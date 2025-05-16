@@ -53,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
 
             
 
@@ -84,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The external authorization policies participate in the policy evaluation process resulting in a user <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+            >The external authorization policies participate in the policy evaluation process resulting in a user <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -147,8 +145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains one of the members of the <see
-             cref="T:System.ServiceModel.Description.PrincipalPermissionMode" />
+            >This property contains one of the members of the <see cref="T:System.ServiceModel.Description.PrincipalPermissionMode" />
 
             
 
@@ -220,8 +217,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Web.Security.RoleProvider" />
+            >The returned <see cref="T:System.Web.Security.RoleProvider" />
 
             
 
@@ -255,18 +251,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.ServiceAuthorizationManager" />
+            >The <see cref="T:System.ServiceModel.ServiceAuthorizationManager" />
 
             
 
-             class is responsible for evaluating all policies, chaining forward and backward, optionally connecting the resulting <see
-             cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+             class is responsible for evaluating all policies, chaining forward and backward, optionally connecting the resulting <see cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
             
 
-             to the <see
-             cref="T:System.ServiceModel.ServiceSecurityContext" />
+             to the <see cref="T:System.ServiceModel.ServiceSecurityContext" />
 
             
 
@@ -311,13 +304,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+             instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
@@ -329,28 +320,44 @@
           <para>Provides the ability to pass custom data to binding elements to support the contract implementation.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description of the service.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host of the service.</param
         >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service endpoints.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,13 +389,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+             instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
@@ -400,14 +405,22 @@
           <para>Defines an explicit interface implementation that adds dispatch behaviors to configure the binding.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -439,13 +452,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ServiceModel.Description.ServiceAuthorizationBehavior" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+             instance is cast to an <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
@@ -457,14 +468,22 @@
           <para>Provides the ability to inspect the service host and the service description to confirm that the service can run successfully.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In a <see
-         cref="T:System.IO.FileSystemWatcher" />
+        >In a <see cref="T:System.IO.FileSystemWatcher" />
 
         
 
-        , when you are notified of file changes, the system stores those changes in a buffer the component creates and passes to the Application Programming Interfaces (APIs). If there are many changes in a short time, the buffer can easily overflow, resulting in an exception being thrown, which essentially loses all changes. To keep the buffer from overflowing, use the <see
-         cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
+        , when you are notified of file changes, the system stores those changes in a buffer the component creates and passes to the Application Programming Interfaces (APIs). If there are many changes in a short time, the buffer can easily overflow, resulting in an exception being thrown, which essentially loses all changes. To keep the buffer from overflowing, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
 
         
 
-         and <see
-         cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+         and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
         
 
-         properties to filter out your unwanted change notifications. You can also increase the size of the internal buffer through the <see
-         cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+         properties to filter out your unwanted change notifications. You can also increase the size of the internal buffer through the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
 
         
 
@@ -73,18 +69,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >These constructors are used by the component to signify an error. Only use them if extending the class or the .NET Framework. This exception indicates an internal buffer has overflowed and users should take appropriate steps in their code to ensure it recovers properly. The cause of the overflow is often too many changes in a short period of time, causing the internal notification buffer to overflow. To resolve this, use the <see
-             cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
+            >These constructors are used by the component to signify an error. Only use them if extending the class or the .NET Framework. This exception indicates an internal buffer has overflowed and users should take appropriate steps in their code to ensure it recovers properly. The cause of the overflow is often too many changes in a short period of time, causing the internal notification buffer to overflow. To resolve this, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
 
             
 
-             and <see
-             cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+             and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
             
 
-             properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see
-             cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+             properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
 
             
 
@@ -94,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.IO.InternalBufferOverflowException" />
+            >Initializes a new default instance of the <see cref="T:System.IO.InternalBufferOverflowException" />
 
             
 
@@ -127,18 +119,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >These constructors are used by the component to signify an error. Only use them if extending the class or the .NET Framework. This exception indicates an internal buffer has overflowed and users should take appropriate steps in their code to ensure it recovers properly. The cause of the overflow is often too many changes in a short period of time, causing the internal notification buffer to overflow. To resolve this, use the <see
-             cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
+            >These constructors are used by the component to signify an error. Only use them if extending the class or the .NET Framework. This exception indicates an internal buffer has overflowed and users should take appropriate steps in their code to ensure it recovers properly. The cause of the overflow is often too many changes in a short period of time, causing the internal notification buffer to overflow. To resolve this, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
 
             
 
-             and <see
-             cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+             and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
             
 
-             properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see
-             cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+             properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
 
             
 
@@ -148,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.InternalBufferOverflowException" />
+            >Initializes a new instance of the <see cref="T:System.IO.InternalBufferOverflowException" />
 
             
 
@@ -157,7 +145,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,18 +182,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.IO.InternalBufferOverflowException" />
+            >Initializes a new, empty instance of the <see cref="T:System.IO.InternalBufferOverflowException" />
 
             
 
-             class that is serializable using the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class that is serializable using the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -209,14 +198,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The information required to serialize the T:System.IO.InternalBufferOverflowException object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -248,18 +245,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >These constructors are used by the component to signify an error. Only use them if extending the class or the .NET Framework. This exception indicates an internal buffer has overflowed and users should take appropriate steps in their code to ensure it recovers properly. The cause of the overflow is often too many changes in a short period of time, causing the internal notification buffer to overflow. To resolve this, use the <see
-             cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
+            >These constructors are used by the component to signify an error. Only use them if extending the class or the .NET Framework. This exception indicates an internal buffer has overflowed and users should take appropriate steps in their code to ensure it recovers properly. The cause of the overflow is often too many changes in a short period of time, causing the internal notification buffer to overflow. To resolve this, use the <see cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
 
             
 
-             and <see
-             cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+             and <see cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
             
 
-             properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see
-             cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+             properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
 
             
 
@@ -269,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.InternalBufferOverflowException" />
+            >Initializes a new instance of the <see cref="T:System.IO.InternalBufferOverflowException" />
 
             
 
@@ -278,14 +271,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to be given for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

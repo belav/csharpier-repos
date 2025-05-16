@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When an <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+        >When an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
         
 
-         store is opened, the result is represented by an <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+         store is opened, the result is represented by an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
         
 
-         object. If you are familiar with the unmanaged Cryptographic API constructs, you can think of an <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+         object. If you are familiar with the unmanaged Cryptographic API constructs, you can think of an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
         
 
-         as a memory store of <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+         as a memory store of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
         
 
@@ -51,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+        >Represents a collection of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
         
 
@@ -78,8 +73,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >This constructor creates an empty <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -89,13 +83,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             class without any <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+             class without any <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -130,13 +122,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+             class using an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -144,12 +134,15 @@
           >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -183,13 +176,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             class using an array of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+             class using an array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -197,12 +188,15 @@
           >
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -236,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -245,12 +238,15 @@
           >
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
           
 
@@ -286,8 +282,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >This method adds an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -297,8 +292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an object to the end of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Adds an object to the end of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -308,13 +302,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             index at which the <paramref
-             name="certificate" />
+             index at which the <paramref name="certificate" />
 
             
 
@@ -322,12 +314,15 @@
           >
         </returns>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An X.509 certificate represented as an <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An X.509 certificate represented as an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -368,23 +363,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you have an array of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Use this method if you have an array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects to add to an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             objects to add to an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object. The <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             object. The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
-             and <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             and <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
@@ -394,13 +385,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds multiple <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Adds multiple <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects in an array to the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             objects in an array to the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -408,12 +397,15 @@
           >
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -454,23 +446,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you have certificates in an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Use this method if you have certificates in an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object that you want to add to another <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             object that you want to add to another <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object. The <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             object. The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
-             and <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             and <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
@@ -480,18 +468,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds multiple <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Adds multiple <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects in an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             objects in an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object to another <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             object to another <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -499,12 +484,15 @@
           >
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
           
 
@@ -540,31 +528,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to the <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to the <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-             property. That is, this method is an O(<paramref
-             name="n" />
+             property. That is, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >This method determines equality by calling the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -574,8 +557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Determines whether the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -585,13 +567,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >true if the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             contains the specified <paramref
-             name="certificate" />
+             contains the specified <paramref name="certificate" />
 
             
 
@@ -599,12 +579,15 @@
           >
         </returns>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -655,12 +638,15 @@
           <para>X.509 certificate information in a byte array.</para>
         </returns>
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A supported <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+          A supported <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
           
 
@@ -702,8 +688,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method supports the following <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -746,19 +731,26 @@
           <para>X.509 certificate information in a byte array.</para>
         </returns>
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A supported <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+          A supported <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
           
 
            object. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -801,18 +793,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to find <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Use this method to find <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects if no user interaction is needed. Use the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
+             objects if no user interaction is needed. Use the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
             
 
-             method to allow the user to select <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+             method to allow the user to select <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
@@ -823,18 +812,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Searches an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object using the search criteria specified by the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
+             object using the search criteria specified by the <see cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
 
             
 
-             enumeration and the <paramref
-             name="findValue" />
+             enumeration and the <paramref name="findValue" />
 
             
 
@@ -844,8 +830,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -853,26 +838,37 @@
           >
         </returns>
         <param name="findType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
+          One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
 
           
 
             values. </param
         >
         <param name="findValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The search criteria as an object. </param
         >
         <param name="validOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -907,8 +903,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Returns an enumerator that can iterate through a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -918,13 +913,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
+            >An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
 
             
 
-             object that can iterate through the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             object that can iterate through the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -960,13 +953,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method imports a certificate in the form of a byte array into a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >This method imports a certificate in the form of a byte array into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object. This method supports the following <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+             object. This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -1008,8 +999,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports a certificate in the form of a byte array into a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Imports a certificate in the form of a byte array into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1017,7 +1007,11 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1052,8 +1046,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method supports the following <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -1095,8 +1088,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports a certificate file into a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Imports a certificate file into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1104,7 +1096,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1147,16 +1143,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used with a PFX/PKCS12 binary large object (BLOB) protected by a password. Key containers associated with certificates in the PFX/PKCS12 BLOB can be created and the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+            >This method can be used with a PFX/PKCS12 binary large object (BLOB) protected by a password. Key containers associated with certificates in the PFX/PKCS12 BLOB can be created and the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
 
             
 
              value can be used to control this process. Note that if you do not create a key container, the private key is not persisted.</para
           >
           <para
-            >This method imports a certificate byte array into a collection of certificates. This method supports the following <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+            >This method imports a certificate byte array into a collection of certificates. This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -1193,8 +1187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports a certificate, in the form of a byte array that requires a password to access the certificate, into a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Imports a certificate, in the form of a byte array that requires a password to access the certificate, into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1202,26 +1195,37 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte array containing data from an <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          A byte array containing data from an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
            object. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the certificate information. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1264,8 +1268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be used with a PFX/PKCS12 file or other certificate files that require a password. Key containers associated with certificates in the PFX/PKCS12 file can be created and <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
+            >This method can be used with a PFX/PKCS12 file or other certificate files that require a password. Key containers associated with certificates in the PFX/PKCS12 file can be created and <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyStorageFlags" />
 
             
 
@@ -1273,8 +1276,7 @@
           >
           <para>Note that a PFX/PKCS12 file can contain more than one certificate. This method imports the first certificate associated with the private key or, if no private key is found, the first certificate found.</para>
           <para
-            >This method supports the following <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+            >This method supports the following <see cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
 
             
 
@@ -1316,8 +1318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports a certificate file that requires a password into a <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Imports a certificate file that requires a password into a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1325,21 +1326,33 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file containing the certificate information. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The password required to access the certificate information. </param
         >
         <param name="keyStorageFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1376,26 +1389,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >If the <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
              property already equals the capacity of the list, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para
           >
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , <paramref
-             name="certificate" />
+            , <paramref name="certificate" />
 
             
 
@@ -1405,8 +1414,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an object into the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Inserts an object into the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1414,24 +1422,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert <paramref
-           name="certificate" />
+          The zero-based index at which to insert <paramref name="certificate" />
 
           
 
           . </param
         >
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -1499,8 +1513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a certificate from the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Removes the first occurrence of a certificate from the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1508,17 +1521,19 @@
           >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
-           object to be removed from the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+           object to be removed from the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
           
 
@@ -1559,23 +1574,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you have an array of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Use this method if you have an array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects to remove from an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             objects to remove from an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object. The <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             object. The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
-             and <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             and <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
@@ -1585,13 +1596,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes multiple <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Removes multiple <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects in an array from an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             objects in an array from an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1599,12 +1608,15 @@
           >
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An array of <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -1645,23 +1657,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you have certificates in an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Use this method if you have certificates in an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object that you want to remove from another <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             object that you want to remove from another <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object. The <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             object. The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.AddRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
-             and <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+             and <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
 
             
 
@@ -1671,18 +1679,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes multiple <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+            >Removes multiple <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
             
 
-             objects in an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             objects in an <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
-             object from another <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+             object from another <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -1690,12 +1695,15 @@
           >
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
           
 

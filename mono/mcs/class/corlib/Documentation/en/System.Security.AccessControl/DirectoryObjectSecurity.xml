@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -83,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -92,12 +90,15 @@
           >
         </summary>
         <param name="securityDescriptor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The security descriptor to be associated with the new <see
-           cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+          The security descriptor to be associated with the new <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
           
 
@@ -138,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -149,8 +149,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >The <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -158,71 +157,100 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity to which the access rule applies.  It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity to which the access rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+          Specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the valid access control type.</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity of the class of objects to which the new access rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -259,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified access rule to the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Adds the specified access rule to the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -268,7 +295,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified audit rule to the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Adds the specified audit rule to the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -314,7 +344,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -366,8 +399,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+            >The <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -375,71 +407,100 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity to which the audit rule applies.  It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity to which the audit rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the inheritance properties of the audit rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies whether inherited audit rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+          Specifies whether inherited audit rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the conditions for which the rule is audited.</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identity of the class of objects to which the new audit rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -479,8 +540,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection of access rules associated with the specified <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >The collection of access rules associated with the specified <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -488,26 +548,37 @@
           >
         </returns>
         <param name="includeExplicit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to include access rules explicitly set for the object.</param
         >
         <param name="includeInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to include inherited access rules.</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The security identifier for which to retrieve access rules. This must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The security identifier for which to retrieve access rules. This must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
@@ -547,8 +618,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection of audit rules associated with the specified <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+            >The collection of audit rules associated with the specified <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -556,26 +626,37 @@
           >
         </returns>
         <param name="includeExplicit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to include audit rules explicitly set for the object.</param
         >
         <param name="includeInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to include inherited audit rules.</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The security identifier for which to retrieve audit rules. This must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The security identifier for which to retrieve audit rules. This must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
@@ -683,8 +764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes access rules that contain the same security identifier and access mask as the specified access rule from the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes access rules that contain the same security identifier and access mask as the specified access rule from the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -696,7 +776,11 @@
           <para>true if the access rule was successfully removed; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -730,8 +814,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules that have the same security identifier as the specified access rule from the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all access rules that have the same security identifier as the specified access rule from the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -739,7 +822,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -773,8 +860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules that exactly match the specified access rule from the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all access rules that exactly match the specified access rule from the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -782,7 +868,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -820,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes audit rules that contain the same security identifier and access mask as the specified audit rule from the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.CommonObjectSecurity" />
+            >Removes audit rules that contain the same security identifier and access mask as the specified audit rule from the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.CommonObjectSecurity" />
 
             
 
@@ -833,7 +922,11 @@
           <para>true if the audit rule was successfully removed; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -867,8 +960,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules that have the same security identifier as the specified audit rule from the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all audit rules that have the same security identifier as the specified audit rule from the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -876,7 +968,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -910,8 +1006,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules that exactly match the specified audit rule from the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all audit rules that exactly match the specified audit rule from the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -919,7 +1014,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -953,8 +1052,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules in the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all access rules in the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -962,7 +1060,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -996,8 +1098,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules that contain the same security identifier and qualifier as the specified access rule in the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all access rules that contain the same security identifier and qualifier as the specified access rule in the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -1005,7 +1106,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1039,8 +1144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules that contain the same security identifier and qualifier as the specified audit rule in the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+            >Removes all audit rules that contain the same security identifier and qualifier as the specified audit rule in the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
             
 
@@ -1048,7 +1152,11 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

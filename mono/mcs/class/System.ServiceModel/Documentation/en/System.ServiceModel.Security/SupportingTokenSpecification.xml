@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supporting tokens augment the claims provided by the token associated with the message signature. There are 4 different kinds of supporting tokens, and the <see
-         cref="P:System.ServiceModel.Security.SupportingTokenSpecification.SecurityTokenAttachmentMode" />
+        >Supporting tokens augment the claims provided by the token associated with the message signature. There are 4 different kinds of supporting tokens, and the <see cref="P:System.ServiceModel.Security.SupportingTokenSpecification.SecurityTokenAttachmentMode" />
 
         
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.SupportingTokenSpecification" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SupportingTokenSpecification" />
 
             
 
@@ -75,21 +73,33 @@
           >
         </summary>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The security token.</param
         >
         <param name="tokenPolicies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The collection of security token policies.</param
         >
         <param name="attachmentMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityTokenAttachmentMode" />
 
             
 

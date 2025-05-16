@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The name type can be a simple name, an email address, a User Principal Name (UPN), a Domain Name System (DNS) name or a URL. An X509 certificate can have one or more of these names. You can obtain the name of a certificate using the method <see
-         cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)" />
+        >The name type can be a simple name, an email address, a User Principal Name (UPN), a Domain Name System (DNS) name or a URL. An X509 certificate can have one or more of these names. You can obtain the name of a certificate using the method <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2.GetNameInfo(System.Security.Cryptography.X509Certificates.X509NameType,System.Boolean)" />
 
         
 
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The DNS name associated with the alternative name of either the subject or the issuer of an X.509 certificate.  This value is equivalent to the <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509NameType.DnsName" />
+            >The DNS name associated with the alternative name of either the subject or the issuer of an X.509 certificate.  This value is equivalent to the <see cref="F:System.Security.Cryptography.X509Certificates.X509NameType.DnsName" />
 
             
 

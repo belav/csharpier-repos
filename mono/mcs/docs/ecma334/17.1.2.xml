@@ -1,26 +1,24 @@
 <?xml version="1.0"?>
 <clause number="17.1.2" title="Class base specification">
   <paragraph
-    >A class declaration may include a <non_terminal
-     where="17.1.2">class-base</non_terminal>
-
-    
-
-     specification, which defines the direct base class of the class and the interfaces (<hyperlink
-    >20</hyperlink>
-
-    
-
-    ) implemented by the class. <grammar_production
+    >A class declaration may include a <non_terminal where="17.1.2"
+      >class-base</non_terminal
     >
+
+    
+
+     specification, which defines the direct base class of the class and the interfaces (<hyperlink>20</hyperlink>
+
+    
+
+    ) implemented by the class. <grammar_production>
       <name>
         <non_terminal where="17.1.2">class-base</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>:</terminal>
         <non_terminal where="11.2">class-type</non_terminal>
       </rhs>
@@ -42,8 +40,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="11.2">interface-type</non_terminal>
       </rhs>
       <rhs>

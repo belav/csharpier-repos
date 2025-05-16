@@ -27,26 +27,22 @@
   </Interfaces>
   <Docs>
     <summary
-      >Every file has a unique INODE data structure. Mono's managed representation is the Stat struct. the <see
-       cref="M:Mono.Unix.Native.Syscall.stat" />
+      >Every file has a unique INODE data structure. Mono's managed representation is the Stat struct. the <see cref="M:Mono.Unix.Native.Syscall.stat" />
 
       
 
-       and <see
-       cref="M:Mono.Unix.Native.Syscall.lstat" />
+       and <see cref="M:Mono.Unix.Native.Syscall.lstat" />
 
       
 
        methods return the Stat struct as an output parameter.</summary
     >
     <remarks
-      >See <c
-      >stat</c>
+      >See <c>stat</c>
 
       
 
-      (2) for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See <c
-      >mount</c>
+      (2) for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See <c>mount</c>
 
       
 
@@ -424,8 +420,7 @@
       <Docs>
         <summary>Size gives the size of the file in bytes.</summary>
         <remarks
-          >If the file is a symlink and <see
-           cref="M:Mono.Unix.Native.Syscall.lstat" />
+          >If the file is a symlink and <see cref="M:Mono.Unix.Native.Syscall.lstat" />
 
           
 

@@ -100,18 +100,15 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control is used to display a menu in an ASP.NET Web page and is often used in combination with a <see
-         cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+         control is used to display a menu in an ASP.NET Web page and is often used in combination with a <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
-         control for navigating a Web site. The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control for navigating a Web site. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -123,8 +120,7 @@
         </item>
         <item>
           <para
-            >Site navigation through integration with the <see
-             cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+            >Site navigation through integration with the <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
             
 
@@ -133,8 +129,7 @@
         </item>
         <item>
           <para
-            >Programmatic access to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Programmatic access to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -146,33 +141,27 @@
         </item>
       </list>
       <para
-        >When the user clicks a menu item, the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >When the user clicks a menu item, the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control can either navigate to a linked Web page or simply post back to the server. If the <see
-         cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
+         control can either navigate to a linked Web page or simply post back to the server. If the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
 
         
 
-         property of a menu item is set, the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         property of a menu item is set, the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control navigates to the linked page; otherwise, it posts the page back to the server for processing. By default, a linked page is displayed in the same window or frame as the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control navigates to the linked page; otherwise, it posts the page back to the server for processing. By default, a linked page is displayed in the same window or frame as the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. To display the linked content in a different window or frame, use the <see
-         cref="P:System.Web.UI.WebControls.Menu.Target" />
+         control. To display the linked content in a different window or frame, use the <see cref="P:System.Web.UI.WebControls.Menu.Target" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         property of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -180,18 +169,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Web.UI.WebControls.Menu.Target" />
+          >The <see cref="P:System.Web.UI.WebControls.Menu.Target" />
 
           
 
-           property affects every menu item in the control. To specify a window or frame for an individual menu item, set the <see
-           cref="P:System.Web.UI.WebControls.MenuItem.Target" />
+           property affects every menu item in the control. To specify a window or frame for an individual menu item, set the <see cref="P:System.Web.UI.WebControls.MenuItem.Target" />
 
           
 
-           property of the <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+           property of the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
@@ -199,28 +185,23 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control displays two types of menus: a static menu and a dynamic menu. The static menu is always displayed in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control displays two types of menus: a static menu and a dynamic menu. The static menu is always displayed in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. By default, the menu items at the root level (level 0) are displayed in the static menu. You can display additional menu levels (static submenus) within the static menu by setting the <see
-         cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+         control. By default, the menu items at the root level (level 0) are displayed in the static menu. You can display additional menu levels (static submenus) within the static menu by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
         
 
-         property. Menu items (if any) with a higher level than the value specified by the <see
-         cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+         property. Menu items (if any) with a higher level than the value specified by the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
         
 
-         property are displayed in a dynamic menu. A dynamic menu appears only when the user positions the mouse pointer over the parent menu item that contains a dynamic submenu. Dynamic menus automatically disappear after a certain duration. Use the <see
-         cref="P:System.Web.UI.WebControls.Menu.DisappearAfter" />
+         property are displayed in a dynamic menu. A dynamic menu appears only when the user positions the mouse pointer over the parent menu item that contains a dynamic submenu. Dynamic menus automatically disappear after a certain duration. Use the <see cref="P:System.Web.UI.WebControls.Menu.DisappearAfter" />
 
         
 
@@ -230,8 +211,7 @@
         <para>A dynamic menu also disappears when the user clicks outside of the menu.</para>
       </block>
       <para
-        >You can also limit the number of levels displayed in a dynamic menu by setting the <see
-         cref="P:System.Web.UI.WebControls.Menu.MaximumDynamicDisplayLevels" />
+        >You can also limit the number of levels displayed in a dynamic menu by setting the <see cref="P:System.Web.UI.WebControls.Menu.MaximumDynamicDisplayLevels" />
 
         
 
@@ -239,40 +219,33 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.Menu" />
+          >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
           
 
-           control is not designed to be used inside an <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control is not designed to be used inside an <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control. You can add the <see
-           cref="T:System.Web.UI.WebControls.Menu" />
+           control. You can add the <see cref="T:System.Web.UI.WebControls.Menu" />
 
           
 
-           control only to a page outside an <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control only to a page outside an <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control. <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control. <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           controls are used to update selected regions of a page instead of updating the whole page with a postback. For more information, see <format
-           type="text/html">
+           controls are used to update selected regions of a page instead of updating the whole page with a postback. For more information, see <format type="text/html">
             <a href="29a2265d-9674-4c19-b70e-e5560ee9689a">UpdatePanel Control Overview</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
 
@@ -288,56 +261,46 @@
         <h2>Menu Items</h2>
       </format>
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >A <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control is made up of a tree of menu items represented by <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         control is made up of a tree of menu items represented by <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
-         objects. Menu items at the top level (level 0) are called root menu items. A menu item that has a parent menu item is called a child menu item. All root menu items are stored in the <see
-         cref="P:System.Web.UI.WebControls.Menu.Items" />
+         objects. Menu items at the top level (level 0) are called root menu items. A menu item that has a parent menu item is called a child menu item. All root menu items are stored in the <see cref="P:System.Web.UI.WebControls.Menu.Items" />
 
         
 
-         collection. Child menu items are stored in a parent menu item's <see
-         cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
+         collection. Child menu items are stored in a parent menu item's <see cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
 
         
 
          collection. </para
       >
       <para
-        >Each menu item has a <see
-         cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+        >Each menu item has a <see cref="P:System.Web.UI.WebControls.MenuItem.Text" />
 
         
 
-         and a <see
-         cref="P:System.Web.UI.WebControls.MenuItem.Value" />
+         and a <see cref="P:System.Web.UI.WebControls.MenuItem.Value" />
 
         
 
-         property. The value of the <see
-         cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+         property. The value of the <see cref="P:System.Web.UI.WebControls.MenuItem.Text" />
 
         
 
-         property is displayed in the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         property is displayed in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control, while the <see
-         cref="P:System.Web.UI.WebControls.MenuItem.Value" />
+         control, while the <see cref="P:System.Web.UI.WebControls.MenuItem.Value" />
 
         
 
-         property is used to store any additional data about the menu item, such as data passed to the postback event associated with the menu item. When clicked, a menu item can navigate to another Web page indicated by the <see
-         cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
+         property is used to store any additional data about the menu item, such as data passed to the postback event associated with the menu item. When clicked, a menu item can navigate to another Web page indicated by the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
 
         
 
@@ -345,13 +308,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see
-           cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
+          >If the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
 
           
 
-           property is not set for a menu item, the <see
-           cref="T:System.Web.UI.WebControls.Menu" />
+           property is not set for a menu item, the <see cref="T:System.Web.UI.WebControls.Menu" />
 
           
 
@@ -359,16 +320,14 @@
         >
       </block>
       <para
-        >You can also optionally display an image in a menu item by setting the <see
-         cref="P:System.Web.UI.WebControls.MenuItem.ImageUrl" />
+        >You can also optionally display an image in a menu item by setting the <see cref="P:System.Web.UI.WebControls.MenuItem.ImageUrl" />
 
         
 
          property.</para
       >
       <para
-        >For more information on menu items, see <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+        >For more information on menu items, see <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
@@ -381,18 +340,15 @@
         <h2>Static Data</h2>
       </format>
       <para
-        >The simplest data model of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >The simplest data model of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control is static menu items. To display static menu items using declarative syntax, first nest opening and closing &lt;Items&gt; tags between the opening and closing tags of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control is static menu items. To display static menu items using declarative syntax, first nest opening and closing &lt;Items&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. Next, create the menu structure by nesting &lt;asp:MenuItem&gt; elements between the opening and closing &lt;Items&gt; tags. Each &lt;asp:MenuItem&gt; element represents a menu item in the control and maps to a <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         control. Next, create the menu structure by nesting &lt;asp:MenuItem&gt; elements between the opening and closing &lt;Items&gt; tags. Each &lt;asp:MenuItem&gt; element represents a menu item in the control and maps to a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
@@ -405,94 +361,77 @@
         <h2>Binding to Data</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control can use any hierarchal data source control, such as an <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         control can use any hierarchal data source control, such as an <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-         control or a <see
-         cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+         control or a <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
-         control. To bind to a hierarchal data source control, set the <see
-         cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />
+         control. To bind to a hierarchal data source control, set the <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataSourceID" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         property of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control to the <see
-         cref="P:System.Web.UI.Control.ID" />
+         control to the <see cref="P:System.Web.UI.Control.ID" />
 
         
 
-         value of the data source control. The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         value of the data source control. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
          control automatically binds to the specified data source control. This is the preferred method to bind to data.</para
       >
       <para
-        >When binding to a data source where each data item contains multiple properties (such as an XML element with several attributes), a menu item displays the value returned by the ToString method of the data item by default. In the case of an XML element, the menu item displays the element name, which shows the underlying structure of the menu tree but is not very useful otherwise. You can bind a menu item to a specific data item property by using the <see
-         cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
+        >When binding to a data source where each data item contains multiple properties (such as an XML element with several attributes), a menu item displays the value returned by the ToString method of the data item by default. In the case of an XML element, the menu item displays the element name, which shows the underlying structure of the menu tree but is not very useful otherwise. You can bind a menu item to a specific data item property by using the <see cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
 
         
 
-         collection to specify menu item bindings. The <see
-         cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
+         collection to specify menu item bindings. The <see cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
 
         
 
-         collection contains <see
-         cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+         collection contains <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
         
 
-         objects that define the relationship between a data item and the menu item it is binding to. You can specify the criteria for binding and the data item property to display in the node. For more information on menu item bindings, see <see
-         cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+         objects that define the relationship between a data item and the menu item it is binding to. You can specify the criteria for binding and the data item property to display in the node. For more information on menu item bindings, see <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
         
 
         .</para
       >
       <para
-        >You cannot create empty nodes in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >You cannot create empty nodes in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control by setting the <see
-         cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
+         control by setting the <see cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
+         or <see cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
 
         
 
-         properties to the empty string (""). Setting these properties to the empty string has the same effect as not setting the properties. In that case, the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         properties to the empty string (""). Setting these properties to the empty string has the same effect as not setting the properties. In that case, the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control creates a default binding using the <see
-         cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+         control creates a default binding using the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
         
 
-         property. For more information, see <format
-         type="text/html">
+         property. For more information, see <format type="text/html">
           <a href="ab7b2846-975b-4057-a948-45527497c742">Binding to Databases</a>
         </format>
 
@@ -507,26 +446,22 @@
         <h2>Customizing the User Interface</h2>
       </format>
       <para
-        >There are many ways to customize the appearance of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >There are many ways to customize the appearance of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. First, you can specify whether the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control. First, you can specify whether the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control is rendered horizontally or vertically by setting the <see
-         cref="P:System.Web.UI.WebControls.Menu.Orientation" />
+         control is rendered horizontally or vertically by setting the <see cref="P:System.Web.UI.WebControls.Menu.Orientation" />
 
         
 
          property. You can also specify a different style (such as font size and color) for each of the menu item types. </para
       >
       <para
-        >If you use cascading style sheets (CSS) to customize the appearance of the control, use either inline styles or a separate CSS file, but not both. Using both inline styles and a separate CSS file could cause unexpected results. For more information on using style sheets with controls, see <format
-         type="text/html">
+        >If you use cascading style sheets (CSS) to customize the appearance of the control, use either inline styles or a separate CSS file, but not both. Using both inline styles and a separate CSS file could cause unexpected results. For more information on using style sheets with controls, see <format type="text/html">
           <a href="782c2db6-fc9b-4243-8df9-a8ffe2f4cc42"
             >ASP.NET Web Server Controls and CSS Styles</a
           >
@@ -649,8 +584,7 @@
           </term>
           <description>
             <para
-              >A collection of <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+              >A collection of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
@@ -666,8 +600,7 @@
           </term>
           <description>
             <para
-              >A collection of <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+              >A collection of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
@@ -683,8 +616,7 @@
           </term>
           <description>
             <para
-              >A collection of <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+              >A collection of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
@@ -696,8 +628,7 @@
       <para>The first style in the collection corresponds to the style of the menu items at the first depth level in the menu tree. The second style in the collection corresponds to the style of the menu items at the second depth level in the menu tree, and so on. This is most often used to generate table of contents-style navigation menus where menu items at a certain depth should have the same appearance, regardless of whether they have submenus.</para>
       <block subset="none" type="note">
         <para
-          >If you use any of the level style collections listed in the previous table to define the style for the <see
-           cref="T:System.Web.UI.WebControls.Menu" />
+          >If you use any of the level style collections listed in the previous table to define the style for the <see cref="T:System.Web.UI.WebControls.Menu" />
 
           
 
@@ -705,8 +636,7 @@
         >
       </block>
       <para
-        >Another way to alter the appearance of the control is to customize the images displayed in the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >Another way to alter the appearance of the control is to customize the images displayed in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -805,8 +735,7 @@
         </item>
       </list>
       <para
-        >For complete control of the user interface (UI), you can define your own custom templates for the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >For complete control of the user interface (UI), you can define your own custom templates for the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -845,18 +774,15 @@
         </item>
       </list>
       <para
-        >You can control the vertical and horizontal position of a dynamic menu relative to its parent menu item by setting the <see
-         cref="P:System.Web.UI.WebControls.Menu.DynamicVerticalOffset" />
+        >You can control the vertical and horizontal position of a dynamic menu relative to its parent menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicVerticalOffset" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Menu.DynamicHorizontalOffset" />
+         and <see cref="P:System.Web.UI.WebControls.Menu.DynamicHorizontalOffset" />
 
         
 
-         properties, respectively. To control the indentation of the static submenu items within a static menu, use the <see
-         cref="P:System.Web.UI.WebControls.Menu.StaticSubMenuIndent" />
+         properties, respectively. To control the indentation of the static submenu items within a static menu, use the <see cref="P:System.Web.UI.WebControls.Menu.StaticSubMenuIndent" />
 
         
 
@@ -869,8 +795,7 @@
         <h2>Events</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -895,8 +820,7 @@
           </term>
           <description>
             <para
-              >Occurs when a menu item is clicked. This event is commonly used to synchronize a <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >Occurs when a menu item is clicked. This event is commonly used to synchronize a <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -912,8 +836,7 @@
           </term>
           <description>
             <para
-              >Occurs when a menu item is bound to data. This event is commonly used to modify a menu item before it is rendered in a <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >Occurs when a menu item is bound to data. This event is commonly used to modify a menu item before it is rendered in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -929,8 +852,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -938,8 +860,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -958,8 +879,7 @@
     AccessKey="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -971,8 +891,7 @@
     DataSourceID="string"
     DisappearAfter="integer"
     DynamicBottomSeparatorImageUrl="uri"
-    DynamicEnableDefaultPopOutImage="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    DynamicEnableDefaultPopOutImage="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -983,53 +902,45 @@
     DynamicPopOutImageUrl="uri"
     DynamicTopSeparatorImageUrl="uri"
     DynamicVerticalOffset="integer"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1037,8 +948,7 @@
     ForeColor="color name|#dddddd"
     Height="size"
     ID="string"
-    ItemWrap="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    ItemWrap="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1053,8 +963,7 @@
     OnMenuItemDataBound="MenuItemDataBound event handler"
     OnPreRender="PreRender event handler"
     OnUnload="Unload event handler"
-    Orientation="Horizontal|<codeFeaturedElement
-        >Vertical</codeFeaturedElement>
+    Orientation="Horizontal|<codeFeaturedElement>Vertical</codeFeaturedElement>
 
         
 
@@ -1069,8 +978,7 @@
     SkipLinkText="string"
     StaticBottomSeparatorImageUrl="uri"
     StaticDisplayLevels="integer"
-    StaticEnableDefaultPopOutImage="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    StaticEnableDefaultPopOutImage="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -1084,8 +992,7 @@
     TabIndex="integer"
     Target="string"
     ToolTip="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -1096,8 +1003,7 @@
                 &lt;asp:MenuItemBinding
                     DataMember="string"
                     Depth="integer"
-                    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -1110,8 +1016,7 @@
                     NavigateUrlField="string"
                     PopOutImageUrl="uri"
                     PopOutImageUrlField="string"
-                    Selectable="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    Selectable="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -1136,8 +1041,7 @@
         &lt;DynamicMenuItemStyle
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1145,35 +1049,30 @@
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
             CssClass="string"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|
                 Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1189,8 +1088,7 @@
         &lt;DynamicMenuStyle
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1198,35 +1096,30 @@
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
             CssClass="string"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|
                 Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1241,8 +1134,7 @@
         &lt;DynamicSelectedStyle
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1250,35 +1142,30 @@
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
             CssClass="string"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|
                 Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1296,8 +1183,7 @@
                 &lt;asp:MenuItemStyle
                     BackColor="color name|#dddddd"
                     BorderColor="color name|#dddddd"
-                    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1305,35 +1191,30 @@
                         Double|Groove|Ridge|Inset|Outset"
                     BorderWidth="size"
                     CssClass="string"
-                    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                     Font-Names="string"
-                    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                     Font-Size="string|Smaller|Larger|XX-Small|
                         X-Small|Small|Medium|Large|X-Large|XX-Large"
-                    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1351,8 +1232,7 @@
                 &lt;asp:MenuItemStyle
                     BackColor="color name|#dddddd"
                     BorderColor="color name|#dddddd"
-                    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1360,35 +1240,30 @@
                         Double|Groove|Ridge|Inset|Outset"
                     BorderWidth="size"
                     CssClass="string"
-                    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                     Font-Names="string"
-                    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                     Font-Size="string|Smaller|Larger|XX-Small|
                         X-Small|Small|Medium|Large|X-Large|XX-Large"
-                    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1406,8 +1281,7 @@
                 &lt;asp:SubMenuStyle
                     BackColor="color name|#dddddd"
                     BorderColor="color name|#dddddd"
-                    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+                    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1415,35 +1289,30 @@
                         Double|Groove|Ridge|Inset|Outset"
                     BorderWidth="size"
                     CssClass="string"
-                    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                     Font-Names="string"
-                    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
                     Font-Size="string|Smaller|Larger|XX-Small|
                         X-Small|Small|Medium|Large|X-Large|XX-Large"
-                    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-                    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1463,8 +1332,7 @@
         &lt;StaticMenuItemStyle
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1472,35 +1340,30 @@
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
             CssClass="string"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|
                 X-Small|Small|Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1516,8 +1379,7 @@
         &lt;StaticMenuStyle
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1525,35 +1387,30 @@
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
             CssClass="string"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|
                 Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1568,8 +1425,7 @@
         &lt;StaticSelectedStyle
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -1577,35 +1433,30 @@
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
             CssClass="string"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|
                 Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -1636,28 +1487,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             class. To dynamically add a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             class. To dynamically add a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to a page, create a new <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             control to a page, create a new <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             object, set its properties, and then add it to the <see
-             cref="P:System.Web.UI.Control.Controls" />
+             object, set its properties, and then add it to the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
-             collection of a container control, such as <see
-             cref="T:System.Web.UI.WebControls.PlaceHolder" />
+             collection of a container control, such as <see cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
             
 
@@ -1667,8 +1513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1697,28 +1542,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control overrides the <see
-             cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             control overrides the <see cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to reset the <see
-             cref="P:System.Web.UI.WebControls.WebControl.AccessKey" />
+             method to reset the <see cref="P:System.Web.UI.WebControls.WebControl.AccessKey" />
 
             
 
-             property to <see
-             cref="F:System.String.Empty" />
+             property to <see cref="F:System.String.Empty" />
 
             
 
-            . This member is primarily used by control developers when deriving a custom control from the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            . This member is primarily used by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1728,8 +1568,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds HTML attributes and styles that need to be rendered to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds HTML attributes and styles that need to be rendered to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1737,7 +1576,11 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1763,18 +1606,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Menu.Controls" />
+            >The <see cref="P:System.Web.UI.WebControls.Menu.Controls" />
 
             
 
-             property allows you programmatic access to the instance of the <see
-             cref="T:System.Web.UI.ControlCollection" />
+             property allows you programmatic access to the instance of the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             class for the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             class for the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1784,13 +1624,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets a <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             that contains the child controls of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             that contains the child controls of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1816,21 +1654,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is primarily used by control developers when deriving a custom control from the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This member is primarily used by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class.</para
           >
           <para
-            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+            >This method is called by the ASP.NET infrastructure to notify any controls that use composition-based implementation, including controls that derive from <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.CompositeControl" />
+             and <see cref="T:System.Web.UI.WebControls.CompositeControl" />
 
             
 
@@ -1840,8 +1675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the child controls of a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Creates the child controls of a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1862,21 +1696,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is used primarily by control developers when deriving a custom control from the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This member is used primarily by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Menu.DataBind" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Menu.DataBind" />
 
             
 
-             method to bind data from a data source to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method to bind data from a data source to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1886,8 +1717,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds the data source to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Binds the data source to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1928,13 +1758,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
+            >The <see cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
 
             
 
-             collection contains <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+             collection contains <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
@@ -1942,13 +1770,11 @@
           >
           <para>When defining the relationship between a data item and a menu item, you must specify both the criteria for binding and the property of a data item to bind to. The criteria indicate when a data item should be bound to a menu item. The criteria can be specified with a depth, a data member, or both. The depth specifies the menu level that gets bound. For example, if you specify a depth of 0, all menu items in the tree structure at level 0 are bound using the menu item binding. A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. For example, the data member for an XML element specifies the name of the element.</para>
           <para
-            >If multiple <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+            >If multiple <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
-             objects are defined that conflict with each other, the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             objects are defined that conflict with each other, the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -1957,8 +1783,7 @@
           <list type="ordered">
             <item>
               <para
-                >The <see
-                 cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+                >The <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
                 
 
@@ -1967,8 +1792,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+                >The <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
                 
 
@@ -1977,8 +1801,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+                >The <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
                 
 
@@ -1987,8 +1810,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+                >The <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
                 
 
@@ -1997,61 +1819,50 @@
             </item>
           </list>
           <para
-            >Once the binding criteria are established, you can then bind a property of a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Once the binding criteria are established, you can then bind a property of a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object that is able to be bound to an attribute or field of a data item. For example, you can bind the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+             object that is able to be bound to an attribute or field of a data item. For example, you can bind the <see cref="P:System.Web.UI.WebControls.MenuItem.Text" />
 
             
 
-             property of a menu item to the text attribute on an XML element by setting the <see
-             cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
+             property of a menu item to the text attribute on an XML element by setting the <see cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+             property of a <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
-             object. You can also bind to a static value. If you set the <see
-             cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
+             object. You can also bind to a static value. If you set the <see cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+             property of a <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
-             object, all menu items to which the <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+             object, all menu items to which the <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
-             object is applied share the same static text value. For more information on binding the properties of a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             object is applied share the same static text value. For more information on binding the properties of a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object to a value, see <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+             object to a value, see <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
             .</para
           >
           <para
-            >Although the <see
-             cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
+            >Although the <see cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
 
             
 
-             collection can be programmatically populated, it is usually set declaratively. To specify the menu item bindings, first nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             collection can be programmatically populated, it is usually set declaratively. To specify the menu item bindings, first nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -2061,8 +1872,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
             
 
@@ -2094,8 +1904,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, a dynamic menu automatically disappears after a certain duration when the mouse pointer is no longer positioned over the menu. Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DisappearAfter" />
+            >By default, a dynamic menu automatically disappears after a certain duration when the mouse pointer is no longer positioned over the menu. Use the <see cref="P:System.Web.UI.WebControls.Menu.DisappearAfter" />
 
             
 
@@ -2106,13 +1915,11 @@
           </block>
           <para>You can also specify that a dynamic menu should never automatically disappear by setting this property to -1. In this case, the dynamic menu item will disappear only when the user clicks outside the menu.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -2159,8 +1966,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" />
 
             
 
@@ -2168,8 +1974,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can also display a separator image at the top of each dynamic menu item by setting the <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" />
+              >You can also display a separator image at the top of each dynamic menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" />
 
               
 
@@ -2209,8 +2014,7 @@
           <list type="bullet">
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
 
                 
 
@@ -2219,8 +2023,7 @@
             </item>
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
                 
 
@@ -2229,8 +2032,7 @@
             </item>
           </list>
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+            >If the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
             
 
@@ -2238,13 +2040,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+              >If the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
               
 
-               property is not set and the <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
+               property is not set and the <see cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
 
               
 
@@ -2252,8 +2052,7 @@
             >
           </block>
           <para
-            >You can specify alternate text for the image by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageTextFormatString" />
+            >You can specify alternate text for the image by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageTextFormatString" />
 
             
 
@@ -2286,18 +2085,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicHorizontalOffset" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicHorizontalOffset" />
 
             
 
-             property to adjust the horizontal position of a dynamic menu relative to its parent menu item. This property affects the position of a dynamic menu differently depending on whether the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             property to adjust the horizontal position of a dynamic menu relative to its parent menu item. This property affects the position of a dynamic menu differently depending on whether the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control is displayed vertically or horizontally (as specified by the <see
-             cref="P:System.Web.UI.WebControls.Menu.Orientation" />
+             control is displayed vertically or horizontally (as specified by the <see cref="P:System.Web.UI.WebControls.Menu.Orientation" />
 
             
 
@@ -2373,33 +2169,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicHoverStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicHoverStyle" />
 
             
 
-             property to control the appearance of a dynamic menu item when the mouse pointer is positioned over it. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             property to control the appearance of a dynamic menu item when the mouse pointer is positioned over it. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object (for example, DynamicHoverStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, DynamicHoverStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -2422,13 +2212,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -2441,8 +2229,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -2463,8 +2250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -2493,8 +2279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be used to insert text to format dynamic menu items in a menu displayed on mobile devices. The <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This property can be used to insert text to format dynamic menu items in a menu displayed on mobile devices. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -2502,8 +2287,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To achieve consistent formatting when you use this property, you should also set the <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticItemFormatString" />
+              >To achieve consistent formatting when you use this property, you should also set the <see cref="P:System.Web.UI.WebControls.Menu.StaticItemFormatString" />
 
               
 
@@ -2550,18 +2334,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of using the built-in rendering for a dynamic menu, you can define your own look and feel for a dynamic menu item by using the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicItemTemplate" />
+            >Instead of using the built-in rendering for a dynamic menu, you can define your own look and feel for a dynamic menu item by using the <see cref="P:System.Web.UI.WebControls.Menu.DynamicItemTemplate" />
 
             
 
-             property. To specify a custom template for a dynamic menu item, first place &lt;DynamicItemTemplate&gt; tags between the opening and closing tags of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             property. To specify a custom template for a dynamic menu item, first place &lt;DynamicItemTemplate&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control. You can then list the contents of the template between the opening and closing &lt;DynamicItemTemplate&gt; tags. You can further control the style of a dynamic menu by using the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicItemFormatString" />
+             control. You can then list the contents of the template between the opening and closing &lt;DynamicItemTemplate&gt; tags. You can further control the style of a dynamic menu by using the <see cref="P:System.Web.UI.WebControls.Menu.DynamicItemFormatString" />
 
             
 
@@ -2606,33 +2387,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
 
             
 
-             property to control the appearance of the menu items within a dynamic menu. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the appearance of the menu items within a dynamic menu. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object (for example, DynamicMenuItemStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, DynamicMenuItemStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -2655,13 +2430,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -2674,8 +2447,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -2696,8 +2468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -2738,33 +2509,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicMenuStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicMenuStyle" />
 
             
 
-             property to control the appearance of a dynamic menu. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the appearance of a dynamic menu. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object (for example, DynamicMenuStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, DynamicMenuStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -2787,13 +2552,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -2806,8 +2569,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -2828,8 +2590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -2856,8 +2617,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a dynamic menu item contains a submenu, an image can be displayed to indicate that the user can expand the menu. Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageTextFormatString" />
+            >When a dynamic menu item contains a submenu, an image can be displayed to indicate that the user can expand the menu. Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageTextFormatString" />
 
             
 
@@ -2867,8 +2627,7 @@
           <list type="bullet">
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
 
                 
 
@@ -2877,8 +2636,7 @@
             </item>
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
                 
 
@@ -2925,8 +2683,7 @@
           <list type="bullet">
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
 
                 
 
@@ -2935,8 +2692,7 @@
             </item>
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
                 
 
@@ -2945,21 +2701,18 @@
             </item>
           </list>
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+            >If the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
             
 
              property is set, that image overrides the built-in image.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
+            >If the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageUrl" />
 
             
 
-             property is not set and the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
+             property is not set and the <see cref="P:System.Web.UI.WebControls.Menu.DynamicEnableDefaultPopOutImage" />
 
             
 
@@ -2969,8 +2722,7 @@
             <para>When you set this property, use a slash mark (/) instead of a backslash (\). If you use backslashes in the path, the specified image will not be displayed.</para>
           </block>
           <para
-            >You can specify alternate text for the image by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageTextFormatString" />
+            >You can specify alternate text for the image by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicPopOutImageTextFormatString" />
 
             
 
@@ -3015,33 +2767,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicSelectedStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicSelectedStyle" />
 
             
 
-             property to control the appearance of a dynamic menu item when the user selects it from the menu. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the appearance of a dynamic menu item when the user selects it from the menu. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object (for example, DynamicSelectedStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, DynamicSelectedStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -3064,13 +2810,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -3083,8 +2827,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -3105,8 +2848,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -3144,8 +2886,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicTopSeparatorImageUrl" />
 
             
 
@@ -3153,8 +2894,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can also display a separator image at the bottom of each dynamic menu item by setting the <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" />
+              >You can also display a separator image at the bottom of each dynamic menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.DynamicBottomSeparatorImageUrl" />
 
               
 
@@ -3188,18 +2928,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicVerticalOffset" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.DynamicVerticalOffset" />
 
             
 
-             property to adjust the vertical position of a dynamic menu relative to its parent menu item. This property affects the position of a dynamic menu differently depending on whether the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             property to adjust the vertical position of a dynamic menu relative to its parent menu item. This property affects the position of a dynamic menu differently depending on whether the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control is displayed vertically or horizontally (as specified by the <see
-             cref="P:System.Web.UI.WebControls.Menu.Orientation" />
+             control is displayed vertically or horizontally (as specified by the <see cref="P:System.Web.UI.WebControls.Menu.Orientation" />
 
             
 
@@ -3259,8 +2996,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -3271,8 +3007,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies that the menu control requires data binding and that a valid data source control is specified before calling the <see
-             cref="M:System.Web.UI.WebControls.Menu.DataBind" />
+            >Verifies that the menu control requires data binding and that a valid data source control is specified before calling the <see cref="M:System.Web.UI.WebControls.Menu.DataBind" />
 
             
 
@@ -3301,28 +3036,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Menu.FindItem(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Menu.FindItem(System.String)" />
 
             
 
-             method to retrieve a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to retrieve a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object from the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control. To retrieve the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             control. To retrieve the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object, you must specify a menu path to the menu item. The menu path is a string of delimited values that form the path from a root menu item to the current menu item. To determine the delimiter character, use the <see
-             cref="P:System.Web.UI.WebControls.Menu.PathSeparator" />
+             object, you must specify a menu path to the menu item. The menu path is a string of delimited values that form the path from a root menu item to the current menu item. To determine the delimiter character, use the <see cref="P:System.Web.UI.WebControls.Menu.PathSeparator" />
 
             
 
@@ -3336,8 +3066,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >A <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -3345,7 +3074,11 @@
           >
         </returns>
         <param name="valuePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3371,13 +3104,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.GetDesignModeState" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.GetDesignModeState" />
 
             
 
-             method is a helper method used to get the current design-time state of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method is a helper method used to get the current design-time state of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3387,8 +3118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the design-time state of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Retrieves the design-time state of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3398,13 +3128,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
-             containing the design-time state of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             containing the design-time state of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3445,36 +3173,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.Items" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.Items" />
 
             
 
-             property (collection) to get a <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             property (collection) to get a <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object that contains all the menu items in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object that contains all the menu items in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              control. This collection is commonly used to quickly iterate through all the menu items, or to access a specific menu item.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Menu.Items" />
+            >The <see cref="P:System.Web.UI.WebControls.Menu.Items" />
 
             
 
-             collection can also be used to programmatically manage the menu items. You can add, insert, remove, and retrieve <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             collection can also be used to programmatically manage the menu items. You can add, insert, remove, and retrieve <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             collection objects. Any updates to the collection will automatically be reflected in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             collection objects. Any updates to the collection will automatically be reflected in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3484,13 +3206,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object that contains all menu items in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object that contains all menu items in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3519,8 +3239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.ItemWrap" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.ItemWrap" />
 
             
 
@@ -3562,13 +3281,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
             
 
-             collection as an alternative to the individual style properties (such as <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
+             collection as an alternative to the individual style properties (such as <see cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
 
             
 
@@ -3576,8 +3293,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If a style is defined for a certain level using the <see
-               cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+              >If a style is defined for a certain level using the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
               
 
@@ -3588,13 +3304,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
             
 
-             object that contains the style settings that are applied to menu items based on their level in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object that contains the style settings that are applied to menu items based on their level in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3632,18 +3346,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
             
 
-             collection as an alternative to the <see
-             cref="P:System.Web.UI.WebControls.Menu.DynamicSelectedStyle" />
+             collection as an alternative to the <see cref="P:System.Web.UI.WebControls.Menu.DynamicSelectedStyle" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticSelectedStyle" />
+             and <see cref="P:System.Web.UI.WebControls.Menu.StaticSelectedStyle" />
 
             
 
@@ -3651,18 +3362,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If a style is defined for a certain level using the <see
-               cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+              >If a style is defined for a certain level using the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
               
 
-               collection, this overrides the <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicSelectedStyle" />
+               collection, this overrides the <see cref="P:System.Web.UI.WebControls.Menu.DynamicSelectedStyle" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticSelectedStyle" />
+               and <see cref="P:System.Web.UI.WebControls.Menu.StaticSelectedStyle" />
 
               
 
@@ -3673,13 +3381,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
             
 
-             object that contains the style settings that are applied to the selected menu item based on its level in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object that contains the style settings that are applied to the selected menu item based on its level in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3717,13 +3423,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
             
 
-             collection as an alternative to the individual style properties (such as <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticMenuItemStyle" />
+             collection as an alternative to the individual style properties (such as <see cref="P:System.Web.UI.WebControls.Menu.StaticMenuItemStyle" />
 
             
 
@@ -3731,8 +3435,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If a style is defined for a certain level using the <see
-               cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+              >If a style is defined for a certain level using the <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
               
 
@@ -3743,13 +3446,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
             
 
-             object that contains the style settings that are applied to the submenu items in the static menu based on their level in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object that contains the style settings that are applied to the submenu items in the static menu based on their level in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3782,8 +3483,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -3794,8 +3494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the state of the properties in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Loads the state of the properties in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3823,8 +3522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the previously saved view state of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Loads the previously saved view state of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3856,13 +3554,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can display multiple menu levels in the static menu by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+            >You can display multiple menu levels in the static menu by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
             
 
-             property to a value greater than 1. You can also display additional levels in dynamic menus by setting this property to a value greater than 0. For example, if you display two menu levels in the static menu (by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+             property to a value greater than 1. You can also display additional levels in dynamic menus by setting this property to a value greater than 0. For example, if you display two menu levels in the static menu (by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
             
 
@@ -3870,8 +3566,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting this property to 0 displays a flat menu up to the level specified by the <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+              >Setting this property to 0 displays a flat menu up to the level specified by the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
               
 
@@ -3902,29 +3597,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+            >The <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
             
 
-             event is raised when a menu item is clicked in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             event is raised when a menu item is clicked in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              control. This allows you to provide an event handler that performs a custom routine, such as synchronizing with another control on the page, whenever this event occurs.</para
           >
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+            >A <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
              object is passed to the event handler, which allows you to access the properties of the menu item that raised the event.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3936,8 +3627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a menu item in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Occurs when a menu item in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -3987,29 +3677,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+            >The <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
             
 
-             event is raised when a menu item is bound to data in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             event is raised when a menu item is bound to data in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              control. This allows you to provide an event handler that performs a custom routine, such as adding custom content or modifying a menu item before it is rendered, whenever this event occurs.</para
           >
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+            >A <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
              object is passed to the event handler, which allows you to access the properties of the menu item that raised the event.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -4021,8 +3707,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a menu item in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Occurs when a menu item in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4053,8 +3738,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="M:System.Web.UI.Control.OnBubbleEvent(System.Object,System.EventArgs)" />
+            >This member overrides <see cref="M:System.Web.UI.Control.OnBubbleEvent(System.Object,System.EventArgs)" />
 
             
 
@@ -4062,8 +3746,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -4074,8 +3757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the event for the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Determines whether the event for the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4087,7 +3769,11 @@
           <para>true if the event has been canceled; otherwise, false. The default is false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4112,37 +3798,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >The <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
-             event is raised when data is bound to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             event is raised when data is bound to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              control. This method notifies the control to perform any data-binding logic that is associated with it. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnDataBinding(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnDataBinding(System.EventArgs)" />
 
             
 
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
-            >This method is generally used by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This method is generally used by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -4154,8 +3835,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >Raises the <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
@@ -4163,12 +3843,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
           
 
@@ -4196,8 +3879,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When notified by this method, Web server controls must perform any initialization steps that are required to create and set up an instance. In this stage of the server control's life cycle, the control's view state has yet to be populated. Additionally, you cannot access another server control when this method is called, regardless of whether it is a child or parent to this control. Other server controls are not guaranteed to be created and ready for access.</para>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4206,8 +3888,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnInit(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnInit(System.EventArgs)" />
 
             
 
@@ -4217,8 +3898,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
@@ -4226,12 +3906,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
           
 
@@ -4256,31 +3939,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnMenuItemClick(System.Web.UI.WebControls.MenuEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnMenuItemClick(System.Web.UI.WebControls.MenuEventArgs)" />
 
             
 
-             method is called by the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method is called by the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to raise the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+             control to raise the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
             
 
-             event. It is generally used by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             event. It is generally used by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -4289,8 +3967,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnMenuItemClick(System.Web.UI.WebControls.MenuEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnMenuItemClick(System.Web.UI.WebControls.MenuEventArgs)" />
 
             
 
@@ -4300,8 +3977,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
             
 
@@ -4309,12 +3985,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
           
 
@@ -4342,31 +4021,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnMenuItemDataBound(System.Web.UI.WebControls.MenuEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnMenuItemDataBound(System.Web.UI.WebControls.MenuEventArgs)" />
 
             
 
-             method is called by the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method is called by the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to raise the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+             control to raise the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
             
 
-             event. It is generally used by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             event. It is generally used by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -4375,8 +4049,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnMenuItemDataBound(System.Web.UI.WebControls.MenuEventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnMenuItemDataBound(System.Web.UI.WebControls.MenuEventArgs)" />
 
             
 
@@ -4386,8 +4059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
             
 
@@ -4395,12 +4067,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+          A <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
           
 
@@ -4427,31 +4102,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
 
             
 
-             method is called by the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method is called by the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to raise the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+             control to raise the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
-             event. It is generally used by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             event. It is generally used by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -4460,8 +4130,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
 
             
 
@@ -4471,8 +4140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -4480,12 +4148,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4513,13 +4184,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.Orientation" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.Orientation" />
 
             
 
-             property to specify the direction in which to render the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             property to specify the direction in which to render the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4542,8 +4211,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.Menu" />
+                  >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
                   
 
@@ -4557,8 +4225,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.Menu" />
+                  >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
                   
 
@@ -4571,8 +4238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the direction in which to render the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Gets or sets the direction in which to render the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4601,36 +4267,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each menu item (represented by a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Each menu item (represented by a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object) in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             object) in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control has a <see
-             cref="P:System.Web.UI.WebControls.MenuItem.ValuePath" />
+             control has a <see cref="P:System.Web.UI.WebControls.MenuItem.ValuePath" />
 
             
 
-             property that specifies the position of the menu item. The value path is a string of delimited values that form the path from a root menu item to the current menu item. Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.PathSeparator" />
+             property that specifies the position of the menu item. The value path is a string of delimited values that form the path from a root menu item to the current menu item. Use the <see cref="P:System.Web.UI.WebControls.Menu.PathSeparator" />
 
             
 
              property to specify the delimiting character used to separate the values in the menu path. This value is commonly used when parsing the list for the individual values.</para
           >
           <para
-            >Depending on the text displayed in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Depending on the text displayed in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control, the delimiter character might need to be changed to prevent any conflicts. For example, if you set the delimiter character to a comma, the displayed text should not contain any commas; otherwise, the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.ValuePath" />
+             control, the delimiter character might need to be changed to prevent any conflicts. For example, if you set the delimiter character to a comma, the displayed text should not contain any commas; otherwise, the <see cref="P:System.Web.UI.WebControls.MenuItem.ValuePath" />
 
             
 
@@ -4640,8 +4300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the character used to delimit the path of a menu item in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Gets or sets the character used to delimit the path of a menu item in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4667,18 +4326,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.PerformDataBinding" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.PerformDataBinding" />
 
             
 
-             method is a helper method called by the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method is a helper method called by the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to bind the items in the data source to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             control to bind the items in the data source to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4688,8 +4344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds the items from the data source to the menu items in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Binds the items from the data source to the menu items in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -4720,12 +4375,15 @@
           <para>Processes an event raised when a form is posted to the server.</para>
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -4755,12 +4413,15 @@
           <para>Renders the menu control on the client browser.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -4785,26 +4446,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the response stream for the client browser.</para
           >
           <para
-            >Override <see
-             cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >Override <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             when you want to implement custom behavior, for example to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. This method overrides the <see
-             cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+             when you want to implement custom behavior, for example to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. This method overrides the <see cref="M:System.Web.UI.WebControls.Menu.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to add the <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+             method to add the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
@@ -4812,8 +4469,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -4826,12 +4482,15 @@
           <para>Adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the browser or device.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -4861,8 +4520,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
+            >Override the <see cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -4872,8 +4530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
+            >This member overrides <see cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -4881,12 +4538,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -4911,18 +4571,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Web.UI.WebControls.WebControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+            >This method overrides <see cref="M:System.Web.UI.WebControls.WebControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             to render <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             to render <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             submenus and the <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+             submenus and the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
@@ -4930,8 +4587,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -4944,12 +4600,15 @@
           <para>Performs final markup and writes the HTML closing tag of the control to the output stream emitted to the browser or device.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -4974,18 +4633,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used to save the state of the properties in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This method is used to save the state of the properties in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control that need to be persisted, even when the <see
-             cref="P:System.Web.UI.Control.EnableViewState" />
+             control that need to be persisted, even when the <see cref="P:System.Web.UI.Control.EnableViewState" />
 
             
 
-             property is set to false. The <see
-             cref="M:System.Web.UI.WebControls.Menu.SaveControlState" />
+             property is set to false. The <see cref="M:System.Web.UI.WebControls.Menu.SaveControlState" />
 
             
 
@@ -4993,8 +4649,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -5005,8 +4660,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the state of the properties in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Saves the state of the properties in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -5032,8 +4686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the state of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Saves the state of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -5043,13 +4696,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the state of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             that contains the state of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -5086,8 +4737,7 @@
           <para>This property is not supported in the .NET 4.0 rendering mode. If this property is required, you can set the menu to the .NET 3.5 rendering mode by adding the following in the page's code:</para>
           <code>menuInstance.RenderingCompatibility = new Version(3, 5);</code>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollDownImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.ScrollDownImageUrl" />
 
             
 
@@ -5097,8 +4747,7 @@
             <para>If this property is not set, the internal, default image is used.</para>
           </block>
           <para
-            >You can specify alternate text for the image by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollDownText" />
+            >You can specify alternate text for the image by setting the <see cref="P:System.Web.UI.WebControls.Menu.ScrollDownText" />
 
             
 
@@ -5133,21 +4782,18 @@
           <para>This property is not supported in the .NET 4.0 rendering mode. If this property is required, you can set the menu to the .NET 3.5 rendering mode by adding the following in the page's code:</para>
           <code>menuInstance.RenderingCompatibility = new Version(3, 5);</code>
           <para
-            >When a dynamic menu item contains additional items at the bottom of the menu, an image is displayed to indicate that the user can scroll down to view additional menu items. Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollDownText" />
+            >When a dynamic menu item contains additional items at the bottom of the menu, an image is displayed to indicate that the user can scroll down to view additional menu items. Use the <see cref="P:System.Web.UI.WebControls.Menu.ScrollDownText" />
 
             
 
              property to specify the alternate text for this image. The text that you specify provides assistive technology devices with a description of the image that can be used to make the control more accessible.</para
           >
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -5161,8 +4807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alternate text for the image specified in the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollDownImageUrl" />
+            >Gets or sets the alternate text for the image specified in the <see cref="P:System.Web.UI.WebControls.Menu.ScrollDownImageUrl" />
 
             
 
@@ -5199,8 +4844,7 @@
           <para>This property is not supported in the .NET 4.0 rendering mode. If this property is required, you can set the menu to the .NET 3.5 rendering mode by adding the following in the page's code:</para>
           <code>menuInstance.RenderingCompatibility = new Version(3, 5);</code>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollUpImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.ScrollUpImageUrl" />
 
             
 
@@ -5210,8 +4854,7 @@
             <para>If this property is not set, the internal, default image is used.</para>
           </block>
           <para
-            >You can specify alternate text for the image by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollUpText" />
+            >You can specify alternate text for the image by setting the <see cref="P:System.Web.UI.WebControls.Menu.ScrollUpText" />
 
             
 
@@ -5246,21 +4889,18 @@
           <para>This property is not supported in the .NET 4.0 rendering mode. If this property is required, you can set the menu to the .NET 3.5 rendering mode by adding the following in the page's code:</para>
           <code>menuInstance.RenderingCompatibility = new Version(3, 5);</code>
           <para
-            >When a dynamic menu item contains additional items at the top of the menu, an image is displayed to indicate that the user can scroll up to view additional menu items. Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollUpText" />
+            >When a dynamic menu item contains additional items at the top of the menu, an image is displayed to indicate that the user can scroll up to view additional menu items. Use the <see cref="P:System.Web.UI.WebControls.Menu.ScrollUpText" />
 
             
 
              property to specify the alternate text for this image. The text that you specify provides assistive technology devices with a description of the image that can be used to make the control more accessible.</para
           >
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -5274,8 +4914,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alternate text for the image specified in the <see
-             cref="P:System.Web.UI.WebControls.Menu.ScrollUpImageUrl" />
+            >Gets or sets the alternate text for the image specified in the <see cref="P:System.Web.UI.WebControls.Menu.ScrollUpImageUrl" />
 
             
 
@@ -5310,8 +4949,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.SelectedItem" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.SelectedItem" />
 
             
 
@@ -5319,8 +4957,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also determine the text of the selected menu item directly by using the <see
-               cref="P:System.Web.UI.WebControls.Menu.SelectedValue" />
+              >As a shortcut, you can also determine the text of the selected menu item directly by using the <see cref="P:System.Web.UI.WebControls.Menu.SelectedValue" />
 
               
 
@@ -5328,13 +4965,11 @@
             >
           </block>
           <para
-            >When the user selects a menu item from a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >When the user selects a menu item from a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control, the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+             control, the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
             
 
@@ -5373,13 +5008,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.SelectedValue" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.SelectedValue" />
 
             
 
-             property as a shortcut to determine the text of the selected menu item. To access the other properties of the selected menu item, use the <see
-             cref="P:System.Web.UI.WebControls.Menu.SelectedItem" />
+             property as a shortcut to determine the text of the selected menu item. To access the other properties of the selected menu item, use the <see cref="P:System.Web.UI.WebControls.Menu.SelectedItem" />
 
             
 
@@ -5412,8 +5045,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Web.UI.Control.SetDesignModeState(System.Collections.IDictionary)" />
+            >This method overrides <see cref="M:System.Web.UI.Control.SetDesignModeState(System.Collections.IDictionary)" />
 
             
 
@@ -5421,8 +5053,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers to extend the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers to extend the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -5433,8 +5064,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets design-time data for the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Sets design-time data for the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -5442,12 +5072,15 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -5476,18 +5109,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.SetItemDataBound(System.Web.UI.WebControls.MenuItem,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.SetItemDataBound(System.Web.UI.WebControls.MenuItem,System.Boolean)" />
 
             
 
-             method is a helper method used by derived classes to set the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.DataBound" />
+             method is a helper method used by derived classes to set the <see cref="P:System.Web.UI.WebControls.MenuItem.DataBound" />
 
             
 
-             property of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -5497,13 +5127,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.DataBound" />
+            >Sets the <see cref="P:System.Web.UI.WebControls.MenuItem.DataBound" />
 
             
 
-             property of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -5511,19 +5139,26 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
            to set.</param
         >
         <param name="dataBound">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5552,18 +5187,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.SetItemDataItem(System.Web.UI.WebControls.MenuItem,System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.SetItemDataItem(System.Web.UI.WebControls.MenuItem,System.Object)" />
 
             
 
-             method is a helper method used by derived classes to set the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.DataItem" />
+             method is a helper method used by derived classes to set the <see cref="P:System.Web.UI.WebControls.MenuItem.DataItem" />
 
             
 
-             property of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -5573,13 +5205,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.DataItem" />
+            >Sets the <see cref="P:System.Web.UI.WebControls.MenuItem.DataItem" />
 
             
 
-             property of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -5587,24 +5217,30 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
            to set.</param
         >
         <param name="dataItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data item for the <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The data item for the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
@@ -5633,18 +5269,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Menu.SetItemDataPath(System.Web.UI.WebControls.MenuItem,System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.Menu.SetItemDataPath(System.Web.UI.WebControls.MenuItem,System.String)" />
 
             
 
-             method is a helper method used by derived classes to set the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.DataPath" />
+             method is a helper method used by derived classes to set the <see cref="P:System.Web.UI.WebControls.MenuItem.DataPath" />
 
             
 
-             property of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -5654,13 +5287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.DataPath" />
+            >Sets the <see cref="P:System.Web.UI.WebControls.MenuItem.DataPath" />
 
             
 
-             property of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -5668,24 +5299,30 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
            to set.</param
         >
         <param name="dataPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data path for the <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The data path for the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
@@ -5713,21 +5350,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
              property to specify the alternate text for a hidden image read by screen readers to provide the ability to skip the list of links. The text that you specify provides assistive technology devices with a description of the hidden skip link image that can be used to make the control more accessible.</para
           >
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -5738,28 +5372,23 @@
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >The <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control provides the <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+             control provides the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
-             property as a way for the entire control to be skipped by screen readers. If the <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+             property as a way for the entire control to be skipped by screen readers. If the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
-             property is set, an invisible image with alternate text is rendered, giving the user the option to jump to the end of the control. Screen readers read the alternate text aloud, and the image occupies only one pixel space. For pixel-precise control over the rendering of the page, set the <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+             property is set, an invisible image with alternate text is rendered, giving the user the option to jump to the end of the control. Screen readers read the alternate text aloud, and the image occupies only one pixel space. For pixel-precise control over the rendering of the page, set the <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
-             property to an empty string ("") and provide your own mechanism to skip the menu. The <see
-             cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
+             property to an empty string ("") and provide your own mechanism to skip the menu. The <see cref="P:System.Web.UI.WebControls.Menu.SkipLinkText" />
 
             
 
@@ -5801,8 +5430,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" />
 
             
 
@@ -5810,8 +5438,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative, you can also display a separator image at the top of each static menu item by setting the <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" />
+              >As an alternative, you can also display a separator image at the top of each static menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" />
 
               
 
@@ -5848,13 +5475,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
             
 
-             property to specify the number of menu levels to display in a static menu. All menu levels below the specified value are displayed in a dynamic menu. You can also limit the number of menu levels to display in a dynamic menu by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.MaximumDynamicDisplayLevels" />
+             property to specify the number of menu levels to display in a static menu. All menu levels below the specified value are displayed in a dynamic menu. You can also limit the number of menu levels to display in a dynamic menu by setting the <see cref="P:System.Web.UI.WebControls.Menu.MaximumDynamicDisplayLevels" />
 
             
 
@@ -5893,8 +5518,7 @@
           <list type="bullet">
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
                 
 
@@ -5903,8 +5527,7 @@
             </item>
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
                 
 
@@ -5913,13 +5536,11 @@
             </item>
           </list>
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+            >If the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
             
 
-             property is set, that image overrides the built-in image, regardless of the value of the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+             property is set, that image overrides the built-in image, regardless of the value of the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
             
 
@@ -5927,13 +5548,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+              >If the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
               
 
-               property is not set and the <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+               property is not set and the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
               
 
@@ -5941,8 +5560,7 @@
             >
           </block>
           <para
-            >You can specify alternate text for the image by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageTextFormatString" />
+            >You can specify alternate text for the image by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageTextFormatString" />
 
             
 
@@ -5987,33 +5605,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticHoverStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticHoverStyle" />
 
             
 
-             property to control the appearance of a static menu item when the mouse pointer is positioned over it. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             property to control the appearance of a static menu item when the mouse pointer is positioned over it. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object (for example, StaticHoverStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, StaticHoverStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -6036,13 +5648,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -6055,8 +5665,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -6077,8 +5686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -6107,8 +5715,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can be used to insert text to format static menu items in a menu. This is particularly useful for mobile devices. The <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This property can be used to insert text to format static menu items in a menu. This is particularly useful for mobile devices. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -6116,8 +5723,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To achieve consistent formatting when you use this property, you should also set the <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicItemFormatString" />
+              >To achieve consistent formatting when you use this property, you should also set the <see cref="P:System.Web.UI.WebControls.Menu.DynamicItemFormatString" />
 
               
 
@@ -6164,18 +5770,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instead of using the built-in rendering for a static menu, you can define your own user interface (UI) for a static menu item by using the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticItemTemplate" />
+            >Instead of using the built-in rendering for a static menu, you can define your own user interface (UI) for a static menu item by using the <see cref="P:System.Web.UI.WebControls.Menu.StaticItemTemplate" />
 
             
 
-             property. To specify a custom template for a static menu item, first place &lt;StaticTemplate&gt; tags between the opening and closing tags of the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             property. To specify a custom template for a static menu item, first place &lt;StaticTemplate&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control. You can then list the contents of the template between the opening and closing &lt;StaticTemplate&gt; tags. You can further control the style of a static menu by using the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticMenuStyle" />
+             control. You can then list the contents of the template between the opening and closing &lt;StaticTemplate&gt; tags. You can further control the style of a static menu by using the <see cref="P:System.Web.UI.WebControls.Menu.StaticMenuStyle" />
 
             
 
@@ -6220,33 +5823,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticMenuItemStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticMenuItemStyle" />
 
             
 
-             property to control the appearance of the menu items in a static menu. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the appearance of the menu items in a static menu. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object (for example, StaticMenuItemStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, StaticMenuItemStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -6269,13 +5866,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -6288,8 +5883,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -6310,8 +5904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -6352,33 +5945,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticMenuStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticMenuStyle" />
 
             
 
-             property to control the appearance of a static menu. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the appearance of a static menu. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object (for example, StaticMenuStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, StaticMenuStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -6401,13 +5988,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -6420,8 +6005,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -6442,8 +6026,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -6470,8 +6053,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a static menu item contains a submenu, an image can be displayed to indicate that the user can expand the menu. Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageTextFormatString" />
+            >When a static menu item contains a submenu, an image can be displayed to indicate that the user can expand the menu. Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageTextFormatString" />
 
             
 
@@ -6481,8 +6063,7 @@
           <list type="bullet">
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
                 
 
@@ -6491,8 +6072,7 @@
             </item>
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
                 
 
@@ -6539,8 +6119,7 @@
           <list type="bullet">
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
                 
 
@@ -6549,8 +6128,7 @@
             </item>
             <item>
               <para
-                >Set the <see
-                 cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+                >Set the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
                 
 
@@ -6559,26 +6137,22 @@
             </item>
           </list>
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+            >If the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
             
 
-             property is set, that image overrides the built-in image, regardless of the value of the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+             property is set, that image overrides the built-in image, regardless of the value of the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
             
 
              property.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
+            >If the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageUrl" />
 
             
 
-             property is not set and the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
+             property is not set and the <see cref="P:System.Web.UI.WebControls.Menu.StaticEnableDefaultPopOutImage" />
 
             
 
@@ -6588,8 +6162,7 @@
             <para>When you set this property, use a slash mark (/) instead of a backslash (\). If you use backslashes in the path, the specified image will not be displayed.</para>
           </block>
           <para
-            >You can specify alternate text for the image by setting the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageTextFormatString" />
+            >You can specify alternate text for the image by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticPopOutImageTextFormatString" />
 
             
 
@@ -6634,33 +6207,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticSelectedStyle" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticSelectedStyle" />
 
             
 
-             property to control the appearance of the menu item selected by the user in a static menu. This property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the appearance of the menu item selected by the user in a static menu. This property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object it returns. The properties can be set declaratively in the form <paramref
-             name="Property-Subproperty" />
+             object it returns. The properties can be set declaratively in the form <paramref name="Property-Subproperty" />
 
             
 
-            , where <paramref
-             name="Subproperty" />
+            , where <paramref name="Subproperty" />
 
             
 
-             is a property of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             is a property of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object (for example, StaticSelectedStyle-ForeColor). The properties can also be set programmatically in the form <paramref
-             name="Property.Subproperty" />
+             object (for example, StaticSelectedStyle-ForeColor). The properties can also be set programmatically in the form <paramref name="Property.Subproperty" />
 
             
 
@@ -6683,13 +6250,11 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
                 
 
-                 collection or <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+                 collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
                 
 
@@ -6702,8 +6267,7 @@
 
                 
 
-                . If the <see
-                 cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+                . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
                 
 
@@ -6724,8 +6288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets a reference to the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -6760,13 +6323,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the static menu displays more than one menu level (if the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
+            >When the static menu displays more than one menu level (if the <see cref="P:System.Web.UI.WebControls.Menu.StaticDisplayLevels" />
 
             
 
-             property is set to a value higher than 1), use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticSubMenuIndent" />
+             property is set to a value higher than 1), use the <see cref="P:System.Web.UI.WebControls.Menu.StaticSubMenuIndent" />
 
             
 
@@ -6808,8 +6369,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.StaticTopSeparatorImageUrl" />
 
             
 
@@ -6817,8 +6377,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As an alternative, you can also display a separator image at the bottom of each static menu item by setting the <see
-               cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" />
+              >As an alternative, you can also display a separator image at the bottom of each static menu item by setting the <see cref="P:System.Web.UI.WebControls.Menu.StaticBottomSeparatorImageUrl" />
 
               
 
@@ -6857,12 +6416,15 @@
           <para>Processes an event raised when a form is posted to the server.</para>
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -6885,18 +6447,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.TagKey" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.TagKey" />
 
             
 
-             property to determine the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             property to determine the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value that is associated with a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             value that is associated with a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -6906,13 +6465,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Gets the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value that corresponds to a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             value that corresponds to a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -6941,8 +6498,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Menu.Target" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Menu.Target" />
 
             
 
@@ -7004,18 +6560,15 @@
             <para>Check your browser documentation to determine if the _search value is supported.  For example, Internet Explorer versions 5.0 and above support the _search target value</para>
           </block>
           <para
-            >This property applies to all menu items in a <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This property applies to all menu items in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control. You can selectively override this property by setting the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.Target" />
+             control. You can selectively override this property by setting the <see cref="P:System.Web.UI.WebControls.MenuItem.Target" />
 
             
 
-             property of each <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of each <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -7023,25 +6576,21 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.MenuItem.Target" />
+              >The <see cref="P:System.Web.UI.WebControls.MenuItem.Target" />
 
               
 
-               property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 strict document type definition. If rendered output must conform to XHTML or accessibility standards, do not set the <see
-               cref="P:System.Web.UI.WebControls.MenuItem.Target" />
+               property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 strict document type definition. If rendered output must conform to XHTML or accessibility standards, do not set the <see cref="P:System.Web.UI.WebControls.MenuItem.Target" />
 
               
 
-               property. For more information, see <format
-               type="text/html">
+               property. For more information, see <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
 
               
 
-               and <format
-               type="text/html">
+               and <format type="text/html">
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
                   >Accessibility in Visual Studio 2010 and ASP.NET 4</a
                 >
@@ -7075,18 +6624,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tracks view-state changes to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Tracks view-state changes to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control so they can be stored in the control's <see
-             cref="T:System.Web.UI.StateBag" />
+             control so they can be stored in the control's <see cref="T:System.Web.UI.StateBag" />
 
             
 
-             object. This object is accessible through the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+             object. This object is accessible through the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 

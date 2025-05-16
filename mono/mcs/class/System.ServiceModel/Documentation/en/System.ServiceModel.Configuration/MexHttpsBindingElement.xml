@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.MexHttpsBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexHttpsBindingElement" />
 
             
 
@@ -76,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.MexHttpsBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MexHttpsBindingElement" />
 
             
 
@@ -85,7 +83,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -50,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElement" />
 
             
 
@@ -86,8 +85,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+            >The <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -134,8 +132,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -143,19 +140,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
            that provides context for the binding element.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,24 +194,30 @@
           <para>Exports custom policy assertions in the binding element into the WSDL information.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataExporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
           
 
            that you can use to modify the exporting process.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
           
 

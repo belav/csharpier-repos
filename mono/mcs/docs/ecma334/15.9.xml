@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="15.9" title="Jump statements">
   <paragraph
-    >Jump statements unconditionally transfer control. <grammar_production
-    >
+    >Jump statements unconditionally transfer control. <grammar_production>
       <name>
         <non_terminal where="15.9">jump-statement</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="15.9.1">break-statement</non_terminal>
       </rhs>
       <rhs>
@@ -32,8 +30,7 @@
   <paragraph>Execution of jump statements is complicated by the presence of intervening try statements. In the absence of such try statements, a jump statement unconditionally transfers control from the jump statement to its target. In the presence of such intervening try statements, execution is more complex. If the jump statement exits one or more try blocks with associated finally blocks, control is initially transferred to the finally block of the innermost try statement. When and if control reaches the end point of a finally block, control is transferred to the finally block of the next enclosing try statement. This process is repeated until the finally blocks of all intervening try statements have been executed. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -66,8 +63,7 @@ class Test
   </paragraph>
   <paragraph>
     <example
-      >The output produced is as follows: <code_example
-      >
+      >The output produced is as follows: <code_example>
         <![CDATA[
 Before break  
 Innermost finally block  

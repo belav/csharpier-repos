@@ -32,81 +32,67 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The collection of <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+        >The collection of <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         objects (the <see
-         cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+         objects (the <see cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
         
 
-        ) is accessed through the <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        ) is accessed through the <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control's <see
-         cref="P:System.Windows.Forms.DataGrid.TableStyles" />
+         control's <see cref="P:System.Windows.Forms.DataGrid.TableStyles" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >The <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control automatically creates a collection of <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+         control automatically creates a collection of <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         objects for you when you set the <see
-         cref="P:System.Windows.Forms.DataGrid.DataSource" />
+         objects for you when you set the <see cref="P:System.Windows.Forms.DataGrid.DataSource" />
 
         
 
-         property to an appropriate data source. The objects created actually are instances of one of the following classes that inherit from <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+         property to an appropriate data source. The objects created actually are instances of one of the following classes that inherit from <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-        : <see
-         cref="T:System.Windows.Forms.DataGridBoolColumn" />
+        : <see cref="T:System.Windows.Forms.DataGridBoolColumn" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+         or <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
         
 
          class.</para
       >
       <para
-        >To format the data display, set the <see
-         cref="P:System.Windows.Forms.DataGridTextBoxColumn.Format" />
+        >To format the data display, set the <see cref="P:System.Windows.Forms.DataGridTextBoxColumn.Format" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+         property of the <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
         
 
-         class to one of the formatting values. For more information about valid formatting values, see <format
-         type="text/html">
+         class to one of the formatting values. For more information about valid formatting values, see <format type="text/html">
           <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Types</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
         </format>
 
@@ -115,28 +101,23 @@
         .</para
       >
       <para
-        >You can also create your own set of <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+        >You can also create your own set of <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         objects and add them to the <see
-         cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+         objects and add them to the <see cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
         
 
-        . When you do so, you must set the <see
-         cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+        . When you do so, you must set the <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
         
 
-         of each column style to the <see
-         cref="P:System.Data.DataColumn.ColumnName" />
+         of each column style to the <see cref="P:System.Data.DataColumn.ColumnName" />
 
         
 
-         of a <see
-         cref="T:System.Data.DataColumn" />
+         of a <see cref="T:System.Data.DataColumn" />
 
         
 
@@ -144,53 +125,43 @@
       >
       <block subset="none" type="note">
         <para
-          >Always create <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+          >Always create <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
-           objects and add them to the <see
-           cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+           objects and add them to the <see cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
           
 
-           before adding <see
-           cref="T:System.Windows.Forms.DataGridTableStyle" />
+           before adding <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
           
 
-           objects to the <see
-           cref="T:System.Windows.Forms.GridTableStylesCollection" />
+           objects to the <see cref="T:System.Windows.Forms.GridTableStylesCollection" />
 
           
 
-          . When you add an empty <see
-           cref="T:System.Windows.Forms.DataGridTableStyle" />
+          . When you add an empty <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
           
 
-           with a valid <see
-           cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+           with a valid <see cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
           
 
-           value to the collection, <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           value to the collection, <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
-           objects are automatically generated for you. Consequently, an exception will be thrown if you try to add new <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           objects are automatically generated for you. Consequently, an exception will be thrown if you try to add new <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
-           objects with duplicate <see
-           cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+           objects with duplicate <see cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
           
 
-           values to the <see
-           cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+           values to the <see cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
           
 
@@ -198,151 +169,125 @@
         >
       </block>
       <para
-        >When one of the derived classes is instantiated by a <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >When one of the derived classes is instantiated by a <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control, the class created depends on the <see
-         cref="P:System.Data.DataColumn.DataType" />
+         control, the class created depends on the <see cref="P:System.Data.DataColumn.DataType" />
 
         
 
-         of the <see
-         cref="T:System.Data.DataColumn" />
+         of the <see cref="T:System.Data.DataColumn" />
 
         
 
-         associated with the <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+         associated with the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         object. For example, a <see
-         cref="T:System.Data.DataColumn" />
+         object. For example, a <see cref="T:System.Data.DataColumn" />
 
         
 
-         with its <see
-         cref="P:System.Data.DataColumn.DataType" />
+         with its <see cref="P:System.Data.DataColumn.DataType" />
 
         
 
-         set to System.Boolean will be associated with a <see
-         cref="T:System.Windows.Forms.DataGridBoolColumn" />
+         set to System.Boolean will be associated with a <see cref="T:System.Windows.Forms.DataGridBoolColumn" />
 
         
 
-        . To determine the type of any <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+        . To determine the type of any <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-        , use the <see
-         cref="M:System.Object.GetType" />
+        , use the <see cref="M:System.Object.GetType" />
 
         
 
          method.</para
       >
       <para
-        >To create your own column classes, you can inherit from <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+        >To create your own column classes, you can inherit from <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-        . You might want to do this in order to create special columns that host controls, as exemplified by the <see
-         cref="T:System.Windows.Forms.DataGridTextBox" />
+        . You might want to do this in order to create special columns that host controls, as exemplified by the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
         
 
-         class, which hosts the <see
-         cref="T:System.Windows.Forms.TextBox" />
+         class, which hosts the <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         control. For example, you can host an <see
-         cref="T:System.Drawing.Image" />
+         control. For example, you can host an <see cref="T:System.Drawing.Image" />
 
         
 
          control to show pictures in columns, or you can create your own user control to host in the column.</para
       >
       <para
-        >The functionality of the <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+        >The functionality of the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         shouldn't be confused with that of the <see
-         cref="T:System.Data.DataColumn" />
+         shouldn't be confused with that of the <see cref="T:System.Data.DataColumn" />
 
         
 
-        . Whereas the <see
-         cref="T:System.Data.DataColumn" />
+        . Whereas the <see cref="T:System.Data.DataColumn" />
 
         
 
-         contains the properties and methods appropriate to creating a data table's schema, the <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+         contains the properties and methods appropriate to creating a data table's schema, the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
          contains the properties and methods related to the appearance of an individual column on the screen.</para
       >
       <para
-        >If a row contains a <see
-         cref="F:System.DBNull.Value" />
+        >If a row contains a <see cref="F:System.DBNull.Value" />
 
         
 
-        , the text displayed in the column can be set with the <see
-         cref="P:System.Windows.Forms.DataGridColumnStyle.NullText" />
+        , the text displayed in the column can be set with the <see cref="P:System.Windows.Forms.DataGridColumnStyle.NullText" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridColumnStyle" />
+        >The <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
         
 
-         class also allows you to specify the behavior of a column while its data is being changed. The <see
-         cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
+         class also allows you to specify the behavior of a column while its data is being changed. The <see cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
+         and <see cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
 
         
 
          methods temporarily suspend the drawing of the column while large updates are being made to the column's data. Without this functionality, every change in every cell of the grid would be immediately drawn; this could be distracting to the user and a performance liability.</para
       >
       <para
-        >Several methods allow monitoring of the column as it is edited by the user, including the <see
-         cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
+        >Several methods allow monitoring of the column as it is edited by the user, including the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.DataGridColumnStyle.Commit(System.Windows.Forms.CurrencyManager,System.Int32)" />
+         and <see cref="M:System.Windows.Forms.DataGridColumnStyle.Commit(System.Windows.Forms.CurrencyManager,System.Int32)" />
 
         
 
          events.</para
       >
       <para
-        >Most of the properties and methods of the class are tailored to controlling a column's appearance. But a few, such as the <see
-         cref="M:System.Windows.Forms.DataGridColumnStyle.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32)" />
+        >Most of the properties and methods of the class are tailored to controlling a column's appearance. But a few, such as the <see cref="M:System.Windows.Forms.DataGridColumnStyle.GetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.DataGridColumnStyle.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32,System.Object)" />
+         and <see cref="M:System.Windows.Forms.DataGridColumnStyle.SetColumnValueAtRow(System.Windows.Forms.CurrencyManager,System.Int32,System.Object)" />
 
         
 
@@ -352,8 +297,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the appearance, text formatting, and behavior of a <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >Specifies the appearance, text formatting, and behavior of a <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
@@ -370,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of a <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >When you create an instance of a <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -453,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a derived class, initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >In a derived class, initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -480,39 +422,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create a new <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >To create a new <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-            , you must first get the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            , you must first get the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
              for the data source of the table to which the column will be added. See the CurrencyManager and BindingManager for details on getting specific CurrencyManager objects for a form.</para
           >
           <para
-            >From the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >From the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-            , you can then get the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            , you can then get the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             for the <see
-             cref="T:System.Data.DataColumn" />
+             for the <see cref="T:System.Data.DataColumn" />
 
             
 
              that will supply the data for the column.</para
           >
           <para
-            >When you create an instance of a <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >When you create an instance of a <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -594,13 +530,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             class with the specified <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             class with the specified <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -608,12 +542,15 @@
           >
         </summary>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -642,59 +579,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
 
             
 
-             method is used by the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             method is used by the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             when the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Commit(System.Windows.Forms.CurrencyManager,System.Int32)" />
+             when the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Commit(System.Windows.Forms.CurrencyManager,System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+             method of the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
              method returns false. In that case, the column value is rolled back to its previous value.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >The <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             must end any editing operations before returning. Use the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
+             must end any editing operations before returning. Use the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
 
             
 
              method to accomplish this.</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGrid.EndEdit(System.Windows.Forms.DataGridColumnStyle,System.Int32,System.Boolean)" />
+            >The <see cref="M:System.Windows.Forms.DataGrid.EndEdit(System.Windows.Forms.DataGridColumnStyle,System.Int32,System.Boolean)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             method of the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             control indirectly invokes <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
+             control indirectly invokes <see cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
 
             
 
-             if its <paramref
-             name="ShouldAbort" />
+             if its <paramref name="ShouldAbort" />
 
             
 
@@ -706,7 +633,11 @@
           <para>When overridden in a derived class, initiates a request to interrupt an edit procedure.</para>
         </summary>
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -754,8 +685,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -769,8 +699,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.Alignment" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.Alignment" />
 
             
 
@@ -794,18 +723,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When many changes are made to the appearance of a <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >When many changes are made to the appearance of a <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             control (whether the changes are in the attributes of the column or the data displayed by the control), you should invoke the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
+             control (whether the changes are in the attributes of the column or the data displayed by the control), you should invoke the <see cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
 
             
 
-             method to temporarily freeze the drawing of the control. This results in less distraction to the user, and a performance gain. After all updates have been made, invoke the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
+             method to temporarily freeze the drawing of the control. This results in less distraction to the user, and a performance gain. After all updates have been made, invoke the <see cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
 
             
 
@@ -815,8 +741,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Suspends the painting of the column until the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
+            >Suspends the painting of the column until the <see cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
 
             
 
@@ -846,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws an exception if the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Throws an exception if the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -855,12 +779,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          A <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
@@ -892,13 +819,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When called, the <see
-             cref="M:System.Windows.Forms.IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing(System.Windows.Forms.Control)" />
+            >When called, the <see cref="M:System.Windows.Forms.IDataGridColumnStyleEditingNotificationService.ColumnStartedEditing(System.Windows.Forms.Control)" />
 
             
 
-             method allows the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             method allows the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -908,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Informs the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Informs the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -917,12 +841,15 @@
           >
         </summary>
         <param name="editingControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -958,24 +885,30 @@
           <para>true if the editing procedure committed successfully; otherwise, false.</para>
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           for the <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           for the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
           . </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -998,13 +931,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine when a further action is required in a derived class. For example, this method is overridden by the <see
-             cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+            >Use this method to determine when a further action is required in a derived class. For example, this method is overridden by the <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
             
 
-             to hide the <see
-             cref="T:System.Windows.Forms.DataGridTextBox" />
+             to hide the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
             
 
@@ -1031,23 +962,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is called by a <see
-             cref="T:System.Windows.Forms.DataGridTableStyle" />
+            >This property is called by a <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
             
 
-             when its <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             when its <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             property changes. This property is required because any child controls hosted by a <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+             property changes. This property is required because any child controls hosted by a <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             must be added to the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             must be added to the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -1057,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Gets the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1068,8 +994,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >An <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1102,8 +1027,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.DataGridTableStyle" />
+            >Gets the <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
             
 
@@ -1139,8 +1063,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
+            >Typically, the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
 
             
 
@@ -1152,43 +1075,56 @@
           <para>Prepares a cell for editing.</para>
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           for the <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           for the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
           . </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row number to edit. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The bounding <see
-           cref="T:System.Drawing.Rectangle" />
+          The bounding <see cref="T:System.Drawing.Rectangle" />
 
           
 
            in which the control is to be sited. </param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1220,8 +1156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
+            >Typically, the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
 
             
 
@@ -1231,13 +1166,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prepares the cell for editing using the specified <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >Prepares the cell for editing using the specified <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-            , row number, and <see
-             cref="T:System.Drawing.Rectangle" />
+            , row number, and <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -1245,50 +1178,67 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           for the <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           for the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
           . </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row number in this column which is being edited. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            in which the control is to be sited. </param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value indicating whether the column is a read-only. true if the value is read-only; otherwise, false. </param
         >
         <param name="displayText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1321,8 +1271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
+            >Typically, the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Edit(System.Windows.Forms.CurrencyManager,System.Int32,System.Drawing.Rectangle,System.Boolean)" />
 
             
 
@@ -1334,57 +1283,78 @@
           <para>When overridden in a deriving class, prepares a cell for editing.</para>
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           for the <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           for the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
           . </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row number in this column which is being edited. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            in which the control is to be sited. </param
         >
         <param name="readOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value indicating whether the column is a read-only. true if the value is read-only; otherwise, false. </param
         >
         <param name="displayText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display in the control. </param
         >
         <param name="cellIsVisible">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1403,18 +1373,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When many changes are made to the appearance of a <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >When many changes are made to the appearance of a <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             control (whether the changes are in the attributes of the column or the data displayed by the control), you should invoke the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
+             control (whether the changes are in the attributes of the column or the data displayed by the control), you should invoke the <see cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
 
             
 
-             method to temporarily freeze the drawing of the control. This results in less distraction to the user, and a performance gain. After all updates have been made, invoke the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
+             method to temporarily freeze the drawing of the control. This results in less distraction to the user, and a performance gain. After all updates have been made, invoke the <see cref="M:System.Windows.Forms.DataGridColumnStyle.EndUpdate" />
 
             
 
@@ -1424,8 +1391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resumes the painting of columns suspended by calling the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
+            >Resumes the painting of columns suspended by calling the <see cref="M:System.Windows.Forms.DataGridColumnStyle.BeginUpdate" />
 
             
 
@@ -1453,26 +1419,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when the user presses ALT+0 to allow a column to enter the appropriate null value. For example, when called on a <see
-             cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+            >This method is called when the user presses ALT+0 to allow a column to enter the appropriate null value. For example, when called on a <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
             
 
-            , the appropriate <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.NullText" />
+            , the appropriate <see cref="P:System.Windows.Forms.DataGridColumnStyle.NullText" />
 
             
 
              value is inserted into the column.</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.EnterNullValue" />
+            >The <see cref="M:System.Windows.Forms.DataGridColumnStyle.EnterNullValue" />
 
             
 
-             has no default behavior. When inheriting from <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+             has no default behavior. When inheriting from <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -1482,8 +1444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enters a <see
-             cref="F:System.DBNull.Value" />
+            >Enters a <see cref="F:System.DBNull.Value" />
 
             
 
@@ -1502,8 +1463,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -1564,18 +1524,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data source for the column is a <see
-             cref="T:System.Data.DataTable" />
+            >If the data source for the column is a <see cref="T:System.Data.DataTable" />
 
             
 
-            , use the <see
-             cref="E:System.Data.DataTable.ColumnChanging" />
+            , use the <see cref="E:System.Data.DataTable.ColumnChanging" />
 
             
 
-             or <see
-             cref="E:System.Data.DataTable.RowChanging" />
+             or <see cref="E:System.Data.DataTable.RowChanging" />
 
             
 
@@ -1585,8 +1542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value in the specified row from the specified <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >Gets the value in the specified row from the specified <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -1596,8 +1552,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1605,19 +1560,26 @@
           >
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
            containing the data. </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1669,8 +1631,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.GetPreferredSize(System.Drawing.Graphics,System.Object)" />
+            >The <see cref="M:System.Windows.Forms.DataGridColumnStyle.GetPreferredSize(System.Drawing.Graphics,System.Object)" />
 
             
 
@@ -1686,19 +1647,26 @@
           <para>The height used for auto resizing a cell.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
            object. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1727,8 +1695,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.GetPreferredSize(System.Drawing.Graphics,System.Object)" />
+            >Use <see cref="M:System.Windows.Forms.DataGridColumnStyle.GetPreferredSize(System.Drawing.Graphics,System.Object)" />
 
             
 
@@ -1738,13 +1705,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the width and height of the specified value. The width and height are used when the user navigates to <see
-             cref="T:System.Windows.Forms.DataGridTableStyle" />
+            >When overridden in a derived class, gets the width and height of the specified value. The width and height are used when the user navigates to <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
             
 
-             using the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+             using the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -1754,8 +1719,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -1763,19 +1727,26 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
            object. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1803,8 +1774,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Gets the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -1833,28 +1803,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
+            >The <see cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
 
             
 
-             property is typically used to display a caption that is different from the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+             property is typically used to display a caption that is different from the <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
             
 
-             value when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+             value when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
             
 
-             value isn't easily understandable. For example, you can change the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
+             value isn't easily understandable. For example, you can change the <see cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
 
             
 
-             to "First Name" when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+             to "First Name" when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
             
 
@@ -1881,8 +1846,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -1896,8 +1860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
 
             
 
@@ -1921,13 +1884,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Invalidate" />
+            >The <see cref="M:System.Windows.Forms.DataGridColumnStyle.Invalidate" />
 
             
 
-             method is typically called after an editing operation is interrupted. For example, you can call the method when implementing the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
+             method is typically called after an editing operation is interrupted. For example, you can call the method when implementing the <see cref="M:System.Windows.Forms.DataGridColumnStyle.Abort(System.Int32)" />
 
             
 
@@ -1966,44 +1927,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The comparison used to match the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+            >The comparison used to match the <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
             
 
              to the data member is case-insensitive.</para
           >
           <para
-            >This <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >This <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             is used to render the data in the indicated data member whenever the data source matches the one indicated by the <see
-             cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+             is used to render the data in the indicated data member whenever the data source matches the one indicated by the <see cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.DataGridTableStyle" />
+             property of the <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
             
 
              that contains this column style.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+            >The <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
             
 
-             property is usually set to the <see
-             cref="P:System.Data.DataColumn.ColumnName" />
+             property is usually set to the <see cref="P:System.Data.DataColumn.ColumnName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataColumn" />
+             of a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -2030,8 +1984,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -2045,8 +1998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
             
 
@@ -2075,13 +2027,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.DataColumn" />
+            >The <see cref="T:System.Data.DataColumn" />
 
             
 
-             class's <see
-             cref="P:System.Data.DataColumn.AllowDBNull" />
+             class's <see cref="P:System.Data.DataColumn.AllowDBNull" />
 
             
 
@@ -2108,8 +2058,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -2123,8 +2072,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.NullText" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.NullText" />
 
             
 
@@ -2161,23 +2109,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Paints the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >Paints the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             with the specified <see
-             cref="T:System.Drawing.Graphics" />
+             with the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , <see
-             cref="T:System.Drawing.Rectangle" />
+            , <see cref="T:System.Drawing.Rectangle" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            , <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -2185,48 +2129,60 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw to. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The bounding <see
-           cref="T:System.Drawing.Rectangle" />
+          The bounding <see cref="T:System.Drawing.Rectangle" />
 
           
 
            to paint into. </param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           of the <see
-           cref="T:System.Windows.Forms.DataGrid" />
+           of the <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
            control the column belongs to. </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2259,23 +2215,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, paints a <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >When overridden in a derived class, paints a <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             with the specified <see
-             cref="T:System.Drawing.Graphics" />
+             with the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , <see
-             cref="T:System.Drawing.Rectangle" />
+            , <see cref="T:System.Drawing.Rectangle" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            , <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -2283,55 +2235,71 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw to. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The bounding <see
-           cref="T:System.Drawing.Rectangle" />
+          The bounding <see cref="T:System.Drawing.Rectangle" />
 
           
 
            to paint into. </param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           of the <see
-           cref="T:System.Windows.Forms.DataGrid" />
+           of the <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
            control the column belongs to. </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of the row in the underlying data being referred to. </param
         >
         <param name="alignToRight">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2366,23 +2334,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Paints a <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >Paints a <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             with the specified <see
-             cref="T:System.Drawing.Graphics" />
+             with the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
-            , <see
-             cref="T:System.Drawing.Rectangle" />
+            , <see cref="T:System.Drawing.Rectangle" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            , <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -2390,79 +2354,101 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to draw to. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The bounding <see
-           cref="T:System.Drawing.Rectangle" />
+          The bounding <see cref="T:System.Drawing.Rectangle" />
 
           
 
            to paint into. </param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           of the <see
-           cref="T:System.Windows.Forms.DataGrid" />
+           of the <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
            control the column belongs to. </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of the row in the underlying data table being referred to. </param
         >
         <param name="backBrush">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Brush" />
+          A <see cref="T:System.Drawing.Brush" />
 
           
 
            used to paint the background color. </param
         >
         <param name="foreBrush">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            used to paint the foreground color. </param
         >
         <param name="alignToRight">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2495,33 +2481,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             for a column is set using the <see
-             cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
+             for a column is set using the <see cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.BindingManagerBase" />
+             method of the <see cref="T:System.Windows.Forms.BindingManagerBase" />
 
             
 
-            . See the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.#ctor" />
+            . See the <see cref="M:System.Windows.Forms.DataGridColumnStyle.#ctor" />
 
             
 
-             constructor for an example of using the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             constructor for an example of using the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             to create a new <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+             to create a new <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -2531,13 +2511,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Gets or sets the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             that determines the attributes of data displayed by the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+             that determines the attributes of data displayed by the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
@@ -2568,8 +2546,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -2583,8 +2560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.PropertyDescriptor" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.PropertyDescriptor" />
 
             
 
@@ -2613,46 +2589,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Make a column read-only if it contains a primary key or if its value is generated automatically (as when the <see
-             cref="T:System.Data.DataColumn" />
+            >Make a column read-only if it contains a primary key or if its value is generated automatically (as when the <see cref="T:System.Data.DataColumn" />
 
             
 
-             object's <see
-             cref="P:System.Data.DataColumn.AutoIncrement" />
+             object's <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
             
 
              property is set to true).</para
           >
           <para
-            >Similar read-only properties exist on other classes, each allowing more control over the access to data. For example, the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Similar read-only properties exist on other classes, each allowing more control over the access to data. For example, the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             control can be set to read-only mode by using its <see
-             cref="P:System.Windows.Forms.DataGrid.ReadOnly" />
+             control can be set to read-only mode by using its <see cref="P:System.Windows.Forms.DataGrid.ReadOnly" />
 
             
 
-             property; the <see
-             cref="T:System.Windows.Forms.DataGridTableStyle" />
+             property; the <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
             
 
-             also has a <see
-             cref="P:System.Windows.Forms.DataGridTableStyle.ReadOnly" />
+             also has a <see cref="P:System.Windows.Forms.DataGridTableStyle.ReadOnly" />
 
             
 
-             property, and the <see
-             cref="T:System.Data.DataColumn" />
+             property, and the <see cref="T:System.Data.DataColumn" />
 
             
 
-             class has a <see
-             cref="P:System.Data.DataColumn.ReadOnly" />
+             class has a <see cref="P:System.Data.DataColumn.ReadOnly" />
 
             
 
@@ -2679,8 +2647,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -2694,8 +2661,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.ReadOnly" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.ReadOnly" />
 
             
 
@@ -2723,23 +2689,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you create a class that derives from <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >If you create a class that derives from <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-            , you will often use the derived class to host a control that is used to edit data. You should override the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.ReleaseHostedControl" />
+            , you will often use the derived class to host a control that is used to edit data. You should override the <see cref="M:System.Windows.Forms.DataGridColumnStyle.ReleaseHostedControl" />
 
             
 
-             method to release any references to the control in order to free system resources. For example, the <see
-             cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+             method to release any references to the control in order to free system resources. For example, the <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
             
 
-             derived class uses this method to release the reference to the hosted <see
-             cref="T:System.Windows.Forms.DataGridTextBox" />
+             derived class uses this method to release the reference to the hosted <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
             
 
@@ -2763,13 +2725,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You typically use this method if you are either creating a designer for the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >You typically use this method if you are either creating a designer for the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-            , or creating your own control incorporating the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            , or creating your own control incorporating the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -2779,8 +2739,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
+            >Resets the <see cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
 
             
 
@@ -2816,8 +2775,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the value in a specified row with the value from a specified <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >Sets the value in a specified row with the value from a specified <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -2825,31 +2783,41 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          A <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           associated with the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
           . </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of the row. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2873,8 +2841,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.SetDataGridInColumn(System.Windows.Forms.DataGrid)" />
+            >Typically, you should use the <see cref="M:System.Windows.Forms.DataGridColumnStyle.SetDataGridInColumn(System.Windows.Forms.DataGrid)" />
 
             
 
@@ -2884,8 +2851,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Sets the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -2893,12 +2859,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGrid" />
+          The <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
@@ -2926,28 +2895,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically overridden by derived classes to do special processing when the <see
-             cref="T:System.Windows.Forms.DataGridColumnStyle" />
+            >This method is typically overridden by derived classes to do special processing when the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
             
 
-             is added to <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             is added to <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-            . For example, the <see
-             cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+            . For example, the <see cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
 
             
 
-             uses this method to add the <see
-             cref="T:System.Windows.Forms.DataGridTextBox" />
+             uses this method to add the <see cref="T:System.Windows.Forms.DataGridTextBox" />
 
             
 
-             as a child of the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             as a child of the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -2957,8 +2921,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Sets the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -2966,12 +2929,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGrid" />
+          A <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
@@ -3003,13 +2969,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When called, the <see
-             cref="M:System.Windows.Forms.DataGridColumnStyle.ColumnStartedEditing(System.Windows.Forms.Control)" />
+            >When called, the <see cref="M:System.Windows.Forms.DataGridColumnStyle.ColumnStartedEditing(System.Windows.Forms.Control)" />
 
             
 
-             method allows the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             method allows the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -3019,8 +2983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Informs the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Informs the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -3028,12 +2991,15 @@
           >
         </summary>
         <param name="editingControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -3066,31 +3032,41 @@
           <para>Updates the value of a specified row with the given text.</para>
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.CurrencyManager" />
+          The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.DataGridColumnStyle" />
+           associated with the <see cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
           
 
           . </param
         >
         <param name="rowNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row to update. </param
         >
         <param name="displayText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3135,8 +3111,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -3150,8 +3125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.Width" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DataGridColumnStyle.Width" />
 
             
 

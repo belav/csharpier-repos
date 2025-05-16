@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Some of the classes and class elements in the <see
-         cref="N:System.Net.WebSockets" />
+        >Some of the classes and class elements in the <see cref="N:System.Net.WebSockets" />
 
         
 
-         namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The class elements in the <see
-         cref="N:System.Net.WebSockets" />
+         namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The class elements in the <see cref="N:System.Net.WebSockets" />
 
         
 
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -130,13 +127,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-             object will complete after the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+             object will complete after the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -146,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Close the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Close the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -157,8 +151,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -167,21 +160,33 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The WebSocket close status.</param
         >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the close status.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -222,13 +227,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-              object will complete after the output on the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+              object will complete after the output on the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -238,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Close the output for the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Close the output for the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -249,8 +251,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -259,21 +260,33 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The WebSocket close status.</param
         >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A description of the close status.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -303,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the reason why the close handshake was initiated on <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Gets the reason why the close handshake was initiated on <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -332,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a description of the reason why the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Gets a description of the reason why the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -374,8 +385,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebSockets.ClientWebSocket.ConnectAsync(System.Uri,System.Threading.CancellationToken)" />
+            >The <see cref="M:System.Net.WebSockets.ClientWebSocket.ConnectAsync(System.Uri,System.Threading.CancellationToken)" />
 
             
 
@@ -383,13 +393,11 @@
           >
           <para>For plain WebSocket connections, use the ws:// scheme in the uri. For secure WebSocket connections over TLS/SSL, use the wss:// scheme.</para>
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-              object will complete after the connect request on the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+              object will complete after the connect request on the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -403,8 +411,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -413,14 +420,22 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the WebSocket server to connect to.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,8 +462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -479,8 +493,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the WebSocket options for the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Gets the WebSocket options for the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -513,13 +526,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             object will complete after the receive request on the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+             object will complete after the receive request on the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -529,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Receive data on <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Receive data on <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -540,8 +550,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -550,14 +559,22 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to receive the response.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -591,13 +608,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-              object will complete after the send request on the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+              object will complete after the send request on the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -607,8 +622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Send data on <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Send data on <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -618,8 +632,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -628,28 +641,44 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer containing the message to be sent.</param
         >
         <param name="messageType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies whether the buffer is clear text or in a binary format.</param
         >
         <param name="endOfMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -679,8 +708,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get the WebSocket state of the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Get the WebSocket state of the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 
@@ -705,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the supported WebSocket sub-protocol for the <see
-             cref="T:System.Net.WebSockets.ClientWebSocket" />
+            >Gets the supported WebSocket sub-protocol for the <see cref="T:System.Net.WebSockets.ClientWebSocket" />
 
             
 

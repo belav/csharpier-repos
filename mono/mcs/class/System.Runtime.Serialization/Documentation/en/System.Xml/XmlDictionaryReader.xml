@@ -20,16 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Methods in this class read <see
-         cref="T:System.Xml.XmlDictionary" />
+        >Methods in this class read <see cref="T:System.Xml.XmlDictionary" />
 
         
 
          objects.</para
       >
       <para
-        >This class is derived from <see
-         cref="T:System.Xml.XmlReader" />
+        >This class is derived from <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -40,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract class that the indigo1 derives from <see
-         cref="T:System.Xml.XmlReader" />
+        >An abstract class that the indigo1 derives from <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -118,8 +115,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -129,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -140,8 +135,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -149,14 +143,22 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -199,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -210,8 +210,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -219,14 +218,22 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -259,8 +266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -270,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -281,8 +286,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -290,7 +294,11 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,7 +313,11 @@
            to use.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -339,8 +351,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -350,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -361,8 +371,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -370,38 +379,52 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,8 +458,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -446,8 +468,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -457,8 +478,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -466,7 +486,11 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -481,7 +505,11 @@
            to use.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -524,8 +552,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -535,8 +562,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -546,8 +572,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -555,31 +580,41 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
@@ -594,7 +629,11 @@
            to use.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -629,8 +668,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -640,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -651,8 +688,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -660,7 +696,11 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -691,7 +731,11 @@
            to use.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -727,8 +771,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -738,8 +781,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -749,8 +791,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -758,67 +799,86 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="dictionary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionary" />
+          The <see cref="T:System.Xml.XmlDictionary" />
 
           
 
            to use.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply.</param
         >
         <param name="session">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlBinaryReaderSession" />
+          The <see cref="T:System.Xml.XmlBinaryReaderSession" />
 
           
 
@@ -855,8 +915,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Other <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Other <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -866,8 +925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -877,8 +935,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -886,74 +943,97 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="dictionary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionary" />
+          The <see cref="T:System.Xml.XmlDictionary" />
 
           
 
            to use.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply.</param
         >
         <param name="session">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlBinaryReaderSession" />
+          The <see cref="T:System.Xml.XmlBinaryReaderSession" />
 
           
 
            to use.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -985,13 +1065,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             from an existing <see
-             cref="T:System.Xml.XmlReader" />
+             from an existing <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1001,8 +1079,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1010,12 +1087,15 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Xml.XmlReader" />
+          An instance of <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -1048,13 +1128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using the character encoding specified by <paramref
-             name="encoding" />
+            >This method reads from a stream, using the character encoding specified by <paramref name="encoding" />
 
             
 
-            , an instance of <see
-             cref="T:System.Text.Encoding" />
+            , an instance of <see cref="T:System.Text.Encoding" />
 
             
 
@@ -1064,8 +1142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1075,8 +1152,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1084,21 +1160,33 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encoding of the stream.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1131,13 +1219,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using one of the character encodings specified by <paramref
-             name="encodings" />
+            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />
 
             
 
-            , an array of instances of <see
-             cref="T:System.Text.Encoding" />
+            , an array of instances of <see cref="T:System.Text.Encoding" />
 
             
 
@@ -1147,8 +1233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1158,8 +1243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1167,21 +1251,33 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="encodings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encodings of the stream.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1215,18 +1311,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using one of the character encodings specified by <paramref
-             name="encodings" />
+            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />
 
             
 
-            , an array of instances of <see
-             cref="T:System.Text.Encoding" />
+            , an array of instances of <see cref="T:System.Text.Encoding" />
 
             
 
-            . The message is of the specified MIME type. If <paramref
-             name="contentType" />
+            . The message is of the specified MIME type. If <paramref name="contentType" />
 
             
 
@@ -1236,8 +1329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1247,8 +1339,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1256,28 +1347,44 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="encodings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encodings of the stream.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Content-Type MIME type of the message.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1312,13 +1419,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using the character encoding specified by <paramref
-             name="encoding" />
+            >This method reads from a buffer with a specified offset and count, using the character encoding specified by <paramref name="encoding" />
 
             
 
-            , an instance of <see
-             cref="T:System.Text.Encoding" />
+            , an instance of <see cref="T:System.Text.Encoding" />
 
             
 
@@ -1328,8 +1433,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1339,8 +1443,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1348,45 +1451,63 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encoding of the input.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1421,13 +1542,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref
-             name="encodings" />
+            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref name="encodings" />
 
             
 
-            , an array of instances of <see
-             cref="T:System.Text.Encoding" />
+            , an array of instances of <see cref="T:System.Text.Encoding" />
 
             
 
@@ -1437,8 +1556,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1448,8 +1566,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1457,45 +1574,63 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encodings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encodings of the input.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1531,18 +1666,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using one of the  character encodings specified by <paramref
-             name="encodings" />
+            >This method reads from a buffer with a specified offset and count, using one of the  character encodings specified by <paramref name="encodings" />
 
             
 
-            , an array of instances of <see
-             cref="T:System.Text.Encoding" />
+            , an array of instances of <see cref="T:System.Text.Encoding" />
 
             
 
-            . The message is of the specified MIME type. If <paramref
-             name="contentType" />
+            . The message is of the specified MIME type. If <paramref name="contentType" />
 
             
 
@@ -1552,8 +1684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1563,8 +1694,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1572,52 +1702,74 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encodings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encodings of the input.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Content-Type MIME type of the message.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1653,18 +1805,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a stream, using one of the character encodings specified by <paramref
-             name="encodings" />
+            >This method reads from a stream, using one of the character encodings specified by <paramref name="encodings" />
 
             
 
-            , an array of instances of <see
-             cref="T:System.Text.Encoding" />
+            , an array of instances of <see cref="T:System.Text.Encoding" />
 
             
 
-            . The message is of the specified MIME type. If <paramref
-             name="contentType" />
+            . The message is of the specified MIME type. If <paramref name="contentType" />
 
             
 
@@ -1674,8 +1823,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1685,8 +1833,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1694,47 +1841,70 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="encodings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encodings of the stream.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Content-Type MIME type of the message.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The MIME type of the message.</param
         >
         <param name="maxBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply to the reader.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1772,18 +1942,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref
-             name="encodings" />
+            >This method reads from a buffer with a specified offset and count, using one of the character encodings specified by <paramref name="encodings" />
 
             
 
-            , an array of instances of <see
-             cref="T:System.Text.Encoding" />
+            , an array of instances of <see cref="T:System.Text.Encoding" />
 
             
 
-            . The message is of the specified MIME type. If <paramref
-             name="contentType" />
+            . The message is of the specified MIME type. If <paramref name="contentType" />
 
             
 
@@ -1793,8 +1960,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1804,8 +1970,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1813,71 +1978,100 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encodings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The possible character encodings of the input.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Content-Type MIME type of the message.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply to the reader.</param
         >
         <param name="maxBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum allowed size of the buffer.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1913,8 +2107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1924,8 +2117,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1933,14 +2125,22 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1976,8 +2176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1987,8 +2186,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -1996,14 +2194,22 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2041,8 +2247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -2052,8 +2257,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -2061,38 +2265,52 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2130,8 +2348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -2141,8 +2358,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -2150,38 +2366,52 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            object that specifies the encoding properties to apply.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2221,8 +2451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -2232,8 +2461,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -2241,62 +2469,82 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            object that specifies the encoding properties to apply.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2357,24 +2605,30 @@
           <para>The value of the attribute.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that represents the local name of the attribute.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
@@ -2410,8 +2664,7 @@
 
             
 
-             is an array of strings, and <paramref
-             name="namespaceUri" />
+             is an array of strings, and <paramref name="namespaceUri" />
 
             
 
@@ -2427,14 +2680,22 @@
           <para>The index of the local name of the current node within an array of names.</para>
         </returns>
         <param name="localNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string array of local names to be searched.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2470,18 +2731,15 @@
 
             
 
-             is an array of <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             is an array of <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
-            , and <paramref
-             name="namespaceUri" />
+            , and <paramref name="namespaceUri" />
 
             
 
-             is an <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             is an <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -2497,19 +2755,26 @@
           <para>The index of the local name of the current node within an array of names.</para>
         </returns>
         <param name="localNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          The <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            array of local names to be searched.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2561,8 +2826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref
-             name="localName" />
+            >Checks whether the parameter, <paramref name="localName" />
 
             
 
@@ -2572,8 +2836,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="localName" />
+            >true if <paramref name="localName" />
 
             
 
@@ -2581,7 +2844,11 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2613,8 +2880,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref
-             name="localName" />
+            >Checks whether the parameter, <paramref name="localName" />
 
             
 
@@ -2624,8 +2890,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="localName" />
+            >true if <paramref name="localName" />
 
             
 
@@ -2633,12 +2898,15 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
@@ -2670,8 +2938,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref
-             name="namespaceUri" />
+            >Checks whether the parameter, <paramref name="namespaceUri" />
 
             
 
@@ -2681,8 +2948,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="namespaceUri" />
+            >true if <paramref name="namespaceUri" />
 
             
 
@@ -2690,7 +2956,11 @@
           >
         </returns>
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2722,8 +2992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the parameter, <paramref
-             name="namespaceUri" />
+            >Checks whether the parameter, <paramref name="namespaceUri" />
 
             
 
@@ -2733,8 +3002,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="namespaceUri" />
+            >true if <paramref name="namespaceUri" />
 
             
 
@@ -2742,7 +3010,11 @@
           >
         </returns>
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2802,13 +3074,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the first tag in the array is a start tag or empty element tag and matches <paramref
-             name="localName" />
+            >true if the first tag in the array is a start tag or empty element tag and matches <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
@@ -2816,24 +3086,30 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that represents the local name of the attribute.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
@@ -2869,28 +3145,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the node type is <see
-             cref="F:System.Xml.XmlNodetype.Text" />
+            >true if the node type is <see cref="F:System.Xml.XmlNodetype.Text" />
 
             
 
-            , <see
-             cref="F:System.Xml.XmlNodetype.Whitespace" />
+            , <see cref="F:System.Xml.XmlNodetype.Whitespace" />
 
             
 
-            , <see
-             cref="F:System.Xml.XmlNodetype.SignificantWhitespace" />
+            , <see cref="F:System.Xml.XmlNodetype.SignificantWhitespace" />
 
             
 
-            , <see
-             cref="F:System.Xml.XmlNodetype.CDATA" />
+            , <see cref="F:System.Xml.XmlNodetype.CDATA" />
 
             
 
-            , or <see
-             cref="F:System.Xml.XmlNodetype.Attribute" />
+            , or <see cref="F:System.Xml.XmlNodetype.Attribute" />
 
             
 
@@ -2898,7 +3169,11 @@
           >
         </returns>
         <param name="nodeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2952,8 +3227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the current content node is a start element or an empty element and if the <see
-             cref="P:System.Xml.XmlReader.Name" />
+            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.Name" />
 
             
 
@@ -2961,12 +3235,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Xml.XmlReader.Name" />
+          The <see cref="P:System.Xml.XmlReader.Name" />
 
           
 
@@ -2999,13 +3276,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the current content node is a start element or an empty element and if the <see
-             cref="P:System.Xml.XmlReader.LocalName" />
+            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.LocalName" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlReader.NamespaceURI" />
+             and <see cref="P:System.Xml.XmlReader.NamespaceURI" />
 
             
 
@@ -3013,14 +3288,22 @@
           >
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3053,13 +3336,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the current content node is a start element or an empty element and if the <see
-             cref="P:System.Xml.XmlReader.LocalName" />
+            >Tests whether the current content node is a start element or an empty element and if the <see cref="P:System.Xml.XmlReader.LocalName" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlReader.NamespaceURI" />
+             and <see cref="P:System.Xml.XmlReader.NamespaceURI" />
 
             
 
@@ -3067,14 +3348,22 @@
           >
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3136,8 +3425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Boolean" />
+            >Reads repeated occurrences of <see cref="T:System.Boolean" />
 
             
 
@@ -3149,28 +3437,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3207,8 +3511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.DateTime" />
+            >Reads repeated occurrences of <see cref="T:System.DateTime" />
 
             
 
@@ -3220,28 +3523,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3278,8 +3597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Decimal" />
+            >Reads repeated occurrences of <see cref="T:System.Decimal" />
 
             
 
@@ -3291,28 +3609,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3349,8 +3683,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Double" />
+            >Reads repeated occurrences of <see cref="T:System.Double" />
 
             
 
@@ -3362,28 +3695,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3420,8 +3769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Guid" />
+            >Reads repeated occurrences of <see cref="T:System.Guid" />
 
             
 
@@ -3433,28 +3781,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3497,28 +3861,44 @@
           <para>The number of integers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the integers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3561,28 +3941,44 @@
           <para>The number of integers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the integers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3625,28 +4021,44 @@
           <para>The number of integers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the integers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3689,28 +4101,44 @@
           <para>The umber of float numbers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the float numbers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3747,8 +4175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.TimeSpan" />
+            >Reads repeated occurrences of <see cref="T:System.TimeSpan" />
 
             
 
@@ -3760,28 +4187,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3818,8 +4261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Boolean" />
+            >Reads repeated occurrences of <see cref="T:System.Boolean" />
 
             
 
@@ -3831,28 +4273,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3889,8 +4347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.DateTime" />
+            >Reads repeated occurrences of <see cref="T:System.DateTime" />
 
             
 
@@ -3902,28 +4359,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3960,8 +4433,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Decimal" />
+            >Reads repeated occurrences of <see cref="T:System.Decimal" />
 
             
 
@@ -3973,28 +4445,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4031,8 +4519,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Double" />
+            >Reads repeated occurrences of <see cref="T:System.Double" />
 
             
 
@@ -4044,28 +4531,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4102,8 +4605,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Guid" />
+            >Reads repeated occurrences of <see cref="T:System.Guid" />
 
             
 
@@ -4115,28 +4617,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4179,28 +4697,44 @@
           <para>The number of integers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the integers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4243,28 +4777,44 @@
           <para>The number of integers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the integers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4307,28 +4857,44 @@
           <para>The number of integers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the integers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4371,28 +4937,44 @@
           <para>The number of float numbers put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the float numbers are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4429,8 +5011,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.TimeSpan" />
+            >Reads repeated occurrences of <see cref="T:System.TimeSpan" />
 
             
 
@@ -4442,28 +5023,44 @@
           <para>The number of nodes put in the array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the element.</param
         >
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the nodes are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4499,8 +5096,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Boolean" />
+            >Reads repeated occurrences of <see cref="T:System.Boolean" />
 
             
 
@@ -4510,13 +5106,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             array of the <see
-             cref="T:System.Boolean" />
+             array of the <see cref="T:System.Boolean" />
 
             
 
@@ -4524,14 +5118,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4567,8 +5169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads repeated occurrences of <see
-             cref="T:System.Boolean" />
+            >Reads repeated occurrences of <see cref="T:System.Boolean" />
 
             
 
@@ -4578,13 +5179,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             array of the <see
-             cref="T:System.Boolean" />
+             array of the <see cref="T:System.Boolean" />
 
             
 
@@ -4592,14 +5191,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4639,12 +5246,15 @@
           <para>The concatenated text content or attribute value converted to the requested type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -4740,7 +5350,11 @@
           <para>A byte array that contains the BinHex decoded binary bytes.</para>
         </returns>
         <param name="maxByteArrayContentLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4780,21 +5394,33 @@
           <para>Number of characters read.</para>
         </returns>
         <param name="chars">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array into which the characters are put.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting index in the array.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4969,7 +5595,11 @@
           <para>Node content in string representation.</para>
         </returns>
         <param name="maxStringContentLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5052,8 +5682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to <see
-             cref="T:System.TimeSpan" />
+            >Converts a node's content to <see cref="T:System.TimeSpan" />
 
             
 
@@ -5129,8 +5758,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to a <see
-             cref="T:System.DateTime" />
+            >Converts a node's content to a <see cref="T:System.DateTime" />
 
             
 
@@ -5140,8 +5768,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.DateTime" />
+            >The node's content represented as a <see cref="T:System.DateTime" />
 
             
 
@@ -5149,14 +5776,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5189,8 +5824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to a <see
-             cref="T:System.DateTime" />
+            >Converts a node's content to a <see cref="T:System.DateTime" />
 
             
 
@@ -5200,8 +5834,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.DateTime" />
+            >The node's content represented as a <see cref="T:System.DateTime" />
 
             
 
@@ -5209,14 +5842,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5252,8 +5893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to a <see
-             cref="T:System.Decimal" />
+            >Converts a node's content to a <see cref="T:System.Decimal" />
 
             
 
@@ -5263,8 +5903,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Decimal" />
+            >The node's content represented as a <see cref="T:System.Decimal" />
 
             
 
@@ -5272,14 +5911,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5315,8 +5962,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to a <see
-             cref="T:System.Decimal" />
+            >Converts a node's content to a <see cref="T:System.Decimal" />
 
             
 
@@ -5326,8 +5972,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Decimal" />
+            >The node's content represented as a <see cref="T:System.Decimal" />
 
             
 
@@ -5335,14 +5980,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5378,8 +6031,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to a <see
-             cref="T:System.Double" />
+            >Converts a node's content to a <see cref="T:System.Double" />
 
             
 
@@ -5389,8 +6041,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Double" />
+            >The node's content represented as a <see cref="T:System.Double" />
 
             
 
@@ -5398,14 +6049,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5441,8 +6100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a node's content to a <see
-             cref="T:System.Double" />
+            >Converts a node's content to a <see cref="T:System.Double" />
 
             
 
@@ -5452,8 +6110,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Double" />
+            >The node's content represented as a <see cref="T:System.Double" />
 
             
 
@@ -5461,14 +6118,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5553,8 +6218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.Boolean" />
+            >Converts an element's content to a <see cref="T:System.Boolean" />
 
             
 
@@ -5564,8 +6228,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Boolean" />
+            >The node's content represented as a <see cref="T:System.Boolean" />
 
             
 
@@ -5596,8 +6259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.DateTime" />
+            >Converts an element's content to a <see cref="T:System.DateTime" />
 
             
 
@@ -5607,8 +6269,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.DateTime" />
+            >The node's content represented as a <see cref="T:System.DateTime" />
 
             
 
@@ -5639,8 +6300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.Decimal" />
+            >Converts an element's content to a <see cref="T:System.Decimal" />
 
             
 
@@ -5650,8 +6310,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Decimal" />
+            >The node's content represented as a <see cref="T:System.Decimal" />
 
             
 
@@ -5682,8 +6341,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.Double" />
+            >Converts an element's content to a <see cref="T:System.Double" />
 
             
 
@@ -5693,8 +6351,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Double" />
+            >The node's content represented as a <see cref="T:System.Double" />
 
             
 
@@ -5722,8 +6379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a floating point number (<see
-             cref="T:System.Single" />
+            >Converts an element's content to a floating point number (<see cref="T:System.Single" />
 
             
 
@@ -5733,8 +6389,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a floating point number (<see
-             cref="T:System.Single" />
+            >The node's content represented as a floating point number (<see cref="T:System.Single" />
 
             
 
@@ -5762,8 +6417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.Guid" />
+            >Converts an element's content to a <see cref="T:System.Guid" />
 
             
 
@@ -5773,8 +6427,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.Guid" />
+            >The node's content represented as a <see cref="T:System.Guid" />
 
             
 
@@ -5802,8 +6455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to an integer (<see
-             cref="T:System.Int32" />
+            >Converts an element's content to an integer (<see cref="T:System.Int32" />
 
             
 
@@ -5813,8 +6465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as an integer (<see
-             cref="T:System.Int32" />
+            >The node's content represented as an integer (<see cref="T:System.Int32" />
 
             
 
@@ -5842,8 +6493,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a long integer (<see
-             cref="T:System.Int64" />
+            >Converts an element's content to a long integer (<see cref="T:System.Int64" />
 
             
 
@@ -5853,8 +6503,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a long integer (<see
-             cref="T:System.Int64" />
+            >The node's content represented as a long integer (<see cref="T:System.Int64" />
 
             
 
@@ -5888,8 +6537,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.String" />
+            >Converts an element's content to a <see cref="T:System.String" />
 
             
 
@@ -5899,8 +6547,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.String" />
+            >The node's content represented as a <see cref="T:System.String" />
 
             
 
@@ -5931,8 +6578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an element's content to a <see
-             cref="T:System.TimeSpan" />
+            >Converts an element's content to a <see cref="T:System.TimeSpan" />
 
             
 
@@ -5942,8 +6588,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node's content represented as a <see
-             cref="T:System.TimeSpan" />
+            >The node's content represented as a <see cref="T:System.TimeSpan" />
 
             
 
@@ -6027,8 +6672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref
-             name="name" />
+            >Checks whether the current node is an element with the given <paramref name="name" />
 
             
 
@@ -6036,7 +6680,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6069,13 +6717,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref
-             name="localName" />
+            >Checks whether the current node is an element with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
@@ -6083,14 +6729,22 @@
           >
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6123,13 +6777,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref
-             name="localName" />
+            >Checks whether the current node is an element with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
@@ -6137,14 +6789,22 @@
           >
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6180,18 +6840,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of <see
-             cref="T:System.Guid" />
+             into an array of <see cref="T:System.Guid" />
 
             
 
@@ -6200,24 +6857,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >An array of <see
-             cref="T:System.Guid" />
+          <para>An array of <see cref="T:System.Guid" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6253,18 +6915,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of <see
-             cref="T:System.Guid" />
+             into an array of <see cref="T:System.Guid" />
 
             
 
@@ -6273,24 +6932,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >An array of <see
-             cref="T:System.Guid" />
+          <para>An array of <see cref="T:System.Guid" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6326,18 +6990,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of short integers (<see
-             cref="T:System.Int16" />
+             into an array of short integers (<see cref="T:System.Int16" />
 
             
 
@@ -6347,8 +7008,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of short integers (<see
-             cref="T:System.Int16" />
+            >An array of short integers (<see cref="T:System.Int16" />
 
             
 
@@ -6356,14 +7016,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6399,18 +7067,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of short integers (<see
-             cref="T:System.Int16" />
+             into an array of short integers (<see cref="T:System.Int16" />
 
             
 
@@ -6420,8 +7085,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of short integers (<see
-             cref="T:System.Int16" />
+            >An array of short integers (<see cref="T:System.Int16" />
 
             
 
@@ -6429,14 +7093,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6472,18 +7144,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of integers (<see
-             cref="T:System.Int32" />
+             into an array of integers (<see cref="T:System.Int32" />
 
             
 
@@ -6493,8 +7162,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of integers (<see
-             cref="T:System.Int32" />
+            >An array of integers (<see cref="T:System.Int32" />
 
             
 
@@ -6502,14 +7170,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6545,18 +7221,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of integers (<see
-             cref="T:System.Int32" />
+             into an array of integers (<see cref="T:System.Int32" />
 
             
 
@@ -6566,8 +7239,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of integers (<see
-             cref="T:System.Int32" />
+            >An array of integers (<see cref="T:System.Int32" />
 
             
 
@@ -6575,14 +7247,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6618,18 +7298,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of long integers (<see
-             cref="T:System.Int64" />
+             into an array of long integers (<see cref="T:System.Int64" />
 
             
 
@@ -6639,8 +7316,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of long integers (<see
-             cref="T:System.Int64" />
+            >An array of long integers (<see cref="T:System.Int64" />
 
             
 
@@ -6648,14 +7324,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6691,18 +7375,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of long integers (<see
-             cref="T:System.Int64" />
+             into an array of long integers (<see cref="T:System.Int64" />
 
             
 
@@ -6712,8 +7393,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of long integers (<see
-             cref="T:System.Int64" />
+            >An array of long integers (<see cref="T:System.Int64" />
 
             
 
@@ -6721,14 +7401,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6764,18 +7452,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of float numbers (<see
-             cref="T:System.Single" />
+             into an array of float numbers (<see cref="T:System.Single" />
 
             
 
@@ -6785,8 +7470,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of float numbers (<see
-             cref="T:System.Single" />
+            >An array of float numbers (<see cref="T:System.Single" />
 
             
 
@@ -6794,14 +7478,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6837,18 +7529,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into an array of float numbers (<see
-             cref="T:System.Single" />
+             into an array of float numbers (<see cref="T:System.Single" />
 
             
 
@@ -6858,8 +7547,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of float numbers (<see
-             cref="T:System.Single" />
+            >An array of float numbers (<see cref="T:System.Single" />
 
             
 
@@ -6867,14 +7555,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6907,13 +7603,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the current node is an element with the given <paramref
-             name="localName" />
+            >Checks whether the current node is an element with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
@@ -6921,14 +7615,22 @@
           >
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6992,7 +7694,11 @@
           <para>A string that contains the contents of the current node.</para>
         </returns>
         <param name="maxStringContentLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -7028,18 +7734,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into a <see
-             cref="T:System.TimeSpan" />
+             into a <see cref="T:System.TimeSpan" />
 
             
 
@@ -7048,24 +7751,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A <see
-             cref="T:System.TimeSpan" />
+          <para>A <see cref="T:System.TimeSpan" />
 
             
 
-             array.</para
-          >
+             array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -7101,18 +7809,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the contents of a series of nodes with the given <paramref
-             name="localName" />
+            >Reads the contents of a series of nodes with the given <paramref name="localName" />
 
             
 
-             and <paramref
-             name="namespaceUri" />
+             and <paramref name="namespaceUri" />
 
             
 
-             into a <see
-             cref="T:System.TimeSpan" />
+             into a <see cref="T:System.TimeSpan" />
 
             
 
@@ -7121,24 +7826,29 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A <see
-             cref="T:System.TimeSpan" />
+          <para>A <see cref="T:System.TimeSpan" />
 
             
 
-             array.</para
-          >
+             array.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element.</param
         >
         <param name="namespaceUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -7207,13 +7917,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Start reading the canonical octets of the XML being read to this reader from the supplied stream until the matching EndCanonicalization call is made. The content read from the main reader stream is unaffected by this call. <paramref
-             name="includeComments" />
+            >Start reading the canonical octets of the XML being read to this reader from the supplied stream until the matching EndCanonicalization call is made. The content read from the main reader stream is unaffected by this call. <paramref name="includeComments" />
 
             
 
-             defines whether comments are to be included in the canonical input and <paramref
-             name="inclusivePrefixes" />
+             defines whether comments are to be included in the canonical input and <paramref name="inclusivePrefixes" />
 
             
 
@@ -7225,21 +7933,33 @@
           <para>This method is not yet implemented.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to read from.</param
         >
         <param name="includeComments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Determines whether comments are included.</param
         >
         <param name="inclusivePrefixes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -25,90 +25,75 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The &lt;td&gt; element represents a data cell in a table, while the &lt;th&gt; element represents a table heading cell. Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+        >The &lt;td&gt; element represents a data cell in a table, while the &lt;th&gt; element represents a table heading cell. Use the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
         
 
-         class to programmatically control the &lt;td&gt; and &lt;th&gt; HTML elements in an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+         class to programmatically control the &lt;td&gt; and &lt;th&gt; HTML elements in an <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
         
 
          object.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
         
 
-         class allows you to customize the appearance of a cell in a table by specifying the background color, the border color, the height, and the width. These attributes are set using the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
+         class allows you to customize the appearance of a cell in a table by specifying the background color, the border color, the height, and the width. These attributes are set using the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
+        , <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Height" />
+        , <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Height" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Width" />
+        , and <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Width" />
 
         
 
          properties.</para
       >
       <para
-        >You can control how the content of a cell is displayed by specifying the vertical and horizontal alignment of the contents. You can also specify whether the content automatically continues on the next line when the end of the cell is reached. The horizontal alignment is controlled by the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Align" />
+        >You can control how the content of a cell is displayed by specifying the vertical and horizontal alignment of the contents. You can also specify whether the content automatically continues on the next line when the end of the cell is reached. The horizontal alignment is controlled by the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Align" />
 
         
 
-         property, while the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.VAlign" />
+         property, while the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.VAlign" />
 
         
 
-         property controls the vertical alignment. The <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.NoWrap" />
+         property controls the vertical alignment. The <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.NoWrap" />
 
         
 
          property indicates whether text wrapping is disabled.</para
       >
       <para
-        >By using the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
+        >By using the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
 
         
 
-         or the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
+         or the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
 
         
 
-         property, you can control the number of columns or rows that a cell occupies. For example, you can create a cell that occupies two columns in a table by setting the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
+         property, you can control the number of columns or rows that a cell occupies. For example, you can create a cell that occupies two columns in a table by setting the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
 
         
 
          property to 2.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlTableCell.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlTableCell.#ctor" />
 
         
 
@@ -116,8 +101,7 @@
       >
       <block subset="none" type="note">
         <para
-          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-           type="text/html">
+          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
             <a href="96D2C59E-693C-4079-9B53-B3FF0D9E9133">Validation Server Controls</a>
           </format>
 
@@ -130,8 +114,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the &lt;td&gt; and &lt;th&gt; HTML elements in an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+        >Represents the &lt;td&gt; and &lt;th&gt; HTML elements in an <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
         
 
@@ -149,21 +132,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             class. This constructor is used to create an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             class. This constructor is used to create an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
              object that represents the &lt;td&gt; element for a table data cell.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -195,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -220,23 +199,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             class. It allows you to create an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             class. It allows you to create an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             object that represents a cell in an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+             object that represents a cell in an <see cref="T:System.Web.UI.HtmlControls.HtmlTable" />
 
             
 
-             control. It is commonly used to create an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             control. It is commonly used to create an <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -246,8 +221,7 @@
             <para>Although this constructor allows you to specify the cell element to create, the &lt;th&gt; element is the only supported cell element. For future compatibility, this constructor allows you to create other HTML cell elements that could become available.</para>
           </block>
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -272,8 +246,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="tagName" />
+                  >The value of the <paramref name="tagName" />
 
                   
 
@@ -286,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -295,7 +267,11 @@
           >
         </summary>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -319,13 +295,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Align" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Align" />
 
             
 
-             property to specify the horizontal alignment of the content in a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify the horizontal alignment of the content in a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -333,18 +307,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting this property affects only the cell represented by an instance of the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+              >Setting this property affects only the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
               
 
-               class. To apply the same alignment to the cells of an entire row in the table, set the <see
-               cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Align" />
+               class. To apply the same alignment to the cells of an entire row in the table, set the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Align" />
 
               
 
-               property of the row represented by an instance of the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+               property of the row represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
               
 
@@ -395,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the horizontal alignment of the content in the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the horizontal alignment of the content in the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -429,26 +399,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
 
             
 
-             property to specify the background color of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify the background color of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
              class. You can specify a color either by name or by using a hexadecimal value, preceded by the pound character (#), in the form #RRGGBB. RR, GG, and BB represent hexadecimal values from 0 to 255 that indicate the red, green, and blue components of a color, respectively. For example, the value #0000FF represents the color blue. It specifies the minimum value (00) for the red and green components, while specifying the maximum value (FF) for the blue component.</para
           >
           <para
-            >The following table shows the sixteen predefined HTML color names and corresponding hexadecimal values that can be used for the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
+            >The following table shows the sixteen predefined HTML color names and corresponding hexadecimal values that can be used for the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
 
             
 
              property. For more information on HTML colors, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -597,13 +564,11 @@
             </item>
           </list>
           <para
-            >The available colors for use with the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
+            >The available colors for use with the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
 
             
 
-             property can be determined from the <see
-             cref="T:System.Drawing.KnownColor" />
+             property can be determined from the <see cref="T:System.Drawing.KnownColor" />
 
             
 
@@ -614,8 +579,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the background color of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the background color of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -648,26 +612,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
 
             
 
-             property to specify the border color of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify the border color of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
              class. You can specify a color either by name or by using a hexadecimal value, preceded by the pound character (#), in the form #RRGGBB. RR, GG, and BB represent hexadecimal values from 0 to 255 that indicate the red, green, and blue components of a color, respectively. For example, the value #0000FF represents the color blue. It specifies the minimum value (00) for the red and green components, while specifying the maximum value (FF) for the blue component.</para
           >
           <para
-            >The following table shows the sixteen predefined HTML color names and corresponding hexadecimal values that can be used for the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
+            >The following table shows the sixteen predefined HTML color names and corresponding hexadecimal values that can be used for the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
 
             
 
              property. For more information on HTML colors, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web</see
             >
 
@@ -816,13 +777,11 @@
             </item>
           </list>
           <para
-            >The available colors for use with the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
+            >The available colors for use with the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BorderColor" />
 
             
 
-             property can be determined from the <see
-             cref="T:System.Drawing.KnownColor" />
+             property can be determined from the <see cref="T:System.Drawing.KnownColor" />
 
             
 
@@ -833,8 +792,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the border color of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the border color of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -867,18 +825,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >In a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             class, use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
+             class, use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
 
             
 
-             property to specify the number of columns the cell occupies. This allows you to create a cell in the table that occupies more than one column. For example, suppose you have a table that contains two columns and two rows. You can create a table heading cell that spans both columns. Set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
+             property to specify the number of columns the cell occupies. This allows you to create a cell in the table that occupies more than one column. For example, suppose you have a table that contains two columns and two rows. You can create a table heading cell that spans both columns. Set the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
 
             
 
@@ -891,8 +846,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of columns occupied by a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the number of columns occupied by a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -925,13 +879,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Height" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Height" />
 
             
 
-             property to specify the height (in pixels) of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify the height (in pixels) of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -944,8 +896,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height (in pixels) of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the height (in pixels) of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -978,13 +929,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.NoWrap" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.NoWrap" />
 
             
 
-             property to specify or determine whether the text in a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify or determine whether the text in a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -994,8 +943,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the text in a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets a value indicating whether the text in a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1032,38 +980,30 @@
         <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="writer"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTableCell.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlTableCell.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method provides additional formatting after calling the base class's <see
-             cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+             method provides additional formatting after calling the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method. The additional formatting makes the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             method. The additional formatting makes the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
              control's rendered HTML easier to read by adding a line return after the closing tag.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTableCell.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlTableCell.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1073,8 +1013,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1099,18 +1038,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >In a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
-             class, use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
+             class, use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
 
             
 
-             property to specify the number of rows the cell occupies. This allows you to create a cell in the table that occupies more than one row. For example, suppose you have a table that contains two columns and two rows. You can create a column that overlaps both rows. Set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
+             property to specify the number of rows the cell occupies. This allows you to create a cell in the table that occupies more than one row. For example, suppose you have a table that contains two columns and two rows. You can create a column that overlaps both rows. Set the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
 
             
 
@@ -1123,8 +1059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of rows occupied by a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the number of rows occupied by a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1157,13 +1092,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.VAlign" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.VAlign" />
 
             
 
-             property to specify the vertical alignment of the content in a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify the vertical alignment of the content in a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1171,18 +1104,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting this property affects only the cell represented by an instance of the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+              >Setting this property affects only the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
               
 
-               class. To apply the same vertical alignment to the cells of an entire row in the table, set the <see
-               cref="P:System.Web.UI.HtmlControls.HtmlTableRow.VAlign" />
+               class. To apply the same vertical alignment to the cells of an entire row in the table, set the <see cref="P:System.Web.UI.HtmlControls.HtmlTableRow.VAlign" />
 
               
 
-               property of the row represented by an instance of the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+               property of the row represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
 
               
 
@@ -1233,8 +1163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the vertical alignment for the content of a cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the vertical alignment for the content of a cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1267,13 +1196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Width" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Width" />
 
             
 
-             property to specify the width (in pixels) of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+             property to specify the width (in pixels) of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 
@@ -1286,8 +1213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the width (in pixels) of the cell represented by an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+            >Gets or sets the width (in pixels) of the cell represented by an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
             
 

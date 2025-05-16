@@ -18,13 +18,11 @@
   <Docs>
     <typeparam name="T">To be added.</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Widget.NestedClass`1</c>
+    <remarks><c>T:Mono.DocTest.Widget.NestedClass`1</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -60,14 +58,11 @@
         <Parameter Name="i" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="i"
-          >Another <see
-           cref="T:System.Int32" />
+        <param name="i">Another <see cref="T:System.Int32" />
 
           
 
-          .</param
-        >
+          .</param>
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Widget.NestedClass`1.M(System.Int32)</c>

@@ -19,26 +19,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is primarily used by the <see
-         cref="T:System.Text.Encoding" />
+        >This class is primarily used by the <see cref="T:System.Text.Encoding" />
 
         
 
-         class. The <see
-         cref="M:System.Text.Encoding.GetEncodings" />
+         class. The <see cref="M:System.Text.Encoding.GetEncodings" />
 
         
 
          method returns an array of this type.</para
       >
       <para
-        >This class is intended to provide minimal information about an encoding. To obtain additional information, the application should use the <see
-         cref="M:System.Text.EncodingInfo.GetEncoding" />
+        >This class is intended to provide minimal information about an encoding. To obtain additional information, the application should use the <see cref="M:System.Text.EncodingInfo.GetEncoding" />
 
         
 
-         method to get an instance of the <see
-         cref="T:System.Text.Encoding" />
+         method to get an instance of the <see cref="T:System.Text.Encoding" />
 
         
 
@@ -68,8 +64,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is equivalent to <see
-             cref="P:System.Text.Encoding.CodePage" />
+            >This member is equivalent to <see cref="P:System.Text.Encoding.CodePage" />
 
             
 
@@ -99,18 +94,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property defines a display name that is the same as the name represented by the <see
-             cref="P:System.Text.Encoding.EncodingName" />
+            >This property defines a display name that is the same as the name represented by the <see cref="P:System.Text.Encoding.EncodingName" />
 
             
 
-             property. Your applications should use <see
-             cref="P:System.Text.EncodingInfo.Name" />
+             property. Your applications should use <see cref="P:System.Text.EncodingInfo.Name" />
 
             
 
-             for a name to pass to <see
-             cref="M:System.Text.Encoding.GetEncoding(System.String)" />
+             for a name to pass to <see cref="M:System.Text.Encoding.GetEncoding(System.String)" />
 
             
 
@@ -145,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.Text.EncodingInfo" />
+            >Two <see cref="T:System.Text.EncodingInfo" />
 
             
 
-             objects are equal if their <see
-             cref="P:System.Text.EncodingInfo.CodePage" />
+             objects are equal if their <see cref="P:System.Text.EncodingInfo.CodePage" />
 
             
 
@@ -161,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the specified object is equal to the current <see
-             cref="T:System.Text.EncodingInfo" />
+            >Gets a value indicating whether the specified object is equal to the current <see cref="T:System.Text.EncodingInfo" />
 
             
 
@@ -172,18 +161,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="value" />
+            >true if <paramref name="value" />
 
             
 
-             is a <see
-             cref="T:System.Text.EncodingInfo" />
+             is a <see cref="T:System.Text.EncodingInfo" />
 
             
 
-             object and is equal to the current <see
-             cref="T:System.Text.EncodingInfo" />
+             object and is equal to the current <see cref="T:System.Text.EncodingInfo" />
 
             
 
@@ -191,12 +177,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare to the current <see
-           cref="T:System.Text.EncodingInfo" />
+          An object to compare to the current <see cref="T:System.Text.EncodingInfo" />
 
           
 
@@ -225,13 +214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Text.Encoding" />
+            >Returns a <see cref="T:System.Text.Encoding" />
 
             
 
-             object that corresponds to the current <see
-             cref="T:System.Text.EncodingInfo" />
+             object that corresponds to the current <see cref="T:System.Text.EncodingInfo" />
 
             
 
@@ -241,13 +228,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Text.Encoding" />
+            >A <see cref="T:System.Text.Encoding" />
 
             
 
-             object that corresponds to the current <see
-             cref="T:System.Text.EncodingInfo" />
+             object that corresponds to the current <see cref="T:System.Text.EncodingInfo" />
 
             
 
@@ -276,18 +261,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value returned by the <see
-             cref="M:System.Text.EncodingInfo.GetHashCode" />
+            >The value returned by the <see cref="M:System.Text.EncodingInfo.GetHashCode" />
 
             
 
-             method is not suitable for distinguishing one <see
-             cref="T:System.Text.EncodingInfo" />
+             method is not suitable for distinguishing one <see cref="T:System.Text.EncodingInfo" />
 
             
 
-             object from another. If your application needs a unique hash code, it should override the <see
-             cref="M:System.Text.EncodingInfo.GetHashCode" />
+             object from another. If your application needs a unique hash code, it should override the <see cref="M:System.Text.EncodingInfo.GetHashCode" />
 
             
 
@@ -297,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the current <see
-             cref="T:System.Text.EncodingInfo" />
+            >Returns the hash code for the current <see cref="T:System.Text.EncodingInfo" />
 
             
 
@@ -328,36 +309,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property defines the name that is appropriate for passing to <see
-             cref="M:System.Text.Encoding.GetEncoding(System.String)" />
+            >This property defines the name that is appropriate for passing to <see cref="M:System.Text.Encoding.GetEncoding(System.String)" />
 
             
 
-            . This name is the same as the name represented by the <see
-             cref="P:System.Text.Encoding.WebName" />
+            . This name is the same as the name represented by the <see cref="P:System.Text.Encoding.WebName" />
 
             
 
-             property. When its value is the name of a standard, the actual implementation of the encoding may not conform in full to that standard. Your applications should use <see
-             cref="P:System.Text.EncodingInfo.DisplayName" />
+             property. When its value is the name of a standard, the actual implementation of the encoding may not conform in full to that standard. Your applications should use <see cref="P:System.Text.EncodingInfo.DisplayName" />
 
             
 
              for a human-readable name.</para
           >
           <para
-            >The <see
-             cref="M:System.Text.Encoding.GetEncodings" />
+            >The <see cref="M:System.Text.Encoding.GetEncodings" />
 
             
 
-             method gets a complete list of supported encodings, uniquely distinguished by code page. If your application retrieves encodings using the <see
-             cref="P:System.Text.EncodingInfo.Name" />
+             method gets a complete list of supported encodings, uniquely distinguished by code page. If your application retrieves encodings using the <see cref="P:System.Text.EncodingInfo.Name" />
 
             
 
-             property, note that some duplicate encodings are retrieved. For more about handling these duplicates, see the description of <see
-             cref="M:System.Text.Encoding.GetEncodings" />
+             property, note that some duplicate encodings are retrieved. For more about handling these duplicates, see the description of <see cref="M:System.Text.Encoding.GetEncodings" />
 
             
 

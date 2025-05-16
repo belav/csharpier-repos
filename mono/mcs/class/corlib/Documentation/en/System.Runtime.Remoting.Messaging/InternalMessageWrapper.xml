@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
 
         
 
-         class is the base class for the <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+         class is the base class for the <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
         
 
-         and <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+         and <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
         
 
@@ -51,18 +48,15 @@
 
         
 
-         is used by the infrastructure of the .NET Framework. You do not need to create instances of the <see
-         cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+         is used by the infrastructure of the .NET Framework. You do not need to create instances of the <see cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
 
         
 
-        , <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+        , <see cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
         
 
-        , and <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+        , and <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
         
 
@@ -98,41 +92,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an <see
-             cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an <see cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
 
             
 
              directly.</para
           >
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
             
 
-             parameter also implements the derived interface, <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+             parameter also implements the derived interface, <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
-            , which indicates that the message acts as a request or as a response on a remote method call. The <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+            , which indicates that the message acts as a request or as a response on a remote method call. The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+             and <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
-             interfaces, in turn, inherit from the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+             interfaces, in turn, inherit from the <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
@@ -142,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
 
             
 
@@ -151,7 +137,11 @@
           >
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -183,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the request or response <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+            >Represents the request or response <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 

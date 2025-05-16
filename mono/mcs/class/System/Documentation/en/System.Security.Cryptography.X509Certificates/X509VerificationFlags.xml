@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >These flags indicate the conditions under which chain verification should occur. For example, if an application does not require certificates time values in a chain to be valid, the <see
-         cref="F:System.Security.Cryptography.X509Certificates.X509VerificationFlags.IgnoreNotTimeValid" />
+        >These flags indicate the conditions under which chain verification should occur. For example, if an application does not require certificates time values in a chain to be valid, the <see cref="F:System.Security.Cryptography.X509Certificates.X509VerificationFlags.IgnoreNotTimeValid" />
 
         
 

@@ -1,31 +1,32 @@
 <?xml version="1.0"?>
 <clause number="14.5.10.1" title="Object creation expressions">
   <paragraph
-    >An <non_terminal
-     where="14.5.10.1">object-creation-expression</non_terminal>
-
-    
-
-     is used to create a new instance of a <non_terminal
-     where="11.2">class-type</non_terminal>
-
-    
-
-     or a <non_terminal
-     where="11.1">value-type</non_terminal>
-
-    
-
-    . <grammar_production
+    >An <non_terminal where="14.5.10.1"
+      >object-creation-expression</non_terminal
     >
+
+    
+
+     is used to create a new instance of a <non_terminal where="11.2"
+      >class-type</non_terminal
+    >
+
+    
+
+     or a <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
+
+    
+
+    . <grammar_production>
       <name>
         <non_terminal where="14.5.10.1">object-creation-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>new</keyword>
         <non_terminal where="11">type</non_terminal>
         <terminal>(</terminal>
@@ -36,77 +37,88 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The type of an <non_terminal
-     where="14.5.10.1">object-creation-expression</non_terminal>
+    >The type of an <non_terminal where="14.5.10.1"
+      >object-creation-expression</non_terminal
+    >
 
     
 
-     must be a <non_terminal
-     where="11.2">class-type</non_terminal>
+     must be a <non_terminal where="11.2"
+      >class-type</non_terminal
+    >
 
     
 
-     or a <non_terminal
-     where="11.1">value-type</non_terminal>
+     or a <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
 
     
 
-    . The type cannot be an abstract <non_terminal
-     where="11.2">class-type</non_terminal>
+    . The type cannot be an abstract <non_terminal where="11.2"
+      >class-type</non_terminal
+    >
 
     
 
     . </paragraph
   >
   <paragraph
-    >The optional <non_terminal
-     where="14.4.1">argument-list</non_terminal>
+    >The optional <non_terminal where="14.4.1"
+      >argument-list</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.4.1</hyperlink>
+     (<hyperlink>14.4.1</hyperlink>
 
     
 
     ) is permitted only if the type is a <non_terminal
-     where="11.2">class-type</non_terminal>
+      where="11.2"
+      >class-type</non_terminal
+    >
 
     
 
-     or a <non_terminal
-     where="11.1">struct-type</non_terminal>
+     or a <non_terminal where="11.1"
+      >struct-type</non_terminal
+    >
 
     
 
     . </paragraph
   >
   <paragraph
-    >The compile-time processing of an <non_terminal
-     where="14.5.10.1">object-creation-expression</non_terminal>
-
-    
-
-     of the form new T(A), where T is a <non_terminal
-     where="11.2">class-type</non_terminal>
-
-    
-
-     or a <non_terminal
-     where="11.1">value-type</non_terminal>
-
-    
-
-     and A is an optional <non_terminal
-     where="14.4.1">argument-list</non_terminal>
-
-    
-
-    , consists of the following steps: <list
+    >The compile-time processing of an <non_terminal where="14.5.10.1"
+      >object-creation-expression</non_terminal
     >
+
+    
+
+     of the form new T(A), where T is a <non_terminal where="11.2"
+      >class-type</non_terminal
+    >
+
+    
+
+     or a <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
+
+    
+
+     and A is an optional <non_terminal where="14.4.1"
+      >argument-list</non_terminal
+    >
+
+    
+
+    , consists of the following steps: <list>
       <list_item
-        > If T is a <non_terminal
-         where="11.1">value-type</non_terminal>
+        > If T is a <non_terminal where="11.1"
+          >value-type</non_terminal
+        >
 
         
 
@@ -114,18 +126,20 @@
       >
       <list>
         <list_item
-          > The <non_terminal
-           where="14.5.10.1">object-creation-expression</non_terminal>
+          > The <non_terminal where="14.5.10.1"
+            >object-creation-expression</non_terminal
+          >
 
           
 
            is a default constructor invocation. The result of the  <non_terminal
-           where="14.5.10.1">object-creation-expression</non_terminal>
+            where="14.5.10.1"
+            >object-creation-expression</non_terminal
+          >
 
           
 
-           is a value of type T, namely the default value for T as defined in <hyperlink
-          >11.1.1</hyperlink>
+           is a value of type T, namely the default value for T as defined in <hyperlink>11.1.1</hyperlink>
 
           
 
@@ -133,8 +147,9 @@
         >
       </list>
       <list_item
-        > Otherwise, if T is a <non_terminal
-         where="11.2">class-type</non_terminal>
+        > Otherwise, if T is a <non_terminal where="11.2"
+          >class-type</non_terminal
+        >
 
         
 
@@ -142,24 +157,25 @@
       >
       <list>
         <list_item
-          > If T is an abstract <non_terminal
-           where="11.2">class-type</non_terminal>
+          > If T is an abstract <non_terminal where="11.2"
+            >class-type</non_terminal
+          >
 
           
 
           , a compile-time error occurs. </list_item
         >
         <list_item
-          > The instance constructor to invoke is determined using the overload resolution rules of <hyperlink
-          >14.4.2</hyperlink>
+          > The instance constructor to invoke is determined using the overload resolution rules of <hyperlink>14.4.2</hyperlink>
 
           
 
           . The set of candidate instance constructors consists of all accessible instance constructors declared in T. If the set of candidate instance constructors is empty, or if a single best instance constructor cannot be identified, a compile-time error occurs. </list_item
         >
         <list_item
-          > The result of the <non_terminal
-           where="14.5.10.1">object-creation-expression</non_terminal>
+          > The result of the <non_terminal where="14.5.10.1"
+            >object-creation-expression</non_terminal
+          >
 
           
 
@@ -167,8 +183,9 @@
         >
       </list>
       <list_item
-        > Otherwise, the <non_terminal
-         where="14.5.10.1">object-creation-expression</non_terminal>
+        > Otherwise, the <non_terminal where="14.5.10.1"
+          >object-creation-expression</non_terminal
+        >
 
         
 
@@ -177,42 +194,43 @@
     </list>
   </paragraph>
   <paragraph
-    >The run-time processing of an <non_terminal
-     where="14.5.10.1">object-creation-expression</non_terminal>
-
-    
-
-     of the form new T(A), where T is <non_terminal
-     where="11.2">class-type</non_terminal>
-
-    
-
-     or a <non_terminal
-     where="11.1">struct-type</non_terminal>
-
-    
-
-     and A is an optional <non_terminal
-     where="14.4.1">argument-list</non_terminal>
-
-    
-
-    , consists of the following steps: <list
+    >The run-time processing of an <non_terminal where="14.5.10.1"
+      >object-creation-expression</non_terminal
     >
+
+    
+
+     of the form new T(A), where T is <non_terminal where="11.2"
+      >class-type</non_terminal
+    >
+
+    
+
+     or a <non_terminal where="11.1"
+      >struct-type</non_terminal
+    >
+
+    
+
+     and A is an optional <non_terminal where="14.4.1"
+      >argument-list</non_terminal
+    >
+
+    
+
+    , consists of the following steps: <list>
       <list_item> If T is a class-type: </list_item>
       <list>
         <list_item> A new instance of class T is allocated. If there is not enough memory available to allocate the new instance, a System.OutOfMemoryException is thrown and no further steps are executed. </list_item>
         <list_item
-          > All fields of the new instance are initialized to their default values (<hyperlink
-          >12.2</hyperlink>
+          > All fields of the new instance are initialized to their default values (<hyperlink>12.2</hyperlink>
 
           
 
           ). </list_item
         >
         <list_item
-          > The instance constructor is invoked according to the rules of function member invocation (<hyperlink
-          >14.4.3</hyperlink>
+          > The instance constructor is invoked according to the rules of function member invocation (<hyperlink>14.4.3</hyperlink>
 
           
 
@@ -223,15 +241,16 @@
       <list>
         <list_item
           > An instance of type T is created by allocating a temporary local variable. Since an instance constructor of a <non_terminal
-           where="11.1">struct-type</non_terminal>
+            where="11.1"
+            >struct-type</non_terminal
+          >
 
           
 
            is required to definitely assign a value to each field of the instance being created, no initialization of the temporary variable is necessary. </list_item
         >
         <list_item
-          > The instance constructor is invoked according to the rules of function member invocation (<hyperlink
-          >14.4.3</hyperlink>
+          > The instance constructor is invoked according to the rules of function member invocation (<hyperlink>14.4.3</hyperlink>
 
           
 

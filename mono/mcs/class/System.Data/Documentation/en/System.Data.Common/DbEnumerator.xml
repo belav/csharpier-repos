@@ -25,21 +25,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Common.DbEnumerator" />
+        >The <see cref="T:System.Data.Common.DbEnumerator" />
 
         
 
          class is implemented by a .NET Framework data provider to provide data binding support.</para
       >
       <para
-        >By design, the <see
-         cref="T:System.Data.Common.DbEnumerator" />
+        >By design, the <see cref="T:System.Data.Common.DbEnumerator" />
 
         
 
-         object is intended for use with only one resultset. For example, if you execute a batch statement containing two SQL SELECT statements that return different schemas, the second statement might not retun the entire schema. To avoid this situation, obtain a <see
-         cref="T:System.Data.Common.DbEnumerator" />
+         object is intended for use with only one resultset. For example, if you execute a batch statement containing two SQL SELECT statements that return different schemas, the second statement might not retun the entire schema. To avoid this situation, obtain a <see cref="T:System.Data.Common.DbEnumerator" />
 
         
 
@@ -49,8 +46,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exposes the <see
-         cref="M:System.Collections.IEnumerable.GetEnumerator" />
+        >Exposes the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
         
 
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbEnumerator" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbEnumerator" />
 
             
 
@@ -83,7 +78,11 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbEnumerator" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbEnumerator" />
 
             
 
@@ -120,14 +118,22 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DataReader through which to iterate. </param
         >
         <param name="closeReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,83 +156,67 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after a <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+            >After an enumerator is created or after a <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-            , <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+            , <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             must be called to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+             must be called to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
-            ; otherwise, <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+            ; otherwise, <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
-             is undefined. <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+             is undefined. <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
-             also throws an exception if the last call to <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+             also throws an exception if the last call to <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             returned false, which indicates the end of the collection. <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+             returned false, which indicates the end of the collection. <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
-             does not move the position of the enumerator and consecutive calls to <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+             does not move the position of the enumerator and consecutive calls to <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+             or <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-             is called. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+             is called. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+             or <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-             generates an <see
-             cref="T:System.InvalidOperationException" />
+             generates an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+             and <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Data.Common.DbEnumerator.Current" />
+            , <see cref="P:System.Data.Common.DbEnumerator.Current" />
 
             
 
@@ -254,38 +244,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after a call to <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+            >After an enumerator is created or after a call to <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-            , an enumerator is positioned before the first element of the collection, and the first call to <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+            , an enumerator is positioned before the first element of the collection, and the first call to <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             moves the enumerator over the first element of the collection. After the end of the collection is passed, subsequent calls to <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+             moves the enumerator over the first element of the collection. After the end of the collection is passed, subsequent calls to <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             return false until <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+             return false until <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-             is called. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+             is called. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+             or <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -317,18 +300,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Data.Common.DbEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Data.Common.DbEnumerator.Reset" />
+             or <see cref="M:System.Data.Common.DbEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 

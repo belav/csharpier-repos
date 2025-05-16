@@ -17,16 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpRuntimeSection" />
+        >The <see cref="T:System.Web.Configuration.HttpRuntimeSection" />
 
         
 
          allows you to handle those parameters that affect the behavior of the ASP.NET runtime. </para
       >
       <para
-        >It refers to the node in the configuration file that is indicated by the <format
-         type="text/html">
+        >It refers to the node in the configuration file that is indicated by the <format type="text/html">
           <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369">&lt;httpRuntime&gt;</a>
         </format>
 
@@ -35,8 +33,7 @@
          element and can be used at any level in the configuration hierarchy.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpRuntimeSection" />
+        >The <see cref="T:System.Web.Configuration.HttpRuntimeSection" />
 
         
 
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.HttpRuntimeSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpRuntimeSection" />
 
             
 
@@ -170,8 +166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can address the problem caused by some antivirus applications, when writing information back to the scanned files, by setting the <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.DelayNotificationTimeout" />
+            >You can address the problem caused by some antivirus applications, when writing information back to the scanned files, by setting the <see cref="P:System.Web.Configuration.HttpRuntimeSection.DelayNotificationTimeout" />
 
             
 
@@ -238,8 +233,7 @@
           <para>This encoding can help to avoid injection attacks that exploit an application that echoes untrusted data contained by the header.</para>
           <block subset="none" type="note">
             <para
-              >This property does not apply to the status line itself (status code and status description), but should apply to other headers. Although <format
-               type="text/html">
+              >This property does not apply to the status line itself (status code and status description), but should apply to other headers. Although <format type="text/html">
                 <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369">&lt;httpRuntime&gt;</a>
               </format>
 
@@ -251,8 +245,7 @@
           <para>When this property is true, which is the default, the \r or \n characters found in a response header are encoded to %0d and %0a. This defeats header-injection attacks by making the injected material part of the same header line. This might break the response but should not open attack vectors against the client. Echoing back untrusted data is never a good idea in any situation, though.</para>
           <block subset="none" type="note">
             <para
-              >HTTP header continuations rely on headers spanning multiple lines and require new lines in them. If you need to use header continuations, you need to set the <see
-               cref="P:System.Web.Configuration.HttpRuntimeSection.EnableHeaderChecking" />
+              >HTTP header continuations rely on headers spanning multiple lines and require new lines in them. If you need to use header continuations, you need to set the <see cref="P:System.Web.Configuration.HttpRuntimeSection.EnableHeaderChecking" />
 
               
 
@@ -363,13 +356,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.ExecutionTimeout" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.ExecutionTimeout" />
 
             
 
-             property indicates the maximum number of seconds a request is allowed to execute before being automatically shut down by ASP.NET. The default is 110 seconds. This time-out applies only if the debug attribute in the <format
-             type="text/html">
+             property indicates the maximum number of seconds a request is allowed to execute before being automatically shut down by ASP.NET. The default is 110 seconds. This time-out applies only if the debug attribute in the <format type="text/html">
               <a href="7c319582-074a-4d2a-a787-03b9d4541c12">&lt;compilation&gt;</a>
             </format>
 
@@ -378,8 +369,7 @@
              element is set to false. </para
           >
           <para
-            >If the time-out expires an exception is raised. You can record the related information in the Application folder of the Event Log. You do this by enabling the application health monitoring in the <format
-             type="text/html">
+            >If the time-out expires an exception is raised. You can record the related information in the Application folder of the Event Log. You do this by enabling the application health monitoring in the <format type="text/html">
               <a href="956dd91b-448e-4a50-b526-961b244d02f8">&lt;healthMonitoring&gt;</a>
             </format>
 
@@ -417,16 +407,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
 
             
 
              property specifies the limit for the buffering threshold of the input stream. For example, this limit can be used to prevent denial of service attacks that are caused by users who post large files to the server. </para
           >
           <para
-            >The value assigned to this property should be greater or equal to value assigned to the <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
+            >The value assigned to this property should be greater or equal to value assigned to the <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
 
             
 
@@ -462,8 +450,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A suggested value for the <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.MaxWaitChangeNotification" />
+            >A suggested value for the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxWaitChangeNotification" />
 
             
 
@@ -502,8 +489,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.MinFreeThreads" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.MinFreeThreads" />
 
             
 
@@ -542,8 +528,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.MinLocalRequestFreeThreads" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.MinLocalRequestFreeThreads" />
 
             
 
@@ -598,13 +583,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
 
             
 
-             property specifies the input-stream buffering threshold limit in number of bytes. Its value should not exceed the <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+             property specifies the input-stream buffering threshold limit in number of bytes. Its value should not exceed the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
 
             
 
@@ -637,16 +620,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.RequireRootedSaveAsPath" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequireRootedSaveAsPath" />
 
             
 
              property specifies whether the file name argument to SaveAs methods must be a rooted path. The ASP.NET process must have permission to create files in the specified location. </para
           >
           <para
-            >For more information, see the save methods defined in the <see
-             cref="T:System.Configuration.Configuration" />
+            >For more information, see the save methods defined in the <see cref="T:System.Configuration.Configuration" />
 
             
 
@@ -679,36 +660,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.HttpResponse" />
+            >The <see cref="T:System.Web.HttpResponse" />
 
             
 
-             class checks both the <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.SendCacheControlHeader" />
+             class checks both the <see cref="P:System.Web.Configuration.HttpRuntimeSection.SendCacheControlHeader" />
 
             
 
-             property and the <see
-             cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" />
+             property and the <see cref="P:System.Web.Configuration.OutputCacheSection.SendCacheControlHeader" />
 
             
 
              property to determine whether to send the cache-control:private header in the HTTP response. If either property is set to false, the header will not be sent. When the cache-control header is set to private, then the client will not cache the response in a shared cache.</para
           >
           <para
-            >Support for the <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.SendCacheControlHeader" />
+            >Support for the <see cref="P:System.Web.Configuration.HttpRuntimeSection.SendCacheControlHeader" />
 
             
 
-             property in the <see
-             cref="T:System.Web.Configuration.HttpRuntimeSection" />
+             property in the <see cref="T:System.Web.Configuration.HttpRuntimeSection" />
 
             
 
-             class is provided for compatibility with legacy applications; this property is obsolete in the .NET Framework version 2.0. For more information, see the <see
-             cref="T:System.Web.Configuration.OutputCacheSection" />
+             class is provided for compatibility with legacy applications; this property is obsolete in the .NET Framework version 2.0. For more information, see the <see cref="T:System.Web.Configuration.OutputCacheSection" />
 
             
 
@@ -744,8 +719,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.ShutdownTimeout" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.ShutdownTimeout" />
 
             
 
@@ -781,8 +755,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.UseFullyQualifiedRedirectUrl" />
+            >The <see cref="P:System.Web.Configuration.HttpRuntimeSection.UseFullyQualifiedRedirectUrl" />
 
             
 
@@ -821,8 +794,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A suggested value for <see
-             cref="P:System.Web.Configuration.HttpRuntimeSection.WaitChangeNotification" />
+            >A suggested value for <see cref="P:System.Web.Configuration.HttpRuntimeSection.WaitChangeNotification" />
 
             
 

@@ -13,28 +13,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
 
         
 
-         values correspond to the states of the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+         values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
         
 
-         objects exposed by the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" />
+         objects exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" />
 
         
 
-         class. The <see
-         cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+         class. The <see cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
 
         
 
-         values are also used as an argument in the <see
-         cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
+         values are also used as an argument in the <see cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
 
         
 

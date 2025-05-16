@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="14.11" title="Conditional logical operators">
   <paragraph
-    >The &amp;&amp; and || operators are called the conditional logical operators. They are also called the  "short-circuiting" logical operators. <grammar_production
-    >
+    >The &amp;&amp; and || operators are called the conditional logical operators. They are also called the  "short-circuiting" logical operators. <grammar_production>
       <name>
         <non_terminal where="14.11">conditional-and-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.10">inclusive-or-expression</non_terminal>
       </rhs>
       <rhs>
@@ -26,8 +24,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.11">conditional-and-expression</non_terminal>
       </rhs>
       <rhs>
@@ -38,37 +35,31 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The &amp;&amp; and || operators are conditional versions of the &amp; and | operators: <list
-    >
+    >The &amp;&amp; and || operators are conditional versions of the &amp; and | operators: <list>
       <list_item> The operation x &amp;&amp; y corresponds to the operation x &amp; y, except that y is evaluated only if x is true. </list_item>
       <list_item> The operation x || y corresponds to the operation x | y, except that y is evaluated only if x is false. </list_item>
     </list>
   </paragraph>
   <paragraph
-    >An operation of the form x &amp;&amp; y or x || y is processed by applying overload resolution (<hyperlink
-    >14.2.4</hyperlink>
+    >An operation of the form x &amp;&amp; y or x || y is processed by applying overload resolution (<hyperlink>14.2.4</hyperlink>
 
     
 
-    ) as if the operation was written x &amp; y or x | y. Then, <list
-    >
+    ) as if the operation was written x &amp; y or x | y. Then, <list>
       <list_item> If overload resolution fails to find a single best operator, or if overload resolution selects one of the predefined integer logical operators, a compile-time error occurs. </list_item>
       <list_item
-        > Otherwise, if the selected operator is one of the predefined boolean logical operators (<hyperlink
-        >14.10.2</hyperlink>
+        > Otherwise, if the selected operator is one of the predefined boolean logical operators (<hyperlink>14.10.2</hyperlink>
 
         
 
-        ), the operation is processed as described in <hyperlink
-        >14.11.1</hyperlink>
+        ), the operation is processed as described in <hyperlink>14.11.1</hyperlink>
 
         
 
         . </list_item
       >
       <list_item
-        > Otherwise, the selected operator is a user-defined operator, and the operation is processed as described in <hyperlink
-        >14.11.2</hyperlink>
+        > Otherwise, the selected operator is a user-defined operator, and the operation is processed as described in <hyperlink>14.11.2</hyperlink>
 
         
 
@@ -77,8 +68,7 @@
     </list>
   </paragraph>
   <paragraph
-    >It is not possible to directly overload the conditional logical operators. However, because the conditional logical operators are evaluated in terms of the regular logical operators, overloads of the regular logical operators are, with certain restrictions, also considered overloads of the conditional logical operators. This is described further in <hyperlink
-    >14.11.2</hyperlink>
+    >It is not possible to directly overload the conditional logical operators. However, because the conditional logical operators are evaluated in terms of the regular logical operators, overloads of the regular logical operators are, with certain restrictions, also considered overloads of the conditional logical operators. This is described further in <hyperlink>14.11.2</hyperlink>
 
     
 

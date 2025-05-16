@@ -37,16 +37,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used with the <see
-         cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
+        >This enumeration is used with the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
 
         
 
         attribute.</para
       >
       <para
-        >You can specify multiple <see
-         cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+        >You can specify multiple <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
         
 
@@ -54,8 +52,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Locking on the instance or on the type, as with the <see
-           cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" />
+          >Locking on the instance or on the type, as with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" />
 
           
 
@@ -197,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method is not optimized by the just-in-time (JIT) compiler or by native code generation (see <format
-             type="text/html">
+            >The method is not optimized by the just-in-time (JIT) compiler or by native code generation (see <format type="text/html">
               <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Ngen.exe</a>
             </format>
 

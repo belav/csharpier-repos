@@ -24,18 +24,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >SOAP headers offer a method for passing data to and from an XML Web service method if the data is not directly related to the XML Web service method's primary functionality. For instance, an XML Web service might contain several XML Web service methods that each require a custom authentication scheme. Instead of adding parameters to each XML Web service method for the custom authentication scheme, a <see
-         cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+        >SOAP headers offer a method for passing data to and from an XML Web service method if the data is not directly related to the XML Web service method's primary functionality. For instance, an XML Web service might contain several XML Web service methods that each require a custom authentication scheme. Instead of adding parameters to each XML Web service method for the custom authentication scheme, a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
         
 
-        , referring to a class deriving from <see
-         cref="T:System.Web.Services.Protocols.SoapHeader" />
+        , referring to a class deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
         
 
-        , can be applied to each XML Web service method. The implementation for the class deriving from <see
-         cref="T:System.Web.Services.Protocols.SoapHeader" />
+        , can be applied to each XML Web service method. The implementation for the class deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
         
 
@@ -45,8 +42,7 @@
       <list type="ordered">
         <item>
           <para
-            >Create a class that derives from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Create a class that derives from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -58,13 +54,11 @@
         </item>
         <item>
           <para
-            >Apply a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >Apply a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
-             to the XML Web service method or the corresponding method in the proxy class, specifying the member created in the second step in the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+             to the XML Web service method or the corresponding method in the proxy class, specifying the member created in the second step in the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
@@ -73,8 +67,7 @@
         </item>
         <item>
           <para
-            >Within the XML Web service method or XML Web service client code, access the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+            >Within the XML Web service method or XML Web service client code, access the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
@@ -99,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -125,21 +117,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the recipient of a SOAP header, set the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
+            >To set the recipient of a SOAP header, set the <see cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
 
             
 
              property. Regardless of the version of the SOAP protocol used to communicate with an XML Web service, the .NET Framework automatically generates the SOAP message specific to the version of the SOAP protocol. Specifically, the XML element and XML namespace representing the recipient differ for the two versions.</para
           >
           <para
-            >XML Web services receiving the SOAP header can get the intended recipient by getting either the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.Role" />
+            >XML Web services receiving the SOAP header can get the intended recipient by getting either the <see cref="P:System.Web.Services.Protocols.SoapHeader.Role" />
 
             
 
-             or <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
+             or <see cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
 
             
 
@@ -181,18 +170,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For SOAP headers defined by an XML Web service, ASP.NET assumes the XML Web service method properly processed the SOAP header by setting the initial value of <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
+            >For SOAP headers defined by an XML Web service, ASP.NET assumes the XML Web service method properly processed the SOAP header by setting the initial value of <see cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
 
             
 
-             to true. For SOAP headers not defined by the XML Web service, the initial value is false. If ASP.NET detects SOAP headers passed to an XML Web service method with <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
+             to true. For SOAP headers not defined by the XML Web service, the initial value is false. If ASP.NET detects SOAP headers passed to an XML Web service method with <see cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
 
             
 
-             set to false after the method returns, a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+             set to false after the method returns, a <see cref="T:System.Web.Services.Protocols.SoapHeaderException" />
 
             
 
@@ -229,8 +215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property. Instead use the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
+            >Do not use this property. Instead use the <see cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
 
             
 
@@ -286,8 +271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property. Instead use the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
+            >Do not use this property. Instead use the <see cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
 
             
 
@@ -328,8 +312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.EncodedRelay" />
+            >The <see cref="P:System.Web.Services.Protocols.SoapHeader.EncodedRelay" />
 
             
 
@@ -354,44 +337,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an XML Web service client adds a SOAP header to an XML Web service method call with the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
+            >When an XML Web service client adds a SOAP header to an XML Web service method call with the <see cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
 
             
 
-             property set to true, the XML Web service method must set the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
+             property set to true, the XML Web service method must set the <see cref="P:System.Web.Services.Protocols.SoapHeader.DidUnderstand" />
 
             
 
-             property to true; otherwise, a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderException" />
+             property to true; otherwise, a <see cref="T:System.Web.Services.Protocols.SoapHeaderException" />
 
             
 
              is thrown back to the XML Web service client by ASP.NET.</para
           >
           <para
-            >Although both the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.EncodedMustUnderstand" />
+            >Although both the <see cref="P:System.Web.Services.Protocols.SoapHeader.EncodedMustUnderstand" />
 
             
 
-             and <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
+             and <see cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
 
             
 
-             properties can be used to set the value of the mustUnderstand attribute within the SOAP header, the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
+             properties can be used to set the value of the mustUnderstand attribute within the SOAP header, the <see cref="P:System.Web.Services.Protocols.SoapHeader.MustUnderstand" />
 
             
 
              property allows you to set the attribute using a Boolean value.</para
           >
           <para
-            >For details on adding SOAP headers to clients, see <format
-             type="text/html">
+            >For details on adding SOAP headers to clients, see <format type="text/html">
               <a href="7BD961F2-B492-48D0-BAFE-09D5D5FEC3BA"
                 >[&lt;topic://cpconusingsoapheaders&gt;]</a
               >
@@ -405,8 +381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -487,21 +462,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To set the recipient of a SOAP header, set the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
+            >To set the recipient of a SOAP header, set the <see cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
 
             
 
              property. Regardless of the version of the SOAP protocol used to communicate with an XML Web service, the .NET Framework automatically generates the SOAP message specific to the version of the SOAP protocol. Specifically, the XML element and XML namespace representing the recipient differ for the two versions.</para
           >
           <para
-            >XML Web services receiving the SOAP header can get the intended recipient by getting either the <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.Role" />
+            >XML Web services receiving the SOAP header can get the intended recipient by getting either the <see cref="P:System.Web.Services.Protocols.SoapHeader.Role" />
 
             
 
-             or <see
-             cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
+             or <see cref="P:System.Web.Services.Protocols.SoapHeader.Actor" />
 
             
 

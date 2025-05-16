@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeDirectiveCollection" />
+        >The <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeDirective" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeDirective" />
 
         
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeDirective" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeDirective" />
 
         
 
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 
@@ -107,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 
@@ -116,12 +111,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeDirective" />
+          An array of <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -152,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 
@@ -161,12 +158,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeDirectiveCollection" />
+          A <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
           
 
@@ -197,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeDirective" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeDirective" />
 
             
 
@@ -210,12 +209,15 @@
           <para>The index position at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeDirective" />
+          The <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -249,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see
-             cref="T:System.CodeDom.CodeDirective" />
+            >Adds an array of <see cref="T:System.CodeDom.CodeDirective" />
 
             
 
@@ -258,12 +259,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeDirective" />
+          An array of <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -297,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of the specified <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Adds the contents of the specified <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 
@@ -306,17 +309,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeDirectiveCollection" />
+          A <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
           
 
-           object containing the <see
-           cref="T:System.CodeDom.CodeDirective" />
+           object containing the <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -350,8 +355,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the collection contains the specified <see
-             cref="T:System.CodeDom.CodeDirective" />
+            >Gets a value indicating whether the collection contains the specified <see cref="T:System.CodeDom.CodeDirective" />
 
             
 
@@ -363,12 +367,15 @@
           <para>true if the collection contains the specified object; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeDirective" />
+          The <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -405,19 +412,26 @@
           <para>Copies the contents of the collection to a one-dimensional array beginning at the specified index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeDirective" />
+          An array of type <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -451,8 +465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the specified <see
-             cref="T:System.CodeDom.CodeDirective" />
+            >Gets the index in the collection of the specified <see cref="T:System.CodeDom.CodeDirective" />
 
             
 
@@ -464,12 +477,15 @@
           <para>The index position in the collection of the specified object, if found; otherwise, -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeDirective" />
+          The <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -504,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.CodeDirective" />
+            >Inserts the specified <see cref="T:System.CodeDom.CodeDirective" />
 
             
 
@@ -513,19 +528,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index position where the specified object should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeDirective" />
+          The <see cref="T:System.CodeDom.CodeDirective" />
 
           
 
@@ -587,8 +609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.CodeDom.CodeDirective" />
+            >Removes the specified <see cref="T:System.CodeDom.CodeDirective" />
 
             
 
@@ -596,12 +617,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeDirective" />
+          The <see cref="T:System.CodeDom.CodeDirective" />
 
           
 

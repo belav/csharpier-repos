@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.MetadataExchangeBindings" />
+        >Use the <see cref="T:System.ServiceModel.Description.MetadataExchangeBindings" />
 
         
 
-         methods and properties to create system-provided bindings to support WS-Transfer GET metadata exchanges. For more information and examples, see <format
-         type="text/html">
+         methods and properties to create system-provided bindings to support WS-Transfer GET metadata exchanges. For more information and examples, see <format type="text/html">
           <a href="f061443f-92df-4824-b36a-609c4cd14a17"
             >How to: Publish Metadata for a Service Using a Configuration File</a
           >
@@ -41,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used to create system-provided bindings for WS-Transfer metadata exchange using the <see
-         cref="T:System.ServiceModel.Description.IMetadataExchange" />
+        >Used to create system-provided bindings for WS-Transfer metadata exchange using the <see cref="T:System.ServiceModel.Description.IMetadataExchange" />
 
         
 
@@ -72,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > Use the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeBindings.CreateMexHttpBinding" />
+            > Use the <see cref="M:System.ServiceModel.Description.MetadataExchangeBindings.CreateMexHttpBinding" />
 
             
 
@@ -83,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.WSHttpBinding" />
+            >Returns a <see cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
@@ -94,8 +89,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.WSHttpBinding" />
+            >A <see cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
@@ -125,13 +119,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.MetadataExchangeBindings.CreateMexHttpsBinding" />
+            >Use the <see cref="M:System.ServiceModel.Description.MetadataExchangeBindings.CreateMexHttpsBinding" />
 
             
 
-             method to return a binding that can be secured at the transport level using certificates. For more information about configuring and using such a metadata endpoint, see <format
-             type="text/html">
+             method to return a binding that can be secured at the transport level using certificates. For more information about configuring and using such a metadata endpoint, see <format type="text/html">
               <a href="cdba4d73-da64-4805-bc56-9822becfd1e4"
                 >How to: Configure a Custom WS-Metadata Exchange Binding</a
               >
@@ -139,8 +131,7 @@
 
             
 
-            , <format
-             type="text/html">
+            , <format type="text/html">
               <a href="2292e124-81b2-4317-b881-ce9c1ec66ecb"
                 >How to: Retrieve Metadata Over a Custom Binding</a
               >
@@ -148,8 +139,7 @@
 
             
 
-            , and the sample <format
-             type="text/html">
+            , and the sample <format type="text/html">
               <a href="9e369e99-ea4a-49ff-aed2-9fdf61091a48">Custom Secure Metadata Endpoint</a>
             </format>
 
@@ -161,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.WSHttpBinding" />
+            >Returns a <see cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
@@ -172,8 +161,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.WSHttpBinding" />
+            >A <see cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
@@ -204,13 +192,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Channels.CustomBinding" />
+            >Returns a <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
             
 
-             with a <see
-             cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+             with a <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
 
             
 
@@ -220,13 +206,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.CustomBinding" />
+            >A <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
             
 
-             with a <see
-             cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+             with a <see cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
 
             
 
@@ -257,13 +241,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Channels.CustomBinding" />
+            >Returns a <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
             
 
-             with a <see
-             cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+             with a <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
 
             
 
@@ -273,13 +255,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.CustomBinding" />
+            >A <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
             
 
-             with a <see
-             cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+             with a <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
 
             
 

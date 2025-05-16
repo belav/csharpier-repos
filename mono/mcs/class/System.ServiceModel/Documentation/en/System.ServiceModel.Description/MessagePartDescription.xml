@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.MessagePartDescription" />
+        >The <see cref="T:System.ServiceModel.Description.MessagePartDescription" />
 
         
 
-         class is the parent class of <see
-         cref="T:System.ServiceModel.Description.MessageHeaderDescription" />
+         class is the parent class of <see cref="T:System.ServiceModel.Description.MessageHeaderDescription" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Description.MessagePropertyDescription" />
+         and <see cref="T:System.ServiceModel.Description.MessagePropertyDescription" />
 
         
 
@@ -71,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MessagePartDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessagePartDescription" />
 
             
 
@@ -80,14 +76,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML name of the message part.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the message part has a value for the <see
-             cref="P:System.ServiceModel.Description.MessagePartDescription.ProtectionLevel" />
+            >Gets a value that indicates whether the message part has a value for the <see cref="P:System.ServiceModel.Description.MessagePartDescription.ProtectionLevel" />
 
             
 
@@ -161,28 +164,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.ServiceModel.Description.MessageDescription" />
+            >If the <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
             
 
-             is loaded from a class marked by the <see
-             cref="T:System.ServiceModel.MessageContractAttribute" />
+             is loaded from a class marked by the <see cref="T:System.ServiceModel.MessageContractAttribute" />
 
             
 
-            , the <see
-             cref="P:System.ServiceModel.Description.MessagePartDescription.MemberInfo" />
+            , the <see cref="P:System.ServiceModel.Description.MessagePartDescription.MemberInfo" />
 
             
 
-             property contains the <see
-             cref="T:System.Reflection.PropertyInfo" />
+             property contains the <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             or the <see
-             cref="T:System.Reflection.FieldInfo" />
+             or the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -274,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Net.Security.ProtectionLevel" />
+            >Gets or sets the <see cref="T:System.Net.Security.ProtectionLevel" />
 
             
 

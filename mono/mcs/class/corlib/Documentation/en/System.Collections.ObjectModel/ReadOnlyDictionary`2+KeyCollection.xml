@@ -114,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
 
             
 
@@ -258,13 +257,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -276,19 +273,26 @@
           <para>Copies the elements of the dictionary to an array, starting at the specified array index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The one-dimensional array that is the destination of the elements copied from the dictionary. The array must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -317,13 +321,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -357,13 +359,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -397,13 +397,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Collections.ObjectModel.ReadOnlyDictionary`2" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 

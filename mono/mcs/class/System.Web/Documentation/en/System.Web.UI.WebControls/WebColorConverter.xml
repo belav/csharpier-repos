@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.WebColorConverter" />
+        >The <see cref="T:System.Web.UI.WebControls.WebColorConverter" />
 
         
 
-         class is used to convert a <see
-         cref="T:System.Drawing.Color" />
+         class is used to convert a <see cref="T:System.Drawing.Color" />
 
         
 
-         object to a predefined color name or an RGB color value. It is also used to convert a predefined color name or an RGB color value to a <see
-         cref="T:System.Drawing.Color" />
+         object to a predefined color name or an RGB color value. It is also used to convert a predefined color name or an RGB color value to a <see cref="T:System.Drawing.Color" />
 
         
 
@@ -39,13 +36,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -108,8 +103,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts a predefined color name or an RGB color value to and from a <see
-         cref="T:System.Drawing.Color" />
+        >Converts a predefined color name or an RGB color value to and from a <see cref="T:System.Drawing.Color" />
 
         
 
@@ -128,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebColorConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebColorConverter" />
 
             
 
@@ -167,31 +160,41 @@
           <para>The object resulting from conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that indicates the context of the object to convert.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -229,38 +232,52 @@
           <para>The object resulting from conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            instance that indicates the context of the object to convert.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

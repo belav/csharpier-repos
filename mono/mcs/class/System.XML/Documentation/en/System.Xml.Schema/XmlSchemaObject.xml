@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the root class for the Xml schema object model hierarchy and serves as a base class for classes such as the <see
-         cref="T:System.Xml.Schema.XmlSchema" />
+        >Represents the root class for the Xml schema object model hierarchy and serves as a base class for classes such as the <see cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 
@@ -87,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >LineNumber is used to store the line number when a schema is read from a file. This is reported through <see
-             cref="T:System.Xml.Schema.XmlSchemaException" />
+            >LineNumber is used to store the line number when a schema is read from a file. This is reported through <see cref="T:System.Xml.Schema.XmlSchemaException" />
 
             
 
@@ -124,8 +121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is used to store the line position when a schema is read from a file. This is reported through <see
-             cref="T:System.Xml.Schema.XmlSchemaException" />
+            >This is used to store the line position when a schema is read from a file. This is reported through <see cref="T:System.Xml.Schema.XmlSchemaException" />
 
             
 
@@ -168,8 +164,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This gives the Schema Object Model (SOM) the ability to add xmlns declarations. This is useful when you want to declare a prefix to qualify declarations from an imported schema or use in the xpath attribute of the xs:selector element.</para>
           <para
-            >You can also use the <see
-             cref="P:System.Xml.Schema.XmlSchemaObject.Namespaces" />
+            >You can also use the <see cref="P:System.Xml.Schema.XmlSchemaObject.Namespaces" />
 
             
 
@@ -185,8 +180,7 @@ s.Namespaces = namespaces;</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Gets or sets the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -224,8 +218,7 @@ s.Namespaces = namespaces;</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the parent of this <see
-             cref="T:System.Xml.Schema.XmlSchemaObject" />
+            >Gets or sets the parent of this <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
             
 

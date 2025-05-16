@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.3.24" title="|| expressions">
   <paragraph
-    >For an expression expr of the form expr-first || expr-second: <list
-    >
+    >For an expression expr of the form expr-first || expr-second: <list>
       <list_item> The definite assignment state of v before expr-first is the same as the definite assignment state of v before expr. </list_item>
       <list_item> The definite assignment state of v before expr-second is definitely assigned if the state of v after expr-first is either definitely assigned or "definitely assigned after false expression". Otherwise, it is not definitely assigned. </list_item>
       <list_item> The definite assignment statement of v after expr is determined by: </list_item>
@@ -17,8 +16,7 @@
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  

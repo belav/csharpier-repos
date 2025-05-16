@@ -17,16 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used extensively by the <see
-         cref="T:System.Drawing.Printing.PreviewPrintController" />
+        >This class is used extensively by the <see cref="T:System.Drawing.Printing.PreviewPrintController" />
 
         
 
          class.</para
       >
       <para
-        >For more information on printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information on printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PreviewPageInfo" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PreviewPageInfo" />
 
             
 
@@ -64,14 +61,22 @@
           >
         </summary>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The image of the printed page. </param
         >
         <param name="physicalSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,8 +99,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="N:System.Drawing" />
+            >See the <see cref="N:System.Drawing" />
 
             
 

@@ -24,31 +24,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 
-         class represents the aggregation of all the items in a smart tag panel. The <see
-         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+         class represents the aggregation of all the items in a smart tag panel. The <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 
-         class contains zero or more <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         class contains zero or more <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
-         objects. Each of these lists contains zero or more objects that represent the actual items in the panel and are derived from the <see
-         cref="T:System.ComponentModel.Design.DesignerActionItem" />
+         objects. Each of these lists contains zero or more objects that represent the actual items in the panel and are derived from the <see cref="T:System.ComponentModel.Design.DesignerActionItem" />
 
         
 
          class.</para
       >
       <para
-        >The following table shows the two techniques for supplying a <see
-         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+        >The following table shows the two techniques for supplying a <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 
@@ -71,13 +66,11 @@
           </term>
           <description>
             <para
-              >The designer for the component class, which is derived from the <see
-               cref="T:System.ComponentModel.Design.ComponentDesigner" />
+              >The designer for the component class, which is derived from the <see cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
               
 
-               class, supplies this collection through the <see
-               cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+               class, supplies this collection through the <see cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
 
               
 
@@ -91,23 +84,19 @@
           </term>
           <description>
             <para
-              >A <see
-               cref="T:System.ComponentModel.Design.DesignerActionList" />
+              >A <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
               
 
-               or <see
-               cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+               or <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
               
 
-               is supplied as a parameter in a call to the <see
-               cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
+               is supplied as a parameter in a call to the <see cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
 
               
 
-               method of the <see
-               cref="T:System.ComponentModel.Design.DesignerActionService" />
+               method of the <see cref="T:System.ComponentModel.Design.DesignerActionService" />
 
               
 
@@ -117,31 +106,26 @@
         </item>
       </list>
       <para
-        >The designer infrastructure constructs a panel by creating a smart tag panel, whose constructor takes two parameters of type <see
-         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+        >The designer infrastructure constructs a panel by creating a smart tag panel, whose constructor takes two parameters of type <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 
         . The collections of lists, which contain the pulled and pushed items, are merged into one panel.</para
       >
       <para
-        >Because it derives from the <see
-         cref="T:System.Collections.CollectionBase" />
+        >Because it derives from the <see cref="T:System.Collections.CollectionBase" />
 
         
 
-         class, <see
-         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+         class, <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 
-         uses an internal <see
-         cref="T:System.Collections.ArrayList" />
+         uses an internal <see cref="T:System.Collections.ArrayList" />
 
         
 
-         to store its collection of <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         to store its collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -151,8 +135,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+        >Represents a collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -172,13 +155,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.#ctor" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.#ctor" />
 
             
 
-             constructor creates an empty collection, containing zero <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             constructor creates an empty collection, containing zero <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -188,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -214,13 +194,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.#ctor(System.ComponentModel.Design.DesignerActionList[])" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.#ctor(System.ComponentModel.Design.DesignerActionList[])" />
 
             
 
-             constructor creates a collection that contains the supplied <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             constructor creates a collection that contains the supplied <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -230,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -239,12 +216,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The array of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -275,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the supplied <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >Adds the supplied <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -288,12 +267,15 @@
           <para>The position into which the new element is inserted into the collection's internal list.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -321,18 +303,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The new elements are added to the end of the internal list.</para>
           <para
-            >After validating the <paramref
-             name="value" />
+            >After validating the <paramref name="value" />
 
             
 
-             parameter, the <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.AddRange(System.ComponentModel.Design.DesignerActionList[])" />
+             parameter, the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.AddRange(System.ComponentModel.Design.DesignerActionList[])" />
 
             
 
-             method makes a series of calls to the <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.Add(System.ComponentModel.Design.DesignerActionList)" />
+             method makes a series of calls to the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.Add(System.ComponentModel.Design.DesignerActionList)" />
 
             
 
@@ -342,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements of the supplied <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >Adds the elements of the supplied <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -351,12 +329,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The array of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -384,18 +365,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The new elements are added to the end of the internal list.</para>
           <para
-            >After validating the <paramref
-             name="value" />
+            >After validating the <paramref name="value" />
 
             
 
-             parameter, the <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.AddRange(System.ComponentModel.Design.DesignerActionListCollection)" />
+             parameter, the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.AddRange(System.ComponentModel.Design.DesignerActionListCollection)" />
 
             
 
-            method makes a series of calls to the <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.Add(System.ComponentModel.Design.DesignerActionList)" />
+            method makes a series of calls to the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.Add(System.ComponentModel.Design.DesignerActionList)" />
 
             
 
@@ -405,8 +383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements of the supplied <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Adds the elements of the supplied <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -414,12 +391,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
           
 
@@ -456,12 +436,15 @@
           <para>true if the collection contains the specified value; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -489,18 +472,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="M:System.ComponentModel.Design.DesignerActionListCollection.CopyTo(System.ComponentModel.Design.DesignerActionList[],System.Int32)" />
+            >If the <see cref="M:System.ComponentModel.Design.DesignerActionListCollection.CopyTo(System.ComponentModel.Design.DesignerActionList[],System.Int32)" />
 
             
 
-             method throws an exception while copying, the state of the destination array is undefined. For example, if an <see
-             cref="T:System.ArgumentException" />
+             method throws an exception while copying, the state of the destination array is undefined. For example, if an <see cref="T:System.ArgumentException" />
 
             
 
-             or <see
-             cref="T:System.InvalidCastException" />
+             or <see cref="T:System.InvalidCastException" />
 
             
 
@@ -512,24 +492,30 @@
           <para>Copies the elements of the current collection into the supplied array, starting at the specified array index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional array of type <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The one-dimensional array of type <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
            that is the destination of the elements copied from the current collection. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -556,18 +542,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Internally, the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Internally, the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
-             class uses a <see
-             cref="T:System.Collections.ArrayList" />
+             class uses a <see cref="T:System.Collections.ArrayList" />
 
             
 
-             to contain its collection of <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             to contain its collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -581,8 +564,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -590,12 +572,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -623,31 +608,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to the value of the <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to the value of the <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
              property, the new element is added to the end of the collection.</para
           >
           <para
-            >Internally, the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Internally, the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
-             class uses a <see
-             cref="T:System.Collections.ArrayList" />
+             class uses a <see cref="T:System.Collections.ArrayList" />
 
             
 
-             to contain its collection of <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             to contain its collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -657,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the supplied <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >Inserts the supplied <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -666,24 +645,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
@@ -749,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before inserting a new element into the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Performs additional custom processes before inserting a new element into the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -758,24 +742,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert <paramref
-           name="value" />
+          The zero-based index at which to insert <paramref name="value" />
 
           
 
           .</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -804,8 +794,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes when removing an element from the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Performs additional custom processes when removing an element from the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -813,24 +802,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            can be found.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the element to remove from <paramref
-           name="index" />
+          The value of the element to remove from <paramref name="index" />
 
           
 
@@ -860,8 +855,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before setting a value in the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Performs additional custom processes before setting a value in the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
@@ -869,36 +863,45 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="oldValue" />
+          The zero-based index at which <paramref name="oldValue" />
 
           
 
            can be found.</param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to replace with <paramref
-           name="newValue" />
+          The value to replace with <paramref name="newValue" />
 
           
 
           .</param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -925,7 +928,11 @@
           <para>Performs additional custom processes when validating a value.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -952,18 +959,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Internally, the <see
-             cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+            >Internally, the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
             
 
-             class uses a <see
-             cref="T:System.Collections.ArrayList" />
+             class uses a <see cref="T:System.Collections.ArrayList" />
 
             
 
-             to contain its collection of <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+             to contain its collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -973,8 +977,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >Removes the first occurrence of a specific <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -982,12 +985,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+          The <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 

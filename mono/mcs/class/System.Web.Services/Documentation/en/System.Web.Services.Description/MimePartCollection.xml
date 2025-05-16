@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each <see
-         cref="T:System.Web.Services.Description.MimePart" />
+        >Each <see cref="T:System.Web.Services.Description.MimePart" />
 
         
 
-         within the collection represents an extensibility element added to a <see
-         cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />
+         within the collection represents an extensibility element added to a <see cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />
 
         
 
-        , and specifies the MIME type for a corresponding <see
-         cref="T:System.Web.Services.Description.MessagePart" />
+        , and specifies the MIME type for a corresponding <see cref="T:System.Web.Services.Description.MessagePart" />
 
         
 
         .</para
       >
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -53,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of instances of the <see
-         cref="T:System.Web.Services.Description.MimePart" />
+        >Represents a collection of instances of the <see cref="T:System.Web.Services.Description.MimePart" />
 
         
 
@@ -73,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
@@ -104,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.MimePart" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.MimePart" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+             to the end of the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
@@ -120,8 +112,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index where the <paramref
-             name="mimePart" />
+            >The zero-based index where the <paramref name="mimePart" />
 
             
 
@@ -129,12 +120,15 @@
           >
         </returns>
         <param name="mimePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MimePart" />
+          The <see cref="T:System.Web.Services.Description.MimePart" />
 
           
 
@@ -163,13 +157,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the specified <see
-             cref="T:System.Web.Services.Description.MimePart" />
+            >Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.MimePart" />
 
             
 
-             is a member of the <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+             is a member of the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
@@ -179,8 +171,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="mimePart" />
+            >true if the <paramref name="mimePart" />
 
             
 
@@ -188,12 +179,15 @@
           >
         </returns>
         <param name="mimePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MimePart" />
+          The <see cref="T:System.Web.Services.Description.MimePart" />
 
           
 
@@ -223,13 +217,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+            >Copies the entire <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
-             to a compatible one-dimensional array of type <see
-             cref="T:System.Web.Services.Description.MimePart" />
+             to a compatible one-dimensional array of type <see cref="T:System.Web.Services.Description.MimePart" />
 
             
 
@@ -237,19 +229,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Description.MimePart" />
+          An array of type <see cref="T:System.Web.Services.Description.MimePart" />
 
           
 
            serving as the destination for the copy action. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Web.Services.Description.MimePart" />
+            >Searches for the specified <see cref="T:System.Web.Services.Description.MimePart" />
 
             
 
@@ -291,17 +289,19 @@
           <para>A 32-bit signed integer.</para>
         </returns>
         <param name="mimePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MimePart" />
+          The <see cref="T:System.Web.Services.Description.MimePart" />
 
           
 
-           for which to search the <see
-           cref="T:System.Web.Services.Description.MimePartCollection" />
+           for which to search the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
           
 
@@ -331,23 +331,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , the <paramref
-             name="mimePart" />
+            , the <paramref name="mimePart" />
 
             
 
-             parameter is added to the end of the <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+             parameter is added to the end of the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
@@ -358,13 +354,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.MimePart" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.MimePart" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+             to the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
@@ -372,24 +366,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="mimePart" />
+          The zero-based index at which to insert the <paramref name="mimePart" />
 
           
 
            parameter. </param
         >
         <param name="mimePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MimePart" />
+          The <see cref="T:System.Web.Services.Description.MimePart" />
 
           
 
@@ -440,8 +440,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
@@ -452,13 +451,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.Services.Description.MimePart" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.MimePart" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Description.MimePartCollection" />
+             from the <see cref="T:System.Web.Services.Description.MimePartCollection" />
 
             
 
@@ -466,12 +463,15 @@
           >
         </summary>
         <param name="mimePart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.MimePart" />
+          The <see cref="T:System.Web.Services.Description.MimePart" />
 
           
 

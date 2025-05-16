@@ -2,9 +2,7 @@
 <clause number="17.4.2.2" title="Versioning of constants and static readonly fields">
   <paragraph
     >Constants and readonly fields have different binary versioning semantics. When an expression references a constant, the value of the constant is obtained at compile-time, but when an expression references a readonly field, the value of the field is not obtained until run-time. <example
-
-      >[Example: Consider an application that consists of two separate programs: <code_example
-      >
+      >[Example: Consider an application that consists of two separate programs: <code_example>
         <![CDATA[
 using System;  
 namespace Program1  

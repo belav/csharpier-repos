@@ -40,8 +40,7 @@
       <para>
         <block subset="none" type="note"
           >For additional information about
-      disposing objects, see the <see
-           cref="T:System.IDisposable" />
+      disposing objects, see the <see cref="T:System.IDisposable" />
 
           
 
@@ -51,8 +50,7 @@
     </remarks>
     <example>
       <para
-        >The following example demonstrates an error that causes the <see
-         cref="T:System.ObjectDisposedException" />
+        >The following example demonstrates an error that causes the <see cref="T:System.ObjectDisposedException" />
 
         
 
@@ -112,8 +110,7 @@ public class ObjectDisposedExceptionTest {
         <example>
           <para
             >The following example displays the error message of a
-   <see
-             cref="T:System.ObjectDisposedException" />
+   <see cref="T:System.ObjectDisposedException" />
 
             
 
@@ -178,13 +175,11 @@ public class ExampleDisposableObject : IDisposable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ObjectDisposedException.Message" />
+            >The <see cref="P:System.ObjectDisposedException.Message" />
 
             
 
-             property is initialized to a system-supplied message that describes the error and includes the <paramref
-             name="objectName" />
+             property is initialized to a system-supplied message that describes the error and includes the <paramref name="objectName" />
 
             
 
@@ -192,8 +187,7 @@ public class ExampleDisposableObject : IDisposable {
           >
           <para>The InnerException property of the new instance is initialized to null.</para>
           <para
-            >If <paramref
-             name="objectName" />
+            >If <paramref name="objectName" />
 
             
 
@@ -203,8 +197,7 @@ public class ExampleDisposableObject : IDisposable {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObjectDisposedException" />
+            >Initializes a new instance of the <see cref="T:System.ObjectDisposedException" />
 
             
 
@@ -212,7 +205,11 @@ public class ExampleDisposableObject : IDisposable {
           >
         </summary>
         <param name="objectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -245,8 +242,7 @@ public class ExampleDisposableObject : IDisposable {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObjectDisposedException" />
+            >Initializes a new instance of the <see cref="T:System.ObjectDisposedException" />
 
             
 
@@ -254,24 +250,30 @@ public class ExampleDisposableObject : IDisposable {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -302,13 +304,11 @@ public class ExampleDisposableObject : IDisposable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -318,8 +318,7 @@ public class ExampleDisposableObject : IDisposable {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObjectDisposedException" />
+            >Initializes a new instance of the <see cref="T:System.ObjectDisposedException" />
 
             
 
@@ -327,19 +326,26 @@ public class ExampleDisposableObject : IDisposable {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If <paramref name="innerException" />
 
           
 
@@ -374,8 +380,7 @@ public class ExampleDisposableObject : IDisposable {
       <Docs>
         <example>
           <para
-            >The following example throws a <see
-             cref="T:System.ObjectDisposedException" />
+            >The following example throws a <see cref="T:System.ObjectDisposedException" />
 
             
 
@@ -441,7 +446,11 @@ public class ExampleDisposableObject : IDisposable {
           </c>
         </example>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -451,8 +460,7 @@ public class ExampleDisposableObject : IDisposable {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The InnerException property of the new instance is initialized to null.</para>
           <para
-            >If <paramref
-             name="objectName" />
+            >If <paramref name="objectName" />
 
             
 
@@ -462,8 +470,7 @@ public class ExampleDisposableObject : IDisposable {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ObjectDisposedException" />
+            >Initializes a new instance of the <see cref="T:System.ObjectDisposedException" />
 
             
 
@@ -471,14 +478,22 @@ public class ExampleDisposableObject : IDisposable {
           >
         </summary>
         <param name="objectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the disposed object. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -514,8 +529,7 @@ public class ExampleDisposableObject : IDisposable {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Retrieves the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -523,24 +537,30 @@ public class ExampleDisposableObject : IDisposable {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -568,8 +588,7 @@ public class ExampleDisposableObject : IDisposable {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -580,16 +599,14 @@ public class ExampleDisposableObject : IDisposable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ObjectDisposedException.ObjectName" />
+            >If the <see cref="P:System.ObjectDisposedException.ObjectName" />
 
             
 
              property is not null, the message includes the name of the object.</para
           >
           <para
-            >This property overrides <see
-             cref="P:System.Exception.Message" />
+            >This property overrides <see cref="P:System.Exception.Message" />
 
             
 
@@ -623,8 +640,7 @@ public class ExampleDisposableObject : IDisposable {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -634,13 +650,11 @@ public class ExampleDisposableObject : IDisposable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current property is not null or <see
-             cref="F:System.String.Empty" />
+            >If the current property is not null or <see cref="F:System.String.Empty" />
 
             
 
-            , the value of this property is included in the string returned by the <see
-             cref="P:System.ObjectDisposedException.Message" />
+            , the value of this property is included in the string returned by the <see cref="P:System.ObjectDisposedException.Message" />
 
             
 

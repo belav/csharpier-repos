@@ -6,7 +6,8 @@
   <members>
     <member name="T:Testing.Test">
             test class
-        </member>
+        </member
+    >
     <member name="M:Testing.Test.Foo(System.Int32)">
       <param>anonymous</param>
     </member>

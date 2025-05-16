@@ -27,23 +27,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+        >Use the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
         
 
-         collection to programmatically manage a collection of <see
-         cref="T:System.Web.UI.WebControls.DataGridColumn" />
+         collection to programmatically manage a collection of <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
         
 
-        -derived column objects. These objects represent the columns in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        -derived column objects. These objects represent the columns in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control. You can add, remove, or insert columns in the <see
-         cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+         control. You can add, remove, or insert columns in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
         
 
@@ -51,18 +47,15 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="P:System.Web.UI.WebControls.DataGrid.AutoGenerateColumns" />
+          >When the <see cref="P:System.Web.UI.WebControls.DataGrid.AutoGenerateColumns" />
 
           
 
-           property is set to true, the columns created by the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+           property is set to true, the columns created by the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
-           control are not added to the <see
-           cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+           control are not added to the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
           
 
@@ -70,28 +63,23 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >The <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control does not store the contents of its <see
-         cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+         control does not store the contents of its <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
         
 
-         collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column every time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column every time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control's state is reloaded and the control is rebuilt. Otherwise, the changes to the <see
-         cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+         control's state is reloaded and the control is rebuilt. Otherwise, the changes to the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
         
 
-         collection are not reflected in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         collection are not reflected in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -99,18 +87,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Although you can programmatically add columns to or remove columns from the <see
-           cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+          >Although you can programmatically add columns to or remove columns from the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
           
 
-           collection of the <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+           collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
-           control, it is easier to list the columns statically and then use the <see
-           cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+           control, it is easier to list the columns statically and then use the <see cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
 
           
 
@@ -118,16 +103,14 @@
         >
       </block>
       <para
-        >The order of the columns in the collection determines the order that the columns are displayed in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >The order of the columns in the collection determines the order that the columns are displayed in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
          control.</para
       >
       <para
-        >The following table lists the different column classes that derive from the <see
-         cref="T:System.Web.UI.WebControls.DataGridColumn" />
+        >The following table lists the different column classes that derive from the <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
         
 
@@ -152,8 +135,7 @@
           </term>
           <description>
             <para
-              >A column that is bound to a field in a data source. It displays each item in the field as text. This is the default column type for the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+              >A column that is bound to a field in a data source. It displays each item in the field as text. This is the default column type for the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
@@ -204,13 +186,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+          >The <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
-           class is the base class for the column classes listed. It is not used directly in the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+           class is the base class for the column classes listed. It is not used directly in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
@@ -221,13 +201,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.UI.WebControls.DataGridColumn" />
+        >A collection of <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
         
 
-        -derived column objects that represent the columns in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        -derived column objects that represent the columns in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -251,8 +229,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -262,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -271,24 +247,30 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataGrid" />
+          The <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
           
 
            control that corresponds with this collection. </param
         >
         <param name="columns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ArrayList" />
+          A <see cref="T:System.Collections.ArrayList" />
 
           
 
@@ -316,41 +298,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Use this method to add a <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object to the end of a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object to the end of a <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
              collection.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >The <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control does not store the contents of its <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control does not store the contents of its <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column each time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column each time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control can reload its state and rebuild itself. Otherwise, the changes to the <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control can reload its state and rebuild itself. Otherwise, the changes to the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection are not reflected in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection are not reflected in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -358,18 +333,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can programmatically add columns to or remove columns from the <see
-               cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+              >Although you can programmatically add columns to or remove columns from the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
               
 
-               collection of the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+               collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control, it is easier to list the columns statically and then use the <see
-               cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+               control, it is easier to list the columns statically and then use the <see cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
 
               
 
@@ -380,13 +352,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object to the end of the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object to the end of the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -394,17 +364,19 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+          The <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
-          -derived column object to append to the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+          -derived column object to append to the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
@@ -433,41 +405,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to insert a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Use this method to insert a <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object at the specified index location in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object at the specified index location in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
              collection.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >The <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control does not store the contents of its <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control does not store the contents of its <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column each time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column each time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control can reload its state and rebuild itself. Otherwise, the changes to the <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control can reload its state and rebuild itself. Otherwise, the changes to the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection are not reflected in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection are not reflected in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -475,18 +440,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can programmatically add columns to or remove columns from the <see
-               cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+              >Although you can programmatically add columns to or remove columns from the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
               
 
-               collection of the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+               collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control, it is easier to list the columns statically and then use the <see
-               cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+               control, it is easier to list the columns statically and then use the <see cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
 
               
 
@@ -497,13 +459,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Inserts a <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -511,34 +471,38 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location in the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+          The index location in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
-           at which to insert the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+           at which to insert the <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
           -derived column. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+          The <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
-          -derived column to insert in the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+          -derived column to insert in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
@@ -561,13 +525,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove all <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Use this method to remove all <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column objects from the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column objects from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -575,8 +537,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.TableRowCollection.Count" />
+              >The <see cref="P:System.Web.UI.WebControls.TableRowCollection.Count" />
 
               
 
@@ -587,13 +548,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Removes all <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column objects from the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column objects from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -620,13 +579,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
-             collection into the specified <see
-             cref="T:System.Array" />
+             collection into the specified <see cref="T:System.Array" />
 
             
 
@@ -634,13 +591,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="array" />
+              >The <paramref name="array" />
 
               
 
-               parameter must be a zero-based <see
-               cref="T:System.Array" />
+               parameter must be a zero-based <see cref="T:System.Array" />
 
               
 
@@ -651,18 +606,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items from the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Copies the items from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
-             collection to the specified <see
-             cref="T:System.Array" />
+             collection to the specified <see cref="T:System.Array" />
 
             
 
-            , starting at the specified index in the <see
-             cref="T:System.Array" />
+            , starting at the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -670,29 +622,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first position in the specified <see
-           cref="T:System.Array" />
+          The first position in the specified <see cref="T:System.Array" />
 
           
 
@@ -715,13 +672,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine the number of columns in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Use this property to determine the number of columns in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
-             collection. The <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.Count" />
+             collection. The <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.Count" />
 
             
 
@@ -731,8 +686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of columns in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Gets the number of columns in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -764,37 +718,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface that can be iterated through easily to get each item in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+             interface that can be iterated through easily to get each item in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
              collection.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -802,23 +751,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+              >The <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method must be called after creating a <see
-               cref="T:System.Collections.IEnumerator" />
+               method must be called after creating a <see cref="T:System.Collections.IEnumerator" />
 
               
 
-               object, or after using the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+               object, or after using the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -829,18 +774,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface that contains all the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+             interface that contains all the <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column objects in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column objects in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -850,18 +792,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface that contains all <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+             interface that contains all <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column objects in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column objects in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -890,18 +829,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine the index number of the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Use this method to determine the index number of the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
-             collection. If the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+             collection. If the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
@@ -911,13 +847,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Returns the index of the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object from the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -927,18 +861,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index position of the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >The index position of the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
-            . The default value is -1, which indicates that the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            . The default value is -1, which indicates that the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
@@ -946,17 +877,19 @@
           >
         </returns>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+          The <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
-          -derived column to search for in the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+          -derived column to search for in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
@@ -979,8 +912,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -990,8 +922,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the columns in the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Gets a value that indicates whether the columns in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -1020,26 +951,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from the <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from the <see cref="T:System.Collections.ICollection" />
 
             
 
              class and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1049,8 +976,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -1112,41 +1038,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Use this method to remove the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object from a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object from a <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
              collection.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >The <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control does not store the contents of its <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control does not store the contents of its <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column every time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column every time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control can reload its state and rebuild itself. Otherwise, the changes to the <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control can reload its state and rebuild itself. Otherwise, the changes to the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection are not reflected in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection are not reflected in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -1154,18 +1073,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can programmatically add columns to or remove columns from the <see
-               cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+              >Although you can programmatically add columns to or remove columns from the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
               
 
-               collection of the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+               collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control, it is easier to list the columns statically and then use the <see
-               cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+               control, it is easier to list the columns statically and then use the <see cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
 
               
 
@@ -1176,13 +1092,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object from the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -1190,17 +1104,19 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+          The <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
-          -derived column to remove from the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+          -derived column to remove from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
@@ -1225,41 +1141,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Use this method to remove a <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object from a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object from a <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
              collection at the specified index.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >The <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control does not store the contents of its <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control does not store the contents of its <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column each time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection in the view state. To add or remove a column dynamically, you must programmatically add or remove the column each time the page is refreshed. Provide a Page_Init function that adds or removes the column before the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control can reload its state and rebuild itself. Otherwise, the changes to the <see
-             cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+             control can reload its state and rebuild itself. Otherwise, the changes to the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
             
 
-             collection are not reflected in the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             collection are not reflected in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -1267,18 +1176,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can programmatically add columns to or remove columns from the <see
-               cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
+              >Although you can programmatically add columns to or remove columns from the <see cref="P:System.Web.UI.WebControls.DataGrid.Columns" />
 
               
 
-               collection of the <see
-               cref="T:System.Web.UI.WebControls.DataGrid" />
+               collection of the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
               
 
-               control, it is easier to list the columns statically and then use the <see
-               cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
+               control, it is easier to list the columns statically and then use the <see cref="P:System.Web.UI.WebControls.DataGridColumn.Visible" />
 
               
 
@@ -1289,13 +1195,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumn" />
+            >Removes a <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
             
 
-            -derived column object from the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            -derived column object from the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -1303,17 +1207,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumn" />
+          The index of the <see cref="T:System.Web.UI.WebControls.DataGridColumn" />
 
           
 
-          -derived column in the <see
-           cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+          -derived column in the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
           
 
@@ -1336,26 +1242,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
              object.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1365,8 +1267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
@@ -1402,18 +1303,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.System#Web#UI#IStateManager#IsTrackingViewState" />
+            >The <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.System#Web#UI#IStateManager#IsTrackingViewState" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when a <see
-             cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
+             member is an explicit interface member implementation. It can be used only when a <see cref="T:System.Web.UI.WebControls.DataGridColumnCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -1449,12 +1347,15 @@
           <para>Loads the previously saved state.</para>
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -1482,8 +1383,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 

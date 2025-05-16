@@ -32,26 +32,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of the <see
-         cref="T:System.Web.HttpApplication" />
+        >Instances of the <see cref="T:System.Web.HttpApplication" />
 
         
 
-         class are created in the ASP.NET infrastructure, not by the user directly. One instance of the <see
-         cref="T:System.Web.HttpApplication" />
+         class are created in the ASP.NET infrastructure, not by the user directly. One instance of the <see cref="T:System.Web.HttpApplication" />
 
         
 
          class is used to process many requests in its lifetime. However, it can process only one request at a time. Thus, member variables can be used to store per-request data.</para
       >
       <para
-        >An application raises events that can be handled by custom modules that implement the <see
-         cref="T:System.Web.IHttpModule" />
+        >An application raises events that can be handled by custom modules that implement the <see cref="T:System.Web.IHttpModule" />
 
         
 
-         interface or by event handler code that is defined in the Global.asax file. Custom modules that implement the <see
-         cref="T:System.Web.IHttpModule" />
+         interface or by event handler code that is defined in the Global.asax file. Custom modules that implement the <see cref="T:System.Web.IHttpModule" />
 
         
 
@@ -62,8 +58,7 @@
 
         
 
-         is introduced in the .NET Framework version 3.5.  For more information, see <format
-         type="text/html">
+         is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
 
@@ -111,18 +106,15 @@
             <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
           </para>
           <para
-            >After the <see
-             cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+            >After the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
             
 
-             event and before the <see
-             cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+             event and before the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
             
 
-             event, an event handler (which is a page that corresponds to the request URL) is created. When a server is running IIS 7.0 in Integrated mode and at least the .NET Framework version 3.0, the <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+             event, an event handler (which is a page that corresponds to the request URL) is created. When a server is running IIS 7.0 in Integrated mode and at least the .NET Framework version 3.0, the <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
@@ -165,8 +157,7 @@
             <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
           </para>
           <para
-            >After the <see
-             cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+            >After the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
             
 
@@ -222,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpApplication" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -247,16 +237,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+            >The <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
              event is raised after the event handler has been created.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -293,13 +281,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
@@ -307,34 +293,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.AcquireRequestState" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.AcquireRequestState" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
           
 
@@ -371,13 +361,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
@@ -404,13 +392,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
@@ -418,34 +404,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
           
 
@@ -482,13 +472,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
@@ -515,13 +503,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
@@ -529,34 +515,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
           
 
@@ -593,13 +583,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
@@ -626,13 +614,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.BeginRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.BeginRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
             
 
@@ -640,34 +626,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.BeginRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.BeginRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
           
 
@@ -704,13 +694,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.BeginRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.BeginRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
             
 
@@ -737,13 +725,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
@@ -751,34 +737,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.EndRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.EndRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
           
 
@@ -815,13 +805,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
@@ -854,8 +842,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -867,13 +854,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
@@ -881,34 +866,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.LogRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
           
 
           .</param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.LogRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
           
 
@@ -938,13 +927,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
@@ -952,46 +939,53 @@
           >
         </summary>
         <param name="beginHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.LogRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
           
 
           .</param
         >
         <param name="endHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.LogRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
           
 
           .</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The associated state to add to the asynchronous <see
-           cref="E:System.Web.HttpApplication.LogRequest" />
+          The associated state to add to the asynchronous <see cref="E:System.Web.HttpApplication.LogRequest" />
 
           
 
@@ -1023,8 +1017,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1036,13 +1029,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
@@ -1050,34 +1041,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.MapRequestHandler" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
           
 
           .</param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.MapRequestHandler" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
           
 
@@ -1107,13 +1102,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
@@ -1121,46 +1114,53 @@
           >
         </summary>
         <param name="beginHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.MapRequestHandler" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
           
 
           .</param
         >
         <param name="endHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.MapRequestHandler" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
           
 
           .</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The associated state to add to the asynchronous <see
-           cref="E:System.Web.HttpApplication.MapRequestHandler" />
+          The associated state to add to the asynchronous <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
           
 
@@ -1189,13 +1189,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
             
 
@@ -1203,34 +1201,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
           
 
@@ -1263,13 +1265,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
             
 
@@ -1299,13 +1299,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
@@ -1313,34 +1311,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
           
 
@@ -1373,13 +1375,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
@@ -1409,13 +1409,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
@@ -1423,34 +1421,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
           
 
@@ -1483,13 +1485,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
-             to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+             to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
@@ -1522,8 +1522,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -1535,13 +1534,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostLogRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostLogRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
             
 
@@ -1549,34 +1546,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostLogRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
           
 
           .</param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostLogRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
           
 
@@ -1606,13 +1607,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostLogRequest" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostLogRequest" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
             
 
@@ -1620,46 +1619,53 @@
           >
         </summary>
         <param name="beginHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostLogRequest" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
           
 
           .</param
         >
         <param name="endHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostLogRequest" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
           
 
           .</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The associated state to add to the asynchronous <see
-           cref="E:System.Web.HttpApplication.PostLogRequest" />
+          The associated state to add to the asynchronous <see cref="E:System.Web.HttpApplication.PostLogRequest" />
 
           
 
@@ -1688,13 +1694,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
             
 
@@ -1702,34 +1706,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
           
 
@@ -1762,13 +1770,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
             
 
@@ -1798,13 +1804,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
             
 
@@ -1812,34 +1816,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
           
 
@@ -1872,13 +1880,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
 
             
 
@@ -1905,13 +1911,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
 
             
 
@@ -1919,34 +1923,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
 
           
 
@@ -1983,13 +1991,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
 
             
 
@@ -2019,13 +2025,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
             
 
@@ -2033,34 +2037,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
           
 
@@ -2093,13 +2101,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
 
             
 
@@ -2129,13 +2135,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
             
 
@@ -2143,34 +2147,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
           
 
@@ -2203,13 +2211,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
             
 
@@ -2236,13 +2242,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
 
             
 
@@ -2250,34 +2254,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
 
           
 
@@ -2314,13 +2322,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
 
             
 
@@ -2347,13 +2353,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
@@ -2361,34 +2365,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
           
 
@@ -2425,13 +2433,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
@@ -2458,13 +2464,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
             
 
-             event handler to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+             event handler to the collection of asynchronous <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
             
 
@@ -2472,34 +2476,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
           
 
@@ -2536,13 +2544,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
             
 
-             event handler to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+             event handler to the collection of asynchronous <see cref="E:System.Web.HttpApplication.ResolveRequestCache" />
 
             
 
@@ -2569,13 +2575,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
             
 
@@ -2583,34 +2587,38 @@
           >
         </summary>
         <param name="bh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.BeginEventHandler" />
+          The <see cref="T:System.Web.BeginEventHandler" />
 
           
 
-           that starts asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+           that starts asynchronous processing of the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
           
 
           . </param
         >
         <param name="eh">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.EndEventHandler" />
+          The <see cref="T:System.Web.EndEventHandler" />
 
           
 
-           that ends asynchronous processing of the <see
-           cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+           that ends asynchronous processing of the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
           
 
@@ -2647,13 +2655,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+            >Adds the specified <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
             
 
-             event to the collection of asynchronous <see
-             cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+             event to the collection of asynchronous <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
             
 
@@ -2706,21 +2712,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+            >The <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
-             event signals that the configured authentication mechanism has authenticated the current request. Subscribing to the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event signals that the configured authentication mechanism has authenticated the current request. Subscribing to the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
              event ensures that the request will be authenticated before processing the attached module or event handler.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2750,21 +2753,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+            >The <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
-             event signals that ASP.NET has authorized the current request. Subscribing to the <see
-             cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+             event signals that ASP.NET has authorized the current request. Subscribing to the <see cref="E:System.Web.HttpApplication.AuthorizeRequest" />
 
             
 
              event ensures that the request will be authenticated and authorized before processing the attached module or event handler. </para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2794,16 +2794,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.BeginRequest" />
+            >The <see cref="E:System.Web.HttpApplication.BeginRequest" />
 
             
 
              event signals the creation of any given new request. This event is always raised and is always the first event to occur during the processing of a request.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2833,11 +2831,8 @@
         <remarks
           >This methods stops the execution of the HttpApplication pipeline and completes the request.
 
-<para
-
-            >
-   If this method is invoked at any stage in the pipeline processing (described in more detail in <see
-             cref="T:System.Web.HttpApplication" />
+<para>
+   If this method is invoked at any stage in the pipeline processing (described in more detail in <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -2848,8 +2843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes ASP.NET to bypass all events and filtering in the HTTP pipeline chain of execution and directly execute the <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >Causes ASP.NET to bypass all events and filtering in the HTTP pipeline chain of execution and directly execute the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
@@ -2900,51 +2894,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpApplication.Request" />
+            >The <see cref="P:System.Web.HttpApplication.Request" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpApplication.Response" />
+            , <see cref="P:System.Web.HttpApplication.Response" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpApplication.Session" />
+            , <see cref="P:System.Web.HttpApplication.Session" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpApplication.Application" />
+            , and <see cref="P:System.Web.HttpApplication.Application" />
 
             
 
-             properties are not available for use when the <see
-             cref="M:System.Web.HttpApplication.Dispose" />
+             properties are not available for use when the <see cref="M:System.Web.HttpApplication.Dispose" />
 
             
 
              method executes.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.HttpApplication.Dispose" />
+            >The <see cref="M:System.Web.HttpApplication.Dispose" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.IHttpModule.Dispose" />
+             method calls the <see cref="M:System.Web.IHttpModule.Dispose" />
 
             
 
-             method on each of the registered <see
-             cref="P:System.Web.Configuration.SystemWebSectionGroup.HttpModules" />
+             method on each of the registered <see cref="P:System.Web.Configuration.SystemWebSectionGroup.HttpModules" />
 
             
 
-             in the application instance and raises the <see
-             cref="E:System.Web.HttpApplication.Disposed" />
+             in the application instance and raises the <see cref="E:System.Web.HttpApplication.Disposed" />
 
             
 
@@ -2954,8 +2939,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes the <see
-             cref="T:System.Web.HttpApplication" />
+            >Disposes the <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -2979,26 +2963,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a <see
-             cref="E:System.Web.HttpApplication.Disposed" />
+            >When you create a <see cref="E:System.Web.HttpApplication.Disposed" />
 
             
 
-             delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the <see
-             cref="E:System.Web.HttpApplication.Disposed" />
+             delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the <see cref="E:System.Web.HttpApplication.Disposed" />
 
             
 
-             delegate to the event. The event handler is called whenever the event occurs, unless you remove the <see
-             cref="E:System.Web.HttpApplication.Disposed" />
+             delegate to the event. The event handler is called whenever the event occurs, unless you remove the <see cref="E:System.Web.HttpApplication.Disposed" />
 
             
 
              delegate.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3028,21 +3008,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >The <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
-             event is always raised when the <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+             event is always raised when the <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
              method is called.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3072,18 +3049,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The exception that raises the <see
-             cref="E:System.Web.HttpApplication.Error" />
+            >The exception that raises the <see cref="E:System.Web.HttpApplication.Error" />
 
             
 
-             event can be accessed by a call to the <see
-             cref="M:System.Web.HttpServerUtility.GetLastError" />
+             event can be accessed by a call to the <see cref="M:System.Web.HttpServerUtility.GetLastError" />
 
             
 
-             method. If your application generates custom error output, suppress the default error message that is generated by ASP.NET by a call to the <see
-             cref="M:System.Web.HttpServerUtility.ClearError" />
+             method. If your application generates custom error output, suppress the default error message that is generated by ASP.NET by a call to the <see cref="M:System.Web.HttpServerUtility.ClearError" />
 
             
 
@@ -3091,13 +3065,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If your Web application contains XML Web services, you cannot use the <see
-               cref="E:System.Web.HttpApplication.Error" />
+              >If your Web application contains XML Web services, you cannot use the <see cref="E:System.Web.HttpApplication.Error" />
 
               
 
-               event for global exception handling of those services. The HTTP handler for XML Web services consumes any exception that occurs in an XML Web service and converts it to a SOAP fault before the <see
-               cref="E:System.Web.HttpApplication.Error" />
+               event for global exception handling of those services. The HTTP handler for XML Web services consumes any exception that occurs in an XML Web service and converts it to a SOAP fault before the <see cref="E:System.Web.HttpApplication.Error" />
 
               
 
@@ -3105,8 +3077,7 @@
             >
           </block>
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3136,10 +3107,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.ComponentModel.EventHandlerList" />
-        </value>
+        <value>a <see cref="T:System.ComponentModel.EventHandlerList" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3168,13 +3136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can override <see
-             cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+            >You can override <see cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
 
             
 
-             to add a new method for calculating custom vary-by values that are based on the current request. The implementation has to call the base class for custom values that it does not recognize. For more information, see <format
-             type="text/html">
+             to add a new method for calculating custom vary-by values that are based on the current request. The implementation has to call the base class for custom values that it does not recognize. For more information, see <format type="text/html">
               <a href="b6c73735-a3cd-4d19-ba4d-0431881b0db0"
                 >How to: Cache Versions of a Page Using Custom Strings</a
               >
@@ -3188,8 +3154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an application-wide implementation of the <see
-             cref="P:System.Web.UI.PartialCachingAttribute.VaryByCustom" />
+            >Provides an application-wide implementation of the <see cref="P:System.Web.UI.PartialCachingAttribute.VaryByCustom" />
 
             
 
@@ -3199,13 +3164,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <paramref
-             name="custom" />
+            >If the value of the <paramref name="custom" />
 
             
 
-             parameter is "browser", the browser's <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Type" />
+             parameter is "browser", the browser's <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Type" />
 
             
 
@@ -3213,19 +3176,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 
            object that contains information about the current Web request. </param
         >
         <param name="custom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3248,8 +3218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a derived class, you can override the <see
-             cref="M:System.Web.HttpApplication.Init" />
+            >In a derived class, you can override the <see cref="M:System.Web.HttpApplication.Init" />
 
             
 
@@ -3279,21 +3248,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+            >The <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
-             event is raised even if an error occurs. You can provide an event handler for the <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+             event is raised even if an error occurs. You can provide an event handler for the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
              event to provide custom logging for the request.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3306,8 +3272,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -3335,13 +3300,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.MapRequestHandler" />
+            >The <see cref="E:System.Web.HttpApplication.MapRequestHandler" />
 
             
 
-             event is used by the ASP.NET infrastructure to determine the request handler for the current request. For more information, see <format
-             type="text/html">
+             event is used by the ASP.NET infrastructure to determine the request handler for the current request. For more information, see <format type="text/html">
               <a href="d5633f9a-03fb-4ccc-a799-dc67d656fa60">How to: Register HTTP Handlers</a>
             </format>
 
@@ -3350,8 +3313,7 @@
             .</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3364,8 +3326,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -3423,31 +3384,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+            >The <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
             
 
-             event is raised after the <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+             event is raised after the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
-             event has occurred. Functionality that subscribes to the <see
-             cref="E:System.Web.HttpApplication.AcquireRequestState" />
+             event has occurred. Functionality that subscribes to the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
             
 
-             event can access any data that is processed by the <see
-             cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+             event can access any data that is processed by the <see cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
 
             
 
             .</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3475,31 +3431,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+            >The <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
-             event is raised after the <see
-             cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+             event is raised after the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
             
 
-             event has occurred. Functionality that subscribes to the <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+             event has occurred. Functionality that subscribes to the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
-             event can access any data that is processed by the <see
-             cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+             event can access any data that is processed by the <see cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
 
             
 
             .</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3527,21 +3478,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+            >The <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
-             event signals that ASP.NET has authorized the current request. Subscribing to the <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+             event signals that ASP.NET has authorized the current request. Subscribing to the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
              event ensures authentication and authorization of the request before processing the attached module or event handler.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3569,8 +3517,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3583,8 +3530,7 @@
 
             
 
-             is introduced in the .NET Framework version 3.5.  For more information, see <format
-             type="text/html">
+             is introduced in the .NET Framework version 3.5.  For more information, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
 
@@ -3596,8 +3542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when ASP.NET has completed processing all the event handlers for the <see
-             cref="E:System.Web.HttpApplication.LogRequest" />
+            >Occurs when ASP.NET has completed processing all the event handlers for the <see cref="E:System.Web.HttpApplication.LogRequest" />
 
             
 
@@ -3619,8 +3564,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3648,8 +3592,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3675,8 +3618,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3708,8 +3650,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3737,26 +3678,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+            >The <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
             
 
-             event is raised after the <see
-             cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+             event is raised after the <see cref="E:System.Web.HttpApplication.UpdateRequestCache" />
 
             
 
-             event has occurred. When the <see
-             cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+             event has occurred. When the <see cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
 
             
 
              is raised, ASP.NET has completed processing code and the content of the cache is finalized.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3782,8 +3719,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3813,16 +3749,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.HttpApplication.PreSendRequestContent" />
+            >The <see cref="E:System.Web.HttpApplication.PreSendRequestContent" />
 
             
 
              event may occur multiple times.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3852,8 +3786,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3883,16 +3816,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+            >When the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
             
 
              event is raised, the application is finished with the request and ASP.NET is signaled to store the request state.</para
           >
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3949,8 +3880,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -4064,16 +3994,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.ComponentModel.ISite" />
-        </value>
+        <value>a <see cref="T:System.ComponentModel.ISite" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a site interface for an <see
-             cref="T:System.ComponentModel.IComponent" />
+            >Gets or sets a site interface for an <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -4121,8 +4047,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -4131,36 +4056,45 @@
           <para />
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 
            that provides references to intrinsic server objects that are used to service HTTP requests.</param
         >
         <param name="cb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
-           to call when the asynchronous method call is complete. If the <paramref
-           name="cb" />
+           to call when the asynchronous method call is complete. If the <paramref name="cb" />
 
           
 
            parameter is null, the delegate is not called.</param
         >
         <param name="extraData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4188,8 +4122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Web.HttpApplication.System#Web#IHttpAsyncHandler#EndProcessRequest(System.IAsyncResult)" />
+            >You can use the <see cref="M:System.Web.HttpApplication.System#Web#IHttpAsyncHandler#EndProcessRequest(System.IAsyncResult)" />
 
             
 
@@ -4201,12 +4134,15 @@
           <para>Provides an asynchronous process End method when the process finishes.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
@@ -4233,8 +4169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value indicating whether another request can use the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Gets a Boolean value indicating whether another request can use the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -4263,18 +4198,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that inherit the <see
-             cref="T:System.Web.IHttpModule" />
+            >Classes that inherit the <see cref="T:System.Web.IHttpModule" />
 
             
 
-             and <see
-             cref="T:System.Web.IHttpHandler" />
+             and <see cref="T:System.Web.IHttpHandler" />
 
             
 
-             interfaces are provided as a reference to an <see
-             cref="T:System.Web.HttpContext" />
+             interfaces are provided as a reference to an <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -4284,8 +4216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables processing of HTTP Web requests by a custom HTTP handler that implements the <see
-             cref="T:System.Web.IHttpHandler" />
+            >Enables processing of HTTP Web requests by a custom HTTP handler that implements the <see cref="T:System.Web.IHttpHandler" />
 
             
 
@@ -4293,12 +4224,15 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -4317,8 +4251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to handle events, see <format
-             type="text/html">
+            >For more information about how to handle events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -4348,10 +4281,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Security.Principal.IPrincipal" />
-        </value>
+        <value>a <see cref="T:System.Security.Principal.IPrincipal" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

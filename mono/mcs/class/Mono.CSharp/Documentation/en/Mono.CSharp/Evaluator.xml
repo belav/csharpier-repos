@@ -159,8 +159,7 @@
 	  </para>
           <para>
             <example>
-              <code lang="C#"
-                >
+              <code lang="C#">
       // First setup the active using statements:
       Evaluator.Run ("using System;");
 
@@ -419,8 +418,7 @@
 	  </para>
           <para>
             <example>
-              <code lang="C#"
-                >
+              <code lang="C#">
       // First setup the active using statements:
       Evaluator.Run ("using System;");
 

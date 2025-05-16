@@ -24,8 +24,7 @@
 
         
 
-         creates pens and brushes based on a replaceable color table called <see
-         cref="T:System.Windows.Forms.ProfessionalColorTable" />
+         creates pens and brushes based on a replaceable color table called <see cref="T:System.Windows.Forms.ProfessionalColorTable" />
 
         
 
@@ -35,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the painting functionality for <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Handles the painting functionality for <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
             
 
@@ -86,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
             
 
@@ -95,12 +91,15 @@
           >
         </summary>
         <param name="professionalColorTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ProfessionalColorTable" />
+          A <see cref="T:System.Windows.Forms.ProfessionalColorTable" />
 
           
 
@@ -480,8 +479,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -490,8 +488,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
 
             
 
@@ -501,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripContentPanelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripContentPanelBackground" />
 
             
 
@@ -510,12 +506,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
 
           
 
@@ -543,8 +542,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -553,8 +551,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
 
             
 
@@ -564,8 +561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripPanelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripPanelBackground" />
 
             
 
@@ -573,12 +569,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
 
           
 
@@ -606,8 +605,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -616,8 +614,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripProfessionalRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -627,8 +624,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripStatusLabelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripStatusLabelBackground" />
 
             
 
@@ -636,12 +632,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 

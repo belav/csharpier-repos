@@ -23,132 +23,108 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface provides methods to convert the value of an instance of an implementing type to a common language runtime type that has an equivalent value. The common language runtime types are <see
-         cref="T:System.Boolean" />
+        >This interface provides methods to convert the value of an instance of an implementing type to a common language runtime type that has an equivalent value. The common language runtime types are <see cref="T:System.Boolean" />
 
         
 
-        , <see
-         cref="T:System.SByte" />
+        , <see cref="T:System.SByte" />
 
         
 
-        , <see
-         cref="T:System.Byte" />
+        , <see cref="T:System.Byte" />
 
         
 
-        , <see
-         cref="T:System.Int16" />
+        , <see cref="T:System.Int16" />
 
         
 
-        , <see
-         cref="T:System.UInt16" />
+        , <see cref="T:System.UInt16" />
 
         
 
-        , <see
-         cref="T:System.Int32" />
+        , <see cref="T:System.Int32" />
 
         
 
-        , <see
-         cref="T:System.UInt32" />
+        , <see cref="T:System.UInt32" />
 
         
 
-        , <see
-         cref="T:System.Int64" />
+        , <see cref="T:System.Int64" />
 
         
 
-        , <see
-         cref="T:System.UInt64" />
+        , <see cref="T:System.UInt64" />
 
         
 
-        , <see
-         cref="T:System.Single" />
+        , <see cref="T:System.Single" />
 
         
 
-        , <see
-         cref="T:System.Double" />
+        , <see cref="T:System.Double" />
 
         
 
-        , <see
-         cref="T:System.Decimal" />
+        , <see cref="T:System.Decimal" />
 
         
 
-        , <see
-         cref="T:System.DateTime" />
+        , <see cref="T:System.DateTime" />
 
         
 
-        , <see
-         cref="T:System.Char" />
+        , <see cref="T:System.Char" />
 
         
 
-        , and <see
-         cref="T:System.String" />
+        , and <see cref="T:System.String" />
 
         
 
         .</para
       >
       <para
-        >If there is no meaningful conversion to a common language runtime type, then a particular interface method implementation throws <see
-         cref="T:System.InvalidCastException" />
+        >If there is no meaningful conversion to a common language runtime type, then a particular interface method implementation throws <see cref="T:System.InvalidCastException" />
 
         
 
-        . For example, if this interface is implemented on a Boolean type, the implementation of the <see
-         cref="M:System.IConvertible.ToDateTime(System.IFormatProvider)" />
+        . For example, if this interface is implemented on a Boolean type, the implementation of the <see cref="M:System.IConvertible.ToDateTime(System.IFormatProvider)" />
 
         
 
-         method throws an exception because there is no meaningful <see
-         cref="T:System.DateTime" />
+         method throws an exception because there is no meaningful <see cref="T:System.DateTime" />
 
         
 
          equivalent to a Boolean type.</para
       >
       <para
-        >The common language runtime typically exposes the <see
-         cref="T:System.IConvertible" />
+        >The common language runtime typically exposes the <see cref="T:System.IConvertible" />
 
         
 
-         interface through the <see
-         cref="T:System.Convert" />
+         interface through the <see cref="T:System.Convert" />
 
         
 
-         class. The common language runtime also uses the <see
-         cref="T:System.IConvertible" />
+         class. The common language runtime also uses the <see cref="T:System.IConvertible" />
 
         
 
-         interface internally, in explicit interface implementations, to simplify the code used to support conversions in the <see
-         cref="T:System.Convert" />
+         interface internally, in explicit interface implementations, to simplify the code used to support conversions in the <see cref="T:System.Convert" />
 
         
 
          class and basic common language runtime types.</para
       >
       <para
-        >In addition to the <see
-         cref="T:System.IConvertible" />
+        >In addition to the <see cref="T:System.IConvertible" />
 
         
 
-         interface, the .NET Framework provides classes called type converters for converting user-defined data types to other data types. For more information, see the <format
-         type="text/html">
+         interface, the .NET Framework provides classes called type converters for converting user-defined data types to other data types. For more information, see the <format type="text/html">
           <a href="49253AE6-7657-4810-82AB-1176A6FEEADA">Generalized Type Conversion</a>
         </format>
 
@@ -184,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.TypeCode" />
+            >Returns the <see cref="T:System.TypeCode" />
 
             
 
@@ -195,8 +170,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerated constant that is the <see
-             cref="T:System.TypeCode" />
+            >The enumerated constant that is the <see cref="T:System.TypeCode" />
 
             
 
@@ -234,12 +208,15 @@
           <para>A Boolean value equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -276,12 +253,15 @@
           <para>An 8-bit unsigned integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -318,12 +298,15 @@
           <para>A Unicode character equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -357,8 +340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value of this instance to an equivalent <see
-             cref="T:System.DateTime" />
+            >Converts the value of this instance to an equivalent <see cref="T:System.DateTime" />
 
             
 
@@ -368,8 +350,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -377,12 +358,15 @@
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -413,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value of this instance to an equivalent <see
-             cref="T:System.Decimal" />
+            >Converts the value of this instance to an equivalent <see cref="T:System.Decimal" />
 
             
 
@@ -424,8 +407,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Decimal" />
+            >A <see cref="T:System.Decimal" />
 
             
 
@@ -433,12 +415,15 @@
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -475,12 +460,15 @@
           <para>A double-precision floating-point number equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -517,12 +505,15 @@
           <para>An 16-bit signed integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -559,12 +550,15 @@
           <para>An 32-bit signed integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -601,12 +595,15 @@
           <para>An 64-bit signed integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -643,12 +640,15 @@
           <para>An 8-bit signed integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -685,12 +685,15 @@
           <para>A single-precision floating-point number equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -721,8 +724,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value of this instance to an equivalent <see
-             cref="T:System.String" />
+            >Converts the value of this instance to an equivalent <see cref="T:System.String" />
 
             
 
@@ -732,8 +734,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -741,12 +742,15 @@
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -781,13 +785,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value of this instance to an <see
-             cref="T:System.Object" />
+            >Converts the value of this instance to an <see cref="T:System.Object" />
 
             
 
-             of the specified <see
-             cref="T:System.Type" />
+             of the specified <see cref="T:System.Type" />
 
             
 
@@ -797,13 +799,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             instance of type <paramref
-             name="conversionType" />
+             instance of type <paramref name="conversionType" />
 
             
 
@@ -811,24 +811,30 @@
           >
         </returns>
         <param name="conversionType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to which the value of this instance is converted. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -865,12 +871,15 @@
           <para>An 16-bit unsigned integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -907,12 +916,15 @@
           <para>An 32-bit unsigned integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 
@@ -949,12 +961,15 @@
           <para>An 64-bit unsigned integer equivalent to the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IFormatProvider" />
+          An <see cref="T:System.IFormatProvider" />
 
           
 

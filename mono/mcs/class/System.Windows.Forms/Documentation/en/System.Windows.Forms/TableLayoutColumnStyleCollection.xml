@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+        >The <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
         
 
-         class represents the collection of all the styles used to describe the columns in an associated <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+         class represents the collection of all the styles used to describe the columns in an associated <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
@@ -35,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection that stores <see
-         cref="T:System.Windows.Forms.ColumnStyle" />
+        >A collection that stores <see cref="T:System.Windows.Forms.ColumnStyle" />
 
         
 
@@ -64,13 +61,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.Add(System.Windows.Forms.ColumnStyle)" />
+            >The <see cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.Add(System.Windows.Forms.ColumnStyle)" />
 
             
 
-             method reapplies the table layout to all the controls in the current <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+             method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -81,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an item to the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+            >Adds an item to the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -94,17 +88,19 @@
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="columnStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ColumnStyle" />
+          The <see cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
-           to add to the <see
-           cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+           to add to the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
           
 
@@ -132,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Windows.Forms.ColumnStyle" />
+            >Determines whether the specified <see cref="T:System.Windows.Forms.ColumnStyle" />
 
             
 
@@ -143,13 +138,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Windows.Forms.ColumnStyle" />
+            >true if the <see cref="T:System.Windows.Forms.ColumnStyle" />
 
             
 
-             is found in the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+             is found in the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -157,17 +150,19 @@
           >
         </returns>
         <param name="columnStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ColumnStyle" />
+          The <see cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
-           to locate in the <see
-           cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+           to locate in the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
           
 
@@ -194,13 +189,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.IndexOf(System.Windows.Forms.ColumnStyle)" />
+            >The <see cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.IndexOf(System.Windows.Forms.ColumnStyle)" />
 
             
 
-             method begins searching at the first element of the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+             method begins searching at the first element of the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -210,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+            >Determines the index of a specific item in the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -221,13 +213,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="columnStyle" />
+            >The index of <paramref name="columnStyle" />
 
             
 
-             if found in the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+             if found in the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -235,17 +225,19 @@
           >
         </returns>
         <param name="columnStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ColumnStyle" />
+          The <see cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
-           to locate in the <see
-           cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+           to locate in the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
           
 
@@ -273,13 +265,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.Insert(System.Int32,System.Windows.Forms.ColumnStyle)" />
+            >The <see cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.Insert(System.Int32,System.Windows.Forms.ColumnStyle)" />
 
             
 
-             method reapplies the table layout to all the controls in the current <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+             method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
@@ -287,8 +277,7 @@
           >
           <para>The number of styles stored in a collection is limited only by available memory.</para>
           <para
-            >In collections of contiguous elements, such as the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -298,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Windows.Forms.ColumnStyle" />
+            >Inserts a <see cref="T:System.Windows.Forms.ColumnStyle" />
 
             
 
-             into the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+             into the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -312,29 +299,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <see
-           cref="T:System.Windows.Forms.ColumnStyle" />
+          The zero-based index at which <see cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
            should be inserted.</param
         >
         <param name="columnStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ColumnStyle" />
+          The <see cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
-           to insert into the <see
-           cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+           to insert into the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
           
 
@@ -383,21 +375,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.Remove(System.Windows.Forms.ColumnStyle)" />
+            >The <see cref="M:System.Windows.Forms.TableLayoutColumnStyleCollection.Remove(System.Windows.Forms.ColumnStyle)" />
 
             
 
-             method reapplies the table layout to all the controls in the current <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+             method reapplies the table layout to all the controls in the current <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
              container. </para
           >
           <para
-            >In collections of contiguous elements, such as the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+            >In collections of contiguous elements, such as the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -407,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific <see
-             cref="T:System.Windows.Forms.ColumnStyle" />
+            >Removes the first occurrence of a specific <see cref="T:System.Windows.Forms.ColumnStyle" />
 
             
 
-             from the <see
-             cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+             from the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
             
 
@@ -421,17 +408,19 @@
           >
         </summary>
         <param name="columnStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ColumnStyle" />
+          The <see cref="T:System.Windows.Forms.ColumnStyle" />
 
           
 
-           to remove from the <see
-           cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
+           to remove from the <see cref="T:System.Windows.Forms.TableLayoutColumnStyleCollection" />
 
           
 

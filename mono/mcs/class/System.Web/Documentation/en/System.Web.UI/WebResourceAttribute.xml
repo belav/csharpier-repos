@@ -19,16 +19,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebResourceAttribute" />
+        >The <see cref="T:System.Web.UI.WebResourceAttribute" />
 
         
 
          class is valid only when used on assembly declarations. It is used to enable a specified embedded resource in an assembly for use as a Web resource. </para
       >
       <para
-        >For more information on resources, see <format
-         type="text/html">
+        >For more information on resources, see <format type="text/html">
           <a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a>
         </format>
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebResourceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebResourceAttribute" />
 
             
 
@@ -68,14 +65,22 @@
           >
         </summary>
         <param name="webResource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the of Web resource.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -99,7 +104,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Examples of content types are "image/jpeg" and "text/xml". For more information on MIME types, go to the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=43988"
+              cref="http://go.microsoft.com/fwlink/?LinkId=43988"
               >Internet Assigned Numbers Authority</see
             >
 
@@ -111,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string containing the MIME type of the resource that is referenced by the <see
-             cref="T:System.Web.UI.WebResourceAttribute" />
+            >Gets a string containing the MIME type of the resource that is referenced by the <see cref="T:System.Web.UI.WebResourceAttribute" />
 
             
 
@@ -136,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a resource is streamed from the assembly to the response, references to other Web resources in the embedded resources can be resolved at this time, if the <see
-             cref="P:System.Web.UI.WebResourceAttribute.PerformSubstitution" />
+            >When a resource is streamed from the assembly to the response, references to other Web resources in the embedded resources can be resolved at this time, if the <see cref="P:System.Web.UI.WebResourceAttribute.PerformSubstitution" />
 
             
 
@@ -147,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value that determines whether, during processing of the embedded resource referenced by the <see
-             cref="T:System.Web.UI.WebResourceAttribute" />
+            >Gets or sets a Boolean value that determines whether, during processing of the embedded resource referenced by the <see cref="T:System.Web.UI.WebResourceAttribute" />
 
             
 
@@ -173,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string containing the name of the resource that is referenced by the <see
-             cref="T:System.Web.UI.WebResourceAttribute" />
+            >Gets a string containing the name of the resource that is referenced by the <see cref="T:System.Web.UI.WebResourceAttribute" />
 
             
 

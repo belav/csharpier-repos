@@ -14,13 +14,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When elements are parsed, they are recognized as child controls of the server control that implements this interface. These elements are converted to objects. When you implement this interface, the control you create defines what processing occurs once it has been notified that an element has been parsed.</para>
       <para
-        >Because the <see
-         cref="T:System.Web.UI.Control" />
+        >Because the <see cref="T:System.Web.UI.Control" />
 
         
 
-         class implements this interface, it is easier to extend that class and override its implementation of the <see
-         cref="M:System.Web.UI.IParserAccessor.AddParsedSubObject(System.Object)" />
+         class implements this interface, it is easier to extend that class and override its implementation of the <see cref="M:System.Web.UI.IParserAccessor.AddParsedSubObject(System.Object)" />
 
         
 
@@ -49,12 +47,15 @@
           <para>When implemented by an ASP.NET server control, notifies the server control that an element, either XML or HTML, was parsed.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 

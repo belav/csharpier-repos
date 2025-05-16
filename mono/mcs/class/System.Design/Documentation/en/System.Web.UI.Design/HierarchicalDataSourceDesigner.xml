@@ -23,28 +23,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+        >The <see cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
 
         
 
-         class is a base class for deriving your own data source designer for a custom data source control derived from the <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+         class is a base class for deriving your own data source designer for a custom data source control derived from the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
-         class. Other classes that derive from <see
-         cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+         class. Other classes that derive from <see cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
 
         
 
-         are <see
-         cref="T:System.Web.UI.Design.WebControls.XmlDataSourceDesigner" />
+         are <see cref="T:System.Web.UI.Design.WebControls.XmlDataSourceDesigner" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.Design.WebControls.SiteMapDataSourceDesigner" />
+         and <see cref="T:System.Web.UI.Design.WebControls.SiteMapDataSourceDesigner" />
 
         
 
@@ -54,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time support in a visual designer for the <see
-         cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+        >Provides design-time support in a visual designer for the <see cref="T:System.Web.UI.HierarchicalDataSourceControl" />
 
         
 
@@ -76,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
 
             
 
@@ -121,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A design host, such as vsprvslong, uses this property to determine whether to show a <ui
-            >Configure</ui>
+            >A design host, such as vsprvslong, uses this property to determine whether to show a <ui>Configure</ui>
 
             
 
@@ -132,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.Configure" />
+            >Gets a value that indicates whether the <see cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.Configure" />
 
             
 
@@ -156,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A design host, such as vsprvslong, uses this property to determine whether to show a <ui
-            >Refresh Schema</ui>
+            >A design host, such as vsprvslong, uses this property to determine whether to show a <ui>Refresh Schema</ui>
 
             
 
@@ -167,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+            >Gets a value that indicates whether the <see cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
 
             
 
@@ -191,13 +180,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.Configure" />
+            >The <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.Configure" />
 
             
 
-             method is not supported in the <see
-             cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+             method is not supported in the <see cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
 
             
 
@@ -270,8 +257,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
+            >A <see cref="T:System.Web.UI.Design.DesignerHierarchicalDataSourceView" />
 
             
 
@@ -279,7 +265,11 @@
           >
         </returns>
         <param name="viewPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,18 +296,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.OnDataSourceChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.OnDataSourceChanged(System.EventArgs)" />
 
             
 
-             method notifies the designer of each control bound to the associated data source to refresh its control in the design host. This method can be suppressed with the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
+             method notifies the designer of each control bound to the associated data source to refresh its control in the design host. This method can be suppressed with the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
 
             
 
-             method, or by calling the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+             method, or by calling the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
 
             
 
@@ -327,13 +314,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Design.HierarchicalDataSourceDesigner.DataSourceChanged" />
+            >Raises the <see cref="E:System.Web.UI.Design.HierarchicalDataSourceDesigner.DataSourceChanged" />
 
             
 
-             event when the properties of the data source have changed and the <see
-             cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
+             event when the properties of the data source have changed and the <see cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
 
             
 
@@ -341,12 +326,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -373,13 +361,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method notifies the designers of each control bound to the associated data source that the fields in the schema have changed. This method can be suppressed with the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
+            >This method notifies the designers of each control bound to the associated data source that the fields in the schema have changed. This method can be suppressed with the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
 
             
 
-             method, or by calling the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+             method, or by calling the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
 
             
 
@@ -389,13 +375,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Design.HierarchicalDataSourceDesigner.SchemaRefreshed" />
+            >Raises the <see cref="E:System.Web.UI.Design.HierarchicalDataSourceDesigner.SchemaRefreshed" />
 
             
 
-             event when the schema of the data source has changed and the <see
-             cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
+             event when the schema of the data source has changed and the <see cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
 
             
 
@@ -403,12 +387,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -435,8 +422,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is not supported in this class, but is implemented in derived classes, such as the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDataSourceDesigner" />
+            >This method is not supported in this class, but is implemented in derived classes, such as the <see cref="T:System.Web.UI.Design.WebControls.XmlDataSourceDesigner" />
 
             
 
@@ -448,7 +434,11 @@
           <para>Refreshes the schema of the data.</para>
         </summary>
         <param name="preferSilent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -470,13 +460,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data source events can be suppressed by setting the <see
-             cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
+            >Data source events can be suppressed by setting the <see cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
 
             
 
-             property to false, or by calling the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+             property to false, or by calling the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
 
             
 
@@ -521,8 +509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Postpones all data source events until after the <see
-             cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.ResumeDataSourceEvents" />
+            >Postpones all data source events until after the <see cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.ResumeDataSourceEvents" />
 
             
 

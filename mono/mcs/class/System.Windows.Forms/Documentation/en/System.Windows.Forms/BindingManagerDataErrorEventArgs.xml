@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+        >The <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
 
         
 
-         provides the <see
-         cref="T:System.Exception" />
+         provides the <see cref="T:System.Exception" />
 
         
 
@@ -33,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+        >Provides data for the <see cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
 
         
 
@@ -58,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
 
             
 
@@ -67,17 +63,19 @@
           >
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
-           that occurred in the binding process that caused the <see
-           cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+           that occurred in the binding process that caused the <see cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
 
           
 
@@ -101,13 +99,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Exception" />
+            >Gets the <see cref="T:System.Exception" />
 
             
 
-             caught in the binding process that caused the <see
-             cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+             caught in the binding process that caused the <see cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
 
             
 

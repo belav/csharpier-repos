@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The new larger key is the signature key. In versions before the net_v45, the signature key was identical to the identity key. Starting with the net_v45, the <see
-         cref="T:System.Reflection.AssemblySignatureKeyAttribute" />
+        >The new larger key is the signature key. In versions before the net_v45, the signature key was identical to the identity key. Starting with the net_v45, the <see cref="T:System.Reflection.AssemblySignatureKeyAttribute" />
 
         
 
@@ -38,8 +37,7 @@
       <para>The presence of the attribute does not necessarily mean that strong name validation takes place. In common full-trust scenarios, the attribute is never considered, because strong name signatures are never validated. However, when the strong name signature does have to be validated, both the strong name signature and the countersignature must be validated. The assembly’s identity key does not have to be identical to the signature key (the key used to do the actual signing and validation). The identity key can be mapped to a different (more robust) signing key. This lets you set the identity of an assembly, and update the signing keys and algorithms to more secure versions.</para>
       <para>The countersignature addresses security concerns when a malicious assembly claims some other identity. For example, a malicious System.Core.dll assembly could contain the Microsoft public key in its metadata, and use the attribute to tell strong name validation to use the attacker’s signature key if no countersignature is present. Thus, it could masquerade as a strong name-validated Microsoft assembly.</para>
       <para
-        >For information about how to sign assemblies for use with this new attribute, see <format
-         type="text/html">
+        >For information about how to sign assemblies for use with this new attribute, see <format type="text/html">
           <a href="6cf17a82-62a1-4f6d-8d5a-d7d06dec2bb5">Enhanced Strong-Naming</a>
         </format>
 
@@ -80,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Reflection.AssemblySignatureKeyAttribute" />
+            >Creates a new instance of the <see cref="T:System.Reflection.AssemblySignatureKeyAttribute" />
 
             
 
@@ -89,14 +86,22 @@
           >
         </summary>
         <param name="publicKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The public or identity key.</param
         >
         <param name="countersignature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

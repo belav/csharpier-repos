@@ -20,49 +20,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Resources.ResXDataNode" />
+        >The <see cref="T:System.Resources.ResXDataNode" />
 
         
 
          class supports the representation of rich data types within a resource file. It can support the storage of any object in a resource file, so long as the object supports serialization and type editors. </para
       >
       <para
-        >You can create a <see
-         cref="T:System.Resources.ResXDataNode" />
+        >You can create a <see cref="T:System.Resources.ResXDataNode" />
 
         
 
-         object by calling one of its overloaded class constructors. You can then add the resource item or element to a resource file by calling the <see
-         cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
+         object by calling one of its overloaded class constructors. You can then add the resource item or element to a resource file by calling the <see cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
 
         
 
          method. </para
       >
       <para
-        >To retrieve an existing <see
-         cref="T:System.Resources.ResXDataNode" />
+        >To retrieve an existing <see cref="T:System.Resources.ResXDataNode" />
 
         
 
-         object, you must enumerate the <see
-         cref="T:System.Resources.ResXDataNode" />
+         object, you must enumerate the <see cref="T:System.Resources.ResXDataNode" />
 
         
 
-         objects in an XML resource file by instantiating a <see
-         cref="T:System.Resources.ResXResourceReader" />
+         objects in an XML resource file by instantiating a <see cref="T:System.Resources.ResXResourceReader" />
 
         
 
-         object, setting the <see
-         cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
+         object, setting the <see cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
 
         
 
-         property to true, and calling the <see
-         cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
+         property to true, and calling the <see cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
 
         
 
@@ -90,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXDataNode" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXDataNode" />
 
             
 
@@ -99,14 +90,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the resource.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXDataNode" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXDataNode" />
 
             
 
@@ -141,14 +139,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the resource.</param
         >
         <param name="fileRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,51 +176,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a comment has not been assigned to the resource item, the value of the <see
-             cref="P:System.Resources.ResXDataNode.Comment" />
+            >If a comment has not been assigned to the resource item, the value of the <see cref="P:System.Resources.ResXDataNode.Comment" />
 
             
 
-             property is <see
-             cref="F:System.String.Empty" />
+             property is <see cref="F:System.String.Empty" />
 
             
 
             .</para
           >
           <para
-            >You access the <see
-             cref="P:System.Resources.ResXDataNode.Comment" />
+            >You access the <see cref="P:System.Resources.ResXDataNode.Comment" />
 
             
 
-             property of an data node in an existing XML resource file by instantiating a <see
-             cref="T:System.Resources.ResXResourceReader" />
+             property of an data node in an existing XML resource file by instantiating a <see cref="T:System.Resources.ResXResourceReader" />
 
             
 
-             object, setting the <see
-             cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
+             object, setting the <see cref="P:System.Resources.ResXResourceReader.UseResXDataNodes" />
 
             
 
-             property to true, and calling the <see
-             cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
+             property to true, and calling the <see cref="M:System.Resources.ResXResourceReader.GetEnumerator" />
 
             
 
-             method to retrieve an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+             method to retrieve an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             object that you use to enumerate the items in the XML resource file. The <see
-             cref="P:System.Collections.IDictionaryEnumerator.Value" />
+             object that you use to enumerate the items in the XML resource file. The <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
-             property returns the <see
-             cref="T:System.Resources.ResXDataNode" />
+             property returns the <see cref="T:System.Resources.ResXDataNode" />
 
             
 
@@ -264,23 +261,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A structure that specifies the location of this resource in the resource file as a line position (<see
-             cref="P:System.Drawing.Point.X" />
+            >A structure that specifies the location of this resource in the resource file as a line position (<see cref="P:System.Drawing.Point.X" />
 
             
 
-            ) and a column position (<see
-             cref="P:System.Drawing.Point.Y" />
+            ) and a column position (<see cref="P:System.Drawing.Point.Y" />
 
             
 
-            ). If this resource is not part of a resource file, this method returns a structure that has an <see
-             cref="P:System.Drawing.Point.X" />
+            ). If this resource is not part of a resource file, this method returns a structure that has an <see cref="P:System.Drawing.Point.X" />
 
             
 
-             of 0 and a <see
-             cref="P:System.Drawing.Point.Y" />
+             of 0 and a <see cref="P:System.Drawing.Point.Y" />
 
             
 
@@ -308,18 +301,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the stored value currently exists in memory, it is returned directly. If it is stored in the resource file and it is not a file reference, <see
-             cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
+            >If the stored value currently exists in memory, it is returned directly. If it is stored in the resource file and it is not a file reference, <see cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
 
             
 
-             looks for a <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             looks for a <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
-             by using the specified type resolution service that can convert from a string to the appropriate object. If the resource is a file reference, <see
-             cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
+             by using the specified type resolution service that can convert from a string to the appropriate object. If the resource is a file reference, <see cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
 
             
 
@@ -335,7 +325,11 @@
           <para>The object that corresponds to the stored value. </para>
         </returns>
         <param name="typeResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,18 +356,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the stored value currently exists in memory, it is returned directly. If it is stored in the resource file and it is not a file reference, <see
-             cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
+            >If the stored value currently exists in memory, it is returned directly. If it is stored in the resource file and it is not a file reference, <see cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
 
             
 
-             looks in the assemblies identified by names to find the object's corresponding type, and then looks for a <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             looks in the assemblies identified by names to find the object's corresponding type, and then looks for a <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
-             that can convert from a string to the appropriate object. If the resource is a file reference, <see
-             cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
+             that can convert from a string to the appropriate object. If the resource is a file reference, <see cref="M:System.Resources.ResXDataNode.GetValue(System.Reflection.AssemblyName[])" />
 
             
 
@@ -389,7 +380,11 @@
           <para>The object that corresponds to the stored value. </para>
         </returns>
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -423,7 +418,11 @@
           <para>A string that represents the fully qualified name of the type.</para>
         </returns>
         <param name="typeResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -457,7 +456,11 @@
           <para>A string that represents the fully qualified name of the type.</para>
         </returns>
         <param name="names">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -503,13 +506,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Resources.ResXDataNode" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Resources.ResXDataNode" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+             instance is cast to an <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -519,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -528,14 +528,22 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An  object to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

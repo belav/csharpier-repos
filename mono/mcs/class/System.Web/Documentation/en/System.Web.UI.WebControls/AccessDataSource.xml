@@ -25,72 +25,60 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         class is a data source control that works with Microsoft Access databases. Like its base class, <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         class is a data source control that works with Microsoft Access databases. Like its base class, <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-        , the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        , the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
          control uses SQL queries to perform data retrieval.</para
       >
       <para
-        >One of the unique characteristics of the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >One of the unique characteristics of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control is that you do not set the <see
-         cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" />
+         control is that you do not set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" />
 
         
 
-         property. All you need to do is set the location of the Access (.mdb) file in the <see
-         cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
+         property. All you need to do is set the location of the Access (.mdb) file in the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
 
         
 
-         property and the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+         property and the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
          takes care of the underlying connection to the database. You should place Access databases in the App_Data directory of the Web site and reference them by a relative path (for example, ~/App_Data/Northwind.mdb). This location offers additional security for data files, because they are not served if they are requested directly by the client Web browser.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         class does not support connecting to Access databases that are protected by a user name or password, because you cannot set the <see
-         cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" />
+         class does not support connecting to Access databases that are protected by a user name or password, because you cannot set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" />
 
         
 
-         property. If your Access database is protected by a user name or password, use the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         property. If your Access database is protected by a user name or password, use the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
          control to connect to it so that you can specify a complete connection string.</para
       >
       <para
-        >You bind data-bound controls to an <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >You bind data-bound controls to an <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         using the DataSourceID property of the data-bound control. For more information about binding a data-bound control to data source controls, see <format
-         type="text/html">
+         using the DataSourceID property of the data-bound control. For more information about binding a data-bound control to data source controls, see <format type="text/html">
           <a href="e41adfff-8fb8-449e-9cd1-9bd49788c5f7"
             >Binding to Data Using a Data Source Control</a
           >
@@ -101,58 +89,47 @@
         .</para
       >
       <para
-        >Because the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >Because the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control is specific to only one database product, it always uses the same provider—the <see
-         cref="N:System.Data.OleDb" />
+         control is specific to only one database product, it always uses the same provider—the <see cref="N:System.Data.OleDb" />
 
         
 
-         .NET data provider. For this reason, the <see
-         cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" />
+         .NET data provider. For this reason, the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" />
 
         
 
-         property is read-only. When using the <see
-         cref="N:System.Data.OleDb" />
+         property is read-only. When using the <see cref="N:System.Data.OleDb" />
 
         
 
-         provider, the order of the parameters in a parameterized SQL statement is significant; any parameterized SQL queries that you specify in the <see
-         cref="P:System.Web.UI.WebControls.SqlDataSource.SelectCommand" />
+         provider, the order of the parameters in a parameterized SQL statement is significant; any parameterized SQL queries that you specify in the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectCommand" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+        , <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+        , <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
+        , and <see cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
 
         
 
-         properties must match the order of any <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         properties must match the order of any <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         objects that are in the corresponding parameter collection. If no parameter collection is specified on the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+         objects that are in the corresponding parameter collection. If no parameter collection is specified on the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-        , the order of parameters that are supplied to these operations must match the order in which they appear in the underlying SQL statement. For more information, see <format
-         type="text/html">
+        , the order of parameters that are supplied to these operations must match the order in which they appear in the underlying SQL statement. For more information, see <format type="text/html">
           <a href="403ff44a-dd0b-484d-968e-dcd1dcd4c295"
             >Using the SqlDataSource and AccessDataSource Controls with Parameters</a
           >
@@ -163,18 +140,15 @@
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control supports the same caching behavior that its base class supports. Use caching to increase the performance of pages that use the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+         control supports the same caching behavior that its base class supports. Use caching to increase the performance of pages that use the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control. For more information about data source caching, see <format
-         type="text/html">
+         control. For more information about data source caching, see <format type="text/html">
           <a href="8f534a06-3136-4048-bb2e-6563a8238d15">Caching Data using Data Source Controls</a>
         </format>
 
@@ -183,8 +157,7 @@
         .</para
       >
       <para
-        >The following table describes the features of the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >The following table describes the features of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
@@ -207,13 +180,11 @@
           </term>
           <description>
             <para
-              >Set the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
 
               
 
-               property to the <see
-               cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+               property to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
 
               
 
@@ -227,13 +198,11 @@
           </term>
           <description>
             <para
-              >Set the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.FilterExpression" />
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.FilterExpression" />
 
               
 
-               property to a filtering expression used to filter the data when the <see
-               cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+               property to a filtering expression used to filter the data when the <see cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
 
               
 
@@ -247,28 +216,23 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.AccessDataSource" />
+              >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
               
 
-               does not support direct paging operations on an Access database. A data-bound control, such as the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+               does not support direct paging operations on an Access database. A data-bound control, such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
-              , can page over the items returned by the <see
-               cref="T:System.Web.UI.WebControls.AccessDataSource" />
+              , can page over the items returned by the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
               
 
-              , if the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+              , if the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
 
               
 
-               property is set to the <see
-               cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+               property is set to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
 
               
 
@@ -282,8 +246,7 @@
           </term>
           <description>
             <para
-              >Set the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateCommand" />
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateCommand" />
 
               
 
@@ -297,8 +260,7 @@
           </term>
           <description>
             <para
-              >Set the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.DeleteCommand" />
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DeleteCommand" />
 
               
 
@@ -312,8 +274,7 @@
           </term>
           <description>
             <para
-              >Set the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.InsertCommand" />
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.InsertCommand" />
 
               
 
@@ -327,28 +288,23 @@
           </term>
           <description>
             <para
-              >Set the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+              >Set the <see cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
 
               
 
-               property to the <see
-               cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+               property to the <see cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
 
               
 
-               value, the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.EnableCaching" />
+               value, the <see cref="P:System.Web.UI.WebControls.SqlDataSource.EnableCaching" />
 
               
 
-               property to true, and the <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.CacheDuration" />
+               property to true, and the <see cref="P:System.Web.UI.WebControls.SqlDataSource.CacheDuration" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.SqlDataSource.CacheExpirationPolicy" />
+               and <see cref="P:System.Web.UI.WebControls.SqlDataSource.CacheExpirationPolicy" />
 
               
 
@@ -358,61 +314,50 @@
         </item>
       </list>
       <para
-        >As with all data source controls, the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >As with all data source controls, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control is associated with a strongly typed data source view class. Just as the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+         control is associated with a strongly typed data source view class. Just as the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control extends the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         control extends the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-         control, the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
+         control, the <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
 
         
 
-         class extends the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+         class extends the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
 
         
 
-         class. The <see
-         cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
+         class. The <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
 
         
 
-         class overrides a few of the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+         class overrides a few of the <see cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
 
         
 
-         methods to use the <see
-         cref="N:System.Data.OleDb" />
+         methods to use the <see cref="N:System.Data.OleDb" />
 
         
 
          .NET data provider.</para
       >
       <para
-        >There is no visual rendering of the <see
-         cref="T:System.Web.UI.WebControls.AccessDataSource" />
+        >There is no visual rendering of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
         
 
-         control; it is implemented as a control to enable declarative persistence and to permit, optionally, participation in state management. As a result, you cannot set properties that support visual features, such as the <see
-         cref="P:System.Web.UI.DataSourceControl.EnableTheming" />
+         control; it is implemented as a control to enable declarative persistence and to permit, optionally, participation in state management. As a result, you cannot set properties that support visual features, such as the <see cref="P:System.Web.UI.DataSourceControl.EnableTheming" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.DataSourceControl.SkinID" />
+         and <see cref="P:System.Web.UI.DataSourceControl.SkinID" />
 
         
 
@@ -426,59 +371,50 @@
       </format>
       <code
         >&lt;asp:AccessDataSource
-    CacheDuration="string|<codeFeaturedElement
-        >Infinite</codeFeaturedElement>
+    CacheDuration="string|<codeFeaturedElement>Infinite</codeFeaturedElement>
 
         
 
         "
-    CacheExpirationPolicy="<codeFeaturedElement
-        >Absolute</codeFeaturedElement>
+    CacheExpirationPolicy="<codeFeaturedElement>Absolute</codeFeaturedElement>
 
         
 
         |Sliding"
     CacheKeyDependency="string"
-    CancelSelectOnNullParameter="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    CancelSelectOnNullParameter="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    ConflictDetection="<codeFeaturedElement
-        >OverwriteChanges</codeFeaturedElement>
+    ConflictDetection="<codeFeaturedElement>OverwriteChanges</codeFeaturedElement>
 
         
 
         |CompareAllValues"
     DataFile="uri"
-    DataSourceMode="DataReader|<codeFeaturedElement
-        >DataSet</codeFeaturedElement>
+    DataSourceMode="DataReader|<codeFeaturedElement>DataSet</codeFeaturedElement>
 
         
 
         "
     DeleteCommand="string"
-    DeleteCommandType="<codeFeaturedElement
-        >Text</codeFeaturedElement>
+    DeleteCommandType="<codeFeaturedElement>Text</codeFeaturedElement>
 
         
 
         |StoredProcedure"
-    EnableCaching="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    EnableCaching="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    EnableTheming="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    EnableTheming="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -486,8 +422,7 @@
     FilterExpression="string"
     ID="string"
     InsertCommand="string"
-    InsertCommandType="<codeFeaturedElement
-        >Text</codeFeaturedElement>
+    InsertCommandType="<codeFeaturedElement>Text</codeFeaturedElement>
 
         
 
@@ -510,8 +445,7 @@
     OnUpdating="Updating event handler"
     runat="server"
     SelectCommand="string"
-    SelectCommandType="<codeFeaturedElement
-        >Text</codeFeaturedElement>
+    SelectCommandType="<codeFeaturedElement>Text</codeFeaturedElement>
 
         
 
@@ -519,14 +453,12 @@
     SkinID="string"
     SortParameterName="string"
     UpdateCommand="string"
-    UpdateCommandType="<codeFeaturedElement
-        >Text</codeFeaturedElement>
+    UpdateCommandType="<codeFeaturedElement>Text</codeFeaturedElement>
 
         
 
         |StoredProcedure"
-    Visible="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Visible="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -535,15 +467,13 @@
         &lt;DeleteParameters&gt;
                 &lt;asp:ControlParameter
                     ControlID="string"
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -552,8 +482,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -562,16 +491,14 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:CookieParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     CookieName="string"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -579,8 +506,7 @@
                         ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -589,15 +515,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:FormParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -605,8 +529,7 @@
                     FormField="string"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -615,23 +538,20 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:Parameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -640,15 +560,13 @@
                         |Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:ProfileParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -656,8 +574,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -666,15 +583,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:QueryStringParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -682,8 +597,7 @@
                     Name="string"
                     QueryStringField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -692,15 +606,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:SessionParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -708,8 +620,7 @@
                     Name="string"
                     SessionField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -721,15 +632,13 @@
         &lt;FilterParameters&gt;
                 &lt;asp:ControlParameter
                     ControlID="string"
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -737,8 +646,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -747,24 +655,21 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:CookieParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     CookieName="string"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -773,15 +678,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:FormParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -789,8 +692,7 @@
                     FormField="string"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -799,23 +701,20 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:Parameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -824,15 +723,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:ProfileParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -840,8 +737,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -850,15 +746,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:QueryStringParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -866,8 +760,7 @@
                     Name="string"
                     QueryStringField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -876,15 +769,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:SessionParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -892,8 +783,7 @@
                     Name="string"
                     SessionField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -905,15 +795,13 @@
         &lt;InsertParameters&gt;
                 &lt;asp:ControlParameter
                     ControlID="string"
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -921,8 +809,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -931,24 +818,21 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:CookieParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     CookieName="string"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -957,15 +841,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:FormParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -973,8 +855,7 @@
                     FormField="string"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -983,23 +864,20 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:Parameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1008,15 +886,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:ProfileParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1024,8 +900,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1034,15 +909,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:QueryStringParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1050,8 +923,7 @@
                     Name="string"
                     QueryStringField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1060,15 +932,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:SessionParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1076,8 +946,7 @@
                     Name="string"
                     SessionField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1089,15 +958,13 @@
         &lt;SelectParameters&gt;
                 &lt;asp:ControlParameter
                     ControlID="string"
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1105,8 +972,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1115,24 +981,21 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:CookieParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     CookieName="string"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1141,15 +1004,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:FormParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1157,8 +1018,7 @@
                     FormField="string"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1167,23 +1027,20 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:Parameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1192,15 +1049,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:ProfileParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1208,8 +1063,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1218,15 +1072,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:QueryStringParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1234,8 +1086,7 @@
                     Name="string"
                     QueryStringField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1244,15 +1095,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:SessionParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1260,8 +1109,7 @@
                     Name="string"
                     SessionField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1273,15 +1121,13 @@
         &lt;UpdateParameters&gt;
                 &lt;asp:ControlParameter
                     ControlID="string"
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1289,8 +1135,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1299,24 +1144,21 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:CookieParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     CookieName="string"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1325,15 +1167,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:FormParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1341,8 +1181,7 @@
                     FormField="string"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1351,23 +1190,20 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:Parameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
         |Output|InputOutput|ReturnValue"
                     Name="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1376,15 +1212,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:ProfileParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1392,8 +1226,7 @@
                     Name="string"
                     PropertyName="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1402,15 +1235,13 @@
                        Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:QueryStringParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1418,8 +1249,7 @@
                     Name="string"
                     QueryStringField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1428,15 +1258,13 @@
                         Single|Double|Decimal|DateTime|String"
                 /&gt;
                 &lt;asp:SessionParameter
-                    ConvertEmptyStringToNull="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                    ConvertEmptyStringToNull="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
                     DefaultValue="string"
-                    Direction="<codeFeaturedElement
-        >Input</codeFeaturedElement>
+                    Direction="<codeFeaturedElement>Input</codeFeaturedElement>
 
         
 
@@ -1444,8 +1272,7 @@
                     Name="string"
                     SessionField="string"
                     Size="integer"
-                    Type="<codeFeaturedElement
-        >Empty</codeFeaturedElement>
+                    Type="<codeFeaturedElement>Empty</codeFeaturedElement>
 
         
 
@@ -1473,8 +1300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
@@ -1502,13 +1328,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
-             class with the specified data file path and <system
-            >Select</system>
+             class with the specified data file path and <system>Select</system>
 
             
 
@@ -1516,24 +1340,30 @@
           >
         </summary>
         <param name="dataFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location of the Access .mdb file. The location can be relative to the current Web form's folder, an absolute physical path, or a virtual path.</param
         >
         <param name="selectCommand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The SQL query used to retrieve data from the Access database. If the SQL query is a parameterized SQL string, add <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+          The SQL query used to retrieve data from the Access database. If the SQL query is a parameterized SQL string, add <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
-           objects to the <see
-           cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" />
+           objects to the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" />
 
           
 
@@ -1567,33 +1397,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+            >The <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
-             control can be used only with the <see
-             cref="N:System.Data.OleDb" />
+             control can be used only with the <see cref="N:System.Data.OleDb" />
 
             
 
-             .NET data provider, and the connection string that <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+             .NET data provider, and the connection string that <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
-             uses is specific to this provider. Therefore, the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+             uses is specific to this provider. Therefore, the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
-             control exposes connection string settings, such as the <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
+             control exposes connection string settings, such as the <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
 
             
 
-             property, as a property and constructs a connection string at run time using the values of the <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" />
+             property, as a property and constructs a connection string at run time using the values of the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ConnectionString" />
 
             
 
@@ -1626,13 +1450,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+            >Classes that derive from the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
-             class can override the <see
-             cref="M:System.Web.UI.WebControls.AccessDataSource.CreateDataSourceView(System.String)" />
+             class can override the <see cref="M:System.Web.UI.WebControls.AccessDataSource.CreateDataSourceView(System.String)" />
 
             
 
@@ -1646,13 +1468,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
+            >An <see cref="T:System.Web.UI.WebControls.AccessDataSourceView" />
 
             
 
-             object that is associated with the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+             object that is associated with the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
@@ -1660,7 +1480,11 @@
           >
         </returns>
         <param name="viewName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1694,13 +1518,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
+            >The <see cref="P:System.Web.UI.WebControls.AccessDataSource.DataFile" />
 
             
 
-             property is a virtual, absolute, or UNC directory path to the Access .mdb file that the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+             property is a virtual, absolute, or UNC directory path to the Access .mdb file that the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
@@ -1742,13 +1564,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a <see
-             cref="T:System.Data.Common.DbProviderFactory" />
+            >Retrieves a <see cref="T:System.Data.Common.DbProviderFactory" />
 
             
 
-             object that is associated with the .NET data provider that is identified by the <see
-             cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" />
+             object that is associated with the .NET data provider that is identified by the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" />
 
             
 
@@ -1758,8 +1578,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.OleDb.OleDbFactory" />
+            >An <see cref="T:System.Data.OleDb.OleDbFactory" />
 
             
 
@@ -1791,23 +1610,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+            >While the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
-             control exposes the <see
-             cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" />
+             control exposes the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" />
 
             
 
-             property because it is inherited from its base class, attempting to set the <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" />
+             property because it is inherited from its base class, attempting to set the <see cref="P:System.Web.UI.WebControls.AccessDataSource.ProviderName" />
 
             
 
-             property results in a <see
-             cref="T:System.NotSupportedException" />
+             property results in a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1817,8 +1632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the .NET data provider that the <see
-             cref="T:System.Web.UI.WebControls.AccessDataSource" />
+            >Gets the name of the .NET data provider that the <see cref="T:System.Web.UI.WebControls.AccessDataSource" />
 
             
 
@@ -1853,23 +1667,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the base class, <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+            >In the base class, <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" />
+            , the <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" />
 
             
 
-             property gets or sets a semicolon-delimited string that indicates which databases and tables to use for the Microsoft SQL Server cache dependency. Cache dependency is not supported by Microsoft Access, and any access to the <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" />
+             property gets or sets a semicolon-delimited string that indicates which databases and tables to use for the Microsoft SQL Server cache dependency. Cache dependency is not supported by Microsoft Access, and any access to the <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" />
 
             
 
-             property results in a <see
-             cref="T:System.NotSupportedException" />
+             property results in a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1879,13 +1689,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" />
+            >The <see cref="P:System.Web.UI.WebControls.AccessDataSource.SqlCacheDependency" />
 
             
 
-             property overrides the <see
-             cref="P:System.Web.UI.WebControls.SqlDataSource.SqlCacheDependency" />
+             property overrides the <see cref="P:System.Web.UI.WebControls.SqlDataSource.SqlCacheDependency" />
 
             
 

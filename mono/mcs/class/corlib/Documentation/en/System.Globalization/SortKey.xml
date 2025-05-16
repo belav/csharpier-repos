@@ -26,21 +26,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A culture-sensitive comparison of two strings depends on each character in the strings having several categories of sort weights, including script, alphabetic, case, and diacritic weights. A sort key serves as the repository of these weights for a particular string. In particular, the value of a <see
-         cref="T:System.Globalization.SortKey" />
+        >A culture-sensitive comparison of two strings depends on each character in the strings having several categories of sort weights, including script, alphabetic, case, and diacritic weights. A sort key serves as the repository of these weights for a particular string. In particular, the value of a <see cref="T:System.Globalization.SortKey" />
 
         
 
          object is its key data, which is a series of bytes that encode the string, culture-specific sorting rules, and user-specified compare options. A comparison using sort keys consists of a bitwise comparison of the corresponding key data in each sort key. </para
       >
       <para
-        >An instance of the <see
-         cref="T:System.Globalization.SortKey" />
+        >An instance of the <see cref="T:System.Globalization.SortKey" />
 
         
 
-         class is returned by the <see
-         cref="M:System.Globalization.CompareInfo.GetSortKey(System.String)" />
+         class is returned by the <see cref="M:System.Globalization.CompareInfo.GetSortKey(System.String)" />
 
         
 
@@ -50,49 +47,41 @@
         <h2>Performance Considerations</h2>
       </format>
       <para
-        >When performing a string comparison, the <see
-         cref="M:System.Globalization.SortKey.Compare(System.Globalization.SortKey,System.Globalization.SortKey)" />
+        >When performing a string comparison, the <see cref="M:System.Globalization.SortKey.Compare(System.Globalization.SortKey,System.Globalization.SortKey)" />
 
         
 
-         and <see
-         cref="Overload:System.Globalization.CompareInfo.Compare" />
+         and <see cref="Overload:System.Globalization.CompareInfo.Compare" />
 
         
 
          methods yield the same results. </para
       >
       <para
-        >In effect, the <see
-         cref="Overload:System.Globalization.CompareInfo.Compare" />
+        >In effect, the <see cref="Overload:System.Globalization.CompareInfo.Compare" />
 
         
 
-         method generates the sort key for each string, performs the comparison, then discards the sort key and returns the result of the comparison. In fact, the <see
-         cref="Overload:System.Globalization.CompareInfo.Compare" />
+         method generates the sort key for each string, performs the comparison, then discards the sort key and returns the result of the comparison. In fact, the <see cref="Overload:System.Globalization.CompareInfo.Compare" />
 
         
 
-         method does not generate an entire sort key and then perform the comparison. Instead, the method generates the key data for each text element, that is, base character, surrogate pair, or combining character sequence, in each string. The method then compares the key data for the corresponding text elements. The operation terminates as soon as the ultimate result of the comparison is determined. Sort key information is computed, but no <see
-         cref="T:System.Globalization.SortKey" />
+         method does not generate an entire sort key and then perform the comparison. Instead, the method generates the key data for each text element, that is, base character, surrogate pair, or combining character sequence, in each string. The method then compares the key data for the corresponding text elements. The operation terminates as soon as the ultimate result of the comparison is determined. Sort key information is computed, but no <see cref="T:System.Globalization.SortKey" />
 
         
 
          object is created. This strategy is economical in terms of performance if both strings are compared once, but becomes expensive if the same strings are compared many times. </para
       >
       <para
-        >The <see
-         cref="M:System.Globalization.SortKey.Compare(System.Globalization.SortKey,System.Globalization.SortKey)" />
+        >The <see cref="M:System.Globalization.SortKey.Compare(System.Globalization.SortKey,System.Globalization.SortKey)" />
 
         
 
-         method requires generation of a <see
-         cref="T:System.Globalization.SortKey" />
+         method requires generation of a <see cref="T:System.Globalization.SortKey" />
 
         
 
-         object for each string before performing the comparison. This strategy is expensive in terms of performance for the first comparison because of the time and memory invested to generate the <see
-         cref="T:System.Globalization.SortKey" />
+         object for each string before performing the comparison. This strategy is expensive in terms of performance for the first comparison because of the time and memory invested to generate the <see cref="T:System.Globalization.SortKey" />
 
         
 
@@ -103,36 +92,30 @@
         <h2>Security Considerations</h2>
       </format>
       <para
-        >The <see
-         cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
+        >The <see cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
 
         
 
-         method returns a <see
-         cref="T:System.Globalization.SortKey" />
+         method returns a <see cref="T:System.Globalization.SortKey" />
 
         
 
-         object with the value based on a specified string and <see
-         cref="T:System.Globalization.CompareOptions" />
+         object with the value based on a specified string and <see cref="T:System.Globalization.CompareOptions" />
 
         
 
-         value, and the culture associated with the underlying <see
-         cref="T:System.Globalization.CompareInfo" />
+         value, and the culture associated with the underlying <see cref="T:System.Globalization.CompareInfo" />
 
         
 
-         object. If a security decision depends on a string comparison or case change, the application should use the <see
-         cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
+         object. If a security decision depends on a string comparison or case change, the application should use the <see cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
 
         
 
          method of the invariant culture to ensure that the behavior of the operation is consistent, regardless of the culture settings of the operating system. </para
       >
       <para
-        >The application should use the following steps to obtain the <see
-         cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
+        >The application should use the following steps to obtain the <see cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
 
         
 
@@ -141,8 +124,7 @@
       <list type="ordered">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >Use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
@@ -151,13 +133,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.Globalization.CultureInfo.CompareInfo" />
+            >Use the <see cref="P:System.Globalization.CultureInfo.CompareInfo" />
 
             
 
-             property of the invariant culture to obtain a <see
-             cref="T:System.Globalization.CompareInfo" />
+             property of the invariant culture to obtain a <see cref="T:System.Globalization.CompareInfo" />
 
             
 
@@ -166,13 +146,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
+            >Use the <see cref="M:System.Globalization.CompareInfo.GetSortKey(System.String,System.Globalization.CompareOptions)" />
 
             
 
-             method of the <see
-             cref="T:System.Globalization.CompareInfo" />
+             method of the <see cref="T:System.Globalization.CompareInfo" />
 
             
 
@@ -181,8 +159,7 @@
         </item>
       </list>
       <para
-        >Working with the value of a <see
-         cref="T:System.Globalization.SortKey" />
+        >Working with the value of a <see cref="T:System.Globalization.SortKey" />
 
         
 
@@ -193,13 +170,11 @@
 
         
 
-         objects can be serialized, but only so that they can cross <see
-         cref="T:System.AppDomain" />
+         objects can be serialized, but only so that they can cross <see cref="T:System.AppDomain" />
 
         
 
-         objects. If an application serializes a <see
-         cref="T:System.Globalization.SortKey" />
+         objects. If an application serializes a <see cref="T:System.Globalization.SortKey" />
 
         
 
@@ -207,7 +182,9 @@
       >
       <para
         >For more information about sort keys, see Unicode Technical Standard #10, "Unicode Collation Algorithm" at the <see
-         cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode home page</see>
+          cref="http://go.microsoft.com/fwlink/?linkid=37123"
+          >Unicode home page</see
+        >
 
         
 
@@ -246,28 +223,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Globalization.SortKey.Compare(System.Globalization.SortKey,System.Globalization.SortKey)" />
+            >The <see cref="M:System.Globalization.SortKey.Compare(System.Globalization.SortKey,System.Globalization.SortKey)" />
 
             
 
-             method compares the <see
-             cref="P:System.Globalization.SortKey.KeyData" />
+             method compares the <see cref="P:System.Globalization.SortKey.KeyData" />
 
             
 
-             properties of the <paramref
-             name="sortkey1" />
+             properties of the <paramref name="sortkey1" />
 
             
 
-             and <paramref
-             name="sortkey2" />
+             and <paramref name="sortkey2" />
 
             
 
-             parameters. The method yields the same results as the <see
-             cref="M:System.Globalization.CompareInfo.Compare(System.String,System.String)" />
+             parameters. The method yields the same results as the <see cref="M:System.Globalization.CompareInfo.Compare(System.String,System.String)" />
 
             
 
@@ -281,13 +253,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relationship between <paramref
-             name="sortkey1" />
+            >A signed integer that indicates the relationship between <paramref name="sortkey1" />
 
             
 
-             and <paramref
-             name="sortkey2" />
+             and <paramref name="sortkey2" />
 
             
 
@@ -314,8 +284,7 @@
 
                   
 
-                   is less than <paramref
-                   name="sortkey2" />
+                   is less than <paramref name="sortkey2" />
 
                   
 
@@ -333,8 +302,7 @@
 
                   
 
-                   is equal to <paramref
-                   name="sortkey2" />
+                   is equal to <paramref name="sortkey2" />
 
                   
 
@@ -352,8 +320,7 @@
 
                   
 
-                   is greater than <paramref
-                   name="sortkey2" />
+                   is greater than <paramref name="sortkey2" />
 
                   
 
@@ -364,14 +331,22 @@
           </list>
         </returns>
         <param name="sortkey1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first sort key to compare. </param
         >
         <param name="sortkey2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -401,21 +376,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.Globalization.SortKey" />
+            >Two <see cref="T:System.Globalization.SortKey" />
 
             
 
-             objects are considered equal if their <see
-             cref="P:System.Globalization.SortKey.KeyData" />
+             objects are considered equal if their <see cref="P:System.Globalization.SortKey.KeyData" />
 
             
 
              properties are equal.</para
           >
           <para
-            >This method overrides <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method overrides <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -425,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object is equal to the current <see
-             cref="T:System.Globalization.SortKey" />
+            >Determines whether the specified object is equal to the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -436,13 +407,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="value" />
+            >true if the <paramref name="value" />
 
             
 
-             parameter is equal to the current <see
-             cref="T:System.Globalization.SortKey" />
+             parameter is equal to the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -450,12 +419,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare with the current <see
-           cref="T:System.Globalization.SortKey" />
+          The object to compare with the current <see cref="T:System.Globalization.SortKey" />
 
           
 
@@ -483,16 +455,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method generates the same hash code for two objects that are equal according to the <see
-             cref="M:System.Globalization.SortKey.Equals(System.Object)" />
+            >This method generates the same hash code for two objects that are equal according to the <see cref="M:System.Globalization.SortKey.Equals(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This method overrides <see
-             cref="M:System.Object.GetHashCode" />
+            >This method overrides <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -502,8 +472,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the current <see
-             cref="T:System.Globalization.SortKey" />
+            >Serves as a hash function for the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -513,8 +482,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Globalization.SortKey" />
+            >A hash code for the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -541,8 +509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the byte array representing the current <see
-             cref="T:System.Globalization.SortKey" />
+            >Gets the byte array representing the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -569,8 +536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the original string used to create the current <see
-             cref="T:System.Globalization.SortKey" />
+            >Gets the original string used to create the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -599,21 +565,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value is the concatenation of the string "SortKey - ", the culture identifier and compare options of the current <see
-             cref="T:System.Globalization.SortKey" />
+            >The return value is the concatenation of the string "SortKey - ", the culture identifier and compare options of the current <see cref="T:System.Globalization.SortKey" />
 
             
 
-             object, and the value of the <see
-             cref="P:System.Globalization.SortKey.OriginalString" />
+             object, and the value of the <see cref="P:System.Globalization.SortKey.OriginalString" />
 
             
 
              property.</para
           >
           <para
-            >This method overrides <see
-             cref="M:System.Object.ToString" />
+            >This method overrides <see cref="M:System.Object.ToString" />
 
             
 
@@ -623,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Globalization.SortKey" />
+            >Returns a string that represents the current <see cref="T:System.Globalization.SortKey" />
 
             
 
@@ -634,8 +596,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Globalization.SortKey" />
+            >A string that represents the current <see cref="T:System.Globalization.SortKey" />
 
             
 

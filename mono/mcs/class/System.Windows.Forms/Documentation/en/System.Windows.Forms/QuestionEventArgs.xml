@@ -14,23 +14,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is currently used with the <see
-         cref="E:System.Windows.Forms.DataGridView.CancelRowEdit" />
+        >This class is currently used with the <see cref="E:System.Windows.Forms.DataGridView.CancelRowEdit" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.DataGridView.RowDirtyStateNeeded" />
+         and <see cref="E:System.Windows.Forms.DataGridView.RowDirtyStateNeeded" />
 
         
 
-         events of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         events of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control. It allows you to specify a response to events that occur when the control needs the answer to a question. The answer to the question is specified by setting the <see
-         cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+         control. It allows you to specify a response to events that occur when the control needs the answer to a question. The answer to the question is specified by setting the <see cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
 
         
 
@@ -53,13 +49,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.QuestionEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.QuestionEventArgs" />
 
             
 
-             class using a default <see
-             cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+             class using a default <see cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
 
             
 
@@ -83,13 +77,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.QuestionEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.QuestionEventArgs" />
 
             
 
-             class using the specified default value for the <see
-             cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+             class using the specified default value for the <see cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
 
             
 
@@ -97,12 +89,15 @@
           >
         </summary>
         <param name="response">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default value of the <see
-           cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
+          The default value of the <see cref="P:System.Windows.Forms.QuestionEventArgs.Response" />
 
           
 

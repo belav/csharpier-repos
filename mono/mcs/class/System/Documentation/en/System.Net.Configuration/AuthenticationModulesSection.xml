@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="10fcfaad-82ef-4692-871a-0aec9dfbe75e"
             >AuthenticationModules Element (Network Settings)</a
           >
@@ -37,13 +36,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to access information about modules registered to authenticate requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to access information about modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -74,13 +71,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds the <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" />
+            >This constructor adds the <see cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" />
 
             
 
-             class to the <see
-             cref="P:System.Configuration.ConfigurationElement.Properties" />
+             class to the <see cref="P:System.Configuration.ConfigurationElement.Properties" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.AuthenticationModulesSection" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModulesSection" />
 
             
 
@@ -128,13 +122,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" />
+            >The <see cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" />
 
             
 
-             returned by this property contains one <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+             returned by this property contains one <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
             
 
@@ -228,8 +220,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see
-             cref="P:System.Net.Configuration.AuthenticationModulesSection.AuthenticationModules" />
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.AuthenticationModulesSection.AuthenticationModules" />
 
             
 

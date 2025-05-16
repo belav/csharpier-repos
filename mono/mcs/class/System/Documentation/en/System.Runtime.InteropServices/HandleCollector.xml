@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.HandleCollector" />
+        >The <see cref="T:System.Runtime.InteropServices.HandleCollector" />
 
         
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.HandleCollector" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.HandleCollector" />
 
             
 
@@ -64,14 +62,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name for the collector. This parameter allows you to name collectors that track handle types separately.</param
         >
         <param name="initialThreshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -103,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.HandleCollector" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.HandleCollector" />
 
             
 
@@ -112,21 +117,33 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name for the collector.  This parameter allows you to name collectors that track handle types separately.</param
         >
         <param name="initialThreshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A value that specifies the point at which collections should begin.</param
         >
         <param name="maximumThreshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of a <see
-             cref="T:System.Runtime.InteropServices.HandleCollector" />
+            >Gets the name of a <see cref="T:System.Runtime.InteropServices.HandleCollector" />
 
             
 

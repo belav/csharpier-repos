@@ -96,7 +96,11 @@
           <para>The zero-based index of the specified property value. If the object is not found, the return value is -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,7 +139,11 @@
           <para>Removes the schema name that is at a specified index from this collection.          </para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,8 +292,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
@@ -328,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.DirectoryServices.SchemaNameCollection.Count" />
+            >The <see cref="P:System.DirectoryServices.SchemaNameCollection.Count" />
 
             
 
@@ -360,13 +366,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a list of the schema names that the <see
-         cref="P:System.DirectoryServices.DirectoryEntries.SchemaFilter" />
+        >Contains a list of the schema names that the <see cref="P:System.DirectoryServices.DirectoryEntries.SchemaFilter" />
 
         
 
-         property of a <see
-         cref="T:System.DirectoryServices.DirectoryEntries" />
+         property of a <see cref="T:System.DirectoryServices.DirectoryEntries" />
 
         
 

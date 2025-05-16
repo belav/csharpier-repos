@@ -20,33 +20,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is typically thrown when there are too many headers or headers are missing from the message. This can include infrastructure headers such as the Action and Reliable Message headers. This exception derives from <see
-         cref="T:System.ServiceModel.ProtocolException" />
+        >This exception is typically thrown when there are too many headers or headers are missing from the message. This can include infrastructure headers such as the Action and Reliable Message headers. This exception derives from <see cref="T:System.ServiceModel.ProtocolException" />
 
         
 
-        , which in turn derives from <see
-         cref="T:System.ServiceModel.CommunicationException" />
+        , which in turn derives from <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-        . The <see
-         cref="T:System.ServiceModel.CommunicationException" />
+        . The <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-         class represents a class of recoverable errors that may be thrown during communication between endpoints and that robust indigo1 client and service applications are expected to handle. To prevent the more generic <see
-         cref="T:System.ServiceModel.CommunicationException" />
+         class represents a class of recoverable errors that may be thrown during communication between endpoints and that robust indigo1 client and service applications are expected to handle. To prevent the more generic <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-         handler from catching the more specific <see
-         cref="T:System.ServiceModel.ProtocolException" />
+         handler from catching the more specific <see cref="T:System.ServiceModel.ProtocolException" />
 
         
 
-        , catch this exception prior to handling <see
-         cref="T:System.ServiceModel.CommunicationException" />
+        , catch this exception prior to handling <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
@@ -75,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -107,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -142,13 +134,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
-             class used to deserialize data into a <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+             class used to deserialize data into a <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -156,24 +146,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -203,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -212,14 +207,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception message.</param
         >
         <param name="isDuplicate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -251,18 +254,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this constructor when you want to pass an error message and information about an inner exception up to the user. The content of the message parameter should be understandable to the intended users.</para>
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -272,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -305,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -314,21 +312,33 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception message.</param
         >
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the message header.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -360,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -369,28 +378,44 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception message.</param
         >
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the message header.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the message header.</param
         >
         <param name="isDuplicate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -422,8 +447,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -431,33 +455,48 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception message.</param
         >
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the message header.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the message header.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -490,8 +529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageHeaderException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageHeaderException" />
 
             
 
@@ -499,40 +537,59 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception message.</param
         >
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the message header.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the message header.</param
         >
         <param name="isDuplicate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the multiple message header is a duplicate; false if there are no message headers.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 

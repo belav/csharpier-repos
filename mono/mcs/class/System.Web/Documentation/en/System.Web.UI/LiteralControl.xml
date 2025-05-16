@@ -29,54 +29,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET compiles all HTML elements and readable text that do not require server-side processing into instances of this class. For example, an HTML element that does not contain a runat="server" attribute/value pair in its opening tag is compiled into a <see
-         cref="T:System.Web.UI.LiteralControl" />
+        >ASP.NET compiles all HTML elements and readable text that do not require server-side processing into instances of this class. For example, an HTML element that does not contain a runat="server" attribute/value pair in its opening tag is compiled into a <see cref="T:System.Web.UI.LiteralControl" />
 
         
 
-         object. <see
-         cref="T:System.Web.UI.LiteralControl" />
+         object. <see cref="T:System.Web.UI.LiteralControl" />
 
         
 
-         objects do not maintain view state, so the contents of a <see
-         cref="T:System.Web.UI.LiteralControl" />
+         objects do not maintain view state, so the contents of a <see cref="T:System.Web.UI.LiteralControl" />
 
         
 
          object must be recreated on each request.</para
       >
       <para
-        >Literal controls behave as text holders, meaning that you can extract text from the literal control and remove the literal control from the parent server control's <see
-         cref="T:System.Web.UI.ControlCollection" />
+        >Literal controls behave as text holders, meaning that you can extract text from the literal control and remove the literal control from the parent server control's <see cref="T:System.Web.UI.ControlCollection" />
 
         
 
-         collection through the parent's <see
-         cref="P:System.Web.UI.Control.Controls" />
+         collection through the parent's <see cref="P:System.Web.UI.Control.Controls" />
 
         
 
-         property. Therefore, when you develop a custom control derived from the <see
-         cref="T:System.Web.UI.LiteralControl" />
+         property. Therefore, when you develop a custom control derived from the <see cref="T:System.Web.UI.LiteralControl" />
 
         
 
-         class, make sure your control performs any required preprocessing steps itself, rather than using a call to the <see
-         cref="M:System.Web.UI.LiteralControl.Render(System.Web.UI.HtmlTextWriter)" />
+         class, make sure your control performs any required preprocessing steps itself, rather than using a call to the <see cref="M:System.Web.UI.LiteralControl.Render(System.Web.UI.HtmlTextWriter)" />
 
         
 
          method to accomplish them. Typically, you would do this to improve the response time of your Web application.</para
       >
       <para
-        >You can add or remove literal controls from a page or server control programmatically using the <see
-         cref="M:System.Web.UI.ControlCollection.Add(System.Web.UI.Control)" />
+        >You can add or remove literal controls from a page or server control programmatically using the <see cref="M:System.Web.UI.ControlCollection.Add(System.Web.UI.Control)" />
 
         
 
-         or the <see
-         cref="M:System.Web.UI.ControlCollection.Remove(System.Web.UI.Control)" />
+         or the <see cref="M:System.Web.UI.ControlCollection.Remove(System.Web.UI.Control)" />
 
         
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.LiteralControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -125,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.LiteralControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -134,7 +123,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,8 +153,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, <see
-             cref="T:System.Web.UI.LiteralControl" />
+            >By default, <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -171,13 +163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >Creates an <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
-             object for the current instance of the <see
-             cref="T:System.Web.UI.LiteralControl" />
+             object for the current instance of the <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -187,8 +177,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.EmptyControlCollection" />
+            >The <see cref="T:System.Web.UI.EmptyControlCollection" />
 
             
 
@@ -214,25 +203,19 @@
         <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="writer"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a custom server control and want to render specific HTML or text to a client, you can improve the performance of the control by passing the value of the <see
-             cref="P:System.Web.UI.LiteralControl.Text" />
+            >When you create a custom server control and want to render specific HTML or text to a client, you can improve the performance of the control by passing the value of the <see cref="P:System.Web.UI.LiteralControl.Text" />
 
             
 
-             property to the <see
-             cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
+             property to the <see cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method rather than calling the <see
-             cref="M:System.Web.UI.LiteralControl.Render(System.Web.UI.HtmlTextWriter)" />
+             method rather than calling the <see cref="M:System.Web.UI.LiteralControl.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -242,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the content of the <see
-             cref="T:System.Web.UI.LiteralControl" />
+            >Writes the content of the <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
@@ -269,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text content of the <see
-             cref="T:System.Web.UI.LiteralControl" />
+            >Gets or sets the text content of the <see cref="T:System.Web.UI.LiteralControl" />
 
             
 

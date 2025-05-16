@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default implementation of the <see
-         cref="T:System.ComponentModel.Design.IComponentDiscoveryService" />
+        >The default implementation of the <see cref="T:System.ComponentModel.Design.IComponentDiscoveryService" />
 
         
 
@@ -58,59 +57,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.IComponentDiscoveryService.GetComponentTypes(System.ComponentModel.Design.IDesignerHost,System.Type)" />
+            >The <see cref="M:System.ComponentModel.Design.IComponentDiscoveryService.GetComponentTypes(System.ComponentModel.Design.IDesignerHost,System.Type)" />
 
             
 
-             method retrieves the list of available component types, which are types implementing the <see
-             cref="T:System.ComponentModel.IComponent" />
+             method retrieves the list of available component types, which are types implementing the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             interface. If the <paramref
-             name="baseType" />
+             interface. If the <paramref name="baseType" />
 
             
 
-             parameter is null, all components are retrieved; otherwise, only component types derived from <paramref
-             name="baseType" />
+             parameter is null, all components are retrieved; otherwise, only component types derived from <paramref name="baseType" />
 
             
 
              are returned.</para
           >
           <para
-            >When you pass in a value for the <paramref
-             name="designerHost" />
+            >When you pass in a value for the <paramref name="designerHost" />
 
             
 
-             parameter, type resolution is scoped to <paramref
-             name="designerHost" />
+             parameter, type resolution is scoped to <paramref name="designerHost" />
 
             
 
-            . This means that if there is a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            . This means that if there is a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
-             whose type is on disk, and not in the global assembly cache, its type will fail to load through <paramref
-             name="designerHost" />
+             whose type is on disk, and not in the global assembly cache, its type will fail to load through <paramref name="designerHost" />
 
             
 
             .</para
           >
           <para
-            >If you pass in null for <paramref
-             name="designerHost" />
+            >If you pass in null for <paramref name="designerHost" />
 
             
 
-            , it returns all types that can be queried from the global assembly cache or the <see
-             cref="Overload:System.Reflection.Assembly.LoadFrom" />
+            , it returns all types that can be queried from the global assembly cache or the <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
             
 
@@ -126,14 +115,22 @@
           <para>The list of available component types.</para>
         </returns>
         <param name="designerHost">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The designer host providing design-time services. Can be null.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

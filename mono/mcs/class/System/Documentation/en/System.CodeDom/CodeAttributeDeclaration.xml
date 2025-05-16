@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeAttributeDeclaration" />
+        >A <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
         
 
-         can be used to represent an expression that declares an attribute. The attribute name and the arguments for the attribute are stored as properties of the object. A <see
-         cref="T:System.CodeDom.CodeAttributeArgument" />
+         can be used to represent an expression that declares an attribute. The attribute name and the arguments for the attribute are stored as properties of the object. A <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
         
 
@@ -68,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -99,18 +96,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="attributeType" />
+            >The <paramref name="attributeType" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" />
+             parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" />
 
             
 
-             and <see
-             cref="P:System.CodeDom.CodeAttributeDeclaration.Name" />
+             and <see cref="P:System.CodeDom.CodeAttributeDeclaration.Name" />
 
             
 
@@ -120,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -129,12 +122,15 @@
           >
         </summary>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          The <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
@@ -163,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -172,7 +167,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,33 +207,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="attributeType" />
+            >The <paramref name="attributeType" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" />
+             parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.AttributeType" />
 
             
 
-             and <see
-             cref="P:System.CodeDom.CodeAttributeDeclaration.Name" />
+             and <see cref="P:System.CodeDom.CodeAttributeDeclaration.Name" />
 
             
 
-             properties, and the <paramref
-             name="arguments" />
+             properties, and the <paramref name="arguments" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.CodeDom.CodeAttributeDeclaration.Arguments" />
+             parameter is used to set the <see cref="P:System.CodeDom.CodeAttributeDeclaration.Arguments" />
 
             
 
-             property for the <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+             property for the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -244,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -253,24 +245,30 @@
           >
         </summary>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          The <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
            that identifies the attribute.</param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 
@@ -309,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeAttributeDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeAttributeDeclaration" />
 
             
 
@@ -318,19 +315,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute. </param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeAttributeArgument" />
+          An array of type <see cref="T:System.CodeDom.CodeAttributeArgument" />
 
           
 

@@ -23,36 +23,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.DataObjectAttribute" />
+        >Use the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
         
 
-         attribute to identify an object as suitable for use by an <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+         attribute to identify an object as suitable for use by an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
-         object. Design-time classes such as the <see
-         cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
+         object. Design-time classes such as the <see cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
         
 
-         class use the <see
-         cref="T:System.ComponentModel.DataObjectAttribute" />
+         class use the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
         
 
-         attribute to present suitable objects to bind to an <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+         attribute to present suitable objects to bind to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
          object.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -64,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Identifies a type as an object suitable for binding to an <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+        >Identifies a type as an object suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
@@ -90,13 +83,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+            >The <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
 
             
 
-             property is set to true when you use the <see
-             cref="M:System.ComponentModel.DataObjectAttribute.#ctor" />
+             property is set to true when you use the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor" />
 
             
 
@@ -106,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
@@ -134,31 +124,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ComponentModel.DataObjectAttribute.#ctor(System.Boolean)" />
+            >Use the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor to indicate to a design-time class such as the <see
-             cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
+             constructor to indicate to a design-time class such as the <see cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
             
 
-             class that an object should be excluded from the list of suitable objects for binding to an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+             class that an object should be excluded from the list of suitable objects for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+            >The <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
 
             
 
-             property is set to the value of the <paramref
-             name="isDataObject" />
+             property is set to the value of the <paramref name="isDataObject" />
 
             
 
@@ -168,13 +153,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
-             class and indicates whether an object is suitable for binding to an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+             class and indicates whether an object is suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
@@ -182,12 +165,15 @@
           >
         </summary>
         <param name="isDataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the object is suitable for binding to an <see
-           cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+          true if the object is suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
           
 
@@ -216,18 +202,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.DataObjectAttribute.DataObject" />
+            >The <see cref="F:System.ComponentModel.DataObjectAttribute.DataObject" />
 
             
 
-             field returns a new <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+             field returns a new <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
-             object with the <see
-             cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+             object with the <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
 
             
 
@@ -237,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the class is suitable for binding to an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >Indicates that the class is suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
@@ -268,23 +250,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.DataObjectAttribute.Default" />
+            >The <see cref="F:System.ComponentModel.DataObjectAttribute.Default" />
 
             
 
-             field defines an instance of the <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+             field defines an instance of the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
-             class initialized with the <see
-             cref="M:System.ComponentModel.DataObjectAttribute.#ctor" />
+             class initialized with the <see cref="M:System.ComponentModel.DataObjectAttribute.#ctor" />
 
             
 
-             constructor, which sets the <see
-             cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+             constructor, which sets the <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
 
             
 
@@ -294,13 +272,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default value of the <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+            >Represents the default value of the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
-             class, which indicates that the class is suitable for binding to an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+             class, which indicates that the class is suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
@@ -330,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines whether this instance of <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+            >This method determines whether this instance of <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
@@ -341,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether this instance of <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+            >Determines whether this instance of <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
@@ -352,8 +326,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this instance is the same as the instance specified by the <paramref
-             name="obj" />
+            >true if this instance is the same as the instance specified by the <paramref name="obj" />
 
             
 
@@ -361,12 +334,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare with this instance of <see
-           cref="T:System.ComponentModel.DataObjectAttribute" />
+          An object to compare with this instance of <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
           
 
@@ -418,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether an object should be considered suitable for binding to an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >Gets a value indicating whether an object should be considered suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
@@ -476,18 +451,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.DataObjectAttribute.NonDataObject" />
+            >The <see cref="F:System.ComponentModel.DataObjectAttribute.NonDataObject" />
 
             
 
-             field returns a new <see
-             cref="T:System.ComponentModel.DataObjectAttribute" />
+             field returns a new <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
             
 
-             object with the <see
-             cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+             object with the <see cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
 
             
 
@@ -497,8 +469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the class is not suitable for binding to an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >Indicates that the class is not suitable for binding to an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 

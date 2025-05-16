@@ -35,38 +35,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
         
 
-         control to create a single-line text box that allows the user to enter text or a password. The <see
-         cref="P:System.Web.UI.HtmlControls.HtmlInputText.MaxLength" />
+         control to create a single-line text box that allows the user to enter text or a password. The <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.MaxLength" />
 
         
 
-         property specifies the maximum number of characters that can be entered in the text box. The <see
-         cref="P:System.Web.UI.HtmlControls.HtmlInputText.Size" />
+         property specifies the maximum number of characters that can be entered in the text box. The <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Size" />
 
         
 
-         property allows you to specify the width of the text box. To determine the value entered by the user into text box, use the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+         property allows you to specify the width of the text box. To determine the value entered by the user into text box, use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
 
         
 
-         property. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+         property. The <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
         
 
-         control provides a <see
-         cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+         control provides a <see cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
         
 
-         event that is raised when the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+         event that is raised when the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
 
         
 
@@ -74,13 +67,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+          >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
           
 
-           control does not provide a built-in way to post back to the server. You must provide another control on the Web page that supports posting to the server, such as an <see
-           cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+           control does not provide a built-in way to post back to the server. You must provide another control on the Web page that supports posting to the server, such as an <see cref="T:System.Web.UI.HtmlControls.HtmlButton" />
 
           
 
@@ -88,21 +79,18 @@
         >
       </block>
       <para
-        >To create a multi-line text box, use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+        >To create a multi-line text box, use the <see cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
 
         
 
          control.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlInputText.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.#ctor" />
 
         
 
@@ -124,16 +112,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
              control using default values. It creates a text type text box control.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -165,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -190,16 +175,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
              control using the specified input control type. It allows you to create a specific type of text box control, such as password. Only the password or text type is currently supported. This constructor is designed to allow you to create other text box types if they become available.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -224,8 +207,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="type" />
+                  >The value of the <paramref name="type" />
 
                   
 
@@ -241,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -250,7 +231,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -285,26 +270,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method checks to see whether the postback value of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+             method checks to see whether the postback value of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
              control is different from its previous value, and if so, returns true. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -314,8 +295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes the postback data for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >Processes the postback data for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -325,8 +305,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -334,14 +313,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -361,8 +348,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputText.MaxLength" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.MaxLength" />
 
             
 
@@ -400,23 +386,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnPreRender(System.EventArgs)" />
 
             
 
-             method is called just prior to rendering the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+             method is called just prior to rendering the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
-             control. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnPreRender(System.EventArgs)" />
+             control. The <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnPreRender(System.EventArgs)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -426,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -435,12 +416,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -465,13 +449,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
             
 
-             event is raised when the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+             event is raised when the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
 
             
 
@@ -479,8 +461,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The control must have view state enabled for the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+              >The control must have view state enabled for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
               
 
@@ -488,8 +469,7 @@
             >
           </block>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -498,8 +478,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnServerChange(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnServerChange(System.EventArgs)" />
 
             
 
@@ -509,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+            >Raises the <see cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
             
 
@@ -518,12 +496,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -549,13 +530,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.RaisePostDataChangedEvent" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -565,13 +544,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnServerChange(System.EventArgs)" />
+            >Calls the <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.OnServerChange(System.EventArgs)" />
 
             
 
-             method to signal the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+             method to signal the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -618,13 +595,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
-             control's attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -632,12 +607,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -660,13 +638,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
             
 
-             event is raised when the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+             event is raised when the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
 
             
 
@@ -674,8 +650,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The control must have view state enabled for the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
+              >The control must have view state enabled for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputText.ServerChange" />
 
               
 
@@ -683,8 +658,7 @@
             >
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -696,8 +670,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+            >Occurs when the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
 
             
 
@@ -722,8 +695,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputText.Size" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Size" />
 
             
 
@@ -773,13 +745,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             interface method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             interface method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -789,8 +759,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
             
 
@@ -798,14 +767,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -832,13 +809,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
-             interface method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputText.RaisePostDataChangedEvent" />
+             interface method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputText.RaisePostDataChangedEvent" />
 
             
 
@@ -855,15 +830,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputText.Value" />
 
             
 
@@ -871,8 +842,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If you specify a value for a password type <see
-               cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+              >If you specify a value for a password type <see cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
 
               
 

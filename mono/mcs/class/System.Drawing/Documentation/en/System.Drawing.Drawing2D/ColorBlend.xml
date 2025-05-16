@@ -31,8 +31,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.ColorBlend" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
             
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.ColorBlend" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
             
 
@@ -66,12 +64,15 @@
           >
         </summary>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of colors and positions in this <see
-           cref="T:System.Drawing.Drawing2D.ColorBlend" />
+          The number of colors and positions in this <see cref="T:System.Drawing.Drawing2D.ColorBlend" />
 
           
 
@@ -95,13 +96,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is an array of <see
-             cref="T:System.Drawing.Color" />
+            >This property is an array of <see cref="T:System.Drawing.Color" />
 
             
 
-             structures that represents the colors to use at corresponding positions along a gradient. Along with the <see
-             cref="P:System.Drawing.Drawing2D.ColorBlend.Positions" />
+             structures that represents the colors to use at corresponding positions along a gradient. Along with the <see cref="P:System.Drawing.Drawing2D.ColorBlend.Positions" />
 
             
 
@@ -131,8 +130,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The elements of this array specify percentages of distance along the gradient line. For example, an element value of 0.2f specifies that this point is 20 percent of the total distance from the starting point. The elements in this array are represented by float values between 0.0f and 1.0f, and the first element of the array must be 0.0f and the last element must be 1.0f.</para>
           <para
-            >Along with the <see
-             cref="P:System.Drawing.Drawing2D.ColorBlend.Colors" />
+            >Along with the <see cref="P:System.Drawing.Drawing2D.ColorBlend.Colors" />
 
             
 

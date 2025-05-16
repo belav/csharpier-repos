@@ -47,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes a Hash-based Message Authentication Code (HMAC) by using the <see
-         cref="T:System.Security.Cryptography.RIPEMD160" />
+        >Computes a Hash-based Message Authentication Code (HMAC) by using the <see cref="T:System.Security.Cryptography.RIPEMD160" />
 
         
 
@@ -85,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.HMACRIPEMD160" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMACRIPEMD160" />
 
             
 
@@ -124,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.HMACRIPEMD160" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMACRIPEMD160" />
 
             
 
@@ -133,12 +130,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The secret key for <see
-           cref="T:System.Security.Cryptography.HMACRIPEMD160" />
+          The secret key for <see cref="T:System.Security.Cryptography.HMACRIPEMD160" />
 
           
 

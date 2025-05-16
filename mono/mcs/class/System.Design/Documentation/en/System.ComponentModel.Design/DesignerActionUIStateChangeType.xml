@@ -15,18 +15,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeType" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeType" />
 
         
 
-         enumeration is used in the <see
-         cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" />
+         enumeration is used in the <see cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" />
 
         
 
-         class and is associated with the <see
-         cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
+         class and is associated with the <see cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
 
         
 

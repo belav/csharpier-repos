@@ -26,46 +26,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The compressed stack is a compact representation of all the code access security information on the call stack, such as <see
-         cref="M:System.Security.CodeAccessPermission.Deny" />
+        >The compressed stack is a compact representation of all the code access security information on the call stack, such as <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
         
 
-         and <see
-         cref="M:System.Security.CodeAccessPermission.Assert" />
+         and <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
         
 
-         actions. For example, if a <see
-         cref="M:System.Security.CodeAccessPermission.Deny" />
+         actions. For example, if a <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
         
 
          action is two stack frames up from the current frame and there are no other code access security annotations between there and the current frame, the compressed stack records only that information, without having to serialize the entire call stack. </para
       >
       <para
-        >The <see
-         cref="T:System.Threading.CompressedStack" />
+        >The <see cref="T:System.Threading.CompressedStack" />
 
         
 
-         class is used internally by the <see
-         cref="T:System.Security.SecurityContext" />
+         class is used internally by the <see cref="T:System.Security.SecurityContext" />
 
         
 
-         class. For example, the <see
-         cref="M:System.Security.SecurityContext.Capture" />
+         class. For example, the <see cref="M:System.Security.SecurityContext.Capture" />
 
         
 
-         method captures the compressed stack for the current call stack, along with impersonation and culture information. The <see
-         cref="T:System.Security.SecurityContext" />
+         method captures the compressed stack for the current call stack, along with impersonation and culture information. The <see cref="T:System.Security.SecurityContext" />
 
         
 
-         class is used in turn by the <see
-         cref="T:System.Threading.ExecutionContext" />
+         class is used in turn by the <see cref="T:System.Threading.ExecutionContext" />
 
         
 
@@ -102,18 +94,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Captures all the code access security information on the call stack, such as <see
-             cref="M:System.Security.CodeAccessPermission.Deny" />
+            >Captures all the code access security information on the call stack, such as <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
             
 
-             and <see
-             cref="M:System.Security.CodeAccessPermission.Assert" />
+             and <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
-             actions, in a compressed format. For example, if a <see
-             cref="M:System.Security.CodeAccessPermission.Deny" />
+             actions, in a compressed format. For example, if a <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
             
 
@@ -128,8 +117,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.CompressedStack" />
+            >A <see cref="T:System.Threading.CompressedStack" />
 
             
 
@@ -174,8 +162,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.CompressedStack" />
+            >A <see cref="T:System.Threading.CompressedStack" />
 
             
 
@@ -212,13 +199,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If security is enabled, the current compressed stack is returned. If security is disabled, <see
-             cref="M:System.Threading.CompressedStack.GetCompressedStack" />
+            >If security is enabled, the current compressed stack is returned. If security is disabled, <see cref="M:System.Threading.CompressedStack.GetCompressedStack" />
 
             
 
-             returns an empty <see
-             cref="T:System.Threading.CompressedStack" />
+             returns an empty <see cref="T:System.Threading.CompressedStack" />
 
             
 
@@ -226,18 +211,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This method uses <see
-               cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+              >This method uses <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
 
               
 
-               to prevent it from being called from untrusted code; only the immediate caller is required to have <see
-               cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" />
+               to prevent it from being called from untrusted code; only the immediate caller is required to have <see cref="P:System.Security.Permissions.SecurityPermissionAttribute.UnmanagedCode" />
 
               
 
-               permission. For important limitations on using the LinkDemand member, see <format
-               type="text/html">
+               permission. For important limitations on using the LinkDemand member, see <format type="text/html">
                 <a href="1ab877f2-70f4-4e0d-8116-943999dfe8f5">Demand vs. LinkDemand</a>
               </format>
 
@@ -257,8 +239,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.CompressedStack" />
+            >A <see cref="T:System.Threading.CompressedStack" />
 
             
 
@@ -303,21 +284,18 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with the logical call context information. During deserialization, the execution context object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with the logical call context information. During deserialization, the execution context object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -327,8 +305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -336,24 +313,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object to be populated with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -399,31 +382,41 @@
           <para>Runs a method in the specified compressed stack on the current thread.</para>
         </summary>
         <param name="compressedStack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.CompressedStack" />
+          The <see cref="T:System.Threading.CompressedStack" />
 
           
 
            to set.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.ContextCallback" />
+          A <see cref="T:System.Threading.ContextCallback" />
 
           
 
            that represents the method to be run in the specified security context.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

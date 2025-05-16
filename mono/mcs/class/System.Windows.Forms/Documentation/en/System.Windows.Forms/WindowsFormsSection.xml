@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class supports application settings in Windows Forms. For more information about this feature, see <format
-         type="text/html">
+        >This class supports application settings in Windows Forms. For more information about this feature, see <format type="text/html">
           <a href="0dd8bca5-a6bf-4ac4-8eec-5725d08b38dc">Application Settings Overview</a>
         </format>
 
@@ -29,8 +28,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a new <see
-         cref="T:System.Configuration.ConfigurationSection" />
+        >Defines a new <see cref="T:System.Configuration.ConfigurationSection" />
 
         
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.WindowsFormsSection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.WindowsFormsSection" />
 
             
 

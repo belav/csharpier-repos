@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.BufferedGraphicsContext" />
+        >The <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
         
 
@@ -27,18 +26,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The simplest way to use double buffering is to set the <see
-           cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+          >The simplest way to use double buffering is to set the <see cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
 
           
 
-           control style flag on a control using the <see
-           cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
+           control style flag on a control using the <see cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
           
 
-           method. Setting the <see
-           cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+           method. Setting the <see cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
 
           
 
@@ -46,56 +42,47 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Drawing.BufferedGraphicsContext" />
+        >The <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
         
 
-         class provides methods for creating and configuring a graphics buffer. The <see
-         cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+         class provides methods for creating and configuring a graphics buffer. The <see cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
         
 
-         method creates a <see
-         cref="T:System.Drawing.BufferedGraphics" />
+         method creates a <see cref="T:System.Drawing.BufferedGraphics" />
 
         
 
         , which is a wrapper for a graphics buffer that also provides methods you can use to write to the buffer and render its contents to an output device.</para
       >
       <para
-        >You can retrieve the <see
-         cref="T:System.Drawing.BufferedGraphicsContext" />
+        >You can retrieve the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
         
 
-         for the current application domain from the static <see
-         cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+         for the current application domain from the static <see cref="P:System.Drawing.BufferedGraphicsManager.Current" />
 
         
 
-         property. For graphically intensive applications such as animation, you can create a dedicated <see
-         cref="T:System.Drawing.BufferedGraphicsContext" />
+         property. For graphically intensive applications such as animation, you can create a dedicated <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
         
 
-         using the constructor, but for most applications the <see
-         cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+         using the constructor, but for most applications the <see cref="P:System.Drawing.BufferedGraphicsManager.Current" />
 
         
 
          property will be sufficient.</para
       >
       <para
-        >For more information on drawing buffered graphics and custom buffering implementations, see <format
-         type="text/html">
+        >For more information on drawing buffered graphics and custom buffering implementations, see <format type="text/html">
           <a href="4F6FEF99-0972-436E-9D73-0167E4033F71">Double Buffered Graphics</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="4C2A90EE-BBBE-4FF6-9170-1B06C195C918"
             >How to: Manually Manage Buffered Graphics</a
           >
@@ -121,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For graphically intensive applications such as animation, you can sometimes improve performance by using a dedicated <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+            >For graphically intensive applications such as animation, you can sometimes improve performance by using a dedicated <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             instead of the default instance provided by the <see
-             cref="T:System.Drawing.BufferedGraphicsManager" />
+             instead of the default instance provided by the <see cref="T:System.Drawing.BufferedGraphicsManager" />
 
             
 
@@ -135,13 +120,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You should always call <see
-               cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
+              >You should always call <see cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
 
               
 
-               when you finish using a dedicated <see
-               cref="T:System.Drawing.BufferedGraphicsContext" />
+               when you finish using a dedicated <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
               
 
@@ -149,8 +132,7 @@
             >
           </block>
           <para
-            >For more information about dedicated graphics buffers, see <format
-             type="text/html">
+            >For more information about dedicated graphics buffers, see <format type="text/html">
               <a href="4C2A90EE-BBBE-4FF6-9170-1B06C195C918"
                 >How to: Manually Manage Buffered Graphics</a
               >
@@ -164,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
@@ -195,38 +176,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call the <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+            >When you call the <see cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
-             method with a rectangle whose size exceeds the value of the <see
-             cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
+             method with a rectangle whose size exceeds the value of the <see cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
 
             
 
-             property, a temporary <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             property, a temporary <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             is created to allocate the buffer and provide a temporary context for the buffer. The new <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             is created to allocate the buffer and provide a temporary context for the buffer. The new <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             is distinct from the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             is distinct from the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             for the application domain and it is disposed automatically when the <see
-             cref="T:System.Drawing.BufferedGraphics" />
+             for the application domain and it is disposed automatically when the <see cref="T:System.Drawing.BufferedGraphics" />
 
             
 
-             returned by the <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+             returned by the <see cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
@@ -236,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a graphics buffer of the specified size using the pixel format of the specified <see
-             cref="T:System.Drawing.Graphics" />
+            >Creates a graphics buffer of the specified size using the pixel format of the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -247,8 +220,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.BufferedGraphics" />
+            >A <see cref="T:System.Drawing.BufferedGraphics" />
 
             
 
@@ -256,24 +228,30 @@
           >
         </returns>
         <param name="targetGraphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            to match the pixel format for the new buffer to. </param
         >
         <param name="targetRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -302,38 +280,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call the <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+            >When you call the <see cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
-             method with a rectangle whose size exceeds the value of the <see
-             cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
+             method with a rectangle whose size exceeds the value of the <see cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
 
             
 
-             property, a temporary <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             property, a temporary <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             is created to allocate the buffer and provide a temporary context for the buffer. The new <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             is created to allocate the buffer and provide a temporary context for the buffer. The new <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             is distinct from the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             is distinct from the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             for the application domain and it is disposed automatically when the <see
-             cref="T:System.Drawing.BufferedGraphics" />
+             for the application domain and it is disposed automatically when the <see cref="T:System.Drawing.BufferedGraphics" />
 
             
 
-             returned by the <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+             returned by the <see cref="M:System.Drawing.BufferedGraphicsContext.Allocate(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
@@ -343,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a graphics buffer of the specified size using the pixel format of the specified <see
-             cref="T:System.Drawing.Graphics" />
+            >Creates a graphics buffer of the specified size using the pixel format of the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -354,8 +324,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.BufferedGraphics" />
+            >A <see cref="T:System.Drawing.BufferedGraphics" />
 
             
 
@@ -363,24 +332,30 @@
           >
         </returns>
         <param name="targetDC">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IntPtr" />
+          An <see cref="T:System.IntPtr" />
 
           
 
            to a device context to match the pixel format of the new buffer to. </param
         >
         <param name="targetRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -403,50 +378,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
+            >Call <see cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             when you are finished using the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-            . The <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
+            . The <see cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             method leaves the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+            , you must release all references to the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9">Implementing a Dispose Method</a>
             </format>
 
@@ -456,23 +422,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
+              >Always call <see cref="M:System.Drawing.BufferedGraphicsContext.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.BufferedGraphicsContext" />
+               before you release your last reference to the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="M:System.Object.Finalize" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="M:System.Object.Finalize" />
 
               
 
-               method of the <see
-               cref="T:System.Drawing.BufferedGraphicsContext" />
+               method of the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
               
 
@@ -483,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Drawing.BufferedGraphicsContext" />
+            >Releases all resources used by the <see cref="T:System.Drawing.BufferedGraphicsContext" />
 
             
 
@@ -549,13 +510,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property allows you to get or set the maximum dimensions for a buffer that should be retained in memory. You can allocate a buffer of any size, however any buffer with dimensions greater than the <see
-             cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
+            >This property allows you to get or set the maximum dimensions for a buffer that should be retained in memory. You can allocate a buffer of any size, however any buffer with dimensions greater than the <see cref="P:System.Drawing.BufferedGraphicsContext.MaximumBuffer" />
 
             
 
-             size will be used temporarily and then discarded when the <see
-             cref="T:System.Drawing.BufferedGraphics" />
+             size will be used temporarily and then discarded when the <see cref="T:System.Drawing.BufferedGraphics" />
 
             
 

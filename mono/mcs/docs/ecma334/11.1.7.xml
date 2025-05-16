@@ -1,31 +1,26 @@
 <?xml version="1.0"?>
 <clause number="11.1.7" title="The bool type">
   <paragraph
-    >The <keyword
-    >bool</keyword>
+    >The <keyword>bool</keyword>
 
     
 
-     type represents boolean logical quantities. The possible values of type <keyword
-    >bool</keyword>
+     type represents boolean logical quantities. The possible values of type <keyword>bool</keyword>
 
     
 
      are true and false. </paragraph
   >
   <paragraph
-    >No standard conversions exist between <keyword
-    >bool</keyword>
+    >No standard conversions exist between <keyword>bool</keyword>
 
     
 
-     and other types. In particular, the <keyword
-    >bool</keyword>
+     and other types. In particular, the <keyword>bool</keyword>
 
     
 
-     type is distinct and separate from the integral types, and a <keyword
-    >bool</keyword>
+     type is distinct and separate from the integral types, and a <keyword>bool</keyword>
 
     
 

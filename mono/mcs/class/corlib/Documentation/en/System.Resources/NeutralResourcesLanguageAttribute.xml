@@ -39,8 +39,7 @@
         <h2>Desktop Apps</h2>
       </format>
       <para
-        >In desktop apps, the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+        >In desktop apps, the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
@@ -48,23 +47,19 @@
       >
       <para>code reference: System.Resources.NeutralResourcesLanguageAttribute#1</para>
       <para
-        >You can also use the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+        >You can also use the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
-         attribute to indicate where <see
-         cref="T:System.Resources.ResourceManager" />
+         attribute to indicate where <see cref="T:System.Resources.ResourceManager" />
 
         
 
-         can find the resources of the default culture by providing an <see
-         cref="T:System.Resources.UltimateResourceFallbackLocation" />
+         can find the resources of the default culture by providing an <see cref="T:System.Resources.UltimateResourceFallbackLocation" />
 
         
 
-         enumeration value in the attribute statement. This is most commonly done to indicate that the resources reside in a satellite assembly. For example, the following statement specifies that English (United States) is the app's default or neutral culture and that its resources reside in a satellite assembly. The <see
-         cref="T:System.Resources.ResourceManager" />
+         enumeration value in the attribute statement. This is most commonly done to indicate that the resources reside in a satellite assembly. For example, the following statement specifies that English (United States) is the app's default or neutral culture and that its resources reside in a satellite assembly. The <see cref="T:System.Resources.ResourceManager" />
 
         
 
@@ -73,8 +68,7 @@
       <para>code reference: System.Resources.NeutralResourcesLanguageAttribute#2</para>
       <block subset="none" type="note">
         <para
-          >We recommend that you always use the <see
-           cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+          >We recommend that you always use the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
           
 
@@ -85,25 +79,21 @@
       <list type="bullet">
         <item>
           <para
-            >If the default culture's resources are embedded in the app's main assembly and <see
-             cref="T:System.Resources.ResourceManager" />
+            >If the default culture's resources are embedded in the app's main assembly and <see cref="T:System.Resources.ResourceManager" />
 
             
 
-             has to retrieve resources that belong to the same culture as the default culture, the <see
-             cref="T:System.Resources.ResourceManager" />
+             has to retrieve resources that belong to the same culture as the default culture, the <see cref="T:System.Resources.ResourceManager" />
 
             
 
-             automatically uses the resources located in the main assembly instead of searching for a satellite assembly. This bypasses the usual assembly probe, improves lookup performance for the first resource you load, and can reduce your working set. See <format
-             type="text/html">
+             automatically uses the resources located in the main assembly instead of searching for a satellite assembly. This bypasses the usual assembly probe, improves lookup performance for the first resource you load, and can reduce your working set. See <format type="text/html">
               <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
             </format>
 
             
 
-             for the process <see
-             cref="T:System.Resources.ResourceManager" />
+             for the process <see cref="T:System.Resources.ResourceManager" />
 
             
 
@@ -112,8 +102,7 @@
         </item>
         <item>
           <para
-            >If the default culture's resources are located in a satellite assembly rather than in the main app assembly, the <see
-             cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+            >If the default culture's resources are located in a satellite assembly rather than in the main app assembly, the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
             
 
@@ -125,23 +114,19 @@
         <h2>win8_appname_long Apps</h2>
       </format>
       <para
-        >In win8_appname_long apps whose resources are loaded and retrieved by using the <see
-         cref="T:System.Resources.ResourceManager" />
+        >In win8_appname_long apps whose resources are loaded and retrieved by using the <see cref="T:System.Resources.ResourceManager" />
 
         
 
-         class, the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         class, the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
-         attribute defines the neutral culture whose resources are used in the event of a failed probe. It does not specify the location of the resources. By default, <see
-         cref="T:System.Resources.ResourceManager" />
+         attribute defines the neutral culture whose resources are used in the event of a failed probe. It does not specify the location of the resources. By default, <see cref="T:System.Resources.ResourceManager" />
 
         
 
-         uses the app's package resource index (PRI) file to locate the resources of the default culture. The neutral culture that is defined by the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         uses the app's package resource index (PRI) file to locate the resources of the default culture. The neutral culture that is defined by the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
@@ -149,21 +134,20 @@
       >
       <para
         >If you load and retrieve resources by using the wrt <see
-         cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
+          cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
           >Windows.ApplicationModel.Resources.ResourceLoader</see
         >
 
         
 
          class or the types in the <see
-         cref="http://go.microsoft.com/fwlink/p/?LinkId=238194"
+          cref="http://go.microsoft.com/fwlink/p/?LinkId=238194"
           >Windows.ApplicationModel.Resources.Core</see
         >
 
         
 
-         namespace, the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         namespace, the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
@@ -200,7 +184,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For a detailed list of culture names, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=200048"
+              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
 
@@ -212,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
             
 
@@ -221,7 +204,11 @@
           >
         </summary>
         <param name="cultureName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -252,28 +239,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+            >Use the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
             
 
-             constructor with the <see
-             cref="T:System.Resources.UltimateResourceFallbackLocation" />
+             constructor with the <see cref="T:System.Resources.UltimateResourceFallbackLocation" />
 
             
 
-             enumeration to specify whether the <see
-             cref="T:System.Resources.ResourceManager" />
+             enumeration to specify whether the <see cref="T:System.Resources.ResourceManager" />
 
             
 
-             class is to retrieve neutral fallback resources from the main app assembly (the default), or from a satellite assembly specified by the <see
-             cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+             class is to retrieve neutral fallback resources from the main app assembly (the default), or from a satellite assembly specified by the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
             
 
-             and the <see
-             cref="P:System.Resources.ResourceManager.FallbackLocation" />
+             and the <see cref="P:System.Resources.ResourceManager.FallbackLocation" />
 
             
 
@@ -281,7 +263,7 @@
           >
           <para
             >For a detailed list of culture names, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=200048"
+              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
 
@@ -293,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
             
 
@@ -302,14 +283,22 @@
           >
         </summary>
         <param name="cultureName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the culture that the current assembly's neutral resources were written in.</param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -335,7 +324,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For a detailed list of culture names, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=200048"
+              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
 
@@ -374,13 +363,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location for the <see
-             cref="T:System.Resources.ResourceManager" />
+            >Gets the location for the <see cref="T:System.Resources.ResourceManager" />
 
             
 
-             class to use to retrieve neutral resources by using the <format
-             type="text/html">
+             class to use to retrieve neutral resources by using the <format type="text/html">
               <a href="B224D7C0-35F8-4E82-A705-DD76795E8D16">resource fallback process</a>
             </format>
 

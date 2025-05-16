@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ValidationSummaryDisplayMode" />
+        >The <see cref="T:System.Web.UI.WebControls.ValidationSummaryDisplayMode" />
 
         
 
-         enumeration represents the different display formats of a <see
-         cref="T:System.Web.UI.WebControls.ValidationSummary" />
+         enumeration represents the different display formats of a <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
         
 
@@ -34,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the validation summary display mode used by the <see
-         cref="T:System.Web.UI.WebControls.ValidationSummary" />
+        >Specifies the validation summary display mode used by the <see cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
         
 

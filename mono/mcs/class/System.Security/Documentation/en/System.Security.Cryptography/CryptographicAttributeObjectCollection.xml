@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a set of <see
-         cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+        >Contains a set of <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
@@ -94,13 +92,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             class, adding a specified <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+             class, adding a specified <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
             
 
@@ -108,12 +104,15 @@
           >
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+          A <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
           
 
@@ -147,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Adds the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -160,12 +158,15 @@
           <para>true if the method returns the zero-based index of the added item; otherwise, false.</para>
         </returns>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -202,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+            >Adds the specified <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
             
 
@@ -215,12 +215,15 @@
           <para>true if the method returns the zero-based index of the added item; otherwise, false.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+          The <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
           
 
@@ -258,13 +261,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >Copies the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             collection to an array of <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+             collection to an array of <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
             
 
@@ -272,24 +273,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+          An array of <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
           
 
            objects that the collection is copied to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -342,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectEnumerator" />
+            >Gets a <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectEnumerator" />
 
             
 
@@ -353,8 +359,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the method returns a <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectEnumerator" />
+            >true if the method returns a <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectEnumerator" />
 
             
 
@@ -444,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+            >Removes the specified <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
             
 
@@ -453,12 +457,15 @@
           >
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+          The <see cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
 
           
 
@@ -484,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Object" />
+            >Gets an <see cref="T:System.Object" />
 
             
 
@@ -517,13 +523,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of this <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >Copies the elements of this <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
-             collection to an <see
-             cref="T:System.Array" />
+             collection to an <see cref="T:System.Array" />
 
             
 
@@ -531,34 +535,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           array that is the destination of the elements copied from this <see
-           cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+           array that is the destination of the elements copied from this <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -589,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 
@@ -600,13 +607,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             object that can be used to iterate through the <see
-             cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+             object that can be used to iterate through the <see cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
             
 

@@ -29,13 +29,11 @@
           </term>
           <description>
             <para
-              >The class derived from <see
-               cref="T:System.ComponentModel.Design.ComponentDesigner" />
+              >The class derived from <see cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
               
 
-               that is associated with the component overrides the <see
-               cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+               that is associated with the component overrides the <see cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
 
               
 
@@ -49,8 +47,7 @@
           </term>
           <description>
             <para
-              >A call to the <see
-               cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
+              >A call to the <see cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
 
               
 
@@ -60,13 +57,11 @@
         </item>
       </list>
       <para
-        >For more information about these smart-tag models, see the <see
-         cref="T:System.ComponentModel.Design.DesignerActionService" />
+        >For more information about these smart-tag models, see the <see cref="T:System.ComponentModel.Design.DesignerActionService" />
 
         
 
-         and <see
-         cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+         and <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
         
 

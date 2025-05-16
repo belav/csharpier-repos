@@ -21,75 +21,63 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+        >The <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
         
 
-         interface defines the collection of session items exposed to application code by the <see
-         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+         interface defines the collection of session items exposed to application code by the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" />
 
         
 
          class.</para
       >
       <para
-        >The ASP.NET implementation of the <see
-         cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+        >The ASP.NET implementation of the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
         
 
-         interface is the <see
-         cref="T:System.Web.SessionState.SessionStateItemCollection" />
+         interface is the <see cref="T:System.Web.SessionState.SessionStateItemCollection" />
 
         
 
          class. </para
       >
       <para
-        >If you create a class derived from the <see
-         cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+        >If you create a class derived from the <see cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
 
         
 
-         class to store session data, you can either use the <see
-         cref="T:System.Web.SessionState.SessionStateItemCollection" />
+         class to store session data, you can either use the <see cref="T:System.Web.SessionState.SessionStateItemCollection" />
 
         
 
-         class to manage the stored objects or implement the <see
-         cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+         class to manage the stored objects or implement the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
         
 
          interface on your own collection manager.</para
       >
       <para
-        >If you implement the <see
-         cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+        >If you implement the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
         
 
-         interface, you must also create a class that inherits the <see
-         cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
+         interface, you must also create a class that inherits the <see cref="T:System.Web.SessionState.SessionStateStoreProviderBase" />
 
         
 
-         class in order to make use of your <see
-         cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+         class in order to make use of your <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
         
 
          implementation to manage session variables.</para
       >
       <para
-        >An <see
-         cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+        >An <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
         
 
-         implementation must also implement the members of the <see
-         cref="T:System.Collections.ICollection" />
+         implementation must also implement the members of the <see cref="T:System.Collections.ICollection" />
 
         
 
@@ -114,18 +102,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In implementing the <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.Clear" />
+            >In implementing the <see cref="M:System.Web.SessionState.ISessionStateItemCollection.Clear" />
 
             
 
-             method, you should set the <see
-             cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+             method, you should set the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
-             property to true to indicate that values in the <see
-             cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+             property to true to indicate that values in the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
             
 
@@ -153,51 +138,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+            >The <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
-             property is used by the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             property is used by the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
-             to determine whether the values in an <see
-             cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+             to determine whether the values in an <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
             
 
              implementation have been modified.</para
           >
           <para
-            >In implementing the <see
-             cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+            >In implementing the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
             
 
-             interface, you should initialize the <see
-             cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+             interface, you should initialize the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
-             property as false and set the <see
-             cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" />
+             property as false and set the <see cref="P:System.Web.SessionState.SessionStateItemCollection.Dirty" />
 
             
 
-             property to true in the implementations of the <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.Remove(System.String)" />
+             property to true in the implementations of the <see cref="M:System.Web.SessionState.ISessionStateItemCollection.Remove(System.String)" />
 
             
 
-            , <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.RemoveAt(System.Int32)" />
+            , <see cref="M:System.Web.SessionState.ISessionStateItemCollection.RemoveAt(System.Int32)" />
 
             
 
-            , or <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.Clear" />
+            , or <see cref="M:System.Web.SessionState.ISessionStateItemCollection.Clear" />
 
             
 
@@ -290,31 +266,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In implementing the <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.Remove(System.String)" />
+            >In implementing the <see cref="M:System.Web.SessionState.ISessionStateItemCollection.Remove(System.String)" />
 
             
 
-             method, you should set the <see
-             cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+             method, you should set the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
-             property to true to indicate values in the <see
-             cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+             property to true to indicate values in the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
             
 
              implementation have been modified.</para
           >
           <para
-            >If the <see
-             cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+            >If the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
             
 
-             implementation does not contain an element with the specified <paramref
-             name="name" />
+             implementation does not contain an element with the specified <paramref name="name" />
 
             
 
@@ -344,41 +315,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In implementing the <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.RemoveAt(System.Int32)" />
+            >In implementing the <see cref="M:System.Web.SessionState.ISessionStateItemCollection.RemoveAt(System.Int32)" />
 
             
 
-             method, you should set the <see
-             cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
+             method, you should set the <see cref="P:System.Web.SessionState.ISessionStateItemCollection.Dirty" />
 
             
 
-             property to true to indicate values in the <see
-             cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+             property to true to indicate values in the <see cref="T:System.Web.SessionState.ISessionStateItemCollection" />
 
             
 
              implementation have been modified.</para
           >
           <para
-            >Your implementation of the <see
-             cref="M:System.Web.SessionState.ISessionStateItemCollection.RemoveAt(System.Int32)" />
+            >Your implementation of the <see cref="M:System.Web.SessionState.ISessionStateItemCollection.RemoveAt(System.Int32)" />
 
             
 
-             method should throw an <see
-             cref="T:System.ArgumentOutOfRangeException" />
+             method should throw an <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
-             exception if <paramref
-             name="index" />
+             exception if <paramref name="index" />
 
             
 
-             is less than zero or is equal to or greater than <see
-             cref="P:System.Collections.ICollection.Count" />
+             is less than zero or is equal to or greater than <see cref="P:System.Collections.ICollection.Count" />
 
             
 
@@ -390,7 +354,11 @@
           <para>Deletes an item at a specified index from the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

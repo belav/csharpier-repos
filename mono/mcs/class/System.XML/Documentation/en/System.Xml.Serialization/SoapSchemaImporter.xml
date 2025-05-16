@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+        >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
         
 
-         class is used by the <format
-         type="text/html">
+         class is used by the <format type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
             >Web Services Description Language Tool (Wsdl.exe)</a
           >
@@ -39,16 +37,14 @@
 
         
 
-        , and the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+        , and the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
          class, while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of using this class directly, use Wsdl.exe.</para
       >
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+        >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
         
 
@@ -85,8 +81,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>SOAP encoding, as defined in Section 5 of the SOAP 1.1 specification, is specified in a WSDL document.</para>
           <para
-            >Instead of creating an instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Instead of creating an instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -96,13 +91,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class, specifying <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class, specifying <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -110,12 +103,15 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -148,8 +144,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>SOAP encoding, as defined in Section 5 of the SOAP 1.1 specification, is specified in a WSDL document.</para>
           <para
-            >Instead of creating an instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Instead of creating an instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -159,13 +154,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class, specifying <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class, specifying <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -173,24 +166,30 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="typeIdentifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          A <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
           
 
@@ -223,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -232,36 +230,45 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          One of the <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            that specifies various options for generating a .NET Framework type.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.ImportContext" />
+          An <see cref="T:System.Xml.Serialization.ImportContext" />
 
           
 
@@ -294,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -303,36 +309,45 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="typeIdentifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          A <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
           
 
             that maintains a group of names for related code entities or type mappings that are generated by the .NET Framework's XML serialization infrastructure.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          One of the <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
@@ -366,8 +381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -375,53 +389,64 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+          An <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
-            containing a collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+            containing a collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
            objects.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          One of the <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            that specifies various options for generating a .NET Framework type.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
             used to generate the serialization code.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.ImportContext" />
+          An <see cref="T:System.Xml.Serialization.ImportContext" />
 
           
 
@@ -456,18 +481,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportDerivedTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportDerivedTypeMapping(System.Xml.XmlQualifiedName,System.Type,System.Boolean)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+             method of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class is used by the <format
-             type="text/html">
+             class is used by the <format type="text/html">
               <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
                 >Web Services Description Language Tool (Wsdl.exe)</a
               >
@@ -478,8 +500,7 @@
              while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
@@ -495,26 +516,37 @@
           <para>The .NET Framework type mapping information for a derived type corresponding to a WSDL message part.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            that specifies the name of an element's type for which a .NET Framework type is being generated.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A base type for the .NET Framework type being generated.</param
         >
         <param name="baseTypeCanBeIndirect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -549,26 +581,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember)" />
+            >The <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+             method of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
              class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. This signature of the <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember)" />
+             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. This signature of the <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember)" />
 
             
 
@@ -584,26 +612,37 @@
           <para>The .NET Framework type mapping for a single element part of a WSDL message definition.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message name.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message namespace.</param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.SoapSchemaMember" />
+          A <see cref="T:System.Xml.Serialization.SoapSchemaMember" />
 
           
 
@@ -638,26 +677,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])" />
+            >The <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+             method of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
              class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])" />
+             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[])" />
 
             
 
@@ -673,26 +708,37 @@
           <para>The .NET Framework type mappings for the element parts of a WSDL message definition.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message name.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message namespace.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Xml.Serialization.SoapSchemaMember" />
+          An array of type <see cref="T:System.Xml.Serialization.SoapSchemaMember" />
 
           
 
@@ -728,26 +774,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+             method of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
              class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean)" />
+             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean)" />
 
             
 
@@ -763,33 +805,48 @@
           <para>The .NET Framework type mappings for the element parts of a WSDL message definition.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message name.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message namespace.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Xml.Serialization.SoapSchemaMember" />
+          An array of type <see cref="T:System.Xml.Serialization.SoapSchemaMember" />
 
           
 
            that provides information about the part elements.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -827,26 +884,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean,System.Type,System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean,System.Type,System.Boolean)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+             method of the <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
              class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of calling this method directly, use Wsdl.exe.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+            >The <see cref="T:System.Xml.Serialization.SoapSchemaImporter" />
 
             
 
-             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see
-             cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean,System.Type,System.Boolean)" />
+             class is used only when a WSDL document specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification. The parameter values to the <see cref="M:System.Xml.Serialization.SoapSchemaImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.SoapSchemaMember[],System.Boolean,System.Type,System.Boolean)" />
 
             
 
@@ -862,47 +915,70 @@
           <para>The .NET Framework type mappings for the element parts of a WSDL message definition.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message name.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message namespace.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Xml.Serialization.SoapSchemaMember" />
+          An array of type <see cref="T:System.Xml.Serialization.SoapSchemaMember" />
 
           
 
            that provides information about the part elements.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to have elements defined by the parts enclosed in an extra, wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="baseType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A base type for all .NET Framework types that are generated to correspond to message parts.</param
         >
         <param name="baseTypeCanBeIndirect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

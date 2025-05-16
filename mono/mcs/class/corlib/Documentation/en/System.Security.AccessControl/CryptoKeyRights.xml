@@ -112,13 +112,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A combination of <see
-             cref="F:System.Security.AccessControl.CryptoKeyRights.GenericRead" />
+            >A combination of <see cref="F:System.Security.AccessControl.CryptoKeyRights.GenericRead" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.CryptoKeyRights.GenericWrite" />
+             and <see cref="F:System.Security.AccessControl.CryptoKeyRights.GenericWrite" />
 
             
 

@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+        >The <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
             
 
@@ -88,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
             
 
@@ -97,7 +94,11 @@
           >
         </summary>
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
             
 
@@ -141,17 +141,19 @@
           >
         </summary>
         <param name="attributeOverrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+          A <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
           
 
-           object that overrides how the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+           object that overrides how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -187,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
             
 
@@ -196,24 +197,30 @@
           >
         </summary>
         <param name="attributeOverrides">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+          A <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
           
 
-           object that overrides how the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+           object that overrides how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
            class serializes mapped types using SOAP encoding.</param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -248,16 +255,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])" />
+            >The <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])" />
 
             
 
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
-            >The following list describes possible values for the <paramref
-             name="members" />
+            >The following list describes possible values for the <paramref name="members" />
 
             
 
@@ -287,21 +292,33 @@
           <para>Internal .NET Framework type mappings to the element parts of a WSDL message definition.</para>
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,16 +355,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean)" />
 
             
 
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
-            >The following list describes possible values for the <paramref
-             name="members" />
+            >The following list describes possible values for the <paramref name="members" />
 
             
 
@@ -377,35 +392,55 @@
           <para>Internal .NET Framework type mappings to the element parts of a WSDL message definition.</para>
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that elements that correspond to WSDL message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="writeAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -443,16 +478,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)" />
+            >The <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[],System.Boolean,System.Boolean,System.Boolean)" />
 
             
 
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
-            >The following list describes possible values for the <paramref
-             name="members" />
+            >The following list describes possible values for the <paramref name="members" />
 
             
 
@@ -482,47 +515,70 @@
           <para>Internal .NET Framework type mappings to the element parts of a WSDL message definition.</para>
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that elements that correspond to WSDL message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="writeAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate an RPC-style Web service binding; false to indicate a document-style Web service binding or a SOAP header.</param
         >
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that a generated deserializer should check for the expected qualified name of the wrapper element; otherwise, false. This parameter's value is relevant only if the <paramref
-           name="hasWrapperElement" />
+          true to indicate that a generated deserializer should check for the expected qualified name of the wrapper element; otherwise, false. This parameter's value is relevant only if the <paramref name="hasWrapperElement" />
 
           
 
@@ -561,16 +617,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])" />
+            >The <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportMembersMapping(System.String,System.String,System.Xml.Serialization.XmlReflectionMember[])" />
 
             
 
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
-            >The following list describes possible values for the <paramref
-             name="members" />
+            >The following list describes possible values for the <paramref name="members" />
 
             
 
@@ -600,59 +654,85 @@
           <para>Internal .NET Framework type mappings to the element parts of a WSDL message definition.</para>
         </returns>
         <param name="elementName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that elements that correspond to WSDL message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="writeAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate an RPC-style Web service binding; false to indicate a document-style Web service binding or a SOAP header.</param
         >
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that a generated deserializer should check for the expected qualified name of the wrapper element; otherwise, false. This parameter's value is relevant only if the <paramref
-           name="hasWrapperElement" />
+          true to indicate that a generated deserializer should check for the expected qualified name of the wrapper element; otherwise, false. This parameter's value is relevant only if the <paramref name="hasWrapperElement" />
 
           
 
            parameter's value is true.</param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Xml.Serialization.XmlMappingAccess" />
+          One of the <see cref="T:System.Xml.Serialization.XmlMappingAccess" />
 
           
 
@@ -686,8 +766,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The XML Schema element is serialized using SOAP encoding.</para>
           <para
-            >You do not need to call the <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
+            >You do not need to call the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
             
 
@@ -703,7 +782,11 @@
           <para>Internal .NET Framework mapping of a type to an XML Schema element. </para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -738,8 +821,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The XML Schema element is serialized using SOAP encoding.</para>
           <para
-            >You do not need to call the <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type,System.String)" />
+            >You do not need to call the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type,System.String)" />
 
             
 
@@ -755,14 +837,22 @@
           <para>Internal .NET Framework mapping of a type to an XML Schema element.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The .NET Framework type for which to generate a type mapping. </param
         >
         <param name="defaultNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -792,8 +882,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the <see
-             cref="M:System.Xml.Serialization.SoapReflectionImporter.IncludeType(System.Type)" />
+            >You do not need to call the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.IncludeType(System.Type)" />
 
             
 
@@ -803,8 +892,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Places mappings for a type in the <see
-             cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+            >Places mappings for a type in the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
             
 
@@ -812,7 +900,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -846,8 +938,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Places mappings for derived types in the <see
-             cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+            >Places mappings for derived types in the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
             
 
@@ -855,17 +946,19 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Reflection.ICustomAttributeProvider" />
+          An <see cref="T:System.Reflection.ICustomAttributeProvider" />
 
           
 
-           reflection object that contains custom attributes that are derived from the <see
-           cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+           reflection object that contains custom attributes that are derived from the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
           
 

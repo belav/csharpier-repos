@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
+        >The <see cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
 
         
 
-         event occurs when a new area of a <see
-         cref="T:System.Windows.Forms.ListView" />
+         event occurs when a new area of a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         in virtual mode is exposed and the <see
-         cref="T:System.Windows.Forms.ListView" />
+         in virtual mode is exposed and the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -35,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.CacheVirtualItems" />
 
         
 
@@ -61,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.CacheVirtualItemsEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.CacheVirtualItemsEventArgs" />
 
             
 
@@ -70,34 +65,38 @@
           >
         </summary>
         <param name="startIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting index of a range of items needed by the <see
-           cref="T:System.Windows.Forms.ListView" />
+          The starting index of a range of items needed by the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
-           for the next <see
-           cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+           for the next <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
 
           
 
            event that occurs.</param
         >
         <param name="endIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The ending index of a range of items needed by the <see
-           cref="T:System.Windows.Forms.ListView" />
+          The ending index of a range of items needed by the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
-           for the next <see
-           cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+           for the next <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
 
           
 
@@ -120,23 +119,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The range of values specified by the <see
-             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" />
+            >The range of values specified by the <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
+             and <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
 
             
 
-             properties represents the range of values most likely needed by a virtual <see
-             cref="T:System.Windows.Forms.ListView" />
+             properties represents the range of values most likely needed by a virtual <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control for the next occurrence of a <see
-             cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+             control for the next occurrence of a <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
 
             
 
@@ -146,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ending index for the range of values needed by a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the ending index for the range of values needed by a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -171,23 +165,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The range of values specified by the <see
-             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" />
+            >The range of values specified by the <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.StartIndex" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
+             and <see cref="P:System.Windows.Forms.CacheVirtualItemsEventArgs.EndIndex" />
 
             
 
-             properties represents the range of values most likely needed by a virtual <see
-             cref="T:System.Windows.Forms.ListView" />
+             properties represents the range of values most likely needed by a virtual <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control for the next occurrence of a <see
-             cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
+             control for the next occurrence of a <see cref="E:System.Windows.Forms.ListView.RetrieveVirtualItem" />
 
             
 
@@ -197,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting index for a range of values needed by a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the starting index for a range of values needed by a <see cref="T:System.Windows.Forms.ListView" />
 
             
 

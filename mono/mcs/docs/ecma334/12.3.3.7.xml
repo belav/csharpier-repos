@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.3.7" title="While statements">
   <paragraph
-    >For a while statement stmt of the form: <code_example
-    >
+    >For a while statement stmt of the form: <code_example>
       <![CDATA[
 while (expr) while-body  
 ]]>

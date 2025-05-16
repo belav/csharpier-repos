@@ -25,24 +25,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This attribute is similar to the <see
-         cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+        >This attribute is similar to the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
         
 
          attribute. Both attributes can be applied to either a method or a class.</para
       >
       <para
-        >A method can have either of the two attributes applied, but not both. Any operation that has neither applied will use the attribute applied to the containing class. If the containing class does not have either attribute applied, the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >A method can have either of the two attributes applied, but not both. Any operation that has neither applied will use the attribute applied to the containing class. If the containing class does not have either attribute applied, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
          is used. </para
       >
       <para
-        >Applying the attribute also causes a <see
-         cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
+        >Applying the attribute also causes a <see cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
 
         
 
@@ -52,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instructs the indigo1 infrastructure to use the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Instructs the indigo1 infrastructure to use the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -78,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DataContractFormatAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DataContractFormatAttribute" />
 
             
 

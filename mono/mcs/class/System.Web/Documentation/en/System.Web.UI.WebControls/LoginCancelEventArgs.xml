@@ -15,33 +15,27 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A cancelable event is raised when a component is about to perform an action that can be canceled, such as logging on to a Web site.</para>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
 
         
 
-         class provides the <see
-         cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+         class provides the <see cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
 
         
 
-         property to indicate whether the event should be canceled. A <see
-         cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+         property to indicate whether the event should be canceled. A <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
 
         
 
-         object is used with controls that have cancelable actions, such as the <see
-         cref="T:System.Web.UI.WebControls.Login" />
+         object is used with controls that have cancelable actions, such as the <see cref="T:System.Web.UI.WebControls.Login" />
 
         
 
-         control, the <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+         control, the <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
-         control, and the <see
-         cref="T:System.Web.UI.WebControls.PasswordRecovery" />
+         control, and the <see cref="T:System.Web.UI.WebControls.PasswordRecovery" />
 
         
 
@@ -64,13 +58,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
 
             
 
-             class with the <see
-             cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+             class with the <see cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
 
             
 
@@ -94,13 +86,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
 
             
 
-             class with the <see
-             cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+             class with the <see cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
 
             
 
@@ -108,7 +98,11 @@
           >
         </summary>
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -131,23 +125,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
+            >You can use the <see cref="P:System.Web.UI.WebControls.LoginCancelEventArgs.Cancel" />
 
             
 
-             property to indicate whether an event, such as the <see
-             cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
+             property to indicate whether an event, such as the <see cref="E:System.Web.UI.WebControls.Login.LoggingIn" />
 
             
 
-             event, the <see
-             cref="E:System.Web.UI.WebControls.LoginStatus.LoggingOut" />
+             event, the <see cref="E:System.Web.UI.WebControls.LoginStatus.LoggingOut" />
 
             
 
-             event, or the <see
-             cref="E:System.Web.UI.WebControls.ChangePassword.ChangingPassword" />
+             event, or the <see cref="E:System.Web.UI.WebControls.ChangePassword.ChangingPassword" />
 
             
 

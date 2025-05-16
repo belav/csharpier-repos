@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You typically use this interface to return a list that can be bound to a data source, from an object that does not implement <see
-         cref="T:System.Collections.IList" />
+        >You typically use this interface to return a list that can be bound to a data source, from an object that does not implement <see cref="T:System.Collections.IList" />
 
         
 
@@ -40,38 +39,31 @@
         </item>
         <item>
           <para
-            >Implementer of <see
-             cref="T:System.Collections.IList" />
+            >Implementer of <see cref="T:System.Collections.IList" />
 
             
 
-            , provided the implementer has a strongly typed <see
-             cref="P:System.Collections.IList.Item(System.Int32)" />
+            , provided the implementer has a strongly typed <see cref="P:System.Collections.IList.Item(System.Int32)" />
 
             
 
-             property (that is, the <see
-             cref="T:System.Type" />
+             property (that is, the <see cref="T:System.Type" />
 
             
 
-             is anything but <see
-             cref="T:System.Object" />
+             is anything but <see cref="T:System.Object" />
 
             
 
-            ). You can accomplish this by making the default implementation of <see
-             cref="P:System.Collections.IList.Item(System.Int32)" />
+            ). You can accomplish this by making the default implementation of <see cref="P:System.Collections.IList.Item(System.Int32)" />
 
             
 
-             private. If you want to create an <see
-             cref="T:System.Collections.IList" />
+             private. If you want to create an <see cref="T:System.Collections.IList" />
 
             
 
-             that follows the rules of a strongly typed collection, you should derive from <see
-             cref="T:System.Collections.CollectionBase" />
+             that follows the rules of a strongly typed collection, you should derive from <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -80,8 +72,7 @@
         </item>
         <item>
           <para
-            >Implementer of <see
-             cref="T:System.ComponentModel.ITypedList" />
+            >Implementer of <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
@@ -90,8 +81,7 @@
         </item>
       </list>
       <para
-        >In a designer, you can initialize binding to <see
-         cref="T:System.ComponentModel.Component" />
+        >In a designer, you can initialize binding to <see cref="T:System.ComponentModel.Component" />
 
         
 
@@ -99,18 +89,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Implementers of <see
-           cref="T:System.ComponentModel.IListSource" />
+          >Implementers of <see cref="T:System.ComponentModel.IListSource" />
 
           
 
-           can return an <see
-           cref="T:System.Collections.IList" />
+           can return an <see cref="T:System.Collections.IList" />
 
           
 
-           that contains a collection of <see
-           cref="T:System.Collections.IList" />
+           that contains a collection of <see cref="T:System.Collections.IList" />
 
           
 
@@ -141,23 +128,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using this property in <see
-             cref="T:System.Data.DataSet" />
+            >Using this property in <see cref="T:System.Data.DataSet" />
 
             
 
-             returns true because the <see
-             cref="T:System.Data.DataSet" />
+             returns true because the <see cref="T:System.Data.DataSet" />
 
             
 
-             class contains a collection of collections. Using this property in <see
-             cref="T:System.Data.DataTable" />
+             class contains a collection of collections. Using this property in <see cref="T:System.Data.DataTable" />
 
             
 
-             returns false because the <see
-             cref="T:System.Data.DataTable" />
+             returns false because the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -167,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the collection is a collection of <see
-             cref="T:System.Collections.IList" />
+            >Gets a value indicating whether the collection is a collection of <see cref="T:System.Collections.IList" />
 
             
 
@@ -198,13 +180,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IList" />
+            >Returns an <see cref="T:System.Collections.IList" />
 
             
 
-             that can be bound to a data source from an object that does not implement an <see
-             cref="T:System.Collections.IList" />
+             that can be bound to a data source from an object that does not implement an <see cref="T:System.Collections.IList" />
 
             
 
@@ -214,8 +194,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IList" />
+            >An <see cref="T:System.Collections.IList" />
 
             
 

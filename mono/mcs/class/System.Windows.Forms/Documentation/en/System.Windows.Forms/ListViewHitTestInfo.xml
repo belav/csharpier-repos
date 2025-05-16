@@ -18,13 +18,11 @@
 
         
 
-         is returned by the <see
-         cref="T:System.Windows.Forms.ListView" />
+         is returned by the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         class when the <see
-         cref="Overload:System.Windows.Forms.ListView.HitTest" />
+         class when the <see cref="Overload:System.Windows.Forms.ListView.HitTest" />
 
         
 
@@ -34,13 +32,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains information about an area of a <see
-         cref="T:System.Windows.Forms.ListView" />
+        >Contains information about an area of a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control or a <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         control or a <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
@@ -87,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value will be null if the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >This value will be null if the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -98,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             at the position indicated by a hit test on a <see
-             cref="T:System.Windows.Forms.ListView" />
+             at the position indicated by a hit test on a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -131,18 +124,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property will return <see
-             cref="F:System.Windows.Forms.ListViewHitTestLocations.None" />
+            >This property will return <see cref="F:System.Windows.Forms.ListViewHitTestLocations.None" />
 
             
 
-             if the hit test indicates a position that is within the client area of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             if the hit test indicates a position that is within the client area of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             but is not located on a <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             but is not located on a <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -152,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of a hit test on a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the location of a hit test on a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, in relation to the <see
-             cref="T:System.Windows.Forms.ListView" />
+             control, in relation to the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -185,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value will be null if the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >This value will be null if the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -196,13 +183,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+            >Gets the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
 
             
 
-             at the position indicated by a hit test on a <see
-             cref="T:System.Windows.Forms.ListView" />
+             at the position indicated by a hit test on a <see cref="T:System.Windows.Forms.ListView" />
 
             
 

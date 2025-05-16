@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IBindingDeliveryCapabilities" />
+        >The <see cref="T:System.ServiceModel.Channels.IBindingDeliveryCapabilities" />
 
         
 
@@ -46,13 +45,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see
-             cref="P:System.ServiceModel.Channels.IBindingDeliveryCapabilities.AssuresOrderedDelivery" />
+            >The value of this <see cref="P:System.ServiceModel.Channels.IBindingDeliveryCapabilities.AssuresOrderedDelivery" />
 
             
 
-             property is consumed by the <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+             property is consumed by the <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
 
             
 
@@ -80,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see
-             cref="P:System.ServiceModel.Channels.IBindingDeliveryCapabilities.QueuedDelivery" />
+            >The value of this <see cref="P:System.ServiceModel.Channels.IBindingDeliveryCapabilities.QueuedDelivery" />
 
             
 

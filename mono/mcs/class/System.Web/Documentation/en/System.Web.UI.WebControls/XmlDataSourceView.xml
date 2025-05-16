@@ -17,139 +17,113 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-         control can present its underlying data in both tabular and hierarchical format to Web server controls that bind to it. Controls such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         control can present its underlying data in both tabular and hierarchical format to Web server controls that bind to it. Controls such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.DropDownList" />
+         or <see cref="T:System.Web.UI.WebControls.DropDownList" />
 
         
 
-         use the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         use the <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-         to bind to XML data and present it in list or tabular form, while controls that derive from the <see
-         cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+         to bind to XML data and present it in list or tabular form, while controls that derive from the <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
 
         
 
-         class, such as <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         class, such as <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
         , bind to XML data and present it in hierarchical form.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-         creates each view type internally through different code paths. If the <see
-         cref="M:System.Web.UI.IDataSource.GetView(System.String)" />
+         creates each view type internally through different code paths. If the <see cref="M:System.Web.UI.IDataSource.GetView(System.String)" />
 
         
 
-         method is called on the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         method is called on the <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-        , an <see
-         cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+        , an <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
         
 
-         is created by the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         is created by the <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-        . If the <see
-         cref="M:System.Web.UI.WebControls.XmlDataSource.GetHierarchicalView(System.String)" />
+        . If the <see cref="M:System.Web.UI.WebControls.XmlDataSource.GetHierarchicalView(System.String)" />
 
         
 
-         method is called, an <see
-         cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
+         method is called, an <see cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
 
         
 
-         is created. The <see
-         cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+         is created. The <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
         
 
-         class is provided for Web server controls that derive from <see
-         cref="T:System.Web.UI.WebControls.DataBoundControl" />
+         class is provided for Web server controls that derive from <see cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
         
 
-         and bind to lists and tabular data, while the <see
-         cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
+         and bind to lists and tabular data, while the <see cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
 
         
 
-         is provided for Web server controls that derive from <see
-         cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+         is provided for Web server controls that derive from <see cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
 
         
 
          and bind to hierarchical data. Internally, all data-bound control methods call the Select method on whichever data source view object is returned.</para
       >
       <para
-        >Like all <see
-         cref="T:System.Web.UI.DataSourceView" />
+        >Like all <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
-         helper objects, the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+         helper objects, the <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
         
 
-         defines the operations that the data source can perform with the underlying data. Because the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+         defines the operations that the data source can perform with the underlying data. Because the <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
         
 
-         class only overrides the <see
-         cref="M:System.Web.UI.HierarchicalDataSourceView.Select" />
+         class only overrides the <see cref="M:System.Web.UI.HierarchicalDataSourceView.Select" />
 
         
 
-         method, the associated <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         method, the associated <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-         control does not support update, insert, or delete operations. Because the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+         control does not support update, insert, or delete operations. Because the <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
         
 
-         class is sealed, you cannot extend the <see
-         cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+         class is sealed, you cannot extend the <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
         
 
-         class to add this functionality, but you can derive a data source control from <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+         class to add this functionality, but you can derive a data source control from <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
-         and a view from <see
-         cref="T:System.Web.UI.DataSourceView" />
+         and a view from <see cref="T:System.Web.UI.DataSourceView" />
 
         
 
@@ -159,8 +133,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a tabular data source view on XML data for an <see
-         cref="T:System.Web.UI.WebControls.XmlDataSource" />
+        >Represents a tabular data source view on XML data for an <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
         
 
@@ -185,13 +158,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new named instance of the <see
-             cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+            >Initializes a new named instance of the <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
             
 
-             class, and associates the specified <see
-             cref="T:System.Web.UI.WebControls.XmlDataSource" />
+             class, and associates the specified <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
             
 
@@ -199,24 +170,30 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.XmlDataSource" />
+          The <see cref="T:System.Web.UI.WebControls.XmlDataSource" />
 
           
 
-           that the <see
-           cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+           that the <see cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
 
           
 
            is associated with. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -271,8 +248,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -280,12 +256,15 @@
           >
         </returns>
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.DataSourceSelectArguments" />
+          A <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
           
 

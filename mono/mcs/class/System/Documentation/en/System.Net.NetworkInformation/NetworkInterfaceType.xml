@@ -19,8 +19,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Network interfaces, also known as network adapters, connect a computer to a network. The interface type defines the transmission media that provides network connectivity.</para>
       <para
-        >This enumeration defines the values returned by the <see
-         cref="P:System.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType" />
+        >This enumeration defines the values returned by the <see cref="P:System.Net.NetworkInformation.NetworkInterface.NetworkInterfaceType" />
 
         
 

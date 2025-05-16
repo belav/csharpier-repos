@@ -24,41 +24,34 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The SOAP messages passed between parts of the indigo1 system are handled by various components of the system that must inspect these messages to determine what actions to take in processing them. The XPath engine is a component that queries messages for this purpose and it requires a navigator to read SOAP messages and other XML documents. A navigator provides a cursor that moves from node to node tracking where the XML document is actually being read.</para>
       <para
-        >The XPath engine works with a <see
-         cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+        >The XPath engine works with a <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
         
 
-        , which extends the <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+        , which extends the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         class by adding a <see
-         cref="P:System.ServiceModel.Dispatcher.SeekableXPathNavigator.CurrentPosition" />
+         class by adding a <see cref="P:System.ServiceModel.Dispatcher.SeekableXPathNavigator.CurrentPosition" />
 
         
 
-         property. This property allows positions within the XML document to be saved and loaded quickly without having to clone the navigator, an expensive memory allocation that the <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+         property. This property allows positions within the XML document to be saved and loaded quickly without having to clone the navigator, an expensive memory allocation that the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         requires for such an operation. The XPath engine must frequently record the position of the cursor in the course of executing queries on XML documents, so the <see
-         cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+         requires for such an operation. The XPath engine must frequently record the position of the cursor in the course of executing queries on XML documents, so the <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
         
 
          provides an important optimization for message processing. </para
       >
       <para
-        >Note that the value of the <see
-         cref="P:System.ServiceModel.Dispatcher.SeekableXPathNavigator.CurrentPosition" />
+        >Note that the value of the <see cref="P:System.ServiceModel.Dispatcher.SeekableXPathNavigator.CurrentPosition" />
 
         
 
-         property is implementation-specific and may not map to node position or character position. Its value is only meaningful to the <see
-         cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+         property is implementation-specific and may not map to node position or character position. Its value is only meaningful to the <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
         
 
@@ -87,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.SeekableXPathNavigator" />
 
             
 
@@ -128,18 +120,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Xml.XmlNodeOrder" />
+            >One of the <see cref="T:System.Xml.XmlNodeOrder" />
 
             
 
-             values that describes the relation of <paramref
-             name="firstPosition" />
+             values that describes the relation of <paramref name="firstPosition" />
 
             
 
-             to <paramref
-             name="secondPosition" />
+             to <paramref name="secondPosition" />
 
             
 
@@ -199,8 +188,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The local name of the node at the specified position. <see
-             cref="F:System.String.Empty" />
+            >The local name of the node at the specified position. <see cref="F:System.String.Empty" />
 
             
 
@@ -230,8 +218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name is the name of the XML element at <paramref
-             name="nodePosition" />
+            >The name is the name of the XML element at <paramref name="nodePosition" />
 
             
 
@@ -245,13 +232,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the node at <paramref
-             name="nodePosition" />
+            >The name of the node at <paramref name="nodePosition" />
 
             
 
-            . <see
-             cref="F:System.String.Empty" />
+            . <see cref="F:System.String.Empty" />
 
             
 
@@ -289,13 +274,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The namespace of the node at <paramref
-             name="nodePosition" />
+            >The namespace of the node at <paramref name="nodePosition" />
 
             
 
-            . <see
-             cref="F:System.String.Empty" />
+            . <see cref="F:System.String.Empty" />
 
             
 
@@ -333,8 +316,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Xml.XPath.XPathNodeType" />
+            >One of the <see cref="T:System.Xml.XPath.XPathNodeType" />
 
             
 
@@ -367,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For elements, this method returns the concatenation of all text descendents of the node at the specified position, similar to the <see
-             cref="P:System.Xml.XmlElement.InnerText" />
+            >For elements, this method returns the concatenation of all text descendents of the node at the specified position, similar to the <see cref="P:System.Xml.XmlElement.InnerText" />
 
             
 
@@ -382,13 +363,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text value of the node at <paramref
-             name="nodePosition" />
+            >The text value of the node at <paramref name="nodePosition" />
 
             
 
-            . <see
-             cref="F:System.String.Empty" />
+            . <see cref="F:System.String.Empty" />
 
             
 

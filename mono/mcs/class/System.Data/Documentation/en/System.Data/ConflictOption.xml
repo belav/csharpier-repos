@@ -62,13 +62,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All update and delete statements include only <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+            >All update and delete statements include only <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             columns in the WHERE clause. If no <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             columns in the WHERE clause. If no <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 

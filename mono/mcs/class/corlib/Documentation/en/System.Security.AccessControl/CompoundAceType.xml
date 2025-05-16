@@ -19,8 +19,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of a <see
-         cref="T:System.Security.AccessControl.CompoundAce" />
+        >Specifies the type of a <see cref="T:System.Security.AccessControl.CompoundAce" />
 
         
 
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.CompoundAce" />
+            >The <see cref="T:System.Security.AccessControl.CompoundAce" />
 
             
 

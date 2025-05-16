@@ -30,51 +30,42 @@
 
         
 
-         is a specialized collection object similar to a Thread Local Storage for method calls and provides data slots that are unique to each logical thread of execution. The slots are not shared across call contexts on other logical threads. Objects can be added to the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         is a specialized collection object similar to a Thread Local Storage for method calls and provides data slots that are unique to each logical thread of execution. The slots are not shared across call contexts on other logical threads. Objects can be added to the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
          as it travels down and back up the execution code path, and examined by various objects along the path.</para
       >
       <para
-        >When a remote method call is made to an object in another <see
-         cref="T:System.AppDomain" />
+        >When a remote method call is made to an object in another <see cref="T:System.AppDomain" />
 
         
 
-        , the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+        , the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         class generates a <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         class generates a <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-         instance that travels along with the remote call. Only objects that expose the <see
-         cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
+         instance that travels along with the remote call. Only objects that expose the <see cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
 
         
 
-         interface and are stored in the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         interface and are stored in the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         are propagated outside the <see
-         cref="T:System.AppDomain" />
+         are propagated outside the <see cref="T:System.AppDomain" />
 
         
 
-         in a <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         in a <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-        . Objects that do not support this interface are not transmitted in <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+        . Objects that do not support this interface are not transmitted in <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
@@ -82,13 +73,11 @@
       >
       <block subset="none" type="note">
         <para
-          >All methods in <see
-           cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+          >All methods in <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
           
 
-           are static and operate on the call context in the current <see
-           cref="T:System.Threading.Thread" />
+           are static and operate on the call context in the current <see cref="T:System.Threading.Thread" />
 
           
 
@@ -97,8 +86,7 @@
       </block>
       <block subset="none" type="note">
         <para
-          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format
-           type="text/html">
+          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
@@ -139,7 +127,11 @@
           <para>Empties a data slot with the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an object with the specified name from the <see
-             cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+            >Retrieves an object with the specified name from the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
             
 
@@ -183,7 +174,11 @@
           <para>The object in the call context associated with the specified name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -270,7 +265,11 @@
           <para>The object in the logical call context associated with the specified name.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,14 +305,22 @@
           <para>Stores a given object in the logical call context and associates it with the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name with which to associate the new item in the logical call context. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -350,14 +357,22 @@
           <para>Stores a given object and associates it with the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name with which to associate the new item in the call context. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -393,12 +408,15 @@
           <para>Sets the headers that are sent along with the method call.</para>
         </summary>
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Remoting.Messaging.Header" />
+          A <see cref="T:System.Runtime.Remoting.Messaging.Header" />
 
           
 

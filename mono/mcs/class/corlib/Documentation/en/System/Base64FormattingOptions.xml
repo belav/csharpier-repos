@@ -23,36 +23,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="Overload:System.Convert.ToBase64CharArray" />
+        >The <see cref="Overload:System.Convert.ToBase64CharArray" />
 
         
 
-         and <see
-         cref="Overload:System.Convert.ToBase64String" />
+         and <see cref="Overload:System.Convert.ToBase64String" />
 
         
 
          methods convert the value of an array of 8-bit unsigned integers to an equivalent string representation that consists of base 64 digits. The string representation can contain one or more line breaks, where a line break is defined as a carriage return character (U+000D) followed by a line feed character (U+000A).</para
       >
       <para
-        >The <see
-         cref="F:System.Base64FormattingOptions.None" />
+        >The <see cref="F:System.Base64FormattingOptions.None" />
 
         
 
-         and <see
-         cref="F:System.Base64FormattingOptions.InsertLineBreaks" />
+         and <see cref="F:System.Base64FormattingOptions.InsertLineBreaks" />
 
         
 
-         values are mutually exclusive. Therefore, although the <see
-         cref="T:System.Base64FormattingOptions" />
+         values are mutually exclusive. Therefore, although the <see cref="T:System.Base64FormattingOptions" />
 
         
 
-         enumeration is marked with the <see
-         cref="T:System.FlagsAttribute" />
+         enumeration is marked with the <see cref="T:System.FlagsAttribute" />
 
         
 
@@ -62,13 +56,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether relevant <see
-         cref="Overload:System.Convert.ToBase64CharArray" />
+        >Specifies whether relevant <see cref="Overload:System.Convert.ToBase64CharArray" />
 
         
 
-         and <see
-         cref="Overload:System.Convert.ToBase64String" />
+         and <see cref="Overload:System.Convert.ToBase64String" />
 
         
 

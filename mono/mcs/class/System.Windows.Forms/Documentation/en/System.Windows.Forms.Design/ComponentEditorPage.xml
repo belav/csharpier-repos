@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+        >The <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
 
         
 
-         class is a complete implementation for a component editor page that consists of an empty window. You can extend this page to add your own controls. <see
-         cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+         class is a complete implementation for a component editor page that consists of an empty window. You can extend this page to add your own controls. <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
 
         
 
-         is used by a <see
-         cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+         is used by a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
         
 
-         of a <see
-         cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />
+         of a <see cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />
 
         
 
@@ -43,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a base implementation for a <see
-         cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+        >Provides a base implementation for a <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
 
         
 
@@ -62,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
 
             
 
@@ -264,31 +258,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each procedure that performs loading or initialization should first call the <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
+            >Each procedure that performs loading or initialization should first call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
 
             
 
-             method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
+             method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
 
             
 
-             completes, it should call the <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" />
+             completes, it should call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" />
 
             
 
              method to indicate that its part of the load process is completed.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
+            >The <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
 
             
 
-             property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see
-             cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
+             property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
 
             
 
@@ -316,31 +305,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each procedure that performs loading or initialization should first call the <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
+            >Each procedure that performs loading or initialization should first call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
 
             
 
-             method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
+             method to indicate that it will load something before the editor can display the loaded editor page. When a loading procedure that called <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.EnterLoadingMode" />
 
             
 
-             completes, it should call the <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" />
+             completes, it should call the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ExitLoadingMode" />
 
             
 
              method to indicate that its part of the load process is completed.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
+            >The <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
 
             
 
-             property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see
-             cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
+             property is used as a counter to determine when loading is complete. A page is in loading mode if the value of the <see cref="P:System.Windows.Forms.Design.ComponentEditorPage.Loading" />
 
             
 
@@ -395,8 +379,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Control" />
+            >The <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -428,8 +411,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.IComponent" />
+            >The <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -694,12 +676,15 @@
           <para>Sets the component to be edited.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -749,7 +734,11 @@
           <para>Sets the site for this page.</para>
         </summary>
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -772,18 +761,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is only called if <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.SupportsHelp" />
+            >This is only called if <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.SupportsHelp" />
 
             
 
-             returns true. The Help system calls the <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" />
+             returns true. The Help system calls the <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" />
 
             
 
-             method to provide Help for the page. <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" />
+             method to provide Help for the page. <see cref="M:System.Windows.Forms.Design.ComponentEditorPage.ShowHelp" />
 
             
 

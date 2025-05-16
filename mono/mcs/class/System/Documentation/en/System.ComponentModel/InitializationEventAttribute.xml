@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.InitializationEventAttribute" />
+        >The <see cref="T:System.ComponentModel.InitializationEventAttribute" />
 
         
 
@@ -65,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.InitializationEventAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InitializationEventAttribute" />
 
             
 
@@ -74,7 +72,11 @@
           >
         </summary>
         <param name="eventName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

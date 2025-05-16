@@ -23,18 +23,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A design host, such as vsprvslong, must provide its own derived version of the <see
-         cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+        >A design host, such as vsprvslong, must provide its own derived version of the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
         
 
-         class to control designers through the <see
-         cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+         class to control designers through the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
         
 
-         property of the designer. Control designers use the <see
-         cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+         property of the designer. Control designers use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
         
 
@@ -59,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
@@ -91,12 +87,15 @@
           <para>When overridden in a derived class, adds a client script element to the current Web Forms page.</para>
         </summary>
         <param name="scriptItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ClientScriptItem" />
+          A <see cref="T:System.Web.UI.Design.ClientScriptItem" />
 
           
 
@@ -135,41 +134,49 @@
           <para>The ID of the control that was added.</para>
         </returns>
         <param name="newControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control to add to the Web Forms page.</param
         >
         <param name="referenceControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The control relative to which <paramref
-           name="newControl" />
+          The control relative to which <paramref name="newControl" />
 
           
 
            is added.</param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ControlLocation" />
+          A <see cref="T:System.Web.UI.Design.ControlLocation" />
 
           
 
-           value that indicates the location for <paramref
-           name="newControl" />
+           value that indicates the location for <paramref name="newControl" />
 
           
 
-           relative to <paramref
-           name="referenceControl" />
+           relative to <paramref name="referenceControl" />
 
           
 
@@ -194,13 +201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.WebFormsRootDesigner.Component" />
+            >The <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.Component" />
 
             
 
-             property is set by the <see
-             cref="M:System.Web.UI.Design.WebFormsRootDesigner.Initialize(System.ComponentModel.IComponent)" />
+             property is set by the <see cref="M:System.Web.UI.Design.WebFormsRootDesigner.Initialize(System.ComponentModel.IComponent)" />
 
             
 
@@ -232,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebFormsRootDesigner.CreateDesignerActionService(System.IServiceProvider)" />
+            >The <see cref="M:System.Web.UI.Design.WebFormsRootDesigner.CreateDesignerActionService(System.IServiceProvider)" />
 
             
 
@@ -243,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a design-time <see
-             cref="T:System.ComponentModel.Design.DesignerActionService" />
+            >Returns a design-time <see cref="T:System.ComponentModel.Design.DesignerActionService" />
 
             
 
@@ -256,12 +259,15 @@
           <para>A design-time designer action service object.</para>
         </returns>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A design host, such as vsprvslong, cast as an <see
-           cref="T:System.IServiceProvider" />
+          A design host, such as vsprvslong, cast as an <see cref="T:System.IServiceProvider" />
 
           
 
@@ -287,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Web.UI.IUrlResolutionService" />
+            >Returns an <see cref="T:System.Web.UI.IUrlResolutionService" />
 
             
 
@@ -339,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources that are used by the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
@@ -348,7 +352,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Frees the resources of the current <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >Frees the resources of the current <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
@@ -418,8 +425,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebFormsRootDesigner.GenerateEmptyDesignTimeHtml(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.WebFormsRootDesigner.GenerateEmptyDesignTimeHtml(System.Web.UI.Control)" />
 
             
 
@@ -435,7 +441,11 @@
           <para>HTML markup for an empty control.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -471,21 +481,33 @@
           <para>HTML markup for a control and exception information.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control that raised the exception.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception. </param
         >
         <param name="errorMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -511,8 +533,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns a <see
-             cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+            >When overridden in a derived class, returns a <see cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
 
             
 
@@ -580,7 +601,11 @@
           <para>The requested service; otherwise, null, if the service cannot be resolved.</para>
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -608,8 +633,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a view object that is determined by the provided <see
-             cref="T:System.ComponentModel.Design.ViewTechnology" />
+            >Returns a view object that is determined by the provided <see cref="T:System.ComponentModel.Design.ViewTechnology" />
 
             
 
@@ -621,17 +645,19 @@
           <para>An object containing the current view of the component.</para>
         </returns>
         <param name="viewTechnology">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.ViewTechnology" />
+          A <see cref="T:System.ComponentModel.Design.ViewTechnology" />
 
           
 
-           obtained from the <see
-           cref="P:System.Web.UI.Design.WebFormsRootDesigner.SupportedTechnologies" />
+           obtained from the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.SupportedTechnologies" />
 
           
 
@@ -659,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >Initializes the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
@@ -668,7 +693,11 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -746,8 +775,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Design.WebFormsRootDesigner.LoadComplete" />
+            >Raises the <see cref="E:System.Web.UI.Design.WebFormsRootDesigner.LoadComplete" />
 
             
 
@@ -755,12 +783,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -788,8 +819,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows a designer to change or remove items from the set of attributes that the designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows a designer to change or remove items from the set of attributes that the designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -797,7 +827,11 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -825,8 +859,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows a designer to change or remove items from the set of events that the designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows a designer to change or remove items from the set of events that the designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -834,7 +867,11 @@
           >
         </summary>
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -862,8 +899,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows a designer to change or remove items from the set of properties that the designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows a designer to change or remove items from the set of properties that the designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -871,7 +907,11 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -899,8 +939,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows a designer to add to the set of attributes that the designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows a designer to add to the set of attributes that the designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -908,7 +947,11 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -936,8 +979,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows a designer to add items to the set of events that the designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows a designer to add items to the set of events that the designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -945,7 +987,11 @@
           >
         </summary>
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -973,8 +1019,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows a designer to add items to the set of properties that the designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows a designer to add items to the set of properties that the designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -982,7 +1027,11 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1008,8 +1057,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets a <see
-             cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+            >When overridden in a derived class, gets a <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
             
 
@@ -1040,7 +1088,11 @@
           <para>Removes the specified client script from the document at design time.</para>
         </summary>
         <param name="clientScriptId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,7 +1122,11 @@
           <para>When overridden in a derived class, removes the specified control from the Web Forms page.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1099,8 +1155,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A fully qualified URL resolved from <paramref
-             name="relativeUrl" />
+            >A fully qualified URL resolved from <paramref name="relativeUrl" />
 
             
 
@@ -1108,7 +1163,11 @@
           >
         </returns>
         <param name="relativeUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1139,14 +1198,22 @@
           <para>Sets the ID property of the specified control with the specified string.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The control on which to set the ID.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1189,13 +1256,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
@@ -1205,8 +1270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesigner.DoDefaultAction" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesigner.DoDefaultAction" />
 
             
 
@@ -1232,13 +1296,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesigner" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesigner" />
 
             
 
@@ -1248,8 +1310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the design-time verbs that are supported by the designer. For a description of this member, see <see
-             cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+            >Gets or sets the design-time verbs that are supported by the designer. For a description of this member, see <see cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
 
             
 
@@ -1277,13 +1338,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1293,8 +1352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesignerFilter.PostFilterAttributes(System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesignerFilter.PostFilterAttributes(System.Collections.IDictionary)" />
 
             
 
@@ -1302,7 +1360,11 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1329,13 +1391,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1345,8 +1405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesignerFilter.PostFilterEvents(System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesignerFilter.PostFilterEvents(System.Collections.IDictionary)" />
 
             
 
@@ -1354,7 +1413,11 @@
           >
         </summary>
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1381,13 +1444,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1397,8 +1458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesignerFilter.PostFilterProperties(System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesignerFilter.PostFilterProperties(System.Collections.IDictionary)" />
 
             
 
@@ -1406,7 +1466,11 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1433,13 +1497,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1449,8 +1511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesignerFilter.PreFilterAttributes(System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesignerFilter.PreFilterAttributes(System.Collections.IDictionary)" />
 
             
 
@@ -1458,7 +1519,11 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1485,13 +1550,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1501,8 +1564,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesignerFilter.PreFilterEvents(System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesignerFilter.PreFilterEvents(System.Collections.IDictionary)" />
 
             
 
@@ -1510,7 +1572,11 @@
           >
         </summary>
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1537,13 +1603,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1553,8 +1617,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IDesignerFilter.PreFilterProperties(System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.IDesignerFilter.PreFilterProperties(System.Collections.IDictionary)" />
 
             
 
@@ -1562,7 +1625,11 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1589,13 +1656,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IRootDesigner" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
             
 
@@ -1605,8 +1670,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a view object for the specified view technology. For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.IRootDesigner.GetView(System.ComponentModel.Design.ViewTechnology)" />
+            >Gets a view object for the specified view technology. For a description of this member, see <see cref="M:System.ComponentModel.Design.IRootDesigner.GetView(System.ComponentModel.Design.ViewTechnology)" />
 
             
 
@@ -1618,7 +1682,11 @@
           <para>The view object for the specified view technology.</para>
         </returns>
         <param name="viewTechnology">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1643,13 +1711,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IRootDesigner" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
             
 
@@ -1659,8 +1725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of technologies that the designer component can support for its display. For a description of this member, see <see
-             cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
+            >Gets an array of technologies that the designer component can support for its display. For a description of this member, see <see cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
 
             
 
@@ -1683,13 +1748,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IDisposable" />
+             instance is cast to an <see cref="T:System.IDisposable" />
 
             
 
@@ -1699,8 +1762,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IDisposable.Dispose" />
+            >For a description of this member, see <see cref="M:System.IDisposable.Dispose" />
 
             
 
@@ -1727,8 +1789,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Typically, a design-time environment provides a <ui
-              >Properties</ui>
+              >Typically, a design-time environment provides a <ui>Properties</ui>
 
               
 

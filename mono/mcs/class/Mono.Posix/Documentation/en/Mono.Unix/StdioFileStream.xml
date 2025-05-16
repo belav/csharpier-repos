@@ -17,13 +17,11 @@
   <Interfaces />
   <Docs>
     <summary
-      >A <see
-       cref="T:System.IO.Stream" />
+      >A <see cref="T:System.IO.Stream" />
 
       
 
-       wrapper over the <c
-      >FILE</c>
+       wrapper over the <c>FILE</c>
 
       
 
@@ -38,8 +36,7 @@
 
          is used for reading and 
         writing files on a file system and interoperating with the standard
-        ANSI/ISO C <c
-        >FILE</c>
+        ANSI/ISO C <c>FILE</c>
 
         
 
@@ -53,34 +50,29 @@
 
          objects support 
         random access to files using the 
-        <see
-         cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
+        <see cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
         
 
          
         method, and the 
-        <see
-         cref="P:System.IO.Stream.CanSeek" />
+        <see cref="P:System.IO.Stream.CanSeek" />
 
         
 
          properties of 
-        <see
-         cref="T:Mono.Unix.StdioFileStream" />
+        <see cref="T:Mono.Unix.StdioFileStream" />
 
         
 
          instances 
-        encapsulating files are set to <see
-         langword="true" />
+        encapsulating files are set to <see langword="true" />
 
         
 
         . 
         The 
-        <see
-         cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
+        <see cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
         
 
@@ -90,41 +82,36 @@
         parameters. The byte offset is relative to the seek reference point, 
         which can be the beginning, the current position, or the end of the 
         underlying file, as represented by the three values of the
-        <see
-         cref="T:System.IO.SeekOrigin" />
+        <see cref="T:System.IO.SeekOrigin" />
 
         
 
          enumeration.
       </para
       >
-      <para
-        >
-        If a <see
-         cref="T:Mono.Unix.StdioFileStream" />
+      <para>
+        If a <see cref="T:Mono.Unix.StdioFileStream" />
 
         
 
          encapsulates a 
         device that does not support seeking, its 
-        <see
-         cref="P:System.IO.FileStream.CanSeek" />
+        <see cref="P:System.IO.FileStream.CanSeek" />
 
         
 
          property is 
-        <see
-         langword="false" />
+        <see langword="false" />
 
         
 
         . 
         <block
-         subset="none" type="note"
-          >
+          subset="none"
+          type="note"
+        >
           For additional information, see 
-          <see
-           cref="P:System.IO.Stream.CanSeek" />
+          <see cref="P:System.IO.Stream.CanSeek" />
 
           
 
@@ -133,11 +120,9 @@
         >
       </para>
       <example>
-        <para
-          >
+        <para>
           The following example demonstrates the use of a 
-          <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
@@ -216,15 +201,12 @@ class Directory {
         <Parameter Name="fileStream" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="fileStream"
-          >
-          A <see
-           cref="T:System.IntPtr" />
+        <param name="fileStream">
+          A <see cref="T:System.IntPtr" />
 
           
 
-           containing a <c
-          >FILE</c>
+           containing a <c>FILE</c>
 
           
 
@@ -232,20 +214,17 @@ class Directory {
         </param
         >
         <summary
-          >Creates a <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          >Creates a <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            type,
-        wrapping the existing unmanaged <c
-          >FILE</c>
+        wrapping the existing unmanaged <c>FILE</c>
 
           
 
            pointer 
-        <paramref
-           name="fileStream" />
+        <paramref name="fileStream" />
 
           
 
@@ -253,14 +232,12 @@ class Directory {
         >
         <remarks>
           <para
-            >By default, <paramref
-             name="fileStream" />
+            >By default, <paramref name="fileStream" />
 
             
 
              is owned by the
-          created <see
-             cref="T:Mono.Unix.StdioFileStream" />
+          created <see cref="T:Mono.Unix.StdioFileStream" />
 
             
 
@@ -272,8 +249,7 @@ class Directory {
 
           
 
-           is an invalid <c
-          >FILE</c>
+           is an invalid <c>FILE</c>
 
           
 
@@ -300,35 +276,29 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the file name to open.</param
         >
-        <summary
-          >Opens <paramref
-           name="path" />
+        <summary>Opens <paramref name="path" />
 
           
 
-           for reading.</summary
-        >
+           for reading.</summary>
         <remarks></remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
 
           
 
-           or <paramref
-           name="mode" />
+           or <paramref name="mode" />
 
           
 
            is 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -340,8 +310,7 @@ class Directory {
 
           
 
-           is a <c
-          >0</c>
+           is a <c>0</c>
 
           
 
@@ -379,103 +348,87 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="fileStream"
-          >A <see
-           cref="T:System.IntPtr" />
+          >A <see cref="T:System.IntPtr" />
 
           
 
-           containing a <c
-          >FILE</c>
+           containing a <c>FILE</c>
 
           
 
            pointer</param
         >
         <param name="ownsHandle"
-          >A <see
-           cref="T:System.Boolean" />
+          >A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the created 
-          <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            instance "owns" 
-          <paramref
-           name="fileStream" />
+          <paramref name="fileStream" />
 
           
 
           .</param
         >
         <summary
-          >Creates a <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          >Creates a <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            type,
-        wrapping the existing unmanaged <c
-          >FILE</c>
+        wrapping the existing unmanaged <c>FILE</c>
 
           
 
            pointer 
-        <paramref
-           name="fileStream" />
+        <paramref name="fileStream" />
 
           
 
           .</summary
         >
         <remarks
-          >If <paramref
-           name="ownsHandle" />
+          >If <paramref name="ownsHandle" />
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
           ,
-        then <paramref
-           name="fileStream" />
+        then <paramref name="fileStream" />
 
           
 
            will be closed via 
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.fclose" />
+        <see cref="M:Mono.Unix.Native.Stdlib.fclose" />
 
           
 
            when 
-        <see
-           cref="M:Mono.Unix.StdioFileStream.Close" />
+        <see cref="M:Mono.Unix.StdioFileStream.Close" />
 
           
 
            is invoked (which is
         also called from the finalizer and from the 
-        <see
-           cref="T:System.IDisposable" />
+        <see cref="T:System.IDisposable" />
 
           
 
            implementation).  Otherwise,
-        <paramref
-           name="fileStream" />
+        <paramref name="fileStream" />
 
           
 
            will only be flushed on 
-        <see
-           cref="M:Mono.Unix.StdioFileStream.Close" />
+        <see cref="M:Mono.Unix.StdioFileStream.Close" />
 
           
 
@@ -487,8 +440,7 @@ class Directory {
 
           
 
-           is an invalid <c
-          >FILE</c>
+           is an invalid <c>FILE</c>
 
           
 
@@ -518,67 +470,57 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="fileStream"
-          >A <see
-           cref="T:System.IntPtr" />
+          >A <see cref="T:System.IntPtr" />
 
           
 
-           containing a <c
-          >FILE</c>
+           containing a <c>FILE</c>
 
           
 
            pointer</param
         >
         <param name="access"
-          >A <see
-           cref="T:System.IO.FileAccess" />
+          >A <see cref="T:System.IO.FileAccess" />
 
           
 
            value
           that determins how the file may be accessed by the 
-          <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            object.  This parameter is 
           used to specify the initial values of the 
-          <see
-           cref="P:System.IO.Stream.CanRead" />
+          <see cref="P:System.IO.Stream.CanRead" />
 
           
 
            and
-          <see
-           cref="P:System.IO.Stream.CanWrite" />
+          <see cref="P:System.IO.Stream.CanWrite" />
 
           
 
            properties.</param
         >
         <summary
-          >Creates a <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          >Creates a <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            type,
-        wrapping the existing unmanaged <c
-          >FILE</c>
+        wrapping the existing unmanaged <c>FILE</c>
 
           
 
            pointer
-        <paramref
-           name="fileStream" />
+        <paramref name="fileStream" />
 
           
 
            with the specified file 
-        <paramref
-           name="access" />
+        <paramref name="access" />
 
           
 
@@ -586,14 +528,12 @@ class Directory {
         >
         <remarks>
           <para
-            >By default, <paramref
-             name="fileStream" />
+            >By default, <paramref name="fileStream" />
 
             
 
              is owned by the
-          created <see
-             cref="T:Mono.Unix.StdioFileStream" />
+          created <see cref="T:Mono.Unix.StdioFileStream" />
 
             
 
@@ -605,8 +545,7 @@ class Directory {
 
           
 
-           is an invalid <c
-          >FILE</c>
+           is an invalid <c>FILE</c>
 
           
 
@@ -637,50 +576,43 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the file name to open.</param
         >
         <param name="access"
-          >A <see
-           cref="T:System.IO.FileAccess" />
+          >A <see cref="T:System.IO.FileAccess" />
 
           
 
            value
         that determins how the file may be accessed by the 
-        <see
-           cref="T:Mono.Unix.StdioFileStream" />
+        <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            object.  This parameter is 
         used to specify the initial values of the 
-        <see
-           cref="P:System.IO.Stream.CanRead" />
+        <see cref="P:System.IO.Stream.CanRead" />
 
           
 
            and
-        <see
-           cref="P:System.IO.Stream.CanWrite" />
+        <see cref="P:System.IO.Stream.CanWrite" />
 
           
 
            properties.</param
         >
         <summary
-          >Opens <paramref
-           name="path" />
+          >Opens <paramref name="path" />
 
           
 
            with the specified file access
-        <paramref
-           name="access" />
+        <paramref name="access" />
 
           
 
@@ -692,14 +624,12 @@ class Directory {
 
           
 
-           or <paramref
-           name="mode" />
+           or <paramref name="mode" />
 
           
 
            is 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -711,8 +641,7 @@ class Directory {
 
           
 
-           is a <c
-          >0</c>
+           is a <c>0</c>
 
           
 
@@ -733,20 +662,17 @@ class Directory {
           
 
            is not one of 
-          <see
-           cref="F:System.IO.FileAccess.Read" />
+          <see cref="F:System.IO.FileAccess.Read" />
 
           
 
           ,
-          <see
-           cref="F:System.IO.FileAccess.Write" />
+          <see cref="F:System.IO.FileAccess.Write" />
 
           
 
           , or
-          <see
-           cref="F:System.IO.FileAccess.ReadWrite" />
+          <see cref="F:System.IO.FileAccess.ReadWrite" />
 
           
 
@@ -776,16 +702,14 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the file name to open.</param
         >
         <param name="mode"
-          >A <see
-           cref="T:System.IO.FileMode" />
+          >A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -793,14 +717,12 @@ class Directory {
         determines how to open or create the file.</param
         >
         <summary
-          >Opens <paramref
-           name="path" />
+          >Opens <paramref name="path" />
 
           
 
            with the specified file mode
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
@@ -812,14 +734,12 @@ class Directory {
 
           
 
-           or <paramref
-           name="mode" />
+           or <paramref name="mode" />
 
           
 
            is 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -831,8 +751,7 @@ class Directory {
 
           
 
-           is a <c
-          >0</c>
+           is a <c>0</c>
 
           
 
@@ -853,8 +772,7 @@ class Directory {
           
 
            exists and 
-          <see
-           cref="F:System.IO.FileMode.CreateNew" />
+          <see cref="F:System.IO.FileMode.CreateNew" />
 
           
 
@@ -867,8 +785,7 @@ class Directory {
           
 
            doesn't exist and 
-          <see
-           cref="F:System.IO.FileMode.Open" />
+          <see cref="F:System.IO.FileMode.Open" />
 
           
 
@@ -895,35 +812,30 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the file name to open.</param
         >
         <param name="mode"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
-           specifying how to access <paramref
-           name="path" />
+           specifying how to access <paramref name="path" />
 
           
 
           .</param
         >
         <summary
-          >Opens <paramref
-           name="path" />
+          >Opens <paramref name="path" />
 
           
 
            with the specified 
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
@@ -931,8 +843,7 @@ class Directory {
         >
         <remarks>
           <para
-            >The argument <paramref
-             name="mode" />
+            >The argument <paramref name="mode" />
 
             
 
@@ -976,8 +887,7 @@ class Directory {
                 <c>"a"</c>
               </term>
               <description
-                >Open for writing.  The file is created if it does not exist.  The stream is positioned at the end of the file.  Subsequent writes to the file will always end up at the then current end of file, irrespective of any intervening <see
-                 cref="M:System.IO.Stream.Seek" />
+                >Open for writing.  The file is created if it does not exist.  The stream is positioned at the end of the file.  Subsequent writes to the file will always end up at the then current end of file, irrespective of any intervening <see cref="M:System.IO.Stream.Seek" />
 
                 
 
@@ -989,8 +899,7 @@ class Directory {
                 <c>"a+"</c>
               </term>
               <description
-                >Open for reading and writing.  The file is created if it does not exist.  The stream is positioned at the end of the file.  Subsequent writes to the file will always end up at the then current end of file, irrespective of any intervening <see
-                 cref="M:System.IO.Stream.Seek" />
+                >Open for reading and writing.  The file is created if it does not exist.  The stream is positioned at the end of the file.  Subsequent writes to the file will always end up at the then current end of file, irrespective of any intervening <see cref="M:System.IO.Stream.Seek" />
 
                 
 
@@ -999,23 +908,20 @@ class Directory {
             </item>
           </list>
           <para
-            >The <paramref
-             name="mode" />
+            >The <paramref name="mode" />
 
             
 
              string can also include the letter 
           "b" either as a third character or as a character between the 
           characters in any of the two-character strings described above, and 
-          is used to enable <i
-            >binary</i>
+          is used to enable <i>binary</i>
 
             
 
              reading/writing on platforms which 
           have different text/binary encodings (read: Microsoft Windows).  The 
-          default (non-<c
-            >b</c>
+          default (non-<c>b</c>
             <paramref name="mode" />
 
             
@@ -1023,15 +929,13 @@ class Directory {
             ) is text encoding.</para
           >
           <para
-            >Any created files will have mode <c
-            >S_IRUSR | S_IWUSR | S_IRGRP | 
+            >Any created files will have mode <c>S_IRUSR | S_IWUSR | S_IRGRP | 
           S_IWGRP | S_IROTH | S_IWOTH</c>
 
             
 
              (0666), as modified by the process' 
-          umask value (see <see
-             cref="M:Mono.Unix.Native.Syscall.umask" />
+          umask value (see <see cref="M:Mono.Unix.Native.Syscall.umask" />
 
             
 
@@ -1047,14 +951,12 @@ class Directory {
 
           
 
-           or <paramref
-           name="mode" />
+           or <paramref name="mode" />
 
           
 
            is 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -1066,8 +968,7 @@ class Directory {
 
           
 
-           is a <c
-          >0</c>
+           is a <c>0</c>
 
           
 
@@ -1107,137 +1008,116 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="fileStream"
-          >A <see
-           cref="T:System.IntPtr" />
+          >A <see cref="T:System.IntPtr" />
 
           
 
-           containing a <c
-          >FILE</c>
+           containing a <c>FILE</c>
 
           
 
            pointer</param
         >
         <param name="access"
-          >A <see
-           cref="T:System.IO.FileAccess" />
+          >A <see cref="T:System.IO.FileAccess" />
 
           
 
            value
           that determins how the file may be accessed by the 
-          <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            object.  This parameter is 
           used to specify the initial values of the 
-          <see
-           cref="P:System.IO.Stream.CanRead" />
+          <see cref="P:System.IO.Stream.CanRead" />
 
           
 
            and
-          <see
-           cref="P:System.IO.Stream.CanWrite" />
+          <see cref="P:System.IO.Stream.CanWrite" />
 
           
 
            properties.</param
         >
         <param name="ownsHandle"
-          >A <see
-           cref="T:System.Boolean" />
+          >A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the created 
-          <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            instance "owns" 
-          <paramref
-           name="fileStream" />
+          <paramref name="fileStream" />
 
           
 
           .</param
         >
         <summary
-          >Creates a <see
-           cref="T:Mono.Unix.StdioFileStream" />
+          >Creates a <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            type,
-        wrapping the existing unmanaged <c
-          >FILE</c>
+        wrapping the existing unmanaged <c>FILE</c>
 
           
 
            pointer
-        <paramref
-           name="fileStream" />
+        <paramref name="fileStream" />
 
           
 
            with the specified file 
-        <paramref
-           name="access" />
+        <paramref name="access" />
 
           
 
           .</summary
         >
         <remarks
-          >If <paramref
-           name="ownsHandle" />
+          >If <paramref name="ownsHandle" />
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
           ,
-        then <paramref
-           name="fileStream" />
+        then <paramref name="fileStream" />
 
           
 
            will be closed via 
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.fclose" />
+        <see cref="M:Mono.Unix.Native.Stdlib.fclose" />
 
           
 
            when 
-        <see
-           cref="M:Mono.Unix.StdioFileStream.Close" />
+        <see cref="M:Mono.Unix.StdioFileStream.Close" />
 
           
 
            is invoked (which is
         also called from the finalizer and from the 
-        <see
-           cref="T:System.IDisposable" />
+        <see cref="T:System.IDisposable" />
 
           
 
            implementation).  Otherwise,
-        <paramref
-           name="fileStream" />
+        <paramref name="fileStream" />
 
           
 
            will only be flushed on 
-        <see
-           cref="M:Mono.Unix.StdioFileStream.Close" />
+        <see cref="M:Mono.Unix.StdioFileStream.Close" />
 
           
 
@@ -1249,8 +1129,7 @@ class Directory {
 
           
 
-           is an invalid <c
-          >FILE</c>
+           is an invalid <c>FILE</c>
 
           
 
@@ -1281,16 +1160,14 @@ class Directory {
       </Parameters>
       <Docs>
         <param name="path"
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
            containing the file name to open.</param
         >
         <param name="mode"
-          >A <see
-           cref="T:System.IO.FileMode" />
+          >A <see cref="T:System.IO.FileMode" />
 
           
 
@@ -1298,48 +1175,41 @@ class Directory {
         determines how to open or create the file.</param
         >
         <param name="access"
-          >A <see
-           cref="T:System.IO.FileAccess" />
+          >A <see cref="T:System.IO.FileAccess" />
 
           
 
            value
         that determins how the file may be accessed by the 
-        <see
-           cref="T:Mono.Unix.StdioFileStream" />
+        <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
            object.  This parameter is 
         used to specify the initial values of the 
-        <see
-           cref="P:System.IO.Stream.CanRead" />
+        <see cref="P:System.IO.Stream.CanRead" />
 
           
 
            and
-        <see
-           cref="P:System.IO.Stream.CanWrite" />
+        <see cref="P:System.IO.Stream.CanWrite" />
 
           
 
            properties.</param
         >
         <summary
-          >Opens <paramref
-           name="path" />
+          >Opens <paramref name="path" />
 
           
 
            with the specified file mode 
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
            and file access
-        <paramref
-           name="access" />
+        <paramref name="access" />
 
           
 
@@ -1351,14 +1221,12 @@ class Directory {
 
           
 
-           or <paramref
-           name="mode" />
+           or <paramref name="mode" />
 
           
 
            is 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -1370,8 +1238,7 @@ class Directory {
 
           
 
-           is a <c
-          >0</c>
+           is a <c>0</c>
 
           
 
@@ -1392,8 +1259,7 @@ class Directory {
           
 
            exists and 
-          <see
-           cref="F:System.IO.FileMode.CreateNew" />
+          <see cref="F:System.IO.FileMode.CreateNew" />
 
           
 
@@ -1406,8 +1272,7 @@ class Directory {
           
 
            doesn't exist and 
-          <see
-           cref="F:System.IO.FileMode.Open" />
+          <see cref="F:System.IO.FileMode.Open" />
 
           
 
@@ -1420,20 +1285,17 @@ class Directory {
           
 
            is not one of 
-          <see
-           cref="F:System.IO.FileAccess.Read" />
+          <see cref="F:System.IO.FileAccess.Read" />
 
           
 
           ,
-          <see
-           cref="F:System.IO.FileAccess.Write" />
+          <see cref="F:System.IO.FileAccess.Write" />
 
           
 
           , or
-          <see
-           cref="F:System.IO.FileAccess.ReadWrite" />
+          <see cref="F:System.IO.FileAccess.ReadWrite" />
 
           
 
@@ -1572,23 +1434,18 @@ class Directory {
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >The underlying <c
-          >FILE</c>
+        <summary>The underlying <c>FILE</c>
 
           
 
-           pointer.</summary
-        >
+           pointer.</summary>
         <value
-          >A <see
-           cref="T:System.IntPtr" />
+          >A <see cref="T:System.IntPtr" />
 
           
 
            containing the underlying
-					<c
-          >FILE</c>
+					<c>FILE</c>
 
           
 
@@ -1614,22 +1471,16 @@ class Directory {
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >An invalid <c
-          >FILE</c>
+        <summary>An invalid <c>FILE</c>
 
           
 
-           pointer.</summary
-        >
-        <remarks
-          >This is <see
-           cref="F:System.IntPtr.Zero" />
+           pointer.</summary>
+        <remarks>This is <see cref="F:System.IntPtr.Zero" />
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Length">
@@ -1722,10 +1573,8 @@ class Directory {
         <Parameter Name="pos" Type="Mono.Unix.Native.FilePosition" />
       </Parameters>
       <Docs>
-        <param name="pos"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.FilePosition" />
+        <param name="pos">
+          A <see cref="T:Mono.Unix.Native.FilePosition" />
 
           
 
@@ -1735,8 +1584,7 @@ class Directory {
         >
         <summary
           >Set the current file position saved in a 
-        <see
-           cref="T:Mono.Unix.Native.FilePosition" />
+        <see cref="T:Mono.Unix.Native.FilePosition" />
 
           
 
@@ -1744,28 +1592,24 @@ class Directory {
         >
         <remarks>
           <para
-            >The <see
-             cref="T:Mono.Unix.Native.FilePosition" />
+            >The <see cref="T:Mono.Unix.Native.FilePosition" />
 
             
 
              type holds
         a platform-specific representation of a file position.  This is useful
         when the underlying standard C library cannot hold a file position in
-        a <c
-            >long</c>
+        a <c>long</c>
 
             
 
              data type.  For example, on 32-bit platforms a
-        <c
-            >long</c>
+        <c>long</c>
 
             
 
              is usually 32-bits in size; thus valid file
-        positions as used from <see
-             cref="P:System.IO.Stream.Position" />
+        positions as used from <see cref="P:System.IO.Stream.Position" />
 
             
 
@@ -1775,8 +1619,7 @@ class Directory {
           >
           <para
             >Use this member if your underlying platform doesn't support
-        <see
-             cref="M:System.IO.Stream.Seek" />
+        <see cref="M:System.IO.Stream.Seek" />
 
             
 
@@ -1805,8 +1648,7 @@ class Directory {
       <Parameters />
       <Docs>
         <summary
-          >Set <see
-           cref="P:Mono.Unix.StdioFileStream.Position" />
+          >Set <see cref="P:Mono.Unix.StdioFileStream.Position" />
 
           
 
@@ -1814,14 +1656,12 @@ class Directory {
         to the beginning of the file.</summary
         >
         <remarks
-          >This is equivalent to <see
-           cref="M:System.IO.Stream.Seek" />
+          >This is equivalent to <see cref="M:System.IO.Stream.Seek" />
 
           
 
           (0, 
-        <see
-           cref="F:System.IO.SeekOrigin.Begin" />
+        <see cref="F:System.IO.SeekOrigin.Begin" />
 
           
 
@@ -1851,10 +1691,8 @@ class Directory {
         <Parameter Name="pos" Type="Mono.Unix.Native.FilePosition" />
       </Parameters>
       <Docs>
-        <param name="pos"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.FilePosition" />
+        <param name="pos">
+          A <see cref="T:Mono.Unix.Native.FilePosition" />
 
           
 
@@ -1864,8 +1702,7 @@ class Directory {
         >
         <summary
           >Save the current file position into a 
-        <see
-           cref="T:Mono.Unix.Native.FilePosition" />
+        <see cref="T:Mono.Unix.Native.FilePosition" />
 
           
 
@@ -1873,28 +1710,24 @@ class Directory {
         >
         <remarks>
           <para
-            >The <see
-             cref="T:Mono.Unix.Native.FilePosition" />
+            >The <see cref="T:Mono.Unix.Native.FilePosition" />
 
             
 
              type holds
         a platform-specific representation of a file position.  This is useful
         when the underlying standard C library cannot hold a file position in
-        a <c
-            >long</c>
+        a <c>long</c>
 
             
 
              data type.  For example, on 32-bit platforms a
-        <c
-            >long</c>
+        <c>long</c>
 
             
 
              is usually 32-bits in size; thus valid file
-        positions as used from <see
-             cref="P:System.IO.Stream.Position" />
+        positions as used from <see cref="P:System.IO.Stream.Position" />
 
             
 
@@ -1904,8 +1737,7 @@ class Directory {
           >
           <para
             >Use this member if your underlying platform doesn't support
-        <see
-             cref="M:System.IO.Stream.Seek" />
+        <see cref="M:System.IO.Stream.Seek" />
 
             
 
@@ -1989,8 +1821,7 @@ class Directory {
         <summary>The standard error file stream.</summary>
         <remarks
           >This is the 
-        <see
-           cref="F:Mono.Unix.Native.Stdlib.stderr" />
+        <see cref="F:Mono.Unix.Native.Stdlib.stderr" />
 
           
 
@@ -2017,8 +1848,7 @@ class Directory {
         <summary>The standard input file stream.</summary>
         <remarks
           >This is the 
-        <see
-           cref="F:Mono.Unix.Native.Stdlib.stdin" />
+        <see cref="F:Mono.Unix.Native.Stdlib.stdin" />
 
           
 
@@ -2045,8 +1875,7 @@ class Directory {
         <summary>The standard output file stream.</summary>
         <remarks
           >This is the 
-        <see
-           cref="F:Mono.Unix.Native.Stdlib.stdout" />
+        <see cref="F:Mono.Unix.Native.Stdlib.stdout" />
 
           
 

@@ -57,13 +57,11 @@
       <list type="bullet">
         <item>
           <para
-            >An implementation of the producer/consumer pattern; <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >An implementation of the producer/consumer pattern; <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             is a wrapper for the <see
-             cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+             is a wrapper for the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
             
 
@@ -72,13 +70,11 @@
         </item>
         <item>
           <para
-            >Concurrent addition and removal of items from multiple threads with the <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Add(`0)" />
+            >Concurrent addition and removal of items from multiple threads with the <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Add(`0)" />
 
             
 
-             and  <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
+             and  <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
 
             
 
@@ -87,13 +83,11 @@
         </item>
         <item>
           <para
-            >A bounded collection that blocks <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Add(`0)" />
+            >A bounded collection that blocks <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Add(`0)" />
 
             
 
-             and <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
+             and <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
 
             
 
@@ -102,28 +96,23 @@
         </item>
         <item>
           <para
-            >Cancellation of <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Add(`0)" />
+            >Cancellation of <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Add(`0)" />
 
             
 
-             or <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
+             or <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
 
             
 
-             operations by using a <see
-             cref="T:System.Threading.CancellationToken" />
+             operations by using a <see cref="T:System.Threading.CancellationToken" />
 
             
 
-             object in the  <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.TryAdd(`0)" />
+             object in the  <see cref="M:System.Collections.Concurrent.BlockingCollection`1.TryAdd(`0)" />
 
             
 
-             or <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.TryTake(`0@)" />
+             or <see cref="M:System.Collections.Concurrent.BlockingCollection`1.TryTake(`0@)" />
 
             
 
@@ -136,33 +125,27 @@
 
         
 
-         represents a collection that allows for thread-safe adding and removal of data. <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+         represents a collection that allows for thread-safe adding and removal of data. <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
-         is used as a wrapper for an <see
-         cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+         is used as a wrapper for an <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
         
 
-         instance, and allows removal attempts from the collection to block until data is available to be removed. Similarly, you can create a <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+         instance, and allows removal attempts from the collection to block until data is available to be removed. Similarly, you can create a <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
-         to enforce an upper bound on the number of data elements allowed in the <see
-         cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+         to enforce an upper bound on the number of data elements allowed in the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
         
 
-        ; addition attempts to the collection may then block until space is available to store the added items. In this manner, <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+        ; addition attempts to the collection may then block until space is available to store the added items. In this manner, <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
-         is similar to a traditional blocking queue data structure, except that the underlying data storage mechanism is abstracted away as an <see
-         cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+         is similar to a traditional blocking queue data structure, except that the underlying data storage mechanism is abstracted away as an <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
         
 
@@ -173,13 +156,11 @@
 
         
 
-         supports bounding and blocking. Bounding means that you can set the maximum capacity of the collection. Bounding is important in certain scenarios because it enables you to control the maximum size of the collection in memory, and it prevents the producing threads from moving too far ahead of the consuming threads.Multiple threads or tasks can add items to the collection concurrently, and if the collection reaches its specified maximum capacity, the producing threads will block until an item is removed. Multiple consumers can remove items concurrently, and if the collection becomes empty, the consuming threads will block until a producer adds an item. A producing thread can call the <see
-         cref="M:System.Collections.Concurrent.BlockingCollection`1.CompleteAdding" />
+         supports bounding and blocking. Bounding means that you can set the maximum capacity of the collection. Bounding is important in certain scenarios because it enables you to control the maximum size of the collection in memory, and it prevents the producing threads from moving too far ahead of the consuming threads.Multiple threads or tasks can add items to the collection concurrently, and if the collection reaches its specified maximum capacity, the producing threads will block until an item is removed. Multiple consumers can remove items concurrently, and if the collection becomes empty, the consuming threads will block until a producer adds an item. A producing thread can call the <see cref="M:System.Collections.Concurrent.BlockingCollection`1.CompleteAdding" />
 
         
 
-         method to indicate that no more items will be added. Consumers monitor the <see
-         cref="P:System.Collections.Concurrent.BlockingCollection`1.IsCompleted" />
+         method to indicate that no more items will be added. Consumers monitor the <see cref="P:System.Collections.Concurrent.BlockingCollection`1.IsCompleted" />
 
         
 
@@ -190,74 +171,61 @@
 
         
 
-         and <see
-         cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
+         and <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
 
         
 
-         operations are typically performed in a loop. You can cancel a loop by passing in a <see
-         cref="T:System.Threading.CancellationToken" />
+         operations are typically performed in a loop. You can cancel a loop by passing in a <see cref="T:System.Threading.CancellationToken" />
 
         
 
-         object to the <see
-         cref="M:System.Collections.Concurrent.BlockingCollection`1.TryAdd(`0)" />
+         object to the <see cref="M:System.Collections.Concurrent.BlockingCollection`1.TryAdd(`0)" />
 
         
 
-         or <see
-         cref="M:System.Collections.Concurrent.BlockingCollection`1.TryTake(`0@)" />
+         or <see cref="M:System.Collections.Concurrent.BlockingCollection`1.TryTake(`0@)" />
 
         
 
-         method, and then checking the value of the token's <see
-         cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+         method, and then checking the value of the token's <see cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
 
         
 
          property on each iteration. If the value is true, it is up to you to respond the cancellation request by cleaning up any resources and exiting the loop.</para
       >
       <para
-        >When you create a <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+        >When you create a <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
-         object, you can specify not only the bounded capacity but also the type of collection to use. For example, you could specify a <see
-         cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+         object, you can specify not only the bounded capacity but also the type of collection to use. For example, you could specify a <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
         
 
-         object for first in, first out (FIFO) behavior, or a <see
-         cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+         object for first in, first out (FIFO) behavior, or a <see cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
 
         
 
-         object for last in, first out (LIFO) behavior. You can use any collection class that implements the <see
-         cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+         object for last in, first out (LIFO) behavior. You can use any collection class that implements the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
         
 
-         interface. The default collection type for <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+         interface. The default collection type for <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
-         is <see
-         cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+         is <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
         
 
         .</para
       >
       <para
-        >Do not modify the underlying collection directly. Use <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+        >Do not modify the underlying collection directly. Use <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
-         methods to add or remove elements. The <see
-         cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+         methods to add or remove elements. The <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
         
 
@@ -267,8 +235,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides blocking and bounding capabilities for thread-safe collections that implement <see
-         cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+        >Provides blocking and bounding capabilities for thread-safe collections that implement <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
         
 
@@ -292,8 +259,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default underlying collection is a <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >The default underlying collection is a <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -303,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -355,8 +320,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default underlying collection is a <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+            >The default underlying collection is a <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -366,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -375,7 +338,11 @@
           >
         </summary>
         <param name="boundedCapacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -539,8 +506,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the bounded capacity of this <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Gets the bounded capacity of this <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -571,8 +537,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Marks the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -624,8 +589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of items contained in the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Gets the number of items contained in the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -653,38 +617,32 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Dispose method is not thread-safe.</para>
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Call Dispose when you are finished using the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            . The Dispose method leaves the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -694,13 +652,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
               
 
@@ -711,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -742,8 +697,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases resources used by the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Releases resources used by the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -751,7 +705,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -781,8 +739,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a consuming <see
-             cref="T:System.Collections.Generic.IEnumerator`1" />
+            >Provides a consuming <see cref="T:System.Collections.Generic.IEnumerator`1" />
 
             
 
@@ -792,8 +749,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -825,23 +781,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables client code to remove items from the collection by using a foreach loop (For Each in Visual Basic), or <see
-             cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" />
+            >This method enables client code to remove items from the collection by using a foreach loop (For Each in Visual Basic), or <see cref="M:System.Threading.Tasks.Parallel.ForEach``1(System.Collections.Concurrent.Partitioner{``0},System.Action{``0})" />
 
             
 
-             or a PLINQ query. The enumerator will continue to provide items (if any exist) until <see
-             cref="P:System.Collections.Concurrent.BlockingCollection`1.IsCompleted" />
+             or a PLINQ query. The enumerator will continue to provide items (if any exist) until <see cref="P:System.Collections.Concurrent.BlockingCollection`1.IsCompleted" />
 
             
 
-             returns true, and if <see
-             cref="P:System.Collections.Concurrent.BlockingCollection`1.IsCompleted" />
+             returns true, and if <see cref="P:System.Collections.Concurrent.BlockingCollection`1.IsCompleted" />
 
             
 
-             is false the loop blocks until an item becomes available or until the <see
-             cref="T:System.Threading.CancellationToken" />
+             is false the loop blocks until an item becomes available or until the <see cref="T:System.Threading.CancellationToken" />
 
             
 
@@ -851,8 +803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a consuming <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >Provides a consuming <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -862,8 +813,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
@@ -871,7 +821,11 @@
           >
         </returns>
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -895,8 +849,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether this <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Gets whether this <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -921,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether this <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Gets whether this <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -976,8 +928,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all of the items in the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Copies all of the items in the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -985,24 +936,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional array that is the destination of the elements copied from the <see
-           cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+          The one-dimensional array that is the destination of the elements copied from the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
           
 
            instance. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -1032,8 +989,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1064,8 +1020,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1096,8 +1051,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Provides an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1107,8 +1061,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1135,46 +1088,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A call to <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
+            >A call to <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Take" />
 
             
 
              may block until an item is available to be removed.</para
           >
           <para
-            >The order in which an item is removed depends on the type of collection used to create the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >The order in which an item is removed depends on the type of collection used to create the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             instance. When you create a <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+             instance. When you create a <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             object, you can specify the type of collection to use. For example, you could specify a <see
-             cref="T:System.Collections.ConcurrentConcurrentQueue`1" />
+             object, you can specify the type of collection to use. For example, you could specify a <see cref="T:System.Collections.ConcurrentConcurrentQueue`1" />
 
             
 
-             object for first in, first out (FIFO) behavior, or a <see
-             cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+             object for first in, first out (FIFO) behavior, or a <see cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
 
             
 
-             object for last in, first out (LIFO) behavior. You can use any collection class that implements the <see
-             cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+             object for last in, first out (LIFO) behavior. You can use any collection class that implements the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
             
 
-             interface. The default collection type for <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+             interface. The default collection type for <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             is <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+             is <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -1184,8 +1129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes  an item from the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Removes  an item from the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -1221,46 +1165,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A call to <see
-             cref="M:System.Collections.Concurrent.BlockingCollection`1.Take(System.Threading.CancellationToken)" />
+            >A call to <see cref="M:System.Collections.Concurrent.BlockingCollection`1.Take(System.Threading.CancellationToken)" />
 
             
 
              may block until an item is available to be removed or the token is canceled.</para
           >
           <para
-            >The order in which an item is removed depends on the type of collection used to create the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >The order in which an item is removed depends on the type of collection used to create the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             instance. When you create a <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+             instance. When you create a <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             object, you can specify the type of collection to use. For example, you could specify a <see
-             cref="T:System.Collections.ConcurrentConcurrentQueue`1" />
+             object, you can specify the type of collection to use. For example, you could specify a <see cref="T:System.Collections.ConcurrentConcurrentQueue`1" />
 
             
 
-             object for first in, first out (FIFO) behavior, or a <see
-             cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+             object for first in, first out (FIFO) behavior, or a <see cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
 
             
 
-             object for last in, first out (LIFO) behavior. You can use any collection class that implements the <see
-             cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+             object for last in, first out (LIFO) behavior. You can use any collection class that implements the <see cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
 
             
 
-             interface. The default collection type for <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+             interface. The default collection type for <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
-             is <see
-             cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+             is <see cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
 
             
 
@@ -1270,8 +1206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an item from the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Removes an item from the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 
@@ -1283,7 +1218,11 @@
           <para>The item removed from the collection.</para>
         </returns>
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1378,8 +1317,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items from the <see
-             cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+            >Copies the items from the <see cref="T:System.Collections.Concurrent.BlockingCollection`1" />
 
             
 

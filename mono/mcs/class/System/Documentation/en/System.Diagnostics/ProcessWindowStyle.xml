@@ -46,13 +46,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hidden window style. A window can be either visible or hidden. The system displays a hidden window by not drawing it. If a window is hidden, it is effectively disabled. A hidden window can process messages from the system or from other windows, but it cannot process input from the user or display output. Frequently, an application may keep a new window hidden while it customizes the window's appearance, and then make the window style Normal. To use <see
-             cref="F:System.Diagnostics.ProcessWindowStyle.Hidden" />
+            >The hidden window style. A window can be either visible or hidden. The system displays a hidden window by not drawing it. If a window is hidden, it is effectively disabled. A hidden window can process messages from the system or from other windows, but it cannot process input from the user or display output. Frequently, an application may keep a new window hidden while it customizes the window's appearance, and then make the window style Normal. To use <see cref="F:System.Diagnostics.ProcessWindowStyle.Hidden" />
 
             
 
-            , the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+            , the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 

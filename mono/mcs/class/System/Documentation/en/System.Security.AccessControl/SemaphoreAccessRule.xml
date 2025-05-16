@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+        >The <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
-         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system semaphores. For an overview of these classes, and their relationship to the underlying Windows access control structures, see <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system semaphores. For an overview of these classes, and their relationship to the underlying Windows access control structures, see <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
@@ -41,8 +39,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Windows access control security is meaningful only for named system semaphores. If a <see
-           cref="T:System.Threading.Semaphore" />
+          >Windows access control security is meaningful only for named system semaphores. If a <see cref="T:System.Threading.Semaphore" />
 
           
 
@@ -50,23 +47,19 @@
         >
       </block>
       <para
-        >To get a list of the rules currently applied to a named semaphore, use the <see
-         cref="M:System.Threading.Semaphore.GetAccessControl" />
+        >To get a list of the rules currently applied to a named semaphore, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" />
 
         
 
-         method to get a <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method to get a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object, then use its <see
-         cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAccessRules(System.Boolean,System.Boolean,System.Type)" />
+         object, then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAccessRules(System.Boolean,System.Boolean,System.Type)" />
 
         
 
-         method to obtain a collection of <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+         method to obtain a collection of <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
@@ -83,36 +76,30 @@
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
       <para
-        >Use <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+        >Use <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
-         objects to specify access rights to allow or deny to a user or group. A <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+         objects to specify access rights to allow or deny to a user or group. A <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
          object always represents either allowed access or denied access, never both.</para
       >
       <para
-        >To apply a rule to a named system semaphore, use the <see
-         cref="M:System.Threading.Semaphore.GetAccessControl" />
+        >To apply a rule to a named system semaphore, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object. Modify the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         object. Modify the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object by using its methods to add the rule, and then use the <see
-         cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+         object by using its methods to add the rule, and then use the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
@@ -120,13 +107,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to a <see
-           cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+          >Changes you make to a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
           
 
-           object do not affect the access levels of the named semaphore until you call the <see
-           cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+           object do not affect the access levels of the named semaphore until you call the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
           
 
@@ -138,8 +123,7 @@
 
         
 
-         objects are immutable. Security for a semaphore is modified using the methods of the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         objects are immutable. Security for a semaphore is modified using the methods of the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
@@ -180,28 +164,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To enter a <see
-             cref="T:System.Threading.Semaphore" />
+            >To enter a <see cref="T:System.Threading.Semaphore" />
 
             
 
-            , for example by calling the <see
-             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+            , for example by calling the <see cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
             
 
-             method, a user must have <see
-             cref="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
+             method, a user must have <see cref="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
 
             
 
-             access. To exit the semaphore, by calling the <see
-             cref="M:System.Threading.Semaphore.Release" />
+             access. To exit the semaphore, by calling the <see cref="M:System.Threading.Semaphore.Release" />
 
             
 
-             method, the user must have <see
-             cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+             method, the user must have <see cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
 
             
 
@@ -211,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
             
 
@@ -220,34 +198,38 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The user or group the rule applies to. Must be of type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The user or group the rule applies to. Must be of type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
-           or a type such as <see
-           cref="T:System.Security.Principal.NTAccount" />
+           or a type such as <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
-           that can be converted to type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+           that can be converted to type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -280,56 +262,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To enter a <see
-             cref="T:System.Threading.Semaphore" />
+            >To enter a <see cref="T:System.Threading.Semaphore" />
 
             
 
-            , for example by calling the <see
-             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+            , for example by calling the <see cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
             
 
-             method, a user must have <see
-             cref="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
+             method, a user must have <see cref="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
 
             
 
-             access. To exit the semaphore, by calling the <see
-             cref="M:System.Threading.Semaphore.Release" />
+             access. To exit the semaphore, by calling the <see cref="M:System.Threading.Semaphore.Release" />
 
             
 
-             method, the user must have <see
-             cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+             method, the user must have <see cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
 
             
 
              access.</para
           >
           <para
-            >This constructor is equivalent to creating an <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >This constructor is equivalent to creating an <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object, by passing <paramref
-             name="identity" />
+             object, by passing <paramref name="identity" />
 
             
 
-             to the <see
-             cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
+             to the <see cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
 
             
 
-             constructor, and passing the newly created <see
-             cref="T:System.Security.Principal.NTAccount" />
+             constructor, and passing the newly created <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object to the <see
-             cref="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)" />
+             object to the <see cref="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)" />
 
             
 
@@ -339,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
             
 
@@ -348,19 +319,26 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the user or group the rule applies to.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -395,8 +373,7 @@
 
             
 
-             objects are immutable. You can create a new access rule representing a different user, different rights, or a different <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             objects are immutable. You can create a new access rule representing a different user, different rights, or a different <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 

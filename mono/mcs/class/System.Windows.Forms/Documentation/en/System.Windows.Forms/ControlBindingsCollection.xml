@@ -28,69 +28,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Simple data binding is accomplished by adding <see
-         cref="T:System.Windows.Forms.Binding" />
+        >Simple data binding is accomplished by adding <see cref="T:System.Windows.Forms.Binding" />
 
         
 
-         objects to a <see
-         cref="T:System.Windows.Forms.ControlBindingsCollection" />
+         objects to a <see cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
         
 
-        . Any object that inherits from the <see
-         cref="T:System.Windows.Forms.Control" />
+        . Any object that inherits from the <see cref="T:System.Windows.Forms.Control" />
 
         
 
-         class can access the <see
-         cref="T:System.Windows.Forms.ControlBindingsCollection" />
+         class can access the <see cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
         
 
-         through the <see
-         cref="P:System.Windows.Forms.Control.DataBindings" />
+         through the <see cref="P:System.Windows.Forms.Control.DataBindings" />
 
         
 
-         property. For a list of Windows controls that support data binding, see the <see
-         cref="T:System.Windows.Forms.Binding" />
+         property. For a list of Windows controls that support data binding, see the <see cref="T:System.Windows.Forms.Binding" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ControlBindingsCollection" />
+        >The <see cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
         
 
-         contains standard collection methods such as <see
-         cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.Windows.Forms.Binding)" />
+         contains standard collection methods such as <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.Windows.Forms.Binding)" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.ControlBindingsCollection.Clear" />
+        , <see cref="M:System.Windows.Forms.ControlBindingsCollection.Clear" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.ControlBindingsCollection.Remove(System.Windows.Forms.Binding)" />
+        , and <see cref="M:System.Windows.Forms.ControlBindingsCollection.Remove(System.Windows.Forms.Binding)" />
 
         
 
         .</para
       >
       <para
-        >To get the control that the <see
-         cref="T:System.Windows.Forms.ControlBindingsCollection" />
+        >To get the control that the <see cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
         
 
-         belongs to, use the <see
-         cref="P:System.Windows.Forms.ControlBindingsCollection.Control" />
+         belongs to, use the <see cref="P:System.Windows.Forms.ControlBindingsCollection.Control" />
 
         
 
@@ -120,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ControlBindingsCollection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
             
 
@@ -129,12 +116,15 @@
           >
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.IBindableComponent" />
+          The <see cref="T:System.Windows.Forms.IBindableComponent" />
 
           
 
@@ -158,31 +148,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
+            >The <see cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.Binding" />
+             property of the <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             created by this overload of the <see
-             cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String)" />
+             created by this overload of the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String)" />
 
             
 
-             method is set to the value of the <see
-             cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
+             method is set to the value of the <see cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
 
             
 
              property. </para
           >
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -192,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Windows.Forms.Binding" />
+            >Adds the specified <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -201,12 +185,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Binding" />
+          The <see cref="T:System.Windows.Forms.Binding" />
 
           
 
@@ -236,36 +223,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
+            >The <see cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.Binding" />
+             property of the <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             created by this overload of the <see
-             cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String)" />
+             created by this overload of the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String)" />
 
             
 
-             method is set to the value of the <see
-             cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
+             method is set to the value of the <see cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
 
             
 
              property. </para
           >
           <para
-            >Adding a <see
-             cref="T:System.Windows.Forms.Binding" />
+            >Adding a <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             causes the <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+             causes the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -275,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Windows.Forms.Binding" />
+            >Creates a <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -286,8 +266,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Windows.Forms.Binding" />
+            >The newly created <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -295,26 +274,37 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control property to bind. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that represents the data source. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,8 +343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Windows.Forms.Binding" />
+            >The newly created <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -362,33 +351,48 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control property to bind.</param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            representing the data source. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -419,13 +423,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode)" />
+            >Calling the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode)" />
 
             
 
-             method raises the <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+             method raises the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -439,8 +441,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Windows.Forms.Binding" />
+            >The newly created <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -448,45 +449,63 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control property to bind. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            representing the data source. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to format the displayed data; otherwise, false.</param
         >
         <param name="updateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+          One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" />
 
           
 
@@ -518,13 +537,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode,System.Object)" />
+            >Calling the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode,System.Object)" />
 
             
 
-             method raises the <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+             method raises the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -534,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see
-             cref="T:System.DBNull" />
+            >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see cref="T:System.DBNull" />
 
             
 
@@ -544,68 +560,85 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The newly created <see
-             cref="T:System.Windows.Forms.Binding" />
-          </para>
+          <para>The newly created <see cref="T:System.Windows.Forms.Binding" /></para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control property to bind. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            representing the data source. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to format the displayed data; otherwise, false.</param
         >
         <param name="updateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+          One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" />
 
           
 
            values.</param
         >
         <param name="nullValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to be applied to the bound control property if the data source value is <see
-           cref="T:System.DBNull" />
+           to be applied to the bound control property if the data source value is <see cref="T:System.DBNull" />
 
           
 
@@ -638,13 +671,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode,System.Object,System.String)" />
+            >Calling the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode,System.Object,System.String)" />
 
             
 
-             method raises the <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+             method raises the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -654,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting with the specified format string, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see
-             cref="T:System.DBNull" />
+            >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting with the specified format string, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see cref="T:System.DBNull" />
 
             
 
@@ -664,75 +694,96 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The newly created <see
-             cref="T:System.Windows.Forms.Binding" />
-          </para>
+          <para>The newly created <see cref="T:System.Windows.Forms.Binding" /></para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control property to bind. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            representing the data source. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to format the displayed data; otherwise, false.</param
         >
         <param name="updateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+          One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" />
 
           
 
            values.</param
         >
         <param name="nullValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to be applied to the bound control property if the data source value is <see
-           cref="T:System.DBNull" />
+           to be applied to the bound control property if the data source value is <see cref="T:System.DBNull" />
 
           
 
           .</param
         >
         <param name="formatString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -766,13 +817,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode,System.Object,System.String,System.IFormatProvider)" />
+            >Calling the <see cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.String,System.Object,System.String,System.Boolean,System.Windows.Forms.DataSourceUpdateMode,System.Object,System.String,System.IFormatProvider)" />
 
             
 
-             method raises the <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+             method raises the <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -782,8 +831,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting with the specified format string, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see
-             cref="T:System.DBNull" />
+            >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting with the specified format string, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see cref="T:System.DBNull" />
 
             
 
@@ -793,8 +841,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Windows.Forms.Binding" />
+            >The newly created <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -802,81 +849,108 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control property to bind. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            representing the data source. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to format the displayed data; otherwise, false.</param
         >
         <param name="updateMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+          One of the <see cref="T:System.Windows.Forms.DataSourceUpdateMode" />
 
           
 
            values.</param
         >
         <param name="nullValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to be applied to the bound control property if the data source value is <see
-           cref="T:System.DBNull" />
+           to be applied to the bound control property if the data source value is <see cref="T:System.DBNull" />
 
           
 
           .</param
         >
         <param name="formatString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One or more format specifier characters that indicate how a value is to be displayed</param
         >
         <param name="formatInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An implementation of <see
-           cref="T:System.IFormatProvider" />
+          An implementation of <see cref="T:System.IFormatProvider" />
 
           
 
@@ -903,12 +977,15 @@
           <para>Adds a binding to the collection.</para>
         </summary>
         <param name="dataBinding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Binding" />
+          The <see cref="T:System.Windows.Forms.Binding" />
 
           
 
@@ -937,13 +1014,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ControlBindingsCollection.BindableComponent" />
+            >The <see cref="P:System.Windows.Forms.ControlBindingsCollection.BindableComponent" />
 
             
 
-             property returns the same object as the <see
-             cref="P:System.Windows.Forms.ControlBindingsCollection.Control" />
+             property returns the same object as the <see cref="P:System.Windows.Forms.ControlBindingsCollection.Control" />
 
             
 
@@ -953,8 +1028,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.IBindableComponent" />
+            >Gets the <see cref="T:System.Windows.Forms.IBindableComponent" />
 
             
 
@@ -974,8 +1048,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -1047,35 +1120,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
+            >The <see cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
 
             
 
-             property is used in cases where a <see
-             cref="T:System.Windows.Forms.Binding" />
+             property is used in cases where a <see cref="T:System.Windows.Forms.Binding" />
 
             
 
-             without a <see
-             cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
+             without a <see cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
 
             
 
-             specified is added to the collection. The default value for Windows Forms controls is <see
-             cref="F:System.Windows.Forms.DataSourceUpdateMode.OnValidation" />
+             specified is added to the collection. The default value for Windows Forms controls is <see cref="F:System.Windows.Forms.DataSourceUpdateMode.OnValidation" />
           </para>
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the default <see
-             cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
+            >Gets or sets the default <see cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
 
             
 
-             for a <see
-             cref="T:System.Windows.Forms.Binding" />
+             for a <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -1124,8 +1191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deletes the specified <see
-             cref="T:System.Windows.Forms.Binding" />
+            >Deletes the specified <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -1133,12 +1199,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Binding" />
+          The <see cref="T:System.Windows.Forms.Binding" />
 
           
 
@@ -1163,8 +1232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+            >The <see cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
 
             
 
@@ -1174,8 +1242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deletes the <see
-             cref="T:System.Windows.Forms.Binding" />
+            >Deletes the <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -1183,7 +1250,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1214,12 +1285,15 @@
           <para>Removes the specified binding from the collection.</para>
         </summary>
         <param name="dataBinding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Binding" />
+          The <see cref="T:System.Windows.Forms.Binding" />
 
           
 

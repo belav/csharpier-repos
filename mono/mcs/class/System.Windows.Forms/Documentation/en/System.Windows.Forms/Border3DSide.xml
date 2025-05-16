@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the members of this enumeration with the <see
-         cref="M:System.Windows.Forms.ControlPaint.DrawBorder3D(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+        >Use the members of this enumeration with the <see cref="M:System.Windows.Forms.ControlPaint.DrawBorder3D(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.ControlPaint" />
+         method of the <see cref="T:System.Windows.Forms.ControlPaint" />
 
         
 

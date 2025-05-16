@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information on using <see
-         cref="T:System.Xml.Xsl.XsltContext" />
+        >For more information on using <see cref="T:System.Xml.Xsl.XsltContext" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
@@ -89,13 +87,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Xsl.XsltContext" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Xsl.XsltContext" />
 
             
 
-             class with the specified <see
-             cref="T:System.Xml.NameTable" />
+             class with the specified <see cref="T:System.Xml.NameTable" />
 
             
 
@@ -103,12 +99,15 @@
           >
         </summary>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.NameTable" />
+          The <see cref="T:System.Xml.NameTable" />
 
           
 
@@ -149,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, compares the base Uniform Resource Identifiers (URIs) of two documents based upon the order the documents were loaded by the XSLT processor (that is, the <see
-             cref="T:System.Xml.Xsl.XslTransform" />
+            >When overridden in a derived class, compares the base Uniform Resource Identifiers (URIs) of two documents based upon the order the documents were loaded by the XSLT processor (that is, the <see cref="T:System.Xml.Xsl.XslTransform" />
 
             
 
@@ -160,23 +158,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer value describing the relative order of the two base URIs: -1 if <paramref
-             name="baseUri" />
+            >An integer value describing the relative order of the two base URIs: -1 if <paramref name="baseUri" />
 
             
 
-             occurs before <paramref
-             name="nextbaseUri" />
+             occurs before <paramref name="nextbaseUri" />
 
             
 
-            ; 0 if the two base URIs are identical; and 1 if <paramref
-             name="baseUri" />
+            ; 0 if the two base URIs are identical; and 1 if <paramref name="baseUri" />
 
             
 
-             occurs after <paramref
-             name="nextbaseUri" />
+             occurs after <paramref name="nextbaseUri" />
 
             
 
@@ -184,14 +178,22 @@
           >
         </returns>
         <param name="baseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base URI of the first document to compare. </param
         >
         <param name="nextbaseUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -231,7 +233,11 @@
           <para>Returns true if the white space is to be preserved or false if the white space is to be stripped.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -267,13 +273,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, resolves a function reference and returns an <see
-             cref="T:System.Xml.Xsl.IXsltContextFunction" />
+            >When overridden in a derived class, resolves a function reference and returns an <see cref="T:System.Xml.Xsl.IXsltContextFunction" />
 
             
 
-             representing the function. The <see
-             cref="T:System.Xml.Xsl.IXsltContextFunction" />
+             representing the function. The <see cref="T:System.Xml.Xsl.IXsltContextFunction" />
 
             
 
@@ -283,8 +287,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Xsl.IXsltContextFunction" />
+            >An <see cref="T:System.Xml.Xsl.IXsltContextFunction" />
 
             
 
@@ -292,21 +295,33 @@
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the function as it appears in the XPath expression. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the function. </param
         >
         <param name="ArgTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -340,8 +355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Xsl.IXsltContextVariable" />
+            >The <see cref="T:System.Xml.Xsl.IXsltContextVariable" />
 
             
 
@@ -351,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, resolves a variable reference and returns an <see
-             cref="T:System.Xml.Xsl.IXsltContextVariable" />
+            >When overridden in a derived class, resolves a variable reference and returns an <see cref="T:System.Xml.Xsl.IXsltContextVariable" />
 
             
 
@@ -362,8 +375,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Xsl.IXsltContextVariable" />
+            >An <see cref="T:System.Xml.Xsl.IXsltContextVariable" />
 
             
 
@@ -371,14 +383,22 @@
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix of the variable as it appears in the XPath expression. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

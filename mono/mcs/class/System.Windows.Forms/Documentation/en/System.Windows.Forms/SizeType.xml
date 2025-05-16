@@ -13,41 +13,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.SizeType" />
+        >The <see cref="T:System.Windows.Forms.SizeType" />
 
         
 
-         enumeration specifies how rows or columns of UI elements, typically controls, should be sized relative to the size of their container. This enumeration is used by the <see
-         cref="T:System.Windows.Forms.RowStyle" />
+         enumeration specifies how rows or columns of UI elements, typically controls, should be sized relative to the size of their container. This enumeration is used by the <see cref="T:System.Windows.Forms.RowStyle" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ColumnStyle" />
+         and <see cref="T:System.Windows.Forms.ColumnStyle" />
 
         
 
-         classes to indicate their preferred sizing attributes. The <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+         classes to indicate their preferred sizing attributes. The <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
          class, in turn, uses these style classes.</para
       >
       <para
-        >When laying out a container with rows or columns that have different preferred sizing attributes, any space remaining after the initial allocation will be distributed between the rows or columns whose styles have <see
-         cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
+        >When laying out a container with rows or columns that have different preferred sizing attributes, any space remaining after the initial allocation will be distributed between the rows or columns whose styles have <see cref="P:System.Windows.Forms.TableLayoutStyle.SizeType" />
 
         
 
-         property values of <see
-         cref="F:System.Windows.Forms.SizeType.AutoSize" />
+         property values of <see cref="F:System.Windows.Forms.SizeType.AutoSize" />
 
         
 
-         or <see
-         cref="F:System.Windows.Forms.SizeType.Percent" />
+         or <see cref="F:System.Windows.Forms.SizeType.Percent" />
 
         
 

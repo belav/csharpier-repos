@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ServiceThrottlingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceThrottlingElement" />
 
             
 
@@ -115,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls in excess of the limit are queued. Setting this value to 0 is equivalent to setting it to <see
-             cref="F:System.Int32.MaxValue" />
+            >Calls in excess of the limit are queued. Setting this value to 0 is equivalent to setting it to <see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -182,8 +180,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The service accepts connections in excess of the limit. However, only the channels below the limit are active and messages are only read from active channels. Setting this property to 0 is equivalent to setting it to <see
-             cref="F:System.Int32.MaxValue" />
+            >The service accepts connections in excess of the limit. However, only the channels below the limit are active and messages are only read from active channels. Setting this property to 0 is equivalent to setting it to <see cref="F:System.Int32.MaxValue" />
 
             
 

@@ -40,26 +40,22 @@
 
         
 
-         provides access to the exception object and a flag indicating whether the common language runtime is terminating. The <see
-         cref="T:System.UnhandledExceptionEventArgs" />
+         provides access to the exception object and a flag indicating whether the common language runtime is terminating. The <see cref="T:System.UnhandledExceptionEventArgs" />
 
         
 
-         is one of the parameters passed into <see
-         cref="T:System.UnhandledExceptionEventHandler" />
+         is one of the parameters passed into <see cref="T:System.UnhandledExceptionEventHandler" />
 
         
 
-         for the <see
-         cref="E:System.AppDomain.UnhandledException" />
+         for the <see cref="E:System.AppDomain.UnhandledException" />
 
         
 
          event.</para
       >
       <para
-        >For more information about event handler delegates, see <format
-         type="text/html">
+        >For more information about event handler delegates, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -101,23 +97,19 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.UnhandledExceptionEventArgs.ExceptionObject" />
+            >This constructor initializes the <see cref="P:System.UnhandledExceptionEventArgs.ExceptionObject" />
 
             
 
-             property using <paramref
-             name="exception" />
+             property using <paramref name="exception" />
 
             
 
-            , and the <see
-             cref="P:System.UnhandledExceptionEventArgs.IsTerminating" />
+            , and the <see cref="P:System.UnhandledExceptionEventArgs.IsTerminating" />
 
             
 
-             property using <paramref
-             name="isTerminating" />
+             property using <paramref name="isTerminating" />
 
             
 
@@ -127,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UnhandledExceptionEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.UnhandledExceptionEventArgs" />
 
             
 
@@ -136,14 +127,22 @@
           >
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The exception that is not handled. </param
         >
         <param name="isTerminating">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -177,13 +176,11 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Object" />
+            > A <see cref="T:System.Object" />
 
             
 
-            , typically a <see
-             cref="T:System.Exception" />
+            , typically a <see cref="T:System.Exception" />
 
             
 
@@ -232,8 +229,7 @@
              if the
    system will end the current process as a result
    of the
-   current unhandled exception; otherwise, <see
-             langword="false" />
+   current unhandled exception; otherwise, <see langword="false" />
 
             
 
@@ -243,8 +239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Beginning with the .NET Framework version 2.0, this property returns true for most unhandled exceptions, unless an application compatibility flag is used to revert to the behavior of versions 1.0 and 1.1. The reason is that most unhandled exceptions in threads, including thread pool threads, are allowed to proceed naturally, which normally results in termination of the application. For more information, including a list of cases in which the runtime does not terminate, see <format
-             type="text/html">
+            >Beginning with the .NET Framework version 2.0, this property returns true for most unhandled exceptions, unless an application compatibility flag is used to revert to the behavior of versions 1.0 and 1.1. The reason is that most unhandled exceptions in threads, including thread pool threads, are allowed to proceed naturally, which normally results in termination of the application. For more information, including a list of cases in which the runtime does not terminate, see <format type="text/html">
               <a href="11294769-2e89-43cb-890e-ad4ad79cfbee">Exceptions in Managed Threads</a>
             </format>
 

@@ -30,16 +30,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A settings provider often supports more than one of the .NET Framework standard serialization schemes. These schemes are outlined by the <see
-         cref="T:System.Configuration.SettingsSerializeAs" />
+        >A settings provider often supports more than one of the .NET Framework standard serialization schemes. These schemes are outlined by the <see cref="T:System.Configuration.SettingsSerializeAs" />
 
         
 
          enumeration, and include plain text, XML, and binary serialization. In addition, a provider may optionally support a custom serialization scheme.</para
       >
       <para
-        >With the <see
-         cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+        >With the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
         
 
@@ -75,8 +73,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the settings provider or the type of the property to be converted does not support the serialization scheme specified by the <paramref
-             name="serializeAs" />
+            >If the settings provider or the type of the property to be converted does not support the serialization scheme specified by the <paramref name="serializeAs" />
 
             
 
@@ -97,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+            >Initializes an instance of the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
             
 
@@ -106,12 +102,15 @@
           >
         </summary>
         <param name="serializeAs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsSerializeAs" />
+          A <see cref="T:System.Configuration.SettingsSerializeAs" />
 
           
 
@@ -142,8 +141,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set in the <see
-             cref="M:System.Configuration.SettingsSerializeAsAttribute.#ctor(System.Configuration.SettingsSerializeAs)" />
+            >This property is set in the <see cref="M:System.Configuration.SettingsSerializeAsAttribute.#ctor(System.Configuration.SettingsSerializeAs)" />
 
             
 
@@ -153,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Configuration.SettingsSerializeAs" />
+            >Gets the <see cref="T:System.Configuration.SettingsSerializeAs" />
 
             
 

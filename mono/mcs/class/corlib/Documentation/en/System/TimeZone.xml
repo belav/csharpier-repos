@@ -28,13 +28,11 @@
       <para>A time zone is a geographical region in which the same standard time is used.</para>
       <block subset="none" type="note">
         <para
-          >Whenever possible, use the <see
-           cref="T:System.TimeZoneInfo" />
+          >Whenever possible, use the <see cref="T:System.TimeZoneInfo" />
 
           
 
-           class instead of the <see
-           cref="T:System.TimeZone" />
+           class instead of the <see cref="T:System.TimeZone" />
 
           
 
@@ -42,36 +40,30 @@
         >
       </block>
       <para
-        >You can use the <see
-         cref="T:System.TimeZone" />
+        >You can use the <see cref="T:System.TimeZone" />
 
         
 
-         class to retrieve information about the current time zone, and to convert times from local time to Coordinated Universal Time (UTC) or vice versa. However, you cannot use the <see
-         cref="T:System.TimeZone" />
+         class to retrieve information about the current time zone, and to convert times from local time to Coordinated Universal Time (UTC) or vice versa. However, you cannot use the <see cref="T:System.TimeZone" />
 
         
 
-         class to represent time zones other than the local zone or to handle date and time conversions from one time zone to another. For this purpose, use the <see
-         cref="T:System.TimeZoneInfo" />
+         class to represent time zones other than the local zone or to handle date and time conversions from one time zone to another. For this purpose, use the <see cref="T:System.TimeZoneInfo" />
 
         
 
          class. You can use this class to retrieve information on any time zone defined on the local system, to create custom time zones, and to convert times from one time zone to another.</para
       >
       <para
-        >The <see
-         cref="T:System.TimeZone" />
+        >The <see cref="T:System.TimeZone" />
 
         
 
-         class supports only a single daylight saving time adjustment rule for the local time zone. As a result, the <see
-         cref="T:System.TimeZone" />
+         class supports only a single daylight saving time adjustment rule for the local time zone. As a result, the <see cref="T:System.TimeZone" />
 
         
 
-         class can accurately report daylight saving time information or convert between UTC and local time only for the period in which the latest adjustment rule is in effect. In contrast, the <see
-         cref="T:System.TimeZoneInfo" />
+         class can accurately report daylight saving time information or convert between UTC and local time only for the period in which the latest adjustment rule is in effect. In contrast, the <see cref="T:System.TimeZoneInfo" />
 
         
 
@@ -103,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeZone" />
+            >Initializes a new instance of the <see cref="T:System.TimeZone" />
 
             
 
@@ -130,18 +121,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.TimeZone.CurrentTimeZone" />
+            >The <see cref="P:System.TimeZone.CurrentTimeZone" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.TimeZoneInfo.Local" />
+             property corresponds to the <see cref="P:System.TimeZoneInfo.Local" />
 
             
 
-             property. Whenever possible, use the <see
-             cref="P:System.TimeZoneInfo.Local" />
+             property. Whenever possible, use the <see cref="P:System.TimeZoneInfo.Local" />
 
             
 
@@ -172,18 +160,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If daylight saving time is not used in the time zone, an empty string ("") is returned.</para>
           <para
-            >The <see
-             cref="P:System.TimeZone.DaylightName" />
+            >The <see cref="P:System.TimeZone.DaylightName" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.TimeZoneInfo.DaylightName" />
+             property corresponds to the <see cref="P:System.TimeZoneInfo.DaylightName" />
 
             
 
-             property. Whenever possible, use the <see
-             cref="P:System.TimeZoneInfo.DaylightName" />
+             property. Whenever possible, use the <see cref="P:System.TimeZoneInfo.DaylightName" />
 
             
 
@@ -222,33 +207,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Only one daylight saving time period per year is supported.</para>
           <para
-            >If daylight saving time is not used in the current time zone, the return value is a <see
-             cref="T:System.Globalization.DaylightTime" />
+            >If daylight saving time is not used in the current time zone, the return value is a <see cref="T:System.Globalization.DaylightTime" />
 
             
 
-             object, where the value of <see
-             cref="P:System.Globalization.DaylightTime.Start" />
+             object, where the value of <see cref="P:System.Globalization.DaylightTime.Start" />
 
             
 
-             and <see
-             cref="P:System.Globalization.DaylightTime.End" />
+             and <see cref="P:System.Globalization.DaylightTime.End" />
 
             
 
-             is <see
-             cref="F:System.DateTime.MinValue" />
+             is <see cref="F:System.DateTime.MinValue" />
 
             
 
-            , and the value of <see
-             cref="P:System.Globalization.DaylightTime.Delta" />
+            , and the value of <see cref="P:System.Globalization.DaylightTime.Delta" />
 
             
 
-             is a <see
-             cref="T:System.TimeSpan" />
+             is a <see cref="T:System.TimeSpan" />
 
             
 
@@ -262,13 +241,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Globalization.DaylightTime" />
+            >A <see cref="T:System.Globalization.DaylightTime" />
 
             
 
-             object that contains the start and end date for daylight saving time in <paramref
-             name="year" />
+             object that contains the start and end date for daylight saving time in <paramref name="year" />
 
             
 
@@ -276,7 +253,11 @@
           >
         </returns>
         <param name="year">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -309,81 +290,66 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the offset, or difference, between the <paramref
-             name="time" />
+            >This method returns the offset, or difference, between the <paramref name="time" />
 
             
 
              parameter and Coordinated Universal Time (UTC). That is:</para
           >
-          <para>
-            <paramref name="time" />
+          <para><paramref name="time" />
 
             
 
-             = UTC + offset</para
-          >
+             = UTC + offset</para>
           <para
-            >The method interprets the time zone of <paramref
-             name="time" />
+            >The method interprets the time zone of <paramref name="time" />
 
             
 
-             based on its <see
-             cref="P:System.DateTime.Kind" />
+             based on its <see cref="P:System.DateTime.Kind" />
 
             
 
-             property. If the value of the <see
-             cref="P:System.DateTime.Kind" />
+             property. If the value of the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property is <see
-             cref="F:System.DateTimeKind.Local" />
+             property is <see cref="F:System.DateTimeKind.Local" />
 
             
 
-             or <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             or <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            , the method returns the offset of the local time zone. If the value of the <see
-             cref="P:System.DateTime.Kind" />
+            , the method returns the offset of the local time zone. If the value of the <see cref="P:System.DateTime.Kind" />
 
             
 
-             property is <see
-             cref="F:System.DateTimeKind.Utc" />
+             property is <see cref="F:System.DateTimeKind.Utc" />
 
             
 
-            , the method returns an offset equal to <see
-             cref="F:System.TimeSpan.Zero" />
+            , the method returns an offset equal to <see cref="F:System.TimeSpan.Zero" />
 
             
 
             .</para
           >
           <para
-            >If the local time zone observes daylight saving time, <see
-             cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
+            >If the local time zone observes daylight saving time, <see cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
 
             
 
-             applies the current adjustment rule to <paramref
-             name="time" />
+             applies the current adjustment rule to <paramref name="time" />
 
             
 
-             when determining the offset of the local time zone. That is, the offset returned by <see
-             cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
+             when determining the offset of the local time zone. That is, the offset returned by <see cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
 
             
 
-             reflects whether <paramref
-             name="time" />
+             reflects whether <paramref name="time" />
 
             
 
@@ -391,13 +357,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
+              >The <see cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
 
               
 
-               method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the UTC offset of a local time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref
-               name="time" />
+               method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the UTC offset of a local time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref name="time" />
 
               
 
@@ -405,36 +369,30 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
+            >The <see cref="M:System.TimeZone.GetUtcOffset(System.DateTime)" />
 
             
 
-             method corresponds to the <see
-             cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" />
+             method corresponds to the <see cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" />
 
             
 
-             method. Whenever possible, use the <see
-             cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" />
+             method. Whenever possible, use the <see cref="M:System.TimeZoneInfo.GetUtcOffset(System.DateTime)" />
 
             
 
              method.</para
           >
           <para
-            >Because the date and time value represented by <paramref
-             name="time" />
+            >Because the date and time value represented by <paramref name="time" />
 
             
 
-             and this value's offset from UTC are not tightly coupled, a local or unspecified date and time value can return a different offset value when run on different computers or when run on the same computer under different time zones. If this behavior is undesirable, use a <see
-             cref="T:System.DateTimeOffset" />
+             and this value's offset from UTC are not tightly coupled, a local or unspecified date and time value can return a different offset value when run on different computers or when run on the same computer under different time zones. If this behavior is undesirable, use a <see cref="T:System.DateTimeOffset" />
 
             
 
-             value instead. The <see
-             cref="T:System.DateTimeOffset" />
+             value instead. The <see cref="T:System.DateTimeOffset" />
 
             
 
@@ -448,8 +406,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Coordinated Universal Time (UTC) offset from <paramref
-             name="time" />
+            >The Coordinated Universal Time (UTC) offset from <paramref name="time" />
 
             
 
@@ -457,7 +414,11 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -490,31 +451,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The year to which the daylight saving time period applies is derived from the <paramref
-             name="time" />
+            >The year to which the daylight saving time period applies is derived from the <paramref name="time" />
 
             
 
              parameter.</para
           >
           <para
-            >Because the <see
-             cref="T:System.TimeZone" />
+            >Because the <see cref="T:System.TimeZone" />
 
             
 
-             class supports a single daylight saving time adjustment rule, the <see
-             cref="M:System.TimeZone.IsDaylightSavingTime(System.DateTime)" />
+             class supports a single daylight saving time adjustment rule, the <see cref="M:System.TimeZone.IsDaylightSavingTime(System.DateTime)" />
 
             
 
-             method applies the current adjustment rule to any date, regardless of whether the adjustment rule was in effect on that date. Assuming that the operating system itself has accurate historic daylight saving time data, a more accurate result is available by using the <see
-             cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
+             method applies the current adjustment rule to any date, regardless of whether the adjustment rule was in effect on that date. Assuming that the operating system itself has accurate historic daylight saving time data, a more accurate result is available by using the <see cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
 
             
 
-             method. Whenever possible, use the <see
-             cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
+             method. Whenever possible, use the <see cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
 
             
 
@@ -528,8 +484,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="time" />
+            >true if <paramref name="time" />
 
             
 
@@ -537,7 +492,11 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -571,18 +530,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
+            >The <see cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
 
             
 
-             method provides the same functionality as this overload of the <see
-             cref="M:System.TimeZone.IsDaylightSavingTime(System.DateTime,System.Globalization.DaylightTime)" />
+             method provides the same functionality as this overload of the <see cref="M:System.TimeZone.IsDaylightSavingTime(System.DateTime,System.Globalization.DaylightTime)" />
 
             
 
-             method. Whenever possible, use the <see
-             cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
+             method. Whenever possible, use the <see cref="M:System.TimeZoneInfo.IsDaylightSavingTime(System.DateTime)" />
 
             
 
@@ -596,13 +552,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="time" />
+            >true if <paramref name="time" />
 
             
 
-             is in <paramref
-             name="daylightTimes" />
+             is in <paramref name="daylightTimes" />
 
             
 
@@ -610,14 +564,22 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A date and time. </param
         >
         <param name="daylightTimes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -642,18 +604,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.TimeZone.StandardName" />
+            >The <see cref="P:System.TimeZone.StandardName" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.TimeZoneInfo.StandardName" />
+             property corresponds to the <see cref="P:System.TimeZoneInfo.StandardName" />
 
             
 
-             property. Whenever possible, use the <see
-             cref="P:System.TimeZoneInfo.StandardName" />
+             property. Whenever possible, use the <see cref="P:System.TimeZoneInfo.StandardName" />
 
             
 
@@ -688,13 +647,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the relationship between the <paramref
-             name="time" />
+            >The following table shows the relationship between the <paramref name="time" />
 
             
 
-             parameter and the <see
-             cref="T:System.DateTime" />
+             parameter and the <see cref="T:System.DateTime" />
 
             
 
@@ -723,8 +680,7 @@
             <item>
               <term>
                 <para
-                  >A Coordinated Universal Time (UTC) time (<see
-                   cref="F:System.DateTimeKind.Utc" />
+                  >A Coordinated Universal Time (UTC) time (<see cref="F:System.DateTimeKind.Utc" />
 
                   
 
@@ -736,13 +692,11 @@
               </description>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.DateTime" />
+                  >A <see cref="T:System.DateTime" />
 
                   
 
-                   object whose value is the local time that corresponds to <paramref
-                   name="time" />
+                   object whose value is the local time that corresponds to <paramref name="time" />
 
                   
 
@@ -753,8 +707,7 @@
             <item>
               <term>
                 <para
-                  >A local time (<see
-                   cref="F:System.DateTimeKind.Local" />
+                  >A local time (<see cref="F:System.DateTimeKind.Local" />
 
                   
 
@@ -766,13 +719,11 @@
               </description>
               <description>
                 <para
-                  >The same <see
-                   cref="T:System.DateTime" />
+                  >The same <see cref="T:System.DateTime" />
 
                   
 
-                   value represented by the <paramref
-                   name="time" />
+                   value represented by the <paramref name="time" />
 
                   
 
@@ -783,8 +734,7 @@
             <item>
               <term>
                 <para
-                  >An unspecified time (<see
-                   cref="F:System.DateTimeKind.Unspecified" />
+                  >An unspecified time (<see cref="F:System.DateTimeKind.Unspecified" />
 
                   
 
@@ -796,13 +746,11 @@
               </description>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.DateTime" />
+                  >A <see cref="T:System.DateTime" />
 
                   
 
-                   object whose value is the local time that corresponds to <paramref
-                   name="time" />
+                   object whose value is the local time that corresponds to <paramref name="time" />
 
                   
 
@@ -812,13 +760,11 @@
             </item>
           </list>
           <para
-            >If the local time zone observes daylight saving time, <see
-             cref="M:System.TimeZone.ToLocalTime(System.DateTime)" />
+            >If the local time zone observes daylight saving time, <see cref="M:System.TimeZone.ToLocalTime(System.DateTime)" />
 
             
 
-             applies the current adjustment rule to <paramref
-             name="time" />
+             applies the current adjustment rule to <paramref name="time" />
 
             
 
@@ -826,13 +772,11 @@
           >
           <block subset="none" type="note">
             <para
-              >   The <see
-               cref="M:System.TimeZone.ToLocalTime(System.DateTime)" />
+              >   The <see cref="M:System.TimeZone.ToLocalTime(System.DateTime)" />
 
               
 
-               method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the local time corresponding to a particular UTC time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref
-               name="time" />
+               method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the local time corresponding to a particular UTC time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref name="time" />
 
               
 
@@ -840,28 +784,23 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.TimeZone.ToLocalTime(System.DateTime)" />
+            >The <see cref="M:System.TimeZone.ToLocalTime(System.DateTime)" />
 
             
 
-             method corresponds to the <see
-             cref="M:System.TimeZoneInfo.ConvertTimeFromUtc(System.DateTime,System.TimeZoneInfo)" />
+             method corresponds to the <see cref="M:System.TimeZoneInfo.ConvertTimeFromUtc(System.DateTime,System.TimeZoneInfo)" />
 
             
 
-             method with its <paramref
-             name="destinationTimeZone" />
+             method with its <paramref name="destinationTimeZone" />
 
             
 
-             parameter set to <see
-             cref="P:System.TimeZoneInfo.Local" />
+             parameter set to <see cref="P:System.TimeZoneInfo.Local" />
 
             
 
-            . Whenever possible, use the <see
-             cref="M:System.TimeZoneInfo.ConvertTimeFromUtc(System.DateTime,System.TimeZoneInfo)" />
+            . Whenever possible, use the <see cref="M:System.TimeZoneInfo.ConvertTimeFromUtc(System.DateTime,System.TimeZoneInfo)" />
 
             
 
@@ -875,13 +814,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
-             object whose value is the local time that corresponds to <paramref
-             name="time" />
+             object whose value is the local time that corresponds to <paramref name="time" />
 
             
 
@@ -889,7 +826,11 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -922,13 +863,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the local time zone observes daylight saving time, <see
-             cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" />
+            >If the local time zone observes daylight saving time, <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" />
 
             
 
-             applies the current adjustment rule to the <paramref
-             name="time" />
+             applies the current adjustment rule to the <paramref name="time" />
 
             
 
@@ -936,13 +875,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" />
+              >The <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" />
 
               
 
-               method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the Coordinated Universal Time (UTC) corresponding to a particular local time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref
-               name="time" />
+               method recognizes only the current daylight saving time adjustment rule for the local time zone. As a result, it is guaranteed to accurately return the Coordinated Universal Time (UTC) corresponding to a particular local time only during the period in which the latest adjustment rule is in effect. It may return inaccurate results if <paramref name="time" />
 
               
 
@@ -950,59 +887,49 @@
             >
           </block>
           <para
-            >If the <paramref
-             name="time" />
+            >If the <paramref name="time" />
 
             
 
-             parameter is an ambiguous time, the method assumes that it is a standard time. (An ambiguous time is one that can map either to a standard time or to a daylight saving time in the local time zone.) If <paramref
-             name="time" />
+             parameter is an ambiguous time, the method assumes that it is a standard time. (An ambiguous time is one that can map either to a standard time or to a daylight saving time in the local time zone.) If <paramref name="time" />
 
             
 
              is an invalid time, the method simply subtracts the local time from the local time zone's UTC offset to return UTC. (An invalid time is one that does not exist because of the application of daylight saving time adjustment rules.)</para
           >
           <para
-            >Because <paramref
-             name="time" />
+            >Because <paramref name="time" />
 
             
 
-             is interpreted in relation to the current time zone on the current system, the date and time returned by this method can differ if an application is run on different computers or on the same computer with different time zones. For cases in which a date and time value must represent a single, unambiguous point in time, use a <see
-             cref="T:System.DateTimeOffset" />
+             is interpreted in relation to the current time zone on the current system, the date and time returned by this method can differ if an application is run on different computers or on the same computer with different time zones. For cases in which a date and time value must represent a single, unambiguous point in time, use a <see cref="T:System.DateTimeOffset" />
 
             
 
              value to represent the local time.</para
           >
           <para
-            >The <see
-             cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" />
+            >The <see cref="M:System.TimeZone.ToUniversalTime(System.DateTime)" />
 
             
 
-             method corresponds to the <see
-             cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" />
+             method corresponds to the <see cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" />
 
             
 
-             method overload with a <see
-             cref="T:System.DateTime" />
+             method overload with a <see cref="T:System.DateTime" />
 
             
 
-             parameter whose <see
-             cref="P:System.DateTime.Kind" />
+             parameter whose <see cref="P:System.DateTime.Kind" />
 
             
 
-             property does not equal <see
-             cref="F:System.DateTimeKind.Utc" />
+             property does not equal <see cref="F:System.DateTimeKind.Utc" />
 
             
 
-            . Whenever possible, use the <see
-             cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" />
+            . Whenever possible, use the <see cref="M:System.TimeZoneInfo.ConvertTimeToUtc(System.DateTime)" />
 
             
 
@@ -1016,13 +943,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
-             object whose value is the Coordinated Universal Time (UTC) that corresponds to <paramref
-             name="time" />
+             object whose value is the Coordinated Universal Time (UTC) that corresponds to <paramref name="time" />
 
             
 
@@ -1030,7 +955,11 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

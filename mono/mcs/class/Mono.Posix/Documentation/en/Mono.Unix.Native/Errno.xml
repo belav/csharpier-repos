@@ -16,47 +16,39 @@
   <Docs>
     <summary>Error values.</summary>
     <remarks>
-      <para
-        >
+      <para>
         Various error numbers that can be signaled by 
-        <see
-         cref="T:Mono.Unix.Native.Syscall" />
+        <see cref="T:Mono.Unix.Native.Syscall" />
 
         
 
          methods.  
         The most recent error can be retrieved from 
-        <see
-         cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
+        <see cref="M:Mono.Unix.Native.Stdlib.GetLastError" />
 
         
 
         .
       </para
       >
-      <para
-        >
-        The value of these members may not match the actual <c
-        >errno</c>
+      <para>
+        The value of these members may not match the actual <c>errno</c>
 
         
 
          value
         used by your operating system.  Use
-        <see
-         cref="T:Mono.Unix.Native.NativeConvert" />
+        <see cref="T:Mono.Unix.Native.NativeConvert" />
 
         
 
          to convert between the
-        native <c
-        >errno</c>
+        native <c>errno</c>
 
         
 
          value and an 
-        <see
-         cref="T:Mono.Unix.Native.Errno" />
+        <see cref="T:Mono.Unix.Native.Errno" />
 
         
 
@@ -90,8 +82,7 @@
 
           
 
-          .  The number of bytes used for the argument and environment list of the new process exceeded the current limit of 65536 bytes (NCARGS in <c
-          >sys/param.h</c>
+          .  The number of bytes used for the argument and environment list of the new process exceeded the current limit of 65536 bytes (NCARGS in <c>sys/param.h</c>
 
           
 
@@ -479,14 +470,12 @@
           
 
           .  A 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.wait" />
+				<see cref="M:Mono.Unix.Native.Syscall.wait" />
 
           
 
           (2) or 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.waitpid" />
+				<see cref="M:Mono.Unix.Native.Syscall.waitpid" />
 
           
 
@@ -743,8 +732,7 @@
           
 
           .  A 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.write" />
+				<see cref="M:Mono.Unix.Native.Syscall.write" />
 
           
 
@@ -775,8 +763,7 @@
           
 
           .  An existing file was mentioned in an inappropriate context, for instance, as the new link name in a 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.link" />
+				<see cref="M:Mono.Unix.Native.Syscall.link" />
 
           
 
@@ -956,14 +943,12 @@
           
 
           .  An operation that takes a long time to complete (such as a 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.connect" />
+				<see cref="M:Mono.Unix.Native.Syscall.connect" />
 
           
 
           (2)) was attempted on a non-blocking object (see 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.fcntl" />
+				<see cref="M:Mono.Unix.Native.Syscall.fcntl" />
 
           
 
@@ -993,14 +978,12 @@
           
 
           .  An asynchronous signal 
-				(such as <see
-           cref="F:Mono.Unix.Native.Signum.SIGINT" />
+				(such as <see cref="F:Mono.Unix.Native.Signum.SIGINT" />
 
           
 
            or 
-				<see
-           cref="F:Mono.Unix.Native.Signum.SIGQUIT" />
+				<see cref="F:Mono.Unix.Native.Signum.SIGQUIT" />
 
           
 
@@ -1035,14 +1018,12 @@
 
           .  Some invalid argument was supplied.  
 				(For example, specifying an undefined signal to a 
-				<see
-           cref="M:Mono.Unix.Native.Stdlib.signal" />
+				<see cref="M:Mono.Unix.Native.Stdlib.signal" />
 
           
 
           (3) function or a 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.kill" />
+				<see cref="M:Mono.Unix.Native.Syscall.kill" />
 
           
 
@@ -1097,21 +1078,18 @@
           
 
           .  A 
-             <see
-           cref="M:Mono.Unix.Native.Syscall.connect" />
+             <see cref="M:Mono.Unix.Native.Syscall.connect" />
 
           
 
           (2) request was made on an already
              connected socket; or, a 
-						 <see
-           cref="M:Mono.Unix.Native.Syscall.sendto" />
+						 <see cref="M:Mono.Unix.Native.Syscall.sendto" />
 
           
 
           (2) or 
-						 <see
-           cref="M:Mono.Unix.Native.Syscall.sendmsg" />
+						 <see cref="M:Mono.Unix.Native.Syscall.sendmsg" />
 
           
 
@@ -1415,13 +1393,11 @@
         <ReturnType>Mono.Unix.Native.Errno</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>
-          <i>Too many open files</i>
+        <summary><i>Too many open files</i>
 
           
 
-          .</summary
-        >
+          .</summary>
       </Docs>
     </Member>
     <Member MemberName="EMLINK">
@@ -1514,25 +1490,21 @@
 
           
 
-          .  A component of a path name exceeded <c
-          >{NAME_MAX}</c>
+          .  A component of a path name exceeded <c>{NAME_MAX}</c>
 
           
 
-           characters, or an entire path name exceeded <c
-          >{PATH_MAX}</c>
+           characters, or an entire path name exceeded <c>{PATH_MAX}</c>
 
           
 
            characters.  (See also the description of 
-				<see
-           cref="F:Mono.Unix.Native.PathConf._PC_NO_TRUNC" />
+				<see cref="F:Mono.Unix.Native.PathConf._PC_NO_TRUNC" />
 
           
 
            in 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.pathconf" />
+				<see cref="M:Mono.Unix.Native.Syscall.pathconf" />
 
           
 
@@ -1995,14 +1967,12 @@
           
 
           .  A bad option or level was specified in a
-             <see
-           cref="M:Mono.Unix.Native.Syscall.getsockopt" />
+             <see cref="M:Mono.Unix.Native.Syscall.getsockopt" />
 
           
 
           (2) or 
-						 <see
-           cref="M:Mono.Unix.Native.Syscall.setsockopt" />
+						 <see cref="M:Mono.Unix.Native.Syscall.setsockopt" />
 
           
 
@@ -2032,8 +2002,7 @@
           
 
           .  A 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.write" />
+				<see cref="M:Mono.Unix.Native.Syscall.write" />
 
           
 
@@ -2271,8 +2240,7 @@
           
 
           .  A control function 
-				(see <see
-           cref="M:Mono.Unix.Native.Syscall.ioctl" />
+				(see <see cref="M:Mono.Unix.Native.Syscall.ioctl" />
 
           
 
@@ -2667,8 +2635,7 @@
           
 
           .  A request to send data was disallowed because the socket had already been shut down with a previous 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.shutdown" />
+				<see cref="M:Mono.Unix.Native.Syscall.shutdown" />
 
           
 
@@ -2723,8 +2690,7 @@
           
 
           .  An 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.lseek" />
+				<see cref="M:Mono.Unix.Native.Syscall.lseek" />
 
           
 
@@ -2862,14 +2828,12 @@
           
 
           .  A 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.connect" />
+				<see cref="M:Mono.Unix.Native.Syscall.connect" />
 
           
 
           (2) or 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.send" />
+				<see cref="M:Mono.Unix.Native.Syscall.send" />
 
           
 
@@ -2919,8 +2883,7 @@
           
 
           .  The new process was a pure procedure (shared text) file which was open for writing by another process, or while the pure procedure file was being executed an 
-				<see
-           cref="M:Mono.Unix.Native.Syscall.open" />
+				<see cref="M:Mono.Unix.Native.Syscall.open" />
 
           
 

@@ -3,8 +3,7 @@
   <paragraph>Name hiding through nesting can occur as a result of nesting namespaces or types within namespaces, as a result of nesting types within classes or structs, and as a result of parameter and local variable declarations. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  
@@ -26,9 +25,7 @@ class A
   </paragraph>
   <paragraph
     >When a name in an inner scope hides a name in an outer scope, it hides all overloaded occurrences of that name. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class Outer  
 {  

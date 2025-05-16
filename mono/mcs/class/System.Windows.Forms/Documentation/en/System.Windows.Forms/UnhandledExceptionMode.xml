@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by <see
-         cref="M:System.Windows.Forms.Application.SetUnhandledExceptionMode(System.Windows.Forms.UnhandledExceptionMode)" />
+        >This enumeration is used by <see cref="M:System.Windows.Forms.Application.SetUnhandledExceptionMode(System.Windows.Forms.UnhandledExceptionMode)" />
 
         
 
@@ -22,8 +21,7 @@
       >
       <block subset="none" type="note">
         <para
-          >In the .NET Framework version 2.0, the common language runtime behavior changed to allow unhandled exceptions to propagate up the call stack. This behavior can be disabled via the application configuration file. For more information, see <format
-           type="text/html">
+          >In the .NET Framework version 2.0, the common language runtime behavior changed to allow unhandled exceptions to propagate up the call stack. This behavior can be disabled via the application configuration file. For more information, see <format type="text/html">
             <a href="11294769-2e89-43cb-890e-ad4ad79cfbee">Exceptions in Managed Threads</a>
           </format>
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Route all exceptions to the <see
-             cref="E:System.Windows.Forms.Application.ThreadException" />
+            >Route all exceptions to the <see cref="E:System.Windows.Forms.Application.ThreadException" />
 
             
 
@@ -75,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Always route exceptions to the <see
-             cref="E:System.Windows.Forms.Application.ThreadException" />
+            >Always route exceptions to the <see cref="E:System.Windows.Forms.Application.ThreadException" />
 
             
 
@@ -99,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Never route exceptions to the <see
-             cref="E:System.Windows.Forms.Application.ThreadException" />
+            >Never route exceptions to the <see cref="E:System.Windows.Forms.Application.ThreadException" />
 
             
 

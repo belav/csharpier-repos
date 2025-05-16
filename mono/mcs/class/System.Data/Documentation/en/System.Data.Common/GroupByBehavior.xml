@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Common.GroupByBehavior" />
+        >The <see cref="T:System.Data.Common.GroupByBehavior" />
 
         
 

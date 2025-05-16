@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the members of this enumeration to set the value of the <see
-         cref="P:System.Windows.Forms.MenuItem.Shortcut" />
+        >Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.MenuItem.Shortcut" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.MenuItem" />
+         property of the <see cref="T:System.Windows.Forms.MenuItem" />
 
         
 

@@ -40,36 +40,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Collections.CollectionBase" />
+        >A <see cref="T:System.Collections.CollectionBase" />
 
         
 
-         instance is always modifiable. See <see
-         cref="T:System.Collections.ReadOnlyCollectionBase" />
+         instance is always modifiable. See <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
         
 
          for a read-only version of this class.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.CollectionBase" />
+        >The capacity of a <see cref="T:System.Collections.CollectionBase" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.CollectionBase" />
+         is the number of elements the <see cref="T:System.Collections.CollectionBase" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.CollectionBase" />
+         can hold. As elements are added to a <see cref="T:System.Collections.CollectionBase" />
 
         
 
-        , the capacity is automatically increased as required through reallocation. The capacity can be decreased by setting the <see
-         cref="P:System.Collections.CollectionBase.Capacity" />
+        , the capacity is automatically increased as required through reallocation. The capacity can be decreased by setting the <see cref="P:System.Collections.CollectionBase.Capacity" />
 
         
 
@@ -100,26 +94,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.CollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.CollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.CollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.CollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.CollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -130,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -159,44 +148,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.CollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.CollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.CollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.CollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.CollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.CollectionBase" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <paramref
-             name="capacity" />
+             is <paramref name="capacity" />
 
             
 
@@ -206,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -215,7 +196,11 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,18 +234,15 @@
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.CollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             can store. <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             can store. <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-             is the number of elements that are actually in the <see
-             cref="T:System.Collections.CollectionBase" />
+             is the number of elements that are actually in the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -271,44 +253,37 @@
 
             
 
-             is always greater than or equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is always greater than or equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            . If <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            . If <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-             exceeds <see
-             cref="P:System.Collections.CollectionBase.Capacity" />
+             exceeds <see cref="P:System.Collections.CollectionBase.Capacity" />
 
             
 
              while adding elements, the capacity is automatically increased by reallocating the internal array before copying the old elements and adding the new elements.</para
           >
           <para
-            >The capacity can be decreased by setting the <see
-             cref="P:System.Collections.CollectionBase.Capacity" />
+            >The capacity can be decreased by setting the <see cref="P:System.Collections.CollectionBase.Capacity" />
 
             
 
-             property explicitly. When the value of <see
-             cref="P:System.Collections.CollectionBase.Capacity" />
+             property explicitly. When the value of <see cref="P:System.Collections.CollectionBase.Capacity" />
 
             
 
              is set explicitly, the internal array is also reallocated to accommodate the specified capacity.</para
           >
           <para
-            >Retrieving the value of this property is an O(1) operation; setting the property is an O(<paramref
-             name="n" />
+            >Retrieving the value of this property is an O(1) operation; setting the property is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
@@ -318,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of elements that the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Gets or sets the number of elements that the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -355,31 +329,26 @@
              is set to zero.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >To perform custom actions before or after the collection is cleared, override the protected <see
-             cref="M:System.Collections.CollectionBase.OnClear" />
+            >To perform custom actions before or after the collection is cleared, override the protected <see cref="M:System.Collections.CollectionBase.OnClear" />
 
             
 
-             or <see
-             cref="M:System.Collections.CollectionBase.OnClearComplete" />
+             or <see cref="M:System.Collections.CollectionBase.OnClearComplete" />
 
             
 
@@ -389,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all objects from the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Removes all objects from the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -417,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -453,23 +420,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -480,99 +443,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -580,13 +525,11 @@
           >
           <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >While the <see
-             cref="M:System.Collections.CollectionBase.GetEnumerator" />
+            >While the <see cref="M:System.Collections.CollectionBase.GetEnumerator" />
 
             
 
-             method is not visible to COM clients by default, inheriting the <see
-             cref="T:System.Collections.CollectionBase" />
+             method is not visible to COM clients by default, inheriting the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -597,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -608,13 +550,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.CollectionBase" />
+             for the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -646,13 +586,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -662,13 +600,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ArrayList" />
+            >Gets an <see cref="T:System.Collections.ArrayList" />
 
             
 
-             containing the list of elements in the <see
-             cref="T:System.Collections.CollectionBase" />
+             containing the list of elements in the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -697,13 +633,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -714,13 +648,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IList" />
+            >Gets an <see cref="T:System.Collections.IList" />
 
             
 
-             containing the list of elements in the <see
-             cref="T:System.Collections.CollectionBase" />
+             containing the list of elements in the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -750,13 +682,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the collection is cleared.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -768,8 +698,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes when clearing the contents of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes when clearing the contents of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -799,13 +728,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the collection is cleared.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -816,8 +743,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after clearing the contents of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes after clearing the contents of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -853,13 +779,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the specified element is inserted.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -871,8 +795,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before inserting a new element into the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes before inserting a new element into the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -880,24 +803,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert <paramref
-           name="value" />
+          The zero-based index at which to insert <paramref name="value" />
 
           
 
           .</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -932,13 +861,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the specified element is inserted.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -958,8 +885,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after inserting a new element into the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes after inserting a new element into the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -967,24 +893,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert <paramref
-           name="value" />
+          The zero-based index at which to insert <paramref name="value" />
 
           
 
           .</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -1019,13 +951,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the specified element is removed.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -1037,8 +967,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes when removing an element from the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes when removing an element from the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1046,24 +975,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            can be found.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the element to remove from <paramref
-           name="index" />
+          The value of the element to remove from <paramref name="index" />
 
           
 
@@ -1098,13 +1033,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the specified element is removed.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -1124,8 +1057,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after removing an element from the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes after removing an element from the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1133,24 +1065,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            can be found.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the element to remove from <paramref
-           name="index" />
+          The value of the element to remove from <paramref name="index" />
 
           
 
@@ -1186,13 +1124,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action before the specified element is set.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -1204,8 +1140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes before setting a value in the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes before setting a value in the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1213,36 +1148,45 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="oldValue" />
+          The zero-based index at which <paramref name="oldValue" />
 
           
 
            can be found.</param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to replace with <paramref
-           name="newValue" />
+          The value to replace with <paramref name="newValue" />
 
           
 
           .</param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -1278,13 +1222,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default implementation of this method is intended to be overridden by a derived class to perform some action after the specified element is set.</para>
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -1304,8 +1246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after setting a value in the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Performs additional custom processes after setting a value in the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1313,36 +1254,45 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="oldValue" />
+          The zero-based index at which <paramref name="oldValue" />
 
           
 
            can be found.</param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to replace with <paramref
-           name="newValue" />
+          The value to replace with <paramref name="newValue" />
 
           
 
           .</param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value of the element at <paramref
-           name="index" />
+          The new value of the element at <paramref name="index" />
 
           
 
@@ -1372,26 +1322,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this method determines whether <paramref
-             name="value" />
+            >The default implementation of this method determines whether <paramref name="value" />
 
             
 
-             is null, and, if so, throws <see
-             cref="T:System.ArgumentNullException" />
+             is null, and, if so, throws <see cref="T:System.ArgumentNullException" />
 
             
 
             . It is intended to be overridden by a derived class to perform additional action when the specified element is validated.</para
           >
           <para
-            >The On* methods are invoked only on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.List" />
+            >The On* methods are invoked only on the instance returned by the <see cref="P:System.Collections.CollectionBase.List" />
 
             
 
-             property, but not on the instance returned by the <see
-             cref="P:System.Collections.CollectionBase.InnerList" />
+             property, but not on the instance returned by the <see cref="P:System.Collections.CollectionBase.InnerList" />
 
             
 
@@ -1404,7 +1350,11 @@
           <para>Performs additional custom processes when validating a value.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1435,18 +1385,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
@@ -1456,8 +1403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element at the specified index of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Removes the element at the specified index of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1465,7 +1411,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1497,26 +1447,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified array must be of a compatible type.</para>
           <para
-            >This method uses <see
-             cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
 
             
 
              to copy the elements.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
@@ -1526,13 +1472,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Collections.CollectionBase" />
+            >Copies the entire <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -1540,34 +1484,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.CollectionBase" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.CollectionBase" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -1598,18 +1546,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.CollectionBase" />
+            >A <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             instance is not synchronized. Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.CollectionBase" />
+             instance is not synchronized. Derived classes can provide a synchronized version of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1617,8 +1562,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1630,8 +1574,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1663,33 +1606,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.CollectionBase" />
+             of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.CollectionBase" />
+            , not directly on the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.CollectionBase" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1697,8 +1634,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1710,8 +1646,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1742,31 +1677,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >If <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
              already equals the capacity, the capacity of the list is doubled by automatically reallocating the internal array and copying the existing elements to the new array before the new element is added.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >If <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
-             name="n" />
+             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
@@ -1776,8 +1706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an object to the end of the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Adds an object to the end of the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1787,13 +1716,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.CollectionBase" />
+            >The <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             index at which the <paramref
-             name="value" />
+             index at which the <paramref name="value" />
 
             
 
@@ -1801,17 +1728,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to be added to the end of the <see
-           cref="T:System.Collections.CollectionBase" />
+           to be added to the end of the <see cref="T:System.Collections.CollectionBase" />
 
           
 
@@ -1841,64 +1770,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -1908,8 +1826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Determines whether the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -1919,13 +1836,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.CollectionBase" />
+            >true if the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             contains the specified <paramref
-             name="value" />
+             contains the specified <paramref name="value" />
 
             
 
@@ -1933,17 +1848,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.CollectionBase" />
+           to locate in the <see cref="T:System.Collections.CollectionBase" />
 
           
 
@@ -1973,64 +1890,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="item" />
+             methods on <paramref name="item" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -2040,13 +1946,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Object" />
+            >Searches for the specified <see cref="T:System.Object" />
 
             
 
-             and returns the zero-based index of the first occurrence within the entire <see
-             cref="T:System.Collections.CollectionBase" />
+             and returns the zero-based index of the first occurrence within the entire <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2056,13 +1960,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
-             within the entire <see
-             cref="T:System.Collections.CollectionBase" />
+             within the entire <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2070,17 +1972,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.CollectionBase" />
+           to locate in the <see cref="T:System.Collections.CollectionBase" />
 
           
 
@@ -2111,31 +2015,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >If <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
              already equals the capacity, the capacity of the list is doubled by automatically reallocating the internal array before the new element is inserted.</para
           >
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , <paramref
-             name="value" />
+            , <paramref name="value" />
 
             
 
-             is added to the end of <see
-             cref="T:System.Collections.CollectionBase" />
+             is added to the end of <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2143,18 +2042,15 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the insertion point move down to accommodate the new element. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
@@ -2164,8 +2060,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an element into the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Inserts an element into the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2173,24 +2068,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -2224,8 +2125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2260,8 +2160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2320,39 +2219,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.CollectionBase" />
+            >If the <see cref="T:System.Collections.CollectionBase" />
 
             
 
-             does not contain the specified object, the <see
-             cref="T:System.Collections.CollectionBase" />
+             does not contain the specified object, the <see cref="T:System.Collections.CollectionBase" />
 
             
 
              remains unchanged. No exception is thrown.</para
           >
           <para
-            >This method performs a linear search; therefore, this method is an O(<paramref
-             name="n" />
+            >This method performs a linear search; therefore, this method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             is <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >This method determines equality by calling <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method determines equality by calling <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2363,8 +2256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.Collections.CollectionBase" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.CollectionBase" />
 
             
 
@@ -2372,17 +2264,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.CollectionBase" />
+           to remove from the <see cref="T:System.Collections.CollectionBase" />
 
           
 

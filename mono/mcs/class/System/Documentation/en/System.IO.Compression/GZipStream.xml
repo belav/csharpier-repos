@@ -19,47 +19,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class represents the gzip data format, which uses an industry-standard algorithm for lossless file compression and decompression. The format includes a cyclic redundancy check value for detecting data corruption. The gzip data format uses the same algorithm as the <see
-         cref="T:System.IO.Compression.DeflateStream" />
+        >This class represents the gzip data format, which uses an industry-standard algorithm for lossless file compression and decompression. The format includes a cyclic redundancy check value for detecting data corruption. The gzip data format uses the same algorithm as the <see cref="T:System.IO.Compression.DeflateStream" />
 
         
 
          class, but can be extended to use other compression formats. The format can be readily implemented in a manner not covered by patents. </para
       >
       <para
-        >Starting with the net_v45, the <see
-         cref="T:System.IO.Compression.DeflateStream" />
+        >Starting with the net_v45, the <see cref="T:System.IO.Compression.DeflateStream" />
 
         
 
          class uses the zlib library for compression. As a result, it provides a better compression algorithm and, in most cases, a smaller compressed file than it provides in earlier versions of the .NET Framework.</para
       >
       <para
-        >Compressed <see
-         cref="T:System.IO.Compression.GZipStream" />
+        >Compressed <see cref="T:System.IO.Compression.GZipStream" />
 
         
 
          objects written to a file with an extension of .gz can be decompressed using many common compression tools; however, this class does not inherently provide functionality for adding files to or extracting files from zip archives. </para
       >
       <para
-        >The compression functionality in <see
-         cref="T:System.IO.Compression.DeflateStream" />
+        >The compression functionality in <see cref="T:System.IO.Compression.DeflateStream" />
 
         
 
-         and <see
-         cref="T:System.IO.Compression.GZipStream" />
+         and <see cref="T:System.IO.Compression.GZipStream" />
 
         
 
-         is exposed as a stream. Data is read on a byte-by-byte basis, so it is not possible to perform multiple passes to determine the best method for compressing entire files or large blocks of data. The <see
-         cref="T:System.IO.Compression.DeflateStream" />
+         is exposed as a stream. Data is read on a byte-by-byte basis, so it is not possible to perform multiple passes to determine the best method for compressing entire files or large blocks of data. The <see cref="T:System.IO.Compression.DeflateStream" />
 
         
 
-         and <see
-         cref="T:System.IO.Compression.GZipStream" />
+         and <see cref="T:System.IO.Compression.GZipStream" />
 
         
 
@@ -98,26 +91,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You use this constructor when you want to specify whether compression efficiency or speed is more important for an instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >You use this constructor when you want to specify whether compression efficiency or speed is more important for an instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
              class.</para
           >
           <para
-            >This constructor overload uses the compression mode <see
-             cref="F:System.IO.Compression.CompressionMode.Compress" />
+            >This constructor overload uses the compression mode <see cref="F:System.IO.Compression.CompressionMode.Compress" />
 
             
 
-            . To set the compression mode to another value, use the <see
-             cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
+            . To set the compression mode to another value, use the <see cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
 
             
 
-             or <see
-             cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
+             or <see cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
 
             
 
@@ -127,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
@@ -136,14 +124,22 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to compress.</param
         >
         <param name="compressionLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -175,39 +171,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >By default, <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
-             owns the underlying stream, so closing the <paramref
-             name="stream" />
+             owns the underlying stream, so closing the <paramref name="stream" />
 
             
 
              parameter also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
-            >If an instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >If an instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
-             class is created with the <paramref
-             name="mode" />
+             class is created with the <paramref name="mode" />
 
             
 
              parameter equal to Compress and no further action occurs, the stream will appear as a valid, empty compressed file. </para
           >
           <para
-            >By default, the compression level is set to <see
-             cref="F:System.IO.Compression.CompressionLevel.Optimal" />
+            >By default, the compression level is set to <see cref="F:System.IO.Compression.CompressionLevel.Optimal" />
 
             
 
-             when the compression mode is <see
-             cref="F:System.IO.Compression.CompressionMode.Compress" />
+             when the compression mode is <see cref="F:System.IO.Compression.CompressionMode.Compress" />
 
             
 
@@ -217,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
@@ -226,7 +215,11 @@
           >
         </summary>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,31 +254,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You use this constructor when you want to specify whether compression efficiency or speed is more important for an instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >You use this constructor when you want to specify whether compression efficiency or speed is more important for an instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
-             class, and whether to leave the stream object open after disposing the <see
-             cref="T:System.IO.Compression.GZipStream" />
+             class, and whether to leave the stream object open after disposing the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
              object.</para
           >
           <para
-            >This constructor overload uses the compression mode <see
-             cref="F:System.IO.Compression.CompressionMode.Compress" />
+            >This constructor overload uses the compression mode <see cref="F:System.IO.Compression.CompressionMode.Compress" />
 
             
 
-            . To set the compression mode to another value, use the <see
-             cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
+            . To set the compression mode to another value, use the <see cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
 
             
 
-             or <see
-             cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
+             or <see cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
 
             
 
@@ -295,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
@@ -304,26 +291,37 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to compress.</param
         >
         <param name="compressionLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing the stream.</param
         >
         <param name="leaveOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to leave the stream object open after disposing the <see
-           cref="T:System.IO.Compression.GZipStream" />
+          true to leave the stream object open after disposing the <see cref="T:System.IO.Compression.GZipStream" />
 
           
 
@@ -356,39 +354,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >By default, <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
-             owns the underlying stream, so closing the <paramref
-             name="stream" />
+             owns the underlying stream, so closing the <paramref name="stream" />
 
             
 
              parameter also closes the underlying stream. Note that the state of the underlying stream can affect the usability of the stream. Also, no explicit checks are performed, so no additional exceptions are thrown when the new instance is created.</para
           >
           <para
-            >If an instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >If an instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
-             class is created with the <paramref
-             name="mode" />
+             class is created with the <paramref name="mode" />
 
             
 
              parameter equal to Compress and no further action occurs, the stream will appear as a valid, empty compressed file. </para
           >
           <para
-            >By default, the compression level is set to <see
-             cref="F:System.IO.Compression.CompressionLevel.Optimal" />
+            >By default, the compression level is set to <see cref="F:System.IO.Compression.CompressionLevel.Optimal" />
 
             
 
-             when the compression mode is <see
-             cref="F:System.IO.Compression.CompressionMode.Compress" />
+             when the compression mode is <see cref="F:System.IO.Compression.CompressionMode.Compress" />
 
             
 
@@ -398,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
@@ -407,19 +398,26 @@
           >
         </summary>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that indicates whether to compress or decompress the stream.</param
         >
         <param name="leaveOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to leave the stream open after disposing the <see
-           cref="T:System.IO.Compression.GZipStream" />
+          true to leave the stream open after disposing the <see cref="T:System.IO.Compression.GZipStream" />
 
           
 
@@ -483,18 +481,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the net_v45, you can perform asynchronous read operations by using the <see
-             cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Starting with the net_v45, you can perform asynchronous read operations by using the <see cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. The <see
-             cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method. The <see cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format
-             type="text/html">
+             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
 
@@ -503,23 +498,19 @@
             .</para
           >
           <para
-            >Pass the <see
-             cref="T:System.IAsyncResult" />
+            >Pass the <see cref="T:System.IAsyncResult" />
 
             
 
-             return value to the <see
-             cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+             return value to the <see cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method of the stream to determine how many bytes were read and to release operating system resources used for reading. You can do this either by using the same code that called <see
-             cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method of the stream to determine how many bytes were read and to release operating system resources used for reading. You can do this either by using the same code that called <see cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             or in a callback passed to <see
-             cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             or in a callback passed to <see cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
@@ -528,26 +519,22 @@
           <para>The current position in the stream is updated when the asynchronous read or write is issued, not when the I/O operation completes.</para>
           <para>Multiple simultaneous asynchronous requests render the request completion order uncertain.</para>
           <para
-            >Use the <see
-             cref="P:System.IO.Compression.GZipStream.CanRead" />
+            >Use the <see cref="P:System.IO.Compression.GZipStream.CanRead" />
 
             
 
-             property to determine whether the current <see
-             cref="T:System.IO.Compression.GZipStream" />
+             property to determine whether the current <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
              object supports reading.</para
           >
           <para
-            >If a stream is closed or you pass an invalid argument, exceptions are thrown immediately from <see
-             cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >If a stream is closed or you pass an invalid argument, exceptions are thrown immediately from <see cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-            . Errors that occur during an asynchronous read request, such as a disk failure during the I/O request, occur on the thread pool thread and throw exceptions when calling <see
-             cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+            . Errors that occur during an asynchronous read request, such as a disk failure during the I/O request, occur on the thread pool thread and throw exceptions when calling <see cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
 
             
 
@@ -557,8 +544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous read operation. (Consider using the <see
-             cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Begins an asynchronous read operation. (Consider using the <see cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -570,19 +556,26 @@
           <para>An object that represents the asynchronous read operation, which could still be pending.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte offset in <paramref
-           name="array" />
+          The byte offset in <paramref name="array" />
 
           
 
            at which to begin reading data from the stream.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -622,18 +615,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the net_v45, you can perform asynchronous write operations by using the <see
-             cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Starting with the net_v45, you can perform asynchronous write operations by using the <see cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. The <see
-             cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method. The <see cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format
-             type="text/html">
+             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
 
@@ -642,26 +632,22 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method starts an asynchronous write operation to a <see
-             cref="T:System.IO.Compression.GZipStream" />
+             method starts an asynchronous write operation to a <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
              stream object.</para
           >
           <para
-            >You must create a callback method that implements the <see
-             cref="T:System.AsyncCallback" />
+            >You must create a callback method that implements the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate and pass its name to the <see
-             cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             delegate and pass its name to the <see cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
@@ -671,8 +657,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous write operation. (Consider using the <see
-             cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Begins an asynchronous write operation. (Consider using the <see cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -684,19 +669,26 @@
           <para>An  object that represents the asynchronous write operation, which could still be pending.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte offset in <paramref
-           name="array" />
+          The byte offset in <paramref name="array" />
 
           
 
            at which to begin writing.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -789,61 +781,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            >This method is called by the public <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             method and the <see
-             cref="M:System.Object.Finalize" />
+             method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+             method. <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             invokes the protected <see
-             cref="M:System.IO.Compression.GZipStream.Dispose(System.Boolean)" />
+             invokes the protected <see cref="M:System.IO.Compression.GZipStream.Dispose(System.Boolean)" />
 
             
 
-             method with the <paramref
-             name="disposing" />
+             method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes <see
-             cref="M:System.IO.Compression.GZipStream.Dispose(System.Boolean)" />
+             invokes <see cref="M:System.IO.Compression.GZipStream.Dispose(System.Boolean)" />
 
             
 
-             with <paramref
-             name="disposing" />
+             with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.Compression.DeflateStream" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.Compression.DeflateStream" />
 
             
 
-             references. This method invokes the <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+             references. This method invokes the <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
@@ -853,8 +834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
@@ -862,7 +842,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -896,18 +880,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the net_v45, you can perform asynchronous read operations by using the <see
-             cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Starting with the net_v45, you can perform asynchronous read operations by using the <see cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. The <see
-             cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+             method. The <see cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format
-             type="text/html">
+             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
 
@@ -916,13 +897,11 @@
             .</para
           >
           <para
-            >Call this method to determine how many bytes were read from the stream. This method can be called once to return the amount of bytes read between calls to <see
-             cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >Call this method to determine how many bytes were read from the stream. This method can be called once to return the amount of bytes read between calls to <see cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+             and <see cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
 
             
 
@@ -933,8 +912,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for the pending asynchronous read to complete. (Consider using the the <see
-             cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Waits for the pending asynchronous read to complete. (Consider using the the <see cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -944,8 +922,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of bytes read from the stream, between 0 (zero) and the number of bytes you requested. <see
-             cref="T:System.IO.Compression.GZipStream" />
+            >The number of bytes read from the stream, between 0 (zero) and the number of bytes you requested. <see cref="T:System.IO.Compression.GZipStream" />
 
             
 
@@ -980,18 +957,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the net_v45, you can perform asynchronous write operations by using the <see
-             cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Starting with the net_v45, you can perform asynchronous write operations by using the <see cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. The <see
-             cref="M:System.IO.Compression.GZipStream.EndWrite(System.IAsyncResult)" />
+             method. The <see cref="M:System.IO.Compression.GZipStream.EndWrite(System.IAsyncResult)" />
 
             
 
-             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format
-             type="text/html">
+             method is still available in net_v45 to support legacy code; however, you can implement asynchronous I/O operations more easily by using the new async methods. For more information, see <format type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
 
@@ -1000,13 +974,11 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.IO.Compression.GZipStream.EndWrite(System.IAsyncResult)" />
+            >The <see cref="M:System.IO.Compression.GZipStream.EndWrite(System.IAsyncResult)" />
 
             
 
-             method completes the asynchronous write operation started in the <see
-             cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method completes the asynchronous write operation started in the <see cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
@@ -1016,8 +988,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the end of an asynchronous write operation. (Consider using the <see
-             cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+            >Handles the end of an asynchronous write operation. (Consider using the <see cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -1071,8 +1042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is not supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >This property is not supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1099,8 +1069,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is not supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >This property is not supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1138,8 +1107,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If data is found in an invalid format, an <see
-             cref="T:System.IO.InvalidDataException" />
+            >If data is found in an invalid format, an <see cref="T:System.IO.InvalidDataException" />
 
             
 
@@ -1155,7 +1123,11 @@
           <para>The number of bytes that were decompressed into the byte array. If the end of the stream has been reached, zero or the number of bytes read is returned.</para>
         </returns>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1190,8 +1162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is not supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >This property is not supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1203,19 +1174,26 @@
           <para>A long value.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location in the stream.</param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.SeekOrigin" />
+          One of the <see cref="T:System.IO.SeekOrigin" />
 
           
 
@@ -1246,8 +1224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is not supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >This property is not supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1255,7 +1232,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1292,13 +1273,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The write operation might not occur immediately but is buffered until the buffer size is reached or until the <see
-             cref="M:System.IO.Compression.GZipStream.Flush" />
+            >The write operation might not occur immediately but is buffered until the buffer size is reached or until the <see cref="M:System.IO.Compression.GZipStream.Flush" />
 
             
 
-             or <see
-             cref="M:System.IO.Stream.Close" />
+             or <see cref="M:System.IO.Stream.Close" />
 
             
 
@@ -1310,7 +1289,11 @@
           <para>Writes compressed bytes to the underlying stream from the specified byte array.</para>
         </summary>
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

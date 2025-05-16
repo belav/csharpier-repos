@@ -28,16 +28,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class can be created with either the new keyword or the static <see
-         cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.TextReader)" />
+        >Instances of this class can be created with either the new keyword or the static <see cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.TextReader)" />
 
         
 
          method, which parses a WSDL file and assigns its values to appropriate members of the class.</para
       >
       <para
-        >WSDL is an XML-based language for describing XML Web services. The <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+        >WSDL is an XML-based language for describing XML Web services. The <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -88,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+            >The <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -99,13 +95,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-             elements contained in the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             elements contained in the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -140,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether an <see
-             cref="T:System.Xml.XmlReader" />
+            >Gets a value that indicates whether an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -151,13 +144,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >true if the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             can recognize the node on which the <see
-             cref="T:System.Xml.XmlReader" />
+             can recognize the node on which the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -165,12 +156,15 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
         </param>
       </Docs>
       <AssemblyInfo>
@@ -193,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of extensibility elements contained in the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the collection of extensibility elements contained in the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -226,8 +219,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.ImportCollection" />
+            >The <see cref="T:System.Web.Services.Description.ImportCollection" />
 
             
 
@@ -237,13 +229,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.Import" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.Import" />
 
             
 
-             elements contained in the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             elements contained in the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -275,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.MessageCollection" />
+            >The <see cref="T:System.Web.Services.Description.MessageCollection" />
 
             
 
@@ -286,13 +275,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.Message" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.Message" />
 
             
 
-             elements contained in the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             elements contained in the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -344,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML namespace in which the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >The XML namespace in which the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -372,8 +358,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.PortTypeCollection" />
+            >The <see cref="T:System.Web.Services.Description.PortTypeCollection" />
 
             
 
@@ -383,13 +368,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.PortType" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.PortType" />
 
             
 
-             elements contained in the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             elements contained in the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -424,13 +407,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             class by directly loading the XML from a <see
-             cref="T:System.IO.Stream" />
+             class by directly loading the XML from a <see cref="T:System.IO.Stream" />
 
             
 
@@ -440,8 +421,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -449,12 +429,15 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
@@ -483,13 +466,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             class by directly loading the XML from a <see
-             cref="T:System.IO.TextReader" />
+             class by directly loading the XML from a <see cref="T:System.IO.TextReader" />
 
             
 
@@ -499,8 +480,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -508,12 +488,15 @@
           >
         </returns>
         <param name="textReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextReader" />
+          A <see cref="T:System.IO.TextReader" />
 
           
 
@@ -542,8 +525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -553,8 +535,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -562,7 +543,11 @@
           >
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -591,13 +576,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             class by directly loading the XML from an <see
-             cref="T:System.Xml.XmlReader" />
+             class by directly loading the XML from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -607,8 +590,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -616,12 +598,15 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -654,13 +639,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             class by directly loading the XML from a <see
-             cref="T:System.IO.Stream" />
+             class by directly loading the XML from a <see cref="T:System.IO.Stream" />
 
             
 
@@ -670,8 +653,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -679,29 +661,34 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
           , passed by reference, which contains the bytes to be read. </param
         >
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           that indicates whether the XML should be validated against the schema specified by <see
-           cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+           that indicates whether the XML should be validated against the schema specified by <see cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
 
           
 
@@ -731,13 +718,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             class by directly loading the XML from a <see
-             cref="T:System.IO.TextReader" />
+             class by directly loading the XML from a <see cref="T:System.IO.TextReader" />
 
             
 
@@ -747,8 +732,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -756,17 +740,19 @@
           >
         </returns>
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           that indicates whether the XML should be validated against the schema specified by <see
-           cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+           that indicates whether the XML should be validated against the schema specified by <see cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
 
           
 
@@ -795,8 +781,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -806,8 +791,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -815,24 +799,30 @@
           >
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path to the file to be read. </param
         >
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           that indicates whether the XML should be validated against the schema specified by <see
-           cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+           that indicates whether the XML should be validated against the schema specified by <see cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
 
           
 
@@ -861,13 +851,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             class by directly loading the XML from an <see
-             cref="T:System.Xml.XmlReader" />
+             class by directly loading the XML from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -877,8 +865,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >An instance of the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -886,29 +873,34 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
           , passed by reference, which contains the XML data to be read. </param
         >
         <param name="validate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           that indicates whether the XML should be validated against the schema specified by <see
-           cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+           that indicates whether the XML should be validated against the schema specified by <see cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
 
           
 
@@ -929,8 +921,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL of the XML Web service to which the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets or sets the URL of the XML Web service to which the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -966,8 +957,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the schema associated with this <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the schema associated with this <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -987,15 +977,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSerializer" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML serializer can be customized using classes derived from the abstract <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >The XML serializer can be customized using classes derived from the abstract <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -1005,8 +991,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the XML serializer used to serialize and deserialize between a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the XML serializer used to serialize and deserialize between a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -1039,13 +1024,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
 
             
 
-             instance of which the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             instance of which the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -1077,8 +1060,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.ServiceCollection" />
+            >The <see cref="T:System.Web.Services.Description.ServiceCollection" />
 
             
 
@@ -1088,13 +1070,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Web.Services.Description.Service" />
+            >Gets the collection of <see cref="T:System.Web.Services.Description.Service" />
 
             
 
-             instances contained in the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             instances contained in the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -1152,8 +1132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.Types" />
+            >The <see cref="T:System.Web.Services.Description.Types" />
 
             
 
@@ -1163,13 +1142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.Services.Description.Types" />
+            >Gets or sets the <see cref="T:System.Web.Services.Description.Types" />
 
             
 
-             contained by the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             contained by the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -1210,33 +1187,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Specialized.StringCollection" />
+            >Gets a <see cref="T:System.Collections.Specialized.StringCollection" />
 
             
 
-             that contains any validation warnings that were generated during a call to <see
-             cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.Stream,System.Boolean)" />
+             that contains any validation warnings that were generated during a call to <see cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.Stream,System.Boolean)" />
 
             
 
-            , <see
-             cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.TextReader,System.Boolean)" />
+            , <see cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.TextReader,System.Boolean)" />
 
             
 
-            , <see
-             cref="M:System.Web.Services.Description.ServiceDescription.Read(System.String,System.Boolean)" />
+            , <see cref="M:System.Web.Services.Description.ServiceDescription.Read(System.String,System.Boolean)" />
 
             
 
-            , or <see
-             cref="M:System.Web.Services.Description.ServiceDescription.Read(System.Xml.XmlReader,System.Boolean)" />
+            , or <see cref="M:System.Web.Services.Description.ServiceDescription.Read(System.Xml.XmlReader,System.Boolean)" />
 
             
 
-             with the <paramref
-             name="validate" />
+             with the <paramref name="validate" />
 
             
 
@@ -1259,13 +1230,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes out the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Writes out the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             to the specified <see
-             cref="T:System.IO.Stream" />
+             to the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -1273,12 +1242,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
@@ -1304,13 +1276,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes out the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Writes out the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             as a Web Services Description Language (WSDL) file to the <see
-             cref="T:System.IO.TextWriter" />
+             as a Web Services Description Language (WSDL) file to the <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -1318,12 +1288,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -1349,8 +1322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes out the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Writes out the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -1358,7 +1330,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1384,13 +1360,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes out the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Writes out the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             to the <see
-             cref="T:System.Xml.XmlWriter" />
+             to the <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1398,12 +1372,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

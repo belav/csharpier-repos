@@ -55,13 +55,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.CounterSampleCalculator.ComputeCounterValue(System.Diagnostics.CounterSample)" />
+            >The <see cref="M:System.Diagnostics.CounterSampleCalculator.ComputeCounterValue(System.Diagnostics.CounterSample)" />
 
             
 
-             method overload returns meaningful results only for performance counters of the following <see
-             cref="T:System.Diagnostics.PerformanceCounterType" />
+             method overload returns meaningful results only for performance counters of the following <see cref="T:System.Diagnostics.PerformanceCounterType" />
 
             
 
@@ -105,12 +103,15 @@
           <para>A floating-point representation of the performance counter's calculated value.</para>
         </returns>
         <param name="newSample">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterSample" />
+          A <see cref="T:System.Diagnostics.CounterSample" />
 
           
 
@@ -156,24 +157,30 @@
           <para>A floating-point representation of the performance counter's calculated value.</para>
         </returns>
         <param name="oldSample">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterSample" />
+          A <see cref="T:System.Diagnostics.CounterSample" />
 
           
 
            that indicates a previous sample the system has taken. </param
         >
         <param name="newSample">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterSample" />
+          A <see cref="T:System.Diagnostics.CounterSample" />
 
           
 

@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To create a server control that captures form submission information from the browser, you must implement this interface. For more information on how to use this interface, see <format
-         type="text/html">
+        >To create a server control that captures form submission information from the browser, you must implement this interface. For more information on how to use this interface, see <format type="text/html">
           <a href="765bfc89-33ee-4d0d-bbe6-3b172c06def9"
             >Server Event Handling in ASP.NET Web Pages</a
           >
@@ -47,23 +46,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The page passes the value of the <paramref
-             name="eventArgument" />
+            >The page passes the value of the <paramref name="eventArgument" />
 
             
 
-             parameter to the RaisePostBackEvent method of the control that implements the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             parameter to the RaisePostBackEvent method of the control that implements the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface. This control also renders the HTML element that causes the postback to occur. If the control renders client-side script for postback, the argument from the script is passed in the <paramref
-             name="eventArgument" />
+             interface. This control also renders the HTML element that causes the postback to occur. If the control renders client-side script for postback, the argument from the script is passed in the <paramref name="eventArgument" />
 
             
 
-             parameter. If the postback is caused by a simple submit operation, the <paramref
-             name="eventArgument" />
+             parameter. If the postback is caused by a simple submit operation, the <paramref name="eventArgument" />
 
             
 
@@ -76,12 +71,15 @@
           <para>When implemented by a class, enables a server control to process an event raised when a form is posted to the server.</para>
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 

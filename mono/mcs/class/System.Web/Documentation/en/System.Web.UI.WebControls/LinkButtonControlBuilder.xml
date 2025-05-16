@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.LinkButtonControlBuilder" />
+        >The <see cref="T:System.Web.UI.WebControls.LinkButtonControlBuilder" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build a <see
-         cref="T:System.Web.UI.WebControls.LinkButton" />
+        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
         
 
@@ -51,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.LinkButtonControlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.LinkButtonControlBuilder" />
 
             
 
@@ -76,13 +73,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
+            >This method overrides <see cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
 
             
 
-             to ignore white space in the <see
-             cref="T:System.Web.UI.WebControls.LinkButton" />
+             to ignore white space in the <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
             
 

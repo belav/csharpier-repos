@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a user interface for specifying a <see
-         cref="P:System.Windows.Forms.Control.Dock" />
+        >Provides a user interface for specifying a <see cref="P:System.Windows.Forms.Control.Dock" />
 
         
 
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.DockEditor" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.DockEditor" />
 
             
 
@@ -76,26 +74,37 @@
           <para>The new value of the object. If the value of the object hasn't changed, this should return the same object it was passed.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that can be used to gain additional context information. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A service provider object through which editing services may be obtained. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -130,12 +139,15 @@
           <para>An enum value indicating the provided editing style.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

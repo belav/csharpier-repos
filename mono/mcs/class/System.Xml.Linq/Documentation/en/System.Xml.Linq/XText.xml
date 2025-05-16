@@ -17,37 +17,32 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XML elements can contain text content. Sometimes the content is simple (the element only contains text content), and sometimes the content is mixed (the contents of the element contains both text and other elements). In either case, each chunk of text is represented as an <see
-         cref="T:System.Xml.Linq.XText" />
+        >XML elements can contain text content. Sometimes the content is simple (the element only contains text content), and sometimes the content is mixed (the contents of the element contains both text and other elements). In either case, each chunk of text is represented as an <see cref="T:System.Xml.Linq.XText" />
 
         
 
          node.</para
       >
       <para
-        >sqltecxlinq developers will often have to write code to work with arbitrary sqltecxlinq trees that they did not create. If you are writing code that has to work with sqltecxlinq trees that you have no control over creating, you should be aware of certain behaviors of <see
-         cref="T:System.Xml.Linq.XText" />
+        >sqltecxlinq developers will often have to write code to work with arbitrary sqltecxlinq trees that they did not create. If you are writing code that has to work with sqltecxlinq trees that you have no control over creating, you should be aware of certain behaviors of <see cref="T:System.Xml.Linq.XText" />
 
         
 
          nodes.</para
       >
       <para
-        >When processing the contents of an XML tree at the node level, you should be prepared for multiple <see
-         cref="T:System.Xml.Linq.XText" />
+        >When processing the contents of an XML tree at the node level, you should be prepared for multiple <see cref="T:System.Xml.Linq.XText" />
 
         
 
-         nodes to be adjacent to each other. Further, you should be prepared for <see
-         cref="T:System.Xml.Linq.XText" />
+         nodes to be adjacent to each other. Further, you should be prepared for <see cref="T:System.Xml.Linq.XText" />
 
         
 
          nodes that contain no text. It is possible through sqltecxlinq methods to remove the content of a text node. However, sqltecxlinq does not automatically delete the node. The node has identity, and might have annotations, so sqltecxlinq allows for zero-length nodes in the tree.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="18680d1c-6e7c-4645-8d53-27b5a96f2d3f">Programming With Nodes</a>
         </format>
 
@@ -79,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You typically do not create text nodes by using the <see
-             cref="T:System.Xml.Linq.XText" />
+            >You typically do not create text nodes by using the <see cref="T:System.Xml.Linq.XText" />
 
             
 
-             constructors. When you pass text content when constructing an <see
-             cref="T:System.Xml.Linq.XElement" />
+             constructors. When you pass text content when constructing an <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -95,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XText" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XText" />
 
             
 
@@ -104,17 +96,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
-           that contains the value of the <see
-           cref="T:System.Xml.Linq.XText" />
+           that contains the value of the <see cref="T:System.Xml.Linq.XText" />
 
           
 
@@ -143,13 +137,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Linq.XText" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Linq.XText" />
 
             
 
-             class from another <see
-             cref="T:System.Xml.Linq.XText" />
+             class from another <see cref="T:System.Xml.Linq.XText" />
 
             
 
@@ -157,12 +149,15 @@
           >
         </summary>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XText" />
+          The <see cref="T:System.Xml.Linq.XText" />
 
           
 
@@ -191,18 +186,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-             contain a <see
-             cref="P:System.Xml.Linq.XObject.NodeType" />
+             contain a <see cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
-             property, you can write code that operates on collections of concrete subclass of <see
-             cref="T:System.Xml.Linq.XObject" />
+             property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -230,13 +222,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >Setting this property will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
@@ -272,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used internally by the methods that write an XML tree to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >This method is primarily used internally by the methods that write an XML tree to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -283,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this node to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes this node to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -292,12 +280,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

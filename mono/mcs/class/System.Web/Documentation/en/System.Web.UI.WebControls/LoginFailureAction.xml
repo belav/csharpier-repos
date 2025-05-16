@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Refreshes the current page so that the <see
-             cref="T:System.Web.UI.WebControls.Login" />
+            >Refreshes the current page so that the <see cref="T:System.Web.UI.WebControls.Login" />
 
             
 

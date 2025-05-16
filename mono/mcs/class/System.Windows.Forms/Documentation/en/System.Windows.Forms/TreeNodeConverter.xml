@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
@@ -35,23 +33,19 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never create an instance of a <see
-           cref="T:System.Windows.Forms.TreeNodeConverter" />
+          >You should never create an instance of a <see cref="T:System.Windows.Forms.TreeNodeConverter" />
 
           
 
-          . Instead, call the <see
-           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+          . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
           
 
-           method of <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+           method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -62,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see
-         cref="T:System.Windows.Forms.TreeNode" />
+        >Provides a type converter to convert <see cref="T:System.Windows.Forms.TreeNode" />
 
         
 
@@ -81,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TreeNodeConverter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TreeNodeConverter" />
 
             
 
@@ -112,8 +104,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -129,24 +120,30 @@
           <para>true if this converter can perform the conversion; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 

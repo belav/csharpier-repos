@@ -67,13 +67,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" />
 
             
 
-             class with the specified hash algorithm, using one of the members of <see
-             cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
+             class with the specified hash algorithm, using one of the members of <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
 
             
 
@@ -81,7 +79,11 @@
           >
         </summary>
         <param name="algorithmId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyAlgorithmIdAttribute" />
 
             
 
@@ -127,7 +128,11 @@
           >
         </summary>
         <param name="algorithmId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

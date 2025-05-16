@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.ListSortDescription" />
+        >The <see cref="T:System.ComponentModel.ListSortDescription" />
 
         
 
-         is used by the <see
-         cref="T:System.ComponentModel.IBindingListView" />
+         is used by the <see cref="T:System.ComponentModel.IBindingListView" />
 
         
 
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListSortDescription" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListSortDescription" />
 
             
 
@@ -98,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the abstract description of a class property associated with this <see
-             cref="T:System.ComponentModel.ListSortDescription" />
+            >Gets or sets the abstract description of a class property associated with this <see cref="T:System.ComponentModel.ListSortDescription" />
           </para>
         </summary>
       </Docs>
@@ -128,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the direction of the sort operation associated with this <see
-             cref="T:System.ComponentModel.ListSortDescription" />
+            >Gets or sets the direction of the sort operation associated with this <see cref="T:System.ComponentModel.ListSortDescription" />
 
             
 

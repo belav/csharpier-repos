@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+        >The <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.Compiler.CompilerError" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
         
 
@@ -40,13 +38,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format
-           type="text/html">
+           is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -59,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.Compiler.CompilerError" />
+        >Represents a collection of <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
         
 
@@ -88,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
             
 
@@ -122,13 +116,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+            >Initializes a new instance of <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
             
 
-             that contains the specified array of <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+             that contains the specified array of <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -136,12 +128,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          An array of <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
@@ -173,13 +168,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
             
 
-             class that contains the contents of the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+             class that contains the contents of the specified <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
             
 
@@ -187,12 +180,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
           
 
@@ -226,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Adds the specified <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -239,12 +234,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          The <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
@@ -280,12 +278,15 @@
           <para>Copies the elements of an array to the end of the error collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          An array of type <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
@@ -321,12 +322,15 @@
           <para>Adds the contents of the specified compiler error collection to the end of the error collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
           
 
@@ -360,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection contains the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -371,8 +374,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >true if the <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -380,12 +382,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          The <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
@@ -420,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection values to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection values to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -429,24 +433,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the values copied from <see
-           cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+           that is the destination of the values copied from <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -522,8 +532,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Gets the index of the specified <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -533,13 +542,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >The index of the specified <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
-             in the <see
-             cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+             in the <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
             
 
@@ -547,12 +554,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          The <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
@@ -587,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Inserts the specified <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -596,19 +605,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index where the compiler error should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          The <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
@@ -670,8 +686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specific <see
-             cref="T:System.CodeDom.Compiler.CompilerError" />
+            >Removes a specific <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
             
 
@@ -679,17 +694,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.Compiler.CompilerError" />
+          The <see cref="T:System.CodeDom.Compiler.CompilerError" />
 
           
 
-           to remove from the <see
-           cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+           to remove from the <see cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
 
           
 

@@ -25,59 +25,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.CompareValidator" />
+        >Use the <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
         
 
-         control to compare the value entered by the user in an input control, such as a <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         control to compare the value entered by the user in an input control, such as a <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
-         control, with the value entered in another input control or a constant value. The <see
-         cref="T:System.Web.UI.WebControls.CompareValidator" />
+         control, with the value entered in another input control or a constant value. The <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
         
 
-         control passes validation if the value of the input control matches the criteria specified by the <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
+         control passes validation if the value of the input control matches the criteria specified by the <see cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+        , <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
         
 
-        , and/or <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+        , and/or <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
         
 
          properties. </para
       >
       <para
-        >You can also use the <see
-         cref="T:System.Web.UI.WebControls.CompareValidator" />
+        >You can also use the <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
         
 
-         control to indicate whether the value entered in an input control can be converted to the data type specified by the <see
-         cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+         control to indicate whether the value entered in an input control can be converted to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
         
 
          property.</para
       >
       <para
-        >Specify the input control to validate by setting the <see
-         cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+        >Specify the input control to validate by setting the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
         
 
-         property. If you want to compare a specific input control with another input control, set the <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+         property. If you want to compare a specific input control with another input control, set the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
         
 
@@ -85,33 +75,27 @@
       >
       <block subset="none" type="note">
         <para
-          >If the value entered in the input control specified by the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+          >If the value entered in the input control specified by the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
           
 
-           property cannot be converted to the data type specified by the <see
-           cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+           property cannot be converted to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
           
 
-           property, but the value entered in the input control specified by the <see
-           cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+           property, but the value entered in the input control specified by the <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
           
 
-           property can be converted, the input control being validated is considered valid. Therefore, you should also place a <see
-           cref="T:System.Web.UI.WebControls.CompareValidator" />
+           property can be converted, the input control being validated is considered valid. Therefore, you should also place a <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
           
 
-           or <see
-           cref="T:System.Web.UI.WebControls.RangeValidator" />
+           or <see cref="T:System.Web.UI.WebControls.RangeValidator" />
 
           
 
-           control on the input control specified by the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+           control on the input control specified by the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
           
 
@@ -119,8 +103,7 @@
         >
       </block>
       <para
-        >Instead of comparing the value of an input control with another input control, you can compare the value of an input control to a constant value. Specify the constant value to compare with by setting the <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+        >Instead of comparing the value of an input control with another input control, you can compare the value of an input control to a constant value. Specify the constant value to compare with by setting the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
         
 
@@ -128,18 +111,15 @@
       >
       <block subset="none" type="note">
         <para
-          >If the value specified by the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+          >If the value specified by the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
           
 
-           property cannot be converted to the data type specified by the <see
-           cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+           property cannot be converted to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
           
 
-           property, an exception is thrown. Be sure to check the data type of a value before programmatically assigning it to the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+           property, an exception is thrown. Be sure to check the data type of a value before programmatically assigning it to the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
           
 
@@ -148,18 +128,15 @@
       </block>
       <block subset="none" type="note">
         <para
-          >Do not set both the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+          >Do not set both the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
           
 
-           and the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+           and the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
           
 
-           property at the same time. You can either compare the value of an input control to another input control, or to a constant value. If both properties are set, the <see
-           cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+           property at the same time. You can either compare the value of an input control to another input control, or to a constant value. If both properties are set, the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
           
 
@@ -167,41 +144,34 @@
         >
       </block>
       <para
-        >Use the <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
+        >Use the <see cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
 
         
 
-         property to specify the type of comparison to perform, such as greater than, equal to, and so on. If you set the <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
+         property to specify the type of comparison to perform, such as greater than, equal to, and so on. If you set the <see cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
 
         
 
-         property to ValidationCompareOperator.DataTypeCheck, the <see
-         cref="T:System.Web.UI.WebControls.CompareValidator" />
+         property to ValidationCompareOperator.DataTypeCheck, the <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
         
 
-         control ignores the <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+         control ignores the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+         and <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
         
 
-         properties and simply indicates whether the value entered in the input control can be converted to the data type specified by the <see
-         cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+         properties and simply indicates whether the value entered in the input control can be converted to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+        >The <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
         
 
@@ -209,13 +179,11 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+          >When the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
           
 
-           property is set to <see
-           cref="F:System.Web.UI.WebControls.ValidationDataType.Date" />
+           property is set to <see cref="F:System.Web.UI.WebControls.ValidationDataType.Date" />
 
           
 
@@ -277,8 +245,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >If the input control is empty, no validation functions are called and validation succeeds. Use a <see
-           cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+          >If the input control is empty, no validation functions are called and validation succeeds. Use a <see cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
 
           
 
@@ -287,23 +254,19 @@
       </block>
       <block subset="none" type="note">
         <para
-          >When you use the <see
-           cref="T:System.Web.UI.WebControls.CompareValidator" />
+          >When you use the <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
           
 
-           control inside an <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control inside an <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see
-           cref="T:System.Web.UI.UpdatePanel" />
+           control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see cref="T:System.Web.UI.UpdatePanel" />
 
           
 
-           control for partial-page updates, see <format
-           type="text/html">
+           control for partial-page updates, see <format type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
 
@@ -313,8 +276,7 @@
         >
       </block>
       <para
-        >For more information about validation controls, see <see
-         cref="T:System.Web.UI.WebControls.BaseValidator" />
+        >For more information about validation controls, see <see cref="T:System.Web.UI.WebControls.BaseValidator" />
 
         
 
@@ -324,8 +286,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -333,8 +294,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -362,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CompareValidator" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CompareValidator" />
 
             
 
@@ -436,13 +395,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
             
 
-             property to specify an input control, such as a <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+             property to specify an input control, such as a <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
@@ -450,18 +407,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not set both the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+              >Do not set both the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
               
 
-               and the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+               and the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
               
 
-               property at the same time. You can either compare the value of an input control to another input control, or to a constant value. If both properties are set, the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+               property at the same time. You can either compare the value of an input control to another input control, or to a constant value. If both properties are set, the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
               
 
@@ -469,8 +423,7 @@
             >
           </block>
           <para
-            >For more information, see <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
+            >For more information, see <see cref="P:System.Web.UI.WebControls.BaseValidator.ControlToValidate" />
 
             
 
@@ -478,8 +431,7 @@
           >
           <block subset="none" type="note">
             <para
-              >  If the control to compare is hidden or is inside a container (such as a <see
-               cref="T:System.Web.UI.WebControls.Panel" />
+              >  If the control to compare is hidden or is inside a container (such as a <see cref="T:System.Web.UI.WebControls.Panel" />
 
               
 
@@ -487,13 +439,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -561,8 +511,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
 
             
 
@@ -633,8 +582,7 @@
               </term>
               <description>
                 <para
-                  >A data type comparison of the value entered in the input control being validated and the data type specified by the <see
-                   cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+                  >A data type comparison of the value entered in the input control being validated and the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
                   
 
@@ -642,13 +590,11 @@
                 >
                 <block subset="none" type="note">
                   <para
-                    >The <see
-                     cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+                    >The <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
                     
 
-                     and <see
-                     cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+                     and <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
                     
 
@@ -659,13 +605,11 @@
             </item>
           </list>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -704,13 +648,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+            >Use the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
             
 
-             property to specify a constant value to compare with the value entered by the user in the input control being validated. If the constant value specified by this property fails to convert to the data type specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+             property to specify a constant value to compare with the value entered by the user in the input control being validated. If the constant value specified by this property fails to convert to the data type specified by the <see cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
 
             
 
@@ -718,18 +660,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not set both the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+              >Do not set both the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
               
 
-               and the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
+               and the <see cref="P:System.Web.UI.WebControls.CompareValidator.ValueToCompare" />
 
               
 
-               property at the same time. You can either compare the value of an input control to another input control, or to a constant value. If both properties are set, the <see
-               cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
+               property at the same time. You can either compare the value of an input control to another input control, or to a constant value. If both properties are set, the <see cref="P:System.Web.UI.WebControls.CompareValidator.ControlToCompare" />
 
               
 
@@ -737,13 +676,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 

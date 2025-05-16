@@ -16,8 +16,7 @@ Expect:       !Error
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary>Some text.</summary>
-    <content type="text/html"
-      >
+    <content type="text/html">
       &lt;html&gt;
         &lt;head&gt;
           &lt;title&gt;Some title.&lt;/title&gt;

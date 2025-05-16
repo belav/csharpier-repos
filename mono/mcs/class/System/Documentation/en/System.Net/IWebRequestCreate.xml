@@ -25,41 +25,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.IWebRequestCreate" />
+        >The <see cref="T:System.Net.IWebRequestCreate" />
 
         
 
-         interface defines the method that <see
-         cref="T:System.Net.WebRequest" />
+         interface defines the method that <see cref="T:System.Net.WebRequest" />
 
         
 
-         descendants must use to register with the <see
-         cref="M:System.Net.WebRequest.Create(System.String)" />
+         descendants must use to register with the <see cref="M:System.Net.WebRequest.Create(System.String)" />
 
         
 
          method.</para
       >
       <para
-        >Classes that implement the <see
-         cref="T:System.Net.IWebRequestCreate" />
+        >Classes that implement the <see cref="T:System.Net.IWebRequestCreate" />
 
         
 
-         interface can be registered with the <see
-         cref="T:System.Net.WebRequest" />
+         interface can be registered with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         class and associated with a specific URI scheme so that the <see
-         cref="T:System.Net.WebRequest" />
+         class and associated with a specific URI scheme so that the <see cref="T:System.Net.WebRequest" />
 
         
 
-         calls the class's <see
-         cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" />
+         calls the class's <see cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" />
 
         
 
@@ -69,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base interface for creating <see
-         cref="T:System.Net.WebRequest" />
+        >Provides the base interface for creating <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -105,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" />
+            >The <see cref="M:System.Net.IWebRequestCreate.Create(System.Uri)" />
 
             
 
-             method must return an initialized instance of the <see
-             cref="T:System.Net.WebRequest" />
+             method must return an initialized instance of the <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -121,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Net.WebRequest" />
+            >Creates a <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -132,8 +121,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.WebRequest" />
+            >A <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -141,7 +129,11 @@
           >
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

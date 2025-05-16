@@ -35,21 +35,18 @@
       <para>Compilers do not necessarily respect the order in which interfaces are implemented. For example, suppose you have the following code: </para>
       <code>interface IBase {}interface IDerived : IBase {}class MyClass : IBase, IDerived {}</code>
       <para
-        >The compiler emits the implemented interfaces as IDervied, IBase. The ordering of interfaces is important  when using the <see
-         cref="T:System.Runtime.InteropServices.ClassInterfaceAttribute" />
+        >The compiler emits the implemented interfaces as IDervied, IBase. The ordering of interfaces is important  when using the <see cref="T:System.Runtime.InteropServices.ClassInterfaceAttribute" />
 
         
 
-         class with [ClassInterface(ClassInterfaceType.None)] to expose an explicit interface as the default interface. Regardless of the specified ClassInterfaceType, use the <see
-         cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
+         class with [ClassInterface(ClassInterfaceType.None)] to expose an explicit interface as the default interface. Regardless of the specified ClassInterfaceType, use the <see cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
 
         
 
          attribute to specify which interface should be recognized as the default.</para
       >
       <para
-        >Note that the type decorated by the <see
-         cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
+        >Note that the type decorated by the <see cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
 
         
 
@@ -84,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="defaultInterface" />
+            >The <paramref name="defaultInterface" />
 
             
 
@@ -95,13 +91,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComDefaultInterfaceAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Type" />
+             class with the specified <see cref="T:System.Type" />
 
             
 
@@ -109,12 +103,15 @@
           >
         </summary>
         <param name="defaultInterface">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -140,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 

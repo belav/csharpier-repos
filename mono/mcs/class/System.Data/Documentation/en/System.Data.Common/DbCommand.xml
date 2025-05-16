@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an SQL statement or stored procedure to execute against a data source. Provides a base class for database-specific classes that represent commands. <see
-         cref="Overload:System.Data.Common.DbCommand.ExecuteNonQueryAsync" />
+        >Represents an SQL statement or stored procedure to execute against a data source. Provides a base class for database-specific classes that represent commands. <see cref="Overload:System.Data.Common.DbCommand.ExecuteNonQueryAsync" />
       </para>
     </summary>
   </Docs>
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs an instance of the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Constructs an instance of the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to cancels the execution of a <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Attempts to cancels the execution of a <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -100,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see
-             cref="T:System.Data.CommandType" />
+            >When you set the <see cref="T:System.Data.CommandType" />
 
             
 
-             to StoredProcedure, you should set the <see
-             cref="P:System.Data.Common.DbCommand.CommandText" />
+             to StoredProcedure, you should set the <see cref="P:System.Data.Common.DbCommand.CommandText" />
 
             
 
@@ -134,13 +129,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ArgumentException" />
+            >An <see cref="T:System.ArgumentException" />
 
             
 
-             is generated if the assigned <see
-             cref="P:System.Data.Common.DbCommand.CommandTimeout" />
+             is generated if the assigned <see cref="P:System.Data.Common.DbCommand.CommandTimeout" />
 
             
 
@@ -180,13 +173,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see
-             cref="T:System.Data.CommandType" />
+            >When you set the <see cref="T:System.Data.CommandType" />
 
             
 
-             to StoredProcedure, you should set the <see
-             cref="P:System.Data.Common.DbCommand.CommandText" />
+             to StoredProcedure, you should set the <see cref="P:System.Data.Common.DbCommand.CommandText" />
 
             
 
@@ -196,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates or specifies how the <see
-             cref="P:System.Data.Common.DbCommand.CommandText" />
+            >Indicates or specifies how the <see cref="P:System.Data.Common.DbCommand.CommandText" />
 
             
 
@@ -236,13 +226,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Gets or sets the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
-             used by this <see
-             cref="T:System.Data.Common.DbCommand" />
+             used by this <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -270,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of a <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Creates a new instance of a <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -281,8 +268,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbParameter" />
+            >A <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -310,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of a <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Creates a new instance of a <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -321,8 +306,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbParameter" />
+            >A <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -350,13 +334,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Gets or sets the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
-             used by this <see
-             cref="T:System.Data.Common.DbCommand" />
+             used by this <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -384,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Gets the collection of <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -413,13 +394,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Data.Common.DbCommand.DbTransaction" />
+            >Gets or sets the <see cref="P:System.Data.Common.DbCommand.DbTransaction" />
 
             
 
-             within which this <see
-             cref="T:System.Data.Common.DbCommand" />
+             within which this <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -488,12 +467,15 @@
           <para>A task representing the operation.</para>
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Data.CommandBehavior" />
+          An instance of <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -516,16 +498,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use <see
-             cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
+            >You can use <see cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
 
             
 
              to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database by executing UPDATE, INSERT, or DELETE statements.</para
           >
           <para
-            >Although <see
-             cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
+            >Although <see cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
 
             
 
@@ -562,18 +542,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <see
-             cref="P:System.Data.Common.DbCommand.CommandText" />
+            >Executes the <see cref="P:System.Data.Common.DbCommand.CommandText" />
 
             
 
-             against the <see
-             cref="P:System.Data.Common.DbCommand.Connection" />
+             against the <see cref="P:System.Data.Common.DbCommand.Connection" />
 
             
 
-            , and returns an <see
-             cref="T:System.Data.Common.DbDataReader" />
+            , and returns an <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -583,8 +560,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >A <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -614,23 +590,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <see
-             cref="P:System.Data.Common.DbCommand.CommandText" />
+            >Executes the <see cref="P:System.Data.Common.DbCommand.CommandText" />
 
             
 
-             against the <see
-             cref="P:System.Data.Common.DbCommand.Connection" />
+             against the <see cref="P:System.Data.Common.DbCommand.Connection" />
 
             
 
-            , and returns an <see
-             cref="T:System.Data.Common.DbDataReader" />
+            , and returns an <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
-             using one of the <see
-             cref="T:System.Data.CommandBehavior" />
+             using one of the <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -640,8 +612,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.Common.DbDataReader" />
+            >An <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -649,12 +620,15 @@
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -677,18 +651,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.Common.DbCommand.ExecuteScalar" />
+            >Use the <see cref="M:System.Data.Common.DbCommand.ExecuteScalar" />
 
             
 
-             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see
-             cref="M:System.Data.Common.DbCommand.ExecuteReader" />
+             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see cref="M:System.Data.Common.DbCommand.ExecuteReader" />
 
             
 
-             method and performing the operations necessary to generate the single value using the data returned by a <see
-             cref="T:System.Data.Common.DbDataReader" />
+             method and performing the operations necessary to generate the single value using the data returned by a <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -733,13 +704,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Gets the collection of <see cref="T:System.Data.Common.DbParameter" />
 
             
 
-             objects. For more information on parameters, see <format
-             type="text/html">
+             objects. For more information on parameters, see <format type="text/html">
               <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
                 >Configuring Parameters and Parameter Data Types (ADO.NET)</a
               >
@@ -767,13 +736,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Data.Common.DbCommand.CommandType" />
+            >If the <see cref="P:System.Data.Common.DbCommand.CommandType" />
 
             
 
-             property is set to TableDirect, Prepare does nothing. If <see
-             cref="P:System.Data.Common.DbCommand.CommandType" />
+             property is set to TableDirect, Prepare does nothing. If <see cref="P:System.Data.Common.DbCommand.CommandType" />
 
             
 
@@ -806,8 +773,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbCommand.Connection" />
+            >For more information, see <see cref="M:System.Data.IDbCommand.Connection" />
 
             
 
@@ -817,13 +783,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.IDbConnection" />
+            >Gets or sets the <see cref="T:System.Data.IDbConnection" />
 
             
 
-             used by this instance of the <see
-             cref="T:System.Data.IDbCommand" />
+             used by this instance of the <see cref="T:System.Data.IDbCommand" />
 
             
 
@@ -849,21 +813,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbCommand" />
+             instance is cast to an <see cref="T:System.Data.IDbCommand" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbCommand.CreateParameter" />
+            >For more information, see <see cref="M:System.Data.IDbCommand.CreateParameter" />
 
             
 
@@ -873,8 +834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of an <see
-             cref="T:System.Data.IDbDataParameter" />
+            >Creates a new instance of an <see cref="T:System.Data.IDbDataParameter" />
 
             
 
@@ -901,21 +861,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbCommand" />
+             instance is cast to an <see cref="T:System.Data.IDbCommand" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbCommand.ExecuteReader" />
+            >For more information, see <see cref="M:System.Data.IDbCommand.ExecuteReader" />
 
             
 
@@ -925,18 +882,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+            >Executes the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
-             against the <see
-             cref="P:System.Data.IDbCommand.Connection" />
+             against the <see cref="P:System.Data.IDbCommand.Connection" />
 
             
 
-             and builds an <see
-             cref="T:System.Data.IDataReader" />
+             and builds an <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -946,8 +900,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.IDataReader" />
+            >An <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -975,21 +928,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbCommand" />
+             instance is cast to an <see cref="T:System.Data.IDbCommand" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbCommand.ExecuteReader(System.Data.CommandBehavior)" />
+            >For more information, see <see cref="M:System.Data.IDbCommand.ExecuteReader(System.Data.CommandBehavior)" />
 
             
 
@@ -999,23 +949,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes the <see
-             cref="P:System.Data.IDbCommand.CommandText" />
+            >Executes the <see cref="P:System.Data.IDbCommand.CommandText" />
 
             
 
-             against the <see
-             cref="P:System.Data.IDbCommand.Connection" />
+             against the <see cref="P:System.Data.IDbCommand.Connection" />
 
             
 
-            , and builds an <see
-             cref="T:System.Data.IDataReader" />
+            , and builds an <see cref="T:System.Data.IDataReader" />
 
             
 
-             using one of the <see
-             cref="T:System.Data.CommandBehavior" />
+             using one of the <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -1025,8 +971,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.IDataReader" />
+            >An <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -1034,12 +979,15 @@
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -1064,21 +1012,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbCommand" />
+             instance is cast to an <see cref="T:System.Data.IDbCommand" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbCommand.Parameters" />
+            >For more information, see <see cref="M:System.Data.IDbCommand.Parameters" />
 
             
 
@@ -1088,8 +1033,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.IDataParameterCollection" />
+            >Gets the <see cref="T:System.Data.IDataParameterCollection" />
 
             
 
@@ -1115,8 +1059,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbCommand.Ttransaction" />
+            >For more information, see <see cref="M:System.Data.IDbCommand.Ttransaction" />
 
             
 
@@ -1126,13 +1069,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Data.Common.DbCommand.DbTransaction" />
+            >Gets or sets the <see cref="P:System.Data.Common.DbCommand.DbTransaction" />
 
             
 
-             within which this <see
-             cref="T:System.Data.Common.DbCommand" />
+             within which this <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -1168,13 +1109,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.Common.DbTransaction" />
+            >Gets or sets the <see cref="T:System.Data.Common.DbTransaction" />
 
             
 
-             within which this <see
-             cref="T:System.Data.Common.DbCommand" />
+             within which this <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -1206,13 +1145,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.ArgumentException" />
+            >Throws a <see cref="T:System.ArgumentException" />
 
             
 
-             if the value entered was not one of the <see
-             cref="T:System.Data.UpdateRowSource" />
+             if the value entered was not one of the <see cref="T:System.Data.UpdateRowSource" />
 
             
 
@@ -1222,13 +1159,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how command results are applied to the <see
-             cref="T:System.Data.DataRow" />
+            >Gets or sets how command results are applied to the <see cref="T:System.Data.DataRow" />
 
             
 
-             when used by the Update method of a <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+             when used by the Update method of a <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 

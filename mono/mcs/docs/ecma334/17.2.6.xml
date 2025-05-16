@@ -2,9 +2,7 @@
 <clause number="17.2.6" title="Nested types">
   <paragraph
     >A type declared within a class or struct is called a nested type. A type that is declared within a compilation unit or namespace is called a non-nested type. <example
-
-      >[Example: In the following example: <code_example
-      >
+      >[Example: In the following example: <code_example>
         <![CDATA[
 using System;  
 class A  

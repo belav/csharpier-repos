@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The event occurs whenever the user clicks on a button on a <see
-         cref="T:System.Windows.Forms.ToolBar" />
+        >The event occurs whenever the user clicks on a button on a <see cref="T:System.Windows.Forms.ToolBar" />
 
         
 
-         control. The <see
-         cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
+         control. The <see cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
 
         
 
-         property contains the <see
-         cref="T:System.Windows.Forms.ToolBarButton" />
+         property contains the <see cref="T:System.Windows.Forms.ToolBarButton" />
 
         
 
@@ -38,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolBar.ButtonClick" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolBar.ButtonClick" />
 
         
 
@@ -61,13 +57,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
+            >The <see cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
 
             
 
-             property is set equal to the <paramref
-             name="button" />
+             property is set equal to the <paramref name="button" />
 
             
 
@@ -77,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolBarButtonClickEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolBarButtonClickEventArgs" />
 
             
 
@@ -86,12 +79,15 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolBarButton" />
+          The <see cref="T:System.Windows.Forms.ToolBarButton" />
 
           
 
@@ -117,18 +113,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
+            >The <see cref="P:System.Windows.Forms.ToolBarButtonClickEventArgs.Button" />
 
             
 
-             property is initially set equal to the <paramref
-             name="button" />
+             property is initially set equal to the <paramref name="button" />
 
             
 
-             parameter of the <see
-             cref="M:System.Windows.Forms.ToolBarButtonClickEventArgs.#ctor(System.Windows.Forms.ToolBarButton)" />
+             parameter of the <see cref="M:System.Windows.Forms.ToolBarButtonClickEventArgs.#ctor(System.Windows.Forms.ToolBarButton)" />
 
             
 
@@ -138,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolBarButton" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolBarButton" />
 
             
 

@@ -158,8 +158,7 @@
       <para>You can use this delegate to represent a method that can be passed as a parameter without explicitly declaring a custom delegate. The encapsulated method must correspond to the method signature that is defined by this delegate. This means that the encapsulated method must have 15 parameters, each of which is passed to it by value, and that it must return a value.</para>
       <block subset="none" type="note">
         <para
-          >To reference a method that has 15 parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see
-           cref="T:System.Action`15" />
+          >To reference a method that has 15 parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see cref="T:System.Action`15" />
 
           
 
@@ -167,8 +166,7 @@
         >
       </block>
       <para
-        >You can also use the <see
-         cref="T:System.Func`16" />
+        >You can also use the <see cref="T:System.Func`16" />
 
         
 
@@ -179,8 +177,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a method that has 15 parameters and returns a value of the type specified by the <paramref
-         name="TResult" />
+        >Encapsulates a method that has 15 parameters and returns a value of the type specified by the <paramref name="TResult" />
 
         
 

@@ -44,18 +44,15 @@
          can be used to represent code that declares a variable.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeVariableDeclarationStatement.Type" />
+        >The <see cref="P:System.CodeDom.CodeVariableDeclarationStatement.Type" />
 
         
 
-         property specifies the type of the variable to declare. The <see
-         cref="P:System.CodeDom.CodeVariableDeclarationStatement.Name" />
+         property specifies the type of the variable to declare. The <see cref="P:System.CodeDom.CodeVariableDeclarationStatement.Name" />
 
         
 
-         property specifies the name of the variable to declare. The <see
-         cref="P:System.CodeDom.CodeVariableDeclarationStatement.InitExpression" />
+         property specifies the name of the variable to declare. The <see cref="P:System.CodeDom.CodeVariableDeclarationStatement.InitExpression" />
 
         
 
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -125,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -134,19 +129,26 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          A <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
            that indicates the data type of the variable. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -179,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -188,14 +189,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the data type of the variable. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -237,14 +245,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type for the variable. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -287,31 +302,41 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          A <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
            that indicates the type of the variable. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the variable. </param
         >
         <param name="initExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -345,8 +370,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -354,26 +378,37 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the data type of the variable. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the variable. </param
         >
         <param name="initExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -407,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeVariableDeclarationStatement" />
 
             
 
@@ -416,26 +450,37 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type of the variable. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the variable. </param
         >
         <param name="initExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 

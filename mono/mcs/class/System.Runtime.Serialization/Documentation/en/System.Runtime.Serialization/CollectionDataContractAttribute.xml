@@ -28,64 +28,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.CollectionDataContractAttribute" />
+        >The <see cref="T:System.Runtime.Serialization.CollectionDataContractAttribute" />
 
         
 
-         is intended to ease interoperability when working with data from non-indigo2 providers and to control the exact shape of serialized instances. To this end, the <see
-         cref="P:System.Runtime.Serialization.CollectionDataContractAttribute.ItemName" />
+         is intended to ease interoperability when working with data from non-indigo2 providers and to control the exact shape of serialized instances. To this end, the <see cref="P:System.Runtime.Serialization.CollectionDataContractAttribute.ItemName" />
 
         
 
          property enables you to control the names of the repeating items inside a collection. This is especially useful when the provider does not use the XML element type name as the array item name, for example, if a provider uses "String" as an element type name instead of the XSD type name "string". </para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.CollectionDataContractAttribute" />
+        >The <see cref="T:System.Runtime.Serialization.CollectionDataContractAttribute" />
 
         
 
-         is also intended to be used with dictionary types to handle keyed collections. Dictionary types are classes that implement either the <see
-         cref="T:System.Collections.IDictionary" />
+         is also intended to be used with dictionary types to handle keyed collections. Dictionary types are classes that implement either the <see cref="T:System.Collections.IDictionary" />
 
         
 
-         or the <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+         or the <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
-         interface, for example, the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         interface, for example, the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-        . Use the <see
-         cref="P:System.Runtime.Serialization.CollectionDataContractAttribute.KeyName" />
+        . Use the <see cref="P:System.Runtime.Serialization.CollectionDataContractAttribute.KeyName" />
 
         
 
-         and <see
-         cref="P:System.Runtime.Serialization.CollectionDataContractAttribute.ValueName" />
+         and <see cref="P:System.Runtime.Serialization.CollectionDataContractAttribute.ValueName" />
 
         
 
-         properties to set custom names when using the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         properties to set custom names when using the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
          class.</para
       >
       <para
-        >crabout using the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >crabout using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Data Contracts Overview</a>
         </format>
 
@@ -97,8 +86,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When applied to a collection type, enables custom specification of the collection item elements. This attribute can be applied only to types that are recognized by the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >When applied to a collection type, enables custom specification of the collection item elements. This attribute can be applied only to types that are recognized by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -123,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.CollectionDataContractAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.CollectionDataContractAttribute" />
 
             
 

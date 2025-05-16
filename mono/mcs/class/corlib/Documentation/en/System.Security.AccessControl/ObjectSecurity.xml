@@ -20,13 +20,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the ability to control access to objects without direct manipulation of Access Control Lists (ACLs). This class is the abstract base class for the <see
-         cref="T:System.Security.AccessControl.CommonObjectSecurity" />
+        >Provides the ability to control access to objects without direct manipulation of Access Control Lists (ACLs). This class is the abstract base class for the <see cref="T:System.Security.AccessControl.CommonObjectSecurity" />
 
         
 
-         and <see
-         cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+         and <see cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -68,24 +65,30 @@
           >
         </summary>
         <param name="isContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the new <see
-           cref="T:System.Security.AccessControl.ObjectSecurity" />
+          true if the new <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
           
 
            object is a container object.</param
         >
         <param name="isDS">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          True if the new <see
-           cref="T:System.Security.AccessControl.ObjectSecurity" />
+          True if the new <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
           
 
@@ -114,13 +117,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             of the securable object associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             of the securable object associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -160,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -171,8 +171,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.AccessRule" />
+            >The <see cref="T:System.Security.AccessControl.AccessRule" />
 
             
 
@@ -180,57 +179,78 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity to which the access rule applies.  It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity to which the access rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+          Specifies whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value that specifies whether the access rules associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets or sets a Boolean value that specifies whether the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -287,23 +306,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             of the object associated with the access rules of this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             of the object associated with the access rules of this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object. The <see
-             cref="T:System.Type" />
+             object. The <see cref="T:System.Type" />
 
             
 
-             object must be an object that can be cast as a <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+             object must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -330,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the access rules associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets a Boolean value that specifies whether the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -358,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets a Boolean value that specifies whether the Discretionary Access Control List (DACL) associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -386,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the audit rules associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets a Boolean value that specifies whether the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -414,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets a Boolean value that specifies whether the System Access Control List (SACL) associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -455,8 +466,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -466,8 +476,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+            >The <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -475,57 +484,78 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity to which the audit rule applies.  It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity to which the audit rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the inheritance properties of the audit rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies whether inherited audit rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+          Specifies whether inherited audit rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -551,8 +581,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a Boolean value that specifies whether the audit rules associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets or sets a Boolean value that specifies whether the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -582,23 +611,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             object associated with the audit rules of this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             object associated with the audit rules of this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object. The <see
-             cref="T:System.Type" />
+             object. The <see cref="T:System.Type" />
 
             
 
-             object must be an object that can be cast as a <see
-             cref="T:System.Security.Principal.SecurityIdentifier" />
+             object must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
             
 
@@ -639,7 +664,11 @@
           <para>The primary group associated with the specified owner.</para>
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -679,7 +708,11 @@
           <para>The owner associated with the specified group.</para>
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -711,8 +744,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of byte values that represents the security descriptor information for this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Returns an array of byte values that represents the security descriptor information for this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -722,13 +754,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of byte values that represents the security descriptor for this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >An array of byte values that represents the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object. This method returns null if there is no security information in this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             object. This method returns null if there is no security information in this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -766,8 +796,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the Security Descriptor Definition Language (SDDL) representation of the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Returns the Security Descriptor Definition Language (SDDL) representation of the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -777,8 +806,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The SDDL representation of the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >The SDDL representation of the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -786,7 +814,11 @@
           >
         </returns>
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -833,8 +865,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets a Boolean value that specifies whether this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -861,8 +892,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that specifies whether this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Gets a Boolean value that specifies whether this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -892,8 +922,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a Boolean value that specifies whether the security descriptor associated with this  <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Returns a Boolean value that specifies whether the security descriptor associated with this  <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -903,8 +932,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the security descriptor associated with this  <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >true if the security descriptor associated with this  <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1103,63 +1131,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1169,13 +1185,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -1183,19 +1197,26 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle used to retrieve the persisted information.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -1232,63 +1253,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1298,13 +1307,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -1312,19 +1319,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used to retrieve the persisted information.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -1367,63 +1381,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When persisting a <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >When persisting a <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object, if the value of the <paramref
-             name="includeSections" />
+             object, if the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the <see
-             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+             parameter passed to the <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
 
             
 
-             method is not identical to the value of the <paramref
-             name="includeSections" />
+             method is not identical to the value of the <paramref name="includeSections" />
 
             
 
-             parameter passed to the constructor used to create that <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             parameter passed to the constructor used to create that <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object, sections of the persisted <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+             object, sections of the persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object can contain unpredictable values. For example, if a constructor is called with an <paramref
-             name="includeSections" />
+             object can contain unpredictable values. For example, if a constructor is called with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , and later a <see
-             cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
+            , and later a <see cref="M:System.Security.AccessControl.ObjectSecurity.Persist" />
 
             
 
-             method is called on that object with an <paramref
-             name="includeSections" />
+             method is called on that object with an <paramref name="includeSections" />
 
             
 
-             value of <see
-             cref="F:System.Security.AccessControl.AccessControlSections.All" />
+             value of <see cref="F:System.Security.AccessControl.AccessControlSections.All" />
 
             
 
-            , the resulting persisted <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            , the resulting persisted <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1433,13 +1435,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the specified sections of the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Saves the specified sections of the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             object to permanent storage. We recommend that the values of the <paramref
-             name="includeSections" />
+             object to permanent storage. We recommend that the values of the <paramref name="includeSections" />
 
             
 
@@ -1447,26 +1447,37 @@
           >
         </summary>
         <param name="enableOwnershipPrivilege">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to enable the privilege that allows the caller to take ownership of the object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used to retrieve the persisted information.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -1500,8 +1511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access rules associated with the specified <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Removes all access rules associated with the specified <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -1509,12 +1519,15 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          The <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
@@ -1548,8 +1561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules associated with the specified <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Removes all audit rules associated with the specified <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -1557,12 +1569,15 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          The <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
@@ -1591,8 +1606,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Locks this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Locks this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1622,8 +1636,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlocks this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Unlocks this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1659,8 +1672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets or removes protection of the access rules associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets or removes protection of the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1668,24 +1680,30 @@
           >
         </summary>
         <param name="isProtected">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to protect the access rules associated with this <see
-           cref="T:System.Security.AccessControl.ObjectSecurity" />
+          true to protect the access rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
           
 
            object from inheritance; false to allow inheritance.</param
         >
         <param name="preserveInheritance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to preserve inherited access rules; false to remove inherited access rules. This parameter is ignored if <paramref
-           name="isProtected" />
+          true to preserve inherited access rules; false to remove inherited access rules. This parameter is ignored if <paramref name="isProtected" />
 
           
 
@@ -1720,8 +1738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets or removes protection of the audit rules associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets or removes protection of the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1729,24 +1746,30 @@
           >
         </summary>
         <param name="isProtected">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to protect the audit rules associated with this <see
-           cref="T:System.Security.AccessControl.ObjectSecurity" />
+          true to protect the audit rules associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
           
 
            object from inheritance; false to allow inheritance.</param
         >
         <param name="preserveInheritance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to preserve inherited audit rules; false to remove inherited audit rules. This parameter is ignored if <paramref
-           name="isProtected" />
+          true to preserve inherited audit rules; false to remove inherited audit rules. This parameter is ignored if <paramref name="isProtected" />
 
           
 
@@ -1780,8 +1803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the primary group for the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets the primary group for the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1789,7 +1811,11 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1823,8 +1849,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the owner for the security descriptor associated with this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets the owner for the security descriptor associated with this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1832,7 +1857,11 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1870,8 +1899,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the security descriptor for this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1879,7 +1907,11 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1921,8 +1953,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified sections of the security descriptor for this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets the specified sections of the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1930,14 +1961,22 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of bytes from which to set the security descriptor.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1975,8 +2014,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the security descriptor for this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -1984,7 +2022,11 @@
           >
         </summary>
         <param name="sddlForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2026,8 +2068,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the specified sections of the security descriptor for this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Sets the specified sections of the security descriptor for this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -2035,14 +2076,22 @@
           >
         </summary>
         <param name="sddlForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The SDDL string from which to set the security descriptor.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2071,8 +2120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Locks this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Locks this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
@@ -2102,8 +2150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlocks this <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Unlocks this <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 

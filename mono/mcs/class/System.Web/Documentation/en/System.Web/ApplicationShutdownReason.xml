@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.ApplicationShutdownReason" />
+        >The <see cref="T:System.Web.ApplicationShutdownReason" />
 
         
 
-         represents the possible values for the <see
-         cref="P:System.Web.Hosting.HostingEnvironment.ShutdownReason" />
+         represents the possible values for the <see cref="P:System.Web.Hosting.HostingEnvironment.ShutdownReason" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Hosting.HostingEnvironment" />
+         property of the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
         
 
@@ -34,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies why the <see
-         cref="T:System.AppDomain" />
+        >Specifies why the <see cref="T:System.AppDomain" />
 
         
 
@@ -174,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A call was made to <see
-             cref="M:System.Web.HttpRuntime.Close" />
+            >A call was made to <see cref="M:System.Web.HttpRuntime.Close" />
 
             
 
@@ -215,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.AppDomain" />
+            >An <see cref="T:System.AppDomain" />
 
             
 
@@ -307,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A call was made to <see
-             cref="M:System.Web.HttpRuntime.UnloadAppDomain" />
+            >A call was made to <see cref="M:System.Web.HttpRuntime.UnloadAppDomain" />
 
             
 

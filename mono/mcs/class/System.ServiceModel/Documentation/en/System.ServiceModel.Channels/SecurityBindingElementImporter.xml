@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.SecurityBindingElementImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.SecurityBindingElementImporter" />
 
             
 
@@ -107,12 +106,15 @@
           <para>Imports a custom policy assertion about bindings.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataImporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataImporter" />
 
           
 

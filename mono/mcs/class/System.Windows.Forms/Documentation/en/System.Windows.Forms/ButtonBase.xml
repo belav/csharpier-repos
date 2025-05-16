@@ -17,74 +17,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You do not typically inherit from <see
-         cref="T:System.Windows.Forms.ButtonBase" />
+        >You do not typically inherit from <see cref="T:System.Windows.Forms.ButtonBase" />
 
         
 
-        . To create your own button class, inherit from the <see
-         cref="T:System.Windows.Forms.Button" />
+        . To create your own button class, inherit from the <see cref="T:System.Windows.Forms.Button" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.CheckBox" />
+        , <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-        , or <see
-         cref="T:System.Windows.Forms.RadioButton" />
+        , or <see cref="T:System.Windows.Forms.RadioButton" />
 
         
 
          class.</para
       >
       <para
-        >To have the derived button control display an image, set the <see
-         cref="P:System.Windows.Forms.ButtonBase.Image" />
+        >To have the derived button control display an image, set the <see cref="P:System.Windows.Forms.ButtonBase.Image" />
 
         
 
-         property or the <see
-         cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+         property or the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+         and <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
         
 
-         properties. The image can be aligned on the button control by setting the <see
-         cref="P:System.Windows.Forms.ButtonBase.ImageAlign" />
+         properties. The image can be aligned on the button control by setting the <see cref="P:System.Windows.Forms.ButtonBase.ImageAlign" />
 
         
 
-         property. Likewise, to align the <see
-         cref="P:System.Windows.Forms.Control.Text" />
+         property. Likewise, to align the <see cref="P:System.Windows.Forms.Control.Text" />
 
         
 
-         displayed on the button control, set the <see
-         cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+         displayed on the button control, set the <see cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+        >The <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-         property determines the style and appearance of the control. If the <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+         property determines the style and appearance of the control. If the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-         property is set to <see
-         cref="F:System.Windows.Forms.FlatStyle.System" />
+         property is set to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
         
 
@@ -106,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ButtonBase" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ButtonBase" />
 
             
 
@@ -145,13 +131,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set <see
-             cref="P:System.Windows.Forms.ButtonBase.AutoEllipsis" />
+            >Set <see cref="P:System.Windows.Forms.ButtonBase.AutoEllipsis" />
 
             
 
-             to true to display text that extends beyond the width of the control when the user passes over the control with the mouse. You must set the control's AutoSize property to false if you want <see
-             cref="P:System.Windows.Forms.ButtonBase.AutoEllipsis" />
+             to true to display text that extends beyond the width of the control when the user passes over the control with the mouse. You must set the control's AutoSize property to false if you want <see cref="P:System.Windows.Forms.ButtonBase.AutoEllipsis" />
 
             
 
@@ -214,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -227,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ButtonBase.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ButtonBase.AutoSize" />
 
             
 
@@ -312,13 +294,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As implemented in the <see
-             cref="T:System.Windows.Forms.ButtonBase" />
+            >As implemented in the <see cref="T:System.Windows.Forms.ButtonBase" />
 
             
 
-             class, this property always returns the Disable value of <see
-             cref="T:System.Windows.Forms.ImeMode" />
+             class, this property always returns the Disable value of <see cref="T:System.Windows.Forms.ImeMode" />
 
             
 
@@ -367,36 +347,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.ButtonBase" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ButtonBase" />
 
             
 
@@ -406,8 +380,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.ButtonBase" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ButtonBase" />
 
             
 
@@ -415,7 +388,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,23 +427,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ButtonBase.FlatAppearance" />
+            >Use the <see cref="P:System.Windows.Forms.ButtonBase.FlatAppearance" />
 
             
 
-             property only with <see
-             cref="T:System.Windows.Forms.Button" />
+             property only with <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             controls whose <see
-             cref="T:System.Windows.Forms.FlatStyle" />
+             controls whose <see cref="T:System.Windows.Forms.FlatStyle" />
 
             
 
-             is <see
-             cref="F:System.Windows.Forms.FlatStyle.Flat" />
+             is <see cref="F:System.Windows.Forms.FlatStyle.Flat" />
 
             
 
@@ -504,38 +477,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+            >When the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.RadioButton" />
+             property of the <see cref="T:System.Windows.Forms.RadioButton" />
 
             
 
-             and <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             and <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             classes is set to System, the control is drawn by the user's operating system and the check alignment is based upon the CheckAlign and <see
-             cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+             classes is set to System, the control is drawn by the user's operating system and the check alignment is based upon the CheckAlign and <see cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
 
             
 
-             property values. The CheckAlign property value is not changed, but the appearance of the control can be affected. The check box is horizontally aligned with either the left or right edge of the control (a left or center alignment appears left aligned, right remains unchanged), and vertically aligned the same as the descriptive text. For example, if you have a <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             property values. The CheckAlign property value is not changed, but the appearance of the control can be affected. The check box is horizontally aligned with either the left or right edge of the control (a left or center alignment appears left aligned, right remains unchanged), and vertically aligned the same as the descriptive text. For example, if you have a <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             control with a CheckAlign property value of ContentAlignment. MiddleCenter, a <see
-             cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+             control with a CheckAlign property value of ContentAlignment. MiddleCenter, a <see cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
 
             
 
-             property value of ContentAlignment.TopRight, and the <see
-             cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+             property value of ContentAlignment.TopRight, and the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
             
 
@@ -543,13 +509,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+              >If the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
               
 
-               property is set to FlatStyle.System, any images assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.Image" />
+               property is set to FlatStyle.System, any images assigned to the <see cref="P:System.Windows.Forms.ButtonBase.Image" />
 
               
 
@@ -586,28 +550,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The behavior of <see
-             cref="M:System.Windows.Forms.ButtonBase.GetPreferredSize(System.Drawing.Size)" />
+            >The behavior of <see cref="M:System.Windows.Forms.ButtonBase.GetPreferredSize(System.Drawing.Size)" />
 
             
 
-             differs by control. The <see
-             cref="P:System.Windows.Forms.Control.LayoutEngine" />
+             differs by control. The <see cref="P:System.Windows.Forms.Control.LayoutEngine" />
 
             
 
-             might be unable to assign the returned size to the control. You can return a size larger than the constraints indicated in the <paramref
-             name="proposedSize" />
+             might be unable to assign the returned size to the control. You can return a size larger than the constraints indicated in the <paramref name="proposedSize" />
 
             
 
-             parameter, but <paramref
-             name="proposedSize" />
+             parameter, but <paramref name="proposedSize" />
 
             
 
-             should decrease as the constraint decreases. For example, GetPreferredSize(new Size(100, 0)) should not be wider than GetPreferredSize(new Size(200, 0)). The exception is a <paramref
-             name="proposedSize" />
+             should decrease as the constraint decreases. For example, GetPreferredSize(new Size(100, 0)) should not be wider than GetPreferredSize(new Size(200, 0)). The exception is a <paramref name="proposedSize" />
 
             
 
@@ -621,8 +580,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ordered pair of type <see
-             cref="T:System.Drawing.Size" />
+            >An ordered pair of type <see cref="T:System.Drawing.Size" />
 
             
 
@@ -630,7 +588,11 @@
           >
         </returns>
         <param name="proposedSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -654,18 +616,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.ButtonBase.Image" />
+            >When the <see cref="P:System.Windows.Forms.ButtonBase.Image" />
 
             
 
-             property is set, the <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+             property is set, the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
             
 
-             property will be set to null, and the <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+             property will be set to null, and the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
             
 
@@ -673,13 +632,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+              >If the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
               
 
-               property is set to FlatStyle.System, any images assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.Image" />
+               property is set to FlatStyle.System, any images assigned to the <see cref="P:System.Windows.Forms.ButtonBase.Image" />
 
               
 
@@ -755,18 +712,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+            >When the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+             or <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
             
 
-             properties are set, the <see
-             cref="P:System.Windows.Forms.ButtonBase.Image" />
+             properties are set, the <see cref="P:System.Windows.Forms.ButtonBase.Image" />
 
             
 
@@ -774,78 +728,63 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+              >If the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
               
 
-               property value is changed to null, the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property value is changed to null, the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property returns its default value, -1. However, the assigned <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property returns its default value, -1. However, the assigned <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               value is retained internally and used when another <see
-               cref="T:System.Windows.Forms.ImageList" />
+               value is retained internally and used when another <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               object is assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+               object is assigned to the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
               
 
-               property. If the new <see
-               cref="T:System.Windows.Forms.ImageList" />
+               property. If the new <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+               assigned to the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
               
 
-               property has an <see
-               cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
+               property has an <see cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
 
               
 
-               property value that is less than or equal to the value assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property value that is less than or equal to the value assigned to the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property minus one (to account for the collection being a zero-based index), the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property minus one (to account for the collection being a zero-based index), the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property value is adjusted to one less than the <see
-               cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
+               property value is adjusted to one less than the <see cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
 
               
 
-               property value. For example, consider a button control whose <see
-               cref="T:System.Windows.Forms.ImageList" />
+               property value. For example, consider a button control whose <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               has three images and whose <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               has three images and whose <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property is set to 2. If a new <see
-               cref="T:System.Windows.Forms.ImageList" />
+               property is set to 2. If a new <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               that has only two images is assigned to the button, the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               that has only two images is assigned to the button, the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
@@ -894,8 +833,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageKey" />
+            >The <see cref="P:System.Windows.Forms.ButtonBase.ImageKey" />
 
             
 
@@ -905,8 +843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the key accessor for the image in the <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+            >Gets or sets the key accessor for the image in the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
             
 
@@ -937,18 +874,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+            >When the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+             or <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
             
 
-             property is set, the <see
-             cref="P:System.Windows.Forms.ButtonBase.Image" />
+             property is set, the <see cref="P:System.Windows.Forms.ButtonBase.Image" />
 
             
 
@@ -956,78 +890,63 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+              >If the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
               
 
-               property value is changed to null, the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property value is changed to null, the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property returns its default value, -1. However, the assigned <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property returns its default value, -1. However, the assigned <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               value is retained internally and used when another <see
-               cref="T:System.Windows.Forms.ImageList" />
+               value is retained internally and used when another <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               is assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+               is assigned to the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
               
 
-               property. If the new <see
-               cref="T:System.Windows.Forms.ImageList" />
+               property. If the new <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageList" />
+               assigned to the <see cref="P:System.Windows.Forms.ButtonBase.ImageList" />
 
               
 
-               property has an <see
-               cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
+               property has an <see cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
 
               
 
-               property value that is less than or equal to the value assigned to the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property value that is less than or equal to the value assigned to the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property minus one (because the collection is a zero-based index), the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               property minus one (because the collection is a zero-based index), the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property value is adjusted to one less than the <see
-               cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
+               property value is adjusted to one less than the <see cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
 
               
 
-               property value. For example, consider a button control whose <see
-               cref="T:System.Windows.Forms.ImageList" />
+               property value. For example, consider a button control whose <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               has three images and whose <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               has three images and whose <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
-               property is set to 2. If a new <see
-               cref="T:System.Windows.Forms.ImageList" />
+               property is set to 2. If a new <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               that has only two images is assigned to the button, the <see
-               cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
+               that has only two images is assigned to the button, the <see cref="P:System.Windows.Forms.ButtonBase.ImageIndex" />
 
               
 
@@ -1038,13 +957,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ImageList" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             that contains the <see
-             cref="T:System.Drawing.Image" />
+             that contains the <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1112,8 +1029,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ButtonBase.ImeMode" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ButtonBase.ImeMode" />
 
             
 
@@ -1137,21 +1053,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.ButtonBase.IsDefault" />
+            >When the <see cref="P:System.Windows.Forms.ButtonBase.IsDefault" />
 
             
 
-             property is set to true, the button is the default button for the <see
-             cref="T:System.Windows.Forms.Form" />
+             property is set to true, the button is the default button for the <see cref="T:System.Windows.Forms.Form" />
 
             
 
             . This means that the button is clicked when the ENTER key is pressed if no other button or any other control that captures the ENTER key has focus.</para
           >
           <para
-            >To specify the default button of a form, set the <see
-             cref="P:System.Windows.Forms.Form.AcceptButton" />
+            >To specify the default button of a form, set the <see cref="P:System.Windows.Forms.Form.AcceptButton" />
 
             
 
@@ -1203,8 +1116,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1213,8 +1125,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnGotFocus(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnGotFocus(System.EventArgs)" />
 
             
 
@@ -1224,8 +1135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.GotFocus" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.GotFocus" />
 
             
 
@@ -1233,12 +1143,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1266,8 +1179,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1276,8 +1188,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
             
 
@@ -1285,28 +1196,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call <see
-               cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+              >Do not call <see cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
               
 
-               if the button is disabled (this includes calls to the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+               if the button is disabled (this includes calls to the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
               
 
-               method when you override <see
-               cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+               method when you override <see cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
               
 
-               in a derived class). When disabling the button in an override of <see
-               cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+               in a derived class). When disabling the button in an override of <see cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
               
 
-              , call the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+              , call the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
               
 
@@ -1317,8 +1223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
 
             
 
@@ -1326,12 +1231,15 @@
           >
         </summary>
         <param name="kevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
@@ -1359,8 +1267,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1369,8 +1276,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
 
             
 
@@ -1380,8 +1286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ButtonBase.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
 
             
 
@@ -1389,12 +1294,15 @@
           >
         </summary>
         <param name="kevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
@@ -1419,8 +1327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1429,8 +1336,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)" />
 
             
 
@@ -1440,8 +1346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ButtonBase.OnLostFocus(System.EventArgs)" />
 
             
 
@@ -1449,12 +1354,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1482,8 +1390,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1492,8 +1399,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1501,28 +1407,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+              >Do not call <see cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-               if the button is disabled (this includes calls to the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+               if the button is disabled (this includes calls to the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-               method when you override <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+               method when you override <see cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-               in a derived class). When disabling the button in an override of <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+               in a derived class). When disabling the button in an override of <see cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-              , call the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+              , call the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
               
 
@@ -1533,8 +1434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1542,12 +1442,15 @@
           >
         </summary>
         <param name="mevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1575,8 +1478,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1585,8 +1487,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
             
 
@@ -1594,28 +1495,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+              >Do not call <see cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
               
 
-               if the button is disabled (this includes call to the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+               if the button is disabled (this includes call to the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
               
 
-               method when you override <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+               method when you override <see cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
               
 
-               in a derived class). When disabling the button in an override of <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+               in a derived class). When disabling the button in an override of <see cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
               
 
-              , call the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
+              , call the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnMouseEnter(System.EventArgs)" />
 
               
 
@@ -1626,8 +1522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseEnter(System.EventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseEnter(System.EventArgs)" />
 
             
 
@@ -1635,12 +1530,15 @@
           >
         </summary>
         <param name="eventargs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1668,8 +1566,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1678,8 +1575,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseLeave(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnMouseLeave(System.EventArgs)" />
 
             
 
@@ -1689,8 +1585,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
 
             
 
@@ -1698,12 +1593,15 @@
           >
         </summary>
         <param name="eventargs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1731,8 +1629,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1741,8 +1638,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1750,28 +1646,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+              >Do not call <see cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-               if the button is disabled (this includes calls to the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+               if the button is disabled (this includes calls to the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-               method when you override <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+               method when you override <see cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-               in a derived class). When disabling the button in an override of <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+               in a derived class). When disabling the button in an override of <see cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
               
 
-              , call the base class's <see
-               cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+              , call the base class's <see cref="M:System.Windows.Forms.ButtonBase.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
               
 
@@ -1782,8 +1673,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1791,12 +1681,15 @@
           >
         </summary>
         <param name="mevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1824,8 +1717,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1834,8 +1726,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1845,8 +1736,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ButtonBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -1854,12 +1744,15 @@
           >
         </summary>
         <param name="mevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1887,8 +1780,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1897,8 +1789,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ButtonBase.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ButtonBase.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -1908,8 +1799,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ButtonBase.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ButtonBase.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -1917,12 +1807,15 @@
           >
         </summary>
         <param name="pevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -2009,8 +1902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="T:System.Windows.Forms.Button" />
+            >Resets the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -2119,41 +2011,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
-             cref="T:System.Drawing.Graphics" />
+             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" />
 
             
 
              class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
           >
           <para
-            >The ndptecgdi based <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The ndptecgdi based <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
-             cref="T:System.Drawing.Graphics" />
+             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see
-             cref="T:System.Drawing.Graphics" />
+             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class to render text, this could cause the text for controls that use <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class to render text, this could cause the text for controls that use <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
-             cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
 
             
 
@@ -2163,13 +2048,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that determines whether to use the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets or sets a value that determines whether to use the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class (ndptecgdiplus) or the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class (ndptecgdiplus) or the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 

@@ -65,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Boxes the supplied unmanaged memory pointer and the type associated with that pointer into a managed <see
-             cref="T:System.Reflection.Pointer" />
+            >Boxes the supplied unmanaged memory pointer and the type associated with that pointer into a managed <see cref="T:System.Reflection.Pointer" />
 
             
 
@@ -78,19 +77,26 @@
           <para>A pointer object.</para>
         </returns>
         <param name="ptr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The supplied unmanaged memory pointer. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type associated with the <paramref
-           name="ptr" />
+          The type associated with the <paramref name="ptr" />
 
           
 
@@ -125,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -134,24 +139,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -188,7 +199,11 @@
           <para>This method returns void.</para>
         </returns>
         <param name="ptr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

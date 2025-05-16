@@ -27,13 +27,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the same functionality as <see
-         cref="T:Microsoft.Build.Utilities.Task" />
+        >Provides the same functionality as <see cref="T:Microsoft.Build.Utilities.Task" />
 
         
 
-        , but also derives from <see
-         cref="T:System.MarshalByRefObject" />
+        , but also derives from <see cref="T:System.MarshalByRefObject" />
 
         
 
@@ -52,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
 
             
 
@@ -80,13 +77,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
 
             
 
-             class and allows derived <see
-             cref="T:Microsoft.Build.Utilities.Task" />
+             class and allows derived <see cref="T:Microsoft.Build.Utilities.Task" />
 
             
 
@@ -94,7 +89,11 @@
           >
         </summary>
         <param name="taskResources">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the prefix is an empty string, then string resource names will be used verbatim as Help keywords. For an example of how the prefix is used, see the <see
-             cref="M:Microsoft.Build.Utilities.TaskLoggingHelper.LogErrorWithCodeFromResources(System.String,System.Object[])" />
+            >If the prefix is an empty string, then string resource names will be used verbatim as Help keywords. For an example of how the prefix is used, see the <see cref="M:Microsoft.Build.Utilities.TaskLoggingHelper.LogErrorWithCodeFromResources(System.String,System.Object[])" />
 
             
 
@@ -131,13 +129,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Utilities.AppDomainIsolatedTask" />
 
             
 
-             class and allows derived <see
-             cref="T:Microsoft.Build.Utilities.Task" />
+             class and allows derived <see cref="T:Microsoft.Build.Utilities.Task" />
 
             
 
@@ -145,14 +141,22 @@
           >
         </summary>
         <param name="taskResources">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The task resources.</param
         >
         <param name="helpKeywordPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,8 +230,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a task does not have help keywords associated with its messages, it can ignore this property or set it to null. If the prefix is set to an empty string, then string resource names will be used verbatim as help keywords. For an example of how this prefix is used, see the <see
-             cref="M:Microsoft.Build.Utilities.TaskLoggingHelper.LogErrorWithCodeFromResources(System.String,System.Object[])" />
+            >If a task does not have help keywords associated with its messages, it can ignore this property or set it to null. If the prefix is set to an empty string, then string resource names will be used verbatim as help keywords. For an example of how this prefix is used, see the <see cref="M:Microsoft.Build.Utilities.TaskLoggingHelper.LogErrorWithCodeFromResources(System.String,System.Object[])" />
 
             
 
@@ -262,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a host object instance that is associated with the derived <see
-             cref="T:Microsoft.Build.Utilities.Task" />
+            >Gets or sets a host object instance that is associated with the derived <see cref="T:Microsoft.Build.Utilities.Task" />
 
             
 
@@ -341,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets culture-specific resources of the derived <see
-             cref="T:Microsoft.Build.Utilities.Task" />
+            >Gets or sets culture-specific resources of the derived <see cref="T:Microsoft.Build.Utilities.Task" />
 
             
 

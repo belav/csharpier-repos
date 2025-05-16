@@ -30,13 +30,11 @@
     <example>
       <para
         > The following example compares the status returned by a
-   <see
-         cref="T:System.Net.HttpWebResponse" />
+   <see cref="T:System.Net.HttpWebResponse" />
 
         
 
-         with a <see
-         cref="T:System.Net.HttpStatusCode" />
+         with a <see cref="T:System.Net.HttpStatusCode" />
 
         
 
@@ -70,16 +68,14 @@ public class HttpStatusCodeExample {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.HttpStatusCode" />
+        >The <see cref="T:System.Net.HttpStatusCode" />
 
         
 
          enumeration contains the values of the status codes defined in RFC 2616 for HTTP 1.1.</para
       >
       <para
-        >The status of an HTTP request is contained in the <see
-         cref="P:System.Net.HttpWebResponse.StatusCode" />
+        >The status of an HTTP request is contained in the <see cref="P:System.Net.HttpWebResponse.StatusCode" />
 
         
 
@@ -117,8 +113,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 202. <see
-             cref="F:System.Net.HttpStatusCode.Accepted" />
+            >Equivalent to HTTP status 202. <see cref="F:System.Net.HttpStatusCode.Accepted" />
 
             
 
@@ -153,13 +148,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.Ambiguous" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.Ambiguous" />
 
             
 
@@ -170,8 +163,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.MultipleChoices" />
 
             
 
@@ -181,8 +173,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 300. <see
-             cref="F:System.Net.HttpStatusCode.Ambiguous" />
+            >Equivalent to HTTP status 300. <see cref="F:System.Net.HttpStatusCode.Ambiguous" />
 
             
 
@@ -217,8 +208,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 502. <see
-             cref="F:System.Net.HttpStatusCode.BadGateway" />
+            >Equivalent to HTTP status 502. <see cref="F:System.Net.HttpStatusCode.BadGateway" />
 
             
 
@@ -253,13 +243,11 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 400. <see
-             cref="F:System.Net.HttpStatusCode.BadRequest" />
+            >Equivalent to HTTP status 400. <see cref="F:System.Net.HttpStatusCode.BadRequest" />
 
             
 
-             indicates that the request could not be understood by the server. <see
-             cref="F:System.Net.HttpStatusCode.BadRequest" />
+             indicates that the request could not be understood by the server. <see cref="F:System.Net.HttpStatusCode.BadRequest" />
 
             
 
@@ -294,8 +282,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 409. <see
-             cref="F:System.Net.HttpStatusCode.Conflict" />
+            >Equivalent to HTTP status 409. <see cref="F:System.Net.HttpStatusCode.Conflict" />
 
             
 
@@ -330,8 +317,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 100. <see
-             cref="F:System.Net.HttpStatusCode.Continue" />
+            >Equivalent to HTTP status 100. <see cref="F:System.Net.HttpStatusCode.Continue" />
 
             
 
@@ -366,8 +352,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 201. <see
-             cref="F:System.Net.HttpStatusCode.Created" />
+            >Equivalent to HTTP status 201. <see cref="F:System.Net.HttpStatusCode.Created" />
 
             
 
@@ -402,8 +387,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 417. <see
-             cref="F:System.Net.HttpStatusCode.ExpectationFailed" />
+            >Equivalent to HTTP status 417. <see cref="F:System.Net.HttpStatusCode.ExpectationFailed" />
 
             
 
@@ -438,8 +422,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 403. <see
-             cref="F:System.Net.HttpStatusCode.Forbidden" />
+            >Equivalent to HTTP status 403. <see cref="F:System.Net.HttpStatusCode.Forbidden" />
 
             
 
@@ -474,13 +457,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.Found" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.Found" />
 
             
 
@@ -491,8 +472,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.Redirect" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.Redirect" />
 
             
 
@@ -502,8 +482,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 302. <see
-             cref="F:System.Net.HttpStatusCode.Found" />
+            >Equivalent to HTTP status 302. <see cref="F:System.Net.HttpStatusCode.Found" />
 
             
 
@@ -538,8 +517,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 504. <see
-             cref="F:System.Net.HttpStatusCode.GatewayTimeout" />
+            >Equivalent to HTTP status 504. <see cref="F:System.Net.HttpStatusCode.GatewayTimeout" />
 
             
 
@@ -574,8 +552,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 410. <see
-             cref="F:System.Net.HttpStatusCode.Gone" />
+            >Equivalent to HTTP status 410. <see cref="F:System.Net.HttpStatusCode.Gone" />
 
             
 
@@ -610,8 +587,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 505. <see
-             cref="F:System.Net.HttpStatusCode.HttpVersionNotSupported" />
+            >Equivalent to HTTP status 505. <see cref="F:System.Net.HttpStatusCode.HttpVersionNotSupported" />
 
             
 
@@ -646,8 +622,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 500. <see
-             cref="F:System.Net.HttpStatusCode.InternalServerError" />
+            >Equivalent to HTTP status 500. <see cref="F:System.Net.HttpStatusCode.InternalServerError" />
 
             
 
@@ -682,8 +657,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 411. <see
-             cref="F:System.Net.HttpStatusCode.LengthRequired" />
+            >Equivalent to HTTP status 411. <see cref="F:System.Net.HttpStatusCode.LengthRequired" />
 
             
 
@@ -718,8 +692,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 405. <see
-             cref="F:System.Net.HttpStatusCode.MethodNotAllowed" />
+            >Equivalent to HTTP status 405. <see cref="F:System.Net.HttpStatusCode.MethodNotAllowed" />
 
             
 
@@ -758,8 +731,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.MovedPermanently" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.MovedPermanently" />
 
             
 
@@ -769,8 +741,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 301. <see
-             cref="F:System.Net.HttpStatusCode.Moved" />
+            >Equivalent to HTTP status 301. <see cref="F:System.Net.HttpStatusCode.Moved" />
 
             
 
@@ -809,8 +780,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.Moved" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.Moved" />
 
             
 
@@ -820,8 +790,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 301. <see
-             cref="F:System.Net.HttpStatusCode.MovedPermanently" />
+            >Equivalent to HTTP status 301. <see cref="F:System.Net.HttpStatusCode.MovedPermanently" />
 
             
 
@@ -856,13 +825,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.MultipleChoices" />
 
             
 
@@ -873,8 +840,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.Ambiguous" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.Ambiguous" />
 
             
 
@@ -884,8 +850,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 300. <see
-             cref="F:System.Net.HttpStatusCode.MultipleChoices" />
+            >Equivalent to HTTP status 300. <see cref="F:System.Net.HttpStatusCode.MultipleChoices" />
 
             
 
@@ -920,8 +885,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 204. <see
-             cref="F:System.Net.HttpStatusCode.NoContent" />
+            >Equivalent to HTTP status 204. <see cref="F:System.Net.HttpStatusCode.NoContent" />
 
             
 
@@ -956,8 +920,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 203. <see
-             cref="F:System.Net.HttpStatusCode.NonAuthoritativeInformation" />
+            >Equivalent to HTTP status 203. <see cref="F:System.Net.HttpStatusCode.NonAuthoritativeInformation" />
 
             
 
@@ -992,8 +955,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 406. <see
-             cref="F:System.Net.HttpStatusCode.NotAcceptable" />
+            >Equivalent to HTTP status 406. <see cref="F:System.Net.HttpStatusCode.NotAcceptable" />
 
             
 
@@ -1028,8 +990,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 404. <see
-             cref="F:System.Net.HttpStatusCode.NotFound" />
+            >Equivalent to HTTP status 404. <see cref="F:System.Net.HttpStatusCode.NotFound" />
 
             
 
@@ -1064,8 +1025,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 501. <see
-             cref="F:System.Net.HttpStatusCode.NotImplemented" />
+            >Equivalent to HTTP status 501. <see cref="F:System.Net.HttpStatusCode.NotImplemented" />
 
             
 
@@ -1100,8 +1060,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 304. <see
-             cref="F:System.Net.HttpStatusCode.NotModified" />
+            >Equivalent to HTTP status 304. <see cref="F:System.Net.HttpStatusCode.NotModified" />
 
             
 
@@ -1136,8 +1095,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 200. <see
-             cref="F:System.Net.HttpStatusCode.OK" />
+            >Equivalent to HTTP status 200. <see cref="F:System.Net.HttpStatusCode.OK" />
 
             
 
@@ -1172,8 +1130,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 206. <see
-             cref="F:System.Net.HttpStatusCode.PartialContent" />
+            >Equivalent to HTTP status 206. <see cref="F:System.Net.HttpStatusCode.PartialContent" />
 
             
 
@@ -1208,8 +1165,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 402. <see
-             cref="F:System.Net.HttpStatusCode.PaymentRequired" />
+            >Equivalent to HTTP status 402. <see cref="F:System.Net.HttpStatusCode.PaymentRequired" />
 
             
 
@@ -1244,8 +1200,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 412. <see
-             cref="F:System.Net.HttpStatusCode.PreconditionFailed" />
+            >Equivalent to HTTP status 412. <see cref="F:System.Net.HttpStatusCode.PreconditionFailed" />
 
             
 
@@ -1280,8 +1235,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 407. <see
-             cref="F:System.Net.HttpStatusCode.ProxyAuthenticationRequired" />
+            >Equivalent to HTTP status 407. <see cref="F:System.Net.HttpStatusCode.ProxyAuthenticationRequired" />
 
             
 
@@ -1316,13 +1270,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.Redirect" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.Redirect" />
 
             
 
@@ -1333,8 +1285,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.Found" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.Found" />
 
             
 
@@ -1344,8 +1295,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 302. <see
-             cref="F:System.Net.HttpStatusCode.Redirect" />
+            >Equivalent to HTTP status 302. <see cref="F:System.Net.HttpStatusCode.Redirect" />
 
             
 
@@ -1380,13 +1330,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
 
             
 
@@ -1397,8 +1345,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
 
             
 
@@ -1408,8 +1355,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 307. <see
-             cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+            >Equivalent to HTTP status 307. <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
 
             
 
@@ -1444,13 +1390,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.RedirectMethod" />
 
             
 
@@ -1461,8 +1405,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.SeeOther" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.SeeOther" />
 
             
 
@@ -1472,8 +1415,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 303. <see
-             cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+            >Equivalent to HTTP status 303. <see cref="F:System.Net.HttpStatusCode.RedirectMethod" />
 
             
 
@@ -1508,8 +1450,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 416. <see
-             cref="F:System.Net.HttpStatusCode.RequestedRangeNotSatisfiable" />
+            >Equivalent to HTTP status 416. <see cref="F:System.Net.HttpStatusCode.RequestedRangeNotSatisfiable" />
 
             
 
@@ -1544,8 +1485,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 413. <see
-             cref="F:System.Net.HttpStatusCode.RequestEntityTooLarge" />
+            >Equivalent to HTTP status 413. <see cref="F:System.Net.HttpStatusCode.RequestEntityTooLarge" />
 
             
 
@@ -1580,8 +1520,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 408. <see
-             cref="F:System.Net.HttpStatusCode.RequestTimeout" />
+            >Equivalent to HTTP status 408. <see cref="F:System.Net.HttpStatusCode.RequestTimeout" />
 
             
 
@@ -1616,8 +1555,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 414. <see
-             cref="F:System.Net.HttpStatusCode.RequestUriTooLong" />
+            >Equivalent to HTTP status 414. <see cref="F:System.Net.HttpStatusCode.RequestUriTooLong" />
 
             
 
@@ -1652,8 +1590,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 205. <see
-             cref="F:System.Net.HttpStatusCode.ResetContent" />
+            >Equivalent to HTTP status 205. <see cref="F:System.Net.HttpStatusCode.ResetContent" />
 
             
 
@@ -1688,13 +1625,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.SeeOther" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.SeeOther" />
 
             
 
@@ -1705,8 +1640,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.RedirectMethod" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.RedirectMethod" />
 
             
 
@@ -1716,8 +1650,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 303. <see
-             cref="F:System.Net.HttpStatusCode.SeeOther" />
+            >Equivalent to HTTP status 303. <see cref="F:System.Net.HttpStatusCode.SeeOther" />
 
             
 
@@ -1752,8 +1685,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 503. <see
-             cref="F:System.Net.HttpStatusCode.ServiceUnavailable" />
+            >Equivalent to HTTP status 503. <see cref="F:System.Net.HttpStatusCode.ServiceUnavailable" />
 
             
 
@@ -1788,8 +1720,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 101. <see
-             cref="F:System.Net.HttpStatusCode.SwitchingProtocols" />
+            >Equivalent to HTTP status 101. <see cref="F:System.Net.HttpStatusCode.SwitchingProtocols" />
 
             
 
@@ -1824,13 +1755,11 @@ public class HttpStatusCodeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+            >If the <see cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
 
             
 
-             property is false, <see
-             cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+             property is false, <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
 
             
 
@@ -1841,8 +1770,7 @@ public class HttpStatusCodeExample {
 
             
 
-             is a synonym for <see
-             cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
+             is a synonym for <see cref="F:System.Net.HttpStatusCode.RedirectKeepVerb" />
 
             
 
@@ -1852,8 +1780,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 307. <see
-             cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
+            >Equivalent to HTTP status 307. <see cref="F:System.Net.HttpStatusCode.TemporaryRedirect" />
 
             
 
@@ -1888,8 +1815,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 401. <see
-             cref="F:System.Net.HttpStatusCode.Unauthorized" />
+            >Equivalent to HTTP status 401. <see cref="F:System.Net.HttpStatusCode.Unauthorized" />
 
             
 
@@ -1924,8 +1850,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 415. <see
-             cref="F:System.Net.HttpStatusCode.UnsupportedMediaType" />
+            >Equivalent to HTTP status 415. <see cref="F:System.Net.HttpStatusCode.UnsupportedMediaType" />
 
             
 
@@ -1960,8 +1885,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 306. <see
-             cref="F:System.Net.HttpStatusCode.Unused" />
+            >Equivalent to HTTP status 306. <see cref="F:System.Net.HttpStatusCode.Unused" />
 
             
 
@@ -1988,8 +1912,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 426. <see
-             cref="F:System.Net.HttpStatusCode.UpgradeRequired" />
+            >Equivalent to HTTP status 426. <see cref="F:System.Net.HttpStatusCode.UpgradeRequired" />
 
             
 
@@ -2023,8 +1946,7 @@ public class HttpStatusCodeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equivalent to HTTP status 305. <see
-             cref="F:System.Net.HttpStatusCode.UseProxy" />
+            >Equivalent to HTTP status 305. <see cref="F:System.Net.HttpStatusCode.UseProxy" />
 
             
 

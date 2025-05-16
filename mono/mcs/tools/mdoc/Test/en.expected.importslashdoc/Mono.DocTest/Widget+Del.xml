@@ -20,12 +20,10 @@
   <Docs>
     <param name="i">To be added.</param>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Widget.Del</c>
+    <remarks><c>T:Mono.DocTest.Widget.Del</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
 </Type>

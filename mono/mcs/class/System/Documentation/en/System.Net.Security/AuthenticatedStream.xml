@@ -23,31 +23,26 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This abstract class provides methods and properties that are common to authenticated streams. </para>
       <para
-        >Authenticated streams can provide authentication, data signing, and encryption services that can help maintain the integrity and confidentiality of data transmitted using the <see
-         cref="P:System.Net.Security.AuthenticatedStream.InnerStream" />
+        >Authenticated streams can provide authentication, data signing, and encryption services that can help maintain the integrity and confidentiality of data transmitted using the <see cref="P:System.Net.Security.AuthenticatedStream.InnerStream" />
 
         
 
         . </para
       >
       <para
-        >The security protocol implemented by a class that derives from <see
-         cref="T:System.Net.Security.AuthenticatedStream" />
+        >The security protocol implemented by a class that derives from <see cref="T:System.Net.Security.AuthenticatedStream" />
 
         
 
-         together with the security protocols supported on the client and server will determine the security features that are available to an application. The <see
-         cref="T:System.Net.Security.NegotiateStream" />
+         together with the security protocols supported on the client and server will determine the security features that are available to an application. The <see cref="T:System.Net.Security.NegotiateStream" />
 
         
 
-         and <see
-         cref="T:System.Net.Security.SslStream" />
+         and <see cref="T:System.Net.Security.SslStream" />
 
         
 
-         classes inherit from <see
-         cref="T:System.Net.Security.AuthenticatedStream" />
+         classes inherit from <see cref="T:System.Net.Security.AuthenticatedStream" />
 
         
 
@@ -83,26 +78,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify true for the <paramref
-             name="leaveStreamOpen" />
+            >When you specify true for the <paramref name="leaveStreamOpen" />
 
             
 
-             parameter, closing the <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+             parameter, closing the <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
-             has no effect on the <paramref
-             name="innerStream" />
+             has no effect on the <paramref name="innerStream" />
 
             
 
              stream.</para
           >
           <para
-            >This constructor is provided for implementers of authenticated streams, and can be called only by classes that are derived from <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >This constructor is provided for implementers of authenticated streams, and can be called only by classes that are derived from <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -112,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >Initializes a new instance of the <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -121,39 +111,42 @@
           >
         </summary>
         <param name="innerStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           object used by the <see
-           cref="T:System.Net.Security.AuthenticatedStream" />
+           object used by the <see cref="T:System.Net.Security.AuthenticatedStream" />
 
           
 
             for sending and receiving data.</param
         >
         <param name="leaveInnerStreamOpen">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           that indicates whether closing this <see
-           cref="T:System.Net.Security.AuthenticatedStream" />
+           that indicates whether closing this <see cref="T:System.Net.Security.AuthenticatedStream" />
 
           
 
-            object also closes <paramref
-           name="innerStream" />
+            object also closes <paramref name="innerStream" />
 
           
 
@@ -183,36 +176,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -222,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -231,7 +217,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -259,13 +249,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that inherit from <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >Classes that inherit from <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
-             can use this property to access the stream passed to the <see
-             cref="M:System.Net.Security.AuthenticatedStream.#ctor(System.IO.Stream,System.Boolean)" />
+             can use this property to access the stream passed to the <see cref="M:System.Net.Security.AuthenticatedStream.#ctor(System.IO.Stream,System.Boolean)" />
 
             
 
@@ -275,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the stream used by this <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >Gets the stream used by this <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -302,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The methods called to perform authentication are defined in the classes that inherit from <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >The methods called to perform authentication are defined in the classes that inherit from <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -313,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -344,13 +329,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
-             value that indicates whether data sent using this <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+             value that indicates whether data sent using this <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -379,8 +362,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Not all security protocols support mutual authentication. To determine whether mutual authentication is supported by the security protocol implemented in a class that inherits from <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >Not all security protocols support mutual authentication. To determine whether mutual authentication is supported by the security protocol implemented in a class that inherits from <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 
@@ -390,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -421,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -452,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -483,8 +462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets whether the stream used by this <see
-             cref="T:System.Net.Security.AuthenticatedStream" />
+            >Gets whether the stream used by this <see cref="T:System.Net.Security.AuthenticatedStream" />
 
             
 

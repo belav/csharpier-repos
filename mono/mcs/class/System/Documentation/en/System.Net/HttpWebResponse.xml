@@ -42,13 +42,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains support for HTTP-specific uses of the properties and methods of the <see
-         cref="T:System.Net.WebResponse" />
+        >This class contains support for HTTP-specific uses of the properties and methods of the <see cref="T:System.Net.WebResponse" />
 
         
 
-         class. The <see
-         cref="T:System.Net.HttpWebResponse" />
+         class. The <see cref="T:System.Net.HttpWebResponse" />
 
         
 
@@ -56,13 +54,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not confuse <see
-           cref="T:System.Net.HttpWebResponse" />
+          >Do not confuse <see cref="T:System.Net.HttpWebResponse" />
 
           
 
-           with the <see
-           cref="T:System.Web.HttpResponse" />
+           with the <see cref="T:System.Web.HttpResponse" />
 
           
 
@@ -70,49 +66,41 @@
         >
       </block>
       <para
-        >You should never directly create an instance of the <see
-         cref="T:System.Net.HttpWebResponse" />
+        >You should never directly create an instance of the <see cref="T:System.Net.HttpWebResponse" />
 
         
 
-         class. Instead, use the instance returned by a call to <see
-         cref="M:System.Net.HttpWebRequest.GetResponse" />
+         class. Instead, use the instance returned by a call to <see cref="M:System.Net.HttpWebRequest.GetResponse" />
 
         
 
-        . You must call either the <see
-         cref="M:System.IO.Stream.Close" />
+        . You must call either the <see cref="M:System.IO.Stream.Close" />
 
         
 
-         or the <see
-         cref="M:System.Net.HttpWebResponse.Close" />
+         or the <see cref="M:System.Net.HttpWebResponse.Close" />
 
         
 
-         method to close the response and release the connection for reuse. It is not necessary to call both <see
-         cref="M:System.IO.Stream.Close" />
+         method to close the response and release the connection for reuse. It is not necessary to call both <see cref="M:System.IO.Stream.Close" />
 
         
 
-         and <see
-         cref="M:System.Net.HttpWebResponse.Close" />
+         and <see cref="M:System.Net.HttpWebResponse.Close" />
 
         
 
         , but doing so does not cause an error.</para
       >
       <para
-        >Common header information returned from the Internet resource is exposed as properties of the class. See the following table for a complete list. Other headers can be read from the <see
-         cref="P:System.Net.HttpWebResponse.Headers" />
+        >Common header information returned from the Internet resource is exposed as properties of the class. See the following table for a complete list. Other headers can be read from the <see cref="P:System.Net.HttpWebResponse.Headers" />
 
         
 
          property as name/value pairs.</para
       >
       <para
-        >The following table shows the common HTTP headers that are available through properties of the <see
-         cref="T:System.Net.HttpWebResponse" />
+        >The following table shows the common HTTP headers that are available through properties of the <see cref="T:System.Net.HttpWebResponse" />
 
         
 
@@ -181,13 +169,11 @@
         </item>
       </list>
       <para
-        >The contents of the response from the Internet resource are returned as a <see
-         cref="T:System.IO.Stream" />
+        >The contents of the response from the Internet resource are returned as a <see cref="T:System.IO.Stream" />
 
         
 
-         by calling the <see
-         cref="M:System.Net.HttpWebResponse.GetResponseStream" />
+         by calling the <see cref="M:System.Net.HttpWebResponse.GetResponseStream" />
 
         
 
@@ -197,8 +183,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an HTTP-specific implementation of the <see
-         cref="T:System.Net.WebResponse" />
+        >Provides an HTTP-specific implementation of the <see cref="T:System.Net.WebResponse" />
 
         
 
@@ -235,13 +220,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface for the <see
-             cref="T:System.Net.HttpWebRequest" />
+             interface for the <see cref="T:System.Net.HttpWebRequest" />
 
             
 
@@ -251,18 +234,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpWebResponse" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-             class from the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -270,34 +250,38 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           that contains the information required to serialize the new <see
-           cref="T:System.Net.HttpWebRequest" />
+           that contains the information required to serialize the new <see cref="T:System.Net.HttpWebRequest" />
 
           
 
           . </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           that contains the source of the serialized stream that is associated with the new <see
-           cref="T:System.Net.HttpWebRequest" />
+           that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.HttpWebRequest" />
 
           
 
@@ -325,8 +309,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -340,8 +323,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.CharacterSet" />
+            >The <see cref="P:System.Net.HttpWebResponse.CharacterSet" />
 
             
 
@@ -376,31 +358,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.HttpWebResponse.Close" />
+            >The <see cref="M:System.Net.HttpWebResponse.Close" />
 
             
 
              method closes the response stream and releases the connection to the resource for reuse by other requests.</para
           >
           <para
-            >You must call either the <see
-             cref="M:System.IO.Stream.Close" />
+            >You must call either the <see cref="M:System.IO.Stream.Close" />
 
             
 
-             or the <see
-             cref="M:System.Net.HttpWebResponse.Close" />
+             or the <see cref="M:System.Net.HttpWebResponse.Close" />
 
             
 
-             method to close the stream and release the connection for reuse. It is not necessary to call both <see
-             cref="M:System.IO.Stream.Close" />
+             method to close the stream and release the connection for reuse. It is not necessary to call both <see cref="M:System.IO.Stream.Close" />
 
             
 
-             and <see
-             cref="M:System.Net.HttpWebResponse.Close" />
+             and <see cref="M:System.Net.HttpWebResponse.Close" />
 
             
 
@@ -408,8 +385,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -448,8 +424,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -462,8 +437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.ContentEncoding" />
+            >The <see cref="P:System.Net.HttpWebResponse.ContentEncoding" />
 
             
 
@@ -497,8 +471,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int64" />
+            >A <see cref="T:System.Int64" />
 
             
 
@@ -513,13 +486,11 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.ContentLength" />
+            >The <see cref="P:System.Net.HttpWebResponse.ContentLength" />
 
             
 
-             property contains the value of the Content-Length header returned with the response. If the Content-Length header is not set in the response, <see
-             cref="P:System.Net.HttpWebResponse.ContentLength" />
+             property contains the value of the Content-Length header returned with the response. If the Content-Length header is not set in the response, <see cref="P:System.Net.HttpWebResponse.ContentLength" />
 
             
 
@@ -553,8 +524,7 @@ value does not include header information.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -568,8 +538,7 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.ContentType" />
+            >The <see cref="P:System.Net.HttpWebResponse.ContentType" />
 
             
 
@@ -606,36 +575,30 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.Cookies" />
+            >The <see cref="P:System.Net.HttpWebResponse.Cookies" />
 
             
 
-             property provides an instance of the <see
-             cref="T:System.Net.CookieCollection" />
+             property provides an instance of the <see cref="T:System.Net.CookieCollection" />
 
             
 
              class that holds the cookies associated with this response.</para
           >
           <para
-            >If the <see
-             cref="P:System.Net.HttpWebRequest.CookieContainer" />
+            >If the <see cref="P:System.Net.HttpWebRequest.CookieContainer" />
 
             
 
-             property of the associated <see
-             cref="T:System.Net.HttpWebRequest" />
+             property of the associated <see cref="T:System.Net.HttpWebRequest" />
 
             
 
-             is null, the <see
-             cref="P:System.Net.HttpWebResponse.Cookies" />
+             is null, the <see cref="P:System.Net.HttpWebResponse.Cookies" />
 
             
 
-             property will also be null. Any cookie information sent by the server will be available in the <see
-             cref="P:System.Net.HttpWebResponse.Headers" />
+             property will also be null. Any cookie information sent by the server will be available in the <see cref="P:System.Net.HttpWebResponse.Headers" />
 
             
 
@@ -673,36 +636,30 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.WebResponse" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -710,8 +667,7 @@ value does not include header information.</para
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -726,8 +682,7 @@ value does not include header information.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.HttpWebResponse" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
@@ -735,7 +690,11 @@ value does not include header information.</para
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -762,8 +721,7 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.HttpWebResponse.GetHashCode" />
+            >The <see cref="M:System.Net.HttpWebResponse.GetHashCode" />
 
             
 
@@ -773,8 +731,7 @@ value does not include header information.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash value for a <see
-             cref="T:System.Net.HttpWebResponse" />
+            >Returns a hash value for a <see cref="T:System.Net.HttpWebResponse" />
 
             
 
@@ -816,8 +773,7 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects that are included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects that are included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -827,8 +783,7 @@ value does not include header information.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -836,24 +791,30 @@ value does not include header information.</para
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -890,8 +851,7 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Net.HttpWebResponse.GetResponseHeader(System.String)" />
+            >Use <see cref="M:System.Net.HttpWebResponse.GetResponseHeader(System.String)" />
 
             
 
@@ -907,7 +867,11 @@ value does not include header information.</para
           <para>The contents of the specified header.</para>
         </returns>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -946,8 +910,7 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.HttpWebResponse.GetResponseStream" />
+            >The <see cref="M:System.Net.HttpWebResponse.GetResponseStream" />
 
             
 
@@ -955,23 +918,19 @@ value does not include header information.</para
           >
           <block subset="none" type="note">
             <para
-              >You must call either the <see
-               cref="M:System.IO.Stream.Close" />
+              >You must call either the <see cref="M:System.IO.Stream.Close" />
 
               
 
-               or the  <see
-               cref="M:System.Net.HttpWebResponse.Close" />
+               or the  <see cref="M:System.Net.HttpWebResponse.Close" />
 
               
 
-               method to close the stream and release the connection for reuse. It is not necessary to call both <see
-               cref="M:System.IO.Stream.Close" />
+               method to close the stream and release the connection for reuse. It is not necessary to call both <see cref="M:System.IO.Stream.Close" />
 
               
 
-               and <see
-               cref="M:System.Net.HttpWebResponse.Close" />
+               and <see cref="M:System.Net.HttpWebResponse.Close" />
 
               
 
@@ -980,8 +939,7 @@ value does not include header information.</para
           </block>
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -1000,8 +958,7 @@ value does not include header information.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.Stream" />
+            >A <see cref="T:System.IO.Stream" />
 
             
 
@@ -1037,8 +994,7 @@ value does not include header information.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >A <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -1052,13 +1008,11 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.Headers" />
+            >The <see cref="P:System.Net.HttpWebResponse.Headers" />
 
             
 
-             property is a collection of name/value pairs that contain the HTTP header values returned with the response. Common header information returned from the Internet resource is exposed as properties of the <see
-             cref="T:System.Net.HttpWebResponse" />
+             property is a collection of name/value pairs that contain the HTTP header values returned with the response. Common header information returned from the Internet resource is exposed as properties of the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
@@ -1158,8 +1112,7 @@ value does not include header information.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify mutual authentication using the <see
-             cref="P:System.Net.WebRequest.AuthenticationLevel" />
+            >You can specify mutual authentication using the <see cref="P:System.Net.WebRequest.AuthenticationLevel" />
 
             
 
@@ -1169,8 +1122,7 @@ value does not include header information.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -1202,8 +1154,7 @@ value does not include header information.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.DateTime" />
+            >A <see cref="T:System.DateTime" />
 
             
 
@@ -1218,8 +1169,7 @@ modified.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.LastModified" />
+            >The <see cref="P:System.Net.HttpWebResponse.LastModified" />
 
             
 
@@ -1253,8 +1203,7 @@ modified.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1304,8 +1253,7 @@ modified.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Version" />
+            >A <see cref="T:System.Version" />
 
             
 
@@ -1319,8 +1267,7 @@ that contains the HTTP protocol version of the response.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.ProtocolVersion" />
+            >The <see cref="P:System.Net.HttpWebResponse.ProtocolVersion" />
 
             
 
@@ -1354,8 +1301,7 @@ that contains the HTTP protocol version of the response.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Uri" />
+            >A <see cref="T:System.Uri" />
 
             
 
@@ -1369,39 +1315,33 @@ representing the resource that actually responded to the request.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.ResponseUri" />
+            >The <see cref="P:System.Net.HttpWebResponse.ResponseUri" />
 
             
 
              property contains the URI of the Internet resource that actually responded to the request. This URI might not be the same as the originally requested URI, if the original server redirected the request.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.ResponseUri" />
+            >The <see cref="P:System.Net.HttpWebResponse.ResponseUri" />
 
             
 
              property will use the Content-Location header if present.</para
           >
           <para
-            >Applications that need to access the last redirected <see
-             cref="P:System.Net.HttpWebResponse.ResponseUri" />
+            >Applications that need to access the last redirected <see cref="P:System.Net.HttpWebResponse.ResponseUri" />
 
             
 
-             should use the <see
-             cref="P:System.Net.HttpWebRequest.Address" />
+             should use the <see cref="P:System.Net.HttpWebRequest.Address" />
 
             
 
-             property rather than <see
-             cref="P:System.Net.HttpWebResponse.ResponseUri" />
+             property rather than <see cref="P:System.Net.HttpWebResponse.ResponseUri" />
 
             
 
-            , since the use of <see
-             cref="P:System.Net.HttpWebResponse.ResponseUri" />
+            , since the use of <see cref="P:System.Net.HttpWebResponse.ResponseUri" />
 
             
 
@@ -1435,8 +1375,7 @@ representing the resource that actually responded to the request.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1449,8 +1388,7 @@ representing the resource that actually responded to the request.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.Server" />
+            >The <see cref="P:System.Net.HttpWebResponse.Server" />
 
             
 
@@ -1490,8 +1428,7 @@ representing the resource that actually responded to the request.</para
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Net.HttpStatusCode" />
+            > A <see cref="T:System.Net.HttpStatusCode" />
 
             
 
@@ -1504,13 +1441,11 @@ representing the resource that actually responded to the request.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.HttpWebResponse.StatusCode" />
+            >The <see cref="P:System.Net.HttpWebResponse.StatusCode" />
 
             
 
-             parameter is a number that indicates the status of the HTTP response. The expected values for status are defined in the <see
-             cref="T:System.Net.HttpStatusCode" />
+             parameter is a number that indicates the status of the HTTP response. The expected values for status are defined in the <see cref="T:System.Net.HttpStatusCode" />
 
             
 
@@ -1544,8 +1479,7 @@ representing the resource that actually responded to the request.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1586,43 +1520,35 @@ representing the resource that actually responded to the request.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
+            >Call <see cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Net.HttpWebResponse" />
+             when you are finished using the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-            . The <see
-             cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
+            . The <see cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.HttpWebResponse" />
+             method leaves the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.HttpWebResponse" />
+            , you must release all references to the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.HttpWebResponse" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -1630,8 +1556,7 @@ representing the resource that actually responded to the request.</para
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9"
                 >[&lt;topic://cpconImplementingDisposeMethod&gt;]</a
               >
@@ -1642,18 +1567,15 @@ representing the resource that actually responded to the request.</para
             . </para
           >
           <para
-            >Note: Always call <see
-             cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
+            >Note: Always call <see cref="M:System.Net.HttpWebResponse.System#IDisposable#Dispose" />
 
             
 
-             before you release your last reference to the <see
-             cref="T:System.Net.HttpWebResponse" />
+             before you release your last reference to the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
-            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-             cref="T:System.Net.HttpWebResponse" />
+            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
@@ -1663,8 +1585,7 @@ representing the resource that actually responded to the request.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Net.HttpWebResponse" />
+            >Releases all resources used by the <see cref="T:System.Net.HttpWebResponse" />
 
             
 
@@ -1700,8 +1621,7 @@ representing the resource that actually responded to the request.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes this instance into the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1709,19 +1629,26 @@ representing the resource that actually responded to the request.</para
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object into which this <see
-           cref="T:System.Net.HttpWebResponse" />
+          The object into which this <see cref="T:System.Net.HttpWebResponse" />
 
           
 
            will be serialized. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

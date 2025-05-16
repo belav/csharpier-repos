@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" />
 
             
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetPeerTcpBindingElement" />
 
             
 
@@ -108,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 

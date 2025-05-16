@@ -36,21 +36,18 @@
 
         
 
-         is a special class. Compilers and other tools can derive from this class, but you cannot derive from it explicitly. The same is true of the <see
-         cref="T:System.Delegate" />
+         is a special class. Compilers and other tools can derive from this class, but you cannot derive from it explicitly. The same is true of the <see cref="T:System.Delegate" />
 
         
 
          class.</para
       >
       <para
-        >In addition to the methods that delegate types inherit from <see
-         cref="T:System.MulticastDelegate" />
+        >In addition to the methods that delegate types inherit from <see cref="T:System.MulticastDelegate" />
 
         
 
-        , the common language runtime provides two special methods: BeginInvoke and EndInvoke. For more information about these methods, see <format
-         type="text/html">
+        , the common language runtime provides two special methods: BeginInvoke and EndInvoke. For more information about these methods, see <format type="text/html">
           <a href="41972034-92ed-450a-9664-ab93fcc6f1fb"
             >Calling Asynchronous Methods Synchronously</a
           >
@@ -61,8 +58,7 @@
         .</para
       >
       <para
-        >A <see
-         cref="T:System.MulticastDelegate" />
+        >A <see cref="T:System.MulticastDelegate" />
 
         
 
@@ -99,13 +95,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor cannot be used in application code. To create a delegate by specifying the name of an instance method, use an overload of the <see
-             cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" />
+            >This constructor cannot be used in application code. To create a delegate by specifying the name of an instance method, use an overload of the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" />
 
             
 
-             method that specifies a method name and a target object. For example, the <see
-             cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" />
+             method that specifies a method name and a target object. For example, the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" />
 
             
 
@@ -115,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MulticastDelegate" />
+            >Initializes a new instance of the <see cref="T:System.MulticastDelegate" />
 
             
 
@@ -124,19 +117,26 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object on which <paramref
-           name="method" />
+          The object on which <paramref name="method" />
 
           
 
            is defined. </param
         >
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,13 +168,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor cannot be used in application code. To create a delegate by specifying the name of a static method, use an overload of the <see
-             cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" />
+            >This constructor cannot be used in application code. To create a delegate by specifying the name of a static method, use an overload of the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" />
 
             
 
-             method that specifies a method name but does not specify a target object. For example, the <see
-             cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" />
+             method that specifies a method name but does not specify a target object. For example, the <see cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" />
 
             
 
@@ -184,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MulticastDelegate" />
+            >Initializes a new instance of the <see cref="T:System.MulticastDelegate" />
 
             
 
@@ -193,19 +190,26 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of object on which <paramref
-           name="method" />
+          The type of object on which <paramref name="method" />
 
           
 
            is defined. </param
         >
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -239,13 +243,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines this <see
-             cref="T:System.Delegate" />
+            >Combines this <see cref="T:System.Delegate" />
 
             
 
-             with the specified <see
-             cref="T:System.Delegate" />
+             with the specified <see cref="T:System.Delegate" />
 
             
 
@@ -255,8 +257,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A delegate that is the new root of the <see
-             cref="T:System.MulticastDelegate" />
+            >A delegate that is the new root of the <see cref="T:System.MulticastDelegate" />
 
             
 
@@ -264,7 +265,11 @@
           >
         </returns>
         <param name="follow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -304,7 +309,11 @@
           <para>An array that contains the return value of the encapsulated method.</para>
         </returns>
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -343,8 +352,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -352,7 +360,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -448,16 +460,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method stores all the information in <paramref
-             name="info" />
+            >This method stores all the information in <paramref name="info" />
 
             
 
              necessary to serialize this instance.</para
           >
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -467,8 +477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -476,14 +485,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that holds all the data needed to serialize or deserialize this instance. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -522,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.MulticastDelegate" />
+            >Determines whether two <see cref="T:System.MulticastDelegate" />
 
             
 
@@ -533,13 +549,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="d1" />
+            >true if <paramref name="d1" />
 
             
 
-             and <paramref
-             name="d2" />
+             and <paramref name="d2" />
 
             
 
@@ -547,14 +561,22 @@
           >
         </returns>
         <param name="d1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The left operand. </param
         >
         <param name="d2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -593,8 +615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.MulticastDelegate" />
+            >Determines whether two <see cref="T:System.MulticastDelegate" />
 
             
 
@@ -604,13 +625,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="d1" />
+            >true if <paramref name="d1" />
 
             
 
-             and <paramref
-             name="d2" />
+             and <paramref name="d2" />
 
             
 
@@ -618,14 +637,22 @@
           >
         </returns>
         <param name="d1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The left operand. </param
         >
         <param name="d2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -659,8 +686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an element from the invocation list of this <see
-             cref="T:System.MulticastDelegate" />
+            >Removes an element from the invocation list of this <see cref="T:System.MulticastDelegate" />
 
             
 
@@ -670,18 +696,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             is found in the invocation list for this instance, then a new <see
-             cref="T:System.Delegate" />
+             is found in the invocation list for this instance, then a new <see cref="T:System.Delegate" />
 
             
 
-             without <paramref
-             name="value" />
+             without <paramref name="value" />
 
             
 
@@ -689,7 +712,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

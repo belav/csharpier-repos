@@ -17,33 +17,27 @@
 
         
 
-         objects and the data-bound controls that use them use the <see
-         cref="T:System.Web.UI.WebControls.DataControlCellType" />
+         objects and the data-bound controls that use them use the <see cref="T:System.Web.UI.WebControls.DataControlCellType" />
 
         
 
-         enumeration to identify the type of cell, and therefore what attributes it should have when rendered. The <see
-         cref="F:System.Web.UI.WebControls.DataControlCellType.DataCell" />
+         enumeration to identify the type of cell, and therefore what attributes it should have when rendered. The <see cref="F:System.Web.UI.WebControls.DataControlCellType.DataCell" />
 
         
 
-         cell type identifies a data-bound cell in a <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         cell type identifies a data-bound cell in a <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         or <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control, whereas the <see
-         cref="F:System.Web.UI.WebControls.DataControlCellType.Header" />
+         control, whereas the <see cref="F:System.Web.UI.WebControls.DataControlCellType.Header" />
 
         
 
-         and <see
-         cref="F:System.Web.UI.WebControls.DataControlCellType.Footer" />
+         and <see cref="F:System.Web.UI.WebControls.DataControlCellType.Footer" />
 
         
 
@@ -53,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the function of a <see
-         cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+        >Describes the function of a <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
         
 
@@ -74,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
@@ -98,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
@@ -122,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 

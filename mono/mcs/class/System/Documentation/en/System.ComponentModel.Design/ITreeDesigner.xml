@@ -25,34 +25,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.ITreeDesigner" />
+        >The <see cref="T:System.ComponentModel.Design.ITreeDesigner" />
 
         
 
-         interface derives from the <see
-         cref="T:System.ComponentModel.Design.IDesigner" />
+         interface derives from the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
          interface and provides support for flexibly navigating a hierarchy of related designers. With this interface, a programmer can supply a number of designers for the component, with the appropriate one being determined dynamically.</para
       >
       <para
-        >This interface is a simple extension of its base class, adding just two properties for navigating a tree hierarchy: <see
-         cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
+        >This interface is a simple extension of its base class, adding just two properties for navigating a tree hierarchy: <see cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
 
         
 
-         and <see
-         cref="P:System.ComponentModel.Design.ITreeDesigner.Parent" />
+         and <see cref="P:System.ComponentModel.Design.ITreeDesigner.Parent" />
 
         
 
         . </para
       >
       <para
-        >For an overview of creating design components, see <format
-         type="text/html">
+        >For an overview of creating design components, see <format type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
 
@@ -89,13 +84,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
+            >The <see cref="P:System.ComponentModel.Design.ITreeDesigner.Children" />
 
             
 
-             property will return an empty collection if the <see
-             cref="T:System.ComponentModel.Design.ITreeDesigner" />
+             property will return an empty collection if the <see cref="T:System.ComponentModel.Design.ITreeDesigner" />
 
             
 

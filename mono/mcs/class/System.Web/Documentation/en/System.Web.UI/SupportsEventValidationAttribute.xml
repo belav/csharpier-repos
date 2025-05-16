@@ -26,13 +26,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Event validation prevents forged postbacks to an ASP.NET Web page and can be enabled through the EnableEventValidation page directive. </para>
       <para
-        >For more information, see <see
-         cref="P:System.Web.UI.Page.EnableEventValidation" />
+        >For more information, see <see cref="P:System.Web.UI.Page.EnableEventValidation" />
 
         
 
-        . For more information about attributes, see <format
-         type="text/html">
+        . For more information about attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.SupportsEventValidationAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.SupportsEventValidationAttribute" />
 
             
 

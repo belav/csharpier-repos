@@ -28,31 +28,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection of endpoints for a service is used by the metadata API to manage services with multiple endpoints. <see
-         cref="T:System.ServiceModel.Description.ServiceEndpointCollection" />
+        >This collection of endpoints for a service is used by the metadata API to manage services with multiple endpoints. <see cref="T:System.ServiceModel.Description.ServiceEndpointCollection" />
 
         
 
-         is returned, for example, by the <see
-         cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" />
+         is returned, for example, by the <see cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" />
 
         
 
-         property and by the <see
-         cref="M:System.ServiceModel.Description.WsdlImporter.ImportAllEndpoints" />
+         property and by the <see cref="M:System.ServiceModel.Description.WsdlImporter.ImportAllEndpoints" />
 
         
 
          method when creating service endpoints from WSDL port types. </para
       >
       <para
-        >The collection provides the functionality to <see
-         cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+        >The collection provides the functionality to <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
 
         
 
-         the endpoints of a particular type, that have a specific name or address, or to <see
-         cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+         the endpoints of a particular type, that have a specific name or address, or to <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
 
         
 
@@ -89,36 +84,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="M:System.ServiceModel.Description.ServiceEndpointCollection.Find(System.Type)" />
+            >This <see cref="M:System.ServiceModel.Description.ServiceEndpointCollection.Find(System.Type)" />
 
             
 
-             overload is specific to the indigo1 programming model. It looks at the <see
-             cref="P:System.ServiceModel.Description.ContractDescription.ContractType" />
+             overload is specific to the indigo1 programming model. It looks at the <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" />
 
             
 
-             property for each endpoint. The <see
-             cref="P:System.ServiceModel.Description.ContractDescription.ContractType" />
+             property for each endpoint. The <see cref="P:System.ServiceModel.Description.ContractDescription.ContractType" />
 
             
 
-             may be null if the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             may be null if the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
              was not created from the indigo2 programming model (types with *Contract attributes). </para
           >
           <para
-            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             objects that satisfy the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+             objects that satisfy the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
 
             
 
@@ -132,8 +121,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -166,13 +154,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             objects that satisfy the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+             objects that satisfy the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
 
             
 
@@ -186,8 +172,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -220,13 +205,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             objects that satisfy the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+             objects that satisfy the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
 
             
 
@@ -240,8 +223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -274,13 +256,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             objects that satisfy the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+             objects that satisfy the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
 
             
 
@@ -294,8 +274,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -303,24 +282,30 @@
           >
         </returns>
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of contract for the service endpoint.</param
         >
         <param name="bindingName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -352,13 +337,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >There are potentially multiple endpoints that could satisfy the criteria. The method returns the first one encountered in the collection. If you need to find all of the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             objects that satisfy the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
+             objects that satisfy the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.FindAll" />
 
             
 
@@ -372,8 +355,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -381,24 +363,30 @@
           >
         </returns>
         <param name="contractName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            for the contract of the service.</param
         >
         <param name="bindingName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -429,13 +417,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you only need to find the first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >If you only need to find the first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             that satisfies the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+             that satisfies the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
 
             
 
@@ -449,13 +435,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -463,12 +447,15 @@
           >
         </returns>
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -500,13 +487,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you only need to find the first <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >If you only need to find the first <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             that satisfies the specified criteria, use one of the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+             that satisfies the specified criteria, use one of the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
 
             
 
@@ -520,13 +505,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+            >The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -559,8 +542,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the virtual <see
-             cref="M:System.Collections.ObjectModel.Collection`1.InsertItem(System.Int32,`0)" />
+            >This method overrides the virtual <see cref="M:System.Collections.ObjectModel.Collection`1.InsertItem(System.Int32,`0)" />
 
             
 
@@ -572,24 +554,30 @@
           <para>Inserts an item into the collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which the item should be inserted.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
-           item to insert at the specified <paramref
-           name="index" />
+           item to insert at the specified <paramref name="index" />
 
           
 
@@ -621,8 +609,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the virtual <see
-             cref="M:System.Collections.ObjectModel.Collection`1.SetItem(System.Int32,`0)" />
+            >This method overrides the virtual <see cref="M:System.Collections.ObjectModel.Collection`1.SetItem(System.Int32,`0)" />
 
             
 
@@ -634,24 +621,30 @@
           <para>Replaces the element in the collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the element to replace.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new value for <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The new value for <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
-           item at the specified <paramref
-           name="index" />
+           item at the specified <paramref name="index" />
 
           
 

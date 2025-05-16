@@ -18,13 +18,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each property of the <see
-         cref="T:System.Drawing.SystemBrushes" />
+        >Each property of the <see cref="T:System.Drawing.SystemBrushes" />
 
         
 
-         class is a <see
-         cref="T:System.Drawing.SolidBrush" />
+         class is a <see cref="T:System.Drawing.SolidBrush" />
 
         
 
@@ -48,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -77,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -138,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -170,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -201,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -232,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -254,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -286,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -318,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -350,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -382,8 +369,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -411,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -437,8 +422,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -468,13 +452,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Brush" />
+            >Creates a <see cref="T:System.Drawing.Brush" />
 
             
 
-             from the specified <see
-             cref="T:System.Drawing.Color" />
+             from the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -484,8 +466,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Brush" />
+            >The <see cref="T:System.Drawing.Brush" />
 
             
 
@@ -493,17 +474,19 @@
           >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
-           structure from which to create the <see
-           cref="T:System.Drawing.Brush" />
+           structure from which to create the <see cref="T:System.Drawing.Brush" />
 
           
 
@@ -533,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -561,8 +543,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -589,8 +570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -617,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -649,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -678,8 +656,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -707,8 +684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -736,8 +712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -768,8 +743,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -790,8 +764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -819,8 +792,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -841,8 +813,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -870,8 +841,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -898,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -923,8 +892,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -948,8 +916,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -974,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -1006,8 +972,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 
@@ -1031,8 +996,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.SolidBrush" />
+            >Gets a <see cref="T:System.Drawing.SolidBrush" />
 
             
 

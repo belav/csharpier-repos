@@ -5,13 +5,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The System.Collections.Concurrent namespace provides several thread-safe collection classes that should be used in place of the corresponding types in the <see
-         cref="N:System.Collections" />
+        >The System.Collections.Concurrent namespace provides several thread-safe collection classes that should be used in place of the corresponding types in the <see cref="N:System.Collections" />
 
         
 
-         and <see
-         cref="N:System.Collections.Generic" />
+         and <see cref="N:System.Collections.Generic" />
 
         
 

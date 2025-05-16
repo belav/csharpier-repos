@@ -21,13 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+        >The <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
         
 
          class provides support for the Range header as defined in <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+          cref="http://go.microsoft.com/fwlink/?LinkID=241642"
+          >RFC 2616</see
+        >
 
         
 
@@ -64,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -95,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This  constructor initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >This  constructor initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -105,13 +104,11 @@
           <para>An example of a Range header with a byte range in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
           <para>Range: bytes=0-99\r\n\r\n</para>
           <para
-            >For this example, the <paramref
-             name="from" />
+            >For this example, the <paramref name="from" />
 
             
 
-             parameter would be specified as 0 and the <paramref
-             name="to" />
+             parameter would be specified as 0 and the <paramref name="to" />
 
             
 
@@ -121,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -130,14 +126,22 @@
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position at which to start sending data.</param
         >
         <param name="to">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -166,13 +170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+             is equal to the current <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -181,17 +183,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
@@ -199,7 +197,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,8 +228,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
           <para
-            >The <see
-             cref="M:System.Net.Http.Headers.RangeHeaderValue.GetHashCode" />
+            >The <see cref="M:System.Net.Http.Headers.RangeHeaderValue.GetHashCode" />
 
             
 
@@ -237,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for an <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -247,14 +247,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Int32" />
+          <para>Returns <see cref="T:System.Int32" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A hash code for the current object.</para>
         </returns>
       </Docs>
@@ -283,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -294,16 +290,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Returns <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
             .</para
           >
           <para
-            >An <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >An <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -311,7 +305,11 @@
           >
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,8 +339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ranges specified from the <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Gets the ranges specified from the <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -370,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -380,14 +376,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Object" />
+          <para>Returns <see cref="T:System.Object" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A copy of the current instance.</para>
         </returns>
       </Docs>
@@ -411,8 +404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 
@@ -421,14 +413,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.String" />
+          <para>Returns <see cref="T:System.String" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A string that represents the current object.</para>
         </returns>
       </Docs>
@@ -481,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the unit from the <see
-             cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+            >Gets the unit from the <see cref="T:System.Net.Http.Headers.RangeHeaderValue" />
 
             
 

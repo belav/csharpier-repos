@@ -29,14 +29,12 @@
     <remarks>
       <block subset="none" type="note">
         <para
-          >This delegate is used by the method <see
-           cref="M:System.Array.ForEach" />
+          >This delegate is used by the method <see cref="M:System.Array.ForEach" />
           <see langword="(T[], Action&lt;T&gt;)" />
 
           
 
-          , and in <see
-           cref="T:System.Collections.Generic.List&lt;T&gt;" />
+          , and in <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
           
 

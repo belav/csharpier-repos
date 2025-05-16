@@ -19,36 +19,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Resources.ResXFileRef" />
+        >The <see cref="T:System.Resources.ResXFileRef" />
 
         
 
-         class is used to include references to files in an XML resource (.resx) file. A <see
-         cref="T:System.Resources.ResXFileRef" />
+         class is used to include references to files in an XML resource (.resx) file. A <see cref="T:System.Resources.ResXFileRef" />
 
         
 
-         object represents a link to an external resource in an XML resource (.resx) file. You add the <see
-         cref="T:System.Resources.ResXFileRef" />
+         object represents a link to an external resource in an XML resource (.resx) file. You add the <see cref="T:System.Resources.ResXFileRef" />
 
         
 
-         object to a .resx file by calling the <see
-         cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
+         object to a .resx file by calling the <see cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
 
         
 
          method. </para
       >
       <para
-        >In a data entry in a .resx file, the type is <see
-         cref="T:System.Resources.ResXFileRef" />
+        >In a data entry in a .resx file, the type is <see cref="T:System.Resources.ResXFileRef" />
 
         
 
-        , and the value is the path location on disk. When the resource manager deserializes the object, the <see
-         cref="T:System.Resources.ResXFileRef" />
+        , and the value is the path location on disk. When the resource manager deserializes the object, the <see cref="T:System.Resources.ResXFileRef" />
 
         
 
@@ -64,36 +58,30 @@
   &lt;value&gt;xplogo.png;System.Drawing.Bitmap, System.Drawing&lt;/value&gt;
  &lt;/data&gt;</code>
       <para
-        >To add a <see
-         cref="T:System.Resources.ResXFileRef" />
+        >To add a <see cref="T:System.Resources.ResXFileRef" />
 
         
 
-         object to a .resx file programmatically, you call the <see
-         cref="M:System.Resources.ResXDataNode.#ctor(System.String,System.Resources.ResXFileRef)" />
+         object to a .resx file programmatically, you call the <see cref="M:System.Resources.ResXDataNode.#ctor(System.String,System.Resources.ResXFileRef)" />
 
         
 
-         constructor to instantiate a <see
-         cref="T:System.Resources.ResXDataNode" />
+         constructor to instantiate a <see cref="T:System.Resources.ResXDataNode" />
 
         
 
-         object. You then pass this <see
-         cref="T:System.Resources.ResXDataNode" />
+         object. You then pass this <see cref="T:System.Resources.ResXDataNode" />
 
         
 
-         object to the <see
-         cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
+         object to the <see cref="M:System.Resources.ResXResourceWriter.AddResource(System.Resources.ResXDataNode)" />
 
         
 
          method. </para
       >
       <para
-        >When you compile a .resx file with <format
-         type="text/html">
+        >When you compile a .resx file with <format type="text/html">
           <a href="8ef159de-b660-4bec-9213-c3fbc4d1c6f4">Resgen.exe (Resource File Generator)</a>
         </format>
 
@@ -122,13 +110,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type referred to by the <paramref
-             name="typeName" />
+            >The type referred to by the <paramref name="typeName" />
 
             
 
-             parameter must support a public constructor that accepts a <see
-             cref="T:System.IO.Stream" />
+             parameter must support a public constructor that accepts a <see cref="T:System.IO.Stream" />
 
             
 
@@ -138,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Resources.ResXFileRef" />
+            >Creates a new instance of the <see cref="T:System.Resources.ResXFileRef" />
 
             
 
@@ -147,14 +132,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to reference. </param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -184,13 +177,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type referred to by the <paramref
-             name="typeName" />
+            >The type referred to by the <paramref name="typeName" />
 
             
 
-             parameter must support a public constructor that accepts a <see
-             cref="T:System.IO.Stream" />
+             parameter must support a public constructor that accepts a <see cref="T:System.IO.Stream" />
 
             
 
@@ -200,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.ResXFileRef" />
+            >Initializes a new instance of the <see cref="T:System.Resources.ResXFileRef" />
 
             
 
@@ -209,21 +199,33 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file to reference. </param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type name of the resource that is referenced. </param
         >
         <param name="textFileEncoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -246,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the file name specified in the current <see
-             cref="Overload:System.Resources.ResXFileRef.#ctor" />
+            >Gets the file name specified in the current <see cref="Overload:System.Resources.ResXFileRef.#ctor" />
 
             
 
@@ -274,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the encoding specified in the current <see
-             cref="Overload:System.Resources.ResXFileRef.#ctor" />
+            >Gets the encoding specified in the current <see cref="Overload:System.Resources.ResXFileRef.#ctor" />
 
             
 
@@ -296,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the text representation of the current <see
-             cref="T:System.Resources.ResXFileRef" />
+            >Gets the text representation of the current <see cref="T:System.Resources.ResXFileRef" />
 
             
 
@@ -307,8 +306,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that consists of the concatenated text representations of the parameters specified in the current <see
-             cref="Overload:System.Resources.ResXFileRef.#ctor" />
+            >A string that consists of the concatenated text representations of the parameters specified in the current <see cref="Overload:System.Resources.ResXFileRef.#ctor" />
 
             
 
@@ -336,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type name specified in the current <see
-             cref="Overload:System.Resources.ResXFileRef.#ctor" />
+            >Gets the type name specified in the current <see cref="Overload:System.Resources.ResXFileRef.#ctor" />
 
             
 

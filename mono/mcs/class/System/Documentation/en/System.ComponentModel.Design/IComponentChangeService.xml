@@ -99,31 +99,26 @@
         </item>
       </list>
       <para
-        >Typically, the design environment raises these component add, change, remove, or rename events. Designers should call the methods of this interface when using <see
-         cref="T:System.ComponentModel.Design.DesignerTransaction" />
+        >Typically, the design environment raises these component add, change, remove, or rename events. Designers should call the methods of this interface when using <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
         
 
-         objects to provide undo and redo functionality for design-time actions that affect components. More information is available in the documentation for <see
-         cref="T:System.ComponentModel.Design.DesignerTransaction" />
+         objects to provide undo and redo functionality for design-time actions that affect components. More information is available in the documentation for <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
         
 
         . Generally, only the root designer handles these change notifications.</para
       >
       <para
-        >This service also provides methods that raise a component changed event or component changing event. A <see
-         cref="T:System.ComponentModel.PropertyDescriptor" />
+        >This service also provides methods that raise a component changed event or component changing event. A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
         
 
-         or a component can indicate that a component has changed or is changing with the <see
-         cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+         or a component can indicate that a component has changed or is changing with the <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
         
 
-         and <see
-         cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+         and <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
 
         
 
@@ -133,13 +128,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an interface to add and remove the event handlers for events that add, change, remove or rename components, and provides methods to raise a <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+        >Provides an interface to add and remove the event handlers for events that add, change, remove or rename components, and provides methods to raise a <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
-         or <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+         or <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
         
 
@@ -233,53 +226,43 @@
           <para>This event occurs when any component on the form changes. This event will not occur during form load and unload, because changes are expected at this time.</para>
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.ComponentModel.Design.DesignerTransaction" />
+              >A <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
               
 
-               can raise multiple <see
-               cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+               can raise multiple <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
               
 
-               events. Some <see
-               cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+               events. Some <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
               
 
-               event handlers can interfere with expected sequences of events, such as if your code alters the values of properties while a transaction is occurring. A <see
-               cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+               event handlers can interfere with expected sequences of events, such as if your code alters the values of properties while a transaction is occurring. A <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
               
 
-               event handler can also impair performance if it draws after each change while a <see
-               cref="T:System.ComponentModel.Design.DesignerTransaction" />
+               event handler can also impair performance if it draws after each change while a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
               
 
-               is in progress. In order to allow a <see
-               cref="T:System.ComponentModel.Design.DesignerTransaction" />
+               is in progress. In order to allow a <see cref="T:System.ComponentModel.Design.DesignerTransaction" />
 
               
 
-               in process to complete without interruption or interference by your <see
-               cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+               in process to complete without interruption or interference by your <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
               
 
-               event handler, you can test the state of the <see
-               cref="P:System.ComponentModel.Design.IDesignerHost.InTransaction" />
+               event handler, you can test the state of the <see cref="P:System.ComponentModel.Design.IDesignerHost.InTransaction" />
 
               
 
-               property, and defer handling the change events until the completion of the transaction by adding a <see
-               cref="T:System.ComponentModel.Design.DesignerTransactionCloseEventHandler" />
+               property, and defer handling the change events until the completion of the transaction by adding a <see cref="T:System.ComponentModel.Design.DesignerTransactionCloseEventHandler" />
 
               
 
-               which will raise your <see
-               cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+               which will raise your <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
               
 
@@ -406,8 +389,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event occurs after the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+            >This event occurs after the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
             
 
@@ -448,49 +430,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method raises the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+            >This method raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
             
 
              event.</para
           >
           <para
-            >Most designers that ship with the winsdklong, as well as the Visual Studio design-time environment, typically raise this event for you when a component in a project is changed, so most of the time you do not need to explicitly call this method. The appropriate <see
-             cref="T:System.ComponentModel.Design.IComponentChangeService" />
+            >Most designers that ship with the winsdklong, as well as the Visual Studio design-time environment, typically raise this event for you when a component in a project is changed, so most of the time you do not need to explicitly call this method. The appropriate <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
             
 
-             events are automatically raised when a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             events are automatically raised when a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             is used to change a property value or components are added or removed from the <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             is used to change a property value or components are added or removed from the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
              container.</para
           >
           <para
-            >Before calling <see
-             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+            >Before calling <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
             
 
-            , first call <see
-             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+            , first call <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
 
             
 
-             to indicate that a component is about to change, and make the change. Then call <see
-             cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
+             to indicate that a component is about to change, and make the change. Then call <see cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
             
 
-             to raise the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+             to raise the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
             
 
@@ -502,28 +476,44 @@
           <para>Announces to the component change service that a particular component has changed.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that has changed. </param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The member that has changed. This is null if this change is not related to a single member. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The old value of the member. This is valid only if the member is not null. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -557,26 +547,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method raises the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+            >This method raises the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
 
             
 
              event.</para
           >
           <para
-            >Most designers included with the winsdklong, as well as the Visual Studio design-time environment, typically raise this event automatically; so most of the time, you do not need to explicitly call this method. The appropriate <see
-             cref="T:System.ComponentModel.Design.IComponentChangeService" />
+            >Most designers included with the winsdklong, as well as the Visual Studio design-time environment, typically raise this event automatically; so most of the time, you do not need to explicitly call this method. The appropriate <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
             
 
-             events are automatically raised when a <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             events are automatically raised when a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             is used to change a property value or components are added or removed from the <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             is used to change a property value or components are added or removed from the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -588,14 +574,22 @@
           <para>Announces to the component change service that a particular component is changing.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that is about to change. </param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

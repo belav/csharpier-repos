@@ -14,117 +14,96 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.ProfileAutoSaveEventHandler" />
+        >The <see cref="T:System.Web.Profile.ProfileAutoSaveEventHandler" />
 
         
 
-         delegate is defined for the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+         delegate is defined for the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
-         class. You can access the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+         class. You can access the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
-         class in the Global.asax file for your ASP.NET application, as shown in the example for this topic. The <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+         class in the Global.asax file for your ASP.NET application, as shown in the example for this topic. The <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
-         event is raised at the end of page execution if the <see
-         cref="P:System.Web.Profile.ProfileManager.AutomaticSaveEnabled" />
+         event is raised at the end of page execution if the <see cref="P:System.Web.Profile.ProfileManager.AutomaticSaveEnabled" />
 
         
 
          property is true.</para
       >
       <para
-        >The <see
-         cref="M:System.Configuration.SettingsBase.Save" />
+        >The <see cref="M:System.Configuration.SettingsBase.Save" />
 
         
 
-         method automatically determines whether properties that are made up of primitive types, strings, or <see
-         cref="T:System.DateTime" />
+         method automatically determines whether properties that are made up of primitive types, strings, or <see cref="T:System.DateTime" />
 
         
 
-         objects have been changed, by checking the <see
-         cref="P:System.Configuration.SettingsPropertyValue.IsDirty" />
+         objects have been changed, by checking the <see cref="P:System.Configuration.SettingsPropertyValue.IsDirty" />
 
         
 
-         property value for each <see
-         cref="T:System.Configuration.SettingsPropertyValue" />
+         property value for each <see cref="T:System.Configuration.SettingsPropertyValue" />
 
         
 
-         in the user profile. The <see
-         cref="M:System.Configuration.SettingsBase.Save" />
+         in the user profile. The <see cref="M:System.Configuration.SettingsBase.Save" />
 
         
 
-         method cannot explicitly determine whether a custom class has changed. You can use the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+         method cannot explicitly determine whether a custom class has changed. You can use the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
          event to determine whether a custom object has been modified and then either continue with the automatic save if the object has been modified or cancel the automatic save if the object has not been modified.</para
       >
       <para
-        >To cancel the automatic profile save operation, set the <see
-         cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+        >To cancel the automatic profile save operation, set the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
         
 
-         property to false in the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+         property to false in the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
-         event; otherwise, set the <see
-         cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+         event; otherwise, set the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
         
 
          property to true.</para
       >
       <para
-        >There may be multiple subscribers to the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+        >There may be multiple subscribers to the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
-         event. The <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event. The <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
-         will use the last value that the <see
-         cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+         will use the last value that the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
         
 
-         property is set to. As a result, it is recommended that you explicitly set the <see
-         cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+         property is set to. As a result, it is recommended that you explicitly set the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
         
 
-         property in the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+         property in the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
@@ -134,13 +113,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+        >Provides data for the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
@@ -163,23 +140,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Profile.ProfileAutoSaveEventArgs.#ctor(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.Profile.ProfileAutoSaveEventArgs.#ctor(System.Web.HttpContext)" />
 
             
 
-             creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
+             creates an instance of the <see cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
 
             
 
-             class and sets the <see
-             cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.Context" />
+             class and sets the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.Context" />
 
             
 
-             property to the specified <see
-             cref="T:System.Web.HttpContext" />
+             property to the specified <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -189,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
+            >Creates an instance of the <see cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
 
             
 
@@ -198,12 +170,15 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -226,28 +201,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
+            >The <see cref="T:System.Web.Profile.ProfileAutoSaveEventArgs" />
 
             
 
-             object provides event information to the <see
-             cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+             object provides event information to the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
-             event of the <see
-             cref="T:System.Web.Profile.ProfileModule" />
+             event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
             
 
-             class. The <see
-             cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.Context" />
+             class. The <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.Context" />
 
             
 
-             property provides access to the <see
-             cref="T:System.Web.HttpContext" />
+             property provides access to the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -257,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -285,79 +254,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.SettingsBase.Save" />
+            >The <see cref="M:System.Configuration.SettingsBase.Save" />
 
             
 
-             method automatically determines whether properties that are made up of primitive types, strings, or <see
-             cref="T:System.DateTime" />
+             method automatically determines whether properties that are made up of primitive types, strings, or <see cref="T:System.DateTime" />
 
             
 
-             objects have been changed, by checking the <see
-             cref="P:System.Configuration.SettingsPropertyValue.IsDirty" />
+             objects have been changed, by checking the <see cref="P:System.Configuration.SettingsPropertyValue.IsDirty" />
 
             
 
-             property value for each <see
-             cref="T:System.Configuration.SettingsPropertyValue" />
+             property value for each <see cref="T:System.Configuration.SettingsPropertyValue" />
 
             
 
-             in the user profile. The <see
-             cref="M:System.Configuration.SettingsBase.Save" />
+             in the user profile. The <see cref="M:System.Configuration.SettingsBase.Save" />
 
             
 
-             method cannot explicitly determine whether a custom class has changed. You can use the <see
-             cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+             method cannot explicitly determine whether a custom class has changed. You can use the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
              event to determine whether a custom object has been modified and then either continue with the automatic save if the object has been modified or cancel the automatic save if the object has not been modified.</para
           >
           <para
-            >To cancel the automatic profile save operation, set the <see
-             cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+            >To cancel the automatic profile save operation, set the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
             
 
-             property to false in the <see
-             cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+             property to false in the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
-             event; otherwise, set the <see
-             cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+             event; otherwise, set the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
             
 
              property to true.</para
           >
           <para
-            >There may be multiple subscribers to the <see
-             cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+            >There may be multiple subscribers to the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
-             event. The <see
-             cref="T:System.Web.Profile.ProfileModule" />
+             event. The <see cref="T:System.Web.Profile.ProfileModule" />
 
             
 
-             will use the last value that the <see
-             cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+             will use the last value that the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
             
 
-             property is set to. As a result, it is recommended that you explicitly set the <see
-             cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
+             property is set to. As a result, it is recommended that you explicitly set the <see cref="P:System.Web.Profile.ProfileAutoSaveEventArgs.ContinueWithProfileAutoSave" />
 
             
 
-             property in the <see
-             cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
+             property in the <see cref="E:System.Web.Profile.ProfileModule.ProfileAutoSaving" />
 
             
 
@@ -367,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.Profile.ProfileModule" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.Profile.ProfileModule" />
 
             
 

@@ -31,8 +31,7 @@
         > The following example queries the DNS database for information
       on the host "www.contoso.com" and
       displays the information in the
-      returned <see
-         cref="T:System.Net.IPHostEntry" />
+      returned <see cref="T:System.Net.IPHostEntry" />
 
         
 
@@ -67,21 +66,18 @@ public class IPHostEntryTest {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.IPHostEntry" />
+        >The <see cref="T:System.Net.IPHostEntry" />
 
         
 
          class associates a Domain Name System (DNS) host name with an array of aliases and an array of matching IP addresses.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.IPHostEntry" />
+        >The <see cref="T:System.Net.IPHostEntry" />
 
         
 
-         class is used as a helper class with the <see
-         cref="T:System.Net.Dns" />
+         class is used as a helper class with the <see cref="T:System.Net.Dns" />
 
         
 
@@ -114,8 +110,7 @@ public class IPHostEntryTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.IPHostEntry" />
+            >Initializes a new instance of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -151,14 +146,12 @@ public class IPHostEntryTest {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Net.IPAddress" />
+            > A <see cref="T:System.Net.IPAddress" />
 
             
 
              array containing IP addresses that resolve
- to the host names contained in the <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+ to the host names contained in the <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
@@ -194,14 +187,12 @@ public class IPHostEntryTest {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
              array containing DNS names that resolve to the IP addresses
- in the <see
-             cref="P:System.Net.IPHostEntry.AddressList" />
+ in the <see cref="P:System.Net.IPHostEntry.AddressList" />
 
             
 
@@ -236,8 +227,7 @@ public class IPHostEntryTest {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -248,13 +238,11 @@ public class IPHostEntryTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.IPHostEntry.HostName" />
+            >The <see cref="P:System.Net.IPHostEntry.HostName" />
 
             
 
-             property contains the primary host name for a server. If the DNS entry for the server defines additional aliases, they will be available in the <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+             property contains the primary host name for a server. If the DNS entry for the server defines additional aliases, they will be available in the <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 

@@ -35,13 +35,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Provides a simple collection object that can represent a set of Code Document Object Model (CodeDOM) expression objects.</para>
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeExpressionCollection" />
+        >The <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeExpression" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeExpression" />
 
         
 
@@ -51,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeExpression" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeExpression" />
 
         
 
@@ -80,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeExpressionCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
             
 
@@ -114,13 +110,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeExpressionCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
             
 
-             class containing the specified array of <see
-             cref="T:System.CodeDom.CodeExpression" />
+             class containing the specified array of <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -128,12 +122,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeExpression" />
+          An array of <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -165,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeExpressionCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
             
 
@@ -174,12 +170,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpressionCollection" />
+          A <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
           
 
@@ -213,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -226,12 +224,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -267,12 +268,15 @@
           <para>Copies the elements of the specified array to the end of the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeExpression" />
+          An array of type <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -306,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of another <see
-             cref="T:System.CodeDom.CodeExpressionCollection" />
+            >Copies the contents of another <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
             
 
@@ -315,12 +318,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpressionCollection" />
+          A <see cref="T:System.CodeDom.CodeExpressionCollection" />
 
           
 
@@ -354,8 +360,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection contains the specified <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -367,12 +372,15 @@
           <para>true if the collection contains the specified object; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -407,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection objects to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection objects to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -416,19 +423,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -462,8 +476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >Gets the index of the specified <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -475,12 +488,15 @@
           <para>The index of the specified object, if found, in the collection; otherwise, -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -515,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >Inserts the specified <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -524,19 +539,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index where the specified object should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -598,8 +620,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >Removes the specified <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -607,12 +628,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 

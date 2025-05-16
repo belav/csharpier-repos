@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can extend the security of your Web application by creating your own named <see
-         cref="T:System.Web.Configuration.TrustLevel" />
+        >You can extend the security of your Web application by creating your own named <see cref="T:System.Web.Configuration.TrustLevel" />
 
         
 
@@ -43,13 +42,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.TrustLevel.#ctor(System.String,System.String)" />
+            >The <see cref="M:System.Web.Configuration.TrustLevel.#ctor(System.String,System.String)" />
 
             
 
-             constructor creates a <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+             constructor creates a <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -59,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Creates an instance of the <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -68,14 +64,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A named security level that is mapped to a policy file.</param
         >
         <param name="policyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -112,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Chase external referrals.  If no referral chasing option is specified for a directory search, the type of referral chasing performed is  <see
-             cref="F:System.DirectoryServices.ReferralChasingOption.External" />
+            >Chase external referrals.  If no referral chasing option is specified for a directory search, the type of referral chasing performed is  <see cref="F:System.DirectoryServices.ReferralChasingOption.External" />
 
             
 
@@ -164,13 +163,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When a server determines that other servers hold relevant information the server might refer the client to another server to obtain the result. Referral chasing is the process by which a client contacts the referenced server to continue the directory search.</para>
       <para
-        >Use the constants of this enumeration to set up search preferences for referral chasing. The action involves assigning the appropriate fields of <see
-         cref="T:System.DirectoryServices.DirectorySearcher" />
+        >Use the constants of this enumeration to set up search preferences for referral chasing. The action involves assigning the appropriate fields of <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
         
 
-         to elements of the <see
-         cref="T:System.DirectoryServices.ReferralChasingOption" />
+         to elements of the <see cref="T:System.DirectoryServices.ReferralChasingOption" />
 
         
 
@@ -181,8 +178,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.ReferralChasingOption" />
+        >The <see cref="T:System.DirectoryServices.ReferralChasingOption" />
 
         
 

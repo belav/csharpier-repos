@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies a type that contains the <see
-         cref="T:System.ServiceModel.EndpointAddress" />
+        >Specifies a type that contains the <see cref="T:System.ServiceModel.EndpointAddress" />
 
         
 
@@ -61,13 +60,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ServiceModel.PeerNodeAddress" />
+            >Initializes a new instance of <see cref="T:System.ServiceModel.PeerNodeAddress" />
 
             
 
-             with the supplied <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+             with the supplied <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -75,24 +72,30 @@
           >
         </summary>
         <param name="endpointAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          A <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that represents the address of the peer node within the mesh. </param
         >
         <param name="ipAddresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+          A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
           
 
@@ -122,13 +125,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >Gets the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
-             associated with this <see
-             cref="T:System.ServiceModel.PeerNodeAddress" />
+             associated with this <see cref="T:System.ServiceModel.PeerNodeAddress" />
 
             
 
@@ -159,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of multihoming IP addresses for this <see
-             cref="T:System.ServiceModel.PeerNodeAddress" />
+            >Gets a collection of multihoming IP addresses for this <see cref="T:System.ServiceModel.PeerNodeAddress" />
 
             
 

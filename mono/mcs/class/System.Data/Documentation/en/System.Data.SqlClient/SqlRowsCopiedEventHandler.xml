@@ -26,13 +26,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the <see
-         cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
+        >Represents the method that handles the <see cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
 
         
 
-         event of a <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+         event of a <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 

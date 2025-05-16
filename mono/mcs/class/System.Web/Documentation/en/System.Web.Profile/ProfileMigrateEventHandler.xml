@@ -25,44 +25,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.ProfileMigrateEventHandler" />
+        >The <see cref="T:System.Web.Profile.ProfileMigrateEventHandler" />
 
         
 
-         delegate is defined for the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+         delegate is defined for the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
-         class. You can access the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+         class. You can access the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
          class in the Global.asax file for your ASP.NET application as shown in the example for this topic.</para
       >
       <para
-        >You can use the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+        >You can use the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
          event to copy profile property values from an anonymous profile to an authenticated profile when someone who has been anonymously using your application logs in.</para
       >
       <para
-        >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
-         cref="T:System.Web.Profile.ProfileBase" />
+        >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
@@ -72,13 +65,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+        >Represents the method that will handle the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 

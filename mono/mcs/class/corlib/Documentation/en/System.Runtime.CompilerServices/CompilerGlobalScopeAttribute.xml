@@ -38,8 +38,7 @@
       <para>You can apply this attribute to classes.</para>
       <para>This class is used only for communication with debugger tools.</para>
       <para
-        >The classes in <see
-         cref="N:System.Runtime.CompilerServices" />
+        >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
         
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.CompilerGlobalScopeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CompilerGlobalScopeAttribute" />
 
             
 

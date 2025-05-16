@@ -40,48 +40,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To use this attribute, your <see
-         cref="T:System.Net.Sockets.Socket" />
+        >To use this attribute, your <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         connection must conform to the properties that are specified in your <see
-         cref="T:System.Net.SocketPermissionAttribute" />
+         connection must conform to the properties that are specified in your <see cref="T:System.Net.SocketPermissionAttribute" />
 
         
 
-        . For example, to apply the permission to a <see
-         cref="T:System.Net.Sockets.Socket" />
+        . For example, to apply the permission to a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         connection on port 80, set the <see
-         cref="P:System.Net.SocketPermissionAttribute.Port" />
+         connection on port 80, set the <see cref="P:System.Net.SocketPermissionAttribute.Port" />
 
         
 
-         property of the <see
-         cref="T:System.Net.SocketPermissionAttribute" />
+         property of the <see cref="T:System.Net.SocketPermissionAttribute" />
 
         
 
-         to "80". The security information that is specified in <see
-         cref="T:System.Net.SocketPermissionAttribute" />
+         to "80". The security information that is specified in <see cref="T:System.Net.SocketPermissionAttribute" />
 
         
 
-         is stored in the metadata of the attribute target, which is the class to which the <see
-         cref="T:System.Net.SocketPermissionAttribute" />
+         is stored in the metadata of the attribute target, which is the class to which the <see cref="T:System.Net.SocketPermissionAttribute" />
 
         
 
-         is applied. The system then accesses the information at run time. The <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+         is applied. The system then accesses the information at run time. The <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
-         that is passed to the constructor determines the allowable <see
-         cref="T:System.Net.SocketPermissionAttribute" />
+         that is passed to the constructor determines the allowable <see cref="T:System.Net.SocketPermissionAttribute" />
 
         
 
@@ -89,8 +80,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The properties of a <see
-           cref="T:System.Net.SocketPermissionAttribute" />
+          >The properties of a <see cref="T:System.Net.SocketPermissionAttribute" />
 
           
 
@@ -99,8 +89,7 @@
       </block>
       <block subset="none" type="note">
         <para
-          >For more information about using attributes, see <format
-           type="text/html">
+          >For more information about using attributes, see <format type="text/html">
             <a href="30386922-1E00-4602-9EBF-526B271A8B87"
               >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
             >
@@ -115,8 +104,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies security actions to control <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Specifies security actions to control <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -154,8 +142,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -164,13 +151,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+            >The <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
-             value that is passed to this constructor specifies the allowable <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+             value that is passed to this constructor specifies the allowable <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
@@ -180,13 +165,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -194,12 +177,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -228,8 +214,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -243,8 +228,7 @@
 
           
 
-           is being set and is not <see
-           langword="null" />
+           is being set and is not <see langword="null" />
 
           
 
@@ -253,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is write-once. Valid values for this property correspond to <see
-             cref="T:System.Net.NetworkAccess" />
+            >This property is write-once. Valid values for this property correspond to <see cref="T:System.Net.NetworkAccess" />
 
             
 
@@ -264,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the network access method that is allowed by this <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+            >Gets or sets the network access method that is allowed by this <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
@@ -300,28 +282,23 @@
       <Parameters />
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >One or more of the current instance's <see
-           cref="P:System.Net.SocketPermissionAttribute.Access" />
+          >One or more of the current instance's <see cref="P:System.Net.SocketPermissionAttribute.Access" />
 
           
 
-          , <see
-           cref="P:System.Net.SocketPermissionAttribute.Host" />
+          , <see cref="P:System.Net.SocketPermissionAttribute.Host" />
 
           
 
-          , <see
-           cref="P:System.Net.SocketPermissionAttribute.Transport" />
+          , <see cref="P:System.Net.SocketPermissionAttribute.Transport" />
 
           
 
-           or <see
-           cref="P:System.Net.SocketPermissionAttribute.Port" />
+           or <see cref="P:System.Net.SocketPermissionAttribute.Port" />
 
           
 
-           properties is <see
-           langword="null" />
+           properties is <see langword="null" />
 
           
 
@@ -330,28 +307,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
+            >The <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
 
             
 
-             method is called by the security system, not by the application code. The security information described by <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+             method is called by the security system, not by the application code. The security information described by <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
-             is stored in the metadata of the attribute target, which is the class to which the <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+             is stored in the metadata of the attribute target, which is the class to which the <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
-             is applied. The system then accesses the information at run-time and calls <see
-             cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
+             is applied. The system then accesses the information at run-time and calls <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
 
             
 
-            . The system uses the returned <see
-             cref="T:System.Security.IPermission" />
+            . The system uses the returned <see cref="T:System.Security.IPermission" />
 
             
 
@@ -361,8 +333,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new instance of the <see
-             cref="T:System.Net.SocketPermission" />
+            >Creates and returns a new instance of the <see cref="T:System.Net.SocketPermission" />
 
             
 
@@ -372,8 +343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Net.SocketPermission" />
+            >An instance of the <see cref="T:System.Net.SocketPermission" />
 
             
 
@@ -403,8 +373,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -417,8 +386,7 @@
 
           
 
-           is being set and is not <see
-           langword="null" />
+           is being set and is not <see langword="null" />
 
           
 
@@ -431,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the DNS host name or IP address that is specified by this <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+            >Gets or sets the DNS host name or IP address that is specified by this <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
@@ -462,8 +429,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -477,8 +443,7 @@
 
           
 
-           is being set and is not <see
-           langword="null" />
+           is being set and is not <see langword="null" />
 
           
 
@@ -491,8 +456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the port number that is associated with this <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+            >Gets or sets the port number that is associated with this <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 
@@ -522,8 +486,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -538,8 +501,7 @@
 
           
 
-           is being set and is not <see
-           langword="null" />
+           is being set and is not <see langword="null" />
 
           
 
@@ -548,28 +510,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Possible string values of this property are <see
-             cref="F:System.Net.TransportType.All" />
+            >Possible string values of this property are <see cref="F:System.Net.TransportType.All" />
 
             
 
-            , <see
-             cref="F:System.Net.TransportType.Connectionless" />
+            , <see cref="F:System.Net.TransportType.Connectionless" />
 
             
 
-            , <see
-             cref="F:System.Net.TransportType.ConnectionOriented" />
+            , <see cref="F:System.Net.TransportType.ConnectionOriented" />
 
             
 
-            , <see
-             cref="F:System.Net.TransportType.Tcp" />
+            , <see cref="F:System.Net.TransportType.Tcp" />
 
             
 
-            , and <see
-             cref="F:System.Net.TransportType.Udp" />
+            , and <see cref="F:System.Net.TransportType.Udp" />
 
             
 
@@ -579,13 +536,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Net.TransportType" />
+            >Gets or sets the <see cref="T:System.Net.TransportType" />
 
             
 
-             that is specified by this <see
-             cref="T:System.Net.SocketPermissionAttribute" />
+             that is specified by this <see cref="T:System.Net.SocketPermissionAttribute" />
 
             
 

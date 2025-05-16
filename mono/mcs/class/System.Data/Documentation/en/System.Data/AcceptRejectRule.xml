@@ -16,28 +16,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Changes to a <see
-         cref="T:System.Data.DataTable" />
+        >Changes to a <see cref="T:System.Data.DataTable" />
 
         
 
-         are not final until you call the <see
-         cref="M:System.Data.DataTable.AcceptChanges" />
+         are not final until you call the <see cref="M:System.Data.DataTable.AcceptChanges" />
 
         
 
-         method. When either <see
-         cref="M:System.Data.DataTable.AcceptChanges" />
+         method. When either <see cref="M:System.Data.DataTable.AcceptChanges" />
 
         
 
-         or <see
-         cref="M:System.Data.DataTable.RejectChanges" />
+         or <see cref="M:System.Data.DataTable.RejectChanges" />
 
         
 
-         is called on a row in the parent table, the <see
-         cref="T:System.Data.AcceptRejectRule" />
+         is called on a row in the parent table, the <see cref="T:System.Data.AcceptRejectRule" />
 
         
 
@@ -47,23 +42,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Determines the action that occurs when the <see
-         cref="M:System.Data.DataSet.AcceptChanges" />
+        >Determines the action that occurs when the <see cref="M:System.Data.DataSet.AcceptChanges" />
 
         
 
-         or <see
-         cref="M:System.Data.DataTable.RejectChanges" />
+         or <see cref="M:System.Data.DataTable.RejectChanges" />
 
         
 
-         method is invoked on a <see
-         cref="T:System.Data.DataTable" />
+         method is invoked on a <see cref="T:System.Data.DataTable" />
 
         
 
-         with a <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         with a <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 

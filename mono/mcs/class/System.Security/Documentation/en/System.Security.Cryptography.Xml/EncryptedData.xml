@@ -46,8 +46,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >This constructor creates a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -91,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -102,8 +99,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -137,8 +133,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to load an existing XML element into the &lt;EncryptedData&gt; element represented by the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Use this method to load an existing XML element into the &lt;EncryptedData&gt; element represented by the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -150,12 +145,15 @@
           <para>Loads XML information into the &lt;EncryptedData&gt; element in XML encryption.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 

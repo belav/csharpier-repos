@@ -29,26 +29,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
+        >Use the <see cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
 
         
 
-         attribute to configure or extend the execution behavior of a callback contract implementation in a client application. This attribute performs the same function for the callback class as the <see
-         cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+         attribute to configure or extend the execution behavior of a callback contract implementation in a client application. This attribute performs the same function for the callback class as the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
         
 
          attribute with the exception of instancing behavior and transaction settings. </para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
+        >The <see cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
 
         
 
-         must be applied to the class that implements the callback contract. If applied to a non-duplex contract implementation an <see
-         cref="T:System.InvalidOperationException" />
+         must be applied to the class that implements the callback contract. If applied to a non-duplex contract implementation an <see cref="T:System.InvalidOperationException" />
 
         
 
@@ -56,28 +52,23 @@
       >
       <block subset="none" type="note">
         <para
-          >You can also use the <see
-           cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+          >You can also use the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
           
 
-           attribute for the callback operation implementations. However, if <see
-           cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+           attribute for the callback operation implementations. However, if <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
           
 
-           is used on a callback operation, the <see
-           cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+           is used on a callback operation, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
           
 
-           property must be <see
-           cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+           property must be <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
           
 
-           or an <see
-           cref="T:System.InvalidOperationException" />
+           or an <see cref="T:System.InvalidOperationException" />
 
           
 
@@ -88,8 +79,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
 
             
 
@@ -98,8 +88,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.ConcurrencyMode" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.ConcurrencyMode" />
 
             
 
@@ -108,8 +97,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
 
             
 
@@ -118,8 +106,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
             
 
@@ -128,8 +115,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.MaxItemsInObjectGraph" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.MaxItemsInObjectGraph" />
 
             
 
@@ -138,8 +124,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.TransactionIsolationLevel" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.TransactionIsolationLevel" />
 
             
 
@@ -148,8 +133,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.TransactionTimeout" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.TransactionTimeout" />
 
             
 
@@ -158,13 +142,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.UseSynchronizationContext" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.UseSynchronizationContext" />
 
             
 
-             property indicates whether to synchronize inbound method calls automatically using the current <see
-             cref="T:System.Threading.SynchronizationContext" />
+             property indicates whether to synchronize inbound method calls automatically using the current <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
@@ -173,8 +155,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
+            >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
 
             
 
@@ -204,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default settings for the <see
-             cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
+            >The default settings for the <see cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
 
             
 
@@ -214,8 +194,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
+                >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
 
                 
 
@@ -224,13 +203,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.CallbackBehaviorAttribute.ConcurrencyMode" />
+                >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.ConcurrencyMode" />
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+                 is set to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
                 
 
@@ -239,8 +216,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
+                >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
 
                 
 
@@ -267,8 +243,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
+                >The <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
 
                 
 
@@ -280,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CallbackBehaviorAttribute" />
 
             
 
@@ -305,8 +279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, when a service closes a duplex session and the callback has finished processing any remaining messages, the callback closes the session. Setting <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
+            >By default, when a service closes a duplex session and the callback has finished processing any remaining messages, the callback closes the session. Setting <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.AutomaticSessionShutdown" />
 
             
 
@@ -341,18 +314,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates whether an instance of a callback object supports one thread or multiple threads that execute concurrently, and if single-threaded, whether reentrancy is supported. </para>
           <para
-            >Setting <see
-             cref="T:System.ServiceModel.ConcurrencyMode" />
+            >Setting <see cref="T:System.ServiceModel.ConcurrencyMode" />
 
             
 
-             to <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+             to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
             
 
-             instructs the system to restrict instances of the service to one thread of execution at a time, which frees you from dealing with threading issues. This is the default value. A value of <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+             instructs the system to restrict instances of the service to one thread of execution at a time, which frees you from dealing with threading issues. This is the default value. A value of <see cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
 
             
 
@@ -367,26 +337,22 @@
           >
           <para>Generally, if a message arrives for an instance that violates its concurrency mode, the message waits until the instance is available, or until it times out.  </para>
           <para
-            >In addition, if the <see
-             cref="T:System.ServiceModel.ConcurrencyMode" />
+            >In addition, if the <see cref="T:System.ServiceModel.ConcurrencyMode" />
 
             
 
-             is set to <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+             is set to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
             
 
              and a reentrant call is blocked while waiting for the instance to be freed, the system detects the deadlock and throws an exception. </para
           >
           <para
-            >crabout concurrency, see <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+            >crabout concurrency, see <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                 >Sessions, Instancing, and Concurrency</a
               >
@@ -418,29 +384,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a type implements the <see
-             cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+            >If a type implements the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
 
             
 
-             interface, it stores any extra data it does not know about that comes over the wire when deserializing into that type. For example, if a type Person has members FirstName and LastName, and an element called PhoneNumber comes in, it is stored. When later serializing the type, PhoneNumber is re-emitted. The problem is that the schema for Person exported by that service only has FirstName and LastName, so indigo1 generates a schema-invalid instance. If strict schema compliance is important, you can set <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
+             interface, it stores any extra data it does not know about that comes over the wire when deserializing into that type. For example, if a type Person has members FirstName and LastName, and an element called PhoneNumber comes in, it is stored. When later serializing the type, PhoneNumber is re-emitted. The problem is that the schema for Person exported by that service only has FirstName and LastName, so indigo1 generates a schema-invalid instance. If strict schema compliance is important, you can set <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
 
             
 
              to true to turn this re-emitting behavior off.</para
           >
           <para
-            >Regardless of the <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
+            >Regardless of the <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IgnoreExtensionDataObject" />
 
             
 
              setting, indigo2 always processes known data (both in and out) and does not throw exceptions when extra data comes in.</para
           >
           <para
-            >You can use the <format
-             type="text/html">
+            >You can use the <format type="text/html">
               <a href="4073feda-1857-4be4-9947-227afb847ced">&lt;callbackDebug&gt;</a>
             </format>
 
@@ -476,13 +438,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
+            >Set <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
             
 
-             to true to enable exception information to flow back to services for debugging purposes when possible. This is a development-only feature and should not be employed in deployed services. These faults appear to the calling service as <see
-             cref="T:System.ServiceModel.FaultException" />
+             to true to enable exception information to flow back to services for debugging purposes when possible. This is a development-only feature and should not be employed in deployed services. These faults appear to the calling service as <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -490,8 +450,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting <see
-               cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
+              >Setting <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
               
 
@@ -502,13 +461,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies that general unhandled execution exceptions are to be converted into a <see
-             cref="T:System.ServiceModel.FaultException`1" />
+            >Gets or sets a value that specifies that general unhandled execution exceptions are to be converted into a <see cref="T:System.ServiceModel.FaultException`1" />
 
             
 
-             of type <see
-             cref="T:System.String" />
+             of type <see cref="T:System.String" />
 
             
 
@@ -532,13 +489,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
+            >Use the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
 
             
 
-             property set a limit on the number of items in an object graph that are serialized. You can also use the <format
-             type="text/html">
+             property set a limit on the number of items in an object graph that are serialized. You can also use the <format type="text/html">
               <a href="a47513a4-a96c-4350-8586-daacb05dee71">&lt;dataContractSerializer&gt;</a>
             </format>
 
@@ -584,7 +539,11 @@
           <para>Configures the binding elements to support the callback behavior.</para>
         </summary>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,7 +579,11 @@
           <para>Configures the client runtime to support the callback object.</para>
         </summary>
         <param name="serviceEndpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -654,8 +617,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of the <see
-             cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" />
+            >Implementation of the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" />
 
             
 
@@ -663,7 +625,11 @@
           >
         </summary>
         <param name="serviceEndpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -697,7 +663,11 @@
           <para>Validates the endpoint description prior to building the runtime.</para>
         </summary>
         <param name="serviceEndpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -726,8 +696,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The isolation level in which your transaction runs determines how data is treated when changes are made in other transactions and how long your transaction must hold locks to protect against these changes. For example, the default value, <see
-             cref="F:System.Transactions.IsolationLevel.Unspecified" />
+            >The isolation level in which your transaction runs determines how data is treated when changes are made in other transactions and how long your transaction must hold locks to protect against these changes. For example, the default value, <see cref="F:System.Transactions.IsolationLevel.Unspecified" />
 
             
 
@@ -777,26 +746,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to provide the user interface thread affinity that some applications require. For example, a Windows Forms application may be registered as a singleton service object. In this case, all calls into the service must run on the Windows Forms thread. The default case, in which <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
+            >Use this property to provide the user interface thread affinity that some applications require. For example, a Windows Forms application may be registered as a singleton service object. In this case, all calls into the service must run on the Windows Forms thread. The default case, in which <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
 
             
 
              is set to true, synchronizes all calls to the service to run on the user interface thread. </para
           >
           <para
-            >Note that the thread used is the current synchronization thread when <see
-             cref="M:System.ServiceModel.DuplexChannelFactory`1.CreateChannel(System.Object,System.String)" />
+            >Note that the thread used is the current synchronization thread when <see cref="M:System.ServiceModel.DuplexChannelFactory`1.CreateChannel(System.Object,System.String)" />
 
             
 
-             or <see
-             cref="M:System.ServiceModel.DuplexClientBase`1.CreateChannel" />
+             or <see cref="M:System.ServiceModel.DuplexClientBase`1.CreateChannel" />
 
             
 
-             is called. In the case of an Windows Forms application, this means that these calls should occur after a call to the <see
-             cref="M:System.Windows.Forms.Application.Run" />
+             is called. In the case of an Windows Forms application, this means that these calls should occur after a call to the <see cref="M:System.Windows.Forms.Application.Run" />
 
             
 
@@ -824,13 +789,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
+            >Use the <see cref="P:System.ServiceModel.CallbackBehaviorAttribute.ValidateMustUnderstand" />
 
             
 
-             property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see
-             cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+             property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
 
             
 

@@ -14,33 +14,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.SiteMapResolveEventArgs" />
+        >The <see cref="T:System.Web.SiteMapResolveEventArgs" />
 
         
 
-         class is used in the <see
-         cref="M:System.Web.SiteMapProvider.ResolveSiteMapNode(System.Web.HttpContext)" />
+         class is used in the <see cref="M:System.Web.SiteMapProvider.ResolveSiteMapNode(System.Web.HttpContext)" />
 
         
 
-         method to enable subscribers to the <see
-         cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+         method to enable subscribers to the <see cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
 
         
 
-         event to return an instance of the <see
-         cref="T:System.Web.SiteMapNode" />
+         event to return an instance of the <see cref="T:System.Web.SiteMapNode" />
 
         
 
-         class. By adding an event handler delegate to handle the <see
-         cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+         class. By adding an event handler delegate to handle the <see cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
 
         
 
-         event, you can create a <see
-         cref="T:System.Web.SiteMapNode" />
+         event, you can create a <see cref="T:System.Web.SiteMapNode" />
 
         
 
@@ -50,13 +44,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for an event that is raised by calling the <see
-         cref="P:System.Web.SiteMapProvider.CurrentNode" />
+        >Provides data for an event that is raised by calling the <see cref="P:System.Web.SiteMapProvider.CurrentNode" />
 
         
 
-         property of the <see
-         cref="T:System.Web.SiteMapProvider" />
+         property of the <see cref="T:System.Web.SiteMapProvider" />
 
         
 
@@ -80,26 +72,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <paramref
-             name="context" />
+            >Both the <paramref name="context" />
 
             
 
-             and <paramref
-             name="provider" />
+             and <paramref name="provider" />
 
             
 
              parameters might be null. </para
           >
           <para
-            >The <see
-             cref="T:System.Web.XmlSiteMapProvider" />
+            >The <see cref="T:System.Web.XmlSiteMapProvider" />
 
             
 
-             object initializes a new instance of the <see
-             cref="T:System.Web.SiteMapResolveEventArgs" />
+             object initializes a new instance of the <see cref="T:System.Web.SiteMapResolveEventArgs" />
 
             
 
@@ -109,18 +97,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.SiteMapResolveEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.SiteMapResolveEventArgs" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.HttpContext" />
+             class using the specified <see cref="T:System.Web.HttpContext" />
 
             
 
-             and <see
-             cref="T:System.Web.SiteMapProvider" />
+             and <see cref="T:System.Web.SiteMapProvider" />
 
             
 
@@ -128,29 +113,34 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 
            that represents the context of the current page request.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.SiteMapProvider" />
+          The <see cref="T:System.Web.SiteMapProvider" />
 
           
 
-           that raised the <see
-           cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+           that raised the <see cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
 
           
 
@@ -173,18 +163,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event subscribers can use the <see
-             cref="T:System.Web.HttpContext" />
+            >Event subscribers can use the <see cref="T:System.Web.HttpContext" />
 
             
 
-             and <see
-             cref="T:System.Web.SiteMapProvider" />
+             and <see cref="T:System.Web.SiteMapProvider" />
 
             
 
-             objects to dynamically create a <see
-             cref="T:System.Web.SiteMapNode" />
+             objects to dynamically create a <see cref="T:System.Web.SiteMapNode" />
 
             
 
@@ -212,18 +199,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Event subscribers can use the <see
-             cref="T:System.Web.HttpContext" />
+            >Event subscribers can use the <see cref="T:System.Web.HttpContext" />
 
             
 
-             and <see
-             cref="T:System.Web.SiteMapProvider" />
+             and <see cref="T:System.Web.SiteMapProvider" />
 
             
 
-             objects to dynamically create a <see
-             cref="T:System.Web.SiteMapNode" />
+             objects to dynamically create a <see cref="T:System.Web.SiteMapNode" />
 
             
 
@@ -233,13 +217,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.SiteMapProvider" />
+            >Gets the <see cref="T:System.Web.SiteMapProvider" />
 
             
 
-             object that raised the <see
-             cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+             object that raised the <see cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
 
             
 

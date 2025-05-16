@@ -24,44 +24,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is implemented by types whose values can be ordered, primarily for sorting. For example, one number can be larger than a second number, and one string can appear in alphabetical order before another. A value type or class implements the <see
-         cref="M:System.IComparable`1.CompareTo(`0)" />
+        >This interface is implemented by types whose values can be ordered, primarily for sorting. For example, one number can be larger than a second number, and one string can appear in alphabetical order before another. A value type or class implements the <see cref="M:System.IComparable`1.CompareTo(`0)" />
 
         
 
          method to create a type-specific comparison method suitable for purposes such as sorting. </para
       >
       <para
-        >The <see
-         cref="T:System.IComparable`1" />
+        >The <see cref="T:System.IComparable`1" />
 
         
 
-         interface defines the <see
-         cref="M:System.IComparable`1.CompareTo(`0)" />
+         interface defines the <see cref="M:System.IComparable`1.CompareTo(`0)" />
 
         
 
-         method, which determines the sort order of instances of the implementing type. The <see
-         cref="T:System.IEquatable`1" />
+         method, which determines the sort order of instances of the implementing type. The <see cref="T:System.IEquatable`1" />
 
         
 
-         interface defines the <see
-         cref="M:System.IEquatable`1.Equals(`0)" />
+         interface defines the <see cref="M:System.IEquatable`1.Equals(`0)" />
 
         
 
          method, which determines the equality of instances of the implementing type.</para
       >
       <para
-        >The implementation of the <see
-         cref="M:System.IComparable`1.CompareTo(`0)" />
+        >The implementation of the <see cref="M:System.IComparable`1.CompareTo(`0)" />
 
         
 
-         method must return an <see
-         cref="T:System.Int32" />
+         method must return an <see cref="T:System.Int32" />
 
         
 
@@ -84,8 +77,7 @@
           </term>
           <description>
             <para
-              >This object is less than the object specified by the <see
-               cref="M:System.IComparable`1.CompareTo(`0)" />
+              >This object is less than the object specified by the <see cref="M:System.IComparable`1.CompareTo(`0)" />
 
               
 
@@ -111,18 +103,15 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.IComparable`1" />
+        >The <see cref="T:System.IComparable`1" />
 
         
 
-         interface provides a strongly typed comparison method for ordering members of a generic collection object. Because of this, it is usually not called directly from developer code. Instead, it is called automatically by methods such as <see
-         cref="M:System.Collections.Generic.List`1.Sort" />
+         interface provides a strongly typed comparison method for ordering members of a generic collection object. Because of this, it is usually not called directly from developer code. Instead, it is called automatically by methods such as <see cref="M:System.Collections.Generic.List`1.Sort" />
 
         
 
-         and <see
-         cref="M:System.Collections.Generic.SortedList`2.Add(`0,`1)" />
+         and <see cref="M:System.Collections.Generic.SortedList`2.Add(`0,`1)" />
 
         
 
@@ -159,8 +148,7 @@
         </summary>
         <returns>
           <para
-            >A value that reflects the sort order of the current instance as compared to <paramref
-             name="obj" />
+            >A value that reflects the sort order of the current instance as compared to <paramref name="obj" />
 
             
 
@@ -174,8 +162,7 @@
             <item>
               <term> A negative value </term>
               <description
-                > The current instance is &lt; <paramref
-                 name="obj" />
+                > The current instance is &lt; <paramref name="obj" />
 
                 
 
@@ -186,8 +173,7 @@
               <term> Zero </term>
               <description
                 >The current instance is ==
-   <paramref
-                 name="obj" />
+   <paramref name="obj" />
 
                 
 
@@ -197,8 +183,7 @@
             <item>
               <term> A positive value </term>
               <description
-                > The current instance is &gt; than <paramref
-                 name="obj" />
+                > The current instance is &gt; than <paramref name="obj" />
 
                 
 
@@ -220,31 +205,26 @@
          B.CompareTo(A) is required to return a value of the opposite
          sign.</para>
             <para
-              >If A.CompareTo(B) returns a value <paramref
-               name="other" />
+              >If A.CompareTo(B) returns a value <paramref name="other" />
 
               
 
                not equal 
-      to zero, and B.CompareTo(C) returns a value <paramref
-               name="y" />
+      to zero, and B.CompareTo(C) returns a value <paramref name="y" />
 
               
 
                of the same sign as
-   <paramref
-               name="other" />
+   <paramref name="other" />
 
               
 
               , then A.CompareTo(C) is required to a value of the same sign as 
-   <paramref
-               name="other" />
+   <paramref name="other" />
 
               
 
-               and <paramref
-               name="y" />
+               and <paramref name="y" />
 
               
 
@@ -259,8 +239,7 @@
           </block>
           <para>
             <block subset="none" type="usage"
-              >Use the <see
-               cref="M:System.IComparable&lt;T&gt;.CompareTo" />
+              >Use the <see cref="M:System.IComparable&lt;T&gt;.CompareTo" />
               <see langword="(T)" />
 
               

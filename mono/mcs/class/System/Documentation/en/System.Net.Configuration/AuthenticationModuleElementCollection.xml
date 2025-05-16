@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection holds instances of the authenticationModules configuration element, which are used to specify modules registered to authenticate requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This collection holds instances of the authenticationModules configuration element, which are used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElementCollection" />
 
             
 
@@ -113,12 +110,15 @@
           <para>Adds an element to the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+          The <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
           
 
@@ -178,8 +178,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+            >A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
             
 
@@ -222,22 +221,22 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The key value of <paramref
-             name="element" />
+          <para>The key value of <paramref name="element" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+          A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
           
 
@@ -275,8 +274,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of <paramref
-             name="element" />
+            >The zero-based index of <paramref name="element" />
 
             
 
@@ -284,12 +282,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+          A <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
           
 
@@ -391,12 +392,15 @@
           <para>Removes the specified configuration element from the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+          The <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
           
 
@@ -429,7 +433,11 @@
           <para>Removes the element with the specified key.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -462,7 +470,11 @@
           <para>Removes the element at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

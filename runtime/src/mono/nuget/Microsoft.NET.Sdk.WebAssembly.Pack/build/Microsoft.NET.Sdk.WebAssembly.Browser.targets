@@ -118,8 +118,7 @@ Copyright (c) .NET Foundation. All rights reserved.
       _GenerateBuildWasmBootJson;
       $(StaticWebAssetsPrepareForRunDependsOn)
     </StaticWebAssetsPrepareForRunDependsOn>
-    <ResolvePublishStaticWebAssetsDependsOn Condition="'$(WasmBuildingForNestedPublish)' != 'true'"
-      >
+    <ResolvePublishStaticWebAssetsDependsOn Condition="'$(WasmBuildingForNestedPublish)' != 'true'">
       $(ResolvePublishStaticWebAssetsDependsOn);
       ProcessPublishFilesForWasm;
       ComputeWasmExtensions;
@@ -128,7 +127,7 @@ Copyright (c) .NET Foundation. All rights reserved.
     >
     <GenerateStaticWebAssetsPublishManifestDependsOn
       Condition="'$(WasmBuildingForNestedPublish)' != 'true'"
-      >
+    >
       $(GenerateStaticWebAssetsPublishManifestDependsOn);
       GeneratePublishWasmBootJson;
     </GenerateStaticWebAssetsPublishManifestDependsOn

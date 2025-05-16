@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Some of the classes in the <see
-         cref="N:System.Net.WebSockets" />
+        >Some of the classes in the <see cref="N:System.Net.WebSockets" />
 
         
 
-         namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The classes and class elements in the <see
-         cref="N:System.Net.WebSockets" />
+         namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The classes and class elements in the <see cref="N:System.Net.WebSockets" />
 
         
 
@@ -57,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocket" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocket" />
 
             
 
@@ -114,8 +111,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -123,7 +119,7 @@
           >
           <para
             >This method closes the WebSocket connection using the close handshake defined in the <see
-             cref="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-06"
+              cref="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-06"
               >WebSocket protocol specification</see
             >
 
@@ -136,7 +132,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Closes the WebSocket connection as an asynchronous operation using the close handshake defined in the <see
-             cref="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-06"
+              cref="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-06"
               >WebSocket protocol specification</see
             >
 
@@ -148,8 +144,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -158,21 +153,33 @@
           <para>The task object representing the asynchronous operation. </para>
         </returns>
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates the reason for closing the WebSocket connection.</param
         >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies a human readable explanation as to why the connection is closed.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,8 +212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -217,7 +223,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Initiates or completes the close handshake defined in the <see
-             cref="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-06"
+              cref="http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-06"
               >WebSocket protocol specification section 7</see
             >
 
@@ -229,8 +235,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -239,21 +244,33 @@
           <para>The task object representing the asynchronous operation. </para>
         </returns>
         <param name="closeStatus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates the reason for closing the WebSocket connection.</param
         >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Allows applications to specify a human readable explanation as to why the connection is closed.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Create client buffers to use with this <see
-             cref="T:System.Net.WebSockets.WebSocket" />
+            >Create client buffers to use with this <see cref="T:System.Net.WebSockets.WebSocket" />
 
             
 
@@ -352,8 +368,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.ArraySegment`1" />
+            >Returns <see cref="T:System.ArraySegment`1" />
 
             
 
@@ -362,14 +377,22 @@
           <para>An array with the client buffers.</para>
         </returns>
         <param name="receiveBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size, in bytes, of the client receive buffer.</param
         >
         <param name="sendBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -417,8 +440,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.WebSockets.WebSocket" />
+            >Returns <see cref="T:System.Net.WebSockets.WebSocket" />
 
             
 
@@ -426,49 +448,77 @@
           >
         </returns>
         <param name="innerStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The connection to be used for IO operations.</param
         >
         <param name="subProtocol">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The subprotocol accepted by the client.</param
         >
         <param name="receiveBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size in bytes of the client WebSocket receive buffer.</param
         >
         <param name="sendBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size in bytes of the client WebSocket send buffer.</param
         >
         <param name="keepAliveInterval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Determines how regularly a frame is sent over the connection as a keep-alive. Applies only when the connection is idle.</param
         >
         <param name="useZeroMaskingKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether a random key or a static key (just zeros) should be used for the WebSocket masking.</param
         >
         <param name="internalBuffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -509,8 +559,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.ArraySegment`1" />
+            >Returns <see cref="T:System.ArraySegment`1" />
 
             
 
@@ -518,7 +567,11 @@
           >
         </returns>
         <param name="receiveBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -608,17 +661,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the <see
-             cref="T:System.Net.WebSockets.WebSocket" />
+            >true if the <see cref="T:System.Net.WebSockets.WebSocket" />
 
             
 
@@ -654,17 +703,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the <see
-             cref="T:System.Net.WebSockets.WebSocket" />
+            >true if the <see cref="T:System.Net.WebSockets.WebSocket" />
 
             
 
@@ -672,7 +717,11 @@
           >
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -704,8 +753,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -719,21 +767,18 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             .</para
           >
           <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns a <see
-             cref="T:System.Byte" />
+             property on the task object returns a <see cref="T:System.Byte" />
 
             
 
@@ -741,14 +786,22 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           References the application buffer that is the storage location for the received data.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -809,8 +862,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -824,8 +876,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -834,28 +885,44 @@
           <para>The task object representing the asynchronous operation. </para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to be sent over the connection.</param
         >
         <param name="messageType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether the application is sending a binary or text message.</param
         >
         <param name="endOfMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether the data in “buffer” is the last part of a message.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -945,14 +1012,22 @@
           <para>Verifies that the connection is in an expected state.</para>
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The current state of the WebSocket to be tested against the list of valid states.</param
         >
         <param name="validStates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

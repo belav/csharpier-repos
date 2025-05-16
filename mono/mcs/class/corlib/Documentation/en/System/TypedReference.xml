@@ -61,8 +61,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Object.Equals(System.Object)" />
+      overrides <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
@@ -79,7 +78,11 @@
           <para>true if this object is equal to the specified object; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,8 +113,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Object.GetHashCode" />
+      overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -161,7 +163,11 @@
           <para>The type of the target of the specified TypedReference.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,8 +206,7 @@
         <exception cref="T:System.ArgumentException">
           <para
             >The 
-<paramref
-             name="flds" />
+<paramref name="flds" />
 
             
 
@@ -209,13 +214,11 @@
           >
           <para>-or-</para>
           <para
-            >An element of <paramref
-             name="flds" />
+            >An element of <paramref name="flds" />
 
             
 
-             is not a <see
-             cref="T:System.Reflection.FieldInfo" />
+             is not a <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -228,13 +231,11 @@
 
             
 
-             or <paramref
-             name="flds" />
+             or <paramref name="flds" />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -242,13 +243,11 @@
           >
           <para>-or-</para>
           <para
-            >An element of <paramref
-             name="flds" />
+            >An element of <paramref name="flds" />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -257,23 +256,19 @@
         </exception>
         <exception cref="T:System.MissingMemberException">
           <para
-            >Parameter <paramref
-             name="target" />
+            >Parameter <paramref name="target" />
 
             
 
-             does not contain the field described by the first element of <paramref
-             name="flds" />
+             does not contain the field described by the first element of <paramref name="flds" />
 
             
 
-            , or an element of <paramref
-             name="flds" />
+            , or an element of <paramref name="flds" />
 
             
 
-             describes a field that is not contained in the field described by the succeeding element of <paramref
-             name="flds" />
+             describes a field that is not contained in the field described by the succeeding element of <paramref name="flds" />
 
             
 
@@ -281,8 +276,7 @@
           >
           <para>-or-</para>
           <para
-            >The field described by an element of <paramref
-             name="flds" />
+            >The field described by an element of <paramref name="flds" />
 
             
 
@@ -292,36 +286,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.TypedReference.MakeTypedReference(System.Object,System.Reflection.FieldInfo[])" />
+            >The <see cref="M:System.TypedReference.MakeTypedReference(System.Object,System.Reflection.FieldInfo[])" />
 
             
 
-             method returns a typed reference to some terminal field, where the <paramref
-             name="target" />
+             method returns a typed reference to some terminal field, where the <paramref name="target" />
 
             
 
-             parameter contains the field described by the first element of <paramref
-             name="flds" />
+             parameter contains the field described by the first element of <paramref name="flds" />
 
             
 
-            , the field described by the first element of <paramref
-             name="flds" />
+            , the field described by the first element of <paramref name="flds" />
 
             
 
-             contains the field described by the second element of <paramref
-             name="flds" />
+             contains the field described by the second element of <paramref name="flds" />
 
             
 
             , and so on until the terminal field is reached.</para
           >
           <para
-            >For an explanation of run-time type system objects such as RuntimeFieldInfo, see <format
-             type="text/html">
+            >For an explanation of run-time type system objects such as RuntimeFieldInfo, see <format type="text/html">
               <a href="c1439fb5-cf76-475d-a9d2-fe64ba858858">Runtime Types in Reflection</a>
             </format>
 
@@ -331,18 +319,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -362,13 +347,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.TypedReference" />
+            >A <see cref="T:System.TypedReference" />
 
             
 
-             for the field described by the last element of <paramref
-             name="flds" />
+             for the field described by the last element of <paramref name="flds" />
 
             
 
@@ -376,19 +359,26 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that contains the field described by the first element of <paramref
-           name="flds" />
+          An object that contains the field described by the first element of <paramref name="flds" />
 
           
 
           . </param
         >
         <param name="flds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -426,13 +416,11 @@
       <Docs>
         <remarks>
           <para
-            >This method converts <paramref
-             name="value" />
+            >This method converts <paramref name="value" />
 
             
 
-             to <paramref
-             name="target" />
+             to <paramref name="target" />
 
             
 
@@ -445,8 +433,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -463,8 +450,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method always throws <see
-             cref="T:System.NotSupportedException" />
+            >This method always throws <see cref="T:System.NotSupportedException" />
 
             
 
@@ -472,14 +458,22 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target of the conversion. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -519,7 +513,11 @@
           <para>The internal metadata type handle for the specified TypedReference.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -560,8 +558,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -569,7 +566,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

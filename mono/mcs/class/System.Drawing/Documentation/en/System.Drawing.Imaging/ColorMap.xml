@@ -21,13 +21,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a map for converting colors. Several methods of the <see
-         cref="T:System.Drawing.Imaging.ImageAttributes" />
+        >Defines a map for converting colors. Several methods of the <see cref="T:System.Drawing.Imaging.ImageAttributes" />
 
         
 
-         class adjust image colors by using a color-remap table, which is an array of <see
-         cref="T:System.Drawing.Imaging.ColorMap" />
+         class adjust image colors by using a color-remap table, which is an array of <see cref="T:System.Drawing.Imaging.ColorMap" />
 
         
 
@@ -46,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.ColorMap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.ColorMap" />
 
             
 
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the new <see
-             cref="T:System.Drawing.Color" />
+            >Gets or sets the new <see cref="T:System.Drawing.Color" />
 
             
 
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the existing <see
-             cref="T:System.Drawing.Color" />
+            >Gets or sets the existing <see cref="T:System.Drawing.Color" />
 
             
 

@@ -112,23 +112,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A logical OR of <see
-             cref="F:System.Security.AccessControl.AceFlags.ObjectInherit" />
+            >A logical OR of <see cref="F:System.Security.AccessControl.AceFlags.ObjectInherit" />
 
             
 
-            , <see
-             cref="F:System.Security.AccessControl.AceFlags.ContainerInherit" />
+            , <see cref="F:System.Security.AccessControl.AceFlags.ContainerInherit" />
 
             
 
-            , <see
-             cref="F:System.Security.AccessControl.AceFlags.NoPropagateInherit" />
+            , <see cref="F:System.Security.AccessControl.AceFlags.NoPropagateInherit" />
 
             
 
-            , and <see
-             cref="F:System.Security.AccessControl.AceFlags.InheritOnly" />
+            , and <see cref="F:System.Security.AccessControl.AceFlags.InheritOnly" />
 
             
 

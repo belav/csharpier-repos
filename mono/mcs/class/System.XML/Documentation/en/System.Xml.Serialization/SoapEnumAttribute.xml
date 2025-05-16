@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+        >The <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
         
 
-         class belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         class belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes or deserializes an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document "Simple Object Access Protocol (SOAP) 1.1". For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes or deserializes an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document "Simple Object Access Protocol (SOAP) 1.1". For a complete list of similar attributes, see <format type="text/html">
           <a href="93EE258C-9C0F-4A08-897C-C10DB7A00F91"
             >[&lt;topic://cpconAttributesThatControlSOAPEncodedSerialization&gt;]</a
           >
@@ -52,102 +49,84 @@
         .</para
       >
       <para
-        >To serialize an object as an encoded SOAP message, you must construct the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >To serialize an object as an encoded SOAP message, you must construct the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         using an <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         using an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         created with the <see
-         cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
+         created with the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+         method of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
          class.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+        >Use the <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
         
 
-         to change the enumeration that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         to change the enumeration that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         generates or recognizes (when it serializes or deserializes a class, respectively). For example, if an enumeration contains a member named One, but you prefer that the XML output be named Single, apply the <see
-         cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+         generates or recognizes (when it serializes or deserializes a class, respectively). For example, if an enumeration contains a member named One, but you prefer that the XML output be named Single, apply the <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
         
 
-         to the enumeration member and set the <see
-         cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
+         to the enumeration member and set the <see cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
 
         
 
          property to "Single".</para
       >
       <para
-        >You can override the <see
-         cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
+        >You can override the <see cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
 
         
 
-         property value of a <see
-         cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+         property value of a <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
         
 
-         by creating an instance of the <see
-         cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+         by creating an instance of the <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
         
 
-         class and assigning it to the <see
-         cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
+         class and assigning it to the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
 
         
 
-         property of a <see
-         cref="T:System.Xml.Serialization.SoapAttributes" />
+         property of a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
         
 
-        . For details, see the <see
-         cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+        . For details, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
         
 
          class overview.</para
       >
       <para
-        >To serialize an object as an encoded SOAP message, you must construct the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >To serialize an object as an encoded SOAP message, you must construct the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         using an <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         using an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         created with the <see
-         cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
+         created with the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+         method of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
@@ -155,8 +134,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the word SoapEnum in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+          >You can use the word SoapEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
           
 
@@ -164,8 +142,7 @@
         >
       </block>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -179,8 +156,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -207,38 +183,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Xml.Serialization.SoapEnumAttribute.#ctor" />
+            >Use the <see cref="M:System.Xml.Serialization.SoapEnumAttribute.#ctor" />
 
             
 
-             to override an existing enumeration. Create a new <see
-             cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+             to override an existing enumeration. Create a new <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
             
 
-            , set its properties and assign the object to the <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
+            , set its properties and assign the object to the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
 
             
 
-             property of a <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+             property of a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-            . For each member of the enumeration, you must create a new <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            . For each member of the enumeration, you must create a new <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-             and add it to the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             and add it to the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
-            . For more details, see the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+            . For more details, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -246,8 +215,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the word SoapEnum in your code instead of the longer <see
-               cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+              >You can use the word SoapEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
               
 
@@ -258,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
             
 
@@ -288,8 +255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify the <see
-             cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
+            >Specify the <see cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
 
             
 
@@ -297,8 +263,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the word SoapEnum in your code instead of the longer <see
-               cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+              >You can use the word SoapEnum in your code instead of the longer <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
               
 
@@ -309,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
             
 
@@ -318,12 +282,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML element name generated by the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The XML element name generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -349,8 +316,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify the <see
-             cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
+            >Specify the <see cref="P:System.Xml.Serialization.SoapEnumAttribute.Name" />
 
             
 
@@ -358,8 +324,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the word SoapEnum instead of the longer <see
-               cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+              >You can use the word SoapEnum instead of the longer <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
               
 
@@ -370,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value generated in an XML document when the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the value generated in an XML document when the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

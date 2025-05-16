@@ -24,41 +24,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.MethodBody" />
+        >The <see cref="T:System.Reflection.MethodBody" />
 
         
 
          class provides access to information about the local variables and exception-handling clauses in a method body, and to the Microsoft intermediate language (MSIL) that makes up the method body. </para
       >
       <para
-        >You can use the token-resolution methods of the module class, such as <see
-         cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
+        >You can use the token-resolution methods of the module class, such as <see cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
 
         
 
-        , <see
-         cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+        , <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
         
 
-        , and <see
-         cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
+        , and <see cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
 
         
 
-        , to resolve the tokens in the method body to <see
-         cref="T:System.Type" />
+        , to resolve the tokens in the method body to <see cref="T:System.Type" />
 
         
 
-         objects, <see
-         cref="T:System.Reflection.MethodInfo" />
+         objects, <see cref="T:System.Reflection.MethodInfo" />
 
         
 
-         objects, and <see
-         cref="T:System.Reflection.FieldInfo" />
+         objects, and <see cref="T:System.Reflection.FieldInfo" />
 
         
 
@@ -67,14 +60,14 @@
       <block subset="none" type="note">
         <para
           >Parsing method bodies requires a thorough understanding of metadata and MSIL instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-           cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+            cref="http://go.microsoft.com/fwlink/?LinkID=99212"
             >ECMA C# and Common Language Infrastructure Standards</see
           >
 
           
 
            on MSDN and <see
-           cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+            cref="http://go.microsoft.com/fwlink/?LinkID=65552"
             >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
           >
 
@@ -84,23 +77,19 @@
         >
       </block>
       <para
-        >To obtain a <see
-         cref="T:System.Reflection.MethodBody" />
+        >To obtain a <see cref="T:System.Reflection.MethodBody" />
 
         
 
-         object for a given method, first obtain a <see
-         cref="T:System.Reflection.MethodInfo" />
+         object for a given method, first obtain a <see cref="T:System.Reflection.MethodInfo" />
 
         
 
-         object for the method, then call the <see
-         cref="T:System.Reflection.MethodInfo" />
+         object for the method, then call the <see cref="T:System.Reflection.MethodInfo" />
 
         
 
-         object's <see
-         cref="M:System.Reflection.MethodBase.GetMethodBody" />
+         object's <see cref="M:System.Reflection.MethodBase.GetMethodBody" />
 
         
 
@@ -128,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is invoked by derived classes during the construction of <see
-             cref="T:System.Reflection.MethodBody" />
+            >This constructor is invoked by derived classes during the construction of <see cref="T:System.Reflection.MethodBody" />
 
             
 
@@ -139,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.MethodBody" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.MethodBody" />
 
             
 
@@ -172,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The list includes all clauses from all try blocks in the method body. Each <see
-             cref="T:System.Reflection.ExceptionHandlingClause" />
+            >The list includes all clauses from all try blocks in the method body. Each <see cref="T:System.Reflection.ExceptionHandlingClause" />
 
             
 
@@ -182,14 +168,14 @@
           <block subset="none" type="note">
             <para
               >Working with exception-handling clauses requires a thorough understanding of metadata and MSIL instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -225,33 +211,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the token-resolution methods of the module class, such as <see
-             cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
+            >You can use the token-resolution methods of the module class, such as <see cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
 
             
 
-            , <see
-             cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+            , <see cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
 
             
 
-            , and <see
-             cref="M:System.Reflection.Module.ResolveMember(System.Int32,System.Type[],System.Type[])" />
+            , and <see cref="M:System.Reflection.Module.ResolveMember(System.Int32,System.Type[],System.Type[])" />
 
             
 
-            , to resolve the tokens in the method body to <see
-             cref="T:System.Type" />
+            , to resolve the tokens in the method body to <see cref="T:System.Type" />
 
             
 
-             objects, <see
-             cref="T:System.Reflection.MethodInfo" />
+             objects, <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             objects, and <see
-             cref="T:System.Reflection.FieldInfo" />
+             objects, and <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -260,14 +240,14 @@
           <block subset="none" type="note">
             <para
               >Parsing method bodies requires a thorough understanding of metadata and MSIL instruction formats. Information can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -284,8 +264,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Byte" />
+            >An array of type <see cref="T:System.Byte" />
 
             
 
@@ -311,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.MethodBody.InitLocals" />
+            >The <see cref="P:System.Reflection.MethodBody.InitLocals" />
 
             
 
@@ -349,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Reflection.MethodBody.LocalVariables" />
+            >Use the <see cref="P:System.Reflection.MethodBody.LocalVariables" />
 
             
 
@@ -359,14 +336,14 @@
           <block subset="none" type="note">
             <para
               >Information about local variable signatures can be found in the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -405,8 +382,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need the metadata token for the local variable signature provided by the <see
-             cref="P:System.Reflection.MethodBody.LocalSignatureMetadataToken" />
+            >You do not need the metadata token for the local variable signature provided by the <see cref="P:System.Reflection.MethodBody.LocalSignatureMetadataToken" />
 
             
 
@@ -437,14 +413,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For more information, see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 

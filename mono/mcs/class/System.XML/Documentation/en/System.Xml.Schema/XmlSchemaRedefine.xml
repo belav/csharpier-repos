@@ -33,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the redefine element from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the redefine element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaRedefine" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaRedefine" />
 
             
 
@@ -103,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
 
             
 
@@ -142,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
 
             
 
@@ -193,28 +189,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of the following classes: <see
-             cref="T:System.Xml.Schema.XmlSchemaAnnotation" />
+            >Gets the collection of the following classes: <see cref="T:System.Xml.Schema.XmlSchemaAnnotation" />
 
             
 
-            , <see
-             cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
+            , <see cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
 
             
 
-            , <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+            , <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
-            , <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            , <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
-            , and <see
-             cref="T:System.Xml.Schema.XmlSchemaGroup" />
+            , and <see cref="T:System.Xml.Schema.XmlSchemaGroup" />
 
             
 
@@ -252,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
 
             
 

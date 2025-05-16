@@ -22,8 +22,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For more information, see the existing documentation for IBindCtx in the MSDN library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -188,7 +187,11 @@
           <para>Registers the passed object as one of the objects that has been bound during a moniker operation and that should be released when the operation is complete.</para>
         </summary>
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,19 +231,26 @@
           <para>Registers the specified object pointer under the specified name in the internally maintained table of object pointers.</para>
         </summary>
         <param name="pszKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to register <paramref
-           name="punk" />
+          The name to register <paramref name="punk" />
 
           
 
            with. </param
         >
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all the objects currently registered with the bind context by using the <see
-             cref="M:System.Runtime.InteropServices.ComTypes.IBindCtx.RegisterObjectBound(System.Object)" />
+            >Releases all the objects currently registered with the bind context by using the <see cref="M:System.Runtime.InteropServices.ComTypes.IBindCtx.RegisterObjectBound(System.Object)" />
 
             
 
@@ -310,7 +319,11 @@
           <para>Removes the object from the set of registered objects that need to be released.</para>
         </summary>
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -350,7 +363,11 @@
           <para>An S_OK HRESULT value if the specified key was successfully removed from the table; otherwise, an S_FALSE HRESULT value.</para>
         </returns>
         <param name="pszKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

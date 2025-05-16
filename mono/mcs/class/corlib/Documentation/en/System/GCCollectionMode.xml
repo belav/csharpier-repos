@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode)" />
+        >Use the <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode)" />
 
         
 
-         method overload to specify the <see
-         cref="T:System.GCCollectionMode" />
+         method overload to specify the <see cref="T:System.GCCollectionMode" />
 
         
 
@@ -54,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default setting for this enumeration, which is currently <see
-             cref="F:System.GCCollectionMode.Forced" />
+            >The default setting for this enumeration, which is currently <see cref="F:System.GCCollectionMode.Forced" />
 
             
 

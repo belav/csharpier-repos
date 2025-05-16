@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You control <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >You control <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         layout by choosing one of the members of <see
-         cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+         layout by choosing one of the members of <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
         
 
-         with the <see
-         cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+         with the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
 
         
 
@@ -34,8 +31,7 @@
         <h2>Stack Layouts</h2>
       </format>
       <para
-        >Stacking is the arranging of items beside each other at both ends of the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Stacking is the arranging of items beside each other at both ends of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -48,13 +44,11 @@
 
             
 
-             is the default. This setting causes the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             is the default. This setting causes the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             to alter its layout automatically in accordance with the <see
-             cref="P:System.Windows.Forms.ToolStrip.Orientation" />
+             to alter its layout automatically in accordance with the <see cref="P:System.Windows.Forms.ToolStrip.Orientation" />
 
             
 
@@ -67,8 +61,7 @@
 
             
 
-             renders the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             renders the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -81,8 +74,7 @@
 
             
 
-             renders the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             renders the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -98,82 +90,68 @@
 
         
 
-         determines the end of the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         determines the end of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
          to which the item is aligned.</para
       >
       <para
-        >When items do not fit within the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >When items do not fit within the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        , an overflow button automatically appears. The <see
-         cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+        , an overflow button automatically appears. The <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
         
 
          property setting determines whether an item appears in the overflow area always, as needed, or never. </para
       >
       <para
-        >In the <see
-         cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
+        >In the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
 
         
 
-         event, you can inspect the <see
-         cref="P:System.Windows.Forms.ToolStripItem.Placement" />
+         event, you can inspect the <see cref="P:System.Windows.Forms.ToolStripItem.Placement" />
 
         
 
-         property to determine whether an item was placed on the main <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         property to determine whether an item was placed on the main <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        , the overflow <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        , the overflow <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        , or if it is not currently showing at all. The typical reasons why an item is not displayed are that the item did not fit on the main <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        , or if it is not currently showing at all. The typical reasons why an item is not displayed are that the item did not fit on the main <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         and its <see
-         cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+         and its <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
         
 
-         property was set to <see
-         cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />
+         property was set to <see cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />
 
         
 
         .</para
       >
       <para
-        >Make a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Make a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         movable by putting it in a <see
-         cref="T:System.Windows.Forms.ToolStripPanel" />
+         movable by putting it in a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
         
 
-         and setting its <see
-         cref="P:System.Windows.Forms.ToolStrip.GripStyle" />
+         and setting its <see cref="P:System.Windows.Forms.ToolStrip.GripStyle" />
 
         
 
-         to <see
-         cref="F:System.Windows.Forms.ToolStripGripStyle.Visible" />
+         to <see cref="F:System.Windows.Forms.ToolStripGripStyle.Visible" />
 
         
 
@@ -183,13 +161,11 @@
         <h2>Other Layout Options</h2>
       </format>
       <para
-        >The other layout options are <see
-         cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
+        >The other layout options are <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
 
         
 
-         and <see
-         cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+         and <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
         
 
@@ -203,28 +179,23 @@
 
         
 
-         layout is the default for <see
-         cref="T:System.Windows.Forms.ContextMenuStrip" />
+         layout is the default for <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+        , <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.ToolStripOverflow" />
+        , and <see cref="T:System.Windows.Forms.ToolStripOverflow" />
 
         
 
-        . It is similar to the <see
-         cref="T:System.Windows.Forms.FlowLayoutPanel" />
+        . It is similar to the <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
         
 
-        . The features of <see
-         cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
+        . The features of <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
 
         
 
@@ -233,23 +204,19 @@
       <list type="bullet">
         <item>
           <para
-            >All of the features of <see
-             cref="T:System.Windows.Forms.FlowLayoutPanel" />
+            >All of the features of <see cref="T:System.Windows.Forms.FlowLayoutPanel" />
 
             
 
-             are exposed by the <see
-             cref="P:System.Windows.Forms.ToolStrip.LayoutSettings" />
+             are exposed by the <see cref="P:System.Windows.Forms.ToolStrip.LayoutSettings" />
 
             
 
-             property. You must cast the <see
-             cref="T:System.Windows.Forms.LayoutSettings" />
+             property. You must cast the <see cref="T:System.Windows.Forms.LayoutSettings" />
 
             
 
-             class to a <see
-             cref="T:System.Windows.Forms.FlowLayoutSettings" />
+             class to a <see cref="T:System.Windows.Forms.FlowLayoutSettings" />
 
             
 
@@ -258,13 +225,11 @@
         </item>
         <item>
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Dock" />
+            >You can use the <see cref="P:System.Windows.Forms.ToolStripItem.Dock" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ToolStripItem.Anchor" />
+             and <see cref="P:System.Windows.Forms.ToolStripItem.Anchor" />
 
             
 
@@ -273,8 +238,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStripItem.Alignment" />
+            >The <see cref="P:System.Windows.Forms.ToolStripItem.Alignment" />
 
             
 
@@ -283,18 +247,15 @@
         </item>
         <item>
           <para
-            >In the <see
-             cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
+            >In the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
 
             
 
-             event, you can inspect the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Placement" />
+             event, you can inspect the <see cref="P:System.Windows.Forms.ToolStripItem.Placement" />
 
             
 
-             property to determine whether an item was placed on the main <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to determine whether an item was placed on the main <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -303,18 +264,15 @@
         </item>
         <item>
           <para
-            >The grip is not rendered, and therefore a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >The grip is not rendered, and therefore a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             in <see
-             cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
+             in <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
 
             
 
-             layout style in a <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             layout style in a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -323,13 +281,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >The <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             overflow button is not rendered, and <see
-             cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+             overflow button is not rendered, and <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
             
 
@@ -345,18 +301,15 @@
 
         
 
-         layout is the default for <see
-         cref="T:System.Windows.Forms.StatusStrip" />
+         layout is the default for <see cref="T:System.Windows.Forms.StatusStrip" />
 
         
 
-        . It is similar to <see
-         cref="T:System.Windows.Forms.TableLayoutPanel" />
+        . It is similar to <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
         
 
-        . The features of <see
-         cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+        . The features of <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
         
 
@@ -365,23 +318,19 @@
       <list type="bullet">
         <item>
           <para
-            >All of the features of <see
-             cref="T:System.Windows.Forms.TableLayoutPanel" />
+            >All of the features of <see cref="T:System.Windows.Forms.TableLayoutPanel" />
 
             
 
-             are exposed by the <see
-             cref="P:System.Windows.Forms.ToolStrip.LayoutSettings" />
+             are exposed by the <see cref="P:System.Windows.Forms.ToolStrip.LayoutSettings" />
 
             
 
-             property. You must cast the <see
-             cref="T:System.Windows.Forms.LayoutSettings" />
+             property. You must cast the <see cref="T:System.Windows.Forms.LayoutSettings" />
 
             
 
-             class to a <see
-             cref="T:System.Windows.Forms.TableLayoutSettings" />
+             class to a <see cref="T:System.Windows.Forms.TableLayoutSettings" />
 
             
 
@@ -390,13 +339,11 @@
         </item>
         <item>
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Dock" />
+            >You can use the <see cref="P:System.Windows.Forms.ToolStripItem.Dock" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ToolStripItem.Anchor" />
+             and <see cref="P:System.Windows.Forms.ToolStripItem.Anchor" />
 
             
 
@@ -405,8 +352,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStripItem.Alignment" />
+            >The <see cref="P:System.Windows.Forms.ToolStripItem.Alignment" />
 
             
 
@@ -415,18 +361,15 @@
         </item>
         <item>
           <para
-            >In the <see
-             cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
+            >In the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
 
             
 
-             event, you can inspect the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Placement" />
+             event, you can inspect the <see cref="P:System.Windows.Forms.ToolStripItem.Placement" />
 
             
 
-             property to determine whether an item was placed on the main <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to determine whether an item was placed on the main <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -435,18 +378,15 @@
         </item>
         <item>
           <para
-            >The grip is not rendered, and therefore a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >The grip is not rendered, and therefore a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             in <see
-             cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+             in <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
             
 
-             layout style in a <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             layout style in a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -455,13 +395,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >The <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             overflow button is not rendered, and <see
-             cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+             overflow button is not rendered, and <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
             
 
@@ -473,8 +411,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the possible alignments with which the items of a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Specifies the possible alignments with which the items of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 

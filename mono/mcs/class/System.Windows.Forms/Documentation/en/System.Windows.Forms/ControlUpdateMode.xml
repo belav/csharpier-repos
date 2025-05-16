@@ -13,38 +13,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ControlUpdateMode" />
+        >The <see cref="T:System.Windows.Forms.ControlUpdateMode" />
 
         
 
-         is used by the <see
-         cref="P:System.Windows.Forms.Binding.ControlUpdateMode" />
+         is used by the <see cref="P:System.Windows.Forms.Binding.ControlUpdateMode" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.Binding" />
+         property of the <see cref="T:System.Windows.Forms.Binding" />
 
         
 
-         class. <see
-         cref="F:System.Windows.Forms.ControlUpdateMode.OnPropertyChanged" />
+         class. <see cref="F:System.Windows.Forms.ControlUpdateMode.OnPropertyChanged" />
 
         
 
-         is the default value. To force a control update when the update mode is <see
-         cref="F:System.Windows.Forms.ControlUpdateMode.Never" />
+         is the default value. To force a control update when the update mode is <see cref="F:System.Windows.Forms.ControlUpdateMode.Never" />
 
         
 
-        , use the <see
-         cref="M:System.Windows.Forms.Binding.ReadValue" />
+        , use the <see cref="M:System.Windows.Forms.Binding.ReadValue" />
 
         
 
-         method on the related <see
-         cref="T:System.Windows.Forms.Binding" />
+         method on the related <see cref="T:System.Windows.Forms.Binding" />
 
         
 

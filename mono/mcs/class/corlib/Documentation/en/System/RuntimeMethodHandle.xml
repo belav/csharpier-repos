@@ -46,8 +46,7 @@
 
         
 
-         objects are created through the use of the CIL instruction <see
-         langword="ldtoken" />
+         objects are created through the use of the CIL instruction <see langword="ldtoken" />
 
         
 
@@ -55,8 +54,7 @@
       >
       <para>
         <block subset="none" type="note"
-          >For more information on <see
-           langword="ldtoken" />
+          >For more information on <see langword="ldtoken" />
 
           
 
@@ -109,13 +107,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.RuntimeMethodHandle" />
+             is a <see cref="T:System.RuntimeMethodHandle" />
 
             
 
@@ -123,12 +119,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -164,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether this instance is equal to a specified <see
-             cref="T:System.RuntimeMethodHandle" />
+            >Indicates whether this instance is equal to a specified <see cref="T:System.RuntimeMethodHandle" />
 
             
 
@@ -175,8 +173,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="handle" />
+            >true if <paramref name="handle" />
 
             
 
@@ -184,12 +181,15 @@
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeMethodHandle" />
+          A <see cref="T:System.RuntimeMethodHandle" />
 
           
 
@@ -279,16 +279,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
              parameter is reserved; it does not currently participate in this operation.</para
           >
           <para
-            >For more information, see the <see
-             cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+            >For more information, see the <see cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
 
             
 
@@ -298,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -307,14 +304,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to populate with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -349,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two instances of <see
-             cref="T:System.RuntimeMethodHandle" />
+            >Indicates whether two instances of <see cref="T:System.RuntimeMethodHandle" />
 
             
 
@@ -360,13 +364,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of <paramref
-             name="left" />
+            >true if the value of <paramref name="left" />
 
             
 
-             is equal to the value of <paramref
-             name="right" />
+             is equal to the value of <paramref name="right" />
 
             
 
@@ -374,34 +376,38 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeMethodHandle" />
+          A <see cref="T:System.RuntimeMethodHandle" />
 
           
 
-           to compare to <paramref
-           name="right" />
+           to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeMethodHandle" />
+          A <see cref="T:System.RuntimeMethodHandle" />
 
           
 
-           to compare to <paramref
-           name="left" />
+           to compare to <paramref name="left" />
 
           
 
@@ -436,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two instances of <see
-             cref="T:System.RuntimeMethodHandle" />
+            >Indicates whether two instances of <see cref="T:System.RuntimeMethodHandle" />
 
             
 
@@ -447,13 +452,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of <paramref
-             name="left" />
+            >true if the value of <paramref name="left" />
 
             
 
-             is unequal to the value of <paramref
-             name="right" />
+             is unequal to the value of <paramref name="right" />
 
             
 
@@ -461,34 +464,38 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeMethodHandle" />
+          A <see cref="T:System.RuntimeMethodHandle" />
 
           
 
-           to compare to <paramref
-           name="right" />
+           to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeMethodHandle" />
+          A <see cref="T:System.RuntimeMethodHandle" />
 
           
 
-           to compare to <paramref
-           name="left" />
+           to compare to <paramref name="left" />
 
           
 
@@ -516,8 +523,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.IntPtr" />
+            > A <see cref="T:System.IntPtr" />
 
             
 

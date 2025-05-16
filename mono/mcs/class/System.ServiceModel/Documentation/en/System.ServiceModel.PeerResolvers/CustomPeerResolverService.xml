@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.PeerResolvers.CustomPeerResolverService" />
+        >The <see cref="T:System.ServiceModel.PeerResolvers.CustomPeerResolverService" />
 
         
 
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.CustomPeerResolverService" />
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.CustomPeerResolverService" />
 
             
 
@@ -91,8 +89,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property must be set before the peer resolver service has been and must not be zero. The default interval is 1 minute.</para>
           <para
-            >This value must be less than the value of <see
-             cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.RefreshInterval" />
+            >This value must be less than the value of <see cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.RefreshInterval" />
 
             
 
@@ -199,8 +196,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this method is called, it schedules the first registration lookup table cleanup based on the value set for the <see
-             cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.CleanupInterval" />
+            >When this method is called, it schedules the first registration lookup table cleanup based on the value set for the <see cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.CleanupInterval" />
 
             
 
@@ -236,8 +232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A refresh of an entry extends the length of time for which it remains valid. All information used to uniquely identify the entry must be supplied in the <see
-             cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+            >A refresh of an entry extends the length of time for which it remains valid. All information used to uniquely identify the entry must be supplied in the <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
 
             
 
@@ -287,8 +282,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property must be set before the peer resolver service has been and must not be zero. The default interval is 2 minutes.</para>
           <para
-            >When the amount of time supplied to this property has passed for a given entry in a peer resolver service's registration lookup table, that entry is marked for deletion. The delete occurs when interval specified in the <see
-             cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.CleanupInterval" />
+            >When the amount of time supplied to this property has passed for a given entry in a peer resolver service's registration lookup table, that entry is marked for deletion. The delete occurs when interval specified in the <see cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.CleanupInterval" />
 
             
 
@@ -379,8 +373,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.PeerResolvers.RegisterResponseInfo" />
+            >A <see cref="T:System.ServiceModel.PeerResolvers.RegisterResponseInfo" />
 
             
 
@@ -388,36 +381,45 @@
           >
         </returns>
         <param name="clientId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Guid" />
+          A <see cref="T:System.Guid" />
 
           
 
            that specifies a unique identifier for the registration entry to register with the resolver service.</param
         >
         <param name="meshId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that specifies the mesh ID of the peer mesh in which the registration entry participates.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.PeerNodeAddress" />
+          A <see cref="T:System.ServiceModel.PeerNodeAddress" />
 
           
 
@@ -448,18 +450,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method looks up a registration entry based on the data supplied in a <see
-             cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+            >This method looks up a registration entry based on the data supplied in a <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
 
             
 
-             object and returns any corresponding endpoint addresses found in the peer resolver service's registration lookup table. The number of endpoint addresses returned is equal to or less than the value of the  <see
-             cref="P:System.ServiceModel.PeerResolvers.ResolveInfo.MaxAddresses" />
+             object and returns any corresponding endpoint addresses found in the peer resolver service's registration lookup table. The number of endpoint addresses returned is equal to or less than the value of the  <see cref="P:System.ServiceModel.PeerResolvers.ResolveInfo.MaxAddresses" />
 
             
 
-             property set on the <see
-             cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+             property set on the <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
 
             
 
@@ -477,8 +476,7 @@
 
             
 
-             that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref
-             name="resolveInfo" />
+             that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref name="resolveInfo" />
 
             
 

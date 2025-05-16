@@ -18,13 +18,11 @@
       <para>Security in this context means message protection (integrity and confidentiality) as well as client and service authentication.</para>
       <para>Actual protection requirements (the specific parts of SOAP messages that must be signed or signed and encrypted) are controlled through attributes on the service contract or through properties in the contract description. Properties on the binding do not control what is being signed or encrypted: a binding only delivers the general capability of signing and encrypting. </para>
       <para
-        >The default behavior for the <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+        >The default behavior for the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
-         is <see
-         cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+         is <see cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
 
         
 
@@ -34,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the types of security that can be used with the system-provided <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+        >Specifies the types of security that can be used with the system-provided <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Security is provided using SOAP message security. For the <see
-             cref="T:System.ServiceModel.BasicHttpBinding" />
+            >Security is provided using SOAP message security. For the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
             
 
@@ -108,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Security is provided using HTTPS. The service must be configured with SSL certificates. The SOAP message is protected as a whole using HTTPS. The service is authenticated by the client using the service’s SSL certificate. The client authentication is controlled through the <see
-             cref="P:System.ServiceModel.HttpTransportSecurity.ClientCredentialType" />
+            >Security is provided using HTTPS. The service must be configured with SSL certificates. The SOAP message is protected as a whole using HTTPS. The service is authenticated by the client using the service’s SSL certificate. The client authentication is controlled through the <see cref="P:System.ServiceModel.HttpTransportSecurity.ClientCredentialType" />
 
             
 

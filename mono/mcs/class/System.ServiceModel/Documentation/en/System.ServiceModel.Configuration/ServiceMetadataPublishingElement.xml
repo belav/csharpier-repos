@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceMetadataPublishingElement" />
 
             
 
@@ -185,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
-             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetBinding" />
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetBinding" />
 
             
 
@@ -215,8 +213,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" />
+            >If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpGetUrl" />
 
             
 
@@ -314,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see
-             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement..HttpsGetBinding" />
+            >Gets or sets a string that points to an XML section defining additional configuration information for the binding specified in <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement..HttpsGetBinding" />
 
             
 
@@ -344,8 +340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" />
+            >If the <see cref="P:System.ServiceModel.Configuration.ServiceMetadataPublishingElement.HttpsGetUrl" />
 
             
 

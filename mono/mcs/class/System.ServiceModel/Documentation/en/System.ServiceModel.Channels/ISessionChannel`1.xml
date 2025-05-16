@@ -28,51 +28,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
+        >The <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
 
         
 
-         interface is the base interface for session-based channels. It associates the type of session with the channel by setting the generic type parameter <paramref
-         name="TSession" />
+         interface is the base interface for session-based channels. It associates the type of session with the channel by setting the generic type parameter <paramref name="TSession" />
 
         
 
-         to a type that implements the <see
-         cref="T:System.ServiceModel.Channels.ISession" />
+         to a type that implements the <see cref="T:System.ServiceModel.Channels.ISession" />
 
         
 
-         interface in a way that reflects its role in the message exchange. For example, the <paramref
-         name="TSession" />
+         interface in a way that reflects its role in the message exchange. For example, the <paramref name="TSession" />
 
         
 
-         is set to <see
-         cref="T:System.ServiceModel.Channels.IInputSession" />
+         is set to <see cref="T:System.ServiceModel.Channels.IInputSession" />
 
         
 
-         for an incoming session on the receiving side of a one-way communication, to <see
-         cref="T:System.ServiceModel.Channels.IOutputSession" />
+         for an incoming session on the receiving side of a one-way communication, to <see cref="T:System.ServiceModel.Channels.IOutputSession" />
 
         
 
-         for an outgoing session on the sending side of a one-way communication, and to <see
-         cref="T:System.ServiceModel.Channels.IDuplexSession" />
+         for an outgoing session on the sending side of a one-way communication, and to <see cref="T:System.ServiceModel.Channels.IDuplexSession" />
 
         
 
          for a duplex session for a bi-directional communication pattern. </para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
+        >The <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
 
         
 
-         interface provides a <see
-         cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+         interface provides a <see cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
 
         
 
@@ -100,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This returns the generic parameter <paramref
-             name="TSession" />
+            >This returns the generic parameter <paramref name="TSession" />
 
             
 

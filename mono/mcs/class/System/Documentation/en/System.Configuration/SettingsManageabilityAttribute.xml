@@ -30,16 +30,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsManageabilityAttribute" />
+        >The <see cref="T:System.Configuration.SettingsManageabilityAttribute" />
 
         
 
          indicates that special, predefined services are to be provided to individual application settings properties and property groups. Most of these services will be provided by the Windows operating system.</para
       >
       <para
-        >For more information about application settings properties and their use, see <format
-         type="text/html">
+        >For more information about application settings properties and their use, see <format type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
 
@@ -76,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiple services can be requested by combining together values defined by the <see
-             cref="T:System.Configuration.SettingsManageability" />
+            >Multiple services can be requested by combining together values defined by the <see cref="T:System.Configuration.SettingsManageability" />
 
             
 
@@ -87,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsManageabilityAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsManageabilityAttribute" />
 
             
 
@@ -96,12 +92,15 @@
           >
         </summary>
         <param name="manageability">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsManageability" />
+          A <see cref="T:System.Configuration.SettingsManageability" />
 
           
 
@@ -132,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set in the <see
-             cref="M:System.Configuration.SettingsManageabilityAttribute.#ctor(System.Configuration.SettingsManageability)" />
+            >This property is set in the <see cref="M:System.Configuration.SettingsManageabilityAttribute.#ctor(System.Configuration.SettingsManageability)" />
 
             
 

@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+        >An <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
         
 
@@ -39,13 +38,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
 
         
 
-         class represents a configuration element for an <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+         class represents a configuration element for an <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
         
 
@@ -69,46 +66,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this constructor is used to initialize a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+            >When this constructor is used to initialize a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
 
             
 
-             class, the <see
-             cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.PolicyEnforcement" />
+             class, the <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.PolicyEnforcement" />
 
             
 
-             property is set to <see
-             cref="F:System.Security.Authentication.ExtendedProtection.PolicyEnforcement.Never" />
+             property is set to <see cref="F:System.Security.Authentication.ExtendedProtection.PolicyEnforcement.Never" />
 
             
 
-            , the <see
-             cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.ProtectionScenario" />
+            , the <see cref="P:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.ProtectionScenario" />
 
             
 
-             property is set to <see
-             cref="F:System.Security.Authentication.ExtendedProtection.ProtectionScenario.TransportSelected" />
+             property is set to <see cref="F:System.Security.Authentication.ExtendedProtection.ProtectionScenario.TransportSelected" />
 
             
 
-            , and the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+            , and the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
              property is set to null.</para
           >
           <para
-            >The properties on the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+            >The properties on the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
 
             
 
-             class instance should be set to appropriate values for the application before calling the <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
+             class instance should be set to appropriate values for the application before calling the <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
 
             
 
@@ -118,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
 
             
 
@@ -149,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The properties on the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+            >The properties on the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
 
             
 
-             class instance must be set before calling the <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
+             class instance must be set before calling the <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
 
             
 
@@ -165,18 +151,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement.BuildPolicy" />
 
             
 
-             method builds a new <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+             method builds a new <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 
-             instance based on the properties set on the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
+             instance based on the properties set on the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ExtendedProtectionPolicyElement" />
 
             
 
@@ -186,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+            >A new <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 
@@ -252,8 +234,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is an <see
-             cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
+            >This value is an <see cref="T:System.Security.Authentication.ExtendedProtection.PolicyEnforcement" />
 
             
 

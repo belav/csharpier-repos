@@ -40,18 +40,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to methods or constructors.</para>
       <para
-        >This attribute lets you customize the configuration of the method or constructor to which it applies by supplying a <see
-         cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+        >This attribute lets you customize the configuration of the method or constructor to which it applies by supplying a <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
         
 
-         value to its class constructor. The members of the <see
-         cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+         value to its class constructor. The members of the <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
         
 
-         enumeration correspond to bit fields in the CorMethodImpl metadata table. This means that information on the attribute cannot be retrieved at run time by calling the <see
-         cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+         enumeration correspond to bit fields in the CorMethodImpl metadata table. This means that information on the attribute cannot be retrieved at run time by calling the <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
         
 
@@ -87,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
 
             
 
@@ -123,13 +119,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+             class with the specified <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
             
 
@@ -137,12 +131,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitmask representing the desired <see
-           cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+          A bitmask representing the desired <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
           
 
@@ -185,13 +182,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+             class with the specified <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
             
 
@@ -199,12 +194,15 @@
           >
         </summary>
         <param name="methodImplOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+          A <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
           
 
@@ -236,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.CompilerServices.MethodCodeType" />
+            >A <see cref="T:System.Runtime.CompilerServices.MethodCodeType" />
 
             
 
@@ -272,8 +269,7 @@
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+            >The <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
             
 
@@ -288,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+            >Gets the <see cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
             
 

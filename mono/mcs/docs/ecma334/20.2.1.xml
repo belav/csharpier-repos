@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="20.2.1" title="Interface methods">
   <paragraph
-    >Interface methods are declared using interface-method-declarations: <grammar_production
-    >
+    >Interface methods are declared using interface-method-declarations: <grammar_production>
       <name>
         <non_terminal where="20.2.1">interface-method-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <keyword>new</keyword>
@@ -26,18 +24,19 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The attributes, <non_terminal
-     where="17.5">return-type</non_terminal>
+    >The attributes, <non_terminal where="17.5"
+      >return-type</non_terminal
+    >
 
     
 
-    , identifier, and <non_terminal
-     where="17.5.1">formal-parameter-list</non_terminal>
+    , identifier, and <non_terminal where="17.5.1"
+      >formal-parameter-list</non_terminal
+    >
 
     
 
-     of an interface method declaration have the same meaning as those of a method declaration in a class (<hyperlink
-    >17.5</hyperlink>
+     of an interface method declaration have the same meaning as those of a method declaration in a class (<hyperlink>17.5</hyperlink>
 
     
 

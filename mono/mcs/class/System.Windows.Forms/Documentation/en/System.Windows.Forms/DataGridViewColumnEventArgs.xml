@@ -21,8 +21,7 @@
 
         
 
-         provides data for the following <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         provides data for the following <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -89,8 +88,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for column-related events of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Provides data for column-related events of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -114,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnEventArgs" />
 
             
 
@@ -123,7 +120,11 @@
           >
         </summary>
         <param name="dataGridViewColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

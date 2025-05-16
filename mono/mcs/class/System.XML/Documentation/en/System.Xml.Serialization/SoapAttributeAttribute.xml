@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+        >The <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
         
 
-         class belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         class belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes, or deserializes, an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes, or deserializes, an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". For a complete list of similar attributes, see <format type="text/html">
           <a href="93ee258c-9c0f-4a08-897c-c10db7a00f91"
             >Attributes That Control Encoded SOAP Serialization</a
           >
@@ -52,66 +49,55 @@
         .</para
       >
       <para
-        >To serialize an object as an encoded SOAP message, you must construct the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >To serialize an object as an encoded SOAP message, you must construct the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         using an <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         using an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         created with the <see
-         cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
+         created with the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+         method of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
          class.</para
       >
       <para
-        >Apply the <see
-         cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+        >Apply the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
         
 
-         to a public field to specify that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         to a public field to specify that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes the field as an XML attribute. You can specify an alternative name of the attribute by setting the <see
-         cref="P:System.Xml.Serialization.SoapAttributeAttribute.AttributeName" />
+         serializes the field as an XML attribute. You can specify an alternative name of the attribute by setting the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.AttributeName" />
 
         
 
-         property. Set the <see
-         cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
+         property. Set the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
 
         
 
-         if the attribute must be given a specific XML Schema definition language (XSD) data type. If the attribute belongs to a specific XML namespace, set the <see
-         cref="P:System.Xml.Serialization.SoapAttributeAttribute.Namespace" />
+         if the attribute must be given a specific XML Schema definition language (XSD) data type. If the attribute belongs to a specific XML namespace, set the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.Namespace" />
 
         
 
          property.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
       </para>
       <block subset="none" type="note">
         <para
-          >You can use the word SoapAttribute in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+          >You can use the word SoapAttribute in your code instead of the longer <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
           
 
@@ -122,8 +108,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Specifies that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -150,28 +135,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+            >Use this constructor to create a <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-             when you override the serialization of a class member. Create the <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+             when you override the serialization of a class member. Create the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-            , set its properties, and set the object to the <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
+            , set its properties, and set the object to the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
 
             
 
-             property of a <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+             property of a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-             object. For more details, see the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             object. For more details, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -181,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
@@ -215,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
@@ -224,7 +202,11 @@
           >
         </summary>
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -250,13 +232,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Xml.Serialization.SoapAttributeAttribute.AttributeName" />
+            >Use the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.AttributeName" />
 
             
 
-             property to specify an XML attribute name when the default value cannot be used. For example, if the XML attribute name is invalid as a member identifier, use a valid name for the identifier while setting the <see
-             cref="P:System.Xml.Serialization.SoapAttributeAttribute.AttributeName" />
+             property to specify an XML attribute name when the default value cannot be used. For example, if the XML attribute name is invalid as a member identifier, use a valid name for the identifier while setting the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.AttributeName" />
 
             
 
@@ -266,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the XML attribute generated by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the name of the XML attribute generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -295,46 +274,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The following table lists the XML Schema simple data types with their.NET equivalents.</para>
           <para
-            >For the XML Schema base64Binary and hexBinary data types, use an array of <see
-             cref="T:System.Byte" />
+            >For the XML Schema base64Binary and hexBinary data types, use an array of <see cref="T:System.Byte" />
 
             
 
-             structures, and apply a <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+             structures, and apply a <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-             with the <see
-             cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
+             with the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
 
             
 
-             set to "base64Binary" or "hexBinary", as appropriate. For the XML Schema time and date data types, use the <see
-             cref="T:System.DateTime" />
+             set to "base64Binary" or "hexBinary", as appropriate. For the XML Schema time and date data types, use the <see cref="T:System.DateTime" />
 
             
 
-             type and apply the <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+             type and apply the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-             with the <see
-             cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
+             with the <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
 
             
 
              set to "date" or "time".</para
           >
           <para
-            >For every XML Schema data type that is mapped to a string, apply the <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+            >For every XML Schema data type that is mapped to a string, apply the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-             with its <see
-             cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
+             with its <see cref="P:System.Xml.Serialization.SoapAttributeAttribute.DataType" />
 
             
 
@@ -374,8 +345,7 @@
               </term>
               <description>
                 <para
-                  >Array of <see
-                   cref="T:System.Byte" />
+                  >Array of <see cref="T:System.Byte" />
 
                   
 
@@ -529,8 +499,7 @@
               </term>
               <description>
                 <para
-                  >Array of <see
-                   cref="T:System.Byte" />
+                  >Array of <see cref="T:System.Byte" />
 
                   
 
@@ -813,8 +782,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the XML Schema definition language (XSD) data type of the SOAP attribute generated by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the XML Schema definition language (XSD) data type of the SOAP attribute generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -841,31 +809,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.Namespace" />
 
             
 
              property conforms to the World Wide Web Consortium (www.w3.org) specification "Namespaces in XML".</para
           >
           <para
-            >To create namespaces that are associated with prefixes, you must create an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >To create namespaces that are associated with prefixes, you must create an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             that contains the namespaces and prefixes used in the XML document. The namespace you set for each <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             that contains the namespaces and prefixes used in the XML document. The namespace you set for each <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-             must match one of the namespaces in the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             must match one of the namespaces in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-            . When the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            . When the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.NetMsmqSecurityMode" />
+        >The <see cref="T:System.ServiceModel.NetMsmqSecurityMode" />
 
         
 

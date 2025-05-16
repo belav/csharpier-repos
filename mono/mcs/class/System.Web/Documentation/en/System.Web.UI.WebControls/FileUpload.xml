@@ -81,122 +81,100 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+        >The <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         class displays a text box control and a browse button that enable users to select a file on the client and upload it to the Web server. The user specifies the file to upload by entering the full path of the file on the local computer (for example, <userInputLocalizable
-        >C:\MyFiles\TestFile.txt</userInputLocalizable>
+         class displays a text box control and a browse button that enable users to select a file on the client and upload it to the Web server. The user specifies the file to upload by entering the full path of the file on the local computer (for example, <userInputLocalizable>C:\MyFiles\TestFile.txt</userInputLocalizable>
 
         
 
-        ) in the text box of the control. Alternately, the user can select the file by clicking the <ui
-        >Browse</ui>
+        ) in the text box of the control. Alternately, the user can select the file by clicking the <ui>Browse</ui>
 
         
 
-         button, and then locating it in the <ui
-        >Choose File</ui>
+         button, and then locating it in the <ui>Choose File</ui>
 
         
 
          dialog box.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
+        >Use the <see cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
 
         
 
-         property to get the name of a file on a client to upload by using the <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+         property to get the name of a file on a client to upload by using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
          control. The file name that this property returns does not include the path of the file on the client.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
+        >The <see cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
         
 
-         property gets a <see
-         cref="T:System.IO.Stream" />
+         property gets a <see cref="T:System.IO.Stream" />
 
         
 
-         object that points to a file to upload. Use this property to access the contents of the file as bytes. For example, you can use the <see
-         cref="T:System.IO.Stream" />
+         object that points to a file to upload. Use this property to access the contents of the file as bytes. For example, you can use the <see cref="T:System.IO.Stream" />
 
         
 
-         object that is returned by the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
+         object that is returned by the <see cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
         
 
-         property to read the contents of the file as bytes and store them in a byte array. Alternatively, you can use the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
+         property to read the contents of the file as bytes and store them in a byte array. Alternatively, you can use the <see cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
 
         
 
          property to retrieve all the bytes in the file.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+        >The <see cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
 
         
 
-         property gets the underlying <see
-         cref="T:System.Web.HttpPostedFile" />
+         property gets the underlying <see cref="T:System.Web.HttpPostedFile" />
 
         
 
-         object for the file to upload. You can use this property to access additional properties on the file. The <see
-         cref="P:System.Web.HttpPostedFile.ContentLength" />
+         object for the file to upload. You can use this property to access additional properties on the file. The <see cref="P:System.Web.HttpPostedFile.ContentLength" />
 
         
 
-         property gets the length of the file. The <see
-         cref="P:System.Web.HttpPostedFile.ContentType" />
+         property gets the length of the file. The <see cref="P:System.Web.HttpPostedFile.ContentType" />
 
         
 
-         property gets the MIME content type of the file. In addition, you can use the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+         property gets the MIME content type of the file. In addition, you can use the <see cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
 
         
 
-         property to access the <see
-         cref="P:System.Web.HttpPostedFile.FileName" />
+         property to access the <see cref="P:System.Web.HttpPostedFile.FileName" />
 
         
 
-         property, the <see
-         cref="P:System.Web.HttpPostedFile.InputStream" />
+         property, the <see cref="P:System.Web.HttpPostedFile.InputStream" />
 
         
 
-         property, and the <see
-         cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+         property, and the <see cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
 
         
 
-         method. However, the same functionality is provided by the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
+         method. However, the same functionality is provided by the <see cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
 
         
 
-         property, the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
+         property, the <see cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
         
 
-         property, and the <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+         property, and the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
@@ -209,61 +187,50 @@
         <h2>Saving Uploaded Files</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+        >The <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         control does not automatically save a file to the server after the user selects the file to upload. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user clicks to upload the file. The code that you write to save the specified file should call the <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+         control does not automatically save a file to the server after the user selects the file to upload. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user clicks to upload the file. The code that you write to save the specified file should call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
-         method, which saves the contents of a file to a specified path on the server. Typically, the <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+         method, which saves the contents of a file to a specified path on the server. Typically, the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
          method is called in an event-handling method for an event that raises a post back to the server. For example, if you provide a button to submit a file, you could include the code to save the file inside the event-handling method for the click event.</para
       >
       <para
-        >Before calling the <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+        >Before calling the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
-         method to save the file to the server, use the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+         method to save the file to the server, use the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
         
 
-         property to verify that the <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+         property to verify that the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         control contains a file. If the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+         control contains a file. If the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
         
 
-         returns true, call the <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+         returns true, call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
-         method. If it returns false, display a message to the user indicating that the control does not contain a file. Do not check the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+         method. If it returns false, display a message to the user indicating that the control does not contain a file. Do not check the <see cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
 
         
 
-         property to determine whether a file to upload exists because, by default, this property contains 0 bytes. As a result, even when the <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+         property to determine whether a file to upload exists because, by default, this property contains 0 bytes. As a result, even when the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         control is blank, the <see
-         cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+         control is blank, the <see cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
 
         
 
@@ -276,31 +243,26 @@
         <h2>Security Considerations</h2>
       </format>
       <para
-        >When you call the <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+        >When you call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
          method, you must specify the full path of the directory in which to save the uploaded file. If you do not explicitly specify a path in your application code, an exception is thrown when a user attempts to upload a file. This behavior helps keep the files on the server secure by preventing users from being able to write to arbitrary locations in your application's directory structure, as well as preventing access to sensitive root directories.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+        >The <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
         
 
-         method writes the uploaded file to the specified directory. Therefore, the ASP.NET application must have write access to the directory on the server. There are two ways that the application can get write access. You can explicitly grant write access to the account under which the application is running, in the directory in which the uploaded files will be saved. Alternatively, you can increase the level of trust that is granted to the ASP.NET application. To get write access to the executing directory for the application, the application must be granted the <see
-         cref="T:System.Web.AspNetHostingPermission" />
+         method writes the uploaded file to the specified directory. Therefore, the ASP.NET application must have write access to the directory on the server. There are two ways that the application can get write access. You can explicitly grant write access to the account under which the application is running, in the directory in which the uploaded files will be saved. Alternatively, you can increase the level of trust that is granted to the ASP.NET application. To get write access to the executing directory for the application, the application must be granted the <see cref="T:System.Web.AspNetHostingPermission" />
 
         
 
-         object with the trust level set to the <see
-         cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
+         object with the trust level set to the <see cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
 
         
 
-         value. Increasing the level of trust increases the application's access to resources on the server. Note that this is not a secure approach, because a malicious user who gains control of your application will also be able to run under this higher level of trust. It is a best practice to run an ASP.NET application in the context of a user with the minimum privileges that are required for the application to run. For more information about security in ASP.NET applications, see <format
-         type="text/html">
+         value. Increasing the level of trust increases the application's access to resources on the server. Note that this is not a secure approach, because a malicious user who gains control of your application will also be able to run under this higher level of trust. It is a best practice to run an ASP.NET application in the context of a user with the minimum privileges that are required for the application to run. For more information about security in ASP.NET applications, see <format type="text/html">
           <a href="3eeeee9e-b09f-4c7f-8ce5-d9ca1f9322ad"
             >Basic Security Practices for Web Applications</a
           >
@@ -308,8 +270,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="F897C794-10D3-414C-86B7-59B66564BBF1">ASP.NET Trust Levels and Policy Files</a>
         </format>
 
@@ -324,20 +285,17 @@
         <h2>Memory Limitations</h2>
       </format>
       <para
-        >One way to guard against denial of service attacks is to limit the size of the files that can be uploaded by using the <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+        >One way to guard against denial of service attacks is to limit the size of the files that can be uploaded by using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         control. You should set a size limit that is appropriate for the types of files that you expect to be uploaded. The default size limit is 4096 kilobytes (KB), or 4 megabytes (MB). You can allow larger files to be uploaded by setting the maxRequestLength attribute of the <format
-         type="text/html">
+         control. You should set a size limit that is appropriate for the types of files that you expect to be uploaded. The default size limit is 4096 kilobytes (KB), or 4 megabytes (MB). You can allow larger files to be uploaded by setting the maxRequestLength attribute of the <format type="text/html">
           <a href="E9B81350-8AAF-47CC-9843-5F7D0C59F369">httpRuntime</a>
         </format>
 
         
 
-         element. To increase the maximum allowable file size for the entire application, set the maxRequestLength attribute in the Web.config file. To increase the maximum allowable file size for a specified page, set the maxRequestLength attribute inside the location element in Web.config. For an example, see <format
-         type="text/html">
+         element. To increase the maximum allowable file size for the entire application, set the maxRequestLength attribute in the Web.config file. To increase the maximum allowable file size for a specified page, set the maxRequestLength attribute inside the location element in Web.config. For an example, see <format type="text/html">
           <a href="922EF7D5-DA38-4661-B1C6-5B9E5CEDA1D5"
             >location Element (ASP.NET Settings Schema)</a
           >
@@ -350,8 +308,7 @@
       <para>When uploading large files, a user might also receive the following error message:</para>
       <para>aspnet_wp.exe (PID: 1520) was recycled because memory consumption exceeded 460 MB (60 percent of available RAM).</para>
       <para
-        >If your users encounter this error message, increase the value of the memoryLimit attribute in the <format
-         type="text/html">
+        >If your users encounter this error message, increase the value of the memoryLimit attribute in the <format type="text/html">
           <a href="4B8FE20E-74C8-4566-B72C-CE5F83C8E32D">processModel</a>
         </format>
 
@@ -360,8 +317,7 @@
          of element the Web.config file for the application. The memoryLimit attribute specifies the maximum amount of memory that a worker process can use. If the worker process exceeds the memoryLimit amount, a new process is created to replace it, and all current requests are reassigned to the new process.</para
       >
       <para
-        >To control whether the file to upload is temporarily stored in memory or on the server while the request is being processed, set the requestLengthDiskThreshold attribute of the <format
-         type="text/html">
+        >To control whether the file to upload is temporarily stored in memory or on the server while the request is being processed, set the requestLengthDiskThreshold attribute of the <format type="text/html">
           <a href="E9B81350-8AAF-47CC-9843-5F7D0C59F369">httpRuntime</a>
         </format>
 
@@ -376,40 +332,33 @@
         <h2>Using the FileUpload Control with the UpdatePanel Control</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+        >The <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         control is designed to be used only in postback scenarios and not in asynchronous postback scenarios during partial-page rendering. When you use a <see
-         cref="T:System.Web.UI.WebControls.FileUpload" />
+         control is designed to be used only in postback scenarios and not in asynchronous postback scenarios during partial-page rendering. When you use a <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
         
 
-         control inside an <see
-         cref="T:System.Web.UI.UpdatePanel" />
+         control inside an <see cref="T:System.Web.UI.UpdatePanel" />
 
         
 
-         control, the file must be uploaded by using a control that is a <see
-         cref="T:System.Web.UI.PostBackTrigger" />
+         control, the file must be uploaded by using a control that is a <see cref="T:System.Web.UI.PostBackTrigger" />
 
         
 
-         object for the panel. <see
-         cref="T:System.Web.UI.UpdatePanel" />
+         object for the panel. <see cref="T:System.Web.UI.UpdatePanel" />
 
         
 
-         controls are used to update selected regions of a page instead of updating the whole page with a postback. For more information, see <format
-         type="text/html">
+         controls are used to update selected regions of a page instead of updating the whole page with a postback. For more information, see <format type="text/html">
           <a href="29a2265d-9674-4c19-b70e-e5560ee9689a">UpdatePanel Control Overview</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
         </format>
 
@@ -428,8 +377,7 @@
     AccessKey="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -437,53 +385,45 @@
         Inset|Outset"
     BorderWidth="size"
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -502,8 +442,7 @@
     Style="string"
     TabIndex="integer"
     ToolTip="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -527,18 +466,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.#ctor" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FileUpload.#ctor" />
 
             
 
-             constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             class. The <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             class. The <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -548,8 +484,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -578,28 +513,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.FileUpload.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.FileUpload.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is primarily used by control developers to insert the appropriate attributes and styles to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is primarily used by control developers to insert the appropriate attributes and styles to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream for a <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             output stream for a <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control. The <see
-             cref="M:System.Web.UI.WebControls.FileUpload.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             control. The <see cref="M:System.Web.UI.WebControls.FileUpload.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method overrides the <see
-             cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+             method overrides the <see cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -609,13 +539,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the HTML attributes and styles of a <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Adds the HTML attributes and styles of a <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control to render to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control to render to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -623,12 +551,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -662,46 +593,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >The <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control does not automatically read the file from the client. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user can click to upload the file. The code that you write to save the specified file could call the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
+             control does not automatically read the file from the client. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user can click to upload the file. The code that you write to save the specified file could call the <see cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
 
             
 
              property, which returns the contents of the file.</para
           >
           <para
-            >Before calling the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
+            >Before calling the <see cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
 
             
 
-             property, you should use the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+             property, you should use the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             property to verify that the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             property to verify that the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control contains a file to upload. If the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+             control contains a file to upload. If the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             returns true, call the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
+             returns true, call the <see cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
 
             
 
-             property. If it returns false, display a message to the user indicating that the control does not contain a file. If you do not provide error-handling code to verify that a file exists, an attempt to save a nonexistent file throws an <see
-             cref="T:System.Web.HttpException" />
+             property. If it returns false, display a message to the user indicating that the control does not contain a file. If you do not provide error-handling code to verify that a file exists, an attempt to save a nonexistent file throws an <see cref="T:System.Web.HttpException" />
 
             
 
@@ -711,8 +634,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of the bytes in a file that is specified by using a <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Gets an array of the bytes in a file that is specified by using a <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -744,28 +666,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
+            >The <see cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
             
 
-             property gets a <see
-             cref="T:System.IO.Stream" />
+             property gets a <see cref="T:System.IO.Stream" />
 
             
 
-             object that points to a file to upload by using the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             object that points to a file to upload by using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control. Use the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
+             control. Use the <see cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
             
 
-             property to access the contents of the file. For example, you can use the <see
-             cref="T:System.IO.Stream" />
+             property to access the contents of the file. For example, you can use the <see cref="T:System.IO.Stream" />
 
             
 
@@ -775,13 +692,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.IO.Stream" />
+            >Gets a <see cref="T:System.IO.Stream" />
 
             
 
-             object that points to a file to upload using the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             object that points to a file to upload using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -813,13 +728,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of a file on a client to upload using the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Gets the name of a file on a client to upload using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control. The file name that the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
+             control. The file name that the <see cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
 
             
 
@@ -829,8 +742,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of a file on a client to upload using the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Gets the name of a file on a client to upload using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -862,33 +774,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+            >The <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             property gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             property gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control contains a file to upload. Use this property to verify that a file to upload exists before performing operations on the file. For example, before calling the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+             control contains a file to upload. Use this property to verify that a file to upload exists before performing operations on the file. For example, before calling the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
-             method to save the file to disk, use the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+             method to save the file to disk, use the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             property to verify that the file exists. If <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+             property to verify that the file exists. If <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             returns true, call the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+             returns true, call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
@@ -898,8 +804,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -927,13 +832,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.FileUpload.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.FileUpload.OnPreRender(System.EventArgs)" />
 
             
 
-             method notifies the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             method notifies the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -943,13 +846,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
-             event for the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             event for the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -957,12 +858,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -990,66 +894,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+            >The <see cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
 
             
 
-             property gets the underlying <see
-             cref="T:System.Web.HttpPostedFile" />
+             property gets the underlying <see cref="T:System.Web.HttpPostedFile" />
 
             
 
-             object for a file that is uploaded by using the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             object for a file that is uploaded by using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
              control. Use this property to access additional properties on the uploaded file.</para
           >
           <para
-            >You can use the <see
-             cref="P:System.Web.HttpPostedFile.ContentLength" />
+            >You can use the <see cref="P:System.Web.HttpPostedFile.ContentLength" />
 
             
 
-             property to get the length of the file. You can use the <see
-             cref="P:System.Web.HttpPostedFile.ContentType" />
+             property to get the length of the file. You can use the <see cref="P:System.Web.HttpPostedFile.ContentType" />
 
             
 
-             property to get the MIME content type of the file. In addition, you can use the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+             property to get the MIME content type of the file. In addition, you can use the <see cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
 
             
 
-             property to access the <see
-             cref="P:System.Web.HttpPostedFile.FileName" />
+             property to access the <see cref="P:System.Web.HttpPostedFile.FileName" />
 
             
 
-             property, the <see
-             cref="P:System.Web.HttpPostedFile.InputStream" />
+             property, the <see cref="P:System.Web.HttpPostedFile.InputStream" />
 
             
 
-             property, and the <see
-             cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+             property, and the <see cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
 
             
 
-             method. However, the same functionality is provided by the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
+             method. However, the same functionality is provided by the <see cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
 
             
 
-             property, the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
+             property, the <see cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
             
 
-             property, and the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+             property, and the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
@@ -1059,13 +951,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying <see
-             cref="T:System.Web.HttpPostedFile" />
+            >Gets the underlying <see cref="T:System.Web.HttpPostedFile" />
 
             
 
-             object for a file that is uploaded by using the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             object for a file that is uploaded by using the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
@@ -1096,18 +986,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.FileUpload.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.FileUpload.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method sends the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             method sends the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control content to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control content to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1117,13 +1004,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >Sends the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control content to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control content to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1131,17 +1016,19 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
-           object that receives the <see
-           cref="T:System.Web.UI.WebControls.FileUpload" />
+           object that receives the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
           
 
@@ -1163,95 +1050,79 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
              method saves the contents of an uploaded file to a specified path on the Web server.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+            >The <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control does not automatically save a file to the server after the user selects the file to upload. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user clicks to upload the file. The code that you write to save the specified file should call the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+             control does not automatically save a file to the server after the user selects the file to upload. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user clicks to upload the file. The code that you write to save the specified file should call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
-             method, which saves the contents of a file to a specified path on the server. Typically, the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+             method, which saves the contents of a file to a specified path on the server. Typically, the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
              method is called in an event-handling method for an event that raises a post back to the server. For example, if you provide a button to submit a file, the code to save the file to the server could then be included inside the event-handling method for the click event.</para
           >
           <para
-            >When you call the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+            >When you call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
-             method, you must specify the full path of the directory on the server in which to save the uploaded file. If you do not explicitly specify a path in your application code, an <see
-             cref="T:System.Web.HttpException" />
+             method, you must specify the full path of the directory on the server in which to save the uploaded file. If you do not explicitly specify a path in your application code, an <see cref="T:System.Web.HttpException" />
 
             
 
              exception is thrown when a user attempts to upload a file. This behavior helps keep the files on the server secure, by not allowing users to specify a path in which to save the files that they upload.</para
           >
           <para
-            >Before calling the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+            >Before calling the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
-             method, you should use the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+             method, you should use the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             property to verify that the <see
-             cref="T:System.Web.UI.WebControls.FileUpload" />
+             property to verify that the <see cref="T:System.Web.UI.WebControls.FileUpload" />
 
             
 
-             control contains a file to upload. If the <see
-             cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+             control contains a file to upload. If the <see cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
 
             
 
-             returns true, call the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+             returns true, call the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
-             method. If it returns false, display a message to the user indicating that the control does not contain a file. If you do not provide error-handling code to verify that a file exists, an attempt to save a nonexistent file throws an <see
-             cref="T:System.Web.HttpException" />
+             method. If it returns false, display a message to the user indicating that the control does not contain a file. If you do not provide error-handling code to verify that a file exists, an attempt to save a nonexistent file throws an <see cref="T:System.Web.HttpException" />
 
             
 
              exception.</para
           >
           <para
-            >For a call to the <see
-             cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+            >For a call to the <see cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
             
 
-             to work, the ASP.NET application must have write access to the directory on the server. There are two ways that the application can get write access. You can explicitly grant write access to the account under which the application is running, in the directory in which the uploaded files will be saved. Alternatively, you can increase the level of trust that is granted to the ASP.NET application. To get write access to the executing directory for the application, the application must be granted the <see
-             cref="T:System.Web.AspNetHostingPermission" />
+             to work, the ASP.NET application must have write access to the directory on the server. There are two ways that the application can get write access. You can explicitly grant write access to the account under which the application is running, in the directory in which the uploaded files will be saved. Alternatively, you can increase the level of trust that is granted to the ASP.NET application. To get write access to the executing directory for the application, the application must be granted the <see cref="T:System.Web.AspNetHostingPermission" />
 
             
 
-             object with the trust level set to the <see
-             cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
+             object with the trust level set to the <see cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
 
             
 
-             value. Increasing the level of trust increases the application's access to resources on the server. Note that this is not a secure approach, because a malicious user who gains control of your application will also be able to run under this higher level of trust. It is a best practice to run an ASP.NET application in the context of a user who has the minimum privileges that are required for the application to run. For more information about security in ASP.NET applications, see <format
-             type="text/html">
+             value. Increasing the level of trust increases the application's access to resources on the server. Note that this is not a secure approach, because a malicious user who gains control of your application will also be able to run under this higher level of trust. It is a best practice to run an ASP.NET application in the context of a user who has the minimum privileges that are required for the application to run. For more information about security in ASP.NET applications, see <format type="text/html">
               <a href="3eeeee9e-b09f-4c7f-8ce5-d9ca1f9322ad"
                 >Basic Security Practices for Web Applications</a
               >
@@ -1259,8 +1130,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="F897C794-10D3-414C-86B7-59B66564BBF1"
                 >ASP.NET Trust Levels and Policy Files</a
               >
@@ -1276,7 +1146,11 @@
           <para>Saves the contents of an uploaded file to a specified path on the Web server.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

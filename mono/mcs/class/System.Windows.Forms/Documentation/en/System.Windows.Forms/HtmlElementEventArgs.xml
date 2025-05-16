@@ -20,21 +20,18 @@
          encapsulates the same information found on the window.event object when programming against the unmanaged HTML DOM or when writing Active Script for HTML pages. </para
       >
       <para
-        >In most cases, you can use <see
-         cref="P:System.Windows.Forms.HtmlElementEventArgs.ToElement" />
+        >In most cases, you can use <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ToElement" />
 
         
 
-         to find the HTML element that is receiving the event action, and <see
-         cref="P:System.Windows.Forms.HtmlElementEventArgs.FromElement" />
+         to find the HTML element that is receiving the event action, and <see cref="P:System.Windows.Forms.HtmlElementEventArgs.FromElement" />
 
         
 
          to find the HTML element that the current event is causing us to leave. However, not every event supplies a value for these properties; see the managed documentation for an event, or the corresponding documentation in the Internet Explorer SDK documentation, to discover if the event supplies it. </para
       >
       <para
-        >Many events in the HTML DOM are sent to their parent elements unless they are cancelled. This is known as event bubbling. If a SPAN inside of a DIV receives a click, then a click event is raised for the SPAN first, then for the DIV, and finally for the HTML page's BODY element. <see
-         cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
+        >Many events in the HTML DOM are sent to their parent elements unless they are cancelled. This is known as event bubbling. If a SPAN inside of a DIV receives a click, then a click event is raised for the SPAN first, then for the DIV, and finally for the HTML page's BODY element. <see cref="P:System.Windows.Forms.HtmlElementEventArgs.BubbleEvent" />
 
         
 
@@ -44,13 +41,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the events defined on <see
-         cref="T:System.Windows.Forms.HtmlDocument" />
+        >Provides data for the events defined on <see cref="T:System.Windows.Forms.HtmlDocument" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.HtmlElement" />
+         and <see cref="T:System.Windows.Forms.HtmlElement" />
 
         
 
@@ -91,18 +86,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Not all events in the Document Object Model bubble. All of the events exposed by the <see
-             cref="T:System.Windows.Forms.HtmlDocument" />
+            >Not all events in the Document Object Model bubble. All of the events exposed by the <see cref="T:System.Windows.Forms.HtmlDocument" />
 
             
 
-             managed wrapper bubble with the exception of <see
-             cref="E:System.Windows.Forms.HtmlDocument.Stop" />
+             managed wrapper bubble with the exception of <see cref="E:System.Windows.Forms.HtmlDocument.Stop" />
 
             
 
-            . For <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            . For <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -132,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ClientMousePosition gives the mouse position of the cursor relative to the upper-left corner of the document. Use <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.MousePosition" />
+            >ClientMousePosition gives the mouse position of the cursor relative to the upper-left corner of the document. Use <see cref="P:System.Windows.Forms.HtmlElementEventArgs.MousePosition" />
 
             
 
@@ -211,13 +202,11 @@
 
             
 
-             will have a valid value during mouse events such as <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseEnter" />
+             will have a valid value during mouse events such as <see cref="E:System.Windows.Forms.HtmlElement.MouseEnter" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseLeave" />
+             and <see cref="E:System.Windows.Forms.HtmlElement.MouseLeave" />
 
             
 
@@ -227,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >Gets the <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 
@@ -252,18 +240,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ASCII value of the keyboard character typed in a <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
+            >Gets the ASCII value of the keyboard character typed in a <see cref="E:System.Windows.Forms.HtmlElement.KeyPress" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
+            , <see cref="E:System.Windows.Forms.HtmlElement.KeyDown" />
 
             
 
-            , or <see
-             cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
+            , or <see cref="E:System.Windows.Forms.HtmlElement.KeyUp" />
 
             
 
@@ -290,13 +275,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the mouse button that was clicked during a <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseDown" />
+            >Gets the mouse button that was clicked during a <see cref="E:System.Windows.Forms.HtmlElement.MouseDown" />
 
             
 
-             or <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseUp" />
+             or <see cref="E:System.Windows.Forms.HtmlElement.MouseUp" />
 
             
 
@@ -320,8 +303,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Relative positioning is used in HTML to place an element on a page in relation to its parent. </para>
           <para
-            >If an element is relatively positioned, this property will return the same result as <see
-             cref="P:System.Windows.Forms.HtmlElementEventArgs.ClientMousePosition" />
+            >If an element is relatively positioned, this property will return the same result as <see cref="P:System.Windows.Forms.HtmlElementEventArgs.ClientMousePosition" />
 
             
 
@@ -420,13 +402,11 @@
 
             
 
-             will have a valid value during mouse events such as <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseEnter" />
+             will have a valid value during mouse events such as <see cref="E:System.Windows.Forms.HtmlElement.MouseEnter" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.HtmlElement.MouseLeave" />
+             and <see cref="E:System.Windows.Forms.HtmlElement.MouseLeave" />
 
             
 
@@ -436,8 +416,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.HtmlElement" />
+            >Gets the <see cref="T:System.Windows.Forms.HtmlElement" />
 
             
 

@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.MsmqIntegrationElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationElement" />
 
             
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of this configuration element to the specified <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+            >Applies the settings of this configuration element to the specified <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -86,7 +84,11 @@
           >
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -143,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the settings from the specified <see
-             cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+            >Copies the settings from the specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
 
             
 
@@ -152,12 +153,15 @@
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+          The <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
 
           
 
@@ -267,8 +271,7 @@
             </item>
             <item>
               <para
-                >Binary - The <see
-                 cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+                >Binary - The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
                 
 
@@ -283,8 +286,7 @@
             </item>
             <item>
               <para
-                >Xml - The <see
-                 cref="T:System.Xml.Serialization.XmlSerializer" />
+                >Xml - The <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
                 
 
@@ -297,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or set the <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
+            >Gets or set the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
 
             
 

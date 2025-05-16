@@ -22,16 +22,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.TagMapInfo" />
+        >The <see cref="T:System.Web.Configuration.TagMapInfo" />
 
         
 
          class allows you to remap the types of tags at compile time. This remapping causes the mapped type to be used in place of the original tag type for all pages and controls in the ASP.NET application in the scope of the configuration file. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.TagMapCollection" />
+        >The <see cref="T:System.Web.Configuration.TagMapCollection" />
 
         
 
@@ -44,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see
-         cref="T:System.Web.Configuration.TagMapInfo" />
+        >Contains a collection of <see cref="T:System.Web.Configuration.TagMapInfo" />
 
         
 
@@ -63,18 +60,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.PagesSection.TagMapping" />
+            >The <see cref="P:System.Web.Configuration.PagesSection.TagMapping" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Configuration.PagesSection" />
+             property of the <see cref="T:System.Web.Configuration.PagesSection" />
 
             
 
-             class always contains an instance of the <see
-             cref="T:System.Web.Configuration.TagMapCollection" />
+             class always contains an instance of the <see cref="T:System.Web.Configuration.TagMapCollection" />
 
             
 
@@ -84,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.TagMapCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.TagMapCollection" />
 
             
 
@@ -114,18 +107,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see
-             cref="T:System.Web.Configuration.TagMapInfo" />
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.TagMapInfo" />
 
             
 
-             object with the same <see
-             cref="P:System.Web.Configuration.TagMapInfo.TagType" />
+             object with the same <see cref="P:System.Web.Configuration.TagMapInfo.TagType" />
 
             
 
-             property value. If it does, a <see
-             cref="T:System.Configuration.ConfigurationException" />
+             property value. If it does, a <see cref="T:System.Configuration.ConfigurationException" />
 
             
 
@@ -135,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.TagMapInfo" />
+            >Adds a <see cref="T:System.Web.Configuration.TagMapInfo" />
 
             
 
@@ -144,12 +133,15 @@
           >
         </summary>
         <param name="tagMapInformation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.TagMapInfo" />
+          A <see cref="T:System.Web.Configuration.TagMapInfo" />
 
           
 
@@ -284,12 +276,15 @@
           <para>Removes the specified object from the collection.</para>
         </summary>
         <param name="tagMapInformation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.TagMapInfo" />
+          A <see cref="T:System.Web.Configuration.TagMapInfo" />
 
           
 

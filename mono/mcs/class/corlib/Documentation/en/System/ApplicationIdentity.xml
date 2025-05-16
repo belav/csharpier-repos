@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ApplicationIdentity" />
+        >The <see cref="T:System.ApplicationIdentity" />
 
         
 
@@ -67,21 +66,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The format of the <paramref
-             name="applicationIdentityFullName" />
+            >The format of the <paramref name="applicationIdentityFullName" />
 
             
 
              parameter is a comma-delimited Unicode string that begins with the name, as follows:</para
           >
           <code
-            >applicationURL<codeFeaturedElement
-            >#</codeFeaturedElement>
+            >applicationURL<codeFeaturedElement>#</codeFeaturedElement>
 
             
 
-            deploymentIdentity<codeFeaturedElement
-            >\</codeFeaturedElement>
+            deploymentIdentity<codeFeaturedElement>\</codeFeaturedElement>
 
             
 
@@ -89,23 +85,19 @@
           >
           <para>Where deploymentIdentity = </para>
           <code
-            >deploymentManifest<codeFeaturedElement
-            >, Version = </codeFeaturedElement>
+            >deploymentManifest<codeFeaturedElement>, Version = </codeFeaturedElement>
 
             
 
-            Major.Minor.Build.Revision<codeFeaturedElement
-            >, Culture = </codeFeaturedElement>
+            Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>
 
             
 
-            CultureInfo<codeFeaturedElement
-            >, PublicKeyToken=</codeFeaturedElement>
+            CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>
 
             
 
-            TokenNumber<codeFeaturedElement
-            >, processorArchitecture=</codeFeaturedElement>
+            TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>
 
             
 
@@ -113,28 +105,23 @@
           >
           <para>And applicationIdentity =</para>
           <code
-            >applicationName<codeFeaturedElement
-            >, Version = </codeFeaturedElement>
+            >applicationName<codeFeaturedElement>, Version = </codeFeaturedElement>
 
             
 
-            Major.Minor.Build.Revision<codeFeaturedElement
-            >, Culture = </codeFeaturedElement>
+            Major.Minor.Build.Revision<codeFeaturedElement>, Culture = </codeFeaturedElement>
 
             
 
-            CultureInfo<codeFeaturedElement
-            >, PublicKeyToken=</codeFeaturedElement>
+            CultureInfo<codeFeaturedElement>, PublicKeyToken=</codeFeaturedElement>
 
             
 
-            TokenNumber<codeFeaturedElement
-            >, processorArchitecture=</codeFeaturedElement>
+            TokenNumber<codeFeaturedElement>, processorArchitecture=</codeFeaturedElement>
 
             
 
-            processorArchitecture<codeFeaturedElement
-            >, type=</codeFeaturedElement>
+            processorArchitecture<codeFeaturedElement>, type=</codeFeaturedElement>
 
             
 
@@ -149,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ApplicationIdentity" />
+            >Initializes a new instance of the <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -158,7 +144,11 @@
           >
         </summary>
         <param name="applicationIdentityFullName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -183,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following are two examples of <see
-             cref="P:System.ApplicationIdentity.CodeBase" />
+            >The following are two examples of <see cref="P:System.ApplicationIdentity.CodeBase" />
 
             
 
@@ -222,13 +211,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of the format of the <see
-             cref="P:System.ApplicationIdentity.FullName" />
+            >For a description of the format of the <see cref="P:System.ApplicationIdentity.FullName" />
 
             
 
-             property, see the <see
-             cref="M:System.ApplicationIdentity.#ctor(System.String)" />
+             property, see the <see cref="M:System.ApplicationIdentity.#ctor(System.String)" />
 
             
 
@@ -268,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -277,24 +263,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -322,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of the format of a full name for a manifest activated application, see the <see
-             cref="M:System.ApplicationIdentity.#ctor(System.String)" />
+            >For a description of the format of a full name for a manifest activated application, see the <see cref="M:System.ApplicationIdentity.#ctor(System.String)" />
 
             
 

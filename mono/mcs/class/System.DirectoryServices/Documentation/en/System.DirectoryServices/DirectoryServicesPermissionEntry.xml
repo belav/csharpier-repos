@@ -80,13 +80,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" />
+            >The <see cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" />
+             constructor initializes a new instance of the <see cref="M:System.DirectoryServices.DirectoryServicesPermissionEntry.#ctor(System.DirectoryServices.DirectoryServicesPermissionAccess,System.String)" />
 
             
 
@@ -94,7 +92,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -114,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.Path" />
+            >The <see cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.Path" />
 
             
 
@@ -139,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.PermissionAccess" />
+            >The <see cref="P:System.DirectoryServices.DirectoryServicesPermissionEntry.PermissionAccess" />
 
             
 
@@ -155,13 +155,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
+        >The <see cref="T:System.DirectoryServices.DirectoryServicesPermissionEntry" />
 
         
 
-         class defines the smallest unit of a code access security permission set for <see
-         cref="N:System.DirectoryServices" />
+         class defines the smallest unit of a code access security permission set for <see cref="N:System.DirectoryServices" />
 
         
 

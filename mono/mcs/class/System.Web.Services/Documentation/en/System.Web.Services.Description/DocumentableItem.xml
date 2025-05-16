@@ -74,8 +74,7 @@
         </item>
       </list>
       <para
-        >This base class contains only one property, the <see
-         cref="P:System.Web.Services.Description.DocumentableItem.Documentation" />
+        >This base class contains only one property, the <see cref="P:System.Web.Services.Description.DocumentableItem.Documentation" />
 
         
 
@@ -86,8 +85,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the abstract base class from which several classes in the <see
-         cref="N:System.Web.Services.Description" />
+        >Represents the abstract base class from which several classes in the <see cref="N:System.Web.Services.Description" />
 
         
 
@@ -106,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.Services.Description.DocumentableItem" />
+            >Initializes an instance of the <see cref="T:System.Web.Services.Description.DocumentableItem" />
 
             
 
@@ -136,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text documentation for the instance of the <see
-             cref="T:System.Web.Services.Description.DocumentableItem" />
+            >Gets or sets the text documentation for the instance of the <see cref="T:System.Web.Services.Description.DocumentableItem" />
 
             
 
@@ -185,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the documentation element for the <see
-             cref="T:System.Web.Services.Description.DocumentableItem" />
+            >Gets or sets the documentation element for the <see cref="T:System.Web.Services.Description.DocumentableItem" />
 
             
 
@@ -218,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of type <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Gets or sets an array of type <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -251,13 +245,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
-             associated with this <see
-             cref="T:System.Web.Services.Description.DocumentableItem" />
+             associated with this <see cref="T:System.Web.Services.Description.DocumentableItem" />
 
             
 
@@ -289,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the dictionary of namespace prefixes and namespaces used to preserve namespace prefixes and namespaces when a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets or sets the dictionary of namespace prefixes and namespaces used to preserve namespace prefixes and namespaces when a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 

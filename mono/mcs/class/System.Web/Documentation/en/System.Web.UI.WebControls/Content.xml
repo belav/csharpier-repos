@@ -32,84 +32,69 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.Content" />
+        >A <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control is a container for the content and controls of a content page. A <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         control is a container for the content and controls of a content page. A <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control is used only with a master page that defines a corresponding <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control is used only with a master page that defines a corresponding <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         control. A <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         control. A <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control is not added to the control hierarchy at runtime. Instead, the contents within the <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         control is not added to the control hierarchy at runtime. Instead, the contents within the <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control are directly merged into the corresponding <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control are directly merged into the corresponding <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
          control.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Content" />
+        >The <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control is associated with a <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control is associated with a <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         using its <see
-         cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+         using its <see cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
 
         
 
-         property. Set the <see
-         cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+         property. Set the <see cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
 
         
 
-         property to the value of the <see
-         cref="P:System.Web.UI.Control.ID" />
+         property to the value of the <see cref="P:System.Web.UI.Control.ID" />
 
         
 
-         property of a <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         property of a <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
-         control in a master page. When the URL of the content page is called, all text, markup, and server controls that are contained within the <see
-         cref="T:System.Web.UI.WebControls.Content" />
+         control in a master page. When the URL of the content page is called, all text, markup, and server controls that are contained within the <see cref="T:System.Web.UI.WebControls.Content" />
 
         
 
-         control are rendered to the <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+         control are rendered to the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
          on the master page, and the address bar of the browser will show the name of the content page.</para
       >
       <para
-        >For more information about master pages and content pages, see <format
-         type="text/html">
+        >For more information about master pages and content pages, see <format type="text/html">
           <a href="4e53eedf-8304-4e7a-aed1-691a2623b28b">ASP.NET Master Pages Overview</a>
         </format>
 
@@ -126,16 +111,14 @@
       <code
         >&lt;asp:Content
     ContentPlaceHolderID="string"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
     ID="string"
     runat="server"&gt;
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -147,8 +130,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Holds text, markup, and server controls to render to a <see
-         cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+        >Holds text, markup, and server controls to render to a <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
         
 
@@ -166,13 +148,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.Content" />
+            >The <see cref="T:System.Web.UI.WebControls.Content" />
 
             
 
-             control typically is created declaratively, not programmatically. For an example, see <see
-             cref="T:System.Web.UI.WebControls.Content" />
+             control typically is created declaratively, not programmatically. For an example, see <see cref="T:System.Web.UI.WebControls.Content" />
 
             
 
@@ -182,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
 
             
 
@@ -218,31 +197,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All content that is encapsulated by the <see
-             cref="T:System.Web.UI.WebControls.Content" />
+            >All content that is encapsulated by the <see cref="T:System.Web.UI.WebControls.Content" />
 
             
 
-             control renders within the referenced <see
-             cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+             control renders within the referenced <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
             
 
-             control in a master page. A <see
-             cref="T:System.Web.UI.WebControls.Content" />
+             control in a master page. A <see cref="T:System.Web.UI.WebControls.Content" />
 
             
 
              control is not added to the control hierarchy at runtime.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -254,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the ID of the <see
-             cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+            >Gets or sets the ID of the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
             
 
@@ -286,8 +259,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Content.DataBinding" />
+            >The <see cref="E:System.Web.UI.WebControls.Content.DataBinding" />
 
             
 
@@ -322,8 +294,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Content.Disposed" />
+            >The <see cref="E:System.Web.UI.WebControls.Content.Disposed" />
 
             
 
@@ -358,8 +329,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Content.Init" />
+            >The <see cref="E:System.Web.UI.WebControls.Content.Init" />
 
             
 
@@ -394,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Content.Load" />
+            >The <see cref="E:System.Web.UI.WebControls.Content.Load" />
 
             
 
@@ -405,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the server control is loaded into the <see
-             cref="T:System.Web.UI.Page" />
+            >Occurs when the server control is loaded into the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -437,8 +405,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Content.PreRender" />
+            >The <see cref="E:System.Web.UI.WebControls.Content.PreRender" />
 
             
 
@@ -448,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the server control is about to render to its containing <see
-             cref="T:System.Web.UI.Page" />
+            >Occurs when the server control is about to render to its containing <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -480,8 +446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.Content.Unload" />
+            >The <see cref="E:System.Web.UI.WebControls.Content.Unload" />
 
             
 

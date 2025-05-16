@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.BIND_OPTS" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.BIND_OPTS" />
 
         
 
@@ -190,7 +189,11 @@
           <para>Register the passed object as one of the objects that has been bound during a moniker operation and which should be released when it is complete.</para>
         </summary>
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,19 +233,26 @@
           <para>Register the given object pointer under the specified name in the internally-maintained table of object pointers.</para>
         </summary>
         <param name="pszKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to register <paramref
-           name="punk" />
+          The name to register <paramref name="punk" />
 
           
 
            with. </param
         >
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -274,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all the objects currently registered with the bind context by <see
-             cref="M:System.Runtime.InteropServices.UCOMIBindCtx.RegisterObjectBound(System.Object)" />
+            >Releases all the objects currently registered with the bind context by <see cref="M:System.Runtime.InteropServices.UCOMIBindCtx.RegisterObjectBound(System.Object)" />
 
             
 
@@ -312,7 +321,11 @@
           <para>Removes the object from the set of registered objects that need to be released.</para>
         </summary>
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -348,7 +361,11 @@
           <para>Revoke the registration of the object currently found under this key in the internally-maintained table of contextual object parameters, if any such key is currently registered.</para>
         </summary>
         <param name="pszKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

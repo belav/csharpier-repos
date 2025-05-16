@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A SessionParameter object is typically used in order to include the value of an <see
-         cref="T:System.Web.SessionState.HttpSessionState" />
+        >A SessionParameter object is typically used in order to include the value of an <see cref="T:System.Web.SessionState.HttpSessionState" />
 
         
 
-         variable in the Where clause of a database query. The <see
-         cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+         variable in the Where clause of a database query. The <see cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
 
         
 
-         property identifies the session variable from which the <see
-         cref="T:System.Web.UI.WebControls.SessionParameter" />
+         property identifies the session variable from which the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
         
 
@@ -41,13 +38,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Controls that bind data to a parameter by using a <see
-           cref="T:System.Web.UI.WebControls.SessionParameter" />
+          >Controls that bind data to a parameter by using a <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
           
 
-           object might throw an exception if the specified session variable is not set. To avoid this error (where appropriate), set the <see
-           cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+           object might throw an exception if the specified session variable is not set. To avoid this error (where appropriate), set the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
           
 
@@ -70,58 +65,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             object created with the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.#ctor" />
+             object created with the <see cref="M:System.Web.UI.WebControls.SessionParameter.#ctor" />
 
             
 
-             constructor is initialized with default values for all its properties. The <see
-             cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+             constructor is initialized with default values for all its properties. The <see cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
 
             
 
-             property is initialized to <see
-             cref="F:System.String.Empty" />
+             property is initialized to <see cref="F:System.String.Empty" />
 
             
 
-            . Additionally, the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Name" />
+            . Additionally, the <see cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
             
 
-             property is initialized to <see
-             cref="F:System.String.Empty" />
+             property is initialized to <see cref="F:System.String.Empty" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+            , the <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
-             property is initialized to <see
-             cref="F:System.TypeCode.Object" />
+             property is initialized to <see cref="F:System.TypeCode.Object" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+            , the <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Data.ParameterDirection.Input" />
+             property is initialized to <see cref="F:System.Data.ParameterDirection.Input" />
 
             
 
-            , and the <see
-             cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+            , and the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
             
 
@@ -131,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new unnamed instance of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >Initializes a new unnamed instance of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -158,33 +141,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.#ctor(System.Web.UI.WebControls.SessionParameter)" />
+            >The <see cref="M:System.Web.UI.WebControls.SessionParameter.#ctor(System.Web.UI.WebControls.SessionParameter)" />
 
             
 
-             constructor is a Protected copy constructor used to clone a <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+             constructor is a Protected copy constructor used to clone a <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             instance. The values of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+             instance. The values of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             object, including the <see
-             cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+             object, including the <see cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Parameter.Name" />
+            , <see cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+            , and <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
@@ -194,13 +171,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             class with the values of the instance specified by the <paramref
-             name="original" />
+             class with the values of the instance specified by the <paramref name="original" />
 
             
 
@@ -208,12 +183,15 @@
           >
         </summary>
         <param name="original">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.SessionParameter" />
+          A <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
           
 
@@ -239,13 +217,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Parameter.Type" />
+            >The <see cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+             and <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
@@ -255,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new named instance of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >Initializes a new named instance of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -264,24 +239,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="sessionField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.SessionState.HttpSessionState" />
+          The name of the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
           
 
-           name/value pair that the parameter object is bound to. The default is <see
-           cref="F:System.String.Empty" />
+           name/value pair that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
@@ -308,13 +289,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+            >The <see cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+             and <see cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
 
             
 
@@ -324,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new named and strongly typed instance of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >Initializes a new named and strongly typed instance of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -333,36 +311,45 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type that the parameter represents. The default is <see
-           cref="F:System.TypeCode.Object" />
+          The type that the parameter represents. The default is <see cref="F:System.TypeCode.Object" />
 
           
 
           . </param
         >
         <param name="sessionField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.SessionState.HttpSessionState" />
+          The name of the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
           
 
-           name/value pair that the parameter object is bound to. The default is <see
-           cref="F:System.String.Empty" />
+           name/value pair that the parameter object is bound to. The default is <see cref="F:System.String.Empty" />
 
           
 
@@ -388,18 +375,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.Clone" />
+            >The <see cref="M:System.Web.UI.WebControls.SessionParameter.Clone" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.#ctor(System.Web.UI.WebControls.SessionParameter)" />
+             method calls the <see cref="M:System.Web.UI.WebControls.SessionParameter.#ctor(System.Web.UI.WebControls.SessionParameter)" />
 
             
 
-             copy constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+             copy constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -409,8 +393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a duplicate of the current <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >Returns a duplicate of the current <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -420,8 +403,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >A <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -452,36 +434,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >The <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             object attempts to bind to the value of the session variable every time the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             object attempts to bind to the value of the session variable every time the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
              method is called. </para
           >
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
-             parameter is used by the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             parameter is used by the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method to retrieve the name/value pair that the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+             method to retrieve the name/value pair that the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             object binds to. The <paramref
-             name="control" />
+             object binds to. The <paramref name="control" />
 
             
 
@@ -491,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Updates and returns the value of the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+            >Updates and returns the value of the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
@@ -502,8 +477,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the updated and current value of the parameter. If the context or the request is null, the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+            >An object that represents the updated and current value of the parameter. If the context or the request is null, the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
@@ -511,17 +485,19 @@
           >
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Control" />
+          A <see cref="T:System.Web.UI.Control" />
 
           
 
-           that is associated with the Web Forms page where the <see
-           cref="T:System.Web.UI.WebControls.SessionParameter" />
+           that is associated with the Web Forms page where the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
           
 
@@ -549,38 +525,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+            >The <see cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
 
             
 
-             property identifies a name/value pair that is stored in the current session object associated with the Web browser. While the <see
-             cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+             property identifies a name/value pair that is stored in the current session object associated with the Web browser. While the <see cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
 
             
 
-             property identifies the name of the pair, the <see
-             cref="T:System.Web.UI.WebControls.SessionParameter" />
+             property identifies the name of the pair, the <see cref="T:System.Web.UI.WebControls.SessionParameter" />
 
             
 
-             binds to its corresponding value at run time. If the expected session string name/value pair is not found in the session, the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             binds to its corresponding value at run time. If the expected session string name/value pair is not found in the session, the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 
-             method binds the parameter to the value of the <see
-             cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+             method binds the parameter to the value of the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
             
 
-             property, if it is set. If the <see
-             cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+             property, if it is set. If the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
             
 
-             property is not set, the <see
-             cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+             property is not set, the <see cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
             
 

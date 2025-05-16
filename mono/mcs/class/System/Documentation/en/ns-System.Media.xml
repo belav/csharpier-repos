@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Media" />
+        >The <see cref="N:System.Media" />
 
         
 
@@ -18,8 +17,7 @@
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="T:System.Media.SoundPlayer" />
+            >A <see cref="T:System.Media.SoundPlayer" />
 
             
 
@@ -28,8 +26,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.Media.SystemSound" />
+            >A <see cref="T:System.Media.SystemSound" />
 
             
 
@@ -38,8 +35,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.Media.SystemSounds" />
+            >A <see cref="T:System.Media.SystemSounds" />
 
             
 

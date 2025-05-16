@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This collection holds instances of the add configuration element in the bypasslist configuration element. An add element specifies the address of a resource residing on a server. When an application requests a resource by using the <see
-         cref="T:System.Net.WebRequest" />
+        >This collection holds instances of the add configuration element in the bypasslist configuration element. An add element specifies the address of a resource residing on a server. When an application requests a resource by using the <see cref="T:System.Net.WebRequest" />
 
         
 
-         or <see
-         cref="T:System.Net.WebClient" />
+         or <see cref="T:System.Net.WebClient" />
 
         
 
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see
-             cref="T:System.Net.Configuration.BypassElementCollection" />
+            >Initializes an empty instance of the <see cref="T:System.Net.Configuration.BypassElementCollection" />
 
             
 
@@ -102,12 +99,15 @@
           <para>Adds an element to the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Configuration.BypassElement" />
+          The <see cref="T:System.Net.Configuration.BypassElement" />
 
           
 
@@ -167,8 +167,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.Configuration.BypassElement" />
+            >A <see cref="T:System.Net.Configuration.BypassElement" />
 
             
 
@@ -211,22 +210,22 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The key value of <paramref
-             name="element" />
+          <para>The key value of <paramref name="element" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Configuration.BypassElement" />
+          A <see cref="T:System.Net.Configuration.BypassElement" />
 
           
 
@@ -264,8 +263,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of <paramref
-             name="element" />
+            >The zero-based index of <paramref name="element" />
 
             
 
@@ -273,12 +271,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Configuration.BypassElement" />
+          A <see cref="T:System.Net.Configuration.BypassElement" />
 
           
 
@@ -375,12 +376,15 @@
           <para>Removes the specified configuration element from the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Configuration.BypassElement" />
+          The <see cref="T:System.Net.Configuration.BypassElement" />
 
           
 
@@ -413,7 +417,11 @@
           <para>Removes the element with the specified key.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -446,7 +454,11 @@
           <para>Removes the element at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

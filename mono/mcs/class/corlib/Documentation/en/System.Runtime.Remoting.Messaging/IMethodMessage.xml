@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A method message is used to send information to and from remote methods. For example, messages used for remote method calls implement the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+        >A method message is used to send information to and from remote methods. For example, messages used for remote method calls implement the <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
         
 
@@ -83,18 +82,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.Args" />
+            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.Args" />
 
             
 
-             property is redundant since the same functionality can be achieved through the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.ArgCount" />
+             property is redundant since the same functionality can be achieved through the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.ArgCount" />
 
             
 
-             and <see
-             cref="M:System.Runtime.Remoting.Messaging.IMethodMessage.GetArg(System.Int32)" />
+             and <see cref="M:System.Runtime.Remoting.Messaging.IMethodMessage.GetArg(System.Int32)" />
 
             
 
@@ -130,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a specific argument as an <see
-             cref="T:System.Object" />
+            >Gets a specific argument as an <see cref="T:System.Object" />
 
             
 
@@ -143,7 +138,11 @@
           <para>The argument passed to the method.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -180,7 +179,11 @@
           <para>The name of the specified argument passed to the method, or null if the current method is not implemented.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -270,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -318,13 +319,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All the current implementations of <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+            >All the current implementations of <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
-             return an array of <see
-             cref="T:System.Type" />
+             return an array of <see cref="T:System.Type" />
 
             
 
@@ -355,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the full <see
-             cref="T:System.Type" />
+            >Gets the full <see cref="T:System.Type" />
 
             
 

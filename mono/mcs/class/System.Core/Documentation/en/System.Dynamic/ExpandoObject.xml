@@ -37,38 +37,38 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The ExpandoObject class enables you to add and delete members of its instances at run time and also to set and get values of these members. This class supports dynamic binding, which enables you to use standard syntax like sampleObject.sampleMember instead of more complex syntax like sampleObject.GetAttribute("sampleMember").</para>
       <para
-        >The ExpandoObject class implements the standard Dynamic Language Runtime (DLR) interface <see
-         cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
+        >The ExpandoObject class implements the standard Dynamic Language Runtime (DLR) interface <see cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
         
 
-        , which enables you to share instances of the ExpandoObject class between languages that support the DLR interoperability model. For example, you can create an instance of the ExpandoObject class in C# and then pass it to an IronPython function. For more information, see <format
-         type="text/html">
+        , which enables you to share instances of the ExpandoObject class between languages that support the DLR interoperability model. For example, you can create an instance of the ExpandoObject class in C# and then pass it to an IronPython function. For more information, see <format type="text/html">
           <a href="f769a271-8aff-4bea-bfab-6160217ce23d">Dynamic Language Runtime Overview</a>
         </format>
 
         
 
          documentation on the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=141028">CodePlex</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=141028"
+          >CodePlex</see
+        >
 
         
 
          Web site, and <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=169157">Introducing the ExpandoObject</see>
+          cref="http://go.microsoft.com/fwlink/?LinkID=169157"
+          >Introducing the ExpandoObject</see
+        >
 
         
 
          on the C# Frequently Asked Questions Web site.</para
       >
       <para
-        >The ExpandoObject class is an implementation of the dynamic object concept that enables getting, setting, and invoking members. If you want to define types that have their own dynamic dispatch semantics, use the <see
-         cref="T:System.Dynamic.DynamicObject" />
+        >The ExpandoObject class is an implementation of the dynamic object concept that enables getting, setting, and invoking members. If you want to define types that have their own dynamic dispatch semantics, use the <see cref="T:System.Dynamic.DynamicObject" />
 
         
 
-         class. If you want to define how dynamic objects participate in the interoperability protocol and manage DLR fast dynamic dispatch caching, create your own implementation of the <see
-         cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
+         class. If you want to define how dynamic objects participate in the interoperability protocol and manage DLR fast dynamic dispatch caching, create your own implementation of the <see cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
         
 
@@ -78,8 +78,7 @@
         <h2>Creating an Instance</h2>
       </format>
       <para
-        >In C#, to enable late binding for an instance of the ExpandoObject class, you must use the dynamic keyword. For more information, see <format
-         type="text/html">
+        >In C#, to enable late binding for an instance of the ExpandoObject class, you must use the dynamic keyword. For more information, see <format type="text/html">
           <a href="3828989d-c967-4a51-b948-857ebc8fdf26"
             >Using Type Dynamic (C# Programming Guide)</a
           >
@@ -90,8 +89,7 @@
         .</para
       >
       <para
-        >In Visual Basic, dynamic operations are supported by late binding. For more information, see <format
-         type="text/html">
+        >In Visual Basic, dynamic operations are supported by late binding. For more information, see <format type="text/html">
           <a href="d6ff7f1e-b94f-4205-ab8d-5cfa91758724">Early and Late Binding</a>
         </format>
 
@@ -172,8 +170,7 @@ End Module</code>
       </format>
       <para>The ExpandoObject class implements the IDictionary&lt;String, Object&gt; interface. This enables enumeration of members added to the instance of the ExpandoObject class at run time. This can be useful if you do not know at compile time what members an instance might have.</para>
       <para
-        >The following code example shows how you can cast an instance of the ExpandoObject class to the <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        >The following code example shows how you can cast an instance of the ExpandoObject class to the <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
@@ -186,13 +183,11 @@ End Module</code>
         <h2>Receiving Notifications of Property Changes</h2>
       </format>
       <para
-        >The ExpandoObject class implements the <see
-         cref="T:System.ComponentModel.INotifyPropertyChanged" />
+        >The ExpandoObject class implements the <see cref="T:System.ComponentModel.INotifyPropertyChanged" />
 
         
 
-         interface and can raise a <see
-         cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+         interface and can raise a <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
 
         
 
@@ -634,8 +629,7 @@ End Module</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -672,8 +666,7 @@ End Module</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object of the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The object of the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -681,7 +674,11 @@ End Module</code>
           >
         </returns>
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

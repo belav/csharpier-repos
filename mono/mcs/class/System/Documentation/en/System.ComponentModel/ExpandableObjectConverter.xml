@@ -26,38 +26,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class adds support for properties on an object to the methods and properties provided by <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >This class adds support for properties on an object to the methods and properties provided by <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-        . To make a type of property expandable in the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        . To make a type of property expandable in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-        , specify this <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        , specify this <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         for standard implementations of <see
-         cref="M:System.ComponentModel.ExpandableObjectConverter.GetPropertiesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+         for standard implementations of <see cref="M:System.ComponentModel.ExpandableObjectConverter.GetPropertiesSupported(System.ComponentModel.ITypeDescriptorContext)" />
 
         
 
-         and <see
-         cref="M:System.ComponentModel.ExpandableObjectConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" />
+         and <see cref="M:System.ComponentModel.ExpandableObjectConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" />
 
         
 
-        . Mark child properties with the <see
-         cref="T:System.ComponentModel.NotifyParentPropertyAttribute" />
+        . Mark child properties with the <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" />
 
         
 
-         to ensure correct behavior in a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         to ensure correct behavior in a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -65,13 +58,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -79,13 +70,11 @@
         >
       </block>
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
 
@@ -119,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ExpandableObjectConverter" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ExpandableObjectConverter" />
 
             
 
@@ -156,31 +144,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para
-            >The <paramref
-             name="attributes" />
+            >The <paramref name="attributes" />
 
             
 
-             array will be used to filter the array. The <paramref
-             name="attributes" />
+             array will be used to filter the array. The <paramref name="attributes" />
 
             
 
-             can have a mix of <see
-             cref="T:System.Type" />
+             can have a mix of <see cref="T:System.Type" />
 
             
 
-             and <see
-             cref="T:System.Attribute" />
+             and <see cref="T:System.Attribute" />
 
             
 
@@ -189,13 +172,11 @@
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Type" />
+                >A <see cref="T:System.Type" />
 
                 
 
-                 object will be treated as a wildcard; it will match any property that has the <see
-                 cref="T:System.Type" />
+                 object will be treated as a wildcard; it will match any property that has the <see cref="T:System.Type" />
 
                 
 
@@ -204,8 +185,7 @@
             </item>
             <item>
               <para
-                >If a property does not have an <see
-                 cref="T:System.Attribute" />
+                >If a property does not have an <see cref="T:System.Attribute" />
 
                 
 
@@ -214,8 +194,7 @@
             </item>
             <item>
               <para
-                >If the attribute is an instance of <see
-                 cref="T:System.Attribute" />
+                >If the attribute is an instance of <see cref="T:System.Attribute" />
 
                 
 
@@ -224,13 +203,11 @@
             </item>
             <item>
               <para
-                >If a <see
-                 cref="T:System.Attribute" />
+                >If a <see cref="T:System.Attribute" />
 
                 
 
-                 instance is specified and it is the default property, it will be included in the returned array even if there is no instance of the <see
-                 cref="T:System.Attribute" />
+                 instance is specified and it is the default property, it will be included in the returned array even if there is no instance of the <see cref="T:System.Attribute" />
 
                 
 
@@ -246,8 +223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -255,36 +231,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that specifies the type of object to get the properties for. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Attribute" />
+          An array of type <see cref="T:System.Attribute" />
 
           
 
@@ -317,8 +302,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -332,8 +316,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true because <see
-             cref="M:System.ComponentModel.TypeConverter.GetProperties(System.Object)" />
+            >true because <see cref="M:System.ComponentModel.TypeConverter.GetProperties(System.Object)" />
 
             
 
@@ -341,12 +324,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

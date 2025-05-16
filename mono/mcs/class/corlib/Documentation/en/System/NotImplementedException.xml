@@ -34,18 +34,15 @@
 
         
 
-         uses the default <see
-         cref="M:System.Object.Equals(System.Object)" />
+         uses the default <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-         implementation, which supports reference equality. For a list of initial values for an instance of <see
-         cref="T:System.NotImplementedException" />
+         implementation, which supports reference equality. For a list of initial values for an instance of <see cref="T:System.NotImplementedException" />
 
         
 
-        , see the <see
-         cref="M:System.NotImplementedException.#ctor" />
+        , see the <see cref="M:System.NotImplementedException.#ctor" />
 
         
 
@@ -76,8 +73,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotImplementedException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotImplementedException" />
 
             
 
@@ -119,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotImplementedException" />
+            >Initializes a new instance of the <see cref="T:System.NotImplementedException" />
 
             
 
@@ -149,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotImplementedException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotImplementedException" />
 
             
 
@@ -192,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotImplementedException" />
+            >Initializes a new instance of the <see cref="T:System.NotImplementedException" />
 
             
 
@@ -201,7 +194,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotImplementedException" />
+            >Initializes a new instance of the <see cref="T:System.NotImplementedException" />
 
             
 
@@ -243,24 +239,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -292,26 +294,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotImplementedException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotImplementedException" />
 
             
 
@@ -353,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotImplementedException" />
+            >Initializes a new instance of the <see cref="T:System.NotImplementedException" />
 
             
 
@@ -362,19 +359,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

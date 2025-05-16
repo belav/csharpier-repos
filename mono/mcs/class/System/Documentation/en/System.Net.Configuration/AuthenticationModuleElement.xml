@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the type attribute of the <format
-         type="text/html">
+        >This class corresponds to the type attribute of the <format type="text/html">
           <a href="333c5fb0-a2ab-4db8-8531-a7fe37bb9b5b"
             >Add Element for AuthenticationModules (Network Settings)</a
           >
@@ -37,13 +36,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to specify modules registered to authenticate requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to specify modules registered to authenticate requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -74,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Net.Configuration.AuthenticationModuleElement.Type" />
+            >This constructor sets the <see cref="P:System.Net.Configuration.AuthenticationModuleElement.Type" />
 
             
 
@@ -85,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
             
 
@@ -117,8 +112,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="typeName" />
+            >The <paramref name="typeName" />
 
             
 
@@ -128,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.AuthenticationModuleElement" />
 
             
 
@@ -137,7 +130,11 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,8 +165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see
-             cref="P:System.Net.Configuration.AuthenticationModuleElement.Type" />
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.AuthenticationModuleElement.Type" />
 
             
 

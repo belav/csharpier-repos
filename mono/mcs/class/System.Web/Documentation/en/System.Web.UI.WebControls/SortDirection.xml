@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SortDirection" />
+        >The <see cref="T:System.Web.UI.WebControls.SortDirection" />
 
         
 
-         enumeration is used to represent the direction in which items are sorted. It is commonly used by properties (such as the <see
-         cref="P:System.Web.UI.WebControls.GridView.SortDirection" />
+         enumeration is used to represent the direction in which items are sorted. It is commonly used by properties (such as the <see cref="P:System.Web.UI.WebControls.GridView.SortDirection" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         property of the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 

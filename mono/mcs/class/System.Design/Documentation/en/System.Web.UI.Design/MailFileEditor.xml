@@ -16,74 +16,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.MailFileEditor" />
+        >The <see cref="T:System.Web.UI.Design.MailFileEditor" />
 
         
 
-         class is an <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         class is an <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-         object that can be used at design time to select and edit a mail file name as a string, and assign the string to a control property. For example, the <see
-         cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+         object that can be used at design time to select and edit a mail file name as a string, and assign the string to a control property. For example, the <see cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.Design.MailFileEditor" />
+         control uses the <see cref="T:System.Web.UI.Design.MailFileEditor" />
 
         
 
-         class at design time to set the value of the <see
-         cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
+         class at design time to set the value of the <see cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
         
 
          property.</para
       >
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.EditorAttribute" />
+        >Use the <see cref="T:System.ComponentModel.EditorAttribute" />
 
         
 
-         attribute to associate the <see
-         cref="T:System.Web.UI.Design.MailFileEditor" />
+         attribute to associate the <see cref="T:System.Web.UI.Design.MailFileEditor" />
 
         
 
-         with a property. When the associated property is edited in the design surface, the designer host calls the <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+         with a property. When the associated property is edited in the design surface, the designer host calls the <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
-         method. The <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+         method. The <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
-         method displays a dialog box for selecting a mail file name from a filtered list of files, and returns the file name that is selected by the user. The <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
+         method displays a dialog box for selecting a mail file name from a filtered list of files, and returns the file name that is selected by the user. The <see cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
 
         
 
          method indicates the display style of the user interface.</para
       >
       <para
-        >Derive a class from the <see
-         cref="T:System.Web.UI.Design.MailFileEditor" />
+        >Derive a class from the <see cref="T:System.Web.UI.Design.MailFileEditor" />
 
         
 
-         to define a custom editor for a mail file name property. For example, a derived class can override the <see
-         cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+         to define a custom editor for a mail file name property. For example, a derived class can override the <see cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
         
 
-         method, and display an <see
-         cref="T:System.Windows.Forms.OpenFileDialog" />
+         method, and display an <see cref="T:System.Windows.Forms.OpenFileDialog" />
 
         
 
@@ -108,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.MailFileEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.MailFileEditor" />
 
             
 

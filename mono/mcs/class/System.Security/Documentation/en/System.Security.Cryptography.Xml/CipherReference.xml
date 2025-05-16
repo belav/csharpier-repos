@@ -25,13 +25,11 @@
       <para>The actual encrypted data referenced by the &lt;CipherReference&gt; is obtained by the following process. The &lt;CipherReference&gt; URI property contains a Uniform Resource Identifier (URI) that is dereferenced. If the &lt;CipherReference&gt; element also contains a transform chain, the data resulting from dereferencing the URI is transformed as specified to produce the encrypted data. For example, if the encrypted data is base64-encoded within an XML document, the transforms would specify an XPath expression followed by a base64 decoding so the encrypted data can be extracted.</para>
       <para>The syntax of the URI and transforms is similar to that of XML digital signatures.  However, in XML digital signatures, both generation and validation processing start with the same source data and perform that transform in the same order. In XML encryption, the decrypting application has only the encrypted data and the specified transforms. The transforms are enumerated in the order necessary to obtain the encrypted data. </para>
       <para
-        >Note   By default, you cannot dereference cipher references from documents with unknown sources, such as files from a Web site, because the <see
-         cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" />
+        >Note   By default, you cannot dereference cipher references from documents with unknown sources, such as files from a Web site, because the <see cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" />
 
         
 
-         property is null. For example, when you attempt to decrypt a file containing a &lt;CipherReference&gt; element that references a file on the Web, a <see
-         cref="T:System.Security.SecurityException" />
+         property is null. For example, when you attempt to decrypt a file containing a &lt;CipherReference&gt; element that references a file on the Web, a <see cref="T:System.Security.SecurityException" />
 
         
 
@@ -65,13 +63,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
-             object that provides reference information for a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+             object that provides reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -81,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -110,13 +105,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
-             object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+             object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -137,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -146,7 +138,11 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -178,13 +174,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >This constructor creates a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
-             object using a Uniform Resource Identifier (URI) and transform chain to indicate the encrypted data. The object is then used to provide reference information for a <see
-             cref="T:System.Security.Cryptography.Xml.CipherData" />
+             object using a Uniform Resource Identifier (URI) and transform chain to indicate the encrypted data. The object is then used to provide reference information for a <see cref="T:System.Security.Cryptography.Xml.CipherData" />
 
             
 
@@ -194,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -203,7 +196,11 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of a <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >Returns the XML representation of a <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -246,8 +242,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -281,8 +276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to load an existing XML element into the <see
-             cref="T:System.Security.Cryptography.Xml.CipherReference" />
+            >Use this method to load an existing XML element into the <see cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
             
 
@@ -294,12 +288,15 @@
           <para>Loads XML information into the &lt;CipherReference&gt; element in XML encryption.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 

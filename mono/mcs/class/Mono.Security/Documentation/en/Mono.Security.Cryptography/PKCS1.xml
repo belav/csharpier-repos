@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -43,16 +45,14 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
             instance that has a private key </param
         >
         <param name="hash"
-          >a <see
-           cref="T:System.Security.Cryptography.HashAlgorithm" />
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
           
 
@@ -63,8 +63,7 @@
         <returns>the decrypted message</returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" />
+            >See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" />
 
             
 
@@ -93,8 +92,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -105,8 +103,7 @@
         <returns>the decrypted message </returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
 
             
 
@@ -136,8 +133,7 @@
       </Parameters>
       <Docs>
         <param name="hash"
-          >a <see
-           cref="T:System.Security.Cryptography.HashAlgorithm" />
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
           
 
@@ -173,24 +169,21 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
            instance</param
         >
         <param name="hash"
-          >a <see
-           cref="T:System.Security.Cryptography.HashAlgorithm" />
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
           
 
            required for the MGF</param
         >
         <param name="rng"
-          >a <see
-           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
 
           
 
@@ -201,8 +194,7 @@
         <returns>the encrypted message </returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
+            >See <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
 
             
 
@@ -232,16 +224,14 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
            instance</param
         >
         <param name="rng"
-          >a <see
-           cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
 
           
 
@@ -252,8 +242,7 @@
         <returns>the encrypted message</returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
 
             
 
@@ -301,8 +290,7 @@
       </Parameters>
       <Docs>
         <param name="x"
-          >the <see
-           cref="T:System.Int32" />
+          >the <see cref="T:System.Int32" />
 
           
 
@@ -334,8 +322,7 @@
       </Parameters>
       <Docs>
         <param name="hash"
-          >a <see
-           cref="T:System.Security.Cryptography.HashAlgorithm" />
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
           
 
@@ -347,8 +334,7 @@
         <returns>the mask</returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" />
+            >See <see cref="T:System.Security.Cryptography.PKCS1MaskGenerationMethod" />
 
             
 
@@ -399,8 +385,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -431,8 +416,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -463,8 +447,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -495,8 +478,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -528,16 +510,14 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >an <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >an <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
            instance that has a private key</param
         >
         <param name="hash"
-          >a <see
-           cref="T:System.Security.Cryptography.HashAlgorithm" />
+          >a <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
           
 
@@ -548,8 +528,7 @@
         <returns>the message signature </returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" />
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureFormatter" />
 
             
 
@@ -580,8 +559,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -594,8 +572,7 @@
         <returns>True if the signature can be verified, false otherwise.</returns>
         <remarks>
           <para
-            >See <see
-             cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" />
+            >See <see cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" />
 
             
 

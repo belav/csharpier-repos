@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used with <see
-         cref="M:System.Runtime.InteropServices.TypeLibConverter.ConvertAssemblyToTypeLib(System.Reflection.Assembly,System.String,System.Runtime.InteropServices.TypeLibExporterFlags,System.Runtime.InteropServices.ITypeLibExporterNotifySink)" />
+        >Used with <see cref="M:System.Runtime.InteropServices.TypeLibConverter.ConvertAssemblyToTypeLib(System.Reflection.Assembly,System.String,System.Runtime.InteropServices.TypeLibExporterFlags,System.Runtime.InteropServices.ITypeLibExporterNotifySink)" />
 
         
 
@@ -149,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When exporting type libraries, the .NET Framework resolves type name conflicts by decorating the type with the name of the namespace; for example, System.Windows.Forms.HorizontalAlignment is exported as System_Windows_Forms_HorizontalAlignment. When there is a conflict with the name of a type that is not visible from COM, the .NET Framework exports the undecorated name. Set the <see
-             cref="F:System.Runtime.InteropServices.TypeLibExporterFlags.OldNames" />
+            >When exporting type libraries, the .NET Framework resolves type name conflicts by decorating the type with the name of the namespace; for example, System.Windows.Forms.HorizontalAlignment is exported as System_Windows_Forms_HorizontalAlignment. When there is a conflict with the name of a type that is not visible from COM, the .NET Framework exports the undecorated name. Set the <see cref="F:System.Runtime.InteropServices.TypeLibExporterFlags.OldNames" />
 
             
 

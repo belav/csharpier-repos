@@ -47,8 +47,7 @@
   </Attributes>
   <Docs>
     <permission cref="T:System.Security.Permissions.ReflectionPermission"
-      >Requires permission to reflect non-public members of a type in loaded assemblies. See <see
-       cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+      >Requires permission to reflect non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
 
       
 
@@ -57,23 +56,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ConstructorInfo is used to discover the attributes of a constructor as well as to invoke a constructor. Objects are created by calling <see
-         cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+        >ConstructorInfo is used to discover the attributes of a constructor as well as to invoke a constructor. Objects are created by calling <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
         
 
-         on a ConstructorInfo returned by either the <see
-         cref="M:System.Type.GetConstructors" />
+         on a ConstructorInfo returned by either the <see cref="M:System.Type.GetConstructors" />
 
         
 
-         or <see
-         cref="M:System.Type.GetConstructor(System.Reflection.BindingFlags,System.Reflection.Binder,System.Reflection.CallingConventions,System.Type[],System.Reflection.ParameterModifier[])" />
+         or <see cref="M:System.Type.GetConstructor(System.Reflection.BindingFlags,System.Reflection.Binder,System.Reflection.CallingConventions,System.Type[],System.Reflection.ParameterModifier[])" />
 
         
 
-         method of a <see
-         cref="T:System.Type" />
+         method of a <see cref="T:System.Type" />
 
         
 
@@ -85,13 +80,11 @@
 
           
 
-           inherits from <see
-           cref="T:System.Reflection.MethodBase" />
+           inherits from <see cref="T:System.Reflection.MethodBase" />
 
           
 
-           several members, such as <see
-           cref="P:System.Reflection.MethodBase.IsGenericMethod" />
+           several members, such as <see cref="P:System.Reflection.MethodBase.IsGenericMethod" />
 
           
 
@@ -128,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -169,8 +161,7 @@
         <remarks>
           <para>This field is read-only.</para>
           <para
-            >This field is a <see
-             cref="T:System.String" />
+            >This field is a <see cref="T:System.String" />
 
             
 
@@ -180,8 +171,7 @@
           <block subset="none" type="note">
             <para
               >For more information on type
-      initializers, see <see
-               cref="F:System.Reflection.ConstructorInfo.TypeConstructorName" />
+      initializers, see <see cref="F:System.Reflection.ConstructorInfo.TypeConstructorName" />
 
               
 
@@ -223,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -232,7 +221,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -312,8 +305,7 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >The types of the elements of <paramref
-             name="parameters" />
+            >The types of the elements of <paramref name="parameters" />
 
             
 
@@ -334,8 +326,7 @@
           .Length does not equal the number of parameters required by the contract of the constructor reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to invoke non-public members of loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to invoke non-public members of loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
@@ -344,8 +335,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number, type, and order of elements in the <paramref
-             name="parameters" />
+            >The number, type, and order of elements in the <paramref name="parameters" />
 
             
 
@@ -354,8 +344,7 @@
           <para>Access restrictions are ignored for fully trusted code. That is, private constructors, methods, fields, and properties can be accessed and invoked using reflection whenever the code is fully trusted.</para>
           <block subset="none" type="note">
             <para
-              >To create an instance of a value type that has no instance constructors, use the <see
-               cref="M:System.Activator.CreateInstance(System.Type)" />
+              >To create an instance of a value type that has no instance constructors, use the <see cref="M:System.Activator.CreateInstance(System.Type)" />
 
               
 
@@ -365,18 +354,15 @@
           <para>This method is a convenience method for the following overloaded version, using default values. This method cannot be overridden.</para>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -398,7 +384,11 @@
           <para>An instance of the class associated with the constructor.</para>
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -437,13 +427,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException"
-          >The types of the elements of <paramref
-           name="parameters" />
+          >The types of the elements of <paramref name="parameters" />
 
           
 
-           do not match the types of the parameters accepted by the constructor reflected by the current instance, under the constraints of <paramref
-           name="binder" />
+           do not match the types of the parameters accepted by the constructor reflected by the current instance, under the constraints of <paramref name="binder" />
 
           
 
@@ -463,49 +451,56 @@
           .Length does not equal the number of parameters required by the contract of the constructor reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to invoke non-public members of loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to invoke non-public members of loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
           .</permission
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
-           name="binder" />
+          A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" />
 
           
 
            is null, then Binder.DefaultBinding is used. </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type Object used to match the number, order and type of the parameters for this constructor, under the constraints of <paramref
-           name="binder" />
+          An array of type Object used to match the number, order and type of the parameters for this constructor, under the constraints of <paramref name="binder" />
 
           
 
           . If this constructor does not require parameters, pass an array with zero elements, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. If this is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -514,8 +509,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number, type, and order of elements in the <paramref
-             name="parameters" />
+            >The number, type, and order of elements in the <paramref name="parameters" />
 
             
 
@@ -525,8 +519,7 @@
           <para>Access restrictions are ignored for fully trusted code. That is, private constructors, methods, fields, and properties can be accessed and invoked using reflection whenever the code is fully trusted.</para>
           <block subset="none" type="note">
             <para
-              >To create an instance of a value type that has no instance constructors, use the <see
-               cref="M:System.Activator.CreateInstance(System.Type)" />
+              >To create an instance of a value type that has no instance constructors, use the <see cref="M:System.Activator.CreateInstance(System.Type)" />
 
               
 
@@ -535,18 +528,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -568,48 +558,60 @@
           <para>An instance of the class associated with the constructor.</para>
         </returns>
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the BindingFlags values that specifies the type of binding. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
-           name="binder" />
+          A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" />
 
           
 
            is null, then Binder.DefaultBinding is used. </param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type Object used to match the number, order and type of the parameters for this constructor, under the constraints of <paramref
-           name="binder" />
+          An array of type Object used to match the number, order and type of the parameters for this constructor, under the constraints of <paramref name="binder" />
 
           
 
           . If this constructor does not require parameters, pass an array with zero elements, as in Object[] parameters = new Object[0]. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. If this is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -647,28 +649,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property overrides <see
-             cref="P:System.Reflection.MemberInfo.MemberType" />
+            >This property overrides <see cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
-            . Therefore, when you examine a set of <see
-             cref="T:System.Reflection.MemberInfo" />
+            . Therefore, when you examine a set of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects — for example, the array returned by <see
-             cref="Overload:System.Type.GetMembers" />
+             objects — for example, the array returned by <see cref="Overload:System.Type.GetMembers" />
 
             
 
-             — the <see
-             cref="P:System.Reflection.MemberInfo.MemberType" />
+             — the <see cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
-             property returns <see
-             cref="F:System.Reflection.MemberTypes.Constructor" />
+             property returns <see cref="F:System.Reflection.MemberTypes.Constructor" />
 
             
 
@@ -678,8 +675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.MemberTypes" />
+            >Gets a <see cref="T:System.Reflection.MemberTypes" />
 
             
 
@@ -713,8 +709,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >Indicates whether two <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -724,13 +719,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -738,24 +731,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Reflection.ConstructorInfo" />
+          The first <see cref="T:System.Reflection.ConstructorInfo" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Reflection.ConstructorInfo" />
+          The second <see cref="T:System.Reflection.ConstructorInfo" />
 
           
 
@@ -788,8 +787,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >Indicates whether two <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -799,13 +797,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -813,24 +809,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Reflection.ConstructorInfo" />
+          The first <see cref="T:System.Reflection.ConstructorInfo" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Reflection.ConstructorInfo" />
+          The second <see cref="T:System.Reflection.ConstructorInfo" />
 
           
 
@@ -892,13 +894,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Type" />
+            >Gets a <see cref="T:System.Type" />
 
             
 
-             object representing the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             object representing the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -908,13 +908,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
-             object representing the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+             object representing the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -950,8 +948,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -963,21 +960,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1082,13 +1091,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+             instance is cast to an <see cref="T:System.Runtime.InteropServices._ConstructorInfo" />
 
             
 
@@ -1098,8 +1105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
@@ -1111,70 +1117,83 @@
           <para>An instance of the type.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The instance that created this method.</param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Reflection.BindingFlags" />
+          One of the <see cref="T:System.Reflection.BindingFlags" />
 
           
 
            values that specifies the type of binding.</param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.Binder" />
+          A <see cref="T:System.Reflection.Binder" />
 
           
 
-           that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
-           name="binder" />
+           that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" />
 
           
 
-           is null, then <see
-           cref="P:System.Type.DefaultBinder" />
+           is null, then <see cref="P:System.Type.DefaultBinder" />
 
           
 
            is used.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
-           name="binder" />
+          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />
 
           
 
           . If this constructor does not require parameters, pass an array with zero elements. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. If this is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -1208,13 +1227,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+             instance is cast to an <see cref="T:System.Runtime.InteropServices._ConstructorInfo" />
 
             
 
@@ -1224,8 +1241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Object[])" />
 
             
 
@@ -1237,19 +1253,26 @@
           <para>An instance of the type.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The instance that created this method.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
-           name="binder" />
+          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />
 
           
 
@@ -1285,13 +1308,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+             instance is cast to an <see cref="T:System.Runtime.InteropServices._ConstructorInfo" />
 
             
 
@@ -1301,8 +1322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
             
 
@@ -1314,63 +1334,72 @@
           <para>An instance of the type.</para>
         </returns>
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Reflection.BindingFlags" />
+          One of the <see cref="T:System.Reflection.BindingFlags" />
 
           
 
            values that specifies the type of binding.</param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.Binder" />
+          A <see cref="T:System.Reflection.Binder" />
 
           
 
-           that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
-           name="binder" />
+           that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref name="binder" />
 
           
 
-           is null, then <see
-           cref="P:System.Type.DefaultBinder" />
+           is null, then <see cref="P:System.Type.DefaultBinder" />
 
           
 
            is used.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
-           name="binder" />
+          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />
 
           
 
           . If this constructor does not require parameters, pass an array with zero elements. Any object in this array that is not explicitly initialized with a value will contain the default value for that object type. For reference-type elements, this value is null. For value-type elements, this value is 0, 0.0, or false, depending on the specific element type.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           used to govern the coercion of types. If this is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           used to govern the coercion of types. If this is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -1403,13 +1432,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Runtime.InteropServices._ConstructorInfo" />
+             instance is cast to an <see cref="T:System.Runtime.InteropServices._ConstructorInfo" />
 
             
 
@@ -1419,8 +1446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.Reflection.ConstructorInfo.Invoke(System.Object[])" />
 
             
 
@@ -1432,12 +1458,15 @@
           <para>An instance of the type.</para>
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref
-           name="binder" />
+          An array of objects used to match the number, order, and type of the parameters for this constructor, under the constraints of <paramref name="binder" />
 
           
 
@@ -1475,8 +1504,7 @@
         <remarks>
           <para>This field is read-only.</para>
           <para
-            >This field is a <see
-             cref="T:System.String" />
+            >This field is a <see cref="T:System.String" />
 
             
 

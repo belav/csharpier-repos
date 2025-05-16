@@ -21,7 +21,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -35,70 +37,59 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
 
         
 
          class represents the C14N XML canonicalization transform that describes the canonical form of an XML document.  This transform allows a signer to create a digest using the canonical form of an XML document.  A recipient can then verify the digital signature using the same canonical form of the XML document with the same transform.         </para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
 
         
 
          class when you need to sign an XML document that contains comments.</para
       >
       <para
-        >Note that you cannot directly create a new instance of a canonicalization transform class.  To specify a canonicalization transform, pass the Uniform Resource Identifier (URI) that describes the transform to the <see
-         cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
+        >Note that you cannot directly create a new instance of a canonicalization transform class.  To specify a canonicalization transform, pass the Uniform Resource Identifier (URI) that describes the transform to the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethod" />
 
         
 
-         property, which is accessible from the <see
-         cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+         property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
 
         
 
-         property.  To acquire a reference to the canonicalization transform, use the <see
-         cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" />
+         property.  To acquire a reference to the canonicalization transform, use the <see cref="P:System.Security.Cryptography.Xml.SignedInfo.CanonicalizationMethodObject" />
 
         
 
-         property, which is accessible from the <see
-         cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+         property, which is accessible from the <see cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
 
         
 
          property.  </para
       >
       <para
-        >The URI that describes the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NWithCommentsTransform" />
+        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NWithCommentsTransform" />
 
         
 
-         class is defined by the <see
-         cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
+         class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
 
         
 
          field.  </para
       >
       <para
-        >The URI that describes the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+        >The URI that describes the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
 
         
 
-         class is defined by the <see
-         cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NWithCommentsTransformUrl" />
+         class is defined by the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NWithCommentsTransformUrl" />
 
         
 
-         field and the <see
-         cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationWithCommentsUrl" />
+         field and the <see cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationWithCommentsUrl" />
 
         
 
@@ -131,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
 
             
 

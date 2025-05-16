@@ -49,13 +49,11 @@
 
         
 
-         implements the <see
-         cref="M:System.IDisposable.Dispose" />
+         implements the <see cref="M:System.IDisposable.Dispose" />
 
         
 
-         pattern. See <format
-         type="text/html">
+         pattern. See <format type="text/html">
           <a href="31a6c13b-d6a2-492b-9a9f-e5238c983bcb"
             >Implementing Finalize and Dispose to Clean Up Unmanaged Resources</a
           >
@@ -63,18 +61,15 @@
 
         
 
-        . When you derive from <see
-         cref="T:System.Threading.WaitHandle" />
+        . When you derive from <see cref="T:System.Threading.WaitHandle" />
 
         
 
-        , use the <see
-         cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+        , use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
 
         
 
-         property to store your native handle operating system handle. You do not need to override the protected <see
-         cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
+         property to store your native handle operating system handle. You do not need to override the protected <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
 
         
 
@@ -110,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.WaitHandle" />
+            >Initializes a new instance of the <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -142,21 +136,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is the public version of the <see
-             cref="M:System.IDisposable.Dispose" />
+            >This method is the public version of the <see cref="M:System.IDisposable.Dispose" />
 
             
 
-             method implemented to support the <see
-             cref="T:System.IDisposable" />
+             method implemented to support the <see cref="T:System.IDisposable" />
 
             
 
              interface.</para
           >
           <para
-            >This method releases any unmanaged resources held by the current instance. This method can, but is not required to, suppress finalization during garbage collection by calling the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >This method releases any unmanaged resources held by the current instance. This method can, but is not required to, suppress finalization during garbage collection by calling the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
@@ -168,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, releases all resources held by the current <see
-             cref="T:System.Threading.WaitHandle" />
+            >When overridden in a derived class, releases all resources held by the current <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -197,51 +187,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to the <see
-             cref="M:System.Threading.WaitHandle.Close" />
+            >This method is equivalent to the <see cref="M:System.Threading.WaitHandle.Close" />
 
             
 
-             method, but it can be called by using the <see
-             cref="T:System.IDisposable" />
+             method, but it can be called by using the <see cref="T:System.IDisposable" />
 
             
 
              interface.</para
           >
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Threading.WaitHandle" />
+            >Call Dispose when you are finished using the <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Threading.WaitHandle" />
+            . The Dispose method leaves the <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Threading.WaitHandle" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Threading.WaitHandle" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Threading.WaitHandle" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -251,13 +233,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Threading.WaitHandle" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Threading.WaitHandle" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Threading.WaitHandle" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Threading.WaitHandle" />
 
               
 
@@ -268,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Threading.WaitHandle" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -307,21 +286,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the WaitHandle.Dispose() method and the Finalize method. Dispose() invokes this protected method with the <paramref
-             name="explicitDisposing" />
+            >This method is called by the WaitHandle.Dispose() method and the Finalize method. Dispose() invokes this protected method with the <paramref name="explicitDisposing" />
 
             
 
-             parameter set to true. Finalize invokes Dispose with <paramref
-             name="explicitDisposing" />
+             parameter set to true. Finalize invokes Dispose with <paramref name="explicitDisposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="explicitDisposing" />
+            >When the <paramref name="explicitDisposing" />
 
             
 
@@ -332,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, releases the unmanaged resources used by the <see
-             cref="T:System.Threading.WaitHandle" />
+            >When overridden in a derived class, releases the unmanaged resources used by the <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -341,7 +316,11 @@
           >
         </summary>
         <param name="explicitDisposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -365,18 +344,15 @@
             <para>This member has been removed from the dnprdnext and subsequent versions. This topic applies only to the versions listed in "Version Information" later in this topic.</para>
           </block>
           <para
-            >Application code does not call this method; it is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled. For more information, see <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Application code does not call this method; it is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled. For more information, see <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Object.Finalize" />
+             and <see cref="M:System.Object.Finalize" />
 
             
 
-            . This method overrides <see
-             cref="M:System.Object.Finalize" />
+            . This method overrides <see cref="M:System.Object.Finalize" />
 
             
 
@@ -416,26 +392,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigning a new value to the <see
-             cref="P:System.Threading.WaitHandle.Handle" />
+            >Assigning a new value to the <see cref="P:System.Threading.WaitHandle.Handle" />
 
             
 
              property does not close the previous handle. This can result in a leaked handle. </para
           >
           <para
-            >Do not use this property in the .NET Framework version 2.0 or later; use the <see
-             cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+            >Do not use this property in the .NET Framework version 2.0 or later; use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
 
             
 
-             property instead. Setting this property to a valid handle also sets the <see
-             cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+             property instead. Setting this property to a valid handle also sets the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
 
             
 
-             property, but setting it to <see
-             cref="F:System.Threading.WaitHandle.InvalidHandle" />
+             property, but setting it to <see cref="F:System.Threading.WaitHandle.InvalidHandle" />
 
             
 
@@ -467,8 +439,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used internally to initialize the <see
-             cref="P:System.Threading.WaitHandle.Handle" />
+            >Used internally to initialize the <see cref="P:System.Threading.WaitHandle.Handle" />
 
             
 
@@ -512,23 +483,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you assign a new value to the <see
-             cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+            >When you assign a new value to the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
 
             
 
-             property, the previous handle will be closed when the previous <see
-             cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+             property, the previous handle will be closed when the previous <see cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
 
             
 
-             object is collected. Do not manually close the handle, because this results in an <see
-             cref="T:System.ObjectDisposedException" />
+             object is collected. Do not manually close the handle, because this results in an <see cref="T:System.ObjectDisposedException" />
 
             
 
-             when the <see
-             cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+             when the <see cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
 
             
 
@@ -539,13 +506,11 @@
 
             
 
-             implements the <see
-             cref="M:System.IDisposable.Dispose" />
+             implements the <see cref="M:System.IDisposable.Dispose" />
 
             
 
-             pattern. See <format
-             type="text/html">
+             pattern. See <format type="text/html">
               <a href="31a6c13b-d6a2-492b-9a9f-e5238c983bcb"
                 >Implementing Finalize and Dispose to Clean Up Unmanaged Resources</a
               >
@@ -553,18 +518,15 @@
 
             
 
-            . When you derive from <see
-             cref="T:System.Threading.WaitHandle" />
+            . When you derive from <see cref="T:System.Threading.WaitHandle" />
 
             
 
-            , use the <see
-             cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+            , use the <see cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
 
             
 
-             property to store your native handle operating system handle. You do not need to override the protected <see
-             cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
+             property to store your native handle operating system handle. You do not need to override the protected <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
 
             
 
@@ -603,18 +565,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation is not guaranteed to be atomic. After the current thread signals <paramref
-             name="toSignal" />
+            >This operation is not guaranteed to be atomic. After the current thread signals <paramref name="toSignal" />
 
             
 
-             but before it waits on <paramref
-             name="toWaitOn" />
+             but before it waits on <paramref name="toWaitOn" />
 
             
 
-            , a thread that is running on another processor might signal <paramref
-             name="toWaitOn" />
+            , a thread that is running on another processor might signal <paramref name="toWaitOn" />
 
             
 
@@ -624,8 +583,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals one <see
-             cref="T:System.Threading.WaitHandle" />
+            >Signals one <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -637,24 +595,30 @@
           <para>true if both the signal and the wait complete successfully; if the wait does not complete, the method does not return.</para>
         </returns>
         <param name="toSignal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
            to signal.</param
         >
         <param name="toWaitOn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
@@ -690,31 +654,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation is not guaranteed to be atomic. After the current thread signals <paramref
-             name="toSignal" />
+            >This operation is not guaranteed to be atomic. After the current thread signals <paramref name="toSignal" />
 
             
 
-             but before it waits on <paramref
-             name="toWaitOn" />
+             but before it waits on <paramref name="toWaitOn" />
 
             
 
-            , a thread that is running on another processor might signal <paramref
-             name="toWaitOn" />
+            , a thread that is running on another processor might signal <paramref name="toWaitOn" />
 
             
 
              or wait on it.</para
           >
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
-             is zero, the method does not block. It tests the state of the <paramref
-             name="toWaitOn" />
+             is zero, the method does not block. It tests the state of the <paramref name="toWaitOn" />
 
             
 
@@ -724,74 +683,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that does not derive from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that does not derive from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
 
             
 
@@ -801,8 +747,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals one <see
-             cref="T:System.Threading.WaitHandle" />
+            >Signals one <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -814,43 +759,56 @@
           <para>true if both the signal and the wait completed successfully, or false if the signal completed but the wait timed out.</para>
         </returns>
         <param name="toSignal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
            to signal.</param
         >
         <param name="toWaitOn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
            to wait on.</param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer that represents the interval to wait. If the value is <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          An integer that represents the interval to wait. If the value is <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
           , that is, -1, the wait is infinite.</param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -886,44 +844,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation is not guaranteed to be atomic. After the current thread signals <paramref
-             name="toSignal" />
+            >This operation is not guaranteed to be atomic. After the current thread signals <paramref name="toSignal" />
 
             
 
-             but before it waits on <paramref
-             name="toWaitOn" />
+             but before it waits on <paramref name="toWaitOn" />
 
             
 
-            , a thread that is running on another processor might signal <paramref
-             name="toWaitOn" />
+            , a thread that is running on another processor might signal <paramref name="toWaitOn" />
 
             
 
              or wait on it.</para
           >
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
-             is zero, the method does not block. It tests the state of the <paramref
-             name="toWaitOn" />
+             is zero, the method does not block. It tests the state of the <paramref name="toWaitOn" />
 
             
 
@@ -933,74 +884,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that does not derive from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that does not derive from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
 
             
 
@@ -1010,13 +948,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Signals one <see
-             cref="T:System.Threading.WaitHandle" />
+            >Signals one <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             and waits on another, specifying the time-out interval as a <see
-             cref="T:System.TimeSpan" />
+             and waits on another, specifying the time-out interval as a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1028,43 +964,56 @@
           <para>true if both the signal and the wait completed successfully, or false if the signal completed but the wait timed out.</para>
         </returns>
         <param name="toSignal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
            to signal.</param
         >
         <param name="toWaitOn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.WaitHandle" />
+          The <see cref="T:System.Threading.WaitHandle" />
 
           
 
            to wait on.</param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
            that represents the interval to wait. If the value is -1, the wait is infinite.</param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1083,13 +1032,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling Dispose allows the resources used by the <see
-             cref="T:System.Threading.WaitHandle" />
+            >Calling Dispose allows the resources used by the <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             to be reallocated for other purposes. For more information about Dispose, see <format
-             type="text/html">
+             to be reallocated for other purposes. For more information about Dispose, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
@@ -1101,8 +1048,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Threading.WaitHandle" />
+            >Releases all resources used by the <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -1146,18 +1092,15 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
-           or one or more elements in the <paramref
-           name="waitHandles " />
+           or one or more elements in the <paramref name="waitHandles " />
 
           
 
-           array is <see
-           langword="null" />
+           array is <see langword="null" />
 
           
 
@@ -1171,8 +1114,7 @@
           contains elements that are duplicates.</exception
         >
         <exception cref="T:System.NotSupportedException"
-          >The number of objects in <paramref
-           name="waitHandles " />
+          >The number of objects in <paramref name="waitHandles " />
 
           
 
@@ -1185,26 +1127,22 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
              method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
-             method returns when all the handles are signaled. On some implementations, if more than 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+             method returns when all the handles are signaled. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. If the array contains duplicates, the call fails with a <see
-             cref="T:System.DuplicateWaitObjectException" />
+             is thrown. If the array contains duplicates, the call fails with a <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -1212,13 +1150,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:System.Threading.WaitHandle.WaitAll" />
+              >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
               
 
-               method is not supported on threads that have <see
-               cref="T:System.STAThreadAttribute" />
+               method is not supported on threads that have <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -1226,23 +1162,19 @@
             >
           </block>
           <para
-            >Calling this method overload is equivalent to calling the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            >Calling this method overload is equivalent to calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method overload and specifying -1 (or <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             method overload and specifying -1 (or <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-            ) for <paramref
-             name="millisecondsTimeout" />
+            ) for <paramref name="millisecondsTimeout" />
 
             
 
-             and true for <paramref
-             name="exitContext" />
+             and true for <paramref name="exitContext" />
 
             
 
@@ -1256,8 +1188,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when every element in <paramref
-             name="waitHandles" />
+            >true when every element in <paramref name="waitHandles" />
 
             
 
@@ -1265,7 +1196,11 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1299,26 +1234,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
-             method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+             method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. If there are duplicates in the array, the call fails with a <see
-             cref="T:System.DuplicateWaitObjectException" />
+             is thrown. If there are duplicates in the array, the call fails with a <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -1326,13 +1257,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:System.Threading.WaitHandle.WaitAll" />
+              >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
               
 
-               method is not supported on threads that have <see
-               cref="T:System.STAThreadAttribute" />
+               method is not supported on threads that have <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -1340,13 +1269,11 @@
             >
           </block>
           <para
-            >Calling this method overload is the same as calling the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             overload and specifying false for <paramref
-             name="exitContext" />
+             overload and specifying false for <paramref name="exitContext" />
 
             
 
@@ -1356,8 +1283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for all the elements in the specified array to receive a signal, using an <see
-             cref="T:System.Int32" />
+            >Waits for all the elements in the specified array to receive a signal, using an <see cref="T:System.Int32" />
 
             
 
@@ -1367,8 +1293,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when every element in <paramref
-             name="waitHandles" />
+            >true when every element in <paramref name="waitHandles" />
 
             
 
@@ -1376,19 +1301,26 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates). </param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
@@ -1421,21 +1353,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
-             method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+             method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1443,13 +1372,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:System.Threading.WaitHandle.WaitAll" />
+              >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
               
 
-               method is not supported on threads that have <see
-               cref="T:System.STAThreadAttribute" />
+               method is not supported on threads that have <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -1457,26 +1384,22 @@
             >
           </block>
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
             .</para
           >
           <para
-            >Calling this method overload is the same as calling the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             overload and specifying false for <paramref
-             name="exitContext" />
+             overload and specifying false for <paramref name="exitContext" />
 
             
 
@@ -1486,8 +1409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for all the elements in the specified array to receive a signal, using a <see
-             cref="T:System.TimeSpan" />
+            >Waits for all the elements in the specified array to receive a signal, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1497,8 +1419,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when every element in <paramref
-             name="waitHandles" />
+            >true when every element in <paramref name="waitHandles" />
 
             
 
@@ -1506,24 +1427,30 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
-           that represents the number of milliseconds to wait, or a <see
-           cref="T:System.TimeSpan" />
+           that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" />
 
           
 
@@ -1558,8 +1485,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
@@ -1570,26 +1496,22 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
              method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
-             method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+             method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
-             is thrown. If there are duplicates in the array, the call fails with a <see
-             cref="T:System.DuplicateWaitObjectException" />
+             is thrown. If there are duplicates in the array, the call fails with a <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -1597,13 +1519,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:System.Threading.WaitHandle.WaitAll" />
+              >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
               
 
-               method is not supported on threads that have <see
-               cref="T:System.STAThreadAttribute" />
+               method is not supported on threads that have <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -1614,74 +1534,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that is not derived from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that is not derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has the <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has the <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-             attribute. In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             attribute. In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
@@ -1691,8 +1598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for all the elements in the specified array to receive a signal, using an <see
-             cref="T:System.Int32" />
+            >Waits for all the elements in the specified array to receive a signal, using an <see cref="T:System.Int32" />
 
             
 
@@ -1702,8 +1608,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when every element in <paramref
-             name="waitHandles" />
+            >true when every element in <paramref name="waitHandles" />
 
             
 
@@ -1711,26 +1616,37 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates). </param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
            (-1) to wait indefinitely. </param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1765,8 +1681,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
@@ -1777,21 +1692,18 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
              method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAll" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
             
 
-             method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+             method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1799,13 +1711,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:System.Threading.WaitHandle.WaitAll" />
+              >The <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
               
 
-               method is not supported on threads that have <see
-               cref="T:System.STAThreadAttribute" />
+               method is not supported on threads that have <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -1813,13 +1723,11 @@
             >
           </block>
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -1829,74 +1737,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that is not derived from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that is not derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             method. It returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+             method. It returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
@@ -1906,8 +1801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for all the elements in the specified array to receive a signal, using a <see
-             cref="T:System.TimeSpan" />
+            >Waits for all the elements in the specified array to receive a signal, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -1917,8 +1811,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true when every element in <paramref
-             name="waitHandles" />
+            >true when every element in <paramref name="waitHandles" />
 
             
 
@@ -1926,31 +1819,41 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
-           that represents the number of milliseconds to wait, or a <see
-           cref="T:System.TimeSpan" />
+           that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" />
 
           
 
            that represents -1 milliseconds, to wait indefinitely. </param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1994,18 +1897,15 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
-           or one or more elements in the <paramref
-           name="waitHandles " />
+           or one or more elements in the <paramref name="waitHandles " />
 
           
 
-           array is <see
-           langword="null" />
+           array is <see langword="null" />
 
           
 
@@ -2019,8 +1919,7 @@
           contains elements that are duplicates.</exception
         >
         <exception cref="T:System.NotSupportedException"
-          >The number of objects in <paramref
-           name="waitHandles " />
+          >The number of objects in <paramref name="waitHandles " />
 
           
 
@@ -2033,31 +1932,26 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
              method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
-             method throws an <see
-             cref="T:System.Threading.AbandonedMutexException" />
+             method throws an <see cref="T:System.Threading.AbandonedMutexException" />
 
             
 
-             only when the wait completes because of an abandoned mutex. If <paramref
-             name="waitHandles" />
+             only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" />
 
             
 
-             contains a released mutex with a lower index number than the abandoned mutex, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
@@ -2065,8 +1959,7 @@
           >
           <block subset="none" type="note">
             <para
-              >In versions of the .NET Framework earlier than version 2.0, if a thread exits or aborts without explicitly releasing a <see
-               cref="T:System.Threading.Mutex" />
+              >In versions of the .NET Framework earlier than version 2.0, if a thread exits or aborts without explicitly releasing a <see cref="T:System.Threading.Mutex" />
 
               
 
@@ -2074,31 +1967,26 @@
             >
           </block>
           <para
-            >This method returns when any handle is signaled. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+            >This method returns when any handle is signaled. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
              is thrown.</para
           >
           <para
-            >Calling this method overload is equivalent to calling the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            >Calling this method overload is equivalent to calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method overload and specifying -1 (or <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             method overload and specifying -1 (or <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-            ) for <paramref
-             name="millisecondsTimeout" />
+            ) for <paramref name="millisecondsTimeout" />
 
             
 
-             and true for <paramref
-             name="exitContext" />
+             and true for <paramref name="exitContext" />
 
             
 
@@ -2114,7 +2002,11 @@
           <para>The array index of the object that satisfied the wait.</para>
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2153,52 +2045,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
-             method throws an <see
-             cref="T:System.Threading.AbandonedMutexException" />
+             method throws an <see cref="T:System.Threading.AbandonedMutexException" />
 
             
 
-             only when the wait completes because of an abandoned mutex. If <paramref
-             name="waitHandles" />
+             only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" />
 
             
 
-             contains a released mutex with a lower index number than the abandoned mutex, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
              method completes normally and the exception is not thrown.</para
           >
           <para
-            >This method returns when the wait terminates, either when any of the handles are signaled or when a timeout occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+            >This method returns when the wait terminates, either when any of the handles are signaled or when a timeout occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
              is thrown.</para
           >
           <para
-            >Calling this method overload is the same as calling the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             overload and specifying false for <paramref
-             name="exitContext" />
+             overload and specifying false for <paramref name="exitContext" />
 
             
 
@@ -2212,13 +2096,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array index of the object that satisfied the wait, or <see
-             cref="F:System.Threading.WaitHandle.WaitTimeout" />
+            >The array index of the object that satisfied the wait, or <see cref="F:System.Threading.WaitHandle.WaitTimeout" />
 
             
 
-             if no object satisfied the wait and a time interval equivalent to <paramref
-             name="millisecondsTimeout" />
+             if no object satisfied the wait and a time interval equivalent to <paramref name="millisecondsTimeout" />
 
             
 
@@ -2226,19 +2108,26 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
@@ -2276,65 +2165,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
-             method throws an <see
-             cref="T:System.Threading.AbandonedMutexException" />
+             method throws an <see cref="T:System.Threading.AbandonedMutexException" />
 
             
 
-             only when the wait completes because of an abandoned mutex. If <paramref
-             name="waitHandles" />
+             only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" />
 
             
 
-             contains a released mutex with a lower index number than the abandoned mutex, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
              method completes normally and the exception is not thrown.</para
           >
           <para
-            >This method returns when the wait terminates, either when any of the handles are signaled or when a time-out occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+            >This method returns when the wait terminates, either when any of the handles are signaled or when a time-out occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
              is thrown.</para
           >
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
             .</para
           >
           <para
-            >Calling this method overload is the same as calling the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             overload and specifying false for <paramref
-             name="exitContext" />
+             overload and specifying false for <paramref name="exitContext" />
 
             
 
@@ -2344,8 +2223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for any of the elements in the specified array to receive a signal, using a <see
-             cref="T:System.TimeSpan" />
+            >Waits for any of the elements in the specified array to receive a signal, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -2355,13 +2233,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array index of the object that satisfied the wait, or <see
-             cref="F:System.Threading.WaitHandle.WaitTimeout" />
+            >The array index of the object that satisfied the wait, or <see cref="F:System.Threading.WaitHandle.WaitTimeout" />
 
             
 
-             if no object satisfied the wait and a time interval equivalent to <paramref
-             name="timeout" />
+             if no object satisfied the wait and a time interval equivalent to <paramref name="timeout" />
 
             
 
@@ -2369,24 +2245,30 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
-           that represents the number of milliseconds to wait, or a <see
-           cref="T:System.TimeSpan" />
+           that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" />
 
           
 
@@ -2426,8 +2308,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
@@ -2438,31 +2319,26 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
              method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
-             method throws an <see
-             cref="T:System.Threading.AbandonedMutexException" />
+             method throws an <see cref="T:System.Threading.AbandonedMutexException" />
 
             
 
-             only when the wait completes because of an abandoned mutex. If <paramref
-             name="waitHandles" />
+             only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" />
 
             
 
-             contains a released mutex with a lower index number than the abandoned mutex, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
@@ -2470,8 +2346,7 @@
           >
           <block subset="none" type="note">
             <para
-              >In versions of the .NET Framework earlier than version 2.0, if a thread exits or aborts without explicitly releasing a <see
-               cref="T:System.Threading.Mutex" />
+              >In versions of the .NET Framework earlier than version 2.0, if a thread exits or aborts without explicitly releasing a <see cref="T:System.Threading.Mutex" />
 
               
 
@@ -2479,8 +2354,7 @@
             >
           </block>
           <para
-            >This method returns when the wait terminates, either when any of the handles are signaled or when a timeout occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+            >This method returns when the wait terminates, either when any of the handles are signaled or when a timeout occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -2490,74 +2364,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that does not derive from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that does not derive from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
@@ -2571,13 +2432,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array index of the object that satisfied the wait, or <see
-             cref="F:System.Threading.WaitHandle.WaitTimeout" />
+            >The array index of the object that satisfied the wait, or <see cref="F:System.Threading.WaitHandle.WaitTimeout" />
 
             
 
-             if no object satisfied the wait and a time interval equivalent to <paramref
-             name="millisecondsTimeout" />
+             if no object satisfied the wait and a time interval equivalent to <paramref name="millisecondsTimeout" />
 
             
 
@@ -2585,26 +2444,37 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
            (-1) to wait indefinitely. </param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2644,8 +2514,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
@@ -2656,31 +2525,26 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
              method returns true if the wait completes because a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+            >The <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
-             method throws an <see
-             cref="T:System.Threading.AbandonedMutexException" />
+             method throws an <see cref="T:System.Threading.AbandonedMutexException" />
 
             
 
-             only when the wait completes because of an abandoned mutex. If <paramref
-             name="waitHandles" />
+             only when the wait completes because of an abandoned mutex. If <paramref name="waitHandles" />
 
             
 
-             contains a released mutex with a lower index number than the abandoned mutex, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitAny" />
+             contains a released mutex with a lower index number than the abandoned mutex, the <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
             
 
@@ -2688,8 +2552,7 @@
           >
           <block subset="none" type="note">
             <para
-              >In versions of the .NET Framework earlier than version 2.0, if a thread exits or aborts without explicitly releasing a <see
-               cref="T:System.Threading.Mutex" />
+              >In versions of the .NET Framework earlier than version 2.0, if a thread exits or aborts without explicitly releasing a <see cref="T:System.Threading.Mutex" />
 
               
 
@@ -2697,21 +2560,18 @@
             >
           </block>
           <para
-            >This method returns when the wait terminates, either when any of the handles are signaled or when a time-out occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
-             cref="T:System.NotSupportedException" />
+            >This method returns when the wait terminates, either when any of the handles are signaled or when a time-out occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see cref="T:System.NotSupportedException" />
 
             
 
              is thrown.</para
           >
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -2721,74 +2581,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that does not derive from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that does not derive from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
             
 
@@ -2798,8 +2645,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Waits for any of the elements in the specified array to receive a signal, using a <see
-             cref="T:System.TimeSpan" />
+            >Waits for any of the elements in the specified array to receive a signal, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -2809,13 +2655,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array index of the object that satisfied the wait, or <see
-             cref="F:System.Threading.WaitHandle.WaitTimeout" />
+            >The array index of the object that satisfied the wait, or <see cref="F:System.Threading.WaitHandle.WaitTimeout" />
 
             
 
-             if no object satisfied the wait and a time interval equivalent to <paramref
-             name="timeout" />
+             if no object satisfied the wait and a time interval equivalent to <paramref name="timeout" />
 
             
 
@@ -2823,31 +2667,41 @@
           >
         </returns>
         <param name="waitHandles">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
-           that represents the number of milliseconds to wait, or a <see
-           cref="T:System.TimeSpan" />
+           that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" />
 
           
 
            that represents -1 milliseconds to wait indefinitely. </param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2883,34 +2737,29 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
             
 
              method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The caller of this method blocks indefinitely until the current instance receives a signal. Use this method to block until a <see
-             cref="T:System.Threading.WaitHandle" />
+            >The caller of this method blocks indefinitely until the current instance receives a signal. Use this method to block until a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
-             cref="T:System.IAsyncResult" />
+             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" />
 
             
 
              interface.</para
           >
           <para
-            >Calling this method overload is equivalent to calling the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+            >Calling this method overload is equivalent to calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             method overload and specifying -1 or <see
-             cref="F:System.Threading.Timeout.Infinite" />
+             method overload and specifying -1 or <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
@@ -2921,8 +2770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see
-             cref="T:System.Threading.WaitHandle" />
+            >Blocks the current thread until the current <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -2932,8 +2780,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current instance receives a signal. If the current instance is never signaled, <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+            >true if the current instance receives a signal. If the current instance is never signaled, <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
@@ -2967,21 +2814,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
              is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
           >
           <para
-            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see
-             cref="T:System.Threading.WaitHandle" />
+            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
-             cref="T:System.IAsyncResult" />
+             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" />
 
             
 
@@ -2989,13 +2833,11 @@
           >
           <para>Override this method to customize the behavior of derived classes.</para>
           <para
-            >Calling this method overload is the same as calling the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             overload and specifying false for <paramref
-             name="exitContext" />
+             overload and specifying false for <paramref name="exitContext" />
 
             
 
@@ -3005,8 +2847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see
-             cref="T:System.Threading.WaitHandle" />
+            >Blocks the current thread until the current <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -3018,12 +2859,15 @@
           <para>true if the current instance receives a signal; otherwise, false.</para>
         </returns>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
@@ -3052,21 +2896,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
              is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
           >
           <para
-            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see
-             cref="T:System.Threading.WaitHandle" />
+            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
-             cref="T:System.IAsyncResult" />
+             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" />
 
             
 
@@ -3074,26 +2915,22 @@
           >
           <para>Override this method to customize the behavior of derived classes.</para>
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
             .</para
           >
           <para
-            >Calling this method overload is the same as calling the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+            >Calling this method overload is the same as calling the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
             
 
-             overload and specifying false for <paramref
-             name="exitContext" />
+             overload and specifying false for <paramref name="exitContext" />
 
             
 
@@ -3103,8 +2940,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current instance receives a signal, using a <see
-             cref="T:System.TimeSpan" />
+            >Blocks the current thread until the current instance receives a signal, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -3116,17 +2952,19 @@
           <para>true if the current instance receives a signal; otherwise, false.</para>
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
-           that represents the number of milliseconds to wait, or a <see
-           cref="T:System.TimeSpan" />
+           that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" />
 
           
 
@@ -3160,8 +2998,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="millisecondsTimeout" />
+            >If <paramref name="millisecondsTimeout" />
 
             
 
@@ -3172,21 +3009,18 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
             
 
              method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see
-             cref="T:System.Threading.WaitHandle" />
+            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
-             cref="T:System.IAsyncResult" />
+             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" />
 
             
 
@@ -3197,74 +3031,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that does not derive from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that does not derive from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
@@ -3274,8 +3095,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current <see
-             cref="T:System.Threading.WaitHandle" />
+            >Blocks the current thread until the current <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -3287,19 +3107,26 @@
           <para>true if the current instance receives a signal; otherwise, false.</para>
         </returns>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of milliseconds to wait, or <see
-           cref="F:System.Threading.Timeout.Infinite" />
+          The number of milliseconds to wait, or <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
            (-1) to wait indefinitely. </param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3333,8 +3160,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="timeout" />
+            >If <paramref name="timeout" />
 
             
 
@@ -3345,21 +3171,18 @@
 
             
 
-             is new in the .NET Framework version 2.0. In previous versions, the <see
-             cref="Overload:System.Threading.WaitHandle.WaitOne" />
+             is new in the .NET Framework version 2.0. In previous versions, the <see cref="Overload:System.Threading.WaitHandle.WaitOne" />
 
             
 
              method returns true when a mutex is abandoned. An abandoned mutex often indicates a serious coding error. In the case of a system-wide mutex, it might indicate that an application has been terminated abruptly (for example, by using Windows Task Manager). The exception contains information useful for debugging. </para
           >
           <para
-            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see
-             cref="T:System.Threading.WaitHandle" />
+            >The caller of this method blocks until the current instance receives a signal or a time-out occurs. Use this method to block until a <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
-             cref="T:System.IAsyncResult" />
+             receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see cref="T:System.IAsyncResult" />
 
             
 
@@ -3367,13 +3190,11 @@
           >
           <para>Override this method to customize the behavior of derived classes.</para>
           <para
-            >The maximum value for <paramref
-             name="timeout" />
+            >The maximum value for <paramref name="timeout" />
 
             
 
-             is <see
-             cref="F:System.Int32.MaxValue" />
+             is <see cref="F:System.Int32.MaxValue" />
 
             
 
@@ -3383,74 +3204,61 @@
             <h2>Notes on Exiting the Context</h2>
           </format>
           <para
-            >The <paramref
-             name="exitContext" />
+            >The <paramref name="exitContext" />
 
             
 
-             parameter has no effect unless the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+             parameter has no effect unless the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
             
 
-             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see
-             cref="T:System.ContextBoundObject" />
+             method is called from inside a nondefault managed context. This can happen if your thread is inside a call to an instance of a class derived from <see cref="T:System.ContextBoundObject" />
 
             
 
-            . Even if you are currently executing a method on a class that does not derive from <see
-             cref="T:System.ContextBoundObject" />
+            . Even if you are currently executing a method on a class that does not derive from <see cref="T:System.ContextBoundObject" />
 
             
 
-            , like <see
-             cref="T:System.String" />
+            , like <see cref="T:System.String" />
 
             
 
-            , you can be in a nondefault context if a <see
-             cref="T:System.ContextBoundObject" />
+            , you can be in a nondefault context if a <see cref="T:System.ContextBoundObject" />
 
             
 
              is on your stack in the current application domain.</para
           >
           <para
-            >When your code is executing in a nondefault context, specifying true for <paramref
-             name="exitContext" />
+            >When your code is executing in a nondefault context, specifying true for <paramref name="exitContext" />
 
             
 
-             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+             causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
             
 
-             method. The thread returns to the original nondefault context after the call to the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+             method. The thread returns to the original nondefault context after the call to the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
             
 
              method completes.</para
           >
           <para
-            >This can be useful when the context-bound class has <see
-             cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
+            >This can be useful when the context-bound class has <see cref="T:System.Runtime.Remoting.Contexts.SynchronizationAttribute" />
 
             
 
-            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+            . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
             
 
-             method and specifies true for <paramref
-             name="exitContext" />
+             method and specifies true for <paramref name="exitContext" />
 
             
 
-            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+            , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
             
 
@@ -3460,8 +3268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Blocks the current thread until the current instance receives a signal, using a <see
-             cref="T:System.TimeSpan" />
+            >Blocks the current thread until the current instance receives a signal, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -3473,24 +3280,30 @@
           <para>true if the current instance receives a signal; otherwise, false.</para>
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
-           that represents the number of milliseconds to wait, or a <see
-           cref="T:System.TimeSpan" />
+           that represents the number of milliseconds to wait, or a <see cref="T:System.TimeSpan" />
 
           
 
            that represents -1 milliseconds to wait indefinitely. </param
         >
         <param name="exitContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3522,8 +3335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that a <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            >Indicates that a <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 

@@ -22,51 +22,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ParameterCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
         
 
-         class represents a collection of <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         class represents a collection of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         objects used in advanced data-binding scenarios with data source controls. The <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         objects used in advanced data-binding scenarios with data source controls. The <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         objects are used to bind the values contained by local <see
-         cref="T:System.Web.UI.Page" />
+         objects are used to bind the values contained by local <see cref="T:System.Web.UI.Page" />
 
         
 
          variables, HTTP cookies, session variables, and other controls' values to data source controls when retrieving, updating, deleting, and inserting data. </para
       >
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.ParameterCollection" />
+        >Use the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
         
 
-         class to programmatically manage a set of <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         class to programmatically manage a set of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         objects. You can add, insert, and remove <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         objects. You can add, insert, and remove <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         objects using the appropriate methods of the <see
-         cref="T:System.Web.UI.WebControls.ParameterCollection" />
+         objects using the appropriate methods of the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
         
 
-         class. To programmatically retrieve <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         class. To programmatically retrieve <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
@@ -75,8 +66,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the indexer to get a single <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Use the indexer to get a single <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -85,13 +75,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+            >Use the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
-             method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+             method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -100,61 +88,50 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="P:System.Web.UI.StateManagedCollection.Count" />
+        >The <see cref="P:System.Web.UI.StateManagedCollection.Count" />
 
         
 
-         property specifies the total number of items in the collection, and is used to determine the upper bound of the collection. You can add and remove items from the collection by using the <see
-         cref="Overload:System.Web.UI.WebControls.ParameterCollection.Add" />
+         property specifies the total number of items in the collection, and is used to determine the upper bound of the collection. You can add and remove items from the collection by using the <see cref="Overload:System.Web.UI.WebControls.ParameterCollection.Add" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
+        , <see cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
+        , <see cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
 
         
 
-        , and <see
-         cref="M:System.Web.UI.WebControls.ParameterCollection.RemoveAt(System.Int32)" />
+        , and <see cref="M:System.Web.UI.WebControls.ParameterCollection.RemoveAt(System.Int32)" />
 
         
 
          methods.</para
       >
       <para
-        >Depending on the implementation and the semantics of a particular data source control, the order in which the parameters are stored in the <see
-         cref="T:System.Web.UI.WebControls.ParameterCollection" />
+        >Depending on the implementation and the semantics of a particular data source control, the order in which the parameters are stored in the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
         
 
-         collection might be important. For example, when using the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         collection might be important. For example, when using the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-         control as an ODBC data source, the order of the <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         control as an ODBC data source, the order of the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         objects in the <see
-         cref="T:System.Web.UI.WebControls.ParameterCollection" />
+         objects in the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
         
 
-         collection must be the same as the order of the parameters in the parameterized SQL queries you use. However, when using the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         collection must be the same as the order of the parameters in the parameterized SQL queries you use. However, when using the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-         control with Microsoft SQL Server, the order of the <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         control with Microsoft SQL Server, the order of the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
@@ -162,8 +139,7 @@
       >
       <block subset="none" type="note">
         <para
-          >When you use data source controls, values are inserted into command parameters without validation, which is a potential security threat. Use an event in the data source control to validate parameter values before the command is executed. For more information, see <format
-           type="text/html">
+          >When you use data source controls, values are inserted into command parameters without validation, which is a potential security threat. Use an event in the data source control to validate parameter values before the command is executed. For more information, see <format type="text/html">
             <a href="772c7312-211a-4eb3-8d6e-eec0aa1dcc07">Script Exploits Overview</a>
           </format>
 
@@ -192,8 +168,7 @@
           </term>
           <description>
             <para
-              >The base parameter class. Use it to bind to a local variable or any static string using the <see
-               cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+              >The base parameter class. Use it to bind to a local variable or any static string using the <see cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
               
 
@@ -266,13 +241,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.Parameter" />
+         and <see cref="T:System.Web.UI.WebControls.Parameter" />
 
         
 
@@ -315,23 +288,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Add(System.Web.UI.WebControls.Parameter)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Add(System.Web.UI.WebControls.Parameter)" />
 
             
 
-             method to append a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             method to append a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object to the end of the collection. This implementation of the method takes the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             object to the end of the collection. This implementation of the method takes the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object specified by the <paramref
-             name="param" />
+             object specified by the <paramref name="param" />
 
             
 
@@ -341,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -373,28 +341,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Add(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Add(System.String,System.String)" />
 
             
 
-             method to create and append a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             method to create and append a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object with a default value to the end of the collection. This implementation of the method creates the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             object with a default value to the end of the collection. This implementation of the method creates the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object using the name and default value specified by the <paramref
-             name="name" />
+             object using the name and default value specified by the <paramref name="name" />
 
             
 
-             and <paramref
-             name="value" />
+             and <paramref name="value" />
 
             
 
@@ -404,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -417,14 +379,22 @@
           <para>The index value of the added item.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -454,33 +424,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Add(System.String,System.TypeCode,System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Add(System.String,System.TypeCode,System.String)" />
 
             
 
-             method to create and append a strongly typed <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             method to create and append a strongly typed <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object with a default value to the end of the collection. This implementation of the method creates the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             object with a default value to the end of the collection. This implementation of the method creates the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object using the name, type and value specified by the <paramref
-             name="name" />
+             object using the name, type and value specified by the <paramref name="name" />
 
             
 
-            , <paramref
-             name="type" />
+            , <paramref name="type" />
 
             
 
-             and <paramref
-             name="value" />
+             and <paramref name="value" />
 
             
 
@@ -490,13 +454,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object with the specified name, <see
-             cref="T:System.TypeCode" />
+             object with the specified name, <see cref="T:System.TypeCode" />
 
             
 
@@ -508,21 +470,33 @@
           <para>The index value of the added item.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the parameter.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -551,13 +525,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine whether a specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Use this method to determine whether a specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object is in the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object is in the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -567,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+            >Determines whether the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -578,13 +549,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object is found in the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+            >true if the object is found in the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
-            ; otherwise, false. If null is passed for the <paramref
-             name="value" />
+            ; otherwise, false. If null is passed for the <paramref name="value" />
 
             
 
@@ -618,12 +587,15 @@
           <para>Copies a specified index of a parameter array to the parameter collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The integer index of the <paramref
-           name="parameterArray" />
+          The integer index of the <paramref name="parameterArray" />
 
           
 
@@ -649,23 +621,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.CreateKnownType(System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.CreateKnownType(System.Int32)" />
 
             
 
-             method creates an instance of a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             method creates an instance of a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object according to the index of the <see
-             cref="T:System.Type" />
+             object according to the index of the <see cref="T:System.Type" />
 
             
 
-             returned by the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.GetKnownTypes" />
+             returned by the <see cref="M:System.Web.UI.WebControls.ParameterCollection.GetKnownTypes" />
 
             
 
@@ -757,8 +725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a default <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Creates an instance of a default <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -768,8 +735,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A default instance of a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >A default instance of a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -794,13 +760,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Gets an array of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             types that the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             types that the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -810,13 +774,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ordered array of <see
-             cref="T:System.Type" />
+            >An ordered array of <see cref="T:System.Type" />
 
             
 
-             objects that identify the types of <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             objects that identify the types of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -846,51 +808,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
-             parameter is used by <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             parameter is used by <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             objects contained in the collection to retrieve the <see
-             cref="T:System.Web.UI.Page" />
+             objects contained in the collection to retrieve the <see cref="T:System.Web.UI.Page" />
 
             
 
-             and current <see
-             cref="T:System.Web.HttpRequest" />
+             and current <see cref="T:System.Web.HttpRequest" />
 
             
 
-             object that the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             object that the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
              object binds to.</para
           >
           <para
-            >Because the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+            >Because the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             object must have uniquely named entries but the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object must have uniquely named entries but the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
-             collection does not require or guarantee unique <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             collection does not require or guarantee unique <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object names, the implementation of this method appends a number to the end of each <see
-             cref="P:System.Web.UI.WebControls.Parameter.Name" />
+             object names, the implementation of this method appends a number to the end of each <see cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
             
 
@@ -900,8 +853,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an ordered collection of <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Gets an ordered collection of <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -911,8 +863,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+            >An <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
@@ -920,34 +871,38 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpRequest" />
+          The current <see cref="T:System.Web.HttpRequest" />
 
           
 
-           that the <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+           that the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
            binds to.</param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
-           instance that is passed to each parameter's <see
-           cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+           instance that is passed to each parameter's <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
           
 
@@ -976,8 +931,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine the index of a parameter in the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+            >Use this method to determine the index of a parameter in the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -987,13 +941,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Determines the index of a specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object in the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -1003,8 +955,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="parameter" />
+            >The index of <paramref name="parameter" />
 
             
 
@@ -1037,13 +988,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Inserts the specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object into the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object into the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -1113,18 +1062,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnClearComplete" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnClearComplete" />
 
             
 
-             method is called to perform additional processing after the <see
-             cref="M:System.Web.UI.StateManagedCollection.Clear" />
+             method is called to perform additional processing after the <see cref="M:System.Web.UI.StateManagedCollection.Clear" />
 
             
 
-             method completes. It calls the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
+             method completes. It calls the <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
 
             
 
@@ -1159,13 +1105,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnInsert(System.Int32,System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnInsert(System.Int32,System.Object)" />
 
             
 
-             method is called to perform additional processing before the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
+             method is called to perform additional processing before the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
 
             
 
@@ -1175,8 +1119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs before the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
+            >Occurs before the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
 
             
 
@@ -1184,17 +1127,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+          The <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
-           that is inserted into the <see
-           cref="T:System.Web.UI.WebControls.ParameterCollection" />
+           that is inserted into the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
           
 
@@ -1224,18 +1169,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnInsertComplete(System.Int32,System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnInsertComplete(System.Int32,System.Object)" />
 
             
 
-             method is called to perform additional processing after the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
+             method is called to perform additional processing after the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
 
             
 
-             method completes. It calls the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
+             method completes. It calls the <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
 
             
 
@@ -1245,8 +1187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
+            >Occurs after the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Insert(System.Int32,System.Web.UI.WebControls.Parameter)" />
 
             
 
@@ -1254,17 +1195,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+          The <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
-           that was inserted into the <see
-           cref="T:System.Web.UI.WebControls.ParameterCollection" />
+           that was inserted into the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
           
 
@@ -1293,8 +1236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
 
             
 
@@ -1302,12 +1244,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1336,18 +1281,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnRemoveComplete(System.Int32,System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnRemoveComplete(System.Int32,System.Object)" />
 
             
 
-             method is called to perform additional processing after the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
+             method is called to perform additional processing after the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
 
             
 
-             method completes. It calls the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
+             method completes. It calls the <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnParametersChanged(System.EventArgs)" />
 
             
 
@@ -1357,8 +1299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
+            >Occurs after the <see cref="M:System.Web.UI.WebControls.ParameterCollection.Remove(System.Web.UI.WebControls.Parameter)" />
 
             
 
@@ -1366,29 +1307,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in the collection that the <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+          The index in the collection that the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
            was removed from. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+          The <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
-           that was removed from the <see
-           cref="T:System.Web.UI.WebControls.ParameterCollection" />
+           that was removed from the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
           
 
@@ -1413,23 +1359,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.OnValidate(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.OnValidate(System.Object)" />
 
             
 
-             method determines whether the object specified in the <paramref
-             name="o" />
+             method determines whether the object specified in the <paramref name="o" />
 
             
 
-             parameter is a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             parameter is a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             instance. If not, it throws an <see
-             cref="T:System.ArgumentException" />
+             instance. If not, it throws an <see cref="T:System.ArgumentException" />
 
             
 
@@ -1441,7 +1383,11 @@
           <para>Performs additional custom processes when validating a value.</para>
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1463,21 +1409,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+            >If the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
-             collection is contained by a data source control, the <see
-             cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
+             collection is contained by a data source control, the <see cref="E:System.Web.UI.WebControls.ParameterCollection.ParametersChanged" />
 
             
 
              event raises the data source control's DataSourceChanged event, causing any data-bound controls to rebind.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1486,8 +1429,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+            >The <see cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
 
             
 
@@ -1497,8 +1439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when one or more <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Occurs when one or more <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -1528,13 +1469,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove the specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Use this method to remove the specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object from a <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object from a <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -1544,13 +1483,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object from the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -1577,13 +1514,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ParameterCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -1593,13 +1528,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Removes the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object at the specified index from the <see
-             cref="T:System.Web.UI.WebControls.ParameterCollection" />
+             object at the specified index from the <see cref="T:System.Web.UI.WebControls.ParameterCollection" />
 
             
 
@@ -1625,13 +1558,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ParameterCollection.SetDirtyObject(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ParameterCollection.SetDirtyObject(System.Object)" />
 
             
 
-             method is a helper function that is used to mark a <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             method is a helper function that is used to mark a <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -1644,8 +1575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the specified <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Marks the specified <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -1653,12 +1583,15 @@
           >
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+          The <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
@@ -1687,41 +1620,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="control" />
+            >The <paramref name="control" />
 
             
 
-             parameter is used by <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             parameter is used by <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             objects contained in the collection to retrieve the <see
-             cref="T:System.Web.UI.Page" />
+             objects contained in the collection to retrieve the <see cref="T:System.Web.UI.Page" />
 
             
 
-             and current <see
-             cref="T:System.Web.HttpRequest" />
+             and current <see cref="T:System.Web.HttpRequest" />
 
             
 
-             object that the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+             object that the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
              object binds to.</para
           >
           <para
-            >If the current value for the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >If the current value for the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
-             object is different from the value cached in view state, the <see
-             cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
+             object is different from the value cached in view state, the <see cref="M:System.Web.UI.WebControls.Parameter.OnParameterChanged" />
 
             
 
@@ -1731,8 +1657,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Iterates through the <see
-             cref="T:System.Web.UI.WebControls.Parameter" />
+            >Iterates through the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
             
 
@@ -1740,34 +1665,38 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The current <see
-           cref="T:System.Web.HttpRequest" />
+          The current <see cref="T:System.Web.HttpRequest" />
 
           
 
-           that the <see
-           cref="T:System.Web.UI.WebControls.Parameter" />
+           that the <see cref="T:System.Web.UI.WebControls.Parameter" />
 
           
 
            binds to.</param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
-           instance that is passed to each parameter's <see
-           cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+           instance that is passed to each parameter's <see cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
           
 

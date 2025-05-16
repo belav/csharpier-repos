@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The thread wait reason is only valid when the <see
-         cref="T:System.Diagnostics.ThreadState" />
+        >The thread wait reason is only valid when the <see cref="T:System.Diagnostics.ThreadState" />
 
         
 
-         is <see
-         cref="F:System.Diagnostics.ThreadState.Wait" />
+         is <see cref="F:System.Diagnostics.ThreadState.Wait" />
 
         
 

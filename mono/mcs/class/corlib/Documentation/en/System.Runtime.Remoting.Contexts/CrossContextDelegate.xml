@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Callbacks provide a facility to request execution of some code in another context. The <see
-         cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
+        >Callbacks provide a facility to request execution of some code in another context. The <see cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
 
         
 
-         class is defined for context callbacks. Each context has a callback object that can be used to perform callbacks on the context. The delegate used to request a callback through the callback object must be of the <see
-         cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
+         class is defined for context callbacks. Each context has a callback object that can be used to perform callbacks on the context. The delegate used to request a callback through the callback object must be of the <see cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
 
         
 

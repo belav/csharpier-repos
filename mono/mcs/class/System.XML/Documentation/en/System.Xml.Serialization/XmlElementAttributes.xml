@@ -25,33 +25,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlElementAttributes" />
+        >The <see cref="T:System.Xml.Serialization.XmlElementAttributes" />
 
         
 
-         is returned by the <see
-         cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
+         is returned by the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
 
         
 
-         property of the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         property of the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         class. By using the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         class. By using the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         class and the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         class and the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         class, you can override the default way that the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         class, you can override the default way that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -61,13 +55,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Xml.Serialization.XmlElementAttribute" />
+        >Represents a collection of <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
         
 
-         objects used by the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         objects used by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -95,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlElementAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlElementAttributes" />
 
             
 
@@ -131,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >Adds an <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
@@ -144,12 +134,15 @@
           <para>The zero-based index of the newly added item.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 
@@ -189,12 +182,15 @@
           <para>true if the object exists in the collection; otherwise, false.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 
@@ -229,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Xml.Serialization.XmlElementAttributes" />
+            >Copies the <see cref="T:System.Xml.Serialization.XmlElementAttributes" />
 
             
 
@@ -238,24 +233,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 
            array to hold the copied elements. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -289,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >Gets the index of the specified <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
@@ -300,8 +300,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >The zero-based index of the <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
@@ -309,12 +308,15 @@
           >
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 
@@ -349,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >Inserts an <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
@@ -358,19 +359,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index where the member is inserted. </param
         >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 
@@ -434,12 +442,15 @@
           <para>Removes the specified object from the collection.</para>
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlElementAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
           
 

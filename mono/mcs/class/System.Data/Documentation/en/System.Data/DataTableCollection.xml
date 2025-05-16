@@ -32,97 +32,80 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.DataTableCollection" />
+        >The <see cref="T:System.Data.DataTableCollection" />
 
         
 
-         contains all the <see
-         cref="T:System.Data.DataTable" />
+         contains all the <see cref="T:System.Data.DataTable" />
 
         
 
-         objects for a particular <see
-         cref="T:System.Data.DataSet" />
+         objects for a particular <see cref="T:System.Data.DataSet" />
 
         
 
-        . To access the <see
-         cref="T:System.Data.DataTableCollection" />
+        . To access the <see cref="T:System.Data.DataTableCollection" />
 
         
 
-         of a <see
-         cref="T:System.Data.DataSet" />
+         of a <see cref="T:System.Data.DataSet" />
 
         
 
-        , use the <see
-         cref="P:System.Data.DataSet.Tables" />
+        , use the <see cref="P:System.Data.DataSet.Tables" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.DataTableCollection" />
+        >The <see cref="T:System.Data.DataTableCollection" />
 
         
 
-         uses methods such as <see
-         cref="M:System.Data.DataTableCollection.Add(System.Data.DataTable)" />
+         uses methods such as <see cref="M:System.Data.DataTableCollection.Add(System.Data.DataTable)" />
 
         
 
-        , <see
-         cref="M:System.Data.DataTableCollection.Clear" />
+        , <see cref="M:System.Data.DataTableCollection.Clear" />
 
         
 
-        , and <see
-         cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
+        , and <see cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
 
         
 
          to manage the items in the collection.</para
       >
       <para
-        >Use the <see
-         cref="M:System.Data.DataTableCollection.Contains(System.String)" />
+        >Use the <see cref="M:System.Data.DataTableCollection.Contains(System.String)" />
 
         
 
          method to determine whether a particular table (specified by either index or name) is in the collection.</para
       >
       <para
-        >To navigate from one table to another, use the <see
-         cref="P:System.Data.DataTable.ChildRelations" />
+        >To navigate from one table to another, use the <see cref="P:System.Data.DataTable.ChildRelations" />
 
         
 
-         or <see
-         cref="P:System.Data.DataTable.ParentRelations" />
+         or <see cref="P:System.Data.DataTable.ParentRelations" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataTable" />
+         property of the <see cref="T:System.Data.DataTable" />
 
         
 
-         to access its collection of <see
-         cref="T:System.Data.DataRelation" />
+         to access its collection of <see cref="T:System.Data.DataRelation" />
 
         
 
-         objects. You can also use the <see
-         cref="P:System.Data.DataSet.Relations" />
+         objects. You can also use the <see cref="P:System.Data.DataSet.Relations" />
 
         
 
-         property to navigate through the parent/child relationships of the DataTables in a particular <see
-         cref="T:System.Data.DataSet" />
+         property to navigate through the parent/child relationships of the DataTables in a particular <see cref="T:System.Data.DataSet" />
 
         
 
@@ -132,8 +115,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the collection of tables for the <see
-         cref="T:System.Data.DataSet" />
+        >Represents the collection of tables for the <see cref="T:System.Data.DataSet" />
 
         
 
@@ -154,8 +136,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Because no name is specified, the DataTable is created by using a default name, relative to its order of addition. The default name is "Table1." </para>
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
@@ -165,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.DataTable" />
+            >Creates a new <see cref="T:System.Data.DataTable" />
 
             
 
@@ -176,8 +156,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Data.DataTable" />
+            >The newly created <see cref="T:System.Data.DataTable" />
 
             
 
@@ -203,8 +182,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
@@ -216,7 +194,11 @@
           <para>Adds the specified DataTable to the collection.</para>
         </summary>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,8 +224,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If either null or an empty string ("") is passed in, a default name is given to the newly created DataTable. This name is based on the order in which the table was added ("Table1", "Table2", and so on).</para>
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
@@ -253,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataTable" />
+            >Creates a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -264,8 +244,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Data.DataTable" />
+            >The newly created <see cref="T:System.Data.DataTable" />
 
             
 
@@ -273,12 +252,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to give the created <see
-           cref="T:System.Data.DataTable" />
+          The name to give the created <see cref="T:System.Data.DataTable" />
 
           
 
@@ -312,8 +294,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If either null or an empty string ("") is passed in, a default name is given to the newly created DataTable. This name is based on the order in which the table was added ("Table1", "Table2", and so on).</para>
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
@@ -323,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataTable" />
+            >Creates a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -334,8 +314,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Data.DataTable" />
+            >The newly created <see cref="T:System.Data.DataTable" />
 
             
 
@@ -343,12 +322,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to give the created <see
-           cref="T:System.Data.DataTable" />
+          The name to give the created <see cref="T:System.Data.DataTable" />
 
           
 
@@ -373,8 +355,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Data.DataTable" />
+            >Copies the elements of the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -382,12 +363,15 @@
           >
         </summary>
         <param name="tables">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataTable" />
+          The array of <see cref="T:System.Data.DataTable" />
 
           
 
@@ -413,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether the specified <see
-             cref="T:System.Data.DataTable" />
+            >Verifies whether the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -426,7 +409,11 @@
           <para>true if the table can be removed; otherwise false.</para>
         </returns>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -449,8 +436,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a particular DataTable from the collection, use the <see
-             cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
+            >To remove a particular DataTable from the collection, use the <see cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
 
             
 
@@ -460,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the collection of all <see
-             cref="T:System.Data.DataTable" />
+            >Clears the collection of all <see cref="T:System.Data.DataTable" />
 
             
 
@@ -488,8 +473,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -501,13 +485,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after the <see
-             cref="T:System.Data.DataTableCollection" />
+            >Occurs after the <see cref="T:System.Data.DataTableCollection" />
 
             
 
-             is changed because of <see
-             cref="T:System.Data.DataTable" />
+             is changed because of <see cref="T:System.Data.DataTable" />
 
             
 
@@ -534,8 +516,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -547,13 +528,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs while the <see
-             cref="T:System.Data.DataTableCollection" />
+            >Occurs while the <see cref="T:System.Data.DataTableCollection" />
 
             
 
-             is changing because of <see
-             cref="T:System.Data.DataTable" />
+             is changing because of <see cref="T:System.Data.DataTable" />
 
             
 
@@ -579,36 +558,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You specify the name of the <see
-             cref="T:System.Data.DataTable" />
+            >You specify the name of the <see cref="T:System.Data.DataTable" />
 
             
 
-             object by using the <see
-             cref="P:System.Data.DataTable.TableName" />
+             object by using the <see cref="P:System.Data.DataTable.TableName" />
 
             
 
-             property. If you add a <see
-             cref="T:System.Data.DataTable" />
+             property. If you add a <see cref="T:System.Data.DataTable" />
 
             
 
-             to the collection with the <see
-             cref="M:System.Data.DataTableCollection.Add(System.Data.DataTable)" />
+             to the collection with the <see cref="M:System.Data.DataTableCollection.Add(System.Data.DataTable)" />
 
             
 
              method, passing no arguments, the table is given a default name, based on the order in which the table was added ("Table1", "Table2", and so on).</para
           >
           <para
-            >To get the index of a <see
-             cref="T:System.Data.DataTable" />
+            >To get the index of a <see cref="T:System.Data.DataTable" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
+            , use the <see cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
 
             
 
@@ -621,8 +594,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether a <see
-             cref="T:System.Data.DataTable" />
+            >Gets a value that indicates whether a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -634,12 +606,15 @@
           <para>true if the specified table exists; otherwise false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -671,23 +646,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You specify the name of the <see
-             cref="T:System.Data.DataTable" />
+            >You specify the name of the <see cref="T:System.Data.DataTable" />
 
             
 
-             object by using the <see
-             cref="P:System.Data.DataTable.TableName" />
+             object by using the <see cref="P:System.Data.DataTable.TableName" />
 
             
 
-             property. If you add a <see
-             cref="T:System.Data.DataTable" />
+             property. If you add a <see cref="T:System.Data.DataTable" />
 
             
 
-             to the collection with the <see
-             cref="M:System.Data.DataTableCollection.Add(System.Data.DataTable)" />
+             to the collection with the <see cref="M:System.Data.DataTableCollection.Add(System.Data.DataTable)" />
 
             
 
@@ -697,13 +668,11 @@
             <para>Returns false when two or more tables have the same name but different namespaces. The call does not succeed if there is any ambiguity when matching a table name to exactly one table.</para>
           </block>
           <para
-            >To get the index of a <see
-             cref="T:System.Data.DataTable" />
+            >To get the index of a <see cref="T:System.Data.DataTable" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
+            , use the <see cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
 
             
 
@@ -713,8 +682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether a <see
-             cref="T:System.Data.DataTable" />
+            >Gets a value that indicates whether a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -726,24 +694,30 @@
           <para>true if the specified table exists; otherwise false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            to find.</param
         >
         <param name="tableNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -775,13 +749,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.DataTableCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.DataTableCollection" />
 
             
 
-             to a one-dimensional <see
-             cref="T:System.Array" />
+             to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -789,29 +761,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           to copy the current <see
-           cref="T:System.Data.DataTableCollection" />
+           to copy the current <see cref="T:System.Data.DataTableCollection" />
 
           
 
            object's elements into.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination <see
-           cref="T:System.Array" />
+          The destination <see cref="T:System.Array" />
 
           
 
@@ -832,21 +809,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
+            >Use the <see cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
 
             
 
              method to determine the exact index of a given table.</para
           >
           <para
-            >Before calling <see
-             cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
+            >Before calling <see cref="M:System.Data.DataTableCollection.IndexOf(System.Data.DataTable)" />
 
             
 
-            , you can test for the existence of a table (specified by either index or name) by using the <see
-             cref="M:System.Data.DataTableCollection.Contains(System.String)" />
+            , you can test for the existence of a table (specified by either index or name) by using the <see cref="M:System.Data.DataTableCollection.Contains(System.String)" />
 
             
 
@@ -856,8 +830,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.Data.DataTable" />
+            >Gets the index of the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -869,7 +842,11 @@
           <para>The zero-based index of the table, or -1 if the table is not found in the collection.</para>
         </returns>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -894,8 +871,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You specify the name of the DataTable object by using the <see
-             cref="P:System.Data.DataTable.TableName" />
+            >You specify the name of the DataTable object by using the <see cref="P:System.Data.DataTable.TableName" />
 
             
 
@@ -905,8 +881,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the <see
-             cref="T:System.Data.DataTable" />
+            >Gets the index in the collection of the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -921,7 +896,11 @@
           </block>
         </returns>
         <param name="tableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -953,13 +932,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You specify the name of the <see
-             cref="T:System.Data.DataTable" />
+            >You specify the name of the <see cref="T:System.Data.DataTable" />
 
             
 
-             object by using the <see
-             cref="P:System.Data.DataTable.TableName" />
+             object by using the <see cref="P:System.Data.DataTable.TableName" />
 
             
 
@@ -969,8 +946,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the specified <see
-             cref="T:System.Data.DataTable" />
+            >Gets the index in the collection of the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -980,8 +956,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the <see
-             cref="T:System.Data.DataTable" />
+            >The zero-based index of the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -989,24 +964,30 @@
           >
         </returns>
         <param name="tableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            object to look for.</param
         >
         <param name="tableNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -1125,12 +1106,15 @@
           <para>Raises the OnCollectionChanged event.</para>
         </summary>
         <param name="ccevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -1163,12 +1147,15 @@
           <para>Raises the OnCollectionChanging event.</para>
         </summary>
         <param name="ccevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -1189,26 +1176,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
              event occurs when a table is successfully removed.</para
           >
           <para
-            >To determine whether a given table exists and can be removed before invoking <see
-             cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
+            >To determine whether a given table exists and can be removed before invoking <see cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataTableCollection.Contains(System.String)" />
+            , use the <see cref="M:System.Data.DataTableCollection.Contains(System.String)" />
 
             
 
-             and the <see
-             cref="M:System.Data.DataTableCollection.CanRemove(System.Data.DataTable)" />
+             and the <see cref="M:System.Data.DataTableCollection.CanRemove(System.Data.DataTable)" />
 
             
 
@@ -1218,8 +1201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Data.DataTable" />
+            >Removes the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1227,7 +1209,11 @@
           >
         </summary>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1252,26 +1238,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
              event occurs when a table is successfully removed.</para
           >
           <para
-            >To determine whether a given table exists and can be removed before invoking <see
-             cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
+            >To determine whether a given table exists and can be removed before invoking <see cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataTableCollection.Contains(System.String)" />
+            , use the <see cref="M:System.Data.DataTableCollection.Contains(System.String)" />
 
             
 
-             and the <see
-             cref="M:System.Data.DataTableCollection.CanRemove(System.Data.DataTable)" />
+             and the <see cref="M:System.Data.DataTableCollection.CanRemove(System.Data.DataTable)" />
 
             
 
@@ -1281,8 +1263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.DataTable" />
+            >Removes the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1290,12 +1271,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -1327,26 +1311,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
              event occurs when a table is successfully removed.</para
           >
           <para
-            >To determine whether a given table exists and can be removed before invoking <see
-             cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
+            >To determine whether a given table exists and can be removed before invoking <see cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataTableCollection.Contains(System.String)" />
+            , use the <see cref="M:System.Data.DataTableCollection.Contains(System.String)" />
 
             
 
-             and the <see
-             cref="M:System.Data.DataTableCollection.CanRemove(System.Data.DataTable)" />
+             and the <see cref="M:System.Data.DataTableCollection.CanRemove(System.Data.DataTable)" />
 
             
 
@@ -1356,8 +1336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.DataTable" />
+            >Removes the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1365,24 +1344,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            object to remove.</param
         >
         <param name="tableNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -1403,8 +1388,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.DataTableCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.DataTableCollection.CollectionChanged" />
 
             
 
@@ -1414,8 +1398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.DataTable" />
+            >Removes the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1423,7 +1406,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

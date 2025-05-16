@@ -14,13 +14,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls how the values from the data source will be applied to existing rows when using the <see
-         cref="Overload:System.Data.DataTable.Load" />
+        >Controls how the values from the data source will be applied to existing rows when using the <see cref="Overload:System.Data.DataTable.Load" />
 
         
 
-         or <see
-         cref="Overload:System.Data.DataSet.Load" />
+         or <see cref="Overload:System.Data.DataSet.Load" />
 
         
 

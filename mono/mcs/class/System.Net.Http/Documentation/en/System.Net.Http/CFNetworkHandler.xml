@@ -18,12 +18,10 @@
   <Docs>
     <summary>An Http Message Handler for HttpClient that is powered by iOS/MacOS CFNetwork stack.</summary>
     <remarks preserve-mono="true">
-      <para
-        >
+      <para>
 	This handler allows the HttpClient API to use Apple's
 	CFNetwork as the HTTP transport as opposed to the default
-	(which is to use <see
-         cref="T:System.Net.HttpWebRequest" />
+	(which is to use <see cref="T:System.Net.HttpWebRequest" />
 
         
 
@@ -39,7 +37,8 @@
       <example>
         <code lang="c#">
 var client = new HttpClient (new CFNetworkHandler ());
-</code>
+</code
+        >
       </example>
       <para>
 
@@ -153,8 +152,7 @@ var client = new HttpClient (new CFNetworkHandler ());
         >
         <summary preserve-mono="true">Sends the Http message asynchronously.</summary>
         <returns>Task representing the asynchronous operation.</returns>
-        <remarks preserve-mono="true"
-          >
+        <remarks preserve-mono="true">
 	  This method is invoked by the HttpClient, it is non-blocking.
 	</remarks
         >

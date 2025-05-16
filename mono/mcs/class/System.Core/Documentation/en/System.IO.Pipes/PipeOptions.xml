@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.IO.Pipes.PipeOptions" />
+        >Use the <see cref="T:System.IO.Pipes.PipeOptions" />
 
         
 
@@ -32,13 +31,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides options for creating a <see
-         cref="T:System.IO.Pipes.PipeStream" />
+        >Provides options for creating a <see cref="T:System.IO.Pipes.PipeStream" />
 
         
 
-         object. This enumeration has a <see
-         cref="T:System.FlagsAttribute" />
+         object. This enumeration has a <see cref="T:System.FlagsAttribute" />
 
         
 

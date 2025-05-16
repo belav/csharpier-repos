@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown when a filter or filter table attempts to access the body of an instance of <see
-         cref="T:System.ServiceModel.Channels.Message" />
+        >This exception is thrown when a filter or filter table attempts to access the body of an instance of <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
 
             
 
@@ -85,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
 
             
 
@@ -117,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
 
             
 
@@ -126,24 +122,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that contains all the data required to serialize the exception.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -177,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
 
             
 
@@ -186,12 +187,15 @@
           >
         </summary>
         <param name="filters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+          The <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
@@ -223,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
 
             
 
@@ -261,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.FilterInvalidBodyAccessException" />
 
             
 
@@ -270,17 +272,19 @@
           >
         </summary>
         <param name="filters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.ObjectModel.Collection`1" />
+          The <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
           
 
-           of type <see
-           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+           of type <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 

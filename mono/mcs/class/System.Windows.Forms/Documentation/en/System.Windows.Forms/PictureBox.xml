@@ -41,36 +41,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Typically the <see
-         cref="T:System.Windows.Forms.PictureBox" />
+        >Typically the <see cref="T:System.Windows.Forms.PictureBox" />
 
         
 
          is used to display graphics from a bitmap, metafile, icon, JPEG, GIF, or PNG file.</para
       >
       <para
-        >Set the <see
-         cref="P:System.Windows.Forms.PictureBox.Image" />
+        >Set the <see cref="P:System.Windows.Forms.PictureBox.Image" />
 
         
 
-         property to the <see
-         cref="T:System.Drawing.Image" />
+         property to the <see cref="T:System.Drawing.Image" />
 
         
 
-         you want to display, either at design time or at run time. You can alternatively specify the image by setting the <see
-         cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+         you want to display, either at design time or at run time. You can alternatively specify the image by setting the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
         
 
-         property and load the image synchronously using the <see
-         cref="Overload:System.Windows.Forms.PictureBox.Load" />
+         property and load the image synchronously using the <see cref="Overload:System.Windows.Forms.PictureBox.Load" />
 
         
 
-         method or asynchronously using the <see
-         cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+         method or asynchronously using the <see cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
 
         
 
@@ -78,13 +72,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If you want to use the same image in multiple <see
-           cref="T:System.Windows.Forms.PictureBox" />
+          >If you want to use the same image in multiple <see cref="T:System.Windows.Forms.PictureBox" />
 
           
 
-           controls, create a clone of the image for each <see
-           cref="T:System.Windows.Forms.PictureBox" />
+           controls, create a clone of the image for each <see cref="T:System.Windows.Forms.PictureBox" />
 
           
 
@@ -92,36 +84,30 @@
         >
       </block>
       <para
-        >The <see
-         cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+        >The <see cref="P:System.Windows.Forms.PictureBox.SizeMode" />
 
         
 
-         property, which is set to values in the <see
-         cref="T:System.Windows.Forms.PictureBoxSizeMode" />
+         property, which is set to values in the <see cref="T:System.Windows.Forms.PictureBoxSizeMode" />
 
         
 
-         enumeration, controls the clipping and positioning of the image in the display area. You can change the size of the display area at run time with the <see
-         cref="P:System.Windows.Forms.Control.ClientSize" />
+         enumeration, controls the clipping and positioning of the image in the display area. You can change the size of the display area at run time with the <see cref="P:System.Windows.Forms.Control.ClientSize" />
 
         
 
          property.</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Windows.Forms.PictureBox" />
+        >By default, the <see cref="T:System.Windows.Forms.PictureBox" />
 
         
 
-         control is displayed by without any borders. You can provide a standard or three-dimensional border using the <see
-         cref="P:System.Windows.Forms.PictureBox.BorderStyle" />
+         control is displayed by without any borders. You can provide a standard or three-dimensional border using the <see cref="P:System.Windows.Forms.PictureBox.BorderStyle" />
 
         
 
-         property to distinguish the picture box from the rest of the form, even if it contains no image. The <see
-         cref="T:System.Windows.Forms.PictureBox" />
+         property to distinguish the picture box from the rest of the form, even if it contains no image. The <see cref="T:System.Windows.Forms.PictureBox" />
 
         
 
@@ -142,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -187,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -221,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="P:System.Windows.Forms.Control.AllowDrop" />
+            >Overrides the <see cref="P:System.Windows.Forms.Control.AllowDrop" />
 
             
 
@@ -282,38 +265,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >A <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-             image is loaded asynchronously when the <see
-             cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+             image is loaded asynchronously when the <see cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
 
             
 
-             property is false and the <see
-             cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+             property is false and the <see cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
 
             
 
-             method is used to load the image. If a load is canceled with the <see
-             cref="M:System.Windows.Forms.PictureBox.CancelAsync" />
+             method is used to load the image. If a load is canceled with the <see cref="M:System.Windows.Forms.PictureBox.CancelAsync" />
 
             
 
-             method cancellation is reported by raising the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
+             method cancellation is reported by raising the <see cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
 
             
 
-             event with the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             event with the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+             property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
             
 
@@ -346,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="P:System.Windows.Forms.Control.CausesValidation" />
+            >Overrides the <see cref="P:System.Windows.Forms.Control.CausesValidation" />
 
             
 
@@ -379,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="E:System.Windows.Forms.Control.CausesValidationChanged" />
+            >Overrides the <see cref="E:System.Windows.Forms.Control.CausesValidationChanged" />
 
             
 
@@ -408,8 +382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="P:System.Windows.Forms.Control.CreateParams" />
+            >Overrides the <see cref="P:System.Windows.Forms.Control.CreateParams" />
 
             
 
@@ -437,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the mode for Input Method Editor (IME) for the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Gets a value indicating the mode for Input Method Editor (IME) for the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -483,36 +455,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -522,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -531,7 +496,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -565,8 +534,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+            >Overrides the <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
@@ -601,8 +569,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no <see
-             cref="P:System.Windows.Forms.PictureBox.ErrorImage" />
+            >If no <see cref="P:System.Windows.Forms.PictureBox.ErrorImage" />
 
             
 
@@ -663,8 +630,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -676,8 +642,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.Font" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.Font" />
 
             
 
@@ -713,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="P:System.Windows.Forms.Control.ForeColor" />
+            >Overrides the <see cref="P:System.Windows.Forms.Control.ForeColor" />
 
             
 
@@ -745,8 +709,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -758,8 +721,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.ForeColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.ForeColor" />
 
             
 
@@ -791,13 +753,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.PictureBox.Image" />
+            >The <see cref="P:System.Windows.Forms.PictureBox.Image" />
 
             
 
-             property is set to the <see
-             cref="T:System.Drawing.Image" />
+             property is set to the <see cref="T:System.Drawing.Image" />
 
             
 
@@ -805,13 +765,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you want to use the same image in multiple <see
-               cref="T:System.Windows.Forms.PictureBox" />
+              >If you want to use the same image in multiple <see cref="T:System.Windows.Forms.PictureBox" />
 
               
 
-               controls, create a clone of the image for each <see
-               cref="T:System.Windows.Forms.PictureBox" />
+               controls, create a clone of the image for each <see cref="T:System.Windows.Forms.PictureBox" />
 
               
 
@@ -822,8 +780,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the image that is displayed by <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Gets or sets the image that is displayed by <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -862,18 +819,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If a relative path is used, it will be considered relative to the working directory.</para>
           <para
-            >A call to the <see
-             cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
+            >A call to the <see cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
 
             
 
-             method will overwrite the <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+             method will overwrite the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
-             property, setting <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+             property, setting <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
@@ -883,8 +837,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the path or URL for the image to display in the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Gets or sets the path or URL for the image to display in the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -941,8 +894,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -954,8 +906,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.ImeMode" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.ImeMode" />
 
             
 
@@ -991,18 +942,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no <see
-             cref="P:System.Windows.Forms.PictureBox.InitialImage" />
+            >If no <see cref="P:System.Windows.Forms.PictureBox.InitialImage" />
 
             
 
-             is specified, a default image is displayed. The <see
-             cref="P:System.Windows.Forms.PictureBox.InitialImage" />
+             is specified, a default image is displayed. The <see cref="P:System.Windows.Forms.PictureBox.InitialImage" />
 
             
 
-             is always displayed non-stretched, in the center of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             is always displayed non-stretched, in the center of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -1012,8 +960,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the image displayed in the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Gets or sets the image displayed in the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -1139,8 +1086,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1152,8 +1098,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when input focus leaves the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Occurs when input focus leaves the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -1181,13 +1126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Displays the image specified by the <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+            >Displays the image specified by the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             property of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -1212,43 +1155,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="url" />
+            >If the <paramref name="url" />
 
             
 
-             parameter indicates a local file, the recommended format is a local file path. For example, an image file named myPicture.jpg located at c:\ would be accessed by passing <userInputLocalizable
-            >c:\myPicture.jpg</userInputLocalizable>
+             parameter indicates a local file, the recommended format is a local file path. For example, an image file named myPicture.jpg located at c:\ would be accessed by passing <userInputLocalizable>c:\myPicture.jpg</userInputLocalizable>
 
             
 
-             for the <paramref
-             name="url" />
+             for the <paramref name="url" />
 
             
 
-             parameter. A full path, such as <userInputLocalizable
-            >http://www.contoso.com/path/images/image.jpg</userInputLocalizable>
+             parameter. A full path, such as <userInputLocalizable>http://www.contoso.com/path/images/image.jpg</userInputLocalizable>
 
             
 
-            , or a relative path, such as <userInputLocalizable
-            >./images/image.jpg</userInputLocalizable>
+            , or a relative path, such as <userInputLocalizable>./images/image.jpg</userInputLocalizable>
 
             
 
-            , can be used. If a relative path is used, it will be considered relative to the working directory. A call to the <see
-             cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
+            , can be used. If a relative path is used, it will be considered relative to the working directory. A call to the <see cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
 
             
 
-             method sets the <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+             method sets the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
-             property to the value of <paramref
-             name="url" />
+             property to the value of <paramref name="url" />
 
             
 
@@ -1258,8 +1193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+            >Sets the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
@@ -1267,12 +1201,15 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path for the image to display in the <see
-           cref="T:System.Windows.Forms.PictureBox" />
+          The path for the image to display in the <see cref="T:System.Windows.Forms.PictureBox" />
 
           
 
@@ -1294,23 +1231,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Besides calling the <see
-             cref="M:System.Windows.Forms.PictureBox.LoadAsync" />
+            >Besides calling the <see cref="M:System.Windows.Forms.PictureBox.LoadAsync" />
 
             
 
-             method, the <see
-             cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+             method, the <see cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
 
             
 
-             property must be set to false to load an image asynchronously. When you load an image asynchronously, you can handle the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
+             property must be set to false to load an image asynchronously. When you load an image asynchronously, you can handle the <see cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
 
             
 
-             event to determine the progress of an image load or the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
+             event to determine the progress of an image load or the <see cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
 
             
 
@@ -1339,91 +1272,74 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="url" />
+            >If the <paramref name="url" />
 
             
 
-             parameter indicates a local file, the recommended format is a local file path. For example, an image file named myPicture.jpg located at c:\ would be accessed by passing <userInputLocalizable
-            >c:\myPicture.jpg</userInputLocalizable>
+             parameter indicates a local file, the recommended format is a local file path. For example, an image file named myPicture.jpg located at c:\ would be accessed by passing <userInputLocalizable>c:\myPicture.jpg</userInputLocalizable>
 
             
 
-             for the <paramref
-             name="url" />
+             for the <paramref name="url" />
 
             
 
-             parameter. A full path, such as <userInputLocalizable
-            >http://www.contoso.com/path/images/image.jpg</userInputLocalizable>
+             parameter. A full path, such as <userInputLocalizable>http://www.contoso.com/path/images/image.jpg</userInputLocalizable>
 
             
 
-            , or a relative path, such as <userInputLocalizable
-            >./images/image.jpg</userInputLocalizable>
+            , or a relative path, such as <userInputLocalizable>./images/image.jpg</userInputLocalizable>
 
             
 
-            , can be used. If a relative path is used, it will be considered relative to the working directory. A call to the <see
-             cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
+            , can be used. If a relative path is used, it will be considered relative to the working directory. A call to the <see cref="M:System.Windows.Forms.PictureBox.Load(System.String)" />
 
             
 
-             method sets the <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+             method sets the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
-             property to the value of <paramref
-             name="url" />
+             property to the value of <paramref name="url" />
 
             
 
             . </para
           >
           <para
-            >A call to the <see
-             cref="M:System.Windows.Forms.PictureBox.LoadAsync(System.String)" />
+            >A call to the <see cref="M:System.Windows.Forms.PictureBox.LoadAsync(System.String)" />
 
             
 
-             method sets the <see
-             cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
+             method sets the <see cref="P:System.Windows.Forms.PictureBox.ImageLocation" />
 
             
 
-             property to the value of <paramref
-             name="url" />
+             property to the value of <paramref name="url" />
 
             
 
-            . Besides calling the <see
-             cref="M:System.Windows.Forms.PictureBox.LoadAsync" />
+            . Besides calling the <see cref="M:System.Windows.Forms.PictureBox.LoadAsync" />
 
             
 
-             method, you must set the <see
-             cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+             method, you must set the <see cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
 
             
 
-             property to false to load an image asynchronously. When you load an image asynchronously, you can handle the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
+             property to false to load an image asynchronously. When you load an image asynchronously, you can handle the <see cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
 
             
 
-             event to determine the progress of an image load or the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
+             event to determine the progress of an image load or the <see cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
 
             
 
-             event to determine when an image load has completed. If an error occurs during an asynchronous image-loading operation, it will be caught and reported by the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             event to determine when an image load has completed. If an error occurs during an asynchronous image-loading operation, it will be caught and reported by the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+             property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
             
 
@@ -1435,12 +1351,15 @@
           <para>Loads the image at the specified location, asynchronously.</para>
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The path for the image to display in the <see
-           cref="T:System.Windows.Forms.PictureBox" />
+          The path for the image to display in the <see cref="T:System.Windows.Forms.PictureBox" />
 
           
 
@@ -1464,51 +1383,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
+            >The <see cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
 
             
 
-             occurs only when the image is loaded asynchronously by using one of the <see
-             cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+             occurs only when the image is loaded asynchronously by using one of the <see cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
 
             
 
-             methods, and <see
-             cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+             methods, and <see cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
 
             
 
-             is false. If the image-load is canceled by calling the <see
-             cref="M:System.Windows.Forms.PictureBox.CancelAsync" />
+             is false. If the image-load is canceled by calling the <see cref="M:System.Windows.Forms.PictureBox.CancelAsync" />
 
             
 
-             method the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             method the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+             property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
             
 
-             will be set to true. If an exception or error occurs during the load process, it will be caught and the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             will be set to true. If an exception or error occurs during the load process, it will be caught and the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+             property of the <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
             
 
              will contain the exception information.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1539,54 +1449,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
+            >The <see cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
 
             
 
-             occurs only when the image is loaded asynchronously by using one of the <see
-             cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+             occurs only when the image is loaded asynchronously by using one of the <see cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
 
             
 
-             methods. The progress percentage of the image load is reported with the <see
-             cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+             methods. The progress percentage of the image load is reported with the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+             property of the <see cref="T:System.ComponentModel.ProgressChangedEventArgs" />
 
             
 
             .</para
           >
           <para
-            >Handle the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
+            >Handle the <see cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
 
             
 
-             if you want to reflect the progress of an asynchronous image-loading operation in a <see
-             cref="T:System.Windows.Forms.ProgressBar" />
+             if you want to reflect the progress of an asynchronous image-loading operation in a <see cref="T:System.Windows.Forms.ProgressBar" />
 
             
 
-             or similar control. Use the <see
-             cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+             or similar control. Use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
             
 
-             property of the <see
-             cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+             property of the <see cref="T:System.ComponentModel.ProgressChangedEventArgs" />
 
             
 
              to update the progress value. </para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1647,8 +1548,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1657,8 +1557,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnHandleCreated(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnHandleCreated(System.EventArgs)" />
 
             
 
@@ -1668,8 +1567,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleCreated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" />
 
             
 
@@ -1677,12 +1575,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1714,8 +1615,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1724,8 +1624,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnHandleDestroyed(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnHandleDestroyed(System.EventArgs)" />
 
             
 
@@ -1735,8 +1634,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleDestroyed" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" />
 
             
 
@@ -1744,12 +1642,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1776,8 +1677,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1786,8 +1686,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnLoadCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
 
             
 
@@ -1797,8 +1696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
+            >Raises the <see cref="E:System.Windows.Forms.PictureBox.LoadCompleted" />
 
             
 
@@ -1806,12 +1704,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+          An <see cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
           
 
@@ -1838,8 +1739,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1848,8 +1748,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnLoadProgressChanged(System.ComponentModel.ProgressChangedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnLoadProgressChanged(System.ComponentModel.ProgressChangedEventArgs)" />
 
             
 
@@ -1859,8 +1758,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PictureBox.LoadProgressChanged" />
 
             
 
@@ -1868,12 +1766,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+          A <see cref="T:System.ComponentModel.ProgressChangedEventArgs" />
 
           
 
@@ -1898,8 +1799,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
@@ -1907,12 +1807,15 @@
           >
         </summary>
         <param name="pe">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -1959,36 +1862,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnResize(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnResize(System.EventArgs)" />
 
             
 
-             method redraws the image if the <see
-             cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+             method redraws the image if the <see cref="P:System.Windows.Forms.PictureBox.SizeMode" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.Zoom" />
+             property is set to <see cref="F:System.Windows.Forms.PictureBoxSizeMode.Zoom" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.CenterImage" />
+            , <see cref="F:System.Windows.Forms.PictureBoxSizeMode.CenterImage" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.StretchImage" />
+            , or <see cref="F:System.Windows.Forms.PictureBoxSizeMode.StretchImage" />
 
             
 
             .</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1997,8 +1894,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnResize(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnResize(System.EventArgs)" />
 
             
 
@@ -2008,8 +1904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Resize" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Resize" />
 
             
 
@@ -2017,12 +1912,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2050,8 +1948,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2060,8 +1957,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.OnSizeModeChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.OnSizeModeChanged(System.EventArgs)" />
 
             
 
@@ -2071,8 +1967,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.PictureBox.SizeModeChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.PictureBox.SizeModeChanged" />
 
             
 
@@ -2080,12 +1975,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2174,8 +2072,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.RightToLeft" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.RightToLeft" />
 
             
 
@@ -2242,64 +2139,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Valid values for this property are taken from the <see
-             cref="T:System.Windows.Forms.PictureBoxSizeMode" />
+            >Valid values for this property are taken from the <see cref="T:System.Windows.Forms.PictureBoxSizeMode" />
 
             
 
              enumeration. </para
           >
           <para
-            >By default, in <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.Normal" />
+            >By default, in <see cref="F:System.Windows.Forms.PictureBoxSizeMode.Normal" />
 
             
 
-             mode, the <see
-             cref="T:System.Drawing.Image" />
+             mode, the <see cref="T:System.Drawing.Image" />
 
             
 
-             is positioned in the upper-left corner of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             is positioned in the upper-left corner of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-            , and any part of the image that is too big for the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            , and any part of the image that is too big for the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-             is clipped. Using the <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.StretchImage" />
+             is clipped. Using the <see cref="F:System.Windows.Forms.PictureBoxSizeMode.StretchImage" />
 
             
 
-             value causes the image to stretch or shrink to fit the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             value causes the image to stretch or shrink to fit the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-            . Using the <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.Zoom" />
+            . Using the <see cref="F:System.Windows.Forms.PictureBoxSizeMode.Zoom" />
 
             
 
-             value causes the image to be stretched or shrunk to fit the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             value causes the image to be stretched or shrunk to fit the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
             ; however, the aspect ratio in the original is maintained.</para
           >
           <para
-            >Using the <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.AutoSize" />
+            >Using the <see cref="F:System.Windows.Forms.PictureBoxSizeMode.AutoSize" />
 
             
 
-             value causes the control to resize to always fit the image. Using the <see
-             cref="F:System.Windows.Forms.PictureBoxSizeMode.CenterImage" />
+             value causes the control to resize to always fit the image. Using the <see cref="F:System.Windows.Forms.PictureBoxSizeMode.CenterImage" />
 
             
 
@@ -2326,8 +2212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2339,8 +2224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when <see
-             cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+            >Occurs when <see cref="P:System.Windows.Forms.PictureBox.SizeMode" />
 
             
 
@@ -2444,8 +2328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.TabIndex" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.TabIndex" />
 
             
 
@@ -2510,8 +2393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.TabStop" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.TabStop" />
 
             
 
@@ -2546,13 +2428,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.PictureBox.Text" />
+            >Setting the <see cref="P:System.Windows.Forms.PictureBox.Text" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             property of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -2562,8 +2442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Gets or sets the text of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -2595,8 +2474,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2608,8 +2486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PictureBox.Text" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PictureBox.Text" />
 
             
 
@@ -2633,13 +2510,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PictureBox.ToString" />
+            >The <see cref="M:System.Windows.Forms.PictureBox.ToString" />
 
             
 
-             method returns a string that includes the type and the <see
-             cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+             method returns a string that includes the type and the <see cref="P:System.Windows.Forms.PictureBox.SizeMode" />
 
             
 
@@ -2649,8 +2524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >Returns a string that represents the current <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -2660,8 +2534,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -2696,23 +2569,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+            >Setting the <see cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
 
             
 
-             property to true means the image is loaded synchronously. This causes the user interface to be blocked from other input until the image is loaded. When <see
-             cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
+             property to true means the image is loaded synchronously. This causes the user interface to be blocked from other input until the image is loaded. When <see cref="P:System.Windows.Forms.PictureBox.WaitOnLoad" />
 
             
 
-             is false (the default) and the <see
-             cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
+             is false (the default) and the <see cref="Overload:System.Windows.Forms.PictureBox.LoadAsync" />
 
             
 
-             method is used to load the image, the <see
-             cref="P:System.Windows.Forms.PictureBox.InitialImage" />
+             method is used to load the image, the <see cref="P:System.Windows.Forms.PictureBox.InitialImage" />
 
             
 

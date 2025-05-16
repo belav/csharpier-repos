@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.TypedDataSetGenerator" />
+        >The <see cref="T:System.Data.TypedDataSetGenerator" />
 
         
 
@@ -24,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Generates a strongly typed <see
-         cref="T:System.Data.DataSet" />
+        >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
         
 
@@ -55,18 +53,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
-            . The dataset is created in the namespace indicated in the <paramref
-             name="codeNamespace" />
+            . The dataset is created in the namespace indicated in the <paramref name="codeNamespace" />
 
             
 
-             parameter, and the dataset is generated in the managed programming language indicated in the <paramref
-             name="codeProvider" />
+             parameter, and the dataset is generated in the managed programming language indicated in the <paramref name="codeProvider" />
 
             
 
@@ -76,13 +71,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
-             based on an existing <see
-             cref="T:System.Data.DataSet" />
+             based on an existing <see cref="T:System.Data.DataSet" />
 
             
 
@@ -92,8 +85,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >A strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -101,41 +93,49 @@
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The source <see
-           cref="T:System.Data.DataSet" />
+          The source <see cref="T:System.Data.DataSet" />
 
           
 
-           that specifies the metadata for the typed <see
-           cref="T:System.Data.DataSet" />
+           that specifies the metadata for the typed <see cref="T:System.Data.DataSet" />
 
           
 
           .</param
         >
         <param name="codeNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace that provides the target namespace for the typed <see
-           cref="T:System.Data.DataSet" />
+          The namespace that provides the target namespace for the typed <see cref="T:System.Data.DataSet" />
 
           
 
           .</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language-specific <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          The language-specific <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -167,7 +167,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -177,8 +177,7 @@
             >
           </block>
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -188,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -199,8 +197,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >A strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -208,48 +205,60 @@
           >
         </returns>
         <param name="inputFileContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the XML schema to base the <see
-           cref="T:System.Data.DataSet" />
+          A string that represents the XML schema to base the <see cref="T:System.Data.DataSet" />
 
           
 
            on.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to contain the generated code.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that contains the generated dataset.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language-specific <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          The language-specific <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -282,7 +291,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -292,8 +301,7 @@
             >
           </block>
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -303,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -314,8 +321,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >A strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -323,55 +329,71 @@
           >
         </returns>
         <param name="inputFileContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the XML schema to base the <see
-           cref="T:System.Data.DataSet" />
+          A string that represents the XML schema to base the <see cref="T:System.Data.DataSet" />
 
           
 
            on.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to contain the generated code.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that contains the generated dataset.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language specific <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          The language specific <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
            to use to generate the dataset.</param
         >
         <param name="customDBProviders">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -404,7 +426,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -414,8 +436,7 @@
             >
           </block>
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -425,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >Generates a strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -436,8 +456,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A strongly typed <see
-             cref="T:System.Data.DataSet" />
+            >A strongly typed <see cref="T:System.Data.DataSet" />
 
             
 
@@ -445,65 +464,79 @@
           >
         </returns>
         <param name="inputFileContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the XML schema to base the <see
-           cref="T:System.Data.DataSet" />
+          A string that represents the XML schema to base the <see cref="T:System.Data.DataSet" />
 
           
 
            on.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          The <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to contain the generated code.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that contains the generated dataset.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language-specific <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          The language-specific <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
            to use to generate the dataset.</param
         >
         <param name="specifiedFactory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DbProviderFactory" />
+          The <see cref="T:System.Data.Common.DbProviderFactory" />
 
           
 
-           to use to override the provider contained in the <paramref
-           name="inputFileContent" />
+           to use to override the provider contained in the <paramref name="inputFileContent" />
 
           
 
@@ -593,7 +626,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -603,8 +636,7 @@
             >
           </block>
           <para
-            >This method returns the first provider name in the specified <paramref
-             name="inputFileContent" />
+            >This method returns the first provider name in the specified <paramref name="inputFileContent" />
 
             
 
@@ -618,8 +650,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the specific provider for this <see
-             cref="T:System.Data.DataSet" />
+            >A string that represents the specific provider for this <see cref="T:System.Data.DataSet" />
 
             
 
@@ -627,12 +658,15 @@
           >
         </returns>
         <param name="inputFileContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the XML schema to base the <see
-           cref="T:System.Data.DataSet" />
+          A string that represents the XML schema to base the <see cref="T:System.Data.DataSet" />
 
           
 
@@ -662,7 +696,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -672,13 +706,11 @@
             >
           </block>
           <para
-            >Returns the provider name for the given <paramref
-             name="tableName" />
+            >Returns the provider name for the given <paramref name="tableName" />
 
             
 
-             in the <see
-             cref="T:System.Data.DataSet" />
+             in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -688,8 +720,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the provider name for the <paramref
-             name="tableName" />
+            >Returns the provider name for the <paramref name="tableName" />
 
             
 
@@ -699,8 +730,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the provider name for the specific table passed in to the <paramref
-             name="tableName" />
+            >A string that represents the provider name for the specific table passed in to the <paramref name="tableName" />
 
             
 
@@ -708,19 +738,26 @@
           >
         </returns>
         <param name="inputFileContent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the XML schema to base the <see
-           cref="T:System.Data.DataSet" />
+          A string that represents the XML schema to base the <see cref="T:System.Data.DataSet" />
 
           
 
            on.</param
         >
         <param name="tableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

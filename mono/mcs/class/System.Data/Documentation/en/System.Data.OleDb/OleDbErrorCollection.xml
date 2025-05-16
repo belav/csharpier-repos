@@ -30,23 +30,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is created by <see
-         cref="T:System.Data.OleDb.OleDbException" />
+        >This class is created by <see cref="T:System.Data.OleDb.OleDbException" />
 
         
 
-         to collect instances of the <see
-         cref="T:System.Data.OleDb.OleDbError" />
+         to collect instances of the <see cref="T:System.Data.OleDb.OleDbError" />
 
         
 
-         class. <see
-         cref="T:System.Data.OleDb.OleDbErrorCollection" />
+         class. <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
         
 
-         always contains at least one instance of the <see
-         cref="T:System.Data.OleDb.OleDbError" />
+         always contains at least one instance of the <see cref="T:System.Data.OleDb.OleDbError" />
 
         
 
@@ -74,18 +70,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+            >Copies the elements of the <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
-             into an <see
-             cref="T:System.Array" />
+             into an <see cref="T:System.Array" />
 
             
 
-            , starting at the specified index within the <see
-             cref="T:System.Array" />
+            , starting at the specified index within the <see cref="T:System.Array" />
 
             
 
@@ -93,24 +86,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
            into which to copy the elements. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting index of the <paramref
-           name="array" />
+          The starting index of the <paramref name="array" />
 
           
 
@@ -143,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+             to the specified <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
@@ -157,29 +154,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.OleDb.OleDbErrorCollection" />
+          The <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.OleDb.OleDbErrorCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Data.OleDb.OleDbErrorCollection" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
           
 
@@ -221,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exposes the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+            >Exposes the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -232,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -287,13 +287,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -303,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.ICollection.IsSynchronized" />
+            >For a description of this member, see <see cref="M:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -331,13 +328,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbErrorCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -347,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.ICollection.SyncRoot" />
+            >For a description of this member, see <see cref="M:System.Collections.ICollection.SyncRoot" />
 
             
 

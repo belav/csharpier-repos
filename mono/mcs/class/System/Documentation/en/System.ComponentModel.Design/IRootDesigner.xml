@@ -35,8 +35,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A root designer is the designer that is in the top position, or root, of the current design-time document object hierarchy. A root designer must implement the <see
-         cref="T:System.ComponentModel.Design.IRootDesigner" />
+        >A root designer is the designer that is in the top position, or root, of the current design-time document object hierarchy. A root designer must implement the <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
         
 
@@ -74,8 +73,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns a view object that can present a user interface to the user. The returned data type is an <see
-             cref="T:System.Object" />
+            >This method returns a view object that can present a user interface to the user. The returned data type is an <see cref="T:System.Object" />
 
             
 
@@ -83,18 +81,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="F:System.ComponentModel.Design.ViewTechnology.Passthrough" />
+              >The <see cref="F:System.ComponentModel.Design.ViewTechnology.Passthrough" />
 
               
 
-               and <see
-               cref="F:System.ComponentModel.Design.ViewTechnology.WindowsForms" />
+               and <see cref="F:System.ComponentModel.Design.ViewTechnology.WindowsForms" />
 
               
 
-               fields are obsolete. Use <see
-               cref="F:System.ComponentModel.Design.ViewTechnology.Default" />
+               fields are obsolete. Use <see cref="F:System.ComponentModel.Design.ViewTechnology.Default" />
 
               
 
@@ -111,12 +106,15 @@
           <para>An object that represents the view for this designer.</para>
         </returns>
         <param name="technology">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.ViewTechnology" />
+          A <see cref="T:System.ComponentModel.Design.ViewTechnology" />
 
           
 
@@ -147,8 +145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.ViewTechnology" />
+            >The <see cref="T:System.ComponentModel.Design.ViewTechnology" />
 
             
 
@@ -156,18 +153,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="F:System.ComponentModel.Design.ViewTechnology.Passthrough" />
+              >The <see cref="F:System.ComponentModel.Design.ViewTechnology.Passthrough" />
 
               
 
-               and <see
-               cref="F:System.ComponentModel.Design.ViewTechnology.WindowsForms" />
+               and <see cref="F:System.ComponentModel.Design.ViewTechnology.WindowsForms" />
 
               
 
-               fields are obsolete. Use <see
-               cref="F:System.ComponentModel.Design.ViewTechnology.Default" />
+               fields are obsolete. Use <see cref="F:System.ComponentModel.Design.ViewTechnology.Default" />
 
               
 

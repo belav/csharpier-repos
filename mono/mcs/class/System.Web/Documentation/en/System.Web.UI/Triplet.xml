@@ -16,33 +16,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Triplet" />
+        >The <see cref="T:System.Web.UI.Triplet" />
 
         
 
-         class is used as a basic structure to store three related objects. It is a utility class that is used in various ways throughout ASP.NET. You can use the <see
-         cref="T:System.Web.UI.Triplet" />
+         class is used as a basic structure to store three related objects. It is a utility class that is used in various ways throughout ASP.NET. You can use the <see cref="T:System.Web.UI.Triplet" />
 
         
 
-         class in your own code anywhere that you need a structure to contain three related objects and where data-hiding is not essential. The <see
-         cref="T:System.Web.UI.Triplet" />
+         class in your own code anywhere that you need a structure to contain three related objects and where data-hiding is not essential. The <see cref="T:System.Web.UI.Triplet" />
 
         
 
-         class does not encapsulate its object references, <see
-         cref="F:System.Web.UI.Triplet.First" />
+         class does not encapsulate its object references, <see cref="F:System.Web.UI.Triplet.First" />
 
         
 
-        , <see
-         cref="F:System.Web.UI.Triplet.Second" />
+        , <see cref="F:System.Web.UI.Triplet.Second" />
 
         
 
-        , and <see
-         cref="F:System.Web.UI.Triplet.Third" />
+        , and <see cref="F:System.Web.UI.Triplet.Third" />
 
         
 
@@ -65,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Triplet" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
@@ -92,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Triplet" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
@@ -101,24 +93,30 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Object assigned to <see
-           cref="F:System.Web.UI.Triplet.First" />
+          Object assigned to <see cref="F:System.Web.UI.Triplet.First" />
 
           
 
           .</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Object assigned to <see
-           cref="F:System.Web.UI.Triplet.Second" />
+          Object assigned to <see cref="F:System.Web.UI.Triplet.Second" />
 
           
 
@@ -144,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Triplet" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Triplet" />
 
             
 
@@ -153,36 +150,45 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Object assigned to <see
-           cref="F:System.Web.UI.Triplet.First" />
+          Object assigned to <see cref="F:System.Web.UI.Triplet.First" />
 
           
 
           .</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Object assigned to <see
-           cref="F:System.Web.UI.Triplet.Second" />
+          Object assigned to <see cref="F:System.Web.UI.Triplet.Second" />
 
           
 
           .</param
         >
         <param name="z">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Object assigned to <see
-           cref="F:System.Web.UI.Triplet.Third" />
+          Object assigned to <see cref="F:System.Web.UI.Triplet.Third" />
 
           
 

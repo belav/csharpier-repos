@@ -20,8 +20,7 @@
 
         
 
-         can display error messages, show dialog boxes, and get ambient properties of the host, such as the font for dialog boxes and color schemes, through the <see
-         cref="P:System.Windows.Forms.Design.IUIService.Styles" />
+         can display error messages, show dialog boxes, and get ambient properties of the host, such as the font for dialog boxes and color schemes, through the <see cref="P:System.Windows.Forms.Design.IUIService.Styles" />
 
         
 
@@ -51,13 +50,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Component editors can display a component editor form that is similar to a property page from the Component Object Model (COM).</para>
           <para
-            >This method checks to determine whether the specified component has a <see
-             cref="T:System.ComponentModel.ComponentEditor" />
+            >This method checks to determine whether the specified component has a <see cref="T:System.ComponentModel.ComponentEditor" />
 
             
 
-             that can display a <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+             that can display a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
             
 
@@ -67,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the component can display a <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+            >Indicates whether the component can display a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
             
 
@@ -80,12 +76,15 @@
           <para>true if the specified component can display a component editor form; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component to check for support for displaying a <see
-           cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+          The component to check for support for displaying a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
           
 
@@ -111,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some dialog boxes are parented to an owner application and are not visible in the task list. This method returns an <see
-             cref="T:System.Windows.Forms.IWin32Window" />
+            >Some dialog boxes are parented to an owner application and are not visible in the task list. This method returns an <see cref="T:System.Windows.Forms.IWin32Window" />
 
             
 
@@ -126,8 +124,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Windows.Forms.IWin32Window" />
+            >An <see cref="T:System.Windows.Forms.IWin32Window" />
 
             
 
@@ -179,21 +176,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+            >A <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
             
 
              is similar to a property page from the Component Object Model (COM).</para
           >
           <para
-            >If the component does not support component editors, an <see
-             cref="T:System.ArgumentException" />
+            >If the component does not support component editors, an <see cref="T:System.ArgumentException" />
 
             
 
-             is thrown. To avoid this, be sure to call <see
-             cref="M:System.Windows.Forms.Design.IUIService.CanShowComponentEditor(System.Object)" />
+             is thrown. To avoid this, be sure to call <see cref="M:System.Windows.Forms.Design.IUIService.CanShowComponentEditor(System.Object)" />
 
             
 
@@ -203,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to display a <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+            >Attempts to display a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
             
 
@@ -216,24 +209,30 @@
           <para>true if the attempt is successful; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component for which to display a <see
-           cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+          The component for which to display a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
           
 
           . </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.IWin32Window" />
+          The <see cref="T:System.Windows.Forms.IWin32Window" />
 
           
 
@@ -266,8 +265,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >One of the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -275,12 +273,15 @@
           >
         </returns>
         <param name="form">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Form" />
+          The <see cref="T:System.Windows.Forms.Form" />
 
           
 
@@ -311,12 +312,15 @@
           <para>Displays the specified exception and information about the exception in a message box.</para>
         </summary>
         <param name="ex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -347,7 +351,11 @@
           <para>Displays the specified error message in a message box.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,19 +390,26 @@
           <para>Displays the specified exception and information about the exception in a message box.</para>
         </summary>
         <param name="ex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
            to display. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -425,7 +440,11 @@
           <para>Displays the specified message in a message box.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -460,14 +479,22 @@
           <para>Displays the specified message in a message box with the specified caption.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to display. </param
         >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -505,8 +532,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >One of the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -514,46 +540,53 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to display. </param
         >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The caption for the dialog box. </param
         >
         <param name="buttons">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MessageBoxButtons" />
+          One of the <see cref="T:System.Windows.Forms.MessageBoxButtons" />
 
           
 
-           values: <see
-           cref="F:System.Windows.Forms.MessageBoxButtons.OK" />
+           values: <see cref="F:System.Windows.Forms.MessageBoxButtons.OK" />
 
           
 
-          , <see
-           cref="F:System.Windows.Forms.MessageBoxButtons.OKCancel" />
+          , <see cref="F:System.Windows.Forms.MessageBoxButtons.OKCancel" />
 
           
 
-          , <see
-           cref="F:System.Windows.Forms.MessageBoxButtons.YesNo" />
+          , <see cref="F:System.Windows.Forms.MessageBoxButtons.YesNo" />
 
           
 
-          , or <see
-           cref="F:System.Windows.Forms.MessageBoxButtons.YesNoCancel" />
+          , or <see cref="F:System.Windows.Forms.MessageBoxButtons.YesNoCancel" />
 
           
 
@@ -585,22 +618,23 @@
           <para>true if the tool window was successfully shown; false if it could not be shown or found.</para>
         </returns>
         <param name="toolWindow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Guid" />
+          A <see cref="T:System.Guid" />
 
           
 
-           identifier for the tool window. This can be a custom <see
-           cref="T:System.Guid" />
+           identifier for the tool window. This can be a custom <see cref="T:System.Guid" />
 
           
 
-           or one of the predefined values from <see
-           cref="T:System.ComponentModel.Design.StandardToolWindows" />
+           or one of the predefined values from <see cref="T:System.ComponentModel.Design.StandardToolWindows" />
 
           
 
@@ -627,8 +661,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The dictionary can provide information from the host environment. At a minimum, this consists of the font that should be used for standard UI text, and the color to use for highlighting. These required styles are "DialogFont" and "HighlightColor".</para>
           <para
-            >The values for these styles may be retrieved by using the style as a key for the dictionary, accessing the dictionary using the key as an indexer. For example: (object implementing <see
-             cref="T:System.Windows.Forms.Design.IUIService" />
+            >The values for these styles may be retrieved by using the style as a key for the dictionary, accessing the dictionary using the key as an indexer. For example: (object implementing <see cref="T:System.Windows.Forms.Design.IUIService" />
 
             
 

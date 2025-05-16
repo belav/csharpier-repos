@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.FaultReasonText" />
+        >Use the <see cref="T:System.ServiceModel.FaultReasonText" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultReasonText" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultReasonText" />
 
             
 
@@ -58,7 +56,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -88,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultReasonText" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultReasonText" />
 
             
 
-             class that uses the specified SOAP fault text and the specified <see
-             cref="T:System.Globalization.CultureInfo" />
+             class that uses the specified SOAP fault text and the specified <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -102,19 +102,26 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text that is the reason of the SOAP fault.</param
         >
         <param name="cultureInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.CultureInfo" />
+          The <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -144,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultReasonText" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultReasonText" />
 
             
 
@@ -153,14 +159,22 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the fault reason.</param
         >
         <param name="xmlLang">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -192,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the language of the description matches provided <see
-             cref="T:System.Globalization.CultureInfo" />
+            >Returns a value that indicates whether the language of the description matches provided <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -203,8 +216,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Globalization.CultureInfo" />
+            >true if the specified <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -212,12 +224,15 @@
           >
         </returns>
         <param name="cultureInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.CultureInfo" />
+          The <see cref="T:System.Globalization.CultureInfo" />
 
           
 

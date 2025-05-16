@@ -25,8 +25,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+        >Represents a collection of <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
         
 
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection to a compatible one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -60,34 +58,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+           that is the destination of the elements copied from <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -110,13 +112,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >Each <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-             object in the collection represents an <format
-             type="text/html">
+             object in the collection represents an <format type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
 
@@ -128,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the number of <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >Gets a value indicating the number of <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -156,13 +155,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
 
             
 
@@ -176,13 +173,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the entire <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+             for the entire <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
 
             
 
@@ -207,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+            >Gets a value indicating whether access to the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
 
             
 
@@ -233,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroupCollection" />
 
             
 

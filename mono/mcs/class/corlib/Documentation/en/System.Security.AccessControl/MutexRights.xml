@@ -23,28 +23,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.MutexRights" />
+        >Use the <see cref="T:System.Security.AccessControl.MutexRights" />
 
         
 
-         enumeration to specify access control rights when you create <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         enumeration to specify access control rights when you create <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
-         objects. To apply access rights to a named system mutex, use <see
-         cref="T:System.Security.AccessControl.MutexSecurity" />
+         objects. To apply access rights to a named system mutex, use <see cref="T:System.Security.AccessControl.MutexSecurity" />
 
         
 
-         objects with the <see
-         cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String,System.Boolean@,System.Security.AccessControl.MutexSecurity)" />
+         objects with the <see cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String,System.Boolean@,System.Security.AccessControl.MutexSecurity)" />
 
         
 
-         constructor and the <see
-         cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+         constructor and the <see cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
 
         
 

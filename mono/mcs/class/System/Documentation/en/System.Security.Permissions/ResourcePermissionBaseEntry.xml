@@ -47,8 +47,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" />
+            >The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" />
 
             
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
 
             
 
@@ -93,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
 
             
 
@@ -102,24 +99,30 @@
           >
         </summary>
         <param name="permissionAccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The integer representation of the permission access level enumeration value. The <see
-           cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" />
+          The integer representation of the permission access level enumeration value. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccess" />
 
           
 
            property is set to this value. </param
         >
         <param name="permissionAccessPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of strings that identify the resource you are protecting. The <see
-           cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" />
+          The array of strings that identify the resource you are protecting. The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" />
 
           
 
@@ -169,33 +172,27 @@
 
             
 
-             has two properties, <see
-             cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />
+             has two properties, <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />
+             and <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />
 
             
 
-            . The <see
-             cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" />
+            . The <see cref="P:System.Security.Permissions.ResourcePermissionBaseEntry.PermissionAccessPath" />
 
             
 
-             for <see
-             cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" />
+             for <see cref="T:System.Diagnostics.PerformanceCounterPermissionEntry" />
 
             
 
-             returns <see
-             cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />
+             returns <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.MachineName" />
 
             
 
-             + "\\" + <see
-             cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />
+             + "\\" + <see cref="P:System.Diagnostics.PerformanceCounterPermissionEntry.CategoryName" />
 
             
 

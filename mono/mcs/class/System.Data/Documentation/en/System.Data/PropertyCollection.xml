@@ -21,46 +21,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.PropertyCollection" />
+        >The <see cref="T:System.Data.PropertyCollection" />
 
         
 
-         can be accessed through the ExtendedProperties property of the <see
-         cref="T:System.Data.DataColumn" />
+         can be accessed through the ExtendedProperties property of the <see cref="T:System.Data.DataColumn" />
 
         
 
-        , <see
-         cref="T:System.Data.DataSet" />
+        , <see cref="T:System.Data.DataSet" />
 
         
 
-        , or <see
-         cref="T:System.Data.DataTable" />
+        , or <see cref="T:System.Data.DataTable" />
 
         
 
          class.</para
       >
       <para
-        >Add custom properties to the <see
-         cref="T:System.Data.DataColumn" />
+        >Add custom properties to the <see cref="T:System.Data.DataColumn" />
 
         
 
-        , <see
-         cref="T:System.Data.DataSet" />
+        , <see cref="T:System.Data.DataSet" />
 
         
 
-        , or <see
-         cref="T:System.Data.DataTable" />
+        , or <see cref="T:System.Data.DataTable" />
 
         
 
-         objects through the <see
-         cref="T:System.Data.PropertyCollection" />
+         objects through the <see cref="T:System.Data.PropertyCollection" />
 
         
 
@@ -70,18 +62,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of properties that can be added to <see
-         cref="T:System.Data.DataColumn" />
+        >Represents a collection of properties that can be added to <see cref="T:System.Data.DataColumn" />
 
         
 
-        , <see
-         cref="T:System.Data.DataSet" />
+        , <see cref="T:System.Data.DataSet" />
 
         
 
-        , or <see
-         cref="T:System.Data.DataTable" />
+        , or <see cref="T:System.Data.DataTable" />
 
         
 
@@ -103,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.PropertyCollection" />
+            >Initializes a new instance of the <see cref="T:System.Data.PropertyCollection" />
 
             
 
@@ -135,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.PropertyCollection" />
+            >Initializes a new instance of the <see cref="T:System.Data.PropertyCollection" />
 
             
 
@@ -144,14 +131,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data needed to serialize or deserialize an object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

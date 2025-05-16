@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Compilers use the <see
-         cref="T:System.Runtime.CompilerServices.NativeCppClassAttribute" />
+        >Compilers use the <see cref="T:System.Runtime.CompilerServices.NativeCppClassAttribute" />
 
         
 
@@ -61,8 +60,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compilers use the <see
-             cref="T:System.Runtime.CompilerServices.NativeCppClassAttribute" />
+            >Compilers use the <see cref="T:System.Runtime.CompilerServices.NativeCppClassAttribute" />
 
             
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.NativeCppClassAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.NativeCppClassAttribute" />
 
             
 

@@ -81,16 +81,14 @@
   </Members>
   <Docs>
     <summary
-      >Typed collection for <see
-       cref="T:Commons.Xml.Nvdl.NvdlAction" />
+      >Typed collection for <see cref="T:Commons.Xml.Nvdl.NvdlAction" />
 
       
 
       .</summary
     >
     <remarks
-      >This class is a collection for <see
-       cref="T:Commons.Xml.Nvdl.NvdlAction" />
+      >This class is a collection for <see cref="T:Commons.Xml.Nvdl.NvdlAction" />
 
       
 

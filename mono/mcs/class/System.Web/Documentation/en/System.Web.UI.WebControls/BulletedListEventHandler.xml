@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create a <see
-         cref="T:System.Web.UI.WebControls.BulletedListEventHandler" />
+        >When you create a <see cref="T:System.Web.UI.WebControls.BulletedListEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the <see
-         cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+         delegate, you identify the method that will handle the <see cref="E:System.Web.UI.WebControls.BulletedList.Click" />
 
         
 
-         event of a <see
-         cref="T:System.Web.UI.WebControls.BulletedList" />
+         event of a <see cref="T:System.Web.UI.WebControls.BulletedList" />
 
         
 
-         control. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         control. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -53,13 +49,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+        >Represents the method that will handle the <see cref="E:System.Web.UI.WebControls.BulletedList.Click" />
 
         
 
-         event of a <see
-         cref="T:System.Web.UI.WebControls.BulletedList" />
+         event of a <see cref="T:System.Web.UI.WebControls.BulletedList" />
 
         
 

@@ -58,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonArray" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonArray" />
 
             
 
@@ -67,12 +66,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The enumeration of objects of type <see
-           cref="T:System.Json.JsonValue" />
+          The enumeration of objects of type <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -104,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Json.JsonArray" />
+            >Initializes a new instance of the <see cref="T:System.Json.JsonArray" />
 
             
 
@@ -113,12 +114,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of type <see
-           cref="T:System.Json.JsonValue" />
+          The array of type <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -147,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Json.JsonValue" />
+            >Adds a <see cref="T:System.Json.JsonValue" />
 
             
 
@@ -156,12 +159,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Json.JsonValue" />
+          The <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -196,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements from a collection of type <see
-             cref="T:System.Json.JsonValue" />
+            >Adds the elements from a collection of type <see cref="T:System.Json.JsonValue" />
 
             
 
@@ -205,7 +210,11 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements from an array of type <see
-             cref="T:System.Json.JsonValue" />
+            >Adds the elements from an array of type <see cref="T:System.Json.JsonValue" />
 
             
 
@@ -252,12 +260,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of type <see
-           cref="T:System.Json.JsonValue" />
+          The array of type <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -284,8 +295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all JSON CLR types from the <see
-             cref="T:System.Json.JsonArray" />
+            >Removes all JSON CLR types from the <see cref="T:System.Json.JsonArray" />
 
             
 
@@ -315,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a specified JSON CLR type is in the <see
-             cref="T:System.Json.JsonArray" />
+            >Indicates whether a specified JSON CLR type is in the <see cref="T:System.Json.JsonArray" />
 
             
 
@@ -326,8 +335,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the item is found in the <see
-             cref="T:System.Json.JsonArray" />
+            >true if the item is found in the <see cref="T:System.Json.JsonArray" />
 
             
 
@@ -335,12 +343,15 @@
           >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Json.JsonValue" />
+          The <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -375,14 +386,22 @@
           <para>Copies the contents of the current JSON CLR array instance into a specified destination array beginning at the specified index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The destination array to which the elements of the current array are copied.</param
         >
         <param name="arrayIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -406,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Json.JsonValue" />
+            >Gets the number of <see cref="T:System.Json.JsonValue" />
 
             
 
@@ -443,12 +461,15 @@
           <para>The zero-based index of the first occurrence of item within the array, if found; otherwise, -1.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Json.JsonValue" />
+          The <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -483,19 +504,26 @@
           <para>Inserts a JSON CLR type into the array at a specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which the item should be inserted.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Json.JsonValue" />
+          The <see cref="T:System.Json.JsonValue" />
 
           
 
@@ -519,8 +547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Json.JsonArray" />
+            >Gets a value that indicates whether the <see cref="T:System.Json.JsonArray" />
 
             
 
@@ -607,7 +634,11 @@
           <para>true if the item is successfully removed; otherwise, false. This method also returns false if the item was not found in the array.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -638,7 +669,11 @@
           <para>Removes the JSON value at a specified index of array.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -713,8 +748,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Json.JsonValue" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Json.JsonValue" />
 
             
 
@@ -724,8 +758,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator that iterates through the <see
-             cref="T:System.Json.JsonValue" />
+            >An enumerator that iterates through the <see cref="T:System.Json.JsonValue" />
 
             
 

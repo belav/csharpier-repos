@@ -17,34 +17,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+        >The <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
         
 
-         class is the location for run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify service run-time behavior for all messages in a contract, use the <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+         class is the location for run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify service run-time behavior for all messages in a contract, use the <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
         
 
          class.) </para
       >
       <para
-        >Install <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+        >Install <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
         
 
          modifications using a custom operation behavior object or a behavior at a larger scope in order to modify operations across a contract. </para
       >
       <para
-        >Use the <see
-         cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
+        >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.Operations" />
 
         
 
-         property to locate the <see
-         cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+         property to locate the <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
         
 
@@ -53,33 +48,27 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Action" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Action" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReplyAction" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReplyAction" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.FaultContractInfos" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.FaultContractInfos" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.IsOneWay" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.IsOneWay" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.IsTerminating" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.IsTerminating" />
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Name" />
+            , and <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Name" />
 
             
 
@@ -88,13 +77,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionAutoComplete" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionAutoComplete" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionRequired" />
+             and <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionRequired" />
 
             
 
@@ -103,18 +90,15 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReleaseInstanceBeforeCall" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReleaseInstanceBeforeCall" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReleaseInstanceAfterCall" />
+             and <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ReleaseInstanceAfterCall" />
 
             
 
-             properties control the lifetime of the user-defined service object relative to the <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             properties control the lifetime of the user-defined service object relative to the <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -123,18 +107,15 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
+            , <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
 
             
 
-            , and the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+            , and the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
 
             
 
@@ -143,8 +124,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Impersonation" />
 
             
 
@@ -153,13 +133,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
 
             
 
-             property inserts custom call context extensions for the operation. For more information, see <see
-             cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+             property inserts custom call context extensions for the operation. For more information, see <see cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
 
             
 
@@ -168,8 +146,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.AutoDisposeParameters" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.AutoDisposeParameters" />
 
             
 
@@ -178,8 +155,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Invoker" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Invoker" />
 
             
 
@@ -188,8 +164,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" />
+            >The <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" />
 
             
 
@@ -233,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
@@ -274,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
             
 
@@ -318,13 +291,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property determines whether the service disposes all <see
-             cref="T:System.IDisposable" />
+            >This property determines whether the service disposes all <see cref="T:System.IDisposable" />
 
             
 
-             parameters (input, output or reference parameters) that were created while processing a message. The default value is true. Set this property to false to prevent the system from disposing resources. In this case, you are responsible for the parameter lifetimes. See the <see
-             cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+             parameters (input, output or reference parameters) that were created while processing a message. The default value is true. Set this property to false to prevent the system from disposing resources. In this case, you are responsible for the parameter lifetimes. See the <see cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
 
             
 
@@ -358,13 +329,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
 
             
 
-             property to add custom <see
-             cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+             property to add custom <see cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
 
             
 
@@ -374,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of <see
-             cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
+            >A collection of <see cref="T:System.ServiceModel.Dispatcher.ICallContextInitializer" />
 
             
 
@@ -399,8 +367,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
 
             
 
@@ -409,13 +376,11 @@
           <list type="bullet">
             <item>
               <para
-                >Note   If false, the return type must be of type <see
-                 cref="T:System.ServiceModel.Channels.Message" />
+                >Note   If false, the return type must be of type <see cref="T:System.ServiceModel.Channels.Message" />
 
                 
 
-                 and there can be no out parameters or an <see
-                 cref="T:System.InvalidCastException" />
+                 and there can be no out parameters or an <see cref="T:System.InvalidCastException" />
 
                 
 
@@ -427,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+            >Gets or sets a value that indicates whether the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
 
             
 
@@ -458,8 +422,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
 
             
 
@@ -469,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
 
             
 
@@ -500,41 +462,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
 
             
 
-             property to insert a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IDispatchMessageFormatter" />
+             property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IDispatchMessageFormatter" />
 
             
 
-             implementation for an operation or modify the current formatter. In the case of strongly-typed message operations, the use of the formatter can be controlled by the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
+             implementation for an operation or modify the current formatter. In the case of strongly-typed message operations, the use of the formatter can be controlled by the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
+             and <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.DeserializeRequest" />
 
             
 
              properties.</para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Dispatcher.IDispatchMessageFormatter" />
+            >The <see cref="T:System.ServiceModel.Dispatcher.IDispatchMessageFormatter" />
 
             
 
-             interface defines the <see
-             cref="M:System.ServiceModel.Dispatcher.IDispatchMessageFormatter.SerializeReply(System.ServiceModel.Channels.MessageVersion,System.Object[],System.Object)" />
+             interface defines the <see cref="M:System.ServiceModel.Dispatcher.IDispatchMessageFormatter.SerializeReply(System.ServiceModel.Channels.MessageVersion,System.Object[],System.Object)" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Dispatcher.IDispatchMessageFormatter.DeserializeRequest(System.ServiceModel.Channels.Message,System.Object[])" />
+             and <see cref="M:System.ServiceModel.Dispatcher.IDispatchMessageFormatter.DeserializeRequest(System.ServiceModel.Channels.Message,System.Object[])" />
 
             
 
@@ -593,8 +548,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
+            >For more information, see <see cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
 
             
 
@@ -604,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
+            >Gets or sets the <see cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
 
             
 
@@ -692,13 +645,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" />
 
             
 
-             property to insert a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+             property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
 
             
 
@@ -708,8 +659,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+            >Gets or sets a collection of <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
 
             
 
@@ -740,8 +690,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the associated <see
-             cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+            >Gets the associated <see cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
             
 
@@ -822,8 +771,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.SerializeReply" />
 
             
 
@@ -831,8 +779,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If set to false, the return value of the operation must be of type <see
-               cref="T:System.ServiceModel.Channels.Message" />
+              >If set to false, the return value of the operation must be of type <see cref="T:System.ServiceModel.Channels.Message" />
 
               
 
@@ -843,8 +790,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
+            >Gets or sets a value that specifies whether the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.Formatter" />
 
             
 
@@ -887,8 +833,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionRequired" />
+            >If the <see cref="P:System.ServiceModel.Dispatcher.DispatchOperation.TransactionRequired" />
 
             
 

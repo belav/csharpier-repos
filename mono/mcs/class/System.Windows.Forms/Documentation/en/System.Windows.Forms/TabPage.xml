@@ -41,18 +41,15 @@
 
         
 
-         controls represent the tabbed pages in a <see
-         cref="T:System.Windows.Forms.TabControl" />
+         controls represent the tabbed pages in a <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
-         control. The order of tab pages in the <see
-         cref="P:System.Windows.Forms.TabControl.TabPages" />
+         control. The order of tab pages in the <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
         
 
-         collection reflects the order of tabs in the <see
-         cref="T:System.Windows.Forms.TabControl" />
+         collection reflects the order of tabs in the <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
@@ -63,86 +60,70 @@
 
         
 
-         controls are constrained by their container, so some of the properties inherited from the <see
-         cref="T:System.Windows.Forms.Control" />
+         controls are constrained by their container, so some of the properties inherited from the <see cref="T:System.Windows.Forms.Control" />
 
         
 
-         base class will have no effect, including <see
-         cref="P:System.Windows.Forms.Control.Top" />
+         base class will have no effect, including <see cref="P:System.Windows.Forms.Control.Top" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.Height" />
+        , <see cref="P:System.Windows.Forms.Control.Height" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.Left" />
+        , <see cref="P:System.Windows.Forms.Control.Left" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.Width" />
+        , <see cref="P:System.Windows.Forms.Control.Width" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.Control.Show" />
+        , <see cref="M:System.Windows.Forms.Control.Show" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.Control.Hide" />
+        , and <see cref="M:System.Windows.Forms.Control.Hide" />
 
         
 
         .</para
       >
       <para
-        >The tabs in a <see
-         cref="T:System.Windows.Forms.TabControl" />
+        >The tabs in a <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
-         are part of the <see
-         cref="T:System.Windows.Forms.TabControl" />
+         are part of the <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
-         but not parts of the individual <see
-         cref="T:System.Windows.Forms.TabPage" />
+         but not parts of the individual <see cref="T:System.Windows.Forms.TabPage" />
 
         
 
-         controls. Members of the <see
-         cref="T:System.Windows.Forms.TabPage" />
+         controls. Members of the <see cref="T:System.Windows.Forms.TabPage" />
 
         
 
-         class, such as the <see
-         cref="P:System.Windows.Forms.Control.ForeColor" />
+         class, such as the <see cref="P:System.Windows.Forms.Control.ForeColor" />
 
         
 
-         property, affect only the client rectangle of the tab page, but not the tabs. Additionally, the <see
-         cref="M:System.Windows.Forms.Control.Hide" />
+         property, affect only the client rectangle of the tab page, but not the tabs. Additionally, the <see cref="M:System.Windows.Forms.Control.Hide" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.TabPage" />
+         method of the <see cref="T:System.Windows.Forms.TabPage" />
 
         
 
-         will not hide the tab. To hide the tab, you must remove the <see
-         cref="T:System.Windows.Forms.TabPage" />
+         will not hide the tab. To hide the tab, you must remove the <see cref="T:System.Windows.Forms.TabPage" />
 
         
 
-         control from the <see
-         cref="P:System.Windows.Forms.TabControl.TabPages" />
+         control from the <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
         
 
@@ -150,33 +131,27 @@
       >
       <block subset="none" type="note">
         <para
-          >In dnprdnext, the tab is considered part of the tab page for determining when the <see
-           cref="E:System.Windows.Forms.Control.Enter" />
+          >In dnprdnext, the tab is considered part of the tab page for determining when the <see cref="E:System.Windows.Forms.Control.Enter" />
 
           
 
-           and <see
-           cref="E:System.Windows.Forms.Control.Leave" />
+           and <see cref="E:System.Windows.Forms.Control.Leave" />
 
           
 
-           events of the <see
-           cref="T:System.Windows.Forms.TabPage" />
+           events of the <see cref="T:System.Windows.Forms.TabPage" />
 
           
 
-           occur. In earlier versions of the .NET Framework, the <see
-           cref="E:System.Windows.Forms.Control.Enter" />
+           occur. In earlier versions of the .NET Framework, the <see cref="E:System.Windows.Forms.Control.Enter" />
 
           
 
-           and <see
-           cref="E:System.Windows.Forms.Control.Leave" />
+           and <see cref="E:System.Windows.Forms.Control.Leave" />
 
           
 
-           events of the <see
-           cref="T:System.Windows.Forms.TabPage" />
+           events of the <see cref="T:System.Windows.Forms.TabPage" />
 
           
 
@@ -184,48 +159,39 @@
         >
       </block>
       <para
-        >For more information about how this control responds to the <see
-         cref="M:System.Windows.Forms.Control.Focus" />
+        >For more information about how this control responds to the <see cref="M:System.Windows.Forms.Control.Focus" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.Control.Select" />
+         and <see cref="M:System.Windows.Forms.Control.Select" />
 
         
 
-         methods, see the following <see
-         cref="T:System.Windows.Forms.Control" />
+         methods, see the following <see cref="T:System.Windows.Forms.Control" />
 
         
 
-         members: <see
-         cref="P:System.Windows.Forms.Control.CanFocus" />
+         members: <see cref="P:System.Windows.Forms.Control.CanFocus" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.CanSelect" />
+        , <see cref="P:System.Windows.Forms.Control.CanSelect" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.Focused" />
+        , <see cref="P:System.Windows.Forms.Control.Focused" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.Control.ContainsFocus" />
+        , <see cref="P:System.Windows.Forms.Control.ContainsFocus" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.Control.Focus" />
+        , <see cref="M:System.Windows.Forms.Control.Focus" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.Control.Select" />
+        , <see cref="M:System.Windows.Forms.Control.Select" />
 
         
 
@@ -233,8 +199,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Controls contained in a <see
-           cref="T:System.Windows.Forms.TabPage" />
+          >Controls contained in a <see cref="T:System.Windows.Forms.TabPage" />
 
           
 
@@ -242,33 +207,27 @@
         >
       </block>
       <para
-        >In dnprdnext, the <see
-         cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+        >In dnprdnext, the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
         
 
-         property lets you indicate whether the background of the tab page should render using the current visual style. This occurs only when the <see
-         cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+         property lets you indicate whether the background of the tab page should render using the current visual style. This occurs only when the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+         and <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
 
         
 
-         property values are both true and the <see
-         cref="P:System.Windows.Forms.TabControl.Appearance" />
+         property values are both true and the <see cref="P:System.Windows.Forms.TabControl.Appearance" />
 
         
 
-         property of the parent <see
-         cref="T:System.Windows.Forms.TabControl" />
+         property of the parent <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
-         is <see
-         cref="F:System.Windows.Forms.TabAppearance.Normal" />
+         is <see cref="F:System.Windows.Forms.TabAppearance.Normal" />
 
         
 
@@ -278,8 +237,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a single tab page in a <see
-         cref="T:System.Windows.Forms.TabControl" />
+        >Represents a single tab page in a <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
@@ -297,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -321,13 +278,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.Text" />
+            >The <see cref="P:System.Windows.Forms.TabPage.Text" />
 
             
 
-             property is set to the value of the <paramref
-             name="text" />
+             property is set to the value of the <paramref name="text" />
 
             
 
@@ -337,8 +292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -346,7 +300,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -438,13 +396,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although you can change the value of the <see
-             cref="P:System.Windows.Forms.TabPage.AutoSize" />
+            >Although you can change the value of the <see cref="P:System.Windows.Forms.TabPage.AutoSize" />
 
             
 
-             property and handle this event to determine when the value changes, the <see
-             cref="P:System.Windows.Forms.TabPage.AutoSize" />
+             property and handle this event to determine when the value changes, the <see cref="P:System.Windows.Forms.TabPage.AutoSize" />
 
             
 
@@ -454,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.AutoSize" />
 
             
 
@@ -514,91 +469,74 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+            >The default value of the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             property is the value of the <see
-             cref="P:System.Windows.Forms.Control.DefaultBackColor" />
+             property is the value of the <see cref="P:System.Windows.Forms.Control.DefaultBackColor" />
 
             
 
-             property unless the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+             property unless the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+             and <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
 
             
 
-             property values are both true and the <see
-             cref="P:System.Windows.Forms.TabControl.Appearance" />
+             property values are both true and the <see cref="P:System.Windows.Forms.TabControl.Appearance" />
 
             
 
-             property of the parent <see
-             cref="T:System.Windows.Forms.TabControl" />
+             property of the parent <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-             has a value of <see
-             cref="F:System.Windows.Forms.TabAppearance.Normal" />
+             has a value of <see cref="F:System.Windows.Forms.TabAppearance.Normal" />
 
             
 
-            , in which case the default value of the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+            , in which case the default value of the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             property is <see
-             cref="P:System.Drawing.Color.Transparent" />
+             property is <see cref="P:System.Drawing.Color.Transparent" />
 
             
 
-            . Child controls that you place on the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            . Child controls that you place on the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             inherit the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+             inherit the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
              value by default, so this behavior causes the background of the child controls to render with the current visual style.</para
           >
           <para
-            >Changing the value of the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+            >Changing the value of the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             property automatically sets the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+             property automatically sets the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             property to false. If you want the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             property to false. If you want the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             background to render using visual styles but you want the child controls to inherit a <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+             background to render using visual styles but you want the child controls to inherit a <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             value that you specify, set the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+             value that you specify, set the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             property after you set the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+             property after you set the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
@@ -608,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the background color for the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >Gets or sets the background color for the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -690,13 +627,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.Dock" />
+            >The <see cref="P:System.Windows.Forms.TabPage.Dock" />
 
             
 
-             property is not meaningful for this control, although you can change its value and handle the <see
-             cref="E:System.Windows.Forms.TabPage.DockChanged" />
+             property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabPage.DockChanged" />
 
             
 
@@ -706,8 +641,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Dock" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.Dock" />
 
             
 
@@ -765,13 +699,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.Enabled" />
+            >The <see cref="P:System.Windows.Forms.TabPage.Enabled" />
 
             
 
-             property is not meaningful for this control, although you can change its value and handle the <see
-             cref="E:System.Windows.Forms.TabPage.EnabledChanged" />
+             property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabPage.EnabledChanged" />
 
             
 
@@ -781,8 +713,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Enabled" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.Enabled" />
 
             
 
@@ -816,8 +747,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >The <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -825,7 +755,11 @@
           >
         </returns>
         <param name="comp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -865,18 +799,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.ImageIndex" />
+            >The <see cref="P:System.Windows.Forms.TabPage.ImageIndex" />
 
             
 
-             points to an image in the associated <see
-             cref="P:System.Windows.Forms.TabControl.ImageList" />
+             points to an image in the associated <see cref="P:System.Windows.Forms.TabControl.ImageList" />
 
             
 
-             of the <see
-             cref="T:System.Windows.Forms.TabControl" />
+             of the <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
@@ -924,8 +855,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.ImageKey" />
+            >The <see cref="P:System.Windows.Forms.TabPage.ImageKey" />
 
             
 
@@ -935,13 +865,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the key accessor for the image in the <see
-             cref="P:System.Windows.Forms.TabControl.ImageList" />
+            >Gets or sets the key accessor for the image in the <see cref="P:System.Windows.Forms.TabControl.ImageList" />
 
             
 
-             of the associated <see
-             cref="T:System.Windows.Forms.TabControl" />
+             of the associated <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
@@ -999,13 +927,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although you can change the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Location" />
+            >Although you can change the value of the <see cref="P:System.Windows.Forms.TabPage.Location" />
 
             
 
-             property and handle this event to determine when the value changes, the <see
-             cref="P:System.Windows.Forms.TabPage.Location" />
+             property and handle this event to determine when the value changes, the <see cref="P:System.Windows.Forms.TabPage.Location" />
 
             
 
@@ -1015,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Location" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.Location" />
 
             
 
@@ -1102,41 +1027,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In dnprdnext, the tab is considered part of the tab page for determining when the <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+            >In dnprdnext, the tab is considered part of the tab page for determining when the <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+             and <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             events of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             events of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             occur. In earlier versions of the .NET Framework, the <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+             occur. In earlier versions of the .NET Framework, the <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+             and <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             events of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             events of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
              do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1145,8 +1063,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TabPage.OnEnter(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TabPage.OnEnter(System.EventArgs)" />
 
             
 
@@ -1156,13 +1073,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             event of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -1170,12 +1085,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1199,41 +1117,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In dnprdnext, the tab is considered part of the tab page for determining when the <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+            >In dnprdnext, the tab is considered part of the tab page for determining when the <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+             and <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             events of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             events of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             occur. In earlier versions of the .NET Framework, the <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+             occur. In earlier versions of the .NET Framework, the <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+             and <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             events of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             events of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
              do not occur when focus enters or leaves a tab, but only when focus enters or leaves the client rectangle of the tab page.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1242,8 +1153,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TabPage.OnLeave(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TabPage.OnLeave(System.EventArgs)" />
 
             
 
@@ -1253,13 +1163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             event of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -1267,12 +1175,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1299,33 +1210,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The system calls this method to paint the background of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >The system calls this method to paint the background of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-            . When the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+            . When the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+             and <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
 
             
 
-             property values are both true and the <see
-             cref="P:System.Windows.Forms.TabControl.Appearance" />
+             property values are both true and the <see cref="P:System.Windows.Forms.TabControl.Appearance" />
 
             
 
-             property of the parent <see
-             cref="T:System.Windows.Forms.TabControl" />
+             property of the parent <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-             is <see
-             cref="F:System.Windows.Forms.TabAppearance.Normal" />
+             is <see cref="F:System.Windows.Forms.TabAppearance.Normal" />
 
             
 
@@ -1335,8 +1240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Paints the background of the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >Paints the background of the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -1344,12 +1248,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -1404,8 +1311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="M:System.Windows.Forms.Control.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" />
+            >This member overrides <see cref="M:System.Windows.Forms.Control.SetBoundsCore(System.Int32,System.Int32,System.Int32,System.Int32,System.Windows.Forms.BoundsSpecified)" />
 
             
 
@@ -1413,60 +1319,75 @@
           >
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Left" />
+          The new <see cref="P:System.Windows.Forms.Control.Left" />
 
           
 
            property value of the control.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Top" />
+          The new <see cref="P:System.Windows.Forms.Control.Top" />
 
           
 
            property value of the control.</param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Width" />
+          The new <see cref="P:System.Windows.Forms.Control.Width" />
 
           
 
            property value of the control.</param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Height" />
+          The new <see cref="P:System.Windows.Forms.Control.Height" />
 
           
 
            property value of the control.</param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
@@ -1497,18 +1418,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Control.TabIndex" />
+            >The <see cref="P:System.Windows.Forms.Control.TabIndex" />
 
             
 
-             property indicates the order in which controls receive focus as a user presses the TAB key on a form. <see
-             cref="T:System.Windows.Forms.TabPage" />
+             property indicates the order in which controls receive focus as a user presses the TAB key on a form. <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             controls are contained within <see
-             cref="T:System.Windows.Forms.TabControl" />
+             controls are contained within <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
@@ -1543,13 +1461,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.TabIndex" />
+            >The <see cref="P:System.Windows.Forms.TabPage.TabIndex" />
 
             
 
-             property is not meaningful for this control, although you can change its value and handle the <see
-             cref="E:System.Windows.Forms.TabPage.TabIndexChanged" />
+             property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabPage.TabIndexChanged" />
 
             
 
@@ -1559,8 +1475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.TabIndex" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.TabIndex" />
 
             
 
@@ -1596,8 +1511,7 @@
 
             
 
-             controls are contained within <see
-             cref="T:System.Windows.Forms.TabControl" />
+             controls are contained within <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
@@ -1632,13 +1546,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.TabStop" />
+            >The <see cref="P:System.Windows.Forms.TabPage.TabStop" />
 
             
 
-             property is not meaningful for this control, although you can change its value and handle the <see
-             cref="E:System.Windows.Forms.TabPage.TabStopChanged" />
+             property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabPage.TabStopChanged" />
 
             
 
@@ -1648,8 +1560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.TabStop" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.TabStop" />
 
             
 
@@ -1684,38 +1595,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changing the <see
-             cref="P:System.Windows.Forms.TabPage.Text" />
+            >Changing the <see cref="P:System.Windows.Forms.TabPage.Text" />
 
             
 
-             property value does not automatically center the new value on the tab if the <see
-             cref="T:System.Windows.Forms.TabControl" />
+             property value does not automatically center the new value on the tab if the <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-             has a <see
-             cref="P:System.Windows.Forms.TabControl.SizeMode" />
+             has a <see cref="P:System.Windows.Forms.TabControl.SizeMode" />
 
             
 
-             property value of <see
-             cref="F:System.Windows.Forms.TabSizeMode.Fixed" />
+             property value of <see cref="F:System.Windows.Forms.TabSizeMode.Fixed" />
 
             
 
-            . You can work around this limitation by setting the <see
-             cref="P:System.Windows.Forms.TabControl.ItemSize" />
+            . You can work around this limitation by setting the <see cref="P:System.Windows.Forms.TabControl.ItemSize" />
 
             
 
-             property or by removing the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             property or by removing the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             from the <see
-             cref="P:System.Windows.Forms.TabControl.TabPages" />
+             from the <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
             
 
@@ -1754,8 +1658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabControl.Text" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabControl.Text" />
 
             
 
@@ -1783,23 +1686,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This tab page belongs to a <see
-             cref="T:System.Windows.Forms.TabControl" />
+            >This tab page belongs to a <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-            . The ToolTip text appears when the user moves the mouse over the tab if the <see
-             cref="P:System.Windows.Forms.TabControl.ShowToolTips" />
+            . The ToolTip text appears when the user moves the mouse over the tab if the <see cref="P:System.Windows.Forms.TabControl.ShowToolTips" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.TabControl" />
+             property of the <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-             is true. For more information about ToolTips, see the <see
-             cref="T:System.Windows.Forms.ToolTip" />
+             is true. For more information about ToolTips, see the <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
@@ -1828,8 +1727,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string containing the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Text" />
+            >Returns a string containing the value of the <see cref="P:System.Windows.Forms.TabPage.Text" />
 
             
 
@@ -1839,8 +1737,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Text" />
+            >A string containing the value of the <see cref="P:System.Windows.Forms.TabPage.Text" />
 
             
 
@@ -1865,99 +1762,81 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >The <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             background uses the current visual style only when the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+             background uses the current visual style only when the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+             and <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
 
             
 
              property values are both true. </para
           >
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+            >When the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
+             and <see cref="P:System.Windows.Forms.Application.RenderWithVisualStyles" />
 
             
 
-             property values are both true and the <see
-             cref="P:System.Windows.Forms.TabControl.Appearance" />
+             property values are both true and the <see cref="P:System.Windows.Forms.TabControl.Appearance" />
 
             
 
-             property of the parent <see
-             cref="T:System.Windows.Forms.TabControl" />
+             property of the parent <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-             is <see
-             cref="F:System.Windows.Forms.TabAppearance.Normal" />
+             is <see cref="F:System.Windows.Forms.TabAppearance.Normal" />
 
             
 
-            , the default value of the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+            , the default value of the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             property is <see
-             cref="P:System.Drawing.Color.Transparent" />
+             property is <see cref="P:System.Drawing.Color.Transparent" />
 
             
 
-            . Child controls that you place on the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            . Child controls that you place on the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             inherit the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+             inherit the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
              value by default, so this behavior causes the background of the child controls to render with the current visual style.</para
           >
           <para
-            >Changing the value of the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+            >Changing the value of the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             property automatically sets the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+             property automatically sets the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             property to false. If you want the <see
-             cref="T:System.Windows.Forms.TabPage" />
+             property to false. If you want the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             background to render using visual styles but you want the child controls to inherit a <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+             background to render using visual styles but you want the child controls to inherit a <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
-             value that you specify, set the <see
-             cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
+             value that you specify, set the <see cref="P:System.Windows.Forms.TabPage.UseVisualStyleBackColor" />
 
             
 
-             property after you set the <see
-             cref="P:System.Windows.Forms.TabPage.BackColor" />
+             property after you set the <see cref="P:System.Windows.Forms.TabPage.BackColor" />
 
             
 
@@ -1967,8 +1846,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
@@ -2005,13 +1883,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This member is not meaningful for this control.</para>
           <para
-            >To hide a tab in a <see
-             cref="T:System.Windows.Forms.TabControl" />
+            >To hide a tab in a <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-            , you must remove it from the control's <see
-             cref="P:System.Windows.Forms.TabControl.TabPages" />
+            , you must remove it from the control's <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
             
 
@@ -2046,26 +1922,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TabPage.Visible" />
+            >The <see cref="P:System.Windows.Forms.TabPage.Visible" />
 
             
 
-             property is not meaningful for this control, although you can change its value and handle the <see
-             cref="E:System.Windows.Forms.TabPage.VisibleChanged" />
+             property is not meaningful for this control, although you can change its value and handle the <see cref="E:System.Windows.Forms.TabPage.VisibleChanged" />
 
             
 
              event to detect the change.</para
           >
           <para
-            >To hide a tab in a <see
-             cref="T:System.Windows.Forms.TabControl" />
+            >To hide a tab in a <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
-            , you must remove it from the control's <see
-             cref="P:System.Windows.Forms.TabControl.TabPages" />
+            , you must remove it from the control's <see cref="P:System.Windows.Forms.TabControl.TabPages" />
 
             
 
@@ -2075,8 +1947,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TabPage.Visible" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TabPage.Visible" />
 
             
 

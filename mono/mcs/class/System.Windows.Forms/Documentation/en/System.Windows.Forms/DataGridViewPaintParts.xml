@@ -18,28 +18,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the protected <see
-         cref="M:System.Windows.Forms.DataGridViewCell.Paint(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Object,System.Object,System.String,System.Windows.Forms.DataGridViewCellStyle,System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Windows.Forms.DataGridViewPaintParts)" />
+        >This enumeration is used by the protected <see cref="M:System.Windows.Forms.DataGridViewCell.Paint(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.Int32,System.Windows.Forms.DataGridViewElementStates,System.Object,System.Object,System.String,System.Windows.Forms.DataGridViewCellStyle,System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Windows.Forms.DataGridViewPaintParts)" />
 
         
 
-         method and by handlers for the <see
-         cref="E:System.Windows.Forms.DataGridView.CellPainting" />
+         method and by handlers for the <see cref="E:System.Windows.Forms.DataGridView.CellPainting" />
 
         
 
-        , <see
-         cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+        , <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
 
         
 
-        , and <see
-         cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
+        , and <see cref="E:System.Windows.Forms.DataGridView.RowPostPaint" />
 
         
 
-         events of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         events of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -49,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines values for specifying the parts of a <see
-         cref="T:System.Windows.Forms.DataGridViewCell" />
+        >Defines values for specifying the parts of a <see cref="T:System.Windows.Forms.DataGridViewCell" />
 
         
 

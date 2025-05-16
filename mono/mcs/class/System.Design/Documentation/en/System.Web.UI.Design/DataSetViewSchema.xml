@@ -20,39 +20,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.Design.DataSetViewSchema" />
+        >Use the <see cref="T:System.Web.UI.Design.DataSetViewSchema" />
 
         
 
-         class to list the structure of data using a <see
-         cref="T:System.Data.DataTable" />
+         class to list the structure of data using a <see cref="T:System.Data.DataTable" />
 
         
 
-         at design time. Use the <see
-         cref="M:System.Web.UI.Design.DataSetViewSchema.GetFields" />
+         at design time. Use the <see cref="M:System.Web.UI.Design.DataSetViewSchema.GetFields" />
 
         
 
-         method to get a list of information about each field as <see
-         cref="T:System.Data.DataColumn" />
+         method to get a list of information about each field as <see cref="T:System.Data.DataColumn" />
 
         
 
          objects.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.DataSetViewSchema" />
+        >The <see cref="T:System.Web.UI.Design.DataSetViewSchema" />
 
         
 
          class is used by custom control designer components to provide UI options to the user at design time that accurately reflect the structure of the data.</para
       >
       <para
-        >To examine the components of data using a <see
-         cref="T:System.Data.DataSet" />
+        >To examine the components of data using a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -79,8 +73,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the structure, or schema, of a <see
-         cref="T:System.Data.DataTable" />
+        >Represents the structure, or schema, of a <see cref="T:System.Data.DataTable" />
 
         
 
@@ -106,13 +99,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.UI.Design.DataSetViewSchema" />
+            >Creates an instance of the <see cref="T:System.Web.UI.Design.DataSetViewSchema" />
 
             
 
-             class using a specified <see
-             cref="T:System.Data.DataTable" />
+             class using a specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -120,17 +111,19 @@
           >
         </summary>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
-           that the <see
-           cref="T:System.Web.UI.Design.DataSetViewSchema" />
+           that the <see cref="T:System.Web.UI.Design.DataSetViewSchema" />
 
           
 
@@ -155,13 +148,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DataSetViewSchema.GetChildren" />
+            >The <see cref="M:System.Web.UI.Design.DataSetViewSchema.GetChildren" />
 
             
 
-             method inherited from <see
-             cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+             method inherited from <see cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
 
             
 
@@ -195,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DataSetViewSchema.GetFields" />
+            >The <see cref="M:System.Web.UI.Design.DataSetViewSchema.GetFields" />
 
             
 
@@ -210,8 +200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+            >An array of <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
             
 
@@ -235,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the view using its <see
-             cref="P:System.Data.DataTable.TableName" />
+            >Gets the name of the view using its <see cref="P:System.Data.DataTable.TableName" />
 
             
 

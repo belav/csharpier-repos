@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="M:System.Diagnostics.DebuggerDisplayAttribute.#ctor(System.String)" />
+        >The <see cref="M:System.Diagnostics.DebuggerDisplayAttribute.#ctor(System.String)" />
 
         
 
@@ -40,8 +39,7 @@ class MyHashtable
     public int count = 4;
 }</code>
       <para
-        >For information about using this attribute in Visual Studio, see <format
-         type="text/html">
+        >For information about using this attribute in Visual Studio, see <format type="text/html">
           <a href="f4eb7c76-af4e-493b-9ab6-9cb05949d9b3">Using DebuggerDisplay Attribute</a>
         </format>
 
@@ -75,8 +73,7 @@ class MyHashtable
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
@@ -91,8 +88,7 @@ class MyTable
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.DebuggerDisplayAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.DebuggerDisplayAttribute" />
 
             
 
@@ -100,7 +96,11 @@ class MyTable
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -218,8 +218,7 @@ class MyTable
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains the string passed in by the <paramref
-             name="value" />
+            >This property contains the string passed in by the <paramref name="value" />
 
             
 

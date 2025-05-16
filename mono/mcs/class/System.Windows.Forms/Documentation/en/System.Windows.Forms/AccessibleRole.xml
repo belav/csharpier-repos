@@ -14,13 +14,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The role of the object describes the function of the object and is used by accessibility applications.</para>
       <para
-        >This enumeration is used by <see
-         cref="T:System.Windows.Forms.AccessibleObject" />
+        >This enumeration is used by <see cref="T:System.Windows.Forms.AccessibleObject" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.Control.AccessibleRole" />
+         and <see cref="P:System.Windows.Forms.Control.AccessibleRole" />
       </para>
       <para>For additional information about the accessibility application, search for "Microsoft Active Accessibility" in the Microsoft Developer Network (MSDN) library.</para>
     </remarks>

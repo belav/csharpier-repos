@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -32,8 +34,7 @@
       </Parameters>
       <Docs>
         <param name="messageType"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -98,10 +99,7 @@
       <Parameters />
       <Docs>
         <summary>Set or get the flags used by the message.</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.Protocol.Ntlm.NtlmFlags" />
-        </value>
+        <value>a <see cref="T:Mono.Security.Protocol.Ntlm.NtlmFlags" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

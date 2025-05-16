@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides basic design-time functionality for the <see
-         cref="T:System.Messaging.Message" />
+        >Provides basic design-time functionality for the <see cref="T:System.Messaging.Message" />
 
         
 
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Messaging.Design.MessageDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Messaging.Design.MessageDesigner" />
 
             
 
@@ -68,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Modifies the set of properties that the designer exposes through the <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Modifies the set of properties that the designer exposes through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -77,12 +74,15 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 

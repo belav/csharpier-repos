@@ -45,77 +45,64 @@
 
         
 
-         is the base class for <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+         is the base class for <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.StatusStrip" />
+        , <see cref="T:System.Windows.Forms.StatusStrip" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.ContextMenuStrip" />
+        , and <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
         
 
         . </para
       >
       <para
-        >Use <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Use <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         and its associated classes in new Windows Forms applications to create toolbars that can have a Windows XP, Office, Internet Explorer, or custom appearance and behavior, all with or without themes, and with support for overflow and run-time item reordering. <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         and its associated classes in new Windows Forms applications to create toolbars that can have a Windows XP, Office, Internet Explorer, or custom appearance and behavior, all with or without themes, and with support for overflow and run-time item reordering. <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         controls also offer a rich design-time experience that includes in-place activation and editing, custom layout, and sharing of horizontal or vertical space within a specified <see
-         cref="T:System.Windows.Forms.ToolStripContainer" />
+         controls also offer a rich design-time experience that includes in-place activation and editing, custom layout, and sharing of horizontal or vertical space within a specified <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
         . </para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >The <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         class provides many members that manage painting, mouse and keyboard input, and drag-and-drop functionality. Use the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+         class provides many members that manage painting, mouse and keyboard input, and drag-and-drop functionality. Use the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-         class with the <see
-         cref="T:System.Windows.Forms.ToolStripManager" />
+         class with the <see cref="T:System.Windows.Forms.ToolStripManager" />
 
         
 
-         class to gain even more control and customizability over the painting and layout style of all <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         class to gain even more control and customizability over the painting and layout style of all <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
          controls on a Windows Form.</para
       >
       <para
-        >The following items are specifically designed to work seamlessly with both <see
-         cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+        >The following items are specifically designed to work seamlessly with both <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+         and <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
         
 
-         in all orientations. They are available by default at design time for the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         in all orientations. They are available by default at design time for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -159,82 +146,68 @@
         </item>
       </list>
       <para
-        >You can join <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >You can join <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         controls within a specified <see
-         cref="T:System.Windows.Forms.ToolStripContainer" />
+         controls within a specified <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
-         and merge <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         and merge <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         controls with each other. Use <see
-         cref="T:System.Windows.Forms.ToolStripPanel" />
+         controls with each other. Use <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
         
 
-         rather than <see
-         cref="T:System.Windows.Forms.ToolStripContainer" />
+         rather than <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
         
 
-         for Multiple Document Interface (MDI) applications. Typically, a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         for Multiple Document Interface (MDI) applications. Typically, a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         does not participate in the tab order unless it is absolutely positioned rather than being docked or in a <see
-         cref="T:System.Windows.Forms.ToolStripPanel" />
+         does not participate in the tab order unless it is absolutely positioned rather than being docked or in a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
         
 
         .</para
       >
       <para
-        >Use the <see
-         cref="T:System.Windows.Forms.ToolStripControlHost" />
+        >Use the <see cref="T:System.Windows.Forms.ToolStripControlHost" />
 
         
 
-         class to host any other Windows Forms control in a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         class to host any other Windows Forms control in a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
         .</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >By default, the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         is double buffered, taking advantage of the <see
-         cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+         is double buffered, taking advantage of the <see cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
 
         
 
          setting.</para
       >
       <para
-        >Although <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Although <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         replaces and adds functionality to the <see
-         cref="T:System.Windows.Forms.ToolBar" />
+         replaces and adds functionality to the <see cref="T:System.Windows.Forms.ToolBar" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.ToolBar" />
+         control of previous versions, <see cref="T:System.Windows.Forms.ToolBar" />
 
         
 
@@ -257,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -291,13 +263,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             class with the specified array of <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class with the specified array of <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -305,12 +275,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          An array of <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -335,74 +308,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
 
             
 
-             property to true and set the <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             property to true and set the <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
-             property to false to respond to drag-and-drop behavior you have defined in the <see
-             cref="E:System.Windows.Forms.Control.DragEnter" />
+             property to false to respond to drag-and-drop behavior you have defined in the <see cref="E:System.Windows.Forms.Control.DragEnter" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.DragLeave" />
+            , <see cref="E:System.Windows.Forms.Control.DragLeave" />
 
             
 
-            , and <see
-             cref="E:System.Windows.Forms.Control.DragDrop" />
+            , and <see cref="E:System.Windows.Forms.Control.DragDrop" />
 
             
 
              events.</para
           >
           <para
-            >Set <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
+            >Set <see cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
 
             
 
-             to false and set <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             to false and set <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
-             to true to cause the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to true to cause the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             class to handle drag-and-drop and item reordering automatically. Set <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             class to handle drag-and-drop and item reordering automatically. Set <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
-             to true for two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to true for two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects to allow dragging of items from one <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects to allow dragging of items from one <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
              to the other. To enable the default drag-and-drop, the ALT key must be pressed during the drag operation.</para
           >
           <para
-            >Setting both <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
+            >Setting both <see cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             and <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
@@ -434,74 +394,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
 
             
 
-             property to true and set the <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             property to true and set the <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
-             property to false to respond to drag-and-drop behavior you have defined in the <see
-             cref="E:System.Windows.Forms.Control.DragEnter" />
+             property to false to respond to drag-and-drop behavior you have defined in the <see cref="E:System.Windows.Forms.Control.DragEnter" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.DragLeave" />
+            , <see cref="E:System.Windows.Forms.Control.DragLeave" />
 
             
 
-            , and <see
-             cref="E:System.Windows.Forms.Control.DragDrop" />
+            , and <see cref="E:System.Windows.Forms.Control.DragDrop" />
 
             
 
              events.</para
           >
           <para
-            >Set <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
+            >Set <see cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
 
             
 
-             to false and set <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             to false and set <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
-             to true to cause the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to true to cause the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             class to handle drag-and-drop and item reordering automatically. Set <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             class to handle drag-and-drop and item reordering automatically. Set <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
-             to true for two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to true for two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects to allow dragging of items from one <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects to allow dragging of items from one <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
              to the other. To enable the default drag-and-drop, the ALT key must be pressed during the drag operation.</para
           >
           <para
-            >Setting both <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
+            >Setting both <see cref="P:System.Windows.Forms.ToolStrip.AllowDrop" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+             and <see cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
 
             
 
@@ -511,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether drag-and-drop and item reordering are handled privately by the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether drag-and-drop and item reordering are handled privately by the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -540,8 +486,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
 
             
 
@@ -551,18 +496,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether multiple <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets or sets a value indicating whether multiple <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            , <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            , <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -586,13 +528,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Anchor" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Anchor" />
 
             
 
-             property to define how a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to define how a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -600,13 +540,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Windows.Forms.ToolStrip.Anchor" />
+              >The <see cref="P:System.Windows.Forms.ToolStrip.Anchor" />
 
               
 
-               and <see
-               cref="P:System.Windows.Forms.ToolStrip.Dock" />
+               and <see cref="P:System.Windows.Forms.ToolStrip.Dock" />
 
               
 
@@ -617,13 +555,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the edges of the container to which a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the edges of the container to which a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is bound and determines how a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             is bound and determines how a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -784,99 +720,81 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you set <see
-             cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+            >If you set <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
             
 
-             to false and the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to false and the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is embedded in a <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             is embedded in a <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
-             panel, the bounds of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             panel, the bounds of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             are not translated when you move the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             are not translated when you move the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             to a different panel of the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             to a different panel of the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
-            . To translate the bounds properly, synchronize the <see
-             cref="E:System.Windows.Forms.ToolStrip.LayoutStyleChanged" />
+            . To translate the bounds properly, synchronize the <see cref="E:System.Windows.Forms.ToolStrip.LayoutStyleChanged" />
 
             
 
-             event, check the value of the <see
-             cref="P:System.Windows.Forms.ToolStrip.Orientation" />
+             event, check the value of the <see cref="P:System.Windows.Forms.ToolStrip.Orientation" />
 
             
 
-             property, and resize the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property, and resize the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStripItem.Image" />
+            >The <see cref="P:System.Windows.Forms.ToolStripItem.Image" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
+            , and <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
             
 
-             properties pertain to various aspects of image handling. Use images in <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             properties pertain to various aspects of image handling. Use images in <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             controls by setting these properties directly or by setting the run-time–only <see
-             cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+             controls by setting these properties directly or by setting the run-time–only <see cref="P:System.Windows.Forms.ToolStrip.ImageList" />
 
             
 
              property.</para
           >
           <para
-            >Image scaling is determined by the interaction of properties in both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Image scaling is determined by the interaction of properties in both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             and <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             and <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -889,13 +807,11 @@
 
                 
 
-                 is the scale of the final image as determined by the combination of the image's <see
-                 cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
+                 is the scale of the final image as determined by the combination of the image's <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
                 
 
-                 setting and the container's <see
-                 cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                 setting and the container's <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                 
 
@@ -904,23 +820,19 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If <see
-                     cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                    >If <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                     
 
-                     is true (the default) and <see
-                     cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+                     is true (the default) and <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
                     
 
-                     is <see
-                     cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
+                     is <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
 
                     
 
-                    , no image scaling occurs, and the <see
-                     cref="T:System.Windows.Forms.ToolStrip" />
+                    , no image scaling occurs, and the <see cref="T:System.Windows.Forms.ToolStrip" />
 
                     
 
@@ -929,23 +841,19 @@
                 </item>
                 <item>
                   <para
-                    >If <see
-                     cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                    >If <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                     
 
-                     is false and <see
-                     cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+                     is false and <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
                     
 
-                     is <see
-                     cref="F:System.Windows.Forms.ToolStripItemImageScaling.None" />
+                     is <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.None" />
 
                     
 
-                    , neither image nor <see
-                     cref="T:System.Windows.Forms.ToolStrip" />
+                    , neither image nor <see cref="T:System.Windows.Forms.ToolStrip" />
 
                     
 
@@ -998,8 +906,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1011,8 +918,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
             
 
@@ -1036,46 +942,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.BackColor" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.BackColor" />
 
             
 
-             property does not support transparent colors unless the SupportsTransparentBackColor value of <see
-             cref="T:System.Windows.Forms.ControlStyles" />
+             property does not support transparent colors unless the SupportsTransparentBackColor value of <see cref="T:System.Windows.Forms.ControlStyles" />
 
             
 
              is set to true.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.BackColor" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.BackColor" />
 
             
 
-             property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a <see
-             cref="T:System.Windows.Forms.Button" />
+             property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             will have the same <see
-             cref="P:System.Windows.Forms.ToolStrip.BackColor" />
+             will have the same <see cref="P:System.Windows.Forms.ToolStrip.BackColor" />
 
             
 
-             as its parent <see
-             cref="T:System.Windows.Forms.Form" />
+             as its parent <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             by default. For more information about ambient properties, see the <see
-             cref="T:System.Windows.Forms.AmbientProperties" />
+             by default. For more information about ambient properties, see the <see cref="T:System.Windows.Forms.AmbientProperties" />
 
             
 
-             class or the <see
-             cref="T:System.Windows.Forms.Control" />
+             class or the <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -1085,8 +983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the background color for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the background color for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1111,8 +1008,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1124,8 +1020,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user begins to drag the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the user begins to drag the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1151,56 +1046,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingContext" />
+            >The <see cref="T:System.Windows.Forms.BindingContext" />
 
             
 
-             of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             returns a single <see
-             cref="T:System.Windows.Forms.BindingManagerBase" />
+             returns a single <see cref="T:System.Windows.Forms.BindingManagerBase" />
 
             
 
-             for all data-bound controls contained by the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             for all data-bound controls contained by the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . The <see
-             cref="T:System.Windows.Forms.BindingManagerBase" />
+            . The <see cref="T:System.Windows.Forms.BindingManagerBase" />
 
             
 
-             keeps all controls that are bound to the same data source synchronized. For example, setting the <see
-             cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+             keeps all controls that are bound to the same data source synchronized. For example, setting the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.BindingManagerBase" />
+             property of the <see cref="T:System.Windows.Forms.BindingManagerBase" />
 
             
 
              specifies the item in the underlying list that all data-bound controls point to.</para
           >
           <para
-            >For more information about creating a new <see
-             cref="T:System.Windows.Forms.BindingContext" />
+            >For more information about creating a new <see cref="T:System.Windows.Forms.BindingContext" />
 
             
 
-             and assigning it to the <see
-             cref="P:System.Windows.Forms.Control.BindingContext" />
+             and assigning it to the <see cref="P:System.Windows.Forms.Control.BindingContext" />
 
             
 
-             property, see the <see
-             cref="M:System.Windows.Forms.BindingContext.#ctor" />
+             property, see the <see cref="M:System.Windows.Forms.BindingContext.#ctor" />
 
             
 
@@ -1210,8 +1095,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the binding context for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the binding context for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1239,13 +1123,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.Windows.Forms.ToolStrip.CanOverflow" />
+            >Set the <see cref="P:System.Windows.Forms.ToolStrip.CanOverflow" />
 
             
 
-             property to true to send a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to true to send a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1253,8 +1135,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If there are more overflow items than can be displayed on the form, use the <format
-               type="text/html">
+              >If there are more overflow items than can be displayed on the form, use the <format type="text/html">
                 <a href="e681f3ab-94ba-4b2b-ac64-1dfad46caa25">ToolStrip Items Collection Editor</a>
               </format>
 
@@ -1267,8 +1148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether items in the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether items in the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1290,8 +1170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1322,8 +1201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1335,8 +1213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.ToolStrip.CausesValidation" />
+            >Occurs when the <see cref="P:System.Windows.Forms.ToolStrip.CausesValidation" />
 
             
 
@@ -1463,8 +1340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1474,13 +1350,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1512,8 +1386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Windows.Forms.Control.ControlCollection" />
+            >A new instance of <see cref="T:System.Windows.Forms.Control.ControlCollection" />
 
             
 
@@ -1547,13 +1420,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a default <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Creates a default <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             with the specified text, image, and event handler on a new <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             with the specified text, image, and event handler on a new <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1563,18 +1434,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="M:System.Windows.Forms.ToolStripButton.#ctor(System.String,System.Drawing.Image,System.EventHandler)" />
+            >A <see cref="M:System.Windows.Forms.ToolStripButton.#ctor(System.String,System.Drawing.Image,System.EventHandler)" />
 
             
 
-            , or a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            , or a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-             if the <paramref
-             name="text" />
+             if the <paramref name="text" />
 
             
 
@@ -1582,56 +1450,61 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to use for the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The text to use for the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
-          . If the <paramref
-           name="text" />
+          . If the <paramref name="text" />
 
           
 
-           parameter is a hyphen (-), this method creates a <see
-           cref="T:System.Windows.Forms.ToolStripSeparator" />
+           parameter is a hyphen (-), this method creates a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to display on the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+           to display on the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An event handler that raises the <see
-           cref="E:System.Windows.Forms.Control.Click" />
+          An event handler that raises the <see cref="E:System.Windows.Forms.Control.Click" />
 
           
 
-           event when the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+           event when the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -1659,8 +1532,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the visual arrangement for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Specifies the visual arrangement for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1670,8 +1542,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+            >One of the <see cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
             
 
@@ -1679,12 +1550,15 @@
           >
         </returns>
         <param name="layoutStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The visual arrangement to be applied to the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The visual arrangement to be applied to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -1707,18 +1581,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Cursor" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Cursor" />
 
             
 
-             property to get or set a specific <see
-             cref="T:System.Windows.Forms.Cursor" />
+             property to get or set a specific <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             used with the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             used with the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1728,8 +1599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the cursor that is displayed when the mouse pointer is over the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the cursor that is displayed when the mouse pointer is over the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1760,8 +1630,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1773,8 +1642,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Occurs when the value of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1807,8 +1675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the docking location of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the docking location of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1842,13 +1709,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.DefaultDropDownDirection" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.DefaultDropDownDirection" />
 
             
 
-             property to get or set where a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             property to get or set where a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1858,13 +1723,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value representing the default direction in which a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets or sets a value representing the default direction in which a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-             control is displayed relative to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             control is displayed relative to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1889,8 +1752,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default spacing, in pixels, between the sizing grip and the edges of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the default spacing, in pixels, between the sizing grip and the edges of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1918,13 +1780,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the spacing, in pixels, between the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the spacing, in pixels, between the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             and the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             and the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1951,18 +1811,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the contents of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >By default, the contents of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             are padded one pixel from the right edge of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             are padded one pixel from the right edge of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             to prevent the right border from painting over a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             to prevent the right border from painting over a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -1972,8 +1829,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the internal spacing, in pixels, of the contents of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the internal spacing, in pixels, of the contents of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2001,8 +1857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether ToolTips are shown for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2029,28 +1884,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.DefaultSize" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.DefaultSize" />
 
             
 
-             property represents the <see
-             cref="T:System.Drawing.Size" />
+             property represents the <see cref="T:System.Drawing.Size" />
 
             
 
-             value of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             value of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             when it is initially created. You can adjust the size of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             when it is initially created. You can adjust the size of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             by setting its <see
-             cref="P:System.Windows.Forms.Control.PreferredSize" />
+             by setting its <see cref="P:System.Windows.Forms.Control.PreferredSize" />
 
             
 
@@ -2058,18 +1908,15 @@
           >
           <block subset="none" type="note">
             <para
-              >To maintain better performance, do not set the <see
-               cref="T:System.Drawing.Size" />
+              >To maintain better performance, do not set the <see cref="T:System.Drawing.Size" />
 
               
 
-               of a <see
-               cref="T:System.Windows.Forms.ToolStrip" />
+               of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
               
 
-               in its constructor. Instead, override the <see
-               cref="P:System.Windows.Forms.ToolStrip.DefaultSize" />
+               in its constructor. Instead, override the <see cref="P:System.Windows.Forms.ToolStrip.DefaultSize" />
 
               
 
@@ -2080,8 +1927,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default size of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the default size of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2110,21 +1956,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.DisplayedItems" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.DisplayedItems" />
 
             
 
              property to access only those items that are currently displayed. These are the items that are not currently in an overflow menu.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Items" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Items" />
 
             
 
-             collection to retrieve all the items of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             collection to retrieve all the items of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2134,13 +1977,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the subset of items that are currently displayed on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the subset of items that are currently displayed on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , including items that are automatically added into the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , including items that are automatically added into the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2164,8 +2005,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The display rectangle is the area where you lay out items. The position and dimensions of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >The display rectangle is the area where you lay out items. The position and dimensions of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2197,36 +2037,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2236,8 +2070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2245,7 +2078,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2273,28 +2110,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Dock" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Dock" />
 
             
 
-             property to define how a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to define how a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is automatically resized as its parent control is resized. For example, setting <see
-             cref="P:System.Windows.Forms.ToolStrip.Dock" />
+             is automatically resized as its parent control is resized. For example, setting <see cref="P:System.Windows.Forms.ToolStrip.Dock" />
 
             
 
-             to <see
-             cref="F:System.Windows.Forms.DockStyle.Left" />
+             to <see cref="F:System.Windows.Forms.DockStyle.Left" />
 
             
 
-             causes the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             causes the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2302,53 +2134,43 @@
           >
           <para>A control can be docked to one edge of its parent container or can be docked to all edges and fill the parent container.</para>
           <para
-            >If the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >If the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             control is in a <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             control is in a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
-            , the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             can be repositioned within the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             can be repositioned within the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
-             and across <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             and across <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
-            s. The <see
-             cref="P:System.Windows.Forms.ToolStrip.Dock" />
+            s. The <see cref="P:System.Windows.Forms.ToolStrip.Dock" />
 
             
 
-             property is ignored, and if the <see
-             cref="P:System.Windows.Forms.ToolStrip.Stretch" />
+             property is ignored, and if the <see cref="P:System.Windows.Forms.ToolStrip.Stretch" />
 
             
 
-             property is false, the size of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property is false, the size of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             grows as items are added to the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             grows as items are added to the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
-            . Typically, the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . Typically, the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2356,13 +2178,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Windows.Forms.ToolStrip.Anchor" />
+              >The <see cref="P:System.Windows.Forms.ToolStrip.Anchor" />
 
               
 
-               and <see
-               cref="P:System.Windows.Forms.ToolStrip.Dock" />
+               and <see cref="P:System.Windows.Forms.ToolStrip.Dock" />
 
               
 
@@ -2373,13 +2193,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets which <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets which <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             borders are docked to its parent control and determines how a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             borders are docked to its parent control and determines how a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2404,8 +2222,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2417,8 +2234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user stops dragging the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the user stops dragging the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2467,8 +2283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the foreground color of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the foreground color of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2496,8 +2311,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2509,8 +2323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStrip.ForeColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStrip.ForeColor" />
 
             
 
@@ -2554,8 +2367,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The child <see
-             cref="T:System.Windows.Forms.Control" />
+            >The child <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -2563,12 +2375,15 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -2609,8 +2424,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The child <see
-             cref="T:System.Windows.Forms.Control" />
+            >The child <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -2618,24 +2432,30 @@
           >
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
            value.</param
         >
         <param name="skipValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.GetChildAtPointSkip" />
+          A <see cref="T:System.Windows.Forms.GetChildAtPointSkip" />
 
           
 
@@ -2661,8 +2481,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the item located at the specified point in the client area of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Returns the item located at the specified point in the client area of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2672,13 +2491,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             at the specified location, or null if the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             at the specified location, or null if the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -2686,17 +2503,19 @@
           >
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Point" />
+          The <see cref="T:System.Drawing.Point" />
 
           
 
-           at which to search for the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+           at which to search for the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -2726,8 +2545,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the item located at the specified x- and y-coordinates of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Returns the item located at the specified x- and y-coordinates of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2737,13 +2555,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             located at the specified location, or null if the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             located at the specified location, or null if the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -2751,14 +2567,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal coordinate, in pixels, from the left edge of the client area. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2787,28 +2611,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStrip.GetNextItem(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ArrowDirection)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStrip.GetNextItem(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ArrowDirection)" />
 
             
 
-             method to get the next <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             method to get the next <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . The <see
-             cref="T:System.Windows.Forms.ArrowDirection" />
+            . The <see cref="T:System.Windows.Forms.ArrowDirection" />
 
             
 
-             enumeration coordinates with the <see
-             cref="P:System.Windows.Forms.ToolStrip.Orientation" />
+             enumeration coordinates with the <see cref="P:System.Windows.Forms.ToolStrip.Orientation" />
 
             
 
@@ -2818,8 +2637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the next <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Retrieves the next <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -2829,18 +2647,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >A <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is specified by the <paramref
-             name="start" />
+             that is specified by the <paramref name="start" />
 
             
 
-             parameter and is next in the order as specified by the <paramref
-             name="direction" />
+             parameter and is next in the order as specified by the <paramref name="direction" />
 
             
 
@@ -2848,24 +2663,30 @@
           >
         </returns>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
            that is the reference point from which to begin the retrieval of the next item.</param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the values of <see
-           cref="T:System.Windows.Forms.ArrowDirection" />
+          One of the values of <see cref="T:System.Windows.Forms.ArrowDirection" />
 
           
 
@@ -2897,8 +2718,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the orientation of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the orientation of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2925,43 +2745,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.GripMargin" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.GripMargin" />
 
             
 
-             property to get or set the space around the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to get or set the space around the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             move handle. Because <see
-             cref="T:System.Windows.Forms.Padding" />
+             move handle. Because <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             can take individual values for <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+             can take individual values for <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            , <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+            , and <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , you can adjust the space around the move handle as preferred. The margin can even be off the edge of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , you can adjust the space around the move handle as preferred. The margin can even be off the edge of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -2971,8 +2783,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the space around the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the space around the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3004,8 +2815,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.GripRectangle" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.GripRectangle" />
 
             
 
@@ -3015,8 +2825,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the boundaries of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the boundaries of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3048,23 +2857,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a stack layout, make a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >In a stack layout, make a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             movable by putting it in a <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+             movable by putting it in a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
-             and ensuring that its <see
-             cref="P:System.Windows.Forms.ToolStrip.GripStyle" />
+             and ensuring that its <see cref="P:System.Windows.Forms.ToolStrip.GripStyle" />
 
             
 
-             is set to <see
-             cref="F:System.Windows.Forms.ToolStripGripStyle.Visible" />
+             is set to <see cref="F:System.Windows.Forms.ToolStripGripStyle.Visible" />
 
             
 
@@ -3074,8 +2879,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets whether the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets whether the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3174,51 +2978,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStripItem.Image" />
+            >The <see cref="P:System.Windows.Forms.ToolStripItem.Image" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
+            , and <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
             
 
-             properties pertain to various aspects of image handling. Use images in <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             properties pertain to various aspects of image handling. Use images in <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             controls by setting these properties directly or by setting the run-time–only <see
-             cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+             controls by setting these properties directly or by setting the run-time–only <see cref="P:System.Windows.Forms.ToolStrip.ImageList" />
 
             
 
              property.</para
           >
           <para
-            >Image scaling is determined by the interaction of properties in both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Image scaling is determined by the interaction of properties in both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             and <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             and <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3231,13 +3026,11 @@
 
                 
 
-                 is the scale of the final image as determined by the combination of the image's <see
-                 cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
+                 is the scale of the final image as determined by the combination of the image's <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
                 
 
-                 setting and the container's <see
-                 cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                 setting and the container's <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                 
 
@@ -3246,23 +3039,19 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If <see
-                     cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                    >If <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                     
 
-                     is true (the default) and <see
-                     cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+                     is true (the default) and <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
                     
 
-                     is <see
-                     cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
+                     is <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
 
                     
 
-                    , no image scaling occurs, and the <see
-                     cref="T:System.Windows.Forms.ToolStrip" />
+                    , no image scaling occurs, and the <see cref="T:System.Windows.Forms.ToolStrip" />
 
                     
 
@@ -3271,23 +3060,19 @@
                 </item>
                 <item>
                   <para
-                    >If <see
-                     cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                    >If <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                     
 
-                     is false and <see
-                     cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+                     is false and <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
                     
 
-                     is <see
-                     cref="F:System.Windows.Forms.ToolStripItemImageScaling.None" />
+                     is <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.None" />
 
                     
 
-                    , neither image nor <see
-                     cref="T:System.Windows.Forms.ToolStrip" />
+                    , neither image nor <see cref="T:System.Windows.Forms.ToolStrip" />
 
                     
 
@@ -3301,8 +3086,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the image list that contains the image displayed on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the image list that contains the image displayed on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3329,74 +3113,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+            >Use the <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
             
 
-             property to control the default size of an image. Use <see
-             cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
+             property to control the default size of an image. Use <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
 
             
 
-             to make the size of the image on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             to make the size of the image on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             to automatically adjust to fit on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to automatically adjust to fit on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
              while retaining the original image proportions. </para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStripItem.Image" />
+            >The <see cref="P:System.Windows.Forms.ToolStripItem.Image" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageIndex" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+            , <see cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
+            , and <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
             
 
-             properties pertain to various aspects of image handling. Use images in <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             properties pertain to various aspects of image handling. Use images in <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             controls by setting these properties directly or by setting the run-time–only <see
-             cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+             controls by setting these properties directly or by setting the run-time–only <see cref="P:System.Windows.Forms.ToolStrip.ImageList" />
 
             
 
              property.</para
           >
           <para
-            >Image scaling is determined by the interaction of properties in both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Image scaling is determined by the interaction of properties in both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             and <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             and <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3409,13 +3180,11 @@
 
                 
 
-                 is the scale of the final image as determined by the combination of the image's <see
-                 cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
+                 is the scale of the final image as determined by the combination of the image's <see cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
                 
 
-                 setting and the container's <see
-                 cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                 setting and the container's <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                 
 
@@ -3424,23 +3193,19 @@
               <list type="bullet">
                 <item>
                   <para
-                    >If <see
-                     cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                    >If <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                     
 
-                     is true (the default) and <see
-                     cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+                     is true (the default) and <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
                     
 
-                     is <see
-                     cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
+                     is <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
 
                     
 
-                    , no image scaling occurs, and the <see
-                     cref="T:System.Windows.Forms.ToolStrip" />
+                    , no image scaling occurs, and the <see cref="T:System.Windows.Forms.ToolStrip" />
 
                     
 
@@ -3449,23 +3214,19 @@
                 </item>
                 <item>
                   <para
-                    >If <see
-                     cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+                    >If <see cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
 
                     
 
-                     is false and <see
-                     cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+                     is false and <see cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
 
                     
 
-                     is <see
-                     cref="F:System.Windows.Forms.ToolStripItemImageScaling.None" />
+                     is <see cref="F:System.Windows.Forms.ToolStripItemImageScaling.None" />
 
                     
 
-                    , neither image nor <see
-                     cref="T:System.Windows.Forms.ToolStrip" />
+                    , neither image nor <see cref="T:System.Windows.Forms.ToolStrip" />
 
                     
 
@@ -3479,8 +3240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size, in pixels, of an image used on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the size, in pixels, of an image used on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3520,13 +3280,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the user is currently moving the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets a value indicating whether the user is currently moving the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             from one <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             from one <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -3553,13 +3311,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets a value indicating whether a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is a <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+             is a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -3587,28 +3343,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.IsInputChar(System.Char)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.IsInputChar(System.Char)" />
 
             
 
-             method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . If the <see
-             cref="M:System.Windows.Forms.ToolStrip.IsInputChar(System.Char)" />
+            . If the <see cref="M:System.Windows.Forms.ToolStrip.IsInputChar(System.Char)" />
 
             
 
-             method returns true, the specified character is sent directly to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method returns true, the specified character is sent directly to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . However, if the method returns false, the character is preprocessed and only sent to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . However, if the method returns false, the character is preprocessed and only sent to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3624,7 +3375,11 @@
           <para>true if the character should be sent directly to the item and not preprocessed; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3658,12 +3413,15 @@
           <para>true if the specified key is a regular input key; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Keys" />
+          One of the <see cref="T:System.Windows.Forms.Keys" />
 
           
 
@@ -3685,8 +3443,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3698,13 +3455,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a new <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when a new <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             is added to the <see
-             cref="T:System.Windows.Forms.ToolStripItemCollection" />
+             is added to the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />
 
             
 
@@ -3730,8 +3485,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3743,8 +3497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3770,8 +3523,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3783,13 +3535,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             is removed from the <see
-             cref="T:System.Windows.Forms.ToolStripItemCollection" />
+             is removed from the <see cref="T:System.Windows.Forms.ToolStripItemCollection" />
 
             
 
@@ -3816,31 +3566,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Items" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Items" />
 
             
 
-             collection to retrieve all the items that have been added to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             collection to retrieve all the items that have been added to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , not just the items that are displayed. An item remains in the <see
-             cref="P:System.Windows.Forms.ToolStrip.Items" />
+            , not just the items that are displayed. An item remains in the <see cref="P:System.Windows.Forms.ToolStrip.Items" />
 
             
 
              collection even if it is an overflow item and is therefore not currently visible.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.DisplayedItems" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.DisplayedItems" />
 
             
 
-             property to retrieve only the items that are currently displayed on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to retrieve only the items that are currently displayed on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3850,8 +3595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the items that belong to a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets all the items that belong to a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3882,59 +3626,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When items do not fit within the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >When items do not fit within the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , an overflow button automatically appears. The <see
-             cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+            , an overflow button automatically appears. The <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
             
 
              property setting determines whether an item appears in the overflow area always, as needed, or never. </para
           >
           <para
-            >Inspect the <see
-             cref="P:System.Windows.Forms.ToolStripItem.Placement" />
+            >Inspect the <see cref="P:System.Windows.Forms.ToolStripItem.Placement" />
 
             
 
-             property in the <see
-             cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
+             property in the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
 
             
 
-             event to determine whether an item was placed on the main <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             event to determine whether an item was placed on the main <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , the overflow <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , the overflow <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , or if it is not currently showing at all. The typical reasons why an item is not displayed are that the item did not fit on the main <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , or if it is not currently showing at all. The typical reasons why an item is not displayed are that the item did not fit on the main <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             and its <see
-             cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+             and its <see cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
             
 
-             property was set to <see
-             cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />
+             property was set to <see cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />
 
             
 
             .</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3946,8 +3680,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the layout of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the layout of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3975,8 +3708,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Passes a reference to the cached <see
-             cref="P:System.Windows.Forms.Control.LayoutEngine" />
+            >Passes a reference to the cached <see cref="P:System.Windows.Forms.Control.LayoutEngine" />
 
             
 
@@ -4036,23 +3768,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The sizing grip will not be displayed unless you also set the <see
-             cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+            >The sizing grip will not be displayed unless you also set the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
 
             
 
-             property to one of the overflow values. If the <see
-             cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+             property to one of the overflow values. If the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
+             property is set to <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+             or <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
             
 
@@ -4062,8 +3790,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating how the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating how the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -4091,8 +3818,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -4104,8 +3830,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
 
             
 
@@ -4135,8 +3860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the maximum height and width, in pixels, of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the maximum height and width, in pixels, of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -4161,8 +3885,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4171,8 +3894,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnBeginDrag(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnBeginDrag(System.EventArgs)" />
 
             
 
@@ -4182,8 +3904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.BeginDrag" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.BeginDrag" />
 
             
 
@@ -4191,12 +3912,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4218,8 +3942,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4228,8 +3951,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnDockChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnDockChanged(System.EventArgs)" />
 
             
 
@@ -4239,8 +3961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.DockChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.DockChanged" />
 
             
 
@@ -4248,12 +3969,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4281,8 +4005,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -4291,8 +4014,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnEnabledChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnEnabledChanged(System.EventArgs)" />
 
             
 
@@ -4302,8 +4024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="P:System.Windows.Forms.Control.Enabled" />
+            >Raises the <see cref="P:System.Windows.Forms.Control.Enabled" />
 
             
 
@@ -4311,12 +4032,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4343,8 +4067,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4353,8 +4076,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnEndDrag(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnEndDrag(System.EventArgs)" />
 
             
 
@@ -4364,8 +4086,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.EndDrag" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.EndDrag" />
 
             
 
@@ -4373,12 +4094,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4401,8 +4125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.FontChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" />
 
             
 
@@ -4410,12 +4133,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4443,8 +4169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -4453,8 +4178,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnHandleCreated(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnHandleCreated(System.EventArgs)" />
 
             
 
@@ -4464,8 +4188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleCreated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" />
 
             
 
@@ -4473,12 +4196,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4506,8 +4232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -4516,8 +4241,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnHandleDestroyed(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnHandleDestroyed(System.EventArgs)" />
 
             
 
@@ -4527,8 +4251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleDestroyed" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" />
 
             
 
@@ -4536,12 +4259,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4570,8 +4296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Invalidated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Invalidated" />
 
             
 
@@ -4579,12 +4304,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Windows.Forms.InvalidateEventArgs" />
+          An <see cref="T:System.Windows.Forms.InvalidateEventArgs" />
 
           
 
@@ -4614,8 +4342,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4624,8 +4351,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnItemAdded(System.Windows.Forms.ToolStripItemEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnItemAdded(System.Windows.Forms.ToolStripItemEventArgs)" />
 
             
 
@@ -4635,8 +4361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.ItemAdded" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ItemAdded" />
 
             
 
@@ -4644,12 +4369,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
 
           
 
@@ -4674,8 +4402,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4684,8 +4411,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
 
             
 
@@ -4695,8 +4421,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
 
             
 
@@ -4704,12 +4429,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
 
           
 
@@ -4739,8 +4467,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4749,8 +4476,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnItemRemoved(System.Windows.Forms.ToolStripItemEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnItemRemoved(System.Windows.Forms.ToolStripItemEventArgs)" />
 
             
 
@@ -4760,8 +4486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.ItemRemoved" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.ItemRemoved" />
 
             
 
@@ -4769,12 +4494,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
 
           
 
@@ -4799,8 +4527,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -4809,8 +4536,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
 
             
 
@@ -4820,8 +4546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -4829,12 +4554,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 
@@ -4862,8 +4590,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4872,8 +4599,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnLayoutCompleted(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnLayoutCompleted(System.EventArgs)" />
 
             
 
@@ -4883,8 +4609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
 
             
 
@@ -4892,12 +4617,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4925,8 +4653,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4935,8 +4662,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnLayoutStyleChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnLayoutStyleChanged(System.EventArgs)" />
 
             
 
@@ -4946,8 +4672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.LayoutStyleChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.LayoutStyleChanged" />
 
             
 
@@ -4955,12 +4680,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -4985,8 +4713,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -4995,8 +4722,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnLeave(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnLeave(System.EventArgs)" />
 
             
 
@@ -5006,8 +4732,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
@@ -5015,12 +4740,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5045,8 +4773,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5055,8 +4782,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnLostFocus(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnLostFocus(System.EventArgs)" />
 
             
 
@@ -5066,8 +4792,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.LostFocus" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.LostFocus" />
 
             
 
@@ -5075,12 +4800,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5111,8 +4839,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseCaptureChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseCaptureChanged" />
 
             
 
@@ -5120,12 +4847,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5150,8 +4880,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5160,8 +4889,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -5171,8 +4899,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseDown" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
             
 
@@ -5180,12 +4907,15 @@
           >
         </summary>
         <param name="mea">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -5210,8 +4940,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5220,8 +4949,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnMouseLeave(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnMouseLeave(System.EventArgs)" />
 
             
 
@@ -5231,8 +4959,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseLeave" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseLeave" />
 
             
 
@@ -5240,12 +4967,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5273,8 +5003,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5283,8 +5012,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -5294,8 +5022,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseMove" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
             
 
@@ -5303,12 +5030,15 @@
           >
         </summary>
         <param name="mea">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -5336,8 +5066,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5346,8 +5075,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
@@ -5357,8 +5085,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
@@ -5366,12 +5093,15 @@
           >
         </summary>
         <param name="mea">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -5399,8 +5129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5409,8 +5138,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -5420,8 +5148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
@@ -5429,12 +5156,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -5462,8 +5192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5472,8 +5201,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -5483,13 +5211,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
-             event for the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             event for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -5497,12 +5223,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -5538,8 +5267,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this method when the move handle is painted.</para>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5548,8 +5276,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaintGrip(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnPaintGrip(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -5559,8 +5286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.PaintGrip" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.PaintGrip" />
 
             
 
@@ -5568,12 +5294,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -5598,8 +5327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -5608,8 +5336,7 @@
             . </para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnRendererChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnRendererChanged(System.EventArgs)" />
 
             
 
@@ -5619,8 +5346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStrip.RendererChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStrip.RendererChanged" />
 
             
 
@@ -5628,12 +5354,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5661,8 +5390,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -5671,8 +5399,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnRightToLeftChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnRightToLeftChanged(System.EventArgs)" />
 
             
 
@@ -5682,8 +5409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.RightToLeftChanged" />
 
             
 
@@ -5691,12 +5417,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5732,8 +5461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
+            >Raises the <see cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
 
             
 
@@ -5741,12 +5469,15 @@
           >
         </summary>
         <param name="se">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ScrollEventArgs" />
+          A <see cref="T:System.Windows.Forms.ScrollEventArgs" />
 
           
 
@@ -5771,8 +5502,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -5781,8 +5511,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnTabStopChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnTabStopChanged(System.EventArgs)" />
 
             
 
@@ -5792,8 +5521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.TabStopChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.TabStopChanged" />
 
             
 
@@ -5801,12 +5529,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5834,26 +5565,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changing the <see
-             cref="P:System.Windows.Forms.Control.Enabled" />
+            >Changing the <see cref="P:System.Windows.Forms.Control.Enabled" />
 
             
 
-             property of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             does not raise the various *Changed events of a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             does not raise the various *Changed events of a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
             . Raise those events with specific property settings.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -5862,8 +5589,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.OnVisibleChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.OnVisibleChanged(System.EventArgs)" />
 
             
 
@@ -5873,8 +5599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripItem.VisibleChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripItem.VisibleChanged" />
 
             
 
@@ -5882,12 +5607,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -5919,8 +5647,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the orientation of the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Gets the orientation of the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -5958,13 +5685,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is the overflow button for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             that is the overflow button for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -5987,8 +5712,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -6000,8 +5724,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -6056,28 +5779,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
             
 
-             method is called during message preprocessing to handle dialog characters such as TAB, RETURN, ESCAPE, and arrow keys. This method is called only if the <see
-             cref="M:System.Windows.Forms.ToolStrip.IsInputKey(System.Windows.Forms.Keys)" />
+             method is called during message preprocessing to handle dialog characters such as TAB, RETURN, ESCAPE, and arrow keys. This method is called only if the <see cref="M:System.Windows.Forms.ToolStrip.IsInputKey(System.Windows.Forms.Keys)" />
 
             
 
-             method indicates that the control is not processing the key. The <see
-             cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
+             method indicates that the control is not processing the key. The <see cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
             
 
-             simply sends the character to the parent control's <see
-             cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
+             simply sends the character to the parent control's <see cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
             
 
-             method, or returns false if the control has no parent. The <see
-             cref="T:System.Windows.Forms.Form" />
+             method, or returns false if the control has no parent. The <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -6093,12 +5811,15 @@
           <para>true if the key was processed by the control; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Keys" />
+          One of the <see cref="T:System.Windows.Forms.Keys" />
 
           
 
@@ -6125,24 +5846,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" />
 
             
 
              method is called to give a control the opportunity to process a mnemonic character. This method should determine whether the control is in a state to process mnemonics and whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. </para
           >
           <para
-            >Implementations of this method often use the <see
-             cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" />
+            >Implementations of this method often use the <see cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" />
 
             
 
              method to determine whether the given character matches a mnemonic in the control's text.</para
           >
           <para
-            >This default implementation of the <see
-             cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" />
+            >This default implementation of the <see cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" />
 
             
 
@@ -6158,7 +5876,11 @@
           <para>true if the character was processed as a mnemonic by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6189,36 +5911,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
             
 
-             property and the <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             property and the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-             class to customize the look and feel of any <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class to customize the look and feel of any <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
              that does not have a window handle.</para
           >
           <para
-            >To do this, derive a class from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+            >To do this, derive a class from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            , assign it to the <see
-             cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+            , assign it to the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
             
 
-             property, and call the <see
-             cref="M:System.Windows.Forms.ToolStripItem.Invalidate" />
+             property, and call the <see cref="M:System.Windows.Forms.ToolStripItem.Invalidate" />
 
             
 
@@ -6228,13 +5944,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+            >Gets or sets a <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-             used to customize the look and feel of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             used to customize the look and feel of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -6257,8 +5971,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -6270,8 +5983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
             
 
@@ -6298,13 +6010,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to indicate which set of visual styles the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Use this property to indicate which set of visual styles the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             will use. You can use this property to specify a professional rendering style, a default system rendering style, or a style managed by the <see
-             cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+             will use. You can use this property to specify a professional rendering style, a default system rendering style, or a style managed by the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
             
 
@@ -6314,8 +6024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates which visual styles will be applied to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value that indicates which visual styles will be applied to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -6372,13 +6081,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Windows.Forms.ToolStrip.RestoreFocus" />
+            >Override the <see cref="M:System.Windows.Forms.ToolStrip.RestoreFocus" />
 
             
 
-             method to control where the focus returns to when the <see
-             cref="P:System.Windows.Forms.ToolStrip.TabStop" />
+             method to control where the focus returns to when the <see cref="P:System.Windows.Forms.ToolStrip.TabStop" />
 
             
 
@@ -6411,41 +6118,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="directed" />
+            >The <paramref name="directed" />
 
             
 
-             and <paramref
-             name="forward" />
+             and <paramref name="forward" />
 
             
 
-             parameters are used by container-style controls. When the <paramref
-             name="directed" />
+             parameters are used by container-style controls. When the <paramref name="directed" />
 
             
 
-             parameter is set to true, the <paramref
-             name="forward" />
+             parameter is set to true, the <paramref name="forward" />
 
             
 
-             parameter is evaluated to determine which control to select. When <paramref
-             name="forward" />
+             parameter is evaluated to determine which control to select. When <paramref name="forward" />
 
             
 
              is set to true, the next control in the tab order is selected; when false, the previous control in the tab order is selected.</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStrip.Select(System.Boolean,System.Boolean)" />
+            >The <see cref="M:System.Windows.Forms.ToolStrip.Select(System.Boolean,System.Boolean)" />
 
             
 
-             method activates the control if the control's <see
-             cref="F:System.Windows.Forms.ControlStyles.Selectable" />
+             method activates the control if the control's <see cref="F:System.Windows.Forms.ControlStyles.Selectable" />
 
             
 
@@ -6457,14 +6157,22 @@
           <para>Activates a child control. Optionally specifies the direction in the tab order to select the control from.</para>
         </summary>
         <param name="directed">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to specify the direction of the control to select; otherwise, false.</param
         >
         <param name="forward">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6500,24 +6208,30 @@
           <para>This method is not relevant for this class.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
           .</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
@@ -6549,60 +6263,75 @@
           <para>Performs the work of setting the specified bounds of this control.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Left" />
+          The new <see cref="P:System.Windows.Forms.Control.Left" />
 
           
 
            property value of the control.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Top" />
+          The new <see cref="P:System.Windows.Forms.Control.Top" />
 
           
 
            property value of the control.</param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Width" />
+          The new <see cref="P:System.Windows.Forms.Control.Width" />
 
           
 
            property value of the control.</param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="P:System.Windows.Forms.Control.Height" />
+          The new <see cref="P:System.Windows.Forms.Control.Height" />
 
           
 
            property value of the control.</param
         >
         <param name="specified">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.BoundsSpecified" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.BoundsSpecified" />
 
           
 
@@ -6653,13 +6382,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Anchors a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Anchors a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             to a particular place on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             to a particular place on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -6667,29 +6394,34 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
            to anchor.</param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
-           representing the x and y client coordinates of the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+           representing the x and y client coordinates of the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -6715,8 +6447,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStrip.SetItemParent(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ToolStrip)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStrip.SetItemParent(System.Windows.Forms.ToolStripItem,System.Windows.Forms.ToolStrip)" />
 
             
 
@@ -6726,13 +6457,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables you to change the parent <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Enables you to change the parent <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             of a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             of a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -6740,39 +6469,42 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
-           whose <see
-           cref="P:System.Windows.Forms.Control.Parent" />
+           whose <see cref="P:System.Windows.Forms.Control.Parent" />
 
           
 
            property is to be changed. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           that is the parent of the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+           that is the parent of the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
-           referred to by the <paramref
-           name="item" />
+           referred to by the <paramref name="item" />
 
           
 
@@ -6804,8 +6536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value that sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Retrieves a value that sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -6813,12 +6544,15 @@
           >
         </summary>
         <param name="visible">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          true if the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -6846,13 +6580,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.ShowItemToolTips" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.ShowItemToolTips" />
 
             
 
-             property to determine whether ToolTips are displayed for the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             property to determine whether ToolTips are displayed for the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -6862,8 +6594,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether ToolTips are to be displayed on <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether ToolTips are to be displayed on <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -6892,13 +6623,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.Stretch" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.Stretch" />
 
             
 
-             property to get or set whether the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property to get or set whether the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -6908,13 +6637,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             stretches from end to end in the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+             stretches from end to end in the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -6946,18 +6673,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user presses the TAB key, the input focus is set to the next <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >When the user presses the TAB key, the input focus is set to the next <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             in the tab order. Controls with a <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+             in the tab order. Controls with a <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
-             property value of false are not included in the collection of controls in the tab order. You can manipulate the tab order by changing the <see
-             cref="P:System.Windows.Forms.Control.TabIndex" />
+             property value of false are not included in the collection of controls in the tab order. You can manipulate the tab order by changing the <see cref="P:System.Windows.Forms.Control.TabIndex" />
 
             
 
@@ -6967,8 +6691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the user can give the focus to an item in the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether the user can give the focus to an item in the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -7002,53 +6725,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStrip.TextDirection" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStrip.TextDirection" />
 
             
 
-             property to get or set the direction of the display text of a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             property to get or set the direction of the display text of a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-            , such as a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+            , such as a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
-             or a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+             or a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-            . You can set the <see
-             cref="P:System.Windows.Forms.ToolStrip.TextDirection" />
+            . You can set the <see cref="P:System.Windows.Forms.ToolStrip.TextDirection" />
 
             
 
-             property on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             itself, in which case the setting will apply to each <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             itself, in which case the setting will apply to each <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             you add to the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             you add to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            , or you can set the <see
-             cref="P:System.Windows.Forms.ToolStrip.TextDirection" />
+            , or you can set the <see cref="P:System.Windows.Forms.ToolStrip.TextDirection" />
 
             
 
-             property differently for each <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             property differently for each <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -7058,8 +6771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the direction in which to draw text on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets the direction in which to draw text on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -7081,8 +6793,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -7092,8 +6803,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >A string that represents the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

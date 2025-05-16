@@ -104,8 +104,7 @@ Unify Enum declarations with other block type declarations.
       </description>
       <lm-equiv name="StatementNode"></lm-equiv>
       <native-equiv name="Statement"></native-equiv>
-      <native-equiv name="StatementList"
-        >
+      <native-equiv name="StatementList">
         The StatementList and Statement structures
         are combined into a single structure. The Previous/NextInBlock and Previous/NextLexical have no direct equivalent,
         helper routines for these operations are very easy to write.
@@ -299,14 +298,12 @@ Unify Enum declarations with other block type declarations.
       for consumers to use, however. -->
       <child name="Options" optional="true" list="true" kind="@OptionStatementSyntax">
         <description>Represents the list of Option statements at the beginning of a source file.</description>
-        <lm-equiv name="ProgramNode.Contents"
-          >
+        <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </lm-equiv
         >
-        <native-equiv name="FileBlockStatement.Children"
-          >
+        <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </native-equiv
@@ -314,14 +311,12 @@ Unify Enum declarations with other block type declarations.
       </child>
       <child name="Imports" optional="true" list="true" kind="@ImportsStatementSyntax">
         <description>Represents the list of Imports statements at the beginning of a source file.</description>
-        <lm-equiv name="ProgramNode.Contents"
-          >
+        <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </lm-equiv
         >
-        <native-equiv name="FileBlockStatement.Children"
-          >
+        <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </native-equiv
@@ -332,14 +327,12 @@ Unify Enum declarations with other block type declarations.
           Represents the list of AttributeStatements at the beginning of a source file
           that contain the Assembly and Module attributes.
         </description>
-        <lm-equiv name="ProgramNode.Contents"
-          >
+        <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </lm-equiv
         >
-        <native-equiv name="FileBlockStatement.Children"
-          >
+        <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </native-equiv
@@ -352,14 +345,12 @@ Unify Enum declarations with other block type declarations.
           the top-level type and namespace declarations in the file. May also contain Statements that are
           not valid
         </description>
-        <lm-equiv name="ProgramNode.Contents"
-          >
+        <lm-equiv name="ProgramNode.Contents">
           The ProgramNode.Contents statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </lm-equiv
         >
-        <native-equiv name="FileBlockStatement.Children"
-          >
+        <native-equiv name="FileBlockStatement.Children">
           The FileBlockStatement.Children statements are split up into
           OptionStatements, ImportStatements, AttributeStatements and TypeAndNamespaceDeclarations.
         </native-equiv
@@ -1682,15 +1673,13 @@ Unify Enum declarations with other block type declarations.
         the Body of that node. Auto properties are property declarations without a PropertyBlock.
       </description>
       <lm-equiv name="PropertyNode"></lm-equiv>
-      <lm-equiv name="AutoPropertyNode"
-        >
+      <lm-equiv name="AutoPropertyNode">
         Normal and auto properties are declared with the same node kind. The IsAutomaticallyImplemented
         field distinguishes the cases.
       </lm-equiv
       >
       <native-equiv name="PropertyStatement"></native-equiv>
-      <native-equiv name="AutoPropertyStatement"
-        >
+      <native-equiv name="AutoPropertyStatement">
         Normal and auto properties are declared with the same node kind. The IsAutomaticallyImplemented
         field distinguishes the cases.
       </native-equiv
@@ -2166,8 +2155,7 @@ Unify Enum declarations with other block type declarations.
         <lm-equiv name="KeyKeyword"></lm-equiv>
         <native-equiv name="Key"></native-equiv>
         <native-equiv name="Initializer.Key"></native-equiv>
-        <native-equiv name="Initializer.FieldIsKey"
-          >
+        <native-equiv name="Initializer.FieldIsKey">
           "FieldIsKey" may be set to true by the native parser even in cases where
           the "Key" keyword was not set (I think in query expressions, but I'm not at all sure). More code review is needed to understand how this field
           might be computed from the new parse trees.
@@ -3696,8 +3684,7 @@ Unify Enum declarations with other block type declarations.
         of a SyncLockBlock.
       </description>
       <lm-equiv name="SyncLockNode"></lm-equiv>
-      <native-equiv name="ExpressionBlockStatement"
-        >
+      <native-equiv name="ExpressionBlockStatement">
         The SyncLock statement and the contained statements are split into a
         BlockStatement, which contains a SyncLock, Body and End SyncLock statements.
       </native-equiv
@@ -4414,8 +4401,7 @@ Unify Enum declarations with other block type declarations.
         <description>Returns Nothing if Kind=ReDim, returns the "Preserve" keyword if Kind=RedimPreserve.</description>
         <lm-equiv name="PreserveKeyword"></lm-equiv>
         <native-equiv name="Preserve"></native-equiv>
-        <native-equiv name="RedimStatement.HasPreserve"
-          >
+        <native-equiv name="RedimStatement.HasPreserve">
           To determine if a ReDim statement has a Preserve, the recommended way is using the Kind and
           checking for ReDimPreserve.
         </native-equiv
@@ -5652,8 +5638,7 @@ Unify Enum declarations with other block type declarations.
       <child name="CloseParenToken" kind="CloseParenToken">
         <description>The ")" token.</description>
         <lm-equiv name="RightParenthesis"></lm-equiv>
-        <native-equiv name="ClosingParenthesisIsPresent"
-          >
+        <native-equiv name="ClosingParenthesisIsPresent">
           To determine if the closing parenthesis was present,
           check the RightParenToken to see if it has an empty Span.
         </native-equiv
@@ -8214,8 +8199,7 @@ Unify Enum declarations with other block type declarations.
       no-factory="true"
     >
       <description>Represents an identifier token. This might include brackets around the name and a type character.</description>
-      <lm-equiv name="Identifier"
-        >
+      <lm-equiv name="Identifier">
         Identifier in language model maps to either Identifier or SimpleName, depending on the context it
         is used in.
       </lm-equiv

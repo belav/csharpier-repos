@@ -18,36 +18,30 @@
 
         
 
-         supports <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         supports <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        -related tasks for entire applications, such as merging, settings, and renderer options. The overloaded <see
-         cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.Windows.Forms.ToolStrip)" />
+        -related tasks for entire applications, such as merging, settings, and renderer options. The overloaded <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.Windows.Forms.ToolStrip)" />
 
         
 
-         method combines <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         method combines <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         controls with each other, and the overloaded <see
-         cref="M:System.Windows.Forms.ToolStripManager.RevertMerge(System.Windows.Forms.ToolStrip)" />
+         controls with each other, and the overloaded <see cref="M:System.Windows.Forms.ToolStripManager.RevertMerge(System.Windows.Forms.ToolStrip)" />
 
         
 
          method undoes a merge operation.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+        >Use the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-         class with the <see
-         cref="T:System.Windows.Forms.ToolStripManager" />
+         class with the <see cref="T:System.Windows.Forms.ToolStripManager" />
 
         
 
@@ -57,23 +51,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Controls <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         rendering and rafting, and the merging of <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+         rendering and rafting, and the merging of <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+        , <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.ToolStripMenuItem" />
+        , and <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
         
 
@@ -101,53 +91,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripManager.FindToolStrip(System.String)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripManager.FindToolStrip(System.String)" />
 
             
 
-             method to search for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method to search for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             or an object derived from <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             or an object derived from <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . Derived types of <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . Derived types of <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             are <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+             are <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            , <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            , <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
-            , <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            , <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
-            , and <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+            , and <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
-            . If the object of the search is not specifically a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . If the object of the search is not specifically a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -157,13 +137,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Finds the specified <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Finds the specified <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             or a type derived from <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             or a type derived from <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -173,18 +151,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >The <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             or one of its derived types as specified by the <paramref
-             name="toolStripName" />
+             or one of its derived types as specified by the <paramref name="toolStripName" />
 
             
 
-             parameter, or null if the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             parameter, or null if the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -192,17 +167,19 @@
           >
         </returns>
         <param name="toolStripName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string specifying the name of the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          A string specifying the name of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           or derived <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           or derived <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -230,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a value indicating whether the specified shortcut key is used by any of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Retrieves a value indicating whether the specified shortcut key is used by any of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -241,8 +217,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the shortcut key is used by any <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >true if the shortcut key is used by any <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -250,7 +225,11 @@
           >
         </returns>
         <param name="shortcut">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,7 +266,11 @@
           <para>true if the shortcut key is valid; otherwise, false. </para>
         </returns>
         <param name="shortcut">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -318,28 +301,23 @@
 
             
 
-             controls that are not on the form at design time when the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             controls that are not on the form at design time when the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             settings are saved are removed from the <see
-             cref="T:System.Windows.Forms.Form" />
+             settings are saved are removed from the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             when the settings are loaded. To reset the settings, comment out the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             when the settings are loaded. To reset the settings, comment out the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
-             line and leave the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
+             line and leave the <see cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
 
             
 
-             line. This will not load any settings and will persist the last state. When you remove the comment from the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             line. This will not load any settings and will persist the last state. When you remove the comment from the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
@@ -349,13 +327,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads settings for the given <see
-             cref="T:System.Windows.Forms.Form" />
+            >Loads settings for the given <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             using the full name of the <see
-             cref="T:System.Windows.Forms.Form" />
+             using the full name of the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -363,12 +339,15 @@
           >
         </summary>
         <param name="targetForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Form" />
+          The <see cref="T:System.Windows.Forms.Form" />
 
           
 
@@ -400,28 +379,23 @@
 
             
 
-             controls that are not on the form at design time when the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             controls that are not on the form at design time when the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             settings are saved are removed from the <see
-             cref="T:System.Windows.Forms.Form" />
+             settings are saved are removed from the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             when the settings are loaded. To reset the settings, comment out the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             when the settings are loaded. To reset the settings, comment out the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
-             line and leave the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
+             line and leave the <see cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
 
             
 
-             line. This will not load any settings and will persist the last state. When you remove the comment from the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             line. This will not load any settings and will persist the last state. When you remove the comment from the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
@@ -431,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads settings for the specified <see
-             cref="T:System.Windows.Forms.Form" />
+            >Loads settings for the specified <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -440,29 +413,34 @@
           >
         </summary>
         <param name="targetForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Form" />
+          The <see cref="T:System.Windows.Forms.Form" />
 
           
 
            for which to load settings.</param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           representing the settings key for this <see
-           cref="T:System.Windows.Forms.Form" />
+           representing the settings key for this <see cref="T:System.Windows.Forms.Form" />
 
           
 
@@ -490,59 +468,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
             
 
-             method to combine <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method to combine <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects of identical type, such as <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects of identical type, such as <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects with other <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects with other <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects, <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             objects, <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             objects with other <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             objects with other <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
              objects, and so on.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.Windows.Forms.ToolStrip)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.Windows.Forms.ToolStrip)" />
 
             
 
-             method to combine <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method to combine <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
              objects of different types.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
 
             
 
-             property must be set to true for both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property must be set to true for both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -550,28 +518,23 @@
           >
           <block subset="none" type="note">
             <para
-              >If there are two <see
-               cref="T:System.Windows.Forms.MenuStrip" />
+              >If there are two <see cref="T:System.Windows.Forms.MenuStrip" />
 
               
 
-               controls on an MDI child form, setting <see
-               cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+               controls on an MDI child form, setting <see cref="P:System.Windows.Forms.Form.IsMdiContainer" />
 
               
 
-               to true for the parent form merges the contents of only one of the <see
-               cref="T:System.Windows.Forms.MenuStrip" />
+               to true for the parent form merges the contents of only one of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
               
 
-               controls. Use <see
-               cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
+               controls. Use <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
               
 
-               to merge the contents of additional child <see
-               cref="T:System.Windows.Forms.MenuStrip" />
+               to merge the contents of additional child <see cref="T:System.Windows.Forms.MenuStrip" />
 
               
 
@@ -582,8 +545,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Combines two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -595,44 +557,46 @@
           <para>true if the merge is successful; otherwise, false. </para>
         </returns>
         <param name="sourceToolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           to be combined with the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           to be combined with the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           referred to by the <paramref
-           name="targetName" />
+           referred to by the <paramref name="targetName" />
 
           
 
            parameter.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The name of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           that receives the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           that receives the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           referred to by the <paramref
-           name="sourceToolStrip" />
+           referred to by the <paramref name="sourceToolStrip" />
 
           
 
@@ -660,59 +624,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.Windows.Forms.ToolStrip)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.Windows.Forms.ToolStrip)" />
 
             
 
-             method to combine <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method to combine <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
              objects of different types.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
             
 
-             method to combine <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method to combine <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects of identical type, such as <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects of identical type, such as <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects with other <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects with other <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects, <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             objects, <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             objects with other <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             objects with other <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
              objects, and so on.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
 
             
 
-             property must be set to true for both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property must be set to true for both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -720,28 +674,23 @@
           >
           <block subset="none" type="note">
             <para
-              >If there are two <see
-               cref="T:System.Windows.Forms.MenuStrip" />
+              >If there are two <see cref="T:System.Windows.Forms.MenuStrip" />
 
               
 
-               controls on an MDI child form, setting <see
-               cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+               controls on an MDI child form, setting <see cref="P:System.Windows.Forms.Form.IsMdiContainer" />
 
               
 
-               to true for the parent form merges the contents of only one of the <see
-               cref="T:System.Windows.Forms.MenuStrip" />
+               to true for the parent form merges the contents of only one of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
               
 
-               controls. Use <see
-               cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
+               controls. Use <see cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
               
 
-               to merge the contents of additional child <see
-               cref="T:System.Windows.Forms.MenuStrip" />
+               to merge the contents of additional child <see cref="T:System.Windows.Forms.MenuStrip" />
 
               
 
@@ -752,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Combines two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -765,44 +713,46 @@
           <para>true if the merge is successful; otherwise, false.</para>
         </returns>
         <param name="sourceToolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           to be combined with the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           to be combined with the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           referred to by the <paramref
-           name="targetToolStrip" />
+           referred to by the <paramref name="targetToolStrip" />
 
           
 
            parameter.</param
         >
         <param name="targetToolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           that receives the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           that receives the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           referred to by the <paramref
-           name="sourceToolStrip" />
+           referred to by the <paramref name="sourceToolStrip" />
 
           
 
@@ -825,23 +775,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
+            >This <see cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
 
             
 
-             property is used when the <see
-             cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
+             property is used when the <see cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
 
             
 
-             property of the current <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property of the current <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is set to <see
-             cref="F:System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode" />
+             is set to <see cref="F:System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode" />
 
             
 
@@ -868,8 +814,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -884,8 +829,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
 
             
 
@@ -912,23 +856,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.ToolStripManager.RenderMode" />
+            >Use the <see cref="P:System.Windows.Forms.ToolStripManager.RenderMode" />
 
             
 
-             property to get or set whether the application is painted by the <see
-             cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+             property to get or set whether the application is painted by the <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
             
 
-            , the <see
-             cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+            , the <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
 
             
 
-            , or a customized <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+            , or a customized <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -960,13 +900,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
 
             
 
-             property must be set to true for both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property must be set to true for both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -976,13 +914,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Undoes a merging of two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Undoes a merging of two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects, returning the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects, returning the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -994,12 +930,15 @@
           <para>true if the undoing of the merge is successful; otherwise, false. </para>
         </returns>
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The name of the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -1026,13 +965,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
 
             
 
-             property must be set to true for both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property must be set to true for both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1042,13 +979,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Undoes a merging of two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Undoes a merging of two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects, returning the specified <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects, returning the specified <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1060,12 +995,15 @@
           <para>true if the undoing of the merge is successful; otherwise, false. </para>
         </returns>
         <param name="targetToolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -1093,13 +1031,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
+            >The <see cref="P:System.Windows.Forms.ToolStrip.AllowMerge" />
 
             
 
-             property must be set to true for both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             property must be set to true for both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1109,13 +1045,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Undoes a merging of two <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Undoes a merging of two <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             objects, returning both <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             objects, returning both <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1127,29 +1061,34 @@
           <para>true if the undoing of the merge is successful; otherwise, false.</para>
         </returns>
         <param name="targetToolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The name of the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
            for which to undo a merge operation.</param
         >
         <param name="sourceToolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
-           that was merged with the <paramref
-           name="targetToolStrip" />
+           that was merged with the <paramref name="targetToolStrip" />
 
           
 
@@ -1180,28 +1119,23 @@
 
             
 
-             controls that are not on the form at design time when the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             controls that are not on the form at design time when the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             settings are saved are removed from the <see
-             cref="T:System.Windows.Forms.Form" />
+             settings are saved are removed from the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             when the settings are loaded. To reset the settings, comment out the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             when the settings are loaded. To reset the settings, comment out the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
-             line and leave the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
+             line and leave the <see cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
 
             
 
-             line. This will not load any settings and will persist the last state. When you remove the comment from the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             line. This will not load any settings and will persist the last state. When you remove the comment from the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
@@ -1211,13 +1145,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves settings for the given <see
-             cref="T:System.Windows.Forms.Form" />
+            >Saves settings for the given <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             using the full name of the <see
-             cref="T:System.Windows.Forms.Form" />
+             using the full name of the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -1225,12 +1157,15 @@
           >
         </summary>
         <param name="sourceForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Form" />
+          The <see cref="T:System.Windows.Forms.Form" />
 
           
 
@@ -1262,28 +1197,23 @@
 
             
 
-             controls that are not on the form at design time when the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             controls that are not on the form at design time when the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             settings are saved are removed from the <see
-             cref="T:System.Windows.Forms.Form" />
+             settings are saved are removed from the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             when the settings are loaded. To reset the settings, comment out the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             when the settings are loaded. To reset the settings, comment out the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
-             line and leave the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
+             line and leave the <see cref="Overload:System.Windows.Forms.ToolStripManager.SaveSettings" />
 
             
 
-             line. This will not load any settings and will persist the last state. When you remove the comment from the <see
-             cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+             line. This will not load any settings and will persist the last state. When you remove the comment from the <see cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
 
             
 
@@ -1293,8 +1223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves settings for the specified <see
-             cref="T:System.Windows.Forms.Form" />
+            >Saves settings for the specified <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -1302,29 +1231,34 @@
           >
         </summary>
         <param name="sourceForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Form" />
+          The <see cref="T:System.Windows.Forms.Form" />
 
           
 
            for which to save settings.</param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           representing the settings key for this <see
-           cref="T:System.Windows.Forms.Form" />
+           representing the settings key for this <see cref="T:System.Windows.Forms.Form" />
 
           
 
@@ -1345,8 +1279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets or sets a value indicating whether a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

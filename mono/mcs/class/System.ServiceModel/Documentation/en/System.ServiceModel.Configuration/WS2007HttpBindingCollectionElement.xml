@@ -32,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a configuration element that contains sub-elements that specify settings for using the <see
-         cref="T:System.ServiceModel.WS2007HttpBinding" />
+        >Represents a configuration element that contains sub-elements that specify settings for using the <see cref="T:System.ServiceModel.WS2007HttpBinding" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.WS2007HttpBindingCollectionElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WS2007HttpBindingCollectionElement" />
 
             
 

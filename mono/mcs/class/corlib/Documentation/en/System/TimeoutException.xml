@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For information about setting the time-out interval before a <see
-         cref="T:System.TimeoutException" />
+        >For information about setting the time-out interval before a <see cref="T:System.TimeoutException" />
 
         
 
@@ -39,13 +38,11 @@
          uses the HRESULT, COR_E_TIMEOUT, which has the value 0x80131505.</para
       >
       <para
-        >For a list of initial property values for an instance of  <see
-         cref="T:System.TimeoutException" />
+        >For a list of initial property values for an instance of  <see cref="T:System.TimeoutException" />
 
         
 
-        , see the <see
-         cref="Overload:System.TimeoutException.#ctor" />
+        , see the <see cref="Overload:System.TimeoutException.#ctor" />
 
         
 
@@ -75,16 +72,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the inherited <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the inherited <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance with a system-supplied error message. This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TimeoutException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TimeoutException" />
 
             
 
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.TimeoutException" />
 
             
 
@@ -155,21 +149,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the inherited <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the inherited <see cref="P:System.Exception.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
              parameter.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TimeoutException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TimeoutException" />
 
             
 
@@ -211,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.TimeoutException" />
 
             
 
@@ -220,7 +210,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -251,8 +245,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="2b1ea3be-1152-4032-b2b3-07794054c405">Binary Serialization</a>
             </format>
 
@@ -264,8 +257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.TimeoutException" />
 
             
 
@@ -273,29 +265,34 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object that contains serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object that contains contextual information about the source or destination. The <paramref
-           name="context" />
+           object that contains contextual information about the source or destination. The <paramref name="context" />
 
           
 
@@ -326,39 +323,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the inherited <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the inherited <see cref="P:System.Exception.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
              parameter.</para
           >
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed to the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed to the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TimeoutException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TimeoutException" />
 
             
 
@@ -400,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TimeoutException" />
+            >Initializes a new instance of the <see cref="T:System.TimeoutException" />
 
             
 
@@ -409,19 +399,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message that describes the error. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

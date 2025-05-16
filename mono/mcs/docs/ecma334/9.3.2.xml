@@ -3,9 +3,7 @@
   <paragraph>Two forms of comments are supported: delimited comments and single-line comments. </paragraph>
   <paragraph
     >A delimited comment begins with the characters /* and ends with the characters */. Delimited comments can occupy a portion of a line, a single line, or multiple lines. <example
-
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 /* Hello, world program  
 This program writes "hello, world" to the console  
@@ -26,9 +24,7 @@ class Hello
   </paragraph>
   <paragraph
     >A single-line comment begins with the characters // and extends to the end of the line. <example
-
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 // Hello, world program  
 //   This program writes "hello, world" to the console  
@@ -51,8 +47,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.3.2">single-line-comment</non_terminal>
       </rhs>
       <rhs>
@@ -66,8 +61,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <terminal>//</terminal>
         <non_terminal where="9.3.2">input-characters</non_terminal>
         <opt />
@@ -84,8 +78,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.3.2">input-character</non_terminal>
       </rhs>
       <rhs>
@@ -101,9 +94,9 @@ class Hello // any name will do for this class
       
 
        :: <rhs
-
-        >Any Unicode character except a <non_terminal
-         where="9.3.2">new-line-character</non_terminal>
+        >Any Unicode character except a <non_terminal where="9.3.2"
+          >new-line-character</non_terminal
+        >
       </rhs>
     </grammar_production>
     <grammar_production>
@@ -113,8 +106,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >Carriage return character (U+000D) </rhs>
+       :: <rhs>Carriage return character (U+000D) </rhs>
       <rhs>Line feed character (U+000A) </rhs>
       <rhs>Line separator character (U+2028) </rhs>
       <rhs>Paragraph separator character (U+2029) </rhs>
@@ -126,8 +118,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <terminal>/*</terminal>
         <non_terminal where="9.3.2">delimited-comment-characters</non_terminal>
         <opt />
@@ -136,7 +127,9 @@ class Hello // any name will do for this class
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="9.3.2">delimited-comment-character</non_terminal>
+        <non_terminal where="9.3.2"
+          >delimited-comment-character</non_terminal
+        >
 
         
 
@@ -145,8 +138,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.3.2">delimited-comment-character</non_terminal>
       </rhs>
       <rhs>
@@ -161,8 +153,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.3.2">not-asterisk</non_terminal>
       </rhs>
       <rhs>
@@ -177,8 +168,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >Any Unicode character except * </rhs>
+       :: <rhs>Any Unicode character except * </rhs>
     </grammar_production>
     <grammar_production>
       <name>
@@ -187,8 +177,7 @@ class Hello // any name will do for this class
 
       
 
-       :: <rhs
-      >Any Unicode character except / </rhs>
+       :: <rhs>Any Unicode character except / </rhs>
     </grammar_production>
   </paragraph>
   <paragraph>Comments do not nest. The character sequences /* and */ have no special meaning within a single-line comment, and the character sequences // and /* have no special meaning within a delimited comment. </paragraph>

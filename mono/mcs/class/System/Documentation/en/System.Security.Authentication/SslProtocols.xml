@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the possible versions of <see
-         cref="T:System.Security.Authentication.SslProtocols" />
+        >Defines the possible versions of <see cref="T:System.Security.Authentication.SslProtocols" />
 
         
 

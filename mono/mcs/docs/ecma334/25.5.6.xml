@@ -1,18 +1,15 @@
 <?xml version="1.0"?>
 <clause number="25.5.6" title="Pointer arithmetic">
   <paragraph
-    >In an unsafe context, the + operator (<hyperlink
-    >14.7.4</hyperlink>
+    >In an unsafe context, the + operator (<hyperlink>14.7.4</hyperlink>
 
     
 
-    ) and  -operator (<hyperlink
-    >14.7.5</hyperlink>
+    ) and  -operator (<hyperlink>14.7.5</hyperlink>
 
     
 
-    ) can be applied to values of all pointer types except void*. Thus, for every pointer type T*, the following operators are implicitly defined: <code_example
-    >
+    ) can be applied to values of all pointer types except void*. Thus, for every pointer type T*, the following operators are implicitly defined: <code_example>
       <![CDATA[
 T* operator +(T* x, int y);  
 T* operator +(T* x, uint y);  
@@ -31,41 +28,34 @@ long operator -(T* x, T* y);
     </code_example>
   </paragraph>
   <paragraph
-    >Given an expression P of a pointer type T* and an expression N of type <keyword
-    >int</keyword>
+    >Given an expression P of a pointer type T* and an expression N of type <keyword>int</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , <keyword
-    >long</keyword>
+    , <keyword>long</keyword>
 
     
 
-    , or <keyword
-    >ulong</keyword>
+    , or <keyword>ulong</keyword>
 
     
 
     , the expressions P + N and N + P compute the pointer value of type T* that results from adding N * sizeof(T) to the address given by P. Likewise, the expression P  -N computes the pointer value of type T* that results from subtracting N * sizeof(T) from the address given by P. </paragraph
   >
   <paragraph
-    >Given two expressions, P and Q, of a pointer type T*, the expression P  -Q computes the difference between the addresses given by P and Q and then divides that difference by sizeof(T). The type of the result is always <keyword
-    >long</keyword>
+    >Given two expressions, P and Q, of a pointer type T*, the expression P  -Q computes the difference between the addresses given by P and Q and then divides that difference by sizeof(T). The type of the result is always <keyword>long</keyword>
 
     
 
-    . In effect, P  -Q is computed as ((<keyword
-    >long</keyword>
+    . In effect, P  -Q is computed as ((<keyword>long</keyword>
 
     
 
-    )(P)  -(<keyword
-    >long</keyword>
+    )(P)  -(<keyword>long</keyword>
 
     
 
@@ -73,8 +63,7 @@ long operator -(T* x, T* y);
   >
   <paragraph>
     <example
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -96,8 +85,7 @@ class Test
 
       
 
-      which produces the output: <code_example
-      >
+      which produces the output: <code_example>
         <![CDATA[
 p - q = -14  
 q - p = 14  

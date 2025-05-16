@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information on using <see
-         cref="T:System.Xml.Xsl.IXsltContextFunction" />
+        >For more information on using <see cref="T:System.Xml.Xsl.IXsltContextFunction" />
 
         
 
@@ -86,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="docContext" />
+            >The <paramref name="docContext" />
 
             
 
@@ -101,8 +99,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -110,21 +107,33 @@
           >
         </returns>
         <param name="xsltContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XSLT context for the function call. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The arguments of the function call. Each argument is an element in the array. </param
         >
         <param name="docContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -198,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XPath.XPathResultType" />
+            >Gets the <see cref="T:System.Xml.XPath.XPathResultType" />
 
             
 

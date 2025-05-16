@@ -58,8 +58,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor initializes timeout properties with the service model timeout values when exchanging messages. The default value is 1 minute for open, send, and close operations and 10 minutes for the receive operation. Use <see
-             cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+            >The default constructor initializes timeout properties with the service model timeout values when exchanging messages. The default value is 1 minute for open, send, and close operations and 10 minutes for the receive operation. Use <see cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
 
             
 
@@ -69,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.ChannelListenerBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelListenerBase`1" />
 
             
 
@@ -99,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+            >Use <see cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
 
             
 
@@ -110,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.ChannelListenerBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.ChannelListenerBase`1" />
 
             
 
@@ -119,12 +115,15 @@
           >
         </summary>
         <param name="timeouts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+          The <see cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
 
           
 
@@ -155,8 +154,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -190,8 +188,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -199,12 +196,15 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -242,8 +242,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -251,12 +250,15 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -295,8 +297,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -304,24 +305,30 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the accept channel operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
@@ -357,8 +364,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -366,17 +372,19 @@
           >
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="Overload:System.ServiceModel.Channels.ChannelListenerBase`1.BeginAcceptChannel" />
+           returned by a call to the <see cref="Overload:System.ServiceModel.Channels.ChannelListenerBase`1.BeginAcceptChannel" />
 
           
 
@@ -412,8 +420,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -421,12 +428,15 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -465,8 +475,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -474,24 +483,30 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the accept channel operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
@@ -527,8 +542,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+            >The <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -536,17 +550,19 @@
           >
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.OnBeginAcceptChannel(System.TimeSpan,System.AsyncCallback,System.Object)" />
+           returned by a call to the <see cref="M:System.ServiceModel.Channels.ChannelListenerBase`1.OnBeginAcceptChannel(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
           
 

@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends design-time behavior for the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >Extends design-time behavior for the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.TableDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.TableDesigner" />
 
             
 
@@ -62,8 +60,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebControls.TableDesigner.GetDesignTimeHtml" />
+            >The <see cref="M:System.Web.UI.Design.WebControls.TableDesigner.GetDesignTimeHtml" />
 
             
 
@@ -96,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member overrides <see
-             cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
+            >This member overrides <see cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
 
             
 

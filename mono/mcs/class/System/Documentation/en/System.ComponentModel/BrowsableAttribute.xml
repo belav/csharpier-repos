@@ -31,23 +31,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A visual designer typically displays in the Properties window those members that either have no browsable attribute or are marked with the <see
-         cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
+        >A visual designer typically displays in the Properties window those members that either have no browsable attribute or are marked with the <see cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
 
         
 
-         constructor's <paramref
-         name="browsable" />
+         constructor's <paramref name="browsable" />
 
         
 
-         parameter set to true. These members can be modified at design time. Members marked with the <see
-         cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
+         parameter set to true. These members can be modified at design time. Members marked with the <see cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
 
         
 
-         constructor's <paramref
-         name="browsable" />
+         constructor's <paramref name="browsable" />
 
         
 
@@ -55,23 +51,19 @@
       >
       <block subset="none" type="note">
         <para
-          >When you mark a property with Browsable(true), the value of this attribute is set to the constant member <see
-           cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+          >When you mark a property with Browsable(true), the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
           
 
-          . For a property marked with Browsable(false), the value is <see
-           cref="F:System.ComponentModel.BrowsableAttribute.No" />
+          . For a property marked with Browsable(false), the value is <see cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
           
 
-          . Therefore, when you check the value of this attribute in your code, you must specify the attribute as <see
-           cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+          . Therefore, when you check the value of this attribute in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
           
 
-           or <see
-           cref="F:System.ComponentModel.BrowsableAttribute.No" />
+           or <see cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
           
 
@@ -79,8 +71,7 @@
         >
       </block>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -115,33 +106,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with the <see
-             cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
+            >When you mark a property with the <see cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor of the value true, the value of this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+             constructor of the value true, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
-            . For a property marked with the <see
-             cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
+            . For a property marked with the <see cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor of the value false, the value is <see
-             cref="F:System.ComponentModel.BrowsableAttribute.No" />
+             constructor of the value false, the value is <see cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
             
 
-            . Therefore, when you want to check the value of this attribute in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+            . Therefore, when you want to check the value of this attribute in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
-             or <see
-             cref="F:System.ComponentModel.BrowsableAttribute.No" />
+             or <see cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
             
 
@@ -151,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BrowsableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BrowsableAttribute" />
 
             
 
@@ -160,7 +144,11 @@
           >
         </summary>
         <param name="browsable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -212,13 +200,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with this value, this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+            >When you mark a property with this value, this attribute is set to the constant member <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
-            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
@@ -228,13 +214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default value for the <see
-             cref="T:System.ComponentModel.BrowsableAttribute" />
+            >Specifies the default value for the <see cref="T:System.ComponentModel.BrowsableAttribute" />
 
             
 
-            , which is <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+            , which is <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
@@ -270,8 +254,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -279,7 +262,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -366,18 +353,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with the <see
-             cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
+            >When you mark a property with the <see cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor of the value false, this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BrowsableAttribute.No" />
+             constructor of the value false, this attribute is set to the constant member <see cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
             
 
-            . Therefore, when you check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BrowsableAttribute.No" />
+            . Therefore, when you check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BrowsableAttribute.No" />
 
             
 
@@ -414,18 +398,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is the default setting for this attribute.</para>
           <para
-            >When you mark a property with the <see
-             cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
+            >When you mark a property with the <see cref="M:System.ComponentModel.BrowsableAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor of the value true, this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+             constructor of the value true, this attribute is set to the constant member <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 
-            . Therefore, when you check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+            . Therefore, when you check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
 
             
 

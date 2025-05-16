@@ -16,31 +16,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the members of this enumeration to set the value of the <see
-         cref="P:System.Windows.Forms.DataGrid.ParentRowsLabelStyle" />
+        >Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.DataGrid.ParentRowsLabelStyle" />
 
         
 
          property.</para
       >
       <para
-        >Parent rows can be displayed only if the <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >Parent rows can be displayed only if the <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         contains at least one <see
-         cref="T:System.Data.DataRelation" />
+         contains at least one <see cref="T:System.Data.DataRelation" />
 
         
 
-         to a second <see
-         cref="T:System.Data.DataTable" />
+         to a second <see cref="T:System.Data.DataTable" />
 
         
 
-        , and if the <see
-         cref="P:System.Windows.Forms.DataGrid.AllowNavigation" />
+        , and if the <see cref="P:System.Windows.Forms.DataGrid.AllowNavigation" />
 
         
 
@@ -50,8 +45,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how the parent row labels of a <see
-         cref="T:System.Windows.Forms.DataGrid" />
+        >Specifies how the parent row labels of a <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 

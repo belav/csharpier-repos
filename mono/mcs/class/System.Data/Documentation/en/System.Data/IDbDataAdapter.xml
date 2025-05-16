@@ -22,33 +22,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.IDbDataAdapter" />
+        >The <see cref="T:System.Data.IDbDataAdapter" />
 
         
 
-         interface inherits from the <see
-         cref="T:System.Data.IDataAdapter" />
+         interface inherits from the <see cref="T:System.Data.IDataAdapter" />
 
         
 
-         interface and allows an object to create a DataAdapter designed for use with a relational database. The <see
-         cref="T:System.Data.IDbDataAdapter" />
+         interface and allows an object to create a DataAdapter designed for use with a relational database. The <see cref="T:System.Data.IDbDataAdapter" />
 
         
 
-         interface and, optionally, the utility class, <see
-         cref="T:System.Data.Common.DbDataAdapter" />
+         interface and, optionally, the utility class, <see cref="T:System.Data.Common.DbDataAdapter" />
 
         
 
-        , allow an inheriting class to implement a DataAdapter class, which represents the bridge between a data source and a <see
-         cref="T:System.Data.DataSet" />
+        , allow an inheriting class to implement a DataAdapter class, which represents the bridge between a data source and a <see cref="T:System.Data.DataSet" />
 
         
 
-        . For more information about DataAdapter classes, see <format
-         type="text/html">
+        . For more information about DataAdapter classes, see <format type="text/html">
           <a href="3FA0AC7D-E266-4954-BFAC-3FBE2F913153"
             >[&lt;topic://cpconpopulatingdatasetfromdataadapter&gt;]</a
           >
@@ -56,8 +50,7 @@
 
         
 
-        . For more information about implementing .NET Framework data providers, see <format
-         type="text/html">
+        . For more information about implementing .NET Framework data providers, see <format type="text/html">
           <a href="A9FA1926-071B-4C6F-997D-A16BAC633852"
             >[&lt;topic://cpconimplementingnetdataprovider&gt;]</a
           >
@@ -68,71 +61,58 @@
         .</para
       >
       <para
-        >An application does not create an instance of the <see
-         cref="T:System.Data.IDbDataAdapter" />
+        >An application does not create an instance of the <see cref="T:System.Data.IDbDataAdapter" />
 
         
 
-         interface directly, but creates an instance of a class that inherits <see
-         cref="T:System.Data.IDbDataAdapter" />
+         interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDbDataAdapter" />
 
         
 
-         and <see
-         cref="T:System.Data.Common.DbDataAdapter" />
+         and <see cref="T:System.Data.Common.DbDataAdapter" />
 
         
 
         .</para
       >
       <para
-        >Classes that inherit <see
-         cref="T:System.Data.IDbDataAdapter" />
+        >Classes that inherit <see cref="T:System.Data.IDbDataAdapter" />
 
         
 
-         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
-         cref="T:System.Data.IDbDataAdapter" />
+         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see cref="T:System.Data.IDbDataAdapter" />
 
         
 
-         interface defines the <see
-         cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+         interface defines the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
         
 
-         property, and the <see
-         cref="T:System.Data.Common.DbDataAdapter" />
+         property, and the <see cref="T:System.Data.Common.DbDataAdapter" />
 
         
 
-         interface defines a <see
-         cref="M:System.Data.IDataAdapter.Fill(System.Data.DataSet)" />
+         interface defines a <see cref="M:System.Data.IDataAdapter.Fill(System.Data.DataSet)" />
 
         
 
-         method that takes a <see
-         cref="T:System.Data.DataTable" />
+         method that takes a <see cref="T:System.Data.DataTable" />
 
         
 
-         as a parameter. In turn, the <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+         as a parameter. In turn, the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         class inherits the <see
-         cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+         class inherits the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
         
 
-         property and the <see
-         cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+         property and the <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
         
 
-         method, and also defines two additional overloads of the <see
-         cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+         method, and also defines two additional overloads of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
         
 
@@ -142,8 +122,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a set of command-related properties that are used to fill the <see
-         cref="T:System.Data.DataSet" />
+        >Represents a set of command-related properties that are used to fill the <see cref="T:System.Data.DataSet" />
 
         
 
@@ -167,28 +146,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >During <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-            , if this property is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+            , if this property is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+            , the <see cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
 
             
 
-             can be generated automatically if you set the SelectCommand property of a .NET Framework data provider. Then, any additional commands that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+             can be generated automatically if you set the SelectCommand property of a .NET Framework data provider. Then, any additional commands that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information see <format
-             type="text/html">
+            . For more information see <format type="text/html">
               <a href="6E3FB8B5-373B-4F9E-AB03-A22693DF8E91"
                 >[&lt;topic://cpconAutomaticallyGeneratedCommands&gt;]</a
               >
@@ -199,28 +173,23 @@
             .</para
           >
           <para
-            >When <see
-             cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+            >When <see cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.IDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.IDbCommand" />
+            , the <see cref="T:System.Data.IDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+             is not cloned. The <see cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.IDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
@@ -252,28 +221,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >During <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-            , if this property is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+            , if this property is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="P:System.Data.IDbDataAdapter.InsertCommand" />
+            , the <see cref="P:System.Data.IDbDataAdapter.InsertCommand" />
 
             
 
-             can be generated automatically if you set the SelectCommand property of a .NET Framework data provider. Then, any additional commands that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+             can be generated automatically if you set the SelectCommand property of a .NET Framework data provider. Then, any additional commands that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information see <format
-             type="text/html">
+            . For more information see <format type="text/html">
               <a href="6E3FB8B5-373B-4F9E-AB03-A22693DF8E91"
                 >[&lt;topic://cpconAutomaticallyGeneratedCommands&gt;]</a
               >
@@ -284,28 +248,23 @@
             .</para
           >
           <para
-            >When <see
-             cref="P:System.Data.IDbDataAdapter.InsertCommand" />
+            >When <see cref="P:System.Data.IDbDataAdapter.InsertCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.IDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.IDbCommand" />
+            , the <see cref="T:System.Data.IDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.IDbDataAdapter.InsertCommand" />
+             is not cloned. The <see cref="P:System.Data.IDbDataAdapter.InsertCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.IDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
@@ -313,18 +272,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If execution of this command returns rows, these rows may be added to the <see
-               cref="T:System.Data.DataSet" />
+              >If execution of this command returns rows, these rows may be added to the <see cref="T:System.Data.DataSet" />
 
               
 
-               depending on how you set the <see
-               cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+               depending on how you set the <see cref="P:System.Data.IDbCommand.UpdatedRowSource" />
 
               
 
-               property of the <see
-               cref="T:System.Data.IDbCommand" />
+               property of the <see cref="T:System.Data.IDbCommand" />
 
               
 
@@ -357,41 +313,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+            >When <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.IDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.IDbCommand" />
+            , the <see cref="T:System.Data.IDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+             is not cloned. The <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.IDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
              object.</para
           >
           <para
-            >If the <see
-             cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+            >If the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
-             does not return any rows, no tables are added to the <see
-             cref="T:System.Data.DataSet" />
+             does not return any rows, no tables are added to the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -423,28 +372,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >During <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-            , if this property is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+            , if this property is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
+            , the <see cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
 
             
 
-             can be generated automatically if you set the SelectCommand property of a .NET Framework data provider. Then, any additional commands that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+             can be generated automatically if you set the SelectCommand property of a .NET Framework data provider. Then, any additional commands that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information see <format
-             type="text/html">
+            . For more information see <format type="text/html">
               <a href="6E3FB8B5-373B-4F9E-AB03-A22693DF8E91"
                 >[&lt;topic://cpconAutomaticallyGeneratedCommands&gt;]</a
               >
@@ -455,28 +399,23 @@
             .</para
           >
           <para
-            >When <see
-             cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
+            >When <see cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.IDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.IDbCommand" />
+            , the <see cref="T:System.Data.IDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
+             is not cloned. The <see cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.IDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.IDbCommand" />
 
             
 
@@ -484,8 +423,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If execution of this command returns rows, these rows are added to the <see
-               cref="T:System.Data.DataSet" />
+              >If execution of this command returns rows, these rows are added to the <see cref="T:System.Data.DataSet" />
 
               
 

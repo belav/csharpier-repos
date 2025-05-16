@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -29,13 +31,11 @@
   <Docs>
     <summary>Implements the Challenge Response mechanism for NTLM v1.</summary>
     <remarks
-      >This requires access to cryptographic algorithm <see
-       cref="T:System.Security.Cryptography.DES" />
+      >This requires access to cryptographic algorithm <see cref="T:System.Security.Cryptography.DES" />
 
       
 
-       and <see
-       cref="T:Mono.Security.Cryptography.MD4" />
+       and <see cref="T:Mono.Security.Cryptography.MD4" />
 
       
 
@@ -70,8 +70,7 @@
       </Parameters>
       <Docs>
         <param name="password"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -147,8 +146,7 @@
       <Docs>
         <summary>Return the LAN Manager (LM) part of the response.</summary>
         <value
-          >a <see
-           cref="T:System.Byte[]" />
+          >a <see cref="T:System.Byte[]" />
 
           
 
@@ -174,8 +172,7 @@
       <Docs>
         <summary>Return the NT part of the response.</summary>
         <value
-          >a <see
-           cref="T:System.Byte[]" />
+          >a <see cref="T:System.Byte[]" />
 
           
 

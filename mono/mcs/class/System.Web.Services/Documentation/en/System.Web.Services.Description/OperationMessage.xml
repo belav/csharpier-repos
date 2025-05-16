@@ -54,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.OperationMessage" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.OperationMessage" />
 
             
 
@@ -79,10 +78,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.XmlQualifiedName" />
-        </value>
+        <value>a <see cref="T:System.Xml.XmlQualifiedName" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -136,13 +132,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Gets the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             of which the <see
-             cref="T:System.Web.Services.Description.OperationMessage" />
+             of which the <see cref="T:System.Web.Services.Description.OperationMessage" />
 
             
 

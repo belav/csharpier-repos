@@ -16,24 +16,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Individual items in the collection return a <see
-         cref="T:System.String" />
+        >Individual items in the collection return a <see cref="T:System.String" />
 
         
 
          object as their value. If there are no attribute items in the collection, the collection returns null.</para
       >
       <para
-        >Attributes on an HTML server control are programmatically available through the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlControl.Attributes" />
+        >Attributes on an HTML server control are programmatically available through the <see cref="P:System.Web.UI.HtmlControls.HtmlControl.Attributes" />
 
         
 
          property, which is inherited by all HTML server controls. ASP.NET exposes attributes of HTML server controls as properties of those controls.</para
       >
       <para
-        >You can add attributes to a Web server control through the <see
-         cref="P:System.Web.UI.WebControls.WebControl.Attributes" />
+        >You can add attributes to a Web server control through the <see cref="P:System.Web.UI.WebControls.WebControl.Attributes" />
 
         
 
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -70,7 +66,11 @@
           >
         </summary>
         <param name="bag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -96,8 +96,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the string in the <paramref
-             name="value" />
+            >If the string in the <paramref name="value" />
 
             
 
@@ -107,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an attribute to a server control's <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Adds an attribute to a server control's <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -116,14 +114,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute name. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,26 +157,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies all the server control's attributes to an <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >This method copies all the server control's attributes to an <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object so that they can be rendered by the next call to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+             object so that they can be rendered by the next call to the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For controls that are contained in other controls such as <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >For controls that are contained in other controls such as <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             and <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -180,13 +182,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds attributes from the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Adds attributes from the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
-             class to the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             class to the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -194,12 +194,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -223,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all attributes from a server control's <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Removes all attributes from a server control's <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -249,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of attributes in the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Gets the number of attributes in the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -277,8 +278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any style declared for a particular HTML server control is added to the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Any style declared for a particular HTML server control is added to the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -288,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of styles for the ASP.NET server control to which the current <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Gets a collection of styles for the ASP.NET server control to which the current <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -323,13 +322,11 @@
           <list type="bullet">
             <item>
               <para
-                >The object that is contained in the <paramref
-                 name="o" />
+                >The object that is contained in the <paramref name="o" />
 
                 
 
-                 parameter must be an <see
-                 cref="T:System.Web.UI.AttributeCollection" />
+                 parameter must be an <see cref="T:System.Web.UI.AttributeCollection" />
 
                 
 
@@ -350,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current instance of the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Determines whether the current instance of the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -361,13 +357,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object that is contained in the <paramref
-             name="o" />
+            >true if the object that is contained in the <paramref name="o" />
 
             
 
-             parameter is equal to the current instance of <see
-             cref="T:System.Web.UI.AttributeCollection" />
+             parameter is equal to the current instance of <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -391,13 +385,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.AttributeCollection.GetHashCode" />
+            >Use the <see cref="M:System.Web.UI.AttributeCollection.GetHashCode" />
 
             
 
-             method to determine the hash code for this <see
-             cref="T:System.Web.UI.AttributeCollection" />
+             method to determine the hash code for this <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -442,20 +434,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ICollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.ICollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property contains all the keys that are in the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >This property contains all the keys that are in the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
-             of an ASP.NET server control, whether you have added them programmatically with the <see
-             cref="M:System.Web.UI.AttributeCollection.Add(System.String,System.String)" />
+             of an ASP.NET server control, whether you have added them programmatically with the <see cref="M:System.Web.UI.AttributeCollection.Add(System.String,System.String)" />
 
             
 
@@ -465,8 +452,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of keys to all attributes in the server control's <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Gets a collection of keys to all attributes in the server control's <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -492,13 +478,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >If the <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
-             object does not contain an attribute that has the specified <paramref
-             name="key" />
+             object does not contain an attribute that has the specified <paramref name="key" />
 
             
 
@@ -508,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an attribute from a server control's <see
-             cref="T:System.Web.UI.AttributeCollection" />
+            >Removes an attribute from a server control's <see cref="T:System.Web.UI.AttributeCollection" />
 
             
 
@@ -517,7 +500,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -546,8 +533,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the collection of attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Writes the collection of attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -555,12 +541,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 

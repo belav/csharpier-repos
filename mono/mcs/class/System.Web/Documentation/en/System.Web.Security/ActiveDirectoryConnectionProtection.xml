@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.ActiveDirectoryConnectionProtection" />
+        >The <see cref="T:System.Web.Security.ActiveDirectoryConnectionProtection" />
 
         
 
-         enumeration is used in an application's configuration file to set the protocol used to secure communications between an <see
-         cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+         enumeration is used in an application's configuration file to set the protocol used to secure communications between an <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
 
         
 
-         object and an Active Directory or Active Directory Application Mode server. The enumeration indicates the type of connection security the provider established based on the connectionProtection attribute of the <format
-         type="text/html">
+         object and an Active Directory or Active Directory Application Mode server. The enumeration indicates the type of connection security the provider established based on the connectionProtection attribute of the <format type="text/html">
           <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
         </format>
 
@@ -39,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the connection protection options supported by the <see
-         cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+        >Specifies the connection protection options supported by the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
 
         
 

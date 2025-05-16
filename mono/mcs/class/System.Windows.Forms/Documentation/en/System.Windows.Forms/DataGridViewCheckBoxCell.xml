@@ -21,51 +21,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
-         class is a specialized type of <see
-         cref="T:System.Windows.Forms.DataGridViewCell" />
+         class is a specialized type of <see cref="T:System.Windows.Forms.DataGridViewCell" />
 
         
 
-         used to display binary or ternary information presented through a check box UI. In the default binary mode, the cells can hold values of true or false. In ternary mode, the cells take on one of the <see
-         cref="T:System.Windows.Forms.CheckState" />
+         used to display binary or ternary information presented through a check box UI. In the default binary mode, the cells can hold values of true or false. In ternary mode, the cells take on one of the <see cref="T:System.Windows.Forms.CheckState" />
 
         
 
-         values. The <see
-         cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+         values. The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
         
 
          property determines whether binary or ternary mode is in effect.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
         
 
-         is the column type specialized to hold cells of this type. By default, the <see
-         cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+         is the column type specialized to hold cells of this type. By default, the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
         
 
-         is initialized to a new <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+         is initialized to a new <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
-        . To pattern the cells within a column after an existing <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+        . To pattern the cells within a column after an existing <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
-        , set the column's <see
-         cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
+        , set the column's <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
         
 
@@ -73,41 +64,34 @@
       >
       <para>The cell-related properties of the column are wrappers for the similarly-named properties of the template cell. Changing the property values of the template cell will affect only cells based on the template that are added after the change. Changing the cell-related property values of the column, however, will update the template cell and all other cells in the column, and refresh the column display if necessary. </para>
       <para
-        >When the current cell is a <see
-         cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+        >When the current cell is a <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
         
 
-        , the <see
-         cref="P:System.Windows.Forms.DataGridView.IsCurrentCellInEditMode" />
+        , the <see cref="P:System.Windows.Forms.DataGridView.IsCurrentCellInEditMode" />
 
         
 
          property is always true.</para
       >
       <para
-        >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CellClick" />
+        >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see cref="E:System.Windows.Forms.DataGridView.CellClick" />
 
         
 
-         event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+         event, but this event occurs before the cell value is updated. If you need the new value at the time of the click, one option is to calculate what the expected value will be based on the current value. Another approach is to commit the change immediately, and handle the <see cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
 
         
 
-         event to respond to it. To commit the change when the cell is clicked, you must handle the <see
-         cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" />
+         event to respond to it. To commit the change when the cell is clicked, you must handle the <see cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" />
 
         
 
-         event. In the handler, if the current cell is a check box cell, call the <see
-         cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" />
+         event. In the handler, if the current cell is a check box cell, call the <see cref="M:System.Windows.Forms.DataGridView.CommitEdit(System.Windows.Forms.DataGridViewDataErrorContexts)" />
 
         
 
-         method and pass in the <see
-         cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
+         method and pass in the <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
 
         
 
@@ -117,8 +101,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Displays a check box user interface (UI) to use in a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Displays a check box user interface (UI) to use in a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -136,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+            >This constructor initializes the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
@@ -147,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -171,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The standard operation of a check box allows for two states: checked and unchecked. When the <paramref
-             name="threeState" />
+            >The standard operation of a check box allows for two states: checked and unchecked. When the <paramref name="threeState" />
 
             
 
@@ -182,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -191,7 +170,11 @@
           >
         </summary>
         <param name="threeState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -214,13 +197,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.Clone" />
+            >Override the <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.Clone" />
 
             
 
-             method whenever you derive from <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+             method whenever you derive from <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -234,13 +215,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the cloned <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+             that represents the cloned <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -273,21 +252,18 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
              has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -307,12 +283,15 @@
           <para>true if the cell is in edit mode; otherwise, false.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
 
           
 
@@ -346,21 +325,18 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
              has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -380,12 +356,15 @@
           <para>true if the cell is in edit mode; otherwise, false.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
 
           
 
@@ -408,13 +387,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
 
             
 
@@ -422,8 +399,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set <see
-               cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+              >To get or set <see cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
 
               
 
@@ -434,8 +410,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -445,13 +420,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell.DataGridViewCheckBoxCellAccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell.DataGridViewCheckBoxCellAccessibleObject" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+             for the <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -544,31 +517,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
              properties determine the associated values of these states as they occur in the underlying data source.</para
           >
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
+            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FalseValue" />
 
             
 
-             property of the owning column also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+             property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
@@ -604,21 +572,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Windows.Forms.FlatStyle.Popup" />
+            >The <see cref="F:System.Windows.Forms.FlatStyle.Popup" />
 
             
 
              flat style is not supported by this cell type.</para
           >
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FlatStyle" />
+            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.FlatStyle" />
 
             
 
-             property of the owning column also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
+             property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
 
             
 
@@ -651,18 +616,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
-             property value is false, the value of this property is the <see
-             cref="T:System.Boolean" />
+             property value is false, the value of this property is the <see cref="T:System.Boolean" />
 
             
 
-             type; otherwise, it is the <see
-             cref="T:System.Windows.Forms.CheckState" />
+             type; otherwise, it is the <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -722,38 +684,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <paramref
-             name="context" />
+            >When <paramref name="context" />
 
             
 
-             includes the <see
-             cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.ClipboardContent" />
+             includes the <see cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.ClipboardContent" />
 
             
 
-             value, this method returns an <see
-             cref="T:System.Object" />
+             value, this method returns an <see cref="T:System.Object" />
 
             
 
-             that you can cast to a <see
-             cref="T:System.String" />
+             that you can cast to a <see cref="T:System.String" />
 
             
 
-             representation of the value. Otherwise, this method returns a <see
-             cref="T:System.Boolean" />
+             representation of the value. Otherwise, this method returns a <see cref="T:System.Boolean" />
 
             
 
-             or a <see
-             cref="T:System.Windows.Forms.CheckState" />
+             or a <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
-             value, depending on the value of the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FormattedValueType" />
+             value, depending on the value of the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FormattedValueType" />
 
             
 
@@ -767,8 +722,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -776,12 +730,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
 
           
 
@@ -896,31 +853,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
              properties determine the associated values of these states as they occur in the underlying data source.</para
           >
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
 
             
 
-             property of the owning column also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+             property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
@@ -963,26 +915,22 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
 
             
 
-             with the same <see
-             cref="T:System.Windows.Forms.KeyEventArgs" />
+             with the same <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
             
 
              argument has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -1002,19 +950,26 @@
           <para>true if the SPACE key is pressed and the CTRL, ALT, and SHIFT keys are all not pressed; otherwise, false.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
            that contains data about the key press. </param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1047,26 +1002,22 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
 
             
 
-             with the same <see
-             cref="T:System.Windows.Forms.KeyEventArgs" />
+             with the same <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
             
 
              argument has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -1086,19 +1037,26 @@
           <para>true if the SPACE key is released; otherwise, false.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
            that contains data about the key press. </param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1131,21 +1089,18 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
              has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -1165,12 +1120,15 @@
           <para>Always true.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
           
 
@@ -1202,21 +1160,18 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
 
             
 
              has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -1236,7 +1191,11 @@
           <para>true if the cell was the last cell receiving a mouse click; otherwise, false.</para>
         </returns>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1268,21 +1227,18 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseLeave(System.Int32)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseLeave(System.Int32)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseLeave(System.Int32)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseLeave(System.Int32)" />
 
             
 
              has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -1302,7 +1258,11 @@
           <para>true if the button is not in the normal state; false if the button is in the pressed state.</para>
         </returns>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1335,21 +1295,18 @@
 
             
 
-             is called just before <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+             is called just before <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
-            . It must return true if the call to <see
-             cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+            . It must return true if the call to <see cref="M:System.Windows.Forms.DataGridViewCheckBoxCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
             
 
              has the effect of unsharing the row containing the cell. It should return false otherwise.</para
           >
           <para
-            >For more information about row sharing, see <format
-             type="text/html">
+            >For more information about row sharing, see <format type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
@@ -1369,12 +1326,15 @@
           <para>Always true.</para>
         </returns>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
           
 
@@ -1448,13 +1408,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When activated by the space key, this method causes the cell's user interface (UI) to be updated.</para>
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.KeyDown" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.KeyDown" />
 
             
 
@@ -1466,19 +1424,26 @@
           <para>Called when a character key is pressed while the focus is on a cell.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
            that contains the event data</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1507,31 +1472,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When activated by the SPACEBAR key (equivalent to the <see
-             cref="F:System.Windows.Forms.Keys.Space" />
+            >When activated by the SPACEBAR key (equivalent to the <see cref="F:System.Windows.Forms.Keys.Space" />
 
             
 
-             value), this method updates the cell's user interface (UI) and raises the <see
-             cref="M:System.Windows.Forms.DataGridView.OnCellClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+             value), this method updates the cell's user interface (UI) and raises the <see cref="M:System.Windows.Forms.DataGridView.OnCellClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
             
 
-             event on the owning <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             event on the owning <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
             .</para
           >
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.KeyUp" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.KeyUp" />
 
             
 
@@ -1543,19 +1503,26 @@
           <para>Called when a character key is released while the focus is on a cell.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyEventArgs" />
 
           
 
            that contains the event data</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1585,13 +1552,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the button is in a pushed state, this method updates the cell's user interface (UI).</para>
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnLeave(System.EventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnLeave(System.EventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
@@ -1603,14 +1568,22 @@
           <para>Called when the focus moves from a cell.</para>
         </summary>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row index of the current cell, or -1 if the cell is not owned by a row.</param
         >
         <param name="throughMouseClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1639,13 +1612,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method causes the cell's user interface (UI) to be updated.</para>
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.MouseDown" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
             
 
@@ -1657,12 +1628,15 @@
           <para>Called when the mouse button is held down while the pointer is on a cell.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
           
 
@@ -1687,21 +1661,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the cell's current <see
-             cref="T:System.Windows.Forms.ButtonState" />
+            >If the cell's current <see cref="T:System.Windows.Forms.ButtonState" />
 
             
 
              is normal, this method causes the cell's user interface (UI) to be updated.</para
           >
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.MouseLeave" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.MouseLeave" />
 
             
 
@@ -1713,7 +1684,11 @@
           <para>Called when the mouse pointer moves from a cell.</para>
         </summary>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1744,13 +1719,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method causes the cell's user interface (UI) to be updated.</para>
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.MouseMove" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
             
 
@@ -1762,12 +1735,15 @@
           <para>Called when the mouse pointer moves within a cell.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
           
 
@@ -1793,13 +1769,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method updates the cell's user interface (UI).</para>
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
 
             
 
-             method. It is called in the same circumstances in which a <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+             method. It is called in the same circumstances in which a <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
@@ -1811,12 +1785,15 @@
           <para>Called when the mouse button is released while the pointer is on a cell. </para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
           
 
@@ -1858,8 +1835,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Paints the current <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+            >Paints the current <see cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
 
             
 
@@ -1867,117 +1843,153 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to paint the cell.</param
         >
         <param name="clipBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the area of the <see
-           cref="T:System.Windows.Forms.DataGridView" />
+           that represents the area of the <see cref="T:System.Windows.Forms.DataGridView" />
 
           
 
            that needs to be repainted.</param
         >
         <param name="cellBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that contains the bounds of the cell that is being painted.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row index of the cell that is being painted.</param
         >
         <param name="elementState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
            values that specifies the state of the cell.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data of the cell that is being painted.</param
         >
         <param name="formattedValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The formatted data of the cell that is being painted.</param
         >
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
            that contains formatting and style information about the cell.</param
         >
         <param name="advancedBorderStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
           
 
            that contains border styles for the cell that is being painted.</param
         >
         <param name="paintParts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewPaintParts" />
 
           
 
@@ -2008,36 +2020,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user edits a cell value and commits the change, the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >When the user edits a cell value and commits the change, the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control calls this method to convert the displayed value from the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
+             control calls this method to convert the displayed value from the <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
 
             
 
-             to the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
+             to the <see cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
 
             
 
             . The control then sets the underlying cell value or data source value to the converted value. </para
           >
           <para
-            >This method converts the display value of the cell to an actual cell value using the values of the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+            >This method converts the display value of the cell to an actual cell value using the values of the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
@@ -2053,43 +2059,56 @@
           <para>The cell value.</para>
         </returns>
         <param name="formattedValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The display value of the cell.</param
         >
         <param name="cellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
            in effect for the cell.</param
         >
         <param name="formattedValueTypeConverter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          A <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
            for the display value type, or null to use the default converter.</param
         >
         <param name="valueTypeConverter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          A <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -2123,7 +2142,11 @@
           <para>This method is not meaningful for this type.</para>
         </summary>
         <param name="selectAll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2147,61 +2170,50 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The third state in ternary mode typically represents an uninitialized or indeterminate value.</para>
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
             
 
-             property of the owning column also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+             property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
              property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >
           <para
-            >Unlike the column <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+            >Unlike the column <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
             
 
-             property, the cell <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+             property, the cell <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
-             property does not automatically update the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property does not automatically update the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property of the associated cell style when you change its value. When you change the cell <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+             property of the associated cell style when you change its value. When you change the cell <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
-             property value to true, be sure to set the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to true, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewCell.Style" />
 
             
 
-             property to <see
-             cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+             property to <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
             
 
-            . When you change the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+            . When you change the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
             
 
-             property value to false, be sure to set the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to false, be sure to set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
@@ -2242,8 +2254,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2267,31 +2278,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+            , <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
 
             
 
              properties determine the associated values of these states as they occur in the underlying data source.</para
           >
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
+            >Setting the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
             
 
-             property of the owning column also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+             property of the owning column also sets the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
 
             
 
@@ -2324,54 +2330,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ValueType" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ValueType" />
 
             
 
-             property of the cell has not been set, then the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.ValueType" />
+             property of the cell has not been set, then the <see cref="P:System.Windows.Forms.DataGridViewColumn.ValueType" />
 
             
 
-             property for the owning <see
-             cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+             property for the owning <see cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
 
             
 
              is used, if the column exists.</para
           >
           <para
-            >If no owning column exists, then this property is set to the default type appropriate for its mode: <see
-             cref="T:System.Boolean" />
+            >If no owning column exists, then this property is set to the default type appropriate for its mode: <see cref="T:System.Boolean" />
 
             
 
-             for binary mode and <see
-             cref="T:System.Windows.Forms.CheckState" />
+             for binary mode and <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
              for ternary mode.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewCell.Value" />
 
             
 
-             is the actual data object contained in the cell, whereas the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+             is the actual data object contained in the cell, whereas the <see cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
 
             
 
-             property is the formatted representation of this object. The <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ValueType" />
+             property is the formatted representation of this object. The <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ValueType" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FormattedValueType" />
+             and <see cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FormattedValueType" />
 
             
 

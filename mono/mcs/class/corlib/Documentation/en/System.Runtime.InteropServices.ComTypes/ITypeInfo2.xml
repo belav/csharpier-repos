@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -175,7 +174,11 @@
           </list>
         </returns>
         <param name="pCustData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -255,14 +258,22 @@
           </list>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the function to get the custom data for. </param
         >
         <param name="pCustData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -342,14 +353,22 @@
           </list>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the implementation type for the custom data. </param
         >
         <param name="pCustData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -430,21 +449,33 @@
           </list>
         </returns>
         <param name="indexFunc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the function to get the custom data for. </param
         >
         <param name="indexParam">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the parameter of this function to get the custom data for. </param
         >
         <param name="pCustData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -524,14 +555,22 @@
           </list>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the variable to get the custom data for. </param
         >
         <param name="pCustData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -634,60 +673,75 @@
           <para>Retrieves a description or specification of an entry point for a function in a DLL.</para>
         </summary>
         <param name="memid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The ID of the member function whose DLL entry description is to be returned. </param
         >
         <param name="invKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.InteropServices.ComTypes.INVOKEKIND" />
+          One of the <see cref="T:System.Runtime.InteropServices.ComTypes.INVOKEKIND" />
 
           
 
-           values that specifies the kind of member identified by <paramref
-           name="memid" />
+           values that specifies the kind of member identified by <paramref name="memid" />
 
           
 
           . </param
         >
         <param name="pBstrDllName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If not null, the function sets <paramref
-           name="pBstrDllName" />
+          If not null, the function sets <paramref name="pBstrDllName" />
 
           
 
            to a BSTR that contains the name of the DLL. </param
         >
         <param name="pBstrName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If not null, the function sets <paramref
-           name="lpbstrName" />
+          If not null, the function sets <paramref name="lpbstrName" />
 
           
 
            to a BSTR that contains the name of the entry point. </param
         >
         <param name="pwOrdinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If not null, and the function is defined by an ordinal, then <paramref
-           name="lpwOrdinal" />
+          If not null, and the function is defined by an ordinal, then <paramref name="lpwOrdinal" />
 
           
 
@@ -889,21 +943,33 @@
           <para>Maps between member names and member IDs, and parameter names and parameter IDs.</para>
         </summary>
         <param name="rgszNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of names to map. </param
         >
         <param name="cNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The count of names to map. </param
         >
         <param name="pMemId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1390,13 +1456,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a <see
-             cref="T:System.Runtime.InteropServices.FUNCDESC" />
+            >Releases a <see cref="T:System.Runtime.InteropServices.FUNCDESC" />
 
             
 
-             structure previously returned by the <see
-             cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" />
+             structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" />
 
             
 
@@ -1404,7 +1468,11 @@
           >
         </summary>
         <param name="pFuncDesc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1437,13 +1505,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a <see
-             cref="T:System.Runtime.InteropServices.TYPEATTR" />
+            >Releases a <see cref="T:System.Runtime.InteropServices.TYPEATTR" />
 
             
 
-             structure previously returned by the <see
-             cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetTypeAttr(System.IntPtr@)" />
+             structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetTypeAttr(System.IntPtr@)" />
 
             
 
@@ -1451,7 +1517,11 @@
           >
         </summary>
         <param name="pTypeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1484,8 +1554,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases a VARDESC structure previously returned by the <see
-             cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetVarDesc(System.Int32,System.IntPtr@)" />
+            >Releases a VARDESC structure previously returned by the <see cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetVarDesc(System.Int32,System.IntPtr@)" />
 
             
 
@@ -1493,7 +1562,11 @@
           >
         </summary>
         <param name="pVarDesc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -33,8 +33,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The component tray represents components that do not otherwise provide a visible surface at design time and provides a way for users to access and set the properties of those components.</para>
       <para
-        >Some types of components, such as a <see
-         cref="T:System.Timers.Timer" />
+        >Some types of components, such as a <see cref="T:System.Timers.Timer" />
 
         
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.ComponentTray" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentTray" />
 
             
 
@@ -75,24 +73,30 @@
           >
         </summary>
         <param name="mainDesigner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesigner" />
+          The <see cref="T:System.ComponentModel.Design.IDesigner" />
 
           
 
            that is the main or document designer for the current project. </param
         >
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
@@ -123,12 +127,15 @@
           <para>Adds a component to the tray.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -182,12 +189,15 @@
           <para>true if the specified tool can be used to create a component; otherwise, false.</para>
         </returns>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -215,8 +225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method tests the specified component for the existence of a <see
-             cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
+            >This method tests the specified component for the existence of a <see cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
 
             
 
@@ -232,12 +241,15 @@
           <para>true if the component can be displayed; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -284,8 +296,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method checks the item for an appropriate <see
-             cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
+            >This method checks the item for an appropriate <see cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
 
             
 
@@ -297,12 +308,15 @@
           <para>Creates a component from the specified toolbox item, adds the component to the current document, and displays a representation for the component in the component tray.</para>
         </summary>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -330,7 +344,11 @@
           <para>Displays an error message to the user with information about the specified exception.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,36 +373,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.Design.ComponentTray" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.Design.ComponentTray" />
 
             
 
@@ -394,8 +406,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.Design.ComponentTray" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Design.ComponentTray" />
 
             
 
@@ -403,7 +414,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -445,33 +460,27 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Point" />
+            >A <see cref="T:System.Drawing.Point" />
 
             
 
-             indicating the coordinates of the specified component, or an empty <see
-             cref="T:System.Drawing.Point" />
+             indicating the coordinates of the specified component, or an empty <see cref="T:System.Drawing.Point" />
 
             
 
-             if the specified component could not be found in the component tray. An empty <see
-             cref="T:System.Drawing.Point" />
+             if the specified component could not be found in the component tray. An empty <see cref="T:System.Drawing.Point" />
 
             
 
-             has an <see
-             cref="P:System.Drawing.Point.IsEmpty" />
+             has an <see cref="P:System.Drawing.Point.IsEmpty" />
 
             
 
-             property equal to true and typically has <see
-             cref="P:System.Drawing.Point.X" />
+             property equal to true and typically has <see cref="P:System.Drawing.Point.X" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Point.Y" />
+             and <see cref="P:System.Drawing.Point.Y" />
 
             
 
@@ -479,12 +488,15 @@
           >
         </returns>
         <param name="receiver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -534,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Similar to <see
-             cref="M:System.Windows.Forms.Control.GetNextControl(System.Windows.Forms.Control,System.Boolean)" />
+            >Similar to <see cref="M:System.Windows.Forms.Control.GetNextControl(System.Windows.Forms.Control,System.Boolean)" />
 
             
 
@@ -545,8 +556,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The next component in the component tray, or null, if the end of the list is encountered (or the beginning, if <paramref
-             name="forward" />
+            >The next component in the component tray, or null, if the end of the list is encountered (or the beginning, if <paramref name="forward" />
 
             
 
@@ -554,14 +564,22 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component from which to start enumerating.</param
         >
         <param name="forward">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -628,18 +646,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Location extender property is offered to all non-visual components. The returned value takes into account the value of <see
-             cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
+            >The Location extender property is offered to all non-visual components. The returned value takes into account the value of <see cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
 
             
 
-            . If <paramref
-             name="receiver" />
+            . If <paramref name="receiver" />
 
             
 
-             does not have a component view, the returned value is an empty <see
-             cref="T:System.Drawing.Point" />
+             does not have a component view, the returned value is an empty <see cref="T:System.Drawing.Point" />
 
             
 
@@ -653,13 +668,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Point" />
+            >A <see cref="T:System.Drawing.Point" />
 
             
 
-             representing the location of <paramref
-             name="receiver" />
+             representing the location of <paramref name="receiver" />
 
             
 
@@ -667,12 +680,15 @@
           >
         </returns>
         <param name="receiver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -704,8 +720,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="comp" />
+            >true if <paramref name="comp" />
 
             
 
@@ -713,7 +728,11 @@
           >
         </returns>
         <param name="comp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -758,12 +777,15 @@
           <para>Called when an object that has been dragged is dropped on the component tray.</para>
         </summary>
         <param name="de">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -794,12 +816,15 @@
           <para>Called when an object is dragged over, and has entered the area over, the component tray.</para>
         </summary>
         <param name="de">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -827,12 +852,15 @@
           <para>Called when an object is dragged out of the area over the component tray.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -863,12 +891,15 @@
           <para>Called when an object is dragged over the component tray.</para>
         </summary>
         <param name="de">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -899,12 +930,15 @@
           <para>Called during an OLE drag and drop operation to provide an opportunity for the component tray to give feedback to the user about the results of dropping the object at a specific point.</para>
         </summary>
         <param name="gfevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+          A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
 
           
 
@@ -933,8 +967,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Layout" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Layout" />
 
             
 
@@ -942,12 +975,15 @@
           >
         </summary>
         <param name="levent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LayoutEventArgs" />
+          A <see cref="T:System.Windows.Forms.LayoutEventArgs" />
 
           
 
@@ -1000,12 +1036,15 @@
           <para>Called when the mouse is double clicked over the component tray.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1032,12 +1071,15 @@
           <para>Called when the mouse button is pressed.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1068,12 +1110,15 @@
           <para>Called when the mouse cursor position has changed.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1104,12 +1149,15 @@
           <para>Called when the mouse button has been released.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 
@@ -1140,12 +1188,15 @@
           <para>Called when the view for the component tray should be refreshed.</para>
         </summary>
         <param name="pe">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -1195,12 +1246,15 @@
           <para>Removes the specified component from the tray.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -1232,24 +1286,30 @@
           <para>Sets the location of the specified component to the specified location.</para>
         </summary>
         <param name="receiver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            to set the location of. </param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1281,8 +1341,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Location extender property is offered to all non-visual components. The actual value takes into account the value of <see
-             cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
+            >The Location extender property is offered to all non-visual components. The actual value takes into account the value of <see cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
 
             
 
@@ -1294,29 +1353,34 @@
           <para>Sets the value of the Location extender property.</para>
         </summary>
         <param name="receiver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            that receives the location extender property.</param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
-           representing the location of <paramref
-           name="receiver" />
+           representing the location of <paramref name="receiver" />
 
           
 
@@ -1360,13 +1424,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentTray" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentTray" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.IExtenderProvider" />
+             instance is cast to an <see cref="T:System.ComponentModel.IExtenderProvider" />
 
             
 
@@ -1376,8 +1438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
 
             
 
@@ -1389,12 +1450,15 @@
           <para>true if this object can provide extender properties to the specified object; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 

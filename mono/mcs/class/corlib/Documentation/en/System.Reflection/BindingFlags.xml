@@ -38,13 +38,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>These BindingFlags control binding for a great many classes in the System, System.Reflection, and System.Runtime namespaces that invoke, create, get, set, and find members and types.</para>
       <para
-        >BindingFlags are used in the following <see
-         cref="T:System.Type" />
+        >BindingFlags are used in the following <see cref="T:System.Type" />
 
         
 
-         methods and other places such as <see
-         cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+         methods and other places such as <see cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
         
 
@@ -215,8 +213,7 @@
         <para>You must specify Instance or Static along with Public or NonPublic or no members will be returned.</para>
       </block>
       <para
-        >The following table lists the coercions performed by the default <see
-         cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />
+        >The following table lists the coercions performed by the default <see cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />
 
         
 
@@ -454,16 +451,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reflection models the accessibility rules of the common type system. For example, if the caller is in the same assembly, the caller does not need special permissions for internal members. Otherwise, the caller needs <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Reflection models the accessibility rules of the common type system. For example, if the caller is in the same assembly, the caller does not need special permissions for internal members. Otherwise, the caller needs <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
             . This is consistent with lookup of members that are protected, private, and so on.</para
           >
           <para
-            >The general principle is that <see
-             cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />
+            >The general principle is that <see cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />
 
             
 
@@ -735,8 +730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the set of members whose parameter count matches the number of supplied arguments. This binding flag is used for methods with parameters that have default values and methods with variable arguments (varargs). This flag should only be used with <see
-             cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+            >Returns the set of members whose parameter count matches the number of supplied arguments. This binding flag is used for methods with parameters that have default values and methods with variable arguments (varargs). This flag should only be used with <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
 
             
 

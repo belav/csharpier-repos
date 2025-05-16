@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When an <see
-         cref="T:System.AppDomain" />
+        >When an <see cref="T:System.AppDomain" />
 
         
 
-         instance is shut down or unloaded, an <see
-         cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" />
+         instance is shut down or unloaded, an <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" />
 
         
 
-         event or an <see
-         cref="E:System.Web.Compilation.ClientBuildManager.AppDomainUnloaded" />
+         event or an <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainUnloaded" />
 
         
 
-         event is raised, respectively. The <see
-         cref="T:System.Web.Compilation.BuildManagerHostUnloadEventArgs" />
+         event is raised, respectively. The <see cref="T:System.Web.Compilation.BuildManagerHostUnloadEventArgs" />
 
         
 
@@ -43,13 +39,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains event data for the <see
-         cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" />
+        >Contains event data for the <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainShutdown" />
 
         
 
-         event and the <see
-         cref="E:System.Web.Compilation.ClientBuildManager.AppDomainUnloaded" />
+         event and the <see cref="E:System.Web.Compilation.ClientBuildManager.AppDomainUnloaded" />
 
         
 
@@ -72,18 +66,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new instance of <see
-             cref="T:System.Web.Compilation.BuildManagerHostUnloadEventArgs" />
+            >This constructor creates a new instance of <see cref="T:System.Web.Compilation.BuildManagerHostUnloadEventArgs" />
 
             
 
-             with the <see
-             cref="P:System.Web.Compilation.BuildManagerHostUnloadEventArgs.Reason" />
+             with the <see cref="P:System.Web.Compilation.BuildManagerHostUnloadEventArgs.Reason" />
 
             
 
-             property set to <paramref
-             name="reason" />
+             property set to <paramref name="reason" />
 
             
 
@@ -93,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.BuildManagerHostUnloadEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.BuildManagerHostUnloadEventArgs" />
 
             
 
@@ -102,7 +92,11 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -128,18 +122,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.BuildManagerHostUnloadEventArgs.Reason" />
+            >The <see cref="P:System.Web.Compilation.BuildManagerHostUnloadEventArgs.Reason" />
 
             
 
-             property stores an <see
-             cref="T:System.Web.ApplicationShutdownReason" />
+             property stores an <see cref="T:System.Web.ApplicationShutdownReason" />
 
             
 
-             object as its value that describes why the <see
-             cref="T:System.AppDomain" />
+             object as its value that describes why the <see cref="T:System.AppDomain" />
 
             
 

@@ -36,13 +36,11 @@
       <para>Common forms of evidence include signatures and location of origin of code, but can potentially be anything. Objects of any type that are recognized by security policy represent evidence.</para>
       <para>Security policy is composed of code groups; a particular assembly (the basic unit of code for granting security permissions) is a member of a code group if it satisfies the code group's membership condition. Evidence is the set of inputs to policy that membership conditions use to determine to which code groups an assembly belongs.</para>
       <para
-        >The <see
-         cref="T:System.Security.Policy.Evidence" />
+        >The <see cref="T:System.Security.Policy.Evidence" />
 
         
 
-         class is a collection (see <see
-         cref="T:System.Collections.ICollection" />
+         class is a collection (see <see cref="T:System.Collections.ICollection" />
 
         
 
@@ -56,23 +54,19 @@
 
             
 
-             is provided by the host, and can only be provided by hosts that have been granted the <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+             is provided by the host, and can only be provided by hosts that have been granted the <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
 
             
 
-             permission. Typically, this is evidence of the origin of the code and digital signatures on the assembly. Evidence about origin typically includes <see
-             cref="T:System.Security.Policy.Url" />
+             permission. Typically, this is evidence of the origin of the code and digital signatures on the assembly. Evidence about origin typically includes <see cref="T:System.Security.Policy.Url" />
 
             
 
-            , <see
-             cref="T:System.Security.Policy.Site" />
+            , <see cref="T:System.Security.Policy.Site" />
 
             
 
-            , and <see
-             cref="T:System.Security.Policy.Zone" />
+            , and <see cref="T:System.Security.Policy.Zone" />
 
             
 
@@ -115,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new empty instance of the <see
-             cref="T:System.Security.Policy.Evidence" />
+            >Initializes a new empty instance of the <see cref="T:System.Security.Policy.Evidence" />
 
             
 
@@ -149,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.Evidence" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.Evidence" />
 
             
 
@@ -158,12 +150,15 @@
           >
         </summary>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
@@ -201,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.Evidence" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.Evidence" />
 
             
 
@@ -210,14 +204,22 @@
           >
         </summary>
         <param name="hostEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host evidence from which to create the new instance. </param
         >
         <param name="assemblyEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,7 +263,11 @@
           <para>Adds the specified assembly evidence to the evidence set.</para>
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,7 +311,11 @@
           <para>Adds the specified evidence supplied by the host to the evidence set.</para>
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -380,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies evidence objects to an <see
-             cref="T:System.Array" />
+            >Copies evidence objects to an <see cref="T:System.Array" />
 
             
 
@@ -389,14 +398,22 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target array to which to copy evidence objects. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -483,8 +500,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for evidence added by the <see
-             cref="M:System.Security.Policy.Evidence.AddAssembly(System.Object)" />
+            >An enumerator for evidence added by the <see cref="M:System.Security.Policy.Evidence.AddAssembly(System.Object)" />
 
             
 
@@ -526,13 +542,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for evidence added by both the <see
-             cref="M:System.Security.Policy.Evidence.AddHost(System.Object)" />
+            >An enumerator for evidence added by both the <see cref="M:System.Security.Policy.Evidence.AddHost(System.Object)" />
 
             
 
-             method and the <see
-             cref="M:System.Security.Policy.Evidence.AddAssembly(System.Object)" />
+             method and the <see cref="M:System.Security.Policy.Evidence.AddAssembly(System.Object)" />
 
             
 
@@ -591,8 +605,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for evidence added by the <see
-             cref="M:System.Security.Policy.Evidence.AddHost(System.Object)" />
+            >An enumerator for evidence added by the <see cref="M:System.Security.Policy.Evidence.AddHost(System.Object)" />
 
             
 
@@ -704,7 +717,11 @@
           <para>Merges the specified evidence set into the current evidence set.</para>
         </summary>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -739,18 +756,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The results of executing the <see
-             cref="M:System.Security.Policy.Evidence.RemoveType(System.Type)" />
+            >The results of executing the <see cref="M:System.Security.Policy.Evidence.RemoveType(System.Type)" />
 
             
 
-             method can be confirmed using the <see
-             cref="M:System.Security.Policy.Evidence.GetAssemblyEnumerator" />
+             method can be confirmed using the <see cref="M:System.Security.Policy.Evidence.GetAssemblyEnumerator" />
 
             
 
-             method and the <see
-             cref="M:System.Security.Policy.Evidence.GetHostEnumerator" />
+             method and the <see cref="M:System.Security.Policy.Evidence.GetHostEnumerator" />
 
             
 
@@ -762,7 +776,11 @@
           <para>Removes the evidence for a given type from the host and assembly enumerations.</para>
         </summary>
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

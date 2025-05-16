@@ -13,23 +13,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
 
         
 
-         enumeration represents a set of integer properties that describe visual style elements. The <see
-         cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
+         enumeration represents a set of integer properties that describe visual style elements. The <see cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
 
         
 
-         values are used as an argument in the <see
-         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetInteger(System.Windows.Forms.VisualStyles.IntegerProperty)" />
+         values are used as an argument in the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetInteger(System.Windows.Forms.VisualStyles.IntegerProperty)" />
 
         
 
-         method to specify which property value to retrieve for the element that the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+         method to specify which property value to retrieve for the element that the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
         
 
@@ -121,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The amount of <see
-             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor1" />
+            >The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor1" />
 
             
 
@@ -145,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The amount of <see
-             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor2" />
+            >The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor2" />
 
             
 
@@ -169,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The amount of <see
-             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor3" />
+            >The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor3" />
 
             
 
@@ -193,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The amount of <see
-             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor4" />
+            >The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor4" />
 
             
 
@@ -217,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The amount of <see
-             cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor5" />
+            >The amount of <see cref="F:System.Windows.Forms.VisualStyles.ColorProperty.GradientColor5" />
 
             
 
@@ -275,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum dots per inch (DPI) that <see
-             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile1" />
+            >The minimum dots per inch (DPI) that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile1" />
 
             
 
@@ -299,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum DPI that <see
-             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile2" />
+            >The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile2" />
 
             
 
@@ -323,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum DPI that <see
-             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile3" />
+            >The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile3" />
 
             
 
@@ -347,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum DPI that <see
-             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile4" />
+            >The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile4" />
 
             
 
@@ -371,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum DPI that <see
-             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile5" />
+            >The minimum DPI that <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile5" />
 
             
 

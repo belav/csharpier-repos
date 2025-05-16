@@ -9,11 +9,9 @@
       <include file="test-xml-025.inc" path="/foo" />
     </member>
     <member name="F:Testing.Test.S1">
-      <root attr="is attribute allowed?"
-        >
+      <root attr="is attribute allowed?">
   includes XML markup.
-  <child
-        >test</child>
+  <child>test</child>
         <child>test2</child>
       </root>
     </member>
@@ -28,8 +26,7 @@
       <summary>
             Implements more features
             </summary>
-      <remarks name="Foo"
-        >
+      <remarks name="Foo">
     implements the method in the most beautiful way possible.
 </remarks
       >

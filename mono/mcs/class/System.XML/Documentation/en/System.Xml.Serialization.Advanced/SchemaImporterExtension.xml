@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Schema importation occurs whenever a Web service proxy is produced through a tool such as the Add Web Reference dialog box found in Visual Studio, or by using the <format
-         type="text/html">
+        >Schema importation occurs whenever a Web service proxy is produced through a tool such as the Add Web Reference dialog box found in Visual Studio, or by using the <format type="text/html">
           <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
             >Web Services Description Language Tool (Wsdl.exe)</a
           >
@@ -31,8 +30,7 @@
 
         
 
-        . Schema importation also occurs when using the <format
-         type="text/html">
+        . Schema importation also occurs when using the <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
 
@@ -41,33 +39,28 @@
          to generate code from a specific XSD document. </para
       >
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+        >The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
         
 
-         class allows you to modify the code generated when using any of these tools. For example, you may have an existing class that processes book orders on a system and you have an existing XSD document that supplies your orders. Using the <see
-         cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+         class allows you to modify the code generated when using any of these tools. For example, you may have an existing class that processes book orders on a system and you have an existing XSD document that supplies your orders. Using the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
         
 
          class, you can enable one of the tools to generate code that uses your class.</para
       >
       <para
-        >In order to control the generation of the code, you must use the classes found in the <see
-         cref="N:System.CodeDom" />
+        >In order to control the generation of the code, you must use the classes found in the <see cref="N:System.CodeDom" />
 
         
 
-         namespace. For more information, see <format
-         type="text/html">
+         namespace. For more information, see <format type="text/html">
           <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
         </format>
 
@@ -79,8 +72,7 @@
       <list type="ordered">
         <item>
           <para
-            >Create an implementation of the <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+            >Create an implementation of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 
@@ -89,8 +81,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="Overload:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportSchemaType" />
+            >Use the <see cref="Overload:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportSchemaType" />
 
             
 
@@ -99,8 +90,7 @@
         </item>
         <item>
           <para
-            >If required, use the <see
-             cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportAnyElement(System.Xml.Schema.XmlSchemaAny,System.Boolean,System.Xml.Serialization.XmlSchemas,System.Xml.Serialization.XmlSchemaImporter,System.CodeDom.CodeCompileUnit,System.CodeDom.CodeNamespace,System.Xml.Serialization.CodeGenerationOptions,System.CodeDom.Compiler.CodeDomProvider)" />
+            >If required, use the <see cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportAnyElement(System.Xml.Schema.XmlSchemaAny,System.Boolean,System.Xml.Serialization.XmlSchemas,System.Xml.Serialization.XmlSchemaImporter,System.CodeDom.CodeCompileUnit,System.CodeDom.CodeNamespace,System.Xml.Serialization.CodeGenerationOptions,System.CodeDom.Compiler.CodeDomProvider)" />
 
             
 
@@ -109,8 +99,7 @@
         </item>
         <item>
           <para
-            >If required, use the <see
-             cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportDefaultValue(System.String,System.String)" />
+            >If required, use the <see cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtension.ImportDefaultValue(System.String,System.String)" />
 
             
 
@@ -156,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 
@@ -198,20 +186,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order to control the generation of the code, you must use the classes found in the <see
-             cref="N:System.CodeDom" />
+            >In order to control the generation of the code, you must use the classes found in the <see cref="N:System.CodeDom" />
 
             
 
-             namespace. For more information, see <format
-             type="text/html">
+             namespace. For more information, see <format type="text/html">
               <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
             </format>
 
@@ -229,96 +214,120 @@
           <para>The name of the CLR type that the element maps to. </para>
         </returns>
         <param name="any">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaAny" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaAny" />
 
           
 
            that represents the xsd:any element found in the XML Schema Document (XSD).</param
         >
         <param name="mixed">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
            that indicates whether the XSD complex attribute has been set to "mixed". true, if the attribute has been set to mixed, otherwise false. </param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+          An <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
            that contains the collection of schemas found in the XSD.</param
         >
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+          The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
           
 
            that is the importer being used.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to which you can add CodeDOM structures to generate alternative code for the XSD. </param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          A <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that represents the current namespace for the element.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          A <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            for the setting options on the code compiler.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -352,20 +361,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order to control the generation of the code, you must use the classes found in the <see
-             cref="N:System.CodeDom" />
+            >In order to control the generation of the code, you must use the classes found in the <see cref="N:System.CodeDom" />
 
             
 
-             namespace. For more information, see <format
-             type="text/html">
+             namespace. For more information, see <format type="text/html">
               <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
             </format>
 
@@ -381,8 +387,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >A <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -390,14 +395,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value found in the original XSD.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -444,96 +457,120 @@
           <para>The name of the CLR type that this maps to.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaType" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
           
 
            that represents the XSD type.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that represents schema information, such as the line number of the XML element.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+          An <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
            that contains the collection of schemas in the document.</param
         >
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+          The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
           
 
            that is the importer being used.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to which you can add CodeDOM structures to generate alternative code for the XSD.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          A <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that represents the current namespace for the element.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          A <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            for the setting options on the code compiler.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -574,20 +611,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order to control the generation of the code, you must use the classes found in the <see
-             cref="N:System.CodeDom" />
+            >In order to control the generation of the code, you must use the classes found in the <see cref="N:System.CodeDom" />
 
             
 
-             namespace. For more information, see <format
-             type="text/html">
+             namespace. For more information, see <format type="text/html">
               <a href="0444ddf3-c3f6-44ed-a999-f710d9c3e0cf">Using the CodeDOM</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="c77b8bfd-0a32-4e36-b59a-4f687f32c524">CodeDOM Quick Reference</a>
             </format>
 
@@ -605,98 +639,127 @@
           <para>The name of the CLR type that this maps to.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the element.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the element.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaObject" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaObject" />
 
           
 
            that represents schema information, such as the line number of the XML element.</param
         >
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
+          An <see cref="T:System.Xml.Serialization.XmlSchemas" />
 
           
 
            that contains the collection of schemas in the document.</param
         >
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+          The <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
           
 
            that is the importer being used.</param
         >
         <param name="compileUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
            to which you can add CodeDOM structures to generate alternative code for the XSD.</param
         >
         <param name="mainNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          A <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that represents the current namespace for the element.</param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+          A <see cref="T:System.Xml.Serialization.CodeGenerationOptions" />
 
           
 
            for the setting options on the code compiler.</param
         >
         <param name="codeProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          A <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 

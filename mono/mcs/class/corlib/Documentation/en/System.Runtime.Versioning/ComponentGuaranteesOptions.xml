@@ -24,41 +24,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Versioning.ComponentGuaranteesOptions" />
+        >The <see cref="T:System.Runtime.Versioning.ComponentGuaranteesOptions" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+         enumeration is used by the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
 
         
 
-         class to indicate the level of compatibility that is guaranteed for a component or class library that spans multiple versions. <see
-         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
+         class to indicate the level of compatibility that is guaranteed for a component or class library that spans multiple versions. <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
 
         
 
-         provides the strongest compatibility guarantee, followed by <see
-         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
+         provides the strongest compatibility guarantee, followed by <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
 
         
 
-         and <see
-         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />
+         and <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />
 
         
 
-        . <see
-         cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+        . <see cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
 
         
 
          does not promise compatibility across versions.</para
       >
       <para
-        >For a detailed discussion of the meaning of each guarantee, see the <see
-         cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+        >For a detailed discussion of the meaning of each guarantee, see the <see cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
 
         
 

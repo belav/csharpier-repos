@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
 
         
 
-         values correspond to the states of the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+         values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
         
 
@@ -58,13 +56,11 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.TabItemState" />
 
         
 
-         values are also used as an argument in the <see
-         cref="Overload:System.Windows.Forms.TabRenderer.DrawTabItem" />
+         values are also used as an argument in the <see cref="Overload:System.Windows.Forms.TabRenderer.DrawTabItem" />
 
         
 

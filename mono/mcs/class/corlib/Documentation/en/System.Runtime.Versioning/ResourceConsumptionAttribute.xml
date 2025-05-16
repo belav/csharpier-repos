@@ -33,135 +33,111 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If the <see
-         cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
+        >If the <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
 
         
 
-         attribute is applied to a member, the <see
-         cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+         attribute is applied to a member, the <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
 
         
 
          attribute must also be applied.</para
       >
       <para
-        >If the resource scope of the consumed resource is different than the resource scope of how it is consumed, the constructor that takes a <paramref
-         name="consumptionScope" />
+        >If the resource scope of the consumed resource is different than the resource scope of how it is consumed, the constructor that takes a <paramref name="consumptionScope" />
 
         
 
-         parameter should be used to specify how the resource is consumed. For example, a resource may be exposed as a <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+         parameter should be used to specify how the resource is consumed. For example, a resource may be exposed as a <see cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
 
         
 
-         resource, but only used at the <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+         resource, but only used at the <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
         
 
-         and <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+         and <see cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
 
         
 
-         scope. For this example the <paramref
-         name="consumptionScope" />
+         scope. For this example the <paramref name="consumptionScope" />
 
         
 
-         parameter is set to <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+         parameter is set to <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
         
 
-         | <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+         | <see cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
 
         
 
         .</para
       >
       <para
-        >The <paramref
-         name="resourceScope" />
+        >The <paramref name="resourceScope" />
 
         
 
-         parameter in the constructor must specify a <see
-         cref="T:System.Runtime.Versioning.ResourceScope" />
+         parameter in the constructor must specify a <see cref="T:System.Runtime.Versioning.ResourceScope" />
 
         
 
-         greater than or equal to the resource exposure of all called members.  For example, a method consuming two <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+         greater than or equal to the resource exposure of all called members.  For example, a method consuming two <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
         
 
-         resources and one <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+         resources and one <see cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
 
         
 
-         resource would be identified as consuming a <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+         resource would be identified as consuming a <see cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
 
         
 
-         and a <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+         and a <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
         
 
-         resource by setting <paramref
-         name="resourceScope" />
+         resource by setting <paramref name="resourceScope" />
 
         
 
-         to <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+         to <see cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
 
         
 
-         | <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+         | <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
         
 
         .</para
       >
       <para
-        >Public members cannot expose <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+        >Public members cannot expose <see cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
 
         
 
-         or <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Private" />
+         or <see cref="F:System.Runtime.Versioning.ResourceScope.Private" />
 
         
 
-         resources.  <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+         resources.  <see cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
 
         
 
-         members cannot expose <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Private" />
+         members cannot expose <see cref="F:System.Runtime.Versioning.ResourceScope.Private" />
 
         
 
          resources.</para
       >
       <para
-        >The graph of methods terminates when a <see
-         cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+        >The graph of methods terminates when a <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
 
         
 
-         attribute with a resource scope of <see
-         cref="F:System.Runtime.Versioning.ResourceScope.None" />
+         attribute with a resource scope of <see cref="F:System.Runtime.Versioning.ResourceScope.None" />
 
         
 
@@ -197,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
 
             
 
@@ -206,12 +181,15 @@
           >
         </summary>
         <param name="resourceScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Versioning.ResourceScope" />
+          The <see cref="T:System.Runtime.Versioning.ResourceScope" />
 
           
 
@@ -242,56 +220,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+            >If the <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
 
             
 
-             attribute specifies a scope of <see
-             cref="F:System.Runtime.Versioning.ResourceScope.None" />
+             attribute specifies a scope of <see cref="F:System.Runtime.Versioning.ResourceScope.None" />
 
             
 
-            , then the <see
-             cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
+            , then the <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
 
             
 
-             attribute must specify a resource it consumes and how it consumes it, by specifying a value for the <paramref
-             name="consumptionScope" />
+             attribute must specify a resource it consumes and how it consumes it, by specifying a value for the <paramref name="consumptionScope" />
 
             
 
              parameter.</para
           >
           <para
-            >The scope specified by <paramref
-             name="consumptionScope" />
+            >The scope specified by <paramref name="consumptionScope" />
 
             
 
-             should be less than or equal to the scope specified by <paramref
-             name="resourceScope" />
+             should be less than or equal to the scope specified by <paramref name="resourceScope" />
 
             
 
-            . For example, a <see
-             cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+            . For example, a <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
             
 
-             scope can be consumed as a <see
-             cref="F:System.Runtime.Versioning.ResourceScope.Process" />
+             scope can be consumed as a <see cref="F:System.Runtime.Versioning.ResourceScope.Process" />
 
             
 
-             or <see
-             cref="F:System.Runtime.Versioning.ResourceScope.AppDomain" />
+             or <see cref="F:System.Runtime.Versioning.ResourceScope.AppDomain" />
 
             
 
-             scope, but not as a <see
-             cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
+             scope, but not as a <see cref="F:System.Runtime.Versioning.ResourceScope.Machine" />
 
             
 
@@ -301,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
 
             
 
@@ -310,24 +277,30 @@
           >
         </summary>
         <param name="resourceScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Versioning.ResourceScope" />
+          The <see cref="T:System.Runtime.Versioning.ResourceScope" />
 
           
 
            for the consumed resource.</param
         >
         <param name="consumptionScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Versioning.ResourceScope" />
+          The <see cref="T:System.Runtime.Versioning.ResourceScope" />
 
           
 

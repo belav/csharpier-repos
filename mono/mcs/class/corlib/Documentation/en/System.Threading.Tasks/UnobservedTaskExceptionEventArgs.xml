@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The Exception property is used to examine the exception without marking it as observed, whereas the <see
-         cref="M:System.Threading.Tasks.UnobservedTaskExceptionEventArgs.SetObserved" />
+        >The Exception property is used to examine the exception without marking it as observed, whereas the <see cref="M:System.Threading.Tasks.UnobservedTaskExceptionEventArgs.SetObserved" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the event that is raised when a faulted <see
-         cref="T:System.Threading.Tasks.Task" />
+        >Provides data for the event that is raised when a faulted <see cref="T:System.Threading.Tasks.Task" />
 
         
 
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.UnobservedTaskExceptionEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.UnobservedTaskExceptionEventArgs" />
 
             
 
@@ -71,7 +68,11 @@
           >
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -139,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the <see
-             cref="P:System.Threading.Tasks.UnobservedTaskExceptionEventArgs.Exception" />
+            >Marks the <see cref="P:System.Threading.Tasks.UnobservedTaskExceptionEventArgs.Exception" />
 
             
 

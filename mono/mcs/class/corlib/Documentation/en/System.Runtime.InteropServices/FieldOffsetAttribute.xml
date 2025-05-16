@@ -40,13 +40,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to fields.</para>
       <para
-        >This attribute is used when <see
-         cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+        >This attribute is used when <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
         
 
-        , with <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
+        , with <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
 
         
 
@@ -82,14 +80,12 @@
       <Docs>
         <remarks>
           <para
-            > If <paramref
-             name="offset" />
+            > If <paramref name="offset" />
 
             
 
              is
-   negative, its value is interpreted as an unsigned <see
-             cref="T:System.Int64" />
+   negative, its value is interpreted as an unsigned <see cref="T:System.Int64" />
 
             
 
@@ -98,14 +94,12 @@
           >
           <para
             > 
-   The <see
-             cref="P:System.Runtime.InteropServices.FieldOffsetAttribute.Value" />
+   The <see cref="P:System.Runtime.InteropServices.FieldOffsetAttribute.Value" />
 
             
 
              property of
-   the new instance is initialized to <paramref
-             name="offset" />
+   the new instance is initialized to <paramref name="offset" />
 
             
 
@@ -116,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
 
             
 
@@ -125,7 +118,11 @@
           >
         </summary>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -154,8 +151,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Int32" />
+            > A <see cref="T:System.Int32" />
 
             
 

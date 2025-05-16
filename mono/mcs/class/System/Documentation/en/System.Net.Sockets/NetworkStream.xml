@@ -29,35 +29,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-         class provides methods for sending and receiving data over <see
-         cref="F:System.Net.Sockets.SocketType.Stream" />
+         class provides methods for sending and receiving data over <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
         
 
-         sockets in blocking mode. For more information about blocking versus nonblocking <see
-         cref="T:System.Net.Sockets.Socket" />
+         sockets in blocking mode. For more information about blocking versus nonblocking <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-        s, see <format
-         type="text/html">
+        s, see <format type="text/html">
           <a href="FD85BC88-E06C-467D-A30D-9FD7CFFCFCA1">Using an Asynchronous Client Socket</a>
         </format>
 
         
 
-        . You can use the <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        . You can use the <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-         class for both synchronous and asynchronous data transfer. For more information about synchronous and asynchronous communication, see <format
-         type="text/html">
+         class for both synchronous and asynchronous data transfer. For more information about synchronous and asynchronous communication, see <format type="text/html">
           <a href="10D22735-BD37-42C1-A2BE-C1932F979A7D">Sockets</a>
         </format>
 
@@ -66,127 +60,104 @@
         . </para
       >
       <para
-        >To create a <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        >To create a <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-        , you must provide a connected <see
-         cref="T:System.Net.Sockets.Socket" />
+        , you must provide a connected <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-        . You can also specify what <see
-         cref="T:System.IO.FileAccess" />
+        . You can also specify what <see cref="T:System.IO.FileAccess" />
 
         
 
-         permission the <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+         permission the <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-         has over the provided <see
-         cref="T:System.Net.Sockets.Socket" />
+         has over the provided <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-        . By default, closing the <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        . By default, closing the <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-         does not close the provided <see
-         cref="T:System.Net.Sockets.Socket" />
+         does not close the provided <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-        . If you want the <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        . If you want the <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-         to have permission to close the provided <see
-         cref="T:System.Net.Sockets.Socket" />
+         to have permission to close the provided <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-        , you must specify true for the value of the <paramref
-         name="ownsSocket" />
+        , you must specify true for the value of the <paramref name="ownsSocket" />
 
         
 
          parameter.</para
       >
       <para
-        >Use the <see
-         cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+        >Use the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+         and <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
         
 
-         methods for simple single thread synchronous blocking I/O. If you want to process your I/O using separate threads, consider using the <see
-         cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+         methods for simple single thread synchronous blocking I/O. If you want to process your I/O using separate threads, consider using the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+         and <see cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
 
         
 
-         methods, or the <see
-         cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+         methods, or the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+         and <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
         
 
          methods for communication.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
-         does not support random access to the network data stream. The value of the <see
-         cref="P:System.Net.Sockets.NetworkStream.CanSeek" />
+         does not support random access to the network data stream. The value of the <see cref="P:System.Net.Sockets.NetworkStream.CanSeek" />
 
         
 
-         property, which indicates whether the stream supports seeking, is always false; reading the <see
-         cref="P:System.Net.Sockets.NetworkStream.Position" />
+         property, which indicates whether the stream supports seeking, is always false; reading the <see cref="P:System.Net.Sockets.NetworkStream.Position" />
 
         
 
-         property, reading the <see
-         cref="P:System.Net.Sockets.NetworkStream.Length" />
+         property, reading the <see cref="P:System.Net.Sockets.NetworkStream.Length" />
 
         
 
-         property, or calling the <see
-         cref="M:System.Net.Sockets.NetworkStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+         property, or calling the <see cref="M:System.Net.Sockets.NetworkStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
         
 
-         method will throw a <see
-         cref="T:System.NotSupportedException" />
+         method will throw a <see cref="T:System.NotSupportedException" />
 
         
 
         .</para
       >
       <para
-        >Read and write operations can be performed simultaneously on an instance of the <see
-         cref="T:System.Net.Sockets.NetworkStream" />
+        >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
         
 
@@ -228,8 +199,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -237,18 +207,15 @@
         >
         <exception cref="T:System.IO.IOException">
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Blocking" />
+            >The <see cref="P:System.Net.Sockets.Socket.Blocking" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -256,18 +223,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Connected" />
+            >The <see cref="P:System.Net.Sockets.Socket.Connected" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -275,18 +239,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.SocketType" />
+            >The <see cref="P:System.Net.Sockets.Socket.SocketType" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is not <see
-             cref="F:System.Net.Sockets.SocketType.Stream" />
+             is not <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
             
 
@@ -296,33 +257,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is created with read/write access to the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             is created with read/write access to the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             does not own the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             does not own the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , so calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.Close" />
+            , so calling the <see cref="M:System.Net.Sockets.NetworkStream.Close" />
 
             
 
-             method does not close the <see
-             cref="T:System.Net.Sockets.Socket" />
+             method does not close the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -332,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Creates a new instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class for the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             class for the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -346,17 +299,19 @@
           >
         </summary>
         <param name="socket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Sockets.Socket" />
+          The <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           that the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
@@ -395,8 +350,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -404,18 +358,15 @@
         >
         <exception cref="T:System.IO.IOException">
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Blocking" />
+            >The <see cref="P:System.Net.Sockets.Socket.Blocking" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -423,18 +374,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Connected" />
+            >The <see cref="P:System.Net.Sockets.Socket.Connected" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -442,18 +390,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.SocketType" />
+            >The <see cref="P:System.Net.Sockets.Socket.SocketType" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is not <see
-             cref="F:System.Net.Sockets.SocketType.Stream" />
+             is not <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
             
 
@@ -463,38 +408,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is created with read/write access to the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             is created with read/write access to the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . If the value of <paramref
-             name="ownsSocket" />
+            . If the value of <paramref name="ownsSocket" />
 
             
 
-             parameter is true, the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             parameter is true, the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             takes ownership of the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             takes ownership of the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.Close" />
+            , and calling the <see cref="M:System.Net.Sockets.NetworkStream.Close" />
 
             
 
-             method also closes the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method also closes the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -504,18 +442,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class for the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             class for the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             with the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             with the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -523,34 +458,38 @@
           >
         </summary>
         <param name="socket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Sockets.Socket" />
+          The <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           that the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
            will use to send and receive data. </param
         >
         <param name="ownsSocket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Set to true to indicate that the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          Set to true to indicate that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
-           will take ownership of the <see
-           cref="T:System.Net.Sockets.Socket" />
+           will take ownership of the <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -589,8 +528,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -598,18 +536,15 @@
         >
         <exception cref="T:System.IO.IOException">
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Blocking" />
+            >The <see cref="P:System.Net.Sockets.Socket.Blocking" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -617,18 +552,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Connected" />
+            >The <see cref="P:System.Net.Sockets.Socket.Connected" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -636,18 +568,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.SocketType" />
+            >The <see cref="P:System.Net.Sockets.Socket.SocketType" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is not <see
-             cref="F:System.Net.Sockets.SocketType.Stream" />
+             is not <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
             
 
@@ -657,91 +586,74 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is created with the specified access to the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             is created with the specified access to the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . With this constructor, the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . With this constructor, the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             does not own the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             does not own the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , so calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.Close" />
+            , so calling the <see cref="M:System.Net.Sockets.NetworkStream.Close" />
 
             
 
-             method does not close the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method does not close the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="access" />
+            >The <paramref name="access" />
 
             
 
-             parameter sets the <see
-             cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+             parameter sets the <see cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
             
 
-             and <see
-             cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+             and <see cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
             
 
-             properties of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             properties of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . If you specify <see
-             cref="F:System.IO.FileAccess.Write" />
+            . If you specify <see cref="F:System.IO.FileAccess.Write" />
 
             
 
-            , then the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            , then the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. If you specify <see
-             cref="F:System.IO.FileAccess.Read" />
+             method. If you specify <see cref="F:System.IO.FileAccess.Read" />
 
             
 
-            , then the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            , then the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. If you specify <see
-             cref="F:System.IO.FileAccess.ReadWrite" />
+             method. If you specify <see cref="F:System.IO.FileAccess.ReadWrite" />
 
             
 
@@ -751,13 +663,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Creates a new instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class for the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             class for the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -765,39 +675,42 @@
           >
         </summary>
         <param name="socket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Sockets.Socket" />
+          The <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           that the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
            will use to send and receive data. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.IO.FileAccess" />
+          A bitwise combination of the <see cref="T:System.IO.FileAccess" />
 
           
 
-           values that specify the type of access given to the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           values that specify the type of access given to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
-           over the provided <see
-           cref="T:System.Net.Sockets.Socket" />
+           over the provided <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -837,8 +750,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -846,18 +758,15 @@
         >
         <exception cref="T:System.IO.IOException">
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Blocking" />
+            >The <see cref="P:System.Net.Sockets.Socket.Blocking" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -865,18 +774,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.Connected" />
+            >The <see cref="P:System.Net.Sockets.Socket.Connected" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
@@ -884,18 +790,15 @@
           >
           <para> -or-</para>
           <para
-            >The <see
-             cref="P:System.Net.Sockets.Socket.SocketType" />
+            >The <see cref="P:System.Net.Sockets.Socket.SocketType" />
 
             
 
-             property of <paramref
-             name="socket" />
+             property of <paramref name="socket" />
 
             
 
-             is not <see
-             cref="F:System.Net.Sockets.SocketType.Stream" />
+             is not <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
             
 
@@ -905,96 +808,78 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is created with read/write access to the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             is created with read/write access to the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . If the value of the <paramref
-             name="ownsSocket" />
+            . If the value of the <paramref name="ownsSocket" />
 
             
 
-             parameter is true, the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             parameter is true, the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             takes ownership of the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             takes ownership of the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            , and calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
+            , and calling the <see cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
 
             
 
-             method also closes the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             method also closes the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="access" />
+            >The <paramref name="access" />
 
             
 
-             parameter sets the <see
-             cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+             parameter sets the <see cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
             
 
-             and <see
-             cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+             and <see cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
             
 
-             properties of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             properties of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . If you specify <see
-             cref="F:System.IO.FileAccess.Write" />
+            . If you specify <see cref="F:System.IO.FileAccess.Write" />
 
             
 
-            , then the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            , then the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. If you specify <see
-             cref="F:System.IO.FileAccess.Read" />
+             method. If you specify <see cref="F:System.IO.FileAccess.Read" />
 
             
 
-            , then the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            , then the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. If you specify <see
-             cref="F:System.IO.FileAccess.ReadWrite" />
+             method. If you specify <see cref="F:System.IO.FileAccess.ReadWrite" />
 
             
 
@@ -1004,18 +889,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Creates a new instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class for the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             class for the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             with the specified access rights and the specified <see
-             cref="T:System.Net.Sockets.Socket" />
+             with the specified access rights and the specified <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -1023,56 +905,61 @@
           >
         </summary>
         <param name="socket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.Sockets.Socket" />
+          The <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           that the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
            will use to send and receive data. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.IO.FileAccess" />
+          A bitwise combination of the <see cref="T:System.IO.FileAccess" />
 
           
 
-           values that specifies the type of access given to the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           values that specifies the type of access given to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
-           over the provided <see
-           cref="T:System.Net.Sockets.Socket" />
+           over the provided <see cref="T:System.Net.Sockets.Socket" />
 
           
 
           . </param
         >
         <param name="ownsSocket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Set to true to indicate that the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          Set to true to indicate that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
-           will take ownership of the <see
-           cref="T:System.Net.Sockets.Socket" />
+           will take ownership of the <see cref="T:System.Net.Sockets.Socket" />
 
           
 
@@ -1116,55 +1003,47 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="offset" />
+          <para><paramref name="offset" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
             .Length. </para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="size" />
+          <para><paramref name="size" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="size" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
-            .Length - <paramref
-             name="offset" />
+            .Length - <paramref name="offset" />
 
             
 
@@ -1176,20 +1055,17 @@
           <para>
             <block subset="none" type="note"
               >Any exception thrown by the <see
-
                 cref="M:System.Net.Sockets.Socket.BeginReceive(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)"
                 qualify="true"
               />
 
               
 
-               method is caught and rethrown as an <see
-               langword="IOException" />
+               method is caught and rethrown as an <see langword="IOException" />
 
               
 
-               with the original exception stored in the <see
-               cref="P:System.Exception.InnerException" />
+               with the original exception stored in the <see cref="P:System.Exception.InnerException" />
 
               
 
@@ -1203,7 +1079,6 @@
         <example>
           <para
             >For an outline of an asynchronous operation, see the <see
-
               cref="M:System.Net.Sockets.Socket.BeginAccept(System.AsyncCallback,System.Object)"
               qualify="true"
             />
@@ -1212,7 +1087,9 @@
 
              method. For the complete example, see
    the <see
-             cref="T:System.Net.Sockets.Socket" qualify="true" />
+              cref="T:System.Net.Sockets.Socket"
+              qualify="true"
+            />
 
             
 
@@ -1222,89 +1099,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method starts asynchronously reading data from the incoming network buffers. Calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method starts asynchronously reading data from the incoming network buffers. Calling the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
              method gives you the ability to receive data within a separate execution thread.</para
           >
           <para
-            >You must create a callback method that implements the <see
-             cref="T:System.AsyncCallback" />
+            >You must create a callback method that implements the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate and pass its name to the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             delegate and pass its name to the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method. At the very minimum, your <paramref
-             name="state" />
+             method. At the very minimum, your <paramref name="state" />
 
             
 
-             parameter must contain the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             parameter must contain the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . Because you will want to obtain the received data within your callback method, you should create a small class or structure to hold a read buffer and any other useful information. Pass the structure or class instance to the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            . Because you will want to obtain the received data within your callback method, you should create a small class or structure to hold a read buffer and any other useful information. Pass the structure or class instance to the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method through the <paramref
-             name="state" />
+             method through the <paramref name="state" />
 
             
 
              parameter.</para
           >
           <para
-            >Your callback method should call the <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+            >Your callback method should call the <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method. When your application calls <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method. When your application calls <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-            , the system will wait until data is received or an error occurs, and then the system will use a separate thread to execute the specified callback method, and blocks on <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+            , the system will wait until data is received or an error occurs, and then the system will use a separate thread to execute the specified callback method, and blocks on <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
-             until the provided <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             until the provided <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             reads data or throws an exception. If you want the original thread to block after you call the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             reads data or throws an exception. If you want the original thread to block after you call the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method, use the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+             method, use the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             method. Call <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+             method. Call <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
-             in the callback method when you want the original thread to continue executing. For additional information about writing callback methods, see <format
-             type="text/html">
+             in the callback method when you want the original thread to continue executing. For additional information about writing callback methods, see <format type="text/html">
               <a href="6DDD7866-9804-4571-84DE-83F5CC017A5A">Callback Sample</a>
             </format>
 
@@ -1313,13 +1174,11 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method reads as much data as is available, up to the number of bytes specified by the <paramref
-             name="size" />
+             method reads as much data as is available, up to the number of bytes specified by the <paramref name="size" />
 
             
 
@@ -1327,23 +1186,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If you receive an <see
-               cref="T:System.IO.IOException" />
+              >If you receive an <see cref="T:System.IO.IOException" />
 
               
 
-              , check the <see
-               cref="P:System.Exception.InnerException" />
+              , check the <see cref="P:System.Exception.InnerException" />
 
               
 
-               property to determine if it was caused by a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               property to determine if it was caused by a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If so, use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              . If so, use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1351,8 +1206,7 @@
             >
           </block>
           <para
-            >Read and write operations can be performed simultaneously on an instance of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1362,8 +1216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous read from the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Begins an asynchronous read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1373,8 +1226,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1382,65 +1234,79 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
-           that is the location in memory to store data read from the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that is the location in memory to store data read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
           . </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in <paramref
-           name="buffer" />
+          The location in <paramref name="buffer" />
 
           
 
            to begin storing the data. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to read from the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          The number of bytes to read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
           . </param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
-           delegate that is executed when <see
-           cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+           delegate that is executed when <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
           
 
            completes. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1484,55 +1350,47 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="offset" />
+          <para><paramref name="offset" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
             .Length. </para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="size" />
+          <para><paramref name="size" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="size" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
-            .Length - <paramref
-             name="offset" />
+            .Length - <paramref name="offset" />
 
             
 
@@ -1544,20 +1402,17 @@
           <para>
             <block subset="none" type="note"
               >Any exception thrown by the <see
-
                 cref="M:System.Net.Sockets.Socket.BeginSend(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags,System.AsyncCallback,System.Object)"
                 qualify="true"
               />
 
               
 
-               method is caught and rethrown as an <see
-               langword="IOException" />
+               method is caught and rethrown as an <see langword="IOException" />
 
               
 
-               with the original exception stored in the <see
-               cref="P:System.Exception.InnerException" />
+               with the original exception stored in the <see cref="P:System.Exception.InnerException" />
 
               
 
@@ -1571,7 +1426,6 @@
         <example>
           <para
             >For an outline of an asynchronous operation, see the <see
-
               cref="M:System.Net.Sockets.Socket.BeginAccept(System.AsyncCallback,System.Object)"
               qualify="true"
             />
@@ -1580,7 +1434,9 @@
 
             
 method. For the complete example, see the <see
-             cref="T:System.Net.Sockets.Socket" qualify="true" />
+              cref="T:System.Net.Sockets.Socket"
+              qualify="true"
+            />
 
             
 
@@ -1590,94 +1446,77 @@ method. For the complete example, see the <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method starts an asynchronous send operation to the remote host. Calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method starts an asynchronous send operation to the remote host. Calling the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
              method gives you the ability to send data within a separate execution thread.</para
           >
           <para
-            >You must create a callback method that implements the <see
-             cref="T:System.AsyncCallback" />
+            >You must create a callback method that implements the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate and pass its name to the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             delegate and pass its name to the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method. At the very minimum, your <paramref
-             name="state" />
+             method. At the very minimum, your <paramref name="state" />
 
             
 
-             parameter must contain the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             parameter must contain the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . If your callback needs more information, you can create a small class or structure to hold the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . If your callback needs more information, you can create a small class or structure to hold the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             and the other required information. Pass the structure or class instance to the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             and the other required information. Pass the structure or class instance to the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method through the <paramref
-             name="state" />
+             method through the <paramref name="state" />
 
             
 
              parameter.</para
           >
           <para
-            >Your callback method should implement the <see
-             cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+            >Your callback method should implement the <see cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
 
             
 
-             method. When your application calls <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method. When your application calls <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-            , the system uses a separate thread to execute the specified callback method, and blocks on <see
-             cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+            , the system uses a separate thread to execute the specified callback method, and blocks on <see cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
 
             
 
-             until the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             until the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             sends the number of bytes requested or throws an exception. If you want the original thread to block after you call the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             sends the number of bytes requested or throws an exception. If you want the original thread to block after you call the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method, use the <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+             method, use the <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-             method. Call <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+             method. Call <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
-             in the callback method when you want the original thread to continue executing. For additional information about writing callback methods, see <format
-             type="text/html">
+             in the callback method when you want the original thread to continue executing. For additional information about writing callback methods, see <format type="text/html">
               <a href="6DDD7866-9804-4571-84DE-83F5CC017A5A">Callback Sample</a>
             </format>
 
@@ -1687,23 +1526,19 @@ method. For the complete example, see the <see
           >
           <block subset="none" type="note">
             <para
-              >If you receive an <see
-               cref="T:System.IO.IOException" />
+              >If you receive an <see cref="T:System.IO.IOException" />
 
               
 
-              , check the <see
-               cref="P:System.Exception.InnerException" />
+              , check the <see cref="P:System.Exception.InnerException" />
 
               
 
-               property to determine if it was caused by a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               property to determine if it was caused by a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If so, use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              . If so, use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -1711,8 +1546,7 @@ method. For the complete example, see the <see
             >
           </block>
           <para
-            >Read and write operations can be performed simultaneously on an instance of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Read and write operations can be performed simultaneously on an instance of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1726,8 +1560,7 @@ method. For the complete example, see the <see
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1735,65 +1568,79 @@ method. For the complete example, see the <see
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
-           that contains the data to write to the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that contains the data to write to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
           . </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in <paramref
-           name="buffer" />
+          The location in <paramref name="buffer" />
 
           
 
            to begin sending the data. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to write to the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          The number of bytes to write to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
           . </param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
-           delegate that is executed when <see
-           cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+           delegate that is executed when <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
           
 
            completes. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1827,8 +1674,7 @@ method. For the complete example, see the <see
             
 
              indicates that the current stream supports reading; 
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -1839,38 +1685,31 @@ method. For the complete example, see the <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+            >If <see cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
             
 
-             is true, <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             is true, <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. Provide the appropriate <see
-             cref="T:System.IO.FileAccess" />
+             method. Provide the appropriate <see cref="T:System.IO.FileAccess" />
 
             
 
-             enumerated value in the constructor to set the readability and writability of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             enumerated value in the constructor to set the readability and writability of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . The <see
-             cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+            . The <see cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
             
 
-             property is set when the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             property is set when the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1880,8 +1719,7 @@ method. For the complete example, see the <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Gets a value that indicates whether the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -1910,20 +1748,20 @@ method. For the complete example, see the <see
       <Parameters />
       <Docs>
         <value>
-          <para>
-            <see langword="false" />
+          <para><see langword="false" />
 
             
 
-            .</para
-          >
+            .</para>
         </value>
         <remarks>
           <para> This property is read-only. </para>
           <block subset="none" type="note">
             <para
               >This property overrides <see
-               cref="P:System.IO.Stream.CanSeek" qualify="true" />
+                cref="P:System.IO.Stream.CanSeek"
+                qualify="true"
+              />
 
               
 
@@ -1954,8 +1792,7 @@ method. For the complete example, see the <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is present because it is inherited from <see
-             cref="T:System.IO.Stream" />
+            >This property is present because it is inherited from <see cref="T:System.IO.Stream" />
 
             
 
@@ -1965,8 +1802,7 @@ method. For the complete example, see the <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether timeout properties are usable for <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Indicates whether timeout properties are usable for <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2000,8 +1836,7 @@ method. For the complete example, see the <see
             
 
              indicates that the current stream supports writing; 
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -2012,38 +1847,31 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+            >If <see cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
             
 
-             is true, <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             is true, <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. Provide the appropriate <see
-             cref="T:System.IO.FileAccess" />
+             method. Provide the appropriate <see cref="T:System.IO.FileAccess" />
 
             
 
-             enumerated value in the constructor to set the readability and writability of the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             enumerated value in the constructor to set the readability and writability of the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . The <see
-             cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+            . The <see cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
             
 
-             property is set when the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             property is set when the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2053,8 +1881,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Gets a value that indicates whether the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2076,46 +1903,38 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.Close" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.Close" />
 
             
 
-             method frees both unmanaged and managed resources associated with the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method frees both unmanaged and managed resources associated with the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . If the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . If the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             owns the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             owns the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
             , it is closed as well. </para
           >
           <para
-            >If a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >If a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             was associated with a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             was associated with a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            , the <see
-             cref="M:System.Net.Sockets.NetworkStream.Close" />
+            , the <see cref="M:System.Net.Sockets.NetworkStream.Close" />
 
             
 
-             method will close the TCP connection, but not dispose of the associated <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method will close the TCP connection, but not dispose of the associated <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2125,8 +1944,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Closes the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2160,46 +1978,38 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
 
             
 
-             method frees both unmanaged and managed resources associated with the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method frees both unmanaged and managed resources associated with the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . If the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . If the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             owns the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             owns the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
             , it is closed as well. </para
           >
           <para
-            >If a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >If a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             was associated with a <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             was associated with a <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
-            , the <see
-             cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
+            , the <see cref="M:System.Net.Sockets.NetworkStream.Close(System.Int32)" />
 
             
 
-             method will close the TCP connection, but not dispose of the associated <see
-             cref="T:System.Net.Sockets.TcpClient" />
+             method will close the TCP connection, but not dispose of the associated <see cref="T:System.Net.Sockets.TcpClient" />
 
             
 
@@ -2209,8 +2019,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Closes the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2218,7 +2027,11 @@ indicates that the current stream does not support writing.</para
           >
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2251,8 +2064,7 @@ indicates that the current stream does not support writing.</para
             
 
              indicates that data is available to be
-   read; <see
-             langword="false" />
+   read; <see langword="false" />
 
             
 
@@ -2266,28 +2078,23 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
+            >Use the <see cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
 
             
 
-             property to determine if data is ready to be read. If <see
-             cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
+             property to determine if data is ready to be read. If <see cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
 
             
 
-             is true, a call to <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             is true, a call to <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             returns immediately. If the remote host shuts down or closes the connection, <see
-             cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
+             returns immediately. If the remote host shuts down or closes the connection, <see cref="P:System.Net.Sockets.NetworkStream.DataAvailable" />
 
             
 
-             may throw a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             may throw a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
@@ -2297,8 +2104,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether data is available on the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Gets a value that indicates whether data is available on the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2334,36 +2140,30 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2373,8 +2173,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2382,7 +2181,11 @@ indicates that the current stream does not support writing.</para
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2415,8 +2218,7 @@ indicates that the current stream does not support writing.</para
       </Parameters>
       <Docs>
         <param name="ar"
-          >A <see
-           cref="T:System.IAsyncResult" />
+          >A <see cref="T:System.IAsyncResult" />
 
           
 
@@ -2427,19 +2229,19 @@ indicates that the current stream does not support writing.</para
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.IOException"
-          >An error occurred while accessing the underlying socket. <para
-          >
+          >An error occurred while accessing the underlying socket. <para>
             <block subset="none" type="note"
               >This method catches all exceptions thrown by the <see
-               cref="M:System.Net.Sockets.Socket.EndReceive(System.IAsyncResult)" qualify="true" />
+                cref="M:System.Net.Sockets.Socket.EndReceive(System.IAsyncResult)"
+                qualify="true"
+              />
 
               
 
@@ -2453,7 +2255,6 @@ indicates that the current stream does not support writing.</para
         <example>
           <para
             >For an outline of an asynchronous operation, see the <see
-
               cref="M:System.Net.Sockets.Socket.BeginAccept(System.AsyncCallback,System.Object)"
               qualify="true"
             />
@@ -2462,7 +2263,9 @@ indicates that the current stream does not support writing.</para
 
              method.
    For the complete example, see the <see
-             cref="T:System.Net.Sockets.Socket" qualify="true" />
+              cref="T:System.Net.Sockets.Socket"
+              qualify="true"
+            />
 
             
 
@@ -2472,120 +2275,99 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method completes the asynchronous read operation started in the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             method completes the asynchronous read operation started in the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >Before calling <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >Before calling <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-            , you need to create a callback method that implements the <see
-             cref="T:System.AsyncCallback" />
+            , you need to create a callback method that implements the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate. This callback method executes in a separate thread and is called by the system after <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             delegate. This callback method executes in a separate thread and is called by the system after <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             returns. The callback method must accept the <see
-             cref="T:System.IAsyncResult" />
+             returns. The callback method must accept the <see cref="T:System.IAsyncResult" />
 
             
 
-             returned from the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             returned from the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
              method as a parameter.</para
           >
           <para
-            >Within the callback method, call the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+            >Within the callback method, call the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
-             property of the <see
-             cref="T:System.IAsyncResult" />
+             property of the <see cref="T:System.IAsyncResult" />
 
             
 
-             to obtain the state object passed to the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             to obtain the state object passed to the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method. Extract the receiving <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method. Extract the receiving <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             from this state object. After obtaining the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             from this state object. After obtaining the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            , call the <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+            , call the <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
              method to successfully complete the read operation and return the number of bytes read.</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method blocks until data is available. The <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+             method blocks until data is available. The <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
-             method reads as much data as is available up to the number of bytes specified in the <paramref
-             name="size" />
+             method reads as much data as is available up to the number of bytes specified in the <paramref name="size" />
 
             
 
-             parameter of the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             parameter of the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             method. If the remote host shuts down the <see
-             cref="T:System.Net.Sockets.Socket" />
+             method. If the remote host shuts down the <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             connection and all available data has been received, the <see
-             cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
+             connection and all available data has been received, the <see cref="M:System.Net.Sockets.NetworkStream.EndRead(System.IAsyncResult)" />
 
             
 
              method completes immediately and returns zero bytes.</para
           >
           <para
-            >To obtain the received data, call the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+            >To obtain the received data, call the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
-             property of the <see
-             cref="T:System.IAsyncResult" />
+             property of the <see cref="T:System.IAsyncResult" />
 
             
 
@@ -2593,23 +2375,19 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >If you receive an <see
-               cref="T:System.IO.IOException" />
+              >If you receive an <see cref="T:System.IO.IOException" />
 
               
 
-              , check the <see
-               cref="P:System.Exception.InnerException" />
+              , check the <see cref="P:System.Exception.InnerException" />
 
               
 
-               property to determine if it was caused by a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               property to determine if it was caused by a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If so, use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              . If so, use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -2624,8 +2402,7 @@ indicates that the current stream does not support writing.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of bytes read from the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The number of bytes read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2659,8 +2436,7 @@ indicates that the current stream does not support writing.</para
       </Parameters>
       <Docs>
         <param name="ar"
-          >A <see
-           cref="T:System.IAsyncResult" />
+          >A <see cref="T:System.IAsyncResult" />
 
           
 
@@ -2671,19 +2447,19 @@ indicates that the current stream does not support writing.</para
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.IOException"
-          >An error occurred while accessing the underlying socket. <para
-          >
+          >An error occurred while accessing the underlying socket. <para>
             <block subset="none" type="note"
               >This method catches all exceptions thrown by the <see
-               cref="M:System.Net.Sockets.Socket.EndSend(System.IAsyncResult)" qualify="true" />
+                cref="M:System.Net.Sockets.Socket.EndSend(System.IAsyncResult)"
+                qualify="true"
+              />
 
               
 
@@ -2697,7 +2473,6 @@ indicates that the current stream does not support writing.</para
         <example>
           <para
             >For an outline of an asynchronous operation, see the <see
-
               cref="M:System.Net.Sockets.Socket.BeginAccept(System.AsyncCallback,System.Object)"
               qualify="true"
             />
@@ -2706,7 +2481,9 @@ indicates that the current stream does not support writing.</para
 
              method.
    For the complete example, see the <see
-             cref="T:System.Net.Sockets.Socket" qualify="true" />
+              cref="T:System.Net.Sockets.Socket"
+              qualify="true"
+            />
 
             
 
@@ -2721,72 +2498,60 @@ indicates that the current stream does not support writing.</para
 
             
 
-             completes the asynchronous send operation started in <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             completes the asynchronous send operation started in <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
             .</para
           >
           <para
-            >Before calling <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            >Before calling <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-            , you need to create a callback method that implements the <see
-             cref="T:System.AsyncCallback" />
+            , you need to create a callback method that implements the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate. This callback method executes in a separate thread and is called by the system after <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             delegate. This callback method executes in a separate thread and is called by the system after <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-             returns. The callback method must accept the <see
-             cref="T:System.IAsyncResult" />
+             returns. The callback method must accept the <see cref="T:System.IAsyncResult" />
 
             
 
-             returned from the <see
-             cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+             returned from the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
              method as a parameter.</para
           >
           <para
-            >Within the callback method, call the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+            >Within the callback method, call the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
-             property of the <paramref
-             name="IAsyncResult" />
+             property of the <paramref name="IAsyncResult" />
 
             
 
-             parameter to obtain the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             parameter to obtain the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . After obtaining the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            . After obtaining the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            , you can call the <see
-             cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+            , you can call the <see cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
 
             
 
              method to successfully complete the send operation and return the number of bytes sent.</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.EndWrite(System.IAsyncResult)" />
 
             
 
@@ -2794,23 +2559,19 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >If you receive an <see
-               cref="T:System.IO.IOException" />
+              >If you receive an <see cref="T:System.IO.IOException" />
 
               
 
-              , check the <see
-               cref="P:System.Exception.InnerException" />
+              , check the <see cref="P:System.Exception.InnerException" />
 
               
 
-               property to determine if it was caused by a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               property to determine if it was caused by a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If so, use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              . If so, use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -2846,40 +2607,34 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Finalize" />
+            >This method overrides <see cref="M:System.Object.Finalize" />
 
             
 
-            . Application code should not call this method; an object's <see
-             cref="M:System.Object.Finalize" />
+            . Application code should not call this method; an object's <see cref="M:System.Object.Finalize" />
 
             
 
-             method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+             method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >For more information about using the Finalize method, see <format
-             type="text/html">
+            >For more information about using the Finalize method, see <format type="text/html">
               <a href="FD376774-1643-499B-869E-9546A3AEEA70">Finalize Methods and Destructors</a>
             </format>
 
             
 
-            , <format
-             type="text/html">
+            , <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-            , and <format
-             type="text/html">
+            , and <format type="text/html">
               <a href="8026CB68-FE93-43FC-96C1-C09AD7D64CD3">Overriding the Finalize Method</a>
             </format>
 
@@ -2891,8 +2646,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Releases all resources used by the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -2923,23 +2677,19 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.Flush" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.Flush" />
 
             
 
-             method implements the <see
-             cref="M:System.IO.Stream.Flush" />
+             method implements the <see cref="M:System.IO.Stream.Flush" />
 
             
 
-             method; however, because <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method; however, because <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is not buffered, it has no affect on network streams. Calling the <see
-             cref="M:System.Net.Sockets.NetworkStream.Flush" />
+             is not buffered, it has no affect on network streams. Calling the <see cref="M:System.Net.Sockets.NetworkStream.Flush" />
 
             
 
@@ -2975,15 +2725,13 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <block subset="none" type="note">
             <para
-              > The <see
-               cref="T:System.IO.Stream" />
+              > The <see cref="T:System.IO.Stream" />
 
               
 
                base class implements this property to return the length of the data
       available on the stream. This functionality is not supported in
-      the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+      the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
@@ -2991,7 +2739,9 @@ indicates that the current stream does not support writing.</para
             >
             <para
               >This property overrides <see
-               cref="P:System.IO.Stream.Length" qualify="true" />
+                cref="P:System.IO.Stream.Length"
+                qualify="true"
+              />
 
               
 
@@ -3005,8 +2755,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length of the data available on the stream. This property is not currently supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >Gets the length of the data available on the stream. This property is not currently supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3038,14 +2787,12 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <block subset="none" type="note">
             <para
-              > The <see
-               cref="T:System.IO.Stream" />
+              > The <see cref="T:System.IO.Stream" />
 
               
 
                base class implements this property to return or set the
-      current position in the stream. This functionality is not supported in the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+      current position in the stream. This functionality is not supported in the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
@@ -3054,7 +2801,9 @@ indicates that the current stream does not support writing.</para
             >
             <para
               >This property overrides <see
-               cref="P:System.IO.Stream.Position" qualify="true" />
+                cref="P:System.IO.Stream.Position"
+                qualify="true"
+              />
 
               
 
@@ -3068,8 +2817,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the current position in the stream. This property is not currently supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >Gets or sets the current position in the stream. This property is not currently supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3112,55 +2860,47 @@ indicates that the current stream does not support writing.</para
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="offset" />
+          <para><paramref name="offset" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
             .Length. </para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="size" />
+          <para><paramref name="size" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="size" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
-            .Length - <paramref
-             name="offset" />
+            .Length - <paramref name="offset" />
 
             
 
@@ -3168,11 +2908,9 @@ indicates that the current stream does not support writing.</para
           >
         </exception>
         <exception cref="T:System.IO.IOException"
-          >An error occurred while accessing the underlying socket. <para
-          >
+          >An error occurred while accessing the underlying socket. <para>
             <block subset="none" type="note"
               >This method catches all exceptions thrown by the <see
-
                 cref="M:System.Net.Sockets.Socket.Receive(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)"
                 qualify="true"
               />
@@ -3189,28 +2927,23 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads data into the <paramref
-             name="buffer" />
+            >This method reads data into the <paramref name="buffer" />
 
             
 
-             parameter and returns the number of bytes successfully read. If no data is available for reading, the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             parameter and returns the number of bytes successfully read. If no data is available for reading, the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method returns 0. The <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             method returns 0. The <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             operation reads as much data as is available, up to the number of bytes specified by the <paramref
-             name="size" />
+             operation reads as much data as is available, up to the number of bytes specified by the <paramref name="size" />
 
             
 
-             parameter. If the remote host shuts down the connection, and all available data has been received, the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             parameter. If the remote host shuts down the connection, and all available data has been received, the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -3218,23 +2951,19 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >Check to see if the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+              >Check to see if the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
-               is readable by calling the <see
-               cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+               is readable by calling the <see cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
               
 
-               property. If you attempt to read from a <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+               property. If you attempt to read from a <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
-               that is not readable, you will get an <see
-               cref="T:System.IO.IOException" />
+               that is not readable, you will get an <see cref="T:System.IO.IOException" />
 
               
 
@@ -3243,23 +2972,19 @@ indicates that the current stream does not support writing.</para
           </block>
           <block subset="none" type="note">
             <para
-              >If you receive an <see
-               cref="T:System.IO.IOException" />
+              >If you receive an <see cref="T:System.IO.IOException" />
 
               
 
-              , check the <see
-               cref="P:System.Exception.InnerException" />
+              , check the <see cref="P:System.Exception.InnerException" />
 
               
 
-               property to determine if it was caused by a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               property to determine if it was caused by a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
-              . If so, use the <see
-               cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+              . If so, use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
               
 
@@ -3270,8 +2995,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads data from the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Reads data from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3281,8 +3005,7 @@ indicates that the current stream does not support writing.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of bytes read from the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >The number of bytes read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3290,41 +3013,49 @@ indicates that the current stream does not support writing.</para
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
-           that is the location in memory to store data read from the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that is the location in memory to store data read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
           . </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in <paramref
-           name="buffer" />
+          The location in <paramref name="buffer" />
 
           
 
            to begin storing the data to. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to read from the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          The number of bytes to read from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
@@ -3350,51 +3081,42 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must derive from the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >You must derive from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class to use the <see
-             cref="P:System.Net.Sockets.NetworkStream.Readable" />
+             class to use the <see cref="P:System.Net.Sockets.NetworkStream.Readable" />
 
             
 
-             property. If <see
-             cref="P:System.Net.Sockets.NetworkStream.Readable" />
+             property. If <see cref="P:System.Net.Sockets.NetworkStream.Readable" />
 
             
 
-             is true, <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             is true, <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. You can also determine whether a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method. You can also determine whether a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is readable by checking the publicly accessible <see
-             cref="P:System.Net.Sockets.NetworkStream.CanRead" />
+             is readable by checking the publicly accessible <see cref="P:System.Net.Sockets.NetworkStream.CanRead" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.Sockets.NetworkStream.Readable" />
+            >The <see cref="P:System.Net.Sockets.NetworkStream.Readable" />
 
             
 
-             property is set when the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             property is set when the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3404,8 +3126,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Gets or sets a value that indicates whether the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3430,8 +3151,7 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the read operation does not complete within the time specified by this property, the read operation throws an <see
-             cref="T:System.IO.IOException" />
+            >If the read operation does not complete within the time specified by this property, the read operation throws an <see cref="T:System.IO.IOException" />
 
             
 
@@ -3439,13 +3159,11 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >This property affects only synchronous reads performed by calling the <see
-               cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
+              >This property affects only synchronous reads performed by calling the <see cref="M:System.Net.Sockets.NetworkStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
               
 
-               method. This property does not affect asynchronous reads performed by calling the <see
-               cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+               method. This property does not affect asynchronous reads performed by calling the <see cref="M:System.Net.Sockets.NetworkStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
               
 
@@ -3489,14 +3207,12 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <block subset="none" type="note">
             <para
-              > The <see
-               cref="T:System.IO.Stream" />
+              > The <see cref="T:System.IO.Stream" />
 
               
 
                base class uses this method to set the current
-      position in the stream. This functionality is not supported in the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+      position in the stream. This functionality is not supported in the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
@@ -3505,7 +3221,9 @@ indicates that the current stream does not support writing.</para
             >
             <para
               >This method overrides <see
-               cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)" qualify="true" />
+                cref="M:System.IO.Stream.Seek(System.Int64,System.IO.SeekOrigin)"
+                qualify="true"
+              />
 
               
 
@@ -3517,8 +3235,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the current position of the stream to the given value. This method is not currently supported and always throws a <see
-             cref="T:System.NotSupportedException" />
+            >Sets the current position of the stream to the given value. This method is not currently supported and always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3530,14 +3247,22 @@ indicates that the current stream does not support writing.</para
           <para>The position in the stream.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           This parameter is not used. </param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3572,15 +3297,13 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.IO.Stream" />
+              >The <see cref="T:System.IO.Stream" />
 
               
 
               
    base class uses this method to set the length of the data available on the
-   stream. This functionality is not supported in the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+   stream. This functionality is not supported in the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
@@ -3588,7 +3311,9 @@ indicates that the current stream does not support writing.</para
             >
             <para
               >This method overrides <see
-               cref="M:System.IO.Stream.SetLength(System.Int64)" qualify="true" />
+                cref="M:System.IO.Stream.SetLength(System.Int64)"
+                qualify="true"
+              />
 
               
 
@@ -3600,8 +3325,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the length of the stream. This method always throws a <see
-             cref="T:System.NotSupportedException" />
+            >Sets the length of the stream. This method always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -3609,7 +3333,11 @@ indicates that the current stream does not support writing.</para
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3638,28 +3366,23 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes deriving from <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Classes deriving from <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             can use this property to get the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+             can use this property to get the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-            . Use the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            . Use the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             returned from the <see
-             cref="P:System.Net.Sockets.NetworkStream.Socket" />
+             returned from the <see cref="P:System.Net.Sockets.NetworkStream.Socket" />
 
             
 
-             property if you require access beyond that which <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             property if you require access beyond that which <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3672,8 +3395,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets the underlying <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -3697,50 +3419,41 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
+            >Call <see cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             when you are finished using the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-            . The <see
-             cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
+            . The <see cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method leaves the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            , you must release all references to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             was occupying. For more information about using the Dispose method, see <format
-             type="text/html">
+             was occupying. For more information about using the Dispose method, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -3750,18 +3463,15 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
+              >Always call <see cref="M:System.Net.Sockets.NetworkStream.System#IDisposable#Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+               before you release your last reference to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
-              . Otherwise, the resources it is using are not freed until the garbage collector calls the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+              . Otherwise, the resources it is using are not freed until the garbage collector calls the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
@@ -3772,8 +3482,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Releases all resources used by the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3815,55 +3524,47 @@ indicates that the current stream does not support writing.</para
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="offset" />
+          <para><paramref name="offset" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
             .Length. </para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="size" />
+          <para><paramref name="size" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="size" />
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
-            .Length - <paramref
-             name="offset" />
+            .Length - <paramref name="offset" />
 
             
 
@@ -3871,11 +3572,9 @@ indicates that the current stream does not support writing.</para
           >
         </exception>
         <exception cref="T:System.IO.IOException"
-          >An error occurred while accessing the underlying socket. <para
-          >
+          >An error occurred while accessing the underlying socket. <para>
             <block subset="none" type="note"
               >This method catches all exceptions thrown by the <see
-
                 cref="M:System.Net.Sockets.Socket.Send(System.Byte[],System.Int32,System.Net.Sockets.SocketFlags)"
                 qualify="true"
               />
@@ -3892,43 +3591,35 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method starts at the specified <paramref
-             name="offset" />
+             method starts at the specified <paramref name="offset" />
 
             
 
-             and sends <paramref
-             name="size" />
+             and sends <paramref name="size" />
 
             
 
-             bytes from the contents of <paramref
-             name="buffer" />
+             bytes from the contents of <paramref name="buffer" />
 
             
 
-             to the network. The <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             to the network. The <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method blocks until the requested number of bytes is sent or a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             method blocks until the requested number of bytes is sent or a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-             is thrown. If you receive a <see
-             cref="T:System.Net.Sockets.SocketException" />
+             is thrown. If you receive a <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
-            , use the <see
-             cref="P:System.Net.Sockets.SocketException.ErrorCode" />
+            , use the <see cref="P:System.Net.Sockets.SocketException.ErrorCode" />
 
             
 
@@ -3936,38 +3627,31 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >Check to see if the <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+              >Check to see if the <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
-               is writable by accessing the <see
-               cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+               is writable by accessing the <see cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
               
 
-               property. If you attempt to write to a <see
-               cref="T:System.Net.Sockets.NetworkStream" />
+               property. If you attempt to write to a <see cref="T:System.Net.Sockets.NetworkStream" />
 
               
 
-               that is not writable, you will get an <see
-               cref="T:System.IO.IOException" />
+               that is not writable, you will get an <see cref="T:System.IO.IOException" />
 
               
 
-              . If you receive an <see
-               cref="T:System.IO.IOException" />
+              . If you receive an <see cref="T:System.IO.IOException" />
 
               
 
-              , check the <see
-               cref="P:System.Exception.InnerException" />
+              , check the <see cref="P:System.Exception.InnerException" />
 
               
 
-               property to determine if it was caused by a <see
-               cref="T:System.Net.Sockets.SocketException" />
+               property to determine if it was caused by a <see cref="T:System.Net.Sockets.SocketException" />
 
               
 
@@ -3978,8 +3662,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes data to the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Writes data to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -3987,41 +3670,49 @@ indicates that the current stream does not support writing.</para
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Byte" />
+          An array of type <see cref="T:System.Byte" />
 
           
 
-           that contains the data to write to the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+           that contains the data to write to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
           . </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in <paramref
-           name="buffer" />
+          The location in <paramref name="buffer" />
 
           
 
            from which to start writing data. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to write to the <see
-           cref="T:System.Net.Sockets.NetworkStream" />
+          The number of bytes to write to the <see cref="T:System.Net.Sockets.NetworkStream" />
 
           
 
@@ -4047,51 +3738,42 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must derive from the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >You must derive from the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             class to use the <see
-             cref="P:System.Net.Sockets.NetworkStream.Writeable" />
+             class to use the <see cref="P:System.Net.Sockets.NetworkStream.Writeable" />
 
             
 
-             property. If <see
-             cref="P:System.Net.Sockets.NetworkStream.Writeable" />
+             property. If <see cref="P:System.Net.Sockets.NetworkStream.Writeable" />
 
             
 
-             is true, <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             is true, <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             allows calls to the <see
-             cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+             allows calls to the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method. You can also determine whether a <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             method. You can also determine whether a <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
-             is writable by checking the publicly accessible <see
-             cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
+             is writable by checking the publicly accessible <see cref="P:System.Net.Sockets.NetworkStream.CanWrite" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.Sockets.NetworkStream.Writeable" />
+            >The <see cref="P:System.Net.Sockets.NetworkStream.Writeable" />
 
             
 
-             property is set when the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+             property is set when the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -4101,8 +3783,7 @@ indicates that the current stream does not support writing.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Net.Sockets.NetworkStream" />
+            >Gets a value that indicates whether the <see cref="T:System.Net.Sockets.NetworkStream" />
 
             
 
@@ -4127,8 +3808,7 @@ indicates that the current stream does not support writing.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the write operation does not complete within the time specified by this property, the write operation throws a <see
-             cref="T:System.IO.IOException" />
+            >If the write operation does not complete within the time specified by this property, the write operation throws a <see cref="T:System.IO.IOException" />
 
             
 
@@ -4136,13 +3816,11 @@ indicates that the current stream does not support writing.</para
           >
           <block subset="none" type="note">
             <para
-              >This property affects only synchronous write operations performed by calling the <see
-               cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
+              >This property affects only synchronous write operations performed by calling the <see cref="M:System.Net.Sockets.NetworkStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
               
 
-               method. This property does not affect asynchronous writes performed by calling the <see
-               cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+               method. This property does not affect asynchronous writes performed by calling the <see cref="M:System.Net.Sockets.NetworkStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
               
 

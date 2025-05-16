@@ -36,54 +36,45 @@
 
         
 
-         is a static class that manages the authentication modules that an application uses. When a request is made to protected resources, the <see
-         cref="T:System.Net.AuthenticationManager" />
+         is a static class that manages the authentication modules that an application uses. When a request is made to protected resources, the <see cref="T:System.Net.AuthenticationManager" />
 
         
 
-         calls the <see
-         cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+         calls the <see cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
         
 
-         method to get an <see
-         cref="T:System.Net.Authorization" />
+         method to get an <see cref="T:System.Net.Authorization" />
 
         
 
          instance to use in subsequent requests.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.AuthenticationManager" />
+        >The <see cref="T:System.Net.AuthenticationManager" />
 
         
 
-         queries each registered authentication module by calling the <see
-         cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+         queries each registered authentication module by calling the <see cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
         
 
-         method for each module. The first authentication module to return an <see
-         cref="T:System.Net.Authorization" />
+         method for each module. The first authentication module to return an <see cref="T:System.Net.Authorization" />
 
         
 
          instance is used to authenticate the request.</para
       >
       <para
-        >Modules that provide the basic, digest, negotiate, NTLM, and Kerberos authentication types are registered with the <see
-         cref="T:System.Net.AuthenticationManager" />
+        >Modules that provide the basic, digest, negotiate, NTLM, and Kerberos authentication types are registered with the <see cref="T:System.Net.AuthenticationManager" />
 
         
 
-         by default. Additional authentication modules that implement the <see
-         cref="T:System.Net.IAuthenticationModule" />
+         by default. Additional authentication modules that implement the <see cref="T:System.Net.IAuthenticationModule" />
 
         
 
-         interface can be added using the <see
-         cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+         interface can be added using the <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
         
 
@@ -132,18 +123,15 @@
 
           
 
-          , <paramref
-           name="request " />
+          , <paramref name="request " />
 
           
 
-          , or <paramref
-           name="credentials " />
+          , or <paramref name="credentials " />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -152,39 +140,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+            >The <see cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method calls the <see
-             cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+             method calls the <see cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method on each registered authentication module until one of the module responds with an <see
-             cref="T:System.Net.Authorization" />
+             method on each registered authentication module until one of the module responds with an <see cref="T:System.Net.Authorization" />
 
             
 
              instance.</para
           >
           <para
-            >The first <see
-             cref="T:System.Net.Authorization" />
+            >The first <see cref="T:System.Net.Authorization" />
 
             
 
-             instance returned is used to authenticate the request. If no authentication module can authenticate the request, the <see
-             cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+             instance returned is used to authenticate the request. If no authentication module can authenticate the request, the <see cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
              method returns null.</para
           >
           <para
-            >Authentication modules are called in the order in which they are registered with the <see
-             cref="T:System.Net.AuthenticationManager" />
+            >Authentication modules are called in the order in which they are registered with the <see cref="T:System.Net.AuthenticationManager" />
 
             
 
@@ -198,8 +180,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Net.Authorization" />
+            >An instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -207,31 +188,41 @@
           >
         </returns>
         <param name="challenge">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The challenge returned by the Internet resource. </param
         >
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.WebRequest" />
+          The <see cref="T:System.Net.WebRequest" />
 
           
 
            that initiated the authentication challenge. </param
         >
         <param name="credentials">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.ICredentials" />
+          The <see cref="T:System.Net.ICredentials" />
 
           
 
@@ -263,8 +254,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The credential policy determines whether to send credentials when sending a request for a network resource, such as the content of a Web page. If credentials are sent, servers that require client authentication can attempt to authenticate the client when the request is received instead of sending a response indicating that the client's credentials are required. While this saves a round trip to the server, this must be balanced against the security risk inherent in sending credentials across the network. When the destination server does not require client authentication it is best to not send credentials.</para>
           <para
-            >The credential policy will be called only for requests that specify credentials or use a <see
-             cref="T:System.Net.WebProxy" />
+            >The credential policy will be called only for requests that specify credentials or use a <see cref="T:System.Net.WebProxy" />
 
             
 
@@ -274,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the credential policy to be used for resource requests made using the <see
-             cref="T:System.Net.HttpWebRequest" />
+            >Gets or sets the credential policy to be used for resource requests made using the <see cref="T:System.Net.HttpWebRequest" />
 
             
 
@@ -311,64 +300,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An SPN is a name by which a client uniquely identifies an instance of a service or application on a server for purposes of mutual authentication. Mutual authentication is requested by default, and you can require it by setting <see
-             cref="P:System.Net.WebRequest.AuthenticationLevel" />
+            >An SPN is a name by which a client uniquely identifies an instance of a service or application on a server for purposes of mutual authentication. Mutual authentication is requested by default, and you can require it by setting <see cref="P:System.Net.WebRequest.AuthenticationLevel" />
 
             
 
-             to <see
-             cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" />
+             to <see cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" />
 
             
 
              in your request.</para
           >
           <para
-            >When a <see
-             cref="T:System.Net.WebRequest" />
+            >When a <see cref="T:System.Net.WebRequest" />
 
             
 
-             requires mutual authentication, the SPN for the destination must be supplied by the client. If you know the SPN, you can add it to the <see
-             cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
+             requires mutual authentication, the SPN for the destination must be supplied by the client. If you know the SPN, you can add it to the <see cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
 
             
 
-             before sending the request. If you have not added SPN information to this dictionary, the <see
-             cref="T:System.Net.AuthenticationManager" />
+             before sending the request. If you have not added SPN information to this dictionary, the <see cref="T:System.Net.AuthenticationManager" />
 
             
 
-             uses the <see
-             cref="P:System.Net.WebRequest.RequestUri" />
+             uses the <see cref="P:System.Net.WebRequest.RequestUri" />
 
             
 
              method to compose the most likely SPN; however, this is a computed value and might be incorrect. If mutual authentication is attempted and fails, you can check the dictionary to determine the computed SPN. No SPN is entered into the dictionary if the authentication protocol does not support mutual authentication.</para
           >
           <para
-            >To add an SPN value to this dictionary, use the <see
-             cref="P:System.Uri.AbsoluteUri" />
+            >To add an SPN value to this dictionary, use the <see cref="P:System.Uri.AbsoluteUri" />
 
             
 
-             of the <see
-             cref="P:System.Net.WebRequest.RequestUri" />
+             of the <see cref="P:System.Net.WebRequest.RequestUri" />
 
             
 
-             as the key. Internally, the key is truncated to include the <see
-             cref="P:System.Uri.Scheme" />
+             as the key. Internally, the key is truncated to include the <see cref="P:System.Uri.Scheme" />
 
             
 
-            , <see
-             cref="P:System.Uri.Host" />
+            , <see cref="P:System.Uri.Host" />
 
             
 
-            , and the <see
-             cref="P:System.Uri.Port" />
+            , and the <see cref="P:System.Uri.Port" />
 
             
 
@@ -376,13 +354,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Accessing the methods and properties of the <see
-               cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
+              >Accessing the methods and properties of the <see cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
 
               
 
-               requires unrestricted <see
-               cref="T:System.Net.WebPermission" />
+               requires unrestricted <see cref="T:System.Net.WebPermission" />
 
               
 
@@ -393,13 +369,11 @@
             <para>When Kerberos authentication is performed through a proxy, both the proxy and the ultimate host name need to be resolved to an SPN. The proxy name resolution is protected by a timeout. Resolution of the ultimate host name to a SPN requires a DNS lookup, and there is no timeout associated directly with this operation. Therefore synchronous operations may take longer to timeout. To overcome this, add the ultimate host's URI prefix to the SPN cache prior to making requests to it.</para>
           </block>
           <para
-            >Version 3.5 SP1 now defaults to specifying the host name used in the request URL in the SPN in the NTLM (NT LAN Manager) authentication exchange when the <see
-             cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
+            >Version 3.5 SP1 now defaults to specifying the host name used in the request URL in the SPN in the NTLM (NT LAN Manager) authentication exchange when the <see cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
 
             
 
-             property is not set. The host name used in the request URL may be different from the Host header specified in the <see
-             cref="T:System.Net.HttpRequestHeader" />
+             property is not set. The host name used in the request URL may be different from the Host header specified in the <see cref="T:System.Net.HttpRequestHeader" />
 
             
 
@@ -409,8 +383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the dictionary that contains Service Principal Names (SPNs) that are used to identify hosts during Kerberos authentication for requests made using <see
-             cref="T:System.Net.WebRequest" />
+            >Gets the dictionary that contains Service Principal Names (SPNs) that are used to identify hosts during Kerberos authentication for requests made using <see cref="T:System.Net.WebRequest" />
 
             
 
@@ -452,23 +425,20 @@
 
             
 
-            is <see
-             langword="null." />
+            is <see langword="null." />
           </para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the authentication module can preauthenticate the request, the <see
-             cref="M:System.Net.AuthenticationManager.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
+            >If the authentication module can preauthenticate the request, the <see cref="M:System.Net.AuthenticationManager.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
              method returns an Authentication instance and sends the authorization information to the server preemptively instead of waiting for the resource to issue a challenge. This behavior is outlined in section 3.3 of RFC 2617 (HTTP Authentication: Basic and Digest Access Authentication). Authentication modules that support preauthentication allow clients to improve server efficiency by avoiding extra round trips caused by authentication challenges.</para
           >
           <para
-            >Authorization modules that can preauthenticate requests set the <see
-             cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
+            >Authorization modules that can preauthenticate requests set the <see cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
 
             
 
@@ -482,13 +452,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Net.Authorization" />
+            >An instance of the <see cref="T:System.Net.Authorization" />
 
             
 
-             class if the request can be preauthenticated; otherwise, null. If <paramref
-             name="credentials" />
+             class if the request can be preauthenticated; otherwise, null. If <paramref name="credentials" />
 
             
 
@@ -496,24 +464,30 @@
           >
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.WebRequest" />
+          A <see cref="T:System.Net.WebRequest" />
 
           
 
            to an Internet resource. </param
         >
         <param name="credentials">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.ICredentials" />
+          The <see cref="T:System.Net.ICredentials" />
 
           
 
@@ -553,8 +527,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -563,23 +536,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+            >The <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
             
 
-             method adds authentication modules to the end of the list of modules called by the <see
-             cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+             method adds authentication modules to the end of the list of modules called by the <see cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method. Authentication modules are called in the order in which they were added to the list. If a module with the same <see
-             cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
+             method. Authentication modules are called in the order in which they were added to the list. If a module with the same <see cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
 
             
 
-             is already registered, this method removes the registered module and adds <paramref
-             name="authenticationModule" />
+             is already registered, this method removes the registered module and adds <paramref name="authenticationModule" />
 
             
 
@@ -591,12 +560,15 @@
           <para>Registers an authentication module with the authentication manager.</para>
         </summary>
         <param name="authenticationModule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IAuthenticationModule" />
+          The <see cref="T:System.Net.IAuthenticationModule" />
 
           
 
@@ -631,8 +603,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -644,23 +615,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.AuthenticationManager.RegisteredModules" />
+            >The <see cref="P:System.Net.AuthenticationManager.RegisteredModules" />
 
             
 
-             property provides an <see
-             cref="T:System.Collections.IEnumerator" />
+             property provides an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             instance that enables the list of registered authentication modules to be read. The <see
-             cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+             instance that enables the list of registered authentication modules to be read. The <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
             
 
-             method adds modules to the list, and the <see
-             cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
+             method adds modules to the list, and the <see cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
 
             
 
@@ -705,8 +672,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -722,18 +688,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
+            >The <see cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
 
             
 
-             method removes the specified authentication module from the list of authentication modules called by the <see
-             cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+             method removes the specified authentication module from the list of authentication modules called by the <see cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method. The module must have been added to the list using the <see
-             cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+             method. The module must have been added to the list using the <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
             
 
@@ -745,12 +708,15 @@
           <para>Removes the specified authentication module from the list of registered modules.</para>
         </summary>
         <param name="authenticationModule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IAuthenticationModule" />
+          The <see cref="T:System.Net.IAuthenticationModule" />
 
           
 
@@ -790,16 +756,14 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >There is no registered module with the <paramref
-           name="authenticationScheme " />
+          >There is no registered module with the <paramref name="authenticationScheme " />
 
           
 
@@ -808,18 +772,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
+            >The <see cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
 
             
 
-             method removes the authentication module with the specified authentication scheme from the list of authentication modules called by the <see
-             cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+             method removes the authentication module with the specified authentication scheme from the list of authentication modules called by the <see cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
             
 
-             method. The module must have been added to the list using the <see
-             cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+             method. The module must have been added to the list using the <see cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
 
             
 
@@ -831,7 +792,11 @@
           <para>Removes authentication modules with the specified authentication scheme from the list of registered modules.</para>
         </summary>
         <param name="authenticationScheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

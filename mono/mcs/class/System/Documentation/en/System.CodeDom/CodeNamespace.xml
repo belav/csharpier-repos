@@ -41,23 +41,19 @@
          can be used to represent a namespace declaration.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeNamespace.Name" />
+        >The <see cref="P:System.CodeDom.CodeNamespace.Name" />
 
         
 
-         property specifies the name of the namespace. The <see
-         cref="P:System.CodeDom.CodeNamespace.Imports" />
+         property specifies the name of the namespace. The <see cref="P:System.CodeDom.CodeNamespace.Imports" />
 
         
 
-         property contains the namespace import directives for the namespace. The <see
-         cref="P:System.CodeDom.CodeNamespace.Types" />
+         property contains the namespace import directives for the namespace. The <see cref="P:System.CodeDom.CodeNamespace.Types" />
 
         
 
-         property contains the type declarations for the namespace. The <see
-         cref="P:System.CodeDom.CodeNamespace.Comments" />
+         property contains the type declarations for the namespace. The <see cref="P:System.CodeDom.CodeNamespace.Comments" />
 
         
 
@@ -90,8 +86,7 @@
       <Parameters />
       <Docs>
         <remarks
-          >After the object has be constructed, the <see
-           cref="M:System.CodeDom.CodeNamespace.Name" />
+          >After the object has be constructed, the <see cref="M:System.CodeDom.CodeNamespace.Name" />
 
           
 
@@ -101,8 +96,7 @@ has to be set before the Code Generator is called on it.</remarks
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -129,8 +123,7 @@ has to be set before the Code Generator is called on it.</remarks
       </Parameters>
       <Docs>
         <remarks>
-          <code lang="C#"
-            >
+          <code lang="C#">
 using System;
 using System.Text;
 using System.IO;
@@ -162,8 +155,7 @@ class CodeDomDemo {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -171,7 +163,11 @@ class CodeDomDemo {
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,8 +203,7 @@ class CodeDomDemo {
 on the namespace.</value
         >
         <remarks>
-          <code lang="C#"
-            >
+          <code lang="C#">
 /*	Creates namespace like thus when c# code is generated.
 /*	// Demo Namespace
 /*	namespace Mono.CodeDomDemo {
@@ -255,8 +250,7 @@ demoNs.Comments.Add(new CodeCommentStatement("Demo Namespace"));
 imports applicable to the namespace.</value
         >
         <remarks>
-          <code lang="C#"
-            >
+          <code lang="C#">
 /*	Creates namespace like thus when c# code is generated.
 /*	namespace Mono.CodeDomDemo {
 /*		using System.Data;
@@ -314,8 +308,7 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see
-             cref="P:System.CodeDom.CodeNamespace.Comments" />
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeNamespace.Comments" />
 
             
 
@@ -342,8 +335,7 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see
-             cref="P:System.CodeDom.CodeNamespace.Imports" />
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeNamespace.Imports" />
 
             
 
@@ -370,8 +362,7 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An event that will be raised the first time the <see
-             cref="P:System.CodeDom.CodeNamespace.Types" />
+            >An event that will be raised the first time the <see cref="P:System.CodeDom.CodeNamespace.Types" />
 
             
 
@@ -401,18 +392,15 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
       <Docs>
         <value>To be added: an object of type 'CodeTypeDeclarationCollection'</value>
         <remarks
-          >This is a  collection of <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          >This is a  collection of <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
           s that reside inside the Namespace.
 
 
-<example
-          >
-            <code lang="C#"
-              >
+<example>
+            <code lang="C#">
 // This example creates a Mono.CodeDomDemo namespace and adds a new class 'Hello' to it.
 ...
 // Create Hello class

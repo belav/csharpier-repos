@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Any style declared for a particular HTML server control is added to the collection when the containing Web Forms page is parsed. It automatically parses and exposes CSS properties through a dictionary pattern API. You can manipulate any CSS property on a server control through the <see
-         cref="P:System.Web.UI.HtmlControls.HtmlControl.Style" />
+        >Any style declared for a particular HTML server control is added to the collection when the containing Web Forms page is parsed. It automatically parses and exposes CSS properties through a dictionary pattern API. You can manipulate any CSS property on a server control through the <see cref="P:System.Web.UI.HtmlControls.HtmlControl.Style" />
 
         
 
@@ -44,23 +43,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the style item to add exists in the <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >If the style item to add exists in the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             enumeration, use the overload of the <see
-             cref="Overload:System.Web.UI.CssStyleCollection.Add" />
+             enumeration, use the overload of the <see cref="Overload:System.Web.UI.CssStyleCollection.Add" />
 
             
 
-             method that takes an <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             method that takes an <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             parameter because it is strongly typed. This means that items that are added will be included when viewing items with the get accessor of the <see
-             cref="P:System.Web.UI.CssStyleCollection.Item(System.Web.UI.HtmlTextWriterStyle)" />
+             parameter because it is strongly typed. This means that items that are added will be included when viewing items with the get accessor of the <see cref="P:System.Web.UI.CssStyleCollection.Item(System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
@@ -70,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a style item to the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Adds a style item to the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -79,14 +73,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the new style attribute to add to the collection. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,23 +120,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the style item to add exists in the <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >If the style item to add exists in the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             enumeration, use this <see
-             cref="M:System.Web.UI.CssStyleCollection.Add(System.Web.UI.HtmlTextWriterStyle,System.String)" />
+             enumeration, use this <see cref="M:System.Web.UI.CssStyleCollection.Add(System.Web.UI.HtmlTextWriterStyle,System.String)" />
 
             
 
-             overload of the <see
-             cref="Overload:System.Web.UI.CssStyleCollection.Add" />
+             overload of the <see cref="Overload:System.Web.UI.CssStyleCollection.Add" />
 
             
 
-             method rather than the overload that does not take an <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             method rather than the overload that does not take an <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -144,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a style item to the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Adds a style item to the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
-             collection of a control using the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             collection of a control using the specified <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -158,19 +154,26 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
            enumeration value to add to the collection.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all style items from the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Removes all style items from the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -216,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of items in the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Gets the number of items in the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -280,16 +281,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ICollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.ICollection" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of keys to all the styles in the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Gets a collection of keys to all the styles in the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -316,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a style item from the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Removes a style item from the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -325,7 +321,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -357,13 +357,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a style item from the <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+            >Removes a style item from the <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
-             collection of a control using the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             collection of a control using the specified <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -371,12 +369,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 

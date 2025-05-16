@@ -14,31 +14,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Padding" />
+        >The <see cref="T:System.Windows.Forms.Padding" />
 
         
 
-         structure represents the padding or margin associated with a rectangular UI element such as a control. The padding is the internal space between the body of the UI element and its edge. In contrast, a margin is the distance separating the adjoining edges of two adjacent UI elements. Because of structural similarities, <see
-         cref="T:System.Windows.Forms.Padding" />
+         structure represents the padding or margin associated with a rectangular UI element such as a control. The padding is the internal space between the body of the UI element and its edge. In contrast, a margin is the distance separating the adjoining edges of two adjacent UI elements. Because of structural similarities, <see cref="T:System.Windows.Forms.Padding" />
 
         
 
          is used to represent both padding and margins.</para
       >
       <para
-        >For a diagram that illustrates the <see
-         cref="P:System.Windows.Forms.Control.Padding" />
+        >For a diagram that illustrates the <see cref="P:System.Windows.Forms.Control.Padding" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.Control.Margin" />
+         and <see cref="P:System.Windows.Forms.Control.Margin" />
 
         
 
-         properties on a control, see <format
-         type="text/html">
+         properties on a control, see <format type="text/html">
           <a href="3781b5a1-3085-4072-bed0-44670c23ffdc"
             >Margin and Padding in Windows Forms Controls</a
           >
@@ -49,41 +44,34 @@
         .</para
       >
       <para
-        >Padding has a different effect on controls that are containers than on controls that are not. For example, in a <see
-         cref="T:System.Windows.Forms.Panel" />
+        >Padding has a different effect on controls that are containers than on controls that are not. For example, in a <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         control, the <see
-         cref="T:System.Windows.Forms.Padding" />
+         control, the <see cref="T:System.Windows.Forms.Padding" />
 
         
 
-         property defines the spacing between the border of the <see
-         cref="T:System.Windows.Forms.Panel" />
+         property defines the spacing between the border of the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         and its child controls. For a <see
-         cref="T:System.Windows.Forms.Button" />
+         and its child controls. For a <see cref="T:System.Windows.Forms.Button" />
 
         
 
-         control, the <see
-         cref="T:System.Windows.Forms.Padding" />
+         control, the <see cref="T:System.Windows.Forms.Padding" />
 
         
 
-         property defines the spacing between the border of the <see
-         cref="T:System.Windows.Forms.Button" />
+         property defines the spacing between the border of the <see cref="T:System.Windows.Forms.Button" />
 
         
 
          control and its contained text.</para
       >
       <para
-        >In addition to typical methods and properties, <see
-         cref="T:System.Windows.Forms.Padding" />
+        >In addition to typical methods and properties, <see cref="T:System.Windows.Forms.Padding" />
 
         
 
@@ -92,13 +80,11 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="F:System.Windows.Forms.Padding.Empty" />
+            >The <see cref="F:System.Windows.Forms.Padding.Empty" />
 
             
 
-             field, which represents a predefined <see
-             cref="T:System.Windows.Forms.Padding" />
+             field, which represents a predefined <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -107,8 +93,7 @@
         </item>
         <item>
           <para
-            >A set of operators for performing common arithmetic operations for the class, such as adding two <see
-             cref="T:System.Windows.Forms.Padding" />
+            >A set of operators for performing common arithmetic operations for the class, such as adding two <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -117,18 +102,15 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Padding.Horizontal" />
+            >The <see cref="P:System.Windows.Forms.Padding.Horizontal" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Vertical" />
+            , <see cref="P:System.Windows.Forms.Padding.Vertical" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Padding.Size" />
+            , and <see cref="P:System.Windows.Forms.Padding.Size" />
 
             
 
@@ -154,33 +136,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+            >This constructor sets the <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            , <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+            , <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Padding.All" />
+             and <see cref="P:System.Windows.Forms.Padding.All" />
 
             
 
-             properties to the value of the <paramref
-             name="all" />
+             properties to the value of the <paramref name="all" />
 
             
 
@@ -190,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -199,7 +174,11 @@
           >
         </summary>
         <param name="all">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -227,8 +206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If all of the parameter values are equal, then the <see
-             cref="P:System.Windows.Forms.Padding.All" />
+            >If all of the parameter values are equal, then the <see cref="P:System.Windows.Forms.Padding.All" />
 
             
 
@@ -238,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -247,28 +224,44 @@
           >
         </summary>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The padding size, in pixels, for the left edge.</param
         >
         <param name="top">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The padding size, in pixels, for the top edge.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The padding size, in pixels, for the right edge.</param
         >
         <param name="bottom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -298,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Computes the sum of the two specified <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Computes the sum of the two specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -309,13 +301,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Padding" />
+            >A <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             that contains the sum of the two specified <see
-             cref="T:System.Windows.Forms.Padding" />
+             that contains the sum of the two specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -323,24 +313,30 @@
           >
         </returns>
         <param name="p1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
           .</param
         >
         <param name="p2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -369,23 +365,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When retrieving this property, if all the edges use the same padding value, then this common value is returned. Otherwise, -1 is returned to indicate that all the padding values are not equal.</para>
           <para
-            >Setting this value changes the <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+            >Setting this value changes the <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            , <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+            , and <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
@@ -418,8 +410,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this value can also alter the <see
-             cref="P:System.Windows.Forms.Padding.All" />
+            >Setting this value can also alter the <see cref="P:System.Windows.Forms.Padding.All" />
 
             
 
@@ -449,23 +440,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty padding object is defined as having the <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+            >An empty padding object is defined as having the <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            , <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+             and <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
@@ -476,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides a <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Provides a <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -503,38 +489,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only other objects of type <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Only other objects of type <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             (or a derived type) can be equal to the current <see
-             cref="T:System.Windows.Forms.Padding" />
+             (or a derived type) can be equal to the current <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-            . In addition, the corresponding <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+            . In addition, the corresponding <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            , <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+             and <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
-             properties for both <see
-             cref="T:System.Windows.Forms.Padding" />
+             properties for both <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -544,8 +523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the value of the specified object is equivalent to the current <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Determines whether the value of the specified object is equivalent to the current <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -555,8 +533,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Windows.Forms.Padding" />
+            >true if the <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -564,12 +541,15 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to the current <see
-           cref="T:System.Windows.Forms.Padding" />
+          The object to compare to the current <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -592,49 +572,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Padding.GetHashCode" />
+            >The <see cref="M:System.Windows.Forms.Padding.GetHashCode" />
 
             
 
-             method uses the <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+             method uses the <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            , <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+            , <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , and <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
-             values to generate a 32-bit hash code that represents the current <see
-             cref="T:System.Windows.Forms.Padding" />
+             values to generate a 32-bit hash code that represents the current <see cref="T:System.Windows.Forms.Padding" />
 
             
 
             .</para
           >
           <para
-            >A hash code is a number that corresponds to the value of an object (so two objects that have the same value should generate the same hash code). Hash codes are used to sort and store collections of objects. For example, a <see
-             cref="T:System.Collections.Hashtable" />
+            >A hash code is a number that corresponds to the value of an object (so two objects that have the same value should generate the same hash code). Hash codes are used to sort and store collections of objects. For example, a <see cref="T:System.Collections.Hashtable" />
 
             
 
              represents a collection of key-and-value pairs that are organized based on the hash code of the key.</para
           >
           <para
-            >For more information on hash codes and hash functions, see the <see
-             cref="M:System.Object.GetHashCode" />
+            >For more information on hash codes and hash functions, see the <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -644,8 +616,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a hash code for the current <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Generates a hash code for the current <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -705,8 +676,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this value can also alter the <see
-             cref="P:System.Windows.Forms.Padding.All" />
+            >Setting this value can also alter the <see cref="P:System.Windows.Forms.Padding.All" />
 
             
 
@@ -740,13 +710,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A vector addition operation is the result of adding the padding values for each edge. For example, the <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            >A vector addition operation is the result of adding the padding values for each edge. For example, the <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-             property of the result is the sum of the <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+             property of the result is the sum of the <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
@@ -757,13 +725,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs vector addition on the two specified <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Performs vector addition on the two specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             objects, resulting in a new <see
-             cref="T:System.Windows.Forms.Padding" />
+             objects, resulting in a new <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -773,18 +739,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.Padding" />
+            >A new <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             that results from adding <paramref
-             name="p1" />
+             that results from adding <paramref name="p1" />
 
             
 
-             and <paramref
-             name="p2" />
+             and <paramref name="p2" />
 
             
 
@@ -792,24 +755,30 @@
           >
         </returns>
         <param name="p1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Windows.Forms.Padding" />
+          The first <see cref="T:System.Windows.Forms.Padding" />
 
           
 
            to add.</param
         >
         <param name="p2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Windows.Forms.Padding" />
+          The second <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -838,28 +807,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Two <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             objects are equal if the padding values for each of the four edges – <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+             objects are equal if the padding values for each of the four edges – <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Right" />
+            , <see cref="P:System.Windows.Forms.Padding.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Padding.Top" />
+            , <see cref="P:System.Windows.Forms.Padding.Top" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Padding.Bottom" />
+            , and <see cref="P:System.Windows.Forms.Padding.Bottom" />
 
             
 
@@ -869,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two specified <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Tests whether two specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -880,8 +843,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Windows.Forms.Padding" />
+            >true if the two <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -889,24 +851,30 @@
           >
         </returns>
         <param name="p1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
            to test.</param
         >
         <param name="p2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -935,8 +903,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation is the inverse of <see
-             cref="M:System.Windows.Forms.Padding.op_Equality(System.Windows.Forms.Padding,System.Windows.Forms.Padding)" />
+            >This operation is the inverse of <see cref="M:System.Windows.Forms.Padding.op_Equality(System.Windows.Forms.Padding,System.Windows.Forms.Padding)" />
 
             
 
@@ -946,8 +913,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two specified <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Tests whether two specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -957,8 +923,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Windows.Forms.Padding" />
+            >true if the two <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -966,24 +931,30 @@
           >
         </returns>
         <param name="p1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
            to test.</param
         >
         <param name="p2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -1012,13 +983,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A vector subtraction operation is the result of subtracting the padding values for each edge. For example, the <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+            >A vector subtraction operation is the result of subtracting the padding values for each edge. For example, the <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
-             property of the result is the difference between the <see
-             cref="P:System.Windows.Forms.Padding.Left" />
+             property of the result is the difference between the <see cref="P:System.Windows.Forms.Padding.Left" />
 
             
 
@@ -1028,13 +997,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs vector subtraction on the two specified <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Performs vector subtraction on the two specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             objects, resulting in a new <see
-             cref="T:System.Windows.Forms.Padding" />
+             objects, resulting in a new <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -1044,18 +1011,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Padding" />
+            >The <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             result of subtracting <paramref
-             name="p2" />
+             result of subtracting <paramref name="p2" />
 
             
 
-             from <paramref
-             name="p1" />
+             from <paramref name="p1" />
 
             
 
@@ -1063,24 +1027,30 @@
           >
         </returns>
         <param name="p1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Padding" />
+          The <see cref="T:System.Windows.Forms.Padding" />
 
           
 
            to subtract from (the minuend).</param
         >
         <param name="p2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Padding" />
+          The <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -1108,8 +1078,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this value can also alter the <see
-             cref="P:System.Windows.Forms.Padding.All" />
+            >Setting this value can also alter the <see cref="P:System.Windows.Forms.Padding.All" />
 
             
 
@@ -1142,38 +1111,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Padding.Size" />
+            >The <see cref="P:System.Windows.Forms.Padding.Size" />
 
             
 
-             property performs a type conversion from <see
-             cref="T:System.Windows.Forms.Padding" />
+             property performs a type conversion from <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             to <see
-             cref="T:System.Drawing.Size" />
+             to <see cref="T:System.Drawing.Size" />
 
             
 
-            . The <see
-             cref="P:System.Windows.Forms.Padding.Horizontal" />
+            . The <see cref="P:System.Windows.Forms.Padding.Horizontal" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Drawing.Size.Width" />
+             property corresponds to the <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             property, and the <see
-             cref="P:System.Windows.Forms.Padding.Vertical" />
+             property, and the <see cref="P:System.Windows.Forms.Padding.Vertical" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Drawing.Size.Height" />
+             property corresponds to the <see cref="P:System.Drawing.Size.Height" />
 
             
 
@@ -1190,8 +1152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the padding information in the form of a <see
-             cref="T:System.Drawing.Size" />
+            >Gets the padding information in the form of a <see cref="T:System.Drawing.Size" />
 
             
 
@@ -1222,8 +1183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Subtracts one specified <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Subtracts one specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -1233,13 +1193,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Padding" />
+            >A <see cref="T:System.Windows.Forms.Padding" />
 
             
 
-             that contains the result of the subtraction of one specified <see
-             cref="T:System.Windows.Forms.Padding" />
+             that contains the result of the subtraction of one specified <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -1247,24 +1205,30 @@
           >
         </returns>
         <param name="p1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
           .</param
         >
         <param name="p2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Padding" />
+          A <see cref="T:System.Windows.Forms.Padding" />
 
           
 
@@ -1292,8 +1256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this value can also alter the <see
-             cref="P:System.Windows.Forms.Padding.All" />
+            >Setting this value can also alter the <see cref="P:System.Windows.Forms.Padding.All" />
 
             
 
@@ -1322,8 +1285,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method returns a string containing the labeled values of the padding for all four edges.</para>
           <para
-            >This method overrides <see
-             cref="M:System.Object.ToString" />
+            >This method overrides <see cref="M:System.Object.ToString" />
 
             
 
@@ -1333,8 +1295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Windows.Forms.Padding" />
+            >Returns a string that represents the current <see cref="T:System.Windows.Forms.Padding" />
 
             
 
@@ -1344,13 +1305,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that represents the current <see
-             cref="T:System.Windows.Forms.Padding" />
+             that represents the current <see cref="T:System.Windows.Forms.Padding" />
 
             
 

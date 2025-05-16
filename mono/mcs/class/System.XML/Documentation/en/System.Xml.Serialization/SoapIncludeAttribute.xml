@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+        >The <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
         
 
-         class belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         class belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes, or deserializes, an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes, or deserializes, an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". For a complete list of similar attributes, see <format type="text/html">
           <a href="93EE258C-9C0F-4A08-897C-C10DB7A00F91"
             >[&lt;topic://cpconAttributesThatControlSOAPEncodedSerialization&gt;]</a
           >
@@ -52,59 +49,49 @@
         .</para
       >
       <para
-        >To serialize an object as an encoded SOAP message, you must construct the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >To serialize an object as an encoded SOAP message, you must construct the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         using an <see
-         cref="T:System.Xml.Serialization.XmlTypeMapping" />
+         using an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
         
 
-         created with the <see
-         cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
+         created with the <see cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+         method of the <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
          class.</para
       >
       <para
-        >When applying the <see
-         cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+        >When applying the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
         
 
-        , specify the <see
-         cref="T:System.Type" />
+        , specify the <see cref="T:System.Type" />
 
         
 
-         of the derived class. When the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         of the derived class. When the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
          serializes objects that include both the base and the derived classes, it can then recognize both object types.</para
       >
       <para
-        >You can use the <see
-         cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+        >You can use the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
         
 
-         to include derived classes in service description documents that are written in the Web Services Description Language (WSDL). For example, if a method returns an <see
-         cref="T:System.Object" />
+         to include derived classes in service description documents that are written in the Web Services Description Language (WSDL). For example, if a method returns an <see cref="T:System.Object" />
 
         
 
-        , apply the <see
-         cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+        , apply the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
         
 
@@ -112,8 +99,7 @@
       >
       <para>For more information about WSDL, see World Wide Web Consortium (www.w3.org) specification, "Web Services Description Language (WSDL) 1.1".</para>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -127,8 +113,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Allows the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -157,18 +142,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply multiple instances of the <see
-             cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+            >Apply multiple instances of the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
             
 
-             to a field or property that returns either an array of objects, an <see
-             cref="T:System.Collections.ArrayList" />
+             to a field or property that returns either an array of objects, an <see cref="T:System.Collections.ArrayList" />
 
             
 
-             that contains a collection of objects, or an object that can return multiple types. Set the <see
-             cref="P:System.Xml.Serialization.SoapIncludeAttribute.Type" />
+             that contains a collection of objects, or an object that can return multiple types. Set the <see cref="P:System.Xml.Serialization.SoapIncludeAttribute.Type" />
 
             
 
@@ -178,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
             
 
@@ -187,7 +168,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,18 +198,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply multiple instances of the <see
-             cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+            >Apply multiple instances of the <see cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
 
             
 
-             to a field or property that returns either an array of objects, an <see
-             cref="T:System.Collections.ArrayList" />
+             to a field or property that returns either an array of objects, an <see cref="T:System.Collections.ArrayList" />
 
             
 
-             that contains a collection of objects, or an object that can return multiple types. Set the <see
-             cref="P:System.Xml.Serialization.SoapIncludeAttribute.Type" />
+             that contains a collection of objects, or an object that can return multiple types. Set the <see cref="P:System.Xml.Serialization.SoapIncludeAttribute.Type" />
 
             
 

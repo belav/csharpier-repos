@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the members of this enumeration to set the value of the <see
-         cref="P:System.Windows.Forms.PictureBox.SizeMode" />
+        >Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.PictureBox.SizeMode" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.PictureBox" />
+         property of the <see cref="T:System.Windows.Forms.PictureBox" />
 
         
 
@@ -29,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how an image is positioned within a <see
-         cref="T:System.Windows.Forms.PictureBox" />
+        >Specifies how an image is positioned within a <see cref="T:System.Windows.Forms.PictureBox" />
 
         
 
@@ -49,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >The <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -73,18 +69,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The image is displayed in the center if the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >The image is displayed in the center if the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-             is larger than the image. If the image is larger than the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             is larger than the image. If the image is larger than the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-            , the picture is placed in the center of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            , the picture is placed in the center of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -107,13 +100,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The image is placed in the upper-left corner of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >The image is placed in the upper-left corner of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-            . The image is clipped if it is larger than the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            . The image is clipped if it is larger than the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
@@ -136,13 +127,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The image within the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+            >The image within the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 
-             is stretched or shrunk to fit the size of the <see
-             cref="T:System.Windows.Forms.PictureBox" />
+             is stretched or shrunk to fit the size of the <see cref="T:System.Windows.Forms.PictureBox" />
 
             
 

@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -70,8 +72,7 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -79,16 +80,14 @@
         >
         <summary>Create a PrivateKey object from the specified file.</summary>
         <returns
-          >a <see
-           cref="T:Mono.Security.Authenticode.PrivateKey" />
+          >a <see cref="T:Mono.Security.Authenticode.PrivateKey" />
 
           
 
            object containing the loaded private key.</returns
         >
         <remarks
-          >A <see
-           cref="T:System.Security.Cryptography.CryptographicException" />
+          >A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
           
 
@@ -115,8 +114,7 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -125,16 +123,14 @@
         <param name="password">the password to decrypt the private key file.</param>
         <summary>Create a PrivateKey object from the specified file and password.</summary>
         <returns
-          >a <see
-           cref="T:Mono.Security.Authenticode.PrivateKey" />
+          >a <see cref="T:Mono.Security.Authenticode.PrivateKey" />
 
           
 
            object containing the loaded and, if required, decrypted private key.</returns
         >
         <remarks
-          >A <see
-           cref="T:System.Security.Cryptography.CryptographicException" />
+          >A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
           
 
@@ -173,8 +169,7 @@
       <Docs>
         <summary>Get or set the intended key usage for the private key.</summary>
         <value
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -200,8 +195,7 @@
       <Docs>
         <summary>The RSA instance containing the private key.</summary>
         <value
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -225,8 +219,7 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -252,16 +245,14 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            representing the filename under which the private key will be saved.</param
         >
         <param name="password"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 

@@ -23,28 +23,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+        >You can use the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
         
 
-         to identify data operation methods on a type marked with the <see
-         cref="T:System.ComponentModel.DataObjectAttribute" />
+         to identify data operation methods on a type marked with the <see cref="T:System.ComponentModel.DataObjectAttribute" />
 
         
 
-         attribute so that they are more easily identified by callers using reflection. When the <see
-         cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+         attribute so that they are more easily identified by callers using reflection. When the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
         
 
-         attribute is applied to a method, it describes the type of operation the method performs and indicates whether the method is the default data operation method of a type. Components such as the <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+         attribute is applied to a method, it describes the type of operation the method performs and indicates whether the method is the default data operation method of a type. Components such as the <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
-         control and the <see
-         cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
+         control and the <see cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
         
 
@@ -78,18 +73,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+            >The <see cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
 
             
 
-             property is set to false when you create a <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+             property is set to false when you create a <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
-             object using this <see
-             cref="M:System.ComponentModel.DataObjectMethodAttribute.#ctor(System.ComponentModel.DataObjectMethodType)" />
+             object using this <see cref="M:System.ComponentModel.DataObjectMethodAttribute.#ctor(System.ComponentModel.DataObjectMethodType)" />
 
             
 
@@ -99,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
@@ -108,12 +99,15 @@
           >
         </summary>
         <param name="methodType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.DataObjectMethodType" />
+          One of the <see cref="T:System.ComponentModel.DataObjectMethodType" />
 
           
 
@@ -144,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
@@ -153,24 +146,30 @@
           >
         </summary>
         <param name="methodType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.DataObjectMethodType" />
+          One of the <see cref="T:System.ComponentModel.DataObjectMethodType" />
 
           
 
            values that describes the data operation the method performs.</param
         >
         <param name="isDefault">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate the method that the attribute is applied to is the default method of the data object for the specified <paramref
-           name="methodType" />
+          true to indicate the method that the attribute is applied to is the default method of the data object for the specified <paramref name="methodType" />
 
           
 
@@ -199,8 +198,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines whether this <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+            >This method determines whether this <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
@@ -215,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this instance is the same as the instance specified by the <paramref
-             name="obj" />
+            >true if this instance is the same as the instance specified by the <paramref name="obj" />
 
             
 
@@ -224,12 +221,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare with this instance of <see
-           cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+          An object to compare with this instance of <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
           
 
@@ -281,74 +281,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+            >The <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
-             control uses the <see
-             cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+             control uses the <see cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
 
             
 
-             property to distinguish between multiple methods that match the signature requirements for a specific method type. If two methods match the signature requirements, the method with the <see
-             cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+             property to distinguish between multiple methods that match the signature requirements for a specific method type. If two methods match the signature requirements, the method with the <see cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
 
             
 
              property set to true is selected.</para
           >
           <para
-            >At design-time the <see
-             cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+            >At design-time the <see cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
 
             
 
-             property is used to automatically set the <see
-             cref="P:System.Web.UI.WebControls.ObjectDataSource.SelectMethod" />
+             property is used to automatically set the <see cref="P:System.Web.UI.WebControls.ObjectDataSource.SelectMethod" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.ObjectDataSource.UpdateMethod" />
+            , <see cref="P:System.Web.UI.WebControls.ObjectDataSource.UpdateMethod" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.ObjectDataSource.DeleteMethod" />
+            , <see cref="P:System.Web.UI.WebControls.ObjectDataSource.DeleteMethod" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.ObjectDataSource.InsertMethod" />
+            , and <see cref="P:System.Web.UI.WebControls.ObjectDataSource.InsertMethod" />
 
             
 
-             properties on an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+             properties on an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
              instance.</para
           >
           <para
-            >If the <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+            >If the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
-             is created using the <see
-             cref="M:System.ComponentModel.DataObjectMethodAttribute.#ctor(System.ComponentModel.DataObjectMethodType)" />
+             is created using the <see cref="M:System.ComponentModel.DataObjectMethodAttribute.#ctor(System.ComponentModel.DataObjectMethodType)" />
 
             
 
-             constructor that only takes a <see
-             cref="T:System.ComponentModel.DataObjectMethodType" />
+             constructor that only takes a <see cref="T:System.ComponentModel.DataObjectMethodType" />
 
             
 
-             parameter, the <see
-             cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+             parameter, the <see cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
 
             
 
@@ -358,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the method that the <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+            >Gets a value indicating whether the method that the <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
@@ -389,13 +375,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines whether one <see
-             cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+            >This method determines whether one <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
             
 
-             fits the pattern of another. Its implementation is not the same as that of <see
-             cref="M:System.ComponentModel.DataObjectMethodAttribute.Equals(System.Object)" />
+             fits the pattern of another. Its implementation is not the same as that of <see cref="M:System.ComponentModel.DataObjectMethodAttribute.Equals(System.Object)" />
 
             
 
@@ -409,8 +393,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this instance is the same as the instance specified by the <paramref
-             name="obj" />
+            >true if this instance is the same as the instance specified by the <paramref name="obj" />
 
             
 
@@ -418,12 +401,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object to compare with this instance of <see
-           cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+          An object to compare with this instance of <see cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
           
 
@@ -454,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.ComponentModel.DataObjectMethodType" />
+            >Gets a <see cref="T:System.ComponentModel.DataObjectMethodType" />
 
             
 

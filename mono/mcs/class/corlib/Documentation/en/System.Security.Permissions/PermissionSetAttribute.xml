@@ -33,41 +33,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Permissions.PermissionSetAttribute" />
+        >The <see cref="T:System.Security.Permissions.PermissionSetAttribute" />
 
         
 
-         properties <see
-         cref="P:System.Security.Permissions.PermissionSetAttribute.Name" />
+         properties <see cref="P:System.Security.Permissions.PermissionSetAttribute.Name" />
 
         
 
-        , <see
-         cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
+        , <see cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
 
         
 
-        , and <see
-         cref="P:System.Security.Permissions.PermissionSetAttribute.XML" />
+        , and <see cref="P:System.Security.Permissions.PermissionSetAttribute.XML" />
 
         
 
          are mutually exclusive, meaning that a permission set can have as its source only one of the following: a named permission set, a file containing an XML representation of a permission set, or a string containing an XML representation of a permission set.</para
       >
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
-         that is used. A <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+         that is used. A <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
-         performed on a <see
-         cref="T:System.Security.PermissionSet" />
+         performed on a <see cref="T:System.Security.PermissionSet" />
 
         
 
@@ -78,8 +71,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for a <see
-         cref="T:System.Security.PermissionSet" />
+        >Allows security actions for a <see cref="T:System.Security.PermissionSet" />
 
         
 
@@ -112,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.PermissionSetAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.PermissionSetAttribute" />
 
             
 
@@ -121,7 +112,11 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -152,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is not used; it is included only to support inheritance from <see
-             cref="T:System.Security.Permissions.SecurityAttribute" />
+            >This method is not used; it is included only to support inheritance from <see cref="T:System.Security.Permissions.SecurityAttribute" />
 
             
 
@@ -222,8 +216,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the file specified is Unicode, set the <see
-             cref="P:System.Security.Permissions.PermissionSetAttribute.UnicodeEncoded" />
+            >If the file specified is Unicode, set the <see cref="P:System.Security.Permissions.PermissionSetAttribute.UnicodeEncoded" />
 
             
 
@@ -299,8 +292,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If this property is not set, the file is assumed to be ASCII.</para>
           <para
-            >If <see
-             cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
+            >If <see cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
 
             
 
@@ -310,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the file specified by <see
-             cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
+            >Gets or sets a value indicating whether the file specified by <see cref="P:System.Security.Permissions.PermissionSetAttribute.File" />
 
             
 

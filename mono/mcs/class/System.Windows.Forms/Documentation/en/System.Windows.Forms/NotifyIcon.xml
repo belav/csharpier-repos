@@ -31,28 +31,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Icons in the notification area are shortcuts to processes that are running in the background of a computer, such as a virus protection program or a volume control. These processes do not come with their own user interfaces. The <see
-         cref="T:System.Windows.Forms.NotifyIcon" />
+        >Icons in the notification area are shortcuts to processes that are running in the background of a computer, such as a virus protection program or a volume control. These processes do not come with their own user interfaces. The <see cref="T:System.Windows.Forms.NotifyIcon" />
 
         
 
-         class provides a way to program in this functionality. The <see
-         cref="P:System.Windows.Forms.NotifyIcon.Icon" />
+         class provides a way to program in this functionality. The <see cref="P:System.Windows.Forms.NotifyIcon.Icon" />
 
         
 
-         property defines the icon that appears in the notification area. Pop-up menus for an icon are addressed with the <see
-         cref="P:System.Windows.Forms.NotifyIcon.ContextMenu" />
+         property defines the icon that appears in the notification area. Pop-up menus for an icon are addressed with the <see cref="P:System.Windows.Forms.NotifyIcon.ContextMenu" />
 
         
 
-         property. The <see
-         cref="P:System.Windows.Forms.NotifyIcon.Text" />
+         property. The <see cref="P:System.Windows.Forms.NotifyIcon.Text" />
 
         
 
-         property assigns ToolTip text. In order for the icon to show up in the notification area, the <see
-         cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+         property assigns ToolTip text. In order for the icon to show up in the notification area, the <see cref="P:System.Windows.Forms.NotifyIcon.Visible" />
 
         
 
@@ -73,23 +68,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a new <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >When a new <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
-             is created, the <see
-             cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+             is created, the <see cref="P:System.Windows.Forms.NotifyIcon.Visible" />
 
             
 
-             property is set to false. You must set the <see
-             cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+             property is set to false. You must set the <see cref="P:System.Windows.Forms.NotifyIcon.Visible" />
 
             
 
-             property to true in order to use the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+             property to true in order to use the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -126,23 +116,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a new <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >When a new <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
-             is created, the <see
-             cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+             is created, the <see cref="P:System.Windows.Forms.NotifyIcon.Visible" />
 
             
 
-             property is set to false. You must set the <see
-             cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+             property is set to false. You must set the <see cref="P:System.Windows.Forms.NotifyIcon.Visible" />
 
             
 
-             property to true in order to use the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+             property to true in order to use the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -152,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -161,17 +146,19 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.IContainer" />
+          An <see cref="T:System.ComponentModel.IContainer" />
 
           
 
-           that represents the container for the <see
-           cref="T:System.Windows.Forms.NotifyIcon" />
+           that represents the container for the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
           
 
@@ -196,8 +183,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -225,8 +211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -264,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the icon to display on the balloon tip associated with the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Gets or sets the icon to display on the balloon tip associated with the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -287,8 +271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -329,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text to display on the balloon tip associated with the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Gets or sets the text to display on the balloon tip associated with the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -365,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the title of the balloon tip displayed on the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Gets or sets the title of the balloon tip displayed on the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -385,8 +366,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -461,8 +441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the shortcut menu associated with the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Gets or sets the shortcut menu associated with the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -500,8 +479,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -563,8 +541,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -576,8 +553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks a <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Occurs when the user clicks a <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -602,8 +578,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -615,8 +590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -638,8 +612,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -671,8 +644,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -704,8 +676,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -741,18 +712,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Minimum and maximum timeout values are enforced by the operating system and are typically 10 and 30 seconds, respectively, however this can vary depending on the operating system. Timeout values that are too large or too small are adjusted to the appropriate minimum or maximum value. In addition, if the user does not appear to be using the computer (no keyboard or mouse events are occurring) then the system does not count this time towards the timeout.</para>
           <para
-            >Only one balloon tip can display on the taskbar at a time. Attempting to display a balloon tip when one is currently displayed on the taskbar causes the <paramref
-             name="timeout" />
+            >Only one balloon tip can display on the taskbar at a time. Attempting to display a balloon tip when one is currently displayed on the taskbar causes the <paramref name="timeout" />
 
             
 
-             value to be ignored. The behavior is slightly different depending on the operating system and whether the balloon tip is from another, or the same, application. When the second balloon tip is from another application, the first balloon tip will display for the minimum timeout value before the second appears, regardless of the value of <paramref
-             name="timeout" />
+             value to be ignored. The behavior is slightly different depending on the operating system and whether the balloon tip is from another, or the same, application. When the second balloon tip is from another application, the first balloon tip will display for the minimum timeout value before the second appears, regardless of the value of <paramref name="timeout" />
 
             
 
-            . In most cases, if the balloon tips are from the same application, the first balloon tip immediately closes when another call to the <see
-             cref="M:System.Windows.Forms.NotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,System.Windows.Forms.ToolTipIcon)" />
+            . In most cases, if the balloon tips are from the same application, the first balloon tip immediately closes when another call to the <see cref="M:System.Windows.Forms.NotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,System.Windows.Forms.ToolTipIcon)" />
 
             
 
@@ -765,7 +733,11 @@
           <para>Displays a balloon tip in the taskbar for the specified time period.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -796,18 +768,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Minimum and maximum timeout values are enforced by the operating system and are typically 10 and 30 seconds, respectively, however this can vary depending on the operating system. Timeout values that are too large or too small are adjusted to the appropriate minimum or maximum value. In addition, if the user does not appear to be using the computer (no keyboard or mouse events are occurring) then the system does not count this time towards the timeout.</para>
           <para
-            >Only one balloon tip can display on the taskbar at a time. Attempting to display a balloon tip when one is currently displayed on the taskbar causes the <paramref
-             name="timeout" />
+            >Only one balloon tip can display on the taskbar at a time. Attempting to display a balloon tip when one is currently displayed on the taskbar causes the <paramref name="timeout" />
 
             
 
-             value to be ignored. The behavior is slightly different depending on the operating system and whether the balloon tip is from another, or the same, application. When the second balloon tip is from another application, the first balloon tip will display for the minimum timeout value before the second appears, regardless of the value of <paramref
-             name="timeout" />
+             value to be ignored. The behavior is slightly different depending on the operating system and whether the balloon tip is from another, or the same, application. When the second balloon tip is from another application, the first balloon tip will display for the minimum timeout value before the second appears, regardless of the value of <paramref name="timeout" />
 
             
 
-            . In most cases, if the balloon tips are from the same application, the first balloon tip immediately closes when another call to the <see
-             cref="M:System.Windows.Forms.NotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,System.Windows.Forms.ToolTipIcon)" />
+            . In most cases, if the balloon tips are from the same application, the first balloon tip immediately closes when another call to the <see cref="M:System.Windows.Forms.NotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,System.Windows.Forms.ToolTipIcon)" />
 
             
 
@@ -820,33 +789,48 @@
           <para>Displays a balloon tip with the specified title, text, and icon in the taskbar for the specified time period.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The time period, in milliseconds, the balloon tip should display.</param
         >
         <param name="tipTitle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The title to display on the balloon tip.</param
         >
         <param name="tipText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display on the balloon tip.</param
         >
         <param name="tipIcon">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ToolTipIcon" />
+          One of the <see cref="T:System.Windows.Forms.ToolTipIcon" />
 
           
 
@@ -883,8 +867,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that contains data about the <see
-             cref="T:System.Windows.Forms.NotifyIcon" />
+            >Gets or sets an object that contains data about the <see cref="T:System.Windows.Forms.NotifyIcon" />
 
             
 
@@ -945,8 +928,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Since the default value is false, in order for the icon to show up in the notification area, you must set the <see
-             cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+            >Since the default value is false, in order for the icon to show up in the notification area, you must set the <see cref="P:System.Windows.Forms.NotifyIcon.Visible" />
 
             
 

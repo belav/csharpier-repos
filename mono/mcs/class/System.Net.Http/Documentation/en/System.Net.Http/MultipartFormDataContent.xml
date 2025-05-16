@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This type is derived from <see
-         cref="T:System.Net.Http.MultipartContent" />
+        >This type is derived from <see cref="T:System.Net.Http.MultipartContent" />
 
         
 
-         type. All <see
-         cref="T:System.Net.Http.MultipartFormDataContent" />
+         type. All <see cref="T:System.Net.Http.MultipartFormDataContent" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Http.MultipartFormDataContent" />
+            >Creates a new instance of the <see cref="T:System.Net.Http.MultipartFormDataContent" />
 
             
 
@@ -83,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Http.MultipartFormDataContent" />
+            >Creates a new instance of the <see cref="T:System.Net.Http.MultipartFormDataContent" />
 
             
 
@@ -92,7 +88,11 @@
           >
         </summary>
         <param name="boundary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -124,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Add HTTP content to a collection of <see
-             cref="T:System.Net.Http.HttpContent" />
+            >Add HTTP content to a collection of <see cref="T:System.Net.Http.HttpContent" />
 
             
 
@@ -133,7 +132,11 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -166,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Add HTTP content to a collection of <see
-             cref="T:System.Net.Http.HttpContent" />
+            >Add HTTP content to a collection of <see cref="T:System.Net.Http.HttpContent" />
 
             
 
@@ -175,14 +177,22 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP content to add to the collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -216,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Add HTTP content to a collection of <see
-             cref="T:System.Net.Http.HttpContent" />
+            >Add HTTP content to a collection of <see cref="T:System.Net.Http.HttpContent" />
 
             
 
@@ -225,21 +234,33 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP content to add to the collection.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name for the HTTP content to add.</param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

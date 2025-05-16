@@ -28,13 +28,11 @@
       <para>This service provides methods to convert a collection of objects to a serializable object that represents them, and to convert serialization data to the object or objects that it represents.</para>
       <para>All components that support a designer must support serialization of each component's type. This occurs when the designer scans the public properties, methods, and events of each type and represents these within a type descriptor.</para>
       <para
-        >This interface uses the technique of scanning members to convert a collection of components into a single object that supports run-time serialization. This does not necessarily provide for the serialization of custom types that belong to the class. Many objects require a custom serializer to have their values serialized at run time. To specify a serializer for a custom type, use a <see
-         cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
+        >This interface uses the technique of scanning members to convert a collection of components into a single object that supports run-time serialization. This does not necessarily provide for the serialization of custom types that belong to the class. Many objects require a custom serializer to have their values serialized at run time. To specify a serializer for a custom type, use a <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
 
         
 
-         attribute or implement an <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+         attribute or implement an <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
 
         
 
@@ -77,8 +75,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.ICollection" />
+            >An <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -86,7 +83,11 @@
           >
         </returns>
         <param name="serializationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -130,7 +131,11 @@
           <para>An object that contains the serialized state of the specified collection of objects.</para>
         </returns>
         <param name="objects">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

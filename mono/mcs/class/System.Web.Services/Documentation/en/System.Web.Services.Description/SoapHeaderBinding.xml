@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -40,13 +39,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to an <see
-         cref="T:System.Web.Services.Description.InputBinding" />
+        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" />
 
         
 
-         or an <see
-         cref="T:System.Web.Services.Description.OutputBinding" />
+         or an <see cref="T:System.Web.Services.Description.OutputBinding" />
 
         
 
@@ -65,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapHeaderBinding" />
 
             
 
@@ -91,8 +87,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property should be set only if the value of the <see
-             cref="P:System.Web.Services.Description.SoapHeaderBinding.Use" />
+            >The value of this property should be set only if the value of the <see cref="P:System.Web.Services.Description.SoapHeaderBinding.Use" />
 
             
 
@@ -160,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.Services.Description.SoapHeaderBinding" />
 
             
 
@@ -190,10 +184,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.XmlQualifiedName" />
-        </value>
+        <value>a <see cref="T:System.Xml.XmlQualifiedName" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default value of this property is an empty string ("").</para>
@@ -201,13 +192,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value specifying the name of the <see
-             cref="T:System.Web.Services.Description.Message" />
+            >Gets or sets a value specifying the name of the <see cref="T:System.Web.Services.Description.Message" />
 
             
 
-             within the XML Web service to which the <see
-             cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+             within the XML Web service to which the <see cref="T:System.Web.Services.Description.SoapHeaderBinding" />
 
             
 
@@ -237,8 +226,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property will return an empty string ("") if the property value has not been set. The value should only be set if the value of the <see
-             cref="P:System.Web.Services.Description.SoapHeaderBinding.Use" />
+            >This property will return an empty string ("") if the property value has not been set. The value should only be set if the value of the <see cref="P:System.Web.Services.Description.SoapHeaderBinding.Use" />
 
             
 
@@ -248,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get or sets the URI representing the location of the specification for encoding of content not specifically defined by the <see
-             cref="P:System.Web.Services.Description.SoapHeaderBinding.Encoding" />
+            >Get or sets the URI representing the location of the specification for encoding of content not specifically defined by the <see cref="P:System.Web.Services.Description.SoapHeaderBinding.Encoding" />
 
             
 
@@ -283,13 +270,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating to which <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >Gets or sets a value indicating to which <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
-             within the XML Web service the <see
-             cref="T:System.Web.Services.Description.SoapHeaderBinding" />
+             within the XML Web service the <see cref="T:System.Web.Services.Description.SoapHeaderBinding" />
 
             
 
@@ -323,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies whether the header is encoded using rules specified by the <see
-             cref="P:System.Web.Services.Description.SoapHeaderBinding.Encoding" />
+            >Specifies whether the header is encoded using rules specified by the <see cref="P:System.Web.Services.Description.SoapHeaderBinding.Encoding" />
 
             
 

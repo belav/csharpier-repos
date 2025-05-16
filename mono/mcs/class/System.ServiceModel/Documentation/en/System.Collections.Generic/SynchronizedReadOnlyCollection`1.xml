@@ -45,33 +45,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
+        >The <see cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
 
         
 
-         stores data in an <see
-         cref="T:System.Collections.Generic.IList`1" />
+         stores data in an <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         container and provides an object that can be set and used to synchronize access to the collection so that it is thread safe. The <see
-         cref="T:System.Collections.Generic.IList`1" />
+         container and provides an object that can be set and used to synchronize access to the collection so that it is thread safe. The <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         container can be recovered using the <see
-         cref="P:System.Collections.Generic.SynchronizedReadOnlyCollection`1.Items" />
+         container can be recovered using the <see cref="P:System.Collections.Generic.SynchronizedReadOnlyCollection`1.Items" />
 
         
 
-         property. The synchronized object can be recovered using the <see
-         cref="P:System.Collections.Generic.SynchronizedReadOnlyCollection`1.System.Collections.ICollection.SyncRoot" />
+         property. The synchronized object can be recovered using the <see cref="P:System.Collections.Generic.SynchronizedReadOnlyCollection`1.System.Collections.ICollection.SyncRoot" />
 
         
 
-         property. It can only be set using one of the constructors that take the <paramref
-         name="syncRoot" />
+         property. It can only be set using one of the constructors that take the <paramref name="syncRoot" />
 
         
 
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
 
             
 
@@ -131,13 +124,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple instances of the <see
-             cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
+            >If multiple instances of the <see cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
 
             
 
-             are created using the same <paramref
-             name="syncRoot" />
+             are created using the same <paramref name="syncRoot" />
 
             
 
@@ -147,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.SynchronizedReadOnlyCollection`1" />
 
             
 
@@ -329,8 +319,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerator`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerator`1" />
 
             
 
@@ -589,19 +578,26 @@
           <para>Copies the elements of the collection to a specified array, starting at a particular index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
            that is the destination for the elements copied from the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -655,13 +651,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <paramref
-             name="syncRoot" />
+            >The value of this <paramref name="syncRoot" />
 
             
 
-             object can be set when creating the thread-safe collection using the <see
-             cref="M:System.Collections.Generic.SynchronizedReadOnlyCollection`1.#ctor(System.Object)" />
+             object can be set when creating the thread-safe collection using the <see cref="M:System.Collections.Generic.SynchronizedReadOnlyCollection`1.#ctor(System.Object)" />
 
             
 
@@ -700,8 +694,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -738,8 +731,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Int32" />
+            >Returns <see cref="T:System.Int32" />
 
             
 
@@ -747,7 +739,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -800,8 +796,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns true if the element <paramref
-             name="value" />
+            >Returns true if the element <paramref name="value" />
 
             
 
@@ -814,18 +809,19 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>True if the object is located in the collection; otherwise false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -857,17 +853,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Int32" />
+          <para>Returns <see cref="T:System.Int32" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >The zero-based index of the first occurrence of the <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of the <paramref name="value" />
 
             
 
@@ -875,7 +867,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -904,8 +900,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -917,19 +912,26 @@
           <para>Items cannot be inserted into a read-only collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            is to be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1027,8 +1029,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1040,7 +1041,11 @@
           <para>Retrieves the specified element from the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1068,8 +1073,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1081,7 +1085,11 @@
           <para>Items cannot be removed from a read-only collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

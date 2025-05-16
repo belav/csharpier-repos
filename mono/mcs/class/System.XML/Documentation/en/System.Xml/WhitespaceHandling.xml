@@ -29,8 +29,7 @@
     <remarks>
       <para
         >Significant white space is white space between markup in 
-      a mixed content model, or white space within an element that has the <c
-        >xml:space="preserve"</c>
+      a mixed content model, or white space within an element that has the <c>xml:space="preserve"</c>
 
         
 

@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A weak reference allows the garbage collector to collect an object while still allowing an application to access the object. If you need the object, you can still obtain a strong reference to it and prevent it from being collected. For more information about how to use short and long weak references, see <format
-         type="text/html">
+        >A weak reference allows the garbage collector to collect an object while still allowing an application to access the object. If you need the object, you can still obtain a strong reference to it and prevent it from being collected. For more information about how to use short and long weak references, see <format type="text/html">
           <a href="6a600fe5-3af3-4c64-82da-10a0a8e2d79b">Using Weak References</a>
         </format>
 
@@ -70,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a short weak reference to <paramref
-             name="target" />
+            >This constructor creates a short weak reference to <paramref name="target" />
 
             
 
@@ -81,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.WeakReference" />
+            >Initializes a new instance of the <see cref="T:System.WeakReference" />
 
             
 
@@ -90,7 +87,11 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -122,13 +123,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="trackResurrection" />
+            >If <paramref name="trackResurrection" />
 
             
 
-             is false, a short weak reference is created. If <paramref
-             name="trackResurrection" />
+             is false, a short weak reference is created. If <paramref name="trackResurrection" />
 
             
 
@@ -138,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.WeakReference" />
+            >Initializes a new instance of the <see cref="T:System.WeakReference" />
 
             
 
@@ -147,14 +145,22 @@
           >
         </summary>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object to track. </param
         >
         <param name="trackResurrection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -186,8 +192,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -197,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.WeakReference" />
+            >Initializes a new instance of the <see cref="T:System.WeakReference" />
 
             
 
@@ -206,24 +210,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that holds all the data needed to serialize or deserialize the current <see
-           cref="T:System.WeakReference" />
+          An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" />
 
           
 
            object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          (Reserved) Describes the source and destination of the serialized stream specified by <paramref
-           name="info" />
+          (Reserved) Describes the source and destination of the serialized stream specified by <paramref name="info" />
 
           
 
@@ -252,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Discards the reference to the target represented by the current <see
-             cref="T:System.WeakReference" />
+            >Discards the reference to the target represented by the current <see cref="T:System.WeakReference" />
 
             
 
@@ -288,21 +297,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method stores all the information in <paramref
-             name="info" />
+            >This method stores all the information in <paramref name="info" />
 
             
 
-             necessary to serialize the current <see
-             cref="T:System.WeakReference" />
+             necessary to serialize the current <see cref="T:System.WeakReference" />
 
             
 
              object.</para
           >
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -312,13 +318,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object with all the data needed to serialize the current <see
-             cref="T:System.WeakReference" />
+             object with all the data needed to serialize the current <see cref="T:System.WeakReference" />
 
             
 
@@ -326,19 +330,26 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that holds all the data needed to serialize or deserialize the current <see
-           cref="T:System.WeakReference" />
+          An object that holds all the data needed to serialize or deserialize the current <see cref="T:System.WeakReference" />
 
           
 
            object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -363,8 +374,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because an object could potentially be reclaimed for garbage collection immediately after the <see
-             cref="P:System.WeakReference.IsAlive" />
+            >Because an object could potentially be reclaimed for garbage collection immediately after the <see cref="P:System.WeakReference.IsAlive" />
 
             
 
@@ -374,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an indication whether the object referenced by the current <see
-             cref="T:System.WeakReference" />
+            >Gets an indication whether the object referenced by the current <see cref="T:System.WeakReference" />
 
             
 
@@ -406,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the object (the target) referenced by the current <see
-             cref="T:System.WeakReference" />
+            >Gets or sets the object (the target) referenced by the current <see cref="T:System.WeakReference" />
 
             
 
@@ -433,13 +441,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If true, the weak reference is a long weak reference and true was specified for the <paramref
-             name="trackResurrection" />
+            >If true, the weak reference is a long weak reference and true was specified for the <paramref name="trackResurrection" />
 
             
 
-             parameter in the <see
-             cref="T:System.WeakReference" />
+             parameter in the <see cref="T:System.WeakReference" />
 
             
 
@@ -449,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an indication whether the object referenced by the current <see
-             cref="T:System.WeakReference" />
+            >Gets an indication whether the object referenced by the current <see cref="T:System.WeakReference" />
 
             
 

@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingCompleteState" />
+        >The <see cref="T:System.Windows.Forms.BindingCompleteState" />
 
         
 
-         is used by the <see
-         cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+         is used by the <see cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
 
         
 

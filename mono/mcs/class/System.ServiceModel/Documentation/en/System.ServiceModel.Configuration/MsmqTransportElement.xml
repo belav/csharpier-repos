@@ -20,16 +20,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
+        >The <see cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
 
         
 
          enables the user to set the properties of the queued communication channel. The queued communication channel uses MSMQ for its transport.</para
       >
       <para
-        >This binding element is the default binding element used by the MSMQ standard binding (<see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+        >This binding element is the default binding element used by the MSMQ standard binding (<see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />
 
             
 
@@ -92,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of this configuration element to the specified <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+            >Applies the settings of this configuration element to the specified <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -101,12 +97,15 @@
           >
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingElement" />
+          The <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
           
 
@@ -163,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the settings from the specified <see
-             cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+            >Copies the settings from the specified <see cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
 
             
 
@@ -172,7 +170,11 @@
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,23 +308,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >MSMQ does not support Active Directory addressing when using SOAP Reliable Messaging Protocol, so do not set <see
-             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.QueueTransferProtocol" />
+            >MSMQ does not support Active Directory addressing when using SOAP Reliable Messaging Protocol, so do not set <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.QueueTransferProtocol" />
 
             
 
-             to <see
-             cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+             to <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
+             or <see cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
 
             
 
-             when <see
-             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+             when <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
 
             
 
@@ -356,8 +354,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>MSMQ queue addresses can consist of path names or direct format names. With a direct format name, MSMQ resolves the queue name using DNS, NetBIOS, or IP. With a path name, MSMQ resolves the queue name using Active Directory.</para>
           <para
-            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
-             cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
 
             
 

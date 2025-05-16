@@ -37,13 +37,11 @@
   <Docs>
     <typeparam name="T">I'm Dying Here!</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Generic.MyList`1</c>
+    <remarks><c>T:Mono.DocTest.Generic.MyList`1</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -85,13 +83,11 @@
       <Docs>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
-        <remarks>
-          <c>M:Mono.DocTest.MyList`1.GetEnumerator</c>
+        <remarks><c>M:Mono.DocTest.MyList`1.GetEnumerator</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="GetHelper&lt;U,V&gt;">
@@ -119,13 +115,11 @@
         <typeparam name="U">To be added.</typeparam>
         <typeparam name="V">To be added.</typeparam>
         <summary>To be added.</summary>
-        <returns>
-          <see langword="null" />
+        <returns><see langword="null" />
 
           
 
-          .</returns
-        >
+          .</returns>
         <remarks>
           <c>M:Mono.DocTest.Generic.MyList`1.GetHelper``2</c>
 
@@ -248,13 +242,11 @@
       <Docs>
         <param name="t">tko</param>
         <summary>To be added.</summary>
-        <remarks>
-          <c>M:Mono.DocTest.MyList`1.Test(`0)</c>
+        <remarks><c>M:Mono.DocTest.MyList`1.Test(`0)</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="UseHelper&lt;U,V&gt;">
@@ -284,8 +276,7 @@
         <typeparam name="U">Argh!</typeparam>
         <typeparam name="V">Foo Argh!</typeparam>
         <param name="helper"
-          >A <see
-           cref="T:Mono.DocTest.Generic.MyList`1.Helper`2" />
+          >A <see cref="T:Mono.DocTest.Generic.MyList`1.Helper`2" />
 
           
 

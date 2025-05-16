@@ -58,18 +58,15 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >By default, the <see
-         cref="T:System.Web.UI.WebControls.LoginName" />
+        >By default, the <see cref="T:System.Web.UI.WebControls.LoginName" />
 
         
 
-         control displays the name contained in the <see
-         cref="P:System.Web.UI.Page.User" />
+         control displays the name contained in the <see cref="P:System.Web.UI.Page.User" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.Page" />
+         property of the <see cref="T:System.Web.UI.Page" />
 
         
 
@@ -77,15 +74,13 @@
       >
       <block subset="none" type="note">
         <para
-          >If you are not familiar with the set of login controls available in ASP.NET, see <format
-           type="text/html">
+          >If you are not familiar with the set of login controls available in ASP.NET, see <format type="text/html">
             <a href="ac032230-6469-4b03-b68d-03ef2643a24d">ASP.NET Login Controls Overview</a>
           </format>
 
           
 
-           before continuing. For a list of other topics related to login controls and membership, see <format
-           type="text/html">
+           before continuing. For a list of other topics related to login controls and membership, see <format type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
 
@@ -95,13 +90,11 @@
         >
       </block>
       <para
-        >To change the text displayed by the <see
-         cref="T:System.Web.UI.WebControls.LoginName" />
+        >To change the text displayed by the <see cref="T:System.Web.UI.WebControls.LoginName" />
 
         
 
-         control, set the <see
-         cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
+         control, set the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
 
         
 
@@ -109,13 +102,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.LoginName" />
+          >The <see cref="T:System.Web.UI.WebControls.LoginName" />
 
           
 
-           control cannot be used outside the &lt;form&gt; tag on a Web page. Specifically, the <see
-           cref="T:System.Web.UI.WebControls.LoginName" />
+           control cannot be used outside the &lt;form&gt; tag on a Web page. Specifically, the <see cref="T:System.Web.UI.WebControls.LoginName" />
 
           
 
@@ -129,8 +120,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -138,8 +128,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -158,8 +147,7 @@
     AccessKey="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -167,53 +155,45 @@
         Inset|Outset"
     BorderWidth="size"
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -233,8 +213,7 @@
     Style="string"
     TabIndex="integer"
     ToolTip="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -258,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.WebControls.LoginName" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.WebControls.LoginName" />
 
             
 
@@ -269,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.UI.WebControls.LoginName" />
+            >Initializes the <see cref="T:System.Web.UI.WebControls.LoginName" />
 
             
 
@@ -302,8 +279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
+            >The <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
 
             
 
@@ -336,8 +312,7 @@
               </term>
               <description>
                 <para
-                  >Same as default. To hide the control, set the <see
-                   cref="P:System.Web.UI.Control.Visible" />
+                  >Same as default. To hide the control, set the <see cref="P:System.Web.UI.Control.Visible" />
 
                   
 
@@ -359,8 +334,7 @@
               </term>
               <description>
                 <para
-                  >When the <see
-                   cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
+                  >When the <see cref="P:System.Web.UI.WebControls.LoginName.FormatString" />
 
                   
 
@@ -370,13 +344,11 @@
             </item>
           </list>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -416,13 +388,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.WebControls.LoginName" />
+            >Renders the <see cref="T:System.Web.UI.WebControls.LoginName" />
 
             
 
-             control to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -430,12 +400,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -463,12 +436,15 @@
           <para>Renders the HTML opening tag of the control to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -501,12 +477,15 @@
           <para>Renders the contents of the control to the specified writer. This method is used primarily by control developers.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -534,12 +513,15 @@
           <para>Renders the HTML closing tag of the control to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 

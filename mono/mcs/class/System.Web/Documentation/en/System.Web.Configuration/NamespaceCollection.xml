@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.NamespaceCollection" />
+        >The <see cref="T:System.Web.Configuration.NamespaceCollection" />
 
         
 
-         contains <see
-         cref="T:System.Web.Configuration.NamespaceInfo" />
+         contains <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
         
 
-         objects. Each <see
-         cref="T:System.Web.Configuration.NamespaceInfo" />
+         objects. Each <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
         
 
@@ -56,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.NamespaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.NamespaceCollection" />
 
             
 
@@ -86,13 +82,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see
-             cref="T:System.Web.Configuration.NamespaceInfo" />
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
             
 
-             object with the same <see
-             cref="P:System.Web.Configuration.NamespaceInfo.Namespace" />
+             object with the same <see cref="P:System.Web.Configuration.NamespaceInfo.Namespace" />
 
             
 
@@ -102,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.NamespaceInfo" />
+            >Adds a <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
             
 
@@ -111,12 +104,15 @@
           >
         </summary>
         <param name="namespaceInformation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.NamespaceInfo" />
+          A <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
           
 
@@ -144,13 +140,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For ASP.NET pages written using Visual Basic the <see
-             cref="N:Microsoft.VisualBasic" />
+            >For ASP.NET pages written using Visual Basic the <see cref="N:Microsoft.VisualBasic" />
 
             
 
-             namespace is automatically imported unless the <see
-             cref="P:System.Web.Configuration.NamespaceCollection.AutoImportVBNamespace" />
+             namespace is automatically imported unless the <see cref="P:System.Web.Configuration.NamespaceCollection.AutoImportVBNamespace" />
 
             
 
@@ -182,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.NamespaceInfo" />
+            >Removes all <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
             
 
@@ -294,8 +287,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified element is defined in a higher-level configuration file, this method inserts a remove element into the appropriate section of the configuration file at the level of the current application. If the element is defined in the current configuration file, its entry is removed from the configuration file. The object to remove must exist in the collection; if it does not, a <see
-             cref="T:System.Configuration.ConfigurationException" />
+            >If the specified element is defined in a higher-level configuration file, this method inserts a remove element into the appropriate section of the configuration file at the level of the current application. If the element is defined in the current configuration file, its entry is removed from the configuration file. The object to remove must exist in the collection; if it does not, a <see cref="T:System.Configuration.ConfigurationException" />
 
             
 
@@ -305,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.Configuration.NamespaceInfo" />
+            >Removes the <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
             
 
@@ -314,12 +305,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace of a <see
-           cref="T:System.Web.Configuration.NamespaceInfo" />
+          The namespace of a <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
           
 
@@ -344,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified element is defined in a higher-level configuration file, this method inserts a remove element into the appropriate section of the configuration file at the level of the current application. If the element is defined in the current configuration file, its entry is removed from the configuration file. The object to remove must exist in the collection; if it does not, a <see
-             cref="T:System.Configuration.ConfigurationException" />
+            >If the specified element is defined in a higher-level configuration file, this method inserts a remove element into the appropriate section of the configuration file at the level of the current application. If the element is defined in the current configuration file, its entry is removed from the configuration file. The object to remove must exist in the collection; if it does not, a <see cref="T:System.Configuration.ConfigurationException" />
 
             
 
@@ -355,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.ProfileGroupSettings" />
+            >Removes a <see cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
             
 
@@ -364,12 +356,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of a <see
-           cref="T:System.Web.Configuration.NamespaceInfo" />
+          The index of a <see cref="T:System.Web.Configuration.NamespaceInfo" />
 
           
 

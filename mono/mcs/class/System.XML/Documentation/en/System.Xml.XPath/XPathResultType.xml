@@ -69,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
@@ -195,14 +194,11 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A <see
-             cref="T:System.String" />
+          <para>A <see cref="T:System.String" />
 
             
 
-             value.</para
-          >
+             value.</para>
         </summary>
       </Docs>
     </Member>

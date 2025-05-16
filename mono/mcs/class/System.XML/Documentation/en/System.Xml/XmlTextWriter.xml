@@ -61,8 +61,7 @@ public class WriteFragment
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the <see
-         cref="T:System.Xml.XmlWriter" />
+        >This class implements the <see cref="T:System.Xml.XmlWriter" />
 
         
 
@@ -70,23 +69,19 @@ public class WriteFragment
       >
       <block subset="none" type="note">
         <para
-          >In the dnprdnext release, the recommended practice is to create <see
-           cref="T:System.Xml.XmlWriter" />
+          >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
           
 
-           instances using the <see
-           cref="Overload:System.Xml.XmlWriter.Create" />
+           instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
           
 
-           method and the <see
-           cref="T:System.Xml.XmlWriterSettings" />
+           method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
           
 
-           class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-           type="text/html">
+           class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
             <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
           </format>
 
@@ -136,8 +131,7 @@ public class WriteFragment
       <para>When writing an empty element, an additional space is added between tag name and the closing tag, for example &lt;item /&gt;. This provides compatibility with older browsers.</para>
       <para>When a String is used as method parameter, null and String.Empty are equivalent. String.Empty follows the W3C rules.</para>
       <para
-        >To write strongly typed data, use the <see
-         cref="T:System.Xml.XmlConvert" />
+        >To write strongly typed data, use the <see cref="T:System.Xml.XmlConvert" />
 
         
 
@@ -161,8 +155,7 @@ public class WriteFragment
         </item>
       </list>
       <para
-        >For more information about writing XML, see <format
-         type="text/html">
+        >For more information about writing XML, see <format type="text/html">
           <a href="ea41f72c-e1d3-4e0a-ab0f-f0eb1c27ab86">Writing XML with the XmlWriter</a>
         </format>
 
@@ -174,8 +167,7 @@ public class WriteFragment
         <h2>Security Considerations</h2>
       </format>
       <para
-        >The following items are things to consider when working with the <see
-         cref="T:System.Xml.XmlTextWriter" />
+        >The following items are things to consider when working with the <see cref="T:System.Xml.XmlTextWriter" />
 
         
 
@@ -184,8 +176,7 @@ public class WriteFragment
       <list type="bullet">
         <item>
           <para
-            >Exceptions thrown by the <see
-             cref="T:System.Xml.XmlTextWriter" />
+            >Exceptions thrown by the <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
@@ -194,23 +185,19 @@ public class WriteFragment
         </item>
         <item>
           <para
-            >When you pass the <see
-             cref="T:System.Xml.XmlTextWriter" />
+            >When you pass the <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
-             to another application the underlying stream is exposed to that application. If you need to pass the <see
-             cref="T:System.Xml.XmlTextWriter" />
+             to another application the underlying stream is exposed to that application. If you need to pass the <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
-             to a semi-trusted application, you should use an <see
-             cref="T:System.Xml.XmlWriter" />
+             to a semi-trusted application, you should use an <see cref="T:System.Xml.XmlWriter" />
 
             
 
-             object created by the <see
-             cref="M:System.Xml.XmlWriter.Create(System.Xml.XmlWriter)" />
+             object created by the <see cref="M:System.Xml.XmlWriter.Create(System.Xml.XmlWriter)" />
 
             
 
@@ -219,18 +206,15 @@ public class WriteFragment
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Xml.XmlTextWriter" />
+            >The <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
-             does not validate any data that is passed to the <see
-             cref="M:System.Xml.XmlTextWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
+             does not validate any data that is passed to the <see cref="M:System.Xml.XmlTextWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
 
             
 
-             or <see
-             cref="Overload:System.Xml.XmlTextWriter.WriteRaw" />
+             or <see cref="Overload:System.Xml.XmlTextWriter.WriteRaw" />
 
             
 
@@ -242,8 +226,7 @@ public class WriteFragment
         </item>
         <item>
           <para
-            >Do not accept supporting components, such as an <see
-             cref="T:System.Text.Encoding" />
+            >Do not accept supporting components, such as an <see cref="T:System.Text.Encoding" />
 
             
 
@@ -283,23 +266,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -312,8 +291,7 @@ public class WriteFragment
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the XmlTextWriter class using the specified <see
-             cref="T:System.IO.TextWriter" />
+            >Creates an instance of the XmlTextWriter class using the specified <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -321,7 +299,11 @@ public class WriteFragment
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -356,13 +338,11 @@ public class WriteFragment
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentException">
-          <para>
-            <paramref name="w" />
+          <para><paramref name="w" />
 
             
 
-             cannot be written to.</para
-          >
+             cannot be written to.</para>
           <para> -or-</para>
           <para>The encoding is not supported.</para>
         </exception>
@@ -371,15 +351,18 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,23 +372,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -420,14 +399,22 @@ public class WriteFragment
           <para>Creates an instance of the XmlTextWriter class using the specified stream and encoding.</para>
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to which you want to write. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,8 +454,7 @@ public class WriteFragment
 
             
 
-             is <see
-             cref="F:System.String.Empty" />
+             is <see cref="F:System.String.Empty" />
 
             
 
@@ -482,16 +468,14 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
-          >The directory path specified in <paramref
-           name="filename" />
+          >The directory path specified in <paramref name="filename" />
 
           
 
@@ -511,8 +495,7 @@ public class WriteFragment
           >The caller does not have the required permissions.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
-          >Write access is not permitted by the operating system for the path specified in <paramref
-           name="filename" />
+          >Write access is not permitted by the operating system for the path specified in <paramref name="filename" />
 
           
 
@@ -520,14 +503,20 @@ public class WriteFragment
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to files. See <see
-           cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write"
+            qualify="true"
+          />
 
           
 
           .</permission
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -537,23 +526,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -566,8 +551,7 @@ public class WriteFragment
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Xml.XmlTextWriter" />
+            >Creates an instance of the <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
@@ -575,14 +559,22 @@ public class WriteFragment
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The filename to write to. If the file exists, it truncates it and overwrites it with the new content. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -615,12 +607,13 @@ public class WriteFragment
         <value>
           <para
             > A <see
-             cref="T:System.IO.Stream" qualify="true" />
+              cref="T:System.IO.Stream"
+              qualify="true"
+            />
 
             
 
-            , or <see
-             langword="null" />
+            , or <see langword="null" />
 
             
 
@@ -632,23 +625,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -658,13 +647,11 @@ public class WriteFragment
             >
           </block>
           <para
-            >If the writer was constructed using a TextWriter that is derived from the StreamWriter class, this property is equivalent to the <see
-             cref="P:System.IO.StreamWriter.BaseStream" />
+            >If the writer was constructed using a TextWriter that is derived from the StreamWriter class, this property is equivalent to the <see cref="P:System.IO.StreamWriter.BaseStream" />
 
             
 
-             property. If the writer was constructed using a <see
-             cref="T:System.IO.Stream" />
+             property. If the writer was constructed using a <see cref="T:System.IO.Stream" />
 
             
 
@@ -700,23 +687,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -757,23 +740,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -783,8 +762,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >This is called instead of <see
-             cref="M:System.Xml.XmlTextWriter.Close" />
+            >This is called instead of <see cref="M:System.Xml.XmlTextWriter.Close" />
 
             
 
@@ -825,12 +803,13 @@ public class WriteFragment
         <value>
           <para
             >One of the members of the <see
-             cref="T:System.Xml.Formatting" qualify="true" />
+              cref="T:System.Xml.Formatting"
+              qualify="true"
+            />
 
             
 
-             enumeration. The default is <see
-             cref="F:System.Xml.Formatting.None" />
+             enumeration. The default is <see cref="F:System.Xml.Formatting.None" />
 
             
 
@@ -842,23 +821,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -868,13 +843,11 @@ public class WriteFragment
             >
           </block>
           <para
-            >If the Indented option is set, child elements are indented using the <see
-             cref="P:System.Xml.XmlTextWriter.Indentation" />
+            >If the Indented option is set, child elements are indented using the <see cref="P:System.Xml.XmlTextWriter.Indentation" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlTextWriter.IndentChar" />
+             and <see cref="P:System.Xml.XmlTextWriter.IndentChar" />
 
             
 
@@ -927,13 +900,14 @@ public class WriteFragment
         <value>
           <para
             >A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
              specifying the
-   number of <see
-             cref="P:System.Xml.XmlTextWriter.IndentChar" />
+   number of <see cref="P:System.Xml.XmlTextWriter.IndentChar" />
 
             
 
@@ -947,23 +921,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -989,8 +959,7 @@ public class WriteFragment
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how many IndentChars to write for each level in the hierarchy when <see
-             cref="P:System.Xml.XmlTextWriter.Formatting" />
+            >Gets or sets how many IndentChars to write for each level in the hierarchy when <see cref="P:System.Xml.XmlTextWriter.Formatting" />
 
             
 
@@ -1021,7 +990,9 @@ public class WriteFragment
         <value>
           <para
             >A <see
-             cref="T:System.Char" qualify="true" />
+              cref="T:System.Char"
+              qualify="true"
+            />
 
             
 
@@ -1034,23 +1005,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1063,8 +1030,7 @@ public class WriteFragment
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets which character to use for indenting when <see
-             cref="P:System.Xml.XmlTextWriter.Formatting" />
+            >Gets or sets which character to use for indenting when <see cref="P:System.Xml.XmlTextWriter.Formatting" />
 
             
 
@@ -1102,13 +1068,14 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
            or <see
-           cref="F:System.String.Empty" qualify="true" />
+            cref="F:System.String.Empty"
+            qualify="true"
+          />
 
           
 
@@ -1118,23 +1085,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1153,7 +1116,11 @@ public class WriteFragment
           <para>The matching prefix. Or null if no matching namespace URI is found in the current scope.</para>
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1183,23 +1150,22 @@ public class WriteFragment
         <value>
           <para
             > A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates the writer supports namespaces; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
-            . The default is <see
-             langword="true" />
+            . The default is <see langword="true" />
 
             
 
@@ -1207,13 +1173,11 @@ public class WriteFragment
           >
         </value>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
-           of the current instance is not <see
-           cref="F:System.Xml.WriteState.Start" />
+           of the current instance is not <see cref="F:System.Xml.WriteState.Start" />
 
           
 
@@ -1223,23 +1187,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1278,7 +1238,9 @@ public class WriteFragment
         <value>
           <para
             >A <see
-             cref="T:System.Char" qualify="true" />
+              cref="T:System.Char"
+              qualify="true"
+            />
 
             
 
@@ -1294,23 +1256,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1360,21 +1318,18 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >The buffer length minus <paramref
-           name="index" />
+          >The buffer length minus <paramref name="index" />
 
           
 
-           is less than <paramref
-           name="count" />
+           is less than <paramref name="count" />
 
           
 
@@ -1385,21 +1340,21 @@ public class WriteFragment
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            is less than zero.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -1409,23 +1364,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1440,21 +1391,33 @@ public class WriteFragment
           <para>Encodes the specified binary bytes as base64 and writes out the resulting text.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Byte array to encode. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position within the buffer indicating the start of the bytes to write. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1496,21 +1459,18 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >The buffer length minus <paramref
-           name="index" />
+          >The buffer length minus <paramref name="index" />
 
           
 
-           is less than <paramref
-           name="count" />
+           is less than <paramref name="count" />
 
           
 
@@ -1521,21 +1481,21 @@ public class WriteFragment
 
           
 
-           or <paramref
-           name="count" />
+           or <paramref name="count" />
 
           
 
            is less than zero.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -1545,23 +1505,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1576,21 +1532,33 @@ public class WriteFragment
           <para>Encodes the specified binary bytes as binhex and writes out the resulting text.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Byte array to encode. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position in the buffer indicating the start of the bytes to write. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1626,13 +1594,14 @@ public class WriteFragment
           >The text would result in a non-well formed XML document.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -1642,23 +1611,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1668,8 +1633,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >If <paramref
-             name="text" />
+            >If <paramref name="text" />
 
             
 
@@ -1681,7 +1645,11 @@ public class WriteFragment
           <para>Writes out a &lt;![CDATA[...]]&gt; block containing the specified text.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1717,13 +1685,14 @@ public class WriteFragment
           >The character is in the surrogate pair character range, 0xd800 - 0xdfff, or the text would result in a non-well formed XML document.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -1733,23 +1702,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1765,7 +1730,11 @@ public class WriteFragment
           <para>Forces the generation of a character entity for the specified Unicode character value.</para>
         </summary>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1807,8 +1776,7 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1820,8 +1788,7 @@ public class WriteFragment
 
             
 
-             or <paramref
-             name="count" />
+             or <paramref name="count" />
 
             
 
@@ -1829,13 +1796,11 @@ public class WriteFragment
           >
           <para>- or -</para>
           <para
-            >The buffer length minus <paramref
-             name="index" />
+            >The buffer length minus <paramref name="index" />
 
             
 
-             is less than <paramref
-             name="count" />
+             is less than <paramref name="count" />
 
             
 
@@ -1843,13 +1808,14 @@ public class WriteFragment
           >
         </exception>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -1859,23 +1825,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1893,21 +1855,33 @@ public class WriteFragment
           <para>Writes text one buffer at a time.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Character array containing the text to write. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position in the buffer indicating the start of the text to write. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1943,13 +1917,14 @@ public class WriteFragment
           >The text would result in a non-well formed XML document</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -1959,23 +1934,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -1985,8 +1956,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >If <paramref
-             name="text" />
+            >If <paramref name="text" />
 
             
 
@@ -1998,7 +1968,11 @@ public class WriteFragment
           <para>Writes out a comment &lt;!--...--&gt; containing the specified text.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2042,13 +2016,14 @@ public class WriteFragment
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
              or <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -2056,8 +2031,7 @@ public class WriteFragment
           >
           <para>-or-</para>
           <para
-            >The value for <paramref
-             name="name" />
+            >The value for <paramref name="name" />
 
             
 
@@ -2071,23 +2045,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2097,18 +2067,15 @@ public class WriteFragment
             >
           </block>
           <para
-            >This method does not check for invalid characters in <paramref
-             name="pubid" />
+            >This method does not check for invalid characters in <paramref name="pubid" />
 
             
 
-            , <paramref
-             name="sysid" />
+            , <paramref name="sysid" />
 
             
 
-             or <paramref
-             name="subset" />
+             or <paramref name="subset" />
 
             
 
@@ -2116,13 +2083,11 @@ public class WriteFragment
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlTextWriter" />
+              >The <see cref="T:System.Xml.XmlTextWriter" />
 
               
 
-               does not validate any data that is passed to the <see
-               cref="M:System.Xml.XmlTextWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
+               does not validate any data that is passed to the <see cref="M:System.Xml.XmlTextWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
 
               
 
@@ -2135,53 +2100,64 @@ public class WriteFragment
           <para>Writes the DOCTYPE declaration with the specified name and optional attributes.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the DOCTYPE. This must be non-empty. </param
         >
         <param name="pubid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If non-null it also writes PUBLIC "pubid" "sysid" where <paramref
-           name="pubid" />
+          If non-null it also writes PUBLIC "pubid" "sysid" where <paramref name="pubid" />
 
           
 
-           and <paramref
-           name="sysid" />
+           and <paramref name="sysid" />
 
           
 
            are replaced with the value of the given arguments. </param
         >
         <param name="sysid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If <paramref
-           name="pubid" />
+          If <paramref name="pubid" />
 
           
 
-           is null and <paramref
-           name="sysid" />
+           is null and <paramref name="sysid" />
 
           
 
-           is non-null it writes SYSTEM "sysid" where <paramref
-           name="sysid" />
+           is non-null it writes SYSTEM "sysid" where <paramref name="sysid" />
 
           
 
            is replaced with the value of this argument. </param
         >
         <param name="subset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2212,13 +2188,14 @@ public class WriteFragment
       <Parameters />
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is not<see
-           cref="F:System.Xml.WriteState.Attribute" qualify="true" />
+            cref="F:System.Xml.WriteState.Attribute"
+            qualify="true"
+          />
 
           
 
@@ -2228,23 +2205,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2255,13 +2228,11 @@ public class WriteFragment
           </block>
           <para>If you call WriteStartAttribute, you can close the attribute with this method.</para>
           <para
-            >You can also close the attribute by calling WriteStartAttribute again, calling <see
-             cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
+            >You can also close the attribute by calling WriteStartAttribute again, calling <see cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
 
             
 
-            , or calling <see
-             cref="M:System.Xml.XmlTextWriter.WriteEndElement" />
+            , or calling <see cref="M:System.Xml.XmlTextWriter.WriteEndElement" />
 
             
 
@@ -2271,8 +2242,7 @@ public class WriteFragment
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the previous <see
-             cref="M:System.Xml.XmlTextWriter.WriteStartAttribute(System.String,System.String,System.String)" />
+            >Closes the previous <see cref="M:System.Xml.XmlTextWriter.WriteStartAttribute(System.String,System.String,System.String)" />
 
             
 
@@ -2305,7 +2275,9 @@ public class WriteFragment
       <Docs>
         <exception cref="T:System.ArgumentException"
           >The current instance is in the wrong <see
-           cref="T:System.Xml.WriteState" qualify="true" />
+            cref="T:System.Xml.WriteState"
+            qualify="true"
+          />
 
           
 
@@ -2313,7 +2285,9 @@ public class WriteFragment
         >
         <exception cref="T:System.InvalidOperationException"
           >The current instance is in the wrong <see
-           cref="T:System.Xml.WriteState" qualify="true" />
+            cref="T:System.Xml.WriteState"
+            qualify="true"
+          />
 
           
 
@@ -2323,23 +2297,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2378,13 +2348,14 @@ public class WriteFragment
       <Parameters />
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >No element was open, or the <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >No element was open, or the <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -2394,23 +2365,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2453,35 +2420,38 @@ public class WriteFragment
       <Docs>
         <exception cref="T:System.ArgumentException"
           >A <see
-           cref="T:System.String" qualify="true" />
+            cref="T:System.String"
+            qualify="true"
+          />
 
           
 
-           containing the text would result in a non-well formed XML document, or <paramref
-           name="name" />
+           containing the text would result in a non-well formed XML document, or <paramref name="name" />
 
           
 
-           is either <see
-           langword="null" />
+           is either <see langword="null" />
 
           
 
            or <see
-           cref="F:System.String.Empty" qualify="true" />
+            cref="F:System.String.Empty"
+            qualify="true"
+          />
 
           
 
           .</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -2491,23 +2461,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2522,7 +2488,11 @@ public class WriteFragment
           <para>Writes out an entity reference as &amp;name;.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2553,13 +2523,14 @@ public class WriteFragment
       <Parameters />
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >No start tag was open, or the <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >No start tag was open, or the <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -2569,23 +2540,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2632,18 +2599,18 @@ public class WriteFragment
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
              or <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
-            ; or <paramref
-             name="name" />
+            ; or <paramref name="name" />
 
             
 
@@ -2651,13 +2618,14 @@ public class WriteFragment
           >
         </exception>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -2667,23 +2635,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2693,8 +2657,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >If <see
-             cref="P:System.Xml.XmlTextWriter.Namespaces" />
+            >If <see cref="P:System.Xml.XmlTextWriter.Namespaces" />
 
             
 
@@ -2706,7 +2669,11 @@ public class WriteFragment
           <para>Writes out the specified name, ensuring it is a valid name according to the W3C XML 1.0 recommendation (http://www.w3.org/TR/1998/REC-xml-19980210#NT-Name).</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2744,18 +2711,18 @@ public class WriteFragment
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
              or <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
-            ; or <paramref
-             name="name" />
+            ; or <paramref name="name" />
 
             
 
@@ -2763,13 +2730,14 @@ public class WriteFragment
           >
         </exception>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -2779,23 +2747,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2810,7 +2774,11 @@ public class WriteFragment
           <para>Writes out the specified name, ensuring it is a valid NmToken according to the W3C XML 1.0 recommendation (http://www.w3.org/TR/1998/REC-xml-19980210#NT-Name).</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2854,13 +2822,14 @@ public class WriteFragment
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
              or <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -2868,8 +2837,7 @@ public class WriteFragment
           >
           <para> - or -</para>
           <para
-            >This method is being used to create an XML declaration after <see
-             cref="M:System.Xml.XmlTextWriter.WriteStartDocument" />
+            >This method is being used to create an XML declaration after <see cref="M:System.Xml.XmlTextWriter.WriteStartDocument" />
 
             
 
@@ -2877,20 +2845,25 @@ public class WriteFragment
           >
         </exception>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
           .</exception
         >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2900,23 +2873,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -2926,8 +2895,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >If <paramref
-             name="text" />
+            >If <paramref name="text" />
 
             
 
@@ -2939,14 +2907,22 @@ public class WriteFragment
           <para>Writes out a processing instruction with a space between the name and text as follows: &lt;?name text?&gt;.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Name of the processing instruction. </param
         >
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2988,13 +2964,14 @@ public class WriteFragment
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
              or <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -3006,23 +2983,22 @@ public class WriteFragment
 
             
 
-             is <see
-             langword="false" />
+             is <see langword="false" />
 
             
 
-            , and <paramref
-             name="ns" />
+            , and <paramref name="ns" />
 
             
 
-             is neither <see
-             langword="null" />
+             is neither <see langword="null" />
 
             
 
              nor <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -3038,13 +3014,14 @@ public class WriteFragment
           >
         </exception>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -3058,7 +3035,11 @@ public class WriteFragment
            is not a valid XML name.</exception
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3068,23 +3049,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3110,29 +3087,25 @@ public class WriteFragment
   &lt;item href="#x:test"/&gt;
   &lt;/root&gt;</code>
           <para
-            >If <paramref
-             name="ns" />
+            >If <paramref name="ns" />
 
             
 
              maps to the current default namespace, no prefix is generated.</para
           >
           <para
-            >When writing attribute values, this method generates a prefix if <paramref
-             name="ns" />
+            >When writing attribute values, this method generates a prefix if <paramref name="ns" />
 
             
 
-             is not found. When writing element content, it throws an exception if <paramref
-             name="ns" />
+             is not found. When writing element content, it throws an exception if <paramref name="ns" />
 
             
 
              is not found.</para
           >
           <para
-            >If this writer supports namespaces (<see
-             cref="P:System.Xml.XmlTextWriter.Namespaces" />
+            >If this writer supports namespaces (<see cref="P:System.Xml.XmlTextWriter.Namespaces" />
 
             
 
@@ -3144,14 +3117,22 @@ public class WriteFragment
           <para>Writes out the namespace-qualified name. This method looks up the prefix that is in scope for the given namespace.</para>
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name to write. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3184,13 +3165,14 @@ public class WriteFragment
       </Parameters>
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -3200,23 +3182,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3228,13 +3206,11 @@ public class WriteFragment
           <para>This method does not escape special characters.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlTextWriter" />
+              >The <see cref="T:System.Xml.XmlTextWriter" />
 
               
 
-               does not validate any data that is passed to the <see
-               cref="M:System.Xml.XmlTextWriter.WriteRaw(System.String)" />
+               does not validate any data that is passed to the <see cref="M:System.Xml.XmlTextWriter.WriteRaw(System.String)" />
 
               
 
@@ -3247,7 +3223,11 @@ public class WriteFragment
           <para>Writes raw markup manually from a string.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3289,8 +3269,7 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3302,8 +3281,7 @@ public class WriteFragment
 
             
 
-             or <paramref
-             name="count" />
+             or <paramref name="count" />
 
             
 
@@ -3311,13 +3289,11 @@ public class WriteFragment
           >
           <para>- or -</para>
           <para
-            >The buffer length minus <paramref
-             name="index" />
+            >The buffer length minus <paramref name="index" />
 
             
 
-             is less than <paramref
-             name="count" />
+             is less than <paramref name="count" />
 
             
 
@@ -3325,13 +3301,14 @@ public class WriteFragment
           >
         </exception>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -3341,23 +3318,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3369,13 +3342,11 @@ public class WriteFragment
           <para>This method does not escape special characters.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.XmlTextWriter" />
+              >The <see cref="T:System.Xml.XmlTextWriter" />
 
               
 
-               does not validate any data that is passed to the <see
-               cref="M:System.Xml.XmlTextWriter.WriteRaw(System.Char[],System.Int32,System.Int32)" />
+               does not validate any data that is passed to the <see cref="M:System.Xml.XmlTextWriter.WriteRaw(System.Char[],System.Int32,System.Int32)" />
 
               
 
@@ -3388,21 +3359,33 @@ public class WriteFragment
           <para>Writes raw markup manually from a character buffer.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Character array containing the text to write. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position within the buffer indicating the start of the text to write. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3444,53 +3427,55 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="false" />
+           is <see langword="false" />
 
           
 
-           for the writer, and <paramref
-           name="prefix" />
+           for the writer, and <paramref name="prefix" />
 
           
 
-           and <paramref
-           name="ns" />
+           and <paramref name="ns" />
 
           
 
-           are not both <see
-           langword="null" />
+           are not both <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
           .</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is not one of the following: <see
-           cref="F:System.Xml.WriteState.Attribute" qualify="true" />
+            cref="F:System.Xml.WriteState.Attribute"
+            qualify="true"
+          />
 
           
 
            or <see
-           cref="F:System.Xml.WriteState.Element" qualify="true" />
+            cref="F:System.Xml.WriteState.Element"
+            qualify="true"
+          />
 
           
 
           .</exception
         >
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3500,23 +3485,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3526,13 +3507,11 @@ public class WriteFragment
             >
           </block>
           <para
-            >This is a more advanced version of <see
-             cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
+            >This is a more advanced version of <see cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
 
             
 
-             that allows you to write an attribute value using multiple write methods, such as <see
-             cref="M:System.Xml.XmlTextWriter.WriteString(System.String)" />
+             that allows you to write an attribute value using multiple write methods, such as <see cref="M:System.Xml.XmlTextWriter.WriteString(System.String)" />
 
             
 
@@ -3544,21 +3523,33 @@ public class WriteFragment
           <para>Writes the start of an attribute.</para>
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Namespace prefix of the attribute. </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           LocalName of the attribute. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3589,13 +3580,14 @@ public class WriteFragment
       <Parameters />
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is not <see
-           cref="F:System.Xml.WriteState.Start" qualify="true" />
+            cref="F:System.Xml.WriteState.Start"
+            qualify="true"
+          />
 
           
 
@@ -3605,23 +3597,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3631,8 +3619,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >The encoding level of the document is determined by how the writer is implemented. For example, if an <see
-             cref="T:System.Text.Encoding" />
+            >The encoding level of the document is determined by how the writer is implemented. For example, if an <see cref="T:System.Text.Encoding" />
 
             
 
@@ -3640,8 +3627,7 @@ public class WriteFragment
           >
           <para>When WriteStartDocument is called the writer validates that what you are writing is a well-formed XML document. For example, it checks that the XML declaration is the first node, that one and only one root-level element exists and so on. If this method is not called, the writer assumes an XML fragment is being written and applies no root level rules.</para>
           <para
-            >If WriteStartDocument has been called and then the <see
-             cref="M:System.Xml.XmlTextWriter.WriteProcessingInstruction(System.String,System.String)" />
+            >If WriteStartDocument has been called and then the <see cref="M:System.Xml.XmlTextWriter.WriteProcessingInstruction(System.String,System.String)" />
 
             
 
@@ -3682,13 +3668,14 @@ public class WriteFragment
       </Parameters>
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is not <see
-           cref="F:System.Xml.WriteState.Start" qualify="true" />
+            cref="F:System.Xml.WriteState.Start"
+            qualify="true"
+          />
 
           
 
@@ -3698,23 +3685,19 @@ public class WriteFragment
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3724,8 +3707,7 @@ public class WriteFragment
             >
           </block>
           <para
-            >The encoding level of the document is determined by how the writer is implemented. For example, if an <see
-             cref="T:System.Text.Encoding" />
+            >The encoding level of the document is determined by how the writer is implemented. For example, if an <see cref="T:System.Text.Encoding" />
 
             
 
@@ -3733,8 +3715,7 @@ public class WriteFragment
           >
           <para>When WriteStartDocument is called the writer validates that what you are writing is a well-formed XML document. For example, it checks that the XML declaration is the first node, that one and only one root-level element exists and so on. If this method is not called, the writer assumes an XML fragment is being written and applies no root level rules.</para>
           <para
-            >If WriteStartDocument has been called and then the <see
-             cref="M:System.Xml.XmlTextWriter.WriteProcessingInstruction(System.String,System.String)" />
+            >If WriteStartDocument has been called and then the <see cref="M:System.Xml.XmlTextWriter.WriteProcessingInstruction(System.String,System.String)" />
 
             
 
@@ -3746,7 +3727,11 @@ public class WriteFragment
           <para>Writes the XML declaration with the version "1.0" and the standalone attribute.</para>
         </summary>
         <param name="standalone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3788,36 +3773,33 @@ public class WriteFragment
 
           
 
-           is <see
-           langword="false" />
+           is <see langword="false" />
 
           
 
-           for the writer, and <paramref
-           name="prefix" />
+           for the writer, and <paramref name="prefix" />
 
           
 
-           and <paramref
-           name="ns" />
+           and <paramref name="ns" />
 
           
 
-           are not both <see
-           langword="null" />
+           are not both <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -3825,8 +3807,7 @@ public class WriteFragment
         >
         <example>
           <para
-            >This example demonstrates the <see
-             cref="M:System.Xml.XmlTextWriter.WriteStartElement(System.String,System.String,System.String)" />
+            >This example demonstrates the <see cref="M:System.Xml.XmlTextWriter.WriteStartElement(System.String,System.String,System.String)" />
 
             
 
@@ -3863,7 +3844,11 @@ public class WriteXml
           <para> The value of the encoding attribute is the encoding of the output stream of the console.</para>
         </example>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3873,23 +3858,19 @@ public class WriteXml
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -3899,23 +3880,19 @@ public class WriteXml
             >
           </block>
           <para
-            >After calling this method you can either write attributes or create content using <see
-             cref="M:System.Xml.XmlTextWriter.WriteComment(System.String)" />
+            >After calling this method you can either write attributes or create content using <see cref="M:System.Xml.XmlTextWriter.WriteComment(System.String)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlTextWriter.WriteString(System.String)" />
+            , <see cref="M:System.Xml.XmlTextWriter.WriteString(System.String)" />
 
             
 
-            , or <see
-             cref="M:System.Xml.XmlTextWriter.WriteStartElement(System.String,System.String,System.String)" />
+            , or <see cref="M:System.Xml.XmlTextWriter.WriteStartElement(System.String,System.String,System.String)" />
 
             
 
-             for child elements. You can close the element with <see
-             cref="M:System.Xml.XmlTextWriter.WriteEndElement" />
+             for child elements. You can close the element with <see cref="M:System.Xml.XmlTextWriter.WriteEndElement" />
 
             
 
@@ -3927,21 +3904,33 @@ public class WriteXml
           <para>Writes the specified start tag and associates it with the given namespace and prefix.</para>
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace prefix of the element. </param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the element. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3976,8 +3965,7 @@ public class WriteXml
       <Docs>
         <value>
           <para
-            > One of the members of the <see
-             cref="T:System.Xml.WriteState" />
+            > One of the members of the <see cref="T:System.Xml.WriteState" />
 
             
 
@@ -3989,23 +3977,19 @@ public class WriteXml
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -4046,28 +4030,29 @@ public class WriteXml
       </Parameters>
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
-           and <paramref
-           name="text" />
+           and <paramref name="text" />
 
           
 
-           is neither <see
-           langword="null" />
+           is neither <see langword="null" />
 
           
 
            nor <see
-           cref="F:System.String.Empty" qualify="true" />
+            cref="F:System.String.Empty"
+            qualify="true"
+          />
 
           
 
@@ -4097,23 +4082,19 @@ public class WriteFrag {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -4137,8 +4118,7 @@ public class WriteFrag {
           <para>For example, this input string test&lt;item&gt;test is written as </para>
           <code> test&amp;lt;item&amp;gt;test</code>
           <para
-            >If <paramref
-             name="text" />
+            >If <paramref name="text" />
 
             
 
@@ -4150,7 +4130,11 @@ public class WriteFrag {
           <para>Writes the given text content.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4190,13 +4174,14 @@ public class WriteFrag {
           >An invalid surrogate character pair was passed.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -4206,23 +4191,19 @@ public class WriteFrag {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -4233,13 +4214,11 @@ public class WriteFrag {
           </block>
           <para>This method is only applicable on systems that use UTF-16 encoding.</para>
           <para
-            >The surrogate character entity is written in hexadecimal format. The range for surrogate characters is #x10000 to #x10FFFF. The following formula is used to generate the surrogate character entity: (<paramref
-             name="highChar" />
+            >The surrogate character entity is written in hexadecimal format. The range for surrogate characters is #x10000 to #x10FFFF. The following formula is used to generate the surrogate character entity: (<paramref name="highChar" />
 
             
 
-             - 0xD800) * 0x400 + (<paramref
-             name="lowChar" />
+             - 0xD800) * 0x400 + (<paramref name="lowChar" />
 
             
 
@@ -4253,14 +4232,22 @@ public class WriteFrag {
           <para>Generates and writes the surrogate character entity for the surrogate character pair.</para>
         </summary>
         <param name="lowChar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The low surrogate. This must be a value between 0xDC00 and 0xDFFF. </param
         >
         <param name="highChar">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4297,26 +4284,28 @@ public class WriteFrag {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
            or <see
-           cref="F:System.String.Empty" qualify="true" />
+            cref="F:System.String.Empty"
+            qualify="true"
+          />
 
           
 
            or contains non-white space characters.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >The <see
-           cref="P:System.Xml.XmlTextWriter.WriteState" />
+          >The <see cref="P:System.Xml.XmlTextWriter.WriteState" />
 
           
 
            is <see
-           cref="F:System.Xml.WriteState.Closed" qualify="true" />
+            cref="F:System.Xml.WriteState.Closed"
+            qualify="true"
+          />
 
           
 
@@ -4326,23 +4315,19 @@ public class WriteFrag {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -4352,8 +4337,7 @@ public class WriteFrag {
             >
           </block>
           <para
-            >This method is used to manually format your document. Use the <see
-             cref="P:System.Xml.XmlTextWriter.Formatting" />
+            >This method is used to manually format your document. Use the <see cref="P:System.Xml.XmlTextWriter.Formatting" />
 
             
 
@@ -4365,7 +4349,11 @@ public class WriteFrag {
           <para>Writes out the given white space.</para>
         </summary>
         <param name="ws">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4395,13 +4383,14 @@ public class WriteFrag {
         <value>
           <para
             > A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
             
-containing the language attribute, or <see
-             langword="null" />
+containing the language attribute, or <see langword="null" />
 
             
 
@@ -4413,23 +4402,19 @@ language attribute is not specified for the element.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -4474,12 +4459,13 @@ language attribute is not specified for the element.</para
         <value>
           <para
             > One of the members of the <see
-             cref="T:System.Xml.XmlSpace" qualify="true" />
+              cref="T:System.Xml.XmlSpace"
+              qualify="true"
+            />
 
             
 
-             enumeration, or <see
-             cref="F:System.Xml.XmlSpace.None" />
+             enumeration, or <see cref="F:System.Xml.XmlSpace.None" />
 
             
 
@@ -4491,23 +4477,19 @@ language attribute is not specified for the element.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlWriter" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlWriter" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlWriter.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlWriter.Create" />
 
               
 
-               method and the <see
-               cref="T:System.Xml.XmlWriterSettings" />
+               method and the <see cref="T:System.Xml.XmlWriterSettings" />
 
               
 
-               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format
-               type="text/html">
+               class. This allows you to take full advantage of all the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="365a45ab-1a3a-4c89-9644-1e0cf2b4b5ce">Creating XML Writers</a>
               </format>
 
@@ -4521,8 +4503,7 @@ language attribute is not specified for the element.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.XmlSpace" />
+            >Gets an <see cref="T:System.Xml.XmlSpace" />
 
             
 

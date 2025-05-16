@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The application creates an <see
-         cref="T:System.Data.Odbc.OdbcTransaction" />
+        >The application creates an <see cref="T:System.Data.Odbc.OdbcTransaction" />
 
         
 
-         object by calling <see
-         cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
+         object by calling <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
 
         
 
-         on the <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         on the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction) are performed on the <see
-         cref="T:System.Data.Odbc.OdbcTransaction" />
+         object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction) are performed on the <see cref="T:System.Data.Odbc.OdbcTransaction" />
 
         
 
@@ -79,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single application may have multiple database connections, each with zero or more transactions. This property lets you determine the connection object associated with a particular transaction created by <see
-             cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
+            >A single application may have multiple database connections, each with zero or more transactions. This property lets you determine the connection object associated with a particular transaction created by <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.Odbc.OdbcConnection" />
+            >Gets the <see cref="T:System.Data.Odbc.OdbcConnection" />
 
             
 
@@ -156,8 +150,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parallel transactions are not supported. Therefore, the <see
-             cref="T:System.Data.IsolationLevel" />
+            >Parallel transactions are not supported. Therefore, the <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -167,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Data.IsolationLevel" />
+            >Specifies the <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -192,13 +184,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transaction can be rolled back only from a pending state (after <see
-             cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
+            >The transaction can be rolled back only from a pending state (after <see cref="M:System.Data.Odbc.OdbcConnection.BeginTransaction" />
 
             
 
-             has been called, but before <see
-             cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
+             has been called, but before <see cref="M:System.Data.Odbc.OdbcTransaction.Commit" />
 
             
 

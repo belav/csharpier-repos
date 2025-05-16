@@ -30,36 +30,30 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Enumerators provide read-only access to the data in the collection. Enumerators cannot be used to modify the underlying collection.</para>
       <para
-        >Initially, the enumerator is positioned before the first element in the collection. The <see
-         cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
+        >Initially, the enumerator is positioned before the first element in the collection. The <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
 
         
 
-         method also brings the enumerator back to this position. At this position, calling the <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
+         method also brings the enumerator back to this position. At this position, calling the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
 
         
 
-         property throws an exception. Therefore, you must call the <see
-         cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.MoveNext" />
+         property throws an exception. Therefore, you must call the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.MoveNext" />
 
         
 
-         method to advance the enumerator to the first element of the collection before reading the value of <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
+         method to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
 
         
 
         .</para
       >
       <para
-        >This class inherits from the <see
-         cref="T:System.Collections.IEnumerator" />
+        >This class inherits from the <see cref="T:System.Collections.IEnumerator" />
 
         
 
-         interface. For more information about enumerating over a collection, see <see
-         cref="T:System.Collections.IEnumerator" />
+         interface. For more information about enumerating over a collection, see <see cref="T:System.Collections.IEnumerator" />
 
         
 
@@ -69,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supports a simple iteration over a <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+        >Supports a simple iteration over a <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
         
 
@@ -106,18 +99,15 @@
 
             
 
-             does not move the position of the enumerator. Consecutive calls to the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
+             does not move the position of the enumerator. Consecutive calls to the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
 
             
 
-             property return the same object until either the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.MoveNext" />
+             property return the same object until either the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
+             or <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
 
             
 
@@ -127,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Gets the current element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -157,8 +146,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method advances the enumerator to the next element in the collection. For more information about enumerating over a collection, see the <see
-             cref="T:System.Collections.IEnumerator" />
+            >This method advances the enumerator to the next element in the collection. For more information about enumerating over a collection, see the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -168,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the enumerator to the next element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Advances the enumerator to the next element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -202,18 +189,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying or deleting elements, the enumerator is irrecoverably invalidated and the next call to the <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
+             or <see cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
 
             
 
-             method throws an <see
-             cref="T:System.InvalidOperationException" />
+             method throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -223,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the enumerator to its initial position, which is before the first element in the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+            >Sets the enumerator to its initial position, which is before the first element in the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
             
 
@@ -255,13 +238,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerator" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -271,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >For a description of this member, see <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -300,13 +280,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerator" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -316,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >For a description of this member, see <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -349,13 +326,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerator" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -365,8 +340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >For a description of this member, see <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 

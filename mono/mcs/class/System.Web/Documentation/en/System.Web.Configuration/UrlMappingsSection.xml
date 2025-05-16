@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.UrlMappingsSection" />
+        >The <see cref="T:System.Web.Configuration.UrlMappingsSection" />
 
         
 
@@ -26,23 +25,19 @@
       >
       <block subset="none" type="note">
         <para
-          >The urlMappings section contains <see
-           cref="T:System.Web.Configuration.UrlMapping" />
+          >The urlMappings section contains <see cref="T:System.Web.Configuration.UrlMapping" />
 
           
 
-           objects that map URLs that are displayed to users to URLs that exist in your Web application. The <see
-           cref="T:System.Web.Configuration.UrlMappingsSection" />
+           objects that map URLs that are displayed to users to URLs that exist in your Web application. The <see cref="T:System.Web.Configuration.UrlMappingsSection" />
 
           
 
-           can write information into the related section of the configuration file according to the restrictions defined by the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can write information into the related section of the configuration file according to the restrictions defined by the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
 
           
 
@@ -65,18 +60,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.UrlMappingsSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.UrlMappingsSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.UrlMappingsSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.UrlMappingsSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -86,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.UrlMappingsSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.UrlMappingsSection" />
 
             
 
@@ -162,8 +153,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each <see
-             cref="T:System.Web.Configuration.UrlMapping" />
+            >Each <see cref="T:System.Web.Configuration.UrlMapping" />
 
             
 
@@ -173,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Web.Configuration.UrlMapping" />
+            >Gets a collection of <see cref="T:System.Web.Configuration.UrlMapping" />
 
             
 

@@ -34,8 +34,7 @@
 
         
 
-         uses three successive iterations of the <see
-         cref="T:System.Security.Cryptography.DES" />
+         uses three successive iterations of the <see cref="T:System.Security.Cryptography.DES" />
 
         
 
@@ -43,18 +42,15 @@
       >
       <block subset="none" type="note">
         <para
-          >A newer symmetric encryption algorithm, Advanced Encryption Standard (AES), is available. Consider using the <see
-           cref="T:System.Security.Cryptography.Aes" />
+          >A newer symmetric encryption algorithm, Advanced Encryption Standard (AES), is available. Consider using the <see cref="T:System.Security.Cryptography.Aes" />
 
           
 
-           class and its derived classes instead of the <see
-           cref="T:System.Security.Cryptography.TripleDES" />
+           class and its derived classes instead of the <see cref="T:System.Security.Cryptography.TripleDES" />
 
           
 
-           class. Use <see
-           cref="T:System.Security.Cryptography.TripleDES" />
+           class. Use <see cref="T:System.Security.Cryptography.TripleDES" />
 
           
 
@@ -66,8 +62,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the base class for Triple Data Encryption Standard algorithms from which all <see
-         cref="T:System.Security.Cryptography.TripleDES" />
+        >Represents the base class for Triple Data Encryption Standard algorithms from which all <see cref="T:System.Security.Cryptography.TripleDES" />
 
         
 
@@ -95,8 +90,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot create an instance of an abstract class. Application code will create a new instance of a derived class.</para>
           <para
-            >This method initializes the protected fields of the <see
-             cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+            >This method initializes the protected fields of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
 
             
 
@@ -148,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
@@ -181,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Creates a new instance of the <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
@@ -192,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a cryptographic object to perform the <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Creates an instance of a cryptographic object to perform the <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
@@ -232,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a cryptographic object to perform the specified implementation of the <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Creates an instance of a cryptographic object to perform the specified implementation of the <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 
@@ -245,12 +235,15 @@
           <para>An instance of a cryptographic object.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the specific implementation of <see
-           cref="T:System.Security.Cryptography.TripleDES" />
+          The name of the specific implementation of <see cref="T:System.Security.Cryptography.TripleDES" />
 
           
 
@@ -281,13 +274,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Weak keys are keys that result in ciphers that are easy to break. If text is encrypted with a weak key, encrypting the resulting cipher again with the same weak key returns the original text. In 128-bit mode, if the first 64 bits are the same as the last 64 bits, the key is weak. In 192-bit mode, if the first 64 bits are the same as the second 64 bits or if the second 64 bits are the same as the last 64 bits, the key is weak.</para>
           <para
-            >Attempting to set a weak key results in a <see
-             cref="T:System.Security.Cryptography.CryptographicException" />
+            >Attempting to set a weak key results in a <see cref="T:System.Security.Cryptography.CryptographicException" />
 
             
 
-            . When <see
-             cref="M:System.Security.Cryptography.TripleDESCryptoServiceProvider.GenerateKey" />
+            . When <see cref="M:System.Security.Cryptography.TripleDESCryptoServiceProvider.GenerateKey" />
 
             
 
@@ -303,7 +294,11 @@
           <para>true if the key is weak; otherwise, false.</para>
         </returns>
         <param name="rgbKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -332,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the secret key for the <see
-             cref="T:System.Security.Cryptography.TripleDES" />
+            >Gets or sets the secret key for the <see cref="T:System.Security.Cryptography.TripleDES" />
 
             
 

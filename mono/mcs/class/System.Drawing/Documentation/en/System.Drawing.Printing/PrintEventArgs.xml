@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -32,13 +31,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
+        >Provides data for the <see cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
 
         
 
-         and <see
-         cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
+         and <see cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
 
         
 
@@ -57,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PrintEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrintEventArgs" />
 
             
 
@@ -88,13 +84,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.Printing.PrintEventArgs.PrintAction" />
+            >The <see cref="P:System.Drawing.Printing.PrintEventArgs.PrintAction" />
 
             
 
-             does not reliably indicate the type of print operation occurring, and returns <see
-             cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
+             does not reliably indicate the type of print operation occurring, and returns <see cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
 
             
 
@@ -104,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
+            >Returns <see cref="F:System.Drawing.Printing.PrintAction.PrintToFile" />
 
             
 

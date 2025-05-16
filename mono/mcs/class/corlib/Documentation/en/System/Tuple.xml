@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A tuple is a data structure that has a specific number and sequence of elements. An example of a tuple is a data structure with three elements (known as a 3-tuple or triple) that is used to store an identifier such as a person's name in the first element, a year in the second element, and the person's income for that year in the third element. The .NET Framework directly supports tuples with one to seven elements. In addition, you can create tuples of eight or more elements by nesting tuple objects in the <see
-         cref="P:System.Tuple`8.Rest" />
+        >A tuple is a data structure that has a specific number and sequence of elements. An example of a tuple is a data structure with three elements (known as a 3-tuple or triple) that is used to store an identifier such as a person's name in the first element, a year in the second element, and the person's income for that year in the third element. The .NET Framework directly supports tuples with one to seven elements. In addition, you can create tuples of eight or more elements by nesting tuple objects in the <see cref="P:System.Tuple`8.Rest" />
 
         
 
-         property of a <see
-         cref="T:System.Tuple`8" />
+         property of a <see cref="T:System.Tuple`8" />
 
         
 
@@ -42,13 +40,11 @@
         </item>
         <item>
           <para
-            >To pass multiple values to a method through a single parameter. For example, the <see
-             cref="M:System.Threading.Thread.Start(System.Object)" />
+            >To pass multiple values to a method through a single parameter. For example, the <see cref="M:System.Threading.Thread.Start(System.Object)" />
 
             
 
-             method has a single parameter that lets you supply one value to the method that the thread executes at startup time. If you supply a <see
-             cref="T:System.Tuple`3" />
+             method has a single parameter that lets you supply one value to the method that the thread executes at startup time. If you supply a <see cref="T:System.Tuple`3" />
 
             
 
@@ -57,8 +53,7 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Tuple" />
+        >The <see cref="T:System.Tuple" />
 
         
 
@@ -69,13 +64,11 @@
       <para>Creating the same tuple object by using a helper method is more straightforward, as the following example shows.</para>
       <para>code reference: System.Tuple.Class#2</para>
       <para
-        >The <see
-         cref="Overload:System.Tuple.Create" />
+        >The <see cref="Overload:System.Tuple.Create" />
 
         
 
-         helper methods directly support the creation of tuple objects that have from one to eight components (that is, singletons through octuples). Although there is no practical limit to the number of components a tuple may have, helper methods are not available to create a tuple with nine or more components. To create such a tuple, you must call the <see
-         cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" />
+         helper methods directly support the creation of tuple objects that have from one to eight components (that is, singletons through octuples). Although there is no practical limit to the number of components a tuple may have, helper methods are not available to create a tuple with nine or more components. To create such a tuple, you must call the <see cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" />
 
         
 

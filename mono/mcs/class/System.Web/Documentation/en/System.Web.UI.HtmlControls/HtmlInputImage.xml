@@ -35,54 +35,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-         control to create a button that displays an image. You can programmatically control the action associated with the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+         control to create a button that displays an image. You can programmatically control the action associated with the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-         control by providing an event handler for the <see
-         cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+         control by providing an event handler for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
         
 
          event.</para
       >
       <para
-        >The coordinates where the user clicks an <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+        >The coordinates where the user clicks an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-         control can be determined by using the <see
-         cref="F:System.Web.UI.ImageClickEventArgs.X" />
+         control can be determined by using the <see cref="F:System.Web.UI.ImageClickEventArgs.X" />
 
         
 
-         and <see
-         cref="F:System.Web.UI.ImageClickEventArgs.Y" />
+         and <see cref="F:System.Web.UI.ImageClickEventArgs.Y" />
 
         
 
-         properties of the <see
-         cref="T:System.Web.UI.ImageClickEventArgs" />
+         properties of the <see cref="T:System.Web.UI.ImageClickEventArgs" />
 
         
 
          object that is passed as a parameter to the user-defined event handler.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlInputImage.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.#ctor" />
 
         
 
@@ -104,16 +95,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
              control.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -145,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -171,13 +159,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Align" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Align" />
 
             
 
-             property to specify the alignment of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             property to specify the alignment of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -187,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alignment of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Gets or sets the alignment of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -221,16 +206,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Alt" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Alt" />
 
             
 
              property to specify the text to display when the specified image is not available or has not been downloaded. You can also use this property to programmatically determine the specified alternative text.</para
           >
           <para
-            >In browsers that support the ToolTip feature, this text also appears as a ToolTip for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >In browsers that support the ToolTip feature, this text also appears as a ToolTip for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -270,13 +253,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Border" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Border" />
 
             
 
-             property to specify the border width for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             property to specify the border width for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -289,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the border width for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Gets or sets the border width for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -323,34 +303,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, page validation is performed when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >By default, page validation is performed when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
-            >You can specify or determine whether validation is performed on both the client and the server when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >You can specify or determine whether validation is performed on both the client and the server when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control is clicked by using the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+             control is clicked by using the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
 
             
 
-             property. To prevent validation from being performed, set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+             property. To prevent validation from being performed, set the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
 
             
 
              property to false.</para
           >
           <para
-            >This property is commonly used in the event handler for the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+            >This property is commonly used in the event handler for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
             
 
@@ -360,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether validation is performed when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Gets or sets a value indicating whether validation is performed when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -402,23 +376,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method checks to see whether coordinates that represent the location where the image was clicked by the user are part of the postback data for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method checks to see whether coordinates that represent the location where the image was clicked by the user are part of the postback data for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control. If coordinates are part of the postback data, then the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             control. If coordinates are part of the postback data, then the <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method registers the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method registers the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -428,13 +398,11 @@
             <para>The origin coordinates (0,0) are located in the upper-left corner of the image.</para>
           </block>
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -444,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes the postback data for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Processes the postback data for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -455,8 +422,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -464,14 +430,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -492,23 +466,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnPreRender(System.EventArgs)" />
 
             
 
-             method is called just prior to rendering the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method is called just prior to rendering the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnPreRender(System.EventArgs)" />
+             control. The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnPreRender(System.EventArgs)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -518,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -527,12 +496,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -560,41 +532,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
             
 
-             event is raised when the user clicks an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             event is raised when the user clicks an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
              control.</para
           >
           <para
-            >The coordinates where the user clicks an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >The coordinates where the user clicks an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control can be determined by using the <see
-             cref="F:System.Web.UI.ImageClickEventArgs.X" />
+             control can be determined by using the <see cref="F:System.Web.UI.ImageClickEventArgs.X" />
 
             
 
-             and <see
-             cref="F:System.Web.UI.ImageClickEventArgs.Y" />
+             and <see cref="F:System.Web.UI.ImageClickEventArgs.Y" />
 
             
 
-             properties of the <see
-             cref="T:System.Web.UI.ImageClickEventArgs" />
+             properties of the <see cref="T:System.Web.UI.ImageClickEventArgs" />
 
             
 
-             object. The <see
-             cref="T:System.Web.UI.ImageClickEventArgs" />
+             object. The <see cref="T:System.Web.UI.ImageClickEventArgs" />
 
             
 
@@ -604,8 +569,7 @@
             <para>The origin (0, 0) is located at the upper-left corner of the image.</para>
           </block>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -614,8 +578,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnServerClick(System.Web.UI.ImageClickEventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnServerClick(System.Web.UI.ImageClickEventArgs)" />
 
             
 
@@ -625,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+            >Raises the <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
             
 
@@ -634,12 +596,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.ImageClickEventArgs" />
+          An <see cref="T:System.Web.UI.ImageClickEventArgs" />
 
           
 
@@ -670,44 +635,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostBackEvent(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostBackEvent(System.String)" />
 
             
 
-             method is used by the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method is used by the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control, when it is clicked, to raise a <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+             control, when it is clicked, to raise a <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
             
 
              event.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+            >If the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
 
             
 
-             property is true; the <see
-             cref="M:System.Web.UI.Page.Validate(System.String)" />
+             property is true; the <see cref="M:System.Web.UI.Page.Validate(System.String)" />
 
             
 
-             method is called using the group of controls specified in the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
+             method is called using the group of controls specified in the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
 
             
 
              property. </para
           >
           <para
-            >This method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >This method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -717,8 +675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises events for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Raises events for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -726,7 +683,11 @@
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -748,31 +709,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
 
             
 
-             method does not participate in the processing of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method does not participate in the processing of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control and is included to complete the <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             control and is included to complete the <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
              interface implementation. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -782,8 +738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Notifies the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -808,51 +763,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method resolves the URL set in the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
+             method resolves the URL set in the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
 
             
 
-             property, writes the onclick attribute of the rendered <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             property, writes the onclick attribute of the rendered <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control if the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+             control if the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
 
             
 
-             property is true, and finally calls the base <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             property is true, and finally calls the base <see cref="M:System.Web.UI.HtmlControls.HtmlInputControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method. If the value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
+             method. If the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
 
             
 
-             property is a malformed URL, an <see
-             cref="T:System.Web.HttpException" />
+             property is a malformed URL, an <see cref="T:System.Web.HttpException" />
 
             
 
              exception is thrown.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -862,13 +808,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control's attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -876,12 +820,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -907,21 +854,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
 
             
 
-             event is raised when the user clicks an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             event is raised when the user clicks an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
              control.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -933,8 +877,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs on the server when the user clicks an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Occurs on the server when the user clicks an <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -959,26 +902,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
 
             
 
-             property to specify the location of the image to display in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             property to specify the location of the image to display in the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control. If the image is not available, the text specified in the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Alt" />
+             control. If the image is not available, the text specified in the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Alt" />
 
             
 
              property is displayed.</para
           >
           <para
-            >You can use a relative or absolute URL. A relative URL relates the location of the image to the location of the Web page without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the image in code. You can use the relative path " ~/ " to refer to the current virtual directory where the page is located. For example, the value of <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
+            >You can use a relative or absolute URL. A relative URL relates the location of the image to the location of the Web page without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the image in code. You can use the relative path " ~/ " to refer to the current virtual directory where the page is located. For example, the value of <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
 
             
 
@@ -1031,13 +970,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             interface method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             interface method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -1047,8 +984,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >true if the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -1056,14 +992,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1090,13 +1034,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
-             interface method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
+             interface method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
 
             
 
@@ -1126,8 +1068,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Enables the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
@@ -1135,7 +1076,11 @@
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1162,36 +1107,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently from other validation groups on the page. Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
+            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently from other validation groups on the page. Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             property to specify the name of the validation group for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
              control causes validation when it posts back to the server. </para
           >
           <para
-            >This property has an effect only when the value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+            >This property has an effect only when the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
 
             
 
-             property is set to true. When you specify a value for the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
+             property is set to true. When you specify a value for the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
 
             
 
-             property, only the validation controls that are part of the specified group are validated when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+             property, only the validation controls that are part of the specified group are validated when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 
-             control posts back to the server. If you do not specify a value for this property and the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+             control posts back to the server. If you do not specify a value for this property and the <see cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
 
             
 
@@ -1201,8 +1140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
             
 

@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is like an extension to the <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.SubjectName" />
+        >This class is like an extension to the <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.SubjectName" />
 
         
 
-         or <see
-         cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.IssuerName" />
+         or <see cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2.IssuerName" />
 
         
 
@@ -130,13 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class inherits from the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class inherits from the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -146,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
@@ -155,7 +150,11 @@
           >
         </summary>
         <param name="encodedDistinguishedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,13 +187,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class inherits from the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class inherits from the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -204,13 +201,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class using the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -218,12 +213,15 @@
           >
         </summary>
         <param name="encodedDistinguishedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          An <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -256,18 +254,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a copy of the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >This constructor creates a copy of the specified <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             object. The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+             object. The <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class inherits from the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class inherits from the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -277,13 +272,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+             class using the specified <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
@@ -291,12 +284,15 @@
           >
         </summary>
         <param name="distinguishedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
           
 
@@ -326,13 +322,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class inherits from the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class inherits from the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -342,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
@@ -351,7 +344,11 @@
           >
         </summary>
         <param name="distinguishedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -385,13 +382,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >The <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class inherits from the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class inherits from the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -401,13 +396,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedName" />
 
             
 
-             class using the specified string and <see
-             cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags" />
+             class using the specified string and <see cref="T:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags" />
 
             
 
@@ -415,14 +408,22 @@
           >
         </summary>
         <param name="distinguishedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that represents the distinguished name.</param
         >
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -462,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Decodes a distinguished name using the characteristics specified by the <paramref
-             name="flag" />
+            >Decodes a distinguished name using the characteristics specified by the <paramref name="flag" />
 
             
 
@@ -475,7 +475,11 @@
           <para>The decoded distinguished name.</para>
         </returns>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -505,8 +509,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to print Abstract Syntax Notation number One (ASN.1)-encoded data or output the information to a text box. Use the <paramref
-             name="multiLine" />
+            >Use this method to print Abstract Syntax Notation number One (ASN.1)-encoded data or output the information to a text box. Use the <paramref name="multiLine" />
 
             
 
@@ -522,7 +525,11 @@
           <para>A formatted string that represents the X500 distinguished name.</para>
         </returns>
         <param name="multiLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

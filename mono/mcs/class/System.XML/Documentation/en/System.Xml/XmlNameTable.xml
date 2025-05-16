@@ -30,8 +30,7 @@
   <Docs>
     <example>
       <para
-        >See the <see
-         cref="T:System.Xml.NameTable" />
+        >See the <see cref="T:System.Xml.NameTable" />
 
         
 
@@ -42,13 +41,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Several classes, such as <see
-         cref="T:System.Xml.XmlDocument" />
+        >Several classes, such as <see cref="T:System.Xml.XmlDocument" />
 
         
 
-         and <see
-         cref="T:System.Xml.XmlReader" />
+         and <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -56,8 +53,7 @@
       >
       <para>The names are stored as common language runtime (CLR) object types. This enables you to do object comparisons on these strings rather than a more expensive string comparison. These string objects are referred to as  atomized strings.</para>
       <para
-        >XmlNameTable is implemented in the <see
-         cref="T:System.Xml.NameTable" />
+        >XmlNameTable is implemented in the <see cref="T:System.Xml.NameTable" />
 
         
 
@@ -90,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -129,8 +124,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -139,8 +133,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -156,7 +149,11 @@
           <para>The new atomized string or the existing one if it already exists.</para>
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -194,21 +191,18 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.IndexOutOfRangeException">
-          <para>
-            <paramref name="offset" />
+          <para><paramref name="offset" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>- or -</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt;= <paramref
-             name="array" />
+             &gt;= <paramref name="array" />
 
             
 
@@ -220,21 +214,18 @@
 
             
 
-             &gt; <paramref
-             name="array" />
+             &gt; <paramref name="array" />
 
             
 
-            .Length - <paramref
-             name="offset" />
+            .Length - <paramref name="offset" />
 
             
 
             .</para
           >
           <para
-            >The above conditions do not cause an exception to be thrown if <paramref
-             name="length" />
+            >The above conditions do not cause an exception to be thrown if <paramref name="length" />
 
             
 
@@ -251,8 +242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -268,21 +258,33 @@
           <para>The new atomized string or the existing one if it already exists. If length is zero, String.Empty is returned.</para>
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array containing the name to add. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Zero-based index into the array specifying the first character of the name. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -319,8 +321,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -329,8 +330,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -346,7 +346,11 @@
           <para>The atomized string or null if the string has not already been atomized.</para>
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -388,15 +392,13 @@
 
           
 
-           &lt; 0. <para
-          >- or -</para>
+           &lt; 0. <para>- or -</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt;= <paramref
-             name="array" />
+             &gt;= <paramref name="array" />
 
             
 
@@ -408,21 +410,18 @@
 
             
 
-             &gt; <paramref
-             name="array" />
+             &gt; <paramref name="array" />
 
             
 
-            .Length - <paramref
-             name="offset" />
+            .Length - <paramref name="offset" />
 
             
 
             .</para
           >
           <para
-            >The above conditions do not cause an exception to be thrown if <paramref
-             name="length" />
+            >The above conditions do not cause an exception to be thrown if <paramref name="length" />
 
             
 
@@ -439,8 +438,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -454,8 +452,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The atomized string or null if the string has not already been atomized. If <paramref
-             name="length" />
+            >The atomized string or null if the string has not already been atomized. If <paramref name="length" />
 
             
 
@@ -463,21 +460,33 @@
           >
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array containing the name to look up. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index into the array specifying the first character of the name. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

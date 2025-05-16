@@ -36,13 +36,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When an instance of <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+        >When an instance of <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
-         is created, the read/write properties are set to their initial values. For a list of these values, see the <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+         is created, the read/write properties are set to their initial values. For a list of these values, see the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
@@ -74,18 +72,15 @@
           </term>
           <description>
             <para
-              >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-               cref="T:System.Data.SqlClient.SqlCommand" />
+              >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
               
 
-              , generally executing commands such as INSERT, DELETE, UPDATE, and SET statements. Each call to <see
-               cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+              , generally executing commands such as INSERT, DELETE, UPDATE, and SET statements. Each call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
               
 
-               must be paired with a call to <see
-               cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+               must be paired with a call to <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
               
 
@@ -101,18 +96,15 @@
           </term>
           <description>
             <para
-              >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-               cref="T:System.Data.SqlClient.SqlCommand" />
+              >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
               
 
-               and retrieves one or more results sets from the server. Each call to <see
-               cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+               and retrieves one or more results sets from the server. Each call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
               
 
-               must be paired with a call to <see
-               cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+               must be paired with a call to <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
               
 
@@ -128,13 +120,11 @@
           </term>
           <description>
             <para
-              >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-               cref="T:System.Data.SqlClient.SqlCommand" />
+              >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
               
 
-              . Each call to BeginExecuteXmlReader must be paired with a call to EndExecuteXmlReader, which finishes the operation, typically on a separate thread, and returns an <see
-               cref="T:System.Xml.XmlReader" />
+              . Each call to BeginExecuteXmlReader must be paired with a call to EndExecuteXmlReader, which finishes the operation, typically on a separate thread, and returns an <see cref="T:System.Xml.XmlReader" />
 
               
 
@@ -150,13 +140,11 @@
           </term>
           <description>
             <para
-              >Executes commands that return rows. For increased performance, <see
-               cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+              >Executes commands that return rows. For increased performance, <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
               
 
-               invokes commands using the Transact-SQL sp_executesql system stored procedure. Therefore, <see
-               cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+               invokes commands using the Transact-SQL sp_executesql system stored procedure. Therefore, <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
               
 
@@ -192,18 +180,15 @@
           </term>
           <description>
             <para
-              >Sends the <see
-               cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+              >Sends the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
               
 
-               to the <see
-               cref="P:System.Data.SqlClient.SqlCommand.Connection" />
+               to the <see cref="P:System.Data.SqlClient.SqlCommand.Connection" />
 
               
 
-               and builds an <see
-               cref="T:System.Xml.XmlReader" />
+               and builds an <see cref="T:System.Xml.XmlReader" />
 
               
 
@@ -213,41 +198,34 @@
         </item>
       </list>
       <para
-        >You can reset the <see
-         cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+        >You can reset the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
         
 
-         property and reuse the <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+         property and reuse the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
-         object. However, you must close the <see
-         cref="T:System.Data.SqlClient.SqlDataReader" />
+         object. However, you must close the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
         
 
          before you can execute a new or previous command.</para
       >
       <para
-        >If a <see
-         cref="T:System.Data.SqlClient.SqlException" />
+        >If a <see cref="T:System.Data.SqlClient.SqlException" />
 
         
 
-         is generated by the method executing a <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+         is generated by the method executing a <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
-        , the <see
-         cref="T:System.Data.SqlClient.SqlConnection" />
+        , the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
         
 
-         remains open when the severity level is 19 or less. When the severity level is 20 or greater, the server ordinarily closes the <see
-         cref="T:System.Data.SqlClient.SqlConnection" />
+         remains open when the severity level is 19 or less. When the severity level is 20 or greater, the server ordinarily closes the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
         
 
@@ -272,8 +250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The base constructor initializes all fields to their default values. The following table shows initial property values for an instance of <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >The base constructor initializes all fields to their default values. The following table shows initial property values for an instance of <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -336,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -361,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an instance of <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >When an instance of <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -427,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -436,7 +410,11 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -463,8 +441,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -521,13 +498,11 @@
               </term>
               <description>
                 <para
-                  >A new <see
-                   cref="T:System.Data.SqlClient.SqlConnection" />
+                  >A new <see cref="T:System.Data.SqlClient.SqlConnection" />
 
                   
 
-                   that is the value for the <paramref
-                   name="connection" />
+                   that is the value for the <paramref name="connection" />
 
                   
 
@@ -541,13 +516,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             class with the text of the query and a <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             class with the text of the query and a <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
@@ -555,19 +528,26 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the query. </param
         >
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlClient.SqlConnection" />
+          A <see cref="T:System.Data.SqlClient.SqlConnection" />
 
           
 
@@ -595,8 +575,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -653,13 +632,11 @@
               </term>
               <description>
                 <para
-                  >A new <see
-                   cref="T:System.Data.SqlClient.SqlConnection" />
+                  >A new <see cref="T:System.Data.SqlClient.SqlConnection" />
 
                   
 
-                   that is the value for the <paramref
-                   name="connection" />
+                   that is the value for the <paramref name="connection" />
 
                   
 
@@ -673,18 +650,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             class with the text of the query, a <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             class with the text of the query, a <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-            , and the <see
-             cref="T:System.Data.SqlClient.SqlTransaction" />
+            , and the <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
             
 
@@ -692,36 +666,45 @@
           >
         </summary>
         <param name="cmdText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the query. </param
         >
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlClient.SqlConnection" />
+          A <see cref="T:System.Data.SqlClient.SqlConnection" />
 
           
 
            that represents the connection to an instance of SQL Server. </param
         >
         <param name="transaction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlClient.SqlTransaction" />
+          The <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
           
 
-           in which the <see
-           cref="T:System.Data.SqlClient.SqlCommand" />
+           in which the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
           
 
@@ -747,48 +730,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method starts the process of asynchronously executing a tsql statement or stored procedure that does not return rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a tsql statement or stored procedure that does not return rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             method to finish the operation. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             method to finish the operation. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method returns immediately (<see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
+             method returns immediately (<see cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
 
             
 
-             has no effect on <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             has no effect on <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-            ), but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+            ), but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -796,28 +770,23 @@
           >
           <para>Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous.</para>
           <para
-            >Because this overload does not support a callback procedure, developers must either poll to determine whether the command has completed, using the <see
-             cref="P:System.IAsyncResult.IsCompleted" />
+            >Because this overload does not support a callback procedure, developers must either poll to determine whether the command has completed, using the <see cref="P:System.IAsyncResult.IsCompleted" />
 
             
 
-             property of the <see
-             cref="T:System.IAsyncResult" />
+             property of the <see cref="T:System.IAsyncResult" />
 
             
 
-             returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method; or wait for the completion of one or more commands using the <see
-             cref="P:System.IAsyncResult.AsyncWaitHandle" />
+             method; or wait for the completion of one or more commands using the <see cref="P:System.IAsyncResult.AsyncWaitHandle" />
 
             
 
-             property of the returned <see
-             cref="T:System.IAsyncResult" />
+             property of the returned <see cref="T:System.IAsyncResult" />
 
             
 
@@ -827,8 +796,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -838,13 +806,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll or wait for results, or both; this value is also needed when invoking <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             that can be used to poll or wait for results, or both; this value is also needed when invoking <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
@@ -873,76 +839,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that does not return rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that does not return rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             method to finish the operation. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             method to finish the operation. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method returns immediately (<see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
+             method returns immediately (<see cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
 
             
 
-             has no effect on <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery(System.AsyncCallback,System.Object)" />
+             has no effect on <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery(System.AsyncCallback,System.Object)" />
 
             
 
-            ), but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+            ), but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >The <paramref
-             name="callback" />
+            >The <paramref name="callback" />
 
             
 
-             parameter lets you specify an <see
-             cref="T:System.AsyncCallback" />
+             parameter lets you specify an <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate that is called when the statement has completed. You can call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             delegate that is called when the statement has completed. You can call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref
-             name="asyncStateObject" />
+             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref name="asyncStateObject" />
 
             
 
-             parameter, and your callback procedure can retrieve this information using the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+             parameter, and your callback procedure can retrieve this information using the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
@@ -955,8 +907,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -966,13 +917,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll or wait for results, or both; this value is also needed when invoking <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             that can be used to poll or wait for results, or both; this value is also needed when invoking <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
@@ -980,24 +929,30 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that is invoked when the command's execution has completed. Pass null (Nothing in Microsoft Visual Basic) to indicate that no callback is required.</param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see
-           cref="P:System.IAsyncResult.AsyncState" />
+          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see cref="P:System.IAsyncResult.AsyncState" />
 
           
 
@@ -1019,102 +974,84 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method to finish the operation and retrieve the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             method to finish the operation and retrieve the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             returned by the command. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             returned by the command. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method returns immediately, but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method returns immediately, but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
             
 
              may block if more data is required and the underlying network's read operation blocks.</para
           >
           <para
-            >Because this overload does not support a callback procedure, developers must either poll to determine whether the command has completed, using the <see
-             cref="P:System.IAsyncResult.IsCompleted" />
+            >Because this overload does not support a callback procedure, developers must either poll to determine whether the command has completed, using the <see cref="P:System.IAsyncResult.IsCompleted" />
 
             
 
-             property of the <see
-             cref="T:System.IAsyncResult" />
+             property of the <see cref="T:System.IAsyncResult" />
 
             
 
-             returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method; or wait for the completion of one or more commands using the <see
-             cref="P:System.IAsyncResult.AsyncWaitHandle" />
+             method; or wait for the completion of one or more commands using the <see cref="P:System.IAsyncResult.AsyncWaitHandle" />
 
             
 
-             property of the returned <see
-             cref="T:System.IAsyncResult" />
+             property of the returned <see cref="T:System.IAsyncResult" />
 
             
 
             .</para
           >
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -1124,8 +1061,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -1135,18 +1071,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll or wait for results, or both; this value is also needed when invoking <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             that can be used to poll or wait for results, or both; this value is also needed when invoking <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-            , which returns a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , which returns a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -1174,115 +1107,95 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method to finish the operation and retrieve the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             method to finish the operation and retrieve the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             returned by the command. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             returned by the command. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method returns immediately, but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method returns immediately, but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >The <paramref
-             name="behavior" />
+            >The <paramref name="behavior" />
 
             
 
-             parameter lets you specify options that control the behavior of the command and its connection. These values can be combined together (using the programming language's OR operator); generally, developers use the CommandBehavior.CloseConnection value to make sure that the connection is closed by the runtime when the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             parameter lets you specify options that control the behavior of the command and its connection. These values can be combined together (using the programming language's OR operator); generally, developers use the CommandBehavior.CloseConnection value to make sure that the connection is closed by the runtime when the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
              is closed. </para
           >
           <para
-            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
             
 
              may block if more data is required and the underlying network's read operation blocks.</para
           >
           <para
-            >Because this overload does not support a callback procedure, developers must either poll to determine whether the command has completed, using the <see
-             cref="P:System.IAsyncResult.IsCompleted" />
+            >Because this overload does not support a callback procedure, developers must either poll to determine whether the command has completed, using the <see cref="P:System.IAsyncResult.IsCompleted" />
 
             
 
-             property of the <see
-             cref="T:System.IAsyncResult" />
+             property of the <see cref="T:System.IAsyncResult" />
 
             
 
-             returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method; or wait for the completion of one or more commands using the <see
-             cref="P:System.IAsyncResult.AsyncWaitHandle" />
+             method; or wait for the completion of one or more commands using the <see cref="P:System.IAsyncResult.AsyncWaitHandle" />
 
             
 
-             property of the returned <see
-             cref="T:System.IAsyncResult" />
+             property of the returned <see cref="T:System.IAsyncResult" />
 
             
 
             .</para
           >
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server returns any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server returns any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -1292,13 +1205,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             using one of the <see
-             cref="T:System.Data.CommandBehavior" />
+             using one of the <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -1308,18 +1219,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll, wait for results, or both; this value is also needed when invoking <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             that can be used to poll, wait for results, or both; this value is also needed when invoking <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-            , which returns a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , which returns a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -1327,12 +1235,15 @@
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -1360,79 +1271,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method to finish the operation and retrieve the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             method to finish the operation and retrieve the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             returned by the command. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             returned by the command. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method returns immediately, but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method returns immediately, but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed cause the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed cause the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >The <paramref
-             name="callback" />
+            >The <paramref name="callback" />
 
             
 
-             parameter lets you specify an <see
-             cref="T:System.AsyncCallback" />
+             parameter lets you specify an <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate that is called when the statement has completed. You can call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             delegate that is called when the statement has completed. You can call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref
-             name="stateObject" />
+             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref name="stateObject" />
 
             
 
-             parameter, and your callback procedure can retrieve this information using the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+             parameter, and your callback procedure can retrieve this information using the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
              property.</para
           >
           <para
-            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
             
 
@@ -1441,23 +1338,19 @@
           <para>Because the callback procedure executes from within a background thread supplied by the Microsoft .NET runtime, it is very important that you take a rigorous approach to handling cross-thread interactions from within your applications. For example, you must not interact with a form's contents from within your callback procedure; should you have to update the form, you must switch back to the form's thread in order to do your work. The example in this topic demonstrates this behavior.</para>
           <para>All errors that occur during the execution of the operation are thrown as exceptions in the callback procedure. You must handle the exception in the callback procedure, not in the main application. See the example in this topic for additional information on handling exceptions in the callback procedure.</para>
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server returns any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server returns any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -1467,8 +1360,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -1478,18 +1370,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll, wait for results, or both; this value is also needed when invoking <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             that can be used to poll, wait for results, or both; this value is also needed when invoking <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-            , which returns a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , which returns a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -1497,24 +1386,30 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that is invoked when the command's execution has completed. Pass null (Nothing in Microsoft Visual Basic) to indicate that no callback is required.</param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see
-           cref="P:System.IAsyncResult.AsyncState" />
+          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see cref="P:System.IAsyncResult.AsyncState" />
 
           
 
@@ -1543,97 +1438,80 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method to finish the operation and retrieve the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             method to finish the operation and retrieve the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             returned by the command. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             returned by the command. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method returns immediately, but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             method returns immediately, but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >The <paramref
-             name="callback" />
+            >The <paramref name="callback" />
 
             
 
-             parameter lets you specify an <see
-             cref="T:System.AsyncCallback" />
+             parameter lets you specify an <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate that is called when the statement has completed. You can call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             delegate that is called when the statement has completed. You can call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref
-             name="stateObject" />
+             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref name="stateObject" />
 
             
 
-             parameter, and your callback procedure can retrieve this information using the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+             parameter, and your callback procedure can retrieve this information using the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
              property.</para
           >
           <para
-            >The <paramref
-             name="behavior" />
+            >The <paramref name="behavior" />
 
             
 
-             parameter lets you specify options that control the behavior of the command and its connection. These values can be combined together (using the programming language's Or operator); generally, developers use the CloseConnection value to make sure that the connection is closed by the runtime when the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             parameter lets you specify options that control the behavior of the command and its connection. These values can be combined together (using the programming language's Or operator); generally, developers use the CloseConnection value to make sure that the connection is closed by the runtime when the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             is closed. Developers can also optimize the behavior of the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             is closed. Developers can also optimize the behavior of the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
              by specifying the SingleRow value when it is known in advance that the Transact-SQL statement or stored procedure only returns a single row.</para
           >
           <para
-            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+            >Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous. This means that calls to <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
             
 
@@ -1642,23 +1520,19 @@
           <para>Because the callback procedure executes from within a background thread supplied by the Microsoft .NET common language runtime, it is very important that you take a rigorous approach to handling cross-thread interactions from within your applications. For example, you must not interact with a form's contents from within your callback procedure--should you have to update the form, you must switch back to the form's thread in order to do your work. The example in this topic demonstrates this behavior.</para>
           <para>All errors that occur during the execution of the operation are thrown as exceptions in the callback procedure. You must handle the exception in the callback procedure, not in the main application. See the example in this topic for additional information on handling exceptions in the callback procedure.</para>
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -1668,8 +1542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -1679,18 +1552,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll or wait for results, or both; this value is also needed when invoking <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             that can be used to poll or wait for results, or both; this value is also needed when invoking <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-            , which returns a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , which returns a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -1698,36 +1568,45 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that is invoked when the command's execution has completed. Pass null (Nothing in Microsoft Visual Basic) to indicate that no callback is required.</param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see
-           cref="P:System.IAsyncResult.AsyncState" />
+          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see cref="P:System.IAsyncResult.AsyncState" />
 
           
 
            property.</param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -1749,39 +1628,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement that returns rows as XML, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the EndExecuteXmlReader method to finish the operation and retrieve the XML returned by the command. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             method starts the process of asynchronously executing a Transact-SQL statement that returns rows as XML, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the EndExecuteXmlReader method to finish the operation and retrieve the XML returned by the command. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             method returns immediately, but until the code executes the corresponding EndExecuteXmlReader method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method returns immediately, but until the code executes the corresponding EndExecuteXmlReader method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the EndExecuteXmlReader before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             object. Calling the EndExecuteXmlReader before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >The <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
              property ordinarily specifies a Transact-SQL statement with a valid FOR XML clause. However, CommandText can also specify a statement that returns ntext data that contains valid XML.</para
           >
           <para
-            >A typical <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader(System.AsyncCallback,System.Object)" />
+            >A typical <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader(System.AsyncCallback,System.Object)" />
 
             
 
@@ -1789,8 +1662,7 @@
           >
           <code>SqlCommand command = new SqlCommand("SELECT ContactID, FirstName, LastName FROM dbo.Contact FOR XML AUTO, XMLDATA", SqlConn);</code>
           <para
-            >This method can also be used to retrieve a single-row, single-column result set. In this case, if more than one row is returned, the EndExecuteXmlReader method attaches the <see
-             cref="T:System.Xml.XmlReader" />
+            >This method can also be used to retrieve a single-row, single-column result set. In this case, if more than one row is returned, the EndExecuteXmlReader method attaches the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1799,51 +1671,42 @@
           <para>The multiple active result set (MARS) feature lets multiple actions use the same connection.</para>
           <para>Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters are sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. Although command execution is asynchronous, value fetching is still synchronous.</para>
           <para
-            >Because this overload does not support a callback procedure, developers need to either poll to determine whether the command has completed, using the <see
-             cref="P:System.IAsyncResult.IsCompleted" />
+            >Because this overload does not support a callback procedure, developers need to either poll to determine whether the command has completed, using the <see cref="P:System.IAsyncResult.IsCompleted" />
 
             
 
-             property of the <see
-             cref="T:System.IAsyncResult" />
+             property of the <see cref="T:System.IAsyncResult" />
 
             
 
-             returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             method; or wait for the completion of one or more commands using the <see
-             cref="P:System.IAsyncResult.AsyncWaitHandle" />
+             method; or wait for the completion of one or more commands using the <see cref="P:System.IAsyncResult.AsyncWaitHandle" />
 
             
 
-             property of the returned <see
-             cref="T:System.IAsyncResult" />
+             property of the returned <see cref="T:System.IAsyncResult" />
 
             
 
             .</para
           >
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server returns any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server returns any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -1853,13 +1716,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             and returns results as an <see
-             cref="T:System.Xml.XmlReader" />
+             and returns results as an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1869,8 +1730,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -1899,64 +1759,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows as XML, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             method starts the process of asynchronously executing a Transact-SQL statement or stored procedure that returns rows as XML, so that other tasks can run concurrently while the statement is executing. When the statement has completed, developers must call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             method to finish the operation and retrieve the requested XML data. The <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             method to finish the operation and retrieve the requested XML data. The <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             method returns immediately, but until the code executes the corresponding <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             method returns immediately, but until the code executes the corresponding <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             method call, it must not execute any other calls that start a synchronous or asynchronous execution against the same <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             object. Calling the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             before the command's execution is completed causes the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             before the command's execution is completed causes the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
              object to block until the execution is finished.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >The <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             property ordinarily specifies a Transact-SQL statement with a valid FOR XML clause. However, CommandText can also specify a statement that returns data that contains valid XML. This method can also be used to retrieve a single-row, single-column result set. In this case, if more than one row is returned, the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             property ordinarily specifies a Transact-SQL statement with a valid FOR XML clause. However, CommandText can also specify a statement that returns data that contains valid XML. This method can also be used to retrieve a single-row, single-column result set. In this case, if more than one row is returned, the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             method attaches the <see
-             cref="T:System.Xml.XmlReader" />
+             method attaches the <see cref="T:System.Xml.XmlReader" />
 
             
 
              to the value on the first row, and discards the rest of the result set.</para
           >
           <para
-            >A typical <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader(System.AsyncCallback,System.Object)" />
+            >A typical <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader(System.AsyncCallback,System.Object)" />
 
             
 
@@ -1964,13 +1813,11 @@
           >
           <code>SqlCommand command = new SqlCommand("SELECT ContactID, FirstName, LastName FROM Contact FOR XML AUTO, XMLDATA", SqlConn);</code>
           <para
-            >This method can also be used to retrieve a single-row, single-column result set. In this case, if more than one row is returned, the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+            >This method can also be used to retrieve a single-row, single-column result set. In this case, if more than one row is returned, the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             method attaches the <see
-             cref="T:System.Xml.XmlReader" />
+             method attaches the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1978,28 +1825,23 @@
           >
           <para>The multiple active result set (MARS) feature lets multiple actions use the same connection.</para>
           <para
-            >The <paramref
-             name="callback" />
+            >The <paramref name="callback" />
 
             
 
-             parameter lets you specify an <see
-             cref="T:System.AsyncCallback" />
+             parameter lets you specify an <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate that is called when the statement has completed. You can call the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             delegate that is called when the statement has completed. You can call the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref
-             name="stateObject" />
+             method from within this delegate procedure, or from any other location within your application. In addition, you can pass any object in the <paramref name="stateObject" />
 
             
 
-             parameter, and your callback procedure can retrieve this information using the <see
-             cref="P:System.IAsyncResult.AsyncState" />
+             parameter, and your callback procedure can retrieve this information using the <see cref="P:System.IAsyncResult.AsyncState" />
 
             
 
@@ -2008,23 +1850,19 @@
           <para>Note that the command text and parameters are sent to the server synchronously. If a large command or many parameters is sent, this method may block during writes. After the command is sent, the method returns immediately without waiting for an answer from the server--that is, reads are asynchronous. </para>
           <para>All errors that occur during the execution of the operation are thrown as exceptions in the callback procedure. You must handle the exception in the callback procedure, not in the main application. See the example in this topic for additional information on handling exceptions in the callback procedure.</para>
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -2034,13 +1872,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Initiates the asynchronous execution of the Transact-SQL statement or stored procedure that is described by this <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             and returns results as an <see
-             cref="T:System.Xml.XmlReader" />
+             and returns results as an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -2050,13 +1886,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
-             that can be used to poll, wait for results, or both; this value is also needed when the <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             that can be used to poll, wait for results, or both; this value is also needed when the <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
@@ -2064,24 +1898,30 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that is invoked when the command's execution has completed. Pass null (Nothing in Microsoft Visual Basic) to indicate that no callback is required.</param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see
-           cref="P:System.IAsyncResult.AsyncState" />
+          A user-defined state object that is passed to the callback procedure. Retrieve this object from within the callback procedure using the <see cref="P:System.IAsyncResult.AsyncState" />
 
           
 
@@ -2101,33 +1941,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If there is nothing to cancel, nothing occurs. However, if there is a command in process, and the attempt to cancel fails, no exception is generated. </para>
           <para
-            >In some, rare, cases, if you call <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >In some, rare, cases, if you call <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             then call <see
-             cref="M:System.Data.SqlClient.SqlDataReader.Close" />
+             then call <see cref="M:System.Data.SqlClient.SqlDataReader.Close" />
 
             
 
-             (implicitily or explicitly) before calling <see
-             cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
+             (implicitily or explicitly) before calling <see cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
 
             
 
-            , and then call <see
-             cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
+            , and then call <see cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
 
             
 
-            , the cancel command will not be sent to SQL Server and the result set can continue to stream after you call <see
-             cref="M:System.Data.SqlClient.SqlConnection.Close" />
+            , the cancel command will not be sent to SQL Server and the result set can continue to stream after you call <see cref="M:System.Data.SqlClient.SqlConnection.Close" />
 
             
 
-            . To avoid this, make sure that you call <see
-             cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
+            . To avoid this, make sure that you call <see cref="M:System.Data.SqlClient.SqlCommand.Cancel" />
 
             
 
@@ -2137,8 +1971,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tries to cancel the execution of a <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Tries to cancel the execution of a <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -2166,8 +1999,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Creates a new <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -2177,8 +2009,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >A new <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -2199,13 +2030,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
+            >When the <see cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
 
             
 
-             property is set to StoredProcedure, the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+             property is set to StoredProcedure, the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
@@ -2214,8 +2043,7 @@
           <para>The Microsoft .NET Framework Data Provider for SQL Server does not support the question mark (?) placeholder for passing parameters to a Transact-SQL statement or a stored procedure called by a command of CommandType.Text. In this case, named parameters must be used. For example: </para>
           <code> SELECT * FROM dbo.Customers WHERE CustomerID = @CustomerID</code>
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
                 >Using Stored Procedures with a Command</a
               >
@@ -2261,13 +2089,11 @@
           <para>A value of 0 indicates no limit (an attempt to execute a command will wait indefinitely).</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
+              >The <see cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
 
               
 
-               property will be ignored during asynchronous method calls such as <see
-               cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+               property will be ignored during asynchronous method calls such as <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
               
 
@@ -2279,8 +2105,7 @@
 
             
 
-             has no effect when the command is executed against a context connection (a <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             has no effect when the command is executed against a context connection (a <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
@@ -2289,13 +2114,11 @@
           <block subset="none" type="note">
             <para>This property is the cumulative time-out (for all network packets that are read during the invocation of a method) for all network reads during command execution or processing of the results. A time-out can still occur after the first row is returned, and does not include user processing time, only network read time.</para>
             <para
-              >For example, with a 30 second time out, if <see
-               cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+              >For example, with a 30 second time out, if <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
               
 
-               requires two network packets, then it has 30 seconds to read both network packets. If you call <see
-               cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+               requires two network packets, then it has 30 seconds to read both network packets. If you call <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
               
 
@@ -2352,26 +2175,22 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
+            >When you set the <see cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
 
             
 
-             property to StoredProcedure, you should set the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+             property to StoredProcedure, you should set the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
              property to the name of the stored procedure. The command executes this stored procedure when you call one of the Execute methods.</para
           >
           <para
-            >The Microsoft .NET Framework Data Provider for SQL Server does not support the question mark (?) placeholder for passing parameters to a SQL Statement or a stored procedure called with a <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
+            >The Microsoft .NET Framework Data Provider for SQL Server does not support the question mark (?) placeholder for passing parameters to a SQL Statement or a stored procedure called with a <see cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
 
             
 
-             of <see
-             cref="F:System.Data.CommandType.Text" />
+             of <see cref="F:System.Data.CommandType.Text" />
 
             
 
@@ -2379,8 +2198,7 @@ public class A {
           >
           <para>SELECT * FROM Customers WHERE CustomerID = @CustomerID </para>
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
                 >Using Stored Procedures with a Command</a
               >
@@ -2394,8 +2212,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating how the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >Gets or sets a value indicating how the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
@@ -2431,21 +2248,18 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the command is enlisted in an existing transaction, and the connection is changed, trying to execute the command will throw an <see
-             cref="T:System.InvalidOperationException" />
+            >If the command is enlisted in an existing transaction, and the connection is changed, trying to execute the command will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Transaction" />
+            >If the <see cref="P:System.Data.SqlClient.SqlCommand.Transaction" />
 
             
 
-             property is not null and the transaction has already been committed or rolled back, <see
-             cref="P:System.Data.SqlClient.SqlCommand.Transaction" />
+             property is not null and the transaction has already been committed or rolled back, <see cref="P:System.Data.SqlClient.SqlCommand.Transaction" />
 
             
 
@@ -2455,13 +2269,11 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Gets or sets the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             used by this instance of the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             used by this instance of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -2515,13 +2327,11 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.SqlClient.SqlCommand.CreateParameter" />
+            >The <see cref="M:System.Data.SqlClient.SqlCommand.CreateParameter" />
 
             
 
-             method is a strongly-typed version of <see
-             cref="M:System.Data.IDbCommand.CreateParameter" />
+             method is a strongly-typed version of <see cref="M:System.Data.IDbCommand.CreateParameter" />
 
             
 
@@ -2531,8 +2341,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Creates a new instance of a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -2542,8 +2351,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -2681,28 +2489,23 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+            >When you call <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             to execute a tsql statement, you must call <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
+             to execute a tsql statement, you must call <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(System.IAsyncResult)" />
 
             
 
-             in order to complete the operation. If the process of executing the command has not yet finished, this method blocks until the operation is complete. Users can verify that the command has completed its operation by using the <see
-             cref="T:System.IAsyncResult" />
+             in order to complete the operation. If the process of executing the command has not yet finished, this method blocks until the operation is complete. Users can verify that the command has completed its operation by using the <see cref="T:System.IAsyncResult" />
 
             
 
-             instance returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             instance returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
-             method. If a callback procedure was specified in the call to <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+             method. If a callback procedure was specified in the call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
             
 
@@ -2716,8 +2519,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows affected (the same behavior as <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteNonQuery" />
+            >The number of rows affected (the same behavior as <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteNonQuery" />
 
             
 
@@ -2725,17 +2527,19 @@ public class A {
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by the call to <see
-           cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
+           returned by the call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteNonQuery" />
 
           
 
@@ -2762,28 +2566,23 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+            >When you call <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to execute a Transact-SQL statement, you must call <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
+             to execute a Transact-SQL statement, you must call <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteReader(System.IAsyncResult)" />
 
             
 
-             in order to complete the operation. If the process of executing the command has not yet finished, this method blocks until the operation is complete. Users can verify that the command has completed its operation by using the <see
-             cref="T:System.IAsyncResult" />
+             in order to complete the operation. If the process of executing the command has not yet finished, this method blocks until the operation is complete. Users can verify that the command has completed its operation by using the <see cref="T:System.IAsyncResult" />
 
             
 
-             instance returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             instance returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             method. If a callback procedure was specified in the call to <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             method. If a callback procedure was specified in the call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
@@ -2793,8 +2592,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Finishes asynchronous execution of a Transact-SQL statement, returning the requested <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >Finishes asynchronous execution of a Transact-SQL statement, returning the requested <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -2804,8 +2602,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >A <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -2813,17 +2610,19 @@ public class A {
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by the call to <see
-           cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+           returned by the call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
           
 
@@ -2850,28 +2649,23 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+            >When you call <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             to execute a Transact-SQL statement, you must call <see
-             cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
+             to execute a Transact-SQL statement, you must call <see cref="M:System.Data.SqlClient.SqlCommand.EndExecuteXmlReader(System.IAsyncResult)" />
 
             
 
-             in order to complete the operation. If the process of executing the command has not yet finished, this method blocks until the operation is complete. Users can verify that the command has completed its operation by using the <see
-             cref="T:System.IAsyncResult" />
+             in order to complete the operation. If the process of executing the command has not yet finished, this method blocks until the operation is complete. Users can verify that the command has completed its operation by using the <see cref="T:System.IAsyncResult" />
 
             
 
-             instance returned by the <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             instance returned by the <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
-             method. If a callback procedure was specified in the call to <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             method. If a callback procedure was specified in the call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -2885,8 +2679,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -2894,17 +2687,19 @@ public class A {
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by the call to <see
-           cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+           returned by the call to <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
           
 
@@ -2945,21 +2740,18 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteNonQuery" />
+            >You can use the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteNonQuery" />
 
             
 
-             to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database without using a <see
-             cref="T:System.Data.DataSet" />
+             to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database without using a <see cref="T:System.Data.DataSet" />
 
             
 
              by executing UPDATE, INSERT, or DELETE statements.</para
           >
           <para
-            >Although the <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteNonQuery" />
+            >Although the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteNonQuery" />
 
             
 
@@ -2995,18 +2787,15 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
+            >When the <see cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
 
             
 
-             property is set to StoredProcedure, the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+             property is set to StoredProcedure, the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+             property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
@@ -3014,8 +2803,7 @@ public class A {
           >
           <block subset="none" type="note">
             <para
-              >If a transaction is deadlocked, an exception may not be thrown until <see
-               cref="M:System.Data.SqlClient.SqlDataReader.Read" />
+              >If a transaction is deadlocked, an exception may not be thrown until <see cref="M:System.Data.SqlClient.SqlDataReader.Read" />
 
               
 
@@ -3024,23 +2812,19 @@ public class A {
           </block>
           <para>The multiple active result set (MARS) feature allows for multiple actions using the same connection.</para>
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -3050,18 +2834,15 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >Sends the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             to the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Connection" />
+             to the <see cref="P:System.Data.SqlClient.SqlCommand.Connection" />
 
             
 
-             and builds a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             and builds a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3071,8 +2852,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >A <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3101,18 +2881,15 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
+            >When the <see cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
 
             
 
-             property is set to StoredProcedure, the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+             property is set to StoredProcedure, the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+             property should be set to the name of the stored procedure. The command executes this stored procedure when you call <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
@@ -3120,13 +2897,11 @@ public class A {
           >
           <block subset="none" type="note">
             <para
-              >Use <see
-               cref="F:System.Data.CommandBehavior.SequentialAccess" />
+              >Use <see cref="F:System.Data.CommandBehavior.SequentialAccess" />
 
               
 
-               to retrieve large values and binary data. Otherwise, an <see
-               cref="T:System.OutOfMemoryException" />
+               to retrieve large values and binary data. Otherwise, an <see cref="T:System.OutOfMemoryException" />
 
               
 
@@ -3135,23 +2910,19 @@ public class A {
           </block>
           <para>The multiple active result set (MARS) feature allows for multiple actions using the same connection.</para>
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -3161,23 +2932,19 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >Sends the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             to the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Connection" />
+             to the <see cref="P:System.Data.SqlClient.SqlCommand.Connection" />
 
             
 
-            , and builds a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , and builds a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             using one of the <see
-             cref="T:System.Data.CommandBehavior" />
+             using one of the <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -3187,8 +2954,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >A <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3196,12 +2962,15 @@ public class A {
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -3224,26 +2993,22 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteScalar" />
+            >Use the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteScalar" />
 
             
 
-             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+             method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             method, and then performing the operations that you need to generate the single value using the data returned by a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+             method, and then performing the operations that you need to generate the single value using the data returned by a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
             .</para
           >
           <para
-            >A typical <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteScalar" />
+            >A typical <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteScalar" />
 
             
 
@@ -3277,21 +3042,18 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >The <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             property ordinarily specifies a tsql statement with a valid FOR XML clause. However, <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+             property ordinarily specifies a tsql statement with a valid FOR XML clause. However, <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
              can also specify a statement that returns ntext or nvarchar data that contains valid XML, or the contents of a column defined with the xml data type. </para
           >
           <para
-            >A typical <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+            >A typical <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
@@ -3299,13 +3061,11 @@ public class A {
           >
           <code>SqlCommand command = new SqlCommand("SELECT * FROM dbo.Customers FOR XML AUTO, XMLDATA", SqlConn);</code>
           <para
-            >This method can also be used to retrieve a single-row, single-column result set that contains XML data. In this case, if more than one row is returned, the <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+            >This method can also be used to retrieve a single-row, single-column result set that contains XML data. In this case, if more than one row is returned, the <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             method attaches the <see
-             cref="T:System.Xml.XmlReader" />
+             method attaches the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -3313,23 +3073,19 @@ public class A {
           >
           <para>The multiple active result set (MARS) feature allows for multiple actions using the same connection.</para>
           <para
-            >If you use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
+            >If you use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteReader" />
 
             
 
-             or <see
-             cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
+             or <see cref="M:System.Data.SqlClient.SqlCommand.BeginExecuteReader" />
 
             
 
-             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see
-             cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
+             to access XML data, SQL Server will return any XML results greater than 2,033 characters in length in multiple rows of 2,033 characters each. To avoid this behavior, use <see cref="M:System.Data.SqlClient.SqlCommand.ExecuteXmlReader" />
 
             
 
-             or <see
-             cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
+             or <see cref="Overload:System.Data.SqlClient.SqlCommand.BeginExecuteXmlReader" />
 
             
 
@@ -3339,18 +3095,15 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >Sends the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             to the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Connection" />
+             to the <see cref="P:System.Data.SqlClient.SqlCommand.Connection" />
 
             
 
-             and builds an <see
-             cref="T:System.Xml.XmlReader" />
+             and builds an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -3360,8 +3113,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -3403,8 +3155,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies the <see
-             cref="T:System.Data.Sql.SqlNotificationRequest" />
+            >Gets or sets a value that specifies the <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
             
 
@@ -3437,8 +3188,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the application should automatically receive query notifications from a common <see
-             cref="T:System.Data.SqlClient.SqlDependency" />
+            >Gets or sets a value indicating whether the application should automatically receive query notifications from a common <see cref="T:System.Data.SqlClient.SqlDependency" />
 
             
 
@@ -3466,8 +3216,7 @@ public class A {
             <para>If the parameters in the collection do not match the requirements of the query to be executed, an error may result.</para>
           </block>
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
                 >Using Stored Procedures with a Command</a
               >
@@ -3481,8 +3230,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Gets the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -3511,31 +3259,26 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
+            >If <see cref="P:System.Data.SqlClient.SqlCommand.CommandType" />
 
             
 
-             is set to StoredProcedure, the call to <see
-             cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
+             is set to StoredProcedure, the call to <see cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
 
             
 
              should succeed, although it may cause a no-op.</para
           >
           <para
-            >Before you call <see
-             cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
+            >Before you call <see cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
 
             
 
-            , specify the data type of each parameter in the statement to be prepared. For each parameter that has a variable length data type, you must set the <see
-             cref="P:System.Data.SqlClient.SqlParameter.Size" />
+            , specify the data type of each parameter in the statement to be prepared. For each parameter that has a variable length data type, you must set the <see cref="P:System.Data.SqlClient.SqlParameter.Size" />
 
             
 
-             property to the maximum size needed. <see
-             cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
+             property to the maximum size needed. <see cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
 
             
 
@@ -3543,13 +3286,11 @@ public class A {
           >
           <block subset="none" type="note">
             <para
-              >If the database context is changed by executing the Transact-SQL USE &lt;database&gt; statement, or by calling the <see
-               cref="M:System.Data.SqlClient.SqlConnection.ChangeDatabase(System.String)" />
+              >If the database context is changed by executing the Transact-SQL USE &lt;database&gt; statement, or by calling the <see cref="M:System.Data.SqlClient.SqlConnection.ChangeDatabase(System.String)" />
 
               
 
-               method, then <see
-               cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
+               method, then <see cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
 
               
 
@@ -3557,29 +3298,25 @@ public class A {
             >
           </block>
           <para
-            >If you call an Execute method after calling <see
-             cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
+            >If you call an Execute method after calling <see cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
 
             
 
-            , any parameter value that is larger than the value specified by the <see
-             cref="P:System.Data.SqlClient.SqlParameter.Size" />
+            , any parameter value that is larger than the value specified by the <see cref="P:System.Data.SqlClient.SqlParameter.Size" />
 
             
 
              property is automatically truncated to the original specified size of the parameter, and no truncation errors are returned.</para
           >
           <para
-            >Output parameters (whether prepared or not) must have a user-specified data type. If you specify a variable length data type, you must also specify the maximum <see
-             cref="P:System.Data.SqlClient.SqlParameter.Size" />
+            >Output parameters (whether prepared or not) must have a user-specified data type. If you specify a variable length data type, you must also specify the maximum <see cref="P:System.Data.SqlClient.SqlParameter.Size" />
 
             
 
             .</para
           >
           <para
-            >Prior to Visual Studio 2010, <see
-             cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
+            >Prior to Visual Studio 2010, <see cref="M:System.Data.SqlClient.SqlCommand.Prepare" />
 
             
 
@@ -3607,8 +3344,7 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
+            >The default value of the <see cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
 
             
 
@@ -3618,8 +3354,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
+            >Resets the <see cref="P:System.Data.SqlClient.SqlCommand.CommandTimeout" />
 
             
 
@@ -3671,13 +3406,11 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Gets or sets the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             used by this instance of the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             used by this instance of the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -3704,8 +3437,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Creates a new instance of a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -3715,8 +3447,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -3740,18 +3471,15 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >Sends the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             to the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Connection" />
+             to the <see cref="P:System.Data.SqlClient.SqlCommand.Connection" />
 
             
 
-            , and builds a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , and builds a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3761,8 +3489,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >A <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3791,23 +3518,19 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends the <see
-             cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
+            >Sends the <see cref="P:System.Data.SqlClient.SqlCommand.CommandText" />
 
             
 
-             to the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Connection" />
+             to the <see cref="P:System.Data.SqlClient.SqlCommand.Connection" />
 
             
 
-            , and builds a <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , and builds a <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
-             using one of the <see
-             cref="T:System.Data.CommandBehavior" />
+             using one of the <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -3817,8 +3540,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            >A <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -3826,12 +3548,15 @@ public class A {
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.CommandBehavior" />
+          One of the <see cref="T:System.Data.CommandBehavior" />
 
           
 
@@ -3896,8 +3621,7 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >Creates a new <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -3907,8 +3631,7 @@ public class A {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >A new <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -3932,23 +3655,19 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot set the <see
-             cref="P:System.Data.SqlClient.SqlCommand.Transaction" />
+            >You cannot set the <see cref="P:System.Data.SqlClient.SqlCommand.Transaction" />
 
             
 
-             property if it is already set to a specific value, and the command is in the process of executing. If you set the transaction property to a <see
-             cref="T:System.Data.SqlClient.SqlTransaction" />
+             property if it is already set to a specific value, and the command is in the process of executing. If you set the transaction property to a <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
             
 
-             object that is not connected to the same <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             object that is not connected to the same <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             as the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             as the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -3958,13 +3677,11 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.SqlClient.SqlTransaction" />
+            >Gets or sets the <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
             
 
-             within which the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             within which the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
@@ -4000,21 +3717,18 @@ public class A {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see
-             cref="T:System.Data.UpdateRowSource" />
+            >The default <see cref="T:System.Data.UpdateRowSource" />
 
             
 
-             value is Both unless the command is automatically generated (as in the case of the <see
-             cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+             value is Both unless the command is automatically generated (as in the case of the <see cref="T:System.Data.SqlClient.SqlCommandBuilder" />
 
             
 
             ), in which case the default is None.</para
           >
           <para
-            >For more information about using the UpdatedRowSource property, see <format
-             type="text/html">
+            >For more information about using the UpdatedRowSource property, see <format type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
 
@@ -4026,13 +3740,11 @@ public class A {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets how command results are applied to the <see
-             cref="T:System.Data.DataRow" />
+            >Gets or sets how command results are applied to the <see cref="T:System.Data.DataRow" />
 
             
 
-             when used by the Update method of the <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+             when used by the Update method of the <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 

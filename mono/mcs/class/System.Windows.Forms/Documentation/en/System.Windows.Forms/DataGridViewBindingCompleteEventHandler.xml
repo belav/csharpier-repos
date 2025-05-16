@@ -28,41 +28,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+        >The <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
         
 
-         event is raised when the contents of the data source change or when the value of the <see
-         cref="P:System.Windows.Forms.DataGridView.DataSource" />
+         event is raised when the contents of the data source change or when the value of the <see cref="P:System.Windows.Forms.DataGridView.DataSource" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridView.DataMember" />
+        , <see cref="P:System.Windows.Forms.DataGridView.DataMember" />
 
         
 
-        , or <see
-         cref="P:System.Windows.Forms.Control.BindingContext" />
+        , or <see cref="P:System.Windows.Forms.Control.BindingContext" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control changes. </para
       >
       <para
-        >When you create a <see
-         cref="T:System.Windows.Forms.DataGridViewBindingCompleteEventHandler" />
+        >When you create a <see cref="T:System.Windows.Forms.DataGridViewBindingCompleteEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -74,13 +67,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         event of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

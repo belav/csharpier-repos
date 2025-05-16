@@ -46,36 +46,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is the default implementation of the <see
-         cref="T:System.Collections.IComparer" />
+        >This class is the default implementation of the <see cref="T:System.Collections.IComparer" />
 
         
 
-         interface. The <see
-         cref="T:System.Collections.CaseInsensitiveComparer" />
+         interface. The <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
         
 
-         class is the implementation of the <see
-         cref="T:System.Collections.IComparer" />
+         class is the implementation of the <see cref="T:System.Collections.IComparer" />
 
         
 
          interface that performs case-insensitive string comparisons.</para
       >
       <para
-        >Comparison procedures use the <see
-         cref="P:System.Threading.Thread.CurrentCulture" />
+        >Comparison procedures use the <see cref="P:System.Threading.Thread.CurrentCulture" />
 
         
 
-         of the current thread unless otherwise specified. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
-         cref="N:System.Globalization" />
+         of the current thread unless otherwise specified. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see cref="N:System.Globalization" />
 
         
 
-         namespace and <format
-         type="text/html">
+         namespace and <format type="text/html">
           <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
         </format>
 
@@ -112,18 +106,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Comparison procedures use the specified <see
-             cref="T:System.Globalization.CultureInfo" />
+            >Comparison procedures use the specified <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
-             cref="N:System.Globalization" />
+             to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see cref="N:System.Globalization" />
 
             
 
-             namespace and <format
-             type="text/html">
+             namespace and <format type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
 
@@ -135,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Comparer" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Comparer" />
 
             
 
-             class using the specified <see
-             cref="T:System.Globalization.CultureInfo" />
+             class using the specified <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -149,17 +138,19 @@
           >
         </summary>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.CultureInfo" />
+          The <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           to use for the new <see
-           cref="T:System.Collections.Comparer" />
+           to use for the new <see cref="T:System.Collections.Comparer" />
 
           
 
@@ -193,23 +184,19 @@
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >Both <paramref
-             name="a" />
+            >Both <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
-             are not <see
-             langword="null" />
+             are not <see langword="null" />
 
             
 
-             and do not implement the <see
-             cref="T:System.IComparable" />
+             and do not implement the <see cref="T:System.IComparable" />
 
             
 
@@ -217,18 +204,15 @@
           >
           <para> -or-</para>
           <para
-            >Both <paramref
-             name="a" />
+            >Both <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
-             are not <see
-             langword="null" />
+             are not <see langword="null" />
 
             
 
@@ -236,7 +220,11 @@
           >
         </exception>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -245,64 +233,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="a" />
+            >If <paramref name="a" />
 
             
 
-             implements <see
-             cref="T:System.IComparable" />
+             implements <see cref="T:System.IComparable" />
 
             
 
-            , then <paramref
-             name="a" />
+            , then <paramref name="a" />
 
             
 
-            . CompareTo (<paramref
-             name="b" />
+            . CompareTo (<paramref name="b" />
 
             
 
-            ) is returned; otherwise, if <paramref
-             name="b" />
+            ) is returned; otherwise, if <paramref name="b" />
 
             
 
-             implements <see
-             cref="T:System.IComparable" />
+             implements <see cref="T:System.IComparable" />
 
             
 
-            , then the negated result of <paramref
-             name="b" />
+            , then the negated result of <paramref name="b" />
 
             
 
-            . CompareTo (<paramref
-             name="a" />
+            . CompareTo (<paramref name="a" />
 
             
 
             ) is returned.</para
           >
           <para
-            >Comparing null with any type is allowed and does not generate an exception when using <see
-             cref="T:System.IComparable" />
+            >Comparing null with any type is allowed and does not generate an exception when using <see cref="T:System.IComparable" />
 
             
 
             . When sorting, null is considered to be less than any other object.</para
           >
           <para
-            >String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
-             cref="N:System.Globalization" />
+            >String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see cref="N:System.Globalization" />
 
             
 
-             namespace and <format
-             type="text/html">
+             namespace and <format type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
 
@@ -318,13 +295,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative values of <paramref
-             name="a" />
+            >A signed integer that indicates the relative values of <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -351,8 +326,7 @@
 
                   
 
-                   is less than <paramref
-                   name="b" />
+                   is less than <paramref name="b" />
 
                   
 
@@ -370,8 +344,7 @@
 
                   
 
-                   equals <paramref
-                   name="b" />
+                   equals <paramref name="b" />
 
                   
 
@@ -389,8 +362,7 @@
 
                   
 
-                   is greater than <paramref
-                   name="b" />
+                   is greater than <paramref name="b" />
 
                   
 
@@ -401,14 +373,22 @@
           </list>
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -444,18 +424,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Comparison procedures use the <see
-             cref="P:System.Threading.Thread.CurrentCulture" />
+            >Comparison procedures use the <see cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
-             of the current thread to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
-             cref="N:System.Globalization" />
+             of the current thread to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see cref="N:System.Globalization" />
 
             
 
-             namespace and <format
-             type="text/html">
+             namespace and <format type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
 
@@ -467,13 +444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an instance of <see
-             cref="T:System.Collections.Comparer" />
+            >Represents an instance of <see cref="T:System.Collections.Comparer" />
 
             
 
-             that is associated with the <see
-             cref="P:System.Threading.Thread.CurrentCulture" />
+             that is associated with the <see cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
@@ -505,18 +480,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Comparison procedures use the <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >Comparison procedures use the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-             to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
-             cref="N:System.Globalization" />
+             to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see cref="N:System.Globalization" />
 
             
 
-             namespace and <format
-             type="text/html">
+             namespace and <format type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
 
@@ -528,13 +500,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an instance of <see
-             cref="T:System.Collections.Comparer" />
+            >Represents an instance of <see cref="T:System.Collections.Comparer" />
 
             
 
-             that is associated with <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+             that is associated with <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
@@ -569,13 +539,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >While the <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             method is not visible to COM clients by default, inheriting the <see
-             cref="T:System.Collections.Comparer" />
+             method is not visible to COM clients by default, inheriting the <see cref="T:System.Collections.Comparer" />
 
             
 
@@ -585,8 +553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -594,14 +561,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

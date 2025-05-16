@@ -15,7 +15,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -73,8 +75,7 @@
       </Parameters>
       <Docs>
         <param name="cspParams"
-          >a <see
-           cref="T:System.Security.Cryptography.CspParameters" />
+          >a <see cref="T:System.Security.Cryptography.CspParameters" />
 
           
 
@@ -97,8 +98,7 @@
       </Parameters>
       <Docs>
         <param name="str"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 

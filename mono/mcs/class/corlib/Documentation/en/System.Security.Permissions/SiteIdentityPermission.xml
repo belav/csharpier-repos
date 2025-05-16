@@ -41,18 +41,15 @@
       </block>
       <block subset="none" type="note">
         <para
-          >In versions of the .NET Framework before the net_v40_long, you could use the <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+          >In versions of the .NET Framework before the net_v40_long, you could use the <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           method to prevent inadvertent access to system resources by trusted code. <see
-           cref="M:System.Security.CodeAccessPermission.Deny" />
+           method to prevent inadvertent access to system resources by trusted code. <see cref="M:System.Security.CodeAccessPermission.Deny" />
 
           
 
-           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format
-           type="text/html">
+           is now obsolete, and access to resources is now determined solely by the granted permission set for an assembly. To limit access to files, you must run partially trusted code in a sandbox and assign it permissions only to resources that the code is allowed to access. For information about running an application in a sandbox, see <format type="text/html">
             <a href="d1ad722b-5b49-4040-bff3-431b94bb8095"
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
@@ -65,13 +62,11 @@
       </block>
       <block subset="none" type="note">
         <para
-          >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+          >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
           
 
-           permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
-           cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+           permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
           
 
@@ -108,8 +103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The fully restricted state of <see
-             cref="T:System.Security.Permissions.SiteIdentityPermission" />
+            >The fully restricted state of <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
             
 
@@ -117,13 +111,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see
-               cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
               
 
-               permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
-               cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+               permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
               
 
@@ -135,13 +127,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.SiteIdentityPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -149,12 +139,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -187,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.SiteIdentityPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
             
 
@@ -196,7 +188,11 @@
           >
         </summary>
         <param name="site">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -263,7 +259,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -307,7 +307,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,8 +345,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The current permission is a subset of the specified permission if the current permission specifies a site that is wholly contained by the specified permission.</para>
           <para
-            >The following table shows the value of <see
-             cref="M:System.Security.Permissions.SiteIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+            >The following table shows the value of <see cref="M:System.Security.Permissions.SiteIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
 
             
 
@@ -472,7 +475,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -583,16 +590,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.SiteIdentityPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.SiteIdentityPermission.Union(System.Security.IPermission)" />
 
             
 
              is a permission that represents all the sites represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. For example, the union of a permission that represents access to www.fourthcoffee.com and one that represents access to *.fourthcoffee.com is a permission that represents access to *.fourthcoffee.com.</para
           >
           <para
-            >The union of a permission and null is the permission that is not null. The union of a permission and a subset of that permission is the permission that contains the subset. Any other combination results in an <see
-             cref="T:System.ArgumentException" />
+            >The union of a permission and null is the permission that is not null. The union of a permission and a subset of that permission is the permission that contains the subset. Any other combination results in an <see cref="T:System.ArgumentException" />
 
             
 
@@ -608,7 +613,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

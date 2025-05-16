@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of access control modification to perform. This enumeration is used by methods of the <see
-         cref="T:System.Security.AccessControl.ObjectSecurity" />
+        >Specifies the type of access control modification to perform. This enumeration is used by methods of the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
         
 

@@ -25,35 +25,29 @@
       </para>
       <list type="bullet">
         <item>
-          <term
-            >
+          <term>
           Asynchronous alerts about events that occur within a process, such as 
-          illegal instruction (<see
-             cref="F:Mono.Unix.Native.Signum.SIGILL" />
+          illegal instruction (<see cref="F:Mono.Unix.Native.Signum.SIGILL" />
 
             
 
             ),
-          floating point exception (<see
-             cref="F:Mono.Unix.Native.Signum.SIGFPE" />
+          floating point exception (<see cref="F:Mono.Unix.Native.Signum.SIGFPE" />
 
             
 
             ),
-          bus error (<see
-             cref="F:Mono.Unix.Native.Signum.SIGBUS" />
+          bus error (<see cref="F:Mono.Unix.Native.Signum.SIGBUS" />
 
             
 
             ),
-          invalid memory access (<see
-             cref="F:Mono.Unix.Native.Signum.SIGSEGV" />
+          invalid memory access (<see cref="F:Mono.Unix.Native.Signum.SIGSEGV" />
 
             
 
             ),
-          I/O is possible (<see
-             cref="F:Mono.Unix.Native.Signum.SIGIO" />
+          I/O is possible (<see cref="F:Mono.Unix.Native.Signum.SIGIO" />
 
             
 
@@ -63,42 +57,35 @@
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           Asynchronous alerts of external "events", such as
-          termanal hangup (<see
-             cref="F:Mono.Unix.Native.Signum.SIGHUP" />
+          termanal hangup (<see cref="F:Mono.Unix.Native.Signum.SIGHUP" />
 
             
 
             ),
-          keyboard interrupt (<see
-             cref="F:Mono.Unix.Native.Signum.SIGINT" />
+          keyboard interrupt (<see cref="F:Mono.Unix.Native.Signum.SIGINT" />
 
             
 
             ),
-          broken pipe (<see
-             cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
+          broken pipe (<see cref="F:Mono.Unix.Native.Signum.SIGPIPE" />
 
             
 
             ),
           program-defined actions 
-          (<see
-             cref="F:Mono.Unix.Native.Signum.SIGUSR1" />
+          (<see cref="F:Mono.Unix.Native.Signum.SIGUSR1" />
 
             
 
             ,
-          <see
-             cref="F:Mono.Unix.Native.Signum.SIGUSR2" />
+          <see cref="F:Mono.Unix.Native.Signum.SIGUSR2" />
 
             
 
             ),
-          child exit (<see
-             cref="F:Mono.Unix.Native.Signum.SIGCHLD" />
+          child exit (<see cref="F:Mono.Unix.Native.Signum.SIGCHLD" />
 
             
 
@@ -122,10 +109,8 @@
         the signal handler before continuing (while the other threads continue
         to execute in ignorance that a signal is occuring).
       </para>
-      <para
-        >
-        Tradtionally, <see
-         cref="M:Mono.Unix.Native.Stdlib.signal" />
+      <para>
+        Tradtionally, <see cref="M:Mono.Unix.Native.Stdlib.signal" />
 
         
 
@@ -133,63 +118,53 @@
         to register a signal handler for a signal, and the registered handler
         is invoked when the signal is generated.  However, due to the
         "hijacking" nature of the signal handling process, what the signal
-        handler could do is <i
-        >severely</i>
+        handler could do is <i>severely</i>
 
         
 
          restricted: it must not invoke
         non-reentrant library functions, and can only modify global data and
         execute a limited set of system calls such as 
-        <see
-         cref="M:Mono.Unix.Native.Syscall.read" />
+        <see cref="M:Mono.Unix.Native.Syscall.read" />
 
         
 
          and
-        <see
-         cref="M:Mono.Unix.Native.Syscall.write" />
+        <see cref="M:Mono.Unix.Native.Syscall.write" />
 
         
 
         .
       </para
       >
-      <para
-        >
+      <para>
         Managed code throws an additional wrench in the works, as the platform
         invocation mechanism is neither reentrant nor signal safe. Consequently,
-        managed code <i
-        >can not</i>
+        managed code <i>can not</i>
 
         
 
          be safely and reliably used as a signal
-        handler (as would traditionally be done with <c
-        >signal</c>
+        handler (as would traditionally be done with <c>signal</c>
 
         
 
         (2)), thus
-        the <see
-         cref="T:Mono.Unix.UnixSignal" />
+        the <see cref="T:Mono.Unix.UnixSignal" />
 
         
 
          type.
       </para
       >
-      <para
-        >
-        A <see
-         cref="T:Mono.Unix.UnixSignal" />
+      <para>
+        A <see cref="T:Mono.Unix.UnixSignal" />
 
         
 
          instance represents the number
         of times that a Unix signal has been emitted.  That's all.
-        <c
-        >UnixSignal</c>
+        <c>UnixSignal</c>
 
         
 
@@ -198,17 +173,14 @@
       >
       <list type="bullet">
         <item>
-          <term
-            >
+          <term>
           Accessing the number of times the Unix signal has been emitted via
-          the <see
-             cref="P:Mono.Unix.UnixSignal.Count" />
+          the <see cref="P:Mono.Unix.UnixSignal.Count" />
 
             
 
             
-          and <see
-             cref="P:Mono.Unix.UnixSignal.IsSet" />
+          and <see cref="P:Mono.Unix.UnixSignal.IsSet" />
 
             
 
@@ -217,10 +189,8 @@
           >
         </item>
         <item>
-          <term
-            >
-          Clearing the count with <see
-             cref="M:Mono.Unix.UnixSignal.Reset" />
+          <term>
+          Clearing the count with <see cref="M:Mono.Unix.UnixSignal.Reset" />
 
             
 
@@ -229,17 +199,14 @@
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           Sleeping until a signal has been emitted via
-          <see
-             cref="M:Mono.Unix.UnixSignal.WaitAny" />
+          <see cref="M:Mono.Unix.UnixSignal.WaitAny" />
 
             
 
              and
-          <see
-             cref="M:Mono.Unix.UnixSignal.WaitOne" />
+          <see cref="M:Mono.Unix.UnixSignal.WaitOne" />
 
             
 
@@ -248,38 +215,32 @@
           >
         </item>
       </list>
-      <para
-        >
+      <para>
         In order to operate, this class uses an internal unmanaged signal
         handler to represent the count information.  Consequently, the count
         will only be updated as long as no other mechanism is used to change
         the registered signal handler, such as
-        <see
-         cref="M:Mono.Unix.Native.Stdlib.signal" />
+        <see cref="M:Mono.Unix.Native.Stdlib.signal" />
 
         
 
          or
-        <see
-         cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
+        <see cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
 
         
 
         .  If you use
-        <see
-         cref="M:Mono.Unix.Native.Stdlib.signal" />
+        <see cref="M:Mono.Unix.Native.Stdlib.signal" />
 
         
 
          or
-        <see
-         cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
+        <see cref="M:Mono.Unix.Native.Stdlib.SetSignalAction" />
 
         
 
          for the same
-        signal as a created <c
-        >UnixSignal</c>
+        signal as a created <c>UnixSignal</c>
 
         
 
@@ -287,10 +248,8 @@
         instance will stop operating as documented.  Don't Do That (TM).
       </para
       >
-      <para
-        >
-        There is currently a limit of 64 concurrent <c
-        >UnixSignal</c>
+      <para>
+        There is currently a limit of 64 concurrent <c>UnixSignal</c>
 
         
 
@@ -319,10 +278,8 @@
         <Parameter Name="rtsig" Type="Mono.Unix.Native.RealTimeSignum" />
       </Parameters>
       <Docs>
-        <param name="rtsig"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.RealTimeSignum" />
+        <param name="rtsig">
+          A <see cref="T:Mono.Unix.Native.RealTimeSignum" />
 
           
 
@@ -330,10 +287,8 @@
           Unix realtime signal this instance should count.
 		</param
         >
-        <summary
-          >
-          Creates and initializes a <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <summary>
+          Creates and initializes a <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
@@ -342,35 +297,29 @@
 		</summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.RealTimeSignum" />
+            <see cref="P:Mono.Unix.UnixSignal.RealTimeSignum" />
 
             
 
              property of the new
-            instance using <paramref
-             name="signum" />
+            instance using <paramref name="signum" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Once this constructor completes execution, all signal emissions
             between the completion of the constructor and the invocation of
-            <see
-             cref="M:System.Threading.WaitHandle.Close" />
+            <see cref="M:System.Threading.WaitHandle.Close" />
 
             
 
              will be
-            counted, updating the <see
-             cref="M:Mono.Unix.UnixSignal.Count" />
+            counted, updating the <see cref="M:Mono.Unix.UnixSignal.Count" />
 
             
 
@@ -385,8 +334,7 @@
 			signals to implement some specific feature.
           </para>
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
+        <exception cref="T:System.ArgumentException">
           The internal signal handler could not be registered or the signal was registered outside of Mono.Posix.
         </exception
         >
@@ -416,10 +364,8 @@
         <Parameter Name="signum" Type="Mono.Unix.Native.Signum" />
       </Parameters>
       <Docs>
-        <param name="signum"
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Signum" />
+        <param name="signum">
+          A <see cref="T:Mono.Unix.Native.Signum" />
 
           
 
@@ -427,10 +373,8 @@
           Unix signal this instance should count.
         </param
         >
-        <summary
-          >
-          Creates and initializes a <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <summary>
+          Creates and initializes a <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
@@ -439,35 +383,29 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Signum" />
+            <see cref="P:Mono.Unix.UnixSignal.Signum" />
 
             
 
              property of the new
-            instance using <paramref
-             name="signum" />
+            instance using <paramref name="signum" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Once this constructor completes execution, all signal emissions
             between the completion of the constructor and the invocation of
-            <see
-             cref="M:System.Threading.WaitHandle.Close" />
+            <see cref="M:System.Threading.WaitHandle.Close" />
 
             
 
              will be
-            counted, updating the <see
-             cref="M:Mono.Unix.UnixSignal.Count" />
+            counted, updating the <see cref="M:Mono.Unix.UnixSignal.Count" />
 
             
 
@@ -476,8 +414,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.ArgumentException"
-          >
+        <exception cref="T:System.ArgumentException">
           The internal signal handler could not be registered.
         </exception
         >
@@ -504,33 +441,27 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          The number of times the <see
-           cref="P:Mono.Unix.UnixSignal.Signum" />
+        <summary>
+          The number of times the <see cref="P:Mono.Unix.UnixSignal.Signum" />
 
           
 
           
           signal has been emitted since construction or the last call to
-          <see
-           cref="M:Mono.Unix.UnixSignal.Reset" />
+          <see cref="M:Mono.Unix.UnixSignal.Reset" />
 
           
 
           .
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Int32" />
+        <value>
+          A <see cref="T:System.Int32" />
 
           
 
            containing the number of the
-          of times the <see
-           cref="P:Mono.Unix.UnixSignal.Signum" />
+          of times the <see cref="P:Mono.Unix.UnixSignal.Signum" />
 
           
 
@@ -538,25 +469,21 @@
           signal has been emitted.
         </value
         >
-        <remarks
-          >
+        <remarks>
           To clear the count, either assign 0 to the 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            property or use 
-          <see
-           cref="M:Mono.Unix.UnixSignal.Reset" />
+          <see cref="M:Mono.Unix.UnixSignal.Reset" />
 
           
 
           .
         </remarks
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -581,28 +508,23 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="disposing">
+          A <see cref="T:System.Boolean" />
 
           
 
-          ; if <see
-           langword="true" />
+          ; if <see langword="true" />
 
           
 
           , then
           this invocation is due to a 
-          <see
-           cref="M:System.Threading.WaitHandle.Close" />
+          <see cref="M:System.Threading.WaitHandle.Close" />
 
           
 
            call; 
-          if <see
-           langword="false" />
+          if <see langword="false" />
 
           
 
@@ -614,24 +536,20 @@
           Cleanup all unmanaged resources.
         </summary>
         <remarks>
-          <block subset="none" type="behaviors"
-            >
+          <block subset="none" type="behaviors">
             This method releases all unmanaged resources held by the current
-            instance.  When <paramref
-             name="disposing" />
+            instance.  When <paramref name="disposing" />
 
             
 
              is 
-            <see
-             langword="true" />
+            <see langword="true" />
 
             
 
             , this method releases all resources held
             by any managed objects referenced by the current instance.  This
-            method invokes the <c
-            >Dispose()</c>
+            method invokes the <c>Dispose()</c>
 
             
 
@@ -639,94 +557,78 @@
             object.
           </block
           >
-          <block subset="none" type="overrides"
-            >
+          <block subset="none" type="overrides">
             Override this mthod to dispose of resources allocated by types
-            derived from <see
-             cref="T:Mono.Unix.UnixSignal" />
+            derived from <see cref="T:Mono.Unix.UnixSignal" />
 
             
 
             .  When
             overriding 
-            <see
-             cref="M:Mono.Unix.UnixSignal.Dispose(System.Boolean)" />
+            <see cref="M:Mono.Unix.UnixSignal.Dispose(System.Boolean)" />
 
             
 
             ,
             be careful not to reference objects that have been previously 
-            disposed an earlier call to <c
-            >Dispose</c>
+            disposed an earlier call to <c>Dispose</c>
 
             
 
-             or <c
-            >Close</c>
+             or <c>Close</c>
 
             
 
             .  
-            <c
-            >Dispose</c>
+            <c>Dispose</c>
 
             
 
              can be called multiple times by other objects.
           </block
           >
-          <block subset="none" type="usage"
-            >
+          <block subset="none" type="usage">
             This method is called by the protected
-            <see
-             cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
+            <see cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
 
             
 
             
-            method and the <see
-             cref="M:System.Object.Finalize" />
+            method and the <see cref="M:System.Object.Finalize" />
 
             
 
              method.
-            <c
-            >Dispose()</c>
+            <c>Dispose()</c>
 
             
 
              invokes this method with the 
-            <paramref
-             name="disposing" />
+            <paramref name="disposing" />
 
             
 
              parameter set to 
-            <see
-             langword="true" />
+            <see langword="true" />
 
             
 
             . 
-            <see
-             cref="M:System.Object.Finalize" />
+            <see cref="M:System.Object.Finalize" />
 
             
 
              invokes 
-            <c
-            >Dispose</c>
+            <c>Dispose</c>
 
             
 
-             with <paramref
-             name="disposing" />
+             with <paramref name="disposing" />
 
             
 
              set to 
-            <see
-             langword="false" />
+            <see langword="false" />
 
             
 
@@ -748,20 +650,16 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          Returns <see
-           langword="true" />
+        <summary>
+          Returns <see langword="true" />
 
           
 
            if the registered signal is realtime.
 		</summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -785,32 +683,26 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          Returns <see
-           langword="true" />
+        <summary>
+          Returns <see langword="true" />
 
           
 
            if 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            is greater than 0.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <value>
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
@@ -818,8 +710,7 @@
         </value
         >
         <remarks></remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -846,10 +737,8 @@
         <summary>
           The RealTime Unix signal this instance is counting
 		</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.Native.RealTimeSignum" />
+        <value>
+          A <see cref="T:Mono.Unix.Native.RealTimeSignum" />
 
           
 
@@ -858,11 +747,9 @@
 		</value
         >
         <remarks>
-          <para
-            >
+          <para>
             This value is set in the 
-            <see
-             cref="C:Mono.Unix.UnixSignal(Mono.Unix.Native.RealTimeSignum)" />
+            <see cref="C:Mono.Unix.UnixSignal(Mono.Unix.Native.RealTimeSignum)" />
 
             
 
@@ -871,13 +758,11 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The current instance is registered for a non-realtime signal.
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -900,17 +785,14 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
-          Clears the <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+        <summary>
+          Clears the <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            property; the
           return value specifies whether or not 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
@@ -918,40 +800,33 @@
           before it was cleared.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <returns>
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            property was not equal
-          to 0 before it was cleared.  If <see
-           langword="true" />
+          to 0 before it was cleared.  If <see langword="true" />
 
           
 
            is returned,
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            was not 0; if
-          <see
-           langword="false" />
+          <see langword="false" />
 
           
 
            is returned, 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
@@ -959,18 +834,15 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This method atomically checks and clears the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Count" />
+            <see cref="P:Mono.Unix.UnixSignal.Count" />
 
             
 
              property, and should
             be preferred over manually checking and clearing the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Count" />
+            <see cref="P:Mono.Unix.UnixSignal.Count" />
 
             
 
@@ -978,8 +850,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -1002,10 +873,8 @@
       </ReturnValue>
       <Docs>
         <summary>The Unix signal this instance is counting.</summary>
-        <value
-          >
-          A <see
-           cref="T:Mono.Unix.Native.Signum" />
+        <value>
+          A <see cref="T:Mono.Unix.Native.Signum" />
 
           
 
@@ -1014,11 +883,9 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This value is set in the 
-            <see
-             cref="C:Mono.Unix.UnixSignal(Mono.Unix.Native.Signum)" />
+            <see cref="C:Mono.Unix.UnixSignal(Mono.Unix.Native.Signum)" />
 
             
 
@@ -1027,13 +894,11 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.InvalidOperationException"
-          >
+        <exception cref="T:System.InvalidOperationException">
           The current instance is registered for a realtime signal.
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -1061,55 +926,45 @@
         <Parameter Name="signals" Type="Mono.Unix.UnixSignal[]" />
       </Parameters>
       <Docs>
-        <param name="signals"
-          >
-          A <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <param name="signals">
+          A <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            array containing the 
-          <see
-           cref="T:Mono.Unix.UnixSignal" />
+          <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances to wait on.
         </param
         >
-        <summary
-          >
+        <summary>
           Blocks the current thread until one of the 
-          <see
-           cref="T:Mono.Unix.UnixSignal" />
+          <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances within 
-          <paramref
-           name="signals" />
+          <paramref name="signals" />
 
           
 
            has a non-zero 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          Returns a <see
-           cref="T:System.Int32" />
+        <returns>
+          Returns a <see cref="T:System.Int32" />
 
           
 
            set to the index of the
-          element in <paramref
-           name="signals" />
+          element in <paramref name="signals" />
 
           
 
@@ -1117,13 +972,10 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This method is equivalent to calling 
             <c
-
-              >UnixSignal.WaitAny(<paramref
-               name="signals" />
+              >UnixSignal.WaitAny(<paramref name="signals" />
 
               
 
@@ -1141,24 +993,20 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.InvalidOperationException"
-          >
-          One of the <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <exception cref="T:System.InvalidOperationException">
+          One of the <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances within
-          <paramref
-           name="signals" />
+          <paramref name="signals" />
 
           
 
@@ -1191,32 +1039,26 @@
         <Parameter Name="millisecondsTimeout" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="signals"
-          >
-          A <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <param name="signals">
+          A <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            array containing the 
-          <see
-           cref="T:Mono.Unix.UnixSignal" />
+          <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances to wait on.
         </param
         >
-        <param name="millisecondsTimeout"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="millisecondsTimeout">
+          A <see cref="T:System.Int32" />
 
           
 
            specifying the number of
-          milliseconds to wait before the method should return.  <c
-          >-1</c>
+          milliseconds to wait before the method should return.  <c>-1</c>
 
           
 
@@ -1224,47 +1066,39 @@
           represents an infinite timeout.
         </param
         >
-        <summary
-          >
+        <summary>
           Blocks the current thread until one of the 
-          <see
-           cref="T:Mono.Unix.UnixSignal" />
+          <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances within 
-          <paramref
-           name="signals" />
+          <paramref name="signals" />
 
           
 
            has a non-zero 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            or the timeout expires.
         </summary
         >
-        <returns
-          >
+        <returns>
           If the method doesn't timeout, returns a 
-          <see
-           cref="T:System.Int32" />
+          <see cref="T:System.Int32" />
 
           
 
            set to the index of the
-          element in <paramref
-           name="signals" />
+          element in <paramref name="signals" />
 
           
 
            that received a signal.
           If the method does timeout, then 
-          <paramref
-           name="millisecondsTimeout" />
+          <paramref name="millisecondsTimeout" />
 
           
 
@@ -1277,8 +1111,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1290,24 +1123,20 @@
 
           
 
-           is less than <c
-          >-1</c>
+           is less than <c>-1</c>
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.InvalidOperationException"
-          >
-          One of the <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <exception cref="T:System.InvalidOperationException">
+          One of the <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances within
-          <paramref
-           name="signals" />
+          <paramref name="signals" />
 
           
 
@@ -1339,102 +1168,84 @@
         <Parameter Name="timeout" Type="System.TimeSpan" />
       </Parameters>
       <Docs>
-        <param name="signals"
-          >
-          A <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <param name="signals">
+          A <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            array containing the 
-          <see
-           cref="T:Mono.Unix.UnixSignal" />
+          <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances to wait on.
         </param
         >
-        <param name="timeout"
-          >
-          A <see
-           cref="T:System.TimeSpan" />
+        <param name="timeout">
+          A <see cref="T:System.TimeSpan" />
 
           
 
            specifying how long the method
-          should wait before returning.  Use a <see
-           cref="T:System.TimeSpan" />
+          should wait before returning.  Use a <see cref="T:System.TimeSpan" />
 
           
 
           
-          with a <see
-           cref="P:System.TimeSpan.TotalMilliseconds" />
+          with a <see cref="P:System.TimeSpan.TotalMilliseconds" />
 
           
 
            value of
-          <c
-          >-1</c>
+          <c>-1</c>
 
           
 
            for an infinite timeout.
         </param
         >
-        <summary
-          >
+        <summary>
           Blocks the current thread until one of the 
-          <see
-           cref="T:Mono.Unix.UnixSignal" />
+          <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances within 
-          <paramref
-           name="signals" />
+          <paramref name="signals" />
 
           
 
            has a non-zero 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            or the timeout expires.
         </summary
         >
-        <returns
-          >
+        <returns>
           If the method doesn't timeout, returns a 
-          <see
-           cref="T:System.Int32" />
+          <see cref="T:System.Int32" />
 
           
 
            set to the index of the
-          element in <paramref
-           name="signals" />
+          element in <paramref name="signals" />
 
           
 
            that received a signal.
-          If the method does timeout, then <paramref
-           name="timeout" />
+          If the method does timeout, then <paramref name="timeout" />
 
           
 
           's 
-          <see
-           cref="P:System.TimeSpan.TotalMilliseconds" />
+          <see cref="P:System.TimeSpan.TotalMilliseconds" />
 
           
 
            value cast to a
-          <see
-           cref="T:System.Int32" />
+          <see cref="T:System.Int32" />
 
           
 
@@ -1442,13 +1253,10 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This is equivalent to 
             <c
-
-              >UnixSignal.WaitAny(<paramref
-               name="signals" />
+              >UnixSignal.WaitAny(<paramref name="signals" />
 
               
 
@@ -1467,8 +1275,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1481,35 +1288,29 @@
           
 
           's 
-          <see
-           cref="P:System.TimeSpan.TotalMilliseconds" />
+          <see cref="P:System.TimeSpan.TotalMilliseconds" />
 
           
 
            property is less
-          than <c
-          >-1</c>
+          than <c>-1</c>
 
           
 
-           or greater than <see
-           cref="F:System.Int32.MaxValue" />
+           or greater than <see cref="F:System.Int32.MaxValue" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.InvalidOperationException"
-          >
-          One of the <see
-           cref="T:Mono.Unix.UnixSignal" />
+        <exception cref="T:System.InvalidOperationException">
+          One of the <see cref="T:Mono.Unix.UnixSignal" />
 
           
 
            instances within
-          <paramref
-           name="signals" />
+          <paramref name="signals" />
 
           
 
@@ -1535,21 +1336,17 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Blocks the current thread until the curent instance has a non-zero 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          Returns <see
-           langword="true" />
+        <returns>
+          Returns <see langword="true" />
 
           
 
@@ -1558,28 +1355,23 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The caller of this method blocks indefinitely until the
-            <see
-             cref="P:Mono.Unix.UnixSignal.Signum" />
+            <see cref="P:Mono.Unix.UnixSignal.Signum" />
 
             
 
              signal is received by
             the current process and the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Count" />
+            <see cref="P:Mono.Unix.UnixSignal.Count" />
 
             
 
              property is non-zero.
           </para
           >
-          <para
-            >
-            This method is equivalent to calling <c
-            >WaitOne(-1)</c>
+          <para>
+            This method is equivalent to calling <c>WaitOne(-1)</c>
 
             
 
@@ -1587,8 +1379,7 @@
           </para
           >
         </remarks>
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -1618,10 +1409,8 @@
         <Parameter Name="exitContext" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="millisecondsTimeout"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="millisecondsTimeout">
+          A <see cref="T:System.Int32" />
 
           
 
@@ -1629,37 +1418,30 @@
           milliseconds the current thread should block before returning.
         </param
         >
-        <param name="exitContext"
-          >
-          This parameter must be <see
-           langword="false" />
+        <param name="exitContext">
+          This parameter must be <see langword="false" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Blocks the current thread until the curent instance has a non-zero 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            or the timeout expires.
         </summary
         >
-        <returns
-          >
-          Returns <see
-           langword="true" />
+        <returns>
+          Returns <see langword="true" />
 
           
 
            when the current instance receives a
-          signal, otherwise <see
-           langword="false" />
+          signal, otherwise <see langword="false" />
 
           
 
@@ -1668,24 +1450,20 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The caller of this method blocks for up to 
-            <paramref
-             name="millisecondsTimeout" />
+            <paramref name="millisecondsTimeout" />
 
             
 
              for the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Signum" />
+            <see cref="P:Mono.Unix.UnixSignal.Signum" />
 
             
 
              signal to be received 
             by the current process and the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Count" />
+            <see cref="P:Mono.Unix.UnixSignal.Count" />
 
             
 
@@ -1699,8 +1477,7 @@
 
           
 
-           is less than <c
-          >-1</c>
+           is less than <c>-1</c>
 
           
 
@@ -1712,16 +1489,14 @@
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >
@@ -1750,65 +1525,53 @@
         <Parameter Name="exitContext" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="timeout"
-          >
-          A <see
-           cref="T:System.TimeSpan" />
+        <param name="timeout">
+          A <see cref="T:System.TimeSpan" />
 
           
 
            specifying how long the method
-          should wait before returning.  Use a <see
-           cref="T:System.TimeSpan" />
+          should wait before returning.  Use a <see cref="T:System.TimeSpan" />
 
           
 
           
-          with a <see
-           cref="P:System.TimeSpan.TotalMilliseconds" />
+          with a <see cref="P:System.TimeSpan.TotalMilliseconds" />
 
           
 
            value of
-          <c
-          >-1</c>
+          <c>-1</c>
 
           
 
            for an infinite timeout.
         </param
         >
-        <param name="exitContext"
-          >
-          This parameter must be <see
-           langword="false" />
+        <param name="exitContext">
+          This parameter must be <see langword="false" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Blocks the current thread until the curent instance has a non-zero 
-          <see
-           cref="P:Mono.Unix.UnixSignal.Count" />
+          <see cref="P:Mono.Unix.UnixSignal.Count" />
 
           
 
            or the timeout expires.
         </summary
         >
-        <returns
-          >
-          Returns <see
-           langword="true" />
+        <returns>
+          Returns <see langword="true" />
 
           
 
            when the current instance receives a
-          signal, otherwise <see
-           langword="false" />
+          signal, otherwise <see langword="false" />
 
           
 
@@ -1817,24 +1580,20 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             The caller of this method blocks for up to 
-            <c
-            >timeout.TotalMilliseconds</c>
+            <c>timeout.TotalMilliseconds</c>
 
             
 
              milliseconds for the
-            <see
-             cref="P:Mono.Unix.UnixSignal.Signum" />
+            <see cref="P:Mono.Unix.UnixSignal.Signum" />
 
             
 
              signal to be received 
             by the current process and the 
-            <see
-             cref="P:Mono.Unix.UnixSignal.Count" />
+            <see cref="P:Mono.Unix.UnixSignal.Count" />
 
             
 
@@ -1849,19 +1608,16 @@
           
 
           's 
-          <see
-           cref="P:System.TimeSpan.TotalMilliseconds" />
+          <see cref="P:System.TimeSpan.TotalMilliseconds" />
 
           
 
            property is less
-          than <c
-          >-1</c>
+          than <c>-1</c>
 
           
 
-           or greater than <see
-           cref="F:System.Int32.MaxValue" />
+           or greater than <see cref="F:System.Int32.MaxValue" />
 
           
 
@@ -1873,16 +1629,14 @@
 
           
 
-           is <see
-           langword="true" />
+           is <see langword="true" />
 
           
 
           .
         </exception
         >
-        <exception cref="T:System.ObjectDisposedException"
-          >
+        <exception cref="T:System.ObjectDisposedException">
           The current instance has already been disposed.
         </exception
         >

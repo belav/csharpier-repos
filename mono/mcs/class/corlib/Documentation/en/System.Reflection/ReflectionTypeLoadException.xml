@@ -36,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown by the <see
-         cref="M:System.Reflection.Module.GetTypes" />
+        >The exception that is thrown by the <see cref="M:System.Reflection.Module.GetTypes" />
 
         
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.ReflectionTypeLoadException" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionTypeLoadException" />
 
             
 
@@ -80,24 +78,30 @@
           >
         </summary>
         <param name="classes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param
         >
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref
-           name="classes" />
+          An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" />
 
           
 
-           array line up with the exceptions in this <paramref
-           name="exceptions" />
+           array line up with the exceptions in this <paramref name="exceptions" />
 
           
 
@@ -131,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.ReflectionTypeLoadException" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.ReflectionTypeLoadException" />
 
             
 
@@ -140,31 +143,41 @@
           >
         </summary>
         <param name="classes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of type Type containing the classes that were defined in the module and loaded. This array can contain null reference (Nothing in Visual Basic) values. </param
         >
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref
-           name="classes" />
+          An array of type Exception containing the exceptions that were thrown by the class loader. The null reference (Nothing in Visual Basic) values in the <paramref name="classes" />
 
           
 
-           array line up with the exceptions in this <paramref
-           name="exceptions" />
+           array line up with the exceptions in this <paramref name="exceptions" />
 
           
 
            array. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -199,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Provides an <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -208,14 +220,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The information and data needed to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,8 +263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The LoaderExceptions property retrieves an array of type Exception that is parallel to the <see
-             cref="P:System.Reflection.ReflectionTypeLoadException.Types" />
+            >The LoaderExceptions property retrieves an array of type Exception that is parallel to the <see cref="P:System.Reflection.ReflectionTypeLoadException.Types" />
 
             
 
@@ -274,8 +293,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.ReflectionTypeLoadException.LoaderExceptions" />
+            >The <see cref="P:System.Reflection.ReflectionTypeLoadException.LoaderExceptions" />
 
             
 

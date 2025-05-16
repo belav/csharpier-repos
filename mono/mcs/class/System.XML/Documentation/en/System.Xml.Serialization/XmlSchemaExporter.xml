@@ -21,23 +21,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+        >The <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
         
 
-         class provides a programmatic representation of an XML Schema Definition language (XSD) document. Instead of using <see
-         cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+         class provides a programmatic representation of an XML Schema Definition language (XSD) document. Instead of using <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
         
 
-         directly, use the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+         directly, use the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
         
 
-         class or the <format
-         type="text/html">
+         class or the <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
 
@@ -46,18 +42,15 @@
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+        >The <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
         
 
-         class creates <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         class creates <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
-         objects from classes that are identified as Web services. It uses the <see
-         cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+         objects from classes that are identified as Web services. It uses the <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
         
 
@@ -72,8 +65,7 @@
         </item>
       </list>
       <para
-        >Xsd.exe generates XML schema documents from one or more types in a run-time assembly file using the <see
-         cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+        >Xsd.exe generates XML schema documents from one or more types in a run-time assembly file using the <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
         
 
@@ -83,8 +75,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Populates <see
-         cref="T:System.Xml.Schema.XmlSchema" />
+        >Populates <see cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
@@ -116,18 +107,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+            >The <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
             
 
-             class supplies the collection of <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class supplies the collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             objects to which XML schema element declarations are to be added. You do not need to create an instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+             objects to which XML schema element declarations are to be added. You do not need to create an instance of the <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
             
 
@@ -137,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
             
 
@@ -146,12 +133,15 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -182,26 +172,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You do not need to call the method directly.</para>
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >The <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
-             creates <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             creates <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
              objects from classes that are identified as Web services.</para
           >
           <para
-            >A field or property of type <see
-             cref="T:System.Xml.XmlElement" />
+            >A field or property of type <see cref="T:System.Xml.XmlElement" />
 
             
 
-            , with an attribute <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            , with an attribute <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -211,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Exports an &lt;any&gt; element to the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Exports an &lt;any&gt; element to the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -224,12 +209,15 @@
           <para>An arbitrary name assigned to the &lt;any&gt; element declaration.</para>
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace of the XML schema document to which to add an <ui
-          >&lt;any&gt;</ui>
+          The namespace of the XML schema document to which to add an <ui>&lt;any&gt;</ui>
 
           
 
@@ -263,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element declaration for an object or type to a SOAP message or to an <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an element declaration for an object or type to a SOAP message or to an <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -276,12 +263,15 @@
           <para>The string "any" with an appended integer. </para>
         </returns>
         <param name="members">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlMembersMapping" />
+          An <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
           
 
@@ -314,21 +304,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each SOAP message part, the <see
-             cref="M:System.Xml.Serialization.XmlSchemaExporter.ExportMembersMapping(System.Xml.Serialization.XmlMembersMapping)" />
+            >For each SOAP message part, the <see cref="M:System.Xml.Serialization.XmlSchemaExporter.ExportMembersMapping(System.Xml.Serialization.XmlMembersMapping)" />
 
             
 
-             method adds an XML schema element declaration to the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             method adds an XML schema element declaration to the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
              that uses the same namespace as the part. A literal message definition normally contains a single part.</para
           >
           <para
-            >Use the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >Use the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
@@ -338,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element declaration to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an element declaration to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -347,7 +333,11 @@
           >
         </summary>
         <param name="xmlMembersMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -382,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element declaration to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an element declaration to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -391,14 +380,22 @@
           >
         </summary>
         <param name="xmlMembersMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The internal mapping between a .NET Framework type and an XML schema element.</param
         >
         <param name="exportEnclosingType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,16 +428,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload adds an XML schema element declaration to the <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >This overload adds an XML schema element declaration to the <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
              that uses the same namespace as the SOAP message part. The literal message definition must contain a single part.</para
           >
           <para
-            >Use the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >Use the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
@@ -450,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element declaration to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an element declaration to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -461,8 +455,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >An <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -470,7 +463,11 @@
           >
         </returns>
         <param name="xmlMembersMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -504,8 +501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an element declaration for a .NET Framework type to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds an element declaration for a .NET Framework type to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -513,7 +509,11 @@
           >
         </summary>
         <param name="xmlTypeMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

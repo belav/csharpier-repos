@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlReflectionMember" />
+        >The <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
         
 
@@ -31,8 +30,7 @@
       <list type="bullet">
         <item>
           <para
-            >To initialize <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >To initialize <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -41,18 +39,15 @@
         </item>
         <item>
           <para
-            >By the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >By the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
-             class while <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+             class while <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
-             creates <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             creates <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -61,8 +56,7 @@
         </item>
       </list>
       <para
-        >During reflection of a SOAP Web service method, arrays of <see
-         cref="T:System.Xml.Serialization.XmlReflectionMember" />
+        >During reflection of a SOAP Web service method, arrays of <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
         
 
@@ -83,28 +77,23 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+        >The <see cref="T:System.Xml.Serialization.SoapReflectionImporter" />
 
         
 
-         and <see
-         cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+         and <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
         
 
-         classes translate an <see
-         cref="T:System.Xml.Serialization.XmlReflectionMember" />
+         classes translate an <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
         
 
-         array into an <see
-         cref="T:System.Xml.Serialization.XmlMembersMapping" />
+         array into an <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
         
 
-         that contains an <see
-         cref="T:System.Xml.Serialization.XmlMemberMapping" />
+         that contains an <see cref="T:System.Xml.Serialization.XmlMemberMapping" />
 
         
 
@@ -136,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -164,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to use the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -175,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >Gets or sets a value that indicates whether the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -204,29 +190,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Web service method member may be an input parameter, an output parameter, a return type, an input header, or an output header.</para>
           <para
-            >You do not need to use the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
              class and its properties directly.</para
           >
           <para
-            >See the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             class for the cases when a member corresponds to a &lt;part&gt; element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see
-             cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+             class for the cases when a member corresponds to a &lt;part&gt; element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
 
             
 
              enumeration member), the method parameters and return value do not appear in the WSDL document.</para
           >
           <para
-            >When a Web service method is being reflected, the return type's <see
-             cref="P:System.Xml.Serialization.XmlReflectionMember.MemberName" />
+            >When a Web service method is being reflected, the return type's <see cref="P:System.Xml.Serialization.XmlReflectionMember.MemberName" />
 
             
 
@@ -258,21 +240,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Web service method member's code entity may be an input parameter, an output parameter, a return type, or a SOAP header attribute.</para>
           <para
-            >You do not need to use the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
              class and its properties directly.</para
           >
           <para
-            >See the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >See the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
-             class for the cases when a member corresponds to a part element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see
-             cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
+             class for the cases when a member corresponds to a part element defined in a Web Services Description Language (WSDL) document. Note, however, that with a wrapped binding between a WSDL operation and a .NET Framework method (indicated by the <see cref="F:System.Web.Services.Protocols.SoapParameterStyle.Wrapped" />
 
             
 
@@ -303,31 +282,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This setting overrides the <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.IsNullable" />
+            >This setting overrides the <see cref="P:System.Xml.Serialization.XmlElementAttribute.IsNullable" />
 
             
 
-             property of the <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+             property of the <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
-             attribute. It is set to true only when a SOAP header's type is neither <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             attribute. It is set to true only when a SOAP header's type is neither <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             nor <see
-             cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
+             nor <see cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
 
             
 
             .</para
           >
           <para
-            >You do not need to use the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -365,8 +339,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Web service method member's code entity may be an input parameter, an output parameter, a return type, an input SOAP header attribute, or an output SOAP header attribute.</para>
           <para
-            >You do not need to use the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -376,8 +349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            >Gets or sets a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
@@ -411,8 +383,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Web service method member's code entity may be an input parameter, an output parameter, a return type, an input SOAP header attribute, or an output SOAP header attribute.</para>
           <para
-            >You do not need to use the <see
-             cref="T:System.Xml.Serialization.XmlReflectionMember" />
+            >You do not need to use the <see cref="T:System.Xml.Serialization.XmlReflectionMember" />
 
             
 
@@ -422,13 +393,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Gets or sets an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             with the collection of <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             with the collection of <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

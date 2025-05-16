@@ -14,51 +14,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Form.FormClosed" />
+        >The <see cref="E:System.Windows.Forms.Form.FormClosed" />
 
         
 
-         event occurs after a form is closed, either by the user, through the user interface (UI), or programmatically, through calls to methods such as <see
-         cref="M:System.Windows.Forms.Form.Close" />
+         event occurs after a form is closed, either by the user, through the user interface (UI), or programmatically, through calls to methods such as <see cref="M:System.Windows.Forms.Form.Close" />
 
         
 
-         in the <see
-         cref="T:System.Windows.Forms.Form" />
+         in the <see cref="T:System.Windows.Forms.Form" />
 
         
 
-         class, or <see
-         cref="M:System.Windows.Forms.Application.Exit" />
+         class, or <see cref="M:System.Windows.Forms.Application.Exit" />
 
         
 
-         in the <see
-         cref="T:System.Windows.Forms.Application" />
+         in the <see cref="T:System.Windows.Forms.Application" />
 
         
 
-         class. If a form has any child or owned forms, a <see
-         cref="E:System.Windows.Forms.Form.FormClosed" />
+         class. If a form has any child or owned forms, a <see cref="E:System.Windows.Forms.Form.FormClosed" />
 
         
 
          event is also raised for each one. </para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.FormClosedEventArgs" />
+        >The <see cref="T:System.Windows.Forms.FormClosedEventArgs" />
 
         
 
-         class provides data for the <see
-         cref="E:System.Windows.Forms.Form.FormClosed" />
+         class provides data for the <see cref="E:System.Windows.Forms.Form.FormClosed" />
 
         
 
-         event. The <see
-         cref="P:System.Windows.Forms.FormClosedEventArgs.CloseReason" />
+         event. The <see cref="P:System.Windows.Forms.FormClosedEventArgs.CloseReason" />
 
         
 
@@ -68,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Form.FormClosed" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Form.FormClosed" />
 
         
 
@@ -92,13 +82,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="closeReason" />
+            >The <paramref name="closeReason" />
 
             
 
-             parameter is used to initialize the <see
-             cref="P:System.Windows.Forms.FormClosedEventArgs.CloseReason" />
+             parameter is used to initialize the <see cref="P:System.Windows.Forms.FormClosedEventArgs.CloseReason" />
 
             
 
@@ -108,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.FormClosedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FormClosedEventArgs" />
 
             
 
@@ -117,12 +104,15 @@
           >
         </summary>
         <param name="closeReason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.CloseReason" />
+          A <see cref="T:System.Windows.Forms.CloseReason" />
 
           
 
@@ -148,13 +138,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Form" />
+            >A <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             can be closed because of a variety of reasons, both user-initiated and programmatic. The <see
-             cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+             can be closed because of a variety of reasons, both user-initiated and programmatic. The <see cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
 
             
 

@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >All code access permissions should implement <see
-         cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+        >All code access permissions should implement <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
         
 

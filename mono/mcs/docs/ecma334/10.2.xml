@@ -2,21 +2,18 @@
 <clause number="10.2" title="Application termination">
   <paragraph>Application termination returns control to the execution environment. </paragraph>
   <paragraph
-    >If the return type of the application's entry point method is <keyword
-    >int</keyword>
+    >If the return type of the application's entry point method is <keyword>int</keyword>
 
     
 
     , the value returned serves as the application's termination status code. The purpose of this code is to allow communication of success or failure to the execution environment. </paragraph
   >
   <paragraph
-    >If the return type of the entry point method is <keyword
-    >void</keyword>
+    >If the return type of the entry point method is <keyword>void</keyword>
 
     
 
-    , reaching the right brace (<symbol
-    >}</symbol>
+    , reaching the right brace (<symbol>}</symbol>
 
     
 

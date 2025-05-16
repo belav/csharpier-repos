@@ -25,8 +25,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class provides the set of standard root keys found in the registry on machines running Windows. The registry is a storage facility for information about applications, users, and default system settings. For example, applications can use the registry for storing information that needs to be preserved after the application is closed, and access that same information when the application is reloaded. For instance, you can store color preferences, screen locations, or the size of the window. You can control this data for each user by storing the information in a different location in the registry.</para>
       <para
-        >The base, or root <see
-         cref="T:Microsoft.Win32.RegistryKey" />
+        >The base, or root <see cref="T:Microsoft.Win32.RegistryKey" />
 
         
 
@@ -91,8 +90,7 @@
         </item>
       </list>
       <para
-        >Once you have identified the root key under which you want to store/retrieve information from the registry, you can use the <see
-         cref="T:Microsoft.Win32.RegistryKey" />
+        >Once you have identified the root key under which you want to store/retrieve information from the registry, you can use the <see cref="T:Microsoft.Win32.RegistryKey" />
 
         
 
@@ -103,31 +101,26 @@
         <h2>Static Methods for Getting and Setting Values</h2>
       </format>
       <para
-        >In the .NET Framework version 2.0, the <see
-         cref="T:Microsoft.Win32.Registry" />
+        >In the .NET Framework version 2.0, the <see cref="T:Microsoft.Win32.Registry" />
 
         
 
-         class also contains static <see
-         cref="M:Microsoft.Win32.Registry.GetValue(System.String,System.String,System.Object)" />
+         class also contains static <see cref="M:Microsoft.Win32.Registry.GetValue(System.String,System.String,System.Object)" />
 
         
 
-         and <see
-         cref="Overload:Microsoft.Win32.Registry.SetValue" />
+         and <see cref="Overload:Microsoft.Win32.Registry.SetValue" />
 
         
 
-         methods for setting and retrieving values from registry keys. These methods open and close registry keys each time they are used, so they do not perform as well as analogous methods in the <see
-         cref="T:Microsoft.Win32.RegistryKey" />
+         methods for setting and retrieving values from registry keys. These methods open and close registry keys each time they are used, so they do not perform as well as analogous methods in the <see cref="T:Microsoft.Win32.RegistryKey" />
 
         
 
          class, when you access a large number of values.</para
       >
       <para
-        >The <see
-         cref="T:Microsoft.Win32.RegistryKey" />
+        >The <see cref="T:Microsoft.Win32.RegistryKey" />
 
         
 
@@ -137,8 +130,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides <see
-         cref="T:Microsoft.Win32.RegistryKey" />
+        >Provides <see cref="T:Microsoft.Win32.RegistryKey" />
 
         
 
@@ -198,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is mapped to a subkey within <see
-             cref="F:Microsoft.Win32.Registry.LocalMachine" />
+            >This member is mapped to a subkey within <see cref="F:Microsoft.Win32.Registry.LocalMachine" />
 
             
 
@@ -306,8 +297,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string <paramref
-             name="valueName" />
+            >The string <paramref name="valueName" />
 
             
 
@@ -315,8 +305,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To retrieve this unnamed value, specify either null or the empty string ("") for <paramref
-               name="valuName" />
+              >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To retrieve this unnamed value, specify either null or the empty string ("") for <paramref name="valuName" />
 
               
 
@@ -325,33 +314,27 @@
           </block>
           <para>Valid root names are HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, HKEY_CLASSES_ROOT, HKEY_USERS, HKEY_PERFORMANCE_DATA, HKEY_CURRENT_CONFIG, and HKEY_DYN_DATA. For example, in Visual Basic the string "HKEY_CURRENT_USER\MyTestKey" accesses key/value pairs for the subkey "MyTestKey" in the HKEY_CURRENT_USER root. </para>
           <para
-            >When the <see
-             cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
+            >When the <see cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
 
             
 
-             method retrieves expandable string values (<see
-             cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+             method retrieves expandable string values (<see cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
 
             
 
-            ), it expands environment strings using data from the local environment. If a value containing expandable references to environment variables has been stored as a string (<see
-             cref="F:Microsoft.Win32.RegistryValueKind.String" />
+            ), it expands environment strings using data from the local environment. If a value containing expandable references to environment variables has been stored as a string (<see cref="F:Microsoft.Win32.RegistryValueKind.String" />
 
             
 
-            ), rather than as an expandable string (<see
-             cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+            ), rather than as an expandable string (<see cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
 
             
 
-            ), <see
-             cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
+            ), <see cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
 
             
 
-             does not expand it. You can expand such a string after it has been retrieved by calling the <see
-             cref="M:System.Environment.ExpandEnvironmentVariables(System.String)" />
+             does not expand it. You can expand such a string after it has been retrieved by calling the <see cref="M:System.Environment.ExpandEnvironmentVariables(System.String)" />
 
             
 
@@ -359,13 +342,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The recommended way to retrieve data from HKEY_PERFORMANCE_DATA is to use the <see
-               cref="T:System.Diagnostics.PerformanceCounter" />
+              >The recommended way to retrieve data from HKEY_PERFORMANCE_DATA is to use the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
               
 
-               class rather than the <see
-               cref="Overload:Microsoft.Win32.RegistryKey.GetValue" />
+               class rather than the <see cref="Overload:Microsoft.Win32.RegistryKey.GetValue" />
 
               
 
@@ -373,18 +354,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:Microsoft.Win32.Registry.GetValue(System.String,System.String,System.Object)" />
+            >The <see cref="M:Microsoft.Win32.Registry.GetValue(System.String,System.String,System.Object)" />
 
             
 
-             and <see
-             cref="Overload:Microsoft.Win32.Registry.SetValue" />
+             and <see cref="Overload:Microsoft.Win32.Registry.SetValue" />
 
             
 
-             methods open and close registry keys each time they are used, so they do not perform as well as the methods of the <see
-             cref="T:Microsoft.Win32.RegistryKey" />
+             methods open and close registry keys each time they are used, so they do not perform as well as the methods of the <see cref="T:Microsoft.Win32.RegistryKey" />
 
             
 
@@ -405,23 +383,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >null if the subkey specified by <paramref
-             name="keyName" />
+            >null if the subkey specified by <paramref name="keyName" />
 
             
 
-             does not exist; otherwise, the value associated with <paramref
-             name="valueName" />
+             does not exist; otherwise, the value associated with <paramref name="valueName" />
 
             
 
-            , or <paramref
-             name="defaultValue" />
+            , or <paramref name="defaultValue" />
 
             
 
-             if <paramref
-             name="valueName" />
+             if <paramref name="valueName" />
 
             
 
@@ -429,26 +403,37 @@
           >
         </returns>
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full registry path of the key, beginning with a valid registry root, such as "HKEY_CURRENT_USER".</param
         >
         <param name="valueName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the name/value pair.</param
         >
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to return if <paramref
-           name="valueName" />
+          The value to return if <paramref name="valueName" />
 
           
 
@@ -511,18 +496,15 @@
             </item>
           </list>
           <para
-            >By convention, if similar data exists under <see
-             cref="F:Microsoft.Win32.Registry.CurrentUser" />
+            >By convention, if similar data exists under <see cref="F:Microsoft.Win32.Registry.CurrentUser" />
 
             
 
-             and under <see
-             cref="F:Microsoft.Win32.Registry.LocalMachine" />
+             and under <see cref="F:Microsoft.Win32.Registry.LocalMachine" />
 
             
 
-            , the data in <see
-             cref="F:Microsoft.Win32.Registry.CurrentUser" />
+            , the data in <see cref="F:Microsoft.Win32.Registry.CurrentUser" />
 
             
 
@@ -557,8 +539,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each software component creates keys for its objects, counters when it is installed, and writes counter data while it is executing. You can access this data as you would access any other registry data, using the <see
-             cref="T:Microsoft.Win32.RegistryKey" />
+            >Each software component creates keys for its objects, counters when it is installed, and writes counter data while it is executing. You can access this data as you would access any other registry data, using the <see cref="T:Microsoft.Win32.RegistryKey" />
 
             
 
@@ -566,26 +547,22 @@
           >
           <para>Although you use the registry to collect performance data, the data is not stored in the registry database. Instead, accessing the registry with this key causes the system to collect the data from the appropriate system object managers.</para>
           <para
-            >To obtain performance data from the local system, use the <see
-             cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
+            >To obtain performance data from the local system, use the <see cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
 
             
 
-             method, with the Registry.PerformanceData key. The first call opens the key (you do not need to explicitly open the key first). However, be sure to use the <see
-             cref="M:Microsoft.Win32.RegistryKey.Close" />
+             method, with the Registry.PerformanceData key. The first call opens the key (you do not need to explicitly open the key first). However, be sure to use the <see cref="M:Microsoft.Win32.RegistryKey.Close" />
 
             
 
              method to close the handle to the key when you are finished obtaining performance data. The user cannot install or remove a software component while its performance data is in use.</para
           >
           <para
-            >To obtain performance data from a remote system, you must use the <see
-             cref="M:Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive,System.String)" />
+            >To obtain performance data from a remote system, you must use the <see cref="M:Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive,System.String)" />
 
             
 
-             method, with the computer name of the remote system and the Registry.PerformanceData key. This call retrieves a key representing the performance data for the remote system. To retrieve the data, call <see
-             cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
+             method, with the computer name of the remote system and the Registry.PerformanceData key. This call retrieves a key representing the performance data for the remote system. To retrieve the data, call <see cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
 
             
 
@@ -627,21 +604,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the net_v40_long, the <paramref
-             name="valueName" />
+            >Starting with the net_v40_long, the <paramref name="valueName" />
 
             
 
-             parameter is no longer restricted to a maximum of 255 characters; however, the <paramref
-             name="keyName" />
+             parameter is no longer restricted to a maximum of 255 characters; however, the <paramref name="keyName" />
 
             
 
              parameter continues to have the 255-character restriction.</para
           >
           <para
-            >Because many values can be stored in each key in the registry, you must use the <paramref
-             name="valueName" />
+            >Because many values can be stored in each key in the registry, you must use the <paramref name="valueName" />
 
             
 
@@ -649,8 +623,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To set this unnamed value, specify either null or the empty string ("") for <paramref
-               name="valueName" />
+              >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To set this unnamed value, specify either null or the empty string ("") for <paramref name="valueName" />
 
               
 
@@ -658,21 +631,18 @@
             >
           </block>
           <para
-            >If <paramref
-             name="valueName" />
+            >If <paramref name="valueName" />
 
             
 
-             does not exist in the key, it is created and the associated value is set to <paramref
-             name="value" />
+             does not exist in the key, it is created and the associated value is set to <paramref name="value" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="keyName" />
+            >If <paramref name="keyName" />
 
             
 
@@ -681,18 +651,15 @@
           <para>Valid root names include HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, HKEY_CLASSES_ROOT, HKEY_USERS, HKEY_PERFORMANCE_DATA, HKEY_CURRENT_CONFIG, and HKEY_DYN_DATA.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:Microsoft.Win32.Registry.SetValue" />
+              >The <see cref="Overload:Microsoft.Win32.Registry.SetValue" />
 
               
 
-               method opens a registry key, sets the value, and closes the key each time it is called. If you need to modify a large number of values, the <see
-               cref="Overload:Microsoft.Win32.RegistryKey.SetValue" />
+               method opens a registry key, sets the value, and closes the key each time it is called. If you need to modify a large number of values, the <see cref="Overload:Microsoft.Win32.RegistryKey.SetValue" />
 
               
 
-               method might provide better performance. The <see
-               cref="T:Microsoft.Win32.RegistryKey" />
+               method might provide better performance. The <see cref="T:Microsoft.Win32.RegistryKey" />
 
               
 
@@ -700,59 +667,49 @@
             >
           </block>
           <para
-            >This overload of <see
-             cref="Overload:Microsoft.Win32.Registry.SetValue" />
+            >This overload of <see cref="Overload:Microsoft.Win32.Registry.SetValue" />
 
             
 
-             stores 64-bit integers as strings (<see
-             cref="F:Microsoft.Win32.RegistryValueKind.String" />
+             stores 64-bit integers as strings (<see cref="F:Microsoft.Win32.RegistryValueKind.String" />
 
             
 
-            ). To store 64-bit numbers as <see
-             cref="F:Microsoft.Win32.RegistryValueKind.QWord" />
+            ). To store 64-bit numbers as <see cref="F:Microsoft.Win32.RegistryValueKind.QWord" />
 
             
 
-             values, use the <see
-             cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
+             values, use the <see cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
 
             
 
              method overload.</para
           >
           <para
-            >This overload of <see
-             cref="Overload:Microsoft.Win32.Registry.SetValue" />
+            >This overload of <see cref="Overload:Microsoft.Win32.Registry.SetValue" />
 
             
 
-             stores all string values as <see
-             cref="F:Microsoft.Win32.RegistryValueKind.String" />
+             stores all string values as <see cref="F:Microsoft.Win32.RegistryValueKind.String" />
 
             
 
-             objects, even if they contain expandable references to environment variables. To save string values as expandable strings (<see
-             cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+             objects, even if they contain expandable references to environment variables. To save string values as expandable strings (<see cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
 
             
 
-            ), use the <see
-             cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
+            ), use the <see cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
 
             
 
              method overload.</para
           >
           <para
-            >This overload is equivalent to calling the <see
-             cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
+            >This overload is equivalent to calling the <see cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
 
             
 
-             method overload with <see
-             cref="F:Microsoft.Win32.RegistryValueKind.Unknown" />
+             method overload with <see cref="F:Microsoft.Win32.RegistryValueKind.Unknown" />
 
             
 
@@ -767,21 +724,33 @@
           <para>Sets the specified name/value pair on the specified registry key. If the specified key does not exist, it is created.</para>
         </summary>
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full registry path of the key, beginning with a valid registry root, such as "HKEY_CURRENT_USER".</param
         >
         <param name="valueName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the name/value pair.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -816,21 +785,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the net_v40_long, the <paramref
-             name="valueName" />
+            >Starting with the net_v40_long, the <paramref name="valueName" />
 
             
 
-             parameter is no longer restricted to a maximum of 255 characters; however, the <paramref
-             name="keyName" />
+             parameter is no longer restricted to a maximum of 255 characters; however, the <paramref name="keyName" />
 
             
 
              parameter continues have the 255-character restriction.</para
           >
           <para
-            >Because many values can be stored in each key in the registry, you must use the <paramref
-             name="valueName" />
+            >Because many values can be stored in each key in the registry, you must use the <paramref name="valueName" />
 
             
 
@@ -838,8 +804,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To set this unnamed value, specify either null or the empty string ("") for <paramref
-               name="valueName" />
+              >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To set this unnamed value, specify either null or the empty string ("") for <paramref name="valueName" />
 
               
 
@@ -847,21 +812,18 @@
             >
           </block>
           <para
-            >If <paramref
-             name="valueName" />
+            >If <paramref name="valueName" />
 
             
 
-             does not exist in the key, it is created and the associated value is set to <paramref
-             name="value" />
+             does not exist in the key, it is created and the associated value is set to <paramref name="value" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="keyName" />
+            >If <paramref name="keyName" />
 
             
 
@@ -870,18 +832,15 @@
           <para>Valid root names include HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE, HKEY_CLASSES_ROOT, HKEY_USERS, HKEY_PERFORMANCE_DATA, HKEY_CURRENT_CONFIG, and HKEY_DYN_DATA.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="Overload:Microsoft.Win32.Registry.SetValue" />
+              >The <see cref="Overload:Microsoft.Win32.Registry.SetValue" />
 
               
 
-               method opens a registry key, sets the value, and closes the key each time it is called. If you need to modify a large number of values, the <see
-               cref="Overload:Microsoft.Win32.RegistryKey.SetValue" />
+               method opens a registry key, sets the value, and closes the key each time it is called. If you need to modify a large number of values, the <see cref="Overload:Microsoft.Win32.RegistryKey.SetValue" />
 
               
 
-               method might provide better performance. The <see
-               cref="T:Microsoft.Win32.RegistryKey" />
+               method might provide better performance. The <see cref="T:Microsoft.Win32.RegistryKey" />
 
               
 
@@ -889,38 +848,31 @@
             >
           </block>
           <para
-            >If the type of the specified <paramref
-             name="value" />
+            >If the type of the specified <paramref name="value" />
 
             
 
-             does not match the specified <paramref
-             name="valueKind" />
+             does not match the specified <paramref name="valueKind" />
 
             
 
-            , and the data cannot be converted, <see
-             cref="T:System.ArgumentException" />
+            , and the data cannot be converted, <see cref="T:System.ArgumentException" />
 
             
 
-             is thrown. For example, you can store a <see
-             cref="T:System.Int64" />
+             is thrown. For example, you can store a <see cref="T:System.Int64" />
 
             
 
-             as a <see
-             cref="F:Microsoft.Win32.RegistryValueKind.DWord" />
+             as a <see cref="F:Microsoft.Win32.RegistryValueKind.DWord" />
 
             
 
-            , but only if its value is less than the maximum value of a <see
-             cref="T:System.Int32" />
+            , but only if its value is less than the maximum value of a <see cref="T:System.Int32" />
 
             
 
-            . You cannot store a single string value as a <see
-             cref="F:Microsoft.Win32.RegistryValueKind.MultiString" />
+            . You cannot store a single string value as a <see cref="F:Microsoft.Win32.RegistryValueKind.MultiString" />
 
             
 
@@ -928,13 +880,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If boxed values are passed for <see
-               cref="F:Microsoft.Win32.RegistryValueKind.DWord" />
+              >If boxed values are passed for <see cref="F:Microsoft.Win32.RegistryValueKind.DWord" />
 
               
 
-               or <see
-               cref="F:Microsoft.Win32.RegistryValueKind.QWord" />
+               or <see cref="F:Microsoft.Win32.RegistryValueKind.QWord" />
 
               
 
@@ -950,28 +900,44 @@
           <para>Sets the name/value pair on the specified registry key, using the specified registry data type. If the specified key does not exist, it is created.</para>
         </summary>
         <param name="keyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full registry path of the key, beginning with a valid registry root, such as "HKEY_CURRENT_USER".</param
         >
         <param name="valueName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the name/value pair.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to be stored.</param
         >
         <param name="valueKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

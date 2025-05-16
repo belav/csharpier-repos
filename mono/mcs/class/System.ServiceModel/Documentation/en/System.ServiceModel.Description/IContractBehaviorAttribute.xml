@@ -17,39 +17,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Description.IContractBehaviorAttribute" />
+        >Implement the <see cref="T:System.ServiceModel.Description.IContractBehaviorAttribute" />
 
         
 
-         interface on an attribute that is also an <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+         interface on an attribute that is also an <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
-         object to enable the use of that contract behavior attribute on a service type but restrict its application to the contract specified in the <see
-         cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+         object to enable the use of that contract behavior attribute on a service type but restrict its application to the contract specified in the <see cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
 
         
 
          property.</para
       >
       <para
-        >There is no requirement to implement <see
-         cref="T:System.ServiceModel.Description.IContractBehaviorAttribute" />
+        >There is no requirement to implement <see cref="T:System.ServiceModel.Description.IContractBehaviorAttribute" />
 
         
 
-         on custom contract behavior attributes, and if the attribute is applied either to a contract interface or to a duplex callback class the value of the <see
-         cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+         on custom contract behavior attributes, and if the attribute is applied either to a contract interface or to a duplex callback class the value of the <see cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
 
         
 
          property is ignored. </para
       >
       <para
-        >For more information, see <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+        >For more information, see <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
@@ -59,8 +53,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the contract for which an attribute that implements the <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+        >Specifies the contract for which an attribute that implements the <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
@@ -87,13 +80,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement the <see
-             cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+            >Implement the <see cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
 
             
 
-             property to specify the contract to which the contract behavior is applied when the implementing <see
-             cref="T:System.ServiceModel.Description.IContractBehavior" />
+             property to specify the contract to which the contract behavior is applied when the implementing <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
             
 

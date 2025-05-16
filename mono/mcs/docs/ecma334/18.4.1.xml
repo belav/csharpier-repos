@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <clause number="18.4.1" title="Database integer type" informative="true">
   <paragraph
-    >The DBInt struct below implements an integer type that can represent the complete set of values of the <keyword
-    >int</keyword>
+    >The DBInt struct below implements an integer type that can represent the complete set of values of the <keyword>int</keyword>
 
     
 
-     type, plus an additional state that indicates an unknown value. A type with these characteristics is commonly used in databases. <code_example
-    >
+     type, plus an additional state that indicates an unknown value. A type with these characteristics is commonly used in databases. <code_example>
       <![CDATA[
 using System;  
 public struct DBInt  

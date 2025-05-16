@@ -5,38 +5,31 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Threading" />
+        >The <see cref="N:System.Threading" />
 
         
 
-         namespace provides classes and interfaces that enable multithreaded programming. In addition to classes for synchronizing thread activities and access to data (<see
-         cref="T:System.Threading.Mutex" />
+         namespace provides classes and interfaces that enable multithreaded programming. In addition to classes for synchronizing thread activities and access to data (<see cref="T:System.Threading.Mutex" />
 
         
 
-        , <see
-         cref="T:System.Threading.Monitor" />
+        , <see cref="T:System.Threading.Monitor" />
 
         
 
-        , <see
-         cref="T:System.Threading.Interlocked" />
+        , <see cref="T:System.Threading.Interlocked" />
 
         
 
-        , <see
-         cref="T:System.Threading.AutoResetEvent" />
+        , <see cref="T:System.Threading.AutoResetEvent" />
 
         
 
-        , and so on), this namespace includes a <see
-         cref="T:System.Threading.ThreadPool" />
+        , and so on), this namespace includes a <see cref="T:System.Threading.ThreadPool" />
 
         
 
-         class that allows you to use a pool of system-supplied threads, and a <see
-         cref="T:System.Threading.Timer" />
+         class that allows you to use a pool of system-supplied threads, and a <see cref="T:System.Threading.Timer" />
 
         
 

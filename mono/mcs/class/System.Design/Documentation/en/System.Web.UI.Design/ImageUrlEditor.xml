@@ -21,8 +21,7 @@
 
         
 
-         is a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         is a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ImageUrlEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ImageUrlEditor" />
 
             
 
@@ -88,8 +86,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.ImageUrlEditor.Filter" />
+            >The <see cref="P:System.Web.UI.Design.ImageUrlEditor.Filter" />
 
             
 

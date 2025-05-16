@@ -16,107 +16,88 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The abstract <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+        >The abstract <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
-         class and its concrete derived classes create <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         class and its concrete derived classes create <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
-         objects from classes that are identified as Web services with the <see
-         cref="T:System.Web.Services.WebServiceAttribute" />
+         objects from classes that are identified as Web services with the <see cref="T:System.Web.Services.WebServiceAttribute" />
 
         
 
-         attribute. Each concrete <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+         attribute. Each concrete <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
-        -derived class generates <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+        -derived class generates <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
-         objects according to a specified communication protocol; <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+         objects according to a specified communication protocol; <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
          provides common functionality regardless of the protocol. </para
       >
       <para
-        >An output <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+        >An output <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
-         instance can be used to generate a Web Services Description Language (WSDL) document with the <see
-         cref="M:System.Web.Services.Description.ServiceDescription.Write(System.IO.Stream)" />
+         instance can be used to generate a Web Services Description Language (WSDL) document with the <see cref="M:System.Web.Services.Description.ServiceDescription.Write(System.IO.Stream)" />
 
         
 
-         method or one of the available overloads. The <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         method or one of the available overloads. The <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
-         instance can also be used by the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+         instance can also be used by the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
          class and related classes to generate client proxy code or abstract server code.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+        >The <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
-         class uses the <see
-         cref="T:System.Web.Services.WebServiceBindingAttribute" />
+         class uses the <see cref="T:System.Web.Services.WebServiceBindingAttribute" />
 
         
 
-         to create a <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         to create a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
-         for each binding it identifies in the Web service class. If that attribute is not present, the <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+         for each binding it identifies in the Web service class. If that attribute is not present, the <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
-         class creates a single binding for the entire class. For each Web service method (a method in the Web service class appearing with the <see
-         cref="T:System.Web.Services.WebMethodAttribute" />
+         class creates a single binding for the entire class. For each Web service method (a method in the Web service class appearing with the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
         
 
-        ) belonging to a binding, a class derived from <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+        ) belonging to a binding, a class derived from <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
-         generates an operation and associated messages that are added to the <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         generates an operation and associated messages that are added to the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
          object.</para
       >
       <para
-        >Typically, a developer uses these classes indirectly through the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+        >Typically, a developer uses these classes indirectly through the <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
         
 
-         class, instead of directly invoking classes derived from <see
-         cref="T:System.Web.Services.Description.ProtocolReflector" />
+         class, instead of directly invoking classes derived from <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
         
 
@@ -126,8 +107,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides common functionality across communication protocols for creating <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+        >Provides common functionality across communication protocols for creating <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
@@ -146,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.ProtocolReflector" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
             
 
@@ -172,13 +151,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, performs processing before <see
-             cref="T:System.Web.Services.Description.ProtocolReflector" />
+            >When overridden in a derived class, performs processing before <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
             
 
-             calls the <see
-             cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
+             calls the <see cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
 
             
 
@@ -206,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Web Services Description Language (WSDL) binding currently being generated and added to the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the Web Services Description Language (WSDL) binding currently being generated and added to the associated <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -232,13 +208,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default namespace, as identified by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the default namespace, as identified by the associated <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             object's <see
-             cref="F:System.Web.Services.Description.ServiceDescription.Namespace" />
+             object's <see cref="F:System.Web.Services.Description.ServiceDescription.Namespace" />
 
             
 
@@ -263,13 +237,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, performs processing after <see
-             cref="ProtocolReflector" />
+            >When overridden in a derived class, performs processing after <see cref="ProtocolReflector" />
 
             
 
-             has called the <see
-             cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
+             has called the <see cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
 
             
 
@@ -298,8 +270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >The <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -309,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -320,8 +290,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >A <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -329,12 +298,15 @@
           >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescription" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
           
 
@@ -361,8 +333,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets SOAP header message definitions to be added to the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets SOAP header message definitions to be added to the associated <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -408,16 +379,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
-        </value>
+        <value>a <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Web service method that the protocol reflector is currently processing to generate a Web Services Description Language (WSDL) operation to be placed in the generated <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the Web service method that the protocol reflector is currently processing to generate a Web Services Description Language (WSDL) operation to be placed in the generated <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -441,21 +408,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Services.WebMethodAttribute" />
-        </value>
+        <value>a <see cref="T:System.Web.Services.WebMethodAttribute" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Gets the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
-             for the method that the protocol reflector is currently processing to generate a Web Services Description Language (WSDL) operation to be placed in the generated <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             for the method that the protocol reflector is currently processing to generate a Web Services Description Language (WSDL) operation to be placed in the generated <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -479,15 +441,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo[]" />
-        </value>
+        <value>a <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Web service methods are identified by the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Web service methods are identified by the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -497,13 +455,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the Web service methods belonging to the Web service class, as identified by the associated <see
-             cref="T:System.Web.Services.Description.ProtocolReflector" />
+            >Gets the Web service methods belonging to the Web service class, as identified by the associated <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
             
 
-             object's <see
-             cref="P:System.Web.Services.Description.ProtocolReflector.Methods" />
+             object's <see cref="P:System.Web.Services.Description.ProtocolReflector.Methods" />
 
             
 
@@ -530,8 +486,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operation appears as a child of the portType element in a WSDL document. Web service methods are identified by the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >The operation appears as a child of the portType element in a WSDL document. Web service methods are identified by the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -562,8 +517,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Web service methods are identified by the <see
-             cref="T:System.Web.Services.WebMethodAttribute" />
+            >Web service methods are identified by the <see cref="T:System.Web.Services.WebMethodAttribute" />
 
             
 
@@ -680,8 +634,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, generates service-specific description information that gets placed in a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >When overridden in a derived class, generates service-specific description information that gets placed in a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -701,21 +654,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlReflectionImporter" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlReflectionImporter" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlReflectionImporter" />
 
             
 
-             instance being used by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+             instance being used by the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
@@ -739,8 +687,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An implementation of the <see
-             cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
+            >An implementation of the <see cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
 
             
 
@@ -750,8 +697,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, generates method-specific information that gets placed in a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >When overridden in a derived class, generates method-specific information that gets placed in a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -761,8 +707,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Method-specific information that gets placed in a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Method-specific information that gets placed in a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -809,21 +754,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSchemaExporter" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSchemaExporter" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlSchemaExporter" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSchemaExporter" />
 
             
 
-             instance being used by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+             instance being used by the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
@@ -847,16 +787,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Xml.Serialization.XmlSchemas" />
-        </value>
+        <value>a <see cref="T:System.Xml.Serialization.XmlSchemas" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the XML schemas being generated by the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >Gets the XML schemas being generated by the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
@@ -906,8 +842,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -934,13 +869,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.ProtocolReflector" />
+            >The <see cref="T:System.Web.Services.Description.ProtocolReflector" />
 
             
 
-             class creates a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             class creates a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -950,23 +883,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             objects that have so far been created and added to the corresponding to the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+             objects that have so far been created and added to the corresponding to the <see cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
 
             
 
-             obtained through the <see
-             cref="P:System.Web.Services.Description.ServiceDescriptionReflector.ServiceDescriptions" />
+             obtained through the <see cref="P:System.Web.Services.Description.ServiceDescriptionReflector.ServiceDescriptions" />
 
             
 
-             property of the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+             property of the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
@@ -990,8 +919,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Web service class is identified by the <see
-             cref="T:System.Web.Services.WebServiceAttribute" />
+            >A Web service class is identified by the <see cref="T:System.Web.Services.WebServiceAttribute" />
 
             
 
@@ -1001,8 +929,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the Web service class being reflected to produce <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets the type of the Web service class being reflected to produce <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -1027,8 +954,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the endpoint of the associated Web service as a Uniform Resource Locator (URL), obtained from the associated <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >Gets the endpoint of the associated Web service as a Uniform Resource Locator (URL), obtained from the associated <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 

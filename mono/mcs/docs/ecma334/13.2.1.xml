@@ -1,519 +1,426 @@
 <?xml version="1.0"?>
 <clause number="13.2.1" title="Explicit numeric conversions">
   <paragraph
-    >The explicit numeric conversions are the conversions from a <non_terminal
-     where="11.1">numeric-type</non_terminal>
-
-    
-
-     to another <non_terminal
-     where="11.1">numeric-type</non_terminal>
-
-    
-
-     for which an implicit numeric conversion (<hyperlink
-    >13.1.2</hyperlink>
-
-    
-
-    ) does not already exist: <list
+    >The explicit numeric conversions are the conversions from a <non_terminal where="11.1"
+      >numeric-type</non_terminal
     >
+
+    
+
+     to another <non_terminal where="11.1"
+      >numeric-type</non_terminal
+    >
+
+    
+
+     for which an implicit numeric conversion (<hyperlink>13.1.2</hyperlink>
+
+    
+
+    ) does not already exist: <list>
       <list_item
-        > From <keyword
-        >sbyte</keyword>
+        > From <keyword>sbyte</keyword>
 
         
 
-         to <keyword
-        >byte</keyword>
+         to <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
+        , <keyword>ulong</keyword>
 
         
 
-        , or <keyword
-        >char</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >byte</keyword>
+        > From <keyword>byte</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-         and <keyword
-        >char</keyword>
-
-        
-
-        . </list_item
-      >
-      <list_item
-        > From <keyword
-        >short</keyword>
-
-        
-
-         to <keyword
-        >sbyte</keyword>
-
-        
-
-        , <keyword
-        >byte</keyword>
-
-        
-
-        , <keyword
-        >ushort</keyword>
-
-        
-
-        , <keyword
-        >uint</keyword>
-
-        
-
-        , <keyword
-        >ulong</keyword>
-
-        
-
-        , or <keyword
-        >char</keyword>
+         and <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >ushort</keyword>
+        > From <keyword>short</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , or <keyword
-        >char</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        . </list_item
-      >
-      <list_item
-        > From <keyword
-        >int</keyword>
+        , <keyword>ulong</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
-
-        
-
-        , <keyword
-        >byte</keyword>
-
-        
-
-        , <keyword
-        >short</keyword>
-
-        
-
-        , <keyword
-        >ushort</keyword>
-
-        
-
-        , <keyword
-        >uint</keyword>
-
-        
-
-        , <keyword
-        >ulong</keyword>
-
-        
-
-        , or <keyword
-        >char</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >uint</keyword>
+        > From <keyword>ushort</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
-
-        
-
-        , <keyword
-        >int</keyword>
-
-        
-
-        , or <keyword
-        >char</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >long</keyword>
+        > From <keyword>int</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >int</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>ulong</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
-
-        
-
-        , or <keyword
-        >char</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >ulong</keyword>
+        > From <keyword>uint</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >int</keyword>
+        , <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
-
-        
-
-        , <keyword
-        >long</keyword>
-
-        
-
-        , or <keyword
-        >char</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >char</keyword>
+        > From <keyword>long</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , or <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        . </list_item
-      >
-      <list_item
-        > From <keyword
-        >float</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+        , <keyword>int</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>ulong</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
-
-        
-
-        , <keyword
-        >int</keyword>
-
-        
-
-        , <keyword
-        >uint</keyword>
-
-        
-
-        , <keyword
-        >long</keyword>
-
-        
-
-        , <keyword
-        >ulong</keyword>
-
-        
-
-        , <keyword
-        >char</keyword>
-
-        
-
-        , or <keyword
-        >decimal</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >double</keyword>
+        > From <keyword>ulong</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >int</keyword>
+        , <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
-
-        
-
-        , <keyword
-        >char</keyword>
-
-        
-
-        , <keyword
-        >float</keyword>
-
-        
-
-        , or <keyword
-        >decimal</keyword>
+        , or <keyword>char</keyword>
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >decimal</keyword>
+        > From <keyword>char</keyword>
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , or <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        . </list_item
+      >
+      <list_item
+        > From <keyword>float</keyword>
 
         
 
-        , <keyword
-        >int</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >char</keyword>
+        , <keyword>int</keyword>
 
         
 
-        , <keyword
-        >float</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , or <keyword
-        >double</keyword>
+        , <keyword>long</keyword>
+
+        
+
+        , <keyword>ulong</keyword>
+
+        
+
+        , <keyword>char</keyword>
+
+        
+
+        , or <keyword>decimal</keyword>
+
+        
+
+        . </list_item
+      >
+      <list_item
+        > From <keyword>double</keyword>
+
+        
+
+         to <keyword>sbyte</keyword>
+
+        
+
+        , <keyword>byte</keyword>
+
+        
+
+        , <keyword>short</keyword>
+
+        
+
+        , <keyword>ushort</keyword>
+
+        
+
+        , <keyword>int</keyword>
+
+        
+
+        , <keyword>uint</keyword>
+
+        
+
+        , <keyword>long</keyword>
+
+        
+
+        , <keyword>ulong</keyword>
+
+        
+
+        , <keyword>char</keyword>
+
+        
+
+        , <keyword>float</keyword>
+
+        
+
+        , or <keyword>decimal</keyword>
+
+        
+
+        . </list_item
+      >
+      <list_item
+        > From <keyword>decimal</keyword>
+
+        
+
+         to <keyword>sbyte</keyword>
+
+        
+
+        , <keyword>byte</keyword>
+
+        
+
+        , <keyword>short</keyword>
+
+        
+
+        , <keyword>ushort</keyword>
+
+        
+
+        , <keyword>int</keyword>
+
+        
+
+        , <keyword>uint</keyword>
+
+        
+
+        , <keyword>long</keyword>
+
+        
+
+        , <keyword>ulong</keyword>
+
+        
+
+        , <keyword>char</keyword>
+
+        
+
+        , <keyword>float</keyword>
+
+        
+
+        , or <keyword>double</keyword>
 
         
 
@@ -523,28 +430,28 @@
   </paragraph>
   <paragraph
     >Because the explicit conversions include all implicit and explicit numeric conversions, it is always possible to convert from any <non_terminal
-     where="11.1">numeric-type</non_terminal>
+      where="11.1"
+      >numeric-type</non_terminal
+    >
 
     
 
-     to any other <non_terminal
-     where="11.1">numeric-type</non_terminal>
+     to any other <non_terminal where="11.1"
+      >numeric-type</non_terminal
+    >
 
     
 
-     using a cast expression (<hyperlink
-    >14.6.6</hyperlink>
+     using a cast expression (<hyperlink>14.6.6</hyperlink>
 
     
 
     ). </paragraph
   >
   <paragraph
-    >The explicit numeric conversions possibly lose information or possibly cause exceptions to be thrown. An explicit numeric conversion is processed as follows: <list
-    >
+    >The explicit numeric conversions possibly lose information or possibly cause exceptions to be thrown. An explicit numeric conversion is processed as follows: <list>
       <list_item
-        > For a conversion from an integral type to another integral type, the processing depends on the overflow checking context (<hyperlink
-        >14.5.12</hyperlink>
+        > For a conversion from an integral type to another integral type, the processing depends on the overflow checking context (<hyperlink>14.5.12</hyperlink>
 
         
 
@@ -560,26 +467,22 @@
         </list>
       </list>
       <list_item
-        > For a conversion from <keyword
-        >decimal</keyword>
+        > For a conversion from <keyword>decimal</keyword>
 
         
 
          to an integral type, the source value is rounded towards zero to the nearest integral value, and this integral value becomes the result of the conversion. If the resulting integral value is outside the range of the destination type, a System.OverflowException is thrown. </list_item
       >
       <list_item
-        > For a conversion from <keyword
-        >float</keyword>
+        > For a conversion from <keyword>float</keyword>
 
         
 
-         or <keyword
-        >double</keyword>
+         or <keyword>double</keyword>
 
         
 
-         to an integral type, the processing depends on the  overflow-checking context (<hyperlink
-        >14.5.12</hyperlink>
+         to an integral type, the processing depends on the  overflow-checking context (<hyperlink>14.5.12</hyperlink>
 
         
 
@@ -598,124 +501,101 @@
         </list>
       </list>
       <list_item
-        > For a conversion from <keyword
-        >double</keyword>
+        > For a conversion from <keyword>double</keyword>
 
         
 
-         to <keyword
-        >float</keyword>
+         to <keyword>float</keyword>
 
         
 
-        , the <keyword
-        >double</keyword>
+        , the <keyword>double</keyword>
 
         
 
-         value is rounded to the nearest <keyword
-        >float</keyword>
+         value is rounded to the nearest <keyword>float</keyword>
 
         
 
-         value. If the <keyword
-        >double</keyword>
+         value. If the <keyword>double</keyword>
 
         
 
-         value is too small to represent as a <keyword
-        >float</keyword>
+         value is too small to represent as a <keyword>float</keyword>
 
         
 
-        , the result becomes positive zero or negative zero. If the <keyword
-        >double</keyword>
+        , the result becomes positive zero or negative zero. If the <keyword>double</keyword>
 
         
 
-         value is too large to represent as a <keyword
-        >float</keyword>
+         value is too large to represent as a <keyword>float</keyword>
 
         
 
-        , the result becomes positive infinity or negative infinity. If the <keyword
-        >double</keyword>
+        , the result becomes positive infinity or negative infinity. If the <keyword>double</keyword>
 
         
 
          value is NaN, the result is also NaN. </list_item
       >
       <list_item
-        > For a conversion from <keyword
-        >float</keyword>
+        > For a conversion from <keyword>float</keyword>
 
         
 
-         or <keyword
-        >double</keyword>
+         or <keyword>double</keyword>
 
         
 
-         to <keyword
-        >decimal</keyword>
+         to <keyword>decimal</keyword>
 
         
 
-        , the source value is converted to <keyword
-        >decimal</keyword>
+        , the source value is converted to <keyword>decimal</keyword>
 
         
 
-         representation and rounded to the nearest number after the 28th <keyword
-        >decimal</keyword>
+         representation and rounded to the nearest number after the 28th <keyword>decimal</keyword>
 
         
 
-         place if required (<hyperlink
-        >11.1.6</hyperlink>
+         place if required (<hyperlink>11.1.6</hyperlink>
 
         
 
-        ). If the source value is too small to represent as a <keyword
-        >decimal</keyword>
+        ). If the source value is too small to represent as a <keyword>decimal</keyword>
 
         
 
-        , the result becomes zero. If the source value is NaN, infinity, or too large to represent as a <keyword
-        >decimal</keyword>
+        , the result becomes zero. If the source value is NaN, infinity, or too large to represent as a <keyword>decimal</keyword>
 
         
 
         , a System.OverflowException is thrown. </list_item
       >
       <list_item
-        > For a conversion from <keyword
-        >decimal</keyword>
+        > For a conversion from <keyword>decimal</keyword>
 
         
 
-         to <keyword
-        >float</keyword>
+         to <keyword>float</keyword>
 
         
 
-         or <keyword
-        >double</keyword>
+         or <keyword>double</keyword>
 
         
 
-        , the <keyword
-        >decimal</keyword>
+        , the <keyword>decimal</keyword>
 
         
 
-         value is rounded to the nearest <keyword
-        >double</keyword>
+         value is rounded to the nearest <keyword>double</keyword>
 
         
 
-         or <keyword
-        >float</keyword>
+         or <keyword>float</keyword>
 
         
 

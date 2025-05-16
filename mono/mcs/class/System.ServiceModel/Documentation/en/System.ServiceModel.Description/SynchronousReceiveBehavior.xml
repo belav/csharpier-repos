@@ -27,16 +27,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this behavior to instruct the channel listener to use a synchronous receive rather than the default, asynchronous. Using <see
-         cref="T:System.ServiceModel.Description.SynchronousReceiveBehavior" />
+        >Use this behavior to instruct the channel listener to use a synchronous receive rather than the default, asynchronous. Using <see cref="T:System.ServiceModel.Description.SynchronousReceiveBehavior" />
 
         
 
          instructs indigo2 to issue a new thread to pump for each accepted channel. If there are a lot of channels there is the possibility of running out of threads.</para
       >
       <para
-        >You can also set this value using the <format
-         type="text/html">
+        >You can also set this value using the <format type="text/html">
           <a href="cc070387-3d11-4b02-a952-bc08ad2df05a">&lt;synchronousReceive&gt; element</a>
         </format>
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.ServiceModel.Description.SynchronousReceiveBehavior" />
+            >Creates an instance of the <see cref="T:System.ServiceModel.Description.SynchronousReceiveBehavior" />
 
             
 
@@ -105,8 +102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
+            >See <see cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -118,7 +114,11 @@
           <para>Not implemented in this class.  </para>
         </summary>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,8 +150,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
+            >See <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
 
             
 
@@ -163,14 +162,22 @@
           <para>Not implemented in this class.  </para>
         </summary>
         <param name="serviceEndpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The endpoint that is to be customized.</param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,8 +210,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws an exception if the <paramref
-             name="endpointDispatcher" />
+            >Throws an exception if the <paramref name="endpointDispatcher" />
 
             
 
@@ -214,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ReceiveSynchronously" />
+            >Sets the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ReceiveSynchronously" />
 
             
 
@@ -223,7 +228,11 @@
           >
         </summary>
         <param name="serviceEndpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -254,8 +263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="M:System.ServiceModel.Description.IEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)" />
+            >See <see cref="M:System.ServiceModel.Description.IEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
@@ -267,7 +275,11 @@
           <para>Not implemented in this class. </para>
         </summary>
         <param name="serviceEndpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

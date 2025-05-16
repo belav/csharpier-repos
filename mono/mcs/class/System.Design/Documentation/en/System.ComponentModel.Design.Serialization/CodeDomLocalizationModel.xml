@@ -64,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The localization provider will write localized property values into a resource file and use the <see
-             cref="T:System.ComponentModel.ComponentResourceManager" />
+            >The localization provider will write localized property values into a resource file and use the <see cref="T:System.ComponentModel.ComponentResourceManager" />
 
             
 

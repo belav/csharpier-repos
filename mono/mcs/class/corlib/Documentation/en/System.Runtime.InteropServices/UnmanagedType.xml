@@ -34,21 +34,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.InteropServices.UnmanagedType" />
+        >Use the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
         
 
-         enumeration with the <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+         enumeration with the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
          attribute to specify how types are marshaled during interoperation with unmanaged code.  You can use this enumeration to marshal code using simple value types (I1, I2, I4, I8, R4, R8, U2, U4, and U8), unmanaged types that are unavailable in the .NET Framework, and various miscellaneous types. </para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="ccb68ce7-b0e9-4ffb-839d-03b1cd2c1258">Interoperating with Unmanaged Code</a>
         </format>
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ANSI character string that is a length-prefixed single byte. You can use this member on the <see
-             cref="T:System.String" />
+            >An ANSI character string that is a length-prefixed single byte. You can use this member on the <see cref="T:System.String" />
 
             
 
@@ -169,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Unicode character string that is a length-prefixed double byte. You can use this member, which is the default string in COM, on the <see
-             cref="T:System.String" />
+            >A Unicode character string that is a length-prefixed double byte. You can use this member, which is the default string in COM, on the <see cref="T:System.String" />
 
             
 
@@ -205,28 +200,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Runtime.InteropServices.MarshalAsAttribute.Value" />
+            >When the <see cref="P:System.Runtime.InteropServices.MarshalAsAttribute.Value" />
 
             
 
-             property is set to ByValArray, the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+             property is set to ByValArray, the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
 
             
 
-             field must be set to indicate the number of elements in the array. The <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.ArraySubType" />
+             field must be set to indicate the number of elements in the array. The <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.ArraySubType" />
 
             
 
-             field can optionally contain the <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+             field can optionally contain the <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
-             of the array elements when it is necessary to differentiate among string types. You can use this <see
-             cref="T:System.Runtime.InteropServices.UnmanagedType" />
+             of the array elements when it is necessary to differentiate among string types. You can use this <see cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
             
 
@@ -256,8 +246,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >.NET Framework <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
+            >.NET Framework <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
 
             
 
@@ -267,23 +256,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used for in-line, fixed-length character arrays that appear within a structure. The character type used with <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
+            >Used for in-line, fixed-length character arrays that appear within a structure. The character type used with <see cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
 
             
 
-             is determined by the <see
-             cref="T:System.Runtime.InteropServices.CharSet" />
+             is determined by the <see cref="T:System.Runtime.InteropServices.CharSet" />
 
             
 
-             argument of the <see
-             cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+             argument of the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
             
 
-             attribute applied to the containing structure. Always use the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+             attribute applied to the containing structure. Always use the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
 
             
 
@@ -313,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A currency type. Used on a <see
-             cref="T:System.Decimal" />
+            >A currency type. Used on a <see cref="T:System.Decimal" />
 
             
 
@@ -349,18 +333,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the custom marshaler class when used with the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+            >Specifies the custom marshaler class when used with the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
             
 
-             or <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+             or <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
             
 
-             field. The <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalCookie" />
+             field. The <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalCookie" />
 
             
 
@@ -391,13 +372,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A native type that is associated with an <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.I4" />
+            >A native type that is associated with an <see cref="F:System.Runtime.InteropServices.UnmanagedType.I4" />
 
             
 
-             or an <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.U4" />
+             or an <see cref="F:System.Runtime.InteropServices.UnmanagedType.U4" />
 
             
 
@@ -432,13 +411,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that can be used as a C-style function pointer. You can use this member on a <see
-             cref="T:System.Delegate" />
+            >An integer that can be used as a C-style function pointer. You can use this member on a <see cref="T:System.Delegate" />
 
             
 
-             data type or on a type that inherits from a <see
-             cref="T:System.Delegate" />
+             data type or on a type that inherits from a <see cref="T:System.Delegate" />
 
             
 
@@ -613,18 +590,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A COM interface pointer. The <see
-             cref="T:System.Guid" />
+            >A COM interface pointer. The <see cref="T:System.Guid" />
 
             
 
-             of the interface is obtained from the class metadata. Use this member to specify the exact interface type or the default interface type if you apply it to a class. This member produces the same behavior as <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.IUnknown" />
+             of the interface is obtained from the class metadata. Use this member to specify the exact interface type or the default interface type if you apply it to a class. This member produces the same behavior as <see cref="F:System.Runtime.InteropServices.UnmanagedType.IUnknown" />
 
             
 
-             when you apply it to the <see
-             cref="T:System.Object" />
+             when you apply it to the <see cref="T:System.Object" />
 
             
 
@@ -654,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A COM IUnknown pointer. You can use this member on the <see
-             cref="T:System.Object" />
+            >A COM IUnknown pointer. You can use this member on the <see cref="T:System.Object" />
 
             
 
@@ -690,13 +663,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A pointer to the first element of a C-style array. When marshaling from managed to unmanaged code, the length of the array is determined by the length of the managed array. When marshaling from unmanaged to managed code, the length of the array is determined from the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+            >A pointer to the first element of a C-style array. When marshaling from managed to unmanaged code, the length of the array is determined by the length of the managed array. When marshaling from unmanaged to managed code, the length of the array is determined from the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
 
             
 
-             and <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
+             and <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
 
             
 
@@ -732,13 +703,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single byte, null-terminated ANSI character string. You can use this member on the <see
-             cref="T:System.String" />
+            >A single byte, null-terminated ANSI character string. You can use this member on the <see cref="T:System.String" />
 
             
 
-             and <see
-             cref="T:System.Text.StringBuilder" />
+             and <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -827,8 +796,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that you cannot use the <see
-             cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
+            >Note that you cannot use the <see cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
 
             
 
@@ -923,8 +891,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A SafeArray, which is a self-describing array that carries the type, rank, and bounds of the associated array data. You can use this member with the <see
-             cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SafeArraySubType" />
+            >A SafeArray, which is a self-describing array that carries the type, rank, and bounds of the associated array data. You can use this member with the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SafeArraySubType" />
 
             
 

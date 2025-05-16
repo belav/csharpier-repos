@@ -34,28 +34,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeExpressionStatement" />
+        >A <see cref="T:System.CodeDom.CodeExpressionStatement" />
 
         
 
-         contains a <see
-         cref="T:System.CodeDom.CodeExpression" />
+         contains a <see cref="T:System.CodeDom.CodeExpression" />
 
         
 
-         object, and it can be added to a <see
-         cref="T:System.CodeDom.CodeStatementCollection" />
+         object, and it can be added to a <see cref="T:System.CodeDom.CodeStatementCollection" />
 
         
 
-         object, allowing some expressions to stand alone. For example, a <see
-         cref="T:System.CodeDom.CodeMethodInvokeExpression" />
+         object, allowing some expressions to stand alone. For example, a <see cref="T:System.CodeDom.CodeMethodInvokeExpression" />
 
         
 
-         contained by a <see
-         cref="T:System.CodeDom.CodeExpressionStatement" />
+         contained by a <see cref="T:System.CodeDom.CodeExpressionStatement" />
 
         
 
@@ -87,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeExpressionStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionStatement" />
 
             
 
@@ -121,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeExpressionStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeExpressionStatement" />
 
             
 
@@ -130,12 +123,15 @@
           >
         </summary>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 

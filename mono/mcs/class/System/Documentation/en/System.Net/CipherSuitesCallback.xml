@@ -40,8 +40,7 @@
     <remarks preserve-mono="true">
       <para>This type is only available in Mono and Xamarin products.</para>
       <para
-        >See the <see
-         cref="P:System.Net.ServicePointManager.ClientCipherSuitesCallback" />
+        >See the <see cref="P:System.Net.ServicePointManager.ClientCipherSuitesCallback" />
 
         
 

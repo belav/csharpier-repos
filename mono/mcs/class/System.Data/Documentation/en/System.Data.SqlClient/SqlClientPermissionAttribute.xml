@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlClientPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlClientPermissionAttribute" />
 
             
 
@@ -59,8 +58,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlClientPermissionAttribute" />
+            >A <see cref="T:System.Data.SqlClient.SqlClientPermissionAttribute" />
 
             
 
@@ -68,12 +66,15 @@
           >
         </returns>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -100,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >Returns a <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 
@@ -111,8 +111,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlClientPermission" />
+            >A <see cref="T:System.Data.SqlClient.SqlClientPermission" />
 
             
 

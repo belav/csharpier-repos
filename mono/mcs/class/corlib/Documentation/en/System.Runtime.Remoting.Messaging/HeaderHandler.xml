@@ -44,13 +44,11 @@
          objects are used to convey information about a remote function call (for example, transaction ID or a method signature).</para
       >
       <para
-        >When you create a <see
-         cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" />
+        >When you create a <see cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" />
 
         
 
-        , you identify the method that will handle the event. For an overview, see <format
-         type="text/html">
+        , you identify the method that will handle the event. For an overview, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconeventsdelegates&gt;]</a>
         </format>
 

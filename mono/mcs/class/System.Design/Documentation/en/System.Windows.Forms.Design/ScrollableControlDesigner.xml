@@ -24,28 +24,23 @@
 
         
 
-         provides a base class for designers of controls that respond to scroll messages. In addition to the methods and functionality inherited from the <see
-         cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+         provides a base class for designers of controls that respond to scroll messages. In addition to the methods and functionality inherited from the <see cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.Design.ControlDesigner" />
+        , <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
         
 
-        , and <see
-         cref="T:System.ComponentModel.Design.ComponentDesigner" />
+        , and <see cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
         
 
-         classes, <see
-         cref="T:System.Windows.Forms.Design.ScrollableControlDesigner" />
+         classes, <see cref="T:System.Windows.Forms.Design.ScrollableControlDesigner" />
 
         
 
-         provides a <see
-         cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)" />
+         provides a <see cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)" />
 
         
 
@@ -53,8 +48,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If a form has its <see
-           cref="P:System.Windows.Forms.Form.AutoScroll" />
+          >If a form has its <see cref="P:System.Windows.Forms.Form.AutoScroll" />
 
           
 
@@ -62,13 +56,11 @@
         >
       </block>
       <para
-        >You can associate a designer with a type using a <see
-         cref="T:System.ComponentModel.DesignerAttribute" />
+        >You can associate a designer with a type using a <see cref="T:System.ComponentModel.DesignerAttribute" />
 
         
 
-        . For an overview of customizing design time behavior, see <format
-         type="text/html">
+        . For an overview of customizing design time behavior, see <format type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
 
@@ -80,8 +72,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Base designer class for extending the design mode behavior of a <see
-         cref="T:System.Windows.Forms.Control" />
+        >Base designer class for extending the design mode behavior of a <see cref="T:System.Windows.Forms.Control" />
 
         
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.ScrollableControlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ScrollableControlDesigner" />
 
             
 
@@ -130,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.ScrollableControlDesigner.GetHitTest(System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.ScrollableControlDesigner.GetHitTest(System.Drawing.Point)" />
 
             
 
@@ -139,13 +128,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can pass a point in screen coordinates to the <see
-               cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
+              >You can pass a point in screen coordinates to the <see cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
 
               
 
-               method of the <see
-               cref="T:System.Windows.Forms.Control" />
+               method of the <see cref="T:System.Windows.Forms.Control" />
 
               
 

@@ -21,28 +21,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Data.DataTable.RowChanged" />
+        >The <see cref="E:System.Data.DataTable.RowChanged" />
 
         
 
-        , <see
-         cref="E:System.Data.DataTable.RowChanging" />
+        , <see cref="E:System.Data.DataTable.RowChanging" />
 
         
 
-        , <see
-         cref="M:System.Data.DataTable.OnRowDeleted(System.Data.DataRowChangeEventArgs)" />
+        , <see cref="M:System.Data.DataTable.OnRowDeleted(System.Data.DataRowChangeEventArgs)" />
 
         
 
-        , and <see
-         cref="M:System.Data.DataTable.OnRowDeleting(System.Data.DataRowChangeEventArgs)" />
+        , and <see cref="M:System.Data.DataTable.OnRowDeleting(System.Data.DataRowChangeEventArgs)" />
 
         
 
-         events occur when an action is performed on a <see
-         cref="T:System.Data.DataRow" />
+         events occur when an action is performed on a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -52,23 +47,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Data.DataTable.RowChanged" />
+        >Provides data for the <see cref="E:System.Data.DataTable.RowChanged" />
 
         
 
-        , <see
-         cref="E:System.Data.DataTable.RowChanging" />
+        , <see cref="E:System.Data.DataTable.RowChanging" />
 
         
 
-        , <see
-         cref="M:System.Data.DataTable.OnRowDeleting(System.Data.DataRowChangeEventArgs)" />
+        , <see cref="M:System.Data.DataTable.OnRowDeleting(System.Data.DataRowChangeEventArgs)" />
 
         
 
-        , and <see
-         cref="M:System.Data.DataTable.OnRowDeleted(System.Data.DataRowChangeEventArgs)" />
+        , and <see cref="M:System.Data.DataTable.OnRowDeleted(System.Data.DataRowChangeEventArgs)" />
 
         
 
@@ -93,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataRowChangeEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataRowChangeEventArgs" />
 
             
 
@@ -102,24 +92,30 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
            upon which an action is occuring. </param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowAction" />
+          One of the <see cref="T:System.Data.DataRowAction" />
 
           
 
@@ -143,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the action that has occurred on a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the action that has occurred on a <see cref="T:System.Data.DataRow" />
 
             
 

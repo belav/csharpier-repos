@@ -19,62 +19,52 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Control.MouseDown" />
+        >The <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
         
 
-         event occurs when the user presses the mouse button while the pointer is over a control. The <see
-         cref="E:System.Windows.Forms.Control.MouseUp" />
+         event occurs when the user presses the mouse button while the pointer is over a control. The <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
         
 
-         event occurs when the user releases the mouse button while the pointer remains over the control. The <see
-         cref="E:System.Windows.Forms.Control.MouseMove" />
+         event occurs when the user releases the mouse button while the pointer remains over the control. The <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
         
 
-         event occurs when the user moves the mouse pointer over a control. A <see
-         cref="T:System.Windows.Forms.MouseEventArgs" />
+         event occurs when the user moves the mouse pointer over a control. A <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
         
 
          specifies which mouse button is pressed, how many times the mouse button was pressed and released, the coordinates of the mouse, and the amount the mouse wheel moved.</para
       >
       <para
-        >It is possible to receive a <see
-         cref="E:System.Windows.Forms.Control.MouseDown" />
+        >It is possible to receive a <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
         
 
-         event without a corresponding <see
-         cref="E:System.Windows.Forms.Control.MouseUp" />
+         event without a corresponding <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
         
 
         , if the user switches focus to another application before releasing the mouse button.</para
       >
       <para
-        >These three events exist for the <see
-         cref="T:System.Windows.Forms.Control" />
+        >These three events exist for the <see cref="T:System.Windows.Forms.Control" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.AxHost" />
+        , <see cref="T:System.Windows.Forms.AxHost" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.NotifyIcon" />
+        , and <see cref="T:System.Windows.Forms.NotifyIcon" />
 
         
 
          classes.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -86,18 +76,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.MouseUp" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
         
 
-        , <see
-         cref="E:System.Windows.Forms.Control.MouseDown" />
+        , <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
         
 
-        , and <see
-         cref="E:System.Windows.Forms.Control.MouseMove" />
+        , and <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
         
 
@@ -124,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MouseEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
             
 
@@ -133,40 +119,59 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicate which mouse button was pressed. </param
         >
         <param name="clicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of times a mouse button was pressed. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of a mouse click, in pixels. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of a mouse click, in pixels. </param
         >
         <param name="delta">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -275,8 +280,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The mouse coordinates vary based on the event being raised. For example, when the <see
-             cref="E:System.Windows.Forms.Control.MouseMove" />
+            >The mouse coordinates vary based on the event being raised. For example, when the <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
             
 
@@ -304,8 +308,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The mouse coordinates vary based on the event being raised. For example, when the <see
-             cref="E:System.Windows.Forms.Control.MouseMove" />
+            >The mouse coordinates vary based on the event being raised. For example, when the <see cref="E:System.Windows.Forms.Control.MouseMove" />
 
             
 

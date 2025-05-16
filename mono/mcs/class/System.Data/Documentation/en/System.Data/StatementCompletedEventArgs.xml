@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides additional information for the <see
-         cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
+        >Provides additional information for the <see cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
 
         
 
@@ -43,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Data.StatementCompletedEventArgs" />
+            >Creates a new instance of the <see cref="T:System.Data.StatementCompletedEventArgs" />
 
             
 
@@ -52,12 +50,15 @@
           >
         </summary>
         <param name="recordCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Indicates the number of rows affected by the statement that caused the <see
-           cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
+          Indicates the number of rows affected by the statement that caused the <see cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
 
           
 
@@ -81,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the number of rows affected by the statement that caused the <see
-             cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
+            >Indicates the number of rows affected by the statement that caused the <see cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
 
             
 

@@ -28,18 +28,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Drawing.Pen" />
+        >A <see cref="T:System.Drawing.Pen" />
 
         
 
-         draws a line of specified width and style. Use the <see
-         cref="T:System.Drawing.Drawing2D.DashStyle" />
+         draws a line of specified width and style. Use the <see cref="T:System.Drawing.Drawing2D.DashStyle" />
 
         
 
-         property to draw several varieties of dashed lines. The line drawn by a <see
-         cref="T:System.Drawing.Pen" />
+         property to draw several varieties of dashed lines. The line drawn by a <see cref="T:System.Drawing.Pen" />
 
         
 
@@ -63,31 +60,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.Pen.Brush" />
+            >The <see cref="P:System.Drawing.Pen.Brush" />
 
             
 
-             property determines how the <see
-             cref="T:System.Drawing.Pen" />
+             property determines how the <see cref="T:System.Drawing.Pen" />
 
             
 
-             draws lines. Lines are drawn as if they are filled rectangles, with the characteristics of the specified <see
-             cref="T:System.Drawing.Brush" />
+             draws lines. Lines are drawn as if they are filled rectangles, with the characteristics of the specified <see cref="T:System.Drawing.Brush" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Drawing.Pen.Width" />
+            >The <see cref="P:System.Drawing.Pen.Width" />
 
             
 
-             property of the new <see
-             cref="T:System.Drawing.Pen" />
+             property of the new <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -97,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Pen" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Brush" />
+             class with the specified <see cref="T:System.Drawing.Brush" />
 
             
 
@@ -111,17 +101,19 @@
           >
         </summary>
         <param name="brush">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Brush" />
+          A <see cref="T:System.Drawing.Brush" />
 
           
 
-           that determines the fill properties of this <see
-           cref="T:System.Drawing.Pen" />
+           that determines the fill properties of this <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -144,18 +136,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
-             property is set to the color specified by the <paramref
-             name="color" />
+             property is set to the color specified by the <paramref name="color" />
 
             
 
-             parameter. The <see
-             cref="P:System.Drawing.Pen.Width" />
+             parameter. The <see cref="P:System.Drawing.Pen.Width" />
 
             
 
@@ -165,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Pen" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -174,17 +162,19 @@
           >
         </summary>
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
-           structure that indicates the color of this <see
-           cref="T:System.Drawing.Pen" />
+           structure that indicates the color of this <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -211,59 +201,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Brush" />
+            >The <see cref="T:System.Drawing.Brush" />
 
             
 
-             is set to the color specified in the <paramref
-             name="brush" />
+             is set to the color specified in the <paramref name="brush" />
 
             
 
-             parameter, the <see
-             cref="P:System.Drawing.Pen.Width" />
+             parameter, the <see cref="P:System.Drawing.Pen.Width" />
 
             
 
-             property is set to the value specified in the <paramref
-             name="width" />
+             property is set to the value specified in the <paramref name="width" />
 
             
 
-             parameter, and the units are set to <see
-             cref="F:System.Drawing.GraphicsUnit.World" />
+             parameter, and the units are set to <see cref="F:System.Drawing.GraphicsUnit.World" />
 
             
 
             .</para
           >
           <para
-            >Note that the <paramref
-             name="brush" />
+            >Note that the <paramref name="brush" />
 
             
 
-             parameter also specifies the <see
-             cref="T:System.Drawing.Color" />
+             parameter also specifies the <see cref="T:System.Drawing.Color" />
 
             
 
-             property of this <see
-             cref="T:System.Drawing.Pen" />
+             property of this <see cref="T:System.Drawing.Pen" />
 
             
 
             .</para
           >
           <para
-            >A <paramref
-             name="width" />
+            >A <paramref name="width" />
 
             
 
-             of 0 will result in the <see
-             cref="T:System.Drawing.Pen" />
+             of 0 will result in the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -273,18 +253,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Pen" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Brush" />
+             class with the specified <see cref="T:System.Drawing.Brush" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Pen.Width" />
+             and <see cref="P:System.Drawing.Pen.Width" />
 
             
 
@@ -292,29 +269,34 @@
           >
         </summary>
         <param name="brush">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Brush" />
+          A <see cref="T:System.Drawing.Brush" />
 
           
 
-           that determines the characteristics of this <see
-           cref="T:System.Drawing.Pen" />
+           that determines the characteristics of this <see cref="T:System.Drawing.Pen" />
 
           
 
           . </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The width of the new <see
-           cref="T:System.Drawing.Pen" />
+          The width of the new <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -341,33 +323,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
-             property is set to the color specified by the <paramref
-             name="color" />
+             property is set to the color specified by the <paramref name="color" />
 
             
 
-             parameter. The <see
-             cref="P:System.Drawing.Pen.Width" />
+             parameter. The <see cref="P:System.Drawing.Pen.Width" />
 
             
 
-             property is set to the value specified in the <paramref
-             name="width" />
+             property is set to the value specified in the <paramref name="width" />
 
             
 
-             parameter. A <paramref
-             name="width" />
+             parameter. A <paramref name="width" />
 
             
 
-             of 0 will result in the <see
-             cref="T:System.Drawing.Pen" />
+             of 0 will result in the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -377,18 +353,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Pen" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Color" />
+             class with the specified <see cref="T:System.Drawing.Color" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Pen.Width" />
+             and <see cref="P:System.Drawing.Pen.Width" />
 
             
 
@@ -396,29 +369,34 @@
           >
         </summary>
         <param name="color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
-           structure that indicates the color of this <see
-           cref="T:System.Drawing.Pen" />
+           structure that indicates the color of this <see cref="T:System.Drawing.Pen" />
 
           
 
           . </param
         >
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value indicating the width of this <see
-           cref="T:System.Drawing.Pen" />
+          A value indicating the width of this <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -445,66 +423,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property determines how the <see
-             cref="T:System.Drawing.Pen" />
+            >This property determines how the <see cref="T:System.Drawing.Pen" />
 
             
 
-             draws closed curves and polygons. The <see
-             cref="T:System.Drawing.Drawing2D.PenAlignment" />
+             draws closed curves and polygons. The <see cref="T:System.Drawing.Drawing2D.PenAlignment" />
 
             
 
-             enumeration specifies five values; however, only two values—<see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Center" />
+             enumeration specifies five values; however, only two values—<see cref="F:System.Drawing.Drawing2D.PenAlignment.Center" />
 
             
 
-             and <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+             and <see cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
 
             
 
-            —will change the appearance of a drawn line. <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Center" />
+            —will change the appearance of a drawn line. <see cref="F:System.Drawing.Drawing2D.PenAlignment.Center" />
 
             
 
-             is the default value for this property and specifies that the width of the pen is centered on the outline of the curve or polygon. A value of <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+             is the default value for this property and specifies that the width of the pen is centered on the outline of the curve or polygon. A value of <see cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
 
             
 
-             for this property specifies that the width of the pen is inside the outline of the curve or polygon. The other three values, <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Right" />
+             for this property specifies that the width of the pen is inside the outline of the curve or polygon. The other three values, <see cref="F:System.Drawing.Drawing2D.PenAlignment.Right" />
 
             
 
-            , <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Left" />
+            , <see cref="F:System.Drawing.Drawing2D.PenAlignment.Left" />
 
             
 
-            , and <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Outset" />
+            , and <see cref="F:System.Drawing.Drawing2D.PenAlignment.Outset" />
 
             
 
             , will result in a pen that is centered.</para
           >
           <para
-            >A <see
-             cref="T:System.Drawing.Pen" />
+            >A <see cref="T:System.Drawing.Pen" />
 
             
 
-             that has its alignment set to <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+             that has its alignment set to <see cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
 
             
 
-             will yield unreliable results, sometimes drawing in the inset position and sometimes in the centered position. Also, an inset pen cannot be used to draw compound lines and cannot draw dashed lines with <see
-             cref="F:System.Drawing.Drawing2D.DashCap.Triangle" />
+             will yield unreliable results, sometimes drawing in the inset position and sometimes in the centered position. Also, an inset pen cannot be used to draw compound lines and cannot draw dashed lines with <see cref="F:System.Drawing.Drawing2D.DashCap.Triangle" />
 
             
 
@@ -514,8 +480,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alignment for this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the alignment for this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -540,13 +505,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigning this property causes the pen to draw filled lines and curves. It overrides the <see
-             cref="T:System.Drawing.Color" />
+            >Assigning this property causes the pen to draw filled lines and curves. It overrides the <see cref="T:System.Drawing.Color" />
 
             
 
-             property of the <see
-             cref="T:System.Drawing.Pen" />
+             property of the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -556,13 +519,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Drawing.Brush" />
+            >Gets or sets the <see cref="T:System.Drawing.Brush" />
 
             
 
-             that determines attributes of this <see
-             cref="T:System.Drawing.Pen" />
+             that determines attributes of this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -587,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Pen" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -598,13 +558,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that can be cast to a <see
-             cref="T:System.Drawing.Pen" />
+             that can be cast to a <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -630,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the color of this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the color of this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -657,26 +614,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A compound line is made up of alternating parallel lines and spaces of varying widths. The values in the array specify the starting points of each component of the compound line relative to the pen's width. The first value in the array specifies where the first component (a line) begins as a fraction of the distance across the width of the pen. The second value in the array specifies the beginning of the next component (a space) as a fraction of the distance across the width of the pen. The final value in the array specifies where the last component ends.</para>
           <para
-            >Suppose you want a pen to draw two parallel lines where the width of the first line is 20 percent of the pen's width, the width of the space that separates the two lines is 50 percent of the pen' s width, and the width of the second line is 30 percent of the pen's width. Start by creating a <see
-             cref="T:System.Drawing.Pen" />
+            >Suppose you want a pen to draw two parallel lines where the width of the first line is 20 percent of the pen's width, the width of the space that separates the two lines is 50 percent of the pen' s width, and the width of the second line is 30 percent of the pen's width. Start by creating a <see cref="T:System.Drawing.Pen" />
 
             
 
              and an array of real numbers. Set the compound array by passing the array with the values 0.0, 0.2, 0.7, and 1.0 to this property.</para
           >
           <para
-            >Do not set this property if the <see
-             cref="T:System.Drawing.Pen" />
+            >Do not set this property if the <see cref="T:System.Drawing.Pen" />
 
             
 
-             has its <see
-             cref="P:System.Drawing.Pen.Alignment" />
+             has its <see cref="P:System.Drawing.Pen.Alignment" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+             property set to <see cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
 
             
 
@@ -709,8 +662,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a custom cap to use at the end of lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets a custom cap to use at the end of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -739,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a custom cap to use at the beginning of lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets a custom cap to use at the beginning of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -768,23 +719,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not set this property to <see
-             cref="F:System.Drawing.Drawing2D.DashCap.Triangle" />
+            >Do not set this property to <see cref="F:System.Drawing.Drawing2D.DashCap.Triangle" />
 
             
 
-             if the <see
-             cref="T:System.Drawing.Pen" />
+             if the <see cref="T:System.Drawing.Pen" />
 
             
 
-             has its <see
-             cref="P:System.Drawing.Pen.Alignment" />
+             has its <see cref="P:System.Drawing.Pen.Alignment" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
+             property set to <see cref="F:System.Drawing.Drawing2D.PenAlignment.Inset" />
 
             
 
@@ -794,8 +741,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the cap style used at the end of the dashes that make up dashed lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the cap style used at the end of the dashes that make up dashed lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -840,34 +786,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigning a value other than null to this property will set the <see
-             cref="T:System.Drawing.Drawing2D.DashStyle" />
+            >Assigning a value other than null to this property will set the <see cref="T:System.Drawing.Drawing2D.DashStyle" />
 
             
 
-             property for this <see
-             cref="T:System.Drawing.Pen" />
+             property for this <see cref="T:System.Drawing.Pen" />
 
             
 
-             to <see
-             cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
+             to <see cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
 
             
 
             .</para
           >
           <para
-            >The elements in the <paramref
-             name="dashArray" />
+            >The elements in the <paramref name="dashArray" />
 
             
 
              array set the length of each dash and space in the dash pattern. The first element sets the length of a dash, the second element sets the length of a space, the third element sets the length of a dash, and so on. Consequently, each element should be a non-zero positive number.</para
           >
           <para
-            >The length of each dash and space in the dash pattern is the product of the element value in the array and the width of the <see
-             cref="T:System.Drawing.Pen" />
+            >The length of each dash and space in the dash pattern is the product of the element value in the array and the width of the <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -899,28 +840,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value of <see
-             cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
+            >A value of <see cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
 
             
 
-             for this property specifies that a custom pattern of dashes and spaces, defined by the <see
-             cref="P:System.Drawing.Pen.DashPattern" />
+             for this property specifies that a custom pattern of dashes and spaces, defined by the <see cref="P:System.Drawing.Pen.DashPattern" />
 
             
 
-             property, makes up lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+             property, makes up lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
-            . If the value of this property is <see
-             cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
+            . If the value of this property is <see cref="F:System.Drawing.Drawing2D.DashStyle.Custom" />
 
             
 
-             and the value of the <see
-             cref="P:System.Drawing.Pen.DashPattern" />
+             and the value of the <see cref="P:System.Drawing.Pen.DashPattern" />
 
             
 
@@ -930,8 +866,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the style used for dashed lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the style used for dashed lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -955,63 +890,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Drawing.Pen.Dispose" />
+            >Calling <see cref="M:System.Drawing.Pen.Dispose" />
 
             
 
-             allows the resources used by this <see
-             cref="T:System.Drawing.Brush" />
+             allows the resources used by this <see cref="T:System.Drawing.Brush" />
 
             
 
              to be reallocated for other purposes.</para
           >
           <para
-            >Call <see
-             cref="M:System.Drawing.Pen.Dispose" />
+            >Call <see cref="M:System.Drawing.Pen.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Drawing.Pen" />
+             when you are finished using the <see cref="T:System.Drawing.Pen" />
 
             
 
-            . The <see
-             cref="M:System.Drawing.Pen.Dispose" />
+            . The <see cref="M:System.Drawing.Pen.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Drawing.Pen" />
+             method leaves the <see cref="T:System.Drawing.Pen" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Drawing.Pen.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Drawing.Pen.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Drawing.Pen" />
+            , you must release all references to the <see cref="T:System.Drawing.Pen" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Drawing.Pen" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.Pen" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -1021,18 +945,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.Pen.Dispose" />
+              >Always call <see cref="M:System.Drawing.Pen.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.Pen" />
+               before you release your last reference to the <see cref="T:System.Drawing.Pen" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Drawing.Pen" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Pen" />
 
               
 
@@ -1043,8 +964,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Pen" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1073,8 +993,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the cap style used at the end of lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the cap style used at the end of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1118,13 +1037,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A line join is the common area that is formed by two lines whose ends meet or overlap. There are three line join styles: miter, bevel, and round.  When you specify a line join style for a <see
-             cref="T:System.Drawing.Pen" />
+            >A line join is the common area that is formed by two lines whose ends meet or overlap. There are three line join styles: miter, bevel, and round.  When you specify a line join style for a <see cref="T:System.Drawing.Pen" />
 
             
 
-             object, that join style will be applied to all the connected lines in any <see
-             cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+             object, that join style will be applied to all the connected lines in any <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
             
 
@@ -1137,8 +1054,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the join style for the ends of two consecutive lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the join style for the ends of two consecutive lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1191,8 +1107,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method prepends the multiplication matrix specified in the <paramref
-             name="matrix" />
+            >This method prepends the multiplication matrix specified in the <paramref name="matrix" />
 
             
 
@@ -1202,13 +1117,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies the transformation matrix for this <see
-             cref="T:System.Drawing.Pen" />
+            >Multiplies the transformation matrix for this <see cref="T:System.Drawing.Pen" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1216,12 +1129,15 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1250,13 +1166,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <see
-             cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+            >This method uses the <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
             
 
-             enumeration element (either prepend or append) specified by the <paramref
-             name="order" />
+             enumeration element (either prepend or append) specified by the <paramref name="order" />
 
             
 
@@ -1266,13 +1180,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies the transformation matrix for this <see
-             cref="T:System.Drawing.Pen" />
+            >Multiplies the transformation matrix for this <see cref="T:System.Drawing.Pen" />
 
             
 
-             by the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             by the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1280,19 +1192,26 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            by which to multiply the transformation matrix. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1318,13 +1237,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Pen" />
+            >A <see cref="T:System.Drawing.Pen" />
 
             
 
-             can draw solid lines, filled lines, or textured lines, depending on the style specified by a member of the <see
-             cref="T:System.Drawing.Drawing2D.PenType" />
+             can draw solid lines, filled lines, or textured lines, depending on the style specified by a member of the <see cref="T:System.Drawing.Drawing2D.PenType" />
 
             
 
@@ -1334,8 +1251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the style of lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets the style of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1360,8 +1276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the geometric transformation matrix for this <see
-             cref="T:System.Drawing.Pen" />
+            >Resets the geometric transformation matrix for this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1397,7 +1312,11 @@
           <para>Rotates the local geometric transformation by the specified angle. This method prepends the rotation to the transformation.</para>
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1432,19 +1351,26 @@
           <para>Rotates the local geometric transformation by the specified angle in the specified order.</para>
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle of rotation. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1473,14 +1399,22 @@
           <para>Scales the local geometric transformation by the specified factors. This method prepends the scaling matrix to the transformation.</para>
         </summary>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The factor by which to scale the transformation in the x-axis direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1513,26 +1447,37 @@
           <para>Scales the local geometric transformation by the specified factors in the specified order.</para>
         </summary>
         <param name="sx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The factor by which to scale the transformation in the x-axis direction. </param
         >
         <param name="sy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The factor by which to scale the transformation in the y-axis direction. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1563,8 +1508,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the values that determine the style of cap used to end lines drawn by this <see
-             cref="T:System.Drawing.Pen" />
+            >Sets the values that determine the style of cap used to end lines drawn by this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1572,51 +1516,57 @@
           >
         </summary>
         <param name="startCap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.LineCap" />
+          A <see cref="T:System.Drawing.Drawing2D.LineCap" />
 
           
 
-           that represents the cap style to use at the beginning of lines drawn with this <see
-           cref="T:System.Drawing.Pen" />
+           that represents the cap style to use at the beginning of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
           
 
           . </param
         >
         <param name="endCap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.LineCap" />
+          A <see cref="T:System.Drawing.Drawing2D.LineCap" />
 
           
 
-           that represents the cap style to use at the end of lines drawn with this <see
-           cref="T:System.Drawing.Pen" />
+           that represents the cap style to use at the end of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
           
 
           . </param
         >
         <param name="dashCap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.LineCap" />
+          A <see cref="T:System.Drawing.Drawing2D.LineCap" />
 
           
 
-           that represents the cap style to use at the beginning or end of dashed lines drawn with this <see
-           cref="T:System.Drawing.Pen" />
+           that represents the cap style to use at the beginning or end of dashed lines drawn with this <see cref="T:System.Drawing.Pen" />
 
           
 
@@ -1644,8 +1594,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the cap style used at the beginning of lines drawn with this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the cap style used at the beginning of lines drawn with this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1673,8 +1622,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property defines an elliptical shape for the pen tip. This ellipse is obtained from the default circular shape by applying the transformation matrix. Note that the translation portion of the matrix is ignored. Because the matrix returned and by the <see
-             cref="P:System.Drawing.Pen.Transform" />
+            >This property defines an elliptical shape for the pen tip. This ellipse is obtained from the default circular shape by applying the transformation matrix. Note that the translation portion of the matrix is ignored. Because the matrix returned and by the <see cref="P:System.Drawing.Pen.Transform" />
 
             
 
@@ -1684,8 +1632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a copy of the geometric transformation for this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets a copy of the geometric transformation for this <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1715,14 +1662,22 @@
           <para>Translates the local geometric transformation by the specified dimensions. This method prepends the translation to the transformation.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in x. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1755,21 +1710,33 @@
           <para>Translates the local geometric transformation by the specified dimensions in the specified order.</para>
         </summary>
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in x. </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the translation in y. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1793,28 +1760,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can access the unit of measure of the <see
-             cref="T:System.Drawing.Graphics" />
+            >You can access the unit of measure of the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object using its <see
-             cref="P:System.Drawing.Graphics.PageUnit" />
+             object using its <see cref="P:System.Drawing.Graphics.PageUnit" />
 
             
 
-             property. The unit of measure is typically pixels. A <see
-             cref="P:System.Drawing.Pen.Width" />
+             property. The unit of measure is typically pixels. A <see cref="P:System.Drawing.Pen.Width" />
 
             
 
-             of 0 will result in the <see
-             cref="T:System.Drawing.Pen" />
+             of 0 will result in the <see cref="T:System.Drawing.Pen" />
 
             
 
-             drawing as if the <see
-             cref="P:System.Drawing.Pen.Width" />
+             drawing as if the <see cref="P:System.Drawing.Pen.Width" />
 
             
 
@@ -1824,13 +1786,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the width of this <see
-             cref="T:System.Drawing.Pen" />
+            >Gets or sets the width of this <see cref="T:System.Drawing.Pen" />
 
             
 
-            , in units of the <see
-             cref="T:System.Drawing.Graphics" />
+            , in units of the <see cref="T:System.Drawing.Graphics" />
 
             
 

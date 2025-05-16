@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface preserves the vtable order of the <see
-         cref="T:System.AppDomain" />
+        >This interface preserves the vtable order of the <see cref="T:System.AppDomain" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Exposes the public members of the <see
-         cref="T:System.AppDomain" />
+        >Exposes the public members of the <see cref="T:System.AppDomain" />
 
         
 
@@ -72,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.AppendPrivatePath(System.String)" />
+            >See the <see cref="M:System.AppDomain.AppendPrivatePath(System.String)" />
 
             
 
@@ -83,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.AppendPrivatePath(System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.AppendPrivatePath(System.String)" />
 
             
 
@@ -92,7 +88,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="E:System.AppDomain.AssemblyLoad" />
+            >See the <see cref="E:System.AppDomain.AssemblyLoad" />
 
             
 
@@ -131,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.AssemblyLoad" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.AssemblyLoad" />
 
             
 
@@ -161,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="E:System.AppDomain.AssemblyResolve" />
+            >See the <see cref="E:System.AppDomain.AssemblyResolve" />
 
             
 
@@ -172,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.AssemblyResolve" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.AssemblyResolve" />
 
             
 
@@ -199,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="P:System.AppDomain.BaseDirectory" />
+            >See the <see cref="P:System.AppDomain.BaseDirectory" />
 
             
 
@@ -210,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.AppDomain.BaseDirectory" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.AppDomain.BaseDirectory" />
 
             
 
@@ -240,8 +234,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ClearPrivatePath" />
+            >See the <see cref="M:System.AppDomain.ClearPrivatePath" />
 
             
 
@@ -251,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.ClearPrivatePath" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.ClearPrivatePath" />
 
             
 
@@ -281,8 +273,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ClearShadowCopyPath" />
+            >See the <see cref="M:System.AppDomain.ClearShadowCopyPath" />
 
             
 
@@ -292,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.ClearShadowCopyPath" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.ClearShadowCopyPath" />
 
             
 
@@ -328,8 +318,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.CreateInstance(System.String,System.String)" />
+            >See the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String)" />
 
             
 
@@ -339,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.CreateInstance(System.String,System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String)" />
 
             
 
@@ -350,8 +338,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a wrapper for the new instance specified by <paramref
-             name="typeName" />
+            >An object that is a wrapper for the new instance specified by <paramref name="typeName" />
 
             
 
@@ -359,24 +346,30 @@
           >
         </returns>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly. See <see
-           cref="P:System.Reflection.Assembly.FullName" />
+          The display name of the assembly. See <see cref="P:System.Reflection.Assembly.FullName" />
 
           
 
           .</param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
-           cref="P:System.Type.FullName" />
+          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" />
 
           
 
@@ -411,21 +404,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Object[])" />
+            >See the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Object[])" />
 
             
 
              method overload.</para
           >
           <para
-            >The <paramref
-             name="activationAttributes" />
+            >The <paramref name="activationAttributes" />
 
             
 
-             parameter is related to client-activated objects; see <format
-             type="text/html">
+             parameter is related to client-activated objects; see <format type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
 
@@ -437,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Object[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Object[])" />
 
             
 
@@ -448,8 +437,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a wrapper for the new instance specified by <paramref
-             name="typeName" />
+            >An object that is a wrapper for the new instance specified by <paramref name="typeName" />
 
             
 
@@ -457,41 +445,49 @@
           >
         </returns>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly. See <see
-           cref="P:System.Reflection.Assembly.FullName" />
+          The display name of the assembly. See <see cref="P:System.Reflection.Assembly.FullName" />
 
           
 
           .</param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
-           cref="P:System.Type.FullName" />
+          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" />
 
           
 
            property. </param
         >
         <param name="activationAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
-           object. The <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+           object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
@@ -532,21 +528,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
 
             
 
              method overload. </para
           >
           <para
-            >The <paramref
-             name="activationAttributes" />
+            >The <paramref name="activationAttributes" />
 
             
 
-             parameter is related to client-activated objects; see <format
-             type="text/html">
+             parameter is related to client-activated objects; see <format type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
 
@@ -558,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.CreateInstance(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
 
             
 
@@ -569,8 +561,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a wrapper for the new instance specified by <paramref
-             name="typeName" />
+            >An object that is a wrapper for the new instance specified by <paramref name="typeName" />
 
             
 
@@ -578,133 +569,155 @@
           >
         </returns>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly. See <see
-           cref="P:System.Reflection.Assembly.FullName" />
+          The display name of the assembly. See <see cref="P:System.Reflection.Assembly.FullName" />
 
           
 
           .</param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
-           cref="P:System.Type.FullName" />
+          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" />
 
           
 
            property. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of zero or more bit flags that affect the search for the <paramref
-           name="typeName" />
+          A combination of zero or more bit flags that affect the search for the <paramref name="typeName" />
 
           
 
-           constructor. If <paramref
-           name="bindingAttr" />
+           constructor. If <paramref name="bindingAttr" />
 
           
 
            is zero, a case-sensitive search for public constructors is conducted. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" />
 
           
 
-           objects using reflection. If <paramref
-           name="binder" />
+           objects using reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
-           name="args" />
+          The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref name="args" />
 
           
 
            must be an empty array or null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Culture-specific information that governs the coercion of <paramref
-           name="args" />
+          Culture-specific information that governs the coercion of <paramref name="args" />
 
           
 
-           to the formal types declared for the <paramref
-           name="typeName" />
+           to the formal types declared for the <paramref name="typeName" />
 
           
 
-           constructor. If <paramref
-           name="culture" />
+           constructor. If <paramref name="culture" />
 
           
 
-           is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            for the current thread is used. </param
         >
         <param name="activationAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
-           object. The <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+           object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
            specifies the URL that is required to activate a remote object.  </param
         >
         <param name="securityAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Information used to authorize creation of <paramref
-           name="typeName" />
+          Information used to authorize creation of <paramref name="typeName" />
 
           
 
@@ -738,8 +751,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
+            >See the <see cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
 
             
 
@@ -749,8 +761,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
 
             
 
@@ -760,8 +771,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a wrapper for the new instance, or null if <paramref
-             name="typeName" />
+            >An object that is a wrapper for the new instance, or null if <paramref name="typeName" />
 
             
 
@@ -769,24 +779,30 @@
           >
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
-           cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+          The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
           
 
             method.</param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
-           cref="P:System.Type.FullName" />
+          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" />
 
           
 
@@ -821,21 +837,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Object[])" />
+            >See the <see cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Object[])" />
 
             
 
              method overload.</para
           >
           <para
-            >The <paramref
-             name="activationAttributes" />
+            >The <paramref name="activationAttributes" />
 
             
 
-             parameter is related to client-activated objects; see <format
-             type="text/html">
+             parameter is related to client-activated objects; see <format type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
 
@@ -847,8 +860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Object[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Object[])" />
 
             
 
@@ -858,8 +870,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a wrapper for the new instance, or null if <paramref
-             name="typeName" />
+            >An object that is a wrapper for the new instance, or null if <paramref name="typeName" />
 
             
 
@@ -867,41 +878,49 @@
           >
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
-           cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+          The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
           
 
             method. </param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
-           cref="P:System.Type.FullName" />
+          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" />
 
           
 
            property. </param
         >
         <param name="activationAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
-           object. The <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+           object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
@@ -942,21 +961,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
 
             
 
              method overload.</para
           >
           <para
-            >The <paramref
-             name="activationAttributes" />
+            >The <paramref name="activationAttributes" />
 
             
 
-             parameter is related to client-activated objects; see <format
-             type="text/html">
+             parameter is related to client-activated objects; see <format type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
 
@@ -968,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String,System.Boolean,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo,System.Object[],System.Security.Policy.Evidence)" />
 
             
 
@@ -979,8 +994,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that is a wrapper for the new instance, or null if <paramref
-             name="typeName" />
+            >An object that is a wrapper for the new instance, or null if <paramref name="typeName" />
 
             
 
@@ -988,133 +1002,155 @@
           >
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
-           cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+          The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
           
 
             method.</param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
-           cref="P:System.Type.FullName" />
+          The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see cref="P:System.Type.FullName" />
 
           
 
            property. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of zero or more bit flags that affect the search for the <paramref
-           name="typeName" />
+          A combination of zero or more bit flags that affect the search for the <paramref name="typeName" />
 
           
 
-           constructor. If <paramref
-           name="bindingAttr" />
+           constructor. If <paramref name="bindingAttr" />
 
           
 
            is zero, a case-sensitive search for public constructors is conducted. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see cref="T:System.Reflection.MemberInfo" />
 
           
 
-           objects through reflection. If <paramref
-           name="binder" />
+           objects through reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
-           name="args" />
+          The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref name="args" />
 
           
 
            must be an empty array or null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Culture-specific information that governs the coercion of <paramref
-           name="args" />
+          Culture-specific information that governs the coercion of <paramref name="args" />
 
           
 
-           to the formal types declared for the <paramref
-           name="typeName" />
+           to the formal types declared for the <paramref name="typeName" />
 
           
 
-           constructor. If <paramref
-           name="culture" />
+           constructor. If <paramref name="culture" />
 
           
 
-           is null, the <see
-           cref="T:System.Globalization.CultureInfo" />
+           is null, the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            for the current thread is used. </param
         >
         <param name="activationAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
-           object. The <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+           object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
            specifies the URL that is required to activate a remote object.  </param
         >
         <param name="securityAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Information used to authorize creation of <paramref
-           name="typeName" />
+          Information used to authorize creation of <paramref name="typeName" />
 
           
 
@@ -1148,8 +1184,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
 
             
 
@@ -1159,8 +1194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
 
             
 
@@ -1172,14 +1206,22 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1214,8 +1256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence)" />
 
             
 
@@ -1225,8 +1266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence)" />
 
             
 
@@ -1238,21 +1278,33 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1287,8 +1339,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String)" />
 
             
 
@@ -1298,8 +1349,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String)" />
 
             
 
@@ -1311,26 +1361,37 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the directory where the assembly will be saved. If <paramref
-           name="dir" />
+          The name of the directory where the assembly will be saved. If <paramref name="dir" />
 
           
 
@@ -1366,8 +1427,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence)" />
 
             
 
@@ -1377,8 +1437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence)" />
 
             
 
@@ -1390,33 +1449,48 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the directory where the assembly will be saved. If <paramref
-           name="dir" />
+          The name of the directory where the assembly will be saved. If <paramref name="dir" />
 
           
 
            is null, the directory defaults to the current directory. </param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1453,8 +1527,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1464,8 +1537,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1477,35 +1549,55 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="requiredPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The required permissions request. </param
         >
         <param name="optionalPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1543,8 +1635,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1554,8 +1645,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1567,42 +1657,66 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The required permissions request. </param
         >
         <param name="optionalPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1640,8 +1754,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1651,8 +1764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1664,47 +1776,70 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the directory where the assembly will be saved. If <paramref
-           name="dir" />
+          The name of the directory where the assembly will be saved. If <paramref name="dir" />
 
           
 
            is null, the directory defaults to the current directory. </param
         >
         <param name="requiredPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The required permissions request. </param
         >
         <param name="optionalPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1743,8 +1878,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1754,8 +1888,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet)" />
 
             
 
@@ -1767,54 +1900,81 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the directory where the assembly will be saved. If <paramref
-           name="dir" />
+          The name of the directory where the assembly will be saved. If <paramref name="dir" />
 
           
 
            is null, the directory defaults to the current directory. </param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The required permissions request. </param
         >
         <param name="optionalPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1854,8 +2014,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Boolean)" />
+            >See the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Boolean)" />
 
             
 
@@ -1865,8 +2024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Boolean)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess,System.String,System.Security.Policy.Evidence,System.Security.PermissionSet,System.Security.PermissionSet,System.Security.PermissionSet,System.Boolean)" />
 
             
 
@@ -1878,61 +2036,92 @@
           <para>Represents the dynamic assembly created.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="dir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the directory where the dynamic assembly will be saved. If <paramref
-           name="dir" />
+          The name of the directory where the dynamic assembly will be saved. If <paramref name="dir" />
 
           
 
            is null, the directory defaults to the current directory. </param
         >
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The required permissions request. </param
         >
         <param name="optionalPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The refused permissions request. </param
         >
         <param name="isSynchronized">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1965,8 +2154,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" />
+            >See the <see cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" />
 
             
 
@@ -1976,8 +2164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" />
 
             
 
@@ -1985,7 +2172,11 @@
           >
         </summary>
         <param name="theDelegate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2010,8 +2201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="E:System.AppDomain.DomainUnload" />
+            >See the <see cref="E:System.AppDomain.DomainUnload" />
 
             
 
@@ -2021,8 +2211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.DomainUnload" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.DomainUnload" />
 
             
 
@@ -2048,8 +2237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="P:System.AppDomain.DynamicDirectory" />
+            >See the <see cref="P:System.AppDomain.DynamicDirectory" />
 
             
 
@@ -2059,8 +2247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.AppDomain.DynamicDirectory" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.AppDomain.DynamicDirectory" />
 
             
 
@@ -2091,8 +2278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >See the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2102,8 +2288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the inherited <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Provides COM objects with version-independent access to the inherited <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -2113,13 +2298,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 
@@ -2127,17 +2310,19 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to compare to the current <see
-           cref="T:System.Object" />
+           to compare to the current <see cref="T:System.Object" />
 
           
 
@@ -2168,8 +2353,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="P:System.AppDomain.Evidence" />
+            >See the <see cref="P:System.AppDomain.Evidence" />
 
             
 
@@ -2179,8 +2363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.AppDomain.Evidence" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.AppDomain.Evidence" />
 
             
 
@@ -2211,8 +2394,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
+            >See the <see cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
 
             
 
@@ -2222,8 +2404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
 
             
 
@@ -2235,7 +2416,11 @@
           <para>The value returned by the entry point of the assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2269,8 +2454,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence)" />
 
             
 
@@ -2280,8 +2464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence)" />
 
             
 
@@ -2293,14 +2476,22 @@
           <para>The value returned by the entry point of the assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file that contains the assembly to execute. </param
         >
         <param name="assemblySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2335,8 +2526,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence,System.String[])" />
+            >See the <see cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence,System.String[])" />
 
             
 
@@ -2346,8 +2536,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence,System.String[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.ExecuteAssembly(System.String,System.Security.Policy.Evidence,System.String[])" />
 
             
 
@@ -2359,21 +2548,33 @@
           <para>The value returned by the entry point of the assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file that contains the assembly to execute. </param
         >
         <param name="assemblySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The supplied evidence for the assembly. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2398,8 +2599,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="P:System.AppDomain.FriendlyName" />
+            >See the <see cref="P:System.AppDomain.FriendlyName" />
 
             
 
@@ -2409,8 +2609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.AppDomain.FriendlyName" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.AppDomain.FriendlyName" />
 
             
 
@@ -2442,8 +2641,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.GetAssemblies" />
+            >See the <see cref="M:System.AppDomain.GetAssemblies" />
 
             
 
@@ -2453,8 +2651,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.GetAssemblies" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.GetAssemblies" />
 
             
 
@@ -2489,8 +2686,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.GetData(System.String)" />
+            >See the <see cref="M:System.AppDomain.GetData(System.String)" />
 
             
 
@@ -2500,8 +2696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.GetData(System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.GetData(System.String)" />
 
             
 
@@ -2511,8 +2706,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <paramref
-             name="name" />
+            >The value of the <paramref name="name" />
 
             
 
@@ -2520,7 +2714,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2548,8 +2746,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.Object.GetHashCode" />
+            >See the <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2559,8 +2756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the inherited <see
-             cref="M:System.Object.GetHashCode" />
+            >Provides COM objects with version-independent access to the inherited <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -2570,8 +2766,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Object" />
+            >A hash code for the current <see cref="T:System.Object" />
 
             
 
@@ -2635,8 +2830,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.MarshalByRefObject.GetLifetimeService" />
+            >See the <see cref="M:System.MarshalByRefObject.GetLifetimeService" />
 
             
 
@@ -2646,8 +2840,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the inherited <see
-             cref="M:System.MarshalByRefObject.GetLifetimeService" />
+            >Provides COM objects with version-independent access to the inherited <see cref="M:System.MarshalByRefObject.GetLifetimeService" />
 
             
 
@@ -2657,8 +2850,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object of type <see
-             cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+            >An object of type <see cref="T:System.Runtime.Remoting.Lifetime.ILease" />
 
             
 
@@ -2687,8 +2879,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.GetType" />
+            >See the <see cref="M:System.AppDomain.GetType" />
 
             
 
@@ -2698,8 +2889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.GetType" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.GetType" />
 
             
 
@@ -2709,8 +2899,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -2746,8 +2935,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -2759,21 +2947,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2825,8 +3025,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.InitializeLifetimeService" />
+            >See the <see cref="M:System.AppDomain.InitializeLifetimeService" />
 
             
 
@@ -2836,8 +3035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.InitializeLifetimeService" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.InitializeLifetimeService" />
 
             
 
@@ -2916,8 +3114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.Byte[])" />
+            >See the <see cref="M:System.AppDomain.Load(System.Byte[])" />
 
             
 
@@ -2927,8 +3124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.Byte[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.Byte[])" />
 
             
 
@@ -2940,7 +3136,11 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2973,8 +3173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+            >See the <see cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
 
             
 
@@ -2984,8 +3183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
 
             
 
@@ -2997,7 +3195,11 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3030,8 +3232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.String)" />
+            >See the <see cref="M:System.AppDomain.Load(System.String)" />
 
             
 
@@ -3041,8 +3242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.String)" />
 
             
 
@@ -3054,12 +3254,15 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly. See <see
-           cref="P:System.Reflection.Assembly.FullName" />
+          The display name of the assembly. See <see cref="P:System.Reflection.Assembly.FullName" />
 
           
 
@@ -3093,8 +3296,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.Byte[],System.Byte[])" />
+            >See the <see cref="M:System.AppDomain.Load(System.Byte[],System.Byte[])" />
 
             
 
@@ -3104,8 +3306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.Byte[],System.Byte[])" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.Byte[],System.Byte[])" />
 
             
 
@@ -3117,14 +3318,22 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of type byte that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3158,8 +3367,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.Reflection.AssemblyName,System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.Load(System.Reflection.AssemblyName,System.Security.Policy.Evidence)" />
 
             
 
@@ -3169,8 +3377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.Reflection.AssemblyName,System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.Reflection.AssemblyName,System.Security.Policy.Evidence)" />
 
             
 
@@ -3182,14 +3389,22 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that describes the assembly to load. </param
         >
         <param name="assemblySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3223,8 +3438,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.String,System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.Load(System.String,System.Security.Policy.Evidence)" />
 
             
 
@@ -3234,8 +3448,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.String,System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.String,System.Security.Policy.Evidence)" />
 
             
 
@@ -3247,19 +3460,26 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly. See <see
-           cref="P:System.Reflection.Assembly.FullName" />
+          The display name of the assembly. See <see cref="P:System.Reflection.Assembly.FullName" />
 
           
 
           .</param
         >
         <param name="assemblySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3294,8 +3514,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+            >See the <see cref="M:System.AppDomain.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
 
             
 
@@ -3305,8 +3524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
 
             
 
@@ -3318,21 +3536,33 @@
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of type byte that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of type byte containing the raw bytes representing the symbols for the assembly. </param
         >
         <param name="securityEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3357,8 +3587,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="E:System.AppDomain.ProcessExit" />
+            >See the <see cref="E:System.AppDomain.ProcessExit" />
 
             
 
@@ -3368,8 +3597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.ProcessExit" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.ProcessExit" />
 
             
 
@@ -3395,8 +3623,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="P:System.AppDomain.RelativeSearchPath" />
+            >See the <see cref="P:System.AppDomain.RelativeSearchPath" />
 
             
 
@@ -3406,8 +3633,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.AppDomain.RelativeSearchPath" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.AppDomain.RelativeSearchPath" />
 
             
 
@@ -3436,8 +3662,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="E:System.AppDomain.ResourceResolve" />
+            >See the <see cref="E:System.AppDomain.ResourceResolve" />
 
             
 
@@ -3447,8 +3672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.ResourceResolve" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.ResourceResolve" />
 
             
 
@@ -3482,8 +3706,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
+            >See the <see cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
 
             
 
@@ -3493,8 +3716,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.SetAppDomainPolicy(System.Security.Policy.PolicyLevel)" />
 
             
 
@@ -3502,7 +3724,11 @@
           >
         </summary>
         <param name="domainPolicy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3532,8 +3758,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.SetCachePath(System.String)" />
+            >See the <see cref="M:System.AppDomain.SetCachePath(System.String)" />
 
             
 
@@ -3543,8 +3768,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.SetCachePath(System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.SetCachePath(System.String)" />
 
             
 
@@ -3552,7 +3776,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3583,8 +3811,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.SetData(System.String,System.Object)" />
+            >See the <see cref="M:System.AppDomain.SetData(System.String,System.Object)" />
 
             
 
@@ -3594,8 +3821,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.SetData(System.String,System.Object)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.SetData(System.String,System.Object)" />
 
             
 
@@ -3603,14 +3829,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of a user-defined application domain property to create or change. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3643,8 +3877,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy)" />
+            >See the <see cref="M:System.AppDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy)" />
 
             
 
@@ -3654,8 +3887,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy)" />
 
             
 
@@ -3663,12 +3895,15 @@
           >
         </summary>
         <param name="policy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Principal.PrincipalPolicy" />
+          One of the <see cref="T:System.Security.Principal.PrincipalPolicy" />
 
           
 
@@ -3698,8 +3933,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.SetShadowCopyPath(System.String)" />
+            >See the <see cref="M:System.AppDomain.SetShadowCopyPath(System.String)" />
 
             
 
@@ -3709,8 +3943,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.SetShadowCopyPath(System.String)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.SetShadowCopyPath(System.String)" />
 
             
 
@@ -3718,7 +3951,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3751,8 +3988,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.SetThreadPrincipal(System.Security.Principal.IPrincipal)" />
+            >See the <see cref="M:System.AppDomain.SetThreadPrincipal(System.Security.Principal.IPrincipal)" />
 
             
 
@@ -3762,8 +3998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.SetThreadPrincipal(System.Security.Principal.IPrincipal)" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.SetThreadPrincipal(System.Security.Principal.IPrincipal)" />
 
             
 
@@ -3771,7 +4006,11 @@
           >
         </summary>
         <param name="principal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3796,8 +4035,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="P:System.AppDomain.ShadowCopyFiles" />
+            >See the <see cref="P:System.AppDomain.ShadowCopyFiles" />
 
             
 
@@ -3807,8 +4045,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="P:System.AppDomain.ShadowCopyFiles" />
+            >Provides COM objects with version-independent access to the <see cref="P:System.AppDomain.ShadowCopyFiles" />
 
             
 
@@ -3837,8 +4074,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ToString" />
+            >See the <see cref="M:System.AppDomain.ToString" />
 
             
 
@@ -3848,8 +4084,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="M:System.AppDomain.ToString" />
+            >Provides COM objects with version-independent access to the <see cref="M:System.AppDomain.ToString" />
 
             
 
@@ -3882,8 +4117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.AppDomain.ToString" />
+            >See the <see cref="M:System.AppDomain.ToString" />
 
             
 
@@ -3893,8 +4127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.TypeResolve" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.TypeResolve" />
 
             
 
@@ -3926,8 +4159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="E:System.AppDomain.UnhandledException" />
+            >See the <see cref="E:System.AppDomain.UnhandledException" />
 
             
 
@@ -3937,8 +4169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides COM objects with version-independent access to the <see
-             cref="E:System.AppDomain.UnhandledException" />
+            >Provides COM objects with version-independent access to the <see cref="E:System.AppDomain.UnhandledException" />
 
             
 

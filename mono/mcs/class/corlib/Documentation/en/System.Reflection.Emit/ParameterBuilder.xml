@@ -41,23 +41,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Parameter attributes need to consistent with the method signature. If you specify Out attributes for a parameter, you should ensure that the type of that method parameter is a ByRef type.</para>
       <para
-        >Some <see
-         cref="T:System.Reflection.Emit.ParameterBuilder" />
+        >Some <see cref="T:System.Reflection.Emit.ParameterBuilder" />
 
         
 
-         attributes require that you call <see
-         cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Type,System.Type[])" />
+         attributes require that you call <see cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Type,System.Type[])" />
 
         
 
-         with viable parameters in order for the Microsoft intermediate language (MSIL) to work correctly at runtime. For example, if you define a <see
-         cref="T:System.Reflection.Emit.ParameterBuilder" />
+         with viable parameters in order for the Microsoft intermediate language (MSIL) to work correctly at runtime. For example, if you define a <see cref="T:System.Reflection.Emit.ParameterBuilder" />
 
         
 
-         with ParameterAttributes.Out for parameter 1 of a MethodBuilder, then parameter 1 of <see
-         cref="T:System.Reflection.Emit.MethodBuilder" />
+         with ParameterAttributes.Out for parameter 1 of a MethodBuilder, then parameter 1 of <see cref="T:System.Reflection.Emit.MethodBuilder" />
 
         
 
@@ -87,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The values of the attribute correspond to the values of the <see
-             cref="T:System.Reflection.ParameterAttributes" />
+            >The values of the attribute correspond to the values of the <see cref="T:System.Reflection.ParameterAttributes" />
 
             
 
@@ -269,18 +264,15 @@
 
             
 
-             is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the parameter type is a reference type, CLS compliance requires <paramref
-             name="defaultValue" />
+             is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the parameter type is a reference type, CLS compliance requires <paramref name="defaultValue" />
 
             
 
-             to be null. However, starting with the net_v40_long, <paramref
-             name="defaultValue" />
+             to be null. However, starting with the net_v40_long, <paramref name="defaultValue" />
 
             
 
-             can be non-null for a reference type as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a parameter of type <see
-             cref="T:System.Object" />
+             can be non-null for a reference type as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a parameter of type <see cref="T:System.Object" />
 
             
 
@@ -292,7 +284,11 @@
           <para>Sets the default value of the parameter.</para>
         </summary>
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -328,7 +324,11 @@
           <para>Set a custom attribute using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -367,20 +367,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref
-             name="binaryAttribute" />
+            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref name="binaryAttribute" />
 
             
 
             . The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -394,14 +393,22 @@
           <para>Set a custom attribute using a specified custom attribute blob.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -452,7 +459,11 @@
           <para>Specifies the marshaling for this parameter.</para>
         </summary>
         <param name="unmanagedMarshal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -522,8 +533,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -535,21 +545,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

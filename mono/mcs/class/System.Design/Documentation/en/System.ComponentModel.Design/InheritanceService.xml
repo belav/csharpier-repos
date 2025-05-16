@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.InheritanceService" />
+        >The <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
         
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
@@ -78,8 +76,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method searches all the fields of all base classes of the specified component. Each field that implements <see
-             cref="T:System.ComponentModel.IComponent" />
+            >This method searches all the fields of all base classes of the specified component. Each field that implements <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -89,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the components inherited by the specified component to the <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+            >Adds the components inherited by the specified component to the <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
@@ -98,14 +94,22 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to search for inherited components to add to the specified container. </param
         >
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,13 +139,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method searches all the fields of all base classes of component. Each field that implements <see
-             cref="T:System.ComponentModel.IComponent" />
+            >This method searches all the fields of all base classes of component. Each field that implements <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             is added to an internal list that stores an <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+             is added to an internal list that stores an <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
@@ -151,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the components of the specified type that are inherited by the specified component to the <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+            >Adds the components of the specified type that are inherited by the specified component to the <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
@@ -160,21 +161,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base type to search for. </param
         >
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to search for inherited components to add to the specified container. </param
         >
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,23 +210,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.ComponentModel.Design.InheritanceService.Dispose" />
+            >Calling <see cref="M:System.ComponentModel.Design.InheritanceService.Dispose" />
 
             
 
-             allows the resources used by the <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+             allows the resources used by the <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
-             to be reallocated for other purposes. For more information about <see
-             cref="M:System.ComponentModel.Design.InheritanceService.Dispose" />
+             to be reallocated for other purposes. For more information about <see cref="M:System.ComponentModel.Design.InheritanceService.Dispose" />
 
             
 
-            , see <format
-             type="text/html">
+            , see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
@@ -225,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
@@ -255,36 +263,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
@@ -294,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.ComponentModel.Design.InheritanceService" />
+            >Releases the unmanaged resources used by the <see cref="T:System.ComponentModel.Design.InheritanceService" />
 
             
 
@@ -303,7 +304,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -327,8 +332,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the component is not inherited, this method returns the value <see
-             cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />
+            >If the component is not inherited, this method returns the value <see cref="F:System.ComponentModel.InheritanceAttribute.NotInherited" />
 
             
 
@@ -342,8 +346,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+            >An <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
@@ -351,7 +354,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -387,24 +394,30 @@
           <para>true if the specified member should be included in the set of inherited components; otherwise, false.</para>
         </returns>
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The member to check. This member is either a <see
-           cref="T:System.Reflection.FieldInfo" />
+          The member to check. This member is either a <see cref="T:System.Reflection.FieldInfo" />
 
           
 
-           or a <see
-           cref="T:System.Reflection.MethodInfo" />
+           or a <see cref="T:System.Reflection.MethodInfo" />
 
           
 
           . </param
         >
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

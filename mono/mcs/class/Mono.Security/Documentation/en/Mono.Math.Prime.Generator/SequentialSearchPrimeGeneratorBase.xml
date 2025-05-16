@@ -15,7 +15,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -57,15 +59,9 @@
         <Parameter Name="bits" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="bits"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="bits">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -87,19 +83,10 @@
         <Parameter Name="context" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="bits"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="context"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="bits">a <see cref="T:System.Int32" /></param>
+        <param name="context">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -121,19 +108,10 @@
         <Parameter Name="context" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="bits"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="context"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="bits">a <see cref="T:System.Int32" /></param>
+        <param name="context">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </returns>
+        <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -155,19 +133,10 @@
         <Parameter Name="context" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="bi"
-          >a <see
-           cref="T:Mono.Math.BigInteger" />
-        </param>
-        <param name="context"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="bi">a <see cref="T:Mono.Math.BigInteger" /></param>
+        <param name="context">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

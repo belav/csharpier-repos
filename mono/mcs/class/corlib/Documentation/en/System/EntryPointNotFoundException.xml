@@ -39,8 +39,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.EntryPointNotFoundException" />
+        >An <see cref="T:System.EntryPointNotFoundException" />
 
         
 
@@ -49,13 +48,11 @@
       <list type="bullet">
         <item>
           <para
-            >The common language runtime is unable to locate an application entry point (typically a Main method) in an executable assembly. The application entry point must be a global or static method that has either no parameters or a string array as its only parameter. The entry point can return void, or it can return an <see
-             cref="T:System.Int32" />
+            >The common language runtime is unable to locate an application entry point (typically a Main method) in an executable assembly. The application entry point must be a global or static method that has either no parameters or a string array as its only parameter. The entry point can return void, or it can return an <see cref="T:System.Int32" />
 
             
 
-             or <see
-             cref="T:System.UInt32" />
+             or <see cref="T:System.UInt32" />
 
             
 
@@ -64,8 +61,7 @@
         </item>
         <item>
           <para
-            >The call to a function in a Windows DLL cannot be resolved because the function cannot be found. In the following example, an <see
-             cref="T:System.EntryPointNotFoundException" />
+            >The call to a function in a Windows DLL cannot be resolved because the function cannot be found. In the following example, an <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -77,13 +73,11 @@
       <list type="bullet">
         <item>
           <para
-            >The call to a function in a Windows DLL cannot be resolved because the name used in the method call does not match a name found in the assembly. Frequently, this occurs because the <see
-             cref="F:System.Runtime.InteropServices.DllImportAttribute.ExactSpelling" />
+            >The call to a function in a Windows DLL cannot be resolved because the name used in the method call does not match a name found in the assembly. Frequently, this occurs because the <see cref="F:System.Runtime.InteropServices.DllImportAttribute.ExactSpelling" />
 
             
 
-             field is either implicitly or explicitly set to true, the called method includes one or more string parameters and has both an ANSI and a Unicode version, and the name used in the method call does not correspond to the name of this ANSI or Unicode version. The following example provides an illustration by attempting to call the Windows MessageBox function in User32.dll. Because the first method definition specifies <see
-             cref="F:System.Runtime.InteropServices.CharSet.Unicode" />
+             field is either implicitly or explicitly set to true, the called method includes one or more string parameters and has both an ANSI and a Unicode version, and the name used in the method call does not correspond to the name of this ANSI or Unicode version. The following example provides an illustration by attempting to call the Windows MessageBox function in User32.dll. Because the first method definition specifies <see cref="F:System.Runtime.InteropServices.CharSet.Unicode" />
 
             
 
@@ -95,8 +89,7 @@
           <para> You are trying to call a function in a dynamic link library by its simple name rather than its decorated name. Typically, the C++ compiler generates a decorated name for DLL functions. For example, the following C++ code defines a function named Double in a library named TestDll.dll. </para>
           <para>code reference: System.EntryPointNotFoundException.Class#6</para>
           <para
-            >When the code in the following example tries to call the function, an <see
-             cref="T:System.EntryPointNotFoundException" />
+            >When the code in the following example tries to call the function, an <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -111,8 +104,7 @@
           <para>You are attempting to call a method in a managed assembly as if it were an unmanaged dynamic link library. To see this in action, compile the following example to an assembly named StringUtilities.dll. </para>
           <para>code reference: System.EntryPointNotFoundException.Class#3</para>
           <para
-            >Then compile and execute the following example, which attempts to call the StringUtilities.SayGoodMorning method in the StringUtilities.dll dynamic link library as if it were unmanaged code. The result is an <see
-             cref="T:System.EntryPointNotFoundException" />
+            >Then compile and execute the following example, which attempts to call the StringUtilities.SayGoodMorning method in the StringUtilities.dll dynamic link library as if it were unmanaged code. The result is an <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -124,13 +116,11 @@
         </item>
         <item>
           <para
-            >You are trying to call a method in a COM DLL as if it were a Windows DLL. To access a COM DLL, select the <ui
-            >Add Reference</ui>
+            >You are trying to call a method in a COM DLL as if it were a Windows DLL. To access a COM DLL, select the <ui>Add Reference</ui>
 
             
 
-             option in Visual Studio to add a reference to the project, and then select the type library from the <ui
-            >COM</ui>
+             option in Visual Studio to add a reference to the project, and then select the type library from the <ui>COM</ui>
 
             
 
@@ -139,13 +129,11 @@
         </item>
       </list>
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.EntryPointNotFoundException" />
+        >For a list of initial property values for an instance of <see cref="T:System.EntryPointNotFoundException" />
 
         
 
-        , see the <see
-         cref="M:System.EntryPointNotFoundException.#ctor" />
+        , see the <see cref="M:System.EntryPointNotFoundException.#ctor" />
 
         
 
@@ -180,16 +168,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Entry point was not found." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.EntryPointNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -231,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.EntryPointNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -266,16 +251,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of <paramref
-             name="message" />
+            >The content of <paramref name="message" />
 
             
 
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.EntryPointNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -317,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.EntryPointNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -326,7 +308,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.EntryPointNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -371,14 +356,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -414,26 +407,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.EntryPointNotFoundException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -475,8 +464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.EntryPointNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.EntryPointNotFoundException" />
 
             
 
@@ -484,19 +472,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

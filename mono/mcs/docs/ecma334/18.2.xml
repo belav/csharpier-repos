@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
 <clause number="18.2" title="Struct members">
   <paragraph
-    >The members of a struct consist of the members introduced by its <non_terminal
-     where="18.2">struct-member-declaration</non_terminal>
+    >The members of a struct consist of the members introduced by its <non_terminal where="18.2"
+      >struct-member-declaration</non_terminal
+    >
 
     
 
-    s and the members inherited from the type System.ValueType. <grammar_production
-    >
+    s and the members inherited from the type System.ValueType. <grammar_production>
       <name>
-        <non_terminal where="18.2">struct-member-declaration</non_terminal>
+        <non_terminal where="18.2"
+          >struct-member-declaration</non_terminal
+        >
 
         
 
@@ -18,8 +20,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="18.2">struct-member-declaration</non_terminal>
       </rhs>
       <rhs>
@@ -34,8 +35,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="17.3">constant-declaration</non_terminal>
       </rhs>
       <rhs>
@@ -68,18 +68,15 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >Except for the differences noted in <hyperlink
-    >18.3</hyperlink>
+    >Except for the differences noted in <hyperlink>18.3</hyperlink>
 
     
 
-    , the descriptions of class members provided in <hyperlink
-    >17.2</hyperlink>
+    , the descriptions of class members provided in <hyperlink>17.2</hyperlink>
 
     
 
-     through <hyperlink
-    >17.11</hyperlink>
+     through <hyperlink>17.11</hyperlink>
 
     
 

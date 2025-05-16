@@ -14,102 +14,84 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A component can use the <see
-         cref="T:System.Drawing.Design.IPropertyValueUIService" />
+        >A component can use the <see cref="T:System.Drawing.Design.IPropertyValueUIService" />
 
         
 
-         interface to provide <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         interface to provide <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
-         objects for any properties of the component. A <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         objects for any properties of the component. A <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
          associated with a property can provide an image, a ToolTip and an event handler for the event that is raised when the image associated with the property is clicked.</para
       >
       <para
-        >The <see
-         cref="T:System.Drawing.Design.IPropertyValueUIService" />
+        >The <see cref="T:System.Drawing.Design.IPropertyValueUIService" />
 
         
 
-         interface provides methods to add, remove, and retrieve <see
-         cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+         interface provides methods to add, remove, and retrieve <see cref="T:System.Drawing.Design.PropertyValueUIHandler" />
 
         
 
-         delegates to or from an internal list. When the properties of a component are displayed in a property browser, each <see
-         cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+         delegates to or from an internal list. When the properties of a component are displayed in a property browser, each <see cref="T:System.Drawing.Design.PropertyValueUIHandler" />
 
         
 
-         in the list is given an opportunity to provide a <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         in the list is given an opportunity to provide a <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
          for each property of the component.</para
       >
       <para
-        >When a property browser is set to display the properties of an object, it calls the <see
-         cref="M:System.Drawing.Design.IPropertyValueUIService.GetPropertyUIValueItems(System.ComponentModel.ITypeDescriptorContext,System.ComponentModel.PropertyDescriptor)" />
+        >When a property browser is set to display the properties of an object, it calls the <see cref="M:System.Drawing.Design.IPropertyValueUIService.GetPropertyUIValueItems(System.ComponentModel.ITypeDescriptorContext,System.ComponentModel.PropertyDescriptor)" />
 
         
 
-         method of this interface for each property of the component, passing a <see
-         cref="T:System.ComponentModel.PropertyDescriptor" />
+         method of this interface for each property of the component, passing a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
         
 
-         that represents the property. The <see
-         cref="M:System.Drawing.Design.IPropertyValueUIService.GetPropertyUIValueItems(System.ComponentModel.ITypeDescriptorContext,System.ComponentModel.PropertyDescriptor)" />
+         that represents the property. The <see cref="M:System.Drawing.Design.IPropertyValueUIService.GetPropertyUIValueItems(System.ComponentModel.ITypeDescriptorContext,System.ComponentModel.PropertyDescriptor)" />
 
         
 
-         method calls each <see
-         cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+         method calls each <see cref="T:System.Drawing.Design.PropertyValueUIHandler" />
 
         
 
-         that has been added to the service. Each <see
-         cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+         that has been added to the service. Each <see cref="T:System.Drawing.Design.PropertyValueUIHandler" />
 
         
 
-         can add a <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         can add a <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
-         to the <see
-         cref="T:System.Collections.ArrayList" />
+         to the <see cref="T:System.Collections.ArrayList" />
 
         
 
-         parameter passed in the <paramref
-         name="valueUIItemList" />
+         parameter passed in the <paramref name="valueUIItemList" />
 
         
 
-         parameter to supply UI items for the property represented by the <see
-         cref="T:System.ComponentModel.PropertyDescriptor" />
+         parameter to supply UI items for the property represented by the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
         
 
-         passed in the <paramref
-         name="propDesc" />
+         passed in the <paramref name="propDesc" />
 
         
 
          parameter.</para
       >
       <para
-        >A <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+        >A <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
@@ -138,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="M:System.Drawing.Design.IPropertyValueUIService.GetPropertyUIValueItems(System.ComponentModel.ITypeDescriptorContext,System.ComponentModel.PropertyDescriptor)" />
+            >When <see cref="M:System.Drawing.Design.IPropertyValueUIService.GetPropertyUIValueItems(System.ComponentModel.ITypeDescriptorContext,System.ComponentModel.PropertyDescriptor)" />
 
             
 
@@ -149,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+            >Adds the specified <see cref="T:System.Drawing.Design.PropertyValueUIHandler" />
 
             
 
@@ -158,7 +138,11 @@
           >
         </summary>
         <param name="newHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Design.PropertyValueUIItem" />
+            >Gets the <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
             
 
@@ -199,8 +182,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Drawing.Design.PropertyValueUIItem" />
+            >An array of <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
             
 
@@ -208,24 +190,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that can be used to gain additional context information. </param
         >
         <param name="propDesc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -249,13 +237,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see
-             cref="T:System.Drawing.Design.IPropertyValueUIService" />
+            >Notifies the <see cref="T:System.Drawing.Design.IPropertyValueUIService" />
 
             
 
-             implementation that the global list of <see
-             cref="T:System.Drawing.Design.PropertyValueUIItem" />
+             implementation that the global list of <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
             
 
@@ -282,13 +268,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Components that serve <see
-             cref="T:System.Drawing.Design.PropertyValueUIItem" />
+            >Components that serve <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
             
 
-             objects can call <see
-             cref="M:System.Drawing.Design.IPropertyValueUIService.NotifyPropertyValueUIItemsChanged" />
+             objects can call <see cref="M:System.Drawing.Design.IPropertyValueUIService.NotifyPropertyValueUIItemsChanged" />
 
             
 
@@ -298,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the list of <see
-             cref="T:System.Drawing.Design.PropertyValueUIItem" />
+            >Occurs when the list of <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
             
 
@@ -329,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+            >Removes the specified <see cref="T:System.Drawing.Design.PropertyValueUIHandler" />
 
             
 
@@ -338,7 +320,11 @@
           >
         </summary>
         <param name="newHandler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

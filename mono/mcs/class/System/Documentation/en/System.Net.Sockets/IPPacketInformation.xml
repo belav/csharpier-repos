@@ -19,13 +19,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Presents the packet information from a call to <see
-         cref="M:System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+        >Presents the packet information from a call to <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
 
         
 
-         or <see
-         cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+         or <see cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
 
         
 
@@ -54,13 +52,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the origin information of the packet that was received as a result of calling the <see
-             cref="M:System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+            >Gets the origin information of the packet that was received as a result of calling the <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
 
             
 
-             method or <see
-             cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+             method or <see cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
 
             
 
@@ -95,13 +91,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="comparand" />
+            >true if <paramref name="comparand" />
 
             
 
-             is an instance of <see
-             cref="T:System.Net.Sockets.IPPacketInformation" />
+             is an instance of <see cref="T:System.Net.Sockets.IPPacketInformation" />
 
             
 
@@ -109,7 +103,11 @@
           >
         </returns>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,13 +134,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code is constructed from the values of the <see
-             cref="P:System.Net.Sockets.IPPacketInformation.Address" />
+            >The hash code is constructed from the values of the <see cref="P:System.Net.Sockets.IPPacketInformation.Address" />
 
             
 
-             and <see
-             cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
+             and <see cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
 
             
 
@@ -176,13 +172,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the network interface information that is associated with a call to <see
-             cref="M:System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+            >Gets the network interface information that is associated with a call to <see cref="M:System.Net.Sockets.Socket.ReceiveMessageFrom(System.Byte[],System.Int32,System.Int32,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
 
             
 
-             or <see
-             cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+             or <see cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
 
             
 
@@ -218,13 +212,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator tests both the <see
-             cref="P:System.Net.Sockets.IPPacketInformation.Address" />
+            >This operator tests both the <see cref="P:System.Net.Sockets.IPPacketInformation.Address" />
 
             
 
-             and <see
-             cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
+             and <see cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
 
             
 
@@ -234,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two specified <see
-             cref="T:System.Net.Sockets.IPPacketInformation" />
+            >Tests whether two specified <see cref="T:System.Net.Sockets.IPPacketInformation" />
 
             
 
@@ -245,13 +236,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="packetInformation1" />
+            >true if <paramref name="packetInformation1" />
 
             
 
-             and <paramref
-             name="packetInformation2" />
+             and <paramref name="packetInformation2" />
 
             
 
@@ -287,13 +276,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator tests both the <see
-             cref="P:System.Net.Sockets.IPPacketInformation.Address" />
+            >This operator tests both the <see cref="P:System.Net.Sockets.IPPacketInformation.Address" />
 
             
 
-             and <see
-             cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
+             and <see cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
 
             
 
@@ -303,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two specified <see
-             cref="T:System.Net.Sockets.IPPacketInformation" />
+            >Tests whether two specified <see cref="T:System.Net.Sockets.IPPacketInformation" />
 
             
 
@@ -314,13 +300,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="packetInformation1" />
+            >true if <paramref name="packetInformation1" />
 
             
 
-             and <paramref
-             name="packetInformation2" />
+             and <paramref name="packetInformation2" />
 
             
 

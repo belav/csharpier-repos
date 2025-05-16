@@ -19,21 +19,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" />
+        >A <see cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" />
 
         
 
          event is raised when the user suspends or resumes the operating system, or when a system power status notification occurs. A system power status notification can occur when a weak or charging power source is detected, or when a transition from AC or battery power source occurs.</para
       >
       <para
-        >The <see
-         cref="P:Microsoft.Win32.PowerModeChangedEventArgs.Mode" />
+        >The <see cref="P:Microsoft.Win32.PowerModeChangedEventArgs.Mode" />
 
         
 
-         property of a <see
-         cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
+         property of a <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
 
         
 
@@ -43,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" />
+        >Provides data for the <see cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" />
 
         
 
@@ -75,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to create a <see
-             cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
+            >This constructor can be used to create a <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
 
             
 
@@ -86,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
 
             
 
@@ -95,12 +89,15 @@
           >
         </summary>
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:Microsoft.Win32.PowerModes" />
+          One of the <see cref="T:Microsoft.Win32.PowerModes" />
 
           
 

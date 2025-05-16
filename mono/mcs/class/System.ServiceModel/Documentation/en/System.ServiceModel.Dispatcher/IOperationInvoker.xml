@@ -14,28 +14,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
 
         
 
-         interface to control the conversion from an untyped object and array of parameters to a strongly-typed method call on that object. It has a synchronous <see
-         cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
+         interface to control the conversion from an untyped object and array of parameters to a strongly-typed method call on that object. It has a synchronous <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
 
         
 
-         method, which takes an instance and set of inputs of type object and returns an object and a set of outputs of type object. It also has a <see
-         cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeBegin(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
+         method, which takes an instance and set of inputs of type object and returns an object and a set of outputs of type object. It also has a <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeBegin(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeEnd(System.Object,System.Object[]@,System.IAsyncResult)" />
+         and <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeEnd(System.Object,System.Object[]@,System.IAsyncResult)" />
 
         
 
-         variant.  The <see
-         cref="P:System.ServiceModel.Dispatcher.IOperationInvoker.IsSynchronous" />
+         variant.  The <see cref="P:System.ServiceModel.Dispatcher.IOperationInvoker.IsSynchronous" />
 
         
 
@@ -66,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement this to return an array of parameters for the operation. This array is filled by the formatter and passed back to the invoker when <see
-             cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
+            >Implement this to return an array of parameters for the operation. This array is filled by the formatter and passed back to the invoker when <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
 
             
 
@@ -77,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Array" />
+            >Returns an <see cref="T:System.Array" />
 
             
 
@@ -148,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An asynchronous implementation of the <see
-             cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
+            >An asynchronous implementation of the <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
 
             
 
@@ -159,8 +151,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IAsyncResult" />
+            >A <see cref="T:System.IAsyncResult" />
 
             
 
@@ -168,28 +159,44 @@
           >
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be invoked.</param
         >
         <param name="inputs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The inputs to the method.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The asynchronous callback object.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,8 +249,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default invoker dispatches messages to the synchronous operation by default. This value is cached by the dispatcher and therefore should not change over the lifetime of the object that implements <see
-             cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
+            >The default invoker dispatches messages to the synchronous operation by default. This value is cached by the dispatcher and therefore should not change over the lifetime of the object that implements <see cref="T:System.ServiceModel.Dispatcher.IOperationInvoker" />
 
             
 
@@ -253,13 +259,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies whether the <see
-             cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
+            >Gets a value that specifies whether the <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
 
             
 
-             or <see
-             cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeBegin(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
+             or <see cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeBegin(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
 
             
 

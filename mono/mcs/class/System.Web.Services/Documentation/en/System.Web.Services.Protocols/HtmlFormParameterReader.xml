@@ -27,45 +27,38 @@
 
         
 
-         and other classes in the <see
-         cref="N:System.Web.Services.Protocols" />
+         and other classes in the <see cref="N:System.Web.Services.Protocols" />
 
         
 
-         namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard. The service-side <see
-         cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+         namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard. The service-side <see cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
 
         
 
-          class provides a <see
-         cref="M:System.Web.Services.Protocols.HtmlFormParameterReader.Read(System.Web.HttpRequest)" />
+          class provides a <see cref="M:System.Web.Services.Protocols.HtmlFormParameterReader.Read(System.Web.HttpRequest)" />
 
         
 
          method to read parameter name-value pairs that are encoded into the body of an HTTP request with the MIME type application/x-www-form-urlencoded.</para
       >
       <para
-        >You typically will not need to use <see
-         cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+        >You typically will not need to use <see cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
 
         
 
-          directly. HTTP-POST Web services are enabled when an ASP.NET configuration file's (Web.config) <format
-         type="text/html">
+          directly. HTTP-POST Web services are enabled when an ASP.NET configuration file's (Web.config) <format type="text/html">
           <a href="f3b301dc-855c-4062-8bcf-5ccadb598fab">&lt;protocols&gt;</a>
         </format>
 
         
 
-         element contains an <format
-         type="text/html">
+         element contains an <format type="text/html">
           <a href="abaa41b9-aa8b-469f-8ae5-e58c4d3a2921">&lt;add&gt;</a>
         </format>
 
         
 
-         element whose name attribute's value is "HttpPost". The <see
-         cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+         element whose name attribute's value is "HttpPost". The <see cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
 
         
 
@@ -88,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
 
             
 
@@ -118,18 +110,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Protocols.HtmlFormParameterReader.Read(System.Web.HttpRequest)" />
+            >The <see cref="M:System.Web.Services.Protocols.HtmlFormParameterReader.Read(System.Web.HttpRequest)" />
 
             
 
-             method uses the content of the <see
-             cref="T:System.Web.HttpRequest" />
+             method uses the content of the <see cref="T:System.Web.HttpRequest" />
 
             
 
-             object's <see
-             cref="P:System.Web.HttpRequest.Form" />
+             object's <see cref="P:System.Web.HttpRequest.Form" />
 
             
 
@@ -145,12 +134,15 @@
           <para>An array of objects contain the name-value pairs.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpRequest" />
+          An <see cref="T:System.Web.HttpRequest" />
 
           
 

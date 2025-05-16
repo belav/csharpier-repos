@@ -17,47 +17,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ClientTarget" />
+        >The <see cref="T:System.Web.Configuration.ClientTarget" />
 
         
 
          class refers to elements that are added in the clientTarget section of the configuration file.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ClientTarget" />
+        >The <see cref="T:System.Web.Configuration.ClientTarget" />
 
         
 
-         class belongs to a group that includes the <see
-         cref="T:System.Web.Configuration.ClientTargetCollection" />
+         class belongs to a group that includes the <see cref="T:System.Web.Configuration.ClientTargetCollection" />
 
         
 
-         class and the <see
-         cref="T:System.Web.Configuration.ClientTargetSection" />
+         class and the <see cref="T:System.Web.Configuration.ClientTargetSection" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ClientTarget" />
+        >The <see cref="T:System.Web.Configuration.ClientTarget" />
 
         
 
          class contains two properties identifying a client browser, also named user agent. One property is the alias associated with the client browser identified by the second property. ASP.NET uses this information to render server controls in a page. </para
       >
       <para
-        >For information about how the user agent or its alias is used programmatically, see the <see
-         cref="P:System.Web.UI.Page.ClientTarget" />
+        >For information about how the user agent or its alias is used programmatically, see the <see cref="P:System.Web.UI.Page.ClientTarget" />
 
         
 
-         property. For information about how the user agent or its alias is used declaratively, see <format
-         type="text/html">
+         property. For information about how the user agent or its alias is used declaratively, see <format type="text/html">
           <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
         </format>
 
@@ -66,18 +59,15 @@
         .</para
       >
       <para
-        >If the <see
-         cref="P:System.Web.UI.Page.ClientTarget" />
+        >If the <see cref="P:System.Web.UI.Page.ClientTarget" />
 
         
 
-         property is not set, the <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+         property is not set, the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
-         object that is associated with the <see
-         cref="P:System.Web.UI.Page.Request" />
+         object that is associated with the <see cref="P:System.Web.UI.Page.Request" />
 
         
 
@@ -106,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ClientTarget" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ClientTarget" />
 
             
 
@@ -115,14 +104,22 @@
           >
         </summary>
         <param name="alias">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name used to refer to a specific user agent.</param
         >
         <param name="userAgent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -153,8 +150,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.ClientTarget.Alias" />
+            >The <see cref="P:System.Web.Configuration.ClientTarget.Alias" />
 
             
 
@@ -218,8 +214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.ClientTarget.UserAgent" />
+            >The <see cref="P:System.Web.Configuration.ClientTarget.UserAgent" />
 
             
 

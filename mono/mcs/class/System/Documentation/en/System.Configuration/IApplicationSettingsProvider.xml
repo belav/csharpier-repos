@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The application settings architecture enables you to provide a custom storage mechanism for application settings by creating a custom settings provider, which is a class derived from <see
-         cref="T:System.Configuration.SettingsProvider" />
+        >The application settings architecture enables you to provide a custom storage mechanism for application settings by creating a custom settings provider, which is a class derived from <see cref="T:System.Configuration.SettingsProvider" />
 
         
 
-        . Such a class contains the basic functionality for storing and retrieving properties. However, you can add additional standardized functionality by implementing the <see
-         cref="T:System.Configuration.IApplicationSettingsProvider" />
+        . Such a class contains the basic functionality for storing and retrieving properties. However, you can add additional standardized functionality by implementing the <see cref="T:System.Configuration.IApplicationSettingsProvider" />
 
         
 
@@ -43,23 +41,19 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        >The <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
-         class implements the <see
-         cref="T:System.Configuration.IApplicationSettingsProvider" />
+         class implements the <see cref="T:System.Configuration.IApplicationSettingsProvider" />
 
         
 
-         interface. The same set of methods contained by <see
-         cref="T:System.Configuration.IApplicationSettingsProvider" />
+         interface. The same set of methods contained by <see cref="T:System.Configuration.IApplicationSettingsProvider" />
 
         
 
-         is also found in the <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+         is also found in the <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
@@ -101,13 +95,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Configuration.IApplicationSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
+            >You can use the <see cref="M:System.Configuration.IApplicationSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
 
             
 
-             method in conjunction with the <see
-             cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+             method in conjunction with the <see cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
@@ -121,8 +113,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.SettingsPropertyValue" />
+            >A <see cref="T:System.Configuration.SettingsPropertyValue" />
 
             
 
@@ -130,24 +121,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application usage.</param
         >
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.SettingsProperty" />
+          The <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -180,21 +177,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.IApplicationSettingsProvider.Reset(System.Configuration.SettingsContext)" />
+            >The <see cref="M:System.Configuration.IApplicationSettingsProvider.Reset(System.Configuration.SettingsContext)" />
 
             
 
-             method reinitializes the stored values of the specified application settings group. In contrast, <see
-             cref="T:System.Configuration.DefaultSettingValueAttribute" />
+             method reinitializes the stored values of the specified application settings group. In contrast, <see cref="T:System.Configuration.DefaultSettingValueAttribute" />
 
             
 
              supplies a default value for a single settings property during property initialization, if it has no stored value.</para
           >
           <para
-            >The settings provider determines what reasonable defaults are for the specified group of application settings. For example, the implementation in <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+            >The settings provider determines what reasonable defaults are for the specified group of application settings. For example, the implementation in <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
@@ -206,12 +200,15 @@
           <para>Resets the application settings associated with the specified application to their default values.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
@@ -245,39 +242,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework enables side-by-side installation and execution of different versions of the same application. The application settings provider stores the application settings for each version of an application separately to ensure isolation. However, you may want to migrate settings from the previous version of an application to the current one. To provide this migration functionality, use the <see
-             cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+            >The .NET Framework enables side-by-side installation and execution of different versions of the same application. The application settings provider stores the application settings for each version of an application separately to ensure isolation. However, you may want to migrate settings from the previous version of an application to the current one. To provide this migration functionality, use the <see cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
-             method, implemented in a class derived from <see
-             cref="T:System.Configuration.SettingsProvider" />
+             method, implemented in a class derived from <see cref="T:System.Configuration.SettingsProvider" />
 
             
 
             .</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+            >You can use the <see cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
-             method in conjunction with the <see
-             cref="M:System.Configuration.IApplicationSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
+             method in conjunction with the <see cref="M:System.Configuration.IApplicationSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
 
             
 
              method to migrate application settings during or after the installation of a new version of an application.</para
           >
           <para
-            >This method should be suppressed for every application setting that has the <see
-             cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+            >This method should be suppressed for every application setting that has the <see cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
 
             
 
-             is applied to it, or to the entire settings wrapper class, derived from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+             is applied to it, or to the entire settings wrapper class, derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -289,24 +280,30 @@
           <para>Indicates to the provider that the application has been upgraded. This offers the provider an opportunity to upgrade its stored settings as appropriate.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application usage.</param
         >
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsPropertyCollection" />
+          A <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
           
 

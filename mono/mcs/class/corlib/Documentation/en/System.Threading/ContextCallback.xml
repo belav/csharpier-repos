@@ -34,26 +34,22 @@
 
         
 
-         is used by the <see
-         cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
+         is used by the <see cref="M:System.Threading.ExecutionContext.Run(System.Threading.ExecutionContext,System.Threading.ContextCallback,System.Object)" />
 
         
 
-         and the <see
-         cref="M:System.Security.SecurityContext.Run(System.Security.SecurityContext,System.Threading.ContextCallback,System.Object)" />
+         and the <see cref="M:System.Security.SecurityContext.Run(System.Security.SecurityContext,System.Threading.ContextCallback,System.Object)" />
 
         
 
-         methods. <see
-         cref="T:System.Threading.ContextCallback" />
+         methods. <see cref="T:System.Threading.ContextCallback" />
 
         
 
          represents the method to be run in the provided context. Upon completion of the method execution, the context is restored to its previous state. </para
       >
       <para
-        >Create the delegate by passing your callback method to the <see
-         cref="T:System.Threading.ContextCallback" />
+        >Create the delegate by passing your callback method to the <see cref="T:System.Threading.ContextCallback" />
 
         
 

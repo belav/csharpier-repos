@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the kind of action to take if a match is found when combining menu items on a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Specifies the kind of action to take if a match is found when combining menu items on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 

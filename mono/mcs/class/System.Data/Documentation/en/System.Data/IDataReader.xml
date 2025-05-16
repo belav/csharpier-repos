@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.IDataReader" />
+        >The <see cref="T:System.Data.IDataReader" />
 
         
 
-         and <see
-         cref="T:System.Data.IDataRecord" />
+         and <see cref="T:System.Data.IDataRecord" />
 
         
 
-         interfaces allow an inheriting class to implement a DataReader class, which provides a means of reading one or more forward-only streams of result sets. For more information about DataReader classes, see <format
-         type="text/html">
+         interfaces allow an inheriting class to implement a DataReader class, which provides a means of reading one or more forward-only streams of result sets. For more information about DataReader classes, see <format type="text/html">
           <a href="97AFC121-FB8B-465B-BAB3-6D844420BADB"
             >[&lt;topic://cpcontheadonetdatareader&gt;]</a
           >
@@ -47,21 +44,18 @@
         . </para
       >
       <para
-        >An application does not create an instance of the <see
-         cref="T:System.Data.IDataReader" />
+        >An application does not create an instance of the <see cref="T:System.Data.IDataReader" />
 
         
 
-         interface directly, but creates an instance of a class that inherits <see
-         cref="T:System.Data.IDataReader" />
+         interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDataReader" />
 
         
 
         .</para
       >
       <para
-        >Classes that inherit <see
-         cref="T:System.Data.IDataReader" />
+        >Classes that inherit <see cref="T:System.Data.IDataReader" />
 
         
 
@@ -86,18 +80,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must explicitly call the <see
-             cref="M:System.Data.IDataReader.Close" />
+            >You must explicitly call the <see cref="M:System.Data.IDataReader.Close" />
 
             
 
-             method when you are through using the <see
-             cref="T:System.Data.IDataReader" />
+             method when you are through using the <see cref="T:System.Data.IDataReader" />
 
             
 
-             to use the associated <see
-             cref="T:System.Data.IDbConnection" />
+             to use the associated <see cref="T:System.Data.IDbConnection" />
 
             
 
@@ -107,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Data.IDataReader" />
+            >Closes the <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -154,18 +144,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of <see
-             cref="M:System.Data.IDataReader.GetSchemaTable" />
+            >The implementation of <see cref="M:System.Data.IDataReader.GetSchemaTable" />
 
             
 
-             method for the .NET Framework Data Provider for OLE DB maps to the OLE DB IColumnsRowset::GetColumnsRowset method, while implementations for other .NET Framework data providers do not use an OLE DB provider layer. The order in which <see
-             cref="M:System.Data.IDataReader.GetSchemaTable" />
+             method for the .NET Framework Data Provider for OLE DB maps to the OLE DB IColumnsRowset::GetColumnsRowset method, while implementations for other .NET Framework data providers do not use an OLE DB provider layer. The order in which <see cref="M:System.Data.IDataReader.GetSchemaTable" />
 
             
 
-             returns metadata about each column in a table, and the DataReader columns that are returned, vary depending on which data provider you use. The following table lists data providers and members that implement <see
-             cref="M:System.Data.IDataReader.GetSchemaTable" />
+             returns metadata about each column in a table, and the DataReader columns that are returned, vary depending on which data provider you use. The following table lists data providers and members that implement <see cref="M:System.Data.IDataReader.GetSchemaTable" />
 
             
 
@@ -243,13 +230,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Data.DataTable" />
+            >Returns a <see cref="T:System.Data.DataTable" />
 
             
 
-             that describes the column metadata of the <see
-             cref="T:System.Data.IDataReader" />
+             that describes the column metadata of the <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -259,8 +244,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -288,13 +272,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.IDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.IDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.IDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -350,26 +332,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default position of the <see
-             cref="T:System.Data.IDataReader" />
+            >The default position of the <see cref="T:System.Data.IDataReader" />
 
             
 
-             is prior to the first record. Therefore you must call <see
-             cref="M:System.Data.IDataReader.Read" />
+             is prior to the first record. Therefore you must call <see cref="M:System.Data.IDataReader.Read" />
 
             
 
              to begin accessing any data.</para
           >
           <para
-            >While the data reader is in use, the associated connection is busy serving the <see
-             cref="T:System.Data.IDataReader" />
+            >While the data reader is in use, the associated connection is busy serving the <see cref="T:System.Data.IDataReader" />
 
             
 
-            . This is the case until <see
-             cref="M:System.Data.IDataReader.Close" />
+            . This is the case until <see cref="M:System.Data.IDataReader.Close" />
 
             
 
@@ -379,8 +357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Advances the <see
-             cref="T:System.Data.IDataReader" />
+            >Advances the <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -408,13 +385,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.IDataReader.RecordsAffected" />
+            >The <see cref="P:System.Data.IDataReader.RecordsAffected" />
 
             
 
-             property is not set until all rows are read and you close the <see
-             cref="T:System.Data.IDataReader" />
+             property is not set until all rows are read and you close the <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -425,13 +400,11 @@
 
             
 
-             and <see
-             cref="P:System.Data.IDataReader.RecordsAffected" />
+             and <see cref="P:System.Data.IDataReader.RecordsAffected" />
 
             
 
-             are the only properties that you can call after the <see
-             cref="T:System.Data.IDataReader" />
+             are the only properties that you can call after the <see cref="T:System.Data.IDataReader" />
 
             
 

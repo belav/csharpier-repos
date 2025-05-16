@@ -58,13 +58,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom code that extends security objects needs to implement the <see
-             cref="M:System.Security.ISecurityEncodable.ToXml" />
+            >Custom code that extends security objects needs to implement the <see cref="M:System.Security.ISecurityEncodable.ToXml" />
 
             
 
-             and <see
-             cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" />
+             and <see cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" />
 
             
 
@@ -76,7 +74,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -104,13 +106,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom code that extends security objects needs to implement the <see
-             cref="M:System.Security.ISecurityEncodable.ToXml" />
+            >Custom code that extends security objects needs to implement the <see cref="M:System.Security.ISecurityEncodable.ToXml" />
 
             
 
-             and <see
-             cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" />
+             and <see cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" />
 
             
 

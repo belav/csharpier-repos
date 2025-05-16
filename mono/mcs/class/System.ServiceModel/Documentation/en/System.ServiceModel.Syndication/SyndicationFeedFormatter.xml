@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract class used as a base class for other formatters, (for example <see
-         cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" />
+        >An abstract class used as a base class for other formatters, (for example <see cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" />
 
         
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -86,38 +84,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            >A <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             must have a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             must have a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             associated with it. The <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             associated with it. The <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             can then write out the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             can then write out the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             to an <see
-             cref="T:System.Xml.XmlReader" />
+             to an <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . The only way to associate a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            . The only way to associate a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             with a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             with a <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -127,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             class with the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -170,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Verifies whether the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -208,13 +196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -224,13 +210,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             class using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             class using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -240,8 +224,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -274,13 +257,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -290,13 +271,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             class using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+             class using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -306,8 +285,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -337,13 +315,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -353,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -364,8 +339,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -398,13 +372,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -414,13 +386,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             class using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             class using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -430,8 +400,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -464,13 +433,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -480,13 +447,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             class with the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -496,8 +461,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
@@ -530,13 +494,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -546,13 +508,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             class with the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+             class with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -562,8 +522,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
@@ -596,13 +555,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -612,13 +569,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             instance with the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             instance with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -628,8 +583,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
@@ -662,13 +616,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             instance is not automatically added to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+             instance is not automatically added to the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -678,13 +630,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             instance with the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+             instance with the specified <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -694,8 +644,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
@@ -725,23 +674,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >A <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             is associated with the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             is associated with the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             by passing in a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             by passing in a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance to the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             instance to the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -751,8 +696,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Gets the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -789,8 +733,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see
-             cref="T:System.Xml.XmlReader" />
+            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -800,13 +743,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads element extensions into the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Loads element extensions into the specified <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             using the specified <see
-             cref="T:System.Xml.XmlReader" />
+             using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -843,8 +784,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see
-             cref="T:System.Xml.XmlReader" />
+            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -854,13 +794,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads element extensions into the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Loads element extensions into the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             using the specified <see
-             cref="T:System.Xml.XmlReader" />
+             using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -897,8 +835,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see
-             cref="T:System.Xml.XmlReader" />
+            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -908,13 +845,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads element extensions into the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Loads element extensions into the specified <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             using the specified <see
-             cref="T:System.Xml.XmlReader" />
+             using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -951,8 +886,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see
-             cref="T:System.Xml.XmlReader" />
+            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -962,13 +896,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads element extensions into the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Loads element extensions into the specified <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             using the specified <see
-             cref="T:System.Xml.XmlReader" />
+             using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1005,8 +937,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see
-             cref="T:System.Xml.XmlReader" />
+            >The RSS 2.0 and Atom 1.0 specifications allow you to add custom element extensions to a syndication feed. This method allows you to read in these element extensions from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1016,13 +947,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads element extensions into the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Loads element extensions into the specified <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             using the specified <see
-             cref="T:System.Xml.XmlReader" />
+             using the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1055,18 +984,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-            , associates it with the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            , associates it with the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             and reads the feed into the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             and reads the feed into the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -1076,13 +1002,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads in a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Reads in a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             from the specified <see
-             cref="T:System.Xml.XmlReader" />
+             from the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1115,38 +1039,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is protected and cannot be called from user code. To associate a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >This method is protected and cannot be called from user code. To associate a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance with a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             instance with a <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-            , either create a new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            , either create a new <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             instance and pass the constructor a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             instance and pass the constructor a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance or load a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+             instance or load a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance into the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             instance into the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
-             by calling the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationFeedFormatter.ReadFrom(System.Xml.XmlReader)" />
+             by calling the <see cref="M:System.ServiceModel.Syndication.SyndicationFeedFormatter.ReadFrom(System.Xml.XmlReader)" />
 
             
 
@@ -1156,13 +1073,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Associates a <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Associates a <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance with the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+             instance with the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -1190,8 +1105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            >Gets a string representation of the <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -1201,8 +1115,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
+            >The <see cref="T:System.ServiceModel.Syndication.SyndicationFeedFormatter" />
 
             
 
@@ -1243,13 +1156,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >To control how attribute extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationCategory.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationCategory.TryParseAttribute(System.String,System.String,System.String,System.String)" />
 
             
 
@@ -1259,8 +1170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an attribute extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Attempts to parse an attribute extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -1305,13 +1215,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >To control how attribute extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationFeed.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationFeed.TryParseAttribute(System.String,System.String,System.String,System.String)" />
 
             
 
@@ -1321,8 +1229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an attribute extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Attempts to parse an attribute extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -1367,13 +1274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >To control how attribute extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationItem.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationItem.TryParseAttribute(System.String,System.String,System.String,System.String)" />
 
             
 
@@ -1383,8 +1288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an attribute extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Attempts to parse an attribute extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -1429,13 +1333,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >To control how attribute extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationLink.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationLink.TryParseAttribute(System.String,System.String,System.String,System.String)" />
 
             
 
@@ -1445,8 +1347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an attribute extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Attempts to parse an attribute extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
@@ -1491,13 +1392,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >To control how attribute extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationPerson.TryParseAttribute(System.String,System.String,System.String,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationPerson.TryParseAttribute(System.String,System.String,System.String,System.String)" />
 
             
 
@@ -1507,8 +1406,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an attribute extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Attempts to parse an attribute extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
@@ -1587,13 +1485,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >To control how element extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationCategory.TryParseElement(System.Xml.XmlReader,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationCategory.TryParseElement(System.Xml.XmlReader,System.String)" />
 
             
 
@@ -1603,8 +1499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an element extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Attempts to parse an element extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -1645,13 +1540,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >To control how element extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationFeed.TryParseElement(System.Xml.XmlReader,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationFeed.TryParseElement(System.Xml.XmlReader,System.String)" />
 
             
 
@@ -1661,8 +1554,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an element extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Attempts to parse an element extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -1703,13 +1595,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >To control how element extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationItem.TryParseElement(System.Xml.XmlReader,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationItem.TryParseElement(System.Xml.XmlReader,System.String)" />
 
             
 
@@ -1719,8 +1609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an element extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Attempts to parse an element extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -1761,13 +1650,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >To control how element extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationLink.TryParseElement(System.Xml.XmlReader,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationLink.TryParseElement(System.Xml.XmlReader,System.String)" />
 
             
 
@@ -1777,8 +1664,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an element extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Attempts to parse an element extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
@@ -1819,13 +1705,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are parsed, derive your own class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >To control how element extensions are parsed, derive your own class from <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationPerson.TryParseElement(System.Xml.XmlReader,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationPerson.TryParseElement(System.Xml.XmlReader,System.String)" />
 
             
 
@@ -1835,8 +1719,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to parse an element extension using the specified <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Attempts to parse an element extension using the specified <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
@@ -1899,18 +1782,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >To control how attribute extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -1920,13 +1800,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Writes the attribute extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1963,18 +1841,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >To control how attribute extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationFeed.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationFeed.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -1984,13 +1859,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Writes the attribute extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2027,18 +1900,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >To control how attribute extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationItem.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationItem.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2048,13 +1918,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Writes the attribute extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2091,18 +1959,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >To control how attribute extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationLink.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationLink.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2112,13 +1977,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Writes the attribute extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2155,18 +2018,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how attribute extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >To control how attribute extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteAttributeExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2176,13 +2036,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the attribute extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Writes the attribute extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2219,18 +2077,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >To control how element extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationCategory.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2240,13 +2095,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Writes the element extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2283,18 +2136,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >To control how element extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationFeed.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationFeed.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2304,13 +2154,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Writes the element extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2347,18 +2195,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >To control how element extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationItem.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationItem.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2368,13 +2213,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Writes the element extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2411,18 +2254,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >To control how element extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationLink.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationLink.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2432,13 +2272,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+            >Writes the element extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationLink" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2475,18 +2313,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To control how element extensions are written by the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >To control how element extensions are written by the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-            , derive a class from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            , derive a class from <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             and override the <see
-             cref="M:System.ServiceModel.Syndication.SyndicationPerson.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
+             and override the <see cref="M:System.ServiceModel.Syndication.SyndicationPerson.WriteElementExtensions(System.Xml.XmlWriter,System.String)" />
 
             
 
@@ -2496,13 +2331,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the element extensions in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+            >Writes the element extensions in the <see cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2536,13 +2369,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >Writes the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
-             to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 

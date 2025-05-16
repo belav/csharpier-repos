@@ -44,18 +44,15 @@
         </item>
       </list>
       <para
-        >For definitions of URL, site, and zone, see <see
-         cref="T:System.Security.Permissions.UrlIdentityPermission" />
+        >For definitions of URL, site, and zone, see <see cref="T:System.Security.Permissions.UrlIdentityPermission" />
 
         
 
-        , <see
-         cref="T:System.Security.Permissions.SiteIdentityPermission" />
+        , <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
         
 
-        , and <see
-         cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+        , and <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
         
 

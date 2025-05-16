@@ -53,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.ManifestResourceInfo" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.ManifestResourceInfo" />
 
             
 
@@ -62,21 +61,33 @@
           >
         </summary>
         <param name="containingAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The assembly that contains the manifest resource.</param
         >
         <param name="containingFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file that contains the manifest resource, if the file is not the same as the manifest file.</param
         >
         <param name="resourceLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

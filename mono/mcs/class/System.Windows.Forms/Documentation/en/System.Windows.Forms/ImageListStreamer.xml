@@ -21,38 +21,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This is a sealed class, so you can not inherit from it. Also, the constructor is private, so you cannot create a new instance of it. An <see
-         cref="T:System.Windows.Forms.ImageListStreamer" />
+        >This is a sealed class, so you can not inherit from it. Also, the constructor is private, so you cannot create a new instance of it. An <see cref="T:System.Windows.Forms.ImageListStreamer" />
 
         
 
-         is returned by the <see
-         cref="P:System.Windows.Forms.ImageList.ImageStream" />
+         is returned by the <see cref="P:System.Windows.Forms.ImageList.ImageStream" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.ImageList" />
+         property of the <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
-        . However, you cannot use this class to load images to an <see
-         cref="T:System.Windows.Forms.ImageList" />
+        . However, you cannot use this class to load images to an <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
-         control by directly assigning the <see
-         cref="P:System.Windows.Forms.ImageList.ImageStream" />
+         control by directly assigning the <see cref="P:System.Windows.Forms.ImageList.ImageStream" />
 
         
 
-         property from one <see
-         cref="T:System.Windows.Forms.ImageList" />
+         property from one <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
-        . Instead you should directly assign one <see
-         cref="T:System.Windows.Forms.ImageList" />
+        . Instead you should directly assign one <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
@@ -62,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the data portion of an <see
-         cref="T:System.Windows.Forms.ImageList" />
+        >Provides the data portion of an <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
@@ -89,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information and a code example, see <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >For more information and a code example, see <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -100,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -109,24 +99,30 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

@@ -21,21 +21,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.FontInfo" />
+        >Use the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
         
 
          class to encapsulate the font properties of text. You can specify the font name and font size. You can also specify whether the style of the font is bold, italic, overlined, strikethrough, or underlined.</para
       >
       <para
-        >This class is commonly used in a property for a class that requires font information, such as the <see
-         cref="P:System.Web.UI.WebControls.WebControl.Font" />
+        >This class is commonly used in a property for a class that requires font information, such as the <see cref="P:System.Web.UI.WebControls.WebControl.Font" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.WebControl" />
+         property of the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
@@ -63,8 +60,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Bold" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Bold" />
 
             
 
@@ -108,18 +104,15 @@
 
             
 
-             properties are unset when the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             properties are unset when the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             object is created. When a property is first set, the value is added to view state. The <see
-             cref="M:System.Web.UI.WebControls.FontInfo.ClearDefaults" />
+             object is created. When a property is first set, the value is added to view state. The <see cref="M:System.Web.UI.WebControls.FontInfo.ClearDefaults" />
 
             
 
-             method is used to set all the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             method is used to set all the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -171,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets all <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+            >Resets all <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -197,18 +189,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
 
             
 
-             method to duplicate the font properties of the specified <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             method to duplicate the font properties of the specified <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -216,13 +205,11 @@
           >
           <block subset="none" type="note">
             <para
-              >All properties in the current instance of the <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+              >All properties in the current instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
-               class will be replaced by the associated property in the <paramref
-               name="f" />
+               class will be replaced by the associated property in the <paramref name="f" />
 
               
 
@@ -230,33 +217,27 @@
             >
           </block>
           <para
-            >When a style is registered using <see
-             cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
+            >When a style is registered using <see cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
 
             
 
-            , and then copied using <see
-             cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
+            , and then copied using <see cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
 
             
 
-            , only the <see
-             cref="P:System.Web.UI.WebControls.Style.CssClass" />
+            , only the <see cref="P:System.Web.UI.WebControls.Style.CssClass" />
 
             
 
-             property is copied to the destination, not all the individual properties. Therefore, if you are using <see
-             cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
+             property is copied to the destination, not all the individual properties. Therefore, if you are using <see cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
 
             
 
-             to copy font information from the <see
-             cref="P:System.Web.UI.WebControls.Style.Font" />
+             to copy font information from the <see cref="P:System.Web.UI.WebControls.Style.Font" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             property of a <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -266,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Duplicates the font properties of the specified <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+            >Duplicates the font properties of the specified <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             into the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             into the instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -280,12 +259,15 @@
           >
         </summary>
         <param name="f">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.FontInfo" />
+          A <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
           
 
@@ -309,8 +291,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Italic" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Italic" />
 
             
 
@@ -352,18 +333,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontInfo.MergeWith(System.Web.UI.WebControls.FontInfo)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontInfo.MergeWith(System.Web.UI.WebControls.FontInfo)" />
 
             
 
-             method to combine the font properties of the specified <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             method to combine the font properties of the specified <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             with the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             with the instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -371,28 +349,23 @@
           >
           <block subset="none" type="note">
             <para
-              >This method joins the properties of the two <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+              >This method joins the properties of the two <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
-               objects by setting each property that is not set in the current instance of the <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+               objects by setting each property that is not set in the current instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
-               class with the value in the corresponding property of the <paramref
-               name="f" />
+               class with the value in the corresponding property of the <paramref name="f" />
 
               
 
-               parameter. Only properties that have not been set will be replaced. If a property in the <paramref
-               name="f" />
+               parameter. Only properties that have not been set will be replaced. If a property in the <paramref name="f" />
 
               
 
-               parameter is not set, it will not replace the corresponding property in the current instance of the <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+               parameter is not set, it will not replace the corresponding property in the current instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
@@ -403,13 +376,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines the font properties of the specified <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+            >Combines the font properties of the specified <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             with the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             with the instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -417,12 +388,15 @@
           >
         </summary>
         <param name="f">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.FontInfo" />
+          A <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
           
 
@@ -446,13 +420,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
             
 
-             property to specify or determine the primary font name. The primary font name determines the font that is used to display text in the control associated with the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             property to specify or determine the primary font name. The primary font name determines the font that is used to display text in the control associated with the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -460,33 +432,27 @@
           >
           <block subset="none" type="note">
             <para
-              >When you set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+              >When you set the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
-               property, the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+               property, the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
               
 
-               property is automatically updated with the first item in the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+               property is automatically updated with the first item in the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
-               property. If you set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+               property. If you set the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
               
 
-               property, the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+               property, the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
-               property is automatically updated with a single element array containing the value of the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+               property is automatically updated with a single element array containing the value of the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
               
 
@@ -536,18 +502,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
-             property to specify or determine an ordered array of font names for a <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             property to specify or determine an ordered array of font names for a <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-            . The <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+            . The <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
@@ -555,33 +518,27 @@
           >
           <block subset="none" type="note">
             <para
-              >When you set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+              >When you set the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
-               property, the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+               property, the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
               
 
-               property is automatically updated with the first item in the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+               property is automatically updated with the first item in the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
-               property. If you set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+               property. If you set the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
               
 
-               property, the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+               property, the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
-               property is automatically updated with a single element array containing the value of the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+               property is automatically updated with a single element array containing the value of the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
               
 
@@ -589,33 +546,27 @@
             >
           </block>
           <para
-            >To specify the font name for the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+            >To specify the font name for the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             using the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+             using the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
-             array, set the first element in the array to the font name you want to use. Since the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+             array, set the first element in the array to the font name you want to use. Since the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
-             property is automatically updated when the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+             property is automatically updated when the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
             
 
-             property is set, you need to manipulate the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+             property is set, you need to manipulate the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
-             array to rearrange the order of the items in the array instead of setting the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+             array to rearrange the order of the items in the array instead of setting the <see cref="P:System.Web.UI.WebControls.FontInfo.Name" />
 
             
 
@@ -659,8 +610,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
             
 
@@ -669,38 +619,31 @@
           <para>The value of this property is stored in view state.</para>
           <block subset="none" type="note">
             <para
-              >The font underline behavior for links generated by the <see
-               cref="T:System.Web.UI.WebControls.LinkButton" />
+              >The font underline behavior for links generated by the <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.HyperLink" />
+              , <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+              , and <see cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
 
               
 
-               controls is affected by setting the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+               controls is affected by setting the <see cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+               property of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
-               for the control. If the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+               for the control. If the <see cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
               
 
-               property is set, regardless of value its value, you must set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+               property is set, regardless of value its value, you must set the <see cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
 
               
 
@@ -737,23 +680,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontInfo.ShouldSerializeNames" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontInfo.ShouldSerializeNames" />
 
             
 
-             method to determine whether the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+             method to determine whether the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
-             property has changed from its default value. This method is commonly used if you are either creating a designer for the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             property has changed from its default value. This method is commonly used if you are either creating a designer for the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
-             class or creating your own control incorporating the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             class or creating your own control incorporating the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -761,8 +700,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+              >The <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
               
 
@@ -773,8 +711,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+            >Determines whether the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
@@ -784,8 +721,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+            >true if the <see cref="P:System.Web.UI.WebControls.FontInfo.Names" />
 
             
 
@@ -813,8 +749,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -855,8 +790,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
             
 
@@ -865,38 +799,31 @@
           <para>The value of this property is stored in view state.</para>
           <block subset="none" type="note">
             <para
-              >The font underline behavior for links generated by the <see
-               cref="T:System.Web.UI.WebControls.LinkButton" />
+              >The font underline behavior for links generated by the <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.HyperLink" />
+              , <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+              , and <see cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
 
               
 
-               controls is affected by setting the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+               controls is affected by setting the <see cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+               property of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
-               for the control. If the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+               for the control. If the <see cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
               
 
-               property is set, regardless of its value, you must set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+               property is set, regardless of its value, you must set the <see cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
 
               
 
@@ -933,13 +860,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontInfo.ToString" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontInfo.ToString" />
 
             
 
-             method to create a string that contains the font name and size, separated by a comma, for an instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+             method to create a string that contains the font name and size, separated by a comma, for an instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -947,8 +872,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+              >If the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
               
 
@@ -959,8 +883,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that contains the font name and size for an instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+            >Returns a string that contains the font name and size for an instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -970,8 +893,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that contains the font name and size for an instance of the <see
-             cref="T:System.Web.UI.WebControls.FontInfo" />
+            >A string that contains the font name and size for an instance of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
             
 
@@ -996,8 +918,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
 
             
 
@@ -1006,48 +927,39 @@
           <para>The value of this property is stored in view state.</para>
           <block subset="none" type="note">
             <para
-              >The font underline behavior for links generated by the <see
-               cref="T:System.Web.UI.WebControls.LinkButton" />
+              >The font underline behavior for links generated by the <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.HyperLink" />
+              , <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+              , and <see cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
 
               
 
-               controls is affected by setting the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+               controls is affected by setting the <see cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
               
 
-               and the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+               and the <see cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
               
 
-               properties of the <see
-               cref="T:System.Web.UI.WebControls.FontInfo" />
+               properties of the <see cref="T:System.Web.UI.WebControls.FontInfo" />
 
               
 
-               for the control. If the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+               for the control. If the <see cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
               
 
-               or the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+               or the <see cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
               
 
-               properties are set, regardless of their value, you must set the <see
-               cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+               properties are set, regardless of their value, you must set the <see cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
 
               
 

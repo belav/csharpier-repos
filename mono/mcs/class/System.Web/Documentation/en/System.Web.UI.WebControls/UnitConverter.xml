@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.UnitConverter" />
+        >Use the <see cref="T:System.Web.UI.WebControls.UnitConverter" />
 
         
 
-         class to convert a <see
-         cref="T:System.Web.UI.WebControls.Unit" />
+         class to convert a <see cref="T:System.Web.UI.WebControls.Unit" />
 
         
 
-         to an object of another data type. You can also use the <see
-         cref="T:System.Web.UI.WebControls.UnitConverter" />
+         to an object of another data type. You can also use the <see cref="T:System.Web.UI.WebControls.UnitConverter" />
 
         
 
-         class to convert an object of another data type to a <see
-         cref="T:System.Web.UI.WebControls.Unit" />
+         class to convert an object of another data type to a <see cref="T:System.Web.UI.WebControls.Unit" />
 
         
 
@@ -44,13 +40,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This converter can convert only a string to <see
-           cref="T:System.Web.UI.WebControls.Unit" />
+          >This converter can convert only a string to <see cref="T:System.Web.UI.WebControls.Unit" />
 
           
 
-           and a <see
-           cref="T:System.Web.UI.WebControls.Unit" />
+           and a <see cref="T:System.Web.UI.WebControls.Unit" />
 
           
 
@@ -59,13 +53,11 @@
       </block>
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -76,13 +68,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts from a <see
-         cref="T:System.Web.UI.WebControls.Unit" />
+        >Converts from a <see cref="T:System.Web.UI.WebControls.Unit" />
 
         
 
-         object to an object of another data type and from another type to a <see
-         cref="T:System.Web.UI.WebControls.Unit" />
+         object to an object of another data type and from another type to a <see cref="T:System.Web.UI.WebControls.Unit" />
 
         
 
@@ -101,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.UnitConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.UnitConverter" />
 
             
 
@@ -139,19 +128,26 @@
           <para>true if the source type can be converted from; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            instance that specifies the context of the object to convert. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -185,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the converter can convert a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+            >Returns a value indicating whether the converter can convert a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -196,8 +191,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the converter supports converting a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+            >true if the converter supports converting a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -205,24 +199,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that indicates the context of the object to convert.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -255,31 +255,41 @@
           <para>The object resulting from conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            instance that indicates the context of the object to convert. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass null for this parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -317,38 +327,52 @@
           <para>The object resulting from conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            instance that indicates the context of the object to convert. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass null for this parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

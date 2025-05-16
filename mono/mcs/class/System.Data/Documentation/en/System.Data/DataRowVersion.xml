@@ -16,41 +16,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.DataRowVersion" />
+        >The <see cref="T:System.Data.DataRowVersion" />
 
         
 
-         values are used when retrieving the value found in a <see
-         cref="T:System.Data.DataRow" />
+         values are used when retrieving the value found in a <see cref="T:System.Data.DataRow" />
 
         
 
-         using <see
-         cref="P:System.Data.DataRow.Item(System.Int32)" />
+         using <see cref="P:System.Data.DataRow.Item(System.Int32)" />
 
         
 
-         or the <see
-         cref="M:System.Data.DataRow.GetChildRows(System.String)" />
+         or the <see cref="M:System.Data.DataRow.GetChildRows(System.String)" />
 
         
 
-         of the <see
-         cref="T:System.Data.DataRow" />
+         of the <see cref="T:System.Data.DataRow" />
 
         
 
          object.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.DataRowVersion" />
+        >The <see cref="T:System.Data.DataRowVersion" />
 
         
 
-         informs you what version of a <see
-         cref="T:System.Data.DataRow" />
+         informs you what version of a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -59,13 +52,11 @@
       <list type="bullet">
         <item>
           <para
-            >After calling the <see
-             cref="T:System.Data.DataRow" />
+            >After calling the <see cref="T:System.Data.DataRow" />
 
             
 
-             object's <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+             object's <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
@@ -74,13 +65,11 @@
         </item>
         <item>
           <para
-            >After calling the <see
-             cref="T:System.Data.DataRow" />
+            >After calling the <see cref="T:System.Data.DataRow" />
 
             
 
-             object's <see
-             cref="M:System.Data.DataRow.CancelEdit" />
+             object's <see cref="M:System.Data.DataRow.CancelEdit" />
 
             
 
@@ -89,13 +78,11 @@
         </item>
         <item>
           <para
-            >After calling the <see
-             cref="T:System.Data.DataRow" />
+            >After calling the <see cref="T:System.Data.DataRow" />
 
             
 
-             object's <see
-             cref="M:System.Data.DataRow.EndEdit" />
+             object's <see cref="M:System.Data.DataRow.EndEdit" />
 
             
 
@@ -104,28 +91,11 @@
         </item>
         <item>
           <para
-            >After calling the <see
-             cref="T:System.Data.DataRow" />
+            >After calling the <see cref="T:System.Data.DataRow" />
 
             
 
-             object's <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
-
-            
-
-             method, the Original value becomes identical to the Current value.</para
-          >
-        </item>
-        <item>
-          <para
-            >After calling the <see
-             cref="T:System.Data.DataTable" />
-
-            
-
-             object's <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+             object's <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -134,13 +104,24 @@
         </item>
         <item>
           <para
-            >After calling the <see
-             cref="T:System.Data.DataRow" />
+            >After calling the <see cref="T:System.Data.DataTable" />
 
             
 
-             object's <see
-             cref="M:System.Data.DataRow.RejectChanges" />
+             object's <see cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
+
+             method, the Original value becomes identical to the Current value.</para
+          >
+        </item>
+        <item>
+          <para
+            >After calling the <see cref="T:System.Data.DataRow" />
+
+            
+
+             object's <see cref="M:System.Data.DataRow.RejectChanges" />
 
             
 
@@ -152,8 +133,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the version of a <see
-         cref="T:System.Data.DataRow" />
+        >Describes the version of a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -193,13 +173,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default version of <see
-             cref="T:System.Data.DataRowState" />
+            >The default version of <see cref="T:System.Data.DataRowState" />
 
             
 
-            . For a DataRowState value of Added, Modified or Deleted, the default version is Current. For a <see
-             cref="T:System.Data.DataRowState" />
+            . For a DataRowState value of Added, Modified or Deleted, the default version is Current. For a <see cref="T:System.Data.DataRowState" />
 
             
 

@@ -13,36 +13,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+        >The <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
         
 
-         base class is implemented by designer hosts to provide access to types, directives, and user controls defined in a Web project document. A control designer class can use the <see
-         cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+         base class is implemented by designer hosts to provide access to types, directives, and user controls defined in a Web project document. A control designer class can use the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
         
 
          to access the definitions in the current document, and to add a new tag prefix to the current document.</para
       >
       <para
-        >You access the <see
-         cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+        >You access the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
         
 
-         services supplied by the designer host through the <see
-         cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+         services supplied by the designer host through the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
 
         
 
-         property of a <see
-         cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+         property of a <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
         
 
-         implementation. The <see
-         cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+         implementation. The <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
         
 
@@ -51,33 +45,27 @@
       <list type="bullet">
         <item>
           <para
-            >Classes deriving from <see
-             cref="T:System.Web.UI.Design.ControlDesigner" />
+            >Classes deriving from <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
             
 
-             can use the <see
-             cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+             can use the <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
             
 
-             property to access a <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+             property to access a <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             implementation supplied by the designer host. The <see
-             cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+             implementation supplied by the designer host. The <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
             
 
-             implementation is supplied through the <see
-             cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+             implementation is supplied through the <see cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
 
             
 
-             property of <see
-             cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
+             property of <see cref="P:System.Web.UI.Design.ControlDesigner.RootDesigner" />
 
             
 
@@ -86,28 +74,23 @@
         </item>
         <item>
           <para
-            >Other designer classes can access the <see
-             cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+            >Other designer classes can access the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
             
 
-             implementation by first obtaining the <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+             implementation by first obtaining the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
-             services implementation through the designer component's <see
-             cref="P:System.ComponentModel.Component.Site" />
+             services implementation through the designer component's <see cref="P:System.ComponentModel.Component.Site" />
 
             
 
-            , and then calling the <see
-             cref="M:System.ComponentModel.Design.IDesignerHost.GetDesigner(System.ComponentModel.IComponent)" />
+            , and then calling the <see cref="M:System.ComponentModel.Design.IDesignerHost.GetDesigner(System.ComponentModel.IComponent)" />
 
             
 
-             method using the designer host <see
-             cref="P:System.ComponentModel.Design.IDesignerHost.RootComponent" />
+             method using the designer host <see cref="P:System.ComponentModel.Design.IDesignerHost.RootComponent" />
 
             
 
@@ -119,33 +102,27 @@
 
               
 
-               replaces the obsolete interface <see
-               cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+               replaces the obsolete interface <see cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
 
               
 
-              . Older designer hosts may only support the <see
-               cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+              . Older designer hosts may only support the <see cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
 
               
 
-               interface implementation. Check that the <see
-               cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+               interface implementation. Check that the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
               
 
-               and <see
-               cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+               and <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
               
 
-               implementations supplied by the designer host are not null to ensure the designer host implements the <see
-               cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+               implementations supplied by the designer host are not null to ensure the designer host implements the <see cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
 
               
 
-               and <see
-               cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+               and <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
               
 
@@ -172,21 +149,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+            >Because the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
             
 
-             class is abstract, you cannot create an instance of <see
-             cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+             class is abstract, you cannot create an instance of <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
             
 
              directly using the constructor.</para
           >
           <para
-            >When deriving from the <see
-             cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+            >When deriving from the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
             
 
@@ -196,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
 
             
 
@@ -257,7 +230,11 @@
           <para>The tag prefix for the specified object type, if found; otherwise, null.</para>
         </returns>
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -290,8 +267,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -299,14 +275,22 @@
           >
         </returns>
         <param name="tagPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The tag prefix of the type to retrieve.</param
         >
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -350,14 +334,22 @@
           <para>A string representing the relative URL path for the specified user control, if found; otherwise, null.</para>
         </returns>
         <param name="tagPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The tag prefix of the user control to retrieve.</param
         >
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -394,7 +386,11 @@
           <para>The tag prefix string.</para>
         </returns>
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

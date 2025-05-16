@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.FtpStatusCode" />
+        >The <see cref="T:System.Net.FtpStatusCode" />
 
         
 
-         enumeration defines the values returned in the <see
-         cref="P:System.Net.FtpWebResponse.StatusCode" />
+         enumeration defines the values returned in the <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
         
 
@@ -32,7 +30,9 @@
       >
       <para
         >For additional information about FTP server status codes, see RFC 959, "File Transfer Protocol," Section 4.2, "FTP Replies," available at <see
-         cref="http://www.ietf.org">http://www.rfc-editor.org</see>
+          cref="http://www.ietf.org"
+          >http://www.rfc-editor.org</see
+        >
 
         
 

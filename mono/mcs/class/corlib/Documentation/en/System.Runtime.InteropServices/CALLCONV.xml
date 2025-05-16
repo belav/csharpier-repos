@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
 
         
 
@@ -108,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the end of the <see
-             cref="T:System.Runtime.InteropServices.CALLCONV" />
+            >Indicates the end of the <see cref="T:System.Runtime.InteropServices.CALLCONV" />
 
             
 

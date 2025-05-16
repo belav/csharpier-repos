@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class contains the local security settings used by the <see
-         cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+        >This class contains the local security settings used by the <see cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
 
             
 
@@ -105,8 +103,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+            >A new instance of <see cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
 
             
 
@@ -183,8 +180,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used to verify that the remote endpoint that the client channel is communicating with matches the identity specified in the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >This property is used to verify that the remote endpoint that the client channel is communicating with matches the identity specified in the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -216,16 +212,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Messages between systems whose clocks' difference exceeds the value specified in this property are rejected.</para>
           <para
-            >This property is used in conjunction with the message time stamp verification and the <see
-             cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.ReplayWindow" />
+            >This property is used in conjunction with the message time stamp verification and the <see cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.ReplayWindow" />
 
             
 
              property.</para
           >
           <para
-            >crdefault <format
-             type="text/html">
+            >crdefault <format type="text/html">
               <a href="491d1705-eb29-43c2-a44c-c0cf996f74eb">How To: Set a Max Clock Skew</a>
             </format>
 
@@ -305,16 +299,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <newTerm
-            >nonce</newTerm>
+            >A <newTerm>nonce</newTerm>
 
             
 
              is a "number used once", often a random number used in an authentication protocol to ensure that old communications cannot be used in an attack by using replays.</para
           >
           <para
-            >If the nonce count is exceeded, the incoming message is rejected and a <see
-             cref="T:System.ServiceModel.Security.MessageSecurityException" />
+            >If the nonce count is exceeded, the incoming message is rejected and a <see cref="T:System.ServiceModel.Security.MessageSecurityException" />
 
             
 
@@ -345,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <newTerm
-            >nonce</newTerm>
+            >A <newTerm>nonce</newTerm>
 
             
 
@@ -383,13 +374,11 @@
           <list type="bullet">
             <item>
               <para
-                >All client credential types for <see
-                 cref="T:System.ServiceModel.WSDualHttpBinding" />
+                >All client credential types for <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
                 
 
-                 and <see
-                 cref="T:System.ServiceModel.NetTcpBinding" />
+                 and <see cref="T:System.ServiceModel.NetTcpBinding" />
 
                 
 
@@ -398,8 +387,7 @@
             </item>
             <item>
               <para
-                >If <format
-                 type="text/html">
+                >If <format type="text/html">
                   <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
                 </format>
 
@@ -410,25 +398,21 @@
             </item>
             <item>
               <para
-                >If <format
-                 type="text/html">
+                >If <format type="text/html">
                   <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
                 </format>
 
                 
 
-                 is not enabled, on <see
-                 cref="T:System.ServiceModel.WSHttpBinding" />
+                 is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" />
 
                 
 
-                 with <see
-                 cref="P:System.ServiceModel.Description.ClientCredentials.UserName" />
+                 with <see cref="P:System.ServiceModel.Description.ClientCredentials.UserName" />
 
                 
 
-                 = true or <see
-                 cref="P:System.ServiceModel.Description.ClientCredentials.Windows" />
+                 = true or <see cref="P:System.ServiceModel.Description.ClientCredentials.Windows" />
 
                 
 
@@ -440,8 +424,7 @@
           <list type="bullet">
             <item>
               <para
-                >For <see
-                 cref="T:System.ServiceModel.BasicHttpBinding" />
+                >For <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
                 
 
@@ -450,8 +433,7 @@
             </item>
             <item>
               <para
-                >For <see
-                 cref="T:System.ServiceModel.NetNamedPipeBinding" />
+                >For <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
                 
 
@@ -460,25 +442,21 @@
             </item>
             <item>
               <para
-                >If <format
-                 type="text/html">
+                >If <format type="text/html">
                   <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
                 </format>
 
                 
 
-                 is not enabled, on <see
-                 cref="T:System.ServiceModel.WSHttpBinding" />
+                 is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" />
 
                 
 
-                 with <see
-                 cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" />
+                 with <see cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" />
 
                 
 
-                 = true or with none of the <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                 = true or with none of the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
@@ -518,13 +496,11 @@
           <list type="bullet">
             <item>
               <para
-                >All client credential types for <see
-                 cref="T:System.ServiceModel.WSDualHttpBinding" />
+                >All client credential types for <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
                 
 
-                 and <see
-                 cref="T:System.ServiceModel.NetTcpBinding" />
+                 and <see cref="T:System.ServiceModel.NetTcpBinding" />
 
                 
 
@@ -533,8 +509,7 @@
             </item>
             <item>
               <para
-                >If <format
-                 type="text/html">
+                >If <format type="text/html">
                   <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
                 </format>
 
@@ -545,25 +520,21 @@
             </item>
             <item>
               <para
-                >If <format
-                 type="text/html">
+                >If <format type="text/html">
                   <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
                 </format>
 
                 
 
-                 is not enabled, on <see
-                 cref="T:System.ServiceModel.WSHttpBinding" />
+                 is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" />
 
                 
 
-                 with <see
-                 cref="P:System.ServiceModel.Description.ClientCredentials.UserName" />
+                 with <see cref="P:System.ServiceModel.Description.ClientCredentials.UserName" />
 
                 
 
-                 = true or  <see
-                 cref="P:System.ServiceModel.Description.ClientCredentials.windows" />
+                 = true or  <see cref="P:System.ServiceModel.Description.ClientCredentials.windows" />
 
                 
 
@@ -575,8 +546,7 @@
           <list type="bullet">
             <item>
               <para
-                >For <see
-                 cref="T:System.ServiceModel.BasicHttpBinding" />
+                >For <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
                 
 
@@ -585,8 +555,7 @@
             </item>
             <item>
               <para
-                >For <see
-                 cref="T:System.ServiceModel.NetNamedPipeBinding" />
+                >For <see cref="T:System.ServiceModel.NetNamedPipeBinding" />
 
                 
 
@@ -595,25 +564,21 @@
             </item>
             <item>
               <para
-                >If <format
-                 type="text/html">
+                >If <format type="text/html">
                   <a href="9c93818a-7dfa-43d5-b3a1-1aafccf3a00b">&lt;reliableSession&gt; element</a>
                 </format>
 
                 
 
-                 is not enabled, on <see
-                 cref="T:System.ServiceModel.WSHttpBinding" />
+                 is not enabled, on <see cref="T:System.ServiceModel.WSHttpBinding" />
 
                 
 
-                 with <see
-                 cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" />
+                 with <see cref="P:System.ServiceModel.Description.ClientCredentials.ClientCertificate" />
 
                 
 
-                 = true or with none of the <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                 = true or with none of the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 

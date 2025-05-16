@@ -13,16 +13,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Microsoft ADO.NET 2.0 introduces the ability to serialize a <see
-         cref="T:System.Data.Dataset" />
+        >Microsoft ADO.NET 2.0 introduces the ability to serialize a <see cref="T:System.Data.Dataset" />
 
         
 
          as binary content. Earlier versions of the Microsoft .NET Framework do not support binary serialization.</para
       >
       <para
-        >The default format is <see
-         cref="F:System.Data.SerializationFormat.Xml" />
+        >The default format is <see cref="F:System.Data.SerializationFormat.Xml" />
 
         
 
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Determines the serialization format for a <see
-         cref="T:System.Data.DataSet" />
+        >Determines the serialization format for a <see cref="T:System.Data.DataSet" />
 
         
 

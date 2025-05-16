@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when a method in the <see
-         cref="N:System.Security.AccessControl" />
+        >The exception that is thrown when a method in the <see cref="N:System.Security.AccessControl" />
 
         
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.PrivilegeNotHeldException" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.PrivilegeNotHeldException" />
 
             
 
@@ -84,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.PrivilegeNotHeldException" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.PrivilegeNotHeldException" />
 
             
 
@@ -93,7 +90,11 @@
           >
         </summary>
         <param name="privilege">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -125,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.PrivilegeNotHeldException" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.PrivilegeNotHeldException" />
 
             
 
@@ -134,19 +134,26 @@
           >
         </summary>
         <param name="privilege">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The privilege that is not enabled.</param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -181,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <paramref
-             name="info" />
+            >Sets the <paramref name="info" />
 
             
 
@@ -190,24 +196,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

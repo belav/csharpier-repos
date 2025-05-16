@@ -71,7 +71,11 @@
           <para>Initializes a new instance of the AccessedThroughPropertyAttribute class with the name of the property used to access the attributed field.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

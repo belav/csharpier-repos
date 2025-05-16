@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.BuildTemplateMethod" />
+        >The <see cref="T:System.Web.UI.BuildTemplateMethod" />
 
         
 
-         delegate is used in conjunction with the <see
-         cref="T:System.Web.UI.CompiledTemplateBuilder" />
+         delegate is used in conjunction with the <see cref="T:System.Web.UI.CompiledTemplateBuilder" />
 
         
 
@@ -37,13 +35,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Supports ASP.NET during the creation of a template for a templated control from generated class code. The <see
-         cref="T:System.Web.UI.BuildTemplateMethod" />
+        >Supports ASP.NET during the creation of a template for a templated control from generated class code. The <see cref="T:System.Web.UI.BuildTemplateMethod" />
 
         
 
-         delegate handles the <see
-         cref="M:System.Web.UI.CompiledTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+         delegate handles the <see cref="M:System.Web.UI.CompiledTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
 
         
 

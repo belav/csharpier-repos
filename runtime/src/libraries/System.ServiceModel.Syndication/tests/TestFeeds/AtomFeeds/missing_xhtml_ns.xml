@@ -16,10 +16,8 @@ Expect:       MissingNamespace{element:b}
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
     <summary type="xhtml">
-      <div xmlns="http://www.w3.org/1999/xhtml"
-        >
-         This is <b
-         xmlns="">XHTML</b>
+      <div xmlns="http://www.w3.org/1999/xhtml">
+         This is <b xmlns="">XHTML</b>
 
         
 

@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see
-         cref="T:System.Security.Cryptography.SHA384" />
+        >Defines a wrapper object to access the cryptographic service provider (CSP) implementation of the <see cref="T:System.Security.Cryptography.SHA384" />
 
         
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.SHA384CryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SHA384CryptoServiceProvider" />
 
             
 
@@ -174,8 +172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not need to be called when using a newly created <see
-             cref="T:System.Security.Cryptography.SHA384CryptoServiceProvider" />
+            >This method does not need to be called when using a newly created <see cref="T:System.Security.Cryptography.SHA384CryptoServiceProvider" />
 
             
 

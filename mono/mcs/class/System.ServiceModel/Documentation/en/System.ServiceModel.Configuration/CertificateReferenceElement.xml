@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.CertificateReferenceElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CertificateReferenceElement" />
 
             
 
@@ -76,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type contained in this property must satisfy the requirements of the specified <see
-             cref="P:System.ServiceModel.Configuration.CertificateReferenceElement.X509FindType" />
+            >The type contained in this property must satisfy the requirements of the specified <see cref="P:System.ServiceModel.Configuration.CertificateReferenceElement.X509FindType" />
 
             
 
@@ -222,8 +220,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type contained in <see
-             cref="P:System.ServiceModel.Configuration.CertificateReferenceElement.FindValue" />
+            >The type contained in <see cref="P:System.ServiceModel.Configuration.CertificateReferenceElement.FindValue" />
 
             
 

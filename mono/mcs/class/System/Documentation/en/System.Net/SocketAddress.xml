@@ -29,38 +29,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The first 2 bytes of the underlying buffer are reserved for the <see
-         cref="T:System.Net.Sockets.AddressFamily" />
+        >The first 2 bytes of the underlying buffer are reserved for the <see cref="T:System.Net.Sockets.AddressFamily" />
 
         
 
-         enumerated value. When the <see
-         cref="T:System.Net.SocketAddress" />
+         enumerated value. When the <see cref="T:System.Net.SocketAddress" />
 
         
 
-         is used to store a serialized <see
-         cref="T:System.Net.IPEndPoint" />
+         is used to store a serialized <see cref="T:System.Net.IPEndPoint" />
 
         
 
-        , the third and fourth bytes are used to store port number information. The next bytes are used to store the IP address. You can access any information within this underlying byte buffer by referring to its index position; the byte buffer uses zero-based indexing. You can also use the <see
-         cref="P:System.Net.SocketAddress.Family" />
+        , the third and fourth bytes are used to store port number information. The next bytes are used to store the IP address. You can access any information within this underlying byte buffer by referring to its index position; the byte buffer uses zero-based indexing. You can also use the <see cref="P:System.Net.SocketAddress.Family" />
 
         
 
-         and <see
-         cref="P:System.Net.SocketAddress.Size" />
+         and <see cref="P:System.Net.SocketAddress.Size" />
 
         
 
-         properties to get the <see
-         cref="T:System.Net.Sockets.AddressFamily" />
+         properties to get the <see cref="T:System.Net.Sockets.AddressFamily" />
 
         
 
-         value and the buffer size, respectively. To view any of this information as a string, use the <see
-         cref="M:System.Net.SocketAddress.ToString" />
+         value and the buffer size, respectively. To view any of this information as a string, use the <see cref="M:System.Net.SocketAddress.ToString" />
 
         
 
@@ -70,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Stores serialized information from <see
-         cref="T:System.Net.EndPoint" />
+        >Stores serialized information from <see cref="T:System.Net.EndPoint" />
 
         
 
@@ -111,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.SocketAddress" />
+            >Creates a new instance of the <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -120,12 +111,15 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Sockets.AddressFamily" />
+          An <see cref="T:System.Net.Sockets.AddressFamily" />
 
           
 
@@ -169,8 +163,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this overload to create a new instance of the <see
-             cref="T:System.Net.SocketAddress" />
+            >Use this overload to create a new instance of the <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -180,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.SocketAddress" />
+            >Creates a new instance of the <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -189,19 +181,26 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Sockets.AddressFamily" />
+          An <see cref="T:System.Net.Sockets.AddressFamily" />
 
           
 
            enumerated value. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,30 +235,28 @@
         <returns>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
             
-indicates <paramref
-             name="comparand" />
+indicates <paramref name="comparand" />
 
             
 
              is an
-instance of the <see
-             cref="T:System.Net.SocketAddress" />
+instance of the <see cref="T:System.Net.SocketAddress" />
 
             
 
              class and contains the same data as the current
-instance; otherwise <see
-             langword="false" />
+instance; otherwise <see langword="false" />
 
             
 
@@ -270,7 +267,9 @@ instance; otherwise <see
           <block subset="none" type="note">
             <para
               >This method overrides <see
-               cref="M:System.Object.Equals(System.Object)" qualify="true" />
+                cref="M:System.Object.Equals(System.Object)"
+                qualify="true"
+              />
 
               
 
@@ -281,13 +280,11 @@ instance; otherwise <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Net.SocketAddress" />
+             is equal to the current <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -295,17 +292,19 @@ instance; otherwise <see
           >
         </summary>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified <see
-           cref="T:System.Object" />
+          The specified <see cref="T:System.Object" />
 
           
 
-           to compare with the current <see
-           cref="T:System.Net.SocketAddress" />
+           to compare with the current <see cref="T:System.Net.SocketAddress" />
 
           
 
@@ -341,7 +340,9 @@ instance; otherwise <see
         <value>
           <para
             >One of the values defined in the <see
-             cref="T:System.Net.Sockets.AddressFamily" qualify="true" />
+              cref="T:System.Net.Sockets.AddressFamily"
+              qualify="true"
+            />
 
             
 
@@ -351,23 +352,19 @@ instance; otherwise <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method gets the <see
-             cref="T:System.Net.Sockets.AddressFamily" />
+            >This method gets the <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
 
-             enumerated value that represents the addressing scheme of the current <see
-             cref="T:System.Net.SocketAddress" />
+             enumerated value that represents the addressing scheme of the current <see cref="T:System.Net.SocketAddress" />
 
             
 
-            . If you want to view the corresponding string representation of <see
-             cref="T:System.Net.Sockets.AddressFamily" />
+            . If you want to view the corresponding string representation of <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
 
-            , use the <see
-             cref="M:System.Net.SocketAddress.ToString" />
+            , use the <see cref="M:System.Net.SocketAddress.ToString" />
 
             
 
@@ -377,13 +374,11 @@ instance; otherwise <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Net.Sockets.AddressFamily" />
+            >Gets the <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
 
-             enumerated value of the current <see
-             cref="T:System.Net.SocketAddress" />
+             enumerated value of the current <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -417,7 +412,9 @@ instance; otherwise <see
         <returns>
           <para
             >A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
@@ -430,7 +427,9 @@ instance; otherwise <see
           <block subset="none" type="note">
             <para
               >This method overrides <see
-               cref="M:System.Object.GetHashCode" qualify="true" />
+                cref="M:System.Object.GetHashCode"
+                qualify="true"
+              />
 
               
 
@@ -467,7 +466,9 @@ instance; otherwise <see
       <Docs>
         <param name="offset"
           >A <see
-           cref="T:System.Int32" qualify="true" />
+            cref="T:System.Int32"
+            qualify="true"
+          />
 
           
 
@@ -477,7 +478,9 @@ instance; otherwise <see
           <para
             >Gets or sets the element at the specified index of
       the <see
-             cref="T:System.Byte" qualify="true" />
+              cref="T:System.Byte"
+              qualify="true"
+            />
 
             
 
@@ -487,7 +490,9 @@ instance; otherwise <see
         <value>
           <para
             >A <see
-             cref="T:System.Byte" qualify="true" />
+              cref="T:System.Byte"
+              qualify="true"
+            />
 
             
 
@@ -496,21 +501,18 @@ instance; otherwise <see
         </value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.IndexOutOfRangeException">
-          <para>
-            <paramref name="offset" />
+          <para><paramref name="offset" />
 
             
 
-             is &lt; 0.</para
-          >
+             is &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="offset" />
 
             
 
-             &gt;= <see
-             cref="P:System.Net.SocketAddress.Size" />
+             &gt;= <see cref="P:System.Net.SocketAddress.Size" />
 
             
 
@@ -541,13 +543,17 @@ instance; otherwise <see
         <value>
           <para
             >A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
              containing the length of the
 <see
-             cref="T:System.Byte" qualify="true" />
+              cref="T:System.Byte"
+              qualify="true"
+            />
 
             
 
@@ -558,8 +564,7 @@ instance; otherwise <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property gets the underlying buffer size of the <see
-             cref="T:System.Net.SocketAddress" />
+            >This property gets the underlying buffer size of the <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -569,8 +574,7 @@ instance; otherwise <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying buffer size of the <see
-             cref="T:System.Net.SocketAddress" />
+            >Gets the underlying buffer size of the <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -628,18 +632,15 @@ public class SocketAddressToString{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.SocketAddress.ToString" />
+            >The <see cref="M:System.Net.SocketAddress.ToString" />
 
             
 
-             method returns a string that contains the <see
-             cref="T:System.Net.Sockets.AddressFamily" />
+             method returns a string that contains the <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
 
-             enumerated value, the size of the underlying buffer of the <see
-             cref="T:System.Net.SocketAddress" />
+             enumerated value, the size of the underlying buffer of the <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -653,8 +654,7 @@ public class SocketAddressToString{
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that contains information about the <see
-             cref="T:System.Net.SocketAddress" />
+            >A string that contains information about the <see cref="T:System.Net.SocketAddress" />
 
             
 

@@ -133,8 +133,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Action`13" />
+        >You can use the <see cref="T:System.Action`13" />
 
         
 
@@ -142,8 +141,7 @@
       >
       <block subset="none" type="note">
         <para
-          >To reference a method that has 13 parameters and returns a value, use the generic <see
-           cref="T:System.Func`14" />
+          >To reference a method that has 13 parameters and returns a value, use the generic <see cref="T:System.Func`14" />
 
           
 
@@ -151,8 +149,7 @@
         >
       </block>
       <para
-        >You can also use the <see
-         cref="T:System.Action`13" />
+        >You can also use the <see cref="T:System.Action`13" />
 
         
 

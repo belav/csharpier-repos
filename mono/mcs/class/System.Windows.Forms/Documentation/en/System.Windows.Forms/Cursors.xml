@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Some of the <see
-         cref="T:System.Windows.Forms.Cursor" />
+        >Some of the <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
@@ -26,8 +25,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a collection of <see
-         cref="T:System.Windows.Forms.Cursor" />
+        >Provides a collection of <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
@@ -644,18 +642,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To force display of the wait cursor over a given control, call that control's <see
-             cref="P:System.Windows.Forms.Control.UseWaitCursor" />
+            >To force display of the wait cursor over a given control, call that control's <see cref="P:System.Windows.Forms.Control.UseWaitCursor" />
 
             
 
-             method. To make the wait cursor display for the entire application, regardless of the control or form selected, call <see
-             cref="P:System.Windows.Forms.Application.UseWaitCursor" />
+             method. To make the wait cursor display for the entire application, regardless of the control or form selected, call <see cref="P:System.Windows.Forms.Application.UseWaitCursor" />
 
             
 
-             on the <see
-             cref="T:System.Windows.Forms.Application" />
+             on the <see cref="T:System.Windows.Forms.Application" />
 
             
 

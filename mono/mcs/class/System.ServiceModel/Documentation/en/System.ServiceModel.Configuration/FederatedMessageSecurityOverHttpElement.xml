@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.FederatedMessageSecurityOverHttpElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.FederatedMessageSecurityOverHttpElement" />
 
             
 
@@ -281,20 +280,17 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates whether the service credential is negotiated automatically between the client and the service. If this property is true, then such negotiation occurs. If this property is false, then the service credentials must be specified at the client before communication with the service can occur.</para>
           <para
-            >If this property is set to false, and the binding is configured to use Windows as a client credential type, the service account must be associated with a Service Principal Name (SPN). To do this, run the service under the NETWORK SERVICE account, or LOCAL SYSTEM account. Alternatively, use the SetSpn.exe tool to create an SPN for the service account. In either case, the client must use the correct SPN in the <format
-             type="text/html">
+            >If this property is set to false, and the binding is configured to use Windows as a client credential type, the service account must be associated with a Service Principal Name (SPN). To do this, run the service under the NETWORK SERVICE account, or LOCAL SYSTEM account. Alternatively, use the SetSpn.exe tool to create an SPN for the service account. In either case, the client must use the correct SPN in the <format type="text/html">
               <a href="3f3b85d3-20f2-4cd8-8a6a-ee18befbd165">&lt;servicePrincipalName&gt;</a>
             </format>
 
             
 
-             element, or by using the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+             element, or by using the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
-             constructor. For more information, see <format
-             type="text/html">
+             constructor. For more information, see <format type="text/html">
               <a href="a4c8f52c-5b30-45c4-a545-63244aba82be">Specifying the Identity</a>
             </format>
 

@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a configuration element that specifies the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Represents a configuration element that specifies the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.DataContractSerializerElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.DataContractSerializerElement" />
 
             
 

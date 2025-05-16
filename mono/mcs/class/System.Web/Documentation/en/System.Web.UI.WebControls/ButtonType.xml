@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ButtonType" />
+        >The <see cref="T:System.Web.UI.WebControls.ButtonType" />
 
         
 
-         enumeration is used to represent the different types of buttons (such as command button, image button, link button, and so on) that can be rendered on an ASP.NET page. It is commonly used by properties such as the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+         enumeration is used to represent the different types of buttons (such as command button, image button, link button, and so on) that can be rendered on an ASP.NET page. It is commonly used by properties such as the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+         property of the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
         
 

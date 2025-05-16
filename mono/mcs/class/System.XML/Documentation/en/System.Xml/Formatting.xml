@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies formatting options for the <see
-         cref="T:System.Xml.XmlTextWriter" />
+        >Specifies formatting options for the <see cref="T:System.Xml.XmlTextWriter" />
 
         
 
@@ -69,13 +68,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes child elements to be indented according to the <see
-             cref="P:System.Xml.XmlTextWriter.Indentation" />
+            >Causes child elements to be indented according to the <see cref="P:System.Xml.XmlTextWriter.Indentation" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlTextWriter.IndentChar" />
+             and <see cref="P:System.Xml.XmlTextWriter.IndentChar" />
 
             
 

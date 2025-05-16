@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used as a parameter to the <see
-         cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+        >This enumeration is used as a parameter to the <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
         
 
@@ -30,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.QueuedDeliveryRequirementsMode" />
+        >The <see cref="T:System.ServiceModel.QueuedDeliveryRequirementsMode" />
 
         
 

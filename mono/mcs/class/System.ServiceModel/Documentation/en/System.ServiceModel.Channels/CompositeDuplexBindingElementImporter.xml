@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElementImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.CompositeDuplexBindingElementImporter" />
 
             
 
@@ -84,24 +83,30 @@
           <para>Imports custom policy assertions for composite duplex bindings.</para>
         </summary>
         <param name="importer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataImporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataImporter" />
 
           
 
            that imports the metadata information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
           
 

@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used by the Visual Basic .NET Data Designers to represent a parameter to a Command object, and optionally, its mapping to <see
-         cref="T:System.Data.DataSet" />
+        >Used by the Visual Basic .NET Data Designers to represent a parameter to a Command object, and optionally, its mapping to <see cref="T:System.Data.DataSet" />
 
         
 

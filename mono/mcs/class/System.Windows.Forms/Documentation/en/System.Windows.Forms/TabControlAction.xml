@@ -13,28 +13,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by event handlers for the <see
-         cref="E:System.Windows.Forms.TabControl.Deselecting" />
+        >This enumeration is used by event handlers for the <see cref="E:System.Windows.Forms.TabControl.Deselecting" />
 
         
 
-        , <see
-         cref="E:System.Windows.Forms.TabControl.Deselected" />
+        , <see cref="E:System.Windows.Forms.TabControl.Deselected" />
 
         
 
-        , <see
-         cref="E:System.Windows.Forms.TabControl.Selecting" />
+        , <see cref="E:System.Windows.Forms.TabControl.Selecting" />
 
         
 
-        , and <see
-         cref="E:System.Windows.Forms.TabControl.Selected" />
+        , and <see cref="E:System.Windows.Forms.TabControl.Selected" />
 
         
 
-         events of a <see
-         cref="T:System.Windows.Forms.TabControl" />
+         events of a <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
@@ -44,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines values representing <see
-         cref="T:System.Windows.Forms.TabControl" />
+        >Defines values representing <see cref="T:System.Windows.Forms.TabControl" />
 
         
 
@@ -65,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the <see
-             cref="E:System.Windows.Forms.TabControl.Deselected" />
+            >Represents the <see cref="E:System.Windows.Forms.TabControl.Deselected" />
 
             
 
@@ -89,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the <see
-             cref="E:System.Windows.Forms.TabControl.Deselecting" />
+            >Represents the <see cref="E:System.Windows.Forms.TabControl.Deselecting" />
 
             
 
@@ -113,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the <see
-             cref="E:System.Windows.Forms.TabControl.Selected" />
+            >Represents the <see cref="E:System.Windows.Forms.TabControl.Selected" />
 
             
 
@@ -137,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the <see
-             cref="E:System.Windows.Forms.TabControl.Selecting" />
+            >Represents the <see cref="E:System.Windows.Forms.TabControl.Selecting" />
 
             
 

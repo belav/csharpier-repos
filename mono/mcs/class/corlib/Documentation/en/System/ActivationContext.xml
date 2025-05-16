@@ -34,18 +34,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ActivationContext" />
+        >The <see cref="T:System.ActivationContext" />
 
         
 
-         class contains an <see
-         cref="T:System.ApplicationIdentity" />
+         class contains an <see cref="T:System.ApplicationIdentity" />
 
         
 
-         and provides internal-only access to the application manifest. The activation context is used during manifest-based activation to set up the domain policy and provide an application-based security model. For more information, see the <see
-         cref="T:System.Security.Policy.ApplicationSecurityManager" />
+         and provides internal-only access to the application manifest. The activation context is used during manifest-based activation to set up the domain policy and provide an application-based security model. For more information, see the <see cref="T:System.Security.Policy.ApplicationSecurityManager" />
 
         
 
@@ -83,13 +80,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ActivationContext.CreatePartialActivationContext(System.ApplicationIdentity)" />
+            >The <see cref="M:System.ActivationContext.CreatePartialActivationContext(System.ApplicationIdentity)" />
 
             
 
-             method calls an internal constructor to create a new activation context. The implementation of the <see
-             cref="T:System.ActivationContext" />
+             method calls an internal constructor to create a new activation context. The implementation of the <see cref="T:System.ActivationContext" />
 
             
 
@@ -99,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ActivationContext" />
+            >Initializes a new instance of the <see cref="T:System.ActivationContext" />
 
             
 
@@ -112,7 +106,11 @@
           <para>An object with the specified application identity.</para>
         </returns>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -146,13 +144,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ActivationContext.CreatePartialActivationContext(System.ApplicationIdentity,System.String[])" />
+            >The <see cref="M:System.ActivationContext.CreatePartialActivationContext(System.ApplicationIdentity,System.String[])" />
 
             
 
-             method calls an internal constructor to create a new activation context. The implementation of the <see
-             cref="T:System.ActivationContext" />
+             method calls an internal constructor to create a new activation context. The implementation of the <see cref="T:System.ActivationContext" />
 
             
 
@@ -162,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ActivationContext" />
+            >Initializes a new instance of the <see cref="T:System.ActivationContext" />
 
             
 
@@ -175,14 +170,22 @@
           <para>An object with the specified application identity and array of manifest paths.</para>
         </returns>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that identifies an application.</param
         >
         <param name="manifestPaths">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,50 +213,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.ActivationContext.Dispose" />
+            >Call <see cref="M:System.ActivationContext.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ActivationContext" />
+             when you are finished using the <see cref="T:System.ActivationContext" />
 
             
 
-            . The <see
-             cref="M:System.ActivationContext.Dispose" />
+            . The <see cref="M:System.ActivationContext.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ActivationContext" />
+             method leaves the <see cref="T:System.ActivationContext" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.ActivationContext.Dispose" />
+             in an unusable state. After calling <see cref="M:System.ActivationContext.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ActivationContext" />
+            , you must release all references to the <see cref="T:System.ActivationContext" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ActivationContext" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ActivationContext" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -263,18 +257,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.ActivationContext.Dispose" />
+              >Always call <see cref="M:System.ActivationContext.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ActivationContext" />
+               before you release your last reference to the <see cref="T:System.ActivationContext" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ActivationContext" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ActivationContext" />
 
               
 
@@ -285,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ActivationContext" />
+            >Releases all resources used by the <see cref="T:System.ActivationContext" />
 
             
 
@@ -316,13 +306,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables an <see
-             cref="T:System.ActivationContext" />
+            >Enables an <see cref="T:System.ActivationContext" />
 
             
 
-             object to attempt to free resources and perform other cleanup operations before the <see
-             cref="T:System.ActivationContext" />
+             object to attempt to free resources and perform other cleanup operations before the <see cref="T:System.ActivationContext" />
 
             
 
@@ -351,13 +339,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A manifest-based application might not be installed in the ClickOnce store. An application that is not in the store, such as a manifest-activated application executing in vsprvs, is classified as <see
-             cref="F:System.ActivationContext.ContextForm.Loose" />
+            >A manifest-based application might not be installed in the ClickOnce store. An application that is not in the store, such as a manifest-activated application executing in vsprvs, is classified as <see cref="F:System.ActivationContext.ContextForm.Loose" />
 
             
 
-            . An application that is contained in the store is classified as <see
-             cref="F:System.ActivationContext.ContextForm.StoreBounded" />
+            . An application that is contained in the store is classified as <see cref="F:System.ActivationContext.ContextForm.StoreBounded" />
 
             
 
@@ -390,8 +376,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ApplicationIdentity" />
+            >An <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -431,8 +416,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -440,14 +424,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

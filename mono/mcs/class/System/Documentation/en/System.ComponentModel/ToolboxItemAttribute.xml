@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.ToolboxItemAttribute" />
+        >The <see cref="T:System.ComponentModel.ToolboxItemAttribute" />
 
         
 
-         class provides a way to specify an attribute for a <see
-         cref="T:System.Drawing.Design.ToolboxItem" />
+         class provides a way to specify an attribute for a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
         
 
-        . In addition to what the <see
-         cref="T:System.Attribute" />
+        . In addition to what the <see cref="T:System.Attribute" />
 
         
 
@@ -75,13 +72,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.ComponentModel.ToolboxItemAttribute.ToolboxItemType" />
+            >By default, the <see cref="P:System.ComponentModel.ToolboxItemAttribute.ToolboxItemType" />
 
             
 
-             property is set to <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             property is set to <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -91,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemAttribute" />
 
             
 
@@ -100,7 +94,11 @@
           >
         </summary>
         <param name="defaultType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +130,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor expects the <paramref
-             name="toolboxItemTypeName" />
+            >This constructor expects the <paramref name="toolboxItemTypeName" />
 
             
 
@@ -143,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemAttribute" />
 
             
 
@@ -174,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemAttribute" />
 
             
 
@@ -183,7 +178,11 @@
           >
         </summary>
         <param name="toolboxItemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -214,13 +213,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.ComponentModel.ToolboxItemAttribute.ToolboxItemType" />
+            >By default, the <see cref="P:System.ComponentModel.ToolboxItemAttribute.ToolboxItemType" />
 
             
 
-             property is set to <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             property is set to <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -230,13 +227,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemAttribute" />
 
             
 
-             class and sets the type to the default, <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             class and sets the type to the default, <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -312,8 +307,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, this value returns false from the method defined in the <see
-             cref="T:System.Attribute" />
+            >By default, this value returns false from the method defined in the <see cref="T:System.Attribute" />
 
             
 
@@ -354,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemAttribute" />
 
             
 
@@ -406,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the type of the current <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >Gets or sets the name of the type of the current <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 

@@ -26,18 +26,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Threading.ThreadExceptionEventArgs" />
+        >A <see cref="T:System.Threading.ThreadExceptionEventArgs" />
 
         
 
-         is created by a thread when an unhandled exception occurs. <see
-         cref="T:System.Threading.ThreadExceptionEventArgs" />
+         is created by a thread when an unhandled exception occurs. <see cref="T:System.Threading.ThreadExceptionEventArgs" />
 
         
 
-         contains the <see
-         cref="T:System.Exception" />
+         contains the <see cref="T:System.Exception" />
 
         
 
@@ -47,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Application.ThreadException" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Application.ThreadException" />
 
         
 
@@ -78,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ThreadExceptionEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ThreadExceptionEventArgs" />
 
             
 
@@ -87,12 +82,15 @@
           >
         </summary>
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -121,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Exception" />
+            >Gets the <see cref="T:System.Exception" />
 
             
 

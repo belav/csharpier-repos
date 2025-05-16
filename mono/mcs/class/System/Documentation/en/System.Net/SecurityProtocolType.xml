@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration defines permissible values for the <see
-         cref="P:System.Net.ServicePointManager.SecurityProtocol" />
+        >This enumeration defines permissible values for the <see cref="P:System.Net.ServicePointManager.SecurityProtocol" />
 
         
 
-         property and specifies the security protocols that are used by instances of the <see
-         cref="T:System.Net.Security.SslStream" />
+         property and specifies the security protocols that are used by instances of the <see cref="T:System.Net.Security.SslStream" />
 
         
 

@@ -21,51 +21,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see
-         cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
+        >An instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
 
         
 
-         is created to hold the pager controls in a <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         is created to hold the pager controls in a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control. The <see
-         cref="T:System.Web.UI.INamingContainer" />
+         control. The <see cref="T:System.Web.UI.INamingContainer" />
 
         
 
-         interface is a marker that indicates that the <see
-         cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
+         interface is a marker that indicates that the <see cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
 
         
 
-         control is part of the <see
-         cref="T:System.Web.UI.Page" />
+         control is part of the <see cref="T:System.Web.UI.Page" />
 
         
 
          object's control hierarchy.</para
       >
       <para
-        >This class is used primarily by control developers. Control developers can override the <see
-         cref="M:System.Web.UI.WebControls.DetailsViewPagerRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+        >This class is used primarily by control developers. Control developers can override the <see cref="M:System.Web.UI.WebControls.DetailsViewPagerRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
 
         
 
-         constructor and the <see
-         cref="M:System.Web.UI.WebControls.DetailsView.CreateRow(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+         constructor and the <see cref="M:System.Web.UI.WebControls.DetailsView.CreateRow(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.WebControls.DetailsView.InitializePager(System.Web.UI.WebControls.DetailsViewRow,System.Web.UI.WebControls.PagedDataSource)" />
+         and <see cref="M:System.Web.UI.WebControls.DetailsView.InitializePager(System.Web.UI.WebControls.DetailsViewRow,System.Web.UI.WebControls.PagedDataSource)" />
 
         
 
-         methods of the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         methods of the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
@@ -75,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the pager row in a <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        >Represents the pager row in a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
@@ -101,48 +91,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DetailsViewPagerRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+            >The <see cref="M:System.Web.UI.WebControls.DetailsViewPagerRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
 
             
 
-             constructor calls the base class constructor, <see
-             cref="M:System.Web.UI.WebControls.DetailsViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+             constructor calls the base class constructor, <see cref="M:System.Web.UI.WebControls.DetailsViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
 
             
 
-            , with the specified parameters. For a <see
-             cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
+            , with the specified parameters. For a <see cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
 
             
 
-             control in a <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             control in a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-             control, the call is made with <paramref
-             name="rowIndex" />
+             control, the call is made with <paramref name="rowIndex" />
 
             
 
-             equal to -1, <paramref
-             name="rowType" />
+             equal to -1, <paramref name="rowType" />
 
             
 
-             equal to <see
-             cref="F:System.Web.UI.WebControls.DataControlRowType.Pager" />
+             equal to <see cref="F:System.Web.UI.WebControls.DataControlRowType.Pager" />
 
             
 
-            , and <paramref
-             name="rowState" />
+            , and <paramref name="rowState" />
 
             
 
-             equal to <see
-             cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+             equal to <see cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
 
             
 
@@ -152,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
 
             
 
@@ -161,41 +141,49 @@
           >
         </summary>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the row in the <see
-           cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
+          The index of the row in the <see cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
 
           
 
-           collection of the <see
-           cref="T:System.Web.UI.WebControls.DetailsView" />
+           collection of the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
           
 
            control.</param
         >
         <param name="rowType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowType" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
           
 
            enumeration values.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 

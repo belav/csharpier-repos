@@ -36,89 +36,73 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Derive from this class to provide a custom implementation of the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+        >Derive from this class to provide a custom implementation of the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
-         generic interface for use with collection classes such as the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         generic interface for use with collection classes such as the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
-         generic class, or with methods such as <see
-         cref="M:System.Collections.Generic.List`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})" />
+         generic class, or with methods such as <see cref="M:System.Collections.Generic.List`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
+        >The <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
 
         
 
-         property checks whether type <paramref
-         name="T" />
+         property checks whether type <paramref name="T" />
 
         
 
-         implements the <see
-         cref="T:System.IEquatable`1" />
+         implements the <see cref="T:System.IEquatable`1" />
 
         
 
-         generic interface and, if so, returns an <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+         generic interface and, if so, returns an <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-         that contains the implantation of the <see
-         cref="M:System.IEquatable`1.Equals(`0)" />
+         that contains the implantation of the <see cref="M:System.IEquatable`1.Equals(`0)" />
 
         
 
-         method. Otherwise, it returns an <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+         method. Otherwise, it returns an <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-        , as provided by <paramref
-         name="T" />
+        , as provided by <paramref name="T" />
 
         
 
         .</para
       >
       <para
-        >We recommend that you derive from the <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+        >We recommend that you derive from the <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-         class instead of implementing the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+         class instead of implementing the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
-         interface, because the <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+         interface, because the <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-         class tests for equality using the <see
-         cref="M:System.IEquatable`1.Equals(`0)" />
+         class tests for equality using the <see cref="M:System.IEquatable`1.Equals(`0)" />
 
         
 
-         method instead of the <see
-         cref="M:System.Object.Equals(System.Object)" />
+         method instead of the <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-         method. This is consistent with the Contains, IndexOf, LastIndexOf, and Remove methods of the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         method. This is consistent with the Contains, IndexOf, LastIndexOf, and Remove methods of the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
@@ -128,8 +112,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a base class for implementations of the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+        >Provides a base class for implementations of the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
@@ -156,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Generic.EqualityComparer`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
             
 
@@ -189,43 +171,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
+            >The <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
 
             
 
-             property checks whether type <paramref
-             name="T" />
+             property checks whether type <paramref name="T" />
 
             
 
-             implements the <see
-             cref="T:System.IEquatable`1" />
+             implements the <see cref="T:System.IEquatable`1" />
 
             
 
-             interface and, if so, returns an <see
-             cref="T:System.Collections.Generic.EqualityComparer`1" />
+             interface and, if so, returns an <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
             
 
-             that uses that implementation. Otherwise, it returns an <see
-             cref="T:System.Collections.Generic.EqualityComparer`1" />
+             that uses that implementation. Otherwise, it returns an <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
             
 
-             that uses the overrides of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             that uses the overrides of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Object.GetHashCode" />
+             and <see cref="M:System.Object.GetHashCode" />
 
             
 
-             provided by <paramref
-             name="T" />
+             provided by <paramref name="T" />
 
             
 
@@ -313,28 +287,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a wrapper for the <see
-             cref="M:System.Collections.Generic.EqualityComparer`1.Equals(`0,`0)" />
+            >This method is a wrapper for the <see cref="M:System.Collections.Generic.EqualityComparer`1.Equals(`0,`0)" />
 
             
 
-             method, so <paramref
-             name="obj" />
+             method, so <paramref name="obj" />
 
             
 
-             must be cast to the type specified by the generic argument <paramref
-             name="T" />
+             must be cast to the type specified by the generic argument <paramref name="T" />
 
             
 
-             of the current instance. If it cannot be cast to <paramref
-             name="T" />
+             of the current instance. If it cannot be cast to <paramref name="T" />
 
             
 
-            , an <see
-             cref="T:System.ArgumentException" />
+            , an <see cref="T:System.ArgumentException" />
 
             
 
@@ -351,14 +320,22 @@
           <para>true if the specified objects are equal; otherwise, false.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -388,18 +365,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a wrapper for the <see
-             cref="M:System.Collections.Generic.EqualityComparer`1.GetHashCode(`0)" />
+            >This method is a wrapper for the <see cref="M:System.Collections.Generic.EqualityComparer`1.GetHashCode(`0)" />
 
             
 
-             method, so <paramref
-             name="obj" />
+             method, so <paramref name="obj" />
 
             
 
-             must be a type that can be cast to the type specified by the generic type argument <paramref
-             name="T" />
+             must be a type that can be cast to the type specified by the generic type argument <paramref name="T" />
 
             
 
@@ -415,12 +389,15 @@
           <para>A hash code for the specified object.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 

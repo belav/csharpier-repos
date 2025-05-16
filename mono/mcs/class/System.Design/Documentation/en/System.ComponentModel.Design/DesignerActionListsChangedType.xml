@@ -20,23 +20,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionListsChangedType" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedType" />
 
         
 
-         enumeration indicates that an element has been added or removed from a managed collection of <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+         enumeration indicates that an element has been added or removed from a managed collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
-         objects. This enumeration is used in the <see
-         cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" />
+         objects. This enumeration is used in the <see cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" />
 
         
 
-         class, which is associated with the <see
-         cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+         class, which is associated with the <see cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
 
         
 
@@ -44,23 +40,19 @@
       >
       <block subset="none" type="note">
         <para
-          >Although the <see
-           cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+          >Although the <see cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
           
 
-           class is a collection of <see
-           cref="T:System.ComponentModel.Design.DesignerActionList" />
+           class is a collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
           
 
-           objects, it does not directly raise events. Instead, the owning <see
-           cref="T:System.ComponentModel.Design.DesignerActionService" />
+           objects, it does not directly raise events. Instead, the owning <see cref="T:System.ComponentModel.Design.DesignerActionService" />
 
           
 
-           raises <see
-           cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+           raises <see cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
 
           
 
@@ -71,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of change occurring in a collection of <see
-         cref="T:System.ComponentModel.Design.DesignerActionList" />
+        >Specifies the type of change occurring in a collection of <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
         
 
@@ -94,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >One or more <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 
@@ -117,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One or more <see
-             cref="T:System.ComponentModel.Design.DesignerActionList" />
+            >One or more <see cref="T:System.ComponentModel.Design.DesignerActionList" />
 
             
 

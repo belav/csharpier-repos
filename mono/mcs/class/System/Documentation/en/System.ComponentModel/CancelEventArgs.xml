@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A cancelable event is raised by a component when it is about to perform an action that can be canceled, such as the <see
-         cref="E:System.Windows.Forms.Form.Closing" />
+        >A cancelable event is raised by a component when it is about to perform an action that can be canceled, such as the <see cref="E:System.Windows.Forms.Form.Closing" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.Form" />
+         event of a <see cref="T:System.Windows.Forms.Form" />
 
         
 
@@ -36,18 +34,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="E:System.Windows.Forms.Form.Closing" />
+          >The <see cref="E:System.Windows.Forms.Form.Closing" />
 
           
 
-           event is deprecated and has been replaced by <see
-           cref="E:System.Windows.Forms.Form.FormClosing" />
+           event is deprecated and has been replaced by <see cref="E:System.Windows.Forms.Form.FormClosing" />
 
           
 
-          . It is offered as an example here only to illustrate the usage of <see
-           cref="T:System.ComponentModel.CancelEventArgs" />
+          . It is offered as an example here only to illustrate the usage of <see cref="T:System.ComponentModel.CancelEventArgs" />
 
           
 
@@ -59,8 +54,7 @@
 
         
 
-         provides the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         provides the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
@@ -92,13 +86,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.CancelEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CancelEventArgs" />
 
             
 
-             class with the <see
-             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+             class with the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 
@@ -128,13 +120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.CancelEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.CancelEventArgs" />
 
             
 
-             class with the <see
-             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+             class with the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 
@@ -142,7 +132,11 @@
           >
         </summary>
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -74,38 +74,52 @@
           <para>An object that implements the ITypeLib interface.</para>
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The assembly to convert. </param
         >
         <param name="typeLibName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name of the resulting type library. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.InteropServices.TypeLibExporterFlags" />
+          A <see cref="T:System.Runtime.InteropServices.TypeLibExporterFlags" />
 
           
 
            value indicating any special settings. </param
         >
         <param name="notifySink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.InteropServices.ITypeLibExporterNotifySink" />
+          The <see cref="T:System.Runtime.InteropServices.ITypeLibExporterNotifySink" />
 
           
 
@@ -155,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+            >An <see cref="T:System.Reflection.Emit.AssemblyBuilder" />
 
             
 
@@ -164,26 +177,37 @@
           >
         </returns>
         <param name="typeLib">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that implements the ITypeLib interface. </param
         >
         <param name="asmFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name of the resulting assembly. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.InteropServices.TypeLibImporterFlags" />
+          A <see cref="T:System.Runtime.InteropServices.TypeLibImporterFlags" />
 
           
 
@@ -198,31 +222,41 @@
            interface implemented by the caller. </param
         >
         <param name="publicKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array containing the public key. </param
         >
         <param name="keyPair">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.StrongNameKeyPair" />
+          A <see cref="T:System.Reflection.StrongNameKeyPair" />
 
           
 
            object containing the public and private cryptographic key pair. </param
         >
         <param name="unsafeInterfaces">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, the interfaces require link time checks for <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+          If true, the interfaces require link time checks for <see cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
 
           
 
@@ -273,8 +307,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+            >An <see cref="T:System.Reflection.Emit.AssemblyBuilder" />
 
             
 
@@ -282,26 +315,37 @@
           >
         </returns>
         <param name="typeLib">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that implements the ITypeLib interface. </param
         >
         <param name="asmFileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name of the resulting assembly. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.InteropServices.TypeLibImporterFlags" />
+          A <see cref="T:System.Runtime.InteropServices.TypeLibImporterFlags" />
 
           
 
@@ -316,33 +360,48 @@
            interface implemented by the caller. </param
         >
         <param name="publicKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array containing the public key. </param
         >
         <param name="keyPair">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.StrongNameKeyPair" />
+          A <see cref="T:System.Reflection.StrongNameKeyPair" />
 
           
 
            object containing the public and private cryptographic key pair. </param
         >
         <param name="asmNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace for the resulting assembly. </param
         >
         <param name="asmVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

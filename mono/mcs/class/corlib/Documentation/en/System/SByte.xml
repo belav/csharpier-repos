@@ -53,8 +53,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.SByte" />
+        >The <see cref="T:System.SByte" />
 
         
 
@@ -62,33 +61,27 @@
       >
       <block subset="none" type="note">
         <para
-          >   The <see
-           cref="T:System.SByte" />
+          >   The <see cref="T:System.SByte" />
 
           
 
-           type is not CLS-compliant. The CLS-compliant alternative type is <see
-           cref="T:System.Int16" />
+           type is not CLS-compliant. The CLS-compliant alternative type is <see cref="T:System.Int16" />
 
           
 
-          . <see
-           cref="T:System.Byte" />
+          . <see cref="T:System.Byte" />
 
           
 
-           can be used instead to replace a positive <see
-           cref="T:System.SByte" />
+           can be used instead to replace a positive <see cref="T:System.SByte" />
 
           
 
-           value that ranges from zero to <see
-           cref="F:System.Byte.MaxValue" />
+           value that ranges from zero to <see cref="F:System.Byte.MaxValue" />
 
           
 
-          . For more information about CLS compliance, see <format
-           type="text/html">
+          . For more information about CLS compliance, see <format type="text/html">
             <a href="4f0b77d0-4844-464f-af73-6e06bedeafc6">Common Language Specification</a>
           </format>
 
@@ -105,8 +98,7 @@
          provides methods to compare instances of this type, convert the value of an instance to its string representation, and convert the string representation of a number to an instance of this type.</para
       >
       <para
-        >For information about how format specification codes control the string representation of value types, see <format
-         type="text/html">
+        >For information about how format specification codes control the string representation of value types, see <format type="text/html">
           <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Types</a>
         </format>
 
@@ -149,8 +141,7 @@
 
           
 
-           is not a <see
-           cref="T:System.SByte" />
+           is not a <see cref="T:System.SByte" />
 
           
 
@@ -159,21 +150,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any instance of <see
-             cref="T:System.SByte" />
+            >Any instance of <see cref="T:System.SByte" />
 
             
 
             , regardless of its value, is considered greater than null.</para
           >
           <para
-            >The <paramref
-             name="obj" />
+            >The <paramref name="obj" />
 
             
 
-             parameter must be null or an instance of <see
-             cref="T:System.SByte" />
+             parameter must be null or an instance of <see cref="T:System.SByte" />
 
             
 
@@ -187,8 +175,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed number indicating the relative values of this instance and <paramref
-             name="obj" />
+            >A signed number indicating the relative values of this instance and <paramref name="obj" />
 
             
 
@@ -211,8 +198,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <paramref
-                   name="obj" />
+                  >This instance is less than <paramref name="obj" />
 
                   
 
@@ -226,8 +212,7 @@
               </term>
               <description>
                 <para
-                  >This instance is equal to <paramref
-                   name="obj" />
+                  >This instance is equal to <paramref name="obj" />
 
                   
 
@@ -241,8 +226,7 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref
-                   name="obj" />
+                  >This instance is greater than <paramref name="obj" />
 
                   
 
@@ -261,7 +245,11 @@
           </list>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -292,59 +280,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IComparable`1" />
+            >This method implements the <see cref="T:System.IComparable`1" />
 
             
 
-             interface and performs slightly better than the <see
-             cref="M:System.SByte.CompareTo(System.Object)" />
+             interface and performs slightly better than the <see cref="M:System.SByte.CompareTo(System.Object)" />
 
             
 
-             method because it does not have to convert the <paramref
-             name="value" />
+             method because it does not have to convert the <paramref name="value" />
 
             
 
              parameter to an object.</para
           >
           <para
-            >Depending on your programming language, it might be possible to code a <see
-             cref="Overload:System.SByte.CompareTo" />
+            >Depending on your programming language, it might be possible to code a <see cref="Overload:System.SByte.CompareTo" />
 
             
 
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
-            >For example, suppose the instance type is <see
-             cref="T:System.Int32" />
+            >For example, suppose the instance type is <see cref="T:System.Int32" />
 
             
 
-             and the parameter type is <see
-             cref="T:System.Byte" />
+             and the parameter type is <see cref="T:System.Byte" />
 
             
 
-            . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
-             cref="T:System.Int32" />
+            . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see cref="T:System.Int32" />
 
             
 
-             object, then generates a <see
-             cref="M:System.Int32.CompareTo(System.Object)" />
+             object, then generates a <see cref="M:System.Int32.CompareTo(System.Object)" />
 
             
 
-             method that compares the values of the <see
-             cref="T:System.Int32" />
+             method that compares the values of the <see cref="T:System.Int32" />
 
             
 
-             instance and the <see
-             cref="T:System.Int32" />
+             instance and the <see cref="T:System.Int32" />
 
             
 
@@ -359,8 +337,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative order of this instance and <paramref
-             name="value" />
+            >A signed integer that indicates the relative order of this instance and <paramref name="value" />
 
             
 
@@ -383,8 +360,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <paramref
-                   name="value" />
+                  >This instance is less than <paramref name="value" />
 
                   
 
@@ -398,8 +374,7 @@
               </term>
               <description>
                 <para
-                  >This instance is equal to <paramref
-                   name="value" />
+                  >This instance is equal to <paramref name="value" />
 
                   
 
@@ -413,8 +388,7 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref
-                   name="value" />
+                  >This instance is greater than <paramref name="value" />
 
                   
 
@@ -425,7 +399,11 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -460,8 +438,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Object.Equals(System.Object)" />
+      overrides <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
@@ -476,13 +453,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is an instance of <see
-             cref="T:System.SByte" />
+             is an instance of <see cref="T:System.SByte" />
 
             
 
@@ -490,7 +465,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -521,18 +500,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IEquatable`1" />
+            >This method implements the <see cref="T:System.IEquatable`1" />
 
             
 
-             interface, and performs slightly better than <see
-             cref="M:System.SByte.Equals(System.Object)" />
+             interface, and performs slightly better than <see cref="M:System.SByte.Equals(System.Object)" />
 
             
 
-             because it does not have to convert the <paramref
-             name="obj" />
+             because it does not have to convert the <paramref name="obj" />
 
             
 
@@ -542,8 +518,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this instance is equal to a specified <see
-             cref="T:System.SByte" />
+            >Returns a value indicating whether this instance is equal to a specified <see cref="T:System.SByte" />
 
             
 
@@ -553,8 +528,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -562,12 +536,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.SByte" />
+          An <see cref="T:System.SByte" />
 
           
 
@@ -601,8 +578,7 @@
       unspecified. </para>
           <para>
             <block subset="none" type="note"
-              >This method overrides <see
-               cref="M:System.Object.GetHashCode" />
+              >This method overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -642,13 +618,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.TypeCode" />
+            >Returns the <see cref="T:System.TypeCode" />
 
             
 
-             for value type <see
-             cref="T:System.SByte" />
+             for value type <see cref="T:System.SByte" />
 
             
 
@@ -658,8 +632,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerated constant, <see
-             cref="F:System.TypeCode.SByte" />
+            >The enumerated constant, <see cref="F:System.TypeCode.SByte" />
 
             
 
@@ -694,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the largest possible value of <see
-             cref="T:System.SByte" />
+            >Represents the largest possible value of <see cref="T:System.SByte" />
 
             
 
@@ -731,8 +703,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the smallest possible value of <see
-             cref="T:System.SByte" />
+            >Represents the smallest possible value of <see cref="T:System.SByte" />
 
             
 
@@ -789,13 +760,11 @@
 
           
 
-           represents a number greater than <see
-           cref="F:System.SByte.MaxValue" />
+           represents a number greater than <see cref="F:System.SByte.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.SByte.MinValue" />
+           or less than <see cref="F:System.SByte.MinValue" />
 
           
 
@@ -803,13 +772,11 @@
         >
         <example>
           <para
-            >This example demonstrates the <see
-             cref="M:System.SByte.Parse(System.String)" />
+            >This example demonstrates the <see cref="M:System.SByte.Parse(System.String)" />
 
             
 
-            (<see
-             cref="T:System.String" />
+            (<see cref="T:System.String" />
 
             
 
@@ -835,8 +802,7 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
@@ -881,51 +847,42 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
-             parameter is interpreted using the <see
-             cref="F:System.Globalization.NumberStyles.Integer" />
+             parameter is interpreted using the <see cref="F:System.Globalization.NumberStyles.Integer" />
 
             
 
-             style. In addition to the byte value's decimal digits, only leading and trailing spaces with a leading positive or negative sign are allowed. To explicitly define the style elements that can be present in <paramref
-             name="s" />
+             style. In addition to the byte value's decimal digits, only leading and trailing spaces with a leading positive or negative sign are allowed. To explicitly define the style elements that can be present in <paramref name="s" />
 
             
 
-            , use either the <see
-             cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles)" />
+            , use either the <see cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles)" />
 
             
 
-             or the <see
-             cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+             or the <see cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
-             parameter is parsed by using the formatting information in a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             parameter is parsed by using the formatting information in a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             that is initialized for the current system culture. For more information, see <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+             that is initialized for the current system culture. For more information, see <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
 
             
 
-            . To parse a string by using the formatting information of some other culture, use the <see
-             cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+            . To parse a string by using the formatting information of some other culture, use the <see cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
             
 
@@ -939,8 +896,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An 8-bit signed integer that is equivalent to the number contained in the <paramref
-             name="s" />
+            >An 8-bit signed integer that is equivalent to the number contained in the <paramref name="s" />
 
             
 
@@ -948,12 +904,15 @@ public class SByteParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents a number to convert. The string is interpreted using the <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          A string that represents a number to convert. The string is interpreted using the <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
@@ -1013,42 +972,45 @@ public class SByteParseClass {
 
           
 
-           represents a number greater than <see
-           cref="F:System.SByte.MaxValue" />
+           represents a number greater than <see cref="F:System.SByte.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.SByte.MinValue" />
+           or less than <see cref="F:System.SByte.MinValue" />
 
           
 
           .</exception
         >
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains a number to convert. The string is interpreted using the style specified by <paramref
-           name="style" />
+          A string that contains a number to convert. The string is interpreted using the style specified by <paramref name="style" />
 
           
 
           .</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
-           name="s" />
+          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
@@ -1057,31 +1019,26 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="style" />
+            >The <paramref name="style" />
 
             
 
-             parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref
-             name="s" />
+             parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref name="s" />
 
             
 
-             parameter for the parse operation to succeed. It must be a combination of bit flags from the <see
-             cref="T:System.Globalization.NumberStyles" />
+             parameter for the parse operation to succeed. It must be a combination of bit flags from the <see cref="T:System.Globalization.NumberStyles" />
 
             
 
              enumeration. </para
           >
           <para
-            >Depending on the value of <paramref
-             name="style" />
+            >Depending on the value of <paramref name="style" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -1089,18 +1046,15 @@ public class SByteParseClass {
           >
           <para>[ws][$][sign]digits[.fractional_digits][E[sign]exponential_digits][ws] </para>
           <para
-            >If <paramref
-             name="style" />
+            >If <paramref name="style" />
 
             
 
-             includes <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+             includes <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -1125,28 +1079,23 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >Optional white space. White space can appear at the beginning of <paramref
-                   name="s" />
+                  >Optional white space. White space can appear at the beginning of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
                   
 
-                   flag, and it can appear at the end of <paramref
-                   name="s" />
+                   flag, and it can appear at the end of <paramref name="s" />
 
                   
 
-                   if style includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+                   if style includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
                   
 
@@ -1160,23 +1109,19 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific currency symbol. Its position in the string is defined by the <see
-                   cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+                  >A culture-specific currency symbol. Its position in the string is defined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
 
                   
 
-                   property of the current culture. The current culture's currency symbol can appear in <paramref
-                   name="s" />
+                   property of the current culture. The current culture's currency symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
 
                   
 
@@ -1190,48 +1135,39 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >An optional sign. The sign can appear at the beginning of <paramref
-                   name="s" />
+                  >An optional sign. The sign can appear at the beginning of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
                   
 
-                   flag, and it can appear at the end of <paramref
-                   name="s" />
+                   flag, and it can appear at the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
 
                   
 
-                   flag. Parentheses can be used in <paramref
-                   name="s" />
+                   flag. Parentheses can be used in <paramref name="s" />
 
                   
 
-                   to indicate a negative value if <paramref
-                   name="style" />
+                   to indicate a negative value if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" />
 
                   
 
@@ -1253,18 +1189,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref
-                   name="s" />
+                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
@@ -1278,28 +1211,23 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >One or more occurrences of the digit 0-9 if <paramref
-                   name="style" />
+                  >One or more occurrences of the digit 0-9 if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
-                   flag, or one or more occurrences of the digit 0 if it does not. Fractional digits can appear in <paramref
-                   name="s" />
+                   flag, or one or more occurrences of the digit 0 if it does not. Fractional digits can appear in <paramref name="s" />
 
                   
 
-                   only if <paramref
-                   name="style" />
+                   only if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
@@ -1313,18 +1241,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref
-                   name="s" />
+                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -1338,18 +1263,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >One or more occurrences of the digit 0-9. The <paramref
-                   name="s" />
+                  >One or more occurrences of the digit 0-9. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -1367,23 +1289,19 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >A string with decimal digits only (which corresponds to the <see
-             cref="F:System.Globalization.NumberStyles.None" />
+            >A string with decimal digits only (which corresponds to the <see cref="F:System.Globalization.NumberStyles.None" />
 
             
 
-             style) always parses successfully. Most of the remaining <see
-             cref="T:System.Globalization.NumberStyles" />
+             style) always parses successfully. Most of the remaining <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members control elements that may be present, but are not required to be present, in the input string. The following table indicates how individual <see
-             cref="T:System.Globalization.NumberStyles" />
+             members control elements that may be present, but are not required to be present, in the input string. The following table indicates how individual <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members affect the elements that may be present in <paramref
-             name="s" />
+             members affect the elements that may be present in <paramref name="s" />
 
             
 
@@ -1418,18 +1336,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The decimal point (.) and fractional_digits elements. However, if <paramref
-                   name="style" />
+                  >The decimal point (.) and fractional_digits elements. However, if <paramref name="style" />
 
                   
 
-                   does not include the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   does not include the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
-                   flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see
-                   cref="T:System.OverflowException" />
+                   flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see cref="T:System.OverflowException" />
 
                   
 
@@ -1455,8 +1370,7 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the beginning of <paramref
-                   name="s" />
+                  >The ws element at the beginning of <paramref name="s" />
 
                   
 
@@ -1472,8 +1386,7 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the end of <paramref
-                   name="s" />
+                  >The ws element at the end of <paramref name="s" />
 
                   
 
@@ -1519,8 +1432,7 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The group separator (,) element. Although the group separator can appear in <paramref
-                   name="s" />
+                  >The group separator (,) element. Although the group separator can appear in <paramref name="s" />
 
                   
 
@@ -1540,33 +1452,27 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >If the <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            >If the <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-             flag is used, <paramref
-             name="s" />
+             flag is used, <paramref name="s" />
 
             
 
-             must be a hexadecimal value. The only other flags that can be combined with it are <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+             must be a hexadecimal value. The only other flags that can be combined with it are <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            . (The <see
-             cref="T:System.Globalization.NumberStyles" />
+            . (The <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             enumeration includes a composite number style, <see
-             cref="F:System.Globalization.NumberStyles.HexNumber" />
+             enumeration includes a composite number style, <see cref="F:System.Globalization.NumberStyles.HexNumber" />
 
             
 
@@ -1574,8 +1480,7 @@ public class SByteParseClass {
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="s" />
+              >If the <paramref name="s" />
 
               
 
@@ -1583,31 +1488,26 @@ public class SByteParseClass {
             >
           </block>
           <para
-            >If <paramref
-             name="s" />
+            >If <paramref name="s" />
 
             
 
-             represents a hexadecimal number, the <see
-             cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles)" />
+             represents a hexadecimal number, the <see cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles)" />
 
             
 
              method interprets the high-order bit of the byte as a sign bit. </para
           >
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
-             parameter is parsed by using the formatting information in a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             parameter is parsed by using the formatting information in a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that is initialized for the current system culture. To use the formatting information of some other culture, call the <see
-             cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+             object that is initialized for the current system culture. To use the formatting information of some other culture, call the <see cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
             
 
@@ -1621,8 +1521,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An 8-bit signed integer that is equivalent to the number specified in <paramref
-             name="s" />
+            >An 8-bit signed integer that is equivalent to the number specified in <paramref name="s" />
 
             
 
@@ -1630,29 +1529,34 @@ public class SByteParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains a number to convert. The string is interpreted using the style specified by <paramref
-           name="style" />
+          A string that contains a number to convert. The string is interpreted using the style specified by <paramref name="style" />
 
           
 
           .</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
-           name="s" />
+          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
@@ -1712,13 +1616,11 @@ public class SByteParseClass {
 
           
 
-           represents a number greater than <see
-           cref="F:System.SByte.MaxValue" />
+           represents a number greater than <see cref="F:System.SByte.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.SByte.MinValue" />
+           or less than <see cref="F:System.SByte.MinValue" />
 
           
 
@@ -1727,8 +1629,7 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
@@ -1773,56 +1674,46 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >The <paramref
-             name="s" />
+            >The <paramref name="s" />
 
             
 
-             parameter is interpreted using the <see
-             cref="F:System.Globalization.NumberStyles.Integer" />
+             parameter is interpreted using the <see cref="F:System.Globalization.NumberStyles.Integer" />
 
             
 
-             style. In addition to the byte value's decimal digits, only leading and trailing spaces with a leading sign are allowed. To explicitly define the style elements with the culture-specific formatting information that can be present in <paramref
-             name="s" />
+             style. In addition to the byte value's decimal digits, only leading and trailing spaces with a leading sign are allowed. To explicitly define the style elements with the culture-specific formatting information that can be present in <paramref name="s" />
 
             
 
-            , use the <see
-             cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+            , use the <see cref="M:System.SByte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation whose <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of <paramref
-             name="s" />
+             object that provides culture-specific information about the format of <paramref name="s" />
 
             
 
-            . There are three ways to use the <paramref
-             name="provider" />
+            . There are three ways to use the <paramref name="provider" />
 
             
 
@@ -1831,13 +1722,11 @@ public class SByteParseClass {
           <list type="bullet">
             <item>
               <para
-                >You can pass the actual <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >You can pass the actual <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
-                 object that provides formatting information. (Its implementation of <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 object that provides formatting information. (Its implementation of <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
@@ -1846,13 +1735,11 @@ public class SByteParseClass {
             </item>
             <item>
               <para
-                >You can pass a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >You can pass a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
-                 object that specifies the culture whose formatting is to be used. Its <see
-                 cref="P:System.Globalization.CultureInfo.NumberFormat" />
+                 object that specifies the culture whose formatting is to be used. Its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
                 
 
@@ -1861,18 +1748,15 @@ public class SByteParseClass {
             </item>
             <item>
               <para
-                >You can pass a custom <see
-                 cref="T:System.IFormatProvider" />
+                >You can pass a custom <see cref="T:System.IFormatProvider" />
 
                 
 
-                 implementation. Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method must instantiate and return the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method must instantiate and return the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -1881,13 +1765,11 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >If <paramref
-             name="provider" />
+            >If <paramref name="provider" />
 
             
 
-             is null, the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -1901,8 +1783,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An 8-bit signed integer that is equivalent to the number specified in <paramref
-             name="s" />
+            >An 8-bit signed integer that is equivalent to the number specified in <paramref name="s" />
 
             
 
@@ -1910,29 +1791,34 @@ public class SByteParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents a number to convert. The string is interpreted using the <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          A string that represents a number to convert. The string is interpreted using the <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
            style.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that supplies culture-specific formatting information about <paramref
-           name="s" />
+          An object that supplies culture-specific formatting information about <paramref name="s" />
 
           
 
-          . If <paramref
-           name="provider" />
+          . If <paramref name="provider" />
 
           
 
@@ -1993,59 +1879,64 @@ public class SByteParseClass {
 
           
 
-           represents a number greater than <see
-           cref="F:System.SByte.MaxValue" />
+           represents a number greater than <see cref="F:System.SByte.MaxValue" />
 
           
 
-           or less than <see
-           cref="F:System.SByte.MinValue" />
+           or less than <see cref="F:System.SByte.MinValue" />
 
           
 
           .</exception
         >
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the number to convert. The string is interpreted by using the style specified by <paramref
-           name="style" />
+          A string that contains the number to convert. The string is interpreted by using the style specified by <paramref name="style" />
 
           
 
           .</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
-           name="s" />
+          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
           .</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that supplies culture-specific formatting information about <paramref
-           name="s" />
+          An object that supplies culture-specific formatting information about <paramref name="s" />
 
           
 
-          . If <paramref
-           name="provider" />
+          . If <paramref name="provider" />
 
           
 
@@ -2054,31 +1945,26 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="style" />
+            >The <paramref name="style" />
 
             
 
-             parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref
-             name="s" />
+             parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref name="s" />
 
             
 
-             parameter for the parse operation to succeed. It must be a combination of bit flags from the <see
-             cref="T:System.Globalization.NumberStyles" />
+             parameter for the parse operation to succeed. It must be a combination of bit flags from the <see cref="T:System.Globalization.NumberStyles" />
 
             
 
              enumeration. </para
           >
           <para
-            >Depending on the value of <paramref
-             name="style" />
+            >Depending on the value of <paramref name="style" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -2086,18 +1972,15 @@ public class SByteParseClass {
           >
           <para>[ws][$][sign]digits[.fractional_digits][E[sign]exponential_digits][ws] </para>
           <para
-            >If <paramref
-             name="style" />
+            >If <paramref name="style" />
 
             
 
-             includes <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+             includes <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-            , the <paramref
-             name="s" />
+            , the <paramref name="s" />
 
             
 
@@ -2122,33 +2005,27 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >Optional white space. White space can appear at the beginning of <paramref
-                   name="s" />
+                  >Optional white space. White space can appear at the beginning of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
                   
 
-                   flag, and it can appear at the end of <paramref
-                   name="s" />
+                   flag, and it can appear at the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
                   
 
@@ -2162,23 +2039,19 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific currency symbol. Its position in the string is defined by the <see
-                   cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+                  >A culture-specific currency symbol. Its position in the string is defined by the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
 
                   
 
-                   property of the current culture. The current culture's currency symbol can appear in <paramref
-                   name="s" />
+                   property of the current culture. The current culture's currency symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
 
                   
 
@@ -2192,48 +2065,39 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >An optional sign. The sign can appear at the beginning of <paramref
-                   name="s" />
+                  >An optional sign. The sign can appear at the beginning of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowLeadingSign" />
 
                   
 
-                   flag, and it can appear the end of <paramref
-                   name="s" />
+                   flag, and it can appear the end of <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
 
                   
 
-                   flag. Parentheses can be used in <paramref
-                   name="s" />
+                   flag. Parentheses can be used in <paramref name="s" />
 
                   
 
-                   to indicate a negative value if <paramref
-                   name="style" />
+                   to indicate a negative value if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowParentheses" />
 
                   
 
@@ -2255,18 +2119,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref
-                   name="s" />
+                  >A culture-specific decimal point symbol. The current culture's decimal point symbol can appear in <paramref name="s" />
 
                   
 
-                   if <paramref
-                   name="style" />
+                   if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
@@ -2280,28 +2141,23 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >One or more occurrences of the digit 0-9 if <paramref
-                   name="style" />
+                  >One or more occurrences of the digit 0-9 if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
-                   flag, or one or more occurrences of the digit 0 if it does not. Fractional digits can appear in <paramref
-                   name="s" />
+                   flag, or one or more occurrences of the digit 0 if it does not. Fractional digits can appear in <paramref name="s" />
 
                   
 
-                   only if <paramref
-                   name="style" />
+                   only if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
 
                   
 
@@ -2315,18 +2171,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref
-                   name="s" />
+                  >The "e" or "E" character, which indicates that the value is represented in exponential (scientific) notation. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -2340,18 +2193,15 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >A sequence of digits from 0 through 9. The <paramref
-                   name="s" />
+                  >A sequence of digits from 0 through 9. The <paramref name="s" />
 
                   
 
-                   parameter can represent a number in exponential notation if <paramref
-                   name="style" />
+                   parameter can represent a number in exponential notation if <paramref name="style" />
 
                   
 
-                   includes the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                   includes the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
@@ -2369,23 +2219,19 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >A string with decimal digits only (which corresponds to the <see
-             cref="F:System.Globalization.NumberStyles.None" />
+            >A string with decimal digits only (which corresponds to the <see cref="F:System.Globalization.NumberStyles.None" />
 
             
 
-             style) always parses successfully. Most of the remaining <see
-             cref="T:System.Globalization.NumberStyles" />
+             style) always parses successfully. Most of the remaining <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members control elements that may be present, but are not required to be present, in this input string. The following table indicates how individual <see
-             cref="T:System.Globalization.NumberStyles" />
+             members control elements that may be present, but are not required to be present, in this input string. The following table indicates how individual <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             members affect the elements that may be present in <paramref
-             name="s" />
+             members affect the elements that may be present in <paramref name="s" />
 
             
 
@@ -2399,8 +2245,7 @@ public class SByteParseClass {
                 </term>
                 <description>
                   <para
-                    >Elements permitted in <paramref
-                     name="s" />
+                    >Elements permitted in <paramref name="s" />
 
                     
 
@@ -2427,13 +2272,11 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The decimal point (.) and fractional_digits elements. However, if style does not include the <see
-                   cref="F:System.Globalization.NumberStyles.AllowExponent" />
+                  >The decimal point (.) and fractional_digits elements. However, if style does not include the <see cref="F:System.Globalization.NumberStyles.AllowExponent" />
 
                   
 
-                   flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see
-                   cref="T:System.OverflowException" />
+                   flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see cref="T:System.OverflowException" />
 
                   
 
@@ -2459,8 +2302,7 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the beginning of <paramref
-                   name="s" />
+                  >The ws element at the beginning of <paramref name="s" />
 
                   
 
@@ -2476,8 +2318,7 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The ws element at the end of <paramref
-                   name="s" />
+                  >The ws element at the end of <paramref name="s" />
 
                   
 
@@ -2523,8 +2364,7 @@ public class SByteParseClass {
               </term>
               <description>
                 <para
-                  >The group separator (,) element. Although the group separator can appear in <paramref
-                   name="s" />
+                  >The group separator (,) element. Although the group separator can appear in <paramref name="s" />
 
                   
 
@@ -2544,33 +2384,27 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >If the <see
-             cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+            >If the <see cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
             
 
-             flag is used, <paramref
-             name="s" />
+             flag is used, <paramref name="s" />
 
             
 
-             must be a hexadecimal value. The only other flags that can be combined with it are <see
-             cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+             must be a hexadecimal value. The only other flags that can be combined with it are <see cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
 
             
 
-             and <see
-             cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+             and <see cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
 
             
 
-            . (The <see
-             cref="T:System.Globalization.NumberStyles" />
+            . (The <see cref="T:System.Globalization.NumberStyles" />
 
             
 
-             enumeration includes a composite number style, <see
-             cref="F:System.Globalization.NumberStyles.HexNumber" />
+             enumeration includes a composite number style, <see cref="F:System.Globalization.NumberStyles.HexNumber" />
 
             
 
@@ -2578,8 +2412,7 @@ public class SByteParseClass {
           >
           <block subset="none" type="note">
             <para
-              >If the <paramref
-               name="s" />
+              >If the <paramref name="s" />
 
               
 
@@ -2587,46 +2420,38 @@ public class SByteParseClass {
             >
           </block>
           <para
-            >If <paramref
-             name="s" />
+            >If <paramref name="s" />
 
             
 
-             represents a hexadecimal number, the <see
-             cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles)" />
+             represents a hexadecimal number, the <see cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles)" />
 
             
 
              method interprets the high-order bit of the byte as a sign bit. </para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation whose <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation whose <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of <paramref
-             name="s" />
+             object that provides culture-specific information about the format of <paramref name="s" />
 
             
 
-            . There are three ways to use the <paramref
-             name="provider" />
+            . There are three ways to use the <paramref name="provider" />
 
             
 
@@ -2635,13 +2460,11 @@ public class SByteParseClass {
           <list type="bullet">
             <item>
               <para
-                >You can pass the actual <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >You can pass the actual <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
-                 object that provides formatting information. (Its implementation of <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 object that provides formatting information. (Its implementation of <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
@@ -2650,13 +2473,11 @@ public class SByteParseClass {
             </item>
             <item>
               <para
-                >You can pass a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >You can pass a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
-                 object that specifies the culture whose formatting is to be used. Its <see
-                 cref="P:System.Globalization.CultureInfo.NumberFormat" />
+                 object that specifies the culture whose formatting is to be used. Its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
                 
 
@@ -2665,18 +2486,15 @@ public class SByteParseClass {
             </item>
             <item>
               <para
-                >You can pass a custom <see
-                 cref="T:System.IFormatProvider" />
+                >You can pass a custom <see cref="T:System.IFormatProvider" />
 
                 
 
-                 implementation. Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                 implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method must instantiate and return the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method must instantiate and return the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -2685,13 +2503,11 @@ public class SByteParseClass {
             </item>
           </list>
           <para
-            >If <paramref
-             name="provider" />
+            >If <paramref name="provider" />
 
             
 
-             is null, the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2705,8 +2521,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An 8-bit signed byte value that is equivalent to the number specified in the <paramref
-             name="s" />
+            >An 8-bit signed byte value that is equivalent to the number specified in the <paramref name="s" />
 
             
 
@@ -2714,46 +2529,53 @@ public class SByteParseClass {
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the number to convert. The string is interpreted by using the style specified by <paramref
-           name="style" />
+          A string that contains the number to convert. The string is interpreted by using the style specified by <paramref name="style" />
 
           
 
           .</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref
-           name="s" />
+          A bitwise combination of the enumeration values that indicates the style elements that can be present in <paramref name="s" />
 
           
 
-          . A typical value to specify is <see
-           cref="F:System.Globalization.NumberStyles.Integer" />
+          . A typical value to specify is <see cref="F:System.Globalization.NumberStyles.Integer" />
 
           
 
           .</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that supplies culture-specific formatting information about <paramref
-           name="s" />
+          An object that supplies culture-specific formatting information about <paramref name="s" />
 
           
 
-          . If <paramref
-           name="provider" />
+          . If <paramref name="provider" />
 
           
 
@@ -2787,18 +2609,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToBoolean(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToBoolean(System.SByte)" />
 
             
 
@@ -2808,8 +2627,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToBoolean(System.IFormatProvider)" />
 
             
 
@@ -2821,7 +2639,11 @@ public class SByteParseClass {
           <para>true if the value of the current instance is not zero; otherwise, false.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2851,18 +2673,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToByte(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToByte(System.SByte)" />
 
             
 
@@ -2872,8 +2691,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToByte(System.IFormatProvider)" />
 
             
 
@@ -2883,8 +2701,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Byte" />
+            >The value of the current instance, converted to a <see cref="T:System.Byte" />
 
             
 
@@ -2892,7 +2709,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2922,18 +2743,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToChar(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToChar(System.SByte)" />
 
             
 
@@ -2943,8 +2761,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToChar(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToChar(System.IFormatProvider)" />
 
             
 
@@ -2954,8 +2771,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Char" />
+            >The value of the current instance, converted to a <see cref="T:System.Char" />
 
             
 
@@ -2963,7 +2779,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2997,8 +2817,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This conversion is not supported. Attempting to do so throws an <see
-             cref="T:System.InvalidCastException" />
+            >This conversion is not supported. Attempting to do so throws an <see cref="T:System.InvalidCastException" />
 
             
 
@@ -3010,7 +2829,11 @@ public class SByteParseClass {
           <para>None. This conversion is not supported. </para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3043,18 +2866,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToDecimal(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToDecimal(System.SByte)" />
 
             
 
@@ -3064,8 +2884,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDecimal(System.IFormatProvider)" />
 
             
 
@@ -3075,8 +2894,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Decimal" />
+            >The value of the current instance, converted to a <see cref="T:System.Decimal" />
 
             
 
@@ -3084,7 +2902,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3117,18 +2939,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToDouble(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToDouble(System.SByte)" />
 
             
 
@@ -3138,8 +2957,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToDouble(System.IFormatProvider)" />
 
             
 
@@ -3149,8 +2967,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Double" />
+            >The value of the current instance, converted to a <see cref="T:System.Double" />
 
             
 
@@ -3158,7 +2975,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3191,18 +3012,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt16(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt16(System.SByte)" />
 
             
 
@@ -3212,8 +3030,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt16(System.IFormatProvider)" />
 
             
 
@@ -3223,8 +3040,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.Int16" />
+            >The value of the current instance, converted to an <see cref="T:System.Int16" />
 
             
 
@@ -3232,7 +3048,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3262,18 +3082,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt32(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt32(System.SByte)" />
 
             
 
@@ -3283,8 +3100,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt32(System.IFormatProvider)" />
 
             
 
@@ -3294,8 +3110,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.Int32" />
+            >The value of the current instance, converted to an <see cref="T:System.Int32" />
 
             
 
@@ -3303,7 +3118,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3336,18 +3155,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToInt64(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToInt64(System.SByte)" />
 
             
 
@@ -3357,8 +3173,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToInt64(System.IFormatProvider)" />
 
             
 
@@ -3368,8 +3183,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an <see
-             cref="T:System.Int64" />
+            >The value of the current instance, converted to an <see cref="T:System.Int64" />
 
             
 
@@ -3377,7 +3191,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3410,13 +3228,11 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
@@ -3426,8 +3242,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSByte(System.IFormatProvider)" />
 
             
 
@@ -3439,7 +3254,11 @@ public class SByteParseClass {
           <para>The value of the current instance, unchanged.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3472,18 +3291,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToSingle(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToSingle(System.SByte)" />
 
             
 
@@ -3493,8 +3309,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToSingle(System.IFormatProvider)" />
 
             
 
@@ -3504,8 +3319,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.Single" />
+            >The value of the current instance, converted to a <see cref="T:System.Single" />
 
             
 
@@ -3513,7 +3327,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3548,18 +3366,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
-             cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+             interface. The recommended alternative is to call the static (Shared in Visual Basic) <see cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
 
             
 
@@ -3569,8 +3384,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
 
             
 
@@ -3580,8 +3394,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to an object of type <paramref
-             name="type" />
+            >The value of the current instance, converted to an object of type <paramref name="type" />
 
             
 
@@ -3589,12 +3402,15 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IFormatProvider" />
+          A <see cref="T:System.IFormatProvider" />
 
           
 
@@ -3627,18 +3443,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt16(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt16(System.SByte)" />
 
             
 
@@ -3648,8 +3461,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt16(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt16(System.IFormatProvider)" />
 
             
 
@@ -3659,8 +3471,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.UInt16" />
+            >The value of the current instance, converted to a <see cref="T:System.UInt16" />
 
             
 
@@ -3668,7 +3479,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3701,18 +3516,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt32(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt32(System.SByte)" />
 
             
 
@@ -3722,8 +3534,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt32(System.IFormatProvider)" />
 
             
 
@@ -3733,8 +3544,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.UInt32" />
+            >The value of the current instance, converted to a <see cref="T:System.UInt32" />
 
             
 
@@ -3742,7 +3552,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3775,18 +3589,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.SByte" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.SByte" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IConvertible" />
+             instance is cast to an <see cref="T:System.IConvertible" />
 
             
 
-             interface. The recommended alternative is to call the <see
-             cref="M:System.Convert.ToUInt64(System.SByte)" />
+             interface. The recommended alternative is to call the <see cref="M:System.Convert.ToUInt64(System.SByte)" />
 
             
 
@@ -3796,8 +3607,7 @@ public class SByteParseClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />
+            >For a description of this member, see <see cref="M:System.IConvertible.ToUInt64(System.IFormatProvider)" />
 
             
 
@@ -3807,8 +3617,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the current instance, converted to a <see
-             cref="T:System.UInt64" />
+            >The value of the current instance, converted to a <see cref="T:System.UInt64" />
 
             
 
@@ -3816,7 +3625,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3848,18 +3661,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.SByte.ToString" />
+            >The <see cref="M:System.SByte.ToString" />
 
             
 
-             method formats an <see
-             cref="T:System.SByte" />
+             method formats an <see cref="T:System.SByte" />
 
             
 
-             value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
-             cref="M:System.SByte.ToString(System.String)" />
+             value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see cref="M:System.SByte.ToString(System.String)" />
 
             
 
@@ -3921,21 +3731,18 @@ public class SByteParseClass {
           </list>
           <para></para>
           <para
-            >The return value is formatted using the general numeric format specifier ("G") The string representation of the <see
-             cref="T:System.SByte" />
+            >The return value is formatted using the general numeric format specifier ("G") The string representation of the <see cref="T:System.SByte" />
 
             
 
-             value includes a negative sign if its value is negative, and a sequence of digits ranging from 0 to 9 without leading zeros. The negative sign is defined by the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             value includes a negative sign if its value is negative, and a sequence of digits ranging from 0 to 9 without leading zeros. The negative sign is defined by the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
              object for the current culture. </para
           >
           <para
-            >To define the formatting of the signed byte value's string representation, call the <see
-             cref="M:System.SByte.ToString(System.String)" />
+            >To define the formatting of the signed byte value's string representation, call the <see cref="M:System.SByte.ToString(System.String)" />
 
             
 
@@ -3979,18 +3786,15 @@ public class SByteParseClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.SByte.ToString(System.IFormatProvider)" />
+            >The <see cref="M:System.SByte.ToString(System.IFormatProvider)" />
 
             
 
-             method formats an <see
-             cref="T:System.SByte" />
+             method formats an <see cref="T:System.SByte" />
 
             
 
-             value in the default ("G", or general) format of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
-             cref="M:System.SByte.ToString(System.String)" />
+             value in the default ("G", or general) format of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see cref="M:System.SByte.ToString(System.String)" />
 
             
 
@@ -4052,61 +3856,50 @@ public class SByteParseClass {
           </list>
           <para></para>
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation. Its <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of the string returned by this method. If <paramref
-             name="provider" />
+             object that provides culture-specific information about the format of the string returned by this method. If <paramref name="provider" />
 
             
 
-             is null, the <see
-             cref="T:System.SByte" />
+             is null, the <see cref="T:System.SByte" />
 
             
 
-             value is formatted using the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             value is formatted using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object of the current culture. The only property of the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             object of the current culture. The only property of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that controls the string representation of the <see
-             cref="T:System.SByte" />
+             object that controls the string representation of the <see cref="T:System.SByte" />
 
             
 
-             value using the general format specifier is <see
-             cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+             value using the general format specifier is <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
             
 
             , which defines the character that represents the negative sign.</para
           >
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
@@ -4115,8 +3908,7 @@ public class SByteParseClass {
           <list type="bullet">
             <item>
               <para
-                >A <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >A <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
@@ -4125,8 +3917,7 @@ public class SByteParseClass {
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4135,18 +3926,15 @@ public class SByteParseClass {
             </item>
             <item>
               <para
-                >A custom object that implements <see
-                 cref="T:System.IFormatProvider" />
+                >A custom object that implements <see cref="T:System.IFormatProvider" />
 
                 
 
-                . Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                . Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4162,8 +3950,7 @@ public class SByteParseClass {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance, as specified by <paramref
-             name="provider" />
+            >The string representation of the value of this instance, as specified by <paramref name="provider" />
 
             
 
@@ -4171,7 +3958,11 @@ public class SByteParseClass {
           >
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4212,13 +4003,11 @@ public class SByteParseClass {
         >
         <example>
           <para
-            >This example demonstrates the <see
-             cref="M:System.SByte.ToString" />
+            >This example demonstrates the <see cref="M:System.SByte.ToString" />
 
             
 
-            (<see
-             cref="T:System.String" />
+            (<see cref="T:System.String" />
 
             
 
@@ -4253,18 +4042,15 @@ public class SByteToStringExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.SByte.ToString(System.String)" />
+            >The <see cref="M:System.SByte.ToString(System.String)" />
 
             
 
-             method formats an <see
-             cref="T:System.SByte" />
+             method formats an <see cref="T:System.SByte" />
 
             
 
-             value in a specified format by using the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
-             cref="M:System.SByte.ToString(System.String)" />
+             value in a specified format by using the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see cref="M:System.SByte.ToString(System.String)" />
 
             
 
@@ -4326,33 +4112,27 @@ public class SByteToStringExample {
           </list>
           <para></para>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
-             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref
-             name="format" />
+             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref name="format" />
 
             
 
-             is equal to <see
-             cref="F:System.String.Empty" />
+             is equal to <see cref="F:System.String.Empty" />
 
             
 
-             or is null, the return value of the current <see
-             cref="T:System.SByte" />
+             or is null, the return value of the current <see cref="T:System.SByte" />
 
             
 
-             object is formatted with the general format specifier ("G"). If <paramref
-             name="format" />
+             object is formatted with the general format specifier ("G"). If <paramref name="format" />
 
             
 
-             is any other value, the method throws a <see
-             cref="T:System.FormatException" />
+             is any other value, the method throws a <see cref="T:System.FormatException" />
 
             
 
@@ -4362,15 +4142,13 @@ public class SByteToStringExample {
           <list type="bullet">
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4381,8 +4159,7 @@ public class SByteToStringExample {
             </item>
             <item>
               <para
-                >For more information about support for formatting in the .NET Framework, see <format
-                 type="text/html">
+                >For more information about support for formatting in the .NET Framework, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4393,18 +4170,15 @@ public class SByteToStringExample {
             </item>
           </list>
           <para
-            >The format of the returned string is determined by the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The format of the returned string is determined by the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object for the current culture. Depending on the <paramref
-             name="format" />
+             object for the current culture. Depending on the <paramref name="format" />
 
             
 
-             parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
-             cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
+             parameter, this object controls symbols such as the negative sign, the group separator, and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -4418,8 +4192,7 @@ public class SByteToStringExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance as specified by <paramref
-             name="format" />
+            >The string representation of the value of this instance as specified by <paramref name="format" />
 
             
 
@@ -4427,7 +4200,11 @@ public class SByteToStringExample {
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4473,18 +4250,15 @@ public class SByteToStringExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
+            >The <see cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
 
             
 
-             method formats an <see
-             cref="T:System.SByte" />
+             method formats an <see cref="T:System.SByte" />
 
             
 
-             value in a specified format of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
-             cref="M:System.SByte.ToString(System.String)" />
+             value in a specified format of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see cref="M:System.SByte.ToString(System.String)" />
 
             
 
@@ -4545,33 +4319,27 @@ public class SByteToStringExample {
             </item>
           </list>
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
-             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref
-             name="format" />
+             parameter can be any valid standard numeric format specifier, or any combination of custom numeric format specifiers. If <paramref name="format" />
 
             
 
-             is equal to <see
-             cref="F:System.String.Empty" />
+             is equal to <see cref="F:System.String.Empty" />
 
             
 
-             or is null, the return value of the current <see
-             cref="T:System.SByte" />
+             or is null, the return value of the current <see cref="T:System.SByte" />
 
             
 
-             object is formatted with the general format specifier ("G"). If <paramref
-             name="format" />
+             object is formatted with the general format specifier ("G"). If <paramref name="format" />
 
             
 
-             is any other value, the method throws a <see
-             cref="T:System.FormatException" />
+             is any other value, the method throws a <see cref="T:System.FormatException" />
 
             
 
@@ -4581,15 +4349,13 @@ public class SByteToStringExample {
           <list type="bullet">
             <item>
               <para
-                >For more information about numeric format specifiers, see <format
-                 type="text/html">
+                >For more information about numeric format specifiers, see <format type="text/html">
                   <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
                 </format>
 
                 
 
-                 and <format
-                 type="text/html">
+                 and <format type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
 
@@ -4600,8 +4366,7 @@ public class SByteToStringExample {
             </item>
             <item>
               <para
-                >For more information about support for formatting in the .NET Framework, see <format
-                 type="text/html">
+                >For more information about support for formatting in the .NET Framework, see <format type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
 
@@ -4612,73 +4377,59 @@ public class SByteToStringExample {
             </item>
           </list>
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
-             parameter is an <see
-             cref="T:System.IFormatProvider" />
+             parameter is an <see cref="T:System.IFormatProvider" />
 
             
 
-             implementation. Its <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method returns a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides culture-specific information about the format of the string returned by this method. When the <see
-             cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
+             object that provides culture-specific information about the format of the string returned by this method. When the <see cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
 
             
 
-             method is invoked, it calls the <paramref
-             name="provider" />
+             method is invoked, it calls the <paramref name="provider" />
 
             
 
-             parameter's <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             parameter's <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method and passes it a <see
-             cref="T:System.Type" />
+             method and passes it a <see cref="T:System.Type" />
 
             
 
-             object that represents the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             object that represents the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             type. The <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             type. The <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method then returns the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method then returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object that provides information for formatting the <paramref
-             name="value" />
+             object that provides information for formatting the <paramref name="value" />
 
             
 
-             parameter, such as the negative sign symbol, the group separator symbol, or the decimal point symbol. There are three ways to use the <paramref
-             name="provider" />
+             parameter, such as the negative sign symbol, the group separator symbol, or the decimal point symbol. There are three ways to use the <paramref name="provider" />
 
             
 
-             parameter to supply formatting information to the <see
-             cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
+             parameter to supply formatting information to the <see cref="M:System.SByte.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -4687,18 +4438,15 @@ public class SByteToStringExample {
           <list type="bullet">
             <item>
               <para
-                >You can pass a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                >You can pass a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
-                 object that represents the culture that supplies formatting information. Its <see
-                 cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
+                 object that represents the culture that supplies formatting information. Its <see cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
                 
 
-                 method returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4707,13 +4455,11 @@ public class SByteToStringExample {
             </item>
             <item>
               <para
-                >You can pass the actual <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                >You can pass the actual <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
-                 object that provides numeric formatting information. (Its implementation of <see
-                 cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+                 object that provides numeric formatting information. (Its implementation of <see cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
 
                 
 
@@ -4722,18 +4468,15 @@ public class SByteToStringExample {
             </item>
             <item>
               <para
-                >You can pass a custom object that implements <see
-                 cref="T:System.IFormatProvider" />
+                >You can pass a custom object that implements <see cref="T:System.IFormatProvider" />
 
                 
 
-                . Its <see
-                 cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+                . Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
                 
 
-                 method instantiates and returns the <see
-                 cref="T:System.Globalization.NumberFormatInfo" />
+                 method instantiates and returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
                 
 
@@ -4742,13 +4485,11 @@ public class SByteToStringExample {
             </item>
           </list>
           <para
-            >If <paramref
-             name="provider" />
+            >If <paramref name="provider" />
 
             
 
-             is null, the formatting of the returned string is based on the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is null, the formatting of the returned string is based on the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -4762,13 +4503,11 @@ public class SByteToStringExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance as specified by <paramref
-             name="format" />
+            >The string representation of the value of this instance as specified by <paramref name="format" />
 
             
 
-             and <paramref
-             name="provider" />
+             and <paramref name="provider" />
 
             
 
@@ -4776,14 +4515,22 @@ public class SByteToStringExample {
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A standard or custom numeric format string.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

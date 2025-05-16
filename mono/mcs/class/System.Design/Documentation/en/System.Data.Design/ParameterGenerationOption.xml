@@ -12,13 +12,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Design.ParameterGenerationOption" />
+        >The <see cref="T:System.Data.Design.ParameterGenerationOption" />
 
         
 
-         enumeration is used to tell the <see
-         cref="T:System.Data.Design.MethodSignatureGenerator" />
+         enumeration is used to tell the <see cref="T:System.Data.Design.MethodSignatureGenerator" />
 
         
 
@@ -28,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Sets the type of parameters that are generated in a typed <see
-         cref="T:System.Data.DataSet" />
+        >Sets the type of parameters that are generated in a typed <see cref="T:System.Data.DataSet" />
 
         
 
@@ -67,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parameters in the typed dataset are all of <see
-             cref="T:System.Object" />
+            >Parameters in the typed dataset are all of <see cref="T:System.Object" />
 
             
 

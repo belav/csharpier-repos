@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you use the <see
-         cref="M:System.Drawing.Image.Save(System.String)" />
+        >When you use the <see cref="M:System.Drawing.Image.Save(System.String)" />
 
         
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -61,17 +59,19 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
-           from which to create the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           from which to create the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -95,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -104,17 +103,19 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name from which to create the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name from which to create the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -142,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -151,19 +151,26 @@
           >
         </summary>
         <param name="henhmetafile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A handle to an enhanced metafile. </param
         >
         <param name="deleteEmf">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to delete the enhanced metafile handle when the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+          true to delete the enhanced metafile handle when the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -191,18 +198,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified handle to a device context and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified handle to a device context and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -210,24 +214,30 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="emfType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -255,13 +265,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified handle and a <see
-             cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
+             class from the specified handle and a <see cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
 
             
 
@@ -269,24 +277,30 @@
           >
         </summary>
         <param name="hmetafile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A windows handle to a <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+          A windows handle to a <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="wmfHeader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
+          A <see cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
 
           
 
@@ -314,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -323,24 +336,30 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -368,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -377,24 +395,30 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -422,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -431,24 +454,30 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -476,8 +505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -485,24 +513,30 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -531,18 +565,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified handle to a device context and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified handle to a device context and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -550,36 +581,45 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="emfType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+          A descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -608,18 +648,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified handle and a <see
-             cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
+             class from the specified handle and a <see cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
 
             
 
-            . Also, the <paramref
-             name="deleteWmf" />
+            . Also, the <paramref name="deleteWmf" />
 
             
 
@@ -627,41 +664,49 @@
           >
         </summary>
         <param name="hmetafile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A windows handle to a <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+          A windows handle to a <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="wmfHeader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
+          A <see cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
 
           
 
           . </param
         >
         <param name="deleteWmf">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to delete the handle to the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+          true to delete the handle to the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
-           when the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           when the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -690,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -699,41 +743,49 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -762,8 +814,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -771,41 +822,49 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -834,18 +893,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified data stream, a Windows handle to a device context, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -853,41 +909,49 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -916,18 +980,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, and a <see
-             cref="T:System.Drawing.Rectangle" />
+             class from the specified data stream, a Windows handle to a device context, and a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -935,41 +996,49 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -998,18 +1067,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, and a <see
-             cref="T:System.Drawing.RectangleF" />
+             class from the specified data stream, a Windows handle to a device context, and a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1017,41 +1083,49 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1080,18 +1154,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class with the specified file name, a Windows handle to a device context, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1099,41 +1170,49 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1162,18 +1241,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, and a <see
-             cref="T:System.Drawing.Rectangle" />
+             class with the specified file name, a Windows handle to a device context, and a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1181,41 +1257,49 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1244,18 +1328,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, and a <see
-             cref="T:System.Drawing.RectangleF" />
+             class with the specified file name, a Windows handle to a device context, and a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1263,41 +1344,49 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1327,18 +1416,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1346,58 +1432,68 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1427,18 +1523,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1446,58 +1539,68 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1527,23 +1630,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified data stream, a Windows handle to a device context, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            . Also, a string that contains a descriptive name for the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            . Also, a string that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1551,58 +1650,68 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1632,18 +1741,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class from the specified data stream, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1651,58 +1757,68 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -1732,18 +1848,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class from the specified data stream, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1751,58 +1864,68 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -1832,18 +1955,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class with the specified file name, a Windows handle to a device context, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1851,58 +1971,68 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -1932,18 +2062,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -1951,58 +2078,68 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           structure that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -2032,18 +2169,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2051,58 +2185,68 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -2134,18 +2278,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2153,58 +2294,68 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2235,18 +2386,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+             class from the specified device context, bounded by the specified rectangle that uses the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2254,75 +2402,87 @@
           >
         </summary>
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2353,28 +2513,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class from the specified data stream, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2382,75 +2537,87 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2481,28 +2648,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class from the specified data stream, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2510,75 +2672,87 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2609,28 +2783,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2638,75 +2807,87 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2737,18 +2918,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2756,75 +2934,87 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2855,28 +3045,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -2884,75 +3069,87 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -2984,18 +3181,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3003,58 +3197,68 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
@@ -3086,33 +3290,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class from the specified data stream, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            . A string that contains a descriptive name for the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            . A string that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3120,92 +3318,106 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3237,33 +3449,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class from the specified data stream, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class from the specified data stream, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            . A string that contains a descriptive name for the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            . A string that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3271,92 +3477,106 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains the data for this <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3388,28 +3608,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.Rectangle" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3417,92 +3632,106 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3534,28 +3763,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-             class with the specified file name, a Windows handle to a device context, a <see
-             cref="T:System.Drawing.RectangleF" />
+             class with the specified file name, a Windows handle to a device context, a <see cref="T:System.Drawing.RectangleF" />
 
             
 
-             structure that represents the rectangle that bounds the new <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             structure that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
-            , the supplied unit of measure, and an <see
-             cref="T:System.Drawing.Imaging.EmfType" />
+            , the supplied unit of measure, and an <see cref="T:System.Drawing.Imaging.EmfType" />
 
             
 
-             enumeration that specifies the format of the <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             enumeration that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3563,92 +3787,106 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the file name of the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the file name of the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="referenceHdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Windows handle to a device context. </param
         >
         <param name="frameRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
-           that represents the rectangle that bounds the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that represents the rectangle that bounds the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="frameUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
+          A <see cref="T:System.Drawing.Imaging.MetafileFrameUnit" />
 
           
 
-           that specifies the unit of measure for <paramref
-           name="frameRect" />
+           that specifies the unit of measure for <paramref name="frameRect" />
 
           
 
           . </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EmfType" />
+          An <see cref="T:System.Drawing.Imaging.EmfType" />
 
           
 
-           that specifies the format of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that specifies the format of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
           . </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains a descriptive name for the new <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           that contains a descriptive name for the new <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3672,8 +3910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a Windows handle to an enhanced <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >Returns a Windows handle to an enhanced <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3683,8 +3920,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Windows handle to this enhanced <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+            >A Windows handle to this enhanced <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3712,13 +3948,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >Returns the <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with this <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with this <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3728,13 +3962,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >The <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with this <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with this <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3764,13 +3996,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >Returns the <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3780,13 +4010,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >The <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3794,12 +4022,15 @@
           >
         </returns>
         <param name="henhmetafile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The handle to the enhanced <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+          The handle to the enhanced <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3828,13 +4059,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >Returns the <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3844,13 +4073,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >The <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3858,17 +4085,19 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           containing the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           containing the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3897,13 +4126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >Returns the <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3913,13 +4140,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >The <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3927,17 +4152,19 @@
           >
         </returns>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           containing the name of the <see
-           cref="T:System.Drawing.Imaging.Metafile" />
+           containing the name of the <see cref="T:System.Drawing.Imaging.Metafile" />
 
           
 
@@ -3968,13 +4195,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >Returns the <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3984,13 +4209,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.MetafileHeader" />
+            >The <see cref="T:System.Drawing.Imaging.MetafileHeader" />
 
             
 
-             associated with the specified <see
-             cref="T:System.Drawing.Imaging.Metafile" />
+             associated with the specified <see cref="T:System.Drawing.Imaging.Metafile" />
 
             
 
@@ -3998,12 +4221,15 @@
           >
         </returns>
         <param name="wmfHeader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
+          A <see cref="T:System.Drawing.Imaging.WmfPlaceableFileHeader" />
 
           
 
@@ -4037,33 +4263,48 @@
           <para>Plays an individual metafile record.</para>
         </summary>
         <param name="recordType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Element of the <see
-           cref="T:System.Drawing.Imaging.EmfPlusRecordType" />
+          Element of the <see cref="T:System.Drawing.Imaging.EmfPlusRecordType" />
 
           
 
            that specifies the type of metafile record being played. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A set of flags that specify attributes of the record. </param
         >
         <param name="dataSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the record data. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

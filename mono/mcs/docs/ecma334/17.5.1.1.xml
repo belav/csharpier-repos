@@ -2,8 +2,7 @@
 <clause number="17.5.1.1" title="Value parameters">
   <paragraph>A parameter declared with no modifiers is a value parameter. A value parameter corresponds to a local variable that gets its initial value from the corresponding argument supplied in the method invocation. </paragraph>
   <paragraph
-    >When a formal parameter is a value parameter, the corresponding argument in a method invocation must be an expression of a type that is implicitly convertible (<hyperlink
-    >13.1</hyperlink>
+    >When a formal parameter is a value parameter, the corresponding argument in a method invocation must be an expression of a type that is implicitly convertible (<hyperlink>13.1</hyperlink>
 
     
 

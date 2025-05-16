@@ -48,8 +48,7 @@
 
         
 
-         is the default implementation of <see
-         cref="T:System.ComponentModel.IComponent" />
+         is the default implementation of <see cref="T:System.ComponentModel.IComponent" />
 
         
 
@@ -61,21 +60,18 @@
 
         
 
-         inherits from <see
-         cref="T:System.ComponentModel.Component" />
+         inherits from <see cref="T:System.ComponentModel.Component" />
 
         
 
-        , the default implementation of <see
-         cref="T:System.ComponentModel.IComponent" />
+        , the default implementation of <see cref="T:System.ComponentModel.IComponent" />
 
         
 
         .</para
       >
       <para
-        >A component interacts with its container primarily through a container-provided <see
-         cref="T:System.ComponentModel.ISite" />
+        >A component interacts with its container primarily through a container-provided <see cref="T:System.ComponentModel.ISite" />
 
         
 
@@ -105,13 +101,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a <see
-             cref="E:System.ComponentModel.IComponent.Disposed" />
+            >When you create a <see cref="E:System.ComponentModel.IComponent.Disposed" />
 
             
 
-             delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
-             type="text/html">
+             delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -123,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the method that handles the <see
-             cref="E:System.ComponentModel.IComponent.Disposed" />
+            >Represents the method that handles the <see cref="E:System.ComponentModel.IComponent.Disposed" />
 
             
 
@@ -161,13 +154,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ComponentModel.ISite" />
+            >Gets or sets the <see cref="T:System.ComponentModel.ISite" />
 
             
 
-             associated with the <see
-             cref="T:System.ComponentModel.IComponent" />
+             associated with the <see cref="T:System.ComponentModel.IComponent" />
 
             
 

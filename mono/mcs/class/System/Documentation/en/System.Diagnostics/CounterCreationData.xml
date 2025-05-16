@@ -50,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -86,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -95,26 +93,37 @@
           >
         </summary>
         <param name="counterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the counter, which must be unique within its category. </param
         >
         <param name="counterHelp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text that describes the counter's behavior. </param
         >
         <param name="counterType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.PerformanceCounterType" />
+          A <see cref="T:System.Diagnostics.PerformanceCounterType" />
 
           
 

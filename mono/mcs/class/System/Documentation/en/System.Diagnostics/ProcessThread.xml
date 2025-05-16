@@ -32,13 +32,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >Starting with the .NET Framework version 2.0, the ability to reference performance counter data on other computers has been eliminated for many of the .NET Framework methods and properties. This change was made to improve performance and to enable non-administrators to use the <see
-           cref="T:System.Diagnostics.ProcessThread" />
+          >Starting with the .NET Framework version 2.0, the ability to reference performance counter data on other computers has been eliminated for many of the .NET Framework methods and properties. This change was made to improve performance and to enable non-administrators to use the <see cref="T:System.Diagnostics.ProcessThread" />
 
           
 
-           class. As a result, some applications that did not get exceptions in earlier versions of the .NET Framework may now get a <see
-           cref="T:System.NotSupportedException" />
+           class. As a result, some applications that did not get exceptions in earlier versions of the .NET Framework may now get a <see cref="T:System.NotSupportedException" />
 
           
 
@@ -46,8 +44,7 @@
         >
       </block>
       <para
-        >Use <see
-         cref="T:System.Diagnostics.ProcessThread" />
+        >Use <see cref="T:System.Diagnostics.ProcessThread" />
 
         
 
@@ -62,18 +59,15 @@
       </block>
       <para>The threads of a process execute individually and are unaware of each other unless you make them visible to each other. Threads that share common resources, however, must coordinate their work by using semaphores or another method of interprocess communication.</para>
       <para
-        >To get a collection of all the <see
-         cref="T:System.Diagnostics.ProcessThread" />
+        >To get a collection of all the <see cref="T:System.Diagnostics.ProcessThread" />
 
         
 
-         objects associated with the current process, get the <see
-         cref="P:System.Diagnostics.Process.Threads" />
+         objects associated with the current process, get the <see cref="P:System.Diagnostics.Process.Threads" />
 
         
 
-         property of the <see
-         cref="T:System.Diagnostics.Process" />
+         property of the <see cref="T:System.Diagnostics.Process" />
 
         
 
@@ -111,69 +105,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessThread.BasePriority" />
+            >The <see cref="P:System.Diagnostics.ProcessThread.BasePriority" />
 
             
 
              is the starting priority for the process thread. You can view information about the base priority through the System Monitor's Priority Base counter.</para
           >
           <para
-            >The operating system computes a thread's base priority by combining the thread's priority level range with the process's priority class. You can set the process's <see
-             cref="P:System.Diagnostics.Process.PriorityClass" />
+            >The operating system computes a thread's base priority by combining the thread's priority level range with the process's priority class. You can set the process's <see cref="P:System.Diagnostics.Process.PriorityClass" />
 
             
 
-             property to one of the values in the <see
-             cref="T:System.Diagnostics.ProcessPriorityClass" />
+             property to one of the values in the <see cref="T:System.Diagnostics.ProcessPriorityClass" />
 
             
 
-             enumeration, which are <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.Idle" />
+             enumeration, which are <see cref="F:System.Diagnostics.ProcessPriorityClass.Idle" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.Normal" />
+            , <see cref="F:System.Diagnostics.ProcessPriorityClass.Normal" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.High" />
+            , <see cref="F:System.Diagnostics.ProcessPriorityClass.High" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.AboveNormal" />
+            , <see cref="F:System.Diagnostics.ProcessPriorityClass.AboveNormal" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.BelowNormal" />
+            , <see cref="F:System.Diagnostics.ProcessPriorityClass.BelowNormal" />
 
             
 
-            , or <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
+            , or <see cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
 
             
 
-            . You can set the thread's <see
-             cref="P:System.Diagnostics.ProcessThread.PriorityLevel" />
+            . You can set the thread's <see cref="P:System.Diagnostics.ProcessThread.PriorityLevel" />
 
             
 
              property to a range of values that bounds the thread's base priority. Win32 uses four priority classes with seven base priority levels per class.</para
           >
           <para
-            >The thread's current priority might deviate from the base priority. For example, the operating system can change the <see
-             cref="P:System.Diagnostics.ProcessThread.CurrentPriority" />
+            >The thread's current priority might deviate from the base priority. For example, the operating system can change the <see cref="P:System.Diagnostics.ProcessThread.CurrentPriority" />
 
             
 
-             property based on the time elapsed or other boosts when a process must be put ahead of others for access to the processor. In addition, you can set the <see
-             cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+             property based on the time elapsed or other boosts when a process must be put ahead of others for access to the processor. In addition, you can set the <see cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
 
             
 
@@ -211,13 +193,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread's current priority might deviate from the base priority. For example, the operating system can change the <see
-             cref="P:System.Diagnostics.ProcessThread.CurrentPriority" />
+            >The thread's current priority might deviate from the base priority. For example, the operating system can change the <see cref="P:System.Diagnostics.ProcessThread.CurrentPriority" />
 
             
 
-             property based on the time elapsed, or other boosts, when a process must be put ahead of others for access to the processor. In addition, you can set the <see
-             cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+             property based on the time elapsed, or other boosts, when a process must be put ahead of others for access to the processor. In addition, you can set the <see cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
 
             
 
@@ -288,8 +268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessThread.IdealProcessor" />
+            >The <see cref="P:System.Diagnostics.ProcessThread.IdealProcessor" />
 
             
 
@@ -330,18 +309,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Diagnostics.ProcessThread.PriorityBoostEnabled" />
+            >When <see cref="P:System.Diagnostics.ProcessThread.PriorityBoostEnabled" />
 
             
 
-             is true, the system temporarily boosts the thread's priority whenever its associated process is taken out of the wait state. This action prevents other processes from interrupting the processing of the current thread. The <see
-             cref="P:System.Diagnostics.ProcessThread.PriorityBoostEnabled" />
+             is true, the system temporarily boosts the thread's priority whenever its associated process is taken out of the wait state. This action prevents other processes from interrupting the processing of the current thread. The <see cref="P:System.Diagnostics.ProcessThread.PriorityBoostEnabled" />
 
             
 
-             setting affects all existing threads as well as any threads subsequently created by the process. To restore normal behavior, set the <see
-             cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+             setting affects all existing threads as well as any threads subsequently created by the process. To restore normal behavior, set the <see cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
 
             
 
@@ -352,23 +328,19 @@
 
             
 
-             has an effect only when the thread is running in a process that has a <see
-             cref="P:System.Diagnostics.Process.PriorityClass" />
+             has an effect only when the thread is running in a process that has a <see cref="P:System.Diagnostics.Process.PriorityClass" />
 
             
 
-             set to one of the dynamic priority enumeration values (<see
-             cref="F:System.Diagnostics.ProcessPriorityClass.Normal" />
+             set to one of the dynamic priority enumeration values (<see cref="F:System.Diagnostics.ProcessPriorityClass.Normal" />
 
             
 
-            , <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.High" />
+            , <see cref="F:System.Diagnostics.ProcessPriorityClass.High" />
 
             
 
-            , or <see
-             cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
+            , or <see cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
 
             
 
@@ -416,13 +388,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The priority level is not a single value, but rather a range of values. The operating system computes the thread's base priority by using the process's <see
-             cref="P:System.Diagnostics.Process.PriorityClass" />
+            >The priority level is not a single value, but rather a range of values. The operating system computes the thread's base priority by using the process's <see cref="P:System.Diagnostics.Process.PriorityClass" />
 
             
 
-             to choose a value from the range specified in the <see
-             cref="P:System.Diagnostics.ProcessThread.PriorityLevel" />
+             to choose a value from the range specified in the <see cref="P:System.Diagnostics.ProcessThread.PriorityLevel" />
 
             
 
@@ -463,13 +433,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Windows uses several different protection mechanisms, and at the root of them all is the distinction between user mode and privileged mode. <see
-             cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
+            >Windows uses several different protection mechanisms, and at the root of them all is the distinction between user mode and privileged mode. <see cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
 
             
 
-             corresponds to the amount of time that the application has spent running in privileged mode, inside the operating system core. The <see
-             cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
+             corresponds to the amount of time that the application has spent running in privileged mode, inside the operating system core. The <see cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
 
             
 
@@ -514,8 +482,7 @@
 
             
 
-             represents each processor as a bit. Bit 0 represents processor one, bit 1 represents processor two, and so on. The following table shows a subset of the possible <see
-             cref="P:System.Diagnostics.ProcessThread.ProcessorAffinity" />
+             represents each processor as a bit. Bit 0 represents processor one, bit 1 represents processor two, and so on. The following table shows a subset of the possible <see cref="P:System.Diagnostics.ProcessThread.ProcessorAffinity" />
 
             
 
@@ -590,8 +557,7 @@
             </item>
           </list>
           <para
-            >You can also specify the single, preferred processor for a thread by setting the <see
-             cref="P:System.Diagnostics.ProcessThread.IdealProcessor" />
+            >You can also specify the single, preferred processor for a thread by setting the <see cref="P:System.Diagnostics.ProcessThread.IdealProcessor" />
 
             
 
@@ -660,8 +626,7 @@
           <para>Each process starts with a single thread, which is known as the primary thread. Any thread can create additional threads.</para>
           <para>A process has a virtual address space, executable code, data, object handles, environment variables, a base priority, and minimum and maximum working set sizes. All the threads of a process share its virtual address space and system resources. In addition, each thread maintains exception handlers, a scheduling priority, and a set of structures in which the system saves the thread context while the thread is waiting to be scheduled. The thread context includes the thread's set of machine registers, the kernel stack, a thread environment block, and a user stack in the address space of the thread's process.</para>
           <para
-            >Every Windows thread actually begins execution in a system-supplied function, not the application-supplied function. The starting address for the primary thread is, therefore, the same (as it represents the address of the system-supplied function) for every Windows process in the system. However, the <see
-             cref="P:System.Diagnostics.ProcessThread.StartAddress" />
+            >Every Windows thread actually begins execution in a system-supplied function, not the application-supplied function. The starting address for the primary thread is, therefore, the same (as it represents the address of the system-supplied function) for every Windows process in the system. However, the <see cref="P:System.Diagnostics.ProcessThread.StartAddress" />
 
             
 
@@ -737,28 +702,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessThread.WaitReason" />
+            >The <see cref="P:System.Diagnostics.ProcessThread.WaitReason" />
 
             
 
-             property value is valid only when the <see
-             cref="P:System.Diagnostics.ProcessThread.ThreadState" />
+             property value is valid only when the <see cref="P:System.Diagnostics.ProcessThread.ThreadState" />
 
             
 
-             value is <see
-             cref="F:System.Diagnostics.ThreadState.Wait" />
+             value is <see cref="F:System.Diagnostics.ThreadState.Wait" />
 
             
 
-            . Therefore, check the <see
-             cref="P:System.Diagnostics.ProcessThread.ThreadState" />
+            . Therefore, check the <see cref="P:System.Diagnostics.ProcessThread.ThreadState" />
 
             
 
-             value before you get the <see
-             cref="P:System.Diagnostics.ProcessThread.WaitReason" />
+             value before you get the <see cref="P:System.Diagnostics.ProcessThread.WaitReason" />
 
             
 
@@ -799,26 +759,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessThread.TotalProcessorTime" />
+            >The <see cref="P:System.Diagnostics.ProcessThread.TotalProcessorTime" />
 
             
 
              property indicates the total amount of time that the system has taken the thread out of the wait state and given it priority on any processor. On a multiple processor system, this value would include time spent on each processor, if the thread used more than one processor.</para
           >
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessThread.TotalProcessorTime" />
+            >The <see cref="P:System.Diagnostics.ProcessThread.TotalProcessorTime" />
 
             
 
-             property is the sum of the <see
-             cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
+             property is the sum of the <see cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
+             and <see cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
 
             
 
@@ -859,13 +815,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Windows NT uses several different protection mechanisms, and at the root of them all is the distinction between user mode and privileged mode. <see
-             cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
+            >Windows NT uses several different protection mechanisms, and at the root of them all is the distinction between user mode and privileged mode. <see cref="P:System.Diagnostics.ProcessThread.UserProcessorTime" />
 
             
 
-             corresponds to the amount of time that the application has spent running in user mode, outside the operating system core. The <see
-             cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
+             corresponds to the amount of time that the application has spent running in user mode, outside the operating system core. The <see cref="P:System.Diagnostics.ProcessThread.PrivilegedProcessorTime" />
 
             
 
@@ -910,28 +864,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessThread.WaitReason" />
+            >The <see cref="P:System.Diagnostics.ProcessThread.WaitReason" />
 
             
 
-             property is valid only when the <see
-             cref="P:System.Diagnostics.ProcessThread.ThreadState" />
+             property is valid only when the <see cref="P:System.Diagnostics.ProcessThread.ThreadState" />
 
             
 
-             is <see
-             cref="F:System.Diagnostics.ThreadState.Wait" />
+             is <see cref="F:System.Diagnostics.ThreadState.Wait" />
 
             
 
-            . Therefore, check the <see
-             cref="P:System.Diagnostics.ProcessThread.ThreadState" />
+            . Therefore, check the <see cref="P:System.Diagnostics.ProcessThread.ThreadState" />
 
             
 
-             value before you get the <see
-             cref="P:System.Diagnostics.ProcessThread.WaitReason" />
+             value before you get the <see cref="P:System.Diagnostics.ProcessThread.WaitReason" />
 
             
 

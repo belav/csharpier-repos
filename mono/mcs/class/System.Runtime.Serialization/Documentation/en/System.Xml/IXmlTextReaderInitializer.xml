@@ -48,21 +48,33 @@
           <para>Specifies initialization requirements for XML text readers that read a stream.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream from which to read.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding of the stream.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -102,45 +114,63 @@
           <para>Specifies initialization requirements for XML text readers that read a buffer.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character encoding of the stream.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

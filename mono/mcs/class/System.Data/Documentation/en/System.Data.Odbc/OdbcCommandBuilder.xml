@@ -17,94 +17,77 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+        >The <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         does not automatically generate the SQL statements required to reconcile changes made to a <see
-         cref="T:System.Data.DataSet" />
+         does not automatically generate the SQL statements required to reconcile changes made to a <see cref="T:System.Data.DataSet" />
 
         
 
-         associated with the data source. However, you can create an <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+         associated with the data source. However, you can create an <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         object that generates SQL statements for single-table updates by setting the <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+         object that generates SQL statements for single-table updates by setting the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
         
 
-         property of the <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+         property of the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-        . The <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+        . The <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
          then generates any additional SQL statements that you do not set.</para
       >
       <para
-        >The relationship between an <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+        >The relationship between an <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         and its corresponding <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+         and its corresponding <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         is always one-to-one. To create this correspondence, you set the <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+         is always one-to-one. To create this correspondence, you set the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
-         property of the <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+         property of the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         object. This causes the <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+         object. This causes the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         to register itself as a listener, which produces the output of <see
-         cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+         to register itself as a listener, which produces the output of <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
 
         
 
-         events that affect the <see
-         cref="T:System.Data.DataSet" />
+         events that affect the <see cref="T:System.Data.DataSet" />
 
         
 
         .</para
       >
       <para
-        >To generate INSERT, UPDATE, or DELETE statements, the <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+        >To generate INSERT, UPDATE, or DELETE statements, the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         uses the <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+         uses the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
         
 
-         property to retrieve a required set of metadata. If you change the value of <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+         property to retrieve a required set of metadata. If you change the value of <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
         
 
-         after the metadata has been retrieved, such as after the first update, you should then call the <see
-         cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+         after the metadata has been retrieved, such as after the first update, you should then call the <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
         
 
@@ -112,8 +95,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If the SELECT statement assigned to the <see
-           cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+          >If the SELECT statement assigned to the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
           
 
@@ -121,71 +103,58 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+        >The <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         also uses the <see
-         cref="P:System.Data.Odbc.OdbcCommand.Connection" />
+         also uses the <see cref="P:System.Data.Odbc.OdbcCommand.Connection" />
 
         
 
-        , <see
-         cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+        , <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
         
 
-        , and <see
-         cref="P:System.Data.Odbc.OdbcCommand.Transaction" />
+        , and <see cref="P:System.Data.Odbc.OdbcCommand.Transaction" />
 
         
 
-         properties referenced by the <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+         properties referenced by the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
         
 
-        . The user should call <see
-         cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+        . The user should call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
         
 
-         if one or more of these properties are modified, or if the value of the <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+         if one or more of these properties are modified, or if the value of the <see cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
         
 
-         property itself is changed. Otherwise the <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+         property itself is changed. Otherwise the <see cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+        , <see cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
         
 
-        , and <see
-         cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+        , and <see cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
         
 
          properties retain their previous values.</para
       >
       <para
-        >If you call <see
-         cref="M:System.ComponentModel.Component.Dispose" />
+        >If you call <see cref="M:System.ComponentModel.Component.Dispose" />
 
         
 
-        , the <see
-         cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+        , the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
         
 
-         is disassociated from the <see
-         cref="T:System.Data.Odbc.OdbcDataAdapter" />
+         is disassociated from the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
         
 
@@ -195,8 +164,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Automatically generates single-table commands that are used to reconcile changes made to a <see
-         cref="T:System.Data.DataSet" />
+        >Automatically generates single-table commands that are used to reconcile changes made to a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -217,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
@@ -244,36 +211,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            >The <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             registers itself as a listener for <see
-             cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+             registers itself as a listener for <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
 
             
 
-             events that are generated by the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             events that are generated by the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
              specified in this property.</para
           >
           <para
-            >When you create a new instance of <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            >When you create a new instance of <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-            , any existing <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            , any existing <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             associated with this <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             associated with this <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -283,13 +244,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             class with the associated <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             class with the associated <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -297,17 +256,19 @@
           >
         </summary>
         <param name="adapter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.Odbc.OdbcDataAdapter" />
+          An <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
           
 
-           object to associate with this <see
-           cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+           object to associate with this <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
           
 
@@ -366,36 +327,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            >The <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             registers itself as a listener for <see
-             cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
+             registers itself as a listener for <see cref="E:System.Data.Odbc.OdbcDataAdapter.RowUpdating" />
 
             
 
-             events that are generated by the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             events that are generated by the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
              specified in this property.</para
           >
           <para
-            >When you create a new instance of <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            >When you create a new instance of <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-            , any existing <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+            , any existing <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
-             associated with this <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             associated with this <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
@@ -405,13 +360,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+            >Gets or sets an <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
-             object for which this <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+             object for which this <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
@@ -444,8 +397,7 @@
 
             
 
-             overwrites any existing parameter information for the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             overwrites any existing parameter information for the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -459,18 +411,15 @@
              requires an additional call to the data source to obtain the information. If the parameter information is known in advance, it is more efficient to populate the parameters collection by setting the information explicitly.</para
           >
           <para
-            >You can only use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.DeriveParameters(System.Data.Odbc.OdbcCommand)" />
+            >You can only use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.DeriveParameters(System.Data.Odbc.OdbcCommand)" />
 
             
 
-             with stored procedures. You cannot use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.DeriveParameters(System.Data.Odbc.OdbcCommand)" />
+             with stored procedures. You cannot use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.DeriveParameters(System.Data.Odbc.OdbcCommand)" />
 
             
 
-             to populate the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to populate the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -480,18 +429,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves parameter information from the stored procedure specified in the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Retrieves parameter information from the stored procedure specified in the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
-             and populates the <see
-             cref="P:System.Data.Odbc.OdbcCommand.Parameters" />
+             and populates the <see cref="P:System.Data.Odbc.OdbcCommand.Parameters" />
 
             
 
-             collection of the specified <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             collection of the specified <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -499,22 +445,23 @@
           >
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcCommand" />
+          The <see cref="T:System.Data.Odbc.OdbcCommand" />
 
           
 
-           referencing the stored procedure from which the parameter information is to be derived. The derived parameters are added to the <see
-           cref="P:System.Data.Odbc.OdbcCommand.Parameters" />
+           referencing the stored procedure from which the parameter information is to be derived. The derived parameters are added to the <see cref="P:System.Data.Odbc.OdbcCommand.Parameters" />
 
           
 
-           collection of the <see
-           cref="T:System.Data.Odbc.OdbcCommand" />
+           collection of the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
           
 
@@ -558,59 +505,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+            >You can use the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             method for informational or troubleshooting purposes because it returns the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object to be executed.</para
           >
           <para
-            >You can also use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+            >You can also use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             as the basis of a modified command. For example, you might call <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+             as the basis of a modified command. For example, you might call <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             and modify the <see
-             cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+             and modify the <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
             
 
-             value, and then explicitly set that on the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             value, and then explicitly set that on the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
             .</para
           >
           <para
-            >After the SQL statement is first generated, you must explicitly call <see
-             cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+            >After the SQL statement is first generated, you must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
             
 
-             if it changes the statement in any way. Otherwise, the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+             if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+             or <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
@@ -620,8 +557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets the automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -631,8 +567,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >The automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -664,72 +599,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+            >You can use the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             method for informational or troubleshooting purposes because it returns the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object to be executed.</para
           >
           <para
-            >You can also use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+            >You can also use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             as the basis of a modified command. For example, you might call <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+             as the basis of a modified command. For example, you might call <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             and modify the <see
-             cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+             and modify the <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
             
 
-             value, and then explicitly set that on the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             value, and then explicitly set that on the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
             .</para
           >
           <para
-            >After the SQL statement is first generated, you must explicitly call <see
-             cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+            >After the SQL statement is first generated, you must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
             
 
-             if it changes the statement in any way. Otherwise, the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+             if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
-             will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
+             or <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetDeleteCommand" />
 
             
 
             .</para
           >
           <para
-            >The default behavior, when generating parameter names, is to use @p1, @p2, and so on for the various parameters. Passing true for the <paramref
-             name="useColumnsForParameterNames" />
+            >The default behavior, when generating parameter names, is to use @p1, @p2, and so on for the various parameters. Passing true for the <paramref name="useColumnsForParameterNames" />
 
             
 
-             parameter lets you force the <see
-             cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+             parameter lets you force the <see cref="T:System.Data.Odbc.OdbcCommandBuilder" />
 
             
 
@@ -738,8 +661,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNameMaxLength" />
+                >The <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNameMaxLength" />
 
                 
 
@@ -748,8 +670,7 @@
             </item>
             <item>
               <para
-                >The generated parameter name meets the criteria specified in the <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNamePattern" />
+                >The generated parameter name meets the criteria specified in the <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNamePattern" />
 
                 
 
@@ -758,8 +679,7 @@
             </item>
             <item>
               <para
-                >A <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterMarkerFormat" />
+                >A <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterMarkerFormat" />
 
                 
 
@@ -771,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets the automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -782,8 +701,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >The automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -791,7 +709,11 @@
           >
         </returns>
         <param name="useColumnsForParameterNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -813,59 +735,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+            >You can use the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             method for informational or troubleshooting purposes because it returns the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object to be executed.</para
           >
           <para
-            >You can also use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+            >You can also use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             as the basis of a modified command. For example, you might call <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+             as the basis of a modified command. For example, you might call <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             and modify the <see
-             cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+             and modify the <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
             
 
-             value, and then explicitly set that on the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             value, and then explicitly set that on the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
             .</para
           >
           <para
-            >After the SQL statement is first generated, you must explicitly call <see
-             cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+            >After the SQL statement is first generated, you must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
             
 
-             if it changes the statement in any way. Otherwise, the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+             if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             still will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             still will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+             or <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
@@ -875,8 +787,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets the automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -886,8 +797,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >The automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -919,72 +829,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+            >You can use the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             method for informational or troubleshooting purposes because it returns the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object to be executed.</para
           >
           <para
-            >You can also use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+            >You can also use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             as the basis of a modified command. For example, you might call <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+             as the basis of a modified command. For example, you might call <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             and modify the <see
-             cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+             and modify the <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
             
 
-             value, and then explicitly set that on the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             value, and then explicitly set that on the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
             .</para
           >
           <para
-            >After the SQL statement is first generated, you must explicitly call <see
-             cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+            >After the SQL statement is first generated, you must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
             
 
-             if it changes the statement in any way. Otherwise, the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+             if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
-             will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
+             or <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetInsertCommand" />
 
             
 
             .</para
           >
           <para
-            >The default behavior, when generating parameter names, is to use @p1, @p2, and so on for the various parameters. Passing true for the <paramref
-             name="useColumnsForParameterNames" />
+            >The default behavior, when generating parameter names, is to use @p1, @p2, and so on for the various parameters. Passing true for the <paramref name="useColumnsForParameterNames" />
 
             
 
-             parameter lets you force the <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             parameter lets you force the <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -993,8 +891,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNameMaxLength" />
+                >The <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNameMaxLength" />
 
                 
 
@@ -1003,8 +900,7 @@
             </item>
             <item>
               <para
-                >The generated parameter name meets the criteria specified in the <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNamePattern" />
+                >The generated parameter name meets the criteria specified in the <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNamePattern" />
 
                 
 
@@ -1013,8 +909,7 @@
             </item>
             <item>
               <para
-                >A <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterMarkerFormat" />
+                >A <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterMarkerFormat" />
 
                 
 
@@ -1026,8 +921,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets the automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -1037,8 +931,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >The automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -1046,7 +939,11 @@
           >
         </returns>
         <param name="useColumnsForParameterNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1137,59 +1034,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+            >You can use the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             method for informational or troubleshooting purposes because it returns the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object to be executed.</para
           >
           <para
-            >You can also use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+            >You can also use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             as the basis of a modified command. For example, you might call <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+             as the basis of a modified command. For example, you might call <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             and modify the <see
-             cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+             and modify the <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
             
 
-             value, and then explicitly set that on the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             value, and then explicitly set that on the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
             .</para
           >
           <para
-            >After the SQL statement is first generated, you must explicitly call <see
-             cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+            >After the SQL statement is first generated, you must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
             
 
-             if it changes the statement in any way. Otherwise, the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+             if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             still will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             still will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+             or <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
@@ -1199,8 +1086,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets the automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -1210,8 +1096,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >The automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -1243,72 +1128,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+            >You can use the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             method for informational or troubleshooting purposes because it returns the <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+             method for informational or troubleshooting purposes because it returns the <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
              object to be executed.</para
           >
           <para
-            >You can also use <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+            >You can also use <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             as the basis of a modified command. For example, you might call <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+             as the basis of a modified command. For example, you might call <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             and modify the <see
-             cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+             and modify the <see cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
 
             
 
-             value, and then explicitly set that on the <see
-             cref="T:System.Data.Odbc.OdbcDataAdapter" />
+             value, and then explicitly set that on the <see cref="T:System.Data.Odbc.OdbcDataAdapter" />
 
             
 
             .</para
           >
           <para
-            >After the SQL statement is first generated, you must explicitly call <see
-             cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
+            >After the SQL statement is first generated, you must explicitly call <see cref="M:System.Data.Common.DbCommandBuilder.RefreshSchema" />
 
             
 
-             if it changes the statement in any way. Otherwise, the <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+             if it changes the statement in any way. Otherwise, the <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
-             still will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             still will be using information from the previous statement, which might not be correct. The SQL statements are first generated when the application calls either <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             or <see
-             cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
+             or <see cref="M:System.Data.Odbc.OdbcCommandBuilder.GetUpdateCommand" />
 
             
 
             .</para
           >
           <para
-            >The default behavior, when generating parameter names, is to use @p1, @p2, and so on for the various parameters. Passing true for the <paramref
-             name="useColumnsForParameterNames" />
+            >The default behavior, when generating parameter names, is to use @p1, @p2, and so on for the various parameters. Passing true for the <paramref name="useColumnsForParameterNames" />
 
             
 
-             parameter lets you force the <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             parameter lets you force the <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -1317,8 +1190,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNameMaxLength" />
+                >The <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNameMaxLength" />
 
                 
 
@@ -1327,8 +1199,7 @@
             </item>
             <item>
               <para
-                >The generated parameter name meets the criteria specified in the <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNamePattern" />
+                >The generated parameter name meets the criteria specified in the <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterNamePattern" />
 
                 
 
@@ -1337,8 +1208,7 @@
             </item>
             <item>
               <para
-                >A <see
-                 cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterMarkerFormat" />
+                >A <see cref="F:System.Data.Common.DbMetaDataColumnNames.ParameterMarkerFormat" />
 
                 
 
@@ -1350,8 +1220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >Gets the automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -1361,8 +1230,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The automatically generated <see
-             cref="T:System.Data.Odbc.OdbcCommand" />
+            >The automatically generated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
             
 
@@ -1370,7 +1238,11 @@
           >
         </returns>
         <param name="useColumnsForParameterNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1402,7 +1274,11 @@
           <para>The quoted version of the identifier. Embedded quotes within the identifier are correctly escaped.</para>
         </returns>
         <param name="unquotedIdentifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1440,24 +1316,30 @@
           <para>The quoted version of the identifier. Embedded quotes within the identifier are correctly escaped.</para>
         </returns>
         <param name="unquotedIdentifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The original unquoted identifier.</param
         >
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When a connection is passed, causes the managed wrapper to get the quote character from the ODBC driver, calling SQLGetInfo(SQL_IDENTIFIER_QUOTE_CHAR). When no connection is passed, the string is quoted using values from <see
-           cref="P:System.Data.Common.DbCommandBuilder.QuotePrefix" />
+          When a connection is passed, causes the managed wrapper to get the quote character from the ODBC driver, calling SQLGetInfo(SQL_IDENTIFIER_QUOTE_CHAR). When no connection is passed, the string is quoted using values from <see cref="P:System.Data.Common.DbCommandBuilder.QuotePrefix" />
 
           
 
-           and <see
-           cref="P:System.Data.Common.DbCommandBuilder.QuoteSuffix" />
+           and <see cref="P:System.Data.Common.DbCommandBuilder.QuoteSuffix" />
 
           
 
@@ -1572,7 +1454,11 @@
           <para>The unquoted identifier, with embedded quotes correctly unescaped.</para>
         </returns>
         <param name="quotedIdentifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1610,19 +1496,26 @@
           <para>The unquoted identifier, with embedded quotes correctly unescaped.</para>
         </returns>
         <param name="quotedIdentifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identifier that will have its embedded quotes removed.</param
         >
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcConnection" />
+          The <see cref="T:System.Data.Odbc.OdbcConnection" />
 
           
 

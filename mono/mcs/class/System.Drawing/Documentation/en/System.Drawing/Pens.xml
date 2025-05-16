@@ -17,13 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Pen" />
+        >The <see cref="T:System.Drawing.Pen" />
 
         
 
          objects returned by this class are immutable, meaning their properties cannot be changed. To see the colors represented by pens in this class, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+          >Colors by Name</see
+        >
 
         
 
@@ -48,7 +49,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -58,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -87,7 +89,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -97,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -123,7 +126,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -133,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -159,7 +163,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -169,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -195,7 +200,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -205,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -231,7 +237,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -241,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -267,7 +274,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -277,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -303,7 +311,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -313,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -342,7 +351,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -352,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -378,7 +388,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -388,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -414,7 +425,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -424,8 +437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -450,7 +462,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -460,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -486,7 +499,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -496,8 +511,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -522,7 +536,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -532,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -558,7 +573,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -568,8 +585,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -594,7 +610,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -604,8 +622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -630,7 +647,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -640,8 +659,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -669,7 +687,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -679,8 +699,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -705,7 +724,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -715,8 +736,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -741,7 +761,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -751,8 +773,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -777,7 +798,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -787,8 +810,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -813,7 +835,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -823,8 +847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -849,7 +872,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -859,8 +884,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -888,7 +912,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -898,8 +924,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -924,7 +949,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -934,8 +961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -960,7 +986,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -970,8 +998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -996,7 +1023,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1006,8 +1035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1035,7 +1063,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1045,8 +1075,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1074,7 +1103,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1084,8 +1115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1110,7 +1140,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1120,8 +1152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1146,7 +1177,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1156,8 +1189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1182,7 +1214,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1192,8 +1226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1218,7 +1251,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1228,8 +1263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1257,7 +1291,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1267,8 +1303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1296,7 +1331,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1306,8 +1343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1335,7 +1371,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1345,8 +1383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1374,7 +1411,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1384,8 +1423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1410,7 +1448,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1420,8 +1460,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1446,7 +1485,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1456,8 +1497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1485,7 +1525,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1495,8 +1537,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1521,7 +1562,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1531,8 +1574,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1557,7 +1599,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1567,8 +1611,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1593,7 +1636,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1603,8 +1648,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1632,7 +1676,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1642,8 +1688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1671,7 +1716,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1681,8 +1728,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1707,7 +1753,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1717,8 +1765,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1743,7 +1790,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1753,8 +1802,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1779,7 +1827,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1789,8 +1839,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1815,7 +1864,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1825,8 +1876,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1851,7 +1901,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1861,8 +1913,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1887,7 +1938,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1897,8 +1950,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1923,7 +1975,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1933,8 +1987,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1962,7 +2015,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -1972,8 +2027,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -1998,7 +2052,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2008,8 +2064,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2034,7 +2089,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2044,8 +2101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2070,7 +2126,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2080,8 +2138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2106,7 +2163,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2116,8 +2175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2142,7 +2200,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2152,8 +2212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2178,7 +2237,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2188,8 +2249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2214,7 +2274,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2224,8 +2286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2253,7 +2314,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2263,8 +2326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2289,7 +2351,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2299,8 +2363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2328,7 +2391,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2338,8 +2403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2364,7 +2428,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2374,8 +2440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2400,7 +2465,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2410,8 +2477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2436,7 +2502,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2446,8 +2514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2475,7 +2542,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2485,8 +2554,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2511,7 +2579,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2521,8 +2591,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2547,7 +2616,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2557,8 +2628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2583,7 +2653,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2593,8 +2665,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2622,7 +2693,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2632,8 +2705,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2661,7 +2733,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2671,8 +2745,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2700,7 +2773,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2710,8 +2785,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2739,7 +2813,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2749,8 +2825,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2778,7 +2853,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2788,8 +2865,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2817,7 +2893,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2827,8 +2905,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2853,7 +2930,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2863,8 +2942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2889,7 +2967,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2899,8 +2979,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2925,7 +3004,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2935,8 +3016,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2961,7 +3041,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -2971,8 +3053,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -2997,7 +3078,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3007,8 +3090,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3036,7 +3118,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3046,8 +3130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3072,7 +3155,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3082,8 +3167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3111,7 +3195,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3121,8 +3207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3150,7 +3235,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3160,8 +3247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3189,7 +3275,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3199,8 +3287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3228,7 +3315,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3238,8 +3327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3267,7 +3355,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3277,8 +3367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3306,7 +3395,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3316,8 +3407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3345,7 +3435,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3355,8 +3447,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3384,7 +3475,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3394,8 +3487,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3420,7 +3512,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3430,8 +3524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3456,7 +3549,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3466,8 +3561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3492,7 +3586,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3502,8 +3598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3531,7 +3626,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3541,8 +3638,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3567,7 +3663,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3577,8 +3675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3603,7 +3700,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3613,8 +3712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3639,7 +3737,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3649,8 +3749,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3675,7 +3774,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3685,8 +3786,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3711,7 +3811,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3721,8 +3823,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3747,7 +3848,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3757,8 +3860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3783,7 +3885,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3793,8 +3897,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3822,7 +3925,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3832,8 +3937,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3858,7 +3962,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3868,8 +3974,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3897,7 +4002,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3907,8 +4014,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3936,7 +4042,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3946,8 +4054,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -3972,7 +4079,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -3982,8 +4091,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4008,7 +4116,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4018,8 +4128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4044,7 +4153,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4054,8 +4165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4080,7 +4190,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4090,8 +4202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4116,7 +4227,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4126,8 +4239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4152,7 +4264,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4162,8 +4276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4188,7 +4301,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4198,8 +4313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4224,7 +4338,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4234,8 +4350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4260,7 +4375,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4270,8 +4387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4296,7 +4412,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4306,8 +4424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4335,7 +4452,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4345,8 +4464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4371,7 +4489,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4381,8 +4501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4407,7 +4526,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4417,8 +4538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4443,7 +4563,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4453,8 +4575,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4479,7 +4600,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4489,8 +4612,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4515,7 +4637,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4525,8 +4649,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4551,7 +4674,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4561,8 +4686,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4587,7 +4711,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4597,8 +4723,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4623,7 +4748,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4633,8 +4760,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4659,7 +4785,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4669,8 +4797,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4695,7 +4822,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4705,8 +4834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4734,7 +4862,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4744,8 +4874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4770,7 +4899,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4780,8 +4911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4806,7 +4936,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4816,8 +4948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4842,7 +4973,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4852,8 +4985,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4878,7 +5010,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4888,8 +5022,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4914,7 +5047,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4924,8 +5059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4953,7 +5087,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4963,8 +5099,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -4989,7 +5124,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -4999,8 +5136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -5025,7 +5161,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -5035,8 +5173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -5061,7 +5198,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -5071,8 +5210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -5097,7 +5235,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -5107,8 +5247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -5133,7 +5272,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -5143,8 +5284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -5169,7 +5309,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -5179,8 +5321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 
@@ -5208,7 +5349,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >To see the color represented by this pen and other pens in this class, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >
 
             
 
@@ -5218,8 +5361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A system-defined <see
-             cref="T:System.Drawing.Pen" />
+            >A system-defined <see cref="T:System.Drawing.Pen" />
 
             
 

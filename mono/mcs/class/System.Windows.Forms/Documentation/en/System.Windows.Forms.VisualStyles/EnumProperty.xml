@@ -13,23 +13,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
 
         
 
-         enumeration represents a set of enumerated properties that describe visual style elements. The <see
-         cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
+         enumeration represents a set of enumerated properties that describe visual style elements. The <see cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
 
         
 
-         values are used as an argument in the <see
-         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
+         values are used as an argument in the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
         
 
-         method to specify which property value to retrieve for the element that the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+         method to specify which property value to retrieve for the element that the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
         
 
@@ -53,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.BackgroundType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.BackgroundType" />
 
             
 
@@ -77,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.BorderType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.BorderType" />
 
             
 
@@ -101,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.ContentAlignment" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.ContentAlignment" />
 
             
 
@@ -125,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.FillType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.FillType" />
 
             
 
@@ -149,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.GlyphFontSizingType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.GlyphFontSizingType" />
 
             
 
@@ -173,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.GlyphType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.GlyphType" />
 
             
 
@@ -197,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.HorizontalAlign" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.HorizontalAlign" />
 
             
 
@@ -221,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.IconEffect" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.IconEffect" />
 
             
 
@@ -245,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.ImageOrientation" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.ImageOrientation" />
 
             
 
@@ -269,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.ImageSelectType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.ImageSelectType" />
 
             
 
@@ -293,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.OffsetType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.OffsetType" />
 
             
 
@@ -317,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.SizingType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.SizingType" />
 
             
 
@@ -341,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.TextShadowType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.TextShadowType" />
 
             
 
@@ -365,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.TrueSizeScalingType" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.TrueSizeScalingType" />
 
             
 
@@ -389,8 +371,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.VisualStyles.VerticalAlignment" />
+            >One of the <see cref="T:System.Windows.Forms.VisualStyles.VerticalAlignment" />
 
             
 

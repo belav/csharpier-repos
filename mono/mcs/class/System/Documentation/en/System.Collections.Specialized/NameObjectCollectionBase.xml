@@ -41,52 +41,44 @@
       <para>The underlying structure for this class is a hash table.</para>
       <para>Each element is a key/value pair.</para>
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+        >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+         is the number of elements the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+         can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
         
 
         , the capacity is automatically increased as required through reallocation.</para
       >
       <para
-        >The hash code provider dispenses hash codes for keys in the <see
-         cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+        >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
         
 
-         instance. The default hash code provider is the <see
-         cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
-
-        
-
-        .</para
-      >
-      <para
-        >The comparer determines whether two keys are equal. The default comparer is the <see
-         cref="T:System.Collections.CaseInsensitiveComparer" />
+         instance. The default hash code provider is the <see cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
 
         
 
         .</para
       >
       <para
-        >In .NET Framework version 1.0, this class uses culture-sensitive string comparisons. However, in .NET Framework version 1.1 and later, this class uses <see
-         cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+        >The comparer determines whether two keys are equal. The default comparer is the <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
         
 
-         when comparing strings. For more information about how culture affects comparisons and sorting, see <format
-         type="text/html">
+        .</para
+      >
+      <para
+        >In .NET Framework version 1.0, this class uses culture-sensitive string comparisons. However, in .NET Framework version 1.1 and later, this class uses <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+        
+
+         when comparing strings. For more information about how culture affects comparisons and sorting, see <format type="text/html">
           <a href="a097acf0-0bbe-46ac-8d54-b6f2bfd3fc6a"
             >Comparing and Sorting Data for a Specific Culture</a
           >
@@ -97,8 +89,7 @@
 
         
 
-        and <format
-         type="text/html">
+        and <format type="text/html">
           <a href="579ef891-1f83-4c63-9ebd-2f40406b5b91"
             >Performing Culture-Insensitive String Operations</a
           >
@@ -111,8 +102,7 @@
       <para>null is allowed as a key or as a value.</para>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="M:System.Collections.Specialized.NameObjectCollectionBase.BaseGet(System.String)" />
+          >The <see cref="M:System.Collections.Specialized.NameObjectCollectionBase.BaseGet(System.String)" />
 
           
 
@@ -123,13 +113,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the abstract base class for a collection of associated <see
-         cref="T:System.String" />
+        >Provides the abstract base class for a collection of associated <see cref="T:System.String" />
 
         
 
-         keys and <see
-         cref="T:System.Object" />
+         keys and <see cref="T:System.Object" />
 
         
 
@@ -156,47 +144,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             instance. The default hash code provider is the <see
-             cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+             instance. The default hash code provider is the <see cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. The default comparer is the <see
-             cref="T:System.Collections.CaseInsensitiveComparer" />
+            >The comparer determines whether two keys are equal. The default comparer is the <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
             
 
@@ -207,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -238,39 +218,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object combines the comparer and the hash code provider.  The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object combines the comparer and the hash code provider.  The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -281,13 +255,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             class that is empty, has the default initial capacity, and uses the specified <see
-             cref="T:System.Collections.IEqualityComparer" />
+             class that is empty, has the default initial capacity, and uses the specified <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -295,12 +267,15 @@
           >
         </summary>
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
@@ -328,65 +303,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             instance. The default hash code provider is the <see
-             cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. The default comparer is the <see
-             cref="T:System.Collections.CaseInsensitiveComparer" />
+             instance. The default hash code provider is the <see cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >The comparer determines whether two keys are equal. The default comparer is the <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            .</para
+          >
+          <para
+            >This constructor is an O(<paramref name="n" />
 
             
 
-             is <paramref
-             name="capacity" />
+            ) operation, where <paramref name="n" />
+
+            
+
+             is <paramref name="capacity" />
 
             
 
@@ -396,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -405,12 +369,15 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of entries that the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+          The approximate number of entries that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
@@ -447,47 +414,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             instance. The default hash code provider is the <see
-             cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
+             instance. The default hash code provider is the <see cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
 
             
 
             .</para
           >
           <para
-            >The comparer determines whether two keys are equal. The default comparer is the <see
-             cref="T:System.Collections.CaseInsensitiveComparer" />
+            >The comparer determines whether two keys are equal. The default comparer is the <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
             
 
@@ -498,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -507,29 +466,34 @@
           >
         </summary>
         <param name="hashProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           that will supply the hash codes for all keys in the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           that will supply the hash codes for all keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
            instance.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -559,57 +523,48 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             object is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >The <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             object combines the comparer and the hash code provider.  The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object combines the comparer and the hash code provider.  The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .  The comparer determines whether two keys are equal.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is the <paramref
-             name="capacity" />
+             is the <paramref name="capacity" />
 
             
 
@@ -619,13 +574,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             class that is empty, has the specified initial capacity, and uses the specified <see
-             cref="T:System.Collections.IEqualityComparer" />
+             class that is empty, has the specified initial capacity, and uses the specified <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
@@ -633,24 +586,30 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of entries that the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+          The approximate number of entries that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
            object can initially contain.</param
         >
         <param name="equalityComparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IEqualityComparer" />
+          The <see cref="T:System.Collections.IEqualityComparer" />
 
           
 
@@ -686,18 +645,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             class that is serializable and uses the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class that is serializable and uses the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -705,34 +661,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object that contains the information required to serialize the new <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           object that contains the information required to serialize the new <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
            instance.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object that contains the source and destination of the serialized stream associated with the new <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           object that contains the source and destination of the serialized stream associated with the new <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
@@ -770,65 +730,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity of a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity of a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can hold. As elements are added to a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             can hold. As elements are added to a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             , the capacity is automatically increased as required by reallocating the internal array.</para
           >
           <para
-            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The hash code provider dispenses hash codes for keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The hash code provider dispenses hash codes for keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             instance. The default hash code provider is the <see
-             cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
-
-            
-
-            .</para
-          >
-          <para
-            >The comparer determines whether two keys are equal. The default comparer is the <see
-             cref="T:System.Collections.CaseInsensitiveComparer" />
+             instance. The default hash code provider is the <see cref="T:System.Collections.CaseInsensitiveHashCodeProvider" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >The comparer determines whether two keys are equal. The default comparer is the <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            .</para
+          >
+          <para
+            >This constructor is an O(<paramref name="n" />
 
             
 
-             is <paramref
-             name="capacity" />
+            ) operation, where <paramref name="n" />
+
+            
+
+             is <paramref name="capacity" />
 
             
 
@@ -838,8 +788,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -847,41 +796,49 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of entries that the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+          The approximate number of entries that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
            instance can initially contain.</param
         >
         <param name="hashProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IHashCodeProvider" />
+          The <see cref="T:System.Collections.IHashCodeProvider" />
 
           
 
-           that will supply the hash codes for all keys in the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           that will supply the hash codes for all keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
            instance.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -912,36 +869,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+            >If <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
-             already equals the capacity, the capacity of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             already equals the capacity, the capacity of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
              is increased by automatically reallocating the internal array, and the existing elements are copied to the new array before the new element is added.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+            >If <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
-             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref
-             name="n" />
+             is less than the capacity, this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -951,8 +902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an entry with the specified key and value into the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Adds an entry with the specified key and value into the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -960,24 +910,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            key of the entry to add. The key can be null.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1016,8 +972,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all entries from the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Removes all entries from the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1052,8 +1007,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the entry at the specified index of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets the value of the entry at the specified index of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1063,8 +1017,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1072,7 +1025,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1110,8 +1067,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the first entry with the specified key from the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets the value of the first entry with the specified key from the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1121,8 +1077,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -1130,12 +1085,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -1163,18 +1121,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1184,13 +1139,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
-             array that contains all the keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             array that contains all the keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1200,13 +1153,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             array that contains all the keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             array that contains all the keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1235,18 +1186,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1256,13 +1204,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Object" />
+            >Returns an <see cref="T:System.Object" />
 
             
 
-             array that contains all the values in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             array that contains all the values in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1272,13 +1218,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             array that contains all the values in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             array that contains all the values in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1309,18 +1253,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1330,8 +1271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of the specified type that contains all the values in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Returns an array of the specified type that contains all the values in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1341,8 +1281,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of the specified type that contains all the values in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >An array of the specified type that contains all the values in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1350,12 +1289,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -1389,8 +1331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key of the entry at the specified index of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets the key of the entry at the specified index of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1400,8 +1341,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1409,7 +1349,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1441,8 +1385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1452,8 +1395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >true if the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1484,13 +1426,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >If the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             does not contain an element with the specified key, the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             does not contain an element with the specified key, the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1498,18 +1438,15 @@
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1519,8 +1456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the entries with the specified key from the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Removes the entries with the specified key from the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1528,12 +1464,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -1564,18 +1503,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1585,8 +1521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the entry at the specified index of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Removes the entry at the specified index of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1594,7 +1529,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1629,8 +1568,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the value of the entry at the specified index of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Sets the value of the entry at the specified index of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1638,19 +1576,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the entry to set.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1686,13 +1631,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the value of the first entry with the specified key in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Sets the value of the first entry with the specified key in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             instance, if found; otherwise, adds an entry with the specified key and value into the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             instance, if found; otherwise, adds an entry with the specified key and value into the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1700,24 +1643,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            key of the entry to set. The key can be null.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1742,31 +1691,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The capacity is the number of elements that the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >The capacity is the number of elements that the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             can store. <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             can store. <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
-             is the number of elements that are actually in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             is the number of elements that are actually in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
             .</para
           >
           <para
-            >The capacity is always greater than or equal to <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+            >The capacity is always greater than or equal to <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
-            . If <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+            . If <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1777,8 +1721,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value pairs contained in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1813,23 +1756,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1840,66 +1779,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -1912,8 +1839,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1923,13 +1849,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             for the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1964,18 +1888,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -1985,13 +1906,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface and returns the data needed to serialize the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             interface and returns the data needed to serialize the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -1999,34 +1918,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object that contains the information required to serialize the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           object that contains the information required to serialize the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
            instance.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           object that contains the source and destination of the serialized stream associated with the <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           object that contains the source and destination of the serialized stream associated with the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
@@ -2057,8 +1980,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -2094,13 +2016,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase.KeysCollection" />
+            >Gets a <see cref="T:System.Collections.Specialized.NameObjectCollectionBase.KeysCollection" />
 
             
 
-             instance that contains all the keys in the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             instance that contains all the keys in the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -2134,31 +2054,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the <see
-             cref="M:System.Collections.Specialized.NameObjectCollectionBase.OnDeserialization(System.Object)" />
+            >While the <see cref="M:System.Collections.Specialized.NameObjectCollectionBase.OnDeserialization(System.Object)" />
 
             
 
-             method is not visible to COM clients by default, inheriting the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             method is not visible to COM clients by default, inheriting the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
              class can expose it and can cause undesirable behavior in COM clients.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -2168,8 +2083,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -2177,7 +2091,11 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2209,39 +2127,33 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The specified array must be of a compatible type.</para>
           <para
-            >This method uses <see
-             cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Array.Copy(System.Array,System.Array,System.Int32)" />
 
             
 
              to copy the elements.</para
           >
           <para
-            >While the <see
-             cref="M:System.Collections.Specialized.NameObjectCollectionBase.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
+            >While the <see cref="M:System.Collections.Specialized.NameObjectCollectionBase.System#Collections#ICollection#CopyTo(System.Array,System.Int32)" />
 
             
 
-             method is not visible to COM clients by default, inheriting the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             method is not visible to COM clients by default, inheriting the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
              class can expose it and can cause undesirable behavior in COM clients.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
+             is <see cref="P:System.Collections.Specialized.NameObjectCollectionBase.Count" />
 
             
 
@@ -2251,13 +2163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Copies the entire <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -2265,34 +2175,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+           that is the destination of the elements copied from <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -2323,18 +2237,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >A <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             object is not synchronized. Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object is not synchronized. Derived classes can provide a synchronized version of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -2342,8 +2253,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -2355,8 +2265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -2388,33 +2297,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             class using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             class using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             property of the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             object, not directly on the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object, not directly on the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
-             object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+             object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 
@@ -2422,8 +2325,7 @@
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >The following code example shows how to lock the collection using the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >The following code example shows how to lock the collection using the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -2435,8 +2337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Specialized.NameObjectCollectionBase" />
 
             
 

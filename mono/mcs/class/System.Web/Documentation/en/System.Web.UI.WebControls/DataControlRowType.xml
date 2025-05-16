@@ -13,51 +13,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DataControlRowType" />
+        >The <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
         
 
-         enumeration identifies the function of rows in a data control. It is used by the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         enumeration identifies the function of rows in a data control. It is used by the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         and <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
          controls to distinguish between rows that display data and rows that display other user interface (UI) elements, such as a header row, row separator, or pager buttons.</para
       >
       <para
-        >You can use the <see
-         cref="T:System.Web.UI.WebControls.DataControlRowType" />
+        >You can use the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
         
 
-         enumeration to identify the type of a <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+         enumeration to identify the type of a <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+         or <see cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
         
 
-         object when you enumerate through a <see
-         cref="T:System.Web.UI.WebControls.GridViewRowCollection" />
+         object when you enumerate through a <see cref="T:System.Web.UI.WebControls.GridViewRowCollection" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+         or <see cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
 
         
 
-         collection. If you are writing a data control that creates rows, you can use the <see
-         cref="T:System.Web.UI.WebControls.DataControlRowType" />
+         collection. If you are writing a data control that creates rows, you can use the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
         
 
@@ -67,13 +58,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the function of a row in a data control, such as a <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        >Specifies the function of a row in a data control, such as a <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         or <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -93,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A data row of a data control. Only <see
-             cref="F:System.Web.UI.WebControls.DataControlRowType.DataRow" />
+            >A data row of a data control. Only <see cref="F:System.Web.UI.WebControls.DataControlRowType.DataRow" />
 
             
 

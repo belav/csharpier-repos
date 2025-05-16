@@ -20,8 +20,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For more information, see the existing documentation for STATSTG in the MSDN library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 

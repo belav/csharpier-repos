@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeTypeParameterCollection" />
+        >The <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeTypeParameter" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeTypeParameter" />
 
         
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeTypeParameter" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeTypeParameter" />
 
         
 
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new, empty instance of the <see
-             cref="T:System.CodeDom.CodeTypeParameterCollection" />
+            >Initializes a new, empty instance of the <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
             
 
@@ -107,13 +103,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeParameterCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
             
 
-             class containing the specified array of <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+             class containing the specified array of <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -121,12 +115,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          An array of <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -157,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeParameterCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
             
 
@@ -166,12 +162,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeParameterCollection" />
+          A <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
           
 
@@ -205,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -218,12 +216,15 @@
           <para>The zero-based index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          The <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -254,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -263,12 +263,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a data type for which to add the <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          The name of a data type for which to add the <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -302,8 +305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Copies the elements of the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -311,12 +313,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          An array of type <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -350,8 +355,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.CodeDom.CodeTypeParameterCollection" />
+            >Copies the elements of the specified <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
             
 
@@ -359,17 +363,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeParameterCollection" />
+          A <see cref="T:System.CodeDom.CodeTypeParameterCollection" />
 
           
 
-           containing the <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+           containing the <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -403,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the collection contains the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Determines whether the collection contains the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -414,8 +419,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >true if the <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -423,12 +427,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          The <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -463,8 +470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items in the collection to the specified one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the items in the collection to the specified one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -472,19 +478,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -518,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Gets the index in the collection of the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -529,8 +541,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >The zero-based index of the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -538,12 +549,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          The <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -578,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Inserts the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -587,19 +600,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which to insert the item. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          The <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 
@@ -661,8 +681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.CodeDom.CodeTypeParameter" />
+            >Removes the specified <see cref="T:System.CodeDom.CodeTypeParameter" />
 
             
 
@@ -670,12 +689,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeParameter" />
+          The <see cref="T:System.CodeDom.CodeTypeParameter" />
 
           
 

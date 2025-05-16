@@ -54,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
@@ -63,7 +62,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
@@ -103,7 +105,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -129,13 +135,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >A <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-             object is used in conjunction with a <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+             object is used in conjunction with a <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -148,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
@@ -157,14 +160,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the fault code. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -196,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
@@ -205,14 +215,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the fault code. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,13 +267,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >A <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-             object with the created SOAP fault subcode in the <see
-             cref="P:System.ServiceModel.FaultCode.SubCode" />
+             object with the created SOAP fault subcode in the <see cref="P:System.ServiceModel.FaultCode.SubCode" />
 
             
 
@@ -293,13 +309,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >A <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-             instance with the created SOAP fault subcode in the <see
-             cref="P:System.ServiceModel.FaultCode.SubCode" />
+             instance with the created SOAP fault subcode in the <see cref="P:System.ServiceModel.FaultCode.SubCode" />
 
             
 
@@ -307,14 +321,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name for the fault subcode. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -351,13 +373,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >A <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-             object with the created SOAP fault subcode in the <see
-             cref="P:System.ServiceModel.FaultCode.SubCode" />
+             object with the created SOAP fault subcode in the <see cref="P:System.ServiceModel.FaultCode.SubCode" />
 
             
 
@@ -395,13 +415,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultCode" />
+            >A <see cref="T:System.ServiceModel.FaultCode" />
 
             
 
-             object with the created SOAP fault subcode in <see
-             cref="P:System.ServiceModel.FaultCode.SubCode" />
+             object with the created SOAP fault subcode in <see cref="P:System.ServiceModel.FaultCode.SubCode" />
 
             
 
@@ -409,14 +427,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name for the fault subcode. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

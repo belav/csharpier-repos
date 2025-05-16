@@ -63,8 +63,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
 
             
 
@@ -93,13 +92,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not directly initialize the <see
-             cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            >This method does not directly initialize the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
 
             
 
-             class.  Calling this method is equivalent to calling the <see
-             cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" />
+             class.  Calling this method is equivalent to calling the <see cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" />
 
             
 
@@ -109,8 +106,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
 
             
 
@@ -118,7 +114,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
           >
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,8 +150,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
 
             
 
@@ -159,7 +158,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
           >
         </summary>
         <param name="cspParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -187,13 +190,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not directly initialize the <see
-             cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            >This method does not directly initialize the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
 
             
 
-             class.  Calling this method is equivalent to calling the <see
-             cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" />
+             class.  Calling this method is equivalent to calling the <see cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" />
 
             
 
@@ -203,8 +204,7 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
 
             
 
@@ -212,7 +212,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
           >
         </summary>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -292,7 +296,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
           <para>Fills an array of bytes with a cryptographically strong sequence of random values.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -328,7 +336,11 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
           <para>Fills an array of bytes with a cryptographically strong sequence of random nonzero values.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -31,21 +31,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+        >The <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
         
 
-         class is provided to enable developers to apply a template to the steps in a control that acts as a wizard. The <see
-         cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+         class is provided to enable developers to apply a template to the steps in a control that acts as a wizard. The <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
         
 
          class is intended to be used primarily by control developers.</para
       >
       <para
-        >You can apply a theme to <see
-         cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+        >You can apply a theme to <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
         
 
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
             
 
@@ -102,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the template for displaying the content of a step in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets or sets the template for displaying the content of a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
@@ -130,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the syntax includes setting the <see
-             cref="P:System.Web.UI.WebControls.TemplatedWizardStep.ContentTemplateContainer" />
+            >Although the syntax includes setting the <see cref="P:System.Web.UI.WebControls.TemplatedWizardStep.ContentTemplateContainer" />
 
             
 
@@ -141,13 +135,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the container that a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets the container that a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control uses to create a <see
-             cref="P:System.Web.UI.WebControls.TemplatedWizardStep.ContentTemplate" />
+             control uses to create a <see cref="P:System.Web.UI.WebControls.TemplatedWizardStep.ContentTemplate" />
 
             
 
@@ -180,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the template for displaying the navigation user interface (UI) of a step in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets or sets the template for displaying the navigation user interface (UI) of a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
@@ -213,21 +204,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the syntax includes setting the <see
-             cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplateContainer" />
+            >Although the syntax includes setting the <see cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplateContainer" />
 
             
 
-             property, it is for internal use only, so the property is effectively read-only. Your code should verify that the <see
-             cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplateContainer" />
+             property, it is for internal use only, so the property is effectively read-only. Your code should verify that the <see cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplateContainer" />
 
             
 
              property is not null before referencing it.</para
           >
           <para
-            >This property is not bindable in visual designers, but is bindable at runtime. For more information, see <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >This property is not bindable in visual designers, but is bindable at runtime. For more information, see <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -237,13 +225,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the container that a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets the container that a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control uses to create a <see
-             cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplate" />
+             control uses to create a <see cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplate" />
 
             
 
@@ -268,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the skin to apply to the <see
-             cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+            >Gets the skin to apply to the <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
             
 

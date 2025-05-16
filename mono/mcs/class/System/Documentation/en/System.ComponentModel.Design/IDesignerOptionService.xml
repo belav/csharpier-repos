@@ -23,23 +23,19 @@
 
         
 
-         provides an interface that can be used to retrieve and update the values of the Windows Forms Designer options, which are listed within the dialog displayed by the <ui
-        >Options</ui>
+         provides an interface that can be used to retrieve and update the values of the Windows Forms Designer options, which are listed within the dialog displayed by the <ui>Options</ui>
 
         
 
-         command of the <ui
-        >Tools</ui>
+         command of the <ui>Tools</ui>
 
         
 
-         menu of the Visual Studio development environment. The <see
-         cref="M:System.ComponentModel.Design.IDesignerOptionService.GetOptionValue(System.String,System.String)" />
+         menu of the Visual Studio development environment. The <see cref="M:System.ComponentModel.Design.IDesignerOptionService.GetOptionValue(System.String,System.String)" />
 
         
 
-         method retrieves the value of a specified option. The <see
-         cref="M:System.ComponentModel.Design.IDesignerOptionService.SetOptionValue(System.String,System.String,System.Object)" />
+         method retrieves the value of a specified option. The <see cref="M:System.ComponentModel.Design.IDesignerOptionService.SetOptionValue(System.String,System.String,System.Object)" />
 
         
 
@@ -49,13 +45,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to the designer options located on the <ui
-        >Tools</ui>
+        >Provides access to the designer options located on the <ui>Tools</ui>
 
         
 
-         menu under the <ui
-        >Options</ui>
+         menu under the <ui>Options</ui>
 
         
 
@@ -90,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="pageName" />
+            >The <paramref name="pageName" />
 
             
 
@@ -215,8 +208,7 @@
               </description>
               <description>
                 <para
-                  >true to automatically add a solution's custom controls and components to the <ui
-                  >Toolbox</ui>
+                  >true to automatically add a solution's custom controls and components to the <ui>Toolbox</ui>
 
                   
 
@@ -248,14 +240,22 @@
           <para>The value of the specified option.</para>
         </returns>
         <param name="pageName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the page that defines the option. </param
         >
         <param name="valueName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -290,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="pageName" />
+            >The <paramref name="pageName" />
 
             
 
@@ -415,8 +414,7 @@
               </description>
               <description>
                 <para
-                  >true to automatically add a solution's custom controls and components to the <ui
-                  >Toolbox</ui>
+                  >true to automatically add a solution's custom controls and components to the <ui>Toolbox</ui>
 
                   
 
@@ -444,21 +442,33 @@
           <para>Sets the value of the specified Windows Forms Designer option.</para>
         </summary>
         <param name="pageName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the page that defines the option. </param
         >
         <param name="valueName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the option property. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

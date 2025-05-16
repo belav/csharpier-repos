@@ -29,13 +29,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
+        >The <see cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
 
         
 
-         object is used to hold information about an exception that was thrown on the server to the client. The <see
-         cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
+         object is used to hold information about an exception that was thrown on the server to the client. The <see cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
 
         
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
 
             
 
@@ -83,21 +80,33 @@
           >
         </summary>
         <param name="exceptionType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the exception that occurred on the server. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message that accompanied the exception. </param
         >
         <param name="stackTrace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

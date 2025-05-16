@@ -43,8 +43,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -54,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -90,7 +88,9 @@
           <para>Use this constructor to provide compatibility with the unmanaged Microsoft Cryptographic API (CAPI).</para>
           <para
             >For more information about the HCERTSTORE handle, see the unmanaged CAPI documentation in the Platform SDK section of the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37118"
+              >MSDN Library</see
+            >
 
             
 
@@ -100,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -109,7 +108,11 @@
           >
         </summary>
         <param name="storeHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -142,8 +145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -153,13 +155,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+             class using the specified <see cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
 
             
 
@@ -167,7 +167,11 @@
           >
         </summary>
         <param name="storeLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,8 +204,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an X.509 store for the current user that corresponds to values enumerated by <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+            >Use this constructor to create an X.509 store for the current user that corresponds to values enumerated by <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
             
 
@@ -211,13 +214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+             class using the specified <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
             
 
@@ -225,7 +226,11 @@
           >
         </summary>
         <param name="storeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -252,8 +257,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -263,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -272,12 +275,15 @@
           >
         </summary>
         <param name="storeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string value that represents the store name. See <see
-           cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+          A string value that represents the store name. See <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
           
 
@@ -314,8 +320,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -325,18 +330,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+             class using the specified <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
             
 
-             and <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+             and <see cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
 
             
 
@@ -344,14 +346,22 @@
           >
         </summary>
         <param name="storeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that specifies the name of the X.509 certificate store. </param
         >
         <param name="storeLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -385,8 +395,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Use this constructor to create an <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -396,18 +405,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
-             class using a string that represents a value from the <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+             class using a string that represents a value from the <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
             
 
-             enumeration and a value from the <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+             enumeration and a value from the <see cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
 
             
 
@@ -415,19 +421,26 @@
           >
         </summary>
         <param name="storeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents a value from the <see
-           cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+          A string that represents a value from the <see cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
           
 
            enumeration. </param
         >
         <param name="storeLocation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -469,7 +482,11 @@
           <para>Adds a certificate to an X.509 certificate store.</para>
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -516,7 +533,11 @@
           <para>Adds a collection of certificates to an X.509 certificate store.</para>
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -547,13 +568,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns a snapshot of the X.509 certificate store. Note that subsequent <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Store.Add(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >This method returns a snapshot of the X.509 certificate store. Note that subsequent <see cref="M:System.Security.Cryptography.X509Certificates.X509Store.Add(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Store.Remove(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+             or <see cref="M:System.Security.Cryptography.X509Certificates.X509Store.Remove(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
@@ -672,18 +691,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to open an existing X.509 store. Note that you must have additional permissions, specified by <see
-             cref="T:System.Security.Permissions.StorePermissionFlags" />
+            >Use this method to open an existing X.509 store. Note that you must have additional permissions, specified by <see cref="T:System.Security.Permissions.StorePermissionFlags" />
 
             
 
-            , to enumerate the certificates in the store. You can create a new store by passing a store name that does not exist to the class constructor, and then using any of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.OpenFlags" />
+            , to enumerate the certificates in the store. You can create a new store by passing a store name that does not exist to the class constructor, and then using any of the <see cref="T:System.Security.Cryptography.X509Certificates.OpenFlags" />
 
             
 
-             flags except <see
-             cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.OpenExistingOnly" />
+             flags except <see cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.OpenExistingOnly" />
 
             
 
@@ -693,8 +709,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens an X.509 certificate store or creates a new store, depending on <see
-             cref="T:System.Security.Cryptography.X509Certificates.OpenFlags" />
+            >Opens an X.509 certificate store or creates a new store, depending on <see cref="T:System.Security.Cryptography.X509Certificates.OpenFlags" />
 
             
 
@@ -702,7 +717,11 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -744,7 +763,11 @@
           <para>Removes a certificate from an X.509 certificate store.</para>
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -791,7 +814,11 @@
           <para>Removes a range of certificates from an X.509 certificate store.</para>
         </summary>
         <param name="certificates">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -821,8 +848,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509Store.StoreHandle" />
+            >Use the <see cref="P:System.Security.Cryptography.X509Certificates.X509Store.StoreHandle" />
 
             
 
@@ -830,7 +856,9 @@
           >
           <para
             >For more information about the HCERTSTORE handle, see the unmanaged CAPI documentation in the Platform SDK section of the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=37118"
+              >MSDN Library</see
+            >
 
             
 
@@ -840,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.IntPtr" />
+            >Gets an <see cref="T:System.IntPtr" />
 
             
 

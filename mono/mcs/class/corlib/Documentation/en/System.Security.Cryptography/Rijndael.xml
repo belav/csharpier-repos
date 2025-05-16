@@ -31,28 +31,24 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This algorithm supports key lengths of 128, 192, or 256 bits.</para>
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Rijndael" />
+        >The <see cref="T:System.Security.Cryptography.Rijndael" />
 
         
 
-         class is the predecessor of the <see
-         cref="T:System.Security.Cryptography.Aes" />
+         class is the predecessor of the <see cref="T:System.Security.Cryptography.Aes" />
 
         
 
-         algorithm. You should use the <see
-         cref="T:System.Security.Cryptography.Aes" />
+         algorithm. You should use the <see cref="T:System.Security.Cryptography.Aes" />
 
         
 
-         algorithm instead of <see
-         cref="T:System.Security.Cryptography.Rijndael" />
+         algorithm instead of <see cref="T:System.Security.Cryptography.Rijndael" />
 
         
 
         . For more information, see the entry <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=200932"
+          cref="http://go.microsoft.com/fwlink/?LinkId=200932"
           >The Differences Between Rijndael and AES</see
         >
 
@@ -64,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the base class from which all implementations of the <see
-         cref="T:System.Security.Cryptography.Rijndael" />
+        >Represents the base class from which all implementations of the <see cref="T:System.Security.Cryptography.Rijndael" />
 
         
 
@@ -93,8 +88,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot create an instance of an abstract class. Application code will create a new instance of a derived class.</para>
           <para
-            >This method initializes the protected fields of <see
-             cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+            >This method initializes the protected fields of <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
 
             
 
@@ -146,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
@@ -179,13 +172,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >The default implementation of <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
-             is <see
-             cref="T:System.Security.Cryptography.RijndaelManaged" />
+             is <see cref="T:System.Security.Cryptography.RijndaelManaged" />
 
             
 
@@ -195,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a cryptographic object to perform the <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >Creates a cryptographic object to perform the <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
@@ -234,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Acceptable values for the <paramref
-             name="algName" />
+            >Acceptable values for the <paramref name="algName" />
 
             
 
@@ -245,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a cryptographic object to perform the specified implementation of the <see
-             cref="T:System.Security.Cryptography.Rijndael" />
+            >Creates a cryptographic object to perform the specified implementation of the <see cref="T:System.Security.Cryptography.Rijndael" />
 
             
 
@@ -258,12 +246,15 @@
           <para>A cryptographic object.</para>
         </returns>
         <param name="algName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the specific implementation of <see
-           cref="T:System.Security.Cryptography.Rijndael" />
+          The name of the specific implementation of <see cref="T:System.Security.Cryptography.Rijndael" />
 
           
 

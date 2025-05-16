@@ -21,64 +21,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creating the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+        >Creating the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         is part of a process that overrides the default way the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         is part of a process that overrides the default way the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes class instances. For example, suppose you want to serialize an object that is created from a DLL which has an inaccessible source. By using the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         serializes class instances. For example, suppose you want to serialize an object that is created from a DLL which has an inaccessible source. By using the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
         , you can augment or otherwise control how the object is serialized.</para
       >
       <para
-        >The members of the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+        >The members of the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         class correspond directly to a family of attribute classes that control serialization. For example, the <see
-         cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
+         class correspond directly to a family of attribute classes that control serialization. For example, the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
 
         
 
-         property must be set to an <see
-         cref="T:System.Xml.Serialization.XmlTextAttribute" />
+         property must be set to an <see cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
         
 
-        , which allows you to override serialization of a field or property by instructing the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        , which allows you to override serialization of a field or property by instructing the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         to serialize the property value as XML text. For a complete list of attributes that control serialization, see the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         to serialize the property value as XML text. For a complete list of attributes that control serialization, see the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
         .</para
       >
       <para
-        >For more details on using the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+        >For more details on using the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         with the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         with the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         class, see <format
-         type="text/html">
+         class, see <format type="text/html">
           <a href="5cc1c0b0-f94b-4525-9a41-88a582cd6668"
             >How to: Specify an Alternate Element Name for an XML Stream</a
           >
@@ -92,8 +81,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of attribute objects that control how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Represents a collection of attribute objects that control how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -121,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
@@ -154,8 +141,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the default constructor for the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Use the default constructor for the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
@@ -165,13 +151,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             class and customizes how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             class and customizes how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -179,7 +163,11 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -211,36 +199,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+            >The <see cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
 
             
 
-             can be applied to a member that returns an array of <see
-             cref="T:System.Xml.XmlAttribute" />
+             can be applied to a member that returns an array of <see cref="T:System.Xml.XmlAttribute" />
 
             
 
-             objects on deserialization. This allows the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             objects on deserialization. This allows the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to deserialize any attributes that do not have a corresponding member in the object being deserialized--thus those elements are "unknown" to the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to deserialize any attributes that do not have a corresponding member in the object being deserialized--thus those elements are "unknown" to the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
             . This is useful when the XML stream has been altered by an XML Web service, or when it is known that random data is always included with the XML stream.</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAnyAttribute" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAnyAttribute" />
 
             
 
-             property allows you to override the serialization of a member to which the <see
-             cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+             property allows you to override the serialization of a member to which the <see cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
 
             
 
@@ -250,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+            >Gets or sets the <see cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
 
             
 
@@ -283,36 +264,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >The <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-             can be applied to a member that returns an array of <see
-             cref="T:System.Xml.XmlElement" />
+             can be applied to a member that returns an array of <see cref="T:System.Xml.XmlElement" />
 
             
 
-             objects on deserialization. This allows the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             objects on deserialization. This allows the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to deserialize any elements that do not have a corresponding member in the object being deserialized--thus those elements are "unknown" to the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to deserialize any elements that do not have a corresponding member in the object being deserialized--thus those elements are "unknown" to the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
             . This is useful when the XML stream has been altered by an XML Web service, or when it is known that random data is always included with the XML stream.</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAnyElements" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAnyElements" />
 
             
 
-             property allows you to override the serialization of a member to function as a member to which the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+             property allows you to override the serialization of a member to function as a member to which the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -322,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Gets the collection of <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -356,8 +330,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are two ways in which a public field or public read/write property that returns an array is serialized by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >There are two ways in which a public field or public read/write property that returns an array is serialized by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -365,41 +338,34 @@
           >
           <para>In the default serialization, no attribute is applied to the member. When serialized, the array is serialized as a nested sequence of XML elements with the XML element name of the nested sequence taken from the member name.</para>
           <para
-            >To control the serialization more precisely, apply an <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+            >To control the serialization more precisely, apply an <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-             to the field or property. For example, you can change the generated XML element name from the default to a different name by setting the <see
-             cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
+             to the field or property. For example, you can change the generated XML element name from the default to a different name by setting the <see cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
 
             
 
              property to a new value.</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlArray" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlArray" />
 
             
 
-             property allows you to override the default serialization, as well as the serialization controlled by applying an <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+             property allows you to override the default serialization, as well as the serialization controlled by applying an <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-             to the member. For example, you can change the XML element name generated from the default (the member identifier) to a new value. In addition, if you apply an <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+             to the member. For example, you can change the XML element name generated from the default (the member identifier) to a new value. In addition, if you apply an <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-             to a member, it is overridden by any <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+             to a member, it is overridden by any <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-             that is assigned to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlArray" />
+             that is assigned to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlArray" />
 
             
 
@@ -409,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that specifies how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that specifies how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -442,63 +407,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
 
             
 
-             property allows you to specify the derived types that can be inserted into an array returned by a public field or public read/write property. For each new type you want the field or property to accept, create an <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+             property allows you to specify the derived types that can be inserted into an array returned by a public field or public read/write property. For each new type you want the field or property to accept, create an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
-             object and <see
-             cref="M:System.Xml.Serialization.XmlArrayItemAttributes.Add(System.Xml.Serialization.XmlArrayItemAttribute)" />
+             object and <see cref="M:System.Xml.Serialization.XmlArrayItemAttributes.Add(System.Xml.Serialization.XmlArrayItemAttribute)" />
 
             
 
-             it to the <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
+             it to the <see cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
 
             
 
-            ) returned by the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
+            ) returned by the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
 
             
 
-             property. (The new type must be derived from the type already accepted by the field or property.) <see
-             cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+             property. (The new type must be derived from the type already accepted by the field or property.) <see cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
 
             
 
-             the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             object and specify the type of the object that contains the field or property, and the name of the field or property. Construct an <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object and specify the type of the object that contains the field or property, and the name of the field or property. Construct an <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             with the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             with the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             object before calling <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+             object before calling <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
             
 
-             or <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+             or <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
 
             
 
@@ -508,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a collection of objects that specify how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a collection of objects that specify how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -542,76 +494,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, if no attribute is applied to a public field or public read/write property, it is serialized as an XML element. You can also instruct the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >By default, if no attribute is applied to a public field or public read/write property, it is serialized as an XML element. You can also instruct the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to generate an XML attribute by applying an <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             to generate an XML attribute by applying an <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
              to the field or property.</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+            >The <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
 
             
 
-             property allows you to override the default serialization, as well as the serialization controlled by applying an <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             property allows you to override the default serialization, as well as the serialization controlled by applying an <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-             to the member. To do this, create an <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             to the member. To do this, create an <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-             and set its properties (such as <see
-             cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
+             and set its properties (such as <see cref="P:System.Xml.Serialization.XmlAttributeAttribute.AttributeName" />
 
             
 
-            ). Assign the new object to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+            ). Assign the new object to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
 
             
 
-             property of an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             property of an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object. Add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             object. Add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             object and specify the type of the object that contains the field or property, and the name of the field or property. Lastly, create an <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object and specify the type of the object that contains the field or property, and the name of the field or property. Lastly, create an <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             using the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             using the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             object and call the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+             object and call the <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
             
 
-             or <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+             or <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
 
             
 
@@ -621,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that specifies how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that specifies how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -676,8 +613,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can specify the default value of an XML element or XML attribute by applying a <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >You can specify the default value of an XML element or XML attribute by applying a <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
@@ -696,26 +632,22 @@
    &lt;/complexType&gt;
  &lt;/schema&gt;</code>
           <para
-            >To override the default value, create an <see
-             cref="T:System.Object" />
+            >To override the default value, create an <see cref="T:System.Object" />
 
             
 
-             and assign it to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlDefaultValue" />
+             and assign it to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlDefaultValue" />
 
             
 
             .</para
           >
           <para
-            >If the value assigned to a field or property is equal to the default value for that field or property, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >If the value assigned to a field or property is equal to the default value for that field or property, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             does not serialize the value to the XML-instance. This is because the assigned value can be recovered from the XML schema. In other words, setting a field or property to its own default value is equivalent of not setting it at all. Likewise, if no value is set for the field or property, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             does not serialize the value to the XML-instance. This is because the assigned value can be recovered from the XML schema. In other words, setting a field or property to its own default value is equivalent of not setting it at all. Likewise, if no value is set for the field or property, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -752,28 +684,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each overridden member that is serialized as an XML element, you must add a new <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >For each overridden member that is serialized as an XML element, you must add a new <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
-             to an <see
-             cref="T:System.Xml.Serialization.XmlElementAttributes" />
+             to an <see cref="T:System.Xml.Serialization.XmlElementAttributes" />
 
             
 
-             by calling the <see
-             cref="M:System.Xml.Serialization.XmlElementAttributes.Add(System.Xml.Serialization.XmlElementAttribute)" />
+             by calling the <see cref="M:System.Xml.Serialization.XmlElementAttributes.Add(System.Xml.Serialization.XmlElementAttribute)" />
 
             
 
-             method. By default, an <see
-             cref="T:System.Xml.Serialization.XmlElementAttributes" />
+             method. By default, an <see cref="T:System.Xml.Serialization.XmlElementAttributes" />
 
             
 
-             object is created and assigned to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
+             object is created and assigned to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
 
             
 
@@ -783,8 +710,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of objects that specify how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets a collection of objects that specify how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -817,33 +743,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each identifier you want to override, you must create an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >For each identifier you want to override, you must create an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object, and set the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlEnum" />
+             object, and set the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlEnum" />
 
             
 
-             property to an <see
-             cref="T:System.Xml.Serialization.XmlEnumAttribute" />
+             property to an <see cref="T:System.Xml.Serialization.XmlEnumAttribute" />
 
             
 
-             that overrides the identifier. Add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             that overrides the identifier. Add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             object and specify both the <see
-             cref="T:System.Type" />
+             object and specify both the <see cref="T:System.Type" />
 
             
 
@@ -853,8 +773,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that specifies how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that specifies how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -881,54 +800,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, all public fields and public read/write properties are serialized by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >By default, all public fields and public read/write properties are serialized by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
             . That is, the value of each public field or property is persisted as an XML element or XML attribute in an XML-document instance.</para
           >
           <para
-            >To override the default serialization of a field or property, create an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >To override the default serialization of a field or property, create an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object, and set its <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlIgnore" />
+             object, and set its <see cref="P:System.Xml.Serialization.XmlAttributes.XmlIgnore" />
 
             
 
-             property to true. <see
-             cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+             property to true. <see cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
 
             
 
-             the object to an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             the object to an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
              object and specify the type of the object that contains the field or property to ignore, and the name of the field or property to ignore.</para
           >
           <para
-            >If an <see
-             cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+            >If an <see cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
 
             
 
-             is applied to a field or property, the field or property is ignored. However you can override that behavior by creating an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             is applied to a field or property, the field or property is ignored. However you can override that behavior by creating an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object, setting its <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlIgnore" />
+             object, setting its <see cref="P:System.Xml.Serialization.XmlAttributes.XmlIgnore" />
 
             
 
-             property to false, adding it to an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             property to false, adding it to an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -938,8 +848,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether or not the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that specifies whether or not the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -967,8 +876,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether to keep all namespace declarations when an object containing a member that returns an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+            >Gets or sets a value that specifies whether to keep all namespace declarations when an object containing a member that returns an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -1002,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that specifies how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that specifies how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -1036,13 +943,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, a public field or public read/write property is serialized as an XML element by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >By default, a public field or public read/write property is serialized as an XML element by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-            . However, it can force the field or property to be serialized as XML text by applying an <see
-             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+            . However, it can force the field or property to be serialized as XML text by applying an <see cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
             
 
@@ -1050,8 +955,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Xml.Serialization.XmlTextAttribute" />
+              >The <see cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
               
 
@@ -1059,28 +963,23 @@
             >
           </block>
           <para
-            >To override the default serialization of a field or property (that does not return an array), create an <see
-             cref="T:System.Xml.Serialization.XmlTextAttribute" />
+            >To override the default serialization of a field or property (that does not return an array), create an <see cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
             
 
-             and assign it to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
+             and assign it to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlText" />
 
             
 
-             property of an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             property of an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object. Add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             object. Add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -1090,8 +989,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that instructs the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -1124,33 +1022,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+            >The <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-             can be used to control how a type is serialized by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             can be used to control how a type is serialized by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-            . For example, by default, when a type is serialized, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            . For example, by default, when a type is serialized, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             uses the class name as the XML element name. By creating an <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             uses the class name as the XML element name. By creating an <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-            , setting the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlType" />
+            , setting the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlType" />
 
             
 
-             property to it, and creating an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             property to it, and creating an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -1160,13 +1052,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that specifies how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that specifies how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             serializes a class to which the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             serializes a class to which the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 

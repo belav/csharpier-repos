@@ -17,94 +17,77 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewImageColumn" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewImageColumn" />
 
         
 
-         class is a specialized type of the <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+         class is a specialized type of the <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         class used to logically host cells that display images. A <see
-         cref="T:System.Windows.Forms.DataGridViewImageColumn" />
+         class used to logically host cells that display images. A <see cref="T:System.Windows.Forms.DataGridViewImageColumn" />
 
         
 
-         has an associated <see
-         cref="T:System.Windows.Forms.DataGridViewImageCell" />
+         has an associated <see cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
         
 
-         in every <see
-         cref="T:System.Windows.Forms.DataGridViewRow" />
+         in every <see cref="T:System.Windows.Forms.DataGridViewRow" />
 
         
 
-         that intersects it. Each cell is capable of containing an <see
-         cref="T:System.Drawing.Image" />
+         that intersects it. Each cell is capable of containing an <see cref="T:System.Drawing.Image" />
 
         
 
-         or an <see
-         cref="T:System.Drawing.Icon" />
+         or an <see cref="T:System.Drawing.Icon" />
 
         
 
-        , depending on the value of the <see
-         cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+        , depending on the value of the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
         
 
          property. Displaying icons is useful to accommodate images with transparency.</para
       >
       <para
-        >By default, empty cells display a default error graphic. To prevent this graphic from appearing for cell values equal to null or <see
-         cref="F:System.DBNull.Value" />
+        >By default, empty cells display a default error graphic. To prevent this graphic from appearing for cell values equal to null or <see cref="F:System.DBNull.Value" />
 
         
 
-        , set the <see
-         cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+        , set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
         
 
-         property of the cell style object returned by the <see
-         cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
+         property of the cell style object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
 
         
 
-         property to null before adding rows to the control. This does not affect the row for new records, however. To prevent the error graphic from appearing in the row for new records when the control <see
-         cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" />
+         property to null before adding rows to the control. This does not affect the row for new records, however. To prevent the error graphic from appearing in the row for new records when the control <see cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" />
 
         
 
-         property value is true, you must also either explicitly set the cell value to null in a handler for the control <see
-         cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
+         property value is true, you must also either explicitly set the cell value to null in a handler for the control <see cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
 
         
 
-         event or set the column <see
-         cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+         event or set the column <see cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
 
         
 
-         property to an instance of a <see
-         cref="T:System.Windows.Forms.DataGridViewImageCell" />
+         property to an instance of a <see cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
         
 
-        -derived type with an overridden <see
-         cref="P:System.Windows.Forms.DataGridViewImageCell.DefaultNewRowValue" />
+        -derived type with an overridden <see cref="P:System.Windows.Forms.DataGridViewImageCell.DefaultNewRowValue" />
 
         
 
          property that returns null. </para
       >
       <para
-        >The default sort mode for this column type is <see
-         cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />
+        >The default sort mode for this column type is <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.NotSortable" />
 
         
 
@@ -114,8 +97,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Hosts a collection of <see
-         cref="T:System.Windows.Forms.DataGridViewImageCell" />
+        >Hosts a collection of <see cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
         
 
@@ -133,13 +115,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor calls <see
-             cref="M:System.Windows.Forms.DataGridViewImageColumn.#ctor(System.Boolean)" />
+            >This constructor calls <see cref="M:System.Windows.Forms.DataGridViewImageColumn.#ctor(System.Boolean)" />
 
             
 
-             with a <paramref
-             name="valuesAreIcons" />
+             with a <paramref name="valuesAreIcons" />
 
             
 
@@ -149,13 +129,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewImageColumn" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewImageColumn" />
 
             
 
-             class, configuring it for use with cell values of type <see
-             cref="T:System.Drawing.Image" />
+             class, configuring it for use with cell values of type <see cref="T:System.Drawing.Image" />
 
             
 
@@ -200,18 +178,15 @@
               </term>
               <description>
                 <para
-                  >A new <see
-                   cref="T:System.Windows.Forms.DataGridViewImageCell" />
+                  >A new <see cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
                   
 
-                   with its <see
-                   cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+                   with its <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
                   
 
-                   property initialized to the <paramref
-                   name="valuesAreIcons" />
+                   property initialized to the <paramref name="valuesAreIcons" />
 
                   
 
@@ -227,8 +202,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="valuesAreIcons" />
+                  >The value of the <paramref name="valuesAreIcons" />
 
                   
 
@@ -239,18 +213,15 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" />
+                  >The <see cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+                   property of the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
                   
 
-                   object returned by the <see
-                   cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
+                   object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
 
                   
 
@@ -266,18 +237,15 @@
             <item>
               <term>
                 <para
-                  >The <see
-                   cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+                  >The <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+                   property of the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
                   
 
-                   object returned by the <see
-                   cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
+                   object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
 
                   
 
@@ -286,23 +254,19 @@
               </term>
               <description>
                 <para
-                  >A standard error graphic of type <see
-                   cref="T:System.Drawing.Icon" />
+                  >A standard error graphic of type <see cref="T:System.Drawing.Icon" />
 
                   
 
-                   if <paramref
-                   name="valuesAreIcons" />
+                   if <paramref name="valuesAreIcons" />
 
                   
 
-                   is true and type <see
-                   cref="T:System.Drawing.Bitmap" />
+                   is true and type <see cref="T:System.Drawing.Bitmap" />
 
                   
 
-                   if <paramref
-                   name="valuesAreIcons" />
+                   if <paramref name="valuesAreIcons" />
 
                   
 
@@ -312,13 +276,11 @@
             </item>
           </list>
           <para
-            >To ensure that the alpha channel of <see
-             cref="T:System.Drawing.Icon" />
+            >To ensure that the alpha channel of <see cref="T:System.Drawing.Icon" />
 
             
 
-             cell values is painted correctly, use this constructor with a <paramref
-             name="valuesAreIcons" />
+             cell values is painted correctly, use this constructor with a <paramref name="valuesAreIcons" />
 
             
 
@@ -328,13 +290,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewImageColumn" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewImageColumn" />
 
             
 
-             class, optionally configuring it for use with <see
-             cref="T:System.Drawing.Icon" />
+             class, optionally configuring it for use with <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -342,22 +302,23 @@
           >
         </summary>
         <param name="valuesAreIcons">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the <see
-           cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+          true to indicate that the <see cref="P:System.Windows.Forms.DataGridViewCell.Value" />
 
           
 
-           property of cells in this column will be set to values of type <see
-           cref="T:System.Drawing.Icon" />
+           property of cells in this column will be set to values of type <see cref="T:System.Drawing.Icon" />
 
           
 
-          ; false to indicate that they will be set to values of type <see
-           cref="T:System.Drawing.Image" />
+          ; false to indicate that they will be set to values of type <see cref="T:System.Drawing.Image" />
 
           
 
@@ -383,13 +344,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructors for the <see
-             cref="T:System.Windows.Forms.DataGridViewImageColumn" />
+            >The constructors for the <see cref="T:System.Windows.Forms.DataGridViewImageColumn" />
 
             
 
-             class initialize this property to a newly created <see
-             cref="T:System.Windows.Forms.DataGridViewImageCell" />
+             class initialize this property to a newly created <see cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
             
 
@@ -397,8 +356,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
-               cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+              >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
 
               
 
@@ -443,13 +401,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the cloned <see
-             cref="T:System.Windows.Forms.DataGridViewImageColumn" />
+             that represents the cloned <see cref="T:System.Windows.Forms.DataGridViewImageColumn" />
 
             
 
@@ -476,8 +432,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see
-             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+            >The default <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
             
 
@@ -514,18 +469,15 @@
               </term>
               <description>
                 <para
-                  >A standard error graphic of type <see
-                   cref="T:System.Drawing.Icon" />
+                  >A standard error graphic of type <see cref="T:System.Drawing.Icon" />
 
                   
 
-                   if the initial <see
-                   cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+                   if the initial <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
                   
 
-                   property value is true; otherwise, a standard error graphic of type <see
-                   cref="T:System.Drawing.Bitmap" />
+                   property value is true; otherwise, a standard error graphic of type <see cref="T:System.Drawing.Bitmap" />
 
                   
 
@@ -535,18 +487,15 @@
             </item>
           </list>
           <para
-            >These values override the value specified in the <see
-             cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
+            >These values override the value specified in the <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control, but may be overridden by other cell style properties. For more information, see <format
-             type="text/html">
+             control, but may be overridden by other cell style properties. For more information, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
@@ -557,96 +506,78 @@
             .</para
           >
           <para
-            >To prevent the standard error graphic from appearing for null or <see
-             cref="F:System.DBNull.Value" />
+            >To prevent the standard error graphic from appearing for null or <see cref="F:System.DBNull.Value" />
 
             
 
-             cell values, set the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             cell values, set the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property for this cell style object to null or your own error graphic before adding rows to the control. This does not affect the row for new records, however. To prevent the error graphic from appearing in the row for new records when the control <see
-             cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" />
+             property for this cell style object to null or your own error graphic before adding rows to the control. This does not affect the row for new records, however. To prevent the error graphic from appearing in the row for new records when the control <see cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" />
 
             
 
-             property value is true, you must also either explicitly set the cell value to null or your own error graphic in a handler for the control <see
-             cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
+             property value is true, you must also either explicitly set the cell value to null or your own error graphic in a handler for the control <see cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
 
             
 
-             event or set the column <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+             event or set the column <see cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
 
             
 
-             property to an instance of a <see
-             cref="T:System.Windows.Forms.DataGridViewImageCell" />
+             property to an instance of a <see cref="T:System.Windows.Forms.DataGridViewImageCell" />
 
             
 
-            -derived type with an overridden <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.DefaultNewRowValue" />
+            -derived type with an overridden <see cref="P:System.Windows.Forms.DataGridViewImageCell.DefaultNewRowValue" />
 
             
 
              property that returns null or your own error graphic. </para
           >
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
 
             
 
-             property has a value equal to the standard error graphic of type <see
-             cref="T:System.Drawing.Bitmap" />
+             property has a value equal to the standard error graphic of type <see cref="T:System.Drawing.Bitmap" />
 
             
 
-            , changing the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+            , changing the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
             
 
-             property value to true automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to true automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             to the standard error graphic of type <see
-             cref="T:System.Drawing.Icon" />
+             to the standard error graphic of type <see cref="T:System.Drawing.Icon" />
 
             
 
-            . If <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            . If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             has a value equal to the standard error graphic of type <see
-             cref="T:System.Drawing.Icon" />
+             has a value equal to the standard error graphic of type <see cref="T:System.Drawing.Icon" />
 
             
 
-            , changing the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+            , changing the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
             
 
-             property value to false automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to false automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             to the standard error graphic of type <see
-             cref="T:System.Drawing.Bitmap" />
+             to the standard error graphic of type <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -679,36 +610,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Description" />
+            >You can use the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Description" />
 
             
 
-             property to describe the image provided by the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
+             property to describe the image provided by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
+             or <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
 
             
 
              property. This description provides an accessible alternative to the image. Additionally, the description text is used when the cell value is copied onto the Clipboard.</para
           >
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.Description" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.Description" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.Description" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.Description" />
 
             
 
@@ -744,61 +669,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
 
             
 
-             property specifies an icons that is displayed in cells with no values when the column is not data-bound and the cell's <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             property specifies an icons that is displayed in cells with no values when the column is not data-bound and the cell's <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
              property is set to true. For a data-bound column whose cells do not have an associated image, a standard error graphic is displayed.</para
           >
           <para
-            >Using the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
+            >Using the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
 
             
 
-             property rather than the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
+             property rather than the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
 
             
 
-             property ensures that an alpha channel in an icon is painted correctly. If you want to display an <see
-             cref="T:System.Drawing.Image" />
+             property ensures that an alpha channel in an icon is painted correctly. If you want to display an <see cref="T:System.Drawing.Image" />
 
             
 
-             instead of an <see
-             cref="T:System.Drawing.Icon" />
+             instead of an <see cref="T:System.Drawing.Icon" />
 
             
 
-            , set the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
+            , set the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
 
             
 
-             property instead and set the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+             property instead and set the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
             
 
-             property to false. You can also set the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             property to false. You can also set the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
-             property of individual cells to indicate whether the cell displays the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
+             property of individual cells to indicate whether the cell displays the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
 
             
 
-             or the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
+             or the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
 
             
 
@@ -808,13 +722,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the icon displayed in the cells of this column when the cell's <see
-             cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+            >Gets or sets the icon displayed in the cells of this column when the cell's <see cref="P:System.Windows.Forms.DataGridViewCell.Value" />
 
             
 
-             property is not set and the cell's <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             property is not set and the cell's <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
@@ -846,56 +758,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
 
             
 
-             property specifies an image that is displayed in cells with no values when the column is not data-bound and the cell's <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             property specifies an image that is displayed in cells with no values when the column is not data-bound and the cell's <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
              property is set to false. For a data-bound column whose cells do not have an associated image, a standard error graphic is displayed.</para
           >
           <para
-            >If you want to display an <see
-             cref="T:System.Drawing.Icon" />
+            >If you want to display an <see cref="T:System.Drawing.Icon" />
 
             
 
-             instead of an <see
-             cref="T:System.Drawing.Image" />
+             instead of an <see cref="T:System.Drawing.Image" />
 
             
 
-            , set the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
+            , set the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
 
             
 
-             property instead and set the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+             property instead and set the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
             
 
-             property to true. This ensures that the alpha channel of the <see
-             cref="T:System.Drawing.Icon" />
+             property to true. This ensures that the alpha channel of the <see cref="T:System.Drawing.Icon" />
 
             
 
-             is painted correctly. You can also set the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             is painted correctly. You can also set the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
-             property of individual cells to indicate whether the cell displays the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
+             property of individual cells to indicate whether the cell displays the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Image" />
 
             
 
-             or the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
+             or the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.Icon" />
 
             
 
@@ -905,13 +807,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the image displayed in the cells of this column when the cell's <see
-             cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+            >Gets or sets the image displayed in the cells of this column when the cell's <see cref="P:System.Windows.Forms.DataGridViewCell.Value" />
 
             
 
-             property is not set and the cell's <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             property is not set and the cell's <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
@@ -943,18 +843,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ImageLayout" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ImageLayout" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ImageLayout" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ImageLayout" />
 
             
 
@@ -1014,84 +911,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To ensure that the alpha channel of <see
-             cref="T:System.Drawing.Icon" />
+            >To ensure that the alpha channel of <see cref="T:System.Drawing.Icon" />
 
             
 
              values is painted correctly, set this property to true. </para
           >
           <para
-            >Getting or setting this property gets or sets the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+            >Getting or setting this property gets or sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.CellTemplate" />
 
             
 
-             property. Setting this property also sets the <see
-             cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
+             property. Setting this property also sets the <see cref="P:System.Windows.Forms.DataGridViewImageCell.ValueIsIcon" />
 
             
 
              property of every cell in the column and refreshes the column display. To override the specified value for individual cells, set the cell values after you set the column value.</para
           >
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             property of the object returned by the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
+             property of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.DefaultCellStyle" />
 
             
 
-             property has a value equal to the standard error graphic of type <see
-             cref="T:System.Drawing.Bitmap" />
+             property has a value equal to the standard error graphic of type <see cref="T:System.Drawing.Bitmap" />
 
             
 
-            , changing the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+            , changing the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
             
 
-             property value to true automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to true automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             to the standard error graphic of type <see
-             cref="T:System.Drawing.Icon" />
+             to the standard error graphic of type <see cref="T:System.Drawing.Icon" />
 
             
 
-            . If <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+            . If <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             has a value equal to the standard error graphic of type <see
-             cref="T:System.Drawing.Icon" />
+             has a value equal to the standard error graphic of type <see cref="T:System.Drawing.Icon" />
 
             
 
-            , changing the <see
-             cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
+            , changing the <see cref="P:System.Windows.Forms.DataGridViewImageColumn.ValuesAreIcons" />
 
             
 
-             property value to false automatically sets <see
-             cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+             property value to false automatically sets <see cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
             
 
-             to the standard error graphic of type <see
-             cref="T:System.Drawing.Bitmap" />
+             to the standard error graphic of type <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -1101,8 +983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether cells in this column display <see
-             cref="T:System.Drawing.Icon" />
+            >Gets or sets a value indicating whether cells in this column display <see cref="T:System.Drawing.Icon" />
 
             
 

@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Diagnostics.Contracts.ContractFailureKind" />
+        >The <see cref="T:System.Diagnostics.Contracts.ContractFailureKind" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" />
+         enumeration is used by the <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" />
 
         
 
@@ -52,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="Overload:System.Diagnostics.Contracts.Contract.Assert" />
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Assert" />
 
             
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="Overload:System.Diagnostics.Contracts.Contract.Assume" />
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Assume" />
 
             
 
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="Overload:System.Diagnostics.Contracts.Contract.Invariant" />
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Invariant" />
 
             
 
@@ -133,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" />
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.Ensures" />
 
             
 
@@ -160,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" />
+            >An <see cref="Overload:System.Diagnostics.Contracts.Contract.EnsuresOnThrow" />
 
             
 
@@ -187,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="Overload:System.Diagnostics.Contracts.Contract.Requires" />
+            >A <see cref="Overload:System.Diagnostics.Contracts.Contract.Requires" />
 
             
 

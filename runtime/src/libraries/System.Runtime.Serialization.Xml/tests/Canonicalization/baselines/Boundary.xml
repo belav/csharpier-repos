@@ -13,8 +13,7 @@
     <author xmlns="urn:someuri1">
       <bk:first-name xmlns:x="urn:y" xmlns=""
         >Jane
-        <c
-        >
+        <c>
           <x:d>
             <e bk:a="b" />
             <f>
@@ -32,10 +31,7 @@
     <title>3. Pride And Prejudice</title>
     <author xmlns="urn:someuri3">
       <bk:first-name xmlns="">Jane</bk:first-name>
-      <last-name
-        >Austen<a:b
-         />
-      </last-name>
+      <last-name>Austen<a:b /></last-name>
     </author>
     <price>24.95</price>
   </book>
@@ -61,55 +57,38 @@
       <first-name bk:x="y">Jane</first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
   <book genre="novel" publicationdate="1982" bk:ISBN="1-861001-45-3">
     <title xmlns:a="urn:a1">7. Sense and Sensibility</title>
     <author xmlns:a="urn:a2">
-      <first-name
-        >Jane<x
-         a:x1="y1" />
-      </first-name>
+      <first-name>Jane<x a:x1="y1" /></first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
   <book genre="novel" publicationdate="1982" bk:ISBN="1-861001-45-3">
     <a:title xmlns:a="urn:a1">8. Sense and Sensibility</a:title>
     <author xmlns:a="urn:a2">
-      <first-name
-        >Jane<x
-         a:x1="y1" />
-      </first-name>
+      <first-name>Jane<x a:x1="y1" /></first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
   <book genre="novel" publicationdate="1982" bk:ISBN="1-861001-45-3">
     <title xmlns:a="urn:a1">7. Sense and Sensibility</title>
     <author xmlns:a="urn:a2">
-      <a:first-name
-        >Jane<x
-         a:x1="y1" />
-      </a:first-name>
+      <a:first-name>Jane<x a:x1="y1" /></a:first-name>
       <last-name>Austen</last-name>
     </author>
-    <price
-      >19.95
+    <price>19.95
 
-      <!-- another comment -->
-    </price>
+      <!-- another comment --></price>
   </book>
 </bookstore>

@@ -44,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
@@ -53,12 +52,15 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string to be set as the <see
-           cref="P:System.Web.UI.ToolboxDataAttribute.Data" />
+          The string to be set as the <see cref="P:System.Web.UI.ToolboxDataAttribute.Data" />
 
           
 
@@ -104,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+            >Represents the default <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
@@ -131,23 +132,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ToolboxDataAttribute.Equals(System.Object)" />
+            >The <see cref="M:System.Web.UI.ToolboxDataAttribute.Equals(System.Object)" />
 
             
 
-             method first compares the objects for equality.  If the comparison returns false, the <see
-             cref="M:System.Web.UI.ToolboxDataAttribute.Equals(System.Object)" />
+             method first compares the objects for equality.  If the comparison returns false, the <see cref="M:System.Web.UI.ToolboxDataAttribute.Equals(System.Object)" />
 
             
 
-             method then compares the data of the <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+             method then compares the data of the <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
-             object to the data of the given object after first testing the given object to make sure that the given object is not null and is also typed as <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+             object to the data of the given object after first testing the given object to make sure that the given object is not null and is also typed as <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
@@ -157,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+            >Tests whether the <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
@@ -168,8 +164,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true, if the <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+            >true, if the <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
@@ -177,7 +172,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -227,13 +226,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+            >Tests whether the <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
-             object contains the default value for the <see
-             cref="P:System.Web.UI.ToolboxDataAttribute.Data" />
+             object contains the default value for the <see cref="P:System.Web.UI.ToolboxDataAttribute.Data" />
 
             
 
@@ -243,13 +240,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true, if the <see
-             cref="T:System.Web.UI.ToolboxDataAttribute" />
+            >true, if the <see cref="T:System.Web.UI.ToolboxDataAttribute" />
 
             
 
-             contains the default value for the <see
-             cref="P:System.Web.UI.ToolboxDataAttribute.Data" />
+             contains the default value for the <see cref="P:System.Web.UI.ToolboxDataAttribute.Data" />
 
             
 

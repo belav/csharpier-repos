@@ -57,7 +57,11 @@
           <para>The object representing the configuration.</para>
         </returns>
         <param name="configKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -11,152 +11,124 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+        >The <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         interface provides several UI-oriented properties that enhance the user experience of working with <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+         interface provides several UI-oriented properties that enhance the user experience of working with <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         controls. When you create controls that derive from the base <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+         controls. When you create controls that derive from the base <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         class, you get an implementation of all the properties in the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         class, you get an implementation of all the properties in the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         interface, because the <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+         interface, because the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
          base class implements this interface. </para
       >
       <para
-        >You can use existing user controls, ASP.NET controls, or custom server controls that do not inherit from the <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+        >You can use existing user controls, ASP.NET controls, or custom server controls that do not inherit from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         class as part of a Web Parts application, and they can also use these UI-oriented properties declared by the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         class as part of a Web Parts application, and they can also use these UI-oriented properties declared by the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         interface. If you place existing server controls in a <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+         interface. If you place existing server controls in a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
 
         
 
-         zone, at run time they are wrapped with a <see
-         cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
+         zone, at run time they are wrapped with a <see cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
 
         
 
-         object. Because the <see
-         cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
+         object. Because the <see cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
 
         
 
-         class inherits from the <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+         class inherits from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         base class, it enables existing server controls to act as true <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+         base class, it enables existing server controls to act as true <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         controls and it adds to them the properties of the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         controls and it adds to them the properties of the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
          interface.</para
       >
       <para
-        >If you place server controls that are not <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+        >If you place server controls that are not <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         controls in zones, they can use the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         controls in zones, they can use the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         properties at run time, and you can also declare values for those properties on server controls in the markup of the page (in page persistence format). However, because these properties are only available to the server controls at run time, design-time coding features such as IntelliSense do not recognize <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         properties at run time, and you can also declare values for those properties on server controls in the markup of the page (in page persistence format). However, because these properties are only available to the server controls at run time, design-time coding features such as IntelliSense do not recognize <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         properties that are declared on server controls. Declared properties on these controls still work when you load the page, but Microsoft Visual Studio does not recognize the properties as valid at design time. If you want to add the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         properties that are declared on server controls. Declared properties on these controls still work when you load the page, but Microsoft Visual Studio does not recognize the properties as valid at design time. If you want to add the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         properties to existing server and user controls to enhance the design-time user experience, you can implement the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+         properties to existing server and user controls to enhance the design-time user experience, you can implement the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
          interface in a server control. </para
       >
       <para
-        >Perhaps the main reason to implement the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+        >Perhaps the main reason to implement the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         interface is for controls that do not support the use of expando (custom) properties. Expando properties are strings that can be added to a class dynamically as a property, by means of the <see
-         cref="T:System.Web.UI.IAttributeAccessor" />
+         interface is for controls that do not support the use of expando (custom) properties. Expando properties are strings that can be added to a class dynamically as a property, by means of the <see cref="T:System.Web.UI.IAttributeAccessor" />
 
         
 
-         interface. Controls that implement this interface, including the <see
-         cref="T:System.Web.UI.WebControls.WebControl" />
+         interface. Controls that implement this interface, including the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
-         class and its children, can use expando properties. Therefore, all ASP.NET server controls, custom controls that derive from them, Web user controls, and <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+         class and its children, can use expando properties. Therefore, all ASP.NET server controls, custom controls that derive from them, Web user controls, and <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         controls support the use of expando properties. But custom controls that inherit directly from the base <see
-         cref="T:System.Web.UI.Control" />
+         controls support the use of expando properties. But custom controls that inherit directly from the base <see cref="T:System.Web.UI.Control" />
 
         
 
-         class do not support expando properties. Thus, if you declare these controls within a <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
+         class do not support expando properties. Thus, if you declare these controls within a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
 
         
 
-        , you will not be able to declare the common <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+        , you will not be able to declare the common <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
-         properties on the controls, properties such as <see
-         cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
+         properties on the controls, properties such as <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Description" />
+         and <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Description" />
 
         
 
-        . If you want to use these properties with such controls, you must implement the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+        . If you want to use these properties with such controls, you must implement the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
         
 
@@ -166,8 +138,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines common user interface (UI) properties used by ASP.NET <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+        >Defines common user interface (UI) properties used by ASP.NET <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
@@ -188,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Web Parts applications often provide a catalog (or list) of controls that users can add to a page. The <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.CatalogIconImageUrl" />
+            >Web Parts applications often provide a catalog (or list) of controls that users can add to a page. The <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.CatalogIconImageUrl" />
 
             
 
@@ -199,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to an image that represents a <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+            >Gets or sets the URL to an image that represents a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
@@ -224,13 +193,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Description" />
+            >The <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Description" />
 
             
 
-             property value is typically used as a descriptive string for a control in catalogs that provide lists of <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+             property value is typically used as a descriptive string for a control in catalogs that provide lists of <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
@@ -240,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a brief phrase that summarizes what a control does, for use in ToolTips and catalogs of <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+            >Gets or sets a brief phrase that summarizes what a control does, for use in ToolTips and catalogs of <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
@@ -265,31 +231,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
+            >The <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
 
             
 
-             property is used to return a default subtitle string for a <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+             property is used to return a default subtitle string for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
              control that is appended to the control's title in the title bar. </para
           >
           <para
-            >If you provide a default value for the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
+            >If you provide a default value for the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
 
             
 
-             property in a control that implements the <see
-             cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
+             property in a control that implements the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPart" />
 
             
 
-             interface, the Web Parts control set automatically appends it to the value of the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
+             interface, the Web Parts control set automatically appends it to the value of the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
 
             
 
@@ -299,13 +260,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string that is concatenated with the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
+            >Gets a string that is concatenated with the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
 
             
 
-             property value to form a complete title for a <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+             property value to form a complete title for a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
@@ -329,21 +288,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The visible title text in a control's title bar is set by the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
+            >The visible title text in a control's title bar is set by the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Title" />
 
             
 
              property.</para
           >
           <para
-            >If you do not supply a title for a control, the Web Parts control set automatically calculates a default string to use as a title. For more information, see <see
-             cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" />
+            >If you do not supply a title for a control, the Web Parts control set automatically calculates a default string to use as a title. For more information, see <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.DisplayTitle" />
 
             
 
-            . Also, it is possible to provide a default subtitle that is appended to the title string. For details, see <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
+            . Also, it is possible to provide a default subtitle that is appended to the title string. For details, see <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.Subtitle" />
 
             
 
@@ -353,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the title of a <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+            >Gets or sets the title of a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
@@ -378,26 +333,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleIconImageUrl" />
+            >The <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleIconImageUrl" />
 
             
 
-             property provides a way to associate an icon with a <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+             property provides a way to associate an icon with a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
-             control. The icon appears in the control's own title bar. For thematic consistency, application developers might want to make this icon similar to the image that represents the control in a catalog of Web Parts controls (the image referenced in the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.CatalogIconImageUrl" />
+             control. The icon appears in the control's own title bar. For thematic consistency, application developers might want to make this icon similar to the image that represents the control in a catalog of Web Parts controls (the image referenced in the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.CatalogIconImageUrl" />
 
             
 
              property). </para
           >
           <para
-            >As it is implemented in the Web Parts control set, the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleIconImageUrl" />
+            >As it is implemented in the Web Parts control set, the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleIconImageUrl" />
 
             
 
@@ -425,8 +376,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you assign a URL to the <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleUrl" />
+            >When you assign a URL to the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleUrl" />
 
             
 
@@ -434,13 +384,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Normally, you would not use the <see
-               cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleUrl" />
+              >Normally, you would not use the <see cref="P:System.Web.UI.WebControls.WebParts.IWebPart.TitleUrl" />
 
               
 
-               property to link to Help content. The best way to provide a link to Help for a control is to use the <see
-               cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" />
+               property to link to Help content. The best way to provide a link to Help for a control is to use the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.HelpUrl" />
 
               
 
@@ -451,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a URL to supplemental information about a <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+            >Gets or sets a URL to supplemental information about a <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 

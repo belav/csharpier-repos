@@ -30,33 +30,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Before a <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Before a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         can send and receive data, it must first be created using an <see
-         cref="T:System.Net.Sockets.AddressFamily" />
+         can send and receive data, it must first be created using an <see cref="T:System.Net.Sockets.AddressFamily" />
 
         
 
-        , a <see
-         cref="T:System.Net.Sockets.SocketType" />
+        , a <see cref="T:System.Net.Sockets.SocketType" />
 
         
 
-        , and a <see
-         cref="T:System.Net.Sockets.ProtocolType" />
+        , and a <see cref="T:System.Net.Sockets.ProtocolType" />
 
         
 
-        . The <see
-         cref="T:System.Net.Sockets.SocketType" />
+        . The <see cref="T:System.Net.Sockets.SocketType" />
 
         
 
-         enumeration provides several options for defining the type of <see
-         cref="T:System.Net.Sockets.Socket" />
+         enumeration provides several options for defining the type of <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -68,68 +62,55 @@
 
           
 
-           will sometimes implicitly indicate which <see
-           cref="T:System.Net.Sockets.ProtocolType" />
+           will sometimes implicitly indicate which <see cref="T:System.Net.Sockets.ProtocolType" />
 
           
 
-           will be used within an <see
-           cref="T:System.Net.Sockets.AddressFamily" />
+           will be used within an <see cref="T:System.Net.Sockets.AddressFamily" />
 
           
 
-          . For example when the <see
-           cref="T:System.Net.Sockets.SocketType" />
+          . For example when the <see cref="T:System.Net.Sockets.SocketType" />
 
           
 
-           is <see
-           cref="F:System.Net.Sockets.SocketType.Dgram" />
+           is <see cref="F:System.Net.Sockets.SocketType.Dgram" />
 
           
 
-          , the <see
-           cref="T:System.Net.Sockets.ProtocolType" />
+          , the <see cref="T:System.Net.Sockets.ProtocolType" />
 
           
 
-           is always <see
-           cref="F:System.Net.Sockets.ProtocolType.Udp" />
+           is always <see cref="F:System.Net.Sockets.ProtocolType.Udp" />
 
           
 
-          .When the <see
-           cref="T:System.Net.Sockets.SocketType" />
+          .When the <see cref="T:System.Net.Sockets.SocketType" />
 
           
 
-           is <see
-           cref="F:System.Net.Sockets.SocketType.Stream" />
+           is <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
           
 
-          , the <see
-           cref="T:System.Net.Sockets.ProtocolType" />
+          , the <see cref="T:System.Net.Sockets.ProtocolType" />
 
           
 
-           is always <see
-           cref="F:System.Net.Sockets.ProtocolType.Tcp" />
+           is always <see cref="F:System.Net.Sockets.ProtocolType.Tcp" />
 
           
 
-          . If you try to create a <see
-           cref="T:System.Net.Sockets.Socket" />
+          . If you try to create a <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           with an incompatible combination, <see
-           cref="T:System.Net.Sockets.Socket" />
+           with an incompatible combination, <see cref="T:System.Net.Sockets.Socket" />
 
           
 
-           will throw a <see
-           cref="T:System.Net.Sockets.SocketException" />
+           will throw a <see cref="T:System.Net.Sockets.SocketException" />
 
           
 
@@ -140,8 +121,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of socket that an instance of the <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Specifies the type of socket that an instance of the <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -175,28 +155,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supports datagrams, which are connectionless, unreliable messages of a fixed (typically small) maximum length. Messages might be lost or duplicated and might arrive out of order. A <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Supports datagrams, which are connectionless, unreliable messages of a fixed (typically small) maximum length. Messages might be lost or duplicated and might arrive out of order. A <see cref="T:System.Net.Sockets.Socket" />
 
             
 
-             of type <see
-             cref="F:System.Net.Sockets.SocketType.Dgram" />
+             of type <see cref="F:System.Net.Sockets.SocketType.Dgram" />
 
             
 
-             requires no connection prior to sending and receiving data, and can communicate with multiple peers. <see
-             cref="F:System.Net.Sockets.SocketType.Dgram" />
+             requires no connection prior to sending and receiving data, and can communicate with multiple peers. <see cref="F:System.Net.Sockets.SocketType.Dgram" />
 
             
 
-             uses the Datagram Protocol (<see
-             cref="F:System.Net.Sockets.ProtocolType.Udp" />
+             uses the Datagram Protocol (<see cref="F:System.Net.Sockets.ProtocolType.Udp" />
 
             
 
-            ) and the <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+            ) and the <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
             <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
@@ -232,19 +207,16 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supports access to the underlying transport protocol. Using the <see
-             cref="T:System.Net.Sockets.SocketType" />
+            >Supports access to the underlying transport protocol. Using the <see cref="T:System.Net.Sockets.SocketType" />
             <see cref="F:System.Net.Sockets.SocketType.Raw" />
 
             
 
-            , you can communicate using protocols like Internet Control Message Protocol (<see
-             cref="F:System.Net.Sockets.ProtocolType.Icmp" />
+            , you can communicate using protocols like Internet Control Message Protocol (<see cref="F:System.Net.Sockets.ProtocolType.Icmp" />
 
             
 
-            ) and Internet Group Management Protocol (<see
-             cref="F:System.Net.Sockets.ProtocolType.Igmp" />
+            ) and Internet Group Management Protocol (<see cref="F:System.Net.Sockets.ProtocolType.Igmp" />
 
             
 
@@ -279,13 +251,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supports connectionless, message-oriented, reliably delivered messages, and preserves message boundaries in data. Rdm (Reliably Delivered Messages) messages arrive unduplicated and in order. Furthermore, the sender is notified if messages are lost. If you initialize a Socket using <see
-             cref="F:System.Net.Sockets.SocketType.Rdm" />
+            >Supports connectionless, message-oriented, reliably delivered messages, and preserves message boundaries in data. Rdm (Reliably Delivered Messages) messages arrive unduplicated and in order. Furthermore, the sender is notified if messages are lost. If you initialize a Socket using <see cref="F:System.Net.Sockets.SocketType.Rdm" />
 
             
 
-            , you do not require a remote host connection before sending and receiving data. With <see
-             cref="F:System.Net.Sockets.SocketType.Rdm" />
+            , you do not require a remote host connection before sending and receiving data. With <see cref="F:System.Net.Sockets.SocketType.Rdm" />
 
             
 
@@ -320,13 +290,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides connection-oriented and reliable two-way transfer of ordered byte streams across a network. <see
-             cref="F:System.Net.Sockets.SocketType.Seqpacket" />
+            >Provides connection-oriented and reliable two-way transfer of ordered byte streams across a network. <see cref="F:System.Net.Sockets.SocketType.Seqpacket" />
 
             
 
-             does not duplicate data, and it preserves boundaries within the data stream. A Socket of type <see
-             cref="F:System.Net.Sockets.SocketType.Seqpacket" />
+             does not duplicate data, and it preserves boundaries within the data stream. A Socket of type <see cref="F:System.Net.Sockets.SocketType.Seqpacket" />
 
             
 
@@ -361,23 +329,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Supports reliable, two-way, connection-based byte streams without the duplication of data and without preservation of boundaries. A Socket of this type communicates with a single peer and requires a remote host connection before communication can begin. <see
-             cref="F:System.Net.Sockets.SocketType.Stream" />
+            >Supports reliable, two-way, connection-based byte streams without the duplication of data and without preservation of boundaries. A Socket of this type communicates with a single peer and requires a remote host connection before communication can begin. <see cref="F:System.Net.Sockets.SocketType.Stream" />
 
             
 
-             uses the Transmission Control Protocol (<see
-             cref="F:System.Net.Sockets.ProtocolType.Tcp" />
+             uses the Transmission Control Protocol (<see cref="F:System.Net.Sockets.ProtocolType.Tcp" />
 
             
 
-            ) <see
-             cref="T:System.Net.Sockets.ProtocolType" />
+            ) <see cref="T:System.Net.Sockets.ProtocolType" />
 
             
 
-             and the InterNetwork <see
-             cref="T:System.Net.Sockets.AddressFamily" />
+             and the InterNetwork <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
 

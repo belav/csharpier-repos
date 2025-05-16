@@ -25,114 +25,93 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.Common.DataAdapter" />
+        >The <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
-         serves as a bridge between a <see
-         cref="T:System.Data.DataSet" />
+         serves as a bridge between a <see cref="T:System.Data.DataSet" />
 
         
 
-         and a data source for retrieving and saving data. The <see
-         cref="T:System.Data.Common.DataAdapter" />
+         and a data source for retrieving and saving data. The <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
-         provides this bridge by mapping <see
-         cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+         provides this bridge by mapping <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
         
 
-        , which changes the data in the <see
-         cref="T:System.Data.DataSet" />
+        , which changes the data in the <see cref="T:System.Data.DataSet" />
 
         
 
-         to match the data in the data source, and <see
-         cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
+         to match the data in the data source, and <see cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
 
         
 
-        , which changes the data in the data source to match the data in the <see
-         cref="T:System.Data.DataSet" />
+        , which changes the data in the data source to match the data in the <see cref="T:System.Data.DataSet" />
 
         
 
         . </para
       >
       <para
-        >If you are connecting to a SQL Server database, you can increase overall performance by using the <see
-         cref="T:System.Data.SqlClient.SqlDataAdapter" />
+        >If you are connecting to a SQL Server database, you can increase overall performance by using the <see cref="T:System.Data.SqlClient.SqlDataAdapter" />
 
         
 
-         along with its associated <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+         along with its associated <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
-         and <see
-         cref="T:System.Data.SqlClient.SqlConnection" />
+         and <see cref="T:System.Data.SqlClient.SqlConnection" />
 
         
 
-         objects. For OLE DB-supported data sources, use the <see
-         cref="T:System.Data.Common.DataAdapter" />
+         objects. For OLE DB-supported data sources, use the <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
-         with its associated <see
-         cref="T:System.Data.OleDb.OleDbCommand" />
+         with its associated <see cref="T:System.Data.OleDb.OleDbCommand" />
 
         
 
-         and <see
-         cref="T:System.Data.OleDb.OleDbConnection" />
+         and <see cref="T:System.Data.OleDb.OleDbConnection" />
 
         
 
-         objects. For ODBC-supported data sources, use the <see
-         cref="T:System.Data.Common.DataAdapter" />
+         objects. For ODBC-supported data sources, use the <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
-         with its associated <see
-         cref="T:System.Data.Odbc.OdbcCommand" />
+         with its associated <see cref="T:System.Data.Odbc.OdbcCommand" />
 
         
 
-         and <see
-         cref="T:System.Data.Odbc.OdbcConnection" />
+         and <see cref="T:System.Data.Odbc.OdbcConnection" />
 
         
 
-         objects. For Oracle databases, use the <see
-         cref="T:System.Data.Common.DataAdapter" />
+         objects. For Oracle databases, use the <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
-         with its associated <see
-         cref="T:System.Data.OracleClient.OracleCommand" />
+         with its associated <see cref="T:System.Data.OracleClient.OracleCommand" />
 
         
 
-         and <see
-         cref="T:System.Data.OracleClient.OracleConnection" />
+         and <see cref="T:System.Data.OracleClient.OracleConnection" />
 
         
 
          objects.</para
       >
       <para
-        >When an instance of <see
-         cref="T:System.Data.Common.DataAdapter" />
+        >When an instance of <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
-         is created, the read/write properties are set to initial values. For a list of these values, see the <see
-         cref="T:System.Data.Common.DataAdapter" />
+         is created, the read/write properties are set to initial values. For a list of these values, see the <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
@@ -142,8 +121,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a set of SQL commands and a database connection that are used to fill the <see
-         cref="T:System.Data.DataSet" />
+        >Represents a set of SQL commands and a database connection that are used to fill the <see cref="T:System.Data.DataSet" />
 
         
 
@@ -161,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an instance of <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >When an instance of <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -207,8 +184,7 @@
               </term>
               <description>
                 <para
-                  >An array of <see
-                   cref="P:System.Data.Common.DataAdapter.TableMappings" />
+                  >An array of <see cref="P:System.Data.Common.DataAdapter.TableMappings" />
 
                   
 
@@ -222,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >Initializes a new instance of a <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -254,8 +229,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >This overload of the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -265,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >Initializes a new instance of a <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -287,8 +260,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If false, <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >If false, <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -298,18 +270,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >Gets or sets a value indicating whether <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
-             is called on a <see
-             cref="T:System.Data.DataRow" />
+             is called on a <see cref="T:System.Data.DataRow" />
 
             
 
-             after it is added to the <see
-             cref="T:System.Data.DataTable" />
+             after it is added to the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -346,23 +315,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During a call to the Update method of a DataAdapter, the database can send data back to your ADO.NET application as output parameters or as the first returned record of a result set. ADO.NET can retrieve these values and update the corresponding columns in the <see
-             cref="T:System.Data.DataRow" />
+            >During a call to the Update method of a DataAdapter, the database can send data back to your ADO.NET application as output parameters or as the first returned record of a result set. ADO.NET can retrieve these values and update the corresponding columns in the <see cref="T:System.Data.DataRow" />
 
             
 
-             being updated. By default, ADO.NET calls the AcceptChanges method of the DataRow after the update. However, if you want to merge the updated row back into another <see
-             cref="T:System.Data.DataTable" />
+             being updated. By default, ADO.NET calls the AcceptChanges method of the DataRow after the update. However, if you want to merge the updated row back into another <see cref="T:System.Data.DataTable" />
 
             
 
-            , you may want to preserver the original value of a primary key column. For example, a primary key column corresponding to an automatically incrementing column in the database, such as an identity column, can contain new values that are assigned by the database that do not match the original values assigned in the DataRow. By default, AcceptChanges is called implicitly after an update, and the original values in the row, which may have been <see
-             cref="P:System.Data.DataColumn.AutoIncrement" />
+            , you may want to preserver the original value of a primary key column. For example, a primary key column corresponding to an automatically incrementing column in the database, such as an identity column, can contain new values that are assigned by the database that do not match the original values assigned in the DataRow. By default, AcceptChanges is called implicitly after an update, and the original values in the row, which may have been <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
             
 
-             values assigned by ADO.NET, are lost. You can preserve the original values in the DataRow by preventing ADO.NET from calling AcceptChanges after it performs an update on a row, by setting the <see
-             cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringUpdate" />
+             values assigned by ADO.NET, are lost. You can preserve the original values in the DataRow by preventing ADO.NET from calling AcceptChanges after it performs an update on a row, by setting the <see cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringUpdate" />
 
             
 
@@ -370,28 +335,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting the AcceptChangesDuringUpdate property to false applies to all data modifications, not only inserts. If you want to edit or delete rows in the same update, and if you want to suppress the call to AcceptChanges only for inserts, then instead of setting AccceptChangesDuringUpdate to false, use an event handler for the RowUpdated event of the DataAdapter. In the event handler you can check the <see
-               cref="P:System.Data.Common.RowUpdatedEventArgs.StatementType" />
+              >Setting the AcceptChangesDuringUpdate property to false applies to all data modifications, not only inserts. If you want to edit or delete rows in the same update, and if you want to suppress the call to AcceptChanges only for inserts, then instead of setting AccceptChangesDuringUpdate to false, use an event handler for the RowUpdated event of the DataAdapter. In the event handler you can check the <see cref="P:System.Data.Common.RowUpdatedEventArgs.StatementType" />
 
               
 
-               to determine if the data modification is an insert, and if true, set the <see
-               cref="P:System.Data.Common.RowUpdatedEventArgs.Status" />
+               to determine if the data modification is an insert, and if true, set the <see cref="P:System.Data.Common.RowUpdatedEventArgs.Status" />
 
               
 
-               property of the <see
-               cref="T:System.Data.Common.RowUpdatedEventArgs" />
+               property of the <see cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
               
 
-               to <see
-               cref="F:System.Data.UpdateStatus.SkipCurrentRow" />
+               to <see cref="F:System.Data.UpdateStatus.SkipCurrentRow" />
 
               
 
-              . For more information and an example, see <format
-               type="text/html">
+              . For more information and an example, see <format type="text/html">
                 <a href="d6b7f9cb-81be-44e1-bb94-56137954876d"
                   >Retrieving Identity or Autonumber Values</a
                 >
@@ -406,13 +366,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets whether <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >Gets or sets whether <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
-             is called during a <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+             is called during a <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -435,31 +393,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is deprecated. The <see
-             cref="M:System.Data.Common.DataAdapter.#ctor(System.Data.Common.DataAdapter)" />
+            >This method is deprecated. The <see cref="M:System.Data.Common.DataAdapter.#ctor(System.Data.Common.DataAdapter)" />
 
             
 
              constructor should be used instead of this method.</para
           >
           <para
-            >All the commands, the <see
-             cref="P:System.Data.Common.DataAdapter.TableMappings" />
+            >All the commands, the <see cref="P:System.Data.Common.DataAdapter.TableMappings" />
 
             
 
-            , the <see
-             cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+            , the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
             
 
-            , and the <see
-             cref="P:System.Data.Common.DataAdapter.MissingMappingAction" />
+            , and the <see cref="P:System.Data.Common.DataAdapter.MissingMappingAction" />
 
             
 
-             are cloned. However, the connections for the commands are not copied, but shared. Thus, the cloned <see
-             cref="T:System.Data.Common.DataAdapter" />
+             are cloned. However, the connections for the commands are not copied, but shared. Thus, the cloned <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -469,8 +422,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of this instance of <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >Creates a copy of this instance of <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -480,8 +432,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The cloned instance of <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >The cloned instance of <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -511,13 +462,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If ContinueUpdateOnError is set to true, no exception is thrown when an error occurs during the update of a row. The update of the row is skipped and the error information is placed in the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >If ContinueUpdateOnError is set to true, no exception is thrown when an error occurs during the update of a row. The update of the row is skipped and the error information is placed in the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
-             property of the row in error. The <see
-             cref="T:System.Data.Common.DataAdapter" />
+             property of the row in error. The <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -555,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Data.Common.DataTableMappingCollection" />
+            >Creates a new <see cref="T:System.Data.Common.DataTableMappingCollection" />
 
             
 
@@ -586,41 +534,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see
-             cref="M:System.IDisposable.Dispose" />
+            >This method is called by the public <see cref="M:System.IDisposable.Dispose" />
 
             
 
-             method and the <see
-             cref="M:System.Object.Finalize" />
+             method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Data.Common.DataAdapter" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -630,8 +571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
@@ -639,7 +579,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -667,79 +611,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+            >The <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             method retrieves rows from the data source using the SELECT statement specified by an associated <see
-             cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+             method retrieves rows from the data source using the SELECT statement specified by an associated <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
-             property. The connection object associated with the SELECT statement must be valid, but it does not need to be open. If the connection is closed before <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+             property. The connection object associated with the SELECT statement must be valid, but it does not need to be open. If the connection is closed before <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             is called, it is opened to retrieve data, then closed. If the connection is open before <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+             is called, it is opened to retrieve data, then closed. If the connection is open before <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
              is called, it remains open.</para
           >
           <para
-            >The <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+            >The <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             operation then adds the rows to destination <see
-             cref="T:System.Data.DataTable" />
+             operation then adds the rows to destination <see cref="T:System.Data.DataTable" />
 
             
 
-             objects in the <see
-             cref="T:System.Data.DataSet" />
+             objects in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , creating the <see
-             cref="T:System.Data.DataTable" />
+            , creating the <see cref="T:System.Data.DataTable" />
 
             
 
-             objects if they do not already exist. When creating <see
-             cref="T:System.Data.DataTable" />
+             objects if they do not already exist. When creating <see cref="T:System.Data.DataTable" />
 
             
 
-             objects, the <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+             objects, the <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             operation normally creates only column name metadata. However, if the <see
-             cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
+             operation normally creates only column name metadata. However, if the <see cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
 
             
 
              property is set to AddWithKey, appropriate primary keys and constraints are also created.</para
           >
           <para
-            >If the SelectCommand returns the results of an OUTER JOIN, the DataAdapter does not set a <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+            >If the SelectCommand returns the results of an OUTER JOIN, the DataAdapter does not set a <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             value for the resulting <see
-             cref="T:System.Data.DataTable" />
+             value for the resulting <see cref="T:System.Data.DataTable" />
 
             
 
-            . You must explicitly define the primary key to ensure that duplicate rows are resolved correctly. For more information, see <format
-             type="text/html">
+            . You must explicitly define the primary key to ensure that duplicate rows are resolved correctly. For more information, see <format type="text/html">
               <a href="2EA85959-E763-4669-8BD9-46A9DAB894BD">Defining a Primary Key for a Table</a>
             </format>
 
@@ -748,49 +678,41 @@
             .</para
           >
           <para
-            >If the data adapter encounters duplicate columns while populating a <see
-             cref="T:System.Data.DataTable" />
+            >If the data adapter encounters duplicate columns while populating a <see cref="T:System.Data.DataTable" />
 
             
 
-            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
-             cref="T:System.Data.DataSet" />
+            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see cref="T:System.Data.DataSet" />
 
             
 
-             according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
-             cref="T:System.Data.DataSet" />
+             according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see cref="T:System.Data.DataSet" />
 
             
 
              each result set is placed in a separate table. Additional result sets are named by appending integral values to the specified table name (for example, "Table", "Table1", "Table2", and so on). Applications using column and table names should ensure that conflicts with these naming patterns does not occur.</para
           >
           <para
-            >When the SELECT statement used to populate the <see
-             cref="T:System.Data.DataSet" />
+            >When the SELECT statement used to populate the <see cref="T:System.Data.DataSet" />
 
             
 
-             returns multiple results, such as a batch SQL statements, if one of the results contains an error, all subsequent results are skipped and not added to the <see
-             cref="T:System.Data.DataSet" />
+             returns multiple results, such as a batch SQL statements, if one of the results contains an error, all subsequent results are skipped and not added to the <see cref="T:System.Data.DataSet" />
 
             
 
             .</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+            >You can use the <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             method multiple times on the same <see
-             cref="T:System.Data.DataTable" />
+             method multiple times on the same <see cref="T:System.Data.DataTable" />
 
             
 
-            . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
-             cref="T:System.Data.DataTable" />
+            . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -798,18 +720,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When handling batch SQL statements that return multiple results, the implementation of <see
-               cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+              >When handling batch SQL statements that return multiple results, the implementation of <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
               
 
-               for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
-               cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+               for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
               
 
-               with the <see
-               cref="T:System.Data.MissingSchemaAction" />
+               with the <see cref="T:System.Data.MissingSchemaAction" />
 
               
 
@@ -820,8 +739,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds or refreshes rows in the <see
-             cref="T:System.Data.DataSet" />
+            >Adds or refreshes rows in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -831,8 +749,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully added to or refreshed in the <see
-             cref="T:System.Data.DataSet" />
+            >The number of rows successfully added to or refreshed in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -840,12 +757,15 @@
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataSet" />
+          A <see cref="T:System.Data.DataSet" />
 
           
 
@@ -881,18 +801,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds or refreshes rows in the <see
-             cref="T:System.Data.DataTable" />
+            >Adds or refreshes rows in the <see cref="T:System.Data.DataTable" />
 
             
 
-             to match those in the data source using the <see
-             cref="T:System.Data.DataTable" />
+             to match those in the data source using the <see cref="T:System.Data.DataTable" />
 
             
 
-             name and the specified <see
-             cref="T:System.Data.IDataReader" />
+             name and the specified <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -902,8 +819,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully added to or refreshed in the <see
-             cref="T:System.Data.DataTable" />
+            >The number of rows successfully added to or refreshed in the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -911,24 +827,30 @@
           >
         </returns>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataTable" />
+          A <see cref="T:System.Data.DataTable" />
 
           
 
            to fill with records.</param
         >
         <param name="dataReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Data.IDataReader" />
+          An instance of <see cref="T:System.Data.IDataReader" />
 
           
 
@@ -962,8 +884,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds or refreshes rows in a specified range in the collection of <see
-             cref="T:System.Data.DataTable" />
+            >Adds or refreshes rows in a specified range in the collection of <see cref="T:System.Data.DataTable" />
 
             
 
@@ -973,8 +894,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully added to or refreshed in the <see
-             cref="T:System.Data.DataTable" />
+            >The number of rows successfully added to or refreshed in the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -982,38 +902,52 @@
           >
         </returns>
         <param name="dataTables">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Data.DataTable" />
+          A collection of <see cref="T:System.Data.DataTable" />
 
           
 
            objects to fill with records.</param
         >
         <param name="dataReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Data.IDataReader" />
+          An instance of <see cref="T:System.Data.IDataReader" />
 
           
 
           .</param
         >
         <param name="startRecord">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the starting record.</param
         >
         <param name="maxRecords">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1048,18 +982,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds or refreshes rows in a specified range in the <see
-             cref="T:System.Data.DataSet" />
+            >Adds or refreshes rows in a specified range in the <see cref="T:System.Data.DataSet" />
 
             
 
-             to match those in the data source using the <see
-             cref="T:System.Data.DataSet" />
+             to match those in the data source using the <see cref="T:System.Data.DataSet" />
 
             
 
-             and <see
-             cref="T:System.Data.DataTable" />
+             and <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1069,8 +1000,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully added to or refreshed in the <see
-             cref="T:System.Data.DataSet" />
+            >The number of rows successfully added to or refreshed in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1078,45 +1008,63 @@
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataSet" />
+          A <see cref="T:System.Data.DataSet" />
 
           
 
            to fill with records.</param
         >
         <param name="srcTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string indicating the name of the source table.</param
         >
         <param name="dataReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Data.IDataReader" />
+          An instance of <see cref="T:System.Data.IDataReader" />
 
           
 
           .</param
         >
         <param name="startRecord">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the starting record.</param
         >
         <param name="maxRecords">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1178,18 +1126,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.LoadOption" />
+            >Gets or sets the <see cref="T:System.Data.LoadOption" />
 
             
 
-             that determines how the adapter fills the <see
-             cref="T:System.Data.DataTable" />
+             that determines how the adapter fills the <see cref="T:System.Data.DataTable" />
 
             
 
-             from the <see
-             cref="T:System.Data.Common.DbDataReader" />
+             from the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -1215,61 +1160,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+            >The <see cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
             
 
-             method retrieves the schema from the data source using the <see
-             cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+             method retrieves the schema from the data source using the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
-            . The connection object associated with the <see
-             cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+            . The connection object associated with the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
-             must be valid, but it does not need to be open. If the connection is closed before <see
-             cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+             must be valid, but it does not need to be open. If the connection is closed before <see cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
             
 
-             is called, it is opened to retrieve data and then closed. If the connection is open before <see
-             cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+             is called, it is opened to retrieve data and then closed. If the connection is open before <see cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
             
 
              is called, it remains open.</para
           >
           <para
-            >A <see
-             cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+            >A <see cref="M:System.Data.Common.DataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
             
 
-             operation adds a <see
-             cref="T:System.Data.DataTable" />
+             operation adds a <see cref="T:System.Data.DataTable" />
 
             
 
-             to the destination <see
-             cref="T:System.Data.DataSet" />
+             to the destination <see cref="T:System.Data.DataSet" />
 
             
 
-            . It then adds columns to the <see
-             cref="T:System.Data.DataColumnCollection" />
+            . It then adds columns to the <see cref="T:System.Data.DataColumnCollection" />
 
             
 
-             of the <see
-             cref="T:System.Data.DataTable" />
+             of the <see cref="T:System.Data.DataTable" />
 
             
 
-            , and configures the following <see
-             cref="T:System.Data.DataColumn" />
+            , and configures the following <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -1287,13 +1221,11 @@
 
                 
 
-                . You must set <see
-                 cref="P:System.Data.DataColumn.AutoIncrementStep" />
+                . You must set <see cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
                 
 
-                 and <see
-                 cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+                 and <see cref="P:System.Data.DataColumn.AutoIncrementSeed" />
 
                 
 
@@ -1321,13 +1253,11 @@
 
             
 
-             also configures the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             also configures the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             and <see
-             cref="P:System.Data.DataTable.Constraints" />
+             and <see cref="P:System.Data.DataTable.Constraints" />
 
             
 
@@ -1336,13 +1266,11 @@
           <list type="bullet">
             <item>
               <para
-                >If one or more primary key columns are returned by the <see
-                 cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+                >If one or more primary key columns are returned by the <see cref="P:System.Data.IDbDataAdapter.SelectCommand" />
 
                 
 
-                , they are used as the primary key columns for the <see
-                 cref="T:System.Data.DataTable" />
+                , they are used as the primary key columns for the <see cref="T:System.Data.DataTable" />
 
                 
 
@@ -1351,18 +1279,15 @@
             </item>
             <item>
               <para
-                >If no primary key columns are returned but unique columns are, the unique columns are used as the primary key if, and only if, all the unique columns are nonnullable. If any of the columns are nullable, a <see
-                 cref="T:System.Data.UniqueConstraint" />
+                >If no primary key columns are returned but unique columns are, the unique columns are used as the primary key if, and only if, all the unique columns are nonnullable. If any of the columns are nullable, a <see cref="T:System.Data.UniqueConstraint" />
 
                 
 
-                 is added to the <see
-                 cref="T:System.Data.ConstraintCollection" />
+                 is added to the <see cref="T:System.Data.ConstraintCollection" />
 
                 
 
-                , but the <see
-                 cref="P:System.Data.DataTable.PrimaryKey" />
+                , but the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
                 
 
@@ -1371,8 +1296,7 @@
             </item>
             <item>
               <para
-                >If both primary key columns and unique columns are returned, the primary key columns are used as the primary key columns for the <see
-                 cref="T:System.Data.DataTable" />
+                >If both primary key columns and unique columns are returned, the primary key columns are used as the primary key columns for the <see cref="T:System.Data.DataTable" />
 
                 
 
@@ -1382,23 +1306,19 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The underlying data store may allow column attributes that are not supported in a <see
-               cref="T:System.Data.DataColumn" />
+              >The underlying data store may allow column attributes that are not supported in a <see cref="T:System.Data.DataColumn" />
 
               
 
-              , which causes some column attributes to not translate correctly. For example, ssNoVersion allows an identity column with a data type of tinyint whereas a <see
-               cref="T:System.Data.DataColumn" />
+              , which causes some column attributes to not translate correctly. For example, ssNoVersion allows an identity column with a data type of tinyint whereas a <see cref="T:System.Data.DataColumn" />
 
               
 
-               only allows Int16, Int32, and Int64 to have the <see
-               cref="P:System.Data.DataColumn.AutoIncrement" />
+               only allows Int16, Int32, and Int64 to have the <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
               
 
-               property set. FillSchema silently ignores cases where the <see
-               cref="T:System.Data.DataColumn" />
+               property set. FillSchema silently ignores cases where the <see cref="T:System.Data.DataColumn" />
 
               
 
@@ -1406,8 +1326,7 @@
             >
           </block>
           <para
-            >Note that primary keys and unique constraints are added to the <see
-             cref="T:System.Data.ConstraintCollection" />
+            >Note that primary keys and unique constraints are added to the <see cref="T:System.Data.ConstraintCollection" />
 
             
 
@@ -1415,30 +1334,28 @@
           >
           <para
             >If a unique clustered index is defined on a column or columns in a SQL Server table and the primary key constraint is defined on a separate set of columns, then the names of the columns in the clustered index will be returned. To return the name or names of the primary key columns, use a query hint with the SELECT statement that specifies the name of the primary key index. For more information about specifying query hints, see <see
-             cref="http://msdn.microsoft.com/library/ms181714.aspx">Query Hint (Transact-SQL)</see>
+              cref="http://msdn.microsoft.com/library/ms181714.aspx"
+              >Query Hint (Transact-SQL)</see
+            >
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >If the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
-             encounters duplicate columns while populating a <see
-             cref="T:System.Data.DataTable" />
+             encounters duplicate columns while populating a <see cref="T:System.Data.DataTable" />
 
             
 
-            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
-             cref="T:System.Data.DataSet" />
+            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see cref="T:System.Data.DataSet" />
 
             
 
-             according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
-             cref="T:System.Data.DataSet" />
+             according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1449,13 +1366,11 @@
 
             
 
-             does not return any rows. Use the <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+             does not return any rows. Use the <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             method to add rows to a <see
-             cref="T:System.Data.DataTable" />
+             method to add rows to a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1463,18 +1378,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When handling batch SQL statements that return multiple results, the implementation of <see
-               cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+              >When handling batch SQL statements that return multiple results, the implementation of <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
               
 
-               for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
-               cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+               for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
               
 
-               with the <see
-               cref="T:System.Data.MissingSchemaAction" />
+               with the <see cref="T:System.Data.MissingSchemaAction" />
 
               
 
@@ -1485,18 +1397,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.DataTable" />
+            >Adds a <see cref="T:System.Data.DataTable" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.DataSet" />
+             to the specified <see cref="T:System.Data.DataSet" />
 
             
 
-             and configures the schema to match that in the data source based on the specified <see
-             cref="T:System.Data.SchemaType" />
+             and configures the schema to match that in the data source based on the specified <see cref="T:System.Data.SchemaType" />
 
             
 
@@ -1506,8 +1415,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1515,24 +1423,30 @@
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataSet" />
+          The <see cref="T:System.Data.DataSet" />
 
           
 
            to be filled with the schema from the data source. </param
         >
         <param name="schemaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.SchemaType" />
+          One of the <see cref="T:System.Data.SchemaType" />
 
           
 
@@ -1566,13 +1480,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.DataTable" />
+            >Adds a <see cref="T:System.Data.DataTable" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.DataSet" />
+             to the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1582,8 +1494,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1591,46 +1502,53 @@
           >
         </returns>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
-           to be filled from the <see
-           cref="T:System.Data.IDataReader" />
+           to be filled from the <see cref="T:System.Data.IDataReader" />
 
           
 
           .</param
         >
         <param name="schemaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.SchemaType" />
+          One of the <see cref="T:System.Data.SchemaType" />
 
           
 
            values.</param
         >
         <param name="dataReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.IDataReader" />
+          The <see cref="T:System.Data.IDataReader" />
 
           
 
-           to be used as the data source when filling the <see
-           cref="T:System.Data.DataTable" />
+           to be used as the data source when filling the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -1661,13 +1579,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.DataTable" />
+            >Adds a <see cref="T:System.Data.DataTable" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.DataSet" />
+             to the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1677,13 +1593,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to a collection of <see
-             cref="T:System.Data.DataTable" />
+            >A reference to a collection of <see cref="T:System.Data.DataTable" />
 
             
 
-             objects that were added to the <see
-             cref="T:System.Data.DataSet" />
+             objects that were added to the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1691,53 +1605,64 @@
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
-           to be filled from the <see
-           cref="T:System.Data.IDataReader" />
+           to be filled from the <see cref="T:System.Data.IDataReader" />
 
           
 
           .</param
         >
         <param name="schemaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.SchemaType" />
+          One of the <see cref="T:System.Data.SchemaType" />
 
           
 
            values.</param
         >
         <param name="srcTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the source table to use for table mapping.</param
         >
         <param name="dataReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.IDataReader" />
+          The <see cref="T:System.Data.IDataReader" />
 
           
 
-           to be used as the data source when filling the <see
-           cref="T:System.Data.DataTable" />
+           to be used as the data source when filling the <see cref="T:System.Data.DataTable" />
 
           
 
@@ -1764,8 +1689,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.IDataParameter" />
+            >An array of <see cref="T:System.Data.IDataParameter" />
 
             
 
@@ -1798,8 +1722,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see
-             cref="T:System.Data.Common.DataTableMappingCollection" />
+            >Indicates whether a <see cref="T:System.Data.Common.DataTableMappingCollection" />
 
             
 
@@ -1809,8 +1732,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a <see
-             cref="T:System.Data.Common.DataTableMappingCollection" />
+            >true if a <see cref="T:System.Data.Common.DataTableMappingCollection" />
 
             
 
@@ -1834,13 +1756,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.Common.DataAdapter.TableMappings" />
+            >The <see cref="P:System.Data.Common.DataAdapter.TableMappings" />
 
             
 
-             property provides the master mapping between the returned records and the <see
-             cref="T:System.Data.DataSet" />
+             property provides the master mapping between the returned records and the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1878,8 +1798,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the action to take when existing <see
-             cref="T:System.Data.DataSet" />
+            >Determines the action to take when existing <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1919,12 +1838,15 @@
           <para>Invoked when an error occurs during a Fill.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.FillErrorEventArgs" />
+          A <see cref="T:System.Data.FillErrorEventArgs" />
 
           
 
@@ -1952,18 +1874,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets <see
-             cref="P:System.Data.Common.DataAdapter.FillLoadOption" />
+            >Resets <see cref="P:System.Data.Common.DataAdapter.FillLoadOption" />
 
             
 
-             to its default state and causes <see
-             cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+             to its default state and causes <see cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             to honor <see
-             cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringFill" />
+             to honor <see cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringFill" />
 
             
 
@@ -2024,8 +1943,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringFill" />
+            >Determines whether the <see cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringFill" />
 
             
 
@@ -2035,8 +1953,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringFill" />
+            >true if the <see cref="P:System.Data.Common.DataAdapter.AcceptChangesDuringFill" />
 
             
 
@@ -2068,8 +1985,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="P:System.Data.Common.DataAdapter.FillLoadOption" />
+            >Determines whether the <see cref="P:System.Data.Common.DataAdapter.FillLoadOption" />
 
             
 
@@ -2079,8 +1995,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Data.Common.DataAdapter.FillLoadOption" />
+            >true if the <see cref="P:System.Data.Common.DataAdapter.FillLoadOption" />
 
             
 
@@ -2104,8 +2019,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether one or more <see
-             cref="T:System.Data.Common.DataTableMapping" />
+            >Determines whether one or more <see cref="T:System.Data.Common.DataTableMapping" />
 
             
 
@@ -2115,8 +2029,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more <see
-             cref="T:System.Data.Common.DataTableMapping" />
+            >true if one or more <see cref="T:System.Data.Common.DataTableMapping" />
 
             
 
@@ -2147,21 +2060,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDataAdapter" />
 
             
 
              interface.</para
           >
           <para
-            >Fore more information, see <see
-             cref="P:System.Data.IDataAdapter.TableMappings" />
+            >Fore more information, see <see cref="P:System.Data.IDataAdapter.TableMappings" />
 
             
 
@@ -2188,18 +2098,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When reconciling changes, the <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >When reconciling changes, the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
-             uses the <see
-             cref="T:System.Data.Common.DataTableMappingCollection" />
+             uses the <see cref="T:System.Data.Common.DataTableMappingCollection" />
 
             
 
-             collection to associate the column names used by the data source with the column names used by the <see
-             cref="T:System.Data.DataSet" />
+             collection to associate the column names used by the data source with the column names used by the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -2209,8 +2116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection that provides the master mapping between a source table and a <see
-             cref="T:System.Data.DataTable" />
+            >Gets a collection that provides the master mapping between a source table and a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -2244,51 +2150,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The update is performed on a by-row basis. For every inserted, modified, and deleted row, the <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+            >The update is performed on a by-row basis. For every inserted, modified, and deleted row, the <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method determines the type of change that has been performed on it (Insert, Update or Delete). Depending on the type of change, the Insert, Update, or Delete command template executes to propagate the modified row to the data source. When an application calls the <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+             method determines the type of change that has been performed on it (Insert, Update or Delete). Depending on the type of change, the Insert, Update, or Delete command template executes to propagate the modified row to the data source. When an application calls the <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method, the <see
-             cref="T:System.Data.Common.DataAdapter" />
+             method, the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
-             examines the <see
-             cref="P:System.Data.DataRow.RowState" />
+             examines the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
-             cref="T:System.Data.DataSet" />
+             property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For example, <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+            . For example, <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see
-             cref="T:System.Data.DataTable" />
+             might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see cref="T:System.Data.DataTable" />
 
             
 
             .</para
           >
           <para
-            >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
-             cref="M:System.Data.DataSet.GetChanges" />
+            >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see cref="M:System.Data.DataSet.GetChanges" />
 
             
 
-             method in situations where you must control the sequence of statement types (for example, INSERT before UPDATE). For more information, see <format
-             type="text/html">
+             method in situations where you must control the sequence of statement types (for example, INSERT before UPDATE). For more information, see <format type="text/html">
               <a href="D1BD9A8C-0E29-40E3-BDA8-D89176B72FB1"
                 >Updating the Database with a DataAdapter and the DataSet</a
               >
@@ -2299,28 +2196,23 @@
             .</para
           >
           <para
-            >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+            >If INSERT, UPDATE, or DELETE statements have not been specified, the <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method generates an exception. However, you can create a <see
-             cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+             method generates an exception. However, you can create a <see cref="T:System.Data.SqlClient.SqlCommandBuilder" />
 
             
 
-             or <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+             or <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-             object to automatically generate SQL statements for single-table updates if you set the SelectCommand property of a .NET Framework data provider. Then, any additional SQL statements that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+             object to automatically generate SQL statements for single-table updates if you set the SelectCommand property of a .NET Framework data provider. Then, any additional SQL statements that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information see <format
-             type="text/html">
+            . For more information see <format type="text/html">
               <a href="6E3FB8B5-373B-4F9E-AB03-A22693DF8E91">Automatically Generated Commands</a>
             </format>
 
@@ -2329,44 +2221,37 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+            >The <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method retrieves rows from the table listed in the first mapping before performing an update. The <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+             method retrieves rows from the table listed in the first mapping before performing an update. The <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             then refreshes the row using the value of the <see
-             cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+             then refreshes the row using the value of the <see cref="P:System.Data.IDbCommand.UpdatedRowSource" />
 
             
 
              property. Any additional rows returned are ignored.</para
           >
           <para
-            >After any data is loaded back into the <see
-             cref="T:System.Data.DataSet" />
+            >After any data is loaded back into the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+            , the <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
             
 
-             event is raised, allowing the user to inspect the reconciled <see
-             cref="T:System.Data.DataSet" />
+             event is raised, allowing the user to inspect the reconciled <see cref="T:System.Data.DataSet" />
 
             
 
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
-            >When using <see
-             cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+            >When using <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -2375,8 +2260,7 @@
           <list type="ordered">
             <item>
               <para
-                >The values in the <see
-                 cref="T:System.Data.DataRow" />
+                >The values in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -2385,8 +2269,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
                 
 
@@ -2398,8 +2281,7 @@
             </item>
             <item>
               <para
-                >If the command is set to FirstReturnedRecord, then the first returned result is placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If the command is set to FirstReturnedRecord, then the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -2408,8 +2290,7 @@
             </item>
             <item>
               <para
-                >If there are output parameters, they are placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -2418,8 +2299,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
                 
 
@@ -2432,18 +2312,15 @@
 
                 
 
-                 is called. This will raise both the <see
-                 cref="E:System.Data.DataTable.RowChanging" />
+                 is called. This will raise both the <see cref="E:System.Data.DataTable.RowChanging" />
 
                 
 
-                 and <see
-                 cref="E:System.Data.DataTable.RowChanged" />
+                 and <see cref="E:System.Data.DataTable.RowChanged" />
 
                 
 
-                 events for the updated <see
-                 cref="T:System.Data.DataRow" />
+                 events for the updated <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -2452,26 +2329,22 @@
             </item>
           </list>
           <para
-            >Each command associated with the <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >Each command associated with the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
-             usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a.NET data provider's Parameter class. SourceColumn refers to a <see
-             cref="T:System.Data.DataTable" />
+             usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a.NET data provider's Parameter class. SourceColumn refers to a <see cref="T:System.Data.DataTable" />
 
             
 
-             column that the <see
-             cref="T:System.Data.Common.DataAdapter" />
+             column that the <see cref="T:System.Data.Common.DataAdapter" />
 
             
 
              references to obtain parameter values for the current row.</para
           >
           <para
-            >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
-             cref="T:System.Data.MissingMappingAction" />
+            >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see cref="T:System.Data.MissingMappingAction" />
 
             
 
@@ -2494,8 +2367,7 @@
               </term>
               <description>
                 <para
-                  >Use the source column names and table names in the <see
-                   cref="T:System.Data.DataSet" />
+                  >Use the source column names and table names in the <see cref="T:System.Data.DataSet" />
 
                   
 
@@ -2509,8 +2381,7 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.SystemException" />
+                  >A <see cref="T:System.SystemException" />
 
                   
 
@@ -2524,8 +2395,7 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.SystemException" />
+                  >A <see cref="T:System.SystemException" />
 
                   
 
@@ -2537,43 +2407,35 @@
           <para>The SourceColumn property is also used to map the value for output or input/output parameters back to the DataSet. An exception is generated if it refers to a nonexistent column.</para>
           <para>The SourceVersion property of a .NET data provider's Parameter class determines whether to use the Original, Current, or Proposed version of the column value. This capability is often used to include original values in the WHERE clause of an UPDATE statement to check for optimistic concurrency violations.</para>
           <para
-            >Calling the <see
-             cref="M:System.Data.DataSet.AcceptChanges" />
+            >Calling the <see cref="M:System.Data.DataSet.AcceptChanges" />
 
             
 
-             method or <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+             method or <see cref="M:System.Data.DataTable.AcceptChanges" />
 
             
 
-             method will commit all changes in the <see
-             cref="T:System.Data.DataSet" />
+             method will commit all changes in the <see cref="T:System.Data.DataSet" />
 
             
 
-             or <see
-             cref="T:System.Data.DataTable" />
+             or <see cref="T:System.Data.DataTable" />
 
             
 
-            . If either of these methods are called before the <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            . If either of these methods are called before the <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method is called, no changes will be committed when the <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+             method is called, no changes will be committed when the <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-             method is called, unless further changes have been made since <see
-             cref="M:System.Data.DataSet.AcceptChanges" />
+             method is called, unless further changes have been made since <see cref="M:System.Data.DataSet.AcceptChanges" />
 
             
 
-             or <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+             or <see cref="M:System.Data.DataTable.AcceptChanges" />
 
             
 
@@ -2581,36 +2443,30 @@
           >
           <block subset="none" type="note">
             <para
-              >If an error occurs while updating a row, an exception is thrown and execution of the update is discontinued. To continue the update operation without generating exceptions when an error is encountered, set the <see
-               cref="P:System.Data.Common.DataAdapter.ContinueUpdateOnError" />
+              >If an error occurs while updating a row, an exception is thrown and execution of the update is discontinued. To continue the update operation without generating exceptions when an error is encountered, set the <see cref="P:System.Data.Common.DataAdapter.ContinueUpdateOnError" />
 
               
 
-               property to true before calling <see
-               cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+               property to true before calling <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
               
 
-              . You may also respond to errors on a per-row basis within the RowUpdated event of a DataAdapter. To continue the update operation without generating an exception within the RowUpdated event, set the <see
-               cref="P:System.Data.Common.RowUpdatedEventArgs.Status" />
+              . You may also respond to errors on a per-row basis within the RowUpdated event of a DataAdapter. To continue the update operation without generating an exception within the RowUpdated event, set the <see cref="P:System.Data.Common.RowUpdatedEventArgs.Status" />
 
               
 
-               property of the <see
-               cref="T:System.Data.Common.RowUpdatedEventArgs" />
+               property of the <see cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
               
 
-               to <see
-               cref="F:System.Data.UpdateStatus.Continue" />
+               to <see cref="F:System.Data.UpdateStatus.Continue" />
 
               
 
               .</para
             >
             <para
-              >For every column that you propagate to the data source on <see
-               cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+              >For every column that you propagate to the data source on <see cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
 
               
 
@@ -2621,13 +2477,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls the respective INSERT, UPDATE, or DELETE statements for each inserted, updated, or deleted row in the specified <see
-             cref="T:System.Data.DataSet" />
+            >Calls the respective INSERT, UPDATE, or DELETE statements for each inserted, updated, or deleted row in the specified <see cref="T:System.Data.DataSet" />
 
             
 
-             from a <see
-             cref="T:System.Data.DataTable" />
+             from a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -2637,8 +2491,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully updated from the <see
-             cref="T:System.Data.DataSet" />
+            >The number of rows successfully updated from the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -2646,12 +2499,15 @@
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataSet" />
+          The <see cref="T:System.Data.DataSet" />
 
           
 

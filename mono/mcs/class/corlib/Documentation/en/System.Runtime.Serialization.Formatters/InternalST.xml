@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The trace message is printed during, serialization, remoting and when running <format
-         type="text/html">
+        >The trace message is printed during, serialization, remoting and when running <format type="text/html">
           <a href="40f6f8c8-b80c-4e9f-a920-31bcd0cf45c5">Soapsuds Tool (Soapsuds.exe)</a>
         </format>
 
@@ -78,7 +77,11 @@
           <para>Prints SOAP trace messages.</para>
         </summary>
         <param name="messages">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -116,8 +119,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Reflection.Assembly" />
+            >The <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -125,7 +127,11 @@
           >
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -163,26 +169,37 @@
           <para>Sets the value of a field.</para>
         </summary>
         <param name="fi">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.FieldInfo" />
+          A <see cref="T:System.Reflection.FieldInfo" />
 
           
 
            containing data about the target field.</param
         >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The field to change.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,7 +243,11 @@
           <para>Processes the specified array of messages.</para>
         </summary>
         <param name="messages">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,14 +289,22 @@
           <para>Asserts the specified message.</para>
         </summary>
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A Boolean value to use when asserting.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

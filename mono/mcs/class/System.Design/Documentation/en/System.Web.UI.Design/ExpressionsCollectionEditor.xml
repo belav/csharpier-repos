@@ -19,41 +19,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see
-         cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
+        >An instance of the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
 
         
 
-         class is a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         class is a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
          object that can be used at design time to select and edit a collection of expression bindings, and assign the expressions to a control property.</para
       >
       <para
-        >A designer host, such as vsprvslong, uses the <see
-         cref="T:System.Web.Compilation.ExpressionBuilder" />
+        >A designer host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.Design.ExpressionEditor" />
+         and <see cref="T:System.Web.UI.Design.ExpressionEditor" />
 
         
 
-         class implementations with the <see
-         cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
+         class implementations with the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
+         and <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
         
 
-         classes to set the expression bindings for control properties at design time, and the <see
-         cref="T:System.Web.UI.Design.ControlPersister" />
+         classes to set the expression bindings for control properties at design time, and the <see cref="T:System.Web.UI.Design.ControlPersister" />
 
         
 
@@ -78,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
 
             
 
@@ -109,64 +101,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
+            >The <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
 
             
 
-             method launches the user interface for editing the <paramref
-             name="value" />
+             method launches the user interface for editing the <paramref name="value" />
 
             
 
-             object. The designer host calls the <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
+             object. The designer host calls the <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
 
             
 
-             method when you attempt to edit the value of a property that this editor is associated with. The input service provider is used to obtain any editing services that are required within the <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
+             method when you attempt to edit the value of a property that this editor is associated with. The input service provider is used to obtain any editing services that are required within the <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
 
             
 
             .</para
           >
           <para
-            >A designer host, such as vsprvslong, uses the <see
-             cref="T:System.Web.Compilation.ExpressionBuilder" />
+            >A designer host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.Design.ExpressionEditor" />
+             and <see cref="T:System.Web.UI.Design.ExpressionEditor" />
 
             
 
-             class implementations with the <see
-             cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
+             class implementations with the <see cref="T:System.Web.UI.Design.ExpressionsCollectionEditor" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
+             and <see cref="T:System.Web.UI.Design.ExpressionsCollectionConverter" />
 
             
 
-             classes to set the expression bindings for control properties at design time, and the <see
-             cref="T:System.Web.UI.Design.ControlPersister" />
+             classes to set the expression bindings for control properties at design time, and the <see cref="T:System.Web.UI.Design.ControlPersister" />
 
             
 
              class to persist the expressions for run time. Expression strings reference a localizable resource, an application setting, a connection string, or a custom expression type. The expression string is bound to the control property at design time, and then used at run time to determine the value for the property. </para
           >
           <para
-            >If users cancel the user interface without modifying the expression binding collection, the <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
+            >If users cancel the user interface without modifying the expression binding collection, the <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.EditValue" />
 
             
 
-             method returns the input <paramref
-             name="value" />
+             method returns the input <paramref name="value" />
 
             
 
@@ -180,13 +161,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.UI.ExpressionBindingCollection" />
+            >An <see cref="T:System.Web.UI.ExpressionBindingCollection" />
 
             
 
-             object containing the selected expressions; otherwise, if no expressions are selected, the <paramref
-             name="value" />
+             object containing the selected expressions; otherwise, if no expressions are selected, the <paramref name="value" />
 
             
 
@@ -194,26 +173,37 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that can be used to gain additional context information such as the associated control.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A service provider object through which editing services can be obtained.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -240,31 +230,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
+            >The <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
 
             
 
-             method returns the <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.Modal" />
+             method returns the <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.Modal" />
 
             
 
              value by default. </para
           >
           <para
-            >If <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
+            >If <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
 
             
 
-             is not supported in the specified context, the <see
-             cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
+             is not supported in the specified context, the <see cref="Overload:System.Web.UI.Design.ExpressionsCollectionEditor.GetEditStyle" />
 
             
 
-             returns <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+             returns <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
 
             
 
@@ -278,8 +263,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+            >An <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
 
             
 
@@ -287,12 +271,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

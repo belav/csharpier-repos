@@ -40,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the base attribute class for declarative security from which <see
-         cref="T:System.Security.Permissions.CodeAccessSecurityAttribute" />
+        >Specifies the base attribute class for declarative security from which <see cref="T:System.Security.Permissions.CodeAccessSecurityAttribute" />
 
         
 
@@ -79,8 +78,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -89,13 +87,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot create an instance of this class. You must inherit from this class to make use of its functionality. The value of <paramref
-             name="action" />
+            >You cannot create an instance of this class. You must inherit from this class to make use of its functionality. The value of <paramref name="action" />
 
             
 
-             is used to set the <see
-             cref="P:System.Security.Permissions.SecurityAttribute.Action" />
+             is used to set the <see cref="P:System.Security.Permissions.SecurityAttribute.Action" />
 
             
 
@@ -105,13 +101,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Security.Permissions.SecurityAttribute" />
+            >Initializes a new instance of <see cref="T:System.Security.Permissions.SecurityAttribute" />
 
             
 
-             with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -119,12 +113,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -194,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, creates a permission object that can then be serialized into binary form and persistently stored along with the <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+            >When overridden in a derived class, creates a permission object that can then be serialized into binary form and persistently stored along with the <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -235,8 +231,7 @@
 
              if full access
    to the protected resource
-   is declared or is being set; otherwise, <see
-             langword="false" />
+   is declared or is being set; otherwise, <see langword="false" />
 
             
 

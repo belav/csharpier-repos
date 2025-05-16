@@ -17,38 +17,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        >The <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         class is used by data-bound controls (such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class is used by data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        ) to display a button for each record that is displayed. The <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        ) to display a button for each record that is displayed. The <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object is displayed differently depending on the data-bound control in which it is used. For example, the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         object is displayed differently depending on the data-bound control in which it is used. For example, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control displays a <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         control displays a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object as a column, while the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         object as a column, while the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
@@ -57,23 +50,19 @@
       <para>Clicking a button in a button field raises the command event of the parent data-bound control. You can provide a custom routine to perform when a command button is clicked by providing an event handler for the command event.</para>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control raises the <see
-           cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+           control raises the <see cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
 
           
 
-           event, while the <see
-           cref="T:System.Web.UI.WebControls.DetailsView" />
+           event, while the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
           
 
-           control raises the <see
-           cref="E:System.Web.UI.WebControls.DetailsView.ItemCommand" />
+           control raises the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemCommand" />
 
           
 
@@ -81,31 +70,26 @@
         >
       </block>
       <para
-        >To determine the index of the record that raises the command event, use the <see
-         cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+        >To determine the index of the record that raises the command event, use the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
         
 
-         property of the event argument that is passed to the command event for the data-bound control. The <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         property of the event argument that is passed to the command event for the data-bound control. The <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         class automatically populates the <see
-         cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+         class automatically populates the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
         
 
          property with the appropriate index value.</para
       >
       <para
-        >To specify the type of button to display, use the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+        >To specify the type of button to display, use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
         
 
-         property. When displaying a link or command button, use the <see
-         cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+         property. When displaying a link or command button, use the <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
         
 
@@ -113,13 +97,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If you set the <see
-           cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+          >If you set the <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
           
 
-           property, all buttons in a <see
-           cref="T:System.Web.UI.WebControls.ButtonField" />
+           property, all buttons in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
           
 
@@ -127,36 +109,30 @@
         >
       </block>
       <para
-        >Alternatively, you can bind the <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        >Alternatively, you can bind the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object to a field in a data source. This allows you to display different captions for the buttons in the <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         object to a field in a data source. This allows you to display different captions for the buttons in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object. The values that are in the specified field are used for the text captions of the buttons. Set the <see
-         cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+         object. The values that are in the specified field are used for the text captions of the buttons. Set the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
         
 
-         property to bind a <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         property to bind a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
          object to a field in a data source.</para
       >
       <para
-        >When displaying an image button, use the <see
-         cref="P:System.Web.UI.WebControls.ButtonField.ImageUrl" />
+        >When displaying an image button, use the <see cref="P:System.Web.UI.WebControls.ButtonField.ImageUrl" />
 
         
 
-         property to specify the image to display for the buttons in the <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         property to specify the image to display for the buttons in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
@@ -164,8 +140,7 @@
       >
       <block subset="none" type="note">
         <para
-          >All buttons in a <see
-           cref="T:System.Web.UI.WebControls.ButtonField" />
+          >All buttons in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
           
 
@@ -173,46 +148,38 @@
         >
       </block>
       <para
-        >You can hide a <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        >You can hide a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object in a data-bound control by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+         object in a data-bound control by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
 
         
 
          property to false.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        >The <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object allows you to customize its header and footer sections. To display a caption in the header or footer section, set the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+         object allows you to customize its header and footer sections. To display a caption in the header or footer section, set the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
+         or <see cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
 
         
 
-         properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+         properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
 
         
 
-         property. To hide the header section in a <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         property. To hide the header section in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         object, set the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+         object, set the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
         
 
@@ -220,13 +187,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Some data-bound controls (such as the <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >Some data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
-           cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
           
 
@@ -234,8 +199,7 @@
         >
       </block>
       <para
-        >You also can customize the appearance of the <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        >You also can customize the appearance of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
@@ -260,8 +224,7 @@
           </term>
           <description>
             <para
-              >The child Web server controls of the <see
-               cref="T:System.Web.UI.WebControls.ButtonField" />
+              >The child Web server controls of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
               
 
@@ -277,8 +240,7 @@
           </term>
           <description>
             <para
-              >The footer section of the <see
-               cref="T:System.Web.UI.WebControls.ButtonField" />
+              >The footer section of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
               
 
@@ -294,8 +256,7 @@
           </term>
           <description>
             <para
-              >The header section of the <see
-               cref="T:System.Web.UI.WebControls.ButtonField" />
+              >The header section of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
               
 
@@ -311,8 +272,7 @@
           </term>
           <description>
             <para
-              >The data items in the <see
-               cref="T:System.Web.UI.WebControls.ButtonField" />
+              >The data items in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
               
 
@@ -337,41 +297,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ButtonField.#ctor" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ButtonField.#ctor" />
 
             
 
-             constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
-            >To add a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >To add a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object dynamically to a data-bound control, create a new <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             object dynamically to a data-bound control, create a new <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object, set its properties, and then add it to the field collection for the data-bound control. For example, if you are using the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             object, set its properties, and then add it to the field collection for the data-bound control. For example, if you are using the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control, add the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             control, add the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object to the <see
-             cref="P:System.Web.UI.WebControls.GridView.Columns" />
+             object to the <see cref="P:System.Web.UI.WebControls.GridView.Columns" />
 
             
 
@@ -384,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -414,18 +366,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
 
             
 
-             property to associate a command name, such as "Add" or "Remove", with the buttons in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to associate a command name, such as "Add" or "Remove", with the buttons in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object. You can set the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
+             object. You can set the <see cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
 
             
 
@@ -433,8 +382,7 @@
           >
           <block subset="none" type="note">
             <para
-              >All buttons in a <see
-               cref="T:System.Web.UI.WebControls.ButtonField" />
+              >All buttons in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
               
 
@@ -472,58 +420,47 @@
             </item>
           </list>
           <para
-            >To invoke paging, set the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
+            >To invoke paging, set the <see cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
 
             
 
-             to "Page" and the <see
-             cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+             to "Page" and the <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
 
             
 
-             of the contained <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             of the contained <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control to "First", "Last", "Prev", "Next", or a page number. However, since the <see
-             cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+             control to "First", "Last", "Prev", "Next", or a page number. However, since the <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
 
             
 
-             for a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             for a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             control is always the integer row index, a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             control is always the integer row index, a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             control is not suitable for invoking paging. Similarly, while you can invoke sorting by setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
+             control is not suitable for invoking paging. Similarly, while you can invoke sorting by setting the <see cref="P:System.Web.UI.WebControls.ButtonField.CommandName" />
 
             
 
-             to "Sort", the <see
-             cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+             to "Sort", the <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
 
             
 
-             property for a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property for a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             control is always the integer row index. For this reason, a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             control is always the integer row index. For this reason, a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             control is not suitable for invoking sorting. For custom command names, such as "Add" and "Remove", you need to write the event code to check the command name and perform some custom action. For more information, see <see
-             cref="T:System.Web.UI.WebControls.DataControlCommands" />
+             control is not suitable for invoking sorting. For custom command names, such as "Add" and "Remove", you need to write the event code to check the command name and perform some custom action. For more information, see <see cref="T:System.Web.UI.WebControls.DataControlCommands" />
 
             
 
@@ -531,13 +468,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Not all command names are recognized by every data-bound controls. For example, "New" is not recognized by the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >Not all command names are recognized by every data-bound controls. For example, "New" is not recognized by the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
-               control and "Select" is not recognized by the <see
-               cref="T:System.Web.UI.WebControls.DetailsView" />
+               control and "Select" is not recognized by the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
               
 
@@ -549,8 +484,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string that represents the action to perform when a button in a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Gets or sets a string that represents the action to perform when a button in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -579,28 +513,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonFieldBase.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonFieldBase.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
 
             
 
-             method is a helper method that is used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method that is used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             method to copy the properties of the current <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
-            -derived object to the <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+            -derived object to the <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
-             object that was created by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             object that was created by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
@@ -610,13 +539,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the properties of the current <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Copies the properties of the current <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object to the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             object to the specified <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -624,17 +551,19 @@
           >
         </summary>
         <param name="newField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlField" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
-           to which to copy the properties of the current <see
-           cref="T:System.Web.UI.WebControls.ButtonField" />
+           to which to copy the properties of the current <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
           
 
@@ -660,23 +589,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonField.CreateField" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonField.CreateField" />
 
             
 
-             method is a helper method that is used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method that is used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method of the base class to create an empty <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             method of the base class to create an empty <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object to which to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             object to which to copy the properties of the current <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -686,8 +611,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Creates and returns a new instance of the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -697,8 +621,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the  <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >A new instance of the  <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -730,71 +653,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property of a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object is set to the <see
-             cref="F:System.Web.UI.WebControls.ButtonType.Button" />
+             object is set to the <see cref="F:System.Web.UI.WebControls.ButtonType.Button" />
 
             
 
-             or <see
-             cref="F:System.Web.UI.WebControls.ButtonType.Link" />
+             or <see cref="F:System.Web.UI.WebControls.ButtonType.Link" />
 
             
 
-             value, use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+             value, use the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
             
 
-             property to specify the name of the field to bind to the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to specify the name of the field to bind to the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object. The values of the field are then displayed as the text for the buttons in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             object. The values of the field are then displayed as the text for the buttons in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object. Optionally, you can format the displayed text by setting the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+             object. Optionally, you can format the displayed text by setting the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
 
             
 
              property.</para
           >
           <para
-            >Instead of using the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+            >Instead of using the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
             
 
-             property to bind a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to bind a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object to a field from a data source, you can use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+             object to a field from a data source, you can use the <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
             
 
-             property to display static text for the text of the buttons in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to display static text for the text of the buttons in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object. When the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+             object. When the <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
             
 
@@ -802,18 +712,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+              >If the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+               and <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
               
 
-               properties are both set, the <see
-               cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+               properties are both set, the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
               
 
@@ -825,18 +732,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the data field for which the value is bound to the <see
-             cref="P:System.Web.UI.WebControls.Button.Text" />
+            >Gets or sets the name of the data field for which the value is bound to the <see cref="P:System.Web.UI.WebControls.Button.Text" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             property of the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control that is rendered by the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             control that is rendered by the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -868,18 +772,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
 
             
 
-             property to specify a custom display format for the values that are displayed in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to specify a custom display format for the values that are displayed in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object. If the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+             object. If the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
 
             
 
@@ -887,8 +788,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The format string is applied only when the <see
-               cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+              >The format string is applied only when the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
               
 
@@ -896,8 +796,7 @@
             >
           </block>
           <para
-            >The format string can be any literal string and usually includes a placeholder for the value for the field. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the value for the field when it is displayed in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >The format string can be any literal string and usually includes a placeholder for the value for the field. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the value for the field when it is displayed in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -907,18 +806,15 @@
             <para>If the format string does not include a placeholder, the value for the field from the data source is not included in the final display text.</para>
           </block>
           <para
-            >The placeholder consists of two parts, separated by a colon and wrapped in braces, in the form { <paramref
-             name="A" />
+            >The placeholder consists of two parts, separated by a colon and wrapped in braces, in the form { <paramref name="A" />
 
             
 
-             : <paramref
-             name="Bxx" />
+             : <paramref name="Bxx" />
 
             
 
-             }. The value before the colon (<paramref
-             name="A" />
+             }. The value before the colon (<paramref name="A" />
 
             
 
@@ -926,8 +822,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This <paramref
-               name="A" />
+              >This <paramref name="A" />
 
               
 
@@ -935,8 +830,7 @@
             >
           </block>
           <para
-            >The colon and the values after the colon are optional. The character after the colon (<paramref
-             name="B" />
+            >The colon and the values after the colon are optional. The character after the colon (<paramref name="B" />
 
             
 
@@ -1014,16 +908,14 @@
             <para>Except for X, the format characters are not case sensitive. The X format character displays the hexadecimal characters in the case that is specified.</para>
           </block>
           <para
-            >The value after the format character (<paramref
-             name="xx" />
+            >The value after the format character (<paramref name="xx" />
 
             
 
              in the general example) specifies the number of significant digits or decimal places to display. For example, the format string "{0:F2}" displays a fixed-point number with two decimal places.</para
           >
           <para
-            >For more information on formatting strings, see <format
-             type="text/html">
+            >For more information on formatting strings, see <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
             </format>
 
@@ -1060,13 +952,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonField.FormatDataTextValue(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonField.FormatDataTextValue(System.Object)" />
 
             
 
-             method is a helper method that is used to transform a field value to the format that is specified by the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+             method is a helper method that is used to transform a field value to the format that is specified by the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
 
             
 
@@ -1076,8 +966,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formats the specified field value for a cell in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Formats the specified field value for a cell in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -1087,8 +976,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The field value converted to the format specified by the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+            >The field value converted to the format specified by the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
 
             
 
@@ -1123,23 +1011,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property of a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object is set to the <see
-             cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+             object is set to the <see cref="F:System.Web.UI.WebControls.ButtonType.Image" />
 
             
 
-             value, use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.ImageUrl" />
+             value, use the <see cref="P:System.Web.UI.WebControls.ButtonField.ImageUrl" />
 
             
 
@@ -1150,8 +1034,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the image to display for each button in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Gets or sets the image to display for each button in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -1181,61 +1064,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" />
 
             
 
-             method is called by the data control with which the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             method is called by the data control with which the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object is associated to perform basic object initialization for instances of the field, before the field is ever added to a rows collection. Data controls, such as <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+             object is associated to perform basic object initialization for instances of the field, before the field is ever added to a rows collection. Data controls, such as <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             and <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-            , call the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" />
+            , call the <see cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" />
 
             
 
              method in their CreateChildControls methods before other methods, such as CreateRow, are called to create specific rows with data.</para
           >
           <para
-            >Call The <see
-             cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" />
+            >Call The <see cref="M:System.Web.UI.WebControls.ButtonField.Initialize(System.Boolean,System.Web.UI.Control)" />
 
             
 
-             method when you are writing a custom data-bound control that uses <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method when you are writing a custom data-bound control that uses <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects to perform basic initialization for a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             objects to perform basic initialization for a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object. Implement this method if your <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             object. Implement this method if your <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-            -derived type requires any object initialization before it populates <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            -derived type requires any object initialization before it populates <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects with data or controls in the <see
-             cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+             objects with data or controls in the <see cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
@@ -1245,8 +1117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the current <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Initializes the current <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -1258,19 +1129,26 @@
           <para>false, which indicates the control does not need to rebind to the data.</para>
         </returns>
         <param name="sortingEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to enable sorting; otherwise, false. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data control that owns the <see
-           cref="T:System.Web.UI.WebControls.ButtonField" />
+          The data control that owns the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
           
 
@@ -1301,38 +1179,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
-             method creates the button type that is specified by the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+             method creates the button type that is specified by the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property and adds it to the <see
-             cref="P:System.Web.UI.Control.Controls" />
+             property and adds it to the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+             collection of the <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
-             object. The <see
-             cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+             object. The <see cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             property of the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control is set to <paramref
-             name="rowIndex" />
+             control is set to <paramref name="rowIndex" />
 
             
 
@@ -1342,8 +1213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+            >Initializes the specified <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
             
 
@@ -1351,43 +1221,56 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
           
 
            to initialize.</param
         >
         <param name="cellType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.DataControlCellType" />
+          A <see cref="T:System.Web.UI.WebControls.DataControlCellType" />
 
           
 
            value that indicates the type of row (header, footer, or data).</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
            values.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1418,56 +1301,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >When the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property of a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object is set to the <see
-             cref="F:System.Web.UI.WebControls.ButtonType.Button" />
+             object is set to the <see cref="F:System.Web.UI.WebControls.ButtonType.Button" />
 
             
 
-             or <see
-             cref="F:System.Web.UI.WebControls.ButtonType.Link" />
+             or <see cref="F:System.Web.UI.WebControls.ButtonType.Link" />
 
             
 
-             value, use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+             value, use the <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
             
 
-             property to display static text for the caption of the buttons in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to display static text for the caption of the buttons in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
             . Each button shares the same caption.</para
           >
           <para
-            >Instead of using the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+            >Instead of using the <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
             
 
-             property to display static text in a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to display static text in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
-             object, you can use the <see
-             cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+             object, you can use the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
             
 
-             property to bind the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             property to bind the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -1475,18 +1348,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+              >If the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+               and <see cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
               
 
-               properties are both set, the <see
-               cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+               properties are both set, the <see cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
 
               
 
@@ -1495,13 +1365,11 @@
           </block>
           <para>The value of this property is stored in view state.</para>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1515,8 +1383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the static caption that is displayed for each button in the <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Gets or sets the static caption that is displayed for each button in the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -1540,13 +1407,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonField.ValidateSupportsCallback" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonField.ValidateSupportsCallback" />
 
             
 
-             method is a helper method that is used to determine whether the controls that are contained in a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+             method is a helper method that is used to determine whether the controls that are contained in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 
@@ -1554,8 +1419,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.WebControls.ButtonField.ValidateSupportsCallback" />
+              >The <see cref="M:System.Web.UI.WebControls.ButtonField.ValidateSupportsCallback" />
 
               
 
@@ -1566,8 +1430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the controls that are contained in a <see
-             cref="T:System.Web.UI.WebControls.ButtonField" />
+            >Determines whether the controls that are contained in a <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
             
 

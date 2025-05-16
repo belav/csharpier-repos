@@ -34,74 +34,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.DomainUpDown" />
+        >A <see cref="T:System.Windows.Forms.DomainUpDown" />
 
         
 
-         control displays a single string value that is selected from an <see
-         cref="T:System.Object" />
+         control displays a single string value that is selected from an <see cref="T:System.Object" />
 
         
 
-         collection by clicking the up or down buttons of the control. The user can also enter text in the control, unless the <see
-         cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
+         collection by clicking the up or down buttons of the control. The user can also enter text in the control, unless the <see cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
 
         
 
          property is set to true (the string typed in must match an item in the collection to be accepted). When an item is selected, the object is converted to a string value so it can be displayed in the spin box.</para
       >
       <para
-        >To create a collection of objects to display in the <see
-         cref="T:System.Windows.Forms.DomainUpDown" />
+        >To create a collection of objects to display in the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
         
 
-         control, you can add or remove the items individually by using the <see
-         cref="M:System.Collections.ArrayList.Add(System.Object)" />
+         control, you can add or remove the items individually by using the <see cref="M:System.Collections.ArrayList.Add(System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Collections.ArrayList.Remove(System.Object)" />
+         and <see cref="M:System.Collections.ArrayList.Remove(System.Object)" />
 
         
 
-         methods. This can be called in an event handler, such as the <see
-         cref="E:System.Windows.Forms.Control.Click" />
+         methods. This can be called in an event handler, such as the <see cref="E:System.Windows.Forms.Control.Click" />
 
         
 
-         event of a button. The object collection can be sorted alphabetically by setting the <see
-         cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
+         event of a button. The object collection can be sorted alphabetically by setting the <see cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
 
         
 
-         property to true. When the <see
-         cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+         property to true. When the <see cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
 
         
 
          property is set to true, if you scroll past the last or first object in the collection, the list will start over with the first or last object respectively and appear to roll in a continuous list.</para
       >
       <para
-        >When the <see
-         cref="M:System.Windows.Forms.DomainUpDown.UpButton" />
+        >When the <see cref="M:System.Windows.Forms.DomainUpDown.UpButton" />
 
         
 
-         or <see
-         cref="M:System.Windows.Forms.DomainUpDown.DownButton" />
+         or <see cref="M:System.Windows.Forms.DomainUpDown.DownButton" />
 
         
 
-         methods are called, either in code or by the click of the up or down buttons, <see
-         cref="M:System.Windows.Forms.DomainUpDown.UpdateEditText" />
+         methods are called, either in code or by the click of the up or down buttons, <see cref="M:System.Windows.Forms.DomainUpDown.UpdateEditText" />
 
         
 
-         is called to update the control with the new string. If <see
-         cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+         is called to update the control with the new string. If <see cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
 
         
 
@@ -123,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
@@ -151,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.DomainUpDown.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.DomainUpDown.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -165,8 +149,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
               
 
@@ -177,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
@@ -188,8 +170,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.DomainUpDown.DomainUpDownAccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.DomainUpDown.DomainUpDownAccessibleObject" />
 
             
 
@@ -213,13 +194,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As you move through the collection of items in the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >As you move through the collection of items in the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
-             control using the down button, you will eventually reach the last item in the collection. If you continue, and <see
-             cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+             control using the down button, you will eventually reach the last item in the collection. If you continue, and <see cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
 
             
 
@@ -261,23 +240,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             collection can be built and made available to the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+             collection can be built and made available to the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
-             control in two ways. You can add items to the collection by using the <see
-             cref="M:System.Collections.ArrayList.Add(System.Object)" />
+             control in two ways. You can add items to the collection by using the <see cref="M:System.Collections.ArrayList.Add(System.Object)" />
 
             
 
-             or <see
-             cref="M:System.Collections.ArrayList.Insert(System.Int32,System.Object)" />
+             or <see cref="M:System.Collections.ArrayList.Insert(System.Int32,System.Object)" />
 
             
 
@@ -312,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" />
 
             
 
@@ -321,19 +295,26 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -362,8 +343,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -372,8 +352,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DomainUpDown.OnSelectedItemChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.DomainUpDown.OnSelectedItemChanged(System.Object,System.EventArgs)" />
 
             
 
@@ -383,8 +362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" />
 
             
 
@@ -392,19 +370,26 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -459,26 +444,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
+            >If the <see cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
 
             
 
-             property is set to true, the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+             property is set to true, the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
-             control chooses the item on the list that begins with the character. If more than one item in the collection starts with the same character, the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+             control chooses the item on the list that begins with the character. If more than one item in the collection starts with the same character, the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
              control selects the next item that begins with the typed character, starting from the currently selected position. </para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -487,8 +468,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DomainUpDown.OnTextBoxKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.DomainUpDown.OnTextBoxKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)" />
 
             
 
@@ -498,8 +478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.KeyPress" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
             
 
@@ -507,19 +486,26 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.KeyPressEventArgs" />
+          A <see cref="T:System.Windows.Forms.KeyPressEventArgs" />
 
           
 
@@ -555,13 +541,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Even if you set the <see
-             cref="P:System.Windows.Forms.DomainUpDown.Padding" />
+            >Even if you set the <see cref="P:System.Windows.Forms.DomainUpDown.Padding" />
 
             
 
-             property, it will have a value of <see
-             cref="F:System.Windows.Forms.Padding.Empty" />
+             property, it will have a value of <see cref="F:System.Windows.Forms.Padding.Empty" />
 
             
 
@@ -571,8 +555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the spacing between the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >Gets or sets the spacing between the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
@@ -602,8 +585,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -615,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.DomainUpDown.Padding" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.DomainUpDown.Padding" />
 
             
 
@@ -644,13 +625,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
+            >The <see cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
 
             
 
-             property holds the index value of the item in the collection that is currently selected in the spin box (also known as an up-down control). Collection items can be reassigned new index values if the <see
-             cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
+             property holds the index value of the item in the collection that is currently selected in the spin box (also known as an up-down control). Collection items can be reassigned new index values if the <see cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
 
             
 
@@ -658,8 +637,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the user has entered an item in the spin box, or if no item has been selected, the <see
-               cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
+              >If the user has entered an item in the spin box, or if no item has been selected, the <see cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
 
               
 
@@ -696,8 +674,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set, the value is validated to be one of the items in the collection, and the <see
-             cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
+            >When this property is set, the value is validated to be one of the items in the collection, and the <see cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
 
             
 
@@ -724,13 +701,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" />
+            >For the <see cref="E:System.Windows.Forms.DomainUpDown.SelectedItemChanged" />
 
             
 
-             event to occur, the <see
-             cref="P:System.Windows.Forms.DomainUpDown.SelectedItem" />
+             event to occur, the <see cref="P:System.Windows.Forms.DomainUpDown.SelectedItem" />
 
             
 
@@ -740,8 +715,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.DomainUpDown.SelectedItem" />
+            >Occurs when the <see cref="P:System.Windows.Forms.DomainUpDown.SelectedItem" />
 
             
 
@@ -770,8 +744,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
+            >When <see cref="P:System.Windows.Forms.DomainUpDown.Sorted" />
 
             
 
@@ -799,13 +772,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return string includes the type and the values for the <see
-             cref="P:System.Collections.ArrayList.Count" />
+            >The return string includes the type and the values for the <see cref="P:System.Collections.ArrayList.Count" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
+             and <see cref="P:System.Windows.Forms.DomainUpDown.SelectedIndex" />
 
             
 
@@ -815,8 +786,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
@@ -826,8 +796,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
@@ -851,13 +820,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As you move through the collection of items in the <see
-             cref="T:System.Windows.Forms.DomainUpDown" />
+            >As you move through the collection of items in the <see cref="T:System.Windows.Forms.DomainUpDown" />
 
             
 
-             control using the up button, you will eventually reach the first item in the collection. If you continue, and <see
-             cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+             control using the up button, you will eventually reach the first item in the collection. If you continue, and <see cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
 
             
 
@@ -912,8 +879,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
+            >When the <see cref="P:System.Windows.Forms.DomainUpDown.Wrap" />
 
             
 

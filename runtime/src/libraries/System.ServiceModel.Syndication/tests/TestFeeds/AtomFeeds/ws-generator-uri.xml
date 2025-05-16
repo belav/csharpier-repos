@@ -12,7 +12,8 @@ Expect:       InvalidUriChar{parent:feed,element:generator,attr:uri}
   <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
   <generator uri="http://www.contoso.com/ " version="1.0">
     Example Toolkit
-  </generator>
+  </generator
+  >
   <entry>
     <title>Atom-Powered Robots Run Amok</title>
     <link href="http://contoso.com/2003/12/13/atom03" />

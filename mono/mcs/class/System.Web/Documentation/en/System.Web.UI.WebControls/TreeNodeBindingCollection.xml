@@ -20,51 +20,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
         
 
-         class is used to store and manage a collection of <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+         class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
         
 
-         objects in the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         objects in the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         control. The <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         control. The <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+         control uses the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
         
 
-         class for its <see
-         cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+         class for its <see cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+        >The <see cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
 
         
 
-         property contains <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+         property contains <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
         
 
-         objects that define the relationship between a data item and the node that it is binding to. When binding to a data source where each data item contains multiple properties (such as an XML element with several attributes), a node displays the value that is returned by the ToString method of the data item, by default. In the case of an XML element, the node displays the element name, which shows the underlying structure of the tree but is not very useful otherwise. You can bind a node to a specific data item property by specifying tree node bindings. Although the <see
-         cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+         objects that define the relationship between a data item and the node that it is binding to. When binding to a data source where each data item contains multiple properties (such as an XML element with several attributes), a node displays the value that is returned by the ToString method of the data item, by default. In the case of an XML element, the node displays the element name, which shows the underlying structure of the tree but is not very useful otherwise. You can bind a node to a specific data item property by specifying tree node bindings. Although the <see cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
 
         
 
@@ -74,8 +65,7 @@
       <list type="ordered">
         <item>
           <para
-            >Nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see
-             cref="T:System.Web.UI.WebControls.TreeView" />
+            >Nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
             
 
@@ -87,51 +77,42 @@
         </item>
       </list>
       <para
-        >You can programmatically manage a <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+        >You can programmatically manage a <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
         
 
-         by adding and removing <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+         by adding and removing <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
         
 
-         objects. To add a <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+         objects. To add a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
         
 
-         object to the collection, use the <see
-         cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" />
+         object to the collection, use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" />
 
         
 
-         or <see
-         cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" />
+         or <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" />
 
         
 
-         method. To remove nodes from the collection, use the <see
-         cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />
+         method. To remove nodes from the collection, use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />
 
         
 
-        , <see
-         cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />
+        , <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />
 
         
 
-        , or <see
-         cref="M:System.Web.UI.StateManagedCollection.Clear" />
+        , or <see cref="M:System.Web.UI.StateManagedCollection.Clear" />
 
         
 
          method.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
         
 
@@ -140,13 +121,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TreeNodeBindingCollection.Item(System.Int32)" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TreeNodeBindingCollection.Item(System.Int32)" />
 
             
 
-             indexer to retrieve a <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             indexer to retrieve a <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
@@ -155,8 +134,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.StateManagedCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.StateManagedCollection.GetEnumerator" />
 
             
 
@@ -168,13 +146,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
         
 
-         objects in the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         objects in the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
@@ -200,36 +176,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
-             method to append the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             method to append the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object to the end of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object to the end of the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
              object.</para
           >
           <para
-            >As an alternative, you can insert a <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >As an alternative, you can insert a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object in the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
-             at a specific index using the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" />
+             at a specific index using the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
@@ -239,13 +209,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object to the end of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object to the end of the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -255,13 +223,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the location of the added <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >The zero-based index of the location of the added <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             in the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             in the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -269,12 +235,15 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 
@@ -302,28 +271,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Contains(System.Web.UI.WebControls.TreeNodeBinding)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Contains(System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             method to determine whether a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object is contained in the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object is contained in the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
-             object. This method is commonly used to test for the existence of a <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             object. This method is commonly used to test for the existence of a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object before performing a task, such as adding or removing a <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             object before performing a task, such as adding or removing a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
@@ -333,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >Determines whether the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
@@ -344,8 +307,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >true if the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
@@ -353,12 +315,15 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 
@@ -388,31 +353,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.CopyTo(System.Web.UI.WebControls.TreeNodeBinding[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.CopyTo(System.Web.UI.WebControls.TreeNodeBinding[],System.Int32)" />
 
             
 
-             method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             method to copy the contents of the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
-             object into <paramref
-             name="bindingArray" />
+             object into <paramref name="bindingArray" />
 
             
 
-            . Items are copied starting at <paramref
-             name="index" />
+            . Items are copied starting at <paramref name="index" />
 
             
 
             . You can then use the array to access the items that are in the collection.</para
           >
           <para
-            >As an alternative, you can use the <see
-             cref="M:System.Web.UI.StateManagedCollection.GetEnumerator" />
+            >As an alternative, you can use the <see cref="M:System.Web.UI.StateManagedCollection.GetEnumerator" />
 
             
 
@@ -422,13 +382,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+            >Copies all the items from the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
-             object to a compatible one-dimensional array of <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             object to a compatible one-dimensional array of <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
@@ -436,12 +394,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="bindingArray" />
+          The position in <paramref name="bindingArray" />
 
           
 
@@ -509,18 +470,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.IndexOf(System.Web.UI.WebControls.TreeNodeBinding)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.IndexOf(System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
-             method to determine the zero-based index of the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             method to determine the zero-based index of the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object in the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -528,8 +486,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the specified <see
-               cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+              >If the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
               
 
@@ -540,8 +497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >Determines the index of the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
@@ -551,13 +507,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="binding" />
+            >The zero-based index of the first occurrence of <paramref name="binding" />
 
             
 
-             within the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             within the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -565,12 +519,15 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 
@@ -599,41 +556,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Insert(System.Int32,System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
-             method to insert the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             method to insert the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object into the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object into the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
-             object at <paramref
-             name="index" />
+             object at <paramref name="index" />
 
             
 
             .</para
           >
           <para
-            >As an alternative, you can append a <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >As an alternative, you can append a <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object to the end of the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object to the end of the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
-             using the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" />
+             using the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Add(System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
@@ -643,13 +593,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >Inserts the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object into the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object into the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -657,24 +605,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index location at which to insert the <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 
           . </param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 
@@ -725,26 +679,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
-             method to remove the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             method to remove the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
              object from the collection. All items that follow that node are then moved up to fill the vacant position. The indexes of the moved items are also updated.</para
           >
           <para
-            >As an alternative, you can remove a node at a specific index using the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />
+            >As an alternative, you can remove a node at a specific index using the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />
 
             
 
-             method. You can also remove every node in the collection using the <see
-             cref="M:System.Web.UI.StateManagedCollection.Clear" />
+             method. You can also remove every node in the collection using the <see cref="M:System.Web.UI.StateManagedCollection.Clear" />
 
             
 
@@ -754,13 +704,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object from the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -768,12 +716,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 
@@ -798,41 +749,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object located at <paramref
-             name="index" />
+             object located at <paramref name="index" />
 
             
 
-             from a <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             from a <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
              object. All items that follow that node are then moved up to fill the vacant position. The indexes of the moved items are also updated.</para
           >
           <para
-            >As an alternative, you can remove a specific <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >As an alternative, you can remove a specific <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object by using the <see
-             cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />
+             object by using the <see cref="M:System.Web.UI.WebControls.TreeNodeBindingCollection.Remove(System.Web.UI.WebControls.TreeNodeBinding)" />
 
             
 
-             method. You can also remove every node in the collection by using the <see
-             cref="M:System.Web.UI.StateManagedCollection.Clear" />
+             method. You can also remove every node in the collection by using the <see cref="M:System.Web.UI.StateManagedCollection.Clear" />
 
             
 
@@ -842,13 +786,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+            >Removes the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
             
 
-             object at the specified index location from the <see
-             cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
+             object at the specified index location from the <see cref="T:System.Web.UI.WebControls.TreeNodeBindingCollection" />
 
             
 
@@ -856,12 +798,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index location of the <see
-           cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+          The zero-based index location of the <see cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
 
           
 

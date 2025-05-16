@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+        >Use the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
         
 
-         class to represent the style of a menu item in the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         class to represent the style of a menu item in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. A menu item is displayed in either a static menu or a dynamic menu. A static menu is always displayed in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control. A menu item is displayed in either a static menu or a dynamic menu. A static menu is always displayed in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -143,13 +140,11 @@
 
             
 
-            . If the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+            . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
             
 
-             collection or <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+             collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
             
 
@@ -162,8 +157,7 @@
 
             
 
-            . If the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+            . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
             
 
@@ -197,13 +191,11 @@
 
             
 
-            . If the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+            . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
             
 
-             collection or <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
+             collection or <see cref="P:System.Web.UI.WebControls.Menu.LevelSubMenuStyles" />
 
             
 
@@ -216,8 +208,7 @@
 
             
 
-            . If the <see
-             cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+            . If the <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
             
 
@@ -235,46 +226,38 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
         
 
-         class inherits most of its members from the <see
-         cref="T:System.Web.UI.WebControls.Style" />
+         class inherits most of its members from the <see cref="T:System.Web.UI.WebControls.Style" />
 
         
 
-         class. It extends the <see
-         cref="T:System.Web.UI.WebControls.Style" />
+         class. It extends the <see cref="T:System.Web.UI.WebControls.Style" />
 
         
 
-         class by providing properties that control the amount of space around a menu item's text, as well as the space between adjacent menu items. Use the <see
-         cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" />
+         class by providing properties that control the amount of space around a menu item's text, as well as the space between adjacent menu items. Use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" />
 
         
 
-         property to control the amount of space to the left and right of the menu item's text. Similarly, the <see
-         cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" />
+         property to control the amount of space to the left and right of the menu item's text. Similarly, the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" />
 
         
 
-         property controls the amount of space above and below the menu item's text. You can control the amount of spacing between the menu item that the <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+         property controls the amount of space above and below the menu item's text. You can control the amount of spacing between the menu item that the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
         
 
-         object is applied to and its adjacent menu items by setting the <see
-         cref="P:System.Web.UI.WebControls.MenuItemStyle.ItemSpacing" />
+         object is applied to and its adjacent menu items by setting the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.ItemSpacing" />
 
         
 
          property. </para
       >
       <para
-        >For more information on the inherited style settings, see <see
-         cref="T:System.Web.UI.WebControls.Style" />
+        >For more information on the inherited style settings, see <see cref="T:System.Web.UI.WebControls.Style" />
 
         
 
@@ -284,8 +267,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the style of a menu item in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >Represents the style of a menu item in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -303,8 +285,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -312,13 +293,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This constructor is commonly used when extending the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This constructor is commonly used when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
-               class to initialize the menu item style properties, such as <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
+               class to initialize the menu item style properties, such as <see cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
 
               
 
@@ -329,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -355,13 +333,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             class using the <see
-             cref="T:System.Web.UI.StateBag" />
+             class using the <see cref="T:System.Web.UI.StateBag" />
 
             
 
@@ -369,13 +345,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This member is used primarily by control developers when deriving a custom control from the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This member is used primarily by control developers when deriving a custom control from the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
-               class. It is used to initialize the menu item style properties, such as <see
-               cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
+               class. It is used to initialize the menu item style properties, such as <see cref="P:System.Web.UI.WebControls.Menu.DynamicMenuItemStyle" />
 
               
 
@@ -386,8 +360,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -395,12 +368,15 @@
           >
         </summary>
         <param name="bag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.StateBag" />
+          A <see cref="T:System.Web.UI.StateBag" />
 
           
 
@@ -425,18 +401,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
 
             
 
-             method to duplicate the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method to duplicate the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object in the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -444,13 +417,11 @@
           >
           <block subset="none" type="note">
             <para
-              >All properties in the current instance of the <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+              >All properties in the current instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
-               class will be replaced by the corresponding properties in the specified <see
-               cref="T:System.Web.UI.WebControls.Style" />
+               class will be replaced by the corresponding properties in the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
               
 
@@ -458,8 +429,7 @@
             >
           </block>
           <para
-            >To copy style properties without replacing any set values, use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
+            >To copy style properties without replacing any set values, use the <see cref="M:System.Web.UI.WebControls.MenuItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
 
             
 
@@ -469,13 +439,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Copies the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object into the current instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object into the current instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -483,12 +451,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          The <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -517,18 +488,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyle.FillStyleAttributes(System.Web.UI.CssStyleCollection,System.Web.UI.IUrlResolutionService)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyle.FillStyleAttributes(System.Web.UI.CssStyleCollection,System.Web.UI.IUrlResolutionService)" />
 
             
 
-             method to add the style properties of the current instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to add the style properties of the current instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             class to the specified <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+             class to the specified <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -541,13 +509,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the style properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Adds the style properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object to the specified <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+             object to the specified <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -555,24 +521,30 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.CssStyleCollection" />
+          The <see cref="T:System.Web.UI.CssStyleCollection" />
 
           
 
            to add the style properties to.</param
         >
         <param name="urlResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.IUrlResolutionService" />
+          An <see cref="T:System.Web.UI.IUrlResolutionService" />
 
           
 
@@ -606,18 +578,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" />
 
             
 
-             property to control the amount of horizontal space around the text of the menu item to which the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the amount of horizontal space around the text of the menu item to which the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object is applied. This space is inserted between the left edge of the text and the border of the text area, and between the right edge of the text and the text's border. To control the vertical spacing, use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" />
+             object is applied. This space is inserted between the left edge of the text and the border of the text area, and between the right edge of the text and the text's border. To control the vertical spacing, use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" />
 
             
 
@@ -680,13 +649,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemStyle.ItemSpacing" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.ItemSpacing" />
 
             
 
-             property to control the amount of vertical spacing between a menu item to which the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the amount of vertical spacing between a menu item to which the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -694,8 +661,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The upper space is not rendered for the first menu item in the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >The upper space is not rendered for the first menu item in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -706,8 +672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the amount of vertical spacing between the menu item to which the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Gets or sets the amount of vertical spacing between the menu item to which the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -736,18 +701,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyle.MergeWith(System.Web.UI.WebControls.Style)" />
 
             
 
-             method to combine the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method to combine the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object with the style properties of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object with the style properties of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -755,23 +717,19 @@
           >
           <block subset="none" type="note">
             <para
-              >This method joins the style properties by setting each property that is not set in the current <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+              >This method joins the style properties by setting each property that is not set in the current <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
-               object with its corresponding value in the specified <see
-               cref="T:System.Web.UI.WebControls.Style" />
+               object with its corresponding value in the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
               
 
-               object. Only properties that have not been set will be updated. If a property in the specified <see
-               cref="T:System.Web.UI.WebControls.Style" />
+               object. Only properties that have not been set will be updated. If a property in the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
               
 
-               object is not set, the corresponding property in the current <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+               object is not set, the corresponding property in the current <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
@@ -782,13 +740,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines the style properties of the specified <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >Combines the style properties of the specified <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object with those of the current instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object with those of the current instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -796,12 +752,15 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          The <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -824,13 +783,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyle.Reset" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyle.Reset" />
 
             
 
-             method to remove any defined style elements from the state bag and reset the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to remove any defined style elements from the state bag and reset the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -840,8 +797,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the current instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Returns the current instance of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -876,18 +832,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.VerticalPadding" />
 
             
 
-             property to control the amount of vertical space around the text of the menu item to which the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             property to control the amount of vertical space around the text of the menu item to which the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object is applied. This space is inserted between the upper edge of the text and the border of the text area, as well as between the lower edge of the text and the text's border. To control the horizontal spacing, use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" />
+             object is applied. This space is inserted between the upper edge of the text and the border of the text area, as well as between the lower edge of the text and the text's border. To control the horizontal spacing, use the <see cref="P:System.Web.UI.WebControls.MenuItemStyle.HorizontalPadding" />
 
             
 

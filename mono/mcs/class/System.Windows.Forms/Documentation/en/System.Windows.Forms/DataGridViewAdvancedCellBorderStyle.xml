@@ -16,23 +16,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />
+        >The <see cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control returns an object of type <see
-         cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+         control returns an object of type <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
         
 
-        , which has properties of type <see
-         cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" />
+        , which has properties of type <see cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" />
 
         
 
@@ -42,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the border styles that can be applied to the cells of a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Specifies the border styles that can be applied to the cells of a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

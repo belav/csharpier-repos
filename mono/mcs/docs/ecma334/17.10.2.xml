@@ -2,7 +2,9 @@
 <clause number="17.10.2" title="Instance variable initializers">
   <paragraph
     >When an instance constructor has no constructor initializer, or it has a constructor initializer of the form base(...), that constructor implicitly performs the initializations specified by the <non_terminal
-     where="19.6">variable-initializer</non_terminal>
+      where="19.6"
+      >variable-initializer</non_terminal
+    >
 
     
 

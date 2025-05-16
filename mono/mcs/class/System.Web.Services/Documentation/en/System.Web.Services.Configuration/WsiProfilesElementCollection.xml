@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Configuration.WsiProfilesElementCollection" />
+        >The <see cref="T:System.Web.Services.Configuration.WsiProfilesElementCollection" />
 
         
 
-         class is used to work with a collection of <see
-         cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+         class is used to work with a collection of <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
         
 
@@ -41,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a strongly typed collection of <see
-         cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+        >Contains a strongly typed collection of <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
         
 
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElementCollection" />
+            >Creates a new <see cref="T:System.Web.Services.Configuration.WsiProfilesElementCollection" />
 
             
 
@@ -92,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >Adds a <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -101,12 +96,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          The <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 
@@ -130,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >Removes all <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -158,13 +155,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Boolean" />
+            >Returns a <see cref="T:System.Boolean" />
 
             
 
-             that indicates whether a <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+             that indicates whether a <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -174,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >true if the collection contains a <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -183,12 +177,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          The key of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 
@@ -220,24 +217,30 @@
           <para>Copies the elements from the collection to an array, starting at a specified index of the array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          An array of type <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 
            to which to copy the contents of the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -309,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the zero-based index of a specified <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >Returns the zero-based index of a specified <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -320,8 +322,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the specified <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >The zero-based index of the specified <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -329,12 +330,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          The <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 
@@ -409,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a specified <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >Removes a specified <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -418,12 +421,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          The <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 
@@ -451,12 +457,15 @@
           <para>Removes the element at the specified index in the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          The zero-based index of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 
@@ -482,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+            >Removes the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
             
 
@@ -491,12 +499,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the <see
-           cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
+          The key of the <see cref="T:System.Web.Services.Configuration.WsiProfilesElement" />
 
           
 

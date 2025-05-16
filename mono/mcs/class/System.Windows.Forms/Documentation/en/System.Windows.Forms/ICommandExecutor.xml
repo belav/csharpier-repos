@@ -29,8 +29,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ICommandExecutor.Execute" />
+            >The <see cref="M:System.Windows.Forms.ICommandExecutor.Execute" />
 
             
 

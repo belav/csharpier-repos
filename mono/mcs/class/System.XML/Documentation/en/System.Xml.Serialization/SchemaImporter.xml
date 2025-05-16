@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class describes a schema importer, which transforms an XML schema into corresponding code entities. The <see
-         cref="T:System.Xml.Serialization.SchemaImporter" />
+        >This class describes a schema importer, which transforms an XML schema into corresponding code entities. The <see cref="T:System.Xml.Serialization.SchemaImporter" />
 
         
 
-         class is the parent class of the <see
-         cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+         class is the parent class of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
         
 
@@ -61,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Schema importer extensions modify the behavior of <see
-             cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+            >Schema importer extensions modify the behavior of <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
             
 
-             objects. By adding <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+             objects. By adding <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 

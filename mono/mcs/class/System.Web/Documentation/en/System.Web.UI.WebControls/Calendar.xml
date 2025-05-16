@@ -44,10 +44,8 @@
     <remarks
       >This is how the calendar can be created and how to setup all styles as css class so yu can finetune the feel and look of the calendar.
 
-<example
-      >
-        <code lang="C#"
-          >
+<example>
+        <code lang="C#">
 	&lt;asp:Calendar runat="server" BorderStyle="double"
 	 BorderColor="#E7E5DB" BorderWidth="2" BackColor="#F8F7F4"
 	 Font--Size=".9em" Font--Names="Verdana" class="TableThin"&gt;
@@ -183,10 +181,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Web.UI.ControlCollection" />
-        </returns>
+        <returns>a <see cref="T:System.Web.UI.ControlCollection" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -362,10 +357,7 @@
         <Parameter Name="savedState" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="savedState"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="savedState">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -527,10 +519,7 @@
         <Parameter Name="previousDate" Type="System.DateTime" />
       </Parameters>
       <Docs>
-        <param name="newDate"
-          >a <see
-           cref="T:System.DateTime" />
-        </param>
+        <param name="newDate">a <see cref="T:System.DateTime" /></param>
         <param name="previousDate">To be added.</param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -632,10 +621,7 @@
         <Parameter Name="writer" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="writer"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -653,10 +639,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Object" />
-        </returns>
+        <returns>a <see cref="T:System.Object" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

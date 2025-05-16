@@ -21,8 +21,7 @@
 
         
 
-         extends <see
-         cref="T:Microsoft.Build.Framework.BuildMessageEventArgs" />
+         extends <see cref="T:Microsoft.Build.Framework.BuildMessageEventArgs" />
 
         
 
@@ -32,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" />
+        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.MessageRaised" />
 
         
 
@@ -52,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.TaskCommandLineEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TaskCommandLineEventArgs" />
 
             
 
@@ -82,13 +79,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.TaskCommandLineEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TaskCommandLineEventArgs" />
 
             
 
-             class with the specified command line and <see
-             cref="T:Microsoft.Build.Framework.MessageImportance" />
+             class with the specified command line and <see cref="T:Microsoft.Build.Framework.MessageImportance" />
 
             
 
@@ -96,26 +91,37 @@
           >
         </summary>
         <param name="commandLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The command line used by the task to run the underlying program.</param
         >
         <param name="taskName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the task raising the event.</param
         >
         <param name="importance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.Framework.MessageImportance" />
+          The <see cref="T:Microsoft.Build.Framework.MessageImportance" />
 
           
 

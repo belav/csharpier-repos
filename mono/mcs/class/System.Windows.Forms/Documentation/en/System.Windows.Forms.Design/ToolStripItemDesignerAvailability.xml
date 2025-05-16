@@ -53,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+            >Specifies that <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Specifies that <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -118,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            >Specifies that <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
@@ -142,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Specifies that <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

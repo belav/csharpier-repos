@@ -29,56 +29,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.ConstraintCollection" />
+        >The <see cref="T:System.Data.ConstraintCollection" />
 
         
 
-         is accessed through the <see
-         cref="P:System.Data.DataTable.Constraints" />
+         is accessed through the <see cref="P:System.Data.DataTable.Constraints" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.ConstraintCollection" />
+        >The <see cref="T:System.Data.ConstraintCollection" />
 
         
 
-         can contain both <see
-         cref="T:System.Data.UniqueConstraint" />
+         can contain both <see cref="T:System.Data.UniqueConstraint" />
 
         
 
-         and <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         and <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         objects for the <see
-         cref="T:System.Data.DataTable" />
+         objects for the <see cref="T:System.Data.DataTable" />
 
         
 
-        . A <see
-         cref="T:System.Data.UniqueConstraint" />
+        . A <see cref="T:System.Data.UniqueConstraint" />
 
         
 
-         object makes sure that data in a specific column is always unique to preserve the data integrity. The <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         object makes sure that data in a specific column is always unique to preserve the data integrity. The <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         determines what will occur in related tables when data in the <see
-         cref="T:System.Data.DataTable" />
+         determines what will occur in related tables when data in the <see cref="T:System.Data.DataTable" />
 
         
 
-         is either updated or deleted. For example, if a row is deleted, the <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         is either updated or deleted. For example, if a row is deleted, the <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
@@ -86,48 +76,39 @@
       >
       <block subset="none" type="note">
         <para
-          >When you add a <see
-           cref="T:System.Data.DataRelation" />
+          >When you add a <see cref="T:System.Data.DataRelation" />
 
           
 
-           that creates a relationship between two tables to a <see
-           cref="T:System.Data.DataSet" />
+           that creates a relationship between two tables to a <see cref="T:System.Data.DataSet" />
 
           
 
-          , both a <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+          , both a <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
-           and a <see
-           cref="T:System.Data.UniqueConstraint" />
+           and a <see cref="T:System.Data.UniqueConstraint" />
 
           
 
-           are created automatically. The <see
-           cref="T:System.Data.UniqueConstraint" />
+           are created automatically. The <see cref="T:System.Data.UniqueConstraint" />
 
           
 
-           is applied to the primary key column in the parent <see
-           cref="T:System.Data.DataTable" />
+           is applied to the primary key column in the parent <see cref="T:System.Data.DataTable" />
 
           
 
-          , and the constraint is added to that table's <see
-           cref="T:System.Data.ConstraintCollection" />
+          , and the constraint is added to that table's <see cref="T:System.Data.ConstraintCollection" />
 
           
 
-          . The <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+          . The <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
-           is applied to the primary key column and the foreign key column, and the constraint is added to the child table's <see
-           cref="T:System.Data.ConstraintCollection" />
+           is applied to the primary key column and the foreign key column, and the constraint is added to the child table's <see cref="T:System.Data.ConstraintCollection" />
 
           
 
@@ -135,79 +116,65 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Data.ConstraintCollection" />
+        >The <see cref="T:System.Data.ConstraintCollection" />
 
         
 
-         uses standard collection methods such as <see
-         cref="M:System.Data.ConstraintCollection.Add(System.Data.Constraint)" />
+         uses standard collection methods such as <see cref="M:System.Data.ConstraintCollection.Add(System.Data.Constraint)" />
 
         
 
-        , <see
-         cref="M:System.Data.ConstraintCollection.Clear" />
+        , <see cref="M:System.Data.ConstraintCollection.Clear" />
 
         
 
-        , and <see
-         cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
+        , and <see cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
 
         
 
-        . In addition, the <see
-         cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+        . In addition, the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
         
 
          method can be used to look for the existence of a particular constraint in the collection.</para
       >
       <para
-        >A <see
-         cref="T:System.Data.UniqueConstraint" />
+        >A <see cref="T:System.Data.UniqueConstraint" />
 
         
 
-         is created when a <see
-         cref="T:System.Data.DataColumn" />
+         is created when a <see cref="T:System.Data.DataColumn" />
 
         
 
-         with its <see
-         cref="P:System.Data.DataColumn.Unique" />
+         with its <see cref="P:System.Data.DataColumn.Unique" />
 
         
 
-         property set to true is added to a <see
-         cref="T:System.Data.DataTable" />
+         property set to true is added to a <see cref="T:System.Data.DataTable" />
 
         
 
-         object's <see
-         cref="T:System.Data.DataColumnCollection" />
+         object's <see cref="T:System.Data.DataColumnCollection" />
 
         
 
         .</para
       >
       <para
-        >A <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+        >A <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         is created when a <see
-         cref="T:System.Data.DataRelation" />
+         is created when a <see cref="T:System.Data.DataRelation" />
 
         
 
-         is added to a <see
-         cref="T:System.Data.DataSet" />
+         is added to a <see cref="T:System.Data.DataSet" />
 
         
 
-         object's <see
-         cref="T:System.Data.DataRelationCollection" />
+         object's <see cref="T:System.Data.DataRelationCollection" />
 
         
 
@@ -217,8 +184,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of constraints for a <see
-         cref="T:System.Data.DataTable" />
+        >Represents a collection of constraints for a <see cref="T:System.Data.DataTable" />
 
         
 
@@ -240,8 +206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the collection is successfully changed by adding or removing constraints, the <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >If the collection is successfully changed by adding or removing constraints, the <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -251,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.Constraint" />
+            >Adds the specified <see cref="T:System.Data.Constraint" />
 
             
 
@@ -262,13 +226,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.UniqueConstraint" />
+            >A new <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             or <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             or <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
@@ -276,7 +238,11 @@
           >
         </returns>
         <param name="constraint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,8 +272,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -317,13 +282,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Constructs a new <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             with the specified name, <see
-             cref="T:System.Data.DataColumn" />
+             with the specified name, <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -335,26 +298,37 @@
           <para>A new UniqueConstraint.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the UniqueConstraint. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
            to which the constraint applies. </param
         >
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -384,8 +358,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -395,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Constructs a new <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
@@ -408,36 +380,45 @@
           <para>A new ForeignKeyConstraint.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+          The name of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
           . </param
         >
         <param name="primaryKeyColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The primary key, or parent, <see
-           cref="T:System.Data.DataColumn" />
+          The primary key, or parent, <see cref="T:System.Data.DataColumn" />
 
           
 
           . </param
         >
         <param name="foreignKeyColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The foreign key, or child, <see
-           cref="T:System.Data.DataColumn" />
+          The foreign key, or child, <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -467,8 +448,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -478,13 +458,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Constructs a new <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             with the specified name, array of <see
-             cref="T:System.Data.DataColumn" />
+             with the specified name, array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -496,31 +474,41 @@
           <para>A new UniqueConstraint.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.UniqueConstraint" />
+          The name of the <see cref="T:System.Data.UniqueConstraint" />
 
           
 
           . </param
         >
         <param name="columns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
            objects to which the constraint applies. </param
         >
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -550,8 +538,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -561,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a new <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Constructs a new <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
@@ -574,36 +560,45 @@
           <para>A new ForeignKeyConstraint.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.ForeignKeyConstraint" />
+          The name of the <see cref="T:System.Data.ForeignKeyConstraint" />
 
           
 
           . </param
         >
         <param name="primaryKeyColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
            objects that are the primary key, or parent, columns. </param
         >
         <param name="foreignKeyColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -631,13 +626,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Data.DataTable.BeginInit" />
+            >If <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             has been called, AddRange does not add any objects to the collection until <see
-             cref="M:System.Data.DataTable.EndInit" />
+             has been called, AddRange does not add any objects to the collection until <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
@@ -647,8 +640,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Data.ConstraintCollection" />
+            >Copies the elements of the specified <see cref="T:System.Data.ConstraintCollection" />
 
             
 
@@ -656,12 +648,15 @@
           >
         </summary>
         <param name="constraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.ConstraintCollection" />
+          An array of <see cref="T:System.Data.ConstraintCollection" />
 
           
 
@@ -689,53 +684,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior whenever a <see
-             cref="T:System.Data.DataRelation" />
+            >The default behavior whenever a <see cref="T:System.Data.DataRelation" />
 
             
 
-             is added to a <see
-             cref="T:System.Data.DataSet" />
+             is added to a <see cref="T:System.Data.DataSet" />
 
             
 
-            , is to add a <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            , is to add a <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             to the parent table and a <see
-             cref="T:System.Data.UniqueConstraint" />
+             to the parent table and a <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             to the child table. The <see
-             cref="T:System.Data.UniqueConstraint" />
+             to the child table. The <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             is applied to the primary key column of the parent table, and the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             is applied to the primary key column of the parent table, and the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             is applied to the foreign key column of the child table. Because trying to remove the <see
-             cref="T:System.Data.UniqueConstraint" />
+             is applied to the foreign key column of the child table. Because trying to remove the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             before removing the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+             before removing the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
-             causes an exception to be thrown, you should always use the <see
-             cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
+             causes an exception to be thrown, you should always use the <see cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
 
             
 
-             method before calling Remove, to make sure that the <see
-             cref="T:System.Data.UniqueConstraint" />
+             method before calling Remove, to make sure that the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
@@ -745,8 +730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see
-             cref="T:System.Data.Constraint" />
+            >Indicates whether a <see cref="T:System.Data.Constraint" />
 
             
 
@@ -756,8 +740,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.Constraint" />
+            >true if the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -765,12 +748,15 @@
           >
         </returns>
         <param name="constraint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Constraint" />
+          The <see cref="T:System.Data.Constraint" />
 
           
 
@@ -793,8 +779,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -804,8 +789,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the collection of any <see
-             cref="T:System.Data.Constraint" />
+            >Clears the collection of any <see cref="T:System.Data.Constraint" />
 
             
 
@@ -832,8 +816,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -845,13 +828,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs whenever the <see
-             cref="T:System.Data.ConstraintCollection" />
+            >Occurs whenever the <see cref="T:System.Data.ConstraintCollection" />
 
             
 
-             is changed because of <see
-             cref="T:System.Data.Constraint" />
+             is changed because of <see cref="T:System.Data.Constraint" />
 
             
 
@@ -877,23 +858,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+            >Use the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
             
 
-             method to determine whether the specified <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether the specified <see cref="T:System.Data.Constraint" />
 
             
 
-             exists before trying to remove it from the collection. You can also use the <see
-             cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
+             exists before trying to remove it from the collection. You can also use the <see cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether a <see cref="T:System.Data.Constraint" />
 
             
 
@@ -903,8 +880,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the <see
-             cref="T:System.Data.Constraint" />
+            >Indicates whether the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -916,12 +892,15 @@
           <para>true if the collection contains the specified constraint; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.Constraint.ConstraintName" />
+          The <see cref="P:System.Data.Constraint.ConstraintName" />
 
           
 
@@ -954,8 +933,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection objects to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection objects to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -963,19 +941,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the values copied from the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -999,18 +984,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.ConstraintCollection.IndexOf(System.Data.Constraint)" />
+            >Use the <see cref="M:System.Data.ConstraintCollection.IndexOf(System.Data.Constraint)" />
 
             
 
-             method to return an index to be used with either the <see
-             cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+             method to return an index to be used with either the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
             
 
-             or <see
-             cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
+             or <see cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
 
             
 
@@ -1020,8 +1002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.Data.Constraint" />
+            >Gets the index of the specified <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1031,8 +1012,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the <see
-             cref="T:System.Data.Constraint" />
+            >The zero-based index of the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1040,12 +1020,15 @@
           >
         </returns>
         <param name="constraint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Constraint" />
+          The <see cref="T:System.Data.Constraint" />
 
           
 
@@ -1070,18 +1053,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.ConstraintCollection.IndexOf(System.Data.Constraint)" />
+            >Use the <see cref="M:System.Data.ConstraintCollection.IndexOf(System.Data.Constraint)" />
 
             
 
-             method to return an index to be used with either the <see
-             cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+             method to return an index to be used with either the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
             
 
-             or <see
-             cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
+             or <see cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
 
             
 
@@ -1091,8 +1071,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Data.Constraint" />
+            >Gets the index of the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1102,8 +1081,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <see
-             cref="T:System.Data.Constraint" />
+            >The index of the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1111,12 +1089,15 @@
           >
         </returns>
         <param name="constraintName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.Constraint" />
+          The name of the <see cref="T:System.Data.Constraint" />
 
           
 
@@ -1213,8 +1194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="System.Data.ConstraintCollection.CollectionChanged" />
+            >Raises the <see cref="System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -1222,12 +1202,15 @@
           >
         </summary>
         <param name="ccevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="System.ComponentModel.CollectionChangeEventArgs" />
+          A <see cref="System.ComponentModel.CollectionChangeEventArgs" />
 
           
 
@@ -1254,31 +1237,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using the Remove method, you can use the <see
-             cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+            >Before using the Remove method, you can use the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
             
 
-             method to determine whether the collection contains the target <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether the collection contains the target <see cref="T:System.Data.Constraint" />
 
             
 
-            , and the <see
-             cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
+            , and the <see cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether a <see cref="T:System.Data.Constraint" />
 
             
 
              can be removed.</para
           >
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -1288,8 +1266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Data.Constraint" />
+            >Removes the specified <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1297,12 +1274,15 @@
           >
         </summary>
         <param name="constraint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Constraint" />
+          The <see cref="T:System.Data.Constraint" />
 
           
 
@@ -1327,31 +1307,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before using the Remove method, you can use the <see
-             cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+            >Before using the Remove method, you can use the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
             
 
-             method to determine whether the collection contains the target <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether the collection contains the target <see cref="T:System.Data.Constraint" />
 
             
 
-            , and the <see
-             cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
+            , and the <see cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether a <see cref="T:System.Data.Constraint" />
 
             
 
              can be removed.</para
           >
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -1361,8 +1336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Constraint" />
+            >Removes the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1370,12 +1344,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.Constraint" />
+          The name of the <see cref="T:System.Data.Constraint" />
 
           
 
@@ -1400,44 +1377,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.ConstraintCollection.IndexOf(System.Data.Constraint)" />
+            >The <see cref="M:System.Data.ConstraintCollection.IndexOf(System.Data.Constraint)" />
 
             
 
-             method returns the index of a specific <see
-             cref="T:System.Data.Constraint" />
+             method returns the index of a specific <see cref="T:System.Data.Constraint" />
 
             
 
             .</para
           >
           <para
-            >Before using the RemoveAt method, you can use the <see
-             cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+            >Before using the RemoveAt method, you can use the <see cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
             
 
-             method to determine whether the collection contains the target <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether the collection contains the target <see cref="T:System.Data.Constraint" />
 
             
 
-            , and the <see
-             cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
+            , and the <see cref="M:System.Data.ConstraintCollection.CanRemove(System.Data.Constraint)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Data.Constraint" />
+             method to determine whether a <see cref="T:System.Data.Constraint" />
 
             
 
              can be removed.</para
           >
           <para
-            >The <see
-             cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+            >The <see cref="E:System.Data.ConstraintCollection.CollectionChanged" />
 
             
 
@@ -1447,8 +1417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Constraint" />
+            >Removes the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -1456,12 +1425,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Data.Constraint" />
+          The index of the <see cref="T:System.Data.Constraint" />
 
           
 

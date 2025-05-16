@@ -72,13 +72,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Assemblies.AssemblyHash" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Assemblies.AssemblyHash" />
 
             
 
-             structure with the specified hash value. The hash algorithm defaults to <see
-             cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
+             structure with the specified hash value. The hash algorithm defaults to <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
 
             
 
@@ -86,7 +84,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -124,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.Assemblies.AssemblyHash" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.Assemblies.AssemblyHash" />
 
             
 
@@ -133,19 +134,26 @@
           >
         </summary>
         <param name="algorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The algorithm used to generate the hash. Values for this parameter come from the <see
-           cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
+          The algorithm used to generate the hash. Values for this parameter come from the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
 
           
 
            enumeration. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -251,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An empty <see
-             cref="T:System.Configuration.Assemblies.AssemblyHash" />
+            >An empty <see cref="T:System.Configuration.Assemblies.AssemblyHash" />
 
             
 
@@ -324,7 +331,11 @@
           <para>Sets the hash value.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

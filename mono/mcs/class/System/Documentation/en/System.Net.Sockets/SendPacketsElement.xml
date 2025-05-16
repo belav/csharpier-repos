@@ -18,28 +18,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.SendPacketsElement" />
+        >The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
         
 
-         class is used to enhance the <see
-         cref="T:System.Net.Sockets.Socket" />
+         class is used to enhance the <see cref="T:System.Net.Sockets.Socket" />
 
         
 
-         class for use by server applications that use asynchronous network I/O to achieve the highest performance. The <see
-         cref="T:System.Net.Sockets.SendPacketsElement" />
+         class for use by server applications that use asynchronous network I/O to achieve the highest performance. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
         
 
-         class is used with the <see
-         cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+         class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
         
 
-         property to get or set a data buffer or file to be sent using the <see
-         cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+         property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
         
 
@@ -49,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an element in a <see
-         cref="T:System.Net.Sockets.SendPacketsElement" />
+        >Represents an element in a <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
         
 
@@ -77,28 +71,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.Byte[])" />
+            >The <see cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.Byte[])" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class with a byte array of data. The <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             class with a byte array of data. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class is used with the <see
-             cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+             class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
             
 
-             property to get or set a data buffer or file to be sent using the <see
-             cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+             property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
@@ -108,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
@@ -117,12 +105,15 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte array of data to send using the <see
-           cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+          A byte array of data to send using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
           
 
@@ -148,36 +139,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.String)" />
+            >The <see cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.String)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class with a filename of a file. The <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             class with a filename of a file. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class is used with the <see
-             cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+             class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
             
 
-             property to get or set a data buffer or file to be sent using the <see
-             cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+             property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
              method.</para
           >
           <para
-            >Universal Naming Convention (UNC) paths are supported by the <paramref
-             name="filepath" />
+            >Universal Naming Convention (UNC) paths are supported by the <paramref name="filepath" />
 
             
 
@@ -187,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
@@ -196,12 +180,15 @@
           >
         </summary>
         <param name="filepath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The filename of the file to be transmitted using the <see
-           cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+          The filename of the file to be transmitted using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
           
 
@@ -232,28 +219,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.Byte[],System.Int32,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class with a byte array of data. The <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             class with a byte array of data. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class is used with the <see
-             cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+             class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
             
 
-             property to get or set a data buffer or file to be sent using the <see
-             cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+             property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
@@ -263,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
@@ -272,51 +253,57 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte array of data to send using the <see
-           cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+          A byte array of data to send using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
           
 
            method.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset, in bytes, from the beginning of the <paramref
-           name="buffer" />
+          The offset, in bytes, from the beginning of the <paramref name="buffer" />
 
           
 
-           to the location in the <paramref
-           name="buffer" />
+           to the location in the <paramref name="buffer" />
 
           
 
-           to start sending the data specified in the <paramref
-           name="buffer" />
+           to start sending the data specified in the <paramref name="buffer" />
 
           
 
            parameter.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to send starting from the <paramref
-           name="offset" />
+          The number of bytes to send starting from the <paramref name="offset" />
 
           
 
-           parameter. If <paramref
-           name="count" />
+           parameter. If <paramref name="count" />
 
           
 
@@ -347,36 +334,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.String,System.Int32,System.Int32)" />
+            >The <see cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.String,System.Int32,System.Int32)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class with a filename of a file. The <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             class with a filename of a file. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class is used with the <see
-             cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+             class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
             
 
-             property to get or set a data buffer or file to be sent using the <see
-             cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+             property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
              method.</para
           >
           <para
-            >Universal Naming Convention (UNC) paths are supported by the <paramref
-             name="filepath" />
+            >Universal Naming Convention (UNC) paths are supported by the <paramref name="filepath" />
 
             
 
@@ -386,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
@@ -395,41 +375,49 @@
           >
         </summary>
         <param name="filepath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The filename of the file to be transmitted using the <see
-           cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+          The filename of the file to be transmitted using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
           
 
            method.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset, in bytes, from the beginning of the file to the location in the file to start sending the file specified in the <paramref
-           name="filepath" />
+          The offset, in bytes, from the beginning of the file to the location in the file to start sending the file specified in the <paramref name="filepath" />
 
           
 
            parameter.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to send starting from the <paramref
-           name="offset" />
+          The number of bytes to send starting from the <paramref name="offset" />
 
           
 
-           parameter. If <paramref
-           name="count" />
+           parameter. If <paramref name="count" />
 
           
 
@@ -461,28 +449,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean)" />
+            >The <see cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class with a byte array of data. The <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             class with a byte array of data. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class is used with the <see
-             cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+             class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
             
 
-             property to get or set a data buffer or file to be sent using the <see
-             cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+             property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
@@ -492,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
@@ -501,58 +483,68 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte array of data to send using the <see
-           cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+          A byte array of data to send using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
           
 
            method.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset, in bytes, from the beginning of the <paramref
-           name="buffer" />
+          The offset, in bytes, from the beginning of the <paramref name="buffer" />
 
           
 
-           to the location in the <paramref
-           name="buffer" />
+           to the location in the <paramref name="buffer" />
 
           
 
-           to start sending the data specified in the <paramref
-           name="buffer" />
+           to start sending the data specified in the <paramref name="buffer" />
 
           
 
            parameter.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number bytes to send starting from the <paramref
-           name="offset" />
+          The number bytes to send starting from the <paramref name="offset" />
 
           
 
-           parameter. If <paramref
-           name="count" />
+           parameter. If <paramref name="count" />
 
           
 
            is zero, no bytes are sent.</param
         >
         <param name="endOfPacket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -584,36 +576,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.String,System.Int32,System.Int32,System.Boolean)" />
+            >The <see cref="M:System.Net.Sockets.SendPacketsElement.#ctor(System.String,System.Int32,System.Int32,System.Boolean)" />
 
             
 
-             constructor initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             constructor initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class with a filename of a file. The <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             class with a filename of a file. The <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class is used with the <see
-             cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
+             class is used with the <see cref="P:System.Net.Sockets.SocketAsyncEventArgs.SendPacketsElements" />
 
             
 
-             property to get or set a data buffer or file to be sent using the <see
-             cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+             property to get or set a data buffer or file to be sent using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
             
 
              method.</para
           >
           <para
-            >Universal Naming Convention (UNC) paths are supported by the <paramref
-             name="filepath" />
+            >Universal Naming Convention (UNC) paths are supported by the <paramref name="filepath" />
 
             
 
@@ -623,8 +609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
@@ -632,48 +617,60 @@
           >
         </summary>
         <param name="filepath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The filename of the file to be transmitted using the <see
-           cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+          The filename of the file to be transmitted using the <see cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
           
 
            method.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset, in bytes, from the beginning of the file to the location in the file to start sending the file specified in the <paramref
-           name="filepath" />
+          The offset, in bytes, from the beginning of the file to the location in the file to start sending the file specified in the <paramref name="filepath" />
 
           
 
            parameter.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes to send starting from the <paramref
-           name="offset" />
+          The number of bytes to send starting from the <paramref name="offset" />
 
           
 
-           parameter. If <paramref
-           name="count" />
+           parameter. If <paramref name="count" />
 
           
 
            is zero, the entire file is sent.</param
         >
         <param name="endOfPacket">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -697,18 +694,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Net.Sockets.SendPacketsElement.Buffer" />
+            >The default value for the <see cref="P:System.Net.Sockets.SendPacketsElement.Buffer" />
 
             
 
-             property is a zero-length array if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             property is a zero-length array if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was not initialized with a <paramref
-             name="buffer" />
+             class was not initialized with a <paramref name="buffer" />
 
             
 
@@ -718,13 +712,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the buffer to be sent if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Gets the buffer to be sent if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was initialized with a <paramref
-             name="buffer" />
+             class was initialized with a <paramref name="buffer" />
 
             
 
@@ -749,31 +741,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Net.Sockets.SendPacketsElement.Count" />
+            >The default value for the <see cref="P:System.Net.Sockets.SendPacketsElement.Count" />
 
             
 
-             property is zero if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             property is zero if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was not initialized with a <paramref
-             name="count" />
+             class was not initialized with a <paramref name="count" />
 
             
 
              parameter.</para
           >
           <para
-            >If <see
-             cref="P:System.Net.Sockets.SendPacketsElement.Count" />
+            >If <see cref="P:System.Net.Sockets.SendPacketsElement.Count" />
 
             
 
-             is zero for a file, the entire file is sent. If <see
-             cref="P:System.Net.Sockets.SendPacketsElement.Count" />
+             is zero for a file, the entire file is sent. If <see cref="P:System.Net.Sockets.SendPacketsElement.Count" />
 
             
 
@@ -802,18 +789,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Net.Sockets.SendPacketsElement.EndOfPacket" />
+            >The default value for the <see cref="P:System.Net.Sockets.SendPacketsElement.EndOfPacket" />
 
             
 
-             property is false if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             property is false if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was not initialized with an <paramref
-             name="endOfPacket" />
+             class was not initialized with an <paramref name="endOfPacket" />
 
             
 
@@ -842,26 +826,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Universal Naming Convention (UNC) paths are supported by the <see
-             cref="P:System.Net.Sockets.SendPacketsElement.FilePath" />
+            >Universal Naming Convention (UNC) paths are supported by the <see cref="P:System.Net.Sockets.SendPacketsElement.FilePath" />
 
             
 
              property. If the file is in the current working directory, no path information needs to be specified.</para
           >
           <para
-            >The default value for the <see
-             cref="P:System.Net.Sockets.SendPacketsElement.FilePath" />
+            >The default value for the <see cref="P:System.Net.Sockets.SendPacketsElement.FilePath" />
 
             
 
-             property is an empty string if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             property is an empty string if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was not initialized with a <paramref
-             name="filepath" />
+             class was not initialized with a <paramref name="filepath" />
 
             
 
@@ -871,13 +851,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the filename of the file to send if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+            >Gets the filename of the file to send if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was initialized with a <paramref
-             name="filepath" />
+             class was initialized with a <paramref name="filepath" />
 
             
 
@@ -902,18 +880,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Net.Sockets.SendPacketsElement.Offset" />
+            >The default value for the <see cref="P:System.Net.Sockets.SendPacketsElement.Offset" />
 
             
 
-             property is zero if the <see
-             cref="T:System.Net.Sockets.SendPacketsElement" />
+             property is zero if the <see cref="T:System.Net.Sockets.SendPacketsElement" />
 
             
 
-             class was not initialized with an <paramref
-             name="offset" />
+             class was not initialized with an <paramref name="offset" />
 
             
 

@@ -29,71 +29,58 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This type is enumerable because it inherits from <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        >This type is enumerable because it inherits from <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
         .</para
       >
       <para
-        >The extension methods <see
-         cref="Overload:System.Linq.Enumerable.ThenBy" />
+        >The extension methods <see cref="Overload:System.Linq.Enumerable.ThenBy" />
 
         
 
-         and <see
-         cref="Overload:System.Linq.Enumerable.ThenByDescending" />
+         and <see cref="Overload:System.Linq.Enumerable.ThenByDescending" />
 
         
 
-         operate on objects of type <see
-         cref="T:System.Linq.IOrderedEnumerable`1" />
+         operate on objects of type <see cref="T:System.Linq.IOrderedEnumerable`1" />
 
         
 
-        . An object of type <see
-         cref="T:System.Linq.IOrderedEnumerable`1" />
+        . An object of type <see cref="T:System.Linq.IOrderedEnumerable`1" />
 
         
 
-         can be obtained by calling one of the primary sort methods, <see
-         cref="Overload:System.Linq.Enumerable.OrderBy" />
+         can be obtained by calling one of the primary sort methods, <see cref="Overload:System.Linq.Enumerable.OrderBy" />
 
         
 
-         or <see
-         cref="Overload:System.Linq.Enumerable.OrderByDescending" />
+         or <see cref="Overload:System.Linq.Enumerable.OrderByDescending" />
 
         
 
-        , which return an <see
-         cref="T:System.Linq.IOrderedEnumerable`1" />
+        , which return an <see cref="T:System.Linq.IOrderedEnumerable`1" />
 
         
 
-        . <see
-         cref="Overload:System.Linq.Enumerable.ThenBy" />
+        . <see cref="Overload:System.Linq.Enumerable.ThenBy" />
 
         
 
-         and <see
-         cref="Overload:System.Linq.Enumerable.ThenByDescending" />
+         and <see cref="Overload:System.Linq.Enumerable.ThenByDescending" />
 
         
 
-        , the subordinate sort methods, in turn also return an object of type <see
-         cref="T:System.Linq.IOrderedEnumerable`1" />
+        , the subordinate sort methods, in turn also return an object of type <see cref="T:System.Linq.IOrderedEnumerable`1" />
 
         
 
-        . This design allows for any number of consecutive calls to <see
-         cref="Overload:System.Linq.Enumerable.ThenBy" />
+        . This design allows for any number of consecutive calls to <see cref="Overload:System.Linq.Enumerable.ThenBy" />
 
         
 
-         or <see
-         cref="Overload:System.Linq.Enumerable.ThenByDescending" />
+         or <see cref="Overload:System.Linq.Enumerable.ThenByDescending" />
 
         
 

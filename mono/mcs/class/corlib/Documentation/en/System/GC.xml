@@ -24,8 +24,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The methods in this class influence when garbage collection is performed on an object and when resources allocated by an object are released. Properties in this class provide information about the total amount of memory available in the system and the age category, or generation, of memory allocated to an object.</para>
       <para
-        >The garbage collector tracks and reclaims objects allocated in managed memory. Periodically, the garbage collector performs garbage collection to reclaim memory allocated to objects for which there are no valid references. Garbage collection happens automatically when a request for memory cannot be satisfied using available free memory. Alternatively, an application can force garbage collection using the <see
-         cref="M:System.GC.Collect(System.Int32)" />
+        >The garbage collector tracks and reclaims objects allocated in managed memory. Periodically, the garbage collector performs garbage collection to reclaim memory allocated to objects for which there are no valid references. Garbage collection happens automatically when a request for memory cannot be satisfied using available free memory. Alternatively, an application can force garbage collection using the <see cref="M:System.GC.Collect(System.Int32)" />
 
         
 
@@ -44,8 +43,7 @@
         </item>
       </list>
       <para
-        >During a collection, the garbage collector will not free an object if it finds one or more references to the object in managed code. However, the garbage collector does not recognize references to an object from unmanaged code, and might free objects that are being used exclusively in unmanaged code unless explicitly prevented from doing so. The <see
-         cref="M:System.GC.KeepAlive(System.Object)" />
+        >During a collection, the garbage collector will not free an object if it finds one or more references to the object in managed code. However, the garbage collector does not recognize references to an object from unmanaged code, and might free objects that are being used exclusively in unmanaged code unless explicitly prevented from doing so. The <see cref="M:System.GC.KeepAlive(System.Object)" />
 
         
 
@@ -53,51 +51,42 @@
       >
       <para>Aside from managed memory allocations, implementations of the garbage collector do not maintain information about resources held by an object, such as file handles or database connections. When a type uses unmanaged resources that must be released before instances of the type are reclaimed, the type can implement a finalizer.</para>
       <para
-        >In most cases, finalizers are implemented by overriding the <see
-         cref="M:System.Object.Finalize" />
+        >In most cases, finalizers are implemented by overriding the <see cref="M:System.Object.Finalize" />
 
         
 
-         method; however, types written in C# or C++ implement destructors, which compilers turn into an override of <see
-         cref="M:System.Object.Finalize" />
+         method; however, types written in C# or C++ implement destructors, which compilers turn into an override of <see cref="M:System.Object.Finalize" />
 
         
 
-        . In most cases, if an object has a finalizer, the garbage collector calls it prior to freeing the object. However, the garbage collector is not required to call finalizers in all situations; for example, the <see
-         cref="M:System.GC.SuppressFinalize(System.Object)" />
+        . In most cases, if an object has a finalizer, the garbage collector calls it prior to freeing the object. However, the garbage collector is not required to call finalizers in all situations; for example, the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
         
 
          method explicitly prevents a finalizer from being called. Also, the garbage collector is not required to use a specific thread to finalize objects, or guarantee the order in which finalizers are called for objects that reference each other but are otherwise available for garbage collection.</para
       >
       <para
-        >In scenarios where resources must be released at a specific time, classes can implement the <see
-         cref="T:System.IDisposable" />
+        >In scenarios where resources must be released at a specific time, classes can implement the <see cref="T:System.IDisposable" />
 
         
 
-         interface, which contains the <see
-         cref="M:System.IDisposable.Dispose" />
+         interface, which contains the <see cref="M:System.IDisposable.Dispose" />
 
         
 
-         method that performs resource management and cleanup tasks. Classes that implement <see
-         cref="M:System.IDisposable.Dispose" />
+         method that performs resource management and cleanup tasks. Classes that implement <see cref="M:System.IDisposable.Dispose" />
 
         
 
-         must specify, as part of their class contract, if and when class consumers call the method to clean up the object. The garbage collector does not, by default, call the <see
-         cref="M:System.IDisposable.Dispose" />
+         must specify, as part of their class contract, if and when class consumers call the method to clean up the object. The garbage collector does not, by default, call the <see cref="M:System.IDisposable.Dispose" />
 
         
 
-         method; however, implementations of the <see
-         cref="M:System.IDisposable.Dispose" />
+         method; however, implementations of the <see cref="M:System.IDisposable.Dispose" />
 
         
 
-         method can call methods in the <see
-         cref="T:System.GC" />
+         method can call methods in the <see cref="T:System.GC" />
 
         
 
@@ -136,34 +125,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In determining when to schedule garbage collection, the runtime takes into account how much managed memory is allocated. If a small managed object allocates a large amount of unmanaged memory, the runtime takes into account only the managed memory, and thus underestimates the urgency of scheduling garbage collection. The <see
-             cref="M:System.GC.AddMemoryPressure(System.Int64)" />
+            >In determining when to schedule garbage collection, the runtime takes into account how much managed memory is allocated. If a small managed object allocates a large amount of unmanaged memory, the runtime takes into account only the managed memory, and thus underestimates the urgency of scheduling garbage collection. The <see cref="M:System.GC.AddMemoryPressure(System.Int64)" />
 
             
 
              method informs the runtime of this additional pressure on system memory.</para
           >
           <para
-            >In the simplest usage pattern, a managed object allocates unmanaged memory in the constructor and releases it in the Dispose or Finalize method. Call the <see
-             cref="M:System.GC.AddMemoryPressure(System.Int64)" />
+            >In the simplest usage pattern, a managed object allocates unmanaged memory in the constructor and releases it in the Dispose or Finalize method. Call the <see cref="M:System.GC.AddMemoryPressure(System.Int64)" />
 
             
 
-             method after allocating the unmanaged memory, and call the <see
-             cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
+             method after allocating the unmanaged memory, and call the <see cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
 
             
 
              method after releasing it.</para
           >
           <para
-            >In more complicated scenarios, where the unmanaged memory allocation changes substantially during the lifetime of the managed object, you can call the <see
-             cref="M:System.GC.AddMemoryPressure(System.Int64)" />
+            >In more complicated scenarios, where the unmanaged memory allocation changes substantially during the lifetime of the managed object, you can call the <see cref="M:System.GC.AddMemoryPressure(System.Int64)" />
 
             
 
-             and <see
-             cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
+             and <see cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
 
             
 
@@ -178,7 +162,11 @@
           <para>Informs the runtime of a large allocation of unmanaged memory that should be taken into account when scheduling garbage collection.</para>
         </summary>
         <param name="bytesAllocated">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,13 +192,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method cancels a garbage collection notification that was registered by using the <see
-             cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
+            >This method cancels a garbage collection notification that was registered by using the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
 
             
 
-             method. You do not have to call this method before adjusting threshold parameter values in subsequent calls to the <see
-             cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
+             method. You do not have to call this method before adjusting threshold parameter values in subsequent calls to the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
 
             
 
@@ -245,18 +231,15 @@
           <para>Use this method to try to reclaim all memory that is inaccessible. It performs a blocking garbage collection of all generations. </para>
           <para>All objects, regardless of how long they have been in memory, are considered for collection; however, objects that are referenced in managed code are not collected. Use this method to force the system to try to reclaim the maximum amount of available memory.</para>
           <para
-            >Starting with the net_v451, you can compact the large object heap (LOH) by setting the <see
-             cref="P:System.Runtime.GCSettings.LargeObjectHeapCompactionMode" />
+            >Starting with the net_v451, you can compact the large object heap (LOH) by setting the <see cref="P:System.Runtime.GCSettings.LargeObjectHeapCompactionMode" />
 
             
 
-             property to <see
-             cref="F:System.Runtime.GCLargeObjectHeapCompactionMode.CompactOnce" />
+             property to <see cref="F:System.Runtime.GCLargeObjectHeapCompactionMode.CompactOnce" />
 
             
 
-             before calling the <see
-             cref="M:System.GC.Collect" />
+             before calling the <see cref="M:System.GC.Collect" />
 
             
 
@@ -294,26 +277,22 @@
           <para>Use this method to try to reclaim memory that is inaccessible. However, using this method does not guarantee that all inaccessible memory in the specified generation is reclaimed.</para>
           <para>If object aging is implemented, the garbage collector does not collect objects with a generation number that is higher than the specified generation. If object aging is not implemented, the garbage collector considers all objects during the garbage collection.</para>
           <para
-            >Use the <see
-             cref="P:System.GC.MaxGeneration" />
+            >Use the <see cref="P:System.GC.MaxGeneration" />
 
             
 
-             property to determine the maximum valid value of the <paramref
-             name="generation" />
+             property to determine the maximum valid value of the <paramref name="generation" />
 
             
 
              parameter.</para
           >
           <para
-            >To have the garbage collector consider all objects regardless of their generation, use the version of this method that takes no parameters. To have the garbage collector reclaim objects based on a <see
-             cref="T:System.GCCollectionMode" />
+            >To have the garbage collector consider all objects regardless of their generation, use the version of this method that takes no parameters. To have the garbage collector reclaim objects based on a <see cref="T:System.GCCollectionMode" />
 
             
 
-             setting, use the <see
-             cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode)" />
+             setting, use the <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode)" />
 
             
 
@@ -325,7 +304,11 @@
           <para>Forces an immediate garbage collection from generation 0 through a specified generation.</para>
         </summary>
         <param name="generation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -358,34 +341,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <paramref
-             name="mode" />
+            >Use the <paramref name="mode" />
 
             
 
              parameter to specify whether garbage collection should occur immediately or only if the time is optimal to reclaim objects. Using this method does not guarantee that all inaccessible memory in the specified generation is reclaimed.</para
           >
           <para
-            >To adjust the intrusiveness of garbage collection during critical periods in your application, set the <see
-             cref="P:System.Runtime.GCSettings.LatencyMode" />
+            >To adjust the intrusiveness of garbage collection during critical periods in your application, set the <see cref="P:System.Runtime.GCSettings.LatencyMode" />
 
             
 
              property.</para
           >
           <para
-            >The garbage collector does not collect objects with a generation number higher than specified by the <paramref
-             name="generation" />
+            >The garbage collector does not collect objects with a generation number higher than specified by the <paramref name="generation" />
 
             
 
-             parameter. Use the <see
-             cref="P:System.GC.MaxGeneration" />
+             parameter. Use the <see cref="P:System.GC.MaxGeneration" />
 
             
 
-             property to determine the maximum valid value of <paramref
-             name="generation" />
+             property to determine the maximum valid value of <paramref name="generation" />
 
             
 
@@ -393,8 +371,7 @@
           >
           <para>To have the garbage collector consider all objects regardless of their generation, use the version of this method that takes no parameters. </para>
           <para
-            >To have the garbage collector reclaim objects up to a specified generation of objects, use the <see
-             cref="M:System.GC.Collect(System.Int32)" />
+            >To have the garbage collector reclaim objects up to a specified generation of objects, use the <see cref="M:System.GC.Collect(System.Int32)" />
 
             
 
@@ -404,8 +381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces a garbage collection from generation 0 through a specified generation, at a time specified by a <see
-             cref="T:System.GCCollectionMode" />
+            >Forces a garbage collection from generation 0 through a specified generation, at a time specified by a <see cref="T:System.GCCollectionMode" />
 
             
 
@@ -413,14 +389,22 @@
           >
         </summary>
         <param name="generation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of the oldest generation that garbage collection can be performed on. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -453,13 +437,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table summarizes the interaction of the <paramref
-             name="mode" />
+            >The following table summarizes the interaction of the <paramref name="mode" />
 
             
 
-             and <paramref
-             name="blocking" />
+             and <paramref name="blocking" />
 
             
 
@@ -498,24 +480,20 @@
 
                   
 
-                   or <see
-                   cref="F:System.GCCollectionMode.Default" />
+                   or <see cref="F:System.GCCollectionMode.Default" />
                 </para>
               </term>
               <description>
                 <para
-                  >A blocking collection is performed as soon as possible. If a background collection is in progress and <paramref
-                   name="generation" />
+                  >A blocking collection is performed as soon as possible. If a background collection is in progress and <paramref name="generation" />
 
                   
 
-                   is 0 or 1, the <see
-                   cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
+                   is 0 or 1, the <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
 
                   
 
-                   method immediately triggers a blocking collection and returns when the collection is finished. If a background collection is in progress and <paramref
-                   name="generation" />
+                   method immediately triggers a blocking collection and returns when the collection is finished. If a background collection is in progress and <paramref name="generation" />
 
                   
 
@@ -524,8 +502,7 @@
               </description>
               <description>
                 <para
-                  >A collection is performed as soon as possible. The <see
-                   cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
+                  >A collection is performed as soon as possible. The <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
 
                   
 
@@ -541,8 +518,7 @@
               </term>
               <description>
                 <para
-                  >A blocking collection may be performed, depending on the state of the garbage collector and the <paramref
-                   name="generation" />
+                  >A blocking collection may be performed, depending on the state of the garbage collector and the <paramref name="generation" />
 
                   
 
@@ -551,8 +527,7 @@
               </description>
               <description>
                 <para
-                  >A collection may be performed, depending on the state of the garbage collector. The <see
-                   cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
+                  >A collection may be performed, depending on the state of the garbage collector. The <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
 
                   
 
@@ -562,23 +537,19 @@
             </item>
           </list>
           <para
-            >If a call to the <see
-             cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
+            >If a call to the <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
 
             
 
-             method performs a full blocking garbage collection, you can also compact the large object heap by setting the <see
-             cref="P:System.Runtime.GCSettings.LargeObjectHeapCompactionMode" />
+             method performs a full blocking garbage collection, you can also compact the large object heap by setting the <see cref="P:System.Runtime.GCSettings.LargeObjectHeapCompactionMode" />
 
             
 
-             property to <see
-             cref="F:System.Runtime.GCLargeObjectHeapCompactionMode.CompactOnce" />
+             property to <see cref="F:System.Runtime.GCLargeObjectHeapCompactionMode.CompactOnce" />
 
             
 
-             before calling the <see
-             cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
+             before calling the <see cref="M:System.GC.Collect(System.Int32,System.GCCollectionMode,System.Boolean)" />
 
             
 
@@ -588,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces a garbage collection from generation 0 through a specified generation, at a time specified by a <see
-             cref="T:System.GCCollectionMode" />
+            >Forces a garbage collection from generation 0 through a specified generation, at a time specified by a <see cref="T:System.GCCollectionMode" />
 
             
 
@@ -597,36 +567,45 @@
           >
         </summary>
         <param name="generation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of the oldest generation that garbage collection can be performed on.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the enumeration values that specifies whether the garbage collection is forced (<see
-           cref="F:System.GCCollectionMode.Default" />
+          One of the enumeration values that specifies whether the garbage collection is forced (<see cref="F:System.GCCollectionMode.Default" />
 
           
 
-           or <see
-           cref="F:System.GCCollectionMode.Forced" />
+           or <see cref="F:System.GCCollectionMode.Forced" />
 
           
 
-          ) or optimized (<see
-           cref="F:System.GCCollectionMode.Optimized" />
+          ) or optimized (<see cref="F:System.GCCollectionMode.Optimized" />
 
           
 
           ).</param
         >
         <param name="blocking">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -661,33 +640,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you implement your own resource management, you might need to force garbage collection periodically by calling the <see
-             cref="M:System.GC.Collect(System.Int32)" />
+            >If you implement your own resource management, you might need to force garbage collection periodically by calling the <see cref="M:System.GC.Collect(System.Int32)" />
 
             
 
-             method. Because this is an expensive operation, you can improve performance by skipping the call when a garbage collection has occurred recently. Save the value returned by <see
-             cref="M:System.GC.CollectionCount(System.Int32)" />
+             method. Because this is an expensive operation, you can improve performance by skipping the call when a garbage collection has occurred recently. Save the value returned by <see cref="M:System.GC.CollectionCount(System.Int32)" />
 
             
 
-             immediately after calling <see
-             cref="M:System.GC.Collect(System.Int32)" />
+             immediately after calling <see cref="M:System.GC.Collect(System.Int32)" />
 
             
 
-            . The next time you need to call <see
-             cref="M:System.GC.Collect(System.Int32)" />
+            . The next time you need to call <see cref="M:System.GC.Collect(System.Int32)" />
 
             
 
-            , compare the current value returned by <see
-             cref="M:System.GC.CollectionCount(System.Int32)" />
+            , compare the current value returned by <see cref="M:System.GC.CollectionCount(System.Int32)" />
 
             
 
-             to the saved value. If the two values are equal, no collection has occurred in the interim and it is reasonable to call <see
-             cref="M:System.GC.Collect(System.Int32)" />
+             to the saved value. If the two values are equal, no collection has occurred in the interim and it is reasonable to call <see cref="M:System.GC.Collect(System.Int32)" />
 
             
 
@@ -703,7 +676,11 @@
           <para>The number of times garbage collection has occurred for the specified generation since the process was started.</para>
         </returns>
         <param name="generation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -733,8 +710,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine the age of an object, and then use that information with the <see
-             cref="M:System.GC.Collect(System.Int32)" />
+            >Use this method to determine the age of an object, and then use that information with the <see cref="M:System.GC.Collect(System.Int32)" />
 
             
 
@@ -748,8 +724,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current generation number of <paramref
-             name="obj" />
+            >The current generation number of <paramref name="obj" />
 
             
 
@@ -757,7 +732,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -792,8 +771,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current generation number of the target of <paramref
-             name="wo" />
+            >The current generation number of the target of <paramref name="wo" />
 
             
 
@@ -801,12 +779,15 @@
           >
         </returns>
         <param name="wo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.WeakReference" />
+          A <see cref="T:System.WeakReference" />
 
           
 
@@ -839,8 +820,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="forceFullCollection" />
+            >If the <paramref name="forceFullCollection" />
 
             
 
@@ -856,7 +836,11 @@
           <para>A number that is the best available approximation of the number of bytes currently allocated in managed memory.</para>
         </returns>
         <param name="forceFullCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -895,29 +879,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The purpose of the <see
-             cref="M:System.GC.KeepAlive(System.Object)" />
+            >The purpose of the <see cref="M:System.GC.KeepAlive(System.Object)" />
 
             
 
              method is to ensure the existence of a reference to an object that is at risk of being prematurely reclaimed by the garbage collector. A common scenario where this might happen is when there are no references to the object in managed code or data, but the object is still in use in unmanaged code such as Win32 APIs, unmanaged DLLs, or methods using COM.</para
           >
           <para
-            >This method references the <paramref
-             name="obj" />
+            >This method references the <paramref name="obj" />
 
             
 
-             parameter, making that object ineligible for garbage collection from the start of the routine to the point, in execution order, where this method is called. Code this method at the end, not the beginning, of the range of instructions where <paramref
-             name="obj" />
+             parameter, making that object ineligible for garbage collection from the start of the routine to the point, in execution order, where this method is called. Code this method at the end, not the beginning, of the range of instructions where <paramref name="obj" />
 
             
 
              must be available.</para
           >
           <para
-            >The <see
-             cref="M:System.GC.KeepAlive(System.Object)" />
+            >The <see cref="M:System.GC.KeepAlive(System.Object)" />
 
             
 
@@ -929,7 +909,11 @@
           <para>References the specified object, which makes it ineligible for garbage collection from the start of the current routine to the point where this method is called.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -955,24 +939,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The generation number, or age, of an object is an implementation-defined relative measure of an object's lifespan. The most recently created objects are in generation 0 and the oldest objects are in a generation less than or equal to the generation returned by the <see
-             cref="P:System.GC.MaxGeneration" />
+            >The generation number, or age, of an object is an implementation-defined relative measure of an object's lifespan. The most recently created objects are in generation 0 and the oldest objects are in a generation less than or equal to the generation returned by the <see cref="P:System.GC.MaxGeneration" />
 
             
 
              property.</para
           >
           <para
-            >The garbage collector assumes that newer memory is more likely to be eligible for garbage collection than older memory. Therefore, the garbage collector improves its performance by adjusting generation numbers each time it reclaims memory, and the <see
-             cref="P:System.GC.MaxGeneration" />
+            >The garbage collector assumes that newer memory is more likely to be eligible for garbage collection than older memory. Therefore, the garbage collector improves its performance by adjusting generation numbers each time it reclaims memory, and the <see cref="P:System.GC.MaxGeneration" />
 
             
 
              property value can grow over time.</para
           >
           <para
-            >If object aging is implemented, the <see
-             cref="P:System.GC.MaxGeneration" />
+            >If object aging is implemented, the <see cref="P:System.GC.MaxGeneration" />
 
             
 
@@ -1009,13 +990,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you have situations in which a full garbage collection by the common language runtime would adversely affect your application's performance, you can determine whether the runtime is about to induce a full garbage collection and circumvent that collection by inducing a collection yourself (using the <see
-             cref="M:System.GC.Collect" />
+            >If you have situations in which a full garbage collection by the common language runtime would adversely affect your application's performance, you can determine whether the runtime is about to induce a full garbage collection and circumvent that collection by inducing a collection yourself (using the <see cref="M:System.GC.Collect" />
 
             
 
-             method) when conditions are still favorable. For more information about what represents a full garbage collection, see <format
-             type="text/html">
+             method) when conditions are still favorable. For more information about what represents a full garbage collection, see <format type="text/html">
               <a href="e12d8e74-31e3-4035-a87d-f3e66f0a9b89">Garbage Collection Notifications</a>
             </format>
 
@@ -1025,13 +1004,11 @@
           >
           <para>When you register for a garbage collection notification, you can determine whether the event that signals an approaching full garbage collection has been raised by checking the status of the garbage collection notification. This pattern resembles how the operating system monitors for low memory notifications. </para>
           <para
-            >Use the following guidelines for specifying the <paramref
-             name="maxGenerationThreshold" />
+            >Use the following guidelines for specifying the <paramref name="maxGenerationThreshold" />
 
             
 
-             and <paramref
-             name="largeObjectHeapThreshold" />
+             and <paramref name="largeObjectHeapThreshold" />
 
             
 
@@ -1053,14 +1030,22 @@
           <para>Specifies that a garbage collection notification should be raised when conditions favor full garbage collection and when the collection has been completed.</para>
         </summary>
         <param name="maxGenerationThreshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A number between 1 and 99 that specifies when the notification should be raised based on the objects surviving in generation 2. </param
         >
         <param name="largeObjectHeapThreshold">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1093,39 +1078,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In determining when to schedule garbage collection, the runtime takes into account how much managed memory is allocated. If a small managed object allocates a large amount of unmanaged memory, the runtime takes into account only the managed memory, and thus underestimates the urgency of scheduling garbage collection. The <see
-             cref="M:System.GC.AddMemoryPressure(System.Int64)" />
+            >In determining when to schedule garbage collection, the runtime takes into account how much managed memory is allocated. If a small managed object allocates a large amount of unmanaged memory, the runtime takes into account only the managed memory, and thus underestimates the urgency of scheduling garbage collection. The <see cref="M:System.GC.AddMemoryPressure(System.Int64)" />
 
             
 
-             method informs the runtime of this additional pressure on system memory, and the <see
-             cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
+             method informs the runtime of this additional pressure on system memory, and the <see cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
 
             
 
              method informs the runtime that the additional pressure has been released.</para
           >
           <para
-            >In the simplest usage pattern, a managed object allocates unmanaged memory in the constructor and releases it in the Dispose or Finalize method. Call the <see
-             cref="M:System.GC.AddMemoryPressure(System.Int64)" />
+            >In the simplest usage pattern, a managed object allocates unmanaged memory in the constructor and releases it in the Dispose or Finalize method. Call the <see cref="M:System.GC.AddMemoryPressure(System.Int64)" />
 
             
 
-             method after allocating the unmanaged memory, and call the <see
-             cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
+             method after allocating the unmanaged memory, and call the <see cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
 
             
 
              method after releasing it.</para
           >
           <para
-            >In more complicated scenarios, where the unmanaged memory allocation changes substantially during the lifetime of the managed object, you can call the <see
-             cref="M:System.GC.AddMemoryPressure(System.Int64)" />
+            >In more complicated scenarios, where the unmanaged memory allocation changes substantially during the lifetime of the managed object, you can call the <see cref="M:System.GC.AddMemoryPressure(System.Int64)" />
 
             
 
-             and <see
-             cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
+             and <see cref="M:System.GC.RemoveMemoryPressure(System.Int64)" />
 
             
 
@@ -1140,7 +1119,11 @@
           <para>Informs the runtime that unmanaged memory has been released and no longer needs to be taken into account when scheduling garbage collection.</para>
         </summary>
         <param name="bytesAllocated">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1179,8 +1162,7 @@
 
           
 
-           is a <see
-           langword="null" />
+           is a <see langword="null" />
 
           
 
@@ -1192,34 +1174,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
+            >The <see cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
 
             
 
-             method adds the <paramref
-             name="obj" />
+             method adds the <paramref name="obj" />
 
             
 
-             parameter to the list of objects that request finalization before the garbage collector frees the object. The <paramref
-             name="obj" />
+             parameter to the list of objects that request finalization before the garbage collector frees the object. The <paramref name="obj" />
 
             
 
              parameter must be the caller of this method.</para
           >
           <para
-            >Calling the <see
-             cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
+            >Calling the <see cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
 
             
 
              method does not guarantee that the garbage collector will call an object's finalizer.</para
           >
           <para
-            >By default, all objects that implement finalizers are added to the list of objects that require finalization; however, an object might have already been finalized or might have disabled finalization by calling the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >By default, all objects that implement finalizers are added to the list of objects that require finalization; however, an object might have already been finalized or might have disabled finalization by calling the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
@@ -1230,8 +1207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Requests that the system call the finalizer for the specified object for which <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Requests that the system call the finalizer for the specified object for which <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
@@ -1239,7 +1215,11 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1281,8 +1261,7 @@
 
           
 
-           is a <see
-           langword="null" />
+           is a <see langword="null" />
 
           
 
@@ -1294,46 +1273,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method sets a bit in the object header of <paramref
-             name="obj" />
+            >This method sets a bit in the object header of <paramref name="obj" />
 
             
 
-            , which the runtime checks when calling finalizers. A finalizer, which is represented by the <see
-             cref="M:System.Object.Finalize" />
+            , which the runtime checks when calling finalizers. A finalizer, which is represented by the <see cref="M:System.Object.Finalize" />
 
             
 
-             method, is used to release unmanaged resources before an object is garbage-collected. If <paramref
-             name="obj" />
+             method, is used to release unmanaged resources before an object is garbage-collected. If <paramref name="obj" />
 
             
 
-             does not have a finalizer, the call to the <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+             does not have a finalizer, the call to the <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
              method has no effect. </para
           >
           <para
-            >Objects that implement the <see
-             cref="T:System.IDisposable" />
+            >Objects that implement the <see cref="T:System.IDisposable" />
 
             
 
-             interface can call this method from the object's <see
-             cref="M:System.IDisposable.Dispose" />
+             interface can call this method from the object's <see cref="M:System.IDisposable.Dispose" />
 
             
 
-             implementation to prevent the garbage collector from calling <see
-             cref="M:System.Object.Finalize" />
+             implementation to prevent the garbage collector from calling <see cref="M:System.Object.Finalize" />
 
             
 
-             on an object that does not require it. Typically, this is done to prevent the finalizer from releasing unmanaged resources that have already been freed by the <see
-             cref="M:System.IDisposable.Dispose" />
+             on an object that does not require it. Typically, this is done to prevent the finalizer from releasing unmanaged resources that have already been freed by the <see cref="M:System.IDisposable.Dispose" />
 
             
 
@@ -1345,7 +1316,11 @@
           <para>Requests that the common language runtime not call the finalizer for the specified object. </para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1375,52 +1350,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.GCNotificationStatus" />
+            >Use the <see cref="T:System.GCNotificationStatus" />
 
             
 
-             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see
-             cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
+             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
 
             
 
-             method. You can also use the <see
-             cref="M:System.GC.WaitForFullGCComplete" />
+             method. You can also use the <see cref="M:System.GC.WaitForFullGCComplete" />
 
             
 
              method to determine whether the full garbage collection has completed.</para
           >
           <para
-            >When the enumeration returns <see
-             cref="F:System.GCNotificationStatus.Succeeded" />
+            >When the enumeration returns <see cref="F:System.GCNotificationStatus.Succeeded" />
 
             
 
-            , you can do tasks such as preventing additional objects from being allocated and inducing a collection yourself with the <see
-             cref="M:System.GC.Collect" />
+            , you can do tasks such as preventing additional objects from being allocated and inducing a collection yourself with the <see cref="M:System.GC.Collect" />
 
             
 
              method. Note that the notification does not guarantee that a full garbage collection will occur, only that conditions have reached the threshold that are favorable for a full garbage collection to occur.</para
           >
           <para
-            >This method waits indefinitely for a garbage collection notification to be obtained. If you want to specify a time-out period for the method to return if the notification cannot be obtained, use the <see
-             cref="M:System.GC.WaitForFullGCApproach(System.Int32)" />
+            >This method waits indefinitely for a garbage collection notification to be obtained. If you want to specify a time-out period for the method to return if the notification cannot be obtained, use the <see cref="M:System.GC.WaitForFullGCApproach(System.Int32)" />
 
             
 
-             method overload. If you call this method without specifying a time-out, you can call the <see
-             cref="M:System.GC.CancelFullGCNotification" />
+             method overload. If you call this method without specifying a time-out, you can call the <see cref="M:System.GC.CancelFullGCNotification" />
 
             
 
              method if you are waiting longer than preferred.</para
           >
           <para
-            >You should follow this method with a call to the <see
-             cref="Overload:System.GC.WaitForFullGCComplete" />
+            >You should follow this method with a call to the <see cref="Overload:System.GC.WaitForFullGCComplete" />
 
             
 
@@ -1460,65 +1427,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.GCNotificationStatus" />
+            >Use the <see cref="T:System.GCNotificationStatus" />
 
             
 
-             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see
-             cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
+             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
 
             
 
-             method. You can also use the <see
-             cref="M:System.GC.WaitForFullGCComplete" />
+             method. You can also use the <see cref="M:System.GC.WaitForFullGCComplete" />
 
             
 
              method to determine whether the full garbage collection has completed.</para
           >
           <para
-            >Note that this method returns immediately whenever a garbage collection notification status is obtained, regardless of the value specified by <paramref
-             name="millisecondsTimeout" />
+            >Note that this method returns immediately whenever a garbage collection notification status is obtained, regardless of the value specified by <paramref name="millisecondsTimeout" />
 
             
 
-            . If a garbage collection notification status is not obtained before <paramref
-             name="millisecondsTimeout " />
+            . If a garbage collection notification status is not obtained before <paramref name="millisecondsTimeout " />
 
             
 
-            times out, this method returns <see
-             cref="F:System.GCNotificationStatus.NotApplicable" />
+            times out, this method returns <see cref="F:System.GCNotificationStatus.NotApplicable" />
 
             
 
             .</para
           >
           <para
-            >When the enumeration returns <see
-             cref="F:System.GCNotificationStatus.Succeeded" />
+            >When the enumeration returns <see cref="F:System.GCNotificationStatus.Succeeded" />
 
             
 
-            , you can do tasks such as preventing additional objects from being allocated and inducing a collection yourself with the <see
-             cref="M:System.GC.Collect" />
+            , you can do tasks such as preventing additional objects from being allocated and inducing a collection yourself with the <see cref="M:System.GC.Collect" />
 
             
 
              method. Note that the notification does not guarantee that a full garbage collection will occur, only that conditions have reached the threshold that are favorable for a full garbage collection to occur.</para
           >
           <para
-            >You can call the <see
-             cref="M:System.GC.CancelFullGCNotification" />
+            >You can call the <see cref="M:System.GC.CancelFullGCNotification" />
 
             
 
              method when you cannot wait for the time-out period to elapse.</para
           >
           <para
-            >You should follow this method with a call to the <see
-             cref="Overload:System.GC.WaitForFullGCComplete" />
+            >You should follow this method with a call to the <see cref="Overload:System.GC.WaitForFullGCComplete" />
 
             
 
@@ -1534,7 +1491,11 @@
           <para>The status of the registered garbage collection notification.</para>
         </returns>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1563,52 +1524,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.GCNotificationStatus" />
+            >Use the <see cref="T:System.GCNotificationStatus" />
 
             
 
-             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see
-             cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
+             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
 
             
 
-             method. You can also use the <see
-             cref="M:System.GC.WaitForFullGCApproach" />
+             method. You can also use the <see cref="M:System.GC.WaitForFullGCApproach" />
 
             
 
              method to determine whether a full garbage collection is imminent.</para
           >
           <para
-            >When the enumeration returns <see
-             cref="F:System.GCNotificationStatus.Succeeded" />
+            >When the enumeration returns <see cref="F:System.GCNotificationStatus.Succeeded" />
 
             
 
-            , you can do tasks such as resuming work and obtaining a collection count with the <see
-             cref="M:System.GC.CollectionCount(System.Int32)" />
+            , you can do tasks such as resuming work and obtaining a collection count with the <see cref="M:System.GC.CollectionCount(System.Int32)" />
 
             
 
              property. </para
           >
           <para
-            >This method waits indefinitely for a garbage collection notification to be obtained. If you want to specify a time-out period for the method to return if the notification cannot be obtained, use the <see
-             cref="M:System.GC.WaitForFullGCApproach(System.Int32)" />
+            >This method waits indefinitely for a garbage collection notification to be obtained. If you want to specify a time-out period for the method to return if the notification cannot be obtained, use the <see cref="M:System.GC.WaitForFullGCApproach(System.Int32)" />
 
             
 
-             method overload. If you call this method without specifying a time-out, you can call the <see
-             cref="M:System.GC.CancelFullGCNotification" />
+             method overload. If you call this method without specifying a time-out, you can call the <see cref="M:System.GC.CancelFullGCNotification" />
 
             
 
              method if you are waiting longer than preferred.</para
           >
           <para
-            >This method call should be preceded with a call to the <see
-             cref="Overload:System.GC.WaitForFullGCApproach" />
+            >This method call should be preceded with a call to the <see cref="Overload:System.GC.WaitForFullGCApproach" />
 
             
 
@@ -1648,65 +1601,55 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.GCNotificationStatus" />
+            >Use the <see cref="T:System.GCNotificationStatus" />
 
             
 
-             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see
-             cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
+             enumeration returned by this method to determine the status of the current garbage collection notification that was registered by using the <see cref="M:System.GC.RegisterForFullGCNotification(System.Int32,System.Int32)" />
 
             
 
-             method. You can also use the <see
-             cref="M:System.GC.WaitForFullGCApproach" />
+             method. You can also use the <see cref="M:System.GC.WaitForFullGCApproach" />
 
             
 
              method to determine whether a full garbage collection is imminent.</para
           >
           <para
-            >Note that this method returns immediately whenever a garbage collection notification status is obtained, regardless of the value specified by <paramref
-             name="millisecondsTimeout" />
+            >Note that this method returns immediately whenever a garbage collection notification status is obtained, regardless of the value specified by <paramref name="millisecondsTimeout" />
 
             
 
-            . If a garbage collection notification status is not obtained before <paramref
-             name="millisecondsTimeout " />
+            . If a garbage collection notification status is not obtained before <paramref name="millisecondsTimeout " />
 
             
 
-            times out, this method returns <see
-             cref="F:System.GCNotificationStatus.NotApplicable" />
+            times out, this method returns <see cref="F:System.GCNotificationStatus.NotApplicable" />
 
             
 
             .</para
           >
           <para
-            >When the enumeration returns <see
-             cref="F:System.GCNotificationStatus.Succeeded" />
+            >When the enumeration returns <see cref="F:System.GCNotificationStatus.Succeeded" />
 
             
 
-            , you can do tasks such as resuming work and obtaining a collection count with the <see
-             cref="M:System.GC.CollectionCount(System.Int32)" />
+            , you can do tasks such as resuming work and obtaining a collection count with the <see cref="M:System.GC.CollectionCount(System.Int32)" />
 
             
 
              property. </para
           >
           <para
-            >You can call the <see
-             cref="M:System.GC.CancelFullGCNotification" />
+            >You can call the <see cref="M:System.GC.CancelFullGCNotification" />
 
             
 
              method when you cannot wait for the time-out period to elapse.</para
           >
           <para
-            >This method call should be preceded with a call to the <see
-             cref="Overload:System.GC.WaitForFullGCApproach" />
+            >This method call should be preceded with a call to the <see cref="Overload:System.GC.WaitForFullGCApproach" />
 
             
 
@@ -1722,7 +1665,11 @@
           <para>The status of the registered garbage collection notification.</para>
         </returns>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1754,21 +1701,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the garbage collector finds objects that can be reclaimed, it checks each object to determine the object's finalization requirements. If an object implements a finalizer and has not disabled finalization by calling <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >When the garbage collector finds objects that can be reclaimed, it checks each object to determine the object's finalization requirements. If an object implements a finalizer and has not disabled finalization by calling <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
-            , the object is placed in a list of objects that are marked as ready for finalization. The garbage collector calls the <see
-             cref="M:System.Object.Finalize" />
+            , the object is placed in a list of objects that are marked as ready for finalization. The garbage collector calls the <see cref="M:System.Object.Finalize" />
 
             
 
              methods for the objects in this list and removes the entries from the list. This method blocks until all finalizers have run to completion.</para
           >
           <para
-            >The thread on which finalizers are run is unspecified, so there is no guarantee that this method will terminate. However, this thread can be interrupted by another thread while the <see
-             cref="M:System.GC.WaitForPendingFinalizers" />
+            >The thread on which finalizers are run is unspecified, so there is no guarantee that this method will terminate. However, this thread can be interrupted by another thread while the <see cref="M:System.GC.WaitForPendingFinalizers" />
 
             
 

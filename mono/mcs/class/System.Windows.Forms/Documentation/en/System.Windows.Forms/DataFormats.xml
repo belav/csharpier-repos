@@ -14,26 +14,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.IDataObject" />
+        >The <see cref="T:System.Windows.Forms.IDataObject" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.DataObject" />
+         and <see cref="T:System.Windows.Forms.DataObject" />
 
         
 
-         classes also use the static format list to determine the type of data that is retrieved from the system <see
-         cref="T:System.Windows.Forms.Clipboard" />
+         classes also use the static format list to determine the type of data that is retrieved from the system <see cref="T:System.Windows.Forms.Clipboard" />
 
         
 
         , or that is transferred in a drag-and-drop operation.</para
       >
       <para
-        >The <see
-         cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
+        >The <see cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
 
         
 
@@ -42,8 +38,7 @@
       <list type="bullet">
         <item>
           <para
-            >Get a predefined <see
-             cref="T:System.Windows.Forms.DataFormats.Format" />
+            >Get a predefined <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
@@ -52,8 +47,7 @@
         </item>
         <item>
           <para
-            >Add a new format name/ID number pair to the static list in this class, and to register the format with the Windows registry as a <see
-             cref="T:System.Windows.Forms.Clipboard" />
+            >Add a new format name/ID number pair to the static list in this class, and to register the format with the Windows registry as a <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
@@ -62,18 +56,15 @@
         </item>
       </list>
       <para
-        >You can get the <see
-         cref="P:System.Windows.Forms.DataFormats.Format.Id" />
+        >You can get the <see cref="P:System.Windows.Forms.DataFormats.Format.Id" />
 
         
 
-         number or format <see
-         cref="P:System.Windows.Forms.DataFormats.Format.Name" />
+         number or format <see cref="P:System.Windows.Forms.DataFormats.Format.Name" />
 
         
 
-         from the appropriate property in the <see
-         cref="T:System.Windows.Forms.DataFormats.Format" />
+         from the appropriate property in the <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
         
 
@@ -83,13 +74,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides static, predefined <see
-         cref="T:System.Windows.Forms.Clipboard" />
+        >Provides static, predefined <see cref="T:System.Windows.Forms.Clipboard" />
 
         
 
-         format names. Use them to identify the format of data that you store in an <see
-         cref="T:System.Windows.Forms.IDataObject" />
+         format names. Use them to identify the format of data that you store in an <see cref="T:System.Windows.Forms.IDataObject" />
 
         
 
@@ -109,62 +98,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A bitmap represents a computer graphic as an array of bits in memory, and these bits represent the attributes of the individual pixels in an image.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -191,62 +170,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -274,62 +243,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>DIB is a file format designed to ensure that bitmapped graphics created using one application can be loaded and displayed in another application exactly the way they appeared in the originating application.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -357,62 +316,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>DIF is a format consisting of ASCII codes in which database, spreadsheet, and similar documents can be structured to facilitate their use by and transfer to other programs.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -441,8 +390,7 @@
           <para>The metafile format is a Windows file that stores an image in terms of graphic objects rather than pixels. When resized, a metafile preserves an image better than a bitmap.</para>
           <block subset="none" type="note">
             <para
-              >Special considerations may be necessary when using the metafile format with the clipboard. Due to a limitation in the current implementation of the <see
-               cref="T:System.Windows.Forms.DataObject" />
+              >Special considerations may be necessary when using the metafile format with the clipboard. Due to a limitation in the current implementation of the <see cref="T:System.Windows.Forms.DataObject" />
 
               
 
@@ -450,62 +398,52 @@
             >
           </block>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -533,62 +471,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this format to interact with shell file drags during drag-and-drop operations.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -622,31 +550,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This member is typically used to register native Clipboard formats.</para>
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
+            >Call <see cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
 
             
 
-             with an ID number when you want to retrieve a <see
-             cref="T:System.Windows.Forms.DataFormats.Format" />
+             with an ID number when you want to retrieve a <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
-             instance that contains the ID/format name pair. Typically, the ID name and number is published by the creator of the application that you are using the <see
-             cref="T:System.Windows.Forms.Clipboard" />
+             instance that contains the ID/format name pair. Typically, the ID name and number is published by the creator of the application that you are using the <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
              to interface with. For example, the ID number for Dynamic Data Exchange (DDE) conversation information in Visual Basic is &amp;HBF00, and the format name is vbCFLink.</para
           >
           <para
-            >Call this method with any unique ID number to add the ID/format name pair to the static list of format name/ID pairs in the <see
-             cref="T:System.Windows.Forms.DataFormats" />
+            >Call this method with any unique ID number to add the ID/format name pair to the static list of format name/ID pairs in the <see cref="T:System.Windows.Forms.DataFormats" />
 
             
 
-             class. The new name will be created by concatenating "Format" and the ID number. This pair is not registered as a new <see
-             cref="T:System.Windows.Forms.Clipboard" />
+             class. The new name will be created by concatenating "Format" and the ID number. This pair is not registered as a new <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
@@ -656,8 +579,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Windows.Forms.DataFormats.Format" />
+            >Returns a <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
@@ -667,8 +589,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.DataFormats.Format" />
+            >A <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
@@ -676,7 +597,11 @@
           >
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -704,21 +629,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
+            >Call <see cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
 
             
 
              with the format name when you need a Windows Clipboard numeric ID for an existing format.</para
           >
           <para
-            >Call this method with your own format name to create a new <see
-             cref="T:System.Windows.Forms.Clipboard" />
+            >Call this method with your own format name to create a new <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
-             format type. If the specified format does not exist, this method will register the name as a Clipboard format with the Windows registry and get a unique format identifier. This new name/ID pair will be added to the static list of format name/ID pairs in the <see
-             cref="T:System.Windows.Forms.DataFormats" />
+             format type. If the specified format does not exist, this method will register the name as a Clipboard format with the Windows registry and get a unique format identifier. This new name/ID pair will be added to the static list of format name/ID pairs in the <see cref="T:System.Windows.Forms.DataFormats" />
 
             
 
@@ -728,8 +650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Windows.Forms.DataFormats.Format" />
+            >Returns a <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
@@ -739,8 +660,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.DataFormats.Format" />
+            >A <see cref="T:System.Windows.Forms.DataFormats.Format" />
 
             
 
@@ -748,7 +668,11 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -770,67 +694,59 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to indicate the CF_HTML clipboard data type. For more information about this format, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=198813">HTML Clipboard Format</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=198813"
+              >HTML Clipboard Format</see
+            >
 
             
 
             .</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -857,62 +773,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -941,8 +847,7 @@
           <para>The metafile format is a Windows file that stores an image in terms of graphic objects rather than pixels. When resized, a metafile preserves an image better than a bitmap.</para>
           <block subset="none" type="note">
             <para
-              >Special considerations may be necessary when using the metafile format with the clipboard. Due to a limitation in the current implementation of the <see
-               cref="T:System.Windows.Forms.DataObject" />
+              >Special considerations may be necessary when using the metafile format with the clipboard. Due to a limitation in the current implementation of the <see cref="T:System.Windows.Forms.DataObject" />
 
               
 
@@ -950,62 +855,52 @@
             >
           </block>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1032,62 +927,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1114,70 +999,59 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this field to query a <see
-             cref="T:System.Windows.Forms.DataObject" />
+            >Use this field to query a <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              for the format of data that it contains.</para
           >
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1204,62 +1078,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1287,62 +1151,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>RIFF is a broad-based specification, designed to be used in defining standard formats for different types of multimedia files.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1370,62 +1224,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>RTF is an adaptation of Document Content Architecture that is used for transferring formatted text documents between applications.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1453,62 +1297,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1538,62 +1372,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1624,62 +1448,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A symbolic link is a disk directory entry that takes the place of a directory entry for a file, but is actually a reference to a file in a different directory. A symbolic link is also called an alias, shortcut, soft link, or symlink.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1706,62 +1520,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1789,62 +1593,52 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>TIFF is a standard file format commonly used for scanning, storage, and interchanges of gray-scale graphic images.</para>
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1871,62 +1665,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -1953,62 +1737,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field is used by the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >This field is used by the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             interface and the <see
-             cref="T:System.Windows.Forms.DataObject" />
+             interface and the <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
              class to specify the data type.</para
           >
           <para
-            >When adding to an <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >When adding to an <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
-             or to an implementation of <see
-             cref="T:System.Windows.Forms.DataObject" />
+             or to an implementation of <see cref="T:System.Windows.Forms.DataObject" />
 
             
 
-            , use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+            , use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+             and <see cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
 
             
 
              methods.</para
           >
           <para
-            >To see if an object of this type exists, use this field as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >To see if an object of this type exists, use this field as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
 
             
 
              methods.</para
           >
           <para
-            >To get an object of this type, use this as the format for the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+            >To get an object of this type, use this as the format for the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+             and <see cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
 
             
 

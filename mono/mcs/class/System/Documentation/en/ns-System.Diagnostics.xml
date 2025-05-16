@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Diagnostics" />
+        >The <see cref="N:System.Diagnostics" />
 
         
 
@@ -17,28 +16,23 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.Diagnostics.EventLog" />
+            >The <see cref="T:System.Diagnostics.EventLog" />
 
             
 
-             component provides functionality to write to event logs, read event log entries, and create and delete event logs and event sources on the network. The <see
-             cref="T:System.Diagnostics.EntryWrittenEventHandler" />
+             component provides functionality to write to event logs, read event log entries, and create and delete event logs and event sources on the network. The <see cref="T:System.Diagnostics.EntryWrittenEventHandler" />
 
             
 
-             provides a way to interact with event logs asynchronously. Supporting classes provide access to more detailed control, including: permission restrictions, the ability to specify event log types (which controls the type of default data that is written with an event log entry), and iterate through collections of event log entries. For more information about these tasks, see the <see
-             cref="T:System.Diagnostics.EventLogPermission" />
+             provides a way to interact with event logs asynchronously. Supporting classes provide access to more detailed control, including: permission restrictions, the ability to specify event log types (which controls the type of default data that is written with an event log entry), and iterate through collections of event log entries. For more information about these tasks, see the <see cref="T:System.Diagnostics.EventLogPermission" />
 
             
 
-            , <see
-             cref="T:System.Diagnostics.EventLogEntryType" />
+            , <see cref="T:System.Diagnostics.EventLogEntryType" />
 
             
 
-            , and <see
-             cref="T:System.Diagnostics.EventLogEntryCollection" />
+            , and <see cref="T:System.Diagnostics.EventLogEntryCollection" />
 
             
 
@@ -47,28 +41,23 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Diagnostics.Process" />
+            >The <see cref="T:System.Diagnostics.Process" />
 
             
 
-             class provides functionality to monitor system processes across the network, and to start and stop local system processes. In addition to retrieving lists of running processes (by specifying either the computer, the process name, or the process id) or viewing information about the process that currently has access to the processor, you can get detailed knowledge of process threads and modules both through the <see
-             cref="T:System.Diagnostics.Process" />
+             class provides functionality to monitor system processes across the network, and to start and stop local system processes. In addition to retrieving lists of running processes (by specifying either the computer, the process name, or the process id) or viewing information about the process that currently has access to the processor, you can get detailed knowledge of process threads and modules both through the <see cref="T:System.Diagnostics.Process" />
 
             
 
-             class itself, and by interacting with the <see
-             cref="T:System.Diagnostics.ProcessThread" />
+             class itself, and by interacting with the <see cref="T:System.Diagnostics.ProcessThread" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.ProcessModule" />
+             and <see cref="T:System.Diagnostics.ProcessModule" />
 
             
 
-             classes. The <see
-             cref="T:System.Diagnostics.ProcessStartInfo" />
+             classes. The <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
             
 
@@ -77,28 +66,23 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+            >The <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
-             class enables you to monitor system performance, while the <see
-             cref="T:System.Diagnostics.PerformanceCounterCategory" />
+             class enables you to monitor system performance, while the <see cref="T:System.Diagnostics.PerformanceCounterCategory" />
 
             
 
-             class provides a way to create new custom counters and categories. You can write to local custom counters and read from both local and remote counters (system as well as custom). You can sample counters using the <see
-             cref="T:System.Diagnostics.PerformanceCounter" />
+             class provides a way to create new custom counters and categories. You can write to local custom counters and read from both local and remote counters (system as well as custom). You can sample counters using the <see cref="T:System.Diagnostics.PerformanceCounter" />
 
             
 
-             class, and calculate results from successive performance counter samples using the <see
-             cref="T:System.Diagnostics.CounterSample" />
+             class, and calculate results from successive performance counter samples using the <see cref="T:System.Diagnostics.CounterSample" />
 
             
 
-             class. The <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+             class. The <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -107,18 +91,15 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="N:System.Diagnostics" />
+        >The <see cref="N:System.Diagnostics" />
 
         
 
-         namespace also provides classes that allow you to debug your application and to trace the execution of your code. For more information, see the <see
-         cref="T:System.Diagnostics.Trace" />
+         namespace also provides classes that allow you to debug your application and to trace the execution of your code. For more information, see the <see cref="T:System.Diagnostics.Trace" />
 
         
 
-         and <see
-         cref="T:System.Diagnostics.Debug" />
+         and <see cref="T:System.Diagnostics.Debug" />
 
         
 

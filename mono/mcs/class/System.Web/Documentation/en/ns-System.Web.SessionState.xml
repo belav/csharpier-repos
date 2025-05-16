@@ -9,8 +9,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Web.SessionState" />
+        >The <see cref="N:System.Web.SessionState" />
 
         
 

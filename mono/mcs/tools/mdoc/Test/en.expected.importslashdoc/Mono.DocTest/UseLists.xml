@@ -14,13 +14,11 @@
   <Interfaces />
   <Docs>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.UseLists</c>
+    <remarks><c>T:Mono.DocTest.UseLists</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -69,18 +67,14 @@
       </Parameters>
       <Docs>
         <typeparam name="T">Something</typeparam>
-        <param name="value"
-          >A <c
-          >T</c>
+        <param name="value">A <c>T</c>
 
           
 
-          .</param
-        >
+          .</param>
         <summary>To be added.</summary>
         <returns
-          >A <see
-           cref="T:Mono.DocTest.Generic.MyList`1" />
+          >A <see cref="T:Mono.DocTest.Generic.MyList`1" />
 
           
 
@@ -116,8 +110,7 @@
       </Parameters>
       <Docs>
         <param name="list"
-          >A <see
-           cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />
+          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />
 
           
 
@@ -154,8 +147,7 @@
       </Parameters>
       <Docs>
         <param name="list"
-          >Another <see
-           cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />
+          >Another <see cref="T:Mono.DocTest.Generic.MyList{System.Int32}" />
 
           
 
@@ -201,8 +193,7 @@
       </Parameters>
       <Docs>
         <param name="list"
-          >A <see
-           cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />
+          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{System.Int32}}" />
 
           
 
@@ -246,8 +237,7 @@
       <Docs>
         <typeparam name="T">Something Else</typeparam>
         <param name="list"
-          >A <see
-           cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />
+          >A <see cref="T:Mono.DocTest.Generic.MyList{System.Predicate{``0}}" />
 
           
 
@@ -298,8 +288,7 @@
           <c>V</c>
         </typeparam>
         <param name="helper"
-          >A <see
-           cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />
+          >A <see cref="T:Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2}" />
 
           
 

@@ -28,23 +28,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Data.DataRelation" />
+        >A <see cref="T:System.Data.DataRelation" />
 
         
 
-         is used to relate two <see
-         cref="T:System.Data.DataTable" />
+         is used to relate two <see cref="T:System.Data.DataTable" />
 
         
 
-         objects to each other through <see
-         cref="T:System.Data.DataColumn" />
+         objects to each other through <see cref="T:System.Data.DataColumn" />
 
         
 
-         objects. For example, in a Customer/Orders relationship, the Customers table is the parent and the Orders table is the child of the relationship. This is similar to a primary key/foreign key relationship. For more information, see <format
-         type="text/html">
+         objects. For example, in a Customer/Orders relationship, the Customers table is the parent and the Orders table is the child of the relationship. This is similar to a primary key/foreign key relationship. For more information, see <format type="text/html">
           <a href="e5e673f4-9b44-45ae-aaea-c504d1cc5d3e"
             >Navigating a Relationship between Tables</a
           >
@@ -55,59 +51,49 @@
         .</para
       >
       <para
-        >Relationships are created between matching columns in the parent and child tables. That is, the <see
-         cref="P:System.Data.DataColumn.DataType" />
+        >Relationships are created between matching columns in the parent and child tables. That is, the <see cref="P:System.Data.DataColumn.DataType" />
 
         
 
          value for both columns must be identical.</para
       >
       <para
-        >Relationships can also cascade various changes from the parent <see
-         cref="T:System.Data.DataRow" />
+        >Relationships can also cascade various changes from the parent <see cref="T:System.Data.DataRow" />
 
         
 
-         to its child rows. To control how values are changed in child rows, add a <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         to its child rows. To control how values are changed in child rows, add a <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         to the <see
-         cref="T:System.Data.ConstraintCollection" />
+         to the <see cref="T:System.Data.ConstraintCollection" />
 
         
 
-         of the <see
-         cref="T:System.Data.DataTable" />
+         of the <see cref="T:System.Data.DataTable" />
 
         
 
-         object. The <see
-         cref="T:System.Data.ConstraintCollection" />
+         object. The <see cref="T:System.Data.ConstraintCollection" />
 
         
 
          determines what action to take when a value in a parent table is deleted or updated.</para
       >
       <para
-        >When a <see
-         cref="T:System.Data.DataRelation" />
+        >When a <see cref="T:System.Data.DataRelation" />
 
         
 
-         is created, it first verifies that the relationship can be established. After it is added to the <see
-         cref="T:System.Data.DataRelationCollection" />
+         is created, it first verifies that the relationship can be established. After it is added to the <see cref="T:System.Data.DataRelationCollection" />
 
         
 
-        , the relationship is maintained by disallowing any changes that would invalidate it. Between the period when a <see
-         cref="T:System.Data.DataRelation" />
+        , the relationship is maintained by disallowing any changes that would invalidate it. Between the period when a <see cref="T:System.Data.DataRelation" />
 
         
 
-         is created and added to the <see
-         cref="T:System.Data.DataRelationCollection" />
+         is created and added to the <see cref="T:System.Data.DataRelationCollection" />
 
         
 
@@ -121,33 +107,27 @@
 
         
 
-         objects are contained in a <see
-         cref="T:System.Data.DataRelationCollection" />
+         objects are contained in a <see cref="T:System.Data.DataRelationCollection" />
 
         
 
-        , which you can access through the <see
-         cref="P:System.Data.DataSet.Relations" />
+        , which you can access through the <see cref="P:System.Data.DataSet.Relations" />
 
         
 
-         property of the <see
-         cref="T:System.Data.DataSet" />
+         property of the <see cref="T:System.Data.DataSet" />
 
         
 
-        , and the <see
-         cref="P:System.Data.DataTable.ChildRelations" />
+        , and the <see cref="P:System.Data.DataTable.ChildRelations" />
 
         
 
-         and <see
-         cref="P:System.Data.DataTable.ParentRelations" />
+         and <see cref="P:System.Data.DataTable.ParentRelations" />
 
         
 
-         properties of the <see
-         cref="T:System.Data.DataTable" />
+         properties of the <see cref="T:System.Data.DataTable" />
 
         
 
@@ -157,8 +137,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a parent/child relationship between two <see
-         cref="T:System.Data.DataTable" />
+        >Represents a parent/child relationship between two <see cref="T:System.Data.DataTable" />
 
         
 
@@ -184,18 +163,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataRelation" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataRelation" />
 
             
 
-             class using the specified <see
-             cref="T:System.Data.DataRelation" />
+             class using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
-             name, and parent and child <see
-             cref="T:System.Data.DataColumn" />
+             name, and parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -203,41 +179,49 @@
           >
         </summary>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataRelation" />
+          The name of the <see cref="T:System.Data.DataRelation" />
 
           
 
-          . If null or an empty string (""), a default name will be given when the created object is added to the <see
-           cref="T:System.Data.DataRelationCollection" />
+          . If null or an empty string (""), a default name will be given when the created object is added to the <see cref="T:System.Data.DataRelationCollection" />
 
           
 
           . </param
         >
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Data.DataColumn" />
+          The parent <see cref="T:System.Data.DataColumn" />
 
           
 
            in the relationship. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The child <see
-           cref="T:System.Data.DataColumn" />
+          The child <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -266,18 +250,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataRelation" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataRelation" />
 
             
 
-             class using the specified <see
-             cref="T:System.Data.DataRelation" />
+             class using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
-             name and matched arrays of parent and child <see
-             cref="T:System.Data.DataColumn" />
+             name and matched arrays of parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -285,36 +266,45 @@
           >
         </summary>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
-           cref="T:System.Data.DataRelationCollection" />
+          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see cref="T:System.Data.DataRelationCollection" />
 
           
 
           . </param
         >
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of child <see
-           cref="T:System.Data.DataColumn" />
+          An array of child <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -344,13 +334,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataRelation" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataRelation" />
 
             
 
-             class using the specified name, parent and child <see
-             cref="T:System.Data.DataColumn" />
+             class using the specified name, parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -358,43 +346,56 @@
           >
         </summary>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
-           cref="T:System.Data.DataRelationCollection" />
+          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see cref="T:System.Data.DataRelationCollection" />
 
           
 
           . </param
         >
         <param name="parentColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parent <see
-           cref="T:System.Data.DataColumn" />
+          The parent <see cref="T:System.Data.DataColumn" />
 
           
 
            in the relation. </param
         >
         <param name="childColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The child <see
-           cref="T:System.Data.DataColumn" />
+          The child <see cref="T:System.Data.DataColumn" />
 
           
 
            in the relation. </param
         >
         <param name="createConstraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -424,13 +425,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataRelation" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataRelation" />
 
             
 
-             class using the specified name, matched arrays of parent and child <see
-             cref="T:System.Data.DataColumn" />
+             class using the specified name, matched arrays of parent and child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -438,43 +437,56 @@
           >
         </summary>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
-           cref="T:System.Data.DataRelationCollection" />
+          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see cref="T:System.Data.DataRelationCollection" />
 
           
 
           . </param
         >
         <param name="parentColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of parent <see
-           cref="T:System.Data.DataColumn" />
+          An array of parent <see cref="T:System.Data.DataColumn" />
 
           
 
            objects. </param
         >
         <param name="childColumns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of child <see
-           cref="T:System.Data.DataColumn" />
+          An array of child <see cref="T:System.Data.DataColumn" />
 
           
 
            objects. </param
         >
         <param name="createConstraints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -505,38 +517,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any <see
-             cref="T:System.Data.DataRelation" />
+            >Any <see cref="T:System.Data.DataRelation" />
 
             
 
-             object created by using this constructor must be added to the collection with the <see
-             cref="M:System.Data.DataRelationCollection.AddRange(System.Data.DataRelation[])" />
+             object created by using this constructor must be added to the collection with the <see cref="M:System.Data.DataRelationCollection.AddRange(System.Data.DataRelation[])" />
 
             
 
-             method inside of a <see
-             cref="M:System.Data.DataTable.BeginInit" />
+             method inside of a <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Data.DataTable.EndInit" />
+             and <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
-             block. If this constructor is not called between <see
-             cref="M:System.Data.DataTable.BeginInit" />
+             block. If this constructor is not called between <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Data.DataTable.EndInit" />
+             and <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
-             a <see
-             cref="T:System.NullReferenceException" />
+             a <see cref="T:System.NullReferenceException" />
 
             
 
@@ -548,77 +553,94 @@
           <para>This constructor is provided for design time support in the Visual Studio environment.</para>
         </summary>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
-           cref="T:System.Data.DataRelationCollection" />
+          The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see cref="T:System.Data.DataRelationCollection" />
 
           
 
           . </param
         >
         <param name="parentTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            that is the parent table of the relation. </param
         >
         <param name="childTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            that is the child table of the relation. </param
         >
         <param name="parentColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
-           object names in the parent <see
-           cref="T:System.Data.DataTable" />
+           object names in the parent <see cref="T:System.Data.DataTable" />
 
           
 
            of the relation. </param
         >
         <param name="childColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
-           object names in the child <see
-           cref="T:System.Data.DataTable" />
+           object names in the child <see cref="T:System.Data.DataTable" />
 
           
 
            of the relation. </param
         >
         <param name="nested">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -665,23 +687,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any <see
-             cref="T:System.Data.DataRelation" />
+            >Any <see cref="T:System.Data.DataRelation" />
 
             
 
-             object created by using this constructor must then be added to the collection with <see
-             cref="M:System.Data.DataRelationCollection.AddRange(System.Data.DataRelation[])" />
+             object created by using this constructor must then be added to the collection with <see cref="M:System.Data.DataRelationCollection.AddRange(System.Data.DataRelation[])" />
 
             
 
-            . Tables and columns with the specified names must exist at the time the method is called, or if <see
-             cref="M:System.Data.DataTable.BeginInit" />
+            . Tables and columns with the specified names must exist at the time the method is called, or if <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             has been called before calling this constructor, the tables and columns with the specified names must exist at the time that <see
-             cref="M:System.Data.DataTable.EndInit" />
+             has been called before calling this constructor, the tables and columns with the specified names must exist at the time that <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
@@ -693,82 +711,98 @@
           <para>This constructor is provided for design time support in the Visual Studio environment.</para>
         </summary>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataRelation" />
+          The name of the <see cref="T:System.Data.DataRelation" />
 
           
 
-          . If null or an empty string (""), a default name will be given when the created object is added to the <see
-           cref="T:System.Data.DataRelationCollection" />
+          . If null or an empty string (""), a default name will be given when the created object is added to the <see cref="T:System.Data.DataRelationCollection" />
 
           
 
           . </param
         >
         <param name="parentTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            that is the parent table of the relation.</param
         >
         <param name="childTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataTable" />
+          The name of the <see cref="T:System.Data.DataTable" />
 
           
 
            that is the child table of the relation. </param
         >
         <param name="parentColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
-           object names in the parent <see
-           cref="T:System.Data.DataTable" />
+           object names in the parent <see cref="T:System.Data.DataTable" />
 
           
 
            of the relation.</param
         >
         <param name="childColumnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
-           object names in the child <see
-           cref="T:System.Data.DataTable" />
+           object names in the child <see cref="T:System.Data.DataTable" />
 
           
 
            of the relation.</param
         >
         <param name="nested">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -810,8 +844,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child <see
-             cref="T:System.Data.DataColumn" />
+            >Gets the child <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -838,8 +871,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no associated <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >If no associated <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
@@ -849,8 +881,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.ForeignKeyConstraint" />
+            >Gets the <see cref="T:System.Data.ForeignKeyConstraint" />
 
             
 
@@ -896,23 +927,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.DataRelationCollection" />
+            >The <see cref="T:System.Data.DataRelationCollection" />
 
             
 
-             associated with a <see
-             cref="T:System.Data.DataSet" />
+             associated with a <see cref="T:System.Data.DataSet" />
 
             
 
-             is accessed through the <see
-             cref="P:System.Data.DataSet.Relations" />
+             is accessed through the <see cref="P:System.Data.DataSet.Relations" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataSet" />
+             property of the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -922,13 +949,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataSet" />
+            >Gets the <see cref="T:System.Data.DataSet" />
 
             
 
-             to which the <see
-             cref="T:System.Data.DataRelation" />
+             to which the <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -963,26 +988,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="P:System.Data.DataRelation.ExtendedProperties" />
+            >Use <see cref="P:System.Data.DataRelation.ExtendedProperties" />
 
             
 
-             to add custom information to a <see
-             cref="T:System.Data.DataRelation" />
+             to add custom information to a <see cref="T:System.Data.DataRelation" />
 
             
 
              object. Add information with the Add method. Retrieve information with the Item method.</para
           >
           <para
-            >Extended properties must be of type <see
-             cref="T:System.String" />
+            >Extended properties must be of type <see cref="T:System.String" />
 
             
 
-            . Properties that are not of type String are not persisted when the <see
-             cref="T:System.Data.DataRelation" />
+            . Properties that are not of type String are not persisted when the <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1016,13 +1037,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use <see
-             cref="T:System.Data.DataRelation" />
+            >You can use <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects to define hierarchical relationships, such as those specified in XML. For more information, see <format
-             type="text/html">
+             objects to define hierarchical relationships, such as those specified in XML. For more information, see <format type="text/html">
               <a href="9530f9c9-dd98-4b93-8cdb-40d7f1e8d0ab">Nested DataRelations</a>
             </format>
 
@@ -1032,18 +1051,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Data.DataTable.TableName" />
+              >If the <see cref="P:System.Data.DataTable.TableName" />
 
               
 
-               of the child table in the relation matches the <see
-               cref="P:System.Data.DataColumn.ColumnName" />
+               of the child table in the relation matches the <see cref="P:System.Data.DataColumn.ColumnName" />
 
               
 
-               of a column in the parent table in the relation, the <see
-               cref="P:System.Data.DataRelation.Nested" />
+               of a column in the parent table in the relation, the <see cref="P:System.Data.DataRelation.Nested" />
 
               
 
@@ -1054,8 +1070,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether <see
-             cref="T:System.Data.DataRelation" />
+            >Gets or sets a value that indicates whether <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1096,7 +1111,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="pcevent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1119,13 +1138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Data.DataColumn" />
+            >Gets an array of <see cref="T:System.Data.DataColumn" />
 
             
 
-             objects that are the parent columns of this <see
-             cref="T:System.Data.DataRelation" />
+             objects that are the parent columns of this <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1153,13 +1170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Gets the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             that guarantees that values in the parent column of a <see
-             cref="T:System.Data.DataRelation" />
+             that guarantees that values in the parent column of a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1187,13 +1202,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent <see
-             cref="T:System.Data.DataTable" />
+            >Gets the parent <see cref="T:System.Data.DataTable" />
 
             
 
-             of this <see
-             cref="T:System.Data.DataRelation" />
+             of this <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1226,7 +1239,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1246,18 +1263,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Data.DataRelation.RelationName" />
+            >Use the <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             property to retrieve a <see
-             cref="T:System.Data.DataRelation" />
+             property to retrieve a <see cref="T:System.Data.DataRelation" />
 
             
 
-             from the <see
-             cref="T:System.Data.DataRelationCollection" />
+             from the <see cref="T:System.Data.DataRelationCollection" />
 
             
 
@@ -1267,13 +1281,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name used to retrieve a <see
-             cref="T:System.Data.DataRelation" />
+            >Gets or sets the name used to retrieve a <see cref="T:System.Data.DataRelation" />
 
             
 
-             from the <see
-             cref="T:System.Data.DataRelationCollection" />
+             from the <see cref="T:System.Data.DataRelationCollection" />
 
             
 
@@ -1303,8 +1315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Data.DataRelation.RelationName" />
+            >Gets the <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
@@ -1314,8 +1325,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Data.DataRelation.RelationName" />
+            >The value of the <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 

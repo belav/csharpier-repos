@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Data.Common.DbTransaction" />
+            >Initializes a new <see cref="T:System.Data.Common.DbTransaction" />
 
             
 
@@ -86,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Specifies the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -118,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Specifies the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -147,13 +144,11 @@
 
             
 
-             should rollback the transaction. However, the behavior of <see
-             cref="Overload:System.Data.Common.DbTransaction.Dispose" />
+             should rollback the transaction. However, the behavior of <see cref="Overload:System.Data.Common.DbTransaction.Dispose" />
 
             
 
-             is provider specific, and should not replace calling <see
-             cref="M:System.Data.Common.DbTransaction.Rollback" />
+             is provider specific, and should not replace calling <see cref="M:System.Data.Common.DbTransaction.Rollback" />
 
             
 
@@ -163,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Data.Common.DbTransaction" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DbTransaction" />
 
             
 
@@ -194,13 +188,11 @@
 
             
 
-             should rollback the transaction. However, the behavior of <see
-             cref="Overload:System.Data.Common.DbTransaction.Dispose" />
+             should rollback the transaction. However, the behavior of <see cref="Overload:System.Data.Common.DbTransaction.Dispose" />
 
             
 
-             is provider specific, and should not replace calling <see
-             cref="M:System.Data.Common.DbTransaction.Rollback" />
+             is provider specific, and should not replace calling <see cref="M:System.Data.Common.DbTransaction.Rollback" />
 
             
 
@@ -210,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Data.Common.DbTransaction" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Data.Common.DbTransaction" />
 
             
 
@@ -219,12 +210,15 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, this method releases all resources held by any managed objects that this <see
-           cref="T:System.Data.Common.DbTransaction" />
+          If true, this method releases all resources held by any managed objects that this <see cref="T:System.Data.Common.DbTransaction" />
 
           
 
@@ -251,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Data.IsolationLevel" />
+            >Specifies the <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -301,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Gets the <see cref="T:System.Data.Common.DbConnection" />
 
             
 

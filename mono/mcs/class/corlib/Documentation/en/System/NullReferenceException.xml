@@ -36,8 +36,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see
-         cref="T:System.NullReferenceException" />
+      a <see cref="T:System.NullReferenceException" />
 
         
 
@@ -70,8 +69,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.NullReferenceException" />
+        >A <see cref="T:System.NullReferenceException" />
 
         
 
@@ -81,18 +79,15 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
       <para>Some compilers issue a warning when they compile this code. Others issue an error, and the compilation fails. To address this problem, instantiate the object so that its value is no longer null. The following example does this by calling a type's class constructor.</para>
       <para>code reference: System.NullReferenceException.Class#2</para>
       <para
-        >More commonly, a <see
-         cref="T:System.NullReferenceException" />
+        >More commonly, a <see cref="T:System.NullReferenceException" />
 
         
 
-         exception is thrown by a method that is passed null. Some methods validate the arguments that are passed to them. If they do and one of the arguments is null, the method throws an <see
-         cref="T:System.ArgumentNullException" />
+         exception is thrown by a method that is passed null. Some methods validate the arguments that are passed to them. If they do and one of the arguments is null, the method throws an <see cref="T:System.ArgumentNullException" />
 
         
 
-         exception. Otherwise, it throws a <see
-         cref="T:System.NullReferenceException" />
+         exception. Otherwise, it throws a <see cref="T:System.NullReferenceException" />
 
         
 
@@ -100,8 +95,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
       >
       <para>code reference: System.NullReferenceException.Class#3</para>
       <para
-        >To address this issue, make sure that the argument passed to the method is not null, or handle the thrown exception in a try…catch…finally block. For more information, see <format
-         type="text/html">
+        >To address this issue, make sure that the argument passed to the method is not null, or handle the thrown exception in a try…catch…finally block. For more information, see <format type="text/html">
           <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
         </format>
 
@@ -110,8 +104,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         . </para
       >
       <para
-        >The following Microsoft intermediate language (MSIL) instructions throw <see
-         cref="T:System.NullReferenceException" />
+        >The following Microsoft intermediate language (MSIL) instructions throw <see cref="T:System.NullReferenceException" />
 
         
 
@@ -125,13 +118,11 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
          uses the HRESULT COR_E_NULLREFERENCE, which has the value 0x80004003.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.NullReferenceException" />
+        >For a list of initial property values for an instance of <see cref="T:System.NullReferenceException" />
 
         
 
-        , see the <see
-         cref="M:System.NullReferenceException.#ctor" />
+        , see the <see cref="M:System.NullReferenceException.#ctor" />
 
         
 
@@ -166,8 +157,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NullReferenceException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />
 
             
 
@@ -209,13 +199,11 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NullReferenceException" />
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" />
 
             
 
-             class, setting the <see
-             cref="P:System.Exception.Message" />
+             class, setting the <see cref="P:System.Exception.Message" />
 
             
 
@@ -249,8 +237,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NullReferenceException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />
 
             
 
@@ -292,8 +279,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NullReferenceException" />
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" />
 
             
 
@@ -301,17 +287,19 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that describes the error. The content of <paramref
-           name="message" />
+           that describes the error. The content of <paramref name="message" />
 
           
 
@@ -343,8 +331,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
@@ -358,8 +345,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NullReferenceException" />
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" />
 
             
 
@@ -367,14 +353,22 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -410,26 +404,22 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NullReferenceException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NullReferenceException" />
 
             
 
@@ -471,8 +461,7 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NullReferenceException" />
+            >Initializes a new instance of the <see cref="T:System.NullReferenceException" />
 
             
 
@@ -480,19 +469,26 @@ Caught error: System.NullReferenceException: Object reference not set to an inst
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 

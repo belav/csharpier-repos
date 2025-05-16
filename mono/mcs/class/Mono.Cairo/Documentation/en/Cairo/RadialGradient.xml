@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Extends  <see
-       cref="T:Cairo.Gradient" />
+      >Extends  <see cref="T:Cairo.Gradient" />
 
       
 
@@ -24,8 +23,7 @@
   should be defined using AddColorStop() or AddColorStopRgb().</para>
       <para>
         <example>
-          <code lang="C#"
-            >
+          <code lang="C#">
 pat = new RadialGradient (0.45, 0.4, 0.1, 0.4,  0.4, 0.5);
 
 pat.AddColorStop (0, new Color (1, 1, 1, 1) );
@@ -64,8 +62,7 @@ pat.Destroy ();
         <param name="cy1">y coordinate for the center of the end circle</param>
         <param name="radius1">radius of the end cirle</param>
         <summary
-          >Create a new radial gradient <see
-           cref="T:Cairo.Pattern" />
+          >Create a new radial gradient <see cref="T:Cairo.Pattern" />
 
           
 

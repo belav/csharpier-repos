@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Many common formats are provided through the <see
-         cref="T:System.Drawing.StringFormatFlags" />
+        >Many common formats are provided through the <see cref="T:System.Drawing.StringFormatFlags" />
 
         
 
-         enumeration. <see
-         cref="T:System.Drawing.StringFormat" />
+         enumeration. <see cref="T:System.Drawing.StringFormat" />
 
         
 
@@ -56,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Drawing.StringFormat" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -99,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.StringFormat" />
+            >Initializes a new <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -128,13 +124,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.StringFormat" />
+            >Initializes a new <see cref="T:System.Drawing.StringFormat" />
 
             
 
-             object from the specified existing <see
-             cref="T:System.Drawing.StringFormat" />
+             object from the specified existing <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -142,17 +136,19 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.StringFormat" />
+          The <see cref="T:System.Drawing.StringFormat" />
 
           
 
-           object from which to initialize the new <see
-           cref="T:System.Drawing.StringFormat" />
+           object from which to initialize the new <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -179,13 +175,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.StringFormat" />
+            >Initializes a new <see cref="T:System.Drawing.StringFormat" />
 
             
 
-             object with the specified <see
-             cref="T:System.Drawing.StringFormatFlags" />
+             object with the specified <see cref="T:System.Drawing.StringFormatFlags" />
 
             
 
@@ -193,17 +187,19 @@
           >
         </summary>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.StringFormatFlags" />
+          The <see cref="T:System.Drawing.StringFormatFlags" />
 
           
 
-           enumeration for the new <see
-           cref="T:System.Drawing.StringFormat" />
+           enumeration for the new <see cref="T:System.Drawing.StringFormat" />
 
           
 
@@ -231,13 +227,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.StringFormat" />
+            >Initializes a new <see cref="T:System.Drawing.StringFormat" />
 
             
 
-             object with the specified <see
-             cref="T:System.Drawing.StringFormatFlags" />
+             object with the specified <see cref="T:System.Drawing.StringFormatFlags" />
 
             
 
@@ -245,24 +239,30 @@
           >
         </summary>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.StringFormatFlags" />
+          The <see cref="T:System.Drawing.StringFormatFlags" />
 
           
 
-           enumeration for the new <see
-           cref="T:System.Drawing.StringFormat" />
+           enumeration for the new <see cref="T:System.Drawing.StringFormat" />
 
           
 
            object. </param
         >
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="P:System.Drawing.StringFormat.LineAlignment" />
+            >Use <see cref="P:System.Drawing.StringFormat.LineAlignment" />
 
             
 
@@ -319,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.StringFormat" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -330,8 +328,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.StringFormat" />
+            >The <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -396,13 +393,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Drawing.StringFormat.Dispose" />
+            >Calling <see cref="M:System.Drawing.StringFormat.Dispose" />
 
             
 
-             allows the resources used by this <see
-             cref="T:System.Drawing.StringFormat" />
+             allows the resources used by this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -412,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.StringFormat" />
+            >Releases all resources used by this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -462,8 +456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Drawing.StringFormatFlags" />
+            >Gets or sets a <see cref="T:System.Drawing.StringFormatFlags" />
 
             
 
@@ -490,8 +483,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for a generic default instance of the <see
-             cref="T:System.Drawing.StringFormat" />
+            >The following table shows initial property values for a generic default instance of the <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -590,18 +582,15 @@
             </item>
           </list>
           <para
-            >If you make changes to the <see
-             cref="T:System.Drawing.StringFormat" />
+            >If you make changes to the <see cref="T:System.Drawing.StringFormat" />
 
             
 
-             object returned from the <see
-             cref="P:System.Drawing.StringFormat.GenericDefault" />
+             object returned from the <see cref="P:System.Drawing.StringFormat.GenericDefault" />
 
             
 
-             property, these changes persist, and future calls to the <see
-             cref="P:System.Drawing.StringFormat.GenericDefault" />
+             property, these changes persist, and future calls to the <see cref="P:System.Drawing.StringFormat.GenericDefault" />
 
             
 
@@ -611,8 +600,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a generic default <see
-             cref="T:System.Drawing.StringFormat" />
+            >Gets a generic default <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -639,8 +627,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for a generic typographic instance of the <see
-             cref="T:System.Drawing.StringFormat" />
+            >The following table shows initial property values for a generic typographic instance of the <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -665,18 +652,15 @@
               </term>
               <description>
                 <para
-                  >24580 (<see
-                   cref="F:System.Drawing.StringFormatFlags.NoClip" />
+                  >24580 (<see cref="F:System.Drawing.StringFormatFlags.NoClip" />
 
                   
 
-                  , <see
-                   cref="F:System.Drawing.StringFormatFlags.FitBlackBox" />
+                  , <see cref="F:System.Drawing.StringFormatFlags.FitBlackBox" />
 
                   
 
-                   and <see
-                   cref="F:System.Drawing.StringFormatFlags.LineLimit" />
+                   and <see cref="F:System.Drawing.StringFormatFlags.LineLimit" />
 
                   
 
@@ -759,8 +743,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a generic typographic <see
-             cref="T:System.Drawing.StringFormat" />
+            >Gets a generic typographic <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -815,13 +798,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Drawing.Text.HotkeyPrefix" />
+            >Gets or sets the <see cref="T:System.Drawing.Text.HotkeyPrefix" />
 
             
 
-             object for this <see
-             cref="T:System.Drawing.StringFormat" />
+             object for this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -849,8 +830,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="P:System.Drawing.StringFormat.Alignment" />
+            >Use <see cref="P:System.Drawing.StringFormat.Alignment" />
 
             
 
@@ -891,59 +871,58 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A National Language Support (NLS) language identifier that identifies the language that will be used when local digits are substituted for western digits. You can pass the <see
-           cref="P:System.Globalization.CultureInfo.LCID" />
+          A National Language Support (NLS) language identifier that identifies the language that will be used when local digits are substituted for western digits. You can pass the <see cref="P:System.Globalization.CultureInfo.LCID" />
 
           
 
-           property of a <see
-           cref="T:System.Globalization.CultureInfo" />
+           property of a <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           object as the NLS language identifier. For example, suppose you create a <see
-           cref="T:System.Globalization.CultureInfo" />
+           object as the NLS language identifier. For example, suppose you create a <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           object by passing the string "ar-EG" to a <see
-           cref="T:System.Globalization.CultureInfo" />
+           object by passing the string "ar-EG" to a <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           constructor. If you pass the <see
-           cref="P:System.Globalization.CultureInfo.LCID" />
+           constructor. If you pass the <see cref="P:System.Globalization.CultureInfo.LCID" />
 
           
 
-           property of that <see
-           cref="T:System.Globalization.CultureInfo" />
+           property of that <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           object along with <see
-           cref="F:System.Drawing.StringDigitSubstitute.Traditional" />
+           object along with <see cref="F:System.Drawing.StringDigitSubstitute.Traditional" />
 
           
 
-           to the <see
-           cref="M:System.Drawing.StringFormat.SetDigitSubstitution(System.Int32,System.Drawing.StringDigitSubstitute)" />
+           to the <see cref="M:System.Drawing.StringFormat.SetDigitSubstitution(System.Int32,System.Drawing.StringDigitSubstitute)" />
 
           
 
            method, then Arabic-Indic digits will be substituted for western digits at display time. </param
         >
         <param name="substitute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An element of the <see
-           cref="T:System.Drawing.StringDigitSubstitute" />
+          An element of the <see cref="T:System.Drawing.StringDigitSubstitute" />
 
           
 
@@ -971,8 +950,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting more than 32 character ranges is not allowed and will cause an <see
-             cref="T:System.OverflowException" />
+            >Setting more than 32 character ranges is not allowed and will cause an <see cref="T:System.OverflowException" />
 
             
 
@@ -982,13 +960,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies an array of <see
-             cref="T:System.Drawing.CharacterRange" />
+            >Specifies an array of <see cref="T:System.Drawing.CharacterRange" />
 
             
 
-             structures that represent the ranges of characters measured by a call to the <see
-             cref="M:System.Drawing.Graphics.MeasureCharacterRanges(System.String,System.Drawing.Font,System.Drawing.RectangleF,System.Drawing.StringFormat)" />
+             structures that represent the ranges of characters measured by a call to the <see cref="M:System.Drawing.Graphics.MeasureCharacterRanges(System.String,System.Drawing.Font,System.Drawing.RectangleF,System.Drawing.StringFormat)" />
 
             
 
@@ -1000,17 +976,19 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="ranges">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.CharacterRange" />
+          An array of <see cref="T:System.Drawing.CharacterRange" />
 
           
 
-           structures that specifies the ranges of characters measured by a call to the <see
-           cref="M:System.Drawing.Graphics.MeasureCharacterRanges(System.String,System.Drawing.Font,System.Drawing.RectangleF,System.Drawing.StringFormat)" />
+           structures that specifies the ranges of characters measured by a call to the <see cref="M:System.Drawing.Graphics.MeasureCharacterRanges(System.String,System.Drawing.Font,System.Drawing.RectangleF,System.Drawing.StringFormat)" />
 
           
 
@@ -1039,13 +1017,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each tab-stop offset in the <paramref
-             name="tabStops" />
+            >Each tab-stop offset in the <paramref name="tabStops" />
 
             
 
-             array, except the first one, is relative to the previous one. The first tab-stop offset is relative to the initial offset position specified by <paramref
-             name="firstTabOffset" />
+             array, except the first one, is relative to the previous one. The first tab-stop offset is relative to the initial offset position specified by <paramref name="firstTabOffset" />
 
             
 
@@ -1055,8 +1031,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets tab stops for this <see
-             cref="T:System.Drawing.StringFormat" />
+            >Sets tab stops for this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -1064,19 +1039,26 @@
           >
         </summary>
         <param name="firstTabOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of spaces between the beginning of a line of text and the first tab stop. </param
         >
         <param name="tabStops">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of distances between tab stops in the units specified by the <see
-           cref="P:System.Drawing.Graphics.PageUnit" />
+          An array of distances between tab stops in the units specified by the <see cref="P:System.Drawing.Graphics.PageUnit" />
 
           
 
@@ -1099,8 +1081,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the value of the <see
-             cref="P:System.Drawing.StringFormat.FormatFlags" />
+            >Only the value of the <see cref="P:System.Drawing.StringFormat.FormatFlags" />
 
             
 
@@ -1110,8 +1091,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Drawing.StringFormat" />
+            >Converts this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -1121,8 +1101,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of this <see
-             cref="T:System.Drawing.StringFormat" />
+            >A string representation of this <see cref="T:System.Drawing.StringFormat" />
 
             
 
@@ -1151,13 +1130,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Drawing.StringTrimming" />
+            >Gets or sets the <see cref="T:System.Drawing.StringTrimming" />
 
             
 
-             enumeration for this <see
-             cref="T:System.Drawing.StringFormat" />
+             enumeration for this <see cref="T:System.Drawing.StringFormat" />
 
             
 

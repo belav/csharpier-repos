@@ -69,50 +69,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
+            >Call <see cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+             when you are finished using the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
-            . The <see
-             cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
+            . The <see cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+             method leaves the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+            , you must release all references to the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -121,18 +112,15 @@
             .</para
           >
           <para
-            >Note: Always call <see
-             cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
+            >Note: Always call <see cref="M:System.Security.Principal.WindowsImpersonationContext.Dispose" />
 
             
 
-             before you release your last reference to the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+             before you release your last reference to the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
-            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
@@ -142,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+            >Releases all resources used by the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
@@ -179,36 +166,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
@@ -218,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Security.Principal.WindowsImpersonationContext" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Principal.WindowsImpersonationContext" />
 
             
 
@@ -227,7 +207,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,18 +233,15 @@
             <para>This member is removed in the dnprdnext and subsequent versions.</para>
           </block>
           <para
-            >Application code does not call this method; it is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled. For more information, see <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Application code does not call this method; it is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled. For more information, see <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Object.Finalize" />
+             and <see cref="M:System.Object.Finalize" />
 
             
 
-            . This method overrides <see
-             cref="M:System.Object.Finalize" />
+            . This method overrides <see cref="M:System.Object.Finalize" />
 
             
 

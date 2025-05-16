@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used with the <see
-         cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+        >This class is used with the <see cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
 
         
 
@@ -30,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Prepares data for the <see
-         cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+        >Prepares data for the <see cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
 
         
 
@@ -63,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property provides information on the event type that caused the <see
-             cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+            >This property provides information on the event type that caused the <see cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
 
             
 

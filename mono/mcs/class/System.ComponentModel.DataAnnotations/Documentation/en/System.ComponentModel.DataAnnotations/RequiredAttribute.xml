@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+        >The <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
 
         
 
@@ -34,8 +33,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If the MVC data model or entity partial class contains a field that is annotated with the <see
-           cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+          >If the MVC data model or entity partial class contains a field that is annotated with the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
 
           
 
@@ -44,7 +42,9 @@
       </block>
       <para
         >A Visual Studio project with source code is available to accompany this topic: <see
-         cref="http://go.microsoft.com/fwlink/?linkid=158686">Download</see>
+          cref="http://go.microsoft.com/fwlink/?linkid=158686"
+          >Download</see
+        >
 
         
 
@@ -73,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RequiredAttribute" />
 
             
 
@@ -98,16 +97,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set <see
-             cref="P:System.ComponentModel.DataAnnotations.RequiredAttribute.AllowEmptyStrings" />
+            >When you set <see cref="P:System.ComponentModel.DataAnnotations.RequiredAttribute.AllowEmptyStrings" />
 
             
 
              to true for a data field, Dynamic Data does not perform validation and transforms the empty string to a null value. This value is then passed to the database. </para
           >
           <para
-            >If the database does not allow null values, it raises an error. To avoid this error, you must also set the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.ConvertEmptyStringToNull" />
+            >If the database does not allow null values, it raises an error. To avoid this error, you must also set the <see cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.ConvertEmptyStringToNull" />
 
             
 
@@ -150,7 +147,11 @@
           <para>true if validation is successful; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

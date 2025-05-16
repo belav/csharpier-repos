@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+        >A <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
         
 
@@ -39,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a user interface for a <see
-         cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />
+        >Provides a user interface for a <see cref="T:System.Windows.Forms.Design.WindowsFormsComponentEditor" />
 
         
 
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
             
 
@@ -73,19 +70,26 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to be edited. </param
         >
         <param name="pageTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The set of <see
-           cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+          The set of <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
 
           
 
@@ -145,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.Form.AutoSize" />
+            >Occurs when the <see cref="P:System.Windows.Forms.Form.AutoSize" />
 
             
 
@@ -168,16 +171,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first time the <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnActivated(System.EventArgs)" />
+            >The first time the <see cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnActivated(System.EventArgs)" />
 
             
 
              method is executed, it shows the first component editor page in the list.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -186,8 +187,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnActivated(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnActivated(System.EventArgs)" />
 
             
 
@@ -197,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Form.Activated" />
+            >Raises the <see cref="E:System.Windows.Forms.Form.Activated" />
 
             
 
@@ -206,12 +205,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -239,16 +241,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnHelpRequested(System.Windows.Forms.HelpEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnHelpRequested(System.Windows.Forms.HelpEventArgs)" />
 
             
 
              method shows the Help page that is associated with the component editor page, if there is one.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -257,8 +257,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnHelpRequested(System.Windows.Forms.HelpEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Design.ComponentEditorForm.OnHelpRequested(System.Windows.Forms.HelpEventArgs)" />
 
             
 
@@ -268,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HelpRequested" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HelpRequested" />
 
             
 
@@ -277,12 +275,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.HelpEventArgs" />
+          A <see cref="T:System.Windows.Forms.HelpEventArgs" />
 
           
 
@@ -314,19 +315,26 @@
           <para>Switches between component editor pages.</para>
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.TreeViewEventArgs" />
+          A <see cref="T:System.Windows.Forms.TreeViewEventArgs" />
 
           
 
@@ -380,8 +388,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >One of the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -415,8 +422,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >One of the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -424,7 +430,11 @@
           >
         </returns>
         <param name="page">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -457,8 +467,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >One of the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -466,12 +475,15 @@
           >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.IWin32Window" />
+          The <see cref="T:System.Windows.Forms.IWin32Window" />
 
           
 
@@ -505,8 +517,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.DialogResult" />
+            >One of the <see cref="T:System.Windows.Forms.DialogResult" />
 
             
 
@@ -514,19 +525,26 @@
           >
         </returns>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.IWin32Window" />
+          The <see cref="T:System.Windows.Forms.IWin32Window" />
 
           
 
            to own the dialog. </param
         >
         <param name="page">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

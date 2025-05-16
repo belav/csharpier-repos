@@ -23,39 +23,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+        >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
-         class and any derived class defines the <see
-         cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+         class and any derived class defines the <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
         
 
-         property as a <see
-         cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+         property as a <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
         
 
-         object. Control developers can override the <see
-         cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+         object. Control developers can override the <see cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
 
         
 
          property in a derived control designer, add custom automatic formatting styles, and return the collection of supported formats to the visual designer.</para
       >
       <para
-        >The collection dynamically increases as objects are added. Indexes in this collection are zero-based. Use the <see
-         cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
+        >The collection dynamically increases as objects are added. Indexes in this collection are zero-based. Use the <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
 
         
 
          property to determine how many automatic style formats are in the collection.</para
       >
       <para
-        >Additionally, use the <see
-         cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+        >Additionally, use the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
         
 
@@ -64,8 +58,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -74,8 +67,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -84,8 +76,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -94,8 +85,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
 
             
 
@@ -104,8 +94,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Contains(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Contains(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -114,8 +103,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -124,8 +112,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Item(System.Int32)" />
+            >The <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Item(System.Int32)" />
 
             
 
@@ -134,8 +121,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
 
             
 
@@ -144,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
+            >The <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
 
             
 
@@ -154,8 +139,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -167,8 +151,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+        >Represents a collection of <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
         
 
@@ -188,18 +171,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Use the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             constructor to create an empty collection. You can add elements to the collection by using the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
+             constructor to create an empty collection. You can add elements to the collection by using the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             or <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+             or <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -209,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
@@ -238,23 +217,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method adds the specified <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             method adds the specified <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             object to the end of the collection. To add a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             object to the end of the collection. To add a <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             object to the collection at a specific index location, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+             object to the collection at a specific index location, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -264,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Adds the specified <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -277,12 +251,15 @@
           <para>The index at which the format was added to the collection.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          An instance of <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -304,18 +281,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+            >Use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
 
             
 
-             method to remove all formats from the collection. To remove a specific format from the collection, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
+             method to remove all formats from the collection. To remove a specific format from the collection, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method. To remove a format at a particular index, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
+             method. To remove a format at a particular index, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
 
             
 
@@ -347,18 +321,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Contains(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Contains(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method determines equality by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             method determines equality by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method on the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             method on the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -374,12 +345,15 @@
           <para>true, if the specified format is in the collection; otherwise, false.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          An instance of <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -401,8 +375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
+            >The <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
 
             
 
@@ -412,8 +385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Gets the number of <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -441,18 +413,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method determines equality by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             method determines equality by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method on the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             method on the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -462,8 +431,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the specified <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Returns the index of the specified <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -473,8 +441,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="format" />
+            >The zero-based index of the first occurrence of <paramref name="format" />
 
             
 
@@ -482,12 +449,15 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          The <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -515,23 +485,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method adds a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             method adds a <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             object to the collection at a specific index location. To add a single <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             object to the collection at a specific index location. To add a single <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
-             to the end of the collection, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
+             to the end of the collection, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
@@ -544,8 +510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Inserts a <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -553,24 +518,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index within the collection at which to insert <paramref
-           name="format" />
+          The zero-based index within the collection at which to insert <paramref name="format" />
 
           
 
           .</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          The <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -614,23 +585,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.PreviewSize" />
+            >The <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.PreviewSize" />
 
             
 
-             property examines each format in the collection and returns the largest height and the largest width in a <see
-             cref="T:System.Drawing.Size" />
+             property examines each format in the collection and returns the largest height and the largest width in a <see cref="T:System.Drawing.Size" />
 
             
 
-             structure. A visual designer, such as vsprvslong, uses the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.PreviewSize" />
+             structure. A visual designer, such as vsprvslong, uses the <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.PreviewSize" />
 
             
 
-             to determine the initial size of the <ui
-            >AutoFormat</ui>
+             to determine the initial size of the <ui>AutoFormat</ui>
 
             
 
@@ -662,67 +629,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method removes the first occurrence of <paramref
-             name="format" />
+             method removes the first occurrence of <paramref name="format" />
 
             
 
-             from the collection. If the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+             from the collection. If the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object does not contain <paramref
-             name="format" />
+             object does not contain <paramref name="format" />
 
             
 
             , the collection remains unchanged. No exception is thrown.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method determines equality by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             method determines equality by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method on the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+             method on the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
              objects that are being compared.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
+            >The <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method performs a linear search; therefore, the average execution time is proportional to the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
+             method performs a linear search; therefore, the average execution time is proportional to the <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
 
             
 
              value.</para
           >
           <para
-            >To remove a format at a particular index from the collection, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
+            >To remove a format at a particular index from the collection, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
 
             
 
-             method. To remove all formats from the collection, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+             method. To remove all formats from the collection, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
 
             
 
@@ -735,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Removes the specified <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -744,12 +699,15 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          The <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -773,18 +731,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove a format at a particular index from the collection. To remove a specified format from the collection, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
+             method to remove a format at a particular index from the collection. To remove a specified format from the collection, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
             
 
-             method. To remove all formats from the collection, use the <see
-             cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+             method. To remove all formats from the collection, use the <see cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
 
             
 
@@ -797,8 +752,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+            >Removes the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
             
 
@@ -806,12 +760,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+          The zero-based index of the <see cref="T:System.Web.UI.Design.DesignerAutoFormat" />
 
           
 
@@ -834,13 +791,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Enumerating through a collection is not a thread-safe procedure intrinsically. Even when a collection is synchronized, other threads can still modify the collection. This causes exceptions during enumeration.</para>
           <para
-            >Lock the collection by using the <see
-             cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.SyncRoot" />
+            >Lock the collection by using the <see cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.SyncRoot" />
 
             
 
-             method during the entire enumeration to guarantee thread safety. For detailed information about locking collections for thread-safe access, see <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             method during the entire enumeration to guarantee thread safety. For detailed information about locking collections for thread-safe access, see <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -850,8 +805,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
@@ -877,13 +831,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -893,23 +845,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the collection to an <see
-             cref="T:System.Array" />
+            >Copies the elements of the collection to an <see cref="T:System.Array" />
 
             
 
-             object, starting at a particular <see
-             cref="T:System.Array" />
+             object, starting at a particular <see cref="T:System.Array" />
 
             
 
-             index when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+             index when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             object is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -917,19 +865,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
            to receive the designated items.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -951,13 +906,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -967,13 +920,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements that are contained in the collection when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Gets the number of elements that are contained in the collection when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             object is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -999,13 +950,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             object is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1015,13 +964,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the collection is synchronized (thread safe) when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Gets a value that indicates whether access to the collection is synchronized (thread safe) when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             object is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1047,13 +994,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             object is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1063,18 +1008,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface that iterates through the collection when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+             interface that iterates through the collection when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             object is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1084,13 +1026,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+             for the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
@@ -1116,13 +1056,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1132,13 +1070,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an item to the collection when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Adds an item to the collection when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1168,13 +1104,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1184,13 +1118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the collection contains a specific value when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Determines whether the collection contains a specific value when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1200,8 +1132,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true, if the object is in the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >true, if the object is in the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
@@ -1227,13 +1158,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1243,13 +1172,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the collection when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Determines the index of a specific item in the collection when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1280,13 +1207,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1296,13 +1221,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an item into the collection at the specified index when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Inserts an item into the collection at the specified index when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1310,12 +1233,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index at which to insert <paramref
-           name="value" />
+          The index at which to insert <paramref name="value" />
 
           
 
@@ -1337,13 +1263,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1353,13 +1277,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection has a fixed size when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Gets a value that indicates whether the collection has a fixed size when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1382,13 +1304,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1398,8 +1318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this method, see <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+            >For a description of this method, see <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 
@@ -1447,13 +1366,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1463,13 +1380,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the collection when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Removes the first occurrence of a specific object from the collection when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1494,13 +1409,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1510,13 +1423,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the item at the specified index when the <see
-             cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+            >Removes the item at the specified index when the <see cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
             
 
-             object is cast to an <see
-             cref="T:System.Collections.IList" />
+             object is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1524,7 +1435,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build the <see
-         cref="T:System.Web.UI.WebControls.Xml" />
+        >Interacts with the parser to build the <see cref="T:System.Web.UI.WebControls.Xml" />
 
         
 
@@ -35,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.XmlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.XmlBuilder" />
 
             
 
@@ -61,23 +59,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.XmlBuilder.AppendLiteralString(System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.XmlBuilder.AppendLiteralString(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.WebControls.XmlBuilder" />
+             method of the <see cref="T:System.Web.UI.WebControls.XmlBuilder" />
 
             
 
-             class overrides the <see
-             cref="M:System.Web.UI.ControlBuilder.AppendLiteralString(System.String)" />
+             class overrides the <see cref="M:System.Web.UI.ControlBuilder.AppendLiteralString(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             method of the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
@@ -89,7 +83,11 @@
           <para>Adds literal content to the control.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -117,28 +115,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.XmlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+            >The <see cref="M:System.Web.UI.WebControls.XmlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.WebControls.XmlBuilder" />
+             method of the <see cref="T:System.Web.UI.WebControls.XmlBuilder" />
 
             
 
-             class overrides the <see
-             cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+             class overrides the <see cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             method of the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
-             class. This implementation of the <see
-             cref="M:System.Web.UI.WebControls.XmlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+             class. This implementation of the <see cref="M:System.Web.UI.WebControls.XmlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
 
             
 
@@ -148,13 +141,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the <see
-             cref="T:System.Type" />
+            >Obtains the <see cref="T:System.Type" />
 
             
 
-             for the <see
-             cref="T:System.Web.UI.WebControls.Xml" />
+             for the <see cref="T:System.Web.UI.WebControls.Xml" />
 
             
 
@@ -164,8 +155,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+            >The <see cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
 
             
 
@@ -173,14 +163,22 @@
           >
         </returns>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The tag name of the child control.</param
         >
         <param name="attribs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -202,23 +200,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.XmlBuilder.NeedsTagInnerText" />
+            >The <see cref="M:System.Web.UI.WebControls.XmlBuilder.NeedsTagInnerText" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.WebControls.XmlBuilder" />
+             method of the <see cref="T:System.Web.UI.WebControls.XmlBuilder" />
 
             
 
-             class overrides the <see
-             cref="M:System.Web.UI.ControlBuilder.NeedsTagInnerText" />
+             class overrides the <see cref="M:System.Web.UI.ControlBuilder.NeedsTagInnerText" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             method of the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
@@ -229,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.UI.WebControls.Xml" />
+            >Determines whether the <see cref="T:System.Web.UI.WebControls.Xml" />
 
             
 
@@ -240,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ControlBuilder.NeedsTagInnerText" />
+            >The <see cref="M:System.Web.UI.ControlBuilder.NeedsTagInnerText" />
 
             
 
@@ -266,18 +258,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method loads the <see
-             cref="T:System.String" />
+            >This method loads the <see cref="T:System.String" />
 
             
 
-             passed in to an XML document to determine whether it is well-formed. If it is, the code calls the <see
-             cref="M:System.Web.UI.ControlBuilder.SetTagInnerText(System.String)" />
+             passed in to an XML document to determine whether it is well-formed. If it is, the code calls the <see cref="M:System.Web.UI.ControlBuilder.SetTagInnerText(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             method of the <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
@@ -287,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Web.UI.WebControls.Xml" />
+            >Sets the <see cref="T:System.Web.UI.WebControls.Xml" />
 
             
 
@@ -296,7 +284,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

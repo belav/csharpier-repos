@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a dialog box for editing regular expressions used by the <see
-         cref="T:System.Web.UI.WebControls.RegularExpressionValidator" />
+        >Provides a dialog box for editing regular expressions used by the <see cref="T:System.Web.UI.WebControls.RegularExpressionValidator" />
 
         
 
@@ -123,51 +122,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+            >This method is called by the public <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             method and the <see
-             cref="M:System.Object.Finalize" />
+             method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. <see
-             cref="M:System.ComponentModel.Component.Dispose" />
+             method. <see cref="M:System.ComponentModel.Component.Dispose" />
 
             
 
-             invokes the protected <see
-             cref="M:System.Web.UI.Design.WebControls.RegexEditorDialog.Dispose(System.Boolean)" />
+             invokes the protected <see cref="M:System.Web.UI.Design.WebControls.RegexEditorDialog.Dispose(System.Boolean)" />
 
             
 
-             method with the <paramref
-             name="disposing" />
+             method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
 
             
 
@@ -177,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
 
             
 
@@ -186,12 +175,15 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value indicating to all resources held by any managed objects that this <see
-           cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
+          A value indicating to all resources held by any managed objects that this <see cref="T:System.Web.UI.Design.WebControls.RegexEditorDialog" />
 
           
 
@@ -247,19 +239,26 @@
           <para>Represents the method that will handle the Activated event of dialog box.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 

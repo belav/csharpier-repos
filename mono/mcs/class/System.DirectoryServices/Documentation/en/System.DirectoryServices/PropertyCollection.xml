@@ -118,24 +118,30 @@
           <para>Copies the all objects in this collection to an array, starting at the specified index in the target array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.DirectoryServices.PropertyValueCollection" />
+          The array of <see cref="T:System.DirectoryServices.PropertyValueCollection" />
 
           
 
            objects that receives the elements of this collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -163,7 +169,11 @@
           <para>The return value is true if the specified property belongs to this collection; otherwise, false.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -190,8 +200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -211,13 +220,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Internet Information Services (IIS), and WinNT providers do not currently support <see
-             cref="P:System.DirectoryServices.PropertyCollection.Count" />
+            >The Internet Information Services (IIS), and WinNT providers do not currently support <see cref="P:System.DirectoryServices.PropertyCollection.Count" />
 
             
 
-            , so each will throw a <see
-             cref="T:System.NotSupportedException" />
+            , so each will throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -244,13 +251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When accessing members of the <see
-             cref="P:System.DirectoryServices.PropertyCollection.PropertyNames" />
+            >When accessing members of the <see cref="P:System.DirectoryServices.PropertyCollection.PropertyNames" />
 
             
 
-             property, a <see
-             cref="T:System.Runtime.InteropServices.COMException" />
+             property, a <see cref="T:System.Runtime.InteropServices.COMException" />
 
             
 
@@ -277,13 +282,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When accessing members of the <see
-             cref="P:System.DirectoryServices.PropertyCollection.Values" />
+            >When accessing members of the <see cref="P:System.DirectoryServices.PropertyCollection.Values" />
 
             
 
-             property, a <see
-             cref="T:System.Runtime.InteropServices.COMException" />
+             property, a <see cref="T:System.Runtime.InteropServices.COMException" />
 
             
 
@@ -321,13 +324,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.DirectoryServices.PropertyCollection" />
+        >The <see cref="T:System.DirectoryServices.PropertyCollection" />
 
         
 
-         class contains the properties of a <see
-         cref="T:System.DirectoryServices.DirectoryEntry" />
+         class contains the properties of a <see cref="T:System.DirectoryServices.DirectoryEntry" />
 
         
 

@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingAttribute" />
+        >The <see cref="T:System.Configuration.SettingAttribute" />
 
         
 
-         class associates settings information with a settings property. The <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+         class associates settings information with a settings property. The <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingAttribute" />
 
             
 

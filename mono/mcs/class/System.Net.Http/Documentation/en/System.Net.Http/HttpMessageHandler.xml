@@ -55,8 +55,7 @@
 
             
 
-             - A specialty class that operates at the bottom of the handler chain class that handles HTTP transport operations with options that are specific to the <see
-             cref="T:System.Net.HttpWebRequest" />
+             - A specialty class that operates at the bottom of the handler chain class that handles HTTP transport operations with options that are specific to the <see cref="T:System.Net.HttpWebRequest" />
 
             
 
@@ -65,41 +64,34 @@
         </item>
       </list>
       <para
-        >If developers derive classes from <see
-         cref="T:System.Net.Http.HttpMessageHandler" />
+        >If developers derive classes from <see cref="T:System.Net.Http.HttpMessageHandler" />
 
         
 
-         and override the <see
-         cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+         and override the <see cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
 
         
 
-         method, they must make sure that <see
-         cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+         method, they must make sure that <see cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
 
         
 
          can get called concurrently by different threads.</para
       >
       <para
-        >This is necessary since methods on <see
-         cref="T:System.Net.Http.HttpClient" />
+        >This is necessary since methods on <see cref="T:System.Net.Http.HttpClient" />
 
         
 
-         can be called concurrently and need a guarantee of thread safety. So if a handler is assigned to an <see
-         cref="T:System.Net.Http.HttpClient" />
+         can be called concurrently and need a guarantee of thread safety. So if a handler is assigned to an <see cref="T:System.Net.Http.HttpClient" />
 
         
 
-         instance, the <see
-         cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+         instance, the <see cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
 
         
 
-         method of the handler may get called concurrently by the <see
-         cref="T:System.Net.Http.HttpClient" />
+         method of the handler may get called concurrently by the <see cref="T:System.Net.Http.HttpClient" />
 
         
 
@@ -128,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.HttpMessageHandler" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.HttpMessageHandler" />
 
             
 
@@ -157,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources and disposes of the managed resources used by the <see
-             cref="T:System.Net.Http.HttpMessageHandler" />
+            >Releases the unmanaged resources and disposes of the managed resources used by the <see cref="T:System.Net.Http.HttpMessageHandler" />
 
             
 
@@ -187,33 +177,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
-             set to false.When the <paramref
-             name="disposing" />
+             set to false.When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Http.HttpMessageHandler" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Http.HttpMessageHandler" />
 
             
 
@@ -223,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Http.HttpMessageHandler" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Http.HttpMessageHandler" />
 
             
 
@@ -232,7 +215,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -264,21 +251,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
              object will complete once the entire response including content is read.</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
+            >The <see cref="M:System.Net.Http.HttpMessageHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)" />
 
             
 
-             method is used primarily by the system. This method is called by the system one of the  <see
-             cref="M:System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage)" />
+             method is used primarily by the system. This method is called by the system one of the  <see cref="M:System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage)" />
 
             
 
@@ -292,8 +276,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -302,14 +285,22 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP request message to send.</param
         >
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

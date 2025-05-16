@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the XPath node types that can be returned from the <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+        >Defines the XPath node types that can be returned from the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any of the <see
-             cref="T:System.Xml.XPath.XPathNodeType" />
+            >Any of the <see cref="T:System.Xml.XPath.XPathNodeType" />
 
             
 
@@ -179,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A processing instruction, such as &lt;?pi test?&gt;. This does not include XML declarations, which are not visible to the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >A processing instruction, such as &lt;?pi test?&gt;. This does not include XML declarations, which are not visible to the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 

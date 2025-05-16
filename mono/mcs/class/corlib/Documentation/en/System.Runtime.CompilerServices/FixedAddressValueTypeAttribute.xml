@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.CompilerServices.FixedAddressValueTypeAttribute" />
+        >Use the <see cref="T:System.Runtime.CompilerServices.FixedAddressValueTypeAttribute" />
 
         
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.FixedAddressValueTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.FixedAddressValueTypeAttribute" />
 
             
 

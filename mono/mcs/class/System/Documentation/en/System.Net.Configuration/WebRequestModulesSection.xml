@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="1263de11-3e0a-4f94-97c9-710b2ae53817"
             >WebRequestModules Element (Network Settings)</a
           >
@@ -34,13 +33,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to access information about modules registered to create requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to access information about modules registered to create requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.WebRequestModulesSection" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.WebRequestModulesSection" />
 
             
 
@@ -107,8 +103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method initializes a <see
-             cref="T:System.Net.Configuration.WebRequestModulesSection" />
+            >This method initializes a <see cref="T:System.Net.Configuration.WebRequestModulesSection" />
 
             
 
@@ -170,8 +165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see
-             cref="P:System.Net.Configuration.WebRequestModulesSection.WebRequestModules" />
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.WebRequestModulesSection.WebRequestModules" />
 
             
 
@@ -212,13 +206,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Configuration.WebRequestModuleElementCollection" />
+            >The <see cref="T:System.Net.Configuration.WebRequestModuleElementCollection" />
 
             
 
-             returned by this property contains one <see
-             cref="T:System.Net.Configuration.WebRequestModuleElement" />
+             returned by this property contains one <see cref="T:System.Net.Configuration.WebRequestModuleElement" />
 
             
 

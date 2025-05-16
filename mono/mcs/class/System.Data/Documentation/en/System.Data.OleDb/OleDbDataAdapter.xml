@@ -32,81 +32,66 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        >The <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         serves as a bridge between a <see
-         cref="T:System.Data.DataSet" />
+         serves as a bridge between a <see cref="T:System.Data.DataSet" />
 
         
 
-         and data source for retrieving and saving data. The <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+         and data source for retrieving and saving data. The <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         provides this bridge by using <see
-         cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+         provides this bridge by using <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
         
 
-         to load data from the data source into the <see
-         cref="T:System.Data.DataSet" />
+         to load data from the data source into the <see cref="T:System.Data.DataSet" />
 
         
 
-        , and using <see
-         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+        , and using <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
         
 
-         to send changes made in the <see
-         cref="T:System.Data.DataSet" />
+         to send changes made in the <see cref="T:System.Data.DataSet" />
 
         
 
          back to the data source.</para
       >
       <para
-        >When the <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        >When the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         fills a <see
-         cref="T:System.Data.DataSet" />
+         fills a <see cref="T:System.Data.DataSet" />
 
         
 
-        , it will create the appropriate tables and columns for the returned data if they do not already exist. However, primary key information is not included in the implicitly created schema unless the <see
-         cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+        , it will create the appropriate tables and columns for the returned data if they do not already exist. However, primary key information is not included in the implicitly created schema unless the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
         
 
-         property is set to <see
-         cref="F:System.Data.MissingSchemaAction.AddWithKey" />
+         property is set to <see cref="F:System.Data.MissingSchemaAction.AddWithKey" />
 
         
 
-        . You may also have the <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        . You may also have the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         create the schema of the <see
-         cref="T:System.Data.DataSet" />
+         create the schema of the <see cref="T:System.Data.DataSet" />
 
         
 
-        , including primary key information, before filling it with data using <see
-         cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+        , including primary key information, before filling it with data using <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
         
 
-        . For more information, see <format
-         type="text/html">
+        . For more information, see <format type="text/html">
           <a href="307d2809-208b-4cf8-b6a9-5d16f15fc16c"
             >Adding Existing Constraints to a DataSet</a
           >
@@ -117,69 +102,57 @@
         .</para
       >
       <para
-        >Note that some OLE DB providers, including the MSDataShape provider, do not return base table or primary key information. Therefore, the <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        >Note that some OLE DB providers, including the MSDataShape provider, do not return base table or primary key information. Therefore, the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         cannot correctly set the <see
-         cref="P:System.Data.DataTable.PrimaryKey" />
+         cannot correctly set the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
         
 
-         property on any created <see
-         cref="T:System.Data.DataTable" />
+         property on any created <see cref="T:System.Data.DataTable" />
 
         
 
-        . In these cases you should explicitly specify primary keys for tables in the <see
-         cref="T:System.Data.DataSet" />
+        . In these cases you should explicitly specify primary keys for tables in the <see cref="T:System.Data.DataSet" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        >The <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-         also includes the <see
-         cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+         also includes the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
+        , <see cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
+        , <see cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
 
         
 
-        , <see
-         cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
+        , <see cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
 
         
 
-        , and <see
-         cref="P:System.Data.Common.DataAdapter.TableMappings" />
+        , and <see cref="P:System.Data.Common.DataAdapter.TableMappings" />
 
         
 
          properties to facilitate the loading and updating of data.</para
       >
       <para
-        >When you create an instance of <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        >When you create an instance of <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
-        , properties are set to their initial values. For a list of these values, see the <see
-         cref="T:System.Data.OleDb.OleDbDataAdapter" />
+        , properties are set to their initial values. For a list of these values, see the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
         
 
@@ -189,8 +162,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a set of data commands and a database connection that are used to fill the <see
-         cref="T:System.Data.DataSet" />
+        >Represents a set of data commands and a database connection that are used to fill the <see cref="T:System.Data.DataSet" />
 
         
 
@@ -208,8 +180,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >When you create an instance of <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
@@ -252,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
@@ -280,26 +250,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This implementation of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             constructor sets the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             constructor sets the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             property to the value specified in the <paramref
-             name="selectCommand" />
+             property to the value specified in the <paramref name="selectCommand" />
 
             
 
              parameter.</para
           >
           <para
-            >When you create an instance of <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >When you create an instance of <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
@@ -342,18 +308,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             class with the specified <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             class with the specified <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-             as the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             as the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
@@ -361,22 +324,23 @@
           >
         </summary>
         <param name="selectCommand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.OleDb.OleDbCommand" />
+          An <see cref="T:System.Data.OleDb.OleDbCommand" />
 
           
 
-           that is a SELECT statement or stored procedure, and is set as the <see
-           cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+           that is a SELECT statement or stored procedure, and is set as the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
           
 
-           property of the <see
-           cref="T:System.Data.OleDb.OleDbDataAdapter" />
+           property of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
           
 
@@ -403,41 +367,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This implementation of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             opens and closes an <see
-             cref="T:System.Data.OleDb.OleDbConnection" />
+             opens and closes an <see cref="T:System.Data.OleDb.OleDbConnection" />
 
             
 
-             if it is not already open. This can be useful in an application that must call the <see
-             cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+             if it is not already open. This can be useful in an application that must call the <see cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
             
 
-             method for two or more <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+             method for two or more <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             objects. If the <see
-             cref="T:System.Data.OleDb.OleDbConnection" />
+             objects. If the <see cref="T:System.Data.OleDb.OleDbConnection" />
 
             
 
-             is already open, you must explicitly call <see
-             cref="M:System.Data.OleDb.OleDbConnection.Close" />
+             is already open, you must explicitly call <see cref="M:System.Data.OleDb.OleDbConnection.Close" />
 
             
 
              or Dispose to close it.</para
           >
           <para
-            >When you create an instance of <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >When you create an instance of <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
@@ -480,13 +437,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             class with a <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             class with a <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
@@ -494,29 +449,34 @@
           >
         </summary>
         <param name="selectCommandText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that is an SQL SELECT statement or stored procedure to be used by the <see
-           cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+          A string that is an SQL SELECT statement or stored procedure to be used by the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
           
 
-           property of the <see
-           cref="T:System.Data.OleDb.OleDbDataAdapter" />
+           property of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
           
 
           . </param
         >
         <param name="selectConnection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Data.OleDb.OleDbConnection" />
+          An <see cref="T:System.Data.OleDb.OleDbConnection" />
 
           
 
@@ -543,26 +503,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This overload of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             constructor uses the <paramref
-             name="selectConnectionString" />
+             constructor uses the <paramref name="selectConnectionString" />
 
             
 
-             parameter to set the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             parameter to set the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
              property. However, it does not open the connection. You still must explicitly open the connection.</para
           >
           <para
-            >When you create an instance of <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >When you create an instance of <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
@@ -605,13 +561,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             class with a <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             class with a <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
@@ -619,24 +573,30 @@
           >
         </summary>
         <param name="selectCommandText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that is an SQL SELECT statement or stored procedure to be used by the <see
-           cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+          A string that is an SQL SELECT statement or stored procedure to be used by the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
           
 
-           property of the <see
-           cref="T:System.Data.OleDb.OleDbDataAdapter" />
+           property of the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
           
 
           . </param
         >
         <param name="selectConnectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -725,43 +685,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >During <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-            , if this property is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+            , if this property is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
+            , the <see cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
 
             
 
-             can be generated automatically if you set the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             can be generated automatically if you set the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             property and use the <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+             property and use the <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-            . Then, any additional commands that you do not set are generated by the <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+            . Then, any additional commands that you do not set are generated by the <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-            . This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+            . This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
 
@@ -770,28 +722,23 @@
             .</para
           >
           <para
-            >When <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
+            >When <see cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+            , the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
+             is not cloned. The <see cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
@@ -851,143 +798,118 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The link between ActiveX Data Objects (ADO) and ADO.NET is a one-way operation in that you can copy data from ADO to the <see
-             cref="T:System.Data.DataSet" />
+            >The link between ActiveX Data Objects (ADO) and ADO.NET is a one-way operation in that you can copy data from ADO to the <see cref="T:System.Data.DataSet" />
 
             
 
             , but any updates to the data must be handled by ADO.NET. </para
           >
           <para
-            >This overload of the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >This overload of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             method does not close the input Recordset on completion of the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+             method does not close the input Recordset on completion of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
              operation.</para
           >
           <para
-            >When handling batch SQL statements that return multiple results, this implementation of <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >When handling batch SQL statements that return multiple results, this implementation of <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+             and <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
             
 
              for the OLE DB.NET Framework Data Provider retrieves schema information for only the first result.</para
           >
           <para
-            >The <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >The <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             operation adds the rows to the specified destination <see
-             cref="T:System.Data.DataTable" />
+             operation adds the rows to the specified destination <see cref="T:System.Data.DataTable" />
 
             
 
-             object in the <see
-             cref="T:System.Data.DataSet" />
+             object in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , creating the <see
-             cref="T:System.Data.DataTable" />
+            , creating the <see cref="T:System.Data.DataTable" />
 
             
 
-             object if it does not already exist. When you create a <see
-             cref="T:System.Data.DataTable" />
+             object if it does not already exist. When you create a <see cref="T:System.Data.DataTable" />
 
             
 
-             object, the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+             object, the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             operation ordinarily creates only column name metadata. However, if the <see
-             cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+             operation ordinarily creates only column name metadata. However, if the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
             
 
              property is set to AddWithKey, appropriate primary keys and constraints are also created.</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >You can use the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             method multiple times on the same <see
-             cref="T:System.Data.DataTable" />
+             method multiple times on the same <see cref="T:System.Data.DataTable" />
 
             
 
-            . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
-             cref="T:System.Data.DataTable" />
+            . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see cref="T:System.Data.DataTable" />
 
             
 
-            . If primary key information is present, any duplicate rows are reconciled and only appear one time in the <see
-             cref="T:System.Data.DataTable" />
+            . If primary key information is present, any duplicate rows are reconciled and only appear one time in the <see cref="T:System.Data.DataTable" />
 
             
 
-             that corresponds to the <see
-             cref="T:System.Data.DataSet" />
+             that corresponds to the <see cref="T:System.Data.DataSet" />
 
             
 
-            . Primary key information may be set either through <see
-             cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+            . Primary key information may be set either through <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
             
 
-            , by specifying the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+            , by specifying the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataTable" />
+             property of the <see cref="T:System.Data.DataTable" />
 
             
 
-            , or by setting the <see
-             cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+            , or by setting the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
             
 
              property to AddWithKey.</para
           >
           <para
-            >If the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+            >If the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             returns the results of an OUTER JOIN, the DataAdapter does not set a <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             returns the results of an OUTER JOIN, the DataAdapter does not set a <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             value for the resulting <see
-             cref="T:System.Data.DataTable" />
+             value for the resulting <see cref="T:System.Data.DataTable" />
 
             
 
-            . You must explicitly define the primary key to make sure that duplicate rows are resolved correctly. For more information, see <format
-             type="text/html">
+            . You must explicitly define the primary key to make sure that duplicate rows are resolved correctly. For more information, see <format type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
 
@@ -996,34 +918,29 @@
             .</para
           >
           <para
-            >To function correctly with the .NET Framework Data Provider for OLE DB, AddWithKey requires that the native OLE DB provider obtains required primary key information by setting the DBPROP_UNIQUEROWS property, and then determines which columns are primary key columns by examining DBCOLUMN_KEYCOLUMN in the IColumnsRowset. Alternatively the user may explicitly set the primary key constraints on each <see
-             cref="T:System.Data.DataTable" />
+            >To function correctly with the .NET Framework Data Provider for OLE DB, AddWithKey requires that the native OLE DB provider obtains required primary key information by setting the DBPROP_UNIQUEROWS property, and then determines which columns are primary key columns by examining DBCOLUMN_KEYCOLUMN in the IColumnsRowset. Alternatively the user may explicitly set the primary key constraints on each <see cref="T:System.Data.DataTable" />
 
             
 
             . This makes sure that incoming records that match existing records are updated instead of appended.</para
           >
           <para
-            >If the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >If the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             encounters duplicate columns while populating a <see
-             cref="T:System.Data.DataTable" />
+             encounters duplicate columns while populating a <see cref="T:System.Data.DataTable" />
 
             
 
-            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. Empty column names are added to the <see
-             cref="T:System.Data.DataTable" />
+            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. Empty column names are added to the <see cref="T:System.Data.DataTable" />
 
             
 
             , using an empty string for the first column, followed by "1", "2", "3", and so on for the subsequent empty columns.</para
           >
           <para
-            >Values in ADO Recordset or Record objects are converted to common language runtime types for storage in the <see
-             cref="T:System.Data.DataSet" />
+            >Values in ADO Recordset or Record objects are converted to common language runtime types for storage in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1031,8 +948,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This overload of the <see
-               cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+              >This overload of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
               
 
@@ -1044,13 +960,11 @@
 rAdapter.Fill(rDataSet, "source table");   </code>
           <para>This example shows how you can skip a result when dealing with multiple results.</para>
           <para
-            >The following example uses an <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >The following example uses an <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             to fill a <see
-             cref="T:System.Data.DataTable" />
+             to fill a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1090,13 +1004,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds or refreshes rows in a <see
-             cref="T:System.Data.DataTable" />
+            >Adds or refreshes rows in a <see cref="T:System.Data.DataTable" />
 
             
 
-             to match those in an ADO Recordset or Record object using the specified <see
-             cref="T:System.Data.DataTable" />
+             to match those in an ADO Recordset or Record object using the specified <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1106,8 +1018,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully refreshed to the <see
-             cref="T:System.Data.DataTable" />
+            >The number of rows successfully refreshed to the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1115,19 +1026,26 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           >
         </returns>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataTable" />
+          A <see cref="T:System.Data.DataTable" />
 
           
 
            to fill with records and, if it is required, schema. </param
         >
         <param name="ADODBRecordSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1157,123 +1075,102 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The link between ActiveX Data Objects (ADO) and ADO.NET is a one-way operation in that you can copy data from ADO to the <see
-             cref="T:System.Data.DataSet" />
+            >The link between ActiveX Data Objects (ADO) and ADO.NET is a one-way operation in that you can copy data from ADO to the <see cref="T:System.Data.DataSet" />
 
             
 
             , but any updates to the data must be handled by ADO.NET. </para
           >
           <para
-            >The <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >The <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             method iterates through multiple results by calling the NextRecordset method on the Recordset, closing the input Recordset on completion of the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+             method iterates through multiple results by calling the NextRecordset method on the Recordset, closing the input Recordset on completion of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
              operation.</para
           >
           <para
-            >The <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >The <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             operation adds the rows to the specified destination <see
-             cref="T:System.Data.DataTable" />
+             operation adds the rows to the specified destination <see cref="T:System.Data.DataTable" />
 
             
 
-             object in the <see
-             cref="T:System.Data.DataSet" />
+             object in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , creating the <see
-             cref="T:System.Data.DataTable" />
+            , creating the <see cref="T:System.Data.DataTable" />
 
             
 
-             object if it does not already exist. When you create a <see
-             cref="T:System.Data.DataTable" />
+             object if it does not already exist. When you create a <see cref="T:System.Data.DataTable" />
 
             
 
-             object, the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+             object, the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             operation ordinarily creates only column name metadata. However, if the <see
-             cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+             operation ordinarily creates only column name metadata. However, if the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
             
 
              property is set to AddWithKey, appropriate primary keys and constraints are also created.</para
           >
           <para
-            >If primary key information is present, any duplicate rows are reconciled and only appear one time in the <see
-             cref="T:System.Data.DataTable" />
+            >If primary key information is present, any duplicate rows are reconciled and only appear one time in the <see cref="T:System.Data.DataTable" />
 
             
 
-             that corresponds to the <see
-             cref="T:System.Data.DataSet" />
+             that corresponds to the <see cref="T:System.Data.DataSet" />
 
             
 
-            . Primary key information may be set either through <see
-             cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+            . Primary key information may be set either through <see cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
             
 
-            , by specifying the <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+            , by specifying the <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataTable" />
+             property of the <see cref="T:System.Data.DataTable" />
 
             
 
-            , or by setting the <see
-             cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+            , or by setting the <see cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
 
             
 
              property to AddWithKey.</para
           >
           <para
-            >To function correctly with the .NET Framework Data Provider for OLE DB, AddWithKey requires the native OLE DB provider to obtain required primary key information by setting the DBPROP_UNIQUEROWS property, and then determine which columns are primary key columns by examining DBCOLUMN_KEYCOLUMN in the IColumnsRowset. Alternatively the user may explicitly set the primary key constraints on each <see
-             cref="T:System.Data.DataTable" />
+            >To function correctly with the .NET Framework Data Provider for OLE DB, AddWithKey requires the native OLE DB provider to obtain required primary key information by setting the DBPROP_UNIQUEROWS property, and then determine which columns are primary key columns by examining DBCOLUMN_KEYCOLUMN in the IColumnsRowset. Alternatively the user may explicitly set the primary key constraints on each <see cref="T:System.Data.DataTable" />
 
             
 
             . This ensures that incoming records that match existing records are updated instead of appended.</para
           >
           <para
-            >If the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+            >If the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             returns the results of an OUTER JOIN, the DataAdapter does not set a <see
-             cref="P:System.Data.DataTable.PrimaryKey" />
+             returns the results of an OUTER JOIN, the DataAdapter does not set a <see cref="P:System.Data.DataTable.PrimaryKey" />
 
             
 
-             value for the resulting <see
-             cref="T:System.Data.DataTable" />
+             value for the resulting <see cref="T:System.Data.DataTable" />
 
             
 
-            . You must explicitly define the primary key to make sure that duplicate rows are resolved correctly. For more information, see <format
-             type="text/html">
+            . You must explicitly define the primary key to make sure that duplicate rows are resolved correctly. For more information, see <format type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
 
@@ -1282,52 +1179,44 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             .</para
           >
           <para
-            >If the Recordset is closed before the starting of the <see
-             cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+            >If the Recordset is closed before the starting of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
             
 
-             operation, no error results. This is required for handling of multiple results, because queries that do not return rows are indicated by a closed Recordset. The <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+             operation, no error results. This is required for handling of multiple results, because queries that do not return rows are indicated by a closed Recordset. The <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
              just calls NextRecordset on the closed Recordset and continues processing.</para
           >
           <para
-            >If an error is encountered while populating the data set, rows added before the occurrence of the error remain in the <see
-             cref="T:System.Data.DataSet" />
+            >If an error is encountered while populating the data set, rows added before the occurrence of the error remain in the <see cref="T:System.Data.DataSet" />
 
             
 
             . The rest of the operation is aborted.</para
           >
           <para
-            >If the <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+            >If the <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 
-             object encounters duplicate columns while populating a <see
-             cref="T:System.Data.DataTable" />
+             object encounters duplicate columns while populating a <see cref="T:System.Data.DataTable" />
 
             
 
-            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
-             cref="T:System.Data.DataSet" />
+            , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see cref="T:System.Data.DataSet" />
 
             
 
-             according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
-             cref="T:System.Data.DataSet" />
+             according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see cref="T:System.Data.DataSet" />
 
             
 
              each result set is placed in a separate table. Additional result sets are named by appending integral values to the specified table name (for example, "Table", "Table1", "Table2", and so on.). Applications that use column and table names should make sure that conflicts with these naming patterns does not occur.</para
           >
           <para
-            >Values in ADO Recordset or Record objects are converted to common language runtime types for storage in the <see
-             cref="T:System.Data.DataSet" />
+            >Values in ADO Recordset or Record objects are converted to common language runtime types for storage in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1335,8 +1224,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           >
           <block subset="none" type="note">
             <para
-              >This overload of the <see
-               cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+              >This overload of the <see cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
               
 
@@ -1344,13 +1232,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             >
           </block>
           <para
-            >The following example uses an <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >The following example uses an <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             to fill a <see
-             cref="T:System.Data.DataSet" />
+             to fill a <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1380,13 +1266,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds or refreshes rows in the <see
-             cref="T:System.Data.DataSet" />
+            >Adds or refreshes rows in the <see cref="T:System.Data.DataSet" />
 
             
 
-             to match those in an ADO Recordset or Record object using the specified <see
-             cref="T:System.Data.DataSet" />
+             to match those in an ADO Recordset or Record object using the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1396,8 +1280,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of rows successfully added to or refreshed in the <see
-             cref="T:System.Data.DataSet" />
+            >The number of rows successfully added to or refreshed in the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1405,26 +1288,37 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           >
         </returns>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataSet" />
+          A <see cref="T:System.Data.DataSet" />
 
           
 
            to fill with records and, if it is required, schema. </param
         >
         <param name="ADODBRecordSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ADO Recordset or Record object. </param
         >
         <param name="srcTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1451,43 +1345,35 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >During <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-            , if this property is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+            , if this property is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
+            , the <see cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
 
             
 
-             can be generated automatically if you set the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             can be generated automatically if you set the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             property and use the <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+             property and use the <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-            . Then, any additional commands that you do not set are generated by the <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+            . Then, any additional commands that you do not set are generated by the <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-            . This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+            . This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
 
@@ -1496,28 +1382,23 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             .</para
           >
           <para
-            >When <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
+            >When <see cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+            , the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
+             is not cloned. The <see cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
@@ -1525,18 +1406,15 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           >
           <block subset="none" type="note">
             <para
-              >If execution of this command returns rows, these rows may be added to the <see
-               cref="T:System.Data.DataSet" />
+              >If execution of this command returns rows, these rows may be added to the <see cref="T:System.Data.DataSet" />
 
               
 
-               depending on how you set the <see
-               cref="P:System.Data.OleDb.OleDbCommand.UpdatedRowSource" />
+               depending on how you set the <see cref="P:System.Data.OleDb.OleDbCommand.UpdatedRowSource" />
 
               
 
-               property of the <see
-               cref="T:System.Data.OleDb.OleDbCommand" />
+               property of the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
               
 
@@ -1622,8 +1500,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >When you use <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -1632,8 +1509,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <list type="ordered">
             <item>
               <para
-                >The values in the <see
-                 cref="T:System.Data.DataRow" />
+                >The values in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1642,8 +1518,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
                 
 
@@ -1655,8 +1530,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1665,8 +1539,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >If there are output parameters, they are placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1675,8 +1548,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
                 
 
@@ -1697,8 +1569,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs during <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >Occurs during <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -1725,8 +1596,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >When you use <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -1735,8 +1605,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <list type="ordered">
             <item>
               <para
-                >The values in the <see
-                 cref="T:System.Data.DataRow" />
+                >The values in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1745,8 +1614,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
 
                 
 
@@ -1758,8 +1626,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If the command is set to FirstReturnedRecord, the first returned result is placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1768,8 +1635,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >If there are output parameters, they are placed in the <see
-                 cref="T:System.Data.DataRow" />
+                >If there are output parameters, they are placed in the <see cref="T:System.Data.DataRow" />
 
                 
 
@@ -1778,8 +1644,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+                >The <see cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
 
                 
 
@@ -1800,8 +1665,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs during <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >Occurs during <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
@@ -1829,41 +1693,34 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+            >When <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+            , the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             is not cloned. The <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
              object.</para
           >
           <para
-            >If the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+            >If the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             returns no rows, no tables are added to the <see
-             cref="T:System.Data.DataSet" />
+             returns no rows, no tables are added to the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1925,13 +1782,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -1941,8 +1796,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.DeleteCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.DeleteCommand" />
 
             
 
@@ -1969,13 +1823,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -1985,8 +1837,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.InsertCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.InsertCommand" />
 
             
 
@@ -2013,13 +1864,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -2029,8 +1878,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.SelectCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.SelectCommand" />
 
             
 
@@ -2057,13 +1905,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataAdapter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataAdapter" />
 
             
 
@@ -2073,8 +1919,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Data.IDbDataAdapter.UpdateCommand" />
+            >For a description of this member, see <see cref="M:System.Data.IDbDataAdapter.UpdateCommand" />
 
             
 
@@ -2098,13 +1943,11 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.OleDb.OleDbDataAdapter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.OleDb.OleDbDataAdapter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
@@ -2114,8 +1957,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ICloneable.Clone" />
+            >For a description of this member, see <see cref="M:System.ICloneable.Clone" />
 
             
 
@@ -2125,8 +1967,7 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Object" />
+            >A new <see cref="T:System.Object" />
 
             
 
@@ -2150,43 +1991,35 @@ rAdapter.Fill(rDataSet, "source table");   </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During <see
-             cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+            >During <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
             
 
-            , if this property is not set and primary key information is present in the <see
-             cref="T:System.Data.DataSet" />
+            , if this property is not set and primary key information is present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            , the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
+            , the <see cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
 
             
 
-             can be generated automatically if you set the <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+             can be generated automatically if you set the <see cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
             
 
-             property and use the <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+             property and use the <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-            . Then, any additional commands that you do not set are generated by the <see
-             cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+            . Then, any additional commands that you do not set are generated by the <see cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
             
 
-            . This generation logic requires key column information to be present in the <see
-             cref="T:System.Data.DataSet" />
+            . This generation logic requires key column information to be present in the <see cref="T:System.Data.DataSet" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
 
@@ -2195,28 +2028,23 @@ rAdapter.Fill(rDataSet, "source table");   </code>
             .</para
           >
           <para
-            >When <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
+            >When <see cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
 
             
 
-             is assigned to a previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             is assigned to a previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-            , the <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+            , the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-             is not cloned. The <see
-             cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
+             is not cloned. The <see cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
 
             
 
-             maintains a reference to the previously created <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             maintains a reference to the previously created <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
@@ -2224,18 +2052,15 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           >
           <block subset="none" type="note">
             <para
-              >If execution of this command returns rows, these rows may be merged with the <see
-               cref="T:System.Data.DataSet" />
+              >If execution of this command returns rows, these rows may be merged with the <see cref="T:System.Data.DataSet" />
 
               
 
-               depending on how you set the <see
-               cref="!:System.Data.OleDb.OleDbCommand.UpdatedRowSource" />
+               depending on how you set the <see cref="!:System.Data.OleDb.OleDbCommand.UpdatedRowSource" />
 
               
 
-               property of the <see
-               cref="T:System.Data.OleDb.OleDbCommand" />
+               property of the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
               
 

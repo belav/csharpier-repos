@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -144,8 +146,7 @@
 
           
 
-           to include private parameters; otherwise, <b
-          >false</b>
+           to include private parameters; otherwise, <b>false</b>
 
           
 
@@ -178,8 +179,7 @@
         >
         <summary>Reconstructs a DiffieHellman object from an XML string.</summary>
         <remarks
-          >A <see
-           cref="T:System.Security.Cryptography.CryptographicException" />
+          >A <see cref="T:System.Security.Cryptography.CryptographicException" />
 
           
 
@@ -231,8 +231,7 @@
 
           
 
-           to include private parameters; otherwise, <b
-          >false</b>
+           to include private parameters; otherwise, <b>false</b>
 
           
 

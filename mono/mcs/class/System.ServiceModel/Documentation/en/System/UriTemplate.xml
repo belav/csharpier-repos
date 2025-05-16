@@ -35,38 +35,31 @@
         </item>
       </list>
       <para
-        >The preceding URI templates might be used for organizing weather reports. Segments enclosed in curly braces are variables, everything else is a literal. You can convert a <see
-         cref="T:System.UriTemplate" />
+        >The preceding URI templates might be used for organizing weather reports. Segments enclosed in curly braces are variables, everything else is a literal. You can convert a <see cref="T:System.UriTemplate" />
 
         
 
-         instance into a <see
-         cref="T:System.Uri" />
+         instance into a <see cref="T:System.Uri" />
 
         
 
-         by replacing variables with actual values. For example, taking the template "weather/{state}/{city}" and putting in values for the variables "{state}" and "{city}" gives you "weather/WA/Seattle". Given a candidate URI, you can test whether it matches a given URI template by calling <see
-         cref="M:System.UriTemplate.Match(System.Uri,System.Uri)" />
+         by replacing variables with actual values. For example, taking the template "weather/{state}/{city}" and putting in values for the variables "{state}" and "{city}" gives you "weather/WA/Seattle". Given a candidate URI, you can test whether it matches a given URI template by calling <see cref="M:System.UriTemplate.Match(System.Uri,System.Uri)" />
 
         
 
-        . You can also use <see
-         cref="T:System.UriTemplate" />
+        . You can also use <see cref="T:System.UriTemplate" />
 
         
 
-         instances to create a <see
-         cref="T:System.Uri" />
+         instances to create a <see cref="T:System.Uri" />
 
         
 
-         from a set of variable values by calling <see
-         cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" />
+         from a set of variable values by calling <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" />
 
         
 
-         or <see
-         cref="M:System.UriTemplate.BindByPosition(System.Uri,System.String[])" />
+         or <see cref="M:System.UriTemplate.BindByPosition(System.Uri,System.String[])" />
 
         
 
@@ -97,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplate" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplate" />
 
             
 
@@ -106,7 +98,11 @@
           >
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <paramref
-             name="ignoreTrailingSlash" />
+            >When the <paramref name="ignoreTrailingSlash" />
 
             
 
@@ -160,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplate" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplate" />
 
             
 
@@ -169,14 +163,22 @@
           >
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The template string.</param
         >
         <param name="ignoreTrailingSlash">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -209,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplate" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplate" />
 
             
 
@@ -218,14 +219,22 @@
           >
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The template string.</param
         >
         <param name="additionalDefaults">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -259,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplate" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplate" />
 
             
 
@@ -268,21 +276,33 @@
           >
         </summary>
         <param name="template">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The template string.</param
         >
         <param name="ignoreTrailingSlash">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the trailing slash “/” characters are ignored; otherwise false.</param
         >
         <param name="additionalDefaults">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -317,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Generic.IDictionary{System.String,System.String}" />
+            >The <see cref="T:System.Collections.Generic.IDictionary{System.String,System.String}" />
 
             
 
@@ -340,14 +359,22 @@
           <para>A URI.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base address.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -379,8 +406,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.Specialized.NameValueCollection" />
+            >The <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
             
 
@@ -388,8 +414,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The name/value collection passed to <see
-               cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" />
+              >The name/value collection passed to <see cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" />
 
               
 
@@ -409,14 +434,22 @@
           <para>A new instance.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base address.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -459,21 +492,33 @@
           <para>A URI.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A URI that contains the base address.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A dictionary that contains a collection of parameter name/value pairs.</param
         >
         <param name="omitDefaults">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -513,21 +558,33 @@
           <para>A URI.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base address.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A collection of parameter name/value pairs. </param
         >
         <param name="omitDefaults">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -567,8 +624,7 @@
           <para>The parameter values are bound by position left to right. The first parameter value replaces the first variable found in the template, the second parameter value replaces the second variable, and so on. Variables passed to this method are escaped.</para>
           <block subset="none" type="note">
             <para
-              >The number of parameters passed in the values parameter must match the number of variables in the template. If not, a <see
-               cref="T:System.FormatException" />
+              >The number of parameters passed in the values parameter must match the number of variables in the template. If not, a <see cref="T:System.FormatException" />
 
               
 
@@ -592,29 +648,33 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A new <see
-             cref="T:System.Uri" />
+          <para>A new <see cref="T:System.Uri" />
 
             
 
-             instance.</para
-          >
+             instance.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
            that contains the base address.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -686,8 +746,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.UriTemplate" />
+            >Two <see cref="T:System.UriTemplate" />
 
             
 
@@ -697,8 +756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a <see
-             cref="T:System.UriTemplate" />
+            >Indicates whether a <see cref="T:System.UriTemplate" />
 
             
 
@@ -708,8 +766,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.UriTemplate" />
+            >true if the <see cref="T:System.UriTemplate" />
 
             
 
@@ -717,12 +774,15 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.UriTemplate" />
+          The <see cref="T:System.UriTemplate" />
 
           
 
@@ -754,8 +814,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the match is successful the <see
-             cref="T:System.UriTemplateMatch" />
+            >If the match is successful the <see cref="T:System.UriTemplateMatch" />
 
             
 
@@ -765,13 +824,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to match a <see
-             cref="T:System.URI" />
+            >Attempts to match a <see cref="T:System.URI" />
 
             
 
-             to a <see
-             cref="T:System.UriTemplate" />
+             to a <see cref="T:System.UriTemplate" />
 
             
 
@@ -783,19 +840,26 @@
           <para>An instance.</para>
         </returns>
         <param name="baseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base address.</param
         >
         <param name="candidate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -878,8 +942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the <see
-             cref="T:System.UriTemplate" />
+            >Returns a string representation of the <see cref="T:System.UriTemplate" />
 
             
 
@@ -889,8 +952,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The representation of the <see
-             cref="T:System.UriTemplate" />
+            >The representation of the <see cref="T:System.UriTemplate" />
 
             
 

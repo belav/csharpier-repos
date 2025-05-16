@@ -53,24 +53,30 @@
           <para>Initializes a new instance of the InstanceData class, using the specified sample and performance counter instance.</para>
         </summary>
         <param name="instanceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of an instance associated with the performance counter. </param
         >
         <param name="sample">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterSample" />
+          A <see cref="T:System.Diagnostics.CounterSample" />
 
           
 
-           taken from the instance specified by the <paramref
-           name="instanceName" />
+           taken from the instance specified by the <paramref name="instanceName" />
 
           
 

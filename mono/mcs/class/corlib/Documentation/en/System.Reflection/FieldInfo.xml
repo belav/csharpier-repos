@@ -50,31 +50,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The field information is obtained from metadata. The <see
-         cref="T:System.Reflection.FieldInfo" />
+        >The field information is obtained from metadata. The <see cref="T:System.Reflection.FieldInfo" />
 
         
 
-         class does not have a public constructor. <see
-         cref="T:System.Reflection.FieldInfo" />
+         class does not have a public constructor. <see cref="T:System.Reflection.FieldInfo" />
 
         
 
-         objects are obtained by calling either the <see
-         cref="M:System.Type.GetFields" />
+         objects are obtained by calling either the <see cref="M:System.Type.GetFields" />
 
         
 
-         or <see
-         cref="M:System.Type.GetField(System.String,System.Reflection.BindingFlags)" />
+         or <see cref="M:System.Type.GetField(System.String,System.Reflection.BindingFlags)" />
 
         
 
          method of a Type object.</para
       >
       <para
-        >Fields are variables defined in the class. <see
-         cref="T:System.Reflection.FieldInfo" />
+        >Fields are variables defined in the class. <see cref="T:System.Reflection.FieldInfo" />
 
         
 
@@ -140,8 +135,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Reflection.FieldAttributes" />
+            >A <see cref="T:System.Reflection.FieldAttributes" />
 
             
 
@@ -240,8 +234,7 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -249,7 +242,11 @@ class FieldAttributesExample
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -307,8 +304,7 @@ class FieldAttributesExample
       <Docs>
         <value>
           <para
-            > The <see
-             cref="T:System.Type" />
+            > The <see cref="T:System.Type" />
 
             
 
@@ -358,8 +354,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Gets a <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -369,13 +364,11 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             object representing the field specified by <paramref
-             name="handle" />
+             object representing the field specified by <paramref name="handle" />
 
             
 
@@ -383,12 +376,15 @@ class FieldAttributesExample
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeFieldHandle" />
+          A <see cref="T:System.RuntimeFieldHandle" />
 
           
 
@@ -428,59 +424,49 @@ class FieldAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Handles are valid only in the application domain in which they were obtained.</para>
           <para
-            >The recommended practice is that <paramref
-             name="declaringType" />
+            >The recommended practice is that <paramref name="declaringType" />
 
             
 
-             should always be the runtime type handle of the constructed type that <paramref
-             name="handle" />
+             should always be the runtime type handle of the constructed type that <paramref name="handle" />
 
             
 
-             belongs to. That is, if <paramref
-             name="handle" />
+             belongs to. That is, if <paramref name="handle" />
 
             
 
-             is a runtime field handle for a field that belongs to MyType&lt;int&gt; (MyType(Of Integer) in Visual Basic), <paramref
-             name="declaringType" />
+             is a runtime field handle for a field that belongs to MyType&lt;int&gt; (MyType(Of Integer) in Visual Basic), <paramref name="declaringType" />
 
             
 
              is the runtime type handle for MyType&lt;int&gt;. Do not use the runtime type handle of the generic type definition, unless the runtime field handle represents a field on the generic type definition.</para
           >
           <para
-            >Implementations are compatible in some cases. For example, a single implementation is shared by all types that are constructed from a particular generic type definition by using reference types for the generic type arguments. For example, MyType&lt;string&gt;, MyType&lt;object&gt;, and MyType&lt;ArrayList&gt; all share the same implementation. In this situation, the <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Implementations are compatible in some cases. For example, a single implementation is shared by all types that are constructed from a particular generic type definition by using reference types for the generic type arguments. For example, MyType&lt;string&gt;, MyType&lt;object&gt;, and MyType&lt;ArrayList&gt; all share the same implementation. In this situation, the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             object that is returned represents a field on the type that <paramref
-             name="declaringType" />
+             object that is returned represents a field on the type that <paramref name="declaringType" />
 
             
 
-             specifies, regardless of the original source of <paramref
-             name="handle" />
+             specifies, regardless of the original source of <paramref name="handle" />
 
             
 
             . This practice is not recommended, because it works only if the generic type arguments of the constructed type are reference types.</para
           >
           <para
-            >If a generic argument is a value type, the runtime type handle of the constructed type is not compatible with runtime field handles from constructions that have a reference type in the same generic parameter position, or that have a different value type in that position. In that case, the only way to use the <see
-             cref="M:System.Reflection.FieldInfo.GetFieldFromHandle(System.RuntimeFieldHandle,System.RuntimeTypeHandle)" />
+            >If a generic argument is a value type, the runtime type handle of the constructed type is not compatible with runtime field handles from constructions that have a reference type in the same generic parameter position, or that have a different value type in that position. In that case, the only way to use the <see cref="M:System.Reflection.FieldInfo.GetFieldFromHandle(System.RuntimeFieldHandle,System.RuntimeTypeHandle)" />
 
             
 
-             overload is to ensure that <paramref
-             name="declaringType" />
+             overload is to ensure that <paramref name="declaringType" />
 
             
 
-             is the runtime type handle for the constructed type that <paramref
-             name="handle" />
+             is the runtime type handle for the constructed type that <paramref name="handle" />
 
             
 
@@ -490,8 +476,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Gets a <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -501,18 +486,15 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Reflection.FieldInfo" />
+            >A <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             object representing the field specified by <paramref
-             name="handle" />
+             object representing the field specified by <paramref name="handle" />
 
             
 
-            , in the generic type specified by <paramref
-             name="declaringType" />
+            , in the generic type specified by <paramref name="declaringType" />
 
             
 
@@ -520,24 +502,30 @@ class FieldAttributesExample
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeFieldHandle" />
+          A <see cref="T:System.RuntimeFieldHandle" />
 
           
 
            structure that contains the handle to the internal metadata representation of a field.</param
         >
         <param name="declaringType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.RuntimeTypeHandle" />
+          A <see cref="T:System.RuntimeTypeHandle" />
 
           
 
@@ -591,35 +579,31 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Reflection.FieldInfo.GetOptionalCustomModifiers" />
+            >The <see cref="M:System.Reflection.FieldInfo.GetOptionalCustomModifiers" />
 
             
 
-             and <see
-             cref="M:System.Reflection.FieldInfo.GetRequiredCustomModifiers" />
+             and <see cref="M:System.Reflection.FieldInfo.GetRequiredCustomModifiers" />
 
             
 
-             methods are provided for designers of managed compilers. For more information on custom modifiers, see <see
-             cref="T:System.Runtime.CompilerServices.IsBoxed" />
+             methods are provided for designers of managed compilers. For more information on custom modifiers, see <see cref="T:System.Runtime.CompilerServices.IsBoxed" />
 
             
 
-             and related classes in the <see
-             cref="N:System.Runtime.CompilerServices" />
+             and related classes in the <see cref="N:System.Runtime.CompilerServices" />
 
             
 
              namespace and the metadata specification in the ECMA Partition II documentation. The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -635,13 +619,11 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Type" />
+            >An array of <see cref="T:System.Type" />
 
             
 
-             objects that identify the optional custom modifiers of the current field, such as <see
-             cref="T:System.Runtime.CompilerServices.IsConst" />
+             objects that identify the optional custom modifiers of the current field, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />
 
             
 
@@ -675,14 +657,14 @@ class FieldAttributesExample
           <block subset="none" type="note">
             <para
               >For more information on constant values and the Constant table, see the ECMA Partition II documentation. The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -699,8 +681,7 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -729,35 +710,31 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Reflection.FieldInfo.GetOptionalCustomModifiers" />
+            >The <see cref="M:System.Reflection.FieldInfo.GetOptionalCustomModifiers" />
 
             
 
-             and <see
-             cref="M:System.Reflection.FieldInfo.GetRequiredCustomModifiers" />
+             and <see cref="M:System.Reflection.FieldInfo.GetRequiredCustomModifiers" />
 
             
 
-             methods are provided for designers of managed compilers. For more information on custom modifiers, see <see
-             cref="T:System.Runtime.CompilerServices.IsBoxed" />
+             methods are provided for designers of managed compilers. For more information on custom modifiers, see <see cref="T:System.Runtime.CompilerServices.IsBoxed" />
 
             
 
-             and related classes in the <see
-             cref="N:System.Runtime.CompilerServices" />
+             and related classes in the <see cref="N:System.Runtime.CompilerServices" />
 
             
 
              namespace and the metadata specification in the ECMA Partition II documentation. The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -773,18 +750,15 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Type" />
+            >An array of <see cref="T:System.Type" />
 
             
 
-             objects that identify the required custom modifiers of the current property, such as <see
-             cref="T:System.Runtime.CompilerServices.IsConst" />
+             objects that identify the required custom modifiers of the current property, such as <see cref="T:System.Runtime.CompilerServices.IsConst" />
 
             
 
-             or <see
-             cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
+             or <see cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
 
             
 
@@ -834,7 +808,8 @@ class FieldAttributesExample
       <Docs>
         <exception cref="T:System.NotSupportedException"
           >A field is marked literal, but the field does not have one of the accepted literal types. <block
-           subset="none" type="note"
+            subset="none"
+            type="note"
             >For information regarding the accepted literal types, see Partition II of the CLI Specification.</block
           >
         </exception>
@@ -842,34 +817,29 @@ class FieldAttributesExample
           >The field reflected by the current instance is non-public, and the caller does not have permission to access non-public members.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >The field reflected by the current instance is declared neither directly in <paramref
-           name="obj" />
+          >The field reflected by the current instance is declared neither directly in <paramref name="obj" />
 
           
 
-           nor in any class from which <paramref
-           name="obj" />
+           nor in any class from which <paramref name="obj" />
 
           
 
            derives.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
-          >The field reflected by the current instance is non-static, and <paramref
-           name="obj" />
+          >The field reflected by the current instance is non-static, and <paramref name="obj" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           . </exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to access non-public members of a type in loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to access non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
@@ -878,13 +848,11 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the field is static, <paramref
-             name="obj" />
+            >If the field is static, <paramref name="obj" />
 
             
 
-             is ignored. For non-static fields, <paramref
-             name="obj" />
+             is ignored. For non-static fields, <paramref name="obj" />
 
             
 
@@ -895,18 +863,15 @@ class FieldAttributesExample
           </block>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -928,7 +893,11 @@ class FieldAttributesExample
           <para>An object containing the value of the field reflected by this instance.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -974,12 +943,15 @@ class FieldAttributesExample
           <para>An Object containing a field value.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TypedReference" />
+          A <see cref="T:System.TypedReference" />
 
           
 
@@ -1004,21 +976,18 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The actual visibility of a field is limited by the visibility of its type. The <see
-             cref="P:System.Reflection.FieldInfo.IsAssembly" />
+            >The actual visibility of a field is limited by the visibility of its type. The <see cref="P:System.Reflection.FieldInfo.IsAssembly" />
 
             
 
              property might be true for a field, but if it is a field of a private nested type then the field is not visible outside the containing type.</para
           >
           <para
-            >The visibility of a field is exactly described by <see
-             cref="F:System.Reflection.FieldAttributes.Assembly" />
+            >The visibility of a field is exactly described by <see cref="F:System.Reflection.FieldAttributes.Assembly" />
 
             
 
-             if the only visibility modifier is internal (Friend in Visual Basic). This property is false for fields that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
-             cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+             if the only visibility modifier is internal (Friend in Visual Basic). This property is false for fields that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
 
             
 
@@ -1028,8 +997,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the potential visibility of this field is described by <see
-             cref="F:System.Reflection.FieldAttributes.Assembly" />
+            >Gets a value indicating whether the potential visibility of this field is described by <see cref="F:System.Reflection.FieldAttributes.Assembly" />
 
             
 
@@ -1055,13 +1023,11 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The visibility of a field is exactly described by <see
-             cref="F:System.Reflection.FieldAttributes.Family" />
+            >The visibility of a field is exactly described by <see cref="F:System.Reflection.FieldAttributes.Family" />
 
             
 
-             if the only visibility modifier is protected. This property is false for fields that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
-             cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+             if the only visibility modifier is protected. This property is false for fields that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
 
             
 
@@ -1071,8 +1037,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the visibility of this field is described by <see
-             cref="F:System.Reflection.FieldAttributes.Family" />
+            >Gets a value indicating whether the visibility of this field is described by <see cref="F:System.Reflection.FieldAttributes.Family" />
 
             
 
@@ -1098,16 +1063,14 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a field has <see
-             cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
+            >If a field has <see cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
 
             
 
              level visibility, it can be called from any member in a derived class that is also in the same assembly, but not from any other type.</para
           >
           <para
-            >The visibility of a field is exactly described by <see
-             cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
+            >The visibility of a field is exactly described by <see cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
 
             
 
@@ -1117,8 +1080,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the visibility of this field is described by <see
-             cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
+            >Gets a value indicating whether the visibility of this field is described by <see cref="F:System.Reflection.FieldAttributes.FamANDAssem" />
 
             
 
@@ -1144,24 +1106,21 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a field has <see
-             cref="F:System.Reflection.FieldAttributes.FamORAssem" />
+            >If a field has <see cref="F:System.Reflection.FieldAttributes.FamORAssem" />
 
             
 
              level visibility, it can be called from any member in a derived class or any member in the same assembly, but not from any other type.</para
           >
           <para
-            >The actual visibility of a field is limited by the visibility of its type. The <see
-             cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+            >The actual visibility of a field is limited by the visibility of its type. The <see cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
 
             
 
              property might be true for a field, but if it is a field of a private nested type then the field is not visible outside the containing type.</para
           >
           <para
-            >The visibility of a field is exactly described by <see
-             cref="F:System.Reflection.FieldAttributes.FamORAssem" />
+            >The visibility of a field is exactly described by <see cref="F:System.Reflection.FieldAttributes.FamORAssem" />
 
             
 
@@ -1171,8 +1130,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the potential visibility of this field is described by <see
-             cref="F:System.Reflection.FieldAttributes.FamORAssem" />
+            >Gets a value indicating whether the potential visibility of this field is described by <see cref="F:System.Reflection.FieldAttributes.FamORAssem" />
 
             
 
@@ -1199,26 +1157,22 @@ class FieldAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the returned value is true, the field can only be initialized, and is read-only thereafter.</para>
           <para
-            >To get the IsInitOnly property, first get the class Type. From the Type, get the FieldInfo. From the FieldInfo, get the IsInitOnly property. To access a non-public field, combine <see
-             cref="F:System.Reflection.BindingFlags.NonPublic" />
+            >To get the IsInitOnly property, first get the class Type. From the Type, get the FieldInfo. From the FieldInfo, get the IsInitOnly property. To access a non-public field, combine <see cref="F:System.Reflection.BindingFlags.NonPublic" />
 
             
 
-             with either or both of <see
-             cref="F:System.Reflection.BindingFlags.Static" />
+             with either or both of <see cref="F:System.Reflection.BindingFlags.Static" />
 
             
 
-             and <see
-             cref="F:System.Reflection.BindingFlags.Instance" />
+             and <see cref="F:System.Reflection.BindingFlags.Instance" />
 
             
 
              in the GetField method.</para
           >
           <para
-            >The IsInitOnly property is set when the <see
-             cref="F:System.Reflection.FieldAttributes.InitOnly" />
+            >The IsInitOnly property is set when the <see cref="F:System.Reflection.FieldAttributes.InitOnly" />
 
             
 
@@ -1297,8 +1251,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the corresponding PinvokeImpl attribute is set in <see
-             cref="T:System.Reflection.FieldAttributes" />
+            >Gets a value indicating whether the corresponding PinvokeImpl attribute is set in <see cref="T:System.Reflection.FieldAttributes" />
 
             
 
@@ -1374,18 +1327,15 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.FieldInfo.IsSecurityCritical" />
+            >The <see cref="P:System.Reflection.FieldInfo.IsSecurityCritical" />
 
             
 
-            , <see
-             cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
+            , <see cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
 
             
 
-            , and <see
-             cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
+            , and <see cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
 
             
 
@@ -1454,13 +1404,11 @@ class FieldAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see
-               cref="P:System.Reflection.Assembly.IsFullyTrusted" />
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" />
 
               
 
-               and <see
-               cref="P:System.AppDomain.IsFullyTrusted" />
+               and <see cref="P:System.AppDomain.IsFullyTrusted" />
 
               
 
@@ -1468,8 +1416,7 @@ class FieldAttributesExample
             >
           </block>
           <para
-            >For more information about reflection and transparency, see <format
-             type="text/html">
+            >For more information about reflection and transparency, see <format type="text/html">
               <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                 >Security Considerations for Reflection</a
               >
@@ -1477,8 +1424,7 @@ class FieldAttributesExample
 
             
 
-            . For information about transparency, see <format
-             type="text/html">
+            . For information about transparency, see <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
@@ -1510,18 +1456,15 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.FieldInfo.IsSecurityCritical" />
+            >The <see cref="P:System.Reflection.FieldInfo.IsSecurityCritical" />
 
             
 
-            , <see
-             cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
+            , <see cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
 
             
 
-            , and <see
-             cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
+            , and <see cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
 
             
 
@@ -1590,13 +1533,11 @@ class FieldAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see
-               cref="P:System.Reflection.Assembly.IsFullyTrusted" />
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" />
 
               
 
-               and <see
-               cref="P:System.AppDomain.IsFullyTrusted" />
+               and <see cref="P:System.AppDomain.IsFullyTrusted" />
 
               
 
@@ -1604,8 +1545,7 @@ class FieldAttributesExample
             >
           </block>
           <para
-            >For more information about reflection and transparency, see <format
-             type="text/html">
+            >For more information about reflection and transparency, see <format type="text/html">
               <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                 >Security Considerations for Reflection</a
               >
@@ -1613,8 +1553,7 @@ class FieldAttributesExample
 
             
 
-            . For information about transparency, see <format
-             type="text/html">
+            . For information about transparency, see <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
@@ -1646,18 +1585,15 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.FieldInfo.IsSecurityCritical" />
+            >The <see cref="P:System.Reflection.FieldInfo.IsSecurityCritical" />
 
             
 
-            , <see
-             cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
+            , <see cref="P:System.Reflection.FieldInfo.IsSecuritySafeCritical" />
 
             
 
-            , and <see
-             cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
+            , and <see cref="P:System.Reflection.FieldInfo.IsSecurityTransparent" />
 
             
 
@@ -1726,13 +1662,11 @@ class FieldAttributesExample
           <para>Using these properties is much simpler than examining the security annotations of an assembly and its types and members, checking the current trust level, and attempting to duplicate the runtime's rules.</para>
           <block subset="none" type="note">
             <para
-              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see
-               cref="P:System.Reflection.Assembly.IsFullyTrusted" />
+              >For partial-trust assemblies, the value of this property depends on the current trust level of the assembly. If the assembly is loaded into a partially trusted application domain (for example, into a sandboxed application domain), then the runtime ignores the security annotations of the assembly. The assembly and all its types are treated as transparent. The runtime pays attention to the security annotations of a partial-trust assembly only when that assembly is loaded into a fully trusted application domain (for example, into the default application domain of a desktop application). By contrast, a trusted assembly (that is, a strong-named assembly that is installed in the global assembly cache) is always loaded with full trust regardless of the trust level of the application domain, so its current trust level is always fully trusted. You can determine the current trust levels of assemblies and application domains by using the <see cref="P:System.Reflection.Assembly.IsFullyTrusted" />
 
               
 
-               and <see
-               cref="P:System.AppDomain.IsFullyTrusted" />
+               and <see cref="P:System.AppDomain.IsFullyTrusted" />
 
               
 
@@ -1740,8 +1674,7 @@ class FieldAttributesExample
             >
           </block>
           <para
-            >For more information about reflection and transparency, see <format
-             type="text/html">
+            >For more information about reflection and transparency, see <format type="text/html">
               <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                 >Security Considerations for Reflection</a
               >
@@ -1749,8 +1682,7 @@ class FieldAttributesExample
 
             
 
-            . For information about transparency, see <format
-             type="text/html">
+            . For information about transparency, see <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
@@ -1788,8 +1720,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the corresponding SpecialName attribute is set in the <see
-             cref="T:System.Reflection.FieldAttributes" />
+            >Gets a value indicating whether the corresponding SpecialName attribute is set in the <see cref="T:System.Reflection.FieldAttributes" />
 
             
 
@@ -1848,28 +1779,23 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property overrides <see
-             cref="P:System.Reflection.MemberInfo.MemberType" />
+            >This property overrides <see cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
-            . Therefore, when you examine a set of <see
-             cref="T:System.Reflection.MemberInfo" />
+            . Therefore, when you examine a set of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects — for example, the array returned by <see
-             cref="Overload:System.Type.GetMembers" />
+             objects — for example, the array returned by <see cref="Overload:System.Type.GetMembers" />
 
             
 
-             — the <see
-             cref="P:System.Reflection.MemberInfo.MemberType" />
+             — the <see cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
-             property returns <see
-             cref="F:System.Reflection.MemberTypes.Field" />
+             property returns <see cref="F:System.Reflection.MemberTypes.Field" />
 
             
 
@@ -1879,8 +1805,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Reflection.MemberTypes" />
+            >Gets a <see cref="T:System.Reflection.MemberTypes" />
 
             
 
@@ -1914,8 +1839,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Indicates whether two <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -1925,13 +1849,11 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -1939,14 +1861,22 @@ class FieldAttributesExample
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1979,8 +1909,7 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Indicates whether two <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -1990,13 +1919,11 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -2004,14 +1931,22 @@ class FieldAttributesExample
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2050,13 +1985,11 @@ class FieldAttributesExample
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >The field reflected by the current instance is declared neither directly in <paramref
-             name="obj" />
+            >The field reflected by the current instance is declared neither directly in <paramref name="obj" />
 
             
 
-             nor in any class from which <paramref
-             name="obj" />
+             nor in any class from which <paramref name="obj" />
 
             
 
@@ -2074,28 +2007,29 @@ class FieldAttributesExample
           >The field reflected by the current instance is non-public, and the caller does not have permission to access non-public members.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
-          >The field reflected by the current instance is non-static, and <paramref
-           name="obj" />
+          >The field reflected by the current instance is non-static, and <paramref name="obj" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
            .</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to access non-public members of a type in loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to access non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
           .</permission
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2104,23 +2038,19 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will assign <paramref
-             name="value" />
+            >This method will assign <paramref name="value" />
 
             
 
-             to the field reflected by this instance on object <paramref
-             name="obj" />
+             to the field reflected by this instance on object <paramref name="obj" />
 
             
 
-            . If the field is static, <paramref
-             name="obj" />
+            . If the field is static, <paramref name="obj" />
 
             
 
-             will be ignored. For non-static fields, <paramref
-             name="obj" />
+             will be ignored. For non-static fields, <paramref name="obj" />
 
             
 
@@ -2131,18 +2061,15 @@ class FieldAttributesExample
           </block>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -2160,14 +2087,22 @@ class FieldAttributesExample
           <para>Sets the value of the field supported by the given object.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose field value will be set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2208,13 +2143,11 @@ class FieldAttributesExample
       <Docs>
         <exception cref="T:System.ArgumentException">
           <para
-            >The field reflected by the current instance is declared neither directly in <paramref
-             name="obj" />
+            >The field reflected by the current instance is declared neither directly in <paramref name="obj" />
 
             
 
-             nor in any class from which <paramref
-             name="obj" />
+             nor in any class from which <paramref name="obj" />
 
             
 
@@ -2232,47 +2165,55 @@ class FieldAttributesExample
           >The field reflected by the current instance is non-public, and the caller does not have permission to access non-public members.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
-          >The field reflected by the current instance is non-static, and <paramref
-           name="obj" />
+          >The field reflected by the current instance is non-static, and <paramref name="obj" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
            .</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
-          >Requires permission to access non-public members of a type in loaded assemblies. See <see
-           cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+          >Requires permission to access non-public members of a type in loaded assemblies. See <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
           
 
           .</permission
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding). </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref
-           name="binder" />
+          A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" />
 
           
 
            is null, then Binder.DefaultBinding is used. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2281,23 +2222,19 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method will assign <paramref
-             name="value" />
+            >This method will assign <paramref name="value" />
 
             
 
-             to the field reflected by this instance on <paramref
-             name="obj" />
+             to the field reflected by this instance on <paramref name="obj" />
 
             
 
-            . If the field is static, <paramref
-             name="obj" />
+            . If the field is static, <paramref name="obj" />
 
             
 
-             will be ignored. For non-static fields, <paramref
-             name="obj" />
+             will be ignored. For non-static fields, <paramref name="obj" />
 
             
 
@@ -2308,18 +2245,15 @@ class FieldAttributesExample
           </block>
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -2337,40 +2271,59 @@ class FieldAttributesExample
           <para>When overridden in a derived class, sets the value of the field supported by the given object.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object whose field value will be set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to assign to the field. </param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A field of Binder that specifies the type of binding that is desired (for example, Binder.CreateInstance or Binder.ExactBinding). </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref
-           name="binder" />
+          A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref name="binder" />
 
           
 
            is null, then Binder.DefaultBinding is used. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2411,18 +2364,15 @@ class FieldAttributesExample
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
 
               
 
-               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
-               type="text/html">
+               flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
@@ -2440,19 +2390,26 @@ class FieldAttributesExample
           <para>Sets the value of the field supported by the given object.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TypedReference" />
+          A <see cref="T:System.TypedReference" />
 
           
 
            structure that encapsulates a managed pointer to a location and a runtime representation of the type that can be stored at that location. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2514,13 +2471,11 @@ class FieldAttributesExample
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Type" />
+            >Gets a <see cref="T:System.Type" />
 
             
 
-             object representing the <see
-             cref="T:System.Reflection.FieldInfo" />
+             object representing the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -2530,13 +2485,11 @@ class FieldAttributesExample
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
-             object representing the <see
-             cref="T:System.Reflection.FieldInfo" />
+             object representing the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -2572,8 +2525,7 @@ class FieldAttributesExample
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -2585,21 +2537,33 @@ class FieldAttributesExample
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -24,26 +24,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can access any of the properties and methods of the <see
-         cref="T:System.Web.UI.ControlCollection" />
+        >You can access any of the properties and methods of the <see cref="T:System.Web.UI.ControlCollection" />
 
         
 
-         class through the <see
-         cref="P:System.Web.UI.Control.Controls" />
+         class through the <see cref="P:System.Web.UI.Control.Controls" />
 
         
 
-         property. Since the <see
-         cref="T:System.Web.UI.Control" />
+         property. Since the <see cref="T:System.Web.UI.Control" />
 
         
 
          class is the base class for all ASP.NET server controls, all server controls inherit this property.</para
       >
       <para
-        >For more information about collections, see <format
-         type="text/html">
+        >For more information about collections, see <format type="text/html">
           <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
         </format>
 
@@ -73,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -82,7 +77,11 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,8 +110,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The new control is added to the end of an ordinal index array. The control can be an instance of any ASP.NET server control, a custom server control you create, or a literal control.</para>
           <para
-            >To add a control to the collection at a specific index location, use the <see
-             cref="M:System.Web.UI.ControlCollection.AddAt(System.Int32,System.Web.UI.Control)" />
+            >To add a control to the collection at a specific index location, use the <see cref="M:System.Web.UI.ControlCollection.AddAt(System.Int32,System.Web.UI.Control)" />
 
             
 
@@ -122,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.Control" />
+            >Adds the specified <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -131,12 +128,15 @@
           >
         </summary>
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -169,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.Control" />
+            >Adds the specified <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -178,19 +177,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location in the array at which to add the child control. </param
         >
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -213,18 +219,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to empty a custom control's <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Use this method to empty a custom control's <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             when you override the <see
-             cref="M:System.Web.UI.Control.CreateChildControls" />
+             when you override the <see cref="M:System.Web.UI.Control.CreateChildControls" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.Control.DataBind" />
+             and <see cref="M:System.Web.UI.Control.DataBind" />
 
             
 
@@ -234,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all controls from the current server control's <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Removes all controls from the current server control's <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -265,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified server control is in the parent server control's <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Determines whether the specified server control is in the parent server control's <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -278,7 +279,11 @@
           <para>true if the specified server control exists in the collection; otherwise, false.</para>
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,18 +310,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the child controls stored in the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Copies the child controls stored in the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object to an <see
-             cref="T:System.Array" />
+             object to an <see cref="T:System.Array" />
 
             
 
-             object, beginning at the specified index location in the <see
-             cref="T:System.Array" />
+             object, beginning at the specified index location in the <see cref="T:System.Array" />
 
             
 
@@ -324,24 +326,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
            to copy the child controls to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based relative index in <paramref
-           name="array" />
+          The zero-based relative index in <paramref name="array" />
 
           
 
@@ -365,8 +373,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of server controls in the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets the number of server controls in the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -394,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an enumerator that can iterate through the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Retrieves an enumerator that can iterate through the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -425,15 +431,11 @@
         <Parameter Name="c" Type="System.Web.UI.Control" />
       </Parameters>
       <Docs>
-        <param name="c"
-          >a <see
-           cref="T:System.Web.UI.Control" />
-        </param>
+        <param name="c">a <see cref="T:System.Web.UI.Control" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine the index location of the specified server control in the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Use this method to determine the index location of the specified server control in the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -443,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the index of a specified <see
-             cref="T:System.Web.UI.Control" />
+            >Retrieves the index of a specified <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -473,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -499,8 +499,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -548,8 +547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ASP.NET server control to which the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets the ASP.NET server control to which the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -578,8 +576,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a control from an index location, use the <see
-             cref="M:System.Web.UI.ControlCollection.RemoveAt(System.Int32)" />
+            >To remove a control from an index location, use the <see cref="M:System.Web.UI.ControlCollection.RemoveAt(System.Int32)" />
 
             
 
@@ -589,8 +586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified server control from the parent server control's <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Removes the specified server control from the parent server control's <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -598,7 +594,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -623,8 +623,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To remove a control from the collection based on its value, use the <see
-             cref="M:System.Web.UI.ControlCollection.Remove(System.Web.UI.Control)" />
+            >To remove a control from the collection based on its value, use the <see cref="M:System.Web.UI.ControlCollection.Remove(System.Web.UI.Control)" />
 
             
 
@@ -634,8 +633,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a child control, at the specified index location, from the <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Removes a child control, at the specified index location, from the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -643,7 +641,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

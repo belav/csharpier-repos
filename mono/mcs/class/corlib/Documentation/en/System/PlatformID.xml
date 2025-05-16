@@ -25,41 +25,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="P:System.Environment.OSVersion" />
+        >Use the <see cref="P:System.Environment.OSVersion" />
 
         
 
-         and <see
-         cref="P:System.OperatingSystem.Platform" />
+         and <see cref="P:System.OperatingSystem.Platform" />
 
         
 
-         properties to obtain the <see
-         cref="T:System.PlatformID" />
+         properties to obtain the <see cref="T:System.PlatformID" />
 
         
 
-         enumeration for the currently executing operating system or development platform. Use the <see
-         cref="T:System.PlatformID" />
+         enumeration for the currently executing operating system or development platform. Use the <see cref="T:System.PlatformID" />
 
         
 
          enumeration to help determine whether the current operating system or development platform supports your application.</para
       >
       <para
-        >You can use the underlying integer value of each <see
-         cref="T:System.PlatformID" />
+        >You can use the underlying integer value of each <see cref="T:System.PlatformID" />
 
         
 
-         enumeration member, as shown in the table, as the <paramref
-         name="PlatformId" />
+         enumeration member, as shown in the table, as the <paramref name="PlatformId" />
 
         
 
-         argument for the <format
-         type="text/html">
+         argument for the <format type="text/html">
           <a href="0c25ff6c-bff3-422e-b017-146a3ee86cb9">SignTool.exe (Sign Tool)</a>
         </format>
 

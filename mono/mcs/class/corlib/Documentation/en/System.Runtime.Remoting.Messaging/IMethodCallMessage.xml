@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+        >An <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
         
 
@@ -74,7 +73,11 @@
           <para>The requested argument that is not marked as an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,7 +114,11 @@
           <para>The name of a specific argument that is not marked as an out parameter.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -157,18 +164,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgs" />
+            >Although the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgs" />
 
             
 
-             property is redundant since the same functionality can be achieved with the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" />
+             property is redundant since the same functionality can be achieved with the <see cref="P:System.Runtime.Remoting.Messaging.IMethodCallMessage.InArgCount" />
 
             
 
-             and <see
-             cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" />
+             and <see cref="M:System.Runtime.Remoting.Messaging.IMethodCallMessage.GetInArg(System.Int32)" />
 
             
 

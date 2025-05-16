@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -44,10 +46,7 @@
       </Parameters>
       <Docs>
         <summary>Writes the whole element to the argument XmlWriter.</summary>
-        <param name="writer"
-          >a <see
-           cref="T:System.Xml.XmlWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Xml.XmlWriter" /></param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -69,10 +68,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the target grammar location.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -88,10 +84,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains overriding "start" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -107,10 +100,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains overriding "define" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -126,10 +116,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains overriding "div" components.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngGrammarContentList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -142,17 +129,13 @@
       <Parameters />
       <Docs>
         <summary
-          >Returns the context namespace. This namespace is filled when read through <see
-           cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" />
+          >Returns the context namespace. This namespace is filled when read through <see cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" />
 
           
 
            and that affects on the compilation of the components contained in this include.</summary
         >
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

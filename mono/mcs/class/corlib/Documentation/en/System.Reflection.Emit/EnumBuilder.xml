@@ -41,23 +41,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see
-           cref="T:System.Reflection.Emit.TypeBuilder" />
+          >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see cref="T:System.Reflection.Emit.TypeBuilder" />
 
           
 
-           because <see
-           cref="T:System.Reflection.Emit.EnumBuilder" />
+           because <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
           
 
-           emits enumerations whose elements are of type <see
-           cref="T:System.Int32" />
+           emits enumerations whose elements are of type <see cref="T:System.Int32" />
 
           
 
-           instead of the enumeration type. In the .NET Framework version 2.0, <see
-           cref="T:System.Reflection.Emit.EnumBuilder" />
+           instead of the enumeration type. In the .NET Framework version 2.0, <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
           
 
@@ -120,8 +116,7 @@
           <para>The format of the returned string is: </para>
           <para>&lt;FullTypeName&gt;, &lt;AssemblyDisplayName&gt; </para>
           <para
-            >See <see
-             cref="T:System.Reflection.AssemblyName" />
+            >See <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -156,13 +151,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the parent <see
-             cref="T:System.Type" />
+            >Returns the parent <see cref="T:System.Type" />
 
             
 
-             of this type which is always <see
-             cref="T:System.Enum" />
+             of this type which is always <see cref="T:System.Enum" />
 
             
 
@@ -192,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Type" />
+            >Creates a <see cref="T:System.Type" />
 
             
 
@@ -203,8 +195,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -234,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the type that declared this <see
-             cref="T:System.Reflection.Emit.EnumBuilder" />
+            >Returns the type that declared this <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
             
 
@@ -270,18 +260,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The defined field will have the field attributes <see
-             cref="F:System.Reflection.FieldAttributes.Public" />
+            >The defined field will have the field attributes <see cref="F:System.Reflection.FieldAttributes.Public" />
 
             
 
-            , <see
-             cref="F:System.Reflection.FieldAttributes.Static" />
+            , <see cref="F:System.Reflection.FieldAttributes.Static" />
 
             
 
-            , and <see
-             cref="F:System.Reflection.FieldAttributes.Literal" />
+            , and <see cref="F:System.Reflection.FieldAttributes.Literal" />
 
             
 
@@ -289,23 +276,19 @@
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see
-               cref="T:System.Reflection.Emit.TypeBuilder" />
+              >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see cref="T:System.Reflection.Emit.TypeBuilder" />
 
               
 
-               because <see
-               cref="T:System.Reflection.Emit.EnumBuilder" />
+               because <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
               
 
-               emits enumerations whose elements are of type <see
-               cref="T:System.Int32" />
+               emits enumerations whose elements are of type <see cref="T:System.Int32" />
 
               
 
-               instead of the enumeration type. In the .NET Framework version 2.0, <see
-               cref="T:System.Reflection.Emit.EnumBuilder" />
+               instead of the enumeration type. In the .NET Framework version 2.0, <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
               
 
@@ -322,14 +305,22 @@
           <para>The defined field.</para>
         </returns>
         <param name="literalName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the static field. </param
         >
         <param name="literalValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -452,13 +443,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the constructor of a finished type, you can retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the constructor of a finished type, you can retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -468,8 +457,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >Returns an array of <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -479,8 +467,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.ConstructorInfo" />
+            >Returns an array of <see cref="T:System.Reflection.ConstructorInfo" />
 
             
 
@@ -488,12 +475,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -526,26 +516,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the custom attributes of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the custom attributes of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             and call <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+             and call <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
-             on the returned <see
-             cref="T:System.Type" />
+             on the returned <see cref="T:System.Type" />
 
             
 
             .</para
           >
           <para
-            >The following code sample illustrates the use of GetCustomAttribute in the context of <see
-             cref="T:System.Reflection.Emit.EnumBuilder" />
+            >The following code sample illustrates the use of GetCustomAttribute in the context of <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
             
 
@@ -560,8 +546,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of objects representing all the custom attributes of the constructor represented by this <see
-             cref="T:System.Reflection.Emit.ConstructorBuilder" />
+            >Returns an array of objects representing all the custom attributes of the constructor represented by this <see cref="T:System.Reflection.Emit.ConstructorBuilder" />
 
             
 
@@ -569,7 +554,11 @@
           >
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -603,26 +592,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the custom attributes of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the custom attributes of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             and call <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+             and call <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
-             on the returned <see
-             cref="T:System.Type" />
+             on the returned <see cref="T:System.Type" />
 
             
 
             .</para
           >
           <para
-            >The following code sample illustrates the use of GetCustomAttribute in the context of <see
-             cref="T:System.Reflection.Emit.EnumBuilder" />
+            >The following code sample illustrates the use of GetCustomAttribute in the context of <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
             
 
@@ -637,8 +622,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of objects representing the attributes of this constructor that are of <see
-             cref="T:System.Type" />
+            >Returns an array of objects representing the attributes of this constructor that are of <see cref="T:System.Type" />
             <paramref name="attributeType" />
 
             
@@ -647,14 +631,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -683,8 +675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling this method always throws <see
-             cref="T:System.NotSupportedException" />
+            >Calling this method always throws <see cref="T:System.NotSupportedException" />
 
             
 
@@ -749,13 +740,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the event of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the event of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -769,8 +758,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Reflection.EventInfo" />
+            >Returns an <see cref="T:System.Reflection.EventInfo" />
 
             
 
@@ -778,19 +766,26 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the event to get. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This invocation attribute. This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -821,13 +816,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the events of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the events of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -841,8 +834,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.EventInfo" />
+            >Returns an array of <see cref="T:System.Reflection.EventInfo" />
 
             
 
@@ -876,13 +868,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the events of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the events of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -896,8 +886,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.EventInfo" />
+            >Returns an array of <see cref="T:System.Reflection.EventInfo" />
 
             
 
@@ -905,12 +894,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -944,13 +936,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the field of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the field of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -964,8 +954,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Returns the <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -973,19 +962,26 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the field to get. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1018,21 +1014,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the field of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the field of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
              and use reflection on the retrieved type.</para
           >
           <para
-            >The <see
-             cref="M:System.Reflection.Emit.EnumBuilder.GetFields(System.Reflection.BindingFlags)" />
+            >The <see cref="M:System.Reflection.Emit.EnumBuilder.GetFields(System.Reflection.BindingFlags)" />
 
             
 
@@ -1046,8 +1039,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.FieldInfo" />
+            >Returns an array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -1055,12 +1047,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1094,13 +1089,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the interface of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the interface of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1114,8 +1107,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Type" />
+            >Returns a <see cref="T:System.Type" />
 
             
 
@@ -1123,14 +1115,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the interface. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1168,13 +1168,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the interface mapping types of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the interface mapping types of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1190,7 +1188,11 @@
           <para>The requested interface mapping.</para>
         </returns>
         <param name="interfaceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1218,13 +1220,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the interface of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the interface of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1238,8 +1238,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Type" />
+            >Returns an array of <see cref="T:System.Type" />
 
             
 
@@ -1275,13 +1274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the member of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the member of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1295,13 +1292,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Returns an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects representing the public and non-public members defined on this type if <paramref
-             name="nonPublic" />
+             objects representing the public and non-public members defined on this type if <paramref name="nonPublic" />
 
             
 
@@ -1309,26 +1304,37 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of member that is to be returned. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1361,13 +1367,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the members of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the members of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1381,8 +1385,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Returns an array of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -1390,12 +1393,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1466,13 +1472,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the methods of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the methods of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1486,13 +1490,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.MethodInfo" />
+            >Returns an array of <see cref="T:System.Reflection.MethodInfo" />
 
             
 
-             objects representing the public and non-public methods defined on this type if <paramref
-             name="nonPublic" />
+             objects representing the public and non-public methods defined on this type if <paramref name="nonPublic" />
 
             
 
@@ -1500,12 +1502,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1539,13 +1544,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the nested type of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the nested type of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1559,8 +1562,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
@@ -1568,24 +1570,30 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
            containing the name of the nested type to get. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitmask comprised of one or more <see
-           cref="T:System.Reflection.BindingFlags" />
+          A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1618,13 +1626,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the nested types of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the nested types of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1638,26 +1644,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Type" />
+            >An array of <see cref="T:System.Type" />
 
             
 
-             objects representing all the types nested within the current <see
-             cref="T:System.Type" />
+             objects representing all the types nested within the current <see cref="T:System.Type" />
 
             
 
              that match the specified binding constraints.</para
           >
           <para
-            >An empty array of type <see
-             cref="T:System.Type" />
+            >An empty array of type <see cref="T:System.Type" />
 
             
 
-            , if no types are nested within the current <see
-             cref="T:System.Type" />
+            , if no types are nested within the current <see cref="T:System.Type" />
 
             
 
@@ -1665,12 +1667,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1703,13 +1708,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to retrieve the properties of a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to retrieve the properties of a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1723,13 +1726,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of <see
-             cref="T:System.Reflection.PropertyInfo" />
+            >Returns an array of <see cref="T:System.Reflection.PropertyInfo" />
 
             
 
-             objects representing the public and non-public properties defined on this type if <paramref
-             name="nonPublic" />
+             objects representing the public and non-public properties defined on this type if <paramref name="nonPublic" />
 
             
 
@@ -1737,12 +1738,15 @@
           >
         </returns>
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This invocation attribute. This must be a bit flag from <see
-           cref="T:System.Reflection.BindingFlags" />
+          This invocation attribute. This must be a bit flag from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
@@ -1863,13 +1867,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >You can retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -1885,86 +1887,112 @@
           <para>Returns the return value of the invoked member.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member. </param
         >
         <param name="invokeAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The invocation attribute. This must be a bit flag from BindingFlags. </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see
-           cref="T:System.Reflection.Binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see cref="T:System.Reflection.Binder" />
 
           
 
           . </param
         >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object on which to invoke the specified member. If the member is static, this parameter is ignored. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument list. This is an array of objects that contains the number, order, and type of the parameters of the member to be invoked. If there are no parameters this should be null. </param
         >
         <param name="modifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of the same length as <paramref
-           name="args" />
+          An array of the same length as <paramref name="args" />
 
           
 
            with elements that represent the attributes associated with the arguments of the member to be invoked. A parameter has attributes associated with it in the metadata. They are used by various interoperability services. See the metadata specs for details such as this. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a string that represents 1000 to a double value, since 1000 is represented differently by different cultures.) </param
         >
         <param name="namedParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Each parameter in the <paramref
-           name="namedParameters" />
+          Each parameter in the <paramref name="namedParameters" />
 
           
 
-           array gets the value in the corresponding element in the <paramref
-           name="args" />
+           array gets the value in the corresponding element in the <paramref name="args" />
 
           
 
-           array. If the length of <paramref
-           name="args" />
+           array. If the length of <paramref name="args" />
 
           
 
-           is greater than the length of <paramref
-           name="namedParameters" />
+           is greater than the length of <paramref name="namedParameters" />
 
           
 
@@ -2018,8 +2046,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether a specified <see
-             cref="T:System.Reflection.TypeInfo" />
+            >Gets a value that indicates whether a specified <see cref="T:System.Reflection.TypeInfo" />
 
             
 
@@ -2029,8 +2056,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="typeInfo" />
+            >true if <paramref name="typeInfo" />
 
             
 
@@ -2038,7 +2064,11 @@
           >
         </returns>
         <param name="typeInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2138,18 +2168,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As a workaround, to check if a custom attribute is defined for a finished type, retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >As a workaround, to check if a custom attribute is defined for a finished type, retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             and call <see
-             cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+             and call <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
             
 
-             on the returned <see
-             cref="T:System.Type" />
+             on the returned <see cref="T:System.Type" />
 
             
 
@@ -2163,8 +2190,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instance of <paramref
-             name="attributeType" />
+            >true if one or more instance of <paramref name="attributeType" />
 
             
 
@@ -2172,14 +2198,22 @@
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2364,8 +2398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the dynamic module that contains this <see
-             cref="T:System.Reflection.Emit.EnumBuilder" />
+            >Retrieves the dynamic module that contains this <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
             
 
@@ -2437,8 +2470,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the type that was used to obtain this <see
-             cref="T:System.Reflection.Emit.EnumBuilder" />
+            >Returns the type that was used to obtain this <see cref="T:System.Reflection.Emit.EnumBuilder" />
 
             
 
@@ -2475,7 +2507,11 @@
           <para>Sets a custom attribute using a custom attribute builder.</para>
         </summary>
         <param name="customBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2514,20 +2550,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref
-             name="binaryAttribute" />
+            >See the metadata specification in the ECMA Partition II documentation for details on how to format <paramref name="binaryAttribute" />
 
             
 
             . The documentation is available online; see <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
             >
 
             
 
              on MSDN and <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
 
@@ -2541,14 +2576,22 @@
           <para>Sets a custom attribute using a specified custom attribute blob.</para>
         </summary>
         <param name="con">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2618,8 +2661,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -2631,21 +2673,33 @@
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2744,13 +2798,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can retrieve the type using <see
-             cref="M:System.Type.GetType" />
+            >You can retrieve the type using <see cref="M:System.Type.GetType" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 

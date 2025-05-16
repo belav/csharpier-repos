@@ -22,36 +22,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+        >Apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
         
 
-         attribute in conjunction with the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+         attribute in conjunction with the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-         to identify members of a type that are part of a data contract. One of the serializers that can serialize data contracts is the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         to identify members of a type that are part of a data contract. One of the serializers that can serialize data contracts is the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
         . </para
       >
       <para
-        >The data contract model is an "opt-in" model. Applying the <see
-         cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+        >The data contract model is an "opt-in" model. Applying the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
         
 
-         to a field or property explicitly specifies that the member value will be serialized. In contrast, the <see
-         cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+         to a field or property explicitly specifies that the member value will be serialized. In contrast, the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 
-         serializes public and private fields of a type, and the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         serializes public and private fields of a type, and the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -59,8 +53,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can apply the <see
-           cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+          >You can apply the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
           
 
@@ -68,13 +61,11 @@
         >
       </block>
       <para
-        >By default, the CLR member name is used as the name of the data member. By setting the <see
-         cref="P:System.Runtime.Serialization.DataMemberAttribute.Name" />
+        >By default, the CLR member name is used as the name of the data member. By setting the <see cref="P:System.Runtime.Serialization.DataMemberAttribute.Name" />
 
         
 
-         property, you can customize the name of the data member. This can be used to provide a name that may not be allowed as a CLR member name. When mapping to XML using the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         property, you can customize the name of the data member. This can be used to provide a name that may not be allowed as a CLR member name. When mapping to XML using the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -82,8 +73,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Properties to which the <see
-           cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+          >Properties to which the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
           
 
@@ -91,15 +81,13 @@
         >
       </block>
       <para
-        >For more information about data contracts and data members, see <format
-         type="text/html">
+        >For more information about data contracts and data members, see <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Using Data Contracts</a>
         </format>
 
         
 
-        . For more information about member names, see <format
-         type="text/html">
+        . For more information about member names, see <format type="text/html">
           <a href="53a3b505-4b27-444b-b079-0eb84a97cfd8">Data Member Default Values</a>
         </format>
 
@@ -111,8 +99,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When applied to the member of a type, specifies that the member is part of a data contract and is serializable by the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >When applied to the member of a type, specifies that the member is part of a data contract and is serializable by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -137,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
             
 
@@ -162,8 +148,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the dnprdnshort, types have a concept of default values. For example, for any reference type the default value is null, and for an integer type it is 0. It is occasionally desirable to omit a data member from the serialized data when it is set to its default value. To do this, set the <see
-             cref="P:System.Runtime.Serialization.DataMemberAttribute.EmitDefaultValue" />
+            >In the dnprdnshort, types have a concept of default values. For example, for any reference type the default value is null, and for an integer type it is 0. It is occasionally desirable to omit a data member from the serialized data when it is set to its default value. To do this, set the <see cref="P:System.Runtime.Serialization.DataMemberAttribute.EmitDefaultValue" />
 
             
 
@@ -171,8 +156,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting the <see
-               cref="P:System.Runtime.Serialization.DataMemberAttribute.EmitDefaultValue" />
+              >Setting the <see cref="P:System.Runtime.Serialization.DataMemberAttribute.EmitDefaultValue" />
 
               
 
@@ -201,15 +185,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property is used for ensuring compatibility with future versions of a type. For more information, see <format
-             type="text/html">
+            >The property is used for ensuring compatibility with future versions of a type. For more information, see <format type="text/html">
               <a href="4a0700cb-5f5f-4137-8705-3a3ecf06461f">Data Contract Versioning</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="bf0ab338-4d36-4e12-8002-8ebfdeb346cb"
                 >Best Practices: Data Contract Versioning</a
               >
@@ -241,16 +223,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used to override the default name of the data member that is derived from the name of the member annotated with the <see
-             cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+            >This property is used to override the default name of the data member that is derived from the name of the member annotated with the <see cref="T:System.Runtime.Serialization.DataMemberAttribute" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="P:System.Runtime.Serialization.DataMemberAttribute.Name" />
+            >The <see cref="P:System.Runtime.Serialization.DataMemberAttribute.Name" />
 
             
 
@@ -278,8 +258,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a type requires that one member be serialized or deserialized before another, use this property to specify the order. For more information, see <format
-             type="text/html">
+            >If a type requires that one member be serialized or deserialized before another, use this property to specify the order. For more information, see <format type="text/html">
               <a href="0658a47d-b6e5-4ae0-ba72-ababc3c6ff33">Data Member Order</a>
             </format>
 

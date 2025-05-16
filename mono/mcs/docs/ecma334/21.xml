@@ -2,9 +2,7 @@
 <clause number="21" title="Enums">
   <paragraph
     >An enum type is a distinct type that declares a set of named constants. <example
-
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 enum Color  
 {  

@@ -24,18 +24,16 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In many scenarios, it is useful to enable a <see
-         cref="T:System.Threading.Tasks.Task`1" />
+        >In many scenarios, it is useful to enable a <see cref="T:System.Threading.Tasks.Task`1" />
 
         
 
-         to represent an external asynchronous operation. <see
-         cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+         to represent an external asynchronous operation. <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
         
 
          is provided for this purpose. It enables the creation of a task that can be handed out to consumers, and those consumers can use the members of the task as they would any other. However, unlike most tasks, the state of a task created by a TaskCompletionSource is controlled explicitly by the methods on TaskCompletionSource. This enables the completion of the external asynchronous operation to be propagated to the underlying Task. The separation also ensures that consumers are not able to transition the state without access to the corresponding TaskCompletionSource. For more information, see the entry <see
-         cref="http://blogs.msdn.com/b/pfxteam/archive/2009/06/02/9685804.aspx"
+          cref="http://blogs.msdn.com/b/pfxteam/archive/2009/06/02/9685804.aspx"
           >The Nature of TaskCompletionSource&lt;TResult&gt;</see
         >
 
@@ -44,13 +42,13 @@
          in the Parallel Programming with .NET blog.</para
       >
       <para
-        >The <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=165717">Parallel Extensions samples</see>
+        >The <see cref="http://go.microsoft.com/fwlink/?LinkID=165717"
+          >Parallel Extensions samples</see
+        >
 
         
 
-         also contain examples of how to use <see
-         cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+         also contain examples of how to use <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
         
 
@@ -60,13 +58,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the producer side of a <see
-         cref="T:System.Threading.Tasks.Task`1" />
+        >Represents the producer side of a <see cref="T:System.Threading.Tasks.Task`1" />
 
         
 
-         unbound to a delegate, providing access to the consumer side through the <see
-         cref="P:System.Threading.Tasks.TaskCompletionSource`1.Task" />
+         unbound to a delegate, providing access to the consumer side through the <see cref="P:System.Threading.Tasks.TaskCompletionSource`1.Task" />
 
         
 
@@ -91,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+            >Creates a <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
             
 
@@ -119,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+            >Creates a <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
             
 
@@ -128,12 +122,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The state to use as the underlying <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The state to use as the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
@@ -161,18 +158,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >The <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             created by this instance and accessible through its <see
-             cref="P:System.Threading.Tasks.TaskCompletionSource`1.Task" />
+             created by this instance and accessible through its <see cref="P:System.Threading.Tasks.TaskCompletionSource`1.Task" />
 
             
 
-             property will be instantiated using the specified <paramref
-             name="creationOptions" />
+             property will be instantiated using the specified <paramref name="creationOptions" />
 
             
 
@@ -182,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+            >Creates a <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
             
 
@@ -191,12 +184,15 @@
           >
         </summary>
         <param name="creationOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The options to use when creating the underlying <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The options to use when creating the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
@@ -226,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+            >Creates a <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
             
 
@@ -235,24 +230,30 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The state to use as the underlying <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The state to use as the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
           's AsyncState.</param
         >
         <param name="creationOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The options to use when creating the underlying <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The options to use when creating the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
@@ -279,13 +280,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transitions the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Transitions the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             into the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+             into the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
@@ -321,13 +320,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transitions the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Transitions the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             into the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+             into the <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
@@ -335,12 +332,15 @@
           >
         </summary>
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection of exceptions to bind to this <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The collection of exceptions to bind to this <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
@@ -369,13 +369,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transitions the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Transitions the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             into the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+             into the <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
@@ -383,12 +381,15 @@
           >
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception to bind to this <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The exception to bind to this <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
@@ -439,47 +440,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables a consumer to access the <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This property enables a consumer to access the <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             that is controlled by this instance. When you create a <see
-             cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+             that is controlled by this instance. When you create a <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
             
 
-             object, the <see
-             cref="P:System.Threading.Tasks.Task.Status" />
+             object, the <see cref="P:System.Threading.Tasks.Task.Status" />
 
             
 
-             property of this <see
-             cref="T:System.Threading.Tasks.Task`1" />
+             property of this <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             object returns <see
-             cref="F:System.Threading.Tasks.TaskStatus.WaitingForActivation" />
+             object returns <see cref="F:System.Threading.Tasks.TaskStatus.WaitingForActivation" />
           </para>
           <para
-            > The <see
-             cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetResult(`0)" />
+            > The <see cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetResult(`0)" />
 
             
 
-            , <see
-             cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetException(System.Exception)" />
+            , <see cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetException(System.Exception)" />
 
             
 
-            , <see
-             cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetException(System.Collections.Generic.IEnumerable{System.Exception})" />
+            , <see cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetException(System.Collections.Generic.IEnumerable{System.Exception})" />
 
             
 
-            , and <see
-             cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetCanceled" />
+            , and <see cref="M:System.Threading.Tasks.TaskCompletionSource`1.SetCanceled" />
 
             
 
@@ -489,13 +481,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Gets the <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             created by this <see
-             cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
+             created by this <see cref="T:System.Threading.Tasks.TaskCompletionSource`1" />
 
             
 
@@ -522,31 +512,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will return false if the <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will return false if the <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             is already in one of the three final states: <see
-             cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+             is already in one of the three final states: <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
 
             
 
-            , <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+            , <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
-            , or <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+            , or <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
             . </para
           >
           <para
-            >This method also returns false if the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This method also returns false if the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -556,13 +541,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to transition the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Attempts to transition the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             into the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+             into the <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
@@ -601,23 +584,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will return false if the <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will return false if the <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             is already in one of the three final states: <see
-             cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+             is already in one of the three final states: <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
 
             
 
-            , <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+            , <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
-            , or <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+            , or <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
@@ -627,13 +606,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to transition the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Attempts to transition the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             into the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+             into the <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
@@ -645,12 +622,15 @@
           <para>True if the operation was successful; otherwise, false.</para>
         </returns>
         <param name="exceptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The collection of exceptions to bind to this <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The collection of exceptions to bind to this <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 
@@ -678,23 +658,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will return false if the <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will return false if the <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             is already in one of the three final states: <see
-             cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
+             is already in one of the three final states: <see cref="F:System.Threading.Tasks.TaskStatus.RanToCompletion" />
 
             
 
-            , <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+            , <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
-            , or <see
-             cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+            , or <see cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
 
             
 
@@ -704,13 +680,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempts to transition the underlying <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Attempts to transition the underlying <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-             into the <see
-             cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+             into the <see cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
 
             
 
@@ -722,12 +696,15 @@
           <para>True if the operation was successful; otherwise, false.</para>
         </returns>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception to bind to this <see
-           cref="T:System.Threading.Tasks.Task`1" />
+          The exception to bind to this <see cref="T:System.Threading.Tasks.Task`1" />
 
           
 

@@ -19,36 +19,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.TemplateInstanceAttribute" />
+        >The <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
         
 
-         class allows you to mark a template property as one that allows single or multiple instantiations. A template that only allows a single instantiation can have the controls that are contained inside of it referenced. The <see
-         cref="P:System.Web.UI.WebControls.WebParts.WebPartZone.ZoneTemplate" />
+         class allows you to mark a template property as one that allows single or multiple instantiations. A template that only allows a single instantiation can have the controls that are contained inside of it referenced. The <see cref="P:System.Web.UI.WebControls.WebParts.WebPartZone.ZoneTemplate" />
 
         
 
          property is an example of a property that can be instantiated only one time.</para
       >
       <para
-        >This <see
-         cref="T:System.Web.UI.TemplateInstanceAttribute" />
+        >This <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
         
 
-         class is optional. If a template property is not extended with a <see
-         cref="T:System.Web.UI.TemplateInstanceAttribute" />
+         class is optional. If a template property is not extended with a <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
         
 
-         class, the default value, the <see
-         cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
+         class, the default value, the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
 
         
 
-         field, is used. For more information about using attributes, see <format
-         type="text/html">
+         field, is used. For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -79,13 +73,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Web.UI.TemplateInstance" />
+             class with the specified <see cref="T:System.Web.UI.TemplateInstance" />
 
             
 
@@ -111,8 +103,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior is to create multiple instances of the template using the <see
-             cref="F:System.Web.UI.TemplateInstance.Multiple" />
+            >The default behavior is to create multiple instances of the template using the <see cref="F:System.Web.UI.TemplateInstance.Multiple" />
 
             
 
@@ -122,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the default value for the <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Defines the default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -150,13 +140,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified object is a <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Indicates whether the specified object is a <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
-             object and is identical to the this <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+             object and is identical to the this <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -166,13 +154,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if value is both a <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >true if value is both a <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
-             object and is identical to the this <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+             object and is identical to the this <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -180,12 +166,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -209,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for this <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Gets a hash code for this <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -220,8 +208,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for this <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >The hash code for this <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -248,13 +235,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible values are either the <see
-             cref="F:System.Web.UI.TemplateInstanceAttribute.Single" />
+            >The possible values are either the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Single" />
 
             
 
-             field or the <see
-             cref="F:System.Web.UI.TemplateInstance.Multiple" />
+             field or the <see cref="F:System.Web.UI.TemplateInstance.Multiple" />
 
             
 
@@ -264,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.TemplateInstance" />
+            >Gets the <see cref="T:System.Web.UI.TemplateInstance" />
 
             
 
@@ -289,13 +273,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >The default value for the <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
-             class is the <see
-             cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
+             class is the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
 
             
 
@@ -305,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating if the current <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Returns a value indicating if the current <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
-             object is the same as the default <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+             object is the same as the default <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -321,8 +301,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of the current instance of <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >true if the value of the current instance of <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -348,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
+            >If the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Multiple" />
 
             
 
@@ -359,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Creates an instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 
@@ -386,8 +363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="F:System.Web.UI.TemplateInstanceAttribute.Single" />
+            >If the <see cref="F:System.Web.UI.TemplateInstanceAttribute.Single" />
 
             
 
@@ -397,8 +373,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.UI.TemplateInstanceAttribute" />
+            >Creates an instance of the <see cref="T:System.Web.UI.TemplateInstanceAttribute" />
 
             
 

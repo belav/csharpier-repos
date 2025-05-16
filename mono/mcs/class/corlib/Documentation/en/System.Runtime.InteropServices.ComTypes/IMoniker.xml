@@ -22,8 +22,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>For more information about the IMoniker, IPersist, and IPersistStream interfaces, see the MSDN Library.</para>
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -440,7 +439,11 @@
           <para>An S_OK HRESULT value if the monikers are identical; otherwise, an S_FALSE HRESULT value.  </para>
         </returns>
         <param name="pmkOtherMoniker">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -485,21 +488,33 @@
           <para>An S_OK HRESULT value if the moniker is running; an S_FALSE HRESULT value if the moniker is not running; or an E_UNEXPECTED HRESULT value.</para>
         </returns>
         <param name="pbc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A reference to the bind context to use in this binding operation. </param
         >
         <param name="pmkToLeft">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A reference to the moniker to the left of the current moniker if the current moniker is part of a composite. </param
         >
         <param name="pmkNewlyRunning">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -563,7 +578,11 @@
           <para>Initializes an object from the stream where it was previously saved.</para>
         </summary>
         <param name="pStm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -716,14 +735,22 @@
           <para>Saves an object to the specified stream.</para>
         </summary>
         <param name="pStm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream to which the object is saved. </param
         >
         <param name="fClearDirty">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

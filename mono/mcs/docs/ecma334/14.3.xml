@@ -2,38 +2,37 @@
 <clause number="14.3" title="Member lookup">
   <paragraph
     >A member lookup is the process whereby the meaning of a name in the context of a type is determined. A member lookup may occur as part of evaluating a <non_terminal
-     where="14.5.2">simple-name</non_terminal>
+      where="14.5.2"
+      >simple-name</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.2</hyperlink>
+     (<hyperlink>14.5.2</hyperlink>
 
     
 
     ) or a <non_terminal
-     where="14.5.4">member-access</non_terminal>
+      where="14.5.4"
+      >member-access</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.4</hyperlink>
+     (<hyperlink>14.5.4</hyperlink>
 
     
 
     ) in an expression. </paragraph
   >
   <paragraph
-    >A member lookup of a name N in a type T is processed as follows: <list
-    >
+    >A member lookup of a name N in a type T is processed as follows: <list>
       <list_item
-        > First, the set of all accessible (<hyperlink
-        >10.5</hyperlink>
+        > First, the set of all accessible (<hyperlink>10.5</hyperlink>
 
         
 
-        ) members named N declared in T and the base types (<hyperlink
-        >14.3.1</hyperlink>
+        ) members named N declared in T and the base types (<hyperlink>14.3.1</hyperlink>
 
         
 
@@ -53,8 +52,7 @@
     </list>
   </paragraph>
   <paragraph
-    >For member lookups in types other than interfaces, and member lookups in interfaces that are strictly  single-inheritance (each interface in the inheritance chain has exactly zero or one direct base interface), the effect of the lookup rules is simply that derived members hide base members with the same name or signature. Such single-inheritance lookups are never ambiguous. The ambiguities that can possibly arise from member lookups in multiple-inheritance interfaces are described in <hyperlink
-    >20.2.5</hyperlink>
+    >For member lookups in types other than interfaces, and member lookups in interfaces that are strictly  single-inheritance (each interface in the inheritance chain has exactly zero or one direct base interface), the effect of the lookup rules is simply that derived members hide base members with the same name or signature. Such single-inheritance lookups are never ambiguous. The ambiguities that can possibly arise from member lookups in multiple-inheritance interfaces are described in <hyperlink>20.2.5</hyperlink>
 
     
 

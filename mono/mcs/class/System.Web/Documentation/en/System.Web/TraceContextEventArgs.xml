@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.TraceContextEventArgs" />
+        >The <see cref="T:System.Web.TraceContextEventArgs" />
 
         
 
-         class is used by the <see
-         cref="T:System.Web.TraceContext" />
+         class is used by the <see cref="T:System.Web.TraceContext" />
 
         
 
-         class to provide access to trace records after all the tracing information is gathered during HTTP request processing. By adding an event handler delegate to handle the <see
-         cref="E:System.Web.TraceContext.TraceFinished" />
+         class to provide access to trace records after all the tracing information is gathered during HTTP request processing. By adding an event handler delegate to handle the <see cref="E:System.Web.TraceContext.TraceFinished" />
 
         
 
@@ -35,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a collection of trace records to any method that handles the <see
-         cref="E:System.Web.TraceContext.TraceFinished" />
+        >Provides a collection of trace records to any method that handles the <see cref="E:System.Web.TraceContext.TraceFinished" />
 
         
 
@@ -60,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.TraceContextEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.TraceContextEventArgs" />
 
             
 
@@ -69,12 +64,15 @@
           >
         </summary>
         <param name="records">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Web.TraceContextRecord" />
+          A collection of <see cref="T:System.Web.TraceContextRecord" />
 
           
 
@@ -100,41 +98,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Every call to the <see
-             cref="Overload:System.Web.TraceContext.Write" />
+            >Every call to the <see cref="Overload:System.Web.TraceContext.Write" />
 
             
 
-             and <see
-             cref="Overload:System.Web.TraceContext.Warn" />
+             and <see cref="Overload:System.Web.TraceContext.Warn" />
 
             
 
-             methods generates a <see
-             cref="T:System.Web.TraceContextRecord" />
+             methods generates a <see cref="T:System.Web.TraceContextRecord" />
 
             
 
-             object that is added to the <see
-             cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
+             object that is added to the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
 
             
 
-             messages collection. The <see
-             cref="Overload:System.Web.TraceContext.Warn" />
+             messages collection. The <see cref="Overload:System.Web.TraceContext.Warn" />
 
             
 
-             method call sets the <see
-             cref="P:System.Web.TraceContextRecord.IsWarning" />
+             method call sets the <see cref="P:System.Web.TraceContextRecord.IsWarning" />
 
             
 
              property to true, while the other method calls set it to false.</para
           >
           <para
-            >You can iterate through the <see
-             cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
+            >You can iterate through the <see cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
 
             
 
@@ -144,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Web.TraceContextRecord" />
+            >Gets a collection of <see cref="T:System.Web.TraceContextRecord" />
 
             
 

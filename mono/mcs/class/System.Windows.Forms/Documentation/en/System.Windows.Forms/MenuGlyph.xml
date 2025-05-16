@@ -13,13 +13,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The values of this enumeration are used in the <see
-         cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
+        >The values of this enumeration are used in the <see cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.ControlPaint" />
+         method of the <see cref="T:System.Windows.Forms.ControlPaint" />
 
         
 
@@ -29,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the image to draw when drawing a menu with the <see
-         cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
+        >Specifies the image to draw when drawing a menu with the <see cref="M:System.Windows.Forms.ControlPaint.DrawMenuGlyph(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.MenuGlyph)" />
 
         
 
@@ -100,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The maximum value available by this enumeration (equal to the <see
-             cref="F:System.Windows.Forms.MenuGlyph.Bullet" />
+            >The maximum value available by this enumeration (equal to the <see cref="F:System.Windows.Forms.MenuGlyph.Bullet" />
 
             
 
@@ -124,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The minimum value available by this enumeration (equal to the <see
-             cref="F:System.Windows.Forms.MenuGlyph.Arrow" />
+            >The minimum value available by this enumeration (equal to the <see cref="F:System.Windows.Forms.MenuGlyph.Arrow" />
 
             
 

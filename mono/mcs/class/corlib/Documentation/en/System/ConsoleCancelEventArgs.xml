@@ -19,41 +19,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A user can interrupt a console application process by simultaneously pressing the <see
-         cref="F:System.ConsoleModifiers.Control" />
+        >A user can interrupt a console application process by simultaneously pressing the <see cref="F:System.ConsoleModifiers.Control" />
 
         
 
-         modifier key and the <see
-         cref="F:System.ConsoleKey.C" />
+         modifier key and the <see cref="F:System.ConsoleKey.C" />
 
         
 
-         console key (Ctrl+C), or the <see
-         cref="F:System.ConsoleModifiers.Control" />
+         console key (Ctrl+C), or the <see cref="F:System.ConsoleModifiers.Control" />
 
         
 
-         modifier key and the Break console key (Ctrl+Break). The .NET Framework consequently provides a <see
-         cref="T:System.ConsoleCancelEventArgs" />
+         modifier key and the Break console key (Ctrl+Break). The .NET Framework consequently provides a <see cref="T:System.ConsoleCancelEventArgs" />
 
         
 
-         object to the event handler for the <see
-         cref="E:System.Console.CancelKeyPress" />
+         object to the event handler for the <see cref="E:System.Console.CancelKeyPress" />
 
         
 
          event to specify whether the process should be cancelled. </para
       >
       <para
-        >If the <see
-         cref="P:System.ConsoleCancelEventArgs.Cancel" />
+        >If the <see cref="P:System.ConsoleCancelEventArgs.Cancel" />
 
         
 
-         property is set to true in the event handler, the process is resumed; otherwise, the process is terminated. By default, the value of the <see
-         cref="T:System.ConsoleCancelEventArgs" />
+         property is set to true in the event handler, the process is resumed; otherwise, the process is terminated. By default, the value of the <see cref="T:System.ConsoleCancelEventArgs" />
 
         
 
@@ -63,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Console.CancelKeyPress" />
+        >Provides data for the <see cref="E:System.Console.CancelKeyPress" />
 
         
 
@@ -90,18 +82,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ConsoleCancelEventArgs.Cancel" />
+            >The <see cref="P:System.ConsoleCancelEventArgs.Cancel" />
 
             
 
-             property is automatically initialized to false when the handler for the <see
-             cref="E:System.Console.CancelKeyPress" />
+             property is automatically initialized to false when the handler for the <see cref="E:System.Console.CancelKeyPress" />
 
             
 
-             event is invoked. The value of the <see
-             cref="P:System.ConsoleCancelEventArgs.Cancel" />
+             event is invoked. The value of the <see cref="P:System.ConsoleCancelEventArgs.Cancel" />
 
             
 
@@ -112,13 +101,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether simultaneously pressing the <see
-             cref="F:System.ConsoleModifiers.Control" />
+            >Gets or sets a value that indicates whether simultaneously pressing the <see cref="F:System.ConsoleModifiers.Control" />
 
             
 
-             modifier key and the <see
-             cref="F:System.ConsoleKey.C" />
+             modifier key and the <see cref="F:System.ConsoleKey.C" />
 
             
 

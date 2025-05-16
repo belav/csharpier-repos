@@ -1,26 +1,26 @@
 <?xml version="1.0"?>
 <clause number="25.5.1" title="Pointer indirection">
   <paragraph
-    >A <non_terminal
-     where="25.5.1">pointer-indirection-expression</non_terminal>
-
-    
-
-     consists of an asterisk (*) followed by a <non_terminal
-     where="14.6">unary-expression</non_terminal>
-
-    
-
-    . <grammar_production
+    >A <non_terminal where="25.5.1"
+      >pointer-indirection-expression</non_terminal
     >
+
+    
+
+     consists of an asterisk (*) followed by a <non_terminal where="14.6"
+      >unary-expression</non_terminal
+    >
+
+    
+
+    . <grammar_production>
       <name>
         <non_terminal where="25.5.1">pointer-indirection-expression</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <terminal>*</terminal>
         <non_terminal where="14.6">unary-expression</non_terminal>
       </rhs>
@@ -31,9 +31,7 @@
   <paragraph>The effect of applying the unary * operator to a null pointer is implementation-defined. In particular, there is no guarantee that this operation throws a System.NullReferenceException. </paragraph>
   <paragraph
     >If an invalid value has been assigned to the pointer, the behavior of the unary * operator is undefined. <note
-
-      >[Note: Among the invalid values for dereferencing a pointer by the unary * operator are an address inappropriately aligned for the type pointed to (see example in <hyperlink
-      >25.4</hyperlink>
+      >[Note: Among the invalid values for dereferencing a pointer by the unary * operator are an address inappropriately aligned for the type pointed to (see example in <hyperlink>25.4</hyperlink>
 
       
 
@@ -41,8 +39,7 @@
     >
   </paragraph>
   <paragraph
-    >For purposes of definite assignment analysis, a variable produced by evaluating an expression of the form *P is considered initially assigned (<hyperlink
-    >12.3.1</hyperlink>
+    >For purposes of definite assignment analysis, a variable produced by evaluating an expression of the form *P is considered initially assigned (<hyperlink>12.3.1</hyperlink>
 
     
 

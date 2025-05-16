@@ -52,8 +52,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -66,8 +65,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -88,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
 
             
 
@@ -125,8 +122,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -139,8 +135,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -169,8 +164,7 @@
 
             
 
-             is set to <paramref
-             name="requireClientCertificate" />
+             is set to <paramref name="requireClientCertificate" />
 
             
 
@@ -180,8 +174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
 
             
 
@@ -189,7 +182,11 @@
           >
         </summary>
         <param name="requireClientCertificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,8 +218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new instance property values are set to the corresponding values in <paramref
-             name="other" />
+            >The new instance property values are set to the corresponding values in <paramref name="other" />
 
             
 
@@ -232,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
 
             
 
@@ -270,8 +265,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
 
                 
 
@@ -284,8 +278,7 @@
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+                 is set to <see cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
 
                 
 
@@ -307,8 +300,7 @@
 
             
 
-             is set to <paramref
-             name="requireCancellation" />
+             is set to <paramref name="requireCancellation" />
 
             
 
@@ -319,8 +311,7 @@
 
             
 
-             is set to <paramref
-             name="requireClientCertificate" />
+             is set to <paramref name="requireClientCertificate" />
 
             
 
@@ -330,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters" />
 
             
 
@@ -339,14 +329,22 @@
           >
         </summary>
         <param name="requireClientCertificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to require client certificate; otherwise, false.</param
         >
         <param name="requireCancellation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -375,36 +373,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
+            >The <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.Clone" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             and <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
-             methods follow the Core design pattern. <see
-             cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" />
+             methods follow the Core design pattern. <see cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" />
 
             
 
-             overrides <see
-             cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+             overrides <see cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" />
+            >The <see cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.CloneCore" />
 
             
 
-             method calls the <see
-             cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.SslSecurityTokenParameters)" />
+             method calls the <see cref="M:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.SslSecurityTokenParameters)" />
 
             
 
@@ -418,8 +410,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+            >A <see cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
 
             
 
@@ -455,13 +446,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a key identifier clause using the <see
-             cref="M:System.IdentityModel.Tokens.SecurityToken.CreateKeyIdentifierClause``1" />
+            >This method creates a key identifier clause using the <see cref="M:System.IdentityModel.Tokens.SecurityToken.CreateKeyIdentifierClause``1" />
 
             
 
-             method, with <paramref
-             name="referenceStyle" />
+             method, with <paramref name="referenceStyle" />
 
             
 
@@ -477,14 +466,22 @@
           <para>The key identifier clause for a token.</para>
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The token.</param
         >
         <param name="referenceStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -541,8 +538,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following properties of the <see
-             cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+            >The following properties of the <see cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
 
             
 
@@ -551,23 +547,19 @@
           <list type="bullet">
             <item>
               <para
-                >If <see
-                 cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
+                >If <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
 
                 
 
-                 is true, <see
-                 cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" />
+                 is true, <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" />
 
                 
 
-                 = <see
-                 cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.MutualSslNego" />
+                 = <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.MutualSslNego" />
 
                 
 
-                ; otherwise, it is set to <see
-                 cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.AnonymousSslNego" />
+                ; otherwise, it is set to <see cref="P:System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenTypes.AnonymousSslNego" />
 
                 
 
@@ -585,13 +577,11 @@
             </item>
             <item>
               <para
-                >The SupportSecurityContextCancellation property in <see
-                 cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+                >The SupportSecurityContextCancellation property in <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
 
                 
 
-                 is set to <see
-                 cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
+                 is set to <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
 
                 
 
@@ -600,8 +590,7 @@
             </item>
             <item>
               <para
-                >The IssuedSecurityTokenParameters property in <see
-                 cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
+                >The IssuedSecurityTokenParameters property in <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.Properties" />
 
                 
 
@@ -614,8 +603,7 @@
 
                 
 
-                 = <see
-                 cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+                 = <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
 
                 
 
@@ -629,7 +617,11 @@
           <para>Initializes a security token requirement.</para>
         </summary>
         <param name="requirement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -774,13 +766,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method displays the name of this class, <see
-             cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
+            >The method displays the name of this class, <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireCancellation" />
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
+            , and <see cref="P:System.ServiceModel.Security.Tokens.SslSecurityTokenParameters.RequireClientCertificate" />
 
             
 

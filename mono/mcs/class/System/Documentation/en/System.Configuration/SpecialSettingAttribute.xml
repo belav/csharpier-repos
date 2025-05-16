@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Certain application settings properties have a special significance that alters the way in which their associated settings provider should process them. The <see
-         cref="T:System.Configuration.SpecialSettingAttribute" />
+        >Certain application settings properties have a special significance that alters the way in which their associated settings provider should process them. The <see cref="T:System.Configuration.SpecialSettingAttribute" />
 
         
 
-         is used to identify such properties. This class uses the <see
-         cref="T:System.Configuration.SpecialSetting" />
+         is used to identify such properties. This class uses the <see cref="T:System.Configuration.SpecialSetting" />
 
         
 
@@ -44,18 +42,15 @@
          can only be applied to the settings class or to the individual settings property.</para
       >
       <para
-        >For an example of how a settings provider deals with the <see
-         cref="T:System.Configuration.SpecialSettingAttribute" />
+        >For an example of how a settings provider deals with the <see cref="T:System.Configuration.SpecialSettingAttribute" />
 
         
 
-        , see the <see
-         cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+        , see the <see cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
         
 
-         method of the <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+         method of the <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
@@ -92,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SpecialSettingAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SpecialSettingAttribute" />
 
             
 
@@ -125,13 +119,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.SpecialSettingAttribute.SpecialSetting" />
+            >The <see cref="P:System.Configuration.SpecialSettingAttribute.SpecialSetting" />
 
             
 
-             property is set in the <see
-             cref="M:System.Configuration.SpecialSettingAttribute.#ctor(System.Configuration.SpecialSetting)" />
+             property is set in the <see cref="M:System.Configuration.SpecialSettingAttribute.#ctor(System.Configuration.SpecialSetting)" />
 
             
 

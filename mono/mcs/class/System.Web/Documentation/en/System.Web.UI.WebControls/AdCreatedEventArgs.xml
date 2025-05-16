@@ -20,34 +20,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.AdRotator.AdCreated" />
+        >The <see cref="E:System.Web.UI.WebControls.AdRotator.AdCreated" />
 
         
 
-         event is raised when the <see
-         cref="T:System.Web.UI.WebControls.AdRotator" />
+         event is raised when the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
         
 
          control displays an advertisement on the page.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.AdCreatedEventArgs.#ctor(System.Collections.IDictionary)" />
+        , see the <see cref="M:System.Web.UI.WebControls.AdCreatedEventArgs.#ctor(System.Collections.IDictionary)" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -59,13 +54,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.AdRotator.AdCreated" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.AdRotator.AdCreated" />
 
         
 
-         event of the <see
-         cref="T:System.Web.UI.WebControls.AdRotator" />
+         event of the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
         
 
@@ -88,16 +81,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
 
             
 
@@ -122,18 +113,15 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="adProperties" />
+                  >The value of the <paramref name="adProperties" />
 
                   
 
-                   parameter if the <paramref
-                   name="adProperties" />
+                   parameter if the <paramref name="adProperties" />
 
                   
 
-                   parameter is not null; otherwise, an empty <see
-                   cref="T:System.Collections.IDictionary" />
+                   parameter is not null; otherwise, an empty <see cref="T:System.Collections.IDictionary" />
 
                   
 
@@ -149,18 +137,15 @@
               </term>
               <description>
                 <para
-                  >If the <paramref
-                   name="adProperties" />
+                  >If the <paramref name="adProperties" />
 
                   
 
-                   parameter is not null, the value in the <paramref
-                   name="adProperties" />
+                   parameter is not null, the value in the <paramref name="adProperties" />
 
                   
 
-                   parameter that represents the alternate text; otherwise, <see
-                   cref="F:System.String.Empty" />
+                   parameter that represents the alternate text; otherwise, <see cref="F:System.String.Empty" />
 
                   
 
@@ -176,18 +161,15 @@
               </term>
               <description>
                 <para
-                  >If the <paramref
-                   name="adProperties" />
+                  >If the <paramref name="adProperties" />
 
                   
 
-                   parameter is not null, the value in the <paramref
-                   name="adProperties" />
+                   parameter is not null, the value in the <paramref name="adProperties" />
 
                   
 
-                   parameter that represents the URL of the image to display; otherwise, <see
-                   cref="F:System.String.Empty" />
+                   parameter that represents the URL of the image to display; otherwise, <see cref="F:System.String.Empty" />
 
                   
 
@@ -203,18 +185,15 @@
               </term>
               <description>
                 <para
-                  >If the <paramref
-                   name="adProperties" />
+                  >If the <paramref name="adProperties" />
 
                   
 
-                   parameter is not null, the value in the <paramref
-                   name="adProperties" />
+                   parameter is not null, the value in the <paramref name="adProperties" />
 
                   
 
-                   parameter that represents the URL to navigate to; otherwise, <see
-                   cref="F:System.String.Empty" />
+                   parameter that represents the URL to navigate to; otherwise, <see cref="F:System.String.Empty" />
 
                   
 
@@ -227,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
 
             
 
@@ -236,12 +214,15 @@
           >
         </summary>
         <param name="adProperties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -264,71 +245,57 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.IDictionary" />
-        </value>
+        <value>a <see cref="T:System.Collections.IDictionary" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AdProperties" />
+            >Use the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AdProperties" />
 
             
 
-             property to get a <see
-             cref="T:System.Collections.IDictionary" />
+             property to get a <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object that contains the advertisement properties for the currently displayed advertisement. The keys and values of the <see
-             cref="T:System.Collections.IDictionary" />
+             object that contains the advertisement properties for the currently displayed advertisement. The keys and values of the <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object are of type <see
-             cref="T:System.String" />
+             object are of type <see cref="T:System.String" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >The <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-             control randomly selects an advertisement each time the control is displayed on the Web page. The attributes for the selected advertisement are extracted from the advertisement XML file and stored in a <see
-             cref="T:System.Collections.IDictionary" />
+             control randomly selects an advertisement each time the control is displayed on the Web page. The attributes for the selected advertisement are extracted from the advertisement XML file and stored in a <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object. When the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+             object. When the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-             control creates a new instance of the <see
-             cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
+             control creates a new instance of the <see cref="T:System.Web.UI.WebControls.AdCreatedEventArgs" />
 
             
 
-             class, the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AdProperties" />
+             class, the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AdProperties" />
 
             
 
-             property gets initialized with the <see
-             cref="T:System.Collections.IDictionary" />
+             property gets initialized with the <see cref="T:System.Collections.IDictionary" />
 
             
 
              object.</para
           >
           <para
-            >Custom attributes about an advertisement, such as an advertisement caption, can also be included in the advertisement XML file. Use this property in the <see
-             cref="M:System.Web.UI.WebControls.AdRotator.OnAdCreated(System.Web.UI.WebControls.AdCreatedEventArgs)" />
+            >Custom attributes about an advertisement, such as an advertisement caption, can also be included in the advertisement XML file. Use this property in the <see cref="M:System.Web.UI.WebControls.AdRotator.OnAdCreated(System.Web.UI.WebControls.AdCreatedEventArgs)" />
 
             
 
@@ -338,8 +305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets a <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -364,26 +330,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AlternateText" />
+            >Use the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AlternateText" />
 
             
 
-             property to specify the text to display if the image specified in the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
+             property to specify the text to display if the image specified in the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
 
             
 
              property is not available. In browsers that support the ToolTips feature, this text also appears as a ToolTip for the advertisement.</para
           >
           <para
-            >A separate XML file contains the properties for the displayed advertisement. The <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >A separate XML file contains the properties for the displayed advertisement. The <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-             control automatically sets the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AlternateText" />
+             control automatically sets the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.AlternateText" />
 
             
 
@@ -393,8 +355,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alternate text displayed in the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >Gets or sets the alternate text displayed in the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
@@ -419,26 +380,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
 
             
 
-             property to specify the URL of an image to display for an advertisement in the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+             property to specify the URL of an image to display for an advertisement in the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
              control. You can use a relative or an absolute URL. A relative URL relates the location of the image to the location of the Web page or user control without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the image in code. An absolute URL provides the complete path, so moving the site to another directory requires updating the code.</para
           >
           <para
-            >A separate XML file contains the properties for the displayed advertisement. The <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >A separate XML file contains the properties for the displayed advertisement. The <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-             control automatically sets the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
+             control automatically sets the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.ImageUrl" />
 
             
 
@@ -446,8 +403,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If you use an advertisement file and specify a relative URL for this property, the URL is relative to the directory that the advertisement file is located in. If you set this property directly with a relative URL, instead of using the advertisement file, the URL is relative to the directory of the page or user control that contains the <see
-               cref="T:System.Web.UI.WebControls.AdRotator" />
+              >If you use an advertisement file and specify a relative URL for this property, the URL is relative to the directory that the advertisement file is located in. If you set this property directly with a relative URL, instead of using the advertisement file, the URL is relative to the directory of the page or user control that contains the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
               
 
@@ -458,8 +414,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL of an image to display in the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >Gets or sets the URL of an image to display in the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
@@ -484,31 +439,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.NavigateUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.NavigateUrl" />
 
             
 
-             property to specify the Web page to display when the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+             property to specify the Web page to display when the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-             control is clicked. A common use for this property is to redirect the navigation, when the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+             control is clicked. A common use for this property is to redirect the navigation, when the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
              control is clicked, to a page that can count the number of times the user clicked the advertisement before proceeding to the destination URL.</para
           >
           <para
-            >A separate XML file contains the properties for the displayed advertisement. The <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >A separate XML file contains the properties for the displayed advertisement. The <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 
-             control automatically sets the <see
-             cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.NavigateUrl" />
+             control automatically sets the <see cref="P:System.Web.UI.WebControls.AdCreatedEventArgs.NavigateUrl" />
 
             
 
@@ -516,8 +466,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If you use an advertisement file and specify a relative URL for this property, the URL is relative to the directory that the advertisement file is located in. If you set this property directly with a relative URL, instead of using the advertisement file, the URL is relative to the directory of the page or user control that contains the <see
-               cref="T:System.Web.UI.WebControls.AdRotator" />
+              >If you use an advertisement file and specify a relative URL for this property, the URL is relative to the directory that the advertisement file is located in. If you set this property directly with a relative URL, instead of using the advertisement file, the URL is relative to the directory of the page or user control that contains the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
               
 
@@ -528,8 +477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Web page to display when the <see
-             cref="T:System.Web.UI.WebControls.AdRotator" />
+            >Gets or sets the Web page to display when the <see cref="T:System.Web.UI.WebControls.AdRotator" />
 
             
 

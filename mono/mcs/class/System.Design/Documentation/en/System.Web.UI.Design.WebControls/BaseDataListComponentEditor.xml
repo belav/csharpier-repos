@@ -20,46 +20,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A component editor provides a user interface for editing the properties of a control. Component editors are invoked from control designers by using the <ui
-        >Property Builder</ui>
+        >A component editor provides a user interface for editing the properties of a control. Component editors are invoked from control designers by using the <ui>Property Builder</ui>
 
         
 
-         menu item from the context menu on the control. Component editors that are derived from the <see
-         cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+         menu item from the context menu on the control. Component editors that are derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
 
         
 
-         class are invoked from designers derived from the <see
-         cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
+         class are invoked from designers derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
 
         
 
-         class, and are used to edit the properties of controls that are derived from the <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+         class, and are used to edit the properties of controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
-         class. For examples of such controls, see <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         class. For examples of such controls, see <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+         and <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.EditComponent(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Windows.Forms.IWin32Window)" />
+        >The <see cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.EditComponent(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Windows.Forms.IWin32Window)" />
 
         
 
-         method displays a component editor for the associated control, if one can be created. The <see
-         cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.GetInitialComponentEditorPageIndex" />
+         method displays a component editor for the associated control, if one can be created. The <see cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.GetInitialComponentEditorPageIndex" />
 
         
 
@@ -69,8 +61,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a component editor base class for Web server controls that are derived from the <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+        >Provides a component editor base class for Web server controls that are derived from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
@@ -93,18 +84,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A designer that is derived from the <see
-             cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
+            >A designer that is derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataListDesigner" />
 
             
 
-             class creates a component editor that is derived from the <see
-             cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+             class creates a component editor that is derived from the <see cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
 
             
 
-             class, when the user selects <ui
-            >Property Builder</ui>
+             class, when the user selects <ui>Property Builder</ui>
 
             
 
@@ -114,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
 
             
 
@@ -146,28 +133,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.EditComponent" />
+            >The <see cref="Overload:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.EditComponent" />
 
             
 
-             method gets a <see
-             cref="T:System.Type" />
+             method gets a <see cref="T:System.Type" />
 
             
 
-             array of page control types by using the <see
-             cref="M:System.Windows.Forms.Design.WindowsFormsComponentEditor.GetComponentEditorPages" />
+             array of page control types by using the <see cref="M:System.Windows.Forms.Design.WindowsFormsComponentEditor.GetComponentEditorPages" />
 
             
 
-             method. It creates a <see
-             cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
+             method. It creates a <see cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
             
 
-             object, and then calls its <see
-             cref="M:System.Windows.Forms.Design.ComponentEditorForm.ShowForm" />
+             object, and then calls its <see cref="M:System.Windows.Forms.Design.ComponentEditorForm.ShowForm" />
 
             
 
@@ -183,41 +165,49 @@
           <para>true the component was successfully edited; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that can be used to gain additional context information. </param
         >
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           implementing the <see
-           cref="T:System.ComponentModel.IComponent" />
+           implementing the <see cref="T:System.ComponentModel.IComponent" />
 
           
 
           , which represents the component to edit. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.IWin32Window" />
+          The <see cref="T:System.Windows.Forms.IWin32Window" />
 
           
 
@@ -243,8 +233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The initial page is specified when the <see
-             cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+            >The initial page is specified when the <see cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
 
             
 

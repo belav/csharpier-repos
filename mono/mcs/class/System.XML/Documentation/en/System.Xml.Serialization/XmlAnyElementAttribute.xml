@@ -31,23 +31,19 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >When working in a portable class library, such as in Silverlight, Windows Phone or Windows Store App project, and you are using the .NET Framework 4.0.3 and above, use <see
-           cref="T:System.Xml.Linq.XElement" />
+          >When working in a portable class library, such as in Silverlight, Windows Phone or Windows Store App project, and you are using the .NET Framework 4.0.3 and above, use <see cref="T:System.Xml.Linq.XElement" />
 
           
 
-           or <see
-           cref="T:System.Xml.Linq.XNode" />
+           or <see cref="T:System.Xml.Linq.XNode" />
 
           
 
-           in place of <see
-           cref="T:System.Xml.XmlElement" />
+           in place of <see cref="T:System.Xml.XmlElement" />
 
           
 
-           and <see
-           cref="T:System.Xml.XmlNode" />
+           and <see cref="T:System.Xml.XmlNode" />
 
           
 
@@ -55,208 +51,170 @@
         >
       </block>
       <para
-        >Use the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+        >Use the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
          to contain arbitrary data (as XML elements) that can be sent as part of an XML document, such as metadata sent as part of the document.</para
       >
       <para
-        >Apply the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+        >Apply the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
-         to a field that returns an array of <see
-         cref="T:System.Xml.XmlElement" />
+         to a field that returns an array of <see cref="T:System.Xml.XmlElement" />
 
         
 
-         or <see
-         cref="T:System.Xml.XmlNode" />
+         or <see cref="T:System.Xml.XmlNode" />
 
         
 
-         objects. Such a field can be used in two ways, depending on whether an object is being serialized or deserialized. When serialized, the object is generated as XML elements or nodes, even though they have no corresponding member (or members) in the object being serialized. If you specify a <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         objects. Such a field can be used in two ways, depending on whether an object is being serialized or deserialized. When serialized, the object is generated as XML elements or nodes, even though they have no corresponding member (or members) in the object being serialized. If you specify a <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         property value when applying the attribute, all <see
-         cref="T:System.Xml.XmlElement" />
+         property value when applying the attribute, all <see cref="T:System.Xml.XmlElement" />
 
         
 
-         or <see
-         cref="T:System.Xml.XmlNode" />
+         or <see cref="T:System.Xml.XmlNode" />
 
         
 
-         objects inserted into the array must have the same element name and default namespace, or an exception is thrown. If you set the <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+         objects inserted into the array must have the same element name and default namespace, or an exception is thrown. If you set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
         
 
-         property value, you must set the <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         property value, you must set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         property as well, and the <see
-         cref="T:System.Xml.XmlElement" />
+         property as well, and the <see cref="T:System.Xml.XmlElement" />
 
         
 
-         or <see
-         cref="T:System.Xml.XmlNode" />
+         or <see cref="T:System.Xml.XmlNode" />
 
         
 
-         objects must also have the same name and namespace values. If no <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         objects must also have the same name and namespace values. If no <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         value is specified, the <see
-         cref="T:System.Xml.XmlElement" />
+         value is specified, the <see cref="T:System.Xml.XmlElement" />
 
         
 
-         or <see
-         cref="T:System.Xml.XmlNode" />
+         or <see cref="T:System.Xml.XmlNode" />
 
         
 
          objects can have any element name.</para
       >
       <para
-        >When you call the <see
-         cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+        >When you call the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         method of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         class, all elements that do not have a corresponding member in the object being deserialized are collected in the array. After deserialization, iterate through the collection of <see
-         cref="T:System.Xml.XmlElement" />
+         class, all elements that do not have a corresponding member in the object being deserialized are collected in the array. After deserialization, iterate through the collection of <see cref="T:System.Xml.XmlElement" />
 
         
 
-         items to process the data. If you specify a <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         items to process the data. If you specify a <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         value, the array contains only XML elements with that name. If you do not specify a <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         value, the array contains only XML elements with that name. If you do not specify a <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         value, the array contains all elements that have no corresponding member in the class. If a class contains more than one field to which the attribute is applied, use the <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         value, the array contains all elements that have no corresponding member in the class. If a class contains more than one field to which the attribute is applied, use the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-        , or <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+        , or <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         and <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+         and <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
         
 
-         properties to differentiate between the contents of the arrays. If such a class (with multiple fields) also contains one field that has no differentiating property values set (in other words, <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         properties to differentiate between the contents of the arrays. If such a class (with multiple fields) also contains one field that has no differentiating property values set (in other words, <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         and <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+         and <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
         
 
-        ) during deserialization, this array contains any unknown XML elements that are not already contained in the other arrays. If a class contains more than one field that does not have a differentiating <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+        ) during deserialization, this array contains any unknown XML elements that are not already contained in the other arrays. If a class contains more than one field that does not have a differentiating <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-        , or <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+        , or <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         and <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+         and <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
         
 
          value set, the behavior during deserialization is unspecified.</para
       >
       <para
-        >You can also apply the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+        >You can also apply the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
-         to a field that returns a single <see
-         cref="T:System.Xml.XmlElement" />
+         to a field that returns a single <see cref="T:System.Xml.XmlElement" />
 
         
 
-         object. If you do so, you must use the properties and methods of the <see
-         cref="T:System.Xml.XmlElement" />
+         object. If you do so, you must use the properties and methods of the <see cref="T:System.Xml.XmlElement" />
 
         
 
          class to recursively iterate through the unknown elements.</para
       >
       <para
-        >You can apply multiple instances of the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+        >You can apply multiple instances of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
-         to a class member, but each instance must have a distinct <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         to a class member, but each instance must have a distinct <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         property value. Or, if the same <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+         property value. Or, if the same <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
         
 
-         property is set for each instance, a distinct <see
-         cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+         property is set for each instance, a distinct <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
         
 
          property value must be set for each instance.</para
       >
       <para
-        >The <see
-         cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
+        >The <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
 
         
 
-         and <see
-         cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+         and <see cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
 
         
 
-         events of the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         events of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         do not occur if you apply the <see
-         cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+         do not occur if you apply the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
         
 
@@ -264,8 +222,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the word XmlAnyElement in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+          >You can use the word XmlAnyElement in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
           
 
@@ -273,8 +230,7 @@
         >
       </block>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -286,13 +242,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies that the member (a field that returns an array of <see
-         cref="T:System.Xml.XmlElement" />
+        >Specifies that the member (a field that returns an array of <see cref="T:System.Xml.XmlElement" />
 
         
 
-         or <see
-         cref="T:System.Xml.XmlNode" />
+         or <see cref="T:System.Xml.XmlNode" />
 
         
 
@@ -319,13 +273,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Use the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-             constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -335,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -365,13 +316,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Use the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-             constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -381,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -390,12 +338,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the XML element that the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -427,13 +378,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Use the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-             constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -443,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
@@ -452,19 +400,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the XML element that the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The name of the XML element that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
            generates. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -490,129 +445,105 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you specify a <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+            >If you specify a <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             property value when applying the attribute, all <see
-             cref="T:System.Xml.XmlElement" />
+             property value when applying the attribute, all <see cref="T:System.Xml.XmlElement" />
 
             
 
-             or <see
-             cref="T:System.Xml.XmlNode" />
+             or <see cref="T:System.Xml.XmlNode" />
 
             
 
-             objects inserted into the array must have the same element name and default namespace, or an exception is thrown. If you set the <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             objects inserted into the array must have the same element name and default namespace, or an exception is thrown. If you set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
-             property value, you must set the <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             property value, you must set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             property as well, and the <see
-             cref="T:System.Xml.XmlElement" />
+             property as well, and the <see cref="T:System.Xml.XmlElement" />
 
             
 
-             or <see
-             cref="T:System.Xml.XmlNode" />
+             or <see cref="T:System.Xml.XmlNode" />
 
             
 
-             objects must also have the same name and namespace values. If no <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             objects must also have the same name and namespace values. If no <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             value is specified, the <see
-             cref="T:System.Xml.XmlElement" />
+             value is specified, the <see cref="T:System.Xml.XmlElement" />
 
             
 
-             or <see
-             cref="T:System.Xml.XmlNode" />
+             or <see cref="T:System.Xml.XmlNode" />
 
             
 
              objects can have any element name.</para
           >
           <para
-            >When you call the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+            >When you call the <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             method of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             class, all attributes that do not have a corresponding member in the object being deserialized are collected in the array. If you specify a <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             class, all attributes that do not have a corresponding member in the object being deserialized are collected in the array. If you specify a <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             value, the array contains only XML elements with that name. If you do not specify a <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             value, the array contains only XML elements with that name. If you do not specify a <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             value, the array contains all elements that have no corresponding member in the class. If a class contains more than one field to which the attribute is applied, use the <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             value, the array contains all elements that have no corresponding member in the class. If a class contains more than one field to which the attribute is applied, use the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             and <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             and <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
-             properties to differentiate between the contents of the arrays. If such a class (with multiple fields) also contains one field that has no differentiating property values set (that is, <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             properties to differentiate between the contents of the arrays. If such a class (with multiple fields) also contains one field that has no differentiating property values set (that is, <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             and <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             and <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
-            ) during deserialization, the array contains any XML elements that are not already contained in the other arrays. If you add more than one field that does not have a differentiating <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+            ) during deserialization, the array contains any XML elements that are not already contained in the other arrays. If you add more than one field that does not have a differentiating <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             or <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             or <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
              value set, the last field in the class contains all unknown elements that are not already contained in the other arrays, and any other fields are set to null.</para
           >
           <para
-            >You can apply multiple instances of the <see
-             cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+            >You can apply multiple instances of the <see cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
 
             
 
-             to a class member, but each instance must have a distinct <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             to a class member, but each instance must have a distinct <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             property value. Or, if the same <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+             property value. Or, if the same <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
             
 
-             property is set for each instance, a distinct <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             property is set for each instance, a distinct <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
@@ -643,36 +574,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+            >The <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
-             property allows you to set a unique name for the XML attribute. The <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             property allows you to set a unique name for the XML attribute. The <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
              property conforms to the rules for creating an XML namespace as found in the World Wide Web Consortium (www.w3.org) document, "Namespaces in XML." </para
           >
           <para
-            >To set the <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+            >To set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
-             property to a prefixed name, create an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             property to a prefixed name, create an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
-             that contains the namespaces and prefixes used in the XML document. Set the <see
-             cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+             that contains the namespaces and prefixes used in the XML document. Set the <see cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
 
             
 
-             property to one of the namespaces in the <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             property to one of the namespaces in the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -702,18 +627,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
+            >Use the <see cref="F:System.Xml.Serialization.CodeGenerationOptions.GenerateOrder" />
 
             
 
-             enumeration to instruct the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+             enumeration to instruct the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
-             to generate code that sets the <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+             to generate code that sets the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
 
             
 
@@ -721,8 +643,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Once the <see
-               cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+              >Once the <see cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
 
               
 

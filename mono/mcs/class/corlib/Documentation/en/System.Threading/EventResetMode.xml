@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates whether an <see
-         cref="T:System.Threading.EventWaitHandle" />
+        >Indicates whether an <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
@@ -53,13 +52,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When signaled, the <see
-             cref="T:System.Threading.EventWaitHandle" />
+            >When signaled, the <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
-             resets automatically after releasing a single thread. If no threads are waiting, the <see
-             cref="T:System.Threading.EventWaitHandle" />
+             resets automatically after releasing a single thread. If no threads are waiting, the <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
@@ -87,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When signaled, the <see
-             cref="T:System.Threading.EventWaitHandle" />
+            >When signaled, the <see cref="T:System.Threading.EventWaitHandle" />
 
             
 

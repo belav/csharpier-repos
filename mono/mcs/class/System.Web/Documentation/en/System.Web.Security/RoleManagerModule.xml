@@ -21,23 +21,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.RoleManagerModule" />
+        >The <see cref="T:System.Web.Security.RoleManagerModule" />
 
         
 
-         class is used to assign a <see
-         cref="T:System.Web.Security.RolePrincipal" />
+         class is used to assign a <see cref="T:System.Web.Security.RolePrincipal" />
 
         
 
-         to the <see
-         cref="P:System.Web.HttpContext.User" />
+         to the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the <see
-         cref="P:System.Web.HttpContext.Current" />
+         property of the <see cref="P:System.Web.HttpContext.Current" />
         <see cref="T:System.Web.HttpContext" />
 
         
@@ -45,33 +41,27 @@
         .</para
       >
       <para
-        >When a request completes, the <see
-         cref="T:System.Web.Security.RoleManagerModule" />
+        >When a request completes, the <see cref="T:System.Web.Security.RoleManagerModule" />
 
         
 
-         refreshes the roles cookie that contains cached role information. If the <see
-         cref="P:System.Web.HttpContext.User" />
+         refreshes the roles cookie that contains cached role information. If the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property is of type <see
-         cref="T:System.Web.Security.RolePrincipal" />
+         property is of type <see cref="T:System.Web.Security.RolePrincipal" />
 
         
 
-        , and that <see
-         cref="T:System.Web.Security.RolePrincipal" />
+        , and that <see cref="T:System.Web.Security.RolePrincipal" />
 
         
 
-         indicates that its cached role list has been modified by setting the <see
-         cref="P:System.Web.Security.RolePrincipal.CachedListChanged" />
+         indicates that its cached role list has been modified by setting the <see cref="P:System.Web.Security.RolePrincipal.CachedListChanged" />
 
         
 
-         property to true, the <see
-         cref="T:System.Web.Security.RoleManagerModule" />
+         property to true, the <see cref="T:System.Web.Security.RoleManagerModule" />
 
         
 
@@ -82,8 +72,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Manages a <see
-         cref="T:System.Web.Security.RolePrincipal" />
+        >Manages a <see cref="T:System.Web.Security.RolePrincipal" />
 
         
 
@@ -101,23 +90,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+            >The <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
-             class is used to place a <see
-             cref="T:System.Web.Security.RolePrincipal" />
+             class is used to place a <see cref="T:System.Web.Security.RolePrincipal" />
 
             
 
-             in the <see
-             cref="P:System.Web.HttpContext.User" />
+             in the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the <see
-             cref="P:System.Web.HttpContext.Current" />
+             property of the <see cref="P:System.Web.HttpContext.Current" />
             <see cref="T:System.Web.HttpContext" />
 
             
@@ -128,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+            >Creates a new instance of the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
@@ -153,33 +137,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Web.Security.RoleManagerModule.Dispose" />
+            >Call <see cref="M:System.Web.Security.RoleManagerModule.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+             when you are finished using the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
-            . The <see
-             cref="M:System.Web.Security.RoleManagerModule.Dispose" />
+            . The <see cref="M:System.Web.Security.RoleManagerModule.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+             method leaves the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Web.Security.RoleManagerModule.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Web.Security.RoleManagerModule.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+            , you must release all references to the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
@@ -210,95 +188,78 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+            >The <see cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
 
             
 
-             event is raised before the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+             event is raised before the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
-             creates a <see
-             cref="T:System.Web.Security.RolePrincipal" />
+             creates a <see cref="T:System.Web.Security.RolePrincipal" />
 
             
 
-             object and assigns it to the <see
-             cref="P:System.Web.HttpContext.User" />
+             object and assigns it to the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the <see
-             cref="P:System.Web.HttpContext.Current" />
+             property of the <see cref="P:System.Web.HttpContext.Current" />
             <see cref="T:System.Web.HttpContext" />
 
             
 
-            . You can use this event to audit when role information is applied or to replace the creation of a <see
-             cref="T:System.Web.Security.RolePrincipal" />
+            . You can use this event to audit when role information is applied or to replace the creation of a <see cref="T:System.Web.Security.RolePrincipal" />
 
             
 
-             by the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+             by the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
              with your own code.</para
           >
           <para
-            >You can cancel the application of role information by the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+            >You can cancel the application of role information by the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
-             by setting the <see
-             cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
+             by setting the <see cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.RoleManagerEventArgs" />
+             property of the <see cref="T:System.Web.Security.RoleManagerEventArgs" />
 
             
 
-             to true in the <see
-             cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+             to true in the <see cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
 
             
 
              event.</para
           >
           <para
-            >If you set <see
-             cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
+            >If you set <see cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
 
             
 
-             to true in your <see
-             cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+             to true in your <see cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
 
             
 
-             event handler, then the <see
-             cref="P:System.Web.HttpContext.User" />
+             event handler, then the <see cref="P:System.Web.HttpContext.User" />
 
             
 
-             property of the current <see
-             cref="T:System.Web.HttpContext" />
+             property of the current <see cref="T:System.Web.HttpContext" />
 
             
 
-             is not set to a <see
-             cref="T:System.Web.Security.RolePrincipal" />
+             is not set to a <see cref="T:System.Web.Security.RolePrincipal" />
 
             
 
-             object by the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+             object by the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
@@ -308,13 +269,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A global application event that is raised when the <see
-             cref="T:System.Web.Security.RoleManagerModule" />
+            >A global application event that is raised when the <see cref="T:System.Web.Security.RoleManagerModule" />
 
             
 
-             is ready to create a <see
-             cref="T:System.Web.Security.RolePrincipal" />
+             is ready to create a <see cref="T:System.Web.Security.RolePrincipal" />
 
             
 
@@ -340,18 +299,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method subscribes to the <see
-             cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+            >This method subscribes to the <see cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
 
             
 
-             and <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+             and <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
-             methods of the specified <see
-             cref="T:System.Web.HttpApplication" />
+             methods of the specified <see cref="T:System.Web.HttpApplication" />
 
             
 
@@ -363,17 +319,19 @@
           <para>Associates the role manager with the specified application.</para>
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpApplication" />
+          The <see cref="T:System.Web.HttpApplication" />
 
           
 
-           to associate the <see
-           cref="T:System.Web.Security.RoleManagerModule" />
+           to associate the <see cref="T:System.Web.Security.RoleManagerModule" />
 
           
 

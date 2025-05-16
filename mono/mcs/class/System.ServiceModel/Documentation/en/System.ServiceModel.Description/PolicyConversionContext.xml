@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An implementation of the <see
-         cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+        >An implementation of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
         
 
-         is passed to <see
-         cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+         is passed to <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+         and <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
 
         
 
@@ -40,8 +37,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
+            >The <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
 
             
 
@@ -50,8 +46,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetFaultBindingAssertions(System.ServiceModel.Description.FaultDescription)" />
+            >The <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetFaultBindingAssertions(System.ServiceModel.Description.FaultDescription)" />
 
             
 
@@ -60,8 +55,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
+            >The <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
@@ -70,8 +64,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+            >The <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
 
             
 
@@ -80,8 +73,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.PolicyConversionContext.BindingElements" />
+            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.BindingElements" />
 
             
 
@@ -90,8 +82,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
 
             
 
@@ -127,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
             
 
@@ -136,12 +126,15 @@
           >
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -220,8 +213,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection returned from <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
+            >The collection returned from <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
 
             
 
@@ -235,13 +227,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >An <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
-             of type <see
-             cref="T:System.Xml.XmlElement" />
+             of type <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -273,8 +263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection returned from <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetFaultBindingAssertions(System.ServiceModel.Description.FaultDescription)" />
+            >The collection returned from <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetFaultBindingAssertions(System.ServiceModel.Description.FaultDescription)" />
 
             
 
@@ -290,12 +279,15 @@
           <para>A collection of policy assertions for the specified SOAP fault.</para>
         </returns>
         <param name="fault">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.FaultDescription" />
+          The <see cref="T:System.ServiceModel.Description.FaultDescription" />
 
           
 
@@ -326,8 +318,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection returned from <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
+            >The collection returned from <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
@@ -343,12 +334,15 @@
           <para>A collection of policy assertions for the specified message.</para>
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MessageDescription" />
+          The <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
           
 
@@ -379,8 +373,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection returned from <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+            >The collection returned from <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
 
             
 
@@ -396,12 +389,15 @@
           <para>The policy assertions for the operation.</para>
         </returns>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          The <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 

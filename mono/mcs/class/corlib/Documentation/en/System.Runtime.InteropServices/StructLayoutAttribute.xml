@@ -38,13 +38,11 @@
   <Docs>
     <example>
       <para
-        >The following example demonstrates the use of the <see
-         cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+        >The following example demonstrates the use of the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
         
 
-        , and the <see
-         cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
+        , and the <see cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
 
         
 
@@ -53,23 +51,20 @@
       <para>
         <block subset="none" type="note"
           >The non-standard
-<see
-           langword=" PtInRect" />
+<see langword=" PtInRect" />
 
           
 
            
 function used in this example indicates whether the specified point is
 located inside the specified rectangle. In this example, the layout setting on the
-<see
-           langword="Rect" />
+<see langword="Rect" />
 
           
 
            
 structure can be
-set to <see
-           cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+set to <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
           
 
@@ -146,58 +141,48 @@ public class StructLayoutTest {
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to classes or structures.</para>
       <para
-        >The common language runtime controls the physical layout of the data fields of a class or structure in managed memory. However, if you want to pass the type to unmanaged code, you can use the <see
-         cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+        >The common language runtime controls the physical layout of the data fields of a class or structure in managed memory. However, if you want to pass the type to unmanaged code, you can use the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
         
 
-         attribute to control the unmanaged layout of the type. Use the attribute with <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+         attribute to control the unmanaged layout of the type. Use the attribute with <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
         
 
-         to force the members to be laid out sequentially in the order they appear. For <format
-         type="text/html">
+         to force the members to be laid out sequentially in the order they appear. For <format type="text/html">
           <a href="d03b050e-2916-49a0-99ba-f19316e5c1b3">blittable types</a>
         </format>
 
         
 
-        , <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+        , <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
         
 
-         controls both the layout in managed memory and the layout in unmanaged memory. For non-blittable types, it controls the layout when the class or structure is marshaled to unmanaged code, but does not control the layout in managed memory.  Use the attribute with <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
+         controls both the layout in managed memory and the layout in unmanaged memory. For non-blittable types, it controls the layout when the class or structure is marshaled to unmanaged code, but does not control the layout in managed memory.  Use the attribute with <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
 
         
 
-         to control the precise position of each data member. This affects both managed and unmanaged layout, for both blittable and non-blittable types. Using <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
+         to control the precise position of each data member. This affects both managed and unmanaged layout, for both blittable and non-blittable types. Using <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
 
         
 
-         requires that you use the <see
-         cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
+         requires that you use the <see cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
 
         
 
          attribute to indicate the position of each field within the type.</para
       >
       <para
-        >C#, Visual Basic, and C++ compilers apply the <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+        >C#, Visual Basic, and C++ compilers apply the <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
         
 
-         layout value to structures by default. For classes, you must apply the <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+         layout value to structures by default. For classes, you must apply the <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
         
 
-         value explicitly. The <format
-         type="text/html">
+         value explicitly. The <format type="text/html">
           <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
             >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
           >
@@ -205,13 +190,11 @@ public class StructLayoutTest {
 
         
 
-         also applies the <see
-         cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+         also applies the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
         
 
-         attribute; it always applies the <see
-         cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+         attribute; it always applies the <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
         
 
@@ -248,13 +231,11 @@ public class StructLayoutTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor takes an underlying 16-bit integer that represents each <see
-             cref="T:System.Runtime.InteropServices.LayoutKind" />
+            >This constructor takes an underlying 16-bit integer that represents each <see cref="T:System.Runtime.InteropServices.LayoutKind" />
 
             
 
-             enumeration member. The <format
-             type="text/html">
+             enumeration member. The <format type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
                 >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
               >
@@ -268,13 +249,11 @@ public class StructLayoutTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initalizes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+            >Initalizes a new instance of the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.InteropServices.LayoutKind" />
+             class with the specified <see cref="T:System.Runtime.InteropServices.LayoutKind" />
 
             
 
@@ -282,12 +261,15 @@ public class StructLayoutTest {
           >
         </summary>
         <param name="layoutKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 16-bit integer that represents one of the <see
-           cref="T:System.Runtime.InteropServices.LayoutKind" />
+          A 16-bit integer that represents one of the <see cref="T:System.Runtime.InteropServices.LayoutKind" />
 
           
 
@@ -327,13 +309,11 @@ public class StructLayoutTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initalizes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+            >Initalizes a new instance of the <see cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.InteropServices.LayoutKind" />
+             class with the specified <see cref="T:System.Runtime.InteropServices.LayoutKind" />
 
             
 
@@ -341,7 +321,11 @@ public class StructLayoutTest {
           >
         </summary>
         <param name="layoutKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -377,18 +361,15 @@ public class StructLayoutTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the CharSet field is set to <see
-             cref="F:System.Runtime.InteropServices.CharSet.Unicode" />
+            >If the CharSet field is set to <see cref="F:System.Runtime.InteropServices.CharSet.Unicode" />
 
             
 
-            , all string arguments are converted to Unicode characters (LPWSTR) before they are passed to the unmanaged implementation. If the field is set to <see
-             cref="F:System.Runtime.InteropServices.CharSet.Ansi" />
+            , all string arguments are converted to Unicode characters (LPWSTR) before they are passed to the unmanaged implementation. If the field is set to <see cref="F:System.Runtime.InteropServices.CharSet.Ansi" />
 
             
 
-            , the strings are converted to ANSI strings (LPSTR). If the CharSet field is set to <see
-             cref="F:System.Runtime.InteropServices.CharSet.Auto" />
+            , the strings are converted to ANSI strings (LPSTR). If the CharSet field is set to <see cref="F:System.Runtime.InteropServices.CharSet.Auto" />
 
             
 
@@ -420,21 +401,18 @@ public class StructLayoutTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This field indicates memory boundaries for aligning fields. It affects both <see
-             cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+            >This field indicates memory boundaries for aligning fields. It affects both <see cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
 
             
 
-             and <see
-             cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
+             and <see cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
 
             
 
             . By default, the value is 0, indicating the default packing size for the current platform.</para
           >
           <para
-            >The value of <see
-             cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
+            >The value of <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
 
             
 
@@ -509,8 +487,7 @@ byte B2;
             </item>
           </list>
           <para
-            >The <see
-             cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
+            >The <see cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
 
             
 
@@ -577,8 +554,7 @@ byte B2;
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Runtime.InteropServices.LayoutKind" />
+            >A <see cref="T:System.Runtime.InteropServices.LayoutKind" />
 
             
 
@@ -592,8 +568,7 @@ byte B2;
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.InteropServices.LayoutKind" />
+            >Gets the <see cref="T:System.Runtime.InteropServices.LayoutKind" />
 
             
 

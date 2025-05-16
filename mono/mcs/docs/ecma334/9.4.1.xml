@@ -1,31 +1,26 @@
 <?xml version="1.0"?>
 <clause number="9.4.1" title="Unicode escape sequences">
   <paragraph
-    >A Unicode escape sequence represents a Unicode character. Unicode escape sequences are processed in identifiers (<hyperlink
-    >9.4.2</hyperlink>
+    >A Unicode escape sequence represents a Unicode character. Unicode escape sequences are processed in identifiers (<hyperlink>9.4.2</hyperlink>
 
     
 
-    ), regular string literals (<hyperlink
-    >9.4.4.5</hyperlink>
+    ), regular string literals (<hyperlink>9.4.4.5</hyperlink>
 
     
 
-    ), and character literals (<hyperlink
-    >9.4.4.4</hyperlink>
+    ), and character literals (<hyperlink>9.4.4.4</hyperlink>
 
     
 
-    ). A Unicode character escape is not processed in any other location (for example, to form an operator, punctuator, or keyword). <grammar_production
-    >
+    ). A Unicode character escape is not processed in any other location (for example, to form an operator, punctuator, or keyword). <grammar_production>
       <name>
         <non_terminal where="9.4.1">unicode-escape-sequence</non_terminal>
       </name>
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <terminal>\u</terminal>
         <non_terminal where="9.4.4.2">hex-digit</non_terminal>
         <non_terminal where="9.4.4.2">hex-digit</non_terminal>
@@ -47,13 +42,11 @@
   </paragraph>
   <paragraph>A Unicode escape sequence represents the single Unicode character formed by the hexadecimal number following the "\u" or "\U" characters. Since C# uses a 16-bit encoding of Unicode characters in characters and string values, a Unicode character in the range U+10000 to U+10FFFF is represented using two Unicode surrogate characters. Unicode characters with code points above 0x10FFFF are not supported. </paragraph>
   <paragraph
-    >Multiple translations are not performed. For instance, the string literal "\u005Cu005C" is equivalent to "\u005C" rather than "\". <note
-    >[Note: The Unicode value \u005C is the character "\". end note]</note>
+    >Multiple translations are not performed. For instance, the string literal "\u005Cu005C" is equivalent to "\u005C" rather than "\". <note>[Note: The Unicode value \u005C is the character "\". end note]</note>
   </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 class Class1  
 {  
@@ -68,8 +61,7 @@ class Class1
 
       
 
-      shows several uses of \u0066, which is the escape sequence for the letter "f". The program is equivalent to <code_example
-      >
+      shows several uses of \u0066, which is the escape sequence for the letter "f". The program is equivalent to <code_example>
         <![CDATA[
 class Class1  
 {  

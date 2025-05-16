@@ -39,28 +39,23 @@
       >
       <block subset="none" type="note">
         <para
-          >Although <see
-           cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
+          >Although <see cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
 
           
 
-           and <see
-           cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
+           and <see cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
 
           
 
-           appear in <see
-           cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+           appear in <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
           
 
-          , they are not valid for use as the parameter for <see
-           cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+          , they are not valid for use as the parameter for <see cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
 
           
 
-           because they describe no registry variable access types or all registry variable access types, respectively, and <see
-           cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+           because they describe no registry variable access types or all registry variable access types, respectively, and <see cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
 
           
 
@@ -99,38 +94,31 @@
 
             
 
-            , <see
-             cref="F:System.Security.Permissions.RegistryPermissionAccess.Read" />
+            , <see cref="F:System.Security.Permissions.RegistryPermissionAccess.Read" />
 
             
 
-            , and <see
-             cref="F:System.Security.Permissions.RegistryPermissionAccess.Write" />
+            , and <see cref="F:System.Security.Permissions.RegistryPermissionAccess.Write" />
 
             
 
-             access to registry variables. <see
-             cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
+             access to registry variables. <see cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
 
             
 
-             represents multiple <see
-             cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+             represents multiple <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
             
 
-             values and causes an <see
-             cref="T:System.ArgumentException" />
+             values and causes an <see cref="T:System.ArgumentException" />
 
             
 
-             when used as the <paramref
-             name="access" />
+             when used as the <paramref name="access" />
 
             
 
-             parameter for the <see
-             cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+             parameter for the <see cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
 
             
 
@@ -184,23 +172,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No access to registry variables. <see
-             cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
+            >No access to registry variables. <see cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
 
             
 
-             represents no valid <see
-             cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+             represents no valid <see cref="T:System.Security.Permissions.RegistryPermissionAccess" />
 
             
 
-             values and causes an <see
-             cref="T:System.ArgumentException" />
+             values and causes an <see cref="T:System.ArgumentException" />
 
             
 
-             when used as the parameter for <see
-             cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+             when used as the parameter for <see cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
 
             
 

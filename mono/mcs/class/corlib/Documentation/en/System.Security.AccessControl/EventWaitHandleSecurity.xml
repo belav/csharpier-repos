@@ -25,31 +25,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+        >An <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object specifies access rights for a named system wait handle, and also specifies the way access attempts are audited. Access rights to the wait handle are expressed as rules, with each access rule represented by an <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+         object specifies access rights for a named system wait handle, and also specifies the way access attempts are audited. Access rights to the wait handle are expressed as rules, with each access rule represented by an <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
         
 
-         object. Each auditing rule is represented by an <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+         object. Each auditing rule is represented by an <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
         
 
          object.</para
       >
       <para
-        >This mirrors the underlying Windows security system, in which each securable object has at most one discretionary access control list (DACL) that controls access to the secured object, and at most one system access control list (SACL) that specifies which access attempts are audited. The DACL and SACL are ordered lists of access control entries (ACE) that specify access and auditing for users and groups. An <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+        >This mirrors the underlying Windows security system, in which each securable object has at most one discretionary access control list (DACL) that controls access to the secured object, and at most one system access control list (SACL) that specifies which access attempts are audited. The DACL and SACL are ordered lists of access control entries (ACE) that specify access and auditing for users and groups. An <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
         
 
-         or <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+         or <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
         
 
@@ -57,8 +52,7 @@
       >
       <block subset="none" type="note">
         <para
-          >An <see
-           cref="T:System.Threading.EventWaitHandle" />
+          >An <see cref="T:System.Threading.EventWaitHandle" />
 
           
 
@@ -66,18 +60,15 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+        >The <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-        , <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+        , <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
         
 
-        , and <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+        , and <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
         
 
@@ -86,8 +77,7 @@
       <list type="bullet">
         <item>
           <para
-            >Creating a security descriptor with a null DACL. A null reference to a DACL allows any user to add access rules to an object, potentially creating a denial-of-service attack. A new <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Creating a security descriptor with a null DACL. A null reference to a DACL allows any user to add access rules to an object, potentially creating a denial-of-service attack. A new <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -96,8 +86,7 @@
         </item>
         <item>
           <para
-            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -127,18 +116,15 @@
         </item>
       </list>
       <para
-        >To modify Windows access control security for a named wait handle, use the <see
-         cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+        >To modify Windows access control security for a named wait handle, use the <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object. Modify the security object by adding and removing rules, and then use the <see
-         cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+         object. Modify the security object by adding and removing rules, and then use the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
 
         
 
@@ -146,13 +132,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to an <see
-           cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+          >Changes you make to an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
           
 
-           object do not affect the access levels of the named wait handle until you call the <see
-           cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+           object do not affect the access levels of the named wait handle until you call the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
 
           
 
@@ -160,36 +144,30 @@
         >
       </block>
       <para
-        >To copy access control security from one wait handle to another, use the <see
-         cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+        >To copy access control security from one wait handle to another, use the <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
 
         
 
-         method to get an <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         method to get an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object representing the access and audit rules for the first wait handle, and then use the <see
-         cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+         object representing the access and audit rules for the first wait handle, and then use the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
 
         
 
-         method, or a constructor that accepts an <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         method, or a constructor that accepts an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
          object, to assign those rules to the second wait handle.</para
       >
       <para
-        >Users with an investment in the security descriptor definition language (SDDL) can use the <see
-         cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
+        >Users with an investment in the security descriptor definition language (SDDL) can use the <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
         
 
-         method to set access rules for a named wait handle, and the <see
-         cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+         method to set access rules for a named wait handle, and the <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
         
 
@@ -219,8 +197,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >A new <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -230,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -260,13 +236,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
 
             
 
@@ -276,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the enumeration type that the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Gets the enumeration type that the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -316,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create access control rules is to use the constructors of the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+            >The recommended way to create access control rules is to use the constructors of the <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
             
 
@@ -334,8 +306,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+            >An <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
             
 
@@ -343,57 +314,78 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            that identifies the user or group the rule applies to.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />
 
           
 
            values specifying the access rights to allow or deny, cast to an integer.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -421,13 +413,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
 
             
 
@@ -437,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Gets the type that the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -472,28 +461,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)" />
 
             
 
-             method searches for rules with the same user or group and the same <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             method searches for rules with the same user or group and the same <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             as <paramref
-             name="rule" />
+             as <paramref name="rule" />
 
             
 
-            . If none are found, <paramref
-             name="rule" />
+            . If none are found, <paramref name="rule" />
 
             
 
-             is added. If a matching rule is found, the rights in <paramref
-             name="rule" />
+             is added. If a matching rule is found, the rights in <paramref name="rule" />
 
             
 
@@ -505,7 +489,11 @@
           <para>Searches for a matching access control rule with which the new rule can be merged. If none are found, adds the new rule.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -538,23 +526,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)" />
 
             
 
-             method searches for rules with the same user or group as <paramref
-             name="rule" />
+             method searches for rules with the same user or group as <paramref name="rule" />
 
             
 
-            . If none are found, <paramref
-             name="rule" />
+            . If none are found, <paramref name="rule" />
 
             
 
-             is added. If a matching rule is found, the flags in <paramref
-             name="rule" />
+             is added. If a matching rule is found, the flags in <paramref name="rule" />
 
             
 
@@ -566,7 +550,11 @@
           <para>Searches for an audit rule with which the new rule can be merged. If none are found, adds the new rule.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -604,8 +592,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create audit rules is to use the constructors of the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+            >The recommended way to create audit rules is to use the constructors of the <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
             
 
@@ -622,13 +609,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+            >An <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
             
 
-             object representing the specified audit rule for the specified user. The return type of the method is the base class, <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+             object representing the specified audit rule for the specified user. The return type of the method is the base class, <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -636,57 +621,78 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            that identifies the user or group the rule applies to.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />
 
           
 
            values specifying the access rights to audit, cast to an integer.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -714,13 +720,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
 
             
 
@@ -730,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Gets the type that the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -765,38 +768,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
-             is searched for a rule that has the same user and the same <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             is searched for a rule that has the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             value as <paramref
-             name="rule" />
+             value as <paramref name="rule" />
 
             
 
-            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
-             name="rule" />
+            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />
 
             
 
-            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
-             name="rule" />
+            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" />
 
             
 
-             are removed from the compatible rule, and the method returns true. If <paramref
-             name="rule" />
+             are removed from the compatible rule, and the method returns true. If <paramref name="rule" />
 
             
 
-             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -804,8 +800,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can specify inheritance and propagation flags for event access rules, by creating them with the <see
-               cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
+              >Although you can specify inheritance and propagation flags for event access rules, by creating them with the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
 
               
 
@@ -816,8 +811,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for an access control rule with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Searches for an access control rule with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -829,17 +823,19 @@
           <para>true if a compatible rule is found; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+          An <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
           
 
-           that specifies the user and <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+           that specifies the user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -872,23 +868,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
-             is searched for rules that have the same user and the same <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             is searched for rules that have the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             value as <paramref
-             name="rule" />
+             value as <paramref name="rule" />
 
             
 
-            . Any rights specified by <paramref
-             name="rule" />
+            . Any rights specified by <paramref name="rule" />
 
             
 
@@ -898,8 +890,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for all access control rules with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Searches for all access control rules with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -907,17 +898,19 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+          An <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
           
 
-           that specifies the user and <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+           that specifies the user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -950,13 +943,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The rule is removed only if it exactly matches <paramref
-             name="rule" />
+            >The rule is removed only if it exactly matches <paramref name="rule" />
 
             
 
-             in all details, including flags. Other rules with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             in all details, including flags. Other rules with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -964,8 +955,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
-               cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)" />
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)" />
 
               
 
@@ -978,12 +968,15 @@
           <para>Searches for an access control rule that exactly matches the specified rule and, if found, removes it.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+          The <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
           
 
@@ -1016,33 +1009,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
-             is searched for an audit rule that has the same user as <paramref
-             name="rule" />
+             is searched for an audit rule that has the same user as <paramref name="rule" />
 
             
 
-            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
-             name="rule" />
+            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />
 
             
 
-            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
-             name="rule" />
+            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" />
 
             
 
-             are removed from the compatible rule, and the method returns true. If <paramref
-             name="rule" />
+             are removed from the compatible rule, and the method returns true. If <paramref name="rule" />
 
             
 
-             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -1050,8 +1037,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can specify inheritance and propagation flags for event audit rules, by creating them with the <see
-               cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
+              >Although you can specify inheritance and propagation flags for event audit rules, by creating them with the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
 
               
 
@@ -1068,12 +1054,15 @@
           <para>true if a compatible rule is found; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+          An <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
           
 
@@ -1106,18 +1095,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
-             is searched for audit rules that have the same user as <paramref
-             name="rule" />
+             is searched for audit rules that have the same user as <paramref name="rule" />
 
             
 
-            . Any rights specified by <paramref
-             name="rule" />
+            . Any rights specified by <paramref name="rule" />
 
             
 
@@ -1129,12 +1115,15 @@
           <para>Searches for all audit rules with the same user as the specified rule and, if found, removes them.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+          An <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
           
 
@@ -1167,8 +1156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The rule is removed only if it exactly matches <paramref
-             name="rule" />
+            >The rule is removed only if it exactly matches <paramref name="rule" />
 
             
 
@@ -1176,8 +1164,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
-               cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)" />
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)" />
 
               
 
@@ -1190,12 +1177,15 @@
           <para>Searches for an audit rule that exactly matches the specified rule and, if found, removes it.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+          The <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
           
 
@@ -1228,8 +1218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are no access rules whose user matches the specified rule, <paramref
-             name="rule" />
+            >If there are no access rules whose user matches the specified rule, <paramref name="rule" />
 
             
 
@@ -1239,8 +1228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access control rules with the same user as the specified rule, regardless of <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Removes all access control rules with the same user as the specified rule, regardless of <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -1248,12 +1236,15 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+          The <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
           
 
@@ -1286,36 +1277,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified rule has <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+            >If the specified rule has <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-            , the effect of this method is to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+            , the effect of this method is to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             rules for the specified user, replacing them with the specified rule. If the specified rule has <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             rules for the specified user, replacing them with the specified rule. If the specified rule has <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-            , all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+            , all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
              rules for the specified user are replaced with the specified rule.</para
           >
           <para
-            >If there are no rules whose user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >If there are no rules whose user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             match the specified rule, <paramref
-             name="rule" />
+             match the specified rule, <paramref name="rule" />
 
             
 
@@ -1325,8 +1310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access control rules with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Removes all access control rules with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -1334,17 +1318,19 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+          The <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
           
 
-           to add. The user and <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+           to add. The user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -1377,8 +1363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are no audit rules whose user matches the specified rule, <paramref
-             name="rule" />
+            >If there are no audit rules whose user matches the specified rule, <paramref name="rule" />
 
             
 
@@ -1388,8 +1373,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules with the same user as the specified rule, regardless of the <see
-             cref="T:System.Security.AccessControl.AuditFlags" />
+            >Removes all audit rules with the same user as the specified rule, regardless of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
             
 
@@ -1397,12 +1381,15 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+          The <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
           
 

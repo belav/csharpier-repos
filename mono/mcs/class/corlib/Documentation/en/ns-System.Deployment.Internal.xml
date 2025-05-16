@@ -5,18 +5,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Deployment.Internal" />
+        >The <see cref="N:System.Deployment.Internal" />
 
         
 
-         namespace contains helper classes for accessing the internal members of <see
-         cref="T:System.ActivationContext" />
+         namespace contains helper classes for accessing the internal members of <see cref="T:System.ActivationContext" />
 
         
 
-         and <see
-         cref="T:System.ApplicationIdentity" />
+         and <see cref="T:System.ApplicationIdentity" />
 
         
 

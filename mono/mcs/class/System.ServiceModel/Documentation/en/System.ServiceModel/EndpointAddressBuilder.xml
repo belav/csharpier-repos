@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The new endpoint address can have its property values initialized from the property values of an existing endpoint address using the <see
-         cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" />
+        >The new endpoint address can have its property values initialized from the property values of an existing endpoint address using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" />
 
         
 
          constructor. </para
       >
       <para
-        >The endpoint addresses created can have their URI and identity values set using the <see
-         cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" />
+        >The endpoint addresses created can have their URI and identity values set using the <see cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" />
+         and <see cref="P:System.ServiceModel.EndpointAddressBuilder.Identity" />
 
         
 
-         properties of the endpoint address builder. Note that <see
-         cref="T:System.ServiceModel.EndpointAddress" />
+         properties of the endpoint address builder. Note that <see cref="T:System.ServiceModel.EndpointAddress" />
 
         
 
@@ -65,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddressBuilder" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" />
 
             
 
@@ -99,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddressBuilder" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddressBuilder" />
 
             
 
@@ -108,12 +102,15 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -150,8 +147,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >The <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -186,8 +182,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >The <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -217,8 +212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Address headers for the endpoints can be set using the <see
-             cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" />
+            >Address headers for the endpoints can be set using the <see cref="M:System.ServiceModel.EndpointAddressBuilder.#ctor(System.ServiceModel.EndpointAddress)" />
 
             
 
@@ -285,12 +279,15 @@
           <para>Specifies the XML dictionary reader that contains the extensions of the endpoint address.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
@@ -324,12 +321,15 @@
           <para>Specifies the XML dictionary reader that contains the metadata associated with the endpoint address.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
@@ -366,8 +366,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 

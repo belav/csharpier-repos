@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The sending side of channels must expose the <see
-         cref="T:System.Runtime.Remoting.Channels.IChannelSender" />
+        >The sending side of channels must expose the <see cref="T:System.Runtime.Remoting.Channels.IChannelSender" />
 
         
 

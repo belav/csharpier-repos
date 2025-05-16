@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see
-         cref="T:System.Windows.Forms.CheckBox" />
+        >Use a <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         to give the user an option, such as true/false or yes/no. The <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         to give the user an option, such as true/false or yes/no. The <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
@@ -51,64 +49,53 @@
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.RadioButton" />
+         and <see cref="T:System.Windows.Forms.RadioButton" />
 
         
 
-         controls have a similar function: they allow the user to choose from a list of options. <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         controls have a similar function: they allow the user to choose from a list of options. <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         controls let the user pick a combination of options. In contrast, <see
-         cref="T:System.Windows.Forms.RadioButton" />
+         controls let the user pick a combination of options. In contrast, <see cref="T:System.Windows.Forms.RadioButton" />
 
         
 
          controls allow a user to choose from mutually exclusive options.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.CheckBox.Appearance" />
+        >The <see cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
         
 
-         property determines whether the <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         property determines whether the <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         appears as a typical <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         appears as a typical <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
          or as a button.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.CheckBox.ThreeState" />
+        >The <see cref="P:System.Windows.Forms.CheckBox.ThreeState" />
 
         
 
-         property determines whether the control supports two or three states. Use the <see
-         cref="P:System.Windows.Forms.CheckBox.Checked" />
+         property determines whether the control supports two or three states. Use the <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
         
 
-         property to get or set the value of a two-state <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         property to get or set the value of a two-state <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         control and use the <see
-         cref="P:System.Windows.Forms.CheckBox.CheckState" />
+         control and use the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
         
 
-         property to get or set the value of a three-state <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         property to get or set the value of a three-state <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
@@ -116,13 +103,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see
-           cref="P:System.Windows.Forms.CheckBox.ThreeState" />
+          >If the <see cref="P:System.Windows.Forms.CheckBox.ThreeState" />
 
           
 
-           property is set to true, the <see
-           cref="P:System.Windows.Forms.CheckBox.Checked" />
+           property is set to true, the <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
           
 
@@ -130,18 +115,15 @@
         >
       </block>
       <para
-        >The <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+        >The <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-         property determines the style and appearance of the control. If the <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+         property determines the style and appearance of the control. If the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-         property is set to <see
-         cref="F:System.Windows.Forms.FlatStyle.System" />
+         property is set to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
         
 
@@ -149,43 +131,35 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+          >When the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
           
 
-           property is set to <see
-           cref="F:System.Windows.Forms.FlatStyle.System" />
+           property is set to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
           
 
-          , the <see
-           cref="P:System.Windows.Forms.CheckBox.CheckAlign" />
+          , the <see cref="P:System.Windows.Forms.CheckBox.CheckAlign" />
 
           
 
-           property is ignored and the control is displayed using the <see
-           cref="F:System.Drawing.ContentAlignment.MiddleLeft" />
+           property is ignored and the control is displayed using the <see cref="F:System.Drawing.ContentAlignment.MiddleLeft" />
 
           
 
-           or <see
-           cref="F:System.Drawing.ContentAlignment.MiddleRight" />
+           or <see cref="F:System.Drawing.ContentAlignment.MiddleRight" />
 
           
 
-           alignment. If the <see
-           cref="P:System.Windows.Forms.CheckBox.CheckAlign" />
+           alignment. If the <see cref="P:System.Windows.Forms.CheckBox.CheckAlign" />
 
           
 
-           property is set to one of the right alignments, the control is displayed using the <see
-           cref="F:System.Drawing.ContentAlignment.MiddleRight" />
+           property is set to one of the right alignments, the control is displayed using the <see cref="F:System.Drawing.ContentAlignment.MiddleRight" />
 
           
 
-           alignment; otherwise, it is displayed using the <see
-           cref="F:System.Drawing.ContentAlignment.MiddleLeft" />
+           alignment; otherwise, it is displayed using the <see cref="F:System.Drawing.ContentAlignment.MiddleLeft" />
 
           
 
@@ -193,28 +167,23 @@
         >
       </block>
       <para
-        >The following describes an indeterminate state: You have a <see
-         cref="T:System.Windows.Forms.CheckBox" />
+        >The following describes an indeterminate state: You have a <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         that determines if the selected text in a <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         that determines if the selected text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         is bold. When you select text you can click the <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         is bold. When you select text you can click the <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         to bold the selection. Likewise, when you select some text, the <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         to bold the selection. Likewise, when you select some text, the <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
-         displays whether the selected text is bold. If your selected text contains text that is bold and normal, the <see
-         cref="T:System.Windows.Forms.CheckBox" />
+         displays whether the selected text is bold. If your selected text contains text that is bold and normal, the <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
@@ -224,8 +193,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a Windows <see
-         cref="T:System.Windows.Forms.CheckBox" />
+        >Represents a Windows <see cref="T:System.Windows.Forms.CheckBox" />
 
         
 
@@ -242,28 +210,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, when a new <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >By default, when a new <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             is instantiated, <see
-             cref="P:System.Windows.Forms.CheckBox.AutoCheck" />
+             is instantiated, <see cref="P:System.Windows.Forms.CheckBox.AutoCheck" />
 
             
 
-             is set to true, <see
-             cref="P:System.Windows.Forms.CheckBox.Checked" />
+             is set to true, <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
             
 
-             is set to false, and <see
-             cref="P:System.Windows.Forms.CheckBox.Appearance" />
+             is set to false, and <see cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
-             is set to <see
-             cref="F:System.Windows.Forms.Appearance.Normal" />
+             is set to <see cref="F:System.Windows.Forms.Appearance.Normal" />
 
             
 
@@ -273,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -309,23 +271,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Windows.Forms.CheckBox.Appearance" />
+            >If <see cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
-             value is set to <see
-             cref="F:System.Windows.Forms.Appearance.Normal" />
+             value is set to <see cref="F:System.Windows.Forms.Appearance.Normal" />
 
             
 
-            , the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            , the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             has a typical appearance. If the value is set to Button, the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             has a typical appearance. If the value is set to Button, the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -335,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value that determines the appearance of a <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Gets or sets the value that determines the appearance of a <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -359,8 +316,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -372,8 +328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.CheckBox.Appearance" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
@@ -402,23 +357,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Windows.Forms.CheckBox.AutoCheck" />
+            >If <see cref="P:System.Windows.Forms.CheckBox.AutoCheck" />
 
             
 
-             is set to false, you will need to add code to update the <see
-             cref="P:System.Windows.Forms.CheckBox.Checked" />
+             is set to false, you will need to add code to update the <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+             or <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
-             values in the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+             values in the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -428,23 +379,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or set a value indicating whether the <see
-             cref="P:System.Windows.Forms.CheckBox.Checked" />
+            >Gets or set a value indicating whether the <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+             or <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
-             values and the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             values and the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-            's appearance are automatically changed when the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            's appearance are automatically changed when the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -483,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the horizontal and vertical alignment of the check mark on a <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Gets or sets the horizontal and vertical alignment of the check mark on a <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -522,18 +468,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the value is true, the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >When the value is true, the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             portion of the control displays a check mark. If the <see
-             cref="P:System.Windows.Forms.CheckBox.Appearance" />
+             portion of the control displays a check mark. If the <see cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
-             property is set to Button, the control will appear sunken when <see
-             cref="P:System.Windows.Forms.CheckBox.Checked" />
+             property is set to Button, the control will appear sunken when <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
             
 
@@ -543,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or set a value indicating whether the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Gets or set a value indicating whether the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -567,8 +509,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -580,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.CheckBox.Checked" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.CheckBox.Checked" />
 
             
 
@@ -619,31 +559,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.CheckBox.ThreeState" />
+            >If the <see cref="P:System.Windows.Forms.CheckBox.ThreeState" />
 
             
 
-             property is set to false, the <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+             property is set to false, the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
              property value can only be set to CheckState.Indeterminate in code and not by user interaction.</para
           >
           <para
-            >The following table describes the <see
-             cref="T:System.Windows.Forms.Appearance" />
+            >The following table describes the <see cref="T:System.Windows.Forms.Appearance" />
 
             
 
-             of the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             of the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             control in its different states for the Normal and Button style control <see
-             cref="P:System.Windows.Forms.CheckBox.Appearance" />
+             control in its different states for the Normal and Button style control <see cref="P:System.Windows.Forms.CheckBox.Appearance" />
 
             
 
@@ -669,8 +604,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Windows.Forms.CheckBox" />
+                  >The <see cref="T:System.Windows.Forms.CheckBox" />
 
                   
 
@@ -687,8 +621,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Windows.Forms.CheckBox" />
+                  >The <see cref="T:System.Windows.Forms.CheckBox" />
 
                   
 
@@ -705,8 +638,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Windows.Forms.CheckBox" />
+                  >The <see cref="T:System.Windows.Forms.CheckBox" />
 
                   
 
@@ -722,8 +654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the state of the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Gets or sets the state of the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -746,8 +677,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -759,8 +689,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
@@ -787,13 +716,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.CheckBox.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.CheckBox.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -801,8 +728,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
               
 
@@ -813,8 +739,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -824,8 +749,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.CheckBox.CheckBoxAccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.CheckBox.CheckBoxAccessibleObject" />
 
             
 
@@ -900,23 +824,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+             and <see cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
 
             
 
-             enumerations are set to false for the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             enumerations are set to false for the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             control, and the <see
-             cref="E:System.Windows.Forms.CheckBox.DoubleClick" />
+             control, and the <see cref="E:System.Windows.Forms.CheckBox.DoubleClick" />
 
             
 
@@ -927,8 +847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -965,23 +884,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+            >By default, the <see cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+             and <see cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
 
             
 
-             style bits are set to false for the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             style bits are set to false for the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             control, and the <see
-             cref="E:System.Windows.Forms.CheckBox.MouseDoubleClick" />
+             control, and the <see cref="E:System.Windows.Forms.CheckBox.MouseDoubleClick" />
 
             
 
@@ -992,8 +907,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -1018,8 +932,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1028,8 +941,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckBox.OnAppearanceChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckBox.OnAppearanceChanged(System.EventArgs)" />
 
             
 
@@ -1039,8 +951,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckBox.AppearanceChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckBox.AppearanceChanged" />
 
             
 
@@ -1048,12 +959,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1081,8 +995,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1091,8 +1004,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckBox.OnCheckedChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckBox.OnCheckedChanged(System.EventArgs)" />
 
             
 
@@ -1102,8 +1014,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckBox.CheckedChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckBox.CheckedChanged" />
 
             
 
@@ -1111,12 +1022,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1144,8 +1058,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1154,8 +1067,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckBox.OnCheckStateChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckBox.OnCheckStateChanged(System.EventArgs)" />
 
             
 
@@ -1165,8 +1077,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckBox.CheckStateChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckBox.CheckStateChanged" />
 
             
 
@@ -1174,12 +1085,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1204,56 +1118,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
 
             
 
-             method changes the <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+             method changes the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
-             property. If the <see
-             cref="P:System.Windows.Forms.CheckBox.ThreeState" />
+             property. If the <see cref="P:System.Windows.Forms.CheckBox.ThreeState" />
 
             
 
-             property is set to true, subsequent clicks of the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+             property is set to true, subsequent clicks of the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
-             will result in <see
-             cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
+             will result in <see cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
 
             
 
-             cycling through all the values of the <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+             cycling through all the values of the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
-             enumeration. Otherwise, <see
-             cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
+             enumeration. Otherwise, <see cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
 
             
 
-             switches between <see
-             cref="F:System.Windows.Forms.CheckState.Checked" />
+             switches between <see cref="F:System.Windows.Forms.CheckState.Checked" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.CheckState.Unchecked" />
+             and <see cref="F:System.Windows.Forms.CheckState.Unchecked" />
 
             
 
             .</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1262,8 +1166,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckBox.OnClick(System.EventArgs)" />
 
             
 
@@ -1273,8 +1176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
@@ -1282,12 +1184,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1340,7 +1245,11 @@
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1386,8 +1295,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called to give a control the opportunity to process a mnemonic character. The method should determine whether the control is in a state to process mnemonics and if whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. Implementations of this method often use the <see
-             cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" />
+            >This method is called to give a control the opportunity to process a mnemonic character. The method should determine whether the control is in a state to process mnemonics and if whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. Implementations of this method often use the <see cref="M:System.Windows.Forms.Control.IsMnemonic(System.Char,System.String)" />
 
             
 
@@ -1398,8 +1306,7 @@
     // Perform action associated with mnemonic.
     }</code>
           <para
-            >This default implementation of the <see
-             cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" />
+            >This default implementation of the <see cref="M:System.Windows.Forms.Control.ProcessMnemonic(System.Char)" />
 
             
 
@@ -1415,7 +1322,11 @@
           <para>true if the character was processed as a mnemonic by the control; otherwise, false.</para>
         </returns>
         <param name="charCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1450,8 +1361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alignment of the text on the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Gets or sets the alignment of the text on the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -1480,18 +1390,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.CheckBox.ThreeState" />
+            >If the <see cref="P:System.Windows.Forms.CheckBox.ThreeState" />
 
             
 
-             property is set to false, the <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+             property is set to false, the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 
-             property value can only be set to the Indeterminate value of <see
-             cref="T:System.Windows.Forms.CheckState" />
+             property value can only be set to the Indeterminate value of <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -1501,8 +1408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -1527,8 +1433,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Windows.Forms.CheckBox" />
+            >Returns a string that represents the current <see cref="T:System.Windows.Forms.CheckBox" />
 
             
 
@@ -1538,8 +1443,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that states the control type and the state of the <see
-             cref="P:System.Windows.Forms.CheckBox.CheckState" />
+            >A string that states the control type and the state of the <see cref="P:System.Windows.Forms.CheckBox.CheckState" />
 
             
 

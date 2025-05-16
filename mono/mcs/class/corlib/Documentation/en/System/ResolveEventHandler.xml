@@ -33,39 +33,31 @@
     <ReturnType>System.Reflection.Assembly</ReturnType>
   </ReturnValue>
   <Docs>
-    <param name="sender"
-      >An instance of <see
-       cref="T:System.AppDomain" />
-    </param>
+    <param name="sender">An instance of <see cref="T:System.AppDomain" /></param>
     <param name="args">The arguments to the resolution callback.</param>
     <returns>The assembly that this event resolved to.</returns>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If the runtime class loader cannot resolve a reference to an assembly, type, or resource, the corresponding events are raised to give the callback a chance to tell the runtime which assembly the referenced assembly, type, or resource is in. It is the responsibility of the <see
-         cref="T:System.ResolveEventHandler" />
+        >If the runtime class loader cannot resolve a reference to an assembly, type, or resource, the corresponding events are raised to give the callback a chance to tell the runtime which assembly the referenced assembly, type, or resource is in. It is the responsibility of the <see cref="T:System.ResolveEventHandler" />
 
         
 
-         to return the assembly that resolves the type, assembly, or resource, or to return null if the assembly is not recognized. For more information, see <format
-         type="text/html">
+         to return the assembly that resolves the type, assembly, or resource, or to return null if the assembly is not recognized. For more information, see <format type="text/html">
           <a href="5099e549-f4fd-49fb-a290-549edd456c6a">Resolving Assembly Loads</a>
         </format>
 
         
 
-         and the <see
-         cref="E:System.AppDomain.ResourceResolve" />
+         and the <see cref="E:System.AppDomain.ResourceResolve" />
 
         
 
-        , <see
-         cref="E:System.AppDomain.AssemblyResolve" />
+        , <see cref="E:System.AppDomain.AssemblyResolve" />
 
         
 
-        , and <see
-         cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
+        , and <see cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
 
         
 
@@ -73,8 +65,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Beginning with the net_v40_long, the <see
-           cref="T:System.ResolveEventHandler" />
+          >Beginning with the net_v40_long, the <see cref="T:System.ResolveEventHandler" />
 
           
 
@@ -82,18 +73,15 @@
         >
       </block>
       <para
-        >Every derived class of <see
-         cref="T:System.Delegate" />
+        >Every derived class of <see cref="T:System.Delegate" />
 
         
 
-         and <see
-         cref="T:System.MulticastDelegate" />
+         and <see cref="T:System.MulticastDelegate" />
 
         
 
-         has a constructor and an Invoke method. See the C++ code example in the description for the <see
-         cref="T:System.Delegate" />
+         has a constructor and an Invoke method. See the C++ code example in the description for the <see cref="T:System.Delegate" />
 
         
 
@@ -103,23 +91,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a method that handles the <see
-         cref="E:System.AppDomain.TypeResolve" />
+        >Represents a method that handles the <see cref="E:System.AppDomain.TypeResolve" />
 
         
 
-        , <see
-         cref="E:System.AppDomain.ResourceResolve" />
+        , <see cref="E:System.AppDomain.ResourceResolve" />
 
         
 
-        , or <see
-         cref="E:System.AppDomain.AssemblyResolve" />
+        , or <see cref="E:System.AppDomain.AssemblyResolve" />
 
         
 
-         event of an <see
-         cref="T:System.AppDomain" />
+         event of an <see cref="T:System.AppDomain" />
 
         
 

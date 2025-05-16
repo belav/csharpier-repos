@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="10.7.1.2" title="Hiding through inheritance">
   <paragraph
-    >Name hiding through inheritance occurs when classes or structs redeclare names that were inherited from base classes. This type of name hiding takes one of the following forms: <list
-    >
+    >Name hiding through inheritance occurs when classes or structs redeclare names that were inherited from base classes. This type of name hiding takes one of the following forms: <list>
       <list_item> A constant, field, property, event, or type introduced in a class or struct hides all base class members with the same name. </list_item>
       <list_item> A method introduced in a class or struct hides all non-method base class members with the same name, and all base class methods with the same signature (method name and parameter count, modifiers, and types). </list_item>
       <list_item> An indexer introduced in a class or struct hides all base class indexers with the same signature (parameter count and types). </list_item>
     </list>
   </paragraph>
   <paragraph
-    >The rules governing operator declarations (<hyperlink
-    >17.9</hyperlink>
+    >The rules governing operator declarations (<hyperlink>17.9</hyperlink>
 
     
 
@@ -18,9 +16,7 @@
   >
   <paragraph
     >Contrary to hiding a name from an outer scope, hiding an accessible name from an inherited scope causes a warning to be reported. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class Base  
 {  
@@ -40,9 +36,7 @@ class Derived: Base
   </paragraph>
   <paragraph
     >The warning caused by hiding an inherited name can be eliminated through use of the new modifier: <example
-
-      >[Example: <code_example
-      >
+      >[Example: <code_example>
         <![CDATA[
 class Base  
 {  
@@ -62,8 +56,7 @@ class Derived: Base
   <paragraph>A declaration of a new member hides an inherited member only within the scope of the new member. </paragraph>
   <paragraph>
     <example
-      >[Example: <code_example
-      >
+      >[Example: <code_example>
         <![CDATA[
 class Base  
 {  

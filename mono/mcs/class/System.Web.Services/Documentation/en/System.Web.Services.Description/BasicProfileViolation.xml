@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.WsiProfiles" />
+            >Gets a <see cref="T:System.Web.Services.WsiProfiles" />
 
             
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.String" />
+            >Gets a <see cref="T:System.String" />
 
             
 
@@ -127,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.String" />
+            >Gets a <see cref="T:System.String" />
 
             
 
@@ -153,23 +150,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
-             that comprises information from <see
-             cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
+             that comprises information from <see cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
 
             
 
-            , <see
-             cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />
+            , <see cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />
 
             
 
-            , and <see
-             cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
+            , and <see cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
 
             
 
@@ -179,23 +172,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that comprises information from <see
-             cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
+             that comprises information from <see cref="P:System.Web.Services.Description.BasicProfileViolation.NormativeStatement" />
 
             
 
-            , <see
-             cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />
+            , <see cref="P:System.Web.Services.Description.BasicProfileViolation.Details" />
 
             
 
-            , and <see
-             cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
+            , and <see cref="P:System.Web.Services.Description.BasicProfileViolation.Elements" />
 
             
 

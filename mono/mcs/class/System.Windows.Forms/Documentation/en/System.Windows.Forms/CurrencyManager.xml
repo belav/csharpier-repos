@@ -17,109 +17,89 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.CurrencyManager" />
+        >The <see cref="T:System.Windows.Forms.CurrencyManager" />
 
         
 
-         derives from the <see
-         cref="T:System.Windows.Forms.BindingManagerBase" />
+         derives from the <see cref="T:System.Windows.Forms.BindingManagerBase" />
 
         
 
-         class. Use the <see
-         cref="T:System.Windows.Forms.BindingContext" />
+         class. Use the <see cref="T:System.Windows.Forms.BindingContext" />
 
         
 
-         to return either a <see
-         cref="T:System.Windows.Forms.CurrencyManager" />
+         to return either a <see cref="T:System.Windows.Forms.CurrencyManager" />
 
         
 
-         or a <see
-         cref="T:System.Windows.Forms.PropertyManager" />
+         or a <see cref="T:System.Windows.Forms.PropertyManager" />
 
         
 
-        . The actual object returned depends on the data source and data member passed to the <see
-         cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+        . The actual object returned depends on the data source and data member passed to the <see cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.BindingContext" />
+         property of the <see cref="T:System.Windows.Forms.BindingContext" />
 
         
 
-        . If the data source is an object that can return only a single property (instead of a list of objects), the type will be a <see
-         cref="T:System.Windows.Forms.PropertyManager" />
+        . If the data source is an object that can return only a single property (instead of a list of objects), the type will be a <see cref="T:System.Windows.Forms.PropertyManager" />
 
         
 
-        . For example, if you specify a <see
-         cref="T:System.Windows.Forms.TextBox" />
+        . For example, if you specify a <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         as the data source, a <see
-         cref="T:System.Windows.Forms.PropertyManager" />
+         as the data source, a <see cref="T:System.Windows.Forms.PropertyManager" />
 
         
 
-         will be returned. If, on the other hand, the data source is an object that implements the <see
-         cref="T:System.Collections.IList" />
+         will be returned. If, on the other hand, the data source is an object that implements the <see cref="T:System.Collections.IList" />
 
         
 
-        , <see
-         cref="T:System.ComponentModel.IListSource" />
+        , <see cref="T:System.ComponentModel.IListSource" />
 
         
 
-        , or <see
-         cref="T:System.ComponentModel.IBindingList" />
+        , or <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
-         interface, a <see
-         cref="T:System.Windows.Forms.CurrencyManager" />
+         interface, a <see cref="T:System.Windows.Forms.CurrencyManager" />
 
         
 
          will be returned.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.BindingManagerBase.Current" />
+        >The <see cref="P:System.Windows.Forms.BindingManagerBase.Current" />
 
         
 
-         property returns the current item in the underlying list. To change the current item, set the <see
-         cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+         property returns the current item in the underlying list. To change the current item, set the <see cref="P:System.Windows.Forms.BindingManagerBase.Position" />
 
         
 
-         property to a new value. The value must be greater than 0 and must be less than the value of the <see
-         cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+         property to a new value. The value must be greater than 0 and must be less than the value of the <see cref="P:System.Windows.Forms.BindingManagerBase.Count" />
 
         
 
          property.</para
       >
       <para
-        >If the underlying data source implements the <see
-         cref="T:System.ComponentModel.IBindingList" />
+        >If the underlying data source implements the <see cref="T:System.ComponentModel.IBindingList" />
 
         
 
-         interface, and the <see
-         cref="P:System.ComponentModel.IBindingList.AllowNew" />
+         interface, and the <see cref="P:System.ComponentModel.IBindingList.AllowNew" />
 
         
 
-         property is set to true, you can use the <see
-         cref="M:System.Windows.Forms.CurrencyManager.AddNew" />
+         property is set to true, you can use the <see cref="M:System.Windows.Forms.CurrencyManager.AddNew" />
 
         
 
@@ -129,8 +109,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Manages a list of <see
-         cref="T:System.Windows.Forms.Binding" />
+        >Manages a list of <see cref="T:System.Windows.Forms.Binding" />
 
         
 
@@ -150,13 +129,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is supported only if the data source implements the <see
-             cref="T:System.ComponentModel.IBindingList" />
+            >This method is supported only if the data source implements the <see cref="T:System.ComponentModel.IBindingList" />
 
             
 
-             interface and the data source allows adding rows (<see
-             cref="P:System.ComponentModel.IBindingList.AllowNew" />
+             interface and the data source allows adding rows (<see cref="P:System.ComponentModel.IBindingList.AllowNew" />
 
             
 
@@ -164,8 +141,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property was designed to allow complex-bound controls, such as the <see
-               cref="T:System.Windows.Forms.DataGrid" />
+              >This property was designed to allow complex-bound controls, such as the <see cref="T:System.Windows.Forms.DataGrid" />
 
               
 
@@ -173,38 +149,31 @@
             >
           </block>
           <para
-            >You typically use this property only if you are creating your own control that incorporates the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >You typically use this property only if you are creating your own control that incorporates the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-            . Otherwise, to add items if the data source is a <see
-             cref="T:System.Data.DataView" />
+            . Otherwise, to add items if the data source is a <see cref="T:System.Data.DataView" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataView.AddNew" />
+            , use the <see cref="M:System.Data.DataView.AddNew" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataView" />
+             method of the <see cref="T:System.Data.DataView" />
 
             
 
-             class. If the data source is a <see
-             cref="T:System.Data.DataTable" />
+             class. If the data source is a <see cref="T:System.Data.DataTable" />
 
             
 
-            , use the <see
-             cref="M:System.Data.DataTable.NewRow" />
+            , use the <see cref="M:System.Data.DataTable.NewRow" />
 
             
 
-             method and add the row to the <see
-             cref="T:System.Data.DataRowCollection" />
+             method and add the row to the <see cref="T:System.Data.DataRowCollection" />
 
             
 
@@ -232,13 +201,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is supported only if the objects contained by the data source implement the <see
-             cref="T:System.ComponentModel.IEditableObject" />
+            >This method is supported only if the objects contained by the data source implement the <see cref="T:System.ComponentModel.IEditableObject" />
 
             
 
-             interface. If the objects contained within the data source do not implement the <see
-             cref="T:System.ComponentModel.IEditableObject" />
+             interface. If the objects contained within the data source do not implement the <see cref="T:System.ComponentModel.IEditableObject" />
 
             
 
@@ -246,33 +213,27 @@
           >
           <block subset="none" type="note">
             <para
-              >This property was designed to be used by complex data-bound controls, such as the <see
-               cref="T:System.Windows.Forms.DataGrid" />
+              >This property was designed to be used by complex data-bound controls, such as the <see cref="T:System.Windows.Forms.DataGrid" />
 
               
 
-               control, to cancel edits. For example, when the user presses the ESC key, the <see
-               cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+               control, to cancel edits. For example, when the user presses the ESC key, the <see cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
 
               
 
-               method is called on the <see
-               cref="T:System.Windows.Forms.CurrencyManager" />
+               method is called on the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
               
 
-               for the <see
-               cref="T:System.Windows.Forms.DataGrid" />
+               for the <see cref="T:System.Windows.Forms.DataGrid" />
 
               
 
-              . Unless you are creating a control that requires this same functionality, you should not use this method. Instead, use the <see
-               cref="M:System.Data.DataRowView.CancelEdit" />
+              . Unless you are creating a control that requires this same functionality, you should not use this method. Instead, use the <see cref="M:System.Data.DataRowView.CancelEdit" />
 
               
 
-               method of the <see
-               cref="T:System.Data.DataRowView" />
+               method of the <see cref="T:System.Data.DataRowView" />
 
               
 
@@ -320,13 +281,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the count property to determine when the end of a list has been reached. Because the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >Use the count property to determine when the end of a list has been reached. Because the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-             maintains a 0-based array of items, the end of the list is always <see
-             cref="P:System.Windows.Forms.CurrencyManager.Count" />
+             maintains a 0-based array of items, the end of the list is always <see cref="P:System.Windows.Forms.CurrencyManager.Count" />
 
             
 
@@ -354,18 +313,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order to get the current item, you must know its data type in order to cast it correctly. For example, if the data source is a <see
-             cref="T:System.Data.DataView" />
+            >In order to get the current item, you must know its data type in order to cast it correctly. For example, if the data source is a <see cref="T:System.Data.DataView" />
 
             
 
-             or <see
-             cref="T:System.Data.DataTable" />
+             or <see cref="T:System.Data.DataTable" />
 
             
 
-            , you must cast the current item as a <see
-             cref="T:System.Data.DataRowView" />
+            , you must cast the current item as a <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -393,13 +349,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is supported only if the objects contained by the data source implement the <see
-             cref="T:System.ComponentModel.IEditableObject" />
+            >This method is supported only if the objects contained by the data source implement the <see cref="T:System.ComponentModel.IEditableObject" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.ICancelAddNew" />
+             or <see cref="T:System.ComponentModel.ICancelAddNew" />
 
             
 
@@ -407,28 +361,23 @@
           >
           <block subset="none" type="note">
             <para
-              >This property was designed to be used by complex data-bound controls, such as the <see
-               cref="T:System.Windows.Forms.DataGridView" />
+              >This property was designed to be used by complex data-bound controls, such as the <see cref="T:System.Windows.Forms.DataGridView" />
 
               
 
-               control. Unless you are creating a control that requires this same functionality, you should not use this method. Instead, if the data source is either a <see
-               cref="T:System.Data.DataView" />
+               control. Unless you are creating a control that requires this same functionality, you should not use this method. Instead, if the data source is either a <see cref="T:System.Data.DataView" />
 
               
 
-               or <see
-               cref="T:System.Data.DataTable" />
+               or <see cref="T:System.Data.DataTable" />
 
               
 
-              , use the <see
-               cref="M:System.Data.DataRowView.EndEdit" />
+              , use the <see cref="M:System.Data.DataRowView.EndEdit" />
 
               
 
-               method of the <see
-               cref="T:System.Data.DataRowView" />
+               method of the <see cref="T:System.Data.DataRowView" />
 
               
 
@@ -478,13 +427,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >The <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             for the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -498,8 +445,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -532,13 +478,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="M:System.Windows.Forms.CurrencyManager.GetListName(System.Collections.ArrayList)" />
+            >For the <see cref="M:System.Windows.Forms.CurrencyManager.GetListName(System.Collections.ArrayList)" />
 
             
 
-             method to be successful, the underlying list must be of type <see
-             cref="T:System.ComponentModel.ITypedList" />
+             method to be successful, the underlying list must be of type <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
@@ -552,13 +496,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If successful, a <see
-             cref="T:System.String" />
+            >If successful, a <see cref="T:System.String" />
 
             
 
-             containing name of the list supplying the data for the binding; otherwise, an <see
-             cref="F:System.String.Empty" />
+             containing name of the list supplying the data for the binding; otherwise, an <see cref="F:System.String.Empty" />
 
             
 
@@ -566,12 +508,15 @@
           >
         </returns>
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ArrayList" />
+          An <see cref="T:System.Collections.ArrayList" />
 
           
 
@@ -592,44 +537,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
+            >The <see cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
 
             
 
-             event will occur when the user calls the <see
-             cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" />
+             event will occur when the user calls the <see cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" />
 
             
 
-             or <see
-             cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
+             or <see cref="M:System.Windows.Forms.BindingManagerBase.SuspendBinding" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
+            >The <see cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
 
             
 
-             event occurs only when the item itself has been changed in some manner. For example, if the value of an item is changed from 10 to 42, the event will occur. This should not be confused with the <see
-             cref="E:System.Windows.Forms.BindingManagerBase.PositionChanged" />
+             event occurs only when the item itself has been changed in some manner. For example, if the value of an item is changed from 10 to 42, the event will occur. This should not be confused with the <see cref="E:System.Windows.Forms.BindingManagerBase.PositionChanged" />
 
             
 
              event where the item has been changed to a new item.</para
           >
           <para
-            >The event will also occur if the underlying data changes. For example, if you change the value of a <see
-             cref="T:System.Data.DataRowView" />
+            >The event will also occur if the underlying data changes. For example, if you change the value of a <see cref="T:System.Data.DataRowView" />
 
             
 
-            , the <see
-             cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
+            , the <see cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
 
             
 
@@ -637,28 +575,23 @@
           >
           <block subset="none" type="note">
             <para
-              >If you are creating your own control that uses the <see
-               cref="T:System.Windows.Forms.CurrencyManager" />
+              >If you are creating your own control that uses the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
               
 
-              , you should use the <see
-               cref="E:System.ComponentModel.IBindingList.ListChanged" />
+              , you should use the <see cref="E:System.ComponentModel.IBindingList.ListChanged" />
 
               
 
-               instead of the <see
-               cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
+               instead of the <see cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
 
               
 
-               event. The <see
-               cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
+               event. The <see cref="P:System.ComponentModel.ListChangedEventArgs.ListChangedType" />
 
               
 
-               property of the <see
-               cref="T:System.ComponentModel.ListChangedEventArgs" />
+               property of the <see cref="T:System.ComponentModel.ListChangedEventArgs" />
 
               
 
@@ -666,8 +599,7 @@
             >
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -697,71 +629,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by the <see
-             cref="P:System.Windows.Forms.CurrencyManager.List" />
+            >The object returned by the <see cref="P:System.Windows.Forms.CurrencyManager.List" />
 
             
 
-             property can be cast to any type that implements the <see
-             cref="T:System.Collections.IList" />
+             property can be cast to any type that implements the <see cref="T:System.Collections.IList" />
 
             
 
-             interface. This will be commonly used when you know the type of the underlying list. For example, if you are data-bound to a <see
-             cref="T:System.Data.DataSet" />
+             interface. This will be commonly used when you know the type of the underlying list. For example, if you are data-bound to a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the underlying list is a <see
-             cref="T:System.Data.DataView" />
+            , the underlying list is a <see cref="T:System.Data.DataView" />
 
             
 
-             (which implements <see
-             cref="T:System.Collections.IList" />
+             (which implements <see cref="T:System.Collections.IList" />
 
             
 
-            ). Other classes that implement the interface (this is not a complete list) include <see
-             cref="T:System.Array" />
+            ). Other classes that implement the interface (this is not a complete list) include <see cref="T:System.Array" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , and <see
-             cref="T:System.Collections.CollectionBase" />
+            , and <see cref="T:System.Collections.CollectionBase" />
 
             
 
             .</para
           >
           <para
-            >How you use the <see
-             cref="P:System.Windows.Forms.CurrencyManager.List" />
+            >How you use the <see cref="P:System.Windows.Forms.CurrencyManager.List" />
 
             
 
-             property depends on the class that implements the <see
-             cref="T:System.Collections.IList" />
+             property depends on the class that implements the <see cref="T:System.Collections.IList" />
 
             
 
-             interface. For example, you can use the <see
-             cref="P:System.Windows.Forms.CurrencyManager.List" />
+             interface. For example, you can use the <see cref="P:System.Windows.Forms.CurrencyManager.List" />
 
             
 
-             property to determine the name of the list. If the data source implements the <see
-             cref="T:System.ComponentModel.ITypedList" />
+             property to determine the name of the list. If the data source implements the <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
-             interface, you can use the <see
-             cref="M:System.ComponentModel.ITypedList.GetListName(System.ComponentModel.PropertyDescriptor[])" />
+             interface, you can use the <see cref="M:System.ComponentModel.ITypedList.GetListName(System.ComponentModel.PropertyDescriptor[])" />
 
             
 
@@ -779,8 +698,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the list for this <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >Gets the list for this <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -809,33 +727,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+            >The <see cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
 
             
 
-             event is thrown by the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             event is thrown by the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-             class when changes to an item are made using methods such as <see
-             cref="M:System.Windows.Forms.CurrencyManager.EndCurrentEdit" />
+             class when changes to an item are made using methods such as <see cref="M:System.Windows.Forms.CurrencyManager.EndCurrentEdit" />
 
             
 
-            , <see
-             cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
+            , <see cref="M:System.Windows.Forms.CurrencyManager.CancelCurrentEdit" />
 
             
 
-            , and <see
-             cref="M:System.Windows.Forms.CurrencyManager.Refresh" />
+            , and <see cref="M:System.Windows.Forms.CurrencyManager.Refresh" />
 
             
 
-            . This event can also occur when the data source is edited directly if it implements the <see
-             cref="T:System.ComponentModel.IBindingListView" />
+            . This event can also occur when the data source is edited directly if it implements the <see cref="T:System.ComponentModel.IBindingListView" />
 
             
 
@@ -843,8 +755,7 @@
           >
           <para>The associated OnListChanged method is a private method in this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -869,28 +780,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see
-             cref="P:System.Windows.Forms.CurrencyManager.Count" />
+            >If the value of the <see cref="P:System.Windows.Forms.CurrencyManager.Count" />
 
             
 
-             property is greater than 0, the <see
-             cref="F:System.Windows.Forms.CurrencyManager.listposition" />
+             property is greater than 0, the <see cref="F:System.Windows.Forms.CurrencyManager.listposition" />
 
             
 
-             field is a number between 0 and <see
-             cref="P:System.Windows.Forms.CurrencyManager.Count" />
+             field is a number between 0 and <see cref="P:System.Windows.Forms.CurrencyManager.Count" />
 
             
 
-             minus 1. If <see
-             cref="P:System.Windows.Forms.CurrencyManager.Count" />
+             minus 1. If <see cref="P:System.Windows.Forms.CurrencyManager.Count" />
 
             
 
-             is 0, <see
-             cref="F:System.Windows.Forms.CurrencyManager.listposition" />
+             is 0, <see cref="F:System.Windows.Forms.CurrencyManager.listposition" />
 
             
 
@@ -900,8 +806,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the current position of the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >Specifies the current position of the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -924,41 +829,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The metadata of the <see
-             cref="P:System.Windows.Forms.CurrencyManager.List" />
+            >The metadata of the <see cref="P:System.Windows.Forms.CurrencyManager.List" />
 
             
 
-             consists of the schema of the underlying <see
-             cref="P:System.Windows.Forms.Binding.DataSource" />
+             consists of the schema of the underlying <see cref="P:System.Windows.Forms.Binding.DataSource" />
 
             
 
-            . The <see
-             cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
+            . The <see cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
 
             
 
-             event is raised when that schema has changed. For example, the <see
-             cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
+             event is raised when that schema has changed. For example, the <see cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
 
             
 
-             event is raised when a <see
-             cref="T:System.Data.DataColumn" />
+             event is raised when a <see cref="T:System.Data.DataColumn" />
 
             
 
-             is programmatically added to a <see
-             cref="T:System.Data.DataTable" />
+             is programmatically added to a <see cref="T:System.Data.DataTable" />
 
             
 
             .</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -970,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the metadata of the <see
-             cref="P:System.Windows.Forms.CurrencyManager.List" />
+            >Occurs when the metadata of the <see cref="P:System.Windows.Forms.CurrencyManager.List" />
 
             
 
@@ -1004,12 +901,15 @@
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -1036,12 +936,15 @@
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -1065,8 +968,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1075,8 +977,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CurrencyManager.OnItemChanged(System.Windows.Forms.ItemChangedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CurrencyManager.OnItemChanged(System.Windows.Forms.ItemChangedEventArgs)" />
 
             
 
@@ -1086,8 +987,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.CurrencyManager.ItemChanged" />
 
             
 
@@ -1095,12 +995,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Windows.Forms.ItemChangedEventArgs" />
+          An <see cref="T:System.Windows.Forms.ItemChangedEventArgs" />
 
           
 
@@ -1128,8 +1031,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1138,8 +1040,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CurrencyManager.OnMetaDataChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CurrencyManager.OnMetaDataChanged(System.EventArgs)" />
 
             
 
@@ -1149,8 +1050,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.CurrencyManager.MetaDataChanged" />
 
             
 
@@ -1158,12 +1058,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1187,8 +1090,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1197,8 +1099,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CurrencyManager.OnPositionChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CurrencyManager.OnPositionChanged(System.EventArgs)" />
 
             
 
@@ -1208,8 +1109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingManagerBase.PositionChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingManagerBase.PositionChanged" />
 
             
 
@@ -1217,12 +1117,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1245,51 +1148,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An important property of the <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+            >An important property of the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-             class is the <see
-             cref="P:System.Windows.Forms.CurrencyManager.Position" />
+             class is the <see cref="P:System.Windows.Forms.CurrencyManager.Position" />
 
             
 
-             property. In a list of items, you can view only one item out of the entire list. To determine which item is viewed, set the <see
-             cref="P:System.Windows.Forms.CurrencyManager.Position" />
+             property. In a list of items, you can view only one item out of the entire list. To determine which item is viewed, set the <see cref="P:System.Windows.Forms.CurrencyManager.Position" />
 
             
 
-             to a number between 0 (the beginning of the list) and <see
-             cref="P:System.Windows.Forms.CurrencyManager.Count" />
+             to a number between 0 (the beginning of the list) and <see cref="P:System.Windows.Forms.CurrencyManager.Count" />
 
             
 
              minus 1 (the end of the list).</para
           >
           <para
-            >Therefore, the <see
-             cref="P:System.Windows.Forms.CurrencyManager.Position" />
+            >Therefore, the <see cref="P:System.Windows.Forms.CurrencyManager.Position" />
 
             
 
-             determines the currency, or place in the list, of all controls bound to the same <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             determines the currency, or place in the list, of all controls bound to the same <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
-            . For example, imagine a list consisting of two columns called "FirstName" and "LastName". Two <see
-             cref="T:System.Windows.Forms.TextBox" />
+            . For example, imagine a list consisting of two columns called "FirstName" and "LastName". Two <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             controls are bound to the same list; the first control is bound to the first column, and the second control is bound to the second column. When the <see
-             cref="P:System.Windows.Forms.CurrencyManager.Position" />
+             controls are bound to the same list; the first control is bound to the first column, and the second control is bound to the second column. When the <see cref="P:System.Windows.Forms.CurrencyManager.Position" />
 
             
 
-             of the common <see
-             cref="T:System.Windows.Forms.CurrencyManager" />
+             of the common <see cref="T:System.Windows.Forms.CurrencyManager" />
 
             
 
@@ -1317,13 +1211,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.CurrencyManager.Refresh" />
+            >Use the <see cref="M:System.Windows.Forms.CurrencyManager.Refresh" />
 
             
 
-             method when the data source does not support notification when it is changed (for example, if it is an <see
-             cref="T:System.Array" />
+             method when the data source does not support notification when it is changed (for example, if it is an <see cref="T:System.Array" />
 
             
 
@@ -1353,23 +1245,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CurrencyManager.RemoveAt(System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.CurrencyManager.RemoveAt(System.Int32)" />
 
             
 
-             method was designed to allow complex controls, such as the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             method was designed to allow complex controls, such as the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
-             control, to remove items from the list. You should not use this method to actually remove items. Instead, use the <see
-             cref="M:System.Data.DataView.Delete(System.Int32)" />
+             control, to remove items from the list. You should not use this method to actually remove items. Instead, use the <see cref="M:System.Data.DataView.Delete(System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataView" />
+             method of the <see cref="T:System.Data.DataView" />
 
             
 
@@ -1381,7 +1269,11 @@
           <para>Removes the item at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1408,8 +1300,7 @@
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
+             and <see cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
 
             
 
@@ -1417,48 +1308,39 @@
           >
           <block subset="none" type="note">
             <para
-              >Using <see
-               cref="M:System.Windows.Forms.CurrencyManager.SuspendBinding" />
+              >Using <see cref="M:System.Windows.Forms.CurrencyManager.SuspendBinding" />
 
               
 
-               prevents changes from being pushed into the data source until <see
-               cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
+               prevents changes from being pushed into the data source until <see cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
 
               
 
-               is called but does not prevent changes in the data source from affecting the bound controls. Controls that use complex data binding, such as the <see
-               cref="T:System.Windows.Forms.DataGridView" />
+               is called but does not prevent changes in the data source from affecting the bound controls. Controls that use complex data binding, such as the <see cref="T:System.Windows.Forms.DataGridView" />
 
               
 
-               control, update their values based on change events such as the <see
-               cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+               control, update their values based on change events such as the <see cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
 
               
 
-               event. Calling this method will not prevent these events from occurring. For this reason, <see
-               cref="M:System.Windows.Forms.CurrencyManager.SuspendBinding" />
+               event. Calling this method will not prevent these events from occurring. For this reason, <see cref="M:System.Windows.Forms.CurrencyManager.SuspendBinding" />
 
               
 
-               and <see
-               cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
+               and <see cref="M:System.Windows.Forms.CurrencyManager.ResumeBinding" />
 
               
 
-               are designed for use with simple-bound controls, such as a <see
-               cref="T:System.Windows.Forms.TextBox" />
+               are designed for use with simple-bound controls, such as a <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-              . Alternatively, you can use these methods in a complex binding scenario if you suppress <see
-               cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+              . Alternatively, you can use these methods in a complex binding scenario if you suppress <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
               
 
-               events by setting the <see
-               cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+               events by setting the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
 
               
 
@@ -1487,13 +1369,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CurrencyManager.SuspendBinding" />
+            >The <see cref="M:System.Windows.Forms.CurrencyManager.SuspendBinding" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+             and <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
             
 
@@ -1505,48 +1385,39 @@
 
               
 
-               prevents changes from being applied to the data source until <see
-               cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+               prevents changes from being applied to the data source until <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
               
 
-               is called, but does not actually prevent any events from occurring. Controls that use complex data binding, such as the <see
-               cref="T:System.Windows.Forms.DataGridView" />
+               is called, but does not actually prevent any events from occurring. Controls that use complex data binding, such as the <see cref="T:System.Windows.Forms.DataGridView" />
 
               
 
-               control, update their values based on change events, such as the <see
-               cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
+               control, update their values based on change events, such as the <see cref="E:System.Windows.Forms.CurrencyManager.ListChanged" />
 
               
 
-               event. Therefore, calling <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+               event. Therefore, calling <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               will not prevent complex-bound controls from receiving events to update the data source. For this reason, <see
-               cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
+               will not prevent complex-bound controls from receiving events to update the data source. For this reason, <see cref="M:System.Windows.Forms.BindingSource.SuspendBinding" />
 
               
 
-               and <see
-               cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
+               and <see cref="M:System.Windows.Forms.BindingSource.ResumeBinding" />
 
               
 
-               are designed for use with simple-bound controls, such as the <see
-               cref="T:System.Windows.Forms.TextBox" />
+               are designed for use with simple-bound controls, such as the <see cref="T:System.Windows.Forms.TextBox" />
 
               
 
-               control. Alternatively, you can use these methods in a complex binding scenario if you suppress <see
-               cref="E:System.Windows.Forms.BindingSource.ListChanged" />
+               control. Alternatively, you can use these methods in a complex binding scenario if you suppress <see cref="E:System.Windows.Forms.BindingSource.ListChanged" />
 
               
 
-               events by setting the <see
-               cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
+               events by setting the <see cref="P:System.Windows.Forms.BindingSource.RaiseListChangedEvents" />
 
               
 

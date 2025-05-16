@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" />
+        >Apply the <see cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" />
 
         
 
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.FixedBufferAttribute" />
 
             
 
@@ -71,14 +69,22 @@
           >
         </summary>
         <param name="elementType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the elements contained in the buffer.</param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

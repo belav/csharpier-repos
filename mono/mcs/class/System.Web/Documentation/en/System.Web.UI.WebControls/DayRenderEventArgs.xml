@@ -16,72 +16,60 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Although data binding is not supported for the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+        >Although data binding is not supported for the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
-         control, it is possible to modify the content and formatting of the individual date cells. Before the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         control, it is possible to modify the content and formatting of the individual date cells. Before the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
-         control is displayed on the Web page, it creates and assembles the components that make up the control. The <see
-         cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
+         control is displayed on the Web page, it creates and assembles the components that make up the control. The <see cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
 
         
 
-         event is raised when each date cell in the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         event is raised when each date cell in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
-         control is created. You can control the contents and formatting of a date cell when it is created by providing code in the event handler for the <see
-         cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
+         control is created. You can control the contents and formatting of a date cell when it is created by providing code in the event handler for the <see cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
 
         
 
          event.</para
       >
       <para
-        >The event handler receives a <see
-         cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+        >The event handler receives a <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
         
 
-         object that contains event data. Use the <see
-         cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
+         object that contains event data. Use the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
 
         
 
-         property to access the cell being rendered. To access the properties of the day being rendered, use the <see
-         cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Day" />
+         property to access the cell being rendered. To access the properties of the day being rendered, use the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Day" />
 
         
 
-         property. When customizing the content for a cell, you might want to preserve the postback behavior when the user selects the date being rendered. This is typically done by rendering the script used to post the page as part of the custom content. To retrieve the script used to post the page back to the server, use the <see
-         cref="P:System.Web.UI.WebControls.DayRenderEventArgs.SelectUrl" />
+         property. When customizing the content for a cell, you might want to preserve the postback behavior when the user selects the date being rendered. This is typically done by rendering the script used to post the page as part of the custom content. To retrieve the script used to post the page back to the server, use the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.SelectUrl" />
 
         
 
          property.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.DayRenderEventArgs.#ctor(System.Web.UI.WebControls.TableCell,System.Web.UI.WebControls.CalendarDay)" />
+        , see the <see cref="M:System.Web.UI.WebControls.DayRenderEventArgs.#ctor(System.Web.UI.WebControls.TableCell,System.Web.UI.WebControls.CalendarDay)" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -93,13 +81,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
 
         
 
-         event of the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         event of the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -123,16 +109,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
             
 
@@ -157,8 +141,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="cell" />
+                  >The value of the <paramref name="cell" />
 
                   
 
@@ -174,8 +157,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="day" />
+                  >The value of the <paramref name="day" />
 
                   
 
@@ -191,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
             
 
@@ -200,34 +181,38 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          A <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           that represents a cell in the <see
-           cref="T:System.Web.UI.WebControls.Calendar" />
+           that represents a cell in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
           
 
           .</param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.CalendarDay" />
+          A <see cref="T:System.Web.UI.WebControls.CalendarDay" />
 
           
 
-           that represents the day to render in the <see
-           cref="T:System.Web.UI.WebControls.Calendar" />
+           that represents the day to render in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
           
 
@@ -257,16 +242,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >When an instance of <see
-             cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+            >When an instance of <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
             
 
@@ -291,8 +274,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="cell" />
+                  >The value of the <paramref name="cell" />
 
                   
 
@@ -308,8 +290,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="day" />
+                  >The value of the <paramref name="day" />
 
                   
 
@@ -325,8 +306,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="selectUrl" />
+                  >The value of the <paramref name="selectUrl" />
 
                   
 
@@ -342,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DayRenderEventArgs" />
 
             
 
@@ -351,41 +330,49 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          A <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           that represents a cell in the <see
-           cref="T:System.Web.UI.WebControls.Calendar" />
+           that represents a cell in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
           
 
           .</param
         >
         <param name="day">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.CalendarDay" />
+          A <see cref="T:System.Web.UI.WebControls.CalendarDay" />
 
           
 
-           that represents the day to render in the <see
-           cref="T:System.Web.UI.WebControls.Calendar" />
+           that represents the day to render in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
           
 
           .</param
         >
         <param name="selectUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -407,26 +394,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
 
             
 
-             property to programmatically control the cell being rendered in the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             property to programmatically control the cell being rendered in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
              control.</para
           >
           <para
-            >You can customize the contents of a cell by dynamically adding controls to the <see
-             cref="P:System.Web.UI.Control.Controls" />
+            >You can customize the contents of a cell by dynamically adding controls to the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
-             collection of the <see
-             cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
+             collection of the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Cell" />
 
             
 
@@ -434,38 +417,31 @@
           >
           <block subset="none" type="note">
             <para
-              >Because the <see
-               cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
+              >Because the <see cref="E:System.Web.UI.WebControls.Calendar.DayRender" />
 
               
 
-               event is raised while the <see
-               cref="T:System.Web.UI.WebControls.Calendar" />
+               event is raised while the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
               
 
-               control is being rendered, you cannot add a control that can also raise an event, such as <see
-               cref="T:System.Web.UI.WebControls.LinkButton" />
+               control is being rendered, you cannot add a control that can also raise an event, such as <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
               
 
-              . You can add only static controls, such as <see
-               cref="T:System.Web.UI.LiteralControl" />
+              . You can add only static controls, such as <see cref="T:System.Web.UI.LiteralControl" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.Label" />
+              , <see cref="T:System.Web.UI.WebControls.Label" />
 
               
 
-              , <see
-               cref="T:System.Web.UI.WebControls.Image" />
+              , <see cref="T:System.Web.UI.WebControls.Image" />
 
               
 
-              , and <see
-               cref="T:System.Web.UI.WebControls.HyperLink" />
+              , and <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
               
 
@@ -476,13 +452,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Gets the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             object that represents the cell being rendered in the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             object that represents the cell being rendered in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -509,13 +483,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Day" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.Day" />
 
             
 
-             property to get information about the day being rendered in the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             property to get information about the day being rendered in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -525,13 +497,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.WebControls.CalendarDay" />
+            >Gets the <see cref="T:System.Web.UI.WebControls.CalendarDay" />
 
             
 
-             object that represents the day being rendered in the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             object that represents the day being rendered in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -558,13 +528,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DayRenderEventArgs.SelectUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DayRenderEventArgs.SelectUrl" />
 
             
 
-             property to retrieve the script used to post the page back to the server when the date being rendered is selected in a <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             property to retrieve the script used to post the page back to the server when the date being rendered is selected in a <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -574,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the script used to post the page back to the server when the date being rendered is selected in a <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Gets the script used to post the page back to the server when the date being rendered is selected in a <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 

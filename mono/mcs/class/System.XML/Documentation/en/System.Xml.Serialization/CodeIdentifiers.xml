@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following list identifies tools and classes that use the <see
-         cref="T:System.Xml.Serialization.CodeIdentifiers" />
+        >The following list identifies tools and classes that use the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
         
 
@@ -31,8 +30,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="b9210348-8bc2-4367-8c91-d1a04b403e88"
                 >Web Services Description Language Tool (Wsdl.exe)</a
               >
@@ -40,8 +38,7 @@
 
             
 
-            , or the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+            , or the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
             
 
@@ -50,8 +47,7 @@
         </item>
         <item>
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="a6e6e65c-347f-4494-9457-653bf29baac2"
                 >XML Schema Definition Tool (Xsd.exe)</a
               >
@@ -64,18 +60,15 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+            >The <see cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
 
             
 
-             class while creating <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             class while creating <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             objects from classes that are identified as Web services via the <see
-             cref="T:System.Web.Services.WebServiceAttribute" />
+             objects from classes that are identified as Web services via the <see cref="T:System.Web.Services.WebServiceAttribute" />
 
             
 
@@ -84,16 +77,14 @@
         </item>
       </list>
       <para
-        >Instead of using the <see
-         cref="T:System.Xml.Serialization.CodeIdentifiers" />
+        >Instead of using the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
         
 
          class directly, use the aforementioned tools or classes. If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes.</para
       >
       <para
-        >Depending on its scope, a <see
-         cref="T:System.Xml.Serialization.CodeIdentifiers" />
+        >Depending on its scope, a <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
         
 
@@ -108,8 +99,7 @@
         </item>
         <item>
           <para
-            >Objects within a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Objects within a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -144,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -173,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -182,7 +170,11 @@
           >
         </summary>
         <param name="caseSensitive">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,26 +205,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+            >Unlike the <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
-             method, the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
+             method, the <see cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
 
             
 
              method does not prevent naming collisions.</para
           >
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -246,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a named code entity or type mapping to the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Adds a named code entity or type mapping to the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -255,14 +242,22 @@
           >
         </summary>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name that is used to index the code entity.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -296,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prevents a specified name from being used within the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Prevents a specified name from being used within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -305,12 +299,15 @@
           >
         </summary>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A name that will not be available within the <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          A name that will not be available within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
           <ui></ui>
 
           
@@ -345,46 +342,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the identifier parameter value is not unique within the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If the identifier parameter value is not unique within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             instance's scope, a new, unique string is generated and used in its place. The new string is generated by appending to the input name. The original name is not unique if it was passed previously to the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
+             instance's scope, a new, unique string is generated and used in its place. The new string is generated by appending to the input name. The original name is not unique if it was passed previously to the <see cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
 
             
 
-            , <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+            , <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
-            , or <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
+            , or <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
 
             
 
-             method, or if it was generated by a previous call to the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+             method, or if it was generated by a previous call to the <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
-             method. In each case, if the new identifier is not unique, it is first passed to the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.MakeUnique(System.String)" />
+             method. In each case, if the new identifier is not unique, it is first passed to the <see cref="M:System.Xml.Serialization.CodeIdentifiers.MakeUnique(System.String)" />
 
             
 
              method to create a new unique identifier.</para
           >
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -398,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a named code entity or type mapping to the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Adds a named code entity or type mapping to the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -411,14 +399,22 @@
           <para>The identifier parameter value or a modified string if there is a name collision.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A candidate name that is used to index the code entity.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -446,21 +442,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reserved names, as added through the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
+            >Reserved names, as added through the <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
 
             
 
              method, are not removed.</para
           >
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -474,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all code entities or type mappings, including their names, from the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Removes all code entities or type mappings, including their names, from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -506,36 +498,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The input name is not unique if it was passed previously to the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
+            >The input name is not unique if it was passed previously to the <see cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
 
             
 
-            , <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+            , <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
-            , or <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
+            , or <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
 
             
 
-             method, or if it was generated by the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+             method, or if it was generated by the <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -549,8 +535,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a specified name is already being used within the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Determines whether a specified name is already being used within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -562,12 +547,15 @@
           <para>true if the name is already in use; otherwise, false.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to check for use within the <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          The name to check for use within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
           
 
@@ -597,13 +585,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see
-             cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" />
+            >If the value of the <see cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" />
 
             
 
-             property is true and the first character of the input is a letter, it is made lowercase, if necessary. If the value of the <see
-             cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" />
+             property is true and the first character of the input is a letter, it is made lowercase, if necessary. If the value of the <see cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" />
 
             
 
@@ -613,8 +599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ensures that the input is of the correct case by modifying the name according to the value of the <see
-             cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" />
+            >Ensures that the input is of the correct case by modifying the name according to the value of the <see cref="P:System.Xml.Serialization.CodeIdentifiers.UseCamelCasing" />
 
             
 
@@ -626,7 +611,11 @@
           <para>A string that is the same as the input identifier or has the first letter's case modified.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -656,36 +645,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The input name is not unique if it was passed previously to the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
+            >The input name is not unique if it was passed previously to the <see cref="M:System.Xml.Serialization.CodeIdentifiers.Add(System.String,System.Object)" />
 
             
 
-            , <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+            , <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
-            , or <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
+            , or <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddReserved(System.String)" />
 
             
 
-              method, or if it was generated by the <see
-             cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
+              method, or if it was generated by the <see cref="M:System.Xml.Serialization.CodeIdentifiers.AddUnique(System.String,System.Object)" />
 
             
 
              method. If the name is not unique, a new string is generated by appending to the original string.</para
           >
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -699,8 +682,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the input name conflicts with another name within the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Determines whether the input name conflicts with another name within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -712,7 +694,11 @@
           <para>The identifier parameter value or a modified string if there is a name collision.</para>
         </returns>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -742,13 +728,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -762,8 +746,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes from the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Removes from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -771,7 +754,11 @@
           >
         </summary>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -801,8 +788,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -812,8 +798,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the input name from the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Removes the input name from the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -821,12 +806,15 @@
           >
         </summary>
         <param name="identifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A name that will be made available within the <see
-           cref="T:System.Xml.Serialization.CodeIdentifiers" />
+          A name that will be made available within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
           
 
@@ -856,13 +844,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >If you want to control the names of code entities that are bound to XML Schema or Web service definitions, use the associated attributes rather than creating an instance of the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
-             class. For a complete list, see <format
-             type="text/html">
+             class. For a complete list, see <format type="text/html">
               <a href="414b820f-a696-4206-b576-2711d85490c7"
                 >Attributes That Control XML Serialization</a
               >
@@ -876,8 +862,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of the code entities or type mappings within the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >Returns an array of the code entities or type mappings within the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -887,8 +872,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of the code entities or type mappings that is stored by the <see
-             cref="T:System.Xml.Serialization.CodeIdentifiers" />
+            >An array of the code entities or type mappings that is stored by the <see cref="T:System.Xml.Serialization.CodeIdentifiers" />
 
             
 
@@ -896,7 +880,11 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

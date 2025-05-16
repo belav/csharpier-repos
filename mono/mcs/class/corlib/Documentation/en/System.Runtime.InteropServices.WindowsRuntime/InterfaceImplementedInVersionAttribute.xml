@@ -57,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.InterfaceImplementedInVersionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.InterfaceImplementedInVersionAttribute" />
 
             
 
@@ -66,55 +65,71 @@
           >
         </summary>
         <param name="interfaceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The interface that was first implemented in the specified version of the target type. </param
         >
         <param name="majorVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The major component of the version of the target type that first implemented <paramref
-           name="interfaceType" />
+          The major component of the version of the target type that first implemented <paramref name="interfaceType" />
 
           
 
           .</param
         >
         <param name="minorVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The minor component of the version of the target type that first implemented <paramref
-           name="interfaceType" />
+          The minor component of the version of the target type that first implemented <paramref name="interfaceType" />
 
           
 
           .</param
         >
         <param name="buildVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The build component of the version of the target type that first implemented <paramref
-           name="interfaceType" />
+          The build component of the version of the target type that first implemented <paramref name="interfaceType" />
 
           
 
           .</param
         >
         <param name="revisionVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The revision component of the version of the target type that first implemented <paramref
-           name="interfaceType" />
+          The revision component of the version of the target type that first implemented <paramref name="interfaceType" />
 
           
 

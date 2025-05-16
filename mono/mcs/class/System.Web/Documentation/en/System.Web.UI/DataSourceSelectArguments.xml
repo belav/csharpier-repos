@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Data-bound controls use the <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
+        >Data-bound controls use the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
         
 
-         class to request that a data source control performs additional data-related operations on a result set, such as sorting the data or returning a specific subset of data. These data-related operations are enumerated by the <see
-         cref="T:System.Web.UI.DataSourceCapabilities" />
+         class to request that a data source control performs additional data-related operations on a result set, such as sorting the data or returning a specific subset of data. These data-related operations are enumerated by the <see cref="T:System.Web.UI.DataSourceCapabilities" />
 
         
 
-         enumeration. The following table indicates how the <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
+         enumeration. The following table indicates how the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
         
 
@@ -66,8 +63,7 @@
 
               
 
-              , <see
-               cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+              , <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
             </para>
           </description>
         </item>
@@ -83,167 +79,137 @@
 
               
 
-              , <see
-               cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+              , <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
             </para>
           </description>
         </item>
       </list>
       <para
-        >Data-bound controls explicitly call the <see
-         cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+        >Data-bound controls explicitly call the <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
         
 
-         method to bind data, which calls the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         method to bind data, which calls the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
         
 
-         method of the data source control they are associated with. In this way, the data-bound control retrieves data from the data source control on demand. Because the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         method of the data source control they are associated with. In this way, the data-bound control retrieves data from the data source control on demand. Because the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
         
 
-         method accepts a <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
+         method accepts a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
         
 
-         parameter, the data-bound control is responsible for creating and managing a <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
+         parameter, the data-bound control is responsible for creating and managing a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
         
 
-         object and passing it to the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         object and passing it to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
         
 
          method when it retrieves data from the data source control.</para
       >
       <para
-        >In some cases, data-bound controls might not need any additional data-related capabilities. In this case, data-bound controls pass an <see
-         cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+        >In some cases, data-bound controls might not need any additional data-related capabilities. In this case, data-bound controls pass an <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
         
 
-         arguments object to the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
-
-        
-
-         method. </para
-      >
-      <para
-        >For sorted result sets, data-bound controls check a data source view's <see
-         cref="P:System.Web.UI.DataSourceView.CanSort" />
-
-        
-
-         property at run time, and add a <see
-         cref="F:System.Web.UI.DataSourceCapabilities.Sort" />
-
-        
-
-         capability using the <see
-         cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
-
-        
-
-         method. As a separate operation, the data-bound control can request a sorted result set from a data source control by setting the <see
-         cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
-
-        
-
-         property on the <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
-
-        
-
-         object passed to the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         arguments object to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
         
 
          method. </para
       >
       <para
-        >For paging scenarios, data-bound controls check a data source view's <see
-         cref="P:System.Web.UI.DataSourceView.CanPage" />
+        >For sorted result sets, data-bound controls check a data source view's <see cref="P:System.Web.UI.DataSourceView.CanSort" />
 
         
 
-         property at run time, and add a <see
-         cref="F:System.Web.UI.DataSourceCapabilities.Page" />
+         property at run time, and add a <see cref="F:System.Web.UI.DataSourceCapabilities.Sort" />
 
         
 
-         capability using the <see
-         cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
+         capability using the <see cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
 
         
 
-         method. As a separate operation, the data-bound control can request a subset of data from a data source control for paging by setting the <see
-         cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+         method. As a separate operation, the data-bound control can request a sorted result set from a data source control by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+         property on the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
         
 
-         properties on the <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
-
-        
-
-         object passed to the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         object passed to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
         
 
          method. </para
       >
       <para
-        >To retrieve a total row count for paging scenarios, data-bound controls check a data source view's <see
-         cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
+        >For paging scenarios, data-bound controls check a data source view's <see cref="P:System.Web.UI.DataSourceView.CanPage" />
 
         
 
-         property at run time, and add a <see
-         cref="F:System.Web.UI.DataSourceCapabilities.RetrieveTotalRowCount" />
+         property at run time, and add a <see cref="F:System.Web.UI.DataSourceCapabilities.Page" />
 
         
 
-         capability using the <see
-         cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
+         capability using the <see cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
 
         
 
-         method. As a separate operation, the data-bound control can request a total row count from a data source control for paging by setting the <see
-         cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
+         method. As a separate operation, the data-bound control can request a subset of data from a data source control for paging by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
         
 
-         property on the <see
-         cref="T:System.Web.UI.DataSourceSelectArguments" />
+         and <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
         
 
-         object passed to the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         properties on the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
         
 
-         method. When the <see
-         cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+         object passed to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
         
 
-         method returns, the total row count is contained by the <see
-         cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+         method. </para
+      >
+      <para
+        >To retrieve a total row count for paging scenarios, data-bound controls check a data source view's <see cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
+
+        
+
+         property at run time, and add a <see cref="F:System.Web.UI.DataSourceCapabilities.RetrieveTotalRowCount" />
+
+        
+
+         capability using the <see cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
+
+        
+
+         method. As a separate operation, the data-bound control can request a total row count from a data source control for paging by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
+
+        
+
+         property on the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+        
+
+         object passed to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+
+        
+
+         method. When the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+
+        
+
+         method returns, the total row count is contained by the <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
         
 
@@ -251,18 +217,15 @@
       >
       <block subset="none" type="note">
         <para
-          >If any of the <see
-           cref="T:System.Web.UI.DataSourceSelectArguments" />
+          >If any of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
           
 
-           properties are set, but the currently bound data source control does not support the requested capability, an <see
-           cref="T:System.InvalidOperationException" />
+           properties are set, but the currently bound data source control does not support the requested capability, an <see cref="T:System.InvalidOperationException" />
 
           
 
-           exception is thrown when the <see
-           cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+           exception is thrown when the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
           
 
@@ -285,23 +248,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor creates an instance of the class with the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+            >The default constructor creates an instance of the class with the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
-             property initialized to <see
-             cref="F:System.String.Empty" />
+             property initialized to <see cref="F:System.String.Empty" />
 
             
 
-             and the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+             and the <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+             and <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
@@ -311,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Initializes a new default instance of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -338,23 +296,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.#ctor(System.String)" />
+            >The <see cref="M:System.Web.UI.DataSourceSelectArguments.#ctor(System.String)" />
 
             
 
-             constructor creates an instance of the class with the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+             constructor creates an instance of the class with the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
-             initialized with the specified expression and the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+             initialized with the specified expression and the <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+             and <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
@@ -364,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -373,7 +326,11 @@
           >
         </summary>
         <param name="sortExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -401,38 +358,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.#ctor(System.Int32,System.Int32)" />
+            >The <see cref="M:System.Web.UI.DataSourceSelectArguments.#ctor(System.Int32,System.Int32)" />
 
             
 
-             constructor creates an instance of the class with the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+             constructor creates an instance of the class with the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
-             initialized to <see
-             cref="F:System.String.Empty" />
+             initialized to <see cref="F:System.String.Empty" />
 
             
 
-             and the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+             and the <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+             and <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
-             properties initialized to the values provided for the <paramref
-             name="startRowIndex" />
+             properties initialized to the values provided for the <paramref name="startRowIndex" />
 
             
 
-             and <paramref
-             name="maximumRows" />
+             and <paramref name="maximumRows" />
 
             
 
@@ -442,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -474,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -483,7 +431,11 @@
           >
         </summary>
         <param name="sortExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -512,53 +464,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Data source controls call the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
+            >Data source controls call the <see cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
 
             
 
-             method for each capability the data source supports. After the capabilities are added, any call to the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+             method for each capability the data source supports. After the capabilities are added, any call to the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
             
 
-             method compares the supported capabilities against the requested capabilities (represented by setting the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+             method compares the supported capabilities against the requested capabilities (represented by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
+            , <see cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+            , <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+            , and <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             properties). For example, if a capability such as <see
-             cref="F:System.Web.UI.DataSourceCapabilities.Sort" />
+             properties). For example, if a capability such as <see cref="F:System.Web.UI.DataSourceCapabilities.Sort" />
 
             
 
-             is not added but the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+             is not added but the <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
-             property is set, the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+             property is set, the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
             
 
-             method throws a <see
-             cref="T:System.NotSupportedException" />
+             method throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -568,8 +510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds one capability to the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Adds one capability to the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -596,23 +537,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property returns a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >The property returns a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object created with the default <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.#ctor" />
+             object created with the default <see cref="M:System.Web.UI.DataSourceSelectArguments.#ctor" />
 
             
 
-             constructor. You can use the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+             constructor. You can use the <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
-             property when you want to call the <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+             property when you want to call the <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
@@ -622,13 +559,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Gets a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object with the sort expression set to <see
-             cref="F:System.String.Empty" />
+             object with the sort expression set to <see cref="F:System.String.Empty" />
 
             
 
@@ -654,43 +589,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >The <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             class overrides the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             class overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             method to test equality using the various properties of the objects. If the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+             method to test equality using the various properties of the objects. If the <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
+            , <see cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+            , <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+            , <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+            , and <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
             
 
-             properties are all equal in value, the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.Equals(System.Object)" />
+             properties are all equal in value, the <see cref="M:System.Web.UI.DataSourceSelectArguments.Equals(System.Object)" />
 
             
 
@@ -700,8 +627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Determines whether the specified <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -711,8 +637,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >true if the specified <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -720,12 +645,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.DataSourceSelectArguments" />
+          The <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
           
 
@@ -749,8 +677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Returns the hash code for the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -760,8 +687,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >The hash code for the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -785,56 +711,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+            >The <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
-             property supports paging scenarios. Data-bound controls check a data source view's <see
-             cref="P:System.Web.UI.DataSourceView.CanPage" />
+             property supports paging scenarios. Data-bound controls check a data source view's <see cref="P:System.Web.UI.DataSourceView.CanPage" />
 
             
 
-             property at run time, and add a <see
-             cref="F:System.Web.UI.DataSourceCapabilities.Page" />
+             property at run time, and add a <see cref="F:System.Web.UI.DataSourceCapabilities.Page" />
 
             
 
-             capability using the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
+             capability using the <see cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
 
             
 
-             method if the view supports paging. If the data-bound control fails to add the capability, and the paging properties are set on a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method if the view supports paging. If the data-bound control fails to add the capability, and the paging properties are set on a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the data source view during a data retrieval operation, an <see
-             cref="T:System.InvalidOperationException" />
+             object passed to the data source view during a data retrieval operation, an <see cref="T:System.InvalidOperationException" />
 
             
 
              exception might be thrown. </para
           >
           <para
-            >The data-bound control can request a subset of data from a data source control for paging by setting the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+            >The data-bound control can request a subset of data from a data source control for paging by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+             and <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
-             properties on the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             properties on the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the <see
-             cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+             object passed to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
             
 
@@ -842,18 +758,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If any of the <see
-               cref="T:System.Web.UI.DataSourceSelectArguments" />
+              >If any of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
               
 
-               properties are set, but the currently bound data source control does not support the requested capability, an <see
-               cref="T:System.InvalidOperationException" />
+               properties are set, but the currently bound data source control does not support the requested capability, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               exception is thrown when the <see
-               cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+               exception is thrown when the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
               
 
@@ -887,23 +800,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+            >The <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
             
 
-             method is used by data-bound controls to compare additional requested capabilities represented by the properties of the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method is used by data-bound controls to compare additional requested capabilities represented by the properties of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             class, such as the ability to sort or page through a result set, with the capabilities supported by the data source view. The view calls its own <see
-             cref="M:System.Web.UI.DataSourceView.RaiseUnsupportedCapabilityError(System.Web.UI.DataSourceCapabilities)" />
+             class, such as the ability to sort or page through a result set, with the capabilities supported by the data source view. The view calls its own <see cref="M:System.Web.UI.DataSourceView.RaiseUnsupportedCapabilityError(System.Web.UI.DataSourceCapabilities)" />
 
             
 
-             method for each possible capability defined in the <see
-             cref="T:System.Web.UI.DataSourceCapabilities" />
+             method for each possible capability defined in the <see cref="T:System.Web.UI.DataSourceCapabilities" />
 
             
 
@@ -911,18 +820,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If any of the <see
-               cref="T:System.Web.UI.DataSourceSelectArguments" />
+              >If any of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
               
 
-               properties are set, but the currently bound data source control does not support the requested capability, an <see
-               cref="T:System.InvalidOperationException" />
+               properties are set, but the currently bound data source control does not support the requested capability, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               exception is thrown when the <see
-               cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+               exception is thrown when the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
               
 
@@ -933,8 +839,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the capabilities requested for an <see
-             cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+            >Compares the capabilities requested for an <see cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
             
 
@@ -942,7 +847,11 @@
           >
         </summary>
         <param name="view">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -965,23 +874,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
+            >The <see cref="P:System.Web.UI.DataSourceSelectArguments.RetrieveTotalRowCount" />
 
             
 
-             property supports paging scenarios. Set this property to true to request a total row count from the data source control during the data-retrieval operation. Check the <see
-             cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
+             property supports paging scenarios. Set this property to true to request a total row count from the data source control during the data-retrieval operation. Check the <see cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
 
             
 
-             property to determine whether a data source view supports retrieving a total row count. If the data source supports it, the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+             property to determine whether a data source view supports retrieving a total row count. If the data source supports it, the <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
             
 
-             property is set by the data source control during the course of a data retrieval operation and the total data row count is returned in the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+             property is set by the data source control during the course of a data retrieval operation and the total data row count is returned in the <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
             
 
@@ -989,18 +894,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If any of the <see
-               cref="T:System.Web.UI.DataSourceSelectArguments" />
+              >If any of the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
               
 
-               properties are set, but the currently bound data source control does not support the requested capability, an <see
-               cref="T:System.InvalidOperationException" />
+               properties are set, but the currently bound data source control does not support the requested capability, an <see cref="T:System.InvalidOperationException" />
 
               
 
-               exception is thrown when the <see
-               cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
+               exception is thrown when the <see cref="M:System.Web.UI.DataSourceSelectArguments.RaiseUnsupportedCapabilitiesError(System.Web.UI.DataSourceView)" />
 
               
 
@@ -1029,8 +931,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+            >The <see cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
 
             
 
@@ -1040,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an expression that the data source view uses to sort the data retrieved by the <see
-             cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+            >Gets or sets an expression that the data source view uses to sort the data retrieved by the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
             
 
@@ -1065,56 +965,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+            >The <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             property supports paging scenarios. Data-bound controls check a data source view's <see
-             cref="P:System.Web.UI.DataSourceView.CanPage" />
+             property supports paging scenarios. Data-bound controls check a data source view's <see cref="P:System.Web.UI.DataSourceView.CanPage" />
 
             
 
-             property at run time, and add a <see
-             cref="F:System.Web.UI.DataSourceCapabilities.Page" />
+             property at run time, and add a <see cref="F:System.Web.UI.DataSourceCapabilities.Page" />
 
             
 
-             capability using the <see
-             cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
+             capability using the <see cref="M:System.Web.UI.DataSourceSelectArguments.AddSupportedCapabilities(System.Web.UI.DataSourceCapabilities)" />
 
             
 
-             method if the view supports paging. If the data-bound control fails to add the capability, and the paging properties are set on a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method if the view supports paging. If the data-bound control fails to add the capability, and the paging properties are set on a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the data source view during a data retrieval operation, an <see
-             cref="T:System.InvalidOperationException" />
+             object passed to the data source view during a data retrieval operation, an <see cref="T:System.InvalidOperationException" />
 
             
 
              exception might be thrown. </para
           >
           <para
-            >As a separate operation, the data-bound control can request a subset of data from a data source control by setting the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
+            >As a separate operation, the data-bound control can request a subset of data from a data source control by setting the <see cref="P:System.Web.UI.DataSourceSelectArguments.StartRowIndex" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
+             and <see cref="P:System.Web.UI.DataSourceSelectArguments.MaximumRows" />
 
             
 
-             properties on the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             properties on the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object passed to the <see
-             cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
+             object passed to the <see cref="M:System.Web.UI.DataSourceView.Select(System.Web.UI.DataSourceSelectArguments,System.Web.UI.DataSourceViewSelectCallback)" />
 
             
 
@@ -1142,23 +1032,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+            >The <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
             
 
-             property supports paging scenarios. Data source and data source view controls differ in their internal implementation for how to retrieve total row counts. Check the <see
-             cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
+             property supports paging scenarios. Data source and data source view controls differ in their internal implementation for how to retrieve total row counts. Check the <see cref="P:System.Web.UI.DataSourceView.CanRetrieveTotalRowCount" />
 
             
 
-             property to determine whether a data source view supports retrieving a total row count during a data-retrieval operation. If the data source supports it, the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+             property to determine whether a data source view supports retrieving a total row count during a data-retrieval operation. If the data source supports it, the <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
             
 
-             property is set by the data source control during the course of a data-retrieval operation, and the total data row count is returned in the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
+             property is set by the data source control during the course of a data-retrieval operation, and the total data row count is returned in the <see cref="P:System.Web.UI.DataSourceSelectArguments.TotalRowCount" />
 
             
 

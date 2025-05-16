@@ -32,13 +32,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >This API is now obsolete. Add a <see
-           cref="T:System.ComponentModel.TypeDescriptionProvider" />
+          >This API is now obsolete. Add a <see cref="T:System.ComponentModel.TypeDescriptionProvider" />
 
           
 
-           to handle a <see
-           cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+           to handle a <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
           
 
@@ -49,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a top-level mapping layer between a COM object and a <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+        >Provides a top-level mapping layer between a COM object and a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
@@ -85,8 +82,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -101,8 +97,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of attributes for <paramref
-             name="component" />
+            >A collection of attributes for <paramref name="component" />
 
             
 
@@ -110,7 +105,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -141,8 +140,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -157,8 +155,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the class that corresponds with <paramref
-             name="component" />
+            >The name of the class that corresponds with <paramref name="component" />
 
             
 
@@ -166,7 +163,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,8 +201,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -216,13 +216,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >The <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
-             for <paramref
-             name="component" />
+             for <paramref name="component" />
 
             
 
@@ -230,12 +228,15 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The component to get the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          The component to get the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -269,8 +270,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -285,13 +285,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >An <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
-             that represents <paramref
-             name="component" />
+             that represents <paramref name="component" />
 
             
 
@@ -299,7 +297,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -333,8 +335,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -349,13 +350,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             that represents <paramref
-             name="component" />
+             that represents <paramref name="component" />
 
             
 
@@ -363,7 +362,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -398,8 +401,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -414,8 +416,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The editor for <paramref
-             name="component" />
+            >The editor for <paramref name="component" />
 
             
 
@@ -423,19 +424,26 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to get the editor for.</param
         >
         <param name="baseEditorType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The base type of the editor for <paramref
-           name="component" />
+          The base type of the editor for <paramref name="component" />
 
           
 
@@ -469,8 +477,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -485,8 +492,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of event descriptors for <paramref
-             name="component" />
+            >A collection of event descriptors for <paramref name="component" />
 
             
 
@@ -494,7 +500,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -529,8 +539,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -545,8 +554,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of event descriptors for <paramref
-             name="component" />
+            >A collection of event descriptors for <paramref name="component" />
 
             
 
@@ -554,14 +562,22 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to get events for.</param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -592,8 +608,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -607,17 +622,18 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >The name of <paramref
-             name="component" />
+          <para>The name of <paramref name="component" />
 
             
 
-            .</para
-          >
+            .</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -652,8 +668,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This API is now obsolete. The non-obsolete alternative is <see
-               cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+              >This API is now obsolete. The non-obsolete alternative is <see cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
 
               
 
@@ -668,8 +683,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of property descriptors for <paramref
-             name="component" />
+            >A collection of property descriptors for <paramref name="component" />
 
             
 
@@ -677,14 +691,22 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to get events for.</param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

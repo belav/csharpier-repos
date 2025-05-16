@@ -33,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Stores a set of <see
-         cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+        >Stores a set of <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
         
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformationCollection" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformationCollection" />
 
             
 
@@ -99,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -108,7 +105,11 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -137,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -176,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the collection contains the specified <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+            >Checks whether the collection contains the specified <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
             
 
@@ -187,8 +186,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+            >true if the <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
             
 
@@ -196,12 +194,15 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+          The <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
           
 
@@ -242,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements in this collection to a one-dimensional array of type <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+            >Copies the elements in this collection to a one-dimensional array of type <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
             
 
@@ -251,19 +251,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A one-dimensional array that receives a copy of the collection.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -289,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+            >Gets the number of <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
             
 
@@ -322,44 +328,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method before you can access the first element. To access the element at the current position, call the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property.</para
           >
           <para
-            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             causes an <see
-             cref="T:System.InvalidOperationException" />
+             causes an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >For a detailed description of enumerators, see the documentation for the <see
-             cref="T:System.Collections.IEnumerator" />
+            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             class and the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+             class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -373,13 +372,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see
-             cref="T:System.Collections.IEnumerator" />
+            >An object that implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface and provides access to the <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+             interface and provides access to the <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
             
 
@@ -466,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -477,8 +473,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Always throws a <see
-             cref="T:System.NotSupportedException" />
+            >Always throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -486,7 +481,11 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -516,44 +515,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method before you can access the first element. To access the element at the current position, call the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property.</para
           >
           <para
-            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             causes an <see
-             cref="T:System.InvalidOperationException" />
+             causes an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >For a detailed description of enumerators, see the documentation for the <see
-             cref="T:System.Collections.IEnumerator" />
+            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             class and the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+             class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -567,13 +559,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see
-             cref="T:System.Collections.IEnumerator" />
+            >An object that implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             interface and provides access to the <see
-             cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
+             interface and provides access to the <see cref="T:System.Net.NetworkInformation.UnicastIPAddressInformation" />
 
             
 

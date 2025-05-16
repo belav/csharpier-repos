@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the members of this enumeration to set the value of the <see
-         cref="P:System.Windows.Forms.ListView.Alignment" />
+        >Use the members of this enumeration to set the value of the <see cref="P:System.Windows.Forms.ListView.Alignment" />
 
         
 
-         property and the <see
-         cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" />
+         property and the <see cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.ListView" />
+         method of the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -34,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how items align in the <see
-         cref="T:System.Windows.Forms.ListView" />
+        >Specifies how items align in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -71,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Items are aligned to the left of the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Items are aligned to the left of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -112,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Items are aligned to the top of the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Items are aligned to the top of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 

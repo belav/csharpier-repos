@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.SecurityPolicySection" />
+        >The <see cref="T:System.Web.Configuration.SecurityPolicySection" />
 
         
 
@@ -40,18 +39,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.SecurityPolicySection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.SecurityPolicySection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.SecurityPolicySection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.SecurityPolicySection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -61,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.SecurityPolicySection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.SecurityPolicySection" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the properties collection for the <see
-             cref="T:System.Web.Configuration.SecurityPolicySection" />
+            >Gets the properties collection for the <see cref="T:System.Web.Configuration.SecurityPolicySection" />
 
             
 
@@ -123,18 +117,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default values for the <see
-             cref="P:System.Web.Configuration.SecurityPolicySection.TrustLevels" />
+            >The default values for the <see cref="P:System.Web.Configuration.SecurityPolicySection.TrustLevels" />
 
             
 
-             property are Full, High, Medium, Low, and Minimal. The items of the <see
-             cref="P:System.Web.Configuration.SecurityPolicySection.TrustLevels" />
+             property are Full, High, Medium, Low, and Minimal. The items of the <see cref="P:System.Web.Configuration.SecurityPolicySection.TrustLevels" />
 
             
 
-             collection each specify a security-level name and an associated policy file. You can extend the security system by providing your own named trust-level element mapped to a file specified by the policyFile attribute. For information about creating trust-level elements, see <format
-             type="text/html">
+             collection each specify a security-level name and an associated policy file. You can extend the security system by providing your own named trust-level element mapped to a file specified by the policyFile attribute. For information about creating trust-level elements, see <format type="text/html">
               <a href="729ab04c-03da-4ee5-86b1-be9d08a09369"
                 >&lt;trustLevel&gt; Element for &lt;securityPolicy&gt;</a
               >
@@ -148,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Web.Configuration.SecurityPolicySection.TrustLevels" />
+            >Gets the <see cref="P:System.Web.Configuration.SecurityPolicySection.TrustLevels" />
 
             
 

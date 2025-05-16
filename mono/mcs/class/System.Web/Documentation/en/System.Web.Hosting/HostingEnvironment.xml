@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each managed application domain contains a static instance of the <see
-         cref="T:System.Web.Hosting.HostingEnvironment" />
+        >Each managed application domain contains a static instance of the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
         
 
@@ -40,33 +39,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.#ctor" />
+            >The <see cref="M:System.Web.Hosting.HostingEnvironment.#ctor" />
 
             
 
-             constructor initializes the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+             constructor initializes the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
-             object. The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.#ctor" />
+             object. The <see cref="M:System.Web.Hosting.HostingEnvironment.#ctor" />
 
             
 
-             constructor is called only once by the application's <see
-             cref="T:System.Web.Hosting.ApplicationManager" />
+             constructor is called only once by the application's <see cref="T:System.Web.Hosting.ApplicationManager" />
 
             
 
-             object. Calling the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.#ctor" />
+             object. Calling the <see cref="M:System.Web.Hosting.HostingEnvironment.#ctor" />
 
             
 
-             constructor more than once will cause an <see
-             cref="T:System.InvalidOperationException" />
+             constructor more than once will cause an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -76,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -101,13 +93,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application must be running with <see
-             cref="T:System.Web.AspNetHostingPermissionLevel" />
+            >The application must be running with <see cref="T:System.Web.AspNetHostingPermissionLevel" />
 
             
 
-             set to high trust to access the <see
-             cref="P:System.Web.Hosting.HostingEnvironment.ApplicationId" />
+             set to high trust to access the <see cref="P:System.Web.Hosting.HostingEnvironment.ApplicationId" />
 
             
 
@@ -157,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath" />
+            >The <see cref="P:System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath" />
 
             
 
@@ -190,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Caching.Cache" />
+            >Gets the <see cref="T:System.Web.Caching.Cache" />
 
             
 
@@ -215,13 +203,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a busy registered object finishes its work, it calls the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.DecrementBusyCount" />
+            >When a busy registered object finishes its work, it calls the <see cref="M:System.Web.Hosting.HostingEnvironment.DecrementBusyCount" />
 
             
 
-             method to signal the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+             method to signal the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -229,13 +215,11 @@
           >
           <para>If the busy count is greater than zero, the hosting application will not time out even if there are no pending requests.</para>
           <para
-            >There must be a call to the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.DecrementBusyCount" />
+            >There must be a call to the <see cref="M:System.Web.Hosting.HostingEnvironment.DecrementBusyCount" />
 
             
 
-             method for each call to the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.IncrementBusyCount" />
+             method for each call to the <see cref="M:System.Web.Hosting.HostingEnvironment.IncrementBusyCount" />
 
             
 
@@ -268,8 +252,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IDisposable" />
+            >An <see cref="T:System.IDisposable" />
 
             
 
@@ -303,8 +286,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IDisposable" />
+            >An <see cref="T:System.IDisposable" />
 
             
 
@@ -312,7 +294,11 @@
           >
         </returns>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,20 +327,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.Impersonate(System.IntPtr,System.String)" />
+            >The <see cref="M:System.Web.Hosting.HostingEnvironment.Impersonate(System.IntPtr,System.String)" />
 
             
 
-             method impersonates the user that results after applying all <format
-             type="text/html">
+             method impersonates the user that results after applying all <format type="text/html">
               <a href="6bff1aa6-d7d5-47a8-8f3b-62b05cf2bdcf">identity</a>
             </format>
 
             
 
-             elements in the configuration settings affecting the specified virtual path. If an identity element is not specified for the virtual path, the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.Impersonate(System.IntPtr,System.String)" />
+             elements in the configuration settings affecting the specified virtual path. If an identity element is not specified for the virtual path, the <see cref="M:System.Web.Hosting.HostingEnvironment.Impersonate(System.IntPtr,System.String)" />
 
             
 
@@ -368,8 +351,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IDisposable" />
+            >An <see cref="T:System.IDisposable" />
 
             
 
@@ -377,14 +359,22 @@
           >
         </returns>
         <param name="userToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle of a Windows account token.</param
         >
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -407,8 +397,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registered objects signal the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+            >Registered objects signal the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -416,13 +405,11 @@
           >
           <para>If the busy count is greater than zero, the hosting application will not time out even if there are no pending requests.</para>
           <para
-            >There must be a call to the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.DecrementBusyCount" />
+            >There must be a call to the <see cref="M:System.Web.Hosting.HostingEnvironment.DecrementBusyCount" />
 
             
 
-             method for each call to the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.IncrementBusyCount" />
+             method for each call to the <see cref="M:System.Web.Hosting.HostingEnvironment.IncrementBusyCount" />
 
             
 
@@ -454,8 +441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets any exception thrown during initialization of the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+            >Gets any exception thrown during initialization of the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -479,13 +465,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
+            >This method overrides the <see cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
 
             
 
-             method in its base class. It always returns null and prevents a lease from being created that would limit the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+             method in its base class. It always returns null and prevents a lease from being created that would limit the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -495,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gives the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+            >Gives the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -524,41 +507,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.InitiateShutdown" />
+            >Use the <see cref="M:System.Web.Hosting.HostingEnvironment.InitiateShutdown" />
 
             
 
-             method to stop a web application domain and remove any objects registered with the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+             method to stop a web application domain and remove any objects registered with the <see cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
 
             
 
              method. This method returns immediately, before the shutdown is complete.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
+            >The <see cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
 
             
 
-             method is called on each registered object with the passed parameter set to false to allow each registered object to shut down asynchronously. After waiting for the amount of time specified in the shutdownTimeout attribute of the <format
-             type="text/html">
+             method is called on each registered object with the passed parameter set to false to allow each registered object to shut down asynchronously. After waiting for the amount of time specified in the shutdownTimeout attribute of the <format type="text/html">
               <a href="043a75c8-231a-4f8d-9633-501530bd7d40">hostingEnvironment</a>
             </format>
 
             
 
-             configuration element, the <see
-             cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
+             configuration element, the <see cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
 
             
 
              method is called again with the passed parameter set to true for each registered object remaining.</para
           >
           <para
-            >Once all registered objects have finished shutting down, the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+            >Once all registered objects have finished shutting down, the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 
@@ -587,8 +564,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current application domain is being hosted by an <see
-             cref="T:System.Web.Hosting.ApplicationManager" />
+            >Gets a value indicating whether the current application domain is being hosted by an <see cref="T:System.Web.Hosting.ApplicationManager" />
 
             
 
@@ -619,8 +595,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The physical path on the server specified by <paramref
-             name="virtualPath" />
+            >The physical path on the server specified by <paramref name="virtualPath" />
 
             
 
@@ -628,7 +603,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -656,23 +635,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Hosting.ApplicationManager" />
+            >The <see cref="T:System.Web.Hosting.ApplicationManager" />
 
             
 
-             class enables methods outside the current application domain to create, manage, and destroy objects inside the current application domain. The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+             class enables methods outside the current application domain to create, manage, and destroy objects inside the current application domain. The <see cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
 
             
 
-             method is used to register previously created objects with the hosting environment. Objects registered with the <see
-             cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+             method is used to register previously created objects with the hosting environment. Objects registered with the <see cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
 
             
 
-             method must implement the <see
-             cref="T:System.Web.Hosting.IRegisteredObject" />
+             method must implement the <see cref="T:System.Web.Hosting.IRegisteredObject" />
 
             
 
@@ -682,8 +657,7 @@
           <list type="ordered">
             <item>
               <para
-                >Create a new instance of your registered object by calling the <see
-                 cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
+                >Create a new instance of your registered object by calling the <see cref="M:System.Web.Hosting.ApplicationManager.CreateObject(System.String,System.Type,System.String,System.String,System.Boolean)" />
 
                 
 
@@ -692,8 +666,7 @@
             </item>
             <item>
               <para
-                >Call a type-specific method to initialize your new object. In the initialization method, call the <see
-                 cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+                >Call a type-specific method to initialize your new object. In the initialization method, call the <see cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
 
                 
 
@@ -702,8 +675,7 @@
             </item>
             <item>
               <para
-                >Call the <see
-                 cref="M:System.Web.Hosting.ApplicationManager.GetObject(System.String,System.Type)" />
+                >Call the <see cref="M:System.Web.Hosting.ApplicationManager.GetObject(System.String,System.Type)" />
 
                 
 
@@ -712,18 +684,15 @@
             </item>
             <item>
               <para
-                >When you wish to stop your object, call the <see
-                 cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" />
+                >When you wish to stop your object, call the <see cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" />
 
                 
 
-                 method. The <see
-                 cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" />
+                 method. The <see cref="M:System.Web.Hosting.ApplicationManager.StopObject(System.String,System.Type)" />
 
                 
 
-                 method in turn calls the <see
-                 cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
+                 method in turn calls the <see cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
 
                 
 
@@ -732,13 +701,11 @@
             </item>
             <item>
               <para
-                >In the <see
-                 cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
+                >In the <see cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
 
                 
 
-                 method, have your object call the <see
-                 cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+                 method, have your object call the <see cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
 
                 
 
@@ -752,7 +719,11 @@
           <para>Places an object in the list of registered objects for the application.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -780,21 +751,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(System.Web.Hosting.VirtualPathProvider)" />
+            >The <see cref="M:System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(System.Web.Hosting.VirtualPathProvider)" />
 
             
 
-             method adds the specified <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             method adds the specified <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
              instance to the application's list of virtual-path providers.</para
           >
           <para
-            >For more information, see the <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >For more information, see the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -804,8 +772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a new <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >Registers a new <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -813,12 +780,15 @@
           >
         </summary>
         <param name="virtualPathProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new <see
-           cref="T:System.Web.Hosting.VirtualPathProvider" />
+          The new <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
           
 
@@ -841,13 +811,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.SetCultures" />
+            >The <see cref="M:System.Web.Hosting.HostingEnvironment.SetCultures" />
 
             
 
-             method sets the current thread to the culture specified in the <format
-             type="text/html">
+             method sets the current thread to the culture specified in the <format type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7">globalization</a>
             </format>
 
@@ -863,8 +831,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IDisposable" />
+            >An <see cref="T:System.IDisposable" />
 
             
 
@@ -893,13 +860,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.SetCultures(System.String)" />
+            >The <see cref="M:System.Web.Hosting.HostingEnvironment.SetCultures(System.String)" />
 
             
 
-             method sets the current thread to the culture that results after applying all <format
-             type="text/html">
+             method sets the current thread to the culture that results after applying all <format type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7">globalization</a>
             </format>
 
@@ -915,8 +880,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IDisposable" />
+            >An <see cref="T:System.IDisposable" />
 
             
 
@@ -924,7 +888,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -993,13 +961,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Hosting.ApplicationManager" />
+            >The <see cref="T:System.Web.Hosting.ApplicationManager" />
 
             
 
-             class enables methods outside the current application domain to create, manage, and destroy objects inside the current application domain. The <see
-             cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+             class enables methods outside the current application domain to create, manage, and destroy objects inside the current application domain. The <see cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
 
             
 
@@ -1011,7 +977,11 @@
           <para>Removes an object from the list of registered objects for the application.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1037,13 +1007,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When more than one <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >When more than one <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
-             instance is registered, the <see
-             cref="T:System.Web.Hosting.HostingEnvironment" />
+             instance is registered, the <see cref="T:System.Web.Hosting.HostingEnvironment" />
 
             
 

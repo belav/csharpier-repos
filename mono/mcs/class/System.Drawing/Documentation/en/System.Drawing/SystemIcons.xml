@@ -18,13 +18,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each property of the <see
-         cref="T:System.Drawing.SystemIcons" />
+        >Each property of the <see cref="T:System.Drawing.SystemIcons" />
 
         
 
-         class is an <see
-         cref="T:System.Drawing.Icon" />
+         class is an <see cref="T:System.Drawing.Icon" />
 
         
 
@@ -48,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -129,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -155,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -184,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -210,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -236,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -262,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Drawing.Icon" />
+            >Gets an <see cref="T:System.Drawing.Icon" />
 
             
 

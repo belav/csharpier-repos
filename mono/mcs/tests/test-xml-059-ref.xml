@@ -19,10 +19,12 @@
     </member>
     <member name="F:Foo.Bar">
             hogehoge
-        </member>
+        </member
+    >
     <member name="M:Foo.ListBase(System.String)">
             fugafuga
-        </member>
+        </member
+    >
     <member name="T:ListBase`1">
       <see cref="T:System.Nullable&lt;System.Int32&gt;" />
       <see cref="T:System.Nullable(System.Int32)" />

@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.IDataReader" />
+        >The <see cref="T:System.Data.IDataReader" />
 
         
 
-         and <see
-         cref="T:System.Data.IDataRecord" />
+         and <see cref="T:System.Data.IDataRecord" />
 
         
 
-         interfaces enable an inheriting class to implement a DataReader class. This provides a way of reading one or more forward-only streams of result sets. For more information about DataReader classes, see <format
-         type="text/html">
+         interfaces enable an inheriting class to implement a DataReader class. This provides a way of reading one or more forward-only streams of result sets. For more information about DataReader classes, see <format type="text/html">
           <a href="97afc121-fb8b-465b-bab3-6d844420badb">Retrieving Data Using the DataReader</a>
         </format>
 
@@ -34,21 +31,18 @@
         . </para
       >
       <para
-        >An application does not create an instance of the <see
-         cref="T:System.Data.IDataRecord" />
+        >An application does not create an instance of the <see cref="T:System.Data.IDataRecord" />
 
         
 
-         interface directly, but creates an instance of a class that inherits <see
-         cref="T:System.Data.IDataRecord" />
+         interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.IDataRecord" />
 
         
 
         . Typically, you do this by obtaining a DataReader through the ExecuteReader method of the Command object.</para
       >
       <para
-        >Classes that inherit <see
-         cref="T:System.Data.IDataRecord" />
+        >Classes that inherit <see cref="T:System.Data.IDataRecord" />
 
         
 
@@ -357,13 +351,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After executing a query that does not return rows (for example, using the <see
-             cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
+            >After executing a query that does not return rows (for example, using the <see cref="M:System.Data.IDbCommand.ExecuteNonQuery" />
 
             
 
-             method), <see
-             cref="P:System.Data.IDataRecord.FieldCount" />
+             method), <see cref="P:System.Data.IDataRecord.FieldCount" />
 
             
 
@@ -403,7 +395,11 @@
           <para>The value of the column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,7 +431,11 @@
           <para>The 8-bit unsigned integer value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -474,8 +474,7 @@
              returns the number of available bytes in the field. Frequently this is the exact length of the field. However, the number returned may be less than the true length of the field if GetBytes has already been used to obtain bytes from the field.</para
           >
           <para
-            >If you pass a buffer that is null, <see
-             cref="M:System.Data.IDataRecord.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
+            >If you pass a buffer that is null, <see cref="M:System.Data.IDataRecord.GetBytes(System.Int32,System.Int64,System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -492,40 +491,59 @@
           <para>The actual number of bytes read.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="fieldOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the field from which to start the read operation. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferoffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index for <paramref
-           name="buffer" />
+          The index for <paramref name="buffer" />
 
           
 
            to start the read operation. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -557,7 +575,11 @@
           <para>The character value of the specified column.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -607,40 +629,59 @@
           <para>The actual number of characters read.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based column ordinal. </param
         >
         <param name="fieldoffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index within the row from which to start the read operation. </param
         >
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to read the stream of bytes. </param
         >
         <param name="bufferoffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index for <paramref
-           name="buffer" />
+          The index for <paramref name="buffer" />
 
           
 
            to start the read operation. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -666,8 +707,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Data.IDataReader" />
+            >Returns an <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -677,8 +717,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.IDataReader" />
+            >The <see cref="T:System.Data.IDataReader" />
 
             
 
@@ -686,7 +725,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -721,7 +764,11 @@
           <para>The data type information for the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -753,7 +800,11 @@
           <para>The date and time data value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -785,7 +836,11 @@
           <para>The fixed-position numeric value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -817,7 +872,11 @@
           <para>The double-precision floating point number of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -846,18 +905,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             information corresponding to the type of <see
-             cref="T:System.Object" />
+             information corresponding to the type of <see cref="T:System.Object" />
 
             
 
-             that would be returned from <see
-             cref="M:System.Data.IDataRecord.GetValue(System.Int32)" />
+             that would be returned from <see cref="M:System.Data.IDataRecord.GetValue(System.Int32)" />
 
             
 
@@ -867,18 +923,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
-             information corresponding to the type of <see
-             cref="T:System.Object" />
+             information corresponding to the type of <see cref="T:System.Object" />
 
             
 
-             that would be returned from <see
-             cref="M:System.Data.IDataRecord.GetValue(System.Int32)" />
+             that would be returned from <see cref="M:System.Data.IDataRecord.GetValue(System.Int32)" />
 
             
 
@@ -886,7 +939,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -918,7 +975,11 @@
           <para>The single-precision floating point number of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -950,7 +1011,11 @@
           <para>The GUID value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -982,7 +1047,11 @@
           <para>The 16-bit signed integer value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1014,7 +1083,11 @@
           <para>The 32-bit signed integer value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1046,7 +1119,11 @@
           <para>The 64-bit signed integer value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1078,7 +1155,11 @@
           <para>The name of the field or the empty string (""), if there is no value to return.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1114,7 +1195,11 @@
           <para>The index of the named field.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1146,7 +1231,11 @@
           <para>The string value of the specified field.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1176,8 +1265,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -1185,7 +1273,11 @@
           >
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1210,26 +1302,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For most applications, the <see
-             cref="M:System.Data.IDataRecord.GetValues(System.Object[])" />
+            >For most applications, the <see cref="M:System.Data.IDataRecord.GetValues(System.Object[])" />
 
             
 
              method provides an efficient means for retrieving all columns, instead of retrieving each column individually.</para
           >
           <para
-            >You can pass an <see
-             cref="T:System.Object" />
+            >You can pass an <see cref="T:System.Object" />
 
             
 
-             array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see
-             cref="T:System.Object" />
+             array that contains fewer than the number of columns that are contained in the resulting row. Only the amount of data the <see cref="T:System.Object" />
 
             
 
-             array holds is copied to the array. You can also pass an <see
-             cref="T:System.Object" />
+             array holds is copied to the array. You can also pass an <see cref="T:System.Object" />
 
             
 
@@ -1243,8 +1331,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of instances of <see
-             cref="T:System.Object" />
+            >The number of instances of <see cref="T:System.Object" />
 
             
 
@@ -1252,12 +1339,15 @@
           >
         </returns>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Object" />
+          An array of <see cref="T:System.Object" />
 
           
 
@@ -1282,13 +1372,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to see if there are null column values before calling the typed get methods (for example, <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
+            >Call this method to see if there are null column values before calling the typed get methods (for example, <see cref="M:System.Data.SqlClient.SqlDataReader.GetByte(System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+            , <see cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
 
             
 
@@ -1304,7 +1392,11 @@
           <para>true if the specified field is set to null; otherwise, false.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

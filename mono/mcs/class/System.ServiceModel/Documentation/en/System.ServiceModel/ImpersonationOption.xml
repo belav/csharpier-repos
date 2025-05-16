@@ -16,16 +16,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.ImpersonationOption" />
+        >Use the <see cref="T:System.ServiceModel.ImpersonationOption" />
 
         
 
          enumeration to control impersonation in indigo1 applications.</para
       >
       <para
-        >This setting interacts with a configuration property on <see
-         cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
+        >This setting interacts with a configuration property on <see cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Impersonation is performed if credentials are available and <see
-             cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
+            >Impersonation is performed if credentials are available and <see cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
 
             
 
@@ -82,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Impersonation is not performed. If <see
-             cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
+            >Impersonation is not performed. If <see cref="P:System.ServiceModel.Configuration.ServiceAuthorizationElement.ImpersonateCallerForAllOperations" />
 
             
 

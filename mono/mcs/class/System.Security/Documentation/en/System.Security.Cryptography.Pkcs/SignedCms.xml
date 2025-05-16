@@ -60,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
         
 
@@ -87,8 +86,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+            >The <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -127,8 +125,7 @@
             </item>
           </list>
           <para
-            >The default <see
-             cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+            >The default <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
             
 
@@ -139,13 +136,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -177,8 +172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
 
             
 
@@ -189,13 +183,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.ContentInfo)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.ContentInfo)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -229,8 +221,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
 
             
 
@@ -241,13 +232,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -255,12 +244,15 @@
           >
         </summary>
         <param name="signerIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
@@ -292,8 +284,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
 
             
 
@@ -304,13 +295,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.ContentInfo,System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.ContentInfo,System.Boolean)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -318,27 +307,27 @@
           >
         </summary>
         <param name="detached">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           value that specifies whether the <see
-           cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+           value that specifies whether the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
           
 
-           object is for a detached signature. If <paramref
-           name="detached" />
+           object is for a detached signature. If <paramref name="detached" />
 
           
 
-           is true, the signature is detached. If <paramref
-           name="detached" />
+           is true, the signature is detached. If <paramref name="detached" />
 
           
 
@@ -373,8 +362,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor" />
 
             
 
@@ -385,13 +373,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.Pkcs.ContentInfo)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.Pkcs.ContentInfo)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -399,12 +385,15 @@
           >
         </summary>
         <param name="signerIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
@@ -444,13 +433,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.Pkcs.ContentInfo,System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.Pkcs.ContentInfo,System.Boolean)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -458,34 +445,38 @@
           >
         </summary>
         <param name="signerIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
            member that specifies the default subject identifier type for signers.</param
         >
         <param name="detached">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
-           value that specifies whether the <see
-           cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+           value that specifies whether the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
           
 
-           object is for a detached signature. If <paramref
-           name="detached" />
+           object is for a detached signature. If <paramref name="detached" />
 
           
 
@@ -517,8 +508,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SignedCms.Certificates" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.Certificates" />
 
             
 
@@ -551,28 +541,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
 
             
 
-             method verifies the data integrity of the CMS/PKCS #7 message. <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
+             method verifies the data integrity of the CMS/PKCS #7 message. <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
 
             
 
-             is a specialized method used in specific security infrastructure applications that only wish to check the hash of the CMS message, rather than perform a full digital signature verification. <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
+             is a specialized method used in specific security infrastructure applications that only wish to check the hash of the CMS message, rather than perform a full digital signature verification. <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
 
             
 
-             does not authenticate the author nor sender of the message because this method does not involve verifying a digital signature. For general-purpose checking of the integrity and authenticity of a CMS/PKCS #7 message, use the <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
+             does not authenticate the author nor sender of the message because this method does not involve verifying a digital signature. For general-purpose checking of the integrity and authenticity of a CMS/PKCS #7 message, use the <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
 
             
 
-             or <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+             or <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
 
             
 
@@ -611,8 +596,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
 
             
 
@@ -620,12 +604,15 @@
           >
         </summary>
         <param name="verifySignatureOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -667,8 +654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
 
             
 
@@ -676,34 +662,38 @@
           >
         </summary>
         <param name="extraStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
           
 
-           object that can be used to validate the certificate chain. If no additional certificates are to be used to validate the certificate chain, use <see
-           cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
+           object that can be used to validate the certificate chain. If no additional certificates are to be used to validate the certificate chain, use <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
 
           
 
-           instead of <see
-           cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+           instead of <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
 
           
 
           .</param
         >
         <param name="verifySignatureOnly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 
@@ -731,13 +721,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method displays a user interface in which you choose signers for this message. This requires that the current process is running in <newTerm
-            >user interactive mode</newTerm>
+            >This method displays a user interface in which you choose signers for this message. This requires that the current process is running in <newTerm>user interactive mode</newTerm>
 
             
 
-            , meaning that the <see
-             cref="P:System.Environment.UserInteractive" />
+            , meaning that the <see cref="P:System.Environment.UserInteractive" />
 
             
 
@@ -784,8 +772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature" />
 
             
 
@@ -838,8 +825,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature(System.Security.Cryptography.Pkcs.CmsSigner)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature(System.Security.Cryptography.Pkcs.CmsSigner)" />
 
             
 
@@ -847,12 +833,15 @@
           >
         </summary>
         <param name="signer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
           
 
@@ -913,13 +902,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a signature using the specified signer and adds the signature to the CMS/PKCS #7 message. If the value of the silent parameter is false and the <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificate" />
+            >Creates a signature using the specified signer and adds the signature to the CMS/PKCS #7 message. If the value of the silent parameter is false and the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.Certificate" />
 
             
 
-             property of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+             property of the <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
             
 
@@ -927,19 +914,26 @@
           >
         </summary>
         <param name="signer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
 
           
 
            object that represents the signer.</param
         >
         <param name="silent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -971,8 +965,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SignedCms.ContentInfo" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.ContentInfo" />
 
             
 
@@ -1007,18 +1000,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.Byte[])" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.Byte[])" />
 
             
 
-             method decodes an encoded <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             method decodes an encoded <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
-             message. Upon successful decoding, the decoded information can be retrieved from the properties of the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             message. Upon successful decoding, the decoded information can be retrieved from the properties of the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -1026,7 +1016,11 @@
           >
         </summary>
         <param name="encodedMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1052,13 +1046,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SignedCms.Detached" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.Detached" />
 
             
 
-             property retrieves whether the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+             property retrieves whether the <see cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
 
             
 
@@ -1088,8 +1080,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.Encode" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.Encode" />
 
             
 
@@ -1099,8 +1090,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of byte values that represents the encoded message. The encoded message can be decoded by the <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.Byte[])" />
+            >An array of byte values that represents the encoded message. The encoded message can be decoded by the <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.Byte[])" />
 
             
 
@@ -1132,8 +1122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the signature at the specified index of the <see
-             cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" />
+            >Removes the signature at the specified index of the <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" />
 
             
 
@@ -1141,7 +1130,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1175,13 +1168,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.SignedCms.RemoveSignature(System.Security.Cryptography.Pkcs.SignerInfo)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.SignedCms.RemoveSignature(System.Security.Cryptography.Pkcs.SignerInfo)" />
 
             
 
-             method removes the signature for the specified <see
-             cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+             method removes the signature for the specified <see cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
             
 
@@ -1189,12 +1180,15 @@
           >
         </summary>
         <param name="signerInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+          A <see cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
           
 
@@ -1226,13 +1220,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" />
 
             
 
-             property retrieves the <see
-             cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+             property retrieves the <see cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
 
             
 
@@ -1262,8 +1254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.SignedCms.Version" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.SignedCms.Version" />
 
             
 

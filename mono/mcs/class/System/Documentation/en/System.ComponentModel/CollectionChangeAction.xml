@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+        >The <see cref="T:System.ComponentModel.CollectionChangeEventArgs" />
 
         
 
@@ -80,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the entire collection has changed. This is caused by using methods that manipulate the entire collection, such as <see
-             cref="M:System.Collections.CollectionBase.Clear" />
+            >Specifies that the entire collection has changed. This is caused by using methods that manipulate the entire collection, such as <see cref="M:System.Collections.CollectionBase.Clear" />
 
             
 

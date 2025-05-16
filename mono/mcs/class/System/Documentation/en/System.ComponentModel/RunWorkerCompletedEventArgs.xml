@@ -25,25 +25,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If you are using a class that implements the <format
-         type="text/html">
+        >If you are using a class that implements the <format type="text/html">
           <a href="792aa8da-918b-458e-b154-9836b97735f3">Event-based Asynchronous Pattern</a>
         </format>
 
         
 
-        , the class provides a MethodNameCompleted event. MethodName is a placeholder for the first part of the method's name. <see
-         cref="M:System.ComponentModel.BackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)" />
+        , the class provides a MethodNameCompleted event. MethodName is a placeholder for the first part of the method's name. <see cref="M:System.ComponentModel.BackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)" />
 
         
 
-         is an example of the name of such a method. If you add an instance of the <see
-         cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+         is an example of the name of such a method. If you add an instance of the <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
         
 
-         delegate to the event, you will receive information about the outcome of asynchronous operations in the <see
-         cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+         delegate to the event, you will receive information about the outcome of asynchronous operations in the <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
         
 
@@ -51,33 +47,27 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          >The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           attribute applied to this class has the following <see
-           cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+           attribute applied to this class has the following <see cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
 
           
 
-           property value: <see
-           cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
+           property value: <see cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
 
           
 
-          . The <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          . The <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+           does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-           class or <format
-           type="text/html">
+           class or <format type="text/html">
             <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
               >SQL Server Programming and Host Protection Attributes</a
             >
@@ -120,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
@@ -129,21 +118,33 @@
           >
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The result of an asynchronous operation.</param
         >
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Any error that occurred during the asynchronous operation.</param
         >
         <param name="cancelled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,28 +169,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Your <see
-             cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+            >Your <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
-             event handler should always check the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             event handler should always check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             properties before accessing the <see
-             cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+             properties before accessing the <see cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 
-             property. If an exception was raised or if the operation was canceled, accessing the <see
-             cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+             property. If an exception was raised or if the operation was canceled, accessing the <see cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 

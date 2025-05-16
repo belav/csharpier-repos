@@ -67,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -94,18 +93,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
@@ -122,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -131,7 +126,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -164,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -173,14 +171,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -209,36 +215,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -248,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -257,19 +256,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message to display with this exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -298,36 +304,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.ParamName" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.ParamName" />
 
             
 
-             property of the new instance using <paramref
-             name="paramName" />
+             property of the new instance using <paramref name="paramName" />
 
             
 
-            . The content of <paramref
-             name="paramName" />
+            . The content of <paramref name="paramName" />
 
             
 
@@ -344,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -353,14 +352,22 @@
           >
         </summary>
         <param name="paramName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that is the cause of the current exception.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -390,18 +397,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
@@ -412,13 +416,11 @@
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -428,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -437,26 +438,37 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message to display with this exception.</param
         >
         <param name="invalidCultureId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Culture ID that cannot be found.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -486,36 +498,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.ParamName" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.ParamName" />
 
             
 
-             property of the new instance using <paramref
-             name="paramName" />
+             property of the new instance using <paramref name="paramName" />
 
             
 
-            . The content of <paramref
-             name="paramName" />
+            . The content of <paramref name="paramName" />
 
             
 
@@ -532,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -541,21 +546,33 @@
           >
         </summary>
         <param name="paramName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that is the cause the current exception.</param
         >
         <param name="invalidCultureId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Culture ID that cannot be found.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -585,18 +602,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
@@ -607,13 +621,11 @@
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -623,8 +635,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -632,26 +643,37 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message to display with this exception.</param
         >
         <param name="invalidCultureName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Culture Name that cannot be found.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -681,36 +703,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Globalization.CultureNotFoundException.Message" />
+            >This constructor initializes the <see cref="P:System.Globalization.CultureNotFoundException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.ParamName" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.ParamName" />
 
             
 
-             property of the new instance using <paramref
-             name="paramName" />
+             property of the new instance using <paramref name="paramName" />
 
             
 
-            . The content of <paramref
-             name="paramName" />
+            . The content of <paramref name="paramName" />
 
             
 
@@ -727,8 +743,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.CultureNotFoundException" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.CultureNotFoundException" />
 
             
 
@@ -736,21 +751,33 @@
           >
         </summary>
         <param name="paramName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that is the cause the current exception.</param
         >
         <param name="invalidCultureName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Culture Name that cannot be found.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -786,21 +813,18 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -810,8 +834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -819,14 +842,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

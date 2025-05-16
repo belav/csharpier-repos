@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the <see
-         cref="M:System.Windows.Forms.GridTablesFactory.CreateGridTables(System.Windows.Forms.DataGridTableStyle,System.Object,System.String,System.Windows.Forms.BindingContext)" />
+        >Provides the <see cref="M:System.Windows.Forms.GridTablesFactory.CreateGridTables(System.Windows.Forms.DataGridTableStyle,System.Object,System.String,System.Windows.Forms.BindingContext)" />
 
         
 
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the specified <see
-             cref="P:System.Windows.Forms.DataGridColumnStyle.DataGridTableStyle" />
+            >Returns the specified <see cref="P:System.Windows.Forms.DataGridColumnStyle.DataGridTableStyle" />
 
             
 
@@ -56,8 +54,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Windows.Forms.DataGridTableStyle" />
+            >An array of <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
             
 
@@ -65,48 +62,60 @@
           >
         </returns>
         <param name="gridTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridTableStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridTableStyle" />
 
           
 
           .</param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
           .</param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
           .</param
         >
         <param name="bindingManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.BindingContext" />
+          A <see cref="T:System.Windows.Forms.BindingContext" />
 
           
 

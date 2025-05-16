@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is intended for future use when the .NET Framework Data Provider for OLE DB is enabled for partial trust scenarios. The .NET Framework Data Provider for OLE DB currently requires FullTrust permission. Currently, using the OleDbPermission class has no effect. For more information, see <format
-         type="text/html">
+        >This class is intended for future use when the .NET Framework Data Provider for OLE DB is enabled for partial trust scenarios. The .NET Framework Data Provider for OLE DB currently requires FullTrust permission. Currently, using the OleDbPermission class has no effect. For more information, see <format type="text/html">
           <a href="93E099EB-DAA1-4F1E-B031-C1E10A996F88">Code Access Security and ADO.NET</a>
         </format>
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbPermission" />
 
             
 
@@ -81,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbPermission" />
 
             
 
@@ -90,12 +87,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -122,23 +122,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >The <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             enumeration takes precedence over the <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             enumeration takes precedence over the <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             property. Therefore, if you set <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             property. Therefore, if you set <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             to false, you must also set <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             to false, you must also set <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -148,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbPermission" />
 
             
 
@@ -157,19 +152,26 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
            values. </param
         >
         <param name="allowBlankPassword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -198,13 +200,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Data.OleDb.OleDbPermission" />
+            >Returns the <see cref="T:System.Data.OleDb.OleDbPermission" />
 
             
 
-             as an <see
-             cref="T:System.Security.IPermission" />
+             as an <see cref="T:System.Security.IPermission" />
 
             
 

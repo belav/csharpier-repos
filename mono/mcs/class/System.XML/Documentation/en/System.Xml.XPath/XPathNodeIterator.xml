@@ -32,77 +32,64 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Xml.XPath.XPathNodeIterator" />
+        >An <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
         
 
-         object returned by the <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+         object returned by the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         class is not positioned on the first node in a selected set of nodes. A call to the <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+         class is not positioned on the first node in a selected set of nodes. A call to the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.XPath.XPathNodeIterator" />
+         method of the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
         
 
-         class must be made to position the <see
-         cref="T:System.Xml.XPath.XPathNodeIterator" />
+         class must be made to position the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
         
 
          object on the first node in the selected set of nodes.</para
       >
       <para
-        >When using the <see
-         cref="T:System.Xml.XPath.XPathNodeIterator" />
+        >When using the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
         
 
-        , if you edit the current node or any of its ancestors, your current position is lost. If you want to edit a number of nodes that you have selected, create a <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+        , if you edit the current node or any of its ancestors, your current position is lost. If you want to edit a number of nodes that you have selected, create a <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         array, copy all of the nodes from the <see
-         cref="T:System.Xml.XPath.XPathNodeIterator" />
+         array, copy all of the nodes from the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
         
 
          into the array, then iterate through the array and modify the nodes.</para
       >
       <para
-        >There are two ways to iterate over an <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+        >There are two ways to iterate over an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         collection by using the <see
-         cref="T:System.Xml.XPath.XPathNodeIterator" />
+         collection by using the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
         
 
          class.</para
       >
       <para
-        >One way is to use the <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+        >One way is to use the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
         
 
-         method and then call <see
-         cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+         method and then call <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
         
 
-         to get the current <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+         to get the current <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
@@ -110,13 +97,11 @@
       >
       <para>code reference: XPathNavigatorMethods#55</para>
       <para
-        >Another way is to use a foreach loop to call the <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+        >Another way is to use a foreach loop to call the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
         
 
-         method and use the returned <see
-         cref="T:System.Collections.IEnumerator" />
+         method and use the returned <see cref="T:System.Collections.IEnumerator" />
 
         
 
@@ -124,33 +109,27 @@
       >
       <para>code reference: XPathNavigatorMethods#56</para>
       <para
-        >You should either use <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+        >You should either use <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
         
 
-         and <see
-         cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+         and <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
         
 
-         or use <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+         or use <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
         
 
-        . Combining these two approaches can cause unexpected results. For example, if the <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+        . Combining these two approaches can cause unexpected results. For example, if the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
         
 
-         method is called first, and then the <see
-         cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+         method is called first, and then the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
         
 
-         method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see
-         cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+         method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
         
 
@@ -185,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
@@ -218,23 +196,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The cloned <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >The cloned <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
-             object is positioned at the same node in the node set if calls have been made to the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+             object is positioned at the same node in the node set if calls have been made to the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method. The cloned <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             method. The cloned <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
-             object is not affected by subsequent changes to this <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             object is not affected by subsequent changes to this <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
@@ -244,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns a clone of this <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >When overridden in a derived class, returns a clone of this <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
@@ -255,13 +228,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >A new <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
-             object clone of this <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             object clone of this <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
@@ -287,13 +258,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Count" />
+            >The <see cref="P:System.Xml.XPath.XPathNodeIterator.Count" />
 
             
 
-             property does not affect the position of the <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             property does not affect the position of the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
@@ -326,8 +295,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >An <see
-           cref="T:System.Xml.XPath.XPathNavigator" />
+          >An <see cref="T:System.Xml.XPath.XPathNavigator" />
 
           
 
@@ -336,77 +304,64 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the properties of the returned <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >You can use the properties of the returned <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object to obtain information on the current node. However, the returned <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             object to obtain information on the current node. However, the returned <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object should not be modified. The returned <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             object should not be modified. The returned <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
              object cannot be moved away from the selected node set.</para
           >
           <para
-            >Alternatively, you can clone the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Alternatively, you can clone the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object using the <see
-             cref="M:System.Xml.XPath.XPathNavigator.Clone" />
+             object using the <see cref="M:System.Xml.XPath.XPathNavigator.Clone" />
 
             
 
-             method of the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             method of the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             class. The cloned <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             class. The cloned <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object can then be moved away from the selected node set. This method of cloning the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             object can then be moved away from the selected node set. This method of cloning the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
              object might affect the performance of the XPath query.</para
           >
           <para
-            >If the <see
-             cref="Overload:System.Xml.XPath.XPathNavigator.SelectAncestors" />
+            >If the <see cref="Overload:System.Xml.XPath.XPathNavigator.SelectAncestors" />
 
             
 
-            , <see
-             cref="Overload:System.Xml.XPath.XPathNavigator.SelectDescendants" />
+            , <see cref="Overload:System.Xml.XPath.XPathNavigator.SelectDescendants" />
 
             
 
-            , and <see
-             cref="Overload:System.Xml.XPath.XPathNavigator.SelectChildren" />
+            , and <see cref="Overload:System.Xml.XPath.XPathNavigator.SelectChildren" />
 
             
 
-             methods result in no nodes being selected, the <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             methods result in no nodes being selected, the <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
              property might not be pointing to the context node.</para
           >
           <para
-            >To test whether nodes have been selected, use the <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Count" />
+            >To test whether nodes have been selected, use the <see cref="P:System.Xml.XPath.XPathNodeIterator.Count" />
 
             
 
@@ -416,13 +371,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >When overridden in a derived class, gets the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object for this <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             object for this <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
@@ -478,39 +431,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumerator is positioned on the current position of the <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >The enumerator is positioned on the current position of the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
              object.</para
           >
           <para
-            >There are two ways to iterate over an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >There are two ways to iterate over an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             collection by using the <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             collection by using the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
              class.</para
           >
           <para
-            >One way is to use the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+            >One way is to use the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method and then call <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             method and then call <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
-             to get the current <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             to get the current <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -518,13 +465,11 @@
           >
           <para>code reference: XPathNavigatorMethods#55</para>
           <para
-            >Another way is to use a foreach loop to call the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+            >Another way is to use a foreach loop to call the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
             
 
-             method and use the returned <see
-             cref="T:System.Collections.IEnumerator" />
+             method and use the returned <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -532,33 +477,27 @@
           >
           <para>code reference: XPathNavigatorMethods#56</para>
           <para
-            >You should either use the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+            >You should either use the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method and <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             method and <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
-             or use the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+             or use the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
             
 
-             method. Combining these two approaches can cause unexpected results. For example, if the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+             method. Combining these two approaches can cause unexpected results. For example, if the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method is called first, and then the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+             method is called first, and then the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
             
 
-             method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
@@ -568,8 +507,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -579,8 +517,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -609,49 +546,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >The <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
-             object is positioned on the first node in the selected node set only after the initial call to the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+             object is positioned on the first node in the selected node set only after the initial call to the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method. The node set is created in document order. Therefore, calling the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+             method. The node set is created in document order. Therefore, calling the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
              method moves to the next node in document order.</para
           >
           <para
-            >There are two ways to iterate over an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >There are two ways to iterate over an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             collection by using the <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+             collection by using the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
              class.</para
           >
           <para
-            >One way is to use the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+            >One way is to use the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method and then call <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             method and then call <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
-             to get the current <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+             to get the current <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -659,13 +588,11 @@
           >
           <para>code reference: XPathNavigatorMethods#55</para>
           <para
-            >Another way is to use a foreach loop to call the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+            >Another way is to use a foreach loop to call the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
             
 
-             method and use the returned <see
-             cref="T:System.Collections.IEnumerator" />
+             method and use the returned <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -673,33 +600,27 @@
           >
           <para>code reference: XPathNavigatorMethods#56</para>
           <para
-            >You should either use the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+            >You should either use the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method and <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             method and <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
-             or use the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+             or use the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
             
 
-             method. Combining these two approaches can cause unexpected results. For example, if the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+             method. Combining these two approaches can cause unexpected results. For example, if the <see cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
             
 
-             method is called first, and then the <see
-             cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
+             method is called first, and then the <see cref="M:System.Xml.XPath.XPathNodeIterator.GetEnumerator" />
 
             
 
-             method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
@@ -709,13 +630,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, moves the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >When overridden in a derived class, moves the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
-             object returned by the <see
-             cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+             object returned by the <see cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
             
 
@@ -725,8 +644,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >true if the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -755,13 +673,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XPath.XPathNodeIterator" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XPath.XPathNodeIterator" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 

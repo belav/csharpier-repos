@@ -38,227 +38,184 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ListView" />
+        >The <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control is similar to a <see
-         cref="T:System.Windows.Forms.ListBox" />
+         control is similar to a <see cref="T:System.Windows.Forms.ListBox" />
 
         
 
-         in that it displays a list of items. The main difference is that the <see
-         cref="T:System.Windows.Forms.ListView" />
+         in that it displays a list of items. The main difference is that the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control provides a number of different ways items can be viewed by the user. The <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         control provides a number of different ways items can be viewed by the user. The <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         class defines the appearance, behavior, and data associated with an item that is displayed in the <see
-         cref="T:System.Windows.Forms.ListView" />
+         class defines the appearance, behavior, and data associated with an item that is displayed in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control. <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         control. <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         objects can be displayed in the <see
-         cref="T:System.Windows.Forms.ListView" />
+         objects can be displayed in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
          control in one of four different views. Items can be displayed as large or small icons or as small icons in a vertical list. Items can also have subitems that contain information that is related to the parent item. The fourth view style, details view, allows you to display the item and its subitems in a grid with column headers that can be used to identify the information being displayed in a subitem.</para
       >
       <para
-        >Most of the properties of the <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+        >Most of the properties of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         class provide ways to change the display of the item in the <see
-         cref="T:System.Windows.Forms.ListView" />
+         class provide ways to change the display of the item in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control it is associated with. The <see
-         cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+         control it is associated with. The <see cref="P:System.Windows.Forms.ListViewItem.BackColor" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+        , <see cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.ListViewItem.Font" />
+        , and <see cref="P:System.Windows.Forms.ListViewItem.Font" />
 
         
 
-         properties allow you to change how the text of the item is displayed in the <see
-         cref="T:System.Windows.Forms.ListView" />
+         properties allow you to change how the text of the item is displayed in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control. The <see
-         cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+         control. The <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
         
 
-         property allows you to specify the image to load from the <see
-         cref="T:System.Windows.Forms.ImageList" />
+         property allows you to specify the image to load from the <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
-         that is assigned to the <see
-         cref="T:System.Windows.Forms.ListView" />
+         that is assigned to the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control (by setting the <see
-         cref="P:System.Windows.Forms.ListView.LargeImageList" />
+         control (by setting the <see cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
         
 
-         or <see
-         cref="P:System.Windows.Forms.ListView.SmallImageList" />
+         or <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
         
 
-         properties of the <see
-         cref="T:System.Windows.Forms.ListView" />
+         properties of the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-        ). Items can display check boxes in order to obtain item choices from the user in a way similar to a <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        ). Items can display check boxes in order to obtain item choices from the user in a way similar to a <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
-         control. You can use the <see
-         cref="P:System.Windows.Forms.ListViewItem.Checked" />
+         control. You can use the <see cref="P:System.Windows.Forms.ListViewItem.Checked" />
 
         
 
-         property to determine if an item is checked, or to select or clear the check box at run time. Items can display any number of subitems when the <see
-         cref="P:System.Windows.Forms.ListView.View" />
+         property to determine if an item is checked, or to select or clear the check box at run time. Items can display any number of subitems when the <see cref="P:System.Windows.Forms.ListView.View" />
 
         
 
-         property of the associated <see
-         cref="T:System.Windows.Forms.ListView" />
+         property of the associated <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control is set to <see
-         cref="F:System.Windows.Forms.View.Details" />
+         control is set to <see cref="F:System.Windows.Forms.View.Details" />
 
         
 
-         and columns are defined in the <see
-         cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+         and columns are defined in the <see cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
         
 
-         of the <see
-         cref="T:System.Windows.Forms.ListView" />
+         of the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control. You can add subitems to an item by calling the <see
-         cref="M:System.Windows.Forms.ListViewItem.ListViewSubItemCollection.Add(System.Windows.Forms.ListViewItem.ListViewSubItem)" />
+         control. You can add subitems to an item by calling the <see cref="M:System.Windows.Forms.ListViewItem.ListViewSubItemCollection.Add(System.Windows.Forms.ListViewItem.ListViewSubItem)" />
 
         
 
-         method of the <see
-         cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+         method of the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
 
         
 
-         class. The <see
-         cref="P:System.Windows.Forms.ListViewItem.SubItems" />
+         class. The <see cref="P:System.Windows.Forms.ListViewItem.SubItems" />
 
         
 
-         property allows you to gain access to the <see
-         cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+         property allows you to gain access to the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
 
         
 
          class and its members.</para
       >
       <para
-        >Some of the properties and methods of the <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+        >Some of the properties and methods of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         class are item-specific versions of properties and methods in the <see
-         cref="T:System.Windows.Forms.ListView" />
+         class are item-specific versions of properties and methods in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control. For example, the <see
-         cref="M:System.Windows.Forms.ListViewItem.EnsureVisible" />
+         control. For example, the <see cref="M:System.Windows.Forms.ListViewItem.EnsureVisible" />
 
         
 
-         method is similar to the <see
-         cref="T:System.Windows.Forms.ListView" />
+         method is similar to the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         version of the method, but the <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         version of the method, but the <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
          version affects only the current item.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+        >The <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         class also provides methods that are not versions of <see
-         cref="T:System.Windows.Forms.ListView" />
+         class also provides methods that are not versions of <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         methods. The <see
-         cref="M:System.Windows.Forms.ListViewItem.BeginEdit" />
+         methods. The <see cref="M:System.Windows.Forms.ListViewItem.BeginEdit" />
 
         
 
-         method places the item's text into edit mode so the user can change the item's text (when the <see
-         cref="P:System.Windows.Forms.ListView.LabelEdit" />
+         method places the item's text into edit mode so the user can change the item's text (when the <see cref="P:System.Windows.Forms.ListView.LabelEdit" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.ListView" />
+         property of the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control is set to true). The <see
-         cref="M:System.Windows.Forms.ListViewItem.Clone" />
+         control is set to true). The <see cref="M:System.Windows.Forms.ListViewItem.Clone" />
 
         
 
-         method allows you to create copies of existing <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+         method allows you to create copies of existing <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 
-         objects to reuse in other <see
-         cref="T:System.Windows.Forms.ListView" />
+         objects to reuse in other <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -268,8 +225,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an item in a <see
-         cref="T:System.Windows.Forms.ListView" />
+        >Represents an item in a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
@@ -287,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -311,8 +266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -322,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -331,7 +284,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -363,7 +319,11 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -395,8 +355,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -407,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -416,12 +374,15 @@
           >
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -450,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -459,29 +419,34 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           containing information about the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+           containing information about the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
            to be initialized.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -500,8 +465,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -511,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -520,24 +483,30 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display for the item. This should not exceed 259 characters.</param
         >
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the image within the <see
-           cref="T:System.Windows.Forms.ImageList" />
+          The zero-based index of the image within the <see cref="T:System.Windows.Forms.ImageList" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.ListView" />
+           associated with the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
@@ -561,31 +530,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="imageKey" />
+            >The <paramref name="imageKey" />
 
             
 
-             parameter specifies an image in the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             parameter specifies an image in the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             associated with the owning <see
-             cref="T:System.Windows.Forms.ListView" />
+             associated with the owning <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, which can be accessed with the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             control, which can be accessed with the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
              property.</para
           >
           <para
-            >The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -595,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -604,29 +567,34 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display for the item. This should not exceed 259 characters.</param
         >
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the image within the <see
-           cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+          The name of the image within the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
-           of the owning <see
-           cref="T:System.Windows.Forms.ListView" />
+           of the owning <see cref="T:System.Windows.Forms.ListView" />
 
           
 
-           to display in the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+           to display in the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
@@ -658,8 +626,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -667,8 +634,7 @@
             >
           </block>
           <para
-            >The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -678,8 +644,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -687,19 +652,26 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display for the item. This should not exceed 259 characters.</param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -725,8 +697,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -734,24 +705,30 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of strings that represent the subitems of the new item. </param
         >
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the image within the <see
-           cref="T:System.Windows.Forms.ImageList" />
+          The zero-based index of the image within the <see cref="T:System.Windows.Forms.ImageList" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.ListView" />
+           associated with the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
@@ -778,23 +755,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="imageKey" />
+            >The <paramref name="imageKey" />
 
             
 
-             parameter specifies an image in the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             parameter specifies an image in the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             associated with the owning <see
-             cref="T:System.Windows.Forms.ListView" />
+             associated with the owning <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, which can be accessed with the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             control, which can be accessed with the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
@@ -804,8 +777,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -813,34 +785,38 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array containing the text of the subitems of the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          An array containing the text of the subitems of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
           .</param
         >
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the image within the <see
-           cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+          The name of the image within the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
-           of the owning <see
-           cref="T:System.Windows.Forms.ListView" />
+           of the owning <see cref="T:System.Windows.Forms.ListView" />
 
           
 
-           to display in the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+           to display in the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
@@ -872,8 +848,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -884,8 +859,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -893,19 +867,26 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of strings that represent the subitems of the new item. </param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -980,8 +961,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -989,8 +969,7 @@
             >
           </block>
           <para
-            >The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1000,8 +979,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1009,36 +987,45 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display for the item. This should not exceed 259 characters.</param
         >
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the image within the <see
-           cref="T:System.Windows.Forms.ImageList" />
+          The zero-based index of the image within the <see cref="T:System.Windows.Forms.ImageList" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.ListView" />
+           associated with the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            that contains the item. </param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -1066,23 +1053,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This version of the constructor allows you to specify the group to which an item belongs.</para>
           <para
-            >The <paramref
-             name="imageKey" />
+            >The <paramref name="imageKey" />
 
             
 
-             parameter specifies an image in the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             parameter specifies an image in the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             associated with the owning <see
-             cref="T:System.Windows.Forms.ListView" />
+             associated with the owning <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, which can be accessed with the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             control, which can be accessed with the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
@@ -1094,8 +1077,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -1103,8 +1085,7 @@
             >
           </block>
           <para
-            >The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1114,8 +1095,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1123,36 +1103,45 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to display for the item. This should not exceed 259 characters.</param
         >
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the image within the <see
-           cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+          The name of the image within the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
-           of the owning <see
-           cref="T:System.Windows.Forms.ListView" />
+           of the owning <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            to display in the item.</param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -1185,8 +1174,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -1197,8 +1185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1206,36 +1193,45 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of strings that represent the subitems of the new item. </param
         >
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the image within the <see
-           cref="T:System.Windows.Forms.ImageList" />
+          The zero-based index of the image within the <see cref="T:System.Windows.Forms.ImageList" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.ListView" />
+           associated with the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            that contains the item. </param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -1263,23 +1259,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This version of the constructor allows you to specify the group to which an item belongs.</para>
           <para
-            >The <paramref
-             name="imageKey" />
+            >The <paramref name="imageKey" />
 
             
 
-             parameter specifies an image in the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             parameter specifies an image in the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             associated with the owning <see
-             cref="T:System.Windows.Forms.ListView" />
+             associated with the owning <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, which can be accessed with the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             control, which can be accessed with the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
@@ -1291,8 +1283,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -1303,8 +1294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1312,41 +1302,49 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of strings that represents the text for subitems of the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          An array of strings that represents the text for subitems of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
           .</param
         >
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the image within the <see
-           cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+          The name of the image within the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
-           of the owning <see
-           cref="T:System.Windows.Forms.ListView" />
+           of the owning <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            to display in the item.</param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -1421,8 +1419,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1430,60 +1427,75 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of strings that represent the subitems of the new item. </param
         >
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the image within the <see
-           cref="T:System.Windows.Forms.ImageList" />
+          The zero-based index of the image within the <see cref="T:System.Windows.Forms.ImageList" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.ListView" />
+           associated with the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            that contains the item. </param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the foreground color of the item. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the background color of the item. </param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Font" />
+          A <see cref="T:System.Drawing.Font" />
 
           
 
@@ -1513,23 +1525,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="imageKey" />
+            >The <paramref name="imageKey" />
 
             
 
-             parameter specifies an image in the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             parameter specifies an image in the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             associated with the owning <see
-             cref="T:System.Windows.Forms.ListView" />
+             associated with the owning <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, which can be accessed with the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             control, which can be accessed with the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
@@ -1539,8 +1547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1548,65 +1555,79 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of strings that represent the text of the subitems for the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          An array of strings that represent the text of the subitems for the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
           .</param
         >
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the image within the <see
-           cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+          The name of the image within the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
-           of the owning <see
-           cref="T:System.Windows.Forms.ListView" />
+           of the owning <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            to display in the item.</param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the foreground color of the item.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the background color of the item.</param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Font" />
+          A <see cref="T:System.Drawing.Font" />
 
           
 
@@ -1642,8 +1663,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -1654,8 +1674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1663,72 +1682,90 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of strings that represent the subitems of the new item. </param
         >
         <param name="imageIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the image within the <see
-           cref="T:System.Windows.Forms.ImageList" />
+          The zero-based index of the image within the <see cref="T:System.Windows.Forms.ImageList" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.ListView" />
+           associated with the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            that contains the item. </param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the foreground color of the item. </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the background color of the item. </param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Font" />
+          A <see cref="T:System.Drawing.Font" />
 
           
 
            that represents the font to display the item's text in. </param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -1759,23 +1796,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This version of the constructor allows you to specify the group to which an item belongs.</para>
           <para
-            >The <paramref
-             name="imageKey" />
+            >The <paramref name="imageKey" />
 
             
 
-             parameter specifies an image in the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             parameter specifies an image in the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             associated with the owning <see
-             cref="T:System.Windows.Forms.ListView" />
+             associated with the owning <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, which can be accessed with the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+             control, which can be accessed with the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
@@ -1787,8 +1820,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -1799,8 +1831,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -1808,77 +1839,94 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of strings that represents the text of the subitems for the <see
-           cref="T:System.Windows.Forms.ListViewItem" />
+          An array of strings that represents the text of the subitems for the <see cref="T:System.Windows.Forms.ListViewItem" />
 
           
 
           .</param
         >
         <param name="imageKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the image within the <see
-           cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+          The name of the image within the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
           
 
-           of the owning <see
-           cref="T:System.Windows.Forms.ListView" />
+           of the owning <see cref="T:System.Windows.Forms.ListView" />
 
           
 
            to display in the item.</param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the foreground color of the item.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Color" />
+          A <see cref="T:System.Drawing.Color" />
 
           
 
            that represents the background color of the item.</param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Font" />
+          A <see cref="T:System.Drawing.Font" />
 
           
 
            to apply to the item text.</param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ListViewGroup" />
+          The <see cref="T:System.Windows.Forms.ListViewGroup" />
 
           
 
@@ -1905,31 +1953,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+            >You can use the <see cref="P:System.Windows.Forms.ListViewItem.BackColor" />
 
             
 
-             property to change the color displayed behind the item text. This property can be used if you want to use different background and foreground color combinations (using the <see
-             cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+             property to change the color displayed behind the item text. This property can be used if you want to use different background and foreground color combinations (using the <see cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
             
 
-             property to set the foreground color) to differentiate one item from another. For example, you could set the <see
-             cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+             property to set the foreground color) to differentiate one item from another. For example, you could set the <see cref="P:System.Windows.Forms.ListViewItem.BackColor" />
 
             
 
-             property to <see
-             cref="P:System.Drawing.Color.Red" />
+             property to <see cref="P:System.Drawing.Color.Red" />
 
             
 
              to identify items that have failed validation or are missing subitem information.</para
           >
           <para
-            >If you want to use the same background color for all subitems of an item, set the <see
-             cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" />
+            >If you want to use the same background color for all subitems of an item, set the <see cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" />
 
             
 
@@ -1957,23 +2000,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is effective only if the <see
-             cref="P:System.Windows.Forms.ListView.LabelEdit" />
+            >This property is effective only if the <see cref="P:System.Windows.Forms.ListView.LabelEdit" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control that contains the item is set to true. You can use this method at run time to force the item's text to display in edit mode. For example, if you are validating the item text edited by the user, and an item fails validation, you could select the item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             control that contains the item is set to true. You can use this method at run time to force the item's text to display in edit mode. For example, if you are validating the item text edited by the user, and an item fails validation, you could select the item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control and call the <see
-             cref="M:System.Windows.Forms.ListViewItem.BeginEdit" />
+             control and call the <see cref="M:System.Windows.Forms.ListViewItem.BeginEdit" />
 
             
 
@@ -2006,54 +2045,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to obtain the bounding rectangle of an entire item. If you want to obtain the bounding rectangle for a portion of the entire item, use the <see
-             cref="M:System.Windows.Forms.ListViewItem.GetBounds(System.Windows.Forms.ItemBoundsPortion)" />
+            >You can use this method to obtain the bounding rectangle of an entire item. If you want to obtain the bounding rectangle for a portion of the entire item, use the <see cref="M:System.Windows.Forms.ListViewItem.GetBounds(System.Windows.Forms.ItemBoundsPortion)" />
 
             
 
-             method. The <see
-             cref="T:System.Windows.Forms.ListView" />
+             method. The <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             class provides a <see
-             cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
+             class provides a <see cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
 
             
 
              method that allows you to get the bounding rectangle of any item located within the control.</para
           >
           <para
-            >The returned bounding rectangle uses client control coordinates that are relative to the top-left corner of the currently visible area of the containing <see
-             cref="T:System.Windows.Forms.ListBox" />
+            >The returned bounding rectangle uses client control coordinates that are relative to the top-left corner of the currently visible area of the containing <see cref="T:System.Windows.Forms.ListBox" />
 
             
 
-            . If the <see
-             cref="T:System.Windows.Forms.ListBox" />
+            . If the <see cref="T:System.Windows.Forms.ListBox" />
 
             
 
-             is scrollable and positioned so that the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             is scrollable and positioned so that the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
              is not visible, the coordinates returned may be negative.</para
           >
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+            >When the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property has a value of <see
-             cref="F:System.Windows.Forms.View.List" />
+             property has a value of <see cref="F:System.Windows.Forms.View.List" />
 
             
 
-            , the width of the bounding rectangle is the width of the column containing the item, not the width of the text in the item. If the <see
-             cref="P:System.Windows.Forms.ListView.Columns" />
+            , the width of the bounding rectangle is the width of the column containing the item, not the width of the text in the item. If the <see cref="P:System.Windows.Forms.ListView.Columns" />
 
             
 
@@ -2089,33 +2119,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is useful only if the <see
-             cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+            >This property is useful only if the <see cref="P:System.Windows.Forms.ListView.CheckBoxes" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control the item is contained in is set to true. You can use this property to determine if the item has been checked by the user or through code at run time. To determine all the items that are checked in a <see
-             cref="T:System.Windows.Forms.ListView" />
+             control the item is contained in is set to true. You can use this property to determine if the item has been checked by the user or through code at run time. To determine all the items that are checked in a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, you can use the <see
-             cref="P:System.Windows.Forms.ListView.CheckedItems" />
+             control, you can use the <see cref="P:System.Windows.Forms.ListView.CheckedItems" />
 
             
 
-             property. To take action when an item has been checked, you can create an event handler for the <see
-             cref="E:System.Windows.Forms.ListView.ItemCheck" />
+             property. To take action when an item has been checked, you can create an event handler for the <see cref="E:System.Windows.Forms.ListView.ItemCheck" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -2143,18 +2167,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to create a new instance of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >You can use this method to create a new instance of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             class based on an existing item. Even the subitems of the item being cloned are specified for the new version. This feature is useful if you want to reuse a <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             class based on an existing item. Even the subitems of the item being cloned are specified for the new version. This feature is useful if you want to reuse a <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             in more than one <see
-             cref="T:System.Windows.Forms.ListView" />
+             in more than one <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -2195,24 +2216,30 @@
           <para>Deserializes the item.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the data needed to deserialize the item. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -2235,31 +2262,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to ensure that the item is visible within the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >You can use this method to ensure that the item is visible within the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control. This method can be used when performing validation on the item. You can call the <see
-             cref="M:System.Windows.Forms.ListViewItem.EnsureVisible" />
+             control. This method can be used when performing validation on the item. You can call the <see cref="M:System.Windows.Forms.ListViewItem.EnsureVisible" />
 
             
 
-             method to ensure that the item is displayed in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             method to ensure that the item is displayed in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
              control if it failed validation, to allow the user to perform changes on the item.</para
           >
           <para
-            >This method is similar to the <see
-             cref="M:System.Windows.Forms.ListView.EnsureVisible(System.Int32)" />
+            >This method is similar to the <see cref="M:System.Windows.Forms.ListView.EnsureVisible(System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             method of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -2295,16 +2317,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ListViewItem.FindNearestItem(System.Windows.Forms.SearchDirectionHint)" />
+            >The <see cref="M:System.Windows.Forms.ListViewItem.FindNearestItem(System.Windows.Forms.SearchDirectionHint)" />
 
             
 
              method returns null if no item is found in the given direction. </para
           >
           <para
-            >Identifying the nearest item can vary depending on the operating system the application is running on and will affect the results of <see
-             cref="M:System.Windows.Forms.ListViewItem.FindNearestItem(System.Windows.Forms.SearchDirectionHint)" />
+            >Identifying the nearest item can vary depending on the operating system the application is running on and will affect the results of <see cref="M:System.Windows.Forms.ListViewItem.FindNearestItem(System.Windows.Forms.SearchDirectionHint)" />
 
             
 
@@ -2314,8 +2334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Finds the next item from the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Finds the next item from the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -2325,8 +2344,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >The <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -2334,12 +2352,15 @@
           >
         </returns>
         <param name="searchDirection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.SearchDirectionHint" />
+          One of the <see cref="T:System.Windows.Forms.SearchDirectionHint" />
 
           
 
@@ -2366,76 +2387,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Because a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control does not have directly editable areas—only items contained in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             control does not have directly editable areas—only items contained in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             can be edited—the text of an item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             can be edited—the text of an item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             will display the focus reticle when the <see
-             cref="T:System.Windows.Forms.ListView" />
+             will display the focus reticle when the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             has focus. Typically, the last selected item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             has focus. Typically, the last selected item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control is the item with focus. Although an item may display the focus reticle, it might not actually be a selected item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             control is the item with focus. Although an item may display the focus reticle, it might not actually be a selected item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-            . You can use the <see
-             cref="P:System.Windows.Forms.ListViewItem.Focused" />
+            . You can use the <see cref="P:System.Windows.Forms.ListViewItem.Focused" />
 
             
 
-             property to determine if the item is currently the focused item in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property to determine if the item is currently the focused item in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control that contains it. If the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             control that contains it. If the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             is not associated with a <see
-             cref="T:System.Windows.Forms.ListView" />
+             is not associated with a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
              control, this property will return false.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ListView" />
+            >The <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control provides the <see
-             cref="P:System.Windows.Forms.ListView.FocusedItem" />
+             control provides the <see cref="P:System.Windows.Forms.ListView.FocusedItem" />
 
             
 
-             property to allow you to determine which <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             property to allow you to determine which <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -2445,8 +2452,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the item has focus within the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets or sets a value indicating whether the item has focus within the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -2478,18 +2484,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to change the font styles applied to the text of the item. Because a <see
-             cref="T:System.Drawing.Font" />
+            >You can use this method to change the font styles applied to the text of the item. Because a <see cref="T:System.Drawing.Font" />
 
             
 
-             is immutable (you cannot adjust any of its properties), you can only assign the <see
-             cref="P:System.Windows.Forms.Control.Font" />
+             is immutable (you cannot adjust any of its properties), you can only assign the <see cref="P:System.Windows.Forms.Control.Font" />
 
             
 
-             property a new <see
-             cref="T:System.Drawing.Font" />
+             property a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2522,31 +2525,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+            >You can use the <see cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
             
 
-             property to change the color of the item text. This property can be used if you want to use different background and foreground color combinations (using the <see
-             cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+             property to change the color of the item text. This property can be used if you want to use different background and foreground color combinations (using the <see cref="P:System.Windows.Forms.ListViewItem.BackColor" />
 
             
 
-             property to set the background color) to differentiate one item from another. For example, you could set the <see
-             cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+             property to set the background color) to differentiate one item from another. For example, you could set the <see cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
             
 
-             property to <see
-             cref="P:System.Drawing.Color.Red" />
+             property to <see cref="P:System.Drawing.Color.Red" />
 
             
 
              to identify items that have a negative number associated with them or have failed item validation.</para
           >
           <para
-            >If you want to use the same foreground color for all subitems of an item, set the <see
-             cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" />
+            >If you want to use the same foreground color for all subitems of an item, set the <see cref="P:System.Windows.Forms.ListViewItem.UseItemStyleForSubItems" />
 
             
 
@@ -2579,28 +2577,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The bounding rectangle returned by the <see
-             cref="M:System.Windows.Forms.ListViewItem.GetBounds(System.Windows.Forms.ItemBoundsPortion)" />
+            >The bounding rectangle returned by the <see cref="M:System.Windows.Forms.ListViewItem.GetBounds(System.Windows.Forms.ItemBoundsPortion)" />
 
             
 
-             method represents only the section of the item specified in the <paramref
-             name="portion" />
+             method represents only the section of the item specified in the <paramref name="portion" />
 
             
 
-             parameter. You can also call the <see
-             cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
+             parameter. You can also call the <see cref="M:System.Windows.Forms.ListView.GetItemRect(System.Int32)" />
 
             
 
-             methods of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             methods of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             class to obtain the bounding rectangle of any item in a <see
-             cref="T:System.Windows.Forms.ListView" />
+             class to obtain the bounding rectangle of any item in a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -2614,8 +2607,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -2623,12 +2615,15 @@
           >
         </returns>
         <param name="portion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ItemBoundsPortion" />
+          One of the <see cref="T:System.Windows.Forms.ItemBoundsPortion" />
 
           
 
@@ -2660,23 +2655,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ListViewItem.GetSubItemAt(System.Int32,System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.ListViewItem.GetSubItemAt(System.Int32,System.Int32)" />
 
             
 
-             method will return null if the <see
-             cref="T:System.Windows.Forms.ListView" />
+             method will return null if the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             is not in <see
-             cref="F:System.Windows.Forms.View.Details" />
+             is not in <see cref="F:System.Windows.Forms.View.Details" />
 
             
 
-             view, or there is not a <see
-             cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+             view, or there is not a <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
 
             
 
@@ -2686,8 +2677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the subitem of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Returns the subitem of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -2697,8 +2687,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
+            >The <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItem" />
 
             
 
@@ -2706,14 +2695,22 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2744,18 +2741,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to set the group to which an item belongs. You can also set the group in the <see
-             cref="M:System.Windows.Forms.ListViewItem.#ctor" />
+            >Use this property to set the group to which an item belongs. You can also set the group in the <see cref="M:System.Windows.Forms.ListViewItem.#ctor" />
 
             
 
-             constructor, or you can use this property to modify the group membership at run time. If you set this property to null and there are groups in the <see
-             cref="P:System.Windows.Forms.ListView.Groups" />
+             constructor, or you can use this property to modify the group membership at run time. If you set this property to null and there are groups in the <see cref="P:System.Windows.Forms.ListView.Groups" />
 
             
 
-             collection, the item will appear in the default group, which has the header label "DefaultGroupSystem.Windows.Forms". The default group is not contained in the <see
-             cref="P:System.Windows.Forms.ListView.Groups" />
+             collection, the item will appear in the default group, which has the header label "DefaultGroupSystem.Windows.Forms". The default group is not contained in the <see cref="P:System.Windows.Forms.ListView.Groups" />
 
             
 
@@ -2767,8 +2761,7 @@
 
               
 
-               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see
-               cref="T:System.Windows.Forms.ListViewGroup" />
+               groups are only available on Windows XP and the Windows Server 2003 family (WinXpFamily). For more information, see the <see cref="T:System.Windows.Forms.ListViewGroup" />
 
               
 
@@ -2816,138 +2809,111 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property depends on the value of the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageList" />
+            >The value of this property depends on the value of the <see cref="P:System.Windows.Forms.ListViewItem.ImageList" />
 
             
 
-             property. Depending on the current value of the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+             property. Depending on the current value of the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control associated with the item, the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             control associated with the item, the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             used by the item could be one specified in the <see
-             cref="P:System.Windows.Forms.ListView.LargeImageList" />
+             used by the item could be one specified in the <see cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
-             property or the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             property or the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control. If the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+             control. If the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.View.LargeIcon" />
+             property is set to <see cref="F:System.Windows.Forms.View.LargeIcon" />
 
             
 
-            , the <see
-             cref="T:System.Windows.Forms.ImageList" />
+            , the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             specified in the <see
-             cref="P:System.Windows.Forms.ListView.LargeImageList" />
+             specified in the <see cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
-             property is used; otherwise, the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             property is used; otherwise, the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             specified in the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             specified in the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property is used. The images defined in the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             property is used. The images defined in the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             specified in the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             specified in the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             should have the same index positions as the images in the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             should have the same index positions as the images in the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             specified in the <see
-             cref="P:System.Windows.Forms.ListView.LargeImageList" />
+             specified in the <see cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
-             property. If the index positions are the same for both <see
-             cref="T:System.Windows.Forms.ImageList" />
+             property. If the index positions are the same for both <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             controls, you can set a single index value for the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             controls, you can set a single index value for the <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             property and the appropriate image will be displayed regardless of the value of the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+             property and the appropriate image will be displayed regardless of the value of the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control. The <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+             control. The <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             and <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             properties are mutually exclusive, meaning if one is set, the other is ignored. Furthermore, if you set the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+             properties are mutually exclusive, meaning if one is set, the other is ignored. Furthermore, if you set the <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
-             property, the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             property, the <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             property is automatically set to -1. Alternatively, if you set the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             property is automatically set to -1. Alternatively, if you set the <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             property, the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+             property, the <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
@@ -2996,48 +2962,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+            >The <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
-             property returns an empty string ("") when the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+             property returns an empty string ("") when the <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
-             is not set for the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             is not set for the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-            . The <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+            . The <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             and <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             properties are mutually exclusive, meaning if one is set, the other is ignored. If you set the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+             properties are mutually exclusive, meaning if one is set, the other is ignored. If you set the <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
-             property, the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             property, the <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             property is automatically set to -1. Alternatively, if you set the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             property is automatically set to -1. Alternatively, if you set the <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
-             property, the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
+             property, the <see cref="P:System.Windows.Forms.ListViewItem.ImageKey" />
 
             
 
@@ -3045,8 +3002,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If you are using multiple image lists, for small and large icon view, with a <see
-               cref="T:System.Windows.Forms.ListView" />
+              >If you are using multiple image lists, for small and large icon view, with a <see cref="T:System.Windows.Forms.ListView" />
 
               
 
@@ -3082,78 +3038,63 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Depending on the current value of the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+            >Depending on the current value of the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control associated with the item, the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             control associated with the item, the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             used by the item could be one specified in the <see
-             cref="P:System.Windows.Forms.ListView.LargeImageList" />
+             used by the item could be one specified in the <see cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
-             property or the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             property or the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control. If the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+             control. If the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.View.LargeIcon" />
+             property is set to <see cref="F:System.Windows.Forms.View.LargeIcon" />
 
             
 
-            , the <see
-             cref="T:System.Windows.Forms.ImageList" />
+            , the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             specified in the <see
-             cref="P:System.Windows.Forms.ListView.LargeImageList" />
+             specified in the <see cref="P:System.Windows.Forms.ListView.LargeImageList" />
 
             
 
-             property is used; otherwise, the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             property is used; otherwise, the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             specified in the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+             specified in the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property is used. You can use this property to determine which <see
-             cref="T:System.Windows.Forms.ImageList" />
+             property is used. You can use this property to determine which <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             control is providing the image for the item. To determine the index position in the <see
-             cref="T:System.Windows.Forms.ImageList" />
+             control is providing the image for the item. To determine the index position in the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             that contains the image to display for the item, use the <see
-             cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
+             that contains the image to display for the item, use the <see cref="P:System.Windows.Forms.ListViewItem.ImageIndex" />
 
             
 
@@ -3163,8 +3104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ImageList" />
+            >Gets the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
@@ -3196,33 +3136,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ListViewItem.IndentCount" />
+            >The <see cref="P:System.Windows.Forms.ListViewItem.IndentCount" />
 
             
 
-             property can be used only when the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+             property can be used only when the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property of the containing <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the containing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             is set to <see
-             cref="F:System.Windows.Forms.View.Details" />
+             is set to <see cref="F:System.Windows.Forms.View.Details" />
 
             
 
-            , and the <see
-             cref="P:System.Windows.Forms.ListView.SmallImageList" />
+            , and the <see cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3232,8 +3166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of small image widths by which to indent the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets or sets the number of small image widths by which to indent the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -3258,18 +3191,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine if the item is associated with a <see
-             cref="T:System.Windows.Forms.ListView" />
+            >You can use this property to determine if the item is associated with a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control as well as to determine its position within the <see
-             cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+             control as well as to determine its position within the <see cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
 
             
 
-             of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3279,8 +3209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the zero-based index of the item within the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the zero-based index of the item within the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3312,13 +3241,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to access the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >You can use this property to access the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control that owns the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             control that owns the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -3328,8 +3255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Gets the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3365,13 +3291,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Windows.Forms.ListViewItem.Name" />
+            >The value of the <see cref="P:System.Windows.Forms.ListViewItem.Name" />
 
             
 
-             property is also the key for the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             property is also the key for the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -3381,8 +3305,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name associated with this <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets or sets the name associated with this <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -3416,108 +3339,87 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ListViewItem.Position" />
+            >The <see cref="P:System.Windows.Forms.ListViewItem.Position" />
 
             
 
-             property should be set after the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             property should be set after the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             and containing <see
-             cref="T:System.Windows.Forms.ListView" />
+             and containing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             are constructed. Changing the <see
-             cref="P:System.Windows.Forms.ListViewItem.Position" />
+             are constructed. Changing the <see cref="P:System.Windows.Forms.ListViewItem.Position" />
 
             
 
-             property when the containing <see
-             cref="T:System.Windows.Forms.ListView" />
+             property when the containing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             is in <see
-             cref="F:System.Windows.Forms.View.Details" />
+             is in <see cref="F:System.Windows.Forms.View.Details" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.View.List" />
+             or <see cref="F:System.Windows.Forms.View.List" />
 
             
 
-             view will have no effect on the position of the items. Also, the <see
-             cref="P:System.Windows.Forms.ListViewItem.Position" />
+             view will have no effect on the position of the items. Also, the <see cref="P:System.Windows.Forms.ListViewItem.Position" />
 
             
 
-             property will automatically change when the <see
-             cref="P:System.Windows.Forms.ListView.View" />
+             property will automatically change when the <see cref="P:System.Windows.Forms.ListView.View" />
 
             
 
-             property of the containing <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the containing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             is changed from <see
-             cref="F:System.Windows.Forms.View.SmallIcon" />
+             is changed from <see cref="F:System.Windows.Forms.View.SmallIcon" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.View.LargeIcon" />
+            , <see cref="F:System.Windows.Forms.View.LargeIcon" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.View.Tile" />
+            , or <see cref="F:System.Windows.Forms.View.Tile" />
 
             
 
-             view to <see
-             cref="F:System.Windows.Forms.View.List" />
+             view to <see cref="F:System.Windows.Forms.View.List" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.View.Details" />
+             or <see cref="F:System.Windows.Forms.View.Details" />
 
             
 
-            . When the <see
-             cref="T:System.Windows.Forms.ListView" />
+            . When the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             is in <see
-             cref="F:System.Windows.Forms.View.SmallIcon" />
+             is in <see cref="F:System.Windows.Forms.View.SmallIcon" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.View.LargeIcon" />
+            , <see cref="F:System.Windows.Forms.View.LargeIcon" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.View.Tile" />
+            , or <see cref="F:System.Windows.Forms.View.Tile" />
 
             
 
-             view, setting the <see
-             cref="P:System.Windows.Forms.ListViewItem.Position" />
+             view, setting the <see cref="P:System.Windows.Forms.ListViewItem.Position" />
 
             
 
-             property for an item will cause the other items contained in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property for an item will cause the other items contained in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3527,8 +3429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the position of the upper-left corner of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets or sets the position of the upper-left corner of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -3548,33 +3449,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar in function to the <see
-             cref="M:System.Windows.Forms.ListView.ListViewItemCollection.Remove(System.Windows.Forms.ListViewItem)" />
+            >This method is similar in function to the <see cref="M:System.Windows.Forms.ListView.ListViewItemCollection.Remove(System.Windows.Forms.ListViewItem)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
+             method of the <see cref="T:System.Windows.Forms.ListView.ListViewItemCollection" />
 
             
 
-             in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control that contains the item. You can use the <see
-             cref="M:System.Windows.Forms.ListViewItem.Remove" />
+             control that contains the item. You can use the <see cref="M:System.Windows.Forms.ListViewItem.Remove" />
 
             
 
-             method to remove an item from its <see
-             cref="T:System.Windows.Forms.ListView" />
+             method to remove an item from its <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control. This feature can be useful if you want to move the item to a different <see
-             cref="T:System.Windows.Forms.ListView" />
+             control. This feature can be useful if you want to move the item to a different <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3584,8 +3479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the item from its associated <see
-             cref="T:System.Windows.Forms.ListView" />
+            >Removes the item from its associated <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -3617,33 +3511,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.ListView.MultiSelect" />
+            >If the <see cref="P:System.Windows.Forms.ListView.MultiSelect" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control the item is contained in is set to true, setting the value of this property adds or removes the item from the set of selected items. If the <see
-             cref="P:System.Windows.Forms.ListView.MultiSelect" />
+             control the item is contained in is set to true, setting the value of this property adds or removes the item from the set of selected items. If the <see cref="P:System.Windows.Forms.ListView.MultiSelect" />
 
             
 
-             property is set to false, setting the value of this property to select an item automatically cancels the selection for any other items in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property is set to false, setting the value of this property to select an item automatically cancels the selection for any other items in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control. You can use this property to determine if an item is selected or to select an item at run time. You can access all items that are selected in a <see
-             cref="T:System.Windows.Forms.ListView" />
+             control. You can use this property to determine if an item is selected or to select an item at run time. You can access all items that are selected in a <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control by using the <see
-             cref="P:System.Windows.Forms.ListView.SelectedItems" />
+             control by using the <see cref="P:System.Windows.Forms.ListView.SelectedItems" />
 
             
 
@@ -3651,13 +3539,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Items appear selected only when the <see
-               cref="T:System.Windows.Forms.ListView" />
+              >Items appear selected only when the <see cref="T:System.Windows.Forms.ListView" />
 
               
 
-               control has focus. To select items in response to a user action such as a button click, be sure to call the <see
-               cref="M:System.Windows.Forms.Control.Focus" />
+               control has focus. To select items in response to a user action such as a button click, be sure to call the <see cref="M:System.Windows.Forms.Control.Focus" />
 
               
 
@@ -3695,24 +3581,30 @@
           <para>Serializes the item.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the data needed to serialize the item. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -3755,33 +3647,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property allows you to specify the index into the <see
-             cref="T:System.Windows.Forms.ImageList" />
+            >This property allows you to specify the index into the <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-             assigned to the <see
-             cref="P:System.Windows.Forms.ListView.StateImageList" />
+             assigned to the <see cref="P:System.Windows.Forms.ListView.StateImageList" />
 
             
 
-             property of the associated <see
-             cref="T:System.Windows.Forms.ListView" />
+             property of the associated <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, where the state images to display to the left of the item are stored. Typically, the state image is a selected or cleared check box or an image that is intended to represent selected or cleared states for the item. If no value is specified for the <see
-             cref="P:System.Windows.Forms.ListView.StateImageList" />
+             control, where the state images to display to the left of the item are stored. Typically, the state image is a selected or cleared check box or an image that is intended to represent selected or cleared states for the item. If no value is specified for the <see cref="P:System.Windows.Forms.ListView.StateImageList" />
 
             
 
-             property, the <see
-             cref="T:System.Windows.Forms.ListView" />
+             property, the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control displays a default selected or cleared check box when the <see
-             cref="P:System.Windows.Forms.ListView.CheckBoxes" />
+             control displays a default selected or cleared check box when the <see cref="P:System.Windows.Forms.ListView.CheckBoxes" />
 
             
 
@@ -3789,18 +3675,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Although the <see
-               cref="T:System.Windows.Forms.ImageList" />
+              >Although the <see cref="T:System.Windows.Forms.ImageList" />
 
               
 
-               specified in the <see
-               cref="P:System.Windows.Forms.ListView.StateImageList" />
+               specified in the <see cref="P:System.Windows.Forms.ListView.StateImageList" />
 
               
 
-               property can contain any number of images, and the <see
-               cref="P:System.Windows.Forms.ListViewItem.StateImageIndex" />
+               property can contain any number of images, and the <see cref="P:System.Windows.Forms.ListViewItem.StateImageIndex" />
 
               
 
@@ -3840,13 +3723,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using the <see
-             cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+            >Using the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
 
             
 
-            , you can add subitems, remove subitems, and obtain a count of subitems. For more information on the tasks that can be performed with the subitems in the collection, see the <see
-             cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+            , you can add subitems, remove subitems, and obtain a count of subitems. For more information on the tasks that can be performed with the subitems in the collection, see the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
 
             
 
@@ -3854,8 +3735,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The first subitem in the <see
-               cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
+              >The first subitem in the <see cref="T:System.Windows.Forms.ListViewItem.ListViewSubItemCollection" />
 
               
 
@@ -3897,24 +3777,30 @@
           <para>Serializes the item.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the data needed to serialize the item.  </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -3947,13 +3833,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ListViewItem.Tag" />
+            >The <see cref="P:System.Windows.Forms.ListViewItem.Tag" />
 
             
 
-             property can be used to store any object that you want to associate with an item. Although you can store any item, the <see
-             cref="P:System.Windows.Forms.ListViewItem.Tag" />
+             property can be used to store any object that you want to associate with an item. Although you can store any item, the <see cref="P:System.Windows.Forms.ListViewItem.Tag" />
 
             
 
@@ -3989,41 +3873,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ListViewItem.Text" />
+            >The <see cref="P:System.Windows.Forms.ListViewItem.Text" />
 
             
 
-             property allows you to change the text displayed for the item. The text of the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             property allows you to change the text displayed for the item. The text of the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
              should not exceed 259 characters or unexpected behavior could occur.</para
           >
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+            >You can use the <see cref="P:System.Windows.Forms.ListViewItem.BackColor" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+            , <see cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ListViewItem.Font" />
+            , and <see cref="P:System.Windows.Forms.ListViewItem.Font" />
 
             
 
-             properties to specify how the text is displayed. The <see
-             cref="T:System.Windows.Forms.ListView" />
+             properties to specify how the text is displayed. The <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             class provides the <see
-             cref="P:System.Windows.Forms.ListView.LabelWrap" />
+             class provides the <see cref="P:System.Windows.Forms.ListView.LabelWrap" />
 
             
 
@@ -4059,18 +3936,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If both the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >If both the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
-             and its containing <see
-             cref="T:System.Windows.Forms.ListView" />
+             and its containing <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             have ToolTips set, only the ToolTip for the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+             have ToolTips set, only the ToolTip for the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -4080,8 +3954,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text shown when the mouse pointer rests on the <see
-             cref="T:System.Windows.Forms.ListViewItem" />
+            >Gets or sets the text shown when the mouse pointer rests on the <see cref="T:System.Windows.Forms.ListViewItem" />
 
             
 
@@ -4123,28 +3996,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not want to have a uniform background color, foreground color, and font used for all items and subitems in your <see
-             cref="T:System.Windows.Forms.ListView" />
+            >If you do not want to have a uniform background color, foreground color, and font used for all items and subitems in your <see cref="T:System.Windows.Forms.ListView" />
 
             
 
-             control, you can set this property to false. When this property is set to true, any changes made to the subitem's <see
-             cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" />
+             control, you can set this property to false. When this property is set to true, any changes made to the subitem's <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.Font" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.ForeColor" />
+            , <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.ForeColor" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.BackColor" />
+            , and <see cref="P:System.Windows.Forms.ListViewItem.ListViewSubItem.BackColor" />
 
             
 
-             properties are ignored, and the values of the item are used instead. You can use this property if you need to specify a different text color, background color, or font to be used for a subitem to highlight the item when subitems are displayed in the <see
-             cref="T:System.Windows.Forms.ListView" />
+             properties are ignored, and the values of the item are used instead. You can use this property if you need to specify a different text color, background color, or font to be used for a subitem to highlight the item when subitems are displayed in the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -4154,18 +4022,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="P:System.Windows.Forms.ListViewItem.Font" />
+            >Gets or sets a value indicating whether the <see cref="P:System.Windows.Forms.ListViewItem.Font" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
+            , <see cref="P:System.Windows.Forms.ListViewItem.ForeColor" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ListViewItem.BackColor" />
+            , and <see cref="P:System.Windows.Forms.ListViewItem.BackColor" />
 
             
 

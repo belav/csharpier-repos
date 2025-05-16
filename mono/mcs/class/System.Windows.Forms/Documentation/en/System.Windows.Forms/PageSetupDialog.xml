@@ -22,69 +22,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.PageSetupDialog" />
+        >The <see cref="T:System.Windows.Forms.PageSetupDialog" />
 
         
 
-         dialog box modifies the <see
-         cref="T:System.Drawing.Printing.PageSettings" />
+         dialog box modifies the <see cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
-         and <see
-         cref="T:System.Drawing.Printing.PrinterSettings" />
+         and <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
         
 
-         information for a given <see
-         cref="P:System.Windows.Forms.PageSetupDialog.Document" />
+         information for a given <see cref="P:System.Windows.Forms.PageSetupDialog.Document" />
 
         
 
-        . The user can enable sections of the dialog box to manipulate printing and margins; paper orientation, size, and source; and to show Help and network buttons. The <see
-         cref="P:System.Windows.Forms.PageSetupDialog.MinMargins" />
+        . The user can enable sections of the dialog box to manipulate printing and margins; paper orientation, size, and source; and to show Help and network buttons. The <see cref="P:System.Windows.Forms.PageSetupDialog.MinMargins" />
 
         
 
          property defines the minimum margins a user can select.</para
       >
       <para
-        >When you create an instance of the <see
-         cref="T:System.Windows.Forms.PageSetupDialog" />
+        >When you create an instance of the <see cref="T:System.Windows.Forms.PageSetupDialog" />
 
         
 
-         class, the read/write properties are set to initial values. For a list of these values, see the <see
-         cref="M:System.Windows.Forms.PageSetupDialog.#ctor" />
+         class, the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PageSetupDialog.#ctor" />
 
         
 
          constructor.</para
       >
       <para
-        >Because a <see
-         cref="T:System.Windows.Forms.PageSetupDialog" />
+        >Because a <see cref="T:System.Windows.Forms.PageSetupDialog" />
 
         
 
-         needs page settings to display, you need to set the <see
-         cref="P:System.Windows.Forms.PrintDialog.Document" />
+         needs page settings to display, you need to set the <see cref="P:System.Windows.Forms.PrintDialog.Document" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
+        , <see cref="P:System.Windows.Forms.PrintDialog.PrinterSettings" />
 
         
 
-        , or <see
-         cref="P:System.Windows.Forms.PageSetupDialog.PageSettings" />
+        , or <see cref="P:System.Windows.Forms.PageSetupDialog.PageSettings" />
 
         
 
-         property before calling <see
-         cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+         property before calling <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
 
         
 
@@ -105,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an instance of <see
-             cref="T:System.Windows.Forms.PageSetupDialog" />
+            >When an instance of <see cref="T:System.Windows.Forms.PageSetupDialog" />
 
             
 
@@ -229,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PageSetupDialog" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PageSetupDialog" />
 
             
 
@@ -332,8 +318,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Setting this property to true has no effect if the application is running on windowsver. The <ui
-              >Printer</ui>
+              >Setting this property to true has no effect if the application is running on windowsver. The <ui>Printer</ui>
 
               
 
@@ -344,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Printer</ui>
+            >Gets or sets a value indicating whether the <ui>Printer</ui>
 
             
 
@@ -378,8 +362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating the <see
-             cref="T:System.Drawing.Printing.PrintDocument" />
+            >Gets or sets a value indicating the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
             
 
@@ -417,18 +400,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >The <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
-             class measures <see
-             cref="P:System.Drawing.Printing.PageSettings.Margins" />
+             class measures <see cref="P:System.Drawing.Printing.PageSettings.Margins" />
 
             
 
-             in hundredths of an inch, but the <see
-             cref="T:System.Windows.Forms.PageSetupDialog" />
+             in hundredths of an inch, but the <see cref="T:System.Windows.Forms.PageSetupDialog" />
 
             
 
@@ -589,8 +569,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Help</ui>
+            >Gets or sets a value indicating whether the <ui>Help</ui>
 
             
 
@@ -620,8 +599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <ui
-            >Network</ui>
+            >Gets or sets a value indicating whether the <ui>Network</ui>
 
             
 

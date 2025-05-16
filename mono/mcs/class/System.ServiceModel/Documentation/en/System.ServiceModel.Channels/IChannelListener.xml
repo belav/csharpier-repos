@@ -21,16 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IChannelListener" />
+        >The <see cref="T:System.ServiceModel.Channels.IChannelListener" />
 
         
 
          interface represents the base interface for channel listeners.</para
       >
       <para
-        >Channel listeners and their associated channels are generally used by services that receive communications initiated by clients. Channel factories that implement the <see
-         cref="T:System.ServiceModel.Channels.IChannelFactory" />
+        >Channel listeners and their associated channels are generally used by services that receive communications initiated by clients. Channel factories that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
         
 
@@ -73,8 +71,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -82,31 +79,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the wait for a channel operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous completion of the wait for a channel operation.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -141,17 +148,19 @@
           <para>true if a message arrived; otherwise false.</para>
         </returns>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.ServiceModel.Channels.IChannelListener.EndWaitForChannel(System.IAsyncResult)" />
+           returned by a call to the <see cref="M:System.ServiceModel.Channels.IChannelListener.EndWaitForChannel(System.IAsyncResult)" />
 
           
 
@@ -192,8 +201,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -201,7 +209,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -224,8 +236,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This URI represents the transport address on which the <see
-             cref="T:System.ServiceModel.Channels.IChannelListener" />
+            >This URI represents the transport address on which the <see cref="T:System.ServiceModel.Channels.IChannelListener" />
 
             
 
@@ -263,8 +274,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a channel arrived before the interval of time specified by the <paramref
-             name="timeout" />
+            >true if a channel arrived before the interval of time specified by the <paramref name="timeout" />
 
             
 
@@ -272,12 +282,15 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 

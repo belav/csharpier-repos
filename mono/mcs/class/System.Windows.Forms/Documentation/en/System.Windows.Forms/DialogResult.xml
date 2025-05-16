@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Windows.Forms.Button.DialogResult" />
+        >The <see cref="P:System.Windows.Forms.Button.DialogResult" />
 
         
 
-         property and the <see
-         cref="M:System.Windows.Forms.Form.ShowDialog" />
+         property and the <see cref="M:System.Windows.Forms.Form.ShowDialog" />
 
         
 

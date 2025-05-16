@@ -21,8 +21,7 @@
 
         
 
-         provides a base class for toolbox items that create Web server controls. This class extends <see
-         cref="T:System.Drawing.Design.ToolboxItem" />
+         provides a base class for toolbox items that create Web server controls. This class extends <see cref="T:System.Drawing.Design.ToolboxItem" />
 
         
 
@@ -61,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a base class for a Web server control <see
-         cref="T:System.Drawing.Design.ToolboxItem" />
+        >Provides a base class for a Web server control <see cref="T:System.Drawing.Design.ToolboxItem" />
 
         
 
@@ -79,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.Design.ToolboxItem.DisplayName" />
+            >The <see cref="P:System.Drawing.Design.ToolboxItem.DisplayName" />
 
             
 
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControlToolboxItem" />
 
             
 
@@ -114,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.Design.ToolboxItem.DisplayName" />
+            >The <see cref="P:System.Drawing.Design.ToolboxItem.DisplayName" />
 
             
 
@@ -125,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.Design.WebControlToolboxItem" />
 
             
 
@@ -134,12 +128,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -169,18 +166,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.Design.WebControlToolboxItem" />
 
             
 
-             class using the provided <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class using the provided <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             object and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -188,14 +182,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A SerializationInfo object containing information needed to instantiate the Web control through deserialization.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -223,8 +225,7 @@
 
             
 
-             always throws an exception, indicating that the method is inherited from <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             always throws an exception, indicating that the method is inherited from <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -234,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates objects from each type contained in this <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >Creates objects from each type contained in this <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -245,8 +245,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of created <see
-             cref="T:System.ComponentModel.IComponent" />
+            >An array of created <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -254,12 +253,15 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -291,29 +293,34 @@
           <para>Loads the state of the toolbox item from the specified serialization information object.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           that describes the <see
-           cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+           that describes the <see cref="T:System.Web.UI.Design.WebControlToolboxItem" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -342,18 +349,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation will throw an <see
-             cref="T:System.ArgumentException" />
+            >The default implementation will throw an <see cref="T:System.ArgumentException" />
 
             
 
-             if the <paramref
-             name="attributeType" />
+             if the <paramref name="attributeType" />
 
             
 
-             parameter is anything other than a <see
-             cref="T:System.Web.UI.PersistChildrenAttribute" />
+             parameter is anything other than a <see cref="T:System.Web.UI.PersistChildrenAttribute" />
 
             
 
@@ -369,19 +373,26 @@
           <para>The value of the specified type of attribute.</para>
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
            for the current design document. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -416,12 +427,15 @@
           <para>The HTML for the Web control that the tool creates.</para>
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -454,8 +468,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -463,12 +476,15 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -496,12 +512,15 @@
           <para>Initializes this toolbox item.</para>
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -533,29 +552,34 @@
           <para>Saves the state of the toolbox item to the specified serialization information object.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           used to save the state of the <see
-           cref="T:System.Web.UI.Design.WebControlToolboxItem" />
+           used to save the state of the <see cref="T:System.Web.UI.Design.WebControlToolboxItem" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

@@ -18,33 +18,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration can be useful when handling the <see
-         cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+        >This enumeration can be useful when handling the <see cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
 
         
 
-         event to detect and respond to errors when communicating data through a <see
-         cref="T:System.IO.Ports.SerialPort" />
+         event to detect and respond to errors when communicating data through a <see cref="T:System.IO.Ports.SerialPort" />
 
         
 
-        . You examine the type of error by retrieving the <see
-         cref="P:System.IO.Ports.SerialErrorReceivedEventArgs.EventType" />
+        . You examine the type of error by retrieving the <see cref="P:System.IO.Ports.SerialErrorReceivedEventArgs.EventType" />
 
         
 
-         property of the <see
-         cref="T:System.IO.Ports.SerialErrorReceivedEventArgs" />
+         property of the <see cref="T:System.IO.Ports.SerialErrorReceivedEventArgs" />
 
         
 
-         class. The <see
-         cref="P:System.IO.Ports.SerialErrorReceivedEventArgs.EventType" />
+         class. The <see cref="P:System.IO.Ports.SerialErrorReceivedEventArgs.EventType" />
 
         
 
-         property contains one of the values from the <see
-         cref="T:System.IO.Ports.SerialError" />
+         property contains one of the values from the <see cref="T:System.IO.Ports.SerialError" />
 
         
 
@@ -54,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies errors that occur on the <see
-         cref="T:System.IO.Ports.SerialPort" />
+        >Specifies errors that occur on the <see cref="T:System.IO.Ports.SerialPort" />
 
         
 

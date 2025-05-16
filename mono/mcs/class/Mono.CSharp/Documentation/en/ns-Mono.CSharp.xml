@@ -15,22 +15,19 @@
 	Mono.CSharp.dll assembly and reference that locally as we are
 	not commiting to the stability of this API yet. 
       </para>
-      <para
-        >
+      <para>
 	The evaluator currently exposes a statement and expression API
 	and will allow the consumer to execute statements or compute
 	the value of expressions and get the results back.  Support
 	for compiling classes will appear in a future version.  The
-	<see
-         cref="M:Mono.CSharp.Evaluator.Run(string)" />
+	<see cref="M:Mono.CSharp.Evaluator.Run(string)" />
 
         
 
          method is a
 	convenient way of executing expressions and stamtements and
 	discarding the result.  If you want to get the results of
-	executing an expression use the <see
-         cref="M:Mono.CSharp.Evaluator.Evaluate(string)" />
+	executing an expression use the <see cref="M:Mono.CSharp.Evaluator.Evaluate(string)" />
 
         
 
@@ -43,12 +40,10 @@
 	available on upcoming invocations.  This allows variables to
 	be declared and reused later.  
       </para>
-      <para
-        >
+      <para>
 	The evaluator does not have direct access to any assemblies
 	that are not explicitly referenced through the Evaluator's
-	<see
-         cref="M:Mono.CSharp.Evaluator.ReferenceAssembly(System.Reflection.Assembly)" />
+	<see cref="M:Mono.CSharp.Evaluator.ReferenceAssembly(System.Reflection.Assembly)" />
 
         
 
@@ -69,12 +64,10 @@
 	Using statements are currently global, once the using
 	statement has been issued, it remains active.
       </para>
-      <para
-        >
+      <para>
 	If you want to create local variables that are not visible
 	across multiple evaluations, you will have to create a new
-	<see
-         cref="T:System.AppDomain" />
+	<see cref="T:System.AppDomain" />
 
         
 

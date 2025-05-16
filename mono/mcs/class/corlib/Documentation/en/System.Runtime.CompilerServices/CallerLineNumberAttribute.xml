@@ -25,16 +25,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You apply the <unmanagedCodeEntityReference
-        >CallerLineNumber</unmanagedCodeEntityReference>
+        >You apply the <unmanagedCodeEntityReference>CallerLineNumber</unmanagedCodeEntityReference>
 
         
 
          attribute to an optional parameter that has a default value. You must specify an explicit default value for the optional parameter. You can't apply this attribute to parameters that aren't specified as optional.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="9cb2b8c0-c4f6-44b8-9c90-38948455b373"
             >Caller Information (C# and Visual Basic)</a
           >
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.CallerLineNumberAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallerLineNumberAttribute" />
 
             
 

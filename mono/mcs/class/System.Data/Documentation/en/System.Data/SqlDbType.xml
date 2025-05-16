@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When setting command parameters, the <see
-         cref="T:System.Data.SqlDbType" />
+        >When setting command parameters, the <see cref="T:System.Data.SqlDbType" />
 
         
 
-         and <see
-         cref="T:System.Data.DbType" />
+         and <see cref="T:System.Data.DbType" />
 
         
 
@@ -32,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies SQL Server-specific data type of a field, property, for use in a <see
-         cref="T:System.Data.SqlClient.SqlParameter" />
+        >Specifies SQL Server-specific data type of a field, property, for use in a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
         
 
@@ -83,8 +80,7 @@
 
             
 
-             of type <see
-             cref="T:System.Byte" />
+             of type <see cref="T:System.Byte" />
 
             
 
@@ -188,13 +184,11 @@
 
             
 
-            . A fixed precision and scale numeric value between -10 <superscript
-            >38</superscript>
+            . A fixed precision and scale numeric value between -10 <superscript>38</superscript>
 
             
 
-             -1 and 10 <superscript
-            >38</superscript>
+             -1 and 10 <superscript>38</superscript>
 
             
 
@@ -248,13 +242,11 @@
 
             
 
-             of type <see
-             cref="T:System.Byte" />
+             of type <see cref="T:System.Byte" />
 
             
 
-            . A variable-length stream of binary data ranging from 0 to 2 <superscript
-            >31</superscript>
+            . A variable-length stream of binary data ranging from 0 to 2 <superscript>31</superscript>
 
             
 
@@ -308,13 +300,11 @@
 
             
 
-            . A currency value ranging from -2 <superscript
-            >63</superscript>
+            . A currency value ranging from -2 <superscript>63</superscript>
 
             
 
-             (or -9,223,372,036,854,775,808) to 2 <superscript
-            >63</superscript>
+             (or -9,223,372,036,854,775,808) to 2 <superscript>63</superscript>
 
             
 
@@ -368,8 +358,7 @@
 
             
 
-            . A variable-length stream of Unicode data with a maximum length of 2 <superscript
-            >30</superscript>
+            . A variable-length stream of Unicode data with a maximum length of 2 <superscript>30</superscript>
 
             
 
@@ -398,8 +387,7 @@
 
             
 
-            . A variable-length stream of Unicode characters ranging between 1 and 4,000 characters. Implicit conversion fails if the string is greater than 4,000 characters. Explicitly set the object when working with strings longer than 4,000 characters. Use <see
-             cref="F:System.Data.SqlDbType.NVarChar" />
+            . A variable-length stream of Unicode characters ranging between 1 and 4,000 characters. Implicit conversion fails if the string is greater than 4,000 characters. Explicitly set the object when working with strings longer than 4,000 characters. Use <see cref="F:System.Data.SqlDbType.NVarChar" />
 
             
 
@@ -528,8 +516,7 @@
 
             
 
-            . A variable-length stream of non-Unicode data with a maximum length of 2 <superscript
-            >31</superscript>
+            . A variable-length stream of non-Unicode data with a maximum length of 2 <superscript>31</superscript>
 
             
 
@@ -558,8 +545,7 @@
 
             
 
-             of type <see
-             cref="T:System.Byte" />
+             of type <see cref="T:System.Byte" />
 
             
 
@@ -654,8 +640,7 @@
 
             
 
-             of type <see
-             cref="T:System.Byte" />
+             of type <see cref="T:System.Byte" />
 
             
 
@@ -684,8 +669,7 @@
 
             
 
-            . A variable-length stream of non-Unicode characters ranging between 1 and 8,000 characters. Use <see
-             cref="F:System.Data.SqlDbType.VarChar" />
+            . A variable-length stream of non-Unicode characters ranging between 1 and 8,000 characters. Use <see cref="F:System.Data.SqlDbType.VarChar" />
 
             
 
@@ -736,23 +720,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML value. Obtain the XML as a string using the <see
-             cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
+            >An XML value. Obtain the XML as a string using the <see cref="M:System.Data.SqlClient.SqlDataReader.GetValue(System.Int32)" />
 
             
 
-             method or <see
-             cref="P:System.Data.SqlTypes.SqlXml.Value" />
+             method or <see cref="P:System.Data.SqlTypes.SqlXml.Value" />
 
             
 
-             property, or as an <see
-             cref="T:System.Xml.XmlReader" />
+             property, or as an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             by calling the <see
-             cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
+             by calling the <see cref="M:System.Data.SqlTypes.SqlXml.CreateReader" />
 
             
 

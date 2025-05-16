@@ -28,18 +28,15 @@
 
         
 
-         is ASP.NET's default session-state handler. It writes session data to and retrieves it from the session-state store and raises the <system
-        >Session_OnStart</system>
+         is ASP.NET's default session-state handler. It writes session data to and retrieves it from the session-state store and raises the <system>Session_OnStart</system>
 
         
 
-         and <system
-        >Session_OnEnd</system>
+         and <system>Session_OnEnd</system>
 
         
 
-         events. For details about how to use ASP.NET session state to store and retrieve values for a user session, see <format
-         type="text/html">
+         events. For details about how to use ASP.NET session state to store and retrieve values for a user session, see <format type="text/html">
           <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
         </format>
 
@@ -48,18 +45,15 @@
         .</para
       >
       <para
-        >You can replace the <see
-         cref="T:System.Web.SessionState.SessionStateModule" />
+        >You can replace the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
         
 
-         with a custom implementation of the <see
-         cref="T:System.Web.IHttpModule" />
+         with a custom implementation of the <see cref="T:System.Web.IHttpModule" />
 
         
 
-         interface that manages session state. For an example of a custom session-state module, see the <see
-         cref="T:System.Web.SessionState.SessionStateUtility" />
+         interface that manages session state. For an example of a custom session-state module, see the <see cref="T:System.Web.SessionState.SessionStateUtility" />
 
         
 
@@ -82,28 +76,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This constructor is not intended to be called from application code.</para>
           <para
-            >An <see
-             cref="T:System.Web.HttpApplication" />
+            >An <see cref="T:System.Web.HttpApplication" />
 
             
 
-             object is created when an ASP.NET application is started. The <see
-             cref="T:System.Web.HttpApplication" />
+             object is created when an ASP.NET application is started. The <see cref="T:System.Web.HttpApplication" />
 
             
 
-             object calls the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             object calls the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
-             constructor to create the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             constructor to create the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
-             object for the application. The <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             object for the application. The <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
@@ -113,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+            >Initializes a new instance of the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
@@ -139,28 +127,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >An <see
-             cref="T:System.Web.HttpApplication" />
+            >An <see cref="T:System.Web.HttpApplication" />
 
             
 
-             object is created when an ASP.NET application is started. The <see
-             cref="T:System.Web.HttpApplication" />
+             object is created when an ASP.NET application is started. The <see cref="T:System.Web.HttpApplication" />
 
             
 
-             object creates and initializes the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             object creates and initializes the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
-             object for the application and calls the <see
-             cref="M:System.Web.SessionState.SessionStateModule.Dispose" />
+             object for the application and calls the <see cref="M:System.Web.SessionState.SessionStateModule.Dispose" />
 
             
 
-             method when the object is released. The <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             method when the object is released. The <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
@@ -170,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Executes final cleanup code before the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+            >Executes final cleanup code before the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
@@ -195,39 +177,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.SessionState.SessionStateModule.End" />
+            >The <see cref="E:System.Web.SessionState.SessionStateModule.End" />
 
             
 
-             event is raised at the end of a request when the <see
-             cref="M:System.Web.SessionState.HttpSessionState.Abandon" />
+             event is raised at the end of a request when the <see cref="M:System.Web.SessionState.HttpSessionState.Abandon" />
 
             
 
-             method has been called or when the session has expired. A session expires when the number of minutes specified by the <see
-             cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
+             method has been called or when the session has expired. A session expires when the number of minutes specified by the <see cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
 
             
 
              property passes without a request being made for the session.</para
           >
           <para
-            >The <system
-            >Session_OnEnd</system>
+            >The <system>Session_OnEnd</system>
 
             
 
              event is used to perform any cleanup work for a session such as disposing of resources used by the session.</para
           >
           <para
-            >You can specify a handler for the <see
-             cref="E:System.Web.SessionState.SessionStateModule.End" />
+            >You can specify a handler for the <see cref="E:System.Web.SessionState.SessionStateModule.End" />
 
             
 
-             event by adding a public subroutine named <system
-            >Session_OnEnd</system>
+             event by adding a public subroutine named <system>Session_OnEnd</system>
 
             
 
@@ -235,53 +211,43 @@
           >
           <block subset="none" type="note">
             <para
-              >The <system
-              >Session_OnEnd</system>
+              >The <system>Session_OnEnd</system>
 
               
 
-               event is only supported when the session-state <see
-               cref="P:System.Web.SessionState.HttpSessionState.Mode" />
+               event is only supported when the session-state <see cref="P:System.Web.SessionState.HttpSessionState.Mode" />
 
               
 
-               property value is <see
-               cref="F:System.Web.SessionState.SessionStateMode.InProc" />
+               property value is <see cref="F:System.Web.SessionState.SessionStateMode.InProc" />
 
               
 
-              , which is the default. If the session-state <see
-               cref="P:System.Web.SessionState.HttpSessionState.Mode" />
+              , which is the default. If the session-state <see cref="P:System.Web.SessionState.HttpSessionState.Mode" />
 
               
 
-               is set to <see
-               cref="F:System.Web.SessionState.SessionStateMode.StateServer" />
+               is set to <see cref="F:System.Web.SessionState.SessionStateMode.StateServer" />
 
               
 
-               or <see
-               cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+               or <see cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
 
               
 
-              , then the <system
-              >Session_OnEnd</system>
+              , then the <system>Session_OnEnd</system>
 
               
 
-               event in the Global.asax file is ignored. If the session state <see
-               cref="P:System.Web.SessionState.HttpSessionState.Mode" />
+               event in the Global.asax file is ignored. If the session state <see cref="P:System.Web.SessionState.HttpSessionState.Mode" />
 
               
 
-               property value is <see
-               cref="F:System.Web.SessionState.SessionStateMode.Custom" />
+               property value is <see cref="F:System.Web.SessionState.SessionStateMode.Custom" />
 
               
 
-              , then support for the <system
-              >Session_OnEnd</system>
+              , then support for the <system>Session_OnEnd</system>
 
               
 
@@ -289,36 +255,30 @@
             >
           </block>
           <para
-            >Though the <see
-             cref="E:System.Web.SessionState.SessionStateModule.End" />
+            >Though the <see cref="E:System.Web.SessionState.SessionStateModule.End" />
 
             
 
-             event is public, you can only handle it by adding an event handler in the Global.asax file. This restriction is implemented because <see
-             cref="T:System.Web.HttpApplication" />
+             event is public, you can only handle it by adding an event handler in the Global.asax file. This restriction is implemented because <see cref="T:System.Web.HttpApplication" />
 
             
 
-             instances are reused for performance. When a session expires, only the <system
-            >Session_OnEnd</system>
+             instances are reused for performance. When a session expires, only the <system>Session_OnEnd</system>
 
             
 
-             event specified in the Global.asax file is executed, to prevent code from calling  an <see
-             cref="E:System.Web.SessionState.SessionStateModule.End" />
+             event specified in the Global.asax file is executed, to prevent code from calling  an <see cref="E:System.Web.SessionState.SessionStateModule.End" />
 
             
 
-             event handler associated with an <see
-             cref="T:System.Web.HttpApplication" />
+             event handler associated with an <see cref="T:System.Web.HttpApplication" />
 
             
 
              instance that is currently in use.</para
           >
           <para
-            >For more information about the Global.asax file, see <format
-             type="text/html">
+            >For more information about the Global.asax file, see <format type="text/html">
               <a href="9ade9d4d-4d52-4e88-af52-53a9ffa26582">Global.asax Syntax</a>
             </format>
 
@@ -351,28 +311,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not intended to be called from application code.</para>
           <para
-            >An <see
-             cref="T:System.Web.HttpApplication" />
+            >An <see cref="T:System.Web.HttpApplication" />
 
             
 
-             is created when an ASP.NET application is started. The <see
-             cref="T:System.Web.HttpApplication" />
+             is created when an ASP.NET application is started. The <see cref="T:System.Web.HttpApplication" />
 
             
 
-             object calls the <see
-             cref="M:System.Web.SessionState.SessionStateModule.Init(System.Web.HttpApplication)" />
+             object calls the <see cref="M:System.Web.SessionState.SessionStateModule.Init(System.Web.HttpApplication)" />
 
             
 
-             method when it creates the <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             method when it creates the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
-             object for the application. The <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+             object for the application. The <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
@@ -382,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calls initialization code when a <see
-             cref="T:System.Web.SessionState.SessionStateModule" />
+            >Calls initialization code when a <see cref="T:System.Web.SessionState.SessionStateModule" />
 
             
 
@@ -391,7 +345,11 @@
           >
         </summary>
         <param name="app">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -414,37 +372,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.SessionState.SessionStateModule.Start" />
+            >The <see cref="E:System.Web.SessionState.SessionStateModule.Start" />
 
             
 
              event is raised at the beginning of a request when a new session is started. A new session is started if a request is made that does not contain a session identifier, the session identifier is invalid, or the session associated with a session identifier has expired. </para
           >
           <para
-            >The <system
-            >Session_OnStart</system>
+            >The <system>Session_OnStart</system>
 
             
 
              event is used to perform any initialization work for a session such as setting up default values for session variables.</para
           >
           <para
-            >You can specify a handler for the <see
-             cref="E:System.Web.SessionState.SessionStateModule.Start" />
+            >You can specify a handler for the <see cref="E:System.Web.SessionState.SessionStateModule.Start" />
 
             
 
-             event by adding a public subroutine named <system
-            >Session_OnStart</system>
+             event by adding a public subroutine named <system>Session_OnStart</system>
 
             
 
              to the Global.asax file.</para
           >
           <para
-            >For more information about the Global.asax file, see <format
-             type="text/html">
+            >For more information about the Global.asax file, see <format type="text/html">
               <a href="9ade9d4d-4d52-4e88-af52-53a9ffa26582">Global.asax Syntax</a>
             </format>
 

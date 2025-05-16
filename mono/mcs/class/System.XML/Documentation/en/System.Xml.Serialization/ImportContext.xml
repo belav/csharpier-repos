@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.ImportContext" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.ImportContext" />
 
             
 
@@ -56,19 +55,26 @@
           >
         </summary>
         <param name="identifiers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The code entities to which the context applies.</param
         >
         <param name="shareTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Boolean" />
+          A <see cref="T:System.Boolean" />
 
           
 

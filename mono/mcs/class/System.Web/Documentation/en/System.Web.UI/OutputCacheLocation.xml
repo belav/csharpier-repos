@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The values specified by this enumeration are used when you include an @ OutputCache directive in an .aspx file. These values determine the cache location for page output. For more information, see <format
-         type="text/html">
+        >The values specified by this enumeration are used when you include an @ OutputCache directive in an .aspx file. These values determine the cache location for page output. For more information, see <format type="text/html">
           <a href="E9666A1B-88DF-4931-AF0B-A754FC65660B">Caching ASP.NET Pages</a>
         </format>
 
@@ -43,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output cache can be located on the browser client (where the request originated), on a proxy server (or any other server) participating in the request, or on the server where the request was processed. This value corresponds to the <see
-             cref="F:System.Web.HttpCacheability.Public" />
+            >The output cache can be located on the browser client (where the request originated), on a proxy server (or any other server) participating in the request, or on the server where the request was processed. This value corresponds to the <see cref="F:System.Web.HttpCacheability.Public" />
 
             
 
@@ -69,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output cache is located on the browser client where the request originated. This value corresponds to the <see
-             cref="F:System.Web.HttpCacheability.Private" />
+            >The output cache is located on the browser client where the request originated. This value corresponds to the <see cref="F:System.Web.HttpCacheability.Private" />
 
             
 
@@ -114,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output cache is disabled for the requested page. This value corresponds to the <see
-             cref="F:System.Web.HttpCacheability.NoCache" />
+            >The output cache is disabled for the requested page. This value corresponds to the <see cref="F:System.Web.HttpCacheability.NoCache" />
 
             
 
@@ -140,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output cache is located on the Web server where the request was processed. This value corresponds to the <see
-             cref="F:System.Web.HttpCacheability.Server" />
+            >The output cache is located on the Web server where the request was processed. This value corresponds to the <see cref="F:System.Web.HttpCacheability.Server" />
 
             
 
@@ -166,13 +161,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output cache can be stored only at the origin server or at the requesting client. Proxy servers are not allowed to cache the response. This value corresponds to the combination of the <see
-             cref="F:System.Web.HttpCacheability.Private" />
+            >The output cache can be stored only at the origin server or at the requesting client. Proxy servers are not allowed to cache the response. This value corresponds to the combination of the <see cref="F:System.Web.HttpCacheability.Private" />
 
             
 
-             and <see
-             cref="F:System.Web.HttpCacheability.Server" />
+             and <see cref="F:System.Web.HttpCacheability.Server" />
 
             
 

@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.FUNCKIND" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.FUNCKIND" />
 
         
 
@@ -156,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The function is accessed the same as <see
-             cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_PUREVIRTUAL" />
+            >The function is accessed the same as <see cref="F:System.Runtime.InteropServices.FUNCKIND.FUNC_PUREVIRTUAL" />
 
             
 

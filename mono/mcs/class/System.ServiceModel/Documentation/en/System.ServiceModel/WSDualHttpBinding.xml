@@ -24,31 +24,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.WSDualHttpBinding" />
+        >The <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
         
 
-         provides the same support for Web Service protocols as the <see
-         cref="T:System.ServiceModel.WSHttpBinding" />
+         provides the same support for Web Service protocols as the <see cref="T:System.ServiceModel.WSHttpBinding" />
 
         
 
-        , but for use with duplex contracts. <see
-         cref="T:System.ServiceModel.WSDualHttpBinding" />
+        , but for use with duplex contracts. <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
         
 
-         only supports SOAP security and requires reliable messaging. This binding requires that the client has a public URI that provides a callback endpoint for the service. This is provided by the <see
-         cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" />
+         only supports SOAP security and requires reliable messaging. This binding requires that the client has a public URI that provides a callback endpoint for the service. This is provided by the <see cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" />
 
         
 
         . A dual binding exposes the IP address of the client to the service. The client should use security to ensure that it only connects to services it trusts.</para
       >
       <para
-        >By default the <see
-         cref="T:System.ServiceModel.WSDualHttpBinding" />
+        >By default the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
         
 
@@ -114,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 
@@ -144,18 +138,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reliable messaging is required by the <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+            >Reliable messaging is required by the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 
-            , so there is no constructor that provides a switch to turn it off as there is on the <see
-             cref="M:System.ServiceModel.WSHttpBinding.#ctor(System.ServiceModel.SecurityMode)" />
+            , so there is no constructor that provides a switch to turn it off as there is on the <see cref="M:System.ServiceModel.WSHttpBinding.#ctor(System.ServiceModel.SecurityMode)" />
 
             
 
-             constructor for the <see
-             cref="T:System.ServiceModel.WSHttpBinding" />
+             constructor for the <see cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
@@ -165,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 
@@ -174,12 +164,15 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of <see
-           cref="T:System.ServiceModel.WSDualHttpSecurityMode" />
+          The value of <see cref="T:System.ServiceModel.WSDualHttpSecurityMode" />
 
           
 
@@ -203,29 +196,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An Internet resource is local if it has a local address. A local address is one that is on the same computer, the local LAN or intranet and is identified, syntactically, by the lack of a period (.) as in the URIs "http://webserver/" and "http://localhost/".</para>
           <para
-            >Setting the <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
+            >Setting the <see cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
 
             
 
-             property determines whether endpoints configured with the <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+             property determines whether endpoints configured with the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 
              use the proxy server when accessing local resources.</para
           >
           <para
-            >If <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
+            >If <see cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
 
             
 
              is true, requests to local Internet resources do not use the proxy server. Use the host name (rather than localhost) if you want clients to go through a proxy when talking to services on the same machine when this property is set to true.</para
           >
           <para
-            >When <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
+            >When <see cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
 
             
 
@@ -289,23 +278,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+            >A <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
             
 
-             that includes a <see
-             cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+             that includes a <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
 
             
 
-             and, because a reliable session is required for the <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+             and, because a reliable session is required for the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 
-            , a <see
-             cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+            , a <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
 
             
 
@@ -379,18 +364,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+            >The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
-             minimizes the cost of using buffers with a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+             minimizes the cost of using buffers with a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
-             must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.MaxBufferPoolSize" />
+             must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see cref="P:System.ServiceModel.WSDualHttpBinding.MaxBufferPoolSize" />
 
             
 
@@ -419,21 +401,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the messages that can be received on the wire by services using the <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+            >The size of the messages that can be received on the wire by services using the <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 
              is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DOS-style attacks. </para
           >
           <para
-            >Note that the settings for <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.MaxBufferPoolSize" />
+            >Note that the settings for <see cref="P:System.ServiceModel.WSDualHttpBinding.MaxBufferPoolSize" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.BasicHttpBinding.MaxReceivedMessageSize" />
+             and <see cref="P:System.ServiceModel.BasicHttpBinding.MaxReceivedMessageSize" />
 
             
 
@@ -486,13 +465,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" />
+            >If the <see cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" />
 
             
 
-             is set to true, the value of the <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.ProxyAddress" />
+             is set to true, the value of the <see cref="P:System.ServiceModel.WSDualHttpBinding.ProxyAddress" />
 
             
 
@@ -554,8 +531,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The reliable session is required for service configured with a <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+            >The reliable session is required for service configured with a <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 

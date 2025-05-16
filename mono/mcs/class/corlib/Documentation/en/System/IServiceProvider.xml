@@ -19,36 +19,30 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This interface is implemented by a class or value type that provides a service to other objects.</para>
       <para
-        >The <see
-         cref="M:System.IServiceProvider.GetService(System.Type)" />
+        >The <see cref="M:System.IServiceProvider.GetService(System.Type)" />
 
         
 
          method of this interface obtains the object that provides the service.</para
       >
       <para
-        >The <see
-         cref="T:System.IServiceProvider" />
+        >The <see cref="T:System.IServiceProvider" />
 
         
 
-         interface is implemented by a number of types, including <see
-         cref="T:System.Web.HttpContext" />
+         interface is implemented by a number of types, including <see cref="T:System.Web.HttpContext" />
 
         
 
-        , <see
-         cref="T:System.ComponentModel.LicenseContext" />
+        , <see cref="T:System.ComponentModel.LicenseContext" />
 
         
 
-        , <see
-         cref="T:System.ComponentModel.MarshalByValueComponent" />
+        , <see cref="T:System.ComponentModel.MarshalByValueComponent" />
 
         
 
-        , and <see
-         cref="T:System.ComponentModel.Design.ServiceContainer" />
+        , and <see cref="T:System.ComponentModel.Design.ServiceContainer" />
 
         
 
@@ -88,8 +82,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A service object of type <paramref
-             name="serviceType" />
+            >A service object of type <paramref name="serviceType" />
 
             
 
@@ -97,8 +90,7 @@
           >
           <para>-or- </para>
           <para
-            >null if there is no service object of type <paramref
-             name="serviceType" />
+            >null if there is no service object of type <paramref name="serviceType" />
 
             
 
@@ -106,7 +98,11 @@
           >
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

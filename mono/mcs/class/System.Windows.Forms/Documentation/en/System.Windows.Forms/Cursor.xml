@@ -33,76 +33,62 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A cursor is a small picture whose location on the screen is controlled by a pointing device, such as a mouse, pen, or trackball. When the user moves the pointing device, the operating system moves the cursor accordingly.</para>
       <para
-        >Different cursor shapes are used to inform the user what operation the mouse will have. For example, when editing or selecting text, a <see
-         cref="P:System.Windows.Forms.Cursors.IBeam" />
+        >Different cursor shapes are used to inform the user what operation the mouse will have. For example, when editing or selecting text, a <see cref="P:System.Windows.Forms.Cursors.IBeam" />
 
         
 
-         cursor is typically displayed. A wait cursor is commonly used to inform the user that a process is currently running. Examples of processes you might have the user wait for are opening a file, saving a file, or filling a control such as a <see
-         cref="T:System.Windows.Forms.DataGrid" />
+         cursor is typically displayed. A wait cursor is commonly used to inform the user that a process is currently running. Examples of processes you might have the user wait for are opening a file, saving a file, or filling a control such as a <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ListBox" />
+        , <see cref="T:System.Windows.Forms.ListBox" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.TreeView" />
+         or <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
          with a large amount of data.</para
       >
       <para
-        >All controls that derive from the <see
-         cref="T:System.Windows.Forms.Control" />
+        >All controls that derive from the <see cref="T:System.Windows.Forms.Control" />
 
         
 
-         class have a <see
-         cref="P:System.Windows.Forms.Control.Cursor" />
+         class have a <see cref="P:System.Windows.Forms.Control.Cursor" />
 
         
 
-         property. To change the cursor displayed by the mouse pointer when it is within the bounds of the control, assign a <see
-         cref="T:System.Windows.Forms.Cursor" />
+         property. To change the cursor displayed by the mouse pointer when it is within the bounds of the control, assign a <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
-         to the <see
-         cref="P:System.Windows.Forms.Control.Cursor" />
+         to the <see cref="P:System.Windows.Forms.Control.Cursor" />
 
         
 
-         property of the control. Alternatively, you can display cursors at the application level by assigning a <see
-         cref="T:System.Windows.Forms.Cursor" />
+         property of the control. Alternatively, you can display cursors at the application level by assigning a <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
-         to the <see
-         cref="P:System.Windows.Forms.Cursor.Current" />
+         to the <see cref="P:System.Windows.Forms.Cursor.Current" />
 
         
 
-         property. For example, if the purpose of your application is to edit a text file, you might set the <see
-         cref="P:System.Windows.Forms.Cursor.Current" />
+         property. For example, if the purpose of your application is to edit a text file, you might set the <see cref="P:System.Windows.Forms.Cursor.Current" />
 
         
 
-         property to <see
-         cref="P:System.Windows.Forms.Cursors.WaitCursor" />
+         property to <see cref="P:System.Windows.Forms.Cursors.WaitCursor" />
 
         
 
-         to display a wait cursor over the application while the file loads or saves to prevent any mouse events from being processed. When the process is complete, set the <see
-         cref="P:System.Windows.Forms.Cursor.Current" />
+         to display a wait cursor over the application while the file loads or saves to prevent any mouse events from being processed. When the process is complete, set the <see cref="P:System.Windows.Forms.Cursor.Current" />
 
         
 
-         property to <see
-         cref="P:System.Windows.Forms.Cursors.Default" />
+         property to <see cref="P:System.Windows.Forms.Cursors.Default" />
 
         
 
@@ -110,23 +96,19 @@
       >
       <block subset="none" type="note">
         <para
-          >If you call <see
-           cref="M:System.Windows.Forms.Application.DoEvents" />
+          >If you call <see cref="M:System.Windows.Forms.Application.DoEvents" />
 
           
 
-           before resetting the <see
-           cref="P:System.Windows.Forms.Cursor.Current" />
+           before resetting the <see cref="P:System.Windows.Forms.Cursor.Current" />
 
           
 
-           property back to the <see
-           cref="P:System.Windows.Forms.Cursors.Default" />
+           property back to the <see cref="P:System.Windows.Forms.Cursors.Default" />
 
           
 
-           cursor, the application will resume listening for mouse events and will resume displaying the appropriate <see
-           cref="T:System.Windows.Forms.Cursor" />
+           cursor, the application will resume listening for mouse events and will resume displaying the appropriate <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -134,13 +116,11 @@
         >
       </block>
       <para
-        >Cursor objects can be created from several sources, such as the handle of an existing <see
-         cref="T:System.Windows.Forms.Cursor" />
+        >Cursor objects can be created from several sources, such as the handle of an existing <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
-        , a standard <see
-         cref="T:System.Windows.Forms.Cursor" />
+        , a standard <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
@@ -148,8 +128,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Windows.Forms.Cursor" />
+          >The <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -157,18 +136,15 @@
         >
       </block>
       <para
-        >If the image you are using as a cursor is too small, you can use the <see
-         cref="M:System.Windows.Forms.Cursor.DrawStretched(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+        >If the image you are using as a cursor is too small, you can use the <see cref="M:System.Windows.Forms.Cursor.DrawStretched(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
         
 
-         method to force the image to fill the bounds of the cursor. You can temporarily hide the cursor by calling the <see
-         cref="M:System.Windows.Forms.Cursor.Hide" />
+         method to force the image to fill the bounds of the cursor. You can temporarily hide the cursor by calling the <see cref="M:System.Windows.Forms.Cursor.Hide" />
 
         
 
-         method, and restore it by calling the <see
-         cref="M:System.Windows.Forms.Cursor.Show" />
+         method, and restore it by calling the <see cref="M:System.Windows.Forms.Cursor.Show" />
 
         
 
@@ -191,8 +167,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must free the cursor handle when you are done with it. For more information about disposing of resources, see <format
-             type="text/html">
+            >You must free the cursor handle when you are done with it. For more information about disposing of resources, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
@@ -204,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -213,12 +187,15 @@
           >
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IntPtr" />
+          An <see cref="T:System.IntPtr" />
 
           
 
@@ -240,8 +217,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data stream specified by <paramref
-             name="stream" />
+            >The data stream specified by <paramref name="stream" />
 
             
 
@@ -249,8 +225,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Animated cursors (.ani files) are not supported by the <see
-               cref="T:System.Windows.Forms.Cursor" />
+              >Animated cursors (.ani files) are not supported by the <see cref="T:System.Windows.Forms.Cursor" />
 
               
 
@@ -261,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -270,12 +244,15 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data stream to load the <see
-           cref="T:System.Windows.Forms.Cursor" />
+          The data stream to load the <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -297,8 +274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="fileName" />
+            >The <paramref name="fileName" />
 
             
 
@@ -306,8 +282,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Animated cursors (.ani files) are not supported by the <see
-               cref="T:System.Windows.Forms.Cursor" />
+              >Animated cursors (.ani files) are not supported by the <see cref="T:System.Windows.Forms.Cursor" />
 
               
 
@@ -318,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -327,7 +301,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -361,8 +339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -370,19 +347,26 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The resource <see
-           cref="T:System.Type" />
+          The resource <see cref="T:System.Type" />
 
           
 
           . </param
         >
         <param name="resource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -434,8 +418,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the handle of this <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Copies the handle of this <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -445,8 +428,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IntPtr" />
+            >An <see cref="T:System.IntPtr" />
 
             
 
@@ -473,18 +455,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.Cursor.Current" />
+            >Setting the <see cref="P:System.Windows.Forms.Cursor.Current" />
 
             
 
-             property changes the cursor currently displayed. The application may or may not continue to listen for mouse events. To signal that the application should not respond to mouse events during a long-running operation, use the <see
-             cref="P:System.Windows.Forms.Application.UseWaitCursor" />
+             property changes the cursor currently displayed. The application may or may not continue to listen for mouse events. To signal that the application should not respond to mouse events during a long-running operation, use the <see cref="P:System.Windows.Forms.Application.UseWaitCursor" />
 
             
 
-             property. In most cases, however, it's better to use a background thread to manage a long-running operation, and leave your user interface accessible to the user. For more information on easily implementing a background task, see <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             property. In most cases, however, it's better to use a background thread to manage a long-running operation, and leave your user interface accessible to the user. For more information on easily implementing a background task, see <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
@@ -512,45 +491,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.Cursor.Dispose" />
+            >Call <see cref="M:System.Windows.Forms.Cursor.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Windows.Forms.Cursor" />
+             when you are finished using the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            . The Dispose method leaves the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Windows.Forms.Cursor.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Windows.Forms.Cursor.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            , you must release all references to the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Windows.Forms.Cursor" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9">Implementing a Dispose Method</a>
             </format>
 
@@ -560,13 +531,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.Cursor.Dispose" />
+              >Always call <see cref="M:System.Windows.Forms.Cursor.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Windows.Forms.Cursor" />
+               before you release your last reference to the <see cref="T:System.Windows.Forms.Cursor" />
 
               
 
@@ -577,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -608,43 +576,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The drawing command originates on the graphics surface represented by the <paramref
-             name="g" />
+            >The drawing command originates on the graphics surface represented by the <paramref name="g" />
 
             
 
-             parameter, but a <see
-             cref="T:System.Drawing.Graphics" />
+             parameter, but a <see cref="T:System.Drawing.Graphics" />
 
             
 
-             does not contain information about how to render a given image, so it passes the call to the <see
-             cref="T:System.Windows.Forms.Cursor" />
+             does not contain information about how to render a given image, so it passes the call to the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.Cursor.Draw(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+            . The <see cref="M:System.Windows.Forms.Cursor.Draw(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
-             method crops the image to the given dimensions and allows you to specify a <see
-             cref="T:System.Drawing.Rectangle" />
+             method crops the image to the given dimensions and allows you to specify a <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             within which to draw the <see
-             cref="T:System.Windows.Forms.Cursor" />
+             within which to draw the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-            . This method is typically used if you want to draw the cursor on a Graphics surface. For example, you might have a dialog that allows the user to select cursors from a <see
-             cref="T:System.Windows.Forms.ListBox" />
+            . This method is typically used if you want to draw the cursor on a Graphics surface. For example, you might have a dialog that allows the user to select cursors from a <see cref="T:System.Windows.Forms.ListBox" />
 
             
 
-             control, or a group of <see
-             cref="T:System.Windows.Forms.RadioButton" />
+             control, or a group of <see cref="T:System.Windows.Forms.RadioButton" />
 
             
 
@@ -656,34 +616,38 @@
           <para>Draws the cursor on the specified surface, within the specified bounds.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           surface on which to draw the <see
-           cref="T:System.Windows.Forms.Cursor" />
+           surface on which to draw the <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
           . </param
         >
         <param name="targetRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the bounds of the <see
-           cref="T:System.Windows.Forms.Cursor" />
+           that represents the bounds of the <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -712,28 +676,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The drawing command originates on the graphics surface represented by the <paramref
-             name="g" />
+            >The drawing command originates on the graphics surface represented by the <paramref name="g" />
 
             
 
-             parameter, but a <see
-             cref="T:System.Drawing.Graphics" />
+             parameter, but a <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object does not contain information about how to render a given image, so it passes the call to the <see
-             cref="T:System.Windows.Forms.Cursor" />
+             object does not contain information about how to render a given image, so it passes the call to the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             object. The <see
-             cref="M:System.Windows.Forms.Cursor.DrawStretched(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+             object. The <see cref="M:System.Windows.Forms.Cursor.DrawStretched(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
             
 
-             method stretches the image to fill the specified <see
-             cref="T:System.Drawing.Rectangle" />
+             method stretches the image to fill the specified <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -745,34 +704,38 @@
           <para>Draws the cursor in a stretched format on the specified surface, within the specified bounds.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
-           surface on which to draw the <see
-           cref="T:System.Windows.Forms.Cursor" />
+           surface on which to draw the <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
           . </param
         >
         <param name="targetRect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the bounds of the <see
-           cref="T:System.Windows.Forms.Cursor" />
+           that represents the bounds of the <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -798,8 +761,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this cursor is equal to the specified <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Returns a value indicating whether this cursor is equal to the specified <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -809,8 +771,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this cursor is equal to the specified <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >true if this cursor is equal to the specified <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -818,12 +779,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Cursor" />
+          The <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -863,8 +827,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the hash code for the current <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Retrieves the hash code for the current <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -874,8 +837,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >A hash code for the current <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -921,23 +883,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Cursor.Show" />
+            >The <see cref="M:System.Windows.Forms.Cursor.Show" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.Cursor.Hide" />
+             and <see cref="M:System.Windows.Forms.Cursor.Hide" />
 
             
 
-             method calls must be balanced. For every call to the <see
-             cref="M:System.Windows.Forms.Cursor.Hide" />
+             method calls must be balanced. For every call to the <see cref="M:System.Windows.Forms.Cursor.Hide" />
 
             
 
-             method there must be a corresponding call to the <see
-             cref="M:System.Windows.Forms.Cursor.Show" />
+             method there must be a corresponding call to the <see cref="M:System.Windows.Forms.Cursor.Show" />
 
             
 
@@ -968,13 +926,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Cursor.HotSpot" />
+            >The <see cref="P:System.Windows.Forms.Cursor.HotSpot" />
 
             
 
-             is the <see
-             cref="T:System.Drawing.Point" />
+             is the <see cref="T:System.Drawing.Point" />
 
             
 
@@ -1005,8 +961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two instances of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Returns a value indicating whether two instances of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1016,8 +971,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if two instances of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >true if two instances of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1025,24 +979,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Cursor" />
+          A <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
            to compare. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Cursor" />
+          A <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -1072,8 +1032,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two instances of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Returns a value indicating whether two instances of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1083,8 +1042,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if two instances of the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >true if two instances of the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1092,24 +1050,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Cursor" />
+          A <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
            to compare. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Cursor" />
+          A <see cref="T:System.Windows.Forms.Cursor" />
 
           
 
@@ -1135,13 +1099,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Cursor.Position" />
+            >The <see cref="P:System.Windows.Forms.Cursor.Position" />
 
             
 
-             property is identical to the <see
-             cref="P:System.Windows.Forms.Control.MousePosition" />
+             property is identical to the <see cref="P:System.Windows.Forms.Control.MousePosition" />
 
             
 
@@ -1169,23 +1131,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Cursor.Show" />
+            >The <see cref="M:System.Windows.Forms.Cursor.Show" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.Cursor.Hide" />
+             and <see cref="M:System.Windows.Forms.Cursor.Hide" />
 
             
 
-             method calls must be balanced. For every call to the <see
-             cref="M:System.Windows.Forms.Cursor.Hide" />
+             method calls must be balanced. For every call to the <see cref="M:System.Windows.Forms.Cursor.Hide" />
 
             
 
-             method there must be a corresponding call to the <see
-             cref="M:System.Windows.Forms.Cursor.Show" />
+             method there must be a corresponding call to the <see cref="M:System.Windows.Forms.Cursor.Show" />
 
             
 
@@ -1245,24 +1203,30 @@
           <para>Serializes the object.</para>
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            class.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -1299,8 +1263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the object that contains data about the <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Gets or sets the object that contains data about the <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1321,8 +1284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a human readable string representing this <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >Retrieves a human readable string representing this <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
@@ -1332,13 +1294,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that represents this <see
-             cref="T:System.Windows.Forms.Cursor" />
+             that represents this <see cref="T:System.Windows.Forms.Cursor" />
 
             
 

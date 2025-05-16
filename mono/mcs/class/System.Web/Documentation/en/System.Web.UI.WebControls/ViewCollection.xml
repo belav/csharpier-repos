@@ -17,61 +17,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ViewCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.ViewCollection" />
 
         
 
-         class represents a collection container that enables a <see
-         cref="T:System.Web.UI.WebControls.MultiView" />
+         class represents a collection container that enables a <see cref="T:System.Web.UI.WebControls.MultiView" />
 
         
 
-         control to maintain a list of its child controls. A <see
-         cref="T:System.Web.UI.WebControls.MultiView" />
+         control to maintain a list of its child controls. A <see cref="T:System.Web.UI.WebControls.MultiView" />
 
         
 
-         control can contain only <see
-         cref="T:System.Web.UI.WebControls.View" />
+         control can contain only <see cref="T:System.Web.UI.WebControls.View" />
 
         
 
          controls as child controls.</para
       >
       <para
-        >Use the <see
-         cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
+        >Use the <see cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
 
         
 
-         method to add a new <see
-         cref="T:System.Web.UI.WebControls.View" />
+         method to add a new <see cref="T:System.Web.UI.WebControls.View" />
 
         
 
-         control to the <see
-         cref="T:System.Web.UI.WebControls.ViewCollection" />
+         control to the <see cref="T:System.Web.UI.WebControls.ViewCollection" />
 
         
 
-         collection at the end of an ordinal index array. Use the <see
-         cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
+         collection at the end of an ordinal index array. Use the <see cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
 
         
 
-         method to add a new control at a specific index location. Use the <see
-         cref="P:System.Web.UI.WebControls.ViewCollection.Item(System.Int32)" />
+         method to add a new control at a specific index location. Use the <see cref="P:System.Web.UI.WebControls.ViewCollection.Item(System.Int32)" />
 
         
 
-         indexer to get a <see
-         cref="T:System.Web.UI.WebControls.View" />
+         indexer to get a <see cref="T:System.Web.UI.WebControls.View" />
 
         
 
-         control from the <see
-         cref="T:System.Web.UI.WebControls.ViewCollection" />
+         control from the <see cref="T:System.Web.UI.WebControls.ViewCollection" />
 
         
 
@@ -81,8 +70,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection container that enables a <see
-         cref="T:System.Web.UI.WebControls.MultiView" />
+        >Represents a collection container that enables a <see cref="T:System.Web.UI.WebControls.MultiView" />
 
         
 
@@ -105,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ViewCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ViewCollection" />
 
             
 
@@ -114,12 +101,15 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MultiView" />
+          The <see cref="T:System.Web.UI.WebControls.MultiView" />
 
           
 
@@ -141,21 +131,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
 
             
 
-             method adds the new control to the end of an ordinal index array. The control can only be an instance of a <see
-             cref="T:System.Web.UI.WebControls.View" />
+             method adds the new control to the end of an ordinal index array. The control can only be an instance of a <see cref="T:System.Web.UI.WebControls.View" />
 
             
 
              control.</para
           >
           <para
-            >To add a control to the collection at a specific index location, use the <see
-             cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
+            >To add a control to the collection at a specific index location, use the <see cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
 
             
 
@@ -165,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.WebControls.View" />
+            >Adds the specified <see cref="T:System.Web.UI.WebControls.View" />
 
             
 
@@ -174,12 +160,15 @@
           >
         </summary>
         <param name="v">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.View" />
+          The <see cref="T:System.Web.UI.WebControls.View" />
 
           
 
@@ -208,21 +197,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.WebControls.ViewCollection.AddAt(System.Int32,System.Web.UI.Control)" />
 
             
 
-             method adds the new control to the collection at the specified index location. The control can only be an instance of a <see
-             cref="T:System.Web.UI.WebControls.View" />
+             method adds the new control to the collection at the specified index location. The control can only be an instance of a <see cref="T:System.Web.UI.WebControls.View" />
 
             
 
              control.</para
           >
           <para
-            >To add a control at the end of an ordinal index array, use the <see
-             cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
+            >To add a control at the end of an ordinal index array, use the <see cref="M:System.Web.UI.WebControls.ViewCollection.Add(System.Web.UI.Control)" />
 
             
 
@@ -232,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.WebControls.View" />
+            >Adds the specified <see cref="T:System.Web.UI.WebControls.View" />
 
             
 
@@ -241,24 +226,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array index at which to add the <see
-           cref="T:System.Web.UI.WebControls.View" />
+          The array index at which to add the <see cref="T:System.Web.UI.WebControls.View" />
 
           
 
            control. </param
         >
         <param name="v">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.View" />
+          The <see cref="T:System.Web.UI.WebControls.View" />
 
           
 

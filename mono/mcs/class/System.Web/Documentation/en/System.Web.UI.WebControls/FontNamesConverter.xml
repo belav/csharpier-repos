@@ -20,29 +20,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+        >Use the <see cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
         
 
          method of this class to convert a single string containing a list of font names to an array of strings containing the individual names. Each font name in the string must be separated by a comma. For example, the string "arial, times new roman, verdana", converts to an array that contains the strings "arial", "times new roman", and "verdana". Notice the commas are removed along with any white space at the beginning or end of the font name. White space in the middle of a font name is not removed.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+        >The <see cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
         
 
          method performs the reverse operation. It converts an array of strings containing the individual font names to a single string containing a list of the names. For example, an array that contains the strings "arial", "times new roman", and "verdana" converts to the string "arial,times new roman,verdana". Notice that commas are automatically inserted between the font names without any white space.</para
       >
       <para
-        >Call the <see
-         cref="M:System.Web.UI.WebControls.FontNamesConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+        >Call the <see cref="M:System.Web.UI.WebControls.FontNamesConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
         
 
-         method to verify that the conversion can be made before calling the <see
-         cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+         method to verify that the conversion can be made before calling the <see cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
         
 
@@ -64,13 +60,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should never access a type converter directly. Instead, call the appropriate converter by using a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >You should never access a type converter directly. Instead, call the appropriate converter by using a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-             object. For more information, see the examples in <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             object. For more information, see the examples in <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -80,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontNamesConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontNamesConverter" />
 
             
 
@@ -111,8 +104,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontNamesConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontNamesConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
             
 
@@ -120,13 +112,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This converter can convert only from a string data type. The <paramref
-               name="sourceType" />
+              >This converter can convert only from a string data type. The <paramref name="sourceType" />
 
               
 
-               parameter must be of type <see
-               cref="T:System.String" />
+               parameter must be of type <see cref="T:System.String" />
 
               
 
@@ -134,8 +124,7 @@
             >
           </block>
           <para
-            >You can optionally pass in null for the <paramref
-             name="context" />
+            >You can optionally pass in null for the <paramref name="context" />
 
             
 
@@ -151,24 +140,30 @@
           <para>true if the type can be converted; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that provides information about the context of a type converter. You can optionally pass in null for this parameter. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -198,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
@@ -207,13 +201,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="context" />
+              >The <paramref name="context" />
 
               
 
-               and <paramref
-               name="culture" />
+               and <paramref name="culture" />
 
               
 
@@ -228,8 +220,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -237,36 +228,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that provides information about the context of a type converter. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -297,8 +297,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
             
 
@@ -306,13 +305,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This converter can convert only to a string data type. The <paramref
-               name="destinationType" />
+              >This converter can convert only to a string data type. The <paramref name="destinationType" />
 
               
 
-               parameter must be of type <see
-               cref="T:System.String" />
+               parameter must be of type <see cref="T:System.String" />
 
               
 
@@ -321,13 +318,11 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="context" />
+              >The <paramref name="context" />
 
               
 
-               and <paramref
-               name="culture" />
+               and <paramref name="culture" />
 
               
 
@@ -342,8 +337,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -351,48 +345,60 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          A <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that provides information about the context of a type converter. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that represents information about a culture such as language, calendar system, and so on. This parameter is not used in this method. It is reserved for future versions of this method. You can optionally pass in null for this parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that represents the source array of strings to convert from. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
-           instance object that represents the data type to convert to. This parameter must be of type <see
-           cref="T:System.String" />
+           instance object that represents the data type to convert to. This parameter must be of type <see cref="T:System.String" />
 
           
 

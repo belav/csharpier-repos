@@ -43,18 +43,15 @@
       <para>The foreach statement of the C# language (for each in C++, For Each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
       <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
       <para
-        >Initially, the enumerator is positioned before the first element in the collection. At this position, <see
-         cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+        >Initially, the enumerator is positioned before the first element in the collection. At this position, <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
         
 
-         is undefined. Therefore, you must call <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         to advance the enumerator to the first element of the collection before reading the value of <see
-         cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+         to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
         
 
@@ -65,64 +62,53 @@
 
         
 
-         returns the same object until <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         returns the same object until <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         is called. <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         sets <see
-         cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+         sets <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
         
 
          to the next element.</para
       >
       <para
-        >If <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         returns false. When the enumerator is at this position, subsequent calls to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         also return false. If the last call to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         returned false, <see
-         cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+         returned false, <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
         
 
-         is undefined. You cannot set <see
-         cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+         is undefined. You cannot set <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
         
 
          to the first element of the collection again; you must create a new enumerator instance instead.</para
       >
       <para
-        >The <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+        >The <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         method is provided for COM interoperability. It does not necessarily need to be implemented; instead, the implementer can simply throw a <see
-         cref="T:System.NotSupportedException" />
+         method is provided for COM interoperability. It does not necessarily need to be implemented; instead, the implementer can simply throw a <see cref="T:System.NotSupportedException" />
 
         
 
@@ -131,8 +117,7 @@
       <para>An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and its behavior is undefined.</para>
       <para>The enumerator does not have exclusive access to the collection; therefore, enumerating through a collection is intrinsically not a thread-safe procedure. To guarantee thread safety during enumeration, you can lock the collection during the entire enumeration. To allow the collection to be accessed by multiple threads for reading and writing, you must implement your own synchronization.</para>
       <para
-        >Default implementations of collections in the <see
-         cref="N:System.Collections.Generic" />
+        >Default implementations of collections in the <see cref="N:System.Collections.Generic" />
 
         
 
@@ -163,13 +148,11 @@
         <since version=".NET 2.0" />
         <exception cref="An unspecified exception type">
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-              is not called before the first call to <see
-             cref="P:System.Collections.Generic.IEnumerator&lt;T&gt;.Current" />
+              is not called before the first call to <see cref="P:System.Collections.Generic.IEnumerator&lt;T&gt;.Current" />
 
             
 
@@ -177,13 +160,11 @@
           >
           <para>-or-</para>
           <para
-            >If the previous call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If the previous call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-              returned <see
-             langword="false" />
+              returned <see langword="false" />
 
             
 
@@ -202,13 +183,11 @@
           <list type="bullet">
             <item>
               <para
-                >The enumerator is positioned before the first element in the collection, immediately after the enumerator is created.   <see
-                 cref="M:System.Collections.IEnumerator.MoveNext" />
+                >The enumerator is positioned before the first element in the collection, immediately after the enumerator is created.   <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
                 
 
-                 must be called to advance the enumerator to the first element of the collection before reading the value of <see
-                 cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+                 must be called to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
                 
 
@@ -217,8 +196,7 @@
             </item>
             <item>
               <para
-                >The last call to <see
-                 cref="M:System.Collections.IEnumerator.MoveNext" />
+                >The last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
                 
 
@@ -234,18 +212,15 @@
 
             
 
-             returns the same object until <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+             sets <see cref="P:System.Collections.Generic.IEnumerator`1.Current" />
 
             
 

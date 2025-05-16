@@ -17,69 +17,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Form.FormClosing" />
+        >The <see cref="E:System.Windows.Forms.Form.FormClosing" />
 
         
 
-         event occurs just before a form is closed, either by the user, through the user interface (UI), or programmatically, through calls to methods such as <see
-         cref="M:System.Windows.Forms.Form.Close" />
+         event occurs just before a form is closed, either by the user, through the user interface (UI), or programmatically, through calls to methods such as <see cref="M:System.Windows.Forms.Form.Close" />
 
         
 
-         in the <see
-         cref="T:System.Windows.Forms.Form" />
+         in the <see cref="T:System.Windows.Forms.Form" />
 
         
 
-         class, or <see
-         cref="M:System.Windows.Forms.Application.Exit" />
+         class, or <see cref="M:System.Windows.Forms.Application.Exit" />
 
         
 
-         in the <see
-         cref="T:System.Windows.Forms.Application" />
+         in the <see cref="T:System.Windows.Forms.Application" />
 
         
 
          class. </para
       >
       <para
-        >If a form has any child or owned forms, a <see
-         cref="E:System.Windows.Forms.Form.FormClosing" />
+        >If a form has any child or owned forms, a <see cref="E:System.Windows.Forms.Form.FormClosing" />
 
         
 
-         event is also raised for each one. If any one of the forms cancels the event, none of the forms are closed. Therefore the corresponding <see
-         cref="E:System.Windows.Forms.Form.FormClosed" />
+         event is also raised for each one. If any one of the forms cancels the event, none of the forms are closed. Therefore the corresponding <see cref="E:System.Windows.Forms.Form.FormClosed" />
 
         
 
          events are not sent to any of the forms.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.FormClosingEventArgs" />
+        >The <see cref="T:System.Windows.Forms.FormClosingEventArgs" />
 
         
 
-         class provides data for this event. Two important members are the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         class provides data for this event. Two important members are the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+         and <see cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
 
         
 
-         properties. The event can be canceled by setting the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         properties. The event can be canceled by setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
-         property to true. The <see
-         cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+         property to true. The <see cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
 
         
 
@@ -89,8 +77,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Form.FormClosing" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Form.FormClosing" />
 
         
 
@@ -114,23 +101,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="closeReason" />
+            >The <paramref name="closeReason" />
 
             
 
-             and <paramref
-             name="cancel" />
+             and <paramref name="cancel" />
 
             
 
-             parameters are used to initialize the <see
-             cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+             parameters are used to initialize the <see cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+             and <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 
@@ -140,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.FormClosingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FormClosingEventArgs" />
 
             
 
@@ -149,19 +131,26 @@
           >
         </summary>
         <param name="closeReason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.CloseReason" />
+          A <see cref="T:System.Windows.Forms.CloseReason" />
 
           
 
            value that represents the reason why the form is being closed.</param
         >
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -187,13 +176,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Form" />
+            >A <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             can be closed because of a variety of reasons, both user-initiated and programmatic. The <see
-             cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+             can be closed because of a variety of reasons, both user-initiated and programmatic. The <see cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
 
             
 

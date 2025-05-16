@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <clause number="25.4" title="Pointer conversions">
   <paragraph
-    >In an unsafe context, the set of available implicit conversions (<hyperlink
-    >13.1</hyperlink>
+    >In an unsafe context, the set of available implicit conversions (<hyperlink>13.1</hyperlink>
 
     
 
-    ) is extended to include the following implicit pointer conversions: <list
-    >
+    ) is extended to include the following implicit pointer conversions: <list>
       <list_item
-        > From any <non_terminal
-         where="25.2">pointer-type</non_terminal>
+        > From any <non_terminal where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
          to the type void*. </list_item
       >
       <list_item
-        > From the null type to any <non_terminal
-         where="25.2">pointer-type</non_terminal>
+        > From the null type to any <non_terminal where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
@@ -27,117 +27,104 @@
     </list>
   </paragraph>
   <paragraph
-    >Additionally, in an unsafe context, the set of available explicit conversions (<hyperlink
-    >13.2</hyperlink>
+    >Additionally, in an unsafe context, the set of available explicit conversions (<hyperlink>13.2</hyperlink>
 
     
 
-    ) is extended to include the following explicit pointer conversions: <list
-    >
+    ) is extended to include the following explicit pointer conversions: <list>
       <list_item
-        > From any <non_terminal
-         where="25.2">pointer-type</non_terminal>
+        > From any <non_terminal where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
-         to any other <non_terminal
-         where="25.2">pointer-type</non_terminal>
+         to any other <non_terminal where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
         . </list_item
       >
       <list_item
-        > From <keyword
-        >sbyte</keyword>
+        > From <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >int</keyword>
+        , <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , or <keyword
-        >ulong</keyword>
+        , or <keyword>ulong</keyword>
 
         
 
          to any <non_terminal
-         where="25.2">pointer-type</non_terminal>
+          where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
         . </list_item
       >
       <list_item
-        > From any <non_terminal
-         where="25.2">pointer-type</non_terminal>
+        > From any <non_terminal where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
-         to <keyword
-        >sbyte</keyword>
+         to <keyword>sbyte</keyword>
 
         
 
-        , <keyword
-        >byte</keyword>
+        , <keyword>byte</keyword>
 
         
 
-        , <keyword
-        >short</keyword>
+        , <keyword>short</keyword>
 
         
 
-        , <keyword
-        >ushort</keyword>
+        , <keyword>ushort</keyword>
 
         
 
-        , <keyword
-        >int</keyword>
+        , <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , or <keyword
-        >ulong</keyword>
+        , or <keyword>ulong</keyword>
 
         
 
@@ -146,16 +133,15 @@
     </list>
   </paragraph>
   <paragraph
-    >Finally, in an unsafe context, the set of standard implicit conversions (<hyperlink
-    >13.3.1</hyperlink>
+    >Finally, in an unsafe context, the set of standard implicit conversions (<hyperlink>13.3.1</hyperlink>
 
     
 
-    ) includes the following pointer conversion: <list
-    >
+    ) includes the following pointer conversion: <list>
       <list_item
-        > From any <non_terminal
-         where="25.2">pointer-type</non_terminal>
+        > From any <non_terminal where="25.2"
+          >pointer-type</non_terminal
+        >
 
         
 
@@ -167,8 +153,7 @@
   <paragraph>When one pointer type is converted to another, if the resulting pointer is not correctly aligned for the pointed-to type, the behavior is undefined if the result is dereferenced. In general, the concept "correctly aligned" is transitive: if a pointer to type A is correctly aligned for a pointer to type B, which, in turn, is correctly aligned for a pointer to type C, then a pointer to type A is correctly aligned for a pointer to type C. </paragraph>
   <paragraph>
     <example
-      >[Example: Consider the following case in which a variable having one type is accessed via a pointer to a different type: <code_example
-      >
+      >[Example: Consider the following case in which a variable having one type is accessed via a pointer to a different type: <code_example>
         <![CDATA[
 char c = 'A';  
 char* pc = &c;  
@@ -185,25 +170,20 @@ int i = *pi;    // undefined
     >
   </paragraph>
   <paragraph
-    >When a pointer type is converted to a pointer to <keyword
-    >byte</keyword>
+    >When a pointer type is converted to a pointer to <keyword>byte</keyword>
 
     
 
-    , the result points to the lowest addressed <keyword
-    >byte</keyword>
+    , the result points to the lowest addressed <keyword>byte</keyword>
 
     
 
      of the variable. Successive increments of the result, up to the size of the variable, yield pointers to the remaining bytes of that variable. <example
-
-      >[Example: For example, the following method displays each of the eight bytes in a <keyword
-      >double</keyword>
+      >[Example: For example, the following method displays each of the eight bytes in a <keyword>double</keyword>
 
       
 
-       as a hexadecimal value: <code_example
-      >
+       as a hexadecimal value: <code_example>
         <![CDATA[
 using System;  
 class Test  
@@ -228,14 +208,11 @@ class Test
   </paragraph>
   <paragraph
     >Mappings between pointers and integers are implementation-defined. <note
-
-      >[Note: However, on  32-and 64-bit CPU architectures with a linear address space, conversions of pointers to or from integral types typically behave exactly like conversions of <keyword
-      >uint</keyword>
+      >[Note: However, on  32-and 64-bit CPU architectures with a linear address space, conversions of pointers to or from integral types typically behave exactly like conversions of <keyword>uint</keyword>
 
       
 
-       or <keyword
-      >ulong</keyword>
+       or <keyword>ulong</keyword>
 
       
 

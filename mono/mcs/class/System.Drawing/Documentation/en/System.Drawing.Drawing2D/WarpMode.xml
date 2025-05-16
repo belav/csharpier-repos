@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A warp style is used by the <see
-         cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Warp" />
+        >A warp style is used by the <see cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Warp" />
 
         
 
@@ -27,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the type of warp transformation applied in a <see
-         cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Warp" />
+        >Specifies the type of warp transformation applied in a <see cref="Overload:System.Drawing.Drawing2D.GraphicsPath.Warp" />
 
         
 

@@ -23,38 +23,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >.NET Framework remoting provides two levels of automatic deserialization, <see
-         cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+        >.NET Framework remoting provides two levels of automatic deserialization, <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
         
 
-         and <see
-         cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+         and <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
 
         
 
-        . The <see
-         cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+        . The <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
         
 
-         deserialization level helps protect against deserialization attacks by deserializing only the types associated with the most basic remoting functionality. The <see
-         cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+         deserialization level helps protect against deserialization attacks by deserializing only the types associated with the most basic remoting functionality. The <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
 
         
 
-         deserialization level supports automatic deserialization of all types that remoting supports in all situations. For a list of the .NET Framework remoting types that <see
-         cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+         deserialization level supports automatic deserialization of all types that remoting supports in all situations. For a list of the .NET Framework remoting types that <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
         
 
-         and <see
-         cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+         and <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
 
         
 
-         support, see <format
-         type="text/html">
+         support, see <format type="text/html">
           <a href="313A0E88-5B2B-4A17-8391-0DDF9F7A787B"
             >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
           >
@@ -65,8 +58,7 @@
         .</para
       >
       <para
-        >You can set the members of this enumeration programmatically or by using an application configuration file. For examples, see <format
-         type="text/html">
+        >You can set the members of this enumeration programmatically or by using an application configuration file. For examples, see <format type="text/html">
           <a href="313A0E88-5B2B-4A17-8391-0DDF9F7A787B"
             >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
           >
@@ -78,8 +70,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not assume that controlling deserialization is the only security your application requires. In distributed applications, even a high degree of control over serialization might not prevent malicious clients from intercepting the communication and using it in some way, even if that is merely showing data to others. Therefore, although the <see
-           cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
+          >Do not assume that controlling deserialization is the only security your application requires. In distributed applications, even a high degree of control over serialization might not prevent malicious clients from intercepting the communication and using it in some way, even if that is merely showing data to others. Therefore, although the <see cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Low" />
 
           
 

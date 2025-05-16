@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.ComponentModel" />
+        >The <see cref="N:System.ComponentModel" />
 
         
 
@@ -18,23 +17,19 @@
       <list type="bullet">
         <item>
           <para
-            >Core component classes. See the <see
-             cref="T:System.ComponentModel.Component" />
+            >Core component classes. See the <see cref="T:System.ComponentModel.Component" />
 
             
 
-            , <see
-             cref="T:System.ComponentModel.IComponent" />
+            , <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-            , <see
-             cref="T:System.ComponentModel.Container" />
+            , <see cref="T:System.ComponentModel.Container" />
 
             
 
-            , and <see
-             cref="T:System.ComponentModel.IContainer" />
+            , and <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -43,23 +38,19 @@
         </item>
         <item>
           <para
-            >Component licensing. See the <see
-             cref="T:System.ComponentModel.License" />
+            >Component licensing. See the <see cref="T:System.ComponentModel.License" />
 
             
 
-            , <see
-             cref="T:System.ComponentModel.LicenseManager" />
+            , <see cref="T:System.ComponentModel.LicenseManager" />
 
             
 
-            , <see
-             cref="T:System.ComponentModel.LicenseProvider" />
+            , <see cref="T:System.ComponentModel.LicenseProvider" />
 
             
 
-            , and <see
-             cref="T:System.ComponentModel.LicenseProviderAttribute" />
+            , and <see cref="T:System.ComponentModel.LicenseProviderAttribute" />
 
             
 
@@ -68,8 +59,7 @@
         </item>
         <item>
           <para
-            >Attributes. See the <see
-             cref="T:System.Attribute" />
+            >Attributes. See the <see cref="T:System.Attribute" />
 
             
 
@@ -78,18 +68,15 @@
         </item>
         <item>
           <para
-            >Descriptors and persistence. See the <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Descriptors and persistence. See the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-            , <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            , <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
-            , and <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            , and <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -98,8 +85,7 @@
         </item>
         <item>
           <para
-            >Type converters. See the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            >Type converters. See the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 

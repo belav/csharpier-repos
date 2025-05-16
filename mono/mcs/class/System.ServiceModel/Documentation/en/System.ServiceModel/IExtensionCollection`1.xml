@@ -36,13 +36,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of the <see
-         cref="T:System.ServiceModel.IExtension`1" />
+        >A collection of the <see cref="T:System.ServiceModel.IExtension`1" />
 
         
 
-         objects that allow for retrieving the <see
-         cref="T:System.ServiceModel.IExtension`1" />
+         objects that allow for retrieving the <see cref="T:System.ServiceModel.IExtension`1" />
 
         
 
@@ -76,8 +74,7 @@
 
             
 
-             returns an extension that implements (is or derives from) the specified type. If more than one extension implements the specified type, one is returned. The indigo2 implementation returns the most recently added, but this is not required of implementations. If no extension implements the specified type, <see
-             cref="M:System.ServiceModel.IExtensionCollection`1.Find``1" />
+             returns an extension that implements (is or derives from) the specified type. If more than one extension implements the specified type, one is returned. The indigo2 implementation returns the most recently added, but this is not required of implementations. If no extension implements the specified type, <see cref="M:System.ServiceModel.IExtensionCollection`1.Find``1" />
 
             
 
@@ -93,7 +90,11 @@
           <para>The extension object that was found.</para>
         </returns>
         <typeparam name="E">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Finds all extension object in the collection specified by <paramref
-             name="E" />
+            >Finds all extension object in the collection specified by <paramref name="E" />
 
             
 
@@ -139,7 +139,11 @@
           <para>A collection of all extension objects in the collection that implement the specified type.</para>
         </returns>
         <typeparam name="E">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

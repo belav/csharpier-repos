@@ -21,30 +21,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+        >A <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
         
 
-         object can represent an <format
-         type="text/html">
+         object can represent an <format type="text/html">
           <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
         </format>
 
         
 
-         element in the project, or a virtual collection of items, containing the items created after evaluating wildcards in the <unmanagedCodeEntityReference
-        >Include</unmanagedCodeEntityReference>
+         element in the project, or a virtual collection of items, containing the items created after evaluating wildcards in the <unmanagedCodeEntityReference>Include</unmanagedCodeEntityReference>
 
         
 
-         and <unmanagedCodeEntityReference
-        >Exclude</unmanagedCodeEntityReference>
+         and <unmanagedCodeEntityReference>Exclude</unmanagedCodeEntityReference>
 
         
 
-         attributes of an <unmanagedCodeEntityReference
-        >Item</unmanagedCodeEntityReference>
+         attributes of an <unmanagedCodeEntityReference>Item</unmanagedCodeEntityReference>
 
         
 
@@ -54,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+        >Represents a collection of <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
         
 
@@ -74,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -106,23 +99,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >Adds a new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
             
 
-             and <see
-             cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+             and <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
             
 
-             property values to the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             property values to the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -132,8 +121,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >The new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
@@ -141,34 +129,38 @@
           >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
           
 
           .</param
         >
         <param name="itemInclude">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
           
 
@@ -199,28 +191,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >Adds a new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
             
 
-             and <see
-             cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+             and <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
             
 
-             property values to the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             property values to the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-            , allowing you to specify whether the <see
-             cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+            , allowing you to specify whether the <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
             
 
@@ -230,8 +217,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >The new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
@@ -239,46 +225,53 @@
           >
         </returns>
         <param name="itemName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
           
 
           .</param
         >
         <param name="itemInclude">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
           
 
           .</param
         >
         <param name="treatItemIncludeAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to treat the <paramref
-           name="itemInclude" />
+          true to treat the <paramref name="itemInclude" />
 
           
 
@@ -302,18 +295,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="P:Microsoft.Build.BuildEngine.BuildItemGroup.Condition" />
+            >Removes the <see cref="P:Microsoft.Build.BuildEngine.BuildItemGroup.Condition" />
 
             
 
-             property value and all <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+             property value and all <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             objects from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             objects from the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -342,51 +332,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of a <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >A shallow copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
              references the same property group as the original. Modifications a shallow copy will be reflected in both copies.</para
           >
           <para
-            >A deep copy of a <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >A deep copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-             creates a new XML element to reference so that both copies of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             creates a new XML element to reference so that both copies of the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
              can be independently modified.</para
           >
           <para
-            >If the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >If the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
-             corresponds directly to a <format
-             type="text/html">
+             corresponds directly to a <format type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
 
             
 
-             element in the project (rather than corresponding to a collection of items created after evaluating wildcards in the <unmanagedCodeEntityReference
-            >Include</unmanagedCodeEntityReference>
+             element in the project (rather than corresponding to a collection of items created after evaluating wildcards in the <unmanagedCodeEntityReference>Include</unmanagedCodeEntityReference>
 
             
 
-             and <unmanagedCodeEntityReference
-            >Exclude</unmanagedCodeEntityReference>
+             and <unmanagedCodeEntityReference>Exclude</unmanagedCodeEntityReference>
 
             
 
-             attributes of an <unmanagedCodeEntityReference
-            >Item</unmanagedCodeEntityReference>
+             attributes of an <unmanagedCodeEntityReference>Item</unmanagedCodeEntityReference>
 
             
 
@@ -396,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a deep or shallow copy of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >Creates a deep or shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -407,8 +388,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >A copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -416,12 +396,15 @@
           >
         </returns>
         <param name="deepClone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to create a deep copy of the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+          true to create a deep copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
           
 
@@ -445,8 +428,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference
-            >Condition</unmanagedCodeEntityReference>
+            >Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference>
 
             
 
@@ -471,13 +453,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the number of <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >Gets a value indicating the number of <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -504,13 +484,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -520,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that iterates through the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+            >Gets an enumerator that iterates through the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -531,13 +508,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the entire <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             for the entire <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -609,13 +584,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >Removes the specified <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             from the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -623,12 +596,15 @@
           >
         </summary>
         <param name="itemToRemove">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+          The <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
           
 
@@ -654,13 +630,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >Removes the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             at the specified index from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             at the specified index from the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -668,12 +642,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+          The zero-based index of the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
           
 
@@ -700,13 +677,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >Copies the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 
@@ -716,13 +691,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new array containing the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+            >A new array containing the <see cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
             
 
-             objects copied from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+             objects copied from the <see cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
             
 

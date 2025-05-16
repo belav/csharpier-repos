@@ -28,8 +28,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Util.IWebObjectFactory" />
+            >Creates a new <see cref="T:System.Web.Util.IWebObjectFactory" />
 
             
 
@@ -38,10 +37,7 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >A new <see
-             cref="T:System.Web.Util.IWebObjectFactory" />
-          </para>
+          <para>A new <see cref="T:System.Web.Util.IWebObjectFactory" /></para>
         </returns>
       </Docs>
       <AssemblyInfo>

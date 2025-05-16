@@ -32,8 +32,7 @@
       <para>This attribute affects only unmanaged applications that host the common language runtime and implement host protection, such as SQL Server. If the code is run in a client application or on a server that is not host-protected, the attribute "evaporates"; it is not detected and therefore not applied. When applied, the security action results in the creation of a link demand based on the host resources the class or method exposes. </para>
       <block subset="none" type="note">
         <para
-          >The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.  Although a link demand is used to check for conformance to programming model requirements, the <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          >The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.  Although a link demand is used to check for conformance to programming model requirements, the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
@@ -55,8 +54,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see
-           cref="T:System.Security.Permissions.HostProtectionResource" />
+          >If you are creating a class library that is to be called by applications that may execute in a host protected environment, you should apply this attribute to members that expose <see cref="T:System.Security.Permissions.HostProtectionResource" />
 
           
 
@@ -65,20 +63,17 @@
       </block>
       <block subset="none" type="note">
         <para
-          >Do not use the <format
-           type="text/html">
+          >Do not use the <format type="text/html">
             <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
           </format>
 
           
 
-           to create a native image of assemblies that are protected by the <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+           to create a native image of assemblies that are protected by the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
-          . In a full-trust environment, the image is always loaded, without regard to the <see
-           cref="T:System.Security.Permissions.HostProtectionAttribute" />
+          . In a full-trust environment, the image is always loaded, without regard to the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
           
 
@@ -110,8 +105,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Security.Permissions.HostProtectionAttribute" />
+            >This constructor creates a <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
             
 
@@ -121,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.HostProtectionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
             
 
@@ -157,13 +150,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.HostProtectionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -171,12 +162,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -216,8 +210,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.IPermission" />
+            >An <see cref="T:System.Security.IPermission" />
 
             
 
@@ -321,8 +314,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.HostProtectionResource" />
+            >The <see cref="T:System.Security.Permissions.HostProtectionResource" />
 
             
 
@@ -357,8 +349,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The use of a <see
-             cref="T:System.Security.Principal.WindowsIdentity" />
+            >The use of a <see cref="T:System.Security.Principal.WindowsIdentity" />
 
             
 
@@ -436,8 +427,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" />
+            >When <see cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" />
 
             
 

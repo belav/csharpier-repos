@@ -38,28 +38,23 @@
          provides a mechanism by which toolbox items can be marked for use only with designers that have a matching attribute or code that determines whether the item should be enabled or disabled in the toolbox.</para
       >
       <para
-        >A <see
-         cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+        >A <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
 
         
 
-         can be applied to a <see
-         cref="T:System.Drawing.Design.ToolboxItem" />
+         can be applied to a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
         
 
-         to indicate a filter string and filter type that specify when to enable or disable the item. <see
-         cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+         to indicate a filter string and filter type that specify when to enable or disable the item. <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
 
         
 
-         can also be applied to a designer to indicate its requirements for enabling items in the toolbox. This type of attribute can be used to indicate that a toolbox item can only be enabled when a designer with a matching filter string is being used. The type of the filter is indicated in the <see
-         cref="P:System.ComponentModel.ToolboxItemFilterAttribute.FilterType" />
+         can also be applied to a designer to indicate its requirements for enabling items in the toolbox. This type of attribute can be used to indicate that a toolbox item can only be enabled when a designer with a matching filter string is being used. The type of the filter is indicated in the <see cref="P:System.ComponentModel.ToolboxItemFilterAttribute.FilterType" />
 
         
 
-         property by a <see
-         cref="T:System.ComponentModel.ToolboxItemFilterType" />
+         property by a <see cref="T:System.ComponentModel.ToolboxItemFilterType" />
 
         
 
@@ -96,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
 
             
 
@@ -105,7 +99,11 @@
           >
         </summary>
         <param name="filterString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -138,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
 
             
 
@@ -147,19 +144,26 @@
           >
         </summary>
         <param name="filterString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The filter string for the toolbox item. </param
         >
         <param name="filterType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.ToolboxItemFilterType" />
+          A <see cref="T:System.ComponentModel.ToolboxItemFilterType" />
 
           
 
@@ -190,7 +194,11 @@
         <returns>To be added: an object of type 'bool'</returns>
         <remarks>To be added</remarks>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -242,8 +250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the filter, along with any existing <see
-             cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+            >The type of the filter, along with any existing <see cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
 
             
 
@@ -307,7 +314,11 @@
           <para>true if the specified object has a matching filter string; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

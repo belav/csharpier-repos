@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Diagnostics.SymbolStore.ISymbolScope" />
+        >The <see cref="T:System.Diagnostics.SymbolStore.ISymbolScope" />
 
         
 
@@ -29,8 +28,7 @@
       >
       <block subset="none" type="note">
         <para
-          >This interface is the managed counterpart of the <unmanagedCodeEntityReference
-          >ISymUnmanagedScope</unmanagedCodeEntityReference>
+          >This interface is the managed counterpart of the <unmanagedCodeEntityReference>ISymUnmanagedScope</unmanagedCodeEntityReference>
 
           
 
@@ -41,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a lexical scope within <see
-         cref="T:System.Diagnostics.SymbolStore.ISymbolMethod" />
+        >Represents a lexical scope within <see cref="T:System.Diagnostics.SymbolStore.ISymbolMethod" />
 
         
 

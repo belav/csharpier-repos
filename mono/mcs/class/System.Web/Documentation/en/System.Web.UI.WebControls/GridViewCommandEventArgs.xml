@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+        >The <see cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
 
         
 
-         event is raised when a button within the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         event is raised when a button within the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -31,18 +29,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control also raises other specialized events when certain buttons are clicked (buttons with the CommandName property set to "Delete", "Update", and "Page" for example). When using one of these buttons, you should consider handling one of the specialized events provided by the control (such as <see
-           cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
+           control also raises other specialized events when certain buttons are clicked (buttons with the CommandName property set to "Delete", "Update", and "Page" for example). When using one of these buttons, you should consider handling one of the specialized events provided by the control (such as <see cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
 
           
 
-           or <see
-           cref="E:System.Web.UI.WebControls.GridView.RowDeleting" />
+           or <see cref="E:System.Web.UI.WebControls.GridView.RowDeleting" />
 
           
 
@@ -50,31 +45,26 @@
         >
       </block>
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
         
 
-         object is passed to the event-handling method, which allows you to determine the command name and command argument of the button clicked. To determine the command name and command argument, use the <see
-         cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+         object is passed to the event-handling method, which allows you to determine the command name and command argument of the button clicked. To determine the command name and command argument, use the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+         and <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
         
 
-         properties, respectively. You can also access the button control that raised the event by using the <see
-         cref="P:System.Web.UI.WebControls.GridViewCommandEventArgs.CommandSource" />
+         properties, respectively. You can also access the button control that raised the event by using the <see cref="P:System.Web.UI.WebControls.GridViewCommandEventArgs.CommandSource" />
 
         
 
          property.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -83,13 +73,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
         
 
-        , see the <see
-         cref="Overload:System.Web.UI.WebControls.GridViewCommandEventArgs.#ctor" />
+        , see the <see cref="Overload:System.Web.UI.WebControls.GridViewCommandEventArgs.#ctor" />
 
         
 
@@ -99,8 +87,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
 
         
 
@@ -126,16 +113,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
@@ -160,18 +145,15 @@
               </term>
               <description>
                 <para
-                  >The value of the <see
-                   cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+                   property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
-                   object contained in the <paramref
-                   name="originalArgs" />
+                   object contained in the <paramref name="originalArgs" />
 
                   
 
@@ -187,18 +169,15 @@
               </term>
               <description>
                 <para
-                  >The value of the <see
-                   cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+                   property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
-                   object contained in the <paramref
-                   name="originalArgs" />
+                   object contained in the <paramref name="originalArgs" />
 
                   
 
@@ -214,8 +193,7 @@
               </term>
               <description>
                 <para
-                  >The object contained in the <paramref
-                   name="commandSource" />
+                  >The object contained in the <paramref name="commandSource" />
 
                   
 
@@ -231,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
@@ -262,16 +239,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
@@ -296,18 +271,15 @@
               </term>
               <description>
                 <para
-                  >The value of the <see
-                   cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+                   property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
-                   object contained in the <paramref
-                   name="originalArgs" />
+                   object contained in the <paramref name="originalArgs" />
 
                   
 
@@ -323,18 +295,15 @@
               </term>
               <description>
                 <para
-                  >The value of the <see
-                   cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+                  >The value of the <see cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
                   
 
-                   property of the <see
-                   cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+                   property of the <see cref="T:System.Web.UI.WebControls.CommandEventArgs" />
 
                   
 
-                   object contained in the <paramref
-                   name="originalArgs" />
+                   object contained in the <paramref name="originalArgs" />
 
                   
 
@@ -350,8 +319,7 @@
               </term>
               <description>
                 <para
-                  >The object contained in the <paramref
-                   name="commandSource" />
+                  >The object contained in the <paramref name="commandSource" />
 
                   
 
@@ -367,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
@@ -376,12 +343,15 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.GridViewRow" />
+          A <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
           
 
@@ -404,18 +374,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewCommandEventArgs.CommandSource" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewCommandEventArgs.CommandSource" />
 
             
 
-             property to access the properties of the object that represents the source of the command. In the case of a <see
-             cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
+             property to access the properties of the object that represents the source of the command. In the case of a <see cref="T:System.Web.UI.WebControls.GridViewCommandEventArgs" />
 
             
 
-             object, the source of the command is the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             object, the source of the command is the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 

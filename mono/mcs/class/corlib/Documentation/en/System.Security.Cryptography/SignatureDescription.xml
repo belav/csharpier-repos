@@ -49,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.SignatureDescription" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SignatureDescription" />
 
             
 
@@ -83,13 +82,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.SignatureDescription" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.SignatureDescription" />
 
             
 
-             class from the specified <see
-             cref="T:System.Security.SecurityElement" />
+             class from the specified <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -97,12 +94,15 @@
           >
         </summary>
         <param name="el">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.SecurityElement" />
+          The <see cref="T:System.Security.SecurityElement" />
 
           
 
@@ -136,13 +136,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+            >Creates an <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
 
             
 
-             instance with the specified key using the <see
-             cref="P:System.Security.Cryptography.SignatureDescription.DeformatterAlgorithm" />
+             instance with the specified key using the <see cref="P:System.Security.Cryptography.SignatureDescription.DeformatterAlgorithm" />
 
             
 
@@ -152,8 +150,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+            >The newly created <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
 
             
 
@@ -161,12 +158,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to use in the <see
-           cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+          The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
 
           
 
@@ -198,13 +198,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Security.Cryptography.HashAlgorithm" />
+            >Creates a <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
             
 
-             instance using the <see
-             cref="P:System.Security.Cryptography.SignatureDescription.DigestAlgorithm" />
+             instance using the <see cref="P:System.Security.Cryptography.SignatureDescription.DigestAlgorithm" />
 
             
 
@@ -214,8 +212,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Security.Cryptography.HashAlgorithm" />
+            >The newly created <see cref="T:System.Security.Cryptography.HashAlgorithm" />
 
             
 
@@ -250,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+            >Creates an <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
 
             
 
-             instance with the specified key using the <see
-             cref="P:System.Security.Cryptography.SignatureDescription.FormatterAlgorithm" />
+             instance with the specified key using the <see cref="P:System.Security.Cryptography.SignatureDescription.FormatterAlgorithm" />
 
             
 
@@ -266,8 +261,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+            >The newly created <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
 
             
 
@@ -275,12 +269,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to use in the <see
-           cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+          The key to use in the <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
 
           
 

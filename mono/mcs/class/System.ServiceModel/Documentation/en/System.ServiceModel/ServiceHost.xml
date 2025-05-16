@@ -21,44 +21,37 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Implements the host used by the indigo1 service model programming model.</para>
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.ServiceHost" />
+        >Use the <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
-         class to configure and expose a service for use by client applications when you are not using Internet Information Services (IIS) or Windows Activation Services (WAS) to expose a service. Both IIS and WAS interact with a <see
-         cref="T:System.ServiceModel.ServiceHost" />
+         class to configure and expose a service for use by client applications when you are not using Internet Information Services (IIS) or Windows Activation Services (WAS) to expose a service. Both IIS and WAS interact with a <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
          object on your behalf.</para
       >
       <para
-        >To expose a service for use by callers, indigo2 requires a complete service description (represented by the <see
-         cref="T:System.ServiceModel.Description.ServiceDescription" />
+        >To expose a service for use by callers, indigo2 requires a complete service description (represented by the <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
         
 
-         class). The <see
-         cref="T:System.ServiceModel.ServiceHost" />
+         class). The <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
-         class creates a <see
-         cref="T:System.ServiceModel.Description.ServiceDescription" />
+         class creates a <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
         
 
-         from the service type and configuration information and then uses that description to create <see
-         cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+         from the service type and configuration information and then uses that description to create <see cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
         
 
          objects for each endpoint in the description. </para
       >
       <para
-        >Use a <see
-         cref="T:System.ServiceModel.ServiceHost" />
+        >Use a <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
@@ -86,18 +79,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >There are two constructors used to create an instance of the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+            >There are two constructors used to create an instance of the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
-             class. Use the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Type,System.Uri[])" />
+             class. Use the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Type,System.Uri[])" />
 
             
 
-             constructor which takes the service type as an input parameter, most of the time. The host can use this to create new services as needed. Use the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+             constructor which takes the service type as an input parameter, most of the time. The host can use this to create new services as needed. Use the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
 
             
 
@@ -107,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
@@ -145,31 +134,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor as an alternative to implementing a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+            >Use this constructor as an alternative to implementing a custom <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
 
             
 
              when you want to provide a specific object instance for use by a singleton service. You may want to use this overload when your service implementation type is difficult to construct (for example, if it does not implement a default public constructor that has no parameters). </para
           >
           <para
-            >Note that when an object is provided to this overload, some features related to the indigo1 instancing behavior work differently. For example, calling <see
-             cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+            >Note that when an object is provided to this overload, some features related to the indigo1 instancing behavior work differently. For example, calling <see cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
 
             
 
-             have no effect when a well-known object instance is provided using this constructor overload. Similarly, any other instance release mechanism is ignored. The <see
-             cref="T:System.ServiceModel.ServiceHost" />
+             have no effect when a well-known object instance is provided using this constructor overload. Similarly, any other instance release mechanism is ignored. The <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
-             always behaves as if the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+             always behaves as if the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
-             property is set to <see
-             cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+             property is set to <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
             
 
@@ -179,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
@@ -188,17 +171,19 @@
           >
         </summary>
         <param name="baseAddresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Array" />
+          An <see cref="T:System.Array" />
 
           
 
-           of type <see
-           cref="T:System.Uri" />
+           of type <see cref="T:System.Uri" />
 
           
 
@@ -233,8 +218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you have the service type and you can create new instances of it when needed, even when you need a singleton instance. Use the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+            >Use this constructor when you have the service type and you can create new instances of it when needed, even when you need a singleton instance. Use the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
 
             
 
@@ -244,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
@@ -253,19 +236,26 @@
           >
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of hosted service.</param
         >
         <param name="baseAddresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Uri" />
+          An array of type <see cref="T:System.Uri" />
 
           
 
@@ -303,8 +293,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -312,31 +301,41 @@
           >
         </returns>
         <param name="implementedContract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of contract for the endpoint added.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            for the endpoint added.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,8 +373,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -383,36 +381,45 @@
           >
         </returns>
         <param name="implementedContract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of contract for the endpoint added.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            for the endpoint added.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -454,8 +461,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -463,43 +469,56 @@
           >
         </returns>
         <param name="implementedContract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of contract for the endpoint added.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            for the endpoint added.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The endpoint address for the service.</param
         >
         <param name="listenUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -541,8 +560,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -550,48 +568,60 @@
           >
         </returns>
         <param name="implementedContract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of contract for the endpoint added.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            for the endpoint added.</param
         >
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that contains the address for the endpoint added.</param
         >
         <param name="listenUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -657,12 +687,15 @@
           <para>Initializes a description of the service hosted based on its instance and specified base addresses.</para>
         </summary>
         <param name="baseAddresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+          The <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
 
           
 
@@ -697,24 +730,30 @@
           <para>Initializes a description of the service hosted based on its type and specified base addresses.</para>
         </summary>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of service hosted.</param
         >
         <param name="baseAddresses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+          The <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
 
           
 
@@ -737,8 +776,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+            >Use the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
 
             
 

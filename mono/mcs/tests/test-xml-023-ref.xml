@@ -4,8 +4,7 @@
     <name>test-xml-023</name>
   </assembly>
   <members>
-    <member name="M:Test.Foo(Test.A,System.Int32)"
-      >
+    <member name="M:Test.Foo(Test.A,System.Int32)">
             here is a documentation
         </member
     >

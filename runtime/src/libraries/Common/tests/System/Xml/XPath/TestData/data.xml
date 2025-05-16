@@ -17,11 +17,9 @@
     <author id="2">
       <first-name>Mary</first-name>
       <last-name>Bob</last-name>
-      <publication
-        >
+      <publication>
 				Publication 1
-				<first-name
-        >Mary</first-name>
+				<first-name>Mary</first-name>
         <last-name>Bob</last-name>
       </publication>
     </author>
@@ -48,15 +46,11 @@
     <price>3.95</price>
     <publisher>Ziff Davis</publisher>
     <articles>
-      <story1
-        >Create a dream PC
-				<details
-        >Create a list of needed hardware</details>
-      </story1>
+      <story1>Create a dream PC
+				<details>Create a list of needed hardware</details></story1>
       <story2
         >The future of the web
-				<details
-        >Can Netscape stay alive with Microsoft eating up its browser share?</details>
+				<details>Can Netscape stay alive with Microsoft eating up its browser share?</details>
         <stock>MSFT 99.30</stock>
         <date>1998-06-23</date>
       </story2>
@@ -79,11 +73,9 @@
     <author>
       <first.name>Mary F</first.name>
       <last-name>Robinson</last-name>
-      <publication
-        >
+      <publication>
 				Publication 2
-				<first.name
-        >Mary F</first.name>
+				<first.name>Mary F</first.name>
         <last-name>Robinson</last-name>
       </publication>
     </author>
@@ -101,11 +93,9 @@
       <first-name>Mary F</first-name>
       <last-name>Robinson</last-name>
       <award>Pulizer</award>
-      <publication
-        >
+      <publication>
 				Selected Short Stories of
-				<first-name
-        >Mary F</first-name>
+				<first-name>Mary F</first-name>
         <last-name>Robinson</last-name>
       </publication>
     </author>
@@ -149,8 +139,7 @@
       <p
         >But then all nights in Trenton seem dark and
 			stormy to someone who has gone through what
-			<emph
-        >I</emph>
+			<emph>I</emph>
 
         
 

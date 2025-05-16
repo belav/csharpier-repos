@@ -24,33 +24,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.BStrWrapper" />
+        >The <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
         
 
-         class controls how the wrapped object is marshaled when passed as VARIANT. You can wrap a <see
-         cref="T:System.String" />
+         class controls how the wrapped object is marshaled when passed as VARIANT. You can wrap a <see cref="T:System.String" />
 
         
 
-         object in a <see
-         cref="T:System.Runtime.InteropServices.BStrWrapper" />
+         object in a <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
         
 
-         object to marshal it as VT_BSTR. <see
-         cref="T:System.Runtime.InteropServices.BStrWrapper" />
+         object to marshal it as VT_BSTR. <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
         
 
-         is useful when passing a null string to unmanaged code. Without <see
-         cref="T:System.Runtime.InteropServices.BStrWrapper" />
+         is useful when passing a null string to unmanaged code. Without <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
         
 
-        , a null string is passed as VT_EMPTY; however, wrapping the string with <see
-         cref="T:System.Runtime.InteropServices.BStrWrapper" />
+        , a null string is passed as VT_EMPTY; however, wrapping the string with <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
         
 
@@ -81,13 +75,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.BStrWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
             
 
-             class with the specified <see
-             cref="T:System.Object" />
+             class with the specified <see cref="T:System.Object" />
 
             
 
@@ -95,7 +87,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -123,13 +119,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.BStrWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.BStrWrapper" />
 
             
 
-             class with the specified <see
-             cref="T:System.String" />
+             class with the specified <see cref="T:System.String" />
 
             
 
@@ -137,7 +131,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -163,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the wrapped <see
-             cref="T:System.String" />
+            >Gets the wrapped <see cref="T:System.String" />
 
             
 

@@ -56,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
 
             
 
@@ -93,12 +92,15 @@
           <para>The key for the specified URI from the collection.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -133,19 +135,26 @@
           <para>Inserts a URI into the collection at a specified location.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index that specifies the insertion location for the item in the collection.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -180,19 +189,26 @@
           <para>Replaces a URI at a specified location of the collection with a new URI.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index that specifies the insertion location for the URI in the collection.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 

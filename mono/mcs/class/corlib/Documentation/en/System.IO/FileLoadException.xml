@@ -36,21 +36,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the error that occurs when a <see
-         cref="T:System.Reflection.Assembly" />
+        >Represents the error that occurs when a <see cref="T:System.Reflection.Assembly" />
 
         
 
          file is found but cannot be loaded.</para
       >
       <para
-        >The <see
-         cref="T:System.IO.FileNotFoundException" />
+        >The <see cref="T:System.IO.FileNotFoundException" />
 
         
 
-         exception is thrown when the file fails to load because it cannot be located. If the file is located, but cannot be loaded due to insufficient permissions, a <see
-         cref="T:System.Security.SecurityException" />
+         exception is thrown when the file fails to load because it cannot be located. If the file is located, but cannot be loaded due to insufficient permissions, a <see cref="T:System.Security.SecurityException" />
 
         
 
@@ -58,8 +55,7 @@
       >
       <para>FileLoadException has the default HRESULT of COR_E_FILELOAD, which has the value 0x80131621, but this is not the only possible HRESULT.</para>
       <para
-        >If your code does not have <see
-         cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+        >If your code does not have <see cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
 
         
 
@@ -68,19 +64,19 @@
       <block subset="none" type="note">
         <para
           >This exception is not included in the <see
-           cref="http://go.microsoft.com/fwlink/?LinkID=247912">.NET for Windows Store apps</see>
+            cref="http://go.microsoft.com/fwlink/?LinkID=247912"
+            >.NET for Windows Store apps</see
+          >
 
           
 
-           or the <format
-           type="text/html">
+           or the <format type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
           </format>
 
           
 
-          , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
-           cref="T:System.IO.IOException" />
+          , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see cref="T:System.IO.IOException" />
 
           
 
@@ -116,13 +112,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Exception.InnerException" />
+            >The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property and <see
-             cref="P:System.IO.FileLoadException.FileName" />
+             property and <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
@@ -132,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileLoadException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileLoadException" />
 
             
 
-             class, setting the <see
-             cref="P:System.Exception.Message" />
+             class, setting the <see cref="P:System.Exception.Message" />
 
             
 
@@ -172,23 +164,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.FileLoadException.Message" />
+            >This constructor initializes the <see cref="P:System.IO.FileLoadException.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
-            . The <see
-             cref="P:System.Exception.InnerException" />
+            . The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property and <see
-             cref="P:System.IO.FileLoadException.FileName" />
+             property and <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
@@ -198,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileLoadException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -207,17 +194,19 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that describes the error. The content of <paramref
-           name="message" />
+           that describes the error. The content of <paramref name="message" />
 
           
 
@@ -250,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileLoadException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -259,24 +247,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -310,12 +304,15 @@
       </Parameters>
       <Docs>
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 
@@ -324,16 +321,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
              property. The InnerException property returns the same value that is passed into the constructor, or null if the InnerException property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.IO.FileLoadException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -372,8 +367,7 @@
             </item>
           </list>
           <para
-            >For more information on inner exceptions, see <see
-             cref="P:System.Exception.InnerException" />
+            >For more information on inner exceptions, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -383,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileLoadException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -392,29 +385,34 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that describes the error. The content of <paramref
-           name="message" />
+           that describes the error. The content of <paramref name="message" />
 
           
 
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 
@@ -451,28 +449,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.IO.FileLoadException.Message" />
+            >This constructor initializes the <see cref="P:System.IO.FileLoadException.Message" />
 
             
 
-             property of the new instance using <paramref
-             name="message" />
+             property of the new instance using <paramref name="message" />
 
             
 
-             and the <see
-             cref="P:System.IO.FileLoadException.FileName" />
+             and the <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
-             property using <paramref
-             name="fileName" />
+             property using <paramref name="fileName" />
 
             
 
-            . The <see
-             cref="P:System.Exception.InnerException" />
+            . The <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -489,8 +482,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileLoadException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -498,29 +490,34 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that describes the error. The content of <paramref
-           name="message" />
+           that describes the error. The content of <paramref name="message" />
 
           
 
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -556,12 +553,15 @@
       </Parameters>
       <Docs>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -570,8 +570,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -585,8 +584,7 @@
              is not required to be a file stored on disk; it can be any part of a system that supports access to streams. For example, depending on the system, this class might be able to access a physical device.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.IO.FileLoadException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -625,8 +623,7 @@
             </item>
           </list>
           <para
-            >For more information on inner exceptions, see <see
-             cref="P:System.Exception.InnerException" />
+            >For more information on inner exceptions, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -636,8 +633,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileLoadException" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -645,41 +641,49 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that describes the error. The content of <paramref
-           name="message" />
+           that describes the error. The content of <paramref name="message" />
 
           
 
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            containing the name of the file that was not loaded. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 
@@ -708,8 +712,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -777,8 +780,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -786,24 +788,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -831,8 +839,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -843,36 +850,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property overrides <see
-             cref="P:System.Exception.Message" />
+            >This property overrides <see cref="P:System.Exception.Message" />
 
             
 
             .</para
           >
           <para
-            >If no message was supplied to the constructor for the current exception, this property returns a system-supplied error message. If the <see
-             cref="P:System.IO.FileLoadException.FileName" />
+            >If no message was supplied to the constructor for the current exception, this property returns a system-supplied error message. If the <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
-             property is not a null reference, the message includes the file name, for example, "Unable to load file a <paramref
-             name="FileName" />
+             property is not a null reference, the message includes the file name, for example, "Unable to load file a <paramref name="FileName" />
 
             
 
-            ." (a <paramref
-             name="FileName" />
+            ." (a <paramref name="FileName" />
 
             
 
-             represents the value returned by <see
-             cref="P:System.IO.FileLoadException.FileName" />
+             represents the value returned by <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
-            .) If <see
-             cref="P:System.IO.FileLoadException.FileName" />
+            .) If <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
@@ -911,26 +912,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.ToString" />
+            >This method overrides <see cref="M:System.Object.ToString" />
 
             
 
             .</para
           >
           <para
-            >The string representation returned by this method includes the name of the exception, the value of the <see
-             cref="P:System.IO.FileLoadException.Message" />
+            >The string representation returned by this method includes the name of the exception, the value of the <see cref="P:System.IO.FileLoadException.Message" />
 
             
 
-             the value of the <see
-             cref="P:System.IO.FileLoadException.FileName" />
+             the value of the <see cref="P:System.IO.FileLoadException.FileName" />
 
             
 
-             property, and the result of calling <see
-             cref="P:System.Environment.StackTrace" />
+             property, and the result of calling <see cref="P:System.Environment.StackTrace" />
 
             
 
@@ -944,8 +941,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the fully qualified name of this exception, and possibly the error message, the name of the inner exception, and the stack trace, depending on which <see
-             cref="T:System.IO.FileLoadException" />
+            >A string containing the fully qualified name of this exception, and possibly the error message, the name of the inner exception, and the stack trace, depending on which <see cref="T:System.IO.FileLoadException" />
 
             
 

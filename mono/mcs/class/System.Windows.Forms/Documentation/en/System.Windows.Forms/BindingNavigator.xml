@@ -37,51 +37,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+        >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         control represents a standardized way to navigate and manipulate data on a form. In most cases, a <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+         control represents a standardized way to navigate and manipulate data on a form. In most cases, a <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         is paired with a <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         is paired with a <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
-         control to move through data records on a form and interact with them. In these cases, the <see
-         cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+         control to move through data records on a form and interact with them. In these cases, the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
         
 
-         property is set to the associated <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         property is set to the associated <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
          component that acts as a data source.</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+        >By default, the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         control's user interface (UI) is composed of a series of <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         control's user interface (UI) is composed of a series of <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         buttons, text boxes, and static text elements for most common data-related actions, such as adding data, deleting data, and navigating through data. Each of these controls can be retrieved or set through an associated member of the <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+         buttons, text boxes, and static text elements for most common data-related actions, such as adding data, deleting data, and navigating through data. Each of these controls can be retrieved or set through an associated member of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         control. Likewise, there is also a one-to-one correspondence to members within the <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         control. Likewise, there is also a one-to-one correspondence to members within the <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
@@ -251,13 +242,11 @@
         </item>
       </list>
       <para
-        >Adding a <see
-         cref="T:System.Windows.Forms.BindingNavigator" />
+        >Adding a <see cref="T:System.Windows.Forms.BindingNavigator" />
 
         
 
-         control to a form and binding it to a data source, such as a <see
-         cref="T:System.Windows.Forms.BindingSource" />
+         control to a form and binding it to a data source, such as a <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
@@ -267,28 +256,23 @@
       <list type="bullet">
         <item>
           <para
-            >Create the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Create the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             with the <see
-             cref="M:System.Windows.Forms.BindingNavigator.#ctor(System.Boolean)" />
+             with the <see cref="M:System.Windows.Forms.BindingNavigator.#ctor(System.Boolean)" />
 
             
 
-             constructor, which accepts a Boolean <paramref
-             name="addStandardItems" />
+             constructor, which accepts a Boolean <paramref name="addStandardItems" />
 
             
 
-             parameter, and set this parameter to false. Then add the desired <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             parameter, and set this parameter to false. Then add the desired <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             objects to the <see
-             cref="P:System.Windows.Forms.ToolStrip.Items" />
+             objects to the <see cref="P:System.Windows.Forms.ToolStrip.Items" />
 
             
 
@@ -297,13 +281,11 @@
         </item>
         <item>
           <para
-            >If a great deal of customization is desired, or the custom design will be reused, derive a class from <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >If a great deal of customization is desired, or the custom design will be reused, derive a class from <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             and override the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+             and override the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
@@ -334,18 +316,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+            >The default constructor sets the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property to null. This constructor is equivalent to calling the <see
-             cref="M:System.Windows.Forms.BindingNavigator.#ctor(System.Boolean)" />
+             property to null. This constructor is equivalent to calling the <see cref="M:System.Windows.Forms.BindingNavigator.#ctor(System.Boolean)" />
 
             
 
-             constructor with a parameter value of false. You can add the standard items by making a separate call to <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+             constructor with a parameter value of false. You can add the standard items by making a separate call to <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
@@ -355,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -378,53 +356,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+            >This constructor sets the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property to null. If <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+             property to null. If <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
-             is false, <see
-             cref="P:System.Windows.Forms.BindingNavigator.AddNewItem" />
+             is false, <see cref="P:System.Windows.Forms.BindingNavigator.AddNewItem" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingNavigator.MoveFirstItem" />
+            , <see cref="P:System.Windows.Forms.BindingNavigator.MoveFirstItem" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingNavigator.MoveLastItem" />
+            , <see cref="P:System.Windows.Forms.BindingNavigator.MoveLastItem" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />
+            , <see cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingNavigator.MovePreviousItem" />
+            , <see cref="P:System.Windows.Forms.BindingNavigator.MovePreviousItem" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingNavigator.DeleteItem" />
+            , <see cref="P:System.Windows.Forms.BindingNavigator.DeleteItem" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+            , <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
+             and <see cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
 
             
 
@@ -434,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -443,7 +410,11 @@
           >
         </summary>
         <param name="addStandardItems">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -472,18 +443,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is provided as a convenience, combining the steps of creating a new <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >This constructor is provided as a convenience, combining the steps of creating a new <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control and adding it to a parent <see
-             cref="T:System.ComponentModel.IContainer" />
+             control and adding it to a parent <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-            . Like the default constructor, it sets the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+            . Like the default constructor, it sets the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
@@ -493,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -502,17 +469,19 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IContainer" />
+          The <see cref="T:System.ComponentModel.IContainer" />
 
           
 
-           to add the new <see
-           cref="T:System.Windows.Forms.BindingNavigator" />
+           to add the new <see cref="T:System.Windows.Forms.BindingNavigator" />
 
           
 
@@ -536,23 +505,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref
-             name="BindingSource" />
+            >This constructor uses the <paramref name="BindingSource" />
 
             
 
-             parameter to initialize the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             parameter to initialize the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property. It also adds the standard set of navigational buttons and sets their corresponding properties, such as <see
-             cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+             property. It also adds the standard set of navigational buttons and sets their corresponding properties, such as <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />
+             and <see cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />
 
             
 
@@ -562,13 +527,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             class with the specified <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             class with the specified <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -576,12 +539,15 @@
           >
         </summary>
         <param name="bindingSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.BindingSource" />
+          The <see cref="T:System.Windows.Forms.BindingSource" />
 
           
 
@@ -611,67 +577,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set, the <see
-             cref="P:System.Windows.Forms.BindingNavigator.AddNewItem" />
+            >When set, the <see cref="P:System.Windows.Forms.BindingNavigator.AddNewItem" />
 
             
 
-             property generates the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+             property generates the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event handler for the <ui
-            >Add New</ui>
+             event handler for the <ui>Add New</ui>
 
             
 
-             button. This event handler calls the <see
-             cref="M:System.Windows.Forms.BindingSource.AddNew" />
+             button. This event handler calls the <see cref="M:System.Windows.Forms.BindingSource.AddNew" />
 
             
 
-             method when the <ui
-            >Add New</ui>
+             method when the <ui>Add New</ui>
 
             
 
              button is clicked at run time.</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control will disable the <ui
-            >Add New</ui>
+             control will disable the <ui>Add New</ui>
 
             
 
-             button if the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             button if the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property is null or the <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+             property is null or the <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
              property is false.</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -681,13 +636,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that represents the <ui
-            >Add New</ui>
+             that represents the <ui>Add New</ui>
 
             
 
@@ -710,51 +663,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >The <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
-             method adds the standard set of user interface <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             method adds the standard set of user interface <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             objects to the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             objects to the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             tool strip for basic navigation operations, such as <ui
-            >Move First</ui>
+             tool strip for basic navigation operations, such as <ui>Move First</ui>
 
             
 
-            , <ui
-            >Move Last</ui>
+            , <ui>Move Last</ui>
 
             
 
-            , and <ui
-            >Add New</ui>
+            , and <ui>Add New</ui>
 
             
 
             . </para
           >
           <para
-            >Override <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >Override <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
-             in derived classes to define additional or alternative tool strip items. To ensure optimal design-time support for your derived class, make sure each item has a meaningful value in its <see
-             cref="P:System.Windows.Forms.ToolStripItem.Name" />
+             in derived classes to define additional or alternative tool strip items. To ensure optimal design-time support for your derived class, make sure each item has a meaningful value in its <see cref="P:System.Windows.Forms.ToolStripItem.Name" />
 
             
 
-             property. At design time, this will be used to generate a unique name for the corresponding member variable. The item's <see
-             cref="P:System.Windows.Forms.ToolStripItem.Name" />
+             property. At design time, this will be used to generate a unique name for the corresponding member variable. The item's <see cref="P:System.Windows.Forms.ToolStripItem.Name" />
 
             
 
@@ -762,53 +706,43 @@
           >
           <block subset="none" type="note">
             <para
-              >This method does not explicitly remove any previously existing items from the <see
-               cref="T:System.Windows.Forms.BindingNavigator" />
+              >This method does not explicitly remove any previously existing items from the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
               
 
-              , but does set new values for the <see
-               cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />
+              , but does set new values for the <see cref="P:System.Windows.Forms.BindingNavigator.MoveNextItem" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.BindingNavigator.MovePreviousItem" />
+              , <see cref="P:System.Windows.Forms.BindingNavigator.MovePreviousItem" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.BindingNavigator.MoveFirstItem" />
+              , <see cref="P:System.Windows.Forms.BindingNavigator.MoveFirstItem" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.BindingNavigator.MoveLastItem" />
+              , <see cref="P:System.Windows.Forms.BindingNavigator.MoveLastItem" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
+              , <see cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+              , <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
               
 
-              , <see
-               cref="P:System.Windows.Forms.BindingNavigator.AddNewItem" />
+              , <see cref="P:System.Windows.Forms.BindingNavigator.AddNewItem" />
 
               
 
-               and <see
-               cref="P:System.Windows.Forms.BindingNavigator.DeleteItem" />
+               and <see cref="P:System.Windows.Forms.BindingNavigator.DeleteItem" />
 
               
 
-               properties. Also <see
-               cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+               properties. Also <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
               
 
@@ -819,8 +753,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the standard set of navigation items to the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Adds the standard set of navigation items to the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -843,28 +776,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
+            >The <see cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
+             and <see cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
 
             
 
-             methods allow the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             methods allow the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control to optimize changes to multiple properties. Using this pair of methods, you can initialize co-dependent properties or batch set multiple properties at design time. Call the <see
-             cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
+             control to optimize changes to multiple properties. Using this pair of methods, you can initialize co-dependent properties or batch set multiple properties at design time. Call the <see cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
 
             
 
-             method to signal the control that initialization is starting; call the <see
-             cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
+             method to signal the control that initialization is starting; call the <see cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
 
             
 
@@ -874,13 +802,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disables updates to the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Disables updates to the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             controls of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             controls of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -914,31 +840,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+            >The <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property represents the data source that the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             property represents the data source that the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             navigates through. More specifically, the <see
-             cref="P:System.Windows.Forms.BindingSource.List" />
+             navigates through. More specifically, the <see cref="P:System.Windows.Forms.BindingSource.List" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             property of the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
              represents the actual data list.</para
           >
           <para
-            >This is the default property for the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >This is the default property for the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -948,8 +869,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -980,34 +900,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+            >The <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
             
 
-             property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+             property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The count of items is accessed through the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+            >The count of items is accessed through the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             property of the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
             .</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
@@ -1017,13 +932,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that displays the total number of items in the associated <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             that displays the total number of items in the associated <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -1046,31 +959,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+            >The <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
             
 
-             control is a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+             control is a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
-             that displays the total number of items in the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             that displays the total number of items in the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-            . The <see
-             cref="P:System.Windows.Forms.BindingNavigator.CountItemFormat" />
+            . The <see cref="P:System.Windows.Forms.BindingNavigator.CountItemFormat" />
 
             
 
              property is the format string used to format the count.</para
           >
           <para
-            >For more information about format strings, see the <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >For more information about format strings, see the <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -1080,8 +988,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a string used to format the information displayed in the <see
-             cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+            >Gets or sets a string used to format the information displayed in the <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
             
 
@@ -1112,67 +1019,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set, this property generates the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >When set, this property generates the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event handler for the <ui
-            >Delete</ui>
+             event handler for the <ui>Delete</ui>
 
             
 
-             button. This event handler calls the <see
-             cref="M:System.Windows.Forms.BindingSource.RemoveCurrent" />
+             button. This event handler calls the <see cref="M:System.Windows.Forms.BindingSource.RemoveCurrent" />
 
             
 
-             method when the <ui
-            >Delete</ui>
+             method when the <ui>Delete</ui>
 
             
 
              button is clicked at run time.</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control will disable the <ui
-            >Delete</ui>
+             control will disable the <ui>Delete</ui>
 
             
 
-             button under the following run-time circumstances: the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property is null, the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+             property is null, the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
-             property is 0, or the <see
-             cref="P:System.Windows.Forms.BindingSource.AllowRemove" />
+             property is 0, or the <see cref="P:System.Windows.Forms.BindingSource.AllowRemove" />
 
             
 
              property is false.</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -1182,13 +1078,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is associated with the <ui
-            >Delete</ui>
+             that is associated with the <ui>Delete</ui>
 
             
 
@@ -1213,36 +1107,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -1252,8 +1140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -1261,7 +1148,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1283,28 +1174,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
+            >The <see cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
+             and <see cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
 
             
 
-             methods allow the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             methods allow the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control to optimize changes to multiple properties. Using this pair of methods, you can initialize co-dependent properties or batch set multiple properties at design time. Call the <see
-             cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
+             control to optimize changes to multiple properties. Using this pair of methods, you can initialize co-dependent properties or batch set multiple properties at design time. Call the <see cref="M:System.Windows.Forms.BindingNavigator.BeginInit" />
 
             
 
-             method to signal the control that initialization is starting; call the <see
-             cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
+             method to signal the control that initialization is starting; call the <see cref="M:System.Windows.Forms.BindingNavigator.EndInit" />
 
             
 
@@ -1314,13 +1200,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables updates to the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Enables updates to the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             controls of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             controls of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -1351,72 +1235,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set, this property generates the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >When set, this property generates the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event handler for the <ui
-            >Move First</ui>
+             event handler for the <ui>Move First</ui>
 
             
 
-             button. This event handler calls the <see
-             cref="M:System.Windows.Forms.BindingSource.MoveFirst" />
+             button. This event handler calls the <see cref="M:System.Windows.Forms.BindingSource.MoveFirst" />
 
             
 
-             method when the <ui
-            >Move First</ui>
+             method when the <ui>Move First</ui>
 
             
 
              button is clicked at run time.</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control will disable the <ui
-            >Move First</ui>
+             control will disable the <ui>Move First</ui>
 
             
 
-             button under the following run-time circumstances: the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property is null, the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+             property is null, the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property is zero, or <see
-             cref="P:System.Windows.Forms.BindingSource.AllowNew" />
+             property is zero, or <see cref="P:System.Windows.Forms.BindingSource.AllowNew" />
 
             
 
-             for the related <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             for the related <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
              is false.</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -1426,13 +1298,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is associated with the <ui
-            >Move First</ui>
+             that is associated with the <ui>Move First</ui>
 
             
 
@@ -1463,67 +1333,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set, this property generates the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >When set, this property generates the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event handler for the <ui
-            >Move Last</ui>
+             event handler for the <ui>Move Last</ui>
 
             
 
-             button. This event handler calls the <see
-             cref="M:System.Windows.Forms.BindingSource.MoveLast" />
+             button. This event handler calls the <see cref="M:System.Windows.Forms.BindingSource.MoveLast" />
 
             
 
-             method when the <ui
-            >Move Last</ui>
+             method when the <ui>Move Last</ui>
 
             
 
              button is clicked at run time.</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control will disable the <ui
-            >Move Last</ui>
+             control will disable the <ui>Move Last</ui>
 
             
 
-             button under the following run-time circumstances: the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property is null or the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+             property is null or the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property is greater than or equal to the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+             property is greater than or equal to the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
              property.</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -1533,13 +1392,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is associated with the <ui
-            >Move Last</ui>
+             that is associated with the <ui>Move Last</ui>
 
             
 
@@ -1570,67 +1427,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set, this property generates the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+            >When set, this property generates the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event handler for the <ui
-            >Move Next</ui>
+             event handler for the <ui>Move Next</ui>
 
             
 
-             button. This event handler calls the <see
-             cref="M:System.Windows.Forms.BindingSource.MoveNext" />
+             button. This event handler calls the <see cref="M:System.Windows.Forms.BindingSource.MoveNext" />
 
             
 
-             method when the <ui
-            >Move Next</ui>
+             method when the <ui>Move Next</ui>
 
             
 
              button is clicked at run time.</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control will disable the<ui
-            > Move Next</ui>
+             control will disable the<ui> Move Next</ui>
 
             
 
-             button under the following run-time circumstances: the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property is null or the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+             property is null or the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property is greater than or equal to the <see
-             cref="P:System.Windows.Forms.BindingSource.Count" />
+             property is greater than or equal to the <see cref="P:System.Windows.Forms.BindingSource.Count" />
 
             
 
              property. </para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -1640,13 +1486,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is associated with the <ui
-            >Move Next</ui>
+             that is associated with the <ui>Move Next</ui>
 
             
 
@@ -1677,67 +1521,56 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set, the <see
-             cref="P:System.Windows.Forms.BindingNavigator.MovePreviousItem" />
+            >When set, the <see cref="P:System.Windows.Forms.BindingNavigator.MovePreviousItem" />
 
             
 
-             property generates the <see
-             cref="E:System.Windows.Forms.Control.Click" />
+             property generates the <see cref="E:System.Windows.Forms.Control.Click" />
 
             
 
-             event handler for the <ui
-            >Move Previous</ui>
+             event handler for the <ui>Move Previous</ui>
 
             
 
-             button. This event handler calls the <see
-             cref="M:System.Windows.Forms.BindingSource.MovePrevious" />
+             button. This event handler calls the <see cref="M:System.Windows.Forms.BindingSource.MovePrevious" />
 
             
 
-             method when the <ui
-            >Move Previous</ui>
+             method when the <ui>Move Previous</ui>
 
             
 
              button is clicked at run time.</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >The <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             control will disable the <ui
-            >Move Previous</ui>
+             control will disable the <ui>Move Previous</ui>
 
             
 
-             button under the following run-time circumstances: the <see
-             cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
+             button under the following run-time circumstances: the <see cref="P:System.Windows.Forms.BindingNavigator.BindingSource" />
 
             
 
-             property is null or the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+             property is null or the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
              property is less than or equal to 0.</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -1747,13 +1580,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that is associated with the <ui
-            >Move Previous</ui>
+             that is associated with the <ui>Move Previous</ui>
 
             
 
@@ -1776,18 +1607,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In addition to raising the corresponding <see
-             cref="E:System.Windows.Forms.BindingNavigator.RefreshItems" />
+            >In addition to raising the corresponding <see cref="E:System.Windows.Forms.BindingNavigator.RefreshItems" />
 
             
 
-             event, the <see
-             cref="M:System.Windows.Forms.BindingNavigator.OnRefreshItems" />
+             event, the <see cref="M:System.Windows.Forms.BindingNavigator.OnRefreshItems" />
 
             
 
-             method performs the following operations against the state of the associated <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             method performs the following operations against the state of the associated <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -1796,8 +1624,7 @@
           <list type="bullet">
             <item>
               <para
-                >Sets the internal members using the current <see
-                 cref="T:System.Windows.Forms.BindingSource" />
+                >Sets the internal members using the current <see cref="T:System.Windows.Forms.BindingSource" />
 
                 
 
@@ -1806,8 +1633,7 @@
             </item>
             <item>
               <para
-                >Enables or disables user interface (UI) items appropriately for the current <see
-                 cref="T:System.Windows.Forms.BindingSource" />
+                >Enables or disables user interface (UI) items appropriately for the current <see cref="T:System.Windows.Forms.BindingSource" />
 
                 
 
@@ -1816,13 +1642,11 @@
             </item>
             <item>
               <para
-                >Updates the <see
-                 cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
+                >Updates the <see cref="P:System.Windows.Forms.BindingNavigator.CountItem" />
 
                 
 
-                 and <see
-                 cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
+                 and <see cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
 
                 
 
@@ -1831,8 +1655,7 @@
             </item>
           </list>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1841,8 +1664,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.BindingNavigator.OnRefreshItems" />
+            >The <see cref="M:System.Windows.Forms.BindingNavigator.OnRefreshItems" />
 
             
 
@@ -1852,8 +1674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.BindingNavigator.RefreshItems" />
+            >Raises the <see cref="E:System.Windows.Forms.BindingNavigator.RefreshItems" />
 
             
 
@@ -1884,42 +1705,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the default implementation, the <see
-             cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
+            >In the default implementation, the <see cref="P:System.Windows.Forms.BindingNavigator.PositionItem" />
 
             
 
-             property is of type <see
-             cref="T:System.Windows.Forms.ToolStripTextBox" />
+             property is of type <see cref="T:System.Windows.Forms.ToolStripTextBox" />
 
             
 
             .</para
           >
           <para
-            >This property is null if it was not previously set and it is accessed before the <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >This property is null if it was not previously set and it is accessed before the <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
              method is implicitly or explicitly called.</para
           >
           <para
-            >The current position calculated by obtaining the <see
-             cref="P:System.Windows.Forms.BindingSource.Position" />
+            >The current position calculated by obtaining the <see cref="P:System.Windows.Forms.BindingSource.Position" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             property of the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
             , and adding 1 to transform the position into a 1-based count.</para
           >
           <para
-            >In the default implementation, this property represents a control of type <see
-             cref="T:System.Windows.Forms.ToolStripTextBox" />
+            >In the default implementation, this property represents a control of type <see cref="T:System.Windows.Forms.ToolStripTextBox" />
 
             
 
@@ -1929,13 +1744,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-             that displays the current position within the <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             that displays the current position within the <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
@@ -1957,26 +1770,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.BindingNavigator.RefreshItems" />
+            >The <see cref="E:System.Windows.Forms.BindingNavigator.RefreshItems" />
 
             
 
-             event signals that the navigational UI of the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             event signals that the navigational UI of the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
-             needs to be updated to reflect the current state of the associated <see
-             cref="T:System.Windows.Forms.BindingSource" />
+             needs to be updated to reflect the current state of the associated <see cref="T:System.Windows.Forms.BindingSource" />
 
             
 
             .</para
           >
           <para
-            >This is the default event for the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >This is the default event for the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -2008,18 +1817,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you have overridden <see
-             cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
+            >If you have overridden <see cref="M:System.Windows.Forms.BindingNavigator.AddStandardItems" />
 
             
 
-             in a derived class, you should also override <see
-             cref="M:System.Windows.Forms.BindingNavigator.RefreshItemsCore" />
+             in a derived class, you should also override <see cref="M:System.Windows.Forms.BindingNavigator.RefreshItemsCore" />
 
             
 
-             to refresh any custom standard items you have added to the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+             to refresh any custom standard items you have added to the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -2046,8 +1852,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to confirm focus can shift before performing the click action for an item on the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >Use this method to confirm focus can shift before performing the click action for an item on the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 
@@ -2061,8 +1866,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if validation was successful and focus can shift to the <see
-             cref="T:System.Windows.Forms.BindingNavigator" />
+            >true if validation was successful and focus can shift to the <see cref="T:System.Windows.Forms.BindingNavigator" />
 
             
 

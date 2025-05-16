@@ -56,13 +56,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see
-             cref="T:System.Xml.XmlEntityReference" />
+            >Do not instantiate an <see cref="T:System.Xml.XmlEntityReference" />
 
             
 
-             directly; instead, use methods such as <see
-             cref="M:System.Xml.XmlDocument.CreateEntityReference" />
+             directly; instead, use methods such as <see cref="M:System.Xml.XmlDocument.CreateEntityReference" />
 
             
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlEntityReference" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlEntityReference" />
 
             
 
@@ -81,19 +78,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the entity reference; see the <see
-           cref="P:System.Xml.XmlEntityReference.Name" />
+          The name of the entity reference; see the <see cref="P:System.Xml.XmlEntityReference.Name" />
 
           
 
            property.</param
         >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A networked XML document is comprised of chunks of data aggregated using various World Wide Web Consortium (W3C) standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from. If there is no base URI for the nodes being returned (maybe they were parsed from an in-memory string), <see
-             cref="F:System.String.Empty" />
+            >A networked XML document is comprised of chunks of data aggregated using various World Wide Web Consortium (W3C) standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from. If there is no base URI for the nodes being returned (maybe they were parsed from an in-memory string), <see cref="F:System.String.Empty" />
 
             
 
@@ -127,8 +130,7 @@
           >
           <para>BaseURI walks the node tree looking for entity reference boundaries, so if entities are expanded, this information is not preserved and this property returns the location of the XmlDocument in all cases.</para>
           <para
-            >For additional information on BaseURI and how it behaves with other node types, see <see
-             cref="P:System.Xml.XmlNode.BaseURI" />
+            >For additional information on BaseURI and how it behaves with other node types, see <see cref="P:System.Xml.XmlNode.BaseURI" />
 
             
 
@@ -167,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >This method serves as a copy constructor for nodes. The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
@@ -184,7 +185,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -360,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -369,7 +373,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -406,8 +414,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -415,7 +422,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

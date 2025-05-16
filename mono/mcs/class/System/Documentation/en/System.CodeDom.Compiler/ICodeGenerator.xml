@@ -20,53 +20,43 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >In the .NET Framework versions 1.0 and 1.1, code providers consist of implementations of <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          >In the .NET Framework versions 1.0 and 1.1, code providers consist of implementations of <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
-          , <see
-           cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+          , <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
           
 
-          , <see
-           cref="T:System.CodeDom.Compiler.ICodeParser" />
+          , <see cref="T:System.CodeDom.Compiler.ICodeParser" />
 
           
 
-          , and <see
-           cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+          , and <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
           
 
-          . In the dnprdnlong, the <see
-           cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
+          . In the dnprdnlong, the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
           
 
-          , <see
-           cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateParser" />
+          , <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateParser" />
 
           
 
-          , and <see
-           cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
+          , and <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
 
           
 
-           methods are obsolete, and the methods of <see
-           cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+           methods are obsolete, and the methods of <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
           
 
-           and <see
-           cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+           and <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
           
 
-           are directly available in the <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+           are directly available in the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -75,18 +65,15 @@
       </block>
       <para>Developers of compilers can implement this interface to allow people to dynamically generate code in a particular language. This can be used for a variety of purposes, such as creating code-generating wizards, creating dynamic assemblies with content that can be debugged, and for templated documents with embedded code, such as ASP.NET.</para>
       <para
-        >An <see
-         cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+        >An <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
         
 
-         implementation is typically obtained through a call to the <see
-         cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
+         implementation is typically obtained through a call to the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
         
 
-         method of <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+         method of <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
@@ -128,18 +115,15 @@
 
             
 
-             tests whether the identifier conflicts with reserved or language keywords, and if so, returns an equivalent name with language-specific escape code formatting. This is referred to an escaped identifier. The escaped identifier will contain the same <paramref
-             name="value" />
+             tests whether the identifier conflicts with reserved or language keywords, and if so, returns an equivalent name with language-specific escape code formatting. This is referred to an escaped identifier. The escaped identifier will contain the same <paramref name="value" />
 
             
 
-             but will have escape code formatting added to differentiate the identifier from the keyword. Two implementation examples are preceding the <paramref
-             name="value" />
+             but will have escape code formatting added to differentiate the identifier from the keyword. Two implementation examples are preceding the <paramref name="value" />
 
             
 
-             with "@" or bracketing the <paramref
-             name="value" />
+             with "@" or bracketing the <paramref name="value" />
 
             
 
@@ -155,7 +139,11 @@
           <para>The escaped identifier for the value.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,8 +177,7 @@
 
             
 
-             tests whether the identifier conflicts with reserved or language keywords, and returns a valid identifier name that does not conflict. The returned identifier will contain the same <paramref
-             name="value" />
+             tests whether the identifier conflicts with reserved or language keywords, and returns a valid identifier name that does not conflict. The returned identifier will contain the same <paramref name="value" />
 
             
 
@@ -206,7 +193,11 @@
           <para>A valid identifier for the specified value.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -410,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type indicated by the specified <see
-             cref="T:System.CodeDom.CodeTypeReference" />
+            >Gets the type indicated by the specified <see cref="T:System.CodeDom.CodeTypeReference" />
 
             
 
@@ -423,12 +413,15 @@
           <para>A text representation of the specified type for the language this code generator is designed to generate code in. For example, in Visual Basic, passing in type System.Int32 will return "Integer".</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          A <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
@@ -458,8 +451,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method tests whether an identifier is valid. When implementing <see
-             cref="M:System.CodeDom.Compiler.ICodeGenerator.IsValidIdentifier(System.String)" />
+            >This method tests whether an identifier is valid. When implementing <see cref="M:System.CodeDom.Compiler.ICodeGenerator.IsValidIdentifier(System.String)" />
 
             
 
@@ -473,8 +465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="value" />
+            >true if the <paramref name="value" />
 
             
 
@@ -482,7 +473,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -515,8 +510,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can be called with a number of <see
-             cref="T:System.CodeDom.Compiler.GeneratorSupport" />
+            >This method can be called with a number of <see cref="T:System.CodeDom.Compiler.GeneratorSupport" />
 
             
 
@@ -526,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the generator provides support for the language features represented by the specified <see
-             cref="T:System.CodeDom.Compiler.GeneratorSupport" />
+            >Gets a value indicating whether the generator provides support for the language features represented by the specified <see cref="T:System.CodeDom.Compiler.GeneratorSupport" />
 
             
 
@@ -539,7 +532,11 @@
           <para>true if the specified capabilities are supported; otherwise, false.</para>
         </returns>
         <param name="supports">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,8 +566,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rather than returning a value, this method throws an exception if the specified identifier is not valid according to the method implementation. Typically, the exception is an <see
-             cref="T:System.ArgumentException" />
+            >Rather than returning a value, this method throws an exception if the specified identifier is not valid according to the method implementation. Typically, the exception is an <see cref="T:System.ArgumentException" />
 
             
 
@@ -582,7 +578,11 @@
           <para>Throws an exception if the specified value is not a valid identifier.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

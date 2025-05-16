@@ -24,8 +24,7 @@
          provides methods that can be used to retrieve a list of data sources accessible to the current design-time component.</para
       >
       <para
-        >This type converter is used by vsprvslong to provide the values that appear in the list of data sources in the <ui
-        >Properties</ui>
+        >This type converter is used by vsprvslong to provide the values that appear in the list of data sources in the <ui>Properties</ui>
 
         
 
@@ -33,13 +32,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -47,13 +44,11 @@
         >
       </block>
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
         </format>
 
@@ -77,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.DataSourceConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DataSourceConverter" />
 
             
 
@@ -116,24 +110,30 @@
           <para>As implemented in this class, this method always returns false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that can be used to gain additional context information. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -168,8 +168,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -177,36 +176,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that can be used to gain additional context information. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.CultureInfo" />
+          The <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            that can be used to support localization features. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -234,8 +242,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data sources that are accessible to the component are determined by retrieving a list of components from the designer, testing each component with the <see
-             cref="M:System.Web.UI.Design.DataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
+            >The data sources that are accessible to the component are determined by retrieving a list of components from the designer, testing each component with the <see cref="M:System.Web.UI.Design.DataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
 
             
 
@@ -249,8 +256,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
@@ -258,12 +264,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -291,8 +300,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list is exclusive, such as in an enumeration data type, then no other values are valid. If the list is not exclusive, then there are other valid values besides the list of standard values that <see
-             cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+            >If the list is exclusive, such as in an enumeration data type, then no other values are valid. If the list is not exclusive, then there are other valid values besides the list of standard values that <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
 
             
 
@@ -302,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the collection of standard values returned from <see
-             cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+            >Gets a value indicating whether the collection of standard values returned from <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
 
             
 
@@ -313,13 +320,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >true if the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             returned from <see
-             cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+             returned from <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
 
             
 
@@ -328,12 +333,15 @@
           <para>As implemented in this class, this method always returns false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -366,8 +374,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+            >true if <see cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
 
             
 
@@ -375,12 +382,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -411,28 +421,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.DataSourceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >The <see cref="M:System.Web.UI.Design.DataSourceConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method uses the <see
-             cref="M:System.Web.UI.Design.DataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
+             method uses the <see cref="M:System.Web.UI.Design.DataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
 
             
 
-             method to determine the components that are available as standard accessible data sources. For the <see
-             cref="T:System.Web.UI.Design.DataSourceConverter" />
+             method to determine the components that are available as standard accessible data sources. For the <see cref="T:System.Web.UI.Design.DataSourceConverter" />
 
             
 
-             class, a valid data source is a component that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             class, a valid data source is a component that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.IListSource" />
+             or <see cref="T:System.ComponentModel.IListSource" />
 
             
 
@@ -446,18 +451,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="component" />
+            >true if <paramref name="component" />
 
             
 
-             implements <see
-             cref="T:System.Collections.IEnumerable" />
+             implements <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             or <see
-             cref="T:System.ComponentModel.IListSource" />
+             or <see cref="T:System.ComponentModel.IListSource" />
 
             
 
@@ -465,7 +467,11 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

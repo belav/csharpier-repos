@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="Overload:System.Linq.Expressions.Expression.Bind" />
+        >Use the <see cref="Overload:System.Linq.Expressions.Expression.Bind" />
 
         
 
-         factory methods to create a <see
-         cref="T:System.Linq.Expressions.MemberAssignment" />
+         factory methods to create a <see cref="T:System.Linq.Expressions.MemberAssignment" />
 
         
 
         .</para
       >
       <para
-        >A <see
-         cref="T:System.Linq.Expressions.MemberAssignment" />
+        >A <see cref="T:System.Linq.Expressions.MemberAssignment" />
 
         
 
-         has the <see
-         cref="P:System.Linq.Expressions.MemberBinding.BindingType" />
+         has the <see cref="P:System.Linq.Expressions.MemberBinding.BindingType" />
 
         
 
-         property equal to <see
-         cref="F:System.Linq.Expressions.MemberBindingType.Assignment" />
+         property equal to <see cref="F:System.Linq.Expressions.MemberBindingType.Assignment" />
 
         
 
@@ -114,12 +109,15 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.MemberAssignment.Expression" />
+          The <see cref="P:System.Linq.Expressions.MemberAssignment.Expression" />
 
           
 

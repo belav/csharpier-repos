@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.XmlFieldOrder" />
+        >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.XmlFieldOrder" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+         property of the <see cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
         
 
-         class gets or sets a value of type <see
-         cref="T:System.Runtime.Remoting.Metadata.XmlFieldOrderOption" />
+         class gets or sets a value of type <see cref="T:System.Runtime.Remoting.Metadata.XmlFieldOrderOption" />
 
         
 

@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This simple implementation of HttpWorkerRequest provides the request URL and the query string and captures the body of the output into a <see
-         cref="T:System.IO.TextWriter" />
+        >This simple implementation of HttpWorkerRequest provides the request URL and the query string and captures the body of the output into a <see cref="T:System.IO.TextWriter" />
 
         
 
@@ -36,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a simple implementation of the <see
-         cref="T:System.Web.HttpWorkerRequest" />
+        >Provides a simple implementation of the <see cref="T:System.Web.HttpWorkerRequest" />
 
         
 
@@ -63,13 +61,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.SimpleWorkerRequest" />
 
             
 
-             class when the target application domain has been created using the <see
-             cref="M:System.Web.Hosting.ApplicationHost.CreateApplicationHost(System.Type,System.String,System.String)" />
+             class when the target application domain has been created using the <see cref="M:System.Web.Hosting.ApplicationHost.CreateApplicationHost(System.Type,System.String,System.String)" />
 
             
 
@@ -77,26 +73,37 @@
           >
         </summary>
         <param name="page">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The page to be requested (or the virtual path to the page, relative to the application directory). </param
         >
         <param name="query">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the query string. </param
         >
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -127,13 +134,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+            >Initializes a new instance of the <see cref="T:System.Web.Hosting.SimpleWorkerRequest" />
 
             
 
-             class for use in an arbitrary application domain, when the user code creates an <see
-             cref="T:System.Web.HttpContext" />
+             class for use in an arbitrary application domain, when the user code creates an <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -141,40 +146,59 @@
           >
         </summary>
         <param name="appVirtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the application directory; for example, "/app". </param
         >
         <param name="appPhysicalDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The physical path to the application directory; for example, "c:\app". </param
         >
         <param name="page">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path for the request (relative to the application directory). </param
         >
         <param name="query">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the query string. </param
         >
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -198,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see
-             cref="T:System.Web.HttpWorkerRequest" />
+            >Notifies the <see cref="T:System.Web.HttpWorkerRequest" />
 
             
 
@@ -231,7 +254,11 @@
           <para>Sends all pending response data to the client.</para>
         </summary>
         <param name="finalFlush">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,7 +596,11 @@
           <para>The requested server variable.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,8 +651,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value representing the client's impersonation token. The default is <see
-             cref="F:System.IntPtr.Zero" />
+            >A value representing the client's impersonation token. The default is <see cref="F:System.IntPtr.Zero" />
 
             
 
@@ -642,10 +672,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -668,10 +695,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -701,8 +725,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The physical path that corresponds to the virtual path specified in the <paramref
-             name="path" />
+            >The physical path that corresponds to the virtual path specified in the <paramref name="path" />
 
             
 
@@ -710,7 +733,11 @@
           >
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -760,19 +787,26 @@
           <para>Adds a standard HTTP header to the response.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The header index. For example, <see
-           cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />
+          The header index. For example, <see cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />
 
           
 
           . </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -805,21 +839,33 @@
           <para>Adds the contents of the file with the specified handle to the response and specifies the starting position in the file and the number of bytes to send.</para>
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle of the file to send. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting position in the file. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -852,21 +898,33 @@
           <para>Adds the contents of the file with the specified name to the response and specifies the starting position in the file and the number of bytes to send.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to send. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting position in the file. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -898,14 +956,22 @@
           <para>Adds the contents of a byte array to the response and specifies the number of bytes to send.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte array to send. </param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -937,14 +1003,22 @@
           <para>Specifies the HTTP status code and status description of the response; for example, SendStatus(200, "Ok").</para>
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The status code to send </param
         >
         <param name="statusDescription">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -976,14 +1050,22 @@
           <para>Adds a nonstandard HTTP header to the response.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the header to send.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -14,23 +14,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ColumnClickEventArgs" />
+        >The <see cref="T:System.Windows.Forms.ColumnClickEventArgs" />
 
         
 
-         class provides the zero-based index within the <see
-         cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+         class provides the zero-based index within the <see cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
 
         
 
-         class of the column that is clicked in the <see
-         cref="T:System.Windows.Forms.ListView" />
+         class of the column that is clicked in the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control. You can use this information in an event handler for the <see
-         cref="E:System.Windows.Forms.ListView.ColumnClick" />
+         control. You can use this information in an event handler for the <see cref="E:System.Windows.Forms.ListView.ColumnClick" />
 
         
 
@@ -40,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.ColumnClick" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ColumnClick" />
 
         
 
@@ -61,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ColumnClickEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ColumnClickEventArgs" />
 
             
 
@@ -70,7 +64,11 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -93,8 +91,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the information provided by this property in an event handler for the <see
-             cref="E:System.Windows.Forms.ListView.ColumnClick" />
+            >You can use the information provided by this property in an event handler for the <see cref="E:System.Windows.Forms.ListView.ColumnClick" />
 
             
 

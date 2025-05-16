@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the security settings for the <see
-         cref="T:System.ServiceModel.WsDualHttpBinding" />
+        >Specifies the security settings for the <see cref="T:System.ServiceModel.WsDualHttpBinding" />
 
         
 
@@ -56,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the message-level security properties for the <see
-             cref="T:System.ServiceModel.WsDualHttpBinding" />
+            >Gets the message-level security properties for the <see cref="T:System.ServiceModel.WsDualHttpBinding" />
 
             
 
@@ -91,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the security mode for the parent <see
-             cref="T:System.ServiceModel.WSDualHttpBinding" />
+            >Gets or sets the security mode for the parent <see cref="T:System.ServiceModel.WSDualHttpBinding" />
 
             
 

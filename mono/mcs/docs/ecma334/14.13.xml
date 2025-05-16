@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <clause number="14.13" title="Assignment operators">
   <paragraph
-    >The assignment operators assign a new value to a variable, a property, event, or an indexer element. <grammar_production
-    >
+    >The assignment operators assign a new value to a variable, a property, event, or an indexer element. <grammar_production>
       <name>assignment</name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.6">unary-expression</non_terminal>
         <non_terminal where="14.13">assignment-operator</non_terminal>
         <non_terminal where="14.14">expression</non_terminal>
@@ -21,8 +19,7 @@
 
       
 
-       : one of <rhs
-      >
+       : one of <rhs>
         <terminal>=</terminal>
         <terminal>+=</terminal>
         <terminal>-=</terminal>
@@ -39,29 +36,25 @@
   </paragraph>
   <paragraph>The left operand of an assignment must be an expression classified as a variable, a property access, an indexer access, or an event access. </paragraph>
   <paragraph
-    >The = operator is called the simple assignment operator. It assigns the value of the right operand to the variable, property, or indexer element given by the left operand. The left operand of the simple assignment operator may not be an event access (except as described in <hyperlink
-    >17.7.1</hyperlink>
+    >The = operator is called the simple assignment operator. It assigns the value of the right operand to the variable, property, or indexer element given by the left operand. The left operand of the simple assignment operator may not be an event access (except as described in <hyperlink>17.7.1</hyperlink>
 
     
 
-    ). The simple assignment operator is described in <hyperlink
-    >14.13.1</hyperlink>
-
-    
-
-    . </paragraph
-  >
-  <paragraph
-    >The operators formed by prefixing a binary operator with an = character are called the compound assignment operators. These operators perform the indicated operation on the two operands, and then assign the resulting value to the variable, property, or indexer element given by the left operand. The compound assignment operators are described in <hyperlink
-    >14.13.2</hyperlink>
+    ). The simple assignment operator is described in <hyperlink>14.13.1</hyperlink>
 
     
 
     . </paragraph
   >
   <paragraph
-    >The += and -= operators with an event access expression as the left operand are called the event assignment operators. No other assignment operator is valid with an event access as the left operand. The event assignment operators are described in <hyperlink
-    >14.13.3</hyperlink>
+    >The operators formed by prefixing a binary operator with an = character are called the compound assignment operators. These operators perform the indicated operation on the two operands, and then assign the resulting value to the variable, property, or indexer element given by the left operand. The compound assignment operators are described in <hyperlink>14.13.2</hyperlink>
+
+    
+
+    . </paragraph
+  >
+  <paragraph
+    >The += and -= operators with an event access expression as the left operand are called the event assignment operators. No other assignment operator is valid with an event access as the left operand. The event assignment operators are described in <hyperlink>14.13.3</hyperlink>
 
     
 

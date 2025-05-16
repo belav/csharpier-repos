@@ -19,23 +19,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To asynchronously collect the redirected <see
-         cref="P:System.Diagnostics.Process.StandardOutput" />
+        >To asynchronously collect the redirected <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
         
 
-         or <see
-         cref="P:System.Diagnostics.Process.StandardError" />
+         or <see cref="P:System.Diagnostics.Process.StandardError" />
 
         
 
-         stream output of a process, you must create a method that handles the redirected stream output events. The event-handler method is called when the process writes to the redirected stream. The event delegate calls your event handler with an instance of <see
-         cref="T:System.Diagnostics.DataReceivedEventArgs" />
+         stream output of a process, you must create a method that handles the redirected stream output events. The event-handler method is called when the process writes to the redirected stream. The event delegate calls your event handler with an instance of <see cref="T:System.Diagnostics.DataReceivedEventArgs" />
 
         
 
-        . The <see
-         cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+        . The <see cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
 
         
 
@@ -45,13 +41,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Diagnostics.Process.OutputDataReceived" />
+        >Provides data for the <see cref="E:System.Diagnostics.Process.OutputDataReceived" />
 
         
 
-         and <see
-         cref="E:System.Diagnostics.Process.ErrorDataReceived" />
+         and <see cref="E:System.Diagnostics.Process.ErrorDataReceived" />
 
         
 
@@ -77,59 +71,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you redirect the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >When you redirect the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
-             or <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+             or <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
-             stream of a <see
-             cref="T:System.Diagnostics.Process" />
+             stream of a <see cref="T:System.Diagnostics.Process" />
 
             
 
-             to your event handler, an event is raised each time the process writes a line to the redirected stream. The <see
-             cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+             to your event handler, an event is raised each time the process writes a line to the redirected stream. The <see cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
 
             
 
-             property is the line that the <see
-             cref="T:System.Diagnostics.Process" />
+             property is the line that the <see cref="T:System.Diagnostics.Process" />
 
             
 
-             wrote to the redirected output stream. Your event handler can use the <see
-             cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+             wrote to the redirected output stream. Your event handler can use the <see cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
 
             
 
              property to filter process output or write output to an alternate location. For example, you might create an event handler that stores all error output lines into a designated error log file.</para
           >
           <para
-            >A line is defined as a sequence of characters followed by a line feed ("\n") or a carriage return immediately followed by a line feed ("\r\n"). The line characters are encoded using the default system ANSI code page. The <see
-             cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+            >A line is defined as a sequence of characters followed by a line feed ("\n") or a carriage return immediately followed by a line feed ("\r\n"). The line characters are encoded using the default system ANSI code page. The <see cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
 
             
 
              property does not include the terminating carriage return or line feed.</para
           >
           <para
-            >When the redirected stream is closed, a null line is sent to the event handler. Ensure your event handler checks the <see
-             cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+            >When the redirected stream is closed, a null line is sent to the event handler. Ensure your event handler checks the <see cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
 
             
 
-             property appropriately before accessing it. For example, you can use the static method <see
-             cref="M:System.String.IsNullOrEmpty(System.String)" />
+             property appropriately before accessing it. For example, you can use the static method <see cref="M:System.String.IsNullOrEmpty(System.String)" />
 
             
 
-             to validate the <see
-             cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+             to validate the <see cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
 
             
 
@@ -139,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the line of characters that was written to a redirected <see
-             cref="T:System.Diagnostics.Process" />
+            >Gets the line of characters that was written to a redirected <see cref="T:System.Diagnostics.Process" />
 
             
 

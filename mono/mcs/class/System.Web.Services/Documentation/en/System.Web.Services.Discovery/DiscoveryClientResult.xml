@@ -20,31 +20,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Using the <see
-         cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.WriteAll(System.String,System.String)" />
+        >Using the <see cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.WriteAll(System.String,System.String)" />
 
         
 
-         method of <see
-         cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+         method of <see cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
         
 
-        , all valid referenced documents and a file containing a map of all save documents can be written to disk. The file containing a map of all saved documents contains the details of each document as summarized by the properties of <see
-         cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+        , all valid referenced documents and a file containing a map of all save documents can be written to disk. The file containing a map of all saved documents contains the details of each document as summarized by the properties of <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
 
         
 
         .</para
       >
       <para
-        >After the referenced documents and the map of the referenced documents have been written to disk using the <see
-         cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.WriteAll(System.String,System.String)" />
+        >After the referenced documents and the map of the referenced documents have been written to disk using the <see cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.WriteAll(System.String,System.String)" />
 
         
 
-         method, you can invoke the <see
-         cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ReadAll(System.String)" />
+         method, you can invoke the <see cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ReadAll(System.String)" />
 
         
 
@@ -67,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
 
             
 
@@ -98,38 +92,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
 
             
 
-             class and sets the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
+             class and sets the <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
 
             
 
-             property to <paramref
-             name="referenceType" />
+             property to <paramref name="referenceType" />
 
             
 
-            , the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Url" />
+            , the <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Url" />
 
             
 
-             property to <paramref
-             name="url" />
+             property to <paramref name="url" />
 
             
 
-             and the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Filename" />
+             and the <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Filename" />
 
             
 
-             property to <paramref
-             name="filename" />
+             property to <paramref name="filename" />
 
             
 
@@ -137,36 +124,45 @@
           >
         </summary>
         <param name="referenceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Name of the class representing the type of reference in the discovery document. Sets the <see
-           cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
+          Name of the class representing the type of reference in the discovery document. Sets the <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
 
           
 
            property. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          URL for the reference. Sets the <see
-           cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Url" />
+          URL for the reference. Sets the <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Url" />
 
           
 
            property. </param
         >
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Name of the file in which the reference was saved. Sets the <see
-           cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Filename" />
+          Name of the file in which the reference was saved. Sets the <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.Filename" />
 
           
 
@@ -218,23 +214,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference within a discovery document can contain references to service descriptions, XSD schemas, or other discovery documents. Therefore, <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
+            >A reference within a discovery document can contain references to service descriptions, XSD schemas, or other discovery documents. Therefore, <see cref="P:System.Web.Services.Discovery.DiscoveryClientResult.ReferenceTypeName" />
 
             
 
-             can have the following values: <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             can have the following values: <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-            , <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            , <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-            , and <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            , and <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 

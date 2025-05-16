@@ -24,105 +24,87 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Code that is being examined in the reflection-only context cannot be executed, so it is not always possible to examine custom attributes by creating instances of them and then examining their properties, using methods like <see
-         cref="Overload:System.Attribute.GetCustomAttributes" />
+        >Code that is being examined in the reflection-only context cannot be executed, so it is not always possible to examine custom attributes by creating instances of them and then examining their properties, using methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />
 
         
 
-        , <see
-         cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
+        , <see cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
 
         
 
         , and so on. If the code for the attribute type itself is loaded into the reflection-only context, it cannot be executed. </para
       >
       <para
-        >The <see
-         cref="T:System.Reflection.CustomAttributeNamedArgument" />
+        >The <see cref="T:System.Reflection.CustomAttributeNamedArgument" />
 
         
 
-         structure is used by the <see
-         cref="T:System.Reflection.CustomAttributeData" />
+         structure is used by the <see cref="T:System.Reflection.CustomAttributeData" />
 
         
 
          class to provide access to the type and value of a positional argument specified for a custom attribute instance, without executing the attribute constructor. It also provides access to the type and value of a named argument without executing the code of the corresponding property of the custom attribute type. </para
       >
       <para
-        >The types and values of all the positional and named arguments of an attribute instance are provided by <see
-         cref="T:System.Reflection.CustomAttributeTypedArgument" />
+        >The types and values of all the positional and named arguments of an attribute instance are provided by <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
-         structures. The positional attributes returned by the <see
-         cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" />
+         structures. The positional attributes returned by the <see cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" />
 
         
 
-         property are directly represented by <see
-         cref="T:System.Reflection.CustomAttributeTypedArgument" />
+         property are directly represented by <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
-         structures, but the named arguments returned by the <see
-         cref="P:System.Reflection.CustomAttributeData.NamedArguments" />
+         structures, but the named arguments returned by the <see cref="P:System.Reflection.CustomAttributeData.NamedArguments" />
 
         
 
-         property are represented by <see
-         cref="T:System.Reflection.CustomAttributeNamedArgument" />
+         property are represented by <see cref="T:System.Reflection.CustomAttributeNamedArgument" />
 
         
 
-         structures; to get the <see
-         cref="T:System.Reflection.CustomAttributeTypedArgument" />
+         structures; to get the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
-         structure for a named argument, use the <see
-         cref="P:System.Reflection.CustomAttributeNamedArgument.TypedValue" />
+         structure for a named argument, use the <see cref="P:System.Reflection.CustomAttributeNamedArgument.TypedValue" />
 
         
 
          property.</para
       >
       <para
-        >If an argument is an array of values, the <see
-         cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+        >If an argument is an array of values, the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
 
         
 
-         property of the <see
-         cref="T:System.Reflection.CustomAttributeTypedArgument" />
+         property of the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
-         that represents the argument returns a generic <see
-         cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+         that represents the argument returns a generic <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
 
         
 
-         of <see
-         cref="T:System.Reflection.CustomAttributeTypedArgument" />
+         of <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
-         objects. Each <see
-         cref="T:System.Reflection.CustomAttributeTypedArgument" />
+         objects. Each <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
         
 
          object in the collection represents the corresponding element of the array. </para
       >
       <para
-        >To create instances of the <see
-         cref="T:System.Reflection.CustomAttributeData" />
+        >To create instances of the <see cref="T:System.Reflection.CustomAttributeData" />
 
         
 
-         class, use the static <see
-         cref="Overload:System.Reflection.CustomAttributeData.GetCustomAttributes" />
+         class, use the static <see cref="Overload:System.Reflection.CustomAttributeData.GetCustomAttributes" />
 
         
 
@@ -152,26 +134,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter cannot be null for this constructor, because the argument type is inferred from the type of <paramref
-             name="value" />
+             parameter cannot be null for this constructor, because the argument type is inferred from the type of <paramref name="value" />
 
             
 
-            . To specify a null value, use the <see
-             cref="M:System.Reflection.CustomAttributeTypedArgument.#ctor(System.Type,System.Object)" />
+            . To specify a null value, use the <see cref="M:System.Reflection.CustomAttributeTypedArgument.#ctor(System.Type,System.Object)" />
 
             
 
              constructor.</para
           >
           <para
-            >This constructor is for use by inheritors of the <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >This constructor is for use by inheritors of the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -181,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -190,7 +167,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -219,8 +200,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is for use by inheritors of the <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >This constructor is for use by inheritors of the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -230,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -239,14 +218,22 @@
           >
         </summary>
         <param name="argumentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the custom attribute argument.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -271,13 +258,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For simple arguments or for elements of array arguments, this property identifies the actual type of the value returned by the <see
-             cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+            >For simple arguments or for elements of array arguments, this property identifies the actual type of the value returned by the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
 
             
 
-             property. For array arguments, this property returns the array type, but the <see
-             cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+             property. For array arguments, this property returns the array type, but the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
 
             
 
@@ -361,8 +346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >Tests whether two <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -372,8 +356,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >true if the two <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -381,24 +364,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.CustomAttributeTypedArgument" />
+          The <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
           
 
            structure to the left of the equality operator.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.CustomAttributeTypedArgument" />
+          The <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
           
 
@@ -432,8 +421,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >Tests whether two <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -443,8 +431,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >true if the two <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
@@ -452,24 +439,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.CustomAttributeTypedArgument" />
+          The <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
           
 
            structure to the left of the inequality operator.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.CustomAttributeTypedArgument" />
+          The <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
           
 
@@ -522,26 +515,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Reflection.CustomAttributeTypedArgument" />
+            >If the <see cref="T:System.Reflection.CustomAttributeTypedArgument" />
 
             
 
              represents an array argument, this property returns a ReadOnlyCollection&lt;CustomAttributeTypedArgument&gt; (ReadOnlyCollection(Of CustomAttributeTypedArgument) in Visual Basic). Each element of the collection represents the corresponding element of the array argument.</para
           >
           <para
-            >The type of the value can be obtained by using the <see
-             cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" />
+            >The type of the value can be obtained by using the <see cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" />
 
             
 
-             property. <see
-             cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" />
+             property. <see cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" />
 
             
 
-             gets the actual type of the value returned by the <see
-             cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+             gets the actual type of the value returned by the <see cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
 
             
 

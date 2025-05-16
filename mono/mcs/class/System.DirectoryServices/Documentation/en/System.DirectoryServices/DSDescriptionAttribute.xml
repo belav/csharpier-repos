@@ -79,7 +79,11 @@
           <para>Supports the .NET Framework infrastructure and is not intended to be used directly from code.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

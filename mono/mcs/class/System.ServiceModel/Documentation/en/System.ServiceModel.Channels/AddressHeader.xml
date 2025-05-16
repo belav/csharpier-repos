@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.ServiceModel.Channels.AddressHeader" />
+        >An <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
         
 
-         is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see
-         cref="P:System.ServiceModel.Channels.AddressHeader.Name" />
+         is characterized by a name and namespace and has a value that contains optional information used to identify or interact with an endpoint. The name can be accessed by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Name" />
 
         
 
-         property and the namespace by the <see
-         cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" />
+         property and the namespace by the <see cref="P:System.ServiceModel.Channels.AddressHeader.Namespace" />
 
         
 
@@ -56,13 +53,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.ServiceModel.Channels.AddressHeader.CreateAddressHeader" />
+            >Use the <see cref="Overload:System.ServiceModel.Channels.AddressHeader.CreateAddressHeader" />
 
             
 
-             to create new <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+             to create new <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -72,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -106,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -117,13 +110,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
-             that contains the information item specified by the <paramref
-             name="value" />
+             that contains the information item specified by the <paramref name="value" />
 
             
 
@@ -131,7 +122,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -176,8 +170,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -185,7 +178,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -219,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -230,23 +226,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
-             with the specified <paramref
-             name="name" />
+             with the specified <paramref name="name" />
 
             
 
-             and <paramref
-             name="ns" />
+             and <paramref name="ns" />
 
             
 
-             that contains the information item specified by <paramref
-             name="value" />
+             that contains the information item specified by <paramref name="value" />
 
             
 
@@ -254,21 +246,33 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the address header.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the address header.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -304,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
@@ -315,23 +318,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.AddressHeader" />
+            >The <see cref="T:System.ServiceModel.Channels.AddressHeader" />
 
             
 
-             with the specified <paramref
-             name="name" />
+             with the specified <paramref name="name" />
 
             
 
-             and <paramref
-             name="ns" />
+             and <paramref name="ns" />
 
             
 
-             that contains the information item specified by <paramref
-             name="value" />
+             that contains the information item specified by <paramref name="value" />
 
             
 
@@ -339,21 +338,33 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the address header.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the address header.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,13 +400,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the information item in a specified <paramref
-             name="obj" />
+            >true if the information item in a specified <paramref name="obj" />
 
             
 
-             is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref
-             name="obj" />
+             is equivalent to the information item contained in the current address header; otherwise, false. In particular, returns false if <paramref name="obj" />
 
             
 
@@ -403,12 +412,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -442,8 +454,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An instance of <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -509,16 +520,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using this overload, you must supply a type for the generic parameter <paramref
-             name="T" />
+            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />
 
             
 
             . The type of the return value is determined by the generic type parameter. </para
           >
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" />
+            >Use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1(System.Runtime.Serialization.XmlObjectSerializer)" />
 
             
 
@@ -532,8 +541,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a class of type <paramref
-             name="T" />
+            >An instance of a class of type <paramref name="T" />
 
             
 
@@ -541,12 +549,15 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A class of type <paramref
-           name="T" />
+          A class of type <paramref name="T" />
 
           
 
@@ -581,16 +592,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using this overload, you must supply a type for the generic parameter <paramref
-             name="T" />
+            >When using this overload, you must supply a type for the generic parameter <paramref name="T" />
 
             
 
             . The type of the return value is determined by the generic type parameter.</para
           >
           <para
-            >Use this overload only if you want to use a customized XML formatter; otherwise use the <see
-             cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" />
+            >Use this overload only if you want to use a customized XML formatter; otherwise use the <see cref="M:System.ServiceModel.Channels.AddressHeader.GetValue``1" />
 
             
 
@@ -604,8 +613,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a class of type <paramref
-             name="T" />
+            >An instance of a class of type <paramref name="T" />
 
             
 
@@ -613,12 +621,15 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A class of type <paramref
-           name="T" />
+          A class of type <paramref name="T" />
 
           
 
@@ -690,12 +701,15 @@
           <para>When overridden in a derived class, is invoked when the address header contents are written to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -729,12 +743,15 @@
           <para>When overridden in a derived class, is invoked when the address header contents begin to be written to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -768,8 +785,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.MessageHeader" />
+            >The <see cref="T:System.ServiceModel.Channels.MessageHeader" />
 
             
 
@@ -812,8 +828,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the address header to a stream or file using a specified <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -821,12 +836,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -857,13 +875,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload wraps <see
-             cref="T:System.Xml.XmlWriter" />
+            >This overload wraps <see cref="T:System.Xml.XmlWriter" />
 
             
 
-             as a <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+             as a <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -880,8 +896,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the address header to a stream or file using a specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes the address header to a stream or file using a specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -889,12 +904,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -928,12 +946,15 @@
           <para>Writes the address header contents to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -967,12 +988,15 @@
           <para>Starts to write the address header contents to a stream or file.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 

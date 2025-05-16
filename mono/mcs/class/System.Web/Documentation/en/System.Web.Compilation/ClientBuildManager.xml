@@ -21,16 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.ClientBuildManager" />
+        >The <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
         
 
          class offers methods and properties for compiling ASP.NET Web applications, and retrieving the generated assemblies or generated source code. Instances of the class are established in the client's application domain and provide access to the ASP.NET build system outside of Microsoft Internet Information Services (IIS). The class can be used to develop customized tools for compiling Web applications. </para
       >
       <para
-        >The command-line tool aspnet_compiler uses the <see
-         cref="T:System.Web.Compilation.ClientBuildManager" />
+        >The command-line tool aspnet_compiler uses the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ClientBuildManager" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
             
 
@@ -68,14 +65,22 @@
           >
         </summary>
         <param name="appVirtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the application root.</param
         >
         <param name="appPhysicalSourceDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -106,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ClientBuildManager" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
             
 
@@ -115,21 +119,33 @@
           >
         </summary>
         <param name="appVirtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the application root.</param
         >
         <param name="appPhysicalSourceDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The physical path to the application root.</param
         >
         <param name="appPhysicalTargetDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -161,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ClientBuildManager" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
             
 
@@ -170,28 +185,44 @@
           >
         </summary>
         <param name="appVirtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path to the application root.</param
         >
         <param name="appPhysicalSourceDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The physical path to the application root.</param
         >
         <param name="appPhysicalTargetDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target directory for precompilation.</param
         >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -296,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Compilation.ClientBuildManager.CompileApplicationDependencies" />
+            >The <see cref="M:System.Web.Compilation.ClientBuildManager.CompileApplicationDependencies" />
 
             
 
@@ -330,7 +360,11 @@
           <para>Compiles the file represented by the virtual path.</para>
         </summary>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -362,14 +396,22 @@
           <para>Compiles the file represented by the virtual path and provides a callback class to receive status information about the build.</para>
         </summary>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path to the file to be compiled.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -405,14 +447,22 @@
           <para>An object in the application domain of the ASP.NET runtime.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of object to be created.</param
         >
         <param name="failIfExists">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -550,8 +600,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -578,18 +627,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.IDictionary" />
+            >The <see cref="T:System.Collections.IDictionary" />
 
             
 
-             object contains browser names for the keys and <see
-             cref="T:System.Web.UI.Triplet" />
+             object contains browser names for the keys and <see cref="T:System.Web.UI.Triplet" />
 
             
 
-             objects for the values. The <see
-             cref="T:System.Web.UI.Triplet" />
+             objects for the values. The <see cref="T:System.Web.UI.Triplet" />
 
             
 
@@ -603,8 +649,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -667,8 +712,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -676,7 +720,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -739,13 +787,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             containing the virtual path for <paramref
-             name="filePath" />
+             containing the virtual path for <paramref name="filePath" />
 
             
 
@@ -753,7 +799,11 @@
           >
         </returns>
         <param name="filePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -786,8 +836,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -795,7 +844,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -828,8 +881,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -837,7 +889,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -865,8 +921,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -890,8 +945,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
+            >This method overrides the <see cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
 
             
 
@@ -930,8 +984,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="assemblyName" />
+            >true if the <paramref name="assemblyName" />
 
             
 
@@ -939,7 +992,11 @@
           >
         </returns>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -983,26 +1040,22 @@
           <para>ASP.NET supports three forms of precompilation. One form allows for the in-place precompilation of an ASP.NET application. In this form, the site is deployed to production and then precompiled, which eliminates the need to dynamically compile the site when it is first visited by a user. The first user of the site will not experience the delay normally encountered on a site that is dynamically compiled.</para>
           <para>The two other forms of precompilation are used for deployment. In either form, a layout of the site is generated that can be deployed to a production computer. One of these forms includes the markup pages so some amount of updating can be performed on the compiled site. The other form does not contain the markup pages and therefore cannot be updated without recompiling the original site. No source code is deployed to the target environment in either of these forms of precompilation.</para>
           <para
-            >The application to precompile is defined through the <see
-             cref="T:System.Web.Compilation.ClientBuildManager" />
+            >The application to precompile is defined through the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
             
 
-             constructor. The <see
-             cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+             constructor. The <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
 
             
 
-             object of the <see
-             cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
+             object of the <see cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
 
             
 
              constructor defines which of the three forms of precompilation to perform.</para
           >
           <para
-            >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see
-             cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication" />
+            >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication" />
 
             
 
@@ -1035,8 +1088,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET supports three forms of precompilation. One form allows for the in-place precompilation of an ASP.NET application. In this form, the site is deployed to production and then precompiled, which eliminates the need to dynamically compile the site when it is first visited by a user. The first user of the site will not experience the delay normally encountered on a site that is dynamically compiled. The <paramref
-             name="callback" />
+            >ASP.NET supports three forms of precompilation. One form allows for the in-place precompilation of an ASP.NET application. In this form, the site is deployed to production and then precompiled, which eliminates the need to dynamically compile the site when it is first visited by a user. The first user of the site will not experience the delay normally encountered on a site that is dynamically compiled. The <paramref name="callback" />
 
             
 
@@ -1044,26 +1096,22 @@
           >
           <para>The two other forms of precompilation are used for deployment. In either form, a layout of the site is generated that can be deployed to a production computer. One of these forms includes the markup pages so some amount of updating can be performed on the compiled site. The other form does not contain the markup pages and therefore cannot be updated without recompiling the original site. No source code is deployed to the target environment in either of these forms of precompilation.</para>
           <para
-            >The application to precompile is defined through the <see
-             cref="T:System.Web.Compilation.ClientBuildManager" />
+            >The application to precompile is defined through the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
             
 
-             constructor. The <see
-             cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+             constructor. The <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
 
             
 
-             object of the <see
-             cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
+             object of the <see cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
 
             
 
              constructor defines which of the three forms of precompilation to perform.</para
           >
           <para
-            >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see
-             cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication(System.Web.Compilation.ClientBuildManagerCallback)" />
+            >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication(System.Web.Compilation.ClientBuildManagerCallback)" />
 
             
 
@@ -1075,12 +1123,15 @@
           <para>Precompiles an ASP.NET application and provides a callback method to receive status information about the build.</para>
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
+          A <see cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
 
           
 
@@ -1109,8 +1160,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET supports three forms of precompilation. One form allows for the in-place precompilation of an ASP.NET application. In this form, the site is deployed to production and then precompiled, which eliminates the need to dynamically compile the site when it is first visited by a user. The first user of the site will not experience the delay normally encountered on a site that is dynamically compiled. The <paramref
-             name="callback" />
+            >ASP.NET supports three forms of precompilation. One form allows for the in-place precompilation of an ASP.NET application. In this form, the site is deployed to production and then precompiled, which eliminates the need to dynamically compile the site when it is first visited by a user. The first user of the site will not experience the delay normally encountered on a site that is dynamically compiled. The <paramref name="callback" />
 
             
 
@@ -1118,26 +1168,22 @@
           >
           <para>The two other forms of precompilation are used for deployment. In either form, a layout of the site is generated that can be deployed to a production computer. One of these forms includes the markup pages so some amount of updating can be performed on the compiled site. The other form does not contain the markup pages and therefore cannot be updated without recompiling the original site. No source code is deployed to the target environment in either of these forms of precompilation.</para>
           <para
-            >The application to precompile is defined through the <see
-             cref="T:System.Web.Compilation.ClientBuildManager" />
+            >The application to precompile is defined through the <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
             
 
-             constructor. The <see
-             cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+             constructor. The <see cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
 
             
 
-             object of the <see
-             cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
+             object of the <see cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
 
             
 
              constructor defines which of the three forms of precompilation to perform.</para
           >
           <para
-            >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see
-             cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication(System.Web.Compilation.ClientBuildManagerCallback)" />
+            >A developer can precompile a Web site with the aspnet_compiler command-line tool or by calling the <see cref="M:System.Web.Compilation.ClientBuildManager.PrecompileApplication(System.Web.Compilation.ClientBuildManagerCallback)" />
 
             
 
@@ -1149,19 +1195,26 @@
           <para>Precompiles an ASP.NET application, provides a callback method to receive status information about the build, and indicates whether to create a clean build.</para>
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
+          A <see cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
 
           
 
            containing the method to call when reporting the result of compilation.</param
         >
         <param name="forceCleanBuild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

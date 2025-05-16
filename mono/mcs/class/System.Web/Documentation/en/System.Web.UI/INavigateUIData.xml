@@ -11,76 +11,62 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.INavigateUIData" />
+        >The <see cref="T:System.Web.UI.INavigateUIData" />
 
         
 
-         interface allows navigation controls, such as the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         interface allows navigation controls, such as the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         and <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         controls, to automatically render data from a data source that represents hierarchical site navigation data. The <see
-         cref="T:System.Web.UI.INavigateUIData" />
+         controls, to automatically render data from a data source that represents hierarchical site navigation data. The <see cref="T:System.Web.UI.INavigateUIData" />
 
         
 
-         interface is implemented by the <see
-         cref="T:System.Web.SiteMapNode" />
+         interface is implemented by the <see cref="T:System.Web.SiteMapNode" />
 
         
 
-         type that is returned from the <see
-         cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+         type that is returned from the <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
-         control so that navigation controls can render data automatically without a page developer explicitly defining the data binding associations to the properties of <see
-         cref="T:System.Web.SiteMapNode" />
+         control so that navigation controls can render data automatically without a page developer explicitly defining the data binding associations to the properties of <see cref="T:System.Web.SiteMapNode" />
 
         
 
-        . For example, the <see
-         cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+        . For example, the <see cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
 
         
 
-         control enables declarative data binding so that a page developer does not have to populate the <see
-         cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+         control enables declarative data binding so that a page developer does not have to populate the <see cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
+         or <see cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
 
         
 
-         properties explicitly for the <see
-         cref="T:System.Web.UI.WebControls.TreeView" />
+         properties explicitly for the <see cref="T:System.Web.UI.WebControls.TreeView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         and <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
          controls, respectively.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.INavigateUIData" />
+        >The <see cref="T:System.Web.UI.INavigateUIData" />
 
         
 
-         interface can also be implemented on objects that are returned by an <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+         interface can also be implemented on objects that are returned by an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
@@ -105,18 +91,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.INavigateUIData.Description" />
+            >The <see cref="P:System.Web.UI.INavigateUIData.Description" />
 
             
 
-             property is rendered as the ToolTip text of the <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             property is rendered as the ToolTip text of the <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             and <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -144,28 +127,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.INavigateUIData.Name" />
+            >The <see cref="P:System.Web.UI.INavigateUIData.Name" />
 
             
 
-             property is rendered as the <see
-             cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+             property is rendered as the <see cref="P:System.Web.UI.WebControls.TreeNode.Text" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             property of a <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
-             control and the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+             control and the <see cref="P:System.Web.UI.WebControls.MenuItem.Text" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             property of a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -193,18 +171,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.INavigateUIData.NavigateUrl" />
+            >The <see cref="P:System.Web.UI.INavigateUIData.NavigateUrl" />
 
             
 
-             property represents the URL to navigate to when a navigation node, such as <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             property represents the URL to navigate to when a navigation node, such as <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
-             or <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             or <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -232,18 +207,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.INavigateUIData.Value" />
+            >The <see cref="P:System.Web.UI.INavigateUIData.Value" />
 
             
 
-             property represents any additional data that is used by a navigation node, such as a <see
-             cref="T:System.Web.UI.WebControls.TreeNode" />
+             property represents any additional data that is used by a navigation node, such as a <see cref="T:System.Web.UI.WebControls.TreeNode" />
 
             
 
-             or <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             or <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 

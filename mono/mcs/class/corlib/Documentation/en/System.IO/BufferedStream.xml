@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A buffer is a block of bytes in memory used to cache data, thereby reducing the number of calls to the operating system. Buffers improve read and write performance. A buffer can be used for either reading or writing, but never both simultaneously. The <see
-         cref="M:System.IO.BufferedStream.Read(System.Byte[],System.Int32,System.Int32)" />
+        >A buffer is a block of bytes in memory used to cache data, thereby reducing the number of calls to the operating system. Buffers improve read and write performance. A buffer can be used for either reading or writing, but never both simultaneously. The <see cref="M:System.IO.BufferedStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.IO.BufferedStream.Write(System.Byte[],System.Int32,System.Int32)" />
+         and <see cref="M:System.IO.BufferedStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
         
 
          methods of BufferedStream automatically maintain the buffer.</para
       >
       <para
-        >BufferedStream can be composed around certain types of streams. It provides implementations for reading and writing bytes to an underlying data source or repository. Use <see
-         cref="T:System.IO.BinaryReader" />
+        >BufferedStream can be composed around certain types of streams. It provides implementations for reading and writing bytes to an underlying data source or repository. Use <see cref="T:System.IO.BinaryReader" />
 
         
 
-         and <see
-         cref="T:System.IO.BinaryWriter" />
+         and <see cref="T:System.IO.BinaryWriter" />
 
         
 
@@ -82,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shared read/write buffer is allocated the first time a BufferedStream object is initialized with this constructor. The shared buffer is not used if all reads and writes are greater than or equal to <paramref
-             name="bufferSize" />
+            >A shared read/write buffer is allocated the first time a BufferedStream object is initialized with this constructor. The shared buffer is not used if all reads and writes are greater than or equal to <paramref name="bufferSize" />
 
             
 
@@ -93,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BufferedStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.BufferedStream" />
 
             
 
@@ -102,7 +96,11 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -134,8 +132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shared read/write buffer is allocated the first time a BufferedStream object is initialized with this constructor. The shared buffer is not used if all reads and writes are greater than or equal to <paramref
-             name="bufferSize" />
+            >A shared read/write buffer is allocated the first time a BufferedStream object is initialized with this constructor. The shared buffer is not used if all reads and writes are greater than or equal to <paramref name="bufferSize" />
 
             
 
@@ -145,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.BufferedStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.BufferedStream" />
 
             
 
@@ -154,14 +150,22 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The current stream. </param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -186,48 +190,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a class derived from <see
-             cref="T:System.IO.Stream" />
+            >If a class derived from <see cref="T:System.IO.Stream" />
 
             
 
-             does not support reading, calls to the <see
-             cref="M:System.IO.BufferedStream.Read(System.Byte[],System.Int32,System.Int32)" />
+             does not support reading, calls to the <see cref="M:System.IO.BufferedStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.IO.BufferedStream.ReadByte" />
+            , <see cref="M:System.IO.BufferedStream.ReadByte" />
 
             
 
-            , <see
-             cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+            , <see cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
             
 
-            , <see
-             cref="M:System.IO.Stream.EndRead(System.IAsyncResult)" />
+            , <see cref="M:System.IO.Stream.EndRead(System.IAsyncResult)" />
 
             
 
-            , and the Peek methods of <see
-             cref="T:System.IO.StreamReader" />
+            , and the Peek methods of <see cref="T:System.IO.StreamReader" />
 
             
 
-            , <see
-             cref="T:System.IO.StringReader" />
+            , <see cref="T:System.IO.StringReader" />
 
             
 
-            , and <see
-             cref="T:System.IO.TextReader" />
+            , and <see cref="T:System.IO.TextReader" />
 
             
 
-             throw a <see
-             cref="T:System.NotSupportedException" />
+             throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -258,33 +253,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a class derived from <see
-             cref="T:System.IO.Stream" />
+            >If a class derived from <see cref="T:System.IO.Stream" />
 
             
 
-             does not support seeking, calls to <see
-             cref="P:System.IO.BufferedStream.Length" />
+             does not support seeking, calls to <see cref="P:System.IO.BufferedStream.Length" />
 
             
 
-            , <see
-             cref="M:System.IO.BufferedStream.SetLength(System.Int64)" />
+            , <see cref="M:System.IO.BufferedStream.SetLength(System.Int64)" />
 
             
 
-            , <see
-             cref="P:System.IO.BufferedStream.Position" />
+            , <see cref="P:System.IO.BufferedStream.Position" />
 
             
 
-            , and <see
-             cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+            , and <see cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
-             throw a <see
-             cref="T:System.NotSupportedException" />
+             throw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -315,28 +304,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a class derived from <see
-             cref="T:System.IO.Stream" />
+            >If a class derived from <see cref="T:System.IO.Stream" />
 
             
 
-             does not support writing, a call to <see
-             cref="M:System.IO.BufferedStream.SetLength(System.Int64)" />
+             does not support writing, a call to <see cref="M:System.IO.BufferedStream.SetLength(System.Int64)" />
 
             
 
-            , <see
-             cref="M:System.IO.BufferedStream.Write(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.IO.BufferedStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , or <see
-             cref="M:System.IO.BufferedStream.WriteByte(System.Byte)" />
+            , or <see cref="M:System.IO.BufferedStream.WriteByte(System.Byte)" />
 
             
 
-             throws a <see
-             cref="T:System.NotSupportedException" />
+             throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -408,16 +392,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see
-             cref="M:System.IO.Stream.Close" />
+            >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see cref="M:System.IO.Stream.Close" />
 
             
 
             .</para
           >
           <para
-            >If you use the <see
-             cref="M:System.IO.BufferedStream.#ctor(System.IO.Stream,System.Int32)" />
+            >If you use the <see cref="M:System.IO.BufferedStream.#ctor(System.IO.Stream,System.Int32)" />
 
             
 
@@ -469,16 +451,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The get accessor invokes <see
-             cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+            >The get accessor invokes <see cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
              to obtain the current position within the underlying stream and then adjusts this value according to the current position within the buffer.</para
           >
           <para
-            >The set accessor copies any data previously written to the buffer to the underlying stream, and then invokes <see
-             cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+            >The set accessor copies any data previously written to the buffer to the underlying stream, and then invokes <see cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
@@ -520,8 +500,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The Read method will return 0 only if the end of the stream is reached. In all other cases, Read always reads at least one byte from the stream before returning. By definition, if no data is available from the stream upon a call to Read, the Read method returns 0 (the end of the stream is reached automatically). An implementation is free to return fewer bytes than requested even if the end of the stream has not been reached.</para>
           <para
-            >Use <see
-             cref="T:System.IO.BinaryReader" />
+            >Use <see cref="T:System.IO.BinaryReader" />
 
             
 
@@ -535,8 +514,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The total number of bytes read into <paramref
-             name="array" />
+            >The total number of bytes read into <paramref name="array" />
 
             
 
@@ -544,21 +522,33 @@
           >
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to which bytes are to be copied. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte offset in the buffer at which to begin reading bytes. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,66 +610,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="offset" />
+            >If <paramref name="offset" />
 
             
 
-             is negative, the new position will precede the position specified by <paramref
-             name="origin" />
+             is negative, the new position will precede the position specified by <paramref name="origin" />
 
             
 
-             by the number of bytes specified by <paramref
-             name="offset" />
+             by the number of bytes specified by <paramref name="offset" />
 
             
 
-            . If <paramref
-             name="offset" />
+            . If <paramref name="offset" />
 
             
 
-             is 0, the new position will be the position specified by <paramref
-             name="origin" />
+             is 0, the new position will be the position specified by <paramref name="origin" />
 
             
 
-            . If <paramref
-             name="offset" />
+            . If <paramref name="offset" />
 
             
 
-             is positive, the new position will follow the position specified by <paramref
-             name="origin" />
+             is positive, the new position will follow the position specified by <paramref name="origin" />
 
             
 
-             by the number of bytes specified by <paramref
-             name="offset" />
+             by the number of bytes specified by <paramref name="offset" />
 
             
 
             .</para
           >
           <para
-            >When a <see
-             cref="T:System.IO.BufferedStream" />
+            >When a <see cref="T:System.IO.BufferedStream" />
 
             
 
-             object is the base stream for a <see
-             cref="T:System.IO.StreamReader" />
+             object is the base stream for a <see cref="T:System.IO.StreamReader" />
 
             
 
-             object, calling the <see
-             cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+             object, calling the <see cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
             
 
-             method can cause the position of the stream to no longer match the position of the internal buffer in the reader. To reset the internal buffer, call the <see
-             cref="M:System.IO.StreamReader.DiscardBufferedData" />
+             method can cause the position of the stream to no longer match the position of the internal buffer in the reader. To reset the internal buffer, call the <see cref="M:System.IO.StreamReader.DiscardBufferedData" />
 
             
 
@@ -696,24 +674,30 @@
           <para>The new position within the current buffered stream.</para>
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A byte offset relative to <paramref
-           name="origin" />
+          A byte offset relative to <paramref name="origin" />
 
           
 
           . </param
         >
         <param name="origin">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value of type <see
-           cref="T:System.IO.SeekOrigin" />
+          A value of type <see cref="T:System.IO.SeekOrigin" />
 
           
 
@@ -751,7 +735,11 @@
           <para>Sets the length of the buffered stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -789,26 +777,37 @@
           <para>Copies bytes to the buffered stream and advances the current position within the buffered stream by the number of bytes written.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte array from which to copy <paramref
-           name="count" />
+          The byte array from which to copy <paramref name="count" />
 
           
 
            bytes to the current buffered stream. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset in the buffer at which to begin copying bytes to the current buffered stream. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -841,7 +840,11 @@
           <para>Writes a byte to the current position in the buffered stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

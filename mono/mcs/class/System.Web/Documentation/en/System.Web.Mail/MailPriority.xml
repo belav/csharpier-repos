@@ -16,8 +16,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the priority level for the e-mail message. Recommended alternative: <see
-         cref="N:System.Net.Mail" />
+        >Specifies the priority level for the e-mail message. Recommended alternative: <see cref="N:System.Net.Mail" />
 
         
 

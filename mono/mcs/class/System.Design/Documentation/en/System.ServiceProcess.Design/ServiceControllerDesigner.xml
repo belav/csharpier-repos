@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides design-time services for the <see
-         cref="T:System.ServiceProcess.ServiceController" />
+        >Provides design-time services for the <see cref="T:System.ServiceProcess.ServiceController" />
 
         
 
@@ -40,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceProcess.Design.ServiceControllerDesigner" />
+            >Initializes a new instance of the <see cref="T:System.ServiceProcess.Design.ServiceControllerDesigner" />
 
             
 
@@ -71,13 +69,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adjusts the set of properties the <see
-             cref="T:System.ServiceProcess.ServiceController" />
+            >Adjusts the set of properties the <see cref="T:System.ServiceProcess.ServiceController" />
 
             
 
-             exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -85,17 +81,19 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
-           containing the properties for the <see
-           cref="T:System.ServiceProcess.ServiceController" />
+           containing the properties for the <see cref="T:System.ServiceProcess.ServiceController" />
 
           
 

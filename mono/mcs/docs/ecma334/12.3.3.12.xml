@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.3.12" title="Return statements">
   <paragraph
-    >For a statement stmt of the form <code_example
-    >
+    >For a statement stmt of the form <code_example>
       <![CDATA[
 return expr ;   
 ]]>

@@ -28,52 +28,44 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+        >The <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
         
 
-         allows you to set the default formatting styles for XML Web service methods within an XML Web service. If an individual XML Web service method must change these defaults, apply a <see
-         cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+         allows you to set the default formatting styles for XML Web service methods within an XML Web service. If an individual XML Web service method must change these defaults, apply a <see cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
         
 
          to that XML Web service method.</para
       >
       <para
-        >Web Services Description Language (WSDL) defines two styles for how an XML Web service method, which it calls an operation, can be formatted in a SOAP request or a SOAP response: RPC and Document. Exactly how the individual message parts is determined by the <see
-         cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
+        >Web Services Description Language (WSDL) defines two styles for how an XML Web service method, which it calls an operation, can be formatted in a SOAP request or a SOAP response: RPC and Document. Exactly how the individual message parts is determined by the <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
 
         
 
-         and <see
-         cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
+         and <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
 
         
 
-         properties. The <see
-         cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
+         properties. The <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
 
         
 
-         property determines whether parameters are formatted Encoded or Literal. The <see
-         cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
+         property determines whether parameters are formatted Encoded or Literal. The <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
 
         
 
          determines whether the parameters are encapsulated within a single message part beneath the Body element, or whether each parameter is an individual message part.</para
       >
       <para
-        >To set the default method level formatting to RPC, apply a <see
-         cref="T:System.Web.Services.Protocols.SoapRpcServiceAttribute" />
+        >To set the default method level formatting to RPC, apply a <see cref="T:System.Web.Services.Protocols.SoapRpcServiceAttribute" />
 
         
 
          to the class implementing the XML Web service.</para
       >
       <para
-        >For more details, see <format
-         type="text/html">
+        >For more details, see <format type="text/html">
           <a href="1D777288-C0D9-4E6A-B638-F010DA031952"
             >[&lt;topic://cpconCustomizingSOAPInASPNETWebServicesWebServiceClients&gt;]</a
           >
@@ -88,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Applying the optional <see
-         cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+        >Applying the optional <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
         
 
@@ -108,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
             
 
@@ -137,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
             
 
@@ -146,12 +135,15 @@
           >
         </summary>
         <param name="use">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parameter formatting of the XML Web service. Sets the <see
-           cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
+          The parameter formatting of the XML Web service. Sets the <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
 
           
 
@@ -179,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
 
             
 
@@ -188,24 +179,30 @@
           >
         </summary>
         <param name="use">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The parameter formatting style. Sets the <see
-           cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
+          The parameter formatting style. Sets the <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
 
           
 
            property. </param
         >
         <param name="paramStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Sets whether parameters are encapsulated within a single XML element, under the Body element, in SOAP messages sent to and from XML Web service methods within the XML Web service. Sets the <see
-           cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
+          Sets whether parameters are encapsulated within a single XML element, under the Body element, in SOAP messages sent to and from XML Web service methods within the XML Web service. Sets the <see cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
 
           
 
@@ -274,38 +271,30 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Services.Description.SoapBindingUse" />
-        </value>
+        <value>a <see cref="T:System.Web.Services.Description.SoapBindingUse" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Web Services Description Language (WSDL) defines two formatting styles for parameters sent to and from XML Web services: <see
-             cref="F:System.Web.Services.Description.SoapBindingUse.Encoded" />
+            >The Web Services Description Language (WSDL) defines two formatting styles for parameters sent to and from XML Web services: <see cref="F:System.Web.Services.Description.SoapBindingUse.Encoded" />
 
             
 
-             and <see
-             cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
+             and <see cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
 
             
 
-            . <see
-             cref="F:System.Web.Services.Description.SoapBindingUse.Encoded" />
+            . <see cref="F:System.Web.Services.Description.SoapBindingUse.Encoded" />
 
             
 
-             refers to formatting the parameters using the SOAP encoding outlined in the SOAP specification in section 5. <see
-             cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
+             refers to formatting the parameters using the SOAP encoding outlined in the SOAP specification in section 5. <see cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
 
             
 
              refers to formatting the parameters using a predefined XSD schema for each parameter.</para
           >
           <para
-            >For more details, see <format
-             type="text/html">
+            >For more details, see <format type="text/html">
               <a href="1D777288-C0D9-4E6A-B638-F010DA031952"
                 >[&lt;topic://cpconCustomizingSOAPInASPNETWebServicesWebServiceClients&gt;]</a
               >

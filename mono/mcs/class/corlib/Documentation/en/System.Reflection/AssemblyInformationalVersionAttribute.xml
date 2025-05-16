@@ -36,28 +36,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The attribute defined by this class attaches additional version information to an assembly. If this attribute is applied to an assembly, the string it specifies can be obtained at run time by using the <see
-         cref="P:System.Windows.Forms.Application.ProductVersion" />
+        >The attribute defined by this class attaches additional version information to an assembly. If this attribute is applied to an assembly, the string it specifies can be obtained at run time by using the <see cref="P:System.Windows.Forms.Application.ProductVersion" />
 
         
 
-         property. The string is also used in the path and registry key provided by the <see
-         cref="P:System.Windows.Forms.Application.UserAppDataPath" />
+         property. The string is also used in the path and registry key provided by the <see cref="P:System.Windows.Forms.Application.UserAppDataPath" />
 
         
 
-         property and the <see
-         cref="P:System.Windows.Forms.Application.UserAppDataRegistry" />
+         property and the <see cref="P:System.Windows.Forms.Application.UserAppDataRegistry" />
 
         
 
-         property. If the <see
-         cref="T:System.Reflection.AssemblyInformationalVersionAttribute" />
+         property. If the <see cref="T:System.Reflection.AssemblyInformationalVersionAttribute" />
 
         
 
-         is not applied to an assembly, the version number specified by the <see
-         cref="T:System.Reflection.AssemblyVersionAttribute" />
+         is not applied to an assembly, the version number specified by the <see cref="T:System.Reflection.AssemblyVersionAttribute" />
 
         
 
@@ -98,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.AssemblyInformationalVersionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.AssemblyInformationalVersionAttribute" />
 
             
 
@@ -107,7 +101,11 @@
           >
         </summary>
         <param name="informationalVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

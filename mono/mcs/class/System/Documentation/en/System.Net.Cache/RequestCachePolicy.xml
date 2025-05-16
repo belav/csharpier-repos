@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can specify a default cache policy for your application by using the <see
-         cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+        >You can specify a default cache policy for your application by using the <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
 
         
 
-         property or the application or machine configuration files. For more information, see <format
-         type="text/html">
+         property or the application or machine configuration files. For more information, see <format type="text/html">
           <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
             >RequestCaching Element (Network Settings)</a
           >
@@ -36,8 +34,7 @@
         .</para
       >
       <para
-        >You can specify the cache policy for an individual request by using the <see
-         cref="P:System.Net.WebRequest.CachePolicy" />
+        >You can specify the cache policy for an individual request by using the <see cref="P:System.Net.WebRequest.CachePolicy" />
 
         
 
@@ -48,8 +45,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines an application's caching requirements for resources obtained by using <see
-         cref="T:System.Net.WebRequest" />
+        >Defines an application's caching requirements for resources obtained by using <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -75,13 +71,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.RequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.RequestCachePolicy.Level" />
 
             
 
-             property to <see
-             cref="F:System.Net.Cache.RequestCacheLevel.Default" />
+             property to <see cref="F:System.Net.Cache.RequestCacheLevel.Default" />
 
             
 
@@ -91,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.RequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.RequestCachePolicy" />
 
             
 
@@ -123,26 +116,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Net.Cache.RequestCachePolicy.Level" />
+            >This constructor initializes the <see cref="P:System.Net.Cache.RequestCachePolicy.Level" />
 
             
 
-             property to <paramref
-             name="level" />
+             property to <paramref name="level" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="T:System.Net.Cache.RequestCacheLevel" />
+            >The <see cref="T:System.Net.Cache.RequestCacheLevel" />
 
             
 
-             value controls whether caching is enabled, and when the cache can be used. For additional information, see the <see
-             cref="T:System.Net.Cache.RequestCacheLevel" />
+             value controls whether caching is enabled, and when the cache can be used. For additional information, see the <see cref="T:System.Net.Cache.RequestCacheLevel" />
 
             
 
@@ -152,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cache.RequestCachePolicy" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cache.RequestCachePolicy" />
 
             
 
@@ -161,17 +149,19 @@
           >
         </summary>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Cache.RequestCacheLevel" />
+          A <see cref="T:System.Net.Cache.RequestCacheLevel" />
 
           
 
-           that specifies the cache behavior for resources obtained using <see
-           cref="T:System.Net.WebRequest" />
+           that specifies the cache behavior for resources obtained using <see cref="T:System.Net.WebRequest" />
 
           
 
@@ -202,31 +192,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications typically use <see
-             cref="F:System.Net.Cache.RequestCacheLevel.Default" />
+            >Applications typically use <see cref="F:System.Net.Cache.RequestCacheLevel.Default" />
 
             
 
-             as their cache policy level. Using the <see
-             cref="F:System.Net.Cache.RequestCacheLevel.Default" />
+             as their cache policy level. Using the <see cref="F:System.Net.Cache.RequestCacheLevel.Default" />
 
             
 
-             level, the effective cache policy is determined by the current cache policy and the age of the content in the cache. The <see
-             cref="P:System.Net.WebRequest.CachePolicy" />
+             level, the effective cache policy is determined by the current cache policy and the age of the content in the cache. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
             
 
              property, if not null, determines the cache policy in effect for a request. </para
           >
           <para
-            >The default policy for the application domain can be set using the <see
-             cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+            >The default policy for the application domain can be set using the <see cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
 
             
 
-             or the application or machine configuration file. For more information, see <format
-             type="text/html">
+             or the application or machine configuration file. For more information, see <format type="text/html">
               <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
                 >RequestCaching Element (Network Settings)</a
               >
@@ -240,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Net.Cache.RequestCacheLevel" />
+            >Gets the <see cref="T:System.Net.Cache.RequestCacheLevel" />
 
             
 
@@ -280,13 +264,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             containing the <see
-             cref="P:System.Net.Cache.RequestCachePolicy.Level" />
+             containing the <see cref="P:System.Net.Cache.RequestCachePolicy.Level" />
 
             
 

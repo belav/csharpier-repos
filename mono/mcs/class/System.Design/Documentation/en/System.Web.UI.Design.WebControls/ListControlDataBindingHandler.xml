@@ -20,36 +20,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
+        >The <see cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
 
         
 
-         class performs design-time data binding of a <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+         class performs design-time data binding of a <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
-         control. The <see
-         cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
+         control. The <see cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
 
         
 
-         class is referenced by the <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+         class is referenced by the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
-         using the <see
-         cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+         using the <see cref="T:System.Web.UI.DataBindingHandlerAttribute" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.Design.WebControls.ListControlDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
+        >The <see cref="M:System.Web.UI.Design.WebControls.ListControlDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
 
         
 
@@ -59,8 +53,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Performs data binding of a <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+        >Performs data binding of a <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
@@ -77,13 +70,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The .NET Framework internally constructs a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
+            >The .NET Framework internally constructs a new instance of the <see cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
 
             
 
-             class when the class is referenced by a <see
-             cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+             class when the class is referenced by a <see cref="T:System.Web.UI.DataBindingHandlerAttribute" />
 
             
 
@@ -93,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
 
             
 
@@ -125,43 +115,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >If the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             control that is specified by <paramref
-             name="control" />
+             control that is specified by <paramref name="control" />
 
             
 
-             has a data source specified within its <see
-             cref="P:System.Web.UI.IDataBindingsAccessor.DataBindings" />
+             has a data source specified within its <see cref="P:System.Web.UI.IDataBindingsAccessor.DataBindings" />
 
             
 
-             property, the <see
-             cref="M:System.Web.UI.Design.WebControls.ListControlDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
+             property, the <see cref="M:System.Web.UI.Design.WebControls.ListControlDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
 
             
 
-             method clears the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Items" />
+             method clears the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             collection of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-            , and then adds a string message indicating that the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            , and then adds a string message indicating that the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             is data bound to the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Items" />
+             is data bound to the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
             
 
@@ -173,12 +155,15 @@
           <para>Performs data binding on the specified control.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 

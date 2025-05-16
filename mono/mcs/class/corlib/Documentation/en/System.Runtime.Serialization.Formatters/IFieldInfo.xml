@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows access to field names and field types of objects that support the <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >Allows access to field names and field types of objects that support the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
@@ -49,18 +48,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If a name is null, a default parameter name is used.</para>
           <para
-            >This property's get and set accessors are protected by a <see
-             cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+            >This property's get and set accessors are protected by a <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
 
             
 
-             for the <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+             for the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
-             with the <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+             with the <see cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
 
             
 
@@ -90,18 +86,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property's get and set accessors are protected by a <see
-             cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+            >This property's get and set accessors are protected by a <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
 
             
 
-             for the <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+             for the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
-             with the <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+             with the <see cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
 
             
 

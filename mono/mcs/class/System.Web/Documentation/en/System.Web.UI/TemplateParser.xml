@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.TemplateParser" />
+        >The <see cref="T:System.Web.UI.TemplateParser" />
 
         
 
-         class provides the common functionality for parser classes. Because the <see
-         cref="T:System.Web.UI.TemplateParser" />
+         class provides the common functionality for parser classes. Because the <see cref="T:System.Web.UI.TemplateParser" />
 
         
 

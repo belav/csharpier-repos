@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Message Queuing can secure messages by signing them. The <see
-         cref="T:System.ServiceModel.MsmqSecureHashAlgorithm" />
+        >Message Queuing can secure messages by signing them. The <see cref="T:System.ServiceModel.MsmqSecureHashAlgorithm" />
 
         
 
@@ -28,8 +27,7 @@
 
         
 
-         and <see
-         cref="F:System.ServiceModel.MsmqSecureHashAlgorithm.Sha512" />
+         and <see cref="F:System.ServiceModel.MsmqSecureHashAlgorithm.Sha512" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95939"
+            >The <see cref="http://go.microsoft.com/fwlink/?LinkId=95939"
               >Message Digest Algorithm 5 (MD5)</see
             >
 
@@ -88,8 +85,9 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95940">Secure Hash Algorithm (SHA-1)</see>
+            >The <see cref="http://go.microsoft.com/fwlink/?LinkId=95940"
+              >Secure Hash Algorithm (SHA-1)</see
+            >
 
             
 
@@ -115,8 +113,9 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95940">SHA-256</see>
+            >The <see cref="http://go.microsoft.com/fwlink/?LinkId=95940"
+              >SHA-256</see
+            >
 
             
 
@@ -142,8 +141,9 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95940">SHA 512</see>
+            >The <see cref="http://go.microsoft.com/fwlink/?LinkId=95940"
+              >SHA 512</see
+            >
 
             
 

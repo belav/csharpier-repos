@@ -34,36 +34,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.FileSystemInfo" />
+        >The <see cref="T:System.IO.FileSystemInfo" />
 
         
 
-         class contains methods that are common to file and directory manipulation. A <see
-         cref="T:System.IO.FileSystemInfo" />
+         class contains methods that are common to file and directory manipulation. A <see cref="T:System.IO.FileSystemInfo" />
 
         
 
-         object can represent either a file or a directory, thus serving as the basis for <see
-         cref="T:System.IO.FileInfo" />
+         object can represent either a file or a directory, thus serving as the basis for <see cref="T:System.IO.FileInfo" />
 
         
 
-         or <see
-         cref="T:System.IO.DirectoryInfo" />
+         or <see cref="T:System.IO.DirectoryInfo" />
 
         
 
          objects. Use this base class when parsing a lot of files and directories.</para
       >
       <para
-        >A derived class can inherit from <see
-         cref="T:System.IO.FileSystemInfo" />
+        >A derived class can inherit from <see cref="T:System.IO.FileSystemInfo" />
 
         
 
-         only if the derived class has the AllAccess permission from the <see
-         cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+         only if the derived class has the AllAccess permission from the <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
         
 
@@ -85,8 +79,7 @@
         </item>
       </list>
       <para
-        >For a list of common I/O tasks, see <format
-         type="text/html">
+        >For a list of common I/O tasks, see <format type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
 
@@ -98,13 +91,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base class for both <see
-         cref="T:System.IO.FileInfo" />
+        >Provides the base class for both <see cref="T:System.IO.FileInfo" />
 
         
 
-         and <see
-         cref="T:System.IO.DirectoryInfo" />
+         and <see cref="T:System.IO.DirectoryInfo" />
 
         
 
@@ -131,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -144,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -177,8 +166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -190,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >Initializes a new instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -199,24 +186,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -248,18 +241,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.Attributes" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.Attributes" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -298,8 +288,7 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
@@ -307,13 +296,11 @@
           >
           <para>The value of this property is a combination of the archive, compressed, directory, hidden, offline, read-only, system, and temporary file attribute flags. </para>
           <para
-            >When you set this value, use the bitwise OR operator (| in C# or Or in Visual Basic) to apply more than one value. To retain any existing values in the <see
-             cref="P:System.IO.FileSystemInfo.Attributes" />
+            >When you set this value, use the bitwise OR operator (| in C# or Or in Visual Basic) to apply more than one value. To retain any existing values in the <see cref="P:System.IO.FileSystemInfo.Attributes" />
 
             
 
-             property, include the value of the <see
-             cref="P:System.IO.FileSystemInfo.Attributes" />
+             property, include the value of the <see cref="P:System.IO.FileSystemInfo.Attributes" />
 
             
 
@@ -349,18 +336,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Note   This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.CreationTime" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.CreationTime" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -399,16 +383,14 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
              method.</para
           >
           <para
-            >If the file described in the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >If the file described in the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -416,8 +398,7 @@
           >
           <para>NTFS-formatted drives may cache file meta-info, such as file creation time, for a short period of time. This process is known as file tunneling. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
           <para
-            >This property value is null if the file system containing the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This property value is null if the file system containing the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -456,18 +437,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Note   This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.CreationTimeUtc" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.CreationTimeUtc" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -506,16 +484,14 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
              method.</para
           >
           <para
-            >If the file described in the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >If the file described in the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -523,8 +499,7 @@
           >
           <para>NTFS-formatted drives may cache file meta-info, such as file creation time, for a short period of time. This process is known as file tunneling. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
           <para
-            >This property value is null if the file system containing the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >This property value is null if the file system containing the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -578,8 +553,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -611,8 +585,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Extension property returns the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >The Extension property returns the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -738,8 +711,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For example, for a file c:\NewFile.txt, this property returns "c:\NewFile.txt".</para>
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -806,8 +778,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -819,8 +790,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -828,24 +798,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -875,26 +851,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Note   This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           <para
-            >If the file described in the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >If the file described in the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
              object does not exist, this property will return 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.LastAccessTimeUtc" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.LastAccessTimeUtc" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -933,8 +905,7 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
@@ -973,18 +944,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Note   This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.LastAccessTimeUtc" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.LastAccessTimeUtc" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-              object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+              object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -1023,24 +991,21 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
               method.</para
           >
           <para
-            >If the file described in the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >If the file described in the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
              object does not exist, this property will return 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 
@@ -1077,18 +1042,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Note   This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.LastWriteTime" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.LastWriteTime" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -1127,16 +1089,14 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
              method.</para
           >
           <para
-            >If the file described in the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >If the file described in the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -1176,18 +1136,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Note   This method may return an inaccurate value, because it uses native functions whose values may not be continuously updated by the operating system.</para>
           <para
-            >The value of the <see
-             cref="P:System.IO.FileSystemInfo.LastWriteTimeUtc" />
+            >The value of the <see cref="P:System.IO.FileSystemInfo.LastWriteTimeUtc" />
 
             
 
-             property is pre-cached if the current instance of the <see
-             cref="T:System.IO.FileSystemInfo" />
+             property is pre-cached if the current instance of the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
-             object was returned from any of the following <see
-             cref="T:System.IO.DirectoryInfo" />
+             object was returned from any of the following <see cref="T:System.IO.DirectoryInfo" />
 
             
 
@@ -1226,16 +1183,14 @@
             </item>
           </list>
           <para
-            >To get the latest value, call the <see
-             cref="M:System.IO.FileSystemInfo.Refresh" />
+            >To get the latest value, call the <see cref="M:System.IO.FileSystemInfo.Refresh" />
 
             
 
              method.</para
           >
           <para
-            >If the file described in the <see
-             cref="T:System.IO.FileSystemInfo" />
+            >If the file described in the <see cref="T:System.IO.FileSystemInfo" />
 
             
 
@@ -1291,8 +1246,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of common I/O tasks, see <format
-             type="text/html">
+            >For a list of common I/O tasks, see <format type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
 

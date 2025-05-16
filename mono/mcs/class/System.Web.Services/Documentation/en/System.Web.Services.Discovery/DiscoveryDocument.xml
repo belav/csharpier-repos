@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >XML Web services discovery involves discovering the available XML Web services, given an URL. The URL typically points to a discovery document, which usually has a.disco file name extension. The discovery document, which is an XML document, contains references to information about the existence of XML Web services, such as a service description, XML Schema Definition (XSD) language schema, or another discovery document. This class represents the contents of the discovery document; where the <see
-         cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
+        >XML Web services discovery involves discovering the available XML Web services, given an URL. The URL typically points to a discovery document, which usually has a.disco file name extension. The discovery document, which is an XML document, contains references to information about the existence of XML Web services, such as a service description, XML Schema Definition (XSD) language schema, or another discovery document. This class represents the contents of the discovery document; where the <see cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
 
         
 
@@ -45,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -76,13 +74,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the passed <see
-             cref="T:System.Xml.XmlReader" />
+            >Returns a value indicating whether the passed <see cref="T:System.Xml.XmlReader" />
 
             
 
-             can be deserialized into a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+             can be deserialized into a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -92,13 +88,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="T:System.Xml.XmlReader" />
+            >true if <see cref="T:System.Xml.XmlReader" />
 
             
 
-             can be deserialized into a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+             can be deserialized into a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -106,17 +100,19 @@
           >
         </returns>
         <param name="xmlReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
-           that is tested whether it can be deserialized into a <see
-           cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+           that is tested whether it can be deserialized into a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
           
 
@@ -139,8 +135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A discovery document contains references to documents describing Web Services. These references are XML elements contained within a discovery XML element. That discovery XML element is a member of the XML namespace specified by the <see
-             cref="F:System.Web.Services.Discovery.DiscoveryDocument.Namespace" />
+            >A discovery document contains references to documents describing Web Services. These references are XML elements contained within a discovery XML element. That discovery XML element is a member of the XML namespace specified by the <see cref="F:System.Web.Services.Discovery.DiscoveryDocument.Namespace" />
 
             
 
@@ -174,13 +169,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads and returns a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Reads and returns a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             from the passed <see
-             cref="T:System.IO.Stream" />
+             from the passed <see cref="T:System.IO.Stream" />
 
             
 
@@ -190,13 +183,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             containing the contents of a discovery document from the passed <see
-             cref="T:System.IO.Stream" />
+             containing the contents of a discovery document from the passed <see cref="T:System.IO.Stream" />
 
             
 
@@ -204,17 +195,19 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
-           from which to read the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+           from which to read the <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
           
 
@@ -239,21 +232,16 @@
         <Parameter Name="textReader" Type="System.IO.TextReader" />
       </Parameters>
       <Docs>
-        <param name="textReader"
-          >a <see
-           cref="T:System.IO.TextReader" />
-        </param>
+        <param name="textReader">a <see cref="T:System.IO.TextReader" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads and returns a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Reads and returns a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             from the passed <see
-             cref="T:System.IO.TextReader" />
+             from the passed <see cref="T:System.IO.TextReader" />
 
             
 
@@ -263,13 +251,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             containing the contents of a discovery document from the passed <see
-             cref="T:System.IO.TextReader" />
+             containing the contents of a discovery document from the passed <see cref="T:System.IO.TextReader" />
 
             
 
@@ -299,13 +285,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads and returns a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Reads and returns a <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             from the passed <see
-             cref="T:System.Xml.XmlReader" />
+             from the passed <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -315,13 +299,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             containing the contents of a discovery document from the passed <see
-             cref="T:System.Xml.XmlReader" />
+             containing the contents of a discovery document from the passed <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -329,17 +311,19 @@
           >
         </returns>
         <param name="xmlReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
-           from which to read the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+           from which to read the <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
           
 
@@ -359,15 +343,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.IList" />
-        </value>
+        <value>a <see cref="T:System.Collections.IList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A discovery document contains references to information about the existence of XML Web services. These references can refer to service descriptions, XSD schemas, or other discovery documents. The <see
-             cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
+            >A discovery document contains references to information about the existence of XML Web services. These references can refer to service descriptions, XSD schemas, or other discovery documents. The <see cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
 
             
 
@@ -403,13 +383,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Writes this <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             into the passed <see
-             cref="T:System.IO.Stream" />
+             into the passed <see cref="T:System.IO.Stream" />
 
             
 
@@ -417,17 +395,19 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
-           into which this <see
-           cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+           into which this <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
           
 
@@ -449,21 +429,16 @@
         <Parameter Name="textWriter" Type="System.IO.TextWriter" />
       </Parameters>
       <Docs>
-        <param name="textWriter"
-          >a <see
-           cref="T:System.IO.TextWriter" />
-        </param>
+        <param name="textWriter">a <see cref="T:System.IO.TextWriter" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Writes this <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             into the passed <see
-             cref="T:System.IO.TextWriter" />
+             into the passed <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -486,21 +461,16 @@
         <Parameter Name="xmlWriter" Type="System.Xml.XmlWriter" />
       </Parameters>
       <Docs>
-        <param name="xmlWriter"
-          >a <see
-           cref="T:System.Xml.XmlWriter" />
-        </param>
+        <param name="xmlWriter">a <see cref="T:System.Xml.XmlWriter" /></param>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+            >Writes this <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
-             into the passed <see
-             cref="T:System.Xml.XmlWriter" />
+             into the passed <see cref="T:System.Xml.XmlWriter" />
 
             
 

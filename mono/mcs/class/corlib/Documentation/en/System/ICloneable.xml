@@ -26,28 +26,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ICloneable" />
+        >The <see cref="T:System.ICloneable" />
 
         
 
-         interface enables you to provide a customized implementation that creates a copy of an existing object. The <see
-         cref="T:System.ICloneable" />
+         interface enables you to provide a customized implementation that creates a copy of an existing object. The <see cref="T:System.ICloneable" />
 
         
 
-         interface contains one member, the <see
-         cref="M:System.ICloneable.Clone" />
+         interface contains one member, the <see cref="M:System.ICloneable.Clone" />
 
         
 
-         method, which is intended to provide cloning support beyond that supplied by <see
-         cref="M:System.Object.MemberwiseClone" />
+         method, which is intended to provide cloning support beyond that supplied by <see cref="M:System.Object.MemberwiseClone" />
 
         
 
-        .  For more information about cloning, deep versus shallow copies, and examples, see the <see
-         cref="M:System.Object.MemberwiseClone" />
+        .  For more information about cloning, deep versus shallow copies, and examples, see the <see cref="M:System.Object.MemberwiseClone" />
 
         
 
@@ -83,14 +78,12 @@
       <Docs>
         <example>
           <para
-            >The following example shows an implementation of <see
-             cref="M:System.ICloneable.Clone" />
+            >The following example shows an implementation of <see cref="M:System.ICloneable.Clone" />
 
             
 
              that
-   uses the <see
-             cref="M:System.Object.MemberwiseClone" />
+   uses the <see cref="M:System.Object.MemberwiseClone" />
 
             
 
@@ -133,26 +126,22 @@ public class TestMyClass {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The resulting clone must be of the same type as, or compatible with, the original instance.</para>
           <para
-            >An implementation of <see
-             cref="M:System.ICloneable.Clone" />
+            >An implementation of <see cref="M:System.ICloneable.Clone" />
 
             
 
-             can perform either a deep copy or a shallow copy. In a deep copy, all objects are duplicated; in a shallow copy, only the top-level objects are duplicated and the lower levels contain references. Because callers of <see
-             cref="M:System.ICloneable.Clone" />
+             can perform either a deep copy or a shallow copy. In a deep copy, all objects are duplicated; in a shallow copy, only the top-level objects are duplicated and the lower levels contain references. Because callers of <see cref="M:System.ICloneable.Clone" />
 
             
 
-             cannot depend on the method performing a predictable cloning operation, we recommend that <see
-             cref="T:System.ICloneable" />
+             cannot depend on the method performing a predictable cloning operation, we recommend that <see cref="T:System.ICloneable" />
 
             
 
              not be implemented in public APIs.  </para
           >
           <para
-            >See <see
-             cref="M:System.Object.MemberwiseClone" />
+            >See <see cref="M:System.Object.MemberwiseClone" />
 
             
 

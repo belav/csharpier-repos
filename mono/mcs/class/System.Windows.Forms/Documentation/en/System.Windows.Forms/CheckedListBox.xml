@@ -14,92 +14,76 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This control presents a list of items that the user can navigate by using the keyboard or the scrollbar on the right side of the control. The user can place a check mark by one or more items and the checked items can be navigated with the <see
-         cref="T:System.Windows.Forms.CheckedListBox.CheckedItemCollection" />
+        >This control presents a list of items that the user can navigate by using the keyboard or the scrollbar on the right side of the control. The user can place a check mark by one or more items and the checked items can be navigated with the <see cref="T:System.Windows.Forms.CheckedListBox.CheckedItemCollection" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.CheckedListBox.CheckedIndexCollection" />
+         and <see cref="T:System.Windows.Forms.CheckedListBox.CheckedIndexCollection" />
 
         
 
         .</para
       >
       <para
-        >To add objects to the list at run time, assign an array of object references with the <see
-         cref="M:System.Windows.Forms.ListBox.ObjectCollection.AddRange(System.Object[])" />
+        >To add objects to the list at run time, assign an array of object references with the <see cref="M:System.Windows.Forms.ListBox.ObjectCollection.AddRange(System.Object[])" />
 
         
 
-         method. The list then displays the default string value for each object. You can add individual items to the list with the <see
-         cref="M:System.Windows.Forms.CheckedListBox.ObjectCollection.Add(System.Object,System.Boolean)" />
+         method. The list then displays the default string value for each object. You can add individual items to the list with the <see cref="M:System.Windows.Forms.CheckedListBox.ObjectCollection.Add(System.Object,System.Boolean)" />
 
         
 
          method.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        >The <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
-         object supports three states through the <see
-         cref="T:System.Windows.Forms.CheckState" />
+         object supports three states through the <see cref="T:System.Windows.Forms.CheckState" />
 
         
 
-         enumeration: <see
-         cref="F:System.Windows.Forms.CheckState.Checked" />
+         enumeration: <see cref="F:System.Windows.Forms.CheckState.Checked" />
 
         
 
-        , <see
-         cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+        , <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
         
 
-        , and <see
-         cref="F:System.Windows.Forms.CheckState.Unchecked" />
+        , and <see cref="F:System.Windows.Forms.CheckState.Unchecked" />
 
         
 
-        . You must set the state of <see
-         cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+        . You must set the state of <see cref="F:System.Windows.Forms.CheckState.Indeterminate" />
 
         
 
-         in the code because the user interface for a <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+         in the code because the user interface for a <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
          does not provide a mechanism to do so.</para
       >
       <para
-        >If <see
-         cref="P:System.Windows.Forms.ListBox.UseTabStops" />
+        >If <see cref="P:System.Windows.Forms.ListBox.UseTabStops" />
 
         
 
-         is true, the <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+         is true, the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
-         will recognize and expand tab characters in an item's text, creating columns. These tab stops are preset and cannot be changed. To use custom tab stops, set <see
-         cref="P:System.Windows.Forms.ListBox.UseTabStops" />
+         will recognize and expand tab characters in an item's text, creating columns. These tab stops are preset and cannot be changed. To use custom tab stops, set <see cref="P:System.Windows.Forms.ListBox.UseTabStops" />
 
         
 
-         to false, set <see
-         cref="P:System.Windows.Forms.ListBox.UseCustomTabOffsets" />
+         to false, set <see cref="P:System.Windows.Forms.ListBox.UseCustomTabOffsets" />
 
         
 
-         to true, and add the custom values to the <see
-         cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" />
+         to true, and add the custom values to the <see cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" />
 
         
 
@@ -107,13 +91,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see
-           cref="P:System.Windows.Forms.CheckedListBox.UseCompatibleTextRendering" />
+          >If the <see cref="P:System.Windows.Forms.CheckedListBox.UseCompatibleTextRendering" />
 
           
 
-           property is false, the <see
-           cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" />
+           property is false, the <see cref="P:System.Windows.Forms.ListBox.CustomTabOffsets" />
 
           
 
@@ -121,8 +103,7 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        >The <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
@@ -142,8 +123,7 @@
         <item>
           <term>
             <para
-              >All items contained in the <see
-               cref="T:System.Windows.Forms.CheckedListBox" />
+              >All items contained in the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
               
 
@@ -159,8 +139,7 @@
         <item>
           <term>
             <para
-              >Checked items (including items in an indeterminate state), which is a subset of the items contained in the <see
-               cref="T:System.Windows.Forms.CheckedListBox" />
+              >Checked items (including items in an indeterminate state), which is a subset of the items contained in the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
               
 
@@ -185,8 +164,7 @@
         </item>
       </list>
       <para
-        >The following three tables are examples of the three indexed collections that the <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        >The following three tables are examples of the three indexed collections that the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
@@ -351,8 +329,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Displays a <see
-         cref="T:System.Windows.Forms.ListBox" />
+        >Displays a <see cref="T:System.Windows.Forms.ListBox" />
 
         
 
@@ -369,18 +346,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >By default, <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-             uses <see
-             cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
+             uses <see cref="M:System.Windows.Forms.Control.SetStyle(System.Windows.Forms.ControlStyles,System.Boolean)" />
 
             
 
-             and the ResizeRedraw value of <see
-             cref="T:System.Windows.Forms.ControlStyles" />
+             and the ResizeRedraw value of <see cref="T:System.Windows.Forms.ControlStyles" />
 
             
 
@@ -390,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -426,8 +399,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection of checked indexes is a subset of the indexes into the collection of all items in the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >The collection of checked indexes is a subset of the indexes into the collection of all items in the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -437,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Collection of checked indexes in this <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Collection of checked indexes in this <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -473,13 +444,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection is a subset of the objects in the <see
-             cref="P:System.Windows.Forms.CheckedListBox.Items" />
+            >The collection is a subset of the objects in the <see cref="P:System.Windows.Forms.CheckedListBox.Items" />
 
             
 
-             collection, representing only those items whose <see
-             cref="T:System.Windows.Forms.CheckState" />
+             collection, representing only those items whose <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -489,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Collection of checked items in this <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Collection of checked items in this <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -554,56 +522,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Windows.Forms.CheckedListBox.Click" />
+            >The <see cref="E:System.Windows.Forms.CheckedListBox.Click" />
 
             
 
-             event passes an <see
-             cref="T:System.EventArgs" />
+             event passes an <see cref="T:System.EventArgs" />
 
             
 
-             to its event handler, so it only indicates that a click has occurred. If you need more specific mouse information (such as the button, number of clicks, wheel rotation, or location), use the <see
-             cref="E:System.Windows.Forms.Control.MouseDown" />
+             to its event handler, so it only indicates that a click has occurred. If you need more specific mouse information (such as the button, number of clicks, wheel rotation, or location), use the <see cref="E:System.Windows.Forms.Control.MouseDown" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.MouseUp" />
+             and <see cref="E:System.Windows.Forms.Control.MouseUp" />
 
             
 
-             events, which pass a <see
-             cref="T:System.Windows.Forms.MouseEventArgs" />
+             events, which pass a <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
             
 
              to the event handler. </para
           >
           <para
-            >A double-click is determined by the mouse settings of the user's operating system. The user can adjust the amount of time that can pass between clicks during a double-click of a mouse button. The <see
-             cref="E:System.Windows.Forms.CheckedListBox.Click" />
+            >A double-click is determined by the mouse settings of the user's operating system. The user can adjust the amount of time that can pass between clicks during a double-click of a mouse button. The <see cref="E:System.Windows.Forms.CheckedListBox.Click" />
 
             
 
-             event is raised every time the user double-clicks a control. For example, if you have event-handling methods for the <see
-             cref="E:System.Windows.Forms.CheckedListBox.Click" />
+             event is raised every time the user double-clicks a control. For example, if you have event-handling methods for the <see cref="E:System.Windows.Forms.CheckedListBox.Click" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.Control.DoubleClick" />
+             and <see cref="E:System.Windows.Forms.Control.DoubleClick" />
 
             
 
-             events of a form, the events are raised when the form is double-clicked and both event-handling methods are called. If the user double-clicks a control that does not support the <see
-             cref="E:System.Windows.Forms.Control.DoubleClick" />
+             events of a form, the events are raised when the form is double-clicked and both event-handling methods are called. If the user double-clicks a control that does not support the <see cref="E:System.Windows.Forms.Control.DoubleClick" />
 
             
 
-             event, the <see
-             cref="E:System.Windows.Forms.CheckedListBox.Click" />
+             event, the <see cref="E:System.Windows.Forms.CheckedListBox.Click" />
 
             
 
@@ -613,8 +571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -641,13 +598,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.CheckedListBox.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.CheckedListBox.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -655,8 +610,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
               
 
@@ -667,8 +621,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -678,8 +631,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -726,43 +678,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Control.CreateParams" />
+            >The <see cref="P:System.Windows.Forms.Control.CreateParams" />
 
             
 
-             property should not be overridden and used to adjust the properties of your derived control. Properties such as the <see
-             cref="P:System.Windows.Forms.CreateParams.Caption" />
+             property should not be overridden and used to adjust the properties of your derived control. Properties such as the <see cref="P:System.Windows.Forms.CreateParams.Caption" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.CreateParams.Width" />
+            , <see cref="P:System.Windows.Forms.CreateParams.Width" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.CreateParams.Height" />
+            , and <see cref="P:System.Windows.Forms.CreateParams.Height" />
 
             
 
-             should be set by the corresponding properties in your control such as <see
-             cref="P:System.Windows.Forms.Control.Text" />
+             should be set by the corresponding properties in your control such as <see cref="P:System.Windows.Forms.Control.Text" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.Width" />
+            , <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Control.Height" />
+             and <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-            . The <see
-             cref="T:System.Windows.Forms.CreateParams" />
+            . The <see cref="T:System.Windows.Forms.CreateParams" />
 
             
 
@@ -825,8 +769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DataSource" />
+            >Occurs when the <see cref="P:System.Windows.Forms.CheckedListBox.DataSource" />
 
             
 
@@ -858,36 +801,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >By default the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-             displays the default string for the items it contains. However, the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+             displays the default string for the items it contains. However, the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-             can display diverse types of objects and you may want to change the displayed string by specifying the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
+             can display diverse types of objects and you may want to change the displayed string by specifying the <see cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
 
             
 
-             property. If the specified property does not exist, or the value of the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
+             property. If the specified property does not exist, or the value of the <see cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
 
             
 
-             property is an empty string (""), the results of the object's <see
-             cref="M:System.Windows.Forms.ListBox.ToString" />
+             property is an empty string (""), the results of the object's <see cref="M:System.Windows.Forms.ListBox.ToString" />
 
             
 
              method are displayed instead.</para
           >
           <para
-            >If the new value of the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
+            >If the new value of the <see cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
 
             
 
@@ -923,8 +860,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
+            >Occurs when the <see cref="P:System.Windows.Forms.CheckedListBox.DisplayMember" />
 
             
 
@@ -958,53 +894,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is used by an owner-drawn <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >This event is used by an owner-drawn <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-            . The event is raised only when the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
+            . The event is raised only when the <see cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.DrawMode.OwnerDrawFixed" />
+             property is set to <see cref="F:System.Windows.Forms.DrawMode.OwnerDrawFixed" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
+             or <see cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
 
             
 
-            . You can use this event to perform the tasks needed to draw items in the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            . You can use this event to perform the tasks needed to draw items in the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-            . If you have a variable-sized item (that is, <see
-             cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
+            . If you have a variable-sized item (that is, <see cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
 
             
 
-             is set to <see
-             cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
+             is set to <see cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
 
             
 
-            ), the <see
-             cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
+            ), the <see cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
 
             
 
-             event is raised before the item is drawn. You can create an event handler for the <see
-             cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
+             event is raised before the item is drawn. You can create an event handler for the <see cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
 
             
 
-             event to specify the size for the item that you are going to draw in your event handler for the <see
-             cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
+             event to specify the size for the item that you are going to draw in your event handler for the <see cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
 
             
 
@@ -1015,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a visual aspect of an owner-drawn <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Occurs when a visual aspect of an owner-drawn <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -1058,8 +983,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the mode for drawing elements of the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Gets a value indicating the mode for drawing elements of the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -1089,13 +1013,11 @@
 
             
 
-             returns true if the value of <see
-             cref="T:System.Windows.Forms.CheckState" />
+             returns true if the value of <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
-             is Checked or Indeterminate for the item. To determine the specific state the item is in, use the <see
-             cref="M:System.Windows.Forms.CheckedListBox.GetItemCheckState(System.Int32)" />
+             is Checked or Indeterminate for the item. To determine the specific state the item is in, use the <see cref="M:System.Windows.Forms.CheckedListBox.GetItemCheckState(System.Int32)" />
 
             
 
@@ -1111,7 +1033,11 @@
           <para>true if the item is checked; otherwise, false.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1139,18 +1065,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.GetItemCheckState(System.Int32)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.GetItemCheckState(System.Int32)" />
 
             
 
-             method provides the ability to get the <see
-             cref="T:System.Windows.Forms.CheckState" />
+             method provides the ability to get the <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
-             value of an item, given the index. If you never set the check state of an item to Indeterminate, then use the <see
-             cref="M:System.Windows.Forms.CheckedListBox.GetItemChecked(System.Int32)" />
+             value of an item, given the index. If you never set the check state of an item to Indeterminate, then use the <see cref="M:System.Windows.Forms.CheckedListBox.GetItemChecked(System.Int32)" />
 
             
 
@@ -1164,8 +1087,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Windows.Forms.CheckState" />
+            >One of the <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -1173,7 +1095,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1198,8 +1124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The check state is not updated until after the <see
-             cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
+            >The check state is not updated until after the <see cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
 
             
 
@@ -1239,13 +1164,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This measurement is based on the font height plus a small margin to provide white space around the item.</para>
           <para
-            >The extenders of characters such as "g" and "y" do not display properly when the font is changed to 9.75-point Arial. To correct this, derive a class from <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >The extenders of characters such as "g" and "y" do not display properly when the font is changed to 9.75-point Arial. To correct this, derive a class from <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-             and override <see
-             cref="P:System.Windows.Forms.CheckedListBox.ItemHeight" />
+             and override <see cref="P:System.Windows.Forms.CheckedListBox.ItemHeight" />
 
             
 
@@ -1287,18 +1210,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.CheckedListBox.Items" />
+            >The <see cref="P:System.Windows.Forms.CheckedListBox.Items" />
 
             
 
-             property enables you to obtain a reference to the list of items that are currently stored in a <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+             property enables you to obtain a reference to the list of items that are currently stored in a <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
-             control. With this reference, you can add items, remove items, and obtain a count of the items in the collection. For more information on the tasks that can be performed with the item collection, see the <see
-             cref="T:System.Windows.Forms.CheckedListBox.ObjectCollection" />
+             control. With this reference, you can add items, remove items, and obtain a count of the items in the collection. For more information on the tasks that can be performed with the item collection, see the <see cref="T:System.Windows.Forms.CheckedListBox.ObjectCollection" />
 
             
 
@@ -1308,8 +1228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of items in this <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Gets the collection of items in this <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -1343,26 +1262,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can create an event handler for this event to specify the size of an item before it is drawn in the <see
-             cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
+            >You can create an event handler for this event to specify the size of an item before it is drawn in the <see cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
 
             
 
-             event. The event is raised only when the <see
-             cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
+             event. The event is raised only when the <see cref="P:System.Windows.Forms.CheckedListBox.DrawMode" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
+             property is set to <see cref="F:System.Windows.Forms.DrawMode.OwnerDrawVariable" />
 
             
 
             .</para
           >
           <para
-            >The maximum height of a <see
-             cref="T:System.Windows.Forms.ListBox" />
+            >The maximum height of a <see cref="T:System.Windows.Forms.ListBox" />
 
             
 
@@ -1373,8 +1288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when an owner-drawn <see
-             cref="T:System.Windows.Forms.ListBox" />
+            >Occurs when an owner-drawn <see cref="T:System.Windows.Forms.ListBox" />
 
             
 
@@ -1411,8 +1325,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1424,8 +1337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -1469,21 +1381,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnClick(System.EventArgs)" />
 
             
 
-             method selects or clears the check box of the item that is clicked. If the <see
-             cref="P:System.Windows.Forms.CheckedListBox.CheckOnClick" />
+             method selects or clears the check box of the item that is clicked. If the <see cref="P:System.Windows.Forms.CheckedListBox.CheckOnClick" />
 
             
 
              property is set to true, the check box is switched from a selected or cleared state the first time the item is clicked. Otherwise, the check box is switched only if the item is already selected.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1492,8 +1401,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnClick(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnClick(System.EventArgs)" />
 
             
 
@@ -1503,8 +1411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckedListBox.Click" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckedListBox.Click" />
 
             
 
@@ -1512,12 +1419,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1545,8 +1455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1555,8 +1464,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" />
 
             
 
@@ -1566,8 +1474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckedListBox.DrawItem" />
 
             
 
@@ -1575,12 +1482,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DrawItemEventArgs" />
+          The <see cref="T:System.Windows.Forms.DrawItemEventArgs" />
 
           
 
@@ -1605,8 +1515,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1615,8 +1524,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnFontChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnFontChanged(System.EventArgs)" />
 
             
 
@@ -1626,8 +1534,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.FontChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.FontChanged" />
 
             
 
@@ -1635,12 +1542,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1668,8 +1578,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1678,8 +1587,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnHandleCreated(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnHandleCreated(System.EventArgs)" />
 
             
 
@@ -1689,8 +1597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleCreated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" />
 
             
 
@@ -1698,12 +1605,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1731,8 +1641,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1741,8 +1650,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnItemCheck(System.Windows.Forms.ItemCheckEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnItemCheck(System.Windows.Forms.ItemCheckEventArgs)" />
 
             
 
@@ -1752,8 +1660,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
 
             
 
@@ -1761,12 +1668,15 @@
           >
         </summary>
         <param name="ice">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Windows.Forms.ItemCheckEventArgs" />
+          An <see cref="T:System.Windows.Forms.ItemCheckEventArgs" />
 
           
 
@@ -1794,26 +1704,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the spacebar is pressed and the <see
-             cref="P:System.Windows.Forms.CheckedListBox.SelectionMode" />
+            >If the spacebar is pressed and the <see cref="P:System.Windows.Forms.CheckedListBox.SelectionMode" />
 
             
 
-             property is not set to <see
-             cref="F:System.Windows.Forms.SelectionMode.None" />
+             property is not set to <see cref="F:System.Windows.Forms.SelectionMode.None" />
 
             
 
-            , the <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+            , the <see cref="M:System.Windows.Forms.CheckedListBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
 
             
 
              method switches the check state of the item currently selected.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1822,8 +1728,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
 
             
 
@@ -1833,8 +1738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.KeyPress" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
             
 
@@ -1842,12 +1746,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.KeyPressEventArgs" />
+          The <see cref="T:System.Windows.Forms.KeyPressEventArgs" />
 
           
 
@@ -1875,8 +1782,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1885,8 +1791,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" />
 
             
 
@@ -1896,8 +1801,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
+            >Raises the <see cref="E:System.Windows.Forms.CheckedListBox.MeasureItem" />
 
             
 
@@ -1905,12 +1809,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MeasureItemEventArgs" />
+          A <see cref="T:System.Windows.Forms.MeasureItemEventArgs" />
 
           
 
@@ -1938,8 +1845,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -1948,8 +1854,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.OnSelectedIndexChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.OnSelectedIndexChanged(System.EventArgs)" />
 
             
 
@@ -1959,8 +1864,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ListBox.SelectedIndexChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.ListBox.SelectedIndexChanged" />
 
             
 
@@ -1968,12 +1872,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2013,8 +1920,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Controls receive default values for <see
-             cref="P:System.Windows.Forms.Control.Padding" />
+            >Controls receive default values for <see cref="P:System.Windows.Forms.Control.Padding" />
 
             
 
@@ -2025,8 +1931,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets padding within the <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Gets or sets padding within the <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -2050,8 +1955,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses all <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+            >Parses all <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -2074,13 +1978,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.CheckedListBox.SelectionMode" />
+            >The <see cref="P:System.Windows.Forms.CheckedListBox.SelectionMode" />
 
             
 
-             property determines whether one item in the list box can be selected or no items can be selected. For <see
-             cref="T:System.Windows.Forms.CheckedListBox" />
+             property determines whether one item in the list box can be selected or no items can be selected. For <see cref="T:System.Windows.Forms.CheckedListBox" />
 
             
 
@@ -2111,13 +2013,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a value of true is passed, this method sets the <see
-             cref="T:System.Windows.Forms.CheckState" />
+            >When a value of true is passed, this method sets the <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
-             value to Checked. A value of false sets <see
-             cref="T:System.Windows.Forms.CheckState" />
+             value to Checked. A value of false sets <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -2127,8 +2027,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets <see
-             cref="T:System.Windows.Forms.CheckState" />
+            >Sets <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -2136,14 +2035,22 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the item to set the check state for. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2172,21 +2079,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.CheckedListBox.SetItemCheckState(System.Int32,System.Windows.Forms.CheckState)" />
+            >The <see cref="M:System.Windows.Forms.CheckedListBox.SetItemCheckState(System.Int32,System.Windows.Forms.CheckState)" />
 
             
 
-             method raises the <see
-             cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
+             method raises the <see cref="E:System.Windows.Forms.CheckedListBox.ItemCheck" />
 
             
 
              event.</para
           >
           <para
-            >Items whose <see
-             cref="T:System.Windows.Forms.CheckState" />
+            >Items whose <see cref="T:System.Windows.Forms.CheckState" />
 
             
 
@@ -2198,19 +2102,26 @@
           <para>Sets the check state of the item at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the item to set the state for. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.CheckState" />
+          One of the <see cref="T:System.Windows.Forms.CheckState" />
 
           
 
@@ -2239,8 +2150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the check boxes have a <see
-             cref="T:System.Windows.Forms.ButtonState" />
+            >Gets or sets a value indicating whether the check boxes have a <see cref="T:System.Windows.Forms.ButtonState" />
 
             
 
@@ -2265,41 +2175,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The UseCompatibleTextRendering property is intended to provide visual compatibility between Windows Forms controls that render text using the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
-             cref="T:System.Drawing.Graphics" />
+             class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see cref="T:System.Drawing.Graphics" />
 
             
 
              class. In most cases, if your application is not being upgraded from net_v10_short or net_v11_short, it is recommended that you leave UseCompatibleTextRendering set to the default value of false.</para
           >
           <para
-            >The ndptecgdi based <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+            >The ndptecgdi based <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
-             cref="T:System.Drawing.Graphics" />
+             class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see
-             cref="T:System.Drawing.Graphics" />
+             class was used to perform all text rendering. ndptecgdi calculates character spacing and word wrapping differently from ndptecgdiplus. In a Windows Forms application that uses the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class to render text, this could cause the text for controls that use <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class to render text, this could cause the text for controls that use <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
-             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
-             cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+             to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
 
             
 
@@ -2309,13 +2212,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that determines whether to use the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets or sets a value that determines whether to use the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             class (ndptecgdiplus) or the <see
-             cref="T:System.Windows.Forms.TextRenderer" />
+             class (ndptecgdiplus) or the <see cref="T:System.Windows.Forms.TextRenderer" />
 
             
 
@@ -2351,34 +2252,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify the contents of the <see
-             cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
+            >Specify the contents of the <see cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
 
             
 
              property in cases where you bind data.</para
           >
           <para
-            >You can clear the <see
-             cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
+            >You can clear the <see cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
 
             
 
              property by setting the property to an empty string ("") or null.</para
           >
           <para
-            >Setting a new <see
-             cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
+            >Setting a new <see cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
 
             
 
-             property raises the <see
-             cref="E:System.Windows.Forms.CheckedListBox.ValueMemberChanged" />
+             property raises the <see cref="E:System.Windows.Forms.CheckedListBox.ValueMemberChanged" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+             and <see cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
 
             
 
@@ -2414,8 +2310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
+            >Occurs when the <see cref="P:System.Windows.Forms.CheckedListBox.ValueMember" />
 
             
 

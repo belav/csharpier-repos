@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.NamedPipeTransportElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NamedPipeTransportElement" />
 
             
 
@@ -79,7 +78,11 @@
           <para>Applies the content of the specified configuration element to this configuration element.</para>
         </summary>
         <param name="bindingElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -168,7 +171,11 @@
           <para>Copies the content of the specified configuration element to this configuration element.</para>
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

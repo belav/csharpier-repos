@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+        >The <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
         
 
-         class allows you to programmatically access a collection of <see
-         cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+         class allows you to programmatically access a collection of <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
         
 
@@ -36,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see
-         cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+        >Contains a collection of <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
         
 
@@ -56,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -88,13 +84,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Adds a <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
-             object to the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+             object to the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -102,24 +96,30 @@
           >
         </summary>
         <param name="virtualDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the virtual directory path.</param
         >
         <param name="mapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+          A <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
@@ -146,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string array that contains all the keys in the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+            >Returns a string array that contains all the keys in the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -172,13 +171,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears all <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Clears all <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+             objects from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -209,13 +206,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+            >Copies the entire <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
-             collection to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             collection to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -223,34 +218,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A one-dimensional <see
-           cref="T:System.Array" />
+          A one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+           that is the destination of the elements copied from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -279,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the specified <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Gets the specified <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -290,8 +288,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -299,17 +296,19 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value that specifies a particular <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+          An integer value that specifies a particular <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
-           object within the <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+           object within the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
           
 
@@ -338,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Gets the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -349,8 +347,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >The <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -358,12 +355,15 @@
           >
         </returns>
         <param name="virtualDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+          A string that contains the name of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
@@ -389,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key of the entry at the specified index of the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+            >Gets the key of the entry at the specified index of the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -400,8 +399,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that contains the name of the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >A string that contains the name of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
@@ -409,17 +407,19 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value that specifies a particular <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+          An integer value that specifies a particular <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
-           object within the <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+           object within the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
           
 
@@ -491,13 +491,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Removes a <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
-             object from the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+             object from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -505,12 +503,15 @@
           >
         </summary>
         <param name="virtualDirectory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+          A string that contains the name of the <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
@@ -536,13 +537,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+            >Removes a <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
             
 
-             object at the specified index from the <see
-             cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+             object at the specified index from the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
             
 
@@ -550,17 +549,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value that specifies a particular <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
+          An integer value that specifies a particular <see cref="T:System.Web.Configuration.VirtualDirectoryMapping" />
 
           
 
-           object within the <see
-           cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
+           object within the <see cref="T:System.Web.Configuration.VirtualDirectoryMappingCollection" />
 
           
 

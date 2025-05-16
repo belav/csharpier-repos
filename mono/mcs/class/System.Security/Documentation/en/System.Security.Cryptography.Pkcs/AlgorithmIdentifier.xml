@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
 
         
 
@@ -47,8 +46,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+            >The <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
 
             
 
@@ -87,8 +85,7 @@
             </item>
           </list>
           <para
-            >To gain the highest degree of control over an application constructing an instance of this class, use one of the constructors that allows the algorithm to be set by passing in its  <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >To gain the highest degree of control over an application constructing an instance of this class, use one of the constructors that allows the algorithm to be set by passing in its  <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -98,13 +95,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
 
             
 
@@ -136,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default property values used with this constructor, see <see
-             cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor" />
+            >For the default property values used with this constructor, see <see cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor" />
 
             
 
@@ -147,13 +141,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor(System.Security.Cryptography.Oid)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor(System.Security.Cryptography.Oid)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
 
             
 
@@ -186,8 +178,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="keyLength" />
+            >The <paramref name="keyLength" />
 
             
 
@@ -197,13 +188,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor(System.Security.Cryptography.Oid,System.Int32)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.#ctor(System.Security.Cryptography.Oid,System.Int32)" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
 
             
 
@@ -211,7 +200,11 @@
           >
         </summary>
         <param name="keyLength">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -240,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.KeyLength" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.KeyLength" />
 
             
 
@@ -274,13 +266,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.Oid" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.Oid" />
 
             
 
-             property sets or retrieves the <see
-             cref="T:System.Security.Cryptography.Oid" />
+             property sets or retrieves the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -307,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.Parameters" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.Parameters" />
 
             
 

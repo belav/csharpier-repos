@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Some serializers require information about the context of an object to correctly persist their state. The <see
-         cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
+        >Some serializers require information about the context of an object to correctly persist their state. The <see cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
 
         
 
-         class enables a serializer to set data about the context of an object that is being serialized to a stack where another serializer can access it. The value of the <see
-         cref="P:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.Context" />
+         class enables a serializer to set data about the context of an object that is being serialized to a stack where another serializer can access it. The value of the <see cref="P:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.Context" />
 
         
 
-         property is provided by an <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+         property is provided by an <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
         
 
@@ -42,18 +39,15 @@
       <para>A context stack is useful because the process of serializing a design document can be deeply nested, and objects at each level of nesting may require context information to correctly persist the state of the object. A serializer can set a context object to the stack before invoking a nested serializer. Each object set to the stack should be removed by the serializer that set it after a call to a nested serializer returns.</para>
       <para>Typically, the objects on the stack contain information about the context of the current object that is being serialized. A parent serializer adds context information to the stack about the next object to be serialized, calls an appropriate serializer and, when the serializer finishes executing on the object, removes the context information from the stack. It is up to the implementation of each serializer to determine what objects get pushed on this stack.</para>
       <para
-        >As an example, an object with a property named Enabled has a data type of <see
-         cref="T:System.Boolean" />
+        >As an example, an object with a property named Enabled has a data type of <see cref="T:System.Boolean" />
 
         
 
-        . If a serializer writes this value to a data stream, it might need to include the context or type of property it is writing. The serializer does not have this information, however, because it is only instructed to write the <see
-         cref="T:System.Boolean" />
+        . If a serializer writes this value to a data stream, it might need to include the context or type of property it is writing. The serializer does not have this information, however, because it is only instructed to write the <see cref="T:System.Boolean" />
 
         
 
-         value. To provide this information to the serializer, the parent serializer can push a <see
-         cref="T:System.ComponentModel.PropertyDescriptor" />
+         value. To provide this information to the serializer, the parent serializer can push a <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
         
 
@@ -85,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
 
             
 
@@ -122,7 +115,11 @@
           <para>Appends an object to the end of the stack, rather than pushing it onto the top of the stack.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -251,7 +248,11 @@
           <para>Pushes, or places, the specified object onto the stack.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

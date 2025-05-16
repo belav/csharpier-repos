@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" />
 
             
 
@@ -79,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" />
 
             
 
@@ -114,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" />
 
             
 
@@ -123,34 +120,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           that holds the serialized data associated with the <see
-           cref="T:System.ServiceModel.MsmqException" />
+           that holds the serialized data associated with the <see cref="T:System.ServiceModel.MsmqException" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           that contains the source and destination of the serialized stream associated with the <see
-           cref="T:System.ServiceModel.MsmqException" />
+           that contains the source and destination of the serialized stream associated with the <see cref="T:System.ServiceModel.MsmqException" />
 
           
 
@@ -181,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" />
 
             
 
@@ -190,12 +190,15 @@
           >
         </summary>
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The inner exception to be encapsulated by the new instance of the <see
-           cref="T:System.ServiceModel.MsmqException" />
+          The inner exception to be encapsulated by the new instance of the <see cref="T:System.ServiceModel.MsmqException" />
 
           
 
@@ -230,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqException" />
 
             
 

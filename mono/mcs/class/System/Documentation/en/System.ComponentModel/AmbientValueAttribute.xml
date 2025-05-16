@@ -31,56 +31,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If a property on a control has ambient behavior, this attribute must be present. Ambient properties query their parent for their value, for example, a <see
-         cref="P:System.Windows.Forms.Control.Font" />
+        >If a property on a control has ambient behavior, this attribute must be present. Ambient properties query their parent for their value, for example, a <see cref="P:System.Windows.Forms.Control.Font" />
 
         
 
-         property or a <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         property or a <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
          property.</para
       >
       <para
-        >Typically, a visual designer uses the <see
-         cref="T:System.ComponentModel.AmbientValueAttribute" />
+        >Typically, a visual designer uses the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
         
 
-         attribute to decide which value to persist for a property. This is usually a value that causes the property to get its value from another source. An example of an ambient value is <see
-         cref="F:System.Drawing.Color.Empty" />
+         attribute to decide which value to persist for a property. This is usually a value that causes the property to get its value from another source. An example of an ambient value is <see cref="F:System.Drawing.Color.Empty" />
 
         
 
-         as the ambient value for the <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         as the ambient value for the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
-         property. If you have a control on a form and the <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         property. If you have a control on a form and the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
-         property of the control is set to a different color than the <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         property of the control is set to a different color than the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
-         property of the form, you can reset the <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         property of the form, you can reset the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
-         property of the control to that of the form by setting the <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+         property of the control to that of the form by setting the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
-         of the control to <see
-         cref="F:System.Drawing.Color.Empty" />
+         of the control to <see cref="F:System.Drawing.Color.Empty" />
 
         
 
@@ -90,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the value to pass to a property to cause the property to get its value from another source. This is known as <newTerm
-        >ambience</newTerm>
+        >Specifies the value to pass to a property to cause the property to get its value from another source. This is known as <newTerm>ambience</newTerm>
 
         
 
@@ -121,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -130,7 +118,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -168,7 +159,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -206,7 +200,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -244,7 +241,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -273,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -282,7 +282,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -311,8 +315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -320,7 +323,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -349,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -358,7 +364,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -387,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -396,7 +405,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -425,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -434,7 +446,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -463,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -472,7 +487,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -505,8 +524,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -514,24 +532,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           of the <paramref
-           name="value" />
+           of the <paramref name="value" />
 
           
 
            parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -562,13 +586,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Determines whether the specified <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+             is equal to the current <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -578,13 +600,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >true if the specified <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+             is equal to the current <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -592,17 +612,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.AmbientValueAttribute" />
+          The <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
           
 
-           to compare with the current <see
-           cref="T:System.ComponentModel.AmbientValueAttribute" />
+           to compare with the current <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
           
 
@@ -635,8 +657,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 
@@ -663,8 +684,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that is the value of this <see
-             cref="T:System.ComponentModel.AmbientValueAttribute" />
+            >Gets the object that is the value of this <see cref="T:System.ComponentModel.AmbientValueAttribute" />
 
             
 

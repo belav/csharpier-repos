@@ -22,41 +22,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Linq.IQueryable" />
+        >The <see cref="T:System.Linq.IQueryable" />
 
         
 
-         interface is intended for implementation by query providers. It is only supposed to be implemented by providers that also implement <see
-         cref="T:System.Linq.IQueryable`1" />
+         interface is intended for implementation by query providers. It is only supposed to be implemented by providers that also implement <see cref="T:System.Linq.IQueryable`1" />
 
         
 
-        . If the provider does not also implement <see
-         cref="T:System.Linq.IQueryable`1" />
+        . If the provider does not also implement <see cref="T:System.Linq.IQueryable`1" />
 
         
 
         , the standard query operators cannot be used on the provider's data source.</para
       >
       <para
-        >The <see
-         cref="T:System.Linq.IQueryable" />
+        >The <see cref="T:System.Linq.IQueryable" />
 
         
 
-         interface inherits the <see
-         cref="T:System.Collections.IEnumerable" />
+         interface inherits the <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         interface so that if it represents a query, the results of that query can be enumerated. Enumeration causes the expression tree associated with an <see
-         cref="T:System.Linq.IQueryable" />
+         interface so that if it represents a query, the results of that query can be enumerated. Enumeration causes the expression tree associated with an <see cref="T:System.Linq.IQueryable" />
 
         
 
-         object to be executed. The definition of "executing an expression tree" is specific to a query provider. For example, it may involve translating the expression tree to an appropriate query language for the underlying data source. Queries that do not return enumerable results are executed when the <see
-         cref="M:System.Linq.IQueryProvider.Execute(System.Linq.Expressions.Expression)" />
+         object to be executed. The definition of "executing an expression tree" is specific to a query provider. For example, it may involve translating the expression tree to an appropriate query language for the underlying data source. Queries that do not return enumerable results are executed when the <see cref="M:System.Linq.IQueryProvider.Execute(System.Linq.Expressions.Expression)" />
 
         
 
@@ -64,7 +57,7 @@
       >
       <para
         >For more information about how to create your own LINQ provider, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=112370"
+          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
 
@@ -95,8 +88,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Linq.IQueryable.ElementType" />
+            >The <see cref="P:System.Linq.IQueryable.ElementType" />
 
             
 
@@ -106,8 +98,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see
-             cref="T:System.Linq.IQueryable" />
+            >Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see cref="T:System.Linq.IQueryable" />
 
             
 
@@ -138,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an instance of <see
-             cref="T:System.Linq.IQueryable" />
+            >If an instance of <see cref="T:System.Linq.IQueryable" />
 
             
 
@@ -149,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the expression tree that is associated with the instance of <see
-             cref="T:System.Linq.IQueryable" />
+            >Gets the expression tree that is associated with the instance of <see cref="T:System.Linq.IQueryable" />
 
             
 
@@ -178,13 +167,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an instance of <see
-             cref="T:System.Linq.IQueryable" />
+            >If an instance of <see cref="T:System.Linq.IQueryable" />
 
             
 
-             represents a vbteclinq query against a data source, the associated query provider is the provider that created the <see
-             cref="T:System.Linq.IQueryable" />
+             represents a vbteclinq query against a data source, the associated query provider is the provider that created the <see cref="T:System.Linq.IQueryable" />
 
             
 

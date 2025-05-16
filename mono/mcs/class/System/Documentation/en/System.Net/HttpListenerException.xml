@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown by the <see
-         cref="T:System.Net.HttpListener" />
+        >This exception is thrown by the <see cref="T:System.Net.HttpListener" />
 
         
 
-         class and its associated classes when an error occurs during initialization of the <see
-         cref="T:System.Net.HttpListener" />
+         class and its associated classes when an error occurs during initialization of the <see cref="T:System.Net.HttpListener" />
 
         
 
-         or while creating or sending a response to an HTTP request. For example, this exception is thrown if the <see
-         cref="T:System.Net.HttpListener" />
+         or while creating or sending a response to an HTTP request. For example, this exception is thrown if the <see cref="T:System.Net.HttpListener" />
 
         
 
@@ -63,13 +60,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Net.HttpListenerException.ErrorCode" />
+            >This constructor sets the <see cref="P:System.Net.HttpListenerException.ErrorCode" />
 
             
 
-             and <see
-             cref="P:System.Exception.Message" />
+             and <see cref="P:System.Exception.Message" />
 
             
 
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpListenerException" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerException" />
 
             
 
@@ -108,13 +102,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <paramref
-             name="errorCode" />
+            >The value of <paramref name="errorCode" />
 
             
 
-             is used to set the <see
-             cref="P:System.Net.HttpListenerException.ErrorCode" />
+             is used to set the <see cref="P:System.Net.HttpListenerException.ErrorCode" />
 
             
 
@@ -124,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpListenerException" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerException" />
 
             
 
@@ -133,12 +124,15 @@
           >
         </summary>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Int32" />
+          A <see cref="T:System.Int32" />
 
           
 
@@ -169,23 +163,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <paramref
-             name="errorCode" />
+            >The value of <paramref name="errorCode" />
 
             
 
-             is used to set the <see
-             cref="P:System.Net.HttpListenerException.ErrorCode" />
+             is used to set the <see cref="P:System.Net.HttpListenerException.ErrorCode" />
 
             
 
-             property. The <paramref
-             name="message" />
+             property. The <paramref name="message" />
 
             
 
-             parameter is used to set the <see
-             cref="P:System.Exception.Message" />
+             parameter is used to set the <see cref="P:System.Exception.Message" />
 
             
 
@@ -195,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpListenerException" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerException" />
 
             
 
@@ -204,24 +193,30 @@
           >
         </summary>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Int32" />
+          A <see cref="T:System.Int32" />
 
           
 
            value that identifies the error that occurred.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -253,18 +248,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.HttpListenerException" />
+            >Initializes a new instance of the <see cref="T:System.Net.HttpListenerException" />
 
             
 
-             class from the specified instances of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -272,29 +264,34 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           object that contains the information required to deserialize the new <see
-           cref="T:System.Net.HttpListenerException" />
+           object that contains the information required to deserialize the new <see cref="T:System.Net.HttpListenerException" />
 
           
 
            object. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

@@ -16,13 +16,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Usually, statements are serialized into the statement collection that is on the context stack. You can modify this behavior by creating a statement context and calling the <see
-         cref="Overload:System.ComponentModel.Design.Serialization.ObjectStatementCollection.Populate" />
+        >Usually, statements are serialized into the statement collection that is on the context stack. You can modify this behavior by creating a statement context and calling the <see cref="Overload:System.ComponentModel.Design.Serialization.ObjectStatementCollection.Populate" />
 
         
 
-         method with a collection of objects whose statements you want stored in the statement table. As each object is serialized in the <see
-         cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+         method with a collection of objects whose statements you want stored in the statement table. As each object is serialized in the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
         
 
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.StatementContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.StatementContext" />
 
             
 

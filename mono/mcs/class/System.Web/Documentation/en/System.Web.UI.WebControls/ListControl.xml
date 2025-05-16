@@ -41,107 +41,88 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+        >An instance of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
-         abstract class cannot be created directly. Instead, this class is inherited by other classes, such as the <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         abstract class cannot be created directly. Instead, this class is inherited by other classes, such as the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DropDownList" />
+        , <see cref="T:System.Web.UI.WebControls.DropDownList" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.ListBox" />
+        , <see cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.RadioButtonList" />
+        , and <see cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
         
 
          classes, to provide common basic functionality.</para
       >
       <para
-        >The properties of the <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+        >The properties of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
-         class allow you to specify the source of the data to populate the list control. Use the <see
-         cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+         class allow you to specify the source of the data to populate the list control. Use the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
         
 
-         property to specify the data source to bind to the list control. If the data source contains more than one table, use the <see
-         cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
+         property to specify the data source to bind to the list control. If the data source contains more than one table, use the <see cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
 
         
 
-         property to specify the table to use. You can bind different fields in the data source to the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Text" />
+         property to specify the table to use. You can bind different fields in the data source to the <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.ListItem.Value" />
+         and <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
         
 
-         properties of the items in the list control by setting the <see
-         cref="P:System.Web.UI.WebControls.ListControl.DataTextField" />
+         properties of the items in the list control by setting the <see cref="P:System.Web.UI.WebControls.ListControl.DataTextField" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.ListControl.DataValueField" />
+         and <see cref="P:System.Web.UI.WebControls.ListControl.DataValueField" />
 
         
 
-         properties, respectively. The text displayed for each item in the list control can by formatted by setting the <see
-         cref="P:System.Web.UI.WebControls.ListControl.DataTextFormatString" />
+         properties, respectively. The text displayed for each item in the list control can by formatted by setting the <see cref="P:System.Web.UI.WebControls.ListControl.DataTextFormatString" />
 
         
 
          property.</para
       >
       <para
-        >All items displayed in the list control are stored in the <see
-         cref="P:System.Web.UI.WebControls.ListControl.Items" />
+        >All items displayed in the list control are stored in the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
         
 
-         collection. You can programmatically specify or determine the index of a selected item in the list control by using the <see
-         cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+         collection. You can programmatically specify or determine the index of a selected item in the list control by using the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
 
         
 
-         property. The properties of the selected item can be accessed by using the <see
-         cref="P:System.Web.UI.WebControls.ListControl.SelectedItem" />
+         property. The properties of the selected item can be accessed by using the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedItem" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+        >The <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
-         class provides the <see
-         cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+         class provides the <see cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
 
         
 
-         event, which is raised when the selection in the list control changes between posts to the server. This allows you to provide a custom handler for this event. For more information about handling events, see <format
-         type="text/html">
+         event, which is raised when the selection in the list control changes between posts to the server. This allows you to provide a custom handler for this event. For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -150,13 +131,11 @@
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ListControl" />
+        >The <see cref="T:System.Web.UI.WebControls.ListControl" />
 
         
 
-         class implements the <see
-         cref="T:System.Web.UI.IEditableTextControl" />
+         class implements the <see cref="T:System.Web.UI.IEditableTextControl" />
 
         
 
@@ -179,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -213,18 +191,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers to insert the additional attributes and styles into the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is used primarily by control developers to insert the additional attributes and styles into the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             output stream for controls that are derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             output stream for controls that are derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -234,8 +209,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies HTML attributes and styles to render to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Applies HTML attributes and styles to render to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -269,13 +243,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ListControl.AppendDataBoundItems" />
+            >The <see cref="P:System.Web.UI.WebControls.ListControl.AppendDataBoundItems" />
 
             
 
-             property allows you to add items to the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property allows you to add items to the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -283,13 +255,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -319,13 +289,11 @@
           <para>This property can be used to allow automatic population of other controls on the Web page based on a user's selection from a list.</para>
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -374,49 +342,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
-             property to determine whether validation is performed when a <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property to determine whether validation is performed when a <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
              control is clicked. Page validation determines whether the input controls that are associated with a validation control on the page all pass the validation rules that are specified by the validation control.</para
           >
           <para
-            >By default, clicking a control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >By default, clicking a control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             class does not cause page validation. To perform page validation when the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             class does not cause page validation. To perform page validation when the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             class is clicked, set the <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+             class is clicked, set the <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
              property to true.</para
           >
           <para
-            >When the value of the <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+            >When the value of the <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
-             property is set to true, you can also use the <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+             property is set to true, you can also use the <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property to specify the name of the validation group for which the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -424,13 +384,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -442,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether validation is performed when a control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Gets or sets a value indicating whether validation is performed when a control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -467,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears out the list selection and sets the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+            >Clears out the list selection and sets the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
@@ -549,8 +505,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to specify a field in the <see
-             cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+            >Use this property to specify a field in the <see cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
 
             
 
@@ -558,13 +513,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -606,21 +559,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ListControl.DataTextFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ListControl.DataTextFormatString" />
 
             
 
              property to provide a custom display format the items in a list control.</para
           >
           <para
-            >The data format string consists of two parts, separated by a colon, in the form { <paramref
-             name="A" />
+            >The data format string consists of two parts, separated by a colon, in the form { <paramref name="A" />
 
             
 
-             : <paramref
-             name="Bxx" />
+             : <paramref name="Bxx" />
 
             
 
@@ -630,8 +580,7 @@
             <para>The entire string must be enclosed in braces to indicate that it is a format string and not a literal string. Any text outside the braces is displayed as literal text.</para>
           </block>
           <para
-            >The value before the colon (<paramref
-             name="A" />
+            >The value before the colon (<paramref name="A" />
 
             
 
@@ -641,8 +590,7 @@
             <para>This value can only be set to 0 because there is only one value in each cell.</para>
           </block>
           <para
-            >The character after the colon (<paramref
-             name="B" />
+            >The character after the colon (<paramref name="B" />
 
             
 
@@ -720,8 +668,7 @@
             <para>The format character is not case-sensitive, except for X, which displays the hexadecimal characters in the case specified.</para>
           </block>
           <para
-            >The value after the format character (<paramref
-             name="xx" />
+            >The value after the format character (<paramref name="xx" />
 
             
 
@@ -887,8 +834,7 @@
             </item>
           </list>
           <para
-            >For more information on formatting strings, see <format
-             type="text/html">
+            >For more information on formatting strings, see <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
             </format>
 
@@ -898,13 +844,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -945,13 +889,11 @@
           <para>Use this property to specify the field that contains the value of each item in a list control.</para>
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1033,13 +975,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.LoadViewState(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.LoadViewState(System.Object)" />
 
             
 
-             method is used to load the previously saved view state of the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method is used to load the previously saved view state of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1047,8 +987,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers when extending the <see
-               cref="T:System.Web.UI.WebControls.ListControl" />
+              >This method is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
               
 
@@ -1059,8 +998,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the previously saved view state of the <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+            >Loads the previously saved view state of the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
@@ -1068,17 +1006,19 @@
           >
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that represents the state of the <see
-           cref="T:System.Web.UI.WebControls.ListControl" />
+           that represents the state of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
           
 
@@ -1104,8 +1044,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >Raises the <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
@@ -1113,12 +1052,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1143,16 +1085,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method notifies the server control to perform any necessary prerendering steps prior to saving view state and rendering content .It is generally used by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >This method notifies the server control to perform any necessary prerendering steps prior to saving view state and rendering content .It is generally used by control developers when extending the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.OnPreRender(System.EventArgs)" />
 
             
 
@@ -1162,8 +1102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -1171,12 +1110,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1204,8 +1146,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
 
             
 
@@ -1215,8 +1156,7 @@
             <para>A list control must persist some values between posts to the server for this event to work correctly. Be sure that view state is enabled for the list control.</para>
           </block>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1225,8 +1165,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
 
             
 
@@ -1236,8 +1175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
 
             
 
@@ -1245,12 +1183,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -1278,36 +1219,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
 
             
 
-             method is called by the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method is called by the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             class to raise the <see
-             cref="E:System.Web.UI.WebControls.ListControl.TextChanged" />
+             class to raise the <see cref="E:System.Web.UI.WebControls.ListControl.TextChanged" />
 
             
 
-             event. Generally, the <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+             event. Generally, the <see cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
 
             
 
-             method is used by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method is used by control developers when extending the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
 
             
 
@@ -1317,8 +1252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.ListControl.TextChanged" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.ListControl.TextChanged" />
 
             
 
@@ -1326,12 +1260,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1358,13 +1295,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.PerformDataBinding(System.Collections.IEnumerable)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
-             method is a helper method that is called by the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method is a helper method that is called by the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1374,8 +1309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds the specified data source to the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Binds the specified data source to the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1383,12 +1317,15 @@
           >
         </summary>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IEnumerable" />
+          An <see cref="T:System.Collections.IEnumerable" />
 
           
 
@@ -1410,18 +1347,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.PerformSelect" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.PerformSelect" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.WebControls.ListControl.PerformDataBinding(System.Collections.IEnumerable)" />
+             method calls the <see cref="M:System.Web.UI.WebControls.ListControl.PerformDataBinding(System.Collections.IEnumerable)" />
 
             
 
-             method after data is retrieved to bind data to elements of the data-bound control. For more information, see <see
-             cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
+             method after data is retrieved to bind data to elements of the data-bound control. For more information, see <see cref="M:System.Web.UI.WebControls.DataBoundControl.PerformSelect" />
 
             
 
@@ -1453,13 +1387,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to render the items in the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method to render the items in the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1469,8 +1401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the items in the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Renders the items in the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1478,12 +1409,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -1502,13 +1436,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.DetailsView.SaveViewState" />
+            >The <see cref="M:System.Web.UI.WebControls.DetailsView.SaveViewState" />
 
             
 
-             method is a helper method called by the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method is a helper method called by the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1516,8 +1448,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers when extending the <see
-               cref="T:System.Web.UI.WebControls.ListControl" />
+              >This method is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
               
 
@@ -1528,8 +1459,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the current view state of the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Saves the current view state of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1539,13 +1469,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the saved state of the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             that contains the saved state of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1571,61 +1499,50 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this property to determine the index of the currently selected item in the list if the list control allows only one selection. If the list control supports multiple selections, use this property to determine the lowest index of the selected items.</para>
           <para
-            >The value of the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+            >The value of the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
 
             
 
-             property is not specifically saved on postback. It is restored on postback using the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+             property is not specifically saved on postback. It is restored on postback using the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
-             property. For example, if the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+             property. For example, if the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
-             property is 4, on postback, the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+             property is 4, on postback, the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
 
             
 
-             property is set to the index of the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property is set to the index of the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             object that has a <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             object that has a <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property of 4. If more than one <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property of 4. If more than one <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             object has a <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             object has a <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property of 4, the first item in the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Items" />
+             property of 4, the first item in the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
             
 
              collection is selected.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1672,8 +1589,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
 
             
 
@@ -1683,8 +1599,7 @@
             <para>A list control must persist some values between posts to the server for this event to work correctly. Be sure that view state is enabled for the list control.</para>
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1747,46 +1662,37 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+            >This property returns the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property of the selected <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property of the selected <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-            . The <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+            . The <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
              property is commonly used to determine the value of the selected item in the list control. If multiple items are selected, the value of the selected item with the lowest index is returned. If no item is selected, an empty string ("") is returned.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+            >The <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
              property can also be used to select an item in the list control by setting it with the value of the item. </para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1795,8 +1701,7 @@
             .</para
           >
           <para
-            >When the selected value is not in the list of available values and a postback is performed, an <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >When the selected value is not in the list of available values and a postback is performed, an <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -1857,13 +1762,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.SetPostDataSelection(System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.SetPostDataSelection(System.Int32)" />
 
             
 
-             method is a helper method that maintains the selected item in the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             method is a helper method that maintains the selected item in the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1873,13 +1776,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+            >Sets the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
-             property of a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property of a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1887,12 +1788,15 @@ if(DropDownList1.Items.FindByValue("2") != null) {
           >
         </summary>
         <param name="selectedIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the selected item in the <see
-           cref="P:System.Web.UI.WebControls.ListControl.Items" />
+          The index of the selected item in the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
           
 
@@ -1918,13 +1822,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ListControl.TagKey" />
+            >The <see cref="P:System.Web.UI.WebControls.ListControl.TagKey" />
 
             
 
-             property allows the output stream to write the appropriate HTML markup for the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property allows the output stream to write the appropriate HTML markup for the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1934,13 +1836,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Gets the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value for the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             value for the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -1977,75 +1877,63 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ListControl.Text" />
+            >The <see cref="P:System.Web.UI.WebControls.ListControl.Text" />
 
             
 
-             property gets and sets the same value that the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+             property gets and sets the same value that the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
             e property does.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+            >The <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
-             property is commonly used to determine the value of the selected item in the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property is commonly used to determine the value of the selected item in the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
              control. If no item is selected, an empty string ("") is returned.</para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+            >You can also use the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
-             property to select an item in the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property to select an item in the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             control by setting it with the value of the item. If no items in the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             control by setting it with the value of the item. If no items in the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             control contain the specified value, an <see
-             cref="T:System.ArgumentOutOfRangeException" />
+             control contain the specified value, an <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
              exception is thrown.</para
           >
           <para
-            >Control developers can override the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+            >Control developers can override the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
-             property to support features that are not related to the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+             property to support features that are not related to the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
              property. </para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -2057,13 +1945,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+            >Gets or sets the <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property of the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -2085,26 +1971,22 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.ListControl.TextChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.ListControl.TextChanged" />
 
             
 
-             event is raised when the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Text" />
+             event is raised when the <see cref="P:System.Web.UI.WebControls.ListControl.Text" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+             and <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
              properties change.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2113,8 +1995,7 @@ if(DropDownList1.Items.FindByValue("2") != null) {
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
 
             
 
@@ -2124,13 +2005,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Text" />
+            >Occurs when the <see cref="P:System.Web.UI.WebControls.ListControl.Text" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
+             and <see cref="P:System.Web.UI.WebControls.ListControl.SelectedValue" />
 
             
 
@@ -2152,8 +2031,7 @@ if(DropDownList1.Items.FindByValue("2") != null) {
           <para>This method is overridden to mark the starting point to begin tracking and saving changes to the control as part of the control's view state.</para>
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers when extending <see
-               cref="T:System.Web.UI.WebControls.ListControl" />
+              >This method is used primarily by control developers when extending <see cref="T:System.Web.UI.WebControls.ListControl" />
 
               
 
@@ -2164,8 +2042,7 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marks the starting point to begin tracking and saving view-state changes to a <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Marks the starting point to begin tracking and saving view-state changes to a <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -2200,46 +2077,38 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently from other validation groups on the page. Use the <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently from other validation groups on the page. Use the <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property to specify the name of the validation group for which the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
              class causes validation when it posts back to the server.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+            >The <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
-             property has an effect only when the value of the <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+             property has an effect only when the value of the <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
-             property is set to true. When you specify a value for the <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+             property is set to true. When you specify a value for the <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
-             property, only the validation controls that are part of the specified group are validated when the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+             property, only the validation controls that are part of the specified group are validated when the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
-             control posts back to the server. If you do not specify a value for the <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+             control posts back to the server. If you do not specify a value for the <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+             property and the <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
@@ -2247,13 +2116,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -2265,8 +2132,7 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the control that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ListControl" />
+            >Gets or sets the group of controls for which the control that is derived from the <see cref="T:System.Web.UI.WebControls.ListControl" />
 
             
 
@@ -2289,13 +2155,11 @@ if(DropDownList1.Items.FindByValue("2") != null) {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ListControl.VerifyMultiSelect" />
+            >The <see cref="M:System.Web.UI.WebControls.ListControl.VerifyMultiSelect" />
 
             
 
-             method does nothing if multiselection is supported. Otherwise, it throws an <see
-             cref="T:System.Web.HttpException" />
+             method does nothing if multiselection is supported. Otherwise, it throws an <see cref="T:System.Web.HttpException" />
 
             
 

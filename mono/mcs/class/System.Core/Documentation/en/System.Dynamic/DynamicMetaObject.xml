@@ -18,12 +18,16 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >For more information, see documentation on the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=141028">CodePlex</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=141028"
+          >CodePlex</see
+        >
 
         
 
          Web site and the MSDN article <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=198161">Implementing Dynamic Interfaces</see>
+          cref="http://go.microsoft.com/fwlink/?LinkID=198161"
+          >Implementing Dynamic Interfaces</see
+        >
 
         
 
@@ -58,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Initializes a new instance of the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -67,19 +70,26 @@
           >
         </summary>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The expression representing this <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The expression representing this <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
            during the dynamic binding process.</param
         >
         <param name="restrictions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Initializes a new instance of the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -119,31 +128,41 @@
           >
         </summary>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The expression representing this <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The expression representing this <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
            during the dynamic binding process.</param
         >
         <param name="restrictions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The set of binding restrictions under which the binding is valid.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The runtime value represented by the <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The runtime value represented by the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -180,8 +199,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -189,24 +207,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.BinaryOperationBinder" />
+          An instance of the <see cref="T:System.Dynamic.BinaryOperationBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="arg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An instance of the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -237,13 +261,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In Visual Basic, only explicit conversion is supported. If you override this method, it is called by using the <see
-             cref="M:Microsoft.VisualBasic.Conversion.CTypeDynamic``1(System.Object)" />
+            >In Visual Basic, only explicit conversion is supported. If you override this method, it is called by using the <see cref="M:Microsoft.VisualBasic.Conversion.CTypeDynamic``1(System.Object)" />
 
             
 
-             or <see
-             cref="M:Microsoft.VisualBasic.Conversion.CTypeDynamic(System.Object,System.Type)" />
+             or <see cref="M:Microsoft.VisualBasic.Conversion.CTypeDynamic(System.Object,System.Type)" />
 
             
 
@@ -257,8 +279,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -266,12 +287,15 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.ConvertBinder" />
+          An instance of the <see cref="T:System.Dynamic.ConvertBinder" />
 
           
 
@@ -308,8 +332,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -317,24 +340,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.CreateInstanceBinder" />
+          An instance of the <see cref="T:System.Dynamic.CreateInstanceBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An array of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -371,8 +400,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -380,24 +408,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.DeleteIndexBinder" />
+          An instance of the <see cref="T:System.Dynamic.DeleteIndexBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An array of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -433,8 +467,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -442,12 +475,15 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.DeleteMemberBinder" />
+          An instance of the <see cref="T:System.Dynamic.DeleteMemberBinder" />
 
           
 
@@ -484,8 +520,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -493,24 +528,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.GetIndexBinder" />
+          An instance of the <see cref="T:System.Dynamic.GetIndexBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An array of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -546,8 +587,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -555,12 +595,15 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.GetMemberBinder" />
+          An instance of the <see cref="T:System.Dynamic.GetMemberBinder" />
 
           
 
@@ -597,8 +640,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -606,24 +648,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.InvokeBinder" />
+          An instance of the <see cref="T:System.Dynamic.InvokeBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An array of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -660,8 +708,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -669,24 +716,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.InvokeMemberBinder" />
+          An instance of the <see cref="T:System.Dynamic.InvokeMemberBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An array of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -724,8 +777,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -733,36 +785,45 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.SetIndexBinder" />
+          An instance of the <see cref="T:System.Dynamic.SetIndexBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="indexes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          An array of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
            instances - indexes for the set index operation.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -799,8 +860,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -808,24 +868,30 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.SetMemberBinder" />
+          An instance of the <see cref="T:System.Dynamic.SetMemberBinder" />
 
           
 
            that represents the details of the dynamic operation.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -861,8 +927,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The new <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -870,12 +935,15 @@
           >
         </returns>
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Dynamic.UnaryOperationBinder" />
+          An instance of the <see cref="T:System.Dynamic.UnaryOperationBinder" />
 
           
 
@@ -912,13 +980,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the given object implements <see
-             cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
+            >If the given object implements <see cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
             
 
-             and is not a remote object from outside the current AppDomain, returns the object's specific meta-object returned by <see
-             cref="M:System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(System.Linq.Expressions.Expression)" />
+             and is not a remote object from outside the current AppDomain, returns the object's specific meta-object returned by <see cref="M:System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(System.Linq.Expressions.Expression)" />
 
             
 
@@ -926,19 +992,26 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to get a meta-object for.</param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The expression representing this <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The expression representing this <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -967,8 +1040,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an empty array of type <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Represents an empty array of type <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -999,8 +1071,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The expression representing the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The expression representing the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -1054,8 +1125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Gets a value indicating whether the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -1079,8 +1149,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the most specific type known about the object represented by the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Represents the most specific type known about the object represented by the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -1090,8 +1159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the limit type of the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Gets the limit type of the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -1141,13 +1209,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
-             of the runtime value or null if the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+             of the runtime value or null if the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -1172,8 +1238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The runtime value represented by this <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The runtime value represented by this <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 

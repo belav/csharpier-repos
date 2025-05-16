@@ -27,28 +27,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Channels transport messages between applications across such remoting boundaries as application domains, processes, and computers. These crossings can be inbound and outbound. A channel can listen on an endpoint for inbound messages, send to an endpoint for outbound messages, or both. This provides an extensibility point in the runtime to plug in a wide range of protocols, even though the runtime might not be at the other end of the channel. Run-time objects can be used to expose a wide range of semantics and entities. The channel provides the extensibility point to convert the messages to and from the specific protocols.</para>
       <para
-        >Channels must expose the <see
-         cref="T:System.Runtime.Remoting.Channels.IChannel" />
+        >Channels must expose the <see cref="T:System.Runtime.Remoting.Channels.IChannel" />
 
         
 
-         interface, which provides informational properties such as the <see
-         cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
+         interface, which provides informational properties such as the <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
         
 
-         and <see
-         cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelPriority" />
+         and <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelPriority" />
 
         
 
-        . Channels are registered using the <see
-         cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
+        . Channels are registered using the <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
 
         
 
-         method. Channels can also be loaded from the remoting configuration. (See <format
-         type="text/html">
+         method. Channels can also be loaded from the remoting configuration. (See <format type="text/html">
           <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE">[&lt;topic://gnconchanneltemplate&gt;]</a>
         </format>
 
@@ -57,21 +52,18 @@
          for details.) </para
       >
       <para
-        >On the client side, messages are handed off to the client channel sink chain after they traverse the client <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+        >On the client side, messages are handed off to the client channel sink chain after they traverse the client <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
-         chain. The first channel sink is typically a <see
-         cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />
+         chain. The first channel sink is typically a <see cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />
 
         
 
         , which serializes the message into a stream that is passed down the channel sink chain to the client transport sink. The client transport sink then writes this stream out to the wire.</para
       >
       <para
-        >On the server side, the server transport sink reads requests off the wire and passes the request stream to the server channel sink chain. The server formatter sink at the end of this chain will deserialize the request into a message. It will then hand this message off to the remoting infrastructure, which will dispatch it to the server <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+        >On the server side, the server transport sink reads requests off the wire and passes the request stream to the server channel sink chain. The server formatter sink at the end of this chain will deserialize the request into a message. It will then hand this message off to the remoting infrastructure, which will dispatch it to the server <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
@@ -118,8 +110,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
+            >A <see cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
 
             
 
@@ -127,14 +118,22 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to dispatch. </param
         >
         <param name="replySink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -178,19 +177,26 @@
           <para>A new channel sink chain for the specified channel.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first provider in the chain of sink providers that will create the channel sink chain. </param
         >
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" />
+          The <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiver" />
 
           
 
@@ -273,7 +279,11 @@
           <para>An interface to a registered channel, or null if the channel is not registered.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -307,8 +317,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IDictionary" />
+            >Returns a <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -320,7 +329,11 @@
           <para>An interface to the dictionary of properties, or null if no properties were found.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -360,7 +373,11 @@
           <para>An array of strings that contains the URLs that can be used to remotely identify the object, or null if none were found.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -403,8 +420,7 @@
 
               
 
-               is obsolete. Please use <see
-               cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
+               is obsolete. Please use <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
 
               
 
@@ -412,59 +428,49 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
+            >The <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
 
             
 
-             method takes in the <see
-             cref="T:System.Runtime.Remoting.Channels.IChannel" />
+             method takes in the <see cref="T:System.Runtime.Remoting.Channels.IChannel" />
 
             
 
-             interface from a channel object. The channel's <see
-             cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
+             interface from a channel object. The channel's <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
             
 
-             must be unique, or the channel must be anonymous. A channel is anonymous if the <see
-             cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
+             must be unique, or the channel must be anonymous. A channel is anonymous if the <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
             
 
-             is set to either null or <see
-             cref="F:System.String.Empty" />
+             is set to either null or <see cref="F:System.String.Empty" />
 
             
 
              by using the name configuration property.</para
           >
           <para
-            >You cannot register two channels with the same name in a <see
-             cref="T:System.AppDomain" />
+            >You cannot register two channels with the same name in a <see cref="T:System.AppDomain" />
 
             
 
-            . By default, the name of a <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+            . By default, the name of a <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
-             is "http" and the name of a <see
-             cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+             is "http" and the name of a <see cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
 
             
 
              is "tcp." Therefore, if you want to register two channels of the same type, you must specify a different name for one of them through configuration properties.</para
           >
           <para
-            >For more information about channel configuration properties, see <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+            >For more information about channel configuration properties, see <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
-            , and <format
-             type="text/html">
+            , and <format type="text/html">
               <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE"
                 >[&lt;topic://gnconchanneltemplate&gt;]</a
               >
@@ -478,13 +484,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a channel with the channel services. <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
+            >Registers a channel with the channel services. <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel)" />
 
             
 
-             is obsolete. Please use <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
+             is obsolete. Please use <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
 
             
 
@@ -492,7 +496,11 @@
           >
         </summary>
         <param name="chnl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -526,54 +534,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
+            >The <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.RegisterChannel(System.Runtime.Remoting.Channels.IChannel,System.Boolean)" />
 
             
 
-             method receives the <see
-             cref="T:System.Runtime.Remoting.Channels.IChannel" />
+             method receives the <see cref="T:System.Runtime.Remoting.Channels.IChannel" />
 
             
 
-             interface from a channel object. The channel's <see
-             cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
+             interface from a channel object. The channel's <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
             
 
-             must be unique, or the channel must be anonymous. A channel is anonymous if the <see
-             cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
+             must be unique, or the channel must be anonymous. A channel is anonymous if the <see cref="P:System.Runtime.Remoting.Channels.IChannel.ChannelName" />
 
             
 
-             is set to either null or <see
-             cref="F:System.String.Empty" />
+             is set to either null or <see cref="F:System.String.Empty" />
 
             
 
              by using the name configuration property.</para
           >
           <para
-            >You cannot register two channels with the same name in a <see
-             cref="T:System.AppDomain" />
+            >You cannot register two channels with the same name in a <see cref="T:System.AppDomain" />
 
             
 
-            . By default, the name of a <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+            . By default, the name of a <see cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
 
             
 
-             is "http" and the name of a <see
-             cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+             is "http" and the name of a <see cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
 
             
 
              is "tcp". Therefore, if you want to register two channels of the same type, you must specify a different name for one of them through configuration properties.</para
           >
           <para
-            >For more information about channel configuration properties, see <format
-             type="text/html">
+            >For more information about channel configuration properties, see <format type="text/html">
               <a href="226ecf74-ebbd-4ea0-a701-dcf4441deefe"
                 >Channel and Formatter Configuration Properties</a
               >
@@ -581,8 +580,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="73399D48-F0FD-46E9-828B-6CDAFDE5FFCE"
                 >[&lt;topic://gnconchanneltemplate&gt;]</a
               >
@@ -593,18 +591,15 @@
             .</para
           >
           <para
-            >If the <paramref
-             name="ensureSecurity" />
+            >If the <paramref name="ensureSecurity" />
 
             
 
-             parameter is set to true, the remoting system determines whether the channel implements <see
-             cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
+             parameter is set to true, the remoting system determines whether the channel implements <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
 
             
 
-            , and if so, enables encryption and digital signatures. An exception is thrown if the channel does not implement <see
-             cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
+            , and if so, enables encryption and digital signatures. An exception is thrown if the channel does not implement <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
 
             
 
@@ -612,23 +607,19 @@
           >
           <block subset="none" type="note">
             <para
-              > Setting <paramref
-               name="ensureSecurity" />
+              > Setting <paramref name="ensureSecurity" />
 
               
 
-               to true throws a <see
-               cref="T:System.Runtime.Remoting.RemotingException" />
+               to true throws a <see cref="T:System.Runtime.Remoting.RemotingException" />
 
               
 
-               for the <see
-               cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+               for the <see cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
 
               
 
-               on Windows 98 (Since secure tcp channels are not supported on Windows 9x), and for the <see
-               cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+               on Windows 98 (Since secure tcp channels are not supported on Windows 9x), and for the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
 
               
 
@@ -641,14 +632,22 @@
           <para>Registers a channel with the channel services.</para>
         </summary>
         <param name="chnl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The channel to register.</param
         >
         <param name="ensureSecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -715,7 +714,11 @@
           <para>A reply message is returned by the call to the server-side chain.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -751,7 +754,11 @@
           <para>Unregisters a particular channel from the registered channels list.</para>
         </summary>
         <param name="chnl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -13,7 +13,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -36,8 +38,7 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-    <see
-         cref="T:Mono.Unix.Native.Syscall" />
+    <see cref="T:Mono.Unix.Native.Syscall" />
 
         
 
@@ -208,23 +209,15 @@
         <Parameter Name="mode" Type="Mono.Posix.AccessMode" />
       </Parameters>
       <Docs>
-        <param name="pathname"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="mode"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pathname">a <see cref="T:System.String" /></param>
+        <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Checks whether the calling task has the necessary access rights to perform operations specified by mode on the file pathname. AccessMode is a mask consisting of one or more of the values R_OK, W_OK, X_OK and F_OK which respectively test if the taks can read, write, execute or test if the file exists.</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -233,8 +226,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.access" />
+          <see cref="M:Mono.Unix.Native.Syscall.access" />
 
             
 
@@ -264,14 +256,10 @@
         <Parameter Name="seconds" Type="System.UInt32" />
       </Parameters>
       <Docs>
-        <param name="seconds"
-          >a <see
-           cref="T:System.UInt32" />
-        </param>
+        <param name="seconds">a <see cref="T:System.UInt32" /></param>
         <summary>If the call completes successfully, the taks will receive a SIGALARM signal after a delay of seconds seconds. A delay of zero seconds simply cancel the alarm. If an previous alarm was activated when the call is made then the previous alarm is cancelled.</summary>
         <returns
-          >a <see
-           cref="T:System.UInt32" />
+          >a <see cref="T:System.UInt32" />
 
           
 
@@ -280,8 +268,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.getuid" />
+          <see cref="M:Mono.Unix.Native.Syscall.getuid" />
 
             
 
@@ -310,19 +297,14 @@
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <summary>Changes the current directory to 'path'.</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -331,8 +313,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.chdir" />
+          <see cref="M:Mono.Unix.Native.Syscall.chdir" />
 
             
 
@@ -366,23 +347,15 @@
         <Parameter Name="mode" Type="Mono.Posix.FileMode" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="mode"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
+        <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Change permissions for a file or folder.</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -391,8 +364,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.chmod" />
+          <see cref="M:Mono.Unix.Native.Syscall.chmod" />
 
             
 
@@ -427,21 +399,16 @@
         <Parameter Name="group" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <param name="owner"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
            representing owner UID.</param
         >
         <param name="group"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -449,13 +416,11 @@
         >
         <summary>Change owner for a file or folder.</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -464,8 +429,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.chown" />
+          <see cref="M:Mono.Unix.Native.Syscall.chown" />
 
             
 
@@ -497,8 +461,7 @@
       </Parameters>
       <Docs>
         <param name="path"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -506,13 +469,11 @@
         >
         <summary>Change root directory</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -521,8 +482,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.chroot" />
+          <see cref="M:Mono.Unix.Native.Syscall.chroot" />
 
             
 
@@ -552,19 +512,14 @@
         <Parameter Name="fileDescriptor" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="fileDescriptor">a <see cref="T:System.Int32" /></param>
         <summary>Closes the file descriptor fileDescriptor. If fileDescriptor is the last file descriptor refering to a file, then the ressources associated with that file are deallocated. The lock held on the file by the current task are released.</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -573,8 +528,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.close" />
+          <see cref="M:Mono.Unix.Native.Syscall.close" />
 
             
 
@@ -603,19 +557,14 @@
         <Parameter Name="dir" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="dir"
-          >a <see
-           cref="T:System.IntPtr" />
-        </param>
+        <param name="dir">a <see cref="T:System.IntPtr" /></param>
         <summary>Closes the directory represented by IntPtr. IntPtr is a pointer retrieved by opendir()</summary>
         <returns
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -624,8 +573,7 @@
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.closedir" />
+          <see cref="M:Mono.Unix.Native.Syscall.closedir" />
 
             
 
@@ -660,32 +608,21 @@
         <Parameter Name="flags" Type="Mono.Posix.FileMode" />
       </Parameters>
       <Docs>
-        <param name="pathname"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="flags"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pathname">a <see cref="T:System.String" /></param>
+        <param name="flags">a <see cref="T:System.Int32" /></param>
         <summary>Creates a file 'pathname' using the given file mode flags.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.creat" />
+          <see cref="M:Mono.Unix.Native.Syscall.creat" />
 
             
 
              instead.</para
           >
           <para
-            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -714,28 +651,20 @@
         <Parameter Name="fileDescriptor" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="fileDescriptor">a <see cref="T:System.Int32" /></param>
         <summary>dup duplicates a file descriptor to the lowest unused file descriptor available.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.dup" />
+          <see cref="M:Mono.Unix.Native.Syscall.dup" />
 
             
 
              instead.</para
           >
           <para
-            >On success, the new file descriptor is returned. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >On success, the new file descriptor is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -768,32 +697,21 @@
         <Parameter Name="newFileDescriptor" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="oldFileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="newFileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="oldFileDescriptor">a <see cref="T:System.Int32" /></param>
+        <param name="newFileDescriptor">a <see cref="T:System.Int32" /></param>
         <summary> dup2 duplicates a file descriptor to another specified file descriptor. If the destination file descriptor is already used, it is closed. The two descriptors share all (ie. file locks, position, etc.) but the close-on-exec flag. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.dup2" />
+          <see cref="M:Mono.Unix.Native.Syscall.dup2" />
 
             
 
              instead.</para
           >
           <para
-            >On success, the new file descriptor is returned. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >On success, the new file descriptor is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -822,28 +740,20 @@
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>Terminates the process that calls the function with the status 'status'. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.exit" />
+          <see cref="M:Mono.Unix.Native.Syscall.exit" />
 
             
 
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Posix;
 using System.Runtime.InteropServices;
@@ -899,23 +809,18 @@ class Test
       <Parameters />
       <Docs>
         <summary>fork() turns a single process into 2 identical processes, known as the parent and the child. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.fork" />
+          <see cref="M:Mono.Unix.Native.Syscall.fork" />
 
             
 
              instead.</para
           >
           <para
-            >On success, fork() returns 0 to the child process and returns the process ID of the child process to the parent process. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >On success, fork() returns 0 to the child process and returns the process ID of the child process to the parent process. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -943,15 +848,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Get the effective group ID for the current process.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.geteuid" />
+          <see cref="M:Mono.Unix.Native.Syscall.geteuid" />
 
             
 
@@ -979,15 +880,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Get the effective user ID for the current process.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.geteuid" />
+          <see cref="M:Mono.Unix.Native.Syscall.geteuid" />
 
             
 
@@ -1016,15 +913,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Get the group ID for the current process.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.getgid" />
+          <see cref="M:Mono.Unix.Native.Syscall.getgid" />
 
             
 
@@ -1054,20 +947,13 @@ class Test
         <Parameter Name="gid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="gid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="gid">a <see cref="T:System.Int32" /></param>
         <summary>Retrieve the groupname for the given GID.</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.UnixGroup.GetGroupName" />
+          <see cref="M:Mono.Unix.UnixGroup.GetGroupName" />
 
             
 
@@ -1105,15 +991,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Retrieves the hostname.</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="P:Mono.Unix.UnixEnvironment.MachineName" />
+          <see cref="P:Mono.Unix.UnixEnvironment.MachineName" />
 
             
 
@@ -1142,15 +1024,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Get the process group.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.getpgrp" />
+          <see cref="M:Mono.Unix.Native.Syscall.getpgrp" />
 
             
 
@@ -1179,15 +1057,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Returns the unique identifier for the current process.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.getpid" />
+          <see cref="M:Mono.Unix.Native.Syscall.getpid" />
 
             
 
@@ -1216,15 +1090,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Returns the unique identifier for the parent process.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.getppid" />
+          <see cref="M:Mono.Unix.Native.Syscall.getppid" />
 
             
 
@@ -1253,15 +1123,11 @@ class Test
       <Parameters />
       <Docs>
         <summary>Get the user ID for the current process.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.getuid" />
+          <see cref="M:Mono.Unix.Native.Syscall.getuid" />
 
             
 
@@ -1291,28 +1157,20 @@ class Test
         <Parameter Name="uid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="uid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="uid">a <see cref="T:System.Int32" /></param>
         <summary>Retrieves the username for the UID in question.</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.UnixUser.GetUserName" />
+          <see cref="M:Mono.Unix.UnixUser.GetUserName" />
 
             
 
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	public static void Main(string[] args)
 	{
 		const int ROOT = 0;
@@ -1351,20 +1209,13 @@ class Test
         <Parameter Name="desc" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="desc"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="desc">a <see cref="T:System.Int32" /></param>
         <summary>Boolean value indicating if the file at fileDescriptor is a tty.</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="P:Mono.Unix.Native.Syscall.isatty" />
+          <see cref="P:Mono.Unix.Native.Syscall.isatty" />
 
             
 
@@ -1394,20 +1245,13 @@ class Test
         <Parameter Name="sig" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="pid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="sig"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pid">a <see cref="T:System.Int32" /></param>
+        <param name="sig">a <see cref="T:System.Int32" /></param>
         <summary>Kill the process 'pid' with the given signal.</summary>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.kill" />
+          <see cref="M:Mono.Unix.Native.Syscall.kill" />
 
             
 
@@ -1417,7 +1261,8 @@ class Test
             <code lang="C#">
 		int myPID = Syscall.getpid();
 		Syscall.kill(myPID,9);
-  </code>
+  </code
+            >
           </example>
         </remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.kill" />
@@ -1447,36 +1292,27 @@ class Test
         <Parameter Name="group" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <param name="owner"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
            Owner UID</param
         >
         <param name="group"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
            Owner GID</param
         >
         <summary>Change the ownership for 'path'</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.lchown" />
+          <see cref="M:Mono.Unix.Native.Syscall.lchown" />
 
             
 
@@ -1511,32 +1347,21 @@ class Test
         <Parameter Name="newPath" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="oldPath"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="newPath"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="oldPath">a <see cref="T:System.String" /></param>
+        <param name="newPath">a <see cref="T:System.String" /></param>
         <summary>Create a hard link from oldPath to newPath.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.link" />
+          <see cref="M:Mono.Unix.Native.Syscall.link" />
 
             
 
              instead.</para
           >
           <para
-            >There is no way to distinguish the links. On success, zero is returned. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >There is no way to distinguish the links. On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -1570,28 +1395,15 @@ class Test
         <Parameter Name="whence" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="offset"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="whence"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="fileDescriptor">a <see cref="T:System.Int32" /></param>
+        <param name="offset">a <see cref="T:System.Int32" /></param>
+        <param name="whence">a <see cref="T:System.Int32" /></param>
         <summary>Changes the read/write file offset of a file descriptor. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.lseek" />
+          <see cref="M:Mono.Unix.Native.Syscall.lseek" />
 
             
 
@@ -1648,23 +1460,15 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <Parameter Name="stat" Type="Mono.Posix.Stat&amp;" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="filename"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="stat"
-          >a <see
-           cref="T:Mono.Posix.Stat" />
-        </param>
+        <param name="filename">a <see cref="T:System.String" /></param>
+        <param name="stat">a <see cref="T:Mono.Posix.Stat" /></param>
         <summary>Retrieves via output paramter the file status struct for a file.</summary>
         <returns
-          > a <see
-           cref="T:System.Int32" />
+          > a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -1673,8 +1477,7 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="P:Mono.Unix.Native.Syscall.lstat" />
+          <see cref="P:Mono.Unix.Native.Syscall.lstat" />
 
             
 
@@ -1707,23 +1510,15 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <Parameter Name="mode" Type="Mono.Posix.FileMode" />
       </Parameters>
       <Docs>
-        <param name="pathname"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="mode"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pathname">a <see cref="T:System.String" /></param>
+        <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Create a directory at 'path' with the given FileMode.</summary>
         <returns
-          > a <see
-           cref="T:System.Int32" />
+          > a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -1732,8 +1527,7 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.mkdir" />
+          <see cref="M:Mono.Unix.Native.Syscall.mkdir" />
 
             
 
@@ -1764,19 +1558,14 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <Parameter Name="increment" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="increment"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="increment">a <see cref="T:System.Int32" /></param>
         <summary>Change the priority of the current process by given increment.</summary>
         <returns
-          > a <see
-           cref="T:System.Int32" />
+          > a <see cref="T:System.Int32" />
 
           
 
-          . On success, zero is returned. On error, -1 is returned and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          . On success, zero is returned. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -1785,8 +1574,7 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.nice" />
+          <see cref="M:Mono.Unix.Native.Syscall.nice" />
 
             
 
@@ -1820,32 +1608,21 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <Parameter Name="flags" Type="Mono.Posix.OpenFlags" />
       </Parameters>
       <Docs>
-        <param name="pathname"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="flags"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pathname">a <see cref="T:System.String" /></param>
+        <param name="flags">a <see cref="T:System.Int32" /></param>
         <summary>Creates/opens a file 'pathname' using the given file open flags.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              instead.</para
           >
           <para
-            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -1879,36 +1656,22 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <Parameter Name="mode" Type="Mono.Posix.FileMode" />
       </Parameters>
       <Docs>
-        <param name="pathname"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="flags"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="mode"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pathname">a <see cref="T:System.String" /></param>
+        <param name="flags">a <see cref="T:System.Int32" /></param>
+        <param name="mode">a <see cref="T:System.Int32" /></param>
         <summary>Creates/opens a file 'pathname' using the given open and file mode flags.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.open" />
+          <see cref="M:Mono.Unix.Native.Syscall.open" />
 
             
 
              instead.</para
           >
           <para
-            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >On success, a file descriptor for the file is returned. This file descriptor is the lowest numbered unused descriptor. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -1937,28 +1700,20 @@ If we seek past the end of a file, the new file region contains 0. </remarks
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <summary>Opens a directory at 'path'.</summary>
-        <returns
-          >a <see
-           cref="T:System.IntPtr" />
-        </returns>
+        <returns>a <see cref="T:System.IntPtr" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.opendir" />
+          <see cref="M:Mono.Unix.Native.Syscall.opendir" />
 
             
 
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	
 public static void Main(string[] argv)
 {
@@ -1999,15 +1754,11 @@ public static void Main(string[] argv)
       <Parameters />
       <Docs>
         <summary>Pause the current process. The task sleeps until a signal is received.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.pause" />
+          <see cref="M:Mono.Unix.Native.Syscall.pause" />
 
             
 
@@ -2041,28 +1792,15 @@ public static void Main(string[] argv)
         <Parameter Name="count" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="buf"
-          >a <see
-           cref="T:System.Void" />
-        </param>
-        <param name="count"
-          >a <see
-           cref="T:System.IntPtr" />
-        </param>
+        <param name="fileDescriptor">a <see cref="T:System.Int32" /></param>
+        <param name="buf">a <see cref="T:System.Void" /></param>
+        <param name="count">a <see cref="T:System.IntPtr" /></param>
         <summary>Reads up to count bytes into buf from fileDescriptor. </summary>
-        <returns
-          >a <see
-           cref="T:System.IntPtr" />
-        </returns>
+        <returns>a <see cref="T:System.IntPtr" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.read" />
+          <see cref="M:Mono.Unix.Native.Syscall.read" />
 
             
 
@@ -2091,28 +1829,20 @@ public static void Main(string[] argv)
         <Parameter Name="dir" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="dir"
-          >a <see
-           cref="T:System.IntPtr" />
-        </param>
+        <param name="dir">a <see cref="T:System.IntPtr" /></param>
         <summary>Read entry from a directory IntPtr as string. </summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.readdir" />
+          <see cref="M:Mono.Unix.Native.Syscall.readdir" />
 
             
 
              instead.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	
 public static void Main(string[] argv)
 {
@@ -2160,20 +1890,13 @@ See also opendir()</remarks
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <summary>Gets the destination of a symlink as a string. See also read()</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="P:Mono.Unix.Native.Syscall.readlink" />
+          <see cref="P:Mono.Unix.Native.Syscall.readlink" />
 
             
 
@@ -2206,24 +1929,14 @@ See also opendir()</remarks
         <Parameter Name="newPath" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="oldPath"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="newPath"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="oldPath">a <see cref="T:System.String" /></param>
+        <param name="newPath">a <see cref="T:System.String" /></param>
         <summary>Rename oldPath to newPath.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.rename" />
+          <see cref="M:Mono.Unix.Native.Syscall.rename" />
 
             
 
@@ -2252,20 +1965,13 @@ See also opendir()</remarks
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <summary>Removes the directory at 'path'.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.rmdir" />
+          <see cref="M:Mono.Unix.Native.Syscall.rmdir" />
 
             
 
@@ -2295,20 +2001,13 @@ See also opendir()</remarks
         <Parameter Name="gid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="gid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="gid">a <see cref="T:System.Int32" /></param>
         <summary>Sets the group ID for the current process to 'gid'.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.setgid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setgid" />
 
             
 
@@ -2338,24 +2037,14 @@ See also opendir()</remarks
         <Parameter Name="pgid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="pid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="pgid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pid">a <see cref="T:System.Int32" /></param>
+        <param name="pgid">a <see cref="T:System.Int32" /></param>
         <summary>Sets the process group ID for the current process to 'pgid'.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.setpgid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setpgid" />
 
             
 
@@ -2385,24 +2074,14 @@ See also opendir()</remarks
         <Parameter Name="egid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="rgid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="egid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="rgid">a <see cref="T:System.Int32" /></param>
+        <param name="egid">a <see cref="T:System.Int32" /></param>
         <summary>Sets the real and effective group ID for the current process to 'rgid' and 'egid' respectively.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.setregid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setregid" />
 
             
 
@@ -2432,24 +2111,14 @@ See also opendir()</remarks
         <Parameter Name="euid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="ruid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="euid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="ruid">a <see cref="T:System.Int32" /></param>
+        <param name="euid">a <see cref="T:System.Int32" /></param>
         <summary>Sets the real and effective user ID for the current process to 'ruid' and 'euid' respectively.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.setreuid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setreuid" />
 
             
 
@@ -2477,15 +2146,11 @@ See also opendir()</remarks
       <Parameters />
       <Docs>
         <summary>Creates a session and sets the process group ID.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.setsid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setsid" />
 
             
 
@@ -2514,20 +2179,13 @@ See also opendir()</remarks
         <Parameter Name="uid" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="uid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="uid">a <see cref="T:System.Int32" /></param>
         <summary>Sets the user ID for the current process to 'uid'.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.setuid" />
+          <see cref="M:Mono.Unix.Native.Syscall.setuid" />
 
             
 
@@ -2562,13 +2220,11 @@ See also opendir()</remarks
       </Parameters>
       <Docs>
         <param name="signum"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
-          .        The signal() function returns the previous value of the signal handler, or SIG_ERR on error  and  <see
-           cref="T:System.Runtime.InteropServices.Marshal" />
+          .        The signal() function returns the previous value of the signal handler, or SIG_ERR on error  and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
           
 
@@ -2577,20 +2233,13 @@ See also opendir()</remarks
 
 </param
         >
-        <param name="handler"
-          >a <see
-           cref="T:Mono.Posix.Syscall+sighandler_t" />
-        </param>
+        <param name="handler">a <see cref="T:Mono.Posix.Syscall+sighandler_t" /></param>
         <summary>Register a handler for a given posix signal. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Stdlib.signal" />
+          <see cref="M:Mono.Unix.Native.Stdlib.signal" />
 
             
 
@@ -2598,8 +2247,7 @@ See also opendir()</remarks
           >
           <para>See 'man signal(2)' and 'man signal(7)' for more information and error codes.</para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 /*
 Possible signal values list:
 Signal     Value     Action   Comment
@@ -2679,24 +2327,14 @@ class Test
         <Parameter Name="stat" Type="Mono.Posix.Stat&amp;" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="filename"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="stat"
-          >a <see
-           cref="T:Mono.Posix.Stat" />
-        </param>
+        <param name="filename">a <see cref="T:System.String" /></param>
+        <param name="stat">a <see cref="T:Mono.Posix.Stat" /></param>
         <summary>Retrieves via output paramter the file status struct for a file.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="P:Mono.Unix.Native.Syscall.stat" />
+          <see cref="P:Mono.Unix.Native.Syscall.stat" />
 
             
 
@@ -2726,20 +2364,13 @@ class Test
         <Parameter Name="errnum" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="errnum"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="errnum">a <see cref="T:System.Int32" /></param>
         <summary>Get error message string for 'errnum'.</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
+          <see cref="M:Mono.Unix.UnixMarshal.GetErrorDescription" />
 
             
 
@@ -2773,24 +2404,14 @@ class Test
         <Parameter Name="newpath" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="oldpath"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="newpath"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="oldpath">a <see cref="T:System.String" /></param>
+        <param name="newpath">a <see cref="T:System.String" /></param>
         <summary>Create a soft link from oldPath to newPath.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.symlink" />
+          <see cref="M:Mono.Unix.Native.Syscall.symlink" />
 
             
 
@@ -2822,8 +2443,7 @@ class Test
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.sync" />
+          <see cref="M:Mono.Unix.Native.Syscall.sync" />
 
             
 
@@ -2853,20 +2473,13 @@ class Test
         <Parameter Name="umask" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="umask"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="umask">a <see cref="T:System.Int32" /></param>
         <summary>Sets new umask.</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.umask" />
+          <see cref="M:Mono.Unix.Native.Syscall.umask" />
 
             
 
@@ -2896,20 +2509,13 @@ class Test
         <Parameter Name="path" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="path"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="path">a <see cref="T:System.String" /></param>
         <summary>Deletes a link to a file. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.unlink" />
+          <see cref="M:Mono.Unix.Native.Syscall.unlink" />
 
             
 
@@ -2943,32 +2549,21 @@ class Test
         <Parameter Name="options" Type="Mono.Posix.WaitOptions" />
       </Parameters>
       <Docs>
-        <param name="pid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="options"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pid">a <see cref="T:System.Int32" /></param>
+        <param name="options">a <see cref="T:System.Int32" /></param>
         <summary>waitpid() will force a parent process to wait for a child process to stop or terminate. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.waitpid" />
+          <see cref="M:Mono.Unix.Native.Syscall.waitpid" />
 
             
 
              instead.</para
           >
           <para
-            >waitpid() returns the pid of the child. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >waitpid() returns the pid of the child. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -3002,36 +2597,22 @@ class Test
         <Parameter Name="options" Type="Mono.Posix.WaitOptions" />
       </Parameters>
       <Docs>
-        <param name="pid"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="options"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="pid">a <see cref="T:System.Int32" /></param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
+        <param name="options">a <see cref="T:System.Int32" /></param>
         <summary>waitpid() will force a parent process to wait for a child process to stop or terminate. </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.close" />
+          <see cref="M:Mono.Unix.Native.Syscall.close" />
 
             
 
              instead.</para
           >
           <para
-            >waitpid() returns the pid of the child. On error, -1 is returned and  <see
-             cref="T:System.Runtime.InteropServices.Marshal" />
+            >waitpid() returns the pid of the child. On error, -1 is returned and  <see cref="T:System.Runtime.InteropServices.Marshal" />
 
             
 
@@ -3060,20 +2641,13 @@ class Test
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>WIFEXITSTATUS is a method that take an argument status, of type int, as returned by waitpid(). </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" />
+          <see cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" />
 
             
 
@@ -3103,20 +2677,13 @@ class Test
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>WIFEXITED is a method that take an argument status, of type int, as returned by waitpid(). </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.WIFEXITED" />
+          <see cref="M:Mono.Unix.Native.Syscall.WIFEXITED" />
 
             
 
@@ -3146,20 +2713,13 @@ class Test
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>WIFSIGNALED is a method that take an argument status, of type int, as returned by waitpid().</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" />
+          <see cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" />
 
             
 
@@ -3189,20 +2749,13 @@ class Test
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>WIFSTOPPED is a method that take an argument status, of type int, as returned by waitpid(). </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" />
+          <see cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" />
 
             
 
@@ -3237,30 +2790,17 @@ class Test
         <Parameter Name="count" Type="System.IntPtr" />
       </Parameters>
       <Docs>
-        <param name="fileDescriptor"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="buf"
-          >a <see
-           cref="T:System.Void" />
-        </param>
-        <param name="count"
-          >a <see
-           cref="T:System.IntPtr" />
-        </param>
+        <param name="fileDescriptor">a <see cref="T:System.Int32" /></param>
+        <param name="buf">a <see cref="T:System.Void" /></param>
+        <param name="count">a <see cref="T:System.IntPtr" /></param>
         <summary>       write  writes  up  to  'count'  bytes  to the file referenced by the file
        descriptor 'fileDescriptor' from the buffer starting at 'buf'.  
 </summary>
-        <returns
-          >a <see
-           cref="T:System.IntPtr" />
-        </returns>
+        <returns>a <see cref="T:System.IntPtr" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.write" />
+          <see cref="M:Mono.Unix.Native.Syscall.write" />
 
             
 
@@ -3289,20 +2829,13 @@ class Test
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>WSTOPSIG is a method that take an argument status, of type int, as returned by waitpid(). </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" />
+          <see cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" />
 
             
 
@@ -3332,20 +2865,13 @@ class Test
         <Parameter Name="status" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="status"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="status">a <see cref="T:System.Int32" /></param>
         <summary>WTERMSIG is a method that take an argument status, of type int, as returned by waitpid(). </summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>
           <para
             >This member is obsolete.  Please use
-          <see
-             cref="M:Mono.Unix.Native.Syscall.WTERMSIG" />
+          <see cref="M:Mono.Unix.Native.Syscall.WTERMSIG" />
 
             
 

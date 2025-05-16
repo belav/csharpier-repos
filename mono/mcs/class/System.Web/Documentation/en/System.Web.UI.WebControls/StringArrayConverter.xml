@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+        >The <see cref="T:System.Web.UI.WebControls.StringArrayConverter" />
 
         
 
-         class converts a string of comma-separated values to and from an array of strings. This class provides the <see
-         cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+         class converts a string of comma-separated values to and from an array of strings. This class provides the <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+         and <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
         
 
@@ -37,13 +34,11 @@
       <para>This type converter is used by design-time environments to provide values for display in the property grid control for a specified type.</para>
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using the <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-           class. For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+           class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -67,13 +62,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You should never access a type converter directly. Instead, call the appropriate converter by using a <see
-               cref="T:System.ComponentModel.TypeDescriptor" />
+              >You should never access a type converter directly. Instead, call the appropriate converter by using a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
               
 
-               object. For more information, see the examples in <see
-               cref="T:System.ComponentModel.TypeConverter" />
+               object. For more information, see the examples in <see cref="T:System.ComponentModel.TypeConverter" />
 
               
 
@@ -84,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.StringArrayConverter" />
 
             
 
@@ -115,23 +107,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+            >The <see cref="M:System.Web.UI.WebControls.StringArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
             
 
-             method determines whether the <see
-             cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+             method determines whether the <see cref="T:System.Web.UI.WebControls.StringArrayConverter" />
 
             
 
-             can convert the object specified by <paramref
-             name="sourceType" />
+             can convert the object specified by <paramref name="sourceType" />
 
             
 
-             to an array of strings. Use this method prior to calling the <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+             to an array of strings. Use this method prior to calling the <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
@@ -141,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.UI.WebControls.StringArrayConverter" />
+            >Determines whether the <see cref="T:System.Web.UI.WebControls.StringArrayConverter" />
 
             
 
@@ -154,24 +141,30 @@
           <para>true if the converter can perform the operation; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that provides a format context that can be used to extract additional information about the environment from which this converter is invoked. This parameter or properties of this parameter can be null.</param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -201,26 +194,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
-             method parses an object that represents a comma-separated string into an array of strings. Prior to calling this method, you can call the <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+             method parses an object that represents a comma-separated string into an array of strings. Prior to calling this method, you can call the <see cref="M:System.Web.UI.WebControls.StringArrayConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
             
 
-             method to determine whether the object specified by <paramref
-             name="value" />
+             method to determine whether the object specified by <paramref name="value" />
 
             
 
              can be converted to an array of strings.</para
           >
           <para
-            >To convert an array of strings into a comma-separated string, use the <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+            >To convert an array of strings into a comma-separated string, use the <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
             
 
@@ -234,13 +223,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the converted <paramref
-             name="value" />
+             that represents the converted <paramref name="value" />
 
             
 
@@ -248,36 +235,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that provides a format context that can be used to extract additional information about the environment from which this converter is invoked. This parameter or properties of this parameter can be null.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object. If null, the current culture is used.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -308,16 +304,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+            >The <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
 
             
 
              method converts an array of strings into a comma-separated string.</para
           >
           <para
-            >To convert a comma-separated string into an array of strings, use the <see
-             cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+            >To convert a comma-separated string into an array of strings, use the <see cref="M:System.Web.UI.WebControls.StringArrayConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
 
             
 
@@ -331,13 +325,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             instance that represents the converted <paramref
-             name="value" />
+             instance that represents the converted <paramref name="value" />
 
             
 
@@ -345,53 +337,64 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            object that provides a format context that can be used to extract additional information about the environment from which this converter is invoked. This parameter or properties of this parameter can be null.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object. If null, the current culture is used.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            to convert.</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           to convert <paramref
-           name="value" />
+           to convert <paramref name="value" />
 
           
 

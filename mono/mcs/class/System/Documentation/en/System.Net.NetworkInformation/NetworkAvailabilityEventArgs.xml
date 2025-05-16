@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to a <see
-         cref="T:System.Net.NetworkInformation.NetworkAvailabilityChangedEventHandler" />
+        >Instances of this class are passed to a <see cref="T:System.Net.NetworkInformation.NetworkAvailabilityChangedEventHandler" />
 
         
 
@@ -33,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+        >Provides data for the <see cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
 
         
 

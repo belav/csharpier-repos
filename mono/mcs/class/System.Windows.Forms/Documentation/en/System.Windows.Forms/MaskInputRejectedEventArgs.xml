@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.MaskInputRejectedEventArgs" />
+        >The <see cref="T:System.Windows.Forms.MaskInputRejectedEventArgs" />
 
         
 
@@ -25,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.MaskedTextBox.MaskInputRejected" />
+        >Provides data for the <see cref="E:System.Windows.Forms.MaskedTextBox.MaskInputRejected" />
 
         
 
@@ -50,18 +48,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
+            >The <see cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
 
             
 
-             constructor sets the values of the <see
-             cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.Position" />
+             constructor sets the values of the <see cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.Position" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.RejectionHint" />
+             and <see cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.RejectionHint" />
 
             
 
@@ -71,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MaskInputRejectedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MaskInputRejectedEventArgs" />
 
             
 
@@ -80,24 +74,30 @@
           >
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Int32" />
+          An <see cref="T:System.Int32" />
 
           
 
            value that contains the zero-based position of the character that failed the mask. The position includes literal characters.</param
         >
         <param name="rejectionHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.MaskedTextResultHint" />
+          A <see cref="T:System.ComponentModel.MaskedTextResultHint" />
 
           
 
@@ -120,13 +120,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.Position" />
+            >The <see cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.Position" />
 
             
 
-             property is set in the <see
-             cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
+             property is set in the <see cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
 
             
 
@@ -157,13 +155,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.MaskInputRejectedEventArgs" />
+            >The <see cref="T:System.Windows.Forms.MaskInputRejectedEventArgs" />
 
             
 
-             property is set in the <see
-             cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
+             property is set in the <see cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
 
             
 

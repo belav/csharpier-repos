@@ -125,41 +125,34 @@
       </list>
       <para>Each binding element provides the specification for building a channel factory on the client and a channel listener on the service. When the channel factory stack is constructed, for example, there is one channel factory in the stack for each binding element in the binding. The same sort of mapping applies to the channel listeners in the stack on the service. Consistency on the client and service is critical for establishing the channel-based connection between these endpoints. Each factory and listener, in turn, processes the sending and accepting of the corresponding channels in the channel stack that connects them, and these channels can then send and receive the messages used to communicate.</para>
       <para
-        >Each instance of a <see
-         cref="T:System.ServiceModel.Channels.Binding" />
+        >Each instance of a <see cref="T:System.ServiceModel.Channels.Binding" />
 
         
 
-         has a <see
-         cref="P:System.ServiceModel.Channels.Binding.Name" />
+         has a <see cref="P:System.ServiceModel.Channels.Binding.Name" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Channels.Binding.Namespace" />
+         and <see cref="P:System.ServiceModel.Channels.Binding.Namespace" />
 
         
 
-         that together uniquely identify it in the metadata of the service. If no name or namespace is specified, indigo2 adds a default values for you. The default name is null and the default namespace is http://tempuri.org/. This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see
-         cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+         that together uniquely identify it in the metadata of the service. If no name or namespace is specified, indigo2 adds a default values for you. The default name is null and the default namespace is http://tempuri.org/. This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
         
 
-         property. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see
-         cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+         property. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
         
 
         . So you avoid the common problem of being unable to register additional handlers for well-known protocols. You can also easily work with multiple versions of a binding side-by-side by giving each version a different name.</para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.Binding" />
+        >The <see cref="T:System.ServiceModel.Channels.Binding" />
 
         
 
-         class implements the <see
-         cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+         class implements the <see cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
 
         
 
@@ -218,21 +211,18 @@
         </item>
       </list>
       <para
-        >When you create a binding by inheriting from <see
-         cref="T:System.ServiceModel.Channels.Binding" />
+        >When you create a binding by inheriting from <see cref="T:System.ServiceModel.Channels.Binding" />
 
         
 
-        , you must override <see
-         cref="M:System.ServiceModel.Channels.Binding.CreateBindingElements" />
+        , you must override <see cref="M:System.ServiceModel.Channels.Binding.CreateBindingElements" />
 
         
 
         .</para
       >
       <para
-        >In addition, you can define your own binding elements and insert them between any of the defined layers in the preceding table. For more information, see the <see
-         cref="T:System.ServiceModel.Channels.CustomBinding" />
+        >In addition, you can define your own binding elements and insert them between any of the defined layers in the preceding table. For more information, see the <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
         
 
@@ -264,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
@@ -292,18 +281,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Channels.Binding.Name" />
+            >The <see cref="P:System.ServiceModel.Channels.Binding.Name" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Channels.Binding.Namespace" />
+             and <see cref="P:System.ServiceModel.Channels.Binding.Namespace" />
 
             
 
-             together uniquely identify an instance of a <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+             together uniquely identify an instance of a <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
@@ -313,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
@@ -322,24 +307,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.ServiceModel.Channels.Binding.Name" />
+          The <see cref="P:System.ServiceModel.Channels.Binding.Name" />
 
           
 
            of the binding.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.ServiceModel.Channels.Binding.Namespace" />
+          The <see cref="P:System.ServiceModel.Channels.Binding.Namespace" />
 
           
 
@@ -384,13 +375,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -398,14 +387,22 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,13 +444,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -461,19 +456,26 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel factory built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -523,13 +525,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -537,14 +537,22 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -591,13 +599,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -605,19 +611,26 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel listener that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -669,13 +682,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -683,14 +694,22 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -739,13 +758,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -753,19 +770,26 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel listener that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -817,13 +841,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -831,33 +853,48 @@
           >
         </returns>
         <param name="listenUriBaseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that provides the base address on which the service listens.</param
         >
         <param name="listenUriRelativeAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address, relative to the base address, on which the service listens.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -906,13 +943,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -920,38 +955,52 @@
           >
         </returns>
         <param name="listenUriBaseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that provides the base address on which the service listens.</param
         >
         <param name="listenUriRelativeAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address, relative to the base address, on which the service listens.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel listener that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1004,13 +1053,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -1018,45 +1065,63 @@
           >
         </returns>
         <param name="listenUriBaseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that provides the base address on which the service listens.</param
         >
         <param name="listenUriRelativeAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address, relative to the base address, on which the service listens.</param
         >
         <param name="listenUriMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value of the <see
-           cref="T:System.ServiceModel.Description.ListenUriMode" />
+          A value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
           
 
            that indicates whether the transport must ensure that the URI provided for the service to listen on is unique or can be used exactly as provided.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1106,13 +1171,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelListener`1" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelListener`1" />
 
             
 
-             of type <paramref
-             name="TChannel" />
+             of type <paramref name="TChannel" />
 
             
 
@@ -1120,50 +1183,67 @@
           >
         </returns>
         <param name="listenUriBaseAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that provides the base address on which the service listens.</param
         >
         <param name="listenUriRelativeAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address, relative to the base address, on which the service listens.</param
         >
         <param name="listenUriMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value of the <see
-           cref="T:System.ServiceModel.Description.ListenUriMode" />
+          A value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
           
 
            that indicates whether the transport must ensure that the URI provided for the service to listen on is unique or can be used exactly as provided.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel listener that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1203,18 +1283,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you want to check that the channel factory for channels of type <paramref
-             name="TChannel" />
+            >Use this method if you want to check that the channel factory for channels of type <paramref name="TChannel" />
 
             
 
-             can be build for the binding <paramref
-             name="parameters" />
+             can be build for the binding <paramref name="parameters" />
 
             
 
-             specified before attempting to actually build the factory. Alternatively, try to build the channel factory by calling <see
-             cref="M:System.ServiceModel.Channels.Binding.BuildChannelFactory``1(System.Object[])" />
+             specified before attempting to actually build the factory. Alternatively, try to build the channel factory by calling <see cref="M:System.ServiceModel.Channels.Binding.BuildChannelFactory``1(System.Object[])" />
 
             
 
@@ -1230,14 +1307,22 @@
           <para>true if the specified channel factory stack can be build on the client; otherwise, false.</para>
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1274,18 +1359,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you want to check that the channel factory for channels of type <paramref
-             name="TChannel" />
+            >Use this method if you want to check that the channel factory for channels of type <paramref name="TChannel" />
 
             
 
-             can be build for the binding <paramref
-             name="parameters" />
+             can be build for the binding <paramref name="parameters" />
 
             
 
-             specified before attempting to actually build the factory. Alternatively, try to build the channel factory by calling <see
-             cref="M:System.ServiceModel.Channels.Binding.BuildChannelFactory``1(System.ServiceModel.Channels.BindingParameterCollection)" />
+             specified before attempting to actually build the factory. Alternatively, try to build the channel factory by calling <see cref="M:System.ServiceModel.Channels.Binding.BuildChannelFactory``1(System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -1301,19 +1383,26 @@
           <para>true if the specified channel factory stack can be build on the client; otherwise, false.</para>
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1358,18 +1447,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you want to check that the channel listener for channels of type <paramref
-             name="TChannel" />
+            >Use this method if you want to check that the channel listener for channels of type <paramref name="TChannel" />
 
             
 
-             can be build for the binding <paramref
-             name="parameters" />
+             can be build for the binding <paramref name="parameters" />
 
             
 
-             specified before attempting to actually build the listener. Alternatively, try to build the channel listener by calling <see
-             cref="M:System.ServiceModel.Channels.Binding.BuildChannelListener``1(System.Object[])" />
+             specified before attempting to actually build the listener. Alternatively, try to build the channel listener by calling <see cref="M:System.ServiceModel.Channels.Binding.BuildChannelListener``1(System.Object[])" />
 
             
 
@@ -1385,14 +1471,22 @@
           <para>true if the specified channel listener stack can be build on the service; otherwise, false.</para>
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object array that specifies requirements for the channel factory that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1434,18 +1528,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you want to check that the channel listener for channels of type <paramref
-             name="TChannel" />
+            >Use this method if you want to check that the channel listener for channels of type <paramref name="TChannel" />
 
             
 
-             can be build for the binding <paramref
-             name="parameters" />
+             can be build for the binding <paramref name="parameters" />
 
             
 
-             specified before attempting to actually build the listener. Alternatively, try to build the channel listener by calling <see
-             cref="M:System.ServiceModel.Channels.Binding.BuildChannelListener``1(System.ServiceModel.Channels.BindingParameterCollection)" />
+             specified before attempting to actually build the listener. Alternatively, try to build the channel listener by calling <see cref="M:System.ServiceModel.Channels.Binding.BuildChannelListener``1(System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -1461,19 +1552,26 @@
           <para>true if the specified channel listener stack can be build on the service; otherwise, false.</para>
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel listener that is built.</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1527,8 +1625,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements should not reference any internal elements that the <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+            >The elements should not reference any internal elements that the <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
@@ -1542,13 +1639,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.Generic.ICollection`1" />
+            >A <see cref="T:System.Collections.Generic.ICollection`1" />
 
             
 
-             object of type <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+             object of type <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -1598,8 +1693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -1607,19 +1701,26 @@
           >
         </returns>
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
            that specifies requirements for the channel listener that is built.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1667,31 +1768,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each instance of a <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+            >Each instance of a <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
-             has a <see
-             cref="P:System.ServiceModel.Channels.Binding.Name" />
+             has a <see cref="P:System.ServiceModel.Channels.Binding.Name" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Channels.Binding.Namespace" />
+             and <see cref="P:System.ServiceModel.Channels.Binding.Namespace" />
 
             
 
              that together uniquely identify the user name for the binding in the metadata of the service.</para
           >
           <para
-            >This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see
-             cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+            >This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
             
 
-             property. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see
-             cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+             property. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
             
 
@@ -1719,31 +1815,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each instance of a <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+            >Each instance of a <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
-             has a <see
-             cref="P:System.ServiceModel.Channels.Binding.Name" />
+             has a <see cref="P:System.ServiceModel.Channels.Binding.Name" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Channels.Binding.Namespace" />
+             and <see cref="P:System.ServiceModel.Channels.Binding.Namespace" />
 
             
 
              that together uniquely identify the user name for the binding in the metadata of the service.</para
           >
           <para
-            >This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see
-             cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+            >This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
             
 
-             property. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see
-             cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+             property. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
             
 
@@ -1802,8 +1893,7 @@
           <list type="bullet">
             <item>
               <para
-                >The first inactivity timer is on the reliable session and is called the <see
-                 cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+                >The first inactivity timer is on the reliable session and is called the <see cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
 
                 
 
@@ -1812,8 +1902,7 @@
             </item>
             <item>
               <para
-                >The second inactivity timer is on the service and uses the <see
-                 cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+                >The second inactivity timer is on the service and uses the <see cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
 
                 
 
@@ -1822,13 +1911,11 @@
             </item>
           </list>
           <para
-            >Since the connection is dropped if either inactivity timer fires, increasing <see
-             cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+            >Since the connection is dropped if either inactivity timer fires, increasing <see cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
 
             
 
-             once it is greater than <see
-             cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+             once it is greater than <see cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
 
             
 
@@ -1836,8 +1923,7 @@
           >
           <para>If transaction flow is enabled on the binding or the channel, the operation may take longer to execute than the specified timeout. In these circumstances the operation fails due to the expired timeout and the transaction aborts appropriately.</para>
           <para
-            >When security is used with sessions, the <see
-             cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+            >When security is used with sessions, the <see cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
 
             
 
@@ -1865,28 +1951,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see
-             cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+            >This user name for the binding is distinct from the specification of the protocol name, which is specified by the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
             
 
-             property. Each instance of a <see
-             cref="T:System.ServiceModel.Channels.Binding" />
+             property. Each instance of a <see cref="T:System.ServiceModel.Channels.Binding" />
 
             
 
-             has a <see
-             cref="P:System.ServiceModel.Channels.Binding.Name" />
+             has a <see cref="P:System.ServiceModel.Channels.Binding.Name" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Channels.Binding.Namespace" />
+             and <see cref="P:System.ServiceModel.Channels.Binding.Namespace" />
 
             
 
-             that together uniquely identify the user name for the binding in the metadata of the service. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see
-             cref="P:System.ServiceModel.Channels.Binding.Scheme" />
+             that together uniquely identify the user name for the binding in the metadata of the service. If you want to add more HTTP bindings, for example, you can name them whatever you want and set all of their schemes to "http". There is no inherent application or machine dispatch based on the <see cref="P:System.ServiceModel.Channels.Binding.Scheme" />
 
             
 

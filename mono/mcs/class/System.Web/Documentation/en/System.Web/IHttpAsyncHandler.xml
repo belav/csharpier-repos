@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An <see
-         cref="T:System.Web.IHttpAsyncHandler" />
+        >An <see cref="T:System.Web.IHttpAsyncHandler" />
 
         
 
@@ -58,8 +57,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -67,36 +65,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpContext" />
+          An <see cref="T:System.Web.HttpContext" />
 
           
 
            object that provides references to intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param
         >
         <param name="cb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
-           to call when the asynchronous method call is complete. If <paramref
-           name="cb" />
+           to call when the asynchronous method call is complete. If <paramref name="cb" />
 
           
 
            is null, the delegate is not called. </param
         >
         <param name="extraData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use <see
-             cref="M:System.Web.IHttpAsyncHandler.EndProcessRequest(System.IAsyncResult)" />
+            >You can use <see cref="M:System.Web.IHttpAsyncHandler.EndProcessRequest(System.IAsyncResult)" />
 
             
 
@@ -134,12 +140,15 @@
           <para>Provides an asynchronous process End method when the process ends.</para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 

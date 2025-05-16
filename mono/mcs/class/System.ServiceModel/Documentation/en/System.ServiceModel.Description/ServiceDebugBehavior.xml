@@ -24,16 +24,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+        >Use the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
         
 
          properties from a configuration file or programmatically to enable the flow of managed exception information to the client for debugging purposes as well as the publication of HTML information files for users browsing the service in Web browsers.</para
       >
       <para
-        >Set the <see
-         cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+        >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
         
 
@@ -41,13 +39,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see
-           cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+          >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
           
 
-           properties can also be set programmatically, it can be easy to forget to disable <see
-           cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+           properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
           
 
@@ -58,8 +54,7 @@
       <list type="bullet">
         <item>
           <para
-            >You use an application configuration file to set the value of the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+            >You use an application configuration file to set the value of the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
             
 
@@ -71,8 +66,7 @@
         </item>
       </list>
       <para
-        >crabout the security issues related to managed exception information, see <format
-         type="text/html">
+        >crabout the security issues related to managed exception information, see <format type="text/html">
           <a href="a9696563-d404-4905-942d-1e0834c26dea"
             >Specifying and Handling Faults in Contracts and Services</a
           >
@@ -83,34 +77,29 @@
         .</para
       >
       <para
-        >The <see
-         cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
+        >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+         and <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
 
         
 
          properties instruct the service to publish HTML help files when the service is viewed using an HTML browser.</para
       >
       <para
-        >The <see
-         cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
+        >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+         and <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
         
 
          properties control the location of the HTML help page that is viewed.</para
       >
       <para
-        >To enable or disable one of the <see
-         cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+        >To enable or disable one of the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
         
 
@@ -119,22 +108,19 @@
       <list type="ordered">
         <item>
           <para
-            >Add a behaviorConfiguration attribute to the <format
-             type="text/html">
+            >Add a behaviorConfiguration attribute to the <format type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
 
             
 
-             element for your indigo2 service. Endpoint behaviors are configured on <format
-             type="text/html">
+             element for your indigo2 service. Endpoint behaviors are configured on <format type="text/html">
               <a href="13aa23b7-2f08-4add-8dbf-a99f8127c017">&lt;endpoint&gt;</a>
             </format>
 
             
 
-             elements; service behaviors on <format
-             type="text/html">
+             elements; service behaviors on <format type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
 
@@ -145,29 +131,25 @@
         </item>
         <item>
           <para
-            >Add to or create a <format
-             type="text/html">
+            >Add to or create a <format type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
             </format>
 
             
 
-             section and add a <format
-             type="text/html">
+             section and add a <format type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
 
             
 
-             element to that with the name that matches the behaviorConfiguration attribute value from step 1. Endpoint behaviors are configured using an <format
-             type="text/html">
+             element to that with the name that matches the behaviorConfiguration attribute value from step 1. Endpoint behaviors are configured using an <format type="text/html">
               <a href="fb851947-e8dd-4f8c-8323-26fae90b09c3">&lt;endpointBehaviors&gt;</a>
             </format>
 
             
 
-             element; service behaviors are configured using a <format
-             type="text/html">
+             element; service behaviors are configured using a <format type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
             </format>
 
@@ -178,15 +160,13 @@
         </item>
         <item>
           <para
-            >Add a <format
-             type="text/html">
+            >Add a <format type="text/html">
               <a href="6d7ea986-f232-49fe-842c-f934d9966889">&lt;serviceDebug&gt;</a>
             </format>
 
             
 
-             element to the <format
-             type="text/html">
+             element to the <format type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
 
@@ -219,8 +199,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor creates a <see
-             cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+            >The constructor creates a <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
             
 
@@ -229,8 +208,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
                 
 
@@ -239,8 +217,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
 
                 
 
@@ -249,8 +226,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
 
                 
 
@@ -259,8 +235,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
 
                 
 
@@ -269,8 +244,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
                 
 
@@ -282,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
             
 
@@ -332,16 +305,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
+            >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
 
             
 
              property to false to disable the publication of an HTML help page visible to HTML browsers.</para
           >
           <para
-            >To ensure the HTML help page is published at the location controlled by the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
             
 
@@ -350,8 +321,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
                 
 
@@ -363,8 +333,7 @@
             </item>
           </list>
           <para
-            >Although an exception is thrown if an absolute address that does not support the HTTP protocol scheme is assigned to the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+            >Although an exception is thrown if an absolute address that does not support the HTTP protocol scheme is assigned to the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
             
 
@@ -374,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that controls whether indigo1 publishes an HTML help page at the address controlled by the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
+            >Gets or sets a value that controls whether indigo1 publishes an HTML help page at the address controlled by the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
 
             
 
@@ -402,8 +370,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageUrl" />
 
             
 
@@ -421,8 +388,7 @@
             </item>
           </list>
           <para
-            >This property is applied only in the case that the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
+            >This property is applied only in the case that the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpHelpPageEnabled" />
 
             
 
@@ -475,16 +441,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+            >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
 
             
 
              property to false to disable the publication of an HTML help page visible to HTML browsers. </para
           >
           <para
-            >To ensure the HTML help page is published at the location controlled by the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+            >To ensure the HTML help page is published at the location controlled by the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
             
 
@@ -493,8 +457,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+                >The <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
                 
 
@@ -506,8 +469,7 @@
             </item>
           </list>
           <para
-            >Although an exception is thrown if an absolute address that does not support the HTTPS protocol scheme is assigned to the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+            >Although an exception is thrown if an absolute address that does not support the HTTPS protocol scheme is assigned to the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
             
 
@@ -517,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address controlled by the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+            >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address controlled by the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
             
 
@@ -545,8 +506,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageUrl" />
 
             
 
@@ -565,8 +525,7 @@
             </item>
           </list>
           <para
-            >This property is applied only in the case that the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
+            >This property is applied only in the case that the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageEnabled" />
 
             
 
@@ -600,8 +559,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+            >Set the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
             
 
@@ -609,13 +567,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see
-               cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+              >Returning managed exception information to clients can be a security risk because exception details expose information about the internal service implementation that could be used by unauthorized clients. In addition, although the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
               
 
-               properties can also be set programmatically, it can be easy to forget to disable <see
-               cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+               properties can also be set programmatically, it can be easy to forget to disable <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
               
 
@@ -626,8 +582,7 @@
           <list type="bullet">
             <item>
               <para
-                >You use an application configuration file to set the value of the <see
-                 cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+                >You use an application configuration file to set the value of the <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
                 
 
@@ -639,8 +594,7 @@
             </item>
           </list>
           <para
-            >crdefault <format
-             type="text/html">
+            >crdefault <format type="text/html">
               <a href="a9696563-d404-4905-942d-1e0834c26dea"
                 >Specifying and Handling Faults in Contracts and Services</a
               >
@@ -689,8 +643,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Modifies the bindings to support the behavior. crdefault the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
+            >Modifies the bindings to support the behavior. crdefault the <see cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -700,8 +653,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
+            >Implements the <see cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -709,28 +661,44 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service host.</param
         >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The endpoints for the service.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -763,8 +731,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
+            >Implements the <see cref="M:System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
 
             
 
@@ -772,14 +739,22 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -812,8 +787,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
+            >Implements the <see cref="M:System.ServiceModel.Description.IServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
 
             
 
@@ -821,14 +795,22 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

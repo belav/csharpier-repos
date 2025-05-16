@@ -34,8 +34,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Key exchange allows a sender to create secret information, for example, random data that can be used as a key in a symmetric encryption algorithm, and use encryption to send it to the intended recipient.</para>
       <para
-        >Use <see
-         cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" />
+        >Use <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeDeformatter" />
 
         
 
@@ -48,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates Optimal Asymmetric Encryption Padding (OAEP) key exchange data using <see
-         cref="T:System.Security.Cryptography.RSA" />
+        >Creates Optimal Asymmetric Encryption Padding (OAEP) key exchange data using <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
@@ -76,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" />
+            >Use <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" />
 
             
 
-             to set the key before calling <see
-             cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />
+             to set the key before calling <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />
 
             
 
@@ -92,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
 
             
 
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter" />
 
             
 
@@ -135,12 +129,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The instance of the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -183,7 +180,11 @@
           <para>The encrypted key exchange data to be sent to the intended recipient.</para>
         </returns>
         <param name="rgbData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -227,14 +228,22 @@
           <para>The encrypted key exchange data to be sent to the intended recipient.</para>
         </returns>
         <param name="rgbData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret information to be passed in the key exchange. </param
         >
         <param name="symAlgType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -339,8 +348,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set the key before calling <see
-             cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />
+            >You must set the key before calling <see cref="M:System.Security.Cryptography.RSAOAEPKeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />
 
             
 
@@ -352,12 +360,15 @@
           <para>Sets the public key to use for encrypting the key exchange data.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The instance of the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 

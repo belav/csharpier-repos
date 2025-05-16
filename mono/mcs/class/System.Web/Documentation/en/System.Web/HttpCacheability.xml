@@ -16,7 +16,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >For more information, go to RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, on the <see
-         cref="http://go.microsoft.com/fwlink/?linkid=37125">World Wide Web Consortium (W3C)</see>
+          cref="http://go.microsoft.com/fwlink/?linkid=37125"
+          >World Wide Web Consortium (W3C)</see
+        >
 
         
 
@@ -101,13 +103,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the response is cached only at the origin server. Similar to the <see
-             cref="F:System.Web.HttpCacheability.NoCache" />
+            >Specifies that the response is cached only at the origin server. Similar to the <see cref="F:System.Web.HttpCacheability.NoCache" />
 
             
 
-             option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see
-             cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
+             option. Clients receive a Cache-Control: no-cache directive but the document is cached on the origin server. Equivalent to <see cref="F:System.Web.HttpCacheability.ServerAndNoCache" />
 
             
 
@@ -132,13 +132,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the settings of both <see
-             cref="F:System.Web.HttpCacheability.Server" />
+            >Applies the settings of both <see cref="F:System.Web.HttpCacheability.Server" />
 
             
 
-             and <see
-             cref="F:System.Web.HttpCacheability.NoCache" />
+             and <see cref="F:System.Web.HttpCacheability.NoCache" />
 
             
 

@@ -1,36 +1,38 @@
 <?xml version="1.0"?>
 <clause number="14.5.2.1" title="Invariant meaning in blocks">
   <paragraph
-    >For each occurrence of a given identifier as a <non_terminal
-     where="14.5.2">simple-name</non_terminal>
+    >For each occurrence of a given identifier as a <non_terminal where="14.5.2"
+      >simple-name</non_terminal
+    >
 
     
 
      in an expression, every other occurrence of the same identifier as a <non_terminal
-     where="14.5.2">simple-name</non_terminal>
+      where="14.5.2"
+      >simple-name</non_terminal
+    >
 
     
 
-     in an expression within the immediately enclosing block (<hyperlink
-    >15.2</hyperlink>
+     in an expression within the immediately enclosing block (<hyperlink>15.2</hyperlink>
 
     
 
     ) or  <non_terminal
-     where="15.7.2">switch-block</non_terminal>
+      where="15.7.2"
+      >switch-block</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >15.7.2</hyperlink>
+     (<hyperlink>15.7.2</hyperlink>
 
     
 
     ) must refer to the same entity. This rule ensures that the meaning of a name in the context of an expression is always the same within a block. </paragraph
   >
   <paragraph
-    >The example <code_example
-    >
+    >The example <code_example>
       <![CDATA[
 class Test  
 {  
@@ -47,8 +49,7 @@ class Test
 
     
 
-    results in a compile-time error because x refers to different entities within the outer block (the extent of which includes the nested block in the if statement). In contrast, the example <code_example
-    >
+    results in a compile-time error because x refers to different entities within the outer block (the extent of which includes the nested block in the if statement). In contrast, the example <code_example>
       <![CDATA[
 class Test  
 {  
@@ -70,15 +71,12 @@ class Test
     is permitted because the name x is never used in the outer block. </paragraph
   >
   <paragraph
-    >Note that the rule of invariant meaning applies only to simple names. It is perfectly valid for the same identifier to have one meaning as a simple name and another meaning as right operand of a member access (<hyperlink
-    >14.5.4</hyperlink>
+    >Note that the rule of invariant meaning applies only to simple names. It is perfectly valid for the same identifier to have one meaning as a simple name and another meaning as right operand of a member access (<hyperlink>14.5.4</hyperlink>
 
     
 
     ). <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 struct Point  
 {  

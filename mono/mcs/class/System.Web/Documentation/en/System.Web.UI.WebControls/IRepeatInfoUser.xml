@@ -13,53 +13,43 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+        >The <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
         
 
-         interface defines the properties and methods that must be implemented by all list controls that repeats a list of items, such as <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         interface defines the properties and methods that must be implemented by all list controls that repeats a list of items, such as <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+        , <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.RadioButtonList" />
+        , and <see cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
         
 
-        . To indicate whether a list control contains a heading section, footer section, or separators, this interface defines the <see
-         cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasHeader" />
+        . To indicate whether a list control contains a heading section, footer section, or separators, this interface defines the <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasHeader" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
+        , <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasSeparators" />
+        , and <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasSeparators" />
 
         
 
-         properties, respectively. The <see
-         cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
+         properties, respectively. The <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
 
         
 
-         property is used to represent the number of items in the list. Use the <see
-         cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+         property is used to represent the number of items in the list. Use the <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
 
         
 
-         method to determine the style of an item in the list. The <see
-         cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+         method to determine the style of an item in the list. The <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
         
 
@@ -89,13 +79,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+            >A list control that inherits from the <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
-             interface must implement the <see
-             cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+             interface must implement the <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
 
             
 
@@ -109,8 +97,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >A <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -118,19 +105,26 @@
           >
         </returns>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
            enumeration values. </param
         >
         <param name="repeatIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -153,13 +147,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+            >A list control that inherits from the <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasFooter" />
 
             
 
@@ -187,13 +179,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+            >A list control that inherits from the <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasHeader" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasHeader" />
 
             
 
@@ -221,13 +211,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+            >A list control that inherits from the <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasSeparators" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.HasSeparators" />
 
             
 
@@ -263,13 +251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+            >A list control that inherits from the <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
-             interface must implement the <see
-             cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+             interface must implement the <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -281,43 +267,56 @@
           <para>Renders an item in the list with the specified information.</para>
         </summary>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
            enumeration values. </param
         >
         <param name="repeatIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.RepeatInfo" />
+          A <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
           
 
            that represents the information used to render the item in the list. </param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -340,13 +339,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+            >A list control that inherits from the <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
-             interface must implement the <see
-             cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
+             interface must implement the <see cref="P:System.Web.UI.WebControls.IRepeatInfoUser.RepeatedItemCount" />
 
             
 

@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see
-         cref="T:System.Net.Sockets.MulticastOption" />
+        >Use a <see cref="T:System.Net.Sockets.MulticastOption" />
 
         
 
-         to store the <see
-         cref="T:System.Net.IPAddress" />
+         to store the <see cref="T:System.Net.IPAddress" />
 
         
 
-         of a multicast group you want to join or drop. Use the <see
-         cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+         of a multicast group you want to join or drop. Use the <see cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
 
         
 
@@ -89,8 +86,7 @@
         </item>
       </list>
       <para
-        >Use <see
-         cref="F:System.Net.Sockets.SocketOptionName.DropMembership" />
+        >Use <see cref="F:System.Net.Sockets.SocketOptionName.DropMembership" />
 
         
 
@@ -100,8 +96,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains <see
-         cref="T:System.Net.IPAddress" />
+        >Contains <see cref="T:System.Net.IPAddress" />
 
         
 
@@ -137,8 +132,7 @@
 
             
 
-            is <see
-             langword="null" />
+            is <see langword="null" />
 
             
 
@@ -152,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new version of the <see
-             cref="T:System.Net.Sockets.MulticastOption" />
+            >Initializes a new version of the <see cref="T:System.Net.Sockets.MulticastOption" />
 
             
 
@@ -161,12 +154,15 @@
           >
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -198,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.MulticastOption" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.MulticastOption" />
 
             
 
@@ -207,19 +202,26 @@
           >
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.IPAddress" />
+          The <see cref="T:System.Net.IPAddress" />
 
           
 
            of the multicast group.</param
         >
         <param name="interfaceIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -258,13 +260,11 @@
 
             
 
-             or <paramref
-             name="mcint" />
+             or <paramref name="mcint" />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -274,8 +274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For machines with multiple network cards, you must use this constructor to create <see
-             cref="T:System.Net.Sockets.MulticastOption" />
+            >For machines with multiple network cards, you must use this constructor to create <see cref="T:System.Net.Sockets.MulticastOption" />
 
             
 
@@ -285,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Sockets.MulticastOption" />
+            >Initializes a new instance of the <see cref="T:System.Net.Sockets.MulticastOption" />
 
             
 
@@ -294,24 +292,30 @@
           >
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The group <see
-           cref="T:System.Net.IPAddress" />
+          The group <see cref="T:System.Net.IPAddress" />
 
           
 
           . </param
         >
         <param name="mcint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The local <see
-           cref="T:System.Net.IPAddress" />
+          The local <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -344,7 +348,9 @@
         <value>
           <para
             > An instance of <see
-             cref="T:System.Net.IPAddress" qualify="true" />
+              cref="T:System.Net.IPAddress"
+              qualify="true"
+            />
 
             
 
@@ -411,7 +417,9 @@ group.</para
         <value>
           <para
             > An instance of <see
-             cref="T:System.Net.IPAddress" qualify="true" />
+              cref="T:System.Net.IPAddress"
+              qualify="true"
+            />
 
             
 
@@ -422,18 +430,15 @@ group.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Sockets.MulticastOption.LocalAddress" />
+            >The <see cref="P:System.Net.Sockets.MulticastOption.LocalAddress" />
 
             
 
-             property contains the IP address of the interface associated with the multicast group membership. If <see
-             cref="P:System.Net.Sockets.MulticastOption.LocalAddress" />
+             property contains the IP address of the interface associated with the multicast group membership. If <see cref="P:System.Net.Sockets.MulticastOption.LocalAddress" />
 
             
 
-             is set to <see
-             cref="F:System.Net.IPAddress.Any" />
+             is set to <see cref="F:System.Net.IPAddress.Any" />
 
             
 

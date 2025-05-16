@@ -14,51 +14,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.ClientScriptManager" />
+        >The <see cref="T:System.Web.UI.ClientScriptManager" />
 
         
 
-         class is used to manage client scripts and add them to Web applications. You can get a reference to the <see
-         cref="T:System.Web.UI.ClientScriptManager" />
+         class is used to manage client scripts and add them to Web applications. You can get a reference to the <see cref="T:System.Web.UI.ClientScriptManager" />
 
         
 
-         class from the <see
-         cref="P:System.Web.UI.Page.ClientScript" />
+         class from the <see cref="P:System.Web.UI.Page.ClientScript" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.Page" />
+         property of the <see cref="T:System.Web.UI.Page" />
 
         
 
          object.</para
       >
       <para
-        >You can add a client script to a Web page declaratively by including the script in the HTML markup of the page. However, there are situations when adding client script dynamically is needed. To add a script dynamically, use the <see
-         cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+        >You can add a client script to a Web page declaratively by including the script in the HTML markup of the page. However, there are situations when adding client script dynamically is needed. To add a script dynamically, use the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
         
 
-         method, the <see
-         cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
+         method, the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
 
         
 
-         method, the <see
-         cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+         method, the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
         
 
-         method, or the <see
-         cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
+         method, or the <see cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
 
         
 
-         method, depending on when and how you want to add the script. For more information, see <format
-         type="text/html">
+         method, depending on when and how you want to add the script. For more information, see <format type="text/html">
           <a href="e89f1306-e43d-49ae-a66a-e18b71007666"
             >How to: Add Client Script Dynamically to ASP.NET Web Pages</a
           >
@@ -69,36 +60,30 @@
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.ClientScriptManager" />
+        >The <see cref="T:System.Web.UI.ClientScriptManager" />
 
         
 
-         class uniquely identifies scripts by a key <see
-         cref="T:System.String" />
+         class uniquely identifies scripts by a key <see cref="T:System.String" />
 
         
 
-         and a <see
-         cref="T:System.Type" />
+         and a <see cref="T:System.Type" />
 
         
 
         . Scripts with the same key and type are considered duplicates. Using the script type helps to avoid confusing similar scripts from different user controls that might be in use on the page.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.ClientScriptManager" />
+        >The <see cref="T:System.Web.UI.ClientScriptManager" />
 
         
 
-         class can be used to invoke client callbacks in situations when it is desirable to run server code from the client without performing a postback. This is referred to as performing an out-of-band callback to the server. In a client callback, a client script function sends an asynchronous request to an ASP.NET Web page. The Web page runs a modified version of its normal life cycle to process the callback. Use the <see
-         cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+         class can be used to invoke client callbacks in situations when it is desirable to run server code from the client without performing a postback. This is referred to as performing an out-of-band callback to the server. In a client callback, a client script function sends an asynchronous request to an ASP.NET Web page. The Web page runs a modified version of its normal life cycle to process the callback. Use the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
         
 
-         method to obtain a reference to a client function that, when invoked, initiates a client callback to a server event. For more information, see <format
-         type="text/html">
+         method to obtain a reference to a client function that, when invoked, initiates a client callback to a server event. For more information, see <format type="text/html">
           <a href="dfaaa7d4-e1f2-4322-b2f5-796e0419f185"
             >Client Callbacks Without Postbacks in ASP.NET Pages</a
           >
@@ -110,18 +95,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Script callbacks will not work in older browsers that do not support the Document Object Model (DOM), and they require that ECMAScript is enabled on the client. To check if the browser supports callbacks, use the <see
-           cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCallback" />
+          >Script callbacks will not work in older browsers that do not support the Document Object Model (DOM), and they require that ECMAScript is enabled on the client. To check if the browser supports callbacks, use the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCallback" />
 
           
 
-           property, which is accessible through the <see
-           cref="P:System.Web.HttpRequest.Browser" />
+           property, which is accessible through the <see cref="P:System.Web.HttpRequest.Browser" />
 
           
 
-           property of the ASP.NET intrinsic <see
-           cref="P:System.Web.HttpContext.Request" />
+           property of the ASP.NET intrinsic <see cref="P:System.Web.HttpContext.Request" />
 
           
 
@@ -129,13 +111,11 @@
         >
       </block>
       <para
-        >Use the <see
-         cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+        >Use the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
         
 
-         method and the <see
-         cref="M:System.Web.UI.ClientScriptManager.GetPostBackClientHyperlink(System.Web.UI.Control,System.String)" />
+         method and the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackClientHyperlink(System.Web.UI.Control,System.String)" />
 
         
 
@@ -143,23 +123,19 @@
       >
       <block subset="none" type="note">
         <para
-          >If you are using a <see
-           cref="T:System.Web.UI.WebControls.Button" />
+          >If you are using a <see cref="T:System.Web.UI.WebControls.Button" />
 
           
 
-           control and the <see
-           cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
+           control and the <see cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
 
           
 
-           property is set to false, then you can use the <see
-           cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+           property is set to false, then you can use the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
           
 
-           method to return the client postback event for the <see
-           cref="T:System.Web.UI.WebControls.Button" />
+           method to return the client postback event for the <see cref="T:System.Web.UI.WebControls.Button" />
 
           
 
@@ -167,23 +143,19 @@
         >
       </block>
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.Button.OnClientClick" />
+        >The <see cref="P:System.Web.UI.WebControls.Button.OnClientClick" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.Button" />
+         property of the <see cref="T:System.Web.UI.WebControls.Button" />
 
         
 
-         control, <see
-         cref="T:System.Web.UI.WebControls.ImageButton" />
+         control, <see cref="T:System.Web.UI.WebControls.ImageButton" />
 
         
 
-         control, and <see
-         cref="T:System.Web.UI.WebControls.LinkButton" />
+         control, and <see cref="T:System.Web.UI.WebControls.LinkButton" />
 
         
 
@@ -216,13 +188,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
 
             
 
-             method performs an out-of-band callback to the server that is a modified version of a page's normal life cycle. For more information, see <format
-             type="text/html">
+             method performs an out-of-band callback to the server that is a modified version of a page's normal life cycle. For more information, see <format type="text/html">
               <a href="dfaaa7d4-e1f2-4322-b2f5-796e0419f185"
                 >Client Callbacks Without Postbacks in ASP.NET Pages</a
               >
@@ -234,23 +204,19 @@
           >
           <block subset="none" type="note">
             <para
-              >When the browser is Microsoft Internet Explorer (version 5.0 or later), the script callback mechanism is implemented through the Microsoft.XmlHttp COM object and requires the browser to be set to run ActiveX controls. For other browsers, an XMLHttpRequest using the browser's local Document Object Model (DOM) is used. To check whether a browser supports client callbacks, use the <see
-               cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCallback" />
+              >When the browser is Microsoft Internet Explorer (version 5.0 or later), the script callback mechanism is implemented through the Microsoft.XmlHttp COM object and requires the browser to be set to run ActiveX controls. For other browsers, an XMLHttpRequest using the browser's local Document Object Model (DOM) is used. To check whether a browser supports client callbacks, use the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCallback" />
 
               
 
-               property. To check whether a browser supports XML over HTTP, use the <see
-               cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsXmlHttp" />
+               property. To check whether a browser supports XML over HTTP, use the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsXmlHttp" />
 
               
 
-               property. Both properties are accessible through the <see
-               cref="P:System.Web.HttpRequest.Browser" />
+               property. Both properties are accessible through the <see cref="P:System.Web.HttpRequest.Browser" />
 
               
 
-               property of the intrinsic ASP.NET <see
-               cref="P:System.Web.HttpContext.Request" />
+               property of the intrinsic ASP.NET <see cref="P:System.Web.HttpContext.Request" />
 
               
 
@@ -258,52 +224,44 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
 
             
 
-             overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+             overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
             
 
              method performs a callback synchronously using XML over HTTP. When sending data synchronously in a callback scenario, synchronous callbacks return immediately and do not block the browser. No two synchronous callbacks callback can execute at the same time in the browser. If a second synchronous callback is fired while one is currently pending, the second synchronous callback cancels the first and only the second callback will return.</para
           >
           <para
-            >To send data asynchronously, use one of the overloads that takes the <paramref
-             name="useAsync" />
+            >To send data asynchronously, use one of the overloads that takes the <paramref name="useAsync" />
 
             
 
              parameter, which is a Boolean value controlling this behavior. In the asynchronous scenario you can have multiple pending callbacks; however, the order in which they return is not guaranteed to match the order in which they were initiated.</para
           >
           <para
-            >Additionally, this overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+            >Additionally, this overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
             
 
-             method specifies no client function to handle the case of an error condition generated by the <see
-             cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+             method specifies no client function to handle the case of an error condition generated by the <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
             
 
-             method. To specify a client error callback handler, use one of the overloads that takes the <paramref
-             name="clientErrorCallback" />
+             method. To specify a client error callback handler, use one of the overloads that takes the <paramref name="clientErrorCallback" />
 
             
 
              parameter.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
 
             
 
-             method takes an optional string <paramref
-             name="argument" />
+             method takes an optional string <paramref name="argument" />
 
             
 
@@ -322,43 +280,56 @@
           <para>The name of a client function that invokes the client callback. </para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server <see
-           cref="T:System.Web.UI.Control" />
+          The server <see cref="T:System.Web.UI.Control" />
 
           
 
-           that handles the client callback. The control must implement the <see
-           cref="T:System.Web.UI.ICallbackEventHandler" />
+           that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" />
 
           
 
-           interface and provide a <see
-           cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+           interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
           
 
            method. </param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument passed from the client script to the server </param
         >
         <param name="clientCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the client event handler that receives the result of the successful server event. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -390,26 +361,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
             
 
-             method requires a <paramref
-             name="useAsync" />
+             method requires a <paramref name="useAsync" />
 
             
 
-             parameter, which allows you to perform the client callback asynchronously by setting the value to true. The overload versions of this method that do not require the <paramref
-             name="useAsync" />
+             parameter, which allows you to perform the client callback asynchronously by setting the value to true. The overload versions of this method that do not require the <paramref name="useAsync" />
 
             
 
              parameter set the value to false by default.</para
           >
           <para
-            >For more information on this method, see the remarks for the overload <see
-             cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
+            >For more information on this method, see the remarks for the overload <see cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
 
             
 
@@ -425,50 +392,67 @@
           <para>The name of a client function that invokes the client callback. </para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server <see
-           cref="T:System.Web.UI.Control" />
+          The server <see cref="T:System.Web.UI.Control" />
 
           
 
-           that handles the client callback. The control must implement the <see
-           cref="T:System.Web.UI.ICallbackEventHandler" />
+           that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" />
 
           
 
-           interface and provide a <see
-           cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+           interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
           
 
            method. </param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument passed from the client script to the server </param
         >
         <param name="clientCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the client event handler that receives the result of the successful server event. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler. </param
         >
         <param name="useAsync">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -501,74 +485,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
             
 
-             method takes a <paramref
-             name="target" />
+             method takes a <paramref name="target" />
 
             
 
-             string parameter instead of a <see
-             cref="T:System.Web.UI.Control" />
+             string parameter instead of a <see cref="T:System.Web.UI.Control" />
 
             
 
-             parameter. Use this overload when you want the callback to go back to something other than a string containing the <see
-             cref="P:System.Web.UI.Control.UniqueID" />
+             parameter. Use this overload when you want the callback to go back to something other than a string containing the <see cref="P:System.Web.UI.Control.UniqueID" />
 
             
 
              of the control.</para
           >
           <para
-            >Additionally, this overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+            >Additionally, this overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
             
 
-             method requires a <paramref
-             name="useAsync" />
+             method requires a <paramref name="useAsync" />
 
             
 
-             and a <paramref
-             name="clientErrorCallback" />
+             and a <paramref name="clientErrorCallback" />
 
             
 
-             parameter. The <paramref
-             name="useAsync" />
+             parameter. The <paramref name="useAsync" />
 
             
 
-             parameter allows you to perform the client callback asynchronously by setting the value to true. The overload versions of this method that do not require the <paramref
-             name="useAsync" />
+             parameter allows you to perform the client callback asynchronously by setting the value to true. The overload versions of this method that do not require the <paramref name="useAsync" />
 
             
 
-             parameter set the value to false by default. The <paramref
-             name="clientErrorCallback" />
+             parameter set the value to false by default. The <paramref name="clientErrorCallback" />
 
             
 
-             parameter allows you to define the name of the client function that is called if the server handler, the <see
-             cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+             parameter allows you to define the name of the client function that is called if the server handler, the <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
             
 
-             method, returns an error. The overload versions of this method that do not require the <paramref
-             name="clientErrorCallback" />
+             method, returns an error. The overload versions of this method that do not require the <paramref name="clientErrorCallback" />
 
             
 
              parameter set the value to null.</para
           >
           <para
-            >For more information on this method, see the remarks for the overload <see
-             cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
+            >For more information on this method, see the remarks for the overload <see cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
 
             
 
@@ -584,57 +555,78 @@
           <para>The name of a client function that invokes the client callback. </para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a server <see
-           cref="T:System.Web.UI.Control" />
+          The name of a server <see cref="T:System.Web.UI.Control" />
 
           
 
-           that handles the client callback. The control must implement the <see
-           cref="T:System.Web.UI.ICallbackEventHandler" />
+           that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" />
 
           
 
-           interface and provide a <see
-           cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+           interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
           
 
            method.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An argument passed from the client script to the server </param
         >
         <param name="clientCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the client event handler that receives the result of the successful server event. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler.</param
         >
         <param name="clientErrorCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the client event handler that receives the result when an error occurs in the server event handler. </param
         >
         <param name="useAsync">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -667,51 +659,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.GetCallbackEventReference" />
 
             
 
-             method requires a <paramref
-             name="useAsync" />
+             method requires a <paramref name="useAsync" />
 
             
 
-             and a <paramref
-             name="clientErrorCallback" />
+             and a <paramref name="clientErrorCallback" />
 
             
 
-             parameter. The <paramref
-             name="useAsync" />
+             parameter. The <paramref name="useAsync" />
 
             
 
-             parameter allows you to perform the client callback asynchronously by setting the value to true. The overload versions of this method that do not require the <paramref
-             name="useAsync" />
+             parameter allows you to perform the client callback asynchronously by setting the value to true. The overload versions of this method that do not require the <paramref name="useAsync" />
 
             
 
-             parameter set the value to false by default. The <paramref
-             name="clientErrorCallback" />
+             parameter set the value to false by default. The <paramref name="clientErrorCallback" />
 
             
 
-             parameter allows you to define the name of the client function that is called if the server handler (the <see
-             cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+             parameter allows you to define the name of the client function that is called if the server handler (the <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
             
 
-             method) returns an error. The overload versions of this method that do not require the <paramref
-             name="clientErrorCallback" />
+             method) returns an error. The overload versions of this method that do not require the <paramref name="clientErrorCallback" />
 
             
 
              parameter set the value to null.</para
           >
           <para
-            >For more information on this method, see the remarks for the overload <see
-             cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
+            >For more information on this method, see the remarks for the overload <see cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.Web.UI.Control,System.String,System.String,System.String)" />
 
             
 
@@ -727,62 +710,82 @@
           <para>The name of a client function that invokes the client callback. </para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server <see
-           cref="T:System.Web.UI.Control" />
+          The server <see cref="T:System.Web.UI.Control" />
 
           
 
-           that handles the client callback. The control must implement the <see
-           cref="T:System.Web.UI.ICallbackEventHandler" />
+           that handles the client callback. The control must implement the <see cref="T:System.Web.UI.ICallbackEventHandler" />
 
           
 
-           interface and provide a <see
-           cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+           interface and provide a <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
           
 
            method. </param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An argument passed from the client script to the server <see
-           cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
+          An argument passed from the client script to the server <see cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
           
 
             method. </param
         >
         <param name="clientCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the client event handler that receives the result of the successful server event. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The client script that is evaluated on the client prior to initiating the callback. The result of the script is passed back to the client event handler. </param
         >
         <param name="clientErrorCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the client event handler that receives the result when an error occurs in the server event handler. </param
         >
         <param name="useAsync">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -811,28 +814,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+            >Using the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method requires the control that handles the postback to implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             method requires the control that handles the postback to implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface. To implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             interface. To implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface for a <see
-             cref="T:System.Web.UI.Page" />
+             interface for a <see cref="T:System.Web.UI.Page" />
 
             
 
-            ,  use the <format
-             type="text/html">
+            ,  use the <format type="text/html">
               <a href="9635526d-d2ab-4fbb-8d90-104156ffcb09">@ Implements</a>
             </format>
 
@@ -850,14 +848,22 @@
           <para>A string representing a JavaScript call to the postback function that includes the target control's ID and event arguments.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The server control to process the postback.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -887,28 +893,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+            >Using the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method requires the control that handles the postback to implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             method requires the control that handles the postback to implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface. To implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+             interface. To implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface for a <see
-             cref="T:System.Web.UI.Page" />
+             interface for a <see cref="T:System.Web.UI.Page" />
 
             
 
-            , use the <format
-             type="text/html">
+            , use the <format type="text/html">
               <a href="9635526d-d2ab-4fbb-8d90-104156ffcb09">@ Implements</a>
             </format>
 
@@ -926,21 +927,33 @@
           <para>A string representing a JavaScript call to the postback function that includes the target control's ID and event arguments.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The server control to process the postback.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parameter passed to the server control.</param
         >
         <param name="registerForEventValidation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -968,18 +981,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+            >To implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface for a <see
-             cref="T:System.Web.UI.Page" />
+             interface for a <see cref="T:System.Web.UI.Page" />
 
             
 
-            ,  use the <format
-             type="text/html">
+            ,  use the <format type="text/html">
               <a href="9635526d-d2ab-4fbb-8d90-104156ffcb09">@ Implements</a>
             </format>
 
@@ -988,28 +998,23 @@
              directive.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+            >The <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method can be used with the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method can be used with the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control when the <see
-             cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
+             control when the <see cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
 
             
 
-             property is false. In this scenario, the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+             property is false. In this scenario, the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method returns the client postback event for the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method returns the client postback event for the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
@@ -1019,8 +1024,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that can be used in a client event to cause postback to the server. The reference string is defined by the specified <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Returns a string that can be used in a client event to cause postback to the server. The reference string is defined by the specified <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
@@ -1032,12 +1036,15 @@
           <para>A string that, when treated as script on the client, initiates the client postback.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.PostBackOptions" />
+          A <see cref="T:System.Web.UI.PostBackOptions" />
 
           
 
@@ -1066,18 +1073,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+            >To implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface for a <see
-             cref="T:System.Web.UI.Page" />
+             interface for a <see cref="T:System.Web.UI.Page" />
 
             
 
-            ,  use the <format
-             type="text/html">
+            ,  use the <format type="text/html">
               <a href="9635526d-d2ab-4fbb-8d90-104156ffcb09">@ Implements</a>
             </format>
 
@@ -1086,28 +1090,23 @@
              directive.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+            >The <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method can be used with the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method can be used with the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control when the <see
-             cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
+             control when the <see cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
 
             
 
-             property is false. In this scenario, the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+             property is false. In this scenario, the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method returns the client postback event for the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method returns the client postback event for the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
@@ -1123,19 +1122,26 @@
           <para>A string that, when treated as script on the client, initiates the postback.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server <see
-           cref="T:System.Web.UI.Control" />
+          The server <see cref="T:System.Web.UI.Control" />
 
           
 
            that processes the postback on the server.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1164,18 +1170,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+            >To implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface for a <see
-             cref="T:System.Web.UI.Page" />
+             interface for a <see cref="T:System.Web.UI.Page" />
 
             
 
-             object, use the <format
-             type="text/html">
+             object, use the <format type="text/html">
               <a href="9635526d-d2ab-4fbb-8d90-104156ffcb09">@ Implements</a>
             </format>
 
@@ -1184,46 +1187,38 @@
              directive.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+            >The <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method can be used with the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method can be used with the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control when the <see
-             cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
+             control when the <see cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
 
             
 
-             property is false. In this scenario, the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+             property is false. In this scenario, the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method returns the client postback event for the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method returns the client postback event for the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
              control.</para
           >
           <para
-            >If <paramref
-             name="registerForEventValidation" />
+            >If <paramref name="registerForEventValidation" />
 
             
 
-             is true, the <see
-             cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions,System.Boolean)" />
+             is true, the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions,System.Boolean)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
+             method calls the <see cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
 
             
 
@@ -1233,8 +1228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that can be used in a client event to cause postback to the server. The reference string is defined by the specified <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Returns a string that can be used in a client event to cause postback to the server. The reference string is defined by the specified <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
@@ -1246,19 +1240,26 @@
           <para>A string that, when treated as script on the client, initiates the client postback.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.PostBackOptions" />
+          A <see cref="T:System.Web.UI.PostBackOptions" />
 
           
 
            that defines the postback.</param
         >
         <param name="registerForEventValidation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1288,18 +1289,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement the <see
-             cref="T:System.Web.UI.IPostBackEventHandler" />
+            >To implement the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
             
 
-             interface for a <see
-             cref="T:System.Web.UI.Page" />
+             interface for a <see cref="T:System.Web.UI.Page" />
 
             
 
-            , use the <format
-             type="text/html">
+            , use the <format type="text/html">
               <a href="9635526d-d2ab-4fbb-8d90-104156ffcb09">@ Implements</a>
             </format>
 
@@ -1308,46 +1306,38 @@
              directive.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+            >The <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method can be used with the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method can be used with the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
-             control when the <see
-             cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
+             control when the <see cref="P:System.Web.UI.WebControls.Button.UseSubmitBehavior" />
 
             
 
-             property is false. In this scenario, the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
+             property is false. In this scenario, the <see cref="Overload:System.Web.UI.ClientScriptManager.GetPostBackEventReference" />
 
             
 
-             method returns the client postback event for the <see
-             cref="T:System.Web.UI.WebControls.Button" />
+             method returns the client postback event for the <see cref="T:System.Web.UI.WebControls.Button" />
 
             
 
              control.</para
           >
           <para
-            >If <paramref
-             name="registerForEventValidation" />
+            >If <paramref name="registerForEventValidation" />
 
             
 
-             is true, the <see
-             cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions,System.Boolean)" />
+             is true, the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions,System.Boolean)" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
+             method calls the <see cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
 
             
 
@@ -1363,31 +1353,41 @@
           <para>A string that, when treated as script on the client, initiates the postback.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server <see
-           cref="T:System.Web.UI.Control" />
+          The server <see cref="T:System.Web.UI.Control" />
 
           
 
            that processes the postback on the server.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string of optional arguments to pass to <paramref
-           name="control" />
+          A string of optional arguments to pass to <paramref name="control" />
 
           
 
           .</param
         >
         <param name="registerForEventValidation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1416,8 +1416,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" />
 
             
 
@@ -1425,18 +1424,15 @@
           >
           <para>A Web resource registered with the page is uniquely identified by its type and name. Only one resource with a given type and name pair can be registered with the page. Attempting to register a resource that is already registered does not create a duplicate of the registered resource. </para>
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" />
 
             
 
-             method is used in conjunction with the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" />
+             method is used in conjunction with the <see cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" />
 
             
 
-             method for accessing resources embedded in assemblies. For more information on using resources in applications, see <format
-             type="text/html">
+             method for accessing resources embedded in assemblies. For more information on using resources in applications, see <format type="text/html">
               <a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a>
             </format>
 
@@ -1454,14 +1450,22 @@
           <para>The URL reference to the resource.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the resource. </param
         >
         <param name="resourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1489,8 +1493,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+            >Call this method before calling the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
@@ -1498,23 +1501,19 @@
           >
           <para>A client script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates.</para>
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
 
             
 
-             method calls the overload that takes both a <paramref
-             name="key" />
+             method calls the overload that takes both a <paramref name="key" />
 
             
 
-             and a <paramref
-             name="type" />
+             and a <paramref name="type" />
 
             
 
-             parameter with the type set as a <see
-             cref="T:System.Web.UI.Page" />
+             parameter with the type set as a <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1524,8 +1523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the client script block is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the client script block is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1537,7 +1535,11 @@
           <para>true if the client script block is registered; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1566,8 +1568,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+            >Call this method before calling the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
@@ -1578,8 +1579,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the client script block is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the client script block is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1591,14 +1591,22 @@
           <para>true if the client script block is registered; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the client script block to search for.  </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1625,8 +1633,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
+            >Call this method before calling the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
 
             
 
@@ -1634,23 +1641,19 @@
           >
           <para>A client script include is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates. </para>
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
 
             
 
-             method calls the overload that takes both a <paramref
-             name="key" />
+             method calls the overload that takes both a <paramref name="key" />
 
             
 
-             and a <paramref
-             name="type" />
+             and a <paramref name="type" />
 
             
 
-             parameter with the type set as a <see
-             cref="T:System.Web.UI.Page" />
+             parameter with the type set as a <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1660,8 +1663,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the client script include is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the client script include is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1673,7 +1675,11 @@
           <para>true if the client script include is registered; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1701,8 +1707,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
+            >Call this method before calling the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
 
             
 
@@ -1713,8 +1718,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the client script include is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the client script include is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1726,14 +1730,22 @@
           <para>true if the client script include is registered; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the client script include to search for. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1760,8 +1772,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
+            >Call this method before calling the <see cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
 
             
 
@@ -1769,23 +1780,19 @@
           >
           <para>A statement is uniquely identified by its key and its type. Statements with the same key and type are considered duplicates. </para>
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsOnSubmitStatementRegistered" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsOnSubmitStatementRegistered" />
 
             
 
-             method calls the overload that takes both a <paramref
-             name="key" />
+             method calls the overload that takes both a <paramref name="key" />
 
             
 
-             and a <paramref
-             name="type" />
+             and a <paramref name="type" />
 
             
 
-             parameter with the type set as a <see
-             cref="T:System.Web.UI.Page" />
+             parameter with the type set as a <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1795,8 +1802,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the OnSubmit statement is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the OnSubmit statement is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1808,7 +1814,11 @@
           <para>true if the OnSubmit statement is registered; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1836,8 +1846,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
+            >Call this method before calling the <see cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
 
             
 
@@ -1848,8 +1857,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the OnSubmit statement is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the OnSubmit statement is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1861,14 +1869,22 @@
           <para>true if the OnSubmit statement is registered; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the OnSubmit statement to search for. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1892,8 +1908,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+            >Call this method before calling the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
@@ -1901,23 +1916,19 @@
           >
           <para>A startup script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates.</para>
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
 
             
 
-             method calls the overload that takes both a string <paramref
-             name="key" />
+             method calls the overload that takes both a string <paramref name="key" />
 
             
 
-             and a <paramref
-             name="type" />
+             and a <paramref name="type" />
 
             
 
-             parameter with the type set as a <see
-             cref="T:System.Web.UI.Page" />
+             parameter with the type set as a <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1927,8 +1938,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the startup script is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the startup script is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1940,7 +1950,11 @@
           <para>true if the startup script is registered; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1968,8 +1982,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method before calling the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+            >Call this method before calling the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
@@ -1980,8 +1993,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the startup script is registered with the <see
-             cref="T:System.Web.UI.Page" />
+            >Determines whether the startup script is registered with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -1993,14 +2005,22 @@
           <para>true if the startup script is registered; otherwise, false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the startup script to search for. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2029,51 +2049,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterArrayDeclaration(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterArrayDeclaration(System.String,System.String)" />
 
             
 
-             checks to see whether a registered array exists with the same name as the name specified in the <paramref
-             name="arrayName" />
+             checks to see whether a registered array exists with the same name as the name specified in the <paramref name="arrayName" />
 
             
 
-             parameter and, if so, adds the values specified in the <paramref
-             name="arrayValue" />
+             parameter and, if so, adds the values specified in the <paramref name="arrayValue" />
 
             
 
-             parameter. Because the underlying storage mechanism is based on an <see
-             cref="T:System.Collections.ArrayList" />
+             parameter. Because the underlying storage mechanism is based on an <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , duplicates are allowed. If a registered array with the same name as the <paramref
-             name="arrayName" />
+            , duplicates are allowed. If a registered array with the same name as the <paramref name="arrayName" />
 
             
 
-             parameter does not exist, it is created and the values in the <paramref
-             name="arrayValue" />
+             parameter does not exist, it is created and the values in the <paramref name="arrayValue" />
 
             
 
              parameter added to it.</para
           >
           <para
-            >If you want string literals in the resulting JavaScript array, include single quotation marks (') or escaped double quotation marks (\") in the <paramref
-             name="arrayValue" />
+            >If you want string literals in the resulting JavaScript array, include single quotation marks (') or escaped double quotation marks (\") in the <paramref name="arrayValue" />
 
             
 
-             parameter. The value of the <paramref
-             name="arrayValue" />
+             parameter. The value of the <paramref name="arrayValue" />
 
             
 
-             parameter should be a single element. If more than one value needs to be added to the array, make multiple calls using the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterArrayDeclaration(System.String,System.String)" />
+             parameter should be a single element. If more than one value needs to be added to the array, make multiple calls using the <see cref="M:System.Web.UI.ClientScriptManager.RegisterArrayDeclaration(System.String,System.String)" />
 
             
 
@@ -2083,8 +2094,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a JavaScript array declaration with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers a JavaScript array declaration with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2092,14 +2102,22 @@
           >
         </summary>
         <param name="arrayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array name to register.</param
         >
         <param name="arrayValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2130,34 +2148,29 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A client script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates. Only one script with a given type and key pair can be registered with the page. Attempting to register a script that is already registered does not create a duplicate of the script.</para>
           <para
-            >Call the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
+            >Call the <see cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
 
             
 
              method to determine whether a client script with a given key and type pair is already registered and avoid unnecessarily attempting to add the script.</para
           >
           <para
-            >In this overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+            >In this overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
-             method, you must make sure that the script provided in the <paramref
-             name="script" />
+             method, you must make sure that the script provided in the <paramref name="script" />
 
             
 
              parameter is wrapped in a &lt;script&gt; element block.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+            >The <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
-             method adds a script block to the top of the rendered page. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see
-             cref="T:System.Text.StringBuilder" />
+             method adds a script block to the top of the rendered page. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -2167,8 +2180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the client script with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the client script with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2176,21 +2188,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the client script to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the client script to register. </param
         >
         <param name="script">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2221,44 +2245,37 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A client script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates. Only one script with a given type and key pair can be registered with the page. Attempting to register a script that is already registered does not create a duplicate of the script.</para>
           <para
-            >Call the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
+            >Call the <see cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptBlockRegistered" />
 
             
 
              method to determine whether a client script with a given key and type pair is already registered. This lets you avoid unnecessarily attempting to add the script.</para
           >
           <para
-            >In this overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+            >In this overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
-             method, you can indicate whether the script provided in the <paramref
-             name="script" />
+             method, you can indicate whether the script provided in the <paramref name="script" />
 
             
 
-             parameter is wrapped with a &lt;script&gt; element block by using the <paramref
-             name="addScriptTags" />
+             parameter is wrapped with a &lt;script&gt; element block by using the <paramref name="addScriptTags" />
 
             
 
-             parameter. Setting <paramref
-             name="addScriptTags" />
+             parameter. Setting <paramref name="addScriptTags" />
 
             
 
              to true indicates that script tags will be added automatically.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
+            >The <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptBlock" />
 
             
 
-             method adds a script block to the top of the rendered page. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see
-             cref="T:System.Text.StringBuilder" />
+             method adds a script block to the top of the rendered page. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -2268,8 +2285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the client script with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the client script with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2277,28 +2293,44 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the client script to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the client script to register. </param
         >
         <param name="script">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The client script literal to register.  </param
         >
         <param name="addScriptTags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2327,8 +2359,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A client script include is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates. Only one script with a given type and key pair can be registered with the page. Attempting to register a script that is already registered does not create a duplicate of the script.</para>
           <para
-            >Call the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptIncludeRegistered" />
+            >Call the <see cref="Overload:System.Web.UI.ClientScriptManager.IsClientScriptIncludeRegistered" />
 
             
 
@@ -2336,8 +2367,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To resolve the client URL, use the <see
-               cref="M:System.Web.UI.Control.ResolveClientUrl(System.String)" />
+              >To resolve the client URL, use the <see cref="M:System.Web.UI.Control.ResolveClientUrl(System.String)" />
 
               
 
@@ -2345,23 +2375,19 @@
             >
           </block>
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
 
             
 
-             method calls the overload that takes a <paramref
-             name="key" />
+             method calls the overload that takes a <paramref name="key" />
 
             
 
-            , a <paramref
-             name="URL" />
+            , a <paramref name="URL" />
 
             
 
-            , and a <paramref
-             name="type" />
+            , and a <paramref name="type" />
 
             
 
@@ -2372,8 +2398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the client script with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the client script with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2381,14 +2406,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the client script include to register. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2417,13 +2450,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
+            >This overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterClientScriptInclude" />
 
             
 
-             method takes key and url parameters to identify the script, as well as a <paramref
-             name="type" />
+             method takes key and url parameters to identify the script, as well as a <paramref name="type" />
 
             
 
@@ -2431,8 +2462,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To resolve the client URL, use the <see
-               cref="M:System.Web.UI.Control.ResolveClientUrl(System.String)" />
+              >To resolve the client URL, use the <see cref="M:System.Web.UI.Control.ResolveClientUrl(System.String)" />
 
               
 
@@ -2444,8 +2474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the client script include with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the client script include with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2453,21 +2482,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the client script include to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the client script include to register. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2496,18 +2537,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" />
 
             
 
-             method is used when accessing compiled-in resources from assemblies through the WebResource.axd HTTP handler. The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" />
+             method is used when accessing compiled-in resources from assemblies through the WebResource.axd HTTP handler. The <see cref="M:System.Web.UI.ClientScriptManager.RegisterClientScriptResource(System.Type,System.String)" />
 
             
 
-             method registers the script with the <see
-             cref="T:System.Web.UI.Page" />
+             method registers the script with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2517,8 +2555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the client script resource with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the client script resource with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2526,14 +2563,22 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the client script resource to register. </param
         >
         <param name="resourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2563,23 +2608,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String)" />
 
             
 
-             method registers a name/value pair as a custom (expando) attribute on the specified <see
-             cref="T:System.Web.UI.Control" />
+             method registers a name/value pair as a custom (expando) attribute on the specified <see cref="T:System.Web.UI.Control" />
 
             
 
-            . The expando attribute is set dynamically from JavaScript to preserve XHTML compatibility for the rendered control's markup. Quotes and backslashes in the custom (expando) attribute's values are escaped. If you do not want to escape quotes and backslashes, call the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String,System.Boolean)" />
+            . The expando attribute is set dynamically from JavaScript to preserve XHTML compatibility for the rendered control's markup. Quotes and backslashes in the custom (expando) attribute's values are escaped. If you do not want to escape quotes and backslashes, call the <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String,System.Boolean)" />
 
             
 
-             overload method and set the <paramref
-             name="encode" />
+             overload method and set the <paramref name="encode" />
 
             
 
@@ -2592,26 +2633,37 @@
           <para>Registers a name/value pair as a custom (expando) attribute of the specified control given a control ID, attribute name, and attribute value.</para>
         </summary>
         <param name="controlId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
            on the page that contains the custom attribute. </param
         >
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom attribute to register. </param
         >
         <param name="attributeValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2642,18 +2694,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterExpandoAttribute(System.String,System.String,System.String,System.Boolean)" />
 
             
 
-             method registers a name/value pair as a custom (expando) attribute on the specified <see
-             cref="T:System.Web.UI.Control" />
+             method registers a name/value pair as a custom (expando) attribute on the specified <see cref="T:System.Web.UI.Control" />
 
             
 
-            . The expando attribute is set dynamically from JavaScript to preserve XHTML compatibility for the rendered control's markup. Set the <paramref
-             name="encode" />
+            . The expando attribute is set dynamically from JavaScript to preserve XHTML compatibility for the rendered control's markup. Set the <paramref name="encode" />
 
             
 
@@ -2666,33 +2715,48 @@
           <para>Registers a name/value pair as a custom (expando) attribute of the specified control given a control ID, an attribute name, an attribute value, and a Boolean value indicating whether to encode the attribute value.</para>
         </summary>
         <param name="controlId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
            on the page that contains the custom attribute.</param
         >
         <param name="attributeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the custom attribute to register.</param
         >
         <param name="attributeValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the custom attribute.</param
         >
         <param name="encode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2720,8 +2784,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information and examples, see the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
+            >For more information and examples, see the <see cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
 
             
 
@@ -2733,7 +2796,11 @@
           <para>Registers an event reference for validation with a unique control ID representing the client control generating the event.</para>
         </summary>
         <param name="uniqueId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2761,8 +2828,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information and examples, see the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
+            >For more information and examples, see the <see cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
 
             
 
@@ -2772,8 +2838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers an event reference for validation with <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Registers an event reference for validation with <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
@@ -2781,12 +2846,15 @@
           >
         </summary>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.PostBackOptions" />
+          A <see cref="T:System.Web.UI.PostBackOptions" />
 
           
 
@@ -2818,14 +2886,22 @@
           <para>Registers an event reference for validation with a unique control ID and event arguments representing the client control generating the event.</para>
         </summary>
         <param name="uniqueId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A unique ID representing the client control generating the event.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2854,8 +2930,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterHiddenField(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterHiddenField(System.String,System.String)" />
 
             
 
@@ -2865,8 +2940,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a hidden value with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers a hidden value with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -2874,14 +2948,22 @@
           >
         </summary>
         <param name="hiddenFieldName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the hidden field to register.</param
         >
         <param name="hiddenFieldInitialValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2911,29 +2993,25 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An OnSubmit statement is uniquely identified by its key and its type. Statements with the same key and type are considered duplicates. Only one statement with a given type and key pair can be registered with the page. Attempting to register a statement that is already registered will not create a duplicate of the statement.</para>
           <para
-            >Call the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsOnSubmitStatementRegistered" />
+            >Call the <see cref="Overload:System.Web.UI.ClientScriptManager.IsOnSubmitStatementRegistered" />
 
             
 
              method to determine whether an OnSubmit statement is already registered with a given key and type pair and avoid unnecessarily attempting to add the script.</para
           >
           <para
-            >The <paramref
-             name="script" />
+            >The <paramref name="script" />
 
             
 
-             parameter of the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
+             parameter of the <see cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
 
             
 
              method can contain multiple script commands as long as they are properly delimited with a semicolon (;).</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.ClientScriptManager.RegisterOnSubmitStatement(System.Type,System.String,System.String)" />
 
             
 
@@ -2941,7 +3019,7 @@
           >
           <para
             >For more information on HTML forms and the OnSubmit attribute, see the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
 
@@ -2953,13 +3031,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers an OnSubmit statement with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers an OnSubmit statement with the <see cref="T:System.Web.UI.Page" />
 
             
 
-             object using a type, a key, and a script literal. The statement executes when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlForm" />
+             object using a type, a key, and a script literal. The statement executes when the <see cref="T:System.Web.UI.HtmlControls.HtmlForm" />
 
             
 
@@ -2967,21 +3043,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the OnSubmit statement to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the OnSubmit statement to register. </param
         >
         <param name="script">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3012,39 +3100,33 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A client script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates. Only one script with a given type and key pair can be registered with the page. Attempting to register a script that is already registered does not create a duplicate of the script.</para>
           <para
-            >Call the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
+            >Call the <see cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
 
             
 
              method to determine whether a startup script with a given key and type pair is already registered and avoid unnecessarily attempting to add the script.</para
           >
           <para
-            >In this overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+            >In this overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
-             method, you must make sure that the script provided in the <paramref
-             name="script" />
+             method, you must make sure that the script provided in the <paramref name="script" />
 
             
 
              parameter is wrapped with a &lt;script&gt; element block.</para
           >
           <para
-            >The script block added by the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+            >The script block added by the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
-             method executes when the page finishes loading but before the page's <see
-             cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+             method executes when the page finishes loading but before the page's <see cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
 
             
 
-             event is raised. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see
-             cref="T:System.Text.StringBuilder" />
+             event is raised. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -3054,8 +3136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the startup script with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the startup script with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -3063,21 +3144,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the startup script to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the startup script to register. </param
         >
         <param name="script">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3109,49 +3202,41 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A startup script is uniquely identified by its key and its type. Scripts with the same key and type are considered duplicates. Only one script with a given type and key pair can be registered with the page. Attempting to register a script that is already registered does not create a duplicate of the script.</para>
           <para
-            >Call the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
+            >Call the <see cref="Overload:System.Web.UI.ClientScriptManager.IsStartupScriptRegistered" />
 
             
 
              method to determine whether a startup script with a given key and type pair is already registered and avoid unnecessarily attempting to add the script.</para
           >
           <para
-            >In this overload of the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+            >In this overload of the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
-             method, you can indicate whether the script provided in the <paramref
-             name="script" />
+             method, you can indicate whether the script provided in the <paramref name="script" />
 
             
 
-             parameter is wrapped with a &lt;script&gt; element block by using the <paramref
-             name="addScriptTags" />
+             parameter is wrapped with a &lt;script&gt; element block by using the <paramref name="addScriptTags" />
 
             
 
-             parameter. Setting <paramref
-             name="addScriptTags" />
+             parameter. Setting <paramref name="addScriptTags" />
 
             
 
              to true indicates that script tags will be added automatically.</para
           >
           <para
-            >The script block added by the <see
-             cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
+            >The script block added by the <see cref="Overload:System.Web.UI.ClientScriptManager.RegisterStartupScript" />
 
             
 
-             method executes when the page finishes loading but before the page's <see
-             cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
+             method executes when the page finishes loading but before the page's <see cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)" />
 
             
 
-             event is raised. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see
-             cref="T:System.Text.StringBuilder" />
+             event is raised. The script blocks are not guaranteed to be output in the order they are registered. If the order of the script blocks is important, use a <see cref="T:System.Text.StringBuilder" />
 
             
 
@@ -3161,8 +3246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the startup script with the <see
-             cref="T:System.Web.UI.Page" />
+            >Registers the startup script with the <see cref="T:System.Web.UI.Page" />
 
             
 
@@ -3170,28 +3254,44 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the startup script to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the startup script to register. </param
         >
         <param name="script">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The startup script literal to register. </param
         >
         <param name="addScriptTags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3217,8 +3317,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates a client event that was registered for event validation using the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String)" />
+            >Validates a client event that was registered for event validation using the <see cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String)" />
 
             
 
@@ -3226,7 +3325,11 @@
           >
         </summary>
         <param name="uniqueId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3256,8 +3359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validates a client event that was registered for event validation using the <see
-             cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
+            >Validates a client event that was registered for event validation using the <see cref="M:System.Web.UI.ClientScriptManager.RegisterForEventValidation(System.String,System.String)" />
 
             
 
@@ -3265,14 +3367,22 @@
           >
         </summary>
         <param name="uniqueId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A unique ID representing the client control generating the event.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

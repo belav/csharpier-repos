@@ -51,7 +51,11 @@
           <para>A collection that holds failed-validation information.</para>
         </returns>
         <param name="validationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

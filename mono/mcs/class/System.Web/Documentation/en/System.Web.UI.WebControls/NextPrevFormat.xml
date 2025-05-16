@@ -15,13 +15,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.NextPrevFormat" />
+        >The <see cref="T:System.Web.UI.WebControls.NextPrevFormat" />
 
         
 
-         enumeration represents the different styles for the next and previous month buttons on the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         enumeration represents the different styles for the next and previous month buttons on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -52,8 +50,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the display format for the previous and next month navigation controls within the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+        >Represents the display format for the previous and next month navigation controls within the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Custom text format for the month navigation controls on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Custom text format for the month navigation controls on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -100,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Full month name format for the month navigation controls on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Full month name format for the month navigation controls on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Abbreviated month name format for the month navigation controls on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Abbreviated month name format for the month navigation controls on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 

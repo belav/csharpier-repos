@@ -17,73 +17,62 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+        >The <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
         
 
-         class is the location for client run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify client run-time behavior for all messages in a contract, use the <see
-         cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+         class is the location for client run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify client run-time behavior for all messages in a contract, use the <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
         
 
          class. ) </para
       >
       <para
-        >Install <see
-         cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+        >Install <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
         
 
-         modifications using a custom client behavior object, either of type <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+         modifications using a custom client behavior object, either of type <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
-         (to find a particular operation to modify) or of type <see
-         cref="T:System.ServiceModel.Description.IOperationBehavior" />
+         (to find a particular operation to modify) or of type <see cref="T:System.ServiceModel.Description.IOperationBehavior" />
 
         
 
          (which can then be applied by creating a custom attribute). </para
       >
       <para
-        >Use the <see
-         cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" />
+        >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" />
 
         
 
-         property to locate the <see
-         cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+         property to locate the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
         
 
          object that represents a particular service operation. </para
       >
       <para
-        >For more information about clients and the client architecture, see <format
-         type="text/html">
+        >For more information about clients and the client architecture, see <format type="text/html">
           <a href="c8329832-bf66-4064-9034-bf39f153fc2d">Consuming Services Using a Client</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="02624403-0d77-41cb-9a86-ab55e98c7966">Client Architecture</a>
         </format>
 
         
 
-        . For more information about customizing the client runtime, see <format
-         type="text/html">
+        . For more information about customizing the client runtime, see <format type="text/html">
           <a href="1328c61c-06e5-455f-9ebd-ceefb59d3867">Extending Clients</a>
         </format>
 
         
 
-        . For more information about using behaviors, see <format
-         type="text/html">
+        . For more information about using behaviors, see <format type="text/html">
           <a href="149b99b6-6eb6-4f45-be22-c967279677d9">Attaching Extensions Using Behaviors</a>
         </format>
 
@@ -95,13 +84,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
 
             
 
-             property to insert a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+             property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
 
             
 
@@ -110,13 +97,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" />
 
             
 
-             property to insert a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+             property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
 
             
 
@@ -125,8 +110,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" />
 
             
 
@@ -135,8 +119,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
 
             
 
@@ -145,13 +128,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Action" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Action" />
 
             
 
-             property to access the WS-Addressing action of the request message and the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.ReplyAction" />
+             property to access the WS-Addressing action of the request message and the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ReplyAction" />
 
             
 
@@ -160,13 +141,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.BeginMethod" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.BeginMethod" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.EndMethod" />
+             and <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.EndMethod" />
 
             
 
@@ -175,8 +154,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
 
             
 
@@ -185,13 +163,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsInitiating" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsInitiating" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsTerminating" />
+             and <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsTerminating" />
 
             
 
@@ -200,8 +176,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsOneWay" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsOneWay" />
 
             
 
@@ -210,13 +185,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Parent" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Parent" />
 
             
 
-             property to obtain the containing <see
-             cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+             property to obtain the containing <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
@@ -225,8 +198,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Name" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Name" />
 
             
 
@@ -235,8 +207,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.SyncMethod" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SyncMethod" />
 
             
 
@@ -274,13 +245,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
             
 
-             class using the specified <see
-             cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+             class using the specified <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
@@ -288,26 +257,37 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The containing <see
-           cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+          The containing <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
           
 
            object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the operation.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -339,13 +319,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
             
 
-             class using the specified <see
-             cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+             class using the specified <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
@@ -353,33 +331,48 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The containing <see
-           cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+          The containing <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
           
 
            object.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the operation.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The action of the operation.</param
         >
         <param name="replyAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -402,8 +395,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default this value corresponds to the value of <see
-             cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+            >By default this value corresponds to the value of <see cref="P:System.ServiceModel.OperationContractAttribute.Action" />
 
             
 
@@ -484,8 +476,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
 
             
 
@@ -494,18 +485,15 @@
           <list type="bullet">
             <item>
               <para
-                >Note   If false, the return type must be of type <see
-                 cref="T:System.ServiceModel.Channels.Message" />
+                >Note   If false, the return type must be of type <see cref="T:System.ServiceModel.Channels.Message" />
 
                 
 
-                 and there can be no out parameters or an <see
-                 cref="T:System.InvalidCastException" />
+                 and there can be no out parameters or an <see cref="T:System.InvalidCastException" />
 
                 
 
-                 is thrown at run-time. If the message is null, a <see
-                 cref="T:System.InvalidOperationException" />
+                 is thrown at run-time. If the message is null, a <see cref="T:System.InvalidOperationException" />
 
                 
 
@@ -517,8 +505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+            >Gets or sets a value that indicates whether the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
 
             
 
@@ -573,8 +560,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
 
             
 
@@ -584,8 +570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
 
             
 
@@ -615,41 +600,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
 
             
 
-             property to insert a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+             property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
 
             
 
-             implementation for an operation or modify the current formatter. The use of the formatter can be controlled by the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" />
+             implementation for an operation or modify the current formatter. The use of the formatter can be controlled by the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
+             and <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
 
             
 
              properties.</para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+            >The <see cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
 
             
 
-             interface defines the  <see
-             cref="M:System.ServiceModel.Dispatcher.IClientMessageFormatter.SerializeRequest(System.ServiceModel.Channels.MessageVersion,System.Object[])" />
+             interface defines the  <see cref="M:System.ServiceModel.Dispatcher.IClientMessageFormatter.SerializeRequest(System.ServiceModel.Channels.MessageVersion,System.Object[])" />
 
             
 
-             and <see
-             cref="M:System.ServiceModel.Dispatcher.IClientMessageFormatter.DeserializeReply(System.ServiceModel.Channels.Message,System.Object[])" />
+             and <see cref="M:System.ServiceModel.Dispatcher.IClientMessageFormatter.DeserializeReply(System.ServiceModel.Channels.Message,System.Object[])" />
 
             
 
@@ -677,8 +655,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default this value corresponds to the value of <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+            >By default this value corresponds to the value of <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
 
             
 
@@ -706,13 +683,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default this value corresponds to the value of <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
+            >By default this value corresponds to the value of <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
 
             
 
-            . For issues related to one-way operations, see <format
-             type="text/html">
+            . For issues related to one-way operations, see <format type="text/html">
               <a href="19053a36-4492-45a3-bfe6-0365ee0205a3">One-Way Services</a>
             </format>
 
@@ -742,8 +717,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default this value corresponds to the value of <see
-             cref="P:System.ServiceModel.OperationContractAttribute.isTerminating" />
+            >By default this value corresponds to the value of <see cref="P:System.ServiceModel.OperationContractAttribute.isTerminating" />
 
             
 
@@ -771,8 +745,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default this value corresponds to the value of <see
-             cref="P:System.ServiceModel.OperationContractAttribute.Name" />
+            >By default this value corresponds to the value of <see cref="P:System.ServiceModel.OperationContractAttribute.Name" />
 
             
 
@@ -806,13 +779,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.ParameterInspectors" />
 
             
 
-             property to insert a custom <see
-             cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+             property to insert a custom <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
 
             
 
@@ -822,8 +793,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a collection of <see
-             cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+            >Gets or sets a collection of <see cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
 
             
 
@@ -854,8 +824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the containing <see
-             cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+            >Gets the containing <see cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
             
 
@@ -879,8 +848,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default this value corresponds to the value of <see
-             cref="P:System.ServiceModel.OperationContractAttribute.ReplyAction" />
+            >By default this value corresponds to the value of <see cref="P:System.ServiceModel.OperationContractAttribute.ReplyAction" />
 
             
 
@@ -908,8 +876,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" />
+            >Use the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.SerializeRequest" />
 
             
 
@@ -917,8 +884,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If set to false, the operation must have exactly one parameter of type <see
-               cref="T:System.ServiceModel.Channels.Message" />
+              >If set to false, the operation must have exactly one parameter of type <see cref="T:System.ServiceModel.Channels.Message" />
 
               
 
@@ -929,8 +895,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+            >Gets or sets a value that specifies whether the <see cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
 
             
 

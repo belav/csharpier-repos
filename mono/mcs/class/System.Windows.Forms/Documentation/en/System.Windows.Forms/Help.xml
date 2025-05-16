@@ -14,26 +14,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You cannot create a new instance of the <see
-         cref="T:System.Windows.Forms.Help" />
+        >You cannot create a new instance of the <see cref="T:System.Windows.Forms.Help" />
 
         
 
-         class. To provide Help for an application, call the static <see
-         cref="M:System.Windows.Forms.Help.ShowHelp(System.Windows.Forms.Control,System.String)" />
+         class. To provide Help for an application, call the static <see cref="M:System.Windows.Forms.Help.ShowHelp(System.Windows.Forms.Control,System.String)" />
 
         
 
-         and <see
-         cref="M:System.Windows.Forms.Help.ShowHelpIndex(System.Windows.Forms.Control,System.String)" />
+         and <see cref="M:System.Windows.Forms.Help.ShowHelpIndex(System.Windows.Forms.Control,System.String)" />
 
         
 
          methods.</para
       >
       <para
-        >You can use <see
-         cref="T:System.Windows.Forms.Help" />
+        >You can use <see cref="T:System.Windows.Forms.Help" />
 
         
 
@@ -41,7 +37,9 @@
       >
       <para
         >You can generate HTML Help 1.x files by using HTML Help Workshop. For more information about HTML Help, see "HTML Help Workshop" and other HTML Help topics at <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=178661">Microsoft HTML Help</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=178661"
+          >Microsoft HTML Help</see
+        >
 
         
 
@@ -71,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="url" />
+            >The <paramref name="url" />
 
             
 
@@ -84,19 +81,26 @@
           <para>Displays the contents of the Help file at the specified URL.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that identifies the parent of the Help dialog box. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,8 +130,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="url" />
+            >The <paramref name="url" />
 
             
 
@@ -140,26 +143,37 @@
           <para>Displays the contents of the Help file found at the specified URL for a specific keyword.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that identifies the parent of the Help dialog box. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path and name of the Help file. </param
         >
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,36 +203,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="url" />
+            >The <paramref name="url" />
 
             
 
              parameter can be of the form C:\path\sample.chm or /folder/file.htm.</para
           >
           <para
-            >Compiled Help files provide table of contents, index, search, and keyword links in pages. You can use the following values for the <paramref
-             name="navigator" />
+            >Compiled Help files provide table of contents, index, search, and keyword links in pages. You can use the following values for the <paramref name="navigator" />
 
             
 
-             parameter: <see
-             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+             parameter: <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.Find" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.Index" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+            , or <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />
 
             
 
@@ -230,31 +238,41 @@
           <para>Displays the contents of the Help file found at the specified URL for a specific topic.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that identifies the parent of the Help dialog box. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path and name of the Help file. </param
         >
         <param name="navigator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.HelpNavigator" />
+          One of the <see cref="T:System.Windows.Forms.HelpNavigator" />
 
           
 
@@ -285,81 +303,66 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiled Help files provide table-of-contents, index, search, and keyword links in pages. You can use the <paramref
-             name="param" />
+            >Compiled Help files provide table-of-contents, index, search, and keyword links in pages. You can use the <paramref name="param" />
 
             
 
-             parameter to provide additional refinement of the <see
-             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+             parameter to provide additional refinement of the <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.TopicId" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.TopicId" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.KeywordIndex" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.KeywordIndex" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
+            , or <see cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
 
             
 
-             command. If the value specified in the <paramref
-             name="command" />
+             command. If the value specified in the <paramref name="command" />
 
             
 
-             parameter is <see
-             cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
+             parameter is <see cref="F:System.Windows.Forms.HelpNavigator.TableOfContents" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.Index" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.Index" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.HelpNavigator.Find" />
+            , or <see cref="F:System.Windows.Forms.HelpNavigator.Find" />
 
             
 
-            , this value should be an empty string. If the <paramref
-             name="command" />
+            , this value should be an empty string. If the <paramref name="command" />
 
             
 
-             parameter references <see
-             cref="F:System.Windows.Forms.HelpNavigator.Topic" />
+             parameter references <see cref="F:System.Windows.Forms.HelpNavigator.Topic" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.TopicId" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.TopicId" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.HelpNavigator.KeywordIndex" />
+            , <see cref="F:System.Windows.Forms.HelpNavigator.KeywordIndex" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
+            , or <see cref="F:System.Windows.Forms.HelpNavigator.AssociateIndex" />
 
             
 
             , this value should be a string that contains the topic name, or the keyword or numeric identifier of the topic to display.</para
           >
           <para
-            >The <paramref
-             name="url" />
+            >The <paramref name="url" />
 
             
 
@@ -371,38 +374,52 @@
           <para>Displays the contents of the Help file located at the URL supplied by the user.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that identifies the parent of the Help dialog box. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path and name of the Help file. </param
         >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.HelpNavigator" />
+          One of the <see cref="T:System.Windows.Forms.HelpNavigator" />
 
           
 
            values. </param
         >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,8 +448,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="url" />
+            >The <paramref name="url" />
 
             
 
@@ -444,19 +460,26 @@
           <para>Displays the index of the specified Help file.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that identifies the parent of the Help dialog box. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -489,26 +512,37 @@
           <para>Displays a Help pop-up window.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that identifies the parent of the Help dialog box. </param
         >
         <param name="caption">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to display in the pop-up window. </param
         >
         <param name="location">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -19,8 +19,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          >The <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
@@ -28,28 +27,23 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Diagnostics.TraceEventCache" />
+        >The <see cref="T:System.Diagnostics.TraceEventCache" />
 
         
 
-         class is used as a parameter in tracing methods to accurately identify the source of a trace event. Examples of methods that use <see
-         cref="T:System.Diagnostics.TraceEventCache" />
+         class is used as a parameter in tracing methods to accurately identify the source of a trace event. Examples of methods that use <see cref="T:System.Diagnostics.TraceEventCache" />
 
         
 
-         are <see
-         cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" />
+         are <see cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" />
 
         
 
-           and <see
-         cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
+           and <see cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
 
         
 
-        . The <see
-         cref="P:System.Diagnostics.TraceEventCache.LogicalOperationStack" />
+        . The <see cref="P:System.Diagnostics.TraceEventCache.LogicalOperationStack" />
 
         
 
@@ -79,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.TraceEventCache" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceEventCache" />
 
             
 
@@ -105,23 +98,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.TraceEventCache.Callstack" />
+            >The <see cref="P:System.Diagnostics.TraceEventCache.Callstack" />
 
             
 
-             property gets the call stack from the <see
-             cref="P:System.Environment.StackTrace" />
+             property gets the call stack from the <see cref="P:System.Environment.StackTrace" />
 
             
 
-             property of the <see
-             cref="T:System.Environment" />
+             property of the <see cref="T:System.Environment" />
 
             
 
-             class. The property value lists method calls in reverse chronological order. That is, the most recent method call is described first. One line of stack trace information is listed for each method call on the stack. For more information, see <see
-             cref="P:System.Environment.StackTrace" />
+             class. The property value lists method calls in reverse chronological order. That is, the most recent method call is described first. One line of stack trace information is listed for each method call on the stack. For more information, see <see cref="P:System.Environment.StackTrace" />
 
             
 
@@ -153,13 +142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first time the property is accessed in an instance of the <see
-             cref="T:System.Diagnostics.TraceEventCache" />
+            >The first time the property is accessed in an instance of the <see cref="T:System.Diagnostics.TraceEventCache" />
 
             
 
-             class, the current time is returned. Subsequent queries of this property in that instance return that same <see
-             cref="T:System.DateTime" />
+             class, the current time is returned. Subsequent queries of this property in that instance return that same <see cref="T:System.DateTime" />
 
             
 
@@ -194,28 +181,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The correlation data is stored as an object in the call context with the name "System.Diagnostics.Trace.CorrelationManagerSlot". The <see
-             cref="T:System.Diagnostics.CorrelationManager" />
+            >The correlation data is stored as an object in the call context with the name "System.Diagnostics.Trace.CorrelationManagerSlot". The <see cref="T:System.Diagnostics.CorrelationManager" />
 
             
 
-             class provides methods used to store a logical operation identity in a thread-bound context and automatically tag each trace event generated by the thread with the stored identity. The <see
-             cref="T:System.Diagnostics.CorrelationManager" />
+             class provides methods used to store a logical operation identity in a thread-bound context and automatically tag each trace event generated by the thread with the stored identity. The <see cref="T:System.Diagnostics.CorrelationManager" />
 
             
 
-             is accessed through the <see
-             cref="P:System.Diagnostics.Trace.CorrelationManager" />
+             is accessed through the <see cref="P:System.Diagnostics.Trace.CorrelationManager" />
 
             
 
-             property. Each call to the <see
-             cref="M:System.Diagnostics.CorrelationManager.StartLogicalOperation" />
+             property. Each call to the <see cref="M:System.Diagnostics.CorrelationManager.StartLogicalOperation" />
 
             
 
-             method pushes a new logical operation identity onto the stack. Each call to the <see
-             cref="M:System.Diagnostics.CorrelationManager.StopLogicalOperation" />
+             method pushes a new logical operation identity onto the stack. Each call to the <see cref="M:System.Diagnostics.CorrelationManager.StopLogicalOperation" />
 
             
 
@@ -267,8 +249,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread identifier is the value of the <see
-             cref="P:System.Threading.Thread.ManagedThreadId" />
+            >The thread identifier is the value of the <see cref="P:System.Threading.Thread.ManagedThreadId" />
 
             
 
@@ -297,38 +278,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The get accessor calls the <see
-             cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+            >The get accessor calls the <see cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
 
             
 
-             method to get the timestamp. If the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             method to get the timestamp. If the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             class uses a high-resolution performance counter, <see
-             cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+             class uses a high-resolution performance counter, <see cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
 
             
 
-             returns the current value of that counter. If the <see
-             cref="T:System.Diagnostics.Stopwatch" />
+             returns the current value of that counter. If the <see cref="T:System.Diagnostics.Stopwatch" />
 
             
 
-             class uses the system timer, <see
-             cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+             class uses the system timer, <see cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
 
             
 
-             returns the <see
-             cref="P:System.DateTime.Ticks" />
+             returns the <see cref="P:System.DateTime.Ticks" />
 
             
 
-             property of <see
-             cref="P:System.DateTime.Now" />
+             property of <see cref="P:System.DateTime.Now" />
 
             
 

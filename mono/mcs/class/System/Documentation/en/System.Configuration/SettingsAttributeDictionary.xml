@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsAttributeDictionary" />
+        >The <see cref="T:System.Configuration.SettingsAttributeDictionary" />
 
         
 
-         object inherits from the <see
-         cref="T:System.Collections.Hashtable" />
+         object inherits from the <see cref="T:System.Collections.Hashtable" />
 
         
 
-         object. The <see
-         cref="T:System.Configuration.SettingsAttributeDictionary" />
+         object. The <see cref="T:System.Configuration.SettingsAttributeDictionary" />
 
         
 
-         object is used to describe a configuration object, such as the <see
-         cref="T:System.Configuration.SettingsProperty" />
+         object is used to describe a configuration object, such as the <see cref="T:System.Configuration.SettingsProperty" />
 
         
 
@@ -51,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of key/value pairs used to describe a configuration object as well as a <see
-         cref="T:System.Configuration.SettingsProperty" />
+        >Represents a collection of key/value pairs used to describe a configuration object as well as a <see cref="T:System.Configuration.SettingsProperty" />
 
         
 
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsAttributeDictionary" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsAttributeDictionary" />
 
             
 
@@ -112,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsAttributeDictionary" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsAttributeDictionary" />
 
             
 
@@ -121,7 +114,11 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

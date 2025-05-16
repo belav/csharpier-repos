@@ -30,8 +30,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" />
 
             
 
@@ -59,33 +58,27 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.Design.HtmlControlDesigner.Behavior" />
+              >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.Behavior" />
 
               
 
-               property is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+               property is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
 
               
 
-               and <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+               and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
 
               
 
-               methods on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property to map properties to styles. Use the <see
-               cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+               property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
               
 
-               method on the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
@@ -141,13 +134,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.HtmlControlDesigner.DesignTimeElement" />
+            >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DesignTimeElement" />
 
             
 
-             property is used by the designer to retrieve the design-time object representing the control that is associated with the <see
-             cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+             property is used by the designer to retrieve the design-time object representing the control that is associated with the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" />
 
             
 
@@ -157,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the design-time object representing the control that is associated with the <see
-             cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+            >Gets the design-time object representing the control that is associated with the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" />
 
             
 
@@ -189,36 +179,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Web.UI.Design.HtmlControlDesigner" />
 
             
 
@@ -228,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources that are used by the <see
-             cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.HtmlControlDesigner" />
 
             
 
@@ -237,7 +220,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,41 +253,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The design host, such as vsprvslong, uses the <see
-             cref="T:System.Web.Compilation.ExpressionBuilder" />
+            >The design host, such as vsprvslong, uses the <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
             
 
-             class to get the <see
-             cref="T:System.Web.UI.Design.ExpressionEditor" />
+             class to get the <see cref="T:System.Web.UI.Design.ExpressionEditor" />
 
             
 
-             class to get the <see
-             cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+             class to get the <see cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
 
             
 
              to set expressions for control properties at design time. Expression strings reference a localizable resource, an application setting, a connection string, or a custom expression type.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.HtmlControlDesigner.Expressions" />
+            >The <see cref="P:System.Web.UI.Design.HtmlControlDesigner.Expressions" />
 
             
 
-             collection contains an <see
-             cref="T:System.Web.UI.ExpressionBinding" />
+             collection contains an <see cref="T:System.Web.UI.ExpressionBinding" />
 
             
 
-             element for each control property that has an associated expression string. Each <see
-             cref="P:System.Web.UI.ExpressionBinding.ExpressionPrefix" />
+             element for each control property that has an associated expression string. Each <see cref="P:System.Web.UI.ExpressionBinding.ExpressionPrefix" />
 
             
 
-             property for each element indicates the associated expression builder implementation. The expression string is parsed and evaluated by its associated <see
-             cref="T:System.Web.Compilation.ExpressionBuilder" />
+             property for each element indicates the associated expression builder implementation. The expression string is parsed and evaluated by its associated <see cref="T:System.Web.Compilation.ExpressionBuilder" />
 
             
 
@@ -332,8 +312,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
+            >The <see cref="M:System.Web.UI.Design.ControlDesigner.Initialize(System.ComponentModel.IComponent)" />
 
             
 
@@ -345,7 +324,11 @@
           <para>Initializes the designer and sets the component for design.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -365,38 +348,31 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorAttached" />
+              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorAttached" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
 
               
 
-               and <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+               and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
 
               
 
-               methods on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property to map properties to styles. Use the <see
-               cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+               property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
               
 
-               method on the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
-               class to set styles for the control at design time. Override the <see
-               cref="M:System.Web.UI.Design.HtmlControlDesigner.Initialize(System.ComponentModel.IComponent)" />
+               class to set styles for the control at design time. Override the <see cref="M:System.Web.UI.Design.HtmlControlDesigner.Initialize(System.ComponentModel.IComponent)" />
 
               
 
@@ -431,38 +407,31 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorDetaching" />
+              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBehaviorDetaching" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
 
               
 
-               and <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+               and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
 
               
 
-               methods on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property to map properties to styles. Use the <see
-               cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+               property to map properties to styles. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
               
 
-               method on the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               method on the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
-               class to set styles for the control at design time. Override the <see
-               cref="Overload:System.Web.UI.Design.HtmlControlDesigner.Dispose" />
+               class to set styles for the control at design time. Override the <see cref="Overload:System.Web.UI.Design.HtmlControlDesigner.Dispose" />
 
               
 
@@ -501,8 +470,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" />
+            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" />
 
             
 
@@ -510,18 +478,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" />
+              >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="E:System.Web.UI.DataBindingCollection.Changed" />
+               method is obsolete. Use the <see cref="E:System.Web.UI.DataBindingCollection.Changed" />
 
               
 
-               event on the <see
-               cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
+               event on the <see cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
 
               
 
@@ -534,7 +499,11 @@
           <para>Provides a method that can be used to indicate when a data binding has changed.</para>
         </summary>
         <param name="propName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -586,21 +555,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterEvents(System.Collections.IDictionary)" />
+            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterEvents(System.Collections.IDictionary)" />
 
             
 
-             method provides a way to add items to or remove items from the dictionary of events that a designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             method provides a way to add items to or remove items from the dictionary of events that a designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
              object.</para
           >
           <para
-            >The keys in the dictionary of events are the names of the events. The objects are of type <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The keys in the dictionary of events are the names of the events. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -610,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the list of events that are exposed at design-time for the <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Sets the list of events that are exposed at design-time for the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -619,12 +584,15 @@
           >
         </summary>
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -652,21 +620,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterProperties(System.Collections.IDictionary)" />
+            >The <see cref="M:System.Web.UI.Design.HtmlControlDesigner.PreFilterProperties(System.Collections.IDictionary)" />
 
             
 
-             method provides a way to add items to or remove items from the dictionary of properties that a designer exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             method provides a way to add items to or remove items from the dictionary of properties that a designer exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
              object.</para
           >
           <para
-            >The keys in the dictionary of properties are the names of the properties. The objects are of type <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >The keys in the dictionary of properties are the names of the properties. The objects are of type <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -676,8 +641,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows the designer to expose a specific set of properties through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Allows the designer to expose a specific set of properties through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -685,7 +649,11 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

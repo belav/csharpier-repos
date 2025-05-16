@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Design.IToolboxService" />
+        >The <see cref="T:System.Drawing.Design.IToolboxService" />
 
         
 
@@ -33,8 +32,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.Drawing.Design.IToolboxService.CategoryNames" />
+            >The <see cref="P:System.Drawing.Design.IToolboxService.CategoryNames" />
 
             
 
@@ -43,8 +41,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Drawing.Design.IToolboxService.SelectedCategory" />
+            >The <see cref="P:System.Drawing.Design.IToolboxService.SelectedCategory" />
 
             
 
@@ -53,8 +50,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.GetToolboxItems" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.GetToolboxItems" />
 
             
 
@@ -63,13 +59,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.GetSelectedToolboxItem" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.GetSelectedToolboxItem" />
 
             
 
-             method retrieves the currently selected <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method retrieves the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -78,13 +72,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.SetSelectedToolboxItem(System.Drawing.Design.ToolboxItem)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SetSelectedToolboxItem(System.Drawing.Design.ToolboxItem)" />
 
             
 
-             method selects the specified <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method selects the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -93,13 +85,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.IsSupported(System.Object,System.ComponentModel.Design.IDesignerHost)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.IsSupported(System.Object,System.ComponentModel.Design.IDesignerHost)" />
 
             
 
-             method indicates whether the specified serialized object, if it is a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method indicates whether the specified serialized object, if it is a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -108,13 +98,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.IsToolboxItem(System.Object)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.IsToolboxItem(System.Object)" />
 
             
 
-             method indicates whether the specified serialized object is a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method indicates whether the specified serialized object is a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -126,13 +114,11 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.AddToolboxItem(System.Drawing.Design.ToolboxItem)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.AddToolboxItem(System.Drawing.Design.ToolboxItem)" />
 
             
 
-             method adds a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method adds a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -141,13 +127,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.AddLinkedToolboxItem(System.Drawing.Design.ToolboxItem,System.ComponentModel.Design.IDesignerHost)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.AddLinkedToolboxItem(System.Drawing.Design.ToolboxItem,System.ComponentModel.Design.IDesignerHost)" />
 
             
 
-             method adds a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method adds a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -156,33 +140,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.RemoveToolboxItem(System.Drawing.Design.ToolboxItem)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.RemoveToolboxItem(System.Drawing.Design.ToolboxItem)" />
 
             
 
-             method removes the specified <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
-
-            
-
-            .</para
-          >
-        </item>
-        <item>
-          <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
-
-            
-
-             method adds a <see
-             cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
-
-            
-
-             delegate capable of converting some type of data stored on the toolbox to a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method removes the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -191,13 +153,28 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.RemoveCreator(System.String)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
 
             
 
-             method removes any <see
-             cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+             method adds a <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+
+            
+
+             delegate capable of converting some type of data stored on the toolbox to a <see cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
+
+            .</para
+          >
+        </item>
+        <item>
+          <para
+            >The <see cref="M:System.Drawing.Design.IToolboxService.RemoveCreator(System.String)" />
+
+            
+
+             method removes any <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
 
             
 
@@ -209,8 +186,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.Refresh" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.Refresh" />
 
             
 
@@ -219,8 +195,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.SelectedToolboxItemUsed" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SelectedToolboxItemUsed" />
 
             
 
@@ -229,8 +204,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.SetCursor" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SetCursor" />
 
             
 
@@ -242,13 +216,11 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.DeserializeToolboxItem(System.Object)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.DeserializeToolboxItem(System.Object)" />
 
             
 
-             method attempts to return a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method attempts to return a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -257,13 +229,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.SerializeToolboxItem(System.Drawing.Design.ToolboxItem)" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.SerializeToolboxItem(System.Drawing.Design.ToolboxItem)" />
 
             
 
-             method returns a serialized object representing the specified <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             method returns a serialized object representing the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -295,13 +265,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
-            . If a creator handles more than one format, call <see
-             cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
+            . If a creator handles more than one format, call <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
 
             
 
@@ -313,19 +281,26 @@
           <para>Adds a new toolbox item creator for a specified data format.</para>
         </summary>
         <param name="creator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+          A <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
 
           
 
            that can create a component when the toolbox item is invoked. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,21 +330,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >A toolbox item creator can convert data of a particular data format that has been pasted or dropped on the toolbox into a <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
-            . If a creator handles more than one format, call <see
-             cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
+            . If a creator handles more than one format, call <see cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
 
             
 
              more than once. Unexpected behavior may result if you add more than one creator for the same format.</para
           >
           <para
-            >If the <paramref
-             name="host" />
+            >If the <paramref name="host" />
 
             
 
@@ -381,31 +353,41 @@
           <para>Adds a new toolbox item creator for a specified data format and designer host.</para>
         </summary>
         <param name="creator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+          A <see cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
 
           
 
            that can create a component when the toolbox item is invoked. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data format that the creator handles. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -440,24 +422,30 @@
           <para>Adds the specified project-linked toolbox item to the toolbox.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The linked <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The linked <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to add to the toolbox. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -493,31 +481,41 @@
           <para>Adds the specified project-linked toolbox item to the toolbox in the specified category.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The linked <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The linked <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to add to the toolbox. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The toolbox item category to add the toolbox item to. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -548,12 +546,15 @@
           <para>Adds the specified toolbox item to the toolbox.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -585,24 +586,30 @@
           <para>Adds the specified toolbox item to the toolbox in the specified category.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to add to the toolbox. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The toolbox item category to add the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The toolbox item category to add the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -657,8 +664,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -666,12 +672,15 @@
           >
         </returns>
         <param name="serializedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that contains the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -705,8 +714,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -714,29 +722,34 @@
           >
         </returns>
         <param name="serializedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that contains the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to retrieve. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
-           to associate with this <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+           to associate with this <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -767,8 +780,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -797,23 +809,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the currently selected <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >This method returns the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
-             if it is not designer specific, and only returns a designer-specific currently selected <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             if it is not designer specific, and only returns a designer-specific currently selected <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
-             if the type of the designer host specified in the <paramref
-             name="host" />
+             if the type of the designer host specified in the <paramref name="host" />
 
             
 
-             parameter matches the type of designer that the currently selected <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+             parameter matches the type of designer that the currently selected <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -827,8 +835,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -836,12 +843,15 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -872,8 +882,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.ToolboxItemCollection" />
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" />
 
             
 
@@ -907,8 +916,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.ToolboxItemCollection" />
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" />
 
             
 
@@ -916,12 +924,15 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -954,8 +965,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.ToolboxItemCollection" />
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" />
 
             
 
@@ -963,7 +973,11 @@
           >
         </returns>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -997,8 +1011,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Design.ToolboxItemCollection" />
+            >A <see cref="T:System.Drawing.Design.ToolboxItemCollection" />
 
             
 
@@ -1006,19 +1019,26 @@
           >
         </returns>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The toolbox item category to retrieve the toolbox items from. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -1054,24 +1074,30 @@
           <para>true if the object matches the specified attributes; otherwise, false.</para>
         </returns>
         <param name="serializedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that contains the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to retrieve. </param
         >
         <param name="filterAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.ICollection" />
+          An <see cref="T:System.Collections.ICollection" />
 
           
 
@@ -1107,29 +1133,34 @@
           <para>true if the specified object is compatible with the specified designer host; otherwise, false.</para>
         </returns>
         <param name="serializedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that contains the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The object that contains the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to retrieve. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
-           to test for support for the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+           to test for support for the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -1161,7 +1192,11 @@
           <para>true if the object contains a toolbox item object; otherwise, false.</para>
         </returns>
         <param name="serializedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1197,19 +1232,26 @@
           <para>true if the object contains a toolbox item object; otherwise, false.</para>
         </returns>
         <param name="serializedObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to inspect. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -1232,8 +1274,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Design.IToolboxService.Refresh" />
+            >The <see cref="M:System.Drawing.Design.IToolboxService.Refresh" />
 
             
 
@@ -1266,7 +1307,11 @@
           <para>Removes a previously added toolbox item creator of the specified data format.</para>
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1298,19 +1343,26 @@
           <para>Removes a previously added toolbox creator that is associated with the specified data format and the specified designer host.</para>
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data format of the creator to remove. </param
         >
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          The <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
@@ -1341,12 +1393,15 @@
           <para>Removes the specified toolbox item from the toolbox.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -1378,24 +1433,30 @@
           <para>Removes the specified toolbox item from the toolbox.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
            to remove from the toolbox. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The toolbox item category to remove the <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The toolbox item category to remove the <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -1462,8 +1523,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serializes the specified <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >This method serializes the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -1477,8 +1537,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the specified <see
-             cref="T:System.Drawing.Design.ToolboxItem" />
+            >An object that represents the specified <see cref="T:System.Drawing.Design.ToolboxItem" />
 
             
 
@@ -1486,12 +1545,15 @@
           >
         </returns>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -1548,12 +1610,15 @@
           <para>Selects the specified toolbox item.</para>
         </summary>
         <param name="toolboxItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 

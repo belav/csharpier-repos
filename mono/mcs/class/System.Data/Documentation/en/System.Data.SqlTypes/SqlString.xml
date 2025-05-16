@@ -35,26 +35,22 @@
 
         
 
-         always uses the default <see
-         cref="T:System.Globalization.CultureInfo" />
+         always uses the default <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         from the current thread, but <see
-         cref="T:System.Data.SqlTypes.SqlString" />
+         from the current thread, but <see cref="T:System.Data.SqlTypes.SqlString" />
 
         
 
-         contains its own locale Id and compare flags. The comparison result of two <see
-         cref="T:System.Data.SqlTypes.SqlString" />
+         contains its own locale Id and compare flags. The comparison result of two <see cref="T:System.Data.SqlTypes.SqlString" />
 
         
 
          structures is independent of operating system and current thread locale. </para
       >
       <para
-        >When you use <see
-         cref="T:System.Data.SqlTypes.SqlString" />
+        >When you use <see cref="T:System.Data.SqlTypes.SqlString" />
 
         
 
@@ -67,13 +63,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a variable-length stream of characters to be stored in or retrieved from the database. <see
-         cref="T:System.Data.SqlTypes.SqlString" />
+        >Represents a variable-length stream of characters to be stored in or retrieved from the database. <see cref="T:System.Data.SqlTypes.SqlString" />
 
         
 
-         has a different underlying data structure from its corresponding .NET Framework <see
-         cref="T:System.String" />
+         has a different underlying data structure from its corresponding .NET Framework <see cref="T:System.String" />
 
         
 
@@ -94,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -103,7 +96,11 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -128,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -137,19 +133,26 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to store. </param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the geographical locale and language for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -178,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -187,31 +189,41 @@
           >
         </summary>
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the geographical locale and language for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="compareOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the compare options for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -240,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -249,31 +260,41 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to store. </param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the geographical locale and language for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="compareOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the compare options for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -303,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -312,38 +332,52 @@
           >
         </summary>
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the geographical locale and language for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="compareOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the compare options for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data array to store. </param
         >
         <param name="fUnicode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -383,45 +416,63 @@
           >
         </summary>
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the geographical locale and language for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="compareOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the compare options for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data array to store. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting index within the array. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -453,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -462,52 +512,74 @@
           >
         </summary>
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the geographical locale and language for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the geographical locale and language for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="compareOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the compare options for the new <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          Specifies the compare options for the new <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
            structure. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data array to store. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The starting index within the array. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of characters from index to copy. </param
         >
         <param name="fUnicode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -543,13 +615,11 @@
 
             
 
-             will appear first in the resulting <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             will appear first in the resulting <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-            , followed by <paramref
-             name="y" />
+            , followed by <paramref name="y" />
 
             
 
@@ -559,13 +629,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Concatenates two specified <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Concatenates two specified <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             values to create a new <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             values to create a new <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -575,18 +643,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             that is the concatenated value of <paramref
-             name="x" />
+             that is the concatenated value of <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
@@ -594,24 +659,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -634,8 +705,7 @@
 
             
 
-             functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -665,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Creates a copy of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -676,8 +745,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -705,13 +773,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Globalization.CompareInfo" />
+            >Gets the <see cref="T:System.Globalization.CompareInfo" />
 
             
 
-             object that defines how string comparisons should be performed for this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             object that defines how string comparisons should be performed for this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -741,13 +807,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Globalization.CompareOptions" />
+            >Gets the <see cref="T:System.Globalization.CompareOptions" />
 
             
 
-             enumeration equilvalent of the specified <see
-             cref="T:System.Data.SqlTypes.SqlCompareOptions" />
+             enumeration equilvalent of the specified <see cref="T:System.Data.SqlTypes.SqlCompareOptions" />
 
             
 
@@ -757,8 +821,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A CompareOptions value that corresponds to the SqlCompareOptions for this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A CompareOptions value that corresponds to the SqlCompareOptions for this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -766,17 +829,19 @@
           >
         </returns>
         <param name="compareOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlCompareOptions" />
+          A <see cref="T:System.Data.SqlTypes.SqlCompareOptions" />
 
           
 
-           value that describes the comparison options for this <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+           value that describes the comparison options for this <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -808,13 +873,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             instance to the supplied <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             instance to the supplied <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -864,12 +927,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          The <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -891,13 +957,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Compares this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             object to the supplied <see
-             cref="T:System.Object" />
+             object to the supplied <see cref="T:System.Object" />
 
             
 
@@ -947,12 +1011,15 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -982,8 +1049,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Concatenates the two specified <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Concatenates the two specified <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -993,13 +1059,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             that contains the newly concatenated value representing the contents of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that contains the newly concatenated value representing the contents of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1007,24 +1071,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -1051,13 +1121,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Globalization.CultureInfo" />
+            >Gets the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             structure that represents information about the culture of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             structure that represents information about the culture of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1084,13 +1152,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the supplied object parameter to the <see
-             cref="P:System.Data.SqlTypes.SqlString.Value" />
+            >Compares the supplied object parameter to the <see cref="P:System.Data.SqlTypes.SqlString.Value" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             property of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1100,8 +1166,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equals will return true if the object is an instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Equals will return true if the object is an instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1109,7 +1174,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1139,8 +1208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1152,24 +1220,30 @@
           <para>true if the two values are equal. Otherwise, false. If either instance is null, then the SqlString will be null.</para>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -1216,8 +1290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of bytes, that contains the contents of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Gets an array of bytes, that contains the contents of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1227,8 +1300,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An byte array, that contains the contents of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >An byte array, that contains the contents of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1253,8 +1325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of bytes, that contains the contents of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Gets an array of bytes, that contains the contents of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1264,8 +1335,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An byte array, that contains the contents of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >An byte array, that contains the contents of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1298,8 +1368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML Schema definition language (XSD) of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Returns the XML Schema definition language (XSD) of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -1309,8 +1378,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string value that indicates the XSD of the specified <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >A string value that indicates the XSD of the specified <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 
@@ -1318,12 +1386,15 @@
           >
         </returns>
         <param name="schemaSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          A <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
@@ -1349,8 +1420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1360,38 +1430,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1399,24 +1462,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -1446,8 +1515,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1457,38 +1525,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1496,24 +1557,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -1540,8 +1607,7 @@
 
             
 
-             functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1551,8 +1617,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies that <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1582,8 +1647,7 @@
 
             
 
-             functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1617,8 +1681,7 @@
 
             
 
-             functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1652,8 +1715,7 @@
 
             
 
-             functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1682,8 +1744,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
 
@@ -1695,8 +1756,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Indicates whether this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1721,8 +1781,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the geographical locale and language for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies the geographical locale and language for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1753,8 +1812,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1764,38 +1822,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1803,24 +1854,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -1850,8 +1907,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1861,38 +1917,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1900,24 +1949,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -1947,8 +2002,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -1958,38 +2012,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are not equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -1997,24 +2044,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2040,13 +2093,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Null functions as a constant for the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Null functions as a constant for the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure.  For more information, see <format
-             type="text/html">
+             structure.  For more information, see <format type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
 
@@ -2058,13 +2109,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.DBNull" />
+            >Represents a <see cref="T:System.DBNull" />
 
             
 
-             that can be assigned to this instance of the <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that can be assigned to this instance of the <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2099,8 +2148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Concatenates the two specified <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Concatenates the two specified <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2110,13 +2158,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             that contains the newly concatenated value representing the contents of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that contains the newly concatenated value representing the contents of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2124,24 +2170,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2171,8 +2223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2182,38 +2233,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are not equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             if the two instances are not equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2221,24 +2265,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2544,8 +2594,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2555,38 +2604,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2594,24 +2636,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2641,8 +2689,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2652,38 +2699,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is greater than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is greater than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2691,24 +2731,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2761,8 +2807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2772,38 +2817,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the two instances are not equal or <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the two instances are not equal or <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-             if the two instances are equal. If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             if the two instances are equal. If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2811,24 +2849,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2858,8 +2902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2869,38 +2912,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -2908,24 +2944,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -2955,8 +2997,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs a logical comparison of the two <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Performs a logical comparison of the two <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -2966,38 +3007,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+            >A <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             that is <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+             that is <see cref="F:System.Data.SqlTypes.SqlBoolean.True" />
 
             
 
-             if the first instance is less than or equal to the second instance. Otherwise, <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.False" />
+             if the first instance is less than or equal to the second instance. Otherwise, <see cref="F:System.Data.SqlTypes.SqlBoolean.False" />
 
             
 
-            . If either instance of <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            . If either instance of <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             is null, the <see
-             cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
+             is null, the <see cref="P:System.Data.SqlTypes.SqlBoolean.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             of the <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
-             will be <see
-             cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+             will be <see cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
 
             
 
@@ -3005,24 +3039,30 @@
           >
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
           . </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlTypes.SqlString" />
+          A <see cref="T:System.Data.SqlTypes.SqlString" />
 
           
 
@@ -3045,18 +3085,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A combination of one or more of the <see
-             cref="T:System.Data.SqlTypes.SqlCompareOptions" />
+            >A combination of one or more of the <see cref="T:System.Data.SqlTypes.SqlCompareOptions" />
 
             
 
-             enumeration values that represent the way in which this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             enumeration values that represent the way in which this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             should be compared to other <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             should be compared to other <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3116,7 +3153,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3146,7 +3187,11 @@
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3169,13 +3214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlBoolean" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlBoolean" />
 
             
 
@@ -3185,8 +3228,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Data.SqlTypes.SqlString.Value" />
+            >true if the <see cref="P:System.Data.SqlTypes.SqlString.Value" />
 
             
 
@@ -3211,13 +3253,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlByte" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlByte" />
 
             
 
@@ -3227,13 +3267,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new SqlByte structure whose <see
-             cref="P:System.Data.SqlTypes.SqlByte.Value" />
+            >A new SqlByte structure whose <see cref="P:System.Data.SqlTypes.SqlByte.Value" />
 
             
 
-             equals the number represented by this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             equals the number represented by this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3261,13 +3299,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlDateTime" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
             
 
@@ -3277,8 +3313,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new SqlDateTime structure that contains the date value represented by this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >A new SqlDateTime structure that contains the date value represented by this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3306,13 +3341,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlDecimal" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlDecimal" />
 
             
 
@@ -3322,13 +3355,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlDecimal" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlDecimal" />
 
             
 
-             that contains the value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that contains the value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3356,13 +3387,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlDouble" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
@@ -3372,13 +3401,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlDouble" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlDouble" />
 
             
 
-             that is equal to the numeric value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3403,13 +3430,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlGuid" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlGuid" />
 
             
 
@@ -3419,18 +3444,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlGuid" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlGuid" />
 
             
 
-             structure whose <see
-             cref="P:System.Data.SqlTypes.SqlGuid.Value" />
+             structure whose <see cref="P:System.Data.SqlTypes.SqlGuid.Value" />
 
             
 
-             is the Guid represented by this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             is the Guid represented by this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3455,13 +3477,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlInt16" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlInt16" />
 
             
 
@@ -3471,13 +3491,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt16" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt16" />
 
             
 
-             that is equal to the numeric value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3502,13 +3520,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlInt32" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlInt32" />
 
             
 
@@ -3518,13 +3534,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt32" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt32" />
 
             
 
-             that is equal to the numeric value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3549,13 +3563,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
@@ -3565,13 +3577,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlInt64" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlInt64" />
 
             
 
-             that is equal to the numeric value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3596,13 +3606,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlMoney" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlMoney" />
 
             
 
@@ -3612,13 +3620,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlMoney" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlMoney" />
 
             
 
-             that is equal to the numeric value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3646,13 +3652,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             structure to <see
-             cref="T:System.Data.SqlTypes.SqlSingle" />
+             structure to <see cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
@@ -3662,13 +3666,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlTypes.SqlSingle" />
+            >A new <see cref="T:System.Data.SqlTypes.SqlSingle" />
 
             
 
-             that is equal to the numeric value of this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             that is equal to the numeric value of this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3693,13 +3695,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Converts a <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
-             object to a <see
-             cref="T:System.String" />
+             object to a <see cref="T:System.String" />
 
             
 
@@ -3709,13 +3709,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             with the same value as this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+             with the same value as this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -3740,8 +3738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the string that is stored in this <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Gets the string that is stored in this <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 

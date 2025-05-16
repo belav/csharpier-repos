@@ -20,33 +20,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+        >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
-         class is used to render HTML 4.0 to desktop browsers. The <see
-         cref="T:System.Web.UI.HtmlTextWriter" />
+         class is used to render HTML 4.0 to desktop browsers. The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
         
 
-         is also the base class for all markup writers in the <see
-         cref="N:System.Web.UI" />
+         is also the base class for all markup writers in the <see cref="N:System.Web.UI" />
 
         
 
-         namespace, including the <see
-         cref="T:System.Web.UI.ChtmlTextWriter" />
+         namespace, including the <see cref="T:System.Web.UI.ChtmlTextWriter" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.Html32TextWriter" />
+        , <see cref="T:System.Web.UI.Html32TextWriter" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.XhtmlTextWriter" />
+        , and <see cref="T:System.Web.UI.XhtmlTextWriter" />
 
         
 
@@ -71,23 +65,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter)" />
 
             
 
-             constructor uses the <see
-             cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+             constructor uses the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
             
 
-             constant when indentation of a line is necessary. It calls the <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+             constant when indentation of a line is necessary. It calls the <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
 
             
 
@@ -97,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -106,12 +95,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -138,23 +130,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
 
             
 
-             constructor uses <paramref
-             name="tabString" />
+             constructor uses <paramref name="tabString" />
 
             
 
-             when indentation of a line is necessary. It calls the <see
-             cref="M:System.IO.TextWriter.#ctor(System.IFormatProvider)" />
+             when indentation of a line is necessary. It calls the <see cref="M:System.IO.TextWriter.#ctor(System.IFormatProvider)" />
 
             
 
@@ -164,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -173,19 +160,26 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            that renders the markup content. </param
         >
         <param name="tabString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -214,41 +208,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
 
             
 
-             method if the attribute is not one of the <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+             method if the attribute is not one of the <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
              values, or if the attribute is not known until run time.</para
           >
           <para
-            >For an instance of any given markup element, the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >For an instance of any given markup element, the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class maintains a list of attributes for that element. When the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             class maintains a list of attributes for that element. When the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method is called, any attributes added by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+             method is called, any attributes added by the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
             
 
-             method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -258,8 +245,7 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
                 
 
@@ -268,8 +254,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
                 
 
@@ -281,8 +266,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+                >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
                 
 
@@ -294,13 +278,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified markup attribute and value to the opening tag of the element that the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds the specified markup attribute and value to the opening tag of the element that the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object creates with a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             object creates with a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -308,14 +290,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the attribute to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -344,36 +334,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
 
             
 
              method to render a standard markup attribute.</para
           >
           <para
-            >For an instance of any given markup element, the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >For an instance of any given markup element, the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class maintains a list of attributes for that element. When the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             class maintains a list of attributes for that element. When the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method is called, any attributes that are added by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+             method is called, any attributes that are added by the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
             
 
-             method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -383,8 +367,7 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
                 
 
@@ -393,8 +376,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
                 
 
@@ -406,8 +388,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+                >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
                 
 
@@ -419,13 +400,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the markup attribute and the attribute value to the opening tag of the element that the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds the markup attribute and the attribute value to the opening tag of the element that the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object creates with a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             object creates with a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -433,19 +412,26 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
            that represents the markup attribute to add to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -476,59 +462,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
 
             
 
-             method if the attribute is not one of the <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+             method if the attribute is not one of the <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
              values, or if the attribute is not known until run time and encoding is needed.</para
           >
           <para
-            >For an instance of any given markup element, the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >For an instance of any given markup element, the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class maintains a list of attributes for that element. When the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             class maintains a list of attributes for that element. When the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method is called, any attributes added by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+             method is called, any attributes added by the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
             
 
-             method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method are rendered to the opening tag of the element. The list of attributes is then cleared from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
              object.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Boolean)" />
 
             
 
-             method with <paramref
-             name="fEncode" />
+             method with <paramref name="fEncode" />
 
             
 
-             set to true, if the attribute can possibly contain a quotation mark ("), a less than sign (&lt;), or an ampersand (&amp;). The method call will encode the attribute to meet the requirements of the requesting device. You can set <paramref
-             name="fEncode" />
+             set to true, if the attribute can possibly contain a quotation mark ("), a less than sign (&lt;), or an ampersand (&amp;). The method call will encode the attribute to meet the requirements of the requesting device. You can set <paramref name="fEncode" />
 
             
 
@@ -538,8 +514,7 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
                 
 
@@ -548,8 +523,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
                 
 
@@ -561,8 +535,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+                >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
                 
 
@@ -574,13 +547,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified markup attribute and value to the opening tag of the element that the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds the specified markup attribute and value to the opening tag of the element that the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object creates with a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             object creates with a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -588,14 +559,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the attribute to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -625,28 +604,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method only when inheriting from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method only when inheriting from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class. It enables you to create new <paramref
-             name="name" />
+             class. It enables you to create new <paramref name="name" />
 
             
 
-             and <paramref
-             name="key" />
+             and <paramref name="key" />
 
             
 
@@ -656,18 +630,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified markup attribute and value, along with an <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+            >Adds the specified markup attribute and value, along with an <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
-             enumeration value, to the opening tag of the element that the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             enumeration value, to the opening tag of the element that the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object creates with a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             object creates with a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -675,26 +646,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the attribute to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the value to assign to the attribute. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
@@ -724,54 +706,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
 
             
 
              method to render a standard markup attribute, with optional encoding.</para
           >
           <para
-            >For an instance of any given markup element, the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >For an instance of any given markup element, the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class maintains a list of attributes for that element. When the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             class maintains a list of attributes for that element. When the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method is called, any attributes added by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+             method is called, any attributes added by the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
             
 
-             are rendered to the opening tag of the element. The list of attributes is then cleared from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             are rendered to the opening tag of the element. The list of attributes is then cleared from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
              object.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.Web.UI.HtmlTextWriterAttribute,System.String,System.Boolean)" />
 
             
 
-             method with <paramref
-             name="fEncode" />
+             method with <paramref name="fEncode" />
 
             
 
-             set to true, if the attribute can possibly contain a quotation mark ("), a less than sign (&lt;), or an ampersand (&amp;). The method call will encode the attribute to meet the requirements of the requesting device. You can set <paramref
-             name="fEncode" />
+             set to true, if the attribute can possibly contain a quotation mark ("), a less than sign (&lt;), or an ampersand (&amp;). The method call will encode the attribute to meet the requirements of the requesting device. You can set <paramref name="fEncode" />
 
             
 
@@ -781,8 +754,7 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
                 
 
@@ -791,8 +763,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
                 
 
@@ -804,8 +775,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+                >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
                 
 
@@ -817,13 +787,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the markup attribute and the attribute value to the opening tag of the element that the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Adds the markup attribute and the attribute value to the opening tag of the element that the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object creates with a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             object creates with a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -831,26 +799,37 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
            that represents the markup attribute to add to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the value to assign to the attribute. </param
         >
         <param name="fEncode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -879,36 +858,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
 
             
 
-             method when the style is not a member of the <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             method when the style is not a member of the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
              enumeration or is not known until run time.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class maintains a list of styles for the markup elements it renders. When the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             class maintains a list of styles for the markup elements it renders. When the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method is called, any styles that are added by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+             method is called, any styles that are added by the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
 
             
 
@@ -918,8 +891,7 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
 
                 
 
@@ -928,8 +900,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
                 
 
@@ -941,8 +912,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+                >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
                 
 
@@ -954,8 +924,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified markup style attribute and the attribute value to the opening markup tag created by a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >Adds the specified markup style attribute and the attribute value to the opening markup tag created by a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -963,14 +932,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the style attribute to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -999,36 +976,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.Web.UI.HtmlTextWriterStyle,System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.Web.UI.HtmlTextWriterStyle,System.String)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.Web.UI.HtmlTextWriterStyle,System.String)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.Web.UI.HtmlTextWriterStyle,System.String)" />
 
             
 
-             method when the style is a member of the <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             method when the style is a member of the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
              enumeration and is known before run time.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class maintains a list of styles for the markup elements it renders. When the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             class maintains a list of styles for the markup elements it renders. When the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method is called, any styles added by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+             method is called, any styles added by the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
 
             
 
@@ -1038,8 +1009,7 @@
           <list type="bullet">
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
 
                 
 
@@ -1048,8 +1018,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+                >Use the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
                 
 
@@ -1061,8 +1030,7 @@
             </item>
             <item>
               <para
-                >Use the <see
-                 cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+                >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
                 
 
@@ -1074,13 +1042,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the markup style attribute associated with the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >Adds the markup style attribute associated with the specified <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             value and the attribute value to the opening markup tag created by a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             value and the attribute value to the opening markup tag created by a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -1088,19 +1054,26 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
            that represents the style attribute to add to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1130,33 +1103,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             method only when inheriting from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method only when inheriting from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class. It enables you to create new <paramref
-             name="name" />
+             class. It enables you to create new <paramref name="name" />
 
             
 
-             and <paramref
-             name="value" />
+             and <paramref name="value" />
 
             
 
-             pairs for <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             pairs for <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -1166,13 +1133,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified markup style attribute and the attribute value, along with an <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >Adds the specified markup style attribute and the attribute value, along with an <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             enumeration value, to the opening markup tag created by a subsequent call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             enumeration value, to the opening markup tag created by a subsequent call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -1180,26 +1145,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the style attribute to be added. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the value to assign to the attribute. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -1225,28 +1201,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
 
             
 
-             method has no functionality. You must override the <see
-             cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+             method has no functionality. You must override the <see cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method in a class derived from <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             to provide your own rendering functionality. For example, in a markup language that might require &lt;p&gt; elements to be rendered immediately ahead of a control, but where the need for the &lt;p&gt; element is determined earlier, you could use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+             to provide your own rendering functionality. For example, in a markup language that might require &lt;p&gt; elements to be rendered immediately ahead of a control, but where the need for the &lt;p&gt; element is determined earlier, you could use the <see cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
 
             
 
@@ -1256,8 +1227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies an <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Notifies an <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1277,26 +1247,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.Close" />
+            >This implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.Close" />
 
             
 
-             method calls the <see
-             cref="M:System.IO.TextWriter.Close" />
+             method calls the <see cref="M:System.IO.TextWriter.Close" />
 
             
 
              base method.</para
           >
           <para
-            >Following a call to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.Close" />
+            >Following a call to the <see cref="M:System.Web.UI.HtmlTextWriter.Close" />
 
             
 
-             method, any operations on the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method, any operations on the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1306,8 +1272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Closes the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1353,13 +1318,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.DoubleQuoteChar" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.DoubleQuoteChar" />
 
             
 
-             field is used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+             field is used by the <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
 
             
 
@@ -1393,31 +1356,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.String,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.String,System.Boolean)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
 
             
 
-             method if the attribute is not an <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+             method if the attribute is not an <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
              enumeration value or is not known until run time.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
 
             
 
-             method removes double quotation marks ("), ampersands (&amp;), and less than signs (&lt;) so that invalid tags are not generated, regardless of the input. The actual encoding is performed by the <see
-             cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+             method removes double quotation marks ("), ampersands (&amp;), and less than signs (&lt;) so that invalid tags are not generated, regardless of the input. The actual encoding is performed by the <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
 
             
 
@@ -1427,8 +1385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Encodes the value of the specified markup attribute based on the requirements of the <see
-             cref="T:System.Web.HttpRequest" />
+            >Encodes the value of the specified markup attribute based on the requirements of the <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -1438,13 +1395,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the encoded attribute value, null if <paramref
-             name="value" />
+            >A string containing the encoded attribute value, null if <paramref name="value" />
 
             
 
-             is empty, or the unencoded attribute value if <paramref
-             name="fEncode" />
+             is empty, or the unencoded attribute value if <paramref name="fEncode" />
 
             
 
@@ -1452,14 +1407,22 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the attribute value to encode. </param
         >
         <param name="fEncode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1488,13 +1451,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.EncodeAttributeValue(System.Web.UI.HtmlTextWriterAttribute,System.String)" />
 
             
 
-             method removes double quotation marks ("), ampersands (&amp;), and less than signs (&lt;) so that invalid tags are not generated, regardless of the input. The actual encoding is performed by the <see
-             cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
+             method removes double quotation marks ("), ampersands (&amp;), and less than signs (&lt;) so that invalid tags are not generated, regardless of the input. The actual encoding is performed by the <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String)" />
 
             
 
@@ -1504,8 +1465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Encodes the value of the specified markup attribute based on the requirements of the <see
-             cref="T:System.Web.HttpRequest" />
+            >Encodes the value of the specified markup attribute based on the requirements of the <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -1517,19 +1477,26 @@
           <para>A string containing the encoded attribute value.</para>
         </returns>
         <param name="attrKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
            representing the markup attribute. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1564,7 +1531,11 @@
           <para>A string containing the encoded URL.</para>
         </returns>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1587,20 +1558,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Text.Encoding" />
-        </value>
+        <value>a <see cref="T:System.Text.Encoding" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlTextWriter.Encoding" />
+            >The <see cref="P:System.Web.UI.HtmlTextWriter.Encoding" />
 
             
 
-             property obtains its value from the base <see
-             cref="T:System.IO.TextWriter" />
+             property obtains its value from the base <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -1610,8 +1576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the encoding that the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Gets the encoding that the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1638,36 +1603,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
 
             
 
-             method has no functionality. You must override <see
-             cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
+             method has no functionality. You must override <see cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
 
             
 
-             in a class derived from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             in a class derived from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
              class to provide your own rendering functionality. </para
           >
           <para
-            >You can use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
+            >You can use the <see cref="M:System.Web.UI.HtmlTextWriter.EndRender" />
 
             
 
-             method to close any markup elements opened in the <see
-             cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+             method to close any markup elements opened in the <see cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
 
             
 
@@ -1677,13 +1636,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies an <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Notifies an <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object, or an object of a derived class, that a control has finished rendering. You can use this method to close any markup elements opened in the <see
-             cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
+             object, or an object of a derived class, that a control has finished rendering. You can use this method to close any markup elements opened in the <see cref="M:System.Web.UI.HtmlTextWriter.BeginRender" />
 
             
 
@@ -1703,13 +1660,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.EndTagLeftChars" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.EndTagLeftChars" />
 
             
 
-             field is used by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             field is used by the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -1745,59 +1700,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
              method to apply styles, such as background color or border width, to a block of markup.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             and <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+             and <see cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
 
             
 
-             methods allow a device adapter or control to create markup that uses the character formatting of the specified style. Use the same value for <paramref
-             name="style" />
+             methods allow a device adapter or control to create markup that uses the character formatting of the specified style. Use the same value for <paramref name="style" />
 
             
 
-             in the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+             in the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             method that you use in the corresponding <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+             method that you use in the corresponding <see cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             method renders the opening tag of a &lt;span&gt; element. This method then adds the necessary attributes and style attributes to the opening tag of the &lt;span&gt; element to display the settings specified by the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method renders the opening tag of a &lt;span&gt; element. This method then adds the necessary attributes and style attributes to the opening tag of the &lt;span&gt; element to display the settings specified by the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object. If you want to render a different markup element to contain the attributes and style attributes, use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             object. If you want to render a different markup element to contain the attributes and style attributes, use the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -1809,12 +1754,15 @@
           <para>Writes the opening tag of a &lt;span&gt; element that contains attributes that implement the layout and character formatting of the specified style. </para>
         </summary>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -1842,69 +1790,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
              method to apply styles, such as background color or border width, to a block of markup.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             and <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+             and <see cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
 
             
 
-             methods allow a device adapter or control to create markup that uses the character formatting of the specified style. Use the same value for <paramref
-             name="style" />
+             methods allow a device adapter or control to create markup that uses the character formatting of the specified style. Use the same value for <paramref name="style" />
 
             
 
-             in the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             in the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method that you use in the corresponding <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
+             method that you use in the corresponding <see cref="Overload:System.Web.UI.HtmlTextWriter.ExitStyle" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.EnterStyle" />
+            >The <see cref="Overload:System.Web.UI.HtmlTextWriter.EnterStyle" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method renders the opening tag of the element specified by the <paramref
-             name="tag" />
+             method renders the opening tag of the element specified by the <paramref name="tag" />
 
             
 
-             parameter. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             parameter. The <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method then adds the necessary attributes and style attributes to the opening tag of the element to display the settings that are specified by the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             method then adds the necessary attributes and style attributes to the opening tag of the element to display the settings that are specified by the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object. Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+             object. Use the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
@@ -1916,29 +1852,34 @@
           <para>Writes the opening tag of a markup element that contains attributes that implement the layout and character formatting of the specified style. </para>
         </summary>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
            that specifies the layout and formatting to begin applying to the block of markup.</param
         >
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
-           that specifies the opening tag of the markup element that will contain the style object specified in <paramref
-           name="style" />
+           that specifies the opening tag of the markup element that will contain the style object specified in <paramref name="style" />
 
           
 
@@ -1957,13 +1898,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You might want to use the <see
-             cref="F:System.Web.UI.HtmlTextWriter.EqualsDoubleQuoteString" />
+            >You might want to use the <see cref="F:System.Web.UI.HtmlTextWriter.EqualsDoubleQuoteString" />
 
             
 
-             field instead of the <see
-             cref="F:System.Web.UI.HtmlTextWriter.EqualsChar" />
+             field instead of the <see cref="F:System.Web.UI.HtmlTextWriter.EqualsChar" />
 
             
 
@@ -1991,18 +1930,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.EqualsDoubleQuoteString" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.EqualsDoubleQuoteString" />
 
             
 
-             field is used by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             field is used by the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             and <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.WriteAttribute" />
+             and <see cref="Overload:System.Web.UI.HtmlTextWriter.WriteAttribute" />
 
             
 
@@ -2038,46 +1974,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             method renders the closing tag of a &lt;span&gt; element after the closing tag of the control, closing the element opened by the corresponding <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+             method renders the closing tag of a &lt;span&gt; element after the closing tag of the control, closing the element opened by the corresponding <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
              call. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             methods allow a device adapter or control to create markup that begins and ends a block by using the character formatting of the specified style. Use the same value for <paramref
-             name="style" />
+             methods allow a device adapter or control to create markup that begins and ends a block by using the character formatting of the specified style. Use the same value for <paramref name="style" />
 
             
 
-             in the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
+             in the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style)" />
 
             
 
-             method that you use in the corresponding <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
+             method that you use in the corresponding <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style)" />
 
             
 
@@ -2089,12 +2017,15 @@
           <para>Writes the closing tag of a &lt;span&gt; element to end the specified layout and character formatting. </para>
         </summary>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
@@ -2122,51 +2053,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method renders the closing tag of the element that is specified by <paramref
-             name="tag" />
+             method renders the closing tag of the element that is specified by <paramref name="tag" />
 
             
 
-             after the closing tag of the control, closing the element that was opened by the corresponding <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             after the closing tag of the control, closing the element that was opened by the corresponding <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
              method call. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             methods allow a device adapter or control to create markup that begins and ends a block by using the character formatting of the specified style. Use the same value for <paramref
-             name="style" />
+             methods allow a device adapter or control to create markup that begins and ends a block by using the character formatting of the specified style. Use the same value for <paramref name="style" />
 
             
 
-             in the <see
-             cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             in the <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method that you use in the corresponding <see
-             cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
+             method that you use in the corresponding <see cref="M:System.Web.UI.HtmlTextWriter.ExitStyle(System.Web.UI.WebControls.Style,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -2178,29 +2100,34 @@
           <para>Writes the closing tag of the specified markup element to end the specified layout and character formatting. </para>
         </summary>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
            that specifies the layout and formatting to stop applying to the output text.</param
         >
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
-           that specifies the closing tag of the markup element that contained the attributes that applied the specified style. This must match the key passed in the corresponding <see
-           cref="M:System.Web.UI.HtmlTextWriter.EnterStyle" />
+           that specifies the closing tag of the markup element that contained the attributes that applied the specified style. This must match the key passed in the corresponding <see cref="M:System.Web.UI.HtmlTextWriter.EnterStyle" />
 
           
 
@@ -2219,23 +2146,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before attributes are rendered on a markup element, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.FilterAttributes" />
+            >Before attributes are rendered on a markup element, the <see cref="M:System.Web.UI.HtmlTextWriter.FilterAttributes" />
 
             
 
-             method is called. In turn, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.FilterAttributes" />
+             method is called. In turn, the <see cref="M:System.Web.UI.HtmlTextWriter.FilterAttributes" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+             method calls the <see cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
@@ -2263,18 +2186,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.Flush" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.Flush" />
 
             
 
-             method just calls the <see
-             cref="M:System.IO.TextWriter.Flush" />
+             method just calls the <see cref="M:System.IO.TextWriter.Flush" />
 
             
 
@@ -2284,8 +2204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears all buffers for the current <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Clears all buffers for the current <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -2314,13 +2233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="attrName" />
+            >If <paramref name="attrName" />
 
             
 
-             is null or an empty string (""), or cannot be found in the table of attribute names, the value -1, typed to an <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+             is null or an empty string (""), or cannot be found in the table of attribute names, the value -1, typed to an <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
@@ -2330,8 +2247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the corresponding <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+            >Obtains the corresponding <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
@@ -2341,13 +2257,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
-             enumeration value for the specified attribute; otherwise, an invalid <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+             enumeration value for the specified attribute; otherwise, an invalid <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
@@ -2355,12 +2269,15 @@
           >
         </returns>
         <param name="attrName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the attribute for which to obtain the <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          A string that contains the attribute for which to obtain the <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
@@ -2388,18 +2305,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.GetAttributeName(System.Web.UI.HtmlTextWriterAttribute)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.GetAttributeName(System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method returns an empty string (""), if <paramref
-             name="attrKey" />
+             method returns an empty string (""), if <paramref name="attrKey" />
 
             
 
-             is not a valid <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+             is not a valid <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
@@ -2409,8 +2323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the name of the markup attribute associated with the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+            >Obtains the name of the markup attribute associated with the specified <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
@@ -2422,12 +2335,15 @@
           <para>A string containing the name of the markup attribute.</para>
         </returns>
         <param name="attrKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
@@ -2455,23 +2371,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.GetStyleKey(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.GetStyleKey(System.String)" />
 
             
 
-             method returns the value -1 typed as a <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             method returns the value -1 typed as a <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             value, if <paramref
-             name="styleName" />
+             value, if <paramref name="styleName" />
 
             
 
-             does not correspond to any <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             does not correspond to any <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -2481,8 +2393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >Obtains the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -2492,13 +2403,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             enumeration value corresponding to <paramref
-             name="styleName" />
+             enumeration value corresponding to <paramref name="styleName" />
 
             
 
@@ -2506,12 +2415,15 @@
           >
         </returns>
         <param name="styleName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The style attribute for which to obtain the <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The style attribute for which to obtain the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -2539,18 +2451,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="styleKey" />
+            >If <paramref name="styleKey" />
 
             
 
-             is not a valid <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+             is not a valid <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             object, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.GetStyleName(System.Web.UI.HtmlTextWriterStyle)" />
+             object, the <see cref="M:System.Web.UI.HtmlTextWriter.GetStyleName(System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
@@ -2560,8 +2469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the markup style attribute name associated with the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >Obtains the markup style attribute name associated with the specified <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
@@ -2571,13 +2479,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The style attribute name associated with the <see
-             cref="T:System.Web.UI.HtmlTextWriterStyle" />
+            >The style attribute name associated with the <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
             
 
-             enumeration value specified in <paramref
-             name="styleKey" />
+             enumeration value specified in <paramref name="styleKey" />
 
             
 
@@ -2585,12 +2491,15 @@
           >
         </returns>
         <param name="styleKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -2618,18 +2527,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="tagName" />
+            >If <paramref name="tagName" />
 
             
 
-             is null, an empty string (""), or cannot be found in the table of markup tag names, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.GetTagKey(System.String)" />
+             is null, an empty string (""), or cannot be found in the table of markup tag names, the <see cref="M:System.Web.UI.HtmlTextWriter.GetTagKey(System.String)" />
 
             
 
-             method returns the <see
-             cref="F:System.Web.UI.HtmlTextWriterTag.Unknown" />
+             method returns the <see cref="F:System.Web.UI.HtmlTextWriterTag.Unknown" />
 
             
 
@@ -2639,8 +2545,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Obtains the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
@@ -2650,23 +2555,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             enumeration value; otherwise, if <paramref
-             name="tagName" />
+             enumeration value; otherwise, if <paramref name="tagName" />
 
             
 
-             is not associated with a specific <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             is not associated with a specific <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value, <see
-             cref="F:System.Web.UI.HtmlTextWriterTag.Unknown" />
+             value, <see cref="F:System.Web.UI.HtmlTextWriterTag.Unknown" />
 
             
 
@@ -2674,12 +2575,15 @@
           >
         </returns>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The markup element for which to obtain the <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          The markup element for which to obtain the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -2707,18 +2611,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="tagKey" />
+            >If <paramref name="tagKey" />
 
             
 
-             is not a valid <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             is not a valid <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             value, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.GetTagName(System.Web.UI.HtmlTextWriterTag)" />
+             value, the <see cref="M:System.Web.UI.HtmlTextWriter.GetTagName(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -2728,8 +2629,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Obtains the markup element associated with the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Obtains the markup element associated with the specified <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
@@ -2741,12 +2641,15 @@
           <para>A string representing the markup element.</para>
         </returns>
         <param name="tagKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -2770,26 +2673,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indentation is performed by writing the string that is specified by the <paramref
-             name="tabString" />
+            >Indentation is performed by writing the string that is specified by the <paramref name="tabString" />
 
             
 
-             parameter of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+             parameter of the <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
 
             
 
-             constructor the number of times that are specified by the <see
-             cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+             constructor the number of times that are specified by the <see cref="P:System.Web.UI.HtmlTextWriter.Indent" />
 
             
 
              property.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+            >If the <see cref="P:System.Web.UI.HtmlTextWriter.Indent" />
 
             
 
@@ -2817,26 +2716,20 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.TextWriter" />
-        </value>
+        <value>a <see cref="T:System.IO.TextWriter" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Inner markup content is the text found between the opening and closing tags of a markup language element.</para>
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlTextWriter.InnerWriter" />
+            >If the <see cref="P:System.Web.UI.HtmlTextWriter.InnerWriter" />
 
             
 
-             property is set to a <see
-             cref="T:System.IO.TextWriter" />
+             property is set to a <see cref="T:System.IO.TextWriter" />
 
             
 
-             object that is an instance of the <see
-             cref="T:System.Web.HttpWriter" />
+             object that is an instance of the <see cref="T:System.Web.HttpWriter" />
 
             
 
@@ -2869,13 +2762,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To obtain the value to be assigned to the <see
-             cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+            >To obtain the value to be assigned to the <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
             
 
-             object, use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.IsAttributeDefined(System.Web.UI.HtmlTextWriterAttribute,System.String@)" />
+             object, use the <see cref="M:System.Web.UI.HtmlTextWriter.IsAttributeDefined(System.Web.UI.HtmlTextWriterAttribute,System.String@)" />
 
             
 
@@ -2885,8 +2776,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified markup attribute and its value are rendered during the next call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >Determines whether the specified markup attribute and its value are rendered during the next call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -2896,8 +2786,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the attribute is rendered during the next call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >true if the attribute is rendered during the next call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -2905,12 +2794,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
@@ -2936,19 +2828,10 @@
         <Parameter Name="value" Type="System.String&amp;" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="key"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
-        </param>
-        <param name="value"
-          >a <see
-           cref="T:System.String&amp;" />
-        </param>
+        <param name="key">a <see cref="T:System.Web.UI.HtmlTextWriterAttribute" /></param>
+        <param name="value">a <see cref="T:System.String&amp;" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -2972,13 +2855,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the value that will be rendered with the specified style attribute, use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.IsStyleAttributeDefined(System.Web.UI.HtmlTextWriterStyle,System.String@)" />
+            >To get the value that will be rendered with the specified style attribute, use the <see cref="M:System.Web.UI.HtmlTextWriter.IsStyleAttributeDefined(System.Web.UI.HtmlTextWriterStyle,System.String@)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.IsStyleAttributeDefined(System.Web.UI.HtmlTextWriterStyle)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.IsStyleAttributeDefined(System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
@@ -2988,8 +2869,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified markup style attribute is rendered during the next call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >Determines whether the specified markup style attribute is rendered during the next call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -2999,8 +2879,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the attribute will be rendered during the next call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >true if the attribute will be rendered during the next call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -3008,12 +2887,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -3039,19 +2921,10 @@
         <Parameter Name="value" Type="System.String&amp;" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="key"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
-        </param>
-        <param name="value"
-          >a <see
-           cref="T:System.String&amp;" />
-        </param>
+        <param name="key">a <see cref="T:System.Web.UI.HtmlTextWriterStyle" /></param>
+        <param name="value">a <see cref="T:System.String&amp;" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -3078,18 +2951,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
 
             
 
-             method returns true for all attributes. Override the <see
-             cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
+             method returns true for all attributes. Override the <see cref="M:System.Web.UI.HtmlTextWriter.IsValidFormAttribute(System.String)" />
 
             
 
@@ -3105,7 +2975,11 @@
           <para>Always true.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3121,21 +2995,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default line terminator string is a carriage return, followed by a line feed ("\r\n").</para>
           <para
-            >The line terminator string is written to the output stream whenever one of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String)" />
+            >The line terminator string is written to the output stream whenever one of the <see cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String)" />
 
             
 
-             methods is called. If the <see
-             cref="P:System.Web.UI.HtmlTextWriter.NewLine" />
+             methods is called. If the <see cref="P:System.Web.UI.HtmlTextWriter.NewLine" />
 
             
 
@@ -3145,8 +3014,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the line terminator string used by the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Gets or sets the line terminator string used by the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -3177,18 +3045,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method always returns true. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+             method always returns true. The <see cref="M:System.Web.UI.HtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
@@ -3204,26 +3069,37 @@
           <para>Always true.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the attribute to render. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the value that is assigned to the attribute. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
@@ -3253,18 +3129,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             method always returns true. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+             method always returns true. The <see cref="M:System.Web.UI.HtmlTextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
@@ -3280,26 +3153,37 @@
           <para>Always true.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the style attribute to render. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the value that is assigned to the style attribute. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -3328,18 +3212,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class implementation of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
+             class implementation of the <see cref="M:System.Web.UI.HtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method always returns true. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
+             method always returns true. The <see cref="M:System.Web.UI.HtmlTextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
@@ -3355,19 +3236,26 @@
           <para>Always true.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the element to render. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -3390,26 +3278,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.OutputTabs" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.OutputTabs" />
 
             
 
-             method uses the <see
-             cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+             method uses the <see cref="P:System.Web.UI.HtmlTextWriter.Indent" />
 
             
 
              property to determine how many tab strings to write to obtain the desired indentation.</para
           >
           <para
-            >The tab string is specified with the <see
-             cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
+            >The tab string is specified with the <see cref="M:System.Web.UI.HtmlTextWriter.#ctor(System.IO.TextWriter,System.String)" />
 
             
 
-             constructor. If no tab string is specified, the <see
-             cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+             constructor. If no tab string is specified, the <see cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
 
             
 
@@ -3437,18 +3321,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Elements are added to the list of rendered markup elements by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >Elements are added to the list of rendered markup elements by the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+             method. The <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
-             method removes markup elements from the list by calling the <see
-             cref="M:System.Web.UI.HtmlTextWriter.PopEndTag" />
+             method removes markup elements from the list by calling the <see cref="M:System.Web.UI.HtmlTextWriter.PopEndTag" />
 
             
 
@@ -3462,8 +3343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -3489,18 +3369,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Elements are added to the list of rendered markup elements when the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+            >Elements are added to the list of rendered markup elements when the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.HtmlTextWriter.PushEndTag(System.String)" />
+             method calls the <see cref="M:System.Web.UI.HtmlTextWriter.PushEndTag(System.String)" />
 
             
 
-             method. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+             method. The <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
@@ -3512,7 +3389,11 @@
           <para>Saves the specified markup element for later use when generating the end tag for a markup element.</para>
         </summary>
         <param name="endTag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3541,31 +3422,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The predefined attributes of the HTML markup language are registered by calls to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+            >The predefined attributes of the HTML markup language are registered by calls to the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method when the first <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method when the first <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object is created. Dynamic attributes can be registered by using the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+             object is created. Dynamic attributes can be registered by using the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
              method at other times. </para
           >
           <para
-            >The registration table used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
+            >The registration table used by the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterAttribute(System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
             
 
-             method is static, so registration of attributes applies to all <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is static, so registration of attributes applies to all <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -3577,19 +3453,26 @@
           <para>Registers markup attributes, whether literals or dynamically generated, from the source file so that they can be properly rendered to the requesting client.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name of the markup attribute to register. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterAttribute" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
           
 
@@ -3618,31 +3501,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The predefined cascading style sheet (CSS) attributes of the HTML markup language are registered by calls to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
+            >The predefined cascading style sheet (CSS) attributes of the HTML markup language are registered by calls to the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             method when the first <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method when the first <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object is created. Dynamic style attributes can be registered by using the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
+             object is created. Dynamic style attributes can be registered by using the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
              method at other times. </para
           >
           <para
-            >The registration table used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
+            >The registration table used by the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterStyle(System.String,System.Web.UI.HtmlTextWriterStyle)" />
 
             
 
-             method is static, so registration of attributes applies to all <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is static, so registration of attributes applies to all <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -3654,19 +3532,26 @@
           <para>Registers markup style properties, whether literals or dynamically generated, from the source file so that they can be properly rendered to the requesting client.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string passed from the source file specifying the style name. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriterStyle" />
+          The <see cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
           
 
@@ -3695,31 +3580,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The predefined markup tags of the HTML language are registered by calls to the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
+            >The predefined markup tags of the HTML language are registered by calls to the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method when the first <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method when the first <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             object is created. Dynamic markup tags can be registered by using the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
+             object is created. Dynamic markup tags can be registered by using the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
              method at other times. </para
           >
           <para
-            >The registration table used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
+            >The registration table used by the <see cref="M:System.Web.UI.HtmlTextWriter.RegisterTag(System.String,System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method is static, so registration of tags applies to all <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             method is static, so registration of tags applies to all <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -3731,19 +3611,26 @@
           <para>Registers markup tags, whether literals or dynamically generated, from the source file so that they can be properly rendered to the requesting client.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the HTML tag. </param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          An <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -3766,8 +3653,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderAfterContent" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.RenderAfterContent" />
 
             
 
@@ -3799,8 +3685,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderAfterTag" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.RenderAfterTag" />
 
             
 
@@ -3832,8 +3717,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeContent" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeContent" />
 
             
 
@@ -3847,8 +3731,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text or spacing to write prior to the content of the element. If not overridden, <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeContent" />
+            >The text or spacing to write prior to the content of the element. If not overridden, <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeContent" />
 
             
 
@@ -3872,8 +3755,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeTag" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeforeTag" />
 
             
 
@@ -3907,41 +3789,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
-             override of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+             override of the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
-             method, if the markup element is not one of the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             method, if the markup element is not one of the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
              enumeration values. </para
           >
           <para
-            >To generate a markup element by using the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+            >To generate a markup element by using the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
-             method, first call the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+             method, first call the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
             
 
-             and the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+             and the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
 
             
 
-             methods, as necessary, to specify any element attributes or style attributes that are to appear in the opening tag of the element. After generating the inner markup, call the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+             methods, as necessary, to specify any element attributes or style attributes that are to appear in the opening tag of the element. After generating the inner markup, call the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
@@ -3953,7 +3828,11 @@
           <para>Writes the opening tag of the specified markup element to the output stream.</para>
         </summary>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3981,41 +3860,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             overload of the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+             overload of the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method if the markup element is of a known type that is one of the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             method if the markup element is of a known type that is one of the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
              enumeration values. </para
           >
           <para
-            >To generate a markup element by using the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+            >To generate a markup element by using the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
-             method, first call the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+             method, first call the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
 
             
 
-             and the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
+             and the <see cref="Overload:System.Web.UI.HtmlTextWriter.AddStyleAttribute" />
 
             
 
-             methods, as necessary, to specify any element attributes or style attributes that are to appear in the opening tag of the element. After generating the inner markup, call the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+             methods, as necessary, to specify any element attributes or style attributes that are to appear in the opening tag of the element. After generating the inner markup, call the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
@@ -4025,8 +3897,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the opening tag of the markup element associated with the specified <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Writes the opening tag of the markup element associated with the specified <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
@@ -4034,12 +3905,15 @@
           >
         </summary>
         <param name="tagKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.HtmlTextWriterTag" />
+          One of the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
           
 
@@ -4062,13 +3936,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+            >Call the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
-             method after the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             method after the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -4096,8 +3968,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.SelfClosingChars" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.SelfClosingChars" />
 
             
 
@@ -4126,13 +3997,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
 
             
 
-             field is used by the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             field is used by the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -4160,13 +4029,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Pass the <see
-             cref="F:System.Web.UI.HtmlTextWriter.SemicolonChar" />
+            >Pass the <see cref="F:System.Web.UI.HtmlTextWriter.SemicolonChar" />
 
             
 
-             field as the parameter argument in a <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char)" />
+             field as the parameter argument in a <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char)" />
 
             
 
@@ -4194,8 +4061,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.HtmlTextWriter.SingleQuoteChar" />
+            >Use the <see cref="F:System.Web.UI.HtmlTextWriter.SingleQuoteChar" />
 
             
 
@@ -4223,18 +4089,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.HtmlTextWriter.SlashChar" />
+            >Use the <see cref="F:System.Web.UI.HtmlTextWriter.SlashChar" />
 
             
 
-             field to render the slash marks when you write a URL. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+             field to render the slash marks when you write a URL. The <see cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
 
             
 
-             method uses the <see
-             cref="F:System.Web.UI.HtmlTextWriter.SlashChar" />
+             method uses the <see cref="F:System.Web.UI.HtmlTextWriter.SlashChar" />
 
             
 
@@ -4262,18 +4125,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.SpaceChar" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.SpaceChar" />
 
             
 
-             field is used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+             field is used by the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
 
             
 
@@ -4301,13 +4161,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.StyleEqualsChar" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.StyleEqualsChar" />
 
             
 
-             field is used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String)" />
+             field is used by the <see cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String)" />
 
             
 
@@ -4338,23 +4196,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlTextWriter.TagKey" />
+            >The <see cref="P:System.Web.UI.HtmlTextWriter.TagKey" />
 
             
 
-             property is of use only to classes that inherit from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             property is of use only to classes that inherit from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class. You should read or set the <see
-             cref="P:System.Web.UI.HtmlTextWriter.TagKey" />
+             class. You should read or set the <see cref="P:System.Web.UI.HtmlTextWriter.TagKey" />
 
             
 
-             property only in a call to the <see
-             cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+             property only in a call to the <see cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
 
             
 
@@ -4364,8 +4218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+            >Gets or sets the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
@@ -4389,28 +4242,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.TagLeftChar" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.TagLeftChar" />
 
             
 
-             field is used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+             field is used by the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-            , <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+            , <see cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
-            , <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
+            , <see cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
 
             
 
-            , and <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+            , and <see cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
 
             
 
@@ -4438,23 +4286,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlTextWriter.TagName" />
+            >The <see cref="P:System.Web.UI.HtmlTextWriter.TagName" />
 
             
 
-             property is of use only to classes that inherit from the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             property is of use only to classes that inherit from the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
-             class. You should read or set the <see
-             cref="P:System.Web.UI.HtmlTextWriter.TagName" />
+             class. You should read or set the <see cref="P:System.Web.UI.HtmlTextWriter.TagName" />
 
             
 
-             property only in <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+             property only in <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
 
             
 
@@ -4482,23 +4326,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.HtmlTextWriter.TagRightChar" />
+            >The <see cref="F:System.Web.UI.HtmlTextWriter.TagRightChar" />
 
             
 
-             field is used by the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+             field is used by the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-            , <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
+            , <see cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
 
             
 
-            , and <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+            , and <see cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
 
             
 
@@ -4528,13 +4368,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Boolean)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Boolean)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4546,12 +4384,15 @@
           <para>Writes the text representation of a Boolean value to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Boolean" />
+          The <see cref="T:System.Boolean" />
 
           
 
@@ -4576,13 +4417,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4594,7 +4433,11 @@
           <para>Writes the text representation of a Unicode character to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4619,13 +4462,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char[])" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char[])" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4637,7 +4478,11 @@
           <para>Writes the text representation of an array of Unicode characters to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4662,13 +4507,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Double)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Double)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4680,7 +4523,11 @@
           <para>Writes the text representation of a double-precision floating-point number to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4705,13 +4552,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Int32)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Int32)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4723,7 +4568,11 @@
           <para>Writes the text representation of a 32-byte signed integer to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4748,13 +4597,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Int64)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Int64)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4766,7 +4613,11 @@
           <para>Writes the text representation of a 64-byte signed integer to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4791,13 +4642,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Object)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Object)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4809,7 +4658,11 @@
           <para>Writes the text representation of an object to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4834,13 +4687,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Single)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Single)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4852,7 +4703,11 @@
           <para>Writes the text representation of a single-precision floating-point number to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4877,13 +4732,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.String)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4895,7 +4748,11 @@
           <para>Writes the specified string to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4924,13 +4781,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.String,System.Object)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.String,System.Object)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -4940,8 +4795,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a tab string and a formatted string to the output stream, using the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >Writes a tab string and a formatted string to the output stream, using the same semantics as the <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -4949,14 +4803,22 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains zero or more format items. </param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4992,13 +4854,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.String,System.Object[])" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.String,System.Object[])" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -5008,8 +4868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string that contains the text representation of an object array to the output stream, along with any pending tab spacing. This method uses the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+            >Writes a formatted string that contains the text representation of an object array to the output stream, along with any pending tab spacing. This method uses the same semantics as the <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
@@ -5017,7 +4876,11 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5047,13 +4910,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char[],System.Int32,System.Int32)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.Char[],System.Int32,System.Int32)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -5065,21 +4926,33 @@
           <para>Writes the text representation of a subarray of Unicode characters to the output stream, along with any pending tab spacing.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of characters from which to write text to the output stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index location in the array where writing begins. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5109,13 +4982,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.Write(System.String,System.Object,System.Object)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.Write(System.String,System.Object,System.Object)" />
 
             
 
-             method generates any tabs that are pending, and then calls the <see
-             cref="Overload:System.IO.TextWriter.Write" />
+             method generates any tabs that are pending, and then calls the <see cref="Overload:System.IO.TextWriter.Write" />
 
             
 
@@ -5125,8 +4996,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a formatted string that contains the text representation of two objects to the output stream, along with any pending tab spacing. This method uses the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object,System.Object)" />
+            >Writes a formatted string that contains the text representation of two objects to the output stream, along with any pending tab spacing. This method uses the same semantics as the <see cref="M:System.String.Format(System.String,System.Object,System.Object)" />
 
             
 
@@ -5134,21 +5004,33 @@
           >
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains zero or more format items. </param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object to format. </param
         >
         <param name="arg1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5177,23 +5059,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
 
             
 
-             method to write markup attributes and their values with no encoding. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+             method to write markup attributes and their values with no encoding. The <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
 
             
 
-             method writes the attribute value enclosed in double quotation marks ("). If <paramref
-             name="value" />
+             method writes the attribute value enclosed in double quotation marks ("). If <paramref name="value" />
 
             
 
-             is null, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
+             is null, the <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String)" />
 
             
 
@@ -5205,14 +5083,22 @@
           <para>Writes the specified markup attribute and value to the output stream.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The attribute to write to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5242,36 +5128,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
 
             
 
-             method to write markup attributes and their values with or without encoding. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+             method to write markup attributes and their values with or without encoding. The <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
 
             
 
-             method uses the <see
-             cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String,System.IO.TextWriter)" />
+             method uses the <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String,System.IO.TextWriter)" />
 
             
 
              method to do the encoding. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
 
             
 
-             method writes the attribute value enclosed in double quotation marks ("). If <paramref
-             name="value" />
+             method writes the attribute value enclosed in double quotation marks ("). If <paramref name="value" />
 
             
 
-             is null, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
+             is null, the <see cref="M:System.Web.UI.HtmlTextWriter.WriteAttribute(System.String,System.String,System.Boolean)" />
 
             
 
@@ -5283,21 +5163,33 @@
           <para>Writes the specified markup attribute and value to the output stream, and, if specified, writes the value encoded.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The markup attribute to write to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value assigned to the attribute. </param
         >
         <param name="fEncode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5322,36 +5214,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
-             method does not write the closing angle bracket (&gt;) of the markup element's opening tag. This allows the writing of markup attributes to the opening tag of the element. Use the <see
-             cref="F:System.Web.UI.HtmlTextWriter.TagRightChar" />
+             method does not write the closing angle bracket (&gt;) of the markup element's opening tag. This allows the writing of markup attributes to the opening tag of the element. Use the <see cref="F:System.Web.UI.HtmlTextWriter.TagRightChar" />
 
             
 
-             constant to close the opening tag when calling the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+             constant to close the opening tag when calling the <see cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
-             method. Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+             method. Use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
-             method with the <see
-             cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
+             method with the <see cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
 
             
 
              constant when you write markup elements that are self-closing.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
@@ -5363,7 +5249,11 @@
           <para>Writes any tab spacing and the opening tag of the specified markup element to the output stream.</para>
         </summary>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5389,13 +5279,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBreak" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteBreak" />
 
             
 
-             method to render line breaks in custom control or adapter markup. The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBreak" />
+             method to render line breaks in custom control or adapter markup. The <see cref="M:System.Web.UI.HtmlTextWriter.WriteBreak" />
 
             
 
@@ -5424,21 +5312,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
 
             
 
              method when a string contains angle brackets (&lt; or &gt;) or an ampersand (&amp;).</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
 
             
 
-             method uses the <see
-             cref="M:System.Web.HttpUtility.HtmlEncode(System.String,System.IO.TextWriter)" />
+             method uses the <see cref="M:System.Web.HttpUtility.HtmlEncode(System.String,System.IO.TextWriter)" />
 
             
 
@@ -5450,7 +5335,11 @@
           <para>Encodes the specified text for the requesting device, and then writes it to the output stream. </para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5474,13 +5363,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrl(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrl(System.String)" />
 
             
 
-             method encodes the string in the <paramref
-             name="url" />
+             method encodes the string in the <paramref name="url" />
 
             
 
@@ -5492,7 +5379,11 @@
           <para>Encodes the specified URL, and then writes it to the output stream. The URL might include parameters.</para>
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5525,7 +5416,11 @@
           <para>Encodes the specified URL parameter for the requesting device, and then writes it to the output stream.</para>
         </summary>
         <param name="urlText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5546,13 +5441,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unlike the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+            >Unlike the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
-             method, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
+             method, the <see cref="M:System.Web.UI.HtmlTextWriter.WriteEndTag(System.String)" />
 
             
 
@@ -5564,7 +5457,11 @@
           <para>Writes any tab spacing and the closing tag of the specified markup element.</para>
         </summary>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5592,18 +5489,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
 
             
 
-             method automatically writes the closing angle bracket (&gt;) of the opening tag of the element, unlike the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
+             method automatically writes the closing angle bracket (&gt;) of the opening tag of the element, unlike the <see cref="M:System.Web.UI.HtmlTextWriter.WriteBeginTag(System.String)" />
 
             
 
-             method, which does not write the closing angle bracket. Use <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
+             method, which does not write the closing angle bracket. Use <see cref="M:System.Web.UI.HtmlTextWriter.WriteFullBeginTag(System.String)" />
 
             
 
@@ -5615,7 +5509,11 @@
           <para>Writes any tab spacing and the opening tag of the specified markup element to the output stream.</para>
         </summary>
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5638,8 +5536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). For more information, see <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). For more information, see <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
@@ -5669,13 +5566,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5687,7 +5582,11 @@
           <para>Writes any pending tab spacing and the text representation of a Boolean value, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5712,13 +5611,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5730,7 +5627,11 @@
           <para>Writes any pending tab spacing and a Unicode character, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5755,13 +5656,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5773,7 +5672,11 @@
           <para>Writes any pending tab spacing and an array of Unicode characters, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5798,13 +5701,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5816,7 +5717,11 @@
           <para>Writes any pending tab spacing and the text representation of a double-precision floating-point number, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5841,13 +5746,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5859,7 +5762,11 @@
           <para>Writes any pending tab spacing and the text representation of a 32-byte signed integer, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5884,13 +5791,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5902,7 +5807,11 @@
           <para>Writes any pending tab spacing and the text representation of a 64-byte signed integer, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5927,13 +5836,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5945,7 +5852,11 @@
           <para>Writes any pending tab spacing and the text representation of an object, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5970,13 +5881,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -5988,7 +5897,11 @@
           <para>Writes any pending tab spacing and the text representation of a single-precision floating-point number, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6013,13 +5926,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6031,7 +5942,11 @@
           <para>Writes any pending tab spacing and a text string, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6056,13 +5971,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6074,7 +5987,11 @@
           <para>Writes any pending tab spacing and the text representation of a 4-byte unsigned integer, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6108,23 +6025,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String,System.Object)" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String,System.Object)" />
 
             
 
-             method uses the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+             method uses the same semantics as the <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
-             method. The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+             method. The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6136,14 +6049,22 @@
           <para>Writes any pending tab spacing and a formatted string containing the text representation of an object, followed by a line terminator string, to the output stream. </para>
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing zero or more format items. </param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6179,23 +6100,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String,System.Object[])" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String,System.Object[])" />
 
             
 
-             method uses the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+             method uses the same semantics as the <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
-             method. The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+             method. The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6207,7 +6124,11 @@
           <para>Writes any pending tab spacing and a formatted string that contains the text representation of an object array, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6237,13 +6158,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6255,21 +6174,33 @@
           <para>Writes any pending tab spacing and a subarray of Unicode characters, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array from which to write text to the output stream. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location in the character array where writing begins. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6299,23 +6230,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String,System.Object,System.Object)" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String,System.Object,System.Object)" />
 
             
 
-             method uses the same semantics as the <see
-             cref="M:System.String.Format(System.String,System.Object,System.Object)" />
+             method uses the same semantics as the <see cref="M:System.String.Format(System.String,System.Object,System.Object)" />
 
             
 
-             method. The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+             method. The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6327,21 +6254,33 @@
           <para>Writes any pending tab spacing and a formatted string that contains the text representation of two objects, followed by a line terminator string, to the output stream.</para>
         </summary>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing zero or more format items.</param
         >
         <param name="arg0">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object to format.</param
         >
         <param name="arg1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6366,31 +6305,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteLineNoTabs(System.String)" />
+            >Use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteLineNoTabs(System.String)" />
 
             
 
-             method rather than the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String)" />
+             method rather than the <see cref="M:System.Web.UI.HtmlTextWriter.WriteLine(System.String)" />
 
             
 
-             method when you do not want to render any tab spacing ahead of the rendered string <paramref
-             name="s" />
+             method when you do not want to render any tab spacing ahead of the rendered string <paramref name="s" />
 
             
 
             .</para
           >
           <para
-            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see
-             cref="Overload:System.IO.TextWriter.WriteLine" />
+            >The default line terminator string is a carriage return followed by a line feed ("\r\n"). The <see cref="Overload:System.IO.TextWriter.WriteLine" />
 
             
 
-             base method is used to write the <paramref
-             name="value" />
+             base method is used to write the <paramref name="value" />
 
             
 
@@ -6402,7 +6336,11 @@
           <para>Writes a string, followed by a line terminator string, to the output stream. This method ignores any specified tab spacing.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6431,8 +6369,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String)" />
 
             
 
@@ -6443,8 +6380,7 @@
 
             
 
-            =<paramref
-             name="value" />
+            =<paramref name="value" />
 
             
 
@@ -6456,14 +6392,22 @@
           <para>Writes the specified style attribute to the output stream.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The style attribute to write to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6493,8 +6437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteStyleAttribute(System.String,System.String,System.Boolean)" />
 
             
 
@@ -6505,21 +6448,18 @@
 
             
 
-            =<paramref
-             name="value" />
+            =<paramref name="value" />
 
             
 
             ;</para
           >
           <para
-            >The <see
-             cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String,System.IO.TextWriter)" />
+            >The <see cref="M:System.Web.HttpUtility.HtmlAttributeEncode(System.String,System.IO.TextWriter)" />
 
             
 
-             method is used to encode the <paramref
-             name="value" />
+             method is used to encode the <paramref name="value" />
 
             
 
@@ -6531,21 +6471,33 @@
           <para>Writes the specified style attribute and value to the output stream, and encodes the value, if specified.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The style attribute to write to the output stream. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value assigned to the style attribute. </param
         >
         <param name="fEncode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6577,46 +6529,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteUrlEncodedString(System.String,System.Boolean)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteUrlEncodedString(System.String,System.Boolean)" />
 
             
 
-             method encodes characters that could be considered URL delimiters (dependent on the setting of <paramref
-             name="argument" />
+             method encodes characters that could be considered URL delimiters (dependent on the setting of <paramref name="argument" />
 
             
 
-            ) into strings of the form %<paramref
-             name="xx" />
+            ) into strings of the form %<paramref name="xx" />
 
             
 
-            , if the ASCII code is less than 128; otherwise, %u<paramref
-             name="xxxx" />
+            , if the ASCII code is less than 128; otherwise, %u<paramref name="xxxx" />
 
             
 
-            , where <paramref
-             name="x" />
+            , where <paramref name="x" />
 
             
 
              is a hexadecimal digit.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrl(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrl(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrlParameter(System.String)" />
+             and <see cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedUrlParameter(System.String)" />
 
             
 
-             methods use the <see
-             cref="M:System.Web.UI.HtmlTextWriter.WriteUrlEncodedString(System.String,System.Boolean)" />
+             methods use the <see cref="M:System.Web.UI.HtmlTextWriter.WriteUrlEncodedString(System.String,System.Boolean)" />
 
             
 
@@ -6628,14 +6572,22 @@
           <para>Writes the specified string, encoding it according to URL requirements.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to encode and write to the output stream. </param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

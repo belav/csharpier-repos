@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.ExtenderProvidedPropertyAttribute" />
+        >The <see cref="T:System.ComponentModel.ExtenderProvidedPropertyAttribute" />
 
         
 
-         is injected automatically by the <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         is injected automatically by the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
@@ -48,18 +46,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Do not use this attribute on your properties. Instead, use the <see
-           cref="T:System.ComponentModel.ProvidePropertyAttribute" />
+          >Do not use this attribute on your properties. Instead, use the <see cref="T:System.ComponentModel.ProvidePropertyAttribute" />
 
           
 
-           on a type that implements the <see
-           cref="T:System.ComponentModel.IExtenderProvider" />
+           on a type that implements the <see cref="T:System.ComponentModel.IExtenderProvider" />
 
           
 
-           interface. For more information, see <format
-           type="text/html">
+           interface. For more information, see <format type="text/html">
             <a href="4ce043d8-cd48-49dd-abef-185a2079e96a">Extender Providers</a>
           </format>
 
@@ -94,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ExtenderProvidedPropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ExtenderProvidedPropertyAttribute" />
 
             
 
@@ -128,13 +122,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 
@@ -144,13 +136,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Object" />
+             is equal to the current <see cref="T:System.Object" />
 
             
 

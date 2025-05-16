@@ -25,29 +25,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The connection string builder lets developers programmatically create syntactically correct connection strings, and parse and rebuild existing connection strings, using properties and methods of the class. The connection string builder provides strongly typed properties corresponding to the known key/value pairs allowed by SQL Server. Developers needing to create connection strings as part of applications can use the <see
-         cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+        >The connection string builder lets developers programmatically create syntactically correct connection strings, and parse and rebuild existing connection strings, using properties and methods of the class. The connection string builder provides strongly typed properties corresponding to the known key/value pairs allowed by SQL Server. Developers needing to create connection strings as part of applications can use the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
         
 
          class to build and modify connection strings. The class also makes it easy to manage connection strings stored in an application configuration file.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+        >The <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
         
 
          performs checks for valid key/value pairs. Therefore, you cannot use this class to create invalid connection strings; trying to add invalid pairs will throw an exception. The class maintains a fixed collection of synonyms and can translate from a synonym to the corresponding well-known key name. </para
       >
       <para
-        >For example, when you use the Item property to retrieve a value, you can specify a string that contains any synonym for the key you need. For example, you can specify "Network Address", "addr", or any other acceptable synonym for this key within a connection string when you use any member that requires a string that contains the key name, such as the Item property or the <see
-         cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
+        >For example, when you use the Item property to retrieve a value, you can specify a string that contains any synonym for the key you need. For example, you can specify "Network Address", "addr", or any other acceptable synonym for this key within a connection string when you use any member that requires a string that contains the key name, such as the Item property or the <see cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
 
         
 
-         method. See the <see
-         cref="P:System.Data.SqlClient.SqlConnection.ConnectionString" />
+         method. See the <see cref="P:System.Data.SqlClient.SqlConnection.ConnectionString" />
 
         
 
@@ -75,8 +71,7 @@ Integrated Security=True</code>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a simple way to create and manage the contents of connection strings used by the <see
-         cref="T:System.Data.SqlClient.SqlConnection" />
+        >Provides a simple way to create and manage the contents of connection strings used by the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
         
 
@@ -95,8 +90,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -122,8 +116,7 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >The <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -133,8 +126,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -142,12 +134,15 @@ Integrated Security=True</code>
           >
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The basis for the object's internal connection information. Parsed into name/value pairs. Invalid key names raise <see
-           cref="T:System.Collections.Generic.KeyNotFoundException" />
+          The basis for the object's internal connection information. Parsed into name/value pairs. Invalid key names raise <see cref="T:System.Collections.Generic.KeyNotFoundException" />
 
           
 
@@ -200,13 +195,11 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the "Asynchronous Processing" and "async" keys within the connection string. In order to take advantage of the asynchronous processing provided by the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >This property corresponds to the "Asynchronous Processing" and "async" keys within the connection string. In order to take advantage of the asynchronous processing provided by the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object, this key/value pair must be included within the connection string of the associated <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             object, this key/value pair must be included within the connection string of the associated <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
@@ -277,23 +270,19 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.Clear" />
+            >The <see cref="M:System.Data.Common.DbConnectionStringBuilder.Clear" />
 
             
 
-             method removes all key/value pairs from the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+             method removes all key/value pairs from the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-            , and resets all corresponding properties. This includes setting the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.Count" />
+            , and resets all corresponding properties. This includes setting the <see cref="P:System.Data.Common.DbConnectionStringBuilder.Count" />
 
             
 
-             property to 0, and setting the <see
-             cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
+             property to 0, and setting the <see cref="P:System.Data.Common.DbConnectionStringBuilder.ConnectionString" />
 
             
 
@@ -303,8 +292,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the contents of the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Clears the contents of the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -328,8 +316,7 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property corresponds to the "Connection Reset" key within the <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >This property corresponds to the "Connection Reset" key within the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
@@ -398,13 +385,11 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Because the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-             contains a fixed-size collection of key/value pairs, the <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
+             contains a fixed-size collection of key/value pairs, the <see cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
 
             
 
@@ -414,8 +399,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Determines whether the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -425,8 +409,7 @@ Integrated Security=True</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >true if the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -434,12 +417,15 @@ Integrated Security=True</code>
           >
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+          The key to locate in the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
           
 
@@ -474,13 +460,11 @@ Integrated Security=True</code>
           <para>This property corresponds to the "Context Connection" key within the connection string.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Data.SqlClient.SqlConnection.DataSource" />
+              >The <see cref="P:System.Data.SqlClient.SqlConnection.DataSource" />
 
               
 
-               property returns null if the connection string for the <see
-               cref="T:System.Data.SqlClient.SqlConnection" />
+               property returns null if the connection string for the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
               
 
@@ -723,8 +707,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -774,18 +757,15 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Values" />
+             returned by the <see cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Values" />
 
             
 
@@ -795,13 +775,11 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             that contains the keys in the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+             that contains the keys in the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -920,8 +898,7 @@ Integrated Security=True</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When true, an application can maintain multiple active result sets (MARS). When false, an application must process or cancel all result sets from one batch before it can execute any other batch on that connection.</para>
           <para
-            >For more information, see <see
-             cref="http://msdn.microsoft.com//library/cfa084cz.aspx"
+            >For more information, see <see cref="http://msdn.microsoft.com//library/cfa084cz.aspx"
               >Multiple Active Result Sets (MARS)</see
             >
 
@@ -1020,13 +997,11 @@ Integrated Security=True</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property corresponds to the "Password" and "pwd" keys within the connection string.</para>
           <para
-            >If <see
-             cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Password" />
+            >If <see cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Password" />
 
             
 
-             has not been set and you retrieve the value, the return value is <see
-             cref="F:System.String.Empty" />
+             has not been set and you retrieve the value, the return value is <see cref="F:System.String.Empty" />
 
             
 
@@ -1127,36 +1102,30 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the Remove method returns a value that indicates its success, it is not required to look for a key before trying to remove the key/value pair from the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Because the Remove method returns a value that indicates its success, it is not required to look for a key before trying to remove the key/value pair from the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-             instance. Because the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+             instance. Because the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-             maintains a fixed-size collection of key/value pairs, calling the <see
-             cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
+             maintains a fixed-size collection of key/value pairs, calling the <see cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
 
             
 
              method simply resets the value of the key/value pair back to its default value.</para
           >
           <para
-            >Because the collection of keys supported by the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Because the collection of keys supported by the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-             is fixed, every item within the collection has a known default value. The following table lists the keys, and the value for each when the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+             is fixed, every item within the collection has a known default value. The following table lists the keys, and the value for each when the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-             is first initialized, or after the <see
-             cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
+             is first initialized, or after the <see cref="M:System.Data.SqlClient.SqlConnectionStringBuilder.Remove(System.String)" />
 
             
 
@@ -1386,8 +1355,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the entry with the specified key from the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Removes the entry with the specified key from the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -1399,12 +1367,15 @@ Integrated Security=True</code>
           <para>true if the key existed within the connection string and was removed; false if the key did not exist.</para>
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key of the key/value pair to be removed from the connection string in this <see
-           cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+          The key of the key/value pair to be removed from the connection string in this <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
           
 
@@ -1462,8 +1433,7 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method behaves identically to the <see
-             cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
+            >This method behaves identically to the <see cref="M:System.Data.Common.DbConnectionStringBuilder.ContainsKey(System.String)" />
 
             
 
@@ -1473,8 +1443,7 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified key exists in this <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >Indicates whether the specified key exists in this <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -1484,8 +1453,7 @@ Integrated Security=True</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+            >true if the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
@@ -1493,12 +1461,15 @@ Integrated Security=True</code>
           >
         </returns>
         <param name="keyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+          The key to locate in the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
           
 
@@ -1647,8 +1618,7 @@ Integrated Security=True</code>
           <para>This property corresponds to the "User Instance" key within the connection string.</para>
           <block subset="none" type="note">
             <para
-              >This feature is available only with the ssNoVersion Express Edition. For more information on user instances, see <format
-               type="text/html">
+              >This feature is available only with the ssNoVersion Express Edition. For more information on user instances, see <format type="text/html">
                 <a href="00c12376-cb26-4317-86ad-e6e9c089be57">Working with User Instances</a>
               </format>
 
@@ -1679,28 +1649,23 @@ Integrated Security=True</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Keys" />
+             returned by the <see cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Keys" />
 
             
 
-             property. Because each instance of the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+             property. Because each instance of the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 
-             always contains the same fixed set of keys, the <see
-             cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Values" />
+             always contains the same fixed set of keys, the <see cref="P:System.Data.SqlClient.SqlConnectionStringBuilder.Values" />
 
             
 
@@ -1710,13 +1675,11 @@ Integrated Security=True</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             that contains the values in the <see
-             cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
+             that contains the values in the <see cref="T:System.Data.SqlClient.SqlConnectionStringBuilder" />
 
             
 

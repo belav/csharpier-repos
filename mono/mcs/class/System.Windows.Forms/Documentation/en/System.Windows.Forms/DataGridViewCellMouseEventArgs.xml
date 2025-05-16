@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
         
 
-         class provides data for the following <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         class provides data for the following <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -83,13 +81,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for mouse events raised by a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Provides data for mouse events raised by a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         whenever the mouse is moved within a <see
-         cref="T:System.Windows.Forms.DataGridViewCell" />
+         whenever the mouse is moved within a <see cref="T:System.Windows.Forms.DataGridViewCell" />
 
         
 
@@ -117,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
 
             
 
@@ -126,40 +121,59 @@
           >
         </summary>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The cell's zero-based column index.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The cell's zero-based row index.</param
         >
         <param name="localX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the mouse, in pixels.</param
         >
         <param name="localY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the mouse, in pixels.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The originating <see
-           cref="T:System.Windows.Forms.MouseEventArgs" />
+          The originating <see cref="T:System.Windows.Forms.MouseEventArgs" />
 
           
 

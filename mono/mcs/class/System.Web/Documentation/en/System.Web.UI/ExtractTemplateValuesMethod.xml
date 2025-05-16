@@ -24,21 +24,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.ExtractTemplateValuesMethod" />
+        >The <see cref="T:System.Web.UI.ExtractTemplateValuesMethod" />
 
         
 
          delegate is used by ASP.NET and is not meant to be used directly from your code. </para
       >
       <para
-        >This delegate is used by the <see
-         cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
+        >This delegate is used by the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
         
 
-         class, which is the default implementation of the <see
-         cref="T:System.Web.UI.IBindableTemplate" />
+         class, which is the default implementation of the <see cref="T:System.Web.UI.IBindableTemplate" />
 
         
 
@@ -48,8 +45,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a delegate with which ASP.NET extracts a set of name/value pairs from an <see
-         cref="T:System.Web.UI.IBindableTemplate" />
+        >Provides a delegate with which ASP.NET extracts a set of name/value pairs from an <see cref="T:System.Web.UI.IBindableTemplate" />
 
         
 

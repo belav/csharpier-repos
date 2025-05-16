@@ -2,20 +2,20 @@
 <clause number="17.4" title="Fields">
   <paragraph
     >A field is a member that represents a variable associated with an object or class. A <non_terminal
-     where="17.4">field-declaration</non_terminal>
+      where="17.4"
+      >field-declaration</non_terminal
+    >
 
     
 
-     introduces one or more fields of a given type. <grammar_production
-    >
+     introduces one or more fields of a given type. <grammar_production>
       <name>
         <non_terminal where="17.4">field-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <non_terminal where="17.4">field-modifiers</non_terminal>
@@ -36,8 +36,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="17.4">field-modifier</non_terminal>
       </rhs>
       <rhs>
@@ -52,8 +51,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>new</keyword>
       </rhs>
       <rhs>
@@ -89,8 +87,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="17.4">variable-declarator</non_terminal>
       </rhs>
       <rhs>
@@ -106,8 +103,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="9.4.2">identifier</non_terminal>
       </rhs>
       <rhs>
@@ -123,8 +119,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="14.14">expression</non_terminal>
       </rhs>
       <rhs>
@@ -133,122 +128,123 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="17.4">field-declaration</non_terminal>
+    >A <non_terminal where="17.4"
+      >field-declaration</non_terminal
+    >
 
     
 
-     may include a set of attributes (<hyperlink
-    >24</hyperlink>
+     may include a set of attributes (<hyperlink>24</hyperlink>
 
     
 
-    ), a new modifier (<hyperlink
-    >17.2.2</hyperlink>
+    ), a new modifier (<hyperlink>17.2.2</hyperlink>
 
     
 
-    ), a valid combination of the four access modifiers (<hyperlink
-    >17.2.3</hyperlink>
+    ), a valid combination of the four access modifiers (<hyperlink>17.2.3</hyperlink>
 
     
 
-    ), and a static modifier (<hyperlink
-    >17.4.1</hyperlink>
+    ), and a static modifier (<hyperlink>17.4.1</hyperlink>
 
     
 
     ). In addition, a <non_terminal
-     where="17.4">field-declaration</non_terminal>
+      where="17.4"
+      >field-declaration</non_terminal
+    >
 
     
 
-     may include a readonly modifier (<hyperlink
-    >17.4.2</hyperlink>
+     may include a readonly modifier (<hyperlink>17.4.2</hyperlink>
 
     
 
-    ) or a volatile modifier (<hyperlink
-    >17.4.3</hyperlink>
+    ) or a volatile modifier (<hyperlink>17.4.3</hyperlink>
 
     
 
     ), but not both The attributes and modifiers apply to all of the members declared by the <non_terminal
-     where="17.4">field-declaration</non_terminal>
+      where="17.4"
+      >field-declaration</non_terminal
+    >
 
     
 
     . It is an error for the same modifier to appear multiple times in a field declaration. </paragraph
   >
   <paragraph
-    >The type of a <non_terminal
-     where="17.4">field-declaration</non_terminal>
+    >The type of a <non_terminal where="17.4"
+      >field-declaration</non_terminal
+    >
 
     
 
      specifies the type of the members introduced by the declaration. The type is followed by a list of <non_terminal
-     where="17.4">variable-declarator</non_terminal>
+      where="17.4"
+      >variable-declarator</non_terminal
+    >
 
     
 
-    s, each of which introduces a new member. A <non_terminal
-     where="17.4">variable-declarator</non_terminal>
+    s, each of which introduces a new member. A <non_terminal where="17.4"
+      >variable-declarator</non_terminal
+    >
 
     
 
      consists of an identifier that names that member, optionally followed by an "=" token and a  <non_terminal
-     where="19.6">variable-initializer</non_terminal>
+      where="19.6"
+      >variable-initializer</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >17.4.5</hyperlink>
+     (<hyperlink>17.4.5</hyperlink>
 
     
 
     ) that gives the initial value of that member. </paragraph
   >
   <paragraph
-    >The type of a field must be at least as accessible as the field itself (<hyperlink
-    >10.5.4</hyperlink>
+    >The type of a field must be at least as accessible as the field itself (<hyperlink>10.5.4</hyperlink>
 
     
 
     ). </paragraph
   >
   <paragraph
-    >The value of a field is obtained in an expression using a <non_terminal
-     where="14.5.2">simple-name</non_terminal>
+    >The value of a field is obtained in an expression using a <non_terminal where="14.5.2"
+      >simple-name</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.2</hyperlink>
+     (<hyperlink>14.5.2</hyperlink>
 
     
 
     ) or a <non_terminal
-     where="14.5.4">member-access</non_terminal>
+      where="14.5.4"
+      >member-access</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.4</hyperlink>
+     (<hyperlink>14.5.4</hyperlink>
 
     
 
-    ). The value of a non-readonly field is modified using an assignment (<hyperlink
-    >14.13</hyperlink>
+    ). The value of a non-readonly field is modified using an assignment (<hyperlink>14.13</hyperlink>
 
     
 
-    ). The value of a  non-readonly field can be both obtained and modified using postfix increment and decrement operators (<hyperlink
-    >14.5.9</hyperlink>
+    ). The value of a  non-readonly field can be both obtained and modified using postfix increment and decrement operators (<hyperlink>14.5.9</hyperlink>
 
     
 
-    ) and prefix increment and decrement operators (<hyperlink
-    >14.6.5</hyperlink>
+    ) and prefix increment and decrement operators (<hyperlink>14.6.5</hyperlink>
 
     
 
@@ -256,9 +252,7 @@
   >
   <paragraph
     >A field declaration that declares multiple fields is equivalent to multiple declarations of single fields with the same attributes, modifiers, and type. <example
-
-      >[Example: For example <code_example
-      >
+      >[Example: For example <code_example>
         <![CDATA[
 class A  
 {  
@@ -269,8 +263,7 @@ class A
 
       
 
-      is equivalent to <code_example
-      >
+      is equivalent to <code_example>
         <![CDATA[
 class A  
 {  

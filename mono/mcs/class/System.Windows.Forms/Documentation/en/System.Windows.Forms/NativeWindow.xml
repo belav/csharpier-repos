@@ -22,13 +22,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class automatically manages window class creation and registration.</para>
       <para
-        >A window is not eligible for garbage collection when it is associated with a window handle. To ensure proper garbage collection, handles must either be destroyed manually using <see
-         cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
+        >A window is not eligible for garbage collection when it is associated with a window handle. To ensure proper garbage collection, handles must either be destroyed manually using <see cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
 
         
 
-         or released using <see
-         cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+         or released using <see cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
 
         
 
@@ -36,13 +34,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+          >The <see cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
 
           
 
-           method is called when the WM_NCDESTROY message is processed. This means there are cases in which when you do not need to manually call <see
-           cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+           method is called when the WM_NCDESTROY message is processed. This means there are cases in which when you do not need to manually call <see cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
 
           
 
@@ -50,33 +46,27 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Windows.Forms.NativeWindow" />
+        >The <see cref="T:System.Windows.Forms.NativeWindow" />
 
         
 
-         class provides the following properties and methods to manage handles: <see
-         cref="P:System.Windows.Forms.NativeWindow.Handle" />
+         class provides the following properties and methods to manage handles: <see cref="P:System.Windows.Forms.NativeWindow.Handle" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.NativeWindow.CreateHandle(System.Windows.Forms.CreateParams)" />
+        , <see cref="M:System.Windows.Forms.NativeWindow.CreateHandle(System.Windows.Forms.CreateParams)" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.NativeWindow.AssignHandle(System.IntPtr)" />
+        , <see cref="M:System.Windows.Forms.NativeWindow.AssignHandle(System.IntPtr)" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
+        , <see cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+        , and <see cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
 
         
 
@@ -97,13 +87,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default <see
-             cref="M:System.Windows.Forms.NativeWindow.#ctor" />
+            >This is the default <see cref="M:System.Windows.Forms.NativeWindow.#ctor" />
 
             
 
-             constructor provided by the compiler. The <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+             constructor provided by the compiler. The <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
@@ -113,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+            >Initializes an instance of the <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
@@ -144,31 +131,26 @@
 
             
 
-             intercepts window messages sent to the <paramref
-             name="handle" />
+             intercepts window messages sent to the <paramref name="handle" />
 
             
 
-             parameter. Use <see
-             cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+             parameter. Use <see cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
 
             
 
              to reset the handle's window procedure to the default window procedure.</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.NativeWindow.AssignHandle(System.IntPtr)" />
+            >The <see cref="M:System.Windows.Forms.NativeWindow.AssignHandle(System.IntPtr)" />
 
             
 
-             method calls the <see
-             cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
+             method calls the <see cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
 
             
 
-             method to indicate that the value of the <see
-             cref="P:System.Windows.Forms.NativeWindow.Handle" />
+             method to indicate that the value of the <see cref="P:System.Windows.Forms.NativeWindow.Handle" />
 
             
 
@@ -183,7 +165,11 @@
           <para>Assigns a handle to this window. </para>
         </summary>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -211,44 +197,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="cp" />
+            >The <paramref name="cp" />
 
             
 
              parameter specifies the values that are passed to the native Win32 CreateWindowEx method to create a window and its handle.</para
           >
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.CreateParams.ClassName" />
+            >When the <see cref="P:System.Windows.Forms.CreateParams.ClassName" />
 
             
 
-             field is not null, the newly created window handle inherits from the specified class. For example, if <see
-             cref="P:System.Windows.Forms.CreateParams.ClassName" />
+             field is not null, the newly created window handle inherits from the specified class. For example, if <see cref="P:System.Windows.Forms.CreateParams.ClassName" />
 
             
 
-             is set to BUTTON, the newly created window is based on the Win32 BUTTON window class. The <see
-             cref="P:System.Windows.Forms.CreateParams.Param" />
+             is set to BUTTON, the newly created window is based on the Win32 BUTTON window class. The <see cref="P:System.Windows.Forms.CreateParams.Param" />
 
             
 
-             property of the <see
-             cref="P:System.Windows.Forms.CreateParams.ClassName" />
+             property of the <see cref="P:System.Windows.Forms.CreateParams.ClassName" />
 
             
 
              object must either be null or reference an instance of a class that was declared as a structure.</para
           >
           <para
-            >This code is an excerpt from the example shown in the <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+            >This code is an excerpt from the example shown in the <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
-             class overview. Some code is not shown for the purpose of brevity. See <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+             class overview. Some code is not shown for the purpose of brevity. See <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
@@ -263,12 +242,15 @@
           <para>Creates a window and its handle with the specified creation parameters. </para>
         </summary>
         <param name="cp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.CreateParams" />
+          A <see cref="T:System.Windows.Forms.CreateParams" />
 
           
 
@@ -313,23 +295,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method destroys the window associated with the <see
-             cref="P:System.Windows.Forms.NativeWindow.Handle" />
+            >This method destroys the window associated with the <see cref="P:System.Windows.Forms.NativeWindow.Handle" />
 
             
 
-            , sets the <see
-             cref="P:System.Windows.Forms.NativeWindow.Handle" />
+            , sets the <see cref="P:System.Windows.Forms.NativeWindow.Handle" />
 
             
 
-             property to 0, and calls the <see
-             cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
+             property to 0, and calls the <see cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
 
             
 
-             method to reflect the change. Typically, you only call <see
-             cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
+             method to reflect the change. Typically, you only call <see cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
 
             
 
@@ -337,8 +315,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Windows.Forms.NativeWindow" />
+              >The <see cref="T:System.Windows.Forms.NativeWindow" />
 
               
 
@@ -367,13 +344,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.NativeWindow.Finalize" />
+            >The <see cref="M:System.Windows.Forms.NativeWindow.Finalize" />
 
             
 
-             method removes the Win32 derived class associated with the current <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+             method removes the Win32 derived class associated with the current <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
@@ -406,8 +381,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you receive a handle from another method, use this method to retrieve the window associated with the handle. The handle must already be owned by another <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+            >If you receive a handle from another method, use this method to retrieve the window associated with the handle. The handle must already be owned by another <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
@@ -421,8 +395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.NativeWindow" />
+            >The <see cref="T:System.Windows.Forms.NativeWindow" />
 
             
 
@@ -430,7 +403,11 @@
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -475,8 +452,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is invoked when the value of the <see
-             cref="P:System.Windows.Forms.NativeWindow.Handle" />
+            >This method is invoked when the value of the <see cref="P:System.Windows.Forms.NativeWindow.Handle" />
 
             
 
@@ -509,8 +485,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, <see
-             cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" />
+            >Typically, <see cref="M:System.Windows.Forms.Application.OnThreadException(System.Exception)" />
 
             
 
@@ -522,12 +497,15 @@
           <para>When overridden in a derived class, manages an unhandled thread exception. </para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Exception" />
+          An <see cref="T:System.Exception" />
 
           
 
@@ -550,13 +528,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not destroy the window handle. Instead, it sets the handle's window procedure to the default window procedure. It sets the <see
-             cref="P:System.Windows.Forms.NativeWindow.Handle" />
+            >This method does not destroy the window handle. Instead, it sets the handle's window procedure to the default window procedure. It sets the <see cref="P:System.Windows.Forms.NativeWindow.Handle" />
 
             
 
-             property to 0 and calls <see
-             cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
+             property to 0 and calls <see cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
 
             
 

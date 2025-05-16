@@ -30,8 +30,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant for use with the <see
-             cref="M:System.Data.Common.DbConnection.GetSchema" />
+            >A constant for use with the <see cref="M:System.Data.Common.DbConnection.GetSchema" />
 
             
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant for use with the <see
-             cref="M:System.Data.Common.DbConnection.GetSchema" />
+            >A constant for use with the <see cref="M:System.Data.Common.DbConnection.GetSchema" />
 
             
 
@@ -80,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant for use with the <see
-             cref="M:System.Data.Common.DbConnection.GetSchema" />
+            >A constant for use with the <see cref="M:System.Data.Common.DbConnection.GetSchema" />
 
             
 
@@ -105,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant for use with the <see
-             cref="M:System.Data.Common.DbConnection.GetSchema" />
+            >A constant for use with the <see cref="M:System.Data.Common.DbConnection.GetSchema" />
 
             
 
@@ -130,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A constant for use with the <see
-             cref="M:System.Data.Common.DbConnection.GetSchema" />
+            >A constant for use with the <see cref="M:System.Data.Common.DbConnection.GetSchema" />
 
             
 

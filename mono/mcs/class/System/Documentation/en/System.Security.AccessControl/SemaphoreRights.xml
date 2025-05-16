@@ -26,28 +26,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.SemaphoreRights" />
+        >Use the <see cref="T:System.Security.AccessControl.SemaphoreRights" />
 
         
 
-         enumeration to specify access control rights when you create <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         enumeration to specify access control rights when you create <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         objects. To apply access rights to a named system semaphore, use <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         objects. To apply access rights to a named system semaphore, use <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         objects with the <see
-         cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String,System.Boolean@,System.Security.AccessControl.SemaphoreSecurity)" />
+         objects with the <see cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String,System.Boolean@,System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
-         constructor and the <see
-         cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+         constructor and the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
@@ -55,7 +50,7 @@
       >
       <para
         >For the numeric values of the underlying Windows access rights, see <see
-         cref="http://go.microsoft.com/fwlink/p/?LinkId=243073"
+          cref="http://go.microsoft.com/fwlink/p/?LinkId=243073"
           >Synchronization Object Security and Access Rights (Windows)</see
         >
 

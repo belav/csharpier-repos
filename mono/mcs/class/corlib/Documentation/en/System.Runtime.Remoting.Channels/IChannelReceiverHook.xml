@@ -55,7 +55,11 @@
           <para>Adds a URI on which the channel hook will listen.</para>
         </summary>
         <param name="channelUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether <see
-             cref="T:System.Runtime.Remoting.Channels.IChannelReceiverHook" />
+            >Gets a Boolean value that indicates whether <see cref="T:System.Runtime.Remoting.Channels.IChannelReceiverHook" />
 
             
 

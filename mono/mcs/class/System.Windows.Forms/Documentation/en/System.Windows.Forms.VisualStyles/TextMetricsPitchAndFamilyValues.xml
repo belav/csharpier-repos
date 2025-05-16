@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.TextMetricsPitchAndFamilyValues" />
 
         
 
-         enumeration specifies the possible values of the <see
-         cref="P:System.Windows.Forms.VisualStyles.TextMetrics.PitchAndFamily" />
+         enumeration specifies the possible values of the <see cref="P:System.Windows.Forms.VisualStyles.TextMetrics.PitchAndFamily" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.VisualStyles.TextMetrics" />
+         property of the <see cref="T:System.Windows.Forms.VisualStyles.TextMetrics" />
 
         
 

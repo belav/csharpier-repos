@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -25,28 +27,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.Signature" />
+        >The <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
         
 
-         class represents the &lt;Signature&gt; element of an XML signature defined by the XML digital signature specification. The &lt;Signature&gt; element is the root element of an XML digital signature. The <see
-         cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" />
+         class represents the &lt;Signature&gt; element of an XML signature defined by the XML digital signature specification. The &lt;Signature&gt; element is the root element of an XML digital signature. The <see cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" />
 
         
 
-        , <see
-         cref="P:System.Security.Cryptography.Xml.Signature.SignatureValue" />
+        , <see cref="P:System.Security.Cryptography.Xml.Signature.SignatureValue" />
 
         
 
-        , <see
-         cref="P:System.Security.Cryptography.Xml.Signature.KeyInfo" />
+        , <see cref="P:System.Security.Cryptography.Xml.Signature.KeyInfo" />
 
         
 
-        , and <see
-         cref="P:System.Security.Cryptography.Xml.Signature.ObjectList" />
+        , and <see cref="P:System.Security.Cryptography.Xml.Signature.ObjectList" />
 
         
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -114,18 +110,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.Signature.AddObject(System.Security.Cryptography.Xml.DataObject)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.Signature.AddObject(System.Security.Cryptography.Xml.DataObject)" />
 
             
 
-             method adds a <see
-             cref="T:System.Security.Cryptography.Xml.DataObject" />
+             method adds a <see cref="T:System.Security.Cryptography.Xml.DataObject" />
 
             
 
-             object to a collection that is accessible using the <see
-             cref="P:System.Security.Cryptography.Xml.Signature.ObjectList" />
+             object to a collection that is accessible using the <see cref="P:System.Security.Cryptography.Xml.Signature.ObjectList" />
 
             
 
@@ -135,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Security.Cryptography.Xml.DataObject" />
+            >Adds a <see cref="T:System.Security.Cryptography.Xml.DataObject" />
 
             
 
@@ -144,12 +136,15 @@
           >
         </summary>
         <param name="dataObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.DataObject" />
+          The <see cref="T:System.Security.Cryptography.Xml.DataObject" />
 
           
 
@@ -178,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -189,8 +183,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+            >The XML representation of the <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -213,25 +206,19 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Cryptography.Xml.Signature.Id" />
+            >Use the <see cref="P:System.Security.Cryptography.Xml.Signature.Id" />
 
             
 
-             property to add a string ID to the XML representation of the current <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+             property to add a string ID to the XML representation of the current <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
-             element. The ID is used to reference the <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+             element. The ID is used to reference the <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -241,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the ID of the current <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+            >Gets or sets the ID of the current <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -271,20 +257,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Security.Cryptography.Xml.KeyInfo" />
-        </value>
+        <value>a <see cref="T:System.Security.Cryptography.Xml.KeyInfo" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.Signature.KeyInfo" />
+            >The <see cref="P:System.Security.Cryptography.Xml.Signature.KeyInfo" />
 
             
 
-             property uses a <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+             property uses a <see cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
             
 
@@ -295,13 +276,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+            >Gets or sets the <see cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
             
 
-             of the current <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+             of the current <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -333,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+            >Loads a <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 
@@ -342,12 +320,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML element from which to load the <see
-           cref="T:System.Security.Cryptography.Xml.Signature" />
+          The XML element from which to load the <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
           
 
@@ -375,33 +356,26 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.IList" />
-        </value>
+        <value>a <see cref="T:System.Collections.IList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.Signature.ObjectList" />
+            >The <see cref="P:System.Security.Cryptography.Xml.Signature.ObjectList" />
 
             
 
-             property uses a collection of <see
-             cref="T:System.Security.Cryptography.Xml.DataObject" />
+             property uses a collection of <see cref="T:System.Security.Cryptography.Xml.DataObject" />
 
             
 
              objects to represent the &lt;Object&gt; tag of an XML digital signature. </para
           >
           <para
-            >You can also add a <see
-             cref="T:System.Security.Cryptography.Xml.DataObject" />
+            >You can also add a <see cref="T:System.Security.Cryptography.Xml.DataObject" />
 
             
 
-             to this collection using the <see
-             cref="M:System.Security.Cryptography.Xml.Signature.AddObject(System.Security.Cryptography.Xml.DataObject)" />
+             to this collection using the <see cref="M:System.Security.Cryptography.Xml.Signature.AddObject(System.Security.Cryptography.Xml.DataObject)" />
 
             
 
@@ -429,15 +403,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.Signature.SignatureValue" />
+            >The <see cref="P:System.Security.Cryptography.Xml.Signature.SignatureValue" />
 
             
 
@@ -471,20 +441,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Security.Cryptography.Xml.SignedInfo" />
-        </value>
+        <value>a <see cref="T:System.Security.Cryptography.Xml.SignedInfo" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" />
+            >The <see cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" />
 
             
 
-             property uses the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+             property uses the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
@@ -495,13 +460,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Cryptography.Xml.SignedInfo" />
+            >Gets or sets the <see cref="T:System.Security.Cryptography.Xml.SignedInfo" />
 
             
 
-             of the current <see
-             cref="T:System.Security.Cryptography.Xml.Signature" />
+             of the current <see cref="T:System.Security.Cryptography.Xml.Signature" />
 
             
 

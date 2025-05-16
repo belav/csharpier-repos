@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the type attribute of the <format
-         type="text/html">
+        >This class corresponds to the type attribute of the <format type="text/html">
           <a href="10318725-9666-4d65-ab61-b94c64e59f13">Module Element (Network Settings)</a>
         </format>
 
@@ -32,13 +31,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to specify a Web proxy that handles requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to specify a Web proxy that handles requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -49,8 +46,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the type information for a custom <see
-         cref="T:System.Net.IWebProxy" />
+        >Represents the type information for a custom <see cref="T:System.Net.IWebProxy" />
 
         
 
@@ -76,18 +72,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds a <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+            >This constructor adds a <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-             object for the <see
-             cref="P:System.Net.Configuration.ModuleElement.Type" />
+             object for the <see cref="P:System.Net.Configuration.ModuleElement.Type" />
 
             
 
-             property to the <see
-             cref="P:System.Configuration.ConfigurationElement.Properties" />
+             property to the <see cref="P:System.Configuration.ConfigurationElement.Properties" />
 
             
 
@@ -97,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.ModuleElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ModuleElement" />
 
             
 
@@ -130,8 +122,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see
-             cref="P:System.Net.Configuration.ModuleElement.Type" />
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.ModuleElement.Type" />
 
             
 

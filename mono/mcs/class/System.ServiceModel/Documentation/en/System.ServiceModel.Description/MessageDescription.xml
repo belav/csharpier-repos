@@ -22,28 +22,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.MessageDescription" />
+        >The <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
         
 
-         contains the <see
-         cref="P:System.ServiceModel.Description.MessageDescription.Headers" />
+         contains the <see cref="P:System.ServiceModel.Description.MessageDescription.Headers" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Description.MessageDescription.Body" />
+         and <see cref="P:System.ServiceModel.Description.MessageDescription.Body" />
 
         
 
-         properties to provide get access to these parts of the message. Whether the message is incoming or outgoing is indicated by the <see
-         cref="P:System.ServiceModel.Description.MessageDescription.Direction" />
+         properties to provide get access to these parts of the message. Whether the message is incoming or outgoing is indicated by the <see cref="P:System.ServiceModel.Description.MessageDescription.Direction" />
 
         
 
-         property. It also provides an <see
-         cref="P:System.ServiceModel.Description.MessageDescription.Action" />
+         property. It also provides an <see cref="P:System.ServiceModel.Description.MessageDescription.Action" />
 
         
 
@@ -80,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MessageDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
             
 
@@ -164,23 +158,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Incoming means that the message is coming from the client to the server. This is the <see
-             cref="F:System.ServiceModel.Description.MessageDirection.Input" />
+            >Incoming means that the message is coming from the client to the server. This is the <see cref="F:System.ServiceModel.Description.MessageDirection.Input" />
 
             
 
-             direction. Outgoing means the message is coming from the server to the client. This is the <see
-             cref="F:System.ServiceModel.Description.MessageDirection.Output" />
+             direction. Outgoing means the message is coming from the server to the client. This is the <see cref="F:System.ServiceModel.Description.MessageDirection.Output" />
 
             
 
-             direction. These terms can be confusing from the client perspective where the messages marked as <see
-             cref="F:System.ServiceModel.Description.MessageDirection.Input" />
+             direction. These terms can be confusing from the client perspective where the messages marked as <see cref="F:System.ServiceModel.Description.MessageDirection.Input" />
 
             
 
-             are actually being sent and the messages marked as <see
-             cref="F:System.ServiceModel.Description.MessageDirection.Output" />
+             are actually being sent and the messages marked as <see cref="F:System.ServiceModel.Description.MessageDirection.Output" />
 
             
 
@@ -209,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="P:System.ServiceModel.Description.MessageDescription.ProtectionLevel" />
+            >Gets a value that indicates whether the <see cref="P:System.ServiceModel.Description.MessageDescription.ProtectionLevel" />
 
             
 

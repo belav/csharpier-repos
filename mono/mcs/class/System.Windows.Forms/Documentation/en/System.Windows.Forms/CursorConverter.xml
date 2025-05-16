@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
@@ -26,18 +25,15 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never create an instance of the <see
-           cref="T:System.Windows.Forms.CursorConverter" />
+          >You should never create an instance of the <see cref="T:System.Windows.Forms.CursorConverter" />
 
           
 
-           class. Instead, call the <see
-           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+           class. Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
           
 
-           method. For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+           method. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -48,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert <see
-         cref="T:System.Windows.Forms.Cursor" />
+        >Provides a type converter to convert <see cref="T:System.Windows.Forms.Cursor" />
 
         
 
@@ -67,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.CursorConverter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.CursorConverter" />
 
             
 
@@ -105,14 +99,22 @@
           <para>true if this object can perform the conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to extract additional information about the environment this converter is being invoked from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -141,8 +143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -158,24 +159,30 @@
           <para>true if this converter can perform the conversion; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -266,7 +273,11 @@
           <para>A collection containing a standard set of valid values, or null. The default implementation always returns null.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -301,7 +312,11 @@
           <para>Returns true if GetStandardValues should be called to find a common set of values the object supports.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

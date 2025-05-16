@@ -20,53 +20,43 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >In the .NET Framework versions 1.0 and 1.1, code providers consist of implementations of <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+          >In the .NET Framework versions 1.0 and 1.1, code providers consist of implementations of <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
-          , <see
-           cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+          , <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
           
 
-          , <see
-           cref="T:System.CodeDom.Compiler.ICodeParser" />
+          , <see cref="T:System.CodeDom.Compiler.ICodeParser" />
 
           
 
-          , and <see
-           cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+          , and <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
           
 
-          . In the dnprdnlong, the <see
-           cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
+          . In the dnprdnlong, the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateGenerator" />
 
           
 
-          , <see
-           cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateParser" />
+          , <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateParser" />
 
           
 
-          , and <see
-           cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
+          , and <see cref="M:System.CodeDom.Compiler.CodeDomProvider.CreateCompiler" />
 
           
 
-           methods are obsolete, and the methods of <see
-           cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+           methods are obsolete, and the methods of <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
           
 
-           and <see
-           cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+           and <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
           
 
-           are directly available in the <see
-           cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+           are directly available in the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
           
 
@@ -74,34 +64,29 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+        >The <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
          interface can be implemented for a specific compiler to enable developers to programmatically compile assemblies from Code Document Object Model (CodeDOM) compile units, strings containing source code, or source code files.</para
       >
       <para
-        >The <see
-         cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+        >The <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
-         interface provides the capability to invoke compilation with specified parameters at runtime and access information related to compilation after compilation occurs, including the result code, and any errors or warnings the compiler returns. Each compile method accepts a <see
-         cref="T:System.CodeDom.Compiler.CompilerParameters" />
+         interface provides the capability to invoke compilation with specified parameters at runtime and access information related to compilation after compilation occurs, including the result code, and any errors or warnings the compiler returns. Each compile method accepts a <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
         
 
-         object that indicates settings for the compiler, and returns a <see
-         cref="T:System.CodeDom.Compiler.CompilerResults" />
+         object that indicates settings for the compiler, and returns a <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
         
 
          object that indicates the results of the compilation.</para
       >
       <para
-        >Compiler developers should provide an implementation of this interface to support dynamic compilation. <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+        >Compiler developers should provide an implementation of this interface to support dynamic compilation. <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
@@ -141,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles an assembly from the <see
-             cref="N:System.CodeDom" />
+            >Compiles an assembly from the <see cref="N:System.CodeDom" />
 
             
 
-             tree contained in the specified <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+             tree contained in the specified <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -157,8 +140,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -166,24 +148,30 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the settings for compilation. </param
         >
         <param name="compilationUnit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
@@ -219,13 +207,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles an assembly based on the <see
-             cref="N:System.CodeDom" />
+            >Compiles an assembly based on the <see cref="N:System.CodeDom" />
 
             
 
-             trees contained in the specified array of <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+             trees contained in the specified array of <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -235,8 +221,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -244,12 +229,15 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
@@ -288,8 +276,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -297,19 +284,26 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the settings for compilation. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -349,8 +343,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -358,12 +351,15 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
@@ -402,8 +398,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -411,19 +406,26 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the settings for compilation. </param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -463,8 +465,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -472,12 +473,15 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 

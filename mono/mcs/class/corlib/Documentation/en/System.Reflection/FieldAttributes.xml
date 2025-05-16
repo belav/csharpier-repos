@@ -325,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the field's value is a compile-time (static or early bound) constant. Any attempt to set it throws a <see
-             cref="T:System.FieldAccessException" />
+            >Specifies that the field's value is a compile-time (static or early bound) constant. Any attempt to set it throws a <see cref="T:System.FieldAccessException" />
 
             
 

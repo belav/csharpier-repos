@@ -16,41 +16,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used with the <see
-         cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.MessageProtectionOrder" />
+        >This enumeration is used with the <see cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.MessageProtectionOrder" />
 
         
 
-         property of the <see
-         cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+         property of the <see cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
 
         
 
-         and the <see
-         cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.MessageProtectionOrder" />
+         and the <see cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.MessageProtectionOrder" />
 
         
 
-         property of the <see
-         cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+         property of the <see cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
 
         
 
          classes.</para
       >
       <para
-        >If a message is vulnerable to a digest attack (for example, if the message is short or the entropy is low), you should use the <see
-         cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />
+        >If a message is vulnerable to a digest attack (for example, if the message is short or the entropy is low), you should use the <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />
 
         
 
-         or <see
-         cref="F:System.ServiceModel.Security.MessageProtectionOrder.EncryptBeforeSign" />
+         or <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.EncryptBeforeSign" />
 
         
 
-         option. (<newTerm
-        >Entropy</newTerm>
+         option. (<newTerm>Entropy</newTerm>
 
         
 
@@ -60,16 +53,14 @@
         <h2>What Is Ordered?</h2>
       </format>
       <para
-        >indigo2 offers three different protection levels that determine how messages are secured using SOAP message security. The default is <see
-         cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />
+        >indigo2 offers three different protection levels that determine how messages are secured using SOAP message security. The default is <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />
 
         
 
         . This setting first signs the message, encrypts the message body, and then encrypts the XML signature. This reduces the likelihood of a successful cryptographic guessing attack against the signature. </para
       >
       <para
-        >However, using the default has performance implications. In effect, there is a tradeoff of performance for increased security. Encrypting the signature can decrease performance between 10 percent and 40 percent. If the data content of the message is of low value, and performance throughput is more significant, use <see
-         cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncrypt" />
+        >However, using the default has performance implications. In effect, there is a tradeoff of performance for increased security. Encrypting the signature can decrease performance between 10 percent and 40 percent. If the data content of the message is of low value, and performance throughput is more significant, use <see cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncrypt" />
 
         
 
@@ -79,8 +70,7 @@
         <h2>Custom Bindings Only</h2>
       </format>
       <para
-        >To change the MessageProtectionOrder property requires the creation of a custom security binding. For more information about creating custom bindings, see <format
-         type="text/html">
+        >To change the MessageProtectionOrder property requires the creation of a custom security binding. For more information about creating custom bindings, see <format type="text/html">
           <a href="c4960675-d701-4bc9-b400-36a752fdd08b"
             >Creating User-defined Bindings and Binding Elements</a
           >
@@ -88,8 +78,7 @@
 
         
 
-        . For more information about creating a custom binding for a specific authentication mode, see <format
-         type="text/html">
+        . For more information about creating a custom binding for a specific authentication mode, see <format type="text/html">
           <a href="a7c7747a-5b8c-463f-8493-7266dac75066"
             >How To: Create a SecurityBindingElement for a Specified Authentication Mode</a
           >

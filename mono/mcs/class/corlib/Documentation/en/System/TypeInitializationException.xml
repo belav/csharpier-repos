@@ -39,8 +39,7 @@
     <example>
       <para
         >The following example demonstrates an error that causes
-      a <see
-         cref="T:System.TypeInitializationException" />
+      a <see cref="T:System.TypeInitializationException" />
 
         
 
@@ -80,18 +79,15 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a class initializer fails to initialize a type, a <see
-         cref="T:System.TypeInitializationException" />
+        >When a class initializer fails to initialize a type, a <see cref="T:System.TypeInitializationException" />
 
         
 
-         is created and passed a reference to the exception thrown by the type's class initializer. The <see
-         cref="P:System.Exception.InnerException" />
+         is created and passed a reference to the exception thrown by the type's class initializer. The <see cref="P:System.Exception.InnerException" />
 
         
 
-         property of <see
-         cref="T:System.TypeInitializationException" />
+         property of <see cref="T:System.TypeInitializationException" />
 
         
 
@@ -105,13 +101,11 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
          uses the HRESULT COR_E_TYPEINITIALIZATION, that has the value 0x80131534.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.TypeInitializationException" />
+        >For a list of initial property values for an instance of <see cref="T:System.TypeInitializationException" />
 
         
 
-        , see the <see
-         cref="M:System.TypeInitializationException.#ctor(System.String,System.Exception)" />
+        , see the <see cref="M:System.TypeInitializationException.#ctor(System.String,System.Exception)" />
 
         
 
@@ -147,26 +141,22 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.TypeInitializationException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.TypeInitializationException" />
 
             
 
@@ -218,8 +208,7 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.TypeInitializationException" />
+            >Initializes a new instance of the <see cref="T:System.TypeInitializationException" />
 
             
 
@@ -227,19 +216,26 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
           >
         </summary>
         <param name="fullTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the type that fails to initialize. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -274,8 +270,7 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -283,24 +278,30 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -328,8 +329,7 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -339,8 +339,7 @@ Error: System.TypeInitializationException: The type initializer for "TypeInit" t
         <remarks>
           <para>This property is read-only.</para>
           <para
-            >The <see
-             cref="P:System.TypeInitializationException.TypeName" />
+            >The <see cref="P:System.TypeInitializationException.TypeName" />
 
             
 

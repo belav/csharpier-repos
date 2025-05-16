@@ -22,29 +22,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.PropertyGrid.PropertyTabChanged" />
+        >The <see cref="E:System.Windows.Forms.PropertyGrid.PropertyTabChanged" />
 
         
 
-         event occurs when the user selects a new property tab in the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         event occurs when the user selects a new property tab in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
         .</para
       >
       <para
-        >A <see
-         cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
+        >A <see cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
 
         
 
          provides data on the old tab and new tab being selected.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
 
@@ -56,13 +52,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.PropertyGrid.PropertyTabChanged" />
+        >Provides data for the <see cref="E:System.Windows.Forms.PropertyGrid.PropertyTabChanged" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         event of a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -86,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
 
             
 
@@ -95,14 +88,22 @@
           >
         </summary>
         <param name="oldTab">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Previously selected property tab. </param
         >
         <param name="newTab">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -129,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the new <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >Gets the new <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -158,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the old <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >Gets the old <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 

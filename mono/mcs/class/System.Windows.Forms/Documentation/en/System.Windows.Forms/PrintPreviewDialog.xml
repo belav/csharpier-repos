@@ -40,26 +40,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create an instance of the <see
-         cref="T:System.Windows.Forms.PrintPreviewDialog" />
+        >When you create an instance of the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
         
 
-         class, some of the read/write properties are set to initial values. For a list of these values, see the <see
-         cref="M:System.Windows.Forms.PrintPreviewDialog.#ctor" />
+         class, some of the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.PrintPreviewDialog.#ctor" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about printing with Windows Forms, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing with Windows Forms, see the <see cref="N:System.Drawing.Printing" />
 
         
 
-         namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
-         cref="N:System.Printing" />
+         namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see cref="N:System.Printing" />
 
         
 
@@ -69,8 +65,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a dialog box form that contains a <see
-         cref="T:System.Windows.Forms.PrintPreviewControl" />
+        >Represents a dialog box form that contains a <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
         
 
@@ -87,13 +82,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >When you create an instance of <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
-            , the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Document" />
+            , the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Document" />
 
             
 
@@ -103,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -140,8 +132,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >This property allows you to designate a default action that occurs when the user presses the ENTER key in your application. The button assigned to this property must be an <see
-             cref="T:System.Windows.Forms.IButtonControl" />
+            >This property allows you to designate a default action that occurs when the user presses the ENTER key in your application. The button assigned to this property must be an <see cref="T:System.Windows.Forms.IButtonControl" />
 
             
 
@@ -336,13 +327,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this property to allow your form and its controls to automatically adjust based on changes in the font. This can be useful in applications where the font might increase or decrease based on the language specified for use by Windows.</para>
           <para
-            >To obtain the size the form will auto scale to, use the <see
-             cref="P:System.Windows.Forms.Form.AutoScaleBaseSize" />
+            >To obtain the size the form will auto scale to, use the <see cref="P:System.Windows.Forms.Form.AutoScaleBaseSize" />
 
             
 
-             property. If you want to determine the size the form will auto scale to based on a specific font, use the <see
-             cref="M:System.Windows.Forms.Form.GetAutoScaleSize(System.Drawing.Font)" />
+             property. If you want to determine the size the form will auto scale to based on a specific font, use the <see cref="M:System.Windows.Forms.Form.GetAutoScaleSize(System.Drawing.Font)" />
 
             
 
@@ -388,13 +377,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >The <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
-             class does not support the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.AutoScaleBaseSize" />
+             class does not support the <see cref="P:System.Windows.Forms.PrintPreviewDialog.AutoScaleBaseSize" />
 
             
 
@@ -493,8 +480,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.AutoScrollMinSize" />
+            >The <see cref="P:System.Windows.Forms.PrintPreviewDialog.AutoScrollMinSize" />
 
             
 
@@ -537,13 +523,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.AutoSize" />
+            >Setting the <see cref="P:System.Windows.Forms.PrintPreviewDialog.AutoSize" />
 
             
 
-             property has no affect on the appearance of the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+             property has no affect on the appearance of the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -553,8 +537,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -588,8 +571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.AutoSize" />
 
             
 
@@ -655,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.Form.AutoValidate" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Form.AutoValidate" />
 
             
 
@@ -720,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.BackColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.BackColor" />
 
             
 
@@ -789,8 +769,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImage" />
 
             
 
@@ -828,13 +807,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImageLayout" />
+            >Setting the <see cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImageLayout" />
 
             
 
-             property has no affect on the appearance of the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+             property has no affect on the appearance of the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -844,8 +821,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the layout of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImage" />
+            >Gets or sets the layout of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImage" />
 
             
 
@@ -882,8 +858,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImageLayout" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.BackgroundImageLayout" />
 
             
 
@@ -918,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the cancel button for the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >Gets or sets the cancel button for the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -981,8 +955,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.CausesValidation" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.CausesValidation" />
 
             
 
@@ -1050,8 +1023,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.ContextMenu" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.ContextMenu" />
 
             
 
@@ -1121,8 +1093,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.ContextMenuStrip" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.ContextMenuStrip" />
 
             
 
@@ -1150,8 +1121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.ControlBox" />
+            >If the <see cref="P:System.Windows.Forms.PrintPreviewDialog.ControlBox" />
 
             
 
@@ -1182,13 +1152,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about the <see
-             cref="M:System.Windows.Forms.PrintPreviewDialog.CreateHandle" />
+            >For more information about the <see cref="M:System.Windows.Forms.PrintPreviewDialog.CreateHandle" />
 
             
 
-             method, see the <see
-             cref="M:System.Windows.Forms.Control.CreateHandle" />
+             method, see the <see cref="M:System.Windows.Forms.Control.CreateHandle" />
 
             
 
@@ -1198,8 +1166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the handle for the form that encapsulates the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >Creates the handle for the form that encapsulates the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -1267,8 +1234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Cursor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Cursor" />
 
             
 
@@ -1304,18 +1270,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.DataBindings" />
+            >Use the <see cref="P:System.Windows.Forms.PrintPreviewDialog.DataBindings" />
 
             
 
-             property to access the <see
-             cref="T:System.Windows.Forms.ControlBindingsCollection" />
+             property to access the <see cref="T:System.Windows.Forms.ControlBindingsCollection" />
 
             
 
-            . By adding <see
-             cref="T:System.Windows.Forms.Binding" />
+            . By adding <see cref="T:System.Windows.Forms.Binding" />
 
             
 
@@ -1349,23 +1312,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unless overridden in a derived class, the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.DefaultMinimumSize" />
+            >Unless overridden in a derived class, the <see cref="P:System.Windows.Forms.PrintPreviewDialog.DefaultMinimumSize" />
 
             
 
-             property returns a <see
-             cref="T:System.Drawing.Size" />
+             property returns a <see cref="T:System.Drawing.Size" />
 
             
 
-             with a <see
-             cref="P:System.Drawing.Size.Width" />
+             with a <see cref="P:System.Drawing.Size.Width" />
 
             
 
-             of 370 pixels and a <see
-             cref="P:System.Drawing.Size.Height" />
+             of 370 pixels and a <see cref="P:System.Drawing.Size.Height" />
 
             
 
@@ -1375,8 +1334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default minimum size, in pixels, of the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >Gets the default minimum size, in pixels, of the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -1440,8 +1398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Dock" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Dock" />
 
             
 
@@ -1480,8 +1437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="P:System.Windows.Forms.ScrollableControl.DockPadding" />
+            >Overrides the <see cref="P:System.Windows.Forms.ScrollableControl.DockPadding" />
 
             
 
@@ -1513,8 +1469,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is equivalent to <see
-             cref="P:System.Windows.Forms.PrintPreviewControl.Document" />
+            >This property is equivalent to <see cref="P:System.Windows.Forms.PrintPreviewControl.Document" />
 
             
 
@@ -1579,8 +1534,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1593,8 +1547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Enabled" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Enabled" />
 
             
 
@@ -1662,8 +1615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Font" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Font" />
 
             
 
@@ -1727,8 +1679,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1741,8 +1692,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.ForeColor" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.ForeColor" />
 
             
 
@@ -1778,8 +1728,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >The border style of the form determines how the outer edge of the form appears. In addition to changing the border display for a form, certain border styles prevent the form from being sized. For example, the <see
-             cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+            >The border style of the form determines how the outer edge of the form appears. In addition to changing the border display for a form, certain border styles prevent the form from being sized. For example, the <see cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
 
             
 
@@ -1816,31 +1765,26 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >When this property is set to true, a small button with a question mark appears in the caption bar to the left of the <ui
-            >Close</ui>
+            >When this property is set to true, a small button with a question mark appears in the caption bar to the left of the <ui>Close</ui>
 
             
 
-             button. You can use this button to display Help for your application. You can create an event handler for the <see
-             cref="E:System.Windows.Forms.Control.HelpRequested" />
+             button. You can use this button to display Help for your application. You can create an event handler for the <see cref="E:System.Windows.Forms.Control.HelpRequested" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.Control" />
+             event of the <see cref="T:System.Windows.Forms.Control" />
 
             
 
-             class to display Help information to the user when the <ui
-            >Help</ui>
+             class to display Help information to the user when the <ui>Help</ui>
 
             
 
              button of the form is clicked.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.HelpButton" />
+            >The value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.HelpButton" />
 
             
 
@@ -1850,8 +1794,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a <ui
-            >Help</ui>
+            >Gets or sets a value indicating whether a <ui>Help</ui>
 
             
 
@@ -1947,8 +1890,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1960,8 +1902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.ImeMode" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.ImeMode" />
 
             
 
@@ -2025,18 +1966,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >When this property is set to true, the form will receive all <see
-             cref="E:System.Windows.Forms.Control.KeyPress" />
+            >When this property is set to true, the form will receive all <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.KeyDown" />
+            , <see cref="E:System.Windows.Forms.Control.KeyDown" />
 
             
 
-            , and <see
-             cref="E:System.Windows.Forms.Control.KeyUp" />
+            , and <see cref="E:System.Windows.Forms.Control.KeyUp" />
 
             
 
@@ -2112,8 +2050,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Location" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Location" />
 
             
 
@@ -2183,8 +2120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Margin" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Margin" />
 
             
 
@@ -2213,28 +2149,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >A maximize button enables users to enlarge a window to full-screen size. To display a maximize button, you must also set the form's <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
+            >A maximize button enables users to enlarge a window to full-screen size. To display a maximize button, you must also set the form's <see cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
 
             
 
-             property to either <see
-             cref="F:System.Windows.Forms.FormBorderStyle.FixedSingle" />
+             property to either <see cref="F:System.Windows.Forms.FormBorderStyle.FixedSingle" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.FormBorderStyle.Sizable" />
+            , <see cref="F:System.Windows.Forms.FormBorderStyle.Sizable" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.FormBorderStyle.Fixed3D" />
+            , <see cref="F:System.Windows.Forms.FormBorderStyle.Fixed3D" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+            , or <see cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
 
             
 
@@ -2243,33 +2174,27 @@
           <para>A maximize button automatically becomes a restore button when a window is maximized. Minimizing or restoring a window automatically changes the restore button back to a maximize button.</para>
           <block subset="none" type="note">
             <para
-              >Maximizing a form at run time generates a <see
-               cref="E:System.Windows.Forms.Control.Resize" />
+              >Maximizing a form at run time generates a <see cref="E:System.Windows.Forms.Control.Resize" />
 
               
 
-               event. The <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
+               event. The <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
 
               
 
-               property reflects the current state of the window. If you set the <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
+               property reflects the current state of the window. If you set the <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
 
               
 
-               property to <see
-               cref="F:System.Windows.Forms.FormWindowState.Maximized" />
+               property to <see cref="F:System.Windows.Forms.FormWindowState.Maximized" />
 
               
 
-              , the form is maximized independently of whatever settings are in effect for the <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.MaximizeBox" />
+              , the form is maximized independently of whatever settings are in effect for the <see cref="P:System.Windows.Forms.PrintPreviewDialog.MaximizeBox" />
 
               
 
-               and <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
+               and <see cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
 
               
 
@@ -2337,8 +2262,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2350,8 +2274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.MaximumSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.MaximumSize" />
 
             
 
@@ -2387,18 +2310,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >You can use this property to switch between complete menu sets at run time. For example, you can define one <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >You can use this property to switch between complete menu sets at run time. For example, you can define one <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             to be displayed when your multiple document interface (MDI) form has no active MDI child forms and another <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             to be displayed when your multiple document interface (MDI) form has no active MDI child forms and another <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             to display when a child window is displayed. You can also use a different <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             to display when a child window is displayed. You can also use a different <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -2408,8 +2328,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -2445,28 +2364,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >A minimize button enables users to minimize a window to an icon. To display a minimize button, you must also set the form's <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
+            >A minimize button enables users to minimize a window to an icon. To display a minimize button, you must also set the form's <see cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
 
             
 
-             property to either <see
-             cref="F:System.Windows.Forms.FormBorderStyle.FixedSingle" />
+             property to either <see cref="F:System.Windows.Forms.FormBorderStyle.FixedSingle" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.FormBorderStyle.Sizable" />
+            , <see cref="F:System.Windows.Forms.FormBorderStyle.Sizable" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.FormBorderStyle.Fixed3D" />
+            , <see cref="F:System.Windows.Forms.FormBorderStyle.Fixed3D" />
 
             
 
-            , or <see
-             cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+            , or <see cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
 
             
 
@@ -2474,33 +2388,27 @@
           >
           <block subset="none" type="note">
             <para
-              >Minimizing a form at run time generates a <see
-               cref="E:System.Windows.Forms.Control.Resize" />
+              >Minimizing a form at run time generates a <see cref="E:System.Windows.Forms.Control.Resize" />
 
               
 
-               event. The <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
+               event. The <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
 
               
 
-               property reflects the current state of the window. If you set the <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
+               property reflects the current state of the window. If you set the <see cref="P:System.Windows.Forms.PrintPreviewDialog.WindowState" />
 
               
 
-               property to <see
-               cref="F:System.Windows.Forms.FormWindowState.Minimized" />
+               property to <see cref="F:System.Windows.Forms.FormWindowState.Minimized" />
 
               
 
-              , the form is minimized independently of whatever settings are in effect for the <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.MinimizeBox" />
+              , the form is minimized independently of whatever settings are in effect for the <see cref="P:System.Windows.Forms.PrintPreviewDialog.MinimizeBox" />
 
               
 
-               and <see
-               cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
+               and <see cref="P:System.Windows.Forms.PrintPreviewDialog.FormBorderStyle" />
 
               
 
@@ -2571,8 +2479,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2584,8 +2491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.MinimumSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.MinimumSize" />
 
             
 
@@ -2615,16 +2521,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is not relevant for this class.</para>
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PrintPreviewDialog.OnClosing(System.ComponentModel.CancelEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PrintPreviewDialog.OnClosing(System.ComponentModel.CancelEventArgs)" />
 
             
 
              method invalidates the preview so it is regenerated when the dialog is reopened.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2633,8 +2537,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.PrintPreviewDialog.OnClosing(System.ComponentModel.CancelEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.PrintPreviewDialog.OnClosing(System.ComponentModel.CancelEventArgs)" />
 
             
 
@@ -2644,8 +2547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Form.Closing" />
+            >Raises the <see cref="E:System.Windows.Forms.Form.Closing" />
 
             
 
@@ -2653,7 +2555,11 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2685,13 +2591,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >The <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >The <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
-             class does not use the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Opacity" />
+             class does not use the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Opacity" />
 
             
 
@@ -2765,8 +2669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Padding" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Padding" />
 
             
 
@@ -2795,8 +2698,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the <see
-             cref="T:System.Windows.Forms.PrintPreviewControl" />
+            >Gets a value indicating the <see cref="T:System.Windows.Forms.PrintPreviewControl" />
 
             
 
@@ -2828,28 +2730,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Windows.Forms.Keys.Up" />
+            >The <see cref="F:System.Windows.Forms.Keys.Up" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.Keys.Down" />
+            , <see cref="F:System.Windows.Forms.Keys.Down" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.Keys.Right" />
+            , <see cref="F:System.Windows.Forms.Keys.Right" />
 
             
 
-            , and <see
-             cref="F:System.Windows.Forms.Keys.Left" />
+            , and <see cref="F:System.Windows.Forms.Keys.Left" />
 
             
 
-             key values will return false; otherwise, processing is passed to the base class's <see
-             cref="M:System.Windows.Forms.Form.ProcessDialogKey(System.Windows.Forms.Keys)" />
+             key values will return false; otherwise, processing is passed to the base class's <see cref="M:System.Windows.Forms.Form.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
             
 
@@ -2865,12 +2762,15 @@
           <para>true to indicate the key should be processed; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.Keys" />
+          One of the <see cref="T:System.Windows.Forms.Keys" />
 
           
 
@@ -2904,7 +2804,11 @@
           <para>true to indicate the TAB key was successfully processed; otherwise, false.</para>
         </returns>
         <param name="forward">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2964,8 +2868,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2977,8 +2880,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeft" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeft" />
 
             
 
@@ -3014,18 +2916,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >The <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
+            >The <see cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
 
             
 
-             property is used for applications where the language is written from right to left. When both the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
+             property is used for applications where the language is written from right to left. When both the <see cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeft" />
+             and <see cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeft" />
 
             
 
@@ -3035,8 +2934,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
@@ -3067,8 +2965,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3080,8 +2977,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
+            >Occurs when value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.RightToLeftLayout" />
 
             
 
@@ -3114,13 +3010,11 @@
           <para>This property is not relevant for this class.</para>
           <para>If a form is a child of another form, the child form is not displayed in the Windows taskbar.</para>
           <para
-            >You can use this property to prevent users from selecting your form through the Windows taskbar. For example, if you display a <ui
-            >Find and Replace</ui>
+            >You can use this property to prevent users from selecting your form through the Windows taskbar. For example, if you display a <ui>Find and Replace</ui>
 
             
 
-             tool window in your application, you might want to prevent that window from being selected through the Windows taskbar, since you would need both the application's main window and the <ui
-            >Find and Replace</ui>
+             tool window in your application, you might want to prevent that window from being selected through the Windows taskbar, since you would need both the application's main window and the <ui>Find and Replace</ui>
 
             
 
@@ -3157,28 +3051,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >This property allows you to set both the height and width of the form at the same time instead of setting the <see
-             cref="P:System.Windows.Forms.Control.Height" />
+            >This property allows you to set both the height and width of the form at the same time instead of setting the <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.Control.Width" />
+             and <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
-             properties individually. If you want to set the size and location of a form, you can use the <see
-             cref="P:System.Windows.Forms.Form.DesktopBounds" />
+             properties individually. If you want to set the size and location of a form, you can use the <see cref="P:System.Windows.Forms.Form.DesktopBounds" />
 
             
 
-             property to size and locate the form based on desktop coordinates or use the <see
-             cref="P:System.Windows.Forms.Control.Bounds" />
+             property to size and locate the form based on desktop coordinates or use the <see cref="P:System.Windows.Forms.Control.Bounds" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.Control" />
+             property of the <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -3214,8 +3103,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3227,8 +3115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Size" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Size" />
 
             
 
@@ -3330,13 +3217,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >When the user presses the TAB key, the input focus is set to the next control in the tab order. Controls with the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.TabStop" />
+            >When the user presses the TAB key, the input focus is set to the next control in the tab order. Controls with the <see cref="P:System.Windows.Forms.PrintPreviewDialog.TabStop" />
 
             
 
-             property value of false are not included in the collection of controls in the tab order. The tab order can be manipulated by setting the control's <see
-             cref="P:System.Windows.Forms.Form.TabIndex" />
+             property value of false are not included in the collection of controls in the tab order. The tab order can be manipulated by setting the control's <see cref="P:System.Windows.Forms.Form.TabIndex" />
 
             
 
@@ -3372,8 +3257,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3385,8 +3269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.TabStop" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.TabStop" />
 
             
 
@@ -3479,8 +3362,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3492,8 +3374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Text" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Text" />
 
             
 
@@ -3526,8 +3407,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >A topmost form is a form that overlaps all the other forms even if it is not the active or foreground form. Topmost forms are always displayed at the highest point in the z-order of an application. You can use this method to create a form that is always displayed in your application, such as a <ui
-            >Find and Replace</ui>
+            >A topmost form is a form that overlaps all the other forms even if it is not the active or foreground form. Topmost forms are always displayed at the highest point in the z-order of an application. You can use this method to create a form that is always displayed in your application, such as a <ui>Find and Replace</ui>
 
             
 
@@ -3567,48 +3447,39 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is not relevant for this class.</para>
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.Form.TransparencyKey" />
+            >When the <see cref="P:System.Windows.Forms.Form.TransparencyKey" />
 
             
 
-             property is assigned a <see
-             cref="T:System.Drawing.Color" />
+             property is assigned a <see cref="T:System.Drawing.Color" />
 
             
 
-            , the areas of the form that have the same <see
-             cref="P:System.Windows.Forms.Control.BackColor" />
+            , the areas of the form that have the same <see cref="P:System.Windows.Forms.Control.BackColor" />
 
             
 
-             will be displayed transparently. Any mouse actions, such as the click of the mouse, that are performed on the transparent areas of the form will be transferred to the windows below the transparent area. For example, if the client region of a form is made transparent, clicking the mouse on that area will send the event notification of the click to any window that is below it. If the color assigned to the <see
-             cref="P:System.Windows.Forms.Form.TransparencyKey" />
+             will be displayed transparently. Any mouse actions, such as the click of the mouse, that are performed on the transparent areas of the form will be transferred to the windows below the transparent area. For example, if the client region of a form is made transparent, clicking the mouse on that area will send the event notification of the click to any window that is below it. If the color assigned to the <see cref="P:System.Windows.Forms.Form.TransparencyKey" />
 
             
 
-             property is the same as any controls on the form, they also will be displayed transparently. For example, if you have a <see
-             cref="T:System.Windows.Forms.Button" />
+             property is the same as any controls on the form, they also will be displayed transparently. For example, if you have a <see cref="T:System.Windows.Forms.Button" />
 
             
 
-             control on a form that has its <see
-             cref="P:System.Windows.Forms.Form.TransparencyKey" />
+             control on a form that has its <see cref="P:System.Windows.Forms.Form.TransparencyKey" />
 
             
 
-             property set to <see
-             cref="P:System.Drawing.SystemColors.Control" />
+             property set to <see cref="P:System.Drawing.SystemColors.Control" />
 
             
 
-            , the control will be displayed transparently unless the <see
-             cref="P:System.Windows.Forms.Control.BackColor" />
+            , the control will be displayed transparently unless the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.Button" />
+             property of the <see cref="T:System.Windows.Forms.Button" />
 
             
 
@@ -3642,58 +3513,47 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Anti-aliasing removes jagged lines when fonts are rendered.</para>
           <para
-            >The following code example demonstrates the <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+            >The following code example demonstrates the <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
-             setting the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Document" />
+             setting the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Document" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.UseAntiAlias" />
+             and <see cref="P:System.Windows.Forms.PrintPreviewDialog.UseAntiAlias" />
 
             
 
-             properties. The example assumes the form contains a <see
-             cref="T:System.Windows.Forms.TreeView" />
+             properties. The example assumes the form contains a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             named TreeView1 that contains <see
-             cref="T:System.Windows.Forms.TreeNode" />
+             named TreeView1 that contains <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
-             objects. The <see
-             cref="P:System.Windows.Forms.Control.Tag" />
+             objects. The <see cref="P:System.Windows.Forms.Control.Tag" />
 
             
 
-             property of each <see
-             cref="T:System.Windows.Forms.TreeNode" />
+             property of each <see cref="T:System.Windows.Forms.TreeNode" />
 
             
 
-             object must be set to a fully qualified document name that can be accessed by the machine running the example. Set each <see
-             cref="P:System.Windows.Forms.TreeNode.Text" />
+             object must be set to a fully qualified document name that can be accessed by the machine running the example. Set each <see cref="P:System.Windows.Forms.TreeNode.Text" />
 
             
 
-             property to a string that identifies the file specified by the <see
-             cref="P:System.Windows.Forms.TreeNode.Tag" />
+             property to a string that identifies the file specified by the <see cref="P:System.Windows.Forms.TreeNode.Tag" />
 
             
 
-             property. For example, you could set TreeNode1.Tag to "c:\myDocuments\recipe.doc" and TreeNode1.Text to "recipe.doc". The example also assumes the form contains a <see
-             cref="T:System.Windows.Forms.PrintPreviewDialog" />
+             property. For example, you could set TreeNode1.Tag to "c:\myDocuments\recipe.doc" and TreeNode1.Text to "recipe.doc". The example also assumes the form contains a <see cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
             
 
-             named PrintPreviewDialog1 and a button named Button1. To run this example, call the InitializePrintPreviewDialog method in the form's constructor or <see
-             cref="E:System.Windows.Forms.Form.Load" />
+             named PrintPreviewDialog1 and a button named Button1. To run this example, call the InitializePrintPreviewDialog method in the form's constructor or <see cref="E:System.Windows.Forms.Form.Load" />
 
             
 
@@ -3786,8 +3646,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is not relevant for this class.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3799,8 +3658,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.PrintPreviewDialog.Visible" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.PrintPreviewDialog.Visible" />
 
             
 
@@ -3835,38 +3693,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before a form is displayed, the <see
-             cref="P:System.Windows.Forms.Form.WindowState" />
+            >Before a form is displayed, the <see cref="P:System.Windows.Forms.Form.WindowState" />
 
             
 
-             property is always set to <see
-             cref="F:System.Windows.Forms.FormWindowState.Normal" />
+             property is always set to <see cref="F:System.Windows.Forms.FormWindowState.Normal" />
 
             
 
-            , regardless of its initial setting. This is reflected in the <see
-             cref="P:System.Windows.Forms.Control.Height" />
+            , regardless of its initial setting. This is reflected in the <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.Left" />
+            , <see cref="P:System.Windows.Forms.Control.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.Top" />
+            , <see cref="P:System.Windows.Forms.Control.Top" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Control.Width" />
+            , and <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
-             property settings. If a form is hidden after it has been shown, these properties reflect the previous state until the form is shown again, regardless of any changes made to the <see
-             cref="P:System.Windows.Forms.Form.WindowState" />
+             property settings. If a form is hidden after it has been shown, these properties reflect the previous state until the form is shown again, regardless of any changes made to the <see cref="P:System.Windows.Forms.Form.WindowState" />
 
             
 

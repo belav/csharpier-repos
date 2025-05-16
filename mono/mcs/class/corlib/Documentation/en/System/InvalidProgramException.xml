@@ -46,21 +46,18 @@
          uses the HRESULT COR_E_INVALIDPROGRAM, which has the value 0x8013153A.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.InvalidProgramException" />
+        >For a list of initial property values for an instance of <see cref="T:System.InvalidProgramException" />
 
         
 
-        , see the <see
-         cref="T:System.InvalidProgramException" />
+        , see the <see cref="T:System.InvalidProgramException" />
 
         
 
          constructors.</para
       >
       <para
-        >For more information about <see
-         cref="T:System.InvalidProgramException" />
+        >For more information about <see cref="T:System.InvalidProgramException" />
 
         
 
@@ -95,16 +92,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >The constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new exception to a system-supplied message that describes the error, such as "Metadata is incorrect." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InvalidProgramException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InvalidProgramException" />
 
             
 
@@ -146,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidProgramException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidProgramException" />
 
             
 
@@ -181,26 +175,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
-             property of the new exception using the <paramref
-             name="message" />
+             property of the new exception using the <paramref name="message" />
 
             
 
-             parameter. The content of <paramref
-             name="message" />
+             parameter. The content of <paramref name="message" />
 
             
 
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InvalidProgramException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InvalidProgramException" />
 
             
 
@@ -242,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidProgramException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidProgramException" />
 
             
 
@@ -251,7 +240,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -288,16 +281,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
              property. The InnerException property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the InnerException property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.InvalidProgramException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.InvalidProgramException" />
 
             
 
@@ -339,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.InvalidProgramException" />
+            >Initializes a new instance of the <see cref="T:System.InvalidProgramException" />
 
             
 
@@ -348,19 +338,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

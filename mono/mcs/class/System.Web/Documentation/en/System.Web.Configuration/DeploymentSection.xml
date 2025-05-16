@@ -30,13 +30,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.DeploymentSection" />
+            >This constructor is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.DeploymentSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -46,8 +44,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.DeploymentSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.DeploymentSection" />
 
             
 
@@ -95,8 +92,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Web.Configuration.DeploymentSection.Retail" />
+            >When <see cref="P:System.Web.Configuration.DeploymentSection.Retail" />
 
             
 
@@ -105,7 +101,6 @@
           <block subset="none" type="note">
             <para
               >When you use the retail setting, you should continue to set the debug attribute to false in application Web.config files that are deployed to the server. The debug setting disables request execution timeout, and this is not overridden by the retail setting. For more information, see. <see
-
                 cref="http://www.hanselman.com/blog/MostCommonASPNETSupportIssuesReportingFromDeepInsideMicrosoftDeveloperSupport.aspx"
                 >Most Common ASP.NET Support issues - Reporting from deep inside Microsoft Developer Support</see
               >

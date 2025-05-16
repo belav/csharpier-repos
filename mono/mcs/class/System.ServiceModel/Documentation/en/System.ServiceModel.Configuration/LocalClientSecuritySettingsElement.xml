@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement" />
 
             
 
@@ -160,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to the default, the receiver accepts messages with send-time timestamps up to 5 minutes later or earlier than the time the message was received. Messages that do not pass the send-time test are rejected. This setting is used in conjunction with the <see
-             cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.ReplayWindow" />
+            >When this property is set to the default, the receiver accepts messages with send-time timestamps up to 5 minutes later or earlier than the time the message was received. Messages that do not pass the send-time test are rejected. This setting is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.ReplayWindow" />
 
             
 
@@ -171,8 +169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 
@@ -208,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 
@@ -329,8 +325,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After the time specified by this property, a message sent with the same nonce as the one sent before is not accepted. This property is used in conjunction with the <see
-             cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.MaxClockSkew" />
+            >After the time specified by this property, a message sent with the same nonce as the one sent before is not accepted. This property is used in conjunction with the <see cref="P:System.ServiceModel.Configuration.LocalClientSecuritySettingsElement.MaxClockSkew" />
 
             
 
@@ -340,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 
@@ -380,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 
@@ -423,8 +416,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 
@@ -463,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.TimeSpan" />
+            >Gets or sets a <see cref="T:System.TimeSpan" />
 
             
 

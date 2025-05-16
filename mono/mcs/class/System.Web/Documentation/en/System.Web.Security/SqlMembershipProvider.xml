@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by the <see
-         cref="T:System.Web.Security.Membership" />
+        >This class is used by the <see cref="T:System.Web.Security.Membership" />
 
         
 
-         and <see
-         cref="T:System.Web.Security.MembershipUser" />
+         and <see cref="T:System.Web.Security.MembershipUser" />
 
         
 
-         classes to provide membership services for an ASP.NET application using a SQL Server database. You cannot use a <see
-         cref="T:System.Web.Security.SqlMembershipProvider" />
+         classes to provide membership services for an ASP.NET application using a SQL Server database. You cannot use a <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
         
 
-         without SQL Server. When your computer has SQL Server Express installed with the default instance name and user-instancing enabled, the <see
-         cref="T:System.Web.Security.SqlMembershipProvider" />
+         without SQL Server. When your computer has SQL Server Express installed with the default instance name and user-instancing enabled, the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
         
 
@@ -42,31 +38,26 @@
       <para>To manually create the database, run the Aspnet_regsql.exe executable found in the %systemroot%\Microsoft.NET\Framework\ versionNumber folder and specify the -A m option (for example aspnet_regsql.exe -A m). The database created is called Aspnetdb. Alternatively, run Aspnet_regsql.exe to pull up the GUI configuration mode and choose to configure all ASP.NET Features.</para>
       <para>If the membership provider is configured with a connection string that uses integrated security, the process account of the ASP.NET application must have rights to connect to the SQL Server database.</para>
       <para
-        >The Machine.config file defines a default <see
-         cref="T:System.Web.Security.SqlMembershipProvider" />
+        >The Machine.config file defines a default <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
         
 
          instance named AspNetSqlMembershipProvider that connects to the default SQL Server Express instance on the local machine. You can use this instance of the provider if you installed SQL Server Express with the default instance name, or you can define your own instance in the Web.config file for your ASP.NET application.</para
       >
       <para
-        >If you set the passwordCompatMode attribute to <see
-         cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework40" />
+        >If you set the passwordCompatMode attribute to <see cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework40" />
 
         
 
-        , the application can use the hashing and encryption membership options that were added in ASP.NET 4. However, if the passwordCompatMode attribute is set to <see
-         cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework20" />
+        , the application can use the hashing and encryption membership options that were added in ASP.NET 4. However, if the passwordCompatMode attribute is set to <see cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework20" />
 
         
 
-        , only the hashing and encryption membership options from the ASP.NET 2.0, ASP.NET 3.5, and ASP.NET 3.5 SP1 can be used. The default value is <see
-         cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework20" />
+        , only the hashing and encryption membership options from the ASP.NET 2.0, ASP.NET 3.5, and ASP.NET 3.5 SP1 can be used. The default value is <see cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework20" />
 
         
 
-        . For more information, see <see
-         cref="T:System.Web.Configuration.MembershipPasswordCompatibilityMode" />
+        . For more information, see <see cref="T:System.Web.Configuration.MembershipPasswordCompatibilityMode" />
 
         
 
@@ -88,13 +79,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Security.SqlMembershipProvider.#ctor" />
+            >The <see cref="M:System.Web.Security.SqlMembershipProvider.#ctor" />
 
             
 
-             constructor is called by ASP.NET to create an instance of the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             constructor is called by ASP.NET to create an instance of the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
@@ -104,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
@@ -129,31 +117,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+            >The <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
-             is used by the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             is used by the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
-             to group user information. By qualifying user information with an application name, you can store information for multiple applications in a single database without running into conflicts between duplicate user names. Also, multiple ASP.NET applications can use the same user database by specifying the same value in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+             to group user information. By qualifying user information with an application name, you can store information for multiple applications in a single database without running into conflicts between duplicate user names. Also, multiple ASP.NET applications can use the same user database by specifying the same value in the <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
-             property. The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+             property. The <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
              property can be set programmatically, or it can be set declaratively in the configuration file for the Web application with the applicationName attribute.</para
           >
           <para
-            >If a value is not specified for the applicationName attribute in the configuration file for the Web application, then the <see
-             cref="P:System.Web.HttpRequest.ApplicationPath" />
+            >If a value is not specified for the applicationName attribute in the configuration file for the Web application, then the <see cref="P:System.Web.HttpRequest.ApplicationPath" />
 
             
 
@@ -161,33 +144,27 @@
           >
           <block subset="none" type="note">
             <para
-              >Because a single default membership provider instance is used for all of the requests served by an <see
-               cref="T:System.Web.HttpApplication" />
+              >Because a single default membership provider instance is used for all of the requests served by an <see cref="T:System.Web.HttpApplication" />
 
               
 
-               object, you can have multiple requests executing concurrently and attempting to set the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+               object, you can have multiple requests executing concurrently and attempting to set the <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
               
 
-               property value. The <see
-               cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+               property value. The <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
               
 
-               property is not thread safe for multiple writes, and changing the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+               property is not thread safe for multiple writes, and changing the <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
               
 
-               property value can result in unexpected behavior for multiple users of an application. We recommend that you avoid writing code to allow users to set the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+               property value can result in unexpected behavior for multiple users of an application. We recommend that you avoid writing code to allow users to set the <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
               
 
-               property unless you must. An example of an application where setting the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+               property unless you must. An example of an application where setting the <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
               
 
@@ -225,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
@@ -234,64 +210,53 @@
           >
           <para>The maximum password length is 128 characters.</para>
           <para
-            >If an incorrect password is supplied to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ChangePassword(System.String,System.String,System.String)" />
+            >If an incorrect password is supplied to the <see cref="M:System.Web.Security.SqlMembershipProvider.ChangePassword(System.String,System.String,System.String)" />
 
             
 
-             method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
+             method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
 
             
 
-             method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             and <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
              properties.</para
           >
           <para
-            >You can call the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ChangePassword(System.String,System.String,System.String)" />
+            >You can call the <see cref="M:System.Web.Security.SqlMembershipProvider.ChangePassword(System.String,System.String,System.String)" />
 
             
 
-             method directly by first obtaining a reference to the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             method directly by first obtaining a reference to the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
-             instance through the <see
-             cref="P:System.Web.Security.Membership.Provider" />
+             instance through the <see cref="P:System.Web.Security.Membership.Provider" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.Membership" />
+             property of the <see cref="T:System.Web.Security.Membership" />
 
             
 
-             class. The <see
-             cref="P:System.Web.Security.Membership.Provider" />
+             class. The <see cref="P:System.Web.Security.Membership.Provider" />
 
             
 
-             property exposes the defaultProvider specified in the Web.config file for the application. Configured providers that are not the default provider referenced using the <see
-             cref="P:System.Web.Security.Membership.Providers" />
+             property exposes the defaultProvider specified in the Web.config file for the application. Configured providers that are not the default provider referenced using the <see cref="P:System.Web.Security.Membership.Providers" />
 
             
 
              property.</para
           >
           <para
-            >You can also change user passwords by using the <see
-             cref="M:System.Web.Security.MembershipUser.ChangePassword(System.String,System.String)" />
+            >You can also change user passwords by using the <see cref="M:System.Web.Security.MembershipUser.ChangePassword(System.String,System.String)" />
 
             
 
@@ -308,7 +273,11 @@
           <para>true if the password was updated successfully. false if the supplied old password is invalid, the user is locked out, or the user does not exist in the database.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,44 +310,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.MembershipUser" />
+            >This method is called by the <see cref="T:System.Web.Security.MembershipUser" />
 
             
 
-             class to update the password question and answer for a user in the SQL Server database that is specified in the ASP.NET application's configuration file (Web.config). The password answer is encrypted using the format that is specified in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+             class to update the password question and answer for a user in the SQL Server database that is specified in the ASP.NET application's configuration file (Web.config). The password answer is encrypted using the format that is specified in the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
              property.</para
           >
           <para
-            >Requiring a password question and answer provides an additional layer of security when retrieving or resetting a user's password. When creating a user name, a user can supply a question and answer that can later be used to retrieve or reset a forgotten password. The <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" />
+            >Requiring a password question and answer provides an additional layer of security when retrieving or resetting a user's password. When creating a user name, a user can supply a question and answer that can later be used to retrieve or reset a forgotten password. The <see cref="M:System.Web.Security.SqlMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" />
 
             
 
              method updates the password question and answer for a membership user.</para
           >
           <para
-            >If an incorrect password is supplied to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" />
+            >If an incorrect password is supplied to the <see cref="M:System.Web.Security.SqlMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" />
 
             
 
-             method, the internal counters that track invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by calling the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
+             method, the internal counters that track invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by calling the <see cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
 
             
 
-             method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             and <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
@@ -386,18 +348,15 @@
           >
           <para>The maximum length for the password question is 256 characters. The maximum length for the password answer is 128 characters.</para>
           <para
-            >For more information, see <see
-             cref="P:System.Web.Security.SqlMembershipProvider.RequiresQuestionAndAnswer" />
+            >For more information, see <see cref="P:System.Web.Security.SqlMembershipProvider.RequiresQuestionAndAnswer" />
 
             
 
-            , <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+            , <see cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
             
 
-            , and <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+            , and <see cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
 
             
 
@@ -412,8 +371,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the update was successful; otherwise, false. A value of false is also returned if the <paramref
-             name="password" />
+            >true if the update was successful; otherwise, false. A value of false is also returned if the <paramref name="password" />
 
             
 
@@ -421,14 +379,22 @@
           >
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user to change the password question and answer for. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -498,90 +464,75 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
              class to remove a user from the SQL Server database specified in the ASP.NET application's configuration file.</para
           >
           <para
-            >Deleted users are only deleted from the configured <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+            >Deleted users are only deleted from the configured <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="deleteAllRelatedData" />
+            >If <paramref name="deleteAllRelatedData" />
 
             
 
-             is set to true, then all user data stored in the database for the <see
-             cref="T:System.Web.Security.Roles" />
+             is set to true, then all user data stored in the database for the <see cref="T:System.Web.Security.Roles" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpContext.Profile" />
+            , <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
-            , or <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+            , or <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
-             personalization features is also deleted for the configured <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+             personalization features is also deleted for the configured <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
             .</para
           >
           <para
-            >If the membership user does not exist in the database, and <paramref
-             name="deleteAllRelatedData" />
+            >If the membership user does not exist in the database, and <paramref name="deleteAllRelatedData" />
 
             
 
-             is true, then the related data and the user information stored for the <see
-             cref="T:System.Web.Security.Roles" />
+             is true, then the related data and the user information stored for the <see cref="T:System.Web.Security.Roles" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpContext.Profile" />
+            , <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
-            , or <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+            , or <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
             
 
-             personalization features will still be deleted for the application specified in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+             personalization features will still be deleted for the application specified in the <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
-             property. As a result, the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.DeleteUser(System.String,System.Boolean)" />
+             property. As a result, the <see cref="M:System.Web.Security.SqlMembershipProvider.DeleteUser(System.String,System.Boolean)" />
 
             
 
-             method can be used for quickly deleting information related to a user, even when the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             method can be used for quickly deleting information related to a user, even when the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
              object is not used for storing authenticated user information.</para
           >
           <para
-            >Leading and trailing spaces are trimmed from the <paramref
-             name="username" />
+            >Leading and trailing spaces are trimmed from the <paramref name="username" />
 
             
 
@@ -597,14 +548,22 @@
           <para>true if the user was deleted; otherwise, false. A value of false is also returned if the user does not exist in the database.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the user to delete.</param
         >
         <param name="deleteAllRelatedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -627,13 +586,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Password reset allows the membership provider to replace the current password for a user name with a new, randomly generated password. This is especially useful when the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+            >Password reset allows the membership provider to replace the current password for a user name with a new, randomly generated password. This is especially useful when the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+             property is set to <see cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
             
 
@@ -664,41 +621,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+            >If the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+             property is set to <see cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
             
 
-            , a user will not be able to retrieve his or her existing password from the database. The <see
-             cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+            , a user will not be able to retrieve his or her existing password from the database. The <see cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
             
 
              password format provides one-way encoding of password values. Passwords are hashed with a randomly generated salt value and compared to values stored in the database for authentication. Hashed values cannot be unencoded to retrieve the original password value.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+            >If the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+             property is set to <see cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
             
 
-            , and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
+            , and <see cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
 
             
 
-             is set to true, a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+             is set to true, a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
@@ -784,66 +734,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.Membership" />
+            >The <see cref="T:System.Web.Security.Membership" />
 
             
 
-             class provides a <see
-             cref="M:System.Web.Security.Membership.GeneratePassword(System.Int32,System.Int32)" />
+             class provides a <see cref="M:System.Web.Security.Membership.GeneratePassword(System.Int32,System.Int32)" />
 
             
 
-             method, which generates a password of a specified size with at least the specified number of non-alphabetic characters. The <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GeneratePassword" />
+             method, which generates a password of a specified size with at least the specified number of non-alphabetic characters. The <see cref="M:System.Web.Security.SqlMembershipProvider.GeneratePassword" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             method of the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
-             calls the <see
-             cref="M:System.Web.Security.Membership.GeneratePassword(System.Int32,System.Int32)" />
+             calls the <see cref="M:System.Web.Security.Membership.GeneratePassword(System.Int32,System.Int32)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Membership" />
+             method of the <see cref="T:System.Web.Security.Membership" />
 
             
 
-             class to retrieve a random password that is at least 14 characters long. If the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
+             class to retrieve a random password that is at least 14 characters long. If the <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
 
             
 
-             property is greater than 14, the password returned will be the length specified in the  <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
+             property is greater than 14, the password returned will be the length specified in the  <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
 
             
 
              property.</para
           >
           <para
-            >You can specifically call the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GeneratePassword" />
+            >You can specifically call the <see cref="M:System.Web.Security.SqlMembershipProvider.GeneratePassword" />
 
             
 
-             method by referencing the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             method by referencing the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
-             class directly from the <see
-             cref="P:System.Web.Security.Membership.Provider" />
+             class directly from the <see cref="P:System.Web.Security.Membership.Provider" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.Membership" />
+             property of the <see cref="T:System.Web.Security.Membership" />
 
             
 
@@ -852,23 +790,19 @@
           <para>The generated password only contains alphanumeric characters and the following punctuation marks: !@#$%^&amp;*()_-+=[{]};:&lt;&gt;|./?. No hidden or non-printable control characters are included in the generated password.</para>
           <block subset="none" type="note">
             <para
-              >The random password created by the <see
-               cref="M:System.Web.Security.SqlMembershipProvider.GeneratePassword" />
+              >The random password created by the <see cref="M:System.Web.Security.SqlMembershipProvider.GeneratePassword" />
 
               
 
-               method is not guaranteed to pass the regular expression in the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
+               method is not guaranteed to pass the regular expression in the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
 
               
 
-               property. However, the random password will meet the criteria established by the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
+               property. However, the random password will meet the criteria established by the <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
 
               
 
-               and <see
-               cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+               and <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
 
               
 
@@ -928,8 +862,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
@@ -940,16 +873,14 @@
 
             
 
-             returns the number of users of the current application whose last activity date and time is greater than the current date and time less the value of the <see
-             cref="P:System.Web.Security.Membership.UserIsOnlineTimeWindow" />
+             returns the number of users of the current application whose last activity date and time is greater than the current date and time less the value of the <see cref="P:System.Web.Security.Membership.UserIsOnlineTimeWindow" />
 
             
 
              property in minutes.</para
           >
           <para
-            >Only users associated with the configured <see
-             cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+            >Only users associated with the configured <see cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
 
             
 
@@ -988,92 +919,76 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.MembershipUser" />
+            >This method is called by the <see cref="T:System.Web.Security.MembershipUser" />
 
             
 
              class to retrieve the password for a user from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para
-            >If an incorrect password answer is supplied to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+            >If an incorrect password answer is supplied to the <see cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
 
             
 
-             method, the internal counter that tracks invalid password-answer attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
+             method, the internal counter that tracks invalid password-answer attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
 
             
 
-             method. If the correct password answer is supplied and the user is not currently locked out, then the internal counter that tracks invalid password-answer attempts is reset to zero. For more information, see the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             method. If the correct password answer is supplied and the user is not currently locked out, then the internal counter that tracks invalid password-answer attempts is reset to zero. For more information, see the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             and <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
              properties.</para
           >
           <para
-            >You can call the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+            >You can call the <see cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
 
             
 
-             method directly by first obtaining a reference to the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             method directly by first obtaining a reference to the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
-             instance through the <see
-             cref="P:System.Web.Security.Membership.Provider" />
+             instance through the <see cref="P:System.Web.Security.Membership.Provider" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.Membership" />
+             property of the <see cref="T:System.Web.Security.Membership" />
 
             
 
              class.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+            >If the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+             property is set to <see cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
             
 
-            , the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+            , the <see cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
 
             
 
-             method cannot retrieve the password. Hashed passwords are encrypted one-way and cannot be decrypted. If the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+             method cannot retrieve the password. Hashed passwords are encrypted one-way and cannot be decrypted. If the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+             property is set to <see cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
             
 
-            , and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
+            , and <see cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
 
             
 
-             is set to true, a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+             is set to true, a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
@@ -1090,7 +1005,11 @@
           <para>The password for the specified user name.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1123,13 +1042,11 @@
 
             
 
-             retrieves the user information from the data source and creates a <see
-             cref="T:System.Web.Security.MembershipUser" />
+             retrieves the user information from the data source and creates a <see cref="T:System.Web.Security.MembershipUser" />
 
             
 
-             object populated with the returned data. The user is identified using the unique identifier specified with the <paramref
-             name="providerUserKey" />
+             object populated with the returned data. The user is identified using the unique identifier specified with the <paramref name="providerUserKey" />
 
             
 
@@ -1143,13 +1060,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Security.MembershipUser" />
+            >A <see cref="T:System.Web.Security.MembershipUser" />
 
             
 
-             object representing the user associated with the specified unique identifier. If no user is found in the database for the specified <paramref
-             name="providerUserKey" />
+             object representing the user associated with the specified unique identifier. If no user is found in the database for the specified <paramref name="providerUserKey" />
 
             
 
@@ -1157,14 +1072,22 @@
           >
         </returns>
         <param name="providerUserKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unique identifier for the user.</param
         >
         <param name="userIsOnline">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1193,39 +1116,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
              class to retrieve user information from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para
-            >If <paramref
-             name="userIsOnline" />
+            >If <paramref name="userIsOnline" />
 
             
 
-             is true, the last activity date/time stamp for the user is updated to the current date and time. This is reflected in the <see
-             cref="P:System.Web.Security.MembershipUser.LastActivityDate" />
+             is true, the last activity date/time stamp for the user is updated to the current date and time. This is reflected in the <see cref="P:System.Web.Security.MembershipUser.LastActivityDate" />
 
             
 
-             and <see
-             cref="P:System.Web.Security.MembershipUser.IsOnline" />
+             and <see cref="P:System.Web.Security.MembershipUser.IsOnline" />
 
             
 
-             properties and in the value returned by <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GetNumberOfUsersOnline" />
+             properties and in the value returned by <see cref="M:System.Web.Security.SqlMembershipProvider.GetNumberOfUsersOnline" />
 
             
 
             .</para
           >
           <para
-            >Leading and trailing spaces are trimmed from the <paramref
-             name="username" />
+            >Leading and trailing spaces are trimmed from the <paramref name="username" />
 
             
 
@@ -1239,13 +1156,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Security.MembershipUser" />
+            >A <see cref="T:System.Web.Security.MembershipUser" />
 
             
 
-             object representing the specified user. If no user is found in the database for the specified <paramref
-             name="username" />
+             object representing the specified user. If no user is found in the database for the specified <paramref name="username" />
 
             
 
@@ -1253,14 +1168,22 @@
           >
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the user to get information for. </param
         >
         <param name="userIsOnline">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1288,8 +1211,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
@@ -1297,8 +1219,7 @@
           >
           <para>If more than one user in the membership database has the same e-mail address, the first user name encountered is returned. You can set the requiresUniqueEmail attribute to true in the application-configuration file to ensure that each e-mail address in the database is unique.</para>
           <para
-            >Leading and trailing spaces are trimmed from the <paramref
-             name="email" />
+            >Leading and trailing spaces are trimmed from the <paramref name="email" />
 
             
 
@@ -1314,7 +1235,11 @@
           <para>The user name associated with the specified e-mail address. If no match is found, this method returns null.</para>
         </returns>
         <param name="email">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1343,8 +1268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method initializes the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+            >This method initializes the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
@@ -1356,24 +1280,30 @@
           <para>Initializes the SQL Server membership provider with the property values specified in the ASP.NET application's configuration file. This method is not intended to be used directly from your code.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Web.Security.SqlMembershipProvider" />
+          The name of the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
           
 
            instance to initialize. </param
         >
         <param name="config">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          A <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
@@ -1399,64 +1329,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+            >The <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
 
             
 
-             works in conjunction with the <see
-             cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+             works in conjunction with the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
 
             
 
-             to guard against an unwanted source guessing the password or password answer of a membership user through repeated attempts. If the number of invalid passwords or password questions supplied for a membership user is greater than or equal to the value of the <see
-             cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+             to guard against an unwanted source guessing the password or password answer of a membership user through repeated attempts. If the number of invalid passwords or password questions supplied for a membership user is greater than or equal to the value of the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
 
             
 
-             property within the number of minutes identified by the value of the <see
-             cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+             property within the number of minutes identified by the value of the <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
 
             
 
-             property, then the membership user is locked out by setting the <see
-             cref="P:System.Web.Security.MembershipUser.IsLockedOut" />
+             property, then the membership user is locked out by setting the <see cref="P:System.Web.Security.MembershipUser.IsLockedOut" />
 
             
 
-             property to true until the user is unlocked with the <see
-             cref="M:System.Web.Security.MembershipUser.UnlockUser" />
+             property to true until the user is unlocked with the <see cref="M:System.Web.Security.MembershipUser.UnlockUser" />
 
             
 
-             method. If a valid password is supplied before the <see
-             cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+             method. If a valid password is supplied before the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
 
             
 
-             value is reached, the counters that track the number of invalid password and password-answer attempts are reset to zero. If a valid password answer is supplied before the <see
-             cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+             value is reached, the counters that track the number of invalid password and password-answer attempts are reset to zero. If a valid password answer is supplied before the <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
 
             
 
              value is reached, only the counter that tracks the number of invalid password-answer attempts is reset to zero. </para
           >
           <para
-            >The <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+            >The <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
              keeps counts of invalid password attempts and invalid password-answer attempts separately. Invalid password attempts result in only the password-attempt counter being incremented. Invalid password-answer attempts result in only the password-answer counter being incremented.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+            >The <see cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
 
             
 
-             property value is set in the application configuration using the maxInvalidPasswordAttempts attribute of the <format
-             type="text/html">
+             property value is set in the application configuration using the maxInvalidPasswordAttempts attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
 
@@ -1465,8 +1384,7 @@
              configuration section.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+            >If the <see cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
 
             
 
@@ -1497,26 +1415,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+            >The <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
 
             
 
-             property returns the minimum number of special, non-alphabetic characters that must be entered to create a valid password for the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             property returns the minimum number of special, non-alphabetic characters that must be entered to create a valid password for the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+            >The <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
 
             
 
-             property value is set in the application configuration using the minRequiredNonalphanumericCharacters attribute of the <format
-             type="text/html">
+             property value is set in the application configuration using the minRequiredNonalphanumericCharacters attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
 
@@ -1525,8 +1439,7 @@
              configuration element.</para
           >
           <para
-            >A non-alphanumeric character is a character for which the <see
-             cref="M:System.Char.IsLetterOrDigit(System.Char)" />
+            >A non-alphanumeric character is a character for which the <see cref="M:System.Char.IsLetterOrDigit(System.Char)" />
 
             
 
@@ -1561,21 +1474,18 @@
 
             
 
-             property gets the minimum number of characters that must be entered to create a valid password for the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             property gets the minimum number of characters that must be entered to create a valid password for the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Security.Membership.MinRequiredPasswordLength" />
+            >The <see cref="P:System.Web.Security.Membership.MinRequiredPasswordLength" />
 
             
 
-             property value is set in the application configuration using the minRequiredPasswordLength attribute of the <format
-             type="text/html">
+             property value is set in the application configuration using the minRequiredPasswordLength attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
 
@@ -1605,64 +1515,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+            >The <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
-             property works in conjunction with the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             property works in conjunction with the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             property to help guard against an unwanted source guessing the password or the password answer of a membership user through repeated attempts. When users are attempting to log in, change their password, or reset their password, only a certain number of consecutive attempts are allowed within a specified time window. The length of the time window is specified by the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             property to help guard against an unwanted source guessing the password or the password answer of a membership user through repeated attempts. When users are attempting to log in, change their password, or reset their password, only a certain number of consecutive attempts are allowed within a specified time window. The length of the time window is specified by the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
-             property, which identifies the number of minutes allowed between invalid attempts. If the number of consecutive failed attempts that a user makes to reset his or her password equals the value stored in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             property, which identifies the number of minutes allowed between invalid attempts. If the number of consecutive failed attempts that a user makes to reset his or her password equals the value stored in the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             property, and the time elapsed since the last invalid attempt is less than the number of minutes specified for the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             property, and the time elapsed since the last invalid attempt is less than the number of minutes specified for the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
-             property, then the membership user is locked out by setting the <see
-             cref="P:System.Web.Security.MembershipUser.IsLockedOut" />
+             property, then the membership user is locked out by setting the <see cref="P:System.Web.Security.MembershipUser.IsLockedOut" />
 
             
 
-             property to true. The user can be unlocked by calling the <see
-             cref="M:System.Web.Security.MembershipUser.UnlockUser" />
+             property to true. The user can be unlocked by calling the <see cref="M:System.Web.Security.MembershipUser.UnlockUser" />
 
             
 
-             method. If the interval between the current failed attempt and the last failed attempt is greater than the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             method. If the interval between the current failed attempt and the last failed attempt is greater than the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
              property setting, the current invalid attempt is counted as the first. If a valid password answer is supplied before the maximum number of allowed invalid attempts is reached, the count of invalid password-answer attempts is set to zero. If a valid password is supplied before the maximum number of allowed invalid attempts is reached, the count of invalid password attempts and the count of invalid password-answer attempts are set to zero.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+            >The <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
              keeps count of invalid password attempts and invalid password-answer attempts separately. Invalid password attempts result in only the password-attempt counter being incremented. Invalid password-answer attempts result in only the password-answer counter being incremented.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+            >The <see cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
 
             
 
-             property value is set in the application configuration using the passwordAttemptWindow attribute of the <format
-             type="text/html">
+             property value is set in the application configuration using the passwordAttemptWindow attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
 
@@ -1671,8 +1570,7 @@
              configuration section.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+            >If the <see cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
 
             
 
@@ -1704,13 +1602,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The SQL Server membership provider supports Clear, Encrypted, and Hashed password formats. Clear passwords are stored in plain text, which improves the performance of password storage and retrieval but is less secure, as passwords are easily read if your SQL Server database is compromised. Encrypted passwords are encrypted when stored and can be decrypted for password comparison or password retrieval. This requires additional processing for password storage and retrieval, but is more secure, as passwords cannot easily be determined if the SQL Server database is compromised. Hashed passwords are hashed using a one-way hash algorithm and a randomly generated salt value when stored in the database. When a password is validated, it is hashed with the salt value in the database for verification. Hashed passwords cannot be retrieved.</para>
           <para
-            >The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+            >The <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
-             value is specified in the <format
-             type="text/html">
+             value is specified in the <format type="text/html">
               <a href="27617d4a-205a-41f0-b2c3-a21aa223d2a9">providers</a>
             </format>
 
@@ -1719,37 +1615,32 @@
              section of the Web.config file for the ASP.NET application.</para
           >
           <para
-            >Encrypted and Hashed passwords are encrypted or hashed by default based on information supplied in the <format
-             type="text/html">
+            >Encrypted and Hashed passwords are encrypted or hashed by default based on information supplied in the <format type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
 
             
 
-             element in your configuration. Note that if you specify a value of 3DES for the validation attribute, or if no value is specified, hashed passwords will be hashed using the <see
-             cref="T:System.Security.Cryptography.SHA1" />
+             element in your configuration. Note that if you specify a value of 3DES for the validation attribute, or if no value is specified, hashed passwords will be hashed using the <see cref="T:System.Security.Cryptography.SHA1" />
 
             
 
              algorithm.</para
           >
           <para
-            >A custom hash algorithm can be defined using the hashAlgorithmType attribute of the <format
-             type="text/html">
+            >A custom hash algorithm can be defined using the hashAlgorithmType attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
 
             
 
-             configuration element. If you choose encryption, default password encryption uses AES. You can change the encryption algorithm by setting the decryption attribute of the <format
-             type="text/html">
+             configuration element. If you choose encryption, default password encryption uses AES. You can change the encryption algorithm by setting the decryption attribute of the <format type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
 
             
 
-             configuration element. If you are encrypting passwords, you must provide an explicit value for the decryptionKey attribute in the <format
-             type="text/html">
+             configuration element. If you are encrypting passwords, you must provide an explicit value for the decryptionKey attribute in the <format type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
 
@@ -1782,26 +1673,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
+            >The <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
 
             
 
-             property gets the regular expression used to evaluate password complexity for the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             property gets the regular expression used to evaluate password complexity for the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" />
+            >The <see cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" />
 
             
 
-             property is set in the application configuration using the passwordStrengthRegularExpression attribute of the <format
-             type="text/html">
+             property is set in the application configuration using the passwordStrengthRegularExpression attribute of the <format type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
 
@@ -1834,31 +1721,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Requiring a password question and answer provides an additional layer of security when retrieving or resetting a user's password. When creating a user name, a user can supply a question and answer that can later be used to retrieve or reset a forgotten password. If the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordReset" />
+            >Requiring a password question and answer provides an additional layer of security when retrieving or resetting a user's password. When creating a user name, a user can supply a question and answer that can later be used to retrieve or reset a forgotten password. If the <see cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordReset" />
 
             
 
-             property and the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
+             property and the <see cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
 
             
 
-             property are both false, the value of the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.RequiresQuestionAndAnswer" />
+             property are both false, the value of the <see cref="P:System.Web.Security.SqlMembershipProvider.RequiresQuestionAndAnswer" />
 
             
 
              property is irrelevant.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+            >For more information, see <see cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
             
 
-             and <see
-             cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+             and <see cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
 
             
 
@@ -1912,8 +1794,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
@@ -1921,23 +1802,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The random password created by the <see
-               cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+              >The random password created by the <see cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
               
 
-               method is not guaranteed to pass the regular expression in the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
+               method is not guaranteed to pass the regular expression in the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
 
               
 
-               property. However, the random password will meet the criteria established by the <see
-               cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
+               property. However, the random password will meet the criteria established by the <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
 
               
 
-               and <see
-               cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+               and <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
 
               
 
@@ -1945,74 +1822,61 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+            >The <see cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
             
 
-             method is most commonly used when the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+             method is most commonly used when the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
 
             
 
              property is set to Hashed. If a user forgets a password that is hashed, the password cannot be retrieved. However, the provider can reset the password to a new, automatically generated password if the user supplies the correct password answer.</para
           >
           <para
-            >If an incorrect password answer is supplied to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+            >If an incorrect password answer is supplied to the <see cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
             
 
-             method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
+             method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
 
             
 
-             method. If the correct password answer is supplied and the user is not currently locked out, then the internal counter that tracks invalid password-answer attempts is reset to zero. For more information, see the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             method. If the correct password answer is supplied and the user is not currently locked out, then the internal counter that tracks invalid password-answer attempts is reset to zero. For more information, see the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             and <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
              properties.</para
           >
           <para
-            >You can call the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+            >You can call the <see cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
             
 
-             method directly by first obtaining a reference to the <see
-             cref="T:System.Web.Security.SqlMembershipProvider" />
+             method directly by first obtaining a reference to the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
             
 
-             instance from the <see
-             cref="P:System.Web.Security.Membership.Provider" />
+             instance from the <see cref="P:System.Web.Security.Membership.Provider" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Security.Membership" />
+             property of the <see cref="T:System.Web.Security.Membership" />
 
             
 
-             class. The generated password will be at least 14 characters long, or the length specified in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
+             class. The generated password will be at least 14 characters long, or the length specified in the <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
 
             
 
-             property, and will contain the number of non-alphanumeric characters specified in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+             property, and will contain the number of non-alphanumeric characters specified in the <see cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
 
             
 
-             property. The password is not guaranteed to pass the regular expression contained in the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
+             property. The password is not guaranteed to pass the regular expression contained in the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
 
             
 
@@ -2029,7 +1893,11 @@
           <para>The new password for the specified user.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2054,26 +1922,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Users are most commonly locked out and cannot be validated by the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ValidateUser(System.String,System.String)" />
+            >Users are most commonly locked out and cannot be validated by the <see cref="M:System.Web.Security.SqlMembershipProvider.ValidateUser(System.String,System.String)" />
 
             
 
-             method when the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             method when the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             is exceeded within the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             is exceeded within the <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
             .</para
           >
           <para
-            >Leading and trailing spaces are trimmed from the <paramref
-             name="username" />
+            >Leading and trailing spaces are trimmed from the <paramref name="username" />
 
             
 
@@ -2089,7 +1953,11 @@
           <para>true if the membership user was successfully unlocked; otherwise, false. A value of false is also returned if the user does not exist in the database.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2117,64 +1985,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
-             class to update user information for a user in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). The <see
-             cref="P:System.Web.Security.MembershipUser.Email" />
+             class to update user information for a user in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). The <see cref="P:System.Web.Security.MembershipUser.Email" />
 
             
 
-            , <see
-             cref="P:System.Web.Security.MembershipUser.Comment" />
+            , <see cref="P:System.Web.Security.MembershipUser.Comment" />
 
             
 
-            , <see
-             cref="P:System.Web.Security.MembershipUser.IsApproved" />
+            , <see cref="P:System.Web.Security.MembershipUser.IsApproved" />
 
             
 
-            , <see
-             cref="P:System.Web.Security.MembershipUser.LastLoginDate" />
+            , <see cref="P:System.Web.Security.MembershipUser.LastLoginDate" />
 
             
 
-            , and <see
-             cref="P:System.Web.Security.MembershipUser.LastActivityDate" />
+            , and <see cref="P:System.Web.Security.MembershipUser.LastActivityDate" />
 
             
 
              property values are updated for the specified membership user.</para
           >
           <para
-            >The maximum length for the <see
-             cref="P:System.Web.Security.MembershipUser.UserName" />
+            >The maximum length for the <see cref="P:System.Web.Security.MembershipUser.UserName" />
 
             
 
-             property is 256 characters. The maximum length for the <see
-             cref="P:System.Web.Security.MembershipUser.Email" />
+             property is 256 characters. The maximum length for the <see cref="P:System.Web.Security.MembershipUser.Email" />
 
             
 
              property is 256 characters.</para
           >
           <para
-            >The password for a membership user cannot be updated using the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)" />
+            >The password for a membership user cannot be updated using the <see cref="M:System.Web.Security.SqlMembershipProvider.UpdateUser(System.Web.Security.MembershipUser)" />
 
             
 
-             method. To update the password for a membership user, use the <see
-             cref="M:System.Web.Security.MembershipUser.ChangePassword(System.String,System.String)" />
+             method. To update the password for a membership user, use the <see cref="M:System.Web.Security.MembershipUser.ChangePassword(System.String,System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.MembershipUser" />
+             method of the <see cref="T:System.Web.Security.MembershipUser" />
 
             
 
@@ -2186,12 +2043,15 @@
           <para>Updates information about a user in the SQL Server membership database.</para>
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Security.MembershipUser" />
+          A <see cref="T:System.Web.Security.MembershipUser" />
 
           
 
@@ -2220,8 +2080,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the <see
-             cref="T:System.Web.Security.Membership" />
+            >This method is called by the <see cref="T:System.Web.Security.Membership" />
 
             
 
@@ -2229,23 +2088,19 @@
           >
           <para>When a user is successfully validated, the last activity date and last sign-in date values are updated to the current date and time in the database.</para>
           <para
-            >If an incorrect password is supplied to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.ValidateUser(System.String,System.String)" />
+            >If an incorrect password is supplied to the <see cref="M:System.Web.Security.SqlMembershipProvider.ValidateUser(System.String,System.String)" />
 
             
 
-             method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see
-             cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
+             method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
 
             
 
-             method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see
-             cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+             method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
             
 
-             and <see
-             cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+             and <see cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
 
             
 
@@ -2262,14 +2117,22 @@
           <para>true if the specified username and password are valid; otherwise, false. A value of false is also returned if the user does not exist in the database.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the user to validate. </param
         >
         <param name="password">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

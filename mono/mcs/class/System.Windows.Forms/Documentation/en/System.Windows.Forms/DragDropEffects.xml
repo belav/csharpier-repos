@@ -18,41 +18,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the following classes: <see
-         cref="T:System.Windows.Forms.DragEventArgs" />
+        >This enumeration is used by the following classes: <see cref="T:System.Windows.Forms.DragEventArgs" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+        , <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.Control" />
+        , and <see cref="T:System.Windows.Forms.Control" />
 
         
 
         .</para
       >
       <para
-        >You can use <see
-         cref="T:System.Windows.Forms.DragDropEffects" />
+        >You can use <see cref="T:System.Windows.Forms.DragDropEffects" />
 
         
 
-         to display different mouse pointers for drag-and-drop operations. For example, you can display a plus symbol for a <see
-         cref="F:System.Windows.Forms.DragDropEffects.Copy" />
+         to display different mouse pointers for drag-and-drop operations. For example, you can display a plus symbol for a <see cref="F:System.Windows.Forms.DragDropEffects.Copy" />
 
         
 
-         drag-and-drop operation, an arrow symbol for a <see
-         cref="F:System.Windows.Forms.DragDropEffects.Move" />
+         drag-and-drop operation, an arrow symbol for a <see cref="F:System.Windows.Forms.DragDropEffects.Move" />
 
         
 
-         drag-and-drop operation, or a red circle with a line through it symbol for a <see
-         cref="F:System.Windows.Forms.DragDropEffects.None" />
+         drag-and-drop operation, or a red circle with a line through it symbol for a <see cref="F:System.Windows.Forms.DragDropEffects.None" />
 
         
 
@@ -84,18 +77,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The combination of the <see
-             cref="F:System.Windows.DragDropEffects.Copy" />
+            >The combination of the <see cref="F:System.Windows.DragDropEffects.Copy" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.DragDropEffects.Move" />
+            , <see cref="F:System.Windows.Forms.DragDropEffects.Move" />
 
             
 
-            , and <see
-             cref="F:System.Windows.Forms.DragDropEffects.Scroll" />
+            , and <see cref="F:System.Windows.Forms.DragDropEffects.Scroll" />
 
             
 

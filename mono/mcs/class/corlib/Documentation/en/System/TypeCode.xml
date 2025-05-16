@@ -25,31 +25,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Call the <see
-         cref="M:System.IConvertible.GetTypeCode" />
+        >Call the <see cref="M:System.IConvertible.GetTypeCode" />
 
         
 
-         method on classes that implement the <see
-         cref="T:System.IConvertible" />
+         method on classes that implement the <see cref="T:System.IConvertible" />
 
         
 
          interface to obtain the type code for an instance of that class.</para
       >
       <para
-        >Otherwise, call an object's <see
-         cref="M:System.Object.GetType" />
+        >Otherwise, call an object's <see cref="M:System.Object.GetType" />
 
         
 
-         method to obtain its <see
-         cref="T:System.Type" />
+         method to obtain its <see cref="T:System.Type" />
 
         
 
-         object, then call the Type object's <see
-         cref="M:System.Type.GetTypeCode(System.Type)" />
+         object, then call the Type object's <see cref="M:System.Type.GetTypeCode(System.Type)" />
 
         
 
@@ -131,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integral type representing unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the <see
-             cref="F:System.TypeCode.Char" />
+            >An integral type representing unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the <see cref="F:System.TypeCode.Char" />
 
             
 
@@ -210,13 +204,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A simple type representing values ranging from 1.0 x 10 <superscript
-            >-28</superscript>
+            >A simple type representing values ranging from 1.0 x 10 <superscript>-28</superscript>
 
             
 
-             to approximately 7.9 x 10 <superscript
-            >28</superscript>
+             to approximately 7.9 x 10 <superscript>28</superscript>
 
             
 
@@ -246,13 +238,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A floating point type representing values ranging from approximately 5.0 x 10 <superscript
-            >-324</superscript>
+            >A floating point type representing values ranging from approximately 5.0 x 10 <superscript>-324</superscript>
 
             
 
-             to 1.7 x 10 <superscript
-            >308</superscript>
+             to 1.7 x 10 <superscript>308</superscript>
 
             
 
@@ -426,13 +416,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A floating point type representing values ranging from approximately 1.5 x 10 <superscript
-            >-45</superscript>
+            >A floating point type representing values ranging from approximately 1.5 x 10 <superscript>-45</superscript>
 
             
 
-             to 3.4 x 10 <superscript
-            >38</superscript>
+             to 3.4 x 10 <superscript>38</superscript>
 
             
 

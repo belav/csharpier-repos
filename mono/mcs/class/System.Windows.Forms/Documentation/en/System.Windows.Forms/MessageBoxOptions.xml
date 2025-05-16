@@ -18,16 +18,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Windows.Forms.MessageBox" />
+        >This enumeration is used by the <see cref="T:System.Windows.Forms.MessageBox" />
 
         
 
          class.</para
       >
       <para
-        >If you do not want to specify this parameter when calling methods on <see
-         cref="T:System.Windows.Forms.MessageBox" />
+        >If you do not want to specify this parameter when calling methods on <see cref="T:System.Windows.Forms.MessageBox" />
 
         
 
@@ -37,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies options on a <see
-         cref="T:System.Windows.Forms.MessageBox" />
+        >Specifies options on a <see cref="T:System.Windows.Forms.MessageBox" />
 
         
 
@@ -62,18 +59,15 @@
 
             
 
-             will cause the application that raised the <see
-             cref="T:System.Windows.Forms.MessageBox" />
+             will cause the application that raised the <see cref="T:System.Windows.Forms.MessageBox" />
 
             
 
-             to lose focus. The <see
-             cref="T:System.Windows.Forms.MessageBox" />
+             to lose focus. The <see cref="T:System.Windows.Forms.MessageBox" />
 
             
 
-             that is displayed will not use visual styles. For more information, see <format
-             type="text/html">
+             that is displayed will not use visual styles. For more information, see <format type="text/html">
               <a href="a5b178ba-610e-46c4-a6c0-509c0886a744"
                 >Rendering Controls with Visual Styles</a
               >

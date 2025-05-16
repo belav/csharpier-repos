@@ -54,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.MessageBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.MessageBinding" />
 
             
 
@@ -128,13 +127,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each of the classes derived from the <see
-             cref="T:System.Web.Services.Description.MessageBinding" />
+            >Each of the classes derived from the <see cref="T:System.Web.Services.Description.MessageBinding" />
 
             
 
-             class corresponds to a Web Services Description Language (WSDL) element (&lt;input&gt;, &lt;output&gt; or &lt;fault&gt;) enclosed by the &lt;operation&gt; element, which is in turn enclosed by the &lt;binding&gt; element. The <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+             class corresponds to a Web Services Description Language (WSDL) element (&lt;input&gt;, &lt;output&gt; or &lt;fault&gt;) enclosed by the &lt;operation&gt; element, which is in turn enclosed by the &lt;binding&gt; element. The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -145,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Gets the <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             of which the current <see
-             cref="T:System.Web.Services.Description.MessageBinding" />
+             of which the current <see cref="T:System.Web.Services.Description.MessageBinding" />
 
             
 

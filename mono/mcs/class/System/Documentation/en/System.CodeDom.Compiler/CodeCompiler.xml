@@ -38,20 +38,17 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -64,8 +61,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an example implementation of the <see
-         cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+        >Provides an example implementation of the <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
         
 
@@ -93,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
@@ -129,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the command arguments to be passed to the compiler from the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerParameters" />
+            >Gets the command arguments to be passed to the compiler from the specified <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
             
 
@@ -142,12 +136,15 @@
           <para>The command arguments.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
@@ -236,24 +233,30 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
@@ -294,24 +297,30 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="ea">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          An array of <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
@@ -352,19 +361,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -405,19 +421,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="fileNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -458,19 +481,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -511,19 +541,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="sources">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,19 +606,26 @@
           <para>The command arguments to use to generate a response file, or null if there are no response file arguments.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="cmdArgs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -622,14 +666,22 @@
           <para>The concatenated string.</para>
         </returns>
         <param name="sa">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of strings to join. </param
         >
         <param name="separator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -664,8 +716,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes the specified line from the specified <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >Processes the specified line from the specified <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
@@ -673,19 +724,26 @@
           >
         </summary>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerResults" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
           
 
            that indicates the results of compilation. </param
         >
         <param name="line">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -719,13 +777,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+             instance is cast to an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -735,8 +791,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit)" />
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDom(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit)" />
 
             
 
@@ -748,24 +803,30 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
@@ -799,13 +860,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+             instance is cast to an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -815,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit[])" />
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromDomBatch(System.CodeDom.Compiler.CompilerParameters,System.CodeDom.CodeCompileUnit[])" />
 
             
 
@@ -828,24 +886,30 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="ea">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeCompileUnit" />
+          An array of <see cref="T:System.CodeDom.CodeCompileUnit" />
 
           
 
@@ -879,13 +943,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+             instance is cast to an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -895,8 +957,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile(System.CodeDom.Compiler.CompilerParameters,System.String)" />
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFile(System.CodeDom.Compiler.CompilerParameters,System.String)" />
 
             
 
@@ -908,19 +969,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -954,13 +1022,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+             instance is cast to an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -970,8 +1036,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromFileBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />
 
             
 
@@ -983,19 +1048,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="fileNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1029,13 +1101,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+             instance is cast to an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -1045,8 +1115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSource(System.CodeDom.Compiler.CompilerParameters,System.String)" />
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSource(System.CodeDom.Compiler.CompilerParameters,System.String)" />
 
             
 
@@ -1058,19 +1127,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1104,13 +1180,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.Compiler.CodeCompiler" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.Compiler.CodeCompiler" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+             instance is cast to an <see cref="T:System.CodeDom.Compiler.ICodeCompiler" />
 
             
 
@@ -1120,8 +1194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />
+            >For a description of this member, see <see cref="M:System.CodeDom.Compiler.ICodeCompiler.CompileAssemblyFromSourceBatch(System.CodeDom.Compiler.CompilerParameters,System.String[])" />
 
             
 
@@ -1133,19 +1206,26 @@
           <para>The results of compilation.</para>
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerParameters" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
           
 
            object that indicates the compiler options. </param
         >
         <param name="sources">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

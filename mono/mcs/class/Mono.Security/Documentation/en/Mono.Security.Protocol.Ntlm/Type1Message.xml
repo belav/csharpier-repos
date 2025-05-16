@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -87,21 +89,18 @@
       <Docs>
         <summary>The (NT) domain of the host computer asking for a challenge from the server.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            representing the domain name of the current computer.</value
         >
         <remarks
-          >Defaults to <see
-           cref="T:System.Environment" />
+          >Defaults to <see cref="T:System.Environment" />
 
           
 
-          .<see
-           cref="P:System.Environment.UserDomainName" />
+          .<see cref="P:System.Environment.UserDomainName" />
 
           
 
@@ -140,21 +139,18 @@
       <Docs>
         <summary>The host (computer name) asking for a challenge from the server.</summary>
         <value
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            representing the current (NetBIOS) host name of the computer.</value
         >
         <remarks
-          >Defaults to <see
-           cref="T:System.Environment" />
+          >Defaults to <see cref="T:System.Environment" />
 
           
 
-          .<see
-           cref="P:System.Environment.MachineName" />
+          .<see cref="P:System.Environment.MachineName" />
 
           
 

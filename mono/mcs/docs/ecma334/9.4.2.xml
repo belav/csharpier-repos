@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <clause number="9.4.2" title="Identifiers">
   <paragraph
-    >The rules for identifiers given in this section correspond exactly to those recommended by the Unicode Standard Annex 15 except that underscore is allowed as an initial character (as is traditional in the C programming language), Unicode escape sequences are permitted in identifiers, and the "@" character is allowed as a prefix to enable keywords to be used as identifiers. <grammar_production
-    >
+    >The rules for identifiers given in this section correspond exactly to those recommended by the Unicode Standard Annex 15 except that underscore is allowed as an initial character (as is traditional in the C programming language), Unicode escape sequences are permitted in identifiers, and the "@" character is allowed as a prefix to enable keywords to be used as identifiers. <grammar_production>
       <name>identifier</name>
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.2">available-identifier</non_terminal>
       </rhs>
       <rhs>
@@ -24,14 +22,13 @@
       
 
        :: <rhs
-
-        >An <non_terminal
-         where="9.4.2">identifier-or-keyword</non_terminal>
+        >An <non_terminal where="9.4.2"
+          >identifier-or-keyword</non_terminal
+        >
 
         
 
-         that is not a <non_terminal
-         where="9.4.3">keyword</non_terminal>
+         that is not a <non_terminal where="9.4.3">keyword</non_terminal>
       </rhs>
     </grammar_production>
     <grammar_production>
@@ -41,8 +38,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.2">identifier-start-character</non_terminal>
         <non_terminal where="9.4.2">identifier-part-characters</non_terminal>
         <opt />
@@ -55,15 +51,16 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.2">letter-character</non_terminal>
       </rhs>
       <rhs>_ (the underscore character U+005F) </rhs>
     </grammar_production>
     <grammar_production>
       <name>
-        <non_terminal where="9.4.2">identifier-part-character</non_terminal>
+        <non_terminal where="9.4.2"
+          >identifier-part-character</non_terminal
+        >
 
         
 
@@ -72,8 +69,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.2">identifier-part-character</non_terminal>
       </rhs>
       <rhs>
@@ -88,8 +84,7 @@
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.2">letter-character</non_terminal>
       </rhs>
       <rhs>
@@ -112,11 +107,11 @@
 
       
 
-       :: <rhs
-      >A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs>
+       :: <rhs>A Unicode character of classes Lu, Ll, Lt, Lm, Lo, or Nl </rhs>
       <rhs
-        >A <non_terminal
-         where="9.4.1">unicode-escape-sequence</non_terminal>
+        >A <non_terminal where="9.4.1"
+          >unicode-escape-sequence</non_terminal
+        >
 
         
 
@@ -130,11 +125,11 @@
 
       
 
-       :: <rhs
-      >A Unicode character of classes Mn or Mc </rhs>
+       :: <rhs>A Unicode character of classes Mn or Mc </rhs>
       <rhs
-        >A <non_terminal
-         where="9.4.1">unicode-escape-sequence</non_terminal>
+        >A <non_terminal where="9.4.1"
+          >unicode-escape-sequence</non_terminal
+        >
 
         
 
@@ -148,11 +143,11 @@
 
       
 
-       :: <rhs
-      >A Unicode character of the class Nd </rhs>
+       :: <rhs>A Unicode character of the class Nd </rhs>
       <rhs
-        >A <non_terminal
-         where="9.4.1">unicode-escape-sequence</non_terminal>
+        >A <non_terminal where="9.4.1"
+          >unicode-escape-sequence</non_terminal
+        >
 
         
 
@@ -166,11 +161,11 @@
 
       
 
-       :: <rhs
-      >A Unicode character of the class Pc </rhs>
+       :: <rhs>A Unicode character of the class Pc </rhs>
       <rhs
-        >A <non_terminal
-         where="9.4.1">unicode-escape-sequence</non_terminal>
+        >A <non_terminal where="9.4.1"
+          >unicode-escape-sequence</non_terminal
+        >
 
         
 
@@ -184,11 +179,11 @@
 
       
 
-       :: <rhs
-      >A Unicode character of the class Cf </rhs>
+       :: <rhs>A Unicode character of the class Cf </rhs>
       <rhs
-        >A <non_terminal
-         where="9.4.1">unicode-escape-sequence</non_terminal>
+        >A <non_terminal where="9.4.1"
+          >unicode-escape-sequence</non_terminal
+        >
 
         
 
@@ -204,13 +199,11 @@
   </paragraph>
   <paragraph>An identifier in a conforming program must be in the canonical format defined by Unicode Normalization Form C, as defined by Unicode Standard Annex 15. The behavior when encountering an identifier not in Normalization Form C is implementation-defined; however, a diagnostic is not required. </paragraph>
   <paragraph
-    >The prefix "@" enables the use of keywords as identifiers, which is useful when interfacing with other programming languages. The character @ is not actually part of the identifier, so the identifier might be seen in other languages as a normal identifier, without the prefix. An identifier with an @ prefix is called a verbatim identifier. <note
-    >[Note: Use of the @ prefix for identifiers that are not keywords is permitted, but strongly discouraged as a matter of style. end note]</note>
+    >The prefix "@" enables the use of keywords as identifiers, which is useful when interfacing with other programming languages. The character @ is not actually part of the identifier, so the identifier might be seen in other languages as a normal identifier, without the prefix. An identifier with an @ prefix is called a verbatim identifier. <note>[Note: Use of the @ prefix for identifiers that are not keywords is permitted, but strongly discouraged as a matter of style. end note]</note>
   </paragraph>
   <paragraph>
     <example
-      >[Example: The example: <code_example
-      >
+      >[Example: The example: <code_example>
         <![CDATA[
 class @class  
 {  
@@ -236,20 +229,21 @@ class Class1
     >
   </paragraph>
   <paragraph
-    >Two identifiers are considered the same if they are identical after the following transformations are applied, in order: <list
-    >
+    >Two identifiers are considered the same if they are identical after the following transformations are applied, in order: <list>
       <list_item> The prefix "@", if used, is removed. </list_item>
       <list_item
-        > Each <non_terminal
-         where="9.4.1">unicode-escape-sequence</non_terminal>
+        > Each <non_terminal where="9.4.1"
+          >unicode-escape-sequence</non_terminal
+        >
 
         
 
          is transformed into its corresponding Unicode character. </list_item
       >
       <list_item
-        > Any <non_terminal
-         where="9.4.2">formatting-character</non_terminal>
+        > Any <non_terminal where="9.4.2"
+          >formatting-character</non_terminal
+        >
 
         
 
@@ -258,7 +252,6 @@ class Class1
     </list>
   </paragraph>
   <paragraph
-    >Identifiers containing two consecutive underscore characters (U+005F) are reserved for use by the implementation; however, no diagnostic is required if such an identifier is defined. <note
-    >[Note: For example, an implementation might provide extended keywords that begin with two underscores. end note]</note>
+    >Identifiers containing two consecutive underscore characters (U+005F) are reserved for use by the implementation; however, no diagnostic is required if such an identifier is defined. <note>[Note: For example, an implementation might provide extended keywords that begin with two underscores. end note]</note>
   </paragraph>
 </clause>

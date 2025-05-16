@@ -21,28 +21,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A hatch pattern is made from two colors: one defined by the <see
-         cref="P:System.Drawing.Drawing2D.HatchBrush.BackgroundColor" />
+        >A hatch pattern is made from two colors: one defined by the <see cref="P:System.Drawing.Drawing2D.HatchBrush.BackgroundColor" />
 
         
 
-        , which fills the background and one for the lines that form the pattern over the background defined by the <see
-         cref="P:System.Drawing.Drawing2D.HatchBrush.ForegroundColor" />
+        , which fills the background and one for the lines that form the pattern over the background defined by the <see cref="P:System.Drawing.Drawing2D.HatchBrush.ForegroundColor" />
 
         
 
-         property. The <see
-         cref="P:System.Drawing.Drawing2D.HatchBrush.HatchStyle" />
+         property. The <see cref="P:System.Drawing.Drawing2D.HatchBrush.HatchStyle" />
 
         
 
-         property defines what type of pattern the brush has and can be any value from the <see
-         cref="T:System.Drawing.Drawing2D.HatchStyle" />
+         property defines what type of pattern the brush has and can be any value from the <see cref="T:System.Drawing.Drawing2D.HatchStyle" />
 
         
 
-         enumeration. There are more than fifty elements in the <see
-         cref="T:System.Drawing.Drawing2D.HatchStyle" />
+         enumeration. There are more than fifty elements in the <see cref="T:System.Drawing.Drawing2D.HatchStyle" />
 
         
 
@@ -79,13 +74,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Drawing2D.HatchStyle" />
+             class with the specified <see cref="T:System.Drawing.Drawing2D.HatchStyle" />
 
             
 
@@ -93,17 +86,19 @@
           >
         </summary>
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
-           structure that represents the color of lines drawn by this <see
-           cref="T:System.Drawing.Drawing2D.HatchBrush" />
+           structure that represents the color of lines drawn by this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
           
 
@@ -139,13 +134,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 
-             class with the specified <see
-             cref="T:System.Drawing.Drawing2D.HatchStyle" />
+             class with the specified <see cref="T:System.Drawing.Drawing2D.HatchStyle" />
 
             
 
@@ -153,34 +146,38 @@
           >
         </summary>
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
-           structure that represents the color of lines drawn by this <see
-           cref="T:System.Drawing.Drawing2D.HatchBrush" />
+           structure that represents the color of lines drawn by this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
           
 
           . </param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
-           structure that represents the color of spaces between the lines drawn by this <see
-           cref="T:System.Drawing.Drawing2D.HatchBrush" />
+           structure that represents the color of spaces between the lines drawn by this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
           
 
@@ -204,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the color of spaces between the hatch lines drawn by this <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >Gets the color of spaces between the hatch lines drawn by this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 
@@ -230,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 
@@ -241,8 +236,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >The <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 
@@ -267,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the color of hatch lines drawn by this <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >Gets the color of hatch lines drawn by this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 
@@ -296,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hatch style of this <see
-             cref="T:System.Drawing.Drawing2D.HatchBrush" />
+            >Gets the hatch style of this <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
             
 

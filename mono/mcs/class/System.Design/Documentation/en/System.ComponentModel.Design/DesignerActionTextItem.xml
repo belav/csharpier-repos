@@ -16,21 +16,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DesignerActionTextItem" />
+        >The <see cref="T:System.ComponentModel.Design.DesignerActionTextItem" />
 
         
 
-         class represents individual static text items in a smart tag panel. Individual items are associated together to form a panel by returning the group from a call to the <see
-         cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+         class represents individual static text items in a smart tag panel. Individual items are associated together to form a panel by returning the group from a call to the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
         
 
          method.</para
       >
       <para
-        >Most commonly, a static text item is used to create an informative label in a panel. Clicking on a static text item causes no action. The derived type <see
-         cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+        >Most commonly, a static text item is used to create an informative label in a panel. Clicking on a static text item causes no action. The derived type <see cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
 
         
 
@@ -60,26 +57,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.DesignerActionTextItem.#ctor(System.String,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.DesignerActionTextItem.#ctor(System.String,System.String)" />
 
             
 
-             constructor sets the <see
-             cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+             constructor sets the <see cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
 
             
 
              property to null.</para
           >
           <para
-            >For more information about how the <paramref
-             name="category" />
+            >For more information about how the <paramref name="category" />
 
             
 
-             parameter is used to group items on a panel, see the <see
-             cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+             parameter is used to group items on a panel, see the <see cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
 
             
 
@@ -89,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.DesignerActionTextItem" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.DesignerActionTextItem" />
 
             
 
@@ -98,14 +90,22 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The panel text for this item.</param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -589,13 +589,10 @@
         </OrderDates>
       </EmployeeIDs>
     </CustomerIDs>
-  </OrderIDs>
-
-  <![CDATA[ This section contains characters that should not
+  </OrderIDs><![CDATA[ This section contains characters that should not
 		                   be interpreted as markup. For example, characters ', ",
 		                   <, >, and & are all fine here.
-		]]>
-  <OrderIDs>
+		]]><OrderIDs>
     <OrderID Required="False" AllowZeroLength="False">10255</OrderID>
     <CustomerIDs>
       <CustomerID FieldSize="Error">RICSU</CustomerID>
@@ -861,7 +858,9 @@
           <ShipCountry>Sweden</ShipCountry>
         </testing:OrderDates>
         <Testing:OrderDates xmlns:Testing="urn:test">
-          <OrderDate Format="Medium Date" ColumnOrder="0">8/24/94</OrderDate>
+          <OrderDate Format="Medium Date" ColumnOrder="0"
+            >8/24/94</OrderDate
+          >
 
           
 
@@ -1012,9 +1011,7 @@
           <ShipPostalCode Value="1081" Attributes="2" CollatingOrder="1033">1081</ShipPostalCode>
           <ShipCountry>Venezuela</ShipCountry>
         </OrderDates>
-      </EmployeeIDs>
-
-      <![CDATA[ Another cdata section]]>
+      </EmployeeIDs><![CDATA[ Another cdata section]]>
     </CustomerIDs>
   </OrderIDs>
   <OrderIDs>
@@ -1138,8 +1135,9 @@
     </CustomerIDs>
     <CustomerIDs
       >Duplicate
-				                        <CustomerID
-       DataUpdatable="False" ForeignName="Error">SPLIRb</CustomerID>
+				                        <CustomerID DataUpdatable="False" ForeignName="Error"
+        >SPLIRb</CustomerID
+      >
       <Custo world="hello">dumb name-b</Custo>
       <my:namespace xmlns:my="urn:hello there">test name2b</my:namespace>
       <EmployeeIDs>
@@ -1309,8 +1307,7 @@
   <OrderIDs>
     <OrderID Caption="Order ID">10278</OrderID>
     <CustomerIDs>
-      <![CDATA[ Third cdata section]]>
-      <CustomerID>BERGS</CustomerID>
+      <![CDATA[ Third cdata section]]><CustomerID>BERGS</CustomerID>
       <EmployeeIDs>
         <EmployeeID>8</EmployeeID>
         <OrderDates>
@@ -1457,8 +1454,7 @@
     </CustomerIDs>
   </OrderIDs>
   <OrderIDs>
-    <![CDATA[ Last cdata section.]]>
-    <OrderID ColumnOrder="0">10285</OrderID>
+    <![CDATA[ Last cdata section.]]><OrderID ColumnOrder="0">10285</OrderID>
     <CustomerIDs>
       <CustomerID ColumnHidden="False" ColumnWidth="3090">QUICK</CustomerID>
       <EmployeeIDs>

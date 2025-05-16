@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -23,8 +25,7 @@
     <remarks>
       <para>Converting private keys into byte arrays may cause security risks. You should always zeroize buffers with sensitive informations after their use.</para>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 	// create a 1024 bits key pair
 	RSA rsa = RSA.Create ();
 	// convert the key pair into a CryptoAPI PRIVATEKEYBLOB
@@ -60,8 +61,7 @@
         >
         <summary>Convert the key from either a CryptoAPI PUBLICKEYBLOB structure or PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -92,8 +92,7 @@
           >an array of bytes containing either a PUBLICKEYBLOB or a PRIVATEKEYBLOB structure.</param
         >
         <param name="offset"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -101,8 +100,7 @@
         >
         <summary>Convert the key from either a CryptoAPI PUBLICKEYBLOB structure or PRIVATEKEYBLOB structure to a RSA instance. </summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -179,8 +177,7 @@
         <param name="blob">an array of bytes containing a PRIVATEKEYBLOB structure. </param>
         <summary>Convert the key from the CryptoAPI PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -209,8 +206,7 @@
       <Docs>
         <param name="blob">an array of bytes containing a PRIVATEKEYBLOB structure. </param>
         <param name="offset"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -218,8 +214,7 @@
         >
         <summary>Convert the key from the CryptoAPI PRIVATEKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -296,8 +291,7 @@
         <param name="blob">an array of bytes containing a PUBLICKEYBLOB structure. </param>
         <summary>Convert the public key from the CryptoAPI PUBLICKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -326,8 +320,7 @@
       <Docs>
         <param name="blob">an array of bytes containing a PUBLICKEYBLOB structure. </param>
         <param name="offset"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -335,8 +328,7 @@
         >
         <summary>Convert the public key from the CryptoAPI PUBLICKEYBLOB structure to a RSA instance.</summary>
         <returns
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >a <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -408,8 +400,7 @@
       </Parameters>
       <Docs>
         <param name="hex"
-          >an hexadecimal <see
-           cref="T:System.String" />
+          >an hexadecimal <see cref="T:System.String" />
 
           
 
@@ -421,7 +412,8 @@
           <example>
             <code lang="C#">
 	byte[] data = CryptoConvert.FromHex ("DEADC0DE");
-  </code>
+  </code
+            >
           </example>
         </remarks>
       </Docs>
@@ -445,8 +437,7 @@
       </Parameters>
       <Docs>
         <param name="keypair"
-          >the <see
-           cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+          >the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
           
 
@@ -507,8 +498,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -563,8 +553,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -616,8 +605,7 @@
       </Parameters>
       <Docs>
         <param name="rsa"
-          >the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          >the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -648,8 +636,7 @@
         <param name="input">an array of bytes to be converted.</param>
         <summary>Convert an array of bytes to an hexadecimal string.</summary>
         <returns
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -657,8 +644,7 @@
         >
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 	byte[] data = new byte[] { 0xDE, 0xAD, 0xC0, 0xDE };
 	string s = CryptoConvert.ToHex (data);
 	// s == "DEADC0DE"

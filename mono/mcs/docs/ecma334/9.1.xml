@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="9.1" title="Programs">
   <paragraph
-    >A C# program consists of one or more source files, known formally as compilation units (<hyperlink
-    >16.1</hyperlink>
+    >A C# program consists of one or more source files, known formally as compilation units (<hyperlink>16.1</hyperlink>
 
     
 
@@ -15,8 +14,7 @@
   <paragraph>Conforming implementations must accept Unicode source files encoded with the UTF-8 encoding form (as defined by the Unicode standard), and transform them into a sequence of Unicode characters. Implementations may choose to accept and transform additional character encoding schemes (such as  UTF-16, UTF-32, or non-Unicode character mappings). </paragraph>
   <paragraph>
     <note
-      >[Note: It is beyond the scope of this standard to define how a file using a character representation other than Unicode might be transformed into a sequence of Unicode characters. During such transformation, however, it is recommended that the usual line-separating character (or sequence) in the other character set be translated to the two-character sequence consisting of the Unicode carriage-return character followed by Unicode line-feed character. For the most part this transformation will have no visible effects; however, it will affect the interpretation of verbatim string literal tokens (<hyperlink
-      >9.4.4.5</hyperlink>
+      >[Note: It is beyond the scope of this standard to define how a file using a character representation other than Unicode might be transformed into a sequence of Unicode characters. During such transformation, however, it is recommended that the usual line-separating character (or sequence) in the other character set be translated to the two-character sequence consisting of the Unicode carriage-return character followed by Unicode line-feed character. For the most part this transformation will have no visible effects; however, it will affect the interpretation of verbatim string literal tokens (<hyperlink>9.4.4.5</hyperlink>
 
       
 

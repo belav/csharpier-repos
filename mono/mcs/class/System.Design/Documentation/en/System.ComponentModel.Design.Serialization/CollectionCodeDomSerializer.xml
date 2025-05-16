@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
 
         
 
-         class can create either statements or expressions. If the object to serialize is an array, the <see
-         cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
+         class can create either statements or expressions. If the object to serialize is an array, the <see cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
 
         
 
-         will create an expression and assign it to the statement in the current context stack. If the object is a collection with an AddRange or similar method, the <see
-         cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
+         will create an expression and assign it to the statement in the current context stack. If the object is a collection with an AddRange or similar method, the <see cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
 
         
 
@@ -55,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
 
             
 
@@ -84,8 +80,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks the <paramref
-             name="method" />
+            >Checks the <paramref name="method" />
 
             
 
@@ -95,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies serialization support by the <paramref
-             name="method" />
+            >Verifies serialization support by the <paramref name="method" />
 
             
 
@@ -106,8 +100,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="method" />
+            >true if the <paramref name="method" />
 
             
 
@@ -115,12 +108,15 @@
           >
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MethodInfo" />
+          The <see cref="T:System.Reflection.MethodInfo" />
 
           
 
@@ -165,18 +161,15 @@
             </item>
             <item>
               <para
-                >If the collection is an <see
-                 cref="T:System.Collections.IList" />
+                >If the collection is an <see cref="T:System.Collections.IList" />
 
                 
 
-                , the <see
-                 cref="M:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+                , the <see cref="M:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
                 
 
-                 method will cast the collection to an <see
-                 cref="T:System.Collections.IList" />
+                 method will cast the collection to an <see cref="T:System.Collections.IList" />
 
                 
 
@@ -185,13 +178,11 @@
               <list type="ordered">
                 <item>
                   <para
-                    >If the collection has no Add method, but is marked with <see
-                     cref="F:System.ComponentModel.DesignerSerializationVisibility.Content" />
+                    >If the collection has no Add method, but is marked with <see cref="F:System.ComponentModel.DesignerSerializationVisibility.Content" />
 
                     
 
-                    , <see
-                     cref="M:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+                    , <see cref="M:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
                     
 
@@ -209,8 +200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A CodeDOM object representing <paramref
-             name="value" />
+            >A CodeDOM object representing <paramref name="value" />
 
             
 
@@ -218,19 +208,26 @@
           >
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
           
 
            to use during serialization.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -264,8 +261,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >The <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -281,50 +277,67 @@
           <para>Serialized collection if the serialization process succeeded; otherwise, null.</para>
         </returns>
         <param name="manager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
           
 
            to use during serialization.</param
         >
         <param name="targetExpression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that refers to the collection</param
         >
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the collection.</param
         >
         <param name="originalCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The collection to serialize.</param
         >
         <param name="valuesToSerialize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

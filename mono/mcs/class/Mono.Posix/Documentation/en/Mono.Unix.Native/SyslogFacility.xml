@@ -21,8 +21,7 @@
   <Docs>
     <summary>System logging facilities.</summary>
     <remarks
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.openlog" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.openlog" />
       <paramref name="facility" />
 
       
@@ -49,19 +48,16 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The authorization system: <c
-          >login</c>
+          >The authorization system: <c>login</c>
 
           
 
-          (1), <c
-          >su</c>
+          (1), <c>su</c>
 
           
 
           (1),
-        <c
-          >getty</c>
+        <c>getty</c>
 
           
 
@@ -87,8 +83,7 @@
       <Docs>
         <summary
           >The same as 
-        <see
-           cref="F:Mono.Unix.Native.SyslogFacility.LOG_AUTH" />
+        <see cref="F:Mono.Unix.Native.SyslogFacility.LOG_AUTH" />
 
           
 
@@ -113,14 +108,11 @@
         <ReturnType>Mono.Unix.Native.SyslogFacility</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >The cron daemon: <c
-          >cron</c>
+        <summary>The cron daemon: <c>cron</c>
 
           
 
-          (8).</summary
-        >
+          (8).</summary>
       </Docs>
     </Member>
     <Member MemberName="LOG_DAEMON">
@@ -140,8 +132,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >System daemons, such as <c
-          >routed</c>
+          >System daemons, such as <c>routed</c>
 
           
 
@@ -167,14 +158,12 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The file transfer protocol daemons: <c
-          >ftpd</c>
+          >The file transfer protocol daemons: <c>ftpd</c>
 
           
 
           (8),
-        <c
-          >tftpd</c>
+        <c>tftpd</c>
 
           
 
@@ -371,19 +360,16 @@
       </ReturnValue>
       <Docs>
         <summary
-          >The line printer spooling system: <c
-          >lpr</c>
+          >The line printer spooling system: <c>lpr</c>
 
           
 
           (1),
-        <c
-          >lpc</c>
+        <c>lpc</c>
 
           
 
-          (8), <c
-          >lpd</c>
+          (8), <c>lpd</c>
 
           
 
@@ -446,8 +432,7 @@
       </ReturnValue>
       <Docs>
         <summary
-          >Messages generated internally by <c
-          >syslogd</c>
+          >Messages generated internally by <c>syslogd</c>
 
           
 

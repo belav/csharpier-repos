@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members such as <see
-         cref="P:System.Windows.Forms.DrawItemEventArgs.State" />
+        >This enumeration is used by members such as <see cref="P:System.Windows.Forms.DrawItemEventArgs.State" />
 
         
 
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The item is the editing portion of a <see
-             cref="T:System.Windows.Forms.ComboBox" />
+            >The item is the editing portion of a <see cref="T:System.Windows.Forms.ComboBox" />
 
             
 

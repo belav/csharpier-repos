@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.ITableMappingCollection" />
+        >The <see cref="T:System.Data.ITableMappingCollection" />
 
         
 
-         interface allows an inheriting class to implement a TableMapping collection. For more information, see <format
-         type="text/html">
+         interface allows an inheriting class to implement a TableMapping collection. For more information, see <format type="text/html">
           <a href="D023260A-A66A-4C39-B8F4-090CD130E730"
             >[&lt;topic://cpconsettingupdatatabledatacolumnmappings&gt;]</a
           >
@@ -39,41 +37,34 @@
         .</para
       >
       <para
-        >An application does not create an instance of the <see
-         cref="T:System.Data.ITableMappingCollection" />
+        >An application does not create an instance of the <see cref="T:System.Data.ITableMappingCollection" />
 
         
 
-         interface directly, but creates an instance of a class that inherits <see
-         cref="T:System.Data.ITableMappingCollection" />
+         interface directly, but creates an instance of a class that inherits <see cref="T:System.Data.ITableMappingCollection" />
 
         
 
         .</para
       >
       <para
-        >Classes that inherit <see
-         cref="T:System.Data.ITableMappingCollection" />
+        >Classes that inherit <see cref="T:System.Data.ITableMappingCollection" />
 
         
 
-         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
-         cref="T:System.Data.ITableMappingCollection" />
+         must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see cref="T:System.Data.ITableMappingCollection" />
 
         
 
-         interface defines one implementation of the <see
-         cref="M:System.Data.ITableMappingCollection.RemoveAt(System.String)" />
+         interface defines one implementation of the <see cref="M:System.Data.ITableMappingCollection.RemoveAt(System.String)" />
 
         
 
-         method. In turn, the <see
-         cref="T:System.Data.Common.DataTableMappingCollection" />
+         method. In turn, the <see cref="T:System.Data.Common.DataTableMappingCollection" />
 
         
 
-         class inherits this method, and defines two additional overloads of <see
-         cref="M:System.Data.Common.DataTableMappingCollection.RemoveAt(System.Int32)" />
+         class inherits this method, and defines two additional overloads of <see cref="M:System.Data.Common.DataTableMappingCollection.RemoveAt(System.Int32)" />
 
         
 
@@ -83,8 +74,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of TableMapping objects, and is implemented by the <see
-         cref="T:System.Data.Common.DataTableMappingCollection" />
+        >Contains a collection of TableMapping objects, and is implemented by the <see cref="T:System.Data.Common.DataTableMappingCollection" />
 
         
 
@@ -115,8 +105,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the newly-mapped <see
-             cref="T:System.Data.ITableMapping" />
+            >A reference to the newly-mapped <see cref="T:System.Data.ITableMapping" />
 
             
 
@@ -124,19 +113,26 @@
           >
         </returns>
         <param name="sourceTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name of the source table. </param
         >
         <param name="dataSetTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataSet" />
+          The name of the <see cref="T:System.Data.DataSet" />
 
           
 
@@ -168,7 +164,11 @@
           <para>true if a table mapping with the specified source table name exists, otherwise false.</para>
         </returns>
         <param name="sourceTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the TableMapping object with the specified <see
-             cref="T:System.Data.DataSet" />
+            >Gets the TableMapping object with the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -210,7 +209,11 @@
           <para>The TableMapping object with the specified DataSet table name.</para>
         </returns>
         <param name="dataSetTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the <see
-             cref="T:System.Data.ITableMapping" />
+            >Gets the location of the <see cref="T:System.Data.ITableMapping" />
 
             
 
@@ -247,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the <see
-             cref="T:System.Data.ITableMapping" />
+            >The zero-based location of the <see cref="T:System.Data.ITableMapping" />
 
             
 
@@ -256,7 +257,11 @@
           >
         </returns>
         <param name="sourceTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -302,13 +307,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.ITableMapping" />
+            >Removes the <see cref="T:System.Data.ITableMapping" />
 
             
 
-             object with the specified <see
-             cref="P:System.Data.ITableMapping.SourceTable" />
+             object with the specified <see cref="P:System.Data.ITableMapping.SourceTable" />
 
             
 
@@ -316,7 +319,11 @@
           >
         </summary>
         <param name="sourceTableName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

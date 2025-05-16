@@ -43,8 +43,7 @@
       <para>You can use this delegate to represent a method that can be passed as a parameter without explicitly declaring a custom delegate. The encapsulated method must correspond to the method signature that is defined by this delegate. This means that the encapsulated method must have four parameters, each of which is passed to it by value, and that it must return a value.</para>
       <block subset="none" type="note">
         <para
-          >To reference a method that has four parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see
-           cref="T:System.Action`4" />
+          >To reference a method that has four parameters and returns void (or in Visual Basic, that is declared as a Sub rather than as a Function), use the generic <see cref="T:System.Action`4" />
 
           
 
@@ -52,13 +51,11 @@
         >
       </block>
       <para
-        >When you use the <see
-         cref="T:System.Func`5" />
+        >When you use the <see cref="T:System.Func`5" />
 
         
 
-         delegate, you do not have to explicitly define a delegate that encapsulates a method with four parameters. For example, the following code explicitly declares a generic delegate named Searcher and assigns a reference to the <see
-         cref="M:System.String.IndexOf(System.String,System.Int32,System.Int32,System.StringComparison)" />
+         delegate, you do not have to explicitly define a delegate that encapsulates a method with four parameters. For example, the following code explicitly declares a generic delegate named Searcher and assigns a reference to the <see cref="M:System.String.IndexOf(System.String,System.Int32,System.Int32,System.StringComparison)" />
 
         
 
@@ -66,8 +63,7 @@
       >
       <para>code reference: System.Func~5#1</para>
       <para
-        >The following example simplifies this code by instantiating the <see
-         cref="T:System.Func`5" />
+        >The following example simplifies this code by instantiating the <see cref="T:System.Func`5" />
 
         
 
@@ -75,13 +71,11 @@
       >
       <para>code reference: System.Func~5#2</para>
       <para
-        >You can use the <see
-         cref="T:System.Func`5" />
+        >You can use the <see cref="T:System.Func`5" />
 
         
 
-         delegate with anonymous methods in C#, as the following example illustrates. (For an introduction to anonymous methods, see <format
-         type="text/html">
+         delegate with anonymous methods in C#, as the following example illustrates. (For an introduction to anonymous methods, see <format type="text/html">
           <a href="a62441fa-f0a3-4acb-9aa6-93762a635275"
             >Anonymous Methods (C# Programming Guide)</a
           >
@@ -93,20 +87,17 @@
       >
       <para>code reference: System.Func~5#3</para>
       <para
-        >You can also assign a lambda expression to a <see
-         cref="T:System.Func`5" />
+        >You can also assign a lambda expression to a <see cref="T:System.Func`5" />
 
         
 
-         delegate, as the following example illustrates. (For an introduction to lambda expressions, see <format
-         type="text/html">
+         delegate, as the following example illustrates. (For an introduction to lambda expressions, see <format type="text/html">
           <a href="137064b0-3928-4bfa-ba71-c3f9cbd951e2">Lambda Expressions</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="57e3ba27-9a82-4067-aca7-5ca446b7bf93"
             >Lambda Expressions (C# Programming Guide)</a
           >
@@ -118,8 +109,7 @@
       >
       <para>code reference: System.Func~5#4</para>
       <para
-        >The underlying type of a lambda expression is one of the generic Func delegates. This makes it possible to pass a lambda expression as a parameter without explicitly assigning it to a delegate. In particular, because many methods of types in the <see
-         cref="N:System.Linq" />
+        >The underlying type of a lambda expression is one of the generic Func delegates. This makes it possible to pass a lambda expression as a parameter without explicitly assigning it to a delegate. In particular, because many methods of types in the <see cref="N:System.Linq" />
 
         
 
@@ -129,8 +119,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a method that has four parameters and returns a value of the type specified by the <paramref
-         name="TResult" />
+        >Encapsulates a method that has four parameters and returns a value of the type specified by the <paramref name="TResult" />
 
         
 

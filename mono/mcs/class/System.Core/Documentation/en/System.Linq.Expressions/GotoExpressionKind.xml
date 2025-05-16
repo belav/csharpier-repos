@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies what kind of jump this <see
-         cref="T:System.Linq.Expressions.GotoExpression" />
+        >Specifies what kind of jump this <see cref="T:System.Linq.Expressions.GotoExpression" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Linq.Expressions.GotoExpression" />
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" />
 
             
 
@@ -71,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Linq.Expressions.GotoExpression" />
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" />
 
             
 
@@ -98,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Linq.Expressions.GotoExpression" />
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" />
 
             
 
@@ -125,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Linq.Expressions.GotoExpression" />
+            >A <see cref="T:System.Linq.Expressions.GotoExpression" />
 
             
 

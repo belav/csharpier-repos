@@ -14,13 +14,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The operating system and accessibility server applications generate accessibility events in response to changes in the user interface.</para>
       <para
-        >This enumeration is used by <see
-         cref="T:System.Windows.Forms.AccessibleObject" />
+        >This enumeration is used by <see cref="T:System.Windows.Forms.AccessibleObject" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.Control" />
+         and <see cref="T:System.Windows.Forms.Control" />
 
         
 
@@ -44,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.KeyboardShortcut" />
+            >An object's <see cref="P:System.Windows.Forms.AccessibleObject.KeyboardShortcut" />
 
             
 
@@ -85,18 +82,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.DefaultAction" />
+            >An object's <see cref="P:System.Windows.Forms.AccessibleObject.DefaultAction" />
 
             
 
-             property changed. The system sends this event for dialog boxes. Server applications send this event for their accessible objects. Therefore, server applications do not need to send this event for the child objects. Hidden objects have a state of <see
-             cref="F:System.Windows.Forms.AccessibleStates.Invisible" />
+             property changed. The system sends this event for dialog boxes. Server applications send this event for their accessible objects. Therefore, server applications do not need to send this event for the child objects. Hidden objects have a state of <see cref="F:System.Windows.Forms.AccessibleStates.Invisible" />
 
             
 
-            , and shown objects do not. Events of type AccessibleEvents.Hide indicate that a state of <see
-             cref="F:System.Windows.Forms.AccessibleStates.Invisible" />
+            , and shown objects do not. Events of type AccessibleEvents.Hide indicate that a state of <see cref="F:System.Windows.Forms.AccessibleStates.Invisible" />
 
             
 
@@ -119,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.Description" />
+            >An object's <see cref="P:System.Windows.Forms.AccessibleObject.Description" />
 
             
 
@@ -177,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.Help" />
+            >An object's <see cref="P:System.Windows.Forms.AccessibleObject.Help" />
 
             
 
@@ -218,13 +210,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object has changed location, shape, or size. The system sends this event for the following user interface elements: caret and window object. Server applications send this event for their accessible objects. This event is generated in response to the top-level object within the object hierarchy that has changed, not for any children it might contain. For example, if the user resizes a window, the system sends this notification for the window, but not for the menu bar, title bar, scroll bars, or other objects that have also changed. The system does not send this event for every non-floating child window when the parent moves. However, if an application explicitly resizes child windows as a result of being resized, the system sends multiple events for the resized children. If an object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.State" />
+            >An object has changed location, shape, or size. The system sends this event for the following user interface elements: caret and window object. Server applications send this event for their accessible objects. This event is generated in response to the top-level object within the object hierarchy that has changed, not for any children it might contain. For example, if the user resizes a window, the system sends this notification for the window, but not for the menu bar, title bar, scroll bars, or other objects that have also changed. The system does not send this event for every non-floating child window when the parent moves. However, if an application explicitly resizes child windows as a result of being resized, the system sends multiple events for the resized children. If an object's <see cref="P:System.Windows.Forms.AccessibleObject.State" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.AccessibleStates.Floating" />
+             property is set to <see cref="F:System.Windows.Forms.AccessibleStates.Floating" />
 
             
 
@@ -247,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.Name" />
+            >An object's <see cref="P:System.Windows.Forms.AccessibleObject.Name" />
 
             
 
@@ -798,8 +787,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object's <see
-             cref="P:System.Windows.Forms.AccessibleObject.Value" />
+            >An object's <see cref="P:System.Windows.Forms.AccessibleObject.Value" />
 
             
 

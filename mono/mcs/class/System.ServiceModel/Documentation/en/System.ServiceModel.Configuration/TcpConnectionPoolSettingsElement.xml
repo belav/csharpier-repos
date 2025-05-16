@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement" />
 
             
 
@@ -139,8 +138,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A connection is closed after it is returned to the connection cache and not during active transmission. The connection cache used by the TCP transport creates new connections as required for each endpoint, up to the cache limit that is set by <see
-             cref="P:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement.MaxOutboundConnectionsPerEndpoint" />
+            >A connection is closed after it is returned to the connection cache and not during active transmission. The connection cache used by the TCP transport creates new connections as required for each endpoint, up to the cache limit that is set by <see cref="P:System.ServiceModel.Configuration.TcpConnectionPoolSettingsElement.MaxOutboundConnectionsPerEndpoint" />
 
             
 
@@ -184,13 +182,11 @@
           <para>Connections in excess of the limit are queued until a space below the limit becomes available. This property limits the duration in which connections remain queued before an exception is thrown. </para>
           <para>This property limits the number of simultaneous active connections from the client to a particular service endpoint. If this value is exceeded by having more active client connections, the service may appear unresponsive to the client. In this case, this value should be adjusted to exceed the maximum number of expected simultaneous client connections to a specific endpoint.</para>
           <para
-            >This setting can also be set on the service side, in which case the value is used to set the <see
-             cref="P:System.ServiceModel.Channels.MaxPooledConnections" />
+            >This setting can also be set on the service side, in which case the value is used to set the <see cref="P:System.ServiceModel.Channels.MaxPooledConnections" />
 
             
 
-             on the <see
-             cref="T:System.ServiceModel.Channels.TcpChannelListener" />
+             on the <see cref="T:System.ServiceModel.Channels.TcpChannelListener" />
 
             
 

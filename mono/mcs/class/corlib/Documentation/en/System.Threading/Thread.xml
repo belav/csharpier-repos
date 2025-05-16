@@ -46,31 +46,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A process can create one or more threads to execute a portion of the program code associated with the process. Use a <see
-         cref="T:System.Threading.ThreadStart" />
+        >A process can create one or more threads to execute a portion of the program code associated with the process. Use a <see cref="T:System.Threading.ThreadStart" />
 
         
 
-         delegate or the <see
-         cref="T:System.Threading.ParameterizedThreadStart" />
+         delegate or the <see cref="T:System.Threading.ParameterizedThreadStart" />
 
         
 
-         delegate to specify the program code executed by a thread. The <see
-         cref="T:System.Threading.ParameterizedThreadStart" />
+         delegate to specify the program code executed by a thread. The <see cref="T:System.Threading.ParameterizedThreadStart" />
 
         
 
          delegate allows you to pass data to the thread procedure.</para
       >
       <para
-        >For the duration of its existence, a thread is always in one or more of the states defined by <see
-         cref="T:System.Threading.ThreadState" />
+        >For the duration of its existence, a thread is always in one or more of the states defined by <see cref="T:System.Threading.ThreadState" />
 
         
 
-        . A scheduling priority level, as defined by <see
-         cref="T:System.Threading.ThreadPriority" />
+        . A scheduling priority level, as defined by <see cref="T:System.Threading.ThreadPriority" />
 
         
 
@@ -87,8 +82,7 @@
         <para>An operating-system ThreadId has no fixed relationship to a managed thread, because an unmanaged host can control the relationship between managed and unmanaged threads. Specifically, a sophisticated host can use the CLR Hosting API to schedule many managed threads against the same operating system thread, or to move a managed thread between different operating system threads.</para>
       </block>
       <para
-        >It is not necessary to retain a reference to a <see
-         cref="T:System.Threading.Thread" />
+        >It is not necessary to retain a reference to a <see cref="T:System.Threading.Thread" />
 
         
 
@@ -126,13 +120,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A thread does not begin executing when it is created. To schedule the thread for execution, call the <see
-             cref="M:System.Threading.Thread.Start" />
+            >A thread does not begin executing when it is created. To schedule the thread for execution, call the <see cref="M:System.Threading.Thread.Start" />
 
             
 
-             method. To pass a data object to the thread, use the <see
-             cref="M:System.Threading.Thread.Start(System.Object)" />
+             method. To pass a data object to the thread, use the <see cref="M:System.Threading.Thread.Start(System.Object)" />
 
             
 
@@ -140,13 +132,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see
-               cref="T:System.Threading.ThreadStart" />
+              >Visual Basic users can omit the <see cref="T:System.Threading.ThreadStart" />
 
               
 
-               constructor when creating a thread. Use the AddressOf operator when passing your method, for example Dim t As New Thread(AddressOf ThreadProc). Visual Basic automatically calls the <see
-               cref="T:System.Threading.ThreadStart" />
+               constructor when creating a thread. Use the AddressOf operator when passing your method, for example Dim t As New Thread(AddressOf ThreadProc). Visual Basic automatically calls the <see cref="T:System.Threading.ThreadStart" />
 
               
 
@@ -157,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Thread" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Thread" />
 
             
 
@@ -166,12 +155,15 @@
           >
         </summary>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.ParameterizedThreadStart" />
+          A <see cref="T:System.Threading.ParameterizedThreadStart" />
 
           
 
@@ -205,8 +197,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -215,8 +206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A thread does not begin executing when it is created. To schedule the thread for execution, call the <see
-             cref="M:System.Threading.Thread.Start" />
+            >A thread does not begin executing when it is created. To schedule the thread for execution, call the <see cref="M:System.Threading.Thread.Start" />
 
             
 
@@ -224,13 +214,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Visual Basic users can omit the <see
-               cref="T:System.Threading.ThreadStart" />
+              >Visual Basic users can omit the <see cref="T:System.Threading.ThreadStart" />
 
               
 
-               constructor when creating a thread. Use the AddressOf operator when passing your method for example Dim t As New Thread(AddressOf ThreadProc). Visual Basic automatically calls the <see
-               cref="T:System.Threading.ThreadStart" />
+               constructor when creating a thread. Use the AddressOf operator when passing your method for example Dim t As New Thread(AddressOf ThreadProc). Visual Basic automatically calls the <see cref="T:System.Threading.ThreadStart" />
 
               
 
@@ -241,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Thread" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Thread" />
 
             
 
@@ -250,12 +237,15 @@
           >
         </summary>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.ThreadStart" />
+          A <see cref="T:System.Threading.ThreadStart" />
 
           
 
@@ -287,8 +277,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Avoid using this constructor overload. The default stack size used by the <see
-             cref="M:System.Threading.Thread.#ctor(System.Threading.ParameterizedThreadStart)" />
+            >Avoid using this constructor overload. The default stack size used by the <see cref="M:System.Threading.Thread.#ctor(System.Threading.ParameterizedThreadStart)" />
 
             
 
@@ -296,23 +285,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Beginning with the net_v40_long, only fully trusted code can set <paramref
-               name="maxStackSize" />
+              >Beginning with the net_v40_long, only fully trusted code can set <paramref name="maxStackSize" />
 
               
 
-               to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref
-               name="maxStackSize" />
+               to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref name="maxStackSize" />
 
               
 
-               when code is running with partial trust, <paramref
-               name="maxStackSize" />
+               when code is running with partial trust, <paramref name="maxStackSize" />
 
               
 
-               is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref
-               name="maxStackSize" />
+               is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref name="maxStackSize" />
 
               
 
@@ -323,13 +308,11 @@
             <para>If you are developing a fully trusted library that will be used by partially trusted code, and you need to start a thread that requires a large stack, you must assert full trust before creating the thread, or the default stack size will be used. Do not do this unless you fully control the code that runs on the thread.</para>
           </block>
           <para
-            >If <paramref
-             name="maxStackSize" />
+            >If <paramref name="maxStackSize" />
 
             
 
-             is less than the minimum stack size, the minimum stack size is used. If <paramref
-             name="maxStackSize" />
+             is less than the minimum stack size, the minimum stack size is used. If <paramref name="maxStackSize" />
 
             
 
@@ -337,8 +320,7 @@
           >
           <block subset="none" type="note">
             <para
-              >On versions of Microsoft Windows prior to Windows XP and Windows Server 2003, <paramref
-               name="maxStackSize" />
+              >On versions of Microsoft Windows prior to Windows XP and Windows Server 2003, <paramref name="maxStackSize" />
 
               
 
@@ -355,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Thread" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Thread" />
 
             
 
@@ -364,19 +345,26 @@
           >
         </summary>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.ParameterizedThreadStart" />
+          A <see cref="T:System.Threading.ParameterizedThreadStart" />
 
           
 
            delegate that represents the methods to be invoked when this thread begins executing.</param
         >
         <param name="maxStackSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -407,8 +395,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Avoid using this constructor overload. The default stack size used by the <see
-             cref="M:System.Threading.Thread.#ctor(System.Threading.ThreadStart)" />
+            >Avoid using this constructor overload. The default stack size used by the <see cref="M:System.Threading.Thread.#ctor(System.Threading.ThreadStart)" />
 
             
 
@@ -416,23 +403,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Beginning with the net_v40_long, only fully trusted code can set <paramref
-               name="maxStackSize" />
+              >Beginning with the net_v40_long, only fully trusted code can set <paramref name="maxStackSize" />
 
               
 
-               to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref
-               name="maxStackSize" />
+               to a value that is greater than the default stack size (1 megabyte). If a larger value is specified for <paramref name="maxStackSize" />
 
               
 
-               when code is running with partial trust, <paramref
-               name="maxStackSize" />
+               when code is running with partial trust, <paramref name="maxStackSize" />
 
               
 
-               is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref
-               name="maxStackSize" />
+               is ignored and the default stack size is used. No exception is thrown. Code at any trust level can set <paramref name="maxStackSize" />
 
               
 
@@ -443,13 +426,11 @@
             <para>If you are developing a fully trusted library that will be used by partially trusted code, and you need to start a thread that requires a large stack, you must assert full trust before creating the thread, or the default stack size will be used. Do not do this unless you fully control the code that runs on the thread.</para>
           </block>
           <para
-            >If <paramref
-             name="maxStackSize" />
+            >If <paramref name="maxStackSize" />
 
             
 
-             is less than the minimum stack size, the minimum stack size is used. If <paramref
-             name="maxStackSize" />
+             is less than the minimum stack size, the minimum stack size is used. If <paramref name="maxStackSize" />
 
             
 
@@ -457,8 +438,7 @@
           >
           <block subset="none" type="note">
             <para
-              >On versions of Microsoft Windows prior to Windows XP and Windows Server 2003, <paramref
-               name="maxStackSize" />
+              >On versions of Microsoft Windows prior to Windows XP and Windows Server 2003, <paramref name="maxStackSize" />
 
               
 
@@ -475,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Thread" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Thread" />
 
             
 
@@ -484,19 +463,26 @@
           >
         </summary>
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Threading.ThreadStart" />
+          A <see cref="T:System.Threading.ThreadStart" />
 
           
 
            delegate that represents the methods to be invoked when this thread begins executing.</param
         >
         <param name="maxStackSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -525,8 +511,7 @@
         <exception cref="T:System.Security.SecurityException">
           <SPAN>
             <SPAN
-              >Caller does not have <see
-               cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+              >Caller does not have <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
 
               
 
@@ -535,8 +520,7 @@
           </SPAN>
         </exception>
         <permission cref="!:System.Security.SecurityPermission"
-          >Requires permission to control the thread to be aborted. See <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+          >Requires permission to control the thread to be aborted. See <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
 
           
 
@@ -545,13 +529,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this method is invoked on a thread, the system throws a <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >When this method is invoked on a thread, the system throws a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-             in the thread to abort it. ThreadAbortException is a special exception that can be caught by application code, but is re-thrown at the end of the catch block unless <see
-             cref="M:System.Threading.Thread.ResetAbort" />
+             in the thread to abort it. ThreadAbortException is a special exception that can be caught by application code, but is re-thrown at the end of the catch block unless <see cref="M:System.Threading.Thread.ResetAbort" />
 
             
 
@@ -559,8 +541,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When a thread calls Abort on itself, the effect is similar to throwing an exception; the <see
-               cref="T:System.Threading.ThreadAbortException" />
+              >When a thread calls Abort on itself, the effect is similar to throwing an exception; the <see cref="T:System.Threading.ThreadAbortException" />
 
               
 
@@ -568,13 +549,11 @@
             >
           </block>
           <para
-            >The thread is not guaranteed to abort immediately, or at all. This situation can occur if a thread does an unbounded amount of computation in the finally blocks that are called as part of the abort procedure, thereby indefinitely delaying the abort. To wait until a thread has aborted, you can call the <see
-             cref="M:System.Threading.Thread.Join" />
+            >The thread is not guaranteed to abort immediately, or at all. This situation can occur if a thread does an unbounded amount of computation in the finally blocks that are called as part of the abort procedure, thereby indefinitely delaying the abort. To wait until a thread has aborted, you can call the <see cref="M:System.Threading.Thread.Join" />
 
             
 
-             method on the thread after calling the <see
-             cref="M:System.Threading.Thread.Abort" />
+             method on the thread after calling the <see cref="M:System.Threading.Thread.Abort" />
 
             
 
@@ -582,13 +561,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The thread that calls <see
-               cref="M:System.Threading.Thread.Abort" />
+              >The thread that calls <see cref="M:System.Threading.Thread.Abort" />
 
               
 
-               might block if the thread that is being aborted is in a protected region of code, such as a catch block, finally block, or constrained execution region. If the thread that calls <see
-               cref="M:System.Threading.Thread.Abort" />
+               might block if the thread that is being aborted is in a protected region of code, such as a catch block, finally block, or constrained execution region. If the thread that calls <see cref="M:System.Threading.Thread.Abort" />
 
               
 
@@ -596,41 +573,34 @@
             >
           </block>
           <para
-            >If Abort is called on a thread that has not been started, the thread will abort when <see
-             cref="M:System.Threading.Thread.Start" />
+            >If Abort is called on a thread that has not been started, the thread will abort when <see cref="M:System.Threading.Thread.Start" />
 
             
 
              is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted. </para
           >
           <para
-            >If Abort is called on a thread that has been suspended, a <see
-             cref="T:System.Threading.ThreadStateException" />
+            >If Abort is called on a thread that has been suspended, a <see cref="T:System.Threading.ThreadStateException" />
 
             
 
-             is thrown in the thread that called <see
-             cref="Overload:System.Threading.Thread.Abort" />
+             is thrown in the thread that called <see cref="Overload:System.Threading.Thread.Abort" />
 
             
 
-            , and <see
-             cref="F:System.Threading.ThreadState.AbortRequested" />
+            , and <see cref="F:System.Threading.ThreadState.AbortRequested" />
 
             
 
-             is added to the <see
-             cref="P:System.Threading.Thread.ThreadState" />
+             is added to the <see cref="P:System.Threading.Thread.ThreadState" />
 
             
 
-             property of the thread being aborted. A <see
-             cref="T:System.Threading.ThreadAbortException" />
+             property of the thread being aborted. A <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-             is not thrown in the suspended thread until <see
-             cref="M:System.Threading.Thread.Resume" />
+             is not thrown in the suspended thread until <see cref="M:System.Threading.Thread.Resume" />
 
             
 
@@ -639,13 +609,11 @@
           <para>If Abort is called on a managed thread while it is executing unmanaged code, a ThreadAbortException is not thrown until the thread returns to managed code.</para>
           <para>If two calls to Abort come at the same time, it is possible for one call to set the state information and the other call to execute the Abort. However, an application cannot detect this situation.</para>
           <para
-            >After Abort is invoked on a thread, the state of the thread includes <see
-             cref="F:System.Threading.ThreadState.AbortRequested" />
+            >After Abort is invoked on a thread, the state of the thread includes <see cref="F:System.Threading.ThreadState.AbortRequested" />
 
             
 
-            . After the thread has terminated as a result of a successful call to Abort, the state of the thread is changed to <see
-             cref="F:System.Threading.ThreadState.Stopped" />
+            . After the thread has terminated as a result of a successful call to Abort, the state of the thread is changed to <see cref="F:System.Threading.ThreadState.Stopped" />
 
             
 
@@ -655,8 +623,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises a <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >Raises a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
@@ -692,8 +659,7 @@
         <exception cref="T:System.Security.SecurityException">
           <SPAN>
             <SPAN
-              >Caller does not have <see
-               cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+              >Caller does not have <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
 
               
 
@@ -702,8 +668,7 @@
           </SPAN>
         </exception>
         <permission cref="!:System.Security.SecurityPermission"
-          >Requires permission to control the thread to be aborted. See <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+          >Requires permission to control the thread to be aborted. See <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
 
           
 
@@ -712,13 +677,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this method is invoked on a thread, the system throws a <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >When this method is invoked on a thread, the system throws a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-             in the thread to abort it. ThreadAbortException is a special exception that can be caught by application code, but is re-thrown at the end of the catch block unless <see
-             cref="M:System.Threading.Thread.ResetAbort" />
+             in the thread to abort it. ThreadAbortException is a special exception that can be caught by application code, but is re-thrown at the end of the catch block unless <see cref="M:System.Threading.Thread.ResetAbort" />
 
             
 
@@ -726,8 +689,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When a thread calls Abort on itself, the effect is similar to throwing an exception; the <see
-               cref="T:System.Threading.ThreadAbortException" />
+              >When a thread calls Abort on itself, the effect is similar to throwing an exception; the <see cref="T:System.Threading.ThreadAbortException" />
 
               
 
@@ -735,13 +697,11 @@
             >
           </block>
           <para
-            >The thread is not guaranteed to abort immediately, or at all. This situation can occur if a thread does an unbounded amount of computation in the finally blocks that are called as part of the abort procedure, thereby indefinitely delaying the abort. To wait until a thread has aborted, you can call the <see
-             cref="M:System.Threading.Thread.Join" />
+            >The thread is not guaranteed to abort immediately, or at all. This situation can occur if a thread does an unbounded amount of computation in the finally blocks that are called as part of the abort procedure, thereby indefinitely delaying the abort. To wait until a thread has aborted, you can call the <see cref="M:System.Threading.Thread.Join" />
 
             
 
-             method on the thread after calling the <see
-             cref="M:System.Threading.Thread.Abort(System.Object)" />
+             method on the thread after calling the <see cref="M:System.Threading.Thread.Abort(System.Object)" />
 
             
 
@@ -749,13 +709,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The thread that calls <see
-               cref="M:System.Threading.Thread.Abort" />
+              >The thread that calls <see cref="M:System.Threading.Thread.Abort" />
 
               
 
-               might block if the thread that is being aborted is in a protected region of code, such as a catch block, finally block, or constrained execution region. If the thread that calls <see
-               cref="M:System.Threading.Thread.Abort" />
+               might block if the thread that is being aborted is in a protected region of code, such as a catch block, finally block, or constrained execution region. If the thread that calls <see cref="M:System.Threading.Thread.Abort" />
 
               
 
@@ -763,41 +721,34 @@
             >
           </block>
           <para
-            >If Abort is called on a thread that has not been started, the thread will abort when <see
-             cref="M:System.Threading.Thread.Start" />
+            >If Abort is called on a thread that has not been started, the thread will abort when <see cref="M:System.Threading.Thread.Start" />
 
             
 
              is called. If Abort is called on a thread that is blocked or is sleeping, the thread is interrupted and then aborted. </para
           >
           <para
-            >If Abort is called on a thread that has been suspended, a <see
-             cref="T:System.Threading.ThreadStateException" />
+            >If Abort is called on a thread that has been suspended, a <see cref="T:System.Threading.ThreadStateException" />
 
             
 
-             is thrown in the thread that called <see
-             cref="Overload:System.Threading.Thread.Abort" />
+             is thrown in the thread that called <see cref="Overload:System.Threading.Thread.Abort" />
 
             
 
-            , and <see
-             cref="F:System.Threading.ThreadState.AbortRequested" />
+            , and <see cref="F:System.Threading.ThreadState.AbortRequested" />
 
             
 
-             is added to the <see
-             cref="P:System.Threading.Thread.ThreadState" />
+             is added to the <see cref="P:System.Threading.Thread.ThreadState" />
 
             
 
-             property of the thread being aborted. A <see
-             cref="T:System.Threading.ThreadAbortException" />
+             property of the thread being aborted. A <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-             is not thrown in the suspended thread until <see
-             cref="M:System.Threading.Thread.Resume" />
+             is not thrown in the suspended thread until <see cref="M:System.Threading.Thread.Resume" />
 
             
 
@@ -806,13 +757,11 @@
           <para>If Abort is called on a managed thread while it is executing unmanaged code, a ThreadAbortException is not thrown until the thread returns to managed code.</para>
           <para>If two calls to Abort come at the same time, it is possible for one call to set the state information and the other call to execute the Abort. However, an application cannot detect this situation.</para>
           <para
-            >After Abort is invoked on a thread, the state of the thread includes <see
-             cref="F:System.Threading.ThreadState.AbortRequested" />
+            >After Abort is invoked on a thread, the state of the thread includes <see cref="F:System.Threading.ThreadState.AbortRequested" />
 
             
 
-            . After the thread has terminated as a result of a successful call to Abort, the state of the thread is changed to <see
-             cref="F:System.Threading.ThreadState.Stopped" />
+            . After the thread has terminated as a result of a successful call to Abort, the state of the thread is changed to <see cref="F:System.Threading.ThreadState.Stopped" />
 
             
 
@@ -822,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises a <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >Raises a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
@@ -831,7 +779,11 @@
           >
         </summary>
         <param name="stateInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -864,13 +816,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see
-               cref="T:System.ThreadStaticAttribute" />
+              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
               
 
-               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
-               type="text/html">
+               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
@@ -887,8 +837,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allocates an unnamed data slot on all the threads. For better performance, use fields that are marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Allocates an unnamed data slot on all the threads. For better performance, use fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -927,13 +876,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see
-               cref="T:System.ThreadStaticAttribute" />
+              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
               
 
-               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
-               type="text/html">
+               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
@@ -946,13 +893,11 @@
           </block>
           <para>Threads use a local store memory mechanism to store thread-specific data. The common language runtime allocates a multi-slot data store array to each process when it is created. The thread can allocate a data slot in the data store, store and retrieve a data value in the slot, and free the slot for reuse after the thread expires. Data slots are unique per thread. No other thread (not even a child thread) can get that data.</para>
           <para
-            >It is not necessary to use the <see
-             cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
+            >It is not necessary to use the <see cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
 
             
 
-             method to allocate a named data slot, because the <see
-             cref="M:System.Threading.Thread.GetNamedDataSlot(System.String)" />
+             method to allocate a named data slot, because the <see cref="M:System.Threading.Thread.GetNamedDataSlot(System.String)" />
 
             
 
@@ -960,8 +905,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
+              >If the <see cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
 
               
 
@@ -969,8 +913,7 @@
             >
           </block>
           <para
-            >Slots allocated with this method must be freed with <see
-             cref="M:System.Threading.Thread.FreeNamedDataSlot(System.String)" />
+            >Slots allocated with this method must be freed with <see cref="M:System.Threading.Thread.FreeNamedDataSlot(System.String)" />
 
             
 
@@ -980,8 +923,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allocates a named data slot on all threads. For better performance, use fields that are marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Allocates a named data slot on all threads. For better performance, use fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -993,7 +935,11 @@
           <para>The allocated named data slot on all threads.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1031,28 +977,23 @@
           <para>In the .NET Framework versions 1.0 and 1.1, the ApartmentState property marks a thread to indicate that it will execute in a single-threaded or multithreaded apartment. This property can be set when the thread is in the Unstarted or Running thread state; however, it can be set only once for a thread. If the property has not been set, it returns Unknown.</para>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, new threads are initialized as <see
-               cref="F:System.Threading.ApartmentState.MTA" />
+              >In the .NET Framework version 2.0, new threads are initialized as <see cref="F:System.Threading.ApartmentState.MTA" />
 
               
 
-               if their apartment state has not been set before they are started. The main application thread is initialized to <see
-               cref="F:System.Threading.ApartmentState.MTA" />
+               if their apartment state has not been set before they are started. The main application thread is initialized to <see cref="F:System.Threading.ApartmentState.MTA" />
 
               
 
-               by default. You can no longer set the main application thread to <see
-               cref="F:System.Threading.ApartmentState.STA" />
+               by default. You can no longer set the main application thread to <see cref="F:System.Threading.ApartmentState.STA" />
 
               
 
-               by setting the <see
-               cref="T:System.Threading.ApartmentState" />
+               by setting the <see cref="T:System.Threading.ApartmentState" />
 
               
 
-               property on the first line of code. Use the <see
-               cref="T:System.STAThreadAttribute" />
+               property on the first line of code. Use the <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -1060,8 +1001,7 @@
             >
           </block>
           <para
-            >In the .NET Framework version 2.0, you can specify the COM threading model for a C++ application using the <format
-             type="text/html">
+            >In the .NET Framework version 2.0, you can specify the COM threading model for a C++ application using the <format type="text/html">
               <a href="4907e9ef-5031-446c-aecf-0a0b32fae1e8"
                 >/CLRTHREADATTRIBUTE (Set CLR Thread Attribute)</a
               >
@@ -1104,26 +1044,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Hosts of the common language runtime (CLR), such as Microsoft SQL Server 2005, can establish different policies for failures in critical and non-critical regions of code. A critical region is one in which the effects of a thread abort or an unhandled exception might not be limited to the current task. By contrast, an abort or failure in a non-critical region of code affects only the task in which the error occurs.</para>
           <para
-            >For example, consider a task that attempts to allocate memory while holding a lock. If the memory allocation fails, aborting the current task is not sufficient to ensure stability of the <see
-             cref="T:System.AppDomain" />
+            >For example, consider a task that attempts to allocate memory while holding a lock. If the memory allocation fails, aborting the current task is not sufficient to ensure stability of the <see cref="T:System.AppDomain" />
 
             
 
             , because there can be other tasks in the domain waiting for the same lock. If the current task is terminated, other tasks could be deadlocked.</para
           >
           <para
-            >When a failure occurs in a critical region, the host might decide to unload the entire <see
-             cref="T:System.AppDomain" />
+            >When a failure occurs in a critical region, the host might decide to unload the entire <see cref="T:System.AppDomain" />
 
             
 
-             rather than take the risk of continuing execution in a potentially unstable state. To inform the host that your code is entering a critical region, call <see
-             cref="M:System.Threading.Thread.BeginCriticalRegion" />
+             rather than take the risk of continuing execution in a potentially unstable state. To inform the host that your code is entering a critical region, call <see cref="M:System.Threading.Thread.BeginCriticalRegion" />
 
             
 
-            . Call <see
-             cref="M:System.Threading.Thread.EndCriticalRegion" />
+            . Call <see cref="M:System.Threading.Thread.EndCriticalRegion" />
 
             
 
@@ -1163,13 +1099,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Some hosts of the common language runtime, such as Microsoft SQL Server 2005, provide their own thread management. A host that provides its own thread management can move an executing task from one physical operating system thread to another at any time. Most tasks are not affected by this switching. However, some tasks have thread affinity - that is, they depend on the identity of a physical operating system thread. These tasks must inform the host when they execute code that should not be switched.</para>
           <para
-            >For example, if your application calls a system API to acquire an operating system lock that has thread affinity, such as a Win32 CRITICAL_SECTION, you must call <see
-             cref="M:System.Threading.Thread.BeginThreadAffinity" />
+            >For example, if your application calls a system API to acquire an operating system lock that has thread affinity, such as a Win32 CRITICAL_SECTION, you must call <see cref="M:System.Threading.Thread.BeginThreadAffinity" />
 
             
 
-             before acquiring the lock, and <see
-             cref="M:System.Threading.Thread.EndThreadAffinity" />
+             before acquiring the lock, and <see cref="M:System.Threading.Thread.EndThreadAffinity" />
 
             
 
@@ -1233,66 +1167,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that is returned by this property, together with its associated objects, determine the default format for dates, times, numbers, currency values, the sorting order of text, casing conventions, and string comparisons. See the <see
-             cref="T:System.Globalization.CultureInfo" />
+             object that is returned by this property, together with its associated objects, determine the default format for dates, times, numbers, currency values, the sorting order of text, casing conventions, and string comparisons. See the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see
-             cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+             class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
             
 
              property to learn how a thread's default culture is determined, and how users set culture information for their computers. </para
           >
           <para
-            >Beginning with the net_v40_long, you can set the <see
-             cref="P:System.Threading.Thread.CurrentCulture" />
+            >Beginning with the net_v40_long, you can set the <see cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
-             property to a neutral culture. This is because the behavior of the <see
-             cref="T:System.Globalization.CultureInfo" />
+             property to a neutral culture. This is because the behavior of the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             class has changed: When it represents a neutral culture, its property values (in particular, the <see
-             cref="P:System.Globalization.CultureInfo.Calendar" />
+             class has changed: When it represents a neutral culture, its property values (in particular, the <see cref="P:System.Globalization.CultureInfo.Calendar" />
 
             
 
-            , <see
-             cref="P:System.Globalization.CultureInfo.CompareInfo" />
+            , <see cref="P:System.Globalization.CultureInfo.CompareInfo" />
 
             
 
-            , <see
-             cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+            , <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
             
 
-            , <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+            , <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
-            , and <see
-             cref="P:System.Globalization.CultureInfo.TextInfo" />
+            , and <see cref="P:System.Globalization.CultureInfo.TextInfo" />
 
             
 
-             properties) now reflect the specific culture that is associated with the neutral culture. In earlier versions of the .NET Framework, the <see
-             cref="P:System.Threading.Thread.CurrentCulture" />
+             properties) now reflect the specific culture that is associated with the neutral culture. In earlier versions of the .NET Framework, the <see cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
-             property threw a <see
-             cref="T:System.NotSupportedException" />
+             property threw a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -1325,8 +1247,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >An object implementing <see
-           cref="T:System.Security.Principal.IPrincipal" />
+          >An object implementing <see cref="T:System.Security.Principal.IPrincipal" />
 
           
 
@@ -1370,8 +1291,7 @@
       <Docs>
         <value>
           <para
-            > An instance of <see
-             cref="T:System.Threading.Thread" />
+            > An instance of <see cref="T:System.Threading.Thread" />
 
             
 
@@ -1411,46 +1331,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The UI culture specifies the resources an application needs to support user input and output, and by default is the same as the operating system culture. See the <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The UI culture specifies the resources an application needs to support user input and output, and by default is the same as the operating system culture. See the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see
-             cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+             class to learn about culture names and identifiers, the differences between invariant, neutral, and specific cultures, and the way culture information affects threads and application domains. See the <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
             
 
              property to learn how a thread's default UI culture is determined. </para
           >
           <para
-            >The <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             returned by this property can be a neutral culture. Neutral cultures should not be used with formatting methods such as <see
-             cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+             returned by this property can be a neutral culture. Neutral cultures should not be used with formatting methods such as <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
             
 
-            , <see
-             cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+            , <see cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
 
             
 
-            , and <see
-             cref="M:System.Convert.ToString(System.Char,System.IFormatProvider)" />
+            , and <see cref="M:System.Convert.ToString(System.Char,System.IFormatProvider)" />
 
             
 
-            . Use the <see
-             cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+            . Use the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
             
 
-             method to get a specific culture, or use the <see
-             cref="P:System.Threading.Thread.CurrentCulture" />
+             method to get a specific culture, or use the <see cref="P:System.Threading.Thread.CurrentCulture" />
 
             
 
@@ -1458,13 +1370,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+              >The <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
               
 
-               method throws <see
-               cref="T:System.ArgumentException" />
+               method throws <see cref="T:System.ArgumentException" />
 
               
 
@@ -1504,26 +1414,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Hosts of the common language runtime (CLR), such as Microsoft SQL Server 2005, can establish different policies for failures in critical and non-critical regions of code. A critical region is one in which the effects of a thread abort or an unhandled exception might not be limited to the current task. By contrast, an abort or failure in a non-critical region of code affects only the task in which the error occurs.</para>
           <para
-            >For example, consider a task that attempts to allocate memory while holding a lock. If the memory allocation fails, aborting the current task is not sufficient to ensure stability of the <see
-             cref="T:System.AppDomain" />
+            >For example, consider a task that attempts to allocate memory while holding a lock. If the memory allocation fails, aborting the current task is not sufficient to ensure stability of the <see cref="T:System.AppDomain" />
 
             
 
             , because there can be other tasks in the domain waiting for the same lock. If the current task is terminated, other tasks could be deadlocked.</para
           >
           <para
-            >When a failure occurs in a critical region, the host might decide to unload the entire <see
-             cref="T:System.AppDomain" />
+            >When a failure occurs in a critical region, the host might decide to unload the entire <see cref="T:System.AppDomain" />
 
             
 
-             rather than take the risk of continuing execution in a potentially unstable state. To inform the host that your code is entering a critical region, call <see
-             cref="M:System.Threading.Thread.BeginCriticalRegion" />
+             rather than take the risk of continuing execution in a potentially unstable state. To inform the host that your code is entering a critical region, call <see cref="M:System.Threading.Thread.BeginCriticalRegion" />
 
             
 
-            . Call <see
-             cref="M:System.Threading.Thread.EndCriticalRegion" />
+            . Call <see cref="M:System.Threading.Thread.EndCriticalRegion" />
 
             
 
@@ -1563,13 +1469,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Some hosts of the common language runtime, such as Microsoft SQL Server 2005, provide their own thread management. A host that provides its own thread management can move an executing task from one physical operating system thread to another at any time. Most tasks are not affected by this switching. However, some tasks have thread affinity - that is, they depend on the identity of a physical operating system thread. These tasks must inform the host when they execute code that should not be switched.</para>
           <para
-            >For example, if your application calls a system API to acquire an operating system lock that has thread affinity, such as a Win32 CRITICAL_SECTION, you must call <see
-             cref="M:System.Threading.Thread.BeginThreadAffinity" />
+            >For example, if your application calls a system API to acquire an operating system lock that has thread affinity, such as a Win32 CRITICAL_SECTION, you must call <see cref="M:System.Threading.Thread.BeginThreadAffinity" />
 
             
 
-             before acquiring the lock, and <see
-             cref="M:System.Threading.Thread.EndThreadAffinity" />
+             before acquiring the lock, and <see cref="M:System.Threading.Thread.EndThreadAffinity" />
 
             
 
@@ -1611,8 +1515,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.ExecutionContext" />
+            >The <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -1622,8 +1525,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Threading.ExecutionContext" />
+            >Gets an <see cref="T:System.Threading.ExecutionContext" />
 
             
 
@@ -1693,13 +1595,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see
-               cref="T:System.ThreadStaticAttribute" />
+              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
               
 
-               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
-               type="text/html">
+               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
@@ -1711,13 +1611,11 @@
             >
           </block>
           <para
-            >After any thread calls FreeNamedDataSlot, any other thread that calls <see
-             cref="M:System.Threading.Thread.GetNamedDataSlot(System.String)" />
+            >After any thread calls FreeNamedDataSlot, any other thread that calls <see cref="M:System.Threading.Thread.GetNamedDataSlot(System.String)" />
 
             
 
-             with the same name will allocate a new slot associated with the name. Subsequent calls to GetNamedDataSlot by any thread will return the new slot. However, any thread that still has a <see
-             cref="T:System.LocalDataStoreSlot" />
+             with the same name will allocate a new slot associated with the name. Subsequent calls to GetNamedDataSlot by any thread will return the new slot. However, any thread that still has a <see cref="T:System.LocalDataStoreSlot" />
 
             
 
@@ -1729,8 +1627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Eliminates the association between a name and a slot, for all threads in the process. For better performance, use fields that are marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Eliminates the association between a name and a slot, for all threads in the process. For better performance, use fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -1738,7 +1635,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1769,18 +1670,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method, along with the <see
-             cref="M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState)" />
+            >This method, along with the <see cref="M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState)" />
 
             
 
-             method and the <see
-             cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
+             method and the <see cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
 
             
 
-             method, replaces the <see
-             cref="P:System.Threading.Thread.ApartmentState" />
+             method, replaces the <see cref="P:System.Threading.Thread.ApartmentState" />
 
             
 
@@ -1790,8 +1688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Threading.ApartmentState" />
+            >Returns an <see cref="T:System.Threading.ApartmentState" />
 
             
 
@@ -1801,13 +1698,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of the <see
-             cref="T:System.Threading.ApartmentState" />
+            >One of the <see cref="T:System.Threading.ApartmentState" />
 
             
 
-             values indicating the apartment state of the managed thread. The default is <see
-             cref="F:System.Threading.ApartmentState.Unknown" />
+             values indicating the apartment state of the managed thread. The default is <see cref="F:System.Threading.ApartmentState.Unknown" />
 
             
 
@@ -1848,8 +1743,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Threading.CompressedStack" />
+            >Returns a <see cref="T:System.Threading.CompressedStack" />
 
             
 
@@ -1888,13 +1782,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see
-               cref="T:System.ThreadStaticAttribute" />
+              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
               
 
-               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
-               type="text/html">
+               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
@@ -1919,8 +1811,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the value from the specified slot on the current thread, within the current thread's current domain. For better performance, use fields that are marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Retrieves the value from the specified slot on the current thread, within the current thread's current domain. For better performance, use fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -1932,12 +1823,15 @@
           <para>The retrieved value.</para>
         </returns>
         <param name="slot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.LocalDataStoreSlot" />
+          The <see cref="T:System.LocalDataStoreSlot" />
 
           
 
@@ -1974,8 +1868,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.AppDomain" />
+            >An <see cref="T:System.AppDomain" />
 
             
 
@@ -2039,8 +1932,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code is not guaranteed to be unique. Use the <see
-             cref="P:System.Threading.Thread.ManagedThreadId" />
+            >The hash code is not guaranteed to be unique. Use the <see cref="P:System.Threading.Thread.ManagedThreadId" />
 
             
 
@@ -2083,13 +1975,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see
-               cref="T:System.ThreadStaticAttribute" />
+              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
               
 
-               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
-               type="text/html">
+               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
@@ -2106,8 +1996,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Looks up a named data slot. For better performance, use fields that are marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Looks up a named data slot. For better performance, use fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -2117,8 +2006,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.LocalDataStoreSlot" />
+            >A <see cref="T:System.LocalDataStoreSlot" />
 
             
 
@@ -2126,7 +2014,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2194,8 +2086,7 @@
 
             
 if this thread has been started, and has not terminated; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -2237,8 +2128,7 @@ if this thread has been started, and has not terminated; otherwise,
             
 
             if the thread is or is to become
-   a background thread; otherwise, <see
-             langword="false" />
+   a background thread; otherwise, <see langword="false" />
 
             
 
@@ -2247,8 +2137,7 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </value>
         <exception cref="T:System.Threading.ThreadStateException"
-          > The thread has reached the <see
-           cref="F:System.Threading.ThreadState.Stopped" />
+          > The thread has reached the <see cref="F:System.Threading.ThreadState.Stopped" />
 
           
 
@@ -2282,8 +2171,7 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information see <format
-             type="text/html">
+            >For more information see <format type="text/html">
               <a href="2be05b06-a42e-4c9d-a739-96c21d673927">The Managed Thread Pool</a>
             </format>
 
@@ -2317,8 +2205,7 @@ if this thread has been started, and has not terminated; otherwise,
       <Parameters />
       <Docs>
         <exception cref="T:System.Threading.ThreadStateException"
-          >The caller attempted to join a thread that is in the <see
-           cref="F:System.Threading.ThreadState.Unstarted" />
+          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" />
 
           
 
@@ -2327,21 +2214,18 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to ensure a thread has terminated. The caller will block indefinitely if the thread does not terminate. If the thread has already terminated when <see
-             cref="Overload:System.Threading.Thread.Join" />
+            >Use this method to ensure a thread has terminated. The caller will block indefinitely if the thread does not terminate. If the thread has already terminated when <see cref="Overload:System.Threading.Thread.Join" />
 
             
 
              is called, the method returns immediately.</para
           >
           <para
-            >This method changes the state of the calling thread to include <see
-             cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+            >This method changes the state of the calling thread to include <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
             
 
-            . You cannot invoke Join on a thread that is in the <see
-             cref="F:System.Threading.ThreadState.Unstarted" />
+            . You cannot invoke Join on a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" />
 
             
 
@@ -2379,21 +2263,18 @@ if this thread has been started, and has not terminated; otherwise,
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value of <paramref
-           name="millisecondsTimeout" />
+          >The value of <paramref name="millisecondsTimeout" />
 
           
 
-           is negative and is not equal to <see
-           cref="F:System.Threading.Timeout.Infinite" />
+           is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
            .</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
-          >The caller attempted to join a thread that is in the <see
-           cref="F:System.Threading.ThreadState.Unstarted" />
+          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" />
 
           
 
@@ -2402,39 +2283,33 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="F:System.Threading.Timeout.Infinite" />
+            >If <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-             is specified for the <paramref
-             name="millisecondsTimeout" />
+             is specified for the <paramref name="millisecondsTimeout" />
 
             
 
-             parameter, this method behaves identically to the <see
-             cref="M:System.Threading.Thread.Join" />
+             parameter, this method behaves identically to the <see cref="M:System.Threading.Thread.Join" />
 
             
 
              method overload, except for the return value.</para
           >
           <para
-            >If the thread has already terminated when <see
-             cref="Overload:System.Threading.Thread.Join" />
+            >If the thread has already terminated when <see cref="Overload:System.Threading.Thread.Join" />
 
             
 
              is called, the method returns immediately.</para
           >
           <para
-            >This method changes the state of the calling thread to include <see
-             cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+            >This method changes the state of the calling thread to include <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
             
 
-            . You cannot invoke Join on a thread that is in the <see
-             cref="F:System.Threading.ThreadState.Unstarted" />
+            . You cannot invoke Join on a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" />
 
             
 
@@ -2448,8 +2323,7 @@ if this thread has been started, and has not terminated; otherwise,
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the thread has terminated; false if the thread has not terminated after the amount of time specified by the <paramref
-             name="millisecondsTimeout" />
+            >true if the thread has terminated; false if the thread has not terminated after the amount of time specified by the <paramref name="millisecondsTimeout" />
 
             
 
@@ -2457,7 +2331,11 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </returns>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2490,26 +2368,25 @@ if this thread has been started, and has not terminated; otherwise,
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value of <paramref
-           name="timeout" />
+          >The value of <paramref name="timeout" />
 
           
 
-           is negative and is not equal to <see
-           cref="F:System.Threading.Timeout.Infinite" />
+           is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
            milliseconds, or is greater than <see
-           cref="F:System.Int32.MaxValue" qualify="true" />
+            cref="F:System.Int32.MaxValue"
+            qualify="true"
+          />
 
           
 
            milliseconds.</exception
         >
         <exception cref="T:System.Threading.ThreadStateException"
-          >The caller attempted to join a thread that is in the <see
-           cref="F:System.Threading.ThreadState.Unstarted" />
+          >The caller attempted to join a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" />
 
           
 
@@ -2518,39 +2395,33 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="F:System.Threading.Timeout.Infinite" />
+            >If <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-             is specified for <paramref
-             name="timeout" />
+             is specified for <paramref name="timeout" />
 
             
 
-            , this method behaves identically to the <see
-             cref="M:System.Threading.Thread.Join" />
+            , this method behaves identically to the <see cref="M:System.Threading.Thread.Join" />
 
             
 
              method overload, except for the return value.</para
           >
           <para
-            >If the thread has already terminated when <see
-             cref="Overload:System.Threading.Thread.Join" />
+            >If the thread has already terminated when <see cref="Overload:System.Threading.Thread.Join" />
 
             
 
              is called, the method returns immediately.</para
           >
           <para
-            >This method changes the state of the current thread to include <see
-             cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+            >This method changes the state of the current thread to include <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
             
 
-            . You cannot invoke Join on a thread that is in the <see
-             cref="F:System.Threading.ThreadState.Unstarted" />
+            . You cannot invoke Join on a thread that is in the <see cref="F:System.Threading.ThreadState.Unstarted" />
 
             
 
@@ -2564,8 +2435,7 @@ if this thread has been started, and has not terminated; otherwise,
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the thread terminated; false if the thread has not terminated after the amount of time specified by the <paramref
-             name="timeout" />
+            >true if the thread terminated; false if the thread has not terminated after the amount of time specified by the <paramref name="timeout" />
 
             
 
@@ -2573,12 +2443,15 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.TimeSpan" />
+          A <see cref="T:System.TimeSpan" />
 
           
 
@@ -2609,8 +2482,7 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Threading.Thread.ManagedThreadId" />
+            >The value of the <see cref="P:System.Threading.Thread.ManagedThreadId" />
 
             
 
@@ -2650,8 +2522,7 @@ if this thread has been started, and has not terminated; otherwise,
              is required only on multiprocessor systems with weak memory ordering (for example, a system employing multiple Intel Itanium processors).</para
           >
           <para
-            >For most purposes, the C# lock statement, the Visual Basic SyncLock statement, or the <see
-             cref="T:System.Threading.Monitor" />
+            >For most purposes, the C# lock statement, the Visual Basic SyncLock statement, or the <see cref="T:System.Threading.Monitor" />
 
             
 
@@ -2661,13 +2532,11 @@ if this thread has been started, and has not terminated; otherwise,
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Synchronizes memory access as follows: The processor executing the current thread cannot reorder instructions in such a way that memory accesses prior to the call to <see
-             cref="M:System.Threading.Thread.MemoryBarrier" />
+            >Synchronizes memory access as follows: The processor executing the current thread cannot reorder instructions in such a way that memory accesses prior to the call to <see cref="M:System.Threading.Thread.MemoryBarrier" />
 
             
 
-             execute after memory accesses that follow the call to <see
-             cref="M:System.Threading.Thread.MemoryBarrier" />
+             execute after memory accesses that follow the call to <see cref="M:System.Threading.Thread.MemoryBarrier" />
 
             
 
@@ -2696,14 +2565,12 @@ if this thread has been started, and has not terminated; otherwise,
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing the
-   name of the thread, or <see
-             langword="null" />
+   name of the thread, or <see langword="null" />
 
             
 
@@ -2712,8 +2579,7 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </value>
         <exception cref="T:System.InvalidOperationException"
-          >A set operation was requested, and the <see
-           langword="Name" />
+          >A set operation was requested, and the <see langword="Name" />
 
           
 
@@ -2756,8 +2622,7 @@ if this thread has been started, and has not terminated; otherwise,
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Threading.ThreadPriority" />
+            > A <see cref="T:System.Threading.ThreadPriority" />
 
             
 
@@ -2766,16 +2631,14 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </value>
         <exception cref="T:System.Threading.ThreadStateException"
-          > The thread is in the <see
-           cref="F:System.Threading.ThreadState.Stopped" />
+          > The thread is in the <see cref="F:System.Threading.ThreadState.Stopped" />
 
           
 
            state.</exception
         >
         <exception cref="T:System.ArgumentException"
-          >The value specified for a set operation is not a valid <see
-           cref="T:System.Threading.ThreadPriority" />
+          >The value specified for a set operation is not a valid <see cref="T:System.Threading.ThreadPriority" />
 
           
 
@@ -2837,8 +2700,7 @@ if this thread has been started, and has not terminated; otherwise,
         >
         <exception cref="T:System.Security.SecurityException">
           <SPAN
-            >Caller does not have <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+            >Caller does not have <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
 
             
 
@@ -2846,8 +2708,7 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </exception>
         <permission cref="!:System.Security.SecurityPermission"
-          >Requires permission to control the current thread. See <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
+          >Requires permission to control the current thread. See <see cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlThread" />
 
           
 
@@ -2856,8 +2717,7 @@ if this thread has been started, and has not terminated; otherwise,
         <example>
           <para
             >For an example that demonstrates calling 
-      this method, see <see
-             cref="T:System.Threading.ThreadAbortException" />
+      this method, see <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
@@ -2867,8 +2727,7 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method can only be called by code with the proper permissions. For more information see <format
-             type="text/html">
+            >This method can only be called by code with the proper permissions. For more information see <format type="text/html">
               <a href="324C14F8-54FF-494D-9FD1-BFD20962C8BA"
                 >[&lt;topic://cpconMakingSecurityDemands&gt;]</a
               >
@@ -2879,16 +2738,14 @@ if this thread has been started, and has not terminated; otherwise,
             .</para
           >
           <para
-            >When a call is made to Abort to terminate a thread, the system throws a <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >When a call is made to Abort to terminate a thread, the system throws a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
             . ThreadAbortException is a special exception that can be caught by application code, but is rethrown at the end of the catch block unless ResetAbort is called. ResetAbort cancels the request to abort, and prevents the ThreadAbortException from terminating the thread.</para
           >
           <para
-            >See <see
-             cref="T:System.Threading.ThreadAbortException" />
+            >See <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
@@ -2898,8 +2755,7 @@ if this thread has been started, and has not terminated; otherwise,
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cancels an <see
-             cref="M:System.Threading.Thread.Abort(System.Object)" />
+            >Cancels an <see cref="M:System.Threading.Thread.Abort(System.Object)" />
 
             
 
@@ -2935,23 +2791,19 @@ if this thread has been started, and has not terminated; otherwise,
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Do not use the <see
-               cref="M:System.Threading.Thread.Suspend" />
+              >Do not use the <see cref="M:System.Threading.Thread.Suspend" />
 
               
 
-               and <see
-               cref="M:System.Threading.Thread.Resume" />
+               and <see cref="M:System.Threading.Thread.Resume" />
 
               
 
-               methods to synchronize the activities of threads. You have no way of knowing what code a thread is executing when you suspend it. If you suspend a thread while it holds locks during a security permission evaluation, other threads in the <see
-               cref="T:System.AppDomain" />
+               methods to synchronize the activities of threads. You have no way of knowing what code a thread is executing when you suspend it. If you suspend a thread while it holds locks during a security permission evaluation, other threads in the <see cref="T:System.AppDomain" />
 
               
 
-               might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see
-               cref="T:System.AppDomain" />
+               might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see cref="T:System.AppDomain" />
 
               
 
@@ -2990,8 +2842,7 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New threads are initialized as <see
-             cref="F:System.Threading.ApartmentState.MTA" />
+            >New threads are initialized as <see cref="F:System.Threading.ApartmentState.MTA" />
 
             
 
@@ -2999,18 +2850,15 @@ if this thread has been started, and has not terminated; otherwise,
           >
           <block subset="none" type="note">
             <para
-              >The main application thread is initialized to <see
-               cref="F:System.Threading.ApartmentState.MTA" />
+              >The main application thread is initialized to <see cref="F:System.Threading.ApartmentState.MTA" />
 
               
 
-               by default. The only way to set the apartment state of the main application thread to <see
-               cref="F:System.Threading.ApartmentState.STA" />
+               by default. The only way to set the apartment state of the main application thread to <see cref="F:System.Threading.ApartmentState.STA" />
 
               
 
-               is to apply the <see
-               cref="T:System.STAThreadAttribute" />
+               is to apply the <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -3018,23 +2866,19 @@ if this thread has been started, and has not terminated; otherwise,
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState)" />
+            >The <see cref="M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState)" />
 
             
 
-             method, along with the <see
-             cref="M:System.Threading.Thread.GetApartmentState" />
+             method, along with the <see cref="M:System.Threading.Thread.GetApartmentState" />
 
             
 
-             method and the <see
-             cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
+             method and the <see cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
 
             
 
-             method, replaces the <see
-             cref="P:System.Threading.Thread.ApartmentState" />
+             method, replaces the <see cref="P:System.Threading.Thread.ApartmentState" />
 
             
 
@@ -3046,7 +2890,11 @@ if this thread has been started, and has not terminated; otherwise,
           <para>Sets the apartment state of a thread before it is started.</para>
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3088,8 +2936,7 @@ if this thread has been started, and has not terminated; otherwise,
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a captured <see
-             cref="T:System.Threading.CompressedStack" />
+            >Applies a captured <see cref="T:System.Threading.CompressedStack" />
 
             
 
@@ -3097,12 +2944,15 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </summary>
         <param name="stack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Threading.CompressedStack" />
+          The <see cref="T:System.Threading.CompressedStack" />
 
           
 
@@ -3137,13 +2987,11 @@ if this thread has been started, and has not terminated; otherwise,
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see
-               cref="T:System.ThreadStaticAttribute" />
+              >The .NET Framework provides two mechanisms for using thread local storage (TLS): thread-relative static fields (that is, fields that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
               
 
-               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format
-               type="text/html">
+               attribute) and data slots. Thread-relative static fields provide much better performance than data slots, and enable compile-time type checking. For more information about using TLS, see <format type="text/html">
                 <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
                   >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
                 >
@@ -3155,8 +3003,7 @@ if this thread has been started, and has not terminated; otherwise,
             >
           </block>
           <para
-            >Threads use a local store memory mechanism to store thread-specific data. The common language runtime allocates a multi-slot data store array to each process when it is created. The thread can allocate a data slot in the data store, store and retrieve a data value in the slot, and free the slot for reuse after the thread procedure ends and the <see
-             cref="T:System.Threading.Thread" />
+            >Threads use a local store memory mechanism to store thread-specific data. The common language runtime allocates a multi-slot data store array to each process when it is created. The thread can allocate a data slot in the data store, store and retrieve a data value in the slot, and free the slot for reuse after the thread procedure ends and the <see cref="T:System.Threading.Thread" />
 
             
 
@@ -3175,8 +3022,7 @@ if this thread has been started, and has not terminated; otherwise,
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the data in the specified slot on the currently running thread, for that thread's current domain. For better performance, use fields marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Sets the data in the specified slot on the currently running thread, for that thread's current domain. For better performance, use fields marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -3184,19 +3030,26 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </summary>
         <param name="slot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.LocalDataStoreSlot" />
+          The <see cref="T:System.LocalDataStoreSlot" />
 
           
 
            in which to set the value. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3228,13 +3081,14 @@ if this thread has been started, and has not terminated; otherwise,
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value of <paramref
-           name="millisecondsTimeout" />
+          >The value of <paramref name="millisecondsTimeout" />
 
           
 
            is negative and is not equal to <see
-           cref="F:System.Threading.Timeout.Infinite" qualify="true" />
+            cref="F:System.Threading.Timeout.Infinite"
+            qualify="true"
+          />
 
           
 
@@ -3243,46 +3097,38 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread will not be scheduled for execution by the operating system for the amount of time specified. This method changes the state of the thread to include <see
-             cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+            >The thread will not be scheduled for execution by the operating system for the amount of time specified. This method changes the state of the thread to include <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
             
 
             .</para
           >
           <para
-            >You can specify <see
-             cref="F:System.Threading.Timeout.Infinite" />
+            >You can specify <see cref="F:System.Threading.Timeout.Infinite" />
 
             
 
-             for the <paramref
-             name="millisecondsTimeout" />
+             for the <paramref name="millisecondsTimeout" />
 
             
 
-             parameter to suspend the thread indefinitely. However, we recommend that you use other <see
-             cref="N:System.Threading" />
+             parameter to suspend the thread indefinitely. However, we recommend that you use other <see cref="N:System.Threading" />
 
             
 
-             classes such as <see
-             cref="T:System.Threading.Mutex" />
+             classes such as <see cref="T:System.Threading.Mutex" />
 
             
 
-            , <see
-             cref="T:System.Threading.Monitor" />
+            , <see cref="T:System.Threading.Monitor" />
 
             
 
-            , <see
-             cref="T:System.Threading.EventWaitHandle" />
+            , <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
-            , or <see
-             cref="T:System.Threading.Semaphore" />
+            , or <see cref="T:System.Threading.Semaphore" />
 
             
 
@@ -3291,13 +3137,11 @@ if this thread has been started, and has not terminated; otherwise,
           <para>This method does not perform standard COM and SendMessage pumping.</para>
           <block subset="none" type="note">
             <para
-              >If you need to sleep on a thread that has <see
-               cref="T:System.STAThreadAttribute" />
+              >If you need to sleep on a thread that has <see cref="T:System.STAThreadAttribute" />
 
               
 
-              , but you want to perform standard COM and SendMessage pumping, consider using one of the overloads of the <see
-               cref="Overload:System.Threading.Thread.Join" />
+              , but you want to perform standard COM and SendMessage pumping, consider using one of the overloads of the <see cref="Overload:System.Threading.Thread.Join" />
 
               
 
@@ -3310,7 +3154,11 @@ if this thread has been started, and has not terminated; otherwise,
           <para>Suspends the current thread for the specified number of milliseconds.</para>
         </summary>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3343,18 +3191,18 @@ if this thread has been started, and has not terminated; otherwise,
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value of <paramref
-           name="timeout" />
+          >The value of <paramref name="timeout" />
 
           
 
-           is negative and is not equal to <see
-           cref="F:System.Threading.Timeout.Infinite" />
+           is negative and is not equal to <see cref="F:System.Threading.Timeout.Infinite" />
 
           
 
            milliseconds, or is greater than <see
-           cref="F:System.Int32.MaxValue" qualify="true" />
+            cref="F:System.Int32.MaxValue"
+            qualify="true"
+          />
 
           
 
@@ -3363,59 +3211,49 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The thread will not be scheduled for execution by the operating system for the amount of time specified. This method changes the state of the thread to include <see
-             cref="F:System.Threading.ThreadState.WaitSleepJoin" />
+            >The thread will not be scheduled for execution by the operating system for the amount of time specified. This method changes the state of the thread to include <see cref="F:System.Threading.ThreadState.WaitSleepJoin" />
 
             
 
             .</para
           >
           <para
-            >You can specify <see
-             cref="F:System.Threading.Timeout.InfiniteTimeSpan" />
+            >You can specify <see cref="F:System.Threading.Timeout.InfiniteTimeSpan" />
 
             
 
-             for the <paramref
-             name="timeout" />
+             for the <paramref name="timeout" />
 
             
 
-             parameter to suspend the thread indefinitely. However, we recommend that you use other <see
-             cref="N:System.Threading" />
+             parameter to suspend the thread indefinitely. However, we recommend that you use other <see cref="N:System.Threading" />
 
             
 
-             classes such as <see
-             cref="T:System.Threading.Mutex" />
+             classes such as <see cref="T:System.Threading.Mutex" />
 
             
 
-            , <see
-             cref="T:System.Threading.Monitor" />
+            , <see cref="T:System.Threading.Monitor" />
 
             
 
-            , <see
-             cref="T:System.Threading.EventWaitHandle" />
+            , <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
-            , or <see
-             cref="T:System.Threading.Semaphore" />
+            , or <see cref="T:System.Threading.Semaphore" />
 
             
 
              instead to sychronize threads or manage resources.</para
           >
           <para
-            >This overload of <see
-             cref="Overload:System.Threading.Thread.Sleep" />
+            >This overload of <see cref="Overload:System.Threading.Thread.Sleep" />
 
             
 
-             uses the total number of whole milliseconds in <paramref
-             name="timeout" />
+             uses the total number of whole milliseconds in <paramref name="timeout" />
 
             
 
@@ -3424,13 +3262,11 @@ if this thread has been started, and has not terminated; otherwise,
           <para>This method does not perform standard COM and SendMessage pumping.</para>
           <block subset="none" type="note">
             <para
-              >If you need to sleep on a thread that has <see
-               cref="T:System.STAThreadAttribute" />
+              >If you need to sleep on a thread that has <see cref="T:System.STAThreadAttribute" />
 
               
 
-              , but you want to perform standard COM and SendMessage pumping, consider using one of the overloads of the <see
-               cref="Overload:System.Threading.Thread.Join" />
+              , but you want to perform standard COM and SendMessage pumping, consider using one of the overloads of the <see cref="Overload:System.Threading.Thread.Join" />
 
               
 
@@ -3443,7 +3279,11 @@ if this thread has been started, and has not terminated; otherwise,
           <para>Suspends the current thread for the specified amount of time.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3479,46 +3319,38 @@ if this thread has been started, and has not terminated; otherwise,
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+            >The <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
             
 
-             method is useful for implementing locks. Classes in the .NET Framework, such as <see
-             cref="T:System.Threading.Monitor" />
+             method is useful for implementing locks. Classes in the .NET Framework, such as <see cref="T:System.Threading.Monitor" />
 
             
 
-             and <see
-             cref="T:System.Threading.ReaderWriterLock" />
+             and <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
-            , use this method internally. <see
-             cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+            , use this method internally. <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
             
 
-             essentially puts the processor into a very tight loop, with the loop count specified by the <paramref
-             name="iterations" />
+             essentially puts the processor into a very tight loop, with the loop count specified by the <paramref name="iterations" />
 
             
 
              parameter. The duration of the wait therefore depends on the speed of the processor.</para
           >
           <para
-            >Contrast this with the <see
-             cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+            >Contrast this with the <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />
 
             
 
-             method. A thread that calls <see
-             cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+             method. A thread that calls <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />
 
             
 
-             yields the rest of its current slice of processor time, even if the specified interval is zero. Specifying a non-zero interval for <see
-             cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+             yields the rest of its current slice of processor time, even if the specified interval is zero. Specifying a non-zero interval for <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />
 
             
 
@@ -3529,13 +3361,11 @@ if this thread has been started, and has not terminated; otherwise,
 
             
 
-             is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework; for example, call <see
-             cref="M:System.Threading.Monitor.Enter(System.Object)" />
+             is not generally useful for ordinary applications. In most cases, you should use the synchronization classes provided by the .NET Framework; for example, call <see cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
             
 
-             or a statement that wraps <see
-             cref="M:System.Threading.Monitor.Enter(System.Object)" />
+             or a statement that wraps <see cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
             
 
@@ -3543,18 +3373,15 @@ if this thread has been started, and has not terminated; otherwise,
           >
           <block subset="none" type="note">
             <para
-              >In the rare case where it is advantageous to avoid a context switch, such as when you know that a state change is imminent, make a call to the <see
-               cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+              >In the rare case where it is advantageous to avoid a context switch, such as when you know that a state change is imminent, make a call to the <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
               
 
-               method in your loop. The code <see
-               cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+               method in your loop. The code <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
               
 
-               executes is designed to prevent problems that can occur on computers with multiple processors. For example, on computers with multiple Intel processors employing Hyper-Threading technology, <see
-               cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
+               executes is designed to prevent problems that can occur on computers with multiple processors. For example, on computers with multiple Intel processors employing Hyper-Threading technology, <see cref="M:System.Threading.Thread.SpinWait(System.Int32)" />
 
               
 
@@ -3565,8 +3392,7 @@ if this thread has been started, and has not terminated; otherwise,
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes a thread to wait the number of times defined by the <paramref
-             name="iterations" />
+            >Causes a thread to wait the number of times defined by the <paramref name="iterations" />
 
             
 
@@ -3574,7 +3400,11 @@ if this thread has been started, and has not terminated; otherwise,
           >
         </summary>
         <param name="iterations">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3604,8 +3434,7 @@ if this thread has been started, and has not terminated; otherwise,
           >There is not enough memory available to start the thread.</exception
         >
         <exception cref="T:System.NullReferenceException"
-          >This method was invoked on a <see
-           langword="null" />
+          >This method was invoked on a <see langword="null" />
 
           
 
@@ -3654,18 +3483,15 @@ class ThreadTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Once a thread is in the <see
-             cref="F:System.Threading.ThreadState.Running" />
+            >Once a thread is in the <see cref="F:System.Threading.ThreadState.Running" />
 
             
 
-             state, the operating system can schedule it for execution. The thread begins executing at the first line of the method represented by the <see
-             cref="T:System.Threading.ThreadStart" />
+             state, the operating system can schedule it for execution. The thread begins executing at the first line of the method represented by the <see cref="T:System.Threading.ThreadStart" />
 
             
 
-             or <see
-             cref="T:System.Threading.ParameterizedThreadStart" />
+             or <see cref="T:System.Threading.ParameterizedThreadStart" />
 
             
 
@@ -3673,8 +3499,7 @@ class ThreadTest{
           >
           <block subset="none" type="note">
             <para
-              >If this overload is used with a thread created using a <see
-               cref="T:System.Threading.ParameterizedThreadStart" />
+              >If this overload is used with a thread created using a <see cref="T:System.Threading.ParameterizedThreadStart" />
 
               
 
@@ -3686,8 +3511,7 @@ class ThreadTest{
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes the operating system to change the state of the current instance to <see
-             cref="F:System.Threading.ThreadState.Running" />
+            >Causes the operating system to change the state of the current instance to <see cref="F:System.Threading.ThreadState.Running" />
 
             
 
@@ -3719,18 +3543,15 @@ class ThreadTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Once a thread is in the <see
-             cref="F:System.Threading.ThreadState.Running" />
+            >Once a thread is in the <see cref="F:System.Threading.ThreadState.Running" />
 
             
 
-             state, the operating system can schedule it for execution. The thread begins executing at the first line of the method represented by the <see
-             cref="T:System.Threading.ThreadStart" />
+             state, the operating system can schedule it for execution. The thread begins executing at the first line of the method represented by the <see cref="T:System.Threading.ThreadStart" />
 
             
 
-             or <see
-             cref="T:System.Threading.ParameterizedThreadStart" />
+             or <see cref="T:System.Threading.ParameterizedThreadStart" />
 
             
 
@@ -3738,13 +3559,11 @@ class ThreadTest{
           >
           <para>Once the thread terminates, it cannot be restarted with another call to Start.</para>
           <para
-            >This overload and the <see
-             cref="T:System.Threading.ParameterizedThreadStart" />
+            >This overload and the <see cref="T:System.Threading.ParameterizedThreadStart" />
 
             
 
-             delegate make it easy to pass data to a thread procedure, but the technique is not type safe because any object can be passed to this overload. A more robust way to pass data to a thread procedure is to put both the thread procedure and the data fields into a worker object. For more information, see <format
-             type="text/html">
+             delegate make it easy to pass data to a thread procedure, but the technique is not type safe because any object can be passed to this overload. A more robust way to pass data to a thread procedure is to put both the thread procedure and the data fields into a worker object. For more information, see <format type="text/html">
               <a href="52b32222-e185-4f42-91a7-eaca65c0ab6d">Creating Threads</a>
             </format>
 
@@ -3756,8 +3575,7 @@ class ThreadTest{
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes the operating system to change the state of the current instance to <see
-             cref="F:System.Threading.ThreadState.Running" />
+            >Causes the operating system to change the state of the current instance to <see cref="F:System.Threading.ThreadState.Running" />
 
             
 
@@ -3765,7 +3583,11 @@ class ThreadTest{
           >
         </summary>
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3800,23 +3622,19 @@ class ThreadTest{
           <para>If the thread is already suspended, this method has no effect.</para>
           <block subset="none" type="note">
             <para
-              >Do not use the <see
-               cref="M:System.Threading.Thread.Suspend" />
+              >Do not use the <see cref="M:System.Threading.Thread.Suspend" />
 
               
 
-               and <see
-               cref="M:System.Threading.Thread.Resume" />
+               and <see cref="M:System.Threading.Thread.Resume" />
 
               
 
-               methods to synchronize the activities of threads. You have no way of knowing what code a thread is executing when you suspend it. If you suspend a thread while it holds locks during a security permission evaluation, other threads in the <see
-               cref="T:System.AppDomain" />
+               methods to synchronize the activities of threads. You have no way of knowing what code a thread is executing when you suspend it. If you suspend a thread while it holds locks during a security permission evaluation, other threads in the <see cref="T:System.AppDomain" />
 
               
 
-               might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see
-               cref="T:System.AppDomain" />
+               might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see cref="T:System.AppDomain" />
 
               
 
@@ -3892,8 +3710,7 @@ class ThreadTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -3905,21 +3722,33 @@ class ThreadTest{
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4018,8 +3847,7 @@ class ThreadTest{
       <Docs>
         <value>
           <para
-            > A combination of one or more <see
-             cref="T:System.Threading.ThreadState" />
+            > A combination of one or more <see cref="T:System.Threading.ThreadState" />
 
             
 
@@ -4030,13 +3858,11 @@ class ThreadTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Threading.Thread.ThreadState" />
+            >The <see cref="P:System.Threading.Thread.ThreadState" />
 
             
 
-             property provides more specific information than the <see
-             cref="P:System.Threading.Thread.IsAlive" />
+             property provides more specific information than the <see cref="P:System.Threading.Thread.IsAlive" />
 
             
 
@@ -4078,8 +3904,7 @@ class ThreadTest{
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New threads are initialized as <see
-             cref="F:System.Threading.ApartmentState.MTA" />
+            >New threads are initialized as <see cref="F:System.Threading.ApartmentState.MTA" />
 
             
 
@@ -4087,18 +3912,15 @@ class ThreadTest{
           >
           <block subset="none" type="note">
             <para
-              >The main application thread is initialized to <see
-               cref="F:System.Threading.ApartmentState.MTA" />
+              >The main application thread is initialized to <see cref="F:System.Threading.ApartmentState.MTA" />
 
               
 
-               by default. The only way to set the apartment state of the main application thread to <see
-               cref="F:System.Threading.ApartmentState.STA" />
+               by default. The only way to set the apartment state of the main application thread to <see cref="F:System.Threading.ApartmentState.STA" />
 
               
 
-               is to apply the <see
-               cref="T:System.STAThreadAttribute" />
+               is to apply the <see cref="T:System.STAThreadAttribute" />
 
               
 
@@ -4106,23 +3928,19 @@ class ThreadTest{
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
+            >The <see cref="M:System.Threading.Thread.TrySetApartmentState(System.Threading.ApartmentState)" />
 
             
 
-             method, along with the <see
-             cref="M:System.Threading.Thread.GetApartmentState" />
+             method, along with the <see cref="M:System.Threading.Thread.GetApartmentState" />
 
             
 
-             method and the <see
-             cref="M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState)" />
+             method and the <see cref="M:System.Threading.Thread.SetApartmentState(System.Threading.ApartmentState)" />
 
             
 
-             method, replaces the <see
-             cref="P:System.Threading.Thread.ApartmentState" />
+             method, replaces the <see cref="P:System.Threading.Thread.ApartmentState" />
 
             
 
@@ -4138,7 +3956,11 @@ class ThreadTest{
           <para>true if the apartment state is set; otherwise, false.</para>
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4170,8 +3992,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Byte" />
+          >A reference to a <see cref="T:System.Byte" />
 
           
 
@@ -4182,8 +4003,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Byte" />
+            >A <see cref="T:System.Byte" />
 
             
 
@@ -4192,23 +4012,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4243,8 +4061,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Double" />
+          >A reference to a <see cref="T:System.Double" />
 
           
 
@@ -4255,8 +4072,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Double" />
+            >A <see cref="T:System.Double" />
 
             
 
@@ -4265,23 +4081,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4316,8 +4130,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Int16" />
+          >A reference to a <see cref="T:System.Int16" />
 
           
 
@@ -4328,8 +4141,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Int16" />
+            >A <see cref="T:System.Int16" />
 
             
 
@@ -4338,23 +4150,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4386,8 +4196,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Int32" />
+          >A reference to a <see cref="T:System.Int32" />
 
           
 
@@ -4398,8 +4207,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -4408,23 +4216,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4456,8 +4262,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Int64" />
+          >A reference to a <see cref="T:System.Int64" />
 
           
 
@@ -4468,8 +4273,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Int64" />
+            >A <see cref="T:System.Int64" />
 
             
 
@@ -4478,23 +4282,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4529,8 +4331,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.IntPtr" />
+          >A reference to a <see cref="T:System.IntPtr" />
 
           
 
@@ -4541,8 +4342,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.IntPtr" />
+            >A <see cref="T:System.IntPtr" />
 
             
 
@@ -4551,23 +4351,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4603,8 +4401,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Object" />
+          >A reference to a <see cref="T:System.Object" />
 
           
 
@@ -4615,8 +4412,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
@@ -4625,23 +4421,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4681,8 +4475,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.SByte" />
+          >A reference to a <see cref="T:System.SByte" />
 
           
 
@@ -4693,8 +4486,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.SByte" />
+            >A <see cref="T:System.SByte" />
 
             
 
@@ -4703,23 +4495,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4754,8 +4544,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Single" />
+          >A reference to a <see cref="T:System.Single" />
 
           
 
@@ -4766,8 +4555,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.Single" />
+            >A <see cref="T:System.Single" />
 
             
 
@@ -4776,23 +4564,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4832,8 +4618,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UInt16" />
+          >A reference to a <see cref="T:System.UInt16" />
 
           
 
@@ -4844,8 +4629,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.UInt16" />
+            >A <see cref="T:System.UInt16" />
 
             
 
@@ -4854,23 +4638,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4907,8 +4689,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UInt32" />
+          >A reference to a <see cref="T:System.UInt32" />
 
           
 
@@ -4919,8 +4700,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.UInt32" />
+            >A <see cref="T:System.UInt32" />
 
             
 
@@ -4929,23 +4709,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -4985,8 +4763,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UInt64" />
+          >A reference to a <see cref="T:System.UInt64" />
 
           
 
@@ -4997,8 +4774,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.UInt64" />
+            >A <see cref="T:System.UInt64" />
 
             
 
@@ -5007,23 +4783,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5059,8 +4833,7 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UIntPtr" />
+          >A reference to a <see cref="T:System.UIntPtr" />
 
           
 
@@ -5071,8 +4844,7 @@ class ThreadTest{
         </summary>
         <returns>
           <para
-            >A <see
-             cref="T:System.UIntPtr" />
+            >A <see cref="T:System.UIntPtr" />
 
             
 
@@ -5081,23 +4853,21 @@ class ThreadTest{
         </returns>
         <remarks>
           <para
-            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value at the given address is atomically loaded with acquire semantics, meaning that the read is guaranteed to occur prior to any references to memory that occur after the execution of this method in the current thread. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the load CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5132,16 +4902,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Byte" />
+          >A reference to a <see cref="T:System.Byte" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Byte" />
+          >A <see cref="T:System.Byte" />
 
           
 
@@ -5152,23 +4920,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5204,16 +4970,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Double" />
+          >A reference to a <see cref="T:System.Double" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Double" />
+          >A <see cref="T:System.Double" />
 
           
 
@@ -5224,23 +4988,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5276,16 +5038,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Int16" />
+          >A reference to a <see cref="T:System.Int16" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Int16" />
+          >A <see cref="T:System.Int16" />
 
           
 
@@ -5296,23 +5056,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5348,16 +5106,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Int32" />
+          >A reference to a <see cref="T:System.Int32" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Int32" />
+          >A <see cref="T:System.Int32" />
 
           
 
@@ -5368,23 +5124,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5420,16 +5174,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Int64" />
+          >A reference to a <see cref="T:System.Int64" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Int64" />
+          >A <see cref="T:System.Int64" />
 
           
 
@@ -5440,23 +5192,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5492,16 +5242,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.IntPtr" />
+          >A reference to a <see cref="T:System.IntPtr" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.IntPtr" />
+          >A <see cref="T:System.IntPtr" />
 
           
 
@@ -5512,23 +5260,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5565,16 +5311,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Object" />
+          >A reference to a <see cref="T:System.Object" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Object" />
+          >A <see cref="T:System.Object" />
 
           
 
@@ -5585,23 +5329,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5642,16 +5384,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.SByte" />
+          >A reference to a <see cref="T:System.SByte" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.SByte" />
+          >A <see cref="T:System.SByte" />
 
           
 
@@ -5662,23 +5402,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5714,16 +5452,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.Single" />
+          >A reference to a <see cref="T:System.Single" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.Single" />
+          >A <see cref="T:System.Single" />
 
           
 
@@ -5734,23 +5470,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5791,16 +5525,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UInt16" />
+          >A reference to a <see cref="T:System.UInt16" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.UInt16" />
+          >A <see cref="T:System.UInt16" />
 
           
 
@@ -5811,23 +5543,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5868,16 +5598,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UInt32" />
+          >A reference to a <see cref="T:System.UInt32" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.UInt32" />
+          >A <see cref="T:System.UInt32" />
 
           
 
@@ -5888,23 +5616,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -5941,16 +5667,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UInt64" />
+          >A reference to a <see cref="T:System.UInt64" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.UInt64" />
+          >A <see cref="T:System.UInt64" />
 
           
 
@@ -5961,23 +5685,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -6017,16 +5739,14 @@ class ThreadTest{
       </Parameters>
       <Docs>
         <param name="address"
-          >A reference to a <see
-           cref="T:System.UIntPtr" />
+          >A reference to a <see cref="T:System.UIntPtr" />
 
           
 
            that specifies the address in memory at which to write.</param
         >
         <param name="value"
-          >A <see
-           cref="T:System.UIntPtr" />
+          >A <see cref="T:System.UIntPtr" />
 
           
 
@@ -6037,23 +5757,21 @@ class ThreadTest{
         </summary>
         <remarks>
           <para
-            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+            >The value is written atomically to the specified address with release semantics, meaning that the write is guaranteed to happen after any references to memory that occur prior to the execution. It is recommended that <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
-             and <see
-             cref="M:System.Threading.Thread.VolatileWrite" />
+             and <see cref="M:System.Threading.Thread.VolatileWrite" />
 
             
 
-             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see
-             cref="M:System.Threading.Thread.VolatileRead" />
+             be used in conjunction. Calling this method affects only this single access; other accesses to the same location are required to also be made using this method or <see cref="M:System.Threading.Thread.VolatileRead" />
 
             
 
              if the volatile semantics are to be preserved. This method has exactly the same semantics as using the volatile prefix on the store CIL instruction, except that atomicity is provided for all types, not just those 32 bits or smaller in size. <block
-             subset="none" type="note"
+              subset="none"
+              type="note"
               >For additional information, see Partition I of the CLI Specification.</block
             >
           </para>
@@ -6087,13 +5805,11 @@ class ThreadTest{
           <para>If this method succeeds, the rest of the thread's current time slice is yielded. The operating system schedules the calling thread for another time slice, according to its priority and the status of other threads that are available to run. </para>
           <para>Yielding is limited to the processor that is executing the calling thread. The operating system will not switch execution to another processor, even if that processor is idle or is running a thread of lower priority. If there are no other threads that are ready to execute on the current processor, the operating system does not yield execution, and this method returns false. </para>
           <para
-            >This method is equivalent to using platform invoke to call the native Win32 <unmanagedCodeEntityReference
-            >SwitchToThread</unmanagedCodeEntityReference>
+            >This method is equivalent to using platform invoke to call the native Win32 <unmanagedCodeEntityReference>SwitchToThread</unmanagedCodeEntityReference>
 
             
 
-             function. You should call the <see
-             cref="M:System.Threading.Thread.Yield" />
+             function. You should call the <see cref="M:System.Threading.Thread.Yield" />
 
             
 

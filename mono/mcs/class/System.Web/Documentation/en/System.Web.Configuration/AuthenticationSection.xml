@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AuthenticationSection" />
+        >The <see cref="T:System.Web.Configuration.AuthenticationSection" />
 
         
 
@@ -26,18 +25,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.AuthenticationSection" />
+          >The <see cref="T:System.Web.Configuration.AuthenticationSection" />
 
           
 
-           can write information into the related section of the configuration file according to the restrictions defined by the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can write information into the related section of the configuration file according to the restrictions defined by the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.MachineToApplication" />
 
           
 
@@ -60,18 +56,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.AuthenticationSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.AuthenticationSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.AuthenticationSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.AuthenticationSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -81,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.AuthenticationSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.AuthenticationSection" />
 
             
 
@@ -115,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Web.Configuration.AuthenticationSection.Forms" />
+            >Gets the <see cref="P:System.Web.Configuration.AuthenticationSection.Forms" />
 
             
 
@@ -176,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Web.Configuration.AuthenticationSection.Passport" />
+            >Gets the <see cref="P:System.Web.Configuration.AuthenticationSection.Passport" />
 
             
 

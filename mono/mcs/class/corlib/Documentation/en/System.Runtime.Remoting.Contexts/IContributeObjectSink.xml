@@ -26,26 +26,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Contexts.IContributeObjectSink" />
+        >The <see cref="T:System.Runtime.Remoting.Contexts.IContributeObjectSink" />
 
         
 
-         interface is implemented by context properties in a <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         interface is implemented by context properties in a <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
          class that want to contribute an object-specific interception sink on the server end of a remoting call.</para
       >
       <para
-        >The server object chain is composed from those context properties in the server object's context that implement <see
-         cref="T:System.Runtime.Remoting.Contexts.IContributeObjectSink" />
+        >The server object chain is composed from those context properties in the server object's context that implement <see cref="T:System.Runtime.Remoting.Contexts.IContributeObjectSink" />
 
         
 
-        . <format
-         type="text/html">
+        . <format type="text/html">
           <a href="6F7A7912-93CD-4C94-824F-42554C17C8D4"
             >[&lt;topic://cpconjust-in-timeactivation&gt;]</a
           >
@@ -95,14 +91,22 @@
           <para>The composite sink chain.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The server object which provides the message sink that is to be chained in front of the given chain. </param
         >
         <param name="nextSink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -41,18 +41,15 @@
          can be used to represent an expression cast to a different data type or interface.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeCastExpression.Expression" />
+        >The <see cref="P:System.CodeDom.CodeCastExpression.Expression" />
 
         
 
-         property indicates the <see
-         cref="T:System.CodeDom.CodeExpression" />
+         property indicates the <see cref="T:System.CodeDom.CodeExpression" />
 
         
 
-         to cast. The <see
-         cref="P:System.CodeDom.CodeCastExpression.TargetType" />
+         to cast. The <see cref="P:System.CodeDom.CodeCastExpression.TargetType" />
 
         
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCastExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" />
 
             
 
@@ -119,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCastExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" />
 
             
 
@@ -128,24 +123,30 @@
           >
         </summary>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeReference" />
+          A <see cref="T:System.CodeDom.CodeTypeReference" />
 
           
 
            that indicates the destination type of the cast. </param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -178,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCastExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" />
 
             
 
@@ -187,19 +187,26 @@
           >
         </summary>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the destination type of the cast. </param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
@@ -232,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeCastExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeCastExpression" />
 
             
 
@@ -241,19 +247,26 @@
           >
         </summary>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The destination data type of the cast. </param
         >
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeExpression" />
+          The <see cref="T:System.CodeDom.CodeExpression" />
 
           
 

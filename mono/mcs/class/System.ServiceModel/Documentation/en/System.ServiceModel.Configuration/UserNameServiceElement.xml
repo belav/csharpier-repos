@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.UserNameServiceElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.UserNameServiceElement" />
 
             
 
@@ -217,8 +216,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see
-             cref="T:System.Web.Security.MembershipProvider" />
+            >When using username ClientCredentialType on a binding, the usernames are mapped to Windows accounts by default. It is possible to override this behavior using this property, which provides the name of the <see cref="T:System.Web.Security.MembershipProvider" />
 
             
 

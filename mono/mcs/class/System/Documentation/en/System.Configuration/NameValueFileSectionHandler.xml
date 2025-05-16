@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The file attribute of the &lt;appSettings&gt; section specifies a relative path to an external file that contains custom application-configuration settings. The details provided in the file act as an &lt;appSettings&gt; section in the configuration file. The file is accessed using the <see
-         cref="T:System.Configuration.NameValueFileSectionHandler" />
+        >The file attribute of the &lt;appSettings&gt; section specifies a relative path to an external file that contains custom application-configuration settings. The details provided in the file act as an &lt;appSettings&gt; section in the configuration file. The file is accessed using the <see cref="T:System.Configuration.NameValueFileSectionHandler" />
 
         
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.NameValueFileSectionHandler" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.NameValueFileSectionHandler" />
 
             
 
@@ -103,28 +101,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="parent" />
+            >The <paramref name="parent" />
 
             
 
-             object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref
-             name="configContext" />
+             object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref name="configContext" />
 
             
 
-             object parameter is the virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null. The <paramref
-             name="section" />
+             object parameter is the virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null. The <paramref name="section" />
 
             
 
-             parameter is the <see
-             cref="T:System.Xml.XmlNode" />
+             parameter is the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             that contains the configuration information to be handled. The <paramref
-             name="section" />
+             that contains the configuration information to be handled. The <paramref name="section" />
 
             
 
@@ -140,21 +133,33 @@
           <para>A configuration object.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parent object.</param
         >
         <param name="configContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The configuration context object.</param
         >
         <param name="section">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

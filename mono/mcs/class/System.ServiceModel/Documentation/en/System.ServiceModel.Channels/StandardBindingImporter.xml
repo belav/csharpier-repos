@@ -27,18 +27,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Override this class to extend the standard mapping between WSDL and a standard binding. Then attach your custom object to a <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+        >Override this class to extend the standard mapping between WSDL and a standard binding. Then attach your custom object to a <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
-         either programmatically or by using an application configuration file. You can also attach your custom object to the internal <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+         either programmatically or by using an application configuration file. You can also attach your custom object to the internal <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
-         used by the <format
-         type="text/html">
+         used by the <format type="text/html">
           <a href="1abf3d9f-b420-46f1-b628-df238751f308"
             >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
           >
@@ -49,8 +46,7 @@
          using an application configuration file.</para
       >
       <para
-        >Use the <see
-         cref="M:System.ServiceModel.Channels.StandardBindingImporter.System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
+        >Use the <see cref="M:System.ServiceModel.Channels.StandardBindingImporter.System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection,System.Xml.Schema.XmlSchemaSet,System.Collections.Generic.ICollection{System.Xml.XmlElement})" />
 
         
 
@@ -79,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StandardBindingImporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StandardBindingImporter" />
 
             
 

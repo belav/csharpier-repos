@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to programmatically manage a collection of <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+        >Use this class to programmatically manage a collection of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
-         objects that make up a row in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         objects that make up a row in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
-         control. This class is commonly used to add or remove cells from a row in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         control. This class is commonly used to add or remove cells from a row in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -48,68 +45,55 @@
       >
       <block subset="none" type="note">
         <para
-          >A <see
-           cref="T:System.Web.UI.WebControls.Table" />
+          >A <see cref="T:System.Web.UI.WebControls.Table" />
 
           
 
-           control contains a <see
-           cref="P:System.Web.UI.WebControls.Table.Rows" />
+           control contains a <see cref="P:System.Web.UI.WebControls.Table.Rows" />
 
           
 
-           collection that represents a collection of <see
-           cref="T:System.Web.UI.WebControls.TableRow" />
+           collection that represents a collection of <see cref="T:System.Web.UI.WebControls.TableRow" />
 
           
 
-           objects. Each <see
-           cref="T:System.Web.UI.WebControls.TableRow" />
+           objects. Each <see cref="T:System.Web.UI.WebControls.TableRow" />
 
           
 
-           represents an individual row in the table and contains a <see
-           cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+           represents an individual row in the table and contains a <see cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
           
 
-           collection that represents a collection of <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+           collection that represents a collection of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           objects. These <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+           objects. These <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           objects represent the individual cells in the table. To get an individual cell, you must first get a <see
-           cref="T:System.Web.UI.WebControls.TableRow" />
+           objects represent the individual cells in the table. To get an individual cell, you must first get a <see cref="T:System.Web.UI.WebControls.TableRow" />
 
           
 
-           from the <see
-           cref="P:System.Web.UI.WebControls.Table.Rows" />
+           from the <see cref="P:System.Web.UI.WebControls.Table.Rows" />
 
           
 
-           collection of a <see
-           cref="T:System.Web.UI.WebControls.Table" />
+           collection of a <see cref="T:System.Web.UI.WebControls.Table" />
 
           
 
-           control. You can then get a <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+           control. You can then get a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           from the <see
-           cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+           from the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
           
 
-           collection of the <see
-           cref="T:System.Web.UI.WebControls.TableRow" />
+           collection of the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
           
 
@@ -120,18 +104,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates a collection of <see
-         cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+        >Encapsulates a collection of <see cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+         and <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
-         objects that make up a row in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         objects that make up a row in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -156,13 +137,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to add the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this method to add the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             to the end of a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             to the end of a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -172,13 +151,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             to the end of the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -188,8 +165,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index number of the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >The index number of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -197,12 +173,15 @@
           >
         </returns>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
@@ -231,13 +210,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to insert the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this method to insert the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             in a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             in a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -247,13 +224,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Adds the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             to the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             to the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -261,34 +236,38 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in the <see
-           cref="T:System.Web.UI.WebControls.TableCellCollection" />
+          The location in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
           
 
-           at which to add the <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+           at which to add the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
           . </param
         >
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.UI.WebControls.TableCellCollection" />
+           to add to the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
           
 
@@ -316,28 +295,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.AddRange(System.Web.UI.WebControls.TableCell[])" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TableCellCollection.AddRange(System.Web.UI.WebControls.TableCell[])" />
 
             
 
-             method to append the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method to append the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects from the specified array to the collection. This method is commonly used when you are constructing a row of a table. To construct a row of a table, first create an array of <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             objects from the specified array to the collection. This method is commonly used when you are constructing a row of a table. To construct a row of a table, first create an array of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects to represent the cells of the row. Next, use the <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.AddRange(System.Web.UI.WebControls.TableCell[])" />
+             objects to represent the cells of the row. Next, use the <see cref="M:System.Web.UI.WebControls.TableCellCollection.AddRange(System.Web.UI.WebControls.TableCell[])" />
 
             
 
-             method, passing the array as an argument, to add the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             method, passing the array as an argument, to add the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -347,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Appends the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -356,12 +329,15 @@
           >
         </summary>
         <param name="cells">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array containing the <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The array containing the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
@@ -384,18 +360,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove all <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this method to remove all <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             objects from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             and set the <see
-             cref="P:System.Web.UI.WebControls.TableCellCollection.Count" />
+             and set the <see cref="P:System.Web.UI.WebControls.TableCellCollection.Count" />
 
             
 
@@ -403,28 +376,23 @@
           >
           <block subset="none" type="note">
             <para
-              >This method removes the <see
-               cref="T:System.Web.UI.WebControls.TableCell" />
+              >This method removes the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
               
 
-               objects from the <see
-               cref="T:System.Web.UI.WebControls.TableCellCollection" />
+               objects from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
               
 
-              , but it does not remove the <see
-               cref="T:System.Web.UI.WebControls.TableRow" />
+              , but it does not remove the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
               
 
-               from the <see
-               cref="T:System.Web.UI.WebControls.Table" />
+               from the <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
-               control. Be sure to also remove the <see
-               cref="T:System.Web.UI.WebControls.TableRow" />
+               control. Be sure to also remove the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
               
 
@@ -435,13 +403,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Removes all <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             objects from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -468,13 +434,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             into the specified <see
-             cref="T:System.Array" />
+             into the specified <see cref="T:System.Array" />
 
             
 
@@ -482,13 +446,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="array" />
+              >The <paramref name="array" />
 
               
 
-               parameter must be a zero-based <see
-               cref="T:System.Array" />
+               parameter must be a zero-based <see cref="T:System.Array" />
 
               
 
@@ -499,18 +461,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items from the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >Copies the items from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Array" />
+             to the specified <see cref="T:System.Array" />
 
             
 
-            , starting with the specified index in the <see
-             cref="T:System.Array" />
+            , starting with the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -518,29 +477,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.TableCellCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 
@@ -563,13 +527,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine the number of cells in the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >Use this property to determine the number of cells in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-            . The <see
-             cref="P:System.Web.UI.WebControls.TableCellCollection.Count" />
+            . The <see cref="P:System.Web.UI.WebControls.TableCellCollection.Count" />
 
             
 
@@ -579,13 +541,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Gets the number of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -614,18 +574,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine the index of the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this method to determine the index of the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             in the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-            . If the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            . If the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -635,13 +592,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that represents the index of the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Returns a value that represents the index of the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             from the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -651,13 +606,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >The index of the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             within the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             within the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -665,17 +618,19 @@
           >
         </returns>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           to get the index of in the <see
-           cref="T:System.Web.UI.WebControls.TableCellCollection" />
+           to get the index of in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
           
 
@@ -701,37 +656,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             implemented object that can be iterated through easily to get each item in the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             implemented object that can be iterated through easily to get each item in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
             .</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -739,23 +689,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+              >The <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method must be called after creating a <see
-               cref="T:System.Collections.IEnumerator" />
+               method must be called after creating a <see cref="T:System.Collections.IEnumerator" />
 
               
 
-               implemented object or after using the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+               implemented object or after using the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -766,18 +712,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             implemented object that contains all <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             implemented object that contains all <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -787,18 +730,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             implemented object that contains all <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             implemented object that contains all <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects within the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             objects within the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -822,8 +762,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -833,8 +772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -858,26 +796,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from <see cref="T:System.Collections.ICollection" />
 
             
 
              and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.TableCellCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.TableCellCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -887,8 +821,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -940,13 +873,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this method to remove the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             from a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             from a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -956,13 +887,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             from the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -970,17 +899,19 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.UI.WebControls.TableCellCollection" />
+           to remove from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
           
 
@@ -1005,13 +936,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to remove a <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this method to remove a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             from a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             from a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -1021,13 +950,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Removes a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             from the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -1035,17 +962,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          The index of the <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.UI.WebControls.TableCellCollection" />
+           to remove from the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
           
 
@@ -1068,26 +997,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
              itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.TableCellCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.TableCellCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1097,8 +1022,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
@@ -1129,31 +1053,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.Add(System.Web.UI.WebControls.TableCell)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.TableCellCollection.Add(System.Web.UI.WebControls.TableCell)" />
 
             
 
-             method to add an element to a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method to add an element to a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.System.Collections.IList.Add(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCellCollection.System.Collections.IList.Add(System.Object)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1188,18 +1107,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#Contains(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#Contains(System.Object)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1234,31 +1150,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.GetCellIndex(System.Web.UI.WebControls.TableCell)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.TableCellCollection.GetCellIndex(System.Web.UI.WebControls.TableCell)" />
 
             
 
-             method to get the index of an element in a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method to get the index of an element in a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#IndexOf(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#IndexOf(System.Object)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1294,31 +1205,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.AddAt(System.Int32,System.Web.UI.WebControls.TableCell)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.TableCellCollection.AddAt(System.Int32,System.Web.UI.WebControls.TableCell)" />
 
             
 
-             method to add an element to a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method to add an element to a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#Insert(System.Int32,System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#Insert(System.Int32,System.Object)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1330,7 +1236,11 @@
           <para>Inserts an object into the collection at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1353,13 +1263,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             instance is cast to the <see
-             cref="T:System.Collections.IList" />
+             instance is cast to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1369,8 +1277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For a description of this member, see <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -1420,31 +1327,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.Remove(System.Web.UI.WebControls.TableCell)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.TableCellCollection.Remove(System.Web.UI.WebControls.TableCell)" />
 
             
 
-             method to remove an element from a <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method to remove an element from a <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#Remove(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.TableCellCollection.System#Collections#IList#Remove(System.Object)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.TableCellCollection" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.TableCellCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 

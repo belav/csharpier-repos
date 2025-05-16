@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides <see
-         cref="T:System.Drawing.Color" />
+        >Provides <see cref="T:System.Drawing.Color" />
 
         
 
@@ -129,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use with <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonCheckedHighlight" />
+            >Gets the border color to use with <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonCheckedHighlight" />
 
             
 
@@ -158,18 +156,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use with the <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedGradientBegin" />
+            >Gets the border color to use with the <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedGradientBegin" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedGradientMiddle" />
+            , <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedGradientMiddle" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedGradientEnd" />
+            , and <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedGradientEnd" />
 
             
 
@@ -285,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use with <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedHighlight" />
+            >Gets the border color to use with <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonPressedHighlight" />
 
             
 
@@ -314,18 +308,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use with the <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientBegin" />
+            >Gets the border color to use with the <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientBegin" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientMiddle" />
+            , <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientMiddle" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientEnd" />
+            , and <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedGradientEnd" />
 
             
 
@@ -441,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use with <see
-             cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedHighlight" />
+            >Gets the border color to use with <see cref="P:System.Windows.Forms.ProfessionalColors.ButtonSelectedHighlight" />
 
             
 
@@ -586,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the image margin of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the starting color of the gradient used in the image margin of a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -624,8 +613,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the image margin of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the end color of the gradient used in the image margin of a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -662,8 +650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the middle color of the gradient used in the image margin of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the middle color of the gradient used in the image margin of a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -700,8 +687,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the image margin of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the starting color of the gradient used in the image margin of a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -738,8 +724,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the image margin of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the end color of the gradient used in the image margin of a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -776,8 +761,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the middle color of the gradient used in the image margin of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+            >Gets the middle color of the gradient used in the image margin of a <see cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
             
 
@@ -805,8 +789,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color or a <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets the border color or a <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -834,8 +817,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use with a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the border color to use with a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -863,8 +845,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used when a top-level <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the starting color of the gradient used when a top-level <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -892,8 +873,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used when a top-level <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the end color of the gradient used when a top-level <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -921,8 +901,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the middle color of the gradient used when a top-level <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the middle color of the gradient used when a top-level <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -950,13 +929,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the solid color to use when a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the solid color to use when a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             other than the top-level <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             other than the top-level <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -984,8 +961,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used when the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the starting color of the gradient used when the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -1013,8 +989,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used when the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets the end color of the gradient used when the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -1042,8 +1017,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets the starting color of the gradient used in the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -1071,8 +1045,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets the end color of the gradient used in the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -1100,8 +1073,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+            >Gets the starting color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
             
 
@@ -1129,8 +1101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+            >Gets the end color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
             
 
@@ -1158,8 +1129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the middle color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+            >Gets the middle color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
             
 
@@ -1187,8 +1157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the starting color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1216,8 +1185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripContainer" />
+            >Gets the end color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripContainer" />
 
             
 
@@ -1245,8 +1213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the color to use to for shadow effects on the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Gets the color to use to for shadow effects on the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -1274,8 +1241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the color to use to for highlight effects on the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Gets the color to use to for highlight effects on the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -1303,8 +1269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used on the <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            >Gets the starting color of the gradient used on the <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
@@ -1332,8 +1297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used on the <see
-             cref="T:System.Windows.Forms.StatusStrip" />
+            >Gets the end color of the gradient used on the <see cref="T:System.Windows.Forms.StatusStrip" />
 
             
 
@@ -1361,8 +1325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the border color to use on the bottom edge of the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the border color to use on the bottom edge of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1390,8 +1353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Gets the starting color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -1419,8 +1381,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Gets the end color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -1448,8 +1409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the solid background color of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets the solid background color of the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -1477,8 +1437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the starting color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1506,8 +1465,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the end color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1535,8 +1493,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the middle color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the middle color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1564,8 +1521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the starting color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Gets the starting color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -1593,8 +1549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the end color of the gradient used in the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Gets the end color of the gradient used in the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 

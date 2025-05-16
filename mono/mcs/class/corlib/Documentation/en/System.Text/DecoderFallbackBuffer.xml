@@ -23,8 +23,7 @@
       <list type="bullet">
         <item>
           <para
-            >A decoder fallback, which is represented by a class derived from the <see
-             cref="T:System.Text.DecoderFallback" />
+            >A decoder fallback, which is represented by a class derived from the <see cref="T:System.Text.DecoderFallback" />
 
             
 
@@ -33,8 +32,7 @@
         </item>
         <item>
           <para
-            >A decoder fallback buffer, which is represented by a type derived from the <see
-             cref="T:System.Text.DecoderFallbackBuffer" />
+            >A decoder fallback buffer, which is represented by a type derived from the <see cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 
@@ -46,8 +44,7 @@
       <list type="bullet">
         <item>
           <para
-            >Best-fit mapping. The decoder fallback buffer can return a string that represents a close approximation to the input byte sequence. The .NET Framework does not provide a public best-fit <see
-             cref="T:System.Text.DecoderFallbackBuffer" />
+            >Best-fit mapping. The decoder fallback buffer can return a string that represents a close approximation to the input byte sequence. The .NET Framework does not provide a public best-fit <see cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 
@@ -56,18 +53,15 @@
         </item>
         <item>
           <para
-            >Replacement. The decoder fallback buffer can return a string, such as a question mark ("?"), that indicates that a byte sequence could not be decoded. In the .NET Framework, the <see
-             cref="T:System.Text.DecoderReplacementFallback" />
+            >Replacement. The decoder fallback buffer can return a string, such as a question mark ("?"), that indicates that a byte sequence could not be decoded. In the .NET Framework, the <see cref="T:System.Text.DecoderReplacementFallback" />
 
             
 
-             and <see
-             cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+             and <see cref="T:System.Text.DecoderReplacementFallbackBuffer" />
 
             
 
-             classes provide a public replacement fallback buffer implementation. The constructor of the <see
-             cref="T:System.Text.DecoderReplacementFallback" />
+             classes provide a public replacement fallback buffer implementation. The constructor of the <see cref="T:System.Text.DecoderReplacementFallback" />
 
             
 
@@ -76,28 +70,23 @@
         </item>
         <item>
           <para
-            >Exception. The <see
-             cref="T:System.Text.DecoderFallbackBuffer" />
+            >Exception. The <see cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 
-             implementation throws an exception, which indicates that a byte sequence cannot be decoded, and terminates the decoding operation. In this case, the fallback handler must provide a <see
-             cref="T:System.Text.DecoderFallbackBuffer" />
+             implementation throws an exception, which indicates that a byte sequence cannot be decoded, and terminates the decoding operation. In this case, the fallback handler must provide a <see cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 
-             implementation, although it does not return a string to the decoder. In the .NET Framework, the <see
-             cref="T:System.Text.DecoderExceptionFallback" />
+             implementation, although it does not return a string to the decoder. In the .NET Framework, the <see cref="T:System.Text.DecoderExceptionFallback" />
 
             
 
-             and <see
-             cref="T:System.Text.DecoderExceptionFallbackBuffer" />
+             and <see cref="T:System.Text.DecoderExceptionFallbackBuffer" />
 
             
 
-             classes provide a public exception fallback implementation that throws a <see
-             cref="T:System.Text.DecoderFallbackException" />
+             classes provide a public exception fallback implementation that throws a <see cref="T:System.Text.DecoderFallbackException" />
 
             
 
@@ -106,13 +95,11 @@
         </item>
       </list>
       <para
-        >The buffer in a <see
-         cref="T:System.Text.DecoderFallbackBuffer" />
+        >The buffer in a <see cref="T:System.Text.DecoderFallbackBuffer" />
 
         
 
-         implementation represents the entire string to be returned to the decoder in response to a decoder fallback. Generally, implementations also include state information, such as the index of the next character to return to the decoder and the number of remaining characters to be returned. Because <see
-         cref="T:System.Text.DecoderFallbackBuffer" />
+         implementation represents the entire string to be returned to the decoder in response to a decoder fallback. Generally, implementations also include state information, such as the index of the next character to return to the decoder and the number of remaining characters to be returned. Because <see cref="T:System.Text.DecoderFallbackBuffer" />
 
         
 
@@ -121,8 +108,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+            >The <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
@@ -131,13 +117,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
+            >The <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
 
             
 
-             method, which is called repeatedly by the decoder if the <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             method, which is called repeatedly by the decoder if the <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
@@ -146,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Text.DecoderFallbackBuffer.MovePrevious" />
+            >The <see cref="M:System.Text.DecoderFallbackBuffer.MovePrevious" />
 
             
 
@@ -156,8 +139,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
+            >The <see cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
 
             
 
@@ -190,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.DecoderFallbackBuffer" />
+            >Initializes a new instance of the <see cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 
@@ -226,33 +207,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Text.Encoding.GetChars(System.Byte[])" />
+            >The <see cref="M:System.Text.Encoding.GetChars(System.Byte[])" />
 
             
 
-            , <see
-             cref="M:System.Text.Encoding.GetString(System.Byte[])" />
+            , <see cref="M:System.Text.Encoding.GetString(System.Byte[])" />
 
             
 
-            , and <see
-             cref="Overload:System.Text.Decoder.Convert" />
+            , and <see cref="Overload:System.Text.Decoder.Convert" />
 
             
 
-             methods call <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             methods call <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             if they encounter an unknown input byte sequence that cannot be decoded. A return value of true indicates that the fallback buffer can process the input byte sequence, which causes the calling method to call the <see
-             cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
+             if they encounter an unknown input byte sequence that cannot be decoded. A return value of true indicates that the fallback buffer can process the input byte sequence, which causes the calling method to call the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
 
             
 
-             method to obtain each character of the fallback buffer. Because it does not process individual bytes, the <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             method to obtain each character of the fallback buffer. Because it does not process individual bytes, the <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
@@ -266,13 +241,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the fallback buffer can process <paramref
-             name="bytesUnknown" />
+            >true if the fallback buffer can process <paramref name="bytesUnknown" />
 
             
 
-            ; false if the fallback buffer ignores <paramref
-             name="bytesUnknown" />
+            ; false if the fallback buffer ignores <paramref name="bytesUnknown" />
 
             
 
@@ -280,19 +253,26 @@
           >
         </returns>
         <param name="bytesUnknown">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An input array of bytes.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index position of a byte in <paramref
-           name="bytesUnknown" />
+          The index position of a byte in <paramref name="bytesUnknown" />
 
           
 
@@ -320,26 +300,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A decoding operation calls the <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+            >A decoding operation calls the <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             method if the operation encounters an unknown byte sequence in the input. If the <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+             method if the operation encounters an unknown byte sequence in the input. If the <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             method returns true, a substitute string exists that can be inserted in the output instead of decoding the unknown input. The decoding operation calls the <see
-             cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
+             method returns true, a substitute string exists that can be inserted in the output instead of decoding the unknown input. The decoding operation calls the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
 
             
 
              method repeatedly and obtains the substitute string one character at a time. When all characters in the fallback buffer have been returned to the decoder, the method should return U+0000.</para
           >
           <para
-            >For an exception fallback handler, the <see
-             cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
+            >For an exception fallback handler, the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
 
             
 
@@ -380,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, causes the next call to the <see
-             cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
+            >When overridden in a derived class, causes the next call to the <see cref="M:System.Text.DecoderFallbackBuffer.GetNextChar" />
 
             
 
@@ -391,8 +366,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="M:System.Text.DecoderFallbackBuffer.MovePrevious" />
+            >true if the <see cref="M:System.Text.DecoderFallbackBuffer.MovePrevious" />
 
             
 
@@ -418,21 +392,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+            >The <see cref="M:System.Text.DecoderFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
             
 
-             method returns true if <see
-             cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
+             method returns true if <see cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
 
             
 
              is a nonzero value.</para
           >
           <para
-            >For an exception fallback handler, the <see
-             cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
+            >For an exception fallback handler, the <see cref="P:System.Text.DecoderFallbackBuffer.Remaining" />
 
             
 
@@ -442,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the number of characters in the current <see
-             cref="T:System.Text.DecoderFallbackBuffer" />
+            >When overridden in a derived class, gets the number of characters in the current <see cref="T:System.Text.DecoderFallbackBuffer" />
 
             
 

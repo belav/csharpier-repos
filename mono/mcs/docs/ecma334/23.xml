@@ -2,13 +2,10 @@
 <clause number="23" title="Exceptions">
   <paragraph
     >Exceptions in C# provide a structured, uniform, and type-safe way of handling both system level and application-level error conditions. <note
-
-      >[Note: The exception mechanism is C# is quite similar to that of C++, with a few important differences: <list
-      >
+      >[Note: The exception mechanism is C# is quite similar to that of C++, with a few important differences: <list>
         <list_item> In C#, all exceptions must be represented by an instance of a class type derived from System.Exception. In C++, any value of any type can be used to represent an exception. </list_item>
         <list_item
-          > In C#, a finally block (<hyperlink
-          >15.10</hyperlink>
+          > In C#, a finally block (<hyperlink>15.10</hyperlink>
 
           
 

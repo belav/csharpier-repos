@@ -32,8 +32,7 @@
       <list type="ordered">
         <item>
           <para
-            >Build a class that derives from <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Build a class that derives from <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -42,8 +41,7 @@
         </item>
         <item>
           <para
-            >Apply a <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Apply a <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -52,8 +50,7 @@
         </item>
         <item>
           <para
-            >Optionally, apply a <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
+            >Optionally, apply a <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
 
             
 
@@ -62,8 +59,7 @@
         </item>
         <item>
           <para
-            >Optionally, apply a <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+            >Optionally, apply a <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
 
             
 
@@ -96,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
 
             
 
@@ -105,7 +100,11 @@
           >
         </summary>
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -130,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the member of the class that implements the service description format extension specified in the <see
-             cref="P:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute.MemberName" />
+            >Gets or sets a value that indicates whether the member of the class that implements the service description format extension specified in the <see cref="P:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute.MemberName" />
 
             
 

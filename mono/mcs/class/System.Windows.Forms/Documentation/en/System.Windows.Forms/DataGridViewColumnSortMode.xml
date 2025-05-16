@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each column may have a different sort mode specified by the <see
-         cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
+        >Each column may have a different sort mode specified by the <see cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
 
         
 
@@ -24,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines how a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Defines how a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 

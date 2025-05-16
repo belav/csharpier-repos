@@ -24,23 +24,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To use a custom <see
-         cref="T:System.Web.UI.TemplateBuilder" />
+        >To use a custom <see cref="T:System.Web.UI.TemplateBuilder" />
 
         
 
-         class for a control, create a custom <see
-         cref="T:System.Web.UI.ControlBuilder" />
+         class for a control, create a custom <see cref="T:System.Web.UI.ControlBuilder" />
 
         
 
-         for the control, and then return the custom <see
-         cref="T:System.Web.UI.TemplateBuilder" />
+         for the control, and then return the custom <see cref="T:System.Web.UI.TemplateBuilder" />
 
         
 
-         control from the <see
-         cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+         control from the <see cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
 
         
 
@@ -63,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.TemplateBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.TemplateBuilder" />
 
             
 
@@ -96,8 +91,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the instance of the <see
-             cref="T:System.Web.UI.TemplateBuilder" />
+            >A reference to the instance of the <see cref="T:System.Web.UI.TemplateBuilder" />
 
             
 
@@ -130,67 +124,86 @@
           <para>Initializes the template builder when a Web request is made.</para>
         </summary>
         <param name="parser">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.TemplateParser" />
+          The <see cref="T:System.Web.UI.TemplateParser" />
 
           
 
            responsible for parsing the control. </param
         >
         <param name="parentBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.ControlBuilder" />
+          The <see cref="T:System.Web.UI.ControlBuilder" />
 
           
 
            responsible for building the control. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            assigned to the control that the builder will create. </param
         >
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the tag to build. This allows the builder to support multiple tag types. </param
         >
         <param name="ID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.UI.ControlBuilder.ID" />
+          The <see cref="P:System.Web.UI.ControlBuilder.ID" />
 
           
 
            assigned to the control. </param
         >
         <param name="attribs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IDictionary" />
+          The <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -218,18 +231,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.TemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
 
             
 
-             method is required when implementing the <see
-             cref="T:System.Web.UI.ITemplate" />
+             method is required when implementing the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             interface. The <see
-             cref="M:System.Web.UI.TemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+             interface. The <see cref="M:System.Web.UI.TemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
 
             
 
@@ -239,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the <see
-             cref="T:System.Web.UI.Control" />
+            >Defines the <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -248,12 +257,15 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -276,23 +288,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateBuilder.SetTagInnerText(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateBuilder.SetTagInnerText(System.String)" />
 
             
 
-             method needs to be called when we are in design time. The <see
-             cref="M:System.Web.UI.TemplateBuilder.NeedsTagInnerText" />
+             method needs to be called when we are in design time. The <see cref="M:System.Web.UI.TemplateBuilder.NeedsTagInnerText" />
 
             
 
-             method returns the value of the <see
-             cref="P:System.Web.UI.ControlBuilder.InDesigner" />
+             method returns the value of the <see cref="P:System.Web.UI.ControlBuilder.InDesigner" />
 
             
 
-             property of the base <see
-             cref="T:System.Web.UI.ControlBuilder" />
+             property of the base <see cref="T:System.Web.UI.ControlBuilder" />
 
             
 
@@ -326,18 +334,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.TemplateBuilder.SetTagInnerText(System.String)" />
+            >The <see cref="M:System.Web.UI.TemplateBuilder.SetTagInnerText(System.String)" />
 
             
 
-             method overrides the base class's <see
-             cref="M:System.Web.UI.ControlBuilder.SetTagInnerText(System.String)" />
+             method overrides the base class's <see cref="M:System.Web.UI.ControlBuilder.SetTagInnerText(System.String)" />
 
             
 
-             method and sets the value of the <see
-             cref="P:System.Web.UI.TemplateBuilder.Text" />
+             method and sets the value of the <see cref="P:System.Web.UI.TemplateBuilder.Text" />
 
             
 
@@ -349,7 +354,11 @@
           <para>Saves the inner text of the template tag.</para>
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -373,8 +382,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.TemplateBuilder.Text" />
+            >The <see cref="P:System.Web.UI.TemplateBuilder.Text" />
 
             
 

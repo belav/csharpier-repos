@@ -20,69 +20,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+        >Use the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
         
 
-         class to get the properties of a data field using a <see
-         cref="T:System.Data.DataColumn" />
+         class to get the properties of a data field using a <see cref="T:System.Data.DataColumn" />
 
         
 
-        . You can discover the structure of a data field by using the following properties in this class: <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.DataType" />
+        . You can discover the structure of a data field by using the following properties in this class: <see cref="P:System.Web.UI.Design.DataSetFieldSchema.DataType" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.IsReadOnly" />
+        , <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsReadOnly" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />
+        , <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
+        , <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />
+        , and <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />
 
         
 
-        . In addition, you can use the <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
+        . In addition, you can use the <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
 
         
 
-         property to determine if a data column is set for <see
-         cref="P:System.Data.DataColumn.AutoIncrement" />
+         property to determine if a data column is set for <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
         
 
-        , or the <see
-         cref="P:System.Web.UI.Design.DataSetFieldSchema.PrimaryKey" />
+        , or the <see cref="P:System.Web.UI.Design.DataSetFieldSchema.PrimaryKey" />
 
         
 
          property to determine if a data column is in the primary key.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+        >The <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
         
 
          class is used by custom control designer components to provide information about a data field at design time. </para
       >
       <para
-        >To examine the components of data using a <see
-         cref="T:System.Data.DataSet" />
+        >To examine the components of data using a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -128,13 +116,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+            >Use the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
             
 
-             class to examine the properties of a data field using a <see
-             cref="T:System.Data.DataColumn" />
+             class to examine the properties of a data field using a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -144,13 +130,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
             
 
-             class using a specified <see
-             cref="T:System.Data.DataColumn" />
+             class using a specified <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -158,17 +142,19 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataColumn" />
+          A <see cref="T:System.Data.DataColumn" />
 
           
 
-           object that the <see
-           cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+           object that the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
           
 
@@ -208,18 +194,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.AutoIncrement" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.AutoIncrement" />
 
             
 
-             property of a <see
-             cref="T:System.Data.DataColumn" />
+             property of a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -247,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Data.DataColumn" />
+            >Gets a value indicating whether the <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -271,18 +253,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.IsUnique" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.Unique" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.Unique" />
 
             
 
-             property of a <see
-             cref="T:System.Data.DataColumn" />
+             property of a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -309,18 +288,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Length" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.MaxLength" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.MaxLength" />
 
             
 
-             property of a <see
-             cref="T:System.Data.DataColumn" />
+             property of a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -347,18 +323,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.ColumnName" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.ColumnName" />
 
             
 
-             property of a <see
-             cref="T:System.Data.DataColumn" />
+             property of a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -385,18 +358,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.Nullable" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Nullable" />
 
             
 
-             property corresponds to the <see
-             cref="P:System.Data.DataColumn.AllowDBNull" />
+             property corresponds to the <see cref="P:System.Data.DataColumn.AllowDBNull" />
 
             
 
-             property of a <see
-             cref="T:System.Data.DataColumn" />
+             property of a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -423,18 +393,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.Precision" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Precision" />
 
             
 
-             property is required by the <see
-             cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+             property is required by the <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
             
 
-             interface, but is not used by the <see
-             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+             interface, but is not used by the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
             
 
@@ -479,18 +446,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.DataSetFieldSchema.Scale" />
+            >The <see cref="P:System.Web.UI.Design.DataSetFieldSchema.Scale" />
 
             
 
-             property is required by the <see
-             cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+             property is required by the <see cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
             
 
-             interface, but is not used by the <see
-             cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+             interface, but is not used by the <see cref="T:System.Web.UI.Design.DataSetFieldSchema" />
 
             
 

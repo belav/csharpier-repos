@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AesCryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AesCryptoServiceProvider" />
 
             
 
@@ -171,23 +170,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the code examples in the <see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.LegalKeySizes" />
+            >See the code examples in the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.LegalKeySizes" />
 
             
 
-             and <see
-             cref="P:System.Security.Cryptography.SymmetricAlgorithm.LegalBlockSizes" />
+             and <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.LegalBlockSizes" />
 
             
 
-             properties to determine the size of the <paramref
-             name="key" />
+             properties to determine the size of the <paramref name="key" />
 
             
 
-             and <paramref
-             name="iv" />
+             and <paramref name="iv" />
 
             
 

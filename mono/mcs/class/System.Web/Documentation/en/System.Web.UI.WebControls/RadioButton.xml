@@ -58,13 +58,11 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RadioButton" />
+        >The <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
         
 
-         server control permits you to intersperse the radio buttons in a group with other content in the page. The buttons are grouped logically if they all share the same <see
-         cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
+         server control permits you to intersperse the radio buttons in a group with other content in the page. The buttons are grouped logically if they all share the same <see cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
 
         
 
@@ -72,13 +70,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the <see
-           cref="T:System.Web.UI.WebControls.RadioButton" />
+          >You can use the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
           
 
-           control to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-           type="text/html">
+           control to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
             <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
           </format>
 
@@ -94,8 +90,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >The markup rendered by default for this control might not conform to accessibility standards such as the Web Content Accessibility Guidelines 1.0 (WCAG) priority 1 guidelines. For details about accessibility support for this control, see <format
-         type="text/html">
+        >The markup rendered by default for this control might not conform to accessibility standards such as the Web Content Accessibility Guidelines 1.0 (WCAG) priority 1 guidelines. For details about accessibility support for this control, see <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -112,82 +107,70 @@
       <code
         >&lt;asp:RadioButton
     AccessKey="string"
-    AutoPostBack="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    AutoPostBack="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
-    CausesValidation="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    CausesValidation="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Checked="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Checked="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -208,16 +191,14 @@
     Style="string"
     TabIndex="integer"
     Text="string"
-    TextAlign="Left|<codeFeaturedElement
-        >Right</codeFeaturedElement>
+    TextAlign="Left|<codeFeaturedElement>Right</codeFeaturedElement>
 
         
 
         "
     ToolTip="string"
     ValidationGroup="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -242,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -268,21 +248,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
 
             
 
-             property to specify a grouping of radio buttons to create a mutually exclusive set of controls. You can use the <see
-             cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
+             property to specify a grouping of radio buttons to create a mutually exclusive set of controls. You can use the <see cref="P:System.Web.UI.WebControls.RadioButton.GroupName" />
 
             
 
              property when only one selection is possible from a list of available options.</para
           >
           <para
-            >When this property is set, only one <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >When this property is set, only one <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -290,13 +267,11 @@
           >
           <para>The value of this property is stored in view state.</para>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -346,18 +321,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.RadioButton.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.WebControls.RadioButton.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             method is called by the <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method. It is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+             method. It is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -367,8 +339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes postback data for the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >Processes postback data for the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -378,8 +349,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the data for the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >true if the data for the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -387,14 +357,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key identifier for the control.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -415,13 +393,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.RadioButton.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.RadioButton.OnPreRender(System.EventArgs)" />
 
             
 
-             method notifies the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+             method notifies the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -431,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -440,12 +415,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -474,18 +452,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.RadioButton.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.WebControls.RadioButton.RaisePostDataChangedEvent" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+             method is called by the <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
-             method. It is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+             method. It is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -495,13 +470,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RadioButton.CheckedChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.RadioButton.CheckedChanged" />
 
             
 
-             event, if the <see
-             cref="P:System.Windows.Forms.RadioButton.Checked" />
+             event, if the <see cref="P:System.Windows.Forms.RadioButton.Checked" />
 
             
 
@@ -534,13 +507,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
-             control is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             control is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -550,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.IPostBackDataHandler.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -561,8 +531,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="T:System.Web.UI.WebControls.RadioButton" />
+            >true if <see cref="T:System.Web.UI.WebControls.RadioButton" />
 
             
 
@@ -570,14 +539,22 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

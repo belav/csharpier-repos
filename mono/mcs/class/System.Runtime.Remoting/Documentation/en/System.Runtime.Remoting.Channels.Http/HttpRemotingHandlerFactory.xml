@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The current class dynamically manufactures new instances of the <see
-         cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+        >The current class dynamically manufactures new instances of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
         
 
@@ -39,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Initializes new instances of the <see
-         cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+        >Initializes new instances of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandlerFactory" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandlerFactory" />
 
             
 
@@ -92,8 +89,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about the current method, see <see
-             cref="M:System.Web.IHttpHandlerFactory.GetHandler(System.Web.HttpContext,System.String,System.String,System.String)" />
+            >For more information about the current method, see <see cref="M:System.Web.IHttpHandlerFactory.GetHandler(System.Web.HttpContext,System.String,System.String,System.String)" />
 
             
 
@@ -103,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >Returns an instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -114,8 +109,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >A new <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -123,43 +117,56 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Web.HttpContext" />
+          An instance of the <see cref="T:System.Web.HttpContext" />
 
           
 
            class that provides references to intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests. </param
         >
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP data transfer method (GET or POST) that the client uses. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.HttpRequest.RawUrl" />
+          The <see cref="P:System.Web.HttpRequest.RawUrl" />
 
           
 
            of the requested resource. </param
         >
         <param name="filePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.HttpRequest.PhysicalApplicationPath" />
+          The <see cref="P:System.Web.HttpRequest.PhysicalApplicationPath" />
 
           
 
@@ -188,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables a factory to reuse the specified <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >Enables a factory to reuse the specified <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -197,12 +203,15 @@
           >
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.IHttpHandler" />
+          The <see cref="T:System.Web.IHttpHandler" />
 
           
 

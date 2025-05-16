@@ -28,13 +28,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use both <see
-             cref="F:System.Web.Security.CookieProtection.Validation" />
+            >Use both <see cref="F:System.Web.Security.CookieProtection.Validation" />
 
             
 
-             and <see
-             cref="F:System.Web.Security.CookieProtection.Encryption" />
+             and <see cref="F:System.Web.Security.CookieProtection.Encryption" />
 
             
 

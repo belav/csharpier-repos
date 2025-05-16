@@ -2,9 +2,7 @@
 <clause number="25.8" title="Dynamic memory allocation">
   <paragraph
     >Except for the stackalloc operator, C# provides no predefined constructs for managing non-garbage collected memory. Such services are typically provided by supporting class libraries or imported directly from the underlying operating system. <example
-
-      >[Example: For example, the Memory class below illustrates how the heap functions of an underlying operating system might be accessed from C#: <code_example
-      >
+      >[Example: For example, the Memory class below illustrates how the heap functions of an underlying operating system might be accessed from C#: <code_example>
         <![CDATA[
 using System;  
 using System.Runtime.InteropServices;  
@@ -75,8 +73,7 @@ public unsafe class Memory
   </paragraph>
   <paragraph>
     <example
-      >An example that uses the Memory class is given below: <code_example
-      >
+      >An example that uses the Memory class is given below: <code_example>
         <![CDATA[
 class Test  
 {  
@@ -97,18 +94,15 @@ class Test
   </paragraph>
   <paragraph>
     <example
-      >The example allocates 256 bytes of memory through Memory.Alloc and initializes the memory block with values increasing from 0 to 255. It then allocates a 256-element <keyword
-      >byte</keyword>
+      >The example allocates 256 bytes of memory through Memory.Alloc and initializes the memory block with values increasing from 0 to 255. It then allocates a 256-element <keyword>byte</keyword>
 
       
 
-       array and uses Memory.Copy to copy the contents of the memory block into the <keyword
-      >byte</keyword>
+       array and uses Memory.Copy to copy the contents of the memory block into the <keyword>byte</keyword>
 
       
 
-       array. Finally, the memory block is freed using Memory.Free and the contents of the <keyword
-      >byte</keyword>
+       array. Finally, the memory block is freed using Memory.Free and the contents of the <keyword>byte</keyword>
 
       
 

@@ -7,7 +7,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -38,42 +40,36 @@
       <Docs>
         <summary>Validates the value string and returns the validated typed object, being supplied context information by XmlReader as a context holder.</summary>
         <param name="text"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that represents a value being parsed.</param
         >
         <param name="reader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
+          >a <see cref="T:System.Xml.XmlReader" />
 
           
 
            that is used as a context holder.</param
         >
         <returns
-          >a <see
-           cref="T:System.Object" />
+          >a <see cref="T:System.Object" />
 
           
 
-           that represents the validated value. This method <strong
-          >must</strong>
+           that represents the validated value. This method <strong>must</strong>
 
           
 
-           return null if the value was invalid. It is recommended that implementations return <see
-           cref="P:System.DBNull.Value" />
+           return null if the value was invalid. It is recommended that implementations return <see cref="P:System.DBNull.Value" />
 
           
 
            for explicit NULL value.</returns
         >
         <remarks
-          >The context represented by the XmlReader parameter is used for example to acquire namespace URI using <see
-           cref="M:System.Xml.XmlREader.LookupNamespace" />
+          >The context represented by the XmlReader parameter is used for example to acquire namespace URI using <see cref="M:System.Xml.XmlREader.LookupNamespace" />
 
           
 
@@ -94,16 +90,14 @@
       <Docs>
         <summary>Compares two "values" that would be used in "value" constraint check.</summary>
         <param name="o1"
-          >a <see
-           cref="T:System.Object" />
+          >a <see cref="T:System.Object" />
 
           
 
            that is being compared.</param
         >
         <param name="o2"
-          >a <see
-           cref="T:System.Object" />
+          >a <see cref="T:System.Object" />
 
           
 
@@ -130,25 +124,20 @@
       <Docs>
         <summary>Compares two "value strings" that would be used in "value" constraint check.</summary>
         <param name="s1"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that is being compared.</param
         >
         <param name="s2"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that is being compared.</param
         >
-        <param name="reader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
-        </param>
+        <param name="reader">a <see cref="T:System.Xml.XmlReader" /></param>
         <returns>True if equals. False if not equals.</returns>
         <remarks>The default implementation converts the values into objects and calls Compare method.</remarks>
       </Docs>
@@ -169,16 +158,14 @@
       <Docs>
         <summary>Validates the argument string.</summary>
         <param name="text"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that represents a value being parsed.</param
         >
         <param name="reader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
+          >a <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -207,10 +194,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the local part of this type's name.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -223,10 +207,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the namespace part of this type's name (datatype library name).</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

@@ -18,13 +18,11 @@
   </Attributes>
   <Docs>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Widget.Direction</c>
+    <remarks><c>T:Mono.DocTest.Widget.Direction</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName="East">
@@ -43,13 +41,11 @@
       <MemberValue>2</MemberValue>
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>T:Mono.DocTest.Widget.Direction.East</c>
+        <remarks><c>T:Mono.DocTest.Widget.Direction.East</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="North">
@@ -68,13 +64,11 @@
       <MemberValue>0</MemberValue>
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>T:Mono.DocTest.Widget.Direction.North</c>
+        <remarks><c>T:Mono.DocTest.Widget.Direction.North</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="South">
@@ -93,13 +87,11 @@
       <MemberValue>1</MemberValue>
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>T:Mono.DocTest.Widget.Direction.South</c>
+        <remarks><c>T:Mono.DocTest.Widget.Direction.South</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="West">
@@ -118,13 +110,11 @@
       <MemberValue>3</MemberValue>
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>T:Mono.DocTest.Widget.Direction.West</c>
+        <remarks><c>T:Mono.DocTest.Widget.Direction.West</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
   </Members>

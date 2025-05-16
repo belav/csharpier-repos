@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the list element from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the list element from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleTypeList" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaSimpleTypeList" />
 
             
 
@@ -103,18 +101,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >Gets or sets the <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
-             representing the type of the simpleType element based on the <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemType" />
+             representing the type of the simpleType element based on the <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemType" />
 
             
 
-             and <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemTypeName" />
+             and <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemTypeName" />
 
             
 
@@ -152,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The base value must be a QName. The use of <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemTypeName" />
+            >The base value must be a QName. The use of <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemTypeName" />
 
             
 
@@ -195,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The simple type list value must be a QName. The use of ItemTypeName and <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemType" />
+            >The simple type list value must be a QName. The use of ItemTypeName and <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeList.ItemType" />
 
             
 

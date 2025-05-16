@@ -33,23 +33,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+        >The <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
         
 
-         event occurs before the value of an application settings property is changed, typically through a call to the <see
-         cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+         event occurs before the value of an application settings property is changed, typically through a call to the <see cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
 
         
 
-         method. <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+         method. <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
         
 
-         can be canceled through the <see
-         cref="T:System.Configuration.SettingChangingEventArgs" />
+         can be canceled through the <see cref="T:System.Configuration.SettingChangingEventArgs" />
 
         
 
@@ -59,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+        >Represents the method that will handle the <see cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
 
         
 

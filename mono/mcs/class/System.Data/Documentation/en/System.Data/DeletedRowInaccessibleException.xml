@@ -21,36 +21,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To delete a <see
-         cref="T:System.Data.DataRow" />
+        >To delete a <see cref="T:System.Data.DataRow" />
 
         
 
-        , use the <see
-         cref="M:System.Data.DataRow.Delete" />
+        , use the <see cref="M:System.Data.DataRow.Delete" />
 
         
 
-         method of a <see
-         cref="T:System.Data.DataRow" />
+         method of a <see cref="T:System.Data.DataRow" />
 
         
 
-         class. As soon as you have deleted a row, any attempts to modify it will generate the <see
-         cref="T:System.Data.DeletedRowInaccessibleException" />
+         class. As soon as you have deleted a row, any attempts to modify it will generate the <see cref="T:System.Data.DeletedRowInaccessibleException" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Data.DeletedRowInaccessibleException" />
+        >The <see cref="T:System.Data.DeletedRowInaccessibleException" />
 
         
 
-         is thrown when you use one of the following properties or methods that try to get or set the value of a deleted <see
-         cref="T:System.Data.DataRow" />
+         is thrown when you use one of the following properties or methods that try to get or set the value of a deleted <see cref="T:System.Data.DataRow" />
 
         
 
@@ -86,23 +80,19 @@
         </item>
       </list>
       <para
-        >Use the <see
-         cref="P:System.Data.DataRow.RowState" />
+        >Use the <see cref="P:System.Data.DataRow.RowState" />
 
         
 
-         of a <see
-         cref="T:System.Data.DataRow" />
+         of a <see cref="T:System.Data.DataRow" />
 
         
 
-         class to determine whether a row has been deleted. If it has been deleted, you can use the <see
-         cref="M:System.Data.DataRow.Original" />
+         class to determine whether a row has been deleted. If it has been deleted, you can use the <see cref="M:System.Data.DataRow.Original" />
 
         
 
-         method to retrieve it because deleted rows have no values available for the <see
-         cref="M:System.Data.DataRow.Current" />
+         method to retrieve it because deleted rows have no values available for the <see cref="M:System.Data.DataRow.Current" />
 
         
 
@@ -112,8 +102,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when an action is tried on a <see
-         cref="T:System.Data.DataRow" />
+        >Represents the exception that is thrown when an action is tried on a <see cref="T:System.Data.DataRow" />
 
         
 
@@ -131,13 +120,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Data.DataRow.RowState" />
+            >Use the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -147,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DeletedRowInaccessibleException" />
+            >Initializes a new instance of the <see cref="T:System.Data.DeletedRowInaccessibleException" />
 
             
 
@@ -172,13 +158,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Data.DataRow.RowState" />
+            >Use the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -188,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DeletedRowInaccessibleException" />
+            >Initializes a new instance of the <see cref="T:System.Data.DeletedRowInaccessibleException" />
 
             
 
@@ -197,7 +180,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -225,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DeletedRowInaccessibleException" />
+            >Initializes a new instance of the <see cref="T:System.Data.DeletedRowInaccessibleException" />
 
             
 
@@ -234,14 +220,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -271,13 +265,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Data.DataRow.RowState" />
+            >Use the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -287,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DeletedRowInaccessibleException" />
+            >Initializes a new instance of the <see cref="T:System.Data.DeletedRowInaccessibleException" />
 
             
 
@@ -296,7 +287,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

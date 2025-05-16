@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SpecialSetting" />
+        >The <see cref="T:System.Configuration.SpecialSetting" />
 
         
 
-         enumeration defines a set of special categories that are applied to application settings properties with the <see
-         cref="T:System.Configuration.SpecialSettingAttribute" />
+         enumeration defines a set of special categories that are applied to application settings properties with the <see cref="T:System.Configuration.SpecialSettingAttribute" />
 
         
 
@@ -32,8 +30,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The default settings provider, <see
-           cref="T:System.Configuration.LocalFileSettingsProvider" />
+          >The default settings provider, <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
           
 

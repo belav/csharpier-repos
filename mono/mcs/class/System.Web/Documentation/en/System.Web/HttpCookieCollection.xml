@@ -33,13 +33,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET includes two intrinsic cookie collections. The collection accessible through <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+            >ASP.NET includes two intrinsic cookie collections. The collection accessible through <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-             contains cookies transmitted by the client to the server in the Cookie header. The collection accessible through <see
-             cref="P:System.Web.HttpResponse.Cookies" />
+             contains cookies transmitted by the client to the server in the Cookie header. The collection accessible through <see cref="P:System.Web.HttpResponse.Cookies" />
 
             
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpCookieCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpCookieCollection" />
 
             
 
@@ -76,21 +73,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any number of cookie collections can exist within an application, but only the collection referenced by the intrinsic <see
-             cref="P:System.Web.HttpResponse.Cookies" />
+            >Any number of cookie collections can exist within an application, but only the collection referenced by the intrinsic <see cref="P:System.Web.HttpResponse.Cookies" />
 
             
 
              object is sent to the client.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.HttpCookieCollection.Add(System.Web.HttpCookie)" />
+            >The <see cref="M:System.Web.HttpCookieCollection.Add(System.Web.HttpCookie)" />
 
             
 
-             method allows duplicate cookies in the cookie collection. Use the <see
-             cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
+             method allows duplicate cookies in the cookie collection. Use the <see cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
 
             
 
@@ -102,12 +96,15 @@
           <para>Adds the specified cookie to the cookie collection.</para>
         </summary>
         <param name="cookie">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpCookie" />
+          The <see cref="T:System.Web.HttpCookie" />
 
           
 
@@ -173,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies members of the cookie collection to an <see
-             cref="T:System.Array" />
+            >Copies members of the cookie collection to an <see cref="T:System.Array" />
 
             
 
@@ -182,7 +178,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Web.HttpCookie" />
+            >Returns the <see cref="T:System.Web.HttpCookie" />
 
             
 
@@ -219,13 +218,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.HttpCookie" />
+            >The <see cref="T:System.Web.HttpCookie" />
 
             
 
-             specified by <paramref
-             name="index" />
+             specified by <paramref name="index" />
 
             
 
@@ -233,7 +230,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,13 +267,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.HttpCookie" />
+            >The <see cref="T:System.Web.HttpCookie" />
 
             
 
-             specified by <paramref
-             name="name" />
+             specified by <paramref name="name" />
 
             
 
@@ -280,7 +279,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -310,8 +313,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the cookie specified by <paramref
-             name="index" />
+            >The name of the cookie specified by <paramref name="index" />
 
             
 
@@ -319,7 +321,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -390,8 +396,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a cookie with the specified <paramref
-             name="name" />
+            >If a cookie with the specified <paramref name="name" />
 
             
 
@@ -403,7 +408,11 @@
           <para>Removes the cookie with the specified name from the collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -428,18 +437,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
+            >The <see cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
 
             
 
-             method first checks to see if a cookie already exists in the collection and if so updates it. The <see
-             cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
+             method first checks to see if a cookie already exists in the collection and if so updates it. The <see cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
 
             
 
-             method does not allow duplicate cookies in the cookie collection. To add duplicate cookies in the cookie collection, use the <see
-             cref="M:System.Web.HttpCookieCollection.Add(System.Web.HttpCookie)" />
+             method does not allow duplicate cookies in the cookie collection. To add duplicate cookies in the cookie collection, use the <see cref="M:System.Web.HttpCookieCollection.Add(System.Web.HttpCookie)" />
 
             
 
@@ -451,12 +457,15 @@
           <para>Updates the value of an existing cookie in a cookie collection.</para>
         </summary>
         <param name="cookie">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpCookie" />
+          The <see cref="T:System.Web.HttpCookie" />
 
           
 

@@ -31,43 +31,35 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The dnprdnshort has two reader-writer locks, <see
-           cref="T:System.Threading.ReaderWriterLockSlim" />
+          >The dnprdnshort has two reader-writer locks, <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
           
 
-           and <see
-           cref="T:System.Threading.ReaderWriterLock" />
+           and <see cref="T:System.Threading.ReaderWriterLock" />
 
           
 
-          . <see
-           cref="T:System.Threading.ReaderWriterLockSlim" />
+          . <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
           
 
-           is recommended for all new development. <see
-           cref="T:System.Threading.ReaderWriterLockSlim" />
+           is recommended for all new development. <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
           
 
-           is similar to <see
-           cref="T:System.Threading.ReaderWriterLock" />
+           is similar to <see cref="T:System.Threading.ReaderWriterLock" />
 
           
 
-          , but it has simplified rules for recursion and for upgrading and downgrading lock state. <see
-           cref="T:System.Threading.ReaderWriterLockSlim" />
+          , but it has simplified rules for recursion and for upgrading and downgrading lock state. <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
           
 
-           avoids many cases of potential deadlock. In addition, the performance of <see
-           cref="T:System.Threading.ReaderWriterLockSlim" />
+           avoids many cases of potential deadlock. In addition, the performance of <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
           
 
-           is significantly better than <see
-           cref="T:System.Threading.ReaderWriterLock" />
+           is significantly better than <see cref="T:System.Threading.ReaderWriterLock" />
 
           
 
@@ -79,8 +71,7 @@
 
         
 
-         is used to synchronize access to a resource. At any given time, it allows either concurrent read access for multiple threads, or write access for a single thread. In a situation where a resource is changed infrequently, a ReaderWriterLock provides better throughput than a simple one-at-a-time lock, such as <see
-         cref="T:System.Threading.Monitor" />
+         is used to synchronize access to a resource. At any given time, it allows either concurrent read access for multiple threads, or write access for a single thread. In a situation where a resource is changed infrequently, a ReaderWriterLock provides better throughput than a simple one-at-a-time lock, such as <see cref="T:System.Threading.Monitor" />
 
         
 
@@ -91,13 +82,11 @@
         <para>Holding reader locks or writer locks for long periods will starve other threads. For best performance, consider restructuring your application to minimize the duration of writes.</para>
       </block>
       <para
-        >A thread can hold a reader lock or a writer lock, but not both at the same time. Instead of releasing a reader lock in order to acquire the writer lock, you can use <see
-         cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+        >A thread can hold a reader lock or a writer lock, but not both at the same time. Instead of releasing a reader lock in order to acquire the writer lock, you can use <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
         
 
-         and <see
-         cref="M:System.Threading.ReaderWriterLock.DowngradeFromWriterLock(System.Threading.LockCookie@)" />
+         and <see cref="M:System.Threading.ReaderWriterLock.DowngradeFromWriterLock(System.Threading.LockCookie@)" />
 
         
 
@@ -108,21 +97,18 @@
       <para>While a thread in the writer queue is waiting for active reader locks to be released, threads requesting new reader locks accumulate in the reader queue. Their requests are not granted, even though they could share concurrent access with existing reader-lock holders; this helps protect writers against indefinite blockage by readers.</para>
       <para>Most methods for acquiring locks on a ReaderWriterLock accept time-out values. Use time-outs to avoid deadlocks in your application. For example, a thread might acquire the writer lock on one resource and then request a reader lock on a second resource; in the meantime, another thread might acquire the writer lock on the second resource, and request a reader lock on the first. Unless time-outs are used, the threads deadlock.</para>
       <para
-        >If the time-out interval expires and the lock request has not been granted, the method returns control to the calling thread by throwing an <see
-         cref="T:System.ApplicationException" />
+        >If the time-out interval expires and the lock request has not been granted, the method returns control to the calling thread by throwing an <see cref="T:System.ApplicationException" />
 
         
 
         . A thread can catch this exception and determine what action to take next.</para
       >
       <para
-        >Time-outs are expressed in milliseconds. If you use a <see
-         cref="T:System.TimeSpan" />
+        >Time-outs are expressed in milliseconds. If you use a <see cref="T:System.TimeSpan" />
 
         
 
-         to specify the time-out, the value used is the total number of whole milliseconds represented by the <see
-         cref="T:System.TimeSpan" />
+         to specify the time-out, the value used is the total number of whole milliseconds represented by the <see cref="T:System.TimeSpan" />
 
         
 
@@ -145,8 +131,7 @@
           </term>
           <description>
             <para
-              >The thread waits until the lock is acquired, regardless of how long it takes. For methods that specify integer time-outs, the constant <see
-               cref="F:System.Threading.Timeout.Infinite" />
+              >The thread waits until the lock is acquired, regardless of how long it takes. For methods that specify integer time-outs, the constant <see cref="F:System.Threading.Timeout.Infinite" />
 
               
 
@@ -172,13 +157,11 @@
         </item>
       </list>
       <para
-        >With the exception of -1, negative time-out values are not allowed. If you specify a negative integer other than -1, a time-out value of zero is used instead. (That is, the method returns without waiting, if the lock cannot be acquired immediately.) If you specify a <see
-         cref="T:System.TimeSpan" />
+        >With the exception of -1, negative time-out values are not allowed. If you specify a negative integer other than -1, a time-out value of zero is used instead. (That is, the method returns without waiting, if the lock cannot be acquired immediately.) If you specify a <see cref="T:System.TimeSpan" />
 
         
 
-         that represents a negative number of milliseconds other than -1, <see
-         cref="T:System.ArgumentOutOfRangeException" />
+         that represents a negative number of milliseconds other than -1, <see cref="T:System.ArgumentOutOfRangeException" />
 
         
 
@@ -210,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >Initializes a new instance of the <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -253,13 +235,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the current thread already has the writer lock, no reader lock is acquired. Instead, the lock count on the writer lock is incremented. This prevents a thread from blocking on its own writer lock. The result is exactly the same as calling <see
-               cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
+              >If the current thread already has the writer lock, no reader lock is acquired. Instead, the lock count on the writer lock is incremented. This prevents a thread from blocking on its own writer lock. The result is exactly the same as calling <see cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
 
               
 
-              , and an additional call to <see
-               cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
+              , and an additional call to <see cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
 
               
 
@@ -267,13 +247,11 @@
             >
           </block>
           <para
-            >AcquireReaderLock supports recursive reader-lock requests. That is, a thread can call AcquireReaderLock multiple times, which increments the lock count each time. You must call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseReaderLock" />
+            >AcquireReaderLock supports recursive reader-lock requests. That is, a thread can call AcquireReaderLock multiple times, which increments the lock count each time. You must call <see cref="M:System.Threading.ReaderWriterLock.ReleaseReaderLock" />
 
             
 
-             once for each time you call AcquireReaderLock. Alternatively, you can call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
+             once for each time you call AcquireReaderLock. Alternatively, you can call <see cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
 
             
 
@@ -281,8 +259,7 @@
           >
           <para>Recursive lock requests are always granted immediately, without placing the requesting thread in the reader queue. Use recursive locks with caution, to avoid blocking writer-lock requests for long periods.</para>
           <para
-            >For valid time-out values, see <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >For valid time-out values, see <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -292,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Acquires a reader lock, using an <see
-             cref="T:System.Int32" />
+            >Acquires a reader lock, using an <see cref="T:System.Int32" />
 
             
 
@@ -301,7 +277,11 @@
           >
         </summary>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -339,13 +319,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If the current thread already has the writer lock, no reader lock is acquired. Instead, the lock count on the writer lock is incremented. This prevents a thread from blocking on its own writer lock. The result is exactly the same as calling <see
-               cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
+              >If the current thread already has the writer lock, no reader lock is acquired. Instead, the lock count on the writer lock is incremented. This prevents a thread from blocking on its own writer lock. The result is exactly the same as calling <see cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
 
               
 
-              , and an additional call to <see
-               cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
+              , and an additional call to <see cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
 
               
 
@@ -353,13 +331,11 @@
             >
           </block>
           <para
-            >AcquireReaderLock supports recursive reader-lock requests. That is, a thread can call AcquireReaderLock multiple times, which increments the lock count each time. You must call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseReaderLock" />
+            >AcquireReaderLock supports recursive reader-lock requests. That is, a thread can call AcquireReaderLock multiple times, which increments the lock count each time. You must call <see cref="M:System.Threading.ReaderWriterLock.ReleaseReaderLock" />
 
             
 
-             once for each time you call AcquireReaderLock. Alternatively, you can call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
+             once for each time you call AcquireReaderLock. Alternatively, you can call <see cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
 
             
 
@@ -367,8 +343,7 @@
           >
           <para>Recursive lock requests are always granted immediately, without placing the requesting thread in the reader queue. Use recursive locks with caution, to avoid blocking writer-lock requests for long periods.</para>
           <para
-            >For valid time-out values, see <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >For valid time-out values, see <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -378,8 +353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Acquires a reader lock, using a <see
-             cref="T:System.TimeSpan" />
+            >Acquires a reader lock, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -387,7 +361,11 @@
           >
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -420,21 +398,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method blocks if another thread has a reader lock or writer lock. For a description of the way the writer lock alternates with multiple concurrent reader locks, see the <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >This method blocks if another thread has a reader lock or writer lock. For a description of the way the writer lock alternates with multiple concurrent reader locks, see the <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
              class.</para
           >
           <para
-            >A thread that already has a reader lock can acquire the writer lock in one of two ways: by releasing the reader lock before calling <see
-             cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
+            >A thread that already has a reader lock can acquire the writer lock in one of two ways: by releasing the reader lock before calling <see cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
 
             
 
-            , or by calling <see
-             cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+            , or by calling <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
             
 
@@ -442,8 +417,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If a thread calls AcquireWriterLock while it still has a reader lock, it will block on its own reader lock; if an infinite time-out is specified, the thread will deadlock. To avoid such deadlocks, use <see
-               cref="P:System.Threading.ReaderWriterLock.IsReaderLockHeld" />
+              >If a thread calls AcquireWriterLock while it still has a reader lock, it will block on its own reader lock; if an infinite time-out is specified, the thread will deadlock. To avoid such deadlocks, use <see cref="P:System.Threading.ReaderWriterLock.IsReaderLockHeld" />
 
               
 
@@ -451,13 +425,11 @@
             >
           </block>
           <para
-            >AcquireWriterLock supports recursive writer-lock requests. That is, a thread can call AcquireWriterLock multiple times, which increments the lock count each time. You must call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
+            >AcquireWriterLock supports recursive writer-lock requests. That is, a thread can call AcquireWriterLock multiple times, which increments the lock count each time. You must call <see cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
 
             
 
-             once for each time you call AcquireWriterLock. Alternatively, you can call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
+             once for each time you call AcquireWriterLock. Alternatively, you can call <see cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
 
             
 
@@ -465,8 +437,7 @@
           >
           <para>Recursive lock requests are always granted immediately, without placing the requesting thread in the writer queue.</para>
           <para
-            >For valid time-out values, see <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >For valid time-out values, see <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -476,8 +447,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Acquires the writer lock, using an <see
-             cref="T:System.Int32" />
+            >Acquires the writer lock, using an <see cref="T:System.Int32" />
 
             
 
@@ -485,7 +455,11 @@
           >
         </summary>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -515,21 +489,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method blocks if another thread has a reader lock or writer lock. For a description of the way the writer lock alternates with multiple concurrent reader locks, see the <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >This method blocks if another thread has a reader lock or writer lock. For a description of the way the writer lock alternates with multiple concurrent reader locks, see the <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
              class.</para
           >
           <para
-            >A thread that already has a reader lock can acquire the writer lock in one of two ways: by releasing the reader lock before calling <see
-             cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
+            >A thread that already has a reader lock can acquire the writer lock in one of two ways: by releasing the reader lock before calling <see cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
 
             
 
-            , or by calling <see
-             cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+            , or by calling <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
             
 
@@ -537,8 +508,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If a thread calls AcquireWriterLock while it still has a reader lock, it will block on its own reader lock; if an infinite time-out is specified, the thread will deadlock. To avoid such deadlocks, use <see
-               cref="P:System.Threading.ReaderWriterLock.IsReaderLockHeld" />
+              >If a thread calls AcquireWriterLock while it still has a reader lock, it will block on its own reader lock; if an infinite time-out is specified, the thread will deadlock. To avoid such deadlocks, use <see cref="P:System.Threading.ReaderWriterLock.IsReaderLockHeld" />
 
               
 
@@ -546,13 +516,11 @@
             >
           </block>
           <para
-            >AcquireWriterLock supports recursive writer-lock requests. That is, a thread can call AcquireWriterLock multiple times, which increments the lock count each time. You must call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
+            >AcquireWriterLock supports recursive writer-lock requests. That is, a thread can call AcquireWriterLock multiple times, which increments the lock count each time. You must call <see cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
 
             
 
-             once for each time you call AcquireWriterLock. Alternatively, you can call <see
-             cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
+             once for each time you call AcquireWriterLock. Alternatively, you can call <see cref="M:System.Threading.ReaderWriterLock.ReleaseLock" />
 
             
 
@@ -560,8 +528,7 @@
           >
           <para>Recursive lock requests are always granted immediately, without placing the requesting thread in the writer queue.</para>
           <para
-            >For valid time-out values, see <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >For valid time-out values, see <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -571,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Acquires the writer lock, using a <see
-             cref="T:System.TimeSpan" />
+            >Acquires the writer lock, using a <see cref="T:System.TimeSpan" />
 
             
 
@@ -580,7 +546,11 @@
           >
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -610,8 +580,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use <see
-             cref="P:System.Threading.ReaderWriterLock.WriterSeqNum" />
+            >You can use <see cref="P:System.Threading.ReaderWriterLock.WriterSeqNum" />
 
             
 
@@ -628,7 +597,11 @@
           <para>true if the writer lock has been granted to any thread since the sequence number was obtained; otherwise, false.</para>
         </returns>
         <param name="seqNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -759,13 +732,11 @@
 
             
 
-             releases the reader lock or writer lock, regardless of the recursive lock count. To restore the state of the lock, including the lock count, pass the <see
-             cref="T:System.Threading.LockCookie" />
+             releases the reader lock or writer lock, regardless of the recursive lock count. To restore the state of the lock, including the lock count, pass the <see cref="T:System.Threading.LockCookie" />
 
             
 
-             to <see
-             cref="M:System.Threading.ReaderWriterLock.RestoreLock(System.Threading.LockCookie@)" />
+             to <see cref="M:System.Threading.ReaderWriterLock.RestoreLock(System.Threading.LockCookie@)" />
 
             
 
@@ -779,8 +750,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.LockCookie" />
+            >A <see cref="T:System.Threading.LockCookie" />
 
             
 
@@ -822,13 +792,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If a thread has the writer lock, calling ReleaseReaderLock has the same effect as calling <see
-               cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
+              >If a thread has the writer lock, calling ReleaseReaderLock has the same effect as calling <see cref="M:System.Threading.ReaderWriterLock.ReleaseWriterLock" />
 
               
 
-              . If a thread has no locks, calling ReleaseReaderLock throws an <see
-               cref="T:System.ApplicationException" />
+              . If a thread has no locks, calling ReleaseReaderLock throws an <see cref="T:System.ApplicationException" />
 
               
 
@@ -875,8 +843,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If a thread has a reader lock, or no locks, calling ReleaseWriterLock throws an <see
-               cref="T:System.ApplicationException" />
+              >If a thread has a reader lock, or no locks, calling ReleaseWriterLock throws an <see cref="T:System.ApplicationException" />
 
               
 
@@ -944,18 +911,15 @@
           <para>When a thread calls UpgradeToWriterLock the reader lock is released, regardless of the lock count, and the thread goes to the end of the queue for the writer lock. Thus, other threads might write to the resource before the thread that requested the upgrade is granted the writer lock.</para>
           <block subset="none" type="note">
             <para
-              >The time-out exception is not thrown until the thread that called the <see
-               cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+              >The time-out exception is not thrown until the thread that called the <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
               
 
-               method can reacquire the reader lock. If there are no other threads waiting for the writer lock, this happens immediately. However, if another thread is queued for the writer lock, the thread that called the <see
-               cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+               method can reacquire the reader lock. If there are no other threads waiting for the writer lock, this happens immediately. However, if another thread is queued for the writer lock, the thread that called the <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
               
 
-               method cannot reacquire the reader lock until all current readers have released their locks, and one thread has acquired and released the writer lock. This is true even if the other thread that requested the writer lock requested it after the current thread called the <see
-               cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+               method cannot reacquire the reader lock until all current readers have released their locks, and one thread has acquired and released the writer lock. This is true even if the other thread that requested the writer lock requested it after the current thread called the <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
               
 
@@ -963,34 +927,29 @@
             >
           </block>
           <para
-            >To restore the lock state, call <see
-             cref="M:System.Threading.ReaderWriterLock.DowngradeFromWriterLock(System.Threading.LockCookie@)" />
+            >To restore the lock state, call <see cref="M:System.Threading.ReaderWriterLock.DowngradeFromWriterLock(System.Threading.LockCookie@)" />
 
             
 
-             using the <see
-             cref="T:System.Threading.LockCookie" />
+             using the <see cref="T:System.Threading.LockCookie" />
 
             
 
-             returned by UpgradeToWriterLock. Do not use this LockCookie with <see
-             cref="M:System.Threading.ReaderWriterLock.RestoreLock(System.Threading.LockCookie@)" />
+             returned by UpgradeToWriterLock. Do not use this LockCookie with <see cref="M:System.Threading.ReaderWriterLock.RestoreLock(System.Threading.LockCookie@)" />
 
             
 
             .</para
           >
           <para
-            >When a thread has no reader lock, do not use UpgradeToWriterLock. Use <see
-             cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
+            >When a thread has no reader lock, do not use UpgradeToWriterLock. Use <see cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
 
             
 
              instead.</para
           >
           <para
-            >For valid time-out values, see <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >For valid time-out values, see <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -1004,8 +963,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.LockCookie" />
+            >A <see cref="T:System.Threading.LockCookie" />
 
             
 
@@ -1013,7 +971,11 @@
           >
         </returns>
         <param name="millisecondsTimeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1048,18 +1010,15 @@
           <para>When a thread calls UpgradeToWriterLock the reader lock is released, regardless of the lock count, and the thread goes to the end of the queue for the writer lock. Thus, other threads might write to the resource before the thread that requested the upgrade is granted the writer lock.</para>
           <block subset="none" type="note">
             <para
-              >The time-out exception is not thrown until the thread that called the <see
-               cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+              >The time-out exception is not thrown until the thread that called the <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
               
 
-               method can reacquire the reader lock. If there are no other threads waiting for the writer lock, this happens immediately. However, if another thread is queued for the writer lock, the thread that called the <see
-               cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+               method can reacquire the reader lock. If there are no other threads waiting for the writer lock, this happens immediately. However, if another thread is queued for the writer lock, the thread that called the <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
               
 
-               method cannot reacquire the reader lock until all current readers have released their locks, and one thread has acquired and released the writer lock. This is true even if the other thread that requested the writer lock requested it after the current thread called the <see
-               cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
+               method cannot reacquire the reader lock until all current readers have released their locks, and one thread has acquired and released the writer lock. This is true even if the other thread that requested the writer lock requested it after the current thread called the <see cref="M:System.Threading.ReaderWriterLock.UpgradeToWriterLock(System.Int32)" />
 
               
 
@@ -1067,34 +1026,29 @@
             >
           </block>
           <para
-            >To restore the lock state, call <see
-             cref="M:System.Threading.ReaderWriterLock.DowngradeFromWriterLock(System.Threading.LockCookie@)" />
+            >To restore the lock state, call <see cref="M:System.Threading.ReaderWriterLock.DowngradeFromWriterLock(System.Threading.LockCookie@)" />
 
             
 
-             using the <see
-             cref="T:System.Threading.LockCookie" />
+             using the <see cref="T:System.Threading.LockCookie" />
 
             
 
-             returned by UpgradeToWriterLock. Do not use this LockCookie with <see
-             cref="M:System.Threading.ReaderWriterLock.RestoreLock(System.Threading.LockCookie@)" />
+             returned by UpgradeToWriterLock. Do not use this LockCookie with <see cref="M:System.Threading.ReaderWriterLock.RestoreLock(System.Threading.LockCookie@)" />
 
             
 
             .</para
           >
           <para
-            >When a thread has no reader lock, do not use UpgradeToWriterLock. Use <see
-             cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
+            >When a thread has no reader lock, do not use UpgradeToWriterLock. Use <see cref="M:System.Threading.ReaderWriterLock.AcquireWriterLock(System.Int32)" />
 
             
 
              instead.</para
           >
           <para
-            >For valid time-out values, see <see
-             cref="T:System.Threading.ReaderWriterLock" />
+            >For valid time-out values, see <see cref="T:System.Threading.ReaderWriterLock" />
 
             
 
@@ -1108,8 +1062,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Threading.LockCookie" />
+            >A <see cref="T:System.Threading.LockCookie" />
 
             
 
@@ -1117,7 +1070,11 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1142,8 +1099,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The sequence number increases whenever a thread acquires the writer lock. You can save the sequence number and pass it to <see
-             cref="M:System.Threading.ReaderWriterLock.AnyWritersSince(System.Int32)" />
+            >The sequence number increases whenever a thread acquires the writer lock. You can save the sequence number and pass it to <see cref="M:System.Threading.ReaderWriterLock.AnyWritersSince(System.Int32)" />
 
             
 

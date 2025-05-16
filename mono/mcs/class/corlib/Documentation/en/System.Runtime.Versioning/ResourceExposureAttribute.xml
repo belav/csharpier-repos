@@ -30,46 +30,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
+        >The <see cref="T:System.Runtime.Versioning.ResourceConsumptionAttribute" />
 
         
 
-         attribute must be applied to a member calling a member that has the <see
-         cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+         attribute must be applied to a member calling a member that has the <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
 
         
 
-         attribute applied. Public members cannot expose <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+         attribute applied. Public members cannot expose <see cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
 
         
 
-         or <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Private" />
+         or <see cref="F:System.Runtime.Versioning.ResourceScope.Private" />
 
         
 
-         resources.  Members with <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
+         resources.  Members with <see cref="F:System.Runtime.Versioning.ResourceScope.Assembly" />
 
         
 
-         scope cannot expose <see
-         cref="F:System.Runtime.Versioning.ResourceScope.Private" />
+         scope cannot expose <see cref="F:System.Runtime.Versioning.ResourceScope.Private" />
 
         
 
          resources.</para
       >
       <para
-        >The graph of methods terminates when an <see
-         cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+        >The graph of methods terminates when an <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
 
         
 
-         attribute with a resource scope of <see
-         cref="F:System.Runtime.Versioning.ResourceScope.None" />
+         attribute with a resource scope of <see cref="F:System.Runtime.Versioning.ResourceScope.None" />
 
         
 
@@ -105,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Versioning.ResourceExposureAttribute" />
 
             
 
@@ -114,7 +105,11 @@
           >
         </summary>
         <param name="exposureLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

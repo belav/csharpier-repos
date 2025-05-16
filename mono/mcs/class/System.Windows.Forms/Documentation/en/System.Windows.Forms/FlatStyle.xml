@@ -13,64 +13,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members such as <see
-         cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+        >This enumeration is used by members such as <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.GroupBox.FlatStyle" />
+        , <see cref="P:System.Windows.Forms.GroupBox.FlatStyle" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.Label.FlatStyle" />
+        , and <see cref="P:System.Windows.Forms.Label.FlatStyle" />
 
         
 
         .</para
       >
       <para
-        >In the case of the <see
-         cref="F:System.Windows.Forms.FlatStyle.Popup" />
+        >In the case of the <see cref="F:System.Windows.Forms.FlatStyle.Popup" />
 
         
 
-         style button, this enumeration controls some behavior as well as appearance. The <see
-         cref="F:System.Windows.Forms.FlatStyle.Popup" />
+         style button, this enumeration controls some behavior as well as appearance. The <see cref="F:System.Windows.Forms.FlatStyle.Popup" />
 
         
 
-         style control initially appears <see
-         cref="F:System.Windows.Forms.FlatStyle.Flat" />
+         style control initially appears <see cref="F:System.Windows.Forms.FlatStyle.Flat" />
 
         
 
-         until the mouse pointer moves over it. When the mouse pointer moves over the <see
-         cref="F:System.Windows.Forms.FlatStyle.Popup" />
+         until the mouse pointer moves over it. When the mouse pointer moves over the <see cref="F:System.Windows.Forms.FlatStyle.Popup" />
 
         
 
-         control, it appears as a <see
-         cref="F:System.Windows.Forms.FlatStyle.Standard" />
+         control, it appears as a <see cref="F:System.Windows.Forms.FlatStyle.Standard" />
 
         
 
          style control until the mouse pointer is moved off of it again.</para
       >
       <para
-        >If the <see
-         cref="F:System.Windows.Forms.FlatStyle.System" />
+        >If the <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
         
 
-         style is used, the appearance of the control is determined by the user's operating system and the following property values will be ignored: <see
-         cref="P:System.Windows.Forms.Control.BackgroundImage" />
+         style is used, the appearance of the control is determined by the user's operating system and the following property values will be ignored: <see cref="P:System.Windows.Forms.Control.BackgroundImage" />
 
         
 
-        , ImageAlign, Image, ImageIndex, ImageList, and TextAlign. In addition, the <see
-         cref="P:System.Windows.Forms.Control.BackColor" />
+        , ImageAlign, Image, ImageIndex, ImageList, and TextAlign. In addition, the <see cref="P:System.Windows.Forms.Control.BackColor" />
 
         
 
@@ -78,63 +67,51 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+          >When the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
           
 
-           property of the <see
-           cref="T:System.Windows.Forms.RadioButton" />
+           property of the <see cref="T:System.Windows.Forms.RadioButton" />
 
           
 
-           and <see
-           cref="T:System.Windows.Forms.CheckBox" />
+           and <see cref="T:System.Windows.Forms.CheckBox" />
 
           
 
-           classes is set to <see
-           cref="F:System.Windows.Forms.FlatStyle.System" />
+           classes is set to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
           
 
-          , the control is drawn by the user's operating system and the check alignment is based upon the CheckAlign and <see
-           cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+          , the control is drawn by the user's operating system and the check alignment is based upon the CheckAlign and <see cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
 
           
 
-           property values. The CheckAlign property value is not changed, but the appearance of the control can be affected. The check box is horizontally aligned with either the left or right edge of the control (a left or center alignment appears left aligned, right remains unchanged), and vertically aligned the same as the descriptive text. For example, if you have a <see
-           cref="T:System.Windows.Forms.CheckBox" />
+           property values. The CheckAlign property value is not changed, but the appearance of the control can be affected. The check box is horizontally aligned with either the left or right edge of the control (a left or center alignment appears left aligned, right remains unchanged), and vertically aligned the same as the descriptive text. For example, if you have a <see cref="T:System.Windows.Forms.CheckBox" />
 
           
 
-           control with a CheckAlign property value of <see
-           cref="F:System.Drawing.ContentAlignment.MiddleCenter" />
+           control with a CheckAlign property value of <see cref="F:System.Drawing.ContentAlignment.MiddleCenter" />
 
           
 
-           and a <see
-           cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
+           and a <see cref="P:System.Windows.Forms.ButtonBase.TextAlign" />
 
           
 
-           property value of <see
-           cref="F:System.Drawing.ContentAlignment.TopRight" />
+           property value of <see cref="F:System.Drawing.ContentAlignment.TopRight" />
 
           
 
-          , and the <see
-           cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
+          , and the <see cref="P:System.Windows.Forms.ButtonBase.FlatStyle" />
 
           
 
-           property value is set to <see
-           cref="F:System.Windows.Forms.FlatStyle.System" />
+           property value is set to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
           
 
-          , the check box alignment will appear to be <see
-           cref="F:System.Drawing.ContentAlignment.TopLeft" />
+          , the check box alignment will appear to be <see cref="F:System.Drawing.ContentAlignment.TopLeft" />
 
           
 
@@ -143,8 +120,7 @@
       </block>
       <block subset="none" type="note">
         <para
-          >Setting the FlatStyle property to <see
-           cref="F:System.Windows.Forms.FlatStyle.System" />
+          >Setting the FlatStyle property to <see cref="F:System.Windows.Forms.FlatStyle.System" />
 
           
 

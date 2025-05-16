@@ -11,39 +11,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Data is usually sent from a provider to a consumer in a Web Parts connection. However, in some cases, a provider needs a parameter from the consumer to determine which values it should send back. The <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
+        >Data is usually sent from a provider to a consumer in a Web Parts connection. However, in some cases, a provider needs a parameter from the consumer to determine which values it should send back. The <see cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
 
         
 
          interface defines members to implement that facilitate the passing of a parameter from a consumer to a provider. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
+        >The <see cref="T:System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
 
         
 
-         class implements the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
+         class implements the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
 
         
 
-         interface. Transformers are used to translate data between two Web Parts controls with incompatible connection points. A <see
-         cref="T:System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
+         interface. Transformers are used to translate data between two Web Parts controls with incompatible connection points. A <see cref="T:System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
 
         
 
-         object transforms data from a provider implementing the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPartRow" />
+         object transforms data from a provider implementing the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPartRow" />
 
         
 
          interface when the provider needs a parameter from the consumer.</para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
+        >The <see cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
 
         
 
@@ -73,13 +67,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
+            >The <see cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
 
             
 
-             method is used to retrieve the values from the provider based on a parameter. The method represented by the <paramref
-             name="callback" />
+             method is used to retrieve the values from the provider based on a parameter. The method represented by the <paramref name="callback" />
 
             
 
@@ -91,7 +83,11 @@
           <para>Gets the value of the data from the connection provider.</para>
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -117,13 +113,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WebParts.IWebPartParameters.Schema" />
+            >The <see cref="P:System.Web.UI.WebControls.WebParts.IWebPartParameters.Schema" />
 
             
 
-             property provides property information for the data passed by the interface. Transformer and consumer controls can query this property to get information about the type, contents, and other details of the field contained in the <see
-             cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
+             property provides property information for the data passed by the interface. Transformer and consumer controls can query this property to get information about the type, contents, and other details of the field contained in the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
 
             
 
@@ -157,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the property descriptors for the properties that the consumer receives when calling the <see
-             cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
+            >Sets the property descriptors for the properties that the consumer receives when calling the <see cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
 
             
 
@@ -166,17 +159,19 @@
           >
         </summary>
         <param name="schema">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
           
 
-           returned by <see
-           cref="P:System.Web.UI.WebControls.WebParts.IWebPartParameters.Schema" />
+           returned by <see cref="P:System.Web.UI.WebControls.WebParts.IWebPartParameters.Schema" />
 
           
 

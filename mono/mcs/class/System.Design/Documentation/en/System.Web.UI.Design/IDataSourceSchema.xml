@@ -10,36 +10,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.Web.UI.Design.IDataSourceSchema" />
+        >Implement the <see cref="T:System.Web.UI.Design.IDataSourceSchema" />
 
         
 
-         interface to describe a custom data source at design time. For example, the <see
-         cref="T:System.Web.UI.Design.DataSetSchema" />
+         interface to describe a custom data source at design time. For example, the <see cref="T:System.Web.UI.Design.DataSetSchema" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.Design.XmlDocumentSchema" />
+        , <see cref="T:System.Web.UI.Design.XmlDocumentSchema" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.Design.TypeSchema" />
+        , and <see cref="T:System.Web.UI.Design.TypeSchema" />
 
         
 
-         classes implement the <see
-         cref="T:System.Web.UI.Design.IDataSourceSchema" />
+         classes implement the <see cref="T:System.Web.UI.Design.IDataSourceSchema" />
 
         
 
          interface.</para
       >
       <para
-        >Classes that implement the <see
-         cref="T:System.Web.UI.Design.IDataSourceSchema" />
+        >Classes that implement the <see cref="T:System.Web.UI.Design.IDataSourceSchema" />
 
         
 
@@ -69,28 +63,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A class that implements the <see
-             cref="M:System.Web.UI.Design.IDataSourceSchema.GetViews" />
+            >A class that implements the <see cref="M:System.Web.UI.Design.IDataSourceSchema.GetViews" />
 
             
 
-             method returns an array of objects that implement the <see
-             cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+             method returns an array of objects that implement the <see cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
 
             
 
-             interface. For example, in the array returned by the <see
-             cref="M:System.Web.UI.Design.DataSetSchema.GetViews" />
+             interface. For example, in the array returned by the <see cref="M:System.Web.UI.Design.DataSetSchema.GetViews" />
 
             
 
-             method, each element of the array is a <see
-             cref="T:System.Web.UI.Design.DataSetViewSchema" />
+             method, each element of the array is a <see cref="T:System.Web.UI.Design.DataSetViewSchema" />
 
             
 
-             object that implements <see
-             cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+             object that implements <see cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
 
             
 
@@ -104,8 +93,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+            >An array of <see cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
 
             
 

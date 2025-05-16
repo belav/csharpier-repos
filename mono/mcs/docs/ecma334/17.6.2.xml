@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <clause number="17.6.2" title="Accessors">
   <paragraph
-    >The <non_terminal
-     where="17.6.2">accessor-declarations</non_terminal>
+    >The <non_terminal where="17.6.2"
+      >accessor-declarations</non_terminal
+    >
 
     
 
-     of a property specify the executable statements associated with reading and writing that property. <grammar_production
-    >
+     of a property specify the executable statements associated with reading and writing that property. <grammar_production>
       <name>
         <non_terminal where="17.6.2">accessor-declarations</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="17.6.2">get-accessor-declaration</non_terminal>
         <non_terminal where="17.6.2">set-accessor-declaration</non_terminal>
         <opt />
@@ -33,8 +32,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <terminal>get</terminal>
@@ -48,8 +46,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <terminal>set</terminal>
@@ -63,8 +60,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="15.2">block</non_terminal>
       </rhs>
       <rhs>
@@ -73,94 +69,90 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The accessor declarations consist of a <non_terminal
-     where="17.6.2">get-accessor-declaration</non_terminal>
+    >The accessor declarations consist of a <non_terminal where="17.6.2"
+      >get-accessor-declaration</non_terminal
+    >
 
     
 
-    , a <non_terminal
-     where="17.6.2">set-accessor-declaration</non_terminal>
+    , a <non_terminal where="17.6.2"
+      >set-accessor-declaration</non_terminal
+    >
 
     
 
     , or both. Each accessor declaration consists of the token get or set followed by an <non_terminal
-     where="17.6.2">accessor-body</non_terminal>
+      where="17.6.2"
+      >accessor-body</non_terminal
+    >
 
     
 
-    . For abstract and extern properties, the <non_terminal
-     where="17.6.2">accessor-body</non_terminal>
+    . For abstract and extern properties, the <non_terminal where="17.6.2"
+      >accessor-body</non_terminal
+    >
 
     
 
      for each accessor specified is simply a semicolon. For the accessors of any non-abstract, non-extern property, the <non_terminal
-     where="17.6.2">accessor-body</non_terminal>
+      where="17.6.2"
+      >accessor-body</non_terminal
+    >
 
     
 
      is a block which specifies the statements to be executed when the corresponding accessor is invoked. </paragraph
   >
   <paragraph
-    >A get accessor corresponds to a parameterless method with a return value of the property type. Except as the target of an assignment, when a property is referenced in an expression, the get accessor of the property is invoked to compute the value of the property (<hyperlink
-    >14.1.1</hyperlink>
+    >A get accessor corresponds to a parameterless method with a return value of the property type. Except as the target of an assignment, when a property is referenced in an expression, the get accessor of the property is invoked to compute the value of the property (<hyperlink>14.1.1</hyperlink>
 
     
 
-    ). The body of a get accessor must conform to the rules for value-returning methods described in <hyperlink
-    >17.5.8</hyperlink>
+    ). The body of a get accessor must conform to the rules for value-returning methods described in <hyperlink>17.5.8</hyperlink>
 
     
 
     . In particular, all return statements in the body of a get accessor must specify an expression that is implicitly convertible to the property type. Furthermore, the endpoint of a get accessor must not be reachable. </paragraph
   >
   <paragraph
-    >A set accessor corresponds to a method with a single value parameter of the property type and a <keyword
-    >void</keyword>
+    >A set accessor corresponds to a method with a single value parameter of the property type and a <keyword>void</keyword>
 
     
 
-     return type. The implicit parameter of a set accessor is always named value. When a property is referenced as the target of an assignment (<hyperlink
-    >14.13</hyperlink>
+     return type. The implicit parameter of a set accessor is always named value. When a property is referenced as the target of an assignment (<hyperlink>14.13</hyperlink>
 
     
 
-    ), or as the operand of ++ or  (<hyperlink
-    >14.5.9</hyperlink>
+    ), or as the operand of ++ or  (<hyperlink>14.5.9</hyperlink>
 
     
 
-    , --14.6.5), the set accessor is invoked with an argument (whose value is that of the right-hand side of the assignment or the operand of the ++ or  --operator) that provides the new value (<hyperlink
-    >14.13.1</hyperlink>
+    , --14.6.5), the set accessor is invoked with an argument (whose value is that of the right-hand side of the assignment or the operand of the ++ or  --operator) that provides the new value (<hyperlink>14.13.1</hyperlink>
 
     
 
-    ). The body of a set accessor must conform to the rules for <keyword
-    >void</keyword>
+    ). The body of a set accessor must conform to the rules for <keyword>void</keyword>
 
     
 
-     methods described in <hyperlink
-    >17.5.8</hyperlink>
+     methods described in <hyperlink>17.5.8</hyperlink>
 
     
 
     . In particular, return statements in the set accessor body are not permitted to specify an expression. Since a set accessor implicitly has a parameter named value, it is a compile-time error for a local variable declaration in a set accessor to have that name. </paragraph
   >
   <paragraph
-    >Based on the presence or absence of the get and set accessors, a property is classified as follows: <list
-    >
+    >Based on the presence or absence of the get and set accessors, a property is classified as follows: <list>
       <list_item> A property that includes both a get accessor and a set accessor is said to be a read-write property. </list_item>
       <list_item> A property that has only a get accessor is said to be a read-only property. It is a compile-time error for a read-only property to be the target of an assignment. </list_item>
       <list_item
-        > A property that has only a set accessor is said to be a write-only property. Except as the target of an assignment, it is a compile-time error to reference a write-only property in an expression. <note
-        >[Note: The  pre-and postfix ++ and  --operators cannot be applied to write-only properties, since these operators read the old value of their operand before they write the new one. end note]</note>
+        > A property that has only a set accessor is said to be a write-only property. Except as the target of an assignment, it is a compile-time error to reference a write-only property in an expression. <note>[Note: The  pre-and postfix ++ and  --operators cannot be applied to write-only properties, since these operators read the old value of their operand before they write the new one. end note]</note>
       </list_item>
     </list>
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 public class Button: Control  
 {  
@@ -190,8 +182,7 @@ public class Button: Control
   </paragraph>
   <paragraph>
     <example
-      >Given the Button class above, the following is an example of use of the Caption property: <code_example
-      >
+      >Given the Button class above, the following is an example of use of the Caption property: <code_example>
         <![CDATA[
 Button okButton = new Button();  
 okButton.Caption = "OK";      // Invokes set accessor  
@@ -204,11 +195,9 @@ string s = okButton.Caption;    // Invokes get accessor
     <example>Here, the set accessor is invoked by assigning a value to the property, and the get accessor is invoked by referencing the property in an expression. end example]</example>
   </paragraph>
   <paragraph
-    >The get and set accessors of a property are not distinct members, and it is not possible to declare the accessors of a property separately. <note
-    >[Note: As such, it is not possible for the two accessors of a read-write property to have different accessibility. end note]</note>
+    >The get and set accessors of a property are not distinct members, and it is not possible to declare the accessors of a property separately. <note>[Note: As such, it is not possible for the two accessors of a read-write property to have different accessibility. end note]</note>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 class A  
 {  
@@ -230,9 +219,7 @@ class A
   </paragraph>
   <paragraph
     >When a derived class declares a property by the same name as an inherited property, the derived property hides the inherited property with respect to both reading and writing. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  
@@ -251,8 +238,7 @@ class B: A
 
       
 
-      the P property in B hides the P property in A with respect to both reading and writing. Thus, in the statements <code_example
-      >
+      the P property in B hides the P property in A with respect to both reading and writing. Thus, in the statements <code_example>
         <![CDATA[
 B b = new B();  
 b.P = 1;     // Error, B.P is read-only  
@@ -267,9 +253,7 @@ b.P = 1;     // Error, B.P is read-only
   </paragraph>
   <paragraph
     >Unlike public fields, properties provide a separation between an object's internal state and its public interface. <example
-
-      >[Example: Consider the example: <code_example
-      >
+      >[Example: Consider the example: <code_example>
         <![CDATA[
 class Label  
 {  
@@ -299,13 +283,11 @@ class Label
   </paragraph>
   <paragraph>
     <example
-      >Here, the Label class uses two <keyword
-      >int</keyword>
+      >Here, the Label class uses two <keyword>int</keyword>
 
       
 
-       fields, x and y, to store its location. The location is publicly exposed both as an X and a Y property and as a Location property of type Point. If, in a future version of Label, it becomes more convenient to store the location as a Point internally, the change can be made without affecting the public interface of the class: <code_example
-      >
+       fields, x and y, to store its location. The location is publicly exposed both as an X and a Y property and as a Location property of type Point. If, in a future version of Label, it becomes more convenient to store the location as a Point internally, the change can be made without affecting the public interface of the class: <code_example>
         <![CDATA[
 class Label  
 {  
@@ -340,8 +322,7 @@ class Label
   </paragraph>
   <paragraph>
     <example
-      >[Example: Since invoking a get accessor is conceptually equivalent to reading the value of a field, it is considered bad programming style for get accessors to have observable side-effects. In the example <code_example
-      >
+      >[Example: Since invoking a get accessor is conceptually equivalent to reading the value of a field, it is considered bad programming style for get accessors to have observable side-effects. In the example <code_example>
         <![CDATA[
 class Counter  
 {  
@@ -366,9 +347,7 @@ class Counter
   </paragraph>
   <paragraph
     >Properties can be used to delay initialization of a resource until the moment it is first referenced. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 using System.IO;  
 public class Console  
@@ -407,8 +386,7 @@ public class Console
   </paragraph>
   <paragraph>
     <example
-      >The Console class contains three properties, In, Out, and Error, that represent the standard input, output, and error devices, respectively. By exposing these members as properties, the Console class can delay their initialization until they are actually used. For example, upon first referencing the Out property, as in <code_example
-      >
+      >The Console class contains three properties, In, Out, and Error, that represent the standard input, output, and error devices, respectively. By exposing these members as properties, the Console class can delay their initialization until they are actually used. For example, upon first referencing the Out property, as in <code_example>
         <![CDATA[
 Console.Out.WriteLine("hello, world");  
 ]]>

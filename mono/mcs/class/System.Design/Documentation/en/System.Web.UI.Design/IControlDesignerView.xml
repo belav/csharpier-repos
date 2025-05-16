@@ -62,8 +62,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Rectangle" />
+            >A <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -71,12 +70,15 @@
           >
         </returns>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Design.DesignerRegion" />
+          The <see cref="T:System.Web.UI.Design.DesignerRegion" />
 
           
 
@@ -106,12 +108,15 @@
           <para>Notifies the design host that the area represented by the provided rectangle needs to be repainted on the design surface.</para>
         </summary>
         <param name="rectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -161,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.Design.IControlDesignerView.SetFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.Design.IControlDesignerView.SetFlags(System.Web.UI.Design.ViewFlags,System.Boolean)" />
 
             
 
@@ -170,19 +174,26 @@
           >
         </summary>
         <param name="viewFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of the <see
-           cref="T:System.Web.UI.Design.ViewFlags" />
+          A member of the <see cref="T:System.Web.UI.Design.ViewFlags" />
 
           
 
            enumeration.</param
         >
         <param name="setFlag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,19 +224,26 @@
           <para>Puts the provided content into the provided designer region.</para>
         </summary>
         <param name="region">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.DesignerRegion" />
+          A <see cref="T:System.Web.UI.Design.DesignerRegion" />
 
           
 
            into which the content is to be put.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -285,8 +303,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+            >The <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
             
 

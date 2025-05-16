@@ -32,20 +32,17 @@
       <para>Developers who build compilers can implement this interface to support code parsing by designers.</para>
       <block subset="none" type="note">
         <para
-          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -58,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an empty implementation of the <see
-         cref="T:System.CodeDom.Compiler.ICodeParser" />
+        >Provides an empty implementation of the <see cref="T:System.CodeDom.Compiler.ICodeParser" />
 
         
 
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CodeParser" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeParser" />
 
             
 
@@ -123,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the specified text stream into a <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+            >Compiles the specified text stream into a <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -134,8 +128,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeCompileUnit" />
+            >A <see cref="T:System.CodeDom.CodeCompileUnit" />
 
             
 
@@ -143,12 +136,15 @@
           >
         </returns>
         <param name="codeStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextReader" />
+          A <see cref="T:System.IO.TextReader" />
 
           
 

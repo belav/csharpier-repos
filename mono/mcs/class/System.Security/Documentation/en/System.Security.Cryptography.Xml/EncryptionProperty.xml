@@ -19,26 +19,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+        >The <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
         
 
          class encapsulates the &lt;EncryptionProperty&gt; element defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
         
 
-         class to provide additional encryption information related to the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+         class to provide additional encryption information related to the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
@@ -69,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -103,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
-             class using an <see
-             cref="T:System.Xml.XmlElement" />
+             class using an <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -138,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptionProperty.GetXml" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptionProperty.GetXml" />
 
             
 
@@ -149,13 +141,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlElement" />
+            >Returns an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             object that encapsulates an instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             object that encapsulates an instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -165,13 +155,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
-             object that encapsulates an instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             object that encapsulates an instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -197,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ID is used to reference the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >The ID is used to reference the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -208,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ID of the current <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Gets the ID of the current <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -240,18 +226,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Xml.EncryptionProperty.LoadXml(System.Xml.XmlElement)" />
+            >The <see cref="M:System.Security.Cryptography.Xml.EncryptionProperty.LoadXml(System.Xml.XmlElement)" />
 
             
 
-             method configures the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             method configures the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
-             object to match the state of an <see
-             cref="T:System.Xml.XmlElement" />
+             object to match the state of an <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -261,13 +244,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the input <see
-             cref="T:System.Xml.XmlElement" />
+            >Parses the input <see cref="T:System.Xml.XmlElement" />
 
             
 
-             and configures the internal state of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             and configures the internal state of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -275,12 +256,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -312,13 +296,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets or sets an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             object that represents an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             object that represents an <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -345,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the target of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Gets the target of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 

@@ -15,7 +15,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -73,10 +75,7 @@
       <Parameters />
       <Docs>
         <summary>Collection of X.509 certifications inside the PKCS#7 structure.</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -98,8 +97,7 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -107,8 +105,7 @@
         >
         <summary>Create a SoftwarePublisherCertificate object from the specified file.</summary>
         <returns
-          >a <see
-           cref="T:Mono.Security.Authenticode.SoftwarePublisherCertificate" />
+          >a <see cref="T:Mono.Security.Authenticode.SoftwarePublisherCertificate" />
         </returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -127,13 +124,11 @@
       <Docs>
         <summary>Collection of X.509 CRL inside the PKCS#7 structure.</summary>
         <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
+          >a <see cref="T:System.Collections.ArrayList" />
 
           
 
-           of <see
-           cref="T:Mono.Security.X509.X509Crl" />
+           of <see cref="T:Mono.Security.X509.X509Crl" />
 
           
 

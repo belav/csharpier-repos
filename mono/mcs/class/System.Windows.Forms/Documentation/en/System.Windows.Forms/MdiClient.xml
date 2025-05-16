@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You should not create an <see
-         cref="T:System.Windows.Forms.MdiClient" />
+        >You should not create an <see cref="T:System.Windows.Forms.MdiClient" />
 
         
 
-         control. A form creates and uses the <see
-         cref="T:System.Windows.Forms.MdiClient" />
+         control. A form creates and uses the <see cref="T:System.Windows.Forms.MdiClient" />
 
         
 
-         when you set the <see
-         cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+         when you set the <see cref="P:System.Windows.Forms.Form.IsMdiContainer" />
 
         
 
@@ -64,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MdiClient" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MdiClient" />
 
             
 
@@ -97,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.MdiClient.BackgroundImage" />
+            >Use the <see cref="P:System.Windows.Forms.MdiClient.BackgroundImage" />
 
             
 
@@ -108,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the background image displayed in the <see
-             cref="T:System.Windows.Forms.MdiClient" />
+            >Gets or sets the background image displayed in the <see cref="T:System.Windows.Forms.MdiClient" />
 
             
 
@@ -209,8 +203,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.Form.LayoutMdi(System.Windows.Forms.MdiLayout)" />
+            >Use the <see cref="M:System.Windows.Forms.Form.LayoutMdi(System.Windows.Forms.MdiLayout)" />
 
             
 
@@ -222,12 +215,15 @@
           <para>Arranges the multiple-document interface (MDI) child forms within the MDI parent form.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MdiLayout" />
+          One of the <see cref="T:System.Windows.Forms.MdiLayout" />
 
           
 
@@ -253,13 +249,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.Form.MdiChildren" />
+            >Use the <see cref="P:System.Windows.Forms.Form.MdiChildren" />
 
             
 
-             property to get the child MDI forms of the <see
-             cref="T:System.Windows.Forms.MdiClient" />
+             property to get the child MDI forms of the <see cref="T:System.Windows.Forms.MdiClient" />
 
             
 
@@ -269,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child multiple-document interface (MDI) forms of the <see
-             cref="T:System.Windows.Forms.MdiClient" />
+            >Gets the child multiple-document interface (MDI) forms of the <see cref="T:System.Windows.Forms.MdiClient" />
 
             
 

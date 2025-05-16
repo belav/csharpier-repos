@@ -131,8 +131,7 @@ class AuthorInfo
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Attribute" />
+        >The <see cref="T:System.Attribute" />
 
         
 
@@ -140,33 +139,28 @@ class AuthorInfo
       >
       <para>Information provided by an attribute is also known as metadata. Metadata can be examined at run time by your application to control how your program processes data, or before run time by external tools to control how your application itself is processed or maintained. For example, the .NET Framework predefines and uses attribute types to control run-time behavior, and some programming languages use attribute types to represent language features not directly supported by the .NET Framework common type system. </para>
       <para
-        >All attribute types derive directly or indirectly from the <see
-         cref="T:System.Attribute" />
+        >All attribute types derive directly or indirectly from the <see cref="T:System.Attribute" />
 
         
 
-         class. Attributes can be applied to any target element; multiple attributes can be applied to the same target element; and attributes can be inherited by an element derived from a target element. Use the <see
-         cref="T:System.AttributeTargets" />
+         class. Attributes can be applied to any target element; multiple attributes can be applied to the same target element; and attributes can be inherited by an element derived from a target element. Use the <see cref="T:System.AttributeTargets" />
 
         
 
          class to specify the target element to which the attribute is applied. </para
       >
       <para
-        >The <see
-         cref="T:System.Attribute" />
+        >The <see cref="T:System.Attribute" />
 
         
 
-         class provides convenient methods to retrieve and test custom attributes. For more information about using attributes, see <format
-         type="text/html">
+         class provides convenient methods to retrieve and test custom attributes. For more information about using attributes, see <format type="text/html">
           <a href="dd7604eb-9fa3-4b60-b2dd-b47739fa3148">Applying Attributes</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -203,8 +197,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is only called by classes that derive from <see
-             cref="T:System.Attribute" />
+            >This constructor is only called by classes that derive from <see cref="T:System.Attribute" />
 
             
 
@@ -214,8 +207,7 @@ class AuthorInfo
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Attribute" />
+            >Initializes a new instance of the <see cref="T:System.Attribute" />
 
             
 
@@ -252,7 +244,9 @@ class AuthorInfo
           <block subset="none" type="note">
             <para
               >This method overrides <see
-               cref="M:System.Object.Equals(System.Object)" qualify="true" />
+                cref="M:System.Object.Equals(System.Object)"
+                qualify="true"
+              />
 
               
 
@@ -261,12 +255,15 @@ class AuthorInfo
           </block>
         </remarks>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -279,8 +276,7 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -288,12 +284,15 @@ class AuthorInfo
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -334,13 +333,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -351,8 +348,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -364,13 +360,11 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
+            >Use the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
 
             
 
-             method if you expect more than one value to be returned, or <see
-             cref="T:System.Reflection.AmbiguousMatchException" />
+             method if you expect more than one value to be returned, or <see cref="T:System.Reflection.AmbiguousMatchException" />
 
             
 
@@ -378,8 +372,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -398,13 +391,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -412,19 +403,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,13 +465,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -484,8 +480,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -504,8 +499,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A match is determined in the same way described in the Return Value section of <see
-             cref="M:System.Type.IsAssignableFrom(System.Type)" />
+            >A match is determined in the same way described in the Return Value section of <see cref="M:System.Type.IsAssignableFrom(System.Type)" />
 
             
 
@@ -513,8 +507,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes on types, methods, and constructors if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes on types, methods, and constructors if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -533,13 +526,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -547,19 +538,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, or property member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -599,19 +597,16 @@ class AuthorInfo
         <remarks>
           <para>
             <block subset="none" type="note"
-              >If multiple instances of <paramref
-               name="attributeType" />
+              >If multiple instances of <paramref name="attributeType" />
 
               
 
                can be
-   applied to <paramref
-               name="element" />
+   applied to <paramref name="element" />
 
               
 
-              , use <see
-               cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
+              , use <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
 
               
 
@@ -624,13 +619,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -641,8 +634,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -658,13 +650,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -672,19 +662,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -726,13 +723,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -743,8 +738,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -756,8 +750,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="element" />
+            >If <paramref name="element" />
 
             
 
@@ -771,13 +764,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -785,19 +776,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -835,8 +833,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -855,13 +852,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -869,26 +864,37 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -924,8 +930,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes on types, methods, and constructors if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes on types, methods, and constructors if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -944,13 +949,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -958,31 +961,41 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, or property member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -1022,13 +1035,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -1036,26 +1047,37 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1090,8 +1112,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="element" />
+            >If <paramref name="element" />
 
             
 
@@ -1105,13 +1126,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the single custom attribute of type <paramref
-             name="attributeType" />
+            >A reference to the single custom attribute of type <paramref name="attributeType" />
 
             
 
-             that is applied to <paramref
-             name="element" />
+             that is applied to <paramref name="element" />
 
             
 
@@ -1119,31 +1138,41 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -1182,8 +1211,7 @@ class AuthorInfo
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1193,8 +1221,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1213,13 +1240,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -1227,12 +1252,15 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
@@ -1274,8 +1302,7 @@ class AuthorInfo
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1291,8 +1318,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value contains the custom attributes for ancestors of <paramref
-             name="element" />
+            >The return value contains the custom attributes for ancestors of <paramref name="element" />
 
             
 
@@ -1300,8 +1326,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1320,13 +1345,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -1334,12 +1357,15 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
@@ -1381,8 +1407,7 @@ class AuthorInfo
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1395,13 +1420,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -1409,12 +1432,15 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
@@ -1455,8 +1481,7 @@ class AuthorInfo
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1465,8 +1490,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="element" />
+            >If <paramref name="element" />
 
             
 
@@ -1480,13 +1504,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -1494,12 +1516,15 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
@@ -1536,8 +1561,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1556,13 +1580,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -1570,19 +1592,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1622,13 +1651,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="type" />
+           or <paramref name="type" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1639,8 +1666,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -1650,8 +1676,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1670,18 +1695,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="attributeType" />
+             array that contains the custom attributes of type <paramref name="attributeType" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -1689,19 +1711,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1738,13 +1767,11 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value contains the custom attributes for ancestors of <paramref
-             name="element" />
+            >The return value contains the custom attributes for ancestors of <paramref name="element" />
 
             
 
-             if <paramref
-             name="inherit" />
+             if <paramref name="inherit" />
 
             
 
@@ -1752,8 +1779,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1772,13 +1798,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -1786,24 +1810,30 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, or property member of a class. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -1843,13 +1873,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="type" />
+           or <paramref name="type" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1860,8 +1888,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -1877,8 +1904,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value contains the custom attributes for ancestors of <paramref
-             name="element" />
+            >The return value contains the custom attributes for ancestors of <paramref name="element" />
 
             
 
@@ -1886,8 +1912,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1906,18 +1931,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="type" />
+             array that contains the custom attributes of type <paramref name="type" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -1925,19 +1947,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, or property member of a class. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1973,13 +2002,11 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value contains the custom attributes for ancestors of <paramref
-             name="element" />
+            >The return value contains the custom attributes for ancestors of <paramref name="element" />
 
             
 
-             if <paramref
-             name="inherit" />
+             if <paramref name="inherit" />
 
             
 
@@ -1993,13 +2020,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -2007,19 +2032,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2060,13 +2092,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="type" />
+           or <paramref name="type" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2077,8 +2107,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -2091,18 +2120,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="attributeType" />
+             array that contains the custom attributes of type <paramref name="attributeType" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -2110,19 +2136,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2158,8 +2191,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="element" />
+            >If <paramref name="element" />
 
             
 
@@ -2173,13 +2205,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes applied to <paramref
-             name="element" />
+             array that contains the custom attributes applied to <paramref name="element" />
 
             
 
@@ -2187,24 +2217,30 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -2244,13 +2280,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2261,8 +2295,7 @@ class AuthorInfo
 
           
 
-           is not a type derived from <see
-           cref="T:System.Attribute" />
+           is not a type derived from <see cref="T:System.Attribute" />
 
           
 
@@ -2271,8 +2304,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="element" />
+            >If <paramref name="element" />
 
             
 
@@ -2286,18 +2318,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="attributeType" />
+             array that contains the custom attributes of type <paramref name="attributeType" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -2305,19 +2334,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2355,8 +2391,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -2375,18 +2410,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="attributeType" />
+             array that contains the custom attributes of type <paramref name="attributeType" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -2394,26 +2426,37 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2448,13 +2491,11 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value contains the custom attributes for ancestors of <paramref
-             name="element" />
+            >The return value contains the custom attributes for ancestors of <paramref name="element" />
 
             
 
-             if <paramref
-             name="inherit" />
+             if <paramref name="inherit" />
 
             
 
@@ -2462,8 +2503,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -2482,18 +2522,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="type" />
+             array that contains the custom attributes of type <paramref name="type" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -2501,31 +2538,41 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, or property member of a class. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -2560,13 +2607,11 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value contains the custom attributes for ancestors of <paramref
-             name="element" />
+            >The return value contains the custom attributes for ancestors of <paramref name="element" />
 
             
 
-             if <paramref
-             name="inherit" />
+             if <paramref name="inherit" />
 
             
 
@@ -2580,18 +2625,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="attributeType" />
+             array that contains the custom attributes of type <paramref name="attributeType" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -2599,26 +2641,37 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2653,8 +2706,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="element" />
+            >If <paramref name="element" />
 
             
 
@@ -2668,18 +2720,15 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Attribute" />
+            >An <see cref="T:System.Attribute" />
 
             
 
-             array that contains the custom attributes of type <paramref
-             name="attributeType" />
+             array that contains the custom attributes of type <paramref name="attributeType" />
 
             
 
-             applied to <paramref
-             name="element" />
+             applied to <paramref name="element" />
 
             
 
@@ -2687,31 +2736,41 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -2746,10 +2805,8 @@ class AuthorInfo
       unspecified.
    </para>
           <para>
-            <block subset="none" type="note"
-              >
-      This method overrides <see
-               cref="M:System.Object.GetHashCode" />
+            <block subset="none" type="note">
+      This method overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -2833,13 +2890,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2850,8 +2905,7 @@ class AuthorInfo
 
           
 
-           is not derived from <see
-           cref="T:System.Attribute" />
+           is not derived from <see cref="T:System.Attribute" />
 
           
 
@@ -2861,8 +2915,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns true if the assembly has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns true if the assembly has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -2881,13 +2934,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -2895,19 +2946,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2950,13 +3008,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2967,8 +3023,7 @@ class AuthorInfo
 
           
 
-           is not derived from <see
-           cref="T:System.Attribute" />
+           is not derived from <see cref="T:System.Attribute" />
 
           
 
@@ -2984,8 +3039,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ancestors of <paramref
-             name="element" />
+            >The ancestors of <paramref name="element" />
 
             
 
@@ -2993,8 +3047,7 @@ class AuthorInfo
           >
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns true if a type, method, or constructor has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns true if a type, method, or constructor has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -3013,13 +3066,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3027,19 +3078,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, type, or property member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3081,13 +3139,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3098,8 +3154,7 @@ class AuthorInfo
 
           
 
-           is not derived from <see
-           cref="T:System.Attribute" />
+           is not derived from <see cref="T:System.Attribute" />
 
           
 
@@ -3108,8 +3163,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ancestors of <paramref
-             name="element" />
+            >The ancestors of <paramref name="element" />
 
             
 
@@ -3123,13 +3177,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3137,19 +3189,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3191,13 +3250,11 @@ class AuthorInfo
 
           
 
-           or <paramref
-           name="attributeType" />
+           or <paramref name="attributeType" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3208,8 +3265,7 @@ class AuthorInfo
 
           
 
-           is not derived from <see
-           cref="T:System.Attribute" />
+           is not derived from <see cref="T:System.Attribute" />
 
           
 
@@ -3218,8 +3274,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ancestors of <paramref
-             name="element" />
+            >The ancestors of <paramref name="element" />
 
             
 
@@ -3233,13 +3288,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3247,19 +3300,26 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3297,8 +3357,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns true if the assembly has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns true if the assembly has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -3317,13 +3376,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3331,26 +3388,37 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Assembly" />
+          An object derived from the <see cref="T:System.Reflection.Assembly" />
 
           
 
            class that describes a reusable collection of modules. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3386,8 +3454,7 @@ class AuthorInfo
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the .NET Framework version 2.0, this method returns true if a type, method, or constructor has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >Starting with the .NET Framework version 2.0, this method returns true if a type, method, or constructor has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 or later use the new format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -3406,13 +3473,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3420,31 +3485,41 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.MemberInfo" />
+          An object derived from the <see cref="T:System.Reflection.MemberInfo" />
 
           
 
            class that describes a constructor, event, field, method, type, or property member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -3479,13 +3554,11 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref
-             name="inherit" />
+            >This method ignores the <paramref name="inherit" />
 
             
 
-             parameter and does not search the ancestors of <paramref
-             name="element" />
+             parameter and does not search the ancestors of <paramref name="element" />
 
             
 
@@ -3499,13 +3572,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3513,26 +3584,37 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.Module" />
+          An object derived from the <see cref="T:System.Reflection.Module" />
 
           
 
            class that describes a portable executable file. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3572,13 +3654,11 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a custom attribute of type <paramref
-             name="attributeType" />
+            >true if a custom attribute of type <paramref name="attributeType" />
 
             
 
-             is applied to <paramref
-             name="element" />
+             is applied to <paramref name="element" />
 
             
 
@@ -3586,31 +3666,41 @@ class AuthorInfo
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from the <see
-           cref="T:System.Reflection.ParameterInfo" />
+          An object derived from the <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
            class that describes a parameter of a member of a class. </param
         >
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type, or a base type, of the custom attribute to search for.</param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, specifies to also search the ancestors of <paramref
-           name="element" />
+          If true, specifies to also search the ancestors of <paramref name="element" />
 
           
 
@@ -3640,26 +3730,22 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method determines if one <see
-             cref="T:System.Attribute" />
+            >This method determines if one <see cref="T:System.Attribute" />
 
             
 
-             equals another. Its default implementation is the same as <see
-             cref="M:System.Attribute.Equals(System.Object)" />
+             equals another. Its default implementation is the same as <see cref="M:System.Attribute.Equals(System.Object)" />
 
             
 
             , which performs a value and reference comparison. Override this method to implement support for attribute values, such as flags or bit fields, that consist of components that are meaningful in themselves.</para
           >
           <para
-            >For example, consider an attribute whose value is a binary field divided into a bit field of flags. Two instances of this attribute have one flag in set in common while all the other flags differ. The <see
-             cref="M:System.Attribute.Equals(System.Object)" />
+            >For example, consider an attribute whose value is a binary field divided into a bit field of flags. Two instances of this attribute have one flag in set in common while all the other flags differ. The <see cref="M:System.Attribute.Equals(System.Object)" />
 
             
 
-             method cannot determine that the two instances have the same flag set, but the <see
-             cref="M:System.Attribute.Match(System.Object)" />
+             method cannot determine that the two instances have the same flag set, but the <see cref="M:System.Attribute.Match(System.Object)" />
 
             
 
@@ -3673,8 +3759,7 @@ class AuthorInfo
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this instance equals <paramref
-             name="obj" />
+            >true if this instance equals <paramref name="obj" />
 
             
 
@@ -3682,17 +3767,19 @@ class AuthorInfo
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           to compare with this instance of <see
-           cref="T:System.Attribute" />
+           to compare with this instance of <see cref="T:System.Attribute" />
 
           
 
@@ -3762,8 +3849,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -3775,21 +3861,33 @@ class AuthorInfo
           <para>Retrieves the type information for an object, which can be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3879,8 +3977,7 @@ class AuthorInfo
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As implemented, this identifier is merely the <see
-             cref="T:System.Type" />
+            >As implemented, this identifier is merely the <see cref="T:System.Type" />
 
             
 
@@ -3890,8 +3987,7 @@ class AuthorInfo
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implemented in a derived class, gets a unique identifier for this <see
-             cref="T:System.Attribute" />
+            >When implemented in a derived class, gets a unique identifier for this <see cref="T:System.Attribute" />
 
             
 

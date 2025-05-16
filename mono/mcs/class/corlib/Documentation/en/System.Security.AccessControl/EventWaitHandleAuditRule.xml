@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+        >The <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
         
 
-         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system events. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system events. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
@@ -39,8 +37,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Windows access control security is meaningful only for named system events. If an <see
-           cref="T:System.Threading.EventWaitHandle" />
+          >Windows access control security is meaningful only for named system events. If an <see cref="T:System.Threading.EventWaitHandle" />
 
           
 
@@ -48,23 +45,19 @@
         >
       </block>
       <para
-        >To get a list of the audit rules currently applied to a named event, use the <see
-         cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+        >To get a list of the audit rules currently applied to a named event, use the <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
 
         
 
-         method to get an <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         method to get an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object, and then use its <see
-         cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
+         object, and then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
 
         
 
-         method to obtain a collection of <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+         method to obtain a collection of <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
         
 
@@ -81,28 +74,23 @@
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
       <para
-        >Use <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+        >Use <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
         
 
-         objects to specify access rights to be audited for a user or group. To apply a rule to a named system event, use the <see
-         cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+         objects to specify access rights to be audited for a user or group. To apply a rule to a named system event, use the <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object. Modify the <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         object. Modify the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object by using its methods to add the rule, and then use the <see
-         cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+         object by using its methods to add the rule, and then use the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
 
         
 
@@ -110,13 +98,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to an <see
-           cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+          >Changes you make to an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
           
 
-           object do not affect the access levels of the named event until you call the <see
-           cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+           object do not affect the access levels of the named event until you call the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
 
           
 
@@ -128,8 +114,7 @@
 
         
 
-         objects are immutable. Security for an event is modified using the methods of the <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         objects are immutable. Security for an event is modified using the methods of the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
@@ -169,13 +154,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To create an <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >To create an <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object from a string representing a user or group name, use the <see
-             cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
+             object from a string representing a user or group name, use the <see cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
 
             
 
@@ -185,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
 
             
 
@@ -194,46 +176,53 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The user or group the rule applies to. Must be of type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The user or group the rule applies to. Must be of type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
-           or a type such as <see
-           cref="T:System.Security.Principal.NTAccount" />
+           or a type such as <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
-           that can be converted to type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+           that can be converted to type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="eventRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />
 
           
 
            values specifying the kinds of access to audit.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -268,8 +257,7 @@
 
             
 
-             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see
-             cref="T:System.Security.AccessControl.AuditFlags" />
+             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
             
 

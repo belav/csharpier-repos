@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.TextDataBindingHandler" />
+        >The <see cref="T:System.Web.UI.Design.TextDataBindingHandler" />
 
         
 
@@ -40,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TextDataBindingHandler" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TextDataBindingHandler" />
 
             
 
@@ -71,13 +69,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.TextDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.Design.TextDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
 
             
 
-             method of <see
-             cref="T:System.Web.UI.Design.TextDataBindingHandler" />
+             method of <see cref="T:System.Web.UI.Design.TextDataBindingHandler" />
 
             
 
@@ -90,24 +86,30 @@
           <para>Data-binds the specified control.</para>
         </summary>
         <param name="designerHost">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implementing <see
-           cref="T:System.ComponentModel.Design.IDesignerHost" />
+          An object implementing <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
           
 
            for the document that contains the control. </param
         >
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 

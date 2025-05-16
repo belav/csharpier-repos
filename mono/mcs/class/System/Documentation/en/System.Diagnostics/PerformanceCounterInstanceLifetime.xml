@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default behavior is <see
-         cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+        >The default behavior is <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
         
 
@@ -29,23 +28,19 @@
       >
       <block subset="none" type="note">
         <para
-          >If the <see
-           cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" />
+          >If the <see cref="P:System.Diagnostics.PerformanceCounterCategory.CategoryType" />
 
           
 
-           property is <see
-           cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
+           property is <see cref="F:System.Diagnostics.PerformanceCounterCategoryType.SingleInstance" />
 
           
 
-          , the <see
-           cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
+          , the <see cref="P:System.Diagnostics.PerformanceCounter.InstanceLifetime" />
 
           
 
-           value for the performance counter must be <see
-           cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
+           value for the performance counter must be <see cref="F:System.Diagnostics.PerformanceCounterInstanceLifetime.Global" />
 
           
 

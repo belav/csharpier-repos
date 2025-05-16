@@ -35,8 +35,7 @@
         </item>
       </list>
       <para
-        >You can apply the <see
-         cref="T:System.Runtime.InteropServices.WindowsRuntime.DefaultInterfaceAttribute" />
+        >You can apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.DefaultInterfaceAttribute" />
 
         
 
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.DefaultInterfaceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.DefaultInterfaceAttribute" />
 
             
 
@@ -79,7 +77,11 @@
           >
         </summary>
         <param name="defaultInterface">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

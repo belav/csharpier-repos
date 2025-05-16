@@ -38,18 +38,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Principal.IdentityReference" />
+        >Represents a collection of <see cref="T:System.Security.Principal.IdentityReference" />
 
         
 
-         objects and provides a means of converting sets of <see
-         cref="T:System.Security.Principal.IdentityReference" />
+         objects and provides a means of converting sets of <see cref="T:System.Security.Principal.IdentityReference" />
 
         
 
-        -derived objects to <see
-         cref="T:System.Security.Principal.IdentityReference" />
+        -derived objects to <see cref="T:System.Security.Principal.IdentityReference" />
 
         
 
@@ -76,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -106,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -115,12 +110,15 @@
           >
         </summary>
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The initial number of items in the collection. The value of <paramref
-           name="capacity" />
+          The initial number of items in the collection. The value of <paramref name="capacity" />
 
           
 
@@ -154,13 +152,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Adds an <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
-             object to the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+             object to the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -168,12 +164,15 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          The <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
@@ -202,13 +201,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears all <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Clears all <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
-             objects from the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+             objects from the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -243,13 +240,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Indicates whether the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
-             collection contains the specified <see
-             cref="T:System.Security.Principal.IdentityReference" />
+             collection contains the specified <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -261,12 +256,15 @@
           <para>true if the collection contains the specified object.</para>
         </returns>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          The <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
@@ -301,13 +299,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Copies the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
-             collection to an <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+             collection to an <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -315,34 +311,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReferenceCollection" />
+          An <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
           
 
-           array object to which the <see
-           cref="T:System.Security.Principal.IdentityReferenceCollection" />
+           array object to which the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
           
 
            collection is to be copied.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
-           where the <see
-           cref="T:System.Security.Principal.IdentityReferenceCollection" />
+           where the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
           
 
@@ -368,8 +368,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of items in the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Gets the number of items in the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -402,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that can be used to iterate through the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Gets an enumerator that can be used to iterate through the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -413,8 +411,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >An enumerator for the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -441,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -505,8 +501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Security.Principal.IdentityReference" />
+            >Removes the specified <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -518,12 +513,15 @@
           <para>true if the specified object was removed from the collection.</para>
         </returns>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          The <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
@@ -555,8 +553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that can be used to iterate through the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >Gets an enumerator that can be used to iterate through the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -566,8 +563,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >An enumerator for the <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -606,8 +602,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the objects in the collection to the specified type. Calling this method is the same as calling <see
-             cref="M:System.Security.Principal.IdentityReferenceCollection.Translate(System.Type,System.Boolean)" />
+            >Converts the objects in the collection to the specified type. Calling this method is the same as calling <see cref="M:System.Security.Principal.IdentityReferenceCollection.Translate(System.Type,System.Boolean)" />
 
             
 
@@ -617,8 +612,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >A <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -626,7 +620,11 @@
           >
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -669,8 +667,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Principal.IdentityReferenceCollection" />
+            >A <see cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
             
 
@@ -678,14 +675,22 @@
           >
         </returns>
         <param name="targetType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type to which items in the collection are being converted.</param
         >
         <param name="forceSuccess">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

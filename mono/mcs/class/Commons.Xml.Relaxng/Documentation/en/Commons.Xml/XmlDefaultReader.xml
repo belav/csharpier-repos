@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -46,14 +48,8 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="name"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="name">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -72,18 +68,9 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="localName"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="namespaceURI"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="localName">a <see cref="T:System.String" /></param>
+        <param name="namespaceURI">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -98,14 +85,8 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="i"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="i">a <see cref="T:System.Int32" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -118,10 +99,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -136,14 +114,8 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="name"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <param name="name">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -162,18 +134,9 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="localName"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="namespaceURI"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <param name="localName">a <see cref="T:System.String" /></param>
+        <param name="namespaceURI">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -188,10 +151,7 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="i"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="i">a <see cref="T:System.Int32" /></param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -204,10 +164,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -220,10 +177,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -236,10 +190,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -252,10 +203,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -268,10 +216,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -284,10 +229,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -300,10 +242,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -321,14 +260,8 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="prefix"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="prefix">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -341,10 +274,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -360,10 +290,7 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="reader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
-        </param>
+        <param name="reader">a <see cref="T:System.Xml.XmlReader" /></param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -376,10 +303,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Xml.XmlReader" />
-        </value>
+        <value>a <see cref="T:System.Xml.XmlReader" /></value>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -392,10 +316,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -408,10 +329,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -427,10 +345,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Xml.XmlNodeType" />
-        </returns>
+        <returns>a <see cref="T:System.Xml.XmlNodeType" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -443,10 +358,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -459,10 +371,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -475,10 +384,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -491,10 +397,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -507,10 +410,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -523,10 +423,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -539,10 +436,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -555,10 +449,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -571,10 +462,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -587,10 +475,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -603,10 +488,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Char" />
-        </returns>
+        <returns>a <see cref="T:System.Char" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -619,10 +501,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -638,10 +517,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Xml.XmlSpace" />
-        </returns>
+        <returns>a <see cref="T:System.Xml.XmlSpace" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -654,10 +530,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -670,10 +543,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -689,10 +559,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Xml.ReadState" />
-        </returns>
+        <returns>a <see cref="T:System.Xml.ReadState" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -708,10 +575,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Xml.XmlNameTable" />
-        </returns>
+        <returns>a <see cref="T:System.Xml.XmlNameTable" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -726,14 +590,8 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="i"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="i">a <see cref="T:System.Int32" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -748,14 +606,8 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="name"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="name">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -771,18 +623,9 @@
       </Parameters>
       <Docs>
         <summary>To be added</summary>
-        <param name="localName"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="namespaceURI"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <param name="localName">a <see cref="T:System.String" /></param>
+        <param name="namespaceURI">a <see cref="T:System.String" /></param>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

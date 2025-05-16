@@ -54,13 +54,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="removeOldestTokensOnCacheFull" />
+            >If <paramref name="removeOldestTokensOnCacheFull" />
 
             
 
-             is false, AddContext throws a <see
-             cref="T:System.ServiceModel.QuotaExceededException" />
+             is false, AddContext throws a <see cref="T:System.ServiceModel.QuotaExceededException" />
 
             
 
@@ -70,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityTokenResolver" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityTokenResolver" />
 
             
 

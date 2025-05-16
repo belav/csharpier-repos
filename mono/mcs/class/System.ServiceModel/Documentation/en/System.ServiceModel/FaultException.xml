@@ -20,41 +20,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In a service, use the <see
-         cref="T:System.ServiceModel.FaultException" />
+        >In a service, use the <see cref="T:System.ServiceModel.FaultException" />
 
         
 
          class to create an untyped fault to return to the client for debugging purposes.</para
       >
       <para
-        >In a client, catch <see
-         cref="T:System.ServiceModel.FaultException" />
+        >In a client, catch <see cref="T:System.ServiceModel.FaultException" />
 
         
 
-         objects to handle unknown or generic faults, such as those returned by a service with the <see
-         cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+         objects to handle unknown or generic faults, such as those returned by a service with the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
         
 
-         property set to true. Because <see
-         cref="T:System.ServiceModel.FaultException" />
+         property set to true. Because <see cref="T:System.ServiceModel.FaultException" />
 
         
 
-         extends <see
-         cref="T:System.ServiceModel.CommunicationException" />
+         extends <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-        , remember to catch any <see
-         cref="T:System.ServiceModel.FaultException" />
+        , remember to catch any <see cref="T:System.ServiceModel.FaultException" />
 
         
 
-         objects prior to catching <see
-         cref="T:System.ServiceModel.CommunicationException" />
+         objects prior to catching <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
@@ -62,8 +55,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Duplex services can also catch <see
-           cref="T:System.ServiceModel.FaultException" />
+          >Duplex services can also catch <see cref="T:System.ServiceModel.FaultException" />
 
           
 
@@ -71,13 +63,11 @@
         >
       </block>
       <para
-        >In general, it is strongly recommended that you use the <see
-         cref="T:System.ServiceModel.FaultContractAttribute" />
+        >In general, it is strongly recommended that you use the <see cref="T:System.ServiceModel.FaultContractAttribute" />
 
         
 
-         to design your services to return strongly-typed SOAP faults (and not managed exception objects) for all fault cases in which you decide the client requires fault information. However, use the <see
-         cref="T:System.ServiceModel.FaultException" />
+         to design your services to return strongly-typed SOAP faults (and not managed exception objects) for all fault cases in which you decide the client requires fault information. However, use the <see cref="T:System.ServiceModel.FaultException" />
 
         
 
@@ -92,41 +82,34 @@
         </item>
       </list>
       <para
-        >Throw <see
-         cref="T:System.ServiceModel.FaultException" />
+        >Throw <see cref="T:System.ServiceModel.FaultException" />
 
         
 
-         objects when you want the string to be passed to the constructor and retrieved by the client by calling the <see
-         cref="M:System.ServiceModel.FaultException`1.ToString" />
+         objects when you want the string to be passed to the constructor and retrieved by the client by calling the <see cref="M:System.ServiceModel.FaultException`1.ToString" />
 
         
 
-         method. If you specify a fault contract of type <see
-         cref="T:System.ServiceModel.FaultException`1" />
+         method. If you specify a fault contract of type <see cref="T:System.ServiceModel.FaultException`1" />
 
         
 
-         where the type parameter is <see
-         cref="T:System.String" />
+         where the type parameter is <see cref="T:System.String" />
 
         
 
-        , the string value is available as the <see
-         cref="P:System.ServiceModel.FaultException`1.Detail" />
+        , the string value is available as the <see cref="P:System.ServiceModel.FaultException`1.Detail" />
 
         
 
-         property and not by calling <see
-         cref="M:System.ServiceModel.FaultException`1.ToString" />
+         property and not by calling <see cref="M:System.ServiceModel.FaultException`1.ToString" />
 
         
 
         .</para
       >
       <para
-        >For details, see <format
-         type="text/html">
+        >For details, see <format type="text/html">
           <a href="a9696563-d404-4905-942d-1e0834c26dea"
             >Handling Faults in Windows Communication Foundation Contracts</a
           >
@@ -159,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -190,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -199,7 +180,11 @@
           >
         </summary>
         <param name="fault">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -237,7 +221,11 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -264,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -296,13 +283,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
-             class using the specified serialization information and context when deserializing a stream into a <see
-             cref="T:System.ServiceModel.FaultException" />
+             class using the specified serialization information and context when deserializing a stream into a <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -310,24 +295,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The serialization information necessary to reconstruct the <see
-           cref="T:System.ServiceModel.FaultException" />
+          The serialization information necessary to reconstruct the <see cref="T:System.ServiceModel.FaultException" />
 
           
 
            object from a stream.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The streaming context required to reconstruct the <see
-           cref="T:System.ServiceModel.FaultException" />
+          The streaming context required to reconstruct the <see cref="T:System.ServiceModel.FaultException" />
 
           
 
@@ -357,8 +348,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -366,14 +356,22 @@
           >
         </summary>
         <param name="fault">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message fault that contains the default SOAP fault values to use.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -403,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -412,14 +409,22 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the SOAP fault.</param
         >
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,8 +455,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -459,7 +463,11 @@
           >
         </summary>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -490,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -499,21 +506,33 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the SOAP fault.</param
         >
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the SOAP fault.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -544,8 +563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.FaultException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -553,21 +571,33 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The reason for the SOAP fault.</param
         >
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault code for the SOAP fault.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -648,23 +678,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="faultDetailTypes" />
+            >The <paramref name="faultDetailTypes" />
 
             
 
-             parameter contains candidate detail types. If any of the <paramref
-             name="faultDetailTypes" />
+             parameter contains candidate detail types. If any of the <paramref name="faultDetailTypes" />
 
             
 
-             has a schema that matches the <paramref
-             name="messageFault" />
+             has a schema that matches the <paramref name="messageFault" />
 
             
 
-             parameter, a <see
-             cref="T:System.ServiceModel.FaultException`1" />
+             parameter, a <see cref="T:System.ServiceModel.FaultException`1" />
 
             
 
@@ -674,8 +700,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Channels.FaultException" />
+            >Returns a <see cref="T:System.ServiceModel.Channels.FaultException" />
 
             
 
@@ -685,8 +710,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultException" />
+            >A <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -726,23 +750,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="faultDetailTypes" />
+            >The <paramref name="faultDetailTypes" />
 
             
 
-             parameter contains candidate detail types. If any of the <paramref
-             name="faultDetailTypes" />
+             parameter contains candidate detail types. If any of the <paramref name="faultDetailTypes" />
 
             
 
-             has a schema that matches the <paramref
-             name="messageFault" />
+             has a schema that matches the <paramref name="messageFault" />
 
             
 
-             parameter, a <see
-             cref="T:System.ServiceModel.FaultException`1" />
+             parameter, a <see cref="T:System.ServiceModel.FaultException`1" />
 
             
 
@@ -752,8 +772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Channels.FaultException" />
+            >Returns a <see cref="T:System.ServiceModel.Channels.FaultException" />
 
             
 
@@ -763,8 +782,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.FaultException" />
+            >A <see cref="T:System.ServiceModel.FaultException" />
 
             
 
@@ -772,21 +790,33 @@
           >
         </returns>
         <param name="messageFault">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message fault that contains default SOAP fault information.</param
         >
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fault action value.</param
         >
         <param name="faultDetailTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -816,8 +846,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+            >Returns a <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -827,18 +856,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The in-memory representation of a SOAP fault that can be passed to <see
-             cref="Overload:System.ServiceModel.Channels.Message.CreateMessage" />
+            >The in-memory representation of a SOAP fault that can be passed to <see cref="Overload:System.ServiceModel.Channels.Message.CreateMessage" />
 
             
 
-             to create a message that contains a fault. For <see
-             cref="T:System.ServiceModel.FaultException" />
+             to create a message that contains a fault. For <see cref="T:System.ServiceModel.FaultException" />
 
             
 
-             objects that result from fault messages, this <see
-             cref="T:System.ServiceModel.Channels.MessageFault" />
+             objects that result from fault messages, this <see cref="T:System.ServiceModel.Channels.MessageFault" />
 
             
 
@@ -872,8 +898,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of the <see
-             cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >Implementation of the <see cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -881,14 +906,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization information to which the object data is added when serialized.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -937,8 +970,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.FaultReason" />
+            >Gets the <see cref="T:System.ServiceModel.FaultReason" />
 
             
 

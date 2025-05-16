@@ -32,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.Configuration.RuleSettings" />
+        >A collection of <see cref="T:System.Web.Configuration.RuleSettings" />
 
         
 
@@ -51,18 +50,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+             property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
-             class always contains an instance of the <see
-             cref="T:System.Web.Configuration.RuleSettingsCollection" />
+             class always contains an instance of the <see cref="T:System.Web.Configuration.RuleSettingsCollection" />
 
             
 
@@ -72,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.RuleSettingsCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.RuleSettingsCollection" />
 
             
 
@@ -102,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -113,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Adds a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -122,12 +115,15 @@
           >
         </summary>
         <param name="ruleSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          A <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
@@ -154,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Removes all <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -185,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns true if the collection contains a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Returns true if the collection contains a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -196,8 +190,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >true if the collection contains a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -205,12 +198,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          The name of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
@@ -238,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Creates a new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -270,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the key of the passed <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Gets the key of the passed <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -279,12 +273,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          A <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
@@ -309,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns -1 if a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Returns -1 if a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -320,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Finds the index of a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Finds the index of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -331,8 +326,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >The index of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -340,12 +334,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          The name of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
@@ -378,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Adds the specified <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -387,24 +383,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A valid index of a <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          A valid index of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
            object in the collection.</param
         >
         <param name="eventSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          The <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
@@ -498,8 +500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Removes a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -507,12 +508,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          The name of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 
@@ -541,8 +545,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.RuleSettings" />
+            >Removes a <see cref="T:System.Web.Configuration.RuleSettings" />
 
             
 
@@ -550,12 +553,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A valid index of a <see
-           cref="T:System.Web.Configuration.RuleSettings" />
+          A valid index of a <see cref="T:System.Web.Configuration.RuleSettings" />
 
           
 

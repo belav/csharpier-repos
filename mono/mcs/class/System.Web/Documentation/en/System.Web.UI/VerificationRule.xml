@@ -13,66 +13,54 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When using extending a class, member or indexer with a <see
-         cref="T:System.Web.UI.VerificationAttribute" />
+        >When using extending a class, member or indexer with a <see cref="T:System.Web.UI.VerificationAttribute" />
 
         
 
-        , you may define how the conditional expression, defined by the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
+        , you may define how the conditional expression, defined by the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
+         and <see cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
 
         
 
-         properties, is used by specifying one of the <see
-         cref="T:System.Web.UI.VerificationRule" />
+         properties, is used by specifying one of the <see cref="T:System.Web.UI.VerificationRule" />
 
         
 
-         values. If in the creation of the <see
-         cref="T:System.Web.UI.VerificationAttribute" />
+         values. If in the creation of the <see cref="T:System.Web.UI.VerificationAttribute" />
 
         
 
-         no <see
-         cref="T:System.Web.UI.VerificationRule" />
+         no <see cref="T:System.Web.UI.VerificationRule" />
 
         
 
-         is specified, the default value of <see
-         cref="F:System.Web.UI.VerificationRule.Required" />
+         is specified, the default value of <see cref="F:System.Web.UI.VerificationRule.Required" />
 
         
 
          is used.</para
       >
       <para
-        >The left side of a verification rule's conditional expression is the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
+        >The left side of a verification rule's conditional expression is the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
 
         
 
-         and the right side is the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
+         and the right side is the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
 
         
 
-        . The <see
-         cref="T:System.Web.UI.VerificationConditionalOperator" />
+        . The <see cref="T:System.Web.UI.VerificationConditionalOperator" />
 
         
 
-         specifies how the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
+         specifies how the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
 
         
 
-         is to be compared to the <see
-         cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
+         is to be compared to the <see cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
 
         
 
@@ -82,8 +70,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how conditional expressions defined by an <see
-         cref="T:System.Web.UI.VerificationAttribute" />
+        >Specifies how conditional expressions defined by an <see cref="T:System.Web.UI.VerificationAttribute" />
 
         
 
@@ -103,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The conditional expression specified in an <see
-             cref="T:System.Web.UI.VerificationAttribute" />
+            >The conditional expression specified in an <see cref="T:System.Web.UI.VerificationAttribute" />
 
             
 
@@ -127,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The conditional expression specified in an <see
-             cref="T:System.Web.UI.VerificationAttribute" />
+            >The conditional expression specified in an <see cref="T:System.Web.UI.VerificationAttribute" />
 
             
 
@@ -151,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The conditional expression specified in an <see
-             cref="T:System.Web.UI.VerificationAttribute" />
+            >The conditional expression specified in an <see cref="T:System.Web.UI.VerificationAttribute" />
 
             
 

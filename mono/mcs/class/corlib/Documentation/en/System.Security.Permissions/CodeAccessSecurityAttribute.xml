@@ -42,24 +42,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This attribute class associates a <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >This attribute class associates a <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
         , for example, Demand, with a custom security attribute.</para
       >
       <para
-        >The types that derive from <see
-         cref="T:System.Security.Permissions.CodeAccessSecurityAttribute" />
+        >The types that derive from <see cref="T:System.Security.Permissions.CodeAccessSecurityAttribute" />
 
         
 
          are used to help restrict access to resources or securable operations.</para
       >
       <para
-        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. Use the corresponding permission class derived from <see
-         cref="T:System.Security.CodeAccessPermission" />
+        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. Use the corresponding permission class derived from <see cref="T:System.Security.CodeAccessPermission" />
 
         
 
@@ -101,8 +98,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -115,13 +111,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Security.Permissions.CodeAccessSecurityAttribute" />
+            >Initializes a new instance of <see cref="T:System.Security.Permissions.CodeAccessSecurityAttribute" />
 
             
 
-             with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -129,12 +123,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 

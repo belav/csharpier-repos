@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.DebugInfoGenerator" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.DebugInfoGenerator" />
 
             
 
@@ -104,21 +103,33 @@
           <para>Marks a sequence point in Microsoft intermediate language (MSIL) code.</para>
         </summary>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The lambda expression that is generated.</param
         >
         <param name="ilOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset within MSIL code at which to mark the sequence point.</param
         >
         <param name="sequencePoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

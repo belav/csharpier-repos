@@ -24,54 +24,45 @@
 
         
 
-         and other classes in the <see
-         cref="N:System.Web.Services.Protocols" />
+         and other classes in the <see cref="N:System.Web.Services.Protocols" />
 
         
 
          namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Services.Protocols.NopReturnReader" />
+        >The <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
         
 
-         class provides a non-reading implementation of the interface of the abstract class <see
-         cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+         class provides a non-reading implementation of the interface of the abstract class <see cref="T:System.Web.Services.Protocols.MimeReturnReader" />
 
         
 
         .</para
       >
       <para
-        >You typically will not need to use the <see
-         cref="T:System.Web.Services.Protocols.NopReturnReader" />
+        >You typically will not need to use the <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
         
 
-         class. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, .it applies the <see
-         cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+         class. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, .it applies the <see cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
 
         
 
-         to each Web method and, by default, sets the attribute's <see
-         cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+         to each Web method and, by default, sets the attribute's <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
         
 
-         property to <see
-         cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+         property to <see cref="T:System.Web.Services.Protocols.XmlReturnReader" />
 
         
 
-        , another class derived from <see
-         cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+        , another class derived from <see cref="T:System.Web.Services.Protocols.MimeReturnReader" />
 
         
 
-        . Wsdl.exe sets the property to <see
-         cref="T:System.Web.Services.Protocols.NopReturnReader" />
+        . Wsdl.exe sets the property to <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
         
 
@@ -94,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.NopReturnReader" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
             
 
@@ -124,13 +114,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An initializer is an object passed as a parameter to the <see
-             cref="M:System.Web.Services.Protocols.NopReturnReader.Initialize(System.Object)" />
+            >An initializer is an object passed as a parameter to the <see cref="M:System.Web.Services.Protocols.NopReturnReader.Initialize(System.Object)" />
 
             
 
-             method. For the <see
-             cref="T:System.Web.Services.Protocols.NopReturnReader" />
+             method. For the <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
             
 
@@ -146,12 +134,15 @@
           <para>An initializer for the specified method.</para>
         </returns>
         <param name="methodInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+          A <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -179,13 +170,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Protocols.NopReturnReader.Initialize(System.Object)" />
+            >The <see cref="M:System.Web.Services.Protocols.NopReturnReader.Initialize(System.Object)" />
 
             
 
-             method does nothing. It is invoked at the time a response is processed. The input parameter, <paramref
-             name="initializer" />
+             method does nothing. It is invoked at the time a response is processed. The input parameter, <paramref name="initializer" />
 
             
 
@@ -197,17 +186,19 @@
           <para>Initializes an instance.</para>
         </summary>
         <param name="initializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Another instance of the <see
-           cref="T:System.Web.Services.Protocols.NopReturnReader" />
+          Another instance of the <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
           
 
-           class, on which the <see
-           cref="M:System.Web.Services.Protocols.NopReturnReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+           class, on which the <see cref="M:System.Web.Services.Protocols.NopReturnReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
 
           
 
@@ -236,13 +227,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Protocols.NopReturnReader" />
+            >The <see cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
             
 
-             class's implementation of the <see
-             cref="M:System.Web.Services.Protocols.MimeReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+             class's implementation of the <see cref="M:System.Web.Services.Protocols.MimeReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
 
             
 
@@ -258,29 +247,34 @@
           <para>null.</para>
         </returns>
         <param name="response">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.WebResponse" />
+          A <see cref="T:System.Net.WebResponse" />
 
           
 
            object  containing the output message for an operation.</param
         >
         <param name="responseStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           whose content is the body of the HTTP response represented by the <paramref
-           name="response" />
+           whose content is the body of the HTTP response represented by the <paramref name="response" />
 
           
 

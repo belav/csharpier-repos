@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="12.3.3.14" title="Try-finally statements">
   <paragraph
-    >For a try statement stmt of the form: <code_example
-    >
+    >For a try statement stmt of the form: <code_example>
       <![CDATA[
 try try-block finally finally-block  
 ]]>

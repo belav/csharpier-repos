@@ -10,10 +10,13 @@
             </summary>
     </member>
     <member name="M:Testing.Test.#ctor">
-            test</member>
+            test</member
+    >
     <member name="M:Testing.Test.Foo">
-            test 2</member>
+            test 2</member
+    >
     <member name="M:Testing.Test.OneMore">
-            test 3</member>
+            test 3</member
+    >
   </members>
 </doc>

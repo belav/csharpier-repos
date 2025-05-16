@@ -14,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement <see
-         cref="T:System.ServiceModel.Description.IServiceBehavior" />
+        >Implement <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
         
 
@@ -24,8 +23,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
+            >Use the <see cref="M:System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
 
             
 
@@ -34,8 +32,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
+            >Use the <see cref="M:System.ServiceModel.Description.IServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
 
             
 
@@ -44,8 +41,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
+            >Use the <see cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -62,23 +58,19 @@
       >
       <block subset="none" type="note">
         <para
-          >All of the <see
-           cref="T:System.ServiceModel.Description.IServiceBehavior" />
+          >All of the <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
           
 
-           methods pass <see
-           cref="T:System.ServiceModel.Description.ServiceDescription" />
+           methods pass <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
           
 
-           and <see
-           cref="T:System.ServiceModel.ServiceHostBase" />
+           and <see cref="T:System.ServiceModel.ServiceHostBase" />
 
           
 
-           objects as a parameters. The <see
-           cref="T:System.ServiceModel.Description.ServiceDescription" />
+           objects as a parameters. The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
           
 
@@ -86,13 +78,11 @@
         >
       </block>
       <para
-        >To perform the customization task for which it is intended, the <see
-         cref="T:System.ServiceModel.Description.IServiceBehavior" />
+        >To perform the customization task for which it is intended, the <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
         
 
-         object must be added to the <see
-         cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+         object must be added to the <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
         
 
@@ -101,18 +91,15 @@
       <list type="bullet">
         <item>
           <para
-            >Programmatically add the custom service behavior to the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+            >Programmatically add the custom service behavior to the <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
             
 
-             property prior to the point where the <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+             property prior to the point where the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             method is called on the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+             method is called on the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
@@ -121,23 +108,19 @@
         </item>
         <item>
           <para
-            >Create a custom attribute that implements <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+            >Create a custom attribute that implements <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
-             and use it to mark service classes that are to be modified. When a <see
-             cref="T:System.ServiceModel.ServiceHost" />
+             and use it to mark service classes that are to be modified. When a <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
-             object is constructed, indigo2 uses reflection to discover the attributes on the service type. If any attributes implement <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+             object is constructed, indigo2 uses reflection to discover the attributes on the service type. If any attributes implement <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
-            , they are added to the behaviors collection on <see
-             cref="T:System.ServiceModel.Description.ServiceDescription" />
+            , they are added to the behaviors collection on <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
             
 
@@ -146,8 +129,7 @@
         </item>
         <item>
           <para
-            >Extend the <see
-             cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
+            >Extend the <see cref="T:System.ServiceModel.Configuration.BehaviorExtensionElement" />
 
             
 
@@ -156,23 +138,19 @@
         </item>
       </list>
       <para
-        >Examples of service behaviors in indigo2 include the <see
-         cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+        >Examples of service behaviors in indigo2 include the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
         
 
-         attribute, the <see
-         cref="T:System.ServiceModel.Description.ServiceThrottlingBehavior" />
+         attribute, the <see cref="T:System.ServiceModel.Description.ServiceThrottlingBehavior" />
 
         
 
-        , the <see
-         cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
+        , the <see cref="T:System.ServiceModel.Description.ServiceDebugBehavior" />
 
         
 
-         and the <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+         and the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
         
 
@@ -182,8 +160,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a mechanism to modify or insert custom extensions across an entire service, including the <see
-         cref="T:System.ServiceModel.ServiceHostBase" />
+        >Provides a mechanism to modify or insert custom extensions across an entire service, including the <see cref="T:System.ServiceModel.ServiceHostBase" />
 
         
 
@@ -226,31 +203,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
+            >Use the <see cref="M:System.ServiceModel.Description.IServiceBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase,System.Collections.ObjectModel.Collection{System.ServiceModel.Description.ServiceEndpoint},System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
-             method to add custom data objects to the <paramref
-             name="parameters" />
+             method to add custom data objects to the <paramref name="parameters" />
 
             
 
              collection that binding elements can use to acquire extra information to enable them to support the contract.</para
           >
           <para
-            >This method is called once for each listen URI. For example, if a service has four endpoints, and two of them have the same listen URI, then this method gets called three times. The reason is that the <paramref
-             name="bindingParameters" />
+            >This method is called once for each listen URI. For example, if a service has four endpoints, and two of them have the same listen URI, then this method gets called three times. The reason is that the <paramref name="bindingParameters" />
 
             
 
-             target each channel stack and there is one channel stack for each listen URI. Because each call receives those endpoints at that listen URI, two calls each get a single <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             target each channel stack and there is one channel stack for each listen URI. Because each call receives those endpoints at that listen URI, two calls each get a single <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-            , and one call gets a collection of two <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            , and one call gets a collection of two <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -258,23 +230,19 @@
           >
           <block subset="none" type="note">
             <para
-              >All of the <see
-               cref="T:System.ServiceModel.Description.IServiceBehavior" />
+              >All of the <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
               
 
-               methods pass <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               methods pass <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
-               and <see
-               cref="T:System.ServiceModel.ServiceHostBase" />
+               and <see cref="T:System.ServiceModel.ServiceHostBase" />
 
               
 
-               objects as a parameters. The <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               objects as a parameters. The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
@@ -287,14 +255,22 @@
           <para>Provides the ability to pass custom data to binding elements to support the contract implementation.</para>
         </summary>
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host of the service.</param
         >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -327,13 +303,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implement the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
+            >Implement the <see cref="M:System.ServiceModel.Description.IServiceBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
 
             
 
-             method to inspect or modify the <see
-             cref="T:System.ServiceModel.ServiceHostBase" />
+             method to inspect or modify the <see cref="T:System.ServiceModel.ServiceHostBase" />
 
             
 
@@ -341,23 +315,19 @@
           >
           <block subset="none" type="note">
             <para
-              >All of the <see
-               cref="T:System.ServiceModel.Description.IServiceBehavior" />
+              >All of the <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
               
 
-               methods pass <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               methods pass <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
-               and <see
-               cref="T:System.ServiceModel.ServiceHostBase" />
+               and <see cref="T:System.ServiceModel.ServiceHostBase" />
 
               
 
-               objects as a parameters. The <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               objects as a parameters. The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
@@ -370,7 +340,11 @@
           <para>Provides the ability to change run-time property values or insert custom extension objects such as error handlers, message or parameter interceptors, security extensions, and other custom extension objects.</para>
         </summary>
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -403,8 +377,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.IServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
+            >Use the <see cref="M:System.ServiceModel.Description.IServiceBehavior.Validate(System.ServiceModel.Description.ServiceDescription,System.ServiceModel.ServiceHostBase)" />
 
             
 
@@ -412,23 +385,19 @@
           >
           <block subset="none" type="note">
             <para
-              >All of the <see
-               cref="T:System.ServiceModel.Description.IServiceBehavior" />
+              >All of the <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
               
 
-               methods pass <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               methods pass <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
-               and <see
-               cref="T:System.ServiceModel.ServiceHostBase" />
+               and <see cref="T:System.ServiceModel.ServiceHostBase" />
 
               
 
-               objects as a parameters. The <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               objects as a parameters. The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
@@ -441,7 +410,11 @@
           <para>Provides the ability to inspect the service host and the service description to confirm that the service can run successfully.</para>
         </summary>
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -22,49 +22,41 @@
       <para>Web Parts verbs are interactive user interface (UI) elements that are displayed in a menu or title bar of a Web Parts control. A Web Parts zone provides to a Web Parts control a standard set of verbs that are rendered in the Web Parts verb menu. A custom Web Parts zone or a Web Parts control can add additional verbs to this menu. </para>
       <para>ASP.NET provides several standard verbs by default to all controls in a Web Parts zone, including the close and minimize verbs. There are standard verbs for opening, closing, editing, and minimizing a control, and other verbs for exporting a definition for the control or loading a Help file. </para>
       <para
-        >You can create new verbs that are added to the Web Parts verb menu. A control can inherit from the <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+        >You can create new verbs that are added to the Web Parts verb menu. A control can inherit from the <see cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
         
 
-         base class and add <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+         base class and add <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
         
 
-         objects to a <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+         objects to a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
         
 
-         collection. This collection can then be added to the <see
-         cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
+         collection. This collection can then be added to the <see cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
 
         
 
          collection of the control.</para
       >
       <para
-        >A control can also implement the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
+        >A control can also implement the <see cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
 
         
 
-         interface and override the <see
-         cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
+         interface and override the <see cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
 
         
 
-         property. You can then use a <see
-         cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+         property. You can then use a <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
         
 
          collection to add custom verbs to a control. </para
       >
       <para
-        >This class implements <see
-         cref="T:System.Collections.ReadOnlyCollectionBase" />
+        >This class implements <see cref="T:System.Collections.ReadOnlyCollectionBase" />
 
         
 
@@ -86,18 +78,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+            >This constructor creates an empty <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
-             object. To create a new instance of <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+             object. To create a new instance of <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
-             using an existing collection of Web Parts verbs, you can use <see
-             cref="M:System.Web.UI.WebControls.WebParts.WebPartVerbCollection.#ctor(System.Collections.ICollection)" />
+             using an existing collection of Web Parts verbs, you can use <see cref="M:System.Web.UI.WebControls.WebParts.WebPartVerbCollection.#ctor(System.Collections.ICollection)" />
 
             
 
@@ -107,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
@@ -134,13 +122,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an instance of <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+            >This constructor creates an instance of <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
-             using the specified verbs collection. This collection can be any object derived from <see
-             cref="T:System.Collections.ICollection" />
+             using the specified verbs collection. This collection can be any object derived from <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -150,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
@@ -159,12 +144,15 @@
           >
         </summary>
         <param name="verbs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from <see
-           cref="T:System.Collections.ICollection" />
+          An object derived from <see cref="T:System.Collections.ICollection" />
 
           
 
@@ -197,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
@@ -206,24 +193,30 @@
           >
         </summary>
         <param name="existingVerbs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An existing <see
-           cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+          An existing <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
           
 
           .</param
         >
         <param name="verbs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object derived from <see
-           cref="T:System.Collections.ICollection" />
+          An object derived from <see cref="T:System.Collections.ICollection" />
 
           
 
@@ -251,8 +244,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on using this method, see its base method, <see
-             cref="M:System.Collections.CollectionBase.System#Collections#IList#Contains(System.Object)" />
+            >For more information on using this method, see its base method, <see cref="M:System.Collections.CollectionBase.System#Collections#IList#Contains(System.Object)" />
 
             
 
@@ -262,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the Web Parts verb collection for the specified <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+            >Searches the Web Parts verb collection for the specified <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
             
 
@@ -275,12 +266,15 @@
           <para>true if the collection contains the Web Parts verb; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+          The <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
           
 
@@ -309,8 +303,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on using this method, see <see
-             cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+            >For more information on using this method, see <see cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
 
             
 
@@ -322,14 +315,22 @@
           <para>Copies elements of the collection to the specified array, starting at the specified index.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array that elements are to be copied to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,8 +355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A static, read-only, empty instance of <see
-             cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
+            >A static, read-only, empty instance of <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbCollection" />
 
             
 
@@ -388,8 +388,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on using this method, see <see
-             cref="M:System.Collections.CollectionBase.System#Collections#IList#IndexOf(System.Object)" />
+            >For more information on using this method, see <see cref="M:System.Collections.CollectionBase.System#Collections#IList#IndexOf(System.Object)" />
 
             
 
@@ -405,12 +404,15 @@
           <para>The index of the Web Parts verb.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+          The <see cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
           
 

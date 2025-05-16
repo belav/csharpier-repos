@@ -19,21 +19,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Control.HelpRequested" />
+        >The <see cref="E:System.Windows.Forms.Control.HelpRequested" />
 
         
 
-         event occurs when the user requests help for a control. A <see
-         cref="T:System.Windows.Forms.HelpEventArgs" />
+         event occurs when the user requests help for a control. A <see cref="T:System.Windows.Forms.HelpEventArgs" />
 
         
 
          object specifies the screen coordinates of the mouse pointer and whether the event was handled.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -45,8 +42,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.HelpRequested" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.HelpRequested" />
 
         
 
@@ -69,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.HelpEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.HelpEventArgs" />
 
             
 
@@ -78,7 +73,11 @@
           >
         </summary>
         <param name="mousePos">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

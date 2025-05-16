@@ -20,28 +20,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+        >Use the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
         
 
-         column type in a <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         column type in a <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-         control to create a hyperlink for each row in the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         control to create a hyperlink for each row in the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-        . Set the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+        . Set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
         
 
-         property to specify the caption text for the hyperlink. To specify the URL to link to when the hyperlink is clicked, set the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+         property to specify the caption text for the hyperlink. To specify the URL to link to when the hyperlink is clicked, set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
         
 
@@ -49,13 +44,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If you set the <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+          >If you set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
           
 
-           and <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+           and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
           
 
@@ -63,26 +56,22 @@
         >
       </block>
       <para
-        >You can also bind the text caption and URL of the hyperlinks in the <see
-         cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+        >You can also bind the text caption and URL of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
         
 
-         to a field in a data source instead of setting the <see
-         cref="P:System.Web.UI.WebControls.ButtonColumn.Text" />
+         to a field in a data source instead of setting the <see cref="P:System.Web.UI.WebControls.ButtonColumn.Text" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+         and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
         
 
          properties. This allows you to display a different caption and to specify a different URL for each hyperlink in the column.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+        >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
         
 
@@ -90,18 +79,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+          >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
           
 
-           and <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+           and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
           
 
-           properties cannot both be set at the same time. If both properties are set, the <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+           properties cannot both be set at the same time. If both properties are set, the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
           
 
@@ -109,8 +95,7 @@
         >
       </block>
       <para
-        >Specify the field to bind to the URL of the hyperlink by setting the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+        >Specify the field to bind to the URL of the hyperlink by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
         
 
@@ -118,18 +103,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+          >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
           
 
-           and <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+           and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
           
 
-           properties cannot both be set at the same time. If both properties are set, the <see
-           cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+           properties cannot both be set at the same time. If both properties are set, the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
           
 
@@ -137,21 +119,18 @@
         >
       </block>
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
+        >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
 
         
 
          property allows you to specify the window or frame to display the Web page content linked to when the hyperlink is clicked.</para
       >
       <para
-        >When using data binding, you can format the text caption and URL of the hyperlink by setting the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
+        >When using data binding, you can format the text caption and URL of the hyperlink by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
+         and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
 
         
 
@@ -159,15 +138,13 @@
       >
       <block subset="none" type="note">
         <para
-          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format
-           type="text/html">
+          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format type="text/html">
             <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
           </format>
 
           
 
-          , <format
-           type="text/html">
+          , <format type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
               >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
             >
@@ -175,8 +152,7 @@
 
           
 
-          , and <format
-           type="text/html">
+          , and <format type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
@@ -191,8 +167,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A column type for the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >A column type for the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -210,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
@@ -221,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
@@ -250,18 +223,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
             
 
-             property to specify the field from a data source to bind to the URL of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+             property to specify the field from a data source to bind to the URL of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
-            . When the URL is data bound to a field, the URL of each hyperlink in the column is set with a corresponding value in the specified field. This allows you to set a different URL for each hyperlink in the column. To specify the same URL for each row in the column, set the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+            . When the URL is data bound to a field, the URL of each hyperlink in the column is set with a corresponding value in the specified field. This allows you to set a different URL for each hyperlink in the column. To specify the same URL for each row in the column, set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
             
 
@@ -269,18 +239,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+              >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
               
 
-               properties cannot both be set at the same time. If both properties are set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+               properties cannot both be set at the same time. If both properties are set, the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
               
 
@@ -288,8 +255,7 @@
             >
           </block>
           <para
-            >When you are using data binding, you can specify a custom display format for the URL of the hyperlinks by setting the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
+            >When you are using data binding, you can specify a custom display format for the URL of the hyperlinks by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
 
             
 
@@ -299,8 +265,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the field from a data source to bind to the URL of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+            >Gets or sets the field from a data source to bind to the URL of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
@@ -333,26 +298,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
 
             
 
-             property to provide a custom display format for the URL of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+             property to provide a custom display format for the URL of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
-            . The specified format is only applied to the URL when the URL is data-bound to a field in a data source. Specify the field to bind to the URL of the hyperlinks in the column by setting the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+            . The specified format is only applied to the URL when the URL is data-bound to a field in a data source. Specify the field to bind to the URL of the hyperlinks in the column by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
             
 
              property.</para
           >
           <para
-            >For information on the syntax of formatting strings, see <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >For information on the syntax of formatting strings, see <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -362,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the display format for the URL of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+            >Gets or sets the display format for the URL of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
@@ -396,18 +356,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
             
 
-             property to specify the field name from a data source to bind to the text caption of the hyperlinks in <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+             property to specify the field name from a data source to bind to the text caption of the hyperlinks in <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
-            . When the text caption is data bound to a field, the text caption of each hyperlink in the column is set with a corresponding value in the specified field. This allows you to set a different text caption for each hyperlink in the column. To specify the same text caption for each row in the column, set the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+            . When the text caption is data bound to a field, the text caption of each hyperlink in the column is set with a corresponding value in the specified field. This allows you to set a different text caption for each hyperlink in the column. To specify the same text caption for each row in the column, set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
             
 
@@ -415,18 +372,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+              >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
               
 
-               properties cannot both be set at the same time. If both properties are set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+               properties cannot both be set at the same time. If both properties are set, the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
               
 
@@ -434,8 +388,7 @@
             >
           </block>
           <para
-            >When you using data binding, you can specify a custom display format for the text caption of the hyperlinks by setting the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
+            >When you using data binding, you can specify a custom display format for the text caption of the hyperlinks by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
 
             
 
@@ -445,8 +398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the field from a data source to bind to the text caption of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+            >Gets or sets the field from a data source to bind to the text caption of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
@@ -479,26 +431,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
 
             
 
-             property to provide a custom display format for the text caption of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+             property to provide a custom display format for the text caption of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
-            . The specified format is applied to the text caption only when the text caption is data bound to a field in a data source. Specify the field to bind to the text caption of the hyperlinks in the column by setting the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+            . The specified format is applied to the text caption only when the text caption is data bound to a field in a data source. Specify the field to bind to the text caption of the hyperlinks in the column by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
             
 
              property.</para
           >
           <para
-            >For information on the syntax of formatting strings, see <see
-             cref="M:System.String.Format(System.String,System.Object)" />
+            >For information on the syntax of formatting strings, see <see cref="M:System.String.Format(System.String,System.Object)" />
 
             
 
@@ -508,8 +456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the display format for the text caption of the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+            >Gets or sets the display format for the text caption of the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
             
 
@@ -547,13 +494,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.HyperLinkColumn.FormatDataNavigateUrlValue(System.Object)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.HyperLinkColumn.FormatDataNavigateUrlValue(System.Object)" />
 
             
 
-             method to format a data-bound URL value with the format specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
+             method to format a data-bound URL value with the format specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
 
             
 
@@ -563,8 +508,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formats a data-bound URL using the format specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
+            >Formats a data-bound URL using the format specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
 
             
 
@@ -574,8 +518,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data-bound URL in the format specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
+            >The data-bound URL in the format specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlFormatString" />
 
             
 
@@ -605,13 +548,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.HyperLinkColumn.FormatDataTextValue(System.Object)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.HyperLinkColumn.FormatDataTextValue(System.Object)" />
 
             
 
-             method to format a data-bound text caption value with the format specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
+             method to format a data-bound text caption value with the format specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
 
             
 
@@ -621,8 +562,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formats a data-bound text caption using the format specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
+            >Formats a data-bound text caption using the format specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
 
             
 
@@ -632,8 +572,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data-bound text caption in the format specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
+            >The data-bound text caption in the format specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextFormatString" />
 
             
 
@@ -688,7 +627,11 @@
           <para>Initializes the cell representing this column with the contained hyperlink.</para>
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -712,8 +655,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
             
 
@@ -723,8 +665,7 @@
             <para>When this property is set, all hyperlinks in the column share the same URL link.</para>
           </block>
           <para
-            >To provide a separate URL for each hyperlink in the column, use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+            >To provide a separate URL for each hyperlink in the column, use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
             
 
@@ -732,18 +673,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+              >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.NavigateUrl" />
 
               
 
-               properties cannot both be set at the same time. If both properties are set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
+               properties cannot both be set at the same time. If both properties are set, the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataNavigateUrlField" />
 
               
 
@@ -778,8 +716,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
 
             
 
@@ -788,23 +725,19 @@
           <para>If this property is not set, the browser or window with focus refreshes when a hyperlink in the column is clicked.</para>
           <block subset="none" type="note">
             <para
-              > The <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
+              > The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
 
               
 
-               property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
+               property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
 
               
 
-               property if the rendered output for the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+               property if the rendered output for the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
               
 
-               must be XHTML 1.1 compliant. For more information, refer to the topic <format
-               type="text/html">
+               must be XHTML 1.1 compliant. For more information, refer to the topic <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
 
@@ -813,13 +746,11 @@
               . </para
             >
             <para
-              >When creating accessible Web pages, it is strongly recommended you avoid using the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
+              >When creating accessible Web pages, it is strongly recommended you avoid using the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
 
               
 
-               property to target another window. For more information, see <format
-               type="text/html">
+               property to target another window. For more information, see <format type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
 
@@ -829,8 +760,7 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
+            >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Target" />
 
             
 
@@ -919,8 +849,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
             
 
@@ -930,8 +859,7 @@
             <para>When this property is set, all hyperlinks in the column share the same text caption.</para>
           </block>
           <para
-            >To provide a separate text caption for each hyperlink in the column, use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+            >To provide a separate text caption for each hyperlink in the column, use the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
             
 
@@ -939,18 +867,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+              >The <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.Text" />
 
               
 
-               properties cannot both be set at the same time. If both properties are set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
+               properties cannot both be set at the same time. If both properties are set, the <see cref="P:System.Web.UI.WebControls.HyperLinkColumn.DataTextField" />
 
               
 
@@ -959,8 +884,7 @@
           </block>
           <block subset="none" type="note">
             <para
-              >Text is not HTML encoded before it is displayed in the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
+              >Text is not HTML encoded before it is displayed in the <see cref="T:System.Web.UI.WebControls.HyperLinkColumn" />
 
               
 
@@ -968,13 +892,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >

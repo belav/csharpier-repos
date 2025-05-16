@@ -28,15 +28,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used to handle the <format
-         type="text/html">
+        >This class is used to handle the <format type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt; Element</a>
         </format>
 
         
 
-         within the <format
-         type="text/html">
+         within the <format type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
         </format>
 
@@ -45,8 +43,7 @@
          element, specifically, to allow the addition of types to the collection of known types.</para
       >
       <para
-        >For more information about data contract known types, see <format
-         type="text/html">
+        >For more information about data contract known types, see <format type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
         </format>
 
@@ -58,8 +55,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the XML elements used to configure the known types used for serialization by the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Handles the XML elements used to configure the known types used for serialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -84,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.Configuration.TypeElementCollection" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.Configuration.TypeElementCollection" />
 
             
 
@@ -120,12 +115,15 @@
           <para>Adds the specified element to the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.Configuration.TypeElement" />
+          A <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" />
 
           
 
@@ -275,12 +273,15 @@
           <para>The position of the specified element.</para>
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.Configuration.TypeElement" />
+          The <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" />
 
           
 
@@ -340,12 +341,15 @@
           <para>Removes the specified element from the collection.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.Configuration.TypeElement" />
+          The <see cref="T:System.Runtime.Serialization.Configuration.TypeElement" />
 
           
 
@@ -376,7 +380,11 @@
           <para>Removes the element at the specified position.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

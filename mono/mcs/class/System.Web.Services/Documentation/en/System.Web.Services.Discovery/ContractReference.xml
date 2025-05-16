@@ -26,18 +26,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>XML Web services discovery involves discovering the available Web Services given an URL. The URL usually points to a discovery document, which typically has a.disco file name extension. Within a discovery document are references to information about the existence of XML Web services. These references can refer to service descriptions, XML Schema Definition language (XSD) schemas or other discovery documents. This class represents a reference to a Service Description.</para>
       <para
-        >Within a discovery document, a reference to a Service Description is contained within a contractRef XML element. The contractRef XML element has two attributes: ref and docRef. The contractRef element must have an XML namespace matching the <see
-         cref="F:System.Web.Services.Discovery.ContractReference.Namespace" />
+        >Within a discovery document, a reference to a Service Description is contained within a contractRef XML element. The contractRef XML element has two attributes: ref and docRef. The contractRef element must have an XML namespace matching the <see cref="F:System.Web.Services.Discovery.ContractReference.Namespace" />
 
         
 
-         constant, whereas the ref and docRef attributes are placed in the <see
-         cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+         constant, whereas the ref and docRef attributes are placed in the <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
         
 
-         and <see
-         cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+         and <see cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
 
         
 
@@ -59,8 +56,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
@@ -70,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
@@ -95,16 +90,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
              class using the specified reference name.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
@@ -127,8 +120,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="href" />
+                  >The <paramref name="href" />
 
                   
 
@@ -141,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
@@ -150,12 +141,15 @@
           >
         </summary>
         <param name="href">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for a Sevice Descritpion. Initializes the <see
-           cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+          The URL for a Sevice Descritpion. Initializes the <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
           
 
@@ -182,16 +176,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
              class using the specified reference name and docRef.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
@@ -214,8 +206,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="href" />
+                  >The <paramref name="href" />
 
                   
 
@@ -229,8 +220,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="docRef" />
+                  >The <paramref name="docRef" />
 
                   
 
@@ -243,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
@@ -252,29 +241,34 @@
           >
         </summary>
         <param name="href">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for a service description. Initializes the <see
-           cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+          The URL for a service description. Initializes the <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
           
 
            property value. </param
         >
         <param name="docRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for a XML Web service implementing the service description at <paramref
-           name="href" />
+          The URL for a XML Web service implementing the service description at <paramref name="href" />
 
           
 
-          . Initializes the <see
-           cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+          . Initializes the <see cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
 
           
 
@@ -297,16 +291,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Services.Description.ServiceDescription" />
-        </value>
+        <value>a <see cref="T:System.Web.Services.Description.ServiceDescription" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets a <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -332,10 +322,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -381,8 +368,7 @@
               </term>
               <description>
                 <para
-                  >The URL for the service description. The <see
-                   cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+                  >The URL for the service description. The <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
                   
 
@@ -396,8 +382,7 @@
               </term>
               <description>
                 <para
-                  >The URL for a XML Web service implementing the service description specified by the ref attribute. The <see
-                   cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+                  >The URL for a XML Web service implementing the service description specified by the ref attribute. The <see cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
 
                   
 
@@ -410,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the URL for a XML Web service implementing the service description referenced in the <see
-             cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+            >Gets and sets the URL for a XML Web service implementing the service description referenced in the <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
             
 
@@ -440,8 +424,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Within a discovery document, a reference to a Service Description is contained within a contractRef XML element, which is a part of the XML namespace specified in the <see
-             cref="F:System.Web.Services.Discovery.ContractReference.Namespace" />
+            >Within a discovery document, a reference to a Service Description is contained within a contractRef XML element, which is a part of the XML namespace specified in the <see cref="F:System.Web.Services.Discovery.ContractReference.Namespace" />
 
             
 
@@ -475,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads the service description from the passed <see
-             cref="T:System.IO.Stream" />
+            >Reads the service description from the passed <see cref="T:System.IO.Stream" />
 
             
 
@@ -486,8 +468,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >A <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -537,8 +518,7 @@
               </term>
               <description>
                 <para
-                  >The URL for the service description.The <see
-                   cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+                  >The URL for the service description.The <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
                   
 
@@ -552,8 +532,7 @@
               </term>
               <description>
                 <para
-                  >The URL for a XML Web service implementing the service description specified by the ref attribute. The <see
-                   cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+                  >The URL for a XML Web service implementing the service description specified by the ref attribute. The <see cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
 
                   
 
@@ -599,28 +578,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the MIME type is text/xml and the contents of <paramref
-             name="stream" />
+            >If the MIME type is text/xml and the contents of <paramref name="stream" />
 
             
 
-             is a Service Description, then the contents of <paramref
-             name="stream" />
+             is a Service Description, then the contents of <paramref name="stream" />
 
             
 
-             are added to the <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+             are added to the <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
 
             
 
-             and <see
-             cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
+             and <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
             
 
-             properties of <see
-             cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+             properties of <see cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
 
             
 
@@ -632,24 +606,30 @@
           <para>Resolves whether the the referenced document is valid.</para>
         </summary>
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The MIME content type of <paramref
-           name="stream" />
+          The MIME content type of <paramref name="stream" />
 
           
 
           . </param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
@@ -665,25 +645,19 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="T:System.Web.Services.Discovery.ContractReference" />
+            >For the <see cref="T:System.Web.Services.Discovery.ContractReference" />
 
             
 
-             class, the <see
-             cref="P:System.Web.Services.Discovery.ContractReference.Url" />
+             class, the <see cref="P:System.Web.Services.Discovery.ContractReference.Url" />
 
             
 
-             property returns the value of the <see
-             cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+             property returns the value of the <see cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
             
 
@@ -723,8 +697,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the passed-in service description into the passed-in <see
-             cref="T:System.IO.Stream" />
+            >Writes the passed-in service description into the passed-in <see cref="T:System.IO.Stream" />
 
             
 
@@ -732,34 +705,38 @@
           >
         </summary>
         <param name="document">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescription" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
           
 
-           to write into <paramref
-           name="stream" />
+           to write into <paramref name="stream" />
 
           
 
           . </param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
-           into which the serialized <see
-           cref="T:System.Web.Services.Description.ServiceDescription" />
+           into which the serialized <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
           
 

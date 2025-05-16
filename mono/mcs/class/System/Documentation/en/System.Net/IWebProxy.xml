@@ -22,26 +22,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.IWebProxy" />
+        >The <see cref="T:System.Net.IWebProxy" />
 
         
 
-         interface provides the methods and properties that are required by the <see
-         cref="T:System.Net.WebRequest" />
+         interface provides the methods and properties that are required by the <see cref="T:System.Net.WebRequest" />
 
         
 
          class to access proxy servers.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.WebProxy" />
+        >The <see cref="T:System.Net.WebProxy" />
 
         
 
-         class is the base implementation of the <see
-         cref="T:System.Net.IWebProxy" />
+         class is the base implementation of the <see cref="T:System.Net.IWebProxy" />
 
         
 
@@ -51,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base interface for implementation of proxy access for the <see
-         cref="T:System.Net.WebRequest" />
+        >Provides the base interface for implementation of proxy access for the <see cref="T:System.Net.WebRequest" />
 
         
 
@@ -87,8 +82,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Net.ICredentials" />
+            > A <see cref="T:System.Net.ICredentials" />
 
             
 
@@ -98,13 +92,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.IWebProxy.Credentials" />
+            >The <see cref="P:System.Net.IWebProxy.Credentials" />
 
             
 
-             property is an <see
-             cref="T:System.Net.ICredentials" />
+             property is an <see cref="T:System.Net.ICredentials" />
 
             
 
@@ -144,13 +136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IWebProxy.GetProxy(System.Uri)" />
+            >The <see cref="M:System.Net.IWebProxy.GetProxy(System.Uri)" />
 
             
 
-             method returns the URI of the proxy server that handles requests to the Internet resource that is specified in the <paramref
-             name="destination" />
+             method returns the URI of the proxy server that handles requests to the Internet resource that is specified in the <paramref name="destination" />
 
             
 
@@ -164,13 +154,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Uri" />
+            >A <see cref="T:System.Uri" />
 
             
 
-             instance that contains the URI of the proxy used to contact <paramref
-             name="destination" />
+             instance that contains the URI of the proxy used to contact <paramref name="destination" />
 
             
 
@@ -178,12 +166,15 @@
           >
         </returns>
         <param name="destination">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Uri" />
+          A <see cref="T:System.Uri" />
 
           
 
@@ -218,18 +209,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IWebProxy.IsBypassed(System.Uri)" />
+            >The <see cref="M:System.Net.IWebProxy.IsBypassed(System.Uri)" />
 
             
 
-             method indicates whether to use the proxy server to access the host that is specified in the <paramref
-             name="host" />
+             method indicates whether to use the proxy server to access the host that is specified in the <paramref name="host" />
 
             
 
-             parameter. If <see
-             cref="M:System.Net.IWebProxy.IsBypassed(System.Uri)" />
+             parameter. If <see cref="M:System.Net.IWebProxy.IsBypassed(System.Uri)" />
 
             
 
@@ -243,8 +231,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the proxy server should not be used for <paramref
-             name="host" />
+            >true if the proxy server should not be used for <paramref name="host" />
 
             
 
@@ -252,12 +239,15 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 

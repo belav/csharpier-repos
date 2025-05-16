@@ -30,38 +30,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
+        >The <see cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
 
         
 
-         enables the control of <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         enables the control of <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         options, such as the <see
-         cref="P:System.Runtime.Serialization.DataContractSerializer.MaxItemsInObjectGraph" />
+         options, such as the <see cref="P:System.Runtime.Serialization.DataContractSerializer.MaxItemsInObjectGraph" />
 
         
 
-         and <see
-         cref="P:System.Runtime.Serialization.DataContractSerializer.IgnoreExtensionDataObject" />
+         and <see cref="P:System.Runtime.Serialization.DataContractSerializer.IgnoreExtensionDataObject" />
 
         
 
-         properties. Some of these properties can be set only using the constructor of the class.  In that case, the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         properties. Some of these properties can be set only using the constructor of the class.  In that case, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
-         can be replaced using the <see
-         cref="Overload:System.ServiceModel.Description.DataContractSerializerOperationBehavior.CreateSerializer" />
+         can be replaced using the <see cref="Overload:System.ServiceModel.Description.DataContractSerializerOperationBehavior.CreateSerializer" />
 
         
 
-         method. crabout data contracts, see <format
-         type="text/html">
+         method. crabout data contracts, see <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Using Data Contracts</a>
         </format>
 
@@ -70,23 +63,19 @@
         .</para
       >
       <para
-        >crabout using the <see
-         cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
+        >crabout using the <see cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
 
         
 
-         to replace the <see
-         cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+         to replace the <see cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
 
         
 
-         returned by the <see
-         cref="P:System.ServiceModel.Description.DataContractSerializerOperationBehavior.DataContractSurrogate" />
+         returned by the <see cref="P:System.ServiceModel.Description.DataContractSerializerOperationBehavior.DataContractSurrogate" />
 
         
 
-         property, see <format
-         type="text/html">
+         property, see <format type="text/html">
           <a href="8c31134c-46c5-4ed7-94af-bab0ac0dfce5">Data Contract Surrogates</a>
         </format>
 
@@ -98,8 +87,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the run-time behavior of the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Represents the run-time behavior of the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -129,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
 
             
 
@@ -138,12 +125,15 @@
           >
         </summary>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          An <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
@@ -176,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.DataContractSerializerOperationBehavior" />
 
             
 
@@ -185,24 +174,30 @@
           >
         </summary>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          An <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
            that represents the operation.</param
         >
         <param name="dataContractFormatAttribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.DataContractFormatAttribute" />
+          A <see cref="T:System.ServiceModel.DataContractFormatAttribute" />
 
           
 
@@ -236,18 +231,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <see
-             cref="T:System.Runtime.Serialization.NetDataContractSerializer" />
+            >Both the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" />
 
             
 
-             and the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+             and the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             inherit from the <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+             inherit from the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -257,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a class that inherits from <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            >Creates an instance of a class that inherits from <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -268,8 +259,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a class that inherits from the <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            >An instance of a class that inherits from the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -277,43 +267,56 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to create the serializer for.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the generated type.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace of the generated type.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IList`1" />
+          An <see cref="T:System.Collections.Generic.IList`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
@@ -347,18 +350,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Both the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Both the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-             and the <see
-             cref="T:System.Runtime.Serialization.NetDataContractSerializer" />
+             and the <see cref="T:System.Runtime.Serialization.NetDataContractSerializer" />
 
             
 
-             inherit from the <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+             inherit from the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -368,13 +368,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a class that inherits from <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            >Creates an instance of a class that inherits from <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
-             for serialization and deserialization processes with an <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             for serialization and deserialization processes with an <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -384,8 +382,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a class that inherits from the <see
-             cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+            >An instance of a class that inherits from the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
             
 
@@ -393,43 +390,56 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type to serialize or deserialize.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the serialized type.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that contains the namespace of the serialized type.</param
         >
         <param name="knownTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.Generic.IList`1" />
+          An <see cref="T:System.Collections.Generic.IList`1" />
 
           
 
-           of <see
-           cref="T:System.Type" />
+           of <see cref="T:System.Type" />
 
           
 
@@ -459,8 +469,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.DataContractFormatAttribute" />
+            >Gets the <see cref="T:System.ServiceModel.DataContractFormatAttribute" />
 
             
 
@@ -490,8 +499,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see the <see
-             cref="T:System.Runtime.Serialization.DataContractResolver" />
+            >For more information, see the <see cref="T:System.Runtime.Serialization.DataContractResolver" />
 
             
 
@@ -501,8 +509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an implementation of the <see
-             cref="T:System.Runtime.Serialization.DataContractResolver" />
+            >Gets or sets an implementation of the <see cref="T:System.Runtime.Serialization.DataContractResolver" />
 
             
 
@@ -551,8 +558,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When set to true, the extra data is returned with any other serialized data. crdefault the <see
-             cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+            >When set to true, the extra data is returned with any other serialized data. crdefault the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
 
             
 
@@ -614,24 +620,30 @@
           <para>Adds a collection of parameters to the behavior. </para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          The <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
            to add the parameters to.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
+          The <see cref="T:System.ServiceModel.Channels.BindingParameterCollection" />
 
           
 
@@ -666,24 +678,30 @@
           <para>Attaches a client behavior to the operation.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          The <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
             that represents the operation.</param
         >
         <param name="proxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+          A <see cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
           
 
@@ -718,24 +736,30 @@
           <para>Applies the behavior to the operation.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          An <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
            that represents the operation.</param
         >
         <param name="dispatch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+          The <see cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
           
 
@@ -769,12 +793,15 @@
           <para>Validates the operation.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ServiceModel.Description.OperationDescription" />
+          An <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
           
 
@@ -813,12 +840,15 @@
           <para>Exports the WSDL representation of the operation.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Description.WsdlExporter" />
+          A <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
           
 
@@ -857,12 +887,15 @@
           <para>Exports the endpoint description as a WSDL document.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Description.WsdlExporter" />
+          A <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
           
 

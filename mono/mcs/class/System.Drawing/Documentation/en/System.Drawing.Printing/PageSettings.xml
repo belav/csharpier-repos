@@ -21,56 +21,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Printing.PageSettings" />
+        >The <see cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
-         class is used to specify settings that modify the way a page will be printed. Typically, you set default settings for all pages to be printed through the <see
-         cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+         class is used to specify settings that modify the way a page will be printed. Typically, you set default settings for all pages to be printed through the <see cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
 
         
 
-         property. To specify settings on a page-by-page basis, handle the <see
-         cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+         property. To specify settings on a page-by-page basis, handle the <see cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
         
 
-         or <see
-         cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
+         or <see cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
 
         
 
-         event and modify the <see
-         cref="T:System.Drawing.Printing.PageSettings" />
+         event and modify the <see cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
-         argument included in the <see
-         cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+         argument included in the <see cref="T:System.Drawing.Printing.PrintPageEventArgs" />
 
         
 
-         or <see
-         cref="T:System.Drawing.Printing.QueryPageSettingsEventArgs" />
+         or <see cref="T:System.Drawing.Printing.QueryPageSettingsEventArgs" />
 
         
 
         , respectively.</para
       >
       <para
-        >For more information about handling <see
-         cref="T:System.Drawing.Printing.PrintDocument" />
+        >For more information about handling <see cref="T:System.Drawing.Printing.PrintDocument" />
 
         
 
-         events, see the <see
-         cref="T:System.Drawing.Printing.PrintDocument" />
+         events, see the <see cref="T:System.Drawing.Printing.PrintDocument" />
 
         
 
-         class overview. For more information about printing, see the <see
-         cref="N:System.Drawing.Printing" />
+         class overview. For more information about printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -93,13 +83,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The default constructor initializes all fields to their default values.</para>
           <para
-            >Typically, you do not create an instance of <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Typically, you do not create an instance of <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
-            , but instead use the <see
-             cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+            , but instead use the <see cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
 
             
 
@@ -109,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
@@ -137,18 +124,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Printing.PageSettings.#ctor(System.Drawing.Printing.PrinterSettings)" />
+            >The <see cref="M:System.Drawing.Printing.PageSettings.#ctor(System.Drawing.Printing.PrinterSettings)" />
 
             
 
-             constructor is similar to initializing a new instance of <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+             constructor is similar to initializing a new instance of <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
-             and setting the <see
-             cref="P:System.Drawing.Printing.PageSettings.PrinterSettings" />
+             and setting the <see cref="P:System.Drawing.Printing.PageSettings.PrinterSettings" />
 
             
 
@@ -158,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
@@ -167,12 +150,15 @@
           >
         </summary>
         <param name="printerSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Printing.PrinterSettings" />
+          The <see cref="T:System.Drawing.Printing.PrinterSettings" />
 
           
 
@@ -195,13 +181,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Drawing.Printing.PageSettings.Bounds" />
+            >Use the <see cref="P:System.Drawing.Printing.PageSettings.Bounds" />
 
             
 
-             property along with the <see
-             cref="P:System.Drawing.Printing.PageSettings.Margins" />
+             property along with the <see cref="P:System.Drawing.Printing.PageSettings.Margins" />
 
             
 
@@ -211,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the size of the page, taking into account the page orientation specified by the <see
-             cref="P:System.Drawing.Printing.PageSettings.Landscape" />
+            >Gets the size of the page, taking into account the page orientation specified by the <see cref="P:System.Drawing.Printing.PageSettings.Landscape" />
 
             
 
@@ -237,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of this <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Creates a copy of this <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
@@ -267,13 +249,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Drawing.Printing.PrinterSettings.SupportsColor" />
+            >You can use the <see cref="P:System.Drawing.Printing.PrinterSettings.SupportsColor" />
 
             
 
-             property to determine if the printer supports color printing. If the printer supports color, but you do not want to print in color, set the <see
-             cref="P:System.Drawing.Printing.PageSettings.Color" />
+             property to determine if the printer supports color printing. If the printer supports color, but you do not want to print in color, set the <see cref="P:System.Drawing.Printing.PageSettings.Color" />
 
             
 
@@ -303,26 +283,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call the <see
-             cref="M:System.Drawing.Printing.PageSettings.CopyToHdevmode(System.IntPtr)" />
+            >Call the <see cref="M:System.Drawing.Printing.PageSettings.CopyToHdevmode(System.IntPtr)" />
 
             
 
-             method to copy relevant information to a DEVMODE structure from a <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+             method to copy relevant information to a DEVMODE structure from a <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
             . This method is useful when you want to make unmanaged Win32 calls that require a DEVMODE.</para
           >
           <para
-            >To copy information from a DEVMODE structure to the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >To copy information from a DEVMODE structure to the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
-            , call <see
-             cref="M:System.Drawing.Printing.PageSettings.SetHdevmode(System.IntPtr)" />
+            , call <see cref="M:System.Drawing.Printing.PageSettings.SetHdevmode(System.IntPtr)" />
 
             
 
@@ -332,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the relevant information from the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Copies the relevant information from the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
@@ -341,7 +316,11 @@
           >
         </summary>
         <param name="hdevmode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -407,8 +386,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Drawing.Printing.PrinterSettings.LandscapeAngle" />
+            >You can use the <see cref="P:System.Drawing.Printing.PrinterSettings.LandscapeAngle" />
 
             
 
@@ -440,13 +418,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When handling the <see
-             cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+            >When handling the <see cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
             
 
-             event, you can use this property along with the <see
-             cref="P:System.Drawing.Printing.PageSettings.Bounds" />
+             event, you can use this property along with the <see cref="P:System.Drawing.Printing.PageSettings.Bounds" />
 
             
 
@@ -478,44 +454,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+            >A <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
-             represents the size of the paper through the <see
-             cref="P:System.Drawing.Printing.PaperSize.Kind" />
+             represents the size of the paper through the <see cref="P:System.Drawing.Printing.PaperSize.Kind" />
 
             
 
-             property, which contains one of the <see
-             cref="T:System.Drawing.Printing.PaperKind" />
+             property, which contains one of the <see cref="T:System.Drawing.Printing.PaperKind" />
 
             
 
              values.</para
           >
           <para
-            >Set the <see
-             cref="P:System.Drawing.Printing.PageSettings.PaperSize" />
+            >Set the <see cref="P:System.Drawing.Printing.PageSettings.PaperSize" />
 
             
 
-             property for the page to a valid <see
-             cref="T:System.Drawing.Printing.PaperSize" />
+             property for the page to a valid <see cref="T:System.Drawing.Printing.PaperSize" />
 
             
 
-            , available through the <see
-             cref="P:System.Drawing.Printing.PrinterSettings.PaperSizes" />
+            , available through the <see cref="P:System.Drawing.Printing.PrinterSettings.PaperSizes" />
 
             
 
              collection.</para
           >
           <para
-            >For information about how you can specify a custom paper size, see the <see
-             cref="M:System.Drawing.Printing.PaperSize.#ctor" />
+            >For information about how you can specify a custom paper size, see the <see cref="M:System.Drawing.Printing.PaperSize.#ctor" />
 
             
 
@@ -547,36 +516,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Printing.PaperSource" />
+            >A <see cref="T:System.Drawing.Printing.PaperSource" />
 
             
 
-             represents the source of the paper through the <see
-             cref="P:System.Drawing.Printing.PaperSource.Kind" />
+             represents the source of the paper through the <see cref="P:System.Drawing.Printing.PaperSource.Kind" />
 
             
 
-             property, which contains one of the <see
-             cref="T:System.Drawing.Printing.PaperSourceKind" />
+             property, which contains one of the <see cref="T:System.Drawing.Printing.PaperSourceKind" />
 
             
 
              values.</para
           >
           <para
-            >Set the <see
-             cref="P:System.Drawing.Printing.PageSettings.PaperSource" />
+            >Set the <see cref="P:System.Drawing.Printing.PageSettings.PaperSource" />
 
             
 
-             property for the page to a valid <see
-             cref="T:System.Drawing.Printing.PaperSource" />
+             property for the page to a valid <see cref="T:System.Drawing.Printing.PaperSource" />
 
             
 
-            , available through the <see
-             cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
+            , available through the <see cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
 
             
 
@@ -610,8 +573,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Drawing.Printing.PageSettings.PrintableArea" />
+            >The <see cref="P:System.Drawing.Printing.PageSettings.PrintableArea" />
 
             
 
@@ -640,36 +602,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Printing.PrinterResolution" />
+            >A <see cref="T:System.Drawing.Printing.PrinterResolution" />
 
             
 
-             represents the printer resolution of through the <see
-             cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+             represents the printer resolution of through the <see cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
             
 
-             property, which contains one of the <see
-             cref="T:System.Drawing.Printing.PrinterResolutionKind" />
+             property, which contains one of the <see cref="T:System.Drawing.Printing.PrinterResolutionKind" />
 
             
 
              values.</para
           >
           <para
-            >Set the <see
-             cref="P:System.Drawing.Printing.PageSettings.PrinterResolution" />
+            >Set the <see cref="P:System.Drawing.Printing.PageSettings.PrinterResolution" />
 
             
 
-             property for the page to a valid <see
-             cref="T:System.Drawing.Printing.PrinterResolution" />
+             property for the page to a valid <see cref="T:System.Drawing.Printing.PrinterResolution" />
 
             
 
-            , available through the <see
-             cref="P:System.Drawing.Printing.PrinterSettings.PrinterResolutions" />
+            , available through the <see cref="P:System.Drawing.Printing.PrinterSettings.PrinterResolutions" />
 
             
 
@@ -725,21 +681,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy relevant information in a DEVMODE structure to the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Use this method to copy relevant information in a DEVMODE structure to the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
             .</para
           >
           <para
-            >To copy information from the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >To copy information from the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
-             to a DEVMODE, call <see
-             cref="M:System.Drawing.Printing.PageSettings.CopyToHdevmode(System.IntPtr)" />
+             to a DEVMODE, call <see cref="M:System.Drawing.Printing.PageSettings.CopyToHdevmode(System.IntPtr)" />
 
             
 
@@ -749,8 +702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies relevant information to the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Copies relevant information to the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
@@ -758,7 +710,11 @@
           >
         </summary>
         <param name="hdevmode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -782,8 +738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >Converts the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 
@@ -793,8 +748,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string showing the various property settings for the <see
-             cref="T:System.Drawing.Printing.PageSettings" />
+            >A string showing the various property settings for the <see cref="T:System.Drawing.Printing.PageSettings" />
 
             
 

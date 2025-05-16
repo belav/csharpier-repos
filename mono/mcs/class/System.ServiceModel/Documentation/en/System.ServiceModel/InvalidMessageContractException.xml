@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.InvalidMessageContractException" />
+        >The <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
         
 
-         is thrown when custom attribute usage results in the generation of an invalid service description. For example, if a <see
-         cref="T:System.ServiceModel.MessageContractAttribute" />
+         is thrown when custom attribute usage results in the generation of an invalid service description. For example, if a <see cref="T:System.ServiceModel.MessageContractAttribute" />
 
         
 
@@ -58,8 +56,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Creates a new <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
@@ -69,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
@@ -97,13 +93,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Creates a new <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
-             object using the <paramref
-             name="message" />
+             object using the <paramref name="message" />
 
             
 
@@ -113,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
@@ -144,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Creates a new <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
@@ -155,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
@@ -164,14 +155,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The serialization information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -202,18 +201,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Creates a new <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 
-             object from the <paramref
-             name="message" />
+             object from the <paramref name="message" />
 
             
 
-             and <paramref
-             name="innerException" />
+             and <paramref name="innerException" />
 
             
 
@@ -223,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.InvalidMessageContractException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.InvalidMessageContractException" />
 
             
 

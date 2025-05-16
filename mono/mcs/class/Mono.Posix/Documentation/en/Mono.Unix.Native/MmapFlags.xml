@@ -23,8 +23,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.mmap" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.mmap" />
       <paramref name="flags" />
 
       
@@ -53,14 +52,12 @@
       <Docs>
         <summary
           >Map anonymous memory not associated with any specific
-        file.  The file descriptor used for creating <c
-          >MAP_ANON</c>
+        file.  The file descriptor used for creating <c>MAP_ANON</c>
 
           
 
           
-        must be -1.  The <paramref
-           name="offset" />
+        must be -1.  The <paramref name="offset" />
 
           
 
@@ -164,19 +161,16 @@
         <summary
           >Do not permit the system to select a different address than
         the one specified.  If the specified address cannot be used, 
-        <see
-           cref="M:Mono.Unix.Native.Syscall.mmap" />
+        <see cref="M:Mono.Unix.Native.Syscall.mmap" />
 
           
 
            will fail.  If
-        <c
-          >MAP_FIXED</c>
+        <c>MAP_FIXED</c>
 
           
 
-           is specified, <paramref
-           name="addr" />
+           is specified, <paramref name="addr" />
 
           
 

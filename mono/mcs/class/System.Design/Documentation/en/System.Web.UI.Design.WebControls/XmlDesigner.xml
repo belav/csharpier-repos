@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends design-time behavior for the <see
-         cref="T:System.Web.UI.WebControls.Xml" />
+        >Extends design-time behavior for the <see cref="T:System.Web.UI.WebControls.Xml" />
 
         
 
@@ -37,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
@@ -64,50 +62,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+            >Call <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+             when you are finished using the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
-             class. The <see
-             cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+             class. The <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
             
 
-             method leaves the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+             method leaves the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+             in an unusable state. After calling <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+            , you must release all references to the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -117,18 +106,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+              >Always call <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+               before you release your last reference to the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
               
 
@@ -136,51 +122,42 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+            >The <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
             
 
-             method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+             method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. The Dispose() invokes the protected Dispose(Boolean) method with <paramref
-             name="disposing" />
+             method. The Dispose() invokes the protected Dispose(Boolean) method with <paramref name="disposing" />
 
             
 
-             set to true. The <see
-             cref="M:System.Object.Finalize" />
+             set to true. The <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When <paramref
-             name="disposing" />
+            >When <paramref name="disposing" />
 
             
 
-             is true, the <see
-             cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+             is true, the <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
             
 
-             method releases all resources that are held by any managed objects that this <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+             method releases all resources that are held by any managed objects that this <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
-             references. The <see
-             cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+             references. The <see cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
 
             
 
@@ -190,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources that are used by the <see
-             cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+            >Releases the unmanaged resources that are used by the <see cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
             
 
@@ -199,7 +175,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -273,7 +253,11 @@
           <para>Initializes the designer with the control that this instance of the designer is associated with.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

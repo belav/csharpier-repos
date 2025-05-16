@@ -17,66 +17,54 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Caching.AggregateCacheDependency" />
+        >The <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
         
 
-         class monitors a collection of dependency objects so that when any of them change, the cached item is automatically removed. The objects in the array can be <see
-         cref="T:System.Web.Caching.CacheDependency" />
+         class monitors a collection of dependency objects so that when any of them change, the cached item is automatically removed. The objects in the array can be <see cref="T:System.Web.Caching.CacheDependency" />
 
         
 
-         objects, <see
-         cref="T:System.Web.Caching.SqlCacheDependency" />
+         objects, <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
         
 
-         objects, custom objects derived from <see
-         cref="T:System.Web.Caching.CacheDependency" />
+         objects, custom objects derived from <see cref="T:System.Web.Caching.CacheDependency" />
 
         
 
         , or any combination of these. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.Caching.AggregateCacheDependency" />
+        >The <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
         
 
-         class differs from the <see
-         cref="T:System.Web.Caching.CacheDependency" />
+         class differs from the <see cref="T:System.Web.Caching.CacheDependency" />
 
         
 
-         class in that it allows you to associate multiple dependencies of different types with a single cached item. For example, if you create a page that imports data from a SQL Server database table and an XML file, you can create a <see
-         cref="T:System.Web.Caching.SqlCacheDependency" />
+         class in that it allows you to associate multiple dependencies of different types with a single cached item. For example, if you create a page that imports data from a SQL Server database table and an XML file, you can create a <see cref="T:System.Web.Caching.SqlCacheDependency" />
 
         
 
-         object to represent a dependency on the database table and a <see
-         cref="T:System.Web.Caching.CacheDependency" />
+         object to represent a dependency on the database table and a <see cref="T:System.Web.Caching.CacheDependency" />
 
         
 
-         to represent the dependency on the XML file. Rather than making an <see
-         cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
+         to represent the dependency on the XML file. Rather than making an <see cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
 
         
 
-         method call for each dependency, you can create an instance of the <see
-         cref="T:System.Web.Caching.AggregateCacheDependency" />
+         method call for each dependency, you can create an instance of the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
         
 
-         class with each dependency added to it. You can then use a single <see
-         cref="Overload:System.Web.Caching.Cache.Insert" />
+         class with each dependency added to it. You can then use a single <see cref="Overload:System.Web.Caching.Cache.Insert" />
 
         
 
-          call to make the page dependent on the <see
-         cref="T:System.Web.Caching.AggregateCacheDependency" />
+          call to make the page dependent on the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
         
 
@@ -86,13 +74,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Combines multiple dependencies between an item stored in an ASP.NET application's <see
-         cref="T:System.Web.Caching.Cache" />
+        >Combines multiple dependencies between an item stored in an ASP.NET application's <see cref="T:System.Web.Caching.Cache" />
 
         
 
-         object and an array of <see
-         cref="T:System.Web.Caching.CacheDependency" />
+         object and an array of <see cref="T:System.Web.Caching.CacheDependency" />
 
         
 
@@ -110,8 +96,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default constructor for the <see
-             cref="T:System.Web.Caching.AggregateCacheDependency" />
+            >This is the default constructor for the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
             
 
@@ -121,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Caching.AggregateCacheDependency" />
+            >Initializes a new instance of the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
             
 
@@ -158,13 +142,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see
-             cref="T:System.Web.Caching.CacheDependency" />
+            >Adds an array of <see cref="T:System.Web.Caching.CacheDependency" />
 
             
 
-             objects to the <see
-             cref="T:System.Web.Caching.AggregateCacheDependency" />
+             objects to the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
             
 
@@ -172,12 +154,15 @@
           >
         </summary>
         <param name="dependencies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Web.Caching.CacheDependency" />
+          The array of <see cref="T:System.Web.Caching.CacheDependency" />
 
           
 
@@ -204,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a unique identifier for the <see
-             cref="T:System.Web.Caching.AggregateCacheDependency" />
+            >Retrieves a unique identifier for the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
             
 
@@ -215,13 +199,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unique identifier for the <see
-             cref="T:System.Web.Caching.AggregateCacheDependency" />
+            >The unique identifier for the <see cref="T:System.Web.Caching.AggregateCacheDependency" />
 
             
 
-             object. If one of the associated dependency objects does not have a unique identifier, the <see
-             cref="M:System.Web.Caching.AggregateCacheDependency.GetUniqueId" />
+             object. If one of the associated dependency objects does not have a unique identifier, the <see cref="M:System.Web.Caching.AggregateCacheDependency.GetUniqueId" />
 
             
 

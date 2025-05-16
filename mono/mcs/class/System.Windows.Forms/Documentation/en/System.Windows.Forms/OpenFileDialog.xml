@@ -17,29 +17,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class allows you to check whether a file exists and to open it. The <see
-         cref="P:System.Windows.Forms.OpenFileDialog.ShowReadOnly" />
+        >This class allows you to check whether a file exists and to open it. The <see cref="P:System.Windows.Forms.OpenFileDialog.ShowReadOnly" />
 
         
 
-         property determines whether a read-only check box appears in the dialog box. The <see
-         cref="P:System.Windows.Forms.OpenFileDialog.ReadOnlyChecked" />
+         property determines whether a read-only check box appears in the dialog box. The <see cref="P:System.Windows.Forms.OpenFileDialog.ReadOnlyChecked" />
 
         
 
          property indicates whether the read-only check box is checked.</para
       >
       <para
-        >Most of the functionality for this class is found in the <see
-         cref="T:System.Windows.Forms.FileDialog" />
+        >Most of the functionality for this class is found in the <see cref="T:System.Windows.Forms.FileDialog" />
 
         
 
          class.</para
       >
       <para
-        >If you want to give the user the ability to select a folder instead of a file, use <see
-         cref="T:System.Windows.Forms.FolderBrowserDialog" />
+        >If you want to give the user the ability to select a folder instead of a file, use <see cref="T:System.Windows.Forms.FolderBrowserDialog" />
 
         
 
@@ -60,8 +56,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the default, compiler-supplied constructor for the <see
-             cref="T:System.Windows.Forms.OpenFileDialog" />
+            >This is the default, compiler-supplied constructor for the <see cref="T:System.Windows.Forms.OpenFileDialog" />
 
             
 
@@ -71,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Windows.Forms.OpenFileDialog" />
+            >Initializes an instance of the <see cref="T:System.Windows.Forms.OpenFileDialog" />
 
             
 
@@ -125,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.FileDialog.FileNames" />
+            >Use the <see cref="P:System.Windows.Forms.FileDialog.FileNames" />
 
             
 
@@ -154,13 +147,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
+            >The <see cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
 
             
 
-             method is used to provide a facility to quickly open a file from the dialog box. The file is opened in read-only mode for security purposes. To open a file in read/write mode, you must use another method, such as <see
-             cref="T:System.IO.FileStream" />
+             method is used to provide a facility to quickly open a file from the dialog box. The file is opened in read-only mode for security purposes. To open a file in read/write mode, you must use another method, such as <see cref="T:System.IO.FileStream" />
 
             
 
@@ -170,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens the file selected by the user, with read-only permission. The file is specified by the <see
-             cref="P:System.Windows.Forms.FileDialog.FileName" />
+            >Opens the file selected by the user, with read-only permission. The file is specified by the <see cref="P:System.Windows.Forms.FileDialog.FileName" />
 
             
 
@@ -181,8 +171,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.Stream" />
+            >A <see cref="T:System.IO.Stream" />
 
             
 
@@ -211,26 +200,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.OpenFileDialog.ReadOnlyChecked" />
+            >The <see cref="P:System.Windows.Forms.OpenFileDialog.ReadOnlyChecked" />
 
             
 
-             state does not affect the read/write mode that <see
-             cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
+             state does not affect the read/write mode that <see cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
 
             
 
-             uses to open a file selected in the dialog box. <see
-             cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
+             uses to open a file selected in the dialog box. <see cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
 
             
 
              will always open the file in read-only mode.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.OpenFileDialog.ShowReadOnly" />
+            >The <see cref="P:System.Windows.Forms.OpenFileDialog.ShowReadOnly" />
 
             
 

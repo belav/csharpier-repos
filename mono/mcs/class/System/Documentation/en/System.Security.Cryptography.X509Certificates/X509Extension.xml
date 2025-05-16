@@ -22,16 +22,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >X509 extensions are dynamic, extended properties that can be added to an X509 certificate and changed. The <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+        >X509 extensions are dynamic, extended properties that can be added to an X509 certificate and changed. The <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
         
 
          class can be used to create extensions that are associated with a certificate but are not part of a certificate as issued by a certification authority (CA).</para
       >
       <para
-        >In its most basic form, an X509 extension has an object identifier (OID), a Boolean value describing whether the extension is considered critical or not, and ASN-encoded data. Custom extensions can be registered in a <see
-         cref="T:System.Security.Cryptography.CryptoConfig" />
+        >In its most basic form, an X509 extension has an object identifier (OID), a Boolean value describing whether the extension is considered critical or not, and ASN-encoded data. Custom extensions can be registered in a <see cref="T:System.Security.Cryptography.CryptoConfig" />
 
         
 
@@ -100,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an empty <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >This constructor creates an empty <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -111,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -144,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor if the information to create the extension is already in an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Use this constructor if the information to create the extension is already in an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -155,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -164,14 +158,22 @@
           >
         </summary>
         <param name="encodedExtension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoded data to be used to create the extension.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,8 +205,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses information from the <paramref
-             name="oid" />
+            >This constructor uses information from the <paramref name="oid" />
 
             
 
@@ -214,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -223,21 +223,33 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object identifier used to identify the extension.</param
         >
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoded data used to create the extension.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,8 +281,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses information from the <paramref
-             name="oid" />
+            >This constructor uses information from the <paramref name="oid" />
 
             
 
@@ -280,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -289,21 +299,33 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string representing the object identifier.</param
         >
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoded data used to create the extension.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -336,13 +358,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the extension properties of the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+            >Use this method to copy the extension properties of the specified <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
-             and add them to the instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
+             and add them to the instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509Extension" />
 
             
 
@@ -352,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the extension properties of the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Copies the extension properties of the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -361,12 +380,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 

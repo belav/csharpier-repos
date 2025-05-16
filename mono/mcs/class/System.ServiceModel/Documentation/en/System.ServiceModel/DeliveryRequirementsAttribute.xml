@@ -35,18 +35,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+        >Use the <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
         
 
-         to instruct indigo1 to confirm that the binding provides the features required by the service or client implementation. If a <see
-         cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+         to instruct indigo1 to confirm that the binding provides the features required by the service or client implementation. If a <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
         
 
-         attribute is detected when a service description is loaded from an application configuration file or built programmatically in code, indigo2 validates the configured binding and supports all the features that the attribute specifies. For example, your service may require the bindings to support queuing. Using <see
-         cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+         attribute is detected when a service description is loaded from an application configuration file or built programmatically in code, indigo2 validates the configured binding and supports all the features that the attribute specifies. For example, your service may require the bindings to support queuing. Using <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
         
 
@@ -55,8 +52,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.QueuedDeliveryRequirements" />
+            >The <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.QueuedDeliveryRequirements" />
 
             
 
@@ -65,8 +61,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+            >The <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
 
             
 
@@ -75,8 +70,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
+            >The <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
 
             
 
@@ -85,13 +79,11 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+        >The <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
         
 
-         attribute is applied to a class, which can implement any number of service contract interfaces. <see
-         cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+         attribute is applied to a class, which can implement any number of service contract interfaces. <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
         
 
@@ -122,13 +114,11 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.DeliveryRequirementsAttribute.QueuedDeliveryRequirements" />
+                >The <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.QueuedDeliveryRequirements" />
 
                 
 
-                 property is set to <see
-                 cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.Allowed" />
+                 property is set to <see cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.Allowed" />
 
                 
 
@@ -137,8 +127,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+                >The <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
 
                 
 
@@ -150,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
             
 
@@ -181,13 +169,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.Required" />
+            >The <see cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.Required" />
 
             
 
-             instructs indigo2 to confirm that the binding supports queued delivery. The <see
-             cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.NotAllowed" />
+             instructs indigo2 to confirm that the binding supports queued delivery. The <see cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.NotAllowed" />
 
             
 
@@ -215,8 +201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+            >Setting the <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
 
             
 
@@ -258,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.DeliveryRequirementsAttribute.System.ServiceModel.Description.IContractBehavior.AddBindingParameters(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
+            >Implements the <see cref="M:System.ServiceModel.DeliveryRequirementsAttribute.System.ServiceModel.Description.IContractBehavior.AddBindingParameters(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -267,21 +251,33 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract description.</param
         >
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service endpoint for the contract.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -315,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of the <see
-             cref="M:System.ServiceModel.DeliveryRequirementsAttribute.System.ServiceModel.Description.IContractBehavior.ApplyClientBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
+            >Implementation of the <see cref="M:System.ServiceModel.DeliveryRequirementsAttribute.System.ServiceModel.Description.IContractBehavior.ApplyClientBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
 
             
 
@@ -324,21 +319,33 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract description to which the behavior is attached.</param
         >
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The endpoint for the contract.</param
         >
         <param name="proxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -372,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implementation of the <see
-             cref="M:System.ServiceModel.Description.IContractBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)" />
+            >Implementation of the <see cref="M:System.ServiceModel.Description.IContractBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.DispatchRuntime)" />
 
             
 
@@ -381,21 +387,33 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract description to which the behavior is attached.</param
         >
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The endpoint for the contract.</param
         >
         <param name="dispatch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -428,8 +446,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.DeliveryRequirementsAttribute.System.ServiceModel.Description.IContractBehavior.Validate(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint)" />
+            >Implements the <see cref="M:System.ServiceModel.DeliveryRequirementsAttribute.System.ServiceModel.Description.IContractBehavior.Validate(System.ServiceModel.Description.ContractDescription,System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
@@ -437,14 +454,22 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract description.</param
         >
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -470,13 +495,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A service class can implement any number of service contract interfaces. Use the <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
+            >A service class can implement any number of service contract interfaces. Use the <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
 
             
 
-             property to validate that endpoints with the <see
-             cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
+             property to validate that endpoints with the <see cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
 
             
 

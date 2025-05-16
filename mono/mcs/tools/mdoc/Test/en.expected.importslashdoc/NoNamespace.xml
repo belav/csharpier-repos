@@ -13,14 +13,11 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary
-      >Namespace Test: [<see
-       cref="N:Mono.DocTest" />
+    <summary>Namespace Test: [<see cref="N:Mono.DocTest" />
 
       
 
-      ]</summary
-    >
+      ]</summary>
     <remarks>
       <c>T:NoNamespace</c>
     </remarks>

@@ -23,38 +23,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+        >Use the <see cref="T:System.Security.AccessControl.EventWaitHandleRights" />
 
         
 
-         enumeration to specify access control rights when you create <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+         enumeration to specify access control rights when you create <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
         
 
-         objects. To apply access rights to a named system event, first add <see
-         cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+         objects. To apply access rights to a named system event, first add <see cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
         
 
-         objects to an <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         objects to an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object, then attach the <see
-         cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+         object, then attach the <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
         
 
-         object to the named system event using the <see
-         cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
+         object to the named system event using the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
         
 
-         constructor or the <see
-         cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+         constructor or the <see cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
 
         
 

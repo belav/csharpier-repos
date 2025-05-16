@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.IdentitySection" />
+        >The <see cref="T:System.Web.Configuration.IdentitySection" />
 
         
 
@@ -26,18 +25,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.IdentitySection" />
+          >The <see cref="T:System.Web.Configuration.IdentitySection" />
 
           
 
-           can read and write information from and to the related section of the configuration file according to the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
 
           
 
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.IdentitySection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.IdentitySection" />
 
             
 
@@ -111,23 +106,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Web.Configuration.IdentitySection.Impersonate" />
+            >If the <see cref="P:System.Web.Configuration.IdentitySection.Impersonate" />
 
             
 
-             property is set to true, each request is served by a Web application impersonating its client. That is, either the user currently logged on or the user specified by the <see
-             cref="P:System.Web.Configuration.IdentitySection.UserName" />
+             property is set to true, each request is served by a Web application impersonating its client. That is, either the user currently logged on or the user specified by the <see cref="P:System.Web.Configuration.IdentitySection.UserName" />
 
             
 
-             and <see
-             cref="P:System.Web.Configuration.IdentitySection.Password" />
+             and <see cref="P:System.Web.Configuration.IdentitySection.Password" />
 
             
 
-             properties. When the <see
-             cref="P:System.Web.Configuration.IdentitySection.Impersonate" />
+             properties. When the <see cref="P:System.Web.Configuration.IdentitySection.Impersonate" />
 
             
 
@@ -135,13 +126,11 @@
           >
           <block subset="none" type="note">
             <para
-              >For security reasons, the identity section supports storage of the encrypted <see
-               cref="P:System.Web.Configuration.IdentitySection.UserName" />
+              >For security reasons, the identity section supports storage of the encrypted <see cref="P:System.Web.Configuration.IdentitySection.UserName" />
 
               
 
-               and <see
-               cref="P:System.Web.Configuration.IdentitySection.Password" />
+               and <see cref="P:System.Web.Configuration.IdentitySection.Password" />
 
               
 
@@ -177,13 +166,11 @@
           <para>Because the password is stored in clear text, an authenticated user with proper credentials on the domain where the server resides can read it. </para>
           <block subset="none" type="note">
             <para
-              >For security reasons, the identity section supports storage of the encrypted <see
-               cref="P:System.Web.Configuration.IdentitySection.UserName" />
+              >For security reasons, the identity section supports storage of the encrypted <see cref="P:System.Web.Configuration.IdentitySection.UserName" />
 
               
 
-               and <see
-               cref="P:System.Web.Configuration.IdentitySection.Password" />
+               and <see cref="P:System.Web.Configuration.IdentitySection.Password" />
 
               
 
@@ -286,13 +273,11 @@
           <para>Because the user name is stored in clear text, an authenticated user with proper credentials on the domain where the server resides can read it. </para>
           <block subset="none" type="note">
             <para
-              >For security reasons, the identity section supports storage of the encrypted <see
-               cref="P:System.Web.Configuration.IdentitySection.UserName" />
+              >For security reasons, the identity section supports storage of the encrypted <see cref="P:System.Web.Configuration.IdentitySection.UserName" />
 
               
 
-               and <see
-               cref="P:System.Web.Configuration.IdentitySection.Password" />
+               and <see cref="P:System.Web.Configuration.IdentitySection.Password" />
 
               
 

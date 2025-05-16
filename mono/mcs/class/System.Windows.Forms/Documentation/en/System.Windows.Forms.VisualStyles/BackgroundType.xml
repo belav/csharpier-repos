@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The background of a visual style element can be a bitmap image, a filled rectangle, or nothing. The <see
-         cref="T:System.Windows.Forms.VisualStyles.BackgroundType" />
+        >The background of a visual style element can be a bitmap image, a filled rectangle, or nothing. The <see cref="T:System.Windows.Forms.VisualStyles.BackgroundType" />
 
         
 
-         values represent the return values of the <see
-         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
+         values represent the return values of the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
         
 
-         method when it is called with an argument value of <see
-         cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />
+         method when it is called with an argument value of <see cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />
 
         
 
@@ -65,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The background of the element is a bitmap. If this value is set, then the property corresponding to the <see
-             cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile" />
+            >The background of the element is a bitmap. If this value is set, then the property corresponding to the <see cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile" />
 
             
 

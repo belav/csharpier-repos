@@ -44,56 +44,46 @@
         </item>
       </list>
       <para
-        >When sampling performance counter data, using a counter type that represents an average can make raw data values meaningful for your use. For example, the raw data counter NumberOfItems64 can expose data that is fairly random from sample to sample. The formula for an average calculation of the values that the counter returns would be (X <subscript
-        >0</subscript>
+        >When sampling performance counter data, using a counter type that represents an average can make raw data values meaningful for your use. For example, the raw data counter NumberOfItems64 can expose data that is fairly random from sample to sample. The formula for an average calculation of the values that the counter returns would be (X <subscript>0</subscript>
 
         
 
-         +X <subscript
-        >1</subscript>
+         +X <subscript>1</subscript>
 
         
 
-         +…+X <subscript
-        >n</subscript>
+         +…+X <subscript>n</subscript>
 
         
 
-        )/n, where each X <subscript
-        >i</subscript>
+        )/n, where each X <subscript>i</subscript>
 
         
 
          is a raw counter sample.</para
       >
       <para
-        >Rate counters are similar to average counters, but more useful for situations in which the rate increases as a resource is used. A formula that quickly calculates the average is ((X <subscript
-        >n</subscript>
+        >Rate counters are similar to average counters, but more useful for situations in which the rate increases as a resource is used. A formula that quickly calculates the average is ((X <subscript>n</subscript>
 
         
 
-         -X <subscript
-        >0</subscript>
+         -X <subscript>0</subscript>
 
         
 
-        )/(T <subscript
-        >n</subscript>
+        )/(T <subscript>n</subscript>
 
         
 
-         -T <subscript
-        >0</subscript>
+         -T <subscript>0</subscript>
 
         
 
-        )) / frequency, where each X <subscript
-        >i</subscript>
+        )) / frequency, where each X <subscript>i</subscript>
 
         
 
-         is a counter sample and each T <subscript
-        >i</subscript>
+         is a counter sample and each T <subscript>i</subscript>
 
         
 
@@ -103,8 +93,7 @@
         <para>Unless otherwise indicated, the time base is seconds.</para>
       </block>
       <para
-        >When instrumenting applications (creating and writing custom performance counters), you might be working with performance counter types that rely on an accompanying base counter that is used in the calculations. The base counter must be immediately after its associated counter in the <see
-         cref="T:System.Diagnostics.CounterCreationDataCollection" />
+        >When instrumenting applications (creating and writing custom performance counters), you might be working with performance counter types that rely on an accompanying base counter that is used in the calculations. The base counter must be immediately after its associated counter in the <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
         
 
@@ -162,13 +151,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the formula used to calculate the <see
-         cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
+        >Specifies the formula used to calculate the <see cref="M:System.Diagnostics.PerformanceCounter.NextValue" />
 
         
 
-         method for a <see
-         cref="T:System.Diagnostics.PerformanceCounter" />
+         method for a <see cref="T:System.Diagnostics.PerformanceCounter" />
 
         
 
@@ -221,43 +208,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             -N <subscript
-            >0</subscript>
+             -N <subscript>0</subscript>
 
             
 
-            )/(B <subscript
-            >1</subscript>
+            )/(B <subscript>1</subscript>
 
             
 
-             -B <subscript
-            >0</subscript>
+             -B <subscript>0</subscript>
 
             
 
-            ), where N <subscript
-            >1</subscript>
+            ), where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, and the B <subscript
-            >1</subscript>
+             are performance counter readings, and the B <subscript>1</subscript>
 
             
 
-             and B <subscript
-            >0</subscript>
+             and B <subscript>0</subscript>
 
             
 
@@ -291,43 +270,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: ((N <subscript
-            >1</subscript>
+            >Formula: ((N <subscript>1</subscript>
 
             
 
-             -N <subscript
-            >0</subscript>
+             -N <subscript>0</subscript>
 
             
 
-            )/F)/(B <subscript
-            >1</subscript>
+            )/F)/(B <subscript>1</subscript>
 
             
 
-             -B <subscript
-            >0</subscript>
+             -B <subscript>0</subscript>
 
             
 
-            ), where N <subscript
-            >1</subscript>
+            ), where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, B <subscript
-            >1</subscript>
+             are performance counter readings, B <subscript>1</subscript>
 
             
 
-             and B <subscript
-            >0</subscript>
+             and B <subscript>0</subscript>
 
             
 
@@ -361,23 +332,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: N <subscript
-            >1</subscript>
+            >Formula: N <subscript>1</subscript>
 
             
 
-             -N <subscript
-            >0</subscript>
+             -N <subscript>0</subscript>
 
             
 
-            , where N <subscript
-            >1</subscript>
+            , where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
@@ -410,23 +377,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: N <subscript
-            >1</subscript>
+            >Formula: N <subscript>1</subscript>
 
             
 
-             -N <subscript
-            >0</subscript>
+             -N <subscript>0</subscript>
 
             
 
-            , where N <subscript
-            >1</subscript>
+            , where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
@@ -484,43 +447,35 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This counter is a multitimer. Multitimers collect data from more than one instance of a component, such as a processor or disk. This counter type differs from CounterMultiTimer100Ns in that it measures time in units of ticks of the system performance timer, rather than in 100 nanosecond units.</para>
           <para
-            >Formula: ((N <subscript
-            >1</subscript>
+            >Formula: ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
-            )) x 100 / B, where N <subscript
-            >1</subscript>
+            )) x 100 / B, where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, D <subscript
-            >1</subscript>
+             are performance counter readings, D <subscript>1</subscript>
 
             
 
-             and D <subscript
-            >0</subscript>
+             and D <subscript>0</subscript>
 
             
 
@@ -554,43 +509,35 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This counter type is a multitimer. Multitimers are designed to monitor more than one instance of a component, such as a processor or disk.</para>
           <para
-            >Formula: ((N <subscript
-            >1</subscript>
+            >Formula: ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
-            )) x 100 / B, where N <subscript
-            >1</subscript>
+            )) x 100 / B, where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, D <subscript
-            >1</subscript>
+             are performance counter readings, D <subscript>1</subscript>
 
             
 
-             and D <subscript
-            >0</subscript>
+             and D <subscript>0</subscript>
 
             
 
@@ -624,23 +571,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This counter type is an inverse multitimer. Multitimers are designed to monitor more than one instance of a component, such as a processor or disk. Inverse counters measure the time that a component is not active and derive its active time from the measurement of inactive time </para>
           <para
-            >Formula: (B - ((N <subscript
-            >1</subscript>
+            >Formula: (B - ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -675,23 +618,19 @@
           <para>This counter type is an inverse multitimer. Multitimers monitor more than one instance of a component, such as a processor or disk. Inverse counters measure the time that a component is not active and derive its active time from that measurement.</para>
           <para>This counter differs from CounterMultiTimer100NsInverse in that it measures time in units of ticks of the system performance timer, rather than in 100 nanosecond units.</para>
           <para
-            >Formula: (B- ((N <subscript
-            >1</subscript>
+            >Formula: (B- ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -724,43 +663,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
-            ), where N <subscript
-            >1</subscript>
+            ), where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, and D <subscript
-            >1</subscript>
+             are performance counter readings, and D <subscript>1</subscript>
 
             
 
-             and D <subscript
-            >0</subscript>
+             and D <subscript>0</subscript>
 
             
 
@@ -794,23 +725,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is an inverse counter type. Inverse counters measure the time that a component is note active and derive the active time from that measurement. This counter type is the same as CounterTimer100NsInv except that it measures time in units of ticks of the system performance timer rather than in 100 nanosecond units.</para>
           <para
-            >Formula: (1- ((N <subscript
-            >1</subscript>
+            >Formula: (1- ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -843,23 +770,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -892,23 +815,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -941,23 +860,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (D <subscript
-            >0</subscript>
+            >Formula: (D <subscript>0</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / F, where D <subscript
-            >0</subscript>
+            ) / F, where D <subscript>0</subscript>
 
             
 
-             represents the current time, N <subscript
-            >0</subscript>
+             represents the current time, N <subscript>0</subscript>
 
             
 
@@ -1100,43 +1015,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / ((D <subscript
-            >1</subscript>
+            ) / ((D <subscript>1</subscript>
 
             
 
-             -D <subscript
-            >0</subscript>
+             -D <subscript>0</subscript>
 
             
 
-            ) / F), where N <subscript
-            >1</subscript>
+            ) / F), where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, D <subscript
-            >1</subscript>
+             are performance counter readings, D <subscript>1</subscript>
 
             
 
-             and D <subscript
-            >0</subscript>
+             and D <subscript>0</subscript>
 
             
 
@@ -1170,43 +1077,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / ((D <subscript
-            >1</subscript>
+            ) / ((D <subscript>1</subscript>
 
             
 
-             -D <subscript
-            >0</subscript>
+             -D <subscript>0</subscript>
 
             
 
-            ) / F), where N <subscript
-            >1</subscript>
+            ) / F), where N <subscript>1</subscript>
 
             
 
-             and N <subscript
-            >0</subscript>
+             and N <subscript>0</subscript>
 
             
 
-             are performance counter readings, D <subscript
-            >1</subscript>
+             are performance counter readings, D <subscript>1</subscript>
 
             
 
-             and D <subscript
-            >0</subscript>
+             and D <subscript>0</subscript>
 
             
 
@@ -1264,23 +1163,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >0</subscript>
+            >Formula: (N <subscript>0</subscript>
 
             
 
-             / D <subscript
-            >0</subscript>
+             / D <subscript>0</subscript>
 
             
 
-            ) x 100, where D <subscript
-            >0</subscript>
+            ) x 100, where D <subscript>0</subscript>
 
             
 
-             represents a measured attribute (using a base counter of type RawBase) and N <subscript
-            >0</subscript>
+             represents a measured attribute (using a base counter of type RawBase) and N <subscript>0</subscript>
 
             
 
@@ -1338,23 +1233,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             – N <subscript
-            >0</subscript>
+             – N <subscript>0</subscript>
 
             
 
-            ) / ((D <subscript
-            >1</subscript>
+            ) / ((D <subscript>1</subscript>
 
             
 
-             – D <subscript
-            >0</subscript>
+             – D <subscript>0</subscript>
 
             
 
@@ -1387,23 +1278,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: ((N <subscript
-            >1</subscript>
+            >Formula: ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -1437,23 +1324,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formula: (N <subscript
-            >1</subscript>
+            >Formula: (N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 
@@ -1488,23 +1371,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This is an inverse counter. Counters of this type calculate active time by measuring the time that the service was inactive and then subtracting the percentage of active time from 100 percent.</para>
           <para
-            >Formula: (1- ((N <subscript
-            >1</subscript>
+            >Formula: (1- ((N <subscript>1</subscript>
 
             
 
-             - N <subscript
-            >0</subscript>
+             - N <subscript>0</subscript>
 
             
 
-            ) / (D <subscript
-            >1</subscript>
+            ) / (D <subscript>1</subscript>
 
             
 
-             - D <subscript
-            >0</subscript>
+             - D <subscript>0</subscript>
 
             
 

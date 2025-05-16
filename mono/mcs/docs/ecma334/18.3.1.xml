@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <clause number="18.3.1" title="Value semantics">
   <paragraph
-    >Structs are value types (<hyperlink
-    >11.1</hyperlink>
+    >Structs are value types (<hyperlink>11.1</hyperlink>
 
     
 
-    ) and are said to have value semantics. Classes, on the other hand, are reference types (<hyperlink
-    >11.2</hyperlink>
+    ) and are said to have value semantics. Classes, on the other hand, are reference types (<hyperlink>11.2</hyperlink>
 
     
 
@@ -17,8 +15,7 @@
   <paragraph>With classes, it is possible for two variables to reference the same object, and thus possible for operations on one variable to affect the object referenced by the other variable. With structs, the variables each have their own copy of the data, and it is not possible for operations on one to affect the other. Furthermore, because structs are not reference types, it is not possible for values of a struct type to be null. </paragraph>
   <paragraph>
     <example
-      >[Example: Given the declaration <code_example
-      >
+      >[Example: Given the declaration <code_example>
         <![CDATA[
 struct Point  
 {  
@@ -33,8 +30,7 @@ struct Point
 
       
 
-      the code fragment <code_example
-      >
+      the code fragment <code_example>
         <![CDATA[
 Point a = new Point(10, 10);  
 Point b = a;  

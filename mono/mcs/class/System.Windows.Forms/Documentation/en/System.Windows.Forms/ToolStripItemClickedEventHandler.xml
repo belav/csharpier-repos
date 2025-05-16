@@ -29,13 +29,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
+        >Represents the method that will handle the <see cref="E:System.Windows.Forms.ToolStrip.ItemClicked" />
 
         
 
-         event of a <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+         event of a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 

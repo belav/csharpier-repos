@@ -14,38 +14,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridCell" />
+        >The <see cref="T:System.Windows.Forms.DataGridCell" />
 
         
 
-         can be used in conjunction with the <see
-         cref="T:System.Windows.Forms.DataGrid" />
+         can be used in conjunction with the <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control's <see
-         cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
+         control's <see cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
 
         
 
-         property to get or set the value of any cell. Setting the <see
-         cref="T:System.Windows.Forms.DataGrid" />
+         property to get or set the value of any cell. Setting the <see cref="T:System.Windows.Forms.DataGrid" />
 
         
 
-         control's <see
-         cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
+         control's <see cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
 
         
 
-         property to a <see
-         cref="T:System.Windows.Forms.DataGridCell" />
+         property to a <see cref="T:System.Windows.Forms.DataGridCell" />
 
         
 
-         causes the focus to move to the cell specified by the <see
-         cref="T:System.Windows.Forms.DataGridCell" />
+         causes the focus to move to the cell specified by the <see cref="T:System.Windows.Forms.DataGridCell" />
 
         
 
@@ -70,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridCell" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridCell" />
 
             
 
@@ -79,24 +71,30 @@
           >
         </summary>
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of a row in the <see
-           cref="T:System.Windows.Forms.DataGrid" />
+          The number of a row in the <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
           . </param
         >
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of a column in the <see
-           cref="T:System.Windows.Forms.DataGrid" />
+          The number of a column in the <see cref="T:System.Windows.Forms.DataGrid" />
 
           
 
@@ -119,23 +117,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.DataGridCell.ColumnNumber" />
+            >You can use the <see cref="P:System.Windows.Forms.DataGridCell.ColumnNumber" />
 
             
 
-             value to specify a <see
-             cref="T:System.Data.DataColumn" />
+             value to specify a <see cref="T:System.Data.DataColumn" />
 
             
 
-             in the <see
-             cref="T:System.Data.DataTable" />
+             in the <see cref="T:System.Data.DataTable" />
 
             
 
-             associated with the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             associated with the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -145,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of a column in the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Gets or sets the number of a column in the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -173,13 +166,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.DataGridCell" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.DataGridCell" />
 
             
 
-             is identical to a second <see
-             cref="T:System.Windows.Forms.DataGridCell" />
+             is identical to a second <see cref="T:System.Windows.Forms.DataGridCell" />
 
             
 
@@ -191,7 +182,11 @@
           <para>true if the second object is identical to the first; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -215,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash value that can be added to a <see
-             cref="T:System.Collections.Hashtable" />
+            >Gets a hash value that can be added to a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -226,13 +220,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A number that uniquely identifies the <see
-             cref="T:System.Windows.Forms.DataGridCell" />
+            >A number that uniquely identifies the <see cref="T:System.Windows.Forms.DataGridCell" />
 
             
 
-             in a <see
-             cref="T:System.Collections.Hashtable" />
+             in a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -256,23 +248,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.DataGridCell.RowNumber" />
+            >You can use the <see cref="P:System.Windows.Forms.DataGridCell.RowNumber" />
 
             
 
-             value to specify a <see
-             cref="T:System.Data.DataRow" />
+             value to specify a <see cref="T:System.Data.DataRow" />
 
             
 
-             in the <see
-             cref="T:System.Data.DataTable" />
+             in the <see cref="T:System.Data.DataTable" />
 
             
 
-             associated with the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+             associated with the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
@@ -282,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of a row in the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >Gets or sets the number of a row in the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 

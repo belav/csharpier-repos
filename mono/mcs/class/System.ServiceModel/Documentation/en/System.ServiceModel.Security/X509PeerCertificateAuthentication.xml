@@ -126,8 +126,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using certificates, indigo1 security system validates the client certificate against a <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+            >When using certificates, indigo1 security system validates the client certificate against a <see cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
 
             
 

@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For a property, the <see
-         cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+        >For a property, the <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
 
         
 
@@ -34,18 +33,15 @@
 
         
 
-         inherits from a <see
-         cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
+         inherits from a <see cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
 
         
 
-        , so <see
-         cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+        , so <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
 
         
 
-         inherits the FillRowMethodName and TableDefinition fields from <see
-         cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
+         inherits the FillRowMethodName and TableDefinition fields from <see cref="T:Microsoft.SqlServer.Server.SqlFunctionAttribute" />
 
         
 
@@ -86,39 +82,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
+            >If the <see cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
 
             
 
              property is set to true and the return type of the method is void, SQL Server marks the method as a mutator. A mutator method is one that causes a state change in the UDT instance. Mutator methods can be called in assignment statements or data modification statements, but cannot be used in queries. If a method is marked as a mutator but does not return void, then CREATE TYPE does not fail with an error. Even though a returned value other than void does not raise an error, the returned value is not accessible and cannot be used. </para
           >
           <para
-            >The default value of the <see
-             cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
+            >The default value of the <see cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
 
             
 
              property is false. </para
           >
           <para
-            >A property can be a mutator if <see
-             cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+            >A property can be a mutator if <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
 
             
 
-             is used on the setter and <see
-             cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
+             is used on the setter and <see cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
 
             
 
-             is set to true. However, a property setter is implicitly treated as a mutator, so it is not necessary to set the <see
-             cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
+             is set to true. However, a property setter is implicitly treated as a mutator, so it is not necessary to set the <see cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.IsMutator" />
 
             
 
-             property of the <see
-             cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
+             property of the <see cref="T:Microsoft.SqlServer.Server.SqlMethodAttribute" />
 
             
 
@@ -146,8 +136,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of the <see
-             cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.OnNullCall" />
+            >The default value of the <see cref="P:Microsoft.SqlServer.Server.SqlMethodAttribute.OnNullCall" />
 
             
 

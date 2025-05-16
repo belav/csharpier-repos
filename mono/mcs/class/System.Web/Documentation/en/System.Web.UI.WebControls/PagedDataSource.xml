@@ -27,59 +27,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.PagedDataSource" />
+        >The <see cref="T:System.Web.UI.WebControls.PagedDataSource" />
 
         
 
-         class encapsulates the properties that allow data-source controls, such as the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         class encapsulates the properties that allow data-source controls, such as the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        , <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        , <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+        , and <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
         , to perform paging. This class is used by control developers when providing paging support to a custom data-bound control.</para
       >
       <para
-        >This class uses the best available method to enumerate over the data belonging to the current page. If the underlying data source supports indexed access (such as <see
-         cref="T:System.Array" />
+        >This class uses the best available method to enumerate over the data belonging to the current page. If the underlying data source supports indexed access (such as <see cref="T:System.Array" />
 
         
 
-         and <see
-         cref="T:System.Collections.IList" />
+         and <see cref="T:System.Collections.IList" />
 
         
 
-        ), this class uses it. Otherwise, it uses the enumerator created by the <see
-         cref="M:System.Collections.IEnumerable.GetEnumerator" />
+        ), this class uses it. Otherwise, it uses the enumerator created by the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
         
 
          method.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.PagedDataSource" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.PagedDataSource" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.PagedDataSource.#ctor" />
+        , see the <see cref="M:System.Web.UI.WebControls.PagedDataSource.#ctor" />
 
         
 
@@ -89,23 +79,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates the paging-related properties of a data-bound control (such as <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+        >Encapsulates the paging-related properties of a data-bound control (such as <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        , <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        , <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+        , and <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
@@ -123,16 +109,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.PagedDataSource" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.PagedDataSource" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.PagedDataSource" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.PagedDataSource" />
 
             
 
@@ -214,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.PagedDataSource" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.PagedDataSource" />
 
             
 
@@ -240,46 +223,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
 
             
 
-             property to indicate whether custom paging is enabled. Custom paging is an optional type of paging provided specifically by the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             property to indicate whether custom paging is enabled. Custom paging is an optional type of paging provided specifically by the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control. ASP.NET version 2.0 data-bound control (such as <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             control. ASP.NET version 2.0 data-bound control (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+            , <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-            , and <see
-             cref="T:System.Web.UI.WebControls.FormView" />
+            , and <see cref="T:System.Web.UI.WebControls.FormView" />
 
             
 
-            ) uses server-side paging and does not support custom paging. Custom paging and server-side paging are mutually exclusive. If you set <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+            ) uses server-side paging and does not support custom paging. Custom paging and server-side paging are mutually exclusive. If you set <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
 
             
 
-             to true, be sure that <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
+             to true, be sure that <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
 
             
 
              is set to false.</para
           >
           <para
-            >For more information about custom paging, see <see
-             cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
+            >For more information about custom paging, see <see cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
 
             
 
@@ -308,43 +283,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowPaging" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowPaging" />
 
             
 
-             property to specify whether a data-bound control has paging enabled. ASP.NET version 2.0 data-bound controls (such as <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             property to specify whether a data-bound control has paging enabled. ASP.NET version 2.0 data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+            , <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-            , and <see
-             cref="T:System.Web.UI.WebControls.FormView" />
+            , and <see cref="T:System.Web.UI.WebControls.FormView" />
 
             
 
-            ) also use server-side paging to provide automatic paging functionality. For more information on server-side paging, see <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
+            ) also use server-side paging to provide automatic paging functionality. For more information on server-side paging, see <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
 
             
 
-            . When using the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            . When using the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control, you can also provide your own custom paging logic. For more information on custom paging, see <see
-             cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
+             control, you can also provide your own custom paging logic. For more information on custom paging, see <see cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+             and <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
 
             
 
@@ -376,18 +343,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET version 2.0 data-bound controls (such as <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            >ASP.NET version 2.0 data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-            , <see
-             cref="T:System.Web.UI.WebControls.DetailsView" />
+            , <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
             
 
-            , and <see
-             cref="T:System.Web.UI.WebControls.FormView" />
+            , and <see cref="T:System.Web.UI.WebControls.FormView" />
 
             
 
@@ -395,13 +359,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Server-side paging and custom paging are mutually exclusive. If you set <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
+              >Server-side paging and custom paging are mutually exclusive. If you set <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
 
               
 
-               to true, be sure that <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+               to true, be sure that <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
 
               
 
@@ -429,13 +391,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the data source into the specified <see
-             cref="T:System.Array" />
+            >Use this method to copy the contents of the data source into the specified <see cref="T:System.Array" />
 
             
 
-            , starting at the specified index. The <see
-             cref="T:System.Array" />
+            , starting at the specified index. The <see cref="T:System.Array" />
 
             
 
@@ -445,13 +405,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from the data source to the specified <see
-             cref="T:System.Array" />
+            >Copies all the items from the data source to the specified <see cref="T:System.Array" />
 
             
 
-            , starting at the specified index in the <see
-             cref="T:System.Array" />
+            , starting at the specified index in the <see cref="T:System.Array" />
 
             
 
@@ -459,24 +417,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
            that receives the copied items from the data source. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first position in the specified <see
-           cref="T:System.Array" />
+          The first position in the specified <see cref="T:System.Array" />
 
           
 
@@ -499,8 +463,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.Count" />
 
             
 
@@ -509,33 +472,11 @@
           <list type="bullet">
             <item>
               <para
-                >If paging is disabled (by setting the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+                >If paging is disabled (by setting the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
                 
 
-                 property to false), the value of the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
-
-                
-
-                 property is returned.</para
-              >
-            </item>
-            <item>
-              <para
-                >If paging is enabled (by setting the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
-
-                
-
-                 property to true) and custom paging is enabled (by setting the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
-
-                
-
-                 property set to true), the value of the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+                 property to false), the value of the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
 
                 
 
@@ -544,18 +485,15 @@
             </item>
             <item>
               <para
-                >If paging is enabled (by setting the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+                >If paging is enabled (by setting the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
                 
 
-                 property to true) and the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
+                 property to true) and custom paging is enabled (by setting the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
 
                 
 
-                 property is set to false, the value of the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+                 property set to true), the value of the <see cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
 
                 
 
@@ -564,28 +502,40 @@
             </item>
             <item>
               <para
-                >If paging is enabled (by setting the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+                >If paging is enabled (by setting the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
                 
 
-                 property to true), custom paging is disabled (by setting the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
+                 property to true) and the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
 
                 
 
-                 property false), and the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
+                 property is set to false, the value of the <see cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
 
                 
 
-                 property is set to true, the value of the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
+                 property is returned.</para
+              >
+            </item>
+            <item>
+              <para
+                >If paging is enabled (by setting the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
                 
 
-                 property is subtracted from the value of the <see
-                 cref="P:System.Web.UI.WebControls.PagedDataSource.FirstIndexInPage" />
+                 property to true), custom paging is disabled (by setting the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
+
+                
+
+                 property false), and the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
+
+                
+
+                 property is set to true, the value of the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
+
+                
+
+                 property is subtracted from the value of the <see cref="P:System.Web.UI.WebControls.PagedDataSource.FirstIndexInPage" />
 
                 
 
@@ -595,8 +545,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+              >If the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
 
               
 
@@ -626,8 +575,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.CurrentPageIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.CurrentPageIndex" />
 
             
 
@@ -655,15 +603,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.IEnumerable" />
-        </value>
+        <value>a <see cref="T:System.Collections.IEnumerable" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
 
             
 
@@ -691,13 +635,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
 
             
 
-             property to determine the number of items in the data source. If custom paging or server-side paging is used, the value of the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
+             property to determine the number of items in the data source. If custom paging or server-side paging is used, the value of the <see cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
 
             
 
@@ -705,8 +647,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+              >If the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
 
               
 
@@ -735,8 +676,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.FirstIndexInPage" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.FirstIndexInPage" />
 
             
 
@@ -744,23 +684,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+              >If the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
               
 
-               property is set to false, or the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
+               property is set to false, or the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
 
               
 
-               or <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
+               or <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
 
               
 
-               properties are set to true, or the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+               properties are set to true, or the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
 
               
 
@@ -792,23 +728,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that can be iterated through to get each item in the data source. To access the item at the current position in the enumerator, use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             that can be iterated through to get each item in the data source. To access the item at the current position in the enumerator, use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             property. Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             property. Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method to move to the next item in the collection. To move the enumerator to its initial position, use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             method to move to the next item in the collection. To move the enumerator to its initial position, use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -816,18 +748,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When you initially get the enumerator or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              >When you initially get the enumerator or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection, you must call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -838,8 +767,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -849,8 +777,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -877,39 +804,32 @@
       </Parameters>
       <Docs>
         <param name="list_accessors"
-          >a <see
-           cref="T:System.ComponentModel.PropertyDescriptor[]" />
+          >a <see cref="T:System.ComponentModel.PropertyDescriptor[]" />
         </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.PagedDataSource.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+            >Use the <see cref="M:System.Web.UI.WebControls.PagedDataSource.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
 
             
 
-             method to create a <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+             method to create a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that represents the properties on each item used to bind data. If the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+             that represents the properties on each item used to bind data. If the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
 
             
 
-             property is null or is not a <see
-             cref="T:System.ComponentModel.ITypedList" />
+             property is null or is not a <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
-             implemented object, null is returned. For more information on the <see
-             cref="M:System.Web.UI.WebControls.PagedDataSource.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+             implemented object, null is returned. For more information on the <see cref="M:System.Web.UI.WebControls.PagedDataSource.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
 
             
 
-             method, see <see
-             cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+             method, see <see cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
 
             
 
@@ -919,8 +839,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -930,8 +849,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >The <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -958,19 +876,16 @@
       </Parameters>
       <Docs>
         <param name="list_accessors"
-          >a <see
-           cref="T:System.ComponentModel.PropertyDescriptor[]" />
+          >a <see cref="T:System.ComponentModel.PropertyDescriptor[]" />
         </param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is inherited from <see
-             cref="T:System.ComponentModel.ITypedList" />
+            >This method is inherited from <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
-             and is not applicable to this class. It has been implemented to return <see
-             cref="F:System.String.Empty" />
+             and is not applicable to this class. It has been implemented to return <see cref="F:System.String.Empty" />
 
             
 
@@ -1008,8 +923,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
 
             
 
@@ -1017,13 +931,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Both the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+              >Both the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+               and <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
 
               
 
@@ -1052,8 +964,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.IsFirstPage" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsFirstPage" />
 
             
 
@@ -1081,8 +992,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
 
             
 
@@ -1110,8 +1020,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
             
 
@@ -1119,13 +1028,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.AllowPaging" />
+              >The <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowPaging" />
 
               
 
-               property must be true and the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+               property must be true and the <see cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
 
               
 
@@ -1179,13 +1086,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Server-side paging is enabled when the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowPaging" />
+            >Server-side paging is enabled when the <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowPaging" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
+             and <see cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
 
             
 
@@ -1209,26 +1114,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from the <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from the <see cref="T:System.Collections.ICollection" />
 
             
 
              class and is overridden to always return false to indicate that this class is not thread-safe.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1256,8 +1157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.PageCount" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.PageCount" />
 
             
 
@@ -1265,18 +1165,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+              >If the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
 
               
 
-               property is null, 0 is returned. If the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+               property is null, 0 is returned. If the <see cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
 
               
 
-               property is set to false or the <see
-               cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
+               property is set to false or the <see cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
 
               
 
@@ -1306,8 +1203,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
 
             
 
@@ -1335,26 +1231,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.PagedDataSource" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.PagedDataSource" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1383,18 +1275,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
+            >Use the <see cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
 
             
 
-             property when custom paging or server-side paging is used to determine the virtual number of items in the data source. For more information on the <see
-             cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
+             property when custom paging or server-side paging is used to determine the virtual number of items in the data source. For more information on the <see cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
 
             
 
-             property, see <see
-             cref="P:System.Web.UI.WebControls.DataGrid.VirtualItemCount" />
+             property, see <see cref="P:System.Web.UI.WebControls.DataGrid.VirtualItemCount" />
 
             
 

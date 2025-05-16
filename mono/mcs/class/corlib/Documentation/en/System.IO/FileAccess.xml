@@ -37,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For an example of creating a file and writing text to a file, see <format
-         type="text/html">
+        >For an example of creating a file and writing text to a file, see <format type="text/html">
           <a href="060CBE06-2ADF-4337-9E7B-961A5C840208"
             >[&lt;topic://cpconwritingtexttofile&gt;]</a
           >
@@ -46,8 +45,7 @@
 
         
 
-        . For an example of reading text from a file, see <format
-         type="text/html">
+        . For an example of reading text from a file, see <format type="text/html">
           <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
             >[&lt;topic://cpconreadingtextfromfile&gt;]</a
           >
@@ -55,8 +53,7 @@
 
         
 
-        . For an example of reading from and writing to a binary file, see <format
-         type="text/html">
+        . For an example of reading from and writing to a binary file, see <format type="text/html">
           <a href="E209D949-31E8-44EA-8E38-87F9093F3093"
             >[&lt;topic://cpconReadingWritingToNewlyCreatedDataFile&gt;]</a
           >
@@ -67,18 +64,15 @@
         .</para
       >
       <para
-        >A FileAccess parameter is specified in many of the constructors for <see
-         cref="T:System.IO.File" />
+        >A FileAccess parameter is specified in many of the constructors for <see cref="T:System.IO.File" />
 
         
 
-        , <see
-         cref="T:System.IO.FileInfo" />
+        , <see cref="T:System.IO.FileInfo" />
 
         
 
-        , <see
-         cref="T:System.IO.FileStream" />
+        , <see cref="T:System.IO.FileStream" />
 
         
 

@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.RegistryAuditRule" />
+        >The <see cref="T:System.Security.AccessControl.RegistryAuditRule" />
 
         
 
-         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on registry keys. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         class is one of a set of classes that the .NET Framework provides for managing Windows access control security on registry keys. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
@@ -38,23 +36,19 @@
         <para>Windows access control security can only be applied to registry keys. It cannot be applied to individual key/value pairs stored in a key.</para>
       </block>
       <para
-        >To get a list of the audit rules currently applied to a registry key, use the <see
-         cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" />
+        >To get a list of the audit rules currently applied to a registry key, use the <see cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" />
 
         
 
-         method to get a <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         method to get a <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
-         object, and then use its <see
-         cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
+         object, and then use its <see cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
 
         
 
-         method to obtain a collection of <see
-         cref="T:System.Security.AccessControl.RegistryAuditRule" />
+         method to obtain a collection of <see cref="T:System.Security.AccessControl.RegistryAuditRule" />
 
         
 
@@ -71,28 +65,23 @@
         <para>The underlying access control entries change as you apply and remove rules. The information in rules is merged if possible, to maintain the smallest number of access control entries. Thus, when you read the current list of rules, it might not look exactly like the list of all the rules you have added.</para>
       </block>
       <para
-        >Use <see
-         cref="T:System.Security.AccessControl.RegistryAuditRule" />
+        >Use <see cref="T:System.Security.AccessControl.RegistryAuditRule" />
 
         
 
-         objects to specify access rights to be audited for a user or group. To apply a rule to a registry key, use the <see
-         cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" />
+         objects to specify access rights to be audited for a user or group. To apply a rule to a registry key, use the <see cref="M:Microsoft.Win32.RegistryKey.GetAccessControl" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
-         object. Modify the <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         object. Modify the <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
-         object by using its methods to add the rule, and then use the <see
-         cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+         object by using its methods to add the rule, and then use the <see cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
 
         
 
@@ -100,13 +89,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to a <see
-           cref="T:System.Security.AccessControl.RegistrySecurity" />
+          >Changes you make to a <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
           
 
-           object do not affect the access levels of the registry key until you call the <see
-           cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+           object do not affect the access levels of the registry key until you call the <see cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
 
           
 
@@ -118,8 +105,7 @@
 
         
 
-         objects are immutable. Security for a registry key is modified by using the methods of the <see
-         cref="T:System.Security.AccessControl.RegistrySecurity" />
+         objects are immutable. Security for a registry key is modified by using the methods of the <see cref="T:System.Security.AccessControl.RegistrySecurity" />
 
         
 
@@ -158,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All registry keys are containers, so the only inheritance flag that is meaningful for registry keys is the <see
-             cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
+            >All registry keys are containers, so the only inheritance flag that is meaningful for registry keys is the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
 
             
 
@@ -237,8 +222,7 @@
 
                   
 
-                  , <see
-                   cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
+                  , <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
                 </para>
               </term>
               <description>
@@ -254,23 +238,19 @@
           </list>
           <para>The pattern for the grandchild subkey governs all subkeys contained by the grandchild subkey. </para>
           <para
-            >For example, if the <see
-             cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
+            >For example, if the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
 
             
 
-             flag is specified for <paramref
-             name="inheritanceFlags" />
+             flag is specified for <paramref name="inheritanceFlags" />
 
             
 
-             and the <see
-             cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
+             and the <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
 
             
 
-             propagation flag is specified for <paramref
-             name="propagationFlags" />
+             propagation flag is specified for <paramref name="propagationFlags" />
 
             
 
@@ -278,23 +258,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can specify the <see
-               cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+              >Although you can specify the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
 
               
 
-               flag for <paramref
-               name="inheritanceFlags" />
+               flag for <paramref name="inheritanceFlags" />
 
               
 
-              , there is no point in doing so. For the purposes of access control, the name/value pairs in a subkey are not separate objects. The access rights to name/value pairs are controlled by the rights of the subkey. Furthermore, since all subkeys are containers (that is, they can contain other subkeys), they are not affected by the <see
-               cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+              , there is no point in doing so. For the purposes of access control, the name/value pairs in a subkey are not separate objects. The access rights to name/value pairs are controlled by the rights of the subkey. Furthermore, since all subkeys are containers (that is, they can contain other subkeys), they are not affected by the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
 
               
 
-               flag. Finally, specifying the <see
-               cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+               flag. Finally, specifying the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
 
               
 
@@ -305,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RegistryAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RegistryAuditRule" />
 
             
 
@@ -314,70 +289,83 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The user or group the rule applies to. Must be of type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The user or group the rule applies to. Must be of type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
-           or a type such as <see
-           cref="T:System.Security.Principal.NTAccount" />
+           or a type such as <see cref="T:System.Security.Principal.NTAccount" />
 
           
 
-           that can be converted to type <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+           that can be converted to type <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="registryRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.RegistryRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.RegistryRights" />
 
           
 
            values specifying the kinds of access to audit.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            values specifying whether the audit rule applies to subkeys of the current key.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            values that affect the way an inherited audit rule is propagated to subkeys of the current key.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -411,8 +399,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All registry keys are containers, so the only inheritance flag that is meaningful for registry keys is the <see
-             cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
+            >All registry keys are containers, so the only inheritance flag that is meaningful for registry keys is the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
 
             
 
@@ -490,8 +477,7 @@
 
                   
 
-                  , <see
-                   cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
+                  , <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
                 </para>
               </term>
               <description>
@@ -507,23 +493,19 @@
           </list>
           <para>The pattern for the grandchild subkey governs all subkeys contained by the grandchild subkey. </para>
           <para
-            >For example, if the <see
-             cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
+            >For example, if the <see cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
 
             
 
-             flag is specified for <paramref
-             name="inheritanceFlags" />
+             flag is specified for <paramref name="inheritanceFlags" />
 
             
 
-             and the <see
-             cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
+             and the <see cref="F:System.Security.AccessControl.PropagationFlags.InheritOnly" />
 
             
 
-             propagation flag is specified for <paramref
-             name="propagationFlags" />
+             propagation flag is specified for <paramref name="propagationFlags" />
 
             
 
@@ -531,23 +513,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can specify the <see
-               cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+              >Although you can specify the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
 
               
 
-               flag for <paramref
-               name="inheritanceFlags" />
+               flag for <paramref name="inheritanceFlags" />
 
               
 
-              , there is no point in doing so. For the purposes of access control, the name/value pairs in a subkey are not separate objects. The access rights to name/value pairs are controlled by the rights of the subkey. Furthermore, since all subkeys are containers (that is, they can contain other subkeys), they are not affected by the <see
-               cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+              , there is no point in doing so. For the purposes of access control, the name/value pairs in a subkey are not separate objects. The access rights to name/value pairs are controlled by the rights of the subkey. Furthermore, since all subkeys are containers (that is, they can contain other subkeys), they are not affected by the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
 
               
 
-               flag. Finally, specifying the <see
-               cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+               flag. Finally, specifying the <see cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
 
               
 
@@ -555,28 +533,23 @@
             >
           </block>
           <para
-            >This constructor is equivalent to creating an <see
-             cref="T:System.Security.Principal.NTAccount" />
+            >This constructor is equivalent to creating an <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object, by passing <paramref
-             name="identity" />
+             object, by passing <paramref name="identity" />
 
             
 
-             to the <see
-             cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
+             to the <see cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
 
             
 
-             constructor, and passing the newly created <see
-             cref="T:System.Security.Principal.NTAccount" />
+             constructor, and passing the newly created <see cref="T:System.Security.Principal.NTAccount" />
 
             
 
-             object to the <see
-             cref="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
+             object to the <see cref="M:System.Security.AccessControl.RegistryAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.RegistryRights,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
 
             
 
@@ -586,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RegistryAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RegistryAuditRule" />
 
             
 
@@ -595,55 +567,71 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the user or group the rule applies to.</param
         >
         <param name="registryRights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.RegistryRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.RegistryRights" />
 
           
 
            values specifying the kinds of access to audit.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of <see
-           cref="T:System.Security.AccessControl.InheritanceFlags" />
+          A combination of <see cref="T:System.Security.AccessControl.InheritanceFlags" />
 
           
 
            flags that specifies whether the audit rule applies to subkeys of the current key.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of <see
-           cref="T:System.Security.AccessControl.PropagationFlags" />
+          A combination of <see cref="T:System.Security.AccessControl.PropagationFlags" />
 
           
 
            flags that affect the way an inherited audit rule is propagated to subkeys of the current key.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -678,8 +666,7 @@
 
             
 
-             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see
-             cref="T:System.Security.AccessControl.AuditFlags" />
+             objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
             
 

@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a Web Parts control implements the <see
-         cref="T:System.Web.UI.WebControls.WebParts.IWebPartTable" />
+        >When a Web Parts control implements the <see cref="T:System.Web.UI.WebControls.WebParts.IWebPartTable" />
 
         
 
-         interface and serves as a provider in a Web Parts connection, the consumer or transformer must retrieve and process the table data from the provider. The <see
-         cref="T:System.Web.UI.WebControls.WebParts.TableCallback" />
+         interface and serves as a provider in a Web Parts connection, the consumer or transformer must retrieve and process the table data from the provider. The <see cref="T:System.Web.UI.WebControls.WebParts.TableCallback" />
 
         
 
          delegate represents the method to call for processing the provider data. </para
       >
       <para
-        >The <see
-         cref="M:System.Web.UI.WebControls.WebParts.IWebPartTable.GetTableData(System.Web.UI.WebControls.WebParts.TableCallback)" />
+        >The <see cref="M:System.Web.UI.WebControls.WebParts.IWebPartTable.GetTableData(System.Web.UI.WebControls.WebParts.TableCallback)" />
 
         
 
-         method contains a <see
-         cref="T:System.Web.UI.WebControls.WebParts.TableCallback" />
+         method contains a <see cref="T:System.Web.UI.WebControls.WebParts.TableCallback" />
 
         
 

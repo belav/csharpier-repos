@@ -5,20 +5,16 @@
   </assembly>
   <members>
     <member name="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper">
-      <summary
-        >
-        en-GB: The summary for <see
-         cref="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper" />
+      <summary>
+        en-GB: The summary for <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper" />
 
         
 
         .
       </summary
       >
-      <remarks
-        >
-        en-GB: Inherits from <see
-         cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
+      <remarks>
+        en-GB: Inherits from <see cref="T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper" />
 
         
 
@@ -27,15 +23,12 @@
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty">
-      <summary
-        >
-        en-GB: This <see
-         cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+      <summary>
+        en-GB: This <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
 
         
 
-         is of type <see
-         cref="T:System.String" />
+         is of type <see cref="T:System.String" />
 
         
 
@@ -44,15 +37,12 @@
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksProperty">
-      <remarks
-        >
-        en-GB: The <see
-         cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+      <remarks>
+        en-GB: The <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
 
         
 
-         may be <c
-        >null</c>
+         may be <c>null</c>
 
         
 
@@ -61,20 +51,16 @@
       >
     </member>
     <member name="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksAndSummaryProperty">
-      <summary
-        >
-        en-GB: This is a complex <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+      <summary>
+        en-GB: This is a complex <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
         .
       </summary
       >
-      <remarks
-        >
-        en-GB: <see
-         cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
+      <remarks>
+        en-GB: <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.SummaryProperty" />
         <see cref="P:Microsoft.AspNetCore.Razor.TagHelpers.DocumentedTagHelper.RemarksProperty" />
       </remarks>
     </member>

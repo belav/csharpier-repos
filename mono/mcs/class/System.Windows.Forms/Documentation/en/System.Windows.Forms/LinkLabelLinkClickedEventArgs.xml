@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+        >Provides data for the <see cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
 
         
 
@@ -108,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.LinkLabel.Link" />
+            >Gets the <see cref="T:System.Windows.Forms.LinkLabel.Link" />
 
             
 

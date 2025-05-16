@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="20.2.3" title="Interface events">
   <paragraph
-    >Interface events are declared using interface-event-declarations: <grammar_production
-    >
+    >Interface events are declared using interface-event-declarations: <grammar_production>
       <name>
         <non_terminal where="20.2.3">interface-event-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <keyword>new</keyword>
@@ -23,8 +21,7 @@
     </grammar_production>
   </paragraph>
   <paragraph
-    >The attributes, type, and identifier of an interface event declaration have the same meaning as those of an event declaration in a class (<hyperlink
-    >17.7</hyperlink>
+    >The attributes, type, and identifier of an interface event declaration have the same meaning as those of an event declaration in a class (<hyperlink>17.7</hyperlink>
 
     
 

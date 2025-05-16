@@ -47,13 +47,11 @@
 
         
 
-         is the abstract base class of <see
-         cref="T:System.IO.StreamReader" />
+         is the abstract base class of <see cref="T:System.IO.StreamReader" />
 
         
 
-         and <see
-         cref="T:System.IO.StringReader" />
+         and <see cref="T:System.IO.StringReader" />
 
         
 
@@ -92,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.TextReader" />
+            >Initializes a new instance of the <see cref="T:System.IO.TextReader" />
 
             
 
@@ -124,16 +121,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This implementation of Close calls the <see
-             cref="M:System.IO.StringReader.Dispose(System.Boolean)" />
+            >This implementation of Close calls the <see cref="M:System.IO.StringReader.Dispose(System.Boolean)" />
 
             
 
              method and passes it a true value.</para
           >
           <para
-            >Flushing the text reader will not flush its underlying encoder unless you explicitly call Close. Setting the <see
-             cref="P:System.IO.StreamWriter.AutoFlush" />
+            >Flushing the text reader will not flush its underlying encoder unless you explicitly call Close. Setting the <see cref="P:System.IO.StreamWriter.AutoFlush" />
 
             
 
@@ -141,13 +136,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In derived classes, do not override the <see
-               cref="M:System.IO.TextReader.Close" />
+              >In derived classes, do not override the <see cref="M:System.IO.TextReader.Close" />
 
               
 
-               method. Instead, override the <see
-               cref="M:System.IO.TextReader.Dispose(System.Boolean)" />
+               method. Instead, override the <see cref="M:System.IO.TextReader.Dispose(System.Boolean)" />
 
               
 
@@ -158,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.IO.TextReader" />
+            >Closes the <see cref="T:System.IO.TextReader" />
 
             
 
@@ -189,46 +181,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.IO.TextReader.Dispose" />
+            >Call <see cref="M:System.IO.TextReader.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.IO.TextReader" />
+             when you are finished using the <see cref="T:System.IO.TextReader" />
 
             
 
-            . The <see
-             cref="M:System.IO.TextReader.Dispose" />
+            . The <see cref="M:System.IO.TextReader.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.IO.TextReader" />
+             method leaves the <see cref="T:System.IO.TextReader" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.IO.TextReader.Dispose" />
+             in an unusable state. After calling <see cref="M:System.IO.TextReader.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.IO.TextReader" />
+            , you must release all references to the <see cref="T:System.IO.TextReader" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.IO.TextReader" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.IO.TextReader" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -236,8 +220,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -247,23 +230,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.IO.TextReader.Dispose" />
+              >Always call <see cref="M:System.IO.TextReader.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.IO.TextReader" />
+               before you release your last reference to the <see cref="T:System.IO.TextReader" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.IO.TextReader" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.IO.TextReader" />
 
               
 
-               object's <see
-               cref="M:System.Object.Finalize" />
+               object's <see cref="M:System.Object.Finalize" />
 
               
 
@@ -274,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.IO.TextReader" />
+            >Releases all resources used by the <see cref="T:System.IO.TextReader" />
 
             
 
@@ -310,36 +288,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. By default, this method specifies the <paramref
-             name="disposing" />
+             method. By default, this method specifies the <paramref name="disposing" />
 
             
 
-             parameter as true. <see
-             cref="M:System.Object.Finalize" />
+             parameter as true. <see cref="M:System.Object.Finalize" />
 
             
 
-             specifies the <paramref
-             name="disposing" />
+             specifies the <paramref name="disposing" />
 
             
 
              parameter as false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.TextReader" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.TextReader" />
 
             
 
@@ -349,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.TextReader" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.TextReader" />
 
             
 
@@ -358,7 +329,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -392,8 +367,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reading from the <see
-             cref="F:System.IO.TextReader.Null" />
+            >Reading from the <see cref="F:System.IO.TextReader.Null" />
 
             
 
@@ -402,13 +376,11 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="M:System.IO.TextReader.Read" />
+                >The <see cref="M:System.IO.TextReader.Read" />
 
                 
 
-                 and <see
-                 cref="M:System.IO.TextReader.Peek" />
+                 and <see cref="M:System.IO.TextReader.Peek" />
 
                 
 
@@ -417,8 +389,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.IO.TextReader.ReadBlock(System.Char[],System.Int32,System.Int32)" />
+                >The <see cref="M:System.IO.TextReader.ReadBlock(System.Char[],System.Int32,System.Int32)" />
 
                 
 
@@ -427,8 +398,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.IO.TextReader.ReadLine" />
+                >The <see cref="M:System.IO.TextReader.ReadLine" />
 
                 
 
@@ -437,8 +407,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="M:System.IO.TextReader.ReadToEnd" />
+                >The <see cref="M:System.IO.TextReader.ReadToEnd" />
 
                 
 
@@ -476,39 +445,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IO.TextReader.Peek" />
+            >The <see cref="M:System.IO.TextReader.Peek" />
 
             
 
-             method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see
-             cref="T:System.Char" />
+             method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see cref="T:System.Char" />
 
             
 
              type.</para
           >
           <para
-            >The current position of the <see
-             cref="T:System.IO.TextReader" />
+            >The current position of the <see cref="T:System.IO.TextReader" />
 
             
 
              is not changed by this operation. The returned value is -1 if no more characters are available. The default implementation returns -1.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.Peek" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.Peek" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.Peek" />
+             method, see the <see cref="M:System.IO.StreamReader.Peek" />
 
             
 
@@ -548,18 +511,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.Read" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.Read" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.Read" />
+             method, see the <see cref="M:System.IO.StreamReader.Read" />
 
             
 
@@ -610,26 +570,22 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           ) &gt; <paramref
-           name="buffer" />
+           ) &gt; <paramref name="buffer" />
           <see langword="." />
 
           
@@ -642,53 +598,43 @@
 
             
 
-            0<paramref
-             name=" " />
+            0<paramref name=" " />
           </para>
-          <para>
-            <paramref name="-" />
+          <para><paramref name="-" />
 
             
 
-             or-</para
-          >
-          <para>
-            <paramref name="count &lt; " />
+             or-</para>
+          <para><paramref name="count &lt; " />
 
             
 
-             0.</para
-          >
+             0.</para>
         </exception>
         <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns after either <paramref
-             name="count" />
+            >This method returns after either <paramref name="count" />
 
             
 
-             characters are read or the end of the file is reached. <see
-             cref="M:System.IO.TextReader.ReadBlock(System.Char[],System.Int32,System.Int32)" />
+             characters are read or the end of the file is reached. <see cref="M:System.IO.TextReader.ReadBlock(System.Char[],System.Int32,System.Int32)" />
 
             
 
              is a blocking version of this method.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.Read(System.Char[],System.Int32,System.Int32)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.Read(System.Char[],System.Int32,System.Int32)" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.Read(System.Char[],System.Int32,System.Int32)" />
+             method, see the <see cref="M:System.IO.StreamReader.Read(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -702,8 +648,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of characters that have been read. The number will be less than or equal to <paramref
-             name="count" />
+            >The number of characters that have been read. The number will be less than or equal to <paramref name="count" />
 
             
 
@@ -711,41 +656,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current source. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="buffer" />
+          The position in <paramref name="buffer" />
 
           
 
            at which to begin writing. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -779,26 +732,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task completes after either the number of characters specified by the <paramref
-             name="count" />
+            >The task completes after either the number of characters specified by the <paramref name="count" />
 
             
 
              parameter are read or the end of the file is reached. </para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.ReadAsync(System.Char[],System.Int32,System.Int32)" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.ReadAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.ReadAsync(System.Char[],System.Int32,System.Int32)" />
+             method, see the <see cref="M:System.IO.StreamReader.ReadAsync(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -812,8 +761,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -821,41 +769,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current source.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="buffer" />
+          The position in <paramref name="buffer" />
 
           
 
            at which to begin writing.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -896,26 +852,22 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentException"
-          >(<paramref
-           name="index" />
+          >(<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           - 1) &gt; <paramref
-           name="buffer" />
+           - 1) &gt; <paramref name="buffer" />
           <see langword="." />
 
           
@@ -928,43 +880,35 @@
 
             
 
-            0<paramref
-             name=" " />
+            0<paramref name=" " />
           </para>
-          <para>
-            <paramref name="-" />
+          <para><paramref name="-" />
 
             
 
-             or-</para
-          >
-          <para>
-            <paramref name="count &lt; " />
+             or-</para>
+          <para><paramref name="count &lt; " />
 
             
 
-             0.</para
-          >
+             0.</para>
         </exception>
         <exception cref="T:System.IO.IOException"> An I/O error occurred.</exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The position of the underlying text reader is advanced by the number of characters that were read into <paramref
-             name="buffer" />
+            >The position of the underlying text reader is advanced by the number of characters that were read into <paramref name="buffer" />
 
             
 
             .</para
           >
           <para
-            >The method blocks until either <paramref
-             name="count" />
+            >The method blocks until either <paramref name="count" />
 
             
 
-             characters are read, or all characters have been read. This is a blocking version of <see
-             cref="M:System.IO.TextReader.Read" />
+             characters are read, or all characters have been read. This is a blocking version of <see cref="M:System.IO.TextReader.Read" />
 
             
 
@@ -978,8 +922,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of characters that have been read. The number will be less than or equal to <paramref
-             name="count" />
+            >The number of characters that have been read. The number will be less than or equal to <paramref name="count" />
 
             
 
@@ -987,41 +930,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, this parameter contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, this parameter contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            -1) replaced by the characters read from the current source. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="buffer" />
+          The position in <paramref name="buffer" />
 
           
 
            at which to begin writing.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1055,8 +1006,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The task does not complete until either the number of characters specified by the <paramref
-             name="count" />
+            >The task does not complete until either the number of characters specified by the <paramref name="count" />
 
             
 
@@ -1070,8 +1020,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -1079,41 +1028,49 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          When this method returns, contains the specified character array with the values between <paramref
-           name="index" />
+          When this method returns, contains the specified character array with the values between <paramref name="index" />
 
           
 
-           and (<paramref
-           name="index" />
+           and (<paramref name="index" />
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
            - 1) replaced by the characters read from the current source.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position in <paramref
-           name="buffer" />
+          The position in <paramref name="buffer" />
 
           
 
            at which to begin writing.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1148,7 +1105,9 @@
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The number of characters in the next line is larger than <see
-           cref="F:System.Int32.MaxValue" qualify="true" />
+            cref="F:System.Int32.MaxValue"
+            qualify="true"
+          />
 
           
 
@@ -1157,62 +1116,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A line is defined as a sequence of characters followed by a carriage return (0x000d), a line feed (0x000a), a carriage return followed by a line feed, <see
-             cref="P:System.Environment.NewLine" />
+            >A line is defined as a sequence of characters followed by a carriage return (0x000d), a line feed (0x000a), a carriage return followed by a line feed, <see cref="P:System.Environment.NewLine" />
 
             
 
             , or the end-of-stream marker. The string that is returned does not contain the terminating carriage return or line feed. The return value is null if the end of the input stream has been reached.</para
           >
           <para
-            >If the method throws an <see
-             cref="T:System.OutOfMemoryException" />
+            >If the method throws an <see cref="T:System.OutOfMemoryException" />
 
             
 
-             exception, the reader's position in the underlying <see
-             cref="T:System.IO.Stream" />
+             exception, the reader's position in the underlying <see cref="T:System.IO.Stream" />
 
             
 
-             is advanced by the number of characters the method was able to read, but the characters that were already read into the internal <see
-             cref="M:System.IO.TextReader.ReadLine" />
+             is advanced by the number of characters the method was able to read, but the characters that were already read into the internal <see cref="M:System.IO.TextReader.ReadLine" />
 
             
 
-             buffer are discarded. Because the position of the reader in the stream cannot be changed, the characters that were already read are unrecoverable and can be accessed only by reinitializing the <see
-             cref="T:System.IO.TextReader" />
+             buffer are discarded. Because the position of the reader in the stream cannot be changed, the characters that were already read are unrecoverable and can be accessed only by reinitializing the <see cref="T:System.IO.TextReader" />
 
             
 
-             object. If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see
-             cref="T:System.IO.Stream" />
+             object. If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see cref="T:System.IO.Stream" />
 
             
 
              also needs to be reinitialized.</para
           >
           <para
-            >To avoid such a situation and produce robust code you should use the <see
-             cref="M:System.IO.TextReader.Read" />
+            >To avoid such a situation and produce robust code you should use the <see cref="M:System.IO.TextReader.Read" />
 
             
 
              method and store the read characters in a preallocated buffer.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.ReadLine" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.ReadLine" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.ReadLine" />
+             method, see the <see cref="M:System.IO.StreamReader.ReadLine" />
 
             
 
@@ -1251,18 +1200,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.ReadLineAsync" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.ReadLineAsync" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.ReadLineAsync" />
+             method, see the <see cref="M:System.IO.StreamReader.ReadLineAsync" />
 
             
 
@@ -1276,8 +1222,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -1313,7 +1258,9 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The number of characters from the current position to the end of the underlying stream is larger than <see
-           cref="F:System.Int32.MaxValue" qualify="true" />
+            cref="F:System.Int32.MaxValue"
+            qualify="true"
+          />
 
           
 
@@ -1322,54 +1269,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the method throws an <see
-             cref="T:System.OutOfMemoryException" />
+            >If the method throws an <see cref="T:System.OutOfMemoryException" />
 
             
 
-             exception, the reader's position in the underlying <see
-             cref="T:System.IO.Stream" />
+             exception, the reader's position in the underlying <see cref="T:System.IO.Stream" />
 
             
 
-             is advanced by the number of characters the method was able to read, but the characters that were already read into the internal <see
-             cref="M:System.IO.TextReader.ReadToEnd" />
+             is advanced by the number of characters the method was able to read, but the characters that were already read into the internal <see cref="M:System.IO.TextReader.ReadToEnd" />
 
             
 
-             buffer are discarded. Because the position of the reader in the stream cannot be changed, the characters that were already read are unrecoverable and can be accessed only by reinitializing the <see
-             cref="T:System.IO.TextReader" />
+             buffer are discarded. Because the position of the reader in the stream cannot be changed, the characters that were already read are unrecoverable and can be accessed only by reinitializing the <see cref="T:System.IO.TextReader" />
 
             
 
-            . If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see
-             cref="T:System.IO.Stream" />
+            . If the initial position within the stream is unknown or the stream does not support seeking, the underlying <see cref="T:System.IO.Stream" />
 
             
 
              also needs to be reinitialized.</para
           >
           <para
-            >To avoid such a situation and produce robust code you should use the <see
-             cref="M:System.IO.TextReader.Read" />
+            >To avoid such a situation and produce robust code you should use the <see cref="M:System.IO.TextReader.Read" />
 
             
 
              method and store the read characters in a preallocated buffer.</para
           >
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.ReadToEnd" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.ReadToEnd" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.ReadToEnd" />
+             method, see the <see cref="M:System.IO.StreamReader.ReadToEnd" />
 
             
 
@@ -1408,18 +1346,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.TextReader" />
+            >The <see cref="T:System.IO.TextReader" />
 
             
 
-             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see
-             cref="M:System.IO.TextReader.ReadToEndAsync" />
+             class is an abstract class. Therefore, you do not instantiate it in your code. For an example of using the <see cref="M:System.IO.TextReader.ReadToEndAsync" />
 
             
 
-             method, see the <see
-             cref="M:System.IO.StreamReader.ReadToEndAsync" />
+             method, see the <see cref="M:System.IO.StreamReader.ReadToEndAsync" />
 
             
 
@@ -1433,8 +1368,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A task that represents the asynchronous read operation. The value of the <paramref
-             name="TResult" />
+            >A task that represents the asynchronous read operation. The value of the <paramref name="TResult" />
 
             
 
@@ -1470,13 +1404,11 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException"
-          >The <paramref
-           name="reader" />
+          >The <paramref name="reader" />
 
           
 
-           parameter is <see
-           langword="null" />
+           parameter is <see langword="null" />
 
           
 
@@ -1485,8 +1417,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method returns a class that wraps around the specified <see
-             cref="T:System.IO.TextReader" />
+            >The current method returns a class that wraps around the specified <see cref="T:System.IO.TextReader" />
 
             
 
@@ -1500,8 +1431,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A thread-safe <see
-             cref="T:System.IO.TextReader" />
+            >A thread-safe <see cref="T:System.IO.TextReader" />
 
             
 
@@ -1509,7 +1439,11 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1529,13 +1463,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.IO.TextReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.IO.TextReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.IDisposable" />
+             instance is cast to an <see cref="T:System.IDisposable" />
 
             
 
@@ -1545,8 +1477,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.IDisposable.Dispose" />
+            >For a description of this member, see <see cref="M:System.IDisposable.Dispose" />
 
             
 

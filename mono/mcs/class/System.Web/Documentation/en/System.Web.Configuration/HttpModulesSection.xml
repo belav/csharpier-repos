@@ -17,21 +17,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.HttpModulesSection" />
+        >The <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
         
 
          class provides a way to programmatically access and modify the httpModules section of a configuration file.</para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.HttpModuleAction" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.HttpModuleAction" />
 
         
 
-         and the <see
-         cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+         and the <see cref="T:System.Web.Configuration.HttpModuleActionCollection" />
 
         
 
@@ -39,18 +36,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.HttpModulesSection" />
+          >The <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
           
 
-           can read and write information from and to the related section of the configuration file according to the section property <see
-           cref="P:System.Configuration.SectionInformation.AllowDefinition" />
+           can read and write information from and to the related section of the configuration file according to the section property <see cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
           
 
-           whose value is <see
-           cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+           whose value is <see cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
 
           
 
@@ -74,18 +68,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.HttpModulesSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.HttpModulesSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.HttpModulesSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -95,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.HttpModulesSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
             
 
@@ -132,18 +122,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+            >Gets the <see cref="T:System.Web.Configuration.HttpModuleActionCollection" />
 
             
 
-             of <see
-             cref="T:System.Web.Configuration.HttpModuleAction" />
+             of <see cref="T:System.Web.Configuration.HttpModuleAction" />
 
             
 
-             modules contained by the <see
-             cref="T:System.Web.Configuration.HttpModulesSection" />
+             modules contained by the <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
             
 
@@ -174,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the properties collection for the <see
-             cref="T:System.Web.Configuration.HttpModulesSection" />
+            >Gets the properties collection for the <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
             
 

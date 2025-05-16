@@ -31,123 +31,102 @@
 
         
 
-         is used together with the <see
-         cref="T:System.Diagnostics.Process" />
+         is used together with the <see cref="T:System.Diagnostics.Process" />
 
         
 
-         component. When you start a process using the <see
-         cref="T:System.Diagnostics.Process" />
+         component. When you start a process using the <see cref="T:System.Diagnostics.Process" />
 
         
 
          class, you have access to process information in addition to that available when attaching to a running process.</para
       >
       <para
-        >You can use the <see
-         cref="T:System.Diagnostics.ProcessStartInfo" />
+        >You can use the <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
         
 
-         class for better control over the process you start. You must at least set the <see
-         cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+         class for better control over the process you start. You must at least set the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
         
 
-         property, either manually or using the constructor. The file name is any application or document. Here a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
-        >Folder Options</ui>
+         property, either manually or using the constructor. The file name is any application or document. Here a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui>Folder Options</ui>
 
         
 
-         dialog box, which is available through the operating system. The <ui
-        >Advanced</ui>
+         dialog box, which is available through the operating system. The <ui>Advanced</ui>
 
         
 
          button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.</para
       >
       <para
-        >In addition, you can set other properties that define actions to take with that file. You can specify a value specific to the type of the <see
-         cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+        >In addition, you can set other properties that define actions to take with that file. You can specify a value specific to the type of the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
         
 
-         property for the <see
-         cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+         property for the <see cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
 
         
 
-         property. For example, you can specify "print" for a document type. Additionally, you can specify <see
-         cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+         property. For example, you can specify "print" for a document type. Additionally, you can specify <see cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
 
         
 
-         property values to be command-line arguments to pass to the file's open procedure. For example, if you specify a text editor application in the <see
-         cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+         property values to be command-line arguments to pass to the file's open procedure. For example, if you specify a text editor application in the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
         
 
-         property, you can use the <see
-         cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+         property, you can use the <see cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
 
         
 
          property to specify a text file to be opened by the editor.</para
       >
       <para
-        >Standard input is usually the keyboard, and standard output and standard error are usually the monitor screen. However, you can use the <see
-         cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardInput" />
+        >Standard input is usually the keyboard, and standard output and standard error are usually the monitor screen. However, you can use the <see cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardInput" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
+        , <see cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
 
         
 
-        , and <see
-         cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardError" />
+        , and <see cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardError" />
 
         
 
-         properties to cause the process to get input from or return output to a file or other device. If you use the <see
-         cref="P:System.Diagnostics.Process.StandardInput" />
+         properties to cause the process to get input from or return output to a file or other device. If you use the <see cref="P:System.Diagnostics.Process.StandardInput" />
 
         
 
-        , <see
-         cref="P:System.Diagnostics.Process.StandardOutput" />
+        , <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
         
 
-        , or <see
-         cref="P:System.Diagnostics.Process.StandardError" />
+        , or <see cref="P:System.Diagnostics.Process.StandardError" />
 
         
 
-         properties on the <see
-         cref="T:System.Diagnostics.Process" />
+         properties on the <see cref="T:System.Diagnostics.Process" />
 
         
 
-         component, you must first set the corresponding value on the <see
-         cref="T:System.Diagnostics.ProcessStartInfo" />
+         component, you must first set the corresponding value on the <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
         
 
          property. Otherwise, the system throws an exception when you read or write to the stream.</para
       >
       <para
-        >Set <see
-         cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+        >Set <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
         
 
          to specify whether to start the process by using the operating system shell.</para
       >
       <para
-        >You can change the value of any <see
-         cref="T:System.Diagnostics.ProcessStartInfo" />
+        >You can change the value of any <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
         
 
@@ -155,13 +134,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the immediate caller does not have full-trust permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when the immediate caller does not have full-trust permission. For details about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
@@ -195,36 +172,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set at least the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >You must set at least the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-             property before you start the process. The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
-            >Folder Options</ui>
+             property before you start the process. The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui>Folder Options</ui>
 
             
 
-             dialog box, which is available through the operating system. The <ui
-            >Advanced</ui>
+             dialog box, which is available through the operating system. The <ui>Advanced</ui>
 
             
 
              button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.</para
           >
           <para
-            >Optionally, you can also set other properties before you start the process. The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+            >Optionally, you can also set other properties before you start the process. The <see cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
 
             
 
-             property supplies actions to take, such as "print", with the file indicated in the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+             property supplies actions to take, such as "print", with the file indicated in the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-             property. The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+             property. The <see cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
 
             
 
@@ -234,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.ProcessStartInfo" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
             
 
@@ -262,8 +232,7 @@
       </Parameters>
       <Docs>
         <param name="filename"
-          >Value the <see
-           cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+          >Value the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
           
 
@@ -272,21 +241,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
-            >Folder Options</ui>
+            >The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui>Folder Options</ui>
 
             
 
-             dialog box, which is available through the operating system. The <ui
-            >Advanced</ui>
+             dialog box, which is available through the operating system. The <ui>Advanced</ui>
 
             
 
              button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.</para
           >
           <para
-            >You can change the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >You can change the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
@@ -296,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.ProcessStartInfo" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
             
 
@@ -331,26 +296,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
-            >Folder Options</ui>
+            >The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui>Folder Options</ui>
 
             
 
-             dialog box, which is available through the operating system. The <ui
-            >Advanced</ui>
+             dialog box, which is available through the operating system. The <ui>Advanced</ui>
 
             
 
              button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.</para
           >
           <para
-            >You can change the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >You can change the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-             or <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+             or <see cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
 
             
 
@@ -360,8 +321,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.ProcessStartInfo" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
             
 
@@ -369,7 +329,11 @@
           >
         </summary>
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -409,8 +373,7 @@
       <Parameters></Parameters>
       <Docs>
         <value
-          >Arguments that should be passed to the program specified in <see
-           cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+          >Arguments that should be passed to the program specified in <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
           
 
@@ -458,23 +421,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+            >If the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             property is true or the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+             property is true or the <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+             and <see cref="P:System.Diagnostics.ProcessStartInfo.Password" />
 
             
 
-             properties are not null, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.CreateNoWindow" />
+             properties are not null, the <see cref="P:System.Diagnostics.ProcessStartInfo.CreateNoWindow" />
 
             
 
@@ -552,38 +511,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although you cannot set the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.EnvironmentVariables" />
+            >Although you cannot set the <see cref="P:System.Diagnostics.ProcessStartInfo.EnvironmentVariables" />
 
             
 
-             property, you can modify the <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             property, you can modify the <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
-             returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.EnvironmentVariables.Add("TempPath", "C:\\Temp").  You must set the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             returned by the property. For example, the following code adds a TempPath environment variable: myProcess.StartInfo.EnvironmentVariables.Add("TempPath", "C:\\Temp").  You must set the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             property to false to start the process after changing the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.EnvironmentVariables" />
+             property to false to start the process after changing the <see cref="P:System.Diagnostics.ProcessStartInfo.EnvironmentVariables" />
 
             
 
-             property. If <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property. If <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is true, an <see
-             cref="T:System.InvalidOperationException" />
+             is true, an <see cref="T:System.InvalidOperationException" />
 
             
 
-             is thrown when the <see
-             cref="M:System.Diagnostics.Process.Start" />
+             is thrown when the <see cref="M:System.Diagnostics.Process.Start" />
 
             
 
@@ -630,8 +582,7 @@
 
               
 
-               must be true if you want to set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
+               must be true if you want to set <see cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
 
               
 
@@ -674,13 +625,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
+            >If <see cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
 
             
 
-             is true, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialogParentHandle" />
+             is true, the <see cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialogParentHandle" />
 
             
 
@@ -731,54 +680,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set at least the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >You must set at least the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-             property before you start the process. The file name is any application or document. A document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
-            >Folder Options</ui>
+             property before you start the process. The file name is any application or document. A document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui>Folder Options</ui>
 
             
 
-             dialog box, which is available through the operating system. The <ui
-            >Advanced</ui>
+             dialog box, which is available through the operating system. The <ui>Advanced</ui>
 
             
 
              button leads to a dialog box that shows whether there is an open action associated with a specific registered file type.</para
           >
           <para
-            >The set of file types available to you depends in part on the value of the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+            >The set of file types available to you depends in part on the value of the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             property. If <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property. If <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is true, you can start any document and perform operations on the file, such as printing, with the <see
-             cref="T:System.Diagnostics.Process" />
+             is true, you can start any document and perform operations on the file, such as printing, with the <see cref="T:System.Diagnostics.Process" />
 
             
 
-             component. When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             component. When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is false, you can start only executables with the <see
-             cref="T:System.Diagnostics.Process" />
+             is false, you can start only executables with the <see cref="T:System.Diagnostics.Process" />
 
             
 
              component.</para
           >
           <para
-            >You can start a ClickOnce application by setting the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >You can start a ClickOnce application by setting the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
@@ -845,18 +785,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >   The <see
-               cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+              >   The <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
               
 
-               property must be set if <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+               property must be set if <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
               
 
-               and <see
-               cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+               and <see cref="P:System.Diagnostics.ProcessStartInfo.Password" />
 
               
 
@@ -865,23 +802,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >   Setting the <see
-               cref="P:System.Diagnostics.ProcessStartInfo.Domain" />
+              >   Setting the <see cref="P:System.Diagnostics.ProcessStartInfo.Domain" />
 
               
 
-              , <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+              , <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
               
 
-              , and the <see
-               cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+              , and the <see cref="P:System.Diagnostics.ProcessStartInfo.Password" />
 
               
 
-               properties in a <see
-               cref="T:System.Diagnostics.ProcessStartInfo" />
+               properties in a <see cref="T:System.Diagnostics.ProcessStartInfo" />
 
               
 
@@ -889,26 +822,22 @@
             >
           </block>
           <para
-            >A <see
-             cref="T:System.Security.SecureString" />
+            >A <see cref="T:System.Security.SecureString" />
 
             
 
-             object is like a <see
-             cref="T:System.String" />
+             object is like a <see cref="T:System.String" />
 
             
 
-             object in that it has a text value. However, the value of a <see
-             cref="T:System.Security.SecureString" />
+             object in that it has a text value. However, the value of a <see cref="T:System.Security.SecureString" />
 
             
 
              object is automatically encrypted, it can be modified until your application marks it as read-only, and it can be deleted from computer memory by either your application or the .NET Framework garbage collector.</para
           >
           <para
-            >For more information about secure strings and an example of how to obtain a password to set this property, see the <see
-             cref="T:System.Security.SecureString" />
+            >For more information about secure strings and an example of how to obtain a password to set this property, see the <see cref="T:System.Security.SecureString" />
 
             
 
@@ -916,23 +845,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If you provide a value for the <see
-               cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+              >If you provide a value for the <see cref="P:System.Diagnostics.ProcessStartInfo.Password" />
 
               
 
-               property, the <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+               property, the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
               
 
-               property must be false, or an <see
-               cref="T:System.InvalidOperationException" />
+               property must be false, or an <see cref="T:System.InvalidOperationException" />
 
               
 
-               will be thrown when the <see
-               cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+               will be thrown when the <see cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
 
               
 
@@ -975,13 +900,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Diagnostics.Process" />
+            >When a <see cref="T:System.Diagnostics.Process" />
 
             
 
-             writes text to its standard error stream, that text is typically displayed on the console. By redirecting the <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+             writes text to its standard error stream, that text is typically displayed on the console. By redirecting the <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -989,18 +912,15 @@
           >
           <block subset="none" type="note">
             <para
-              >You must set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+              >You must set <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
               
 
-               to false if you want to set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardError" />
+               to false if you want to set <see cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardError" />
 
               
 
-               to true. Otherwise, reading from the <see
-               cref="P:System.Diagnostics.Process.StandardError" />
+               to true. Otherwise, reading from the <see cref="P:System.Diagnostics.Process.StandardError" />
 
               
 
@@ -1008,46 +928,38 @@
             >
           </block>
           <para
-            >The redirected <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+            >The redirected <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
-             stream can be read synchronously or asynchronously. Methods such as <see
-             cref="M:System.IO.StreamReader.Read" />
+             stream can be read synchronously or asynchronously. Methods such as <see cref="M:System.IO.StreamReader.Read" />
 
             
 
-            , <see
-             cref="M:System.IO.StreamReader.ReadLine" />
+            , <see cref="M:System.IO.StreamReader.ReadLine" />
 
             
 
-             and <see
-             cref="M:System.IO.StreamReader.ReadToEnd" />
+             and <see cref="M:System.IO.StreamReader.ReadToEnd" />
 
             
 
-             perform synchronous read operations on the error output stream of the process. These synchronous read operations do not complete until the associated <see
-             cref="T:System.Diagnostics.Process" />
+             perform synchronous read operations on the error output stream of the process. These synchronous read operations do not complete until the associated <see cref="T:System.Diagnostics.Process" />
 
             
 
-             writes to its <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+             writes to its <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
              stream, or closes the stream.</para
           >
           <para
-            >In contrast, <see
-             cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
+            >In contrast, <see cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
 
             
 
-             starts asynchronous read operations on the <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+             starts asynchronous read operations on the <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -1055,8 +967,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The application that is processing the asynchronous output should call the <see
-               cref="M:System.Diagnostics.Process.WaitForExit" />
+              >The application that is processing the asynchronous output should call the <see cref="M:System.Diagnostics.Process.WaitForExit" />
 
               
 
@@ -1064,8 +975,7 @@
             >
           </block>
           <para
-            >Synchronous read operations introduce a dependency between the caller reading from the <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+            >Synchronous read operations introduce a dependency between the caller reading from the <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -1086,8 +996,7 @@
  string error = p.StandardError.ReadToEnd();
  p.WaitForExit();</code>
           <para
-            >The code example avoids a deadlock condition by calling p.StandardError.ReadToEnd before p.WaitForExit. A deadlock condition can result if the parent process calls p.WaitForExit before p.StandardError.ReadToEnd and the child process writes enough text to fill the redirected stream. The parent process would wait indefinitely for the child process to exit. The child process would wait indefinitely for the parent to read from the full <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+            >The code example avoids a deadlock condition by calling p.StandardError.ReadToEnd before p.WaitForExit. A deadlock condition can result if the parent process calls p.WaitForExit before p.StandardError.ReadToEnd and the child process writes enough text to fill the redirected stream. The parent process would wait indefinitely for the child process to exit. The child process would wait indefinitely for the parent to read from the full <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -1104,18 +1013,15 @@
  string error = p.StandardError.ReadToEnd();
  p.WaitForExit();</code>
           <para
-            >The code example avoids the deadlock condition by performing asynchronous read operations on the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >The code example avoids the deadlock condition by performing asynchronous read operations on the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
-             stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+             stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
-             stream. The child process would wait indefinitely for the parent to read from the full <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+             stream. The child process would wait indefinitely for the parent to read from the full <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -1126,8 +1032,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the error output of an application is written to the <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+            >Gets or sets a value that indicates whether the error output of an application is written to the <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -1165,13 +1070,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Diagnostics.Process" />
+            >A <see cref="T:System.Diagnostics.Process" />
 
             
 
-             can read input text from its standard input stream, typically the keyboard. By redirecting the <see
-             cref="P:System.Diagnostics.Process.StandardInput" />
+             can read input text from its standard input stream, typically the keyboard. By redirecting the <see cref="P:System.Diagnostics.Process.StandardInput" />
 
             
 
@@ -1179,18 +1082,15 @@
           >
           <block subset="none" type="note">
             <para
-              >You must set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+              >You must set <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
               
 
-               to false if you want to set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardInput" />
+               to false if you want to set <see cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardInput" />
 
               
 
-               to true. Otherwise, writing to the <see
-               cref="P:System.Diagnostics.Process.StandardInput" />
+               to true. Otherwise, writing to the <see cref="P:System.Diagnostics.Process.StandardInput" />
 
               
 
@@ -1201,8 +1101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the input for an application is read from the <see
-             cref="P:System.Diagnostics.Process.StandardInput" />
+            >Gets or sets a value indicating whether the input for an application is read from the <see cref="P:System.Diagnostics.Process.StandardInput" />
 
             
 
@@ -1240,13 +1139,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Diagnostics.Process" />
+            >When a <see cref="T:System.Diagnostics.Process" />
 
             
 
-             writes text to its standard stream, that text is typically displayed on the console. By redirecting the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+             writes text to its standard stream, that text is typically displayed on the console. By redirecting the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
@@ -1254,18 +1151,15 @@
           >
           <block subset="none" type="note">
             <para
-              >You must set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+              >You must set <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
               
 
-               to false if you want to set <see
-               cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
+               to false if you want to set <see cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
 
               
 
-               to true. Otherwise, reading from the <see
-               cref="P:System.Diagnostics.Process.StandardOutput" />
+               to true. Otherwise, reading from the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
               
 
@@ -1273,46 +1167,38 @@
             >
           </block>
           <para
-            >The redirected <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >The redirected <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
-             stream can be read synchronously or asynchronously. Methods such as <see
-             cref="M:System.IO.StreamReader.Read" />
+             stream can be read synchronously or asynchronously. Methods such as <see cref="M:System.IO.StreamReader.Read" />
 
             
 
-            , <see
-             cref="M:System.IO.StreamReader.ReadLine" />
+            , <see cref="M:System.IO.StreamReader.ReadLine" />
 
             
 
-            , and <see
-             cref="M:System.IO.StreamReader.ReadToEnd" />
+            , and <see cref="M:System.IO.StreamReader.ReadToEnd" />
 
             
 
-             perform synchronous read operations on the output stream of the process. These synchronous read operations do not complete until the associated <see
-             cref="T:System.Diagnostics.Process" />
+             perform synchronous read operations on the output stream of the process. These synchronous read operations do not complete until the associated <see cref="T:System.Diagnostics.Process" />
 
             
 
-             writes to its <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+             writes to its <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
              stream, or closes the stream.</para
           >
           <para
-            >In contrast, <see
-             cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
+            >In contrast, <see cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
 
             
 
-             starts asynchronous read operations on the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+             starts asynchronous read operations on the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
@@ -1320,8 +1206,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The application that is processing the asynchronous output should call the <see
-               cref="M:System.Diagnostics.Process.WaitForExit" />
+              >The application that is processing the asynchronous output should call the <see cref="M:System.Diagnostics.Process.WaitForExit" />
 
               
 
@@ -1329,8 +1214,7 @@
             >
           </block>
           <para
-            >Synchronous read operations introduce a dependency between the caller reading from the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >Synchronous read operations introduce a dependency between the caller reading from the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
@@ -1351,8 +1235,7 @@
  string output = p.StandardOutput.ReadToEnd();
  p.WaitForExit();</code>
           <para
-            >The code example avoids a deadlock condition by calling p.StandardOutput.ReadToEnd before p.WaitForExit. A deadlock condition can result if the parent process calls p.WaitForExit before p.StandardOutput.ReadToEnd and the child process writes enough text to fill the redirected stream. The parent process would wait indefinitely for the child process to exit. The child process would wait indefinitely for the parent to read from the full <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >The code example avoids a deadlock condition by calling p.StandardOutput.ReadToEnd before p.WaitForExit. A deadlock condition can result if the parent process calls p.WaitForExit before p.StandardOutput.ReadToEnd and the child process writes enough text to fill the redirected stream. The parent process would wait indefinitely for the child process to exit. The child process would wait indefinitely for the parent to read from the full <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
@@ -1369,18 +1252,15 @@
  string error = p.StandardError.ReadToEnd();
  p.WaitForExit();</code>
           <para
-            >The code example avoids the deadlock condition by performing asynchronous read operations on the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >The code example avoids the deadlock condition by performing asynchronous read operations on the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
-             stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+             stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
-             stream. The child process would wait indefinitely for the parent to read from the full <see
-             cref="P:System.Diagnostics.Process.StandardError" />
+             stream. The child process would wait indefinitely for the parent to read from the full <see cref="P:System.Diagnostics.Process.StandardError" />
 
             
 
@@ -1391,8 +1271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the output of an application is written to the <see
-             cref="P:System.Diagnostics.Process.StandardOutput" />
+            >Gets or sets a value that indicates whether the output of an application is written to the <see cref="P:System.Diagnostics.Process.StandardOutput" />
 
             
 
@@ -1423,13 +1302,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.StandardErrorEncoding" />
+            >If the value of the <see cref="P:System.Diagnostics.ProcessStartInfo.StandardErrorEncoding" />
 
             
 
-             property is null, the process uses the default standard error encoding for error output. The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.StandardErrorEncoding" />
+             property is null, the process uses the default standard error encoding for error output. The <see cref="P:System.Diagnostics.ProcessStartInfo.StandardErrorEncoding" />
 
             
 
@@ -1464,13 +1341,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.StandardOutputEncoding" />
+            >If the value of the <see cref="P:System.Diagnostics.ProcessStartInfo.StandardOutputEncoding" />
 
             
 
-             property is null, the process uses the default standard output encoding for the standard output. The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.StandardOutputEncoding" />
+             property is null, the process uses the default standard output encoding for the standard output. The <see cref="P:System.Diagnostics.ProcessStartInfo.StandardOutputEncoding" />
 
             
 
@@ -1505,18 +1380,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >   The <see
-               cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+              >   The <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
               
 
-               property must be set if <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+               property must be set if <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
               
 
-               and <see
-               cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+               and <see cref="P:System.Diagnostics.ProcessStartInfo.Password" />
 
               
 
@@ -1524,23 +1396,19 @@
             >
           </block>
           <para
-            >If the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+            >If the <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
             
 
-             property is not null or an empty string, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property is not null or an empty string, the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             property must be false, or an <see
-             cref="T:System.InvalidOperationException" />
+             property must be false, or an <see cref="T:System.InvalidOperationException" />
 
             
 
-             will be thrown when the <see
-             cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+             will be thrown when the <see cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
 
             
 
@@ -1584,23 +1452,19 @@
           <para>Setting this property to false enables you to redirect input, output, and error streams.</para>
           <block subset="none" type="note">
             <para
-              >   <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+              >   <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
               
 
-               must be false if the <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+               must be false if the <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
               
 
-               property is not null or an empty string, or an <see
-               cref="T:System.InvalidOperationException" />
+               property is not null or an empty string, or an <see cref="T:System.InvalidOperationException" />
 
               
 
-               will be thrown when the <see
-               cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+               will be thrown when the <see cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
 
               
 
@@ -1608,18 +1472,15 @@
             >
           </block>
           <para
-            >When you use the operating system shell to start processes, you can start any document (which is any registered file type associated with an executable that has a default open action) and perform operations on the file, such as printing, by using the <see
-             cref="T:System.Diagnostics.Process" />
+            >When you use the operating system shell to start processes, you can start any document (which is any registered file type associated with an executable that has a default open action) and perform operations on the file, such as printing, by using the <see cref="T:System.Diagnostics.Process" />
 
             
 
-             object. When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             object. When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is false, you can start only executables by using the <see
-             cref="T:System.Diagnostics.Process" />
+             is false, you can start only executables by using the <see cref="T:System.Diagnostics.Process" />
 
             
 
@@ -1631,8 +1492,7 @@
 
               
 
-               must be true if you set the <see
-               cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
+               must be true if you set the <see cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
 
               
 
@@ -1640,51 +1500,42 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+            >The <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
-             property behaves differently depending on the value of the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property behaves differently depending on the value of the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             property. When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property. When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is true, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+             is true, the <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
-             property specifies the location of the executable. If <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+             property specifies the location of the executable. If <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
              is an empty string, it is assumed that the current directory contains the executable.</para
           >
           <para
-            >When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+            >When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is false, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+             is false, the <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
-             property is not used to find the executable. Instead, it is used only by the process that is started and has meaning only within the context of the new process. When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property is not used to find the executable. Instead, it is used only by the process that is started and has meaning only within the context of the new process. When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is false, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+             is false, the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
@@ -1729,36 +1580,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each file name extension has its own set of verbs, which can be obtained by using the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
+            >Each file name extension has its own set of verbs, which can be obtained by using the <see cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
 
             
 
-             property. For example, the "print" verb will print a document specified by using <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+             property. For example, the "print" verb will print a document specified by using <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-            . The default verb can be specified by using an empty string (""). Examples of verbs are "Edit", "Open", "OpenAsReadOnly", "Print", and "Printto". You should use only verbs that appear in the set of verbs returned by the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
+            . The default verb can be specified by using an empty string (""). Examples of verbs are "Edit", "Open", "OpenAsReadOnly", "Print", and "Printto". You should use only verbs that appear in the set of verbs returned by the <see cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
 
             
 
              property.</para
           >
           <para
-            >When you use the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+            >When you use the <see cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
 
             
 
-             property, you must include the file name extension when you set the value of the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+             property, you must include the file name extension when you set the value of the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-             property. The file name does not need to have an extension if you manually enter a value for the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+             property. The file name does not need to have an extension if you manually enter a value for the <see cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
 
             
 
@@ -1768,8 +1613,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the verb to use when opening the application or document specified by the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >Gets or sets the verb to use when opening the application or document specified by the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
@@ -1803,31 +1647,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
+            >The <see cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
 
             
 
-             property enables you to determine the verbs that can be used with the file specified by the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+             property enables you to determine the verbs that can be used with the file specified by the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
-             property. You can set the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+             property. You can set the <see cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
 
             
 
              property to the value of any verb in the set. Examples of verbs are "Edit", "Open", "OpenAsReadOnly", "Print", and "Printto".</para
           >
           <para
-            >When you use the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
+            >When you use the <see cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
 
             
 
-             property, you must include the file name extension when you set the value of the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+             property, you must include the file name extension when you set the value of the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
@@ -1837,8 +1676,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the set of verbs associated with the type of file specified by the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+            >Gets the set of verbs associated with the type of file specified by the <see cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
             
 
@@ -1925,18 +1763,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+              >The <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
               
 
-               property must be set if <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+               property must be set if <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
               
 
-               and <see
-               cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+               and <see cref="P:System.Diagnostics.ProcessStartInfo.Password" />
 
               
 
@@ -1945,33 +1780,27 @@
           </block>
           <para>If the directory is already part of the system path variable, you do not have to repeat the directory's location in this property.</para>
           <para
-            >The <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+            >The <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
-             property behaves differently when <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property behaves differently when <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is true than when <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             is true than when <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is false. When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             is false. When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is true, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+             is true, the <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
-             property specifies the location of the executable. If <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+             property specifies the location of the executable. If <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
@@ -1979,8 +1808,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When <see
-               cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+              >When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
               
 
@@ -1988,13 +1816,11 @@
             >
           </block>
           <para
-            >When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+            >When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             is false, the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+             is false, the <see cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
             
 
@@ -2004,13 +1830,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+            >When the <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 
-             property is false, gets or sets the working directory for the process to be started. When <see
-             cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+             property is false, gets or sets the working directory for the process to be started. When <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
             
 

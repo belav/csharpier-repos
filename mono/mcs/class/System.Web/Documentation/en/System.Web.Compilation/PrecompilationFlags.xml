@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The PrecompilationFlags class defines the behavior of the build manager during precompilation. The <see
-         cref="T:System.Web.Compilation.ClientBuildManager" />
+        >The PrecompilationFlags class defines the behavior of the build manager during precompilation. The <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
         
 
-         class takes PrecompilationFlags as one of its constructor parameters. Precompilation can be performed programmatically through <see
-         cref="T:System.Web.Compilation.ClientBuildManager" />
+         class takes PrecompilationFlags as one of its constructor parameters. Precompilation can be performed programmatically through <see cref="T:System.Web.Compilation.ClientBuildManager" />
 
         
 
@@ -48,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
+            >An <see cref="T:System.Security.AllowPartiallyTrustedCallersAttribute" />
 
             
 

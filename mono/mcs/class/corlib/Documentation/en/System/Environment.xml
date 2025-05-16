@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Environment" />
+        >Use the <see cref="T:System.Environment" />
 
         
 
@@ -67,8 +66,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -80,8 +78,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property provides access to the program name and any arguments specified on the command line when the current process was started.</para>
           <para
-            >The program name can  include path information, but is not required to do so. Use the <see
-             cref="M:System.Environment.GetCommandLineArgs" />
+            >The program name can  include path information, but is not required to do so. Use the <see cref="M:System.Environment.GetCommandLineArgs" />
 
             
 
@@ -110,8 +107,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >A <see
-           cref="T:System.String" />
+          >A <see cref="T:System.String" />
 
           
 
@@ -174,16 +170,14 @@
           >The immediate caller does not have the required permission.</exception
         >
         <permission cref="T:System.Security.Permissions.EnvironmentPermission"
-          >Requires permission to read environment variables. See <see
-           cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
+          >Requires permission to read environment variables. See <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
 
           
 
           .</permission
         >
         <permission cref="T:System.Security.Permissions.SecurityPermission"
-          >Requires unmanaged code permission. See <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+          >Requires unmanaged code permission. See <see cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
 
           
 
@@ -192,21 +186,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <paramref
-             name="exitCode" />
+            >For the <paramref name="exitCode" />
 
             
 
              parameter, use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by the Windows operating system, see <see
-             cref="http://msdn.microsoft.com/library/ms681381.aspx">System Error Codes</see>
+              cref="http://msdn.microsoft.com/library/ms681381.aspx"
+              >System Error Codes</see
+            >
 
             
 
              in the Windows documentation.</para
           >
           <para
-            >Calling the <see
-             cref="M:System.Environment.Exit(System.Int32)" />
+            >Calling the <see cref="M:System.Environment.Exit(System.Int32)" />
 
             
 
@@ -242,8 +236,7 @@
             </item>
             <item>
               <para
-                >If <see
-                 cref="M:System.Environment.Exit(System.Int32)" />
+                >If <see cref="M:System.Environment.Exit(System.Int32)" />
 
                 
 
@@ -257,7 +250,11 @@
           <para>Terminates this process and gives the underlying operating system the specified exit code.</para>
         </summary>
         <param name="exitCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,8 +284,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -301,8 +297,7 @@ value returned by a process. The default value is zero.</para
           <para>If the Main method returns void, you can use this property to set the exit code that will be returned to the calling environment. If Main does not return void, this property is ignored. The initial value of this property is zero.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Environment.ExitCode" />
+              >The <see cref="P:System.Environment.ExitCode" />
 
               
 
@@ -311,7 +306,7 @@ value returned by a process. The default value is zero.</para
           </block>
           <para
             >Use a non-zero number to indicate an error. In your application, you can define your own error codes in an enumeration, and return the appropriate error code based on the scenario. For example, return a value of 1 to indicate that the required file is not present and a value of 2 to indicate that the file is in the wrong format. For a list of exit codes used by the Windows operating system, see <see
-             cref="http://msdn.microsoft.com/en-us/library/ms681381(v=vs.85)"
+              cref="http://msdn.microsoft.com/en-us/library/ms681381(v=vs.85)"
               >System Error Codes</see
             >
 
@@ -352,16 +347,14 @@ value returned by a process. The default value is zero.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >COM interop is used to retrieve the environment variables from the operating system. If the environment variables cannot be retrieved due to a COM error, the HRESULT that explains the cause of the failure is used to generate one of several possible exceptions; that is, the exception depends on the HRESULT. For more information about how the HRESULT is processed, see the Remarks section of the <see
-             cref="M:System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(System.Int32)" />
+            >COM interop is used to retrieve the environment variables from the operating system. If the environment variables cannot be retrieved due to a COM error, the HRESULT that explains the cause of the failure is used to generate one of several possible exceptions; that is, the exception depends on the HRESULT. For more information about how the HRESULT is processed, see the Remarks section of the <see cref="M:System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >Replacement only occurs for environment variables that are set. For example, suppose <paramref
-             name="name" />
+            >Replacement only occurs for environment variables that are set. For example, suppose <paramref name="name" />
 
             
 
@@ -378,7 +371,11 @@ value returned by a process. The default value is zero.</para
           <para>A string with each environment variable replaced by its value.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -409,31 +406,26 @@ value returned by a process. The default value is zero.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method terminates a process without running any active try/finally blocks or finalizers. </para>
           <para
-            >The <see
-             cref="M:System.Environment.FailFast(System.String)" />
+            >The <see cref="M:System.Environment.FailFast(System.String)" />
 
             
 
-             method writes the <paramref
-             name="message" />
+             method writes the <paramref name="message" />
 
             
 
-             string to the Windows Application event log, creates a dump of your application, and then terminates the current process. The <paramref
-             name="message" />
+             string to the Windows Application event log, creates a dump of your application, and then terminates the current process. The <paramref name="message" />
 
             
 
              string is also included in error reporting to Microsoft.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Environment.FailFast(System.String)" />
+            >Use the <see cref="M:System.Environment.FailFast(System.String)" />
 
             
 
-             method instead of the <see
-             cref="M:System.Environment.Exit(System.Int32)" />
+             method instead of the <see cref="M:System.Environment.Exit(System.Int32)" />
 
             
 
@@ -445,7 +437,11 @@ value returned by a process. The default value is zero.</para
           <para>Immediately terminates a process after writing a message to the Windows Application event log, and then includes the message in error reporting to Microsoft.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -483,62 +479,52 @@ value returned by a process. The default value is zero.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method terminates the process without running any active try/finally blocks or finalizers. </para>
           <para
-            >The <see
-             cref="M:System.Environment.FailFast(System.String,System.Exception)" />
+            >The <see cref="M:System.Environment.FailFast(System.String,System.Exception)" />
 
             
 
-             method writes the <paramref
-             name="message" />
+             method writes the <paramref name="message" />
 
             
 
              string to the Windows Application event log, creates a dump of your application, and then terminates the current process.</para
           >
           <para
-            >Error reporting to Microsoft includes <paramref
-             name="message" />
+            >Error reporting to Microsoft includes <paramref name="message" />
 
             
 
-             and <paramref
-             name="exception" />
+             and <paramref name="exception" />
 
             
 
-             information, which provides details used to classify the error. Although <paramref
-             name="exception" />
+             information, which provides details used to classify the error. Although <paramref name="exception" />
 
             
 
              is not handled because the process is terminated, the contextual information that raised the exception is still obtained.</para
           >
           <para
-            >If <paramref
-             name="exception" />
+            >If <paramref name="exception" />
 
             
 
-             is null, or if <paramref
-             name="exception" />
+             is null, or if <paramref name="exception" />
 
             
 
-             is not thrown, this method operates the same as the <see
-             cref="M:System.Environment.FailFast(System.String)" />
+             is not thrown, this method operates the same as the <see cref="M:System.Environment.FailFast(System.String)" />
 
             
 
              method overload. </para
           >
           <para
-            >Use the <see
-             cref="M:System.Environment.FailFast(System.String,System.Exception)" />
+            >Use the <see cref="M:System.Environment.FailFast(System.String,System.Exception)" />
 
             
 
-             method instead of the <see
-             cref="M:System.Environment.Exit(System.Int32)" />
+             method instead of the <see cref="M:System.Environment.Exit(System.Int32)" />
 
             
 
@@ -550,14 +536,22 @@ value returned by a process. The default value is zero.</para
           <para>Immediately terminates a process after writing a message to the Windows Application event log, and then includes the message and exception information in error reporting to Microsoft.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A message that explains why the process was terminated, or null if no explanation is provided.</param
         >
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -589,8 +583,7 @@ value returned by a process. The default value is zero.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first element in the array contains the file name of the executing program. If the file name is not available, the first element is equal to <see
-             cref="F:System.String.Empty" />
+            >The first element in the array contains the file name of the executing program. If the file name is not available, the first element is equal to <see cref="F:System.String.Empty" />
 
             
 
@@ -653,8 +646,7 @@ value returned by a process. The default value is zero.</para
             </item>
           </list>
           <para
-            >To obtain the command line as a single string, use the <see
-             cref="P:System.Environment.CommandLine" />
+            >To obtain the command line as a single string, use the <see cref="P:System.Environment.CommandLine" />
 
             
 
@@ -709,8 +701,7 @@ value returned by a process. The default value is zero.</para
           >The caller does not have the required permission.</exception
         >
         <permission cref="T:System.Security.Permissions.EnvironmentPermission"
-          >Requires permission to read environment variables. See <see
-           cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
+          >Requires permission to read environment variables. See <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
 
           
 
@@ -720,8 +711,7 @@ value returned by a process. The default value is zero.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Environment variable names are not case-sensitive.</para>
           <para
-            >To retrieve all environment variables along with their values, call the <see
-             cref="M:System.Environment.GetEnvironmentVariables" />
+            >To retrieve all environment variables along with their values, call the <see cref="M:System.Environment.GetEnvironmentVariables" />
 
             
 
@@ -735,8 +725,7 @@ value returned by a process. The default value is zero.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the environment variable specified by <paramref
-             name="variable" />
+            >The value of the environment variable specified by <paramref name="variable" />
 
             
 
@@ -744,7 +733,11 @@ value returned by a process. The default value is zero.</para
           >
         </returns>
         <param name="variable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -779,8 +772,7 @@ value returned by a process. The default value is zero.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="target" />
+            >The <paramref name="target" />
 
             
 
@@ -788,8 +780,7 @@ value returned by a process. The default value is zero.</para
           >
           <para>Environment variable names are not case-sensitive.</para>
           <para
-            >To retrieve all environment variables along with their values, call the <see
-             cref="M:System.Environment.GetEnvironmentVariables" />
+            >To retrieve all environment variables along with their values, call the <see cref="M:System.Environment.GetEnvironmentVariables" />
 
             
 
@@ -803,13 +794,11 @@ value returned by a process. The default value is zero.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the environment variable specified by the <paramref
-             name="variable" />
+            >The value of the environment variable specified by the <paramref name="variable" />
 
             
 
-             and <paramref
-             name="target" />
+             and <paramref name="target" />
 
             
 
@@ -817,19 +806,26 @@ value returned by a process. The default value is zero.</para
           >
         </returns>
         <param name="variable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of an environment variable.</param
         >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.EnvironmentVariableTarget" />
+          One of the <see cref="T:System.EnvironmentVariableTarget" />
 
           
 
@@ -865,8 +861,7 @@ value returned by a process. The default value is zero.</para
           >The caller does not have the required permission.</exception
         >
         <permission cref="T:System.Security.Permissions.EnvironmentPermission"
-          >Requires permission to read environment variables. See <see
-           cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
+          >Requires permission to read environment variables. See <see cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Read" />
 
           
 
@@ -900,8 +895,7 @@ class EnvTest:Object {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The names and values for the environment variables are stored as key-value pairs in the returned <see
-             cref="T:System.Collections.IDictionary" />
+            >The names and values for the environment variables are stored as key-value pairs in the returned <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -944,16 +938,14 @@ class EnvTest:Object {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="target" />
+            >The <paramref name="target" />
 
             
 
              parameter specifies whether the source is the current process, the registry key for the current user, or the registry key for the local machine.</para
           >
           <para
-            >The names and values of the environment variables are stored as key/value pairs in the returned <see
-             cref="T:System.Collections.IDictionary" />
+            >The names and values of the environment variables are stored as key/value pairs in the returned <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -967,8 +959,7 @@ class EnvTest:Object {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A dictionary that contains all environment variable names and their values from the source specified by the <paramref
-             name="target" />
+            >A dictionary that contains all environment variable names and their values from the source specified by the <paramref name="target" />
 
             
 
@@ -976,12 +967,15 @@ class EnvTest:Object {
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.EnvironmentVariableTarget" />
+          One of the <see cref="T:System.EnvironmentVariableTarget" />
 
           
 
@@ -1015,8 +1009,7 @@ class EnvTest:Object {
         <summary>Returns the path on the file system corresponding to the special folder.</summary>
         <returns>The path to the special folder, or the empty string if the special folder is not available or not applicable in the running operating system.</returns>
         <remarks
-          >See <see
-           cref="T:System.Environment+SpecialFolder" />
+          >See <see cref="T:System.Environment+SpecialFolder" />
 
           
 
@@ -1101,18 +1094,18 @@ class EnvTest:Object {
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates the shutdown
-   process has started; otherwise <see
-             langword="false" />
+   process has started; otherwise <see langword="false" />
 
             
 
@@ -1122,21 +1115,18 @@ class EnvTest:Object {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the CLR unloads an application domain, it runs the finalizers on all objects that have a finalizer method in that application domain. When the CLR shuts down, it starts the finalizer thread on all objects that have a finalizer method. The <see
-             cref="P:System.Environment.HasShutdownStarted" />
+            >When the CLR unloads an application domain, it runs the finalizers on all objects that have a finalizer method in that application domain. When the CLR shuts down, it starts the finalizer thread on all objects that have a finalizer method. The <see cref="P:System.Environment.HasShutdownStarted" />
 
             
 
-             property returns true only after the finalizer thread has been started. When the property returns true, you can determine whether an application domain is being unloaded or the CLR itself is shutting down by calling the <see
-             cref="M:System.AppDomain.IsFinalizingForUnload" />
+             property returns true only after the finalizer thread has been started. When the property returns true, you can determine whether an application domain is being unloaded or the CLR itself is shutting down by calling the <see cref="M:System.AppDomain.IsFinalizingForUnload" />
 
             
 
              method. This method returns true if finalizers are called because the application domain is unloading or false if the CLR is shutting down. </para
           >
           <para
-            >The <see
-             cref="P:System.Environment.HasShutdownStarted" />
+            >The <see cref="P:System.Environment.HasShutdownStarted" />
 
             
 
@@ -1233,8 +1223,7 @@ class EnvTest:Object {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 
@@ -1243,14 +1232,12 @@ class EnvTest:Object {
         </value>
         <example>
           <para
-            >The following example demonstrates using the <see
-             cref="P:System.Environment.NewLine" />
+            >The following example demonstrates using the <see cref="P:System.Environment.NewLine" />
 
             
 
             
-property. The string returned by <see
-             cref="P:System.Environment.NewLine" />
+property. The string returned by <see cref="P:System.Environment.NewLine" />
 
             
 
@@ -1276,13 +1263,11 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The property value of <see
-             cref="P:System.Environment.NewLine" />
+            >The property value of <see cref="P:System.Environment.NewLine" />
 
             
 
-             is a constant customized specifically for the current platform and implementation of the .NET Framework. For more information about the escape characters in the property value, see <format
-             type="text/html">
+             is a constant customized specifically for the current platform and implementation of the .NET Framework. For more information about the escape characters in the property value, see <format type="text/html">
               <a href="f49cc9cc-db7d-4058-8b8a-422bc08b29b0">Character Escapes</a>
             </format>
 
@@ -1291,8 +1276,7 @@ class TestClass {
             .</para
           >
           <para
-            >The functionality provided by <see
-             cref="P:System.Environment.NewLine" />
+            >The functionality provided by <see cref="P:System.Environment.NewLine" />
 
             
 
@@ -1310,13 +1294,11 @@ class TestClass {
 
             
 
-             is automatically appended to text processed by the <see
-             cref="Overload:System.Console.WriteLine" />
+             is automatically appended to text processed by the <see cref="Overload:System.Console.WriteLine" />
 
             
 
-             and <see
-             cref="Overload:System.Text.StringBuilder.AppendLine" />
+             and <see cref="Overload:System.Text.StringBuilder.AppendLine" />
 
             
 
@@ -1344,8 +1326,7 @@ class TestClass {
       </ReturnValue>
       <Docs>
         <value
-          >A <see
-           cref="T:System.OperatingSystem" />
+          >A <see cref="T:System.OperatingSystem" />
 
           
 
@@ -1354,31 +1335,27 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the <see
-             cref="P:System.Environment.OSVersion" />
+            >Typically, the <see cref="P:System.Environment.OSVersion" />
 
             
 
-             property is used to ensure that an app is running on some base version of an operating system in which a particular feature was introduced. When this is the case, you should perform a version check by testing whether the current operating system version returned by the <see
-             cref="P:System.Environment.OSVersion" />
+             property is used to ensure that an app is running on some base version of an operating system in which a particular feature was introduced. When this is the case, you should perform a version check by testing whether the current operating system version returned by the <see cref="P:System.Environment.OSVersion" />
 
             
 
-             property is the same as, or greater than, the base operating system version. For more information, see the <see
-             cref="T:System.Version" />
+             property is the same as, or greater than, the base operating system version. For more information, see the <see cref="T:System.Version" />
 
             
 
              class topic. </para
           >
           <para
-            >The <see
-             cref="P:System.Environment.OSVersion" />
+            >The <see cref="P:System.Environment.OSVersion" />
 
             
 
              property returns the version reported by the Windows <see
-             cref="http://msdn.microsoft.com/library/windows/desktop/ms724451(v=vs.85).aspx"
+              cref="http://msdn.microsoft.com/library/windows/desktop/ms724451(v=vs.85).aspx"
               >GetVersionEx</see
             >
 
@@ -1388,8 +1365,7 @@ class TestClass {
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Environment.OSVersion" />
+              >The <see cref="P:System.Environment.OSVersion" />
 
               
 
@@ -1397,8 +1373,7 @@ class TestClass {
             >
           </block>
           <para
-            >In some cases, the <see
-             cref="P:System.Environment.OSVersion" />
+            >In some cases, the <see cref="P:System.Environment.OSVersion" />
 
             
 
@@ -1408,8 +1383,7 @@ class TestClass {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.OperatingSystem" />
+            >Gets an <see cref="T:System.OperatingSystem" />
 
             
 
@@ -1465,57 +1439,48 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="value" />
+            >If the <paramref name="value" />
 
             
 
-             parameter is not empty and the environment variable named by the <paramref
-             name="variable" />
+             parameter is not empty and the environment variable named by the <paramref name="variable" />
 
             
 
-             parameter does not exist, the environment variable is created and assigned the contents of <paramref
-             name="value" />
+             parameter does not exist, the environment variable is created and assigned the contents of <paramref name="value" />
 
             
 
-            . Solely for purposes of this operation, <paramref
-             name="value" />
+            . Solely for purposes of this operation, <paramref name="value" />
 
             
 
              is considered empty if it is null, contains a zero-length string, or contains an initial hexadecimal zero character (0x00).</para
           >
           <para
-            >If <paramref
-             name="variable" />
+            >If <paramref name="variable" />
 
             
 
              contains a non-initial hexadecimal zero character, the characters before the zero character are considered the environment variable name and all subsequent characters are ignored.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
              contains a non-initial hexadecimal zero character, the characters before the zero character are assigned to the environment variable and all subsequent characters are ignored.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             is empty and the environment variable named by <paramref
-             name="variable" />
+             is empty and the environment variable named by <paramref name="variable" />
 
             
 
-             exists, the environment variable is deleted. If <paramref
-             name="variable" />
+             exists, the environment variable is deleted. If <paramref name="variable" />
 
             
 
@@ -1527,19 +1492,26 @@ class TestClass {
           <para>Creates, modifies, or deletes an environment variable stored in the current process.</para>
         </summary>
         <param name="variable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of an environment variable.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value to assign to <paramref
-           name="variable" />
+          A value to assign to <paramref name="variable" />
 
           
 
@@ -1574,134 +1546,112 @@ class TestClass {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="value" />
+            >If the <paramref name="value" />
 
             
 
-             parameter is not empty and the environment variable named by the <paramref
-             name="variable" />
+             parameter is not empty and the environment variable named by the <paramref name="variable" />
 
             
 
-             parameter does not exist, the environment variable is created and assigned the contents of <paramref
-             name="value" />
+             parameter does not exist, the environment variable is created and assigned the contents of <paramref name="value" />
 
             
 
-            . Solely for the purposes of this operation, <paramref
-             name="value" />
+            . Solely for the purposes of this operation, <paramref name="value" />
 
             
 
              is considered empty if it is null, contains a zero-length string, or contains an initial hexadecimal zero character (0x00).</para
           >
           <para
-            >If <paramref
-             name="variable" />
+            >If <paramref name="variable" />
 
             
 
              contains a non-initial hexadecimal zero character, the characters before the zero character are considered the environment variable name and all subsequent characters are ignored.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
              contains a non-initial hexadecimal zero character, the characters before the zero character are assigned to the environment variable and all subsequent characters are ignored.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             is empty and the environment variable named by <paramref
-             name="variable" />
+             is empty and the environment variable named by <paramref name="variable" />
 
             
 
-             exists, the environment variable is deleted. If <paramref
-             name="variable" />
+             exists, the environment variable is deleted. If <paramref name="variable" />
 
             
 
-             does not exist, no error occurs even though the operation cannot be performed. Exercise caution when <paramref
-             name="target" />
+             does not exist, no error occurs even though the operation cannot be performed. Exercise caution when <paramref name="target" />
 
             
 
-             is <see
-             cref="F:System.EnvironmentVariableTarget.Machine" />
+             is <see cref="F:System.EnvironmentVariableTarget.Machine" />
 
             
 
              because you can delete an environment variable that affects your entire local machine, not just the current process or user.</para
           >
           <para
-            >If <paramref
-             name="target" />
+            >If <paramref name="target" />
 
             
 
-             is <see
-             cref="F:System.EnvironmentVariableTarget.User" />
+             is <see cref="F:System.EnvironmentVariableTarget.User" />
 
             
 
             , the environment variable is stored in the Windows registry key reserved for the current user. It is also copied to instances of File Explorer that are running as the current user. The environment variable is then inherited by any new processes that the user launches from File Explorer. </para
           >
           <para
-            >Similarly, if <paramref
-             name="target" />
+            >Similarly, if <paramref name="target" />
 
             
 
-             is <see
-             cref="F:System.EnvironmentVariableTarget.Machine" />
+             is <see cref="F:System.EnvironmentVariableTarget.Machine" />
 
             
 
             , the environment variable is stored in the Windows registry key reserved for the local computer. It is also copied to all instances of File Explorer. The environment variable is then inherited by any new processes that are launched from File Explorer.</para
           >
           <para
-            >If <paramref
-             name="target" />
+            >If <paramref name="target" />
 
             
 
-             is <see
-             cref="F:System.EnvironmentVariableTarget.User" />
+             is <see cref="F:System.EnvironmentVariableTarget.User" />
 
             
 
-             or <see
-             cref="F:System.EnvironmentVariableTarget.Machine" />
+             or <see cref="F:System.EnvironmentVariableTarget.Machine" />
 
             
 
             , other applications are notified of the set operation by a Windows WM_SETTINGCHANGE message.</para
           >
           <para
-            >If <paramref
-             name="target" />
+            >If <paramref name="target" />
 
             
 
-             is <see
-             cref="F:System.EnvironmentVariableTarget.User" />
+             is <see cref="F:System.EnvironmentVariableTarget.User" />
 
             
 
-             or <see
-             cref="F:System.EnvironmentVariableTarget.Machine" />
+             or <see cref="F:System.EnvironmentVariableTarget.Machine" />
 
             
 
-            , it is recommended that the length of <paramref
-             name="value" />
+            , it is recommended that the length of <paramref name="value" />
 
             
 
@@ -1713,31 +1663,41 @@ class TestClass {
           <para>Creates, modifies, or deletes an environment variable stored in the current process or in the Windows operating system registry key reserved for the current user or local machine.</para>
         </summary>
         <param name="variable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of an environment variable.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value to assign to <paramref
-           name="variable" />
+          A value to assign to <paramref name="variable" />
 
           
 
           .</param
         >
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.EnvironmentVariableTarget" />
+          One of the <see cref="T:System.EnvironmentVariableTarget" />
 
           
 
@@ -1765,14 +1725,12 @@ class TestClass {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing a description of the methods currently in the
-   call stack. This value can be <see
-             cref="F:System.String.Empty" />
+   call stack. This value can be <see cref="F:System.String.Empty" />
 
             
 
@@ -1781,8 +1739,7 @@ class TestClass {
         </value>
         <example>
           <para
-            >The following example gets the <see
-             cref="P:System.Environment.StackTrace" />
+            >The following example gets the <see cref="P:System.Environment.StackTrace" />
 
             
 
@@ -1830,13 +1787,11 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Environment.StackTrace" />
+            >The <see cref="P:System.Environment.StackTrace" />
 
             
 
-             property lists method calls in reverse chronological order, that is, the most recent method call is described first, and one line of stack trace information is listed for each method call on the stack. However, the <see
-             cref="P:System.Environment.StackTrace" />
+             property lists method calls in reverse chronological order, that is, the most recent method call is described first, and one line of stack trace information is listed for each method call on the stack. However, the <see cref="P:System.Environment.StackTrace" />
 
             
 
@@ -1844,8 +1799,7 @@ public class TestCallStack {
           >
           <block subset="none" type="note">
             <para
-              >For a hierarchical view of the stack trace information by class, use the <see
-               cref="T:System.Diagnostics.StackTrace" />
+              >For a hierarchical view of the stack trace information by class, use the <see cref="T:System.Diagnostics.StackTrace" />
 
               
 
@@ -1853,64 +1807,53 @@ public class TestCallStack {
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Environment.StackTrace" />
+            >The <see cref="P:System.Environment.StackTrace" />
 
             
 
              property formats the stack trace information for each method call as follows: </para
           >
           <para
-            >"at <paramref
-             name="FullClassName" />
+            >"at <paramref name="FullClassName" />
 
             
 
-            .<paramref
-             name="MethodName" />
+            .<paramref name="MethodName" />
 
             
 
-            (<paramref
-             name="MethodParams" />
+            (<paramref name="MethodParams" />
 
             
 
-            ) in <paramref
-             name="FileName" />
+            ) in <paramref name="FileName" />
 
             
 
-             :line <paramref
-             name="LineNumber" />
+             :line <paramref name="LineNumber" />
 
             
 
              " </para
           >
           <para
-            >The literal "at" is preceded by three spaces, and the entire substring starting with "in" is omitted if debug symbols are not available. The placeholders, <paramref
-             name="FullClassName" />
+            >The literal "at" is preceded by three spaces, and the entire substring starting with "in" is omitted if debug symbols are not available. The placeholders, <paramref name="FullClassName" />
 
             
 
-            , <paramref
-             name="MethodName" />
+            , <paramref name="MethodName" />
 
             
 
-            , <paramref
-             name="MethodParams" />
+            , <paramref name="MethodParams" />
 
             
 
-            , <paramref
-             name="FileName" />
+            , <paramref name="FileName" />
 
             
 
-            , and <paramref
-             name="LineNumber" />
+            , and <paramref name="LineNumber" />
 
             
 
@@ -1937,8 +1880,7 @@ public class TestCallStack {
               </term>
               <description>
                 <para
-                  >The list of parameter type/name pairs. Each pair is separated by a comma (","). This information is omitted if <paramref
-                   name="MethodName" />
+                  >The list of parameter type/name pairs. Each pair is separated by a comma (","). This information is omitted if <paramref name="MethodName" />
 
                   
 
@@ -1952,8 +1894,7 @@ public class TestCallStack {
               </term>
               <description>
                 <para
-                  >The name of the source file where the <paramref
-                   name="MethodName" />
+                  >The name of the source file where the <paramref name="MethodName" />
 
                   
 
@@ -1967,13 +1908,11 @@ public class TestCallStack {
               </term>
               <description>
                 <para
-                  >The number of the line in <paramref
-                   name="FileName" />
+                  >The number of the line in <paramref name="FileName" />
 
                   
 
-                   that contains the source code from <paramref
-                   name="MethodName" />
+                   that contains the source code from <paramref name="MethodName" />
 
                   
 
@@ -1983,8 +1922,7 @@ public class TestCallStack {
             </item>
           </list>
           <para
-            >The <see
-             cref="P:System.Environment.NewLine" />
+            >The <see cref="P:System.Environment.NewLine" />
 
             
 
@@ -2037,8 +1975,7 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This information can be useful when determining whether to use the <see
-             cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileOptions.DelayAllocatePages" />
+            >This information can be useful when determining whether to use the <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileOptions.DelayAllocatePages" />
 
             
 
@@ -2073,8 +2010,7 @@ public class TestCallStack {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -2085,18 +2021,15 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property is derived from the system timer and is stored as a 32-bit signed integer. Consequently, if the system runs continuously, <see
-             cref="P:System.Environment.TickCount" />
+            >The value of this property is derived from the system timer and is stored as a 32-bit signed integer. Consequently, if the system runs continuously, <see cref="P:System.Environment.TickCount" />
 
             
 
-             will increment from zero to <see
-             cref="F:System.Int32.MaxValue" />
+             will increment from zero to <see cref="F:System.Int32.MaxValue" />
 
             
 
-             for approximately 24.9 days, then jump to <see
-             cref="F:System.Int32.MinValue" />
+             for approximately 24.9 days, then jump to <see cref="F:System.Int32.MinValue" />
 
             
 
@@ -2107,16 +2040,14 @@ public class TestCallStack {
 
             
 
-             is different from the <see
-             cref="P:System.DateTime.Ticks" />
+             is different from the <see cref="P:System.DateTime.Ticks" />
 
             
 
              property, which is the number of 100-nanosecond intervals that have elapsed since 1/1/0001, 12:00am.</para
           >
           <para
-            >Use the <see
-             cref="P:System.DateTime.Now" />
+            >Use the <see cref="P:System.DateTime.Now" />
 
             
 
@@ -2147,31 +2078,26 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the <see
-             cref="P:System.Environment.UserDomainName" />
+            >The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the <see cref="P:System.Environment.UserDomainName" />
 
             
 
-             property to obtain the user's domain name without the user name, and the <see
-             cref="P:System.Environment.UserName" />
+             property to obtain the user's domain name without the user name, and the <see cref="P:System.Environment.UserName" />
 
             
 
-             property to obtain the user name without the domain name.  For example, if a user's domain name and user name are CORPORATENETWORK\john, the <see
-             cref="P:System.Environment.UserDomainName" />
+             property to obtain the user name without the domain name.  For example, if a user's domain name and user name are CORPORATENETWORK\john, the <see cref="P:System.Environment.UserDomainName" />
 
             
 
              property returns "CORPORATENETWORK". </para
           >
           <para
-            >The <see
-             cref="P:System.Environment.UserDomainName" />
+            >The <see cref="P:System.Environment.UserDomainName" />
 
             
 
-             property first attempts to get the domain name component of the Windows account name for the current user. If that attempt fails, this property attempts to get the domain name associated with the user name provided by the <see
-             cref="P:System.Environment.UserName" />
+             property first attempts to get the domain name component of the Windows account name for the current user. If that attempt fails, this property attempts to get the domain name associated with the user name provided by the <see cref="P:System.Environment.UserName" />
 
             
 
@@ -2201,8 +2127,7 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Environment.UserInteractive" />
+            >The <see cref="P:System.Environment.UserInteractive" />
 
             
 
@@ -2232,21 +2157,18 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Environment.UserName" />
+            >You can use the <see cref="P:System.Environment.UserName" />
 
             
 
              property to identify the user on the current thread, to the system and application for security or access purposes. It can also be used to customize a particular application for each user.</para
           >
           <para
-            >The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the <see
-             cref="P:System.Environment.UserDomainName" />
+            >The domain account credentials for a user are formatted as the user's domain name, the '\' character, and user name. Use the <see cref="P:System.Environment.UserDomainName" />
 
             
 
-             property to obtain the user's domain name and the <see
-             cref="P:System.Environment.UserName" />
+             property to obtain the user's domain name and the <see cref="P:System.Environment.UserName" />
 
             
 
@@ -2279,8 +2201,7 @@ public class TestCallStack {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Version" />
+            >A <see cref="T:System.Version" />
 
             
 
@@ -2291,8 +2212,7 @@ public class TestCallStack {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about the version of the common language runtime that is installed with each version of the .NET Framework, see <format
-             type="text/html">
+            >For more information about the version of the common language runtime that is installed with each version of the .NET Framework, see <format type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90"
                 >.NET Framework Versions and Dependencies</a
               >
@@ -2306,8 +2226,7 @@ public class TestCallStack {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Version" />
+            >Gets a <see cref="T:System.Version" />
 
             
 

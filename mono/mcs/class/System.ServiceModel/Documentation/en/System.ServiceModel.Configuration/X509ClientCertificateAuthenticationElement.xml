@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.X509ClientCertificateAuthenticationElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.X509ClientCertificateAuthenticationElement" />
 
             
 
@@ -115,31 +114,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" />
+            >If the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CertificateValidationMode" />
 
             
 
-             property is set to <see
-             cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
+             property is set to <see cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
 
             
 
-            , you must set the <see
-             cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CustomCertificateValidator" />
+            , you must set the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.CustomCertificateValidator" />
 
             
 
-             property to a custom validator that inherits from the <see
-             cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
+             property to a custom validator that inherits from the <see cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
 
             
 
              class.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
                 >How To: Create a Service Employing a Custom Certificate Validator</a
               >
@@ -209,8 +203,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is valid only when the <see
-             cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.MapClientCertificateToWindowsAccount" />
+            >This property is valid only when the <see cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.MapClientCertificateToWindowsAccount" />
 
             
 
@@ -272,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The system verifies that the client certificate has not been revoked by looking it up in the revoked certificate list. This check can be performed either by checking online or against a cached revocation list. Revocation checking can be turned off by setting this property to <see
-             cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck" />
+            >The system verifies that the client certificate has not been revoked by looking it up in the revoked certificate list. This check can be performed either by checking online or against a cached revocation list. Revocation checking can be turned off by setting this property to <see cref="F:System.Security.Cryptography.X509Certificates.X509RevocationMode.NoCheck" />
 
             
 
@@ -312,8 +304,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo1 security system validates the client certificate against a <see
-             cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+            >indigo1 security system validates the client certificate against a <see cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
 
             
 

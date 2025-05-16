@@ -19,72 +19,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.CodeDom.Compiler.CompilerInfo" />
+        >Use the <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
         
 
-         class to determine whether a <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+         class to determine whether a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
          implementation is configured on the computer, or to examine the configuration and compiler settings for a specific language provider.</para
       >
       <para
-        >The <format
-         type="text/html">
+        >The <format type="text/html">
           <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt; Element</a>
         </format>
 
         
 
-         in the machine configuration file contains the language provider and compiler configuration settings. Each configured language provider has a corresponding compiler configuration element. Each element defines the <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+         in the machine configuration file contains the language provider and compiler configuration settings. Each configured language provider has a corresponding compiler configuration element. Each element defines the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
          implementation type, supported language names, supported file name extensions, and compiler parameters.</para
       >
       <para
-        >The .NET Framework defines the initial compiler settings in the machine configuration file. Developers and compiler vendors can add configuration settings for a new <see
-         cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+        >The .NET Framework defines the initial compiler settings in the machine configuration file. Developers and compiler vendors can add configuration settings for a new <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
         
 
          implementation.</para
       >
       <para
-        >The <see
-         cref="T:System.CodeDom.Compiler.CompilerInfo" />
+        >The <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
         
 
-         class provides read-only access to these settings in the machine configuration file. Use the <see
-         cref="M:System.CodeDom.Compiler.CompilerInfo.GetLanguages" />
+         class provides read-only access to these settings in the machine configuration file. Use the <see cref="M:System.CodeDom.Compiler.CompilerInfo.GetLanguages" />
 
         
 
-        , <see
-         cref="M:System.CodeDom.Compiler.CompilerInfo.GetExtensions" />
+        , <see cref="M:System.CodeDom.Compiler.CompilerInfo.GetExtensions" />
 
         
 
-        , and <see
-         cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
+        , and <see cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
 
         
 
-         members to examine the corresponding configuration attributes for a language provider. Use the <see
-         cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
+         members to examine the corresponding configuration attributes for a language provider. Use the <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
 
         
 
          method to obtain the compiler options and warning level attribute values for a language provider.</para
       >
       <para
-        >For more details on language provider settings in the configuration file, see <format
-         type="text/html">
+        >For more details on language provider settings in the configuration file, see <format type="text/html">
           <a href="c020b139-8699-4f0d-9ac9-70d0c5b2a8c8"
             >Compiler and Language Provider Settings Schema</a
           >
@@ -96,13 +85,11 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when the immediate caller does not have full-trust permission. For details about link demands, see <format
-           type="text/html">
+           is thrown when the immediate caller does not have full-trust permission. For details about link demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
@@ -138,18 +125,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The machine configuration file contains the fully qualified type name for each <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >The machine configuration file contains the fully qualified type name for each <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation on the computer. The <see
-             cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
+             implementation on the computer. The <see cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
 
             
 
-             property value is a <see
-             cref="T:System.Type" />
+             property value is a <see cref="T:System.Type" />
 
             
 
@@ -159,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the configured <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >Gets the type of the configured <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
@@ -192,61 +175,51 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
+            >Use the <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
 
             
 
-             method to examine the compiler settings of the <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+             method to examine the compiler settings of the <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
-             instances returned by the <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
+             instances returned by the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
 
             
 
-             and <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+             and <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
 
             
 
              methods.</para
           >
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt; Element</a>
             </format>
 
             
 
-             in the machine configuration file contains the language provider and compiler configuration settings for each <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             in the machine configuration file contains the language provider and compiler configuration settings for each <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation on the computer. Each language provider configuration element can contain optional compilerOptions and warningLevel attributes. These attributes define the default values for the <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
+             implementation on the computer. Each language provider configuration element can contain optional compilerOptions and warningLevel attributes. These attributes define the default values for the <see cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
 
             
 
-             and <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
+             and <see cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
 
             
 
              properties.</para
           >
           <para
-            >If the language provider configuration element does not define the compilerOptions attribute, the <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
+            >If the language provider configuration element does not define the compilerOptions attribute, the <see cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
 
             
 
-             property value is an empty string (""). If the language provider configuration element does not define the warningLevel attribute, the <see
-             cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
+             property value is an empty string (""). If the language provider configuration element does not define the warningLevel attribute, the <see cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
 
             
 
@@ -260,8 +233,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only <see
-             cref="T:System.CodeDom.Compiler.CompilerParameters" />
+            >A read-only <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
             
 
@@ -293,41 +265,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider" />
+            >The <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider" />
 
             
 
-             method returns a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             method returns a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
              instance for the current language provider settings.</para
           >
           <para
-            >Use the <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider" />
+            >Use the <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider" />
 
             
 
-             method to get a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             method to get a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation for a <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+             implementation for a <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
-             instance returned by the <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
+             instance returned by the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
 
             
 
-             or <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+             or <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
 
             
 
@@ -337,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >Returns a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
@@ -377,41 +341,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider(System.Collections.Generic.IDictionary{System.String,System.String})" />
+            >The <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider(System.Collections.Generic.IDictionary{System.String,System.String})" />
 
             
 
-             method returns a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             method returns a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
              instance for the current language provider settings and the specified provider options. For information about supported provider options, see the specific CodeDOM provider documentation.</para
           >
           <para
-            >Use the <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider(System.Collections.Generic.IDictionary{System.String,System.String})" />
+            >Use the <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider(System.Collections.Generic.IDictionary{System.String,System.String})" />
 
             
 
-             method to get a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             method to get a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation for a <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+             implementation for a <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
-             instance returned by the <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
+             instance returned by the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetAllCompilerInfo" />
 
             
 
-             or <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+             or <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
 
             
 
@@ -421,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+            >Returns a <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
@@ -434,7 +390,11 @@
           <para>A CodeDOM provider associated with the language provider configuration and specified options.</para>
         </returns>
         <param name="providerOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -464,8 +424,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -475,8 +434,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
+                >The <see cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
 
                 
 
@@ -485,28 +443,23 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
+                >The <see cref="P:System.CodeDom.Compiler.CompilerParameters.WarningLevel" />
 
                 
 
-                , <see
-                 cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
+                , <see cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
 
                 
 
-                , and <see
-                 cref="P:System.CodeDom.Compiler.CompilerParameters.IncludeDebugInformation" />
+                , and <see cref="P:System.CodeDom.Compiler.CompilerParameters.IncludeDebugInformation" />
 
                 
 
-                 properties of the <see
-                 cref="T:System.CodeDom.Compiler.CompilerParameters" />
+                 properties of the <see cref="T:System.CodeDom.Compiler.CompilerParameters" />
 
                 
 
-                 instance returned by the <see
-                 cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
+                 instance returned by the <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateDefaultCompilerParameters" />
 
                 
 
@@ -518,8 +471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object represents the same language provider and compiler settings as the current <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+            >Determines whether the specified object represents the same language provider and compiler settings as the current <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
@@ -529,13 +481,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="o" />
+            >true if <paramref name="o" />
 
             
 
-             is a <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+             is a <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
@@ -543,12 +493,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare with the current <see
-           cref="T:System.CodeDom.Compiler.CompilerInfo" />
+          The object to compare with the current <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
           
 
@@ -576,20 +529,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt; Element</a>
             </format>
 
             
 
-             in the machine configuration file contains the language provider and compiler configuration settings for each <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             in the machine configuration file contains the language provider and compiler configuration settings for each <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation on the computer. Each configured language provider supports one or more file name extensions. For example, a <see
-             cref="T:Microsoft.CSharp.CSharpCodeProvider" />
+             implementation on the computer. Each configured language provider supports one or more file name extensions. For example, a <see cref="T:Microsoft.CSharp.CSharpCodeProvider" />
 
             
 
@@ -626,16 +576,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.Object.GetHashCode" />
+            >This method overrides the <see cref="M:System.Object.GetHashCode" />
 
             
 
              method.</para
           >
           <para
-            >This method generates the same hash code for two objects that are equal according to the <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.Equals(System.Object)" />
+            >This method generates the same hash code for two objects that are equal according to the <see cref="M:System.CodeDom.Compiler.CompilerInfo.Equals(System.Object)" />
 
             
 
@@ -649,8 +597,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A 32-bit signed integer hash code for the current <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+            >A 32-bit signed integer hash code for the current <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
@@ -679,25 +626,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <format
-             type="text/html">
+            >The <format type="text/html">
               <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">&lt;system.codedom&gt; Element</a>
             </format>
 
             
 
-             in the machine configuration file contains the language provider and compiler configuration settings for each <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             in the machine configuration file contains the language provider and compiler configuration settings for each <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation on the computer. Each configured language provider supports one or more language names. For example, the <see
-             cref="T:System.CodeDom.Compiler.CompilerInfo" />
+             implementation on the computer. Each configured language provider supports one or more language names. For example, the <see cref="T:System.CodeDom.Compiler.CompilerInfo" />
 
             
 
-             object for a <see
-             cref="T:Microsoft.CSharp.CSharpCodeProvider" />
+             object for a <see cref="T:Microsoft.CSharp.CSharpCodeProvider" />
 
             
 
@@ -734,33 +677,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.CodeDom.Compiler.CompilerInfo.IsCodeDomProviderTypeValid" />
+            >Use the <see cref="P:System.CodeDom.Compiler.CompilerInfo.IsCodeDomProviderTypeValid" />
 
             
 
-             property to check the <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             property to check the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation before accessing the provider properties or methods. For example, after you get the language provider settings from the <see
-             cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
+             implementation before accessing the provider properties or methods. For example, after you get the language provider settings from the <see cref="M:System.CodeDom.Compiler.CodeDomProvider.GetCompilerInfo(System.String)" />
 
             
 
-             method, use the <see
-             cref="P:System.CodeDom.Compiler.CompilerInfo.IsCodeDomProviderTypeValid" />
+             method, use the <see cref="P:System.CodeDom.Compiler.CompilerInfo.IsCodeDomProviderTypeValid" />
 
             
 
-             property to verify the provider type implementation before calling the <see
-             cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider" />
+             property to verify the provider type implementation before calling the <see cref="M:System.CodeDom.Compiler.CompilerInfo.CreateProvider" />
 
             
 
-             method or using the <see
-             cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
+             method or using the <see cref="P:System.CodeDom.Compiler.CompilerInfo.CodeDomProviderType" />
 
             
 

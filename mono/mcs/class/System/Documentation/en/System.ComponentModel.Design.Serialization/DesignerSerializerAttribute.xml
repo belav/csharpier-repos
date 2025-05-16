@@ -72,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
 
             
 
@@ -81,14 +80,22 @@
           >
         </summary>
         <param name="serializerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the data type of the serializer. </param
         >
         <param name="baseSerializerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
 
             
 
@@ -130,14 +136,22 @@
           >
         </summary>
         <param name="serializerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the data type of the serializer. </param
         >
         <param name="baseSerializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
 
             
 
@@ -179,14 +192,22 @@
           >
         </summary>
         <param name="serializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type of the serializer. </param
         >
         <param name="baseSerializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -253,13 +274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This ID is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see
-             cref="T:System.Type" />
+            >This ID is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" />
 
             
 
-             instance for the attribute. <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+             instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 

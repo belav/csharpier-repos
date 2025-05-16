@@ -26,18 +26,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract class for <see
-         cref="T:System.Xml.Schema.XmlSchemaAll" />
+        >An abstract class for <see cref="T:System.Xml.Schema.XmlSchemaAll" />
 
         
 
-        , <see
-         cref="T:System.Xml.Schema.XmlSchemaChoice" />
+        , <see cref="T:System.Xml.Schema.XmlSchemaChoice" />
 
         
 
-        , or <see
-         cref="T:System.Xml.Schema.XmlSchemaSequence" />
+        , or <see cref="T:System.Xml.Schema.XmlSchemaSequence" />
 
         
 
@@ -65,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaGroupBase" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaGroupBase" />
 
             
 

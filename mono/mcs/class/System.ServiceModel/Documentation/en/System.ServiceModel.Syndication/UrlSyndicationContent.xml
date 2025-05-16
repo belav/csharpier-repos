@@ -45,13 +45,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
-             class with the specified <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+             class with the specified <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
@@ -59,12 +57,15 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+          The <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
           
 
@@ -94,7 +95,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The media type parameter can be set to any known MIME type value as defined in <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95720">RFC 2046</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=95720"
+              >RFC 2046</see
+            >
 
             
 
@@ -104,13 +107,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
-             class with the specified <see
-             cref="T:System.Uri" />
+             class with the specified <see cref="T:System.Uri" />
 
             
 
@@ -118,24 +119,30 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
           . </param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The media type of the resource referenced by the <see
-           cref="T:System.Uri" />
+          The media type of the resource referenced by the <see cref="T:System.Uri" />
 
           
 
@@ -165,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the existing <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
@@ -176,13 +182,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />
 
             
 
-             instance that contains the new copy of the <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+             instance that contains the new copy of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
@@ -207,7 +211,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The content type can be set to any known MIME type value as defined in <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=95720">RFC 2046</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=95720"
+              >RFC 2046</see
+            >
 
             
 
@@ -217,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the content type of the <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+            >Gets the content type of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
@@ -243,13 +248,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Uri" />
+            >Gets the <see cref="T:System.Uri" />
 
             
 
-             for the <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+             for the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
@@ -282,13 +285,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of the <see
-             cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+            >Writes the contents of the <see cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
 
             
 
-             instance to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             instance to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -296,12 +297,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 

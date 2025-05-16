@@ -93,8 +93,7 @@
 
               
 
-               or <see
-               cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+               or <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
             </para>
           </description>
           <description>
@@ -156,13 +155,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The registry key inherits the mode of its parent. Security checks are performed when trying to access subkeys or values, unless the parent was opened with <see
-             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+            >The registry key inherits the mode of its parent. Security checks are performed when trying to access subkeys or values, unless the parent was opened with <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
 
             
 
-             or <see
-             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+             or <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
 
             
 
@@ -190,13 +187,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see
-             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
+            >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadSubTree" />
 
             
 
-             or <see
-             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+             or <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
 
             
 
@@ -224,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see
-             cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
+            >Security checks are not performed when accessing subkeys or values. A security check is performed when trying to open the current key, unless the parent was opened with <see cref="F:Microsoft.Win32.RegistryKeyPermissionCheck.ReadWriteSubTree" />
 
             
 

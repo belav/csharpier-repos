@@ -31,59 +31,49 @@
 
         
 
-         can be implemented to support custom loading of a designer and designer components. A designer loader is also responsible for writing changes to an open document back to the storage the loader used when loading the document after the <see
-         cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Flush" />
+         can be implemented to support custom loading of a designer and designer components. A designer loader is also responsible for writing changes to an open document back to the storage the loader used when loading the document after the <see cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Flush" />
 
         
 
          method is called.</para
       >
       <para
-        >By default, the Visual Studio development environment creates its own variety of <see
-         cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+        >By default, the Visual Studio development environment creates its own variety of <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
         
 
-         that can load basic designer projects. To create a custom designer loader, you must inherit from and implement the abstract <see
-         cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+         that can load basic designer projects. To create a custom designer loader, you must inherit from and implement the abstract <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
         
 
-         class. You cannot directly instantiate <see
-         cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+         class. You cannot directly instantiate <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
         
 
         , as it has no public constructor.</para
       >
       <para
-        >When <see
-         cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
+        >When <see cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.BeginLoad(System.ComponentModel.Design.Serialization.IDesignerLoaderHost)" />
 
         
 
-         is invoked, the designer loader loads the design document, displays the designer surface using the <see
-         cref="T:System.ComponentModel.Design.IDesignerHost" />
+         is invoked, the designer loader loads the design document, displays the designer surface using the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
         
 
-         interface, and calls <see
-         cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderHost.EndLoad(System.String,System.Boolean,System.Collections.ICollection)" />
+         interface, and calls <see cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderHost.EndLoad(System.String,System.Boolean,System.Collections.ICollection)" />
 
         
 
-         on the <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
+         on the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
 
         
 
-         interface when done. The <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
+         interface when done. The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
 
         
 
-         implementation is usually the same class that implements <see
-         cref="T:System.ComponentModel.Design.IDesignerHost" />
+         implementation is usually the same class that implements <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
         
 
@@ -115,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 
@@ -153,13 +142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
+            >The <see cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
 
             
 
-             that is passed to the <paramref
-             name="host" />
+             that is passed to the <paramref name="host" />
 
             
 
@@ -171,7 +158,11 @@
           <para>Begins loading a designer.</para>
         </summary>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -199,50 +190,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
+            >Call <see cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+             when you are finished using the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 
-            . The <see
-             cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
+            . The <see cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+             method leaves the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
+             in an unusable state. After calling <see cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+            , you must release all references to the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -252,18 +234,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
+              >Always call <see cref="M:System.ComponentModel.Design.Serialization.DesignerLoader.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+               before you release your last reference to the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
               
 
@@ -274,8 +253,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+            >Releases all resources used by the <see cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
 
             
 

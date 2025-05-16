@@ -22,18 +22,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the kinds of <see
-         cref="T:System.Uri" />
+        >Defines the kinds of <see cref="T:System.Uri" />
 
         
 
-        s for the <see
-         cref="M:System.Uri.IsWellFormedUriString(System.String,System.UriKind)" />
+        s for the <see cref="M:System.Uri.IsWellFormedUriString(System.String,System.UriKind)" />
 
         
 
-         and several <see
-         cref="Overload:System.Uri.#ctor" />
+         and several <see cref="Overload:System.Uri.#ctor" />
 
         
 

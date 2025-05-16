@@ -42,23 +42,19 @@
       <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended instead of directly manipulating the enumerator.</para>
       <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
       <para
-        >Initially, the enumerator is positioned before the first element in the collection. The <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+        >Initially, the enumerator is positioned before the first element in the collection. The <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         method also brings the enumerator back to this position. At this position, calling the <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         method also brings the enumerator back to this position. At this position, calling the <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-         property throws an exception. Therefore, you must call the <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         property throws an exception. Therefore, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         method to advance the enumerator to the first element of the collection before reading the value of <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         method to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
@@ -69,99 +65,81 @@
 
         
 
-         returns the same object until either <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         or <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         or <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         is called. <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         sets <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         sets <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
          to the next element.</para
       >
       <para
-        >If <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         returns false. When the enumerator is at this position, subsequent calls to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         also return false. If the last call to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         returned false, calling <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-         throws an exception. To set <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-         to the first element of the collection again, you can call <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         followed by <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+         followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
         .</para
       >
       <para
-        >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         or <see
-         cref="M:System.Collections.IEnumerator.Reset" />
+         or <see cref="M:System.Collections.IEnumerator.Reset" />
 
         
 
-         throws an <see
-         cref="T:System.InvalidOperationException" />
+         throws an <see cref="T:System.InvalidOperationException" />
 
         
 
-        . If the collection is modified between <see
-         cref="M:System.Collections.IEnumerator.MoveNext" />
+        . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
         
 
-         and <see
-         cref="P:System.Collections.IEnumerator.Current" />
+         and <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
-        , <see
-         cref="P:System.Collections.IEnumerator.Current" />
+        , <see cref="P:System.Collections.IEnumerator.Current" />
 
         
 
@@ -201,8 +179,7 @@
       <Docs>
         <value>
           <para
-            > The <see
-             cref="T:System.Collections.DictionaryEntry" />
+            > The <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -211,8 +188,7 @@
         </value>
         <exception cref="T:System.InvalidOperationException">
           <para
-            >The <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >The <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -220,8 +196,7 @@
           >
           <para>-or-</para>
           <para
-            >The dictionary was modified after the <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >The dictionary was modified after the <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -231,23 +206,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >After an enumerator is created or after the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method is called, the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             method is called, the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see
-             cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see cref="P:System.Collections.IDictionaryEnumerator.Entry" />
 
             
 
-             property; otherwise, <see
-             cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+             property; otherwise, <see cref="P:System.Collections.IDictionaryEnumerator.Entry" />
 
             
 
@@ -258,8 +229,7 @@
 
             
 
-             also throws an exception if the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also throws an exception if the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -270,18 +240,15 @@
 
             
 
-             does not move the position of the enumerator, and consecutive calls to <see
-             cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+             does not move the position of the enumerator, and consecutive calls to <see cref="P:System.Collections.IDictionaryEnumerator.Entry" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -315,20 +282,17 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
              that contains the
-<see
-             cref="P:System.Collections.DictionaryEntry.Key" />
+<see cref="P:System.Collections.DictionaryEntry.Key" />
 
             
 
              
-of the <see
-             cref="T:System.Collections.DictionaryEntry" />
+of the <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -337,8 +301,7 @@ of the <see
         </value>
         <exception cref="T:System.InvalidOperationException">
           <para
-            >The <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >The <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -346,8 +309,7 @@ of the <see
           >
           <para>-or-</para>
           <para
-            >The dictionary was modified after the <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >The dictionary was modified after the <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -357,23 +319,19 @@ of the <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >After an enumerator is created or after the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method is called, the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             method is called, the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see
-             cref="P:System.Collections.IDictionaryEnumerator.Key" />
+             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
             
 
-             property; otherwise, <see
-             cref="P:System.Collections.IDictionaryEnumerator.Key" />
+             property; otherwise, <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
             
 
@@ -384,8 +342,7 @@ of the <see
 
             
 
-             also throws an exception if the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also throws an exception if the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -396,18 +353,15 @@ of the <see
 
             
 
-             does not move the position of the enumerator, and consecutive calls to <see
-             cref="P:System.Collections.IDictionaryEnumerator.Key" />
+             does not move the position of the enumerator, and consecutive calls to <see cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -441,20 +395,17 @@ of the <see
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
              that contains the
-<see
-             cref="P:System.Collections.DictionaryEntry.Value" />
+<see cref="P:System.Collections.DictionaryEntry.Value" />
 
             
 
              
-of the <see
-             cref="T:System.Collections.DictionaryEntry" />
+of the <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -463,8 +414,7 @@ of the <see
         </value>
         <exception cref="T:System.InvalidOperationException">
           <para
-            >The <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >The <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -472,8 +422,7 @@ of the <see
           >
           <para>-or-</para>
           <para
-            >The dictionary was modified after the <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >The dictionary was modified after the <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -483,23 +432,19 @@ of the <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After an enumerator is created or after the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >After an enumerator is created or after the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             method is called, the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             method is called, the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see
-             cref="P:System.Collections.IDictionaryEnumerator.Value" />
+             method must be called to advance the enumerator to the first element of the collection before reading the value of the <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
-             property; otherwise, <see
-             cref="P:System.Collections.IDictionaryEnumerator.Value" />
+             property; otherwise, <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
@@ -510,8 +455,7 @@ of the <see
 
             
 
-             also throws an exception if the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also throws an exception if the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -522,18 +466,15 @@ of the <see
 
             
 
-             does not move the position of the enumerator, and consecutive calls to <see
-             cref="P:System.Collections.IDictionaryEnumerator.Value" />
+             does not move the position of the enumerator, and consecutive calls to <see cref="P:System.Collections.IDictionaryEnumerator.Value" />
 
             
 
-             return the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             return the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 

@@ -25,8 +25,7 @@
 
         
 
-         is used by the <see
-         cref="T:System.Drawing.StringFormat" />
+         is used by the <see cref="T:System.Drawing.StringFormat" />
 
         
 
@@ -34,8 +33,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="F:System.Drawing.StringFormatFlags.FitBlackBox" />
+          >The <see cref="F:System.Drawing.StringFormatFlags.FitBlackBox" />
 
           
 
@@ -156,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Includes the trailing space at the end of each line. By default the boundary rectangle returned by the <see
-             cref="Overload:System.Drawing.Graphics.MeasureString" />
+            >Includes the trailing space at the end of each line. By default the boundary rectangle returned by the <see cref="Overload:System.Drawing.Graphics.MeasureString" />
 
             
 

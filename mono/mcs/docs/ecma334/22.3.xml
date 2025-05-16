@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <clause number="22.3" title="Delegate invocation">
   <paragraph
-    >C# provides special syntax for invoking a delegate. When a non-null delegate instance whose invocation list contains one entry, is invoked, it invokes the one method with the same arguments it was given, and returns the same value as the referred to method. (See <hyperlink
-    >14.5.5.2</hyperlink>
+    >C# provides special syntax for invoking a delegate. When a non-null delegate instance whose invocation list contains one entry, is invoked, it invokes the one method with the same arguments it was given, and returns the same value as the referred to method. (See <hyperlink>14.5.5.2</hyperlink>
 
     
 
      for detailed information on delegate invocation.) If an exception occurs during the invocation of such a delegate, and that exception is not caught within the method that was invoked, the search for an exception catch clause continues in the method that called the delegate, as if that method had directly called the method to which that delegate referred. </paragraph
   >
   <paragraph
-    >Invocation of a delegate instance whose invocation list contains multiple entries, proceeds by invoking each of the methods in the invocation list, synchronously, in order. Each method so called is passed the same set of arguments as was given to the delegate instance. If such a delegate invocation includes reference parameters (<hyperlink
-    >17.5.1.2</hyperlink>
+    >Invocation of a delegate instance whose invocation list contains multiple entries, proceeds by invoking each of the methods in the invocation list, synchronously, in order. Each method so called is passed the same set of arguments as was given to the delegate instance. If such a delegate invocation includes reference parameters (<hyperlink>17.5.1.2</hyperlink>
 
     
 
@@ -19,8 +17,7 @@
   <paragraph>Attempting to invoke a delegate instance whose value is null results in an exception of type System.NullReferenceException. </paragraph>
   <paragraph>
     <example
-      >[Example: The following example shows how to instantiate, combine, remove, and invoke delegates: <code_example
-      >
+      >[Example: The following example shows how to instantiate, combine, remove, and invoke delegates: <code_example>
         <![CDATA[
 using System;  
 delegate void D(int x);  
@@ -77,8 +74,7 @@ class Demo
   </paragraph>
   <paragraph>
     <example
-      >The output produced is: <code_example
-      >
+      >The output produced is: <code_example>
         <![CDATA[
 Test.M1: -1  
 Test.M2: -2  

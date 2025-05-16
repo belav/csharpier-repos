@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolStripRenderer.RenderGrip" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderGrip" />
 
         
 
@@ -47,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
 
             
 
@@ -56,24 +54,30 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            object used to paint the move handle.</param
         >
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 

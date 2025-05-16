@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a set of binding restrictions on the <see
-         cref="T:System.Dynamic.DynamicMetaObject" />
+        >Represents a set of binding restrictions on the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
         
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines binding restrictions from the list of <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Combines binding restrictions from the list of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -76,12 +74,15 @@
           <para>The new set of binding restrictions.</para>
         </returns>
         <param name="contributingObjects">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The list of <see
-           cref="T:System.Dynamic.DynamicMetaObject" />
+          The list of <see cref="T:System.Dynamic.DynamicMetaObject" />
 
           
 
@@ -146,7 +147,11 @@
           <para>The new binding restrictions.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -185,14 +190,22 @@
           <para>The new binding restrictions.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The expression to test.</param
         >
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -231,14 +244,22 @@
           <para>The new binding restrictions.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The expression to test.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -276,7 +297,11 @@
           <para>The new set of binding restrictions.</para>
         </returns>
         <param name="restrictions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -306,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Creates the <see cref="T:System.Linq.Expressions.Expression" />
 
             
 

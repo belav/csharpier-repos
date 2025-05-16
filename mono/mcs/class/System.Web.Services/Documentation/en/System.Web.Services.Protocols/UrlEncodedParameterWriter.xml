@@ -27,39 +27,33 @@
 
         
 
-         and other classes in the <see
-         cref="N:System.Web.Services.Protocols" />
+         and other classes in the <see cref="N:System.Web.Services.Protocols" />
 
         
 
          namespace support the .NET Framework's implementations of Web services via the HTTP-GET and HTTP-POST operations. Web service writers and readers serialize and deserialize, respectively, between the parameters or return objects of Web methods and the HTTP request or response streams. Web service writers and readers use HTTP for transport but don't exchange messages using the SOAP standard.</para
       >
       <para
-        >The abstract <see
-         cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+        >The abstract <see cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
 
         
 
-         class inherits from the abstract <see
-         cref="T:System.Web.Services.Protocols.MimeParameterWriter" />
+         class inherits from the abstract <see cref="T:System.Web.Services.Protocols.MimeParameterWriter" />
 
         
 
          class, adding URL encoding functionality for client-side writing of Web method parameters into HTTP request streams.</para
       >
       <para
-        >You typically will not need to use <see
-         cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+        >You typically will not need to use <see cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
 
         
 
-         or its descendant classes directly. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see
-         cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+         or its descendant classes directly. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
 
         
 
-         to each Web method and sets the attribute's <see
-         cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+         to each Web method and sets the attribute's <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
 
         
 
@@ -85,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
 
             
 
@@ -116,13 +109,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload of the <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.Object[])" />
+            >This overload of the <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.Object[])" />
 
             
 
-             method calls the other overload, <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
+             method calls the other overload, <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
 
             
 
@@ -134,19 +125,26 @@
           <para>Encodes all the parameter values for a Web method and writes them to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
            object that does the writing to the HTTP request.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,18 +174,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The other signature of the <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
+            >The other signature of the <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
 
             
 
-             method, <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.Object[])" />
+             method, <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.Object[])" />
 
             
 
-            , which is called for each Web method, calls this signature of the <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
+            , which is called for each Web method, calls this signature of the <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
 
             
 
@@ -199,26 +194,37 @@
           <para>Encodes a specified parameter value and writes it to the specified writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
            object that does the writing to the HTTP request.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that will be encoded.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,50 +249,39 @@
         <Parameter Name="methodInfo" Type="System.Web.Services.Protocols.LogicalMethodInfo" />
       </Parameters>
       <Docs>
-        <returns
-          >a <see
-           cref="T:System.Object" />
-        </returns>
+        <returns>a <see cref="T:System.Object" /></returns>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An initializer is an object passed as a parameter to the <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Initialize(System.Object)" />
+            >An initializer is an object passed as a parameter to the <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Initialize(System.Object)" />
 
             
 
-             method. For the <see
-             cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+             method. For the <see cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
 
             
 
-             class, the initializer is the value of the <see
-             cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
+             class, the initializer is the value of the <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
 
             
 
-             property of the input <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+             property of the input <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
-             object. The property is a <see
-             cref="T:System.Reflection.ParameterInfo" />
+             object. The property is a <see cref="T:System.Reflection.ParameterInfo" />
 
             
 
-             array.The <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+             array.The <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
 
             
 
-             method is invoked during service initialization. Later, at the time a request is populated, the initializer object is passed to the <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Initialize(System.Object)" />
+             method is invoked during service initialization. Later, at the time a request is populated, the initializer object is passed to the <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Initialize(System.Object)" />
 
             
 
-             method of another <see
-             cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+             method of another <see cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
 
             
 
@@ -298,12 +293,15 @@
           <para>Returns an initializer for the specified method.</para>
         </summary>
         <param name="methodInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+          A <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -331,21 +329,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Initialize(System.Object)" />
+            >The <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Initialize(System.Object)" />
 
             
 
              method is invoked at the time a request is populated.</para
           >
           <para
-            >The input parameter, <paramref
-             name="initializer" />
+            >The input parameter, <paramref name="initializer" />
 
             
 
-            , is obtained by calling the <see
-             cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+            , is obtained by calling the <see cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
 
             
 
@@ -357,22 +352,23 @@
           <para>Initializes an instance.</para>
         </summary>
         <param name="initializer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.ParameterInfo" />
+          A <see cref="T:System.Reflection.ParameterInfo" />
 
           
 
-           array obtained through the <see
-           cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
+           array obtained through the <see cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
 
           
 
-           property of the <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+           property of the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
@@ -395,15 +391,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Text.Encoding" />
-        </value>
+        <value>a <see cref="T:System.Text.Encoding" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An encoding, as represented by the <see
-             cref="T:System.Text.Encoding" />
+            >An encoding, as represented by the <see cref="T:System.Text.Encoding" />
 
             
 

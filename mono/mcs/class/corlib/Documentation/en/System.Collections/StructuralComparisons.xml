@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Collections.StructuralComparisons" />
+        >The <see cref="T:System.Collections.StructuralComparisons" />
 
         
 
@@ -27,18 +26,15 @@
       <list type="bullet">
         <item>
           <para
-            >An <see
-             cref="T:System.Collections.IComparer" />
+            >An <see cref="T:System.Collections.IComparer" />
 
             
 
-             implementation that can be passed to a method such as <see
-             cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+             implementation that can be passed to a method such as <see cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
 
             
 
-             or <see
-             cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+             or <see cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
 
             
 
@@ -47,18 +43,15 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="T:System.Collections.IEqualityComparer" />
+            >An <see cref="T:System.Collections.IEqualityComparer" />
 
             
 
-             implementation that can be passed to a method such as <see
-             cref="M:System.Array.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+             implementation that can be passed to a method such as <see cref="M:System.Array.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
             
 
-             or <see
-             cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+             or <see cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
             
 
@@ -95,28 +88,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.Collections.IComparer" />
+            >When the <see cref="T:System.Collections.IComparer" />
 
             
 
-             object returned by this property is passed to the comparison method of a collection object, such as <see
-             cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+             object returned by this property is passed to the comparison method of a collection object, such as <see cref="M:System.Array.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
 
             
 
-             or <see
-             cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
+             or <see cref="M:System.Tuple`3.System#Collections#IStructuralComparable#CompareTo(System.Object,System.Collections.IComparer)" />
 
             
 
-            , its <see
-             cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+            , its <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
             
 
-             method is called for each member of an array or for each component of a tuple. This implementation of the <see
-             cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+             method is called for each member of an array or for each component of a tuple. This implementation of the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
             
 
@@ -128,18 +116,15 @@
             </item>
             <item>
               <para
-                >If the first item in the comparison can be cast to an <see
-                 cref="T:System.Collections.IStructuralComparable" />
+                >If the first item in the comparison can be cast to an <see cref="T:System.Collections.IStructuralComparable" />
 
                 
 
-                 object (in other words, if it is a collection object that implements the <see
-                 cref="T:System.Collections.IStructuralComparable" />
+                 object (in other words, if it is a collection object that implements the <see cref="T:System.Collections.IStructuralComparable" />
 
                 
 
-                 interface), it calls the <see
-                 cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
+                 interface), it calls the <see cref="M:System.Collections.IStructuralComparable.CompareTo(System.Object,System.Collections.IComparer)" />
 
                 
 
@@ -148,13 +133,11 @@
             </item>
             <item>
               <para
-                >If the first item in the comparison cannot be cast to an <see
-                 cref="T:System.Collections.IStructuralComparable" />
+                >If the first item in the comparison cannot be cast to an <see cref="T:System.Collections.IStructuralComparable" />
 
                 
 
-                 object (in other words, if it is not a collection object that implements the <see
-                 cref="T:System.Collections.IStructuralComparable" />
+                 object (in other words, if it is not a collection object that implements the <see cref="T:System.Collections.IStructuralComparable" />
 
                 
 
@@ -190,28 +173,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.Collections.IComparer" />
+            >When the <see cref="T:System.Collections.IComparer" />
 
             
 
-             object returned by this property is passed to the equality comparison method of a collection object, such as <see
-             cref="M:System.Array.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+             object returned by this property is passed to the equality comparison method of a collection object, such as <see cref="M:System.Array.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
             
 
-             or <see
-             cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
+             or <see cref="M:System.Tuple`3.System#Collections#IStructuralEquatable#Equals(System.Object,System.Collections.IEqualityComparer)" />
 
             
 
-            , its <see
-             cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+            , its <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
 
             
 
-             method is called for each member of an array or for each component of a tuple. This implementation of the <see
-             cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
+             method is called for each member of an array or for each component of a tuple. This implementation of the <see cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
 
             
 
@@ -226,18 +204,15 @@
             </item>
             <item>
               <para
-                >If the first item in the comparison can be cast to an <see
-                 cref="T:System.Collections.IStructuralEquatable" />
+                >If the first item in the comparison can be cast to an <see cref="T:System.Collections.IStructuralEquatable" />
 
                 
 
-                 object (in other words, if it is a collection object that implements the <see
-                 cref="T:System.Collections.IStructuralEquatable" />
+                 object (in other words, if it is a collection object that implements the <see cref="T:System.Collections.IStructuralEquatable" />
 
                 
 
-                 interface), it calls the <see
-                 cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" />
+                 interface), it calls the <see cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" />
 
                 
 
@@ -246,13 +221,11 @@
             </item>
             <item>
               <para
-                >If the first item in the comparison cannot be cast to an <see
-                 cref="T:System.Collections.IStructuralEquatable" />
+                >If the first item in the comparison cannot be cast to an <see cref="T:System.Collections.IStructuralEquatable" />
 
                 
 
-                 object (in other words, if it is not a collection object that implements the <see
-                 cref="T:System.Collections.IStructuralEquatable" />
+                 object (in other words, if it is not a collection object that implements the <see cref="T:System.Collections.IStructuralEquatable" />
 
                 
 

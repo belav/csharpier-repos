@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts <see
-         cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+        >Converts <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewCellStyleConverter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewCellStyleConverter" />
 
             
 

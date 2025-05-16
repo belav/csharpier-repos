@@ -28,21 +28,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This attribute is similar to the <see
-         cref="T:System.ServiceModel.DataContractFormatAttribute" />
+        >This attribute is similar to the <see cref="T:System.ServiceModel.DataContractFormatAttribute" />
 
         
 
          attribute. Both attributes can be applied to a method, class, or interface. </para
       >
       <para
-        >crabout the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >crabout the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="c680602d-39d3-44f1-bf22-8e6654ad5069">Using the XmlSerializer</a>
         </format>
 
@@ -51,16 +48,14 @@
         .</para
       >
       <para
-        >A method can have either of the two attributes applied, but not both. Any operation that has neither applied uses the attribute applied to the containing class. If the containing class does not have either attribute applied, the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >A method can have either of the two attributes applied, but not both. Any operation that has neither applied uses the attribute applied to the containing class. If the containing class does not have either attribute applied, the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
          is used. </para
       >
       <para
-        >Applying the attribute also causes a <see
-         cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" />
+        >Applying the attribute also causes a <see cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" />
 
         
 
@@ -70,13 +65,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instructs the indigo1 infrastructure to use the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Instructs the indigo1 infrastructure to use the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         instead of the <see
-         cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+         instead of the <see cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
         
 
@@ -101,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
             
 
@@ -132,13 +124,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" />
+            >The <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Use" />
+             and <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Use" />
 
             
 
@@ -148,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the SOAP style of the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets the SOAP style of the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -173,23 +162,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default formatter for fault serialization is the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >The default formatter for fault serialization is the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 
-            . To use the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            . To use the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-            , set this property to true. Starting in .NET 4 the serializer set by the <see
-             cref="P:System.ServiceModel.XmlSerializerFormatAttribute.SupportFaults" />
+            , set this property to true. Starting in .NET 4 the serializer set by the <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.SupportFaults" />
 
             
 
-             property will be used even if a custom behavior is set on the contract to which the <see
-             cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+             property will be used even if a custom behavior is set on the contract to which the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
             
 
@@ -199,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates that the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that indicates that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -230,13 +214,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" />
+            >The <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Style" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Use" />
+             and <see cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Use" />
 
             
 

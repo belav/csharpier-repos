@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used with the <see
-         cref="P:System.IO.Ports.SerialPort.Handshake" />
+        >This enumeration is used with the <see cref="P:System.IO.Ports.SerialPort.Handshake" />
 
         
 
@@ -29,8 +28,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the control protocol used in establishing a serial port communication for a <see
-         cref="T:System.IO.Ports.SerialPort" />
+        >Specifies the control protocol used in establishing a serial port communication for a <see cref="T:System.IO.Ports.SerialPort" />
 
         
 

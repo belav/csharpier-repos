@@ -27,8 +27,7 @@
       <para>These roles represent the local Windows groups common to most installations of Windows NT, Windows 2000 and Windows XP.</para>
       <block subset="none" type="note">
         <para
-          >In Windows Vista, User Account Control (UAC) determines the privileges of a user. If you are a member of the Built-in Administrators group, you are assigned two run-time access tokens: a standard user access token and an administrator access token. By default, you are in the standard user role. When you attempt to perform a task that requires administrative privileges, you can dynamically elevate your role by using the Consent dialog box. The code that executes the <see
-           cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" />
+          >In Windows Vista, User Account Control (UAC) determines the privileges of a user. If you are a member of the Built-in Administrators group, you are assigned two run-time access tokens: a standard user access token and an administrator access token. By default, you are in the standard user role. When you attempt to perform a task that requires administrative privileges, you can dynamically elevate your role by using the Consent dialog box. The code that executes the <see cref="Overload:System.Security.Principal.WindowsPrincipal.IsInRole" />
 
           
 
@@ -39,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies common roles to be used with <see
-         cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.String)" />
+        >Specifies common roles to be used with <see cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.String)" />
 
         
 

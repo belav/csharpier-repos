@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+        >The <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
-         properties are accessible through the <see
-         cref="P:System.Web.HttpRequest.Browser" />
+         properties are accessible through the <see cref="P:System.Web.HttpRequest.Browser" />
 
         
 
-         property of the ASP.NET intrinsic <see
-         cref="P:System.Web.HttpContext.Request" />
+         property of the ASP.NET intrinsic <see cref="P:System.Web.HttpContext.Request" />
 
         
 
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.HttpBrowserCapabilities" />
+            >Creates a new instance of the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
             
 

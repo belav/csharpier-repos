@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by the <see
-         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />
+        >This class is used by the <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />
 
         
 
-         and <see
-         cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
+         and <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
 
         
 
@@ -57,8 +55,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
@@ -68,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
@@ -123,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -176,13 +171,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The data returned by this property includes addresses of pseudo network interfaces such as tunnels.</para>
           <para
-            >If this instance was obtained by calling <see
-             cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />
+            >If this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv4GlobalStatistics" />
 
             
 
-            , this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see
-             cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
+            , this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
 
             
 

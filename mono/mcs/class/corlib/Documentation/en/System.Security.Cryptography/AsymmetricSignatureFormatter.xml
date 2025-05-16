@@ -33,8 +33,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Asymmetric signature formatters create digital signatures that are verified using implementations of <see
-         cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+        >Asymmetric signature formatters create digital signatures that are verified using implementations of <see cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
 
         
 
@@ -66,18 +65,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You cannot create an instance of an abstract class. Application code will create a new instance of a derived class.</para>
           <para
-            >Use implementations of <see
-             cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" />
+            >Use implementations of <see cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" />
 
             
 
-             and <see
-             cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.SetHashAlgorithm(System.String)" />
+             and <see cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.SetHashAlgorithm(System.String)" />
 
             
 
-             to set the key and hash algorithm before calling an implementation of <see
-             cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
+             to set the key and hash algorithm before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
 
             
 
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+            >Initializes a new instance of <see cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
 
             
 
@@ -130,8 +125,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The digital signature for the <paramref
-             name="rgbHash" />
+            >The digital signature for the <paramref name="rgbHash" />
 
             
 
@@ -139,7 +133,11 @@
           >
         </returns>
         <param name="rgbHash">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,7 +180,11 @@
           <para>The signature for the specified hash value.</para>
         </returns>
         <param name="hash">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -215,8 +217,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a hash algorithm before calling an implementation of <see
-             cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
+            >You must set a hash algorithm before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
 
             
 
@@ -228,7 +229,11 @@
           <para>When overridden in a derived class, sets the hash algorithm to use for creating the signature.</para>
         </summary>
         <param name="strName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,8 +266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must set a key before calling an implementation of <see
-             cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
+            >You must set a key before calling an implementation of <see cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
 
             
 
@@ -274,12 +278,15 @@
           <para>When overridden in a derived class, sets the asymmetric algorithm to use to create the signature.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the implementation of <see
-           cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+          The instance of the implementation of <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
           
 

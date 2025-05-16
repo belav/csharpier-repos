@@ -24,21 +24,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Dns" />
+        >The <see cref="T:System.Net.Dns" />
 
         
 
          class is a static class that retrieves information about a specific host from the Internet Domain Name System (DNS).</para
       >
       <para
-        >The host information from the DNS query is returned in an instance of the <see
-         cref="T:System.Net.IPHostEntry" />
+        >The host information from the DNS query is returned in an instance of the <see cref="T:System.Net.IPHostEntry" />
 
         
 
-         class. If the specified host has more than one entry in the DNS database, <see
-         cref="T:System.Net.IPHostEntry" />
+         class. If the specified host has more than one entry in the DNS database, <see cref="T:System.Net.IPHostEntry" />
 
         
 
@@ -77,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             method asynchronously queries a DNS server for the IP addresses that are associated with a host name. If <paramref
-             name="hostNameOrAddress" />
+             method asynchronously queries a DNS server for the IP addresses that are associated with a host name. If <paramref name="hostNameOrAddress" />
 
             
 
@@ -91,8 +86,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -103,34 +97,29 @@
           </block>
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host for all operating systems except Windows Server 2003; for Windows Server 2003, both IPv4 and IPv6 addresses for the local host are returned.</para>
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Dns.EndGetHostAddresses(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Dns.EndGetHostAddresses(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use the <see
-             cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use the <see cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For more information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For more information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
@@ -142,8 +131,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -151,31 +139,41 @@
           >
         </returns>
         <param name="hostNameOrAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host name or IP address to resolve.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -221,8 +219,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -235,13 +232,14 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. See <see
-           cref="T:System.Net.DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -250,34 +248,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Dns.EndGetHostByName(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Dns.EndGetHostByName(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use the <see
-             cref="M:System.Net.Dns.GetHostByName(System.String)" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use the <see cref="M:System.Net.Dns.GetHostByName(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -287,8 +280,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -301,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous request for <see
-             cref="T:System.Net.IPHostEntry" />
+            >Begins an asynchronous request for <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -312,8 +303,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -321,31 +311,41 @@
           >
         </returns>
         <param name="hostName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DNS name of the host. </param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -380,16 +380,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.BeginGetHostEntry(System.Net.IPAddress,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Dns.BeginGetHostEntry(System.Net.IPAddress,System.AsyncCallback,System.Object)" />
 
             
 
              method asynchronously queries a DNS server for the IP addresses and aliases associated with an IP address.</para
           >
           <para
-            >Note   This member emits trace information when you enable network tracing in your application. For more information, see <format
-             type="text/html">
+            >Note   This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
               <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
             </format>
 
@@ -398,34 +396,29 @@
             .</para
           >
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Dns.BeginGetHostEntry(System.Net.IPAddress,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Dns.BeginGetHostEntry(System.Net.IPAddress,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Dns.EndGetHostEntry(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Dns.EndGetHostEntry(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use the <see
-             cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use the <see cref="M:System.Net.Dns.GetHostEntry(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
           </para>
@@ -433,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Asynchronously resolves an IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Asynchronously resolves an IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -444,8 +436,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -453,31 +444,41 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The IP address to resolve.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -511,16 +512,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.BeginGetHostEntry(System.String,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Dns.BeginGetHostEntry(System.String,System.AsyncCallback,System.Object)" />
 
             
 
              method queries a DNS server for the IP address that is associated with a host name or IP address.</para
           >
           <para
-            >Note   This member emits trace information when you enable network tracing in your application. For more information, see <format
-             type="text/html">
+            >Note   This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
               <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
             </format>
 
@@ -529,34 +528,29 @@
             .</para
           >
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Dns.BeginGetHostEntry(System.String,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Dns.BeginGetHostEntry(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Dns.EndGetHostEntry(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Dns.EndGetHostEntry(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use the <see
-             cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use the <see cref="M:System.Net.Dns.GetHostEntry(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For detailed information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For detailed information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -568,8 +562,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Asynchronously resolves a host name or IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Asynchronously resolves a host name or IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -579,8 +572,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -588,31 +580,41 @@
           >
         </returns>
         <param name="hostNameOrAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The host name or IP address to resolve.</param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -658,8 +660,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -672,13 +673,14 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. See <see
-           cref="T:System.Net.DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -687,34 +689,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The asynchronous <see
-             cref="M:System.Net.Dns.BeginResolve(System.String,System.AsyncCallback,System.Object)" />
+            >The asynchronous <see cref="M:System.Net.Dns.BeginResolve(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             operation must be completed by calling the <see
-             cref="M:System.Net.Dns.EndResolve(System.IAsyncResult)" />
+             operation must be completed by calling the <see cref="M:System.Net.Dns.EndResolve(System.IAsyncResult)" />
 
             
 
-             method. Typically, the method is invoked by the <paramref
-             name="requestCallback" />
+             method. Typically, the method is invoked by the <paramref name="requestCallback" />
 
             
 
              delegate.</para
           >
           <para
-            >This method does not block until the operation is complete. To block until the operation is complete, use the <see
-             cref="M:System.Net.Dns.Resolve(System.String)" />
+            >This method does not block until the operation is complete. To block until the operation is complete, use the <see cref="M:System.Net.Dns.Resolve(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >For more information about using the asynchronous programming model, see <format
-             type="text/html">
+            >For more information about using the asynchronous programming model, see <format type="text/html">
               <a href="41972034-92ed-450a-9664-ab93fcc6f1fb">Asynchronous Programming Overview</a>
             </format>
 
@@ -724,8 +721,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -738,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins an asynchronous request to resolve a DNS host name or IP address to an <see
-             cref="T:System.Net.IPAddress" />
+            >Begins an asynchronous request to resolve a DNS host name or IP address to an <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -749,8 +744,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.IAsyncResult" />
+            >An <see cref="T:System.IAsyncResult" />
 
             
 
@@ -758,31 +752,41 @@
           >
         </returns>
         <param name="hostName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The DNS name of the host. </param
         >
         <param name="requestCallback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.AsyncCallback" />
+          An <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that references the method to invoke when the operation is complete. </param
         >
         <param name="stateObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A user-defined object that contains information about the operation. This object is passed to the <paramref
-           name="requestCallback" />
+          A user-defined object that contains information about the operation. This object is passed to the <paramref name="requestCallback" />
 
           
 
@@ -815,13 +819,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+            >The <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             method queries a DNS server for the IP addresses associated with a host name. If <paramref
-             name="hostNameOrAddress" />
+             method queries a DNS server for the IP addresses associated with a host name. If <paramref name="hostNameOrAddress" />
 
             
 
@@ -830,8 +832,7 @@
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host for all operating systems except Windows Server 2003; for Windows Server 2003, both IPv4 and IPv6 addresses for the local host are returned.</para>
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -848,18 +849,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Net.IPAddress" />
+            >An array of type <see cref="T:System.Net.IPAddress" />
 
             
 
-             that holds the IP addresses for the host specified by the <paramref
-             name="hostNameOrAddress" />
+             that holds the IP addresses for the host specified by the <paramref name="hostNameOrAddress" />
 
             
 
-             parameter of <see
-             cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+             parameter of <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
             
 
@@ -867,17 +865,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance returned by a call to the <see
-           cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
+           instance returned by a call to the <see cref="M:System.Net.Dns.BeginGetHostAddresses(System.String,System.AsyncCallback,System.Object)" />
 
           
 
@@ -921,8 +921,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -932,26 +931,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method blocks until the operation is complete. </para>
           <para
-            >To perform this operation synchronously, use the <see
-             cref="M:System.Net.Dns.GetHostByName(System.String)" />
+            >To perform this operation synchronously, use the <see cref="M:System.Net.Dns.GetHostByName(System.String)" />
 
             
 
              method. </para
           >
           <para
-            >If the <see
-             cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+            >If the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
 
             
 
-             property is set to true, the <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+             property is set to true, the <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -959,8 +954,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -977,8 +971,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -986,17 +979,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance that is returned by a call to the <see
-           cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
+           instance that is returned by a call to the <see cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
 
           
 
@@ -1030,21 +1025,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method blocks until the operation is complete. </para>
           <para
-            >The <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            >The <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
              instance returned is not populated by this method and will always be empty.</para
           >
           <para
-            >To perform this operation synchronously, use a <see
-             cref="Overload:System.Net.Dns.GetHostEntry" />
+            >To perform this operation synchronously, use a <see cref="Overload:System.Net.Dns.GetHostEntry" />
 
             
 
@@ -1052,8 +1044,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1070,8 +1061,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1079,17 +1069,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance returned by a call to an <see
-           cref="Overload:System.Net.Dns.BeginGetHostEntry" />
+           instance returned by a call to an <see cref="Overload:System.Net.Dns.BeginGetHostEntry" />
 
           
 
@@ -1133,8 +1125,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1144,26 +1135,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method blocks until the operation is complete. </para>
           <para
-            >If the <see
-             cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+            >If the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
 
             
 
-             is set to true, the <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+             is set to true, the <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
              instance returned is not populated by this method and will always be empty.</para
           >
           <para
-            >To perform this operation synchronously, use the <see
-             cref="M:System.Net.Dns.Resolve(System.String)" />
+            >To perform this operation synchronously, use the <see cref="M:System.Net.Dns.Resolve(System.String)" />
 
             
 
@@ -1171,8 +1158,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1189,8 +1175,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1198,17 +1183,19 @@
           >
         </returns>
         <param name="asyncResult">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IAsyncResult" />
+          An <see cref="T:System.IAsyncResult" />
 
           
 
-           instance that is returned by a call to the <see
-           cref="M:System.Net.Dns.BeginResolve(System.String,System.AsyncCallback,System.Object)" />
+           instance that is returned by a call to the <see cref="M:System.Net.Dns.BeginResolve(System.String,System.AsyncCallback,System.Object)" />
 
           
 
@@ -1241,13 +1228,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+            >The <see cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
 
             
 
-             method queries a DNS server for the IP addresses associated with a host name. If <paramref
-             name="hostNameOrAddress" />
+             method queries a DNS server for the IP addresses associated with a host name. If <paramref name="hostNameOrAddress" />
 
             
 
@@ -1255,18 +1240,15 @@
           >
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host for all operating systems except Windows Server 2003; for Windows Server 2003, both IPv4 and IPv6 addresses for the local host are returned.</para>
           <para
-            >IPv6 addresses are filtered from the results of the <see
-             cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+            >IPv6 addresses are filtered from the results of the <see cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
 
             
 
-             method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
-             cref="T:System.Net.IPAddress" />
+             method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see cref="T:System.Net.IPAddress" />
 
             
 
-             instance if only IPv6 results where available for the <paramref
-             name="hostNameOrAddress" />
+             instance if only IPv6 results where available for the <paramref name="hostNameOrAddress" />
 
             
 
@@ -1274,8 +1256,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1292,13 +1273,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Net.IPAddress" />
+            >An array of type <see cref="T:System.Net.IPAddress" />
 
             
 
-             that holds the IP addresses for the host that is specified by the <paramref
-             name="hostNameOrAddress" />
+             that holds the IP addresses for the host that is specified by the <paramref name="hostNameOrAddress" />
 
             
 
@@ -1306,7 +1285,11 @@
           >
         </returns>
         <param name="hostNameOrAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1337,21 +1320,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-              object will complete after the <paramref
-             name="hostNameOrAddress" />
+              object will complete after the <paramref name="hostNameOrAddress" />
 
             
 
              has been resolved.</para
           >
           <para
-            >This method queries a DNS server for the IP addresses associated with a host name. If <paramref
-             name="hostNameOrAddress" />
+            >This method queries a DNS server for the IP addresses associated with a host name. If <paramref name="hostNameOrAddress" />
 
             
 
@@ -1365,26 +1345,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             .</para
           >
           <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns an array of type <see
-             cref="T:System.Net.IPAddress" />
+             property on the task object returns an array of type <see cref="T:System.Net.IPAddress" />
 
             
 
-             that holds the IP addresses for the host that is specified by the <paramref
-             name="hostNameOrAddress" />
+             that holds the IP addresses for the host that is specified by the <paramref name="hostNameOrAddress" />
 
             
 
@@ -1392,7 +1368,11 @@
           >
         </returns>
         <param name="hostNameOrAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1436,8 +1416,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1450,13 +1429,14 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. See <see
-           cref="T:System.Net.DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -1466,8 +1446,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1480,13 +1459,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Creates an <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance from the specified <see
-             cref="T:System.Net.IPAddress" />
+             instance from the specified <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -1495,17 +1472,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+          <para>An <see cref="T:System.Net.IPHostEntry" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1513,12 +1486,15 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPAddress" />
+          An <see cref="T:System.Net.IPAddress" />
 
           
 
@@ -1563,8 +1539,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1584,13 +1559,14 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. See <see
-           cref="T:System.Net.DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -1600,8 +1576,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1614,8 +1589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Creates an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1625,8 +1599,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1634,7 +1607,11 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1679,8 +1656,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -1693,13 +1669,14 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. See <see
-           cref="T:System.Net.DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -1708,39 +1685,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostByName(System.String)" />
+            >The <see cref="M:System.Net.Dns.GetHostByName(System.String)" />
 
             
 
              method queries the Internet DNS server for host information. If you pass an empty string as the host name, this method retrieves the standard host name for the local computer.</para
           >
           <para
-            >For asynchronous access to DNS information, use the <see
-             cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
+            >For asynchronous access to DNS information, use the <see cref="M:System.Net.Dns.BeginGetHostByName(System.String,System.AsyncCallback,System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Net.Dns.EndGetHostByName(System.IAsyncResult)" />
+             and <see cref="M:System.Net.Dns.EndGetHostByName(System.IAsyncResult)" />
 
             
 
              methods.</para
           >
           <para
-            >If the <see
-             cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+            >If the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
 
             
 
-             property is set to true, the <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+             property is set to true, the <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1748,8 +1719,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1766,13 +1736,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             object that contains host information for the address specified in <paramref
-             name="hostName" />
+             object that contains host information for the address specified in <paramref name="hostName" />
 
             
 
@@ -1780,7 +1748,11 @@
           >
         </returns>
         <param name="hostName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1813,39 +1785,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostEntry(System.Net.IPAddress)" />
+            >The <see cref="M:System.Net.Dns.GetHostEntry(System.Net.IPAddress)" />
 
             
 
              method queries a DNS server for the IP addresses and aliases associated with an IP address.</para
           >
           <para
-            >IPv6 addresses are filtered from the results of the <see
-             cref="M:System.Net.Dns.GetHostEntry(System.Net.IPAddress)" />
+            >IPv6 addresses are filtered from the results of the <see cref="M:System.Net.Dns.GetHostEntry(System.Net.IPAddress)" />
 
             
 
-             method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
-             cref="T:System.Net.IPHostEntry" />
+             method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance if only IPv6 results where available for the <paramref
-             name="address" />
+             instance if only IPv6 results where available for the <paramref name="address" />
 
             
 
              parameter.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            >The <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1853,8 +1819,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -1867,8 +1832,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resolves an IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Resolves an IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -1878,13 +1842,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance that contains address information about the host specified in <paramref
-             name="address" />
+             instance that contains address information about the host specified in <paramref name="address" />
 
             
 
@@ -1892,7 +1854,11 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1924,8 +1890,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+            >The <see cref="M:System.Net.Dns.GetHostEntry(System.String)" />
 
             
 
@@ -1933,69 +1898,57 @@
           >
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host.</para>
           <para
-            >If the host name could not be found, the <see
-             cref="T:System.Net.Sockets.SocketException" />
+            >If the host name could not be found, the <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
              exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried. </para
           >
           <para
-            >The <see
-             cref="T:System.ArgumentException" />
+            >The <see cref="T:System.ArgumentException" />
 
             
 
-             exception is also returned if the <paramref
-             name="hostNameOrAddress" />
+             exception is also returned if the <paramref name="hostNameOrAddress" />
 
             
 
-             parameter contains <see
-             cref="F:System.Net.IPAddress.Any" />
+             parameter contains <see cref="F:System.Net.IPAddress.Any" />
 
             
 
-             or <see
-             cref="F:System.Net.IPAddress.IPv6Any" />
+             or <see cref="F:System.Net.IPAddress.IPv6Any" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+            >The <see cref="M:System.Net.Dns.GetHostEntry(System.String)" />
 
             
 
-             method assumes that if an IP literal string is passed in the <paramref
-             name="hostNameOrAddress" />
+             method assumes that if an IP literal string is passed in the <paramref name="hostNameOrAddress" />
 
             
 
-             parameter that the application wants an <see
-             cref="T:System.Net.IPHostEntry" />
+             parameter that the application wants an <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance returned with all of the properties set. These properties include the <see
-             cref="P:System.Net.IPHostEntry.AddressList" />
+             instance returned with all of the properties set. These properties include the <see cref="P:System.Net.IPHostEntry.AddressList" />
 
             
 
-            , <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            , <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-            , and <see
-             cref="P:System.Net.IPHostEntry.HostName" />
+            , and <see cref="P:System.Net.IPHostEntry.HostName" />
 
             
 
-            . As a result, the implementation of the <see
-             cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+            . As a result, the implementation of the <see cref="M:System.Net.Dns.GetHostEntry(System.String)" />
 
             
 
@@ -2004,8 +1957,7 @@
           <list type="ordered">
             <item>
               <para
-                >The method tries to parse the address. If the <paramref
-                 name="hostNameOrAddress" />
+                >The method tries to parse the address. If the <paramref name="hostNameOrAddress" />
 
                 
 
@@ -2014,8 +1966,7 @@
             </item>
             <item>
               <para
-                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see
-                 cref="P:System.Net.IPHostEntry.HostName" />
+                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see cref="P:System.Net.IPHostEntry.HostName" />
 
                 
 
@@ -2024,8 +1975,7 @@
             </item>
             <item>
               <para
-                >The host name from this reverse lookup is used again to obtain all the possible IP addresses associated with the name and set as the <see
-                 cref="P:System.Net.IPHostEntry.AddressList" />
+                >The host name from this reverse lookup is used again to obtain all the possible IP addresses associated with the name and set as the <see cref="P:System.Net.IPHostEntry.AddressList" />
 
                 
 
@@ -2035,47 +1985,40 @@
           </list>
           <para>For an IPv4 string literal, all three steps above may succeed. But it is possible for a stale DNS record for an IPv4 address that actually belongs to a different host to be returned. This may cause step #3 to fail and throw an exception (there is a DNS PTR record for the IPv4 address, but no DNS A record for the IPv4 address).</para>
           <para
-            >For IPv6, step #2 above may fail, since most IPv6 deployments do not register the reverse (PTR) record for an IPv6 address. So this method may return the string IPv6 literal as the fully-qualified domain (FQDN) host name in the <see
-             cref="P:System.Net.IPHostEntry.HostName" />
+            >For IPv6, step #2 above may fail, since most IPv6 deployments do not register the reverse (PTR) record for an IPv6 address. So this method may return the string IPv6 literal as the fully-qualified domain (FQDN) host name in the <see cref="P:System.Net.IPHostEntry.HostName" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+            >The <see cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
 
             
 
              method has different behavior with respect to IP literals. If step #1 above succeeds (it successfully parses as an IP address), that address is immediately returned as the result. There is no attempt at a reverse lookup.</para
           >
           <para
-            >IPv6 addresses are filtered from the results of the <see
-             cref="M:System.Net.Dns.GetHostEntry(System.String)" />
+            >IPv6 addresses are filtered from the results of the <see cref="M:System.Net.Dns.GetHostEntry(System.String)" />
 
             
 
-             method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
-             cref="T:System.Net.IPHostEntry" />
+             method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance if only IPv6 results where available for the <paramref
-             name="hostNameOrAddress" />
+             instance if only IPv6 results where available for the <paramref name="hostNameOrAddress" />
 
             
 
             .parameter.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            >The <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2083,8 +2026,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -2097,8 +2039,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resolves a host name or IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Resolves a host name or IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2108,13 +2049,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance that contains address information about the host specified in <paramref
-             name="hostNameOrAddress" />
+             instance that contains address information about the host specified in <paramref name="hostNameOrAddress" />
 
             
 
@@ -2122,7 +2061,11 @@
           >
         </returns>
         <param name="hostNameOrAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2153,13 +2096,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-              object will complete after the <paramref
-             name="address" />
+              object will complete after the <paramref name="address" />
 
             
 
@@ -2167,26 +2108,22 @@
           >
           <para>This method queries a DNS server for the IP addresses and aliases associated with an IP address.</para>
           <para
-            >IPv6 addresses are filtered from the results of this method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
-             cref="T:System.Net.IPHostEntry" />
+            >IPv6 addresses are filtered from the results of this method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance if only IPv6 results where available for the <paramref
-             name="address" />
+             instance if only IPv6 results where available for the <paramref name="address" />
 
             
 
              parameter.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            >The <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2194,8 +2131,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -2208,8 +2144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resolves an IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Resolves an IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2219,26 +2154,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             .</para
           >
           <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns an <see
-             cref="T:System.Net.IPHostEntry" />
+             property on the task object returns an <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance that contains address information about the host specified in <paramref
-             name="address" />
+             instance that contains address information about the host specified in <paramref name="address" />
 
             
 
@@ -2246,7 +2177,11 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2277,13 +2212,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
-              object will complete after the <paramref
-             name="hostNameOrAddress" />
+              object will complete after the <paramref name="hostNameOrAddress" />
 
             
 
@@ -2292,59 +2225,49 @@
           <para>This method queries a DNS server for the IP address that is associated with a host name or IP address.</para>
           <para>When an empty string is passed as the host name, this method returns the IPv4 addresses of the local host.</para>
           <para
-            >If the host name could not be found, the <see
-             cref="T:System.Net.Sockets.SocketException" />
+            >If the host name could not be found, the <see cref="T:System.Net.Sockets.SocketException" />
 
             
 
              exception is returned with a value of 11001 (Windows Sockets error WSAHOST_NOT_FOUND). This exception can be returned if the DNS server does not respond. This exception can also be returned if the name is not an official host name or alias, or it cannot be found in the database(s) being queried. </para
           >
           <para
-            >The <see
-             cref="T:System.ArgumentException" />
+            >The <see cref="T:System.ArgumentException" />
 
             
 
-             exception is also returned if the <paramref
-             name="hostNameOrAddress" />
+             exception is also returned if the <paramref name="hostNameOrAddress" />
 
             
 
-             parameter contains <see
-             cref="F:System.Net.IPAddress.Any" />
+             parameter contains <see cref="F:System.Net.IPAddress.Any" />
 
             
 
-             or <see
-             cref="F:System.Net.IPAddress.IPv6Any" />
+             or <see cref="F:System.Net.IPAddress.IPv6Any" />
 
             
 
             .</para
           >
           <para
-            >This method assumes that if an IP literal string is passed in the <paramref
-             name="hostNameOrAddress" />
+            >This method assumes that if an IP literal string is passed in the <paramref name="hostNameOrAddress" />
 
             
 
-             parameter that the application wants an <see
-             cref="T:System.Net.IPHostEntry" />
+             parameter that the application wants an <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance returned with all of the properties set. These properties include the <see
-             cref="P:System.Net.IPHostEntry.AddressList" />
+             instance returned with all of the properties set. These properties include the <see cref="P:System.Net.IPHostEntry.AddressList" />
 
             
 
-            , <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            , <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-            , and <see
-             cref="P:System.Net.IPHostEntry.HostName" />
+            , and <see cref="P:System.Net.IPHostEntry.HostName" />
 
             
 
@@ -2353,8 +2276,7 @@
           <list type="ordered">
             <item>
               <para
-                >The method tries to parse the address. If the <paramref
-                 name="hostNameOrAddress" />
+                >The method tries to parse the address. If the <paramref name="hostNameOrAddress" />
 
                 
 
@@ -2363,8 +2285,7 @@
             </item>
             <item>
               <para
-                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see
-                 cref="P:System.Net.IPHostEntry.HostName" />
+                >A reverse lookup using the IP address of the IP string literal is attempted to obtain the host name. This result is set as the <see cref="P:System.Net.IPHostEntry.HostName" />
 
                 
 
@@ -2373,8 +2294,7 @@
             </item>
             <item>
               <para
-                >The host name from this reverse lookup is used again to obtain all the possible IP addresses associated with the name and set as the <see
-                 cref="P:System.Net.IPHostEntry.AddressList" />
+                >The host name from this reverse lookup is used again to obtain all the possible IP addresses associated with the name and set as the <see cref="P:System.Net.IPHostEntry.AddressList" />
 
                 
 
@@ -2384,42 +2304,36 @@
           </list>
           <para>For an IPv4 string literal, all three steps above may succeed. But it is possible for a stale DNS record for an IPv4 address that actually belongs to a different host to be returned. This may cause step #3 to fail and throw an exception (there is a DNS PTR record for the IPv4 address, but no DNS A record for the IPv4 address).</para>
           <para
-            >For IPv6, step #2 above may fail, since most IPv6 deployments do not register the reverse (PTR) record for an IPv6 address. So this method may return the string IPv6 literal as the fully-qualified domain (FQDN) host name in the <see
-             cref="P:System.Net.IPHostEntry.HostName" />
+            >For IPv6, step #2 above may fail, since most IPv6 deployments do not register the reverse (PTR) record for an IPv6 address. So this method may return the string IPv6 literal as the fully-qualified domain (FQDN) host name in the <see cref="P:System.Net.IPHostEntry.HostName" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
+            >The <see cref="M:System.Net.Dns.GetHostAddresses(System.String)" />
 
             
 
              method has different behavior with respect to IP literals. If step #1 above succeeds (it successfully parses as an IP address), that address is immediately returned as the result. There is no attempt at a reverse lookup.</para
           >
           <para
-            >IPv6 addresses are filtered from the results of this method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see
-             cref="T:System.Net.IPHostEntry" />
+            >IPv6 addresses are filtered from the results of this method if the local computer does not have IPv6 installed. As a result, it is possible to get back an empty <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance if only IPv6 results where available for the <paramref
-             name="hostNameOrAddress" />
+             instance if only IPv6 results where available for the <paramref name="hostNameOrAddress" />
 
             
 
             .parameter.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+            >The <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2427,8 +2341,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -2441,8 +2354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resolves a host name or IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Resolves a host name or IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2452,26 +2364,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
             .</para
           >
           <para
-            >The task object representing the asynchronous operation. The <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The task object representing the asynchronous operation. The <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
-             property on the task object returns an <see
-             cref="T:System.Net.IPHostEntry" />
+             property on the task object returns an <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance that contains address information about the host specified in <paramref
-             name="hostNameOrAddress" />
+             instance that contains address information about the host specified in <paramref name="hostNameOrAddress" />
 
             
 
@@ -2479,7 +2387,11 @@
           >
         </returns>
         <param name="hostNameOrAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2516,13 +2428,14 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. See <see
-           cref="T:System.Net.DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -2575,8 +2488,7 @@
 
           
 
-          is <see
-           langword="null" />
+          is <see langword="null" />
 
           
 
@@ -2589,18 +2501,18 @@
           >The caller does not have permission to access DNS information.</exception
         >
         <permission cref="T:System.Net.DnsPermission"
-          >Requires unrestricted permission for accessing DNS information. This method also asserts unrestricted <see
-           langword="DnsPermission" />
+          >Requires unrestricted permission for accessing DNS information. This method also asserts unrestricted <see langword="DnsPermission" />
 
           
 
-           . See <see
-           cref="T:System.Net.DnsPermission" />
+           . See <see cref="T:System.Net.DnsPermission" />
 
           
 
            and <see
-           cref="F:System.Security.Permissions.PermissionState.Unrestricted" qualify="true" />
+            cref="F:System.Security.Permissions.PermissionState.Unrestricted"
+            qualify="true"
+          />
 
           
 
@@ -2608,8 +2520,7 @@
         >
         <example>
           <para
-            >The following example demonstrates the use of the <see
-             cref="M:System.Net.Dns.Resolve(System.String)" />
+            >The following example demonstrates the use of the <see cref="M:System.Net.Dns.Resolve(System.String)" />
 
             
 
@@ -2646,34 +2557,29 @@ public class DnsTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Dns.Resolve(System.String)" />
+            >The <see cref="M:System.Net.Dns.Resolve(System.String)" />
 
             
 
              method queries a DNS server for the IP address associated with a host name or IP address.</para
           >
           <para
-            >When <paramref
-             name="hostName" />
+            >When <paramref name="hostName" />
 
             
 
              is a DNS-style host name associated with multiple IP addresses, only the first IP address that resolves to that host name is returned.</para
           >
           <para
-            >If the <see
-             cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
+            >If the <see cref="P:System.Net.Configuration.Ipv6Element.Enabled" />
 
             
 
-             property is set to true, the <see
-             cref="P:System.Net.IPHostEntry.Aliases" />
+             property is set to true, the <see cref="P:System.Net.IPHostEntry.Aliases" />
 
             
 
-             property of the <see
-             cref="T:System.Net.IPHostEntry" />
+             property of the <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2681,8 +2587,7 @@ public class DnsTest {
           >
           <block subset="none" type="note">
             <para
-              >This member emits trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member emits trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
 
@@ -2695,8 +2600,7 @@ public class DnsTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resolves a DNS host name or IP address to an <see
-             cref="T:System.Net.IPHostEntry" />
+            >Resolves a DNS host name or IP address to an <see cref="T:System.Net.IPHostEntry" />
 
             
 
@@ -2706,13 +2610,11 @@ public class DnsTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPHostEntry" />
+            >An <see cref="T:System.Net.IPHostEntry" />
 
             
 
-             instance that contains address information about the host specified in <paramref
-             name="hostName" />
+             instance that contains address information about the host specified in <paramref name="hostName" />
 
             
 
@@ -2720,7 +2622,11 @@ public class DnsTest {
           >
         </returns>
         <param name="hostName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

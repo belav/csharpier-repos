@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsPropertyCollection" />
+        >The <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
         
 
-         collection contains a collection of <see
-         cref="T:System.Configuration.SettingsProperty" />
+         collection contains a collection of <see cref="T:System.Configuration.SettingsProperty" />
 
         
 
-         objects. A <see
-         cref="T:System.Configuration.SettingsProperty" />
+         objects. A <see cref="T:System.Configuration.SettingsProperty" />
 
         
 
@@ -50,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see
-         cref="T:System.Configuration.SettingsProperty" />
+        >Contains a collection of <see cref="T:System.Configuration.SettingsProperty" />
 
         
 
@@ -78,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -114,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Configuration.SettingsProperty" />
+            >Adds a <see cref="T:System.Configuration.SettingsProperty" />
 
             
 
@@ -123,12 +117,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsProperty" />
+          A <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -157,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Configuration.SettingsProperty" />
+            >Removes all <see cref="T:System.Configuration.SettingsProperty" />
 
             
 
@@ -192,8 +188,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >A <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -226,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies this <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Copies this <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -235,14 +229,22 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array to copy the object to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that specifies the number of <see
-             cref="T:System.Configuration.SettingsProperty" />
+            >Gets a value that specifies the number of <see cref="T:System.Configuration.SettingsProperty" />
 
             
 
@@ -302,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Collections.IEnumerator" />
+            >Gets the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -313,8 +313,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Collections.IEnumerator" />
+            >The <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -398,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional, custom processing when adding to the contents of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Performs additional, custom processing when adding to the contents of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -407,12 +405,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsProperty" />
+          A <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -446,8 +447,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional, custom processing after adding to the contents of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Performs additional, custom processing after adding to the contents of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -455,12 +455,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsProperty" />
+          A <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -489,8 +492,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional, custom processing when clearing the contents of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Performs additional, custom processing when clearing the contents of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -520,8 +522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional, custom processing after clearing the contents of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Performs additional, custom processing after clearing the contents of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -556,8 +557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional, custom processing when removing the contents of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Performs additional, custom processing when removing the contents of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -565,12 +565,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsProperty" />
+          A <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -604,8 +607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional, custom processing after removing the contents of the <see
-             cref="T:System.Configuration.SettingsPropertyCollection" />
+            >Performs additional, custom processing after removing the contents of the <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
             
 
@@ -613,12 +615,15 @@
           >
         </summary>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsProperty" />
+          A <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -649,8 +654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Configuration.SettingsProperty" />
+            >Removes a <see cref="T:System.Configuration.SettingsProperty" />
 
             
 
@@ -658,12 +662,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Configuration.SettingsProperty" />
+          The name of the <see cref="T:System.Configuration.SettingsProperty" />
 
           
 

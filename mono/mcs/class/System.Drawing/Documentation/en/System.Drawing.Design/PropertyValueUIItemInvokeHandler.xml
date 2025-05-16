@@ -26,46 +26,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Double-clicking an icon in the Properties window will raise the <see
-         cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
+        >Double-clicking an icon in the Properties window will raise the <see cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
 
         
 
-         event of the <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         event of the <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
-         that the icon is associated with. The <see
-         cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
+         that the icon is associated with. The <see cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
 
         
 
-         event typically launches a user interface (UI) to edit the property's value. Add a <see
-         cref="T:System.Drawing.Design.PropertyValueUIItemInvokeHandler" />
+         event typically launches a user interface (UI) to edit the property's value. Add a <see cref="T:System.Drawing.Design.PropertyValueUIItemInvokeHandler" />
 
         
 
-         to the <see
-         cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
+         to the <see cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
 
         
 
-         property of a <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         property of a <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 
          to assign an event handler to perform the appropriate behavior when the icon displayed next to the property name is double-clicked.</para
       >
       <para
-        >When you create a <see
-         cref="T:System.Drawing.Design.PropertyValueUIItemInvokeHandler" />
+        >When you create a <see cref="T:System.Drawing.Design.PropertyValueUIItemInvokeHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
         </format>
 
@@ -77,13 +69,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
+        >Represents the method that will handle the <see cref="P:System.Drawing.Design.PropertyValueUIItem.InvokeHandler" />
 
         
 
-         event of a <see
-         cref="T:System.Drawing.Design.PropertyValueUIItem" />
+         event of a <see cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
         
 

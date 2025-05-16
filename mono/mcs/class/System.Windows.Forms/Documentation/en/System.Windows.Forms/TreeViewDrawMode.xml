@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.TreeView.DrawMode" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.TreeView.DrawMode" />
 
         
 
-         property to indicate whether the nodes or node-labels of a <see
-         cref="T:System.Windows.Forms.TreeView" />
+         property to indicate whether the nodes or node-labels of a <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
-         are owner-drawn. For more information, see the <see
-         cref="E:System.Windows.Forms.TreeView.DrawNode" />
+         are owner-drawn. For more information, see the <see cref="E:System.Windows.Forms.TreeView.DrawNode" />
 
         
 
@@ -34,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that represent the ways a <see
-         cref="T:System.Windows.Forms.TreeView" />
+        >Defines constants that represent the ways a <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
@@ -55,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >The <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -79,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All elements of a <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >All elements of a <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
@@ -103,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The label portion of the <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >The label portion of the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 

@@ -27,13 +27,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Hosting.ActivationArguments" />
+        >The <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
         
 
-         class is used by the <see
-         cref="T:System.AppDomainSetup" />
+         class is used by the <see cref="T:System.AppDomainSetup" />
 
         
 
@@ -69,18 +67,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ActivationContext" />
+            >The <see cref="T:System.ActivationContext" />
 
             
 
-             object represented by the <paramref
-             name="activationData" />
+             object represented by the <paramref name="activationData" />
 
             
 
-             parameter contains the <see
-             cref="T:System.ApplicationIdentity" />
+             parameter contains the <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
@@ -99,7 +93,11 @@
           >
         </summary>
         <param name="activationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -133,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
@@ -142,7 +139,11 @@
           >
         </summary>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -173,18 +174,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ActivationContext" />
+            >The <see cref="T:System.ActivationContext" />
 
             
 
-             object represented by the <paramref
-             name="activationContext" />
+             object represented by the <paramref name="activationContext" />
 
             
 
-             parameter contains the <see
-             cref="T:System.ApplicationIdentity" />
+             parameter contains the <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -194,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
@@ -203,14 +200,22 @@
           >
         </summary>
         <param name="activationContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that identifies the manifest-based activation application.</param
         >
         <param name="activationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -245,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Hosting.ActivationArguments" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Hosting.ActivationArguments" />
 
             
 
@@ -254,14 +258,22 @@
           >
         </summary>
         <param name="applicationIdentity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that identifies the manifest-based activation application.</param
         >
         <param name="activationData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,13 +301,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ActivationContext" />
+            >The <see cref="T:System.ActivationContext" />
 
             
 
-             object contains an <see
-             cref="T:System.ApplicationIdentity" />
+             object contains an <see cref="T:System.ApplicationIdentity" />
 
             
 

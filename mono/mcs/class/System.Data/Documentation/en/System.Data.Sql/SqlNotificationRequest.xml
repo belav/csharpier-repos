@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides low-level access to the query notification services exposed by SQL Server 2005. For most applications the <see
-         cref="T:System.Data.SqlClient.SqlDependency" />
+        >This class provides low-level access to the query notification services exposed by SQL Server 2005. For most applications the <see cref="T:System.Data.SqlClient.SqlDependency" />
 
         
 
-         class provides a simpler way of using query notifications. However, if you need fine control over when notifications occur, or you need to customize the message data returned as part of a notification, the <see
-         cref="T:System.Data.Sql.SqlNotificationRequest" />
+         class provides a simpler way of using query notifications. However, if you need fine control over when notifications occur, or you need to customize the message data returned as part of a notification, the <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
         
 
@@ -42,43 +40,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the default constructor is used to create a <see
-             cref="T:System.Data.Sql.SqlNotificationRequest" />
+            >If the default constructor is used to create a <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
             
 
-             object, that instance must have its <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
+             object, that instance must have its <see cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
 
             
 
-             and <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
+             and <see cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
 
             
 
-             properties initialized before assigning the object to a <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+             properties initialized before assigning the object to a <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             object's <see
-             cref="P:System.Data.SqlClient.SqlCommand.Notification" />
+             object's <see cref="P:System.Data.SqlClient.SqlCommand.Notification" />
 
             
 
-             property. The default values used by the constructor are NULL (Nothing in Visual Basic) for the <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
+             property. The default values used by the constructor are NULL (Nothing in Visual Basic) for the <see cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
 
             
 
-            , an empty string for the <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
+            , an empty string for the <see cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
 
             
 
-            , and zero for the <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.Timeout" />
+            , and zero for the <see cref="P:System.Data.Sql.SqlNotificationRequest.Timeout" />
 
             
 
@@ -88,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Data.Sql.SqlNotificationRequest" />
+            >Creates a new instance of the <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
             
 
@@ -117,8 +106,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows you to initialize a new <see
-             cref="T:System.Data.Sql.SqlNotificationRequest" />
+            >This constructor allows you to initialize a new <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
             
 
@@ -128,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Data.Sql.SqlNotificationRequest" />
+            >Creates a new instance of the <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
             
 
@@ -137,21 +124,33 @@
           >
         </summary>
         <param name="userData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains an application-specific identifier for this notification. It is not used by the notifications infrastructure, but it allows you to associate notifications with the application state. The value indicated in this parameter is included in the Service Broker queue message. </param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that contains the Service Broker service name where notification messages are posted, and it must include a database name or a Service Broker instance GUID that restricts the scope of the service name lookup to a particular database.</param
         >
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -174,8 +173,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
+            >The value of the <see cref="P:System.Data.Sql.SqlNotificationRequest.Options" />
 
             
 
@@ -207,8 +205,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After the time-out period expires, the notification is sent even if no change takes place. The <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.Timeout" />
+            >After the time-out period expires, the notification is sent even if no change takes place. The <see cref="P:System.Data.Sql.SqlNotificationRequest.Timeout" />
 
             
 
@@ -236,8 +233,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value is not used by the notifications infrastructure. Instead, it is a mechanism that allows an application to associate notifications with application state. The value specified in the <see
-             cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
+            >This value is not used by the notifications infrastructure. Instead, it is a mechanism that allows an application to associate notifications with application state. The value specified in the <see cref="P:System.Data.Sql.SqlNotificationRequest.UserData" />
 
             
 

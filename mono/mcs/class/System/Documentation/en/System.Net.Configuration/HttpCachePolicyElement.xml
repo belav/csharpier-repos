@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="2c1247d0-39b0-4c12-919a-a925ce075c79"
             >DefaultHttpCachePolicy Element (Network Settings)</a
           >
@@ -34,13 +33,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to specify the HTTP caching configuration that applies to network resources obtained by using the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to specify the HTTP caching configuration that applies to network resources obtained by using the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -71,23 +68,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds the <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumAge" />
+            >This constructor adds the <see cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumAge" />
 
             
 
-            , <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumStale" />
+            , <see cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumStale" />
 
             
 
-            , <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.MinimumFresh" />
+            , <see cref="P:System.Net.Configuration.HttpCachePolicyElement.MinimumFresh" />
 
             
 
-            , and <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.PolicyLevel" />
+            , and <see cref="P:System.Net.Configuration.HttpCachePolicyElement.PolicyLevel" />
 
             
 
@@ -97,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.HttpCachePolicyElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.HttpCachePolicyElement" />
 
             
 
@@ -265,13 +257,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications typically use <see
-             cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+            >Applications typically use <see cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
 
             
 
-             as their cache policy level. The <see
-             cref="P:System.Net.WebRequest.CachePolicy" />
+             as their cache policy level. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
             
 
@@ -307,23 +297,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains four elements, which corresponds to the <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumAge" />
+            >The collection contains four elements, which corresponds to the <see cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumAge" />
 
             
 
-            , <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumStale" />
+            , <see cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumStale" />
 
             
 
-            , <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.MinimumFresh" />
+            , <see cref="P:System.Net.Configuration.HttpCachePolicyElement.MinimumFresh" />
 
             
 
-            , and <see
-             cref="P:System.Net.Configuration.HttpCachePolicyElement.PolicyLevel" />
+            , and <see cref="P:System.Net.Configuration.HttpCachePolicyElement.PolicyLevel" />
 
             
 

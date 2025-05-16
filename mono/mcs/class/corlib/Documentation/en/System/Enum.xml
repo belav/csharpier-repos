@@ -43,13 +43,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An enumeration is a set of named constants whose underlying type is any integral type. If no underlying type is explicitly declared, <see
-         cref="T:System.Int32" />
+        >An enumeration is a set of named constants whose underlying type is any integral type. If no underlying type is explicitly declared, <see cref="T:System.Int32" />
 
         
 
-         is used. <see
-         cref="T:System.Enum" />
+         is used. <see cref="T:System.Enum" />
 
         
 
@@ -63,15 +61,13 @@
          provides methods for comparing instances of this class, converting the value of an instance to its string representation, converting the string representation of a number to an instance of this class, and creating an instance of a specified enumeration and value.</para
       >
       <para
-        >You can also treat an enumeration as a bit field. For more information, see the <format
-         type="text/html">
+        >You can also treat an enumeration as a bit field. For more information, see the <format type="text/html">
           <a href="#Flags">Non-Exclusive Members and the Flags Attribute</a>
         </format>
 
         
 
-         section and the <see
-         cref="T:System.FlagsAttribute" />
+         section and the <see cref="T:System.FlagsAttribute" />
 
         
 
@@ -84,8 +80,7 @@
         <h2>Creating an Enumeration Type</h2>
       </format>
       <para
-        >Programming languages typically provide syntax to declare an enumeration that consists of a set of named constants and their values. The following example illustrates the syntax used by C# and Visual Basic to define an enumeration. It creates an enumeration named ArrivalStatus that has three members: ArrivalStatus.Early, ArrivalStatus.OnTime, and ArrivalStatus.Late. Note that in both cases, the enumeration does not explicitly inherit from <see
-         cref="T:System.Enum" />
+        >Programming languages typically provide syntax to declare an enumeration that consists of a set of named constants and their values. The following example illustrates the syntax used by C# and Visual Basic to define an enumeration. It creates an enumeration named ArrivalStatus that has three members: ArrivalStatus.Early, ArrivalStatus.OnTime, and ArrivalStatus.Late. Note that in both cases, the enumeration does not explicitly inherit from <see cref="T:System.Enum" />
 
         
 
@@ -94,8 +89,7 @@
       <para>code reference: System.Enum.Class#1</para>
       <block subset="none" type="note">
         <para
-          >You should never create an enumeration type whose underlying type is non-integral or <see
-           cref="T:System.Char" />
+          >You should never create an enumeration type whose underlying type is non-integral or <see cref="T:System.Char" />
 
           
 
@@ -122,18 +116,15 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Enum.Parse(System.Type,System.String)" />
+            >By calling the <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
             
 
-             or <see
-             cref="M:System.Enum.TryParse``1(System.String,``0@)" />
+             or <see cref="M:System.Enum.TryParse``1(System.String,``0@)" />
 
             
 
-             method to parse a string that contains the name of a constant in the enumeration. For more information, see the <format
-             type="text/html">
+             method to parse a string that contains the name of a constant in the enumeration. For more information, see the <format type="text/html">
               <a href="#parsing">Parsing Enumeration Values</a>
             </format>
 
@@ -144,13 +135,11 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
+            >By calling the <see cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
 
             
 
-             method to convert an integral value to an enumeration type. For more information, see the <format
-             type="text/html">
+             method to convert an integral value to an enumeration type. For more information, see the <format type="text/html">
               <a href="#conversions">Performing Conversions</a>
             </format>
 
@@ -182,8 +171,7 @@
         </item>
       </list>
       <para
-        >Additional best practices for enumeration types whose constants are bit fields are listed in the <format
-         type="text/html">
+        >Additional best practices for enumeration types whose constants are bit fields are listed in the <format type="text/html">
           <a href="#Flags">Non-Exclusive Members and the Flags Attribute</a>
         </format>
 
@@ -198,8 +186,7 @@
         <h2>Performing Operations with Enumerations</h2>
       </format>
       <para
-        >You cannot define new methods when you are creating an enumeration. However, an enumeration type inherits a complete set of static and instance methods from the <see
-         cref="T:System.Enum" />
+        >You cannot define new methods when you are creating an enumeration. However, an enumeration type inherits a complete set of static and instance methods from the <see cref="T:System.Enum" />
 
         
 
@@ -214,33 +201,27 @@
       <para>You can convert between an enumeration member and its underlying type by using a casting (in C#) or conversion (in Visual Basic) operator. The following example uses casting or conversion operators to perform conversions both from an integer to an enumeration value and from an enumeration value to an integer.</para>
       <para>code reference: System.Enum.Class#5</para>
       <para
-        >The <see
-         cref="T:System.Enum" />
+        >The <see cref="T:System.Enum" />
 
         
 
-         class also includes a <see
-         cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
+         class also includes a <see cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
 
         
 
-         method that converts a value of any integral type to an enumeration value. The following example uses the <see
-         cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
+         method that converts a value of any integral type to an enumeration value. The following example uses the <see cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
 
         
 
-         method to convert an <see
-         cref="T:System.Int32" />
+         method to convert an <see cref="T:System.Int32" />
 
         
 
-         to an ArrivalStatus value. Note that, because the <see
-         cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
+         to an ArrivalStatus value. Note that, because the <see cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
 
         
 
-         returns a value of type <see
-         cref="T:System.Object" />
+         returns a value of type <see cref="T:System.Object" />
 
         
 
@@ -248,8 +229,7 @@
       >
       <para>code reference: System.Enum.Class#6</para>
       <para
-        >When converting an integer to an enumeration value, it is possible to assign a value that is not actually a member of the enumeration. To prevent this, you can pass the integer to the <see
-         cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+        >When converting an integer to an enumeration value, it is possible to assign a value that is not actually a member of the enumeration. To prevent this, you can pass the integer to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
         
 
@@ -257,33 +237,27 @@
       >
       <para>code reference: System.Enum.Class#7</para>
       <para
-        >Although the <see
-         cref="T:System.Enum" />
+        >Although the <see cref="T:System.Enum" />
 
         
 
-         class provides explicit interface implementations of the <see
-         cref="T:System.IConvertible" />
+         class provides explicit interface implementations of the <see cref="T:System.IConvertible" />
 
         
 
-         interface for converting from an enumeration value to an integral type, you should use the methods of the <see
-         cref="T:System.Convert" />
+         interface for converting from an enumeration value to an integral type, you should use the methods of the <see cref="T:System.Convert" />
 
         
 
-         class, such as <see
-         cref="M:System.Convert.ToInt32(System.Object)" />
+         class, such as <see cref="M:System.Convert.ToInt32(System.Object)" />
 
         
 
-        , to perform these conversions. The following example illustrates how you can use the <see
-         cref="M:System.Enum.GetUnderlyingType(System.Type)" />
+        , to perform these conversions. The following example illustrates how you can use the <see cref="M:System.Enum.GetUnderlyingType(System.Type)" />
 
         
 
-         method along with the <see
-         cref="M:System.Convert.ChangeType(System.Object,System.Type)" />
+         method along with the <see cref="M:System.Convert.ChangeType(System.Object,System.Type)" />
 
         
 
@@ -297,28 +271,23 @@
         <h2>Parsing Enumeration Values</h2>
       </format>
       <para
-        >The <see
-         cref="M:System.Enum.Parse(System.Type,System.String)" />
+        >The <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
         
 
-         and <see
-         cref="M:System.Enum.TryParse``1(System.String,``0@)" />
+         and <see cref="M:System.Enum.TryParse``1(System.String,``0@)" />
 
         
 
-         methods allow you to convert the string representation of an enumeration value to that value. The string representation can be either the name or the underlying value of an enumeration constant. Note that the parsing methods will successfully convert string representations of numbers that are not members of a particular enumeration if the strings can be converted to a value of the enumeration's underlying type. To prevent this, the <see
-         cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+         methods allow you to convert the string representation of an enumeration value to that value. The string representation can be either the name or the underlying value of an enumeration constant. Note that the parsing methods will successfully convert string representations of numbers that are not members of a particular enumeration if the strings can be converted to a value of the enumeration's underlying type. To prevent this, the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
         
 
-         method can be called to ensure that the result of the parsing method is a valid enumeration value. The example illustrates this approach and demonstrates calls to both the <see
-         cref="M:System.Enum.Parse(System.Type,System.String)" />
+         method can be called to ensure that the result of the parsing method is a valid enumeration value. The example illustrates this approach and demonstrates calls to both the <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
         
 
-         and <see
-         cref="M:System.Enum.TryParse``1(System.String,``0@)" />
+         and <see cref="M:System.Enum.TryParse``1(System.String,``0@)" />
 
         
 
@@ -332,18 +301,15 @@
         <h2>Formatting Enumeration Values</h2>
       </format>
       <para
-        >You can convert enumeration values to their string representations by calling the static <see
-         cref="M:System.Enum.Format(System.Type,System.Object,System.String)" />
+        >You can convert enumeration values to their string representations by calling the static <see cref="M:System.Enum.Format(System.Type,System.Object,System.String)" />
 
         
 
-         method, as well as the overloads of the instance <see
-         cref="M:System.Enum.ToString" />
+         method, as well as the overloads of the instance <see cref="M:System.Enum.ToString" />
 
         
 
-         method. You can use a format string to control the precise way in which an enumeration value is represented as a string. For more information, see <format
-         type="text/html">
+         method. You can use a format string to control the precise way in which an enumeration value is represented as a string. For more information, see <format type="text/html">
           <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
         </format>
 
@@ -359,18 +325,15 @@
         <h2>Iterating Enumeration Members</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Enum" />
+        >The <see cref="T:System.Enum" />
 
         
 
-         type does not implement the <see
-         cref="T:System.Collections.IEnumerable" />
+         type does not implement the <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         or <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+         or <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
@@ -379,13 +342,11 @@
       <list type="bullet">
         <item>
           <para
-            >You can call the <see
-             cref="M:System.Enum.GetNames(System.Type)" />
+            >You can call the <see cref="M:System.Enum.GetNames(System.Type)" />
 
             
 
-             method to retrieve a string array containing the names of the enumeration members. Next, for each element of the string array, you can call the <see
-             cref="M:System.Enum.Parse(System.Type,System.String)" />
+             method to retrieve a string array containing the names of the enumeration members. Next, for each element of the string array, you can call the <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
             
 
@@ -395,13 +356,11 @@
         </item>
         <item>
           <para
-            >You can call the <see
-             cref="M:System.Enum.GetValues(System.Type)" />
+            >You can call the <see cref="M:System.Enum.GetValues(System.Type)" />
 
             
 
-             method to retrieve an array that contains the underlying values in the enumeration. Next, for each element of the array, you can call the <see
-             cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
+             method to retrieve an array that contains the underlying values in the enumeration. Next, for each element of the array, you can call the <see cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
 
             
 
@@ -418,8 +377,7 @@
       </format>
       <para>One common use of an enumeration is to represent a set of mutually exclusive values. For example, an ArrivalStatus instance can have a value of Early, OnTime, or Late. It makes no sense for the value of an ArrivalStatus instance to reflect more than one enumeration constant. </para>
       <para
-        >In other cases, however, the value of an enumeration object can include multiple enumeration members, and each member represents a bit field in the enumeration value. The <see
-         cref="T:System.FlagsAttribute" />
+        >In other cases, however, the value of an enumeration object can include multiple enumeration members, and each member represents a bit field in the enumeration value. The <see cref="T:System.FlagsAttribute" />
 
         
 
@@ -429,8 +387,7 @@
       <para>The Pets enumeration can then be used as shown in the following example.</para>
       <para>code reference: System.Enum.Class#14</para>
       <para
-        >The following best practices should be used when defining a bitwise enumeration and applying the <see
-         cref="T:System.FlagsAttribute" />
+        >The following best practices should be used when defining a bitwise enumeration and applying the <see cref="T:System.FlagsAttribute" />
 
         
 
@@ -439,8 +396,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="T:System.FlagsAttribute" />
+            >Use the <see cref="T:System.FlagsAttribute" />
 
             
 
@@ -458,8 +414,7 @@
         </item>
         <item>
           <para
-            >A convenient way to test whether a flag is set in a numeric value is to call the instance <see
-             cref="M:System.Enum.HasFlag(System.Enum)" />
+            >A convenient way to test whether a flag is set in a numeric value is to call the instance <see cref="M:System.Enum.HasFlag(System.Enum)" />
 
             
 
@@ -502,8 +457,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Enum" />
+            >Initializes a new instance of the <see cref="T:System.Enum" />
 
             
 
@@ -539,8 +493,7 @@
           <para>
             <block subset="none" type="note"
               > This method is
-      implemented to support the <see
-               cref="T:System.IComparable" />
+      implemented to support the <see cref="T:System.IComparable" />
 
               
 
@@ -563,8 +516,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed number that indicates the relative values of this instance and <paramref
-             name="target" />
+            >A signed number that indicates the relative values of this instance and <paramref name="target" />
 
             
 
@@ -587,8 +539,7 @@
               </term>
               <description>
                 <para
-                  >The value of this instance is less than the value of <paramref
-                   name="target" />
+                  >The value of this instance is less than the value of <paramref name="target" />
 
                   
 
@@ -602,8 +553,7 @@
               </term>
               <description>
                 <para
-                  >The value of this instance is equal to the value of <paramref
-                   name="target" />
+                  >The value of this instance is equal to the value of <paramref name="target" />
 
                   
 
@@ -617,8 +567,7 @@
               </term>
               <description>
                 <para
-                  >The value of this instance is greater than the value of <paramref
-                   name="target" />
+                  >The value of this instance is greater than the value of <paramref name="target" />
 
                   
 
@@ -637,7 +586,11 @@
           </list>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -670,7 +623,11 @@
       </Parameters>
       <Docs>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -679,13 +636,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.Equals(System.Object)" />
+            >The <see cref="M:System.Enum.Equals(System.Object)" />
 
             
 
-             method overrides <see
-             cref="M:System.ValueType.Equals(System.Object)" />
+             method overrides <see cref="M:System.ValueType.Equals(System.Object)" />
 
             
 
@@ -699,8 +654,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -708,7 +662,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -755,13 +713,11 @@
 
           
 
-          , <paramref
-           name="value" />
+          , <paramref name="value" />
 
           
 
-           or <paramref
-           name="format" />
+           or <paramref name="format" />
 
           
 
@@ -773,8 +729,7 @@
 
             
 
-             is not a <see
-             cref="T:System.Enum" />
+             is not a <see cref="T:System.Enum" />
 
             
 
@@ -786,13 +741,11 @@
 
             
 
-             is neither of type <paramref
-             name="enumType" />
+             is neither of type <paramref name="enumType" />
 
             
 
-             nor does it have the same underlying type as <paramref
-             name="enumType" />
+             nor does it have the same underlying type as <paramref name="enumType" />
 
             
 
@@ -840,14 +793,22 @@ public class EnumCompTo {
           </c>
         </example>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to convert. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -856,8 +817,7 @@ public class EnumCompTo {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the valid values for the <paramref
-             name="format" />
+            >The following table shows the valid values for the <paramref name="format" />
 
             
 
@@ -880,26 +840,22 @@ public class EnumCompTo {
               </term>
               <description>
                 <para
-                  >If <paramref
-                   name="value" />
+                  >If <paramref name="value" />
 
                   
 
-                   is equal to a named enumerated constant, the name of that constant is returned; otherwise, the decimal equivalent of <paramref
-                   name="value" />
+                   is equal to a named enumerated constant, the name of that constant is returned; otherwise, the decimal equivalent of <paramref name="value" />
 
                   
 
                    is returned.</para
                 >
                 <para
-                  >For example, suppose the only enumerated constant is named Red, and its value is 1. If <paramref
-                   name="value" />
+                  >For example, suppose the only enumerated constant is named Red, and its value is 1. If <paramref name="value" />
 
                   
 
-                   is specified as 1, this format returns "Red". However, if <paramref
-                   name="value" />
+                   is specified as 1, this format returns "Red". However, if <paramref name="value" />
 
                   
 
@@ -907,44 +863,37 @@ public class EnumCompTo {
                 >
                 <para>-or- </para>
                 <para
-                  >If the <see
-                   cref="T:System.FlagsAttribute" />
+                  >If the <see cref="T:System.FlagsAttribute" />
 
                   
 
-                   custom attribute is applied to the enumeration, <paramref
-                   name="value" />
+                   custom attribute is applied to the enumeration, <paramref name="value" />
 
                   
 
                    is treated as a bit field that contains one or more flags that consist of one or more bits.</para
                 >
                 <para
-                  >If <paramref
-                   name="value" />
+                  >If <paramref name="value" />
 
                   
 
-                   is equal to a combination of named enumerated constants, a delimiter-separated list of the names of those constants is returned. <paramref
-                   name="value" />
+                   is equal to a combination of named enumerated constants, a delimiter-separated list of the names of those constants is returned. <paramref name="value" />
 
                   
 
-                   is searched for flags, going from the flag with the largest value to the smallest value. For each flag that corresponds to a bit field in <paramref
-                   name="value" />
+                   is searched for flags, going from the flag with the largest value to the smallest value. For each flag that corresponds to a bit field in <paramref name="value" />
 
                   
 
                   , the name of the constant is concatenated to the delimiter-separated list. The value of that flag is then excluded from further consideration, and the search continues for the next flag.</para
                 >
                 <para
-                  >If <paramref
-                   name="value" />
+                  >If <paramref name="value" />
 
                   
 
-                   is not equal to a combination of named enumerated constants, the decimal equivalent of <paramref
-                   name="value" />
+                   is not equal to a combination of named enumerated constants, the decimal equivalent of <paramref name="value" />
 
                   
 
@@ -958,8 +907,7 @@ public class EnumCompTo {
               </term>
               <description>
                 <para
-                  >Represents <paramref
-                   name="value" />
+                  >Represents <paramref name="value" />
 
                   
 
@@ -973,8 +921,7 @@ public class EnumCompTo {
               </term>
               <description>
                 <para
-                  >Represents <paramref
-                   name="value" />
+                  >Represents <paramref name="value" />
 
                   
 
@@ -988,13 +935,11 @@ public class EnumCompTo {
               </term>
               <description>
                 <para
-                  >Behaves identically to "G" or "g", except that the <see
-                   cref="T:System.FlagsAttribute" />
+                  >Behaves identically to "G" or "g", except that the <see cref="T:System.FlagsAttribute" />
 
                   
 
-                   is not required to be present on the <see
-                   cref="T:System.Enum" />
+                   is not required to be present on the <see cref="T:System.Enum" />
 
                   
 
@@ -1011,8 +956,7 @@ public class EnumCompTo {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of <paramref
-             name="value" />
+            >A string representation of <paramref name="value" />
 
             
 
@@ -1020,21 +964,33 @@ public class EnumCompTo {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type of the value to convert. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value to convert. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,8 +1026,7 @@ public class EnumCompTo {
           <para>
             <block subset="none" type="note"
               > This method
-      overrides <see
-               cref="M:System.Object.GetHashCode" />
+      overrides <see cref="M:System.Object.GetHashCode" />
 
               
 
@@ -1127,8 +1082,7 @@ public class EnumCompTo {
 
           
 
-           or <paramref
-           name="value" />
+           or <paramref name="value" />
 
           
 
@@ -1140,13 +1094,11 @@ public class EnumCompTo {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -1158,13 +1110,11 @@ public class EnumCompTo {
 
             
 
-             is neither of type <paramref
-             name="enumType" />
+             is neither of type <paramref name="enumType" />
 
             
 
-             nor does it have the same underlying type as <paramref
-             name="enumType" />
+             nor does it have the same underlying type as <paramref name="enumType" />
 
             
 
@@ -1173,8 +1123,7 @@ public class EnumCompTo {
         </exception>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Enum.GetName(System.Type,System.Object)" />
+            >The following example demonstrates the <see cref="M:System.Enum.GetName(System.Type,System.Object)" />
 
             
 
@@ -1206,8 +1155,7 @@ public class EnumCompTo {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If multiple enumeration members have the same underlying value, the <see
-             cref="M:System.Enum.GetName(System.Type,System.Object)" />
+            >If multiple enumeration members have the same underlying value, the <see cref="M:System.Enum.GetName(System.Type,System.Object)" />
 
             
 
@@ -1221,13 +1169,11 @@ public class EnumCompTo {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the name of the enumerated constant in <paramref
-             name="enumType" />
+            >A string containing the name of the enumerated constant in <paramref name="enumType" />
 
             
 
-             whose value is <paramref
-             name="value" />
+             whose value is <paramref name="value" />
 
             
 
@@ -1235,14 +1181,22 @@ public class EnumCompTo {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An enumeration type. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1292,13 +1246,11 @@ public class EnumCompTo {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -1307,8 +1259,7 @@ public class EnumCompTo {
         </exception>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Enum.GetNames(System.Type)" />
+            >The following example demonstrates the <see cref="M:System.Enum.GetNames(System.Type)" />
 
             
 
@@ -1346,8 +1297,7 @@ public class enumGetNames {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements of the return value array are sorted by the binary values of the enumerated constants (that is, by their unsigned magnitude). The following example provides displays information about the array returned by the <see
-             cref="M:System.Enum.GetNames(System.Type)" />
+            >The elements of the return value array are sorted by the binary values of the enumerated constants (that is, by their unsigned magnitude). The following example provides displays information about the array returned by the <see cref="M:System.Enum.GetNames(System.Type)" />
 
             
 
@@ -1363,8 +1313,7 @@ public class enumGetNames {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string array of the names of the constants in <paramref
-             name="enumType" />
+            >A string array of the names of the constants in <paramref name="enumType" />
 
             
 
@@ -1372,7 +1321,11 @@ public class enumGetNames {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1402,8 +1355,7 @@ public class enumGetNames {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the underlying <see
-             cref="T:System.TypeCode" />
+            >Returns the underlying <see cref="T:System.TypeCode" />
 
             
 
@@ -1465,8 +1417,7 @@ public class enumGetNames {
         </exception>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Enum.GetUnderlyingType(System.Type)" />
+            >The following example demonstrates the <see cref="M:System.Enum.GetUnderlyingType(System.Type)" />
 
             
 
@@ -1496,28 +1447,23 @@ public class EnumUnderlyingTypeTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Enum" />
+            >The <see cref="T:System.Enum" />
 
             
 
-             structure enables values to be represented as named constants. The data type of the enumeration's values is known as its underlying type. For example, the underlying type of the <see
-             cref="T:System.DayOfWeek" />
+             structure enables values to be represented as named constants. The data type of the enumeration's values is known as its underlying type. For example, the underlying type of the <see cref="T:System.DayOfWeek" />
 
             
 
-             enumeration, which consists of constants that represent each day of the week (<see
-             cref="F:System.DayOfWeek.Monday" />
+             enumeration, which consists of constants that represent each day of the week (<see cref="F:System.DayOfWeek.Monday" />
 
             
 
-            , <see
-             cref="F:System.DayOfWeek.Tuesday" />
+            , <see cref="F:System.DayOfWeek.Tuesday" />
 
             
 
-            , and so on), is <see
-             cref="T:System.Int32" />
+            , and so on), is <see cref="T:System.Int32" />
 
             
 
@@ -1531,8 +1477,7 @@ public class EnumUnderlyingTypeTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The underlying type of <paramref
-             name="enumType" />
+            >The underlying type of <paramref name="enumType" />
 
             
 
@@ -1540,7 +1485,11 @@ public class EnumUnderlyingTypeTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1595,8 +1544,7 @@ public class EnumUnderlyingTypeTest {
         </exception>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Enum.GetValues(System.Type)" />
+            >The following example demonstrates the <see cref="M:System.Enum.GetValues(System.Type)" />
 
             
 
@@ -1630,8 +1578,7 @@ public class enumGetValues {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements of the array are sorted by the binary values of the enumeration constants (that is, by their unsigned magnitude). The following example displays information about the array returned by the <see
-             cref="M:System.Enum.GetValues(System.Type)" />
+            >The elements of the array are sorted by the binary values of the enumeration constants (that is, by their unsigned magnitude). The following example displays information about the array returned by the <see cref="M:System.Enum.GetValues(System.Type)" />
 
             
 
@@ -1639,46 +1586,38 @@ public class enumGetValues {
           >
           <para>code reference: System.Enum.GetValues#1</para>
           <para
-            >The <see
-             cref="M:System.Enum.GetValues(System.Type)" />
+            >The <see cref="M:System.Enum.GetValues(System.Type)" />
 
             
 
-             method returns an array that contains a value for each member of the <paramref
-             name="enumType" />
+             method returns an array that contains a value for each member of the <paramref name="enumType" />
 
             
 
-             enumeration. If multiple members have the same value, the returned array includes duplicate values. In this case, calling the <see
-             cref="M:System.Enum.GetName(System.Type,System.Object)" />
+             enumeration. If multiple members have the same value, the returned array includes duplicate values. In this case, calling the <see cref="M:System.Enum.GetName(System.Type,System.Object)" />
 
             
 
-             method with each value in the returned array does not restore the unique names assigned to members that have duplicate values. To retrieve all the names of enumeration members successfully, call the <see
-             cref="M:System.Enum.GetNames(System.Type)" />
+             method with each value in the returned array does not restore the unique names assigned to members that have duplicate values. To retrieve all the names of enumeration members successfully, call the <see cref="M:System.Enum.GetNames(System.Type)" />
 
             
 
              method. </para
           >
           <para
-            >The <see
-             cref="M:System.Enum.GetValues(System.Type)" />
+            >The <see cref="M:System.Enum.GetValues(System.Type)" />
 
             
 
-             method cannot be invoked by using reflection in a reflection-only context. Instead, you can retrieve the value of all enumeration members by using the <see
-             cref="M:System.Type.GetFields" />
+             method cannot be invoked by using reflection in a reflection-only context. Instead, you can retrieve the value of all enumeration members by using the <see cref="M:System.Type.GetFields" />
 
             
 
-             method to get an array of <see
-             cref="T:System.Reflection.FieldInfo" />
+             method to get an array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
-             objects that represent enumeration members and then call the <see
-             cref="M:System.Reflection.FieldInfo.GetRawConstantValue" />
+             objects that represent enumeration members and then call the <see cref="M:System.Reflection.FieldInfo.GetRawConstantValue" />
 
             
 
@@ -1686,13 +1625,11 @@ public class enumGetValues {
           >
           <para>code reference: System.Enum.GetValues#2</para>
           <para
-            >The assembly is loaded in a reflection-only context, a <see
-             cref="T:System.Type" />
+            >The assembly is loaded in a reflection-only context, a <see cref="T:System.Type" />
 
             
 
-             object that represents the Pets enumeration is instantiated, an array of <see
-             cref="T:System.Reflection.FieldInfo" />
+             object that represents the Pets enumeration is instantiated, an array of <see cref="T:System.Reflection.FieldInfo" />
 
             
 
@@ -1707,8 +1644,7 @@ public class enumGetValues {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array that contains the values of the constants in <paramref
-             name="enumType" />
+            >An array that contains the values of the constants in <paramref name="enumType" />
 
             
 
@@ -1716,7 +1652,11 @@ public class enumGetValues {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1745,8 +1685,7 @@ public class enumGetValues {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.HasFlag(System.Enum)" />
+            >The <see cref="M:System.Enum.HasFlag(System.Enum)" />
 
             
 
@@ -1754,23 +1693,19 @@ public class enumGetValues {
           >
           <code>thisInstance And flag = flag </code>
           <para
-            >If the underlying value of <paramref
-             name="flag" />
+            >If the underlying value of <paramref name="flag" />
 
             
 
-             is zero, the method returns true. If this behavior is not desirable, you can use the <see
-             cref="M:System.Enum.Equals(System.Object)" />
+             is zero, the method returns true. If this behavior is not desirable, you can use the <see cref="M:System.Enum.Equals(System.Object)" />
 
             
 
-             method to test for equality with zero and call <see
-             cref="M:System.Enum.HasFlag(System.Enum)" />
+             method to test for equality with zero and call <see cref="M:System.Enum.HasFlag(System.Enum)" />
 
             
 
-             only if the underlying value of <paramref
-             name="flag" />
+             only if the underlying value of <paramref name="flag" />
 
             
 
@@ -1778,28 +1713,23 @@ public class enumGetValues {
           >
           <para>code reference: System.Enum.HasFlag#1</para>
           <para
-            >The <see
-             cref="M:System.Enum.HasFlag(System.Enum)" />
+            >The <see cref="M:System.Enum.HasFlag(System.Enum)" />
 
             
 
-             method is designed to be used with enumeration types that are marked with the <see
-             cref="T:System.FlagsAttribute" />
+             method is designed to be used with enumeration types that are marked with the <see cref="T:System.FlagsAttribute" />
 
             
 
-             attribute and can be used to determine whether multiple bit fields are set. For enumeration types that are not marked with the <see
-             cref="T:System.FlagsAttribute" />
+             attribute and can be used to determine whether multiple bit fields are set. For enumeration types that are not marked with the <see cref="T:System.FlagsAttribute" />
 
             
 
-             attribute, call either the <see
-             cref="M:System.Enum.Equals(System.Object)" />
+             attribute, call either the <see cref="M:System.Enum.Equals(System.Object)" />
 
             
 
-             method or the <see
-             cref="M:System.Enum.CompareTo(System.Object)" />
+             method or the <see cref="M:System.Enum.CompareTo(System.Object)" />
 
             
 
@@ -1813,8 +1743,7 @@ public class enumGetValues {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the bit field or bit fields that are set in <paramref
-             name="flag" />
+            >true if the bit field or bit fields that are set in <paramref name="flag" />
 
             
 
@@ -1822,7 +1751,11 @@ public class enumGetValues {
           >
         </returns>
         <param name="flag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1867,8 +1800,7 @@ public class enumGetValues {
 
           
 
-          or <paramref
-           name="value" />
+          or <paramref name="value" />
 
           
 
@@ -1884,18 +1816,15 @@ public class enumGetValues {
           >
           <para> -or-</para>
           <para
-            > The type of <paramref
-             name="value" />
+            > The type of <paramref name="value" />
 
             
 
-             is not an <paramref
-             name="enumType" />
+             is not an <paramref name="enumType" />
 
             
 
-             or an underlying type of <paramref
-             name="enumType" />
+             or an underlying type of <paramref name="enumType" />
 
             
 
@@ -1904,8 +1833,7 @@ public class enumGetValues {
         </exception>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+            >The following example demonstrates the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
@@ -1935,12 +1863,15 @@ public class enumIsDefined {
           </c>
         </example>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value or name of a constant in <paramref
-           name="enumType" />
+          The value or name of a constant in <paramref name="enumType" />
 
           
 
@@ -1949,8 +1880,7 @@ public class enumIsDefined {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
@@ -1959,8 +1889,7 @@ public class enumIsDefined {
           <list type="bullet">
             <item>
               <para
-                >Any member of type <paramref
-                 name="enumType" />
+                >Any member of type <paramref name="enumType" />
 
                 
 
@@ -1969,8 +1898,7 @@ public class enumIsDefined {
             </item>
             <item>
               <para
-                >A variable whose value is an enumeration member of type <paramref
-                 name="enumType" />
+                >A variable whose value is an enumeration member of type <paramref name="enumType" />
 
                 
 
@@ -1982,8 +1910,7 @@ public class enumIsDefined {
             </item>
             <item>
               <para
-                >A value of the underlying type of <paramref
-                 name="enumType" />
+                >A value of the underlying type of <paramref name="enumType" />
 
                 
 
@@ -1992,28 +1919,23 @@ public class enumIsDefined {
             </item>
           </list>
           <para
-            >If the constants in <paramref
-             name="enumType" />
+            >If the constants in <paramref name="enumType" />
 
             
 
-             define a set of bit fields and <paramref
-             name="value" />
+             define a set of bit fields and <paramref name="value" />
 
             
 
-             contains the values, names, or underlying values of multiple bit fields, the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             contains the values, names, or underlying values of multiple bit fields, the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
-             method returns false. In other words, for enumerations that define a set of bit fields, the method determines only whether a single bit field belongs to the enumeration. To determine whether multiple bit fields are set in an enumeration type that is tagged with the <see
-             cref="T:System.FlagsAttribute" />
+             method returns false. In other words, for enumerations that define a set of bit fields, the method determines only whether a single bit field belongs to the enumeration. To determine whether multiple bit fields are set in an enumeration type that is tagged with the <see cref="T:System.FlagsAttribute" />
 
             
 
-             attribute, you can call the <see
-             cref="M:System.Enum.HasFlag(System.Enum)" />
+             attribute, you can call the <see cref="M:System.Enum.HasFlag(System.Enum)" />
 
             
 
@@ -2027,13 +1949,11 @@ public class enumIsDefined {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a constant in <paramref
-             name="enumType" />
+            >true if a constant in <paramref name="enumType" />
 
             
 
-             has a value equal to <paramref
-             name="value" />
+             has a value equal to <paramref name="value" />
 
             
 
@@ -2041,19 +1961,26 @@ public class enumIsDefined {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An enumeration type. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value or name of a constant in <paramref
-           name="enumType" />
+          The value or name of a constant in <paramref name="enumType" />
 
           
 
@@ -2099,8 +2026,7 @@ public class enumIsDefined {
 
           
 
-           or <paramref
-           name="value" />
+           or <paramref name="value" />
 
           
 
@@ -2112,13 +2038,11 @@ public class enumIsDefined {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -2131,7 +2055,9 @@ public class enumIsDefined {
             
 
              is either equal to <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -2143,13 +2069,11 @@ public class enumIsDefined {
 
             
 
-             represents one or more names, and at least one name represented by <paramref
-             name="value " />
+             represents one or more names, and at least one name represented by <paramref name="value " />
 
             
 
-             is not of type <paramref
-             name="enumType" />
+             is not of type <paramref name="enumType" />
 
             
 
@@ -2158,8 +2082,7 @@ public class enumIsDefined {
         </exception>
         <example>
           <para
-            >The following example demonstrates the <see
-             cref="M:System.Enum.Parse(System.Type,System.String)" />
+            >The following example demonstrates the <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
             
 
@@ -2192,7 +2115,11 @@ public class enumTest {
           </c>
         </example>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2201,71 +2128,58 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter contains the string representation of an enumeration member's underlying value or named constant, or a list of named constants delimited by commas (,). One or more blank spaces can precede or follow each value, name, or comma in <paramref
-             name="value" />
+             parameter contains the string representation of an enumeration member's underlying value or named constant, or a list of named constants delimited by commas (,). One or more blank spaces can precede or follow each value, name, or comma in <paramref name="value" />
 
             
 
-            . If <paramref
-             name="value" />
+            . If <paramref name="value" />
 
             
 
              is a list, the return value is the value of the specified names combined with a bitwise OR operation.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             is a name that does not correspond to a named constant of <paramref
-             name="enumType" />
+             is a name that does not correspond to a named constant of <paramref name="enumType" />
 
             
 
-            , the method throws an <see
-             cref="T:System.ArgumentException" />
+            , the method throws an <see cref="T:System.ArgumentException" />
 
             
 
-            . If <paramref
-             name="value" />
+            . If <paramref name="value" />
 
             
 
-             is the string representation of an integer that does not represent an underlying value of the <paramref
-             name="enumType" />
+             is the string representation of an integer that does not represent an underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, the method returns an enumeration member whose underlying value is <paramref
-             name="value" />
+             enumeration, the method returns an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-             converted to an integral type. If this behavior is undesirable, call the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             converted to an integral type. If this behavior is undesirable, call the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
-             method to ensure that a particular string representation of an integer is actually a member of <paramref
-             name="enumType" />
+             method to ensure that a particular string representation of an integer is actually a member of <paramref name="enumType" />
 
             
 
-            . The following example defines a Colors enumeration, calls the <see
-             cref="M:System.Enum.Parse(System.Type,System.String)" />
+            . The following example defines a Colors enumeration, calls the <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
             
 
-             method to convert strings to their corresponding enumeration values, and calls the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             method to convert strings to their corresponding enumeration values, and calls the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
@@ -2281,13 +2195,11 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object of type <paramref
-             name="enumType" />
+            >An object of type <paramref name="enumType" />
 
             
 
-             whose value is represented by <paramref
-             name="value" />
+             whose value is represented by <paramref name="value" />
 
             
 
@@ -2295,14 +2207,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An enumeration type. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2349,8 +2269,7 @@ public class enumTest {
 
           
 
-           or <paramref
-           name="value" />
+           or <paramref name="value" />
 
           
 
@@ -2362,13 +2281,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -2381,7 +2298,9 @@ public class enumTest {
             
 
              is either equal to <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -2393,13 +2312,11 @@ public class enumTest {
 
             
 
-             represents one or more names, and at least one name represented by <paramref
-             name="value " />
+             represents one or more names, and at least one name represented by <paramref name="value " />
 
             
 
-             is not of type <paramref
-             name="enumType" />
+             is not of type <paramref name="enumType" />
 
             
 
@@ -2409,18 +2326,15 @@ public class enumTest {
         <example>
           <para
             >For an example that demonstrates parsing strings
-      containing enumeration values, see <see
-             cref="M:System.Enum.Parse(System.Type,System.String)" />
+      containing enumeration values, see <see cref="M:System.Enum.Parse(System.Type,System.String)" />
 
             
 
-            (<see
-             cref="T:System.Type" />
+            (<see cref="T:System.Type" />
 
             
 
-            , <see
-             cref="T:System.String" />
+            , <see cref="T:System.String" />
 
             
 
@@ -2428,7 +2342,11 @@ public class enumTest {
           >
         </example>
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2437,71 +2355,58 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter contains the string representation of an enumeration member's underlying value or named constant, or a list of named constants delimited by commas (,). One or more blank spaces can precede or follow each value, name, or comma in <paramref
-             name="value" />
+             parameter contains the string representation of an enumeration member's underlying value or named constant, or a list of named constants delimited by commas (,). One or more blank spaces can precede or follow each value, name, or comma in <paramref name="value" />
 
             
 
-            . If <paramref
-             name="value" />
+            . If <paramref name="value" />
 
             
 
              is a list, the return value is the value of the specified names combined with a bitwise OR operation.</para
           >
           <para
-            >If <paramref
-             name="value" />
+            >If <paramref name="value" />
 
             
 
-             is a name that does not correspond to a named constant of <paramref
-             name="enumType" />
+             is a name that does not correspond to a named constant of <paramref name="enumType" />
 
             
 
-            , the method throws an <see
-             cref="T:System.ArgumentException" />
+            , the method throws an <see cref="T:System.ArgumentException" />
 
             
 
-            . If <paramref
-             name="value" />
+            . If <paramref name="value" />
 
             
 
-             is the string representation of an integer that does not represent an underlying value of the <paramref
-             name="enumType" />
+             is the string representation of an integer that does not represent an underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, the method returns an enumeration member whose underlying value is <paramref
-             name="value" />
+             enumeration, the method returns an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-             converted to an integral type. If this behavior is undesirable, call the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             converted to an integral type. If this behavior is undesirable, call the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
-             method to ensure that a particular string representation of an integer is actually a member of <paramref
-             name="enumType" />
+             method to ensure that a particular string representation of an integer is actually a member of <paramref name="enumType" />
 
             
 
-            . The following example defines a Colors enumeration, calls the <see
-             cref="M:System.Enum.Parse(System.Type,System.String,System.Boolean)" />
+            . The following example defines a Colors enumeration, calls the <see cref="M:System.Enum.Parse(System.Type,System.String,System.Boolean)" />
 
             
 
-             method to convert strings to their corresponding enumeration values, and calls the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             method to convert strings to their corresponding enumeration values, and calls the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
@@ -2509,8 +2414,7 @@ public class enumTest {
           >
           <para>code reference: System.Enum.Parse#2</para>
           <para
-            >The <paramref
-             name="ignoreCase" />
+            >The <paramref name="ignoreCase" />
 
             
 
@@ -2524,13 +2428,11 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object of type <paramref
-             name="enumType" />
+            >An object of type <paramref name="enumType" />
 
             
 
-             whose value is represented by <paramref
-             name="value" />
+             whose value is represented by <paramref name="value" />
 
             
 
@@ -2538,21 +2440,33 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An enumeration type. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string containing the name or value to convert. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2596,7 +2510,11 @@ public class enumTest {
           <para>This member always throws an exception.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2626,8 +2544,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -2643,7 +2560,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2683,7 +2604,11 @@ public class enumTest {
           <para>This member always throws an exception.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2720,8 +2645,7 @@ public class enumTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the current value to a <see
-             cref="T:System.DateTime" />
+            >Converts the current value to a <see cref="T:System.DateTime" />
 
             
 
@@ -2733,7 +2657,11 @@ public class enumTest {
           <para>This member always throws an exception.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2770,8 +2698,7 @@ public class enumTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the current value to a <see
-             cref="T:System.Decimal" />
+            >Converts the current value to a <see cref="T:System.Decimal" />
 
             
 
@@ -2783,7 +2710,11 @@ public class enumTest {
           <para>This member always throws an exception.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2826,7 +2757,11 @@ public class enumTest {
           <para>This member always throws an exception.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2859,8 +2794,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -2876,7 +2810,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2906,8 +2844,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -2923,7 +2860,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2956,8 +2897,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -2973,7 +2913,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3006,8 +2950,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -3023,7 +2966,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3066,7 +3013,11 @@ public class enumTest {
           <para>This member always throws an exception.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3101,8 +3052,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -3118,7 +3068,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3151,8 +3105,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -3168,7 +3121,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3201,8 +3158,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -3218,7 +3174,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3251,8 +3211,7 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses <see
-             cref="T:System.Convert" />
+            >Uses <see cref="T:System.Convert" />
 
             
 
@@ -3268,7 +3227,11 @@ public class enumTest {
           <para>The converted value.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3321,13 +3284,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -3335,7 +3296,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3344,51 +3309,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -3402,8 +3358,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -3411,14 +3366,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3472,13 +3435,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -3486,7 +3447,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3495,51 +3460,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.Int16)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.Int16)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -3553,8 +3509,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -3562,14 +3517,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3623,13 +3586,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -3637,7 +3598,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3646,51 +3611,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -3704,8 +3660,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -3713,14 +3668,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3774,13 +3737,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -3788,7 +3749,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3797,51 +3762,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.Int64)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.Int64)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -3855,8 +3811,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -3864,14 +3819,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3925,13 +3888,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -3939,7 +3900,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3948,51 +3913,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.Object)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.Object)" />
 
             
 
-             method converts the integral value <paramref
-             name="value" />
+             method converts the integral value <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -4006,8 +3962,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumeration object whose value is <paramref
-             name="value" />
+            >An enumeration object whose value is <paramref name="value" />
 
             
 
@@ -4015,14 +3970,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4079,13 +4042,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -4093,7 +4054,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4102,51 +4067,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.SByte)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.SByte)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -4160,8 +4116,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -4169,14 +4124,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4233,13 +4196,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -4247,7 +4208,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4256,51 +4221,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.UInt16)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.UInt16)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -4314,8 +4270,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -4323,14 +4278,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4387,13 +4350,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -4401,7 +4362,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4410,51 +4375,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.UInt32)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.UInt32)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -4468,8 +4424,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -4477,14 +4432,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4541,13 +4504,11 @@ public class enumTest {
 
             
 
-             is not a <see
-             cref="T:System.Type" />
+             is not a <see cref="T:System.Type" />
 
             
 
-             that describes a <see
-             cref="T:System.Enum" />
+             that describes a <see cref="T:System.Enum" />
 
             
 
@@ -4555,7 +4516,11 @@ public class enumTest {
           >
         </exception>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4564,51 +4529,42 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Enum.ToObject(System.Type,System.UInt64)" />
+            >The <see cref="M:System.Enum.ToObject(System.Type,System.UInt64)" />
 
             
 
-             method converts <paramref
-             name="value" />
+             method converts <paramref name="value" />
 
             
 
-             to an enumeration member whose underlying value is <paramref
-             name="value" />
+             to an enumeration member whose underlying value is <paramref name="value" />
 
             
 
-            . Note that the conversion succeeds even if value is outside the bounds of <paramref
-             name="enumType" />
+            . Note that the conversion succeeds even if value is outside the bounds of <paramref name="enumType" />
 
             
 
-             members. To ensure that <paramref
-             name="value" />
+             members. To ensure that <paramref name="value" />
 
             
 
-             is a valid underlying value of the <paramref
-             name="enumType" />
+             is a valid underlying value of the <paramref name="enumType" />
 
             
 
-             enumeration, pass it to the <see
-             cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+             enumeration, pass it to the <see cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >This conversion method returns a value of type <see
-             cref="T:System.Object" />
+            >This conversion method returns a value of type <see cref="T:System.Object" />
 
             
 
-            . You can then cast it or convert it to an object of type <paramref
-             name="enumType" />
+            . You can then cast it or convert it to an object of type <paramref name="enumType" />
 
             
 
@@ -4622,8 +4578,7 @@ public class enumTest {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the enumeration set to <paramref
-             name="value" />
+            >An instance of the enumeration set to <paramref name="value" />
 
             
 
@@ -4631,14 +4586,22 @@ public class enumTest {
           >
         </returns>
         <param name="enumType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The enumeration type to return. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4671,25 +4634,21 @@ public class enumTest {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return value is formatted with the general format specifier ("G"). That is, if the <see
-             cref="T:System.FlagsAttribute" />
+            >The return value is formatted with the general format specifier ("G"). That is, if the <see cref="T:System.FlagsAttribute" />
 
             
 
-             is not applied to this enumerated type and there is a named constant equal to the value of this instance, then the return value is a string containing the name of the constant. If the <see
-             cref="T:System.FlagsAttribute" />
+             is not applied to this enumerated type and there is a named constant equal to the value of this instance, then the return value is a string containing the name of the constant. If the <see cref="T:System.FlagsAttribute" />
 
             
 
-             is applied and there is a combination of one or more named constants equal to the value of this instance, then the return value is a string containing a delimiter-separated list of the names of the constants. Otherwise, the return value is the string representation of the numeric value of this instance. For more information about formatting enumeration values, see <format
-             type="text/html">
+             is applied and there is a combination of one or more named constants equal to the value of this instance, then the return value is a string containing a delimiter-separated list of the names of the constants. Otherwise, the return value is the string representation of the numeric value of this instance. For more information about formatting enumeration values, see <format type="text/html">
               <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
             </format>
 
             
 
-            . For more information about formatting in general, see <format
-             type="text/html">
+            . For more information about formatting in general, see <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
 
@@ -4739,8 +4698,7 @@ public class enumTest {
       <Docs>
         <remarks>
           <para
-            >This method is equivalent to the version of <see
-             cref="M:System.Enum.ToString(System.String)" />
+            >This method is equivalent to the version of <see cref="M:System.Enum.ToString(System.String)" />
 
             
 
@@ -4751,8 +4709,7 @@ that takes no arguments.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overload is obsolete; use <see
-             cref="M:System.Enum.ToString" />
+            >This method overload is obsolete; use <see cref="M:System.Enum.ToString" />
 
             
 
@@ -4764,7 +4721,11 @@ that takes no arguments.</para
           <para>The string representation of the value of this instance.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4806,25 +4767,21 @@ that takes no arguments.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="format" />
+            >The <paramref name="format" />
 
             
 
-             parameter can contain the "G" or "g", "D" or "d", "X" or "x", and "F" or "f" format strings. If <paramref
-             name="format" />
+             parameter can contain the "G" or "g", "D" or "d", "X" or "x", and "F" or "f" format strings. If <paramref name="format" />
 
             
 
-             is null or an empty string (""), the general format specifier ("G") is used. For more information about formatting enumeration values, see <format
-             type="text/html">
+             is null or an empty string (""), the general format specifier ("G") is used. For more information about formatting enumeration values, see <format type="text/html">
               <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
             </format>
 
             
 
-            . For more information about formatting in general, see <format
-             type="text/html">
+            . For more information about formatting in general, see <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
 
@@ -4840,8 +4797,7 @@ that takes no arguments.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance as specified by <paramref
-             name="format" />
+            >The string representation of the value of this instance as specified by <paramref name="format" />
 
             
 
@@ -4849,7 +4805,11 @@ that takes no arguments.</para
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4898,14 +4858,22 @@ that takes no arguments.</para
            does not contain a valid format specifier.</exception
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A format specification. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4914,13 +4882,11 @@ that takes no arguments.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify only <paramref
-             name="format" />
+            >Specify only <paramref name="format" />
 
             
 
-            ; the <paramref
-             name="provider" />
+            ; the <paramref name="provider" />
 
             
 
@@ -4930,8 +4896,7 @@ that takes no arguments.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overload is obsolete; use <see
-             cref="M:System.Enum.ToString(System.String)" />
+            >This method overload is obsolete; use <see cref="M:System.Enum.ToString(System.String)" />
 
             
 
@@ -4941,8 +4906,7 @@ that takes no arguments.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the value of this instance as specified by <paramref
-             name="format" />
+            >The string representation of the value of this instance as specified by <paramref name="format" />
 
             
 
@@ -4950,14 +4914,22 @@ that takes no arguments.</para
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A format specification. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

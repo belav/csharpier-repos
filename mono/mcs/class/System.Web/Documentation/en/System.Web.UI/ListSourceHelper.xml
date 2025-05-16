@@ -14,38 +14,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.ListSourceHelper" />
+        >The <see cref="T:System.Web.UI.ListSourceHelper" />
 
         
 
-         class is a utility class provided to simplify implementation of the <see
-         cref="T:System.ComponentModel.IListSource" />
+         class is a utility class provided to simplify implementation of the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
-         interface by data source controls. Data source controls that implement the <see
-         cref="T:System.Web.UI.IDataSource" />
+         interface by data source controls. Data source controls that implement the <see cref="T:System.Web.UI.IDataSource" />
 
         
 
-         interface but do not extend the <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         interface but do not extend the <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         class can use the static <see
-         cref="T:System.Web.UI.ListSourceHelper" />
+         class can use the static <see cref="T:System.Web.UI.ListSourceHelper" />
 
         
 
-         methods in their own implementations of the methods defined by the <see
-         cref="T:System.ComponentModel.IListSource" />
+         methods in their own implementations of the methods defined by the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
-         interface. Data source controls that extend from the <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         interface. Data source controls that extend from the <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
@@ -55,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Used by data source controls when implementing the members defined by the <see
-         cref="T:System.ComponentModel.IListSource" />
+        >Used by data source controls when implementing the members defined by the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
@@ -82,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method in an implementation of the <see
-             cref="P:System.ComponentModel.IListSource.ContainsListCollection" />
+            >Use this method in an implementation of the <see cref="P:System.ComponentModel.IListSource.ContainsListCollection" />
 
             
 
@@ -99,12 +90,15 @@
           <para>true if the data source control contains a collection of data source view objects; otherwise, false.</para>
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.IDataSource" />
+          An <see cref="T:System.Web.UI.IDataSource" />
 
           
 
@@ -132,36 +126,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method in an implementation of the <see
-             cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
+            >Use this method in an implementation of the <see cref="M:System.Web.UI.DataSourceControl.System#ComponentModel#IListSource#GetList" />
 
             
 
              method, passing a reference to a data source control.</para
           >
           <para
-            >The <see
-             cref="T:System.Collections.IList" />
+            >The <see cref="T:System.Collections.IList" />
 
             
 
-             object that is returned implements the <see
-             cref="T:System.ComponentModel.ITypedList" />
+             object that is returned implements the <see cref="T:System.ComponentModel.ITypedList" />
 
             
 
-             interface. You can use the <see
-             cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+             interface. You can use the <see cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
 
             
 
-             method to retrieve a list of <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             method to retrieve a list of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             descriptors that correspond to the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             descriptors that correspond to the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -171,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves an <see
-             cref="T:System.Collections.IList" />
+            >Retrieves an <see cref="T:System.Collections.IList" />
 
             
 
@@ -182,23 +169,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IList" />
+            >An <see cref="T:System.Collections.IList" />
 
             
 
-             of one <see
-             cref="T:System.Web.UI.IDataSource" />
+             of one <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-            , if the <see
-             cref="T:System.Web.UI.IDataSource" />
+            , if the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             has one or more associated <see
-             cref="T:System.Web.UI.DataSourceView" />
+             has one or more associated <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
@@ -206,22 +189,23 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.IDataSource" />
+          An <see cref="T:System.Web.UI.IDataSource" />
 
           
 
-           that contains one or more associated <see
-           cref="T:System.Web.UI.DataSourceView" />
+           that contains one or more associated <see cref="T:System.Web.UI.DataSourceView" />
 
           
 
-           objects, which are retrieved by a call to <see
-           cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+           objects, which are retrieved by a call to <see cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
 
           
 

@@ -71,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Guid" />
+            >Initializes a new instance of the <see cref="T:System.Guid" />
 
             
 
@@ -80,7 +79,11 @@
           >
         </summary>
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -108,8 +111,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The alphabetic hexadecimal digits in the <paramref
-             name="g" />
+            >The alphabetic hexadecimal digits in the <paramref name="g" />
 
             
 
@@ -124,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Guid" />
+            >Initializes a new instance of the <see cref="T:System.Guid" />
 
             
 
@@ -133,7 +134,11 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Guid" />
+            >Initializes a new instance of the <see cref="T:System.Guid" />
 
             
 
@@ -174,28 +178,44 @@
           >
         </summary>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first 4 bytes of the GUID. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next 2 bytes of the GUID. </param
         >
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next 2 bytes of the GUID. </param
         >
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -240,8 +260,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Guid" />
+            >Initializes a new instance of the <see cref="T:System.Guid" />
 
             
 
@@ -249,77 +268,121 @@
           >
         </summary>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first 4 bytes of the GUID. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next 2 bytes of the GUID. </param
         >
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next 2 bytes of the GUID. </param
         >
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="f">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="h">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="j">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="k">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -369,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Guid" />
+            >Initializes a new instance of the <see cref="T:System.Guid" />
 
             
 
@@ -378,77 +440,121 @@
           >
         </summary>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first 4 bytes of the GUID. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next 2 bytes of the GUID. </param
         >
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next 2 bytes of the GUID. </param
         >
         <param name="d">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="f">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="h">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="j">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The next byte of the GUID. </param
         >
         <param name="k">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -478,18 +584,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the <see
-             cref="T:System.IComparable`1" />
+            >This method implements the <see cref="T:System.IComparable`1" />
 
             
 
-             interface and performs slightly better than the <see
-             cref="M:System.Guid.CompareTo(System.Object)" />
+             interface and performs slightly better than the <see cref="M:System.Guid.CompareTo(System.Object)" />
 
             
 
-             method because it does not have to convert the <paramref
-             name="value" />
+             method because it does not have to convert the <paramref name="value" />
 
             
 
@@ -499,8 +602,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this instance to a specified <see
-             cref="T:System.Guid" />
+            >Compares this instance to a specified <see cref="T:System.Guid" />
 
             
 
@@ -510,8 +612,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed number indicating the relative values of this instance and <paramref
-             name="value" />
+            >A signed number indicating the relative values of this instance and <paramref name="value" />
 
             
 
@@ -534,8 +635,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <paramref
-                   name="value" />
+                  >This instance is less than <paramref name="value" />
 
                   
 
@@ -549,8 +649,7 @@
               </term>
               <description>
                 <para
-                  >This instance is equal to <paramref
-                   name="value" />
+                  >This instance is equal to <paramref name="value" />
 
                   
 
@@ -564,8 +663,7 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref
-                   name="value" />
+                  >This instance is greater than <paramref name="value" />
 
                   
 
@@ -576,7 +674,11 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -606,21 +708,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any instance of <see
-             cref="T:System.Guid" />
+            >Any instance of <see cref="T:System.Guid" />
 
             
 
             , regardless of its value, is considered greater than null.</para
           >
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter must be null or an instance of <see
-             cref="T:System.Guid" />
+             parameter must be null or an instance of <see cref="T:System.Guid" />
 
             
 
@@ -634,8 +733,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed number indicating the relative values of this instance and <paramref
-             name="value" />
+            >A signed number indicating the relative values of this instance and <paramref name="value" />
 
             
 
@@ -658,8 +756,7 @@
               </term>
               <description>
                 <para
-                  >This instance is less than <paramref
-                   name="value" />
+                  >This instance is less than <paramref name="value" />
 
                   
 
@@ -673,8 +770,7 @@
               </term>
               <description>
                 <para
-                  >This instance is equal to <paramref
-                   name="value" />
+                  >This instance is equal to <paramref name="value" />
 
                   
 
@@ -688,13 +784,11 @@
               </term>
               <description>
                 <para
-                  >This instance is greater than <paramref
-                   name="value" />
+                  >This instance is greater than <paramref name="value" />
 
                   
 
-                  , or <paramref
-                   name="value" />
+                  , or <paramref name="value" />
 
                   
 
@@ -705,7 +799,11 @@
           </list>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -734,18 +832,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can compare a GUID with the value of the <see
-             cref="F:System.Guid.Empty" />
+            >You can compare a GUID with the value of the <see cref="F:System.Guid.Empty" />
 
             
 
-             field to determine whether a GUID is non-zero. The following example uses the <see
-             cref="M:System.Guid.op_Equality(System.Guid,System.Guid)" />
+             field to determine whether a GUID is non-zero. The following example uses the <see cref="M:System.Guid.op_Equality(System.Guid,System.Guid)" />
 
             
 
-             operator to compare two GUID values with <see
-             cref="F:System.Guid.Empty" />
+             operator to compare two GUID values with <see cref="F:System.Guid.Empty" />
 
             
 
@@ -756,8 +851,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only instance of the <see
-             cref="T:System.Guid" />
+            >A read-only instance of the <see cref="T:System.Guid" />
 
             
 
@@ -788,13 +882,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs slightly better than the <see
-             cref="M:System.Guid.Equals(System.Object)" />
+            >This method performs slightly better than the <see cref="M:System.Guid.Equals(System.Object)" />
 
             
 
-             method because it does not have to box the <paramref
-             name="g" />
+             method because it does not have to box the <paramref name="g" />
 
             
 
@@ -804,8 +896,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether this instance and a specified <see
-             cref="T:System.Guid" />
+            >Returns a value indicating whether this instance and a specified <see cref="T:System.Guid" />
 
             
 
@@ -815,8 +906,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="g" />
+            >true if <paramref name="g" />
 
             
 
@@ -824,7 +914,11 @@
           >
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -859,13 +953,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="o" />
+            >true if <paramref name="o" />
 
             
 
-             is a <see
-             cref="T:System.Guid" />
+             is a <see cref="T:System.Guid" />
 
             
 
@@ -873,7 +965,11 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -929,26 +1025,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a convenient static method that you can call to get a new <see
-             cref="T:System.Guid" />
+            >This is a convenient static method that you can call to get a new <see cref="T:System.Guid" />
 
             
 
             .</para
           >
           <para
-            >The chance that the value of the new <see
-             cref="T:System.Guid" />
+            >The chance that the value of the new <see cref="T:System.Guid" />
 
             
 
-             will be all zeros or equal to any other <see
-             cref="T:System.Guid" />
+             will be all zeros or equal to any other <see cref="T:System.Guid" />
 
             
 
-             is very low. You can determine whether a GUID consists of all zeros by comparing it to <see
-             cref="F:System.Guid.Empty" />
+             is very low. You can determine whether a GUID consists of all zeros by comparing it to <see cref="F:System.Guid.Empty" />
 
             
 
@@ -958,8 +1050,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Guid" />
+            >Initializes a new instance of the <see cref="T:System.Guid" />
 
             
 
@@ -996,8 +1087,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the values of two specified <see
-             cref="T:System.Guid" />
+            >Indicates whether the values of two specified <see cref="T:System.Guid" />
 
             
 
@@ -1007,13 +1097,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -1021,14 +1109,22 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1060,8 +1156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the values of two specified <see
-             cref="T:System.Guid" />
+            >Indicates whether the values of two specified <see cref="T:System.Guid" />
 
             
 
@@ -1071,13 +1166,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -1085,14 +1178,22 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1120,8 +1221,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Guid.TryParse(System.String,System.Guid@)" />
+            >Use <see cref="M:System.Guid.TryParse(System.String,System.Guid@)" />
 
             
 
@@ -1131,8 +1231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the string representation of a GUID to the equivalent <see
-             cref="T:System.Guid" />
+            >Converts the string representation of a GUID to the equivalent <see cref="T:System.Guid" />
 
             
 
@@ -1144,7 +1243,11 @@
           <para>A structure that contains the value that was parsed.</para>
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1176,8 +1279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the accepted format specifiers for the <paramref
-             name="format" />
+            >The following table shows the accepted format specifiers for the <paramref name="format" />
 
             
 
@@ -1191,8 +1293,7 @@
                 </term>
                 <description>
                   <para
-                    >Format of the <paramref
-                     name="input" />
+                    >Format of the <paramref name="input" />
 
                     
 
@@ -1251,8 +1352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the string representation of a GUID to the equivalent <see
-             cref="T:System.Guid" />
+            >Converts the string representation of a GUID to the equivalent <see cref="T:System.Guid" />
 
             
 
@@ -1264,19 +1364,26 @@
           <para>A structure that contains the value that was parsed.</para>
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The GUID to convert.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the following specifiers that indicates the exact format to use when interpreting <paramref
-           name="input" />
+          One of the following specifiers that indicates the exact format to use when interpreting <paramref name="input" />
 
           
 
@@ -1304,21 +1411,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the byte array returned by this method to round-trip a <see
-             cref="T:System.Guid" />
+            >You can use the byte array returned by this method to round-trip a <see cref="T:System.Guid" />
 
             
 
-             value by calling the <see
-             cref="M:System.Guid.#ctor(System.Byte[])" />
+             value by calling the <see cref="M:System.Guid.#ctor(System.Byte[])" />
 
             
 
              constructor. </para
           >
           <para
-            >Note that the order of bytes in the returned byte array is different from the string representation of a <see
-             cref="T:System.Guid" />
+            >Note that the order of bytes in the returned byte array is different from the string representation of a <see cref="T:System.Guid" />
 
             
 
@@ -1355,8 +1459,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method provides a default GUID format that is sufficient for typical use; however, other versions of this method that take a <paramref
-             name="format" />
+            >This method provides a default GUID format that is sufficient for typical use; however, other versions of this method that take a <paramref name="format" />
 
             
 
@@ -1370,8 +1473,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see
-             cref="T:System.Guid" />
+            >The value of this <see cref="T:System.Guid" />
 
             
 
@@ -1379,8 +1481,7 @@
           >
           <para>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx </para>
           <para
-            >where the value of the GUID is represented as a series of lowercase hexadecimal digits in groups of 8, 4, 4, 4, and 12 digits and separated by hyphens. An example of a return value is "382c74c3-721d-4f34-80e5-57657b6cbc27". To convert the hexadecimal digits from a through f to uppercase, call the <see
-             cref="M:System.String.ToUpper" />
+            >where the value of the GUID is represented as a series of lowercase hexadecimal digits in groups of 8, 4, 4, 4, and 12 digits and separated by hyphens. An example of a return value is "382c74c3-721d-4f34-80e5-57657b6cbc27". To convert the hexadecimal digits from a through f to uppercase, call the <see cref="M:System.String.ToUpper" />
 
             
 
@@ -1411,8 +1512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the accepted format specifiers for the <paramref
-             name="format" />
+            >The following table shows the accepted format specifiers for the <paramref name="format" />
 
             
 
@@ -1476,8 +1576,7 @@
             </item>
           </list>
           <para
-            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see
-             cref="M:System.String.ToUpper" />
+            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see cref="M:System.String.ToUpper" />
 
             
 
@@ -1487,8 +1586,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the value of this <see
-             cref="T:System.Guid" />
+            >Returns a string representation of the value of this <see cref="T:System.Guid" />
 
             
 
@@ -1498,8 +1596,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see
-             cref="T:System.Guid" />
+            >The value of this <see cref="T:System.Guid" />
 
             
 
@@ -1507,22 +1604,23 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A single format specifier that indicates how to format the value of this <see
-           cref="T:System.Guid" />
+          A single format specifier that indicates how to format the value of this <see cref="T:System.Guid" />
 
           
 
-          . The <paramref
-           name="format" />
+          . The <paramref name="format" />
 
           
 
-           parameter can be "N", "D", "B", "P", or "X". If <paramref
-           name="format" />
+           parameter can be "N", "D", "B", "P", or "X". If <paramref name="format" />
 
           
 
@@ -1556,16 +1654,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="provider" />
+            >The <paramref name="provider" />
 
             
 
              parameter is reserved for future use and does not contribute to the execution of this method. You can pass null in the method call.</para
           >
           <para
-            >The following table shows the accepted format specifiers for the <paramref
-             name="format" />
+            >The following table shows the accepted format specifiers for the <paramref name="format" />
 
             
 
@@ -1629,46 +1725,38 @@
             </item>
           </list>
           <para
-            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see
-             cref="M:System.String.ToUpper" />
+            >The hexadecimal digits a through f are lowercase in the returned string. To convert them to uppercase, call the <see cref="M:System.String.ToUpper" />
 
             
 
              method on the returned string. </para
           >
           <para
-            >Because the <paramref
-             name="provider" />
+            >Because the <paramref name="provider" />
 
             
 
-             parameter is ignored, you cannot use it to provide a custom formatting solution. To represent a <see
-             cref="T:System.Guid" />
+             parameter is ignored, you cannot use it to provide a custom formatting solution. To represent a <see cref="T:System.Guid" />
 
             
 
-             value as a string in a format that isn't supported by the standard GUID format strings, call the <see
-             cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+             value as a string in a format that isn't supported by the standard GUID format strings, call the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
             
 
-             method with a <paramref
-             name="provider" />
+             method with a <paramref name="provider" />
 
             
 
-             object that implements both the <see
-             cref="T:System.ICustomFormatter" />
+             object that implements both the <see cref="T:System.ICustomFormatter" />
 
             
 
-             and <see
-             cref="T:System.IFormatProvider" />
+             and <see cref="T:System.IFormatProvider" />
 
             
 
-             interfaces. For more information, see the "Custom Formatting with ICustomFormatter" section in the <format
-             type="text/html">
+             interfaces. For more information, see the "Custom Formatting with ICustomFormatter" section in the <format type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
 
@@ -1680,8 +1768,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the value of this instance of the <see
-             cref="T:System.Guid" />
+            >Returns a string representation of the value of this instance of the <see cref="T:System.Guid" />
 
             
 
@@ -1691,8 +1778,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this <see
-             cref="T:System.Guid" />
+            >The value of this <see cref="T:System.Guid" />
 
             
 
@@ -1700,29 +1786,34 @@
           >
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A single format specifier that indicates how to format the value of this <see
-           cref="T:System.Guid" />
+          A single format specifier that indicates how to format the value of this <see cref="T:System.Guid" />
 
           
 
-          . The <paramref
-           name="format" />
+          . The <paramref name="format" />
 
           
 
-           parameter can be "N", "D", "B", "P", or "X". If <paramref
-           name="format" />
+           parameter can be "N", "D", "B", "P", or "X". If <paramref name="format" />
 
           
 
            is null or an empty string (""), "D" is used. </param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

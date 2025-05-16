@@ -20,31 +20,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.WsdlExporter" />
+        >Use the <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
         
 
-         class to transform <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         class to transform <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-         or <see
-         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+         or <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
         
 
-         objects into metadata represented by <see
-         cref="T:System.ServiceModel.Description.MetadataSection" />
+         objects into metadata represented by <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
         
 
          objects.</para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.WsdlExporter" />
+        >The <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
         
 
@@ -53,18 +48,15 @@
       <list type="ordered">
         <item>
           <para
-            >Call the <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+            >Call the <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+            , <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
-            , or <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+            , or <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
 
             
 
@@ -73,8 +65,7 @@
         </item>
         <item>
           <para
-            >Determine whether there are any export errors by checking the base <see
-             cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
+            >Determine whether there are any export errors by checking the base <see cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
 
             
 
@@ -83,23 +74,19 @@
         </item>
         <item>
           <para
-            >If there are no errors, use the <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
+            >If there are no errors, use the <see cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
 
             
 
-             to get a collection of <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+             to get a collection of <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             objects or get more specific versions of the metadata using the <see
-             cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
+             objects or get more specific versions of the metadata using the <see cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
 
             
 
-             or <see
-             cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedXmlSchemas" />
+             or <see cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedXmlSchemas" />
 
             
 
@@ -108,13 +95,11 @@
         </item>
       </list>
       <para
-        >You can support exporting custom WSDL extensions by implementing the <see
-         cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+        >You can support exporting custom WSDL extensions by implementing the <see cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
 
         
 
-         interface and custom policy assertions by implementing the <see
-         cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+         interface and custom policy assertions by implementing the <see cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
 
         
 
@@ -145,8 +130,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use to create a <see
-             cref="T:System.ServiceModel.Description.WsdlExporter" />
+            >Use to create a <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
             
 
@@ -156,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.WsdlExporter" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
             
 
@@ -189,8 +172,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+            >Use the <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
 
             
 
@@ -202,12 +184,15 @@
           <para>Exports metadata that describes only the contract information from the specified contract description.</para>
         </summary>
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ContractDescription" />
+          The <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
           
 
@@ -238,8 +223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+            >Use the <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
@@ -251,12 +235,15 @@
           <para>Generates metadata about the specified endpoint.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -292,8 +279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+            >Use the <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
 
             
 
@@ -305,12 +291,15 @@
           <para>Generates metadata about a group of endpoints from a specified service.</para>
         </summary>
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -339,23 +328,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
+            >The <see cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
 
             
 
-             property returns documents only as a result of calls to either <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+             property returns documents only as a result of calls to either <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+            , <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
-            , or <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+            , or <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
 
             
 
@@ -365,8 +350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Gets a collection of <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -396,23 +380,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedXmlSchemas" />
+            >The <see cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedXmlSchemas" />
 
             
 
-             property returns documents only as a result of calls to either <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+             property returns documents only as a result of calls to either <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+            , <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
-            , or <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+            , or <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
 
             
 
@@ -422,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a set of <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Gets a set of <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -453,31 +432,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
+            >Use the <see cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
 
             
 
-             property to get a collection of all the metadata generated as a result of any number of calls to <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+             property to get a collection of all the metadata generated as a result of any number of calls to <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+            , <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
-            , or <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+            , or <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
 
             
 
             . </para
           >
           <para
-            >It is recommended that you check the base <see
-             cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
+            >It is recommended that you check the base <see cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
 
             
 
@@ -487,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerable collection of generated <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Returns an enumerable collection of generated <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
@@ -498,23 +471,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerable collection of generated <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >An enumerable collection of generated <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             objects that represents the metadata generated as a result of calls to <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
+             objects that represents the metadata generated as a result of calls to <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportContract(System.ServiceModel.Description.ContractDescription)" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+            , <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
-            , or <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
+            , or <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoints(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ServiceEndpoint},System.Xml.XmlQualifiedName)" />
 
             
 

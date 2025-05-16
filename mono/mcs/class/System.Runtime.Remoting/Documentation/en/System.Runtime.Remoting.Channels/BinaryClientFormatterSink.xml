@@ -28,23 +28,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The function of the formatter sink is to generate the necessary headers and serialize the message to the stream. After the formatter sink, the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+        >The function of the formatter sink is to generate the necessary headers and serialize the message to the stream. After the formatter sink, the <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
         
 
-         is forwarded to all sinks in the chain through the <see
-         cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.ProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream,System.Runtime.Remoting.Channels.ITransportHeaders@,System.IO.Stream@)" />
+         is forwarded to all sinks in the chain through the <see cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.ProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream,System.Runtime.Remoting.Channels.ITransportHeaders@,System.IO.Stream@)" />
 
         
 
-         or <see
-         cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.AsyncProcessRequest(System.Runtime.Remoting.Channels.IClientChannelSinkStack,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
+         or <see cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.AsyncProcessRequest(System.Runtime.Remoting.Channels.IClientChannelSinkStack,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
 
         
 
-         calls. At this stage the message has already been serialized and is provided as information only. Sinks that need to create or modify the message must be placed in the sink chain before the formatter. This is easily achieved by implementing the <see
-         cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />
+         calls. At this stage the message has already been serialized and is provided as information only. Sinks that need to create or modify the message must be placed in the sink chain before the formatter. This is easily achieved by implementing the <see cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />
 
         
 
@@ -73,7 +69,9 @@
       <block subset="none" type="note">
         <para
           >Using an instance of this object with untrusted data or across an unsecure channel is a security risk. Use this object only with trusted data and across a secure channel. For more information, see <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=330378">Untrusted Data Security Risks</see>
+            cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+            >Untrusted Data Security Risks</see
+          >
 
           
 
@@ -84,8 +82,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the implementation for a client formatter sink that uses the <see
-         cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+        >Provides the implementation for a client formatter sink that uses the <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 
@@ -109,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.BinaryClientFormatterSink" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.BinaryClientFormatterSink" />
 
             
 
@@ -118,12 +114,15 @@
           >
         </summary>
         <param name="nextSink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The next <see
-           cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />
+          The next <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />
 
           
 
@@ -157,8 +156,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
+            >A <see cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
 
             
 
@@ -166,14 +164,22 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to process. </param
         >
         <param name="replySink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,28 +216,44 @@
           <para>Requests asynchronous processing of a method call on the current sink.</para>
         </summary>
         <param name="sinkStack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stack of channel sinks that called the current sink. </param
         >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message to process. </param
         >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The headers to add to the outgoing message that is heading to the server. </param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,28 +290,44 @@
           <para>Requests asynchronous processing of a response to a method call on the current sink.</para>
         </summary>
         <param name="sinkStack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stack of sinks that called the current sink. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Information that is associated with the current sink, generated on the request side and needed on the response side. </param
         >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The headers that are retrieved from the server response stream. </param
         >
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -318,8 +356,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Channels.BinaryClientFormatterSink.GetRequestStream(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders)" />
+            >The <see cref="M:System.Runtime.Remoting.Channels.BinaryClientFormatterSink.GetRequestStream(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders)" />
 
             
 
@@ -329,8 +366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.IO.Stream" />
+            >Returns the <see cref="T:System.IO.Stream" />
 
             
 
@@ -340,8 +376,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IO.Stream" />
+            >The <see cref="T:System.IO.Stream" />
 
             
 
@@ -349,19 +384,26 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+          The <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
           
 
            that contains details about the method call. </param
         >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -388,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the next <see
-             cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />
+            >Gets the next <see cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />
 
             
 
@@ -417,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the next <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+            >Gets the next <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
 
             
 
@@ -486,8 +526,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="226ECF74-EBBD-4EA0-A701-DCF4441DEEFE"
                 >[&lt;topic://cpconchannelformatterconfigurationproperties&gt;]</a
               >
@@ -501,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets a <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -538,7 +576,11 @@
           <para>The response to the processed message.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

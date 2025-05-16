@@ -37,16 +37,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to fields or parameters.</para>
       <para
-        >For more information about constant attributes, see the <see
-         cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" />
+        >For more information about constant attributes, see the <see cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" />
 
         
 
          class.</para
       >
       <para
-        >The classes in <see
-         cref="N:System.Runtime.CompilerServices" />
+        >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
         
 
@@ -56,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Persists an 8-byte <see
-         cref="T:System.DateTime" />
+        >Persists an 8-byte <see cref="T:System.DateTime" />
 
         
 
@@ -89,7 +86,11 @@
           <para>Initializes a new instance of the DateTimeConstantAttribute class with the number of 100-nanosecond ticks that represent the date and time of this instance.</para>
         </summary>
         <param name="ticks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

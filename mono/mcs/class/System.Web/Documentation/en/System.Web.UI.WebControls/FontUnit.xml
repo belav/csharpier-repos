@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.FontUnit" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
         
 
-        , see the <see
-         cref="Overload:System.Web.UI.WebControls.FontUnit.#ctor" />
+        , see the <see cref="Overload:System.Web.UI.WebControls.FontUnit.#ctor" />
 
         
 
@@ -53,18 +51,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.Double)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.Double)" />
 
             
 
-             constructor to create and initialize an instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             constructor to create and initialize an instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class using the specified font size. The following table shows initial property values for the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             class using the specified font size. The following table shows initial property values for the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -87,8 +82,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
+                  >The <see cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
 
                   
 
@@ -102,28 +96,23 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.Web.UI.WebControls.Unit" />
+                  >A <see cref="T:System.Web.UI.WebControls.Unit" />
 
                   
 
-                   with the <see
-                   cref="P:System.Web.UI.WebControls.Unit.Value" />
+                   with the <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
                   
 
-                   property equal to <paramref
-                   name="value" />
+                   property equal to <paramref name="value" />
 
                   
 
-                   and the <see
-                   cref="P:System.Web.UI.WebControls.Unit.Type" />
+                   and the <see cref="P:System.Web.UI.WebControls.Unit.Type" />
 
                   
 
-                   property equal to the <see
-                   cref="F:System.Web.UI.WebControls.UnitType.Point" />
+                   property equal to the <see cref="F:System.Web.UI.WebControls.UnitType.Point" />
 
                   
 
@@ -136,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -145,12 +133,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Double" />
+          A <see cref="T:System.Double" />
 
           
 
@@ -169,16 +160,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
              class using the specified font size.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -209,18 +198,15 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.Web.UI.WebControls.Unit" />
+                  >A <see cref="T:System.Web.UI.WebControls.Unit" />
 
                   
 
-                   with its <see
-                   cref="P:System.Web.UI.WebControls.Unit.Value" />
+                   with its <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
                   
 
-                   property set to the font size specified by the <paramref
-                   name="value" />
+                   property set to the font size specified by the <paramref name="value" />
 
                   
 
@@ -233,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -242,7 +227,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -265,23 +254,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String)" />
 
             
 
-             constructor calls the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String,System.Globalization.CultureInfo)" />
+             constructor calls the <see cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String,System.Globalization.CultureInfo)" />
 
             
 
-             constructor, using the <see
-             cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+             constructor, using the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
             
 
-             property for the <see
-             cref="T:System.Globalization.CultureInfo" />
+             property for the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -291,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -300,7 +284,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -326,26 +314,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             class using the specified <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
              object.</para
           >
           <para
-            >If the <paramref
-             name="type" />
+            >If the <paramref name="type" />
 
             
 
-             parameter contains the value FontSize.AsUnit, the following table shows the initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             parameter contains the value FontSize.AsUnit, the following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -376,13 +360,11 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.Web.UI.WebControls.Unit" />
+                  >A <see cref="T:System.Web.UI.WebControls.Unit" />
 
                   
 
-                   object with its <see
-                   cref="P:System.Web.UI.WebControls.Unit.Value" />
+                   object with its <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
                   
 
@@ -392,18 +374,15 @@
             </item>
           </list>
           <para
-            >If the <paramref
-             name="type" />
+            >If the <paramref name="type" />
 
             
 
-             parameter contains any other <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             parameter contains any other <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the following table shows the initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             value, the following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -426,8 +405,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="type" />
+                  >The value of the <paramref name="type" />
 
                   
 
@@ -450,13 +428,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class with the specified <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             class with the specified <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
@@ -464,12 +440,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.FontSize" />
+          One of the <see cref="T:System.Web.UI.WebControls.FontSize" />
 
           
 
@@ -495,36 +474,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             class using the specified <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
             .</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Unit.IsEmpty" />
+            >If the <see cref="P:System.Web.UI.WebControls.Unit.IsEmpty" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property of the <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
-             passed in the <paramref
-             name="value" />
+             passed in the <paramref name="value" />
 
             
 
-             parameter is true, the following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             parameter is true, the following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -561,23 +534,19 @@
             </item>
           </list>
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.Unit.IsEmpty" />
+            >If the <see cref="P:System.Web.UI.WebControls.Unit.IsEmpty" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property of the <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
-             passed in the <paramref
-             name="value" />
+             passed in the <paramref name="value" />
 
             
 
-             parameter is false, the following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             parameter is false, the following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -608,8 +577,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="value" />
+                  >The value of the <paramref name="value" />
 
                   
 
@@ -622,13 +590,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class with the specified <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             class with the specified <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -636,12 +602,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Unit" />
+          A <see cref="T:System.Web.UI.WebControls.Unit" />
 
           
 
@@ -670,21 +639,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.Double,System.Web.UI.WebControls.UnitType)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.Double,System.Web.UI.WebControls.UnitType)" />
 
             
 
-             constructor to create and initialize an instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             constructor to create and initialize an instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
              class using the specified font size and measuring unit, such as point or pixel. </para
           >
           <para
-            >The following table shows the initial property values for a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >The following table shows the initial property values for a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -707,8 +673,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
+                  >The <see cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
 
                   
 
@@ -722,28 +687,23 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.Web.UI.WebControls.Unit" />
+                  >A <see cref="T:System.Web.UI.WebControls.Unit" />
 
                   
 
-                   with the <see
-                   cref="P:System.Web.UI.WebControls.Unit.Value" />
+                   with the <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
                   
 
-                   property equal to <paramref
-                   name="value" />
+                   property equal to <paramref name="value" />
 
                   
 
-                   and the <see
-                   cref="P:System.Web.UI.WebControls.Unit.Type" />
+                   and the <see cref="P:System.Web.UI.WebControls.Unit.Type" />
 
                   
 
-                   property equal to <paramref
-                   name="type" />
+                   property equal to <paramref name="type" />
 
                   
 
@@ -756,13 +716,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class with the specified font size and <see
-             cref="T:System.Web.UI.WebControls.UnitType" />
+             class with the specified font size and <see cref="T:System.Web.UI.WebControls.UnitType" />
 
             
 
@@ -770,24 +728,30 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Double" />
+          A <see cref="T:System.Double" />
 
           
 
            that specifies the font size. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.UnitType" />
+          A <see cref="T:System.Web.UI.WebControls.UnitType" />
 
           
 
@@ -810,18 +774,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String,System.Globalization.CultureInfo)" />
+            >The <see cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String,System.Globalization.CultureInfo)" />
 
             
 
-             constructor recognizes the strings for <paramref
-             name="value" />
+             constructor recognizes the strings for <paramref name="value" />
 
             
 
-             that are shown in the following table to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             that are shown in the following table to create a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -932,41 +893,34 @@
             </item>
           </list>
           <para
-            >In all cases, the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+            >In all cases, the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property has the value <see
-             cref="F:System.Web.UI.WebControls.FontSize.NotSet" />
+             property has the value <see cref="F:System.Web.UI.WebControls.FontSize.NotSet" />
 
             
 
             . The string comparison is case insensitive.</para
           >
           <para
-            >For all other values of <paramref
-             name="value" />
+            >For all other values of <paramref name="value" />
 
             
 
-            , a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            , a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class is created by treating <paramref
-             name="value" />
+             class is created by treating <paramref name="value" />
 
             
 
-             as a font size and setting the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             as a font size and setting the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property to <see
-             cref="F:System.Web.UI.WebControls.UnitType.Point" />
+             property to <see cref="F:System.Web.UI.WebControls.UnitType.Point" />
 
             
 
@@ -976,13 +930,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class with the specified string using the specified <see
-             cref="T:System.Globalization.CultureInfo" />
+             class with the specified string using the specified <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -990,19 +942,26 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string to specify the font size.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
@@ -1028,13 +987,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.Empty" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.Empty" />
 
             
 
-             field to represent an empty <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent an empty <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1044,8 +1001,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents an empty <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents an empty <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1071,43 +1027,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.Equals(System.Object)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnit.Equals(System.Object)" />
 
             
 
-             method to determine whether the specified <see
-             cref="T:System.Object" />
+             method to determine whether the specified <see cref="T:System.Object" />
 
             
 
-             is equivalent to the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             is equivalent to the instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             class that this method is called from. For the specified <see
-             cref="T:System.Object" />
+             class that this method is called from. For the specified <see cref="T:System.Object" />
 
             
 
-             to be equivalent, the object must be a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             to be equivalent, the object must be a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             that contains the same values for the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             that contains the same values for the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             and <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
-             properties as the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             properties as the instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1117,13 +1065,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equivalent to the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             is equivalent to the instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1133,13 +1079,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
-             is equivalent to the instance of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             is equivalent to the instance of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1147,12 +1091,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -1198,8 +1145,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.IsEmpty" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontUnit.IsEmpty" />
 
             
 
@@ -1230,26 +1176,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.Large" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.Large" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.Large.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -1259,13 +1201,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -1292,26 +1232,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.Larger" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.Larger" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.Larger.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -1319,8 +1255,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Some browers do not recognize the <see
-               cref="F:System.Web.UI.WebControls.FontSize.Larger" />
+              >Some browers do not recognize the <see cref="F:System.Web.UI.WebControls.FontSize.Larger" />
 
               
 
@@ -1331,13 +1266,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -1364,26 +1297,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.Medium" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.Medium" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.Medium.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -1393,13 +1322,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -1429,18 +1356,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >For the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             objects to be equivalent, each object must have the same values for the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             objects to be equivalent, each object must have the same values for the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             and <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
@@ -1450,8 +1374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Compares two <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1461,8 +1384,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if both <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >true if both <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1470,24 +1392,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+          A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
            on the left of the operator that contains font properties. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+          A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
@@ -1539,18 +1467,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >For the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             objects to be not equal to each other, each object must either have different values for the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             objects to be not equal to each other, each object must either have different values for the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property or the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             property or the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
@@ -1560,8 +1485,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Compares two <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1571,8 +1495,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if both <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >true if both <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1580,24 +1503,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+          A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
            that contains font properties on the left of the operator. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+          A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
@@ -1625,36 +1554,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the static <see
-             cref="M:System.Web.UI.WebControls.FontUnit.Parse(System.String)" />
+            >Use the static <see cref="M:System.Web.UI.WebControls.FontUnit.Parse(System.String)" />
 
             
 
-             method to convert the specified string to its <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to convert the specified string to its <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
              equivalent.</para
           >
           <para
-            >If the value of the <paramref
-             name="s" />
+            >If the value of the <paramref name="s" />
 
             
 
-             parameter is not null, not <see
-             cref="F:System.String.Empty" />
+             parameter is not null, not <see cref="F:System.String.Empty" />
 
             
 
-            , and a valid <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+            , and a valid <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the following table shows initial property values for the new instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             value, the following table shows initial property values for the new instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1677,13 +1600,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.FontSize" />
+                  >The <see cref="T:System.Web.UI.WebControls.FontSize" />
 
                   
 
-                   enumeration equivalent of the <paramref
-                   name="s" />
+                   enumeration equivalent of the <paramref name="s" />
 
                   
 
@@ -1703,23 +1624,19 @@
             </item>
           </list>
           <para
-            >If the value of the <paramref
-             name="s" />
+            >If the value of the <paramref name="s" />
 
             
 
-             parameter is not null, not <see
-             cref="F:System.String.Empty" />
+             parameter is not null, not <see cref="F:System.String.Empty" />
 
             
 
-            , and an invalid <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+            , and an invalid <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the following table shows initial property values for the new instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             value, the following table shows initial property values for the new instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1750,18 +1667,15 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.Web.UI.WebControls.Unit" />
+                  >A <see cref="T:System.Web.UI.WebControls.Unit" />
 
                   
 
-                   object with its <see
-                   cref="P:System.Web.UI.WebControls.Unit.Value" />
+                   object with its <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
                   
 
-                   property initialized with the <paramref
-                   name="s" />
+                   property initialized with the <paramref name="s" />
 
                   
 
@@ -1771,18 +1685,15 @@
             </item>
           </list>
           <para
-            >If the value of the <paramref
-             name="s" />
+            >If the value of the <paramref name="s" />
 
             
 
-             parameter is null or <see
-             cref="F:System.String.Empty" />
+             parameter is null or <see cref="F:System.String.Empty" />
 
             
 
-            , the following table shows initial property values for the new instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            , the following table shows initial property values for the new instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1822,8 +1733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified string to its <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts the specified string to its <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1833,13 +1743,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             that represents the font size specified by the <paramref
-             name="s" />
+             that represents the font size specified by the <paramref name="s" />
 
             
 
@@ -1847,12 +1755,15 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of one of the <see
-           cref="T:System.Web.UI.WebControls.FontSize" />
+          A string representation of one of the <see cref="T:System.Web.UI.WebControls.FontSize" />
 
           
 
@@ -1881,36 +1792,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the static <see
-             cref="M:System.Web.UI.WebControls.FontUnit.Parse(System.String)" />
+            >Use the static <see cref="M:System.Web.UI.WebControls.FontUnit.Parse(System.String)" />
 
             
 
-             method to convert the specified string and culture to its <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to convert the specified string and culture to its <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
              equivalent.</para
           >
           <para
-            >If the value of the <paramref
-             name="s" />
+            >If the value of the <paramref name="s" />
 
             
 
-             parameter is not null, not <see
-             cref="F:System.String.Empty" />
+             parameter is not null, not <see cref="F:System.String.Empty" />
 
             
 
-            , and a valid <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+            , and a valid <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the following table shows initial property values for the new instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             value, the following table shows initial property values for the new instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -1933,13 +1838,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.FontSize" />
+                  >The <see cref="T:System.Web.UI.WebControls.FontSize" />
 
                   
 
-                   enumeration equivalent of the <paramref
-                   name="s" />
+                   enumeration equivalent of the <paramref name="s" />
 
                   
 
@@ -1959,23 +1862,19 @@
             </item>
           </list>
           <para
-            >If the value of the <paramref
-             name="s" />
+            >If the value of the <paramref name="s" />
 
             
 
-             parameter is not null, not <see
-             cref="F:System.String.Empty" />
+             parameter is not null, not <see cref="F:System.String.Empty" />
 
             
 
-            , and an invalid <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+            , and an invalid <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the following table shows initial property values for the new instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             value, the following table shows initial property values for the new instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2006,18 +1905,15 @@
               </term>
               <description>
                 <para
-                  >A <see
-                   cref="T:System.Web.UI.WebControls.Unit" />
+                  >A <see cref="T:System.Web.UI.WebControls.Unit" />
 
                   
 
-                   object with its <see
-                   cref="P:System.Web.UI.WebControls.Unit.Value" />
+                   object with its <see cref="P:System.Web.UI.WebControls.Unit.Value" />
 
                   
 
-                   property initialized with the <paramref
-                   name="s" />
+                   property initialized with the <paramref name="s" />
 
                   
 
@@ -2027,18 +1923,15 @@
             </item>
           </list>
           <para
-            >If the value of the <paramref
-             name="s" />
+            >If the value of the <paramref name="s" />
 
             
 
-             parameter is null or <see
-             cref="F:System.String.Empty" />
+             parameter is null or <see cref="F:System.String.Empty" />
 
             
 
-            , the following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            , the following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2078,8 +1971,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified string to its <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts the specified string to its <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2089,18 +1981,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             that represents the font size specified by the <paramref
-             name="s" />
+             that represents the font size specified by the <paramref name="s" />
 
             
 
-             parameter in the culture specified by the <paramref
-             name="culture" />
+             parameter in the culture specified by the <paramref name="culture" />
 
             
 
@@ -2108,29 +1997,34 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of one of the <see
-           cref="T:System.Web.UI.WebControls.FontSize" />
+          A string representation of one of the <see cref="T:System.Web.UI.WebControls.FontSize" />
 
           
 
            values. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           that represents the culture of the <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+           that represents the culture of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
@@ -2158,18 +2052,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the static <see
-             cref="M:System.Web.UI.WebControls.FontUnit.Point(System.Int32)" />
+            >Use the static <see cref="M:System.Web.UI.WebControls.FontUnit.Point(System.Int32)" />
 
             
 
-             method to create a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to create a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             that represents the font size specified by the <paramref
-             name="n" />
+             that represents the font size specified by the <paramref name="n" />
 
             
 
@@ -2179,13 +2070,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             of type <see
-             cref="T:System.Drawing.Point" />
+             of type <see cref="T:System.Drawing.Point" />
 
             
 
@@ -2195,13 +2084,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >A <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             that represents the font size specified by the <paramref
-             name="n" />
+             that represents the font size specified by the <paramref name="n" />
 
             
 
@@ -2209,17 +2096,19 @@
           >
         </returns>
         <param name="n">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer representing the <see
-           cref="T:System.Drawing.Point" />
+          An integer representing the <see cref="T:System.Drawing.Point" />
 
           
 
-           value to convert to a <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+           value to convert to a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
@@ -2245,26 +2134,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.Small" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.Small" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.Small.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -2274,13 +2159,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -2307,26 +2190,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.Smaller" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.Smaller" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.Smaller.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -2334,8 +2213,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Some browers do not recognize the <see
-               cref="F:System.Web.UI.WebControls.FontSize.Smaller" />
+              >Some browers do not recognize the <see cref="F:System.Web.UI.WebControls.FontSize.Smaller" />
 
               
 
@@ -2346,13 +2224,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -2376,43 +2252,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.ToString" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnit.ToString" />
 
             
 
-             method to retrieve the string representation of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to retrieve the string representation of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-            . If the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+            . If the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to FontSize.AsUnit, the returned string is the string equivalent of the <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property is set to FontSize.AsUnit, the returned string is the string equivalent of the <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
-             contained in the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             contained in the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
-             property. If the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             property. If the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to any other <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             property is set to any other <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the returned string is the string equivalent of the <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             value, the returned string is the string equivalent of the <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
@@ -2422,8 +2290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2433,8 +2300,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >The string representation of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2463,43 +2329,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.ToString" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnit.ToString" />
 
             
 
-             method to retrieve the string representation of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to retrieve the string representation of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             in the specified culture. If the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             in the specified culture. If the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to FontSize.AsUnit, the returned string is the string equivalent of the <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property is set to FontSize.AsUnit, the returned string is the string equivalent of the <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
-             contained in the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             contained in the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
-             property. If the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             property. If the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to any other <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             property is set to any other <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the returned string is the string equivalent of the <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             value, the returned string is the string equivalent of the <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
@@ -2509,13 +2367,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object to a string representation, using the specified <see
-             cref="T:System.Globalization.CultureInfo" />
+             object to a string representation, using the specified <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -2525,8 +2381,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >The string representation of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2534,17 +2389,19 @@
           >
         </returns>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           that contains the culture to represent the <see
-           cref="T:System.Web.UI.WebControls.FontUnit" />
+           that contains the culture to represent the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
           
 
@@ -2573,79 +2430,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.FontUnit.ToString" />
+            >Use the <see cref="M:System.Web.UI.WebControls.FontUnit.ToString" />
 
             
 
-             method to retrieve the string representation of the <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             method to retrieve the string representation of the <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
              object using a culture-specific format provider for any numeric values that are in the string. </para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+            >If the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to the <see
-             cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
+             property is set to the <see cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
 
             
 
-             value, the returned string is the string equivalent of the unit value that is contained in the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             value, the returned string is the string equivalent of the unit value that is contained in the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
-             property. The numeric portion of the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             property. The numeric portion of the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
-             value is formatted using the specified <paramref
-             name="formatProvider" />
+             value is formatted using the specified <paramref name="formatProvider" />
 
             
 
-            . In other words, when the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+            . In other words, when the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to the <see
-             cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
+             property is set to the <see cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
 
             
 
-             value, the returned string representation is generated using the <see
-             cref="M:System.Web.UI.WebControls.Unit.ToString(System.IFormatProvider)" />
+             value, the returned string representation is generated using the <see cref="M:System.Web.UI.WebControls.Unit.ToString(System.IFormatProvider)" />
 
             
 
-             method on the unit object that is stored in the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+             method on the unit object that is stored in the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
              property. </para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+            >If the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property is set to any other <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             property is set to any other <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
-             value, the returned string is the string equivalent of the <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             value, the returned string is the string equivalent of the <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
@@ -2655,8 +2498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Converts a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
@@ -2666,13 +2508,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents this <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >A string that represents this <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-            , with any numeric unit value in the format specified by <paramref
-             name="formatProvider" />
+            , with any numeric unit value in the format specified by <paramref name="formatProvider" />
 
             
 
@@ -2695,13 +2535,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
-             property to retrieve a <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+             property to retrieve a <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
@@ -2711,8 +2549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.FontSize" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.FontSize" />
 
             
 
@@ -2736,13 +2573,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
 
             
 
-             property to retrieve a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+             property to retrieve a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -2752,8 +2587,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.Unit" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.Unit" />
 
             
 
@@ -2780,26 +2614,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.XLarge" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.XLarge" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.XLarge.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -2809,13 +2639,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -2842,26 +2670,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.XSmall" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.XSmall" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.XSmall.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -2871,13 +2695,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -2904,26 +2726,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.XXLarge" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.XXLarge" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.XXLarge.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -2933,13 +2751,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
@@ -2966,26 +2782,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="F:System.Web.UI.WebControls.FontUnit.XXSmall" />
+            >Use the <see cref="F:System.Web.UI.WebControls.FontUnit.XXSmall" />
 
             
 
-             field to represent a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+             field to represent a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 
              property set to FontSize.XXSmall.</para
           >
           <para
-            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
-             cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+            >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see cref="P:System.Web.UI.WebControls.FontInfo.Size" />
 
             
 
@@ -2995,13 +2807,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a <see
-             cref="T:System.Web.UI.WebControls.FontUnit" />
+            >Represents a <see cref="T:System.Web.UI.WebControls.FontUnit" />
 
             
 
-             object with the <see
-             cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+             object with the <see cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
             
 

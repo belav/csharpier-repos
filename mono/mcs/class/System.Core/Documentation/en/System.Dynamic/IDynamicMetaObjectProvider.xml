@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Objects that want to participate in the binding process should implement an IDynamicMetaObjectProvider interface, and implement <see
-         cref="M:System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(System.Linq.Expressions.Expression)" />
+        >Objects that want to participate in the binding process should implement an IDynamicMetaObjectProvider interface, and implement <see cref="M:System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(System.Linq.Expressions.Expression)" />
 
         
 
-         to return a <see
-         cref="T:System.Dynamic.DynamicMetaObject" />
+         to return a <see cref="T:System.Dynamic.DynamicMetaObject" />
 
         
 
@@ -28,12 +26,16 @@
       >
       <para
         >For more information, see documentation on the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=141028">CodePlex</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=141028"
+          >CodePlex</see
+        >
 
         
 
          Web site and the MSDN article <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=198161">Implementing Dynamic Interfaces</see>
+          cref="http://go.microsoft.com/fwlink/?LinkID=198161"
+          >Implementing Dynamic Interfaces</see
+        >
 
         
 
@@ -70,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >Returns the <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -81,8 +82,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Dynamic.DynamicMetaObject" />
+            >The <see cref="T:System.Dynamic.DynamicMetaObject" />
 
             
 
@@ -90,7 +90,11 @@
           >
         </returns>
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

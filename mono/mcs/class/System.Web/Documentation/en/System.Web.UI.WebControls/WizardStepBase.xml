@@ -28,26 +28,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You cannot directly create an instance of the <see
-         cref="T:System.Web.UI.WebControls.WizardStepBase" />
+        >You cannot directly create an instance of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
         
 
-         class. Instead, this class is inherited by the <see
-         cref="T:System.Web.UI.WebControls.WizardStep" />
+         class. Instead, this class is inherited by the <see cref="T:System.Web.UI.WebControls.WizardStep" />
 
         
 
-         class and the <see
-         cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+         class and the <see cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
 
         
 
          class to provide the basic functionality of a step in a control that acts as a wizard. </para
       >
       <para
-        >You can derive from the <see
-         cref="T:System.Web.UI.WebControls.WizardStepBase" />
+        >You can derive from the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
         
 
@@ -57,8 +53,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the basic functionality required by a step in a <see
-         cref="T:System.Web.UI.WebControls.Wizard" />
+        >Implements the basic functionality required by a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
         
 
@@ -77,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 
@@ -113,41 +107,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+            >The <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
             
 
-             property can be used to enforce linear navigation in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+             property can be used to enforce linear navigation in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control. If each step has its <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+             control. If each step has its <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
             
 
-             property set to false, the user will not be able to return to a step after it has been accessed. One scenario where you might use this functionality is to disallow a user to return to a step after it has been completed because you are persisting the data to a database as each step is completed. If you save the data after each step and allow the user to return to a step and change information after it has been saved, the saved data might become corrupted. By setting the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+             property set to false, the user will not be able to return to a step after it has been accessed. One scenario where you might use this functionality is to disallow a user to return to a step after it has been completed because you are persisting the data to a database as each step is completed. If you save the data after each step and allow the user to return to a step and change information after it has been saved, the saved data might become corrupted. By setting the <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
             
 
              property to false, once the user has left a step, he or she will not be able to return to it and change any values.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+            >The <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
             
 
-             property determines how and when the <ui
-            >Previous</ui>
+             property determines how and when the <ui>Previous</ui>
 
             
 
-             button is not rendered. The following table describes the <ui
-            >Previous</ui>
+             button is not rendered. The following table describes the <ui>Previous</ui>
 
             
 
@@ -167,8 +154,7 @@
             <item>
               <term>
                 <para
-                  >Linear: Step1 has <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+                  >Linear: Step1 has <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
                   
 
@@ -177,8 +163,7 @@
               </term>
               <description>
                 <para
-                  >Step 2 does not display the <ui
-                  >Previous</ui>
+                  >Step 2 does not display the <ui>Previous</ui>
 
                   
 
@@ -189,8 +174,7 @@
             <item>
               <term>
                 <para
-                  >Non-Linear: Step1 has <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+                  >Non-Linear: Step1 has <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
                   
 
@@ -199,8 +183,7 @@
               </term>
               <description>
                 <para
-                  >Step 3 does not display the <ui
-                  >Previous</ui>
+                  >Step 3 does not display the <ui>Previous</ui>
 
                   
 
@@ -211,13 +194,11 @@
             <item>
               <term>
                 <para
-                  >SideBar Buttons: Step 2 has <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+                  >SideBar Buttons: Step 2 has <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
                   
 
-                   set to false , <see
-                   cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+                   set to false , <see cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
 
                   
 
@@ -226,8 +207,7 @@
               </term>
               <description>
                 <para
-                  >No buttons are automatically disabled on the sidebar when <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+                  >No buttons are automatically disabled on the sidebar when <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
                   
 
@@ -241,13 +221,11 @@
               </term>
               <description>
                 <para
-                  >No automatic hiding or displaying occurs if <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+                  >No automatic hiding or displaying occurs if <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
                   
 
-                   is set to false when you use a template for navigation. The <ui
-                  >Previous</ui>
+                   is set to false when you use a template for navigation. The <ui>Previous</ui>
 
                   
 
@@ -258,8 +236,7 @@
             <item>
               <term>
                 <para
-                  >Using the Visual Studio Designer and <see
-                   cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+                  >Using the Visual Studio Designer and <see cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
 
                   
 
@@ -268,38 +245,31 @@
               </term>
               <description>
                 <para
-                  >When step 4 is the <see
-                   cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+                  >When step 4 is the <see cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
 
                   
 
-                  , then the <ui
-                  >Previous</ui>
+                  , then the <ui>Previous</ui>
 
                   
 
-                   button is rendered. The <ui
-                  >Previous</ui>
+                   button is rendered. The <ui>Previous</ui>
 
                   
 
-                   button is only hidden for <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+                   button is only hidden for <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
                   
 
-                   set to <see
-                   cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
+                   set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
 
                   
 
-                   when the preceding step in the history has <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+                   when the preceding step in the history has <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
                   
 
-                   set to false. Since step 4 is rendered first and there are no steps in the history, the <ui
-                  >Previous</ui>
+                   set to false. Since step 4 is rendered first and there are no steps in the history, the <ui>Previous</ui>
 
                   
 
@@ -310,13 +280,11 @@
             <item>
               <term>
                 <para
-                  >Start Step and Non-Linear Navigation: A user visits step 3 and step 4 and then step 1 which has <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+                  >Start Step and Non-Linear Navigation: A user visits step 3 and step 4 and then step 1 which has <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
                   
 
-                   set to <see
-                   cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+                   set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
 
                   
 
@@ -325,18 +293,15 @@
               </term>
               <description>
                 <para
-                  >The wizard does not add a <ui
-                  >Previous</ui>
+                  >The wizard does not add a <ui>Previous</ui>
 
                   
 
-                   button when the <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+                   button when the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
                   
 
-                   is set to <see
-                   cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+                   is set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
 
                   
 
@@ -347,13 +312,11 @@
             <item>
               <term>
                 <para
-                  >Same Step In History: A user visits step 3 where <see
-                   cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+                  >Same Step In History: A user visits step 3 where <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
                   
 
-                   is set to <see
-                   cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
+                   is set to <see cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
 
                   
 
@@ -362,13 +325,11 @@
               </term>
               <description>
                 <para
-                  >The wizard control checks to see if the <ui
-                  >Previous</ui>
+                  >The wizard control checks to see if the <ui>Previous</ui>
 
                   
 
-                   step in the history is the "same" step that the user is currently on. If the step is the same, the wizard control looks back in the history to determine the preceding "different" step and bases the display of the <ui
-                  >Previous</ui>
+                   step in the history is the "same" step that the user is currently on. If the step is the same, the wizard control looks back in the history to determine the preceding "different" step and bases the display of the <ui>Previous</ui>
 
                   
 
@@ -379,23 +340,19 @@
           </list>
           <block subset="none" type="note">
             <para
-              >When the <see
-               cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+              >When the <see cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
               
 
-               property is set to false, but the <see
-               cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+               property is set to false, but the <see cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
 
               
 
-               property of the parent control of <see
-               cref="T:System.Web.UI.WebControls.WizardStepBase" />
+               property of the parent control of <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
               
 
-               is set to true, clicking on a button in the sidebar area has no effect. The sidebar area is generally displayed to provide nonlinear navigation, so if you are not using the functionality of nonlinear navigation, you may want to set the <see
-               cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+               is set to true, clicking on a button in the sidebar area has no effect. The sidebar area is generally displayed to provide nonlinear navigation, so if you are not using the functionality of nonlinear navigation, you may want to set the <see cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
 
               
 
@@ -403,13 +360,11 @@
             >
           </block>
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -421,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the user is allowed to return to the current step from a subsequent step in a <see
-             cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+            >Gets or sets a value indicating whether the user is allowed to return to the current step from a subsequent step in a <see cref="T:System.Web.UI.WebControls.WizardStepCollection" />
 
             
 
@@ -454,48 +408,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+            >The <see cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
 
             
 
-             property returns a string that identifies a step in a wizard control. If a value is specified for the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
+             property returns a string that identifies a step in a wizard control. If a value is specified for the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
 
             
 
-             property, the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+             property, the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
 
             
 
-             property returns that value. If no value is specified for the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
+             property returns that value. If no value is specified for the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
 
             
 
-             property, the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+             property, the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
 
             
 
-             property returns the value of the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
+             property returns the value of the <see cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
 
             
 
-             property. If values are not specified for either the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
+             property. If values are not specified for either the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
 
             
 
-             or the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
+             or the <see cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
 
             
 
-             property, the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+             property, the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
 
             
 
@@ -531,18 +476,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
             
 
-             property to specify the type of navigation buttons to display for a step in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+             property to specify the type of navigation buttons to display for a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control. If you specify a value for this property, any steps marked as <see
-             cref="F:System.Web.UI.WebControls.WizardStepType.Complete" />
+             control. If you specify a value for this property, any steps marked as <see cref="F:System.Web.UI.WebControls.WizardStepType.Complete" />
 
             
 
@@ -550,8 +492,7 @@
           >
           <para>If you do not specify a value for this property, the default is WizardStepType.Auto.</para>
           <para
-            >The following table lists the available settings for the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+            >The following table lists the available settings for the <see cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
             
 
@@ -586,8 +527,7 @@
               <term>WizardStepType.Step</term>
               <description>
                 <para
-                  >The step is any step between the Start and the Finish step. Previous and Next buttons are rendered for navigation. This step type is useful for overriding the <see
-                   cref="F:System.Web.UI.WebControls.WizardStepType.Auto" />
+                  >The step is any step between the Start and the Finish step. Previous and Next buttons are rendered for navigation. This step type is useful for overriding the <see cref="F:System.Web.UI.WebControls.WizardStepType.Auto" />
 
                   
 
@@ -600,8 +540,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of navigation user interface (UI) to display for a step in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets or sets the type of navigation user interface (UI) to display for a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
@@ -633,36 +572,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
+            >Use the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
 
             
 
-             property to display a user-friendly title for a step in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+             property to display a user-friendly title for a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control when the sidebar feature is enabled. If the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
+             control when the sidebar feature is enabled. If the <see cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
 
             
 
-             property is not set and the sidebar feature is enabled, the value of the <see
-             cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
+             property is not set and the sidebar feature is enabled, the value of the <see cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
 
             
 
              property is displayed for the sidebar button.</para
           >
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -676,8 +609,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the title to use for a step in a <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets or sets the title to use for a step in a <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
@@ -713,13 +645,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.UI.WebControls.Wizard" />
+            >Gets the <see cref="T:System.Web.UI.WebControls.Wizard" />
 
             
 
-             control that is the parent of the object derived from <see
-             cref="T:System.Web.UI.WebControls.WizardStepBase" />
+             control that is the parent of the object derived from <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
             
 

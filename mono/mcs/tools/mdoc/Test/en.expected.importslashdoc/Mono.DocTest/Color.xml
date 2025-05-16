@@ -19,8 +19,7 @@
       
 
       .
-              Namespace Test: [<see
-       cref="N:Mono.DocTest" />
+              Namespace Test: [<see cref="N:Mono.DocTest" />
 
       
 
@@ -63,13 +62,11 @@
       <MemberValue>1</MemberValue>
       <Docs>
         <summary>Insert Blue summary here</summary>
-        <remarks>
-          <c>F:Mono.DocTest.Color.Blue</c>
+        <remarks><c>F:Mono.DocTest.Color.Blue</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Green">
@@ -88,13 +85,11 @@
       <MemberValue>2</MemberValue>
       <Docs>
         <summary>Insert Green summary here</summary>
-        <remarks>
-          <c>F:Mono.DocTest.Color.Green</c>
+        <remarks><c>F:Mono.DocTest.Color.Green</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Red">
@@ -113,13 +108,11 @@
       <MemberValue>0</MemberValue>
       <Docs>
         <summary>Insert Red summary here</summary>
-        <remarks>
-          <c>F:Mono.DocTest.Color.Red</c>
+        <remarks><c>F:Mono.DocTest.Color.Red</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
   </Members>

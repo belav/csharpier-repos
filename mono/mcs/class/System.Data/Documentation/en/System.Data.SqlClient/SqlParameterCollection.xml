@@ -30,8 +30,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>If the command contains an ad hoc SQL statement, as opposed to a stored-procedure name, the number of the parameters in the collection must be equal to the number of parameter placeholders within the command text, or SQL Server raises an error. With a stored procedure, all the parameters declared in the stored procedure without a default value must be provided. Parameters declared with a default value are optional. This lets you specify a value other than the default.</para>
       <para
-        >For more information with additional sample code demonstrating how to use parameters, see <format
-         type="text/html">
+        >For more information with additional sample code demonstrating how to use parameters, see <format type="text/html">
           <a href="b623f810-d871-49a5-b0f5-078cc3c34db6">Commands and Parameters (ADO.NET)</a>
         </format>
 
@@ -43,13 +42,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of parameters associated with a <see
-         cref="T:System.Data.SqlClient.SqlCommand" />
+        >Represents a collection of parameters associated with a <see cref="T:System.Data.SqlClient.SqlCommand" />
 
         
 
-         and their respective mappings to columns in a <see
-         cref="T:System.Data.DataSet" />
+         and their respective mappings to columns in a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -75,13 +72,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             object to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             object to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -91,8 +86,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A new <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -100,12 +94,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -131,13 +128,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             object to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             object to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -147,8 +142,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >The index of the new <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -156,12 +150,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -196,13 +193,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -212,8 +207,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A new <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -221,19 +215,26 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="sqlDbType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.SqlDbType" />
+          One of the <see cref="T:System.Data.SqlDbType" />
 
           
 
@@ -263,13 +264,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             object to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             object to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -279,26 +278,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A new <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
              object.</para
           >
           <para
-            >Use caution when you are using this overload of the SqlParameterCollection.Add method to specify integer parameter values. Because this overload takes a <paramref
-             name="value" />
+            >Use caution when you are using this overload of the SqlParameterCollection.Add method to specify integer parameter values. Because this overload takes a <paramref name="value" />
 
             
 
-             of type <see
-             cref="T:System.Object" />
+             of type <see cref="T:System.Object" />
 
             
 
-            , you must convert the integral value to an <see
-             cref="T:System.Object" />
+            , you must convert the integral value to an <see cref="T:System.Object" />
 
             
 
@@ -308,24 +303,30 @@
           <para>If you do not perform this conversion, the compiler assumes that you are trying to call the SqlParameterCollection.Add (string, SqlDbType) overload.</para>
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The name of the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
            to add to the collection.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -367,18 +368,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
-            , given the specified parameter name, <see
-             cref="T:System.Data.SqlDbType" />
+            , given the specified parameter name, <see cref="T:System.Data.SqlDbType" />
 
             
 
@@ -388,8 +386,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A new <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -397,36 +394,45 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="sqlDbType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlDbType" />
+          The <see cref="T:System.Data.SqlDbType" />
 
           
 
-           of the <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+           of the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
            to add to the collection. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The size as an <see
-           cref="T:System.Int32" />
+          The size as an <see cref="T:System.Int32" />
 
           
 
@@ -458,13 +464,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -474,8 +478,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A new <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -483,48 +486,60 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="sqlDbType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.SqlDbType" />
+          One of the <see cref="T:System.Data.SqlDbType" />
 
           
 
            values. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The column length.</param
         >
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the source column (<see
-           cref="P:System.Data.SqlClient.SqlParameter.SourceColumn" />
+          The name of the source column (<see cref="P:System.Data.SqlClient.SqlParameter.SourceColumn" />
 
           
 
-          ) if this <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          ) if this <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
-           is used in a call to <see
-           cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+           is used in a call to <see cref="Overload:System.Data.Common.DbDataAdapter.Update" />
 
           
 
@@ -553,8 +568,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of values to the end of the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Adds an array of values to the end of the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -562,12 +576,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
@@ -595,13 +612,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Adds an array of <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             values to the end of the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             values to the end of the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -609,12 +624,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -646,51 +664,42 @@
 
             
 
-             replaces the SqlParameterCollection.Add method that takes a <see
-             cref="T:System.String" />
+             replaces the SqlParameterCollection.Add method that takes a <see cref="T:System.String" />
 
             
 
-             and an <see
-             cref="T:System.Object" />
+             and an <see cref="T:System.Object" />
 
             
 
-            . The overload of Add that takes a string and an object was deprecated because of possible ambiguity with the SqlParameterCollection.Add overload that takes a <see
-             cref="T:System.String" />
+            . The overload of Add that takes a string and an object was deprecated because of possible ambiguity with the SqlParameterCollection.Add overload that takes a <see cref="T:System.String" />
 
             
 
-             and a <see
-             cref="T:System.Data.SqlDbType" />
+             and a <see cref="T:System.Data.SqlDbType" />
 
             
 
-             enumeration value where passing an integer with the string could be interpreted as being either the parameter value or the corresponding <see
-             cref="T:System.Data.SqlDbType" />
+             enumeration value where passing an integer with the string could be interpreted as being either the parameter value or the corresponding <see cref="T:System.Data.SqlDbType" />
 
             
 
-             value. Use <see
-             cref="M:System.Data.SqlClient.SqlParameterCollection.AddWithValue(System.String,System.Object)" />
+             value. Use <see cref="M:System.Data.SqlClient.SqlParameterCollection.AddWithValue(System.String,System.Object)" />
 
             
 
              whenever you want to add a parameter by specifying its name and value.</para
           >
           <para
-            >For <see
-             cref="T:System.Data.SqlDbType" />
+            >For <see cref="T:System.Data.SqlDbType" />
 
             
 
-             Xml enumeration values, you can use a string, an XML value, an <see
-             cref="T:System.Xml.XmlReader" />
+             Xml enumeration values, you can use a string, an XML value, an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             derived type instance, or a <see
-             cref="T:System.Data.SqlTypes.SqlXml" />
+             derived type instance, or a <see cref="T:System.Data.SqlTypes.SqlXml" />
 
             
 
@@ -700,8 +709,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a value to the end of the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Adds a value to the end of the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -711,8 +719,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >A <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -720,19 +727,26 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to be added. Use <see
-           cref="F:System.DBNull.Value" />
+          The value to be added. Use <see cref="F:System.DBNull.Value" />
 
           
 
@@ -752,13 +766,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all the <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Removes all the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             objects from the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             objects from the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -791,13 +803,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Determines whether the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             is in this <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             is in this <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -807,8 +817,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >true if the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -816,12 +825,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -843,13 +855,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is in this <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             is in this <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -859,8 +869,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >true if the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -868,12 +877,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -899,8 +911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified parameter name is in this <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Determines whether the specified parameter name is in this <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -910,8 +921,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >true if the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -919,12 +929,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -954,18 +967,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
-             to the specified one-dimensional <see
-             cref="T:System.Array" />
+             to the specified one-dimensional <see cref="T:System.Array" />
 
             
 
-             starting at the specified destination <see
-             cref="T:System.Array" />
+             starting at the specified destination <see cref="T:System.Array" />
 
             
 
@@ -973,29 +983,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.SqlClient.SqlParameterCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Array" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Array" />
 
           
 
@@ -1028,13 +1043,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             to the specified <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1042,29 +1055,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlClient.SqlParameterCollection" />
+          The <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.SqlClient.SqlParameterCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Data.SqlClient.SqlParameterCollection" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
           
 
@@ -1084,8 +1102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an Integer that contains the number of elements in the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Returns an Integer that contains the number of elements in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1113,8 +1130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1124,13 +1140,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             for the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1207,8 +1221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Gets the location of the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -1218,18 +1231,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >The zero-based location of the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             that is a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+             that is a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             within the collection. Returns -1 when the object does not exist in the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             within the collection. Returns -1 when the object does not exist in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1237,12 +1247,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -1264,8 +1277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Object" />
+            >Gets the location of the specified <see cref="T:System.Object" />
 
             
 
@@ -1275,18 +1287,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Object" />
+            >The zero-based location of the specified <see cref="T:System.Object" />
 
             
 
-             that is a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+             that is a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             within the collection. Returns -1 when the object does not exist in the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             within the collection. Returns -1 when the object does not exist in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1294,12 +1303,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1325,8 +1337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Gets the location of the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -1336,13 +1347,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >The zero-based location of the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             with the specified case-sensitive name. Returns -1 when the object does not exist in the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             with the specified case-sensitive name. Returns -1 when the object does not exist in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1350,12 +1359,15 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The case-sensitive name of the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -1388,13 +1400,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Inserts a <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             object into the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             object into the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1402,24 +1412,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          A <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
-           object to be inserted in the <see
-           cref="T:System.Data.SqlClient.SqlParameterCollection" />
+           object to be inserted in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
           
 
@@ -1445,13 +1461,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Object" />
+            >Inserts an <see cref="T:System.Object" />
 
             
 
-             into the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             into the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1459,24 +1473,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           to be inserted in the <see
-           cref="T:System.Data.SqlClient.SqlParameterCollection" />
+           to be inserted in the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
           
 
@@ -1503,8 +1523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1528,8 +1547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1553,8 +1571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1645,8 +1662,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Removes the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -1654,12 +1670,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          A <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -1681,8 +1700,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Removes the specified <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
@@ -1690,7 +1708,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1716,13 +1738,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Removes the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             from the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1730,12 +1750,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The zero-based index of the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -1764,13 +1787,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.SqlClient.SqlParameter" />
+            >Removes the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+             from the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 
@@ -1778,12 +1799,15 @@
           >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.SqlClient.SqlParameter" />
+          The name of the <see cref="T:System.Data.SqlClient.SqlParameter" />
 
           
 
@@ -1856,8 +1880,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Data.SqlClient.SqlParameterCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
             
 

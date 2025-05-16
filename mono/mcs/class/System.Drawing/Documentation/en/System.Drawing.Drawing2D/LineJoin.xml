@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how to join consecutive line or curve segments in a figure (subpath) contained in a <see
-         cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+        >Specifies how to join consecutive line or curve segments in a figure (subpath) contained in a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
         
 

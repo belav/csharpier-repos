@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A type is said to be nullable if it can be assigned a value or can be assigned null, which means the type has no value whatsoever. By default, all reference types, such as <see
-         cref="T:System.String" />
+        >A type is said to be nullable if it can be assigned a value or can be assigned null, which means the type has no value whatsoever. By default, all reference types, such as <see cref="T:System.String" />
 
         
 
-        , are nullable, but all value types, such as <see
-         cref="T:System.Int32" />
+        , are nullable, but all value types, such as <see cref="T:System.Int32" />
 
         
 
@@ -38,18 +36,15 @@
       >
       <para>In C# and Visual Basic, you mark a value type as nullable by using the ? notation after the value type. For example, int? in C# or Integer? in Visual Basic declares an integer value type that can be assigned null.</para>
       <para
-        >The <see
-         cref="T:System.Nullable" />
+        >The <see cref="T:System.Nullable" />
 
         
 
-         class provides complementary support for the <see
-         cref="T:System.Nullable`1" />
+         class provides complementary support for the <see cref="T:System.Nullable`1" />
 
         
 
-         structure. The <see
-         cref="T:System.Nullable" />
+         structure. The <see cref="T:System.Nullable" />
 
         
 
@@ -59,28 +54,23 @@
         <h2>Boxing and Unboxing</h2>
       </format>
       <para
-        >When a nullable type is boxed, the common language runtime automatically boxes the underlying value of the <see
-         cref="T:System.Nullable`1" />
+        >When a nullable type is boxed, the common language runtime automatically boxes the underlying value of the <see cref="T:System.Nullable`1" />
 
         
 
-         object, not the <see
-         cref="T:System.Nullable`1" />
+         object, not the <see cref="T:System.Nullable`1" />
 
         
 
-         object itself. That is, if the <see
-         cref="P:System.Nullable`1.HasValue" />
+         object itself. That is, if the <see cref="P:System.Nullable`1.HasValue" />
 
         
 
-         property is true, the contents of the <see
-         cref="P:System.Nullable`1.Value" />
+         property is true, the contents of the <see cref="P:System.Nullable`1.Value" />
 
         
 
-         property is boxed. If the HasValue property is false, null is boxed. When the underlying value of a nullable type is unboxed, the common language runtime creates a new <see
-         cref="T:System.Nullable`1" />
+         property is boxed. If the HasValue property is false, null is boxed. When the underlying value of a nullable type is unboxed, the common language runtime creates a new <see cref="T:System.Nullable`1" />
 
         
 
@@ -129,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares the relative values of two <see
-             cref="T:System.Nullable`1" />
+            >Compares the relative values of two <see cref="T:System.Nullable`1" />
 
             
 
@@ -140,13 +129,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that indicates the relative values of the <paramref
-             name="n1" />
+            >An integer that indicates the relative values of the <paramref name="n1" />
 
             
 
-             and <paramref
-             name="n2" />
+             and <paramref name="n2" />
 
             
 
@@ -169,23 +156,19 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for <paramref
-                   name="n1" />
+                   property for <paramref name="n1" />
 
                   
 
-                   is false, and the <see
-                   cref="P:System.Nullable`1.HasValue" />
+                   is false, and the <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for <paramref
-                   name="n2" />
+                   property for <paramref name="n2" />
 
                   
 
@@ -193,38 +176,31 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
-                   are true, and the value of the <see
-                   cref="P:System.Nullable`1.Value" />
+                   are true, and the value of the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property for <paramref
-                   name="n1" />
+                   property for <paramref name="n1" />
 
                   
 
-                   is less than the value of the <see
-                   cref="P:System.Nullable`1.Value" />
+                   is less than the value of the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property for <paramref
-                   name="n2" />
+                   property for <paramref name="n2" />
 
                   
 
@@ -238,18 +214,15 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
@@ -257,38 +230,31 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
-                   are true, and the value of the <see
-                   cref="P:System.Nullable`1.Value" />
+                   are true, and the value of the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property for <paramref
-                   name="n1" />
+                   property for <paramref name="n1" />
 
                   
 
-                   is equal to the value of the <see
-                   cref="P:System.Nullable`1.Value" />
+                   is equal to the value of the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property for <paramref
-                   name="n2" />
+                   property for <paramref name="n2" />
 
                   
 
@@ -302,23 +268,19 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for <paramref
-                   name="n1" />
+                   property for <paramref name="n1" />
 
                   
 
-                   is true, and the <see
-                   cref="P:System.Nullable`1.HasValue" />
+                   is true, and the <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   property for <paramref
-                   name="n2" />
+                   property for <paramref name="n2" />
 
                   
 
@@ -326,38 +288,31 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
-                   are true, and the value of the <see
-                   cref="P:System.Nullable`1.Value" />
+                   are true, and the value of the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property for <paramref
-                   name="n1" />
+                   property for <paramref name="n1" />
 
                   
 
-                   is greater than the value of the <see
-                   cref="P:System.Nullable`1.Value" />
+                   is greater than the value of the <see cref="P:System.Nullable`1.Value" />
 
                   
 
-                   property for <paramref
-                   name="n2" />
+                   property for <paramref name="n2" />
 
                   
 
@@ -368,41 +323,49 @@
           </list>
         </returns>
         <param name="n1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Nullable`1" />
+          A <see cref="T:System.Nullable`1" />
 
           
 
            object.</param
         >
         <param name="n2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Nullable`1" />
+          A <see cref="T:System.Nullable`1" />
 
           
 
            object.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The underlying value type of the <paramref
-           name="n1" />
+          The underlying value type of the <paramref name="n1" />
 
           
 
-           and <paramref
-           name="n2" />
+           and <paramref name="n2" />
 
           
 
@@ -446,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two specified <see
-             cref="T:System.Nullable`1" />
+            >Indicates whether two specified <see cref="T:System.Nullable`1" />
 
             
 
@@ -457,26 +419,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="n1" />
+            >true if the <paramref name="n1" />
 
             
 
-             parameter is equal to the <paramref
-             name="n2" />
+             parameter is equal to the <paramref name="n2" />
 
             
 
              parameter; otherwise, false. </para
           >
           <para
-            >The return value depends on the <see
-             cref="P:System.Nullable`1.HasValue" />
+            >The return value depends on the <see cref="P:System.Nullable`1.HasValue" />
 
             
 
-             and <see
-             cref="P:System.Nullable`1.Value" />
+             and <see cref="P:System.Nullable`1.Value" />
 
             
 
@@ -499,18 +457,15 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
@@ -518,23 +473,19 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
-                   are true, and the <see
-                   cref="P:System.Nullable`1.Value" />
+                   are true, and the <see cref="P:System.Nullable`1.Value" />
 
                   
 
@@ -548,8 +499,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
@@ -557,23 +507,19 @@
                 >
                 <para>-or-</para>
                 <para
-                  >The <see
-                   cref="P:System.Nullable`1.HasValue" />
+                  >The <see cref="P:System.Nullable`1.HasValue" />
 
                   
 
-                   properties for <paramref
-                   name="n1" />
+                   properties for <paramref name="n1" />
 
                   
 
-                   and <paramref
-                   name="n2" />
+                   and <paramref name="n2" />
 
                   
 
-                   are true, and the <see
-                   cref="P:System.Nullable`1.Value" />
+                   are true, and the <see cref="P:System.Nullable`1.Value" />
 
                   
 
@@ -584,41 +530,49 @@
           </list>
         </returns>
         <param name="n1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Nullable`1" />
+          A <see cref="T:System.Nullable`1" />
 
           
 
            object.</param
         >
         <param name="n2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Nullable`1" />
+          A <see cref="T:System.Nullable`1" />
 
           
 
            object.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The underlying value type of the <paramref
-           name="n1" />
+          The underlying value type of the <paramref name="n1" />
 
           
 
-           and <paramref
-           name="n2" />
+           and <paramref name="n2" />
 
           
 
@@ -651,21 +605,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic type definition is a type declaration, such as <see
-             cref="T:System.Nullable`1" />
+            >A generic type definition is a type declaration, such as <see cref="T:System.Nullable`1" />
 
             
 
             , that contains a type parameter list, and the type parameter list declares one or more type parameters. A closed generic type is a type declaration where a particular type is specified for a type parameter. </para
           >
           <para
-            >For example, if the <paramref
-             name="nullableType" />
+            >For example, if the <paramref name="nullableType" />
 
             
 
-             parameter is the type of Nullable&lt;Int32&gt; in C# (Nullable(Of Int32) in Visual Basic), the return value is the type of <see
-             cref="T:System.Int32" />
+             parameter is the type of Nullable&lt;Int32&gt; in C# (Nullable(Of Int32) in Visual Basic), the return value is the type of <see cref="T:System.Int32" />
 
             
 
@@ -679,13 +630,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type argument of the <paramref
-             name="nullableType" />
+            >The type argument of the <paramref name="nullableType" />
 
             
 
-             parameter, if the <paramref
-             name="nullableType" />
+             parameter, if the <paramref name="nullableType" />
 
             
 
@@ -693,12 +642,15 @@
           >
         </returns>
         <param name="nullableType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 

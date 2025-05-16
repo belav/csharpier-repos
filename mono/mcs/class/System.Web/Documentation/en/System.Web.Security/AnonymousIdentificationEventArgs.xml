@@ -20,97 +20,80 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+        >The <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
         
 
-         class is used to supply event values to the <see
-         cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+         class is used to supply event values to the <see cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
         
 
-         event and to enable you to specify a custom Windows identity for the current request. You can access the <see
-         cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+         event and to enable you to specify a custom Windows identity for the current request. You can access the <see cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Security.AnonymousIdentificationModule" />
+         event of the <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
         
 
-         class by specifying a subroutine named <system
-        >AnonymousIdentification_Creating</system>
+         class by specifying a subroutine named <system>AnonymousIdentification_Creating</system>
 
         
 
          in the Global.asax file for your ASP.NET application.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.AnonymousIdentificationModule" />
+        >The <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
         
 
-         constructs a <see
-         cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+         constructs a <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
         
 
-         object using the current <see
-         cref="T:System.Web.HttpContext" />
+         object using the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         and passes it to the <system
-        >AnonymousIdentification_Creating</system>
+         and passes it to the <system>AnonymousIdentification_Creating</system>
 
         
 
          event.</para
       >
       <para
-        >You can use the <see
-         cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
+        >You can use the <see cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+         property of the <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
         
 
-         object supplied to the <system
-        >AnonymousIdentification_Creating</system>
+         object supplied to the <system>AnonymousIdentification_Creating</system>
 
         
 
-         event to set the anonymous identifier to a custom value. If you do not specify a value for the <see
-         cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
+         event to set the anonymous identifier to a custom value. If you do not specify a value for the <see cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
 
         
 
-         property during the <system
-        >AnonymousIdentification_Creating</system>
+         property during the <system>AnonymousIdentification_Creating</system>
 
         
 
-         event, a <see
-         cref="T:System.Guid" />
+         event, a <see cref="T:System.Guid" />
 
         
 
          is used.</para
       >
       <para
-        >The <system
-        >AnonymousIdentification_Creating</system>
+        >The <system>AnonymousIdentification_Creating</system>
 
         
 
-         event is only raised when the anonymous identification is <see
-         cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+         event is only raised when the anonymous identification is <see cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
 
         
 
@@ -120,8 +103,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <system
-        >AnonymousIdentification_Creating</system>
+        >Provides data for the <system>AnonymousIdentification_Creating</system>
 
         
 
@@ -144,28 +126,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Security.AnonymousIdentificationModule" />
+            >The <see cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
             
 
-             constructs a <see
-             cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+             constructs a <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
             
 
-             object using the current <see
-             cref="T:System.Web.HttpContext" />
+             object using the current <see cref="T:System.Web.HttpContext" />
 
             
 
-            . It then passes the <see
-             cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+            . It then passes the <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
             
 
-             object to the <system
-            >AnonymousIdentification_Creating</system>
+             object to the <system>AnonymousIdentification_Creating</system>
 
             
 
@@ -175,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
             
 
@@ -184,7 +160,11 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -207,41 +187,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
+            >You can use the <see cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
 
             
 
-             property to set the anonymous identifier to a custom value during the <system
-            >AnonymousIdentification_Creating</system>
+             property to set the anonymous identifier to a custom value during the <system>AnonymousIdentification_Creating</system>
 
             
 
-             event. If you do not specify a value for the <see
-             cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
+             event. If you do not specify a value for the <see cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
 
             
 
-             property during the <system
-            >AnonymousIdentification_Creating</system>
+             property during the <system>AnonymousIdentification_Creating</system>
 
             
 
-             event, a <see
-             cref="T:System.Guid" />
+             event, a <see cref="T:System.Guid" />
 
             
 
              is used.</para
           >
           <para
-            >The <system
-            >AnonymousIdentification_Creating</system>
+            >The <system>AnonymousIdentification_Creating</system>
 
             
 
-             event is only raised when the anonymous identification is <see
-             cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+             event is only raised when the anonymous identification is <see cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
 
             
 
@@ -269,23 +242,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.HttpContext" />
+            >The <see cref="T:System.Web.HttpContext" />
 
             
 
-             provides access to <see
-             cref="P:System.Web.HttpContext.Request" />
+             provides access to <see cref="P:System.Web.HttpContext.Request" />
 
             
 
-            , <see
-             cref="P:System.Web.HttpContext.Response" />
+            , <see cref="P:System.Web.HttpContext.Response" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpContext.User" />
+            , and <see cref="P:System.Web.HttpContext.User" />
 
             
 
@@ -295,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets the <see cref="T:System.Web.HttpContext" />
 
             
 

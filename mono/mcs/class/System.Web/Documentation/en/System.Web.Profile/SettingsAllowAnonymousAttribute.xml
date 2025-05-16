@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
+        >The <see cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
 
         
 
-         class is used to identify whether a property of a custom profile implementation can be accessed if the user is an anonymous user. For information about enabling anonymous identification, see the documentation provided for the <format
-         type="text/html">
+         class is used to identify whether a property of a custom profile implementation can be accessed if the user is an anonymous user. For information about enabling anonymous identification, see the documentation provided for the <format type="text/html">
           <a href="2bd927ef-9057-4703-9c55-4cfb6d7d0929">anonymousIdentification</a>
         </format>
 
@@ -40,28 +38,24 @@
          configuration element.</para
       >
       <para
-        >If no <see
-         cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
+        >If no <see cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
 
         
 
          is specified for a profile property, anonymous access of the profile property is not allowed.</para
       >
       <para
-        >A custom profile implementation is a class that inherits from the <see
-         cref="T:System.Web.Profile.ProfileBase" />
+        >A custom profile implementation is a class that inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
-         abstract class and defines properties for the user profile that are not specified in the <format
-         type="text/html">
+         abstract class and defines properties for the user profile that are not specified in the <format type="text/html">
           <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
         </format>
 
         
 
-         configuration element. You can specify a custom user-profile type in the application's Web.config file with the inherits attribute of the <format
-         type="text/html">
+         configuration element. You can specify a custom user-profile type in the application's Web.config file with the inherits attribute of the <format type="text/html">
           <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
         </format>
 
@@ -127,13 +121,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
+            >The <see cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
 
             
 
-             class is used to identify whether a property of a custom profile implementation can be accessed if the user is an anonymous user. For information about enabling anonymous identification, see the <format
-             type="text/html">
+             class is used to identify whether a property of a custom profile implementation can be accessed if the user is an anonymous user. For information about enabling anonymous identification, see the <format type="text/html">
               <a href="2bd927ef-9057-4703-9c55-4cfb6d7d0929">anonymousIdentification</a>
             </format>
 
@@ -142,21 +134,18 @@
              configuration element.</para
           >
           <para
-            >If no <see
-             cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
+            >If no <see cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
 
             
 
              is specified for a profile property, anonymous access to the profile property is not allowed.</para
           >
           <para
-            >A custom profile implementation is a class that inherits from the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >A custom profile implementation is a class that inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
-             abstract class and defines properties for the user profile that are not specified in the <format
-             type="text/html">
+             abstract class and defines properties for the user profile that are not specified in the <format type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
 
@@ -168,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
+            >Creates a new instance of the <see cref="T:System.Web.Profile.SettingsAllowAnonymousAttribute" />
 
             
 
@@ -177,7 +165,11 @@
           >
         </summary>
         <param name="allow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -220,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="P:System.Web.Profile.SettingsAllowAnonymousAttribute.Allow" />
+            >Gets a value indicating whether the <see cref="P:System.Web.Profile.SettingsAllowAnonymousAttribute.Allow" />
 
             
 
@@ -231,8 +222,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="P:System.Web.Profile.SettingsAllowAnonymousAttribute.Allow" />
+            >true if the <see cref="P:System.Web.Profile.SettingsAllowAnonymousAttribute.Allow" />
 
             
 

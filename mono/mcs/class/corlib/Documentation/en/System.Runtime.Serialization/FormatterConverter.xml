@@ -35,18 +35,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a base implementation of the <see
-         cref="T:System.Runtime.Serialization.IFormatterConverter" />
+        >Represents a base implementation of the <see cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
         
 
-         interface that uses the <see
-         cref="T:System.Convert" />
+         interface that uses the <see cref="T:System.Convert" />
 
         
 
-         class and the <see
-         cref="T:System.IConvertible" />
+         class and the <see cref="T:System.IConvertible" />
 
         
 
@@ -74,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.FormatterConverter" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.FormatterConverter" />
 
             
 
@@ -108,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to the given <see
-             cref="T:System.Type" />
+            >Converts a value to the given <see cref="T:System.Type" />
 
             
 
@@ -119,13 +114,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -133,24 +126,30 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           into which <paramref
-           name="value" />
+           into which <paramref name="value" />
 
           
 
@@ -185,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to the given <see
-             cref="T:System.TypeCode" />
+            >Converts a value to the given <see cref="T:System.TypeCode" />
 
             
 
@@ -196,13 +194,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-            , or null if the <paramref
-             name="type" />
+            , or null if the <paramref name="type" />
 
             
 
@@ -210,24 +206,30 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="typeCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.TypeCode" />
+          The <see cref="T:System.TypeCode" />
 
           
 
-           into which <paramref
-           name="value" />
+           into which <paramref name="value" />
 
           
 
@@ -257,28 +259,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToBoolean(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToBoolean(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Boolean" />
+             method instead. For more information, see <see cref="T:System.Boolean" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -288,8 +285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.Boolean" />
+            >Converts a value to a <see cref="T:System.Boolean" />
 
             
 
@@ -299,13 +295,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -313,7 +307,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -343,28 +341,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToByte(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToByte(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Byte" />
+             method instead. For more information, see <see cref="T:System.Byte" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-             and <see
-             cref="T:System.ValueType" />
+             and <see cref="T:System.ValueType" />
 
             
 
@@ -378,13 +371,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -392,7 +383,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -422,28 +417,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToChar(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToChar(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Char" />
+             method instead. For more information, see <see cref="T:System.Char" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -457,13 +447,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -471,7 +459,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -501,28 +493,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToDateTime(System.DateTime)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToDateTime(System.DateTime)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.DateTime" />
+             method instead. For more information, see <see cref="T:System.DateTime" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -532,8 +519,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.DateTime" />
+            >Converts a value to a <see cref="T:System.DateTime" />
 
             
 
@@ -543,13 +529,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -557,7 +541,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -587,28 +575,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToDecimal(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToDecimal(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Decimal" />
+             method instead. For more information, see <see cref="T:System.Decimal" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -618,8 +601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.Decimal" />
+            >Converts a value to a <see cref="T:System.Decimal" />
 
             
 
@@ -629,13 +611,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -643,7 +623,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -673,28 +657,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToDouble(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToDouble(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Double" />
+             method instead. For more information, see <see cref="T:System.Double" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -708,13 +687,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -722,7 +699,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -752,28 +733,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToInt16(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToInt16(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Int16" />
+             method instead. For more information, see <see cref="T:System.Int16" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -787,13 +763,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -801,7 +775,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -831,28 +809,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToInt32(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToInt32(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Int32" />
+             method instead. For more information, see <see cref="T:System.Int32" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -866,13 +839,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -880,7 +851,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -910,28 +885,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToInt64(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToInt64(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Int64" />
+             method instead. For more information, see <see cref="T:System.Int64" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -945,13 +915,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -959,7 +927,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -994,28 +966,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToSByte(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToSByte(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.SByte" />
+             method instead. For more information, see <see cref="T:System.SByte" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -1025,8 +992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a value to a <see
-             cref="T:System.SByte" />
+            >Converts a value to a <see cref="T:System.SByte" />
 
             
 
@@ -1036,13 +1002,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -1050,7 +1014,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1080,28 +1048,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToSingle(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToSingle(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.Single" />
+             method instead. For more information, see <see cref="T:System.Single" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -1115,13 +1078,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -1129,7 +1090,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1159,28 +1124,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToString(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToString(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.String" />
+             method instead. For more information, see <see cref="T:System.String" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -1190,8 +1150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified object to a <see
-             cref="T:System.String" />
+            >Converts the specified object to a <see cref="T:System.String" />
 
             
 
@@ -1201,13 +1160,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -1215,7 +1172,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1250,28 +1211,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToUInt16(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToUInt16(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.UInt16" />
+             method instead. For more information, see <see cref="T:System.UInt16" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -1285,13 +1241,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -1299,7 +1253,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1334,28 +1292,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToUInt32(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToUInt32(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.UInt32" />
+             method instead. For more information, see <see cref="T:System.UInt32" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -1369,13 +1322,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -1383,7 +1334,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1418,28 +1373,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the invariant culture (see <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+            >This method uses the invariant culture (see <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
             
 
-            ). To use the current culture or to specify a culture, use the <see
-             cref="M:System.Convert.ToUInt64(System.Object)" />
+            ). To use the current culture or to specify a culture, use the <see cref="M:System.Convert.ToUInt64(System.Object)" />
 
             
 
-             method instead. For more information, see <see
-             cref="T:System.UInt64" />
+             method instead. For more information, see <see cref="T:System.UInt64" />
 
             
 
-            , <see
-             cref="T:System.Convert" />
+            , <see cref="T:System.Convert" />
 
             
 
-            , and <see
-             cref="T:System.ValueType" />
+            , and <see cref="T:System.ValueType" />
 
             
 
@@ -1453,13 +1403,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The converted <paramref
-             name="value" />
+            >The converted <paramref name="value" />
 
             
 
-             or null if the <paramref
-             name="type" />
+             or null if the <paramref name="type" />
 
             
 
@@ -1467,7 +1415,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

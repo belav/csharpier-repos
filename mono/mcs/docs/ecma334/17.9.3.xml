@@ -1,37 +1,34 @@
 <?xml version="1.0"?>
 <clause number="17.9.3" title="Conversion operators">
   <paragraph
-    >A conversion operator declaration introduces a user-defined conversion (<hyperlink
-    >13.4</hyperlink>
+    >A conversion operator declaration introduces a user-defined conversion (<hyperlink>13.4</hyperlink>
 
     
 
     ), which augments the  pre-defined implicit and explicit conversions. </paragraph
   >
   <paragraph
-    >A conversion operator declaration that includes the implicit keyword introduces a user-defined implicit conversion. Implicit conversions can occur in a variety of situations, including function member invocations, cast expressions, and assignments. This is described further in <hyperlink
-    >13.1</hyperlink>
+    >A conversion operator declaration that includes the implicit keyword introduces a user-defined implicit conversion. Implicit conversions can occur in a variety of situations, including function member invocations, cast expressions, and assignments. This is described further in <hyperlink>13.1</hyperlink>
 
     
 
     . </paragraph
   >
   <paragraph
-    >A conversion operator declaration that includes the explicit keyword introduces a user-defined explicit conversion. Explicit conversions can occur in cast expressions, and are described further in <hyperlink
-    >13.2</hyperlink>
+    >A conversion operator declaration that includes the explicit keyword introduces a user-defined explicit conversion. Explicit conversions can occur in cast expressions, and are described further in <hyperlink>13.2</hyperlink>
 
     
 
     . </paragraph
   >
   <paragraph
-    >A conversion operator converts from a source type, indicated by the parameter type of the conversion operator, to a target type, indicated by the return type of the conversion operator. A class or struct is permitted to declare a conversion from a source type S to a target type T provided all of the following are true: <list
-    >
+    >A conversion operator converts from a source type, indicated by the parameter type of the conversion operator, to a target type, indicated by the return type of the conversion operator. A class or struct is permitted to declare a conversion from a source type S to a target type T provided all of the following are true: <list>
       <list_item> S and T are different types. </list_item>
       <list_item> Either S or T is the class or struct type in which the operator declaration takes place. </list_item>
       <list_item
-        > Neither S nor T is object or an <non_terminal
-         where="11.2">interface-type</non_terminal>
+        > Neither S nor T is object or an <non_terminal where="11.2"
+          >interface-type</non_terminal
+        >
 
         
 
@@ -42,24 +39,19 @@
   </paragraph>
   <paragraph
     >From the second rule it follows that a conversion operator must convert either to or from the class or struct type in which the operator is declared. <example
-
-      >[Example: For example, it is possible for a class or struct type C to define a conversion from C to <keyword
-      >int</keyword>
+      >[Example: For example, it is possible for a class or struct type C to define a conversion from C to <keyword>int</keyword>
 
       
 
-       and from <keyword
-      >int</keyword>
+       and from <keyword>int</keyword>
 
       
 
-       to C, but not from <keyword
-      >int</keyword>
+       to C, but not from <keyword>int</keyword>
 
       
 
-       to <keyword
-      >bool</keyword>
+       to <keyword>bool</keyword>
 
       
 
@@ -68,23 +60,29 @@
   </paragraph>
   <paragraph>It is not possible to redefine a pre-defined conversion. Thus, conversion operators are not allowed to convert from or to object because implicit and explicit conversions already exist between object and all other types. Likewise, neither the source nor the target types of a conversion can be a base type of the other, since a conversion would then already exist. </paragraph>
   <paragraph
-    >User-defined conversions are not allowed to convert from or to <non_terminal
-     where="11.2">interface-type</non_terminal>
+    >User-defined conversions are not allowed to convert from or to <non_terminal where="11.2"
+      >interface-type</non_terminal
+    >
 
     
 
     s. In particular, this restriction ensures that no user-defined transformations occur when converting to an <non_terminal
-     where="11.2">interface-type</non_terminal>
+      where="11.2"
+      >interface-type</non_terminal
+    >
 
     
 
-    , and that a conversion to an <non_terminal
-     where="11.2">interface-type</non_terminal>
+    , and that a conversion to an <non_terminal where="11.2"
+      >interface-type</non_terminal
+    >
 
     
 
      succeeds only if the object being converted actually implements the specified <non_terminal
-     where="11.2">interface-type</non_terminal>
+      where="11.2"
+      >interface-type</non_terminal
+    >
 
     
 
@@ -96,8 +94,7 @@
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 using System;  
 public struct Digit  
@@ -119,18 +116,15 @@ public struct Digit
 
       
 
-      the conversion from Digit to <keyword
-      >byte</keyword>
+      the conversion from Digit to <keyword>byte</keyword>
 
       
 
-       is implicit because it never throws exceptions or loses information, but the conversion from <keyword
-      >byte</keyword>
+       is implicit because it never throws exceptions or loses information, but the conversion from <keyword>byte</keyword>
 
       
 
-       to Digit is explicit since Digit can only represent a subset of the possible values of a <keyword
-      >byte</keyword>
+       to Digit is explicit since Digit can only represent a subset of the possible values of a <keyword>byte</keyword>
 
       
 

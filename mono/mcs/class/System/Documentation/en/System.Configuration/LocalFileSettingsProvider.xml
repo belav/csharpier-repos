@@ -26,21 +26,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Setting providers define a mechanism for storing configuration data used in the application settings architecture. The dnprdnshort contains a single default settings provider, <see
-         cref="T:System.Configuration.LocalFileSettingsProvider" />
+        >Setting providers define a mechanism for storing configuration data used in the application settings architecture. The dnprdnshort contains a single default settings provider, <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
         
 
-        , which stores configuration data to the local file system. An application settings property or group of properties are associated to a specific settings provider through the use of the <see
-         cref="T:System.Configuration.SettingsProviderAttribute" />
+        , which stores configuration data to the local file system. An application settings property or group of properties are associated to a specific settings provider through the use of the <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
         
 
         . </para
       >
       <para
-        >Typically, the client program does not explicitly access this class; rather, the application settings architecture automatically invokes the appropriate settings provider when its services are required. For example, many of the members of <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >Typically, the client program does not explicitly access this class; rather, the application settings architecture automatically invokes the appropriate settings provider when its services are required. For example, many of the members of <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
@@ -51,18 +48,15 @@
 
         
 
-         persists settings to configuration files that have the extension .config. The contents of configuration files are structured as XML documents. Depending on whether the setting is scoped at either the application-level or user-level, the configuration data is stored as elements within an &lt;applicationSettings&gt; or a &lt;userSettings&gt; section group, respectively. Each of these section groups is represented by a corresponding <see
-         cref="T:System.Configuration.AppSettingsSection" />
+         persists settings to configuration files that have the extension .config. The contents of configuration files are structured as XML documents. Depending on whether the setting is scoped at either the application-level or user-level, the configuration data is stored as elements within an &lt;applicationSettings&gt; or a &lt;userSettings&gt; section group, respectively. Each of these section groups is represented by a corresponding <see cref="T:System.Configuration.AppSettingsSection" />
 
         
 
-         or <see
-         cref="T:System.Configuration.ClientSettingsSection" />
+         or <see cref="T:System.Configuration.ClientSettingsSection" />
 
         
 
-        , respectively. Each section object is owned and administered by a configuration section handler, which is an object of type <see
-         cref="T:System.Configuration.IConfigurationSectionHandler" />
+        , respectively. Each section object is owned and administered by a configuration section handler, which is an object of type <see cref="T:System.Configuration.IConfigurationSectionHandler" />
 
         
 
@@ -70,8 +64,7 @@
       >
       <para>Application-scoped settings and the default user-scoped settings are stored in a file named application.exe.config, which is created in the same directory as the executable file. Application configuration settings are read-only. Specific user data is stored in a file named user.config, stored under the user's home directory. If roaming profiles are enabled, two versions of the user configuration file could exist. In such a case, the entries in the roaming version take precedence over duplicated entries in the local user configuration file.</para>
       <para
-        >For more information about application settings, see <format
-         type="text/html">
+        >For more information about application settings, see <format type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
 
@@ -103,13 +96,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor sets the <see
-             cref="P:System.Configuration.LocalFileSettingsProvider.ApplicationName" />
+            >The default constructor sets the <see cref="P:System.Configuration.LocalFileSettingsProvider.ApplicationName" />
 
             
 
-             property to <see
-             cref="F:System.String.Empty" />
+             property to <see cref="F:System.String.Empty" />
 
             
 
@@ -119,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
@@ -146,13 +136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.LocalFileSettingsProvider.ApplicationName" />
+            >The <see cref="P:System.Configuration.LocalFileSettingsProvider.ApplicationName" />
 
             
 
-             and <see
-             cref="P:System.Configuration.Provider.ProviderBase.Name" />
+             and <see cref="P:System.Configuration.Provider.ProviderBase.Name" />
 
             
 
@@ -196,18 +184,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
+            >The <see cref="M:System.Configuration.LocalFileSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
 
             
 
-             method is often used in conjunction with the <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+             method is often used in conjunction with the <see cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
-             method when migrating application settings during the installation of a new version of an application. For more information, see the <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+             method when migrating application settings during the installation of a new version of an application. For more information, see the <see cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
@@ -221,8 +206,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.SettingsPropertyValue" />
+            >A <see cref="T:System.Configuration.SettingsPropertyValue" />
 
             
 
@@ -230,24 +214,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            that describes where the application settings property is used.</param
         >
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.SettingsProperty" />
+          The <see cref="T:System.Configuration.SettingsProperty" />
 
           
 
@@ -286,13 +276,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+            >The <see cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
-             method also manages the special application settings type <see
-             cref="F:System.Configuration.SpecialSetting.ConnectionString" />
+             method also manages the special application settings type <see cref="F:System.Configuration.SpecialSetting.ConnectionString" />
 
             
 
@@ -304,8 +292,7 @@
 
               
 
-               does not use encryption to persist any settings. Therefore, do not store plain text passwords or other sensitive information using this provider without taking additional precautions, such as separately encrypting the information within the configuration file. For more information, see <format
-               type="text/html">
+               does not use encryption to persist any settings. Therefore, do not store plain text passwords or other sensitive information using this provider without taking additional precautions, such as separately encrypting the information within the configuration file. For more information, see <format type="text/html">
                 <a href="51cdfe5b-9d82-458c-94ff-c551c4f38ed1"
                   >Encrypting Configuration Information using Protected Configuration</a
                 >
@@ -324,8 +311,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Configuration.SettingsPropertyValueCollection" />
+            >A <see cref="T:System.Configuration.SettingsPropertyValueCollection" />
 
             
 
@@ -333,24 +319,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application usage.</param
         >
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsPropertyCollection" />
+          A <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
           
 
@@ -384,14 +376,22 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the provider.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -429,13 +429,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.Reset(System.Configuration.SettingsContext)" />
+            >The <see cref="M:System.Configuration.LocalFileSettingsProvider.Reset(System.Configuration.SettingsContext)" />
 
             
 
-             method restores the stored values of the specified application settings group. The action of <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.Reset(System.Configuration.SettingsContext)" />
+             method restores the stored values of the specified application settings group. The action of <see cref="M:System.Configuration.LocalFileSettingsProvider.Reset(System.Configuration.SettingsContext)" />
 
             
 
@@ -456,12 +454,15 @@
           <para>Resets all application settings properties associated with the specified application to their default values.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
@@ -500,23 +501,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A settings wrapper class, derived from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+            >A settings wrapper class, derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
-            , contains the <see
-             cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+            , contains the <see cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
             
 
-             method, which is called to persist the values of all of its settings properties. This method enumerates through all the settings providers associated with its settings properties, and calls the <see
-             cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+             method, which is called to persist the values of all of its settings properties. This method enumerates through all the settings providers associated with its settings properties, and calls the <see cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
             
 
-             method for each <see
-             cref="T:System.Configuration.SettingsProvider" />
+             method for each <see cref="T:System.Configuration.SettingsProvider" />
 
             
 
@@ -530,8 +527,7 @@
              individually serializes each user-scoped application settings property to its corresponding application setting in the appropriate user.config configuration file.</para
           >
           <para
-            >By default, the <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+            >By default, the <see cref="M:System.Configuration.LocalFileSettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
 
             
 
@@ -540,13 +536,11 @@
           <list type="ordered">
             <item>
               <para
-                >If the type has an associated <see
-                 cref="T:System.ComponentModel.TypeConverter" />
+                >If the type has an associated <see cref="T:System.ComponentModel.TypeConverter" />
 
                 
 
-                 with a <see
-                 cref="Overload:System.ComponentModel.TypeConverter.ConvertToString" />
+                 with a <see cref="Overload:System.ComponentModel.TypeConverter.ConvertToString" />
 
                 
 
@@ -558,13 +552,11 @@
             </item>
           </list>
           <para
-            >However, you can specify a preferred serialization mechanism by using the <see
-             cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+            >However, you can specify a preferred serialization mechanism by using the <see cref="T:System.Configuration.SettingsSerializeAsAttribute" />
 
             
 
-            . <see
-             cref="T:System.Configuration.LocalFileSettingsProvider" />
+            . <see cref="T:System.Configuration.LocalFileSettingsProvider" />
 
             
 
@@ -577,8 +569,7 @@
 
               
 
-               does not use encryption to persist any settings. Therefore, do not store plain text passwords or other sensitive information using this provider without taking additional precautions, such as separately encrypting the information within the configuration file. For more information, see <format
-               type="text/html">
+               does not use encryption to persist any settings. Therefore, do not store plain text passwords or other sensitive information using this provider without taking additional precautions, such as separately encrypting the information within the configuration file. For more information, see <format type="text/html">
                 <a href="51cdfe5b-9d82-458c-94ff-c551c4f38ed1"
                   >Encrypting Configuration Information using Protected Configuration</a
                 >
@@ -595,24 +586,30 @@
           <para>Sets the values of the specified group of property settings.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application usage.</param
         >
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsPropertyValueCollection" />
+          A <see cref="T:System.Configuration.SettingsPropertyValueCollection" />
 
           
 
@@ -658,18 +655,15 @@
              migrates the local and roaming settings in separate operations.</para
           >
           <para
-            >The <see
-             cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+            >The <see cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
             
 
-             method is suppressed for every application setting that has the <see
-             cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+             method is suppressed for every application setting that has the <see cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
 
             
 
-             applied to it, or to the entire settings wrapper class, derived from <see
-             cref="T:System.Configuration.ApplicationSettingsBase" />
+             applied to it, or to the entire settings wrapper class, derived from <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
             
 
@@ -679,13 +673,11 @@
           <list type="bullet">
             <item>
               <para
-                >Each version of a ndptecclick application is stored in its own isolated installation directory. After a new version of a ndptecclick application is installed, and when the new version is first run, internal logic will automatically call <see
-                 cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+                >Each version of a ndptecclick application is stored in its own isolated installation directory. After a new version of a ndptecclick application is installed, and when the new version is first run, internal logic will automatically call <see cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
                 
 
-                 to migrate all common application settings to the new version. For more information, see <format
-                 type="text/html">
+                 to migrate all common application settings to the new version. For more information, see <format type="text/html">
                   <a href="891caba6-faef-4a3c-8f71-60e6fadb60eb"
                     >ClickOnce and Application Settings</a
                   >
@@ -698,8 +690,7 @@
             </item>
             <item>
               <para
-                >Standard Windows Forms and console applications must manually call <see
-                 cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+                >Standard Windows Forms and console applications must manually call <see cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
                 
 
@@ -714,24 +705,30 @@
           <para>Attempts to migrate previous user-scoped settings from a previous version of the same application.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsContext" />
+          A <see cref="T:System.Configuration.SettingsContext" />
 
           
 
            describing the current application usage. </param
         >
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.SettingsPropertyCollection" />
+          A <see cref="T:System.Configuration.SettingsPropertyCollection" />
 
           
 

@@ -23,23 +23,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Discovery.DiscoveryDocumentLinksPattern" />
+        >The <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentLinksPattern" />
 
         
 
-          class inherits from the abstract <see
-         cref="T:System.Web.Services.Discovery.DiscoverySearchPattern" />
+          class inherits from the abstract <see cref="T:System.Web.Services.Discovery.DiscoverySearchPattern" />
 
         
 
-         class and is employed by the <see
-         cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+         class and is employed by the <see cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
 
         
 
-         class's <see
-         cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+         class's <see cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
 
         
 
@@ -62,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentLinksPattern" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentLinksPattern" />
 
             
 
@@ -92,26 +87,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The concrete <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >The concrete <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
-             class inherits from the abstract <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+             class inherits from the abstract <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
              class. </para
           >
           <para
-            >A <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
-             instance contains the location of the .vsdisco file, which is also the file system directory corresponding to the HTTP request passed to the <see
-             cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+             instance contains the location of the .vsdisco file, which is also the file system directory corresponding to the HTTP request passed to the <see cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -121,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >Returns the <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
@@ -132,8 +122,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
+            >A <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentReference" />
 
             
 
@@ -141,7 +130,11 @@
           >
         </returns>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -161,15 +154,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The pattern "*.disco" indicates a Web services discovery document extension, .disco. The <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocumentSearchPattern" />
+            >The pattern "*.disco" indicates a Web services discovery document extension, .disco. The <see cref="T:System.Web.Services.Discovery.DiscoveryDocumentSearchPattern" />
 
             
 

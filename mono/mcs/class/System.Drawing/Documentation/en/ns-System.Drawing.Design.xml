@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Drawing.Design" />
+        >The <see cref="N:System.Drawing.Design" />
 
         
 
@@ -17,8 +16,7 @@
       <para>The classes in this namespace can be used to create custom toolbox items, type-specific value editors that can edit and graphically represent values of their supported types, and type converters that can convert values between certain types. This namespace provides the basic frameworks for developing extensions to the design-time UI.</para>
       <block subset="none" type="note">
         <para
-          >Classes within the <see
-           cref="N:System.Drawing.Design" />
+          >Classes within the <see cref="N:System.Drawing.Design" />
 
           
 

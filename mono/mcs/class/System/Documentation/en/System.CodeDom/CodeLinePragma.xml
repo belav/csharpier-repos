@@ -59,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor you should also set the <see
-             cref="P:System.CodeDom.CodeLinePragma.LineNumber" />
+            >If you use this constructor you should also set the <see cref="P:System.CodeDom.CodeLinePragma.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.CodeDom.CodeLinePragma.FileName" />
+             and <see cref="P:System.CodeDom.CodeLinePragma.FileName" />
 
             
 
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeLinePragma" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" />
 
             
 
@@ -110,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeLinePragma" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeLinePragma" />
 
             
 
@@ -119,14 +115,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name of the associated file. </param
         >
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

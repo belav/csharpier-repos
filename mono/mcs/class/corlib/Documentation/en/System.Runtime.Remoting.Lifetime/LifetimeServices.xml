@@ -29,8 +29,7 @@
       <para>The lifetime service associates a lease with each remotely activated object. When the lease expires, the object is removed.</para>
       <block subset="none" type="note">
         <para
-          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format
-           type="text/html">
+          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Lifetime.LifetimeServices" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Lifetime.LifetimeServices" />
 
             
 
@@ -103,16 +101,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current property defines the frequency at which the lease manager becomes active to clean up expired leases. For example, if <see
-             cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime" />
+            >The current property defines the frequency at which the lease manager becomes active to clean up expired leases. For example, if <see cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime" />
 
             
 
              is set to 100 seconds, the lease list is inspected for cleanups and renewals every 100 seconds.</para
           >
           <para
-            >The default value of the <see
-             cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime" />
+            >The default value of the <see cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime" />
 
             
 
@@ -146,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the initial lease time span for an <see
-             cref="T:System.AppDomain" />
+            >Gets or sets the initial lease time span for an <see cref="T:System.AppDomain" />
 
             
 

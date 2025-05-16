@@ -19,8 +19,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.KeyAgreeKeyChoice" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.KeyAgreeKeyChoice" />
 
         
 

@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+        >The <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeTypeDeclaration" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
         
 
@@ -50,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeTypeDeclaration" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
         
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
             
 
@@ -113,13 +109,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
             
 
-             class that contains the specified array of <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             class that contains the specified array of <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -127,12 +121,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          An array of <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -164,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
             
 
@@ -173,12 +169,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+          A <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
           
 
@@ -212,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -225,12 +223,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -266,12 +267,15 @@
           <para>Copies the elements of the specified array to the end of the collection.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          An array of type <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -305,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of another <see
-             cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+            >Adds the contents of another <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
             
 
@@ -314,12 +317,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+          A <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
           
 
@@ -353,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection contains the specified <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -366,12 +371,15 @@
           <para>true if the collection contains the specified object; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -406,13 +414,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements in the <see
-             cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+            >Copies the elements in the <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
             
 
-             object to a one-dimensional <see
-             cref="T:System.Array" />
+             object to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -420,19 +426,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -466,13 +479,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Gets the index of the specified <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
-             object in the <see
-             cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
+             object in the <see cref="T:System.CodeDom.CodeTypeDeclarationCollection" />
 
             
 
@@ -484,12 +495,15 @@
           <para>The index of the specified object, if it is found, in the collection; otherwise, -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -524,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Inserts the specified <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -533,19 +546,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index where the specified object should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -607,8 +627,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Removes the specified <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -616,12 +635,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 

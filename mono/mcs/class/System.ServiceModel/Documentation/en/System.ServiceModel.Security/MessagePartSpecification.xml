@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty <see
-             cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+            >Initializes an empty <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
             
 
@@ -74,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+            >Initializes a new <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
             
 
@@ -83,7 +81,11 @@
           >
         </summary>
         <param name="isBodyIncluded">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+            >Initializes a new <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
             
 
@@ -130,7 +131,11 @@
           >
         </summary>
         <param name="headerTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +170,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each header is specified using its name and namespace. In addition, the <paramref
-             name="isBodyIncluded" />
+            >Each header is specified using its name and namespace. In addition, the <paramref name="isBodyIncluded" />
 
             
 
@@ -176,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+            >Initializes a new <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
             
 
@@ -185,14 +188,22 @@
           >
         </summary>
         <param name="isBodyIncluded">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Initializes whether the message body is included in the specification.</param
         >
         <param name="headerTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -281,13 +292,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use <see
-             cref="M:System.ServiceModel.Security.MessagePartSpecification.MakeReadOnly" />
+            >You can use <see cref="M:System.ServiceModel.Security.MessagePartSpecification.MakeReadOnly" />
 
             
 
-             to set this property to true. <see
-             cref="M:System.ServiceModel.Security.MessagePartSpecification.Clear" />
+             to set this property to true. <see cref="M:System.ServiceModel.Security.MessagePartSpecification.Clear" />
 
             
 
@@ -383,18 +392,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After the <see
-             cref="M:System.ServiceModel.Security.MessagePartSpecification.Union(System.ServiceModel.Security.MessagePartSpecification)" />
+            >After the <see cref="M:System.ServiceModel.Security.MessagePartSpecification.Union(System.ServiceModel.Security.MessagePartSpecification)" />
 
             
 
-             method is called, the <see
-             cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+             method is called, the <see cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
             
 
-             holds all header information from both specifications, and the <see
-             cref="P:System.ServiceModel.Security.MessagePartSpecification.IsBodyIncluded" />
+             holds all header information from both specifications, and the <see cref="P:System.ServiceModel.Security.MessagePartSpecification.IsBodyIncluded" />
 
             
 

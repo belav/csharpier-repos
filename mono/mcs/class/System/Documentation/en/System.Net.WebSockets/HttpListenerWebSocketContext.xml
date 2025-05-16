@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to information received by the <see
-         cref="T:System.Net.HttpListener" />
+        >Provides access to information received by the <see cref="T:System.Net.HttpListener" />
 
         
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the cookies received by the <see
-             cref="T:System.Net.HttpListener" />
+            >Gets the cookies received by the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -114,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the HTTP headers received by the <see
-             cref="T:System.Net.HttpListener" />
+            >Gets the HTTP headers received by the <see cref="T:System.Net.HttpListener" />
 
             
 

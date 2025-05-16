@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" />
+            >Initializes a new instance of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" />
 
             
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" />
+            >Initializes a new instance of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" />
 
             
 
@@ -80,7 +78,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -136,7 +138,11 @@
           <para>Initializes the binding element using specified binding.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,7 +206,11 @@
           <para>Raises the apply configuration event.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

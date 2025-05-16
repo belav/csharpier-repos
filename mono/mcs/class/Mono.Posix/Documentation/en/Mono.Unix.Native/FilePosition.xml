@@ -30,8 +30,7 @@
   </Interfaces>
   <Docs>
     <summary
-      >A wrapper for the platform-specific <paramref
-       name="fpos_t" />
+      >A wrapper for the platform-specific <paramref name="fpos_t" />
 
       
 
@@ -45,14 +44,12 @@
 
          is an alternate mechanism for specifying a
     location within a file, which can take into account text vs. binary
-    <c
-        >FILE</c>
+    <c>FILE</c>
 
         
 
          stream differences.  It exists to support platforms for which
-    file positions can exceed the size of <see
-         langword="long" />
+    file positions can exceed the size of <see langword="long" />
 
         
 
@@ -64,8 +61,7 @@
         
 
          wraps unmanaged memory.  It contains a finalizer
-    to free this memory, but using <see
-         cref="M:Mono.Unix.Native.FilePosition.Dispose" />
+    to free this memory, but using <see cref="M:Mono.Unix.Native.FilePosition.Dispose" />
 
         
 
@@ -114,17 +110,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >Frees the wrapped <c
-          >fpos_t</c>
+        <summary>Frees the wrapped <c>fpos_t</c>
 
           
 
-           instance.</summary
-        >
+           instance.</summary>
         <remarks
-          >This method should be called whenever a <c
-          >FilePosition</c>
+          >This method should be called whenever a <c>FilePosition</c>
 
           
 

@@ -32,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection element in a service configuration file that contains <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+        >Represents a collection element in a service configuration file that contains <see cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the<see
-             cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointCollectionElement" />
+            >Creates a new instance of the<see cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointCollectionElement" />
 
             
 

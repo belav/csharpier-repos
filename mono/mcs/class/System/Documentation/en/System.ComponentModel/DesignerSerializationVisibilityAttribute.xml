@@ -35,59 +35,49 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When a serializer persists the persistable state of a design mode document, it often adds code to the initialization method of components to persist values of properties that have been set at design time. This happens by default for most basic types, if no attribute has been set to direct other behavior.</para>
       <para
-        >With the <see
-         cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+        >With the <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
 
         
 
-        , you can indicate whether the value for a property is <see
-         cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+        , you can indicate whether the value for a property is <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
 
         
 
-        , and should be persisted in initialization code, <see
-         cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Hidden" />
+        , and should be persisted in initialization code, <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Hidden" />
 
         
 
-        , and should not be persisted in initialization code, or consists of <see
-         cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Content" />
+        , and should not be persisted in initialization code, or consists of <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Content" />
 
         
 
         , which should have initialization code generated for each public, not hidden property of the object assigned to the property.</para
       >
       <para
-        >Members that do not have a <see
-         cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+        >Members that do not have a <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
 
         
 
-         will be treated as though they have a <see
-         cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+         will be treated as though they have a <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
 
         
 
-         with a value of <see
-         cref="F:System.ComponentModel.DesignerSerializationVisibility.Visible" />
+         with a value of <see cref="F:System.ComponentModel.DesignerSerializationVisibility.Visible" />
 
         
 
-        . The values of a property marked as <see
-         cref="F:System.ComponentModel.DesignerSerializationVisibility.Visible" />
+        . The values of a property marked as <see cref="F:System.ComponentModel.DesignerSerializationVisibility.Visible" />
 
         
 
-         will be serialized, if possible, by a serializer for the type. To specify custom serialization for a particular type or property, use the <see
-         cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
+         will be serialized, if possible, by a serializer for the type. To specify custom serialization for a particular type or property, use the <see cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
 
         
 
         .</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -127,13 +117,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
 
             
 
-             class using the specified <see
-             cref="T:System.ComponentModel.DesignerSerializationVisibility" />
+             class using the specified <see cref="T:System.ComponentModel.DesignerSerializationVisibility" />
 
             
 
@@ -165,13 +153,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with DesignerSerializationVisibilityAttribute.Content, the value of its <see
-             cref="P:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visibility" />
+            >When you mark a property with DesignerSerializationVisibilityAttribute.Content, the value of its <see cref="P:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visibility" />
 
             
 
-             property is set to <see
-             cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Content" />
+             property is set to <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Content" />
 
             
 
@@ -207,13 +193,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with this value, this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+            >When you mark a property with this value, this attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
 
             
 
-            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
 
             
 
@@ -223,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default value, which is <see
-             cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+            >Specifies the default value, which is <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
 
             
 
@@ -260,8 +243,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -269,7 +251,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -328,13 +314,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with DesignerSerializationVisibilityAttribute.Hidden, the value of its <see
-             cref="P:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visibility" />
+            >When you mark a property with DesignerSerializationVisibilityAttribute.Hidden, the value of its <see cref="P:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visibility" />
 
             
 
-             property is set to the constant member <see
-             cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Hidden" />
+             property is set to the constant member <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Hidden" />
 
             
 
@@ -426,8 +410,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This field is the default setting for this attribute.</para>
           <para
-            >When you mark a property with DesignerSerializationVisibilityAttribute.Visible, the value of its Visibility property is set to the constant member <see
-             cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+            >When you mark a property with DesignerSerializationVisibilityAttribute.Visible, the value of its Visibility property is set to the constant member <see cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
 
             
 

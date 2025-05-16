@@ -15,13 +15,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides static values that are used for the column names in the MetaDataCollection objects contained in the <see
-         cref="T:System.Data.DataTable" />
+        >Provides static values that are used for the column names in the MetaDataCollection objects contained in the <see cref="T:System.Data.DataTable" />
 
         
 
-        . The <see
-         cref="T:System.Data.DataTable" />
+        . The <see cref="T:System.Data.DataTable" />
 
         
 

@@ -18,33 +18,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+        >The <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
-         class uses the values in this enumeration to set the <see
-         cref="P:System.Net.NetworkInformation.PingReply.Status" />
+         class uses the values in this enumeration to set the <see cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
         
 
-         property. The <see
-         cref="T:System.Net.NetworkInformation.Ping" />
+         property. The <see cref="T:System.Net.NetworkInformation.Ping" />
 
         
 
-         class returns <see
-         cref="T:System.Net.NetworkInformation.PingReply" />
+         class returns <see cref="T:System.Net.NetworkInformation.PingReply" />
 
         
 
-         objects when you call the <see
-         cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+         objects when you call the <see cref="Overload:System.Net.NetworkInformation.Ping.Send" />
 
         
 
-         or <see
-         cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+         or <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
         
 
@@ -52,23 +46,19 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="F:System.Net.NetworkInformation.IPStatus.DestinationProhibited" />
+          >The <see cref="F:System.Net.NetworkInformation.IPStatus.DestinationProhibited" />
 
           
 
-           and <see
-           cref="F:System.Net.NetworkInformation.IPStatus.DestinationProtocolUnreachable" />
+           and <see cref="F:System.Net.NetworkInformation.IPStatus.DestinationProtocolUnreachable" />
 
           
 
-           enumeration values have the same numeric value. This is possible because <see
-           cref="F:System.Net.NetworkInformation.IPStatus.DestinationProhibited" />
+           enumeration values have the same numeric value. This is possible because <see cref="F:System.Net.NetworkInformation.IPStatus.DestinationProhibited" />
 
           
 
-           applies only to IPv6 and <see
-           cref="F:System.Net.NetworkInformation.IPStatus.DestinationProtocolUnreachable" />
+           applies only to IPv6 and <see cref="F:System.Net.NetworkInformation.IPStatus.DestinationProtocolUnreachable" />
 
           
 
@@ -101,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ICMP echo request failed because the destination IP address cannot receive ICMP echo requests or should never appear in the destination address field of any IP datagram. For example, calling <see
-             cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+            >The ICMP echo request failed because the destination IP address cannot receive ICMP echo requests or should never appear in the destination address field of any IP datagram. For example, calling <see cref="Overload:System.Net.NetworkInformation.Ping.Send" />
 
             
 
@@ -482,8 +471,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ICMP echo request succeeded; an ICMP echo reply was received. When you get this status code, the other <see
-             cref="T:System.Net.NetworkInformation.PingReply" />
+            >The ICMP echo request succeeded; an ICMP echo reply was received. When you get this status code, the other <see cref="T:System.Net.NetworkInformation.PingReply" />
 
             
 
@@ -511,18 +499,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ICMP echo Reply was not received within the allotted time. The default time allowed for replies is 5 seconds. You can change this value using the <see
-             cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+            >The ICMP echo Reply was not received within the allotted time. The default time allowed for replies is 5 seconds. You can change this value using the <see cref="Overload:System.Net.NetworkInformation.Ping.Send" />
 
             
 
-              or <see
-             cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+              or <see cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
             
 
-             methods that take a <paramref
-             name="timeout" />
+             methods that take a <paramref name="timeout" />
 
             
 

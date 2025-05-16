@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to internal properties of an <see
-         cref="T:System.ApplicationIdentity" />
+        >Provides access to internal properties of an <see cref="T:System.ApplicationIdentity" />
 
         
 
@@ -84,15 +83,13 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <format
-             type="text/html">
+            >Gets an <format type="text/html">
               <a href="e72f2550-bdec-4a20-a2f4-2e14847266c1">IDefinitionAppId Interface</a>
             </format>
 
             
 
-             representing the unique identifier of an <see
-             cref="T:System.ApplicationIdentity" />
+             representing the unique identifier of an <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -102,8 +99,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The unique identifier held by the <see
-             cref="T:System.ApplicationIdentity" />
+            >The unique identifier held by the <see cref="T:System.ApplicationIdentity" />
 
             
 
@@ -111,7 +107,11 @@
           >
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

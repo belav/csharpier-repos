@@ -93,8 +93,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Action`8" />
+        >You can use the <see cref="T:System.Action`8" />
 
         
 
@@ -102,8 +101,7 @@
       >
       <block subset="none" type="note">
         <para
-          >To reference a method that has eight parameters and returns a value, use the generic <see
-           cref="T:System.Func`9" />
+          >To reference a method that has eight parameters and returns a value, use the generic <see cref="T:System.Func`9" />
 
           
 
@@ -111,8 +109,7 @@
         >
       </block>
       <para
-        >You can also use the <see
-         cref="T:System.Action`8" />
+        >You can also use the <see cref="T:System.Action`8" />
 
         
 

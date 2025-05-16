@@ -22,57 +22,48 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Channels are used by the .NET Framework remoting infrastructure to transport remote calls. When a client calls a remote object, the call is serialized into a message that is sent by a client channel and received by a server channel. After the message is received, it is deserialized and processed. Any returned values are transmitted by the server channel and received by the client channel.</para>
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+        >The <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
         
 
          class uses the Windows interprocess communication (IPC) system to transport messages between application domains on the same computer. When communicating between application domains on the same computer, the IPC channel is much faster than the TCP or HTTP channels.</para
       >
       <para
-        >To perform additional processing of messages on the server side, specify an implementation of the <see
-         cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+        >To perform additional processing of messages on the server side, specify an implementation of the <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
         
 
-         interface through which all messages processed by the <see
-         cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+         interface through which all messages processed by the <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
         
 
          instance are passed.</para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+        >The <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
         
 
          instance accepts messages serialized in either binary or SOAP format.</para
       >
       <para
-        >A <see
-         cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+        >A <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
         
 
-         object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see
-         cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+         object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
 
         
 
-         method) or programmatically (by passing an <see
-         cref="T:System.Collections.IDictionary" />
+         method) or programmatically (by passing an <see cref="T:System.Collections.IDictionary" />
 
         
 
-         collection to the <see
-         cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
+         collection to the <see cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
 
         
 
-         constructor). For a list of these configuration properties, see the documentation for the <see
-         cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
+         constructor). For a list of these configuration properties, see the documentation for the <see cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
 
         
 
@@ -80,13 +71,11 @@
       >
       <block subset="none" type="note">
         <para
-          >When setting the exclusiveAddressUse property to false in the <paramref
-           name="properties" />
+          >When setting the exclusiveAddressUse property to false in the <paramref name="properties" />
 
           
 
-           argument, several <see
-           cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+           argument, several <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
           
 
@@ -112,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
             
 
@@ -121,7 +109,11 @@
           >
         </summary>
         <param name="portName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +143,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about channel configuration properties, see <format
-             type="text/html">
+            >For more information about channel configuration properties, see <format type="text/html">
               <a href="226ecf74-ebbd-4ea0-a701-dcf4441deefe"
                 >Channel and Formatter Configuration Properties</a
               >
@@ -163,8 +154,7 @@
             .</para
           >
           <para
-            >If you do not require sink functionality, set the <paramref
-             name="sinkProvider" />
+            >If you do not require sink functionality, set the <paramref name="sinkProvider" />
 
             
 
@@ -172,13 +162,11 @@
           >
           <block subset="none" type="note">
             <para
-              >When setting the exclusiveAddressUse property to false in the <paramref
-               name="properties" />
+              >When setting the exclusiveAddressUse property to false in the <paramref name="properties" />
 
               
 
-               argument, several <see
-               cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+               argument, several <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
               
 
@@ -189,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
             
 
@@ -198,12 +185,15 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -229,13 +219,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.ChannelName" />
+            >This constructor sets the <see cref="P:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.ChannelName" />
 
             
 
-             property by using the <paramref
-             name="name" />
+             property by using the <paramref name="name" />
 
             
 
@@ -245,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
             
 
@@ -254,14 +241,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the channel.</param
         >
         <param name="portName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -292,21 +287,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.ChannelName" />
+            >This constructor sets the <see cref="P:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.ChannelName" />
 
             
 
-             property by using the <paramref
-             name="name" />
+             property by using the <paramref name="name" />
 
             
 
              parameter. If you want to register more than one channel, each channel must have a unique name.</para
           >
           <para
-            >If you do not require sink functionality, set the <paramref
-             name="sinkProvider" />
+            >If you do not require sink functionality, set the <paramref name="sinkProvider" />
 
             
 
@@ -316,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
             
 
@@ -325,14 +316,22 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the channel.</param
         >
         <param name="portName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,18 +354,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Although returned as an instance of the <see
-             cref="T:System.Object" />
+            >Although returned as an instance of the <see cref="T:System.Object" />
 
             
 
-             class, the value of this property can be cast to an instance of <see
-             cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
+             class, the value of this property can be cast to an instance of <see cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
             
 
-             that describes the channel to which the <see
-             cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+             that describes the channel to which the <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
 
             
 
@@ -394,8 +390,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Every registered channel has a unique name. The name is used to retrieve a specific channel when calling the <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
+            >Every registered channel has a unique name. The name is used to retrieve a specific channel when calling the <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
 
             
 
@@ -423,13 +418,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The priority controls the order in which channel data appears in a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >The priority controls the order in which channel data appears in a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -465,8 +458,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -492,8 +484,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used by the <see
-             cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetUrlsForObject(System.MarshalByRefObject)" />
+            >This method is used by the <see cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetUrlsForObject(System.MarshalByRefObject)" />
 
             
 
@@ -503,8 +494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of all the URLs for the object with the specified URI, hosted on the current <see
-             cref="T:System.Runtime.Remoting.Channels.Ipc.IpcChannel" />
+            >Returns an array of all the URLs for the object with the specified URI, hosted on the current <see cref="T:System.Runtime.Remoting.Channels.Ipc.IpcChannel" />
 
             
 
@@ -514,8 +504,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of the URLs for an object with the specified URI, hosted on the current <see
-             cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+            >An array of the URLs for an object with the specified URI, hosted on the current <see cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
 
             
 
@@ -523,7 +512,11 @@
           >
         </returns>
         <param name="objectUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -574,16 +567,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>It is not necessary to call this method to begin listening on a newly initialized channel.</para>
           <para
-            >Use this method to restart listening on a channel after the <see
-             cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.StopListening(System.Object)" />
+            >Use this method to restart listening on a channel after the <see cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.StopListening(System.Object)" />
 
             
 
              method has been called to stop listening on the channel.</para
           >
           <para
-            >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, pass null as the <paramref
-             name="data" />
+            >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, pass null as the <paramref name="data" />
 
             
 
@@ -595,7 +586,11 @@
           <para>Instructs the current channel to start listening for requests.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,16 +615,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to stop listening on a channel. To restart listening, use the <see
-             cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.StartListening(System.Object)" />
+            >Use this method to stop listening on a channel. To restart listening, use the <see cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.StartListening(System.Object)" />
 
             
 
              method.</para
           >
           <para
-            >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, pass null as the <paramref
-             name="data" />
+            >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, pass null as the <paramref name="data" />
 
             
 
@@ -641,7 +634,11 @@
           <para>Instructs the current channel to stop listening for requests.</para>
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

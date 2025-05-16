@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -68,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -77,7 +75,11 @@
           >
         </summary>
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -106,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -115,7 +116,11 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -141,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -150,7 +154,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -180,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -189,14 +196,22 @@
           >
         </summary>
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native error code for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -235,14 +249,22 @@
           >
         </summary>
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native error code for the exception.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -272,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -281,14 +302,22 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -318,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -327,14 +355,22 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -364,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -373,14 +408,22 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -410,8 +453,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -419,14 +461,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -457,8 +507,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -466,21 +515,33 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native error code for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -511,8 +572,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -520,21 +580,33 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native error code for the exception.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -565,8 +637,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -574,21 +645,33 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,8 +703,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Net.WebSockets.WebSocketException" />
+            >Creates an instance of the <see cref="T:System.Net.WebSockets.WebSocketException" />
 
             
 
@@ -629,28 +711,44 @@
           >
         </summary>
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error from the WebSocketError enumeration.</param
         >
         <param name="nativeError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The native error code for the exception.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the error.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

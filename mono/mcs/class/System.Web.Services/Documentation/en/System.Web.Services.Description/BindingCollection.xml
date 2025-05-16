@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.Binding" />
+        >The <see cref="T:System.Web.Services.Description.Binding" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of instances of the <see
-         cref="T:System.Web.Services.Description.Binding" />
+        >Represents a collection of instances of the <see cref="T:System.Web.Services.Description.Binding" />
 
         
 
@@ -58,13 +56,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             to the end of the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -74,8 +70,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index where the <paramref
-             name="binding" />
+            >The zero-based index where the <paramref name="binding" />
 
             
 
@@ -83,12 +78,15 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Binding" />
+          The <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
@@ -117,13 +115,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the specified <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-             is a member of the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             is a member of the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -133,13 +129,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="binding" />
+            >true if the <paramref name="binding" />
 
             
 
-             parameter is a member of the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             parameter is a member of the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -147,12 +141,15 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.Binding" />
+          A <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
@@ -182,13 +179,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+            >Copies the entire <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
-             to a compatible one-dimensional array of type <see
-             cref="T:System.Web.Services.Description.Binding" />
+             to a compatible one-dimensional array of type <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
@@ -196,19 +191,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Description.Binding" />
+          An array of type <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
            serving as the destination for the copy action. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the name of the <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Returns the name of the <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
@@ -245,8 +246,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the <paramref
-             name="value" />
+            >The name of the <paramref name="value" />
 
             
 
@@ -254,12 +254,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Binding" />
+          The <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
@@ -288,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Searches for the specified <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
@@ -301,12 +303,15 @@
           <para>A 32-bit signed integer.</para>
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Binding" />
+          The <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
@@ -336,23 +341,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , the <paramref
-             name="binding" />
+            , the <paramref name="binding" />
 
             
 
-             parameter is added to the end of the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             parameter is added to the end of the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -363,13 +364,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             to the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -377,24 +376,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="binding" />
+          The zero-based index at which to insert the <paramref name="binding" />
 
           
 
            parameter. </param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Binding" />
+          The <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
@@ -468,8 +473,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
@@ -480,13 +484,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.Services.Description.Binding" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             from the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -494,12 +496,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Binding" />
+          The <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
@@ -529,13 +534,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the parent <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >Sets the parent <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             of a member of the <see
-             cref="T:System.Web.Services.Description.BindingCollection" />
+             of a member of the <see cref="T:System.Web.Services.Description.BindingCollection" />
 
             
 
@@ -543,24 +546,30 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Description.Binding" />
+          A <see cref="T:System.Web.Services.Description.Binding" />
 
           
 
            within the collection. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.ServiceDescription" />
+          The <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
           
 

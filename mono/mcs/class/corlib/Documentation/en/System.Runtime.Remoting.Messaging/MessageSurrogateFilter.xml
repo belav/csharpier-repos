@@ -42,39 +42,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" />
 
         
 
          delegate is intended for use only by the remoting infrastructure of the .NET Framework; you should not instantiate the delegate directly.</para
       >
       <para
-        >The <see
-         cref="P:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector.Filter" />
+        >The <see cref="P:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector.Filter" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+         property of the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
 
         
 
-         class gets and sets a <see
-         cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" />
+         class gets and sets a <see cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" />
 
         
 
          instance.</para
       >
       <para
-        >Each key/value parameter pair is a remoting message property that belongs to the <see
-         cref="P:System.Runtime.Remoting.Messaging.IMessage.Properties" />
+        >Each key/value parameter pair is a remoting message property that belongs to the <see cref="P:System.Runtime.Remoting.Messaging.IMessage.Properties" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+         property of the <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
         
 
@@ -84,23 +78,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Determines whether the <see
-         cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+        >Determines whether the <see cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
 
         
 
-         class should ignore a particular <see
-         cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+         class should ignore a particular <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
         
 
-         property while creating an <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+         property while creating an <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
-         for a <see
-         cref="T:System.MarshalByRefObject" />
+         for a <see cref="T:System.MarshalByRefObject" />
 
         
 

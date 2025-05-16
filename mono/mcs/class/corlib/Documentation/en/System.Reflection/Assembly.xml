@@ -58,29 +58,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Reflection.Assembly" />
+        >Use the <see cref="T:System.Reflection.Assembly" />
 
         
 
          class to load assemblies, to explore the metadata and constituent parts of assemblies, to discover the types contained in assemblies, and to create instances of those types.</para
       >
       <para
-        >To get an array of <see
-         cref="T:System.Reflection.Assembly" />
+        >To get an array of <see cref="T:System.Reflection.Assembly" />
 
         
 
-         objects representing the assemblies currently loaded into an application domain (for example, the default application domain of a simple project), use the <see
-         cref="M:System.AppDomain.GetAssemblies" />
+         objects representing the assemblies currently loaded into an application domain (for example, the default application domain of a simple project), use the <see cref="M:System.AppDomain.GetAssemblies" />
 
         
 
          method.</para
       >
       <para
-        >To load assemblies dynamically, the <see
-         cref="T:System.Reflection.Assembly" />
+        >To load assemblies dynamically, the <see cref="T:System.Reflection.Assembly" />
 
         
 
@@ -89,13 +85,11 @@
       <list type="bullet">
         <item>
           <para
-            >The recommended way to load assemblies is to use the <see
-             cref="Overload:System.AppDomain.Load" />
+            >The recommended way to load assemblies is to use the <see cref="Overload:System.AppDomain.Load" />
 
             
 
-             method, which identifies the assembly to be loaded by its display name (for example, "System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"). The search for the assembly follows the rules described in <format
-             type="text/html">
+             method, which identifies the assembly to be loaded by its display name (for example, "System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"). The search for the assembly follows the rules described in <format type="text/html">
               <a href="772ac6f4-64d2-4cfb-92fd-58096dcd6c34">How the Runtime Locates Assemblies</a>
             </format>
 
@@ -106,13 +100,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
+            >The <see cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
 
             
 
-             and <see
-             cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+             and <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
 
             
 
@@ -121,13 +113,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.LoadFile" />
+            >The <see cref="Overload:System.Reflection.Assembly.LoadFile" />
 
             
 
-             and <see
-             cref="Overload:System.Reflection.Assembly.LoadFrom" />
+             and <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
             
 
@@ -136,21 +126,18 @@
         </item>
       </list>
       <para
-        >To get an <see
-         cref="T:System.Reflection.Assembly" />
+        >To get an <see cref="T:System.Reflection.Assembly" />
 
         
 
-         object for the currently executing assembly, use the <see
-         cref="M:System.Reflection.Assembly.GetExecutingAssembly" />
+         object for the currently executing assembly, use the <see cref="M:System.Reflection.Assembly.GetExecutingAssembly" />
 
         
 
          method. </para
       >
       <para
-        >Many members of the <see
-         cref="T:System.Reflection.Assembly" />
+        >Many members of the <see cref="T:System.Reflection.Assembly" />
 
         
 
@@ -159,13 +146,11 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="M:System.Reflection.Assembly.GetName" />
+            >The <see cref="M:System.Reflection.Assembly.GetName" />
 
             
 
-             method returns an <see
-             cref="T:System.Reflection.AssemblyName" />
+             method returns an <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -174,8 +159,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.GetCustomAttributes" />
+            >The <see cref="Overload:System.Reflection.Assembly.GetCustomAttributes" />
 
             
 
@@ -184,8 +168,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.GetFiles" />
+            >The <see cref="Overload:System.Reflection.Assembly.GetFiles" />
 
             
 
@@ -194,8 +177,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Reflection.Assembly.GetManifestResourceNames" />
+            >The <see cref="M:System.Reflection.Assembly.GetManifestResourceNames" />
 
             
 
@@ -204,31 +186,26 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="M:System.Reflection.Assembly.GetTypes" />
+        >The <see cref="M:System.Reflection.Assembly.GetTypes" />
 
         
 
-         method lists all the types in the assembly. The <see
-         cref="M:System.Reflection.Assembly.GetExportedTypes" />
+         method lists all the types in the assembly. The <see cref="M:System.Reflection.Assembly.GetExportedTypes" />
 
         
 
-         method lists the types that are visible to callers outside the assembly. The <see
-         cref="Overload:System.Reflection.Assembly.GetType" />
+         method lists the types that are visible to callers outside the assembly. The <see cref="Overload:System.Reflection.Assembly.GetType" />
 
         
 
-         method can be used to search for a particular type in the assembly. The <see
-         cref="Overload:System.Reflection.Assembly.CreateInstance" />
+         method can be used to search for a particular type in the assembly. The <see cref="Overload:System.Reflection.Assembly.CreateInstance" />
 
         
 
          method can be used to search for and create instances of types in the assembly. </para
       >
       <para
-        >For more information on assemblies, see <format
-         type="text/html">
+        >For more information on assemblies, see <format type="text/html">
           <a href="433b04ae-4ba8-4849-9dbd-79194f240346">Application Domains and Assemblies</a>
         </format>
 
@@ -258,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is invoked by derived classes during the construction of <see
-             cref="T:System.Reflection.Assembly" />
+            >This constructor is invoked by derived classes during the construction of <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -269,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.Assembly" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -296,16 +271,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the absolute path to the loaded manifest-containing file, use the <see
-             cref="P:System.Reflection.Assembly.Location" />
+            >To get the absolute path to the loaded manifest-containing file, use the <see cref="P:System.Reflection.Assembly.Location" />
 
             
 
              property instead.</para
           >
           <para
-            >If the assembly was loaded as a byte array, using an overload of the <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+            >If the assembly was loaded as a byte array, using an overload of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -315,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the assembly as specified originally, for example, in an <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Gets the location of the assembly as specified originally, for example, in an <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -361,8 +333,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -375,13 +346,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the specified type created with the default constructor; or null if <paramref
-             name="typeName" />
+            >An instance of the specified type created with the default constructor; or null if <paramref name="typeName" />
 
             
 
-             is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with <see
-             cref="T:System.Reflection.BindingFlags" />
+             is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with <see cref="T:System.Reflection.BindingFlags" />
 
             
 
@@ -389,12 +358,15 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Type.FullName" />
+          The <see cref="P:System.Type.FullName" />
 
           
 
@@ -434,13 +406,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the specified type created with the default constructor; or null if <paramref
-             name="typeName" />
+            >An instance of the specified type created with the default constructor; or null if <paramref name="typeName" />
 
             
 
-             is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with <see
-             cref="T:System.Reflection.BindingFlags" />
+             is not found. The type is resolved using the default binder, without specifying culture or activation attributes, and with <see cref="T:System.Reflection.BindingFlags" />
 
             
 
@@ -448,19 +418,26 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Type.FullName" />
+          The <see cref="P:System.Type.FullName" />
 
           
 
            of the type to locate. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -499,13 +476,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="activationAttributes" />
+            >The <paramref name="activationAttributes" />
 
             
 
-             parameter is related to client-activated objects; see <format
-             type="text/html">
+             parameter is related to client-activated objects; see <format type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
 
@@ -521,8 +496,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the specified type, or null if <paramref
-             name="typeName" />
+            >An instance of the specified type, or null if <paramref name="typeName" />
 
             
 
@@ -530,79 +504,101 @@
           >
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Type.FullName" />
+          The <see cref="P:System.Type.FullName" />
 
           
 
            of the type to locate. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to ignore the case of the type name; otherwise, false. </param
         >
         <param name="bindingAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitmask that affects the way in which the search is conducted. The value is a combination of bit flags from <see
-           cref="T:System.Reflection.BindingFlags" />
+          A bitmask that affects the way in which the search is conducted. The value is a combination of bit flags from <see cref="T:System.Reflection.BindingFlags" />
 
           
 
           . </param
         >
         <param name="binder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
-           name="binder" />
+          An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref name="binder" />
 
           
 
            is null, the default binder is used. </param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array that contains the arguments to be passed to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to be invoked. If the default constructor is desired, <paramref
-           name="args" />
+          An array that contains the arguments to be passed to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to be invoked. If the default constructor is desired, <paramref name="args" />
 
           
 
            must be an empty array or null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (This is necessary to convert a String that represents 1000 to a Double value, for example, since 1000 is represented differently by different cultures.) </param
         >
         <param name="activationAttributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+          An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
-           object. The <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+           object. The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
@@ -638,16 +634,14 @@
           <para>The format of the returned string is: </para>
           <para>&lt;FullTypeName&gt;, &lt;AssemblyDisplayName&gt; </para>
           <para
-            >See <see
-             cref="T:System.Reflection.AssemblyName" />
+            >See <see cref="T:System.Reflection.AssemblyName" />
 
             
 
              for a description of the format of the display name of an assembly.</para
           >
           <para
-            >To accommodate changes in versions of the common language runtime, use this method rather than constructing the qualified name yourself.  For information about qualified assembly names, see <see
-             cref="P:System.Type.AssemblyQualifiedName" />
+            >To accommodate changes in versions of the common language runtime, use this method rather than constructing the qualified name yourself.  For information about qualified assembly names, see <see cref="P:System.Type.AssemblyQualifiedName" />
 
             
 
@@ -663,14 +657,22 @@
           <para>The full name of the type qualified by the display name of the assembly.</para>
         </returns>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The display name of an assembly. </param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -787,8 +789,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="o" />
+            >true if <paramref name="o" />
 
             
 
@@ -796,7 +797,11 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -900,8 +905,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -911,8 +915,7 @@
         <example>
           <para
             > The following example demonstrates using
-      the <see
-             cref="P:System.Reflection.Assembly.FullName" />
+      the <see cref="P:System.Reflection.Assembly.FullName" />
 
             
 
@@ -940,8 +943,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="T:System.Reflection.AssemblyName" />
+            >See <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -949,13 +951,11 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >Writing your own code to parse display names is not recommended. Instead, pass the display name to the <see
-               cref="M:System.Reflection.AssemblyName.#ctor(System.String)" />
+              >Writing your own code to parse display names is not recommended. Instead, pass the display name to the <see cref="M:System.Reflection.AssemblyName.#ctor(System.String)" />
 
               
 
-               constructor, which parses it and populates the appropriate fields of the new <see
-               cref="T:System.Reflection.AssemblyName" />
+               constructor, which parses it and populates the appropriate fields of the new <see cref="T:System.Reflection.AssemblyName" />
 
               
 
@@ -963,13 +963,11 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >In the .NET Framework version 2.0, processor architecture is added to assembly identity, and can be specified as part of assembly name strings. However, it is not included in the string returned by the <see
-             cref="P:System.Reflection.Assembly.FullName" />
+            >In the .NET Framework version 2.0, processor architecture is added to assembly identity, and can be specified as part of assembly name strings. However, it is not included in the string returned by the <see cref="P:System.Reflection.Assembly.FullName" />
 
             
 
-             property, for compatibility reasons. See <see
-             cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+             property, for compatibility reasons. See <see cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
 
             
 
@@ -1008,8 +1006,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order to call this method, you must have a <see
-             cref="T:System.Type" />
+            >In order to call this method, you must have a <see cref="T:System.Type" />
 
             
 
@@ -1025,7 +1022,11 @@ public class AssemblyExample {
           <para>The assembly in which the specified class is defined.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1056,13 +1057,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the method that calls the <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+            >If the method that calls the <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
-             method is expanded inline by the just-in-time (JIT) compiler, or if its caller is expanded inline, the assembly that is returned by <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+             method is expanded inline by the just-in-time (JIT) compiler, or if its caller is expanded inline, the assembly that is returned by <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
@@ -1071,8 +1070,7 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >Method M1 in assembly A1 calls <see
-                 cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+                >Method M1 in assembly A1 calls <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
                 
 
@@ -1087,41 +1085,34 @@ public class AssemblyExample {
             </item>
           </list>
           <para
-            >When M1 is not inlined, <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+            >When M1 is not inlined, <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
-             returns A2. When M1 is inlined, <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+             returns A2. When M1 is inlined, <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
-             returns A3. Similarly, when M2 is not inlined, <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+             returns A3. Similarly, when M2 is not inlined, <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
-             returns A2. When M2 is inlined, <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+             returns A2. When M2 is inlined, <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
              returns A3. </para
           >
           <para
-            >This effect also occurs when M1 executes as a tail call from M2, or when M2 executes as a tail call from M3. You can prevent the JIT compiler from inlining the method that calls <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+            >This effect also occurs when M1 executes as a tail call from M2, or when M2 executes as a tail call from M3. You can prevent the JIT compiler from inlining the method that calls <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
-            , by applying the <see
-             cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
+            , by applying the <see cref="T:System.Runtime.CompilerServices.MethodImplAttribute" />
 
             
 
-             attribute with the <see
-             cref="F:System.Runtime.CompilerServices.MethodImplOptions.NoInlining" />
+             attribute with the <see cref="F:System.Runtime.CompilerServices.MethodImplOptions.NoInlining" />
 
             
 
@@ -1131,8 +1122,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Reflection.Assembly" />
+            >Returns the <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -1170,13 +1160,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the corresponding <see
-             cref="T:System.Reflection.ICustomAttributeProvider" />
+            >This method implements the corresponding <see cref="T:System.Reflection.ICustomAttributeProvider" />
 
             
 
-             interface method. Therefore, the <paramref
-             name="inherit" />
+             interface method. Therefore, the <paramref name="inherit" />
 
             
 
@@ -1184,8 +1172,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, this method returns security attributes if they are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >In the .NET Framework version 2.0, this method returns security attributes if they are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1380,12 +1367,15 @@ public class AssemblyExample {
           <para>An array that contains the custom attributes for this assembly.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This argument is ignored for objects of type <see
-           cref="T:System.Reflection.Assembly" />
+          This argument is ignored for objects of type <see cref="T:System.Reflection.Assembly" />
 
           
 
@@ -1419,13 +1409,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method implements the corresponding <see
-             cref="T:System.Reflection.ICustomAttributeProvider" />
+            >This method implements the corresponding <see cref="T:System.Reflection.ICustomAttributeProvider" />
 
             
 
-             interface method. Therefore, the <paramref
-             name="inherit" />
+             interface method. Therefore, the <paramref name="inherit" />
 
             
 
@@ -1433,8 +1421,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, this method returns security attributes if they are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >In the .NET Framework version 2.0, this method returns security attributes if they are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -1627,8 +1614,7 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array that contains the custom attributes for this assembly as specified by <paramref
-             name="attributeType" />
+            >An array that contains the custom attributes for this assembly as specified by <paramref name="attributeType" />
 
             
 
@@ -1636,19 +1622,26 @@ public class AssemblyExample {
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type for which the custom attributes are to be returned. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          This argument is ignored for objects of type <see
-           cref="T:System.Reflection.Assembly" />
+          This argument is ignored for objects of type <see cref="T:System.Reflection.Assembly" />
 
           
 
@@ -1677,18 +1670,15 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods like <see
-             cref="Overload:System.Attribute.GetCustomAttributes" />
+            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />
 
             
 
-             and <see
-             cref="Overload:System.Reflection.Assembly.GetCustomAttributes" />
+             and <see cref="Overload:System.Reflection.Assembly.GetCustomAttributes" />
 
             
 
-             cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and for example code, see the <see
-             cref="T:System.Reflection.CustomAttributeData" />
+             cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and for example code, see the <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -1698,13 +1688,11 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns information about the attributes that have been applied to the current <see
-             cref="T:System.Reflection.Assembly" />
+            >Returns information about the attributes that have been applied to the current <see cref="T:System.Reflection.Assembly" />
 
             
 
-            , expressed as <see
-             cref="T:System.Reflection.CustomAttributeData" />
+            , expressed as <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -1714,8 +1702,7 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic list of <see
-             cref="T:System.Reflection.CustomAttributeData" />
+            >A generic list of <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -1747,13 +1734,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Reflection.Assembly.GetEntryAssembly" />
+            >The <see cref="M:System.Reflection.Assembly.GetEntryAssembly" />
 
             
 
-             method can return null when a managed assembly has been loaded from an unmanaged application. For example, if an unmanaged application creates an instance of a COM component written in C#, a call to the <see
-             cref="M:System.Reflection.Assembly.GetEntryAssembly" />
+             method can return null when a managed assembly has been loaded from an unmanaged application. For example, if an unmanaged application creates an instance of a COM component written in C#, a call to the <see cref="M:System.Reflection.Assembly.GetEntryAssembly" />
 
             
 
@@ -1763,8 +1748,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the process executable in the default application domain. In other application domains, this is the first executable that was executed by <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
+            >Gets the process executable in the default application domain. In other application domains, this is the first executable that was executed by <see cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
 
             
 
@@ -1774,8 +1758,7 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The assembly that is the process executable in the default application domain, or the first executable that was executed by <see
-             cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
+            >The assembly that is the process executable in the default application domain, or the first executable that was executed by <see cref="M:System.AppDomain.ExecuteAssembly(System.String)" />
 
             
 
@@ -1807,8 +1790,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the assembly that contains the method that called the currently executing code, use <see
-             cref="M:System.Reflection.Assembly.GetCallingAssembly" />
+            >To get the assembly that contains the method that called the currently executing code, use <see cref="M:System.Reflection.Assembly.GetCallingAssembly" />
 
             
 
@@ -1882,8 +1864,7 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method works on both public and private resource files.</para>
           <para
-            >The <paramref
-             name="name" />
+            >The <paramref name="name" />
 
             
 
@@ -1893,8 +1874,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.IO.FileStream" />
+            >Gets a <see cref="T:System.IO.FileStream" />
 
             
 
@@ -1906,7 +1886,11 @@ public class AssemblyExample {
           <para>A stream that contains the specified file, or null if the file is not found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1935,8 +1919,7 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method works on public and private resource files.</para>
           <para
-            >This overload is equivalent to calling the <see
-             cref="M:System.Reflection.Assembly.GetFiles(System.Boolean)" />
+            >This overload is equivalent to calling the <see cref="M:System.Reflection.Assembly.GetFiles(System.Boolean)" />
 
             
 
@@ -1988,7 +1971,11 @@ public class AssemblyExample {
           <para>An array of streams that contain the files.</para>
         </returns>
         <param name="getResourceModules">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2085,7 +2072,11 @@ public class AssemblyExample {
           <para>An array of modules.</para>
         </returns>
         <param name="getResourceModules">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2118,8 +2109,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resource information is returned only if the resource is visible to the caller, or the caller has <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Resource information is returned only if the resource is visible to the caller, or the caller has <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -2135,7 +2125,11 @@ public class AssemblyExample {
           <para>An object that is populated with information about the resource's topology, or null if the resource is not found.</para>
         </returns>
         <param name="resourceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2163,8 +2157,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resource information is returned only if the resource is visible to the caller, or the caller has <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Resource information is returned only if the resource is visible to the caller, or the caller has <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -2207,7 +2200,7 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >A manifest resource is a resource (such as an image file) that is embedded in the assembly at compile time. For more information about manifest resources, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=204554"
+              cref="http://go.microsoft.com/fwlink/?LinkId=204554"
               >Microsoft .NET Framework Resource Basics</see
             >
 
@@ -2216,8 +2209,7 @@ public class AssemblyExample {
              in the MSDN Library.</para
           >
           <para
-            >Resource information is returned only if the resource is visible to the caller, or the caller has <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Resource information is returned only if the resource is visible to the caller, or the caller has <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -2225,13 +2217,11 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >This method returns null if a private resource in another assembly is accessed and the caller does not have <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >This method returns null if a private resource in another assembly is accessed and the caller does not have <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
               
 
@@ -2239,28 +2229,23 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >If the assembly manifest lists a resource file, <see
-             cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.String)" />
+            >If the assembly manifest lists a resource file, <see cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.String)" />
 
             
 
-             returns a <see
-             cref="T:System.IO.Stream" />
+             returns a <see cref="T:System.IO.Stream" />
 
             
 
-             object even if the resource file cannot be found on disk at the time. If the resource file is not found, passing the resulting <see
-             cref="T:System.IO.Stream" />
+             object even if the resource file cannot be found on disk at the time. If the resource file is not found, passing the resulting <see cref="T:System.IO.Stream" />
 
             
 
-             object to the <see
-             cref="T:System.Resources.ResourceReader" />
+             object to the <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             constructor causes an <see
-             cref="T:System.ArgumentException" />
+             constructor causes an <see cref="T:System.ArgumentException" />
 
             
 
@@ -2276,7 +2261,11 @@ public class AssemblyExample {
           <para>The manifest resource; or null if no resources were specified during compilation or if the resource is not visible to the caller.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2310,13 +2299,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, if the full name specified for <paramref
-             name="type" />
+            >For example, if the full name specified for <paramref name="type" />
 
             
 
-             is "MyNameSpace.MyClasses" and <paramref
-             name="name" />
+             is "MyNameSpace.MyClasses" and <paramref name="name" />
 
             
 
@@ -2324,7 +2311,7 @@ public class AssemblyExample {
           >
           <para
             >A manifest resource is a resource (such as an image file) that is embedded in the assembly at compile time. For more information about manifest resources, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=204554"
+              cref="http://go.microsoft.com/fwlink/?LinkId=204554"
               >Microsoft .NET Framework Resource Basics</see
             >
 
@@ -2333,8 +2320,7 @@ public class AssemblyExample {
              in the MSDN Library.</para
           >
           <para
-            >Resource information is returned only if the resource is visible to the caller, or the caller has <see
-             cref="T:System.Security.Permissions.ReflectionPermission" />
+            >Resource information is returned only if the resource is visible to the caller, or the caller has <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
             
 
@@ -2342,13 +2328,11 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >This method returns null if a private resource in another assembly is accessed and the caller does not have <see
-               cref="T:System.Security.Permissions.ReflectionPermission" />
+              >This method returns null if a private resource in another assembly is accessed and the caller does not have <see cref="T:System.Security.Permissions.ReflectionPermission" />
 
               
 
-               with the <see
-               cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+               with the <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
 
               
 
@@ -2356,28 +2340,23 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >If the assembly manifest lists a resource file, <see
-             cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.Type,System.String)" />
+            >If the assembly manifest lists a resource file, <see cref="M:System.Reflection.Assembly.GetManifestResourceStream(System.Type,System.String)" />
 
             
 
-             returns a <see
-             cref="T:System.IO.Stream" />
+             returns a <see cref="T:System.IO.Stream" />
 
             
 
-             object even if the resource file cannot be found on disk at the time. If the resource file is not found, passing the resulting <see
-             cref="T:System.IO.Stream" />
+             object even if the resource file cannot be found on disk at the time. If the resource file is not found, passing the resulting <see cref="T:System.IO.Stream" />
 
             
 
-             object to the <see
-             cref="T:System.Resources.ResourceReader" />
+             object to the <see cref="T:System.Resources.ResourceReader" />
 
             
 
-             constructor causes an <see
-             cref="T:System.ArgumentException" />
+             constructor causes an <see cref="T:System.ArgumentException" />
 
             
 
@@ -2393,14 +2372,22 @@ public class AssemblyExample {
           <para>The manifest resource; or null if no resources were specified during compilation or if the resource is not visible to the caller.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type whose namespace is used to scope the manifest resource name. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2434,21 +2421,18 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method works on file names.</para>
           <para
-            >Classes in the Reflection.Emit namespace emit the scope name for a dynamic module. The scope name can be determined by the <see
-             cref="P:System.Reflection.Module.ScopeName" />
+            >Classes in the Reflection.Emit namespace emit the scope name for a dynamic module. The scope name can be determined by the <see cref="P:System.Reflection.Module.ScopeName" />
 
             
 
              property. Pass the kind of module you want to Assembly.GetModule. For example, if you want the module that contains the assembly manifest, pass the scope name of the module to GetModule. Otherwise, pass the file name of the module. Assemblies loaded by one of the Load methods that have a byte[] parameter have only one module, and that is the manifest module. Always seek these modules using the scope name.</para
           >
           <para
-            >A type can be retrieved from a specific module using <see
-             cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
+            >A type can be retrieved from a specific module using <see cref="M:System.Reflection.Module.GetType(System.String,System.Boolean)" />
 
             
 
-            . Calling Module.GetType on the module containing the manifest will not initiate a search of the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see
-             cref="M:System.Reflection.Assembly.GetType(System.String)" />
+            . Calling Module.GetType on the module containing the manifest will not initiate a search of the entire assembly. To retrieve a type from an assembly, regardless of which module it is in, you must call <see cref="M:System.Reflection.Assembly.GetType(System.String)" />
 
             
 
@@ -2464,7 +2448,11 @@ public class AssemblyExample {
           <para>The module being requested, or null if the module is not found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2544,7 +2532,11 @@ public class AssemblyExample {
           <para>An array of modules.</para>
         </returns>
         <param name="getResourceModules">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2576,8 +2568,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Gets an <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -2616,13 +2607,11 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Gets an <see cref="T:System.Reflection.AssemblyName" />
 
             
 
-             for this assembly, setting the codebase as specified by <paramref
-             name="copiedName" />
+             for this assembly, setting the codebase as specified by <paramref name="copiedName" />
 
             
 
@@ -2634,17 +2623,19 @@ public class AssemblyExample {
           <para>An object that contains the fully parsed display name for this assembly.</para>
         </returns>
         <param name="copiedName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to set the <see
-           cref="P:System.Reflection.Assembly.CodeBase" />
+          true to set the <see cref="P:System.Reflection.Assembly.CodeBase" />
 
           
 
-           to the location of the assembly after it was shadow copied; false to set <see
-           cref="P:System.Reflection.Assembly.CodeBase" />
+           to the location of the assembly after it was shadow copied; false to set <see cref="P:System.Reflection.Assembly.CodeBase" />
 
           
 
@@ -2681,14 +2672,22 @@ public class AssemblyExample {
           <para>Gets serialization information with all of the data needed to reinstantiate this assembly.</para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to be populated with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2720,33 +2719,27 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Starting with the net_v40_long, the <see
-               cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
+              >Starting with the net_v40_long, the <see cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
 
               
 
-               property of an <see
-               cref="T:System.Reflection.AssemblyName" />
+               property of an <see cref="T:System.Reflection.AssemblyName" />
 
               
 
-               object that is returned by this method is <see
-               cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.None" />
+               object that is returned by this method is <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.None" />
 
               
 
-               if there is no hash algorithm for the referenced assembly, or if the hash algorithm of the referenced assembly is not identified by the <see
-               cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
+               if there is no hash algorithm for the referenced assembly, or if the hash algorithm of the referenced assembly is not identified by the <see cref="T:System.Configuration.Assemblies.AssemblyHashAlgorithm" />
 
               
 
-               enumeration. In previous versions of the .NET Framework, the <see
-               cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
+               enumeration. In previous versions of the .NET Framework, the <see cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
 
               
 
-               property returned <see
-               cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
+               property returned <see cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
 
               
 
@@ -2757,8 +2750,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Gets the <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -2807,7 +2799,11 @@ public class AssemblyExample {
           <para>The specified satellite assembly.</para>
         </returns>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2842,16 +2838,14 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Satellite assemblies contain localized resources, as distinct from main application assemblies, which contain non-localizable executable code and resources for a single culture that serve as the default or neutral culture.</para>
           <para
-            >Call the <see
-             cref="M:System.Reflection.Assembly.GetSatelliteAssembly(System.Globalization.CultureInfo)" />
+            >Call the <see cref="M:System.Reflection.Assembly.GetSatelliteAssembly(System.Globalization.CultureInfo)" />
 
             
 
              overload to use your current assembly version.</para
           >
           <para
-            >If <paramref
-             name="version" />
+            >If <paramref name="version" />
 
             
 
@@ -2867,14 +2861,22 @@ public class AssemblyExample {
           <para>The specified satellite assembly.</para>
         </returns>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The specified culture. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2926,8 +2928,7 @@ public class AssemblyExample {
 
           
 
-           is equal to <see
-           cref="F:System.String.Empty" />
+           is equal to <see cref="F:System.String.Empty" />
 
           
 
@@ -2938,8 +2939,7 @@ public class AssemblyExample {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2948,13 +2948,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only searches the current assembly instance. The <paramref
-             name="name" />
+            >This method only searches the current assembly instance. The <paramref name="name" />
 
             
 
-             parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see
-             cref="M:System.Type.GetType(System.String)" />
+             parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see cref="M:System.Type.GetType(System.String)" />
 
             
 
@@ -2962,8 +2960,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format
-               type="text/html">
+              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -2978,8 +2975,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -2991,7 +2987,11 @@ public class AssemblyExample {
           <para>An object that represents the specified class, or null if the class is not found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3026,13 +3026,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only searches the current assembly instance. The <paramref
-             name="name" />
+            >This method only searches the current assembly instance. The <paramref name="name" />
 
             
 
-             parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see
-             cref="M:System.Type.GetType(System.String)" />
+             parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see cref="M:System.Type.GetType(System.String)" />
 
             
 
@@ -3040,8 +3038,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format
-               type="text/html">
+              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -3053,18 +3050,15 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >The <paramref
-             name="throwOnError" />
+            >The <paramref name="throwOnError" />
 
             
 
-             parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
-             cref="T:System.TypeLoadException" />
+             parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see cref="T:System.TypeLoadException" />
 
             
 
-             can be thrown even if <paramref
-             name="throwOnError" />
+             can be thrown even if <paramref name="throwOnError" />
 
             
 
@@ -3074,8 +3068,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -3087,14 +3080,22 @@ public class AssemblyExample {
           <para>An object that represents the specified class.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full name of the type. </param
         >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3129,13 +3130,11 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method only searches the current assembly instance. The <paramref
-             name="name" />
+            >This method only searches the current assembly instance. The <paramref name="name" />
 
             
 
-             parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see
-             cref="M:System.Type.GetType(System.String)" />
+             parameter includes the namespace but not the assembly. To search other assemblies for a type, use the <see cref="M:System.Type.GetType(System.String)" />
 
             
 
@@ -3143,8 +3142,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format
-               type="text/html">
+              >If the type has been forwarded to another assembly, it is still returned by this method. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -3156,18 +3154,15 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >The <paramref
-             name="throwOnError" />
+            >The <paramref name="throwOnError" />
 
             
 
-             parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
-             cref="T:System.TypeLoadException" />
+             parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see cref="T:System.TypeLoadException" />
 
             
 
-             can be thrown even if <paramref
-             name="throwOnError" />
+             can be thrown even if <paramref name="throwOnError" />
 
             
 
@@ -3177,8 +3172,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -3190,21 +3184,33 @@ public class AssemblyExample {
           <para>An object that represents the specified class.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full name of the type. </param
         >
         <param name="throwOnError">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to throw an exception if the type is not found; false to return null. </param
         >
         <param name="ignoreCase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3237,38 +3243,31 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The returned array includes nested types.</para>
           <para
-            >If the <see
-             cref="M:System.Reflection.Assembly.GetTypes" />
+            >If the <see cref="M:System.Reflection.Assembly.GetTypes" />
 
             
 
-             method is called on an assembly and a type in that assembly is dependent on a type in an assembly that has not been loaded (for example, if it derives from a type in the second assembly), a <see
-             cref="T:System.Reflection.ReflectionTypeLoadException" />
+             method is called on an assembly and a type in that assembly is dependent on a type in an assembly that has not been loaded (for example, if it derives from a type in the second assembly), a <see cref="T:System.Reflection.ReflectionTypeLoadException" />
 
             
 
-             is thrown. For example, this can happen if the first assembly was loaded with the <see
-             cref="M:System.Reflection.Assembly.ReflectionOnlyLoad(System.String)" />
+             is thrown. For example, this can happen if the first assembly was loaded with the <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoad(System.String)" />
 
             
 
-             or <see
-             cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+             or <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
 
             
 
-             methods, and the second assembly was not loaded. It can also happen with assemblies loaded using the <see
-             cref="M:System.Reflection.Assembly.Load(System.String)" />
+             methods, and the second assembly was not loaded. It can also happen with assemblies loaded using the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+             and <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             methods if the second assembly cannot be located when the <see
-             cref="M:System.Reflection.Assembly.GetTypes" />
+             methods if the second assembly cannot be located when the <see cref="M:System.Reflection.Assembly.GetTypes" />
 
             
 
@@ -3276,8 +3275,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If a type has been forwarded to another assembly, it is not included in the returned array. For information on type forwarding, see <format
-               type="text/html">
+              >If a type has been forwarded to another assembly, it is not included in the returned array. For information on type forwarding, see <format type="text/html">
                 <a href="51f8ffa3-c253-4201-a3d3-c4fad85ae097"
                   >Type Forwarding in the Common Language Runtime</a
                 >
@@ -3370,8 +3368,7 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For example, the value for the .NET Framework version 1.1 would be v1.1.4322. The binary files for that version would be located in the path %windir%\Microsoft.NET\Framework\v1.1.4322. </para>
           <para
-            >By default, <see
-             cref="P:System.Reflection.Assembly.ImageRuntimeVersion" />
+            >By default, <see cref="P:System.Reflection.Assembly.ImageRuntimeVersion" />
 
             
 
@@ -3422,14 +3419,22 @@ public class AssemblyExample {
           <para>true if the attribute has been applied to the assembly; otherwise, false.</para>
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the attribute to be checked for this assembly. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3452,16 +3457,14 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Dynamic assemblies are represented by the derived class <see
-             cref="T:System.Reflection.Emit.AssemblyBuilder" />
+            >Dynamic assemblies are represented by the derived class <see cref="T:System.Reflection.Emit.AssemblyBuilder" />
 
             
 
             .</para
           >
           <para
-            >When a dynamic assembly is saved to disk, the saved assembly is not dynamic. If the saved assembly is loaded into another application domain or process, the <see
-             cref="P:System.Reflection.Assembly.IsDynamic" />
+            >When a dynamic assembly is saved to disk, the saved assembly is not dynamic. If the saved assembly is loaded into another application domain or process, the <see cref="P:System.Reflection.Assembly.IsDynamic" />
 
             
 
@@ -3518,34 +3521,29 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The trust level of an assembly that is loaded by using this method is the same as the trust level of the calling assembly. To load an assembly from a byte array with the trust level of the application domain, use the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.SecurityContextSource)" />
+            >The trust level of an assembly that is loaded by using this method is the same as the trust level of the calling assembly. To load an assembly from a byte array with the trust level of the application domain, use the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.SecurityContextSource)" />
 
             
 
-             method overload. For more information about the use of evidence with overloads of the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[])" />
+             method overload. For more information about the use of evidence with overloads of the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[])" />
 
             
 
-             method that take byte arrays, see the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+             method that take byte arrays, see the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
 
             
 
              method overload. </para
           >
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
-            >Note that this method overload always creates a new <see
-             cref="T:System.Reflection.Assembly" />
+            >Note that this method overload always creates a new <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -3561,7 +3559,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3598,8 +3600,7 @@ public class AssemblyExample {
 
             
 
-             is thrown if <paramref
-             name="assemblyRef" />
+             is thrown if <paramref name="assemblyRef" />
 
             
 
@@ -3607,33 +3608,27 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >Do not use an <see
-               cref="T:System.Reflection.AssemblyName" />
+              >Do not use an <see cref="T:System.Reflection.AssemblyName" />
 
               
 
-               with only the <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               with only the <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property set. The <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property set. The <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see
-               cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
+               property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
 
               
 
-               method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see
-               cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+               method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
               
 
-               method overload or <format
-               type="text/html">
+               method overload or <format type="text/html">
                 <a href="68d1c539-6a47-4614-ab59-4b071c9d4b4c"
                   >Best Practices for Assembly Loading</a
                 >
@@ -3648,13 +3643,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -3663,18 +3656,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -3683,8 +3673,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -3692,8 +3681,7 @@ public class AssemblyExample {
               >
               <block subset="none" type="note">
                 <para
-                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
-                   cref="M:System.Reflection.Assembly.Load(System.String)" />
+                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                   
 
@@ -3703,13 +3691,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -3718,8 +3704,7 @@ public class AssemblyExample {
             </item>
           </list>
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
@@ -3727,33 +3712,27 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If both the <see
-               cref="P:System.Reflection.AssemblyName.Name" />
+              >If both the <see cref="P:System.Reflection.AssemblyName.Name" />
 
               
 
-               property and the <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property and the <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property are set, the first attempt to load the assembly uses the display name (including version, culture, and so on, as returned by the <see
-               cref="P:System.Reflection.Assembly.FullName" />
+               property are set, the first attempt to load the assembly uses the display name (including version, culture, and so on, as returned by the <see cref="P:System.Reflection.Assembly.FullName" />
 
               
 
-               property). If the file is not found, <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property). If the file is not found, <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               is used to search for the assembly. If the assembly is found using <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               is used to search for the assembly. If the assembly is found using <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-              , the display name is matched against the assembly. If the match fails, a <see
-               cref="T:System.IO.FileLoadException" />
+              , the display name is matched against the assembly. If the match fails, a <see cref="T:System.IO.FileLoadException" />
 
               
 
@@ -3764,8 +3743,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an assembly given its <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Loads an assembly given its <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -3777,7 +3755,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3816,8 +3798,7 @@ public class AssemblyExample {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3828,34 +3809,29 @@ public class AssemblyExample {
 
           
 
-           is equal to <see
-           cref="F:System.String.Empty" />
+           is equal to <see cref="F:System.String.Empty" />
 
           
 
            or starts with the null character ('\0').</exception
         >
         <exception cref="T:System.IO.FileNotFoundException"
-          >The <see
-           cref="T:System.Reflection.Assembly" />
+          >The <see cref="T:System.Reflection.Assembly" />
 
           
 
-           identified by <paramref
-           name="assemblyString" />
+           identified by <paramref name="assemblyString" />
 
           
 
            was not found.</exception
         >
         <exception cref="T:System.BadImageFormatException"
-          >The <see
-           cref="T:System.Reflection.Assembly" />
+          >The <see cref="T:System.Reflection.Assembly" />
 
           
 
-           identified by <paramref
-           name="assemblyString" />
+           identified by <paramref name="assemblyString" />
 
           
 
@@ -3868,8 +3844,7 @@ public class AssemblyExample {
 
             
 
-             is thrown if <paramref
-             name="assemblyString" />
+             is thrown if <paramref name="assemblyString" />
 
             
 
@@ -3879,13 +3854,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -3894,18 +3867,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -3914,8 +3884,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -3923,8 +3892,7 @@ public class AssemblyExample {
               >
               <block subset="none" type="note">
                 <para
-                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
-                   cref="M:System.Reflection.Assembly.Load(System.String)" />
+                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                   
 
@@ -3934,13 +3902,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -3949,26 +3915,22 @@ public class AssemblyExample {
             </item>
           </list>
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
-            >In the .NET Framework version 2.0, processor architecture is added to assembly identity, and can be specified as part of assembly name strings. For example, "ProcessorArchitecture=msil". However, the recommended way to specify an assembly name is to create an <see
-             cref="T:System.Reflection.AssemblyName" />
+            >In the .NET Framework version 2.0, processor architecture is added to assembly identity, and can be specified as part of assembly name strings. For example, "ProcessorArchitecture=msil". However, the recommended way to specify an assembly name is to create an <see cref="T:System.Reflection.AssemblyName" />
 
             
 
-             object and pass it to an appropriate overload of the <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+             object and pass it to an appropriate overload of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
-             method. See <see
-             cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+             method. See <see cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
 
             
 
@@ -3984,7 +3946,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4019,34 +3985,29 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The trust level of an assembly that is loaded by using this method is the same as the trust level of the calling assembly. To load an assembly from a byte array with the trust level of the application domain, use the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.SecurityContextSource)" />
+            >The trust level of an assembly that is loaded by using this method is the same as the trust level of the calling assembly. To load an assembly from a byte array with the trust level of the application domain, use the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.SecurityContextSource)" />
 
             
 
-             method overload. For more information about the use of evidence with overloads of the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[])" />
+             method overload. For more information about the use of evidence with overloads of the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[])" />
 
             
 
-             method that take byte arrays, see the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+             method that take byte arrays, see the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
 
             
 
              method overload.</para
           >
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
-            >Note that this method overload always creates a new <see
-             cref="T:System.Reflection.Assembly" />
+            >Note that this method overload always creates a new <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -4062,14 +4023,22 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4112,8 +4081,7 @@ public class AssemblyExample {
 
             
 
-             is thrown if <paramref
-             name="assemblyRef" />
+             is thrown if <paramref name="assemblyRef" />
 
             
 
@@ -4121,33 +4089,27 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >Do not use an <see
-               cref="T:System.Reflection.AssemblyName" />
+              >Do not use an <see cref="T:System.Reflection.AssemblyName" />
 
               
 
-               with only the <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               with only the <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property set. The <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property set. The <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see
-               cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
+               property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
 
               
 
-               method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see
-               cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+               method. Instead, the assembly is loaded using load-from rules. For information about the disadvantages of using the load-from context, see the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
               
 
-               method overload or <format
-               type="text/html">
+               method overload or <format type="text/html">
                 <a href="68d1c539-6a47-4614-ab59-4b071c9d4b4c"
                   >Best Practices for Assembly Loading</a
                 >
@@ -4162,13 +4124,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -4177,18 +4137,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -4197,8 +4154,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -4206,8 +4162,7 @@ public class AssemblyExample {
               >
               <block subset="none" type="note">
                 <para
-                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
-                   cref="M:System.Reflection.Assembly.Load(System.String)" />
+                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                   
 
@@ -4217,13 +4172,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -4232,8 +4185,7 @@ public class AssemblyExample {
             </item>
           </list>
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
@@ -4241,33 +4193,27 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If both the <see
-               cref="P:System.Reflection.AssemblyName.Name" />
+              >If both the <see cref="P:System.Reflection.AssemblyName.Name" />
 
               
 
-               property and the <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property and the <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               property are set, the first attempt to load the assembly uses the display name (including version, culture, and so on, as returned by the <see
-               cref="P:System.Reflection.Assembly.FullName" />
+               property are set, the first attempt to load the assembly uses the display name (including version, culture, and so on, as returned by the <see cref="P:System.Reflection.Assembly.FullName" />
 
               
 
-               property). If the file is not found, <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               property). If the file is not found, <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-               is used to search for the assembly. If the assembly is found using <see
-               cref="P:System.Reflection.AssemblyName.CodeBase" />
+               is used to search for the assembly. If the assembly is found using <see cref="P:System.Reflection.AssemblyName.CodeBase" />
 
               
 
-              , the display name is matched against the assembly. If the match fails, a <see
-               cref="T:System.IO.FileLoadException" />
+              , the display name is matched against the assembly. If the match fails, a <see cref="T:System.IO.FileLoadException" />
 
               
 
@@ -4275,13 +4221,11 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >If you call the <see
-             cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName,System.Security.Policy.Evidence)" />
+            >If you call the <see cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName,System.Security.Policy.Evidence)" />
 
             
 
-             method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
-             cref="T:System.IO.FileLoadException" />
+             method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see cref="T:System.IO.FileLoadException" />
 
             
 
@@ -4291,8 +4235,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads an assembly given its <see
-             cref="T:System.Reflection.AssemblyName" />
+            >Loads an assembly given its <see cref="T:System.Reflection.AssemblyName" />
 
             
 
@@ -4304,14 +4247,22 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that describes the assembly to be loaded. </param
         >
         <param name="assemblySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4354,8 +4305,7 @@ public class AssemblyExample {
 
             
 
-             is thrown if <paramref
-             name="assemblyString" />
+             is thrown if <paramref name="assemblyString" />
 
             
 
@@ -4365,13 +4315,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -4380,18 +4328,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -4400,8 +4345,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -4409,8 +4353,7 @@ public class AssemblyExample {
               >
               <block subset="none" type="note">
                 <para
-                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
-                   cref="M:System.Reflection.Assembly.Load(System.String)" />
+                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                   
 
@@ -4420,13 +4363,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -4435,34 +4376,29 @@ public class AssemblyExample {
             </item>
           </list>
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
-            >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
-             cref="T:System.IO.FileLoadException" />
+            >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see cref="T:System.IO.FileLoadException" />
 
             
 
              because the equality and integrity of the different evidence specifications cannot be determined. The evidence that first succeeds is the evidence that is used. </para
           >
           <para
-            >In the .NET Framework version 2.0, processor architecture is added to assembly identity, and can be specified as part of assembly name strings. For example, "ProcessorArchitecture=msil". However, the recommended way to specify an assembly name is to create an <see
-             cref="T:System.Reflection.AssemblyName" />
+            >In the .NET Framework version 2.0, processor architecture is added to assembly identity, and can be specified as part of assembly name strings. For example, "ProcessorArchitecture=msil". However, the recommended way to specify an assembly name is to create an <see cref="T:System.Reflection.AssemblyName" />
 
             
 
-             object and pass it to an appropriate overload of the <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+             object and pass it to an appropriate overload of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
-             method. See <see
-             cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+             method. See <see cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
 
             
 
@@ -4478,14 +4414,22 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The display name of the assembly. </param
         >
         <param name="assemblySecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4529,13 +4473,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -4544,18 +4486,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -4564,8 +4503,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
@@ -4573,8 +4511,7 @@ public class AssemblyExample {
               >
               <block subset="none" type="note">
                 <para
-                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see
-                   cref="M:System.Reflection.Assembly.Load(System.String)" />
+                  >In the .NET Framework version 1.0 and in version 1.1 without SP1, when you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                   
 
@@ -4584,13 +4521,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.Load(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -4599,29 +4534,25 @@ public class AssemblyExample {
             </item>
           </list>
           <para
-            >Reflecting on C++ executable files might throw a <see
-             cref="T:System.BadImageFormatException" />
+            >Reflecting on C++ executable files might throw a <see cref="T:System.BadImageFormatException" />
 
             
 
             . This is most likely caused by the C++ compiler stripping the relocation addresses or the .reloc section from your executable file. To preserve the .reloc address for your C++ executable file, specify /fixed:no when you are linking.</para
           >
           <para
-            >If you call the <see
-             cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
+            >If you call the <see cref="M:System.Reflection.Assembly.Load(System.Byte[],System.Byte[],System.Security.Policy.Evidence)" />
 
             
 
-             method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
-             cref="T:System.IO.FileLoadException" />
+             method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see cref="T:System.IO.FileLoadException" />
 
             
 
              because the equality and integrity of the different evidence specifications cannot be determined. The evidence that first succeeds is the evidence that is used. </para
           >
           <para
-            >Note that this method overload always creates a new <see
-             cref="T:System.Reflection.Assembly" />
+            >Note that this method overload always creates a new <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -4637,21 +4568,33 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that contains the raw bytes representing the symbols for the assembly. </param
         >
         <param name="securityEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4684,8 +4627,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The assembly is loaded into the application domain of the caller using the specified source for the security context. If <paramref
-             name="rawSymbolStore" />
+            >The assembly is loaded into the application domain of the caller using the specified source for the security context. If <paramref name="rawSymbolStore" />
 
             
 
@@ -4701,21 +4643,33 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that contains the raw bytes representing the symbols for the assembly. </param
         >
         <param name="securityContextSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4748,33 +4702,27 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+            >Use the <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             method to load and examine assemblies that have the same identity, but are located in different paths. <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+             method to load and examine assemblies that have the same identity, but are located in different paths. <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             does not load files into the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             does not load files into the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
-             context, and does not resolve dependencies using the load path, as the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             context, and does not resolve dependencies using the load path, as the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
-             method does. <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+             method does. <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             is useful in this limited scenario because <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             is useful in this limited scenario because <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
@@ -4790,7 +4738,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4829,33 +4781,27 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+            >Use the <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             method to load and examine assemblies that have the same identity, but are located in different paths. <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+             method to load and examine assemblies that have the same identity, but are located in different paths. <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             does not load files into the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             does not load files into the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
-             context, and does not resolve dependencies using the load path, as the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             context, and does not resolve dependencies using the load path, as the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
-             method does. <see
-             cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+             method does. <see cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
 
             
 
-             is useful in this limited scenario because <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             is useful in this limited scenario because <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
@@ -4871,14 +4817,22 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path of the assembly file. </param
         >
         <param name="securityEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4911,8 +4865,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="assemblyFile" />
+            >The <paramref name="assemblyFile" />
 
             
 
@@ -4920,8 +4873,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref
-               name="assemblyFile" />
+              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref name="assemblyFile" />
 
               
 
@@ -4939,18 +4891,15 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >The load context contains assemblies found by probing: in the GAC, in a host assembly store if the runtime is hosted, or in the <see
-                 cref="P:System.AppDomainSetup.ApplicationBase" />
+                >The load context contains assemblies found by probing: in the GAC, in a host assembly store if the runtime is hosted, or in the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
                 
 
-                 and <see
-                 cref="P:System.AppDomainSetup.PrivateBinPath" />
+                 and <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
-                 of the application domain. Most overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                 of the application domain. Most overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -4959,18 +4908,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The load-from context contains assemblies for which the user provided a path not included in the directories searched by probing. <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >The load-from context contains assemblies for which the user provided a path not included in the directories searched by probing. <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , <see
-                 cref="Overload:System.AppDomain.CreateInstanceFrom" />
+                , <see cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
-                , and <see
-                 cref="Overload:System.AppDomain.ExecuteAssembly" />
+                , and <see cref="Overload:System.AppDomain.ExecuteAssembly" />
 
                 
 
@@ -4979,13 +4925,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The reflection-only context contains assemblies loaded with the <see
-                 cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
+                >The reflection-only context contains assemblies loaded with the <see cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
 
                 
 
-                 and <see
-                 cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+                 and <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
 
                 
 
@@ -4994,8 +4938,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5005,13 +4948,11 @@ public class AssemblyExample {
           </list>
           <para>The load-from context allows an assembly to be loaded from a path not included in probing, and yet allows dependencies on that path to be found and loaded because the path information is maintained by the context. </para>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.LoadFrom" />
+            >The <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
             
 
-             method has the following disadvantages. Consider using <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+             method has the following disadvantages. Consider using <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -5020,8 +4961,7 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >If an assembly with the same identity is already loaded, <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly with the same identity is already loaded, <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5030,8 +4970,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5040,18 +4979,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , and the probing path includes an assembly with the same identity but a different location, an <see
-                 cref="T:System.InvalidCastException" />
+                , and the probing path includes an assembly with the same identity but a different location, an <see cref="T:System.InvalidCastException" />
 
                 
 
-                , <see
-                 cref="T:System.MissingMethodException" />
+                , <see cref="T:System.MissingMethodException" />
 
                 
 
@@ -5064,18 +5000,15 @@ public class AssemblyExample {
 
                 
 
-                 demands <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+                 demands <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
                 
 
-                 and <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+                 and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
 
                 
 
-                , or <see
-                 cref="T:System.Net.WebPermission" />
+                , or <see cref="T:System.Net.WebPermission" />
 
                 
 
@@ -5084,8 +5017,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If a native image exists for <paramref
-                 name="assemblyFile" />
+                >If a native image exists for <paramref name="assemblyFile" />
 
                 
 
@@ -5106,7 +5038,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5145,8 +5081,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="assemblyFile" />
+            >The <paramref name="assemblyFile" />
 
             
 
@@ -5154,8 +5089,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref
-               name="assemblyFile" />
+              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref name="assemblyFile" />
 
               
 
@@ -5173,18 +5107,15 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >The load context contains assemblies found by probing: in the GAC, in a host assembly store if the runtime is hosted, or in the <see
-                 cref="P:System.AppDomainSetup.ApplicationBase" />
+                >The load context contains assemblies found by probing: in the GAC, in a host assembly store if the runtime is hosted, or in the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
                 
 
-                 and <see
-                 cref="P:System.AppDomainSetup.PrivateBinPath" />
+                 and <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
-                 of the application domain. Most overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                 of the application domain. Most overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5193,18 +5124,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The load-from context contains assemblies for which the user provided a path not included in the directories searched by probing. <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >The load-from context contains assemblies for which the user provided a path not included in the directories searched by probing. <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , <see
-                 cref="Overload:System.AppDomain.CreateInstanceFrom" />
+                , <see cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
-                , and <see
-                 cref="Overload:System.AppDomain.ExecuteAssembly" />
+                , and <see cref="Overload:System.AppDomain.ExecuteAssembly" />
 
                 
 
@@ -5213,13 +5141,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The reflection-only context contains assemblies loaded with the <see
-                 cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
+                >The reflection-only context contains assemblies loaded with the <see cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
 
                 
 
-                 and <see
-                 cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+                 and <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
 
                 
 
@@ -5228,8 +5154,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5239,13 +5164,11 @@ public class AssemblyExample {
           </list>
           <para>The load-from context allows an assembly to be loaded from a path not included in probing, and yet allows dependencies on that path to be found and loaded because the path information is maintained by the context. </para>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.LoadFrom" />
+            >The <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
             
 
-             method has the following disadvantages. Consider using <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+             method has the following disadvantages. Consider using <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -5254,8 +5177,7 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >If an assembly with the same identity is already loaded, <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly with the same identity is already loaded, <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5264,8 +5186,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5274,18 +5195,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , and the probing path includes an assembly with the same identity but a different location, an <see
-                 cref="T:System.InvalidCastException" />
+                , and the probing path includes an assembly with the same identity but a different location, an <see cref="T:System.InvalidCastException" />
 
                 
 
-                , <see
-                 cref="T:System.MissingMethodException" />
+                , <see cref="T:System.MissingMethodException" />
 
                 
 
@@ -5298,18 +5216,15 @@ public class AssemblyExample {
 
                 
 
-                 demands <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+                 demands <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
                 
 
-                 and <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+                 and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
 
                 
 
-                , or <see
-                 cref="T:System.Net.WebPermission" />
+                , or <see cref="T:System.Net.WebPermission" />
 
                 
 
@@ -5318,8 +5233,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If a native image exists for <paramref
-                 name="assemblyFile" />
+                >If a native image exists for <paramref name="assemblyFile" />
 
                 
 
@@ -5334,13 +5248,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -5349,18 +5261,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
@@ -5369,8 +5278,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
-                 cref="T:System.IO.FileLoadException" />
+                >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see cref="T:System.IO.FileLoadException" />
 
                 
 
@@ -5379,8 +5287,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
@@ -5389,13 +5296,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -5413,14 +5318,22 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name or path of the file that contains the manifest of the assembly. </param
         >
         <param name="securityEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5456,8 +5369,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="assemblyFile" />
+            >The <paramref name="assemblyFile" />
 
             
 
@@ -5465,8 +5377,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref
-               name="assemblyFile" />
+              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref name="assemblyFile" />
 
               
 
@@ -5484,18 +5395,15 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >The load context contains assemblies found by probing: in the global assembly cache, in a host assembly store if the runtime is hosted, or in the <see
-                 cref="P:System.AppDomainSetup.ApplicationBase" />
+                >The load context contains assemblies found by probing: in the global assembly cache, in a host assembly store if the runtime is hosted, or in the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
                 
 
-                 and <see
-                 cref="P:System.AppDomainSetup.PrivateBinPath" />
+                 and <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
-                 of the application domain. Most overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                 of the application domain. Most overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5504,18 +5412,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The load-from context contains assemblies for which the user provided a path that is not included in probing. <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >The load-from context contains assemblies for which the user provided a path that is not included in probing. <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , <see
-                 cref="Overload:System.AppDomain.CreateInstanceFrom" />
+                , <see cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
-                , and <see
-                 cref="Overload:System.AppDomain.ExecuteAssembly" />
+                , and <see cref="Overload:System.AppDomain.ExecuteAssembly" />
 
                 
 
@@ -5524,13 +5429,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The reflection-only context contains assemblies loaded with the <see
-                 cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
+                >The reflection-only context contains assemblies loaded with the <see cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
 
                 
 
-                 and <see
-                 cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+                 and <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
 
                 
 
@@ -5539,8 +5442,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5550,13 +5452,11 @@ public class AssemblyExample {
           </list>
           <para>The load-from context allows an assembly to be loaded from a path that is not included in probing, and yet allows dependencies on that path to be found and loaded because the path information is maintained by the context. </para>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.LoadFrom" />
+            >The <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
             
 
-             method has the following disadvantages. Consider using <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+             method has the following disadvantages. Consider using <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -5565,8 +5465,7 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >If an assembly with the same identity is already loaded, <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly with the same identity is already loaded, <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5575,8 +5474,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5585,18 +5483,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , and the probing path includes an assembly with the same identity but a different location, an <see
-                 cref="T:System.InvalidCastException" />
+                , and the probing path includes an assembly with the same identity but a different location, an <see cref="T:System.InvalidCastException" />
 
                 
 
-                , <see
-                 cref="T:System.MissingMethodException" />
+                , <see cref="T:System.MissingMethodException" />
 
                 
 
@@ -5609,18 +5504,15 @@ public class AssemblyExample {
 
                 
 
-                 demands <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+                 demands <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
                 
 
-                 and <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+                 and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
 
                 
 
-                , or <see
-                 cref="T:System.Net.WebPermission" />
+                , or <see cref="T:System.Net.WebPermission" />
 
                 
 
@@ -5629,8 +5521,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If a native image exists for <paramref
-                 name="assemblyFile" />
+                >If a native image exists for <paramref name="assemblyFile" />
 
                 
 
@@ -5649,21 +5540,33 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name or path of the file that contains the manifest of the assembly. </param
         >
         <param name="hashValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5707,8 +5610,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="assemblyFile" />
+            >The <paramref name="assemblyFile" />
 
             
 
@@ -5716,8 +5618,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref
-               name="assemblyFile" />
+              >File transfer protocol (FTP) is not supported. If the URI supplied for <paramref name="assemblyFile" />
 
               
 
@@ -5735,18 +5636,15 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >The load context contains assemblies found by probing: in the GAC, in a host assembly store if the runtime is hosted, or in the <see
-                 cref="P:System.AppDomainSetup.ApplicationBase" />
+                >The load context contains assemblies found by probing: in the GAC, in a host assembly store if the runtime is hosted, or in the <see cref="P:System.AppDomainSetup.ApplicationBase" />
 
                 
 
-                 and <see
-                 cref="P:System.AppDomainSetup.PrivateBinPath" />
+                 and <see cref="P:System.AppDomainSetup.PrivateBinPath" />
 
                 
 
-                 of the application domain. Most overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                 of the application domain. Most overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5755,18 +5653,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The load-from context contains assemblies for which the user provided a path not included in the directories searched by probing. <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >The load-from context contains assemblies for which the user provided a path not included in the directories searched by probing. <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , <see
-                 cref="Overload:System.AppDomain.CreateInstanceFrom" />
+                , <see cref="Overload:System.AppDomain.CreateInstanceFrom" />
 
                 
 
-                , and <see
-                 cref="Overload:System.AppDomain.ExecuteAssembly" />
+                , and <see cref="Overload:System.AppDomain.ExecuteAssembly" />
 
                 
 
@@ -5775,13 +5670,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >The reflection-only context contains assemblies loaded with the <see
-                 cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
+                >The reflection-only context contains assemblies loaded with the <see cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
 
                 
 
-                 and <see
-                 cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
+                 and <see cref="M:System.Reflection.Assembly.ReflectionOnlyLoadFrom(System.String)" />
 
                 
 
@@ -5790,8 +5683,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see
-                 cref="Overload:System.Reflection.Assembly.Load" />
+                >If the user generated or found the assembly, it is not in any context. This applies to assemblies loaded using overloads of the <see cref="Overload:System.Reflection.Assembly.Load" />
 
                 
 
@@ -5801,13 +5693,11 @@ public class AssemblyExample {
           </list>
           <para>The load-from context allows an assembly to be loaded from a path not included in probing, and yet allows dependencies on that path to be found and loaded because the path information is maintained by the context. </para>
           <para
-            >The <see
-             cref="Overload:System.Reflection.Assembly.LoadFrom" />
+            >The <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
             
 
-             method has the following disadvantages. Consider using <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+             method has the following disadvantages. Consider using <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -5816,8 +5706,7 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >If an assembly with the same identity is already loaded, <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly with the same identity is already loaded, <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5826,8 +5715,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
@@ -5836,18 +5724,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If an assembly is loaded with <see
-                 cref="Overload:System.Reflection.Assembly.LoadFrom" />
+                >If an assembly is loaded with <see cref="Overload:System.Reflection.Assembly.LoadFrom" />
 
                 
 
-                , and the probing path includes an assembly with the same identity but a different location, an <see
-                 cref="T:System.InvalidCastException" />
+                , and the probing path includes an assembly with the same identity but a different location, an <see cref="T:System.InvalidCastException" />
 
                 
 
-                , <see
-                 cref="T:System.MissingMethodException" />
+                , <see cref="T:System.MissingMethodException" />
 
                 
 
@@ -5860,18 +5745,15 @@ public class AssemblyExample {
 
                 
 
-                 demands <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
+                 demands <see cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" />
 
                 
 
-                 and <see
-                 cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+                 and <see cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
 
                 
 
-                , or <see
-                 cref="T:System.Net.WebPermission" />
+                , or <see cref="T:System.Net.WebPermission" />
 
                 
 
@@ -5880,8 +5762,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If a native image exists for <paramref
-                 name="assemblyFile" />
+                >If a native image exists for <paramref name="assemblyFile" />
 
                 
 
@@ -5896,13 +5777,11 @@ public class AssemblyExample {
           <list type="bullet">
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
-                 method with no <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with no <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -5911,18 +5790,15 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
-                 method with an <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with an <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
-                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                 parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
@@ -5931,8 +5807,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see
-                 cref="T:System.IO.FileLoadException" />
+                >If you call this method more than once on the same assembly but with a different evidence specified, the common language runtime does not throw a <see cref="T:System.IO.FileLoadException" />
 
                 
 
@@ -5941,8 +5816,7 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
@@ -5951,13 +5825,11 @@ public class AssemblyExample {
             </item>
             <item>
               <para
-                >When you use a <see
-                 cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+                >When you use a <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
                 
 
-                 method with a Byte[] parameter and <see
-                 cref="T:System.Security.Policy.Evidence" />
+                 method with a Byte[] parameter and <see cref="T:System.Security.Policy.Evidence" />
 
                 
 
@@ -5975,28 +5847,44 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name or path of the file that contains the manifest of the assembly. </param
         >
         <param name="securityEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Evidence for loading the assembly. </param
         >
         <param name="hashValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6037,14 +5925,22 @@ public class AssemblyExample {
           <para>The loaded module.</para>
         </returns>
         <param name="moduleName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the module. This string must correspond to a file name in this assembly's manifest. </param
         >
         <param name="rawModule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6086,21 +5982,33 @@ public class AssemblyExample {
           <para>The loaded module.</para>
         </returns>
         <param name="moduleName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the module. This string must correspond to a file name in this assembly's manifest. </param
         >
         <param name="rawModule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A byte array that is a COFF-based image containing an emitted module, or a resource. </param
         >
         <param name="rawSymbolStore">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6138,21 +6046,18 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications that load assemblies with this method will be affected by upgrades of those assemblies. Therefore, do not use this method; redesign the application to use the <see
-             cref="M:System.Reflection.Assembly.Load(System.String)" />
+            >Applications that load assemblies with this method will be affected by upgrades of those assemblies. Therefore, do not use this method; redesign the application to use the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
             
 
-             method overload or the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             method overload or the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
              method overload.</para
           >
           <para
-            >This method first calls <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+            >This method first calls <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -6166,8 +6071,7 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The loaded assembly. If <paramref
-             name="partialName" />
+            >The loaded assembly. If <paramref name="partialName" />
 
             
 
@@ -6175,7 +6079,11 @@ public class AssemblyExample {
           >
         </returns>
         <param name="partialName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6215,21 +6123,18 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Evidence is the set of information that constitutes input to security policy decisions, such as what permissions can be granted to code.</para>
           <para
-            >Applications that load assemblies with this method will be affected by upgrades of those assemblies. Therefore, do not use this method; redesign the application to use the <see
-             cref="M:System.Reflection.Assembly.Load(System.String)" />
+            >Applications that load assemblies with this method will be affected by upgrades of those assemblies. Therefore, do not use this method; redesign the application to use the <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
             
 
-             method or the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+             method or the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >This method first calls <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+            >This method first calls <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -6243,8 +6148,7 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The loaded assembly. If <paramref
-             name="partialName" />
+            >The loaded assembly. If <paramref name="partialName" />
 
             
 
@@ -6252,14 +6156,22 @@ public class AssemblyExample {
           >
         </returns>
         <param name="partialName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The display name of the assembly. </param
         >
         <param name="securityEvidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6284,8 +6196,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To get the location before the file has been shadow-copied, use the <see
-             cref="P:System.Reflection.Assembly.CodeBase" />
+            >To get the location before the file has been shadow-copied, use the <see cref="P:System.Reflection.Assembly.CodeBase" />
 
             
 
@@ -6404,8 +6315,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.Assembly" />
+            >Indicates whether two <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -6415,13 +6325,11 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -6429,24 +6337,30 @@ public class AssemblyExample {
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The assembly to compare to <paramref
-           name="right" />
+          The assembly to compare to <paramref name="right" />
 
           
 
           . </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The assembly to compare to <paramref
-           name="left" />
+          The assembly to compare to <paramref name="left" />
 
           
 
@@ -6479,8 +6393,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.Assembly" />
+            >Indicates whether two <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -6490,13 +6403,11 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -6504,24 +6415,30 @@ public class AssemblyExample {
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The assembly to compare to <paramref
-           name="right" />
+          The assembly to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The assembly to compare to <paramref
-           name="left" />
+          The assembly to compare to <paramref name="left" />
 
           
 
@@ -6585,8 +6502,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an assembly has been loaded into the reflection-only context, using the <see
-             cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
+            >If an assembly has been loaded into the reflection-only context, using the <see cref="Overload:System.Reflection.Assembly.ReflectionOnlyLoad" />
 
             
 
@@ -6596,8 +6512,7 @@ public class AssemblyExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -6631,8 +6546,7 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You cannot execute code from an assembly loaded into the reflection-only context. To execute code, the assembly must be loaded into the execution context as well, using the <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+            >You cannot execute code from an assembly loaded into the reflection-only context. To execute code, the assembly must be loaded into the execution context as well, using the <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -6649,7 +6563,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="rawAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6683,8 +6601,7 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Dependencies are not automatically loaded into the reflection-only context. </para>
           <para
-            >You cannot execute code from an assembly loaded into the reflection-only context. To execute code, the assembly must be loaded into the execution context as well, using the <see
-             cref="Overload:System.Reflection.Assembly.Load" />
+            >You cannot execute code from an assembly loaded into the reflection-only context. To execute code, the assembly must be loaded into the execution context as well, using the <see cref="Overload:System.Reflection.Assembly.Load" />
 
             
 
@@ -6693,8 +6610,7 @@ public class AssemblyExample {
           <para>Whether certain permissions are granted or not granted to an assembly is based on evidence. The rules for assembly and security evidence merging are as follows: </para>
           <block subset="none" type="note">
             <para
-              >Reflecting on executable files compiled in C++ might throw a <see
-               cref="T:System.IO.FileLoadException" />
+              >Reflecting on executable files compiled in C++ might throw a <see cref="T:System.IO.FileLoadException" />
 
               
 
@@ -6712,12 +6628,15 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The display name of the assembly, as returned by the <see
-           cref="P:System.Reflection.AssemblyName.FullName" />
+          The display name of the assembly, as returned by the <see cref="P:System.Reflection.AssemblyName.FullName" />
 
           
 
@@ -6750,32 +6669,28 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Dependencies are not automatically loaded into the reflection-only context. To automatically load dependencies, handle the <see
-             cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
+            >Dependencies are not automatically loaded into the reflection-only context. To automatically load dependencies, handle the <see cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
 
             
 
              event and load the dependency in the event handler.</para
           >
           <para
-            >You cannot execute code from an assembly that has been loaded into the reflection-only context. To execute the code, load the assembly with the <see
-             cref="Overload:System.Reflection.Assembly.LoadFile" />
+            >You cannot execute code from an assembly that has been loaded into the reflection-only context. To execute the code, load the assembly with the <see cref="Overload:System.Reflection.Assembly.LoadFile" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="assemblyFile" />
+            >The <paramref name="assemblyFile" />
 
             
 
              parameter must refer to a URI without escape characters. This method supplies escape characters for all invalid characters in the URI.</para
           >
           <para
-            >The path specified for <paramref
-             name="assemblyFile" />
+            >The path specified for <paramref name="assemblyFile" />
 
             
 
@@ -6792,7 +6707,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6821,15 +6740,13 @@ public class AssemblyExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, assemblies that you compile with the net_v40_long have <format
-             type="text/html">
+            >By default, assemblies that you compile with the net_v40_long have <format type="text/html">
               <a href="4d05610a-0da6-4f08-acea-d54c9d6143c0">level 2</a>
             </format>
 
             
 
-             transparency, although you can explicitly make them <format
-             type="text/html">
+             transparency, although you can explicitly make them <format type="text/html">
               <a href="5fd8f46d-3961-46a7-84af-2eb1f48e75cf">level 1</a>
             </format>
 
@@ -6838,8 +6755,7 @@ public class AssemblyExample {
              instead. Assemblies that were compiled with earlier versions of the .NET Framework have level 1 transparency. </para
           >
           <para
-            >See <format
-             type="text/html">
+            >See <format type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework 4</a
               >
@@ -6879,8 +6795,7 @@ public class AssemblyExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that represents the <see
-             cref="T:System.Reflection.Assembly" />
+            >An object that represents the <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -6912,8 +6827,7 @@ public class AssemblyExample {
       <Docs>
         <remarks>
           <para
-            > This method returns the <see
-             cref="P:System.Reflection.Assembly.FullName" />
+            > This method returns the <see cref="P:System.Reflection.Assembly.FullName" />
 
             
 
@@ -6924,7 +6838,9 @@ public class AssemblyExample {
             <block subset="none" type="note"
               >This method
    overrides <see
-               cref="M:System.Object.ToString" qualify="true" />
+                cref="M:System.Object.ToString"
+                qualify="true"
+              />
 
               
 
@@ -6936,7 +6852,9 @@ public class AssemblyExample {
         <example>
           <para
             >The following example demonstrates the use of the <see
-             cref="M:System.Reflection.Assembly.ToString" qualify="true" />
+              cref="M:System.Reflection.Assembly.ToString"
+              qualify="true"
+            />
 
             
 
@@ -6996,8 +6914,7 @@ public class AssemblyExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Use this method to load a local assembly that the operating system has flagged as having been loaded from the Web (for example, a temporary file that was downloaded from the Internet or intranet). Before the net_v40_long, such assemblies were automatically loaded into a sandboxed application domain. Starting with the net_v40_short, they are loaded with full trust. </para>
           <para
-            >As an alternative to using this method, you can apply the <format
-             type="text/html">
+            >As an alternative to using this method, you can apply the <format type="text/html">
               <a href="07132b9c-4a72-4710-99d7-e702405e02d4"
                 >&lt;NetFx40_LegacySecurityPolicy&gt; Element</a
               >
@@ -7009,8 +6926,7 @@ public class AssemblyExample {
           >
           <block subset="none" type="note">
             <para
-              >If you use either of these solutions, you must be certain that it is safe to load <paramref
-               name="assemblyFile" />
+              >If you use either of these solutions, you must be certain that it is safe to load <paramref name="assemblyFile" />
 
               
 
@@ -7018,8 +6934,7 @@ public class AssemblyExample {
             >
           </block>
           <para
-            >For a discussion of load contexts, including the load-from context, see the <see
-             cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+            >For a discussion of load contexts, including the load-from context, see the <see cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
 
             
 
@@ -7035,7 +6950,11 @@ public class AssemblyExample {
           <para>The loaded assembly.</para>
         </returns>
         <param name="assemblyFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -9,6 +9,7 @@
     </member>
     <member name="M:Test.#ctor(System.Byte*)">
             Start
-        </member>
+        </member
+    >
   </members>
 </doc>

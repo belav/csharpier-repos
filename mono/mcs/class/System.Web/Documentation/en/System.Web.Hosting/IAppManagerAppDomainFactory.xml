@@ -20,13 +20,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a method used to create an <see
-         cref="T:System.AppDomain" />
+        >Defines a method used to create an <see cref="T:System.AppDomain" />
 
         
 
-         instance for a Web-application manager and a method used to stop all <see
-         cref="T:System.AppDomain" />
+         instance for a Web-application manager and a method used to stop all <see cref="T:System.AppDomain" />
 
         
 

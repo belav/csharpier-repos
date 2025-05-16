@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Thrown when SQL Server or the ADO.NET <see
-         cref="N:System.Data.SqlClient" />
+        >Thrown when SQL Server or the ADO.NET <see cref="N:System.Data.SqlClient" />
 
         
 
@@ -43,8 +42,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is present in the <see
-             cref="T:Microsoft.SqlServer.Server.InvalidUdtException" />
+            >This method is present in the <see cref="T:Microsoft.SqlServer.Server.InvalidUdtException" />
 
             
 
@@ -54,18 +52,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Streams all the <see
-             cref="T:Microsoft.SqlServer.Server.InvalidUdtException" />
+            >Streams all the <see cref="T:Microsoft.SqlServer.Server.InvalidUdtException" />
 
             
 
-             properties into the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             properties into the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             class for the given <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             class for the given <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -73,24 +68,30 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

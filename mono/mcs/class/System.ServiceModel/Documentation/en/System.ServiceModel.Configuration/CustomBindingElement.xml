@@ -76,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.CustomBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CustomBindingElement" />
 
             
 
@@ -104,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.CustomBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.CustomBindingElement" />
 
             
 
@@ -113,7 +111,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,12 +152,15 @@
           <para>Adds the specified element to this configuration section.</para>
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
+          A <see cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
 
           
 
@@ -189,7 +194,11 @@
           <para>Applies the content of the specified binding to this binding configuration element. This method cannot be inherited.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,12 +239,15 @@
           <para>true if the operation is successful; otherwise, false.</para>
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
+          A <see cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
 
           
 
@@ -299,7 +311,11 @@
           <para>Called when the content of a specified binding element is applied to this binding configuration element.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -359,18 +375,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" />
 
             
 
-             instance that contains a collection of <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+             instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-             objects that can be attributes or <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 

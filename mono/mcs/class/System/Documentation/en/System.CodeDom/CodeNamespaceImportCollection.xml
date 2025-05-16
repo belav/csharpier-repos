@@ -38,13 +38,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+        >The <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeNamespaceImport" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeNamespaceImport" />
 
         
 
@@ -54,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeNamespaceImport" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeNamespaceImport" />
 
         
 
@@ -83,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
@@ -119,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.CodeDom.CodeNamespaceImport" />
+            >Adds a <see cref="T:System.CodeDom.CodeNamespaceImport" />
 
             
 
@@ -128,12 +123,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespaceImport" />
+          The <see cref="T:System.CodeDom.CodeNamespaceImport" />
 
           
 
@@ -167,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a set of <see
-             cref="T:System.CodeDom.CodeNamespaceImport" />
+            >Adds a set of <see cref="T:System.CodeDom.CodeNamespaceImport" />
 
             
 
@@ -176,12 +173,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeNamespaceImport" />
+          An array of type <see cref="T:System.CodeDom.CodeNamespaceImport" />
 
           
 
@@ -262,8 +262,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -323,13 +322,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -339,18 +336,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -358,29 +352,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Collections.ICollection" />
+           that is the destination of the elements copied from the <see cref="T:System.Collections.ICollection" />
 
           
 
           . The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -409,8 +408,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -443,8 +441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -477,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -515,8 +511,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -547,13 +542,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -563,8 +556,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an object to the <see
-             cref="T:System.Collections.IList" />
+            >Adds an object to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -576,17 +568,19 @@
           <para>The position at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to add to the <see
-           cref="T:System.Collections.IList" />
+           to add to the <see cref="T:System.Collections.IList" />
 
           
 
@@ -614,13 +608,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -630,8 +622,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all items from the <see
-             cref="T:System.Collections.IList" />
+            >Removes all items from the <see cref="T:System.Collections.IList" />
 
             
 
@@ -662,13 +653,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -678,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.IList" />
+            >Determines whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -691,17 +679,19 @@
           <para>true if the value is in the list; otherwise, false. </para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -731,13 +721,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -747,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Collections.IList" />
+            >Determines the index of a specific item in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -758,8 +745,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -767,17 +753,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -808,13 +796,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -824,8 +810,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an item in the <see
-             cref="T:System.Collections.IList" />
+            >Inserts an item in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -833,29 +818,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to insert into the <see
-           cref="T:System.Collections.IList" />
+           to insert into the <see cref="T:System.Collections.IList" />
 
           
 
@@ -884,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.IList" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -915,8 +904,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.IList" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -975,13 +963,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -991,8 +977,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.Collections.IList" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1000,17 +985,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.IList" />
+           to remove from the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1040,13 +1027,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1056,8 +1041,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the element at the specified index of the <see
-             cref="T:System.Collections.IList" />
+            >Removes the element at the specified index of the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1065,7 +1049,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

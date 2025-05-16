@@ -13,28 +13,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
 
         
 
-         values correspond to the states of the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+         values correspond to the states of the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
         
 
-         objects exposed by the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.CheckBox" />
+         objects exposed by the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.CheckBox" />
 
         
 
-         class. The <see
-         cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
+         class. The <see cref="T:System.Windows.Forms.VisualStyles.CheckBoxState" />
 
         
 
-         values are also used as an argument in the <see
-         cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
+         values are also used as an argument in the <see cref="Overload:System.Windows.Forms.CheckBoxRenderer.DrawCheckBox" />
 
         
 

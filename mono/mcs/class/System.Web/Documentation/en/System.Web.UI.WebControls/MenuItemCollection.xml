@@ -24,51 +24,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
         
 
-         class is used to store and manage a collection of <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
-         objects in the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         objects in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+         control uses the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
         
 
-         class to store its root menu items in the <see
-         cref="P:System.Web.UI.WebControls.Menu.Items" />
+         class to store its root menu items in the <see cref="P:System.Web.UI.WebControls.Menu.Items" />
 
         
 
-         property. This collection is also used for the <see
-         cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
+         property. This collection is also used for the <see cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
 
         
 
-         property of a <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         property of a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
          object to store a menu item's submenu items (if any).</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
         
 
@@ -77,13 +68,11 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.Item(System.Int32)" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemCollection.Item(System.Int32)" />
 
             
 
-             indexer to directly retrieve a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             indexer to directly retrieve a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -92,8 +81,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
 
             
 
@@ -102,8 +90,7 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Array,System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Array,System.Int32)" />
 
             
 
@@ -112,38 +99,31 @@
         </item>
       </list>
       <para
-        >You can programmatically manage a <see
-         cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+        >You can programmatically manage a <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
         
 
-         object by adding and removing <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         object by adding and removing <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
-         objects. To add menu items to the collection, use the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
+         objects. To add menu items to the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
 
         
 
-         or the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
+         or the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
 
         
 
-         method. To remove nodes from the collection, use the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
+         method. To remove nodes from the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
 
         
 
-        , the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
+        , the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
 
         
 
-        , or the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+        , or the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
 
         
 
@@ -151,18 +131,15 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="T:System.Web.UI.WebControls.Menu" />
+          >When the <see cref="T:System.Web.UI.WebControls.Menu" />
 
           
 
-           control is bound to a data source, the <see
-           cref="P:System.Web.UI.WebControls.Menu.Items" />
+           control is bound to a data source, the <see cref="P:System.Web.UI.WebControls.Menu.Items" />
 
           
 
-           and <see
-           cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
+           and <see cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
 
           
 
@@ -170,33 +147,27 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
         
 
-         class contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see
-         cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
+         class contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
 
         
 
-         property. If you want to determine whether the collection contains a certain <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         property. If you want to determine whether the collection contains a certain <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
-         object, use the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.Contains(System.Web.UI.WebControls.MenuItem)" />
+         object, use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Contains(System.Web.UI.WebControls.MenuItem)" />
 
         
 
-         method. To get the index of a <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+         method. To get the index of a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
-         object in the collection, use the <see
-         cref="M:System.Web.UI.WebControls.MenuItemCollection.IndexOf(System.Web.UI.WebControls.MenuItem)" />
+         object in the collection, use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.IndexOf(System.Web.UI.WebControls.MenuItem)" />
 
         
 
@@ -206,8 +177,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of menu items in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >Represents a collection of menu items in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -225,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -234,8 +203,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When creating a collection of child menu items, you should use the overloaded constructor that takes the <paramref
-               name="owner" />
+              >When creating a collection of child menu items, you should use the overloaded constructor that takes the <paramref name="owner" />
 
               
 
@@ -243,13 +211,11 @@
             >
           </block>
           <para
-            >This constructor is used primarily by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >This constructor is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to initialize the <see
-             cref="P:System.Web.UI.WebControls.Menu.Items" />
+             control to initialize the <see cref="P:System.Web.UI.WebControls.Menu.Items" />
 
             
 
@@ -259,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -286,8 +251,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -297,13 +261,11 @@
             <para>When creating a collection of root menu items, consider using the default constructor because root menu items do not have a parent menu item.</para>
           </block>
           <para
-            >This constructor is used primarily by control developers when extending the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >This constructor is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             class to initialize the <see
-             cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
+             class to initialize the <see cref="P:System.Web.UI.WebControls.MenuItem.ChildItems" />
 
             
 
@@ -313,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -322,17 +283,19 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          A <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
-           that represents the parent menu item of the current <see
-           cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+           that represents the parent menu item of the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
           
 
@@ -360,13 +323,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
 
             
 
-             method to append the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to append the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -374,8 +335,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can add null values and duplicate <see
-               cref="T:System.Web.UI.WebControls.MenuItem" />
+              >You can add null values and duplicate <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
               
 
@@ -383,13 +343,11 @@
             >
           </block>
           <para
-            >As an alternative, you can insert a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >As an alternative, you can insert a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object in the collection at a specific index by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
+             object in the collection at a specific index by using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
 
             
 
@@ -399,13 +357,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object to the end of the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object to the end of the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -413,17 +369,19 @@
           >
         </summary>
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
-           to append to the end of the current <see
-           cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+           to append to the end of the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
           
 
@@ -452,13 +410,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.AddAt(System.Int32,System.Web.UI.WebControls.MenuItem)" />
 
             
 
-             method to insert the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to insert the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -466,8 +422,7 @@
           >
           <block subset="none" type="note">
             <para
-              >You can add null values and duplicate <see
-               cref="T:System.Web.UI.WebControls.MenuItem" />
+              >You can add null values and duplicate <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
               
 
@@ -475,13 +430,11 @@
             >
           </block>
           <para
-            >As an alternative, you can simply append a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >As an alternative, you can simply append a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object to the end of the collection by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
+             object to the end of the collection by using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Add(System.Web.UI.WebControls.MenuItem)" />
 
             
 
@@ -491,13 +444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Inserts the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -505,24 +456,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index location at which to insert the <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
           .</param
         >
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
@@ -545,18 +502,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
 
             
 
-             method to remove every <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to remove every <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object from the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object from the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -564,13 +518,11 @@
           >
           <block subset="none" type="note">
             <para
-              >To remove an individual node from the collection, consider using the <see
-               cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
+              >To remove an individual node from the collection, consider using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
 
               
 
-               or the <see
-               cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
+               or the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
 
               
 
@@ -581,8 +533,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all items from the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Removes all items from the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -612,28 +563,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Contains(System.Web.UI.WebControls.MenuItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Contains(System.Web.UI.WebControls.MenuItem)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to determine whether a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object is contained in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object is contained in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object. The <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             object. The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             and its properties is compared with the passed in value. This method is commonly used to test for the existence of a <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             and its properties is compared with the passed in value. This method is commonly used to test for the existence of a <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -643,8 +589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Determines whether the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -654,8 +599,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >true if the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -683,36 +627,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Array,System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Array,System.Int32)" />
 
             
 
-             method to copy the contents of the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             method to copy the contents of the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object into the specified zero-based <see
-             cref="T:System.Array" />
+             object into the specified zero-based <see cref="T:System.Array" />
 
             
 
-            . Items are copied starting at the specified index of the target array. With the <see
-             cref="T:System.Array" />
+            . Items are copied starting at the specified index of the target array. With the <see cref="T:System.Array" />
 
             
 
-            , you can then use array syntax to access the items in the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            , you can then use array syntax to access the items in the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
              object.</para
           >
           <para
-            >As an alternative, you can also use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
+            >As an alternative, you can also use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
 
             
 
@@ -722,13 +660,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Copies all the items from the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object to a compatible one-dimensional <see
-             cref="T:System.Array" />
+             object to a compatible one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -736,7 +672,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -766,26 +706,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Web.UI.WebControls.MenuItem[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.CopyTo(System.Web.UI.WebControls.MenuItem[],System.Int32)" />
 
             
 
-             method to copy the contents of the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             method to copy the contents of the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object into the specified zero-based array. Items are copied starting at the specified index of the target array. With the array, you can then use array syntax to access the items in the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object into the specified zero-based array. Items are copied starting at the specified index of the target array. With the array, you can then use array syntax to access the items in the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
              object.</para
           >
           <para
-            >As an alternative, you can also use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
+            >As an alternative, you can also use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
 
             
 
@@ -795,13 +731,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Copies all the items from the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object to a compatible one-dimensional array of <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             object to a compatible one-dimensional array of <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -809,7 +743,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -832,18 +770,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
 
             
 
-             property to determine the number of items in a <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             property to determine the number of items in a <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object. This property is commonly used when iterating through a collection to determine the upper bound of the collection. The <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
+             object. This property is commonly used when iterating through a collection to determine the upper bound of the collection. The <see cref="P:System.Web.UI.WebControls.MenuItemCollection.Count" />
 
             
 
@@ -853,8 +788,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of menu items contained in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Gets the number of menu items contained in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -881,28 +815,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.GetEnumerator" />
 
             
 
-             method to create an enumerator that can be easily iterated through to get each item in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             method to create an enumerator that can be easily iterated through to get each item in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object. To get the item currently pointed to in the enumerator, use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             object. To get the item currently pointed to in the enumerator, use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             property. Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             property. Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method to move to the next item. If you need to move the enumerator back to the beginning of the collection, use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             method to move to the next item. If you need to move the enumerator back to the beginning of the collection, use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -910,18 +839,15 @@
           >
           <block subset="none" type="note">
             <para
-              >After you create an enumerator or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+              >After you create an enumerator or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method, you must call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -929,8 +855,7 @@
             >
           </block>
           <para
-            >As an alternative, you can also use the <see
-             cref="Overload:System.Web.UI.WebControls.MenuItemCollection.CopyTo" />
+            >As an alternative, you can also use the <see cref="Overload:System.Web.UI.WebControls.MenuItemCollection.CopyTo" />
 
             
 
@@ -940,8 +865,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can be used to iterate through the items in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Returns an enumerator that can be used to iterate through the items in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -951,8 +875,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator that can be used to iterate through the items in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >An enumerator that can be used to iterate through the items in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -982,18 +905,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.IndexOf(System.Web.UI.WebControls.MenuItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.IndexOf(System.Web.UI.WebControls.MenuItem)" />
 
             
 
-             method to determine the index of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to determine the index of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object in the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object in the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1006,8 +926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Determines the index of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -1017,13 +936,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="value" />
+            >The zero-based index of the first occurrence of <paramref name="value" />
 
             
 
-             within the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             within the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1047,36 +964,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.IsSynchronized" />
+            >The <see cref="P:System.Web.UI.WebControls.MenuItemCollection.IsSynchronized" />
 
             
 
-             property is used to indicate whether access to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             property is used to indicate whether access to the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object is synchronized (thread safe). This property is derived from the <see
-             cref="T:System.Collections.ICollection" />
+             object is synchronized (thread safe). This property is derived from the <see cref="T:System.Collections.ICollection" />
 
             
 
              class and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.MenuItemCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1086,8 +997,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1140,8 +1050,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
 
             
 
@@ -1149,13 +1058,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+              >The <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
               
 
-               object can contain null values, as well as duplicate <see
-               cref="T:System.Web.UI.WebControls.MenuItem" />
+               object can contain null values, as well as duplicate <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
               
 
@@ -1163,13 +1070,11 @@
             >
           </block>
           <para
-            >As an alternative, you can remove a menu item from a specific index in the collection by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
+            >As an alternative, you can remove a menu item from a specific index in the collection by using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
 
             
 
-             method. You can also remove all menu items from the collection by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+             method. You can also remove all menu items from the collection by using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
 
             
 
@@ -1179,13 +1084,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object from the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object from the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1211,13 +1114,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -1225,13 +1126,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+              >The <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
               
 
-               object can contain null values, as well as duplicate <see
-               cref="T:System.Web.UI.WebControls.MenuItem" />
+               object can contain null values, as well as duplicate <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
               
 
@@ -1239,18 +1138,15 @@
             >
           </block>
           <para
-            >As an alternative, you can remove a specific <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >As an alternative, you can remove a specific <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
+             object by using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Remove(System.Web.UI.WebControls.MenuItem)" />
 
             
 
-             method. You can also remove all menu items from the collection by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
+             method. You can also remove all menu items from the collection by using the <see cref="M:System.Web.UI.WebControls.MenuItemCollection.Clear" />
 
             
 
@@ -1260,13 +1156,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Removes the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object at the specified index location from the current <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object at the specified index location from the current <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1274,7 +1168,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1297,13 +1195,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.SyncRoot" />
+            >The <see cref="P:System.Web.UI.WebControls.MenuItemCollection.SyncRoot" />
 
             
 
-             property provides a synchronized version of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             property provides a synchronized version of the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1311,13 +1207,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.MenuItemCollection.IsSynchronized" />
+              >The <see cref="P:System.Web.UI.WebControls.MenuItemCollection.IsSynchronized" />
 
               
 
-               property of this class always returns false, which indicates that the <see
-               cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+               property of this class always returns false, which indicates that the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
               
 
@@ -1325,23 +1219,19 @@
             >
           </block>
           <para
-            >Synchronizing code must perform operations on the <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.SyncRoot" />
+            >Synchronizing code must perform operations on the <see cref="P:System.Web.UI.WebControls.MenuItemCollection.SyncRoot" />
 
             
 
-             object of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object of the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             collection, not directly on the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             collection, not directly on the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
-             object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+             object itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1349,13 +1239,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The object returned in this implementation is the <see
-               cref="T:System.Collections.ArrayList" />
+              >The object returned in this implementation is the <see cref="T:System.Collections.ArrayList" />
 
               
 
-               object used to store the <see
-               cref="T:System.Web.UI.WebControls.MenuItem" />
+               object used to store the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
               
 
@@ -1364,18 +1252,15 @@
           </block>
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads could still modify the collection, causing the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.MenuItemCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.MenuItemCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1385,8 +1270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1436,8 +1320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1463,8 +1346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Loads the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 
@@ -1472,12 +1354,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -1500,8 +1385,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the changes to view state to an <see
-             cref="T:System.Object" />
+            >Saves the changes to view state to an <see cref="T:System.Object" />
 
             
 
@@ -1511,8 +1395,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -1535,8 +1418,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After this method has been called on a server control, the <see
-             cref="P:System.Web.UI.Control.IsTrackingViewState" />
+            >After this method has been called on a server control, the <see cref="P:System.Web.UI.Control.IsTrackingViewState" />
 
             
 
@@ -1546,8 +1428,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instructs the <see
-             cref="T:System.Web.UI.WebControls.MenuItemCollection" />
+            >Instructs the <see cref="T:System.Web.UI.WebControls.MenuItemCollection" />
 
             
 

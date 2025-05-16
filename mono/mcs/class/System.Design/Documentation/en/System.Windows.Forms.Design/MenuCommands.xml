@@ -21,18 +21,15 @@
 
         
 
-         contains a set of <see
-         cref="T:System.ComponentModel.Design.CommandID" />
+         contains a set of <see cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
-         fields that can be used to specify a command to link when adding a command using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
+         fields that can be used to specify a command to link when adding a command using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
 
         
 
-         method of the <see
-         cref="T:System.ComponentModel.Design.IMenuCommandService" />
+         method of the <see cref="T:System.ComponentModel.Design.IMenuCommandService" />
 
         
 
@@ -42,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines a set of <see
-         cref="T:System.ComponentModel.Design.CommandID" />
+        >Defines a set of <see cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
@@ -61,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.MenuCommands" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.MenuCommands" />
 
             
 
@@ -89,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -117,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -145,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -176,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -200,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -228,8 +218,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -259,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -286,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -313,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -337,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -365,8 +350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -393,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -421,8 +404,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -449,8 +431,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -477,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -505,8 +485,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -533,8 +512,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -561,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -589,8 +566,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -617,8 +593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -645,8 +620,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -673,8 +647,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -701,8 +674,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -729,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -760,8 +731,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -787,8 +757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -811,8 +780,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -839,8 +807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -867,8 +834,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -895,8 +861,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -923,8 +888,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -951,8 +915,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -982,8 +945,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -1009,8 +971,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -1033,8 +994,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 

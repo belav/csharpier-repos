@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the interface used to inspect and add state to channels when they are first created. This can be used to track all outstanding sessions, for instance, so the service can send messages on them. Add service channel initializers to the <see
-         cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ChannelInitializers" />
+        >Defines the interface used to inspect and add state to channels when they are first created. This can be used to track all outstanding sessions, for instance, so the service can send messages on them. Add service channel initializers to the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ChannelInitializers" />
 
         
 
-         collection. Add client channel initializers to the <see
-         cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ChannelInitializers" />
+         collection. Add client channel initializers to the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ChannelInitializers" />
 
         
 
@@ -57,13 +55,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.ServiceModel.Dispatcher.IChannelInitializer" />
+            >Initializes the <see cref="T:System.ServiceModel.Dispatcher.IChannelInitializer" />
 
             
 
-             class with a specified <see
-             cref="T:System.ServiceModel.IClientChannel" />
+             class with a specified <see cref="T:System.ServiceModel.IClientChannel" />
 
             
 
@@ -71,17 +67,19 @@
           >
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.IClientChannel" />
+          The <see cref="T:System.ServiceModel.IClientChannel" />
 
           
 
-           used to initialize the <see
-           cref="T:System.ServiceModel.Dispatcher.IChannelInitializer" />
+           used to initialize the <see cref="T:System.ServiceModel.Dispatcher.IChannelInitializer" />
 
           
 

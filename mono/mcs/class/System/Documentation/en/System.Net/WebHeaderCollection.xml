@@ -44,18 +44,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.WebHeaderCollection" />
+        >The <see cref="T:System.Net.WebHeaderCollection" />
 
         
 
-         class is generally accessed through <see
-         cref="P:System.Net.WebRequest.Headers" />
+         class is generally accessed through <see cref="P:System.Net.WebRequest.Headers" />
 
         
 
-         or <see
-         cref="P:System.Net.WebResponse.Headers" />
+         or <see cref="P:System.Net.WebResponse.Headers" />
 
         
 
@@ -133,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -167,13 +163,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface for the <see
-             cref="T:System.Net.WebHeaderCollection" />
+             interface for the <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -183,18 +177,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
-             class from the specified instances of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -202,34 +193,38 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           containing the information required to serialize the <see
-           cref="T:System.Net.WebHeaderCollection" />
+           containing the information required to serialize the <see cref="T:System.Net.WebHeaderCollection" />
 
           
 
           . </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           containing the source of the serialized stream associated with the new <see
-           cref="T:System.Net.WebHeaderCollection" />
+           containing the source of the serialized stream associated with the new <see cref="T:System.Net.WebHeaderCollection" />
 
           
 
@@ -265,13 +260,11 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
@@ -291,8 +284,7 @@
 
             
 
-             is <see
-             cref="F:System.String.Empty" />
+             is <see cref="F:System.String.Empty" />
 
             
 
@@ -307,32 +299,27 @@
              is a protected header that can only be set with a property accessor or by the system. </para
           >
           <para>-or-</para>
-          <para>
-            <c>value</c>
+          <para><c>value</c>
 
             
 
-             contains invalid characters.</para
-          >
+             contains invalid characters.</para>
         </exception>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="header" />
+            >The <paramref name="header" />
 
             
 
              parameter must be specified in the format "name:value". If the specified header does not exist in the collection, a new header is added to the collection.</para
           >
           <para
-            >If the header specified in <paramref
-             name="header" />
+            >If the header specified in <paramref name="header" />
 
             
 
-             is already present in the collection, the value part of the <paramref
-             name="header" />
+             is already present in the collection, the value part of the <paramref name="header" />
 
             
 
@@ -344,7 +331,11 @@
           <para>Inserts the specified header into the collection.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -378,16 +369,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified header does not exist, the <see
-             cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
+            >If the specified header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the specified header is already present, <paramref
-             name="value" />
+            >If the specified header is already present, <paramref name="value" />
 
             
 
@@ -399,14 +388,22 @@
           <para>Inserts the specified header with the specified value into the collection.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -439,16 +436,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified header does not exist, the <see
-             cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
+            >If the specified header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the specified header is already present, <paramref
-             name="value" />
+            >If the specified header is already present, <paramref name="value" />
 
             
 
@@ -460,14 +455,22 @@
           <para>Inserts the specified header with the specified value into the collection.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -508,13 +511,11 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-             or <see
-             cref="F:System.String.Empty" />
+             or <see cref="F:System.String.Empty" />
 
             
 
@@ -540,31 +541,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in <paramref
-             name="name" />
+            >If the header specified in <paramref name="name" />
 
             
 
-             does not exist, the <see
-             cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
+             does not exist, the <see cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the header specified in <paramref
-             name="name" />
+            >If the header specified in <paramref name="name" />
 
             
 
-             is already present, <paramref
-             name="value" />
+             is already present, <paramref name="value" />
 
             
 
-             is added to the existing comma-separated list of values associated with <paramref
-             name="name" />
+             is added to the existing comma-separated list of values associated with <paramref name="name" />
 
             
 
@@ -576,14 +572,22 @@
           <para>Inserts a header with the specified name and value into the collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -625,13 +629,11 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-             or <see
-             cref="F:System.String.Empty" />
+             or <see cref="F:System.String.Empty" />
 
             
 
@@ -649,8 +651,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebHeaderCollection.AddWithoutValidate(System.String,System.String)" />
+            >The <see cref="M:System.Net.WebHeaderCollection.AddWithoutValidate(System.String,System.String)" />
 
             
 
@@ -662,14 +663,22 @@
           <para>Inserts a header into the collection without checking whether the header is on the restricted header list.</para>
         </summary>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to add to the collection. </param
         >
         <param name="headerValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -770,8 +779,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -779,7 +787,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -809,8 +821,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns null if there is no <paramref
-             name="name" />
+            >This method returns null if there is no <paramref name="name" />
 
             
 
@@ -824,8 +835,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -833,7 +843,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -864,8 +878,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that can iterate through the <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >Returns an enumerator that can iterate through the <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -875,13 +888,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Net.WebHeaderCollection" />
+             for the <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -917,8 +928,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -926,7 +936,11 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -960,8 +974,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -971,8 +984,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -980,24 +992,30 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -1037,8 +1055,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of header values stored in the <paramref
-             name="index" />
+            >Gets an array of header values stored in the <paramref name="index" />
 
             
 
@@ -1050,7 +1067,11 @@
           <para>An array of header strings.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1083,15 +1104,13 @@
       <Docs>
         <example>
           <para
-            >This example demonstrates the <see
-             cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" />
+            >This example demonstrates the <see cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" />
 
             
 
              method.</para
           >
-          <code lang="C#"
-            >
+          <code lang="C#">
 using System;
 using System.Net;
 
@@ -1143,7 +1162,11 @@ Transfer-Encoding:</para>
           <para>An array of header strings.</para>
         </returns>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1180,13 +1203,11 @@ Transfer-Encoding:</para>
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
@@ -1204,8 +1225,7 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" />
+            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" />
 
             
 
@@ -1262,7 +1282,11 @@ Transfer-Encoding:</para>
           <para>true if the header is restricted; otherwise false.</para>
         </returns>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1296,8 +1320,7 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" />
+            >The <see cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" />
 
             
 
@@ -1354,14 +1377,22 @@ Transfer-Encoding:</para>
           <para>true if the header is restricted; otherwise, false.</para>
         </returns>
         <param name="headerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to test.</param
         >
         <param name="response">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1476,8 +1507,7 @@ Transfer-Encoding:</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >Implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
@@ -1485,7 +1515,11 @@ Transfer-Encoding:</para>
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1529,12 +1563,15 @@ Transfer-Encoding:</para>
           <para>Removes the specified header from the collection.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.HttpRequestHeader" />
+          The <see cref="T:System.Net.HttpRequestHeader" />
 
           
 
@@ -1578,12 +1615,15 @@ Transfer-Encoding:</para>
           <para>Removes the specified header from the collection.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.HttpResponseHeader" />
+          The <see cref="T:System.Net.HttpResponseHeader" />
 
           
 
@@ -1619,13 +1659,11 @@ Transfer-Encoding:</para>
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
@@ -1663,7 +1701,11 @@ Transfer-Encoding:</para>
           <para>Removes the specified header from the collection.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1697,21 +1739,18 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in the header does not exist, the <see
-             cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" />
+            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the header specified in <paramref
-             name="header" />
+            >If the header specified in <paramref name="header" />
 
             
 
-             is already present, <paramref
-             name="value" />
+             is already present, <paramref name="value" />
 
             
 
@@ -1723,19 +1762,26 @@ Transfer-Encoding:</para>
           <para>Sets the specified header to the specified value.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.HttpRequestHeader" />
+          The <see cref="T:System.Net.HttpRequestHeader" />
 
           
 
            value to set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1768,21 +1814,18 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in the header does not exist, the <see
-             cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" />
+            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the header specified in <paramref
-             name="header" />
+            >If the header specified in <paramref name="header" />
 
             
 
-             is already present, <paramref
-             name="value" />
+             is already present, <paramref name="value" />
 
             
 
@@ -1794,19 +1837,26 @@ Transfer-Encoding:</para>
           <para>Sets the specified header to the specified value.</para>
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.HttpResponseHeader" />
+          The <see cref="T:System.Net.HttpResponseHeader" />
 
           
 
            value to set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1846,13 +1896,11 @@ Transfer-Encoding:</para>
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-           or <see
-           cref="F:System.String.Empty" />
+           or <see cref="F:System.String.Empty" />
 
           
 
@@ -1886,21 +1934,18 @@ Transfer-Encoding:</para>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the header specified in the header does not exist, the <see
-             cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" />
+            >If the header specified in the header does not exist, the <see cref="M:System.Net.WebHeaderCollection.Set(System.Net.HttpRequestHeader,System.String)" />
 
             
 
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
-            >If the header specified in <paramref
-             name="header" />
+            >If the header specified in <paramref name="header" />
 
             
 
-             is already present, <paramref
-             name="value" />
+             is already present, <paramref name="value" />
 
             
 
@@ -1912,14 +1957,22 @@ Transfer-Encoding:</para>
           <para>Sets the specified header to the specified value.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The header to set. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1955,8 +2008,7 @@ Transfer-Encoding:</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes this instance into the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -1964,19 +2016,26 @@ Transfer-Encoding:</para>
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object into which this <see
-           cref="T:System.Net.WebHeaderCollection" />
+          The object into which this <see cref="T:System.Net.WebHeaderCollection" />
 
           
 
            will be serialized. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2005,8 +2064,7 @@ Transfer-Encoding:</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >Converts the <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -2016,8 +2074,7 @@ Transfer-Encoding:</para>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Byte" />
+            >A <see cref="T:System.Byte" />
 
             
 
@@ -2051,8 +2108,7 @@ Transfer-Encoding:</para>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.String" />
+            >The <see cref="T:System.String" />
 
             
 

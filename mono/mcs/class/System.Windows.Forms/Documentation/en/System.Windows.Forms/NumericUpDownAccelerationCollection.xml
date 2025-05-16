@@ -28,13 +28,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The elements in the <see
-         cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+        >The elements in the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
         
 
-         are sorted by the <see
-         cref="P:System.Windows.Forms.NumericUpDownAcceleration.Seconds" />
+         are sorted by the <see cref="P:System.Windows.Forms.NumericUpDownAcceleration.Seconds" />
 
         
 
@@ -44,13 +42,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a sorted collection of <see
-         cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+        >Represents a sorted collection of <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
         
 
-         objects in the <see
-         cref="T:System.Windows.Forms.NumericUpDown" />
+         objects in the <see cref="T:System.Windows.Forms.NumericUpDown" />
 
         
 
@@ -71,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -100,8 +95,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The item is added while preserving the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >The item is added while preserving the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -111,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+            >Adds a new <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
-             to the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+             to the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -125,17 +117,19 @@
           >
         </summary>
         <param name="acceleration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+          The <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
           
 
-           to add to the <see
-           cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+           to add to the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
           
 
@@ -169,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the elements of the specified array to the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Adds the elements of the specified array to the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -178,12 +171,15 @@
           >
         </summary>
         <param name="accelerations">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+          An array of type <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
           
 
@@ -206,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all elements from the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Removes all elements from the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -236,13 +231,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Determines whether the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
-             contains a specific <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+             contains a specific <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
@@ -252,13 +245,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+            >true if the <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
-             is found in the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+             is found in the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -266,17 +257,19 @@
           >
         </returns>
         <param name="acceleration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+          The <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
           
 
-           to locate in the <see
-           cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+           to locate in the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
           
 
@@ -305,13 +298,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Copies the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
-             values to a one-dimensional <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+             values to a one-dimensional <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
@@ -319,29 +310,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+          The one-dimensional <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
           
 
-           that is the destination of the values copied from <see
-           cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+           that is the destination of the values copied from <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -364,8 +360,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of objects in the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Gets the number of objects in the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -392,8 +387,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -444,13 +438,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+            >Removes the first occurrence of the specified <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
-             from the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+             from the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -460,13 +452,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+            >true if the <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
             
 
-             is removed from <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+             is removed from <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
@@ -474,12 +464,15 @@
           >
         </returns>
         <param name="acceleration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+          The <see cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
           
 
@@ -523,13 +516,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 

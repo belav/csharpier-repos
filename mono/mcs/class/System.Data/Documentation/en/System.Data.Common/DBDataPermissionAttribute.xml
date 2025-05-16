@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DBDataPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DBDataPermissionAttribute" />
 
             
 
@@ -54,7 +53,11 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -127,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Identifies whether the list of connection string parameters identified by the <see
-             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictions" />
+            >Identifies whether the list of connection string parameters identified by the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictions" />
 
             
 
@@ -152,24 +154,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Connection string parameters are identified in the form &lt;parameter name&gt;=. Multiple parameters can be specified, delimited using a semicolon (;). The connection string parameters listed may be identified as either the only additional parameters allowed or additional parameters that are not allowed using the <see
-             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+            >Connection string parameters are identified in the form &lt;parameter name&gt;=. Multiple parameters can be specified, delimited using a semicolon (;). The connection string parameters listed may be identified as either the only additional parameters allowed or additional parameters that are not allowed using the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
 
             
 
              property.</para
           >
           <para
-            >If no key restrictions are specified, and the <see
-             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+            >If no key restrictions are specified, and the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
 
             
 
              property is set to AllowOnly, no additional connection string parameters are allowed.</para
           >
           <para
-            >If no key restrictions are specified, and the <see
-             cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
+            >If no key restrictions are specified, and the <see cref="P:System.Data.Common.DBDataPermissionAttribute.KeyRestrictionBehavior" />
 
             
 

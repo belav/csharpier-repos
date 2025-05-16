@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.TrustSection" />
+        >The <see cref="T:System.Web.Configuration.TrustSection" />
 
         
 
@@ -40,26 +39,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.TrustSection.#ctor" />
+            >The <see cref="M:System.Web.Configuration.TrustSection.#ctor" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.TrustSection" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.TrustSection" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The following table shows the default settings that are used for the <see
-             cref="M:System.Web.Configuration.TrustSection.#ctor" />
+            >The following table shows the default settings that are used for the <see cref="M:System.Web.Configuration.TrustSection.#ctor" />
 
             
 
@@ -101,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.TrustSection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.TrustSection" />
 
             
 
@@ -134,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.TrustSection.Level" />
+            >The <see cref="P:System.Web.Configuration.TrustSection.Level" />
 
             
 
@@ -187,18 +180,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.TrustSection.OriginUrl" />
+            >The <see cref="P:System.Web.Configuration.TrustSection.OriginUrl" />
 
             
 
-             property specifies the URL of origin for an application. If present, this can be used for some permissions, such as those associated with the <see
-             cref="T:System.Net.WebRequest" />
+             property specifies the URL of origin for an application. If present, this can be used for some permissions, such as those associated with the <see cref="T:System.Net.WebRequest" />
 
             
 
-             class. This enables you to specify a single URL that is used to create permission through a <see
-             cref="T:System.Net.WebPermission" />
+             class. This enables you to specify a single URL that is used to create permission through a <see cref="T:System.Net.WebPermission" />
 
             
 

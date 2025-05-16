@@ -24,28 +24,24 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET uses the <see
-         cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
+        >ASP.NET uses the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
         
 
-         class whenever it parses declarative two-way data-binding within the templated content of an ASP.NET control such as <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+         class whenever it parses declarative two-way data-binding within the templated content of an ASP.NET control such as <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
         . It is not meant to be used directly in your code.</para
       >
       <para
-        >For more information about ASP.NET data binding, expressions, and syntax, see <format
-         type="text/html">
+        >For more information about ASP.NET data binding, expressions, and syntax, see <format type="text/html">
           <a href="ab7b2846-975b-4057-a948-45527497c742">Data Binding</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="14cdd57d-0f82-4667-b503-73e1a96f136a">Data-Binding Expression Syntax</a>
         </format>
 
@@ -57,13 +53,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the default implementation of an <see
-         cref="T:System.Web.UI.IBindableTemplate" />
+        >Provides the default implementation of an <see cref="T:System.Web.UI.IBindableTemplate" />
 
         
 
-         object, which ASP.NET uses whenever it parses two-way data-binding within the templated content of an ASP.NET control such as <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+         object, which ASP.NET uses whenever it parses two-way data-binding within the templated content of an ASP.NET control such as <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
@@ -91,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
             
 
@@ -100,24 +93,30 @@
           >
         </summary>
         <param name="buildTemplateMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A delegate used to handle the <see
-           cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+          A delegate used to handle the <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
 
           
 
            method call.</param
         >
         <param name="extractTemplateValuesMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A delegate used to handle the <see
-           cref="M:System.Web.UI.CompiledBindableTemplateBuilder.ExtractValues(System.Web.UI.Control)" />
+          A delegate used to handle the <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.ExtractValues(System.Web.UI.Control)" />
 
           
 
@@ -145,18 +144,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.CompiledBindableTemplateBuilder.ExtractValues(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.ExtractValues(System.Web.UI.Control)" />
 
             
 
-             method is the <see
-             cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
+             method is the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
             
 
-             class's implementation of the <see
-             cref="M:System.Web.UI.IBindableTemplate.ExtractValues(System.Web.UI.Control)" />
+             class's implementation of the <see cref="M:System.Web.UI.IBindableTemplate.ExtractValues(System.Web.UI.Control)" />
 
             
 
@@ -170,8 +166,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+            >An <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
@@ -179,12 +174,15 @@
           >
         </returns>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -212,18 +210,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+            >The <see cref="M:System.Web.UI.CompiledBindableTemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
 
             
 
-             method is the <see
-             cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
+             method is the <see cref="T:System.Web.UI.CompiledBindableTemplateBuilder" />
 
             
 
-             class's implementation of the <see
-             cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" />
+             class's implementation of the <see cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" />
 
             
 
@@ -233,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines the <see
-             cref="T:System.Web.UI.Control" />
+            >Defines the <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -242,12 +236,15 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 

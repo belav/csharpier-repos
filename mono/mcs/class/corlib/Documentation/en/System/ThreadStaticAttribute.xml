@@ -33,16 +33,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A static field marked with <see
-         cref="T:System.ThreadStaticAttribute" />
+        >A static field marked with <see cref="T:System.ThreadStaticAttribute" />
 
         
 
          is not shared between threads. Each executing thread has a separate instance of the field, and independently sets and gets values for that field. If the field is accessed on a different thread, it will contain a different value.</para
       >
       <para
-        >Note that in addition to applying the <see
-         cref="T:System.ThreadStaticAttribute" />
+        >Note that in addition to applying the <see cref="T:System.ThreadStaticAttribute" />
 
         
 
@@ -53,8 +51,7 @@
       </block>
       <para>Use this attribute as it is, and do not derive from it. </para>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ThreadStaticAttribute" />
 
             
 

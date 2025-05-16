@@ -39,16 +39,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error. This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.OperationCanceledException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.OperationCanceledException" />
 
             
 
@@ -90,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
@@ -117,8 +114,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
@@ -153,8 +149,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -167,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
@@ -176,7 +170,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,13 +203,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
-             class with a reference to the <see
-             cref="T:System.Threading.Tasks.Task" />
+             class with a reference to the <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -219,7 +215,11 @@
           >
         </summary>
         <param name="task">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,7 +249,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkID=248602">XML and SOAP Serialization</see>
+              cref="http://go.microsoft.com/fwlink/p/?LinkID=248602"
+              >XML and SOAP Serialization</see
+            >
 
             
 
@@ -259,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
@@ -268,14 +269,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -304,26 +313,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
@@ -358,8 +363,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified in <paramref
-                   name="message" />
+                  >The error message string specified in <paramref name="message" />
 
                   
 
@@ -372,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >Initializes a new instance of the <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 
@@ -381,19 +384,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message that describes the exception. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -419,8 +429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is permissible for no Task to be associated with a <see
-             cref="T:System.Threading.Tasks.TaskCanceledException" />
+            >It is permissible for no Task to be associated with a <see cref="T:System.Threading.Tasks.TaskCanceledException" />
 
             
 

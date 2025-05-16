@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+        >A <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
 
         
 
-         event is raised when a property is changed on a component. A <see
-         cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+         event is raised when a property is changed on a component. A <see cref="T:System.ComponentModel.PropertyChangedEventArgs" />
 
         
 
@@ -43,8 +41,7 @@
 
         
 
-         provides the <see
-         cref="P:System.ComponentModel.PropertyChangedEventArgs.PropertyName" />
+         provides the <see cref="P:System.ComponentModel.PropertyChangedEventArgs.PropertyName" />
 
         
 
@@ -54,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+        >Provides data for the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
 
         
 
@@ -87,13 +83,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="F:System.String.Empty" />
+            >An <see cref="F:System.String.Empty" />
 
             
 
-             value or null for the <paramref
-             name="propertyName" />
+             value or null for the <paramref name="propertyName" />
 
             
 
@@ -103,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyChangedEventArgs" />
 
             
 
@@ -112,7 +105,11 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -137,13 +134,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="F:System.String.Empty" />
+            >An <see cref="F:System.String.Empty" />
 
             
 
-             value or null for the <paramref
-             name="propertyName" />
+             value or null for the <paramref name="propertyName" />
 
             
 

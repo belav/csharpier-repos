@@ -56,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Contracts.ContractClassAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractClassAttribute" />
 
             
 
@@ -65,7 +64,11 @@
           >
         </summary>
         <param name="typeContainingContracts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

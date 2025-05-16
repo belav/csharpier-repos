@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.LosFormatter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.LosFormatter" />
 
             
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.LosFormatter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.LosFormatter" />
 
             
 
@@ -75,14 +73,22 @@
           >
         </summary>
         <param name="enableMac">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to enable view-state MAC; otherwise, false.</param
         >
         <param name="macKeyModifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -105,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.LosFormatter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.LosFormatter" />
 
             
 
@@ -114,14 +119,22 @@
           >
         </summary>
         <param name="enableMac">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to enable view-state MAC; otherwise, false. </param
         >
         <param name="macKeyModifier">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -146,13 +159,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
+            >This version of the <see cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
 
             
 
-             method is used to transform the view-state value contained in a <see
-             cref="T:System.IO.Stream" />
+             method is used to transform the view-state value contained in a <see cref="T:System.IO.Stream" />
 
             
 
@@ -161,7 +172,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -174,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the view-state value contained in a <see
-             cref="T:System.IO.Stream" />
+            >Transforms the view-state value contained in a <see cref="T:System.IO.Stream" />
 
             
 
@@ -187,12 +197,15 @@
           <para>A LOS-formatted object.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
@@ -220,13 +233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
+            >This version of the <see cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
 
             
 
-             method is used to transform the view-state value contained in a <see
-             cref="T:System.IO.TextReader" />
+             method is used to transform the view-state value contained in a <see cref="T:System.IO.TextReader" />
 
             
 
@@ -235,7 +246,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -248,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms the view-state value contained in a <see
-             cref="T:System.IO.TextReader" />
+            >Transforms the view-state value contained in a <see cref="T:System.IO.TextReader" />
 
             
 
@@ -261,12 +271,15 @@
           <para>A LOS-formatted object.</para>
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextReader" />
+          A <see cref="T:System.IO.TextReader" />
 
           
 
@@ -291,8 +304,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
+            >This version of the <see cref="M:System.Web.UI.LosFormatter.Deserialize(System.IO.Stream)" />
 
             
 
@@ -301,7 +313,7 @@
           <block subset="none" type="note">
             <para
               >Calling this method with untrusted data is a security risk. Call this method only with trusted data. For more information, see <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=330378"
+                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
 
@@ -320,7 +332,11 @@
           <para>A LOS-formatted object.</para>
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -349,13 +365,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" />
+            >This version of the <see cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" />
 
             
 
-             method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see
-             cref="T:System.IO.Stream" />
+             method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see cref="T:System.IO.Stream" />
 
             
 
@@ -365,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see
-             cref="T:System.IO.Stream" />
+            >Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see cref="T:System.IO.Stream" />
 
             
 
@@ -374,19 +387,26 @@
           >
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            to receive the transformed value. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -415,13 +435,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" />
+            >This version of the <see cref="M:System.Web.UI.LosFormatter.Serialize(System.IO.Stream,System.Object)" />
 
             
 
-             method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see
-             cref="T:System.IO.TextWriter" />
+             method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -431,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see
-             cref="T:System.IO.TextWriter" />
+            >Transforms a limited object serialization (LOS)-formatted object into a view-state value and places the results into a <see cref="T:System.IO.TextWriter" />
 
             
 
@@ -440,19 +457,26 @@
           >
         </summary>
         <param name="output">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.TextWriter" />
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
            to receive the transformed value. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -28,21 +28,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Collections.Generic.Dictionary`2.Enumerator.Current" />
+        >The <see cref="P:System.Collections.Generic.Dictionary`2.Enumerator.Current" />
 
         
 
          property returns an instance of this type.</para
       >
       <para
-        >The foreach statement of the C# language (for each in C++, For Each in Visual Basic) requires the type of the elements in the collection. Since each element of a collection based on <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        >The foreach statement of the C# language (for each in C++, For Each in Visual Basic) requires the type of the elements in the collection. Since each element of a collection based on <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
-         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.Generic.KeyValuePair`2" />
+         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
         
 
@@ -124,23 +121,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation consists of the string representations of the key and value, separated by a comma and a space, and enclosed in square brackets. For example, the <see
-             cref="M:System.Collections.Generic.KeyValuePair`2.ToString" />
+            >The string representation consists of the string representations of the key and value, separated by a comma and a space, and enclosed in square brackets. For example, the <see cref="M:System.Collections.Generic.KeyValuePair`2.ToString" />
 
             
 
-             method for a <see
-             cref="T:System.Collections.Generic.KeyValuePair`2" />
+             method for a <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
             
 
-             structure with the string <see
-             cref="P:System.Collections.Generic.KeyValuePair`2.Key" />
+             structure with the string <see cref="P:System.Collections.Generic.KeyValuePair`2.Key" />
 
             
 
-             "Test" and the integer <see
-             cref="P:System.Collections.Generic.KeyValuePair`2.Value" />
+             "Test" and the integer <see cref="P:System.Collections.Generic.KeyValuePair`2.Value" />
 
             
 
@@ -153,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the <see
-             cref="T:System.Collections.Generic.KeyValuePair`2" />
+            >Returns a string representation of the <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
             
 
@@ -164,8 +156,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the <see
-             cref="T:System.Collections.Generic.KeyValuePair`2" />
+            >A string representation of the <see cref="T:System.Collections.Generic.KeyValuePair`2" />
 
             
 

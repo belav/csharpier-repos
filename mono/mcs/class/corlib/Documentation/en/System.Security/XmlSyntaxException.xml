@@ -34,16 +34,14 @@
 
         
 
-         uses the default <see
-         cref="M:System.Object.Equals(System.Object)" />
+         uses the default <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
          implementation, which supports reference equality.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Security.XmlSyntaxException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Security.XmlSyntaxException" />
 
         
 
@@ -74,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -117,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >Initializes a new instance of the <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -148,8 +144,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The line number of an XML stream is updated whenever a newline character is detected. Numbering begins with 1 for the first line.</para>
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -184,8 +179,7 @@
               </term>
               <description>
                 <para
-                  >"Invalid syntax on line <paramref
-                   name="lineNumber" />
+                  >"Invalid syntax on line <paramref name="lineNumber" />
 
                   
 
@@ -198,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >Initializes a new instance of the <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -207,7 +200,11 @@
           >
         </summary>
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -278,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >Initializes a new instance of the <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -287,7 +282,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -320,8 +319,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The line number of an XML stream is updated whenever a newline character is detected. Numbering begins with 1 for the first line.</para>
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -356,13 +354,11 @@
               </term>
               <description>
                 <para
-                  >"Invalid syntax on line <paramref
-                   name="lineNumber" />
+                  >"Invalid syntax on line <paramref name="lineNumber" />
 
                   
 
-                   - <paramref
-                   name="message" />
+                   - <paramref name="message" />
 
                   
 
@@ -375,8 +371,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >Initializes a new instance of the <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -384,14 +379,22 @@
           >
         </summary>
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The line number of the XML stream where the XML syntax error was detected. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -423,26 +426,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -484,8 +483,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.XmlSyntaxException" />
+            >Initializes a new instance of the <see cref="T:System.Security.XmlSyntaxException" />
 
             
 
@@ -493,19 +491,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 

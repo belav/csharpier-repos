@@ -15,8 +15,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
+        >The <see cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
+            >Gets a <see cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
 
             
 
@@ -93,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Type" />
+            >Gets a <see cref="T:System.Type" />
 
             
 
@@ -122,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Gets the <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -148,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 

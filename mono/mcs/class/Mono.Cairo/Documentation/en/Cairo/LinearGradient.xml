@@ -11,8 +11,7 @@
   <Interfaces />
   <Docs>
     <summary
-      >Extends <see
-       cref="T:Cairo.Gradient" />
+      >Extends <see cref="T:Cairo.Gradient" />
 
       
 
@@ -23,8 +22,7 @@
 </para>
       <para>
         <example>
-          <code lang="C#"
-            >
+          <code lang="C#">
 Pattern pat;
 
 pat = new LinearGradient (0.0, 0.0,  0.0, 1.0);
@@ -61,8 +59,7 @@ pat.Destroy ();
         <param name="x1">x coordinate of the end point</param>
         <param name="y1">y coordinate of the end point</param>
         <summary
-          >Create a new linear gradient <see
-           cref="T:Cairo.Pattern" />
+          >Create a new linear gradient <see cref="T:Cairo.Pattern" />
 
           
 
@@ -88,8 +85,7 @@ pat.Destroy ();
       <Docs>
         <summary>Gets the gradient endpoints for a linear gradient</summary>
         <value
-          >A Array of <see
-           cref="t:Cairo.PointD" />
+          >A Array of <see cref="t:Cairo.PointD" />
 
           
 

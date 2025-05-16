@@ -37,8 +37,7 @@
       <para>Setting the attribute to false on the assembly hides all public types within the assembly. You can selectively make types within the assembly visible by setting the individual types to true. Setting the attribute to false on a specific type hides that type and its members. However, you cannot make members of a type visible if the type is invisible. Setting the attribute to false on a type prevents that type from being exported to a type library; classes are not registered; interfaces are never responsive to unmanaged QueryInterface calls.</para>
       <para>Unless you explicitly set a class and its members to false, inherited classes can expose to COM base class members that are invisible in the original class. For example, if you set ClassA to false and do not apply the attribute to its members, the class and its members are invisible to COM. However, if you derive ClassB from ClassA and export ClassB to COM, ClassA members become visible base class members of ClassB.</para>
       <para
-        >For a detailed description of the export process, see <format
-         type="text/html">
+        >For a detailed description of the export process, see <format type="text/html">
           <a href="3A37EEFB-A76C-4000-9080-7DBBF66A4896"
             >[&lt;topic://cpconassemblytotypelibraryconversionsummary&gt;]</a
           >
@@ -81,7 +80,11 @@
           <para>Initializes a new instance of the ComVisibleAttribute class.</para>
         </summary>
         <param name="visibility">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

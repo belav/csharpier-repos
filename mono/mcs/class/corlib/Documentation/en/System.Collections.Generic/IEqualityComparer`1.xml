@@ -27,87 +27,72 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface allows the implementation of customized equality comparison for collections. That is, you can create your own definition of equality for type <paramref
-         name="T" />
+        >This interface allows the implementation of customized equality comparison for collections. That is, you can create your own definition of equality for type <paramref name="T" />
 
         
 
-        , and specify that this definition be used with a collection type that accepts the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+        , and specify that this definition be used with a collection type that accepts the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
-         generic interface. In the .NET Framework, constructors of the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         generic interface. In the .NET Framework, constructors of the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
          generic collection type accept this interface.</para
       >
       <para
-        >A default implementation of this interface is provided by the <see
-         cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
+        >A default implementation of this interface is provided by the <see cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
 
         
 
-         property of the <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+         property of the <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-         generic class. The <see
-         cref="T:System.StringComparer" />
+         generic class. The <see cref="T:System.StringComparer" />
 
         
 
-         class implements <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+         class implements <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
-         of type <see
-         cref="T:System.String" />
+         of type <see cref="T:System.String" />
 
         
 
         . </para
       >
       <para
-        >This interface supports only equality comparisons. Customization of comparisons for sorting and ordering is provided by the <see
-         cref="T:System.Collections.Generic.IComparer`1" />
+        >This interface supports only equality comparisons. Customization of comparisons for sorting and ordering is provided by the <see cref="T:System.Collections.Generic.IComparer`1" />
 
         
 
          generic interface. </para
       >
       <para
-        >We recommend that you derive from the <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+        >We recommend that you derive from the <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-         class instead of implementing the <see
-         cref="T:System.Collections.Generic.IEqualityComparer`1" />
+         class instead of implementing the <see cref="T:System.Collections.Generic.IEqualityComparer`1" />
 
         
 
-         interface, because the <see
-         cref="T:System.Collections.Generic.EqualityComparer`1" />
+         interface, because the <see cref="T:System.Collections.Generic.EqualityComparer`1" />
 
         
 
-         class tests for equality using the <see
-         cref="M:System.IEquatable`1.Equals(`0)" />
+         class tests for equality using the <see cref="M:System.IEquatable`1.Equals(`0)" />
 
         
 
-         method instead of the <see
-         cref="M:System.Object.Equals(System.Object)" />
+         method instead of the <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-         method. This is consistent with the Contains, IndexOf, LastIndexOf, and Remove methods of the <see
-         cref="T:System.Collections.Generic.Dictionary`2" />
+         method. This is consistent with the Contains, IndexOf, LastIndexOf, and Remove methods of the <see cref="T:System.Collections.Generic.Dictionary`2" />
 
         
 
@@ -139,22 +124,16 @@
         <Parameter Name="y" Type="T" />
       </Parameters>
       <Docs>
-        <param name="x"
-          >First <see
-           langword="T" />
+        <param name="x">First <see langword="T" />
 
           
 
-           to compare.</param
-        >
-        <param name="y"
-          >Second <see
-           langword="T" />
+           to compare.</param>
+        <param name="y">Second <see langword="T" />
 
           
 
-           to compare.</param
-        >
+           to compare.</param>
         <summary>
           <para>Determines whether the specified objects are equal.</para>
         </summary>
@@ -164,8 +143,7 @@
 
             
 
-             if the specified objects are equal; otherwise, <see
-             langword="false" />
+             if the specified objects are equal; otherwise, <see langword="false" />
 
             
 
@@ -206,19 +184,16 @@ y.Equals(z) implies x.Equals(z); for any values x, y and z for  which these expr
         </returns>
         <remarks>
           <para
-            >To produce a hash function for the given object. <block
-             subset="none" type="note"
+            >To produce a hash function for the given object. <block subset="none" type="note"
               > A hash function is used to
    quickly generate a number (a hash code) corresponding to the value of an object.
-   Hash functions are used with <see
-               langword="hashtables" />
+   Hash functions are used with <see langword="hashtables" />
 
               
 
               . A good hash function
    algorithm rarely generates hash codes that collide. For more information about
-   hash functions, see <paramref
-               name="The Art of Computer Programming" />
+   hash functions, see <paramref name="The Art of Computer Programming" />
 
               
 
@@ -233,18 +208,15 @@ y.Equals(z) implies x.Equals(z); for any values x, y and z for  which these expr
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentNullException"
-          >The type of <paramref
-           name="obj" />
+          >The type of <paramref name="obj" />
 
           
 
-           is a reference type and <paramref
-           name="obj" />
+           is a reference type and <paramref name="obj" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 

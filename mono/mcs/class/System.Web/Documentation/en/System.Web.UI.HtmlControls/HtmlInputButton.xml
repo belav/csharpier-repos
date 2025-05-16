@@ -32,34 +32,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
         
 
          class to create button controls on a Web page. An &lt;input type=button&gt; HTML element is a push button with no default behavior when clicked. An &lt;input type=submit&gt; HTML element is a button that submits a form when clicked. An &lt;input type=reset&gt; HTML button resets all controls to their initial values when clicked.</para
       >
       <para
-        >In ASP.NET 2.0, use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
+        >In ASP.NET 2.0, use the <see cref="T:System.Web.UI.HtmlControls.HtmlInputReset" />
 
         
 
-         class and the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
+         class and the <see cref="T:System.Web.UI.HtmlControls.HtmlInputSubmit" />
 
         
 
          class to create Reset and Submit buttons, respectively.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlInputButton.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.#ctor" />
 
         
 
@@ -81,8 +76,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -114,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -139,8 +132,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -165,8 +157,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="type" />
+                  >The value of the <paramref name="type" />
 
                   
 
@@ -176,8 +167,7 @@
             </item>
           </list>
           <para
-            >The following table shows the different possible values for the <paramref
-             name="type" />
+            >The following table shows the different possible values for the <paramref name="type" />
 
             
 
@@ -223,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -232,7 +221,11 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,34 +249,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, page validation is performed when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >By default, page validation is performed when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
-            >You can specify or determine whether validation is performed on both the client and the server when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >You can specify or determine whether validation is performed on both the client and the server when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
-             control is clicked by using the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+             control is clicked by using the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
 
             
 
-             property. To prevent validation from being performed, set the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+             property. To prevent validation from being performed, set the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
 
             
 
              property to false.</para
           >
           <para
-            >This property is commonly used in the event handler for the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+            >This property is commonly used in the event handler for the <see cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
 
             
 
@@ -293,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether validation is performed when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >Gets or sets a value indicating whether validation is performed when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -325,18 +312,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputButton.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.OnPreRender(System.EventArgs)" />
 
             
 
-             method overrides the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+             method overrides the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
-             method. <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputButton.OnPreRender(System.EventArgs)" />
+             method. <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.OnPreRender(System.EventArgs)" />
 
             
 
@@ -346,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+            >Raises the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
@@ -355,12 +338,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+          An <see cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
 
           
 
@@ -385,13 +371,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+            >The <see cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
 
             
 
-             event is raised when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+             event is raised when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -399,8 +383,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A Reset button does not raise the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+              >A Reset button does not raise the <see cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
 
               
 
@@ -408,13 +391,11 @@
             >
           </block>
           <para
-            >When you create an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >When you create an <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
-             delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
-             type="text/html">
+             delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
 
@@ -426,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+            >Raises the <see cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
 
             
 
@@ -435,12 +415,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -471,44 +454,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RaisePostBackEvent(System.String)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RaisePostBackEvent(System.String)" />
 
             
 
-             method is used by the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+             method is used by the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
-             control, when it is clicked, to raise a <see
-             cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+             control, when it is clicked, to raise a <see cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
 
             
 
              event.</para
           >
           <para
-            >If the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+            >If the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
 
             
 
-             property is true, the <see
-             cref="M:System.Web.UI.Page.Validate(System.String)" />
+             property is true, the <see cref="M:System.Web.UI.Page.Validate(System.String)" />
 
             
 
-             method is called using the group of controls specified in the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
+             method is called using the group of controls specified in the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
 
             
 
              property.</para
           >
           <para
-            >This method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >This method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -518,8 +494,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises events for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >Raises events for the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -527,7 +502,11 @@
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -551,18 +530,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method overrides the base <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             method overrides the base <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-            .method. <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            .method. <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -572,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the attributes into the specified writer and then calls the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >Renders the attributes into the specified writer and then calls the <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -581,12 +556,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -609,8 +587,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >This event is raised when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -618,8 +595,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A Reset button does not raise the <see
-               cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
+              >A Reset button does not raise the <see cref="E:System.Web.UI.HtmlControls.HtmlInputButton.ServerClick" />
 
               
 
@@ -627,8 +603,7 @@
             >
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -640,8 +615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when an <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >Occurs when an <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
@@ -675,13 +649,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+            >Implements the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 
-             method by calling the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RaisePostBackEvent(System.String)" />
+             method by calling the <see cref="M:System.Web.UI.HtmlControls.HtmlInputButton.RaisePostBackEvent(System.String)" />
 
             
 
@@ -689,12 +661,15 @@
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -721,36 +696,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently from other validation groups on the page. Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
+            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently from other validation groups on the page. Use the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+             property to specify the name of the validation group for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
              control causes validation when it posts back to the server. </para
           >
           <para
-            >This property has an effect only when the value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+            >This property has an effect only when the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
 
             
 
-             property is set to true. When you specify a value for the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
+             property is set to true. When you specify a value for the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.ValidationGroup" />
 
             
 
-             property, only the validation controls that are part of the specified group are validated when the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+             property, only the validation controls that are part of the specified group are validated when the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 
-             control posts back to the server. If you do not specify a value for this property and the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
+             control posts back to the server. If you do not specify a value for this property and the <see cref="P:System.Web.UI.HtmlControls.HtmlInputButton.CausesValidation" />
 
             
 
@@ -760,8 +729,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.HtmlControls.HtmlInputButton" />
 
             
 

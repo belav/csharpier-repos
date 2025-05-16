@@ -29,13 +29,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of parameters relevant to an <see
-         cref="T:System.Data.Odbc.OdbcCommand" />
+        >Represents a collection of parameters relevant to an <see cref="T:System.Data.Odbc.OdbcCommand" />
 
         
 
-         and their respective mappings to columns in a <see
-         cref="T:System.Data.DataSet" />
+         and their respective mappings to columns in a <see cref="T:System.Data.DataSet" />
 
         
 
@@ -61,13 +59,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -77,8 +73,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The index of the new <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -86,12 +81,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -117,13 +115,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             object to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             object to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -133,8 +129,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The index of the new <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -142,12 +137,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
@@ -182,13 +180,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds an <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -198,8 +194,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The index of the new <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -207,19 +202,26 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="odbcType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Odbc.OdbcType" />
+          One of the <see cref="T:System.Data.Odbc.OdbcType" />
 
           
 
@@ -248,23 +250,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use caution when using this overload of the <see
-             cref="M:System.Data.Odbc.OdbcParameterCollection.Add(System.Data.Odbc.OdbcParameter)" />
+            >Use caution when using this overload of the <see cref="M:System.Data.Odbc.OdbcParameterCollection.Add(System.Data.Odbc.OdbcParameter)" />
 
             
 
-             method to specify integer parameter values. Because this overload takes a <paramref
-             name="value" />
+             method to specify integer parameter values. Because this overload takes a <paramref name="value" />
 
             
 
-             of type <see
-             cref="T:System.Object" />
+             of type <see cref="T:System.Object" />
 
             
 
-            , you must convert the integer value to an <see
-             cref="T:System.Object" />
+            , you must convert the integer value to an <see cref="T:System.Object" />
 
             
 
@@ -272,8 +270,7 @@
           >
           <code>parameters.Add("@pname", Convert.ToInt32(0));</code>
           <para
-            >If you do not perform this conversion, the compiler will assume you are attempting to call the <see
-             cref="M:System.Data.Odbc.OdbcParameterCollection.Add(System.String,System.Data.Odbc.OdbcType)" />
+            >If you do not perform this conversion, the compiler will assume you are attempting to call the <see cref="M:System.Data.Odbc.OdbcParameterCollection.Add(System.String,System.Data.Odbc.OdbcType)" />
 
             
 
@@ -283,13 +280,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds an <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -299,8 +294,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The index of the new <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -308,24 +302,30 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.OleDb.OleDbParameter.Value" />
+          The <see cref="P:System.Data.OleDb.OleDbParameter.Value" />
 
           
 
-           of the <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+           of the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -364,13 +364,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds an <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -380,8 +378,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The index of the new <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -389,26 +386,37 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="odbcType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Odbc.OdbcType" />
+          One of the <see cref="T:System.Data.Odbc.OdbcType" />
 
           
 
            values. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -441,13 +449,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds an <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -457,8 +463,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The index of the new <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -466,33 +471,48 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter. </param
         >
         <param name="odbcType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.Odbc.OdbcType" />
+          One of the <see cref="T:System.Data.Odbc.OdbcType" />
 
           
 
            values. </param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of the column. </param
         >
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -519,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of values to the end of the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Adds an array of values to the end of the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -528,12 +547,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
@@ -564,13 +586,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an array of <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Adds an array of <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             values to the end of the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             values to the end of the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -578,12 +598,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          An array of <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -612,8 +635,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a value to the end of the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Adds a value to the end of the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -623,8 +645,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >An <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -632,14 +653,22 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -659,13 +688,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Removes all <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             objects from the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             objects from the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -698,13 +725,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Determines whether the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             is in this <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             is in this <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -714,8 +739,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >true if the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -723,12 +747,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -750,13 +777,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is in this <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             is in this <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -766,8 +791,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >true if the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -775,12 +799,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -806,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether an <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Gets a value indicating whether an <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -819,12 +845,15 @@
           <para>true if the collection contains the parameter; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The name of the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -854,18 +883,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
-             to the specified one-dimensional <see
-             cref="T:System.Array" />
+             to the specified one-dimensional <see cref="T:System.Array" />
 
             
 
-             starting at the specified destination <see
-             cref="T:System.Array" />
+             starting at the specified destination <see cref="T:System.Array" />
 
             
 
@@ -873,29 +899,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Array" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Array" />
 
           
 
@@ -928,13 +959,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Copies all the elements of the current <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             to the specified <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -942,29 +971,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+          The <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
-           that is the destination of the elements copied from the current <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+           that is the destination of the elements copied from the current <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
           .</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A 32-bit integer that represents the index in the <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+          A 32-bit integer that represents the index in the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
@@ -984,8 +1018,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an Integer that contains the number of elements in the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Returns an Integer that contains the number of elements in the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1013,8 +1046,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1024,13 +1056,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerator" />
+            >An <see cref="T:System.Collections.Generic.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             for the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1109,8 +1139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Gets the location of the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -1120,8 +1149,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The zero-based location of the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -1129,12 +1157,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -1156,8 +1187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Object" />
+            >Gets the location of the specified <see cref="T:System.Object" />
 
             
 
@@ -1167,13 +1197,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Object" />
+            >The zero-based location of the specified <see cref="T:System.Object" />
 
             
 
-             that is a <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+             that is a <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -1181,12 +1209,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -1212,8 +1243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Gets the location of the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -1223,8 +1253,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >The zero-based location of the specified <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
@@ -1232,12 +1261,15 @@
           >
         </returns>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive name of the <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The case-sensitive name of the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -1270,13 +1302,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Inserts a <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             object into the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             object into the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1284,24 +1314,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which the object should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          A <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
-           object to be inserted in the <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+           object to be inserted in the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
@@ -1327,13 +1363,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Object" />
+            >Inserts a <see cref="T:System.Object" />
 
             
 
-             into the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             into the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1341,24 +1375,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index at which the object should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
-           to be inserted in the <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+           to be inserted in the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
@@ -1383,8 +1423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1409,8 +1448,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1435,8 +1473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1532,13 +1569,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Removes the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             from the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1546,12 +1581,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          A <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -1573,13 +1611,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Object" />
+            >Removes the <see cref="T:System.Object" />
 
             
 
-             object from the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             object from the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1587,17 +1623,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Object" />
+          A <see cref="T:System.Object" />
 
           
 
-           to be removed from the <see
-           cref="T:System.Data.Odbc.OdbcParameterCollection" />
+           to be removed from the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
           
 
@@ -1623,13 +1661,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Removes the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             from the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1637,12 +1673,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The zero-based index of the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -1671,13 +1710,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Odbc.OdbcParameter" />
+            >Removes the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
             
 
-             from the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+             from the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 
@@ -1685,12 +1722,15 @@
           >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.Odbc.OdbcParameter" />
+          The name of the <see cref="T:System.Data.Odbc.OdbcParameter" />
 
           
 
@@ -1763,8 +1803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Data.Odbc.OdbcParameterCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Data.Odbc.OdbcParameterCollection" />
 
             
 

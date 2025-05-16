@@ -21,23 +21,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The application creates an <see
-         cref="T:System.Data.OleDb.OleDbTransaction" />
+        >The application creates an <see cref="T:System.Data.OleDb.OleDbTransaction" />
 
         
 
-         object by calling <see
-         cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
+         object by calling <see cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
 
         
 
-         on the <see
-         cref="T:System.Data.OleDb.OleDbConnection" />
+         on the <see cref="T:System.Data.OleDb.OleDbConnection" />
 
         
 
-         object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction), are performed on the <see
-         cref="T:System.Data.OleDb.OleDbTransaction" />
+         object. All subsequent operations associated with the transaction (for example, committing or aborting the transaction), are performed on the <see cref="T:System.Data.OleDb.OleDbTransaction" />
 
         
 
@@ -102,7 +98,11 @@
           <para>A nested database transaction.</para>
         </returns>
         <param name="isolevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -147,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A single application may have multiple database connections, each with zero or more transactions. This property lets you determine the connection object associated with a particular transaction created by <see
-             cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
+            >A single application may have multiple database connections, each with zero or more transactions. This property lets you determine the connection object associated with a particular transaction created by <see cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
 
             
 
@@ -158,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.OleDb.OleDbConnection" />
+            >Gets the <see cref="T:System.Data.OleDb.OleDbConnection" />
 
             
 
@@ -237,8 +235,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parallel transactions are not supported. Therefore, the <see
-             cref="T:System.Data.IsolationLevel" />
+            >Parallel transactions are not supported. Therefore, the <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -248,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the <see
-             cref="T:System.Data.IsolationLevel" />
+            >Specifies the <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -273,13 +269,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transaction can only be rolled back from a pending state (after <see
-             cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
+            >The transaction can only be rolled back from a pending state (after <see cref="M:System.Data.OleDb.OleDbConnection.BeginTransaction" />
 
             
 
-             has been called, but before <see
-             cref="M:System.Data.OleDb.OleDbTransaction.Commit" />
+             has been called, but before <see cref="M:System.Data.OleDb.OleDbTransaction.Commit" />
 
             
 

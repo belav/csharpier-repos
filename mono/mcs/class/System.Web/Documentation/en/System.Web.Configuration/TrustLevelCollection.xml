@@ -32,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see
-         cref="T:System.Web.Configuration.TrustLevel" />
+        >Contains a collection of <see cref="T:System.Web.Configuration.TrustLevel" />
 
         
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -83,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Adds a <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -92,12 +89,15 @@
           >
         </summary>
         <param name="trustLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.TrustLevel" />
+          The <see cref="T:System.Web.Configuration.TrustLevel" />
 
           
 
@@ -120,8 +120,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+            >If <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -131,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Removes all <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -160,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+            >Gets the type of the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -189,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+            >Creates a new <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -200,8 +196,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >A new <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -250,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Gets the <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -261,8 +255,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >The <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -270,12 +263,15 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.Configuration.TrustLevelCollection" />
+          The index of the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
           
 
@@ -304,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the element key for a specified <see
-             cref="T:System.Configuration.ConfigurationElement" />
+            >Gets the element key for a specified <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -315,13 +310,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
-             that acts as the key for the specified <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             that acts as the key for the specified <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -329,12 +322,15 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Configuration.ConfigurationElement" />
+          The <see cref="T:System.Configuration.ConfigurationElement" />
 
           
 
@@ -369,7 +365,11 @@
           <para>true if the name is allowed; otherwise, false.</para>
         </returns>
         <param name="elementname">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -462,8 +462,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >If the <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
@@ -473,13 +472,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Removes a <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
-             object from the <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+             object from the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -487,17 +484,19 @@
           >
         </summary>
         <param name="trustLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.TrustLevel" />
+          The <see cref="T:System.Web.Configuration.TrustLevel" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.Configuration.TrustLevelCollection" />
+           to remove from the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
           
 
@@ -523,13 +522,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Removes a <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
-             object at the specified index location from the <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+             object at the specified index location from the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -537,17 +534,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location of the <see
-           cref="T:System.Web.Configuration.TrustLevel" />
+          The index location of the <see cref="T:System.Web.Configuration.TrustLevel" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.Configuration.TrustLevelCollection" />
+           to remove from the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
           
 
@@ -577,13 +576,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Configuration.TrustLevel" />
+            >Adds the specified <see cref="T:System.Web.Configuration.TrustLevel" />
 
             
 
-             object to the <see
-             cref="T:System.Web.Configuration.TrustLevelCollection" />
+             object to the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
             
 
@@ -591,34 +588,38 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index location of the <see
-           cref="T:System.Web.Configuration.TrustLevel" />
+          The index location of the <see cref="T:System.Web.Configuration.TrustLevel" />
 
           
 
-           to be set within the <see
-           cref="T:System.Web.Configuration.TrustLevelCollection" />
+           to be set within the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
           
 
           .</param
         >
         <param name="trustLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.TrustLevel" />
+          The <see cref="T:System.Web.Configuration.TrustLevel" />
 
           
 
-           to be set within the <see
-           cref="T:System.Web.Configuration.TrustLevelCollection" />
+           to be set within the <see cref="T:System.Web.Configuration.TrustLevelCollection" />
 
           
 

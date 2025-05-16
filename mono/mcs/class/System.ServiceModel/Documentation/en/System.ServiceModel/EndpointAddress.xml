@@ -19,8 +19,7 @@
       <para>An endpoint address uniquely identifies the endpoint for a service. </para>
       <para>The endpoint address belongs to the service endpoint, which also contains the binding, contract and behaviors for the endpoint.</para>
       <para
-        >The <see
-         cref="T:System.ServiceModel.EndpointAddress" />
+        >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
         
 
@@ -32,18 +31,15 @@
 
         
 
-         does not implement the <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+         does not implement the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-         interface and so is not serializable. For an endpoint to be exposed as part of a service contract it must be serializable and it must also be compliant with the Web Service Addressing (WS-Addressing) protocol. Serializable endpoints that are compliant with version 1.0 and the August 2004 version of WS-Addressing are provided, respectively, by the <see
-         cref="T:System.ServiceModel.EndpointAddress10" />
+         interface and so is not serializable. For an endpoint to be exposed as part of a service contract it must be serializable and it must also be compliant with the Web Service Addressing (WS-Addressing) protocol. Serializable endpoints that are compliant with version 1.0 and the August 2004 version of WS-Addressing are provided, respectively, by the <see cref="T:System.ServiceModel.EndpointAddress10" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+         and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />
 
         
 
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -83,7 +78,11 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -129,12 +127,15 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -172,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -181,24 +181,30 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that identifies the endpoint location.</param
         >
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointIdentity" />
+          The <see cref="T:System.ServiceModel.EndpointIdentity" />
 
           
 
@@ -229,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -238,36 +243,45 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that identifies the endpoint location.</param
         >
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointIdentity" />
+          The <see cref="T:System.ServiceModel.EndpointIdentity" />
 
           
 
            for the endpoint.</param
         >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+          The <see cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
 
           
 
@@ -299,8 +313,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The WS-Addressing specification allows for arbitrary extension elements to appear at the end of an Endpoint Reference (EPR) that can be obtained using an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >The WS-Addressing specification allows for arbitrary extension elements to appear at the end of an Endpoint Reference (EPR) that can be obtained using an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -310,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -319,60 +331,75 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
            that identifies the endpoint location.</param
         >
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointIdentity" />
+          The <see cref="T:System.ServiceModel.EndpointIdentity" />
 
           
 
            for the endpoint.</param
         >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+          The <see cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
 
           
 
            that contains address information used to interact with the endpoint.</param
         >
         <param name="metadataReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
            from which the endpoint metadata is obtained.</param
         >
         <param name="extensionReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
@@ -395,13 +422,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the URI used to initialize the constructor is the <see
-             cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
+            >If the value of the URI used to initialize the constructor is the <see cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
 
             
 
-            , then <see
-             cref="P:System.ServiceModel.EndpointAddress.IsAnonymous" />
+            , then <see cref="P:System.ServiceModel.EndpointAddress.IsAnonymous" />
 
             
 
@@ -412,21 +437,21 @@
 
             
 
-             is a version-neutral class and the <see
-             cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
+             is a version-neutral class and the <see cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
 
             
 
              property returns a value is a neutral representation. When you write this out or convert this to one version or the other, then it turns into the right value for that version.</para
           >
           <para
-            >Due to the range of network technologies currently in widespread use (for example, NAT, DHCP, and firewalls), many deployments cannot assign a meaningful global URI to a given endpoint. To allow these <newTerm
-            >anonymous</newTerm>
+            >Due to the range of network technologies currently in widespread use (for example, NAT, DHCP, and firewalls), many deployments cannot assign a meaningful global URI to a given endpoint. To allow these <newTerm>anonymous</newTerm>
 
             
 
              endpoints to initiate message exchange patterns and receive replies, the Web Services Addressing specification defines a <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=96169">URI</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=96169"
+              >URI</see
+            >
 
             
 
@@ -463,18 +488,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.EndpointAddress.ApplyTo(System.ServiceModel.Channels.Message)" />
+            >The <see cref="M:System.ServiceModel.EndpointAddress.ApplyTo(System.ServiceModel.Channels.Message)" />
 
             
 
-             method sets the "To" of the message with the <see
-             cref="P:System.ServiceModel.EndpointAddress.Uri" />
+             method sets the "To" of the message with the <see cref="P:System.ServiceModel.EndpointAddress.Uri" />
 
             
 
-             of the current <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+             of the current <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -486,12 +508,15 @@
           <para>Assigns the URI and properties of the endpoint address to the values of the headers of a specified message.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
@@ -526,12 +551,15 @@
           <para>true if the specified object is equivalent to the current address; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -603,8 +631,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >The <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -639,8 +666,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >The <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -717,46 +743,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to check for the <see
-             cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
+            >Use this method to check for the <see cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
 
             
 
-             when manually copying the URI from an <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+             when manually copying the URI from an <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
-             to the URI of either a <see
-             cref="T:System.ServiceModel.EndpointAddress10" />
+             to the URI of either a <see cref="T:System.ServiceModel.EndpointAddress10" />
 
             
 
-             or a <see
-             cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+             or a <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />
 
             
 
-            . This must be done because both <see
-             cref="T:System.ServiceModel.EndpointAddress10" />
+            . This must be done because both <see cref="T:System.ServiceModel.EndpointAddress10" />
 
             
 
-             and <see
-             cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+             and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />
 
             
 
              have special anonymous values. Users must use these values if the URI being copied is anonymous. </para
           >
           <para
-            >Due to the range of network technologies currently in widespread use (for example, NAT, DHCP, and firewalls), many deployments cannot assign a meaningful global URI to a given endpoint. To allow these <newTerm
-            >anonymous</newTerm>
+            >Due to the range of network technologies currently in widespread use (for example, NAT, DHCP, and firewalls), many deployments cannot assign a meaningful global URI to a given endpoint. To allow these <newTerm>anonymous</newTerm>
 
             
 
              endpoints to initiate message exchange patterns and receive replies, the Web Services Addressing specification defines a <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=96169">URI</see>
+              cref="http://go.microsoft.com/fwlink/?LinkId=96169"
+              >URI</see
+            >
 
             
 
@@ -767,8 +788,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the endpoint is <newTerm
-            >anonymous</newTerm>
+            >Gets a value that indicates whether the endpoint is <newTerm>anonymous</newTerm>
 
             
 
@@ -792,33 +812,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to check for the <see
-             cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
+            >Use this method to check for the <see cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
 
             
 
-             when manually copying the URI from an <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+             when manually copying the URI from an <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
-             to the URI of either a <see
-             cref="T:System.ServiceModel.EndpointAddress10" />
+             to the URI of either a <see cref="T:System.ServiceModel.EndpointAddress10" />
 
             
 
-             or a <see
-             cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+             or a <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />
 
             
 
-            . This must be done because both <see
-             cref="T:System.ServiceModel.EndpointAddress10" />
+            . This must be done because both <see cref="T:System.ServiceModel.EndpointAddress10" />
 
             
 
-             and <see
-             cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+             and <see cref="T:System.ServiceModel.EndpointAddressAugust2004" />
 
             
 
@@ -828,8 +842,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the URI for the endpoint is the <see
-             cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
+            >Gets a value that indicates whether the URI for the endpoint is the <see cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
 
             
 
@@ -853,13 +866,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the URI used to initialize the constructor is the <see
-             cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
+            >If the value of the URI used to initialize the constructor is the <see cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
 
             
 
-            , then <see
-             cref="P:System.ServiceModel.EndpointAddress.IsNone" />
+            , then <see cref="P:System.ServiceModel.EndpointAddress.IsNone" />
 
             
 
@@ -903,24 +914,30 @@
           <para>true if the endpoint addresses are equivalent; otherwise, false.</para>
         </returns>
         <param name="address1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          One of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            objects being compared.</param
         >
         <param name="address2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          One of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -959,24 +976,30 @@
           <para>true if the endpoint addresses are not equivalent; otherwise, false.</para>
         </returns>
         <param name="address1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          One of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            objects being compared.</param
         >
         <param name="address2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          One of the <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -1012,8 +1035,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -1021,12 +1043,15 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
@@ -1063,8 +1088,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -1072,24 +1096,30 @@
           >
         </returns>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
@@ -1126,8 +1156,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -1135,24 +1164,30 @@
           >
         </returns>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -1190,8 +1225,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -1199,36 +1233,45 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
            from which the endpoint address is obtained.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
            that contains the local name for the XML node to contain the endpoint address.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          An <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
@@ -1267,8 +1310,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -1276,38 +1318,52 @@
           >
         </returns>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReader" />
+          The <see cref="T:System.Xml.XmlDictionaryReader" />
 
           
 
            from which the endpoint address is obtained.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Contains the local name for the XML node to contain the endpoint address.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1346,8 +1402,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.EndpointAddress" />
+            >The <see cref="T:System.ServiceModel.EndpointAddress" />
 
             
 
@@ -1355,38 +1410,52 @@
           >
         </returns>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
            from which the endpoint address is obtained.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Contains the local name for the XML node to contain the endpoint address.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1435,8 +1504,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The URI identifies where a message is being sent. To set a URI for an endpoint address, use <see
-             cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" />
+            >The URI identifies where a message is being sent. To set a URI for an endpoint address, use <see cref="P:System.ServiceModel.EndpointAddressBuilder.Uri" />
 
             
 
@@ -1476,24 +1544,30 @@
           <para>Saves all the child nodes of the node to the XML dictionary writer specified.</para>
         </summary>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -1528,24 +1602,30 @@
           <para>Saves all the child nodes of the node to the XML writer specified.</para>
         </summary>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1580,24 +1660,30 @@
           <para>Saves the current endpoint address of a specified version to a specified XML dictionary writer.</para>
         </summary>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
@@ -1632,24 +1718,30 @@
           <para>Saves the current endpoint address of a specified version to a specified XML writer.</para>
         </summary>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -1687,36 +1779,45 @@
           <para>Saves the current endpoint address of a specified version to an XML dictionary writer with a specified namespace and local name.</para>
         </summary>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryWriter" />
+          The <see cref="T:System.Xml.XmlDictionaryWriter" />
 
           
 
            to which the endpoint address is saved.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          The <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 
@@ -1754,36 +1855,45 @@
           <para>Saves the current endpoint address of a specified version to an XML writer with a specified namespace and local name.</para>
         </summary>
         <param name="addressingVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.AddressingVersion" />
+          The <see cref="T:System.ServiceModel.Channels.AddressingVersion" />
 
           
 
            of the current endpoint address.</param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
            to which the endpoint address is saved.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryString" />
+          The <see cref="T:System.Xml.XmlDictionaryString" />
 
           
 

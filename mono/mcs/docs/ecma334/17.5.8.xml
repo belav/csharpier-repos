@@ -1,42 +1,38 @@
 <?xml version="1.0"?>
 <clause number="17.5.8" title="Method body">
   <paragraph
-    >The <non_terminal
-     where="17.5">method-body</non_terminal>
+    >The <non_terminal where="17.5"
+      >method-body</non_terminal
+    >
 
     
 
      of a method declaration consists of either a block or a semicolon. </paragraph
   >
   <paragraph
-    >Abstract and external method declarations do not provide a method implementation, so their method bodies simply consist of a semicolon. For any other method, the method body is a block (<hyperlink
-    >15.2</hyperlink>
+    >Abstract and external method declarations do not provide a method implementation, so their method bodies simply consist of a semicolon. For any other method, the method body is a block (<hyperlink>15.2</hyperlink>
 
     
 
     ) that contains the statements to execute when that method is invoked. </paragraph
   >
   <paragraph
-    >When the return type of a method is <keyword
-    >void</keyword>
+    >When the return type of a method is <keyword>void</keyword>
 
     
 
-    , return statements (<hyperlink
-    >15.9.4</hyperlink>
+    , return statements (<hyperlink>15.9.4</hyperlink>
 
     
 
-    ) in that method's body are not permitted to specify an expression. If execution of the method body of a <keyword
-    >void</keyword>
+    ) in that method's body are not permitted to specify an expression. If execution of the method body of a <keyword>void</keyword>
 
     
 
      method completes normally (that is, control flows off the end of the method body), that method simply returns to its caller. </paragraph
   >
   <paragraph
-    >When the return type of a method is not <keyword
-    >void</keyword>
+    >When the return type of a method is not <keyword>void</keyword>
 
     
 
@@ -44,8 +40,7 @@
   >
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  

@@ -18,13 +18,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+          >The <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
           
 
-           class is obsolete. Use the <see
-           cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+           class is obsolete. Use the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
           
 
@@ -48,13 +46,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+              >The <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
               
 
-               class is obsolete. Use the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               class is obsolete. Use the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
@@ -65,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+            >Initializes an instance of the <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
             
 
@@ -94,13 +89,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+              >The <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
               
 
-               class is obsolete. Use the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               class is obsolete. Use the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
@@ -136,13 +129,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ReadWriteControlDesigner.MapPropertyToStyle(System.String,System.Object)" />
+              >The <see cref="M:System.Web.UI.Design.ReadWriteControlDesigner.MapPropertyToStyle(System.String,System.Object)" />
 
               
 
-               method is obsolete. Use the <see
-               cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
+               method is obsolete. Use the <see cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
               
 
@@ -158,14 +149,22 @@
           <para>Maps a property, including description and value, to an intrinsic HTML style.</para>
         </summary>
         <param name="propName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the property to map. </param
         >
         <param name="varPropValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,28 +188,23 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Web.UI.Design.ReadWriteControlDesigner.OnBehaviorAttached" />
+              >The <see cref="M:System.Web.UI.Design.ReadWriteControlDesigner.OnBehaviorAttached" />
 
               
 
-               method is obsolete. Use the members of the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               method is obsolete. Use the members of the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
-               property instead. For example, use the <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+               property instead. For example, use the <see cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
 
               
 
-               and <see
-               cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+               and <see cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
 
               
 
-               methods on the <see
-               cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+               methods on the <see cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
 
               
 
@@ -251,13 +245,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+              >The <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
               
 
-               class is obsolete. Use the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               class is obsolete. Use the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 
@@ -265,8 +257,7 @@
             >
           </block>
           <para
-            >The <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+            >The <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
             
 
@@ -276,13 +267,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the method that will handle the <see
-             cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+            >Represents the method that will handle the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
             
 
-             event of the <see
-             cref="T:System.ComponentModel.Design.IComponentChangeService" />
+             event of the <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
             
 
@@ -290,19 +279,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object sending the event. </param
         >
         <param name="ce">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+          The <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
 
           
 
@@ -329,13 +325,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
+              >The <see cref="T:System.Web.UI.Design.ReadWriteControlDesigner" />
 
               
 
-               class is obsolete. Use the <see
-               cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+               class is obsolete. Use the <see cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
               
 

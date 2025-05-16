@@ -64,13 +64,11 @@
     <typeparam name="A">Ako generic param</typeparam>
     <typeparam name="B">Bko generic param</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.MyList`2</c>
+    <remarks><c>T:Mono.DocTest.MyList`2</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -134,21 +132,16 @@
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
-        <value
-          >A <see
-           cref="T:System.Int32" />
+        <value>A <see cref="T:System.Int32" />
 
           
 
-          .</value
-        >
-        <remarks>
-          <c>P:Mono.DocTest.MyList`2.Count</c>
+          .</value>
+        <remarks><c>P:Mono.DocTest.MyList`2.Count</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Current">
@@ -167,13 +160,11 @@
       <Docs>
         <summary>To be added.</summary>
         <value>The current value.</value>
-        <remarks>
-          <c>P:Mono.DocTest.MyList`2.Current</c>
+        <remarks><c>P:Mono.DocTest.MyList`2.Current</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -195,13 +186,11 @@
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>M:Mono.DocTest.MyList`2.Dispose</c>
+        <remarks><c>M:Mono.DocTest.MyList`2.Dispose</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Foo">
@@ -247,20 +236,17 @@
       <Docs>
         <summary>To be added.</summary>
         <returns
-          >A <see
-           cref="T:System.Collections.Generic.List{`0}.Enumerator" />
+          >A <see cref="T:System.Collections.Generic.List{`0}.Enumerator" />
 
           
 
           .</returns
         >
-        <remarks>
-          <c>M:Mono.DocTest.MyList`2.GetEnumerator</c>
+        <remarks><c>M:Mono.DocTest.MyList`2.GetEnumerator</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Mono.DocTest.Generic.IFoo&lt;A&gt;.Method&lt;U&gt;">
@@ -323,13 +309,11 @@
         <returns>
           <see cref="T:System.Boolean" />
         </returns>
-        <remarks>
-          <c>M:Mono.DocTest.MyList`2.MoveNext</c>
+        <remarks><c>M:Mono.DocTest.MyList`2.MoveNext</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="Reset">
@@ -351,13 +335,11 @@
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>M:Mono.DocTest.MyList`2.Reset</c>
+        <remarks><c>M:Mono.DocTest.MyList`2.Reset</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.Generic.ICollection&lt;A&gt;.Add">
@@ -442,13 +424,11 @@
         <param name="item">The item to check for</param>
         <summary>To be added.</summary>
         <returns
-          >A <see
-           cref="T:System.Boolean" />
+          >A <see cref="T:System.Boolean" />
 
           
 
-           instance (<see
-           langword="false" />
+           instance (<see langword="false" />
 
           
 
@@ -484,14 +464,11 @@
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
-        <value
-          >A <see
-           cref="T:System.Boolean" />
+        <value>A <see cref="T:System.Boolean" />
 
           
 
-          .</value
-        >
+          .</value>
         <remarks>
           <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>
 
@@ -556,8 +533,7 @@
       <Docs>
         <summary>To be added.</summary>
         <returns
-          >A <see
-           cref="T:System.Collections.Generic.IEnumerator{`0}" />
+          >A <see cref="T:System.Collections.Generic.IEnumerator{`0}" />
 
           
 
@@ -594,13 +570,11 @@
       <Docs>
         <summary>To be added.</summary>
         <value>The current value.</value>
-        <remarks>
-          <c>P:Mono.DocTest.MyList`2.Current</c>
+        <remarks><c>P:Mono.DocTest.MyList`2.Current</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IEnumerable.GetEnumerator">

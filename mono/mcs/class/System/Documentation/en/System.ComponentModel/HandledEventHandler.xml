@@ -30,41 +30,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This delegate is available for use with your own events when the <see
-         cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+        >This delegate is available for use with your own events when the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" />
 
         
 
-         property provides sufficient event data. The event handler can set the <see
-         cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+         property provides sufficient event data. The event handler can set the <see cref="P:System.ComponentModel.HandledEventArgs.Handled" />
 
         
 
          property to true if all necessary processing has been completed in the handler. </para
       >
       <para
-        >Typically, events that require this functionality will also require additional event data, and will use a class that derives from <see
-         cref="T:System.ComponentModel.HandledEventArgs" />
+        >Typically, events that require this functionality will also require additional event data, and will use a class that derives from <see cref="T:System.ComponentModel.HandledEventArgs" />
 
         
 
-         along with a corresponding, similarly-named delegate type. For example, the <see
-         cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+         along with a corresponding, similarly-named delegate type. For example, the <see cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
 
         
 
-         event uses the <see
-         cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />
+         event uses the <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventArgs" />
 
         
 
-         event-data type and the <see
-         cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventHandler" />
+         event-data type and the <see cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventHandler" />
 
         
 
-         delegate type. Because delegates are not inherited, the <see
-         cref="T:System.ComponentModel.HandledEventHandler" />
+         delegate type. Because delegates are not inherited, the <see cref="T:System.ComponentModel.HandledEventHandler" />
 
         
 

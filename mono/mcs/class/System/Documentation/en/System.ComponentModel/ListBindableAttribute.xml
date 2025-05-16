@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -68,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListBindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListBindableAttribute" />
 
             
 
@@ -77,7 +75,11 @@
           >
         </summary>
         <param name="listBindable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -109,13 +111,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ListBindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ListBindableAttribute" />
 
             
 
-             class using <see
-             cref="T:System.ComponentModel.BindableSupport" />
+             class using <see cref="T:System.ComponentModel.BindableSupport" />
 
             
 
@@ -123,12 +123,15 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.BindableSupport" />
+          A <see cref="T:System.ComponentModel.BindableSupport" />
 
           
 
@@ -159,8 +162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defaults to <see
-             cref="F:System.ComponentModel.ListBindableAttribute.Yes" />
+            >Defaults to <see cref="F:System.ComponentModel.ListBindableAttribute.Yes" />
 
             
 
@@ -170,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the default value for <see
-             cref="T:System.ComponentModel.ListBindableAttribute" />
+            >Represents the default value for <see cref="T:System.ComponentModel.ListBindableAttribute" />
 
             
 
@@ -203,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the object passed is equal to this <see
-             cref="T:System.ComponentModel.ListBindableAttribute" />
+            >Returns whether the object passed is equal to this <see cref="T:System.ComponentModel.ListBindableAttribute" />
 
             
 
@@ -214,8 +214,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object passed is equal to this <see
-             cref="T:System.ComponentModel.ListBindableAttribute" />
+            >true if the object passed is equal to this <see cref="T:System.ComponentModel.ListBindableAttribute" />
 
             
 
@@ -223,7 +222,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,8 +259,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.ListBindableAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.ListBindableAttribute" />
 
             
 
@@ -287,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether <see
-             cref="P:System.ComponentModel.ListBindableAttribute.ListBindable" />
+            >Returns whether <see cref="P:System.ComponentModel.ListBindableAttribute.ListBindable" />
 
             
 
@@ -298,8 +299,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="P:System.ComponentModel.ListBindableAttribute.ListBindable" />
+            >true if <see cref="P:System.ComponentModel.ListBindableAttribute.ListBindable" />
 
             
 

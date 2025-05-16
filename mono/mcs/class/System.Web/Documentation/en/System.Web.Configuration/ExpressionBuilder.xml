@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >ASP.NET automatically evaluates expressions during page parsing using the <see
-         cref="T:System.Web.Configuration.ExpressionBuilder" />
+        >ASP.NET automatically evaluates expressions during page parsing using the <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
         
 
-         class. The <see
-         cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+         class. The <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
         
 
-         collection, which is made up of the expressionBuilders elements contained in the compilation section of the configuration. The <see
-         cref="T:System.Web.Configuration.ExpressionBuilder" />
+         collection, which is made up of the expressionBuilders elements contained in the compilation section of the configuration. The <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
         
 
@@ -37,16 +34,14 @@
       <para>A value is retrieved by including an expression of the form</para>
       <para>&lt;%$ ExpressionPrefix: ExpressionKey %&gt;</para>
       <para
-        >within the page. The ExpressionPrefix maps the type of expression to be retrieved as either a common expression-builder type (that is, <see
-         cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+        >within the page. The ExpressionPrefix maps the type of expression to be retrieved as either a common expression-builder type (that is, <see cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
 
         
 
         ) or a custom expression builder type. The ExpressionKey specifies the key used to reference the returned value. </para
       >
       <para
-        >If you choose to implement a common expression-builder type, you must map the expression builder to the associated section name in the configuration. If you choose to implement a custom expression-builder type, you must map your expression builder to your custom expression-builder class, which must derive from the <see
-         cref="T:System.Web.Configuration.ExpressionBuilder" />
+        >If you choose to implement a common expression-builder type, you must map the expression builder to the associated section name in the configuration. If you choose to implement a custom expression-builder type, you must map your expression builder to your custom expression-builder class, which must derive from the <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
         
 
@@ -75,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ExpressionBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
             
 
@@ -84,14 +78,22 @@
           >
         </summary>
         <param name="expressionPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that identifies the type of expression to retrieve.</param
         >
         <param name="theType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -122,8 +124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.ExpressionBuilder.ExpressionPrefix" />
+            >The <see cref="P:System.Web.Configuration.ExpressionBuilder.ExpressionPrefix" />
 
             
 
@@ -178,8 +179,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.ExpressionBuilder.Type" />
+            >The <see cref="P:System.Web.Configuration.ExpressionBuilder.Type" />
 
             
 

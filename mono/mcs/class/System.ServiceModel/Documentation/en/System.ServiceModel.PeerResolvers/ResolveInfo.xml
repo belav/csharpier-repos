@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+            >Initializes a new default instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
 
             
 
@@ -79,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
 
             
 

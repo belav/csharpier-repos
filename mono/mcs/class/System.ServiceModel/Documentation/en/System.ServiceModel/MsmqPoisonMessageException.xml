@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This exception is thrown when the channel detects that Message Queuing (MSMQ) aborted processing in the message because the number of retry attempts exceeded the value specified by the <see
-         cref="P:System.ServiceModel.Configuration.MsmqElementBase.ReceiveRetryCount" />
+        >This exception is thrown when the channel detects that Message Queuing (MSMQ) aborted processing in the message because the number of retry attempts exceeded the value specified by the <see cref="P:System.ServiceModel.Configuration.MsmqElementBase.ReceiveRetryCount" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Configuration.MsmqElementBase.MaxRetryCycles" />
+         and <see cref="P:System.ServiceModel.Configuration.MsmqElementBase.MaxRetryCycles" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
             
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
             
 
@@ -116,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
             
 
@@ -125,34 +120,38 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           instance that holds the serialized data associated with the <see
-           cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+           instance that holds the serialized data associated with the <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
           
 
           .</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           instance that contains the source and destination of the serialized stream associated with the <see
-           cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+           instance that contains the source and destination of the serialized stream associated with the <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
           
 
@@ -184,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MsmqPoisonMessageException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
             
 

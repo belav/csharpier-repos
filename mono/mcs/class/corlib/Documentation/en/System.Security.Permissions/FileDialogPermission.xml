@@ -37,8 +37,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This permission is typically used to provide limited access to user-specified files when <see
-         cref="T:System.Security.Permissions.FileIOPermission" />
+        >This permission is typically used to provide limited access to user-specified files when <see cref="T:System.Security.Permissions.FileIOPermission" />
 
         
 
@@ -48,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls the ability to access files or folders through a <ui
-        >File</ui>
+        >Controls the ability to access files or folders through a <ui>File</ui>
 
         
 
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileDialogPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileDialogPermission" />
 
             
 
@@ -91,12 +88,15 @@
           >
         </summary>
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Security.Permissions.FileDialogPermissionAccess" />
+          A bitwise combination of the <see cref="T:System.Security.Permissions.FileDialogPermissionAccess" />
 
           
 
@@ -127,8 +127,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates either fully restricted (None) or Unrestricted access to <ui
-            >File</ui>
+            >Creates either fully restricted (None) or Unrestricted access to <ui>File</ui>
 
             
 
@@ -138,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.FileDialogPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.FileDialogPermission" />
 
             
 
@@ -147,12 +145,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -246,7 +247,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -289,7 +294,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -322,13 +331,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, a permission for <see
-             cref="F:System.Security.Permissions.FileDialogPermissionAccess.Open" />
+            >The current permission is a subset of the specified permission if the current permission specifies a set of operations that is wholly contained by the specified permission. For example, a permission for <see cref="F:System.Security.Permissions.FileDialogPermissionAccess.Open" />
 
             
 
-             access is a subset of a permission for <see
-             cref="F:System.Security.Permissions.FileDialogPermissionAccess.OpenSave" />
+             access is a subset of a permission for <see cref="F:System.Security.Permissions.FileDialogPermissionAccess.OpenSave" />
 
             
 
@@ -344,7 +351,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -417,8 +428,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This override of the <see
-               cref="M:System.Security.CodeAccessPermission.ToString" />
+              >This override of the <see cref="M:System.Security.CodeAccessPermission.ToString" />
 
               
 
@@ -497,8 +507,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.FileDialogPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.FileDialogPermission.Union(System.Security.IPermission)" />
 
             
 
@@ -514,7 +523,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -69,8 +68,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about using attributes, see <format
-             type="text/html">
+            >For more information about using attributes, see <format type="text/html">
               <a href="30386922-1E00-4602-9EBF-526B271A8B87"
                 >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
               >
@@ -84,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.IODescriptionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.IO.IODescriptionAttribute" />
 
             
 
@@ -93,7 +90,11 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,8 +119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about using attributes, see <format
-             type="text/html">
+            >For more information about using attributes, see <format type="text/html">
               <a href="30386922-1E00-4602-9EBF-526B271A8B87"
                 >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
               >

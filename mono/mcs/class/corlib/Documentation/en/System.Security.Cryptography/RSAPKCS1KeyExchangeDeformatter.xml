@@ -34,13 +34,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Key exchange allows a sender to create secret information (such as random data that can be used as a key in a symmetric encryption algorithm) and use encryption to send it to the intended recipient.</para>
       <para
-        >Use <see
-         cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
+        >Use <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
 
         
 
-         to create the key exchange message using the <see
-         cref="T:System.Security.Cryptography.RSA" />
+         to create the key exchange message using the <see cref="T:System.Security.Cryptography.RSA" />
 
         
 
@@ -74,13 +72,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" />
+            >Use <see cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter.SetKey(System.Security.Cryptography.AsymmetricAlgorithm)" />
 
             
 
-             to establish the key before calling <see
-             cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />
+             to establish the key before calling <see cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />
 
             
 
@@ -90,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
 
             
 
@@ -124,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter" />
 
             
 
@@ -133,12 +127,15 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The instance of the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 
@@ -181,7 +178,11 @@
           <para>The secret information derived from the key exchange data.</para>
         </returns>
         <param name="rgbIn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,8 +263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must specify a key before calling <see
-             cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />
+            >You must specify a key before calling <see cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeDeformatter.DecryptKeyExchange(System.Byte[])" />
 
             
 
@@ -275,12 +275,15 @@
           <para>Sets the private key to use for decrypting the secret information.</para>
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance of the <see
-           cref="T:System.Security.Cryptography.RSA" />
+          The instance of the <see cref="T:System.Security.Cryptography.RSA" />
 
           
 

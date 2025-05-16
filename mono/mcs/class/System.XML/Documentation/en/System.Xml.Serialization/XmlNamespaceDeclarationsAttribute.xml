@@ -33,21 +33,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
         
 
-         attribute can only be applied once in a class to a field or property that returns an <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+         attribute can only be applied once in a class to a field or property that returns an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
          object.</para
       >
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
         
 
@@ -64,21 +61,18 @@
     &lt;/complexType&gt;
  &lt;/element&gt;</code>
       <para
-        >Without the <see
-         cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+        >Without the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
         
 
         , the association between the prefix and the namespace is lost.</para
       >
       <para
-        >To retain the association between the prefix and the namespace URI, add a member that returns an <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+        >To retain the association between the prefix and the namespace URI, add a member that returns an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
-         object and apply the <see
-         cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+         object and apply the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
         
 
@@ -108,21 +102,18 @@
     &lt;/xs:complexType&gt;
  &lt;/xs:element&gt;</code>
       <para
-        >On deserialization, the xmlns field contains an <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+        >On deserialization, the xmlns field contains an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
          object that contains all namespace prefix definitions.</para
       >
       <para
-        >On serialization, the user can add prefix-namespace pairs to the <see
-         cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+        >On serialization, the user can add prefix-namespace pairs to the <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
         
 
-         object using the <see
-         cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
+         object using the <see cref="M:System.Xml.Serialization.XmlSerializerNamespaces.Add(System.String,System.String)" />
 
         
 
@@ -181,8 +172,7 @@
  ' &lt;select xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  ' xmlns:common="common.tempuri.org" xmlns:MyNS="myNS.tempuri.org" xpath="myNS:ref/@common:y" /&gt;</code>
       <para
-        >Also note that the member to which the attribute is applied contains only the prefix-namespace pairs that belong to the XML element defined by the class. For example, in the following XML document, only the prefix pair "cal" is captured, but not the "x" prefix. To get that data, add a member with the <see
-         cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+        >Also note that the member to which the attribute is applied contains only the prefix-namespace pairs that belong to the XML element defined by the class. For example, in the following XML document, only the prefix pair "cal" is captured, but not the "x" prefix. To get that data, add a member with the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
         
 
@@ -217,13 +207,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+            >The <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
             
 
-             can only be applied to a target that returns an <see
-             cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+             can only be applied to a target that returns an <see cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
             
 
@@ -233,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlNamespaceDeclarationsAttribute" />
 
             
 

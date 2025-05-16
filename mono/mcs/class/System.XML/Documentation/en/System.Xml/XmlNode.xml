@@ -35,13 +35,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the W3C Document Object Model (DOM) Level 1 Core and the Core DOM Level 2. The DOM is an in-memory (cache) tree representation of an XML document. XmlNode is the base class in the .NET implementation of the DOM. It supports XPath selections and provides editing capabilities. The <see
-         cref="T:System.Xml.XmlDocument" />
+        >This class implements the W3C Document Object Model (DOM) Level 1 Core and the Core DOM Level 2. The DOM is an in-memory (cache) tree representation of an XML document. XmlNode is the base class in the .NET implementation of the DOM. It supports XPath selections and provides editing capabilities. The <see cref="T:System.Xml.XmlDocument" />
 
         
 
-         class extends XmlNode and represents an XML document. You can use XmlDocument to load and save XML data. It also includes methods for node creation. See <format
-         type="text/html">
+         class extends XmlNode and represents an XML document. You can use XmlDocument to load and save XML data. It also includes methods for node creation. See <format type="text/html">
           <a href="B5E52844-4820-47C0-A61D-DE2DA33E9F54"
             >[&lt;topic://cpconXMLDocumentObjectModelDOM&gt;]</a
           >
@@ -53,13 +51,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Exceptions raised as a result of using the <see
-           cref="T:System.Xml.XmlNode" />
+          >Exceptions raised as a result of using the <see cref="T:System.Xml.XmlNode" />
 
           
 
-           class, such as the <see
-           cref="T:System.Xml.XmlException" />
+           class, such as the <see cref="T:System.Xml.XmlException" />
 
           
 
@@ -98,13 +94,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="newChild" />
+            >If the <paramref name="newChild" />
 
             
 
-             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format
-             type="text/html">
+             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format type="text/html">
               <a href="891e54f5-54f6-4bb4-b624-9d1b6a1f1216"
                 >Inserting Nodes into an XML Document</a
               >
@@ -115,8 +109,7 @@
             .</para
           >
           <para
-            >If the node being inserted was created from another document, you can use <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -132,7 +125,11 @@
           <para>The node added.</para>
         </returns>
         <param name="newChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -164,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.XmlAttributeCollection" />
+            >Gets an <see cref="T:System.Xml.XmlAttributeCollection" />
 
             
 
@@ -192,8 +188,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A networked XML document is comprised of chunks of data aggregated using various W3C standard inclusion mechanisms and therefore contains nodes that come from different places. The BaseURI tells you where these nodes came from.</para>
           <para
-            >The value of this property varies depending on the node type. For example, Document nodes return the location of the <see
-             cref="T:System.Xml.XmlDocument" />
+            >The value of this property varies depending on the node type. For example, Document nodes return the location of the <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -352,13 +347,11 @@
               <description>
                 <para>http://localhost/mydata.xml </para>
                 <para
-                  >The <see
-                   cref="P:System.Xml.XmlDocumentType.SystemId" />
+                  >The <see cref="P:System.Xml.XmlDocumentType.SystemId" />
 
                   
 
-                   or <see
-                   cref="P:System.Xml.XmlDocumentType.PublicId" />
+                   or <see cref="P:System.Xml.XmlDocumentType.PublicId" />
 
                   
 
@@ -469,8 +462,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Cloning an <see
-             cref="T:System.Xml.XmlElement" />
+            >Cloning an <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -478,8 +470,7 @@
           >
           <para>Clone is equivalent to calling CloneNode(true).</para>
           <para
-            >The following table describes the specific behavior for each <see
-             cref="T:System.Xml.XmlNodeType" />
+            >The following table describes the specific behavior for each <see cref="T:System.Xml.XmlNodeType" />
 
             
 
@@ -662,16 +653,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The duplicate node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >This method serves as a copy constructor for nodes. The duplicate node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
              returns null).</para
           >
           <para
-            >The following table describes the specific behavior for each <see
-             cref="T:System.Xml.XmlNodeType" />
+            >The following table describes the specific behavior for each <see cref="T:System.Xml.XmlNodeType" />
 
             
 
@@ -878,7 +867,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -909,8 +902,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XPathNavigator provides read-only, random access to data. Because it is optimized for XSLT transformations, it provides performance benefits when used as an input mechanism to the <see
-             cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)" />
+            >The XPathNavigator provides read-only, random access to data. Because it is optimized for XSLT transformations, it provides performance benefits when used as an input mechanism to the <see cref="M:System.Xml.Xsl.XslTransform.Transform(System.Xml.XPath.XPathNavigator,System.Xml.Xsl.XsltArgumentList,System.Xml.XmlResolver)" />
 
             
 
@@ -921,8 +913,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >Creates an <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -994,8 +985,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -1039,7 +1029,11 @@
           <para>The namespace URI of the specified prefix.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1082,7 +1076,11 @@
           <para>The prefix for the specified namespace URI.</para>
         </returns>
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1130,8 +1128,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Setting this property replaces all the child nodes with the parsed contents of the given string.</para>
           <para
-            >For leaf nodes, InnerText returns the same content as the <see
-             cref="P:System.Xml.XmlNode.Value" />
+            >For leaf nodes, InnerText returns the same content as the <see cref="P:System.Xml.XmlNode.Value" />
 
             
 
@@ -1161,13 +1158,11 @@
       <Docs>
         <value>
           <para
-            >The contents of the node as an Xml string.  When getting the value of this property, InnerXml returns the same string that <see
-             cref="M:System.Xml.XmlNode.WriteContentTo" />
+            >The contents of the node as an Xml string.  When getting the value of this property, InnerXml returns the same string that <see cref="M:System.Xml.XmlNode.WriteContentTo" />
 
             
 
-             would write to an <see
-             cref="T:System.Xml.XmlTextWriter" />
+             would write to an <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
@@ -1215,33 +1210,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="refChild" />
+            >If <paramref name="refChild" />
 
             
 
-             is null, insert <paramref
-             name="newChild" />
+             is null, insert <paramref name="newChild" />
 
             
 
-             at the beginning of the list of child nodes. All the contents of the <paramref
-             name="newChild" />
+             at the beginning of the list of child nodes. All the contents of the <paramref name="newChild" />
 
             
 
-             are inserted, in the same order, after <paramref
-             name="refChild" />
+             are inserted, in the same order, after <paramref name="refChild" />
 
             
 
-            . If the <paramref
-             name="newChild" />
+            . If the <paramref name="newChild" />
 
             
 
-             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format
-             type="text/html">
+             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format type="text/html">
               <a href="891e54f5-54f6-4bb4-b624-9d1b6a1f1216"
                 >Inserting Nodes into an XML Document</a
               >
@@ -1252,8 +1241,7 @@
             .</para
           >
           <para
-            >If the node being inserted was created from another document, you can use <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -1270,24 +1258,30 @@
           <para>The node being inserted.</para>
         </returns>
         <param name="newChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XmlNode to insert. </param
         >
         <param name="refChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XmlNode that is the reference node. The <paramref
-           name="newNode" />
+          The XmlNode that is the reference node. The <paramref name="newNode" />
 
           
 
-           is placed after the <paramref
-           name="refNode" />
+           is placed after the <paramref name="refNode" />
 
           
 
@@ -1321,33 +1315,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="refChild" />
+            >If <paramref name="refChild" />
 
             
 
-             is null, insert <paramref
-             name="newChild" />
+             is null, insert <paramref name="newChild" />
 
             
 
-             at the end of the list of child nodes. All the contents of the <paramref
-             name="newChild" />
+             at the end of the list of child nodes. All the contents of the <paramref name="newChild" />
 
             
 
-             are inserted, in the same order, before <paramref
-             name="refChild" />
+             are inserted, in the same order, before <paramref name="refChild" />
 
             
 
-            . If the <paramref
-             name="newChild" />
+            . If the <paramref name="newChild" />
 
             
 
-             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format
-             type="text/html">
+             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format type="text/html">
               <a href="891e54f5-54f6-4bb4-b624-9d1b6a1f1216"
                 >Inserting Nodes into an XML Document</a
               >
@@ -1358,8 +1346,7 @@
             .</para
           >
           <para
-            >If the node being inserted was created from another document, you can use <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -1375,19 +1362,26 @@
           <para>The node being inserted.</para>
         </returns>
         <param name="newChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XmlNode to insert. </param
         >
         <param name="refChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XmlNode that is the reference node. The <paramref
-           name="newChild" />
+          The XmlNode that is the reference node. The <paramref name="newChild" />
 
           
 
@@ -1445,13 +1439,11 @@
         <param name="name">The name of the child element to return.</param>
         <summary>Gets the child element with the given name.</summary>
         <value
-          >The child element whose <see
-           cref="P:System.Xml.XmlNode.Name" />
+          >The child element whose <see cref="P:System.Xml.XmlNode.Name" />
 
           
 
-           is <paramref
-           name="name" />
+           is <paramref name="name" />
 
           
 
@@ -1487,23 +1479,19 @@
         <param name="ns">The namespace URI of the element to return.</param>
         <summary>Gets the child element with the given local name and namespace URI.</summary>
         <value
-          >The child element whose <see
-           cref="P:System.Xml.XmlNode.LocalName" />
+          >The child element whose <see cref="P:System.Xml.XmlNode.LocalName" />
 
           
 
-           is <paramref
-           name="localname" />
+           is <paramref name="localname" />
 
           
 
-           and <see
-           cref="P:System.Xml.XmlNode.NamespaceURI" />
+           and <see cref="P:System.Xml.XmlNode.NamespaceURI" />
 
           
 
-           is <paramref
-           name="ns" />
+           is <paramref name="ns" />
 
           
 
@@ -1553,8 +1541,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the node does not have a prefix, LocalName is the same as <see
-             cref="P:System.Xml.XmlNode.Name" />
+            >If the node does not have a prefix, LocalName is the same as <see cref="P:System.Xml.XmlNode.Name" />
 
             
 
@@ -1582,13 +1569,11 @@
       <Docs>
         <value>The fully qualified name of the node.</value>
         <remarks
-          >This is a string consisting of both the <see
-           cref="P:System.Xml.XmlNode.Prefix" />
+          >This is a string consisting of both the <see cref="P:System.Xml.XmlNode.Prefix" />
 
           
 
-           and the <see
-           cref="P:System.Xml.XmlNode.LocalName" />
+           and the <see cref="P:System.Xml.XmlNode.LocalName" />
 
           
 
@@ -1646,13 +1631,11 @@
       <Docs>
         <value>The next node that follows this one, or null if this is the last node in its parent's children.</value>
         <remarks
-          >The node after this one in the <see
-           cref="P:System.Xml.XmlNode.ParentNode" />
+          >The node after this one in the <see cref="P:System.Xml.XmlNode.ParentNode" />
 
           
 
-          's <see
-           cref="P:System.Xml.XmlNode.ChildNodes" />
+          's <see cref="P:System.Xml.XmlNode.ChildNodes" />
 
           
 
@@ -1684,8 +1667,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >A value from <see
-           cref="T:System.Xml.XmlNodeType" />
+          >A value from <see cref="T:System.Xml.XmlNodeType" />
 
           
 
@@ -1772,8 +1754,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >The <see
-           cref="T:System.Xml.XmlDocument" />
+          >The <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -1782,13 +1763,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When adding nodes to the current node, use the <see
-             cref="T:System.Xml.XmlDocument" />
+            >When adding nodes to the current node, use the <see cref="T:System.Xml.XmlDocument" />
 
             
 
-             returned by the <see
-             cref="P:System.Xml.XmlNode.OwnerDocument" />
+             returned by the <see cref="P:System.Xml.XmlNode.OwnerDocument" />
 
             
 
@@ -1798,8 +1777,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlDocument" />
+            >Gets the <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -1828,8 +1806,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >The node that this node is a child of, or null if this is an <see
-           cref="T:System.Xml.XmlDocument" />
+          >The node that this node is a child of, or null if this is an <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -1860,8 +1837,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property, when permitted, changes the <see
-             cref="P:System.Xml.XmlNode.Name" />
+            >Setting this property, when permitted, changes the <see cref="P:System.Xml.XmlNode.Name" />
 
             
 
@@ -1899,13 +1875,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="newChild" />
+            >If the <paramref name="newChild" />
 
             
 
-             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format
-             type="text/html">
+             is already in the tree, it is removed from its original position and added to its target position. For more information about inserting nodes, see <format type="text/html">
               <a href="891e54f5-54f6-4bb4-b624-9d1b6a1f1216"
                 >Inserting Nodes into an XML Document</a
               >
@@ -1916,8 +1890,7 @@
             .</para
           >
           <para
-            >If the node being inserted was created from another document, you can use <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+            >If the node being inserted was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -1934,7 +1907,11 @@
           <para>The node added.</para>
         </returns>
         <param name="newChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1963,13 +1940,11 @@
       <Docs>
         <value>The node that comes before this one, or null if this is the first node in its parent's children.</value>
         <remarks
-          >The node before this one in the <see
-           cref="P:System.Xml.XmlNode.ParentNode" />
+          >The node before this one in the <see cref="P:System.Xml.XmlNode.ParentNode" />
 
           
 
-          's <see
-           cref="P:System.Xml.XmlNode.ChildNodes" />
+          's <see cref="P:System.Xml.XmlNode.ChildNodes" />
 
           
 
@@ -2041,7 +2016,11 @@
           <para>The node removed.</para>
         </returns>
         <param name="oldChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2075,21 +2054,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="newChild" />
+            >If the <paramref name="newChild" />
 
             
 
              is already in the tree, it is first removed.</para
           >
           <para
-            >If the <paramref
-             name="newChild" />
+            >If the <paramref name="newChild" />
 
             
 
-             was created from another document, you can use <see
-             cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
+             was created from another document, you can use <see cref="M:System.Xml.XmlDocument.ImportNode(System.Xml.XmlNode,System.Boolean)" />
 
             
 
@@ -2099,13 +2075,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the child node <paramref
-             name="oldChild" />
+            >Replaces the child node <paramref name="oldChild" />
 
             
 
-             with <paramref
-             name="newChild" />
+             with <paramref name="newChild" />
 
             
 
@@ -2117,14 +2091,22 @@
           <para>The node replaced.</para>
         </returns>
         <param name="newChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The new node to put in the child list. </param
         >
         <param name="oldChild">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2155,8 +2137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XmlNode.SchemaInfo" />
+            >The <see cref="P:System.Xml.XmlNode.SchemaInfo" />
 
             
 
@@ -2194,8 +2175,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XPath expression requires namespace resolution, you must use the SelectNodes overload which takes an <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >If the XPath expression requires namespace resolution, you must use the SelectNodes overload which takes an <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -2203,8 +2183,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the XmlNamespaceManager and add a prefix and namespace URI to it; otherwise, you will not get any nodes selected. For more information, see <format
-               type="text/html">
+              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the XmlNamespaceManager and add a prefix and namespace URI to it; otherwise, you will not get any nodes selected. For more information, see <format type="text/html">
                 <a href="8e4450dc-56b3-472b-b467-32f5694f83ad"
                   >Select Nodes Using XPath Navigation</a
                 >
@@ -2228,8 +2207,7 @@
           <code> nodeList = root.SelectNodes("//book[contains(title,""'Emma'"")]")</code>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
           <para
-            >The <see
-             cref="T:System.Xml.XmlNodeList" />
+            >The <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -2243,8 +2221,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlNodeList" />
+            >An <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -2252,7 +2229,11 @@
           >
         </returns>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2288,8 +2269,7 @@
           <para>XPath expressions can include namespaces. Namespace resolution is supported using the XmlNamespaceManager. If the XPath expression includes a prefix, the prefix and namespace URI pair must be added to the XmlNamespaceManager.</para>
           <block subset="none" type="note">
             <para
-              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still add a prefix and namespace URI to the XmlNamespaceManager; otherwise, you will not get any nodes selected. For more information, see <format
-               type="text/html">
+              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still add a prefix and namespace URI to the XmlNamespaceManager; otherwise, you will not get any nodes selected. For more information, see <format type="text/html">
                 <a href="8e4450dc-56b3-472b-b467-32f5694f83ad"
                   >Select Nodes Using XPath Navigation</a
                 >
@@ -2325,8 +2305,7 @@
  nodeList = root.SelectNodes("//ab:book[contains(ab:title,""'Emma'"")]", nsmgr)</code>
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
           <para
-            >The <see
-             cref="T:System.Xml.XmlNodeList" />
+            >The <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -2336,8 +2315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects a list of nodes matching the XPath expression. Any prefixes found in the XPath expression are resolved using the supplied <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >Selects a list of nodes matching the XPath expression. Any prefixes found in the XPath expression are resolved using the supplied <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -2347,8 +2325,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlNodeList" />
+            >An <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -2356,19 +2333,26 @@
           >
         </returns>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XPath expression. </param
         >
         <param name="nsmgr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          An <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
@@ -2401,8 +2385,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XPath expression requires namespace resolution, you must use the SelectSingleNode overload which takes an <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >If the XPath expression requires namespace resolution, you must use the SelectSingleNode overload which takes an <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -2410,8 +2393,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the XmlNamespaceManager and add a prefix and namespace URI to it; otherwise, you will not get a selected node. For more information, see <format
-               type="text/html">
+              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the XmlNamespaceManager and add a prefix and namespace URI to it; otherwise, you will not get a selected node. For more information, see <format type="text/html">
                 <a href="8e4450dc-56b3-472b-b467-32f5694f83ad"
                   >Select Nodes Using XPath Navigation</a
                 >
@@ -2444,7 +2426,11 @@
           <para>The first XmlNode that matches the XPath query or null if no matching node is found. The XmlNode should not be expected to be connected "live" to the XML document. That is, changes that appear in the XML document may not appear in the XmlNode, and vice versa.</para>
         </returns>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2480,8 +2466,7 @@
           <para>XPath expressions can include namespaces. Namespace resolution is supported using the XmlNamespaceManager. If the XPath expression includes a prefix, the prefix and namespace URI pair must be added to the XmlNamespaceManager.</para>
           <block subset="none" type="note">
             <para
-              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still add a prefix and namespace URI to the XmlNamespaceManager; otherwise, you will not get a node selected. For more information, see <format
-               type="text/html">
+              >If the XPath expression does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still add a prefix and namespace URI to the XmlNamespaceManager; otherwise, you will not get a node selected. For more information, see <format type="text/html">
                 <a href="8e4450dc-56b3-472b-b467-32f5694f83ad"
                   >Select Nodes Using XPath Navigation</a
                 >
@@ -2520,8 +2505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Selects the first XmlNode that matches the XPath expression. Any prefixes found in the XPath expression are resolved using the supplied <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >Selects the first XmlNode that matches the XPath expression. Any prefixes found in the XPath expression are resolved using the supplied <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -2533,19 +2517,26 @@
           <para>The first XmlNode that matches the XPath query or null if no matching node is found. The XmlNode should not be expected to be connected "live" to the XML document. That is, changes that appear in the XML document may not appear in the XmlNode, and vice versa.</para>
         </returns>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XPath expression. </param
         >
         <param name="nsmgr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          An <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 
@@ -2578,13 +2569,11 @@
       <Docs>
         <remarks>
           <para
-            >This method currently returns true only when <paramref
-             name="feature" />
+            >This method currently returns true only when <paramref name="feature" />
 
             
 
-             is "xml" and <paramref
-             name="version" />
+             is "xml" and <paramref name="version" />
 
             
 
@@ -2629,14 +2618,22 @@
           </list>
         </returns>
         <param name="feature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The package name of the feature to test. This name is not case-sensitive. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2667,13 +2664,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlNode" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -2683,8 +2678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.XmlNode.GetEnumerator" />
+            >For a description of this member, see <see cref="M:System.Xml.XmlNode.GetEnumerator" />
 
             
 
@@ -2717,13 +2711,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlNode" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlNode" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
@@ -2733,8 +2725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.XmlNode.Clone" />
+            >For a description of this member, see <see cref="M:System.Xml.XmlNode.Clone" />
 
             
 
@@ -2794,8 +2785,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see
-             cref="P:System.Xml.XmlNode.InnerXml" />
+            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlNode.InnerXml" />
 
             
 
@@ -2805,8 +2795,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the child nodes of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the child nodes of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2814,7 +2803,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2847,8 +2840,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see
-             cref="P:System.Xml.XmlNode.OuterXml" />
+            >This method is a Microsoft extension to the Document Object Model (DOM). It is functionally equivalent to the <see cref="P:System.Xml.XmlNode.OuterXml" />
 
             
 
@@ -2858,8 +2850,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the current node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the current node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2867,7 +2858,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

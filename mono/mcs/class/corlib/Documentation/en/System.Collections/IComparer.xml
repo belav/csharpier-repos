@@ -26,31 +26,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is used in conjunction with the <see
-         cref="M:System.Array.Sort(System.Array)" />
+        >This interface is used in conjunction with the <see cref="M:System.Array.Sort(System.Array)" />
 
         
 
-         and <see
-         cref="M:System.Array.BinarySearch(System.Array,System.Object)" />
+         and <see cref="M:System.Array.BinarySearch(System.Array,System.Object)" />
 
         
 
-         methods. It provides a way to customize the sort order of a collection. See the <see
-         cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+         methods. It provides a way to customize the sort order of a collection. See the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
         
 
          method for notes on parameters and return value.</para
       >
       <para
-        >The default implementation of this interface is the <see
-         cref="T:System.Collections.Comparer" />
+        >The default implementation of this interface is the <see cref="T:System.Collections.Comparer" />
 
         
 
-         class. For the generic version of this interface, see <see
-         cref="T:System.Collections.Generic.IComparer`1" />
+         class. For the generic version of this interface, see <see cref="T:System.Collections.Generic.IComparer`1" />
 
         
 
@@ -90,16 +85,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The preferred implementation is to use the <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+            >The preferred implementation is to use the <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
              method of one of the parameters.</para
           >
           <para
-            >Comparing null with any type is allowed and does not generate an exception when using <see
-             cref="T:System.IComparable" />
+            >Comparing null with any type is allowed and does not generate an exception when using <see cref="T:System.IComparable" />
 
             
 
@@ -113,13 +106,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A signed integer that indicates the relative values of <paramref
-             name="x" />
+            >A signed integer that indicates the relative values of <paramref name="x" />
 
             
 
-             and <paramref
-             name="y" />
+             and <paramref name="y" />
 
             
 
@@ -146,8 +137,7 @@
 
                   
 
-                   is less than <paramref
-                   name="y" />
+                   is less than <paramref name="y" />
 
                   
 
@@ -165,8 +155,7 @@
 
                   
 
-                   equals <paramref
-                   name="y" />
+                   equals <paramref name="y" />
 
                   
 
@@ -184,8 +173,7 @@
 
                   
 
-                   is greater than <paramref
-                   name="y" />
+                   is greater than <paramref name="y" />
 
                   
 
@@ -196,14 +184,22 @@
           </list>
         </returns>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first object to compare. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

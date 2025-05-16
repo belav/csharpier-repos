@@ -29,49 +29,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.DataListItem" />
+        >A <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
         
 
-         object represents an item in a <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+         object represents an item in a <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
          control, such as a heading section, a footer section, or a data item.</para
       >
       <para
-        >The data items in the <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+        >The data items in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-         control are stored in a <see
-         cref="T:System.Web.UI.WebControls.DataListItemCollection" />
+         control are stored in a <see cref="T:System.Web.UI.WebControls.DataListItemCollection" />
 
         
 
-         that can be accessed by using the <see
-         cref="P:System.Web.UI.WebControls.DataList.Items" />
+         that can be accessed by using the <see cref="P:System.Web.UI.WebControls.DataList.Items" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+         property of the <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
          control.</para
       >
       <para
-        >You can use a <see
-         cref="T:System.Web.UI.WebControls.DataListItem" />
+        >You can use a <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
         
 
-         to programmatically access the properties of an item in a <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+         to programmatically access the properties of an item in a <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
@@ -81,8 +73,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an item in a <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+        >Represents an item in a <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
@@ -106,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -117,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -126,29 +115,34 @@
           >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the item in the <see
-           cref="T:System.Web.UI.WebControls.DataList" />
+          The index of the item in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
           
 
-           control from the <see
-           cref="P:System.Web.UI.WebControls.DataList.Items" />
+           control from the <see cref="P:System.Web.UI.WebControls.DataList.Items" />
 
           
 
            collection. </param
         >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -174,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is primarily used by control developers, when extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >This method is primarily used by control developers, when extending the functionality of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -185,13 +178,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             object for the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             object for the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -201,8 +192,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >A <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
@@ -227,18 +217,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataListItem.DataItem" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataListItem.DataItem" />
 
             
 
-             property to specify or determine the properties of a data item associated with the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property to specify or determine the properties of a data item associated with the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+             object in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
@@ -246,23 +233,19 @@
           >
           <block subset="none" type="note">
             <para
-              >This property only applies to data items in the <see
-               cref="T:System.Web.UI.WebControls.DataList" />
+              >This property only applies to data items in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.DataListItem" />
+               property of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
               
 
-               object must be set to one of the <see
-               cref="T:System.Web.UI.WebControls.ListItemType" />
+               object must be set to one of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
               
 
@@ -273,13 +256,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a data item associated with the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >Gets or sets a data item associated with the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+             object in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
@@ -303,18 +284,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
 
             
 
-             property to determine the index number of the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property to determine the index number of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             object from the <see
-             cref="P:System.Web.UI.WebControls.DataList.Items" />
+             object from the <see cref="P:System.Web.UI.WebControls.DataList.Items" />
 
             
 
@@ -322,18 +300,15 @@
           >
           <block subset="none" type="note">
             <para
-              >This property only applies to data items in the <see
-               cref="T:System.Web.UI.WebControls.DataList" />
+              >This property only applies to data items in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
 
               
 
-               property of the <see
-               cref="T:System.Web.UI.WebControls.DataListItem" />
+               property of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
               
 
@@ -344,13 +319,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >Gets the index of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             object from the <see
-             cref="P:System.Web.UI.WebControls.DataList.Items" />
+             object from the <see cref="P:System.Web.UI.WebControls.DataList.Items" />
 
             
 
@@ -377,13 +350,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
 
             
 
-             property to determine the type of the item represented by the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property to determine the type of the item represented by the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -406,8 +377,7 @@
               </term>
               <description>
                 <para
-                  >The heading section of the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >The heading section of the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -421,8 +391,7 @@
               </term>
               <description>
                 <para
-                  >The footer section of the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >The footer section of the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -436,8 +405,7 @@
               </term>
               <description>
                 <para
-                  >An item in the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >An item in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -451,8 +419,7 @@
               </term>
               <description>
                 <para
-                  >An alternating item in the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >An alternating item in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -466,8 +433,7 @@
               </term>
               <description>
                 <para
-                  >The selected item in the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >The selected item in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -481,8 +447,7 @@
               </term>
               <description>
                 <para
-                  >The item selected for editing in the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >The item selected for editing in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -496,8 +461,7 @@
               </term>
               <description>
                 <para
-                  >A separator between the items of the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >A separator between the items of the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -511,8 +475,7 @@
               </term>
               <description>
                 <para
-                  >The page selection section of the <see
-                   cref="T:System.Web.UI.WebControls.DataList" />
+                  >The page selection section of the <see cref="T:System.Web.UI.WebControls.DataList" />
 
                   
 
@@ -525,13 +488,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the item represented by the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >Gets the type of the item represented by the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+             object in the <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
@@ -561,8 +522,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >This method is used primarily by control developers when extending the functionality of the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -578,19 +538,26 @@
           <para>true if the event has been canceled; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -620,13 +587,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.DataListItem.RenderItem(System.Web.UI.HtmlTextWriter,System.Boolean,System.Boolean)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.DataListItem.RenderItem(System.Web.UI.HtmlTextWriter,System.Boolean,System.Boolean)" />
 
             
 
-             method to display the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             method to display the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -636,8 +601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Displays the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >Displays the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -645,26 +609,37 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
            object that contains the output stream for rendering on the client. </param
         >
         <param name="extractRows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to extract rows; otherwise false. </param
         >
         <param name="tableLayout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -696,8 +671,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers when extending the functionality of a <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+            >This method is used primarily by control developers when extending the functionality of a <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -707,13 +681,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the current <see
-             cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
+            >Sets the current <see cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
 
             
 
-             property for the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property for the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
@@ -721,12 +693,15 @@
           >
         </summary>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          A <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -751,31 +726,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.DataListItem.DataItem" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.DataListItem.DataItem" />
 
             
 
-             property to retrieve the data object for a <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property to retrieve the data object for a <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataListItem.System#Web#UI#IDataItemContainer#DataItem" />
+            >The <see cref="P:System.Web.UI.WebControls.DataListItem.System#Web#UI#IDataItemContainer#DataItem" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -785,8 +755,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItem" />
 
             
 
@@ -812,31 +781,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
 
             
 
-             property to retrieve the data-item index for a <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property to retrieve the data-item index for a <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataListItem.System#Web#UI#IDataItemContainer#DataItemIndex" />
+            >The <see cref="P:System.Web.UI.WebControls.DataListItem.System#Web#UI#IDataItemContainer#DataItemIndex" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -846,8 +810,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
 
             
 
@@ -873,31 +836,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.DataListItem.ItemIndex" />
 
             
 
-             property to retrieve the data-item index for a <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             property to retrieve the data-item index for a <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DataListItem.System#Web#UI#IDataItemContainer#DisplayIndex" />
+            >The <see cref="P:System.Web.UI.WebControls.DataListItem.System#Web#UI#IDataItemContainer#DisplayIndex" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.DataListItem" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.DataListItem" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to an <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -907,8 +865,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
 
             
 

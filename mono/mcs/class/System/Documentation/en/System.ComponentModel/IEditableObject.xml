@@ -19,23 +19,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This interface is typically used to capture the <see
-         cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+        >This interface is typically used to capture the <see cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
 
         
 
-        , <see
-         cref="M:System.ComponentModel.IEditableObject.EndEdit" />
+        , <see cref="M:System.ComponentModel.IEditableObject.EndEdit" />
 
         
 
-        , and <see
-         cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
+        , and <see cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
 
         
 
-         semantics of a <see
-         cref="T:System.Data.DataRowView" />
+         semantics of a <see cref="T:System.Data.DataRowView" />
 
         
 
@@ -68,21 +64,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically used to capture the <see
-             cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+            >This method is typically used to capture the <see cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
 
             
 
-             semantics of a <see
-             cref="T:System.Data.DataRowView" />
+             semantics of a <see cref="T:System.Data.DataRowView" />
 
             
 
             .</para
           >
           <para
-            >If <see
-             cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+            >If <see cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
 
             
 
@@ -115,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically used to capture the <see
-             cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
+            >This method is typically used to capture the <see cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
 
             
 
-             semantics of a <see
-             cref="T:System.Data.DataRowView" />
+             semantics of a <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -130,18 +121,15 @@
           <para>This method will be ignored if called on an object that is not being edited.</para>
           <block subset="none" type="note">
             <para
-              >If the owning list implements <see
-               cref="T:System.ComponentModel.IBindingList" />
+              >If the owning list implements <see cref="T:System.ComponentModel.IBindingList" />
 
               
 
-              , calling <see
-               cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
+              , calling <see cref="M:System.ComponentModel.IEditableObject.CancelEdit" />
 
               
 
-               on an object created using <see
-               cref="M:System.ComponentModel.IBindingList.AddNew" />
+               on an object created using <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
               
 
@@ -152,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Discards changes since the last <see
-             cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+            >Discards changes since the last <see cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
 
             
 
@@ -182,13 +169,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is typically used to capture the <see
-             cref="M:System.ComponentModel.IEditableObject.EndEdit" />
+            >This method is typically used to capture the <see cref="M:System.ComponentModel.IEditableObject.EndEdit" />
 
             
 
-             semantics of a <see
-             cref="T:System.Data.DataRowView" />
+             semantics of a <see cref="T:System.Data.DataRowView" />
 
             
 
@@ -199,13 +184,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Pushes changes since the last <see
-             cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
+            >Pushes changes since the last <see cref="M:System.ComponentModel.IEditableObject.BeginEdit" />
 
             
 
-             or <see
-             cref="M:System.ComponentModel.IBindingList.AddNew" />
+             or <see cref="M:System.ComponentModel.IBindingList.AddNew" />
 
             
 

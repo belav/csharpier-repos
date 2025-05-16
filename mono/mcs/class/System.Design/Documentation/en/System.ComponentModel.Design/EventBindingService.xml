@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By providing a service for registering event handlers for component events, <see
-         cref="T:System.ComponentModel.Design.EventBindingService" />
+        >By providing a service for registering event handlers for component events, <see cref="T:System.ComponentModel.Design.EventBindingService" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A default implementation of the <see
-         cref="T:System.ComponentModel.Design.IEventBindingService" />
+        >A default implementation of the <see cref="T:System.ComponentModel.Design.IEventBindingService" />
 
         
 
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.EventBindingService" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.EventBindingService" />
 
             
 
@@ -67,12 +64,15 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The service provider from which <see
-           cref="T:System.ComponentModel.Design.EventBindingService" />
+          The service provider from which <see cref="T:System.ComponentModel.Design.EventBindingService" />
 
           
 
@@ -101,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name returned by the <see
-             cref="M:System.ComponentModel.Design.EventBindingService.CreateUniqueMethodName(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor)" />
+            >The name returned by the <see cref="M:System.ComponentModel.Design.EventBindingService.CreateUniqueMethodName(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor)" />
 
             
 
@@ -118,7 +117,11 @@
           <para>The unique method name.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -147,13 +150,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some implementations may intend to remove the event hander when no events are using it. By overriding <see
-             cref="M:System.ComponentModel.Design.EventBindingService.UseMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+            >Some implementations may intend to remove the event hander when no events are using it. By overriding <see cref="M:System.ComponentModel.Design.EventBindingService.UseMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
 
             
 
-             and <see
-             cref="M:System.ComponentModel.Design.EventBindingService.FreeMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+             and <see cref="M:System.ComponentModel.Design.EventBindingService.FreeMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
 
             
 
@@ -165,26 +166,37 @@
           <para>Provides a notification that a particular method is no longer being used by an event handler.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to which the method is bound.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.EventDescriptor" />
+          The <see cref="T:System.ComponentModel.EventDescriptor" />
 
           
 
            for the event handler.</param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -212,13 +224,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each string returned in the collection is the method name of a method whose signature is compatible with the delegate contained in <paramref
-             name="e" />
+            >Each string returned in the collection is the method name of a method whose signature is compatible with the delegate contained in <paramref name="e" />
 
             
 
-            . <see
-             cref="M:System.ComponentModel.Design.EventBindingService.GetCompatibleMethods(System.ComponentModel.EventDescriptor)" />
+            . <see cref="M:System.ComponentModel.Design.EventBindingService.GetCompatibleMethods(System.ComponentModel.EventDescriptor)" />
 
             
 
@@ -257,8 +267,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A reference to the service specified by <paramref
-             name="serviceType" />
+            >A reference to the service specified by <paramref name="serviceType" />
 
             
 
@@ -281,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.EventBindingService.ShowCode" />
+            >The <see cref="M:System.ComponentModel.Design.EventBindingService.ShowCode" />
 
             
 
@@ -325,7 +333,11 @@
           <para>true if it is possible to display the code; otherwise, false.</para>
         </returns>
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,8 +366,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.EventBindingService.ShowCode(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+            >The <see cref="M:System.ComponentModel.Design.EventBindingService.ShowCode(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
 
             
 
@@ -371,26 +382,37 @@
           <para>true if it is possible to display the code; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to which the method is bound.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.EventDescriptor" />
+          The <see cref="T:System.ComponentModel.EventDescriptor" />
 
           
 
            for the event handler.</param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -426,7 +448,11 @@
           <para>The recommended name for the event-handler method for this event.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -454,13 +480,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Each string returned in the collection is the method name of a method whose signature is compatible with the delegate contained in <paramref
-             name="e" />
+            >Each string returned in the collection is the method name of a method whose signature is compatible with the delegate contained in <paramref name="e" />
 
             
 
-            . <see
-             cref="M:System.ComponentModel.Design.EventBindingService.GetCompatibleMethods(System.ComponentModel.EventDescriptor)" />
+            . <see cref="M:System.ComponentModel.Design.EventBindingService.GetCompatibleMethods(System.ComponentModel.EventDescriptor)" />
 
             
 
@@ -497,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >Gets an <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -508,8 +531,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ComponentModel.EventDescriptor" />
+            >An <see cref="T:System.ComponentModel.EventDescriptor" />
 
             
 
@@ -517,7 +539,11 @@
           >
         </returns>
         <param name="property">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -549,8 +575,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -558,7 +583,11 @@
           >
         </returns>
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -591,8 +620,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -646,7 +674,11 @@
           <para>true if the code is displayed; otherwise, false.</para>
         </returns>
         <param name="lineNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -682,7 +714,11 @@
           <para>true if the code is displayed; otherwise, false.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -711,13 +747,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some implementations may intend to remove the event hander when no events are using it. By overriding <see
-             cref="M:System.ComponentModel.Design.EventBindingService.UseMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+            >Some implementations may intend to remove the event hander when no events are using it. By overriding <see cref="M:System.ComponentModel.Design.EventBindingService.UseMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
 
             
 
-             and <see
-             cref="M:System.ComponentModel.Design.EventBindingService.FreeMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+             and <see cref="M:System.ComponentModel.Design.EventBindingService.FreeMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
 
             
 
@@ -729,26 +763,37 @@
           <para>Provides a notification that a particular method is being used by an event handler.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to which the method is bound.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.EventDescriptor" />
+          The <see cref="T:System.ComponentModel.EventDescriptor" />
 
           
 
            for the event handler.</param
         >
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -781,7 +826,11 @@
           <para>Validates that the provided method name is valid for the language or script being used.</para>
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

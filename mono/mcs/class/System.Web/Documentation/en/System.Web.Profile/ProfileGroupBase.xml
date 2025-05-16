@@ -14,23 +14,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.ProfileGroupBase" />
+        >The <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
         
 
-         class is used by ASP.NET to create grouped properties in the <see
-         cref="P:System.Web.HttpContext.Profile" />
+         class is used by ASP.NET to create grouped properties in the <see cref="P:System.Web.HttpContext.Profile" />
 
         
 
-         property for the current <see
-         cref="T:System.Web.HttpContext" />
+         property for the current <see cref="T:System.Web.HttpContext" />
 
         
 
-        . When properties are specified as a group of properties using the <format
-         type="text/html">
+        . When properties are specified as a group of properties using the <format type="text/html">
           <a href="b4e3672f-9653-4034-a178-fb358b02730e"
             >group Element for properties for profile (ASP.NET Settings Schema)</a
           >
@@ -38,51 +34,42 @@
 
         
 
-        , ASP.NET creates a new class with strongly typed accessors for each property in the group. The new class inherits the <see
-         cref="T:System.Web.Profile.ProfileGroupBase" />
+        , ASP.NET creates a new class with strongly typed accessors for each property in the group. The new class inherits the <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
         
 
-         base class. The strongly typed accessors of the new class call the <see
-         cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
+         base class. The strongly typed accessors of the new class call the <see cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
+         and <see cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
 
         
 
-         methods of the <see
-         cref="T:System.Web.Profile.ProfileGroupBase" />
+         methods of the <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
         
 
          base class to retrieve and set profile property values, respectively.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Profile.ProfileGroupBase" />
+        >The <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
         
 
-         passes calls to get and set property values to the class that inherits the <see
-         cref="T:System.Web.Profile.ProfileBase" />
+         passes calls to get and set property values to the class that inherits the <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
-         class that is supplied to the <see
-         cref="M:System.Web.Profile.ProfileGroupBase.Init(System.Web.Profile.ProfileBase,System.String)" />
+         class that is supplied to the <see cref="M:System.Web.Profile.ProfileGroupBase.Init(System.Web.Profile.ProfileBase,System.String)" />
 
         
 
-         method of the <see
-         cref="T:System.Web.Profile.ProfileGroupBase" />
+         method of the <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
         
 
-         class. See the <see
-         cref="T:System.Web.Profile.ProfileBase" />
+         class. See the <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
@@ -105,30 +92,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET uses the <see
-             cref="T:System.Web.Profile.ProfileGroupBase" />
+            >ASP.NET uses the <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
             
 
-             class to create grouped properties in the <see
-             cref="P:System.Web.HttpContext.Profile" />
+             class to create grouped properties in the <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
-             property for the current <see
-             cref="T:System.Web.HttpContext" />
+             property for the current <see cref="T:System.Web.HttpContext" />
 
             
 
-            . When properties are specified as a group of properties using the <format
-             type="text/html">
+            . When properties are specified as a group of properties using the <format type="text/html">
               <a href="b4e3672f-9653-4034-a178-fb358b02730e">group</a>
             </format>
 
             
 
-             element, ASP.NET creates a new class with strongly typed accessors for each property in the group. The new class inherits the <see
-             cref="T:System.Web.Profile.ProfileGroupBase" />
+             element, ASP.NET creates a new class with strongly typed accessors for each property in the group. The new class inherits the <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
             
 
@@ -139,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileGroupBase" />
+            >Creates an instance of the <see cref="T:System.Web.Profile.ProfileGroupBase" />
 
             
 
@@ -169,43 +150,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET uses the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >ASP.NET uses the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
-             class to create the class for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+             class to create the class for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
-             class. Strongly typed accessors are added to the ProfileCommon class for each group and property defined in the <format
-             type="text/html">
+             class. Strongly typed accessors are added to the ProfileCommon class for each group and property defined in the <format type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
 
             
 
-             configuration section. The strongly typed accessors of the ProfileCommon class call the <see
-             cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
+             configuration section. The strongly typed accessors of the ProfileCommon class call the <see cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
 
             
 
-             method to retrieve untyped values from the <see
-             cref="T:System.Web.Profile.ProfileProvider" />
+             method to retrieve untyped values from the <see cref="T:System.Web.Profile.ProfileProvider" />
 
             
 
              that the generated accessor then casts as the specified type and returns as the grouped property value.</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
+            >You can use the <see cref="M:System.Web.Profile.ProfileGroupBase.GetPropertyValue(System.String)" />
 
             
 
-             method to retrieve grouped property values of the user profile for your application by name. Returned values are typed as object and must be cast as the specific object type when retrieved. For strongly typed access to profile property values, you can access the grouped property by name as a member of a group of the <see
-             cref="P:System.Web.HttpContext.Profile" />
+             method to retrieve grouped property values of the user profile for your application by name. Returned values are typed as object and must be cast as the specific object type when retrieved. For strongly typed access to profile property values, you can access the grouped property by name as a member of a group of the <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
@@ -221,7 +195,11 @@
           <para>The value of the grouped profile property typed as object.</para>
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,24 +234,30 @@
           <para>Used by ASP.NET to initialize the grouped profile property values and information.</para>
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The class that inherits <see
-           cref="T:System.Web.Profile.ProfileBase" />
+          The class that inherits <see cref="T:System.Web.Profile.ProfileBase" />
 
           
 
-           that is assigned to the <see
-           cref="P:System.Web.HttpContext.Profile" />
+           that is assigned to the <see cref="P:System.Web.HttpContext.Profile" />
 
           
 
            property.</param
         >
         <param name="myName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -325,43 +309,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET uses the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >ASP.NET uses the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
-             class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+             class to create the class used for the user profile. When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
-             class. Strongly typed accessors are added to the ProfileCommon class for each group and property defined in the <format
-             type="text/html">
+             class. Strongly typed accessors are added to the ProfileCommon class for each group and property defined in the <format type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
 
             
 
-             configuration section. The strongly typed accessors of the ProfileCommon class call the <see
-             cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
+             configuration section. The strongly typed accessors of the ProfileCommon class call the <see cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
 
             
 
-             method to pass grouped property values to the <see
-             cref="T:System.Web.Profile.ProfileProvider" />
+             method to pass grouped property values to the <see cref="T:System.Web.Profile.ProfileProvider" />
 
             
 
              to be stored at the data source.</para
           >
           <para
-            >You can use the <see
-             cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
+            >You can use the <see cref="M:System.Web.Profile.ProfileGroupBase.SetPropertyValue(System.String,System.Object)" />
 
             
 
-             method to assign values to grouped properties of the user profile for your application by name. Values are typed as object, and type checking will be done at run time, not compile time. For strongly typed access to profile property values, you can access the grouped property by name as a member of a group of the <see
-             cref="P:System.Web.HttpContext.Profile" />
+             method to assign values to grouped properties of the user profile for your application by name. Values are typed as object, and type checking will be done at run time, not compile time. For strongly typed access to profile property values, you can access the grouped property by name as a member of a group of the <see cref="P:System.Web.HttpContext.Profile" />
 
             
 
@@ -373,14 +350,22 @@
           <para>Sets the value of a grouped profile property.</para>
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the grouped property to set.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

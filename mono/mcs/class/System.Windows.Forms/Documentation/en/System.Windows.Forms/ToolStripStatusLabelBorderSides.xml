@@ -28,8 +28,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies which sides of a <see
-         cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+        >Specifies which sides of a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
         
 
@@ -49,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All sides of the <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >All sides of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
@@ -73,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the bottom side of the <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >Only the bottom side of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
@@ -97,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the left side of the <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >Only the left side of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
@@ -121,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >The <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
@@ -145,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the right side of the <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >Only the right side of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
@@ -169,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the top side of the <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >Only the top side of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 

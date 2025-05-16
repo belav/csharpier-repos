@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
 <clause number="16.3.2" title="Using namespace directives">
   <paragraph
-    >A <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    >A <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
-     imports the types contained in a namespace into the immediately enclosing compilation unit or namespace body, enabling the identifier of each type to be used without qualification. <grammar_production
-    >
+     imports the types contained in a namespace into the immediately enclosing compilation unit or namespace body, enabling the identifier of each type to be used without qualification. <grammar_production>
       <name>
         <non_terminal where="16.3.2">using-namespace-directive</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>using</keyword>
         <non_terminal where="10.8">namespace-name</non_terminal>
         <terminal>;</terminal>
@@ -24,14 +23,14 @@
   </paragraph>
   <paragraph
     >Within member declarations in a compilation unit or namespace body that contains a  <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+      where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
     , the types contained in the given namespace can be referenced directly. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 namespace N1.N2  
 {  
@@ -50,15 +49,14 @@ namespace N3
     <example>Above, within member declarations in the N3 namespace, the type members of N1.N2 are directly available, and thus class N3.B derives from class N1.N2.A. end example]</example>
   </paragraph>
   <paragraph
-    >A <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    >A <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
      imports the types contained in the given namespace, but specifically does not import nested namespaces. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 namespace N1.N2  
 {  
@@ -74,8 +72,9 @@ namespace N3
 
       
 
-      the <non_terminal
-       where="16.3.2">using-namespace-directive</non_terminal>
+      the <non_terminal where="16.3.2"
+        >using-namespace-directive</non_terminal
+      >
 
       
 
@@ -83,25 +82,27 @@ namespace N3
     >
   </paragraph>
   <paragraph
-    >Unlike a <non_terminal
-     where="16.3.1">using-alias-directive</non_terminal>
+    >Unlike a <non_terminal where="16.3.1"
+      >using-alias-directive</non_terminal
+    >
 
     
 
-    , a <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    , a <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
      may import types whose identifiers are already defined within the enclosing compilation unit or namespace body. In effect, names imported by a  <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+      where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
      are hidden by similarly named members in the enclosing compilation unit or namespace body. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 namespace N1.N2  
 {  
@@ -121,8 +122,9 @@ namespace N3
     <example>Here, within member declarations in the N3 namespace, A refers to N3.A rather than N1.N2.A. end example]</example>
   </paragraph>
   <paragraph
-    >When more than one namespace imported by <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    >When more than one namespace imported by <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
@@ -130,8 +132,7 @@ namespace N3
   >
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 namespace N1  
 {  
@@ -158,14 +159,14 @@ namespace N3
     
 
      In this situation, the conflict can be resolved either through qualification of references to A, or by introducing a <non_terminal
-     where="16.3.1">using-alias-directive</non_terminal>
+      where="16.3.1"
+      >using-alias-directive</non_terminal
+    >
 
     
 
      that picks a particular A. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 namespace N3  
 {  
@@ -183,41 +184,48 @@ namespace N3
     >
   </paragraph>
   <paragraph
-    >Like a <non_terminal
-     where="16.3.1">using-alias-directive</non_terminal>
+    >Like a <non_terminal where="16.3.1"
+      >using-alias-directive</non_terminal
+    >
 
     
 
-    , a <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    , a <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
      does not contribute any new members to the underlying declaration space of the compilation unit or namespace, but, rather, affects only the compilation unit or namespace body in which it appears. </paragraph
   >
   <paragraph
-    >The <non_terminal
-     where="10.8">namespace-name</non_terminal>
+    >The <non_terminal where="10.8"
+      >namespace-name</non_terminal
+    >
 
     
 
-     referenced by a <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+     referenced by a <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 
-     is resolved in the same way as the <non_terminal
-     where="10.8">namespace-or-type-name</non_terminal>
+     is resolved in the same way as the <non_terminal where="10.8"
+      >namespace-or-type-name</non_terminal
+    >
 
     
 
-     referenced by a <non_terminal
-     where="16.3.1">using-alias-directive</non_terminal>
+     referenced by a <non_terminal where="16.3.1"
+      >using-alias-directive</non_terminal
+    >
 
     
 
-    . Thus, <non_terminal
-     where="16.3.2">using-namespace-directive</non_terminal>
+    . Thus, <non_terminal where="16.3.2"
+      >using-namespace-directive</non_terminal
+    >
 
     
 

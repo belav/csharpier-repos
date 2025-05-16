@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Text.InstalledFontCollection" />
+        >The <see cref="T:System.Drawing.Text.InstalledFontCollection" />
 
         
 
-         allows you to get a list of fonts families that are installed on the computer running the application with its <see
-         cref="P:System.Drawing.Text.FontCollection.Families" />
+         allows you to get a list of fonts families that are installed on the computer running the application with its <see cref="P:System.Drawing.Text.FontCollection.Families" />
 
         
 
-         property. For additional information on fonts and text, including example code, see <format
-         type="text/html">
+         property. For additional information on fonts and text, including example code, see <format type="text/html">
           <a href="d43640f3-da94-4df2-a29d-a9d021a1c069">Using Fonts and Text</a>
         </format>
 
@@ -41,13 +38,11 @@
         .</para
       >
       <para
-        > Do not use the <see
-         cref="T:System.Drawing.Text.InstalledFontCollection" />
+        > Do not use the <see cref="T:System.Drawing.Text.InstalledFontCollection" />
 
         
 
-         class to install a font to Windows. Instead use the ndptecgdi AddFontResource function. An <see
-         cref="T:System.Drawing.Text.InstalledFontCollection" />
+         class to install a font to Windows. Instead use the ndptecgdi AddFontResource function. An <see cref="T:System.Drawing.Text.InstalledFontCollection" />
 
         
 
@@ -70,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Text.InstalledFontCollection" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Text.InstalledFontCollection" />
 
             
 

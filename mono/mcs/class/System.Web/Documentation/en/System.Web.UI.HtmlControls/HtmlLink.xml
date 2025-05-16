@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
         
 
-         control allows programmatic access to the HTML link element on the server. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+         control allows programmatic access to the HTML link element on the server. The <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
         
 
@@ -50,8 +48,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
             
 
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
             
 
@@ -97,13 +93,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" />
 
             
 
-             property specifies the URL target of the link specified in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+             property specifies the URL target of the link specified in the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
             
 
@@ -113,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL target of the link specified in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+            >Gets or sets the URL target of the link specified in the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
             
 
@@ -145,18 +138,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlLink.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlLink.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method renders a <see
-             cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
+             method renders a <see cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
 
             
 
-             closing bracket (/&gt;) if the ASP.NET application is configured to render XHTML-compliant markup. By default, ASP.NET pages and controls render markup that is compatible with the XHTML 1.1 standard. For more information on configuring an ASP.NET Web site for non-XHTML rendering, see <format
-             type="text/html">
+             closing bracket (/&gt;) if the ASP.NET application is configured to render XHTML-compliant markup. By default, ASP.NET pages and controls render markup that is compatible with the XHTML 1.1 standard. For more information on configuring an ASP.NET Web site for non-XHTML rendering, see <format type="text/html">
               <a href="42483a54-f1ae-44e1-88e6-4370f8690149"
                 >How to: Configure ASP.NET Web Sites for Non-XHTML Rendering</a
               >
@@ -170,13 +160,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
             
 
-             control to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -184,12 +172,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -214,18 +205,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlLink.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlLink.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method resolves the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" />
+             method resolves the <see cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" />
 
             
 
-             property before calling the base class's <see
-             cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             property before calling the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -235,13 +223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlLink" />
 
             
 
-             control's attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -249,12 +235,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 

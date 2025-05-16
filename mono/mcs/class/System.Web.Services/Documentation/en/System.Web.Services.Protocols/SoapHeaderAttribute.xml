@@ -28,8 +28,7 @@
       <list type="ordered">
         <item>
           <para
-            >Create a class deriving from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Create a class deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -41,13 +40,11 @@
         </item>
         <item>
           <para
-            >Apply a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >Apply a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
-             to the XML Web service method or the corresponding method in the proxy class, specifying the member created in step 2 in the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+             to the XML Web service method or the corresponding method in the proxy class, specifying the member created in step 2 in the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
@@ -56,8 +53,7 @@
         </item>
         <item>
           <para
-            >Within the XML Web service method or XML Web service client code, access the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+            >Within the XML Web service method or XML Web service client code, access the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
@@ -66,8 +62,7 @@
         </item>
       </list>
       <para
-        >For more details, see the <see
-         cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+        >For more details, see the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
         
 
@@ -91,74 +86,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML Web service client or XML Web service can specify the SOAP headers it wants to process for specific XML Web service methods by applying a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >An XML Web service client or XML Web service can specify the SOAP headers it wants to process for specific XML Web service methods by applying a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
-             to the XML Web service method in the XML Web service class or the corresponding method in the proxy class. In order for the XML Web service method to receive the contents of the SOAP header, a member is added to the XML Web service class of a <see
-             cref="T:System.Type" />
+             to the XML Web service method in the XML Web service class or the corresponding method in the proxy class. In order for the XML Web service method to receive the contents of the SOAP header, a member is added to the XML Web service class of a <see cref="T:System.Type" />
 
             
 
-             derived from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             derived from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-            . Likewise, an XML Web service client adds a member to the proxy class deriving from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            . Likewise, an XML Web service client adds a member to the proxy class deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-            . That <see
-             cref="T:System.Type" />
+            . That <see cref="T:System.Type" />
 
             
 
-             deriving from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             represents the contents of the SOAP header and is created by the developer of the XML Web service or XML Web service client that wants to receive the SOAP header. Once the class is created, a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+             represents the contents of the SOAP header and is created by the developer of the XML Web service or XML Web service client that wants to receive the SOAP header. Once the class is created, a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
-             can be applied to the XML Web service method or corresponding method in the XML Web service client proxy class specifing the member to receive the SOAP header contents with the <paramref
-             name="memberName" />
+             can be applied to the XML Web service method or corresponding method in the XML Web service client proxy class specifing the member to receive the SOAP header contents with the <paramref name="memberName" />
 
             
 
-             parameter to this constructor or the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+             parameter to this constructor or the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
              property.</para
           >
           <para
-            >An XML Web service method can receive multiple SOAP headers by adding multiple members to the XML Web service class or the XML Web service proxy class and in turn applying multiple <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >An XML Web service method can receive multiple SOAP headers by adding multiple members to the XML Web service class or the XML Web service proxy class and in turn applying multiple <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
              attributes to the XML Web service method.</para
           >
           <para
-            >To receive and process unknown SOAP headers at the time the XML Web service is written, specify the <see
-             cref="T:System.Type" />
+            >To receive and process unknown SOAP headers at the time the XML Web service is written, specify the <see cref="T:System.Type" />
 
             
 
-             of the member to be either <see
-             cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
+             of the member to be either <see cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
 
             
 
-            , <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            , <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -168,8 +150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
@@ -177,12 +158,15 @@
           >
         </summary>
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The member of the XML Web service class representing the SOAP header contents. The <see
-           cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+          The member of the XML Web service class representing the SOAP header contents. The <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
           
 
@@ -229,59 +213,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An XML Web service or XML Web service client can specify the SOAP headers it wants to process by applying a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >An XML Web service or XML Web service client can specify the SOAP headers it wants to process by applying a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
-             to the XML Web service method in the XML Web service class or the corresponding method in the proxy class. In order for the XML Web service method to receive the contents of the SOAP header, a member is added to the XML Web service class of a type derived from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             to the XML Web service method in the XML Web service class or the corresponding method in the proxy class. In order for the XML Web service method to receive the contents of the SOAP header, a member is added to the XML Web service class of a type derived from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-            . Likewise, an XML Web service client adds a member to the proxy class deriving from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            . Likewise, an XML Web service client adds a member to the proxy class deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-            . The <see
-             cref="T:System.Type" />
+            . The <see cref="T:System.Type" />
 
             
 
-             deriving from <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             deriving from <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             represents the contents of the SOAP header and is created by the developer of the XML Web service or XML Web service client that wants to receive the SOAP header. Once the class is created, a <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+             represents the contents of the SOAP header and is created by the developer of the XML Web service or XML Web service client that wants to receive the SOAP header. Once the class is created, a <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
-             can be applied to the XML Web service method or corresponding method in the XML Web service client proxy class specifying the member to receive the SOAP header contents with the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+             can be applied to the XML Web service method or corresponding method in the XML Web service client proxy class specifying the member to receive the SOAP header contents with the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
              property.</para
           >
           <para
-            >An XML Web service method can receive multiple SOAP headers by adding multiple members to the XML Web service class or the XML Web service proxy class and in turn applying multiple <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
+            >An XML Web service method can receive multiple SOAP headers by adding multiple members to the XML Web service class or the XML Web service proxy class and in turn applying multiple <see cref="T:System.Web.Services.Protocols.SoapHeaderAttribute" />
 
             
 
              attributes to the XML Web service method.</para
           >
           <para
-            >To receive and process unknown SOAP headers at the time the XML Web service is written, specify the type of the member to be either <see
-             cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
+            >To receive and process unknown SOAP headers at the time the XML Web service is written, specify the type of the member to be either <see cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
 
             
 
-            , <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            , <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -310,16 +284,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To verify that a SOAP header is sent to an XML Web service, confirm that the member specified in the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+            >To verify that a SOAP header is sent to an XML Web service, confirm that the member specified in the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
 
             
 
              property is null. If it is null, the SOAP header was not sent.</para
           >
           <para
-            >In version 1.0 of the .NET Framework SDK, the <see
-             cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.Required" />
+            >In version 1.0 of the .NET Framework SDK, the <see cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.Required" />
 
             
 

@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build a <see
-         cref="T:System.Web.UI.WebControls.WizardStepBase" />
+        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.WizardStepControlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.WizardStepControlBuilder" />
 
             
 

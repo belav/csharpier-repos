@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -55,12 +54,15 @@
           >
         </summary>
         <param name="sddlForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The SDDL string from which to create the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The SDDL string from which to create the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
@@ -92,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -101,24 +102,30 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of byte values from which to create the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The array of byte values from which to create the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset in the  <paramref
-           name="binaryForm" />
+          The offset in the  <paramref name="binaryForm" />
 
           
 
@@ -153,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -162,60 +168,75 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Flags that specify behavior of the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          Flags that specify behavior of the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The owner for the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The owner for the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The primary group for the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The primary group for the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="systemAcl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The System Access Control List (SACL) for the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The System Access Control List (SACL) for the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
            object.</param
         >
         <param name="discretionaryAcl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The Discretionary Access Control List (DACL) for the new <see
-           cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+          The Discretionary Access Control List (DACL) for the new <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
           
 
@@ -247,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets values that specify behavior of the <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Gets values that specify behavior of the <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -281,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Discretionary Access Control List (DACL) for this <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Gets or sets the Discretionary Access Control List (DACL) for this <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -315,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the primary group for this <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Gets or sets the primary group for this <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -349,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the owner of the object associated with this <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Gets or sets the owner of the object associated with this <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -383,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a byte value that represents the resource manager control bits associated with this <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Gets or sets a byte value that represents the resource manager control bits associated with this <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -419,13 +435,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Security.AccessControl.RawSecurityDescriptor.ControlFlags" />
+            >Sets the <see cref="P:System.Security.AccessControl.RawSecurityDescriptor.ControlFlags" />
 
             
 
-             property of this <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+             property of this <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 
@@ -433,12 +447,15 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One or more values of the <see
-           cref="T:System.Security.AccessControl.ControlFlags" />
+          One or more values of the <see cref="T:System.Security.AccessControl.ControlFlags" />
 
           
 
@@ -470,8 +487,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the System Access Control List (SACL) for this <see
-             cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
+            >Gets or sets the System Access Control List (SACL) for this <see cref="T:System.Security.AccessControl.RawSecurityDescriptor" />
 
             
 

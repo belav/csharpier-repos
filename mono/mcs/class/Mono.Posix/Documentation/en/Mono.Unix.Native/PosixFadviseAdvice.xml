@@ -20,8 +20,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.posix_fadvise" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.posix_fadvise" />
       <paramref name="advice" />
 
       

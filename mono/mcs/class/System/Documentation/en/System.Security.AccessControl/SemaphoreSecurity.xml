@@ -27,31 +27,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+        >A <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object specifies access rights for a named system semaphore, and also specifies how access attempts are audited. Access rights to the semaphore are expressed as rules, with each access rule represented by a <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+         object specifies access rights for a named system semaphore, and also specifies how access attempts are audited. Access rights to the semaphore are expressed as rules, with each access rule represented by a <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
-         object. Each auditing rule is represented by a <see
-         cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+         object. Each auditing rule is represented by a <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
         
 
          object.</para
       >
       <para
-        >This mirrors the underlying Windows security system, in which each securable object has at most one discretionary access control list (DACL) that controls access to the secured object, and at most one system access control list (SACL) that specifies which access attempts are audited. The DACL and SACL are ordered lists of access control entries (ACE) that specify access and auditing for users and groups. A <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+        >This mirrors the underlying Windows security system, in which each securable object has at most one discretionary access control list (DACL) that controls access to the secured object, and at most one system access control list (SACL) that specifies which access attempts are audited. The DACL and SACL are ordered lists of access control entries (ACE) that specify access and auditing for users and groups. A <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
-         or <see
-         cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+         or <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
         
 
@@ -59,8 +54,7 @@
       >
       <block subset="none" type="note">
         <para
-          >A <see
-           cref="T:System.Threading.Semaphore" />
+          >A <see cref="T:System.Threading.Semaphore" />
 
           
 
@@ -68,18 +62,15 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+        >The <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-        , <see
-         cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+        , <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
         
 
-        , and <see
-         cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+        , and <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
         
 
@@ -88,8 +79,7 @@
       <list type="bullet">
         <item>
           <para
-            >Creating a security descriptor with a null DACL. A null reference to a DACL allows any user to add access rules to an object, potentially creating a denial-of-service attack. A new <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Creating a security descriptor with a null DACL. A null reference to a DACL allows any user to add access rules to an object, potentially creating a denial-of-service attack. A new <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -98,8 +88,7 @@
         </item>
         <item>
           <para
-            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -129,18 +118,15 @@
         </item>
       </list>
       <para
-        >To modify Windows access control security for a named semaphore, use the <see
-         cref="M:System.Threading.Semaphore.GetAccessControl" />
+        >To modify Windows access control security for a named semaphore, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" />
 
         
 
-         method to get the <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method to get the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object. Modify the security object by adding and removing rules, and then use the <see
-         cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+         object. Modify the security object by adding and removing rules, and then use the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
@@ -148,13 +134,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Changes you make to a <see
-           cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+          >Changes you make to a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
           
 
-           object do not affect the access levels of the named semaphore until you call the <see
-           cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+           object do not affect the access levels of the named semaphore until you call the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
           
 
@@ -162,36 +146,30 @@
         >
       </block>
       <para
-        >To copy access control security from one semaphore to another, use the <see
-         cref="M:System.Threading.Semaphore.GetAccessControl" />
+        >To copy access control security from one semaphore to another, use the <see cref="M:System.Threading.Semaphore.GetAccessControl" />
 
         
 
-         method to get a <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method to get a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
-         object representing the access and audit rules for the first semaphore, then use the <see
-         cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+         object representing the access and audit rules for the first semaphore, then use the <see cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
 
         
 
-         method, or a constructor that accepts a <see
-         cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+         method, or a constructor that accepts a <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
         
 
          object, to assign those rules to the second semaphore.</para
       >
       <para
-        >Users with an investment in the security descriptor definition language (SDDL) can use the <see
-         cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
+        >Users with an investment in the security descriptor definition language (SDDL) can use the <see cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
         
 
-         method to set access rules for a named semaphore, and the <see
-         cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+         method to set access rules for a named semaphore, and the <see cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
         
 
@@ -224,8 +202,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >A new <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -235,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -271,16 +247,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor allows you to obtain the access control security for a named system semaphore without first creating a <see
-             cref="T:System.Threading.Semaphore" />
+            >This constructor allows you to obtain the access control security for a named system semaphore without first creating a <see cref="T:System.Threading.Semaphore" />
 
             
 
              object.</para
           >
           <para
-            >Caution must be exercised when working with named system objects. If there is a system object named <paramref
-             name="name" />
+            >Caution must be exercised when working with named system objects. If there is a system object named <paramref name="name" />
 
             
 
@@ -290,8 +264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -299,19 +272,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the system semaphore whose access control security rules are to be retrieved.</param
         >
         <param name="includeSections">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of <see
-           cref="T:System.Security.AccessControl.AccessControlSections" />
+          A combination of <see cref="T:System.Security.AccessControl.AccessControlSections" />
 
           
 
@@ -339,13 +319,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
 
             
 
@@ -355,8 +333,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the enumeration that the <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Gets the enumeration that the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -395,8 +372,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create access control rules is to use the constructors of the <see
-             cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+            >The recommended way to create access control rules is to use the constructors of the <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
             
 
@@ -413,8 +389,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+            >A <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
             
 
@@ -422,57 +397,78 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            that identifies the user or group the rule applies to.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.SemaphoreRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.SemaphoreRights" />
 
           
 
            values specifying the access rights to allow or deny, cast to an integer.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named semaphores, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named semaphores, because they have no hierarchy.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named semaphores, because they have no hierarchy.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+          One of the <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -500,13 +496,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
 
             
 
@@ -516,8 +510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that the <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Gets the type that the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -551,28 +544,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)" />
+            >The <see cref="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)" />
 
             
 
-             method searches for rules with the same user or group and the same <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             method searches for rules with the same user or group and the same <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             as <paramref
-             name="rule" />
+             as <paramref name="rule" />
 
             
 
-            . If none are found, <paramref
-             name="rule" />
+            . If none are found, <paramref name="rule" />
 
             
 
-             is added. If a matching rule is found, the rights in <paramref
-             name="rule" />
+             is added. If a matching rule is found, the rights in <paramref name="rule" />
 
             
 
@@ -584,7 +572,11 @@
           <para>Searches for a matching rule with which the new rule can be merged. If none are found, adds the new rule.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -617,23 +609,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)" />
+            >The <see cref="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)" />
 
             
 
-             method searches for rules with the same user or group as <paramref
-             name="rule" />
+             method searches for rules with the same user or group as <paramref name="rule" />
 
             
 
-            . If none are found, <paramref
-             name="rule" />
+            . If none are found, <paramref name="rule" />
 
             
 
-             is added. If a matching rule is found, the flags in <paramref
-             name="rule" />
+             is added. If a matching rule is found, the flags in <paramref name="rule" />
 
             
 
@@ -645,7 +633,11 @@
           <para>Searches for an audit rule with which the new rule can be merged. If none are found, adds the new rule.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -683,8 +675,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The recommended way to create audit rules is to use the constructors of the <see
-             cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+            >The recommended way to create audit rules is to use the constructors of the <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
             
 
@@ -701,13 +692,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+            >A <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
             
 
-             object representing the specified audit rule for the specified user. The return type of the method is the base class, <see
-             cref="T:System.Security.AccessControl.AuditRule" />
+             object representing the specified audit rule for the specified user. The return type of the method is the base class, <see cref="T:System.Security.AccessControl.AuditRule" />
 
             
 
@@ -715,57 +704,78 @@
           >
         </returns>
         <param name="identityReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            that identifies the user or group the rule applies to.</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.SemaphoreRights" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.SemaphoreRights" />
 
           
 
            values specifying the access rights to audit, cast to an integer.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          A bitwise combination of <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -793,13 +803,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that derive from the <see
-             cref="T:System.Security.AccessControl.ObjectSecurity" />
+            >Classes that derive from the <see cref="T:System.Security.AccessControl.ObjectSecurity" />
 
             
 
-             class override the <see
-             cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+             class override the <see cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
 
             
 
@@ -809,8 +817,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that the <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >Gets the type that the <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -844,38 +851,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
-             is searched for a rule that has the same user and the same <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             is searched for a rule that has the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             value as <paramref
-             name="rule" />
+             value as <paramref name="rule" />
 
             
 
-            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
-             name="rule" />
+            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />
 
             
 
-            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
-             name="rule" />
+            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" />
 
             
 
-             are removed from the compatible rule, and the method returns true. If <paramref
-             name="rule" />
+             are removed from the compatible rule, and the method returns true. If <paramref name="rule" />
 
             
 
-             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -883,8 +883,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can specify inheritance and propagation flags for semaphore access rules, by creating them with the <see
-               cref="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
+              >Although you can specify inheritance and propagation flags for semaphore access rules, by creating them with the <see cref="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
 
               
 
@@ -895,8 +894,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for an access control rule with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Searches for an access control rule with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -908,17 +906,19 @@
           <para>true if a compatible rule is found; otherwise false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+          A <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
           
 
-           that specifies the user and <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+           that specifies the user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -951,23 +951,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
-             object is searched for rules that have the same user and the same <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             object is searched for rules that have the same user and the same <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             value as <paramref
-             name="rule" />
+             value as <paramref name="rule" />
 
             
 
-            . Any rights specified by <paramref
-             name="rule" />
+            . Any rights specified by <paramref name="rule" />
 
             
 
@@ -977,8 +973,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for all access control rules with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Searches for all access control rules with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -986,17 +981,19 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+          A <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
           
 
-           that specifies the user and <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+           that specifies the user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -1029,13 +1026,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The rule is removed only if it exactly matches <paramref
-             name="rule" />
+            >The rule is removed only if it exactly matches <paramref name="rule" />
 
             
 
-             in all details, including flags. Other rules with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+             in all details, including flags. Other rules with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -1043,8 +1038,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
-               cref="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)" />
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)" />
 
               
 
@@ -1057,12 +1051,15 @@
           <para>Searches for an access control rule that exactly matches the specified rule and, if found, removes it.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+          The <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
           
 
@@ -1095,33 +1092,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
-             is searched for an audit rule that has the same user as <paramref
-             name="rule" />
+             is searched for an audit rule that has the same user as <paramref name="rule" />
 
             
 
-            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
-             name="rule" />
+            . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref name="rule" />
 
             
 
-            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
-             name="rule" />
+            . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref name="rule" />
 
             
 
-             are removed from the compatible rule, and the method returns true. If <paramref
-             name="rule" />
+             are removed from the compatible rule, and the method returns true. If <paramref name="rule" />
 
             
 
-             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+             specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
@@ -1129,8 +1120,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Although you can specify inheritance and propagation flags for semaphore audit rules, by creating them with the <see
-               cref="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
+              >Although you can specify inheritance and propagation flags for semaphore audit rules, by creating them with the <see cref="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
 
               
 
@@ -1147,12 +1137,15 @@
           <para>true if a compatible rule is found; otherwise, false.</para>
         </returns>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+          A <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
           
 
@@ -1185,18 +1178,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+            >The current <see cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
             
 
-             is searched for audit rules that have the same user as <paramref
-             name="rule" />
+             is searched for audit rules that have the same user as <paramref name="rule" />
 
             
 
-            . Any rights specified by <paramref
-             name="rule" />
+            . Any rights specified by <paramref name="rule" />
 
             
 
@@ -1208,12 +1198,15 @@
           <para>Searches for all audit rules with the same user as the specified rule and, if found, removes them.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+          A <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
           
 
@@ -1246,8 +1239,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The rule is removed only if it exactly matches <paramref
-             name="rule" />
+            >The rule is removed only if it exactly matches <paramref name="rule" />
 
             
 
@@ -1255,8 +1247,7 @@
           >
           <block subset="none" type="note">
             <para
-              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
-               cref="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)" />
+              >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see cref="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)" />
 
               
 
@@ -1269,12 +1260,15 @@
           <para>Searches for an audit rule that exactly matches the specified rule and, if found, removes it.</para>
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+          The <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
           
 
@@ -1307,8 +1301,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are no access rules whose user matches the specified rule, <paramref
-             name="rule" />
+            >If there are no access rules whose user matches the specified rule, <paramref name="rule" />
 
             
 
@@ -1318,8 +1311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access control rules with the same user as the specified rule, regardless of <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Removes all access control rules with the same user as the specified rule, regardless of <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -1327,12 +1319,15 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+          The <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
           
 
@@ -1365,36 +1360,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified rule has <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+            >If the specified rule has <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-            , the effect of this method is to remove all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+            , the effect of this method is to remove all <see cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
             
 
-             rules for the specified user, replacing them with the specified rule. If the specified rule has <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+             rules for the specified user, replacing them with the specified rule. If the specified rule has <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
-            , all <see
-             cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+            , all <see cref="F:System.Security.AccessControl.AccessControlType.Deny" />
 
             
 
              rules for the specified user are replaced with the specified rule.</para
           >
           <para
-            >If there are no rules whose user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >If there are no rules whose user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
-             match the specified rule, <paramref
-             name="rule" />
+             match the specified rule, <paramref name="rule" />
 
             
 
@@ -1404,8 +1393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all access control rules with the same user and <see
-             cref="T:System.Security.AccessControl.AccessControlType" />
+            >Removes all access control rules with the same user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
             
 
@@ -1413,17 +1401,19 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+          The <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
           
 
-           to add. The user and <see
-           cref="T:System.Security.AccessControl.AccessControlType" />
+           to add. The user and <see cref="T:System.Security.AccessControl.AccessControlType" />
 
           
 
@@ -1456,8 +1446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there are no audit rules whose user matches the specified rule, <paramref
-             name="rule" />
+            >If there are no audit rules whose user matches the specified rule, <paramref name="rule" />
 
             
 
@@ -1467,8 +1456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all audit rules with the same user as the specified rule, regardless of the <see
-             cref="T:System.Security.AccessControl.AuditFlags" />
+            >Removes all audit rules with the same user as the specified rule, regardless of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
             
 
@@ -1476,12 +1464,15 @@
           >
         </summary>
         <param name="rule">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+          The <see cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
 
           
 

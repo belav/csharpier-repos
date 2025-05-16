@@ -39,14 +39,12 @@
     <example>
       <para
         >The following example demonstrates an error that causes 
-      the <see
-         cref="T:System.Array" />
+      the <see cref="T:System.Array" />
 
         
 
         
-      class to throw a <see
-         cref="T:System.ArgumentOutOfRangeException" />
+      class to throw a <see cref="T:System.ArgumentOutOfRangeException" />
 
         
 
@@ -90,13 +88,11 @@ class ArgOutOfRangeExample {
       <list type="bullet">
         <item>
           <para
-            >Classes in the <see
-             cref="N:System.Collections" />
+            >Classes in the <see cref="N:System.Collections" />
 
             
 
-             and <see
-             cref="N:System.IO" />
+             and <see cref="N:System.IO" />
 
             
 
@@ -104,24 +100,19 @@ class ArgOutOfRangeExample {
           >
         </item>
         <item>
-          <para
-            >The <see
-             cref="T:System.Array" />
+          <para>The <see cref="T:System.Array" />
 
             
 
-             class.</para
-          >
+             class.</para>
         </item>
       </list>
       <para
-        >ArgumentOutOfRangeException behaves identically to <see
-         cref="T:System.ArgumentException" />
+        >ArgumentOutOfRangeException behaves identically to <see cref="T:System.ArgumentException" />
 
         
 
-        . It is provided so that application code can differentiate between exceptions caused by invalid arguments that are not null, and exceptions caused by null arguments. For errors caused by null arguments, see <see
-         cref="T:System.ArgumentNullException" />
+        . It is provided so that application code can differentiate between exceptions caused by invalid arguments that are not null, and exceptions caused by null arguments. For errors caused by null arguments, see <see cref="T:System.ArgumentNullException" />
 
         
 
@@ -135,13 +126,11 @@ class ArgOutOfRangeExample {
          uses the HRESULT COR_E_ARGUMENTOUTOFRANGE, which has the value 0x80131502.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.ArgumentOutOfRangeException" />
+        >For a list of initial property values for an instance of <see cref="T:System.ArgumentOutOfRangeException" />
 
         
 
-        , see the <see
-         cref="T:System.ArgumentOutOfRangeException" />
+        , see the <see cref="T:System.ArgumentOutOfRangeException" />
 
         
 
@@ -176,16 +165,14 @@ class ArgOutOfRangeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.Message" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Nonnegative number required." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -227,8 +214,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >Initializes a new instance of the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -265,34 +251,29 @@ class ArgOutOfRangeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.Message" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Nonnegative number required." This message takes into account the current system culture.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.ParamName" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.ParamName" />
 
             
 
-             property of the new instance using the <paramref
-             name="paramName" />
+             property of the new instance using the <paramref name="paramName" />
 
             
 
-             parameter. The content of <paramref
-             name="paramName" />
+             parameter. The content of <paramref name="paramName" />
 
             
 
              is intended to be understood by humans.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -344,8 +325,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >Initializes a new instance of the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -353,7 +333,11 @@ class ArgOutOfRangeExample {
           >
         </summary>
         <param name="paramName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -385,8 +369,7 @@ class ArgOutOfRangeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and Soap Serialization</a>
             </format>
 
@@ -398,8 +381,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >Initializes a new instance of the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -407,14 +389,22 @@ class ArgOutOfRangeExample {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -446,8 +436,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >Initializes a new instance of the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -455,14 +444,22 @@ class ArgOutOfRangeExample {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for this exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -498,44 +495,37 @@ class ArgOutOfRangeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentOutOfRangeException.Message" />
+            >This constructor initializes the <see cref="P:System.ArgumentOutOfRangeException.Message" />
 
             
 
-             property of the new instance using the value of the <paramref
-             name="message" />
+             property of the new instance using the value of the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="message" />
+             parameter. The content of the <paramref name="message" />
 
             
 
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.ParamName" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.ParamName" />
 
             
 
-             property of the new instance using the <paramref
-             name="paramName" />
+             property of the new instance using the <paramref name="paramName" />
 
             
 
-             parameter. The content of <paramref
-             name="paramName" />
+             parameter. The content of <paramref name="paramName" />
 
             
 
              is intended to be understood by humans.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -587,8 +577,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >Initializes a new instance of the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -596,14 +585,22 @@ class ArgOutOfRangeExample {
           >
         </summary>
         <param name="paramName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that caused the exception. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -641,82 +638,68 @@ class ArgOutOfRangeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.ArgumentException.ParamName" />
+            >This constructor initializes the <see cref="P:System.ArgumentException.ParamName" />
 
             
 
-             property of the new instance using the <paramref
-             name="paramName" />
+             property of the new instance using the <paramref name="paramName" />
 
             
 
-             parameter, the <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+             parameter, the <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
-             property using the <paramref
-             name="actualValue" />
+             property using the <paramref name="actualValue" />
 
             
 
-             parameter, and the <see
-             cref="P:System.ArgumentException.Message" />
+             parameter, and the <see cref="P:System.ArgumentException.Message" />
 
             
 
-             property using the <paramref
-             name="message" />
+             property using the <paramref name="message" />
 
             
 
-             parameter. The content of the <paramref
-             name="paramName" />
+             parameter. The content of the <paramref name="paramName" />
 
             
 
-             and <paramref
-             name="message" />
+             and <paramref name="message" />
 
             
 
              parameters is intended to be understood by humans. The caller of this constructor is required to ensure that these strings have been localized for the current system culture.</para
           >
           <para
-            >The <paramref
-             name="actualValue" />
+            >The <paramref name="actualValue" />
 
             
 
-             parameter is not used within the .NET Framework class library. However, the <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+             parameter is not used within the .NET Framework class library. However, the <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
              property is provided so that applications can use the available argument value.</para
           >
           <para
-            >The <paramref
-             name="actualValue" />
+            >The <paramref name="actualValue" />
 
             
 
-             parameter contains an invalid value that is passed to the method and causes this exception to be thrown. This value is stored in the <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+             parameter contains an invalid value that is passed to the method and causes this exception to be thrown. This value is stored in the <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
-             property and its string representation is appended to the message string held in the <see
-             cref="P:System.ArgumentOutOfRangeException.Message" />
+             property and its string representation is appended to the message string held in the <see cref="P:System.ArgumentOutOfRangeException.Message" />
 
             
 
              property.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -778,8 +761,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+            >Initializes a new instance of the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -787,21 +769,33 @@ class ArgOutOfRangeExample {
           >
         </summary>
         <param name="paramName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that caused the exception. </param
         >
         <param name="actualValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the argument that causes this exception. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -830,15 +824,13 @@ class ArgOutOfRangeExample {
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Object" />
+            > A <see cref="T:System.Object" />
 
             
 
              that contains the 
    value of the parameter that caused the current exception, or
-<see
-             langword="null" />
+<see langword="null" />
 
             
 
@@ -850,36 +842,30 @@ class ArgOutOfRangeExample {
           <para>Use this property to retrieve the invalid argument.</para>
           <para>The ActualValue property returns the same value that was passed to the constructor, or null if no value was supplied.</para>
           <para
-            >The <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+            >The <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
-             property is assigned a value at the time of object construction. If the <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+             property is assigned a value at the time of object construction. If the <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
-             property value is not null, a string representation of the value is appended to the message string held by the <see
-             cref="P:System.ArgumentOutOfRangeException.Message" />
+             property value is not null, a string representation of the value is appended to the message string held by the <see cref="P:System.ArgumentOutOfRangeException.Message" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+            >The <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
-             property is not used within the .NET Framework class library. It carries a null value in all the <see
-             cref="T:System.ArgumentOutOfRangeException" />
+             property is not used within the .NET Framework class library. It carries a null value in all the <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
-             objects thrown by the .NET Framework class library. The <see
-             cref="P:System.ArgumentOutOfRangeException.ActualValue" />
+             objects thrown by the .NET Framework class library. The <see cref="P:System.ArgumentOutOfRangeException.ActualValue" />
 
             
 
@@ -924,21 +910,18 @@ class ArgOutOfRangeExample {
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             object with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -948,8 +931,7 @@ class ArgOutOfRangeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -957,14 +939,22 @@ class ArgOutOfRangeExample {
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -987,8 +977,7 @@ class ArgOutOfRangeExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -998,8 +987,7 @@ class ArgOutOfRangeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property overrides <see
-             cref="P:System.ArgumentException.Message" />
+            >This property overrides <see cref="P:System.ArgumentException.Message" />
 
             
 

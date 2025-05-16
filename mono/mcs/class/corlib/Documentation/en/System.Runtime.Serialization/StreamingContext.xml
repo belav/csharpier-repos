@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Indicates the source or destination of the bits that the formatter uses. Classes with surrogates or that implement <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >Indicates the source or destination of the bits that the formatter uses. Classes with surrogates or that implement <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-         can serialize or ignore fields and values based on the information stored in the streaming context. For example, a window handle is still valid if the <see
-         cref="P:System.Runtime.Serialization.StreamingContext.State" />
+         can serialize or ignore fields and values based on the information stored in the streaming context. For example, a window handle is still valid if the <see cref="P:System.Runtime.Serialization.StreamingContext.State" />
 
         
 
@@ -69,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -78,17 +75,19 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Runtime.Serialization.StreamingContextStates" />
+          A bitwise combination of the <see cref="T:System.Runtime.Serialization.StreamingContextStates" />
 
           
 
-           values that specify the source or destination context for this <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+           values that specify the source or destination context for this <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -121,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -130,34 +128,38 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Runtime.Serialization.StreamingContextStates" />
+          A bitwise combination of the <see cref="T:System.Runtime.Serialization.StreamingContextStates" />
 
           
 
-           values that specify the source or destination context for this <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+           values that specify the source or destination context for this <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
           . </param
         >
         <param name="additional">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Any additional information to be associated with the <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          Any additional information to be associated with the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-          . This information is available to any object that implements <see
-           cref="T:System.Runtime.Serialization.ISerializable" />
+          . This information is available to any object that implements <see cref="T:System.Runtime.Serialization.ISerializable" />
 
           
 
@@ -211,13 +213,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two code groups are equivalent if they have the same <see
-             cref="P:System.Runtime.Serialization.StreamingContext.Context" />
+            >Two code groups are equivalent if they have the same <see cref="P:System.Runtime.Serialization.StreamingContext.Context" />
 
             
 
-             and <see
-             cref="P:System.Runtime.Serialization.StreamingContext.State" />
+             and <see cref="P:System.Runtime.Serialization.StreamingContext.State" />
 
             
 
@@ -227,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+            >Determines whether two <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -238,8 +237,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified object is an instance of <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+            >true if the specified object is an instance of <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -247,7 +245,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,13 +282,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.StreamingContextStates" />
+            >The <see cref="T:System.Runtime.Serialization.StreamingContextStates" />
 
             
 
-             value that contains the source or destination of the serialization for this <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             value that contains the source or destination of the serialization for this <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -318,13 +318,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >During serialization, the current property specifies the destination of the transmitted data. For example, when serializing data from cross-AppDomain remoting, the <see
-             cref="T:System.Runtime.Serialization.StreamingContextStates" />
+            >During serialization, the current property specifies the destination of the transmitted data. For example, when serializing data from cross-AppDomain remoting, the <see cref="T:System.Runtime.Serialization.StreamingContextStates" />
 
             
 
-             is <see
-             cref="F:System.Runtime.Serialization.StreamingContextStates.CrossProcess" />
+             is <see cref="F:System.Runtime.Serialization.StreamingContextStates.CrossProcess" />
 
             
 

@@ -2,8 +2,7 @@
 <clause number="10.5.4" title="Accessibility constraints">
   <paragraph>Several constructs in the C# language require a type to be at least as accessible as a member or another type. A type T is said to be at least as accessible as a member or type M if the accessibility domain of T is a superset of the accessibility domain of M. In other words, T is at least as accessible as M if T is accessible in all contexts in which M is accessible. </paragraph>
   <paragraph
-    >The following accessibility constraints exist: <list
-    >
+    >The following accessibility constraints exist: <list>
       <list_item> The direct base class of a class type must be at least as accessible as the class type itself. </list_item>
       <list_item> The explicit base interfaces of an interface type must be at least as accessible as the interface type itself. </list_item>
       <list_item> The return type and parameter types of a delegate type must be at least as accessible as the delegate type itself. </list_item>
@@ -19,8 +18,7 @@
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A {...}  
 public class B: A {...}  
@@ -34,8 +32,7 @@ public class B: A {...}
   </paragraph>
   <paragraph>
     <example
-      >[Example: Likewise, in the example <code_example
-      >
+      >[Example: Likewise, in the example <code_example>
         <![CDATA[
 class A {...}  
 public class B  

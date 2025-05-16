@@ -22,8 +22,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the compare option values for a <see
-         cref="T:System.Data.SqlTypes.SqlString" />
+        >Specifies the compare option values for a <see cref="T:System.Data.SqlTypes.SqlString" />
 
         
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies that <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -89,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies that <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -115,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies that <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -141,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies that <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 
@@ -167,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default option settings for <see
-             cref="T:System.Data.SqlTypes.SqlString" />
+            >Specifies the default option settings for <see cref="T:System.Data.SqlTypes.SqlString" />
 
             
 

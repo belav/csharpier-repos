@@ -11,13 +11,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.PropertyGridInternal.IRootGridEntry" />
+        >The <see cref="T:System.Windows.Forms.PropertyGridInternal.IRootGridEntry" />
 
         
 
-         is used internally by the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         is used internally by the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the <see
-             cref="P:System.Windows.Forms.PropertyGridInternal.IRootGridEntry.BrowsableAttributes" />
+            >Resets the <see cref="P:System.Windows.Forms.PropertyGridInternal.IRootGridEntry.BrowsableAttributes" />
 
             
 
@@ -94,7 +91,11 @@
           <para>Sorts the properties in the property browser.</para>
         </summary>
         <param name="showCategories">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

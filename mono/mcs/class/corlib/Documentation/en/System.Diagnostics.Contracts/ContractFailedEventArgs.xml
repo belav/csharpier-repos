@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" />
+        >A <see cref="T:System.Diagnostics.Contracts.ContractFailedEventArgs" />
 
         
 
-         object is passed to the <see
-         cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+         object is passed to the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
         
 
-         event when a contract fails. The <see
-         cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+         event when a contract fails. The <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
         
 
@@ -41,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides methods and data for the <see
-         cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+        >Provides methods and data for the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
         
 
@@ -80,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides data for the <see
-             cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+            >Provides data for the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
             
 
@@ -89,28 +84,44 @@
           >
         </summary>
         <param name="failureKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that specifies the contract that failed.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message for the event.</param
         >
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The condition for the event.</param
         >
         <param name="originalException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -177,13 +188,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+            >If the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
             
 
-             event has not been handled, the debugger is notified. If no debugger is attached, an <ui
-            >Assert</ui>
+             event has not been handled, the debugger is notified. If no debugger is attached, an <ui>Assert</ui>
 
             
 
@@ -193,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the <see
-             cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+            >Indicates whether the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
             
 
@@ -219,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the message that describes the <see
-             cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+            >Gets the message that describes the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
             
 
@@ -248,8 +255,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the original exception that caused the <see
-             cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+            >Gets the original exception that caused the <see cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
             
 
@@ -276,13 +282,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetHandled" />
+            >The <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetHandled" />
 
             
 
-             method provides a way for the runtime analysis checker to indicate that a contract exception has been handled. See the <see
-             cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Handled" />
+             method provides a way for the runtime analysis checker to indicate that a contract exception has been handled. See the <see cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Handled" />
 
             
 
@@ -292,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Handled" />
+            >Sets the <see cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Handled" />
 
             
 
@@ -320,13 +323,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetUnwind" />
+            >The <see cref="M:System.Diagnostics.Contracts.ContractFailedEventArgs.SetUnwind" />
 
             
 
-             method provides a way to indicate that the escalation policy for the code contract should be applied. See the <see
-             cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Unwind" />
+             method provides a way to indicate that the escalation policy for the code contract should be applied. See the <see cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Unwind" />
 
             
 
@@ -336,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Unwind" />
+            >Sets the <see cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Unwind" />
 
             
 
@@ -361,8 +361,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the return value is true, the escalation policy is to notify the attached debugger about a contract failure or to display an <ui
-            >Assert</ui>
+            >If the return value is true, the escalation policy is to notify the attached debugger about a contract failure or to display an <ui>Assert</ui>
 
             
 

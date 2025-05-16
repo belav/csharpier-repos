@@ -17,21 +17,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implement the <see
-         cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+        >Implement the <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
         
 
          interface to enable a client application to display a user interface that enables the user of the application to create or select the credentials prior to opening a channel. </para
       >
       <para
-        >To implement <see
-         cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+        >To implement <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
         
 
-        , perform the following steps in <see
-         cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
+        , perform the following steps in <see cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
 
         
 
@@ -40,8 +37,7 @@
       <list type="ordered">
         <item>
           <para
-            >Prompt the user and obtain an appropriate <see
-             cref="T:System.Net.NetworkCredential" />
+            >Prompt the user and obtain an appropriate <see cref="T:System.Net.NetworkCredential" />
 
             
 
@@ -50,23 +46,19 @@
         </item>
         <item>
           <para
-            >Add a custom channel parameter object to the collection returned by the <see
-             cref="M:System.ServiceModel.Channels.IChannel.GetProperty``1" />
+            >Add a custom channel parameter object to the collection returned by the <see cref="M:System.ServiceModel.Channels.IChannel.GetProperty``1" />
 
             
 
-             method on the <see
-             cref="T:System.ServiceModel.IClientChannel" />
+             method on the <see cref="T:System.ServiceModel.IClientChannel" />
 
             
 
-             object with a type parameter of <see
-             cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+             object with a type parameter of <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
 
             
 
-            . This channel parameter object is used by the custom <see
-             cref="T:System.ServiceModel.ClientCredentialsSecurityTokenManager" />
+            . This channel parameter object is used by the custom <see cref="T:System.ServiceModel.ClientCredentialsSecurityTokenManager" />
 
             
 
@@ -78,8 +70,7 @@
         </item>
       </list>
       <para
-        >To insert <see
-         cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+        >To insert <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
         
 
@@ -88,13 +79,11 @@
       <list type="ordered">
         <item>
           <para
-            >Override the <see
-             cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
+            >Override the <see cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)" />
 
             
 
-             method on the <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+             method on the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 
@@ -103,18 +92,15 @@
         </item>
         <item>
           <para
-            >In that method, determine whether the endpoint requires an <see
-             cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+            >In that method, determine whether the endpoint requires an <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
             
 
-             and if so, add the <see
-             cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+             and if so, add the <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
             
 
-             to the <see
-             cref="P:System.ServiceModel.Dispatcher.ClientRuntime.InteractiveChannelInitializers" />
+             to the <see cref="P:System.ServiceModel.Dispatcher.ClientRuntime.InteractiveChannelInitializers" />
 
             
 
@@ -123,41 +109,34 @@
         </item>
       </list>
       <para
-        >There are two ways application developers can make use of an inserted <see
-         cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+        >There are two ways application developers can make use of an inserted <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
         
 
-        . The client application can call either <see
-         cref="M:System.ServiceModel.ClientBase`1.DisplayInitializationUI" />
+        . The client application can call either <see cref="M:System.ServiceModel.ClientBase`1.DisplayInitializationUI" />
 
         
 
-         or <see
-         cref="M:System.ServiceModel.IClientChannel.DisplayInitializationUI" />
+         or <see cref="M:System.ServiceModel.IClientChannel.DisplayInitializationUI" />
 
         
 
-         (or an asynchronous version) prior to opening the channel (the <newTerm
-        >explicit</newTerm>
+         (or an asynchronous version) prior to opening the channel (the <newTerm>explicit</newTerm>
 
         
 
-         approach) or simply call the first operation (the <newTerm
-        >implicit</newTerm>
+         approach) or simply call the first operation (the <newTerm>implicit</newTerm>
 
         
 
          approach).</para
       >
       <para
-        >If using the implicit approach, the application must call the first operation on an <see
-         cref="T:System.ServiceModel.ClientBase`1" />
+        >If using the implicit approach, the application must call the first operation on an <see cref="T:System.ServiceModel.ClientBase`1" />
 
         
 
-         or <see
-         cref="T:System.ServiceModel.IClientChannel" />
+         or <see cref="T:System.ServiceModel.IClientChannel" />
 
         
 
@@ -167,13 +146,11 @@
       <list type="ordered">
         <item>
           <para
-            >Call either <see
-             cref="M:System.ServiceModel.ClientBase`1.DisplayInitializationUI" />
+            >Call either <see cref="M:System.ServiceModel.ClientBase`1.DisplayInitializationUI" />
 
             
 
-             or <see
-             cref="M:System.ServiceModel.IClientChannel.DisplayInitializationUI" />
+             or <see cref="M:System.ServiceModel.IClientChannel.DisplayInitializationUI" />
 
             
 
@@ -182,23 +159,19 @@
         </item>
         <item>
           <para
-            >When the initializers have returned, call either the <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+            >When the initializers have returned, call either the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             method on the <see
-             cref="T:System.ServiceModel.IClientChannel" />
+             method on the <see cref="T:System.ServiceModel.IClientChannel" />
 
             
 
-             object or on the <see
-             cref="T:System.ServiceModel.IClientChannel" />
+             object or on the <see cref="T:System.ServiceModel.IClientChannel" />
 
             
 
-             object returned from the <see
-             cref="P:System.ServiceModel.ClientBase`1.InnerChannel" />
+             object returned from the <see cref="P:System.ServiceModel.ClientBase`1.InnerChannel" />
 
             
 
@@ -243,13 +216,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement <see
-             cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
+            >To implement <see cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
             
 
-            , perform the following steps in <see
-             cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
+            , perform the following steps in <see cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
 
             
 
@@ -258,8 +229,7 @@
           <list type="ordered">
             <item>
               <para
-                >Prompt the user in what way you see fit and obtain an appropriate <see
-                 cref="T:System.Net.NetworkCredential" />
+                >Prompt the user in what way you see fit and obtain an appropriate <see cref="T:System.Net.NetworkCredential" />
 
                 
 
@@ -268,23 +238,19 @@
             </item>
             <item>
               <para
-                >Add a custom channel parameter object to the collection returned by the <see
-                 cref="M:System.ServiceModel.Channels.IChannel.GetProperty``1" />
+                >Add a custom channel parameter object to the collection returned by the <see cref="M:System.ServiceModel.Channels.IChannel.GetProperty``1" />
 
                 
 
-                 method on the <see
-                 cref="T:System.ServiceModel.IClientChannel" />
+                 method on the <see cref="T:System.ServiceModel.IClientChannel" />
 
                 
 
-                 object with a type parameter of <see
-                 cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
+                 object with a type parameter of <see cref="T:System.ServiceModel.Channels.ChannelParameterCollection" />
 
                 
 
-                . This channel parameter object is used by the custom <see
-                 cref="T:System.ServiceModel.ClientCredentialsSecurityTokenManager" />
+                . This channel parameter object is used by the custom <see cref="T:System.ServiceModel.ClientCredentialsSecurityTokenManager" />
 
                 
 
@@ -303,8 +269,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -312,21 +277,33 @@
           >
         </returns>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The client channel.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The callback object.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -358,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when the <see
-             cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
+            >Called when the <see cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
 
             
 
@@ -367,12 +343,15 @@
           >
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 

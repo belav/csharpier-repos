@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Drawing.Drawing2D" />
+        >The <see cref="N:System.Drawing.Drawing2D" />
 
         
 
@@ -15,8 +14,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following table lists some of the important classes and enumerations in the<see
-         cref="N:System.Drawing.Drawing2D" />
+        >The following table lists some of the important classes and enumerations in the<see cref="N:System.Drawing.Drawing2D" />
 
         
 
@@ -43,33 +41,27 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Drawing.Drawing2D.GraphicsState" />
+              >The <see cref="T:System.Drawing.Drawing2D.GraphicsState" />
 
               
 
-               and <see
-               cref="T:System.Drawing.Drawing2D.GraphicsContainer" />
+               and <see cref="T:System.Drawing.Drawing2D.GraphicsContainer" />
 
               
 
-               classes report information about the current Graphics object. <see
-               cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+               classes report information about the current Graphics object. <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
               
 
-               classes represent a series of lines and curves. The <see
-               cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+               classes represent a series of lines and curves. The <see cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
 
               
 
-               and <see
-               cref="T:System.Drawing.Drawing2D.PathData" />
+               and <see cref="T:System.Drawing.Drawing2D.PathData" />
 
               
 
-               classes provide detailed information about the contents of a <see
-               cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+               classes provide detailed information about the contents of a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
               
 
@@ -87,13 +79,11 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Drawing.Drawing2D.Matrix" />
+              >The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
               
 
-               class represents a matrix for geometric transforms. The <see
-               cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+               class represents a matrix for geometric transforms. The <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
               
 
@@ -111,13 +101,11 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
+              >The <see cref="T:System.Drawing.Drawing2D.PathGradientBrush" />
 
               
 
-               and <see
-               cref="T:System.Drawing.Drawing2D.HatchBrush" />
+               and <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
               
 
@@ -135,28 +123,23 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Drawing.Drawing2D.LineCap" />
+              >The <see cref="T:System.Drawing.Drawing2D.LineCap" />
 
               
 
-               and <see
-               cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+               and <see cref="T:System.Drawing.Drawing2D.CustomLineCap" />
 
               
 
-               enumerations enable you to specify cap styles for a line. The, <see
-               cref="T:System.Drawing.Drawing2D.LineJoin" />
+               enumerations enable you to specify cap styles for a line. The, <see cref="T:System.Drawing.Drawing2D.LineJoin" />
 
               
 
-                enumeration enables you to specify how two lines are joined in a path. The <see
-               cref="T:System.Drawing.Drawing2D.PenAlignment" />
+                enumeration enables you to specify how two lines are joined in a path. The <see cref="T:System.Drawing.Drawing2D.PenAlignment" />
 
               
 
-               enumeration enables you specify the alignment of the drawing tip, when you draw a line. The <see
-               cref="T:System.Drawing.Drawing2D.PenType" />
+               enumeration enables you specify the alignment of the drawing tip, when you draw a line. The <see cref="T:System.Drawing.Drawing2D.PenType" />
 
               
 
@@ -174,33 +157,27 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Drawing.Drawing2D.HatchStyle" />
+              >The <see cref="T:System.Drawing.Drawing2D.HatchStyle" />
 
               
 
-               enumeration specifies fill styles for a <see
-               cref="T:System.Drawing.Drawing2D.HatchBrush" />
+               enumeration specifies fill styles for a <see cref="T:System.Drawing.Drawing2D.HatchBrush" />
 
               
 
-              . The <see
-               cref="T:System.Drawing.Drawing2D.Blend" />
+              . The <see cref="T:System.Drawing.Drawing2D.Blend" />
 
               
 
-               class specifies a blend pattern for a <see
-               cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
+               class specifies a blend pattern for a <see cref="T:System.Drawing.Drawing2D.LinearGradientBrush" />
 
               
 
-              . The <see
-               cref="T:System.Drawing.Drawing2D.FillMode" />
+              . The <see cref="T:System.Drawing.Drawing2D.FillMode" />
 
               
 
-               enumeration specifies the fill style for a <see
-               cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+               enumeration specifies the fill style for a <see cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
               
 
@@ -211,8 +188,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Classes in the <see
-           cref="N:System.Drawing.Drawing2D" />
+          >Classes in the <see cref="N:System.Drawing.Drawing2D" />
 
           
 

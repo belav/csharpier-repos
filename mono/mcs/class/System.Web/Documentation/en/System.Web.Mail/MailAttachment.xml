@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides properties and methods for constructing an e-mail attachment. Recommended alternative: <see
-         cref="N:System.Net.Mail" />
+        >Provides properties and methods for constructing an e-mail attachment. Recommended alternative: <see cref="N:System.Net.Mail" />
 
         
 
@@ -42,23 +41,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Mail.MailAttachment" />
+            >Initializes a new instance of the <see cref="T:System.Web.Mail.MailAttachment" />
 
             
 
-             class with the specified file name for the attachment. Sets the <see
-             cref="T:System.Text.Encoding" />
+             class with the specified file name for the attachment. Sets the <see cref="T:System.Text.Encoding" />
 
             
 
-             property to <see
-             cref="F:System.Web.Mail.MailEncoding.UUEncode" />
+             property to <see cref="F:System.Web.Mail.MailEncoding.UUEncode" />
 
             
 
-             by default. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+             by default. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 
@@ -66,7 +61,11 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Mail.MailAttachment" />
+            >Initializes a new instance of the <see cref="T:System.Web.Mail.MailAttachment" />
 
             
 
-             class with the specified file name and encoding type for the attachment. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+             class with the specified file name and encoding type for the attachment. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 
@@ -108,19 +105,26 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attachment file. </param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of <see
-           cref="T:System.Web.Mail.MailEncoding" />
+          The type of <see cref="T:System.Web.Mail.MailEncoding" />
 
           
 
@@ -147,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of encoding for the e-mail attachment. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+            >Gets the type of encoding for the e-mail attachment. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 
@@ -173,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the attachment file. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+            >Gets the name of the attachment file. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 

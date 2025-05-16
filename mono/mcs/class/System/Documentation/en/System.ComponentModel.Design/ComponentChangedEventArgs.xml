@@ -38,26 +38,22 @@
 
         
 
-         provides data for a <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+         provides data for a <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
-         event. The <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+         event. The <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
-         event notifies the <see
-         cref="T:System.ComponentModel.Design.IComponentChangeService" />
+         event notifies the <see cref="T:System.ComponentModel.Design.IComponentChangeService" />
 
         
 
          and registered event handlers that a particular component in the currently active document has been changed.</para
       >
       <para
-        >A <see
-         cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+        >A <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
 
         
 
@@ -66,8 +62,7 @@
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.Component" />
+            >A <see cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.Component" />
 
             
 
@@ -76,8 +71,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.Member" />
+            >A <see cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.Member" />
 
             
 
@@ -86,8 +80,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.NewValue" />
+            >A <see cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.NewValue" />
 
             
 
@@ -96,8 +89,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.OldValue" />
+            >An <see cref="P:System.ComponentModel.Design.ComponentChangedEventArgs.OldValue" />
 
             
 
@@ -106,18 +98,15 @@
         </item>
       </list>
       <para
-        >Component designers typically raise the <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+        >Component designers typically raise the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
-         event automatically when components are added, removed, or modified. A <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+         event automatically when components are added, removed, or modified. A <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
-         event is not raised during form load and unload because changes at this time are expected. A component designer might raise the <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+         event is not raised during form load and unload because changes at this time are expected. A component designer might raise the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
@@ -127,8 +116,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+        >Provides data for the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
 
         
 
@@ -167,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
 
             
 
@@ -176,33 +163,48 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component that was changed. </param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.MemberDescriptor" />
+          A <see cref="T:System.ComponentModel.MemberDescriptor" />
 
           
 
            that represents the member that was changed. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The old value of the changed member. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

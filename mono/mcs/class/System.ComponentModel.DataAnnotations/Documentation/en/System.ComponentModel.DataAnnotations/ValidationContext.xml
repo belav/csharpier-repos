@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class describes the type or member on which validation is performed. It also enables custom validation to be added through any service that implements the <see
-         cref="T:System.IServiceProvider" />
+        >This class describes the type or member on which validation is performed. It also enables custom validation to be added through any service that implements the <see cref="T:System.IServiceProvider" />
 
         
 
@@ -53,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
             
 
@@ -62,7 +60,11 @@
           >
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,13 +96,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="items" />
+            >If <paramref name="items" />
 
             
 
-             is null, an empty dictionary is created. If <paramref
-             name="items" />
+             is null, an empty dictionary is created. If <paramref name="items" />
 
             
 
@@ -110,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
             
 
@@ -119,14 +118,22 @@
           >
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object instance to validate.  It cannot be null</param
         >
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,21 +166,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="serviceProvider" />
+            >The <paramref name="serviceProvider" />
 
             
 
-             parameter represents a service that can be used by the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
+             parameter represents a service that can be used by the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
 
             
 
              method in order to perform custom validation. </para
           >
           <para
-            >If the <paramref
-             name="items" />
+            >If the <paramref name="items" />
 
             
 
@@ -183,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
             
 
@@ -192,26 +195,37 @@
           >
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to validate. This parameter is required.</param
         >
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that implements the <see
-           cref="T:System.IServiceProvider" />
+          The object that implements the <see cref="T:System.IServiceProvider" />
 
           
 
            interface. This parameter is optional.</param
         >
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,18 +248,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.DisplayName" />
+            >The <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.DisplayName" />
 
             
 
-             value is the name that is shown to the user. If a display name is not explicitly set, this property uses the value that is assigned by the associated <see
-             cref="T:System.ComponentModel.DataAnnotations.DisplayAttribute" />
+             value is the name that is shown to the user. If a display name is not explicitly set, this property uses the value that is assigned by the associated <see cref="T:System.ComponentModel.DataAnnotations.DisplayAttribute" />
 
             
 
-             object. If that attribute does not exist, the property returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.MemberName" />
+             object. If that attribute does not exist, the property returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.MemberName" />
 
             
 
@@ -278,36 +289,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
+            >If the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
 
             
 
-             object is defined at the application level, the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
+             object is defined at the application level, the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
 
             
 
              method accesses it to retrieve the requested service. </para
           >
           <para
-            >If the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
+            >If the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
 
             
 
-             object is not defined or it does not return the service, the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
+             object is not defined or it does not return the service, the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.GetService(System.Type)" />
 
             
 
-             method queries the <see
-             cref="T:System.IServiceProvider" />
+             method queries the <see cref="T:System.IServiceProvider" />
 
             
 
-             object that is passed to the <see
-             cref="M:System.ComponentModel.DataAnnotations.ValidationContext.#ctor(System.Object,System.IServiceProvider,System.Collections.Generic.IDictionary{System.Object,System.Object})" />
+             object that is passed to the <see cref="M:System.ComponentModel.DataAnnotations.ValidationContext.#ctor(System.Object,System.IServiceProvider,System.Collections.Generic.IDictionary{System.Object,System.Object})" />
 
             
 
@@ -323,7 +328,11 @@
           <para>An instance of the service, or null if the service is not available.</para>
         </returns>
         <param name="serviceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -355,13 +364,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+            >Initializes the <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
 
             
 
              using a service provider that can return service instances by type when <see
-
               cref="http://msdn.microsoft.com/en-us/library/system.web.mvc.idependencyresolver.getservice(VS.98).aspx"
               >GetService</see
             >
@@ -372,7 +379,11 @@
           >
         </summary>
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -492,31 +503,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
+            >The <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
 
             
 
              property is used for getting services during validation.</para
           >
           <para
-            >If the <see
-             cref="T:System.IServiceProvider" />
+            >If the <see cref="T:System.IServiceProvider" />
 
             
 
-             provider that is specified in the constructor implements the <see
-             cref="T:System.ComponentModel.Design.IServiceContainer" />
+             provider that is specified in the constructor implements the <see cref="T:System.ComponentModel.Design.IServiceContainer" />
 
             
 
-             interface, the provider is used to initialize the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
+             interface, the provider is used to initialize the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
 
             
 
-             property. Otherwise the <see
-             cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
+             property. Otherwise the <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.ServiceContainer" />
 
             
 

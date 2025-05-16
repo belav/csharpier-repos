@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -36,8 +38,7 @@
       </Parameters>
       <Docs>
         <param name="hashAlgorithm"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -45,8 +46,7 @@
         >
         <summary>Return a context to do a series of hashing operation with the default Cryptographic Service Provider (CSP).</summary>
         <remarks
-          >A default <see
-           cref="T:Mono.Security.Cryptography.CapiContext" />
+          >A default <see cref="T:Mono.Security.Cryptography.CapiContext" />
 
           
 
@@ -71,16 +71,14 @@
       </Parameters>
       <Docs>
         <param name="ctx"
-          >a <see
-           cref="T:Mono.Security.Cryptography.CapiContext" />
+          >a <see cref="T:Mono.Security.Cryptography.CapiContext" />
 
           
 
            representing the Cryptographic Service Provider (CSP) to use.</param
         >
         <param name="hashAlgorithm"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -107,16 +105,14 @@
       </Parameters>
       <Docs>
         <param name="cspParams"
-          >a <see
-           cref="T:System.Security.Cryptography.CspParameters" />
+          >a <see cref="T:System.Security.Cryptography.CspParameters" />
 
           
 
            containing the parameters to create the cryptographic context.</param
         >
         <param name="hashAlgorithm"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -124,13 +120,11 @@
         >
         <summary>Return a context to do a series of hashing operation with a Cryptographic Service Provider (CSP) created with the specifed parameters.</summary>
         <remarks
-          >A <see
-           cref="T:Mono.Security.Cryptography.CapiContext" />
+          >A <see cref="T:Mono.Security.Cryptography.CapiContext" />
 
           
 
-           will be created with the specified <see
-           cref="T:System.Security.Cryptography.CspParameters" />
+           will be created with the specified <see cref="T:System.Security.Cryptography.CspParameters" />
 
           
 
@@ -184,8 +178,7 @@
       <Docs>
         <summary>Return the HCRYPTHASH handle managed by the class.</summary>
         <value
-          >a <see
-           cref="T:System.IntPtr" />
+          >a <see cref="T:System.IntPtr" />
 
           
 
@@ -233,10 +226,7 @@
       <Parameters />
       <Docs>
         <summary>This finalizes the hash. Takes the data from the chaining variables and returns it.</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -254,8 +244,7 @@
       <Docs>
         <summary>Returns the size in bits of the hash.</summary>
         <value
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 
@@ -279,8 +268,7 @@
       </Parameters>
       <Docs>
         <param name="algo"
-          >a <see
-           cref="T:System.Int32" />
+          >a <see cref="T:System.Int32" />
 
           
 

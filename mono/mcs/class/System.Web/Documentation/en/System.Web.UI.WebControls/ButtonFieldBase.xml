@@ -17,51 +17,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+        >The <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
         
 
-         class is the abstract base class for button fields and contains the methods and properties that are common to all button fields. Because this class is abstract, you cannot create an instance of it directly. Instead, you must create an instance of a non-abstract class that inherits from the <see
-         cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+         class is the abstract base class for button fields and contains the methods and properties that are common to all button fields. Because this class is abstract, you cannot create an instance of it directly. Instead, you must create an instance of a non-abstract class that inherits from the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
         
 
-         class, such as the <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+         class, such as the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+         or <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
          class.</para
       >
       <para
-        >An object that is derived from the  <see
-         cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+        >An object that is derived from the  <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
         
 
-         is used by data-bound controls (such as the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         is used by data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         controls) to display one or more buttons for each record that is displayed. A button field is displayed differently depending on the data-bound control in which it is used. For example, the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         controls) to display one or more buttons for each record that is displayed. A button field is displayed differently depending on the data-bound control in which it is used. For example, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control displays a button field as a column, whereas the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         control displays a button field as a column, whereas the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
@@ -70,23 +61,19 @@
       <para>Clicking a button in a button field raises the command event of the parent data-bound control. You can provide a custom routine to perform when a button is clicked by providing an event handler for the command event.</para>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control raises the <see
-           cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+           control raises the <see cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
 
           
 
-           event, whereas the <see
-           cref="T:System.Web.UI.WebControls.DetailsView" />
+           event, whereas the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
           
 
-           control raises the <see
-           cref="E:System.Web.UI.WebControls.DetailsView.ItemCommand" />
+           control raises the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemCommand" />
 
           
 
@@ -94,18 +81,15 @@
         >
       </block>
       <para
-        >To specify the type of button to display, use the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+        >To specify the type of button to display, use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
         
 
-         property. To show or hide the header section of a <see
-         cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+         property. To show or hide the header section of a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
         
 
-         object, set the <see
-         cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+         object, set the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
         
 
@@ -113,13 +97,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Some data-bound controls (such as the <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >Some data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
-           cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
           
 
@@ -130,18 +112,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Serves as the abstract base class for button fields, such as the <see
-         cref="T:System.Web.UI.WebControls.ButtonField" />
+        >Serves as the abstract base class for button fields, such as the <see cref="T:System.Web.UI.WebControls.ButtonField" />
 
         
 
-         or <see
-         cref="T:System.Web.UI.WebControls.CommandField" />
+         or <see cref="T:System.Web.UI.WebControls.CommandField" />
 
         
 
-         class. The <see
-         cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+         class. The <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
         
 
@@ -159,13 +138,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+            >Because the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
-             class is an abstract class, you cannot create a <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             class is an abstract class, you cannot create a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
@@ -175,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
@@ -208,8 +184,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
             
 
@@ -285,51 +260,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently of other validation groups on the page. Use the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+            >Validation groups allow you to assign validation controls on a page to a specific category. Each validation group can be validated independently of other validation groups on the page. Use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
             
 
-             property to specify the name of the validation group for which the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             property to specify the name of the validation group for which the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
              object causes validation when it posts back to the server.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+            >The <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
             
 
-             property has an effect only when the value of the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
+             property has an effect only when the value of the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
 
             
 
-             property is set to true. When you specify a value for the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+             property is set to true. When you specify a value for the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
             
 
-             property, only the validation controls that are part of the specified group are validated when the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             property, only the validation controls that are part of the specified group are validated when the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
-             posts back to the server. If you do not specify a value for the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+             posts back to the server. If you do not specify a value for the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
+             property and the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
 
             
 
-             property is set to true, all validation controls on the page that are not assigned to a validation group are validated when the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             property is set to true, all validation controls on the page that are not assigned to a validation group are validated when the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
@@ -340,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether validation is performed when a button in a <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+            >Gets or sets a value indicating whether validation is performed when a button in a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
@@ -370,28 +335,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ButtonFieldBase.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
+            >The <see cref="M:System.Web.UI.WebControls.ButtonFieldBase.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
 
             
 
-             method is a helper method that is used by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is a helper method that is used by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to copy the properties of the current object that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             method to copy the properties of the current object that is derived from the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
-             class to the <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             class to the <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
-             object that is passed in the <paramref
-             name="newField" />
+             object that is passed in the <paramref name="newField" />
 
             
 
@@ -401,13 +361,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the properties of the current object that is derived from the <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+            >Copies the properties of the current object that is derived from the <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
-             class to the specified <see
-             cref="T:System.Web.UI.WebControls.DataControlField" />
+             class to the specified <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
             
 
@@ -415,17 +373,19 @@
           >
         </summary>
         <param name="newField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlField" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
-           to which to copy the properties of the current <see
-           cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+           to which to copy the properties of the current <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
           
 
@@ -453,18 +413,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
             
 
-             property to show or hide the header section of a <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             property to show or hide the header section of a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
-             object. To show the header section, set the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+             object. To show the header section, set the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
             
 
@@ -472,13 +429,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Some data-bound controls (such as the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >Some data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
-               control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+               control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
 
               
 
@@ -490,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the header section is displayed in a <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+            >Gets or sets a value indicating whether the header section is displayed in a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
@@ -520,13 +474,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
             
 
-             property to specify the validation group to validate when a button in a <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+             property to specify the validation group to validate when a button in a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 
@@ -534,13 +486,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
+              >The <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
 
               
 
-               property must be set to true for the <see
-               cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+               property must be set to true for the <see cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
 
               
 
@@ -548,8 +498,7 @@
             >
           </block>
           <para
-            >For more information on validation groups, see <see
-             cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
+            >For more information on validation groups, see <see cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
 
             
 
@@ -560,8 +509,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the group of validation controls to validate when a button in a <see
-             cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+            >Gets or sets the name of the group of validation controls to validate when a button in a <see cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
             
 

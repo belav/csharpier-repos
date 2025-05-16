@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -40,14 +42,8 @@
       </Parameters>
       <Docs>
         <summary>Reads a RELAX NG pattern from XmlReader. This method equals to the call to Read (xmlReader, RelaxngMergedProvider.DefaultProvider).</summary>
-        <param name="xmlReader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
-        </param>
-        <returns
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
-        </returns>
+        <param name="xmlReader">a <see cref="T:System.Xml.XmlReader" /></param>
+        <returns>a <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" /></returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -66,32 +62,25 @@
       </Parameters>
       <Docs>
         <summary
-          >Reads a RELAX NG pattern from XmlReader, using specified data type provider (see <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+          >Reads a RELAX NG pattern from XmlReader, using specified data type provider (see <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
 
           
 
            for the detail).</summary
         >
         <param name="xmlReader"
-          >a <see
-           cref="T:System.Xml.XmlReader" />
+          >a <see cref="T:System.Xml.XmlReader" />
 
           
 
            that holds the target RELAX NG grammar XML.</param
         >
         <param name="provider"
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
         </param>
-        <returns
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPattern" />
-        </returns>
+        <returns>a <see cref="T:Commons.Xml.Relaxng.RelaxngPattern" /></returns>
         <remarks
-          >This method is not designed to read RELAX NG compact syntax. To parse RELAX NG compact syntax, use <see
-           cref="T:Commons.Xml.Relaxng.Rnc.RncParser" />
+          >This method is not designed to read RELAX NG compact syntax. To parse RELAX NG compact syntax, use <see cref="T:Commons.Xml.Relaxng.Rnc.RncParser" />
 
           
 
@@ -109,8 +98,7 @@
       <Docs>
         <summary>Compiles the pattern and checks if the pattern object contains any errors or not.</summary>
         <remarks
-          >This method is anyways called internally before being used in <see
-           cref="T:Commons.Xml.Relaxng.RelaxngValidatingReader" />
+          >This method is anyways called internally before being used in <see cref="T:Commons.Xml.Relaxng.RelaxngValidatingReader" />
 
           
 
@@ -140,10 +128,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the pattern type of this instance.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngPatternType" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngPatternType" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -159,17 +144,13 @@
       <Parameters />
       <Docs>
         <summary
-          >Returns the data type provider for this pattern instance. See <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+          >Returns the data type provider for this pattern instance. See <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
 
           
 
            for the detail.</summary
         >
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

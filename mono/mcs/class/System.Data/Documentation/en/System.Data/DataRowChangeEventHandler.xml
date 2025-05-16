@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you create a <see
-         cref="T:System.Data.DataRowChangeEventHandler" />
+        >When you create a <see cref="T:System.Data.DataRowChangeEventHandler" />
 
         
 
-         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, until you remove the delegate. For more information about delegates, see <format
-         type="text/html">
+         delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, until you remove the delegate. For more information about delegates, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -40,28 +38,23 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Data.DataTable.RowChanging" />
+        >Represents the method that will handle the <see cref="E:System.Data.DataTable.RowChanging" />
 
         
 
-        , <see
-         cref="E:System.Data.DataTable.RowChanged" />
+        , <see cref="E:System.Data.DataTable.RowChanged" />
 
         
 
-        , <see
-         cref="E:System.Data.DataTable.RowDeleting" />
+        , <see cref="E:System.Data.DataTable.RowDeleting" />
 
         
 
-        , and <see
-         cref="E:System.Data.DataTable.RowDeleted" />
+        , and <see cref="E:System.Data.DataTable.RowDeleted" />
 
         
 
-         events of a <see
-         cref="T:System.Data.DataTable" />
+         events of a <see cref="T:System.Data.DataTable" />
 
         
 

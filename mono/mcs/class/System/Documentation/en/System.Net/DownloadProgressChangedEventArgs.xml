@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to the <see
-         cref="T:System.Net.DownloadProgressChangedEventHandler" />
+        >Instances of this class are passed to the <see cref="T:System.Net.DownloadProgressChangedEventHandler" />
 
         
 
@@ -36,13 +35,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Net.WebClient.DownloadProgressChanged" />
+        >Provides data for the <see cref="E:System.Net.WebClient.DownloadProgressChanged" />
 
         
 
-         event of a <see
-         cref="T:System.Net.WebClient" />
+         event of a <see cref="T:System.Net.WebClient" />
 
         
 
@@ -68,8 +65,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine what percentage of the transfer has occurred, use the <see
-             cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
             
 
@@ -99,16 +95,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine the number of bytes already received, use the <see
-             cref="P:System.Net.DownloadProgressChangedEventArgs.BytesReceived" />
+            >To determine the number of bytes already received, use the <see cref="P:System.Net.DownloadProgressChangedEventArgs.BytesReceived" />
 
             
 
              property.</para
           >
           <para
-            >To determine what percentage of the transfer has occurred, use the <see
-             cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+            >To determine what percentage of the transfer has occurred, use the <see cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
             
 
@@ -118,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the total number of bytes in a <see
-             cref="T:System.Net.WebClient" />
+            >Gets the total number of bytes in a <see cref="T:System.Net.WebClient" />
 
             
 

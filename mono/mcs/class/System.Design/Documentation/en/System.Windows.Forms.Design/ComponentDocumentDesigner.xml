@@ -37,18 +37,15 @@
 
         
 
-         provides a base class for designers of root design documents that support nested components. In addition to the methods and functionality inherited from the <see
-         cref="T:System.ComponentModel.Design.ComponentDesigner" />
+         provides a base class for designers of root design documents that support nested components. In addition to the methods and functionality inherited from the <see cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
         
 
-         class, <see
-         cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+         class, <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
         
 
-         implements the <see
-         cref="T:System.ComponentModel.Design.IRootDesigner" />
+         implements the <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
         
 
@@ -56,18 +53,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The root-level design mode view for a <see
-           cref="T:System.Windows.Forms.Form" />
+          >The root-level design mode view for a <see cref="T:System.Windows.Forms.Form" />
 
           
 
-           or <see
-           cref="T:System.Windows.Forms.Control" />
+           or <see cref="T:System.Windows.Forms.Control" />
 
           
 
-           is typically provided by a built-in root designer. A custom <see
-           cref="T:System.ComponentModel.Design.IRootDesigner" />
+           is typically provided by a built-in root designer. A custom <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
           
 
@@ -75,13 +69,11 @@
         >
       </block>
       <para
-        >You can associate a designer with a type using a <see
-         cref="T:System.ComponentModel.DesignerAttribute" />
+        >You can associate a designer with a type using a <see cref="T:System.ComponentModel.DesignerAttribute" />
 
         
 
-        . For an overview of customizing design time behavior, see <format
-         type="text/html">
+        . For an overview of customizing design time behavior, see <format type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
 
@@ -105,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
@@ -151,36 +142,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
@@ -190,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
@@ -199,7 +183,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -237,12 +225,15 @@
           <para>true if the tool should be enabled on the toolbox; false if the document designer doesn't know how to use the tool.</para>
         </returns>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -273,12 +264,15 @@
           <para>Initializes the designer with the specified component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -306,8 +300,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+            >This <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -317,8 +310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adjusts the set of properties the component will expose through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Adjusts the set of properties the component will expose through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -326,12 +318,15 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -363,13 +358,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IRootDesigner" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
             
 
@@ -379,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="T:System.ComponentModel.Design.ViewTechnology" />
+            >For a description of this member, see <see cref="T:System.ComponentModel.Design.ViewTechnology" />
 
             
 
@@ -392,12 +384,15 @@
           <para>An object that represents the view for this designer.</para>
         </returns>
         <param name="technology">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.ViewTechnology" />
+          A <see cref="T:System.ComponentModel.Design.ViewTechnology" />
 
           
 
@@ -423,13 +418,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.IRootDesigner" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.IRootDesigner" />
 
             
 
@@ -439,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
+            >For a description of this member, see <see cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
 
             
 
@@ -470,13 +462,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
 
             
 
@@ -486,8 +476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterAttributes(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterAttributes(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
 
             
 
@@ -499,14 +488,22 @@
           <para>true if the set of filtered attributes is to be cached; false if the filter service must query again.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to filter the attributes of.</param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -535,13 +532,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
 
             
 
@@ -551,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterEvents(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterEvents(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
 
             
 
@@ -564,14 +558,22 @@
           <para>true if the set of filtered events is to be cached; false if the filter service must query again.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to filter events for.</param
         >
         <param name="events">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -600,13 +602,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+             instance is cast to an <see cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
 
             
 
@@ -616,8 +616,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterProperties(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
+            >For a description of this member, see <see cref="M:System.ComponentModel.Design.ITypeDescriptorFilterService.FilterProperties(System.ComponentModel.IComponent,System.Collections.IDictionary)" />
 
             
 
@@ -629,14 +628,22 @@
           <para>true if the set of filtered properties is to be cached; false if the filter service must query again.</para>
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to filter properties for.</param
         >
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -664,13 +671,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Drawing.Design.IToolboxUser" />
+             instance is cast to an <see cref="T:System.Drawing.Design.IToolboxUser" />
 
             
 
@@ -680,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
+            >For a description of this member, see <see cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
 
             
 
@@ -693,12 +697,15 @@
           <para>true if the tool is supported by the toolbox and can be enabled; false if the document designer does not know how to use the tool.</para>
         </returns>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 
@@ -726,13 +733,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.Design.ComponentDocumentDesigner" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Drawing.Design.IToolboxUser" />
+             instance is cast to an <see cref="T:System.Drawing.Design.IToolboxUser" />
 
             
 
@@ -742,8 +747,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
+            >For a description of this member, see <see cref="M:System.Drawing.Design.IToolboxUser.ToolPicked(System.Drawing.Design.ToolboxItem)" />
 
             
 
@@ -751,12 +755,15 @@
           >
         </summary>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Design.ToolboxItem" />
+          The <see cref="T:System.Drawing.Design.ToolboxItem" />
 
           
 

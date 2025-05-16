@@ -32,61 +32,50 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+        >The <see cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
 
         
 
-         class is a specialized type of <see
-         cref="T:System.Windows.Forms.ComboBox" />
+         class is a specialized type of <see cref="T:System.Windows.Forms.ComboBox" />
 
         
 
-         that implements the <see
-         cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
+         that implements the <see cref="T:System.Windows.Forms.IDataGridViewEditingControl" />
 
         
 
-         interface, allowing it to be hosted in a <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+         interface, allowing it to be hosted in a <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
-         when the cell is in edit mode. When a <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+         when the cell is in edit mode. When a <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
-         is in edit mode, you can retrieve the <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+         is in edit mode, you can retrieve the <see cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
 
         
 
-         through the <see
-         cref="P:System.Windows.Forms.DataGridView.EditingControl" />
+         through the <see cref="P:System.Windows.Forms.DataGridView.EditingControl" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control.</para
       >
       <para
-        >Handle the <see
-         cref="E:System.Windows.Forms.DataGridView.EditingControlShowing" />
+        >Handle the <see cref="E:System.Windows.Forms.DataGridView.EditingControlShowing" />
 
         
 
-         event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see
-         cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
+         event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
 
         
 
-         property rather than setting the properties of the control returned by the <see
-         cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+         property rather than setting the properties of the control returned by the <see cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
 
         
 
@@ -96,8 +85,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the hosted combo box control in a <see
-         cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+        >Represents the hosted combo box control in a <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
         
 
@@ -115,21 +103,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default constructor sets the <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >This default constructor sets the <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
              property to false. </para
           >
           <para
-            >Application code typically will not explicitly create instances of the <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+            >Application code typically will not explicitly create instances of the <see cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
 
             
 
-             class, because this is performed automatically when the containing <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+             class, because this is performed automatically when the containing <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
             
 
@@ -139,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
 
             
 
@@ -169,23 +153,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Control.Font" />
+            >The <see cref="P:System.Windows.Forms.Control.Font" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.Control.BackColor" />
+            , <see cref="P:System.Windows.Forms.Control.BackColor" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.Control.ForeColor" />
+            , and <see cref="P:System.Windows.Forms.Control.ForeColor" />
 
             
 
-             properties of the control align with the corresponding properties of the <paramref
-             name="dataGridViewCellStyle" />
+             properties of the control align with the corresponding properties of the <paramref name="dataGridViewCellStyle" />
 
             
 
@@ -197,12 +177,15 @@
           <para>Changes the control's user interface (UI) to be consistent with the specified cell style.</para>
         </summary>
         <param name="dataGridViewCellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
@@ -228,23 +211,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is automatically set when a <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
+            >This property is automatically set when a <see cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+             or <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
             
 
-             is created within a <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             is created within a <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             or added to a <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             or added to a <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -254,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -282,13 +260,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ComboBox.Text" />
+            >The <see cref="P:System.Windows.Forms.ComboBox.Text" />
 
             
 
-             property contains the actual data contained in the control. This data is the string shown in the text box portion of the control. In contrast, the <see
-             cref="M:System.Windows.Forms.DataGridViewComboBoxEditingControl.GetEditingControlFormattedValue(System.Windows.Forms.DataGridViewDataErrorContexts)" />
+             property contains the actual data contained in the control. This data is the string shown in the text box portion of the control. In contrast, the <see cref="M:System.Windows.Forms.DataGridViewComboBoxEditingControl.GetEditingControlFormattedValue(System.Windows.Forms.DataGridViewDataErrorContexts)" />
 
             
 
@@ -345,8 +321,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.DataGridViewComboBoxEditingControl.EditingControlValueChanged" />
+            >The <see cref="P:System.Windows.Forms.DataGridViewComboBoxEditingControl.EditingControlValueChanged" />
 
             
 
@@ -381,46 +356,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >The <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
              control calls this method to determine whether to handle an input key or let the editing control handle it.</para
           >
           <para
-            >This method returns true if <paramref
-             name="keyData" />
+            >This method returns true if <paramref name="keyData" />
 
             
 
-             includes the <see
-             cref="F:System.Windows.Forms.Keys.Up" />
+             includes the <see cref="F:System.Windows.Forms.Keys.Up" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.Keys.Down" />
+             or <see cref="F:System.Windows.Forms.Keys.Down" />
 
             
 
-             values or if the drop-down list is displayed and <paramref
-             name="keyData" />
+             values or if the drop-down list is displayed and <paramref name="keyData" />
 
             
 
-             includes the <see
-             cref="F:System.Windows.Forms.Keys.Escape" />
+             includes the <see cref="F:System.Windows.Forms.Keys.Escape" />
 
             
 
-             or <see
-             cref="F:System.Windows.Forms.Keys.Enter" />
+             or <see cref="F:System.Windows.Forms.Keys.Enter" />
 
             
 
-             values. This method also returns true if <paramref
-             name="dataGridViewWantsInputKey" />
+             values. This method also returns true if <paramref name="dataGridViewWantsInputKey" />
 
             
 
@@ -430,8 +397,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -443,24 +409,30 @@
           <para>true if the specified key is a regular input key that should be handled by the editing control; otherwise, false.</para>
         </returns>
         <param name="keyData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.Keys" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.Keys" />
 
           
 
            values that represents the key that was pressed.</param
         >
         <param name="dataGridViewWantsInputKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to indicate that the <see
-           cref="T:System.Windows.Forms.DataGridView" />
+          true to indicate that the <see cref="T:System.Windows.Forms.DataGridView" />
 
           
 
@@ -515,8 +487,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -524,12 +495,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
 
           
 
@@ -582,7 +556,11 @@
           <para>Prepares the currently selected cell for editing.</para>
         </summary>
         <param name="selectAll">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

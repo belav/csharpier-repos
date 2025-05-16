@@ -38,8 +38,7 @@
       <para>You can apply this attribute to classes, structures, enumerations, and interfaces.</para>
       <para>For example, you can use this attribute to mark a C++ class that has a copy constructor. Any compiler that uses such a class must understand every constraint on its use, such as never creating an object of that class in the garbage collected heap, because a relocation does not call its copy constructor.</para>
       <para
-        >The classes in <see
-         cref="N:System.Runtime.CompilerServices" />
+        >The classes in <see cref="N:System.Runtime.CompilerServices" />
 
         
 
@@ -76,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.RequiredAttributeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.RequiredAttributeAttribute" />
 
             
 
@@ -85,7 +83,11 @@
           >
         </summary>
         <param name="requiredContract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

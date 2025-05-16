@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.MissingMappingAction" />
+        >The <see cref="T:System.Data.MissingMappingAction" />
 
         
 
-         values are used as arguments in the <see
-         cref="M:System.Data.Common.DataColumnMappingCollection.GetColumnMappingBySchemaAction(System.Data.Common.DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)" />
+         values are used as arguments in the <see cref="M:System.Data.Common.DataColumnMappingCollection.GetColumnMappingBySchemaAction(System.Data.Common.DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)" />
 
         
 
-         method, and the <see
-         cref="M:System.Data.Common.DataTableMappingCollection.GetTableMappingBySchemaAction(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)" />
+         method, and the <see cref="M:System.Data.Common.DataTableMappingCollection.GetTableMappingBySchemaAction(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)" />
 
         
 
@@ -52,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.InvalidOperationException" />
+            >An <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -97,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The source column or source table is created and added to the <see
-             cref="T:System.Data.DataSet" />
+            >The source column or source table is created and added to the <see cref="T:System.Data.DataSet" />
 
             
 

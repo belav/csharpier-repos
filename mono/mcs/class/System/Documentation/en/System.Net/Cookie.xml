@@ -22,21 +22,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Cookie" />
+        >The <see cref="T:System.Net.Cookie" />
 
         
 
          class is used by a client application to retrieve information about cookies that are received with HTTP responses. The following cookie formats are supported during parsing of the HTTP response headers: the original Netscape specification, RFC 2109, and RFC 2965.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Net.Cookie" />
+        >For a list of initial property values for an instance of <see cref="T:System.Net.Cookie" />
 
         
 
-        , see the various <see
-         cref="T:System.Net.Cookie" />
+        , see the various <see cref="T:System.Net.Cookie" />
 
         
 
@@ -67,33 +64,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default constructor initializes all fields to their default values, using empty strings ("") for <paramref
-             name="name" />
+            >The default constructor initializes all fields to their default values, using empty strings ("") for <paramref name="name" />
 
             
 
-            , <paramref
-             name="value" />
+            , <paramref name="value" />
 
             
 
-            , <paramref
-             name="path" />
+            , <paramref name="path" />
 
             
 
-            , and <paramref
-             name="domain" />
+            , and <paramref name="domain" />
 
             
 
-            . Note that at least the <see
-             cref="P:System.Net.Cookie.Name" />
+            . Note that at least the <see cref="P:System.Net.Cookie.Name" />
 
             
 
-             property must be initialized before using an instance of the <see
-             cref="T:System.Net.Cookie" />
+             property must be initialized before using an instance of the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -103,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cookie" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -134,51 +124,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default for the <paramref
-             name="value" />
+            >The default for the <paramref name="value" />
 
             
 
              parameter uses the empty string ("").</para
           >
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter for a <see
-             cref="T:System.Net.Cookie" />
+             parameter for a <see cref="T:System.Net.Cookie" />
 
             
 
-             must not be a null reference (Nothing in Visual Basic). The following characters are reserved and cannot be passed in the <paramref
-             name="value" />
+             must not be a null reference (Nothing in Visual Basic). The following characters are reserved and cannot be passed in the <paramref name="value" />
 
             
 
-             parameter unless the string passed in the <paramref
-             name="value" />
+             parameter unless the string passed in the <paramref name="value" />
 
             
 
-             parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see
-             cref="T:System.Net.Cookie" />
+             parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see cref="T:System.Net.Cookie" />
 
             
 
-             to a <see
-             cref="T:System.Net.CookieContainer" />
+             to a <see cref="T:System.Net.CookieContainer" />
 
             
 
-             instance with the <see
-             cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
+             instance with the <see cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
 
             
 
-             or <see
-             cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
+             or <see cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
 
             
 
@@ -186,13 +167,11 @@
           >
           <para>System.Net.Cookie cookie = new System.Net.Cookie("contoso", "123,456", "");</para>
           <para
-            >However, the following constructor with these special characters escaped will create a <see
-             cref="T:System.Net.Cookie" />
+            >However, the following constructor with these special characters escaped will create a <see cref="T:System.Net.Cookie" />
 
             
 
-             that can be added to a <see
-             cref="T:System.Net.CookieContainer" />
+             that can be added to a <see cref="T:System.Net.CookieContainer" />
 
             
 
@@ -204,18 +183,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cookie" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cookie" />
 
             
 
-             class with a specified <see
-             cref="P:System.Net.Cookie.Name" />
+             class with a specified <see cref="P:System.Net.Cookie.Name" />
 
             
 
-             and <see
-             cref="P:System.Net.Cookie.Value" />
+             and <see cref="P:System.Net.Cookie.Value" />
 
             
 
@@ -223,34 +199,38 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Net.Cookie" />
+          The name of a <see cref="T:System.Net.Cookie" />
 
           
 
-          . The following characters must not be used inside <paramref
-           name="name" />
+          . The following characters must not be used inside <paramref name="name" />
 
           
 
           : equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of a <see
-           cref="T:System.Net.Cookie" />
+          The value of a <see cref="T:System.Net.Cookie" />
 
           
 
-          . The following characters must not be used inside <paramref
-           name="value" />
+          . The following characters must not be used inside <paramref name="value" />
 
           
 
@@ -283,51 +263,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default for the <paramref
-             name="path" />
+            >The default for the <paramref name="path" />
 
             
 
              parameter uses the empty string ("").</para
           >
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter for a <see
-             cref="T:System.Net.Cookie" />
+             parameter for a <see cref="T:System.Net.Cookie" />
 
             
 
-             must not be a null reference (Nothing in Visual Basic). The following characters are reserved and can not cannot be passed in the <paramref
-             name="value" />
+             must not be a null reference (Nothing in Visual Basic). The following characters are reserved and can not cannot be passed in the <paramref name="value" />
 
             
 
-             parameter unless the string passed in the <paramref
-             name="value" />
+             parameter unless the string passed in the <paramref name="value" />
 
             
 
-             parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see
-             cref="T:System.Net.Cookie" />
+             parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see cref="T:System.Net.Cookie" />
 
             
 
-             to a <see
-             cref="T:System.Net.CookieContainer" />
+             to a <see cref="T:System.Net.CookieContainer" />
 
             
 
-             instance with the <see
-             cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
+             instance with the <see cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
 
             
 
-             or <see
-             cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
+             or <see cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
 
             
 
@@ -335,13 +306,11 @@
           >
           <para>System.Net.Cookie cookie = new System.Net.Cookie("contoso", "123,456", "");</para>
           <para
-            >However, the following constructor with these special characters escaped will create a <see
-             cref="T:System.Net.Cookie" />
+            >However, the following constructor with these special characters escaped will create a <see cref="T:System.Net.Cookie" />
 
             
 
-             that can be added to a <see
-             cref="T:System.Net.CookieContainer" />
+             that can be added to a <see cref="T:System.Net.CookieContainer" />
 
             
 
@@ -353,23 +322,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cookie" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cookie" />
 
             
 
-             class with a specified <see
-             cref="P:System.Net.Cookie.Name" />
+             class with a specified <see cref="P:System.Net.Cookie.Name" />
 
             
 
-            , <see
-             cref="P:System.Net.Cookie.Value" />
+            , <see cref="P:System.Net.Cookie.Value" />
 
             
 
-            , and <see
-             cref="P:System.Net.Cookie.Path" />
+            , and <see cref="P:System.Net.Cookie.Path" />
 
             
 
@@ -377,46 +342,53 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Net.Cookie" />
+          The name of a <see cref="T:System.Net.Cookie" />
 
           
 
-          . The following characters must not be used inside <paramref
-           name="name" />
+          . The following characters must not be used inside <paramref name="name" />
 
           
 
           : equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of a <see
-           cref="T:System.Net.Cookie" />
+          The value of a <see cref="T:System.Net.Cookie" />
 
           
 
-          . The following characters must not be used inside <paramref
-           name="value" />
+          . The following characters must not be used inside <paramref name="value" />
 
           
 
           : semicolon, comma. </param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The subset of URIs on the origin server to which this <see
-           cref="T:System.Net.Cookie" />
+          The subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" />
 
           
 
@@ -450,56 +422,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default for the <paramref
-             name="domain" />
+            >The default for the <paramref name="domain" />
 
             
 
-             and <paramref
-             name="path" />
+             and <paramref name="path" />
 
             
 
              parameters uses the empty string ("").</para
           >
           <para
-            >The <paramref
-             name="value" />
+            >The <paramref name="value" />
 
             
 
-             parameter for a <see
-             cref="T:System.Net.Cookie" />
+             parameter for a <see cref="T:System.Net.Cookie" />
 
             
 
-             must not be a null reference (Nothing in Visual Basic). The following characters are reserved and cannot be passed in the <paramref
-             name="value" />
+             must not be a null reference (Nothing in Visual Basic). The following characters are reserved and cannot be passed in the <paramref name="value" />
 
             
 
-             parameter unless the string passed in the <paramref
-             name="value" />
+             parameter unless the string passed in the <paramref name="value" />
 
             
 
-             parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see
-             cref="T:System.Net.Cookie" />
+             parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see cref="T:System.Net.Cookie" />
 
             
 
-             to a <see
-             cref="T:System.Net.CookieContainer" />
+             to a <see cref="T:System.Net.CookieContainer" />
 
             
 
-             instance with the <see
-             cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
+             instance with the <see cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
 
             
 
-             or <see
-             cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
+             or <see cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
 
             
 
@@ -507,13 +469,11 @@
           >
           <para>System.Net.Cookie cookie = new System.Net.Cookie("contoso", "123,456", "");</para>
           <para
-            >However, the following constructor with these special characters escaped will create a <see
-             cref="T:System.Net.Cookie" />
+            >However, the following constructor with these special characters escaped will create a <see cref="T:System.Net.Cookie" />
 
             
 
-             that can be added to a <see
-             cref="T:System.Net.CookieContainer" />
+             that can be added to a <see cref="T:System.Net.CookieContainer" />
 
             
 
@@ -525,28 +485,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Cookie" />
+            >Initializes a new instance of the <see cref="T:System.Net.Cookie" />
 
             
 
-             class with a specified <see
-             cref="P:System.Net.Cookie.Name" />
+             class with a specified <see cref="P:System.Net.Cookie.Name" />
 
             
 
-            , <see
-             cref="P:System.Net.Cookie.Value" />
+            , <see cref="P:System.Net.Cookie.Value" />
 
             
 
-            , <see
-             cref="P:System.Net.Cookie.Path" />
+            , <see cref="P:System.Net.Cookie.Path" />
 
             
 
-            , and <see
-             cref="P:System.Net.Cookie.Domain" />
+            , and <see cref="P:System.Net.Cookie.Domain" />
 
             
 
@@ -554,63 +509,72 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Net.Cookie" />
+          The name of a <see cref="T:System.Net.Cookie" />
 
           
 
-          . The following characters must not be used inside <paramref
-           name="name" />
+          . The following characters must not be used inside <paramref name="name" />
 
           
 
           : equal sign, semicolon, comma, newline (\n), return (\r), tab (\t), and space character. The dollar sign character ("$") cannot be the first character. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of a <see
-           cref="T:System.Net.Cookie" />
+          The value of a <see cref="T:System.Net.Cookie" />
 
           
 
-           object. The following characters must not be used inside <paramref
-           name="value" />
+           object. The following characters must not be used inside <paramref name="value" />
 
           
 
           : semicolon, comma. </param
         >
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The subset of URIs on the origin server to which this <see
-           cref="T:System.Net.Cookie" />
+          The subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" />
 
           
 
            applies. The default value is "/". </param
         >
         <param name="domain">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The optional internet domain for which this <see
-           cref="T:System.Net.Cookie" />
+          The optional internet domain for which this <see cref="T:System.Net.Cookie" />
 
           
 
-           is valid. The default value is the host this <see
-           cref="T:System.Net.Cookie" />
+           is valid. The default value is the host this <see cref="T:System.Net.Cookie" />
 
           
 
@@ -640,8 +604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a comment that the server can add to a <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets a comment that the server can add to a <see cref="T:System.Net.Cookie" />
 
             
 
@@ -668,8 +631,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The URI can provide optional information, such as how the server uses the <see
-             cref="T:System.Net.Cookie" />
+            >The URI can provide optional information, such as how the server uses the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -679,8 +641,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a URI comment that the server can provide with a <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets a URI comment that the server can provide with a <see cref="T:System.Net.Cookie" />
 
             
 
@@ -707,8 +668,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When true, this property instructs the client application not to save the <see
-             cref="T:System.Net.Cookie" />
+            >When true, this property instructs the client application not to save the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -743,8 +703,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URI for which the <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets the URI for which the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -776,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -787,53 +745,43 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns true if the <see
-             cref="T:System.Net.Cookie" />
+            >Returns true if the <see cref="T:System.Net.Cookie" />
 
             
 
-             is equal to <paramref
-             name="comparand" />
+             is equal to <paramref name="comparand" />
 
             
 
-            . Two <see
-             cref="T:System.Net.Cookie" />
+            . Two <see cref="T:System.Net.Cookie" />
 
             
 
-             instances are equal if their <see
-             cref="P:System.Net.Cookie.Name" />
+             instances are equal if their <see cref="P:System.Net.Cookie.Name" />
 
             
 
-            , <see
-             cref="P:System.Net.Cookie.Value" />
+            , <see cref="P:System.Net.Cookie.Value" />
 
             
 
-            , <see
-             cref="P:System.Net.Cookie.Path" />
+            , <see cref="P:System.Net.Cookie.Path" />
 
             
 
-            , <see
-             cref="P:System.Net.Cookie.Domain" />
+            , <see cref="P:System.Net.Cookie.Domain" />
 
             
 
-            , and <see
-             cref="P:System.Net.Cookie.Version" />
+            , and <see cref="P:System.Net.Cookie.Version" />
 
             
 
-             properties are equal. <see
-             cref="P:System.Net.Cookie.Name" />
+             properties are equal. <see cref="P:System.Net.Cookie.Name" />
 
             
 
-             and <see
-             cref="P:System.Net.Cookie.Domain" />
+             and <see cref="P:System.Net.Cookie.Domain" />
 
             
 
@@ -841,12 +789,15 @@
           >
         </returns>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A reference to a <see
-           cref="T:System.Net.Cookie" />
+          A reference to a <see cref="T:System.Net.Cookie" />
 
           
 
@@ -876,8 +827,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the current state of the <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets the current state of the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -907,61 +857,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Net.Cookie.Expires" />
+            >Setting the <see cref="P:System.Net.Cookie.Expires" />
 
             
 
-             property to <see
-             cref="F:System.DateTime.MinValue" />
+             property to <see cref="F:System.DateTime.MinValue" />
 
             
 
-             makes this a session <see
-             cref="T:System.Net.Cookie" />
+             makes this a session <see cref="T:System.Net.Cookie" />
 
             
 
             , which is its default value.</para
           >
           <para
-            >The <see
-             cref="T:System.DateTimeKind" />
+            >The <see cref="T:System.DateTimeKind" />
 
             
 
-             property of <see
-             cref="P:System.Net.Cookie.Expires" />
+             property of <see cref="P:System.Net.Cookie.Expires" />
 
             
 
-             is used to determine if the <see
-             cref="T:System.Net.Cookie" />
+             is used to determine if the <see cref="T:System.Net.Cookie" />
 
             
 
-             is set in <see
-             cref="F:System.DateTimeKind.Local" />
+             is set in <see cref="F:System.DateTimeKind.Local" />
 
             
 
-             or <see
-             cref="F:System.DateTimeKind.Utc" />
+             or <see cref="F:System.DateTimeKind.Utc" />
 
             
 
-            . If the <see
-             cref="T:System.DateTimeKind" />
+            . If the <see cref="T:System.DateTimeKind" />
 
             
 
-             property is set to <see
-             cref="F:System.DateTimeKind.Unspecified" />
+             property is set to <see cref="F:System.DateTimeKind.Unspecified" />
 
             
 
-            , then <see
-             cref="F:System.DateTimeKind.Utc" />
+            , then <see cref="F:System.DateTimeKind.Utc" />
 
             
 
@@ -971,13 +910,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the expiration date and time for the <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets the expiration date and time for the <see cref="T:System.Net.Cookie" />
 
             
 
-             as a <see
-             cref="T:System.DateTime" />
+             as a <see cref="T:System.DateTime" />
 
             
 
@@ -1010,8 +947,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Object.GetHashCode" />
+            >Overrides the <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -1065,13 +1001,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Cookie.Name" />
+            >The <see cref="P:System.Net.Cookie.Name" />
 
             
 
-             property must be initialized before using an instance of the <see
-             cref="T:System.Net.Cookie" />
+             property must be initialized before using an instance of the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1082,8 +1016,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name for the <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets the name for the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1110,18 +1043,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Cookie.Path" />
+            >The <see cref="P:System.Net.Cookie.Path" />
 
             
 
-             property specifies the subset of URIs on the origin server to which this <see
-             cref="T:System.Net.Cookie" />
+             property specifies the subset of URIs on the origin server to which this <see cref="T:System.Net.Cookie" />
 
             
 
-             applies. If this propery is not specified, then this <see
-             cref="T:System.Net.Cookie" />
+             applies. If this propery is not specified, then this <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1131,8 +1061,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URIs to which the <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets the URIs to which the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1159,8 +1088,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This attribute restricts the ports to which this <see
-             cref="T:System.Net.Cookie" />
+            >This attribute restricts the ports to which this <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1170,8 +1098,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a list of TCP ports that the <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets a list of TCP ports that the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1202,8 +1129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the security level of a <see
-             cref="T:System.Net.Cookie" />
+            >Gets or sets the security level of a <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1236,8 +1162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the time when the cookie was issued as a <see
-             cref="T:System.DateTime" />
+            >Gets the time when the cookie was issued as a <see cref="T:System.DateTime" />
 
             
 
@@ -1270,8 +1195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Object.ToString" />
+            >Overrides the <see cref="M:System.Object.ToString" />
 
             
 
@@ -1281,8 +1205,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of this <see
-             cref="T:System.Net.Cookie" />
+            >Returns a string representation of this <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1309,13 +1232,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Cookie.Value" />
+            >The <see cref="P:System.Net.Cookie.Value" />
 
             
 
-             of a <see
-             cref="T:System.Net.Cookie" />
+             of a <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1325,13 +1246,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Net.Cookie.Value" />
+            >Gets or sets the <see cref="P:System.Net.Cookie.Value" />
 
             
 
-             for the <see
-             cref="T:System.Net.Cookie" />
+             for the <see cref="T:System.Net.Cookie" />
 
             
 
@@ -1358,26 +1277,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value for the <see
-             cref="P:System.Net.Cookie.Version" />
+            >The default value for the <see cref="P:System.Net.Cookie.Version" />
 
             
 
-             property is 0, complying with the original Netscape specification. If the value is explicitly set to 1, then this <see
-             cref="T:System.Net.Cookie" />
+             property is 0, complying with the original Netscape specification. If the value is explicitly set to 1, then this <see cref="T:System.Net.Cookie" />
 
             
 
-             must conform to RFC 2109. Note that if a <see
-             cref="T:System.Net.Cookie" />
+             must conform to RFC 2109. Note that if a <see cref="T:System.Net.Cookie" />
 
             
 
              was created automatically by receiving a Set-Cookie2 HTTP response header, the conformance is set to RFC 2965.</para
           >
           <para
-            >An attempt to set the <see
-             cref="P:System.Net.Cookie.Version" />
+            >An attempt to set the <see cref="P:System.Net.Cookie.Version" />
 
             
 

@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a control expression that handles multiple selections by passing control to <see
-         cref="T:System.Linq.Expressions.SwitchCase" />
+        >Represents a control expression that handles multiple selections by passing control to <see cref="T:System.Linq.Expressions.SwitchCase" />
 
         
 
@@ -84,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of <see
-             cref="T:System.Linq.Expressions.SwitchCase" />
+            >Gets the collection of <see cref="T:System.Linq.Expressions.SwitchCase" />
 
             
 
@@ -166,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this Expression. Extension nodes should return <see
-             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+            >Returns the node type of this Expression. Extension nodes should return <see cref="F:System.Linq.Expressions.ExpressionType.Extension" />
 
             
 
@@ -217,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -262,36 +258,45 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="switchValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" />
+          The <see cref="P:System.Linq.Expressions.SwitchExpression.SwitchValue" />
 
           
 
            property of the result.</param
         >
         <param name="cases">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.SwitchExpression.Cases" />
+          The <see cref="P:System.Linq.Expressions.SwitchExpression.Cases" />
 
           
 
            property of the result.</param
         >
         <param name="defaultBody">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.SwitchExpression.DefaultBody" />
+          The <see cref="P:System.Linq.Expressions.SwitchExpression.DefaultBody" />
 
           
 

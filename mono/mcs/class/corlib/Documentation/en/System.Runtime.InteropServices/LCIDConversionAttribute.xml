@@ -67,7 +67,11 @@
           <para>Initializes a new instance of the LCIDConversionAttribute class with the position of the LCID in the unmanaged signature.</para>
         </summary>
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

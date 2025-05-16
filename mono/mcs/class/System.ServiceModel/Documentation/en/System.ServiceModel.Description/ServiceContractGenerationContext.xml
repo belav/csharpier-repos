@@ -20,28 +20,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" />
+        >Use the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" />
 
         
 
-         object passed to the <see
-         cref="M:System.ServiceModel.Description.IServiceContractGenerationExtension.GenerateContract(System.ServiceModel.Description.ServiceContractGenerationContext)" />
+         object passed to the <see cref="M:System.ServiceModel.Description.IServiceContractGenerationExtension.GenerateContract(System.ServiceModel.Description.ServiceContractGenerationContext)" />
 
         
 
-         method to modify the code document object model prior to the generation of code. Typically, the <see
-         cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
+         method to modify the code document object model prior to the generation of code. Typically, the <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
 
         
 
-         interface is implemented on a custom <see
-         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+         interface is implemented on a custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
-         implementation that is used to import custom WSDL elements or otherwise modify the code at the service or operation level. To modify the code at the operation level, see <see
-         cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
+         implementation that is used to import custom WSDL elements or otherwise modify the code at the service or operation level. To modify the code at the operation level, see <see cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
 
         
 
@@ -51,8 +46,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Passed to the <see
-         cref="M:System.ServiceModel.Description.IServiceContractGenerationExtension.GenerateContract(System.ServiceModel.Description.ServiceContractGenerationContext)" />
+        >Passed to the <see cref="M:System.ServiceModel.Description.IServiceContractGenerationExtension.GenerateContract(System.ServiceModel.Description.ServiceContractGenerationContext)" />
 
         
 
@@ -87,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" />
 
             
 
@@ -96,26 +89,37 @@
           >
         </summary>
         <param name="serviceContractGenerator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The generator that generates the code for the contract.</param
         >
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract description for the contract to be generated.</param
         >
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -150,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceContractGenerationContext" />
 
             
 
@@ -159,38 +162,52 @@
           >
         </summary>
         <param name="serviceContractGenerator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The generator that generates the code for the contract.</param
         >
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract description for the contract to be generated.</param
         >
         <param name="contractType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
            for the contract code to be generated.</param
         >
         <param name="duplexCallbackType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeTypeDeclaration" />
+          The <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
           
 
@@ -219,13 +236,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.Contract" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.Contract" />
 
             
 
-             property to examine the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             property to examine the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
@@ -235,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+            >Gets the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
@@ -266,13 +280,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.ContractType" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.ContractType" />
 
             
 
-             property to examine or modify the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             property to examine or modify the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -282,8 +294,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Gets the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -313,13 +324,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.DuplexCallbackType" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.DuplexCallbackType" />
 
             
 
-             property to examine or modify the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+             property to examine or modify the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -329,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.CodeDom.CodeTypeDeclaration" />
+            >Gets the <see cref="T:System.CodeDom.CodeTypeDeclaration" />
 
             
 
@@ -360,13 +368,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.Operations" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.Operations" />
 
             
 
-             property to examine or modify the <see
-             cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+             property to examine or modify the <see cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
 
             
 
@@ -376,8 +382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
 
             
 
@@ -407,8 +412,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.ServiceContractGenerator" />
+            >Use the <see cref="P:System.ServiceModel.Description.ServiceContractGenerationContext.ServiceContractGenerator" />
 
             
 
@@ -418,8 +422,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+            >Gets the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
 
             
 

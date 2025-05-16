@@ -19,80 +19,70 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The information in the <see
-         cref="T:System.Net.Mime.ContentDisposition" />
+        >The information in the <see cref="T:System.Net.Mime.ContentDisposition" />
 
         
 
-         class accompanies an e-mail message that contains attachments when the e-mail message is sent to its destination. The information in <see
-         cref="T:System.Net.Mime.ContentDisposition" />
+         class accompanies an e-mail message that contains attachments when the e-mail message is sent to its destination. The information in <see cref="T:System.Net.Mime.ContentDisposition" />
 
         
 
          can be used by software that displays e-mail to present the e-mail attachments in the manner intended by the sender. </para
       >
       <para
-        >E-mail messages are created using instances of the <see
-         cref="T:System.Net.Mail.MailMessage" />
+        >E-mail messages are created using instances of the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class. Instances of the <see
-         cref="T:System.Net.Mail.Attachment" />
+         class. Instances of the <see cref="T:System.Net.Mail.Attachment" />
 
         
 
-         class are used to add attachments to e-mail messages. To modify the <see
-         cref="T:System.Net.Mime.ContentDisposition" />
+         class are used to add attachments to e-mail messages. To modify the <see cref="T:System.Net.Mime.ContentDisposition" />
 
         
 
-         for an attachment, get the instance from the <see
-         cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+         for an attachment, get the instance from the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" />
 
         
 
          property.</para
       >
       <para
-        >Content to be displayed as part of the message body has the disposition type of <see
-         cref="P:System.Net.Mime.ContentDisposition.Inline" />
+        >Content to be displayed as part of the message body has the disposition type of <see cref="P:System.Net.Mime.ContentDisposition.Inline" />
 
         
 
-        . Content that is not displayed but is attached in a separate file has the disposition type of <see
-         cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+        . Content that is not displayed but is attached in a separate file has the disposition type of <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
 
         
 
-        . Use the <see
-         cref="P:System.Net.Mime.ContentDisposition.Inline" />
+        . Use the <see cref="P:System.Net.Mime.ContentDisposition.Inline" />
 
         
 
-         property to control the disposition type for the attachment associated with an instance of <see
-         cref="T:System.Net.Mime.ContentDisposition" />
+         property to control the disposition type for the attachment associated with an instance of <see cref="T:System.Net.Mime.ContentDisposition" />
 
         
 
         .</para
       >
       <para
-        >For file attachments, you can use the properties of the <see
-         cref="T:System.Net.Mime.ContentDisposition" />
+        >For file attachments, you can use the properties of the <see cref="T:System.Net.Mime.ContentDisposition" />
 
         
 
          to set the file size, as well as the date the file was created, last read, and last modified. For all attachments, you can set a recommended file name in the event that the attachment is stored on the receiving computer.</para
       >
       <para
-        >The <see
-         cref="M:System.Net.Mime.ContentDisposition.ToString" />
+        >The <see cref="M:System.Net.Mime.ContentDisposition.ToString" />
 
         
 
          method returns the Content-Disposition header. The Content-Disposition header is described in RFC 2183 available at <see
-         cref="http://www.ietf.org/">http://www.ietf.org</see>
+          cref="http://www.ietf.org/"
+          >http://www.ietf.org</see
+        >
 
         
 
@@ -122,13 +112,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The instance returned by this constructor has the <see
-             cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
+            >The instance returned by this constructor has the <see cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
 
             
 
-             property set to <see
-             cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+             property set to <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
 
             
 
@@ -138,18 +126,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
-             class with a <see
-             cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
+             class with a <see cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
 
             
 
-             of <see
-             cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+             of <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
 
             
 
@@ -178,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
@@ -187,12 +171,15 @@
           >
         </summary>
         <param name="disposition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Mime.DispositionTypeNames" />
+          A <see cref="T:System.Net.Mime.DispositionTypeNames" />
 
           
 
@@ -220,36 +207,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.CreationDate" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.CreationDate" />
 
             
 
              property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Creation-Date parameter in the Content-Disposition header sent with the email. </para
           >
           <para
-            >The <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >The <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class is used to compose an e-mail message. The <see
-             cref="T:System.Net.Mail.Attachment" />
+             class is used to compose an e-mail message. The <see cref="T:System.Net.Mail.Attachment" />
 
             
 
-             class is used to attach a file to an e-mail message. To set <see
-             cref="P:System.Net.Mime.ContentDisposition.CreationDate" />
+             class is used to attach a file to an e-mail message. To set <see cref="P:System.Net.Mime.ContentDisposition.CreationDate" />
 
             
 
-            , get the <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+            , get the <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
-             for the attachment from the <see
-             cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+             for the attachment from the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" />
 
             
 
@@ -257,7 +238,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -287,18 +270,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.DispositionType" />
 
             
 
-             property value can be used by software that displays e-mail to determine the correct way to present the e-mail attachments. <see
-             cref="F:System.Net.Mime.DispositionTypeNames.Inline" />
+             property value can be used by software that displays e-mail to determine the correct way to present the e-mail attachments. <see cref="F:System.Net.Mime.DispositionTypeNames.Inline" />
 
             
 
-             attachments are usually displayed when the user opens the e-mail. <see
-             cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+             attachments are usually displayed when the user opens the e-mail. <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
 
             
 
@@ -306,7 +286,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -343,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the content-disposition header of the specified <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+            >Determines whether the content-disposition header of the specified <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
@@ -374,8 +355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.FileName" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.FileName" />
 
             
 
@@ -384,7 +364,9 @@
           <para>To remove file name information, you can set this property to null or the empty string ("").</para>
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -418,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the hash code of the specified <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+            >Determines the hash code of the specified <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
@@ -449,18 +430,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.Inline" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.Inline" />
 
             
 
-             property sets the disposition type in the Content-Disposition header sent with the e-mail message. The disposition type can be used by software that displays e-mail to determine the correct way to present the e-mail attachments. Attachments with a disposition type of <see
-             cref="F:System.Net.Mime.DispositionTypeNames.Inline" />
+             property sets the disposition type in the Content-Disposition header sent with the e-mail message. The disposition type can be used by software that displays e-mail to determine the correct way to present the e-mail attachments. Attachments with a disposition type of <see cref="F:System.Net.Mime.DispositionTypeNames.Inline" />
 
             
 
-             are usually displayed when the user opens the e-mail. Attachments with a disposition type of <see
-             cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
+             are usually displayed when the user opens the e-mail. Attachments with a disposition type of <see cref="F:System.Net.Mime.DispositionTypeNames.Attachment" />
 
             
 
@@ -468,7 +446,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -478,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
@@ -508,36 +487,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.ModificationDate" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.ModificationDate" />
 
             
 
              property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Modification-Date parameter in the Content-Disposition header sent with the e-mail message. </para
           >
           <para
-            >The <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >The <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class is used to compose an e-mail message. The <see
-             cref="T:System.Net.Mail.Attachment" />
+             class is used to compose an e-mail message. The <see cref="T:System.Net.Mail.Attachment" />
 
             
 
-             class is used to attach a file to an e-mail message. To set the <see
-             cref="P:System.Net.Mime.ContentDisposition.ModificationDate" />
+             class is used to attach a file to an e-mail message. To set the <see cref="P:System.Net.Mime.ContentDisposition.ModificationDate" />
 
             
 
-             property, get the <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+             property, get the <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
-             for the attachment using the <see
-             cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+             for the attachment using the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" />
 
             
 
@@ -545,7 +518,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -581,8 +556,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, the parameters are determined by the property values so you do not need to access them. If you need to add or change parameter information, modify the dictionary returned by the <see
-             cref="P:System.Net.Mime.ContentDisposition.Parameters" />
+            >Typically, the parameters are determined by the property values so you do not need to access them. If you need to add or change parameter information, modify the dictionary returned by the <see cref="P:System.Net.Mime.ContentDisposition.Parameters" />
 
             
 
@@ -590,7 +564,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183, available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -623,36 +599,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.ReadDate" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.ReadDate" />
 
             
 
              property is used to send time stamp information with a file being sent in an e-mail message. This value sets the Read-Date parameter in the Content-Disposition header sent with the e-mail message. </para
           >
           <para
-            >The <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >The <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class is used to compose an e-mail message. The <see
-             cref="T:System.Net.Mail.Attachment" />
+             class is used to compose an e-mail message. The <see cref="T:System.Net.Mail.Attachment" />
 
             
 
-             class is used to attach a file to an e-mail message. To set <see
-             cref="P:System.Net.Mime.ContentDisposition.ReadDate" />
+             class is used to attach a file to an e-mail message. To set <see cref="P:System.Net.Mime.ContentDisposition.ReadDate" />
 
             
 
-            , get the <see
-             cref="T:System.Net.Mime.ContentDisposition" />
+            , get the <see cref="T:System.Net.Mime.ContentDisposition" />
 
             
 
-             for the attachment by using the <see
-             cref="P:System.Net.Mail.Attachment.ContentDisposition" />
+             for the attachment by using the <see cref="P:System.Net.Mail.Attachment.ContentDisposition" />
 
             
 
@@ -660,7 +630,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -690,18 +662,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mime.ContentDisposition.Size" />
+            >The <see cref="P:System.Net.Mime.ContentDisposition.Size" />
 
             
 
-             property is used to send time stamp information with a file being sent in an e-mail message. The <see
-             cref="T:System.Net.Mail.MailMessage" />
+             property is used to send time stamp information with a file being sent in an e-mail message. The <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class is used to compose the message. The <see
-             cref="T:System.Net.Mail.Attachment" />
+             class is used to compose the message. The <see cref="T:System.Net.Mail.Attachment" />
 
             
 
@@ -709,7 +678,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -742,8 +713,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string returned by the <see
-             cref="M:System.Net.Mime.ContentDisposition.ToString" />
+            >The string returned by the <see cref="M:System.Net.Mime.ContentDisposition.ToString" />
 
             
 
@@ -751,7 +721,9 @@
           >
           <para
             >The Content-Disposition header is described in RFC 2183 available at <see
-             cref="http://www.ietf.org/">http://www.ietf.org</see>
+              cref="http://www.ietf.org/"
+              >http://www.ietf.org</see
+            >
 
             
 
@@ -761,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
@@ -772,8 +743,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

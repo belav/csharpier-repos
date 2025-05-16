@@ -39,15 +39,13 @@
     <example>
       <para
         > The following example demonstrates the use of
-   <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+   <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
          with a
       particular compiler that supports the use of this
-      attribute. The <see
-         cref="P:System.Diagnostics.ConditionalAttribute.ConditionString" />
+      attribute. The <see cref="P:System.Diagnostics.ConditionalAttribute.ConditionString" />
 
         
 
@@ -103,36 +101,30 @@ How was this compiled?</para>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can apply the <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+        >You can apply the <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
-         attribute to methods and classes. However, its use on classes is valid only for types that are derived from <see
-         cref="T:System.Attribute" />
+         attribute to methods and classes. However, its use on classes is valid only for types that are derived from <see cref="T:System.Attribute" />
 
         
 
-        . <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+        . <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
          either will be ignored or will produce a compiler warning or error message if you apply it to any other type.</para
       >
       <para
-        >Applying <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+        >Applying <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
-         to a method indicates to compilers that a call to the method should not be compiled into Microsoft intermediate language (MSIL) unless the conditional compilation symbol that is associated with <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+         to a method indicates to compilers that a call to the method should not be compiled into Microsoft intermediate language (MSIL) unless the conditional compilation symbol that is associated with <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
-         is defined. You will get a compilation error in Visual Studio if you apply this attribute to a method that does not return void. Applying <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+         is defined. You will get a compilation error in Visual Studio if you apply this attribute to a method that does not return void. Applying <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
@@ -142,8 +134,7 @@ How was this compiled?</para>
       <list type="bullet">
         <item>
           <para
-            >Use compiler command-line options; for example, <system
-            >/define:DEBUG</system>
+            >Use compiler command-line options; for example, <system>/define:DEBUG</system>
 
             
 
@@ -152,8 +143,7 @@ How was this compiled?</para>
         </item>
         <item>
           <para
-            >Use environment variables in the operating system shell; for example, <system
-            >set DEBUG=1</system>
+            >Use environment variables in the operating system shell; for example, <system>set DEBUG=1</system>
 
             
 
@@ -170,13 +160,11 @@ How was this compiled?</para>
         </item>
       </list>
       <para
-        >Compilers that comply with the Common Language Specification (CLS) are permitted to ignore <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+        >Compilers that comply with the Common Language Specification (CLS) are permitted to ignore <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
-        . The C#, Visual Basic, and C++ compilers support <see
-         cref="T:System.Diagnostics.ConditionalAttribute" />
+        . The C#, Visual Basic, and C++ compilers support <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
         
 
@@ -190,21 +178,18 @@ How was this compiled?</para>
 
         
 
-         is applied to the methods that are defined in the <see
-         cref="T:System.Diagnostics.Debug" />
+         is applied to the methods that are defined in the <see cref="T:System.Diagnostics.Debug" />
 
         
 
-         and <see
-         cref="T:System.Diagnostics.Trace" />
+         and <see cref="T:System.Diagnostics.Trace" />
 
         
 
          classes. </para
       >
       <para
-        >For more information about how to use attributes, see <format
-         type="text/html">
+        >For more information about how to use attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -245,14 +230,12 @@ How was this compiled?</para>
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Diagnostics.ConditionalAttribute.ConditionString" />
+            >This constructor initializes the <see cref="P:System.Diagnostics.ConditionalAttribute.ConditionString" />
 
             
 
              property of the current instance using 
-<paramref
-             name="conditionString" />
+<paramref name="conditionString" />
 
             
 
@@ -262,8 +245,7 @@ How was this compiled?</para>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.ConditionalAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
             
 
@@ -271,7 +253,11 @@ How was this compiled?</para>
           >
         </summary>
         <param name="conditionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,8 +286,7 @@ How was this compiled?</para>
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -317,8 +302,7 @@ method of the current instance.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the conditional compilation symbol that is associated with the <see
-             cref="T:System.Diagnostics.ConditionalAttribute" />
+            >Gets the conditional compilation symbol that is associated with the <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
             
 

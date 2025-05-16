@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The properties that make up the context are provided by various automatic services and are set up by the activation services when a <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+        >The properties that make up the context are provided by various automatic services and are set up by the activation services when a <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 

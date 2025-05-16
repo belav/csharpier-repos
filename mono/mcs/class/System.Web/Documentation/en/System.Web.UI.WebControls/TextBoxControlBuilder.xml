@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
+        >The <see cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
 
         
 
-         class is an internal helper class used with the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         class is an internal helper class used with the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
@@ -36,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Interacts with the parser to build a <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+        >Interacts with the parser to build a <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
@@ -55,13 +52,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
+            >The <see cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
 
             
 
-             class is an internal helper class used with the <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+             class is an internal helper class used with the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
@@ -71,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
 
             
 
@@ -96,13 +90,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
+            >This method overrides <see cref="M:System.Web.UI.ControlBuilder.AllowWhitespaceLiterals" />
 
             
 
-             to ignore white space in the <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+             to ignore white space in the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
@@ -134,18 +126,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TextBoxControlBuilder.HtmlDecodeLiterals" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TextBoxControlBuilder.HtmlDecodeLiterals" />
 
             
 
-             method to determine whether the literal string of the <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+             method to determine whether the literal string of the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
-             control must be HTML decoded. This implementation of the method always returns true to indicate that the literal string of the <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+             control must be HTML decoded. This implementation of the method always returns true to indicate that the literal string of the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 
@@ -155,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the literal string of the <see
-             cref="T:System.Web.UI.WebControls.TextBox" />
+            >Determines whether the literal string of the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
             
 

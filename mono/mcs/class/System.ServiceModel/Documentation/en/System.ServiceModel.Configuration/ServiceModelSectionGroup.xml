@@ -46,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" />
 
             
 
@@ -246,8 +245,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" />
+            >A <see cref="T:System.ServiceModel.Configuration.ServiceModelSectionGroup" />
 
             
 
@@ -255,12 +253,15 @@
           >
         </returns>
         <param name="config">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.Configuration" />
+          A <see cref="T:System.Configuration.Configuration" />
 
           
 

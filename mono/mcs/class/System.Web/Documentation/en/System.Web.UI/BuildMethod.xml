@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.BuildMethod" />
+        >The <see cref="T:System.Web.UI.BuildMethod" />
 
         
 
-         delegate passes the information that is required to build ASP.NET server controls. The information is defined by the <see
-         cref="T:System.Web.UI.TemplateControl" />
+         delegate passes the information that is required to build ASP.NET server controls. The information is defined by the <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
-         class or a class that is derived from the <see
-         cref="T:System.Web.UI.TemplateControl" />
+         class or a class that is derived from the <see cref="T:System.Web.UI.TemplateControl" />
 
         
 

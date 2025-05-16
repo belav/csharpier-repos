@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Grid items represent the hierarchy of the view into a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >Grid items represent the hierarchy of the view into a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-        . You can use a <see
-         cref="T:System.Windows.Forms.GridItem" />
+        . You can use a <see cref="T:System.Windows.Forms.GridItem" />
 
         
 
@@ -31,18 +29,15 @@
 
         
 
-         objects should not be cached because they represent a snapshot of the state of the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         objects should not be cached because they represent a snapshot of the state of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         at the time they are accessed, and grid activity might dispose them. The <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         at the time they are accessed, and grid activity might dispose them. The <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         often recreates <see
-         cref="T:System.Windows.Forms.GridItem" />
+         often recreates <see cref="T:System.Windows.Forms.GridItem" />
 
         
 
@@ -52,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements one row in a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >Implements one row in a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -71,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -96,8 +89,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a property is expandable, a plus (+) sign is displayed by the property name in the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+            >If a property is expandable, a plus (+) sign is displayed by the property name in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -126,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -155,13 +146,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the collection of <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, gets the collection of <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             objects, if any, associated as a child of this <see
-             cref="T:System.Windows.Forms.GridItem" />
+             objects, if any, associated as a child of this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -188,33 +177,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >For a <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             of type <see
-             cref="F:System.Windows.Forms.GridItemType.Property" />
+             of type <see cref="F:System.Windows.Forms.GridItemType.Property" />
 
             
 
-            , you must also ensure that the <see
-             cref="P:System.Windows.Forms.GridItem.PropertyDescriptor" />
+            , you must also ensure that the <see cref="P:System.Windows.Forms.GridItem.PropertyDescriptor" />
 
             
 
-             has a valid value. For a <see
-             cref="T:System.Windows.Forms.GridItem" />
+             has a valid value. For a <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             of type <see
-             cref="F:System.Windows.Forms.GridItemType.Root" />
+             of type <see cref="F:System.Windows.Forms.GridItemType.Root" />
 
             
 
-             the <see
-             cref="P:System.Windows.Forms.GridItem.Parent" />
+             the <see cref="P:System.Windows.Forms.GridItem.Parent" />
 
             
 
@@ -224,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the type of this <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, gets the type of this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -249,28 +231,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This class gets the text that displays in the left column of the grid. The text retrieved can be different from the actual property name of the property represented by this <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >This class gets the text that displays in the left column of the grid. The text retrieved can be different from the actual property name of the property represented by this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-            . You can get the name for a <see
-             cref="T:System.Windows.Forms.GridItem" />
+            . You can get the name for a <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             of type <see
-             cref="F:System.Windows.Forms.GridItemType.Property" />
+             of type <see cref="F:System.Windows.Forms.GridItemType.Property" />
 
             
 
-             by retrieving the <see
-             cref="P:System.Windows.Forms.GridItem.PropertyDescriptor" />
+             by retrieving the <see cref="P:System.Windows.Forms.GridItem.PropertyDescriptor" />
 
             
 
-             and checking its <see
-             cref="P:System.ComponentModel.MemberDescriptor.Name" />
+             and checking its <see cref="P:System.ComponentModel.MemberDescriptor.Name" />
 
             
 
@@ -280,8 +257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the text of this <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, gets the text of this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -308,18 +284,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.GridItem.GridItemType" />
+            >If the <see cref="P:System.Windows.Forms.GridItem.GridItemType" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.GridItem" />
+             for the <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             is <see
-             cref="F:System.Windows.Forms.GridItemType.Root" />
+             is <see cref="F:System.Windows.Forms.GridItemType.Root" />
 
             
 
@@ -329,13 +302,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the parent <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, gets the parent <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             of this <see
-             cref="T:System.Windows.Forms.GridItem" />
+             of this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -362,13 +333,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is only valid for a <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >This property is only valid for a <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             of type <see
-             cref="F:System.Windows.Forms.GridItemType.Property" />
+             of type <see cref="F:System.Windows.Forms.GridItemType.Property" />
 
             
 
@@ -379,13 +348,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >When overridden in a derived class, gets the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
-             that is associated with this <see
-             cref="T:System.Windows.Forms.GridItem" />
+             that is associated with this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -410,13 +377,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, selects this <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, selects this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
-             in the <see
-             cref="T:System.Windows.Forms.PropertyGrid" />
+             in the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
             
 
@@ -462,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets user-defined data about the <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >Gets or sets user-defined data about the <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -484,8 +448,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets the current value of this <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >When overridden in a derived class, gets the current value of this <see cref="T:System.Windows.Forms.GridItem" />
 
             
 

@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewAccessor" />
+        >The <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewAccessor" />
 
         
 
-         method of a <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
+         method of a <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
 
         
 
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.UnmanagedMemoryAccessor" />
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" />
 
             
 
@@ -89,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.UnmanagedMemoryAccessor" />
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" />
 
             
 
@@ -98,21 +94,33 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to contain the accessor.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte at which to start the accessor.</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.UnmanagedMemoryAccessor" />
+            >Initializes a new instance of the <see cref="T:System.IO.UnmanagedMemoryAccessor" />
 
             
 
@@ -153,33 +160,48 @@
           >
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to contain the accessor.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte at which to start the accessor.</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size, in bytes, of memory to allocate.</param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of access allowed to the memory. The default is <see
-           cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+          The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
 
           
 
@@ -263,8 +285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.IO.UnmanagedMemoryAccessor" />
+            >Releases all resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" />
 
             
 
@@ -293,36 +314,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.IO.UnmanagedMemoryAccessor" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.IO.UnmanagedMemoryAccessor" />
 
             
 
@@ -332,8 +347,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.IO.UnmanagedMemoryAccessor" />
+            >Releases the unmanaged resources used by the <see cref="T:System.IO.UnmanagedMemoryAccessor" />
 
             
 
@@ -341,7 +355,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -381,33 +399,48 @@
           <para>Sets the initial values for the accessor.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer to contain the accessor.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte at which to start the accessor.</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The size, in bytes, of memory to allocate.</param
         >
         <param name="access">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of access allowed to the memory. The default is <see
-           cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
+          The type of access allowed to the memory. The default is <see cref="F:System.IO.MemoryMappedFiles.MemoryMappedFileAccess.ReadWrite" />
 
           
 
@@ -540,7 +573,11 @@
           <para>true or false.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -575,7 +612,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -610,7 +651,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -645,7 +690,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -680,7 +729,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -715,7 +768,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -750,7 +807,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -785,7 +846,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -825,7 +890,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -860,7 +929,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -900,7 +973,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -940,7 +1017,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -980,7 +1061,11 @@
           <para>The value that was read.</para>
         </returns>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1012,14 +1097,22 @@
           <para>Writes a Boolean value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1051,14 +1144,22 @@
           <para>Writes a byte value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1090,14 +1191,22 @@
           <para>Writes a character into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1129,14 +1238,22 @@
           <para>Writes a decimal value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1168,14 +1285,22 @@
           <para>Writes a Double value into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1207,14 +1332,22 @@
           <para>Writes a 16-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1246,14 +1379,22 @@
           <para>Writes a 32-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1285,14 +1426,22 @@
           <para>Writes a 64-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1329,14 +1478,22 @@
           <para>Writes an 8-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1368,14 +1525,22 @@
           <para>Writes a Single into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1412,14 +1577,22 @@
           <para>Writes an unsigned 16-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1456,14 +1629,22 @@
           <para>Writes an unsigned 32-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1500,14 +1681,22 @@
           <para>Writes an unsigned 64-bit integer into the accessor.</para>
         </summary>
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes into the accessor at which to begin writing.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

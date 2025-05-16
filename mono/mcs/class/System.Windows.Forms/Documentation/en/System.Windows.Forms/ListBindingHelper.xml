@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used by classes such as <see
-         cref="T:System.Windows.Forms.BindingSource" />
+        >This class is used by classes such as <see cref="T:System.Windows.Forms.BindingSource" />
 
         
 
@@ -44,23 +43,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data source specified by the <paramref
-             name="list" />
+            >If the data source specified by the <paramref name="list" />
 
             
 
-             parameter implements the <see
-             cref="T:System.ComponentModel.IListSource" />
+             parameter implements the <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interface, then the <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object)" />
+             interface, then the <see cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object)" />
 
             
 
-             method will return an object of type <see
-             cref="T:System.Collections.IList" />
+             method will return an object of type <see cref="T:System.Collections.IList" />
 
             
 
@@ -74,13 +69,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             representing the underlying list if it exists; otherwise, the original data source specified by <paramref
-             name="list" />
+             representing the underlying list if it exists; otherwise, the original data source specified by <paramref name="list" />
 
             
 
@@ -88,7 +81,11 @@
           >
         </returns>
         <param name="list">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -116,59 +113,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data member is null or an empty string (""), the <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object,System.String)" />
+            >If the data member is null or an empty string (""), the <see cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object,System.String)" />
 
             
 
-             method returns <paramref
-             name="dataSource" />
+             method returns <paramref name="dataSource" />
 
             
 
             . </para
           >
           <para
-            >If <paramref
-             name="dataSource" />
+            >If <paramref name="dataSource" />
 
             
 
-             is not a list, <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object,System.String)" />
+             is not a list, <see cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object,System.String)" />
 
             
 
-             returns the value of the <paramref
-             name="dataSource" />
+             returns the value of the <paramref name="dataSource" />
 
             
 
-             property that matches the <paramref
-             name="dataMember" />
+             property that matches the <paramref name="dataMember" />
 
             
 
              value.</para
           >
           <para
-            >If <paramref
-             name="dataSource" />
+            >If <paramref name="dataSource" />
 
             
 
-             is a list, in that it implements either the <see
-             cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
+             is a list, in that it implements either the <see cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
 
             
 
-             or <see
-             cref="T:System.Collections.IEnumerable" />
+             or <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interfaces, then the underlying list is obtained by choosing an item from the list and querying that item for the value of the property named by <paramref
-             name="dataMember" />
+             interfaces, then the underlying list is obtained by choosing an item from the list and querying that item for the value of the property named by <paramref name="dataMember" />
 
             
 
@@ -182,13 +169,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             representing the underlying list if it was found; otherwise, <paramref
-             name="dataSource" />
+             representing the underlying list if it was found; otherwise, <paramref name="dataSource" />
 
             
 
@@ -196,14 +181,22 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data source from which to find the list.</param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,13 +223,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object)" />
+            >The <see cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object)" />
 
             
 
-             method is used to examine the collection of properties for a data source. The action of this method depends on the actual type of the <paramref
-             name="list" />
+             method is used to examine the collection of properties for a data source. The action of this method depends on the actual type of the <paramref name="list" />
 
             
 
@@ -259,8 +250,7 @@
               </term>
               <description>
                 <para
-                  >Returns a <see
-                   cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+                  >Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
                   
 
@@ -274,8 +264,7 @@
               </term>
               <description>
                 <para
-                  >Returns a <see
-                   cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+                  >Returns a <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
                   
 
@@ -289,8 +278,7 @@
               </term>
               <description>
                 <para
-                  >Returns an empty <see
-                   cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+                  >Returns an empty <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
                   
 
@@ -303,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -314,22 +301,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >The <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             containing the properties of the items contained in <paramref
-             name="list" />
+             containing the properties of the items contained in <paramref name="list" />
 
             
 
-            , or properties of <paramref
-             name="list." />
+            , or properties of <paramref name="list." />
           </para>
         </returns>
         <param name="list">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -357,8 +345,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object,System.ComponentModel.PropertyDescriptor[])" />
+            >The <see cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object,System.ComponentModel.PropertyDescriptor[])" />
 
             
 
@@ -368,13 +355,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that describes the properties of an item type contained in a collection property of a data source. Uses the specified <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             that describes the properties of an item type contained in a collection property of a data source. Uses the specified <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -384,8 +369,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >The <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -393,19 +377,26 @@
           >
         </returns>
         <param name="list">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data source to be examined for property information.</param
         >
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -434,18 +425,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="dataMember" />
+            >The <paramref name="dataMember" />
 
             
 
-             parameter can be null, in which case the <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object,System.String,System.ComponentModel.PropertyDescriptor[])" />
+             parameter can be null, in which case the <see cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object,System.String,System.ComponentModel.PropertyDescriptor[])" />
 
             
 
-             method will return property descriptions using the data source and the <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             method will return property descriptions using the data source and the <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -462,13 +450,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >Returns the <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
-             that describes the properties of an item type contained in the specified data member of a data source. Uses the specified <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+             that describes the properties of an item type contained in the specified data member of a data source. Uses the specified <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -478,8 +464,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >The <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -487,26 +472,37 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data source to be examined for property information.</param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional data member to be examined for property information. This can be null.</param
         >
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          The <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 
@@ -530,13 +526,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="list" />
+            >If the <paramref name="list" />
 
             
 
-             parameter is not a list or array, the type returned will be that of the <paramref
-             name="list" />
+             parameter is not a list or array, the type returned will be that of the <paramref name="list" />
 
             
 
@@ -550,8 +544,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -559,7 +552,11 @@
           >
         </returns>
         <param name="list">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -587,44 +584,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetListItemType(System.Object,System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.ListBindingHelper.GetListItemType(System.Object,System.String)" />
 
             
 
              method is used to determine the type of items used in complex or simple data-binding schemes. This static method may be useful in determining whether a proposed data-binding scheme is appropriate before attempting it.</para
           >
           <para
-            >If <paramref
-             name="dataSource" />
+            >If <paramref name="dataSource" />
 
             
 
-             is null, the property descriptors cannot be found for the list items of the specified data member, or the property descriptor for the list item is an <see
-             cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+             is null, the property descriptors cannot be found for the list items of the specified data member, or the property descriptor for the list item is an <see cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
             
 
-            , then this method returns the type of the <see
-             cref="T:System.Object" />
+            , then this method returns the type of the <see cref="T:System.Object" />
 
             
 
              class. </para
           >
           <para
-            >If <paramref
-             name="dataMember" />
+            >If <paramref name="dataMember" />
 
             
 
-             is null or empty, then this method returns the <see
-             cref="T:System.Type" />
+             is null or empty, then this method returns the <see cref="T:System.Type" />
 
             
 
-             of the items in the data source, if it is a list; otherwise, this method returns the <see
-             cref="T:System.Type" />
+             of the items in the data source, if it is a list; otherwise, this method returns the <see cref="T:System.Type" />
 
             
 
@@ -638,18 +628,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For complex data binding, the <see
-             cref="T:System.Type" />
+            >For complex data binding, the <see cref="T:System.Type" />
 
             
 
-             of the items represented by the <paramref
-             name="dataMember" />
+             of the items represented by the <paramref name="dataMember" />
 
             
 
-             in the data source; otherwise, the <see
-             cref="T:System.Type" />
+             in the data source; otherwise, the <see cref="T:System.Type" />
 
             
 
@@ -657,14 +644,22 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data source to examine for items. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -692,13 +687,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="listAccessors" />
+            >If <paramref name="listAccessors" />
 
             
 
-             is null or empty, the <see
-             cref="M:System.Windows.Forms.ListBindingHelper.GetListName(System.Object,System.ComponentModel.PropertyDescriptor[])" />
+             is null or empty, the <see cref="M:System.Windows.Forms.ListBindingHelper.GetListName(System.Object,System.ComponentModel.PropertyDescriptor[])" />
 
             
 
@@ -708,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the name of an underlying list, given a data source and optional <see
-             cref="T:System.ComponentModel.PropertyDescriptor" />
+            >Returns the name of an underlying list, given a data source and optional <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
             
 
@@ -719,13 +711,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the list in the data source, as described by <paramref
-             name="listAccessors" />
+            >The name of the list in the data source, as described by <paramref name="listAccessors" />
 
             
 
-            , or<paramref
-             name=" " />
+            , or<paramref name=" " />
 
             
 
@@ -733,19 +723,26 @@
           >
         </returns>
         <param name="list">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data source to examine for the list name.</param
         >
         <param name="listAccessors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.ComponentModel.PropertyDescriptor" />
+          An array of <see cref="T:System.ComponentModel.PropertyDescriptor" />
 
           
 

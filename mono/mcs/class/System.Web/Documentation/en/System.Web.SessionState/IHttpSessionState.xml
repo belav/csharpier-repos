@@ -11,104 +11,85 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A session-state container provides access to the session-state values and related information for the current session. Session information included in a session-state container is exposed to application code through the <see
-         cref="T:System.Web.SessionState.HttpSessionState" />
+        >A session-state container provides access to the session-state values and related information for the current session. Session information included in a session-state container is exposed to application code through the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
         
 
-         class using the <see
-         cref="P:System.Web.HttpContext.Session" />
+         class using the <see cref="P:System.Web.HttpContext.Session" />
 
         
 
-         property. The <see
-         cref="T:System.Web.SessionState.HttpSessionState" />
+         property. The <see cref="T:System.Web.SessionState.HttpSessionState" />
 
         
 
          class is a wrapper class for a session-state container.</para
       >
       <para
-        >The ASP.NET implementation of a session-state container is the <see
-         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+        >The ASP.NET implementation of a session-state container is the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" />
 
         
 
-         class. At the beginning of a request, during the <see
-         cref="E:System.Web.HttpApplication.AcquireRequestState" />
+         class. At the beginning of a request, during the <see cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
         
 
-         event, the <see
-         cref="T:System.Web.SessionState.SessionStateModule" />
+         event, the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
         
 
-         creates and populates an <see
-         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+         creates and populates an <see cref="T:System.Web.SessionState.HttpSessionStateContainer" />
 
         
 
-         object and assigns it to the current <see
-         cref="T:System.Web.HttpContext" />
+         object and assigns it to the current <see cref="T:System.Web.HttpContext" />
 
         
 
-        . At the end of a request, during the <see
-         cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+        . At the end of a request, during the <see cref="E:System.Web.HttpApplication.ReleaseRequestState" />
 
         
 
-         event, the <see
-         cref="T:System.Web.SessionState.SessionStateModule" />
+         event, the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
         
 
-         retrieves the <see
-         cref="T:System.Web.SessionState.HttpSessionStateContainer" />
+         retrieves the <see cref="T:System.Web.SessionState.HttpSessionStateContainer" />
 
         
 
-         object from the current <see
-         cref="T:System.Web.HttpContext" />
+         object from the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         and performs any required session work, such as writing the session values to the session store, or abandoning the session. If the request is abruptly terminated, such as through a redirect, the <see
-         cref="T:System.Web.SessionState.SessionStateModule" />
+         and performs any required session work, such as writing the session values to the session store, or abandoning the session. If the request is abruptly terminated, such as through a redirect, the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
         
 
-         performs the same cleanup by calling the <see
-         cref="M:System.Web.SessionState.SessionStateStoreProviderBase.EndRequest(System.Web.HttpContext)" />
+         performs the same cleanup by calling the <see cref="M:System.Web.SessionState.SessionStateStoreProviderBase.EndRequest(System.Web.HttpContext)" />
 
         
 
          method.</para
       >
       <para
-        >To create a custom session-state container, create a class that implements the <see
-         cref="T:System.Web.SessionState.IHttpSessionState" />
+        >To create a custom session-state container, create a class that implements the <see cref="T:System.Web.SessionState.IHttpSessionState" />
 
         
 
-         interface. If you are creating your own custom session-state container, you must also replace the <see
-         cref="T:System.Web.SessionState.SessionStateModule" />
+         interface. If you are creating your own custom session-state container, you must also replace the <see cref="T:System.Web.SessionState.SessionStateModule" />
 
         
 
-         with your own custom module. Your custom module will create an instance of your custom session-state container and add it to the current <see
-         cref="T:System.Web.HttpContext" />
+         with your own custom module. Your custom module will create an instance of your custom session-state container and add it to the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         using the <see
-         cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
+         using the <see cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
 
         
 
-         method. An example of a custom session-state module is included in the <see
-         cref="T:System.Web.SessionState.SessionStateUtility" />
+         method. An example of a custom session-state module is included in the <see cref="T:System.Web.SessionState.SessionStateUtility" />
 
         
 
@@ -133,13 +114,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.SessionState.IHttpSessionState.Abandon" />
+            >The <see cref="M:System.Web.SessionState.IHttpSessionState.Abandon" />
 
             
 
-             method is used to clear out session data and raise the <system
-            >Session_OnEnd</system>
+             method is used to clear out session data and raise the <system>Session_OnEnd</system>
 
             
 
@@ -195,8 +174,7 @@
 
             
 
-             performs the same function as <see
-             cref="M:System.Web.SessionState.IHttpSessionState.RemoveAll" />
+             performs the same function as <see cref="M:System.Web.SessionState.IHttpSessionState.RemoveAll" />
 
             
 
@@ -225,18 +203,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A character set (code page) is used to interpret multi-byte character data, determining character value, and therefore sort order. Code-page settings apply only to multi-byte character data, not to Unicode character data.</para>
           <para
-            >This <see
-             cref="P:System.Web.SessionState.IHttpSessionState.CodePage" />
+            >This <see cref="P:System.Web.SessionState.IHttpSessionState.CodePage" />
 
             
 
-             property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
-             cref="P:System.Text.Encoding.CodePage" />
+             property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see cref="P:System.Text.Encoding.CodePage" />
 
             
 
-             property of the <see
-             cref="P:System.Web.HttpResponse.ContentEncoding" />
+             property of the <see cref="P:System.Web.HttpResponse.ContentEncoding" />
 
             
 
@@ -264,38 +239,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
+            >The <see cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
 
             
 
-             property returns a <see
-             cref="T:System.Web.HttpCookieMode" />
+             property returns a <see cref="T:System.Web.HttpCookieMode" />
 
             
 
-             enumeration value that is based on the value of the cookieless attribute of the <see
-             cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
+             enumeration value that is based on the value of the cookieless attribute of the <see cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
 
             
 
-              configuration element. If the cookieless attribute is set to true, then the <see
-             cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
+              configuration element. If the cookieless attribute is set to true, then the <see cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
 
             
 
-             property returns <see
-             cref="F:System.Web.HttpCookieMode.UseUri" />
+             property returns <see cref="F:System.Web.HttpCookieMode.UseUri" />
 
             
 
-            ; otherwise, the <see
-             cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
+            ; otherwise, the <see cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
 
             
 
-             property returns <see
-             cref="F:System.Web.HttpCookieMode.UseCookies" />
+             property returns <see cref="F:System.Web.HttpCookieMode.UseCookies" />
 
             
 
@@ -330,12 +298,15 @@
           <para>Copies the collection of session-state item values to a one-dimensional array, starting at the specified index in the array.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -385,8 +356,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -410,8 +380,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For information on cookieless sessions, see <format
-             type="text/html">
+            >For information on cookieless sessions, see <format type="text/html">
               <a href="146ca206-d151-4f2e-a548-bcca05ccf0cb">Session Identifiers</a>
             </format>
 
@@ -460,8 +429,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Session state is set to read-only by setting the <see
-             cref="P:System.Web.Configuration.PagesSection.EnableSessionState" />
+            >Session state is set to read-only by setting the <see cref="P:System.Web.Configuration.PagesSection.EnableSessionState" />
 
             
 
@@ -570,21 +538,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This LCID property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
-             cref="P:System.Globalization.CultureInfo.LCID" />
+            >This LCID property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see cref="P:System.Globalization.CultureInfo.LCID" />
 
             
 
              property instead.</para
           >
           <para
-            >ASP.NET does not store the locale identifier in session state. The <see
-             cref="P:System.Web.SessionState.IHttpSessionState.LCID" />
+            >ASP.NET does not store the locale identifier in session state. The <see cref="P:System.Web.SessionState.IHttpSessionState.LCID" />
 
             
 
-             property calls the <see
-             cref="P:System.Globalization.CultureInfo.LCID" />
+             property calls the <see cref="P:System.Globalization.CultureInfo.LCID" />
 
             
 
@@ -615,8 +580,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For information on different session-state modes, see <format
-             type="text/html">
+            >For information on different session-state modes, see <format type="text/html">
               <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
             </format>
 
@@ -672,8 +636,7 @@
 
             
 
-             performs the same function as <see
-             cref="M:System.Web.SessionState.IHttpSessionState.Clear" />
+             performs the same function as <see cref="M:System.Web.SessionState.IHttpSessionState.Clear" />
 
             
 
@@ -706,7 +669,11 @@
           <para>Deletes an item at a specified index from the session-state item collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

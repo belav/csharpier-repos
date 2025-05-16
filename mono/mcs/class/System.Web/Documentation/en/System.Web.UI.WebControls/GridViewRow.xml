@@ -21,23 +21,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+        >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-         class is used represent an individual row in a <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class is used represent an individual row in a <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control. Each row in the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         control. Each row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control has a designated row type using the <see
-         cref="T:System.Web.UI.WebControls.DataControlRowType" />
+         control has a designated row type using the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
         
 
@@ -60,8 +56,7 @@
           </term>
           <description>
             <para
-              >A data row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >A data row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -75,18 +70,15 @@
           </term>
           <description>
             <para
-              >The empty row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >The empty row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
-               control. The empty row is displayed when the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+               control. The empty row is displayed when the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
-               control has no records to display and the <see
-               cref="P:System.Web.UI.WebControls.GridView.EmptyDataTemplate" />
+               control has no records to display and the <see cref="P:System.Web.UI.WebControls.GridView.EmptyDataTemplate" />
 
               
 
@@ -100,8 +92,7 @@
           </term>
           <description>
             <para
-              >The footer row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >The footer row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -115,8 +106,7 @@
           </term>
           <description>
             <para
-              >The header row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >The header row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -130,8 +120,7 @@
           </term>
           <description>
             <para
-              >A pager row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >A pager row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -145,8 +134,7 @@
           </term>
           <description>
             <para
-              >A separator row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+              >A separator row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -156,18 +144,15 @@
         </item>
       </list>
       <para
-        >To determine the row type of a <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+        >To determine the row type of a <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-         object, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
+         object, use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
 
         
 
-         property. A <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+         property. A <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
@@ -190,13 +175,11 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.GridViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
               
 
-               object is an alternate row in the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+               object is an alternate row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -210,8 +193,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.GridViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
               
 
@@ -225,8 +207,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.GridViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
               
 
@@ -240,8 +221,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.GridViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
               
 
@@ -251,54 +231,45 @@
         </item>
       </list>
       <para
-        >To determine the state of a <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+        >To determine the state of a <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-         object, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewRow.RowState" />
-
-        
-
-         property.</para
-      >
-      <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.GridView" />
-
-        
-
-         control stores all of its data rows in the <see
-         cref="P:System.Web.UI.WebControls.GridView.Rows" />
-
-        
-
-         collection. To determine the index of a <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
-
-        
-
-         object in the <see
-         cref="P:System.Web.UI.WebControls.GridView.Rows" />
-
-        
-
-         collection, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewRow.RowIndex" />
+         object, use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowState" />
 
         
 
          property.</para
       >
       <para
-        >You can access the properties of the underlying data object that is bound to the <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+        >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         object by using the <see
-         cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+         control stores all of its data rows in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" />
+
+        
+
+         collection. To determine the index of a <see cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
+
+         object in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" />
+
+        
+
+         collection, use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowIndex" />
+
+        
+
+         property.</para
+      >
+      <para
+        >You can access the properties of the underlying data object that is bound to the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
+
+         object by using the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
         
 
@@ -306,18 +277,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+          >The <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
           
 
-           property is available only during and after the <see
-           cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
+           property is available only during and after the <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
 
           
 
-           event of a <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+           event of a <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
@@ -325,49 +293,41 @@
         >
       </block>
       <para
-        >To determine the index of the data object in the underlying data source, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewRow.DataItemIndex" />
+        >To determine the index of the data object in the underlying data source, use the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItemIndex" />
 
         
 
          property.</para
       >
       <para
-        >You can access the individual cells of the <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+        >You can access the individual cells of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-         object by using the <see
-         cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+         object by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
         
 
-         property. If a cell contains other controls, you can retrieve a control from the cell by using the <see
-         cref="P:System.Web.UI.Control.Controls" />
+         property. If a cell contains other controls, you can retrieve a control from the cell by using the <see cref="P:System.Web.UI.Control.Controls" />
 
         
 
-         collection of the cell. You can also use the <see
-         cref="M:System.Web.UI.Control.FindControl(System.String)" />
+         collection of the cell. You can also use the <see cref="M:System.Web.UI.Control.FindControl(System.String)" />
 
         
 
-         method of the cell to find the control, if the control has an <see
-         cref="P:System.Web.UI.Control.ID" />
+         method of the cell to find the control, if the control has an <see cref="P:System.Web.UI.Control.ID" />
 
         
 
          specified.</para
       >
       <para
-        >To retrieve a field value from a <see
-         cref="T:System.Web.UI.WebControls.BoundField" />
+        >To retrieve a field value from a <see cref="T:System.Web.UI.WebControls.BoundField" />
 
         
 
-         field column or an automatically generated field column, use the <see
-         cref="P:System.Web.UI.WebControls.TableCell.Text" />
+         field column or an automatically generated field column, use the <see cref="P:System.Web.UI.WebControls.TableCell.Text" />
 
         
 
@@ -375,23 +335,19 @@
       >
       <block subset="none" type="note">
         <para
-          >It is possible to use a data-binding expression directly in a <see
-           cref="T:System.Web.UI.WebControls.TemplateField" />
+          >It is possible to use a data-binding expression directly in a <see cref="T:System.Web.UI.WebControls.TemplateField" />
 
           
 
-            field column without binding the value to a property of a control. In this case, the field value is automatically placed in a <see
-           cref="T:System.Web.UI.DataBoundLiteralControl" />
+            field column without binding the value to a property of a control. In this case, the field value is automatically placed in a <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
           
 
-           control. To retrieve the field value, you must first retrieve the <see
-           cref="T:System.Web.UI.DataBoundLiteralControl" />
+           control. To retrieve the field value, you must first retrieve the <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
           
 
-           control from the appropriate cell and then use its <see
-           cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+           control from the appropriate cell and then use its <see cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
 
           
 
@@ -399,13 +355,11 @@
         >
       </block>
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.GridViewRow" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.GridViewRow.#ctor(System.Int32,System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+        , see the <see cref="M:System.Web.UI.WebControls.GridViewRow.#ctor(System.Int32,System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
 
         
 
@@ -415,8 +369,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an individual row in a <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >Represents an individual row in a <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
@@ -442,16 +395,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of a <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >Use this constructor to initialize a new instance of a <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
              object.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
@@ -476,8 +427,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="dataItemIndex" />
+                  >The value of the <paramref name="dataItemIndex" />
 
                   
 
@@ -493,8 +443,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="rowIndex" />
+                  >The value of the <paramref name="rowIndex" />
 
                   
 
@@ -510,8 +459,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="rowState" />
+                  >The value of the <paramref name="rowState" />
 
                   
 
@@ -527,8 +475,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="rowType" />
+                  >The value of the <paramref name="rowType" />
 
                   
 
@@ -541,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
@@ -550,63 +496,72 @@
           >
         </summary>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.UI.WebControls.GridViewRow" />
+          The index of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
           
 
-           object in the <see
-           cref="P:System.Web.UI.WebControls.GridView.Rows" />
+           object in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
           
 
-           collection of a <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+           collection of a <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
            control.</param
         >
         <param name="dataItemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+          The index of the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
           
 
-           in the underlying <see
-           cref="T:System.Data.DataSet" />
+           in the underlying <see cref="T:System.Data.DataSet" />
 
           
 
           .</param
         >
         <param name="rowType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowType" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
           
 
            enumeration values.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          A bitwise combination of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
@@ -629,28 +584,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
             
 
-             property to access the properties of the underlying data object to which the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+             property to access the properties of the underlying data object to which the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             object is bound. The <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+             object is bound. The <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
             
 
-             property is only available during and after the <see
-             cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
+             property is only available during and after the <see cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
 
             
 
-             event of a <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             event of a <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
@@ -663,8 +613,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the underlying data object to which the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >Gets the underlying data object to which the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
@@ -688,18 +637,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.DataItemIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItemIndex" />
 
             
 
-             property to determine the index of the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+             property to determine the index of the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
             
 
-             in the underlying <see
-             cref="T:System.Data.DataSet" />
+             in the underlying <see cref="T:System.Data.DataSet" />
 
             
 
@@ -712,13 +658,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
+            >Gets the index of the <see cref="P:System.Web.UI.WebControls.GridViewRow.DataItem" />
 
             
 
-             in the underlying <see
-             cref="T:System.Data.DataSet" />
+             in the underlying <see cref="T:System.Data.DataSet" />
 
             
 
@@ -755,19 +699,26 @@
           <para>true if the event has been canceled; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -790,23 +741,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.RowIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowIndex" />
 
             
 
-             property to determine the index of the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+             property to determine the index of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             object in the <see
-             cref="P:System.Web.UI.WebControls.GridView.Rows" />
+             object in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
             
 
-             collection of a <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             collection of a <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
@@ -819,18 +766,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >Gets the index of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             object in the <see
-             cref="P:System.Web.UI.WebControls.GridView.Rows" />
+             object in the <see cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
             
 
-             collection of a <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             collection of a <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
@@ -857,13 +801,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
 
             
 
-             property to determine the state of the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+             property to determine the state of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
@@ -886,13 +828,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.GridViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
                   
 
-                    object is an alternate row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                    object is an alternate row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -906,8 +846,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.GridViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
                   
 
@@ -921,8 +860,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.GridViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
                   
 
@@ -936,8 +874,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.GridViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
                   
 
@@ -951,8 +888,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the state of the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >Gets the state of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
@@ -979,18 +915,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
 
             
 
-             property to determine the type of row that the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+             property to determine the type of row that the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             object represents. The following table lists the different row type values using the <see
-             cref="T:System.Web.UI.WebControls.DataControlRowType" />
+             object represents. The following table lists the different row type values using the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
             
 
@@ -1015,8 +948,7 @@
               </term>
               <description>
                 <para
-                  >A data row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                  >A data row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -1032,8 +964,7 @@
               </term>
               <description>
                 <para
-                  >The footer row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                  >The footer row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -1049,8 +980,7 @@
               </term>
               <description>
                 <para
-                  >The header row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                  >The header row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -1066,13 +996,11 @@
               </term>
               <description>
                 <para
-                  >The empty row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                  >The empty row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
-                   control. The empty row is displayed when <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                   control. The empty row is displayed when <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -1088,8 +1016,7 @@
               </term>
               <description>
                 <para
-                  >A pager row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                  >A pager row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -1105,8 +1032,7 @@
               </term>
               <description>
                 <para
-                  >A separator row in the <see
-                   cref="T:System.Web.UI.WebControls.GridView" />
+                  >A separator row in the <see cref="T:System.Web.UI.WebControls.GridView" />
 
                   
 
@@ -1120,8 +1046,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the row type of the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >Gets the row type of the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
@@ -1150,13 +1075,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             instance is cast to the <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to the <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -1166,8 +1089,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItem" />
 
             
 
@@ -1193,13 +1115,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             instance is cast to the <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to the <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -1209,8 +1129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
 
             
 
@@ -1236,13 +1155,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.GridViewRow" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.GridViewRow" />
 
             
 
-             instance is cast to the <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to the <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -1252,8 +1169,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
 
             
 

@@ -15,8 +15,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RepeatLayout" />
+        >The <see cref="T:System.Web.UI.WebControls.RepeatLayout" />
 
         
 
@@ -40,18 +39,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following example shows markup that is rendered for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >The following example shows markup that is rendered for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control whose <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+             control whose <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
 
             
 
@@ -92,18 +88,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following example shows markup that is rendered for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >The following example shows markup that is rendered for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control whose <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+             control whose <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
 
             
 
@@ -111,8 +104,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This option causes the control to render HTML that might not conform to accessibility standards. For more information, see <format
-               type="text/html">
+              >This option causes the control to render HTML that might not conform to accessibility standards. For more information, see <format type="text/html">
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
                   >Accessibility in Visual Studio 2010 and ASP.NET 4</a
                 >

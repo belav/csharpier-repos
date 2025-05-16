@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by <see
-         cref="T:System.Security.Permissions.UIPermission" />
+        >This enumeration is used by <see cref="T:System.Security.Permissions.UIPermission" />
 
         
 
@@ -108,18 +107,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Users can only use <see
-             cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+            >Users can only use <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
 
             
 
-             for drawing, and can only use user input events for user interface within that subwindow. Examples of <see
-             cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+             for drawing, and can only use user input events for user interface within that subwindow. Examples of <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
 
             
 
-             are a <see
-             cref="T:System.Windows.Forms.MessageBox" />
+             are a <see cref="T:System.Windows.Forms.MessageBox" />
 
             
 
@@ -148,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When it runs under <see
-             cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
+            >When it runs under <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
 
             
 
@@ -177,13 +172,11 @@
             </item>
             <item>
               <para
-                >Cannot use the <see
-                 cref="P:System.Windows.Forms.Form.Opacity" />
+                >Cannot use the <see cref="P:System.Windows.Forms.Form.Opacity" />
 
                 
 
-                 property on <see
-                 cref="T:System.Windows.Forms.Form" />
+                 property on <see cref="T:System.Windows.Forms.Form" />
 
                 
 
@@ -192,8 +185,7 @@
             </item>
             <item>
               <para
-                >Must use only rectangular windows, and must include the window frame. Windows Forms will not honor setting <see
-                 cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+                >Must use only rectangular windows, and must include the window frame. Windows Forms will not honor setting <see cref="P:System.Windows.Forms.Form.FormBorderStyle" />
 
                 
 
@@ -202,13 +194,11 @@
             </item>
             <item>
               <para
-                >Cannot make windows invisible. Any attempt by the application to set the <see
-                 cref="P:System.Windows.Forms.Control.Visible" />
+                >Cannot make windows invisible. Any attempt by the application to set the <see cref="P:System.Windows.Forms.Control.Visible" />
 
                 
 
-                 property on its <see
-                 cref="T:System.Windows.Forms.Form" />
+                 property on its <see cref="T:System.Windows.Forms.Form" />
 
                 
 
@@ -220,8 +210,7 @@
             </item>
             <item>
               <para
-                >Will have its controls prohibited from accessing the <see
-                 cref="P:System.Windows.Forms.Control.Parent" />
+                >Will have its controls prohibited from accessing the <see cref="P:System.Windows.Forms.Control.Parent" />
 
                 
 
@@ -230,8 +219,7 @@
             </item>
             <item>
               <para
-                >Cannot control focus using the <see
-                 cref="M:System.Windows.Forms.Control.Focus" />
+                >Cannot control focus using the <see cref="M:System.Windows.Forms.Control.Focus" />
 
                 
 
@@ -246,8 +234,7 @@
             </item>
             <item>
               <para
-                >Cannot set the <see
-                 cref="P:System.Windows.Forms.Form.TopMost" />
+                >Cannot set the <see cref="P:System.Windows.Forms.Form.TopMost" />
 
                 
 
@@ -256,13 +243,11 @@
             </item>
             <item>
               <para
-                >Cannot control the z-order of controls on the form using the <see
-                 cref="M:System.Windows.Forms.Control.BringToFront" />
+                >Cannot control the z-order of controls on the form using the <see cref="M:System.Windows.Forms.Control.BringToFront" />
 
                 
 
-                 and <see
-                 cref="M:System.Windows.Forms.Control.SendToBack" />
+                 and <see cref="M:System.Windows.Forms.Control.SendToBack" />
 
                 
 
@@ -275,13 +260,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Users can only use <see
-             cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
+            >Users can only use <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeTopLevelWindows" />
 
             
 
-             and <see
-             cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+             and <see cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
 
             
 

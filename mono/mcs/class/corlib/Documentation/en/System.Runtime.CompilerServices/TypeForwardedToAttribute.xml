@@ -27,16 +27,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
+        >Use the <see cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
 
         
 
          attribute to move a type from one assembly to another without disrupting callers that compiled against the old assembly.</para
       >
       <para
-        >Note   vbprvbext does not support the use of the <see
-         cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
+        >Note   vbprvbext does not support the use of the <see cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
 
         
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies a destination <see
-         cref="T:System.Type" />
+        >Specifies a destination <see cref="T:System.Type" />
 
         
 
@@ -76,13 +73,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
 
             
 
-             class specifying a destination <see
-             cref="T:System.Type" />
+             class specifying a destination <see cref="T:System.Type" />
 
             
 
@@ -90,12 +85,15 @@
           >
         </summary>
         <param name="destination">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination <see
-           cref="T:System.Type" />
+          The destination <see cref="T:System.Type" />
 
           
 
@@ -121,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the destination <see
-             cref="T:System.Type" />
+            >Gets the destination <see cref="T:System.Type" />
 
             
 

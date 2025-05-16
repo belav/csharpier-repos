@@ -17,49 +17,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To inspect or modify <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >To inspect or modify <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         objects when they are created, implement the <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+         objects when they are created, implement the <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
 
         
 
-         interface and use an <see
-         cref="T:System.ServiceModel.Description.IContractBehavior" />
+         interface and use an <see cref="T:System.ServiceModel.Description.IContractBehavior" />
 
         
 
-         to add it to the <see
-         cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
+         to add it to the <see cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
 
         
 
          property.</para
       >
       <para
-        >There can be any number of context initializers for a service. Typically, the <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+        >There can be any number of context initializers for a service. Typically, the <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
 
         
 
-         is added to attach an extension to the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+         is added to attach an extension to the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
          object as a mechanism for passing data throughout an application.</para
       >
       <para
-        >If you want to participate in providing or selecting the <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >If you want to participate in providing or selecting the <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
-         object that processes a message, see <see
-         cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+         object that processes a message, see <see cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
 
         
 
@@ -69,8 +61,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the methods necessary to inspect or modify the creation of <see
-         cref="T:System.ServiceModel.InstanceContext" />
+        >Defines the methods necessary to inspect or modify the creation of <see cref="T:System.ServiceModel.InstanceContext" />
 
         
 
@@ -104,13 +95,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.Dispatcher.IInstanceContextInitializer.Initialize(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)" />
+            >The <see cref="M:System.ServiceModel.Dispatcher.IInstanceContextInitializer.Initialize(System.ServiceModel.InstanceContext,System.ServiceModel.Channels.Message)" />
 
             
 
-             method is called when an <see
-             cref="T:System.ServiceModel.InstanceContext" />
+             method is called when an <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -120,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides the ability to modify the newly created <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >Provides the ability to modify the newly created <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
@@ -129,7 +117,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.XmlElementElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.XmlElementElement" />
 
             
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.XmlElementElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.XmlElementElement" />
 
             
 
@@ -80,12 +78,15 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlElement" />
+          The <see cref="T:System.Xml.XmlElement" />
 
           
 
@@ -216,8 +217,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets or sets the <see cref="T:System.Xml.XmlElement" />
 
             
 

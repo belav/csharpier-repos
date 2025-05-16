@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you apply this attribute to a data field, you must follow the guidelines for how to use validation attributes. For more information, see <format
-         type="text/html">
+        >When you apply this attribute to a data field, you must follow the guidelines for how to use validation attributes. For more information, see <format type="text/html">
           <a href="c563bbf3-feb9-484e-81d1-a585f1b0e192">ASP.NET Dynamic Data Guidelines</a>
         </format>
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" />
 
             
 
@@ -72,14 +70,22 @@
           >
         </summary>
         <param name="minimum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the minimum value allowed for the data field value.</param
         >
         <param name="maximum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -106,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" />
 
             
 
@@ -115,14 +120,22 @@
           >
         </summary>
         <param name="minimum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the minimum value allowed for the data field value.</param
         >
         <param name="maximum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -152,8 +165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object to validate must implement the <see
-             cref="T:System.IComparable" />
+            >The object to validate must implement the <see cref="T:System.IComparable" />
 
             
 
@@ -163,8 +175,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.RangeAttribute" />
 
             
 
@@ -172,21 +183,33 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the type of the object to test.</param
         >
         <param name="minimum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the minimum value allowed for the data field value.</param
         >
         <param name="maximum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -217,13 +240,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.DataAnnotations.RangeAttribute.FormatErrorMessage(System.String)" />
+            >The <see cref="M:System.ComponentModel.DataAnnotations.RangeAttribute.FormatErrorMessage(System.String)" />
 
             
 
-             creates the error message by using the name of the data field that caused the validation failure. You can override this method in a custom validation attribute to customize how errors are created, or to provide a more complex message that contains parameters that you evaluate at run time. For an example, see the <see
-             cref="M:System.ComponentModel.DataAnnotations.RangeAttribute.#ctor(System.Type,System.String,System.String)" />
+             creates the error message by using the name of the data field that caused the validation failure. You can override this method in a custom validation attribute to customize how errors are created, or to provide a more complex message that contains parameters that you evaluate at run time. For an example, see the <see cref="M:System.ComponentModel.DataAnnotations.RangeAttribute.#ctor(System.Type,System.String,System.String)" />
 
             
 
@@ -239,7 +260,11 @@
           <para>The formatted error message.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -274,7 +299,11 @@
           <para>true if the specified value is in the range; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,8 +367,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object to be tested must implement the <see
-             cref="T:System.IComparable" />
+            >The object to be tested must implement the <see cref="T:System.IComparable" />
 
             
 

@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.DesignTimeTemplateParser" />
+        >The <see cref="T:System.Web.UI.DesignTimeTemplateParser" />
 
         
 
@@ -55,8 +54,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The built <see
-             cref="T:System.Web.UI.Control" />
+            >The built <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -64,7 +62,11 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -100,8 +102,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of built <see
-             cref="T:System.Web.UI.Control" />
+            >An array of built <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -109,7 +110,11 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -138,8 +143,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.RootBuilder" />
+            >The <see cref="T:System.Web.UI.RootBuilder" />
 
             
 
@@ -147,7 +151,11 @@
           >
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -185,8 +193,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.RootBuilder" />
+            >The <see cref="T:System.Web.UI.RootBuilder" />
 
             
 
@@ -194,21 +201,33 @@
           >
         </returns>
         <param name="host">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Manages designer components.</param
         >
         <param name="theme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The content to parse.</param
         >
         <param name="themePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

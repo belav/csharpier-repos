@@ -14,13 +14,11 @@
   <Interfaces />
   <Docs>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Widget.NestedClass.Double</c>
+    <remarks><c>T:Mono.DocTest.Widget.NestedClass.Double</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">

@@ -24,18 +24,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Base class that represents an email attachment. Classes <see
-         cref="T:System.Net.Mail.Attachment" />
+        >Base class that represents an email attachment. Classes <see cref="T:System.Net.Mail.Attachment" />
 
         
 
-        , <see
-         cref="T:System.Net.Mail.AlternateView" />
+        , <see cref="T:System.Net.Mail.AlternateView" />
 
         
 
-        , and <see
-         cref="T:System.Net.Mail.LinkedResource" />
+        , and <see cref="T:System.Net.Mail.LinkedResource" />
 
         
 
@@ -67,13 +64,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-             with the specified <see
-             cref="T:System.IO.Stream" />
+             with the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -81,7 +76,11 @@
           >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -109,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -118,7 +116,11 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,18 +152,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-             with the specified <see
-             cref="T:System.IO.Stream" />
+             with the specified <see cref="T:System.IO.Stream" />
 
             
 
-             and <see
-             cref="T:System.Net.Mime.ContentType" />
+             and <see cref="T:System.Net.Mime.ContentType" />
 
             
 
@@ -169,14 +168,22 @@
           >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stream containing the content for this attachment.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,13 +215,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-             with the specified <see
-             cref="T:System.IO.Stream" />
+             with the specified <see cref="T:System.IO.Stream" />
 
             
 
@@ -222,14 +227,22 @@
           >
         </summary>
         <param name="contentStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A stream containing the content for this attachment.</param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -261,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -270,14 +282,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name holding the content for this attachment.</param
         >
         <param name="contentType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -309,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Instantiates an <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Instantiates an <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -318,14 +337,22 @@
           >
         </summary>
         <param name="fileName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file name holding the content for this attachment.</param
         >
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -425,50 +452,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Net.Mail.AttachmentBase.Dispose" />
+            >Call <see cref="M:System.Net.Mail.AttachmentBase.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+             when you are finished using the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-            . The <see
-             cref="M:System.Net.Mail.AttachmentBase.Dispose" />
+            . The <see cref="M:System.Net.Mail.AttachmentBase.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+             method leaves the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.Mail.AttachmentBase.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.Mail.AttachmentBase.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            , you must release all references to the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -477,18 +495,15 @@
             . </para
           >
           <para
-            >Note   Always call <see
-             cref="M:System.Net.Mail.AttachmentBase.Dispose" />
+            >Note   Always call <see cref="M:System.Net.Mail.AttachmentBase.Dispose" />
 
             
 
-             before you release your last reference to the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+             before you release your last reference to the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
-            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -498,8 +513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Releases the resources used by the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -530,36 +544,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -569,8 +577,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Mail.AttachmentBase" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.AttachmentBase" />
 
             
 
@@ -578,7 +585,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -41,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
 
             
 
@@ -50,14 +49,22 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the arrow. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -86,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
 
             
 
-             class with the specified width, height, and fill property. Whether an arrow end cap is filled depends on the argument passed to the <paramref
-             name="isFilled" />
+             class with the specified width, height, and fill property. Whether an arrow end cap is filled depends on the argument passed to the <paramref name="isFilled" />
 
             
 
@@ -100,21 +105,33 @@
           >
         </summary>
         <param name="width">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The width of the arrow. </param
         >
         <param name="height">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The height of the arrow. </param
         >
         <param name="isFilled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,13 +175,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The height of the arrow cap is scaled by the width of the <see
-             cref="T:System.Drawing.Pen" />
+            >The height of the arrow cap is scaled by the width of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             object used to draw the line being capped. For example, if you are drawing a capped line with a pen that has a width of 5 pixels, and the <see
-             cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
+             object used to draw the line being capped. For example, if you are drawing a capped line with a pen that has a width of 5 pixels, and the <see cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
 
             
 
@@ -213,13 +228,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The width of the arrow cap is scaled by the width of the <see
-             cref="T:System.Drawing.Pen" />
+            >The width of the arrow cap is scaled by the width of the <see cref="T:System.Drawing.Pen" />
 
             
 
-             object used to draw the line being capped. For example, if you are drawing a capped line with a pen that has a width of 5 pixels, and the <see
-             cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
+             object used to draw the line being capped. For example, if you are drawing a capped line with a pen that has a width of 5 pixels, and the <see cref="T:System.Drawing.Drawing2D.AdjustableArrowCap" />
 
             
 

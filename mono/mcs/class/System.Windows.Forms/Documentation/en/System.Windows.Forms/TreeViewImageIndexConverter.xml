@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        >For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
@@ -38,23 +36,19 @@
       >
       <block subset="none" type="note">
         <para
-          >Typically, you do not directly create an instance of a <see
-           cref="T:System.Windows.Forms.TreeViewImageIndexConverter" />
+          >Typically, you do not directly create an instance of a <see cref="T:System.Windows.Forms.TreeViewImageIndexConverter" />
 
           
 
-          . Instead, call the <see
-           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+          . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
           
 
-           method of <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+           method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -65,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a type converter to convert data for an image index to and from one data type to another for use by the <see
-         cref="T:System.Windows.Forms.TreeView" />
+        >Provides a type converter to convert data for an image index to and from one data type to another for use by the <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
@@ -83,13 +76,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Access the <see
-             cref="M:System.Windows.Forms.TreeViewImageIndexConverter.#ctor" />
+            >Access the <see cref="M:System.Windows.Forms.TreeViewImageIndexConverter.#ctor" />
 
             
 
-             class through the <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -99,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TreeViewImageIndexConverter" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TreeViewImageIndexConverter" />
 
             
 
@@ -135,36 +125,45 @@
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.CultureInfo" />
+          The <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            to use as the current culture. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -195,53 +194,64 @@
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.CultureInfo" />
+          The <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            to use as the current culture. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
            to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           to convert the <paramref
-           name="value" />
+           to convert the <paramref name="value" />
 
           
 
@@ -269,7 +279,11 @@
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -295,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating null is valid in the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >Gets a value indicating null is valid in the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 

@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables setting message-level security properties on the <see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+        >Enables setting message-level security properties on the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.MessageSecurityOverMsmqElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MessageSecurityOverMsmqElement" />
 
             
 
@@ -137,8 +135,7 @@
             </item>
             <item>
               <para
-                >UserName: This enables the service to require that the client be authenticated using a UserName credential. This credential needs to be specified using <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                >UserName: This enables the service to require that the client be authenticated using a UserName credential. This credential needs to be specified using <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
@@ -150,13 +147,11 @@
             </item>
             <item>
               <para
-                >Certificate: This enables the service to require that the client be authenticated using a certificate. The client credential in this case needs to be specified using the <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                >Certificate: This enables the service to require that the client be authenticated using a certificate. The client credential in this case needs to be specified using the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
-                 class or ClientCredentials behavior. The service credential in this case needs to be specified using the <see
-                 cref="T:System.ServiceModel.Description.ClientCredentials" />
+                 class or ClientCredentials behavior. The service credential in this case needs to be specified using the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
                 
 
@@ -172,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.MessageCredentialType" />
+            >Gets or sets the <see cref="T:System.ServiceModel.MessageCredentialType" />
 
             
 

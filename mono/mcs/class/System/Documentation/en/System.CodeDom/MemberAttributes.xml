@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The identifiers defined in the <see
-         cref="T:System.CodeDom.MemberAttributes" />
+        >The identifiers defined in the <see cref="T:System.CodeDom.MemberAttributes" />
 
         
 
@@ -35,38 +34,31 @@
       >
       <block subset="none" type="note">
         <para
-          >There is no Virtual member attribute. A member is declared virtual by setting its member access to <see
-           cref="F:System.CodeDom.MemberAttributes.Public" />
+          >There is no Virtual member attribute. A member is declared virtual by setting its member access to <see cref="F:System.CodeDom.MemberAttributes.Public" />
 
           
 
-           (property1.Attributes = MemberAttributes.Public) without specifying it as <see
-           cref="F:System.CodeDom.MemberAttributes.Final" />
+           (property1.Attributes = MemberAttributes.Public) without specifying it as <see cref="F:System.CodeDom.MemberAttributes.Final" />
 
           
 
-          . The absence of the <see
-           cref="F:System.CodeDom.MemberAttributes.Final" />
+          . The absence of the <see cref="F:System.CodeDom.MemberAttributes.Final" />
 
           
 
-           flag makes a member virtual in C# (public virtual), overrideable in Visual Basic (Public Overrideable). To avoid declaring the member as virtual or overrideable, set both the <see
-           cref="F:System.CodeDom.MemberAttributes.Public" />
+           flag makes a member virtual in C# (public virtual), overrideable in Visual Basic (Public Overrideable). To avoid declaring the member as virtual or overrideable, set both the <see cref="F:System.CodeDom.MemberAttributes.Public" />
 
           
 
-           and <see
-           cref="F:System.CodeDom.MemberAttributes.Final" />
+           and <see cref="F:System.CodeDom.MemberAttributes.Final" />
 
           
 
-           flags in the <see
-           cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+           flags in the <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
           
 
-           property. See the <see
-           cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+           property. See the <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
           
 
@@ -75,43 +67,35 @@
       </block>
       <block subset="none" type="note">
         <para
-          >The pattern for setting the access flags (flags containing the terms Public, Private, Assembly, or Family) is to mask out all access flags using the <see
-           cref="F:System.CodeDom.MemberAttributes.AccessMask" />
+          >The pattern for setting the access flags (flags containing the terms Public, Private, Assembly, or Family) is to mask out all access flags using the <see cref="F:System.CodeDom.MemberAttributes.AccessMask" />
 
           
 
-           mask and then set the desired access flag. For example, the code statement to identify a constructor (named constructor1) as public is constructor1.Attributes = (constructor1.Attributes &amp; ~MemberAttributes.AccessMask) | MemberAttributes.Public;. Setting the <see
-           cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+           mask and then set the desired access flag. For example, the code statement to identify a constructor (named constructor1) as public is constructor1.Attributes = (constructor1.Attributes &amp; ~MemberAttributes.AccessMask) | MemberAttributes.Public;. Setting the <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
           
 
-           property directly to an access flag (for example, constructor1.Attributes = MemberAttributes.Public;) erases all other flags that might be set. This pattern should also be used for setting the scope flags (<see
-           cref="F:System.CodeDom.MemberAttributes.Abstract" />
+           property directly to an access flag (for example, constructor1.Attributes = MemberAttributes.Public;) erases all other flags that might be set. This pattern should also be used for setting the scope flags (<see cref="F:System.CodeDom.MemberAttributes.Abstract" />
 
           
 
-          , <see
-           cref="F:System.CodeDom.MemberAttributes.Final" />
+          , <see cref="F:System.CodeDom.MemberAttributes.Final" />
 
           
 
-          , <see
-           cref="F:System.CodeDom.MemberAttributes.Static" />
+          , <see cref="F:System.CodeDom.MemberAttributes.Static" />
 
           
 
-          , <see
-           cref="F:System.CodeDom.MemberAttributes.Override" />
+          , <see cref="F:System.CodeDom.MemberAttributes.Override" />
 
           
 
-           or <see
-           cref="F:System.CodeDom.MemberAttributes.Const" />
+           or <see cref="F:System.CodeDom.MemberAttributes.Const" />
 
           
 
-          ) using the <see
-           cref="F:System.CodeDom.MemberAttributes.ScopeMask" />
+          ) using the <see cref="F:System.CodeDom.MemberAttributes.ScopeMask" />
 
           
 

@@ -28,8 +28,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />
 
             
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />
 
             
 
@@ -66,29 +64,34 @@
           >
         </summary>
         <param name="serverType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            to which this method belongs.</param
         >
         <param name="methodInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+          The <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
           
 
-           with which to initialize this <see
-           cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+           with which to initialize this <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />
 
           
 
@@ -134,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Description.SoapBindingUse" />
+            >Gets a <see cref="T:System.Web.Services.Description.SoapBindingUse" />
 
             
 
@@ -163,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -192,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -221,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+            >Gets the <see cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
             
 
@@ -247,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -276,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlMembersMapping" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
             
 
@@ -305,8 +302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -334,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -363,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
+            >Gets a <see cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
 
             
 
@@ -392,8 +386,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -418,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -447,8 +439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.Services.WsiProfiles" />
+            >Gets a <see cref="T:System.Web.Services.WsiProfiles" />
 
             
 

@@ -39,33 +39,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The common language runtime provides a thread synchronization mechanism based on synchronization objects waiting for execution in an array of <see
-         cref="T:System.Threading.WaitHandle" />
+        >The common language runtime provides a thread synchronization mechanism based on synchronization objects waiting for execution in an array of <see cref="T:System.Threading.WaitHandle" />
 
         
 
-         objects. If the array of <see
-         cref="T:System.Threading.WaitHandle" />
+         objects. If the array of <see cref="T:System.Threading.WaitHandle" />
 
         
 
-         objects passed to <see
-         cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+         objects passed to <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
         
 
-         or <see
-         cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+         or <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
         
 
-         contains any duplicate operating system handles, <see
-         cref="T:System.DuplicateWaitObjectException" />
+         contains any duplicate operating system handles, <see cref="T:System.DuplicateWaitObjectException" />
 
         
 
-         is thrown. For more information, see <see
-         cref="T:System.Threading.WaitHandle" />
+         is thrown. For more information, see <see cref="T:System.Threading.WaitHandle" />
 
         
 
@@ -79,13 +73,11 @@
          uses the HRESULT COR_E_DUPLICATEWAITOBJECT, which has the value 0x80131529.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.DuplicateWaitObjectException" />
+        >For a list of initial property values for an instance of <see cref="T:System.DuplicateWaitObjectException" />
 
         
 
-        , see the <see
-         cref="M:System.DuplicateWaitObjectException.#ctor" />
+        , see the <see cref="M:System.DuplicateWaitObjectException.#ctor" />
 
         
 
@@ -94,19 +86,19 @@
       <block subset="none" type="note">
         <para
           >This exception is not included in the <see
-           cref="http://go.microsoft.com/fwlink/?LinkID=247912">.NET for Windows Store apps</see>
+            cref="http://go.microsoft.com/fwlink/?LinkID=247912"
+            >.NET for Windows Store apps</see
+          >
 
           
 
-           or the <format
-           type="text/html">
+           or the <format type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
           </format>
 
           
 
-          , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
-           cref="T:System.ArgumentException" />
+          , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see cref="T:System.ArgumentException" />
 
           
 
@@ -142,16 +134,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Duplicate objects in argument." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -193,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >Initializes a new instance of the <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -231,16 +220,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of <paramref
-             name="parameterName" />
+            >The content of <paramref name="parameterName" />
 
             
 
              is intended to be understood by humans.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -292,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >Initializes a new instance of the <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -301,7 +287,11 @@
           >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -333,8 +323,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832AC524-21BC-419A-A27B-CA8BFC45840F"
                 >[&lt;topic://cpconSerialization&gt;]</a
               >
@@ -348,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >Initializes a new instance of the <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -357,14 +345,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -395,21 +391,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
              property returns the same value that is passed to this constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -434,8 +427,7 @@
               </term>
               <description>
                 <para
-                  >The exception specified by <paramref
-                   name="innerException" />
+                  >The exception specified by <paramref name="innerException" />
 
                   
 
@@ -451,8 +443,7 @@
               </term>
               <description>
                 <para
-                  >The error message string specified by <paramref
-                   name="message" />
+                  >The error message string specified by <paramref name="message" />
 
                   
 
@@ -465,8 +456,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >Initializes a new instance of the <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -474,19 +464,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -522,39 +519,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of the <paramref
-             name="parameterName" />
+            >The content of the <paramref name="parameterName" />
 
             
 
-             and <paramref
-             name="message" />
+             and <paramref name="message" />
 
             
 
              parameters is intended to be understood by humans. The caller of this constructor is required to ensure that these strings have been localized for the current system culture.</para
           >
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -606,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.DuplicateWaitObjectException" />
+            >Initializes a new instance of the <see cref="T:System.DuplicateWaitObjectException" />
 
             
 
@@ -615,14 +605,22 @@
           >
         </summary>
         <param name="parameterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the parameter that caused the exception. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

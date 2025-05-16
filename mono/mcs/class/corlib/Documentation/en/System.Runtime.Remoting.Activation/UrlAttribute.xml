@@ -30,26 +30,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+        >The <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
         
 
-         is passed in the activation attributes array as a parameter to <see
-         cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+         is passed in the activation attributes array as a parameter to <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
         
 
-         when creating activated objects with the <see
-         cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+         when creating activated objects with the <see cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
         
 
          method.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+            >Creates a new instance of the <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
             
 
@@ -96,7 +91,11 @@
           >
         </summary>
         <param name="callsiteURL">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -126,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the default <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method overrides the default <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -141,8 +139,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object is a <see
-             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+            >true if the object is a <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
             
 
@@ -150,12 +147,15 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare to the current <see
-           cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+          The object to compare to the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
           
 
@@ -184,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash value for the current <see
-             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+            >Returns the hash value for the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
             
 
@@ -195,8 +194,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash value for the current <see
-             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+            >The hash value for the current <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
             
 
@@ -250,12 +248,15 @@
           <para>Forces the creation of the context and the server object inside the context at the specified URL.</para>
         </summary>
         <param name="ctorMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+          The <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
           
 
@@ -295,13 +296,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a Boolean value that indicates whether the specified <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+            >Returns a Boolean value that indicates whether the specified <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
-             meets <see
-             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+             meets <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
             
 
@@ -313,14 +312,22 @@
           <para>true if the passed-in context is acceptable; otherwise, false.</para>
         </returns>
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The context to check against the current context attribute. </param
         >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -346,8 +353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the URL value of the <see
-             cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+            >Gets the URL value of the <see cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
             
 

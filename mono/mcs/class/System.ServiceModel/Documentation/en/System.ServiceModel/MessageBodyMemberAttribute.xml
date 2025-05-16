@@ -25,37 +25,32 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+        >Use the <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
 
         
 
          attribute to specify that a data member is serialized into the SOAP body and to control some serialization items. </para
       >
       <para
-        >The <see
-         cref="P:System.ServiceModel.MessageBodyMemberAttribute.Order" />
+        >The <see cref="P:System.ServiceModel.MessageBodyMemberAttribute.Order" />
 
         
 
          property is used to specify the order of body parts in cases where the default alphabetical order is not appropriate.</para
       >
       <para
-        >The other properties are inherited from the base class, <see
-         cref="T:System.ServiceModel.MessageContractMemberAttribute" />
+        >The other properties are inherited from the base class, <see cref="T:System.ServiceModel.MessageContractMemberAttribute" />
 
         
 
         .</para
       >
       <para
-        >crabout controlling the serialization of the contents of a SOAP body without modifying the default SOAP envelope itself, see <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+        >crabout controlling the serialization of the contents of a SOAP body without modifying the default SOAP envelope itself, see <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-        , <format
-         type="text/html">
+        , <format type="text/html">
           <a href="7c5a26c8-89c9-4bcb-a4bc-7131e6d01f0c"
             >Specifying Data Transfer in Service Contracts</a
           >
@@ -63,8 +58,7 @@
 
         
 
-        , and <format
-         type="text/html">
+        , and <format type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Data Contracts Overview</a>
         </format>
 
@@ -73,8 +67,7 @@
         .</para
       >
       <para
-        >crdefault <format
-         type="text/html">
+        >crdefault <format type="text/html">
           <a href="1e19c64a-ae84-4c2f-9155-91c54a77c249">Using Message Contracts</a>
         </format>
 
@@ -104,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+            >See <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
 
             
 
@@ -115,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
 
             
 
@@ -140,16 +131,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.MessageBodyMemberAttribute.Order" />
+            >Use the <see cref="P:System.ServiceModel.MessageBodyMemberAttribute.Order" />
 
             
 
              property to specify the location of a data member in the SOAP body element. The value is not required to be consecutive, because it does not represent the position of the member, only the sorting key.</para
           >
           <para
-            >The order of the body elements is alphabetical by default. The semantics of this property are the same as the semantics of the <see
-             cref="P:System.Runtime.Serialization.DataMemberAttribute.Order" />
+            >The order of the body elements is alphabetical by default. The semantics of this property are the same as the semantics of the <see cref="P:System.Runtime.Serialization.DataMemberAttribute.Order" />
 
             
 

@@ -20,8 +20,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
         
 
@@ -55,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+            >The <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
@@ -90,13 +88,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipient.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipient.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             constructor constructs an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+             constructor constructs an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
@@ -104,12 +100,15 @@
           >
         </summary>
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -147,13 +146,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.CmsRecipient.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.CmsRecipient.#ctor(System.Security.Cryptography.Pkcs.SubjectIdentifierType,System.Security.Cryptography.X509Certificates.X509Certificate2)" />
 
             
 
-             constructor constructs an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+             constructor constructs an instance of the <see cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
             
 
@@ -161,24 +158,30 @@
           >
         </summary>
         <param name="recipientIdentifierType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A member of the <see
-           cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+          A member of the <see cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
 
           
 
            enumeration that specifies the type of the identifier of the recipient.</param
         >
         <param name="certificate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+          An <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
 
           
 
@@ -210,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsRecipient.Certificate" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsRecipient.Certificate" />
 
             
 
@@ -244,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.CmsRecipient.RecipientIdentifierType" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.CmsRecipient.RecipientIdentifierType" />
 
             
 

@@ -30,8 +30,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Design.ProcessThreadDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Design.ProcessThreadDesigner" />
 
             
 
@@ -64,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adjusts the set of properties the component exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Adjusts the set of properties the component exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -73,12 +71,15 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 

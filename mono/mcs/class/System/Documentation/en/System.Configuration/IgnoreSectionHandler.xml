@@ -31,21 +31,18 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The configuration system completely parses configuration files to collect configuration information and throws exceptions when it encounters configuration sections that do not have a corresponding entry in the configSections section. </para>
       <para
-        >For those sections not handled by the <see
-         cref="N:System.Configuration" />
+        >For those sections not handled by the <see cref="N:System.Configuration" />
 
         
 
-         types, the new wrapper type <see
-         cref="T:System.Configuration.IgnoreSection" />
+         types, the new wrapper type <see cref="T:System.Configuration.IgnoreSection" />
 
         
 
          is provided. This is to prevent configuration-file parsing exceptions. </para
       >
       <para
-        >For legacy purposes the <see
-         cref="T:System.Configuration.IgnoreSectionHandler" />
+        >For legacy purposes the <see cref="T:System.Configuration.IgnoreSectionHandler" />
 
         
 
@@ -55,8 +52,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a legacy section-handler definition for configuration sections that are not handled by the <see
-         cref="N:System.Configuration" />
+        >Provides a legacy section-handler definition for configuration sections that are not handled by the <see cref="N:System.Configuration" />
 
         
 
@@ -84,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.IgnoreSectionHandler" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.IgnoreSectionHandler" />
 
             
 
@@ -128,26 +123,37 @@
           <para>The created configuration handler object.</para>
         </returns>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The configuration settings in a corresponding parent configuration section. </param
         >
         <param name="configContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The virtual path for which the configuration section handler computes configuration values. Normally this parameter is reserved and is null. </param
         >
         <param name="section">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNode" />
+          An <see cref="T:System.Xml.XmlNode" />
 
           
 

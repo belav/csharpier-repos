@@ -19,18 +19,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.UrlPropertyAttribute" />
+        >The <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
         
 
-         attribute is an attribute applied to a control property that represents a URL. In addition to marking a string property as representing a URL, the <see
-         cref="T:System.Web.UI.UrlPropertyAttribute" />
+         attribute is an attribute applied to a control property that represents a URL. In addition to marking a string property as representing a URL, the <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
         
 
-         attribute defines the <see
-         cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
+         attribute defines the <see cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
 
         
 
@@ -52,13 +49,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A default instance of the <see
-             cref="T:System.Web.UI.UrlPropertyAttribute" />
+            >A default instance of the <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
             
 
-             class is initialized with the <see
-             cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
+             class is initialized with the <see cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
 
             
 
@@ -68,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new default instance of the <see
-             cref="T:System.Web.UI.UrlPropertyAttribute" />
+            >Initializes a new default instance of the <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
             
 
@@ -92,18 +86,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of a <see
-             cref="T:System.Web.UI.UrlPropertyAttribute" />
+            >An instance of a <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
             
 
-             class created with this constructor is initialized with the <see
-             cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
+             class created with this constructor is initialized with the <see cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
 
             
 
-             property set to <paramref
-             name="filter" />
+             property set to <paramref name="filter" />
 
             
 
@@ -113,13 +104,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.UrlPropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
             
 
-             class, setting the <see
-             cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
+             class, setting the <see cref="P:System.Web.UI.UrlPropertyAttribute.Filter" />
 
             
 
@@ -127,7 +116,11 @@
           >
         </summary>
         <param name="filter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,8 +163,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A designer provides a filter in file selectors based on the <see
-             cref="T:System.Web.UI.UrlPropertyAttribute" />
+            >A designer provides a filter in file selectors based on the <see cref="T:System.Web.UI.UrlPropertyAttribute" />
 
             
 

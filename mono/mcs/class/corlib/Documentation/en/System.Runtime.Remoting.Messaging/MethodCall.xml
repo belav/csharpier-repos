@@ -46,18 +46,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
         
 
-         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
         
 
-         class directly; instead, use the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+         class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
         
 
@@ -68,8 +65,7 @@
 
         
 
-         contains remoting data that is passed between message sinks. A remoting client sends a <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+         contains remoting data that is passed between message sinks. A remoting client sends a <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
         
 
@@ -79,8 +75,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+        >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
         
 
@@ -112,18 +107,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
-             class directly; instead, use the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+             class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
             
 
@@ -133,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
@@ -142,12 +133,15 @@
           >
         </summary>
         <param name="h1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of remoting headers that contains key/value pairs. This array is used to initialize <see
-           cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+          An array of remoting headers that contains key/value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
           
 
@@ -178,18 +172,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
-             class directly; instead, use the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+             class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
             
 
@@ -199,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes  a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+            >Initializes  a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
@@ -208,7 +198,11 @@
           >
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -287,13 +281,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Runtime.Remoting.Messaging.MethodCall.ExternalProperties" />
+            >The <see cref="F:System.Runtime.Remoting.Messaging.MethodCall.ExternalProperties" />
 
             
 
-             field is also accessible through the <see
-             cref="P:System.Runtime.Remoting.Messaging.MethodCall.Properties" />
+             field is also accessible through the <see cref="P:System.Runtime.Remoting.Messaging.MethodCall.Properties" />
 
             
 
@@ -303,8 +295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -345,7 +336,11 @@
           <para>The method argument as an object.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -385,7 +380,11 @@
           <para>The name of the method argument.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -425,7 +424,11 @@
           <para>The method argument that is not marked as an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -465,7 +468,11 @@
           <para>The name of the method argument that is not marked as an out parameter.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -499,13 +506,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.MethodCall.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.MethodCall.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             method throws a <see
-             cref="T:System.NotSupportedException" />
+             method throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -515,8 +520,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.MethodCall.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.MethodCall.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
@@ -524,14 +528,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data for serializing or deserializing the remote object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -598,12 +610,15 @@
           <para>An internal serialization handler.</para>
         </returns>
         <param name="h">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of remoting headers that contain key/value pairs. This array is used to initialize <see
-           cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+          An array of remoting headers that contain key/value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
           
 
@@ -680,8 +695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+            >Initializes a <see cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
             
 
@@ -714,8 +728,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -751,8 +764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -788,8 +800,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -869,13 +880,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Messaging.MethodCall.Properties" />
+            >The <see cref="P:System.Runtime.Remoting.Messaging.MethodCall.Properties" />
 
             
 
-             property returns the value of the <see
-             cref="F:System.Runtime.Remoting.Messaging.MethodCall.ExternalProperties" />
+             property returns the value of the <see cref="F:System.Runtime.Remoting.Messaging.MethodCall.ExternalProperties" />
 
             
 
@@ -885,8 +894,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets an <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -915,13 +923,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method belongs to a remote object. The value of the <see
-             cref="P:System.Runtime.Remoting.Messaging.MethodCall.MethodBase" />
+            >The method belongs to a remote object. The value of the <see cref="P:System.Runtime.Remoting.Messaging.MethodCall.MethodBase" />
 
             
 
-             property is set through the <see
-             cref="M:System.Runtime.Remoting.Messaging.MethodCall.ResolveMethod" />
+             property is set through the <see cref="M:System.Runtime.Remoting.Messaging.MethodCall.ResolveMethod" />
 
             
 
@@ -966,14 +972,22 @@
           <para>Sets method information from serialization settings. </para>
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data for serializing or deserializing the remote object.</param
         >
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

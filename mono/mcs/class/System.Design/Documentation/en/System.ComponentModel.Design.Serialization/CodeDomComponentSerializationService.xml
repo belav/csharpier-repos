@@ -19,46 +19,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
 
         
 
-         class serializes a set of components or serializable objects into a serialization store. The store can then be deserialized at a later time. The <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+         class serializes a set of components or serializable objects into a serialization store. The store can then be deserialized at a later time. The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
 
         
 
          class differs from other serialization schemes in that the serialization format is opaque, and it allows for partial serialization of objects. For example, you can choose to serialize only selected properties for an object.</para
       >
       <para
-        >The base class, <see
-         cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
+        >The base class, <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
 
         
 
-        , replaces the <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+        , replaces the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
 
         
 
-         interface from the .NET Framework version 1.0, although the latter is retained for backward compatibility. The <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+         interface from the .NET Framework version 1.0, although the latter is retained for backward compatibility. The <see cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
 
         
 
-         class does not implement the <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+         class does not implement the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
 
         
 
-         interface, but if you query for <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+         interface, but if you query for <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
 
         
 
-        , the <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+        , the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
 
         
 
@@ -83,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
 
             
 
@@ -110,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
 
             
 
@@ -119,12 +109,15 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.IServiceProvider" />
+          An <see cref="T:System.IServiceProvider" />
 
           
 
@@ -149,8 +142,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The serialization store can be passed to any of the <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.Serialize(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)" />
+            >The serialization store can be passed to any of the <see cref="M:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.Serialize(System.ComponentModel.Design.Serialization.SerializationStore,System.Object)" />
 
             
 
@@ -160,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+            >Creates a new <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
             
 
@@ -203,12 +194,15 @@
           <para>A collection of deserialized components.</para>
         </returns>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
@@ -239,13 +233,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Created objects that implement the <see
-             cref="T:System.ComponentModel.IComponent" />
+            >Created objects that implement the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             interface will be added to the <paramref
-             name="container" />
+             interface will be added to the <paramref name="container" />
 
             
 
@@ -255,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deserializes the given store and populates the given <see
-             cref="T:System.ComponentModel.IContainer" />
+            >Deserializes the given store and populates the given <see cref="T:System.ComponentModel.IContainer" />
 
             
 
-             with deserialized <see
-             cref="T:System.ComponentModel.IComponent" />
+             with deserialized <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -273,24 +263,30 @@
           <para>A collection of deserialized components.</para>
         </returns>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
            from which objects will be deserialized.</param
         >
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A container to which <see
-           cref="T:System.ComponentModel.IComponent" />
+          A container to which <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -323,18 +319,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.DeserializeTo(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer,System.Boolean,System.Boolean)" />
+            >The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.DeserializeTo(System.ComponentModel.Design.Serialization.SerializationStore,System.ComponentModel.IContainer,System.Boolean,System.Boolean)" />
 
             
 
-             method deserializes the given store, but rather than producing new objects, the data in the store is applied to an existing set of objects that are taken from the <paramref
-             name="container" />
+             method deserializes the given store, but rather than producing new objects, the data in the store is applied to an existing set of objects that are taken from the <paramref name="container" />
 
             
 
-             parameter. As a result, the caller can create in advance an object however it sees fit. If an object has deserialization state and the object is not named in the set of existing objects, a new object will be created. If that object also implements <see
-             cref="T:System.ComponentModel.IComponent" />
+             parameter. As a result, the caller can create in advance an object however it sees fit. If an object has deserialization state and the object is not named in the set of existing objects, a new object will be created. If that object also implements <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -344,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deserializes the given <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+            >Deserializes the given <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
             
 
@@ -353,33 +345,48 @@
           >
         </summary>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
             from which the objects will be deserialized.</param
         >
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A container of objects to which data will be applied.</param
         >
         <param name="validateRecycledTypes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to validate the recycled type; otherwise, false.</param
         >
         <param name="applyDefaults">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -406,8 +413,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the returned store to deserialize objects by passing it to the various <see
-             cref="Overload:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.Deserialize" />
+            >You can use the returned store to deserialize objects by passing it to the various <see cref="Overload:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.Deserialize" />
 
             
 
@@ -417,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+            >Loads a <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
             
 
@@ -428,8 +433,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The loaded <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+            >The loaded <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
             
 
@@ -437,12 +441,15 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The stream from which to load the <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The stream from which to load the <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
@@ -473,8 +480,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="store" />
+            >The <paramref name="store" />
 
             
 
@@ -484,8 +490,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes the given object to the given <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+            >Serializes the given object to the given <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
             
 
@@ -493,24 +498,30 @@
           >
         </summary>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
-            to which <paramref
-           name="value" />
+            to which <paramref name="value" />
 
           
 
            will be serialized. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -547,24 +558,30 @@
           <para>Serializes the given object, accounting for default property values.</para>
         </summary>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
-            to which <paramref
-           name="value" />
+            to which <paramref name="value" />
 
           
 
            will be serialized. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -602,36 +619,45 @@
           <para>Serializes the given member on the given object.</para>
         </summary>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
-            to which <paramref
-           name="member" />
+            to which <paramref name="member" />
 
           
 
            will be serialized. </param
         >
         <param name="owningObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that owns the <paramref
-           name="member" />
+          The object that owns the <paramref name="member" />
 
           
 
           .</param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -663,8 +689,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For some members, containing the default property value and setting the same value back to the member are different concepts. For example, if a property inherits its value from a parent object if no local value is set, setting the value back to the property may not be what is desired. The <see
-             cref="M:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.SerializeMemberAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)" />
+            >For some members, containing the default property value and setting the same value back to the member are different concepts. For example, if a property inherits its value from a parent object if no local value is set, setting the value back to the property may not be what is desired. The <see cref="M:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService.SerializeMemberAbsolute(System.ComponentModel.Design.Serialization.SerializationStore,System.Object,System.ComponentModel.MemberDescriptor)" />
 
             
 
@@ -676,36 +701,45 @@
           <para>Serializes the given member on the given object, but also serializes the member if it contains the default property value.</para>
         </summary>
         <param name="store">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
           
 
-            to which <paramref
-           name="member" />
+            to which <paramref name="member" />
 
           
 
            will be serialized. </param
         >
         <param name="owningObject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that owns the <paramref
-           name="member" />
+          The object that owns the <paramref name="member" />
 
           
 
           .</param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -3,15 +3,16 @@
   <paragraph>When an instance method declaration includes an abstract modifier, that method is said to be an abstract method. Although an abstract method is implicitly also a virtual method, it cannot have the modifier virtual. </paragraph>
   <paragraph
     >An abstract method declaration introduces a new virtual method but does not provide an implementation of that method. Instead, non-abstract derived classes are required to provide their own implementation by overriding that method. Because an abstract method provides no actual implementation, the <non_terminal
-     where="17.5">method-body</non_terminal>
+      where="17.5"
+      >method-body</non_terminal
+    >
 
     
 
      of an abstract method simply consists of a semicolon. </paragraph
   >
   <paragraph
-    >Abstract method declarations are only permitted in abstract classes (<hyperlink
-    >17.1.1.1</hyperlink>
+    >Abstract method declarations are only permitted in abstract classes (<hyperlink>17.1.1.1</hyperlink>
 
     
 
@@ -19,8 +20,7 @@
   >
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 public abstract class Shape  
 {  
@@ -47,20 +47,18 @@ public class Box: Shape
     >
   </paragraph>
   <paragraph
-    >It is a compile-time error for a <non_terminal
-     where="14.5.8">base-access</non_terminal>
+    >It is a compile-time error for a <non_terminal where="14.5.8"
+      >base-access</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.8</hyperlink>
+     (<hyperlink>14.5.8</hyperlink>
 
     
 
     ) to reference an abstract method. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 abstract class A  
 {  
@@ -82,9 +80,7 @@ class B: A
   </paragraph>
   <paragraph
     >An abstract method declaration is permitted to override a virtual method. This allows an abstract class to force re-implementation of the method in derived classes, and makes the original implementation of the method unavailable. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 using System;  
 class A  

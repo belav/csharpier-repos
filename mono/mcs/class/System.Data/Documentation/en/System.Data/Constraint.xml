@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A constraint is a rule used to maintain the integrity of the data in the <see
-         cref="T:System.Data.DataTable" />
+        >A constraint is a rule used to maintain the integrity of the data in the <see cref="T:System.Data.DataTable" />
 
         
 
-        . For example, when you delete a value that is used in one or more related tables, a <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+        . For example, when you delete a value that is used in one or more related tables, a <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
-         determines whether the values in the related tables are also deleted, set to null values, set to default values, or whether no action occurs. A <see
-         cref="T:System.Data.UniqueConstraint" />
+         determines whether the values in the related tables are also deleted, set to null values, set to default values, or whether no action occurs. A <see cref="T:System.Data.UniqueConstraint" />
 
         
 
-        , on the other hand, just makes sure that all values within a particular table are unique. For more information, see <format
-         type="text/html">
+        , on the other hand, just makes sure that all values within a particular table are unique. For more information, see <format type="text/html">
           <a href="27C9F2FD-F64D-4B4E-BBF6-1D24F47067CB">Adding Constraints to a Table</a>
         </format>
 
@@ -50,18 +46,15 @@
         .</para
       >
       <para
-        >A base <see
-         cref="T:System.Data.Constraint" />
+        >A base <see cref="T:System.Data.Constraint" />
 
         
 
-         constructor is not used. Primary or unique key constraints are created by using the <see
-         cref="T:System.Data.UniqueConstraint" />
+         constructor is not used. Primary or unique key constraints are created by using the <see cref="T:System.Data.UniqueConstraint" />
 
         
 
-         constructor, and foreign key constraints are created by using the <see
-         cref="T:System.Data.ForeignKeyConstraint" />
+         constructor, and foreign key constraints are created by using the <see cref="T:System.Data.ForeignKeyConstraint" />
 
         
 
@@ -71,8 +64,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a constraint that can be enforced on one or more <see
-         cref="T:System.Data.DataColumn" />
+        >Represents a constraint that can be enforced on one or more <see cref="T:System.Data.DataColumn" />
 
         
 
@@ -94,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Constraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -132,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataSet" />
+            >Gets the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -154,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataSet" />
+            >Gets the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -180,18 +169,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.ConstraintCollection" />
+            >The <see cref="T:System.Data.ConstraintCollection" />
 
             
 
-             is returned by the <see
-             cref="P:System.Data.DataTable.Constraints" />
+             is returned by the <see cref="P:System.Data.DataTable.Constraints" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataTable" />
+             property of the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -201,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of a constraint in the <see
-             cref="T:System.Data.ConstraintCollection" />
+            >The name of a constraint in the <see cref="T:System.Data.ConstraintCollection" />
 
             
 
@@ -234,18 +219,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Extended properties must be of type <see
-             cref="T:System.String" />
+            >Extended properties must be of type <see cref="T:System.String" />
 
             
 
-            . Properties that are not of type <see
-             cref="T:System.String" />
+            . Properties that are not of type <see cref="T:System.String" />
 
             
 
-             are not persisted when the <see
-             cref="T:System.Data.Constraint" />
+             are not persisted when the <see cref="T:System.Data.Constraint" />
 
             
 
@@ -288,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the constraint's <see
-             cref="T:System.Data.DataSet" />
+            >Sets the constraint's <see cref="T:System.Data.DataSet" />
 
             
 
@@ -297,12 +278,15 @@
           >
         </summary>
         <param name="dataSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataSet" />
+          The <see cref="T:System.Data.DataSet" />
 
           
 
@@ -322,8 +306,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataTable" />
+            >Gets the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -348,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Data.Constraint.ConstraintName" />
+            >Gets the <see cref="P:System.Data.Constraint.ConstraintName" />
 
             
 
@@ -359,8 +341,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the <see
-             cref="P:System.Data.Constraint.ConstraintName" />
+            >The string value of the <see cref="P:System.Data.Constraint.ConstraintName" />
 
             
 

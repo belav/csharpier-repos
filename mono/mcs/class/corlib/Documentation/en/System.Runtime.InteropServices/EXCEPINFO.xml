@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.EXCEPINFO" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.EXCEPINFO" />
 
         
 
@@ -142,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a pointer to a function that takes an <see
-             cref="T:System.Runtime.InteropServices.EXCEPINFO" />
+            >Represents a pointer to a function that takes an <see cref="T:System.Runtime.InteropServices.EXCEPINFO" />
 
             
 

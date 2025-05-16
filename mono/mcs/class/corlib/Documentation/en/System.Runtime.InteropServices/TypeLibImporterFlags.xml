@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used with the <see
-         cref="M:System.Runtime.InteropServices.TypeLibConverter.ConvertTypeLibToAssembly(System.Object,System.String,System.Int32,System.Runtime.InteropServices.ITypeLibImporterNotifySink,System.Byte[],System.Reflection.StrongNameKeyPair,System.Boolean)" />
+        >This enumeration is used with the <see cref="M:System.Runtime.InteropServices.TypeLibConverter.ConvertTypeLibToAssembly(System.Object,System.String,System.Int32,System.Runtime.InteropServices.ITypeLibImporterNotifySink,System.Byte[],System.Reflection.StrongNameKeyPair,System.Boolean)" />
 
         
 
@@ -147,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prevents inclusion of a version resource in the interop assembly. For more information, see the <see
-             cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource" />
+            >Prevents inclusion of a version resource in the interop assembly. For more information, see the <see cref="M:System.Reflection.Emit.AssemblyBuilder.DefineVersionInfoResource" />
 
             
 
@@ -222,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Generates a primary interop assembly. For more information, see the <see
-             cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+            >Generates a primary interop assembly. For more information, see the <see cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
             
 
@@ -275,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports all SAFEARRAY instances as <see
-             cref="T:System.Array" />
+            >Imports all SAFEARRAY instances as <see cref="T:System.Array" />
 
             
 
@@ -328,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Transforms [out, retval] parameters of methods on dispatch-only interfaces (<format
-             type="text/html">
+            >Transforms [out, retval] parameters of methods on dispatch-only interfaces (<format type="text/html">
               <a href="e8c18ae5-3d9e-4dff-aa20-b5acc723eacf">dispinterface</a>
             </format>
 
@@ -361,8 +356,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Imports all interfaces as interfaces that suppress the common language runtime's stack crawl for <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+            >Imports all interfaces as interfaces that suppress the common language runtime's stack crawl for <see cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
 
             
 

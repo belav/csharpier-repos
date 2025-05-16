@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If there are more overflow items than can be displayed on the form, use the <format
-         type="text/html">
+        >If there are more overflow items than can be displayed on the form, use the <format type="text/html">
           <a href="e681f3ab-94ba-4b2b-ac64-1dfad46caa25">ToolStrip Items Collection Editor</a>
         </format>
 
@@ -34,13 +33,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Hosts a <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+        >Hosts a <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
-         that displays items that overflow the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         that displays items that overflow the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -66,13 +63,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.ToolStripOverflowButton.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.ToolStripOverflowButton.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -80,8 +75,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
               
 
@@ -96,8 +90,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -124,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Creates an empty <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -135,8 +127,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >A <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 
@@ -190,8 +181,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An ordered pair of type <see
-             cref="T:System.Drawing.Size" />
+            >An ordered pair of type <see cref="T:System.Drawing.Size" />
 
             
 
@@ -199,7 +189,11 @@
           >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -222,13 +216,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
             
 
-             has items that overflow the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             has items that overflow the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -256,8 +248,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -266,8 +257,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripOverflowButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripOverflowButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
@@ -277,8 +267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
@@ -286,12 +275,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -351,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the size and location of the <see
-             cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+            >Sets the size and location of the <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
             
 
@@ -360,17 +351,19 @@
           >
         </summary>
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           representing the size and location of the <see
-           cref="T:System.Windows.Forms.ToolStripOverflowButton" />
+           representing the size and location of the <see cref="T:System.Windows.Forms.ToolStripOverflowButton" />
 
           
 

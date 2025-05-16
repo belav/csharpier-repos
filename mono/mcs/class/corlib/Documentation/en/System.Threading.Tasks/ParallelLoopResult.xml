@@ -17,38 +17,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If <see
-         cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+        >If <see cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
 
         
 
-         returns true, then the loop ran to completion, such that all iterations of the loop were executed. If <see
-         cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+         returns true, then the loop ran to completion, such that all iterations of the loop were executed. If <see cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
 
         
 
-         returns false and <see
-         cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
+         returns false and <see cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
 
         
 
-         returns null, a call to <see
-         cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
+         returns null, a call to <see cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
 
         
 
-         was used to end the loop prematurely. If <see
-         cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
+         was used to end the loop prematurely. If <see cref="P:System.Threading.Tasks.ParallelLoopResult.IsCompleted" />
 
         
 
-         returns false and <see
-         cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
+         returns false and <see cref="P:System.Threading.Tasks.ParallelLoopResult.LowestBreakIteration" />
 
         
 
-         returns a non-null integral value, <see
-         cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+         returns a non-null integral value, <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
 
         
 
@@ -58,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides completion status on the execution of a <see
-         cref="T:System.Threading.Tasks.Parallel" />
+        >Provides completion status on the execution of a <see cref="T:System.Threading.Tasks.Parallel" />
 
         
 
@@ -108,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+            >If <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
 
             
 
@@ -119,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the lowest iteration from which <see
-             cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+            >Gets the index of the lowest iteration from which <see cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
 
             
 

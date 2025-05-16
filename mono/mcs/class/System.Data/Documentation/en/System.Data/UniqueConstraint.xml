@@ -29,29 +29,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.UniqueConstraint" />
+        >The <see cref="T:System.Data.UniqueConstraint" />
 
         
 
          is enforced on a single column (or columns) to ensure that a primary key value is unique.</para
       >
       <para
-        >Constraints are not enforced unless the <see
-         cref="P:System.Data.DataSet.EnforceConstraints" />
+        >Constraints are not enforced unless the <see cref="P:System.Data.DataSet.EnforceConstraints" />
 
         
 
          property is set to true.</para
       >
       <para
-        >When the a <see
-         cref="T:System.Data.DataSet" />
+        >When the a <see cref="T:System.Data.DataSet" />
 
         
 
-         is merged with a second <see
-         cref="T:System.Data.DataSet" />
+         is merged with a second <see cref="T:System.Data.DataSet" />
 
         
 
@@ -79,13 +75,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the specified <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -93,12 +87,15 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -125,13 +122,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the given array of <see
-             cref="T:System.Data.DataColumn" />
+             class with the given array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -139,12 +134,15 @@
           >
         </summary>
         <param name="columns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataColumn" />
+          The array of <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -172,13 +170,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the <see
-             cref="T:System.Data.DataColumn" />
+             class with the <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -186,19 +182,26 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
            to constrain. </param
         >
         <param name="isPrimaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,13 +229,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with an array of <see
-             cref="T:System.Data.DataColumn" />
+             class with an array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -240,19 +241,26 @@
           >
         </summary>
         <param name="columns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
            objects to constrain. </param
         >
         <param name="isPrimaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,13 +288,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the specified name and <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name and <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -294,19 +300,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -334,13 +347,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the specified name and array of <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name and array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -348,19 +359,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="columns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.DataColumn" />
+          The array of <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -389,13 +407,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the specified name, the <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name, the <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -403,26 +419,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
            to constrain. </param
         >
         <param name="isPrimaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -451,13 +478,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the specified name, an array of <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name, an array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -465,26 +490,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="columns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
            objects to constrain. </param
         >
         <param name="isPrimaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -512,23 +548,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is provided for design time support in the Visual Studio .NET environment. <see
-             cref="T:System.Data.UniqueConstraint" />
+            >This constructor is provided for design time support in the Visual Studio .NET environment. <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             objects created by using this constructor must then be added to the collection via <see
-             cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
+             objects created by using this constructor must then be added to the collection via <see cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
 
             
 
-            . Columns with the specified names must exist at the time the method is called, or if <see
-             cref="M:System.Data.DataTable.BeginInit" />
+            . Columns with the specified names must exist at the time the method is called, or if <see cref="M:System.Data.DataTable.BeginInit" />
 
             
 
-             has been called prior to calling this constructor, the columns with the specified names must exist at the time that <see
-             cref="M:System.Data.DataTable.EndInit" />
+             has been called prior to calling this constructor, the columns with the specified names must exist at the time that <see cref="M:System.Data.DataTable.EndInit" />
 
             
 
@@ -538,13 +570,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Initializes a new instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 
-             class with the specified name, an array of <see
-             cref="T:System.Data.DataColumn" />
+             class with the specified name, an array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -552,26 +582,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the constraint. </param
         >
         <param name="columnNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataColumn" />
+          An array of <see cref="T:System.Data.DataColumn" />
 
           
 
            objects to constrain. </param
         >
         <param name="isPrimaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -638,12 +679,15 @@
           <para>true, if the contraints are equal; otherwise, false.</para>
         </returns>
         <param name="key2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to which this <see
-           cref="T:System.Data.UniqueConstraint" />
+          The object to which this <see cref="T:System.Data.UniqueConstraint" />
 
           
 
@@ -667,8 +711,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hash code of this instance of the <see
-             cref="T:System.Data.UniqueConstraint" />
+            >Gets the hash code of this instance of the <see cref="T:System.Data.UniqueConstraint" />
 
             
 

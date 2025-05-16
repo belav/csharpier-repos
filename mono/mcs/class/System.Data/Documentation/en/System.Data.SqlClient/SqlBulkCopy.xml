@@ -17,31 +17,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Microsoft SQL Server includes a popular command-prompt utility named bcp for moving data from one table to another, whether on a single server or between servers. The <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+        >Microsoft SQL Server includes a popular command-prompt utility named bcp for moving data from one table to another, whether on a single server or between servers. The <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
-         class lets you write managed code solutions that provide similar functionality. There are other ways to load data into a SQL Server table (INSERT statements, for example), but <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+         class lets you write managed code solutions that provide similar functionality. There are other ways to load data into a SQL Server table (INSERT statements, for example), but <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
          offers a significant performance advantage over them.</para
       >
       <para
-        >The <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+        >The <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
-         class can be used to write data only to SQL Server tables. However, the data source is not limited to SQL Server; any data source can be used, as long as the data can be loaded to a <see
-         cref="T:System.Data.DataTable" />
+         class can be used to write data only to SQL Server tables. However, the data source is not limited to SQL Server; any data source can be used, as long as the data can be loaded to a <see cref="T:System.Data.DataTable" />
 
         
 
-         instance or read with a <see
-         cref="T:System.Data.IDataReader" />
+         instance or read with a <see cref="T:System.Data.IDataReader" />
 
         
 
@@ -52,13 +47,11 @@
 
         
 
-         will fail when bulk loading a <see
-         cref="T:System.Data.DataTable" />
+         will fail when bulk loading a <see cref="T:System.Data.DataTable" />
 
         
 
-         column of type <see
-         cref="T:System.Data.SqlTypes.SqlDateTime" />
+         column of type <see cref="T:System.Data.SqlTypes.SqlDateTime" />
 
         
 
@@ -87,26 +80,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the connection is already open when the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Because the connection is already open when the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             instance is initialized, the connection remains open after the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             instance is initialized, the connection remains open after the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
              instance is closed.</para
           >
           <para
-            >If the <paramref
-             name="connection" />
+            >If the <paramref name="connection" />
 
             
 
-             argument is null, an <see
-             cref="T:System.ArgumentNullException" />
+             argument is null, an <see cref="T:System.ArgumentNullException" />
 
             
 
@@ -116,13 +105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             class using the specified open instance of <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             class using the specified open instance of <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
@@ -130,17 +117,19 @@
           >
         </summary>
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The already open <see
-           cref="T:System.Data.SqlClient.SqlConnection" />
+          The already open <see cref="T:System.Data.SqlClient.SqlConnection" />
 
           
 
-           instance that will be used to perform the bulk copy operation. If your connection string does not use Integrated Security = true, you can use <see
-           cref="T:System.Data.SqlClient.SqlCredential" />
+           instance that will be used to perform the bulk copy operation. If your connection string does not use Integrated Security = true, you can use <see cref="T:System.Data.SqlClient.SqlCredential" />
 
           
 
@@ -162,23 +151,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The connection is automatically closed at the end of the bulk copy operation.</para>
           <para
-            >If <paramref
-             name="connectionString" />
+            >If <paramref name="connectionString" />
 
             
 
-             is null, an <see
-             cref="T:System.ArgumentNullException" />
+             is null, an <see cref="T:System.ArgumentNullException" />
 
             
 
-             is thrown. If <paramref
-             name="connectionString" />
+             is thrown. If <paramref name="connectionString" />
 
             
 
-             is an empty string, an <see
-             cref="T:System.ArgumentException" />
+             is an empty string, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -188,23 +173,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and opens a new instance of <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Initializes and opens a new instance of <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             based on the supplied <paramref
-             name="connectionString" />
+             based on the supplied <paramref name="connectionString" />
 
             
 
-            . The constructor uses the <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            . The constructor uses the <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             to initialize a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             to initialize a new instance of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -212,27 +193,27 @@
           >
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string defining the connection that will be opened for use by the <see
-           cref="T:System.Data.SqlClient.SqlBulkCopy" />
+          The string defining the connection that will be opened for use by the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
           
 
-           instance. If your connection string does not use Integrated Security = true, you can use <see
-           cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection)" />
+           instance. If your connection string does not use Integrated Security = true, you can use <see cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection)" />
 
           
 
-           or <see
-           cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlBulkCopyOptions,System.Data.SqlClient.SqlTransaction)" />
+           or <see cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlBulkCopyOptions,System.Data.SqlClient.SqlTransaction)" />
 
           
 
-           and <see
-           cref="T:System.Data.SqlClient.SqlCredential" />
+           and <see cref="T:System.Data.SqlClient.SqlCredential" />
 
           
 
@@ -257,8 +238,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can obtain detailed information about all the bulk copy options in the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+            >You can obtain detailed information about all the bulk copy options in the <see cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
 
             
 
@@ -268,33 +248,27 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and opens a new instance of <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >Initializes and opens a new instance of <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             based on the supplied <paramref
-             name="connectionString" />
+             based on the supplied <paramref name="connectionString" />
 
             
 
-            . The constructor uses that <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            . The constructor uses that <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             to initialize a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             to initialize a new instance of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             class. The <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             class. The <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-             instance behaves according to options supplied in the <paramref
-             name="copyOptions" />
+             instance behaves according to options supplied in the <paramref name="copyOptions" />
 
             
 
@@ -302,39 +276,42 @@
           >
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string defining the connection that will be opened for use by the <see
-           cref="T:System.Data.SqlClient.SqlBulkCopy" />
+          The string defining the connection that will be opened for use by the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
           
 
-           instance. If your connection string does not use Integrated Security = true, you can use <see
-           cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection)" />
+           instance. If your connection string does not use Integrated Security = true, you can use <see cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection)" />
 
           
 
-           or <see
-           cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlBulkCopyOptions,System.Data.SqlClient.SqlTransaction)" />
+           or <see cref="M:System.Data.SqlClient.SqlBulkCopy.#ctor(System.Data.SqlClient.SqlConnection,System.Data.SqlClient.SqlBulkCopyOptions,System.Data.SqlClient.SqlTransaction)" />
 
           
 
-           and <see
-           cref="T:System.Data.SqlClient.SqlCredential" />
+           and <see cref="T:System.Data.SqlClient.SqlCredential" />
 
           
 
            to pass the user ID and password more securely than by specifying the user ID and password as text in the connection string.</param
         >
         <param name="copyOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of values from the <see
-           cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+          A combination of values from the <see cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
 
           
 
@@ -360,16 +337,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If options include UseInternalTransaction and the <paramref
-             name="externalTransaction" />
+            >If options include UseInternalTransaction and the <paramref name="externalTransaction" />
 
             
 
              argument is not null, an InvalidArgumentException is thrown.</para
           >
           <para
-            >For examples demonstrating how to use SqlBulkCopy in a transaction, see <format
-             type="text/html">
+            >For examples demonstrating how to use SqlBulkCopy in a transaction, see <format type="text/html">
               <a href="f6f0cbc9-f7bf-4d6e-875f-ad1ba0b4aa62"
                 >Performing a Bulk Copy Operation in a Transaction</a
               >
@@ -383,28 +358,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Initializes a new instance of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             class using the supplied existing open instance of <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+             class using the supplied existing open instance of <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
-            . The <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            . The <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             instance behaves according to options supplied in the <paramref
-             name="copyOptions" />
+             instance behaves according to options supplied in the <paramref name="copyOptions" />
 
             
 
-             parameter. If a non-null <see
-             cref="T:System.Data.SqlClient.SqlTransaction" />
+             parameter. If a non-null <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
             
 
@@ -412,41 +382,49 @@
           >
         </summary>
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The already open <see
-           cref="T:System.Data.SqlClient.SqlConnection" />
+          The already open <see cref="T:System.Data.SqlClient.SqlConnection" />
 
           
 
-           instance that will be used to perform the bulk copy. If your connection string does not use Integrated Security = true, you can use <see
-           cref="T:System.Data.SqlClient.SqlCredential" />
+           instance that will be used to perform the bulk copy. If your connection string does not use Integrated Security = true, you can use <see cref="T:System.Data.SqlClient.SqlCredential" />
 
           
 
            to pass the user ID and password more securely than by specifying the user ID and password as text in the connection string.</param
         >
         <param name="copyOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A combination of values from the <see
-           cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+          A combination of values from the <see cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
 
           
 
             enumeration that determines which data source rows are copied to the destination table.</param
         >
         <param name="externalTransaction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An existing <see
-           cref="T:System.Data.SqlClient.SqlTransaction" />
+          An existing <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
           
 
@@ -468,72 +446,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A batch is complete when <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+            >A batch is complete when <see cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
              rows have been processed or there are no more rows to send to the destination data source.</para
           >
           <para
-            >Zero (the default) indicates that each <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+            >Zero (the default) indicates that each <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
              operation is a single batch.</para
           >
           <para
-            >If the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >If the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             instance has been declared without the <see
-             cref="F:System.Data.SqlClient.SqlBulkCopyOptions.UseInternalTransaction" />
+             instance has been declared without the <see cref="F:System.Data.SqlClient.SqlBulkCopyOptions.UseInternalTransaction" />
 
             
 
-             option in effect, rows are sent to the server <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+             option in effect, rows are sent to the server <see cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
-             rows at a time, but no transaction-related action is taken. If <see
-             cref="F:System.Data.SqlClient.SqlBulkCopyOptions.UseInternalTransaction" />
+             rows at a time, but no transaction-related action is taken. If <see cref="F:System.Data.SqlClient.SqlBulkCopyOptions.UseInternalTransaction" />
 
             
 
              is in effect, each batch of rows is inserted as a separate transaction.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
-             property can be set at any time. If a bulk copy is already in progress, the current batch is sized according to the previous batch size. Subsequent batches use the new size. If the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+             property can be set at any time. If a bulk copy is already in progress, the current batch is sized according to the previous batch size. Subsequent batches use the new size. If the <see cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
-             is initially zero and changed while a <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+             is initially zero and changed while a <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
-             operation is already in progress, that operation loads the data as a single batch. Any subsequent <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+             operation is already in progress, that operation loads the data as a single batch. Any subsequent <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
-             operations on the same <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             operations on the same <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             instance use the new <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+             instance use the new <see cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
@@ -581,49 +547,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After you call a <see
-             cref="M:System.Data.SqlClient.SqlBulkCopy.Close" />
+            >After you call a <see cref="M:System.Data.SqlClient.SqlBulkCopy.Close" />
 
             
 
-             on the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             on the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             object, no other operation will succeed. Calls to the <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+             object, no other operation will succeed. Calls to the <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
-             method will throw an <see
-             cref="T:System.InvalidOperationException" />
+             method will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >Calling the <see
-             cref="M:System.Data.SqlClient.SqlBulkCopy.Close" />
+            >Calling the <see cref="M:System.Data.SqlClient.SqlBulkCopy.Close" />
 
             
 
-             method from the <see
-             cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
+             method from the <see cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
 
             
 
-             event causes an <see
-             cref="T:System.InvalidOperationException" />
+             event causes an <see cref="T:System.InvalidOperationException" />
 
             
 
              to be thrown.</para
           >
           <para
-            >Note that open <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Note that open <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -633,8 +591,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Closes the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Closes the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -660,21 +617,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data source and the destination table have the same number of columns, and the ordinal position of each source column within the data source matches the ordinal position of the corresponding destination column, the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+            >If the data source and the destination table have the same number of columns, and the ordinal position of each source column within the data source matches the ordinal position of the corresponding destination column, the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
             
 
-             collection is unnecessary. However, if the column counts differ, or the ordinal positions are not consistent, you must use <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+             collection is unnecessary. However, if the column counts differ, or the ordinal positions are not consistent, you must use <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
             
 
              to make sure that data is copied into the correct columns.</para
           >
           <para
-            >During the execution of a bulk copy operation, this collection can be accessed, but it cannot be changed. Any attempt to change it will throw an <see
-             cref="T:System.InvalidOperationException" />
+            >During the execution of a bulk copy operation, this collection can be accessed, but it cannot be changed. Any attempt to change it will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -684,8 +638,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of <see
-             cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+            >Returns a collection of <see cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
 
             
 
@@ -708,41 +661,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+            >If <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             has not been set when <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+             has not been set when <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
-             is called, an <see
-             cref="T:System.ArgumentNullException" />
+             is called, an <see cref="T:System.ArgumentNullException" />
 
             
 
              is thrown.</para
           >
           <para
-            >If <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+            >If <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             is modified while a <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+             is modified while a <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
-             operation is running, the change does not affect the current operation. The new <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+             operation is running, the change does not affect the current operation. The new <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             value is used the next time a <see
-             cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+             value is used the next time a <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
             
 
@@ -756,8 +702,7 @@
              is a three-part name (&lt;database&gt;.&lt;owningschema&gt;.&lt;name&gt;). You can qualify the table name with its database and owning schema if you choose. However, if the table name uses an underscore ("_") or any other special characters, you must escape the name using surrounding brackets as in ([&lt;database&gt;.&lt;owningschema&gt;.&lt;name_01&gt;]). For more information, see "Identifiers" in SQL Server Books Online.</para
           >
           <para
-            >You can bulk-copy data to a temporary table by using a value such as tempdb..#table or tempdb.&lt;owner&gt;.#table for the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+            >You can bulk-copy data to a temporary table by using a value such as tempdb..#table or tempdb.&lt;owner&gt;.#table for the <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
@@ -784,21 +729,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is designed for user interface components that illustrate the progress of a bulk copy operation. It indicates the number of rows to be processed before generating a notification event. The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
+            >This property is designed for user interface components that illustrate the progress of a bulk copy operation. It indicates the number of rows to be processed before generating a notification event. The <see cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
 
             
 
              property can be set at any time, even while a bulk copy operation is underway. Changes made during a bulk copy operation take effect after the next notification. The new setting applies to all subsequent operations on the same instance.</para
           >
           <para
-            >If <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
+            >If <see cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
 
             
 
-             is set to a number less than zero, an <see
-             cref="T:System.ArgumentOutOfRangeException" />
+             is set to a number less than zero, an <see cref="T:System.ArgumentOutOfRangeException" />
 
             
 
@@ -827,56 +769,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that the settings of <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
+            >Note that the settings of <see cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
 
             
 
-             and <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
+             and <see cref="P:System.Data.SqlClient.SqlBulkCopy.BatchSize" />
 
             
 
-             are independent. Receipt of a <see
-             cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
+             are independent. Receipt of a <see cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
 
             
 
              event does not imply that any rows have been sent to the server or committed.</para
           >
           <para
-            >You cannot call SqlBulkCopy.Close (<see
-             cref="M:System.Data.SqlClient.SqlBulkCopy.Close" />
+            >You cannot call SqlBulkCopy.Close (<see cref="M:System.Data.SqlClient.SqlBulkCopy.Close" />
 
             
 
-            ) or SqlConnection.Close (<see
-             cref="M:System.Data.SqlClient.SqlConnection.Close" />
+            ) or SqlConnection.Close (<see cref="M:System.Data.SqlClient.SqlConnection.Close" />
 
             
 
-            ) from this event. Doing this will cause an <see
-             cref="T:System.InvalidOperationException" />
+            ) from this event. Doing this will cause an <see cref="T:System.InvalidOperationException" />
 
             
 
-             being thrown, and the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             being thrown, and the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             object state will not change. If the user wants to cancel the operation from the event, the <see
-             cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
+             object state will not change. If the user wants to cancel the operation from the event, the <see cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlClient.SqlRowsCopiedEventArgs" />
+             property of the <see cref="T:System.Data.SqlClient.SqlRowsCopiedEventArgs" />
 
             
 
-             can be used. (See <format
-             type="text/html">
+             can be used. (See <format type="text/html">
               <a href="f6f0cbc9-f7bf-4d6e-875f-ad1ba0b4aa62"
                 >Performing a Bulk Copy Operation in a Transaction</a
               >
@@ -884,16 +816,14 @@
 
             
 
-             for examples that use the <see
-             cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
+             for examples that use the <see cref="P:System.Data.SqlClient.SqlRowsCopiedEventArgs.Abort" />
 
             
 
              property.)</para
           >
           <para
-            >No action, such as transaction activity, is supported in the connection during the execution of the bulk copy operation, and it is recommended that you not use the same connection used during the <see
-             cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
+            >No action, such as transaction activity, is supported in the connection during the execution of the bulk copy operation, and it is recommended that you not use the same connection used during the <see cref="E:System.Data.SqlClient.SqlBulkCopy.SqlRowsCopied" />
 
             
 
@@ -903,8 +833,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs every time that the number of rows specified by the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
+            >Occurs every time that the number of rows specified by the <see cref="P:System.Data.SqlClient.SqlBulkCopy.NotifyAfter" />
 
             
 
@@ -927,38 +856,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Call Dispose when you are finished using the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            . The Dispose method leaves the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -968,13 +891,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Data.SqlClient.SqlBulkCopy" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Data.SqlClient.SqlBulkCopy" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
               
 
@@ -985,8 +906,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -1014,21 +934,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While the bulk copy operation is in progress, the associated destination <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >While the bulk copy operation is in progress, the associated destination <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
             
 
-             collection maps from the <see
-             cref="T:System.Data.DataRow" />
+             collection maps from the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1038,18 +955,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all rows from the supplied <see
-             cref="T:System.Data.DataRow" />
+            >Copies all rows from the supplied <see cref="T:System.Data.DataRow" />
 
             
 
-             array to a destination table specified by the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+             array to a destination table specified by the <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             property of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -1057,12 +971,15 @@
           >
         </summary>
         <param name="rows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Data.DataRow" />
+          An array of <see cref="T:System.Data.DataRow" />
 
           
 
@@ -1089,29 +1006,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All rows in the <see
-             cref="T:System.Data.DataTable" />
+            >All rows in the <see cref="T:System.Data.DataTable" />
 
             
 
              are copied to the destination table except those that have been deleted.</para
           >
           <para
-            >While the bulk copy operation is in progress, the associated destination <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >While the bulk copy operation is in progress, the associated destination <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
             
 
-             collection maps from the <see
-             cref="T:System.Data.DataTable" />
+             collection maps from the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1121,18 +1034,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all rows in the supplied <see
-             cref="T:System.Data.DataTable" />
+            >Copies all rows in the supplied <see cref="T:System.Data.DataTable" />
 
             
 
-             to a destination table specified by the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+             to a destination table specified by the <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             property of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -1140,12 +1050,15 @@
           >
         </summary>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataTable" />
+          A <see cref="T:System.Data.DataTable" />
 
           
 
@@ -1172,52 +1085,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The copy operation starts at the next available row in the reader. Most of the time, the reader was just returned by <see
-             cref="Overload:System.Data.IDbCommand.ExecuteReader" />
+            >The copy operation starts at the next available row in the reader. Most of the time, the reader was just returned by <see cref="Overload:System.Data.IDbCommand.ExecuteReader" />
 
             
 
-             or a similar call, so the next available row is the first row. To process multiple results, call <see
-             cref="M:System.Data.IDataReader.NextResult" />
+             or a similar call, so the next available row is the first row. To process multiple results, call <see cref="M:System.Data.IDataReader.NextResult" />
 
             
 
-             on the data reader and call <see
-             cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
+             on the data reader and call <see cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
 
             
 
              again.</para
           >
           <para
-            >Note that using <see
-             cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
+            >Note that using <see cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
 
             
 
-             modifies the state of the reader. The method will call <see
-             cref="M:System.Data.IDataReader.Read" />
+             modifies the state of the reader. The method will call <see cref="M:System.Data.IDataReader.Read" />
 
             
 
-             until it returns false, the operation is aborted, or an error occurs. This means that the data reader will be in a different state, probably at the end of the result set, when the <see
-             cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
+             until it returns false, the operation is aborted, or an error occurs. This means that the data reader will be in a different state, probably at the end of the result set, when the <see cref="M:System.Data.SqlClient.SqlBulkCopy.WriteToServer(System.Data.IDataReader)" />
 
             
 
              operation is complete.</para
           >
           <para
-            >While the bulk copy operation is in progress, the associated destination <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >While the bulk copy operation is in progress, the associated destination <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
             
 
@@ -1227,18 +1132,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all rows in the supplied <see
-             cref="T:System.Data.IDataReader" />
+            >Copies all rows in the supplied <see cref="T:System.Data.IDataReader" />
 
             
 
-             to a destination table specified by the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+             to a destination table specified by the <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             property of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -1246,12 +1148,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.IDataReader" />
+          A <see cref="T:System.Data.IDataReader" />
 
           
 
@@ -1279,13 +1184,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only rows in the <see
-             cref="T:System.Data.DataTable" />
+            >Only rows in the <see cref="T:System.Data.DataTable" />
 
             
 
-             that are in the states indicated in the <paramref
-             name="rowState" />
+             that are in the states indicated in the <paramref name="rowState" />
 
             
 
@@ -1293,23 +1196,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="F:System.Data.DataRowState.Deleted" />
+              >If <see cref="F:System.Data.DataRowState.Deleted" />
 
               
 
-               is specified, any <see
-               cref="F:System.Data.DataRowState.Unchanged" />
+               is specified, any <see cref="F:System.Data.DataRowState.Unchanged" />
 
               
 
-              , <see
-               cref="F:System.Data.DataRowState.Added" />
+              , <see cref="F:System.Data.DataRowState.Added" />
 
               
 
-              , and <see
-               cref="F:System.Data.DataRowState.Modified" />
+              , and <see cref="F:System.Data.DataRowState.Modified" />
 
               
 
@@ -1317,21 +1216,18 @@
             >
           </block>
           <para
-            >While the bulk copy operation is in progress, the associated destination <see
-             cref="T:System.Data.SqlClient.SqlConnection" />
+            >While the bulk copy operation is in progress, the associated destination <see cref="T:System.Data.SqlClient.SqlConnection" />
 
             
 
              is busy serving it, and no other operations can be performed on the connection.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
             
 
-             collection maps from the <see
-             cref="T:System.Data.DataTable" />
+             collection maps from the <see cref="T:System.Data.DataTable" />
 
             
 
@@ -1341,18 +1237,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies only rows that match the supplied row state in the supplied <see
-             cref="T:System.Data.DataTable" />
+            >Copies only rows that match the supplied row state in the supplied <see cref="T:System.Data.DataTable" />
 
             
 
-             to a destination table specified by the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
+             to a destination table specified by the <see cref="P:System.Data.SqlClient.SqlBulkCopy.DestinationTableName" />
 
             
 
-             property of the <see
-             cref="T:System.Data.SqlClient.SqlBulkCopy" />
+             property of the <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
             
 
@@ -1360,24 +1253,30 @@
           >
         </summary>
         <param name="table">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataTable" />
+          A <see cref="T:System.Data.DataTable" />
 
           
 
            whose rows will be copied to the destination table.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A value from the <see
-           cref="T:System.Data.DataRowState" />
+          A value from the <see cref="T:System.Data.DataRowState" />
 
           
 

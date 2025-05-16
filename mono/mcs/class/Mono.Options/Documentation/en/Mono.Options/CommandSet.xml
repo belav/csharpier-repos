@@ -11,10 +11,8 @@
     <AssemblyName>Mono.Options</AssemblyName>
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadingSafetyStatement
-    >
-    Public <c
-    >static</c>
+  <ThreadingSafetyStatement>
+    Public <c>static</c>
 
     
 
@@ -31,10 +29,8 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary
-      >
-      A <i
-      >suite</i>
+    <summary>
+      A <i>suite</i>
 
       
 
@@ -42,45 +38,37 @@
     </summary
     >
     <remarks>
-      <para
-        >
-        A common requirement of some programs are discrete <i
-        >commands</i>
+      <para>
+        A common requirement of some programs are discrete <i>commands</i>
 
         
 
         .
-        A <c
-        >CommandSet</c>
+        A <c>CommandSet</c>
 
         
 
-         represents a <i
-        >suite</i>
+         represents a <i>suite</i>
 
         
 
          of commands, intermixed
         with suite documentation. Commands are managed by
-        <see
-         cref="T:Mono.Options.Command" />
+        <see cref="T:Mono.Options.Command" />
 
         
 
          instances, which have a required
-        <i
-        >name</i>
+        <i>name</i>
 
         
 
-         and optional help text, and <c
-        >CommandSet</c>
+         and optional help text, and <c>CommandSet</c>
 
         
 
          will use the
-        intermixed documentation, options, and commands to produce <c
-        >help</c>
+        intermixed documentation, options, and commands to produce <c>help</c>
 
         
 
@@ -88,16 +76,13 @@
         command output.
       </para
       >
-      <para
-        >
-        To create a <c
-        >CommandSet</c>
+      <para>
+        To create a <c>CommandSet</c>
 
         
 
          instance, use the
-        <see
-         cref="C:Mono.Options.CommandSet(System.String, System.Converter, System.IO.TextWriter, System.IO.TextWriter)" />
+        <see cref="C:Mono.Options.CommandSet(System.String, System.Converter, System.IO.TextWriter, System.IO.TextWriter)" />
 
         
 
@@ -106,87 +91,72 @@
         optional.
       </para
       >
-      <para
-        >
-        Once a <c
-        >CommandSet</c>
+      <para>
+        Once a <c>CommandSet</c>
 
         
 
          instance has been constructed, use the
-        <see
-         cref="M:Mono.Options.CommandSet.Add" />
+        <see cref="M:Mono.Options.CommandSet.Add" />
 
         
 
          methods to add and
         intermix suite documentation, global options, and commands.
         Documentation is any string constant, global options are handled
-        by <see
-         cref="T:Mono.Options.Option" />
+        by <see cref="T:Mono.Options.Option" />
 
         
 
          instances and associated
-        <c
-        >Add()</c>
+        <c>Add()</c>
 
         
 
-         method overloads which implicitly create <c
-        >Option</c>
+         method overloads which implicitly create <c>Option</c>
 
         
 
         
-        instances, and commands are through <c
-        >Command</c>
+        instances, and commands are through <c>Command</c>
 
         
 
          instances.
       </para
       >
-      <para
-        >
-        Once the <c
-        >CommandSet</c>
+      <para>
+        Once the <c>CommandSet</c>
 
         
 
          instance has been initialized, call the
-        <see
-         cref="M:Mono.Options.CommandSet.Run(System.String[])" />
+        <see cref="M:Mono.Options.CommandSet.Run(System.String[])" />
 
         
 
         
-        method to process the arguments provided to <c
-        >Main()</c>
+        method to process the arguments provided to <c>Main()</c>
 
         
 
         .
-        The appropriate <c
-        >Command</c>
+        The appropriate <c>Command</c>
 
         
 
          instance will be determined, it's
-        options parsed, and <see
-         cref="M:Mono.Options.Command.Invoke" />
+        options parsed, and <see cref="M:Mono.Options.Command.Invoke" />
 
         
 
         
-        will be executed. The return value of <c
-        >Command.Invoke()</c>
+        will be executed. The return value of <c>Command.Invoke()</c>
 
         
 
         
-        is returned from <c
-        >CommandSet.Run()</c>
+        is returned from <c>CommandSet.Run()</c>
 
         
 
@@ -196,16 +166,13 @@
       >
     </remarks>
     <example>
-      <para
-        >
-        The following <c
-        >commands</c>
+      <para>
+        The following <c>commands</c>
 
         
 
          example demonstrates some simple usage
-        of <see
-         cref="T:Mono.Options.CommandSet" />
+        of <see cref="T:Mono.Options.CommandSet" />
 
         
 
@@ -452,10 +419,8 @@ Showing CommandSet completions for prefix 's o':
 	completion: set output
 </code
       >
-      <para
-        >
-        The <c
-        >commands.exe</c>
+      <para>
+        The <c>commands.exe</c>
 
         
 
@@ -463,15 +428,12 @@ Showing CommandSet completions for prefix 's o':
         commands are required for use.
       </para
       >
-      <para
-        >
-        The <c
-        >commands.exe --help</c>
+      <para>
+        The <c>commands.exe --help</c>
 
         
 
-         is identical to the <c
-        >commands help</c>
+         is identical to the <c>commands help</c>
 
         
 
@@ -484,80 +446,67 @@ Showing CommandSet completions for prefix 's o':
 
         
 
-         and <c
-        >commands.exe help COMMAND</c>
+         and <c>commands.exe help COMMAND</c>
 
         
 
         
         output is likewise identical, and will attempt to generate documentation
         for the specified command, if available. This is performed by invoking
-        <see
-         cref="M:Mono.Options.Command.Invoke(System.Collections.Generic.IEnumerable{System.String})" />
+        <see cref="M:Mono.Options.Command.Invoke(System.Collections.Generic.IEnumerable{System.String})" />
 
         
 
         
-        with the value <c
-        >{ "--help" }</c>
+        with the value <c>{ "--help" }</c>
 
         
 
         . This can be seen in the
-        <c
-        >commands.exe help echo</c>
+        <c>commands.exe help echo</c>
 
         
 
-         and <c
-        >commands.exe echo --help</c>
+         and <c>commands.exe echo --help</c>
 
         
 
         
-        output, which simply prints <c
-        >--help</c>
+        output, which simply prints <c>--help</c>
 
         
 
         . If a command wants
-        to partake in <c
-        >help COMMAND</c>
+        to partake in <c>help COMMAND</c>
 
         
 
          support, it needs to explicitly
-        handle the <c
-        >--help</c>
+        handle the <c>--help</c>
 
         
 
          option in its associated
-        <see
-         cref="T:Mono.Options.OptionSet" />
+        <see cref="T:Mono.Options.OptionSet" />
 
         
 
          instance, referenced by the
-        <see
-         cref="P:Mono.Options.Command.Options" />
+        <see cref="P:Mono.Options.Command.Options" />
 
         
 
          property.
       </para
       >
-      <para
-        >
+      <para>
         Finally, if an invalid command is specified, then an error is written
-        to <see
-         cref="P:Mono.Options.CommandSet.Error" />
+        to <see cref="P:Mono.Options.CommandSet.Error" />
 
         
 
         , prefixed with the
-        <see
-         cref="P:Mono.Options.CommandSet.Suite" />
+        <see cref="P:Mono.Options.CommandSet.Suite" />
 
         
 
@@ -585,43 +534,35 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="localizer" Type="System.Converter&lt;System.String,System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="suite"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="suite">
+          A <see cref="T:System.String" />
 
           
 
            containing the name of the suite.
-          This value is used in default <c
-          >help</c>
+          This value is used in default <c>help</c>
 
           
 
            text output.
         </param
         >
-        <param name="localizer"
-          >
-          A <see
-           cref="T:System.Converter{System.String,System.String}" />
+        <param name="localizer">
+          A <see cref="T:System.Converter{System.String,System.String}" />
 
           
 
           
           instance that will be used to translate strings.
-          If <see
-           langword="null" />
+          If <see langword="null" />
 
           
 
           , then no localization is performed.
         </param
         >
-        <summary
-          >
-          Creates and initializes a new <c
-          >CommandSet</c>
+        <summary>
+          Creates and initializes a new <c>CommandSet</c>
 
           
 
@@ -629,53 +570,44 @@ Showing CommandSet completions for prefix 's o':
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes
-            the <see
-             cref="P:Mono.Options.CommandSet.Suite" />
+            the <see cref="P:Mono.Options.CommandSet.Suite" />
 
             
 
              property
-            of the new instance using <paramref
-             name="suite" />
+            of the new instance using <paramref name="suite" />
 
             
 
             ,
-            the <see
-             cref="P:Mono.Options.CommandSet.MessageLocalizer" />
+            the <see cref="P:Mono.Options.CommandSet.MessageLocalizer" />
 
             
 
              property
-            of the new instance using <paramref
-             name="localizer" />
+            of the new instance using <paramref name="localizer" />
 
             
 
             ,
-            the <see
-             cref="P:Mono.Options.CommandSet.Out" />
+            the <see cref="P:Mono.Options.CommandSet.Out" />
 
             
 
              property
-            to <see
-             cref="P:System.Console.Out" />
+            to <see cref="P:System.Console.Out" />
 
             
 
             , and
-            the <see
-             cref="P:Mono.Options.CommandSet.Error" />
+            the <see cref="P:Mono.Options.CommandSet.Error" />
 
             
 
              property
-            to <see
-             cref="P:System.Console.Error" />
+            to <see cref="P:System.Console.Error" />
 
             
 
@@ -688,8 +620,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -718,26 +649,21 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="localizer" Type="System.Converter&lt;System.String,System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="suite"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="suite">
+          A <see cref="T:System.String" />
 
           
 
            containing the name of the suite.
-          This value is used in default <c
-          >help</c>
+          This value is used in default <c>help</c>
 
           
 
            text output.
         </param
         >
-        <param name="output"
-          >
-          A <see
-           cref="T:System.IO.TextWriter" />
+        <param name="output">
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -745,10 +671,8 @@ Showing CommandSet completions for prefix 's o':
           written to.
         </param
         >
-        <param name="error"
-          >
-          A <see
-           cref="T:System.IO.TextWriter" />
+        <param name="error">
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -756,27 +680,22 @@ Showing CommandSet completions for prefix 's o':
           written to.
         </param
         >
-        <param name="localizer"
-          >
-          A <see
-           cref="T:System.Converter{System.String,System.String}" />
+        <param name="localizer">
+          A <see cref="T:System.Converter{System.String,System.String}" />
 
           
 
           
           instance that will be used to translate strings.
-          If <see
-           langword="null" />
+          If <see langword="null" />
 
           
 
           , then no localization is performed.
         </param
         >
-        <summary
-          >
-          Creates and initializes a new <c
-          >CommandSet</c>
+        <summary>
+          Creates and initializes a new <c>CommandSet</c>
 
           
 
@@ -784,53 +703,44 @@ Showing CommandSet completions for prefix 's o':
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes
-            the <see
-             cref="P:Mono.Options.CommandSet.Suite" />
+            the <see cref="P:Mono.Options.CommandSet.Suite" />
 
             
 
              property
-            of the new instance using <paramref
-             name="suite" />
+            of the new instance using <paramref name="suite" />
 
             
 
             ,
-            the <see
-             cref="P:Mono.Options.CommandSet.MessageLocalizer" />
+            the <see cref="P:Mono.Options.CommandSet.MessageLocalizer" />
 
             
 
              property
-            of the new instance using <paramref
-             name="localizer" />
+            of the new instance using <paramref name="localizer" />
 
             
 
             ,
-            the <see
-             cref="P:Mono.Options.CommandSet.Out" />
+            the <see cref="P:Mono.Options.CommandSet.Out" />
 
             
 
              property
-            of the new instance using <paramref
-             name="output" />
+            of the new instance using <paramref name="output" />
 
             
 
             , and
-            the <see
-             cref="P:Mono.Options.CommandSet.Error" />
+            the <see cref="P:Mono.Options.CommandSet.Error" />
 
             
 
              property
-            of the new instance using <paramref
-             name="error" />
+            of the new instance using <paramref name="error" />
 
             
 
@@ -843,8 +753,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -856,8 +765,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -869,8 +777,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -899,10 +806,8 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="source" Type="Mono.Options.ArgumentSource" />
       </Parameters>
       <Docs>
-        <param name="source"
-          >
-          A <see
-           cref="T:Mono.Options.ArgumentSource" />
+        <param name="source">
+          A <see cref="T:Mono.Options.ArgumentSource" />
 
           
 
@@ -910,27 +815,22 @@ Showing CommandSet completions for prefix 's o':
           argument processing.
         </param
         >
-        <summary
-          >
-          Registers <paramref
-           name="source" />
+        <summary>
+          Registers <paramref name="source" />
 
           
 
            so that it may be consulted
           during argument processing within
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -944,8 +844,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -974,30 +873,24 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="value" Type="Mono.Options.Command" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >
-          A <see
-           cref="T:Mono.Options.Command" />
+        <param name="value">
+          A <see cref="T:Mono.Options.Command" />
 
           
 
            to add to the suite.
         </param
         >
-        <summary
-          >
-          Add a <c
-          >Command</c>
+        <summary>
+          Add a <c>Command</c>
 
           
 
            to the suite.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1007,16 +900,13 @@ Showing CommandSet completions for prefix 's o':
         >
         <remarks></remarks>
         <exception cref="T:System.ArgumentException">
-          <para
-            >
-            A <c
-            >Command</c>
+          <para>
+            A <c>Command</c>
 
             
 
              with the same value for
-            <c
-            >
+            <c>
               <paramref name="value" />
 
               
@@ -1027,8 +917,7 @@ Showing CommandSet completions for prefix 's o':
             
 
             
-            has already been added to the <c
-            >CommandSet</c>
+            has already been added to the <c>CommandSet</c>
 
             
 
@@ -1041,14 +930,12 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             has been <c
-            >Add()</c>
+             has been <c>Add()</c>
 
             
 
             ed to a different
-            <c
-            >CommandSet</c>
+            <c>CommandSet</c>
 
             
 
@@ -1061,8 +948,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1091,10 +977,8 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="nestedCommands" Type="Mono.Options.CommandSet" />
       </Parameters>
       <Docs>
-        <param name="nestedCommands"
-          >
-          The <see
-           cref="T:Mono.Options.OptionSet" />
+        <param name="nestedCommands">
+          The <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -1102,17 +986,14 @@ Showing CommandSet completions for prefix 's o':
         </param
         >
         <summary
-          >Adds <paramref
-           name="nestedCommands" />
+          >Adds <paramref name="nestedCommands" />
 
           
 
            as a suite of sub-commands.</summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1121,27 +1002,22 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
-            When a <c
-            >CommandSet</c>
+          <para>
+            When a <c>CommandSet</c>
 
             
 
-             is a child of a <c
-            >CommandSet</c>
+             is a child of a <c>CommandSet</c>
 
             
 
             , the nested
-            <c
-            >CommandSet</c>
+            <c>CommandSet</c>
 
             
 
              commands can be invoked by prefixing the command name
-            with the <c
-            >CommandSet</c>
+            with the <c>CommandSet</c>
 
             
 
@@ -1154,8 +1030,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1184,30 +1059,24 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="option" Type="Mono.Options.Option" />
       </Parameters>
       <Docs>
-        <param name="option"
-          >
-          The <see
-           cref="T:Mono.Options.Option" />
+        <param name="option">
+          The <see cref="T:Mono.Options.Option" />
 
           
 
            to register.
         </param
         >
-        <summary
-          >
-          Adds <paramref
-           name="option" />
+        <summary>
+          Adds <paramref name="option" />
 
           
 
            as a global suite option.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1216,18 +1085,15 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Registers each option name returned by
-            <see
-             cref="M:Mono.Options.Option.GetNames" />
+            <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
             , ensuring that any
             option with a matching name will be handled by the
-            <paramref
-             name="option" />
+            <paramref name="option" />
 
             
 
@@ -1241,14 +1107,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -1260,8 +1124,7 @@ Showing CommandSet completions for prefix 's o':
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1287,16 +1150,13 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="header" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="header"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="header">
+          A <see cref="T:System.String" />
 
           
 
            containing the header to display
-          during <see
-           cref="M:Mono.Options.CommandSet.Run" />
+          during <see cref="M:Mono.Options.CommandSet.Run" />
           <c>help</c>
 
           
@@ -1304,20 +1164,16 @@ Showing CommandSet completions for prefix 's o':
            processing.
         </param
         >
-        <summary
-          >
-          Declare a header to be printed during for <c
-          >help</c>
+        <summary>
+          Declare a header to be printed during for <c>help</c>
 
           
 
            output.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1352,18 +1208,15 @@ Showing CommandSet completions for prefix 's o':
         />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -1371,10 +1224,8 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{System.String,System.String}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
 
           
 
@@ -1382,28 +1233,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -1411,10 +1257,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1422,23 +1266,19 @@ Showing CommandSet completions for prefix 's o':
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.CommandSet.Add(System.String,System.String,Mono.Options.OptionAction{System.String,System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Add(System.String,System.String,Mono.Options.OptionAction{System.String,System.String})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -1453,14 +1293,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -1473,8 +1311,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -1482,8 +1319,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -1509,18 +1345,15 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="action" Type="System.Action&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -1528,10 +1361,8 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{System.String}" />
+        <param name="action">
+          A <see cref="T:System.Action{System.String}" />
 
           
 
@@ -1539,28 +1370,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -1568,10 +1394,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1579,23 +1403,19 @@ Showing CommandSet completions for prefix 's o':
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.CommandSet.Add(System.String,System.String,System.Action{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Add(System.String,System.String,System.Action{System.String})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -1610,14 +1430,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -1630,8 +1448,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -1639,8 +1456,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -1670,18 +1486,15 @@ Showing CommandSet completions for prefix 's o':
         />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -1689,26 +1502,21 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            to be used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{System.String,System.String}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
 
           
 
@@ -1716,28 +1524,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -1745,10 +1548,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1757,10 +1558,8 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
-            Use this method when <paramref
-             name="prototype" />
+          <para>
+            Use this method when <paramref name="prototype" />
 
             
 
@@ -1768,23 +1567,19 @@ Showing CommandSet completions for prefix 's o':
             two values, generally a key and a value.
           </para
           >
-          <block subset="none" type="note"
-            >
-            If <paramref
-             name="prototype" />
+          <block subset="none" type="note">
+            If <paramref name="prototype" />
 
             
 
              specifies a 
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              option,
             then it's possible that both the key and the value will be
-            <see
-             langword="null" />
+            <see langword="null" />
 
             
 
@@ -1799,14 +1594,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -1819,8 +1612,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -1828,8 +1620,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -1856,18 +1647,15 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="action" Type="System.Action&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -1875,26 +1663,21 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{System.String}" />
+        <param name="action">
+          A <see cref="T:System.Action{System.String}" />
 
           
 
@@ -1902,28 +1685,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -1931,10 +1709,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -1950,14 +1726,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -1970,8 +1744,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -1979,8 +1752,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2011,18 +1783,15 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2030,26 +1799,21 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{System.String,System.String}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
 
           
 
@@ -2057,17 +1821,14 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <param name="hidden"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="hidden">
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the
           Option should be displayed in
-          <see
-           cref="M:Mono.Options.CommandSet.Run" />
+          <see cref="M:Mono.Options.CommandSet.Run" />
           <c>help</c>
 
           
@@ -2075,28 +1836,23 @@ Showing CommandSet completions for prefix 's o':
            output.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2104,10 +1860,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -2123,14 +1877,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2143,8 +1895,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2152,8 +1903,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2181,18 +1931,15 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2200,26 +1947,21 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{System.String}" />
+        <param name="action">
+          A <see cref="T:System.Action{System.String}" />
 
           
 
@@ -2227,17 +1969,14 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <param name="hidden"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="hidden">
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the
           Option should be displayed in
-          <see
-           cref="M:Mono.Options.CommandSet.Run" />
+          <see cref="M:Mono.Options.CommandSet.Run" />
           <c>help</c>
 
           
@@ -2245,28 +1984,23 @@ Showing CommandSet completions for prefix 's o':
            output.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2274,10 +2008,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -2293,14 +2025,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2313,8 +2043,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2322,8 +2051,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2352,29 +2080,24 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="action" Type="System.Action&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T"
-          >
+        <typeparam name="T">
           The type of the option to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2382,10 +2105,8 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{``0}" />
+        <param name="action">
+          A <see cref="T:System.Action{``0}" />
 
           
 
@@ -2393,28 +2114,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2422,10 +2138,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -2433,23 +2147,19 @@ Showing CommandSet completions for prefix 's o':
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
+          <see cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -2464,14 +2174,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2505,29 +2213,24 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="action" Type="System.Action&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T"
-          >
+        <typeparam name="T">
           The type of the option to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2535,26 +2238,21 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{``0}" />
+        <param name="action">
+          A <see cref="T:System.Action{``0}" />
 
           
 
@@ -2562,28 +2260,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2591,10 +2284,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -2603,19 +2294,16 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Use this typed overload when you want strongly typed option values
             that correspond to a managed type.
-            <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
+            <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
 
             
 
             
             is used to lookup the
-            <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -2623,36 +2311,30 @@ Showing CommandSet completions for prefix 's o':
             performing the string-to-type conversion.
           </para
           >
-          <para
-            >
-            Special support is provided for <see
-             cref="T:System.Nullable{X}" />
+          <para>
+            Special support is provided for <see cref="T:System.Nullable{X}" />
 
             
 
             
-            types; <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            types; <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
             
             doesn't currently support their use, but if 
-            <typeparamref
-             name="T" />
+            <typeparamref name="T" />
 
             
 
              is a nullable type, then this method
             will instead use the 
-            <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
              for the 
-            <typeparamref
-             name="X" />
+            <typeparamref name="X" />
 
             
 
@@ -2662,28 +2344,23 @@ Showing CommandSet completions for prefix 's o':
           </para
           >
           <block subset="none" type="note">
-            <para
-              >
-              If <paramref
-               name="prototype" />
+            <para>
+              If <paramref name="prototype" />
 
               
 
                specifies an
-              <see
-               cref="F:Mono.Options.OptionValueType.Optional" />
+              <see cref="F:Mono.Options.OptionValueType.Optional" />
 
               
 
                value
-              and the value is not provided, then <c
-              >default(T)</c>
+              and the value is not provided, then <c>default(T)</c>
 
               
 
                is
-              provided as the value to <paramref
-               name="action" />
+              provided as the value to <paramref name="action" />
 
               
 
@@ -2699,14 +2376,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2719,8 +2394,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2728,8 +2402,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2759,40 +2432,33 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="action" Type="Mono.Options.OptionAction&lt;TKey,TValue&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="TKey"
-          >
+        <typeparam name="TKey">
           The type of the first argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <typeparam name="TValue"
-          >
+        <typeparam name="TValue">
           The type of the second argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2800,10 +2466,8 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{TKey,TValue}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{TKey,TValue}" />
 
           
 
@@ -2811,28 +2475,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2840,10 +2499,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -2851,23 +2508,19 @@ Showing CommandSet completions for prefix 's o':
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.OptionSet.Add``2(System.String,System.String,Mono.Options.OptionAction{``0,``1})" />
+          <see cref="M:Mono.Options.OptionSet.Add``2(System.String,System.String,Mono.Options.OptionAction{``0,``1})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -2882,14 +2535,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2902,8 +2553,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2911,8 +2561,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2943,40 +2592,33 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="action" Type="Mono.Options.OptionAction&lt;TKey,TValue&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="TKey"
-          >
+        <typeparam name="TKey">
           The type of the first argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <typeparam name="TValue"
-          >
+        <typeparam name="TValue">
           The type of the second argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2984,26 +2626,21 @@ Showing CommandSet completions for prefix 's o':
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            to be used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{TKey,TValue}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{TKey,TValue}" />
 
           
 
@@ -3011,28 +2648,23 @@ Showing CommandSet completions for prefix 's o':
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.CommandSet.Run(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3040,10 +2672,8 @@ Showing CommandSet completions for prefix 's o':
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.CommandSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.CommandSet" />
 
           
 
@@ -3052,10 +2682,8 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
-            Use this method when <paramref
-             name="prototype" />
+          <para>
+            Use this method when <paramref name="prototype" />
 
             
 
@@ -3064,34 +2692,28 @@ Showing CommandSet completions for prefix 's o':
           </para
           >
           <block subset="none" type="note">
-            <para
-              >
-              If <paramref
-               name="prototype" />
+            <para>
+              If <paramref name="prototype" />
 
               
 
                specifies an
-              <see
-               cref="F:Mono.Options.OptionValueType.Optional" />
+              <see cref="F:Mono.Options.OptionValueType.Optional" />
 
               
 
                value
-              and the value is not provided, then <c
-              >default(TKey)</c>
+              and the value is not provided, then <c>default(TKey)</c>
 
               
 
                and
-              <c
-              >default(TValue)</c>
+              <c>default(TValue)</c>
 
               
 
                may be provided as the values to
-              <paramref
-               name="action" />
+              <paramref name="action" />
 
               
 
@@ -3107,14 +2729,12 @@ Showing CommandSet completions for prefix 's o':
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3127,8 +2747,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -3136,8 +2755,7 @@ Showing CommandSet completions for prefix 's o':
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -3156,20 +2774,16 @@ Showing CommandSet completions for prefix 's o':
         <ReturnType>System.IO.TextWriter</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          Where <c
-          >CommandSet</c>
+        <summary>
+          Where <c>CommandSet</c>
 
           
 
            should write error messages.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.IO.TextWriter" />
+        <value>
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -3178,44 +2792,36 @@ Showing CommandSet completions for prefix 's o':
         </value
         >
         <remarks>
-          <para
-            >
-            This value may be set by providing the <paramref
-             name="error" />
+          <para>
+            This value may be set by providing the <paramref name="error" />
 
             
 
             
             constructor parameter. If not specified, then
-            <see
-             cref="P:System.Console.Error" />
+            <see cref="P:System.Console.Error" />
 
             
 
              will be used.
           </para
           >
-          <para
-            >
-            Error messages by <c
-            >CommandSet</c>
+          <para>
+            Error messages by <c>CommandSet</c>
 
             
 
-             are written to the <c
-            >Error</c>
+             are written to the <c>Error</c>
 
             
 
             
-            property. <c
-            >Command</c>
+            property. <c>Command</c>
 
             
 
              instances may also choose to write error
-            messages to the <c
-            >CommandSet.Error</c>
+            messages to the <c>CommandSet.Error</c>
 
             
 
@@ -3277,20 +2883,16 @@ Showing CommandSet completions for prefix 's o':
         <Parameter Name="item" Type="Mono.Options.Command" />
       </Parameters>
       <Docs>
-        <param name="item"
-          >
-          An <see
-           cref="T:Mono.Options.Command" />
+        <param name="item">
+          An <see cref="T:Mono.Options.Command" />
 
           
 
            to return the key of.
         </param
         >
-        <summary
-          >
-          Returns <c
-          >
+        <summary>
+          Returns <c>
             <paramref name="item" />
 
             
@@ -3303,10 +2905,8 @@ Showing CommandSet completions for prefix 's o':
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
@@ -3314,11 +2914,9 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This is to support the
-            <see
-             cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Command}" />
+            <see cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Command}" />
 
             
 
@@ -3349,10 +2947,8 @@ Showing CommandSet completions for prefix 's o':
         <summary>
           Permits access to the message localization facility.
         </summary>
-        <value
-          >
-          A <see
-           cref="T:System.Converter{System.String,System.String}" />
+        <value>
+          A <see cref="T:System.Converter{System.String,System.String}" />
 
           
 
@@ -3374,20 +2970,16 @@ Showing CommandSet completions for prefix 's o':
         <ReturnType>System.IO.TextWriter</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          Where <c
-          >CommandSet</c>
+        <summary>
+          Where <c>CommandSet</c>
 
           
 
            should write output messages.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.IO.TextWriter" />
+        <value>
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -3396,44 +2988,36 @@ Showing CommandSet completions for prefix 's o':
         </value
         >
         <remarks>
-          <para
-            >
-            This value may be set by providing the <paramref
-             name="output" />
+          <para>
+            This value may be set by providing the <paramref name="output" />
 
             
 
             
             constructor parameter. If not specified, then
-            <see
-             cref="P:System.Console.Out" />
+            <see cref="P:System.Console.Out" />
 
             
 
              will be used.
           </para
           >
-          <para
-            >
-            Output messages by <c
-            >CommandSet</c>
+          <para>
+            Output messages by <c>CommandSet</c>
 
             
 
-             are written to the <c
-            >Out</c>
+             are written to the <c>Out</c>
 
             
 
             
-            property. <c
-            >Command</c>
+            property. <c>Command</c>
 
             
 
              instances may also choose to write output
-            messages to the <c
-            >CommandSet.Out</c>
+            messages to the <c>CommandSet.Out</c>
 
             
 
@@ -3467,10 +3051,8 @@ Showing CommandSet completions for prefix 's o':
         />
       </Parameters>
       <Docs>
-        <param name="arguments"
-          >
-          A <see
-           cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+        <param name="arguments">
+          A <see cref="T:System.Collections.Generic.IEnumerable{System.String}" />
 
           
 
@@ -3481,16 +3063,13 @@ Showing CommandSet completions for prefix 's o':
         <summary>
           Processes command-line arguments and invokes the specified command.
         </summary>
-        <returns
-          >
-          A <see
-           cref="T:System.Int32" />
+        <returns>
+          A <see cref="T:System.Int32" />
 
           
 
            containing the command's exit value.
-          Normal Unix process exit values should be used: <c
-          >0</c>
+          Normal Unix process exit values should be used: <c>0</c>
 
           
 
@@ -3499,29 +3078,24 @@ Showing CommandSet completions for prefix 's o':
         </returns
         >
         <remarks>
-          <para
-            >
-            Processes <paramref
-             name="arguments" />
+          <para>
+            Processes <paramref name="arguments" />
 
             
 
             , parsing global options in the first pass.
             The first unprocessed argument is treated as a command name, and the
-            <see
-             cref="T:Mono.Options.Command" />
+            <see cref="T:Mono.Options.Command" />
 
             
 
              instance with a
-            <see
-             cref="P:Mono.Options.Command.Name" />
+            <see cref="P:Mono.Options.Command.Name" />
 
             
 
              value matching the command name
-            has its <see
-             cref="M:Mono.Options.Command.Invoke" />
+            has its <see cref="M:Mono.Options.Command.Invoke" />
 
             
 
@@ -3530,23 +3104,19 @@ Showing CommandSet completions for prefix 's o':
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
-              If no command is specified within <paramref
-               name="arguments" />
+            <para>
+              If no command is specified within <paramref name="arguments" />
               <i>or</i>
 
               
 
-               an invalid command name is specified, then <c
-              >1</c>
+               an invalid command name is specified, then <c>1</c>
 
               
 
                is returned.
               Otherwise, the value returned from
-              <see
-               cref="M:Mono.Options.Command.Invoke" />
+              <see cref="M:Mono.Options.Command.Invoke" />
 
               
 
@@ -3554,87 +3124,72 @@ Showing CommandSet completions for prefix 's o':
             </para
             >
           </block>
-          <para
-            >
-            If the <c
-            >help</c>
+          <para>
+            If the <c>help</c>
 
             
 
              command is provided with no arguments, then the
             suite help text will be written to
-            <see
-             cref="P:Mono.Options.CommandSet.Out" />
+            <see cref="P:Mono.Options.CommandSet.Out" />
 
             
 
             
             consisting of the descriptive text ("headers"), options, and
-            <c
-            >Command</c>
+            <c>Command</c>
 
             
 
              values provided to
-            <see
-             cref="M:Mono.Options.CommandSet.Add" />
+            <see cref="M:Mono.Options.CommandSet.Add" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            If the <c
-            >help</c>
+          <para>
+            If the <c>help</c>
 
             
 
-             command is provided with <c
-            >--help</c>
+             command is provided with <c>--help</c>
 
             
 
              as an
-            argument, then all registered <c
-            >Command</c>
+            argument, then all registered <c>Command</c>
 
             
 
              instances are written to
-            <see
-             cref="P:Mono.Options.CommandSet.Out" />
+            <see cref="P:Mono.Options.CommandSet.Out" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            If the <c
-            >help</c>
+          <para>
+            If the <c>help</c>
 
             
 
              command is provided with any other string, the
             following value is treated as a command name, and the output of
-            <c
-            >command --help</c>
+            <c>command --help</c>
 
             
 
              is written to
-            <see
-             cref="P:Mono.Options.CommandSet.Out" />
+            <see cref="P:Mono.Options.CommandSet.Out" />
 
             
 
             . If the specified
             command name has not been registered, then an error message is written to
-            <see
-             cref="P:Mono.Options.CommandSet.Error" />
+            <see cref="P:Mono.Options.CommandSet.Error" />
 
             
 
@@ -3658,10 +3213,8 @@ Showing CommandSet completions for prefix 's o':
         <summary>
           The name of the suite.
         </summary>
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -3669,10 +3222,8 @@ Showing CommandSet completions for prefix 's o':
         </value
         >
         <remarks>
-          <para
-            >
-            The <c
-            >Suite</c>
+          <para>
+            The <c>Suite</c>
 
             
 

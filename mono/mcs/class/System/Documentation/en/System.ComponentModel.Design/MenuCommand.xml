@@ -27,18 +27,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.MenuCommand" />
+        >The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
         
 
-         class represents information about a Windows menu or toolbar command. The <see
-         cref="T:System.ComponentModel.Design.IMenuCommandService" />
+         class represents information about a Windows menu or toolbar command. The <see cref="T:System.ComponentModel.Design.IMenuCommandService" />
 
         
 
-         interface allows you to add <see
-         cref="T:System.ComponentModel.Design.MenuCommand" />
+         interface allows you to add <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
         
 
@@ -51,8 +48,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >A <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -61,8 +57,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="M:System.ComponentModel.Design.MenuCommand.Invoke" />
+            >An <see cref="M:System.ComponentModel.Design.MenuCommand.Invoke" />
 
             
 
@@ -71,8 +66,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="M:System.ComponentModel.Design.MenuCommand.OnCommandChanged(System.EventArgs)" />
+            >An <see cref="M:System.ComponentModel.Design.MenuCommand.OnCommandChanged(System.EventArgs)" />
 
             
 
@@ -81,23 +75,19 @@
         </item>
         <item>
           <para
-            >Boolean flag states that indicate whether the command is <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Checked" />
+            >Boolean flag states that indicate whether the command is <see cref="P:System.ComponentModel.Design.MenuCommand.Checked" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
+            , <see cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Supported" />
+            , <see cref="P:System.ComponentModel.Design.MenuCommand.Supported" />
 
             
 
-            , or <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Visible" />
+            , or <see cref="P:System.ComponentModel.Design.MenuCommand.Visible" />
 
             
 
@@ -106,8 +96,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="P:System.ComponentModel.Design.MenuCommand.OleStatus" />
+            >An <see cref="P:System.ComponentModel.Design.MenuCommand.OleStatus" />
 
             
 
@@ -116,8 +105,7 @@
         </item>
         <item>
           <para
-            >An override for the <see
-             cref="M:System.ComponentModel.Design.MenuCommand.ToString" />
+            >An override for the <see cref="M:System.ComponentModel.Design.MenuCommand.ToString" />
 
             
 
@@ -157,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -166,14 +153,22 @@
           >
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The event to raise when the user selects the menu item or toolbar button. </param
         >
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -251,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >Gets the <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -331,7 +325,11 @@
           <para>Invokes the command with the given parameter.</para>
         </summary>
         <param name="arg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -390,8 +388,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -400,8 +397,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.MenuCommand.OnCommandChanged(System.EventArgs)" />
+            >The <see cref="M:System.ComponentModel.Design.MenuCommand.OnCommandChanged(System.EventArgs)" />
 
             
 
@@ -411,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.Design.MenuCommand.CommandChanged" />
+            >Raises the <see cref="E:System.ComponentModel.Design.MenuCommand.CommandChanged" />
 
             
 
@@ -420,12 +415,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -455,8 +453,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All menu commands store their public properties in the <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Properties" />
+            >All menu commands store their public properties in the <see cref="P:System.ComponentModel.Design.MenuCommand.Properties" />
 
             
 
@@ -466,8 +463,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the public properties associated with the <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >Gets the public properties associated with the <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -523,28 +519,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the value of the <see
-             cref="P:System.ComponentModel.Design.MenuCommand.CommandID" />
+            >A string containing the value of the <see cref="P:System.ComponentModel.Design.MenuCommand.CommandID" />
 
             
 
-             property appended with the names of any flags that are set, separated by pipe bars (|). These flag properties include <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Checked" />
+             property appended with the names of any flags that are set, separated by pipe bars (|). These flag properties include <see cref="P:System.ComponentModel.Design.MenuCommand.Checked" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
+            , <see cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Supported" />
+            , <see cref="P:System.ComponentModel.Design.MenuCommand.Supported" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.Design.MenuCommand.Visible" />
+            , and <see cref="P:System.ComponentModel.Design.MenuCommand.Visible" />
 
             
 

@@ -17,82 +17,68 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The information contained in the <see
-         cref="T:System.ServiceModel.Description.ServiceDescription" />
+        >The information contained in the <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
         
 
          is used by the indigo1 system to building the run-time components for the service.</para
       >
       <para
-        >Use this method when adding custom behaviors to extend <see
-         cref="T:System.ServiceModel.ServiceHost" />
+        >Use this method when adding custom behaviors to extend <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
-        . Programmatically, you must <see
-         cref="M:System.Collections.ObjectModel.Collection`1.Add(`0)" />
+        . Programmatically, you must <see cref="M:System.Collections.ObjectModel.Collection`1.Add(`0)" />
 
         
 
-         the custom service behavior to the <see
-         cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+         the custom service behavior to the <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
         
 
-         prior to when you call the <see
-         cref="M:System.ServiceModel.ICommunicationObject.Open" />
+         prior to when you call the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
         
 
-         method on the <see
-         cref="T:System.ServiceModel.ServiceHost" />
+         method on the <see cref="T:System.ServiceModel.ServiceHost" />
 
         
 
          object.</para
       >
       <para
-        >The <see
-         cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Object)" />
+        >The <see cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Object)" />
 
         
 
-         and <see
-         cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Type)" />
+         and <see cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Type)" />
 
         
 
-         methods are available to reflect on behaviors using the indigo1 programming model when replacing <see
-         cref="T:System.ServiceModel.ServiceHostBase" />
+         methods are available to reflect on behaviors using the indigo1 programming model when replacing <see cref="T:System.ServiceModel.ServiceHostBase" />
 
         
 
          with you own hosting mechanism. </para
       >
       <para
-        >Export metadata about a service endpoint by passing <see
-         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+        >Export metadata about a service endpoint by passing <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
         
 
-         as a parameter to <see
-         cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+         as a parameter to <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
         
 
-        . After calling this method, or one of the other export methods provided by <see
-         cref="T:System.ServiceModel.Description.WsdlExporter" />
+        . After calling this method, or one of the other export methods provided by <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
         
 
-        , use the <see
-         cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
+        , use the <see cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
 
         
 
-         property to return the collection of <see
-         cref="T:System.Web.Services.Description.ServiceDescription" />
+         property to return the collection of <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
         
 
@@ -121,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
             
 
@@ -155,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.ServiceDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
             
 
@@ -164,17 +148,19 @@
           >
         </summary>
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.Generic.IEnumerable`1" />
+          The <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
           
 
-           of type <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+           of type <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -203,74 +189,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method when adding custom behaviors to extend <see
-             cref="T:System.ServiceModel.ServiceHost" />
+            >Use this method when adding custom behaviors to extend <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
-            . Programmatically, you must <see
-             cref="M:System.Collections.ObjectModel.Collection`1.Add(`0)" />
+            . Programmatically, you must <see cref="M:System.Collections.ObjectModel.Collection`1.Add(`0)" />
 
             
 
-             the custom service behavior to the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+             the custom service behavior to the <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
             
 
-             prior to when you call the <see
-             cref="M:System.ServiceModel.ICommunicationObject.Open" />
+             prior to when you call the <see cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
             
 
-             method on the <see
-             cref="T:System.ServiceModel.ServiceHost" />
+             method on the <see cref="T:System.ServiceModel.ServiceHost" />
 
             
 
              object.</para
           >
           <para
-            >The type of behavior that is accessible from the description hierarchy is scoped to the specific level. From the <see
-             cref="T:System.ServiceModel.Description.ServiceDescription" />
+            >The type of behavior that is accessible from the description hierarchy is scoped to the specific level. From the <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
             
 
-             the <see
-             cref="T:System.ServiceModel.Description.IServiceBehavior" />
+             the <see cref="T:System.ServiceModel.Description.IServiceBehavior" />
 
             
 
              is accessible. </para
           >
           <para
-            >If you want access to the <see
-             cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+            >If you want access to the <see cref="T:System.ServiceModel.Description.IEndpointBehavior" />
 
             
 
-             associated with an endpoint instead, you can obtain the endpoints for the service using the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" />
+             associated with an endpoint instead, you can obtain the endpoints for the service using the <see cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" />
 
             
 
-             property. Then retrieve the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             property. Then retrieve the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             from the collection with the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+             from the collection with the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
 
             
 
-             method that employs the relevant search criteria, and call the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+             method that employs the relevant search criteria, and call the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
 
             
 
-              property to obtain the collection of the <see
-             cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+              property to obtain the collection of the <see cref="T:System.ServiceModel.Description.IEndpointBehavior" />
 
             
 
@@ -298,8 +271,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This name is not coupled to our configuration model. This is used by service host base to wire up the service. The configuration name is a required string attribute for the <format
-             type="text/html">
+            >This name is not coupled to our configuration model. This is used by service host base to wire up the service. The configuration name is a required string attribute for the <format type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
 
@@ -335,46 +307,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The endpoints in the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpointCollection" />
+            >The endpoints in the <see cref="T:System.ServiceModel.Description.ServiceEndpointCollection" />
 
             
 
-             returned by this method each contain the address, binding, contract, and behavior information required to communicate with the service. To access this information, you must retrieve the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             returned by this method each contain the address, binding, contract, and behavior information required to communicate with the service. To access this information, you must retrieve the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             from the collection with the <see
-             cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+             from the collection with the <see cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
 
             
 
-             method that employs the relevant search criteria. Then the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             method that employs the relevant search criteria. Then the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             properties can be used to access the information. For example, the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             properties can be used to access the information. For example, the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
-             is accessed by the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" />
+             is accessed by the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" />
 
             
 
              property.</para
           >
           <para
-            >Export metadata about a service endpoint by passing <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >Export metadata about a service endpoint by passing <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             as a parameter to <see
-             cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+             as a parameter to <see cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
 
             
 
@@ -411,8 +375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to reflect on behaviors using the indigo1 programming model when replacing <see
-             cref="T:System.ServiceModel.ServiceHostBase" />
+            >Use this method to reflect on behaviors using the indigo1 programming model when replacing <see cref="T:System.ServiceModel.ServiceHostBase" />
 
             
 
@@ -423,28 +386,23 @@
 
             
 
-             initializes the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
+             initializes the <see cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
+            , <see cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.ConfigurationName" />
+            , and <see cref="P:System.ServiceModel.Description.ServiceDescription.ConfigurationName" />
 
             
 
-             properties, and ensures that the <see
-             cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+             properties, and ensures that the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
             
 
-             is attached to the service and adds any relevant service behaviors to <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+             is attached to the service and adds any relevant service behaviors to <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
             
 
@@ -458,8 +416,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceDescription" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
             
 
@@ -492,8 +449,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to reflect on behaviors using the indigo1 programming model when replacing <see
-             cref="T:System.ServiceModel.ServiceHostBase" />
+            >Use this method to reflect on behaviors using the indigo1 programming model when replacing <see cref="T:System.ServiceModel.ServiceHostBase" />
 
             
 
@@ -504,33 +460,27 @@
 
             
 
-             initializes the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
+             initializes the <see cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
 
             
 
-            , <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
+            , <see cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
 
             
 
-            , and <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.ConfigurationName" />
+            , and <see cref="P:System.ServiceModel.Description.ServiceDescription.ConfigurationName" />
 
             
 
-             properties, reflects on the type for any the <see
-             cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+             properties, reflects on the type for any the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
             
 
-             objects and adds them to <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+             objects and adds them to <see cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
 
             
 
-            , and ensures that the <see
-             cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+            , and ensures that the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
             
 
@@ -544,8 +494,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceDescription" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
             
 
@@ -570,8 +519,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the name is null, this property returns the name of the service type. If service type is also null, it returns the default service name.</para>
           <para
-            >When exporting WSDL metadata, the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
+            >When exporting WSDL metadata, the <see cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
 
             
 
@@ -599,8 +547,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When exporting WSDL metadata, the <see
-             cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
+            >When exporting WSDL metadata, the <see cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
 
             
 

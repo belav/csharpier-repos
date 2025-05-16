@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.EventHandlerService" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.EventHandlerService" />
 
             
 
@@ -49,12 +48,15 @@
           >
         </summary>
         <param name="focusWnd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -129,7 +131,11 @@
           <para>An instance of the handler, or null if there is no handler of the requested type.</para>
         </returns>
         <param name="handlerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,7 +166,11 @@
           <para>Pops the given handler off of the stack.</para>
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -191,7 +201,11 @@
           <para>Pushes a new event handler on the stack.</para>
         </summary>
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

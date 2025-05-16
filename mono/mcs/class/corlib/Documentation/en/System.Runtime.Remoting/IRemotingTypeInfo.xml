@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this interface to provide custom type information that is carried along with the <see
-         cref="T:System.Runtime.Remoting.ObjRef" />
+        >Use this interface to provide custom type information that is carried along with the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
         
 
@@ -60,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current method is called when an attempt is made to cast a proxy generated from a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >The current method is called when an attempt is made to cast a proxy generated from a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-            . This method takes into account the type information carried in the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            . This method takes into account the type information carried in the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -76,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks whether the proxy that represents the specified object type can be cast to the type represented by the <see
-             cref="T:System.Runtime.Remoting.IRemotingTypeInfo" />
+            >Checks whether the proxy that represents the specified object type can be cast to the type represented by the <see cref="T:System.Runtime.Remoting.IRemotingTypeInfo" />
 
             
 
@@ -89,14 +85,22 @@
           <para>true if cast will succeed; otherwise, false.</para>
         </returns>
         <param name="fromType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type to cast to. </param
         >
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -123,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the fully qualified type name of the server object in a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >Gets or sets the fully qualified type name of the server object in a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 

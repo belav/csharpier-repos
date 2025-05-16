@@ -19,41 +19,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Control developers use the <see
-         cref="T:System.Web.UI.ThemeableAttribute" />
+        >Control developers use the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
         
 
-         attribute to decorate control types and their members, to signal which ones can and cannot be affected by themes and control skins. By default, all properties exposed by a control are themeable. However, themes are typically applied only to stylistic properties; the Themeable(false) attribute should be applied explicitly to all non-stylistic properties. Decorating a member with the Themeable(false) attribute ensures that the member is not themed, regardless of the value of the <see
-         cref="P:System.Web.UI.Control.EnableTheming" />
+         attribute to decorate control types and their members, to signal which ones can and cannot be affected by themes and control skins. By default, all properties exposed by a control are themeable. However, themes are typically applied only to stylistic properties; the Themeable(false) attribute should be applied explicitly to all non-stylistic properties. Decorating a member with the Themeable(false) attribute ensures that the member is not themed, regardless of the value of the <see cref="P:System.Web.UI.Control.EnableTheming" />
 
         
 
-         property. For example, if the <see
-         cref="T:System.Web.UI.ThemeableAttribute" />
+         property. For example, if the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
         
 
-         attribute is applied to a control and set to false, the control is not affected by themes even when its <see
-         cref="P:System.Web.UI.Control.EnableTheming" />
+         attribute is applied to a control and set to false, the control is not affected by themes even when its <see cref="P:System.Web.UI.Control.EnableTheming" />
 
         
 
          property is set to true. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.ThemeableAttribute" />
+        >The <see cref="T:System.Web.UI.ThemeableAttribute" />
 
         
 
-         class maintains a static list of all types that support themes, and this list is consulted whenever the static methods <see
-         cref="M:System.Web.UI.ThemeableAttribute.IsObjectThemeable(System.Object)" />
+         class maintains a static list of all types that support themes, and this list is consulted whenever the static methods <see cref="M:System.Web.UI.ThemeableAttribute.IsObjectThemeable(System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.ThemeableAttribute.IsTypeThemeable(System.Type)" />
+         and <see cref="M:System.Web.UI.ThemeableAttribute.IsTypeThemeable(System.Type)" />
 
         
 
@@ -77,13 +70,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Passing true to this constructor is equivalent to using the <see
-             cref="F:System.Web.UI.ThemeableAttribute.Yes" />
+            >Passing true to this constructor is equivalent to using the <see cref="F:System.Web.UI.ThemeableAttribute.Yes" />
 
             
 
-             field, while passing false is equivalent to using the <see
-             cref="F:System.Web.UI.ThemeableAttribute.No" />
+             field, while passing false is equivalent to using the <see cref="F:System.Web.UI.ThemeableAttribute.No" />
 
             
 
@@ -93,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -102,12 +92,15 @@
           >
         </summary>
         <param name="themeable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to initialize the <see
-           cref="T:System.Web.UI.ThemeableAttribute" />
+          true to initialize the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
           
 
@@ -132,13 +125,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of the <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >The default value of the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             class is equivalent to the <see
-             cref="F:System.Web.UI.ThemeableAttribute.Yes" />
+             class is equivalent to the <see cref="F:System.Web.UI.ThemeableAttribute.Yes" />
 
             
 
@@ -148,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >Gets a <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -180,8 +170,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -189,7 +178,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -212,8 +205,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.ThemeableAttribute.GetHashCode" />
+            >The <see cref="M:System.Web.UI.ThemeableAttribute.GetHashCode" />
 
             
 
@@ -223,8 +215,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >Serves as a hash function for the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -234,8 +225,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >A hash code for the current <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -260,13 +250,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current instance is equivalent to a <see
-             cref="F:System.Web.UI.ThemeableAttribute.Default" />
+            >Gets a value indicating whether the current instance is equivalent to a <see cref="F:System.Web.UI.ThemeableAttribute.Default" />
 
             
 
-             instance of the <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+             instance of the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -276,8 +264,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current instance is equivalent to a <see
-             cref="F:System.Web.UI.ThemeableAttribute.Default" />
+            >true if the current instance is equivalent to a <see cref="F:System.Web.UI.ThemeableAttribute.Default" />
 
             
 
@@ -329,28 +316,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >The <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             class maintains a static internal catalog of types that support themes, and this method checks the catalog to determine whether the specified <see
-             cref="T:System.Type" />
+             class maintains a static internal catalog of types that support themes, and this method checks the catalog to determine whether the specified <see cref="T:System.Type" />
 
             
 
-             is represented there. If it is not, the method examines the <see
-             cref="T:System.ComponentModel.AttributeCollection" />
+             is represented there. If it is not, the method examines the <see cref="T:System.ComponentModel.AttributeCollection" />
 
             
 
-             object associated with the <see
-             cref="T:System.Type" />
+             object associated with the <see cref="T:System.Type" />
 
             
 
-             for the <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+             for the <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -360,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the <see
-             cref="T:System.Type" />
+            >Returns a value indicating whether the <see cref="T:System.Type" />
 
             
 
@@ -371,8 +352,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Type" />
+            >true if the <see cref="T:System.Type" />
 
             
 
@@ -380,12 +360,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -410,13 +393,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.ThemeableAttribute.No" />
+            >The <see cref="F:System.Web.UI.ThemeableAttribute.No" />
 
             
 
-             field is equivalent to creating an instance using the <see
-             cref="M:System.Web.UI.ThemeableAttribute.#ctor(System.Boolean)" />
+             field is equivalent to creating an instance using the <see cref="M:System.Web.UI.ThemeableAttribute.#ctor(System.Boolean)" />
 
             
 
@@ -426,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >Gets a <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -451,13 +431,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A member is affected by themes if no <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >A member is affected by themes if no <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             attribute is defined explicitly for the member, or the Themeable(true) attribute is applied. A member is not affected by themes if the Themeable(false) attribute is applied; this is the default value for <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+             attribute is defined explicitly for the member, or the Themeable(true) attribute is applied. A member is not affected by themes if the Themeable(false) attribute is applied; this is the default value for <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
@@ -487,13 +465,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Web.UI.ThemeableAttribute.Yes" />
+            >The <see cref="F:System.Web.UI.ThemeableAttribute.Yes" />
 
             
 
-             field is equivalent to creating an instance using the <see
-             cref="M:System.Web.UI.ThemeableAttribute.#ctor(System.Boolean)" />
+             field is equivalent to creating an instance using the <see cref="M:System.Web.UI.ThemeableAttribute.#ctor(System.Boolean)" />
 
             
 
@@ -503,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >Gets a <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 

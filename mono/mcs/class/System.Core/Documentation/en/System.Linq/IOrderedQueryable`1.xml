@@ -36,46 +36,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Linq.IOrderedQueryable`1" />
+        >The <see cref="T:System.Linq.IOrderedQueryable`1" />
 
         
 
          interface is intended for implementation by query providers.</para
       >
       <para
-        >This interface represents the result of a sorting query that calls the method(s) <see
-         cref="Overload:System.Linq.Queryable.OrderBy" />
+        >This interface represents the result of a sorting query that calls the method(s) <see cref="Overload:System.Linq.Queryable.OrderBy" />
 
         
 
-        , <see
-         cref="Overload:System.Linq.Queryable.OrderByDescending" />
+        , <see cref="Overload:System.Linq.Queryable.OrderByDescending" />
 
         
 
-        , <see
-         cref="Overload:System.Linq.Queryable.ThenBy" />
+        , <see cref="Overload:System.Linq.Queryable.ThenBy" />
 
         
 
-         or <see
-         cref="Overload:System.Linq.Queryable.ThenByDescending" />
+         or <see cref="Overload:System.Linq.Queryable.ThenByDescending" />
 
         
 
-        . When <see
-         cref="M:System.Linq.IQueryProvider.CreateQuery``1(System.Linq.Expressions.Expression)" />
+        . When <see cref="M:System.Linq.IQueryProvider.CreateQuery``1(System.Linq.Expressions.Expression)" />
 
         
 
-         is called and passed an expression tree that represents a sorting query, the resulting <see
-         cref="T:System.Linq.IQueryable`1" />
+         is called and passed an expression tree that represents a sorting query, the resulting <see cref="T:System.Linq.IQueryable`1" />
 
         
 
-         object must be of a type that implements <see
-         cref="T:System.Linq.IOrderedQueryable`1" />
+         object must be of a type that implements <see cref="T:System.Linq.IOrderedQueryable`1" />
 
         
 
@@ -83,7 +75,7 @@
       >
       <para
         >For more information about how to create your own LINQ provider, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=112370"
+          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
 

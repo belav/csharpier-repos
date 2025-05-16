@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the maximumResponseHeadersLength attribute of the <format
-         type="text/html">
+        >This class corresponds to the maximumResponseHeadersLength attribute of the <format type="text/html">
           <a href="52acd9d2-5bdc-4dc4-9c2a-f0a476ccbb31"
             >HttpWebRequest Element (Network Settings)</a
           >
@@ -34,13 +33,11 @@
          configuration element.</para
       >
       <para
-        >The information in this class applies to responses to requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >The information in this class applies to responses to requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -71,18 +68,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds a <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+            >This constructor adds a <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-             object that represents the <see
-             cref="P:System.Net.Configuration.HttpWebRequestElement.MaximumResponseHeadersLength" />
+             object that represents the <see cref="P:System.Net.Configuration.HttpWebRequestElement.MaximumResponseHeadersLength" />
 
             
 
-             to the <see
-             cref="P:System.Configuration.ConfigurationElement.Properties" />
+             to the <see cref="P:System.Configuration.ConfigurationElement.Properties" />
 
             
 
@@ -92,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.HttpWebRequestElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.HttpWebRequestElement" />
 
             
 
@@ -248,8 +241,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains one element, which corresponds to the <see
-             cref="P:System.Net.Configuration.HttpWebRequestElement.MaximumResponseHeadersLength" />
+            >The collection contains one element, which corresponds to the <see cref="P:System.Net.Configuration.HttpWebRequestElement.MaximumResponseHeadersLength" />
 
             
 
@@ -302,13 +294,11 @@
             </item>
           </list>
           <para
-            >When a protocol violation occurs, a <see
-             cref="T:System.Net.WebException" />
+            >When a protocol violation occurs, a <see cref="T:System.Net.WebException" />
 
             
 
-             exception is thrown with the status set to <see
-             cref="F:System.Net.WebExceptionStatus.ServerProtocolViolation" />
+             exception is thrown with the status set to <see cref="F:System.Net.WebExceptionStatus.ServerProtocolViolation" />
 
             
 

@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.DataReference" />
+        >The <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
         
 
@@ -55,8 +54,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >This constructor creates a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
@@ -96,8 +93,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the specified Uniform Resource Identifier (URI) to create a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >This constructor uses the specified Uniform Resource Identifier (URI) to create a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
@@ -108,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
@@ -117,7 +112,11 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -149,8 +148,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the specified Uniform Resource Identifier (URI) and transform chain to create a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >This constructor uses the specified Uniform Resource Identifier (URI) and transform chain to create a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
@@ -161,13 +159,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             class using the specified Uniform Resource Identifier (URI) and a <see
-             cref="T:System.Security.Cryptography.Xml.TransformChain" />
+             class using the specified Uniform Resource Identifier (URI) and a <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
             
 
@@ -175,7 +171,11 @@
           >
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

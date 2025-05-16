@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The Taiwan lunisolar calendar works exactly like the Gregorian calendar, except that the year and era are different. The <see
-         cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+        >The Taiwan lunisolar calendar works exactly like the Gregorian calendar, except that the year and era are different. The <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
         
 
-         class calculates years using the Gregorian calendar, days and months using the <see
-         cref="T:System.Globalization.EastAsianLunisolarCalendar" />
+         class calculates years using the Gregorian calendar, days and months using the <see cref="T:System.Globalization.EastAsianLunisolarCalendar" />
 
         
 
@@ -39,13 +37,11 @@
       >
       <block subset="none" type="note">
         <para
-          >For information about using the <see
-           cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+          >For information about using the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
           
 
-           class and the other calendar classes in the .NET Framework, see <format
-           type="text/html">
+           class and the other calendar classes in the .NET Framework, see <format type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
 
@@ -55,82 +51,68 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+        >The <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
         
 
-         class is derived from the <see
-         cref="T:System.Globalization.EastAsianLunisolarCalendar" />
+         class is derived from the <see cref="T:System.Globalization.EastAsianLunisolarCalendar" />
 
         
 
-         class, which represents the lunisolar calendar. The <see
-         cref="T:System.Globalization.EastAsianLunisolarCalendar" />
+         class, which represents the lunisolar calendar. The <see cref="T:System.Globalization.EastAsianLunisolarCalendar" />
 
         
 
          class supports the sexagenary year cycle (which repeats every 60 years) in addition to solar years and lunar months. Each solar year in the calendar is associated with a Sexagenary Year, a Celestial Stem, and a Terrestrial Branch, and these calendars can have leap months after any month of the year.</para
       >
       <para
-        >A leap month can occur after any month in a year. For example, the <see
-         cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+        >A leap month can occur after any month in a year. For example, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
 
         
 
-         method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see
-         cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
+         method returns a number between 1 and 13 that indicates the month associated with a specified date. If there is a leap month between the eighth and ninth months of the year, the <see cref="M:System.Globalization.EastAsianLunisolarCalendar.GetMonth(System.DateTime)" />
 
         
 
          method returns 8 for the eighth month, 9 for the leap eighth month, and 10 for the ninth month.</para
       >
       <para
-        >Currently, the <see
-         cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+        >Currently, the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
         
 
-         is not used by any of the cultures supported by the <see
-         cref="T:System.Globalization.CultureInfo" />
+         is not used by any of the cultures supported by the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
          class. Therefore, this class can be used only to calculate dates in the Taiwan lunisolar calendar.</para
       >
       <para
-        >Each <see
-         cref="T:System.Globalization.CultureInfo" />
+        >Each <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         object supports a set of calendars. The <see
-         cref="P:System.Globalization.CultureInfo.Calendar" />
+         object supports a set of calendars. The <see cref="P:System.Globalization.CultureInfo.Calendar" />
 
         
 
-         property returns the default calendar for the culture, and the <see
-         cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+         property returns the default calendar for the culture, and the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
 
         
 
-         property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see
-         cref="T:System.Globalization.CultureInfo" />
+         property returns an array containing all the calendars supported by the culture. To change the calendar used by a <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-        , the application should set the <see
-         cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
+        , the application should set the <see cref="P:System.Globalization.DateTimeFormatInfo.Calendar" />
 
         
 
-         property of <see
-         cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+         property of <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
-         to a new <see
-         cref="T:System.Globalization.Calendar" />
+         to a new <see cref="T:System.Globalization.Calendar" />
 
         
 
@@ -161,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
             
 
@@ -196,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of days in the year that precedes the year specified by the <see
-             cref="P:System.Globalization.TaiwanLunisolarCalendar.MinSupportedDateTime" />
+            >Gets the number of days in the year that precedes the year specified by the <see cref="P:System.Globalization.TaiwanLunisolarCalendar.MinSupportedDateTime" />
 
             
 
@@ -227,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the eras that are relevant to the current <see
-             cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+            >Gets the eras that are relevant to the current <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
             
 
@@ -260,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the era that corresponds to the specified <see
-             cref="T:System.DateTime" />
+            >Retrieves the era that corresponds to the specified <see cref="T:System.DateTime" />
 
             
 
@@ -271,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer that represents the era specified in the <paramref
-             name="time" />
+            >An integer that represents the era specified in the <paramref name="time" />
 
             
 
@@ -280,12 +257,15 @@
           >
         </returns>
         <param name="time">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.DateTime" />
+          The <see cref="T:System.DateTime" />
 
           
 
@@ -317,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the maximum date and time supported by the <see
-             cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+            >Gets the maximum date and time supported by the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
             
 
@@ -351,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the minimum date and time supported by the <see
-             cref="T:System.Globalization.TaiwanLunisolarCalendar" />
+            >Gets the minimum date and time supported by the <see cref="T:System.Globalization.TaiwanLunisolarCalendar" />
 
             
 

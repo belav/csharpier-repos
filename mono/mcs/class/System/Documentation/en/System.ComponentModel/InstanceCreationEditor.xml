@@ -18,23 +18,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Usually, the text specified by <see
-         cref="P:System.ComponentModel.InstanceCreationEditor.Text" />
+        >Usually, the text specified by <see cref="P:System.ComponentModel.InstanceCreationEditor.Text" />
 
         
 
-         is displayed on the drop-down box from the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         is displayed on the drop-down box from the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         as a link or button. When clicked, the <see
-         cref="M:System.ComponentModel.InstanceCreationEditor.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+         as a link or button. When clicked, the <see cref="M:System.ComponentModel.InstanceCreationEditor.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
         
 
-         method is called with the <see
-         cref="T:System.Type" />
+         method is called with the <see cref="T:System.Type" />
 
         
 
@@ -44,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates an instance of a particular type of property from a drop-down box within the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+        >Creates an instance of a particular type of property from a drop-down box within the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -71,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.InstanceCreationEditor" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InstanceCreationEditor" />
 
             
 
@@ -114,7 +108,11 @@
           <para>An instance of the specified type or null.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

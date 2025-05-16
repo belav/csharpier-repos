@@ -14,24 +14,21 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.UICuesEventArgs" />
+        >A <see cref="T:System.Windows.Forms.UICuesEventArgs" />
 
         
 
          specifies which user interface feature changed and its new value.</para
       >
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Control.ChangeUICues" />
+        >The <see cref="E:System.Windows.Forms.Control.ChangeUICues" />
 
         
 
          event occurs when the user interface changes by showing or hiding focus indicators or keyboard cues. This is usually when the user presses the TAB, ALT, or F10 keys.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -43,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.ChangeUICues" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.ChangeUICues" />
 
         
 
@@ -67,13 +63,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.UICuesEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.UICuesEventArgs" />
 
             
 
-             class with the specified <see
-             cref="T:System.Windows.Forms.UICues" />
+             class with the specified <see cref="T:System.Windows.Forms.UICues" />
 
             
 
@@ -81,12 +75,15 @@
           >
         </summary>
         <param name="uicues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.UICues" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.UICues" />
 
           
 
@@ -110,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the bitwise combination of the <see
-             cref="T:System.Windows.Forms.UICues" />
+            >Gets the bitwise combination of the <see cref="T:System.Windows.Forms.UICues" />
 
             
 

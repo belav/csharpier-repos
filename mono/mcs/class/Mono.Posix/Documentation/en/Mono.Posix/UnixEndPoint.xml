@@ -17,7 +17,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -37,16 +39,14 @@
     <remarks>
       <para
         >This type is obsolete.  Please use 
-      <see
-         cref="T:Mono.Unix.UnixEndPoint" />
+      <see cref="T:Mono.Unix.UnixEndPoint" />
 
         
 
          instead.</para
       >
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 try
 {
 	UnixEndPoint endPoint = new UnixEndPoint (socketName);
@@ -84,8 +84,7 @@ catch (Exception ex)
       </Parameters>
       <Docs>
         <param name="filename"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -188,10 +187,7 @@ catch (Exception ex)
       <Parameters />
       <Docs>
         <summary>Returns the filename representing the unix socket.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks />
         <altmember cref="P:Mono.Unix.UnixEndPoint.Filename" />
       </Docs>

@@ -14,31 +14,26 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This enumeration defines identifiers that represent the standard operating system startup modes.</para>
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.SystemInformation.BootMode" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.SystemInformation.BootMode" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.SystemInformation" />
+         property of the <see cref="T:System.Windows.Forms.SystemInformation" />
 
         
 
          class.</para
       >
       <para
-        >The <see
-         cref="F:System.Windows.Forms.BootMode.Normal" />
+        >The <see cref="F:System.Windows.Forms.BootMode.Normal" />
 
         
 
-         boot mode is the standard system startup mode. The <see
-         cref="F:System.Windows.Forms.BootMode.FailSafe" />
+         boot mode is the standard system startup mode. The <see cref="F:System.Windows.Forms.BootMode.FailSafe" />
 
         
 
-         boot mode is also called safe mode. The <see
-         cref="F:System.Windows.Forms.BootMode.FailSafeWithNetwork" />
+         boot mode is also called safe mode. The <see cref="F:System.Windows.Forms.BootMode.FailSafeWithNetwork" />
 
         
 

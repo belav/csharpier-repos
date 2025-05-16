@@ -24,21 +24,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When you call the BeginMyMethodName method, where MyMethodName is the synchronous version of the method, on an XML Web service proxy class, an instance of the <see
-         cref="T:System.Web.Services.Protocols.WebClientAsyncResult" />
+        >When you call the BeginMyMethodName method, where MyMethodName is the synchronous version of the method, on an XML Web service proxy class, an instance of the <see cref="T:System.Web.Services.Protocols.WebClientAsyncResult" />
 
         
 
-         is returned. Following the standard asynchronous design pattern, that instance of <see
-         cref="T:System.Web.Services.Protocols.WebClientAsyncResult" />
+         is returned. Following the standard asynchronous design pattern, that instance of <see cref="T:System.Web.Services.Protocols.WebClientAsyncResult" />
 
         
 
          must later be passed to EndMyMethodName to complete the asynchronous method call.</para
       >
       <para
-        >For details on calling XML Web services asynchronously, see <format
-         type="text/html">
+        >For details on calling XML Web services asynchronously, see <format type="text/html">
           <a href="F9E26A43-063A-440A-8C73-A02F2CCF3EA0"
             >[&lt;topic://cpconInvokingWebServicesAsynchronously&gt;]</a
           >
@@ -52,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides an implementation of <see
-         cref="T:System.IAsyncResult" />
+        >Provides an implementation of <see cref="T:System.IAsyncResult" />
 
         
 
@@ -111,38 +107,30 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Threading.WaitHandle" />
-        </value>
+        <value>a <see cref="T:System.Threading.WaitHandle" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.WaitHandle" />
+            >The <see cref="T:System.Threading.WaitHandle" />
 
             
 
-             can be used to perform a <see
-             cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+             can be used to perform a <see cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
             
 
-            , <see
-             cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            , <see cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
-            , or <see
-             cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+            , or <see cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
             
 
              to wait for the asynchronous call to complete.</para
           >
           <para
-            >For more details, see <see
-             cref="P:System.IAsyncResult.AsyncWaitHandle" />
+            >For more details, see <see cref="P:System.IAsyncResult.AsyncWaitHandle" />
 
             
 
@@ -152,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Gets a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -177,18 +164,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Web.Services.Protocols.WebClientAsyncResult.CompletedSynchronously" />
+            >If <see cref="P:System.Web.Services.Protocols.WebClientAsyncResult.CompletedSynchronously" />
 
             
 
-             is set to true within the <see
-             cref="T:System.AsyncCallback" />
+             is set to true within the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate, it is probable that the thread that called <see
-             cref="M:System.Web.Services.Protocols.SoapHttpClientProtocol.BeginInvoke(System.String,System.Object[],System.AsyncCallback,System.Object)" />
+             delegate, it is probable that the thread that called <see cref="M:System.Web.Services.Protocols.SoapHttpClientProtocol.BeginInvoke(System.String,System.Object[],System.AsyncCallback,System.Object)" />
 
             
 

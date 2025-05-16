@@ -17,153 +17,126 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >With the <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+        >With the <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         control, the user can enter and edit text. The control also provides more advanced formatting features than the standard <see
-         cref="T:System.Windows.Forms.TextBox" />
+         control, the user can enter and edit text. The control also provides more advanced formatting features than the standard <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
          control. Text can be assigned directly to the control, or can be loaded from a rich text format (RTF) or plain text file. The text within the control can be assigned character and paragraph formatting.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+        >The <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         control provides a number of properties you can use to apply formatting to any portion of text within the control. To change the formatting of text, it must first be selected. Only selected text can be assigned character and paragraph formatting. Once a setting has been made to a selected section of text, all text entered after the selection is also formatted with the same settings until a setting change is made or a different section of the control's document is selected. The <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionFont" />
+         control provides a number of properties you can use to apply formatting to any portion of text within the control. To change the formatting of text, it must first be selected. Only selected text can be assigned character and paragraph formatting. Once a setting has been made to a selected section of text, all text entered after the selection is also formatted with the same settings until a setting change is made or a different section of the control's document is selected. The <see cref="P:System.Windows.Forms.RichTextBox.SelectionFont" />
 
         
 
-         property enables you to make text bold or italic. You can also use this property to change the size and typeface of the text. The <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionColor" />
+         property enables you to make text bold or italic. You can also use this property to change the size and typeface of the text. The <see cref="P:System.Windows.Forms.RichTextBox.SelectionColor" />
 
         
 
-         property enables you to change the color of the text. To create bulleted lists you can use the <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionBullet" />
+         property enables you to change the color of the text. To create bulleted lists you can use the <see cref="P:System.Windows.Forms.RichTextBox.SelectionBullet" />
 
         
 
-         property. You can also adjust paragraph formatting by setting the <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionIndent" />
+         property. You can also adjust paragraph formatting by setting the <see cref="P:System.Windows.Forms.RichTextBox.SelectionIndent" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionRightIndent" />
+        , <see cref="P:System.Windows.Forms.RichTextBox.SelectionRightIndent" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionHangingIndent" />
+        , and <see cref="P:System.Windows.Forms.RichTextBox.SelectionHangingIndent" />
 
         
 
          properties.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+        >The <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         control provides methods that provide functionality for opening and saving files. The <see
-         cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+         control provides methods that provide functionality for opening and saving files. The <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
         
 
-         method enables you to load an existing RTF or ASCII text file into the control. You can also load data from an already opened data stream. The <see
-         cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+         method enables you to load an existing RTF or ASCII text file into the control. You can also load data from an already opened data stream. The <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
         
 
-         enables you to save a file to RTF or ASCII text. Similar to the <see
-         cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+         enables you to save a file to RTF or ASCII text. Similar to the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
         
 
-         method, you can also use the <see
-         cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+         method, you can also use the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
         
 
-         method to save to an open data stream. The <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         method to save to an open data stream. The <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         control also provides features for finding strings of text. The <see
-         cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+         control also provides features for finding strings of text. The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
         
 
          method is overloaded to find both strings of text as well as specific characters within the text of the control.</para
       >
       <para
-        >You can also initialize the <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+        >You can also initialize the <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         control to data stored in memory. For example, you can initialize the <see
-         cref="P:System.Windows.Forms.RichTextBox.Rtf" />
+         control to data stored in memory. For example, you can initialize the <see cref="P:System.Windows.Forms.RichTextBox.Rtf" />
 
         
 
          property to a string that contains the text to display, including the RTF codes that determine how the text should be formatted.</para
       >
       <para
-        >If the text within the control contains links, such as a link to a Web site, you can use the <see
-         cref="P:System.Windows.Forms.RichTextBox.DetectUrls" />
+        >If the text within the control contains links, such as a link to a Web site, you can use the <see cref="P:System.Windows.Forms.RichTextBox.DetectUrls" />
 
         
 
-         property to display the link appropriately in the control's text. You can then handle the <see
-         cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
+         property to display the link appropriately in the control's text. You can then handle the <see cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
 
         
 
-         event to perform the tasks associated with the link. The <see
-         cref="P:System.Windows.Forms.RichTextBox.SelectionProtected" />
+         event to perform the tasks associated with the link. The <see cref="P:System.Windows.Forms.RichTextBox.SelectionProtected" />
 
         
 
-         property enables you to protect text within the control from manipulation by the user. With protected text in your control, you can handle the <see
-         cref="E:System.Windows.Forms.RichTextBox.Protected" />
+         property enables you to protect text within the control from manipulation by the user. With protected text in your control, you can handle the <see cref="E:System.Windows.Forms.RichTextBox.Protected" />
 
         
 
          event to determine when the user has attempted to modify protected text, and either alert the user that the text is protected or provide the user with a standard way to manipulate the protected text.</para
       >
       <para
-        >Applications that already use <see
-         cref="T:System.Windows.Forms.TextBox" />
+        >Applications that already use <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         controls can easily be adapted to make use of <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         controls can easily be adapted to make use of <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         controls. However, the <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         controls. However, the <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         control does not have the same 64K character capacity limit of the <see
-         cref="T:System.Windows.Forms.TextBox" />
+         control does not have the same 64K character capacity limit of the <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         control. The <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         control. The <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
@@ -171,18 +144,15 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="M:System.Windows.Forms.TextBoxBase.Undo" />
+          >The <see cref="M:System.Windows.Forms.TextBoxBase.Undo" />
 
           
 
-           method does not work with the <see
-           cref="E:System.Windows.Forms.Control.KeyPress" />
+           method does not work with the <see cref="E:System.Windows.Forms.Control.KeyPress" />
 
           
 
-           or <see
-           cref="E:System.Windows.Forms.Control.TextChanged" />
+           or <see cref="E:System.Windows.Forms.Control.TextChanged" />
 
           
 
@@ -204,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+            >By default, the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
@@ -215,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -374,8 +342,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -387,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.RichTextBox.BackgroundImage" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.RichTextBox.BackgroundImage" />
 
             
 
@@ -461,8 +427,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.RichTextBox.BackgroundImageLayout" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.RichTextBox.BackgroundImageLayout" />
 
             
 
@@ -490,18 +455,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To apply the bullet style to a paragraph of text, set the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionBullet" />
+            >To apply the bullet style to a paragraph of text, set the <see cref="P:System.Windows.Forms.RichTextBox.SelectionBullet" />
 
             
 
-             property to true and then set the <see
-             cref="P:System.Windows.Forms.RichTextBox.BulletIndent" />
+             property to true and then set the <see cref="P:System.Windows.Forms.RichTextBox.BulletIndent" />
 
             
 
-             property to the number of pixels that the text should be indented. The paragraph will have the bullet style applied to it with the specified amount of indentation after the bullet. This property only affects the current paragraph within the control's text and the currently selected bullet in a list of bulleted items. To apply a different indentation level to an entire list of bulleted items, all the text of the bulleted items must be selected before setting the <see
-             cref="P:System.Windows.Forms.RichTextBox.BulletIndent" />
+             property to the number of pixels that the text should be indented. The paragraph will have the bullet style applied to it with the specified amount of indentation after the bullet. This property only affects the current paragraph within the control's text and the currently selected bullet in a list of bulleted items. To apply a different indentation level to an entire list of bulleted items, all the text of the bulleted items must be selected before setting the <see cref="P:System.Windows.Forms.RichTextBox.BulletIndent" />
 
             
 
@@ -511,8 +473,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the indentation used in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the indentation used in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -567,13 +528,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine whether the last operation undone in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >You can use this property to determine whether the last operation undone in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             can be reapplied using the <see
-             cref="M:System.Windows.Forms.RichTextBox.Redo" />
+             can be reapplied using the <see cref="M:System.Windows.Forms.RichTextBox.Redo" />
 
             
 
@@ -583,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether there are actions that have occurred within the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets a value indicating whether there are actions that have occurred within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -610,8 +568,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -716,23 +673,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is set to true, any text entered into the control that is determined by the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If this property is set to true, any text entered into the control that is determined by the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             to be a URL is automatically formatted as a link. You can create an event handler for the <see
-             cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
+             to be a URL is automatically formatted as a link. You can create an event handler for the <see cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
 
             
 
-             event to handle all links clicked in the control. The <see
-             cref="T:System.Windows.Forms.LinkClickedEventArgs" />
+             event to handle all links clicked in the control. The <see cref="T:System.Windows.Forms.LinkClickedEventArgs" />
 
             
 
-             that is provided to the event handler for the <see
-             cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
+             that is provided to the event handler for the <see cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
 
             
 
@@ -742,8 +695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether or not the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets a value indicating whether or not the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -822,8 +774,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -860,8 +811,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -901,8 +851,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is not relevant to this class. For more information about handling events, see <format
-             type="text/html">
+            >This event is not relevant to this class. For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -952,24 +901,30 @@
           <para>This method is not relevant for this class.</para>
         </summary>
         <param name="bitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Bitmap" />
+          A <see cref="T:System.Drawing.Bitmap" />
 
           
 
           .</param
         >
         <param name="targetBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
@@ -1013,31 +968,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the first instance of a character from a list of characters specified in the <paramref
-             name="characterSet" />
+             method searches for the first instance of a character from a list of characters specified in the <paramref name="characterSet" />
 
             
 
-             parameter and returns the location of the character. For example, you pass an array of characters containing the character 'Q'. If the control contained the text "The Quick Brown Fox", the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location of the character. For example, you pass an array of characters containing the character 'Q'. If the control contained the text "The Quick Brown Fox", the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
              method would return the value of four. An upper case character and a lower case character are considered different values in the search.</para
           >
           <para
-            >If the property returns a negative value, the characters being searched for were not found within the contents of the control. You can use this method to search for a group of characters within the control. This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >If the property returns a negative value, the characters being searched for were not found within the contents of the control. You can use this method to search for a group of characters within the control. This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method requires that the entire document contained in the control is searched for the characters. If a character from the character list provided in the method's <paramref
-             name="characterSet" />
+             method requires that the entire document contained in the control is searched for the characters. If a character from the character list provided in the method's <paramref name="characterSet" />
 
             
 
@@ -1047,8 +997,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the text of a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches the text of a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1058,8 +1007,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The location within the control where the search characters were found or -1 if the search characters are not found or an empty search character set is specified in the <paramref
-             name="char" />
+            >The location within the control where the search characters were found or -1 if the search characters are not found or an empty search character set is specified in the <paramref name="char" />
 
             
 
@@ -1067,7 +1015,11 @@
           >
         </returns>
         <param name="characterSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1092,23 +1044,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the text specified in the <paramref
-             name="str" />
+             method searches for the text specified in the <paramref name="str" />
 
             
 
-             parameter and returns the location of the first character within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you could use the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location of the first character within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you could use the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method to search for all dates in the document and replace them with the appropriate format before using the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             method to search for all dates in the document and replace them with the appropriate format before using the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
@@ -1116,13 +1064,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
               
 
-               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
@@ -1133,8 +1079,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the text in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches the text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1144,8 +1089,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The location within the control where the search text was found or -1 if the search string is not found or an empty search string is specified in the <paramref
-             name="str" />
+            >The location within the control where the search text was found or -1 if the search string is not found or an empty search string is specified in the <paramref name="str" />
 
             
 
@@ -1153,7 +1097,11 @@
           >
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1179,44 +1127,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the first instance of a character from a list of characters specified in the <paramref
-             name="characterSet" />
+             method searches for the first instance of a character from a list of characters specified in the <paramref name="characterSet" />
 
             
 
-             parameter and returns the location the character. For example, you pass an array of characters containing the character 'Q'. If the control contained the text "The Quick Brown Fox", the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location the character. For example, you pass an array of characters containing the character 'Q'. If the control contained the text "The Quick Brown Fox", the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
              method would return the value of four. An upper case character and a lower case character are considered different values in the search.</para
           >
           <para
-            >If the property returns a negative value, the characters being searched for were not found within the contents of the control. You can use this method to search for a group of characters within the control. If a character from the character list provided in the method's <paramref
-             name="characterSet" />
+            >If the property returns a negative value, the characters being searched for were not found within the contents of the control. You can use this method to search for a group of characters within the control. If a character from the character list provided in the method's <paramref name="characterSet" />
 
             
 
              parameter is found, the value returned by this method is a zero-based index of the character's position in the control. A space is considered a character by the method when determining the location of a character.</para
           >
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method enables you to search for a character set from a specified start position within the text of the control by specifying a value for the <paramref
-             name="start" />
+             method enables you to search for a character set from a specified start position within the text of the control by specifying a value for the <paramref name="start" />
 
             
 
-             parameter. A value of zero indicates that the search should start from the beginning of the control's document. You can use this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter. A value of zero indicates that the search should start from the beginning of the control's document. You can use this version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
@@ -1226,8 +1167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the text of a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches the text of a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1239,14 +1179,22 @@
           <para>The location within the control where the search characters are found.</para>
         </returns>
         <param name="characterSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of characters to search for. </param
         >
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1275,36 +1223,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the text specified in the <paramref
-             name="str" />
+             method searches for the text specified in the <paramref name="str" />
 
             
 
-             parameter and returns the location of the first character within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location of the first character within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you can use the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method to search for all dates in the document and replace them with the appropriate format before using the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             method to search for all dates in the document and replace them with the appropriate format before using the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
              method of the control.</para
           >
           <para
-            >With this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >With this version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method, you can specify options that enable you to expand or narrow your search. You can specify options that enable you to match the casing of the search word or to search for entire words instead of partial words. By specifying the RichTextBoxFinds.Reverse enumeration in the <paramref
-             name="options" />
+             method, you can specify options that enable you to expand or narrow your search. You can specify options that enable you to match the casing of the search word or to search for entire words instead of partial words. By specifying the RichTextBoxFinds.Reverse enumeration in the <paramref name="options" />
 
             
 
@@ -1312,13 +1254,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
               
 
-               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
@@ -1329,8 +1269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the text in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches the text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1342,19 +1281,26 @@
           <para>The location within the control where the search text was found.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to locate in the control. </param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.RichTextBoxFinds" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" />
 
           
 
@@ -1384,59 +1330,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the first instance of a character from a list of characters specified in the <paramref
-             name="characterSet" />
+             method searches for the first instance of a character from a list of characters specified in the <paramref name="characterSet" />
 
             
 
-             parameter and returns the location of the character. For example, you pass an array of characters containing the character 'Q'. If the control contained the text "The Quick Brown Fox", the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location of the character. For example, you pass an array of characters containing the character 'Q'. If the control contained the text "The Quick Brown Fox", the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
              method would return the value of four. An upper case character and a lower case character are considered different values in the search.</para
           >
           <para
-            >If the property returns a negative value, the characters being searched for were not found within the contents of the control. You can use this method to search for a group of characters within the control. If a character from the character list provided in the method's <paramref
-             name="characterSet" />
+            >If the property returns a negative value, the characters being searched for were not found within the contents of the control. You can use this method to search for a group of characters within the control. If a character from the character list provided in the method's <paramref name="characterSet" />
 
             
 
              parameter is found, the value returned by this method is a zero based index of the character's position in the control. A space is considered a character by the method when determining the location of a character.</para
           >
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method enables you to search for a character set from a range of text in the control by specifying a value for the <paramref
-             name="start" />
+             method enables you to search for a character set from a range of text in the control by specifying a value for the <paramref name="start" />
 
             
 
-             and <paramref
-             name="end" />
+             and <paramref name="end" />
 
             
 
-             parameters. A value of zero for the <paramref
-             name="start" />
+             parameters. A value of zero for the <paramref name="start" />
 
             
 
-             parameter indicates that the search should start from the beginning of the control's document. A -1 value for the <paramref
-             name="end" />
+             parameter indicates that the search should start from the beginning of the control's document. A -1 value for the <paramref name="end" />
 
             
 
-             parameter indicates that the search should end at the end of the text within the control. You can use this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter indicates that the search should end at the end of the text within the control. You can use this version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
@@ -1446,8 +1382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches a range of text in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches a range of text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1459,21 +1394,33 @@
           <para>The location within the control where the search characters are found.</para>
         </returns>
         <param name="characterSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of characters to search for. </param
         >
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location within the control's text at which to begin searching. </param
         >
         <param name="end">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1503,56 +1450,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the text specified in the <paramref
-             name="str" />
+             method searches for the text specified in the <paramref name="str" />
 
             
 
-             parameter and returns the location of the first character of the search string within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you could use the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location of the first character of the search string within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you could use the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method to search for all dates in the document and replace them with the appropriate format before using the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             method to search for all dates in the document and replace them with the appropriate format before using the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
              method of the control.</para
           >
           <para
-            >With this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >With this version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method, you can specify options that enable you to expand or narrow your search. You can specify options that enable you to match the casing of the search word or to search for entire words instead of partial words. By specifying the RichTextBoxFinds.Reverse enumeration in the <paramref
-             name="options" />
+             method, you can specify options that enable you to expand or narrow your search. You can specify options that enable you to match the casing of the search word or to search for entire words instead of partial words. By specifying the RichTextBoxFinds.Reverse enumeration in the <paramref name="options" />
 
             
 
-             parameter, you can search for text from the bottom of the document to the top instead of the default top to bottom search method. This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter, you can search for text from the bottom of the document to the top instead of the default top to bottom search method. This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method also enables you to narrow the search for text by selecting a specific starting position within the control's text. This feature can enable you to avoid text that might have already been searched or where the specific text you are searching for is known not to exist. When the RichTextBoxFinds.Reverse value is specified in the <paramref
-             name="options" />
+             method also enables you to narrow the search for text by selecting a specific starting position within the control's text. This feature can enable you to avoid text that might have already been searched or where the specific text you are searching for is known not to exist. When the RichTextBoxFinds.Reverse value is specified in the <paramref name="options" />
 
             
 
-             parameter, the value of the <paramref
-             name="start" />
+             parameter, the value of the <paramref name="start" />
 
             
 
-             parameter indicates the position where the reverse search will end since the search will start at the bottom of the document when using this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter indicates the position where the reverse search will end since the search will start at the bottom of the document when using this version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
@@ -1560,13 +1497,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
               
 
-               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
@@ -1577,8 +1512,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the text in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches the text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1590,26 +1524,37 @@
           <para>The location within the control where the search text was found.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to locate in the control. </param
         >
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location within the control's text at which to begin searching. </param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.RichTextBoxFinds" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" />
 
           
 
@@ -1640,71 +1585,58 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method searches for the text specified in the <paramref
-             name="str" />
+             method searches for the text specified in the <paramref name="str" />
 
             
 
-             parameter and returns the location of the first character of the search string within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter and returns the location of the first character of the search string within the control. If the property returns a negative value, the text string being searched for was not found within the contents of the control. You can use this method to create search functionality that can be provided to the user of the control. You can also use this method to search for text to be replaced with a specific format. For example, if the user entered dates into the control, you can use the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method to search for all dates in the document and replace them with the appropriate format before using the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             method to search for all dates in the document and replace them with the appropriate format before using the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
              method of the control.</para
           >
           <para
-            >With this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+            >With this version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method, you can specify options that enable you to expand or narrow your search. You can specify options that enable you to match the casing of the search word or to search for entire words instead of partial words. By specifying the RichTextBoxFinds.Reverse enumeration in the <paramref
-             name="options" />
+             method, you can specify options that enable you to expand or narrow your search. You can specify options that enable you to match the casing of the search word or to search for entire words instead of partial words. By specifying the RichTextBoxFinds.Reverse enumeration in the <paramref name="options" />
 
             
 
-             parameter, you can search for text from the bottom of the document to the top instead of the default top to bottom search method. This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             parameter, you can search for text from the bottom of the document to the top instead of the default top to bottom search method. This version of the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method also enables you to narrow the search for text by selecting a specific start and end position within the control's text. This feature can enable you to limit the search range to a specific section of the control's text. If a value of negative one (-1) is assigned to the <paramref
-             name="end" />
+             method also enables you to narrow the search for text by selecting a specific start and end position within the control's text. This feature can enable you to limit the search range to a specific section of the control's text. If a value of negative one (-1) is assigned to the <paramref name="end" />
 
             
 
-             parameter, the method will search until the end of the text in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             parameter, the method will search until the end of the text in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             for normal searches. For reverse searches, a value of negative one (-1) assigned to the <paramref
-             name="end" />
+             for normal searches. For reverse searches, a value of negative one (-1) assigned to the <paramref name="end" />
 
             
 
-             parameter indicates that text will be searched from the end of text (bottom) to the position defined by <paramref
-             name="start" />
+             parameter indicates that text will be searched from the end of text (bottom) to the position defined by <paramref name="start" />
 
             
 
-             parameter. When the <paramref
-             name="start" />
+             parameter. When the <paramref name="start" />
 
             
 
-             and <paramref
-             name="end" />
+             and <paramref name="end" />
 
             
 
@@ -1712,13 +1644,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
               
 
-               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               methods that accept a string as a parameter cannot find text that is contained on more than one line of text within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
@@ -1729,8 +1659,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the text in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Searches the text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -1742,38 +1671,52 @@
           <para>The location within the control where the search text was found.</para>
         </returns>
         <param name="str">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text to locate in the control. </param
         >
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location within the control's text at which to begin searching. </param
         >
         <param name="end">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location within the control's text at which to end searching. This value must be equal to negative one (-1) or greater than or equal to the <paramref
-           name="start" />
+          The location within the control's text at which to end searching. This value must be equal to negative one (-1) or greater than or equal to the <paramref name="start" />
 
           
 
            parameter. </param
         >
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.RichTextBoxFinds" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.RichTextBoxFinds" />
 
           
 
@@ -1867,8 +1810,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns the character index that is closest to the position specified in the <paramref
-             name="pt" />
+            >This method returns the character index that is closest to the position specified in the <paramref name="pt" />
 
             
 
@@ -1884,7 +1826,11 @@
           <para>The zero-based character index at the specified location.</para>
         </returns>
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1912,46 +1858,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to determine the line number based on the character index specified in the <paramref
-             name="index" />
+            >This method enables you to determine the line number based on the character index specified in the <paramref name="index" />
 
             
 
-             parameter of the method. The first line of text in the control returns the value zero. The <see
-             cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
+             parameter of the method. The first line of text in the control returns the value zero. The <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
 
             
 
-             method returns the physical line number where the indexed character is located within the control. For example, if a portion of the first logical line of text in the control wraps to the next line, the <see
-             cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
+             method returns the physical line number where the indexed character is located within the control. For example, if a portion of the first logical line of text in the control wraps to the next line, the <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
 
             
 
-             method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see
-             cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+             method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
             
 
-             is set to false, no portion of the line wraps to the next, and the method returns 0 for the specified character index. You can use this method to determine which line a specific character index is located within. For example, after calling the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             is set to false, no portion of the line wraps to the next, and the method returns 0 for the specified character index. You can use this method to determine which line a specific character index is located within. For example, after calling the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
-             method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see
-             cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+             method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
             
 
              method to determine which line the word was found.</para
           >
           <para
-            >In certain cases, <see
-             cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
+            >In certain cases, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
 
             
 
-             does not throw an exception when the <paramref
-             name="index" />
+             does not throw an exception when the <paramref name="index" />
 
             
 
@@ -1960,18 +1898,15 @@
           <list type="bullet">
             <item>
               <para
-                >If the <paramref
-                 name="index" />
+                >If the <paramref name="index" />
 
                 
 
-                 parameter is <see
-                 cref="F:System.Int32.MinValue" />
+                 parameter is <see cref="F:System.Int32.MinValue" />
 
                 
 
-                 or -1, <see
-                 cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
+                 or -1, <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
 
                 
 
@@ -1980,23 +1915,19 @@
             </item>
             <item>
               <para
-                >If the <paramref
-                 name="index" />
+                >If the <paramref name="index" />
 
                 
 
-                 parameter is the text length or <see
-                 cref="F:System.Int32.MaxValue" />
+                 parameter is the text length or <see cref="F:System.Int32.MaxValue" />
 
                 
 
-                , <see
-                 cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
+                , <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
 
                 
 
-                 returns the number of the last line of text, which is not necessarily the same as Lines.Length-1, depending on the value of the <see
-                 cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+                 returns the number of the last line of text, which is not necessarily the same as Lines.Length-1, depending on the value of the <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
                 
 
@@ -2005,8 +1936,7 @@
             </item>
           </list>
           <para
-            >In these cases, validate the input before calling <see
-             cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
+            >In these cases, validate the input before calling <see cref="M:System.Windows.Forms.RichTextBox.GetLineFromCharIndex(System.Int32)" />
 
             
 
@@ -2014,8 +1944,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the character index specified in the <paramref
-               name="index" />
+              >If the character index specified in the <paramref name="index" />
 
               
 
@@ -2026,8 +1955,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the line number from the specified character position within the text of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Retrieves the line number from the specified character position within the text of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2039,7 +1967,11 @@
           <para>The zero-based line number in which the character index is located.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2067,8 +1999,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method enables you to determine where in the control a specific character index is located. You can use this method for such tasks as displaying shortcut menu items or help information for a word in the control. For example, if you wanted to display a menu of options to the user when the user right clicks on a word in the control, you can use this method to determine the position of the word to properly display a <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >This method enables you to determine where in the control a specific character index is located. You can use this method for such tasks as displaying shortcut menu items or help information for a word in the control. For example, if you wanted to display a menu of options to the user when the user right clicks on a word in the control, you can use this method to determine the position of the word to properly display a <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
@@ -2084,7 +2015,11 @@
           <para>The location of the specified character.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2138,8 +2073,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2168,8 +2102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2214,8 +2147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets a value that indicates <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2239,8 +2171,7 @@
           <para>You can create an event handler for this event to process a link that has been clicked within the control. Using the information provided to the event handler, you can determine which link was clicked in the document.</para>
           <block subset="none" type="note">
             <para
-              >By default, links are displayed as text and are not clickable. To make them clickable set the <see
-               cref="P:System.Windows.Forms.RichTextBox.DetectUrls" />
+              >By default, links are displayed as text and are not clickable. To make them clickable set the <see cref="P:System.Windows.Forms.RichTextBox.DetectUrls" />
 
               
 
@@ -2248,8 +2179,7 @@
             >
           </block>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2281,28 +2211,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When loading a file with the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+            >When loading a file with the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
-             method, the contents of the file being loaded replace the entire contents of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             method, the contents of the file being loaded replace the entire contents of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control. This will cause the values of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+             control. This will cause the values of the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.RichTextBox.Rtf" />
+             and <see cref="P:System.Windows.Forms.RichTextBox.Rtf" />
 
             
 
-             properties to change. You can use this method to load a previously created text or RTF document into the control for manipulation. If you want to save the file, you can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             properties to change. You can use this method to load a previously created text or RTF document into the control for manipulation. If you want to save the file, you can use the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
@@ -2310,13 +2235,11 @@
           >
           <block subset="none" type="note">
             <para
-              >With this version of the <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              >With this version of the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
-               method, if the file being loaded is not an RTF document, an exception will occur. To load a different type of file such as an ASCII text file, use the other versions of this method that accept a value from the <see
-               cref="T:System.Windows.Forms.RichTextBoxStreamType" />
+               method, if the file being loaded is not an RTF document, an exception will occur. To load a different type of file such as an ASCII text file, use the other versions of this method that accept a value from the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" />
 
               
 
@@ -2325,18 +2248,15 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
-               method will not open a file until a handle is created for the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               method will not open a file until a handle is created for the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
-              . Ensure that the control's handle is created before calling the <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              . Ensure that the control's handle is created before calling the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
@@ -2347,8 +2267,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a rich text format (RTF) or standard ASCII text file into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Loads a rich text format (RTF) or standard ASCII text file into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2356,7 +2275,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2385,46 +2308,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+            >You can use this version of the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
-             method to load the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             method to load the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             with data from an existing stream of data. The data that is loaded into the control replaces the entire contents of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             with data from an existing stream of data. The data that is loaded into the control replaces the entire contents of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control. This will cause the values of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+             control. This will cause the values of the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.RichTextBox.Rtf" />
+             and <see cref="P:System.Windows.Forms.RichTextBox.Rtf" />
 
             
 
-             properties to change. You can use this method to load a file that has been previously opened into a data stream into the control for manipulation. If you want to save contents of the control back into the stream, you can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             properties to change. You can use this method to load a file that has been previously opened into a data stream into the control for manipulation. If you want to save contents of the control back into the stream, you can use the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
-             method that accepts a <see
-             cref="T:System.IO.Stream" />
+             method that accepts a <see cref="T:System.IO.Stream" />
 
             
 
              object as a parameter.</para
           >
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
@@ -2432,18 +2347,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
-               method will not open a file until a handle is created for the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               method will not open a file until a handle is created for the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
-              . Ensure that the control's handle is created before calling the <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              . Ensure that the control's handle is created before calling the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
@@ -2454,8 +2366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads the contents of an existing data stream into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Loads the contents of an existing data stream into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2463,24 +2374,30 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A stream of data to load into the <see
-           cref="T:System.Windows.Forms.RichTextBox" />
+          A stream of data to load into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
           
 
            control. </param
         >
         <param name="fileType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.RichTextBoxStreamType" />
+          One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" />
 
           
 
@@ -2509,36 +2426,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When loading a file with the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+            >When loading a file with the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
-             method, the contents of the file being loaded replace the entire contents of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             method, the contents of the file being loaded replace the entire contents of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control. This will cause the values of the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Text" />
+             control. This will cause the values of the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.RichTextBox.Rtf" />
+             and <see cref="P:System.Windows.Forms.RichTextBox.Rtf" />
 
             
 
-             properties to change. You can use this method to load a previously created text or rich text format (RTF) document into the control for manipulation. If you want to save the file, you can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+             properties to change. You can use this method to load a previously created text or rich text format (RTF) document into the control for manipulation. If you want to save the file, you can use the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >You can use this version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+            >You can use this version of the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
@@ -2546,18 +2457,15 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              >The <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
-               method will not open a file until a handle is created for the <see
-               cref="T:System.Windows.Forms.RichTextBox" />
+               method will not open a file until a handle is created for the <see cref="T:System.Windows.Forms.RichTextBox" />
 
               
 
-              . Ensure that the control's handle is created before calling the <see
-               cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+              . Ensure that the control's handle is created before calling the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
               
 
@@ -2568,8 +2476,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads a specific type of file into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Loads a specific type of file into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2577,19 +2484,26 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name and location of the file to load into the control. </param
         >
         <param name="fileType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.RichTextBoxStreamType" />
+          One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" />
 
           
 
@@ -2617,8 +2531,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this property is set to 0, the maximum length of the text that can be entered in the control is 64 KB of characters. This property is typically used when the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >When this property is set to 0, the maximum length of the text that can be entered in the control is 64 KB of characters. This property is typically used when the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2626,13 +2539,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In code, you can set the value of the <see
-               cref="P:System.Windows.Forms.TextBoxBase.Text" />
+              >In code, you can set the value of the <see cref="P:System.Windows.Forms.TextBoxBase.Text" />
 
               
 
-               property to a value that has a length greater than the value specified by the <see
-               cref="P:System.Windows.Forms.TextBoxBase.MaxLength" />
+               property to a value that has a length greater than the value specified by the <see cref="P:System.Windows.Forms.TextBoxBase.MaxLength" />
 
               
 
@@ -2667,8 +2578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether this is a multiline <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets a value indicating whether this is a multiline <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -2698,8 +2608,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.BackColorChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.BackColorChanged" />
 
             
 
@@ -2707,12 +2616,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2740,8 +2652,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2750,8 +2661,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnContentsResized(System.Windows.Forms.ContentsResizedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnContentsResized(System.Windows.Forms.ContentsResizedEventArgs)" />
 
             
 
@@ -2761,8 +2671,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
 
             
 
@@ -2770,12 +2679,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
+          A <see cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
 
           
 
@@ -2804,8 +2716,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.ContextMenuChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.ContextMenuChanged" />
 
             
 
@@ -2813,12 +2724,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2847,8 +2761,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleCreated" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" />
 
             
 
@@ -2856,12 +2769,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2890,8 +2806,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.HandleDestroyed" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.HandleDestroyed" />
 
             
 
@@ -2899,12 +2814,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2929,8 +2847,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2939,8 +2856,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnHScroll(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnHScroll(System.EventArgs)" />
 
             
 
@@ -2950,8 +2866,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.HScroll" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.HScroll" />
 
             
 
@@ -2959,12 +2874,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2989,8 +2907,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -2999,8 +2916,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnImeChange(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnImeChange(System.EventArgs)" />
 
             
 
@@ -3010,8 +2926,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.ImeChange" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.ImeChange" />
 
             
 
@@ -3019,12 +2934,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3052,8 +2970,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -3062,8 +2979,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnLinkClicked(System.Windows.Forms.LinkClickedEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnLinkClicked(System.Windows.Forms.LinkClickedEventArgs)" />
 
             
 
@@ -3073,8 +2989,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.LinkClicked" />
 
             
 
@@ -3082,12 +2997,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LinkClickedEventArgs" />
+          A <see cref="T:System.Windows.Forms.LinkClickedEventArgs" />
 
           
 
@@ -3112,8 +3030,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -3122,8 +3039,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnProtected(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnProtected(System.EventArgs)" />
 
             
 
@@ -3133,8 +3049,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.Protected" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.Protected" />
 
             
 
@@ -3142,12 +3057,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3175,12 +3093,15 @@
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3208,8 +3129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -3218,8 +3138,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnSelectionChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnSelectionChanged(System.EventArgs)" />
 
             
 
@@ -3229,8 +3148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.SelectionChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.SelectionChanged" />
 
             
 
@@ -3238,12 +3156,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3307,8 +3228,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -3317,8 +3237,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.OnVScroll(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.OnVScroll(System.EventArgs)" />
 
             
 
@@ -3328,8 +3247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.RichTextBox.VScroll" />
+            >Raises the <see cref="E:System.Windows.Forms.RichTextBox.VScroll" />
 
             
 
@@ -3337,12 +3255,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -3411,8 +3332,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can create an event handler for this event in your applications to determine when the user has attempted to modify text that has been marked as protected in the control. The event handler can be used to notify the user that the text the user is attempting to modify is protected or to display a dialog box that enables the user to make appropriate changes to the text. For example, if the protected area is a date, you can display a dialog box that enables the user to choose a date which can then be applied to the text of the control.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -3474,13 +3394,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can then use the <see
-             cref="M:System.Windows.Forms.RichTextBox.Redo" />
+            >You can then use the <see cref="M:System.Windows.Forms.RichTextBox.Redo" />
 
             
 
-             method to reapply the last undo operation to the control. The <see
-             cref="P:System.Windows.Forms.RichTextBox.CanRedo" />
+             method to reapply the last undo operation to the control. The <see cref="P:System.Windows.Forms.RichTextBox.CanRedo" />
 
             
 
@@ -3516,18 +3434,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property returns an empty string (""), there is no operation available to reapply to the control. You can use this method to determine the last action undone in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If this property returns an empty string (""), there is no operation available to reapply to the control. You can use this method to determine the last action undone in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control that can then be reapplied to the control when a call to the <see
-             cref="M:System.Windows.Forms.RichTextBox.Redo" />
+             control that can then be reapplied to the control when a call to the <see cref="M:System.Windows.Forms.RichTextBox.Redo" />
 
             
 
-             method is made. You can determine whether there are any operations to be reapplied to the control by using the <see
-             cref="P:System.Windows.Forms.RichTextBox.CanRedo" />
+             method is made. You can determine whether there are any operations to be reapplied to the control by using the <see cref="P:System.Windows.Forms.RichTextBox.CanRedo" />
 
             
 
@@ -3537,8 +3452,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the action that can be reapplied to the control when the <see
-             cref="M:System.Windows.Forms.RichTextBox.Redo" />
+            >Gets the name of the action that can be reapplied to the control when the <see cref="M:System.Windows.Forms.RichTextBox.Redo" />
 
             
 
@@ -3602,8 +3516,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a value greater than zero is entered into the control, a nonvisible margin is placed in the control at the specified number of pixels from the left side of the control. Any text that is entered that extends beyond this margin is placed on the next line of text in the control. This property affects all text currently entered into the control as well as any additional text entered into the control after the property is set. You can use this property to specify a maximum line width for all text entered into a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >When a value greater than zero is entered into the control, a nonvisible margin is placed in the control at the specified number of pixels from the left side of the control. Any text that is entered that extends beyond this margin is placed on the next line of text in the control. This property affects all text currently entered into the control as well as any additional text entered into the control after the property is set. You can use this property to specify a maximum line width for all text entered into a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3613,8 +3526,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the size of a single line of text within the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the size of a single line of text within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3650,8 +3562,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this property to place RTF formatted text into the control for display or to extract the text of the control with the specified RTF formatting defined in the text of the control. This property is typically used when you are assigning RTF text from another RTF source, such as Microsoft Word or Windows WordPad, to the control.</para>
           <para
-            >If you change the <see
-             cref="P:System.Windows.Forms.Control.RightToLeft" />
+            >If you change the <see cref="P:System.Windows.Forms.Control.RightToLeft" />
 
             
 
@@ -3662,8 +3573,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the text of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3689,23 +3599,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
-             method enables you to save the entire contents of the control to an RTF file that can be used by other programs such as Microsoft Word and Windows WordPad. If the file name that is passed to the <paramref
-             name="path" />
+             method enables you to save the entire contents of the control to an RTF file that can be used by other programs such as Microsoft Word and Windows WordPad. If the file name that is passed to the <paramref name="path" />
 
             
 
-             parameter already exists at the specified directory, the file will be overwritten without notice. You can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+             parameter already exists at the specified directory, the file will be overwritten without notice. You can use the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
-             method to load the contents of a file into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             method to load the contents of a file into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3713,8 +3619,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To save the contents of the control to a different type of file format such as ASCII text, use the other versions of this method that accept a value from the <see
-               cref="T:System.Windows.Forms.RichTextBoxStreamType" />
+              >To save the contents of the control to a different type of file format such as ASCII text, use the other versions of this method that accept a value from the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" />
 
               
 
@@ -3725,8 +3630,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the contents of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Saves the contents of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3734,7 +3638,11 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3763,31 +3671,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
-             method enables you to save the entire contents of the control to the data stream that is already opened. The data stream can then save the information to a file. You can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+             method enables you to save the entire contents of the control to the data stream that is already opened. The data stream can then save the information to a file. You can use the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
-             method to load the contents of a file into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             method to load the contents of a file into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
             .</para
           >
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
-             method also enables you to specify a data format of the information that will be sent to the <see
-             cref="T:System.IO.Stream" />
+             method also enables you to specify a data format of the information that will be sent to the <see cref="T:System.IO.Stream" />
 
             
 
@@ -3797,8 +3700,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the contents of a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Saves the contents of a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3806,19 +3708,26 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data stream that contains the file to save to. </param
         >
         <param name="fileType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.RichTextBoxStreamType" />
+          One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" />
 
           
 
@@ -3847,36 +3756,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+            >The <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
-             method enables you to save the entire contents of the control to an RTF file that can be used by other programs such as Microsoft Word and Windows WordPad. If the file name that is passed to the <paramref
-             name="path" />
+             method enables you to save the entire contents of the control to an RTF file that can be used by other programs such as Microsoft Word and Windows WordPad. If the file name that is passed to the <paramref name="path" />
 
             
 
-             parameter already exists at the specified directory, the file will be overwritten without notice. You can use the <see
-             cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
+             parameter already exists at the specified directory, the file will be overwritten without notice. You can use the <see cref="M:System.Windows.Forms.RichTextBox.LoadFile(System.String)" />
 
             
 
-             method to load the contents of a file into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             method to load the contents of a file into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
             .</para
           >
           <para
-            >This version of the <see
-             cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
+            >This version of the <see cref="M:System.Windows.Forms.RichTextBox.SaveFile(System.String)" />
 
             
 
-             method enables you to specify a file type to save the contents of the control to. You can use this feature to ensure that the file is saved in the proper format based on the contents of the control. For example, if your document has no differences in font style or coloring, you can save the file as an ASCII text file by setting the <paramref
-             name="fileType" />
+             method enables you to specify a file type to save the contents of the control to. You can use this feature to ensure that the file is saved in the proper format based on the contents of the control. For example, if your document has no differences in font style or coloring, you can save the file as an ASCII text file by setting the <paramref name="fileType" />
 
             
 
@@ -3886,8 +3789,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the contents of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Saves the contents of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3895,19 +3797,26 @@
           >
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name and location of the file to save. </param
         >
         <param name="fileType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.RichTextBoxStreamType" />
+          One of the <see cref="T:System.Windows.Forms.RichTextBoxStreamType" />
 
           
 
@@ -3941,8 +3850,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to provide horizontal and vertical scroll bars to the user of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >This property enables you to provide horizontal and vertical scroll bars to the user of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -3950,13 +3858,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Horizontal scroll bars will not be shown if the <see
-               cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+              >Horizontal scroll bars will not be shown if the <see cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
 
               
 
-               is true, regardless of the value of the <see
-               cref="P:System.Windows.Forms.RichTextBox.ScrollBars" />
+               is true, regardless of the value of the <see cref="P:System.Windows.Forms.RichTextBox.ScrollBars" />
 
               
 
@@ -3967,8 +3873,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of scroll bars to display in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the type of scroll bars to display in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4003,8 +3908,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to obtain the selected text in the control, including the RTF formatting codes. You can use this property to copy text from your control, complete with formatting, and paste the text in other applications that accept RTF formatted text, such as Microsoft Word and Windows WordPad. To get the selected text, without RTF formatting codes, use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.SelectedText" />
+            >This property enables you to obtain the selected text in the control, including the RTF formatting codes. You can use this property to copy text from your control, complete with formatting, and paste the text in other applications that accept RTF formatted text, such as Microsoft Word and Windows WordPad. To get the selected text, without RTF formatting codes, use the <see cref="P:System.Windows.Forms.TextBoxBase.SelectedText" />
 
             
 
@@ -4045,8 +3949,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the selected text within the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the selected text within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4084,26 +3987,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no paragraph is selected in the control, setting this property applies the alignment setting to the paragraph in which the insertion point appears as well as to paragraphs created after the paragraph that has the alignment property setting. For example, if there are two paragraphs in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If no paragraph is selected in the control, setting this property applies the alignment setting to the paragraph in which the insertion point appears as well as to paragraphs created after the paragraph that has the alignment property setting. For example, if there are two paragraphs in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control and the insertion point is located within the second paragraph. If you set the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionAlignment" />
+             control and the insertion point is located within the second paragraph. If you set the <see cref="P:System.Windows.Forms.RichTextBox.SelectionAlignment" />
 
             
 
              property to HorizontalAlignment.Center, the paragraph at the insertion point will be centered within the control. If a third paragraph is created after the second paragraph, it also is aligned to the center of the control.</para
           >
           <para
-            >If a selection is made within the control when the property is set, all paragraphs selected are aligned based on this property setting. You can use this property to align the paragraphs in a document being created in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If a selection is made within the control when the property is set, all paragraphs selected are aligned based on this property setting. You can use this property to align the paragraphs in a document being created in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            . For example, if you want all paragraphs in a document to be centered, you can select all the paragraphs in the control and set the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionAlignment" />
+            . For example, if you want all paragraphs in a document to be centered, you can select all the paragraphs in the control and set the <see cref="P:System.Windows.Forms.RichTextBox.SelectionAlignment" />
 
             
 
@@ -4154,23 +4053,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionBackColor" />
+            >Use <see cref="P:System.Windows.Forms.RichTextBox.SelectionBackColor" />
 
             
 
-             to get or set the color of selected text in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             to get or set the color of selected text in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            . If no text is currently selected, the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionBackColor" />
+            . If no text is currently selected, the <see cref="P:System.Windows.Forms.RichTextBox.SelectionBackColor" />
 
             
 
-             property applies to the current position of the caret. Characters that are entered from that position have the specified <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionBackColor" />
+             property applies to the current position of the caret. Characters that are entered from that position have the specified <see cref="P:System.Windows.Forms.RichTextBox.SelectionBackColor" />
 
             
 
@@ -4180,8 +4075,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the color of text when the text is selected in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the color of text when the text is selected in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4213,16 +4107,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If no text is selected, the bullet style is applied to the current insertion point and to all paragraphs that the user enters after the insertion point. The bullet style is applied to the text of the control until the insertion point is moved or when the user presses the Enter key on an empty bullet item.</para>
           <para
-            >If text is selected within the control when this property is set, all paragraphs within the selected text are converted into bulleted items in the bulleted list. You can use this property to create bulleted lists within the documents you create in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If text is selected within the control when this property is set, all paragraphs within the selected text are converted into bulleted items in the bulleted list. You can use this property to create bulleted lists within the documents you create in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
              control.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.RichTextBox.BulletIndent" />
+            >The <see cref="P:System.Windows.Forms.RichTextBox.BulletIndent" />
 
             
 
@@ -4250,8 +4142,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can create an event handler for this event to determine when the user has changed text selection within the control. An event handler for this event can be used to keep text selected until the user has completed a task within the application.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -4329,16 +4220,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the current text selection has more than one color specified, this property returns Color.Empty. If no text is currently selected, the text color specified in this property is applied to the current insertion point and to all text that is typed into the control after the insertion point. The text color setting applies until the property is changed to a different color or until the insertion point is moved to a different section within the control.</para>
           <para
-            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to change the color of text in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to change the color of text in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
             .</para
           >
           <para
-            >To make text bold in the control, use the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionFont" />
+            >To make text bold in the control, use the <see cref="P:System.Windows.Forms.RichTextBox.SelectionFont" />
 
             
 
@@ -4378,16 +4267,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the current text selection has more than one font specified, this property is null. If no text is currently selected, the font specified in this property is applied to the current insertion point and to all text that is typed into the control after the insertion point. The font setting applies until the property is changed to a different font or until the insertion point is moved to a different section within the control.</para>
           <para
-            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to change the font style of text in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to change the font style of text in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
             . You can make the text in the control bold, italic, and underlined. You can also change the size of the text and the font applied to the text.</para
           >
           <para
-            >To change the color of the text in the control, use the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionColor" />
+            >To change the color of the text in the control, use the <see cref="P:System.Windows.Forms.RichTextBox.SelectionColor" />
 
             
 
@@ -4428,8 +4315,7 @@
           <para>If no text is currently selected, the hanging indent is applied to the paragraph in which the insertion point appears and to all text that is typed into the control after the insertion point. The hanging indent setting applies until the property is changed to a different value or until the insertion point is moved to a different paragraph within the control.</para>
           <para>If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to apply a hanging indent to your paragraphs.</para>
           <para
-            >To set the indention of the first line of a paragraph selection, use the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionIndent" />
+            >To set the indention of the first line of a paragraph selection, use the <see cref="P:System.Windows.Forms.RichTextBox.SelectionIndent" />
 
             
 
@@ -4469,21 +4355,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If no text is currently selected, the indentation setting is applied to the paragraph in which the insertion point appears and to all text that is typed into the control after the insertion point. The indentation setting applies until the property is changed to a different value or until the insertion point is moved to a different paragraph within the control.</para>
           <para
-            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to indent paragraphs contained in document of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to indent paragraphs contained in document of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            . You can use this property in conjunction with the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionRightIndent" />
+            . You can use this property in conjunction with the <see cref="P:System.Windows.Forms.RichTextBox.SelectionRightIndent" />
 
             
 
              to create paragraphs displayed in paragraphs.</para
           >
           <para
-            >To create a hanging indent for paragraphs in the control, use the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionHangingIndent" />
+            >To create a hanging indent for paragraphs in the control, use the <see cref="P:System.Windows.Forms.RichTextBox.SelectionHangingIndent" />
 
             
 
@@ -4554,8 +4437,7 @@
           <para>If no text is currently selected, the protection setting is applied to the paragraph in which the insertion point appears and to all text that is typed into the control after the insertion point. The protection setting applies until the property is changed to a different value or until the insertion point is moved to a different paragraph within the control.</para>
           <para>If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to prevent the user from modifying sections of text within the control.</para>
           <para
-            >If this property is set to true, the <see
-             cref="E:System.Windows.Forms.RichTextBox.Protected" />
+            >If this property is set to true, the <see cref="E:System.Windows.Forms.RichTextBox.Protected" />
 
             
 
@@ -4598,21 +4480,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If no text is currently selected, the indentation setting is applied to the paragraph in which the insertion point appears and to all text that is typed into the control after the insertion point. The indentation setting applies until the property is changed to a different value or until the insertion point is moved to a different paragraph within the control.</para>
           <para
-            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to indent paragraphs contained in document of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >If text is selected within the control, the selected text and any text entered after the text selection will have the value of this property applied to it. You can use this property to indent paragraphs contained in document of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            . You can use this property in conjunction with the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionIndent" />
+            . You can use this property in conjunction with the <see cref="P:System.Windows.Forms.RichTextBox.SelectionIndent" />
 
             
 
              to create paragraphs displayed in paragraphs.</para
           >
           <para
-            >To create a hanging indent for paragraphs in the control, use the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionHangingIndent" />
+            >To create a hanging indent for paragraphs in the control, use the <see cref="P:System.Windows.Forms.RichTextBox.SelectionHangingIndent" />
 
             
 
@@ -4622,8 +4501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The distance (in pixels) between the right edge of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >The distance (in pixels) between the right edge of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4655,13 +4533,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to obtain an array that contains the spacing for each tab in the current text selection within the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >This property enables you to obtain an array that contains the spacing for each tab in the current text selection within the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control. You can then use this property to adjust the size of each tab within the text selection. For example, if you want to adjust the tab space within the document, you can select the entire document and obtain the list of tab spaces using the <see
-             cref="P:System.Windows.Forms.RichTextBox.SelectionTabs" />
+             control. You can then use this property to adjust the size of each tab within the text selection. For example, if you want to adjust the tab space within the document, you can select the entire document and obtain the list of tab spaces using the <see cref="P:System.Windows.Forms.RichTextBox.SelectionTabs" />
 
             
 
@@ -4671,8 +4547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the absolute tab stop positions in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the absolute tab stop positions in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4707,8 +4582,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine the type of data that is currently selected in the control in order to handle the selection properly when performing tasks within the control on the current selection. The property can represent any combination of values from the <see
-             cref="T:System.Windows.Forms.RichTextBoxSelectionTypes" />
+            >You can use this property to determine the type of data that is currently selected in the control in order to handle the selection properly when performing tasks within the control on the current selection. The property can represent any combination of values from the <see cref="T:System.Windows.Forms.RichTextBoxSelectionTypes" />
 
             
 
@@ -4741,13 +4615,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to enable the user to easily select lines of text in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >You can use this property to enable the user to easily select lines of text in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            . The selection margin is added to the left side of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            . The selection margin is added to the left side of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4755,23 +4627,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Windows.Forms.RichTextBox.ShowSelectionMargin" />
+              >If the <see cref="P:System.Windows.Forms.RichTextBox.ShowSelectionMargin" />
 
               
 
-               property is set to true, setting the <see
-               cref="P:System.Windows.Forms.RichTextBox.ScrollBars" />
+               property is set to true, setting the <see cref="P:System.Windows.Forms.RichTextBox.ScrollBars" />
 
               
 
-               property to RichTextBoxScrollBars.Horizontal, RichTextBoxScrollBars.Vertical, or RichTextBoxScrollBars.Both will not cause scroll bars to be displayed. In order to display scroll bars while the <see
-               cref="P:System.Windows.Forms.RichTextBox.ShowSelectionMargin" />
+               property to RichTextBoxScrollBars.Horizontal, RichTextBoxScrollBars.Vertical, or RichTextBoxScrollBars.Both will not cause scroll bars to be displayed. In order to display scroll bars while the <see cref="P:System.Windows.Forms.RichTextBox.ShowSelectionMargin" />
 
               
 
-               property is set to true, set the <see
-               cref="P:System.Windows.Forms.RichTextBox.ScrollBars" />
+               property is set to true, set the <see cref="P:System.Windows.Forms.RichTextBox.ScrollBars" />
 
               
 
@@ -4782,8 +4650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a selection margin is displayed in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets a value indicating whether a selection margin is displayed in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4815,38 +4682,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To display multiple lines of text in a <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >To display multiple lines of text in a <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            , set the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+            , set the <see cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
 
             
 
-             property to true. To read or set the text of a multiline text box, use the <see
-             cref="P:System.Windows.Forms.TextBoxBase.Lines" />
+             property to true. To read or set the text of a multiline text box, use the <see cref="P:System.Windows.Forms.TextBoxBase.Lines" />
 
             
 
-             property. The <see
-             cref="P:System.Windows.Forms.RichTextBox.Text" />
+             property. The <see cref="P:System.Windows.Forms.RichTextBox.Text" />
 
             
 
-             property does not return any information about the formatting applied to the contents of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             property does not return any information about the formatting applied to the contents of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-            . To get the rich text formatting (RTF) codes, use the <see
-             cref="P:System.Windows.Forms.RichTextBox.Rtf" />
+            . To get the rich text formatting (RTF) codes, use the <see cref="P:System.Windows.Forms.RichTextBox.Rtf" />
 
             
 
-             property. The amount of text that can be entered in the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             property. The amount of text that can be entered in the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -4907,8 +4767,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the action that can be undone in the control when the <see
-             cref="M:System.Windows.Forms.TextBoxBase.Undo" />
+            >Gets the name of the action that can be undone in the control when the <see cref="M:System.Windows.Forms.TextBoxBase.Undo" />
 
             
 
@@ -4931,8 +4790,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -4992,13 +4850,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property can be between 1/64 (0.015625) and 64.0, not inclusive. A value of 1.0 indicates that no zoom is applied to the control. The zoom feature performs optimally when the document contains TrueType fonts. When a font that is not TrueType is used within the document of the control, the <see
-             cref="P:System.Windows.Forms.RichTextBox.ZoomFactor" />
+            >The value of this property can be between 1/64 (0.015625) and 64.0, not inclusive. A value of 1.0 indicates that no zoom is applied to the control. The zoom feature performs optimally when the document contains TrueType fonts. When a font that is not TrueType is used within the document of the control, the <see cref="P:System.Windows.Forms.RichTextBox.ZoomFactor" />
 
             
 
-             property will use the nearest whole number value. You can use this property to enable the user of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             property will use the nearest whole number value. You can use this property to enable the user of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -5008,8 +4864,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the current zoom level of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Gets or sets the current zoom level of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 

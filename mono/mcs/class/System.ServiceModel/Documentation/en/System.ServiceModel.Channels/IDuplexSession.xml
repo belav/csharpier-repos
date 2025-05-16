@@ -24,36 +24,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IDuplexSession" />
+        >The <see cref="T:System.ServiceModel.Channels.IDuplexSession" />
 
         
 
-         interface is the union of the inbound session, defined by the <see
-         cref="T:System.ServiceModel.Channels.IInputSession" />
+         interface is the union of the inbound session, defined by the <see cref="T:System.ServiceModel.Channels.IInputSession" />
 
         
 
-         interface, and the outbound session, defined by the <see
-         cref="T:System.ServiceModel.Channels.IOutputSession" />
+         interface, and the outbound session, defined by the <see cref="T:System.ServiceModel.Channels.IOutputSession" />
 
         
 
-         interface. Either the inbound session or outbound session can be terminated independently of the other. The outbound session can be terminated synchronously by calling <see
-         cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+         interface. Either the inbound session or outbound session can be terminated independently of the other. The outbound session can be terminated synchronously by calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
 
         
 
-         or asynchronously by calling <see
-         cref="M:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />
+         or asynchronously by calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />
 
         
 
         . </para
       >
       <para
-        >The inbound session can be remotely terminated. The <see
-         cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+        >The inbound session can be remotely terminated. The <see cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
         
 
@@ -98,8 +92,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -107,19 +100,26 @@
           >
         </returns>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,8 +160,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -169,31 +168,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.TimeSpan" />
+          The <see cref="T:System.TimeSpan" />
 
           
 
            that specifies the interval of time within which the operation must complete.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate. </param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -219,18 +228,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+            >Calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
 
             
 
-             signals to the other side of the session that it should return null from any outstanding or subsequent calls made to <see
-             cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+             signals to the other side of the session that it should return null from any outstanding or subsequent calls made to <see cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
             
 
-            . <see
-             cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+            . <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
 
             
 
@@ -264,18 +270,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession(System.TimeSpan)" />
+            >Calling <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession(System.TimeSpan)" />
 
             
 
-             signals to the other side of the session that it should return null from any outstanding or subsequent calls made to <see
-             cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+             signals to the other side of the session that it should return null from any outstanding or subsequent calls made to <see cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
             
 
-            . <see
-             cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+            . <see cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
 
             
 
@@ -288,12 +291,15 @@
           <para>Terminates the outbound session that indicates that no more messages will be sent from this endpoint on the channel associated with the session within a specified interval of time.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.TimeSpan" />
+          The <see cref="T:System.TimeSpan" />
 
           
 
@@ -330,17 +336,19 @@
           <para>Completes an asynchronous operation to terminate the outbound session that indicates that no more messages will be sent from this endpoint on the channel associated with the session. </para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to one of the <see
-           cref="Overload:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />
+           returned by a call to one of the <see cref="Overload:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />
 
           
 

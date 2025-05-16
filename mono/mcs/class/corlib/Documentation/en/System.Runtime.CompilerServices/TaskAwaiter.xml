@@ -102,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the action to perform when the <see
-             cref="T:System.Runtime.CompilerServices.TaskAwaiter" />
+            >Sets the action to perform when the <see cref="T:System.Runtime.CompilerServices.TaskAwaiter" />
 
             
 
@@ -111,7 +110,11 @@
           >
         </summary>
         <param name="continuation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -142,7 +145,11 @@
           <para>Schedules the continuation action for the asynchronous task that is associated with this awaiter.</para>
         </summary>
         <param name="continuation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -37,36 +37,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.OperatingSystem" />
+        >The <see cref="T:System.OperatingSystem" />
 
         
 
-         class contains information about an operating system. For example, the <see
-         cref="P:System.Environment.OSVersion" />
+         class contains information about an operating system. For example, the <see cref="P:System.Environment.OSVersion" />
 
         
 
-         property returns information about the currently executing operating system in an <see
-         cref="T:System.OperatingSystem" />
+         property returns information about the currently executing operating system in an <see cref="T:System.OperatingSystem" />
 
         
 
          object. </para
       >
       <para
-        >By design, the <see
-         cref="T:System.OperatingSystem" />
+        >By design, the <see cref="T:System.OperatingSystem" />
 
         
 
-         class is not a general purpose means of describing an operating system, and you cannot derive a more inclusive type from the <see
-         cref="T:System.OperatingSystem" />
+         class is not a general purpose means of describing an operating system, and you cannot derive a more inclusive type from the <see cref="T:System.OperatingSystem" />
 
         
 
-         class. If you need a type to contain other information about an operating system, create your own type, then include a field of type <see
-         cref="T:System.OperatingSystem" />
+         class. If you need a type to contain other information about an operating system, create your own type, then include a field of type <see cref="T:System.OperatingSystem" />
 
         
 
@@ -102,8 +96,7 @@
       <Docs>
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 
 class SystemDemo
@@ -121,8 +114,7 @@ class SystemDemo
 
             
 prints
-<para
-            >
+<para>
 Microsoft Windows NT 5.1.2600.0
 </para>
           </example>
@@ -130,8 +122,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.OperatingSystem" />
+            >Initializes a new instance of the <see cref="T:System.OperatingSystem" />
 
             
 
@@ -139,24 +130,30 @@ Microsoft Windows NT 5.1.2600.0
           >
         </summary>
         <param name="platform">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.PlatformID" />
+          One of the <see cref="T:System.PlatformID" />
 
           
 
            values that indicates the operating system platform. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Version" />
+          A <see cref="T:System.Version" />
 
           
 
@@ -185,8 +182,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.OperatingSystem" />
+            >Creates an <see cref="T:System.OperatingSystem" />
 
             
 
@@ -196,8 +192,7 @@ Microsoft Windows NT 5.1.2600.0
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.OperatingSystem" />
+            >An <see cref="T:System.OperatingSystem" />
 
             
 
@@ -231,21 +226,18 @@ Microsoft Windows NT 5.1.2600.0
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
-             parameter is reserved for future use; it is currently not implemented in the <see
-             cref="M:System.OperatingSystem.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+             parameter is reserved for future use; it is currently not implemented in the <see cref="M:System.OperatingSystem.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
              method.</para
           >
           <para
-            >For more information, see the <see
-             cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+            >For more information, see the <see cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
 
             
 
@@ -255,8 +247,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -264,14 +255,22 @@ Microsoft Windows NT 5.1.2600.0
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to populate with serialization information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,8 +299,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.PlatformID" />
+            >Gets a <see cref="T:System.PlatformID" />
 
             
 
@@ -332,8 +330,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the service pack version represented by this <see
-             cref="T:System.OperatingSystem" />
+            >Gets the service pack version represented by this <see cref="T:System.OperatingSystem" />
 
             
 
@@ -363,8 +360,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the value of this <see
-             cref="T:System.OperatingSystem" />
+            >Converts the value of this <see cref="T:System.OperatingSystem" />
 
             
 
@@ -374,18 +370,15 @@ Microsoft Windows NT 5.1.2600.0
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation of the values returned by the <see
-             cref="P:System.OperatingSystem.Platform" />
+            >The string representation of the values returned by the <see cref="P:System.OperatingSystem.Platform" />
 
             
 
-            , <see
-             cref="P:System.OperatingSystem.Version" />
+            , <see cref="P:System.OperatingSystem.Version" />
 
             
 
-            , and <see
-             cref="P:System.OperatingSystem.ServicePack" />
+            , and <see cref="P:System.OperatingSystem.ServicePack" />
 
             
 
@@ -411,8 +404,7 @@ Microsoft Windows NT 5.1.2600.0
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See <see
-             cref="http://msdn.microsoft.com/library/windows/desktop/ms724832.aspx"
+            >See <see cref="http://msdn.microsoft.com/library/windows/desktop/ms724832.aspx"
               >Operating System Version</see
             >
 
@@ -424,8 +416,7 @@ Microsoft Windows NT 5.1.2600.0
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Version" />
+            >Gets a <see cref="T:System.Version" />
 
             
 
@@ -451,13 +442,11 @@ Microsoft Windows NT 5.1.2600.0
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the value returned by <see
-             cref="P:System.OperatingSystem.VersionString" />
+            >By default, the value returned by <see cref="P:System.OperatingSystem.VersionString" />
 
             
 
-             is the same as the value returned by the <see
-             cref="M:System.OperatingSystem.ToString" />
+             is the same as the value returned by the <see cref="M:System.OperatingSystem.ToString" />
 
             
 

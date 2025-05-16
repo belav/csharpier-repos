@@ -34,23 +34,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.DuplexClientBase`1" />
+        >Use the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
         
 
-         class to create a channel to a service that specifies a callback object. The <see
-         cref="T:System.ServiceModel.DuplexClientBase`1" />
+         class to create a channel to a service that specifies a callback object. The <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
         
 
-         object wraps a <see
-         cref="T:System.ServiceModel.DuplexChannelFactory`1" />
+         object wraps a <see cref="T:System.ServiceModel.DuplexChannelFactory`1" />
 
         
 
-         object, which provides the connectivity for the indigo2 object. You can use either type to connect to a duplex service. For more information about duplex services, see <format
-         type="text/html">
+         object, which provides the connectivity for the indigo2 object. You can use either type to connect to a duplex service. For more information about duplex services, see <format type="text/html">
           <a href="396b875a-d203-4ebe-a3a1-6a330d962e95">Duplex Services</a>
         </format>
 
@@ -65,25 +61,21 @@
         </item>
         <item>
           <para
-            >Avoid destructors: they cause the compiler to auto-generate <see
-             cref="T:System.IDisposable" />
+            >Avoid destructors: they cause the compiler to auto-generate <see cref="T:System.IDisposable" />
           </para>
         </item>
         <item>
           <para
-            >Avoid non-reference members: they can cause the compiler to auto-generate <see
-             cref="T:System.IDisposable" />
+            >Avoid non-reference members: they can cause the compiler to auto-generate <see cref="T:System.IDisposable" />
           </para>
         </item>
         <item>
           <para
-            >Avoid finalizers; but if you include one, you should suppress the build warning and call <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Avoid finalizers; but if you include one, you should suppress the build warning and call <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
-             and the finalizer itself from (On)(Begin)Close (and/or OnAbort) in order to emulate what would have been the auto-generated <see
-             cref="T:System.IDisposable" />
+             and the finalizer itself from (On)(Begin)Close (and/or OnAbort) in order to emulate what would have been the auto-generated <see cref="T:System.IDisposable" />
 
             
 
@@ -116,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo2 creates a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >indigo2 creates a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object using the <paramref
-             name="callbackInstance" />
+             object using the <paramref name="callbackInstance" />
 
             
 
@@ -132,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -163,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="callbackInstance" />
+            >The <paramref name="callbackInstance" />
 
             
 
@@ -174,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -208,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -241,13 +227,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo2 creates a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >indigo2 creates a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object using the <paramref
-             name="callbackInstance" />
+             object using the <paramref name="callbackInstance" />
 
             
 
@@ -257,8 +241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -291,8 +274,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -324,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="callbackInstance" />
+            >The <paramref name="callbackInstance" />
 
             
 
@@ -335,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -370,13 +350,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo2 creates a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >indigo2 creates a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object using the <paramref
-             name="callbackInstance" />
+             object using the <paramref name="callbackInstance" />
 
             
 
@@ -386,8 +364,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -421,13 +398,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo2 creates a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >indigo2 creates a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object using the <paramref
-             name="callbackInstance" />
+             object using the <paramref name="callbackInstance" />
 
             
 
@@ -437,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -472,13 +446,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >indigo2 creates a new <see
-             cref="T:System.ServiceModel.InstanceContext" />
+            >indigo2 creates a new <see cref="T:System.ServiceModel.InstanceContext" />
 
             
 
-             object using the <paramref
-             name="callbackInstance" />
+             object using the <paramref name="callbackInstance" />
 
             
 
@@ -488,8 +460,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -523,8 +494,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="callbackInstance" />
+            >The <paramref name="callbackInstance" />
 
             
 
@@ -534,8 +504,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -569,8 +538,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="callbackInstance" />
+            >The <paramref name="callbackInstance" />
 
             
 
@@ -580,8 +548,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 
@@ -615,8 +582,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="callbackInstance" />
+            >The <paramref name="callbackInstance" />
 
             
 
@@ -626,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DuplexClientBase`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DuplexClientBase`1" />
 
             
 

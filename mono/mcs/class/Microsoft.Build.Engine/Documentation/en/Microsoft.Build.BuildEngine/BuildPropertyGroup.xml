@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+        >A <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
         
 
-         object can represent a <format
-         type="text/html">
+         object can represent a <format type="text/html">
           <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
         </format>
 
@@ -39,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+        >Represents a collection of <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
         
 
@@ -59,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -91,23 +87,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >Adds a new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
             
 
-             and <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+             and <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
             
 
-             to the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             to the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -117,8 +109,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >The new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
@@ -126,34 +117,38 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
           .</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
@@ -184,23 +179,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >Adds a new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
             
 
-             and <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+             and <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
             
 
-             to the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             to the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -210,8 +201,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >The new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
@@ -219,46 +209,53 @@
           >
         </returns>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
           .</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
           
 
-           property value to assign the new <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value to assign the new <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
           .</param
         >
         <param name="treatPropertyValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to treat the <paramref
-           name="propertyValue" />
+          true to treat the <paramref name="propertyValue" />
 
           
 
@@ -282,18 +279,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="P:Microsoft.Build.BuildEngine.BuildPropertyGroup.Condition" />
+            >Removes the <see cref="P:Microsoft.Build.BuildEngine.BuildPropertyGroup.Condition" />
 
             
 
-             property value and all <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+             property value and all <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             objects from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             objects from the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -322,34 +316,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A shallow copy of a <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >A shallow copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
              references the same property group as the original. Modifications a shallow copy will be reflected in both copies.</para
           >
           <para
-            >A deep copy of a <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >A deep copy of a <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
-             creates a new XML element to reference so that both copies of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             creates a new XML element to reference so that both copies of the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
              can be independently modified.</para
           >
           <para
-            >If the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >If the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
-             corresponds directly to a <format
-             type="text/html">
+             corresponds directly to a <format type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
 
@@ -361,8 +350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a deep or shallow copy of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >Creates a deep or shallow copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -372,8 +360,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >A copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -381,12 +368,15 @@
           >
         </returns>
         <param name="deepClone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to create a deep copy of the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+          true to create a deep copy of the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
           
 
@@ -410,8 +400,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <unmanagedCodeEntityReference
-            >Condition</unmanagedCodeEntityReference>
+            >Gets or sets the <unmanagedCodeEntityReference>Condition</unmanagedCodeEntityReference>
 
             
 
@@ -435,13 +424,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >A <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
-             object can represent a <format
-             type="text/html">
+             object can represent a <format type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
 
@@ -453,13 +440,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the number of <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >Gets a value indicating the number of <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -486,13 +471,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >This method allows the caller to use the foreach statement of the C# language (for each in vbprvb) to iterate through the individual <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             objects in the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             objects in the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -502,8 +485,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that iterates through the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+            >Gets an enumerator that iterates through the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -513,13 +495,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the entire <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             for the entire <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -592,13 +572,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >Removes the specified <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             from the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -625,18 +603,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+            >Removes the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
             
 
-             from the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+             from the <see cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
 
             
 
@@ -644,17 +619,19 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
           
 
-           value of the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           value of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
@@ -684,18 +661,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+            >Sets the <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
             
 
-             of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+             of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
             
 
@@ -703,34 +677,38 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
           
 
-           property value of the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
            to set.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
           
 
-           property value to assign the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value to assign the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
@@ -761,18 +739,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+            >Sets the <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
             
 
-             of the <see
-             cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+             of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
             
 
-             with the specified <see
-             cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+             with the specified <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
             
 
@@ -780,46 +755,53 @@
           >
         </summary>
         <param name="propertyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
           
 
-           property value of the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value of the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
            to set.</param
         >
         <param name="propertyValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+          The <see cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
           
 
-           property value to assign the <see
-           cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+           property value to assign the <see cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
           
 
           .</param
         >
         <param name="treatPropertyValueAsLiteral">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true to treat the <paramref
-           name="propertyValue" />
+          true to treat the <paramref name="propertyValue" />
 
           
 

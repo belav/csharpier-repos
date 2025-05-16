@@ -17,28 +17,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ImageIndexConverter" />
+        >The <see cref="T:System.Windows.Forms.ImageIndexConverter" />
 
         
 
-         class is used to convert index values of an <see
-         cref="T:System.Windows.Forms.ImageList" />
+         class is used to convert index values of an <see cref="T:System.Windows.Forms.ImageList" />
 
         
 
-         to and from other data types, typically <see
-         cref="T:System.String" />
+         to and from other data types, typically <see cref="T:System.String" />
 
         
 
-        . For more information about type converters, see the <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        . For more information about type converters, see the <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
-         base class and <format
-         type="text/html">
+         base class and <format type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
@@ -50,23 +45,19 @@
       >
       <block subset="none" type="note">
         <para
-          >Typically, you do not directly create an instance of an <see
-           cref="T:System.Windows.Forms.ImageIndexConverter" />
+          >Typically, you do not directly create an instance of an <see cref="T:System.Windows.Forms.ImageIndexConverter" />
 
           
 
-          . Instead, call the <see
-           cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+          . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
           
 
-           method of <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+           method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-          . For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+          . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -88,23 +79,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you do not directly create an instance of an <see
-             cref="T:System.Windows.Forms.ImageIndexConverter" />
+            >Typically, you do not directly create an instance of an <see cref="T:System.Windows.Forms.ImageIndexConverter" />
 
             
 
-            . Instead, call the <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+            . Instead, call the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
             
 
-             method of <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             method of <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-            . For more information, see the examples in the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            . For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -114,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes and instance of the <see
-             cref="T:System.Windows.Forms.ImageIndexConverter" />
+            >Initializes and instance of the <see cref="T:System.Windows.Forms.ImageIndexConverter" />
 
             
 
@@ -147,8 +133,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This type converter only can convert a 32-bit signed integer object to and from a string.</para>
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -162,13 +147,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the converted <paramref
-             name="value" />
+             that represents the converted <paramref name="value" />
 
             
 
@@ -176,36 +159,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            to provide locale information. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -236,13 +228,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this method can only convert an index value represented as an <see
-             cref="T:System.Int32" />
+            >The default implementation of this method can only convert an index value represented as an <see cref="T:System.Int32" />
 
             
 
-             to a <see
-             cref="T:System.String" />
+             to a <see cref="T:System.String" />
 
             
 
@@ -256,13 +246,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the converted <paramref
-             name="value" />
+             that represents the converted <paramref name="value" />
 
             
 
@@ -270,48 +258,60 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context, which can be used to extract additional information about the environment this type converter is being invoked from. This parameter or properties of this parameter can be null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            that provides locale information. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to convert, typically an index represented as an <see
-           cref="T:System.Int32" />
+          The object to convert, typically an index represented as an <see cref="T:System.Int32" />
 
           
 
           .</param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type to convert the object to, often a <see
-           cref="T:System.String" />
+          The type to convert the object to, often a <see cref="T:System.String" />
 
           
 
@@ -339,36 +339,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of index values for image lists associated with the <see
-             cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
+            >Returns a collection of index values for image lists associated with the <see cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
 
             
 
-             property of the <paramref
-             name="context" />
+             property of the <paramref name="context" />
 
             
 
-             parameter. If an <see
-             cref="T:System.Windows.Forms.ImageList" />
+             parameter. If an <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
              is not found, then the parent of the component will be searched for such a list.</para
           >
           <para
-            >Typically the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesSupported" />
+            >Typically the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesSupported" />
 
             
 
-             method is called to before an attempt is made to use the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+             method is called to before an attempt is made to use the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
-             and <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesExclusive" />
+             and <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesExclusive" />
 
             
 
@@ -382,8 +376,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
@@ -391,12 +384,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -424,13 +420,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the list returned by the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+            >If the list returned by the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
-             method is exclusive, then no other values are valid. This is typical of an enumerated data type. If the list is not exclusive, then there are other valid values besides the list of standard values that <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+             method is exclusive, then no other values are valid. This is typical of an enumerated data type. If the list is not exclusive, then there are other valid values besides the list of standard values that <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
@@ -438,18 +432,15 @@
           >
           <para>As implemented in this type converter, this method always returns false. </para>
           <para
-            >Typically the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesSupported" />
+            >Typically the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesSupported" />
 
             
 
-             method is called to before an attempt is made to use the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+             method is called to before an attempt is made to use the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
-             and <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesExclusive" />
+             and <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesExclusive" />
 
             
 
@@ -459,8 +450,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the list of standard values returned from the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+            >Determines if the list of standard values returned from the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
@@ -470,8 +460,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+            >true if the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
@@ -479,7 +468,11 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -507,8 +500,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >As implemented in this class, <see
-             cref="M:System.Windows.Forms.ImageIndexConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+            >As implemented in this class, <see cref="M:System.Windows.Forms.ImageIndexConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -522,8 +514,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+            >true if the <see cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
             
 
@@ -531,12 +522,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -566,8 +560,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether a none or null value is valid in the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >Gets or sets a value indicating whether a none or null value is valid in the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 

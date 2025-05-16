@@ -19,69 +19,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.MainMenu" />
+        >The <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         control represents the container for the menu structure of a form. A menu is composed of <see
-         cref="T:System.Windows.Forms.MenuItem" />
+         control represents the container for the menu structure of a form. A menu is composed of <see cref="T:System.Windows.Forms.MenuItem" />
 
         
 
-         objects that represent the individual menu commands in the menu structure. Each <see
-         cref="T:System.Windows.Forms.MenuItem" />
+         objects that represent the individual menu commands in the menu structure. Each <see cref="T:System.Windows.Forms.MenuItem" />
 
         
 
-         can be a command for your application or a parent menu for other submenu items. To bind the <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         can be a command for your application or a parent menu for other submenu items. To bind the <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         to the <see
-         cref="T:System.Windows.Forms.Form" />
+         to the <see cref="T:System.Windows.Forms.Form" />
 
         
 
-         that will display it, assign the <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         that will display it, assign the <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         to the <see
-         cref="P:System.Windows.Forms.Form.Menu" />
+         to the <see cref="P:System.Windows.Forms.Form.Menu" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.Form" />
+         property of the <see cref="T:System.Windows.Forms.Form" />
 
         
 
         .</para
       >
       <para
-        >For applications that will have support for multiple languages, you can use the <see
-         cref="P:System.Windows.Forms.MainMenu.RightToLeft" />
+        >For applications that will have support for multiple languages, you can use the <see cref="P:System.Windows.Forms.MainMenu.RightToLeft" />
 
         
 
          property to display the text of the menu from right to left to support languages such as Arabic.</para
       >
       <para
-        >You can create different <see
-         cref="T:System.Windows.Forms.MainMenu" />
+        >You can create different <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         objects to represent different menu structures for your form. If you want to reuse the menu structure contained in a specific <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         objects to represent different menu structures for your form. If you want to reuse the menu structure contained in a specific <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-        , you can use its <see
-         cref="M:System.Windows.Forms.MainMenu.CloneMenu" />
+        , you can use its <see cref="M:System.Windows.Forms.MainMenu.CloneMenu" />
 
         
 
@@ -94,18 +82,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the menu structure of a form. Although <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+        >Represents the menu structure of a form. Although <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-         replaces and adds functionality to the <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         replaces and adds functionality to the <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         control of previous versions, <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
@@ -122,28 +107,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This version of the constructor creates a <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >This version of the constructor creates a <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             without any specified <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             without any specified <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects. To add menu items to the control use the other version of this constructor that accepts an array of <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             objects. To add menu items to the control use the other version of this constructor that accepts an array of <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects as its parameter or use the <see
-             cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
+             objects as its parameter or use the <see cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
 
             
 
-             method of the <see
-             cref="P:System.Windows.Forms.Menu.MenuItems" />
+             method of the <see cref="P:System.Windows.Forms.Menu.MenuItems" />
 
             
 
@@ -153,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -182,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -191,17 +169,19 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.IContainer" />
+          An <see cref="T:System.ComponentModel.IContainer" />
 
           
 
-           representing the container of the <see
-           cref="T:System.Windows.Forms.MainMenu" />
+           representing the container of the <see cref="T:System.Windows.Forms.MainMenu" />
 
           
 
@@ -225,38 +205,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this constructor to assign an array of <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >You can use this constructor to assign an array of <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects to the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             objects to the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             at the time of its creation. After the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             at the time of its creation. After the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             has been created you can add additional <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             has been created you can add additional <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects to the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             objects to the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             using the <see
-             cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
+             using the <see cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
 
             
 
-             method of the <see
-             cref="P:System.Windows.Forms.Menu.MenuItems" />
+             method of the <see cref="P:System.Windows.Forms.Menu.MenuItems" />
 
             
 
@@ -266,13 +239,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             with a specified set of <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             with a specified set of <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -280,17 +251,19 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Windows.Forms.MenuItem" />
+          An array of <see cref="T:System.Windows.Forms.MenuItem" />
 
           
 
-           objects that will be added to the <see
-           cref="T:System.Windows.Forms.MainMenu" />
+           objects that will be added to the <see cref="T:System.Windows.Forms.MainMenu" />
 
           
 
@@ -316,48 +289,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to create a copy of the menu structure stored in a <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >You can use this method to create a copy of the menu structure stored in a <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-            . You can use this method to reuse the menu structure stored in a <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            . You can use this method to reuse the menu structure stored in a <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             as the foundation for a new <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             as the foundation for a new <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-            . For example, if you want to create a menu structure that has the same menu items as an existing <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            . For example, if you want to create a menu structure that has the same menu items as an existing <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             but will also have additional <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             but will also have additional <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects added to it, you can use the <see
-             cref="M:System.Windows.Forms.MainMenu.CloneMenu" />
+             objects added to it, you can use the <see cref="M:System.Windows.Forms.MainMenu.CloneMenu" />
 
             
 
-             method to create a copy of the original <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             method to create a copy of the original <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             and then add the new <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             and then add the new <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects to the cloned <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             objects to the cloned <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -367,13 +331,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Creates a new <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             that is a duplicate of the current <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             that is a duplicate of the current <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -383,8 +345,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >A <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -410,8 +371,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -456,33 +416,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
+            >Call <see cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             when you are finished using the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
+            . The <see cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
 
             
 
-             method leaves the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             method leaves the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
+             in an unusable state. After calling <see cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            , you must release all references to the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -490,23 +444,19 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
+              >Always call <see cref="M:System.Windows.Forms.MainMenu.Dispose(System.Boolean)" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Windows.Forms.MainMenu" />
+               before you release your last reference to the <see cref="T:System.Windows.Forms.MainMenu" />
 
               
 
-              . Otherwise, the resources the <see
-               cref="T:System.Windows.Forms.MainMenu" />
+              . Otherwise, the resources the <see cref="T:System.Windows.Forms.MainMenu" />
 
               
 
-               is using will not be freed until garbage collection calls the <see
-               cref="T:System.Windows.Forms.MainMenu" />
+               is using will not be freed until garbage collection calls the <see cref="T:System.Windows.Forms.MainMenu" />
 
               
 
@@ -517,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disposes of the resources, other than memory, used by the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Disposes of the resources, other than memory, used by the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -526,7 +475,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -549,13 +502,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to determine if a specific <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >This property enables you to determine if a specific <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
-             is parented to a form. The property is typically used when multiple <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             is parented to a form. The property is typically used when multiple <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -565,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Form" />
+            >Gets the <see cref="T:System.Windows.Forms.Form" />
 
             
 
@@ -576,13 +526,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Form" />
+            >A <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             that is the container for this control. Returns null if the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             that is the container for this control. Returns null if the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -611,8 +559,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -621,8 +568,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.MainMenu.OnCollapse(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.MainMenu.OnCollapse(System.EventArgs)" />
 
             
 
@@ -632,8 +578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.MainMenu.Collapse" />
+            >Raises the <see cref="E:System.Windows.Forms.MainMenu.Collapse" />
 
             
 
@@ -641,12 +586,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -678,8 +626,7 @@
           <para>This property enables your menus to support languages that are written from right to left. When this property is set to RightToLeft.Yes, the menu item text will be displayed from right to left instead of the default left to right method.</para>
           <block subset="none" type="note">
             <para
-              >For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see
-               cref="P:System.Windows.Forms.Control.RightToLeft" />
+              >For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see cref="P:System.Windows.Forms.Control.RightToLeft" />
 
               
 
@@ -708,13 +655,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The return string includes the type and the string returned by the <see
-             cref="M:System.Windows.Forms.Form.ToString" />
+            >The return string includes the type and the string returned by the <see cref="M:System.Windows.Forms.Form.ToString" />
 
             
 
-             method if the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+             method if the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -724,8 +669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 
@@ -735,8 +679,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.MainMenu" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.MainMenu" />
 
             
 

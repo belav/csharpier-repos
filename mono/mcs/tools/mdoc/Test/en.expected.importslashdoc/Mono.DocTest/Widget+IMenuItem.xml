@@ -11,13 +11,11 @@
   <Interfaces />
   <Docs>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.Widget.IMenuItem</c>
+    <remarks><c>T:Mono.DocTest.Widget.IMenuItem</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName="A">
@@ -36,13 +34,11 @@
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
-        <remarks>
-          <c>M:Mono.DocTest.Widget.IMenuItem.A</c>
+        <remarks><c>M:Mono.DocTest.Widget.IMenuItem.A</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
     <Member MemberName="B">
@@ -58,13 +54,11 @@
       <Docs>
         <summary>To be added.</summary>
         <value>To be added.</value>
-        <remarks>
-          <c>P:Mono.DocTest.Widget.IMenuItem.P</c>
+        <remarks><c>P:Mono.DocTest.Widget.IMenuItem.P</c>
 
           
 
-          .</remarks
-        >
+          .</remarks>
       </Docs>
     </Member>
   </Members>

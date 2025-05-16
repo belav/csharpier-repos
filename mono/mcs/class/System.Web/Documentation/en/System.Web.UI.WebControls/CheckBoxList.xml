@@ -74,18 +74,15 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+        >The <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-         control provides a multi selection check box group that can be dynamically generated with data binding. It contains an <see
-         cref="P:System.Web.UI.WebControls.ListControl.Items" />
+         control provides a multi selection check box group that can be dynamically generated with data binding. It contains an <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
         
 
-         collection with members corresponding to individual items in the list. To determine which items are checked, iterate through the collection and test the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+         collection with members corresponding to individual items in the list. To determine which items are checked, iterate through the collection and test the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
         
 
@@ -93,18 +90,15 @@
       >
       <block subset="none" type="note">
         <para
-          >You can also use multiple <see
-           cref="T:System.Web.UI.WebControls.CheckBox" />
+          >You can also use multiple <see cref="T:System.Web.UI.WebControls.CheckBox" />
 
           
 
-           controls. The <see
-           cref="T:System.Web.UI.WebControls.CheckBoxList" />
+           controls. The <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
           
 
-           control is easier for creating a set of check boxes using data binding, while the individual <see
-           cref="T:System.Web.UI.WebControls.CheckBox" />
+           control is easier for creating a set of check boxes using data binding, while the individual <see cref="T:System.Web.UI.WebControls.CheckBox" />
 
           
 
@@ -118,36 +112,30 @@
         <h2>Specifying List Layout</h2>
       </format>
       <para
-        >You can specify the way the list is displayed by using the <see
-         cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+        >You can specify the way the list is displayed by using the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatDirection" />
+         and <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatDirection" />
 
         
 
-         properties. For information about layout options, see the <see
-         cref="T:System.Web.UI.WebControls.RepeatLayout" />
+         properties. For information about layout options, see the <see cref="T:System.Web.UI.WebControls.RepeatLayout" />
 
         
 
          enumeration.</para
       >
       <para
-        >By default, <see
-         cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatDirection" />
+        >By default, <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatDirection" />
 
         
 
-         is set to RepeatDirection.Vertical. Setting this property to RepeatDirection.Horizontal renders the list horizontally. Some <see
-         cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+         is set to RepeatDirection.Vertical. Setting this property to RepeatDirection.Horizontal renders the list horizontally. Some <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
         
 
-         settings do not allow horizontal layout. For more information, see the <see
-         cref="T:System.Web.UI.WebControls.RepeatLayout" />
+         settings do not allow horizontal layout. For more information, see the <see cref="T:System.Web.UI.WebControls.RepeatLayout" />
 
         
 
@@ -160,69 +148,57 @@
         <h2>Specifying List Items</h2>
       </format>
       <para
-        >To specify items that you want to appear in the <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+        >To specify items that you want to appear in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-         control, place a ListItem element for each entry between the opening and closing tags of the <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         control, place a ListItem element for each entry between the opening and closing tags of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
          control.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+        >The <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-         control also supports data binding. To bind the control to a data source, first create a data source, such as one of the <see
-         cref="T:System.Web.UI.DataSourceControl" />
+         control also supports data binding. To bind the control to a data source, first create a data source, such as one of the <see cref="T:System.Web.UI.DataSourceControl" />
 
         
 
-         objects, that contains the items to display in the control. Next, use the <see
-         cref="M:System.Web.UI.Control.DataBind" />
+         objects, that contains the items to display in the control. Next, use the <see cref="M:System.Web.UI.Control.DataBind" />
 
         
 
-         method to bind the data source to the <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         method to bind the data source to the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-         control. Use the <see
-         cref="P:System.Web.UI.WebControls.ListControl.DataTextField" />
+         control. Use the <see cref="P:System.Web.UI.WebControls.ListControl.DataTextField" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.ListControl.DataValueField" />
+         and <see cref="P:System.Web.UI.WebControls.ListControl.DataValueField" />
 
         
 
-         properties to specify which field in the data source to bind to the Text and Value properties of each list item in the control, respectively. The <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         properties to specify which field in the data source to bind to the Text and Value properties of each list item in the control, respectively. The <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
          control will now display the information from the data source.</para
       >
       <para
-        >To determine the selected items in the <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+        >To determine the selected items in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-         control, iterate through the <see
-         cref="P:System.Web.UI.WebControls.ListControl.Items" />
+         control, iterate through the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
         
 
-         collection and test the <see
-         cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+         collection and test the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
         
 
@@ -230,15 +206,13 @@
       >
       <block subset="none" type="note">
         <para
-          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format
-           type="text/html">
+          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format type="text/html">
             <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
           </format>
 
           
 
-          , <format
-           type="text/html">
+          , <format type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
               >How to: Protect Against Script Exploits in a Web Application by Applying HTML Encoding to Strings</a
             >
@@ -246,8 +220,7 @@
 
           
 
-          , and <format
-           type="text/html">
+          , and <format type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
@@ -265,8 +238,7 @@
         <h2>Accessibility</h2>
       </format>
       <para
-        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format
-         type="text/html">
+        >For information about how to configure this control so that it generates markup that conforms to accessibility standards, see <format type="text/html">
           <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13"
             >Accessibility in Visual Studio 2010 and ASP.NET 4</a
           >
@@ -274,8 +246,7 @@
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
 
@@ -292,30 +263,26 @@
       <code
         >&lt;asp:CheckBoxList
     AccessKey="string"
-    AppendDataBoundItems="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    AppendDataBoundItems="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    AutoPostBack="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    AutoPostBack="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
-    CausesValidation="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    CausesValidation="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -329,53 +296,45 @@
     DataTextField="string"
     DataTextFormatString="string"
     DataValueField="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -393,14 +352,12 @@
     OnTextChanged="TextChanged event handler"
     OnUnload="Unload event handler"
     RepeatColumns="integer"
-    RepeatDirection="Horizontal|<codeFeaturedElement
-        >Vertical</codeFeaturedElement>
+    RepeatDirection="Horizontal|<codeFeaturedElement>Vertical</codeFeaturedElement>
 
         
 
         "
-    RepeatLayout="<codeFeaturedElement
-        >Table</codeFeaturedElement>
+    RepeatLayout="<codeFeaturedElement>Table</codeFeaturedElement>
 
         
 
@@ -411,16 +368,14 @@
     SkinID="string"
     Style="string"
     TabIndex="integer"
-    TextAlign="Left|<codeFeaturedElement
-        >Right</codeFeaturedElement>
+    TextAlign="Left|<codeFeaturedElement>Right</codeFeaturedElement>
 
         
 
         "
     ToolTip="string"
     ValidationGroup="string"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -428,14 +383,12 @@
     Width="size"
 &gt;
             &lt;asp:ListItem
-                Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+                Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-                Selected="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+                Selected="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
@@ -461,8 +414,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -472,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -498,21 +449,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to control the spacing between the contents of a cell and the cell's border in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Use this property to control the spacing between the contents of a cell and the cell's border in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              control.</para
           >
           <para
-            >The padding amount specified is added to all four sides of a cell with the height of the tallest cell and width of the widest cell in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >The padding amount specified is added to all four sides of a cell with the height of the tallest cell and width of the widest cell in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control. The resulting cell size is applied uniformly to all cells in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             control. The resulting cell size is applied uniformly to all cells in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -546,8 +494,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to control the spacing between individual cells in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Use this property to control the spacing between individual cells in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -583,13 +530,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.CreateControlStyle" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.CreateControlStyle" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -599,8 +544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a style object that is used internally by the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Creates a style object that is used internally by the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -610,8 +554,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >A <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -641,36 +584,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" />
 
             
 
-             method overrides the <see
-             cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
+             method overrides the <see cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
 
             
 
-             method of the base <see
-             cref="T:System.Web.UI.Control" />
+             method of the base <see cref="T:System.Web.UI.Control" />
 
             
 
-             class. You should not override this version of the <see
-             cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
+             class. You should not override this version of the <see cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
 
             
 
@@ -680,13 +617,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the current naming container for a server control with the specified ID and path offset. The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" />
+            >Searches the current naming container for a server control with the specified ID and path offset. The <see cref="M:System.Web.UI.WebControls.CheckBoxList.FindControl(System.String,System.Int32)" />
 
             
 
-             method always returns the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method always returns the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -696,8 +631,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >The current <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -705,14 +639,22 @@
           >
         </returns>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identifier for the control to find.</param
         >
         <param name="pathOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -744,31 +686,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >The style attribute for the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >The style attribute for the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control applies to all list items that are contained by the control. Use the <see
-             cref="T:System.Web.UI.WebControls.Style" />
+             control applies to all list items that are contained by the control. Use the <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -782,8 +719,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >null, indicating that style attributes are not set on individual list items in a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >null, indicating that style attributes are not set on individual list items in a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -791,19 +727,26 @@
           >
         </returns>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
            enumeration values. </param
         >
         <param name="repeatIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -825,28 +768,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.HasFooter" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.HasFooter" />
 
             
 
-             property is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             class. Footers are not supported when the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+             class. Footers are not supported when the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
             
 
-             or <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+             or <see cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
 
             
 
@@ -856,8 +794,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -880,28 +817,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.HasHeader" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.HasHeader" />
 
             
 
-             property is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             class. Headers are not supported when the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+             class. Headers are not supported when the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
             
 
-             or <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+             or <see cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
 
             
 
@@ -911,8 +843,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -935,28 +866,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.HasSeparators" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.HasSeparators" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             class. Separators are not supported when the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+             class. Separators are not supported when the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
             
 
-             or <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+             or <see cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
 
             
 
@@ -966,8 +892,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -999,74 +924,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method indicates whether the state of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method indicates whether the state of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control has changed. In other words, it determines whether each list item in the control has the same <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+             control has changed. In other words, it determines whether each list item in the control has the same <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
-             value as the last posted value. A user selecting or clearing an item in the control changes the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+             value as the last posted value. A user selecting or clearing an item in the control changes the <see cref="P:System.Web.UI.WebControls.ListItem.Selected" />
 
             
 
-             property value for the corresponding <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property value for the corresponding <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             object in the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Items" />
+             object in the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
             
 
-             collection of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             collection of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control. If the same list items are selected in the control, or if the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             control. If the same list items are selected in the control, or if the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             is disabled, <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             is disabled, <see cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
              returns false. </para
           >
           <para
-            >When the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >When the <see cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method returns true for a control, the page framework invokes the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
+             method returns true for a control, the page framework invokes the <see cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
 
             
 
@@ -1076,8 +988,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes the posted data for the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Processes the posted data for the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1087,8 +998,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the state of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >true if the state of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1096,29 +1006,34 @@
           >
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key identifier for the control, used to index the <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          The key identifier for the control, used to index the <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
-           specified in the <paramref
-           name="postCollection" />
+           specified in the <paramref name="postCollection" />
 
           
 
            parameter.</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          A <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
@@ -1139,56 +1054,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             class. The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)" />
+             class. The <see cref="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)" />
 
             
 
-             method allows derived classes to handle the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+             method allows derived classes to handle the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
              event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.OnPreRender(System.EventArgs)" />
 
             
 
-             method performs any necessary prerendering steps prior to saving view state and rendering content for the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method performs any necessary prerendering steps prior to saving view state and rendering content for the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-            . The individual list items contained in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            . The individual list items contained in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control are initialized for rendering using the current <see
-             cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
+             control are initialized for rendering using the current <see cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+            , <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
-            , and <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+            , and <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
@@ -1198,8 +1103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Configures the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Configures the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1207,12 +1111,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1238,89 +1145,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >The page framework calls the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
+            >The page framework calls the <see cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
 
             
 
-             method on a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method on a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control when the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+             control when the <see cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method indicates that the state of the list items have changed in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method indicates that the state of the list items have changed in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control. The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
+             control. The <see cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
 
             
 
-             method calls the <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+             method calls the <see cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
 
             
 
-             method to raise the <see
-             cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+             method to raise the <see cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
 
             
 
-             event. Control developers can override the <see
-             cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+             event. Control developers can override the <see cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
 
             
 
              method to perform custom processing when the user selects or clears list items in the control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
 
             
 
-             method can optionally perform validation before raising the <see
-             cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
+             method can optionally perform validation before raising the <see cref="E:System.Web.UI.WebControls.ListControl.SelectedIndexChanged" />
 
             
 
-             event for the control. To validate a group of controls on the page when a list item within the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             event for the control. To validate a group of controls on the page when a list item within the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             is selected, set the <see
-             cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
+             is selected, set the <see cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
+             and <see cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
             
 
-             properties to true, and specify the group of controls to validate in the <see
-             cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+             properties to true, and specify the group of controls to validate in the <see cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
 
             
 
@@ -1330,8 +1221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the ASP.NET application that the state of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Notifies the ASP.NET application that the state of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1356,41 +1246,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             implementation for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             implementation for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control initializes a <see
-             cref="T:System.Web.UI.WebControls.RepeatInfo" />
+             control initializes a <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
             
 
-             object for the list, and calls the <see
-             cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
+             object for the list, and calls the <see cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
 
             
 
-             method, which in turn uses the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+             method, which in turn uses the <see cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -1400,8 +1283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Displays the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Displays the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1409,12 +1291,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -1448,64 +1333,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >This method is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             implementation for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             implementation for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control calls the <see
-             cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
+             control calls the <see cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
 
             
 
-             method, which in turn uses the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+             method, which in turn uses the <see cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
              method to render individual checkbox list items. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control ignores the <paramref
-             name="itemType" />
+             control ignores the <paramref name="itemType" />
 
             
 
-             and <paramref
-             name="repeatInfo" />
+             and <paramref name="repeatInfo" />
 
             
 
-             parameters. The <paramref
-             name="repeatIndex" />
+             parameters. The <paramref name="repeatIndex" />
 
             
 
-             value is used to select the checkbox list item in the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Items" />
+             value is used to select the checkbox list item in the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
             
 
@@ -1515,8 +1389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders a list item in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Renders a list item in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1524,43 +1397,56 @@
           >
         </summary>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
            enumeration values. </param
         >
         <param name="repeatIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.RepeatInfo" />
+          A <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
           
 
            object that represents the information used to render the item in the list. </param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -1580,23 +1466,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+            >When the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
 
             
 
-            , you can use this property to specify the number of columns that display in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            , you can use this property to specify the number of columns that display in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             control. If this property is not set, the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             control. If this property is not set, the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1606,8 +1488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of columns to display in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Gets or sets the number of columns to display in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1640,8 +1521,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to specify the display direction of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Use this property to specify the display direction of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1649,8 +1529,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The number of columns that are displayed is always determined by the <see
-               cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
+              >The number of columns that are displayed is always determined by the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
 
               
 
@@ -1658,23 +1537,19 @@
             >
           </block>
           <para
-            >If this property is set to RepeatDirection.Vertical and if the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+            >If this property is set to RepeatDirection.Vertical and if the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
 
             
 
-            , the first column is filled from top to bottom, then the next column, and so on until all items are rendered. For example, if the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
+            , the first column is filled from top to bottom, then the next column, and so on until all items are rendered. For example, if the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
 
             
 
-             property is set to 3, the items in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property is set to 3, the items in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1716,23 +1591,19 @@
             </item>
           </list>
           <para
-            >If this property is set to RepeatDirection.Horizontal and if the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+            >If this property is set to RepeatDirection.Horizontal and if the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+             property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
 
             
 
-            , the first column is filled from top to bottom, then the next column, and so on until all items are rendered. For example, if the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
+            , the first column is filled from top to bottom, then the next column, and so on until all items are rendered. For example, if the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatColumns" />
 
             
 
-             property is set to 3, the items of the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property is set to 3, the items of the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1803,46 +1674,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
 
             
 
-             property is used primarily by control developers in custom controls that derive from the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property is used primarily by control developers in custom controls that derive from the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              class.</para
           >
           <para
-            >If there are no items set in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >If there are no items set in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
+            , the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
 
             
 
-             is zero. If there are items set in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             is zero. If there are items set in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
+            , the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
 
             
 
-             is the same as the <see
-             cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+             is the same as the <see cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
 
             
 
-             property on the <see
-             cref="P:System.Web.UI.WebControls.ListControl.Items" />
+             property on the <see cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
             
 
@@ -1852,8 +1715,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of list items in the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Gets the number of list items in the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1877,8 +1739,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For information about the available options, see the <see
-             cref="T:System.Web.UI.WebControls.RepeatLayout" />
+            >For information about the available options, see the <see cref="T:System.Web.UI.WebControls.RepeatLayout" />
 
             
 
@@ -1886,13 +1747,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Two options are new as of ASP.NET 4: <see
-               cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+              >Two options are new as of ASP.NET 4: <see cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
 
               
 
-               and <see
-               cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
+               and <see cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
               
 
@@ -1900,13 +1759,11 @@
             >
           </block>
           <para
-            >Some <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
+            >Some <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
             
 
-             settings do not allow horizontal layout. For more information, see the <see
-             cref="T:System.Web.UI.WebControls.RepeatLayout" />
+             settings do not allow horizontal layout. For more information, see the <see cref="T:System.Web.UI.WebControls.RepeatLayout" />
 
             
 
@@ -1952,31 +1809,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.CheckBoxList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method to process posted data for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method to process posted data for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#IPostBackDataHandler#LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#IPostBackDataHandler#LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -1986,8 +1838,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Processes posted data for the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+            >Processes posted data for the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
@@ -1999,24 +1850,30 @@
           <para>true if the server control's state changes as a result of the postback; otherwise, false.</para>
         </returns>
         <param name="postDataKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key identifier for the control, used to index the <paramref
-           name="postCollection" />
+          The key identifier for the control, used to index the <paramref name="postCollection" />
 
           
 
           .</param
         >
         <param name="postCollection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.Specialized.NameValueCollection" />
+          A <see cref="T:System.Collections.Specialized.NameValueCollection" />
 
           
 
@@ -2042,31 +1899,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.CheckBoxList.RaisePostDataChangedEvent" />
 
             
 
-             method to raise an event when the posted data for a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method to raise an event when the posted data for a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object changes. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#IPostBackDataHandler#RaisePostDataChangedEvent" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#IPostBackDataHandler#RaisePostDataChangedEvent" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IPostBackDataHandler" />
+             instance is cast to an <see cref="T:System.Web.UI.IPostBackDataHandler" />
 
             
 
@@ -2100,31 +1952,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.CheckBoxList.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
 
             
 
-             method to retrieve the style of an item in a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method to retrieve the style of an item in a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
@@ -2134,8 +1981,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.GetItemStyle(System.Web.UI.WebControls.ListItemType,System.Int32)" />
 
             
 
@@ -2145,8 +1991,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >A <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
@@ -2154,19 +1999,26 @@
           >
         </returns>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
            enumeration values. </param
         >
         <param name="repeatIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2192,31 +2044,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.HasFooter" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.CheckBoxList.HasFooter" />
 
             
 
-             property to determine if a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property to determine if a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object contains a footer section. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#HasFooter" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#HasFooter" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
@@ -2247,31 +2094,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.HasHeader" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.CheckBoxList.HasHeader" />
 
             
 
-             property to determine a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property to determine a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object contains a heading section. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#HasHeader" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#HasHeader" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
@@ -2302,31 +2144,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.HasSeparators" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.CheckBoxList.HasSeparators" />
 
             
 
-             property to determine whether a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property to determine whether a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object contains a separator. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#HasSeparators" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#HasSeparators" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
@@ -2362,31 +2199,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+            >Typically, you should use the <see cref="M:System.Web.UI.WebControls.CheckBoxList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to render items in a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method to render items in a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             method is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 
@@ -2396,8 +2228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+            >For a description of this member, see <see cref="M:System.Web.UI.WebControls.IRepeatInfoUser.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -2405,43 +2236,56 @@
           >
         </summary>
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
            enumeration values. </param
         >
         <param name="repeatIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.RepeatInfo" />
+          A <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
           
 
            object that represents the information used to render the item in the list. </param
         >
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          An <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -2467,31 +2311,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, you should use the <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
+            >Typically, you should use the <see cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatedItemCount" />
 
             
 
-             property to determine the number of items in a <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             property to determine the number of items in a <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
              object. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#RepeatedItemCount" />
+            >The <see cref="P:System.Web.UI.WebControls.CheckBoxList.System#Web#UI#WebControls#IRepeatInfoUser#RepeatedItemCount" />
 
             
 
-             member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.CheckBoxList" />
+             member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+             instance is cast to an <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
             
 

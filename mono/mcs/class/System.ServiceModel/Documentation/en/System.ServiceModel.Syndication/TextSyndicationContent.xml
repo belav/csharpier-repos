@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents any <see
-         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+        >Represents any <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
         
 
@@ -58,13 +57,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
-             with the specified <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+             with the specified <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
@@ -72,12 +69,15 @@
           >
         </summary>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+          The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
           
 
@@ -103,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
@@ -112,7 +111,11 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
+            >The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
 
             
 
@@ -172,13 +174,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
-             with the specified text and <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
+             with the specified text and <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
 
             
 
@@ -186,19 +186,26 @@
           >
         </summary>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the content.</param
         >
         <param name="textKind">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
+          The <see cref="T:System.ServiceModel.Syndication.TextSyndicationContentKind" />
 
           
 
@@ -228,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the existing <see
-             cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+            >Creates a copy of the existing <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />
 
             
 
@@ -239,8 +245,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationContent" />
 
             
 
@@ -265,8 +270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the text of the <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+            >Gets the text of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
@@ -305,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the content type of the <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+            >Gets the content type of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
@@ -339,13 +342,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the contents of the <see
-             cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+            >Writes the contents of the <see cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
 
             
 
-             to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -353,12 +354,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 

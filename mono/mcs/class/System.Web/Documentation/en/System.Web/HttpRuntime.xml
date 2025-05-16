@@ -16,36 +16,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.HttpRuntime" />
+        >The <see cref="T:System.Web.HttpRuntime" />
 
         
 
-         object is used at the beginning of the ASP.NET pipeline model that processes HTTP requests. The <see
-         cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+         object is used at the beginning of the ASP.NET pipeline model that processes HTTP requests. The <see cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
 
         
 
          method drives all subsequent ASP.NET Web processing. </para
       >
       <para
-        >Page developers can use the <see
-         cref="T:System.Web.HttpRuntime" />
+        >Page developers can use the <see cref="T:System.Web.HttpRuntime" />
 
         
 
-         class properties to find out information about the current application domain for diagnostic purposes, for example. Developers creating custom process pipeline or a custom hosting environment should call the <see
-         cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
+         class properties to find out information about the current application domain for diagnostic purposes, for example. Developers creating custom process pipeline or a custom hosting environment should call the <see cref="M:System.Web.HttpRuntime.ProcessRequest(System.Web.HttpWorkerRequest)" />
 
         
 
-         method from a class derived from the <see
-         cref="T:System.Web.HttpWorkerRequest" />
+         method from a class derived from the <see cref="T:System.Web.HttpWorkerRequest" />
 
         
 
-         or <see
-         cref="T:System.Web.Hosting.SimpleWorkerRequest" />
+         or <see cref="T:System.Web.Hosting.SimpleWorkerRequest" />
 
         
 
@@ -68,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpRuntime" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpRuntime" />
 
             
 
@@ -97,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the application identification of the application domain where the <see
-             cref="T:System.Web.HttpRuntime" />
+            >Gets the application identification of the application domain where the <see cref="T:System.Web.HttpRuntime" />
 
             
 
@@ -167,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the domain identification of the application domain where the <see
-             cref="T:System.Web.HttpRuntime" />
+            >Gets the domain identification of the application domain where the <see cref="T:System.Web.HttpRuntime" />
 
             
 
@@ -230,8 +221,7 @@
       </ReturnValue>
       <Docs>
         <value
-          >The <see
-           cref="T:System.Web.Caching.Cache" />
+          >The <see cref="T:System.Web.Caching.Cache" />
 
           
 
@@ -240,8 +230,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see the <see
-             cref="T:System.Web.Caching.Cache" />
+            >For more information, see the <see cref="T:System.Web.Caching.Cache" />
 
             
 
@@ -251,8 +240,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Caching.Cache" />
+            >Gets the <see cref="T:System.Web.Caching.Cache" />
 
             
 
@@ -280,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Shuts down the <see
-             cref="T:System.Web.HttpRuntime" />
+            >Shuts down the <see cref="T:System.Web.HttpRuntime" />
 
             
 
@@ -389,8 +376,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is provided for use when your code implements its own hosting environment. It also can be used to execute child requests when your code implements its own <see
-             cref="T:System.Web.HttpWorkerRequest" />
+            >This method is provided for use when your code implements its own hosting environment. It also can be used to execute child requests when your code implements its own <see cref="T:System.Web.HttpWorkerRequest" />
 
             
 
@@ -402,12 +388,15 @@
           <para>Drives all ASP.NET Web processing execution.</para>
         </summary>
         <param name="wr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.HttpWorkerRequest" />
+          An <see cref="T:System.Web.HttpWorkerRequest" />
 
           
 

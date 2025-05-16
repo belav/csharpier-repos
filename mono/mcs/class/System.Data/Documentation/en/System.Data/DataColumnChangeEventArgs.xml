@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Data.DataTable.ColumnChanging" />
+        >The <see cref="E:System.Data.DataTable.ColumnChanging" />
 
         
 
-         event occurs when a change is made to the value of a column in the <see
-         cref="T:System.Data.DataTable" />
+         event occurs when a change is made to the value of a column in the <see cref="T:System.Data.DataTable" />
 
         
 
@@ -37,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Data.DataTable.ColumnChanging" />
+        >Provides data for the <see cref="E:System.Data.DataTable.ColumnChanging" />
 
         
 
@@ -64,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.DataColumnChangeEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Data.DataColumnChangeEventArgs" />
 
             
 
@@ -73,31 +69,41 @@
           >
         </summary>
         <param name="row">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRow" />
+          The <see cref="T:System.Data.DataRow" />
 
           
 
            of the column with the changing value. </param
         >
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
            with the changing value. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataColumn" />
+            >Gets the <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -167,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataRow" />
+            >Gets the <see cref="T:System.Data.DataRow" />
 
             
 

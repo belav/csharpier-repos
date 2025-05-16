@@ -24,28 +24,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Threading.EventWaitHandle" />
+        >The <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         class allows threads to communicate with each other by signaling. Typically, one or more threads block on an <see
-         cref="T:System.Threading.EventWaitHandle" />
+         class allows threads to communicate with each other by signaling. Typically, one or more threads block on an <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         until an unblocked thread calls the <see
-         cref="M:System.Threading.EventWaitHandle.Set" />
+         until an unblocked thread calls the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
         
 
-         method, releasing one or more of the blocked threads. A thread can signal an <see
-         cref="T:System.Threading.EventWaitHandle" />
+         method, releasing one or more of the blocked threads. A thread can signal an <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         and then block on it, by calling the static (Shared in Visual Basic) <see
-         cref="Overload:System.Threading.WaitHandle.SignalAndWait" />
+         and then block on it, by calling the static (Shared in Visual Basic) <see cref="Overload:System.Threading.WaitHandle.SignalAndWait" />
 
         
 
@@ -53,8 +48,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Threading.EventWaitHandle" />
+          >The <see cref="T:System.Threading.EventWaitHandle" />
 
           
 
@@ -62,33 +56,27 @@
         >
       </block>
       <para
-        >The behavior of an <see
-         cref="T:System.Threading.EventWaitHandle" />
+        >The behavior of an <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         that has been signaled depends on its reset mode. An <see
-         cref="T:System.Threading.EventWaitHandle" />
+         that has been signaled depends on its reset mode. An <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         created with the <see
-         cref="F:System.Threading.EventResetMode.AutoReset" />
+         created with the <see cref="F:System.Threading.EventResetMode.AutoReset" />
 
         
 
-         flag resets automatically when signaled, after releasing a single waiting thread. An <see
-         cref="T:System.Threading.EventWaitHandle" />
+         flag resets automatically when signaled, after releasing a single waiting thread. An <see cref="T:System.Threading.EventWaitHandle" />
 
         
 
-         created with the <see
-         cref="F:System.Threading.EventResetMode.ManualReset" />
+         created with the <see cref="F:System.Threading.EventResetMode.ManualReset" />
 
         
 
-         flag remains signaled until its <see
-         cref="M:System.Threading.EventWaitHandle.Reset" />
+         flag remains signaled until its <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
         
 
@@ -96,8 +84,7 @@
       >
       <para>Automatic reset events provide exclusive access to a resource. If an automatic reset event is signaled when no threads are waiting, it remains signaled until a thread attempts to wait on it. The event releases the thread and immediately resets, blocking subsequent threads.</para>
       <para
-        >Manual reset events are like gates. When the event is not signaled, threads that wait on it will block. When the event is signaled, all waiting threads are released, and the event remains signaled (that is, subsequent waits do not block) until its <see
-         cref="M:System.Threading.EventWaitHandle.Reset" />
+        >Manual reset events are like gates. When the event is not signaled, threads that wait on it will block. When the event is signaled, all waiting threads are released, and the event remains signaled (that is, subsequent waits do not block) until its <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
         
 
@@ -108,21 +95,18 @@
 
         
 
-         objects can be used with the static (Shared in Visual Basic) <see
-         cref="Overload:System.Threading.WaitHandle.WaitAll" />
+         objects can be used with the static (Shared in Visual Basic) <see cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
         
 
-         and <see
-         cref="Overload:System.Threading.WaitHandle.WaitAny" />
+         and <see cref="Overload:System.Threading.WaitHandle.WaitAny" />
 
         
 
          methods.</para
       >
       <para
-        >For more information about thread synchronization mechanisms, see <format
-         type="text/html">
+        >For more information about thread synchronization mechanisms, see <format type="text/html">
           <a href="cd94fc34-ac15-427f-b723-a1240a4fab7d"
             >EventWaitHandle, AutoResetEvent, and ManualResetEvent</a
           >
@@ -162,23 +146,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the initial state of the event is nonsignaled, threads that wait on the event will block. If the initial state is signaled, and the <see
-             cref="F:System.Threading.EventResetMode.ManualReset" />
+            >If the initial state of the event is nonsignaled, threads that wait on the event will block. If the initial state is signaled, and the <see cref="F:System.Threading.EventResetMode.ManualReset" />
 
             
 
-             flag is specified for <paramref
-             name="mode" />
+             flag is specified for <paramref name="mode" />
 
             
 
-            , threads that wait on the event will not block. If the initial state is signaled, and <paramref
-             name="mode" />
+            , threads that wait on the event will not block. If the initial state is signaled, and <paramref name="mode" />
 
             
 
-             is <see
-             cref="F:System.Threading.EventResetMode.AutoReset" />
+             is <see cref="F:System.Threading.EventResetMode.AutoReset" />
 
             
 
@@ -188,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.EventWaitHandle" />
+            >Initializes a new instance of the <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
@@ -197,19 +176,26 @@
           >
         </summary>
         <param name="initialState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to set the initial state to signaled; false to set it to nonsignaled.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Threading.EventResetMode" />
+          One of the <see cref="T:System.Threading.EventResetMode" />
 
           
 
@@ -241,26 +227,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="name" />
+            >If <paramref name="name" />
 
             
 
-             is null or an empty string, a local <see
-             cref="T:System.Threading.EventWaitHandle" />
+             is null or an empty string, a local <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
              is created.</para
           >
           <para
-            >If a system event with the name specified for the <paramref
-             name="name" />
+            >If a system event with the name specified for the <paramref name="name" />
 
             
 
-             parameter already exists, the <paramref
-             name="initialState" />
+             parameter already exists, the <paramref name="initialState" />
 
             
 
@@ -268,18 +250,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When using this constructor for named system events, specify false for <paramref
-               name="initialState" />
+              >When using this constructor for named system events, specify false for <paramref name="initialState" />
 
               
 
-              . This constructor provides no way to determine whether a named system event was created, so you cannot make any assumptions about the state of the named event. To determine whether a named event was created, use the <see
-               cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@)" />
+              . This constructor provides no way to determine whether a named system event was created, so you cannot make any assumptions about the state of the named event. To determine whether a named event was created, use the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@)" />
 
               
 
-               constructor or the <see
-               cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
+               constructor or the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
               
 
@@ -287,23 +266,19 @@
             >
           </block>
           <para
-            >If the initial state of the event is nonsignaled, threads that wait on the event will block. If the initial state is signaled, and the <see
-             cref="F:System.Threading.EventResetMode.ManualReset" />
+            >If the initial state of the event is nonsignaled, threads that wait on the event will block. If the initial state is signaled, and the <see cref="F:System.Threading.EventResetMode.ManualReset" />
 
             
 
-             flag is specified for <paramref
-             name="mode" />
+             flag is specified for <paramref name="mode" />
 
             
 
-            , threads that wait on the event will not block. If the initial state is signaled, and <paramref
-             name="mode" />
+            , threads that wait on the event will not block. If the initial state is signaled, and <paramref name="mode" />
 
             
 
-             is <see
-             cref="F:System.Threading.EventResetMode.AutoReset" />
+             is <see cref="F:System.Threading.EventResetMode.AutoReset" />
 
             
 
@@ -313,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Threading.EventWaitHandle" />
+            >Initializes a new instance of the <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
@@ -322,26 +296,37 @@
           >
         </summary>
         <param name="initialState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to set the initial state to signaled if the named event is created as a result of this call; false to set it to nonsignaled.</param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Threading.EventResetMode" />
+          One of the <see cref="T:System.Threading.EventResetMode" />
 
           
 
            values that determines whether the event resets automatically or manually.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -437,36 +422,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+            >The <see cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
 
             
 
-             method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+             method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see cref="F:System.Security.AccessControl.AccessControlSections.Access" />
 
             
 
-            , <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
+            , <see cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
 
             
 
-            , and <see
-             cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+            , and <see cref="F:System.Security.AccessControl.AccessControlSections.Group" />
 
             
 
             .</para
           >
           <para
-            >The user must have <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions" />
+            >The user must have <see cref="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions" />
 
             
 
-             rights to call this method, and the event must have been opened with the <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions" />
+             rights to call this method, and the event must have been opened with the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions" />
 
             
 
@@ -476,13 +455,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >Gets an <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
-             object that represents the access control security for the named system event represented by the current <see
-             cref="T:System.Threading.EventWaitHandle" />
+             object that represents the access control security for the named system event represented by the current <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
@@ -492,8 +469,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+            >An <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
             
 
@@ -527,72 +503,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Threading.EventWaitHandle.OpenExisting" />
+            >The <see cref="Overload:System.Threading.EventWaitHandle.OpenExisting" />
 
             
 
-             method tries to open the specified named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see
-             cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
+             method tries to open the specified named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
             
 
-             constructors that has a <paramref
-             name="name" />
+             constructors that has a <paramref name="name" />
 
             
 
              parameter. </para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref
-             name="name" />
+            >Multiple calls to this method that use the same value for <paramref name="name" />
 
             
 
-             do not necessarily return the same <see
-             cref="T:System.Threading.EventWaitHandle" />
+             do not necessarily return the same <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
              object, even though the objects that are returned represent the same named system event.  </para
           >
           <para
-            >This method overload is equivalent to calling the <see
-             cref="M:System.Threading.EventWaitHandle.OpenExisting(System.String,System.Security.AccessControl.EventWaitHandleRights)" />
+            >This method overload is equivalent to calling the <see cref="M:System.Threading.EventWaitHandle.OpenExisting(System.String,System.Security.AccessControl.EventWaitHandleRights)" />
 
             
 
-             method overload and specifying <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
+             method overload and specifying <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
 
             
 
-             and <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
+             and <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
 
             
 
              rights, combined by using the bitwise OR operation.</para
           >
           <para
-            >Specifying the <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
+            >Specifying the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
 
             
 
-             flag allows a thread to wait on the named system event, and specifying the <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
+             flag allows a thread to wait on the named system event, and specifying the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
 
             
 
-             flag allows a thread to call the <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+             flag allows a thread to call the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
-             and <see
-             cref="M:System.Threading.EventWaitHandle.Reset" />
+             and <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
             
 
@@ -608,7 +572,11 @@
           <para>An  object that represents the named system event.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -642,59 +610,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="rights" />
+            >The <paramref name="rights" />
 
             
 
-             parameter must include the <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
+             parameter must include the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
 
             
 
-             flag to allow threads to wait on the event, and the <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
+             flag to allow threads to wait on the event, and the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
 
             
 
-             flag to allow threads to call the <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+             flag to allow threads to call the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
-             and <see
-             cref="M:System.Threading.EventWaitHandle.Reset" />
+             and <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
             
 
              methods. </para
           >
           <para
-            >The <see
-             cref="Overload:System.Threading.EventWaitHandle.OpenExisting" />
+            >The <see cref="Overload:System.Threading.EventWaitHandle.OpenExisting" />
 
             
 
-             method tries to open an existing named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see
-             cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
+             method tries to open an existing named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
             
 
-             constructors that has a <paramref
-             name="name" />
+             constructors that has a <paramref name="name" />
 
             
 
              parameter.</para
           >
           <para
-            >Multiple calls to this method that use the same value for <paramref
-             name="name" />
+            >Multiple calls to this method that use the same value for <paramref name="name" />
 
             
 
-             do not necessarily return the same <see
-             cref="T:System.Threading.EventWaitHandle" />
+             do not necessarily return the same <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
@@ -710,14 +668,22 @@
           <para>An object that represents the named system event.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the system synchronization event to open.</param
         >
         <param name="rights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -773,28 +739,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For an <see
-             cref="T:System.Threading.EventWaitHandle" />
+            >For an <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
-             with <see
-             cref="F:System.Threading.EventResetMode.AutoReset" />
+             with <see cref="F:System.Threading.EventResetMode.AutoReset" />
 
             
 
-             (including <see
-             cref="T:System.Threading.AutoResetEvent" />
+             (including <see cref="T:System.Threading.AutoResetEvent" />
 
             
 
-            ), the <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+            ), the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
-             method releases a single thread. If there are no waiting threads, the wait handle remains signaled until a thread attempts to wait on it, or until its <see
-             cref="M:System.Threading.EventWaitHandle.Reset" />
+             method releases a single thread. If there are no waiting threads, the wait handle remains signaled until a thread attempts to wait on it, or until its <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
             
 
@@ -802,28 +763,23 @@
           >
           <block subset="none" type="note">
             <para
-              >There is no guarantee that every call to the <see
-               cref="M:System.Threading.EventWaitHandle.Set" />
+              >There is no guarantee that every call to the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
               
 
-               method will release a thread from an <see
-               cref="T:System.Threading.EventWaitHandle" />
+               method will release a thread from an <see cref="T:System.Threading.EventWaitHandle" />
 
               
 
-               whose reset mode is <see
-               cref="F:System.Threading.EventResetMode.AutoReset" />
+               whose reset mode is <see cref="F:System.Threading.EventResetMode.AutoReset" />
 
               
 
-              . If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see
-               cref="M:System.Threading.EventWaitHandle.Set" />
+              . If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see cref="M:System.Threading.EventWaitHandle.Set" />
 
               
 
-               is called when there are no threads waiting and the <see
-               cref="T:System.Threading.EventWaitHandle" />
+               is called when there are no threads waiting and the <see cref="T:System.Threading.EventWaitHandle" />
 
               
 
@@ -831,28 +787,23 @@
             >
           </block>
           <para
-            >For an <see
-             cref="T:System.Threading.EventWaitHandle" />
+            >For an <see cref="T:System.Threading.EventWaitHandle" />
 
             
 
-             with <see
-             cref="F:System.Threading.EventResetMode.ManualReset" />
+             with <see cref="F:System.Threading.EventResetMode.ManualReset" />
 
             
 
-             (including <see
-             cref="T:System.Threading.ManualResetEvent" />
+             (including <see cref="T:System.Threading.ManualResetEvent" />
 
             
 
-            ), calling the <see
-             cref="M:System.Threading.EventWaitHandle.Set" />
+            ), calling the <see cref="M:System.Threading.EventWaitHandle.Set" />
 
             
 
-             method leaves the wait handle in a signaled state until its <see
-             cref="M:System.Threading.EventWaitHandle.Reset" />
+             method leaves the wait handle in a signaled state until its <see cref="M:System.Threading.EventWaitHandle.Reset" />
 
             
 
@@ -897,13 +848,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user must have <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions" />
+            >The user must have <see cref="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions" />
 
             
 
-             rights to call this method, and the event must have been opened with the <see
-             cref="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions" />
+             rights to call this method, and the event must have been opened with the <see cref="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions" />
 
             
 
@@ -915,12 +864,15 @@
           <para>Sets the access control security for a named system event.</para>
         </summary>
         <param name="eventSecurity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+          An <see cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
           
 

@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class represents an entry in an <see
-         cref="T:System.Xml.IXmlDictionary" />
+        >This class represents an entry in an <see cref="T:System.Xml.IXmlDictionary" />
 
         
 
-        .  It associates an integer value with a string value for use by <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+        .  It associates an integer value with a string value for use by <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
-         and <see
-         cref="T:System.Xml.XmlDictionaryWriter" />
+         and <see cref="T:System.Xml.XmlDictionaryWriter" />
 
         
 
@@ -38,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an entry stored in a <see
-         cref="T:System.Xml.XmlDictionary" />
+        >Represents an entry stored in a <see cref="T:System.Xml.XmlDictionary" />
 
         
 
@@ -70,8 +66,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryString" />
+            >The <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -83,26 +78,37 @@
           <para>Creates an instance of this class. </para>
         </summary>
         <param name="dictionary">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.IXmlDictionary" />
+          The <see cref="T:System.Xml.IXmlDictionary" />
 
           
 
            containing this instance.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string that is the value of the dictionary entry.</param
         >
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -129,13 +135,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the <see
-             cref="T:System.Xml.IXmlDictionary" />
+            >Represents the <see cref="T:System.Xml.IXmlDictionary" />
 
             
 
-             passed to the constructor of this instance of <see
-             cref="T:System.Xml.XmlDictionaryString" />
+             passed to the constructor of this instance of <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -166,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.XmlDictionaryString" />
+            >Gets an <see cref="T:System.Xml.XmlDictionaryString" />
 
             
 
@@ -191,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property must be greater than 0 and less than <see
-             cref="F:System.Int32.MaxValue" />
+            >This property must be greater than 0 and less than <see cref="F:System.Int32.MaxValue" />
 
             
 

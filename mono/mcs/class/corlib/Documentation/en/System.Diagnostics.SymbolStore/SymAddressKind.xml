@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <paramref
-         name="addr1" />
+        >The <paramref name="addr1" />
 
         
 
-        , <paramref
-         name="addr2" />
+        , <paramref name="addr2" />
 
         
 
-        , and <paramref
-         name="addr3" />
+        , and <paramref name="addr3" />
 
         
 
-         parameters refer to the address parameters in the <see
-         cref="T:System.Diagnostics.SymbolStore.ISymbolWriter" />
+         parameters refer to the address parameters in the <see cref="T:System.Diagnostics.SymbolStore.ISymbolWriter" />
 
         
 
@@ -51,23 +47,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies address types for local variables, parameters, and fields in the methods <see
-         cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineLocalVariable(System.String,System.Reflection.FieldAttributes,System.Byte[],System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" />
+        >Specifies address types for local variables, parameters, and fields in the methods <see cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineLocalVariable(System.String,System.Reflection.FieldAttributes,System.Byte[],System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)" />
 
         
 
-        , <see
-         cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineParameter(System.String,System.Reflection.ParameterAttributes,System.Int32,System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32)" />
+        , <see cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineParameter(System.String,System.Reflection.ParameterAttributes,System.Int32,System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32)" />
 
         
 
-        , and <see
-         cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineField(System.Diagnostics.SymbolStore.SymbolToken,System.String,System.Reflection.FieldAttributes,System.Byte[],System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32)" />
+        , and <see cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineField(System.Diagnostics.SymbolStore.SymbolToken,System.String,System.Reflection.FieldAttributes,System.Byte[],System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32)" />
 
         
 
-         of the <see
-         cref="T:System.Diagnostics.SymbolStore.ISymbolWriter" />
+         of the <see cref="T:System.Diagnostics.SymbolStore.ISymbolWriter" />
 
         
 
@@ -97,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A bit field. The <paramref
-             name="addr1" />
+            >A bit field. The <paramref name="addr1" />
 
             
 
-             parameter is the position where the field starts, and the <paramref
-             name="addr2" />
+             parameter is the position where the field starts, and the <paramref name="addr2" />
 
             
 
@@ -133,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Microsoft intermediate language (MSIL) offset. The <paramref
-             name="addr1" />
+            >A Microsoft intermediate language (MSIL) offset. The <paramref name="addr1" />
 
             
 
@@ -164,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A native offset. The <paramref
-             name="addr1" />
+            >A native offset. The <paramref name="addr1" />
 
             
 
@@ -195,8 +183,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A native register address. The <paramref
-             name="addr1" />
+            >A native register address. The <paramref name="addr1" />
 
             
 
@@ -226,13 +213,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A register-relative address. The <paramref
-             name="addr1" />
+            >A register-relative address. The <paramref name="addr1" />
 
             
 
-             parameter is the low-order register, and the <paramref
-             name="addr2" />
+             parameter is the low-order register, and the <paramref name="addr2" />
 
             
 
@@ -262,13 +247,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A register-relative address. The <paramref
-             name="addr1" />
+            >A register-relative address. The <paramref name="addr1" />
 
             
 
-             parameter is the register, and the <paramref
-             name="addr2" />
+             parameter is the register, and the <paramref name="addr2" />
 
             
 
@@ -298,18 +281,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A register-relative address. The <paramref
-             name="addr1" />
+            >A register-relative address. The <paramref name="addr1" />
 
             
 
-             parameter is the low-order register, the <paramref
-             name="addr2" />
+             parameter is the low-order register, the <paramref name="addr2" />
 
             
 
-             parameter is the stack register, and the <paramref
-             name="addr3" />
+             parameter is the stack register, and the <paramref name="addr3" />
 
             
 
@@ -339,8 +319,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A native Relevant Virtual Address (RVA). The <paramref
-             name="addr1" />
+            >A native Relevant Virtual Address (RVA). The <paramref name="addr1" />
 
             
 
@@ -368,13 +347,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A native section offset. The <paramref
-             name="addr1" />
+            >A native section offset. The <paramref name="addr1" />
 
             
 
-             parameter is the section, and the <paramref
-             name="addr2" />
+             parameter is the section, and the <paramref name="addr2" />
 
             
 
@@ -404,18 +381,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A register-relative address. The <paramref
-             name="addr1" />
+            >A register-relative address. The <paramref name="addr1" />
 
             
 
-             parameter is the stack register, the <paramref
-             name="addr2" />
+             parameter is the stack register, the <paramref name="addr2" />
 
             
 
-             parameter is the offset from the stack pointer to the low-order part of the value, and the <paramref
-             name="addr3" />
+             parameter is the offset from the stack pointer to the low-order part of the value, and the <paramref name="addr3" />
 
             
 

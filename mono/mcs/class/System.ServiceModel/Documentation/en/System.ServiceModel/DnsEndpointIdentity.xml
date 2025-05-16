@@ -47,13 +47,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="identity" />
+            >The <paramref name="identity" />
 
             
 
-             is used to create an endpoint identity by the <see
-             cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
+             is used to create an endpoint identity by the <see cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
 
             
 
@@ -63,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.DnsEndpointIdentity" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.DnsEndpointIdentity" />
 
             
 
@@ -72,12 +69,15 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IdentityModel.Claims.Claim" />
+          The <see cref="T:System.IdentityModel.Claims.Claim" />
 
           
 
@@ -103,13 +103,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="dnsName" />
+            >The <paramref name="dnsName" />
 
             
 
-             is used to create a DNS claim and an endpoint identity is created by the <see
-             cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
+             is used to create a DNS claim and an endpoint identity is created by the <see cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
 
             
 

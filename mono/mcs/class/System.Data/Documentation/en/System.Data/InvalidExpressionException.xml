@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Data.DataColumn.Expression" />
+        >The <see cref="P:System.Data.DataColumn.Expression" />
 
         
 
@@ -32,18 +31,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when you try to add a <see
-         cref="T:System.Data.DataColumn" />
+        >Represents the exception that is thrown when you try to add a <see cref="T:System.Data.DataColumn" />
 
         
 
-         that contains an invalid <see
-         cref="P:System.Data.DataColumn.Expression" />
+         that contains an invalid <see cref="P:System.Data.DataColumn.Expression" />
 
         
 
-         to a <see
-         cref="T:System.Data.DataColumnCollection" />
+         to a <see cref="T:System.Data.DataColumnCollection" />
 
         
 
@@ -62,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidExpressionException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidExpressionException" />
 
             
 
@@ -88,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidExpressionException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidExpressionException" />
 
             
 
@@ -97,7 +91,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -125,18 +123,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidExpressionException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidExpressionException" />
 
             
 
-             class with the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class with the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and the <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -144,14 +139,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data needed to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,8 +185,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InvalidExpressionException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InvalidExpressionException" />
 
             
 
@@ -191,7 +193,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

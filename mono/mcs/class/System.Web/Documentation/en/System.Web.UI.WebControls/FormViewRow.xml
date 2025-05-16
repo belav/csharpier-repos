@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.FormViewRow" />
+        >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
         
 
-         class is used to represent an individual row in a <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+         class is used to represent an individual row in a <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
-         control. Each row in the <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+         control. Each row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
@@ -51,8 +48,7 @@
           </term>
           <description>
             <para
-              >The data row in the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >The data row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
@@ -66,13 +62,11 @@
           </term>
           <description>
             <para
-              >The empty data row in the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >The empty data row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
-               control. The empty data row is displayed in a <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+               control. The empty data row is displayed in a <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
@@ -86,8 +80,7 @@
           </term>
           <description>
             <para
-              >The footer row in the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >The footer row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
@@ -101,8 +94,7 @@
           </term>
           <description>
             <para
-              >The header row in the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >The header row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
@@ -116,8 +108,7 @@
           </term>
           <description>
             <para
-              >A pager row in the <see
-               cref="T:System.Web.UI.WebControls.FormView" />
+              >A pager row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
               
 
@@ -127,18 +118,15 @@
         </item>
       </list>
       <para
-        >To determine the row type of a <see
-         cref="T:System.Web.UI.WebControls.FormViewRow" />
+        >To determine the row type of a <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
         
 
-         object, use the <see
-         cref="P:System.Web.UI.WebControls.FormViewRow.RowType" />
+         object, use the <see cref="P:System.Web.UI.WebControls.FormViewRow.RowType" />
 
         
 
-         property. A <see
-         cref="T:System.Web.UI.WebControls.FormViewRow" />
+         property. A <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
         
 
@@ -161,8 +149,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.FormViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
               
 
@@ -176,8 +163,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.FormViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
               
 
@@ -191,8 +177,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.FormViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
               
 
@@ -206,8 +191,7 @@
           </term>
           <description>
             <para
-              >The <see
-               cref="T:System.Web.UI.WebControls.FormViewRow" />
+              >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
               
 
@@ -217,49 +201,41 @@
         </item>
       </list>
       <para
-        >To determine the state of a <see
-         cref="T:System.Web.UI.WebControls.FormViewRow" />
+        >To determine the state of a <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
         
 
-         object, use the <see
-         cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
-
-        
-
-         property.</para
-      >
-      <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.FormView" />
-
-        
-
-         control displays the contents of its <see
-         cref="P:System.Web.UI.WebControls.FormView.ItemTemplate" />
-
-        
-
-         property in a data row. To access the data row, use the <see
-         cref="P:System.Web.UI.WebControls.FormView.Row" />
-
-        
-
-         property. To determine the index of the current data item in the data source, use the <see
-         cref="P:System.Web.UI.WebControls.FormViewRow.ItemIndex" />
+         object, use the <see cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
 
         
 
          property.</para
       >
       <para
-        >You can access the individual cells of the <see
-         cref="T:System.Web.UI.WebControls.FormViewRow" />
+        >The <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
-         object by using the <see
-         cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+         control displays the contents of its <see cref="P:System.Web.UI.WebControls.FormView.ItemTemplate" />
+
+        
+
+         property in a data row. To access the data row, use the <see cref="P:System.Web.UI.WebControls.FormView.Row" />
+
+        
+
+         property. To determine the index of the current data item in the data source, use the <see cref="P:System.Web.UI.WebControls.FormViewRow.ItemIndex" />
+
+        
+
+         property.</para
+      >
+      <para
+        >You can access the individual cells of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+        
+
+         object by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
         
 
@@ -268,8 +244,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.Control.Controls" />
+            >Use the <see cref="P:System.Web.UI.Control.Controls" />
 
             
 
@@ -278,13 +253,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.Control.FindControl(System.String)" />
+            >Use the <see cref="M:System.Web.UI.Control.FindControl(System.String)" />
 
             
 
-             method of the cell to retrieve the control, if the control has its <see
-             cref="P:System.Web.UI.Control.ID" />
+             method of the cell to retrieve the control, if the control has its <see cref="P:System.Web.UI.Control.ID" />
 
             
 
@@ -293,13 +266,11 @@
         </item>
       </list>
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.FormViewRow" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
         
 
-         class, see the <see
-         cref="M:System.Web.UI.WebControls.FormViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+         class, see the <see cref="M:System.Web.UI.WebControls.FormViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
 
         
 
@@ -309,8 +280,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a row within a <see
-         cref="T:System.Web.UI.WebControls.FormView" />
+        >Represents a row within a <see cref="T:System.Web.UI.WebControls.FormView" />
 
         
 
@@ -336,16 +306,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FormViewRow" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Web.UI.WebControls.FormViewRow" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
             
 
@@ -370,8 +338,7 @@
               </term>
               <description>
                 <para
-                  >The value specified by the <paramref
-                   name="itemIndex" />
+                  >The value specified by the <paramref name="itemIndex" />
 
                   
 
@@ -387,8 +354,7 @@
               </term>
               <description>
                 <para
-                  >The value specified by the <paramref
-                   name="rowType" />
+                  >The value specified by the <paramref name="rowType" />
 
                   
 
@@ -404,8 +370,7 @@
               </term>
               <description>
                 <para
-                  >The value specified by the <paramref
-                   name="rowState" />
+                  >The value specified by the <paramref name="rowState" />
 
                   
 
@@ -418,8 +383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.FormViewRow" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
             
 
@@ -427,24 +391,30 @@
           >
         </summary>
         <param name="rowType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowType" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowType" />
 
           
 
            enumeration values.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
@@ -467,8 +437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FormViewRow.ItemIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FormViewRow.ItemIndex" />
 
             
 
@@ -509,14 +478,22 @@
           <para>true if the event has been canceled; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -542,8 +519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
 
             
 
@@ -566,8 +542,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.FormViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
                   
 
@@ -581,8 +556,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.FormViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
                   
 
@@ -596,8 +570,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.FormViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
                   
 
@@ -611,8 +584,7 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.FormViewRow" />
+                  >The <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
                   
 
@@ -626,8 +598,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the state of the <see
-             cref="T:System.Web.UI.WebControls.FormViewRow" />
+            >Gets the state of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
             
 
@@ -654,13 +625,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.FormViewRow.RowType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.FormViewRow.RowType" />
 
             
 
-             property to determine the type of row that the <see
-             cref="T:System.Web.UI.WebControls.FormViewRow" />
+             property to determine the type of row that the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
             
 
@@ -683,8 +652,7 @@
               </term>
               <description>
                 <para
-                  >The data row in the <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                  >The data row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
@@ -698,13 +666,11 @@
               </term>
               <description>
                 <para
-                  >The empty data row in the <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                  >The empty data row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
-                   control. The empty data row is displayed in a <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                   control. The empty data row is displayed in a <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
@@ -718,8 +684,7 @@
               </term>
               <description>
                 <para
-                  >The footer row in the <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                  >The footer row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
@@ -733,8 +698,7 @@
               </term>
               <description>
                 <para
-                  >The header row in the <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                  >The header row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
@@ -748,8 +712,7 @@
               </term>
               <description>
                 <para
-                  >A pager row in the <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                  >A pager row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
@@ -763,8 +726,7 @@
               </term>
               <description>
                 <para
-                  >A separator row in the <see
-                   cref="T:System.Web.UI.WebControls.FormView" />
+                  >A separator row in the <see cref="T:System.Web.UI.WebControls.FormView" />
 
                   
 
@@ -778,8 +740,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the row type of the <see
-             cref="T:System.Web.UI.WebControls.FormViewRow" />
+            >Gets the row type of the <see cref="T:System.Web.UI.WebControls.FormViewRow" />
 
             
 

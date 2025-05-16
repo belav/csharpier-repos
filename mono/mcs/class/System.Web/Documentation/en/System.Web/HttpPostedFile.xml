@@ -16,21 +16,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.HttpFileCollection" />
+        >The <see cref="T:System.Web.HttpFileCollection" />
 
         
 
-         class provides access to all the files that are uploaded from a client as a file collection. The <see
-         cref="T:System.Web.HttpPostedFile" />
+         class provides access to all the files that are uploaded from a client as a file collection. The <see cref="T:System.Web.HttpPostedFile" />
 
         
 
          class provides properties and methods to get information about an individual file and to read and save the file. </para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+        >The <see cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
 
         
 
@@ -38,13 +35,11 @@
       >
       <para>Files are uploaded in MIME multipart/form-data format. By default, all requests, including form fields and uploaded files, larger than 256 KB are buffered to disk, rather than held in server memory.</para>
       <para
-        >You can specify the maximum allowable request size by accessing the <see
-         cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+        >You can specify the maximum allowable request size by accessing the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
 
         
 
-         property or by setting the maxRequestLength attribute of the <format
-         type="text/html">
+         property or by setting the maxRequestLength attribute of the <format type="text/html">
           <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369"
             >httpRuntime Element (ASP.NET Settings Schema)</a
           >
@@ -55,13 +50,11 @@
          element within the Machine.config or Web.config file. The default is 4 MB.</para
       >
       <para
-        >The amount of data that is buffered in server memory for a request, which includes file uploads, can be specified by accessing the <see
-         cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
+        >The amount of data that is buffered in server memory for a request, which includes file uploads, can be specified by accessing the <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
 
         
 
-         property or by setting the requestLengthDiskThreshold attribute of the <format
-         type="text/html">
+         property or by setting the requestLengthDiskThreshold attribute of the <format type="text/html">
           <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369"
             >httpRuntime Element (ASP.NET Settings Schema)</a
           >
@@ -72,26 +65,22 @@
          element within the Machine.config or Web.config file.</para
       >
       <para
-        >By adjusting the <see
-         cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+        >By adjusting the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
 
         
 
-         and <see
-         cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
+         and <see cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
 
         
 
-         properties, you can fine tune the performance of your server. Additionally, you should consider setting the <see
-         cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+         properties, you can fine tune the performance of your server. Additionally, you should consider setting the <see cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
 
         
 
          to prevent denial of service attacks caused by users posting large files to the server.</para
       >
       <para
-        >Server resources that are allocated to buffer the uploaded file will be destroyed when the request ends. To save a durable copy of the file, use the <see
-         cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+        >Server resources that are allocated to buffer the uploaded file will be destroyed when the request ends. To save a durable copy of the file, use the <see cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
 
         
 
@@ -169,16 +158,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.Stream" />
-        </value>
+        <value>a <see cref="T:System.IO.Stream" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.IO.Stream" />
+            >Gets a <see cref="T:System.IO.Stream" />
 
             
 
@@ -204,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The maximum size allowed for a request, which includes uploaded files, is 4 MB, by default. Maximum request size can be specified in the Machine.config or Web.config file in the maxRequestLength attribute of the <format
-             type="text/html">
+            >The maximum size allowed for a request, which includes uploaded files, is 4 MB, by default. Maximum request size can be specified in the Machine.config or Web.config file in the maxRequestLength attribute of the <format type="text/html">
               <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369"
                 >httpRuntime Element (ASP.NET Settings Schema)</a
               >
@@ -213,8 +197,7 @@
 
             
 
-             element. The maximum request size for a specific page can be specified using the <format
-             type="text/html">
+             element. The maximum request size for a specific page can be specified using the <format type="text/html">
               <a href="922ef7d5-da38-4661-b1c6-5b9e5ceda1d5"
                 >location Element (ASP.NET Settings Schema)</a
               >
@@ -230,7 +213,11 @@
           <para>Saves the contents of an uploaded file.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

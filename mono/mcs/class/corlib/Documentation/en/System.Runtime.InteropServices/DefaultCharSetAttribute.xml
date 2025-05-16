@@ -30,36 +30,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
+        >Apply the <see cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
 
         
 
-         attribute at the assembly level or module level to set the <see
-         cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+         attribute at the assembly level or module level to set the <see cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
 
         
 
-         value for any call to <see
-         cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+         value for any call to <see cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
         
 
-         that does not include a <see
-         cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+         that does not include a <see cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
 
         
 
          named argument specified by the user.</para
       >
       <para
-        >A <see
-         cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+        >A <see cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
 
         
 
-         named argument specified by the user overrides the setting of <see
-         cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
+         named argument specified by the user overrides the setting of <see cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
 
         
 
@@ -72,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the value of the <see
-         cref="T:System.Runtime.InteropServices.CharSet" />
+        >Specifies the value of the <see cref="T:System.Runtime.InteropServices.CharSet" />
 
         
 
@@ -105,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.InteropServices.CharSet" />
+             class with the specified <see cref="T:System.Runtime.InteropServices.CharSet" />
 
             
 
@@ -119,12 +110,15 @@
           >
         </summary>
         <param name="charSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.InteropServices.CharSet" />
+          One of the <see cref="T:System.Runtime.InteropServices.CharSet" />
 
           
 
@@ -156,13 +150,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default value of <see
-             cref="T:System.Runtime.InteropServices.CharSet" />
+            >Gets the default value of <see cref="T:System.Runtime.InteropServices.CharSet" />
 
             
 
-             for any call to <see
-             cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+             for any call to <see cref="T:System.Runtime.InteropServices.DllImportAttribute" />
 
             
 

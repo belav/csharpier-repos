@@ -36,28 +36,23 @@
         </item>
       </list>
       <para
-        >Override the <see
-         cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" />
+        >Override the <see cref="P:System.ServiceModel.Channels.MessageEncoderFactory.Encoder" />
 
         
 
-         to return an instance of your custom <see
-         cref="T:System.ServiceModel.Channels.MessageEncoder" />
+         to return an instance of your custom <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
         
 
-        . Then wire up your custom <see
-         cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+        . Then wire up your custom <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
 
         
 
-         to the binding element stack used to configure the service or client by overriding the <see
-         cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
+         to the binding element stack used to configure the service or client by overriding the <see cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
 
         
 
-         method to return an instance of this factory. For more information about custom encoders, see <format
-         type="text/html">
+         method to return an instance of this factory. For more information about custom encoders, see <format type="text/html">
           <a href="0f03c635-f3e7-4c5c-9463-3cb0135e221e">Custom Encoders</a>
         </format>
 
@@ -88,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
 
             
 
@@ -127,8 +121,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.MessageEncoder" />
+            >The <see cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
             
 
@@ -183,18 +176,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The message version can be set using the <see
-             cref="P:System.ServiceModel.Channels.MessageEncodingBindingElement.MessageVersion" />
+            >The message version can be set using the <see cref="P:System.ServiceModel.Channels.MessageEncodingBindingElement.MessageVersion" />
 
             
 
-             property. <see
-             cref="T:System.ServiceModel.Channels.MessageVersion" />
+             property. <see cref="T:System.ServiceModel.Channels.MessageVersion" />
 
             
 
-             is limited to using certain versions of SOAP and WS-Addressing and is not extensible. So if these versions are not to be used, this property should be overridden to return <see
-             cref="P:System.ServiceModel.Channels.MessageVersion.None" />
+             is limited to using certain versions of SOAP and WS-Addressing and is not extensible. So if these versions are not to be used, this property should be overridden to return <see cref="P:System.ServiceModel.Channels.MessageVersion.None" />
 
             
 

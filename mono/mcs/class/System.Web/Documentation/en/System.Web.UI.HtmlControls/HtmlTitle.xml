@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+        >Use the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
         
 
@@ -26,20 +25,17 @@
       >
       <block subset="none" type="note">
         <para
-          >You can also set the page title by using the title attribute of the <format
-           type="text/html">
+          >You can also set the page title by using the title attribute of the <format type="text/html">
             <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
           </format>
 
           
 
-           directive, or by setting the <see
-           cref="P:System.Web.UI.Page.Title" />
+           directive, or by setting the <see cref="P:System.Web.UI.Page.Title" />
 
           
 
-           property of the <see
-           cref="T:System.Web.UI.Page" />
+           property of the <see cref="T:System.Web.UI.Page" />
 
           
 
@@ -62,13 +58,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
-             control using default values. It creates an HTML &lt;title&gt; element on the Web page. The following table shows the initial property value for an instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+             control using default values. It creates an HTML &lt;title&gt; element on the Web page. The following table shows the initial property value for an instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
@@ -100,8 +94,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
@@ -130,38 +123,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the element added to the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+            >If the element added to the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
-             control is a <see
-             cref="T:System.Web.UI.LiteralControl" />
+             control is a <see cref="T:System.Web.UI.LiteralControl" />
 
             
 
-             control, then the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTitle.AddParsedSubObject(System.Object)" />
+             control, then the <see cref="M:System.Web.UI.HtmlControls.HtmlTitle.AddParsedSubObject(System.Object)" />
 
             
 
-             method sets the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTitle.Text" />
+             method sets the <see cref="P:System.Web.UI.HtmlControls.HtmlTitle.Text" />
 
             
 
-             property with the value of the literal string; otherwise, the base <see
-             cref="M:System.Web.UI.Control.AddParsedSubObject(System.Object)" />
+             property with the value of the literal string; otherwise, the base <see cref="M:System.Web.UI.Control.AddParsedSubObject(System.Object)" />
 
             
 
-             method is called. The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTitle.AddParsedSubObject(System.Object)" />
+             method is called. The <see cref="M:System.Web.UI.HtmlControls.HtmlTitle.AddParsedSubObject(System.Object)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
@@ -171,13 +157,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+            >Notifies the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
-             control that an XML or HTML element was parsed and adds that element to the <see
-             cref="T:System.Web.UI.ControlCollection" />
+             control that an XML or HTML element was parsed and adds that element to the <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -185,12 +169,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -217,13 +204,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Creates a new <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             collection for the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+             collection for the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
@@ -233,8 +218,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >A <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -265,28 +249,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlTitle.Render(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlTitle.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method first calls the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+             method first calls the <see cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
 
             
 
-             method using the Title member of the <see
-             cref="T:System.Web.UI.HtmlTextWriterTag" />
+             method using the Title member of the <see cref="T:System.Web.UI.HtmlTextWriterTag" />
 
             
 
-             enumeration. Next, any child controls of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+             enumeration. Next, any child controls of the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
-             control are rendered. Finally, the <see
-             cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+             control are rendered. Finally, the <see cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
 
             
 
@@ -296,13 +275,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
             
 
-             control to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -310,12 +287,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -349,8 +329,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlTitle.Text" />
+            >Use the <see cref="P:System.Web.UI.HtmlControls.HtmlTitle.Text" />
 
             
 

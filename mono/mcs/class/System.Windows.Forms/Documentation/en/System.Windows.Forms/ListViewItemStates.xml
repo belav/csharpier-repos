@@ -18,23 +18,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="P:System.Windows.Forms.DrawListViewItemEventArgs.State" />
+        >This enumeration is used by the <see cref="P:System.Windows.Forms.DrawListViewItemEventArgs.State" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" />
+         and <see cref="P:System.Windows.Forms.DrawListViewSubItemEventArgs.ItemState" />
 
         
 
-         properties. For more information, see the <see
-         cref="E:System.Windows.Forms.ListView.DrawItem" />
+         properties. For more information, see the <see cref="E:System.Windows.Forms.ListView.DrawItem" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.ListView.DrawSubItem" />
+         and <see cref="E:System.Windows.Forms.ListView.DrawSubItem" />
 
         
 
@@ -44,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that represent the possible states of a <see
-         cref="T:System.Windows.Forms.ListViewItem" />
+        >Defines constants that represent the possible states of a <see cref="T:System.Windows.Forms.ListViewItem" />
 
         
 

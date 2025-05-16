@@ -22,42 +22,36 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. For example, an <see
-         cref="T:System.Text.ASCIIEncoding" />
+        >A common reason for an encoding or decoding operation to fail is if the underlying encoding class does not provide a mapping between a character and an equivalent byte sequence. For example, an <see cref="T:System.Text.ASCIIEncoding" />
 
         
 
-         object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see
-         cref="T:System.Text.EncoderReplacementFallback" />
+         object cannot encode a character having a Unicode code point value that is outside the range U+0000 to U+007F. If the input character cannot be converted to an output byte sequence, a <see cref="T:System.Text.EncoderReplacementFallback" />
 
         
 
          object substitutes a specified replacement string for the original input character. The conversion process encodes the replacement string and then continues to process the remainder of the original input. </para
       >
       <para
-        >The value of a <see
-         cref="T:System.Text.EncoderReplacementFallback" />
+        >The value of a <see cref="T:System.Text.EncoderReplacementFallback" />
 
         
 
          object is the replacement string used to initialize that object.</para
       >
       <para
-        >This class is one of two .NET Framework classes that implement different fallback strategies for handling encoding conversion failures. The other class is the <see
-         cref="T:System.Text.EncoderExceptionFallback" />
+        >This class is one of two .NET Framework classes that implement different fallback strategies for handling encoding conversion failures. The other class is the <see cref="T:System.Text.EncoderExceptionFallback" />
 
         
 
-         class, which throws an <see
-         cref="T:System.Text.EncoderFallbackException" />
+         class, which throws an <see cref="T:System.Text.EncoderFallbackException" />
 
         
 
          when an invalid character is encountered.</para
       >
       <para
-        >When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see
-         cref="T:System.ArgumentException" />
+        >When you choose a fallback string to use with this class, make sure that the string is composed entirely of characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see cref="T:System.ArgumentException" />
 
         
 
@@ -87,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the replacement string that is the value of this <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >By default, the replacement string that is the value of this <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -98,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Initializes a new instance of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -130,36 +122,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="replacement" />
+            >The <paramref name="replacement" />
 
             
 
-             parameter initializes the replacement string that is the value of this <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             parameter initializes the replacement string that is the value of this <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
-             object. You application must provide a <paramref
-             name="replacement" />
+             object. You application must provide a <paramref name="replacement" />
 
             
 
-             value that contains only characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see
-             cref="T:System.ArgumentException" />
+             value that contains only characters that can be encoded in the target encoding. Otherwise, a recursive fallback results, causing an <see cref="T:System.ArgumentException" />
 
             
 
-            . For example, the fallback provided for an <see
-             cref="T:System.Text.ASCIIEncoding" />
+            . For example, the fallback provided for an <see cref="T:System.Text.ASCIIEncoding" />
 
             
 
              object cannot include the character "¿" (U+00BF) because that character is itself not a valid ASCII character.</para
           >
           <para
-            >As a result of this, U+FFFD, which is a good choice for a fallback string for <see
-             cref="T:System.Text.DecoderExceptionFallback" />
+            >As a result of this, U+FFFD, which is a good choice for a fallback string for <see cref="T:System.Text.DecoderExceptionFallback" />
 
             
 
@@ -169,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Initializes a new instance of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -178,7 +163,11 @@
           >
         </summary>
         <param name="replacement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,13 +199,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >Creates a <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
-             object that is initialized with the replacement string of this <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             object that is initialized with the replacement string of this <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -226,13 +213,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Text.EncoderFallbackBuffer" />
+            >A <see cref="T:System.Text.EncoderFallbackBuffer" />
 
             
 
-             object equal to this <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             object equal to this <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -259,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the replacement string that is the value of the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Gets the replacement string that is the value of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -291,13 +275,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of a <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >The value of a <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
-             object is the value of its <see
-             cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
+             object is the value of its <see cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
 
             
 
@@ -307,8 +289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the value of a specified object is equal to the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Indicates whether the value of a specified object is equal to the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -318,18 +299,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="value" />
+            >true if the <paramref name="value" />
 
             
 
-             parameter specifies an <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             parameter specifies an <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
-             object and the replacement string of that object is equal to the replacement string of this <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+             object and the replacement string of that object is equal to the replacement string of this <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -337,12 +315,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Text.EncoderReplacementFallback" />
+          A <see cref="T:System.Text.EncoderReplacementFallback" />
 
           
 
@@ -370,13 +351,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of a <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >The value of a <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
-             object is the value of its <see
-             cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
+             object is the value of its <see cref="P:System.Text.EncoderReplacementFallback.DefaultString" />
 
             
 
@@ -386,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the hash code for the value of the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Retrieves the hash code for the value of the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 
@@ -418,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of characters in the replacement string for the <see
-             cref="T:System.Text.EncoderReplacementFallback" />
+            >Gets the number of characters in the replacement string for the <see cref="T:System.Text.EncoderReplacementFallback" />
 
             
 

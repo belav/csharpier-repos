@@ -19,34 +19,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Control.DragDrop" />
+        >The <see cref="E:System.Windows.Forms.Control.DragDrop" />
 
         
 
-         event occurs when the user completes a drag-and-drop operation by dragging an object over the control and then dropping it onto the control by releasing the mouse button. The <see
-         cref="E:System.Windows.Forms.Control.DragEnter" />
+         event occurs when the user completes a drag-and-drop operation by dragging an object over the control and then dropping it onto the control by releasing the mouse button. The <see cref="E:System.Windows.Forms.Control.DragEnter" />
 
         
 
-         event occurs when the user moves the mouse pointer onto the control while dragging an object with the mouse. The <see
-         cref="E:System.Windows.Forms.Control.DragOver" />
+         event occurs when the user moves the mouse pointer onto the control while dragging an object with the mouse. The <see cref="E:System.Windows.Forms.Control.DragOver" />
 
         
 
          event occurs when the user moves the mouse pointer over the control while dragging an object with the mouse.</para
       >
       <para
-        >A <see
-         cref="T:System.Windows.Forms.DragEventArgs" />
+        >A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
         
 
          object specifies any data associated with this event; the current state of the SHIFT, CTRL, and ALT keys; the location of the mouse pointer; and the drag-and-drop effects allowed by the source and target of the drag event.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -58,18 +53,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.DragDrop" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.DragDrop" />
 
         
 
-        , <see
-         cref="E:System.Windows.Forms.Control.DragEnter" />
+        , <see cref="E:System.Windows.Forms.Control.DragEnter" />
 
         
 
-        , or <see
-         cref="E:System.Windows.Forms.Control.DragOver" />
+        , or <see cref="E:System.Windows.Forms.Control.DragOver" />
 
         
 
@@ -97,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DragEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DragEventArgs" />
 
             
 
@@ -106,52 +97,74 @@
           >
         </summary>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data associated with this event. </param
         >
         <param name="keyState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The current state of the SHIFT, CTRL, and ALT keys. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate of the mouse cursor in pixels. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The y-coordinate of the mouse cursor in pixels. </param
         >
         <param name="allowedEffect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DragDropEffects" />
+          One of the <see cref="T:System.Windows.Forms.DragDropEffects" />
 
           
 
            values. </param
         >
         <param name="effect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.DragDropEffects" />
+          One of the <see cref="T:System.Windows.Forms.DragDropEffects" />
 
           
 
@@ -177,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a control initiates a drag-and-drop operation by calling the <see
-             cref="M:System.Windows.Forms.Control.DoDragDrop(System.Object,System.Windows.Forms.DragDropEffects)" />
+            >When a control initiates a drag-and-drop operation by calling the <see cref="M:System.Windows.Forms.Control.DoDragDrop(System.Object,System.Windows.Forms.DragDropEffects)" />
 
             
 
@@ -210,13 +222,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the body of your event handler, you can use the <see
-             cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+            >In the body of your event handler, you can use the <see cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
 
             
 
-             method to determine whether the data matches the format requirements of the control onto which the data is being dragged. You also can specify whether you want to attempt to convert the data to meet your format requirements. If the dragged data meets your format requirements, use the <see
-             cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+             method to determine whether the data matches the format requirements of the control onto which the data is being dragged. You also can specify whether you want to attempt to convert the data to meet your format requirements. If the dragged data meets your format requirements, use the <see cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
             
 
@@ -226,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.IDataObject" />
+            >Gets the <see cref="T:System.Windows.Forms.IDataObject" />
 
             
 
@@ -254,16 +263,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the effect applied determines the mouse cursor for the target of a drag-and-drop operation. This is useful to provide feedback to the user on the operation that will occur. For example, if you press the CTRL key when you drag a file from a source, specify <see
-             cref="F:System.Windows.Forms.DragDropEffects.Copy" />
+            >By default, the effect applied determines the mouse cursor for the target of a drag-and-drop operation. This is useful to provide feedback to the user on the operation that will occur. For example, if you press the CTRL key when you drag a file from a source, specify <see cref="F:System.Windows.Forms.DragDropEffects.Copy" />
 
             
 
              to indicate the target will try to perform a copy operation.</para
           >
           <para
-            >To use custom cursors for a drag operation, see <see
-             cref="P:System.Windows.Forms.GiveFeedbackEventArgs.UseDefaultCursors" />
+            >To use custom cursors for a drag operation, see <see cref="P:System.Windows.Forms.GiveFeedbackEventArgs.UseDefaultCursors" />
 
             
 
@@ -292,13 +299,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can make the effect of a drag-and-drop operation to depend on the state of a particular key. For example, you may decide to copy or move data depending on whether the CTRL or SHIFT keys are pressed during the drag-and-drop operation.</para>
           <para
-            >The bits that are set in the <see
-             cref="P:System.Windows.Forms.DragEventArgs.KeyState" />
+            >The bits that are set in the <see cref="P:System.Windows.Forms.DragEventArgs.KeyState" />
 
             
 
-             property identify the keys or mouse buttons that were pressed during the operation. For example, if the left mouse button is pressed, the first bit in the <see
-             cref="P:System.Windows.Forms.DragEventArgs.KeyState" />
+             property identify the keys or mouse buttons that were pressed during the operation. For example, if the left mouse button is pressed, the first bit in the <see cref="P:System.Windows.Forms.DragEventArgs.KeyState" />
 
             
 

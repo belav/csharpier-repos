@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
             >RequestCaching Element (Network Settings)</a
           >
@@ -34,13 +33,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to access information about default caching behavior for resources requested by using the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to access information about default caching behavior for resources requested by using the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.RequestCachingSection" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.RequestCachingSection" />
 
             
 
@@ -142,13 +138,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unless the <see
-             cref="P:System.Net.Configuration.RequestCachingSection.DisableAllCaching" />
+            >Unless the <see cref="P:System.Net.Configuration.RequestCachingSection.DisableAllCaching" />
 
             
 
-             property is set to true, the policy returned by this property overrides the policy set in the <see
-             cref="P:System.Net.Configuration.RequestCachingSection.DefaultPolicyLevel" />
+             property is set to true, the policy returned by this property overrides the policy set in the <see cref="P:System.Net.Configuration.RequestCachingSection.DefaultPolicyLevel" />
 
             
 

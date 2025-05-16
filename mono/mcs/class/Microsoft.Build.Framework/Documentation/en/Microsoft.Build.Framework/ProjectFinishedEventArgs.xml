@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" />
+        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.ProjectFinished" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" />
 
             
 
@@ -69,28 +67,23 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.ProjectFinishedEventArgs" />
 
             
 
-             class with the specified <see
-             cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
+             class with the specified <see cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
 
             
 
-            , <see
-             cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
+            , <see cref="P:Microsoft.Build.Framework.BuildEventArgs.HelpKeyword" />
 
             
 
-            , <see
-             cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.ProjectFile" />
+            , <see cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.ProjectFile" />
 
             
 
-            , and <see
-             cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.Succeeded" />
+            , and <see cref="P:Microsoft.Build.Framework.ProjectFinishedEventArgs.Succeeded" />
 
             
 
@@ -98,28 +91,44 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the event.</param
         >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Help keyword associated with the event.</param
         >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The project file associated with the event.</param
         >
         <param name="succeeded">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

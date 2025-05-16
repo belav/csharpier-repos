@@ -18,13 +18,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration specifies the X.509 store name, which also includes the type of certificates included. For example, <see
-         cref="F:System.Security.Cryptography.X509Certificates.StoreName.My" />
+        >This enumeration specifies the X.509 store name, which also includes the type of certificates included. For example, <see cref="F:System.Security.Cryptography.X509Certificates.StoreName.My" />
 
         
 
-         includes personal certificates, whereas <see
-         cref="F:System.Security.Cryptography.X509Certificates.StoreName.Disallowed" />
+         includes personal certificates, whereas <see cref="F:System.Security.Cryptography.X509Certificates.StoreName.Disallowed" />
 
         
 

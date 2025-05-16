@@ -2,8 +2,7 @@
 <clause number="8.7.10" title="Static constructors" informative="true">
   <paragraph>A static constructor is a member that implements the actions required to initialize a class. Static constructors cannot have parameters, they cannot have accessibility modifiers, and they cannot be called explicitly. The static constructor for a class is called automatically. </paragraph>
   <paragraph
-    >The example <code_example
-    >
+    >The example <code_example>
       <![CDATA[
 using Personnel.Data;  
 class Employee  

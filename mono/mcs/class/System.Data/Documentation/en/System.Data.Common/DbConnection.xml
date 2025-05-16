@@ -35,8 +35,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -75,7 +74,11 @@
           <para>An object representing the new transaction.</para>
         </returns>
         <param name="isolationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -139,7 +142,11 @@
           <para>An object representing the new transaction.</para>
         </returns>
         <param name="isolationLevel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value supplied in the <paramref
-             name="databaseName" />
+            >The value supplied in the <paramref name="databaseName" />
 
             
 
@@ -180,7 +186,11 @@
           <para>Changes the current database for an open connection.</para>
         </summary>
         <param name="databaseName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -203,24 +213,21 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.Common.DbConnection.Close" />
+            >The <see cref="M:System.Data.Common.DbConnection.Close" />
 
             
 
              method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled.</para
           >
           <para
-            >An application can call <see
-             cref="M:System.Data.Common.DbConnection.Close" />
+            >An application can call <see cref="M:System.Data.Common.DbConnection.Close" />
 
             
 
              more than one time. No exception is generated.</para
           >
           <para
-            >If the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >If the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -228,8 +235,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
-               type="text/html">
+              >Do not call Close or Dispose on a Connection, a DataReader, or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format type="text/html">
                 <a href="22b6cb97-0c80-4eeb-a2cf-5ed7655e37f9"
                   >Programming for Garbage Collection</a
                 >
@@ -321,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Creates and returns a <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -332,8 +337,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbCommand" />
+            >A <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -360,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you are implementing your own connection, override this method to implement the code necessary to create and return a <see
-             cref="T:System.Data.Common.DbCommand" />
+            >If you are implementing your own connection, override this method to implement the code necessary to create and return a <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -371,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Creates and returns a <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -382,8 +384,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbCommand" />
+            >A <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -429,23 +430,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the connection to the database is closed, the <see
-             cref="P:System.Data.Common.DbConnection.DataSource" />
+            >If the connection to the database is closed, the <see cref="P:System.Data.Common.DbConnection.DataSource" />
 
             
 
-             returns whatever is contained in the <see
-             cref="P:System.Data.Common.DbConnection.ConnectionString" />
+             returns whatever is contained in the <see cref="P:System.Data.Common.DbConnection.ConnectionString" />
 
             
 
-             for the DataSource keyword. If the connection is open and the <see
-             cref="P:System.Data.Common.DbConnection.ConnectionString" />
+             for the DataSource keyword. If the connection is open and the <see cref="P:System.Data.Common.DbConnection.ConnectionString" />
 
             
 
-             data source keyword's value starts with "|datadirectory|", the property returns whatever is contained in the <see
-             cref="P:System.Data.Common.DbConnection.ConnectionString" />
+             data source keyword's value starts with "|datadirectory|", the property returns whatever is contained in the <see cref="P:System.Data.Common.DbConnection.ConnectionString" />
 
             
 
@@ -478,13 +475,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New in ADO.NET 2.0 is support for using the EnlistTransaction method to enlist in a distributed transaction. Because it enlists a connection in a <see
-             cref="T:System.Transactions.Transaction" />
+            >New in ADO.NET 2.0 is support for using the EnlistTransaction method to enlist in a distributed transaction. Because it enlists a connection in a <see cref="T:System.Transactions.Transaction" />
 
             
 
-             instance, EnlistTransaction takes advantage of functionality available in the <see
-             cref="N:System.Transactions" />
+             instance, EnlistTransaction takes advantage of functionality available in the <see cref="N:System.Transactions" />
 
             
 
@@ -496,12 +491,15 @@
           <para>Enlists in the specified transaction.</para>
         </summary>
         <param name="transaction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A reference to an existing <see
-           cref="T:System.Transactions.Transaction" />
+          A reference to an existing <see cref="T:System.Transactions.Transaction" />
 
           
 
@@ -528,8 +526,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns schema information for the data source of this <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Returns schema information for the data source of this <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -539,8 +536,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -573,8 +569,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns schema information for the data source of this <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Returns schema information for the data source of this <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -584,8 +579,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -593,7 +587,11 @@
           >
         </returns>
         <param name="collectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -622,8 +620,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="restrictionValues" />
+            >The <paramref name="restrictionValues" />
 
             
 
@@ -635,8 +632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns schema information for the data source of this <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Returns schema information for the data source of this <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -646,8 +642,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -655,14 +650,22 @@
           >
         </returns>
         <param name="collectionName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the name of the schema to return.</param
         >
         <param name="restrictionValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -691,8 +694,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For an overview, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For an overview, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
@@ -706,8 +708,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Data.Common.DbConnection.StateChange" />
+            >Raises the <see cref="E:System.Data.Common.DbConnection.StateChange" />
 
             
 
@@ -731,8 +732,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must be overridden with user-defined behavior. <see
-             cref="M:System.Data.SqlClient.SqlConnection.Open" />
+            >This method must be overridden with user-defined behavior. <see cref="M:System.Data.SqlClient.SqlConnection.Open" />
 
             
 
@@ -742,8 +742,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Opens a database connection with the settings specified by the <see
-             cref="P:System.Data.Common.DbConnection.ConnectionString" />
+            >Opens a database connection with the settings specified by the <see cref="P:System.Data.Common.DbConnection.ConnectionString" />
 
             
 
@@ -820,8 +819,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Data.Common.DbConnection.StateChange" />
+            >The <see cref="E:System.Data.Common.DbConnection.StateChange" />
 
             
 
@@ -854,21 +852,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbConnection" />
+             instance is cast to an <see cref="T:System.Data.IDbConnection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbConnection.BeginTransaction" />
+            >For more information, see <see cref="M:System.Data.IDbConnection.BeginTransaction" />
 
             
 
@@ -905,8 +900,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="M:System.Data.IDbConnection.BeginTransaction(System.Data.IsolationLevel)" />
+            >For more information, see <see cref="M:System.Data.IDbConnection.BeginTransaction(System.Data.IsolationLevel)" />
 
             
 
@@ -916,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins a database transaction with the specified <see
-             cref="T:System.Data.IsolationLevel" />
+            >Begins a database transaction with the specified <see cref="T:System.Data.IsolationLevel" />
 
             
 
@@ -947,15 +940,13 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="b623f810-d871-49a5-b0f5-078cc3c34db6">Commands (ADO.NET)</a>
             </format>
 
             
 
-             and <see
-             cref="M:System.Data.IDbConnection.CreateCommand" />
+             and <see cref="M:System.Data.IDbConnection.CreateCommand" />
 
             
 
@@ -965,8 +956,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Creates and returns a <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -976,8 +966,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DbCommand" />
+            >A <see cref="T:System.Data.Common.DbCommand" />
 
             
 

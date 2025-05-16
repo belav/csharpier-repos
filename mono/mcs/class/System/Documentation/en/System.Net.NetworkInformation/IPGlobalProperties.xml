@@ -44,8 +44,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes derived from <see
-             cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
+            >This constructor can be called only by classes derived from <see cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
 
             
 
@@ -55,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
 
             
 
@@ -133,13 +131,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The objects returned by this method include connections in all TCP states except the <see
-             cref="F:System.Net.NetworkInformation.TcpState.Listen" />
+            >The objects returned by this method include connections in all TCP states except the <see cref="F:System.Net.NetworkInformation.TcpState.Listen" />
 
             
 
-             state. You can check the state of a connection by calling <see
-             cref="P:System.Net.NetworkInformation.TcpConnectionInformation.State" />
+             state. You can check the state of a connection by calling <see cref="P:System.Net.NetworkInformation.TcpConnectionInformation.State" />
 
             
 
@@ -154,8 +150,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
+            >A <see cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
 
             
 
@@ -187,8 +182,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The objects returned by this method include listeners in all TCP states except the <see
-             cref="F:System.Net.NetworkInformation.TcpState.Listen" />
+            >The objects returned by this method include listeners in all TCP states except the <see cref="F:System.Net.NetworkInformation.TcpState.Listen" />
 
             
 
@@ -203,8 +197,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.IPEndPoint" />
+            >A <see cref="T:System.Net.IPEndPoint" />
 
             
 
@@ -245,8 +238,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.IPEndPoint" />
+            >An <see cref="T:System.Net.IPEndPoint" />
 
             
 
@@ -279,13 +271,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>ICMP is a set of messages for use with Internet Protocol version 4 (IPv4). ICMP is used by IPv4 nodes to report errors encountered in processing data packets and to perform other Internet layer functions. ICMP version 4 is defined in IETF RFC 792.</para>
           <para
-            >For details on the ICMP version 4 traffic statistics that are available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+            >For details on the ICMP version 4 traffic statistics that are available to applications, see the <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
 
             
 
-             class documentation. Note that the <see
-             cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+             class documentation. Note that the <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
 
             
 
@@ -299,8 +289,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
+            >An <see cref="T:System.Net.NetworkInformation.IcmpV4Statistics" />
 
             
 
@@ -334,13 +323,11 @@
           <para>ICMP version 6 is a set of messages for use with Internet Protocol version 6 (IPv6). ICMP is used by IPv6 nodes to report errors encountered in processing data packets and to perform other Internet layer functions. ICMP version 6 is defined in IETF RFC 1885.</para>
           <para>The IPv6 protocol is not supported for computers with Windows 2000 or earlier operating systems.</para>
           <para
-            >For details on the ICMP version 6 traffic statistics available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
+            >For details on the ICMP version 6 traffic statistics available to applications, see the <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
 
             
 
-             class documentation. Note that the <see
-             cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
+             class documentation. Note that the <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
 
             
 
@@ -354,8 +341,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
+            >An <see cref="T:System.Net.NetworkInformation.IcmpV6Statistics" />
 
             
 
@@ -387,8 +373,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned by this method is a system-supplied type that derives from the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
+            >The object returned by this method is a system-supplied type that derives from the <see cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
 
             
 
@@ -402,8 +387,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
+            >A <see cref="T:System.Net.NetworkInformation.IPGlobalProperties" />
 
             
 
@@ -436,13 +420,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>IPv4 is a network layer protocol that is responsible for routing data packets from its source computer to its destination. </para>
           <para
-            >For details on the IP traffic statistics available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+            >For details on the IP traffic statistics available to applications, see the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
-             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
@@ -456,8 +438,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+            >An <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
@@ -490,13 +471,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>IPv6 is a network layer protocol responsible for routing data packets from its source computer to its destination. The IPv6 protocol is not supported on computers with Windows 2000 or earlier operating systems.</para>
           <para
-            >For details on the IP traffic statistics available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+            >For details on the IP traffic statistics available to applications, see the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
-             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
@@ -510,8 +489,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+            >An <see cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
 
             
 
@@ -544,13 +522,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>TCP is a transport layer protocol that is responsible for reliably sending and receiving data packets. It is defined in IETF RFC 793.</para>
           <para
-            >For details on the TCP traffic statistics available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+            >For details on the TCP traffic statistics available to applications, see the <see cref="T:System.Net.NetworkInformation.TcpStatistics" />
 
             
 
-             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
-             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see cref="T:System.Net.NetworkInformation.TcpStatistics" />
 
             
 
@@ -564,8 +540,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+            >A <see cref="T:System.Net.NetworkInformation.TcpStatistics" />
 
             
 
@@ -598,13 +573,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>TCP is a transport layer protocol responsible for reliably sending and receiving data packets. It is defined in IETF RFC 793.</para>
           <para
-            >For details on the TCP traffic statistics that are available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+            >For details on the TCP traffic statistics that are available to applications, see the <see cref="T:System.Net.NetworkInformation.TcpStatistics" />
 
             
 
-             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
-             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see cref="T:System.Net.NetworkInformation.TcpStatistics" />
 
             
 
@@ -618,8 +591,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.TcpStatistics" />
+            >A <see cref="T:System.Net.NetworkInformation.TcpStatistics" />
 
             
 
@@ -652,13 +624,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>UDP is a connectionless transport layer protocol that is responsible for sending and receiving datagrams. It is defined in IETF RFC 768.</para>
           <para
-            >For details on the UDP traffic statistics that are available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+            >For details on the UDP traffic statistics that are available to applications, see the <see cref="T:System.Net.NetworkInformation.UdpStatistics" />
 
             
 
-             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
-             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see cref="T:System.Net.NetworkInformation.UdpStatistics" />
 
             
 
@@ -672,8 +642,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+            >A <see cref="T:System.Net.NetworkInformation.UdpStatistics" />
 
             
 
@@ -706,13 +675,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>UDP is a connectionless transport layer protocol that is responsible for sending and receiving datagrams. It is defined in IETF RFC 768.</para>
           <para
-            >For details on the UDP traffic statistics that are available to applications, see the <see
-             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+            >For details on the UDP traffic statistics that are available to applications, see the <see cref="T:System.Net.NetworkInformation.UdpStatistics" />
 
             
 
-             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see
-             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+             class documentation. Note that the object returned by this method reflects the statistics as of the time the <see cref="T:System.Net.NetworkInformation.UdpStatistics" />
 
             
 
@@ -726,8 +693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.NetworkInformation.UdpStatistics" />
+            >A <see cref="T:System.Net.NetworkInformation.UdpStatistics" />
 
             
 
@@ -782,8 +748,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -815,8 +780,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The node type determines the way in which NetBIOS names are resolved to IP addresses. For additional information, see the <see
-             cref="T:System.Net.NetworkInformation.NetBiosNodeType" />
+            >The node type determines the way in which NetBIOS names are resolved to IP addresses. For additional information, see the <see cref="T:System.Net.NetworkInformation.NetBiosNodeType" />
 
             
 

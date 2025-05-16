@@ -15,28 +15,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A SOAP 1.2 fault contains a Code element and among other things an optional Subcode element. The Code element specifies the type of error that occurred using a limited number of pre-defined error codes specified by the SOAP protocol, whereas the Subcode element allows the sender of the SOAP fault to provide an application specific error code. This class represents the contents of the Subcode element.</para>
       <para
-        >XML Web services return a SOAP fault by throwing a <see
-         cref="T:System.Web.Services.Protocols.SoapException" />
+        >XML Web services return a SOAP fault by throwing a <see cref="T:System.Web.Services.Protocols.SoapException" />
 
         
 
-         and.NET clients receive a SOAP fault by catching a <see
-         cref="T:System.Web.Services.Protocols.SoapException" />
+         and.NET clients receive a SOAP fault by catching a <see cref="T:System.Web.Services.Protocols.SoapException" />
 
         
 
-        . A <see
-         cref="T:System.Web.Services.Protocols.SoapException" />
+        . A <see cref="T:System.Web.Services.Protocols.SoapException" />
 
         
 
-         has the <see
-         cref="P:System.Web.Services.Protocols.SoapException.Code" />
+         has the <see cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
         
 
-         property representing the Code element and the <see
-         cref="P:System.Web.Services.Protocols.SoapException.Subcode" />
+         property representing the Code element and the <see cref="P:System.Web.Services.Protocols.SoapException.Subcode" />
 
         
 
@@ -64,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapFaultSubcode" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapFaultSubcode" />
 
             
 
@@ -73,17 +67,19 @@
           >
         </summary>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
-           specifying the application specific error code. Sets the <see
-           cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+           specifying the application specific error code. Sets the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
           
 
@@ -111,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapFaultSubcode" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapFaultSubcode" />
 
             
 
@@ -120,17 +115,19 @@
           >
         </summary>
         <param name="code">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
-           specifying the application specific error code. Sets the <see
-           cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+           specifying the application specific error code. Sets the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
           
 
@@ -153,36 +150,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use a constructor to set the <see
-             cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+            >Use a constructor to set the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
             
 
              property.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+            >The value of the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
 
             
 
-             property can be any user defined XML qualified name, including the codes represented by the <see
-             cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcProcedureNotPresentFaultCode" />
+             property can be any user defined XML qualified name, including the codes represented by the <see cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcProcedureNotPresentFaultCode" />
 
             
 
-            , <see
-             cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcBadArgumentsFaultCode" />
+            , <see cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcBadArgumentsFaultCode" />
 
             
 
-            , <see
-             cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingMissingIDFaultCode" />
+            , <see cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingMissingIDFaultCode" />
 
             
 
-            , and <see
-             cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingUntypedValueFaultCode" />
+            , and <see cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingUntypedValueFaultCode" />
 
             
 
@@ -213,16 +204,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use a constructor to set the <see
-             cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Subcode" />
+            >Use a constructor to set the <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Subcode" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Subcode" />
+            >The <see cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Subcode" />
 
             
 

@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.IRevertibleChangeTracking" />
+        >The <see cref="T:System.ComponentModel.IRevertibleChangeTracking" />
 
         
 
-         extends <see
-         cref="T:System.ComponentModel.IChangeTracking" />
+         extends <see cref="T:System.ComponentModel.IChangeTracking" />
 
         
 

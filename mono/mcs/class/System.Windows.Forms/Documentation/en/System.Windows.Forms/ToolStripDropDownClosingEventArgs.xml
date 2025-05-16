@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use data from the <see
-         cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
+        >Use data from the <see cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
 
         
 
@@ -55,8 +53,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use data from the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
+            >Use data from the <see cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
 
             
 
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripDropDownClosingEventArgs" />
 
             
 
@@ -75,12 +71,15 @@
           >
         </summary>
         <param name="reason">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
+          One of the <see cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
 
           
 
@@ -107,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the reason that the <see
-             cref="T:System.Windows.Forms.ToolStripDropDown" />
+            >Gets the reason that the <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
             
 

@@ -1,14 +1,12 @@
 <?xml version="1.0"?>
 <clause number="9.4.4" title="Literals">
   <paragraph
-    >A literal is a source code representation of a value. <grammar_production
-    >
+    >A literal is a source code representation of a value. <grammar_production>
       <name>literal</name>
 
       
 
-       :: <rhs
-      >
+       :: <rhs>
         <non_terminal where="9.4.4.1">boolean-literal</non_terminal>
       </rhs>
       <rhs>

@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ProfileGroupSettings" />
+        >The <see cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
         
 
          class provides a way to programmatically create, access, and modify groups of properties added to the group subsection of the profile section of a configuration file. </para
       >
       <para
-        >The profile section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see
-         cref="T:System.Web.Profile.ProfileBase" />
+        >The profile section of the configuration file specifies a schema for user profiles. At run time, the ASP.NET compilation system uses the information specified in the profile section to generate a class called ProfileCommon, which is derived from <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
-        . The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see
-         cref="P:System.Web.HttpContext.Profile" />
+        . The ProfileCommon class definition is based on the properties defined in the properties subsection of the profile section of the configuration file. An instance of this class is created for each user profile, and you can access the individual profile values in your code through the <see cref="P:System.Web.HttpContext.Profile" />
 
         
 
-         property. For more information about the profile features added to vstecasplong, see <format
-         type="text/html">
+         property. For more information about the profile features added to vstecasplong, see <format type="text/html">
           <a href="89439440-92ea-48c3-a4bd-dea40307899d">ASP.NET Profile Properties Overview</a>
         </format>
 
@@ -62,18 +58,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.ProfileGroupSettings.#ctor(System.String)" />
+            >The <see cref="M:System.Web.Configuration.ProfileGroupSettings.#ctor(System.String)" />
 
             
 
-             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
-             cref="T:System.Web.Configuration.ProfileGroupSettings" />
+             constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSection(System.String)" />
 
             
 
@@ -83,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ProfileGroupSettings" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
             
 
@@ -92,7 +84,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -118,12 +114,15 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.ProfileGroupSettings" />
+          A <see cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
           
 
@@ -168,8 +167,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The group name must be unique within a <see
-             cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" />
+            >The group name must be unique within a <see cref="T:System.Web.Configuration.ProfileGroupSettingsCollection" />
 
             
 
@@ -179,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets name of the group of <see
-             cref="T:System.Web.Configuration.ProfilePropertySettings" />
+            >Gets or sets name of the group of <see cref="T:System.Web.Configuration.ProfilePropertySettings" />
 
             
 
@@ -210,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the properties collection for the <see
-             cref="T:System.Web.Configuration.ProfileGroupSettings" />
+            >Gets the properties collection for the <see cref="T:System.Web.Configuration.ProfileGroupSettings" />
 
             
 

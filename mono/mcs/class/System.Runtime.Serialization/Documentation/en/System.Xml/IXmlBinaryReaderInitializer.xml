@@ -49,7 +49,11 @@
           <para>Reinitializes the binary reader using the given input stream.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -72,7 +76,11 @@
            to use.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -113,31 +121,41 @@
           <para>Reinitializes the binary reader using the given input buffer.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Starting position from which to read in <paramref
-           name="buffer" />
+          Starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Number of bytes that can be read from <paramref
-           name="buffer" />
+          Number of bytes that can be read from <paramref name="buffer" />
 
           
 
@@ -160,7 +178,11 @@
            to use.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -23,13 +23,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+        >The <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
         
 
          class provides support for the media type and quality in a Content-Type header as defined in <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+          cref="http://go.microsoft.com/fwlink/?LinkID=241642"
+          >RFC 2616</see
+        >
 
         
 
@@ -37,8 +38,7 @@
       >
       <para>Quality factors allow the user agent to indicate the relative degree of preference for the media type in a Content-Type header. Quality uses a scale from 0 to 1. The default value is q=1.</para>
       <para
-        >This type derives from <see
-         cref="T:System.Net.Http.Headers.MediaTypeHeaderValue" />
+        >This type derives from <see cref="T:System.Net.Http.Headers.MediaTypeHeaderValue" />
 
         
 
@@ -72,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
             
 
@@ -81,12 +80,15 @@
           >
         </summary>
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+          A <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
           
 
@@ -116,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
             
 
@@ -125,19 +126,26 @@
           >
         </summary>
         <param name="mediaType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+          A <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
           
 
            represented as string to initialize the new instance.</param
         >
         <param name="quality">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -169,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see
-             cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
             
 
@@ -180,16 +187,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+            >Returns <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
             
 
             .</para
           >
           <para
-            >An <see
-             cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+            >An <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
             
 
@@ -197,7 +202,11 @@
           >
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -224,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get or set the quality value for the <see
-             cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
+            >Get or set the quality value for the <see cref="T:System.Net.Http.Headers.MediaTypeWithQualityHeaderValue" />
 
             
 

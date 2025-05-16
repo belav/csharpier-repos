@@ -43,8 +43,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The value of an instance of the <see
-         cref="T:System.RuntimeFieldHandle" />
+        >The value of an instance of the <see cref="T:System.RuntimeFieldHandle" />
 
         
 
@@ -89,13 +88,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.RuntimeFieldHandle" />
+             is a <see cref="T:System.RuntimeFieldHandle" />
 
             
 
@@ -103,7 +100,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -139,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the current instance is equal to the specified <see
-             cref="T:System.RuntimeFieldHandle" />
+            >Indicates whether the current instance is equal to the specified <see cref="T:System.RuntimeFieldHandle" />
 
             
 
@@ -150,8 +150,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of <paramref
-             name="handle" />
+            >true if the value of <paramref name="handle" />
 
             
 
@@ -159,12 +158,15 @@
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.RuntimeFieldHandle" />
+          The <see cref="T:System.RuntimeFieldHandle" />
 
           
 
@@ -220,16 +222,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
              parameter is reserved; it does not currently participate in this operation.</para
           >
           <para
-            >For more information, see the <see
-             cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+            >For more information, see the <see cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
 
             
 
@@ -239,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -248,19 +247,26 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object to populate with serialization information. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -295,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.RuntimeFieldHandle" />
+            >Indicates whether two <see cref="T:System.RuntimeFieldHandle" />
 
             
 
@@ -306,13 +311,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -320,34 +323,38 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.RuntimeFieldHandle" />
+          The <see cref="T:System.RuntimeFieldHandle" />
 
           
 
-           to compare to <paramref
-           name="right" />
+           to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.RuntimeFieldHandle" />
+          The <see cref="T:System.RuntimeFieldHandle" />
 
           
 
-           to compare to <paramref
-           name="left" />
+           to compare to <paramref name="left" />
 
           
 
@@ -382,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.RuntimeFieldHandle" />
+            >Indicates whether two <see cref="T:System.RuntimeFieldHandle" />
 
             
 
@@ -393,13 +399,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -407,34 +411,38 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.RuntimeFieldHandle" />
+          The <see cref="T:System.RuntimeFieldHandle" />
 
           
 
-           to compare to <paramref
-           name="right" />
+           to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.RuntimeFieldHandle" />
+          The <see cref="T:System.RuntimeFieldHandle" />
 
           
 
-           to compare to <paramref
-           name="left" />
+           to compare to <paramref name="left" />
 
           
 
@@ -462,14 +470,12 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.IntPtr" />
+            > A <see cref="T:System.IntPtr" />
 
             
 
              that contains the
-   value of the current <see
-             cref="T:System.RuntimeFieldHandle" />
+   value of the current <see cref="T:System.RuntimeFieldHandle" />
 
             
 

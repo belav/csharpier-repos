@@ -19,49 +19,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Mail.MailAddress" />
+        >The <see cref="T:System.Net.Mail.MailAddress" />
 
         
 
-         class is used by the <see
-         cref="T:System.Net.Mail.SmtpClient" />
+         class is used by the <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
-         and <see
-         cref="T:System.Net.Mail.MailMessage" />
+         and <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
          classes to store address information for e-mail messages.</para
       >
       <para
-        >A mail address is composed of a <see
-         cref="P:System.Net.Mail.MailAddress.User" />
+        >A mail address is composed of a <see cref="P:System.Net.Mail.MailAddress.User" />
 
         
 
-         name, <see
-         cref="P:System.Net.Mail.MailAddress.Host" />
+         name, <see cref="P:System.Net.Mail.MailAddress.Host" />
 
         
 
-         name and optionally, a <see
-         cref="P:System.Net.Mail.MailAddress.DisplayName" />
+         name and optionally, a <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
         
 
-        . The <see
-         cref="P:System.Net.Mail.MailAddress.DisplayName" />
+        . The <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
         
 
          can contain non-ASCII characters if you encode them.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.Mail.MailAddress" />
+        >The <see cref="T:System.Net.Mail.MailAddress" />
 
         
 
@@ -70,8 +62,7 @@
       <list type="bullet">
         <item>
           <para
-            >A simple address format of user@host. If a <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >A simple address format of user@host. If a <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
@@ -80,8 +71,7 @@
         </item>
         <item>
           <para
-            >A standard quoted display name format of "display name" &lt;user@host&gt;. If a <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >A standard quoted display name format of "display name" &lt;user@host&gt;. If a <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
@@ -90,13 +80,11 @@
         </item>
         <item>
           <para
-            >Angle brackets are added around the <see
-             cref="P:System.Net.Mail.MailAddress.User" />
+            >Angle brackets are added around the <see cref="P:System.Net.Mail.MailAddress.User" />
 
             
 
-             name, <see
-             cref="P:System.Net.Mail.MailAddress.Host" />
+             name, <see cref="P:System.Net.Mail.MailAddress.Host" />
 
             
 
@@ -105,8 +93,7 @@
         </item>
         <item>
           <para
-            >Quotes are added around the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >Quotes are added around the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
@@ -115,8 +102,7 @@
         </item>
         <item>
           <para
-            >Unicode characters are supported in the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >Unicode characters are supported in the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
@@ -125,8 +111,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="P:System.Net.Mail.MailAddress.User" />
+            >A <see cref="P:System.Net.Mail.MailAddress.User" />
 
             
 
@@ -153,8 +138,7 @@
       <para>The following mail address would not be allowed:</para>
       <para>"John "Jr" Doe" &lt;user@host&gt;</para>
       <para
-        >When the username is note quoted, all text between the start of the string (or comma) and the address are considered part of the <see
-         cref="P:System.Net.Mail.MailAddress.DisplayName" />
+        >When the username is note quoted, all text between the start of the string (or comma) and the address are considered part of the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
         
 
@@ -162,16 +146,14 @@
       >
       <para>-- Example: (non comment) unquoted display (non comment) name (non comment) &lt;user@host&gt;</para>
       <para
-        >Although the <see
-         cref="T:System.Net.Mail.MailAddress" />
+        >Although the <see cref="T:System.Net.Mail.MailAddress" />
 
         
 
          class accepts a mail address as valid, other mail servers may not accept the mail address.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.Mail.MailAddress" />
+        >The <see cref="T:System.Net.Mail.MailAddress" />
 
         
 
@@ -206,8 +188,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="address" />
+            >The <paramref name="address" />
 
             
 
@@ -216,8 +197,7 @@
           <para>"Tom Smith &lt;tsmith@contoso.com&gt;"</para>
           <para>White space is permitted between the display name and the angle brackets. </para>
           <para
-            >The following table shows the property values for a <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >The following table shows the property values for a <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
@@ -279,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
@@ -288,12 +267,15 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -325,46 +307,41 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Leading and trailing white space in the display name is preserved.</para>
           <para
-            >If <paramref
-             name="displayName" />
+            >If <paramref name="displayName" />
 
             
 
-             contains non-ASCII characters, the iso-8859-1 character set is used for the <paramref
-             name="displayName" />
+             contains non-ASCII characters, the iso-8859-1 character set is used for the <paramref name="displayName" />
 
             
 
              encoding. Encoding non-ASCII characters is discussed in RFC 1522, which is available at <see
-             cref="http://www.ietf.org">http://www.ietf.org</see>
+              cref="http://www.ietf.org"
+              >http://www.ietf.org</see
+            >
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="address" />
+            >If <paramref name="address" />
 
             
 
-             contains a display name, and <paramref
-             name="displayName" />
+             contains a display name, and <paramref name="displayName" />
 
             
 
-             is not null and is not equal to <see
-             cref="F:System.String.Empty" />
+             is not null and is not equal to <see cref="F:System.String.Empty" />
 
             
 
-            , <paramref
-             name="displayName" />
+            , <paramref name="displayName" />
 
             
 
-             overrides the value specified in <paramref
-             name="address" />
+             overrides the value specified in <paramref name="address" />
 
             
 
@@ -374,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
@@ -383,29 +359,34 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains an e-mail address.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains the display name associated with <paramref
-           name="address" />
+           that contains the display name associated with <paramref name="address" />
 
           
 
@@ -443,99 +424,81 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Leading and trailing white space in the display name is preserved.</para>
           <para
-            >If <paramref
-             name="address" />
+            >If <paramref name="address" />
 
             
 
-             contains a display name, and <paramref
-             name="displayName" />
+             contains a display name, and <paramref name="displayName" />
 
             
 
-             is not null and is not equal to <see
-             cref="F:System.String.Empty" />
+             is not null and is not equal to <see cref="F:System.String.Empty" />
 
             
 
-            , <paramref
-             name="displayName" />
+            , <paramref name="displayName" />
 
             
 
-             overrides the value specified in <paramref
-             name="address" />
+             overrides the value specified in <paramref name="address" />
 
             
 
             . </para
           >
           <para
-            >The <see
-             cref="M:System.Net.Mail.MailAddress.#ctor(System.String,System.String,System.Text.Encoding)" />
+            >The <see cref="M:System.Net.Mail.MailAddress.#ctor(System.String,System.String,System.Text.Encoding)" />
 
             
 
-             method does not check if the <paramref
-             name="displayName" />
+             method does not check if the <paramref name="displayName" />
 
             
 
-             parameter is valid. This method removes surrounding quotes not displayed by the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+             parameter is valid. This method removes surrounding quotes not displayed by the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
-             property. Quotes will be added before transmission, except where <see
-             cref="P:System.Text.Encoding.ASCII" />
+             property. Quotes will be added before transmission, except where <see cref="P:System.Text.Encoding.ASCII" />
 
             
 
-             or <see
-             cref="P:System.Text.Encoding.Unicode" />
+             or <see cref="P:System.Text.Encoding.Unicode" />
 
             
 
-             is specified in the <paramref
-             name="displayNameEncoding" />
+             is specified in the <paramref name="displayNameEncoding" />
 
             
 
-             parameter. The encoding specified in the <paramref
-             name="displayNameEncoding" />
+             parameter. The encoding specified in the <paramref name="displayNameEncoding" />
 
             
 
-             parameter will be applied to the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+             parameter will be applied to the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
-             property before transmission <see
-             cref="P:System.Text.Encoding.ASCII" />
+             property before transmission <see cref="P:System.Text.Encoding.ASCII" />
 
             
 
-             or <see
-             cref="P:System.Text.Encoding.Unicode" />
+             or <see cref="P:System.Text.Encoding.Unicode" />
 
             
 
-             is specified in the <paramref
-             name="displayNameEncoding" />
+             is specified in the <paramref name="displayNameEncoding" />
 
             
 
-             parameter. <see
-             cref="P:System.Text.Encoding.UTF8" />
+             parameter. <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
              is the default encoding if none is specified.</para
           >
           <para
-            >For more information on supported mail address formats, see <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >For more information on supported mail address formats, see <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
@@ -545,8 +508,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
@@ -554,46 +516,53 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains an e-mail address.</param
         >
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that contains the display name associated with <paramref
-           name="address" />
+           that contains the display name associated with <paramref name="address" />
 
           
 
           .</param
         >
         <param name="displayNameEncoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
-           that defines the character set used for <paramref
-           name="displayName" />
+           that defines the character set used for <paramref name="displayName" />
 
           
 
@@ -618,8 +587,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value returned by this property does not include the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >The value returned by this property does not include the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
@@ -649,21 +617,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Display names that contain non-ASCII characters are returned in human-readable form. Use the <see
-             cref="M:System.Net.Mail.MailAddress.ToString" />
+            >Display names that contain non-ASCII characters are returned in human-readable form. Use the <see cref="M:System.Net.Mail.MailAddress.ToString" />
 
             
 
-             method to get the encoded form of the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+             method to get the encoded form of the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
             . </para
           >
           <para
-            >Some software programs that are used to read e-mail display the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >Some software programs that are used to read e-mail display the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
@@ -727,8 +692,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Mail.MailAddress.GetHashCode" />
+            >The <see cref="M:System.Net.Mail.MailAddress.GetHashCode" />
 
             
 
@@ -789,18 +753,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string returned by this method is not necessarily identical to the string specified when the instance was created. If the <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >The string returned by this method is not necessarily identical to the string specified when the instance was created. If the <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
-             property is not null and not equal to <see
-             cref="F:System.String.Empty" />
+             property is not null and not equal to <see cref="F:System.String.Empty" />
 
             
 
-             (""), <see
-             cref="M:System.Net.Mail.MailAddress.ToString" />
+             (""), <see cref="M:System.Net.Mail.MailAddress.ToString" />
 
             
 
@@ -811,36 +772,30 @@
 
             
 
-             &lt;<see
-             cref="P:System.Net.Mail.MailAddress.User" />
+             &lt;<see cref="P:System.Net.Mail.MailAddress.User" />
 
             
 
-            @<see
-             cref="P:System.Net.Mail.MailAddress.Host" />
+            @<see cref="P:System.Net.Mail.MailAddress.Host" />
 
             
 
             &gt;</para
           >
           <para
-            >If <see
-             cref="P:System.Net.Mail.MailAddress.DisplayName" />
+            >If <see cref="P:System.Net.Mail.MailAddress.DisplayName" />
 
             
 
-             is null or is equal to <see
-             cref="F:System.String.Empty" />
+             is null or is equal to <see cref="F:System.String.Empty" />
 
             
 
-            , <see
-             cref="M:System.Net.Mail.MailAddress.ToString" />
+            , <see cref="M:System.Net.Mail.MailAddress.ToString" />
 
             
 
-             returns the value of the <see
-             cref="P:System.Net.Mail.MailAddress.Address" />
+             returns the value of the <see cref="P:System.Net.Mail.MailAddress.Address" />
 
             
 
@@ -854,13 +809,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that contains the contents of this <see
-             cref="T:System.Net.Mail.MailAddress" />
+             that contains the contents of this <see cref="T:System.Net.Mail.MailAddress" />
 
             
 

@@ -15,21 +15,18 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Column mappings define the mapping between data source and the target table.</para>
       <para
-        >If mappings are not defined—that is, the <see
-         cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+        >If mappings are not defined—that is, the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
         
 
-         collection is empty—the columns are mapped implicitly based on ordinal position. For this to work, source and target schemas must match. If they do not, an <see
-         cref="T:System.InvalidOperationException" />
+         collection is empty—the columns are mapped implicitly based on ordinal position. For this to work, source and target schemas must match. If they do not, an <see cref="T:System.InvalidOperationException" />
 
         
 
          will be thrown.</para
       >
       <para
-        >If the <see
-         cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+        >If the <see cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
 
         
 
@@ -40,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the mapping between a column in a <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+        >Defines the mapping between a column in a <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
@@ -59,23 +55,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor, you must then define the source for the mapping using the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" />
+            >If you use this constructor, you must then define the source for the mapping using the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" />
 
             
 
-             property or the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
+             property or the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
 
             
 
-             property, and define the destination for the mapping using the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" />
+             property, and define the destination for the mapping using the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" />
 
             
 
-             property or the <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
+             property or the <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
 
             
 
@@ -85,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Default constructor that initializes a new <see
-             cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+            >Default constructor that initializes a new <see cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
 
             
 
@@ -116,14 +107,22 @@
           <para>Creates a new column mapping, using column ordinals to refer to source and destination columns.</para>
         </summary>
         <param name="sourceColumnOrdinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The ordinal position of the source column within the data source.</param
         >
         <param name="destinationOrdinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -152,14 +151,22 @@
           <para>Creates a new column mapping, using a column ordinal to refer to the source column and a column name for the target column.</para>
         </summary>
         <param name="sourceColumnOrdinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The ordinal position of the source column within the data source.</param
         >
         <param name="destinationColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -188,14 +195,22 @@
           <para>Creates a new column mapping, using a column name to refer to the source column and a column ordinal for the target column.</para>
         </summary>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the source column within the data source.</param
         >
         <param name="destinationOrdinal">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -224,14 +239,22 @@
           <para>Creates a new column mapping, using column names to refer to source and destination columns.</para>
         </summary>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the source column within the data source.</param
         >
         <param name="destinationColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -254,13 +277,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" />
 
             
 
-             and <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
+             and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
 
             
 
@@ -288,13 +309,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationColumn" />
 
             
 
-             and <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
+             and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
 
             
 
@@ -322,13 +341,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" />
 
             
 
-             and <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
+             and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
 
             
 
@@ -356,13 +373,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" />
+            >The <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceColumn" />
 
             
 
-             and <see
-             cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
+             and <see cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
 
             
 

@@ -23,18 +23,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when the <see
-         cref="T:System.Net.Mail.SmtpClient" />
+        >Represents the exception that is thrown when the <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
-         is not able to complete a <see
-         cref="Overload:System.Net.Mail.SmtpClient.Send" />
+         is not able to complete a <see cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
         
 
-         or <see
-         cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+         or <see cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
 
         
 
@@ -61,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+            >Initializes an empty instance of the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -93,13 +89,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref
-             name="message" />
+            >This constructor uses the <paramref name="message" />
 
             
 
-             parameter to initialize the <see
-             cref="P:System.Exception.Message" />
+             parameter to initialize the <see cref="P:System.Exception.Message" />
 
             
 
@@ -109,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -118,12 +111,15 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -154,23 +150,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref
-             name="statusCode" />
+            >This constructor uses the <paramref name="statusCode" />
 
             
 
-             parameter to initialize the <see
-             cref="P:System.Net.Mail.SmtpException.StatusCode" />
+             parameter to initialize the <see cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
             
 
-             property and uses the <paramref
-             name="failedRecipient" />
+             property and uses the <paramref name="failedRecipient" />
 
             
 
-             parameter to initialize the <see
-             cref="P:System.Net.Mail.SmtpFailedRecipientException.FailedRecipient" />
+             parameter to initialize the <see cref="P:System.Net.Mail.SmtpFailedRecipientException.FailedRecipient" />
 
             
 
@@ -180,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -189,24 +180,30 @@
           >
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Mail.SmtpStatusCode" />
+          An <see cref="T:System.Net.Mail.SmtpStatusCode" />
 
           
 
            value.</param
         >
         <param name="failedRecipient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -239,13 +236,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface for the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+             interface for the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -255,18 +250,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
-             class from the specified instances of the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified instances of the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -299,8 +291,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpException" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" />
 
             
 
@@ -308,19 +299,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that describes the error that occurred.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -352,23 +350,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref
-             name="statusCode" />
+            >This constructor uses the <paramref name="statusCode" />
 
             
 
-             parameter to initialize the <see
-             cref="P:System.Net.Mail.SmtpException.StatusCode" />
+             parameter to initialize the <see cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
             
 
-             property and uses the <paramref
-             name="failedRecipient" />
+             property and uses the <paramref name="failedRecipient" />
 
             
 
-             parameter to initialize the <see
-             cref="P:System.Net.Mail.SmtpFailedRecipientException.FailedRecipient" />
+             parameter to initialize the <see cref="P:System.Net.Mail.SmtpFailedRecipientException.FailedRecipient" />
 
             
 
@@ -378,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -387,36 +380,45 @@
           >
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.Mail.SmtpStatusCode" />
+          An <see cref="T:System.Net.Mail.SmtpStatusCode" />
 
           
 
            value.</param
         >
         <param name="failedRecipient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the e-mail address.</param
         >
         <param name="serverResponse">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -449,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.SmtpException" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.SmtpException" />
 
             
 
@@ -458,31 +459,41 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that describes the error that occurred.</param
         >
         <param name="failedRecipient">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the e-mail address.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -537,8 +548,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects that are included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects that are included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -548,13 +558,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance with the data that is needed to serialize the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+             instance with the data that is needed to serialize the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -562,24 +570,30 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -613,13 +627,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             instance with the data that is needed to serialize the <see
-             cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+             instance with the data that is needed to serialize the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
             
 
@@ -627,34 +639,38 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           instance, which holds the serialized data for the <see
-           cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+           instance, which holds the serialized data for the <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
           
 
           . </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           instance that contains the destination of the serialized stream that is associated with the new <see
-           cref="T:System.Net.Mail.SmtpFailedRecipientException" />
+           instance that contains the destination of the serialized stream that is associated with the new <see cref="T:System.Net.Mail.SmtpFailedRecipientException" />
 
           
 

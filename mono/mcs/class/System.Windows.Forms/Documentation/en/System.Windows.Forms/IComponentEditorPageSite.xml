@@ -12,8 +12,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The site for a <see
-         cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
+        >The site for a <see cref="T:System.Windows.Forms.Design.ComponentEditorPage" />
 
         
 

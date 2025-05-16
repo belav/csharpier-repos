@@ -70,8 +70,7 @@
         </item>
       </list>
       <para
-        >Objects of classes that derive from <see
-         cref="T:System.Xml.Linq.XContainer" />
+        >Objects of classes that derive from <see cref="T:System.Xml.Linq.XContainer" />
 
         
 
@@ -79,13 +78,11 @@
       >
       <block subset="none" type="note">
         <para
-          >An <see
-           cref="T:System.Xml.Linq.XAttribute" />
+          >An <see cref="T:System.Xml.Linq.XAttribute" />
 
           
 
-           is not an <see
-           cref="T:System.Xml.Linq.XNode" />
+           is not an <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -120,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about the valid content that can be passed to this method, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this method, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -144,7 +140,11 @@
           <para>Adds the specified content immediately after this node.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -178,8 +178,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about the valid content that can be passed to this method, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this method, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -190,13 +189,11 @@
             .</para
           >
           <para
-            >This method will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
@@ -208,7 +205,11 @@
           <para>Adds the specified content immediately after this node.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -236,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about the valid content that can be passed to this method, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this method, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -248,31 +248,26 @@
             .</para
           >
           <para
-            >This method will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
              events.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="Overload:System.Xml.Linq.XNode.AddBeforeSelf" />
+             objects. This means that the <see cref="Overload:System.Xml.Linq.XNode.AddBeforeSelf" />
 
             
 
@@ -284,7 +279,11 @@
           <para>Adds the specified content immediately before this node.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -318,8 +317,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about the valid content that can be passed to this method, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this method, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -330,31 +328,26 @@
             .</para
           >
           <para
-            >This method will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
              events.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="Overload:System.Xml.Linq.XNode.AddBeforeSelf" />
+             objects. This means that the <see cref="Overload:System.Xml.Linq.XNode.AddBeforeSelf" />
 
             
 
@@ -366,7 +359,11 @@
           <para>Adds the specified content immediately before this node.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -405,13 +402,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -447,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of the ancestor elements of this node. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of the ancestor elements of this node. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -458,18 +452,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             of the ancestor elements of this node. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             of the ancestor elements of this node. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -479,12 +470,15 @@
           <para>This method uses deferred execution.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -516,18 +510,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="M:System.Xml.Linq.XNode.CompareDocumentOrder" />
+             objects. This means that the <see cref="M:System.Xml.Linq.XNode.CompareDocumentOrder" />
 
             
 
@@ -541,23 +532,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An int containing 0 if the nodes are equal; -1 if <paramref
-             name="n1" />
+            >An int containing 0 if the nodes are equal; -1 if <paramref name="n1" />
 
             
 
-             is before <paramref
-             name="n2" />
+             is before <paramref name="n2" />
 
             
 
-            ; 1 if <paramref
-             name="n1" />
+            ; 1 if <paramref name="n1" />
 
             
 
-             is after <paramref
-             name="n2" />
+             is after <paramref name="n2" />
 
             
 
@@ -565,24 +552,30 @@
           >
         </returns>
         <param name="n1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          First <see
-           cref="T:System.Xml.Linq.XNode" />
+          First <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            to compare.</param
         >
         <param name="n2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Second <see
-           cref="T:System.Xml.Linq.XNode" />
+          Second <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -608,88 +601,74 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You typically use this method when you have to supply another component with an <see
-             cref="T:System.Xml.XmlReader" />
+            >You typically use this method when you have to supply another component with an <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . For example, you can create an <see
-             cref="T:System.Xml.XmlReader" />
+            . For example, you can create an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             from a sqltecxlinq tree, and then pass that reader to <see
-             cref="M:System.Xml.XmlDocument.Load(System.Xml.XmlReader)" />
+             from a sqltecxlinq tree, and then pass that reader to <see cref="M:System.Xml.XmlDocument.Load(System.Xml.XmlReader)" />
 
             
 
             .</para
           >
           <para
-            >All of the readers returned by <see
-             cref="Overload:System.Xml.XmlReader.Create" />
+            >All of the readers returned by <see cref="Overload:System.Xml.XmlReader.Create" />
 
             
 
-             are normalizing readers. They always perform line break normalization and full normalization of attributes. In contrast, the <see
-             cref="T:System.Xml.XmlReader" />
+             are normalizing readers. They always perform line break normalization and full normalization of attributes. In contrast, the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             returned by <see
-             cref="M:System.Xml.Linq.XNode.CreateReader" />
+             returned by <see cref="M:System.Xml.Linq.XNode.CreateReader" />
 
             
 
              is not a normalizing reader. It does not transform any white space. It also returns attributes in the order that they were added, not in attribute name order.</para
           >
           <para
-            >sqltecxlinq does not keep information about whether attributes are default attributes. <see
-             cref="P:System.Xml.XmlReader.IsDefault" />
+            >sqltecxlinq does not keep information about whether attributes are default attributes. <see cref="P:System.Xml.XmlReader.IsDefault" />
 
             
 
              will always return false regardless of whether the attribute was populated from a default value or not.</para
           >
           <para
-            >The the PUBLIC and SYSTEM pseudo attributes on <see
-             cref="T:System.Xml.Linq.XDocumentType" />
+            >The the PUBLIC and SYSTEM pseudo attributes on <see cref="T:System.Xml.Linq.XDocumentType" />
 
             
 
-             are not available through the <see
-             cref="M:System.Xml.XmlReader.MoveToAttribute(System.Int32)" />
+             are not available through the <see cref="M:System.Xml.XmlReader.MoveToAttribute(System.Int32)" />
 
             
 
-             method. They are only available through the <see
-             cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
+             method. They are only available through the <see cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
 
             
 
-             method that takes the qualified name of the attribute as a parameter. If you have to retrieve the PUBLIC or SYSTEM attributes, you should use the <see
-             cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
+             method that takes the qualified name of the attribute as a parameter. If you have to retrieve the PUBLIC or SYSTEM attributes, you should use the <see cref="M:System.Xml.XmlReader.GetAttribute(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >Base64 and BinHex data are not supported. If you attempt to retrieve these types of data (for example, by calling <see
-             cref="M:System.Xml.XmlReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >Base64 and BinHex data are not supported. If you attempt to retrieve these types of data (for example, by calling <see cref="M:System.Xml.XmlReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            ), the reader will throw <see
-             cref="T:System.NotSupportedException" />
+            ), the reader will throw <see cref="T:System.NotSupportedException" />
 
             
 
             .</para
           >
           <para
-            >The xml declaration is not surfaced by the reader. While reading, you will not encounter a node of type <see
-             cref="F:System.Xml.XmlNodeType.XmlDeclaration" />
+            >The xml declaration is not surfaced by the reader. While reading, you will not encounter a node of type <see cref="F:System.Xml.XmlNodeType.XmlDeclaration" />
 
             
 
@@ -699,8 +678,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlReader" />
+            >Creates an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -710,8 +688,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -744,13 +721,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlReader" />
+            >Creates an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             with the options specified by the <paramref
-             name="readerOptions" />
+             with the options specified by the <paramref name="readerOptions" />
 
             
 
@@ -760,8 +735,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlReader" />
+            >An <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -769,12 +743,15 @@
           >
         </returns>
         <param name="readerOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Linq.ReaderOptions" />
+          A <see cref="T:System.Xml.Linq.ReaderOptions" />
 
           
 
@@ -812,8 +789,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XNode" />
+                >Two <see cref="T:System.Xml.Linq.XNode" />
 
                 
 
@@ -822,8 +798,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XText" />
+                >Two <see cref="T:System.Xml.Linq.XText" />
 
                 
 
@@ -832,8 +807,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XElement" />
+                >Two <see cref="T:System.Xml.Linq.XElement" />
 
                 
 
@@ -842,8 +816,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XDocument" />
+                >Two <see cref="T:System.Xml.Linq.XDocument" />
 
                 
 
@@ -852,8 +825,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XComment" />
+                >Two <see cref="T:System.Xml.Linq.XComment" />
 
                 
 
@@ -862,8 +834,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XProcessingInstruction" />
+                >Two <see cref="T:System.Xml.Linq.XProcessingInstruction" />
 
                 
 
@@ -872,8 +843,7 @@
             </item>
             <item>
               <para
-                >Two <see
-                 cref="T:System.Xml.Linq.XDocumentType" />
+                >Two <see cref="T:System.Xml.Linq.XDocumentType" />
 
                 
 
@@ -891,24 +861,30 @@
           <para>true if the nodes are equal; otherwise false.</para>
         </returns>
         <param name="n1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.Linq.XNode" />
+          The first <see cref="T:System.Xml.Linq.XNode" />
 
           
 
            to compare.</param
         >
         <param name="n2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.Linq.XNode" />
+          The second <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -937,8 +913,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is primarily used internally for implementing the <see
-             cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
+            >This property is primarily used internally for implementing the <see cref="M:System.Xml.Linq.Extensions.InDocumentOrder``1(System.Collections.Generic.IEnumerable{``0})" />
 
             
 
@@ -981,13 +956,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -1024,8 +997,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of the sibling elements after this node, in document order. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of the sibling elements after this node, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1035,18 +1007,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             of the sibling elements after this node, in document order. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             of the sibling elements after this node, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1054,12 +1023,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -1097,13 +1069,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
@@ -1140,8 +1110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a filtered collection of the sibling elements before this node, in document order. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns a filtered collection of the sibling elements before this node, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1151,18 +1120,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XElement" />
+             of <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             of the sibling elements before this node, in document order. Only elements that have a matching <see
-             cref="T:System.Xml.Linq.XName" />
+             of the sibling elements before this node, in document order. Only elements that have a matching <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -1170,12 +1136,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XName" />
+          The <see cref="T:System.Xml.Linq.XName" />
 
           
 
@@ -1228,18 +1197,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="M:System.Xml.Linq.XNode.CompareDocumentOrder" />
+             objects. This means that the <see cref="M:System.Xml.Linq.XNode.CompareDocumentOrder" />
 
             
 
@@ -1255,12 +1221,15 @@
           <para>true if this node appears after the specified node; otherwise false.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -1288,18 +1257,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="M:System.Xml.Linq.XNode.IsBefore" />
+             objects. This means that the <see cref="M:System.Xml.Linq.XNode.IsBefore" />
 
             
 
@@ -1315,12 +1281,15 @@
           <para>true if this node appears before the specified node; otherwise false.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNode" />
+          The <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -1346,8 +1315,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this <see
-             cref="T:System.Xml.Linq.XNode" />
+            >If this <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -1390,13 +1358,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XNode" />
+             of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -1435,13 +1401,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Xml.Linq.XNode" />
+             of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
@@ -1468,26 +1432,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this <see
-             cref="T:System.Xml.Linq.XNode" />
+            >If this <see cref="T:System.Xml.Linq.XNode" />
 
             
 
              does not have a parent, or if there is no previous node, this property returns null.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="P:System.Xml.Linq.XNode.PreviousNode" />
+             objects. This means that the <see cref="P:System.Xml.Linq.XNode.PreviousNode" />
 
             
 
@@ -1524,26 +1484,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this method to write a method that returns a collection of nodes, yielding each node as the node is read from the reader. This method enables you to process arbitrarily large XML files with a very small memory footprint.</para>
           <para
-            >The reader that you pass to this method might throw exceptions. <see
-             cref="M:System.Xml.Linq.XNode.ReadFrom(System.Xml.XmlReader)" />
+            >The reader that you pass to this method might throw exceptions. <see cref="M:System.Xml.Linq.XNode.ReadFrom(System.Xml.XmlReader)" />
 
             
 
-             does not catch all exceptions thrown by the reader; the unhandled exceptions bubble up to the code that called <see
-             cref="M:System.Xml.Linq.XNode.ReadFrom(System.Xml.XmlReader)" />
+             does not catch all exceptions thrown by the reader; the unhandled exceptions bubble up to the code that called <see cref="M:System.Xml.Linq.XNode.ReadFrom(System.Xml.XmlReader)" />
 
             
 
-            . In particular, your code should be prepared to handle <see
-             cref="T:System.Xml.XmlException" />
+            . In particular, your code should be prepared to handle <see cref="T:System.Xml.XmlException" />
 
             
 
             .</para
           >
           <para
-            >For an example of how to stream a more complex document, see <format
-             type="text/html">
+            >For an example of how to stream a more complex document, see <format type="text/html">
               <a href="01311522-9d03-4977-8641-2932c6f56092"
                 >How to: Stream XML Fragments with Access to Header Information</a
               >
@@ -1554,16 +1510,14 @@
             .</para
           >
           <para
-            >Certain standard query operators, such as <see
-             cref="Overload:System.Linq.Enumerable.OrderBy" />
+            >Certain standard query operators, such as <see cref="Overload:System.Linq.Enumerable.OrderBy" />
 
             
 
             , iterate their source, collect all of the data, sort it, and then finally yield the first item in the sequence. If you use a query operator that materializes its source before yielding the first item, you will not retain a small memory footprint.</para
           >
           <para
-            >For an example of using sqltecxlinq to transform extremely large XML documents while maintaining a small memory footprint, see <format
-             type="text/html">
+            >For an example of using sqltecxlinq to transform extremely large XML documents while maintaining a small memory footprint, see <format type="text/html">
               <a href="0759e428-6e59-4d80-a506-365d3a6a2b73"
                 >How to: Perform Streaming Transform of Large XML Documents</a
               >
@@ -1577,13 +1531,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.Linq.XNode" />
+            >Creates an <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             from an <see
-             cref="T:System.Xml.XmlReader" />
+             from an <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -1593,13 +1545,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XNode" />
+            >An <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             that contains the node and its descendant nodes that were read from the reader. The runtime type of the node is determined by the node type (<see
-             cref="P:System.Xml.Linq.XObject.NodeType" />
+             that contains the node and its descendant nodes that were read from the reader. The runtime type of the node is determined by the node type (<see cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
@@ -1607,17 +1557,19 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
-           positioned at the node to read into this <see
-           cref="T:System.Xml.Linq.XNode" />
+           positioned at the node to read into this <see cref="T:System.Xml.Linq.XNode" />
 
           
 
@@ -1643,18 +1595,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In sqltecxlinq programming, you should not manipulate or modify a set of nodes while you are querying for nodes in that set. In practical terms, this means that you should not iterate over a set of nodes and remove them. Instead, you should materialize them into a <see
-             cref="T:System.Collections.Generic.List`1" />
+            >In sqltecxlinq programming, you should not manipulate or modify a set of nodes while you are querying for nodes in that set. In practical terms, this means that you should not iterate over a set of nodes and remove them. Instead, you should materialize them into a <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-             by using the <see
-             cref="M:System.Linq.Enumerable.ToList``1(System.Collections.Generic.IEnumerable{``0})" />
+             by using the <see cref="M:System.Linq.Enumerable.ToList``1(System.Collections.Generic.IEnumerable{``0})" />
 
             
 
-             extension method. Then, you can iterate over the list to remove the nodes. For more information, see <format
-             type="text/html">
+             extension method. Then, you can iterate over the list to remove the nodes. For more information, see <format type="text/html">
               <a href="d9a5c404-2b0e-46cd-a358-0e78773b3094"
                 >Mixed Declarative Code/Imperative Code Bugs (C#) (LINQ to XML)</a
               >
@@ -1665,39 +1614,33 @@
             .</para
           >
           <para
-            >Alternatively, if you want to remove a set of nodes, it is recommended that you use the <see
-             cref="Overload:System.Xml.Linq.Extensions.Remove" />
+            >Alternatively, if you want to remove a set of nodes, it is recommended that you use the <see cref="Overload:System.Xml.Linq.Extensions.Remove" />
 
             
 
              method. This method copies the nodes to a list, and then iterates over the list to remove the nodes.</para
           >
           <para
-            >This method will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
              events.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="M:System.Xml.Linq.XNode.Remove" />
+             objects. This means that the <see cref="M:System.Xml.Linq.XNode.Remove" />
 
             
 
@@ -1731,26 +1674,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method first removes this node from its parent, and then adds the specified content to this node's parent, in the place of this node.</para>
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="Overload:System.Xml.Linq.XNode.ReplaceWith" />
+             objects. This means that the <see cref="Overload:System.Xml.Linq.XNode.ReplaceWith" />
 
             
 
              method must traverse the list of direct child nodes under the parent container. Therefore, using this method might affect your performance.</para
           >
           <para
-            >For details about the valid content that can be passed to this method, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this method, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -1761,13 +1700,11 @@
             .</para
           >
           <para
-            >This method will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
@@ -1779,7 +1716,11 @@
           <para>Replaces this node with the specified content.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1814,26 +1755,22 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method first removes this node from its parent, and then adds the specified content to this node's parent, in the place of this node.</para>
           <para
-            >The <see
-             cref="T:System.Xml.Linq.XContainer" />
+            >The <see cref="T:System.Xml.Linq.XContainer" />
 
             
 
-             stores its child nodes as a singly-linked list of <see
-             cref="T:System.Xml.Linq.XNode" />
+             stores its child nodes as a singly-linked list of <see cref="T:System.Xml.Linq.XNode" />
 
             
 
-             objects. This means that the <see
-             cref="Overload:System.Xml.Linq.XNode.ReplaceWith" />
+             objects. This means that the <see cref="Overload:System.Xml.Linq.XNode.ReplaceWith" />
 
             
 
              method must traverse the list of direct child nodes under the parent container. Therefore, using this method might affect your performance.</para
           >
           <para
-            >For details about the valid content that can be passed to this method, see <format
-             type="text/html">
+            >For details about the valid content that can be passed to this method, see <format type="text/html">
               <a href="aee2d319-5c5f-4b99-9bb4-2f58232577ae"
                 >Valid Content of XElement and XDocument Objects</a
               >
@@ -1844,13 +1781,11 @@
             .</para
           >
           <para
-            >This method will raise the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+            >This method will raise the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
-             and the <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+             and the <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
@@ -1862,7 +1797,11 @@
           <para>Replaces this node with the specified content.</para>
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1893,8 +1832,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1931,8 +1869,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -1940,12 +1877,15 @@
           >
         </returns>
         <param name="options">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Xml.Linq.SaveOptions" />
+          A <see cref="T:System.Xml.Linq.SaveOptions" />
 
           
 
@@ -1976,8 +1916,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to write code that does a streaming transform of a very large document. For more information, see <format
-             type="text/html">
+            >You can use this method to write code that does a streaming transform of a very large document. For more information, see <format type="text/html">
               <a href="0759e428-6e59-4d80-a506-365d3a6a2b73"
                 >How to: Perform Streaming Transform of Large XML Documents</a
               >
@@ -1991,8 +1930,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes this node to an <see
-             cref="T:System.Xml.XmlWriter" />
+            >Writes this node to an <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -2000,12 +1938,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 

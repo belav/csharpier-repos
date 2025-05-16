@@ -21,56 +21,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.Profile.ProfileInfoCollection" />
+        >A <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
         
 
-         object contains <see
-         cref="T:System.Web.Profile.ProfileInfo" />
+         object contains <see cref="T:System.Web.Profile.ProfileInfo" />
 
         
 
-         objects that represent user profiles from a data source. A <see
-         cref="T:System.Web.Profile.ProfileInfoCollection" />
+         objects that represent user profiles from a data source. A <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
         
 
-         is returned from the <see
-         cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+         is returned from the <see cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
 
         
 
-        , <see
-         cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+        , <see cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
         
 
-        , <see
-         cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+        , <see cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
 
         
 
-        , and <see
-         cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+        , and <see cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
         
 
-         methods of a <see
-         cref="T:System.Web.Profile.ProfileProvider" />
+         methods of a <see cref="T:System.Web.Profile.ProfileProvider" />
 
         
 
         .</para
       >
       <para
-        >A <see
-         cref="T:System.Web.Profile.ProfileInfoCollection" />
+        >A <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
         
 
-         can be supplied to the <see
-         cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" />
+         can be supplied to the <see cref="M:System.Web.Profile.ProfileProvider.DeleteProfiles(System.Web.Profile.ProfileInfoCollection)" />
 
         
 
@@ -80,8 +70,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.Profile.ProfileInfo" />
+        >A collection of <see cref="T:System.Web.Profile.ProfileInfo" />
 
         
 
@@ -99,33 +88,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+            >A <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
-             is constructed by profile provider implementers and returned from the <see
-             cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+             is constructed by profile provider implementers and returned from the <see cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-            , <see
-             cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+            , <see cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-            , <see
-             cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+            , <see cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-            , and <see
-             cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+            , and <see cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-             methods of the <see
-             cref="T:System.Web.Profile.ProfileProvider" />
+             methods of the <see cref="T:System.Web.Profile.ProfileProvider" />
 
             
 
@@ -135,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new, empty <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+            >Creates a new, empty <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
@@ -165,38 +147,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Profile.ProfileInfoCollection.Add(System.Web.Profile.ProfileInfo)" />
+            >The <see cref="M:System.Web.Profile.ProfileInfoCollection.Add(System.Web.Profile.ProfileInfo)" />
 
             
 
-             method is commonly used by profile-provider implementers to populate a <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+             method is commonly used by profile-provider implementers to populate a <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
-             to return from the <see
-             cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+             to return from the <see cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-            , <see
-             cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+            , <see cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-            , <see
-             cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+            , <see cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-            , or <see
-             cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+            , or <see cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Profile.ProfileProvider" />
+             method of the <see cref="T:System.Web.Profile.ProfileProvider" />
 
             
 
@@ -206,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+            >Adds the specified <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
@@ -215,12 +189,15 @@
           >
         </summary>
         <param name="profileInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Profile.ProfileInfo" />
+          A <see cref="T:System.Web.Profile.ProfileInfo" />
 
           
 
@@ -244,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+            >Removes all <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
@@ -272,18 +248,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses <see
-             cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
 
             
 
-             to copy <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+             to copy <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
-             objects to the specified <see
-             cref="T:System.Array" />
+             objects to the specified <see cref="T:System.Array" />
 
             
 
@@ -293,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+            >Copies the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
@@ -302,29 +274,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A one-dimensional <see
-           cref="T:System.Array" />
+          A one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Web.Profile.ProfileInfoCollection" />
+           that is the destination of the elements copied from the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,13 +330,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses <see
-             cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
 
             
 
-             to copy <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+             to copy <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
@@ -369,13 +344,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+            >Copies the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
-             to a one-dimensional array of type <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+             to a one-dimensional array of type <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
@@ -383,29 +356,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A one-dimensional array of type <see
-           cref="T:System.Web.Profile.ProfileInfo" />
+          A one-dimensional array of type <see cref="T:System.Web.Profile.ProfileInfo" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Web.Profile.ProfileInfoCollection" />
+           that is the destination of the elements copied from the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
           
 
           . The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in the <paramref
-           name="array" />
+          The zero-based index in the <paramref name="array" />
 
           
 
@@ -429,8 +407,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+            >Gets the number of <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
@@ -457,8 +434,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enumerators only allow reading the data in the collection. Enumerators cannot be used to modify the underlying collection. For more information, see <see
-             cref="T:System.Collections.IEnumerator" />
+            >Enumerators only allow reading the data in the collection. Enumerators cannot be used to modify the underlying collection. For more information, see <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -468,8 +444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an enumerator that can iterate through the <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+            >Gets an enumerator that can iterate through the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
@@ -479,13 +454,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the entire <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+             for the entire <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
@@ -557,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+            >Removes the <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
@@ -566,17 +538,19 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Web.Profile.ProfileInfo.UserName" />
+          The <see cref="P:System.Web.Profile.ProfileInfo.UserName" />
 
           
 
-           of the <see
-           cref="T:System.Web.Profile.ProfileInfo" />
+           of the <see cref="T:System.Web.Profile.ProfileInfo" />
 
           
 
@@ -599,28 +573,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Profile.ProfileInfoCollection.SetReadOnly" />
+            >The <see cref="M:System.Web.Profile.ProfileInfoCollection.SetReadOnly" />
 
             
 
-             method marks the <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+             method marks the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
-             as read-only so that <see
-             cref="T:System.Web.Profile.ProfileInfo" />
+             as read-only so that <see cref="T:System.Web.Profile.ProfileInfo" />
 
             
 
-             objects cannot be added to or removed from the collection. After calling the <see
-             cref="M:System.Web.Profile.ProfileInfoCollection.SetReadOnly" />
+             objects cannot be added to or removed from the collection. After calling the <see cref="M:System.Web.Profile.ProfileInfoCollection.SetReadOnly" />
 
             
 
-             method, you cannot change the <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+             method, you cannot change the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 
@@ -630,8 +599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Makes the contents of the <see
-             cref="T:System.Web.Profile.ProfileInfoCollection" />
+            >Makes the contents of the <see cref="T:System.Web.Profile.ProfileInfoCollection" />
 
             
 

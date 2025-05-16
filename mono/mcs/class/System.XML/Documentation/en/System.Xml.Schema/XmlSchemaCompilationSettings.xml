@@ -19,28 +19,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Schema.XmlSchemaCompilationSettings" />
+        >The <see cref="T:System.Xml.Schema.XmlSchemaCompilationSettings" />
 
         
 
-         class provides schema compilation options for the <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+         class provides schema compilation options for the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
-         class. For example, the <see
-         cref="P:System.Xml.Schema.XmlSchemaCompilationSettings.EnableUpaCheck" />
+         class. For example, the <see cref="P:System.Xml.Schema.XmlSchemaCompilationSettings.EnableUpaCheck" />
 
         
 
-         property specifies that the <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+         property specifies that the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
-         should check for Unique Particle Attribution (UPA) violations when schemas in the <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+         should check for Unique Particle Attribution (UPA) violations when schemas in the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
@@ -50,8 +45,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides schema compilation options for the <see
-         cref="T:System.Xml.Schema.XmlSchemaSet" />
+        >Provides schema compilation options for the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
         
 
@@ -78,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaCompilationSettings" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaCompilationSettings" />
 
             
 
@@ -105,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Xml.Schema.XmlSchemaCompilationSettings.EnableUpaCheck" />
+            >When the <see cref="P:System.Xml.Schema.XmlSchemaCompilationSettings.EnableUpaCheck" />
 
             
 
@@ -115,8 +107,7 @@
           <list type="ordered">
             <item>
               <para
-                >If there is a choice between a strong type and a wildcard, the <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                >If there is a choice between a strong type and a wildcard, the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
@@ -133,8 +124,7 @@
           <list type="ordered">
             <item>
               <para
-                >If there is a choice between two strongly typed elements, the <see
-                 cref="T:System.Xml.Schema.XmlSchemaSet" />
+                >If there is a choice between two strongly typed elements, the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
                 
 
@@ -154,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Xml.Schema.XmlSchemaSet" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
             
 

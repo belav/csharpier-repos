@@ -14,8 +14,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class can be extended to develop any type of user interface behavior, including selection, drag, and resize behaviors.</para>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a>
         </format>
 
@@ -25,13 +24,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Your <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          >Your <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
-           type must be associated with a <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           type must be associated with a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -42,13 +39,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the <see
-         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+        >Represents the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
         
 
-         objects that are managed by a <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         objects that are managed by a <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
@@ -69,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -99,18 +93,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parent behavior is the next behavior on the behavior stack maintained by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >The parent behavior is the next behavior on the behavior stack maintained by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . If the <paramref
-             name="callParentBehavior" />
+            . If the <paramref name="callParentBehavior" />
 
             
 
-             parameter is true, then the <paramref
-             name="behaviorService" />
+             parameter is true, then the <paramref name="behaviorService" />
 
             
 
@@ -121,13 +112,11 @@
 
             
 
-             indicates whether the base <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             indicates whether the base <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             class should call the parent behavior, and then allow the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             class should call the parent behavior, and then allow the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -137,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             class with the given <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             class with the given <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -151,19 +138,26 @@
           >
         </summary>
         <param name="callParentBehavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the parent behavior should be called if it exists; otherwise, false.</param
         >
         <param name="behaviorService">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
           
 
@@ -206,41 +200,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A true value for the <see
-             cref="P:System.Windows.Forms.Design.Behavior.Behavior.DisableAllCommands" />
+            >A true value for the <see cref="P:System.Windows.Forms.Design.Behavior.Behavior.DisableAllCommands" />
 
             
 
-             property indicates to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             property indicates to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             that all <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+             that all <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
              objects the designer receives should have their state disabled when this behavior is active.</para
           >
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Design.Behavior.Behavior.DisableAllCommands" />
+            >The <see cref="P:System.Windows.Forms.Design.Behavior.Behavior.DisableAllCommands" />
 
             
 
-             property works in conjunction with the <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
+             property works in conjunction with the <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
 
             
 
-             method so you can customize the interaction between glyphs and behaviors. The following table summarizes the results of a call to <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
+             method so you can customize the interaction between glyphs and behaviors. The following table summarizes the results of a call to <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
 
             
 
-             for a particular <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+             for a particular <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -276,23 +263,19 @@
               </term>
               <description>
                 <para
-                  >If the <see
-                   cref="T:System.ComponentModel.Design.MenuCommand" />
+                  >If the <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
                   
 
-                   with the specified <paramref
-                   name="command ID" />
+                   with the specified <paramref name="command ID" />
 
                   
 
-                   is found in the <see
-                   cref="T:System.ComponentModel.Design.IMenuCommandService" />
+                   is found in the <see cref="T:System.ComponentModel.Design.IMenuCommandService" />
 
                   
 
-                  , that <see
-                   cref="T:System.ComponentModel.Design.MenuCommand" />
+                  , that <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
                   
 
@@ -305,18 +288,15 @@
 
                   
 
-                   is called on the behavior and, if found, the behavior’s <see
-                   cref="T:System.ComponentModel.Design.MenuCommand" />
+                   is called on the behavior and, if found, the behavior’s <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
                   
 
-                   is returned. Otherwise, the result of <see
-                   cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+                   is returned. Otherwise, the result of <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
                   
 
-                   with the specified <paramref
-                   name="command ID" />
+                   with the specified <paramref name="command ID" />
 
                   
 
@@ -330,13 +310,11 @@
               </term>
               <description>
                 <para
-                  >The result of <see
-                   cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+                  >The result of <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
                   
 
-                   with the specified <paramref
-                   name="command ID" />
+                   with the specified <paramref name="command ID" />
 
                   
 
@@ -345,13 +323,11 @@
               </description>
               <description>
                 <para
-                  >The result of <see
-                   cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+                  >The result of <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
                   
 
-                   with the specified <paramref
-                   name="command ID" />
+                   with the specified <paramref name="command ID" />
 
                   
 
@@ -364,8 +340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >Gets a value indicating whether <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -393,23 +368,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
 
             
 
-             method is called from the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called from the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . It provides an opportunity for the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            . It provides an opportunity for the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             to return its own custom <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+             to return its own custom <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -423,13 +394,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >A <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
-            . By default, <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
+            . By default, <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.FindCommand(System.ComponentModel.Design.CommandID)" />
 
             
 
@@ -437,12 +406,15 @@
           >
         </returns>
         <param name="commandId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.CommandID" />
+          A <see cref="T:System.ComponentModel.Design.CommandID" />
 
           
 
@@ -473,24 +445,30 @@
           <para>Permits custom drag-and-drop behavior.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            object on which to invoke drag-and-drop behavior.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -521,24 +499,30 @@
           <para>Permits custom drag-enter behavior.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            on which to invoke drag-enter behavior.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -569,24 +553,30 @@
           <para>Permits custom drag-leave behavior.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            on which to invoke drag-leave behavior.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -617,24 +607,30 @@
           <para>Permits custom drag-over behavior.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            on which to invoke drag-over behavior.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -665,24 +661,30 @@
           <para>Permits custom drag-and-drop feedback behavior.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            on which to invoke drag-and-drop behavior.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+          A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
 
           
 
@@ -710,13 +712,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A behavior can request mouse capture through the behavior service by pushing itself onto the behavior stack with the <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
+            >A behavior can request mouse capture through the behavior service by pushing itself onto the behavior stack with the <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
 
             
 
-             method. If it does so, it will be notified through the <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
+             method. If it does so, it will be notified through the <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
 
             
 
@@ -734,8 +734,7 @@
             </item>
           </list>
           <para
-            >In each of these cases, <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
+            >In each of these cases, <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
 
             
 
@@ -747,24 +746,30 @@
           <para>Called by the adorner window when it loses mouse capture.</para>
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
            on which to invoke drag-and-drop behavior.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -793,23 +798,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any double-click message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any double-click message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . The message is first passed here, to the top-most <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            . The message is first passed here, to the top-most <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             in the behavior stack. Returning true from this method signifies that the message was handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             in the behavior stack. Returning true from this method signifies that the message was handled by the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -819,8 +820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any double-click message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any double-click message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -832,31 +832,41 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           .</param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          A <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            value indicating which button was clicked.</param
         >
         <param name="mouseLoc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -885,23 +895,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any mouse-down message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any mouse-down message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . The message is first passed here, to the top-most <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            . The message is first passed here, to the top-most <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             in the behavior stack. Returning true from this method signifies that the message was handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             in the behavior stack. Returning true from this method signifies that the message was handled by the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -911,8 +917,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any mouse-down message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any mouse-down message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -924,31 +929,41 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           . </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          A <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            value indicating which button was clicked.</param
         >
         <param name="mouseLoc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -975,31 +990,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any mouse-enter message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any mouse-enter message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
             . From here, the message is sent to the appropriate behavior.</para
           >
           <para
-            >When the mouse pointer's location is positively hit-tested with a different <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >When the mouse pointer's location is positively hit-tested with a different <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             than previous hit tests, this method is called on the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             than previous hit tests, this method is called on the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             associated with the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -1009,8 +1019,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any mouse-enter message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any mouse-enter message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -1022,12 +1031,15 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -1055,23 +1067,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any mouse-hover message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any mouse-hover message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . The message is first passed here, to the top-most <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            . The message is first passed here, to the top-most <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             in the behavior stack. Returning true from this method signifies that the message was handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             in the behavior stack. Returning true from this method signifies that the message was handled by the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -1081,8 +1089,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any mouse-hover message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any mouse-hover message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -1094,19 +1101,26 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           . </param
         >
         <param name="mouseLoc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1133,26 +1147,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any mouse-leave message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any mouse-leave message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
             . From here, the message is sent to the appropriate behavior.</para
           >
           <para
-            >When the mouse pointer leaves a positively hit-tested <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >When the mouse pointer leaves a positively hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             with a valid <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             with a valid <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -1162,8 +1172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any mouse-leave message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any mouse-leave message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -1175,12 +1184,15 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -1209,23 +1221,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any mouse-move message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any mouse-move message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . The message is first passed here, to the top-most <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            . The message is first passed here, to the top-most <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             in the behavior stack. Returning true from this method signifies that the message was handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             in the behavior stack. Returning true from this method signifies that the message was handled by the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -1235,8 +1243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any mouse-move message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any mouse-move message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -1248,31 +1255,41 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           . </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          A <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            value indicating which button was clicked.</param
         >
         <param name="mouseLoc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1300,23 +1317,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnMouseDoubleClick(System.Windows.Forms.Design.Behavior.Glyph,System.Windows.Forms.MouseButtons,System.Drawing.Point)" />
 
             
 
-             method is called when any mouse-up message enters the WndProc of the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method is called when any mouse-up message enters the WndProc of the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . The message is first passed here, to the top-most <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            . The message is first passed here, to the top-most <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             in the behavior stack. Returning true from this method signifies that the message was handled by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             in the behavior stack. Returning true from this method signifies that the message was handled by the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -1326,8 +1339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called when any mouse-up message enters the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Called when any mouse-up message enters the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -1339,24 +1351,30 @@
           <para>true if the message was handled; otherwise, false.</para>
         </returns>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           . </param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          A <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
@@ -1385,13 +1403,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends this drag-and-drop event from the adorner window to the appropriate <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Sends this drag-and-drop event from the adorner window to the appropriate <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             or hit-tested <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             or hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -1399,24 +1415,30 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
           . </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
+          A <see cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
 
           
 

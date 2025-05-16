@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="366c634c-7d16-478f-aedf-053eda94a1a0">Socket Element (Network Settings)</a>
         </format>
 
@@ -37,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents information used to configure <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Represents information used to configure <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -64,18 +62,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor adds the <see
-             cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
+            >This constructor adds the <see cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
 
             
 
-             and <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+             and <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
-             properties to the <see
-             cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
+             properties to the <see cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
 
             
 
@@ -85,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.SocketElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.SocketElement" />
 
             
 
@@ -208,18 +202,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection contains three elements, which correspond to the <see
-             cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
+            >The collection contains three elements, which correspond to the <see cref="P:System.Net.Configuration.SocketElement.AlwaysUseCompletionPortsForAccept" />
 
             
 
-            , <see
-             cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
+            , <see cref="P:System.Net.Configuration.ConnectionManagementElement.MaxConnection" />
 
             
 
-            , and <see
-             cref="P:System.Net.Configuration.SocketElement.IPProtectionLevel" />
+            , and <see cref="P:System.Net.Configuration.SocketElement.IPProtectionLevel" />
 
             
 

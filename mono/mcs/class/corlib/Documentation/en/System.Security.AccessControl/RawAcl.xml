@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.RawAcl" />
+        >The <see cref="T:System.Security.AccessControl.RawAcl" />
 
         
 
@@ -57,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
@@ -66,19 +64,26 @@
           >
         </summary>
         <param name="revision">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The revision level of the new Access Control List (ACL).</param
         >
         <param name="capacity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of Access Control Entries (ACEs) this <see
-           cref="T:System.Security.AccessControl.RawAcl" />
+          The number of Access Control Entries (ACEs) this <see cref="T:System.Security.AccessControl.RawAcl" />
 
           
 
@@ -107,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
@@ -116,19 +120,26 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of byte values that represent an Access Control List (ACL).</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset in the <paramref
-           name="binaryForm" />
+          The offset in the <paramref name="binaryForm" />
 
           
 
@@ -154,13 +165,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length, in bytes, of the binary representation of the current <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
-             object. This length should be used before marshaling the ACL into a binary array with the <see
-             cref="M:System.Security.AccessControl.RawAcl.GetBinaryForm" />
+             object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.RawAcl.GetBinaryForm" />
 
             
 
@@ -187,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of access control entries (ACEs) in the current <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >Gets the number of access control entries (ACEs) in the current <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
@@ -224,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marshals the contents of the <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >Marshals the contents of the <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 
@@ -233,19 +240,26 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte array into which the contents of the <see
-           cref="T:System.Security.AccessControl.RawAcl" />
+          The byte array into which the contents of the <see cref="T:System.Security.AccessControl.RawAcl" />
 
           
 
            is marshaled.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -285,24 +299,30 @@
           <para>Inserts the specified Access Control Entry (ACE) at the specified index.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position at which to add the new ACE. Specify the value of the <see
-           cref="P:System.Security.AccessControl.RawAcl.Count" />
+          The position at which to add the new ACE. Specify the value of the <see cref="P:System.Security.AccessControl.RawAcl.Count" />
 
           
 
-           property to insert an ACE at the end of the <see
-           cref="T:System.Security.AccessControl.RawAcl" />
+           property to insert an ACE at the end of the <see cref="T:System.Security.AccessControl.RawAcl" />
 
           
 
            object.</param
         >
         <param name="ace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -363,7 +383,11 @@
           <para>Removes the Access Control Entry (ACE) at the specified location.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the revision level of the <see
-             cref="T:System.Security.AccessControl.RawAcl" />
+            >Gets the revision level of the <see cref="T:System.Security.AccessControl.RawAcl" />
 
             
 

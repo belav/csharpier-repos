@@ -22,31 +22,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A switch provides an efficient mechanism for controlling tracing and debugging output at run time using external settings. The <see
-         cref="T:System.Diagnostics.Switch" />
+        >A switch provides an efficient mechanism for controlling tracing and debugging output at run time using external settings. The <see cref="T:System.Diagnostics.Switch" />
 
         
 
          class implements default behavior for switches, allowing you to change the switch level at run time.</para
       >
       <para
-        >This class is the base class for the <see
-         cref="T:System.Diagnostics.BooleanSwitch" />
+        >This class is the base class for the <see cref="T:System.Diagnostics.BooleanSwitch" />
 
         
 
-        , <see
-         cref="T:System.Diagnostics.SourceSwitch" />
+        , <see cref="T:System.Diagnostics.SourceSwitch" />
 
         
 
-         and the <see
-         cref="T:System.Diagnostics.TraceSwitch" />
+         and the <see cref="T:System.Diagnostics.TraceSwitch" />
 
         
 
-         classes. These switches meet most debugging and tracing needs. For more information about trace switches, see <format
-         type="text/html">
+         classes. These switches meet most debugging and tracing needs. For more information about trace switches, see <format type="text/html">
           <a href="8ab913aa-f400-4406-9436-f45bc6e54fbe">Trace Switches</a>
         </format>
 
@@ -72,23 +67,19 @@
   &lt;/system.diagnostics&gt;
 &lt;/configuration&gt;</code>
       <para
-        > This example configuration section defines a <see
-         cref="T:System.Diagnostics.BooleanSwitch" />
+        > This example configuration section defines a <see cref="T:System.Diagnostics.BooleanSwitch" />
 
         
 
-         with the <see
-         cref="P:System.Diagnostics.Switch.DisplayName" />
+         with the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
         
 
-         property set to mySwitch and the <see
-         cref="P:System.Diagnostics.BooleanSwitch.Enabled" />
+         property set to mySwitch and the <see cref="P:System.Diagnostics.BooleanSwitch.Enabled" />
 
         
 
-         value set to true. Within your application, you can use the configured switch value by creating a <see
-         cref="T:System.Diagnostics.BooleanSwitch" />
+         value set to true. Within your application, you can use the configured switch value by creating a <see cref="T:System.Diagnostics.BooleanSwitch" />
 
         
 
@@ -126,13 +117,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a new <see
-             cref="T:System.Diagnostics.Switch" />
+            >When you create a new <see cref="T:System.Diagnostics.Switch" />
 
             
 
-             object, the value of the <paramref
-             name="displayName" />
+             object, the value of the <paramref name="displayName" />
 
             
 
@@ -153,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Switch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Switch" />
 
             
 
@@ -162,14 +150,22 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the switch. </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,38 +196,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="displayName" />
+            >The <paramref name="displayName" />
 
             
 
-             parameter is used to set the value of the <see
-             cref="P:System.Diagnostics.Switch.DisplayName" />
+             parameter is used to set the value of the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
             
 
-             property, and the <paramref
-             name="description" />
+             property, and the <paramref name="description" />
 
             
 
-             parameter is use to set the value of the <see
-             cref="P:System.Diagnostics.Switch.Description" />
+             parameter is use to set the value of the <see cref="P:System.Diagnostics.Switch.Description" />
 
             
 
-             property. The <paramref
-             name="defaultSwitchValue" />
+             property. The <paramref name="defaultSwitchValue" />
 
             
 
-             parameter is the value for the switch if the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+             parameter is the value for the switch if the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
-             property is not set by code or by the configuration file attribute. See the <see
-             cref="M:System.Diagnostics.Switch.#ctor(System.String,System.String)" />
+             property is not set by code or by the configuration file attribute. See the <see cref="M:System.Diagnostics.Switch.#ctor(System.String,System.String)" />
 
             
 
@@ -241,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Switch" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Switch" />
 
             
 
@@ -250,21 +238,33 @@
           >
         </summary>
         <param name="displayName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the switch. </param
         >
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The description of the switch. </param
         >
         <param name="defaultSwitchValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -299,18 +299,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.Switch.Attributes" />
+            >The <see cref="P:System.Diagnostics.Switch.Attributes" />
 
             
 
-             property identifies the custom attributes referenced in the application's configuration file. Unreferenced custom attributes are not enumerated. Classes that inherit from the <see
-             cref="T:System.Diagnostics.Switch" />
+             property identifies the custom attributes referenced in the application's configuration file. Unreferenced custom attributes are not enumerated. Classes that inherit from the <see cref="T:System.Diagnostics.Switch" />
 
             
 
-             class can add custom attributes by overriding the <see
-             cref="M:System.Diagnostics.Switch.GetSupportedAttributes" />
+             class can add custom attributes by overriding the <see cref="M:System.Diagnostics.Switch.GetSupportedAttributes" />
 
             
 
@@ -340,13 +337,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property should indicate the function of the switch; for example, "Enables tracing for a directory watcher component." The value is set by the <paramref
-             name="descriptor" />
+            >This property should indicate the function of the switch; for example, "Enables tracing for a directory watcher component." The value is set by the <paramref name="descriptor" />
 
             
 
-             parameter in the <see
-             cref="M:System.Diagnostics.Switch.#ctor(System.String,System.String)" />
+             parameter in the <see cref="M:System.Diagnostics.Switch.#ctor(System.String,System.String)" />
 
             
 
@@ -376,23 +371,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a new <see
-             cref="T:System.Diagnostics.Switch" />
+            >When you create a new <see cref="T:System.Diagnostics.Switch" />
 
             
 
-             object, the <see
-             cref="P:System.Diagnostics.Switch.DisplayName" />
+             object, the <see cref="P:System.Diagnostics.Switch.DisplayName" />
 
             
 
-             finds initial switch settings. For more information, see the <see
-             cref="Overload:System.Diagnostics.Switch.#ctor" />
+             finds initial switch settings. For more information, see the <see cref="Overload:System.Diagnostics.Switch.#ctor" />
 
             
 
-             constructor and <format
-             type="text/html">
+             constructor and <format type="text/html">
               <a href="5a0e41bf-f99c-4692-8799-f89617f5bcf9">How to: Configure Trace Switches</a>
             </format>
 
@@ -429,18 +420,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation for the <see
-             cref="M:System.Diagnostics.Switch.GetSupportedAttributes" />
+            >The default implementation for the <see cref="M:System.Diagnostics.Switch.GetSupportedAttributes" />
 
             
 
-             method returns null. If a switch is added in a configuration file and custom attributes are specified that are not included in the string array returned by <see
-             cref="M:System.Diagnostics.Switch.GetSupportedAttributes" />
+             method returns null. If a switch is added in a configuration file and custom attributes are specified that are not included in the string array returned by <see cref="M:System.Diagnostics.Switch.GetSupportedAttributes" />
 
             
 
-            , a <see
-             cref="T:System.Configuration.ConfigurationException" />
+            , a <see cref="T:System.Configuration.ConfigurationException" />
 
             
 
@@ -481,8 +469,7 @@
 
             
 
-             is invoked the first time a switch reads the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+             is invoked the first time a switch reads the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
@@ -492,8 +479,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked when the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+            >Invoked when the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
@@ -521,13 +507,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation parses the new value of the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+            >The default implementation parses the new value of the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
-             property to an integer value which it uses to set the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+             property to an integer value which it uses to set the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 
@@ -537,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invoked when the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+            >Invoked when the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
@@ -584,23 +567,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.Switch.OnValueChanged" />
+            >The <see cref="M:System.Diagnostics.Switch.OnValueChanged" />
 
             
 
-             method is called when the value of the <see
-             cref="P:System.Diagnostics.Switch.Value" />
+             method is called when the value of the <see cref="P:System.Diagnostics.Switch.Value" />
 
             
 
-             property is changed. The <see
-             cref="M:System.Diagnostics.Switch.OnValueChanged" />
+             property is changed. The <see cref="M:System.Diagnostics.Switch.OnValueChanged" />
 
             
 
-             method parses the value of this property and converts it to an integer value, which is then used to set the <see
-             cref="P:System.Diagnostics.Switch.SwitchSetting" />
+             method parses the value of this property and converts it to an integer value, which is then used to set the <see cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
             
 

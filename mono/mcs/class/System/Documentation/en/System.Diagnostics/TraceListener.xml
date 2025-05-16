@@ -30,23 +30,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For examples of how to implement a <see
-         cref="T:System.Diagnostics.TraceListener" />
+        >For examples of how to implement a <see cref="T:System.Diagnostics.TraceListener" />
 
         
 
-        , see the <see
-         cref="T:System.Diagnostics.DefaultTraceListener" />
+        , see the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
         
 
-        , <see
-         cref="T:System.Diagnostics.TextWriterTraceListener" />
+        , <see cref="T:System.Diagnostics.TextWriterTraceListener" />
 
         
 
-         and the <see
-         cref="T:System.Diagnostics.EventLogTraceListener" />
+         and the <see cref="T:System.Diagnostics.EventLogTraceListener" />
 
         
 
@@ -73,8 +69,7 @@
   &lt;/system.diagnostics&gt;
 &lt;/configuration&gt;</code>
       <para
-        >For more information on using configuration files for tracing, see <format
-         type="text/html">
+        >For more information on using configuration files for tracing, see <format type="text/html">
           <a href="3f348f42-fa72-4ff2-aa1c-bb9eecad4bb2">&lt;system.diagnostics&gt; Element</a>
         </format>
 
@@ -107,8 +102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -154,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -185,8 +178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -194,12 +186,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Diagnostics.TraceListener" />
+          The name of the <see cref="T:System.Diagnostics.TraceListener" />
 
           
 
@@ -229,33 +224,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Classes that inherit from the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Classes that inherit from the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
-             class can add custom attributes by overriding the <see
-             cref="M:System.Diagnostics.TraceListener.GetSupportedAttributes" />
+             class can add custom attributes by overriding the <see cref="M:System.Diagnostics.TraceListener.GetSupportedAttributes" />
 
             
 
-             method and returning a string array of custom attribute names. The <see
-             cref="P:System.Diagnostics.TraceListener.Attributes" />
+             method and returning a string array of custom attribute names. The <see cref="P:System.Diagnostics.TraceListener.Attributes" />
 
             
 
-             property identifies the custom attributes that are referenced in the application's configuration file. For example, in the following configuration file excerpt the <see
-             cref="T:System.Diagnostics.DelimitedListTraceListener" />
+             property identifies the custom attributes that are referenced in the application's configuration file. For example, in the following configuration file excerpt the <see cref="T:System.Diagnostics.DelimitedListTraceListener" />
 
             
 
-             custom attribute "delimiter" is referenced. In this case, the <see
-             cref="P:System.Diagnostics.TraceListener.Attributes" />
+             custom attribute "delimiter" is referenced. In this case, the <see cref="P:System.Diagnostics.TraceListener.Attributes" />
 
             
 
-             property returns a <see
-             cref="T:System.Collections.Specialized.StringDictionary" />
+             property returns a <see cref="T:System.Collections.Specialized.StringDictionary" />
 
             
 
@@ -270,8 +259,7 @@
   &lt;remove name="Default" /&gt;
 &lt;/listeners&gt;</code>
           <para
-            >Unreferenced custom attributes are not enumerated.  For more information, see the <see
-             cref="M:System.Diagnostics.TraceListener.GetSupportedAttributes" />
+            >Unreferenced custom attributes are not enumerated.  For more information, see the <see cref="M:System.Diagnostics.TraceListener.GetSupportedAttributes" />
 
             
 
@@ -304,8 +292,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method when the output is going to a file, such as to the <see
-             cref="T:System.Diagnostics.TextWriterTraceListener" />
+            >Use this method when the output is going to a file, such as to the <see cref="T:System.Diagnostics.TextWriterTraceListener" />
 
             
 
@@ -338,23 +325,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Diagnostics.TraceListener.Dispose" />
+            >Calling <see cref="M:System.Diagnostics.TraceListener.Dispose" />
 
             
 
-             allows the resources used by the <see
-             cref="T:System.Diagnostics.TraceListener" />
+             allows the resources used by the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
-             to be reallocated for other purposes. For more information about <see
-             cref="M:System.Diagnostics.TraceListener.Dispose" />
+             to be reallocated for other purposes. For more information about <see cref="M:System.Diagnostics.TraceListener.Dispose" />
 
             
 
-            , see <format
-             type="text/html">
+            , see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -368,8 +351,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Releases all resources used by the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -400,46 +382,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public <see
-             cref="M:System.Diagnostics.TraceListener.Dispose" />
+            >This method is called by the public <see cref="M:System.Diagnostics.TraceListener.Dispose" />
 
             
 
-             method and the <see
-             cref="M:System.Object.Finalize" />
+             method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose invokes the protected <see
-             cref="M:System.Diagnostics.TraceListener.Dispose" />
+             method. Dispose invokes the protected <see cref="M:System.Diagnostics.TraceListener.Dispose" />
 
             
 
-             method with the <paramref
-             name="disposing" />
+             method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Diagnostics.TraceListener" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -449,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -458,7 +431,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -488,28 +465,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior is to display the specified message in a message box when the application is running in a user-interface mode, and to the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >The default behavior is to display the specified message in a message box when the application is running in a user-interface mode, and to the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
-             instances in a <see
-             cref="T:System.Diagnostics.TraceListenerCollection" />
+             instances in a <see cref="T:System.Diagnostics.TraceListenerCollection" />
 
             
 
-             collection. By default, the <see
-             cref="T:System.Diagnostics.TraceListenerCollection" />
+             collection. By default, the <see cref="T:System.Diagnostics.TraceListenerCollection" />
 
             
 
-             collection has an instance of a <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+             collection has an instance of a <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
-            . You can customize this behavior by adding a <see
-             cref="T:System.Diagnostics.TraceListener" />
+            . You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -519,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Emits an error message to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Emits an error message to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -528,7 +499,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -562,28 +537,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default behavior is to display the message and detailed message in a message box when the application is running in a user-interface mode, and to the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >The default behavior is to display the message and detailed message in a message box when the application is running in a user-interface mode, and to the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
-             instances in a <see
-             cref="T:System.Diagnostics.TraceListenerCollection" />
+             instances in a <see cref="T:System.Diagnostics.TraceListenerCollection" />
 
             
 
-             collection. By default, the <see
-             cref="T:System.Diagnostics.TraceListenerCollection" />
+             collection. By default, the <see cref="T:System.Diagnostics.TraceListenerCollection" />
 
             
 
-             collection has an instance of a <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+             collection has an instance of a <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
-            . You can customize this behavior by adding a <see
-             cref="T:System.Diagnostics.TraceListener" />
+            . You can customize this behavior by adding a <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -593,8 +563,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Emits an error message and a detailed error message to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Emits an error message and a detailed error message to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -602,14 +571,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A message to emit. </param
         >
         <param name="detailMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -644,8 +621,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A trace filter can be added to a trace listener to provide a layer of screening beyond that provided to the trace source by switches. For example, the <see
-             cref="T:System.Diagnostics.EventTypeFilter" />
+            >A trace filter can be added to a trace listener to provide a layer of screening beyond that provided to the trace source by switches. For example, the <see cref="T:System.Diagnostics.EventTypeFilter" />
 
             
 
@@ -704,8 +680,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation for <see
-             cref="M:System.Diagnostics.TraceListener.GetSupportedAttributes" />
+            >The default implementation for <see cref="M:System.Diagnostics.TraceListener.GetSupportedAttributes" />
 
             
 
@@ -740,13 +715,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.TraceListener.IndentLevel" />
+            >The <see cref="P:System.Diagnostics.TraceListener.IndentLevel" />
 
             
 
-             property represents the number of times that the indent specified by the <see
-             cref="P:System.Diagnostics.TraceListener.IndentSize" />
+             property represents the number of times that the indent specified by the <see cref="P:System.Diagnostics.TraceListener.IndentSize" />
 
             
 
@@ -805,28 +778,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <see
-             cref="P:System.Diagnostics.TraceListener.IsThreadSafe" />
+            >The value of <see cref="P:System.Diagnostics.TraceListener.IsThreadSafe" />
 
             
 
-             is used to determine whether to use a global lock when writing to the listener. If the value of <see
-             cref="P:System.Diagnostics.TraceListener.IsThreadSafe" />
+             is used to determine whether to use a global lock when writing to the listener. If the value of <see cref="P:System.Diagnostics.TraceListener.IsThreadSafe" />
 
             
 
-             is false, the global lock is used regardless of the value of <see
-             cref="P:System.Diagnostics.Trace.UseGlobalLock" />
+             is false, the global lock is used regardless of the value of <see cref="P:System.Diagnostics.Trace.UseGlobalLock" />
 
             
 
-            . The global lock is not used only if the value of <see
-             cref="P:System.Diagnostics.TraceListener.IsThreadSafe" />
+            . The global lock is not used only if the value of <see cref="P:System.Diagnostics.TraceListener.IsThreadSafe" />
 
             
 
-             is true and the value of <see
-             cref="P:System.Diagnostics.Trace.UseGlobalLock" />
+             is true and the value of <see cref="P:System.Diagnostics.Trace.UseGlobalLock" />
 
             
 
@@ -857,8 +825,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name can be used to organize and access listeners in a <see
-             cref="T:System.Diagnostics.TraceListenerCollection" />
+            >The name can be used to organize and access listeners in a <see cref="T:System.Diagnostics.TraceListenerCollection" />
 
             
 
@@ -868,8 +835,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a name for this <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Gets or sets a name for this <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -895,28 +861,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note   The <see
-             cref="M:System.Diagnostics.TraceListener.WriteIndent" />
+            >Note   The <see cref="M:System.Diagnostics.TraceListener.WriteIndent" />
 
             
 
-             method, called by the <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+             method, called by the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.TextWriterTraceListener" />
+             and <see cref="T:System.Diagnostics.TextWriterTraceListener" />
 
             
 
-             classes, sets the <see
-             cref="P:System.Diagnostics.TraceListener.NeedIndent" />
+             classes, sets the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" />
 
             
 
-             property value to false to prevent later, unnecessary indents. You must set the <see
-             cref="P:System.Diagnostics.TraceListener.NeedIndent" />
+             property value to false to prevent later, unnecessary indents. You must set the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" />
 
             
 
@@ -963,18 +924,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is not intended to be called directly by application code but by members of the <see
-               cref="T:System.Diagnostics.Debug" />
+              >This method is not intended to be called directly by application code but by members of the <see cref="T:System.Diagnostics.Debug" />
 
               
 
-              , <see
-               cref="T:System.Diagnostics.Trace" />
+              , <see cref="T:System.Diagnostics.Trace" />
 
               
 
-              , and <see
-               cref="T:System.Diagnostics.TraceSource" />
+              , and <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -982,33 +940,27 @@
             >
           </block>
           <para
-            >The default implementation writes the <paramref
-             name="eventCache" />
+            >The default implementation writes the <paramref name="eventCache" />
 
             
 
-            , <paramref
-             name="source" />
+            , <paramref name="source" />
 
             
 
-            , <paramref
-             name="eventType" />
+            , <paramref name="eventType" />
 
             
 
-             and <paramref
-             name="id" />
+             and <paramref name="id" />
 
             
 
-             parameters in the header and footer of the trace. The <paramref
-             name="data" />
+             parameters in the header and footer of the trace. The <paramref name="data" />
 
             
 
-             parameter is written as the body of the trace message. The ToString method of the data object is used to convert the object to a <see
-             cref="T:System.String" />
+             parameter is written as the body of the trace message. The ToString method of the data object is used to convert the object to a <see cref="T:System.String" />
 
             
 
@@ -1020,45 +972,63 @@
           <para>Writes trace information, a data object and event information to the listener specific output.</para>
         </summary>
         <param name="eventCache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          A <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 
            values specifying the type of event that has caused the trace.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A numeric identifier for the event.</param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1106,18 +1076,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is not intended to be called directly by application code but by members of the <see
-               cref="T:System.Diagnostics.Debug" />
+              >This method is not intended to be called directly by application code but by members of the <see cref="T:System.Diagnostics.Debug" />
 
               
 
-              , <see
-               cref="T:System.Diagnostics.Trace" />
+              , <see cref="T:System.Diagnostics.Trace" />
 
               
 
-              , and <see
-               cref="T:System.Diagnostics.TraceSource" />
+              , and <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -1125,28 +1092,23 @@
             >
           </block>
           <para
-            >The default implementation writes the values of the <paramref
-             name="source" />
+            >The default implementation writes the values of the <paramref name="source" />
 
             
 
-            , <paramref
-             name="eventType" />
+            , <paramref name="eventType" />
 
             
 
-             and <paramref
-             name="id" />
+             and <paramref name="id" />
 
             
 
-             parameters as a header. The data objects are converted to strings using the ToString method of each object. The <paramref
-             name="eventCache" />
+             parameters as a header. The data objects are converted to strings using the ToString method of each object. The <paramref name="eventCache" />
 
             
 
-             data is written as a footer, the nature of the output data being dependent on the value of the <see
-             cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+             data is written as a footer, the nature of the output data being dependent on the value of the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
 
             
 
@@ -1158,45 +1120,63 @@
           <para>Writes trace information, an array of data objects and event information to the listener specific output.</para>
         </summary>
         <param name="eventCache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          A <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 
            values specifying the type of event that has caused the trace.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A numeric identifier for the event.</param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1237,18 +1217,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is not intended to be called directly by application code but by members of the <see
-               cref="T:System.Diagnostics.Debug" />
+              >This method is not intended to be called directly by application code but by members of the <see cref="T:System.Diagnostics.Debug" />
 
               
 
-              , <see
-               cref="T:System.Diagnostics.Trace" />
+              , <see cref="T:System.Diagnostics.Trace" />
 
               
 
-              , and <see
-               cref="T:System.Diagnostics.TraceSource" />
+              , and <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -1256,28 +1233,23 @@
             >
           </block>
           <para
-            >The default implementation writes the values of the <paramref
-             name="source" />
+            >The default implementation writes the values of the <paramref name="source" />
 
             
 
-            , <paramref
-             name="eventType" />
+            , <paramref name="eventType" />
 
             
 
-             and <paramref
-             name="id" />
+             and <paramref name="id" />
 
             
 
-             parameters as a header. The <paramref
-             name="eventCache" />
+             parameters as a header. The <paramref name="eventCache" />
 
             
 
-             data is written as a footer, the nature of the output data being dependent on the value of the <see
-             cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+             data is written as a footer, the nature of the output data being dependent on the value of the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
 
             
 
@@ -1289,38 +1261,52 @@
           <para>Writes trace and event information to the listener specific output.</para>
         </summary>
         <param name="eventCache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          A <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 
            values specifying the type of event that has caused the trace.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1362,18 +1348,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is not intended to be called directly by application code but by members of the <see
-               cref="T:System.Diagnostics.Debug" />
+              >This method is not intended to be called directly by application code but by members of the <see cref="T:System.Diagnostics.Debug" />
 
               
 
-              , <see
-               cref="T:System.Diagnostics.Trace" />
+              , <see cref="T:System.Diagnostics.Trace" />
 
               
 
-              , and <see
-               cref="T:System.Diagnostics.TraceSource" />
+              , and <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -1381,33 +1364,27 @@
             >
           </block>
           <para
-            >The default implementation writes the values of the <paramref
-             name="source" />
+            >The default implementation writes the values of the <paramref name="source" />
 
             
 
-            , <paramref
-             name="eventType" />
+            , <paramref name="eventType" />
 
             
 
-             and <paramref
-             name="id" />
+             and <paramref name="id" />
 
             
 
-             parameters as a header, followed by the <paramref
-             name="message" />
+             parameters as a header, followed by the <paramref name="message" />
 
             
 
-             data. The <paramref
-             name="eventCache" />
+             data. The <paramref name="eventCache" />
 
             
 
-             data is written as a footer, the nature of the output data being dependent on the value of the <see
-             cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+             data is written as a footer, the nature of the output data being dependent on the value of the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
 
             
 
@@ -1419,45 +1396,63 @@
           <para>Writes trace information, a message, and event information to the listener specific output.</para>
         </summary>
         <param name="eventCache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          A <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 
            values specifying the type of event that has caused the trace.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A numeric identifier for the event.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1506,18 +1501,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is not intended to be called directly by application code but by members of the <see
-               cref="T:System.Diagnostics.Debug" />
+              >This method is not intended to be called directly by application code but by members of the <see cref="T:System.Diagnostics.Debug" />
 
               
 
-              , <see
-               cref="T:System.Diagnostics.Trace" />
+              , <see cref="T:System.Diagnostics.Trace" />
 
               
 
-              , and <see
-               cref="T:System.Diagnostics.TraceSource" />
+              , and <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -1525,48 +1517,39 @@
             >
           </block>
           <para
-            >The default implementation writes the values of the <paramref
-             name="source" />
+            >The default implementation writes the values of the <paramref name="source" />
 
             
 
-            , <paramref
-             name="eventType" />
+            , <paramref name="eventType" />
 
             
 
-             and <paramref
-             name="id" />
+             and <paramref name="id" />
 
             
 
-             parameters as a header. The <paramref
-             name="args" />
+             parameters as a header. The <paramref name="args" />
 
             
 
-             object array is converted to a string using the <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+             object array is converted to a string using the <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
-             method, passing the <paramref
-             name="format" />
+             method, passing the <paramref name="format" />
 
             
 
-             string and <paramref
-             name="args" />
+             string and <paramref name="args" />
 
             
 
-             array to format the string as the message portion of the trace. The <paramref
-             name="eventCache" />
+             array to format the string as the message portion of the trace. The <paramref name="eventCache" />
 
             
 
-             data is written as a footer, the nature of the output data being dependent on the value of the <see
-             cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+             data is written as a footer, the nature of the output data being dependent on the value of the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
 
             
 
@@ -1578,57 +1561,78 @@
           <para>Writes trace information, a formatted array of objects and event information to the listener specific output.</para>
         </summary>
         <param name="eventCache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          A <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 
            values specifying the type of event that has caused the trace.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A numeric identifier for the event.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A format string that contains zero or more format items, which correspond to objects in the <paramref
-           name="args" />
+          A format string that contains zero or more format items, which correspond to objects in the <paramref name="args" />
 
           
 
            array.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1663,26 +1667,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+            >The <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
 
             
 
-             property determines the optional content of trace output. The property can be set in the configuration file or programmatically during execution to include additional data specifically for a section of code. For example, you can set the <see
-             cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+             property determines the optional content of trace output. The property can be set in the configuration file or programmatically during execution to include additional data specifically for a section of code. For example, you can set the <see cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
 
             
 
-             property for the console trace listener to <see
-             cref="F:System.Diagnostics.TraceOptions.Callstack" />
+             property for the console trace listener to <see cref="F:System.Diagnostics.TraceOptions.Callstack" />
 
             
 
              to add call stack information to the trace output. </para
           >
           <para
-            >The <see
-             cref="T:System.Diagnostics.TraceOptions" />
+            >The <see cref="T:System.Diagnostics.TraceOptions" />
 
             
 
@@ -1691,8 +1691,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="T:System.Diagnostics.EventLogTraceListener" />
+                >The <see cref="T:System.Diagnostics.EventLogTraceListener" />
 
                 
 
@@ -1701,18 +1700,15 @@
             </item>
             <item>
               <para
-                >The Write and WriteLine methods of the <see
-                 cref="T:System.Diagnostics.ConsoleTraceListener" />
+                >The Write and WriteLine methods of the <see cref="T:System.Diagnostics.ConsoleTraceListener" />
 
                 
 
-                , <see
-                 cref="T:System.Diagnostics.DefaultTraceListener" />
+                , <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
                 
 
-                , and <see
-                 cref="T:System.Diagnostics.TextWriterTraceListener" />
+                , and <see cref="T:System.Diagnostics.TextWriterTraceListener" />
 
                 
 
@@ -1721,18 +1717,15 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="Overload:System.Diagnostics.TraceListener.Write" />
+                >The <see cref="Overload:System.Diagnostics.TraceListener.Write" />
 
                 
 
-                 and <see
-                 cref="Overload:System.Diagnostics.TraceListener.WriteLine" />
+                 and <see cref="Overload:System.Diagnostics.TraceListener.WriteLine" />
 
                 
 
-                 methods of the <see
-                 cref="T:System.Diagnostics.TraceListener" />
+                 methods of the <see cref="T:System.Diagnostics.TraceListener" />
 
                 
 
@@ -1781,18 +1774,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >This method is not intended to be called directly by application code but by members of the <see
-               cref="T:System.Diagnostics.Debug" />
+              >This method is not intended to be called directly by application code but by members of the <see cref="T:System.Diagnostics.Debug" />
 
               
 
-              , <see
-               cref="T:System.Diagnostics.Trace" />
+              , <see cref="T:System.Diagnostics.Trace" />
 
               
 
-              , and <see
-               cref="T:System.Diagnostics.TraceSource" />
+              , and <see cref="T:System.Diagnostics.TraceSource" />
 
               
 
@@ -1800,28 +1790,23 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Diagnostics.XmlWriterTraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" />
+            >The <see cref="M:System.Diagnostics.XmlWriterTraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" />
 
             
 
-             method is used for the correlation of related traces. The <see
-             cref="M:System.Diagnostics.TraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" />
+             method is used for the correlation of related traces. The <see cref="M:System.Diagnostics.TraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" />
 
             
 
-             method calls the <see
-             cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" />
+             method calls the <see cref="M:System.Diagnostics.TraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)" />
 
             
 
-              method to process the call, with the eventType level set to <see
-             cref="F:System.Diagnostics.TraceEventType.Transfer" />
+              method to process the call, with the eventType level set to <see cref="F:System.Diagnostics.TraceEventType.Transfer" />
 
             
 
-             and the <paramref
-             name="relatedActivityId" />
+             and the <paramref name="relatedActivityId" />
             <see cref="T:System.Guid" />
 
             
@@ -1834,45 +1819,63 @@
           <para>Writes trace information, a message, a related activity identity and event information to the listener specific output.</para>
         </summary>
         <param name="eventCache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          A <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            object that contains the current process ID, thread ID, and stack trace information.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A name used to identify the output, typically the name of the application that generated the trace event.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A numeric identifier for the event.</param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A message to write.</param
         >
         <param name="relatedActivityId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-           A <see
-           cref="T:System.Guid" />
+           A <see cref="T:System.Guid" />
 
           
 
@@ -1903,13 +1906,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the value of the object's <see
-             cref="M:System.Object.ToString" />
+            >Writes the value of the object's <see cref="M:System.Object.ToString" />
 
             
 
-             method to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+             method to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -1917,12 +1918,15 @@
           >
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -1955,7 +1959,11 @@
           <para>When overridden in a derived class, writes the specified message to the listener you create in the derived class.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1990,13 +1998,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a category name and the value of the object's <see
-             cref="M:System.Object.ToString" />
+            >Writes a category name and the value of the object's <see cref="M:System.Object.ToString" />
 
             
 
-             method to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+             method to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -2004,19 +2010,26 @@
           >
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            whose fully qualified class name you want to write. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2051,8 +2064,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a category name and a message to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Writes a category name and a message to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -2060,14 +2072,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A message to write. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2095,53 +2115,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method writes the indent and resets the <see
-             cref="P:System.Diagnostics.TraceListener.NeedIndent" />
+            >This method writes the indent and resets the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" />
 
             
 
-             property to false. Call this method if <see
-             cref="P:System.Diagnostics.TraceListener.NeedIndent" />
+             property to false. Call this method if <see cref="P:System.Diagnostics.TraceListener.NeedIndent" />
 
             
 
-             is true when you are overriding the <see
-             cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
+             is true when you are overriding the <see cref="M:System.Diagnostics.TraceListener.Write(System.String)" />
 
             
 
-             and <see
-             cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
+             and <see cref="M:System.Diagnostics.TraceListener.WriteLine(System.String)" />
 
             
 
-             methods. By default, this method uses blank spaces for indentation. The size of the indent is determined by the values of the <see
-             cref="P:System.Diagnostics.TraceListener.IndentSize" />
+             methods. By default, this method uses blank spaces for indentation. The size of the indent is determined by the values of the <see cref="P:System.Diagnostics.TraceListener.IndentSize" />
 
             
 
-             and <see
-             cref="P:System.Diagnostics.TraceListener.IndentLevel" />
+             and <see cref="P:System.Diagnostics.TraceListener.IndentLevel" />
 
             
 
-             properties. The <see
-             cref="P:System.Diagnostics.TraceListener.IndentLevel" />
+             properties. The <see cref="P:System.Diagnostics.TraceListener.IndentLevel" />
 
             
 
-             property represents the number of times the indent of the size specified by the <see
-             cref="P:System.Diagnostics.TraceListener.IndentSize" />
+             property represents the number of times the indent of the size specified by the <see cref="P:System.Diagnostics.TraceListener.IndentSize" />
 
             
 
-             property is applied. This method is called by the <see
-             cref="T:System.Diagnostics.DefaultTraceListener" />
+             property is applied. This method is called by the <see cref="T:System.Diagnostics.DefaultTraceListener" />
 
             
 
-             and <see
-             cref="T:System.Diagnostics.TextWriterTraceListener" />
+             and <see cref="T:System.Diagnostics.TextWriterTraceListener" />
 
             
 
@@ -2151,8 +2161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the indent to the listener you create when you implement this class, and resets the <see
-             cref="P:System.Diagnostics.TraceListener.NeedIndent" />
+            >Writes the indent to the listener you create when you implement this class, and resets the <see cref="P:System.Diagnostics.TraceListener.NeedIndent" />
 
             
 
@@ -2187,13 +2196,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the value of the object's <see
-             cref="M:System.Object.ToString" />
+            >Writes the value of the object's <see cref="M:System.Object.ToString" />
 
             
 
-             method to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+             method to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -2201,12 +2208,15 @@
           >
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -2242,7 +2252,11 @@
           <para>When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.</para>
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2280,13 +2294,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a category name and the value of the object's <see
-             cref="M:System.Object.ToString" />
+            >Writes a category name and the value of the object's <see cref="M:System.Object.ToString" />
 
             
 
-             method to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+             method to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -2294,19 +2306,26 @@
           >
         </summary>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            whose fully qualified class name you want to write. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2344,8 +2363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes a category name and a message to the listener you create when you implement the <see
-             cref="T:System.Diagnostics.TraceListener" />
+            >Writes a category name and a message to the listener you create when you implement the <see cref="T:System.Diagnostics.TraceListener" />
 
             
 
@@ -2353,14 +2371,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A message to write. </param
         >
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

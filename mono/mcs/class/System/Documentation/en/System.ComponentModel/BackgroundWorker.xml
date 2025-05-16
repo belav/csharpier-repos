@@ -27,64 +27,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.BackgroundWorker" />
+        >The <see cref="T:System.ComponentModel.BackgroundWorker" />
 
         
 
-         class allows you to run an operation on a separate, dedicated thread. Time-consuming operations like downloads and database transactions can cause your user interface (UI) to seem as though it has stopped responding while they are running. When you want a responsive UI and you are faced with long delays associated with such operations, the <see
-         cref="T:System.ComponentModel.BackgroundWorker" />
+         class allows you to run an operation on a separate, dedicated thread. Time-consuming operations like downloads and database transactions can cause your user interface (UI) to seem as though it has stopped responding while they are running. When you want a responsive UI and you are faced with long delays associated with such operations, the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
         
 
          class provides a convenient solution.</para
       >
       <para
-        >To execute a time-consuming operation in the background, create a <see
-         cref="T:System.ComponentModel.BackgroundWorker" />
+        >To execute a time-consuming operation in the background, create a <see cref="T:System.ComponentModel.BackgroundWorker" />
 
         
 
-         and listen for events that report the progress of your operation and signal when your operation is finished. You can create the <see
-         cref="T:System.ComponentModel.BackgroundWorker" />
+         and listen for events that report the progress of your operation and signal when your operation is finished. You can create the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
         
 
-         programmatically or you can drag it onto your form from the <ui
-        >Components</ui>
+         programmatically or you can drag it onto your form from the <ui>Components</ui>
 
         
 
-         tab of the <ui
-        >Toolbox</ui>
+         tab of the <ui>Toolbox</ui>
 
         
 
-        . If you create the <see
-         cref="T:System.ComponentModel.BackgroundWorker" />
+        . If you create the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
         
 
          in the Windows Forms Designer, it will appear in the Component Tray, and its properties will be displayed in the Properties window.</para
       >
       <para
-        >To set up for a background operation, add an event handler for the <see
-         cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+        >To set up for a background operation, add an event handler for the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
         
 
-         event. Call your time-consuming operation in this event handler. To start the operation, call <see
-         cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+         event. Call your time-consuming operation in this event handler. To start the operation, call <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
         
 
-        . To receive notifications of progress updates, handle the <see
-         cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+        . To receive notifications of progress updates, handle the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
         
 
-         event. To receive a notification when the operation is completed, handle the <see
-         cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+         event. To receive a notification when the operation is completed, handle the <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
         
 
@@ -92,18 +81,15 @@
       >
       <block subset="none" type="note">
         <para
-          >You must be careful not to manipulate any user-interface objects in your <see
-           cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+          >You must be careful not to manipulate any user-interface objects in your <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
           
 
-           event handler. Instead, communicate to the user interface through the <see
-           cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+           event handler. Instead, communicate to the user interface through the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
           
 
-           and <see
-           cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+           and <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
           
 
@@ -114,18 +100,15 @@
 
           
 
-           events are not marshaled across <see
-           cref="T:System.AppDomain" />
+           events are not marshaled across <see cref="T:System.AppDomain" />
 
           
 
-           boundaries. Do not use a <see
-           cref="T:System.ComponentModel.BackgroundWorker" />
+           boundaries. Do not use a <see cref="T:System.ComponentModel.BackgroundWorker" />
 
           
 
-           component to perform multithreaded operations in more than one <see
-           cref="T:System.AppDomain" />
+           component to perform multithreaded operations in more than one <see cref="T:System.AppDomain" />
 
           
 
@@ -133,31 +116,26 @@
         >
       </block>
       <para
-        >If your background operation requires a parameter, call <see
-         cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+        >If your background operation requires a parameter, call <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
         
 
-         with your parameter. Inside the <see
-         cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+         with your parameter. Inside the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
         
 
-         event handler, you can extract the parameter from the <see
-         cref="P:System.ComponentModel.DoWorkEventArgs.Argument" />
+         event handler, you can extract the parameter from the <see cref="P:System.ComponentModel.DoWorkEventArgs.Argument" />
 
         
 
          property.</para
       >
       <para
-        >For more information about <see
-         cref="T:System.ComponentModel.BackgroundWorker" />
+        >For more information about <see cref="T:System.ComponentModel.BackgroundWorker" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="5b56e2aa-dc05-444f-930c-2d7b23f9ad5b"
             >How to: Run an Operation in the Background</a
           >
@@ -191,8 +169,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >This constructor initializes a <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
@@ -202,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
@@ -236,21 +212,18 @@
 
             
 
-             submits a request to terminate the pending background operation and sets the <see
-             cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+             submits a request to terminate the pending background operation and sets the <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
             
 
              property to true.</para
           >
           <para
-            >When you call <see
-             cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
+            >When you call <see cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
 
             
 
-            , your worker method has an opportunity to stop its execution and exit. The worker code should periodically check the <see
-             cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+            , your worker method has an opportunity to stop its execution and exit. The worker code should periodically check the <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
             
 
@@ -258,38 +231,31 @@
           >
           <block subset="none" type="note">
             <para
-              >Be aware that your code in the <see
-               cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+              >Be aware that your code in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
               
 
-               event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see
-               cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+               event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
               
 
-               being set to true. In this case, the <see
-               cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+               being set to true. In this case, the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
               
 
-               flag of <see
-               cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+               flag of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
               
 
-               in your <see
-               cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+               in your <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
               
 
-               event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm
-              >race condition</newTerm>
+               event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm>race condition</newTerm>
 
               
 
-               and is a common concern in multithreaded programming. For more information about multithreading design issues, see <format
-               type="text/html">
+               and is a common concern in multithreaded programming. For more information about multithreading design issues, see <format type="text/html">
                 <a href="e51988e7-7f4b-4646-a06d-1416cee8d557">Managed Threading Best Practices</a>
               </format>
 
@@ -327,26 +293,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+            >If <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
             
 
-             is true, then the <see
-             cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
+             is true, then the <see cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
 
             
 
-             method has been called on the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             method has been called on the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
             .</para
           >
           <para
-            >This property is meant for use by the worker thread, which should periodically check <see
-             cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+            >This property is meant for use by the worker thread, which should periodically check <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
             
 
@@ -381,46 +343,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when you call the <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+            >This event is raised when you call the <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
              method. This is where you start the operation that performs the potentially time-consuming work.</para
           >
           <para
-            >Your code in the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            >Your code in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
-             event handler should periodically check the <see
-             cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+             event handler should periodically check the <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
             
 
-             property value and abort the operation if it is true. When this occurs, you can set the <see
-             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+             property value and abort the operation if it is true. When this occurs, you can set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 
-             flag of <see
-             cref="T:System.ComponentModel.DoWorkEventArgs" />
+             flag of <see cref="T:System.ComponentModel.DoWorkEventArgs" />
 
             
 
-             to true, and the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             to true, and the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             flag of <see
-             cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+             flag of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
-             in your <see
-             cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+             in your <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
@@ -428,38 +382,31 @@
           >
           <block subset="none" type="note">
             <para
-              >Be aware that your code in the <see
-               cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+              >Be aware that your code in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
               
 
-               event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see
-               cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+               event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
               
 
-               being set to true. In this case, the <see
-               cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+               being set to true. In this case, the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
               
 
-               flag of <see
-               cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+               flag of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
               
 
-               in your <see
-               cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+               in your <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
               
 
-               event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm
-              >race condition</newTerm>
+               event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm>race condition</newTerm>
 
               
 
-               and is a common concern in multithreaded programming. For more information about multithreading design issues, see <format
-               type="text/html">
+               and is a common concern in multithreaded programming. For more information about multithreading design issues, see <format type="text/html">
                 <a href="e51988e7-7f4b-4646-a06d-1416cee8d557">Managed Threading Best Practices</a>
               </format>
 
@@ -469,97 +416,80 @@
             >
           </block>
           <para
-            >If your operation produces a result, you can assign the result to the <see
-             cref="P:System.ComponentModel.DoWorkEventArgs.Result" />
+            >If your operation produces a result, you can assign the result to the <see cref="P:System.ComponentModel.DoWorkEventArgs.Result" />
 
             
 
-             property. This will be available to the <see
-             cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+             property. This will be available to the <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
-             event handler in the <see
-             cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+             event handler in the <see cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 
              property.</para
           >
           <para
-            >If the operation raises an exception that your code does not handle, the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >If the operation raises an exception that your code does not handle, the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-             catches the exception and passes it into the <see
-             cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+             catches the exception and passes it into the <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
-             event handler, where it is exposed as the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             event handler, where it is exposed as the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             property of <see
-             cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+             property of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
-            . If you are running under the Visual Studio debugger, the debugger will break at the point in the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            . If you are running under the Visual Studio debugger, the debugger will break at the point in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
-             event handler where the unhandled exception was raised. If you have more than one <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             event handler where the unhandled exception was raised. If you have more than one <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-            , you should not reference any of them directly, as this would couple your <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            , you should not reference any of them directly, as this would couple your <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
-             event handler to a specific instance of <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             event handler to a specific instance of <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-            . Instead, you should access your <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            . Instead, you should access your <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-             by casting the <paramref
-             name="sender" />
+             by casting the <paramref name="sender" />
 
             
 
-             parameter in your <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+             parameter in your <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
              event handler.</para
           >
           <para
-            >You must be careful not to manipulate any user-interface objects in your <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            >You must be careful not to manipulate any user-interface objects in your <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
-             event handler. Instead, communicate to the user interface through the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             event handler. Instead, communicate to the user interface through the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
              events.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -571,8 +501,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+            >Occurs when <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
@@ -603,13 +532,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >The <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-             starts an asynchronous operation when you call <see
-             cref="Overload:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+             starts an asynchronous operation when you call <see cref="Overload:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
@@ -619,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >Gets a value indicating whether the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
@@ -655,8 +581,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            >Raises the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
@@ -664,12 +589,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -702,8 +630,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -712,8 +639,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.BackgroundWorker.OnProgressChanged(System.ComponentModel.ProgressChangedEventArgs)" />
+            >The <see cref="M:System.ComponentModel.BackgroundWorker.OnProgressChanged(System.ComponentModel.ProgressChangedEventArgs)" />
 
             
 
@@ -723,8 +649,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+            >Raises the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
@@ -732,12 +657,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -770,8 +698,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -780,8 +707,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.BackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)" />
+            >The <see cref="M:System.ComponentModel.BackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)" />
 
             
 
@@ -791,8 +717,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+            >Raises the <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
@@ -800,12 +725,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -835,16 +763,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when you call the <see
-             cref="Overload:System.ComponentModel.BackgroundWorker.ReportProgress" />
+            >This event is raised when you call the <see cref="Overload:System.ComponentModel.BackgroundWorker.ReportProgress" />
 
             
 
              method.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -856,8 +782,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+            >Occurs when <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
@@ -888,28 +813,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you need the background operation to report on its progress, you can call the <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+            >If you need the background operation to report on its progress, you can call the <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
-             method to raise the <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+             method to raise the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
-             event. The <see
-             cref="P:System.ComponentModel.BackgroundWorker.WorkerReportsProgress" />
+             event. The <see cref="P:System.ComponentModel.BackgroundWorker.WorkerReportsProgress" />
 
             
 
-             property value must be true, or <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+             property value must be true, or <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
-             will throw an <see
-             cref="T:System.InvalidOperationException" />
+             will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -917,18 +837,15 @@
           >
           <para>It is up to you to implement a meaningful way of measuring your background operation's progress as a percentage of the total task completed.</para>
           <para
-            >The call to the <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+            >The call to the <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
-             method is asynchronous and returns immediately. The <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+             method is asynchronous and returns immediately. The <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
-             event handler executes on the thread that created the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             event handler executes on the thread that created the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
@@ -938,8 +855,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+            >Raises the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
@@ -947,7 +863,11 @@
           >
         </summary>
         <param name="percentProgress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -981,28 +901,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you need the background operation to report on its progress, you can call the <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+            >If you need the background operation to report on its progress, you can call the <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
-             method to raise the <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+             method to raise the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
-             event. The <see
-             cref="P:System.ComponentModel.BackgroundWorker.WorkerReportsProgress" />
+             event. The <see cref="P:System.ComponentModel.BackgroundWorker.WorkerReportsProgress" />
 
             
 
-             property value must true, or <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+             property value must true, or <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
-             will throw an <see
-             cref="T:System.InvalidOperationException" />
+             will throw an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -1013,8 +928,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+            >Raises the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
@@ -1022,19 +936,26 @@
           >
         </summary>
         <param name="percentProgress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The percentage, from 0 to 100, of the background operation that is complete.</param
         >
         <param name="userState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The state object passed to <see
-           cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync(System.Object)" />
+          The state object passed to <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync(System.Object)" />
 
           
 
@@ -1062,26 +983,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+            >The <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
-             method submits a request to start the operation running asynchronously. When the request is serviced, the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+             method submits a request to start the operation running asynchronously. When the request is serviced, the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
              event is raised, which in turn starts execution of your background operation.</para
           >
           <para
-            >If the background operation is already running, calling <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+            >If the background operation is already running, calling <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
-             again will raise an <see
-             cref="T:System.InvalidOperationException" />
+             again will raise an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -1116,39 +1033,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+            >The <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
-             method submits a request to start the operation running asynchronously. When the request is serviced, the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+             method submits a request to start the operation running asynchronously. When the request is serviced, the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
              event is raised, which in turn starts execution of your background operation.</para
           >
           <para
-            >If your operation requires a parameter, you can provide it as the <paramref
-             name="argument" />
+            >If your operation requires a parameter, you can provide it as the <paramref name="argument" />
 
             
 
-             parameter to <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+             parameter to <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
             .</para
           >
           <para
-            >If the background operation is already running, calling <see
-             cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
+            >If the background operation is already running, calling <see cref="M:System.ComponentModel.BackgroundWorker.RunWorkerAsync" />
 
             
 
-             again will raise an <see
-             cref="T:System.InvalidOperationException" />
+             again will raise an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -1160,12 +1071,15 @@
           <para>Starts execution of a background operation.</para>
         </summary>
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A parameter for use by the background operation to be executed in the <see
-           cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+          A parameter for use by the background operation to be executed in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
           
 
@@ -1195,77 +1109,64 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            >This event is raised when the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
              event handler returns.</para
           >
           <para
-            >If the operation completes successfully and its result is assigned in the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+            >If the operation completes successfully and its result is assigned in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
-             event handler, you can access the result through the <see
-             cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+             event handler, you can access the result through the <see cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+            >The <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             property of <see
-             cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+             property of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
              indicates that an exception was thrown by the operation.</para
           >
           <para
-            >The <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+            >The <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             property of <see
-             cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+             property of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
-             indicates whether a cancellation request was processed by the background operation. If your code in the <see
-             cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+             indicates whether a cancellation request was processed by the background operation. If your code in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
             
 
-             event handler detects a cancellation request by checking the <see
-             cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+             event handler detects a cancellation request by checking the <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
             
 
-             flag and setting the <see
-             cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+             flag and setting the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
             
 
-             flag of <see
-             cref="T:System.ComponentModel.DoWorkEventArgs" />
+             flag of <see cref="T:System.ComponentModel.DoWorkEventArgs" />
 
             
 
-             to true, the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             to true, the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             flag of <see
-             cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+             flag of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
             
 
@@ -1273,38 +1174,31 @@
           >
           <block subset="none" type="note">
             <para
-              >Be aware that your code in the <see
-               cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
+              >Be aware that your code in the <see cref="E:System.ComponentModel.BackgroundWorker.DoWork" />
 
               
 
-               event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see
-               cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
+               event handler may finish its work as a cancellation request is being made, and your polling loop may miss <see cref="P:System.ComponentModel.BackgroundWorker.CancellationPending" />
 
               
 
-               being set to true. In this case, the <see
-               cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+               being set to true. In this case, the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
               
 
-               flag of <see
-               cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+               flag of <see cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
 
               
 
-               in your <see
-               cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+               in your <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
               
 
-               event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm
-              >race condition</newTerm>
+               event handler will not be set to true, even though a cancellation request was made. This situation is called a <newTerm>race condition</newTerm>
 
               
 
-               and is a common concern in multithreaded programming. For more information about multithreading design issues, see <format
-               type="text/html">
+               and is a common concern in multithreaded programming. For more information about multithreading design issues, see <format type="text/html">
                 <a href="e51988e7-7f4b-4646-a06d-1416cee8d557">Managed Threading Best Practices</a>
               </format>
 
@@ -1314,28 +1208,23 @@
             >
           </block>
           <para
-            >Your <see
-             cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
+            >Your <see cref="E:System.ComponentModel.BackgroundWorker.RunWorkerCompleted" />
 
             
 
-             event handler should always check the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             event handler should always check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             properties before accessing the <see
-             cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+             properties before accessing the <see cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 
-             property. If an exception was raised or if the operation was canceled, accessing the <see
-             cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+             property. If an exception was raised or if the operation was canceled, accessing the <see cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
             
 
@@ -1370,23 +1259,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.BackgroundWorker.WorkerReportsProgress" />
+            >Set the <see cref="P:System.ComponentModel.BackgroundWorker.WorkerReportsProgress" />
 
             
 
-             property to true if you want the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             property to true if you want the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-             to support progress updates. When this property is true, user code can call the <see
-             cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
+             to support progress updates. When this property is true, user code can call the <see cref="M:System.ComponentModel.BackgroundWorker.ReportProgress(System.Int32)" />
 
             
 
-             method to raise the <see
-             cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
+             method to raise the <see cref="E:System.ComponentModel.BackgroundWorker.ProgressChanged" />
 
             
 
@@ -1396,8 +1281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >Gets or sets a value indicating whether the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
@@ -1431,18 +1315,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ComponentModel.BackgroundWorker.WorkerSupportsCancellation" />
+            >Set the <see cref="P:System.ComponentModel.BackgroundWorker.WorkerSupportsCancellation" />
 
             
 
-             property to true if you want the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+             property to true if you want the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 
-             to support cancellation. When this property is true, you can call the <see
-             cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
+             to support cancellation. When this property is true, you can call the <see cref="M:System.ComponentModel.BackgroundWorker.CancelAsync" />
 
             
 
@@ -1452,8 +1333,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.ComponentModel.BackgroundWorker" />
+            >Gets or sets a value indicating whether the <see cref="T:System.ComponentModel.BackgroundWorker" />
 
             
 

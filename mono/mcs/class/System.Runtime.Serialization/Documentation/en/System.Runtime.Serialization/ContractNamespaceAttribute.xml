@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+        >Apply the <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
 
         
 
-         attribute to an assembly that contains types to which the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+         attribute to an assembly that contains types to which the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
-         has been applied. The <see
-         cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+         has been applied. The <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
 
         
 
-         enables you to set a namespace that is different than the one generated when the type is serialized. For more information about how names are generated, see <format
-         type="text/html">
+         enables you to set a namespace that is different than the one generated when the type is serialized. For more information about how names are generated, see <format type="text/html">
           <a href="31f87e6c-247b-48f5-8e94-b9e1e33d8d09">Data Contract Names</a>
         </format>
 
@@ -50,18 +46,15 @@
         .</para
       >
       <para
-        >If you are using a type to conform to an existing data contract, you must match the namespace of the existing contract by using the <see
-         cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+        >If you are using a type to conform to an existing data contract, you must match the namespace of the existing contract by using the <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
 
         
 
-         (or the <see
-         cref="P:System.Runtime.Serialization.DataContractAttribute.Namespace" />
+         (or the <see cref="P:System.Runtime.Serialization.DataContractAttribute.Namespace" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Serialization.DataContractAttribute" />
+         property of the <see cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
         
 
@@ -69,8 +62,7 @@
       >
       <block subset="none" type="note">
         <para
-          >In any code, you can use the word ContractNamespace instead of the longer <see
-           cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+          >In any code, you can use the word ContractNamespace instead of the longer <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
 
           
 
@@ -103,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
 
             
 

@@ -14,26 +14,22 @@
     <AssemblyVersion>0.2.2.0</AssemblyVersion>
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadingSafetyStatement
-    >
+  <ThreadingSafetyStatement>
     All public static members of this type are safe for multithreaded
     operations.  The 
-    <see
-     cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable&lt;System.String&gt;)" />
+    <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable&lt;System.String&gt;)" />
 
     
 
     
     instance method is thread-safe if no concurrent modifying methods are
     invoked 
-    (<see
-     cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
+    (<see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
 
     
 
     ,
-    <see
-     cref="M:System.Collections.ObjectModel.Collection{Mono.Options.Option}.Remove(``0)" />
+    <see cref="M:System.Collections.ObjectModel.Collection{Mono.Options.Option}.Remove(``0)" />
 
     
 
@@ -54,44 +50,37 @@
       A class to parse program options.
     </summary>
     <remarks>
-      <para
-        >
+      <para>
         A common requirement for command-line programs is option parsing.  
         The command line consists of a sequence of 
-        <paramref
-         name="arguments" />
+        <paramref name="arguments" />
 
         
 
         .  
-        <see
-         cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+        <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
         
 
         
         parses this argument
         sequence, invoking actions of registered 
-        <see
-         cref="T:Mono.Options.Option" />
+        <see cref="T:Mono.Options.Option" />
 
         
 
         s when a sequence of arguments 
-        matching the <see
-         cref="T:Mono.Options.Option" />
+        matching the <see cref="T:Mono.Options.Option" />
 
         
 
         s requirements are
-        encountered.  <see
-         cref="T:Mono.Options.Option" />
+        encountered.  <see cref="T:Mono.Options.Option" />
 
         
 
         's are registered 
-        with <see
-         cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
+        with <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
 
         
 
@@ -106,49 +95,41 @@
 
         ,
         returns a 
-        <see
-         cref="T:System.Collections.Generic.List{System.String}" />
+        <see cref="T:System.Collections.Generic.List{System.String}" />
 
         
 
          of all
         arguments which were not matched by a registered
-        <see
-         cref="T:Mono.Options.Option" />
+        <see cref="T:Mono.Options.Option" />
 
         
 
         .
       </para
       >
-      <para
-        >
-        Response files, as used by <c
-        >mcs</c>
+      <para>
+        Response files, as used by <c>mcs</c>
 
         
 
          and other compiler tools, may be
-        supported by using <see
-         cref="T:Mono.Options.ResponseFileSource" />
+        supported by using <see cref="T:Mono.Options.ResponseFileSource" />
 
         
 
         .
       </para
       >
-      <para
-        >
+      <para>
         "Headers" -- string constants which allow grouping of options in the
         output of
-        <see
-         cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+        <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
         
 
         
-        -- may be provided "inline" with the actual options. The <c
-        >greet</c>
+        -- may be provided "inline" with the actual options. The <c>greet</c>
 
         
 
@@ -156,11 +137,9 @@
         example below shows such usage.
       </para
       >
-      <para
-        >
+      <para>
         Three conditions must be met for a sequence of arguments to be
-        considered as a match for an <see
-         cref="T:Mono.Options.Option" />
+        considered as a match for an <see cref="T:Mono.Options.Option" />
 
         
 
@@ -169,58 +148,48 @@
       >
       <list type="bullet">
         <item>
-          <term
-            >
-          The <paramref
-             name="name" />
+          <term>
+          The <paramref name="name" />
 
             
 
              must be matched.  An 
-          <see
-             cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
             
 
              has one or more names, as
-          returned from <see
-             cref="M:Mono.Options.Option.GetNames" />
+          returned from <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
             .
-          Matched names must start with a <paramref
-             name="flag" />
+          Matched names must start with a <paramref name="flag" />
 
             
 
              
           (even though the flag is not part of the
-          <see
-             cref="P:Mono.Options.Option.Prototype" />
+          <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
-            ): <c
-            >-</c>
+            ): <c>-</c>
 
             
 
             , 
-          <c
-            >--</c>
+          <c>--</c>
 
             
 
-            , or <c
-            >/</c>
+            , or <c>/</c>
 
             
 
             .
           There are several different name matching algorithms:
-          <list
-             type="bullet">
+          <list type="bullet">
               <item>
                 <term>
                   <para>
@@ -232,26 +201,21 @@
                 consists solely of a flag followed by an option name.
               </para
                   >
-                  <para
-                    >
-                Examples: <c
-                    >-opt</c>
+                  <para>
+                Examples: <c>-opt</c>
 
                     
 
-                    , <c
-                    >--opt</c>
+                    , <c>--opt</c>
 
                     
 
-                    , and <c
-                    >/opt</c>
+                    , and <c>/opt</c>
 
                     
 
                      are all
-                simple names for the <c
-                    >opt</c>
+                simple names for the <c>opt</c>
 
                     
 
@@ -269,18 +233,15 @@
 
                      names are matched when the
                 argument consists of a flag, followed by an option name,
-                followed by <c
-                    >+</c>
+                followed by <c>+</c>
 
                     
 
-                     or <c
-                    >-</c>
+                     or <c>-</c>
 
                     
 
-                    .  If a <c
-                    >+</c>
+                    .  If a <c>+</c>
 
                     
 
@@ -288,21 +249,17 @@
                 name, the option is enabled, otherwise the option is disabled.
               </para
                   >
-                  <para
-                    >
-                Examples: <c
-                    >-opt+</c>
+                  <para>
+                Examples: <c>-opt+</c>
 
                     
 
-                     and <c
-                    >-opt-</c>
+                     and <c>-opt-</c>
 
                     
 
                      enable and disble the
-                <c
-                    >opt</c>
+                <c>opt</c>
 
                     
 
@@ -320,13 +277,11 @@
 
                      names are matched when the
                 argument consists of a flag, followed by an option name,
-                followed by a <c
-                    >=</c>
+                followed by a <c>=</c>
 
                     
 
-                     or <c
-                    >:</c>
+                     or <c>:</c>
 
                     
 
@@ -334,26 +289,21 @@
                 string.
               </para
                   >
-                  <para
-                    >
-                Examples: <c
-                    >-opt=A</c>
+                  <para>
+                Examples: <c>-opt=A</c>
 
                     
 
-                    , <c
-                    >--opt:B</c>
+                    , <c>--opt:B</c>
 
                     
 
-                    , and <c
-                    >/opt=C</c>
+                    , and <c>/opt=C</c>
 
                     
 
                      all
-                provide a value for the <c
-                    >opt</c>
+                provide a value for the <c>opt</c>
 
                     
 
@@ -371,22 +321,19 @@
 
                      names are matched only when
                 simple, boolean, and assigned names are not matched,
-                the flag is <c
-                    >-</c>
+                the flag is <c>-</c>
 
                     
 
                     , and the first character matches a
                 registered option.  Any number of (single-character) boolean 
                 options may be bundled in this fashion, and at most one
-                <see
-                     cref="F:Mono.Options.OptionValueType.Optional" />
+                <see cref="F:Mono.Options.OptionValueType.Optional" />
 
                     
 
                      or
-                <see
-                     cref="F:Mono.Options.OptionValueType.Required" />
+                <see cref="F:Mono.Options.OptionValueType.Required" />
 
                     
 
@@ -395,38 +342,31 @@
                 as a value).
               </para
                   >
-                  <para
-                    >
-                Examples: <c
-                    >-xvfinput-file</c>
+                  <para>
+                Examples: <c>-xvfinput-file</c>
 
                     
 
                      could match the boolean 
-                <see
-                     cref="T:Mono.Options.Option" />
+                <see cref="T:Mono.Options.Option" />
 
                     
 
-                    s <c
-                    >x</c>
+                    s <c>x</c>
 
                     
 
-                     and <c
-                    >v</c>
+                     and <c>v</c>
 
                     
 
                     
-                and the value-accepting option <c
-                    >f</c>
+                and the value-accepting option <c>f</c>
 
                     
 
                     , which will get the
-                value <c
-                    >input-file</c>
+                value <c>input-file</c>
 
                     
 
@@ -438,83 +378,69 @@
               </item>
               <item>
                 <term>
-                  <para
-                    >
-                  As a fallback, a <paramref
-                     name="default handler" />
+                  <para>
+                  As a fallback, a <paramref name="default handler" />
 
                     
 
                      may be
-                  registered which will handle <paramref
-                     name="all" />
+                  registered which will handle <paramref name="all" />
 
                     
 
                     
                   arguments which are not handled by any of the above matching
                   algorithms.  The default handler is designated by the name
-                  <c
-                    >&lt;&gt;</c>
+                  <c>&lt;&gt;</c>
 
                     
 
                      (which may be an alias for another named
-                  <see
-                     cref="T:Mono.Options.Option" />
+                  <see cref="T:Mono.Options.Option" />
 
                     
 
                     ).
                 </para
                   >
-                  <para
-                    >
+                  <para>
                   Default handlers are useful for argument runs -- sequences
                   of arguments that are not related to each other but are
                   instead related to a prior option on the command line, and it
                   isn't desirable to use named options for these.  For
-                  example, <c
-                    >mdoc-assemble --format=ecma DirA DirB 
+                  example, <c>mdoc-assemble --format=ecma DirA DirB 
                   --format=man FileC</c>
 
                     
 
-                     would process <c
-                    >DirA</c>
+                     would process <c>DirA</c>
 
                     
 
                      and
-                  <c
-                    >DirB</c>
+                  <c>DirB</c>
 
                     
 
-                     with <c
-                    >--format=ecma</c>
+                     with <c>--format=ecma</c>
 
                     
 
                      in effect, and then
-                  process <c
-                    >FileC</c>
+                  process <c>FileC</c>
 
                     
 
-                     with <c
-                    >--format=man</c>
+                     with <c>--format=man</c>
 
                     
 
                      in effect.
                 </para
                   >
-                  <para
-                    >
+                  <para>
                   See 
-                  <see
-                     cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+                  <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
                     
 
@@ -528,16 +454,13 @@
           </term>
         </item>
         <item>
-          <term
-            >
-          The <paramref
-             name="type" />
+          <term>
+          The <paramref name="type" />
 
             
 
              must be matched.  
-          <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+          <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
@@ -547,10 +470,8 @@
           >
         </item>
         <item>
-          <term
-            >
-          The <paramref
-             name="value count" />
+          <term>
+          The <paramref name="value count" />
 
             
 
@@ -558,8 +479,7 @@
           option takes any values is dependent upon the option's type
           (previous bullet), but the number of values the option either
           accepts or requires is specified by the
-          <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+          <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
@@ -568,10 +488,8 @@
           >
         </item>
       </list>
-      <para
-        >
-        There are three types of <see
-         cref="T:Mono.Options.Option" />
+      <para>
+        There are three types of <see cref="T:Mono.Options.Option" />
 
         
 
@@ -581,53 +499,44 @@
       >
       <list type="number">
         <item>
-          <term
-            >
+          <term>
           Boolean options, which correspond to a 
-          <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+          <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              value of
-          <see
-             cref="F:Mono.Options.OptionValueType.None" />
+          <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
             .
           When a matching argument is encountered, their registered
-          action is invoked immediately.  The <see
-             cref="T:System.Action`1" />
+          action is invoked immediately.  The <see cref="T:System.Action`1" />
 
             
 
             
-          value will be non-<see
-             langword="default(T)" />
+          value will be non-<see langword="default(T)" />
 
             
 
              if the value is true,
-          e.g.  if <c
-            >-option</c>
+          e.g.  if <c>-option</c>
 
             
 
-             or <c
-            >-option+</c>
+             or <c>-option+</c>
 
             
 
              is specified, and the value
-          will be <see
-             langword="default(T)" />
+          will be <see langword="default(T)" />
 
             
 
              if the value is false, e.g. 
-          if <c
-            >-option-</c>
+          if <c>-option-</c>
 
             
 
@@ -637,74 +546,61 @@
         </item>
         <item>
           <term>
-            <para
-              >
+            <para>
             Optional value options, which correspond to a 
-            <see
-               cref="P:Mono.Options.Option.OptionValueType" />
+            <see cref="P:Mono.Options.Option.OptionValueType" />
 
               
 
                value of
-            <see
-               cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
               
 
               .
             Optional value options are not "greedy"; they will only get their
             value only from the current argument.  If the value is not present, 
-            <see
-               langword="default(T)" />
+            <see langword="default(T)" />
 
               
 
                is provided to their corresponding
-            <see
-               cref="T:System.Action`1" />
+            <see cref="T:System.Action`1" />
 
               
 
               .
           </para
             >
-            <para
-              >
-            Thus, <c
-              >-opt:value</c>
+            <para>
+            Thus, <c>-opt:value</c>
 
               
 
-               would pass <c
-              >value</c>
+               would pass <c>value</c>
 
               
 
                to the
-            action registered for <c
-              >opt</c>
+            action registered for <c>opt</c>
 
               
 
-              , while <c
-              >-opt value</c>
+              , while <c>-opt value</c>
 
               
 
                would pass
-            <see
-               langword="default(T)" />
+            <see langword="default(T)" />
 
               
 
                to the action registered for 
-            <c
-              >opt</c>
+            <c>opt</c>
 
               
 
-               and <c
-              >value</c>
+               and <c>value</c>
 
               
 
@@ -715,17 +611,14 @@
         </item>
         <item>
           <term>
-            <para
-              >
+            <para>
             Required value options, which correspond to a 
-            <see
-               cref="P:Mono.Options.Option.OptionValueType" />
+            <see cref="P:Mono.Options.Option.OptionValueType" />
 
               
 
                value of
-            <see
-               cref="F:Mono.Options.OptionValueType.Required" />
+            <see cref="F:Mono.Options.OptionValueType.Required" />
 
               
 
@@ -733,51 +626,42 @@
             Required value options are "greedy" -- if the value is not found
             within the current argument, the following argument(s) will be used to
             supply the value(s).  Once enough values have been parsed, 
-            their corresponding <see
-               cref="T:System.Action`1" />
+            their corresponding <see cref="T:System.Action`1" />
 
               
 
                is invoked.
           </para
             >
-            <para
-              >
-            Thus, both <c
-              >-opt:value</c>
+            <para>
+            Thus, both <c>-opt:value</c>
 
               
 
-               and <c
-              >-opt value</c>
+               and <c>-opt value</c>
 
               
 
                would pass 
-            <c
-              >value</c>
+            <c>value</c>
 
               
 
-               to the action registered for <c
-              >opt</c>
+               to the action registered for <c>opt</c>
 
               
 
               .
           </para
             >
-            <para
-              >
+            <para>
             If no value can be found, an 
-            <see
-               cref="T:Mono.Options.OptionException" />
+            <see cref="T:Mono.Options.OptionException" />
 
               
 
                is thrown from
-            <see
-               cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+            <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
               
 
@@ -788,10 +672,8 @@
         </item>
       </list>
       <block subset="none" type="behaviors">
-        <para
-          >
-          Use of <c
-          >OptionSet</c>
+        <para>
+          Use of <c>OptionSet</c>
 
           
 
@@ -806,22 +688,18 @@
             <term>Parsing.</term>
           </item>
         </list>
-        <para
-          >
-          During the <paramref
-           name="initialization" />
+        <para>
+          During the <paramref name="initialization" />
 
           
 
            phase, new
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
            instances are created and
-          associated with an action to perform when the <c
-          >Option</c>
+          associated with an action to perform when the <c>Option</c>
 
           
 
@@ -829,8 +707,7 @@
           requirements are met (e.g. when a required value has been
           encountered).  This phase is not thread safe.
           All options added during this phase are considered to have been
-          <paramref
-           name="registered" />
+          <paramref name="registered" />
 
           
 
@@ -842,16 +719,13 @@
   { "option-a", v =&gt; { /* action to perform */ } },
 };</code
         >
-        <para
-          >
-          There are three ways to add <see
-           cref="T:Mono.Options.Option" />
+        <para>
+          There are three ways to add <see cref="T:Mono.Options.Option" />
 
           
 
           s
-          to the <see
-           cref="T:Mono.Options.OptionSet" />
+          to the <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -865,17 +739,14 @@
           </term>
           </item>
           <item>
-            <term
-              >
+            <term>
             Explicitly by calling
-            <see
-               cref="M:Mono.Options.OptionSet.Add(System.String,System.Action{System.String})" />
+            <see cref="M:Mono.Options.OptionSet.Add(System.String,System.Action{System.String})" />
 
               
 
               
-            and the other <c
-              >Add</c>
+            and the other <c>Add</c>
 
               
 
@@ -884,25 +755,21 @@
             >
           </item>
           <item>
-            <term
-              >
-            By creating a new subclass of <see
-               cref="T:Mono.Options.Option" />
+            <term>
+            By creating a new subclass of <see cref="T:Mono.Options.Option" />
 
               
 
               
             and adding it via 
-            <see
-               cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
+            <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
 
               
 
               .
             This is not recommended, but is available if you require more
             direct option handling than the default 
-            <see
-               cref="T:Mono.Options.Option" />
+            <see cref="T:Mono.Options.Option" />
 
               
 
@@ -911,16 +778,13 @@
             >
           </item>
         </list>
-        <para
-          >
-          During the <paramref
-           name="parsing" />
+        <para>
+          During the <paramref name="parsing" />
 
           
 
            phase, an
-          <see
-           cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+          <see cref="T:System.Collections.Generic.IEnumerable{System.String}" />
 
           
 
@@ -928,29 +792,25 @@
           is enumerated, looking for arguments which match a registered option,
           and invoking the corresponding action when an option and associated
           (optional) value is encountered.  During this phase, the 
-          <see
-           cref="T:Mono.Options.OptionSet" />
+          <see cref="T:Mono.Options.OptionSet" />
 
           
 
            instance itself is thread
           safe, but full thread safety depends upon thread-safety of the
           registered actions.  Any option-like strings for names that haven't
-          been registered, e.g. <c
-          >--this-was-never-registered=false</c>
+          been registered, e.g. <c>--this-was-never-registered=false</c>
 
           
 
           , and
           all arguments that are not used as option values are returned from 
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
           
-          or processed by the default handler <c
-          >&lt;&gt;</c>
+          or processed by the default handler <c>&lt;&gt;</c>
 
           
 
@@ -960,10 +820,8 @@
         <code lang="C#">List&lt;string&gt; extra = p.Parse (new string[]{"-option-a"});</code>
       </block>
       <block subset="none" type="overrides">
-        <para
-          >
-          Subclasses can override the following <see
-           langword="virtual" />
+        <para>
+          Subclasses can override the following <see langword="virtual" />
 
           
 
@@ -986,16 +844,13 @@
       </block>
     </remarks>
     <example>
-      <para
-        >
-        The following <c
-        >greet</c>
+      <para>
+        The following <c>greet</c>
 
         
 
          example demonstrates some simple usage of
-        <see
-         cref="T:Mono.Options.OptionSet" />
+        <see cref="T:Mono.Options.OptionSet" />
 
         
 
@@ -1113,133 +968,110 @@ greet: Could not convert string `not-an-int' to type Int32 for option `-r'.
 Try `greet --help' for more information.
 </code
       >
-      <para
-        >
-        Notice how the output produced by <c
-        >--help</c>
+      <para>
+        Notice how the output produced by <c>--help</c>
 
         
 
          uses the
-        descriptions provided during <c
-        >OptionSet</c>
+        descriptions provided during <c>OptionSet</c>
 
         
 
          initialization.
-        Notice that the <see
-         cref="T:Mono.Options.Option" />
+        Notice that the <see cref="T:Mono.Options.Option" />
 
         
 
          requiring a 
-        value (<c
-        >n|name=</c>
+        value (<c>n|name=</c>
 
         
 
         ) can use multiple different forms of invocation,
         including: 
-        <c
-        >-n value</c>
+        <c>-n value</c>
 
         
 
         , 
-        <c
-        >-n=value</c>
+        <c>-n=value</c>
 
         
 
         , 
-        <c
-        >-name value</c>
+        <c>-name value</c>
 
         
 
         , 
-        <c
-        >-name=value</c>
+        <c>-name=value</c>
 
         
 
         , 
-        <c
-        >--name value</c>
+        <c>--name value</c>
 
         
 
         ,
-        <c
-        >--name=value</c>
+        <c>--name=value</c>
 
         
 
         ,
-        <c
-        >/name value</c>
+        <c>/name value</c>
 
         
 
         , and
-        <c
-        >/name=value</c>
+        <c>/name=value</c>
 
         
 
         .
       </para
       >
-      <para
-        >
-        Notice also that the boolean <c
-        >v</c>
+      <para>
+        Notice also that the boolean <c>v</c>
 
         
 
          option can take three
-        separate forms: <c
-        >-v</c>
+        separate forms: <c>-v</c>
 
         
 
-         and <c
-        >-v+</c>
+         and <c>-v+</c>
 
         
 
         , which both enable the option,
-        and <c
-        >-v-</c>
+        and <c>-v-</c>
 
         
 
-        , which disables the option.  (The second <c
-        >greet</c>
+        , which disables the option.  (The second <c>greet</c>
 
         
 
         
-        invocation uses <c
-        >-v-</c>
+        invocation uses <c>-v-</c>
 
         
 
         , which is why no debug messages are shown.)
       </para
       >
-      <para
-        >
+      <para>
         Finally, note that the action can specify a type to use.  If no type
         is provided, the action parameter will be a 
-        <see
-         cref="T:System.String" />
+        <see cref="T:System.String" />
 
         
 
         .  If a type is provided, then
-        <see
-         cref="T:System.ComponentModel.TypeConverter" />
+        <see cref="T:System.ComponentModel.TypeConverter" />
 
         
 
@@ -1428,10 +1260,8 @@ Options:
       >
     </example>
     <example>
-      <para
-        >
-        The following example shows a custom <c
-        >OptionSet</c>
+      <para>
+        The following example shows a custom <c>OptionSet</c>
 
         
 
@@ -1441,16 +1271,13 @@ Options:
       >
       <list type="number">
         <item>
-          <term
-            >
+          <term>
           Option name lookup is done in a case insensitive fashion, so
-          <c
-            >--name</c>
+          <c>--name</c>
 
             
 
-             and <c
-            >--NAME</c>
+             and <c>--NAME</c>
 
             
 
@@ -1459,11 +1286,9 @@ Options:
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           Option-like strings cannot be used as values to options, so
-          <c
-            >--name --repeat</c>
+          <c>--name --repeat</c>
 
             
 
@@ -1472,17 +1297,14 @@ Options:
           >
         </item>
         <item>
-          <term
-            >
+          <term>
           A key/value parser is provided, to show the use of custom 
-          <see
-             cref="T:Mono.Options.OptionContext" />
+          <see cref="T:Mono.Options.OptionContext" />
 
             
 
              and
-          <see
-             cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
             
 
@@ -1656,10 +1478,8 @@ Key: a\b\c=d\e\f
       <para>Notice:</para>
       <list type="bullet">
         <item>
-          <term
-            >
-          That <c
-            >--name</c>
+          <term>
+          That <c>--name</c>
 
             
 
@@ -1668,21 +1488,17 @@ Key: a\b\c=d\e\f
           >
         </item>
         <item>
-          <term
-            >
-          That <c
-            >repeat</c>
+          <term>
+          That <c>repeat</c>
 
             
 
              has an optional value, so with 
-          <c
-            >--Repeat -name A</c>
+          <c>--Repeat -name A</c>
 
             
 
-             the default <c
-            >int</c>
+             the default <c>int</c>
 
             
 
@@ -1692,16 +1508,13 @@ Key: a\b\c=d\e\f
           >
         </item>
         <item>
-          <term
-            >
-          That <c
-            >name</c>
+          <term>
+          That <c>name</c>
 
             
 
              has a required value, so 
-          <c
-            >-Name --Repeat 3</c>
+          <c>-Name --Repeat 3</c>
 
             
 
@@ -1710,10 +1523,8 @@ Key: a\b\c=d\e\f
           >
         </item>
         <item>
-          <term
-            >
-          The <c
-            >DemoOptionSet.Add()</c>
+          <term>
+          The <c>DemoOptionSet.Add()</c>
 
             
 
@@ -1742,11 +1553,9 @@ Key: a\b\c=d\e\f
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Creates and initializes a new 
-          <see
-           cref="T:Mono.Options.OptionSet" />
+          <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -1754,11 +1563,9 @@ Key: a\b\c=d\e\f
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor causes the created 
-            <see
-             cref="T:Mono.Options.OptionSet" />
+            <see cref="T:Mono.Options.OptionSet" />
 
             
 
@@ -1791,10 +1598,8 @@ Key: a\b\c=d\e\f
         <Parameter Name="localizer" Type="System.Converter&lt;System.String,System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="localizer"
-          >
-          A <see
-           cref="T:System.Converter{System.String,System.String}" />
+        <param name="localizer">
+          A <see cref="T:System.Converter{System.String,System.String}" />
 
           
 
@@ -1802,11 +1607,9 @@ Key: a\b\c=d\e\f
           instance that will be used to translate strings.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new 
-          <see
-           cref="T:Mono.Options.OptionSet" />
+          <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -1814,29 +1617,24 @@ Key: a\b\c=d\e\f
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
-            <see
-             cref="P:Mono.Options.OptionSet.MessageLocalizer" />
+            <see cref="P:Mono.Options.OptionSet.MessageLocalizer" />
 
             
 
              property
-            of the new instance using <paramref
-             name="localizer" />
+            of the new instance using <paramref name="localizer" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Use this constructor when you want to perform some form of
             localization or internationalization on text strings generated
-            from the <see
-             cref="T:Mono.Options.OptionSet" />
+            from the <see cref="T:Mono.Options.OptionSet" />
 
             
 
@@ -1846,16 +1644,13 @@ Key: a\b\c=d\e\f
           >
           <list type="bullet">
             <item>
-              <term
-                >
-              The <see
-                 cref="P:Mono.Options.Option.Description" />
+              <term>
+              The <see cref="P:Mono.Options.Option.Description" />
 
                 
 
                  written by
-              <see
-                 cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+              <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
                 
 
@@ -1976,16 +1771,13 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           <para>Notice:</para>
           <list type="bullet">
             <item>
-              <term
-                >
-              The <c
-                >--with-gettext</c>
+              <term>
+              The <c>--with-gettext</c>
 
                 
 
                  parser uses 
-              <see
-                 cref="M:Mono.Unix.Catalog.GetString" />
+              <see cref="M:Mono.Unix.Catalog.GetString" />
 
                 
 
@@ -1995,16 +1787,13 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
               >
             </item>
             <item>
-              <term
-                >
-              The <c
-                >-with-hello</c>
+              <term>
+              The <c>-with-hello</c>
 
                 
 
                  parser prefixes all 
-              descriptions with <c
-                >hello:</c>
+              descriptions with <c>hello:</c>
 
                 
 
@@ -2037,27 +1826,22 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="comparer" Type="System.StringComparer" />
       </Parameters>
       <Docs>
-        <param name="comparer"
-          >
-          A <see
-           cref="T:System.StringComparer" />
+        <param name="comparer">
+          A <see cref="T:System.StringComparer" />
 
           
 
            that will be used to compare the option names, 
-          e.g. <see
-           cref="M:System.StringComparer.OrdinalIgnoreCase" />
+          e.g. <see cref="M:System.StringComparer.OrdinalIgnoreCase" />
 
           
 
            for case insensitive processing.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new 
-          <see
-           cref="T:Mono.Options.OptionSet" />
+          <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2084,10 +1868,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="comparer" Type="System.StringComparer" />
       </Parameters>
       <Docs>
-        <param name="localizer"
-          >
-          A <see
-           cref="T:System.Converter{System.String,System.String}" />
+        <param name="localizer">
+          A <see cref="T:System.Converter{System.String,System.String}" />
 
           
 
@@ -2095,27 +1877,22 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           instance that will be used to translate strings.
         </param
         >
-        <param name="comparer"
-          >
-          A <see
-           cref="T:System.StringComparer" />
+        <param name="comparer">
+          A <see cref="T:System.StringComparer" />
 
           
 
            that will be used to compare the option names, 
-          e.g. <see
-           cref="M:System.StringComparer.OrdinalIgnoreCase" />
+          e.g. <see cref="M:System.StringComparer.OrdinalIgnoreCase" />
 
           
 
            for case insensitive processing.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new 
-          <see
-           cref="T:Mono.Options.OptionSet" />
+          <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2145,10 +1922,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="source" Type="Mono.Options.ArgumentSource" />
       </Parameters>
       <Docs>
-        <param name="source"
-          >
-          A <see
-           cref="T:Mono.Options.ArgumentSource" />
+        <param name="source">
+          A <see cref="T:Mono.Options.ArgumentSource" />
 
           
 
@@ -2156,27 +1931,22 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           argument processing.
         </param
         >
-        <summary
-          >
-          Registers <paramref
-           name="source" />
+        <summary>
+          Registers <paramref name="source" />
 
           
 
            so that it may be consulted
           during argument processing within
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2190,8 +1960,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2223,43 +1992,35 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="option" Type="Mono.Options.Option" />
       </Parameters>
       <Docs>
-        <param name="option"
-          >
-          The <see
-           cref="T:Mono.Options.Option" />
+        <param name="option">
+          The <see cref="T:Mono.Options.Option" />
 
           
 
            to register.
         </param
         >
-        <summary
-          >
-          Registers <paramref
-           name="option" />
+        <summary>
+          Registers <paramref name="option" />
 
           
 
            so that any options matching
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
            will be treated
           specially by 
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2267,18 +2028,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Registers each option name returned by 
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           , ensuring that any
           option with a matching name will be handled by the 
-          <paramref
-           name="option" />
+          <paramref name="option" />
 
           
 
@@ -2291,14 +2049,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2310,8 +2066,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -2337,37 +2092,30 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="header" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="header"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="header">
+          A <see cref="T:System.String" />
 
           
 
            containing the header to display
-          during <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+          during <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Declare a header to be printed during
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2376,17 +2124,14 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
-            The <c
-            >Add(string)</c>
+          <para>
+            The <c>Add(string)</c>
 
             
 
              method can be used to provide option grouping
             in the output generated by
-            <see
-             cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+            <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
             
 
@@ -2423,18 +2168,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2442,10 +2184,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{System.String,System.String}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
 
           
 
@@ -2453,28 +2193,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2482,10 +2217,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2493,23 +2226,19 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.OptionSet.Add(System.String,System.String,Mono.Options.OptionAction{System.String,System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Add(System.String,System.String,Mono.Options.OptionAction{System.String,System.String})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -2524,14 +2253,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2544,8 +2271,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2553,8 +2279,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2583,18 +2308,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="action" Type="System.Action&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2602,10 +2324,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{System.String}" />
+        <param name="action">
+          A <see cref="T:System.Action{System.String}" />
 
           
 
@@ -2613,28 +2333,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2642,10 +2357,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2653,23 +2366,19 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.OptionSet.Add(System.String,System.String,System.Action{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Add(System.String,System.String,System.Action{System.String})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -2684,14 +2393,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2704,8 +2411,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2713,8 +2419,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2747,18 +2452,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2766,26 +2468,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            to be used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{System.String,System.String}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
 
           
 
@@ -2793,28 +2490,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -2822,10 +2514,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -2834,10 +2524,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
-            Use this method when <paramref
-             name="prototype" />
+          <para>
+            Use this method when <paramref name="prototype" />
 
             
 
@@ -2845,23 +2533,19 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             two values, generally a key and a value.
           </para
           >
-          <block subset="none" type="note"
-            >
-            If <paramref
-             name="prototype" />
+          <block subset="none" type="note">
+            If <paramref name="prototype" />
 
             
 
              specifies a 
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              option,
             then it's possible that both the key and the value will be
-            <see
-             langword="null" />
+            <see langword="null" />
 
             
 
@@ -2876,14 +2560,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2896,8 +2578,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -2905,8 +2586,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -2936,18 +2616,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="action" Type="System.Action&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -2955,26 +2632,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{System.String}" />
+        <param name="action">
+          A <see cref="T:System.Action{System.String}" />
 
           
 
@@ -2982,28 +2654,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3011,10 +2678,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -3030,14 +2695,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3050,8 +2713,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -3059,8 +2721,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -3091,18 +2752,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -3110,26 +2768,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{System.String,System.String}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
 
           
 
@@ -3137,45 +2790,37 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <param name="hidden"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="hidden">
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the
           Option should be displayed in
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3183,10 +2828,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -3202,14 +2845,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3222,8 +2863,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -3231,8 +2871,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -3260,18 +2899,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -3279,26 +2915,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{System.String}" />
+        <param name="action">
+          A <see cref="T:System.Action{System.String}" />
 
           
 
@@ -3306,45 +2937,37 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <param name="hidden"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="hidden">
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the
           Option should be displayed in
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3352,10 +2975,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -3371,14 +2992,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3391,8 +3010,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -3400,8 +3018,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -3433,29 +3050,24 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="action" Type="System.Action&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T"
-          >
+        <typeparam name="T">
           The type of the option to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -3463,10 +3075,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{``0}" />
+        <param name="action">
+          A <see cref="T:System.Action{``0}" />
 
           
 
@@ -3474,28 +3084,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3503,10 +3108,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -3514,23 +3117,19 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
+          <see cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -3545,14 +3144,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3589,29 +3186,24 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="action" Type="System.Action&lt;T&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="T"
-          >
+        <typeparam name="T">
           The type of the option to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -3619,26 +3211,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            containing to used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:System.Action{``0}" />
+        <param name="action">
+          A <see cref="T:System.Action{``0}" />
 
           
 
@@ -3646,28 +3233,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3675,10 +3257,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -3687,19 +3267,16 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Use this typed overload when you want strongly typed option values
             that correspond to a managed type.
-            <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
+            <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
 
             
 
             
             is used to lookup the
-            <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -3707,36 +3284,30 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             performing the string-to-type conversion.
           </para
           >
-          <para
-            >
-            Special support is provided for <see
-             cref="T:System.Nullable{X}" />
+          <para>
+            Special support is provided for <see cref="T:System.Nullable{X}" />
 
             
 
             
-            types; <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            types; <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
             
             doesn't currently support their use, but if 
-            <typeparamref
-             name="T" />
+            <typeparamref name="T" />
 
             
 
              is a nullable type, then this method
             will instead use the 
-            <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
              for the 
-            <typeparamref
-             name="X" />
+            <typeparamref name="X" />
 
             
 
@@ -3746,28 +3317,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           </para
           >
           <block subset="none" type="note">
-            <para
-              >
-              If <paramref
-               name="prototype" />
+            <para>
+              If <paramref name="prototype" />
 
               
 
                specifies an
-              <see
-               cref="F:Mono.Options.OptionValueType.Optional" />
+              <see cref="F:Mono.Options.OptionValueType.Optional" />
 
               
 
                value
-              and the value is not provided, then <c
-              >default(T)</c>
+              and the value is not provided, then <c>default(T)</c>
 
               
 
                is
-              provided as the value to <paramref
-               name="action" />
+              provided as the value to <paramref name="action" />
 
               
 
@@ -3783,14 +3349,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3803,8 +3367,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -3812,8 +3375,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -3846,40 +3408,33 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="action" Type="Mono.Options.OptionAction&lt;TKey,TValue&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="TKey"
-          >
+        <typeparam name="TKey">
           The type of the first argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <typeparam name="TValue"
-          >
+        <typeparam name="TValue">
           The type of the second argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -3887,10 +3442,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{TKey,TValue}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{TKey,TValue}" />
 
           
 
@@ -3898,28 +3451,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -3927,10 +3475,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -3938,23 +3484,19 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           This is to permit method chaining.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           Calls 
-          <see
-           cref="M:Mono.Options.OptionSet.Add``2(System.String,System.String,Mono.Options.OptionAction{``0,``1})" />
+          <see cref="M:Mono.Options.OptionSet.Add``2(System.String,System.String,Mono.Options.OptionAction{``0,``1})" />
 
           
 
           
-          with a <paramref
-           name="description" />
+          with a <paramref name="description" />
 
           
 
            value of 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
@@ -3969,14 +3511,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -3989,8 +3529,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -3998,8 +3537,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -4033,40 +3571,33 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="action" Type="Mono.Options.OptionAction&lt;TKey,TValue&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="TKey"
-          >
+        <typeparam name="TKey">
           The type of the first argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <typeparam name="TValue"
-          >
+        <typeparam name="TValue">
           The type of the second argument to parse and provide to the 
-          <paramref
-           name="action" />
+          <paramref name="action" />
 
           
 
            callback.
         </typeparam
         >
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
            containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
-          <see
-           cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+          <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
           
 
@@ -4074,26 +3605,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           for details.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
            to be used to initialize
-          the <see
-           cref="P:Mono.Options.Option.Description" />
+          the <see cref="P:Mono.Options.Option.Description" />
 
           
 
            property.
         </param
         >
-        <param name="action"
-          >
-          A <see
-           cref="T:Mono.Options.OptionAction{TKey,TValue}" />
+        <param name="action">
+          A <see cref="T:Mono.Options.OptionAction{TKey,TValue}" />
 
           
 
@@ -4101,28 +3627,23 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           to invoke when an option is parsed.
         </param
         >
-        <summary
-          >
-          Registers each alias within <paramref
-           name="prototype" />
+        <summary>
+          Registers each alias within <paramref name="prototype" />
 
           
 
            so that any 
-          options matching the aliases in <paramref
-           name="prototype" />
+          options matching the aliases in <paramref name="prototype" />
 
           
 
            will be
-          handled by <paramref
-           name="action" />
+          handled by <paramref name="action" />
 
           
 
            during any subsequent
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -4130,10 +3651,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           calls.
         </summary
         >
-        <returns
-          >
-          The current <see
-           cref="T:Mono.Options.OptionSet" />
+        <returns>
+          The current <see cref="T:Mono.Options.OptionSet" />
 
           
 
@@ -4142,10 +3661,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
-            Use this method when <paramref
-             name="prototype" />
+          <para>
+            Use this method when <paramref name="prototype" />
 
             
 
@@ -4154,34 +3671,28 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           </para
           >
           <block subset="none" type="note">
-            <para
-              >
-              If <paramref
-               name="prototype" />
+            <para>
+              If <paramref name="prototype" />
 
               
 
                specifies an
-              <see
-               cref="F:Mono.Options.OptionValueType.Optional" />
+              <see cref="F:Mono.Options.OptionValueType.Optional" />
 
               
 
                value
-              and the value is not provided, then <c
-              >default(TKey)</c>
+              and the value is not provided, then <c>default(TKey)</c>
 
               
 
                and
-              <c
-              >default(TValue)</c>
+              <c>default(TValue)</c>
 
               
 
                may be provided as the values to
-              <paramref
-               name="action" />
+              <paramref name="action" />
 
               
 
@@ -4197,14 +3708,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           
 
            has an alias (as returned from
-          <see
-           cref="M:Mono.Options.Option.GetNames" />
+          <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
           ) that conflicts with
-          a previously registered <see
-           cref="T:Mono.Options.Option" />
+          a previously registered <see cref="T:Mono.Options.Option" />
 
           
 
@@ -4217,8 +3726,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
           <para>-or-</para>
           <para>
@@ -4226,8 +3734,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
           </para>
         </exception>
       </Docs>
@@ -4250,17 +3757,14 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <ReturnType>System.Collections.ObjectModel.ReadOnlyCollection&lt;Mono.Options.ArgumentSource&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           A collection of all
-          <see
-           cref="T:Mono.Options.ArgumentSource" />
+          <see cref="T:Mono.Options.ArgumentSource" />
 
           
 
           s which will be consulted during 
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -4268,23 +3772,19 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           processing.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Collections.ObjectModel.ReadOnlyCollection{Mono.Options.ArgumentSource}" />
+        <value>
+          A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection{Mono.Options.ArgumentSource}" />
 
           
 
           
-          containing all <see
-           cref="T:Mono.Options.ArgumentSource" />
+          containing all <see cref="T:Mono.Options.ArgumentSource" />
 
           
 
           s which
           have been 
-          <see
-           cref="M:Mono.Options.OptionSet.Add(Mono.Options.ArgumentSource)" />
+          <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.ArgumentSource)" />
 
           
 
@@ -4315,27 +3815,22 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
-          Creates an <see
-           cref="T:Mono.Options.OptionContext" />
+        <summary>
+          Creates an <see cref="T:Mono.Options.OptionContext" />
 
           
 
            instance.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:Mono.Options.OptionContext" />
+        <returns>
+          A <see cref="T:Mono.Options.OptionContext" />
 
           
 
            instance to be used
           when parsing all options during the current
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
@@ -4345,25 +3840,21 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         >
         <remarks>
           <block subset="none" type="overrides">
-            <para
-              >
+            <para>
               This method can be overridden if
-              <see
-               cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+              <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
 
               
 
               
               is overridden and requires access to an 
-              <see
-               cref="T:Mono.Options.OptionContext" />
+              <see cref="T:Mono.Options.OptionContext" />
 
               
 
                subclass to store
               additional information during the current 
-              <see
-               cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+              <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
               
 
@@ -4399,20 +3890,16 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="item" Type="Mono.Options.Option" />
       </Parameters>
       <Docs>
-        <param name="item"
-          >
-          An <see
-           cref="T:Mono.Options.Option" />
+        <param name="item">
+          An <see cref="T:Mono.Options.Option" />
 
           
 
            to return the key of.
         </param
         >
-        <summary
-          >
-          Returns <c
-          >
+        <summary>
+          Returns <c>
             <paramref name="item" />
 
             
@@ -4425,16 +3912,13 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing the first alias returned
-          by <see
-           cref="M:Mono.Options.Option.GetNames" />
+          by <see cref="M:Mono.Options.Option.GetNames" />
 
           
 
@@ -4442,18 +3926,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             This is to support the 
-            <see
-             cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
+            <see cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
 
             
 
             
             infrastructure.  
-            <see
-             cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
+            <see cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
 
             
 
@@ -4462,46 +3943,39 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             item in the option alias list.
           </para
           >
-          <block subset="none" type="note"
-            >
+          <block subset="none" type="note">
             All aliases returned by 
-            <see
-             cref="M:Mono.Options.Option.GetNames" />
+            <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
              are still
             registered with 
-            <see
-             cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
+            <see cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
 
             
 
             
             even though 
-            <see
-             cref="M:Mono.Options.OptionSet.GetKeyForItem(Mono.Options.Option)" />
+            <see cref="M:Mono.Options.OptionSet.GetKeyForItem(Mono.Options.Option)" />
 
             
 
             
             will never return them.  Consequently, 
-            <see
-             cref="M:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}.Contains(`0)" />
+            <see cref="M:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}.Contains(`0)" />
 
             
 
             
             and
-            <see
-             cref="P:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}.Item(`0)" />
+            <see cref="P:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}.Item(`0)" />
 
             
 
             
             will both correctly use all aliases returned by 
-            <see
-             cref="M:Mono.Options.Option.GetNames" />
+            <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
@@ -4539,10 +4013,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="option" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="option"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="option">
+          A <see cref="T:System.String" />
 
           
 
@@ -4550,44 +4022,36 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           lookup.
         </param
         >
-        <summary
-          >
-          Looks up the <see
-           cref="T:Mono.Options.Option" />
+        <summary>
+          Looks up the <see cref="T:Mono.Options.Option" />
 
           
 
            registered to
-          handle the option name <paramref
-           name="option" />
+          handle the option name <paramref name="option" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          The <see
-           cref="T:Mono.Options.Option" />
+        <returns>
+          The <see cref="T:Mono.Options.Option" />
 
           
 
            instance registered to
-          handle the option name <paramref
-           name="option" />
+          handle the option name <paramref name="option" />
 
           
 
           .
-          If there is no registered handler for <paramref
-           name="option" />
+          If there is no registered handler for <paramref name="option" />
 
           
 
           ,
-          then <see
-           langword="null" />
+          then <see langword="null" />
 
           
 
@@ -4595,17 +4059,14 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Subclasses can use this function to perform 
-            <paramref
-             name="option" />
+            <paramref name="option" />
 
             
 
              lookup when overriding
-            <see
-             cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+            <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
 
             
 
@@ -4619,8 +4080,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -4656,10 +4116,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="value" Type="System.String" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="argument"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="argument">
+          A <see cref="T:System.String" />
 
           
 
@@ -4667,80 +4125,66 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           its constituent parts.
         </param
         >
-        <param name="flag"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="flag">
+          A <see cref="T:System.String" />
 
           
 
            reference which will be set to 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
            if the method returns 
-          <see
-           langword="false" />
+          <see langword="false" />
 
           
 
           , or set to the flag the option starts with
-          if the method returns <see
-           langword="true" />
+          if the method returns <see langword="true" />
 
           
 
           .
-          Valid flags include: <c
-          >-</c>
+          Valid flags include: <c>-</c>
 
           
 
-          , <c
-          >--</c>
+          , <c>--</c>
 
           
 
-          , and <c
-          >/</c>
+          , and <c>/</c>
 
           
 
           .
         </param
         >
-        <param name="name"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="name">
+          A <see cref="T:System.String" />
 
           
 
            reference which will be set to 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
            if the method returns 
-          <see
-           langword="false" />
+          <see langword="false" />
 
           
 
           , or set to the option name following a
-          valid flag if the method returns <see
-           langword="true" />
+          valid flag if the method returns <see langword="true" />
 
           
 
           .
           No lookup is made to determine that flag has been registered via a 
           prior call to 
-          <see
-           cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
+          <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
 
           
 
@@ -4748,148 +4192,121 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           or related overload.
         </param
         >
-        <param name="sep"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="sep">
+          A <see cref="T:System.String" />
 
           
 
            reference which will be set to 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
            if either the method returns 
-          <see
-           langword="false" />
+          <see langword="false" />
 
           
 
-           or if <c
-          >=</c>
+           or if <c>=</c>
 
           
 
-           or <c
-          >:</c>
+           or <c>:</c>
 
           
 
            was not found
-          within <paramref
-           name="argument" />
+          within <paramref name="argument" />
 
           
 
           ; if the method returns 
-          <see
-           langword="true" />
+          <see langword="true" />
 
           
 
-           and <paramref
-           name="argument" />
+           and <paramref name="argument" />
 
           
 
            contains a
-          <c
-          >=</c>
+          <c>=</c>
 
           
 
-           or <c
-          >:</c>
+           or <c>:</c>
 
           
 
-          , then <paramref
-           name="sep" />
+          , then <paramref name="sep" />
 
           
 
            will contain
-          either <c
-          >=</c>
+          either <c>=</c>
 
           
 
-           or <c
-          >:</c>
+           or <c>:</c>
 
           
 
           , whichever was found within 
-          <paramref
-           name="argument" />
+          <paramref name="argument" />
 
           
 
           .
         </param
         >
-        <param name="value"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="value">
+          A <see cref="T:System.String" />
 
           
 
            reference which will be set to 
-          <see
-           langword="null" />
+          <see langword="null" />
 
           
 
            if either the method returns 
-          <see
-           langword="false" />
+          <see langword="false" />
 
           
 
-           or if <paramref
-           name="sep" />
+           or if <paramref name="sep" />
 
           
 
            is null;
-          if the method returns <see
-           langword="true" />
+          if the method returns <see langword="true" />
 
           
 
            and 
-          <paramref
-           name="sep" />
+          <paramref name="sep" />
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
           , then
-          <paramref
-           name="value" />
+          <paramref name="value" />
 
           
 
            will contain all text after 
-          <paramref
-           name="sep" />
+          <paramref name="sep" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Splits <paramref
-           name="argument" />
+        <summary>
+          Splits <paramref name="argument" />
 
           
 
@@ -4901,48 +4318,40 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
           
 
-           if <paramref
-           name="argument" />
+           if <paramref name="argument" />
 
           
 
            could be split
-          into its constituent parts, and <paramref
-           name="flag" />
+          into its constituent parts, and <paramref name="flag" />
 
           
 
            and 
-          <paramref
-           name="name" />
+          <paramref name="name" />
 
           
 
-           are set (<paramref
-           name="sep" />
+           are set (<paramref name="sep" />
 
           
 
            and
-          <paramref
-           name="value" />
+          <paramref name="value" />
 
           
 
            may not be set, depending on whether or
-          not they are present within <paramref
-           name="argument" />
+          not they are present within <paramref name="argument" />
 
           
 
           );
-          <see
-           langword="true" />
+          <see langword="true" />
 
           
 
-           if <paramref
-           name="argument" />
+           if <paramref name="argument" />
 
           
 
@@ -4951,11 +4360,9 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Subclasses can call this method from their 
-            <see
-             cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+            <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
 
             
 
@@ -4964,66 +4371,54 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             split the option up for further processing.
           </para
           >
-          <para
-            >
-            For example, <c
-            >GetOptionParts("foo", ...)</c>
+          <para>
+            For example, <c>GetOptionParts("foo", ...)</c>
 
             
 
              would return 
-            <see
-             langword="false" />
+            <see langword="false" />
 
             
 
             , while 
-            <c
-            >GetOptionParts("--foo=bar", ...)</c>
+            <c>GetOptionParts("--foo=bar", ...)</c>
 
             
 
             
-            would result in <paramref
-             name="flag" />
+            would result in <paramref name="flag" />
 
             
 
-             containing <c
-            >--</c>
+             containing <c>--</c>
 
             
 
             , 
-            <paramref
-             name="name" />
+            <paramref name="name" />
 
             
 
-             containing <c
-            >foo</c>
+             containing <c>foo</c>
 
             
 
             , 
-            <paramref
-             name="sep" />
+            <paramref name="sep" />
 
             
 
-             containing <c
-            >=</c>
+             containing <c>=</c>
 
             
 
             , and
-            <paramref
-             name="value" />
+            <paramref name="value" />
 
             
 
-             containing <c
-            >bar</c>
+             containing <c>bar</c>
 
             
 
@@ -5036,8 +4431,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -5070,42 +4464,34 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <Parameter Name="item" Type="Mono.Options.Option" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="index">
+          A <see cref="T:System.Int32" />
 
           
 
            specifying the index to insert 
-          <paramref
-           name="item" />
+          <paramref name="item" />
 
           
 
            into.
         </param
         >
-        <param name="item"
-          >
-          The <see
-           cref="T:Mono.Options.Option" />
+        <param name="item">
+          The <see cref="T:Mono.Options.Option" />
 
           
 
            to insert.
         </param
         >
-        <summary
-          >
-          Inserts <paramref
-           name="item" />
+        <summary>
+          Inserts <paramref name="item" />
 
           
 
            at the specified 
-          <paramref
-           name="index" />
+          <paramref name="index" />
 
           
 
@@ -5138,10 +4524,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <summary>
           Permits access to the message localization facility.
         </summary>
-        <value
-          >
-          A <see
-           cref="T:System.Converter{System.String,System.String}" />
+        <value>
+          A <see cref="T:System.Converter{System.String,System.String}" />
 
           
 
@@ -5157,8 +4541,7 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
              subclasses can use this
             property 
-            (via <see
-             cref="P:Mono.Options.OptionContext.OptionSet" />
+            (via <see cref="P:Mono.Options.OptionContext.OptionSet" />
 
             
 
@@ -5196,10 +4579,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         />
       </Parameters>
       <Docs>
-        <param name="arguments"
-          >
-          A <see
-           cref="T:System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <param name="arguments">
+          A <see cref="T:System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
 
           
 
@@ -5207,32 +4588,26 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           containing all arguments to parse.
         </param
         >
-        <summary
-          >
-          Parses each <see
-           cref="T:System.String" />
+        <summary>
+          Parses each <see cref="T:System.String" />
 
           
 
            within 
-          <paramref
-           name="arguments" />
+          <paramref name="arguments" />
 
           
 
           , invoking any registered
-          <paramref
-           name="actions" />
+          <paramref name="actions" />
 
           
 
            if a registered option is encountered.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.Collections.Generic.List{System.String}" />
+        <returns>
+          A <see cref="T:System.Collections.Generic.List{System.String}" />
 
           
 
@@ -5246,44 +4621,37 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
 
             
 
-             looks at each argument from <paramref
-             name="arguments" />
+             looks at each argument from <paramref name="arguments" />
 
             
 
              in order, passing each argument to each
-            <see
-             cref="T:Mono.Options.ArgumentSource" />
+            <see cref="T:Mono.Options.ArgumentSource" />
 
             
 
              within
-            <see
-             cref="P:Mono.Options.OptionSet.ArgumentSources" />
+            <see cref="P:Mono.Options.OptionSet.ArgumentSources" />
 
             
 
              using
-            <see
-             cref="M:Mono.Options.ArgumentSource.GetArguments(System.Int32, System.Collections.Generic.IEnumerable{System.String}@)" />
+            <see cref="M:Mono.Options.ArgumentSource.GetArguments(System.Int32, System.Collections.Generic.IEnumerable{System.String}@)" />
 
             
 
             
-            until a source returns <see
-             langword="true" />
+            until a source returns <see langword="true" />
 
             
 
              (and the
-            replacement sequence is used) or no <c
-            >ArgumentSource</c>
+            replacement sequence is used) or no <c>ArgumentSource</c>
 
             
 
              supports
-            the argument.  <c
-            >Parse</c>
+            the argument.  <c>Parse</c>
 
             
 
@@ -5296,10 +4664,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           </para>
           <list type="bullet">
             <item>
-              <term
-                >
-              There is no default handler registered (the <c
-                >&lt;&gt;</c>
+              <term>
+              There is no default handler registered (the <c>&lt;&gt;</c>
 
                 
 
@@ -5310,21 +4676,17 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
               >
             </item>
             <item>
-              <term
-                >
-              The option starts with a flag such as <c
-                >-</c>
+              <term>
+              The option starts with a flag such as <c>-</c>
 
                 
 
-                , <c
-                >--</c>
+                , <c>--</c>
 
                 
 
                 ,
-              <c
-                >/</c>
+              <c>/</c>
 
                 
 
@@ -5341,30 +4703,25 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             </term>
             </item>
           </list>
-          <para
-            >
+          <para>
             Furthermore, argument parsing (including default handler invocation)
-            stops whenever the <c
-            >--</c>
+            stops whenever the <c>--</c>
 
             
 
              option is
             encountered.  This is in accordance with GNU conventions, and
             is frequently used to permit users to provide option-like
-            filenames, e.g. <c
-            >ls -lF -- -l</c>
+            filenames, e.g. <c>ls -lF -- -l</c>
 
             
 
-             to view the file <c
-            >-l</c>
+             to view the file <c>-l</c>
 
             
 
             
-            instead of needing to use <c
-            >ls -lF ./-l</c>
+            instead of needing to use <c>ls -lF ./-l</c>
 
             
 
@@ -5373,10 +4730,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           >
         </remarks>
         <exception cref="T:Mono.Options.OptionException">
-          <para
-            >
-            A value was not found for an <see
-             cref="T:Mono.Options.Option" />
+          <para>
+            A value was not found for an <see cref="T:Mono.Options.Option" />
 
             
 
@@ -5390,24 +4745,20 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             value.
           </para>
           <para>-or-</para>
-          <para
-            >
+          <para>
             An exception was generated when trying to convert the value to the
-            type <typeparamref
-             name="T" />
+            type <typeparamref name="T" />
 
             
 
             , for options added with
-            <see
-             cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
+            <see cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
 
             
 
             
             and related methods.  The originating exception is provided via
-            the <see
-             cref="P:System.Exception.InnerException" />
+            the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -5416,11 +4767,9 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           >
         </exception>
         <example>
-          <para
-            >
+          <para>
             The following example demonstrates some simple usage of 
-            <see
-             cref="T:Mono.Options.OptionSet" />
+            <see cref="T:Mono.Options.OptionSet" />
 
             
 
@@ -5529,10 +4878,8 @@ class Test {
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <param name="argument"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="argument">
+          A <see cref="T:System.String" />
 
           
 
@@ -5540,10 +4887,8 @@ class Test {
           parse.
         </param
         >
-        <param name="c"
-          >
-          A <see
-           cref="T:Mono.Options.OptionContext" />
+        <param name="c">
+          A <see cref="T:Mono.Options.OptionContext" />
 
           
 
@@ -5551,16 +4896,13 @@ class Test {
           current parser context.
         </param
         >
-        <summary
-          >
-          Parses <paramref
-           name="argument" />
+        <summary>
+          Parses <paramref name="argument" />
 
           
 
            and invokes
-          <see
-           cref="M:Mono.Options.Option.Invoke(Mono.Options.OptionContext)" />
+          <see cref="M:Mono.Options.Option.Invoke(Mono.Options.OptionContext)" />
 
           
 
@@ -5568,34 +4910,28 @@ class Test {
           if appropriate.
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <returns>
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not
-          <paramref
-           name="argument" />
+          <paramref name="argument" />
 
           
 
            was handled.
-          If <see
-           langword="false" />
+          If <see langword="false" />
 
           
 
           , then
-          <see
-           cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+          <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
           
 
           
-          will return <paramref
-           name="argument" />
+          will return <paramref name="argument" />
 
           
 
@@ -5603,23 +4939,19 @@ class Test {
         </returns
         >
         <remarks>
-          <para
-            >
-            This method is called for each <see
-             cref="T:System.String" />
+          <para>
+            This method is called for each <see cref="T:System.String" />
 
             
 
             
-            within the <see
-             cref="T:System.Collections.Generic.IEnumerable{System.String}" />
+            within the <see cref="T:System.Collections.Generic.IEnumerable{System.String}" />
 
             
 
             
             provided to 
-            <see
-             cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+            <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
@@ -5627,8 +4959,7 @@ class Test {
             which thus gives this method a chance to parse a single option, or
             chain together multiple options to form a single option (as is
             necessary when an option and its value are separated, e.g. with
-            <c
-            >-option value</c>
+            <c>-option value</c>
 
             
 
@@ -5636,54 +4967,45 @@ class Test {
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
+            <para>
               The default implementation will check 
-              <see
-               cref="P:Mono.Options.OptionContext.Option" />
+              <see cref="P:Mono.Options.OptionContext.Option" />
 
               
 
               , which is
-              assumed to be a <see
-               cref="T:Mono.Options.Option" />
+              assumed to be a <see cref="T:Mono.Options.Option" />
 
               
 
                in need of
               a value.  If 
-              <see
-               cref="P:Mono.Options.OptionContext.Option" />
+              <see cref="P:Mono.Options.OptionContext.Option" />
 
               
 
                is 
-              non-<see
-               langword="null" />
+              non-<see langword="null" />
 
               
 
-              , then <paramref
-               name="argument" />
+              , then <paramref name="argument" />
 
               
 
               
               is 
-              <see
-               cref="M:Mono.Options.OptionValueCollection.Add(System.String)" />
+              <see cref="M:Mono.Options.OptionValueCollection.Add(System.String)" />
 
               
 
               ed
-              to <see
-               cref="P:Mono.Options.OptionContext.OptionValues" />
+              to <see cref="P:Mono.Options.OptionContext.OptionValues" />
 
               
 
                and
-              <see
-               cref="M:Mono.Options.Option.Invoke(Mono.Options.OptionContext)" />
+              <see cref="M:Mono.Options.Option.Invoke(Mono.Options.OptionContext)" />
 
               
 
@@ -5691,74 +5013,61 @@ class Test {
               is invoked.
             </para
             >
-            <para
-              >
-              Next, <see
-               cref="M:Mono.Options.OptionSet.GetOptionParts(System.String,System.String@,System.String@,System.String@,System.String@)" />
+            <para>
+              Next, <see cref="M:Mono.Options.OptionSet.GetOptionParts(System.String,System.String@,System.String@,System.String@,System.String@)" />
 
               
 
               
-              is invoked.  If <c
-              >GetOptionParts</c>
+              is invoked.  If <c>GetOptionParts</c>
 
               
 
                returns 
-              <see
-               langword="false" />
+              <see langword="false" />
 
               
 
-              , then <see
-               langword="false" />
+              , then <see langword="false" />
 
               
 
                is
-              returned from <c
-              >Parse</c>
+              returned from <c>Parse</c>
 
               
 
               .
             </para
             >
-            <para
-              >
-              Finally, check to see if the <paramref
-               name="name" />
+            <para>
+              Finally, check to see if the <paramref name="name" />
 
               
 
                returned
-              from <c
-              >GetOptionParts</c>
+              from <c>GetOptionParts</c>
 
               
 
                is registered; if it is, handle it
               appropriately.  If it isn't, check to see if 
-              <paramref
-               name="name" />
+              <paramref name="name" />
 
               
 
                is a bundled option or a boolean
-              option.  If <paramref
-               name="name" />
+              option.  If <paramref name="name" />
 
               
 
                isn't any registered
-              option, then <see
-               langword="false" />
+              option, then <see langword="false" />
 
               
 
                is returned.
-              Otherwise, <see
-               langword="true" />
+              Otherwise, <see langword="true" />
 
               
 
@@ -5767,12 +5076,10 @@ class Test {
             >
           </block>
           <block subset="none" type="overrides">
-            <para
-              >
+            <para>
               Inheriting types can override this method if they want to
               customize the per-option parsing within the containing
-              <see
-               cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+              <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
               
 
@@ -5780,18 +5087,15 @@ class Test {
               invocation.
             </para
             >
-            <para
-              >
+            <para>
               Inheriting types should consider overriding 
-              <see
-               cref="M:Mono.Options.OptionSet.CreateOptionContext" />
+              <see cref="M:Mono.Options.OptionSet.CreateOptionContext" />
 
               
 
               
               if they want to store extra information for use and retrieval
-              during each <c
-              >Parse</c>
+              during each <c>Parse</c>
 
               
 
@@ -5824,32 +5128,26 @@ class Test {
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="index">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the index of the 
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
            to remove.
         </param
         >
-        <summary
-          >
-          Removes the <see
-           cref="T:Mono.Options.Option" />
+        <summary>
+          Removes the <see cref="T:Mono.Options.Option" />
 
           
 
            at the specified
-          <paramref
-           name="index" />
+          <paramref name="index" />
 
           
 
@@ -5883,59 +5181,48 @@ class Test {
         <Parameter Name="item" Type="Mono.Options.Option" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="index">
+          A <see cref="T:System.Int32" />
 
           
 
            containing the index of the 
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
            to change.
         </param
         >
-        <param name="item"
-          >
-          The new <see
-           cref="T:Mono.Options.Option" />
+        <param name="item">
+          The new <see cref="T:Mono.Options.Option" />
 
           
 
            to set at
-          <paramref
-           name="index" />
+          <paramref name="index" />
 
           
 
           .
         </param
         >
-        <summary
-          >
-          Removes the current <see
-           cref="T:Mono.Options.Option" />
+        <summary>
+          Removes the current <see cref="T:Mono.Options.Option" />
 
           
 
            at 
-          <paramref
-           name="index" />
+          <paramref name="index" />
 
           
 
-           and sets <paramref
-           name="item" />
+           and sets <paramref name="item" />
 
           
 
            
-          as the value for the <paramref
-           name="index" />
+          as the value for the <paramref name="index" />
 
           
 
@@ -5968,10 +5255,8 @@ class Test {
         <Parameter Name="o" Type="System.IO.TextWriter" />
       </Parameters>
       <Docs>
-        <param name="o"
-          >
-          The <see
-           cref="T:System.IO.TextWriter" />
+        <param name="o">
+          The <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -5979,16 +5264,13 @@ class Test {
           descriptions to.
         </param
         >
-        <summary
-          >
-          Writes <see
-           cref="T:Mono.Options.Option" />
+        <summary>
+          Writes <see cref="T:Mono.Options.Option" />
 
           
 
            documentation to 
-          <paramref
-           name="o" />
+          <paramref name="o" />
 
           
 
@@ -5996,142 +5278,117 @@ class Test {
         </summary
         >
         <remarks>
-          <para
-            >
-            Writes <see
-             cref="T:Mono.Options.Option" />
+          <para>
+            Writes <see cref="T:Mono.Options.Option" />
 
             
 
              documentation to
-            <paramref
-             name="o" />
+            <paramref name="o" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            If <see
-             cref="P:Mono.Options.Option.Hidden" />
+          <para>
+            If <see cref="P:Mono.Options.Option.Hidden" />
 
             
 
              is
-            <see
-             langword="true" />
+            <see langword="true" />
 
             
 
             , then the Option will not be written to
-            <paramref
-             name="o" />
+            <paramref name="o" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            For each <see
-             cref="T:Mono.Options.Option" />
+          <para>
+            For each <see cref="T:Mono.Options.Option" />
 
             
 
              previously added to
             the current instance, this method writes out a comma-separated
-            list of all <see
-             cref="M:Mono.Options.Option.GetNames" />
+            list of all <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
             
-            followed by the <see
-             cref="P:Mono.Options.Option.Description" />
+            followed by the <see cref="P:Mono.Options.Option.Description" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            The <see
-             cref="P:Mono.Options.Option.Description" />
+          <para>
+            The <see cref="P:Mono.Options.Option.Description" />
 
             
 
              is
             automatically wrapped so that output will flow nicely across
             multiple lines.  Wrapping is preferred at explicit embedded 
-            newline characters (<c
-            >\n</c>
+            newline characters (<c>\n</c>
 
             
 
             ) or spaces, but words will be split
-            (by adding a <c
-            >-</c>
+            (by adding a <c>-</c>
 
             
 
             ) if necessary.
           </para
           >
-          <para
-            >
-            Options requiring a value have <c
-            >=VALUE</c>
+          <para>
+            Options requiring a value have <c>=VALUE</c>
 
             
 
              appended to their
             last name, while options with an optional value have
-            <c
-            >[=VALUE]</c>
+            <c>[=VALUE]</c>
 
             
 
              appended to their last name.
-            The <c
-            >VALUE</c>
+            The <c>VALUE</c>
 
             
 
              string can be changed by using a format
             specifier-like string within the 
-            <see
-             cref="P:Mono.Options.Option.Description" />
+            <see cref="P:Mono.Options.Option.Description" />
 
             
 
             .
           </para
           >
-          <para
-            >
-            For <see
-             cref="T:Mono.Options.Option" />
+          <para>
+            For <see cref="T:Mono.Options.Option" />
 
             
 
             s accepting one value,
-            the string <c
-            >{VALUE}</c>
+            the string <c>{VALUE}</c>
 
             
 
-             or <c
-            >{0:VALUE}</c>
+             or <c>{0:VALUE}</c>
 
             
 
              can be used to
-            explicitly provide the value name.  For <c
-            >Option</c>
+            explicitly provide the value name.  For <c>Option</c>
 
             
 
@@ -6140,28 +5397,23 @@ class Test {
             value the string is for.
           </para
           >
-          <para
-            >
-            Once all <see
-             cref="T:Mono.Options.Option" />
+          <para>
+            Once all <see cref="T:Mono.Options.Option" />
 
             
 
             s have been written,
-            all <see
-             cref="T:Mono.Options.ArgumentSource" />
+            all <see cref="T:Mono.Options.ArgumentSource" />
 
             
 
             s are printed out
-            using <see
-             cref="M:Mono.Options.ArgumentSource.GetNames" />
+            using <see cref="M:Mono.Options.ArgumentSource.GetNames" />
 
             
 
              and
-            <see
-             cref="P:Mono.Options.ArgumentSource.Description" />
+            <see cref="P:Mono.Options.ArgumentSource.Description" />
 
             
 
@@ -6170,11 +5422,9 @@ class Test {
           >
         </remarks>
         <example>
-          <para
-            >
+          <para>
             The following example initializes a
-            <see
-             cref="T:Mono.Options.OptionSet" />
+            <see cref="T:Mono.Options.OptionSet" />
 
             
 
@@ -6258,35 +5508,29 @@ class Test {
 
 </code
           >
-          <para
-            >
+          <para>
             Notice that when the above program is invoked with the
-            <c
-            >--help</c>
+            <c>--help</c>
 
             
 
              parameter, 
-            <see
-             cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+            <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
             
 
             
-            is used to generate the <see
-             cref="T:Mono.Options.Option" />
+            is used to generate the <see cref="T:Mono.Options.Option" />
 
             
 
             
-            description, that the <c
-            >--repeat</c>
+            description, that the <c>--repeat</c>
 
             
 
              description spans
-            multiple lines, and that format specifiers such as <c
-            >{NAME}</c>
+            multiple lines, and that format specifiers such as <c>{NAME}</c>
 
             
 

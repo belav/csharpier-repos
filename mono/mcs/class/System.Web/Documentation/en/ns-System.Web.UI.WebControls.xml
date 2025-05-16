@@ -9,8 +9,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Web.UI.WebControls" />
+        >The <see cref="N:System.Web.UI.WebControls" />
 
         
 
@@ -20,48 +19,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Web.UI.WebControls" />
+        >The <see cref="N:System.Web.UI.WebControls" />
 
         
 
-         namespace contains classes that are rendered as HTML tags, such as the <see
-         cref="T:System.Web.UI.WebControls.TextBox" />
+         namespace contains classes that are rendered as HTML tags, such as the <see cref="T:System.Web.UI.WebControls.TextBox" />
 
         
 
-         control and the <see
-         cref="T:System.Web.UI.WebControls.ListBox" />
+         control and the <see cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
-         control. The namespace also contains classes that are not rendered on the Web page, but support data operations, such as the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         control. The namespace also contains classes that are not rendered on the Web page, but support data operations, such as the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+         and <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
         
 
-         classes. Other controls, such as the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         classes. Other controls, such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         controls, support data display and editing. The <see
-         cref="T:System.Web.UI.WebControls.WebControl" />
+         controls, support data display and editing. The <see cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
-         class serves as the base class for many of the classes in the <see
-         cref="N:System.Web.UI.WebControls" />
+         class serves as the base class for many of the classes in the <see cref="N:System.Web.UI.WebControls" />
 
         
 

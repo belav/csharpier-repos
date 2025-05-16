@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -52,10 +54,7 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate[]" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -75,10 +74,7 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509CertificateCollection" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -100,15 +96,9 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -129,10 +119,7 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate[]" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -154,10 +141,7 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509CertificateCollection" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509CertificateCollection" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -179,15 +163,9 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -209,14 +187,8 @@
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="array"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
-        <param name="index"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="array">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
+        <param name="index">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -238,8 +210,7 @@
       <Docs>
         <summary>To be added</summary>
         <returns
-          >a <see
-           cref="T:Mono.Security.X509.X509CertificateCollection+X509CertificateEnumerator" />
+          >a <see cref="T:Mono.Security.X509.X509CertificateCollection+X509CertificateEnumerator" />
         </returns>
         <remarks>To be added</remarks>
       </Docs>
@@ -257,10 +228,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -281,15 +249,9 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Int32" />
-        </returns>
+        <returns>a <see cref="T:System.Int32" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -311,14 +273,8 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="index">a <see cref="T:System.Int32" /></param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -340,15 +296,9 @@
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="index">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509Certificate" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -369,10 +319,7 @@
         <Parameter Name="value" Type="Mono.Security.X509.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:Mono.Security.X509.X509Certificate" />
-        </param>
+        <param name="value">a <see cref="T:Mono.Security.X509.X509Certificate" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>

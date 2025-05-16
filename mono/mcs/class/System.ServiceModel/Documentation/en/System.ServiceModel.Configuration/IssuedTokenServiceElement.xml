@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.IssuedTokenServiceElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IssuedTokenServiceElement" />
 
             
 
@@ -79,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on this property, see <format
-             type="text/html">
+            >For more information on this property, see <format type="text/html">
               <a href="0f4dc73d-d95d-4193-9755-7df4cf2b8e1c">&lt;allowedAudienceUris&gt;</a>
             </format>
           </para>
@@ -145,13 +143,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether the <see
-             cref="T:System.IdentityModel.Tokens.SamlSecurityToken" />
+            >Gets or sets a value that specifies whether the <see cref="T:System.IdentityModel.Tokens.SamlSecurityToken" />
 
             
 
-             security token's <see
-             cref="T:System.IdentityModel.Tokens.SamlAudienceRestrictionCondition" />
+             security token's <see cref="T:System.IdentityModel.Tokens.SamlAudienceRestrictionCondition" />
 
             
 
@@ -329,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of <see
-             cref="T:System.IdentityModel.Tokens.SamlSerializer" />
+            >Gets or sets the type of <see cref="T:System.IdentityModel.Tokens.SamlSerializer" />
 
             
 

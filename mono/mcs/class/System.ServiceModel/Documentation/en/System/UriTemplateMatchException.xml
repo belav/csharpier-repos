@@ -18,13 +18,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an error when matching a <see
-         cref="T:System.Uri" />
+        >Represents an error when matching a <see cref="T:System.Uri" />
 
         
 
-         to a <see
-         cref="T:System.UriTemplateTable" />
+         to a <see cref="T:System.UriTemplateTable" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateMatchException" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateMatchException" />
 
             
 
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateMatchException" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateMatchException" />
 
             
 
@@ -110,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateMatchException" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateMatchException" />
 
             
 
@@ -119,14 +114,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized data object.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.UriTemplateMatchException" />
+            >Initializes a new instance of the <see cref="T:System.UriTemplateMatchException" />
 
             
 

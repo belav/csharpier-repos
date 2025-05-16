@@ -20,36 +20,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+        >The <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
         
 
-         event is raised when the contents of the data source change or when the value of the <see
-         cref="P:System.Windows.Forms.DataGridView.DataSource" />
+         event is raised when the contents of the data source change or when the value of the <see cref="P:System.Windows.Forms.DataGridView.DataSource" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridView.DataMember" />
+        , <see cref="P:System.Windows.Forms.DataGridView.DataMember" />
 
         
 
-        , or <see
-         cref="P:System.Windows.Forms.Control.BindingContext" />
+        , or <see cref="P:System.Windows.Forms.Control.BindingContext" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control changes. </para
       >
       <para
-        >This class describes the change made by the <see
-         cref="T:System.Windows.Forms.CurrencyManager" />
+        >This class describes the change made by the <see cref="T:System.Windows.Forms.CurrencyManager" />
 
         
 
@@ -59,8 +53,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
 
         
 
@@ -84,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewBindingCompleteEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewBindingCompleteEventArgs" />
 
             
 
@@ -93,12 +85,15 @@
           >
         </summary>
         <param name="listChangedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.ListChangedType" />
+          One of the <see cref="T:System.ComponentModel.ListChangedType" />
 
           
 

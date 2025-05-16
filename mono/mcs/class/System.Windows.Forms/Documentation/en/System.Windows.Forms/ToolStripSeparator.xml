@@ -22,36 +22,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use a <see
-         cref="T:System.Windows.Forms.ToolStripSeparator" />
+        >Use a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
         
 
-         to group related items on a menu or <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         to group related items on a menu or <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        . The <see
-         cref="T:System.Windows.Forms.ToolStripSeparator" />
+        . The <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
         
 
          is automatically spaced and oriented horizontally or vertically to accord with its container.</para
       >
       <para
-        >You can add a <see
-         cref="T:System.Windows.Forms.ToolStripSeparator" />
+        >You can add a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
         
 
-         at design time by choosing it from a drop-down list. However, you can also automatically create a <see
-         cref="T:System.Windows.Forms.ToolStripSeparator" />
+         at design time by choosing it from a drop-down list. However, you can also automatically create a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
         
 
-         by typing a hyphen (-) in either the designer template node or in the <see
-         cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.String)" />
+         by typing a hyphen (-) in either the designer template node or in the <see cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.String)" />
 
         
 
@@ -61,23 +55,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a line used to group items of a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Represents a line used to group items of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         or the drop-down items of a <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+         or the drop-down items of a <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-         or <see
-         cref="T:System.Windows.Forms.ContextMenuStrip" />
+         or <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
         
 
-         or other <see
-         cref="T:System.Windows.Forms.ToolStripDropDown" />
+         or other <see cref="T:System.Windows.Forms.ToolStripDropDown" />
 
         
 
@@ -96,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -227,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -256,8 +244,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessibility object for the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Creates a new accessibility object for the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -267,13 +254,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             for the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -308,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the spacing between the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Gets the spacing between the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -334,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default size of the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Gets the default size of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -561,8 +544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the size of a rectangular area into which a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Retrieves the size of a rectangular area into which a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -572,13 +554,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
-             representing the height and width of the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+             representing the height and width of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -586,17 +566,19 @@
           >
         </returns>
         <param name="constrainingSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Size" />
+          A <see cref="T:System.Drawing.Size" />
 
           
 
-           representing the height and width of the <see
-           cref="T:System.Windows.Forms.ToolStripSeparator" />
+           representing the height and width of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
           
 
@@ -839,12 +821,15 @@
           <para>This method is not relevant to this class.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.EventArgs" />
+          A <see cref="T:System.EventArgs" />
 
           
 
@@ -878,8 +863,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.Paint" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.Paint" />
 
             
 
@@ -887,12 +871,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -955,8 +942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the size and location of the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Sets the size and location of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -964,17 +950,19 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           specifying the size and location of the <see
-           cref="T:System.Windows.Forms.ToolStripSeparator" />
+           specifying the size and location of the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
           
 

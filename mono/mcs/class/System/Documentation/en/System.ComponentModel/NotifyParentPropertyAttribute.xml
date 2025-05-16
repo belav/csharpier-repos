@@ -34,31 +34,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply <see
-         cref="T:System.ComponentModel.NotifyParentPropertyAttribute" />
+        >Apply <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" />
 
         
 
-         to a property if its parent property should receive notification of changes to the property's values. For example, in the Properties window, the <see
-         cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+         to a property if its parent property should receive notification of changes to the property's values. For example, in the Properties window, the <see cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
 
         
 
-         property has nested properties such as <see
-         cref="P:System.Windows.Forms.DataGridViewRow.Height" />
+         property has nested properties such as <see cref="P:System.Windows.Forms.DataGridViewRow.Height" />
 
         
 
-         and <see
-         cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />
+         and <see cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />
 
         
 
         . These nested properties are marked with NotifyParentPropertyAttribute(true) so they notify the parent property to update its value and display when the property values change.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -97,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.NotifyParentPropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.NotifyParentPropertyAttribute" />
 
             
 
@@ -106,7 +100,11 @@
           >
         </summary>
         <param name="notifyParent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -170,7 +168,11 @@
           <para>true if the object is the same as this object; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

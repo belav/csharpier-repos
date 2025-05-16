@@ -8,13 +8,11 @@
   <Interfaces />
   <Docs>
     <summary>Process interface</summary>
-    <remarks>
-      <c>T:Mono.DocTest.IProcess</c>
+    <remarks><c>T:Mono.DocTest.IProcess</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members />
 </Type>

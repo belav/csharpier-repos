@@ -26,8 +26,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class specifies that the message transmission will use SOAP and provides details about how the SOAP message will be formatted.</para>
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -41,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extension added to an <see
-         cref="T:System.Web.Services.Description.OperationBinding" />
+        >Represents an extension added to an <see cref="T:System.Web.Services.Description.OperationBinding" />
 
         
 
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.SoapOperationBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.SoapOperationBinding" />
 
             
 
@@ -119,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of SOAP binding used by the <see
-             cref="T:System.Web.Services.Description.SoapOperationBinding" />
+            >Gets or sets the type of SOAP binding used by the <see cref="T:System.Web.Services.Description.SoapOperationBinding" />
 
             
 

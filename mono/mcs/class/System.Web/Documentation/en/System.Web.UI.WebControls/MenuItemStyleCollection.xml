@@ -17,84 +17,69 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
         
 
-         class is used to store and manage a collection of <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+         class is used to store and manage a collection of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
         
 
-         objects in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         objects in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control. The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+         control uses the <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
         
 
-         class as the underlying data type of the <see
-         cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+         class as the underlying data type of the <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+         and <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
         
 
          properties.</para
       >
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+        >The <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+         and <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
         
 
-         properties are an alternative to the individual style properties (such as <see
-         cref="P:System.Web.UI.WebControls.Menu.StaticMenuItemStyle" />
+         properties are an alternative to the individual style properties (such as <see cref="P:System.Web.UI.WebControls.Menu.StaticMenuItemStyle" />
 
         
 
-        ). These properties are applied to regular menu items and the selected menu item, respectively, based on the menu item's level in the menu. The first style in the collection corresponds to the menu item style for the first level of the menu. The second style in the collection corresponds to the menu item style for the second level of the menu, and so on. The <see
-         cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
+        ). These properties are applied to regular menu items and the selected menu item, respectively, based on the menu item's level in the menu. The first style in the collection corresponds to the menu item style for the first level of the menu. The second style in the collection corresponds to the menu item style for the second level of the menu, and so on. The <see cref="P:System.Web.UI.WebControls.Menu.LevelMenuItemStyles" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
+         and <see cref="P:System.Web.UI.WebControls.Menu.LevelSelectedStyles" />
 
         
 
          properties are most often used to generate menus where menu items at a certain level have the same appearance, regardless of whether they have submenus.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
         
 
-         class inherits most of its members from the <see
-         cref="T:System.Web.UI.StateManagedCollection" />
+         class inherits most of its members from the <see cref="T:System.Web.UI.StateManagedCollection" />
 
         
 
-         class. For more information on the inherited members, see <see
-         cref="T:System.Web.UI.StateManagedCollection" />
+         class. For more information on the inherited members, see <see cref="T:System.Web.UI.StateManagedCollection" />
 
         
 
@@ -104,13 +89,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+        >Represents a collection of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
         
 
-         objects in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         objects in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -136,23 +119,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Add(System.Web.UI.WebControls.MenuItemStyle)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Add(System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
-             method to append the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to append the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object to the end of the collection. As an alternative, you can insert a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object to the end of the collection. As an alternative, you can insert a <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object into the collection at a specific index by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemStyle)" />
+             object into the collection at a specific index by using the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
@@ -162,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -173,8 +151,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the added <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >The zero-based index of the added <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -182,12 +159,15 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 
@@ -215,18 +195,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Contains(System.Web.UI.WebControls.MenuItemStyle)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Contains(System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to determine whether a <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object is contained in the collection. This method is commonly used to test for the existence of a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object is contained in the collection. This method is commonly used to test for the existence of a <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -236,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Determines whether the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -247,8 +223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >true if the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -256,12 +231,15 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 
@@ -291,18 +269,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.CopyTo(System.Web.UI.WebControls.MenuItemStyle[],System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.CopyTo(System.Web.UI.WebControls.MenuItemStyle[],System.Int32)" />
 
             
 
-             method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+             method to copy the contents of the <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
             
 
-             object into the specified zero-based array of <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object into the specified zero-based array of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -312,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the items from the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
+            >Copies all the items from the <see cref="T:System.Web.UI.WebControls.MenuItemStyleCollection" />
 
             
 
-             object to a compatible one-dimensional array of <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             object to a compatible one-dimensional array of <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -326,7 +299,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -394,13 +371,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.IndexOf(System.Web.UI.WebControls.MenuItemStyle)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.IndexOf(System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
-             method to determine the zero-based index of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to determine the zero-based index of the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -408,8 +383,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If the specified <see
-               cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+              >If the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
               
 
@@ -420,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Determines the index of the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -431,8 +404,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the first occurrence of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >The zero-based index of the first occurrence of the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -440,12 +412,15 @@
           >
         </returns>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 
@@ -474,26 +449,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemStyle)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Insert(System.Int32,System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
-             method to insert the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to insert the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
              object into the collection at the specified zero-based index.</para
           >
           <para
-            >As an alternative, you can append a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >As an alternative, you can append a <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object to the end of the collection using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Add(System.Web.UI.WebControls.MenuItemStyle)" />
+             object to the end of the collection using the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Add(System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
@@ -503,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Inserts the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -512,24 +482,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index location at which to insert the <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The zero-based index location at which to insert the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 
           .</param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 
@@ -580,26 +556,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Remove(System.Web.UI.WebControls.MenuItemStyle)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Remove(System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
-             method to remove the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to remove the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
              object from the collection. All items that follow that menu item style are then moved up to fill the vacant position. The indexes of the moved items are also updated.</para
           >
           <para
-            >As an alternative, you can remove a <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >As an alternative, you can remove a <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object at a specific index by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.RemoveAt(System.Int32)" />
+             object at a specific index by using the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.RemoveAt(System.Int32)" />
 
             
 
@@ -609,8 +581,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -618,12 +589,15 @@
           >
         </summary>
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 
@@ -648,26 +622,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
              object at the specified zero-based index location from the collection. All items that follow that node are then moved up to fill the vacant position. The indexes of the moved items are also updated.</para
           >
           <para
-            >As an alternative, you can remove a specific <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >As an alternative, you can remove a specific <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
-             object by using the <see
-             cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Remove(System.Web.UI.WebControls.MenuItemStyle)" />
+             object by using the <see cref="M:System.Web.UI.WebControls.MenuItemStyleCollection.Remove(System.Web.UI.WebControls.MenuItemStyle)" />
 
             
 
@@ -677,8 +647,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+            >Removes the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
             
 
@@ -686,12 +655,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index location of the <see
-           cref="T:System.Web.UI.WebControls.MenuItemStyle" />
+          The zero-based index location of the <see cref="T:System.Web.UI.WebControls.MenuItemStyle" />
 
           
 

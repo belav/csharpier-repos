@@ -13,28 +13,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control manages its site navigation information as a collection of <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+         control manages its site navigation information as a collection of <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
         
 
-         objects. <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+         objects. <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
         
 
-         objects represent functionally different types of <see
-         cref="T:System.Web.SiteMapNode" />
+         objects represent functionally different types of <see cref="T:System.Web.SiteMapNode" />
 
         
 
-         nodes. Accordingly, they are managed by the <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+         nodes. Accordingly, they are managed by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
@@ -55,13 +50,11 @@
         </item>
       </list>
       <para
-        >Each node is data-bound to an underlying <see
-         cref="T:System.Web.SiteMapNode" />
+        >Each node is data-bound to an underlying <see cref="T:System.Web.SiteMapNode" />
 
         
 
-        , except nodes of the <see
-         cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
+        , except nodes of the <see cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
 
         
 
@@ -71,18 +64,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+        >The <see cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
 
         
 
-         enumeration is used by the <see
-         cref="T:System.Web.UI.WebControls.SiteMapPath" />
+         enumeration is used by the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
         
 
-         control to identify the type of a <see
-         cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+         control to identify the type of a <see cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
         
 
@@ -136,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A site map navigation path separator. The default separator for the <see
-             cref="T:System.Web.UI.WebControls.SiteMapPath" />
+            >A site map navigation path separator. The default separator for the <see cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
             
 

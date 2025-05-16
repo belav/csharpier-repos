@@ -25,36 +25,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.Timer" />
+        >A <see cref="T:System.Windows.Forms.Timer" />
 
         
 
          is used to raise an event at user-defined intervals. This Windows timer is designed for a single-threaded environment where UI threads are used to perform processing. It requires that the user code have a UI message pump available and always operate from the same thread, or marshal the call onto another thread.</para
       >
       <para
-        >When you use this timer, use the <see
-         cref="E:System.Windows.Forms.Timer.Tick" />
+        >When you use this timer, use the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
         
 
-         event to perform a polling operation or to display a splash screen for a specified period of time. Whenever the <see
-         cref="P:System.Windows.Forms.Timer.Enabled" />
+         event to perform a polling operation or to display a splash screen for a specified period of time. Whenever the <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
         
 
-         property is set to true and the <see
-         cref="P:System.Windows.Forms.Timer.Interval" />
+         property is set to true and the <see cref="P:System.Windows.Forms.Timer.Interval" />
 
         
 
-         property is greater than zero, the <see
-         cref="E:System.Windows.Forms.Timer.Tick" />
+         property is greater than zero, the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
         
 
-         event is raised at intervals based on the <see
-         cref="P:System.Windows.Forms.Timer.Interval" />
+         event is raised at intervals based on the <see cref="P:System.Windows.Forms.Timer.Interval" />
 
         
 
@@ -63,13 +57,11 @@
       <para>This class provides methods to set the interval, and to start and stop the timer.</para>
       <block subset="none" type="note">
         <para
-          >The Windows Forms Timer component is single-threaded, and is limited to an accuracy of 55 milliseconds. If you require a multithreaded timer with greater accuracy, use the <see
-           cref="T:System.Timers.Timer" />
+          >The Windows Forms Timer component is single-threaded, and is limited to an accuracy of 55 milliseconds. If you require a multithreaded timer with greater accuracy, use the <see cref="T:System.Timers.Timer" />
 
           
 
-           class in the <see
-           cref="N:System.Timers" />
+           class in the <see cref="N:System.Timers" />
 
           
 
@@ -91,18 +83,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a new timer is created, it is disabled; that is, <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+            >When a new timer is created, it is disabled; that is, <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
-             is set to false. To enable the timer, call the <see
-             cref="M:System.Windows.Forms.Timer.Start" />
+             is set to false. To enable the timer, call the <see cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
-             method or set <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+             method or set <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
@@ -113,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Timer" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
@@ -140,81 +128,66 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Timer" />
+            >The <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             constructor enables you to associate a <see
-             cref="T:System.Windows.Forms.Timer" />
+             constructor enables you to associate a <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             with any <see
-             cref="T:System.ComponentModel.Container" />
+             with any <see cref="T:System.ComponentModel.Container" />
 
             
 
-             object. By associating the <see
-             cref="T:System.Windows.Forms.Timer" />
+             object. By associating the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             like this, you hand over control of the lifetime of the <see
-             cref="T:System.Windows.Forms.Timer" />
+             like this, you hand over control of the lifetime of the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             to the <see
-             cref="T:System.ComponentModel.Container" />
+             to the <see cref="T:System.ComponentModel.Container" />
 
             
 
-            . This can be useful if you use a number of components in your application and want to dispose of all of them simultaneously. For example, if you associate a <see
-             cref="T:System.Windows.Forms.ToolTip" />
+            . This can be useful if you use a number of components in your application and want to dispose of all of them simultaneously. For example, if you associate a <see cref="T:System.Windows.Forms.ToolTip" />
 
             
 
-            , an <see
-             cref="T:System.Windows.Forms.ImageList" />
+            , an <see cref="T:System.Windows.Forms.ImageList" />
 
             
 
-            , and a <see
-             cref="T:System.Windows.Forms.Timer" />
+            , and a <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             with a <see
-             cref="T:System.ComponentModel.Container" />
+             with a <see cref="T:System.ComponentModel.Container" />
 
             
 
-            , calling <see
-             cref="M:System.ComponentModel.Container.Dispose" />
+            , calling <see cref="M:System.ComponentModel.Container.Dispose" />
 
             
 
-             on the <see
-             cref="T:System.ComponentModel.Container" />
+             on the <see cref="T:System.ComponentModel.Container" />
 
             
 
              will force disposal of all of these components as well.</para
           >
           <para
-            >When a new timer is created, it is disabled; that is, <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+            >When a new timer is created, it is disabled; that is, <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
-             is set to false. To enable the timer, call the <see
-             cref="M:System.Windows.Forms.Timer.Start" />
+             is set to false. To enable the timer, call the <see cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
-             method or set <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+             method or set <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
@@ -225,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Timer" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
@@ -234,12 +206,15 @@
           >
         </summary>
         <param name="container">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.IContainer" />
+          An <see cref="T:System.ComponentModel.IContainer" />
 
           
 
@@ -264,18 +239,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
+            >Call <see cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
 
             
 
-             when you are finished using the timer. The <see
-             cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
+             when you are finished using the timer. The <see cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
 
             
 
-             method leaves the timer in an unusable state. After you call <see
-             cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
+             method leaves the timer in an unusable state. After you call <see cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
 
             
 
@@ -283,8 +255,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
+              >Always call <see cref="M:System.Windows.Forms.Timer.Dispose(System.Boolean)" />
 
               
 
@@ -297,7 +268,11 @@
           <para>Disposes of the resources, other than memory, used by the timer.</para>
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -326,23 +301,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The timer is not subject to garbage collection when the value is true.</para>
           <para
-            >Calling the <see
-             cref="M:System.Windows.Forms.Timer.Start" />
+            >Calling the <see cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
-             method is the same as setting <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+             method is the same as setting <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
-             to true. Likewise, calling the <see
-             cref="M:System.Windows.Forms.Timer.Stop" />
+             to true. Likewise, calling the <see cref="M:System.Windows.Forms.Timer.Stop" />
 
             
 
-             method is the same as setting <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+             method is the same as setting <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
@@ -379,13 +350,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the time, in milliseconds, before the <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+            >Gets or sets the time, in milliseconds, before the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
-             event is raised relative to the last occurrence of the <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+             event is raised relative to the last occurrence of the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
@@ -411,21 +380,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called for each timer tick. It calls any methods that are added through <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+            >This method is called for each timer tick. It calls any methods that are added through <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
-            . If you are inheriting from <see
-             cref="T:System.Windows.Forms.Timer" />
+            . If you are inheriting from <see cref="T:System.Windows.Forms.Timer" />
 
             
 
             , you can override this method.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2">Raising an Event</a>
             </format>
 
@@ -437,8 +403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+            >Raises the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
@@ -446,17 +411,19 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
-           that contains the event data. This is always <see
-           cref="F:System.EventArgs.Empty" />
+           that contains the event data. This is always <see cref="F:System.EventArgs.Empty" />
 
           
 
@@ -479,8 +446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also start the timer by setting the <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+            >You can also start the timer by setting the <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
@@ -508,61 +474,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also stop the timer by setting the <see
-             cref="P:System.Windows.Forms.Timer.Enabled" />
+            >You can also stop the timer by setting the <see cref="P:System.Windows.Forms.Timer.Enabled" />
 
             
 
-             property to false. A <see
-             cref="T:System.Windows.Forms.Timer" />
+             property to false. A <see cref="T:System.Windows.Forms.Timer" />
 
             
 
              object may be enabled and disabled multiple times within the same application session. </para
           >
           <para
-            >Calling <see
-             cref="M:System.Windows.Forms.Timer.Start" />
+            >Calling <see cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
-             after you have disabled a <see
-             cref="T:System.Windows.Forms.Timer" />
+             after you have disabled a <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             by calling <see
-             cref="M:System.Windows.Forms.Timer.Stop" />
+             by calling <see cref="M:System.Windows.Forms.Timer.Stop" />
 
             
 
-             will cause the <see
-             cref="T:System.Windows.Forms.Timer" />
+             will cause the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             to restart the interrupted interval. If your <see
-             cref="T:System.Windows.Forms.Timer" />
+             to restart the interrupted interval. If your <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             is set for a 5000-millisecond interval, and you call <see
-             cref="M:System.Windows.Forms.Timer.Stop" />
+             is set for a 5000-millisecond interval, and you call <see cref="M:System.Windows.Forms.Timer.Stop" />
 
             
 
-             at around 3000 milliseconds, calling <see
-             cref="M:System.Windows.Forms.Timer.Start" />
+             at around 3000 milliseconds, calling <see cref="M:System.Windows.Forms.Timer.Start" />
 
             
 
-             will cause the <see
-             cref="T:System.Windows.Forms.Timer" />
+             will cause the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
-             to wait 5000 milliseconds before raising the <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+             to wait 5000 milliseconds before raising the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
@@ -570,43 +525,35 @@
           >
           <block subset="none" type="note">
             <para
-              >Calling Stop on any <see
-               cref="T:System.Windows.Forms.Timer" />
+              >Calling Stop on any <see cref="T:System.Windows.Forms.Timer" />
 
               
 
-               within a Windows Forms application can cause messages from other <see
-               cref="T:System.Windows.Forms.Timer" />
+               within a Windows Forms application can cause messages from other <see cref="T:System.Windows.Forms.Timer" />
 
               
 
-               components in the application to be processed immediately, because all <see
-               cref="T:System.Windows.Forms.Timer" />
+               components in the application to be processed immediately, because all <see cref="T:System.Windows.Forms.Timer" />
 
               
 
-               components operate on the main application thread. If you have two <see
-               cref="T:System.Windows.Forms.Timer" />
+               components operate on the main application thread. If you have two <see cref="T:System.Windows.Forms.Timer" />
 
               
 
-               components, one set to 700 milliseconds and one set to 500 milliseconds, and you call <see
-               cref="M:System.Windows.Forms.Timer.Stop" />
+               components, one set to 700 milliseconds and one set to 500 milliseconds, and you call <see cref="M:System.Windows.Forms.Timer.Stop" />
 
               
 
-               on the first <see
-               cref="T:System.Windows.Forms.Timer" />
+               on the first <see cref="T:System.Windows.Forms.Timer" />
 
               
 
-              , your application may receive an event callback for the second component first. If this proves problematic, consider using the <see
-               cref="T:System.Threading.Timer" />
+              , your application may receive an event callback for the second component first. If this proves problematic, consider using the <see cref="T:System.Threading.Timer" />
 
               
 
-               class in the <see
-               cref="N:System.Threading" />
+               class in the <see cref="N:System.Threading" />
 
               
 
@@ -667,51 +614,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="Overload:System.Diagnostics.Debug.Assert" />
+            >Calling the <see cref="Overload:System.Diagnostics.Debug.Assert" />
 
             
 
-             method on the <see
-             cref="T:System.Diagnostics.Debug" />
+             method on the <see cref="T:System.Diagnostics.Debug" />
 
             
 
-             class from within the <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+             class from within the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
-             event may not behave as expected, as displaying the assertion dialog box may cause Windows to raise the <see
-             cref="E:System.Windows.Forms.Timer.Tick" />
+             event may not behave as expected, as displaying the assertion dialog box may cause Windows to raise the <see cref="E:System.Windows.Forms.Timer.Tick" />
 
             
 
-             event repeatedly. We recommend that you refrain from testing assertions within this event, and use the <see
-             cref="Overload:System.Diagnostics.Debug.Write" />
+             event repeatedly. We recommend that you refrain from testing assertions within this event, and use the <see cref="Overload:System.Diagnostics.Debug.Write" />
 
             
 
-            , <see
-             cref="Overload:System.Diagnostics.Debug.WriteIf" />
+            , <see cref="Overload:System.Diagnostics.Debug.WriteIf" />
 
             
 
-            , <see
-             cref="Overload:System.Diagnostics.Debug.WriteLine" />
+            , <see cref="Overload:System.Diagnostics.Debug.WriteLine" />
 
             
 
-            , or <see
-             cref="Overload:System.Diagnostics.Debug.WriteLineIf" />
+            , or <see cref="Overload:System.Diagnostics.Debug.WriteLineIf" />
 
             
 
              methods instead.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -741,13 +679,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Timer.ToString" />
+            >The <see cref="M:System.Windows.Forms.Timer.ToString" />
 
             
 
-             method returns a string that includes the value of the <see
-             cref="P:System.Windows.Forms.Timer.Interval" />
+             method returns a string that includes the value of the <see cref="P:System.Windows.Forms.Timer.Interval" />
 
             
 
@@ -757,8 +693,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.Timer" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.Timer" />
 
             
 
@@ -768,8 +703,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.Timer" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.Timer" />
 
             
 

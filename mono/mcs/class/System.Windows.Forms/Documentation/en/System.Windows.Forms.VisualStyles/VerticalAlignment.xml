@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.VerticalAlignment" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.VerticalAlignment" />
 
         
 
-         values represent the return values of the <see
-         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
+         values represent the return values of the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
         
 
-         method when it is called with an argument value of <see
-         cref="F:System.Windows.Forms.VisualStyles.EnumProperty.VerticalAlignment" />
+         method when it is called with an argument value of <see cref="F:System.Windows.Forms.VisualStyles.EnumProperty.VerticalAlignment" />
 
         
 

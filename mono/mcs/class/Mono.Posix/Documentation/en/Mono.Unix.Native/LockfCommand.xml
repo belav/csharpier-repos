@@ -20,8 +20,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.lockf" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.lockf" />
       <paramref name="cmd" />
 
       

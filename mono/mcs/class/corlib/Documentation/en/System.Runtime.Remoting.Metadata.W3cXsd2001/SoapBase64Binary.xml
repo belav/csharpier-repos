@@ -38,7 +38,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >For more information about XSD data types, see the "XML Data Types Reference" in the MSDN Library at <see
-         cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+          cref="http://msdn.microsoft.com/library"
+          >http://msdn.microsoft.com/library</see
+        >
 
         
 
@@ -70,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
 
             
 
@@ -101,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
 
             
 
@@ -110,12 +110,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
@@ -148,8 +151,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -184,13 +186,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see
-             cref="T:System.String" />
+            >Converts the specified <see cref="T:System.String" />
 
             
 
-             into a <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
+             into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
 
             
 
@@ -200,13 +200,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
+            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary" />
 
             
 
-             object that is obtained from <paramref
-             name="value" />
+             object that is obtained from <paramref name="value" />
 
             
 
@@ -214,7 +212,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,13 +245,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary.Value" />
+            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary.Value" />
 
             
 
-             as a <see
-             cref="T:System.String" />
+             as a <see cref="T:System.String" />
 
             
 
@@ -259,13 +259,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that is obtained from <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary.Value" />
+             that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapBase64Binary.Value" />
 
             
 

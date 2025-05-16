@@ -31,23 +31,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Void" />
+        >The <see cref="T:System.Void" />
 
         
 
-         structure is used in the <see
-         cref="N:System.Reflection" />
+         structure is used in the <see cref="N:System.Reflection" />
 
         
 
-         namespace, but is rarely useful in a typical application. The <see
-         cref="T:System.Void" />
+         namespace, but is rarely useful in a typical application. The <see cref="T:System.Void" />
 
         
 
-         structure has no members other than the ones all types inherit from the <see
-         cref="T:System.Object" />
+         structure has no members other than the ones all types inherit from the <see cref="T:System.Object" />
 
         
 

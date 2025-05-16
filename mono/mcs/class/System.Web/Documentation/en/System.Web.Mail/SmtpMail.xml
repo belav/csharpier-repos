@@ -16,21 +16,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The mail message can be delivered either through the SMTP mail service built into Microsoft Windows 2000 or through an arbitrary SMTP server. Types in the <see
-         cref="N:System.Web.Mail" />
+        >The mail message can be delivered either through the SMTP mail service built into Microsoft Windows 2000 or through an arbitrary SMTP server. Types in the <see cref="N:System.Web.Mail" />
 
         
 
          namespace can be used from ASP.NET or from any managed application.</para
       >
       <para
-        >If the <see
-         cref="P:System.Web.Mail.SmtpMail.SmtpServer" />
+        >If the <see cref="P:System.Web.Mail.SmtpMail.SmtpServer" />
 
         
 
-         property is not set, mail is by default queued on a Windows 2000 system, ensuring that the calling program does not block network traffic. If the <see
-         cref="T:System.Web.Mail.SmtpMail" />
+         property is not set, mail is by default queued on a Windows 2000 system, ensuring that the calling program does not block network traffic. If the <see cref="T:System.Web.Mail.SmtpMail" />
 
         
 
@@ -40,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides properties and methods for sending messages using the Collaboration Data Objects for Windows 2000 (CDOSYS) message component. Recommended alternative: <see
-         cref="N:System.Net.Mail" />
+        >Provides properties and methods for sending messages using the Collaboration Data Objects for Windows 2000 (CDOSYS) message component. Recommended alternative: <see cref="N:System.Net.Mail" />
 
         
 
@@ -64,41 +60,33 @@
       </Parameters>
       <Docs>
         <remarks>
-          <para
-            >
-	    This method sends an e-mail to the recipients specified in the <see
-             cref="T:System.Web.Mail.MailMessage" />
+          <para>
+	    This method sends an e-mail to the recipients specified in the <see cref="T:System.Web.Mail.MailMessage" />
 
             
 
               parameter
-	    <paramref
-             name="message" />
+	    <paramref name="message" />
 
             
 
             . The e-mail is sent over the SMTP protocol through the server
-	    specified in <see
-             cref="P:System.Web.Mail.SmtpMail.SmtpServer" />
+	    specified in <see cref="P:System.Web.Mail.SmtpMail.SmtpServer" />
 
             
 
             .
 	  </para
           >
-          <para
-            >
-	    This example shows the typical usage of the <c
-            >SmtpMail.Send</c>
+          <para>
+	    This example shows the typical usage of the <c>SmtpMail.Send</c>
 
             
 
              method. To run this sample you have to change the
 	    e-mail addresses and the SMTP server to real ones.
-	    <example
-            >
-              <code lang="C#"
-                >
+	    <example>
+              <code lang="C#">
 using System;
 using System.Web.Mail;
 
@@ -124,13 +112,11 @@ public class SmtpTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends an e-mail message using arguments supplied in the properties of the <see
-             cref="T:System.Web.Mail.MailMessage" />
+            >Sends an e-mail message using arguments supplied in the properties of the <see cref="T:System.Web.Mail.MailMessage" />
 
             
 
-             class. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+             class. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 
@@ -138,12 +124,15 @@ public class SmtpTest {
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Mail.MailMessage" />
+          The <see cref="T:System.Web.Mail.MailMessage" />
 
           
 
@@ -172,23 +161,19 @@ public class SmtpTest {
       </Parameters>
       <Docs>
         <remarks>
-          <para
-            >
+          <para>
 	    This is a method that sends an e-mail message over the SMTP protocol. It connects
-	    to the SMTP server as specified in <see
-             cref="P:System.Web.Mail.SmtpMail.SmtpServer" />
+	    to the SMTP server as specified in <see cref="P:System.Web.Mail.SmtpMail.SmtpServer" />
 
             
 
              and
-	    sends the e-mail to <paramref
-             name="to" />
+	    sends the e-mail to <paramref name="to" />
 
             
 
             . This method is a simplified version of 
-	    <see
-             cref="M:System.Web.Mail.SmtpMail.Send(MailMessage)" />
+	    <see cref="M:System.Web.Mail.SmtpMail.Send(MailMessage)" />
 
             
 
@@ -196,13 +181,10 @@ public class SmtpTest {
 	    method for sending e-mails.
 	  </para
           >
-          <para
-            >
+          <para>
 	    Here is a simple example to show how to send an e-mail.
-	    <example
-            >
-              <code lang="C#"
-                >
+	    <example>
+              <code lang="C#">
 using System;
 using System.Web.Mail;
 
@@ -222,8 +204,7 @@ public class SmtpTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends an e-mail message using the specified destination parameters. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+            >Sends an e-mail message using the specified destination parameters. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 
@@ -231,28 +212,44 @@ public class SmtpTest {
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the e-mail sender. </param
         >
         <param name="to">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the e-mail recipient. </param
         >
         <param name="subject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The subject line of the e-mail message. </param
         >
         <param name="messageText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -281,8 +278,7 @@ public class SmtpTest {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the SMTP relay mail server to use to send e-mail messages. Recommended alternative: <see
-             cref="N:System.Net.Mail" />
+            >Gets or sets the name of the SMTP relay mail server to use to send e-mail messages. Recommended alternative: <see cref="N:System.Net.Mail" />
 
             
 

@@ -2,39 +2,31 @@
 <clause number="13" title="Conversions">
   <paragraph
     >A conversion enables an expression of one type to be treated as another type. Conversions can be implicit or explicit, and this determines whether an explicit cast is required. <example
-
-      >[Example: For instance, the conversion from type <keyword
-      >int</keyword>
+      >[Example: For instance, the conversion from type <keyword>int</keyword>
 
       
 
-       to type <keyword
-      >long</keyword>
+       to type <keyword>long</keyword>
 
       
 
-       is implicit, so expressions of type <keyword
-      >int</keyword>
+       is implicit, so expressions of type <keyword>int</keyword>
 
       
 
-       can implicitly be treated as type <keyword
-      >long</keyword>
+       can implicitly be treated as type <keyword>long</keyword>
 
       
 
-      . The opposite conversion, from type <keyword
-      >long</keyword>
+      . The opposite conversion, from type <keyword>long</keyword>
 
       
 
-       to type <keyword
-      >int</keyword>
+       to type <keyword>int</keyword>
 
       
 
-      , is explicit and so an explicit cast is required. <code_example
-      >
+      , is explicit and so an explicit cast is required. <code_example>
         <![CDATA[
 int a = 123;  
 long b = a;     // implicit conversion from int to long  
@@ -49,8 +41,7 @@ int c = (int) b;  // explicit conversion from long to int
 
     
 
-     Some conversions are defined by the language. Programs may also define their own conversions (<hyperlink
-    >13.4</hyperlink>
+     Some conversions are defined by the language. Programs may also define their own conversions (<hyperlink>13.4</hyperlink>
 
     
 

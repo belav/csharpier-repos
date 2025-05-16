@@ -35,7 +35,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >For more information about XSD data types, see the "XML Data Types Reference" in the MSDN Library at <see
-         cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+          cref="http://msdn.microsoft.com/library"
+          >http://msdn.microsoft.com/library</see
+        >
 
         
 
@@ -67,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
 
             
 
@@ -98,13 +99,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
 
             
 
-             class with a specified <see
-             cref="T:System.DateTime" />
+             class with a specified <see cref="T:System.DateTime" />
 
             
 
@@ -112,12 +111,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.DateTime" />
+          A <see cref="T:System.DateTime" />
 
           
 
@@ -150,8 +152,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -185,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Parse(System.String)" />
+            >The <see cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Parse(System.String)" />
 
             
 
@@ -244,13 +244,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified <see
-             cref="T:System.String" />
+            >Converts the specified <see cref="T:System.String" />
 
             
 
-             into a <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+             into a <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
 
             
 
@@ -260,13 +258,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
+            >A <see cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay" />
 
             
 
-             object that is obtained from <paramref
-             name="value" />
+             object that is obtained from <paramref name="value" />
 
             
 
@@ -274,12 +270,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.String" />
+          The <see cref="T:System.String" />
 
           
 
@@ -308,13 +307,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
+            >Returns <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
 
             
 
-             as a <see
-             cref="T:System.String" />
+             as a <see cref="T:System.String" />
 
             
 
@@ -324,13 +321,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             that is obtained from <see
-             cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
+             that is obtained from <see cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapMonthDay.Value" />
 
             
 

@@ -30,59 +30,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is recommended for cases where the number of elements in a dictionary is unknown. It takes advantage of the improved performance of a <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+        >This class is recommended for cases where the number of elements in a dictionary is unknown. It takes advantage of the improved performance of a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
-         with small collections, and offers the flexibility of switching to a <see
-         cref="T:System.Collections.Hashtable" />
+         with small collections, and offers the flexibility of switching to a <see cref="T:System.Collections.Hashtable" />
 
         
 
-         which handles larger collections better than <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+         which handles larger collections better than <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
         .</para
       >
       <para
-        >If the initial size of the collection is greater than the optimal size for a <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+        >If the initial size of the collection is greater than the optimal size for a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
-        , the collection is stored in a <see
-         cref="T:System.Collections.Hashtable" />
+        , the collection is stored in a <see cref="T:System.Collections.Hashtable" />
 
         
 
-          to avoid the overhead of copying elements from the <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+          to avoid the overhead of copying elements from the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
-         to a <see
-         cref="T:System.Collections.Hashtable" />
+         to a <see cref="T:System.Collections.Hashtable" />
 
         
 
         .</para
       >
       <para
-        >The constructor accepts a Boolean parameter that allows the user to specify whether the collection ignores the case when comparing strings. If the collection is case-sensitive, it uses the key's implementations of <see
-         cref="M:System.Object.GetHashCode" />
+        >The constructor accepts a Boolean parameter that allows the user to specify whether the collection ignores the case when comparing strings. If the collection is case-sensitive, it uses the key's implementations of <see cref="M:System.Object.GetHashCode" />
 
         
 
-         and <see
-         cref="M:System.Object.Equals(System.Object)" />
+         and <see cref="M:System.Object.Equals(System.Object)" />
 
         
 
-        . If the collection is case-insensitive, it performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. By default, the collection is case-sensitive. For more information on the invariant culture, see <see
-         cref="T:System.Globalization.CultureInfo" />
+        . If the collection is case-insensitive, it performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. By default, the collection is case-sensitive. For more information on the invariant culture, see <see cref="T:System.Globalization.CultureInfo" />
 
         
 
@@ -90,13 +80,11 @@
       >
       <para>A key cannot be null, but a value can.</para>
       <para
-        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
-         cref="T:System.Collections.Specialized.HybridDictionary" />
+        >The foreach statement of the C# language (For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
         
 
-         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.DictionaryEntry" />
+         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
@@ -108,13 +96,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements IDictionary by using a <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+        >Implements IDictionary by using a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
-         while the collection is small, and then switching to a <see
-         cref="T:System.Collections.Hashtable" />
+         while the collection is small, and then switching to a <see cref="T:System.Collections.Hashtable" />
 
         
 
@@ -141,21 +127,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the collection is case-sensitive and uses the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+            >By default, the collection is case-sensitive and uses the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
-             as the hash code provider and the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             as the hash code provider and the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              as the comparer.</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -166,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty case-sensitive <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Creates an empty case-sensitive <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -196,28 +178,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="caseInsensitive" />
+            >If <paramref name="caseInsensitive" />
 
             
 
-             is false, the collection uses the key's implementations of <see
-             cref="M:System.Object.GetHashCode" />
+             is false, the collection uses the key's implementations of <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            . If <paramref
-             name="caseInsensitive" />
+            . If <paramref name="caseInsensitive" />
 
             
 
-             is true, the collection performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. For more information on the invariant culture, see <see
-             cref="T:System.Globalization.CultureInfo" />
+             is true, the collection performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. For more information on the invariant culture, see <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -228,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Creates an empty <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -237,12 +213,15 @@
           >
         </summary>
         <param name="caseInsensitive">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Boolean that denotes whether the <see
-           cref="T:System.Collections.Specialized.HybridDictionary" />
+          A Boolean that denotes whether the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
           
 
@@ -270,62 +249,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the initial size of the collection is greater than the optimal size for a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >If the initial size of the collection is greater than the optimal size for a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , the collection is stored in a <see
-             cref="T:System.Collections.Hashtable" />
+            , the collection is stored in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-              to avoid the overhead of copying elements from the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+              to avoid the overhead of copying elements from the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             to the <see
-             cref="T:System.Collections.Hashtable" />
+             to the <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >By default, the collection is case-sensitive and uses the key's implementation of <see
-             cref="M:System.Object.GetHashCode" />
+            >By default, the collection is case-sensitive and uses the key's implementation of <see cref="M:System.Object.GetHashCode" />
 
             
 
-             as the hash code provider and the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             as the hash code provider and the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
              as the comparer.</para
           >
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
              must be unique.</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <paramref
-             name="initialSize" />
+             is <paramref name="initialSize" />
 
             
 
@@ -335,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a case-sensitive <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Creates a case-sensitive <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -344,12 +312,15 @@
           >
         </summary>
         <param name="initialSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of entries that the <see
-           cref="T:System.Collections.Specialized.HybridDictionary" />
+          The approximate number of entries that the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
           
 
@@ -381,69 +352,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the initial size of the collection is greater than the optimal size for a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >If the initial size of the collection is greater than the optimal size for a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , the collection is stored in a <see
-             cref="T:System.Collections.Hashtable" />
+            , the collection is stored in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-              to avoid the overhead of copying elements from the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+              to avoid the overhead of copying elements from the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             to the <see
-             cref="T:System.Collections.Hashtable" />
+             to the <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >If <paramref
-             name="caseInsensitive" />
+            >If <paramref name="caseInsensitive" />
 
             
 
-             is false, the collection uses the key's implementations of <see
-             cref="M:System.Object.GetHashCode" />
+             is false, the collection uses the key's implementations of <see cref="M:System.Object.GetHashCode" />
 
             
 
-             and <see
-             cref="M:System.Object.Equals(System.Object)" />
+             and <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-            . If <paramref
-             name="caseInsensitive" />
+            . If <paramref name="caseInsensitive" />
 
             
 
-             is true, the collection performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. For more information on the invariant culture, see <see
-             cref="T:System.Globalization.CultureInfo" />
+             is true, the collection performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. For more information on the invariant culture, see <see cref="T:System.Globalization.CultureInfo" />
 
             
 
             .</para
           >
           <para
-            >This constructor is an O(<paramref
-             name="n" />
+            >This constructor is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <paramref
-             name="initialSize" />
+             is <paramref name="initialSize" />
 
             
 
@@ -453,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Creates a <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -462,24 +420,30 @@
           >
         </summary>
         <param name="initialSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The approximate number of entries that the <see
-           cref="T:System.Collections.Specialized.HybridDictionary" />
+          The approximate number of entries that the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
           
 
            can initially contain. </param
         >
         <param name="caseInsensitive">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Boolean that denotes whether the <see
-           cref="T:System.Collections.Specialized.HybridDictionary" />
+          A Boolean that denotes whether the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
           
 
@@ -512,61 +476,50 @@
           <para>An object that has no correlation between its state and its hash code value should typically not be used as the key. For example, String objects are better than StringBuilder objects for use as keys.</para>
           <para>A key cannot be null, but a value can.</para>
           <para
-            >You can also use the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.Item(System.Object)" />
+            >You can also use the <see cref="P:System.Collections.Specialized.HybridDictionary.Item(System.Object)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             property to add new elements by setting the value of a key that does not exist in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-            , setting the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.Item(System.Object)" />
+            , setting the <see cref="P:System.Collections.Specialized.HybridDictionary.Item(System.Object)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.Specialized.HybridDictionary.Add(System.Object,System.Object)" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.Specialized.HybridDictionary.Add(System.Object,System.Object)" />
 
             
 
              method does not modify existing elements.</para
           >
           <para
-            >When the number of elements becomes greater than the optimal size for a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >When the number of elements becomes greater than the optimal size for a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , the elements are copied from the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            , the elements are copied from the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             to a <see
-             cref="T:System.Collections.Hashtable" />
+             to a <see cref="T:System.Collections.Hashtable" />
 
             
 
-            . However, this only happens once. If the collection is already stored in a <see
-             cref="T:System.Collections.Hashtable" />
+            . However, this only happens once. If the collection is already stored in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             and the number of elements falls below the optimal size for a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             and the number of elements falls below the optimal size for a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , the collection remains in the <see
-             cref="T:System.Collections.Hashtable" />
+            , the collection remains in the <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -577,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an entry with the specified key and value into the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Adds an entry with the specified key and value into the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -586,14 +538,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the entry to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -628,31 +588,26 @@
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
-            >If the collection is already stored in a <see
-             cref="T:System.Collections.Hashtable" />
+            >If the collection is already stored in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-            , the collection remains in the <see
-             cref="T:System.Collections.Hashtable" />
+            , the collection remains in the <see cref="T:System.Collections.Hashtable" />
 
             
 
             .</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.HybridDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.HybridDictionary.Count" />
 
             
 
@@ -662,8 +617,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all entries from the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Removes all entries from the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -695,38 +649,31 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method is an O(1) operation.</para>
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="key" />
+             methods on <paramref name="key" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -736,8 +683,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Determines whether the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -747,8 +693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >true if the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -756,12 +701,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.Specialized.HybridDictionary" />
+          The key to locate in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
           
 
@@ -792,47 +740,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are copied to the <see
-             cref="T:System.Array" />
+            >The elements are copied to the <see cref="T:System.Array" />
 
             
 
-             in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             in the same order in which the enumerator iterates through the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
             .</para
           >
           <para
-            >To copy only the keys in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >To copy only the keys in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
             , use HybridDictionary.Keys.CopyTo.</para
           >
           <para
-            >To copy only the values in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >To copy only the values in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
             , use HybridDictionary.Values.CopyTo.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.HybridDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.HybridDictionary.Count" />
 
             
 
@@ -842,13 +783,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Copies the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-             entries to a one-dimensional <see
-             cref="T:System.Array" />
+             entries to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -856,39 +795,42 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the <see
-           cref="T:System.Collections.DictionaryEntry" />
+           that is the destination of the <see cref="T:System.Collections.DictionaryEntry" />
 
           
 
-           objects copied from <see
-           cref="T:System.Collections.Specialized.HybridDictionary" />
+           objects copied from <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -914,8 +856,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value pairs contained in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -949,23 +890,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -976,66 +913,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -1048,13 +973,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             that iterates through the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1064,13 +987,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             for the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1100,13 +1021,11 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.IsFixedSize" />
+             implements the <see cref="P:System.Collections.Specialized.HybridDictionary.IsFixedSize" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.IDictionary" />
+             property because it is required by the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1119,8 +1038,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1150,13 +1068,11 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.IsReadOnly" />
+             implements the <see cref="P:System.Collections.Specialized.HybridDictionary.IsReadOnly" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.IDictionary" />
+             property because it is required by the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -1169,8 +1085,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1200,26 +1115,22 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.IsSynchronized" />
+             implements the <see cref="P:System.Collections.Specialized.HybridDictionary.IsSynchronized" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.ICollection" />
+             property because it is required by the <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Derived classes can provide a synchronized version of the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
 
             
 
@@ -1230,8 +1141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1282,46 +1192,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.Values" />
+             returned by the <see cref="P:System.Collections.Specialized.HybridDictionary.Values" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the keys in the original <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             refers back to the keys in the original <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            . Therefore, changes to the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1332,13 +1234,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the keys in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             containing the keys in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1369,41 +1269,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >If the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-             does not contain an element with the specified key, the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             does not contain an element with the specified key, the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
              remains unchanged. No exception is thrown.</para
           >
           <para
-            >If the collection is already stored in a <see
-             cref="T:System.Collections.Hashtable" />
+            >If the collection is already stored in a <see cref="T:System.Collections.Hashtable" />
 
             
 
-             and the number of elements falls below the optimal size for a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             and the number of elements falls below the optimal size for a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , the collection remains in the <see
-             cref="T:System.Collections.Hashtable" />
+            , the collection remains in the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             to avoid the overhead of copying elements from the <see
-             cref="T:System.Collections.Hashtable" />
+             to avoid the overhead of copying elements from the <see cref="T:System.Collections.Hashtable" />
 
             
 
-             back to a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             back to a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1414,8 +1307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the entry with the specified key from the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Removes the entry with the specified key from the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1423,7 +1315,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1448,33 +1344,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             of the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            , not directly on the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1485,8 +1375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1520,23 +1409,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1547,99 +1432,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1651,13 +1518,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             that iterates through the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1667,13 +1532,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             for the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
@@ -1705,46 +1568,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Specialized.HybridDictionary.Keys" />
+             returned by the <see cref="P:System.Collections.Specialized.HybridDictionary.Keys" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the values in the original <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             refers back to the values in the original <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+            . Therefore, changes to the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1755,13 +1610,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the values in the <see
-             cref="T:System.Collections.Specialized.HybridDictionary" />
+             containing the values in the <see cref="T:System.Collections.Specialized.HybridDictionary" />
 
             
 

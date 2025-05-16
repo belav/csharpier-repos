@@ -59,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.UnknownWrapper" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.UnknownWrapper" />
 
             
 
@@ -68,7 +67,11 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

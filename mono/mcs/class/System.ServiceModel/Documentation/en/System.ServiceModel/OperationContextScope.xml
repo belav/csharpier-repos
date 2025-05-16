@@ -21,41 +21,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.OperationContextScope" />
+        >Use the <see cref="T:System.ServiceModel.OperationContextScope" />
 
         
 
-         class to create a scope for a specific <see
-         cref="T:System.ServiceModel.OperationContext" />
+         class to create a scope for a specific <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
-         object or a scope for a new <see
-         cref="T:System.ServiceModel.OperationContext" />
+         object or a scope for a new <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
-         object using a specified <see
-         cref="T:System.ServiceModel.IContextChannel" />
+         object using a specified <see cref="T:System.ServiceModel.IContextChannel" />
 
         
 
-         object. An <see
-         cref="T:System.ServiceModel.OperationContextScope" />
+         object. An <see cref="T:System.ServiceModel.OperationContextScope" />
 
         
 
          can be used in a indigo1 service or indigo2 client application.</para
       >
       <para
-        >Once the <see
-         cref="T:System.ServiceModel.OperationContextScope" />
+        >Once the <see cref="T:System.ServiceModel.OperationContextScope" />
 
         
 
-         object has established the current operation context, you can use the <see
-         cref="T:System.ServiceModel.OperationContext" />
+         object has established the current operation context, you can use the <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
@@ -73,13 +66,11 @@
         </item>
         <item>
           <para
-            >Access the channel associated with the <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Access the channel associated with the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
-             object or (if the channel implements <see
-             cref="T:System.ServiceModel.Channels.ISession" />
+             object or (if the channel implements <see cref="T:System.ServiceModel.Channels.ISession" />
 
             
 
@@ -88,33 +79,27 @@
         </item>
       </list>
       <para
-        >When an <see
-         cref="T:System.ServiceModel.OperationContextScope" />
+        >When an <see cref="T:System.ServiceModel.OperationContextScope" />
 
         
 
-         is created, the current <see
-         cref="T:System.ServiceModel.OperationContext" />
+         is created, the current <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
-         is stored and the new <see
-         cref="T:System.ServiceModel.OperationContext" />
+         is stored and the new <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
-         becomes the one returned by the <see
-         cref="P:System.ServiceModel.OperationContext.Current" />
+         becomes the one returned by the <see cref="P:System.ServiceModel.OperationContext.Current" />
 
         
 
-         property. When the <see
-         cref="T:System.ServiceModel.OperationContextScope" />
+         property. When the <see cref="T:System.ServiceModel.OperationContextScope" />
 
         
 
-         is disposed, the original <see
-         cref="T:System.ServiceModel.OperationContext" />
+         is disposed, the original <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
@@ -127,8 +112,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creates a block within which an <see
-         cref="T:System.ServiceModel.OperationContext" />
+        >Creates a block within which an <see cref="T:System.ServiceModel.OperationContext" />
 
         
 
@@ -157,36 +141,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.OperationContextScope.#ctor(System.ServiceModel.IContextChannel)" />
+            >Use the <see cref="M:System.ServiceModel.OperationContextScope.#ctor(System.ServiceModel.IContextChannel)" />
 
             
 
-             constructor to create a new <see
-             cref="T:System.ServiceModel.OperationContext" />
+             constructor to create a new <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
-             for a client channel that can be used to add or modify outbound message headers, read incoming message headers, or access other run-time properties of the <see
-             cref="T:System.ServiceModel.OperationContext" />
+             for a client channel that can be used to add or modify outbound message headers, read incoming message headers, or access other run-time properties of the <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
             .</para
           >
           <para
-            >The headers added to the <see
-             cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" />
+            >The headers added to the <see cref="P:System.ServiceModel.OperationContext.IncomingMessageHeaders" />
 
             
 
-             property of the newly created <see
-             cref="T:System.ServiceModel.OperationContext" />
+             property of the newly created <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
-             apply only to the channel that was passed to the <see
-             cref="Overload:System.ServiceModel.OperationContextScope.#ctor" />
+             apply only to the channel that was passed to the <see cref="Overload:System.ServiceModel.OperationContextScope.#ctor" />
 
             
 
@@ -196,18 +174,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.OperationContextScope" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationContextScope" />
 
             
 
-             class that uses the specified <see
-             cref="T:System.ServiceModel.IContextChannel" />
+             class that uses the specified <see cref="T:System.ServiceModel.IContextChannel" />
 
             
 
-             to create a new <see
-             cref="T:System.ServiceModel.OperationContext" />
+             to create a new <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -215,12 +190,15 @@
           >
         </summary>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The channel to use when creating the scope for a new <see
-           cref="T:System.ServiceModel.OperationContext" />
+          The channel to use when creating the scope for a new <see cref="T:System.ServiceModel.OperationContext" />
 
           
 
@@ -248,13 +226,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.OperationContextScope.#ctor(System.ServiceModel.OperationContext)" />
+            >Use the <see cref="M:System.ServiceModel.OperationContextScope.#ctor(System.ServiceModel.OperationContext)" />
 
             
 
-             constructor to create a code block within which the specified <see
-             cref="T:System.ServiceModel.OperationContextScope" />
+             constructor to create a code block within which the specified <see cref="T:System.ServiceModel.OperationContextScope" />
 
             
 
@@ -264,13 +240,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.OperationContextScope" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationContextScope" />
 
             
 
-             class to create a scope for the specified <see
-             cref="T:System.ServiceModel.OperationContext" />
+             class to create a scope for the specified <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
@@ -278,12 +252,15 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The active <see
-           cref="T:System.ServiceModel.OperationContext" />
+          The active <see cref="T:System.ServiceModel.OperationContext" />
 
           
 
@@ -310,13 +287,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Restores the original <see
-             cref="T:System.ServiceModel.OperationContext" />
+            >Restores the original <see cref="T:System.ServiceModel.OperationContext" />
 
             
 
-             to the active context and recycles the <see
-             cref="T:System.ServiceModel.OperationContextScope" />
+             to the active context and recycles the <see cref="T:System.ServiceModel.OperationContextScope" />
 
             
 

@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information on this element, see <format
-         type="text/html">
+        >For more information on this element, see <format type="text/html">
           <a href="0f4dc73d-d95d-4193-9755-7df4cf2b8e1c">&lt;allowedAudienceUris&gt;</a>
         </format>
       </para>
@@ -51,8 +50,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.AllowedAudienceUriElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.AllowedAudienceUriElement" />
 
             
 

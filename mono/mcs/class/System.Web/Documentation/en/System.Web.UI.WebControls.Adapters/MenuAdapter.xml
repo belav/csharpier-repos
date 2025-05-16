@@ -21,62 +21,52 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+        >A <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
         
 
-         modifies the markup or behavior of a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         modifies the markup or behavior of a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
          control for a specific browser or class of browsers, or acts as a filter on some capability.</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Web.UI.WebControls.MenuItem" />
+        >By default, the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
         
 
-         objects in the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         objects in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control are rendered as hyperlinks to accommodate menu navigation. The <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         control are rendered as hyperlinks to accommodate menu navigation. The <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         class maintains state by implementing the <see
-         cref="T:System.Web.UI.IPostBackEventHandler" />
+         class maintains state by implementing the <see cref="T:System.Web.UI.IPostBackEventHandler" />
 
         
 
-         interface so that it can respond to and raise specific events during postback. You can extend the <see
-         cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+         interface so that it can respond to and raise specific events during postback. You can extend the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
         
 
-         class to further customize rendering or behavior of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         class to further customize rendering or behavior of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
          control. </para
       >
       <para
-        >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. The <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+        >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. The <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
          class uses browser definition files to identify the characteristics of the client browser and to map the adapter to the browser type.</para
       >
       <para
-        >For more information about adaptive rendering in ASP.NET, see <format
-         type="text/html">
+        >For more information about adaptive rendering in ASP.NET, see <format type="text/html">
           <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
             >Architectural Overview of Adaptive Control Behavior</a
           >
@@ -90,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the means to modify the behavior of the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >Provides the means to modify the behavior of the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -109,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. After the adapter is found, the control holds a reference to the mapped adapter instance in its <see
-             cref="P:System.Web.UI.Control.Adapter" />
+            >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. After the adapter is found, the control holds a reference to the mapped adapter instance in its <see cref="P:System.Web.UI.Control.Adapter" />
 
             
 
@@ -120,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
             
 
@@ -148,8 +135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Adapters.MenuAdapter.Control" />
+            >The <see cref="P:System.Web.UI.WebControls.Adapters.MenuAdapter.Control" />
 
             
 
@@ -159,13 +145,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a strongly typed reference to the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Retrieves a strongly typed reference to the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control associated with this <see
-             cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+             control associated with this <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
             
 
@@ -196,43 +180,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an adapter needs to maintain private state information, it can override the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.LoadAdapterControlState(System.Object)" />
+            >When an adapter needs to maintain private state information, it can override the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.LoadAdapterControlState(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+             and <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
 
             
 
-             methods. In the case of the <see
-             cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+             methods. In the case of the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
             
 
-             class, where the displayed menu hierarchy is dependent on the previously selected <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             class, where the displayed menu hierarchy is dependent on the previously selected <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object, <paramref
-             name="state" />
+             object, <paramref name="state" />
 
             
 
-             provides a dictionary of name/value pairs containing the path of the selected item in the menu's hierarchy. The <paramref
-             name="state" />
+             provides a dictionary of name/value pairs containing the path of the selected item in the menu's hierarchy. The <paramref name="state" />
 
             
 
-             parameter is a <see
-             cref="T:System.Web.UI.Pair" />
+             parameter is a <see cref="T:System.Web.UI.Pair" />
 
             
 
-             object saved by the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+             object saved by the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
 
             
 
@@ -243,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Loads any control state information that was saved by the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+            >Loads any control state information that was saved by the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
 
             
 
@@ -252,12 +227,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -281,36 +259,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
 
             
 
-             method registers the associated control as one that requires control state. By default, the .NET Framework calls the Web server control's own <see
-             cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+             method registers the associated control as one that requires control state. By default, the .NET Framework calls the Web server control's own <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
 
             
 
-             method. However, after the <see
-             cref="P:System.Web.UI.Control.Adapter" />
+             method. However, after the <see cref="P:System.Web.UI.Control.Adapter" />
 
             
 
-             property of the server control is set, the .NET Framework will call the adapter's implementation of the <see
-             cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+             property of the server control is set, the .NET Framework will call the adapter's implementation of the <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
 
             
 
              method instead of the control's implementation.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
 
             
 
-             method to initialize settings in the control. During a postback, this is an important phase for managing interaction with existing view-state data. For more information, see <format
-             type="text/html">
+             method to initialize settings in the control. During a postback, this is an important phase for managing interaction with existing view-state data. For more information, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
                 >Architectural Overview of Adaptive Control Behavior</a
               >
@@ -324,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers the associated <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Registers the associated <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -333,12 +304,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -362,54 +336,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
 
             
 
-             method calls an internal OnPreRender method in the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method calls an internal OnPreRender method in the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
              class. All other pre-rendering functions of the parent classes, such as data binding, applying styles, and event assignments perform as expected.</para
           >
           <para
-            >By default, the .NET Framework calls the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >By default, the .NET Framework calls the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control's <see
-             cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
+             control's <see cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
 
             
 
-             method. However, after the <see
-             cref="P:System.Web.UI.Control.Adapter" />
+             method. However, after the <see cref="P:System.Web.UI.Control.Adapter" />
 
             
 
-             property of that control is set, the .NET Framework will call the adapter's implementation of the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
+             property of that control is set, the .NET Framework will call the adapter's implementation of the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
 
             
 
              method instead of the control's implementation.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
 
             
 
-             method to finalize any settings in the control. Changes made to control properties in this phase will be saved to view state, but changes made in the <see
-             cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+             method to finalize any settings in the control. Changes made to control properties in this phase will be saved to view state, but changes made in the <see cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method are not saved. For more information, see <format
-             type="text/html">
+             method are not saved. For more information, see <format type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
                 >Architectural Overview of Adaptive Control Behavior</a
               >
@@ -423,13 +388,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Handles the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+            >Handles the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
-             method for the associated <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method for the associated <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -437,12 +400,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -467,46 +433,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RaisePostBackEvent(System.String)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RaisePostBackEvent(System.String)" />
 
             
 
-             method is called when the <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+             method is called when the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 
-             event is raised, and is used to maintain the navigation path of the menu. The <paramref
-             name="eventArgument" />
+             event is raised, and is used to maintain the navigation path of the menu. The <paramref name="eventArgument" />
 
             
 
              parameter contains a delimited string of menu items that identify the current location in the menu hierarchy. </para
           >
           <para
-            >The page passes the value of <paramref
-             name="eventArgument" />
+            >The page passes the value of <paramref name="eventArgument" />
 
             
 
-             to the associated control's <see
-             cref="M:System.Web.UI.WebControls.Menu.RaisePostBackEvent(System.String)" />
+             to the associated control's <see cref="M:System.Web.UI.WebControls.Menu.RaisePostBackEvent(System.String)" />
 
             
 
-             method. The associated <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method. The associated <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control also renders the markup element that causes the postback to occur. If the control renders client-side script for postback, the argument from the script is passed in the <paramref
-             name="eventArgument" />
+             control also renders the markup element that causes the postback to occur. If the control renders client-side script for postback, the argument from the script is passed in the <paramref name="eventArgument" />
 
             
 
-             parameter. If the postback is caused by a simple submit, <paramref
-             name="eventArgument" />
+             parameter. If the postback is caused by a simple submit, <paramref name="eventArgument" />
 
             
 
@@ -518,12 +476,15 @@
           <para>Used to maintain the path of the menu when a postback event is raised.</para>
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -551,41 +512,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the response stream for the client browser. The <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the response stream for the client browser. The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             objects will be rendered individually in the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             objects will be rendered individually in the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method and the control will be closed with a call to the subsequent <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+             method and the control will be closed with a call to the subsequent <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method.</para
           >
           <para
-            >Override <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+            >Override <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             when you want to implement custom behavior. For example, override the method to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. Use the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+             when you want to implement custom behavior. For example, override the method to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. Use the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method in conjunction with the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+             method in conjunction with the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -597,12 +551,15 @@
           <para>Adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the browser or device.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -630,36 +587,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method writes the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method writes the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             objects of the associated <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             objects of the associated <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control to the output stream as hyperlinks. The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             control to the output stream as hyperlinks. The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is called from the <see
-             cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+             method is called from the <see cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method and is used to perform modifications to the markup code that is rendered to a device browser.</para
           >
           <para
-            >Control properties should be set prior to this phase of the life cycle, and only the actual markup creation for the control done here. Changes made to the control in this stage of the life cycle are not saved to view state. For saving changes made to the control, override the <see
-             cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+            >Control properties should be set prior to this phase of the life cycle, and only the actual markup creation for the control done here. Changes made to the control in this stage of the life cycle are not saved to view state. For saving changes made to the control, override the <see cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
             
 
@@ -669,8 +620,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the associated menu items in the associated <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+            >Writes the associated menu items in the associated <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
@@ -678,12 +628,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -711,41 +664,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method writes the markup for the closing tag of the control to the output stream emitted to the response stream for the client browser. The attributes, style attributes, and opening tag are rendered in the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+             method writes the markup for the closing tag of the control to the output stream emitted to the response stream for the client browser. The attributes, style attributes, and opening tag are rendered in the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method. The <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method. The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             objects are rendered individually in the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             objects are rendered individually in the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
              method.</para
           >
           <para
-            >Override <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+            >Override <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             when you want to implement custom behavior. For example, override the method to write multiple closing tags to the response stream after any control content, such as &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;. Use the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+             when you want to implement custom behavior. For example, override the method to write multiple closing tags to the response stream after any control content, such as &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;. Use the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method in conjunction with the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+             method in conjunction with the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
             
 
@@ -757,12 +703,15 @@
           <para>Creates final markup and writes the markup for the closing tag of the control to the output stream emitted to the browser or device.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -794,33 +743,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderItem(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.MenuItem,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderItem(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.MenuItem,System.Int32)" />
 
             
 
-             method is called from the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             method is called from the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to retrieve the styles and spacing attributes from the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to retrieve the styles and spacing attributes from the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
-             object and apply them to a newly created hyperlink element. The menu hierarchy is traversed in the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+             object and apply them to a newly created hyperlink element. The menu hierarchy is traversed in the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method and will call the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderItem(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.MenuItem,System.Int32)" />
+             method and will call the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderItem(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.MenuItem,System.Int32)" />
 
             
 
-             method to render each item. Each item is rendered as a hyperlink and inherits the properties and styles of the specified <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+             method to render each item. Each item is rendered as a hyperlink and inherits the properties and styles of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 
@@ -832,13 +775,11 @@
             </item>
             <item>
               <para
-                >A link to navigate to the target specified in the <see
-                 cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
+                >A link to navigate to the target specified in the <see cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
 
                 
 
-                 property of the <see
-                 cref="T:System.Web.UI.WebControls.MenuItem" />
+                 property of the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
                 
 
@@ -852,36 +793,45 @@
           <para>Renders a single menu item as a hyperlink.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          The <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
            instance containing methods to build and render the device-specific output.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
            object containing the properties to write to the response stream. </param
         >
         <param name="position">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position of the specified <see
-           cref="T:System.Web.UI.WebControls.MenuItem" />
+          The position of the specified <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
           
 
@@ -906,28 +856,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+            >The <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
 
             
 
-             method uses the <see
-             cref="T:System.Web.UI.WebControls.Menu" />
+             method uses the <see cref="T:System.Web.UI.WebControls.Menu" />
 
             
 
-             control state to maintain the current navigation path of the menu. When an adapter needs to maintain private state information, it can override the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.LoadAdapterControlState(System.Object)" />
+             control state to maintain the current navigation path of the menu. When an adapter needs to maintain private state information, it can override the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.LoadAdapterControlState(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+             and <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
 
             
 
-             methods. An adapter might maintain private control state when there are complex features that need to maintain state across requests, separate from the associated control's state. The adapter needs to register for control state during the <see
-             cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
+             methods. An adapter might maintain private control state when there are complex features that need to maintain state across requests, separate from the associated control's state. The adapter needs to register for control state during the <see cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
 
             
 
@@ -941,13 +886,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that contains the adapter's control state information as a <see
-             cref="T:System.Web.UI.StateBag" />
+             that contains the adapter's control state information as a <see cref="T:System.Web.UI.StateBag" />
 
             
 
@@ -975,23 +918,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+            >The <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 
-             method enables the <see
-             cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+             method enables the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
             
 
-             class to process an event that is raised when a page is posted back to the server. The page passes <paramref
-             name="eventArgument" />
+             class to process an event that is raised when a page is posted back to the server. The page passes <paramref name="eventArgument" />
 
             
 
-             to the <see
-             cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+             to the <see cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
             
 
@@ -1001,8 +940,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enables the <see
-             cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+            >Enables the <see cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
 
             
 
@@ -1010,12 +948,15 @@
           >
         </summary>
         <param name="eventArgument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 

@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following table shows the configuration attributes of the <format
-         type="text/html">
+        >The following table shows the configuration attributes of the <format type="text/html">
           <a href="37a548d8-fade-4ac5-82ec-b49b6c6cb22a">Proxy Element (Network Settings)</a>
         </format>
 
@@ -100,13 +99,11 @@
         </item>
       </list>
       <para
-        >This class is used to specify and configure the Web proxy server to use for requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to specify and configure the Web proxy server to use for requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -138,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.ProxyElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.ProxyElement" />
 
             
 
@@ -177,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Net.Configuration.ProxyElement.AutoDetectValues" />
+            >Gets or sets an <see cref="T:System.Net.Configuration.ProxyElement.AutoDetectValues" />
 
             
 
@@ -298,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Uri" />
+            >Gets or sets an <see cref="T:System.Uri" />
 
             
 
@@ -337,8 +331,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 

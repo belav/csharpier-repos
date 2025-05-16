@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -19,8 +21,7 @@
   >
   <Docs>
     <summary
-      >A <see
-       cref="Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+      >A <see cref="Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
 
       
 
@@ -55,33 +56,27 @@
       <Docs>
         <summary>Returns data types using contained datatype providers.</summary>
         <param name="name"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that represents the local type name.</param
         >
         <param name="ns"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that represents the namespace (datatype library).</param
         >
         <param name="parameters"
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngParamList" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngParamList" />
 
           
 
           ; The parameters for this type.</param
         >
-        <returns
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatype" />
-        </returns>
+        <returns>a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatype" /></returns>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -106,17 +101,13 @@
       <Parameters />
       <Docs>
         <summary
-          >The default provider used by <see
-           cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" />
+          >The default provider used by <see cref="M:Commons.Xml.Relaxng.RelaxngPattern.Read" />
 
           
 
           . This provider support default namespace types ("string" and "token") and XML Schema datatypes (identified by the namespace http://www.w3.org/2001/XMLSchema-datatypes ).</summary
         >
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngMergedProvider" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngMergedProvider" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -134,37 +125,32 @@
       </Parameters>
       <Docs>
         <summary
-          >This indexer is used to get or set each <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+          >This indexer is used to get or set each <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
 
           
 
            instance indexed by the parameter datatype library URI.</summary
         >
         <param name="ns"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that indicates the datatype library namespace.</param
         >
         <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+          >a <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
 
           
 
            that is identified by the namespace. Returns null if no datatype provider is registered by this provider.</value
         >
         <remarks
-          >Note that returned <see
-           cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+          >Note that returned <see cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
 
           
 
-           does not always support the datatypes indicated by the datatype library URI. <see
-           cref="M:Commons.Xml.Relaxng.RelaxngDatatypeProvider.GetDatatype" />
+           does not always support the datatypes indicated by the datatype library URI. <see cref="M:Commons.Xml.Relaxng.RelaxngDatatypeProvider.GetDatatype" />
 
           
 

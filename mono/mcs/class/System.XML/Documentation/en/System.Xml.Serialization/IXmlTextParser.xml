@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You should not implement the <see
-         cref="T:System.Xml.Serialization.IXmlTextParser" />
+        >You should not implement the <see cref="T:System.Xml.Serialization.IXmlTextParser" />
 
         
 
-         interface in your code. Instead use the <see
-         cref="P:System.Xml.XmlTextReader.Normalization" />
+         interface in your code. Instead use the <see cref="P:System.Xml.XmlTextReader.Normalization" />
 
         
 
-         property of the <see
-         cref="T:System.Xml.XmlTextReader" />
+         property of the <see cref="T:System.Xml.XmlTextReader" />
 
         
 
@@ -37,8 +34,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Establishes a <see
-         cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
+        >Establishes a <see cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
 
         
 
@@ -64,23 +60,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not implement the <see
-             cref="T:System.Xml.Serialization.IXmlTextParser" />
+            >You should not implement the <see cref="T:System.Xml.Serialization.IXmlTextParser" />
 
             
 
-             interface and <see
-             cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
+             interface and <see cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
 
             
 
-             property in your code. Instead use the <see
-             cref="P:System.Xml.XmlTextReader.Normalization" />
+             property in your code. Instead use the <see cref="P:System.Xml.XmlTextReader.Normalization" />
 
             
 
-             property of the <see
-             cref="T:System.Xml.XmlTextReader" />
+             property of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -116,23 +108,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not implement the <see
-             cref="T:System.Xml.Serialization.IXmlTextParser" />
+            >You should not implement the <see cref="T:System.Xml.Serialization.IXmlTextParser" />
 
             
 
-             interface and <see
-             cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
+             interface and <see cref="P:System.Xml.Serialization.IXmlTextParser.Normalized" />
 
             
 
-             property in your code. Instead use the <see
-             cref="P:System.Xml.XmlTextReader.Normalization" />
+             property in your code. Instead use the <see cref="P:System.Xml.XmlTextReader.Normalization" />
 
             
 
-             property of the <see
-             cref="T:System.Xml.XmlTextReader" />
+             property of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 

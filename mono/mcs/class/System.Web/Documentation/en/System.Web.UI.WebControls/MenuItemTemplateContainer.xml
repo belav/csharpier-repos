@@ -24,13 +24,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
 
         
 
-         class is used by the <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         class is used by the <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -38,8 +36,7 @@
       >
       <block subset="none" type="note">
         <para
-          >This class is used by control developers primarily when extending the <see
-           cref="T:System.Web.UI.WebControls.Menu" />
+          >This class is used by control developers primarily when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
           
 
@@ -47,31 +44,26 @@
         >
       </block>
       <para
-        >You can define a custom template for the dynamic and static menu items of a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >You can define a custom template for the dynamic and static menu items of a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
-         control by using the <see
-         cref="P:System.Web.UI.WebControls.Menu.DynamicItemTemplate" />
+         control by using the <see cref="P:System.Web.UI.WebControls.Menu.DynamicItemTemplate" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Menu.StaticItemTemplate" />
+         and <see cref="P:System.Web.UI.WebControls.Menu.StaticItemTemplate" />
 
         
 
          properties, respectively.</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
 
         
 
-         class, see the <see
-         cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+         class, see the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
 
         
 
@@ -81,8 +73,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a container that holds the contents of a templated menu item in a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+        >Represents a container that holds the contents of a templated menu item in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -107,16 +98,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
 
             
 
              class using the specified menu item index and menu item.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
 
             
 
@@ -141,8 +130,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="dataItem" />
+                  >The value of the <paramref name="dataItem" />
 
                   
 
@@ -158,8 +146,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="itemIndex" />
+                  >The value of the <paramref name="itemIndex" />
 
                   
 
@@ -172,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuItemTemplateContainer" />
 
             
 
@@ -181,7 +167,11 @@
           >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.DataItem" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.DataItem" />
 
             
 
@@ -213,8 +202,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property is used primarily by control developers when extending the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This property is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -243,8 +231,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.ItemIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuItemTemplateContainer.ItemIndex" />
 
             
 
@@ -252,8 +239,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property is used primarily by control developers when extending the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This property is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -289,8 +275,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.MenuItemTemplateContainer.OnBubbleEvent(System.Object,System.EventArgs)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.MenuItemTemplateContainer.OnBubbleEvent(System.Object,System.EventArgs)" />
 
             
 
@@ -298,8 +283,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is used primarily by control developers when extending the <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >This method is used primarily by control developers when extending the <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -316,7 +300,11 @@
           <para>true to indicate that this method is passing an event raised by a control within the container up the page's UI server control hierarchy; otherwise, false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -366,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index value of the <see
-             cref="T:System.Web.UI.WebControls.MenuItem" />
+            >Gets the index value of the <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
             
 

@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a combination of a user's identity, an access mask, and audit conditions. An <see
-         cref="T:System.Security.AccessControl.ObjectAuditRule" />
+        >Represents a combination of a user's identity, an access mask, and audit conditions. An <see cref="T:System.Security.AccessControl.ObjectAuditRule" />
 
         
 
@@ -63,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.AccessControl.ObjectAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.Security.AccessControl.ObjectAuditRule" />
 
             
 
@@ -72,71 +70,100 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The identity to which the access rule applies.  It must be an object that can be cast as a <see
-           cref="T:System.Security.Principal.SecurityIdentifier" />
+          The identity to which the access rule applies.  It must be an object that can be cast as a <see cref="T:System.Security.Principal.SecurityIdentifier" />
 
           
 
           .</param
         >
         <param name="accessMask">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if this rule is inherited from a parent container.</param
         >
         <param name="inheritanceFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref
-           name="inheritanceFlags" />
+          Whether inherited access rules are automatically propagated. The propagation flags are ignored if <paramref name="inheritanceFlags" />
 
           
 
-           is set to <see
-           cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+           is set to <see cref="F:System.Security.AccessControl.InheritanceFlags.None" />
 
           
 
           .</param
         >
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of object to which the rule applies.</param
         >
         <param name="inheritedObjectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of child object that can inherit the rule.</param
         >
         <param name="auditFlags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -165,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of child object that can inherit the <see
-             cref="System.Security.AccessControl.ObjectAuditRule" />
+            >Gets the type of child object that can inherit the <see cref="System.Security.AccessControl.ObjectAuditRule" />
 
             
 
@@ -203,13 +229,11 @@
 
             
 
-             and <see
-             cref="P:System.Security.AccessControl.ObjectAuditRule.InheritedObjectType" />
+             and <see cref="P:System.Security.AccessControl.ObjectAuditRule.InheritedObjectType" />
 
             
 
-             properties of the <see
-             cref="System.Security.AccessControl.ObjectAuditRule" />
+             properties of the <see cref="System.Security.AccessControl.ObjectAuditRule" />
 
             
 
@@ -239,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of object to which the <see
-             cref="System.Security.AccessControl.ObjectAuditRule" />
+            >Gets the type of object to which the <see cref="System.Security.AccessControl.ObjectAuditRule" />
 
             
 

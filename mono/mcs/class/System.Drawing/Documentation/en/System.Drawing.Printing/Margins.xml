@@ -26,23 +26,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Drawing.Printing.Margins" />
+        >The <see cref="T:System.Drawing.Printing.Margins" />
 
         
 
-         class is used to manipulate the width of margins in <see
-         cref="T:System.Drawing.Printing.PageSettings" />
+         class is used to manipulate the width of margins in <see cref="T:System.Drawing.Printing.PageSettings" />
 
         
 
-         and <see
-         cref="T:System.Drawing.Printing.PrintController" />
+         and <see cref="T:System.Drawing.Printing.PrintController" />
 
         
 
-        . <see
-         cref="T:System.Drawing.Printing.MarginsConverter" />
+        . <see cref="T:System.Drawing.Printing.MarginsConverter" />
 
         
 
@@ -53,46 +49,38 @@
 
         
 
-        , <see
-         cref="P:System.Drawing.Printing.Margins.Right" />
+        , <see cref="P:System.Drawing.Printing.Margins.Right" />
 
         
 
-        , <see
-         cref="P:System.Drawing.Printing.Margins.Top" />
+        , <see cref="P:System.Drawing.Printing.Margins.Top" />
 
         
 
-        , and <see
-         cref="P:System.Drawing.Printing.Margins.Bottom" />
+        , and <see cref="P:System.Drawing.Printing.Margins.Bottom" />
 
         
 
-         are properties that define the margins. <see
-         cref="M:System.Drawing.Printing.Margins.Clone" />
+         are properties that define the margins. <see cref="M:System.Drawing.Printing.Margins.Clone" />
 
         
 
-         creates an identical <see
-         cref="T:System.Drawing.Printing.Margins" />
+         creates an identical <see cref="T:System.Drawing.Printing.Margins" />
 
         
 
-        . <see
-         cref="M:System.Drawing.Printing.Margins.Equals(System.Object)" />
+        . <see cref="M:System.Drawing.Printing.Margins.Equals(System.Object)" />
 
         
 
-         determines if another object has the same dimensions as a <see
-         cref="T:System.Drawing.Printing.Margins" />
+         determines if another object has the same dimensions as a <see cref="T:System.Drawing.Printing.Margins" />
 
         
 
         .</para
       >
       <para
-        >For more information about printing, see the <see
-         cref="N:System.Drawing.Printing" />
+        >For more information about printing, see the <see cref="N:System.Drawing.Printing" />
 
         
 
@@ -115,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -147,8 +134,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -156,28 +142,44 @@
           >
         </summary>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The left margin, in hundredths of an inch. </param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The right margin, in hundredths of an inch. </param
         >
         <param name="top">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The top margin, in hundredths of an inch. </param
         >
         <param name="bottom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -201,8 +203,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -256,13 +257,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares this <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >Compares this <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
-             to the specified <see
-             cref="T:System.Object" />
+             to the specified <see cref="T:System.Object" />
 
             
 
@@ -272,33 +271,27 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified object is a <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >true if the specified object is a <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
-             and has the same <see
-             cref="P:System.Drawing.Printing.Margins.Top" />
+             and has the same <see cref="P:System.Drawing.Printing.Margins.Top" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Printing.Margins.Bottom" />
+            , <see cref="P:System.Drawing.Printing.Margins.Bottom" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Printing.Margins.Right" />
+            , <see cref="P:System.Drawing.Printing.Margins.Right" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Printing.Margins.Left" />
+             and <see cref="P:System.Drawing.Printing.Margins.Left" />
 
             
 
-             values as this <see
-             cref="T:System.Drawing.Printing.Margins" />
+             values as this <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -306,12 +299,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to which to compare this <see
-           cref="T:System.Drawing.Printing.Margins" />
+          The object to which to compare this <see cref="T:System.Drawing.Printing.Margins" />
 
           
 
@@ -358,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -397,8 +392,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >Compares two <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -408,23 +402,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate the <see
-             cref="P:System.Drawing.Printing.Margins.Left" />
+            >true to indicate the <see cref="P:System.Drawing.Printing.Margins.Left" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Printing.Margins.Right" />
+            , <see cref="P:System.Drawing.Printing.Margins.Right" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Printing.Margins.Top" />
+            , <see cref="P:System.Drawing.Printing.Margins.Top" />
 
             
 
-            , and <see
-             cref="P:System.Drawing.Printing.Margins.Bottom" />
+            , and <see cref="P:System.Drawing.Printing.Margins.Bottom" />
 
             
 
@@ -432,24 +422,30 @@
           >
         </returns>
         <param name="m1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Drawing.Printing.Margins" />
+          The first <see cref="T:System.Drawing.Printing.Margins" />
 
           
 
            to compare for equality.</param
         >
         <param name="m2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Drawing.Printing.Margins" />
+          The second <see cref="T:System.Drawing.Printing.Margins" />
 
           
 
@@ -478,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >Compares two <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -489,23 +484,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate if the <see
-             cref="P:System.Drawing.Printing.Margins.Left" />
+            >true to indicate if the <see cref="P:System.Drawing.Printing.Margins.Left" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Printing.Margins.Right" />
+            , <see cref="P:System.Drawing.Printing.Margins.Right" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Printing.Margins.Top" />
+            , <see cref="P:System.Drawing.Printing.Margins.Top" />
 
             
 
-            , or <see
-             cref="P:System.Drawing.Printing.Margins.Bottom" />
+            , or <see cref="P:System.Drawing.Printing.Margins.Bottom" />
 
             
 
@@ -513,24 +504,30 @@
           >
         </returns>
         <param name="m1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Drawing.Printing.Margins" />
+          The first <see cref="T:System.Drawing.Printing.Margins" />
 
           
 
            to compare for inequality.</param
         >
         <param name="m2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Drawing.Printing.Margins" />
+          The second <see cref="T:System.Drawing.Printing.Margins" />
 
           
 
@@ -550,8 +547,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 rounded down. You would then set the appropriate <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 rounded down. You would then set the appropriate <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -580,8 +576,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -610,8 +605,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the <see
-             cref="T:System.Drawing.Printing.Margins" />
+            >Converts the <see cref="T:System.Drawing.Printing.Margins" />
 
             
 
@@ -621,13 +615,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
-             representation of the <see
-             cref="T:System.Drawing.Printing.Margins" />
+             representation of the <see cref="T:System.Drawing.Printing.Margins" />
 
             
 

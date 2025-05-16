@@ -27,8 +27,7 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
   </PropertyGroup>
   <!-- Redefine AssemblySearchPaths to exclude {AssemblyFolders} and {GAC}, these represent .NET-specific locations -->
   <PropertyGroup>
-    <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''"
-      >
+    <AssemblySearchPaths Condition="'$(AssemblySearchPaths)' == ''">
             {CandidateAssemblyFiles};
             $(ReferencePath);
             {HintPathFromItem};

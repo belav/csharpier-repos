@@ -19,84 +19,69 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides the information related to a client's Hypertext Transfer Protocol (HTTP) request being processed by an <see
-         cref="T:System.Net.HttpListener" />
+        >This class provides the information related to a client's Hypertext Transfer Protocol (HTTP) request being processed by an <see cref="T:System.Net.HttpListener" />
 
         
 
-         object. This class also has methods that allow an <see
-         cref="T:System.Net.HttpListener" />
+         object. This class also has methods that allow an <see cref="T:System.Net.HttpListener" />
 
         
 
          object to accept a WebSocket connection.</para
       >
       <para
-        >The <see
-         cref="M:System.Net.HttpListener.GetContext" />
+        >The <see cref="M:System.Net.HttpListener.GetContext" />
 
         
 
-         method returns instances of the <see
-         cref="T:System.Net.HttpListenerContext" />
+         method returns instances of the <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-         class. To get the object that represents the client request, use the <see
-         cref="P:System.Net.HttpListenerContext.Request" />
+         class. To get the object that represents the client request, use the <see cref="P:System.Net.HttpListenerContext.Request" />
 
         
 
-         property. To get the object that represents the response that will be sent to the client by the <see
-         cref="T:System.Net.HttpListener" />
+         property. To get the object that represents the response that will be sent to the client by the <see cref="T:System.Net.HttpListener" />
 
         
 
-        , use the <see
-         cref="P:System.Net.HttpListenerContext.Response" />
+        , use the <see cref="P:System.Net.HttpListenerContext.Response" />
 
         
 
-         property. To get user information about the client sending the request, such as its login name and whether it has been authenticated, you can query the properties in the <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         property. To get user information about the client sending the request, such as its login name and whether it has been authenticated, you can query the properties in the <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         object returned by the <see
-         cref="P:System.Net.HttpListenerContext.User" />
+         object returned by the <see cref="P:System.Net.HttpListenerContext.User" />
 
         
 
          property.</para
       >
       <para
-        >Closing an <see
-         cref="T:System.Net.HttpListenerContext" />
+        >Closing an <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-         object sends the response to the client and frees any resources used by the <see
-         cref="T:System.Net.HttpListenerContext" />
+         object sends the response to the client and frees any resources used by the <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-        . Aborting an <see
-         cref="T:System.Net.HttpListenerContext" />
+        . Aborting an <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-         object discards the response to the client if it has not already been sent, and frees any resources used by the <see
-         cref="T:System.Net.HttpListenerContext" />
+         object discards the response to the client if it has not already been sent, and frees any resources used by the <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-        . After closing or aborting an <see
-         cref="T:System.Net.HttpListenerContext" />
+        . After closing or aborting an <see cref="T:System.Net.HttpListenerContext" />
 
         
 
-         object, you cannot reference its methods or properties. If you do so, you will receive an <see
-         cref="T:System.ObjectDisposedException" />
+         object, you cannot reference its methods or properties. If you do so, you will receive an <see cref="T:System.ObjectDisposedException" />
 
         
 
@@ -106,8 +91,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides access to the request and response objects used by the <see
-         cref="T:System.Net.HttpListener" />
+        >Provides access to the request and response objects used by the <see cref="T:System.Net.HttpListener" />
 
         
 
@@ -139,18 +123,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you close this <see
-             cref="T:System.Net.HttpListenerContext" />
+            >If you close this <see cref="T:System.Net.HttpListenerContext" />
 
             
 
-            , it will send the response to the client, close the <see
-             cref="T:System.Net.HttpListenerResponse" />
+            , it will send the response to the client, close the <see cref="T:System.Net.HttpListenerResponse" />
 
             
 
-             that contains the response, and close the <see
-             cref="T:System.Net.HttpListenerRequest" />
+             that contains the response, and close the <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
@@ -160,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Net.HttpListenerRequest" />
+            >Gets the <see cref="T:System.Net.HttpListenerRequest" />
 
             
 
@@ -193,13 +173,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Your application configures the response by setting properties in the <see
-             cref="T:System.Net.HttpListenerResponse" />
+            >Your application configures the response by setting properties in the <see cref="T:System.Net.HttpListenerResponse" />
 
             
 
-             object returned by this property. After configuring the response, you send it to the client by closing the response, or by closing this <see
-             cref="T:System.Net.HttpListenerContext" />
+             object returned by this property. After configuring the response, you send it to the client by closing the response, or by closing this <see cref="T:System.Net.HttpListenerContext" />
 
             
 
@@ -209,8 +187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Net.HttpListenerResponse" />
+            >Gets the <see cref="T:System.Net.HttpListenerResponse" />
 
             
 
@@ -242,31 +219,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.HttpListener" />
+            >An <see cref="T:System.Net.HttpListener" />
 
             
 
-             indicates that it requires authentication using the <see
-             cref="P:System.Net.HttpListener.AuthenticationSchemes" />
+             indicates that it requires authentication using the <see cref="P:System.Net.HttpListener.AuthenticationSchemes" />
 
             
 
-             property or by specifying an <see
-             cref="T:System.Net.AuthenticationSchemeSelector" />
+             property or by specifying an <see cref="T:System.Net.AuthenticationSchemeSelector" />
 
             
 
-             delegate using the <see
-             cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+             delegate using the <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
 
             
 
              property.</para
           >
           <para
-            >To determine the client's login name and authentication information, check the <see
-             cref="P:System.Security.Principal.IPrincipal.Identity" />
+            >To determine the client's login name and authentication information, check the <see cref="P:System.Security.Principal.IPrincipal.Identity" />
 
             
 
@@ -276,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object used to obtain identity, authentication information, and security roles for the client whose request is represented by this <see
-             cref="T:System.Net.HttpListenerContext" />
+            >Gets an object used to obtain identity, authentication information, and security roles for the client whose request is represented by this <see cref="T:System.Net.HttpListenerContext" />
 
             
 

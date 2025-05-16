@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members of the <see
-         cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+        >This enumeration is used by members of the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
         
 
@@ -40,38 +39,31 @@
         <para>Many of these flags can have powerful effects and should be granted only to highly trusted code.</para>
       </block>
       <para
-        >The most powerful of the flags are <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Create" />
+        >The most powerful of the flags are <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Create" />
 
         
 
-        , <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />
+        , <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />
 
         
 
-        , <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Import" />
+        , <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Import" />
 
         
 
-        , <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />
+        , <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />
 
         
 
-        , <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Sign" />
+        , <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Sign" />
 
         
 
-        , <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />
+        , <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />
 
         
 
-        , and <see
-         cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
+        , and <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
 
         
 

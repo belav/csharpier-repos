@@ -23,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the interfaces of an ActiveX site for use as a base class by the <see
-         cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
+        >Implements the interfaces of an ActiveX site for use as a base class by the <see cref="T:System.Windows.Forms.WebBrowser.WebBrowserSite" />
 
         
 
@@ -48,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Windows.Forms.WebBrowserSiteBase" />
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.WebBrowserSiteBase" />
 
             
 
@@ -75,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.WebBrowserSiteBase" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.WebBrowserSiteBase" />
 
             
 
@@ -84,7 +81,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

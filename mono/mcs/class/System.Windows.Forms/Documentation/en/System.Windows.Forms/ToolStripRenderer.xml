@@ -14,108 +14,90 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+        >Use the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-         class to apply a particular style or theme to a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         class to apply a particular style or theme to a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-        . Rather than custom painting a <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        . Rather than custom painting a <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         and the <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+         and the <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
-         objects it contains, you set the <see
-         cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+         objects it contains, you set the <see cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
         
 
-         property to an object that inherits from <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+         property to an object that inherits from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-        . The painting specified by the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+        . The painting specified by the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-         is applied to the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         is applied to the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
         , as well as the items it contains.</para
       >
       <para
-        >You can do custom painting in <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >You can do custom painting in <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         controls in several ways. As with other Windows Forms controls, the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         controls in several ways. As with other Windows Forms controls, the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+         and <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
-         both have overridable OnPaint methods and Paint events. As with regular painting, the coordinate system is relative to the client area of the control; that is, the upper left-hand corner of the control is 0, 0. The Paint event and OnPaint method for a <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+         both have overridable OnPaint methods and Paint events. As with regular painting, the coordinate system is relative to the client area of the control; that is, the upper left-hand corner of the control is 0, 0. The Paint event and OnPaint method for a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
          behave like other control paint events.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+        >The <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
-         class has overridable methods for painting the background, item background, item image, item arrow, item text, and border of the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+         class has overridable methods for painting the background, item background, item image, item arrow, item text, and border of the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
         . The event arguments for these methods expose several properties such as rectangles, colors, and text formats that you can adjust as desired.</para
       >
       <para
-        >To adjust just a few aspects of how an item is painted, you typically override the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+        >To adjust just a few aspects of how an item is painted, you typically override the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
         .</para
       >
       <para
-        >If you are writing a new item and want to control all aspects of the painting, override the OnPaint method. From within OnPaint, you can use methods from the <see
-         cref="T:System.Windows.Forms.ToolStripRenderer" />
+        >If you are writing a new item and want to control all aspects of the painting, override the OnPaint method. From within OnPaint, you can use methods from the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
         
 
         .</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >By default, the <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
-         is double buffered, taking advantage of the <see
-         cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+         is double buffered, taking advantage of the <see cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
 
         
 
@@ -125,8 +107,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles the painting functionality for <see
-         cref="T:System.Windows.Forms.ToolStrip" />
+        >Handles the painting functionality for <see cref="T:System.Windows.Forms.ToolStrip" />
 
         
 
@@ -154,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -189,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Image" />
+            >An <see cref="T:System.Drawing.Image" />
 
             
 
@@ -198,7 +177,11 @@
           >
         </returns>
         <param name="normalImage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -226,28 +209,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
 
             
 
-             method provides an entry point to the arrow rendering code. Use this method to draw an arrow when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             method provides an entry point to the arrow rendering code. Use this method to draw an arrow when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force an arrow to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force an arrow to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way an arrow is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
+            . To change the way an arrow is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -257,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws an arrow on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Draws an arrow on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -266,12 +243,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
 
           
 
@@ -299,33 +279,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides an entry point to the rendering code for the background of a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+             method provides an entry point to the rendering code for the background of a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
-            . Use this method to draw the background of a button when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            . Use this method to draw the background of a button when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background of a button to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force the background of a button to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            . To change the way the background is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -335,8 +309,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background for a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Draws the background for a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -344,12 +317,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          The <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -377,33 +353,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the background of a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+             method provides the entry point to the rendering code for the background of a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
-            . Use this method to draw the background of a drop-down button when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripDropDownButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            . Use this method to draw the background of a drop-down button when overriding the <see cref="M:System.Windows.Forms.ToolStripDropDownButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background of a drop-down button to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force the background of a drop-down button to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            . To change the way the background is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -413,8 +383,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background for a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Draws the background for a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -422,12 +391,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -455,33 +427,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
 
             
 
-             method provides an entry point to the rendering code for a move handle located on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method provides an entry point to the rendering code for a move handle located on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . Use this method when overriding the <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaintGrip(System.Windows.Forms.PaintEventArgs)" />
+            . Use this method when overriding the <see cref="M:System.Windows.Forms.ToolStrip.OnPaintGrip(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force a move handle to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force a move handle to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way a move handle is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
+            . To change the way a move handle is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -491,8 +457,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws a move handle on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Draws a move handle on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -500,12 +465,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
 
           
 
@@ -533,28 +501,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the image. Use this method to draw the image margin when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             method provides the entry point to the rendering code for the image. Use this method to draw the image margin when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the image margin to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force the image margin to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the image margin is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            . To change the way the image margin is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -564,8 +527,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the space around an image on a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Draws the space around an image on a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -573,12 +535,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -606,28 +571,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the background of an item. Use this method to draw the background of an item when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             method provides the entry point to the rendering code for the background of an item. Use this method to draw the background of an item when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background of an item to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force the background of an item to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background of an item is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            . To change the way the background of an item is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -637,8 +597,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background for a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Draws the background for a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -646,12 +605,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -679,28 +641,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for an image in a selected state. Use this method to draw a selected image when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             method provides the entry point to the rendering code for an image in a selected state. Use this method to draw a selected image when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force a selected image to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force a selected image to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way a selected image is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+            . To change the way a selected image is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -710,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws an image on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Draws an image on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -719,12 +675,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
 
           
 
@@ -752,23 +711,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemImage(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemImage(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for an image. Use this method to draw an image when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             method provides the entry point to the rendering code for an image. Use this method to draw an image when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method or to force the image to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method or to force the image to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the image is rendered, override the OnDrawItem method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+            . To change the way the image is rendered, override the OnDrawItem method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -778,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws an image on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Draws an image on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -787,12 +741,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
 
           
 
@@ -820,33 +777,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the text of a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             method provides the entry point to the rendering code for the text of a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
-            . Use this method to draw the item text when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+            . Use this method to draw the item text when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the item text to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force the item text to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the item text is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
+            . To change the way the item text is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -856,8 +807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws text on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Draws text on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -865,12 +815,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" />
 
           
 
@@ -898,48 +851,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the background of a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+             method provides the entry point to the rendering code for the background of a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
-            . Use this method to draw the background of a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+            . Use this method to draw the background of a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
-             when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripLabel.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             when overriding the <see cref="M:System.Windows.Forms.ToolStripLabel.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background of a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+             method, or to force the background of a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
-             to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background of a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+            . To change the way the background of a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
-             is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+             is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -949,8 +893,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background for a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+            >Draws the background for a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
@@ -958,12 +901,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -991,48 +937,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the background of a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             method provides the entry point to the rendering code for the background of a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-            . Use this method to draw the background of a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            . Use this method to draw the background of a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripMenuItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             when overriding the <see cref="M:System.Windows.Forms.ToolStripMenuItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background of a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             method, or to force the background of a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background for a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            . To change the way the background for a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+             is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -1042,8 +979,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background for a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Draws the background for a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -1051,12 +987,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -1084,28 +1023,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the background of an overflow button. Use this method to draw the background of an overflow button when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             method provides the entry point to the rendering code for the background of an overflow button. Use this method to draw the background of an overflow button when overriding the <see cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background for an overflow button to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method, or to force the background for an overflow button to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background for an overflow button is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            . To change the way the background for an overflow button is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -1117,12 +1051,15 @@
           <para>Draws the background for an overflow button.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -1150,48 +1087,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+             method provides the entry point to the rendering code for a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-            . Use this method to draw the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            . Use this method to draw the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-             when overriding the <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             when overriding the <see cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+             method, or to force a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-             to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            . To change the way the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-             is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
+             is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -1201,8 +1129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Draws a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -1210,17 +1137,19 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripSeparatorRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripSeparatorRenderEventArgs" />
 
           
 
-           that contains the data to draw the <see
-           cref="T:System.Windows.Forms.ToolStripSeparator" />
+           that contains the data to draw the <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
           
 
@@ -1248,48 +1177,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawSplitButton(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawSplitButton(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+             method provides the entry point to the rendering code for a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-            . Use this method to draw a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            . Use this method to draw a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             when overriding the <see
-             cref="M:System.Windows.Forms.ToolStripSplitButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             when overriding the <see cref="M:System.Windows.Forms.ToolStripSplitButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+             method, or to force a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            . To change the way the <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
-             is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripSystemRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+             is rendered, override the <see cref="M:System.Windows.Forms.ToolStripSystemRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -1299,8 +1219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Draws a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -1308,12 +1227,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -1344,12 +1266,15 @@
           <para>Draws a sizing grip.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -1377,48 +1302,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the background of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method provides the entry point to the rendering code for the background of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . Use this method to draw the background of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . Use this method to draw the background of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             when overriding the <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+             when overriding the <see cref="M:System.Windows.Forms.ToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the background of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method, or to force the background of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the background of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . To change the way the background of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+             is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -1428,8 +1344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Draws the background for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1437,17 +1352,19 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
-           that contains the data to draw the background for the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           that contains the data to draw the background for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -1475,48 +1392,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
-             method provides the entry point to the rendering code for the border of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method provides the entry point to the rendering code for the border of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-            . Use this method to draw the border of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . Use this method to draw the border of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             when overriding the <see
-             cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+             when overriding the <see cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method, or to force the border of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             method, or to force the border of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             to be drawn in a custom <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             to be drawn in a custom <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
-            . To change the way the border of a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            . To change the way the border of a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             is rendered, override the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+             is rendered, override the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
-             method in a class derived from <see
-             cref="T:System.Windows.Forms.ToolStripRenderer" />
+             method in a class derived from <see cref="T:System.Windows.Forms.ToolStripRenderer" />
 
             
 
@@ -1526,8 +1434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the border for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Draws the border for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1535,17 +1442,19 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
-           that contains the data to draw the border for the <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+           that contains the data to draw the border for the <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -1574,8 +1483,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background of the <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Draws the background of the <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -1583,12 +1491,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
 
           
 
@@ -1617,8 +1528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background of the <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Draws the background of the <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -1626,12 +1536,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
 
           
 
@@ -1660,8 +1573,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background of the <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >Draws the background of the <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 
@@ -1669,12 +1581,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -1704,23 +1619,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.Initialize(System.Windows.Forms.ToolStrip)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripRenderer.Initialize(System.Windows.Forms.ToolStrip)" />
 
             
 
-             method to set properties, such as the <see
-             cref="P:System.Windows.Forms.ToolStrip.BackColor" />
+             method to set properties, such as the <see cref="P:System.Windows.Forms.ToolStrip.BackColor" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.ToolStrip.Font" />
+             or <see cref="P:System.Windows.Forms.ToolStrip.Font" />
 
             
 
-            , when a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            , when a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1730,8 +1641,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, provides for custom initialization of the given <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >When overridden in a derived class, provides for custom initialization of the given <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -1739,12 +1649,15 @@
           >
         </summary>
         <param name="toolStrip">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStrip" />
+          The <see cref="T:System.Windows.Forms.ToolStrip" />
 
           
 
@@ -1772,8 +1685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the specified <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Initializes the specified <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -1781,12 +1693,15 @@
           >
         </summary>
         <param name="contentPanel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripContentPanel" />
+          The <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
           
 
@@ -1813,23 +1728,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.InitializeItem(System.Windows.Forms.ToolStripItem)" />
+            >Use the <see cref="M:System.Windows.Forms.ToolStripRenderer.InitializeItem(System.Windows.Forms.ToolStripItem)" />
 
             
 
-             method to set properties, such as the <see
-             cref="P:System.Windows.Forms.ToolStripItem.BackColor" />
+             method to set properties, such as the <see cref="P:System.Windows.Forms.ToolStripItem.BackColor" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.ToolStripItem.Font" />
+             or <see cref="P:System.Windows.Forms.ToolStripItem.Font" />
 
             
 
-            , when a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            , when a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -1839,8 +1750,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, provides for custom initialization of the given <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >When overridden in a derived class, provides for custom initialization of the given <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -1848,12 +1758,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
@@ -1881,8 +1794,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the specified <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Initializes the specified <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -1890,12 +1802,15 @@
           >
         </summary>
         <param name="toolStripPanel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripPanel" />
+          The <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
           
 
@@ -1920,8 +1835,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1930,8 +1844,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
 
             
 
@@ -1941,8 +1854,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderArrow" />
 
             
 
@@ -1950,12 +1862,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
 
           
 
@@ -1983,8 +1898,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1993,8 +1907,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2004,8 +1917,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderButtonBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderButtonBackground" />
 
             
 
@@ -2013,12 +1925,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -2046,8 +1961,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2056,8 +1970,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2067,8 +1980,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderDropDownButtonBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderDropDownButtonBackground" />
 
             
 
@@ -2076,12 +1988,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -2109,8 +2024,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2119,8 +2033,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
 
             
 
@@ -2130,8 +2043,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderGrip" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderGrip" />
 
             
 
@@ -2139,12 +2051,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
 
           
 
@@ -2172,8 +2087,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2182,8 +2096,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
@@ -2195,12 +2108,15 @@
           <para>Draws the item background.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -2228,8 +2144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2238,8 +2153,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2249,8 +2163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ToolStripSystemRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ToolStripSystemRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2258,12 +2171,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -2291,8 +2207,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2301,8 +2216,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
 
             
 
@@ -2312,8 +2226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemCheck" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemCheck" />
 
             
 
@@ -2321,12 +2234,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
 
           
 
@@ -2354,8 +2270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2364,8 +2279,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemImage(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemImage(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
 
             
 
@@ -2375,8 +2289,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemImage" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemImage" />
 
             
 
@@ -2384,12 +2297,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
 
           
 
@@ -2417,8 +2333,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2427,8 +2342,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
 
             
 
@@ -2438,8 +2352,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemText" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemText" />
 
             
 
@@ -2447,12 +2360,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" />
 
           
 
@@ -2480,8 +2396,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2490,8 +2405,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2501,8 +2415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderLabelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderLabelBackground" />
 
             
 
@@ -2510,12 +2423,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -2543,8 +2459,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2553,8 +2468,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2564,8 +2478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderMenuItemBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderMenuItemBackground" />
 
             
 
@@ -2573,12 +2486,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -2606,8 +2522,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2616,8 +2531,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2627,8 +2541,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderOverflowButtonBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderOverflowButtonBackground" />
 
             
 
@@ -2636,12 +2549,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -2669,8 +2585,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2679,8 +2594,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
 
             
 
@@ -2690,8 +2604,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderSeparator" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderSeparator" />
 
             
 
@@ -2699,12 +2612,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripSeparatorRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripSeparatorRenderEventArgs" />
 
           
 
@@ -2732,8 +2648,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2742,8 +2657,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2753,8 +2667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >Raises the <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -2762,12 +2675,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -2795,8 +2711,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2805,8 +2720,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderStatusStripSizingGrip(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderStatusStripSizingGrip(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
@@ -2816,8 +2730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderStatusStripSizingGrip" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderStatusStripSizingGrip" />
 
             
 
@@ -2825,12 +2738,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -2858,8 +2774,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2868,8 +2783,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
@@ -2879,8 +2793,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripBackground" />
 
             
 
@@ -2888,12 +2801,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -2921,8 +2837,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2931,8 +2846,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
             
 
@@ -2942,8 +2856,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripBorder" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripBorder" />
 
             
 
@@ -2951,12 +2864,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
 
           
 
@@ -2984,8 +2900,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2994,8 +2909,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
 
             
 
@@ -3005,8 +2919,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripContentPanelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripContentPanelBackground" />
 
             
 
@@ -3014,12 +2927,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
 
           
 
@@ -3047,8 +2963,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -3057,8 +2972,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
 
             
 
@@ -3068,8 +2982,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripPanelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripPanelBackground" />
 
             
 
@@ -3077,12 +2990,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
 
           
 
@@ -3110,8 +3026,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -3120,8 +3035,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
             
 
@@ -3131,8 +3045,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripStatusLabelBackground" />
+            >Raises the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderToolStripStatusLabelBackground" />
 
             
 
@@ -3140,12 +3053,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+          A <see cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
 
           
 
@@ -3170,8 +3086,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3183,8 +3098,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when an arrow on a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when an arrow on a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3210,8 +3124,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3223,8 +3136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStripButton" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStripButton" />
 
             
 
@@ -3250,8 +3162,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3263,8 +3174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStripDropDownButton" />
 
             
 
@@ -3290,8 +3200,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3303,8 +3212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the move handle for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the move handle for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3330,8 +3238,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3363,8 +3270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3376,8 +3282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3403,8 +3308,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3416,8 +3320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the image for a selected <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when the image for a selected <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3443,8 +3346,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3456,8 +3358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the image for a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when the image for a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3483,8 +3384,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3496,8 +3396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the text for a <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+            >Occurs when the text for a <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -3523,8 +3422,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3536,8 +3434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStripLabel" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStripLabel" />
 
             
 
@@ -3563,8 +3460,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3576,8 +3472,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -3603,8 +3498,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3636,8 +3530,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3649,8 +3542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            >Occurs when a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
@@ -3676,8 +3568,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3689,8 +3580,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStripSplitButton" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStripSplitButton" />
 
             
 
@@ -3716,8 +3606,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3749,8 +3638,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3762,8 +3650,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the background for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the background for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3789,8 +3676,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3802,8 +3688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the border for a <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Occurs when the border for a <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
@@ -3829,8 +3714,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3842,8 +3726,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background of a <see
-             cref="T:System.Windows.Forms.ToolStripContentPanel" />
+            >Draws the background of a <see cref="T:System.Windows.Forms.ToolStripContentPanel" />
 
             
 
@@ -3869,8 +3752,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3882,8 +3764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background of a <see
-             cref="T:System.Windows.Forms.ToolStripPanel" />
+            >Draws the background of a <see cref="T:System.Windows.Forms.ToolStripPanel" />
 
             
 
@@ -3909,8 +3790,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -3922,8 +3802,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the background of a <see
-             cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+            >Draws the background of a <see cref="T:System.Windows.Forms.ToolStripStatusLabel" />
 
             
 

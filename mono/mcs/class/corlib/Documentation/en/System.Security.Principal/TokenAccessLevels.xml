@@ -225,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The maximum value that can be assigned for the <see
-             cref="T:System.Security.Principal.TokenAccessLevels" />
+            >The maximum value that can be assigned for the <see cref="T:System.Security.Principal.TokenAccessLevels" />
 
             
 
@@ -298,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user has standard read rights and the <see
-             cref="F:System.Security.Principal.TokenAccessLevels.Query" />
+            >The user has standard read rights and the <see cref="F:System.Security.Principal.TokenAccessLevels.Query" />
 
             
 
@@ -327,13 +325,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The user has standard write rights and the <see
-             cref="F:System.Security.Principal.TokenAccessLevels.AdjustPrivileges, F:System.Security.Principal.TokenAccessLevels.AdjustGroups" />
+            >The user has standard write rights and the <see cref="F:System.Security.Principal.TokenAccessLevels.AdjustPrivileges, F:System.Security.Principal.TokenAccessLevels.AdjustGroups" />
 
             
 
-            , and <see
-             cref="F:System.Security.Principal.TokenAccessLevels.AdjustDefault" />
+            , and <see cref="F:System.Security.Principal.TokenAccessLevels.AdjustDefault" />
 
             
 

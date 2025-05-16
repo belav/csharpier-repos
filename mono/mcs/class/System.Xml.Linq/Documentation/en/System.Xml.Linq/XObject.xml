@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is the abstract common base class for <see
-         cref="T:System.Xml.Linq.XNode" />
+        >This class is the abstract common base class for <see cref="T:System.Xml.Linq.XNode" />
 
         
 
-         and <see
-         cref="T:System.Xml.Linq.XAttribute" />
+         and <see cref="T:System.Xml.Linq.XAttribute" />
 
         
 
@@ -61,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that annotations are not part of the infoset; they are not persisted, or displayed by <see
-             cref="Overload:System.Xml.Linq.XNode.ToString" />
+            >Note that annotations are not part of the infoset; they are not persisted, or displayed by <see cref="Overload:System.Xml.Linq.XNode.ToString" />
 
             
 
             . Also, if you import an XML Namespace into your VB project and call AddAnnotation with the SaveOptions.OmitDuplicateNamespaces enumeration value, then only one element will contain the XML Namespace attribute instead of every element. For more information, see <see
-
               cref="http://blogs.msdn.com/b/vbteam/archive/2010/06/09/removing-duplicate-namespaces-in-xml-literals-shyam-namboodiripad.aspx"
               >Removing duplicate namespaces in XML Literals</see
             >
@@ -80,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an object to the annotation list of this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Adds an object to the annotation list of this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -89,12 +84,15 @@
           >
         </summary>
         <param name="annotation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -123,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the first annotation object of the specified type from this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Gets the first annotation object of the specified type from this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -134,8 +131,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Object" />
+            >The <see cref="T:System.Object" />
 
             
 
@@ -143,12 +139,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -182,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get the first annotation object of the specified type from this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Get the first annotation object of the specified type from this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -195,7 +193,11 @@
           <para>The first annotation object that matches the specified type, or null if no annotation is of the specified type.</para>
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -227,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of annotations of the specified type for this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Gets a collection of annotations of the specified type for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -238,18 +239,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Object" />
+             of <see cref="T:System.Object" />
 
             
 
-             that contains the annotations that match the specified type for this <see
-             cref="T:System.Xml.Linq.XObject" />
+             that contains the annotations that match the specified type for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -257,12 +255,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -299,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of annotations of the specified type for this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Gets a collection of annotations of the specified type for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -310,13 +310,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >An <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             that contains the annotations for this <see
-             cref="T:System.Xml.Linq.XObject" />
+             that contains the annotations for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -324,7 +322,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -347,72 +349,60 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using LINQ to XML, you can deserialize XML in a number of fashions. You can parse it from a string, load it from a file, or read it from a <see
-             cref="T:System.IO.TextReader" />
+            >Using LINQ to XML, you can deserialize XML in a number of fashions. You can parse it from a string, load it from a file, or read it from a <see cref="T:System.IO.TextReader" />
 
             
 
-             or an <see
-             cref="T:System.Xml.XmlReader" />
+             or an <see cref="T:System.Xml.XmlReader" />
 
             
 
-            . In all of these cases, LINQ to XML uses one or another of the concrete subclasses of <see
-             cref="T:System.Xml.XmlReader" />
+            . In all of these cases, LINQ to XML uses one or another of the concrete subclasses of <see cref="T:System.Xml.XmlReader" />
 
             
 
             .</para
           >
           <para
-            >Sometimes the <see
-             cref="T:System.Xml.XmlReader" />
+            >Sometimes the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             has the base URI, and sometimes it does not. For instance, when loading from a file, the <see
-             cref="T:System.Xml.XmlReader" />
+             has the base URI, and sometimes it does not. For instance, when loading from a file, the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             knows the base URI, but when reading from an <see
-             cref="T:System.Xml.XmlReader" />
+             knows the base URI, but when reading from an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             that was created because of calling the <see
-             cref="Overload:System.Xml.Linq.XElement.Parse" />
+             that was created because of calling the <see cref="Overload:System.Xml.Linq.XElement.Parse" />
 
             
 
-             method, there is no possibility of the <see
-             cref="T:System.Xml.XmlReader" />
+             method, there is no possibility of the <see cref="T:System.Xml.XmlReader" />
 
             
 
              reporting a base URI; the XML was in a string.</para
           >
           <para
-            >If, when parsing or loading the XML, you specify <see
-             cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
+            >If, when parsing or loading the XML, you specify <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
 
             
 
-            , LINQ to XML will request the base URI for each node as the <see
-             cref="T:System.Xml.XmlReader" />
+            , LINQ to XML will request the base URI for each node as the <see cref="T:System.Xml.XmlReader" />
 
             
 
-             returns the node. If the reader has the base URI, LINQ to XML will save the information with the LINQ to XML node. This property returns that information. If the underlying <see
-             cref="T:System.Xml.XmlReader" />
+             returns the node. If the reader has the base URI, LINQ to XML will save the information with the LINQ to XML node. This property returns that information. If the underlying <see cref="T:System.Xml.XmlReader" />
 
             
 
              does not have the base URI, then this property will return an empty string.</para
           >
           <para
-            >Setting <see
-             cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
+            >Setting <see cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
 
             
 
@@ -423,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the base URI for this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Gets the base URI for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -453,26 +442,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Events are raised only when an XML tree is modified, not when it is constructed. This is because you have to add an event handler to an event before you can receive events, and you cannot add an event handler before you have a reference to an <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Events are raised only when an XML tree is modified, not when it is constructed. This is because you have to add an event handler to an event before you can receive events, and you cannot add an event handler before you have a reference to an <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-            . You cannot get a reference to an <see
-             cref="T:System.Xml.Linq.XObject" />
+            . You cannot get a reference to an <see cref="T:System.Xml.Linq.XObject" />
 
             
 
              before the XML tree is constructed. This means that during functional construction of an XML tree, you will not receive events.</para
           >
           <para
-            >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+            >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
-             event, and while the event is being processed you remove the node from the tree, you might not receive the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+             event, and while the event is being processed you remove the node from the tree, you might not receive the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
@@ -482,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raised when this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Raised when this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -512,26 +496,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Events are raised only from modification of an XML tree, not from construction of an XML tree. You have to add an event handler to an event before you can receive events, and you can't add an event handler before you have a reference to an <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Events are raised only from modification of an XML tree, not from construction of an XML tree. You have to add an event handler to an event before you can receive events, and you can't add an event handler before you have a reference to an <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-            . You can't get a reference to an <see
-             cref="T:System.Xml.Linq.XObject" />
+            . You can't get a reference to an <see cref="T:System.Xml.Linq.XObject" />
 
             
 
              before the XML tree is constructed. This means that during functional construction of an XML tree, you will not receive events.</para
           >
           <para
-            >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see
-             cref="E:System.Xml.Linq.XObject.Changing" />
+            >You should be careful when modifying an XML tree within one of these events, because doing this might lead to unexpected results. For example, if you receive a <see cref="E:System.Xml.Linq.XObject.Changing" />
 
             
 
-             event, and while the event is being processed you remove the node from the tree, you might not receive the <see
-             cref="E:System.Xml.Linq.XObject.Changed" />
+             event, and while the event is being processed you remove the node from the tree, you might not receive the <see cref="E:System.Xml.Linq.XObject.Changed" />
 
             
 
@@ -541,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raised when this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Raised when this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -570,13 +549,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Linq.XDocument" />
+            >Gets the <see cref="T:System.Xml.Linq.XDocument" />
 
             
 
-             for this <see
-             cref="T:System.Xml.Linq.XObject" />
+             for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -606,18 +583,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because all classes that derive from <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Because all classes that derive from <see cref="T:System.Xml.Linq.XObject" />
 
             
 
-             contain a <see
-             cref="P:System.Xml.Linq.XObject.NodeType" />
+             contain a <see cref="P:System.Xml.Linq.XObject.NodeType" />
 
             
 
-             property, you can write code that operates on collections of concrete subclass of <see
-             cref="T:System.Xml.Linq.XObject" />
+             property, you can write code that operates on collections of concrete subclass of <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -627,8 +601,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the node type for this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Gets the node type for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -655,8 +628,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >If this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -664,8 +636,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property returns the parent element, and as children nodes of an <see
-               cref="T:System.Xml.Linq.XDocument" />
+              >This property returns the parent element, and as children nodes of an <see cref="T:System.Xml.Linq.XDocument" />
 
               
 
@@ -676,13 +647,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent <see
-             cref="T:System.Xml.Linq.XElement" />
+            >Gets the parent <see cref="T:System.Xml.Linq.XElement" />
 
             
 
-             of this <see
-             cref="T:System.Xml.Linq.XObject" />
+             of this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -712,8 +681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the annotations of the specified type from this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Removes the annotations of the specified type from this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -721,12 +689,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -763,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the annotations of the specified type from this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Removes the annotations of the specified type from this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -772,7 +742,11 @@
           >
         </summary>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -798,21 +772,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can call this method to determine whether the <see
-             cref="T:System.Xml.Linq.XObject" />
+            >You can call this method to determine whether the <see cref="T:System.Xml.Linq.XObject" />
 
             
 
              contains valid line information.</para
           >
           <para
-            >This method is an explicit interface member implementation of a method in the <see
-             cref="T:System.Xml.IXmlLineInfo" />
+            >This method is an explicit interface member implementation of a method in the <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
-             interface, so in order to call this method, it is necessary to cast to <see
-             cref="T:System.Xml.IXmlLineInfo" />
+             interface, so in order to call this method, it is necessary to cast to <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
@@ -822,8 +793,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether or not this <see
-             cref="T:System.Xml.Linq.XObject" />
+            >Gets a value indicating whether or not this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -833,8 +803,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Xml.Linq.XObject" />
+            >true if the <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -861,13 +830,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation of a method in the <see
-             cref="T:System.Xml.IXmlLineInfo" />
+            >This method is an explicit interface member implementation of a method in the <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
-             interface, so in order to call this method, it is necessary to cast to <see
-             cref="T:System.Xml.IXmlLineInfo" />
+             interface, so in order to call this method, it is necessary to cast to <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
@@ -877,13 +844,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the line number that the underlying <see
-             cref="T:System.Xml.XmlReader" />
+            >Gets the line number that the underlying <see cref="T:System.Xml.XmlReader" />
 
             
 
-             reported for this <see
-             cref="T:System.Xml.Linq.XObject" />
+             reported for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 
@@ -910,13 +875,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an explicit interface member implementation of a method in the <see
-             cref="T:System.Xml.IXmlLineInfo" />
+            >This method is an explicit interface member implementation of a method in the <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
-             interface, so in order to call this method, it is necessary to cast to <see
-             cref="T:System.Xml.IXmlLineInfo" />
+             interface, so in order to call this method, it is necessary to cast to <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
@@ -926,13 +889,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the line position that the underlying <see
-             cref="T:System.Xml.XmlReader" />
+            >Gets the line position that the underlying <see cref="T:System.Xml.XmlReader" />
 
             
 
-             reported for this <see
-             cref="T:System.Xml.Linq.XObject" />
+             reported for this <see cref="T:System.Xml.Linq.XObject" />
 
             
 

@@ -21,16 +21,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Audit rules determine when and how actions performed on system objects are logged.</para>
       <para
-        >The <see
-         cref="T:System.IO.Pipes.PipeAuditRule" />
+        >The <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
         
 
          class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to perform auditing. This class can specify how audit rules are inherited from and propagated to objects.</para
       >
       <para
-        >To allow file auditing on computers that are running Windows NT or later operating systems, the Audit Access Security policy must be enabled; by default, this policy is set to <ui
-        >No Auditing</ui>
+        >To allow file auditing on computers that are running Windows NT or later operating systems, the Audit Access Security policy must be enabled; by default, this policy is set to <ui>No Auditing</ui>
 
         
 
@@ -40,23 +38,19 @@
       <list type="ordered">
         <item>
           <para
-            >Click the <ui
-            >Start</ui>
+            >Click the <ui>Start</ui>
 
             
 
-             button and then point to <ui
-            >All Programs</ui>
+             button and then point to <ui>All Programs</ui>
 
             
 
-            . Point to <ui
-            >Administrative Tools</ui>
+            . Point to <ui>Administrative Tools</ui>
 
             
 
-             and then click <ui
-            >Local Security Policy</ui>
+             and then click <ui>Local Security Policy</ui>
 
             
 
@@ -68,13 +62,11 @@
         </item>
         <item>
           <para
-            >Double-click the <ui
-            >Audit object access</ui>
+            >Double-click the <ui>Audit object access</ui>
 
             
 
-             entry in the right pane of the Local Security Settings window to display the <ui
-            >Audit object access Properties</ui>
+             entry in the right pane of the Local Security Settings window to display the <ui>Audit object access Properties</ui>
 
             
 
@@ -83,13 +75,11 @@
         </item>
         <item>
           <para
-            >Select the <ui
-            >Success</ui>
+            >Select the <ui>Success</ui>
 
             
 
-             or <ui
-            >Failure</ui>
+             or <ui>Failure</ui>
 
             
 
@@ -99,13 +89,11 @@
       </list>
       <para>Note that an audit rule for a user account requires a corresponding access rule for the same user account.</para>
       <para
-        >Use the <see
-         cref="T:System.IO.Pipes.PipeAuditRule" />
+        >Use the <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
         
 
-         class to create a new audit rule. You can persist this rule using the <see
-         cref="T:System.IO.Pipes.PipeSecurity" />
+         class to create a new audit rule. You can persist this rule using the <see cref="T:System.IO.Pipes.PipeSecurity" />
 
         
 
@@ -140,8 +128,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that can be persisted using the <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Use this constructor to create an audit rule that can be persisted using the <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -151,13 +138,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Pipes.PipeAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
             
 
-             class for a user account specified in a <see
-             cref="T:System.Security.Principal.IdentityReference" />
+             class for a user account specified in a <see cref="T:System.Security.Principal.IdentityReference" />
 
             
 
@@ -165,36 +150,45 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Principal.IdentityReference" />
+          An <see cref="T:System.Security.Principal.IdentityReference" />
 
           
 
            object that encapsulates a reference to a user account.</param
         >
         <param name="rights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.Pipes.PipeAccessRights" />
+          One of the <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
           
 
            values that specifies the type of operation associated with the access rule.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -224,8 +218,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create an audit rule that can be persisted using the <see
-             cref="T:System.IO.Pipes.PipeSecurity" />
+            >Use this constructor to create an audit rule that can be persisted using the <see cref="T:System.IO.Pipes.PipeSecurity" />
 
             
 
@@ -235,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Pipes.PipeAuditRule" />
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
             
 
@@ -244,31 +236,41 @@
           >
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the user account.</param
         >
         <param name="rights">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.IO.Pipes.PipeAccessRights" />
+          One of the <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
           
 
            values that specifies the type of operation associated with the access rule.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.AccessControl.AuditFlags" />
+          One of the <see cref="T:System.Security.AccessControl.AuditFlags" />
 
           
 
@@ -298,13 +300,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.IO.Pipes.PipeAccessRights" />
+            >Gets the <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
             
 
-             flags that are associated with the current <see
-             cref="T:System.IO.Pipes.PipeAuditRule" />
+             flags that are associated with the current <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
             
 

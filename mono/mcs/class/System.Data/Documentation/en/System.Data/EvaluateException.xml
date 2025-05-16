@@ -22,13 +22,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when the <see
-         cref="P:System.Data.DataColumn.Expression" />
+        >Represents the exception that is thrown when the <see cref="P:System.Data.DataColumn.Expression" />
 
         
 
-         property of a <see
-         cref="T:System.Data.DataColumn" />
+         property of a <see cref="T:System.Data.DataColumn" />
 
         
 
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.EvaluateException" />
+            >Initializes a new instance of the <see cref="T:System.Data.EvaluateException" />
 
             
 
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.EvaluateException" />
+            >Initializes a new instance of the <see cref="T:System.Data.EvaluateException" />
 
             
 
@@ -82,7 +78,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,18 +110,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.EvaluateException" />
+            >Initializes a new instance of the <see cref="T:System.Data.EvaluateException" />
 
             
 
-             class with the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class with the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and the <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and the <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -129,14 +126,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data needed to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,8 +172,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.EvaluateException" />
+            >Initializes a new instance of the <see cref="T:System.Data.EvaluateException" />
 
             
 
@@ -176,7 +180,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

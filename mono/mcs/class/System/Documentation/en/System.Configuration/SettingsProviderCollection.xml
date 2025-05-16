@@ -22,31 +22,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Configuration.SettingsProviderCollection" />
+        >The <see cref="T:System.Configuration.SettingsProviderCollection" />
 
         
 
-         class is a straightforward extension of the <see
-         cref="T:System.Configuration.Provider.ProviderCollection" />
+         class is a straightforward extension of the <see cref="T:System.Configuration.Provider.ProviderCollection" />
 
         
 
-         class to provide for storage of <see
-         cref="T:System.Configuration.SettingsProvider" />
+         class to provide for storage of <see cref="T:System.Configuration.SettingsProvider" />
 
         
 
          objects.</para
       >
       <para
-        >The <see
-         cref="T:System.Configuration.ApplicationSettingsBase" />
+        >The <see cref="T:System.Configuration.ApplicationSettingsBase" />
 
         
 
-         class uses this collection to manage the settings providers associated with each of its application settings properties through the <see
-         cref="T:System.Configuration.SettingsProviderAttribute" />
+         class uses this collection to manage the settings providers associated with each of its application settings properties through the <see cref="T:System.Configuration.SettingsProviderAttribute" />
 
         
 
@@ -80,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Configuration.SettingsProviderCollection" />
+            >Initializes a new instance of the <see cref="T:System.Configuration.SettingsProviderCollection" />
 
             
 
@@ -115,13 +109,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Configuration.Provider.ProviderBase.Name" />
+            >The <see cref="P:System.Configuration.Provider.ProviderBase.Name" />
 
             
 
-             property of the <see
-             cref="T:System.Configuration.SettingsProvider" />
+             property of the <see cref="T:System.Configuration.SettingsProvider" />
 
             
 
@@ -129,28 +121,23 @@
           >
           <block subset="none" type="note">
             <para
-              >Although the <see
-               cref="M:System.Configuration.SettingsProviderCollection.Add(System.Configuration.Provider.ProviderBase)" />
+              >Although the <see cref="M:System.Configuration.SettingsProviderCollection.Add(System.Configuration.Provider.ProviderBase)" />
 
               
 
-               method has a single <see
-               cref="T:System.Configuration.Provider.ProviderBase" />
+               method has a single <see cref="T:System.Configuration.Provider.ProviderBase" />
 
               
 
-               parameter to match the signature of this same method in the base class <see
-               cref="T:System.Configuration.Provider.ProviderCollection" />
+               parameter to match the signature of this same method in the base class <see cref="T:System.Configuration.Provider.ProviderCollection" />
 
               
 
-              , this method will throw an exception if the <paramref
-               name="provider" />
+              , this method will throw an exception if the <paramref name="provider" />
 
               
 
-               parameter is not of type <see
-               cref="T:System.Configuration.SettingsProvider" />
+               parameter is not of type <see cref="T:System.Configuration.SettingsProvider" />
 
               
 
@@ -163,12 +150,15 @@
           <para>Adds a new settings provider to the collection.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Configuration.Provider.ProviderBase" />
+          A <see cref="T:System.Configuration.Provider.ProviderBase" />
 
           
 

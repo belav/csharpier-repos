@@ -214,13 +214,11 @@
       <Docs>
         <typeparam name="T">To be added.</typeparam>
         <param name="self">To be added.</param>
-        <summary>
-          <c>System.Object</c>
+        <summary><c>System.Object</c>
 
           
 
-           extension method</summary
-        >
+           extension method</summary>
         <returns>To be added.</returns>
         <remarks>
           <c>M:Mono.DocTest.Generic.Extensions.ToEnumerable``1</c>

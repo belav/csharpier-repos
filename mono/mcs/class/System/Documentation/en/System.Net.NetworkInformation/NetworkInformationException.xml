@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Types in the <see
-         cref="N:System.Net.NetworkInformation" />
+        >Types in the <see cref="N:System.Net.NetworkInformation" />
 
         
 
-         namespace throw this exception when a call to a Win32 function fails. The <see
-         cref="P:System.Net.NetworkInformation.NetworkInformationException.ErrorCode" />
+         namespace throw this exception when a call to a Win32 function fails. The <see cref="P:System.Net.NetworkInformation.NetworkInformationException.ErrorCode" />
 
         
 
@@ -61,8 +59,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Net.NetworkInformation.NetworkInformationException.ErrorCode" />
+            >This constructor sets the <see cref="P:System.Net.NetworkInformation.NetworkInformationException.ErrorCode" />
 
             
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.NetworkInformationException" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationException" />
 
             
 
@@ -101,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the value of the <see
-             cref="P:System.Net.NetworkInformation.NetworkInformationException.ErrorCode" />
+            >This constructor sets the value of the <see cref="P:System.Net.NetworkInformation.NetworkInformationException.ErrorCode" />
 
             
 
-             property to <paramref
-             name="errorCode" />
+             property to <paramref name="errorCode" />
 
             
 
@@ -117,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.NetworkInformationException" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationException" />
 
             
 
@@ -126,7 +119,11 @@
           >
         </summary>
         <param name="errorCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,8 +156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is used by the system to create a <see
-             cref="T:System.Net.NetworkInformation.NetworkInformationException" />
+            >This constructor is used by the system to create a <see cref="T:System.Net.NetworkInformation.NetworkInformationException" />
 
             
 
@@ -170,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.NetworkInformationException" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.NetworkInformationException" />
 
             
 

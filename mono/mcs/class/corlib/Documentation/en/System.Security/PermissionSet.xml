@@ -52,8 +52,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use <see
-         cref="T:System.Security.PermissionSet" />
+        >You can use <see cref="T:System.Security.PermissionSet" />
 
         
 
@@ -95,8 +94,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.PermissionState" />
+           is not a valid <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -105,21 +103,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unrestricted state allows all permissions that implement the <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+            >The Unrestricted state allows all permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
              interface, while None allows no permissions.</para
           >
           <para
-            >Use <see
-             cref="M:System.Security.PermissionSet.AddPermission(System.Security.IPermission)" />
+            >Use <see cref="M:System.Security.PermissionSet.AddPermission(System.Security.IPermission)" />
 
             
 
-             on an empty <see
-             cref="T:System.Security.PermissionSet" />
+             on an empty <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -129,13 +124,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.PermissionSet" />
+            >Initializes a new instance of the <see cref="T:System.Security.PermissionSet" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -143,7 +136,11 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -181,13 +178,11 @@
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
-           and is not an instance of <see
-           cref="T:System.Security.PermissionSet" />
+           and is not an instance of <see cref="T:System.Security.PermissionSet" />
 
           
 
@@ -196,13 +191,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Security.PermissionSet" />
+            >The new <see cref="T:System.Security.PermissionSet" />
 
             
 
-             contains copies of the permissions contained in the specified <see
-             cref="T:System.Security.PermissionSet" />
+             contains copies of the permissions contained in the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -210,13 +203,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This is equivalent to <see
-               cref="M:System.Security.PermissionSet.Copy" />
+              >This is equivalent to <see cref="M:System.Security.PermissionSet.Copy" />
 
               
 
-               when the <paramref
-               name="permSet" />
+               when the <paramref name="permSet" />
 
               
 
@@ -227,13 +218,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.PermissionSet" />
+            >Initializes a new instance of the <see cref="T:System.Security.PermissionSet" />
 
             
 
-             class with initial values taken from the <paramref
-             name="permSet" />
+             class with initial values taken from the <paramref name="permSet" />
 
             
 
@@ -241,17 +230,19 @@
           >
         </summary>
         <param name="permSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The set from which to take the value of the new <see
-           cref="T:System.Security.PermissionSet" />
+          The set from which to take the value of the new <see cref="T:System.Security.PermissionSet" />
 
           
 
-          , or null to create an empty <see
-           cref="T:System.Security.PermissionSet" />
+          , or null to create an empty <see cref="T:System.Security.PermissionSet" />
 
           
 
@@ -291,8 +282,7 @@
 
           
 
-           is not a <see
-           cref="T:System.Security.IPermission" />
+           is not a <see cref="T:System.Security.IPermission" />
 
           
 
@@ -301,24 +291,20 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a permission of the same type as the added permission already exists in the <see
-             cref="T:System.Security.PermissionSet" />
+            >If a permission of the same type as the added permission already exists in the <see cref="T:System.Security.PermissionSet" />
 
             
 
-            , the new permission is the union of the existing permission object and the specified permission object. For example, if a permission that implements <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+            , the new permission is the union of the existing permission object and the specified permission object. For example, if a permission that implements <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
-             is added to an <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             is added to an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
             <see cref="T:System.Security.PermissionSet" />
 
             
 
-            , the resulting union is the original Unrestricted <see
-             cref="T:System.Security.PermissionSet" />
+            , the resulting union is the original Unrestricted <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -328,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a specified permission to the <see
-             cref="T:System.Security.PermissionSet" />
+            >Adds a specified permission to the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -339,8 +324,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The union of the permission added and any permission of the same type that already exists in the <see
-             cref="T:System.Security.PermissionSet" />
+            >The union of the permission added and any permission of the same type that already exists in the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -348,7 +332,11 @@
           >
         </returns>
         <param name="perm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -381,8 +369,7 @@
           <para>This method was called with permissions already asserted for the current stack frame.</para>
         </exception>
         <permission cref="T:System.Security.Permissions.SecurityPermission"
-          >Requires permission to perform the assertion security operation. See <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.Assertion" />
+          >Requires permission to perform the assertion security operation. See <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Assertion" />
 
           
 
@@ -391,28 +378,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is the only way to assert multiple permissions at the same time within a frame because only one <see
-             cref="M:System.Security.PermissionSet.Assert" />
+            >This is the only way to assert multiple permissions at the same time within a frame because only one <see cref="M:System.Security.PermissionSet.Assert" />
 
             
 
-             can be active on a frame. <see
-             cref="M:System.Security.PermissionSet.Assert" />
+             can be active on a frame. <see cref="M:System.Security.PermissionSet.Assert" />
 
             
 
-             is only effective for granted permissions. Call the <see
-             cref="M:System.Security.CodeAccessPermission.RevertAssert" />
+             is only effective for granted permissions. Call the <see cref="M:System.Security.CodeAccessPermission.RevertAssert" />
 
             
 
-             or <see
-             cref="M:System.Security.CodeAccessPermission.RevertAll" />
+             or <see cref="M:System.Security.CodeAccessPermission.RevertAll" />
 
             
 
-             method to cancel an active <see
-             cref="M:System.Security.PermissionSet.Assert" />
+             method to cancel an active <see cref="M:System.Security.PermissionSet.Assert" />
 
             
 
@@ -420,8 +402,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Because calling the <see
-               cref="M:System.Security.PermissionSet.Assert" />
+              >Because calling the <see cref="M:System.Security.PermissionSet.Assert" />
 
               
 
@@ -432,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Declares that the calling code can access the resource protected by a permission demand through the code that calls this method, even if callers higher in the stack have not been granted permission to access the resource. Using <see
-             cref="M:System.Security.PermissionSet.Assert" />
+            >Declares that the calling code can access the resource protected by a permission demand through the code that calls this method, even if callers higher in the stack have not been granted permission to access the resource. Using <see cref="M:System.Security.PermissionSet.Assert" />
 
             
 
@@ -464,13 +444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Security.PermissionSet" />
+            >Gets a value indicating whether the <see cref="T:System.Security.PermissionSet" />
 
             
 
-             contains permissions that are not derived from <see
-             cref="T:System.Security.CodeAccessPermission" />
+             contains permissions that are not derived from <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
@@ -480,13 +458,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.PermissionSet" />
+            >true if the <see cref="T:System.Security.PermissionSet" />
 
             
 
-             contains permissions that are not derived from <see
-             cref="T:System.Security.CodeAccessPermission" />
+             contains permissions that are not derived from <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
@@ -526,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an encoded <see
-             cref="T:System.Security.PermissionSet" />
+            >Converts an encoded <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -539,21 +514,33 @@
           <para>An encrypted permission set with the specified output format.</para>
         </returns>
         <param name="inFormat">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string representing one of the following encoding formats: ASCII, Unicode, or Binary. Possible values are "XMLASCII" or "XML", "XMLUNICODE", and "BINARY".</param
         >
         <param name="inData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XML-encoded permission set.</param
         >
         <param name="outFormat">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -588,8 +575,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of a <see
-             cref="T:System.Security.PermissionSet" />
+            >A copy of a <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -599,8 +585,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a copy of the <see
-             cref="T:System.Security.PermissionSet" />
+            >Creates a copy of the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -610,8 +595,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the <see
-             cref="T:System.Security.PermissionSet" />
+            >A copy of the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -649,8 +633,7 @@
           <para>
             <block subset="none" type="note"
               >This method is
-      implemented to support the <see
-               cref="T:System.Collections.ICollection" />
+      implemented to support the <see cref="T:System.Collections.ICollection" />
 
               
 
@@ -663,18 +646,15 @@
           <para>
             <block subset="none" type="default"
               >The default
-      implementation uses the <see
-               cref="M:System.Array.SetValue(System.Object,System.Int32)" />
+      implementation uses the <see cref="M:System.Array.SetValue(System.Object,System.Int32)" />
 
               
 
-              (<see
-               cref="T:System.Object" />
+              (<see cref="T:System.Object" />
 
               
 
-              , <see
-               cref="T:System.Int32" />
+              , <see cref="T:System.Int32" />
 
               
 
@@ -684,8 +664,7 @@
           <para>
             <block subset="none" type="overrides"
               >Override this 
-      method to customize the manner in which elements are added to <paramref
-               name=" array" />
+      method to customize the manner in which elements are added to <paramref name=" array" />
 
               
 
@@ -706,8 +685,7 @@
 
           
 
-           is outside the range of allowable values for <paramref
-           name="array" />
+           is outside the range of allowable values for <paramref name="array" />
 
           
 
@@ -718,8 +696,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -728,8 +705,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the permission objects of the set to the indicated location in an <see
-             cref="T:System.Array" />
+            >Copies the permission objects of the set to the indicated location in an <see cref="T:System.Array" />
 
             
 
@@ -737,14 +713,22 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target array to which to copy. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -807,39 +791,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Security.PermissionSet.Demand" />
+            >Use <see cref="M:System.Security.PermissionSet.Demand" />
 
             
 
-             on a <see
-             cref="T:System.Security.PermissionSet" />
+             on a <see cref="T:System.Security.PermissionSet" />
 
             
 
              to ensure that all callers have all permissions in the set with one operation.</para
           >
           <para
-            >The permissions of the code that calls this method are not examined; the check begins from the immediate caller of that code and proceeds up the stack. The call stack is typically represented as growing down, so that methods higher in the call stack call methods lower in the call stack. <see
-             cref="M:System.Security.PermissionSet.Demand" />
+            >The permissions of the code that calls this method are not examined; the check begins from the immediate caller of that code and proceeds up the stack. The call stack is typically represented as growing down, so that methods higher in the call stack call methods lower in the call stack. <see cref="M:System.Security.PermissionSet.Demand" />
 
             
 
-             succeeds only if no <see
-             cref="T:System.Security.SecurityException" />
+             succeeds only if no <see cref="T:System.Security.SecurityException" />
 
             
 
              is thrown.</para
           >
           <para
-            >If the <see
-             cref="T:System.Security.PermissionSet" />
+            >If the <see cref="T:System.Security.PermissionSet" />
 
             
 
-             contains permissions that do not inherit from <see
-             cref="T:System.Security.CodeAccessPermission" />
+             contains permissions that do not inherit from <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
@@ -849,8 +827,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces a <see
-             cref="T:System.Security.SecurityException" />
+            >Forces a <see cref="T:System.Security.SecurityException" />
 
             
 
@@ -880,8 +857,7 @@
       <Docs>
         <exception cref="T:System.Security.SecurityException">
           <para
-            >A previous call to <see
-             langword="Deny" />
+            >A previous call to <see langword="Deny" />
 
             
 
@@ -896,23 +872,19 @@
 
             
 
-             can limit the liability of the programmer or help prevent accidental security vulnerabilities because it helps prevent the method that calls <see
-             cref="M:System.Security.PermissionSet.Deny" />
+             can limit the liability of the programmer or help prevent accidental security vulnerabilities because it helps prevent the method that calls <see cref="M:System.Security.PermissionSet.Deny" />
 
             
 
-             from being used to access the resource protected by the denied permission. If a method calls <see
-             cref="M:System.Security.PermissionSet.Deny" />
+             from being used to access the resource protected by the denied permission. If a method calls <see cref="M:System.Security.PermissionSet.Deny" />
 
             
 
-             on a permission, and if a <see
-             cref="M:System.Security.PermissionSet.Demand" />
+             on a permission, and if a <see cref="M:System.Security.PermissionSet.Demand" />
 
             
 
-             for that permission is invoked by a caller lower in the call stack, that security check fails when it reaches the <see
-             cref="M:System.Security.PermissionSet.Deny" />
+             for that permission is invoked by a caller lower in the call stack, that security check fails when it reaches the <see cref="M:System.Security.PermissionSet.Deny" />
 
             
 
@@ -929,13 +901,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes any <see
-             cref="M:System.Security.PermissionSet.Demand" />
+            >Causes any <see cref="M:System.Security.PermissionSet.Demand" />
 
             
 
-             that passes through the calling code for a permission that has an intersection with a permission of a type contained in the current <see
-             cref="T:System.Security.PermissionSet" />
+             that passes through the calling code for a permission that has an intersection with a permission of a type contained in the current <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -972,41 +942,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Equality is determined by the permissions contained in the permission set specified by <paramref
-             name="obj" />
+            >Equality is determined by the permissions contained in the permission set specified by <paramref name="obj" />
 
             
 
-            . <paramref
-             name="obj" />
+            . <paramref name="obj" />
 
             
 
-             can be either a <see
-             cref="T:System.Security.PermissionSet" />
+             can be either a <see cref="T:System.Security.PermissionSet" />
 
             
 
-             object or a <see
-             cref="T:System.Security.NamedPermissionSet" />
+             object or a <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
-             object. If <paramref
-             name="obj" />
+             object. If <paramref name="obj" />
 
             
 
-             is a <see
-             cref="T:System.Security.NamedPermissionSet" />
+             is a <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
             , the name and description are ignored.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >For more information, see <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -1016,18 +979,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.PermissionSet" />
+            >Determines whether the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
-             or <see
-             cref="T:System.Security.NamedPermissionSet" />
+             or <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Security.PermissionSet" />
+             object is equal to the current <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1037,8 +997,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified object is equal to the current <see
-             cref="T:System.Security.PermissionSet" />
+            >true if the specified object is equal to the current <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1046,12 +1005,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare with the current <see
-           cref="T:System.Security.PermissionSet" />
+          The object to compare with the current <see cref="T:System.Security.PermissionSet" />
 
           
 
@@ -1090,8 +1052,7 @@
             <block subset="none" type="note"
               >For the XML
       encoding for this class, see
-      the <see
-               cref="T:System.Security.PermissionSet" />
+      the <see cref="T:System.Security.PermissionSet" />
 
               
 
@@ -1101,15 +1062,13 @@
           <para>
             <block subset="none" type="behaviors"
               >When this call completes, the
-      objects in the current instance are required to be identical to the objects in the <see
-               cref="T:System.Security.PermissionSet" />
+      objects in the current instance are required to be identical to the objects in the <see cref="T:System.Security.PermissionSet" />
 
               
 
               
       encoded in
-   <paramref
-               name=" et" />
+   <paramref name=" et" />
 
               
 
@@ -1119,8 +1078,7 @@
           <para>
             <block subset="none" type="overrides"
               >Override this method
-      to reconstruct subclasses of <see
-               cref="T:System.Security.PermissionSet" />
+      to reconstruct subclasses of <see cref="T:System.Security.PermissionSet" />
 
               
 
@@ -1139,8 +1097,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1152,8 +1109,7 @@
 
             
 
-             does not contain an XML encoding for a <see
-             cref="T:System.Security.PermissionSet" />
+             does not contain an XML encoding for a <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1161,8 +1117,7 @@
           >
           <para>-or-</para>
           <para
-            >An error occurred while reconstructing <paramref
-             name="et" />
+            >An error occurred while reconstructing <paramref name="et" />
 
             
 
@@ -1174,7 +1129,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="et">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1247,8 +1206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for two instances of the same permission set might be different, so a hash code should not be used to compare two <see
-             cref="T:System.Security.PermissionSet" />
+            >The hash code for two instances of the same permission set might be different, so a hash code should not be used to compare two <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1258,8 +1216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for the <see
-             cref="T:System.Security.PermissionSet" />
+            >Gets a hash code for the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1269,8 +1226,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Security.PermissionSet" />
+            >A hash code for the current <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1304,13 +1260,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method returns null for an Unrestricted <see
-             cref="T:System.Security.PermissionSet" />
+            >The method returns null for an Unrestricted <see cref="T:System.Security.PermissionSet" />
 
             
 
-            . Although an Unrestricted <see
-             cref="T:System.Security.PermissionSet" />
+            . Although an Unrestricted <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1324,13 +1278,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the permission object of the type specified by the <paramref
-             name="permClass" />
+            >A copy of the permission object of the type specified by the <paramref name="permClass" />
 
             
 
-             parameter contained in the <see
-             cref="T:System.Security.PermissionSet" />
+             parameter contained in the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1338,7 +1290,11 @@
           >
         </returns>
         <param name="permClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1372,8 +1328,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The intersection of two permission sets is a permission set that describes the set of operations they both describe in common. Specifically, it represents the minimum permissions such that any demand that passes both permission sets also passes their intersection.</para>
           <para
-            >For each type of permission that is present in both sets, the two instances of those permissions are intersected using the permission's Intersect method; the resulting permission is included in the resulting <see
-             cref="T:System.Security.PermissionSet" />
+            >For each type of permission that is present in both sets, the two instances of those permissions are intersected using the permission's Intersect method; the resulting permission is included in the resulting <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1383,13 +1338,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a permission set that is the intersection of the current <see
-             cref="T:System.Security.PermissionSet" />
+            >Creates and returns a permission set that is the intersection of the current <see cref="T:System.Security.PermissionSet" />
 
             
 
-             and the specified <see
-             cref="T:System.Security.PermissionSet" />
+             and the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1399,8 +1352,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new permission set that represents the intersection of the current <see
-             cref="T:System.Security.PermissionSet" />
+            >A new permission set that represents the intersection of the current <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1408,12 +1360,15 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A permission set to intersect with the current <see
-           cref="T:System.Security.PermissionSet" />
+          A permission set to intersect with the current <see cref="T:System.Security.PermissionSet" />
 
           
 
@@ -1441,8 +1396,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.PermissionSet" />
+            >A <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1452,8 +1406,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Security.PermissionSet" />
+            >Gets a value indicating whether the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1463,8 +1416,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.PermissionSet" />
+            >true if the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1490,8 +1442,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.PermissionSet" />
+            >A <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1533,18 +1484,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.PermissionSet" />
+            >A <see cref="T:System.Security.PermissionSet" />
 
             
 
-             is a subset of the target <see
-             cref="T:System.Security.PermissionSet" />
+             is a subset of the target <see cref="T:System.Security.PermissionSet" />
 
             
 
-             if all demands that succeed for the <see
-             cref="T:System.Security.PermissionSet" />
+             if all demands that succeed for the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1554,13 +1502,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the current <see
-             cref="T:System.Security.PermissionSet" />
+            >Determines whether the current <see cref="T:System.Security.PermissionSet" />
 
             
 
-             is a subset of the specified <see
-             cref="T:System.Security.PermissionSet" />
+             is a subset of the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1570,13 +1516,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the current <see
-             cref="T:System.Security.PermissionSet" />
+            >true if the current <see cref="T:System.Security.PermissionSet" />
 
             
 
-             is a subset of the <paramref
-             name="target" />
+             is a subset of the <paramref name="target" />
 
             
 
@@ -1584,17 +1528,19 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The permission set to test for the subset relationship. This must be either a <see
-           cref="T:System.Security.PermissionSet" />
+          The permission set to test for the subset relationship. This must be either a <see cref="T:System.Security.PermissionSet" />
 
           
 
-           or a <see
-           cref="T:System.Security.NamedPermissionSet" />
+           or a <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -1632,8 +1578,7 @@
              does not automatically handle thread safety, so this property is always false.</para
           >
           <para
-            >This method is required to support <see
-             cref="T:System.Collections.ICollection" />
+            >This method is required to support <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1667,13 +1612,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An Unrestricted <see
-             cref="T:System.Security.PermissionSet" />
+            >An Unrestricted <see cref="T:System.Security.PermissionSet" />
 
             
 
-             effectively contains all permissions that implement the <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+             effectively contains all permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
@@ -1683,8 +1626,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Security.PermissionSet" />
+            >Determines whether the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1694,8 +1636,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.PermissionSet" />
+            >true if the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1727,8 +1668,7 @@
       <Docs>
         <exception cref="T:System.Security.SecurityException">
           <para
-            >A previous call to <see
-             langword="PermitOnly" />
+            >A previous call to <see langword="PermitOnly" />
 
             
 
@@ -1742,18 +1682,15 @@
 
             
 
-             is similar to <see
-             cref="M:System.Security.PermissionSet.Deny" />
+             is similar to <see cref="M:System.Security.PermissionSet.Deny" />
 
             
 
-            , in that both cause stack walks to fail when they would otherwise succeed. The difference is that <see
-             cref="M:System.Security.PermissionSet.Deny" />
+            , in that both cause stack walks to fail when they would otherwise succeed. The difference is that <see cref="M:System.Security.PermissionSet.Deny" />
 
             
 
-             specifies permissions that will cause the stack walk to fail, but <see
-             cref="M:System.Security.PermissionSet.PermitOnly" />
+             specifies permissions that will cause the stack walk to fail, but <see cref="M:System.Security.PermissionSet.PermitOnly" />
 
             
 
@@ -1764,28 +1701,23 @@
 
             
 
-             is ignored for a permission not granted because a demand for that permission cannot succeed. However, if code lower on the call stack later calls <see
-             cref="M:System.Security.PermissionSet.Demand" />
+             is ignored for a permission not granted because a demand for that permission cannot succeed. However, if code lower on the call stack later calls <see cref="M:System.Security.PermissionSet.Demand" />
 
             
 
-             for that permission, a <see
-             cref="T:System.Security.SecurityException" />
+             for that permission, a <see cref="T:System.Security.SecurityException" />
 
             
 
-             is thrown when the stack walk reaches the code that tried to call <see
-             cref="M:System.Security.PermissionSet.PermitOnly" />
+             is thrown when the stack walk reaches the code that tried to call <see cref="M:System.Security.PermissionSet.PermitOnly" />
 
             
 
-            . This is because the code that called <see
-             cref="M:System.Security.PermissionSet.PermitOnly" />
+            . This is because the code that called <see cref="M:System.Security.PermissionSet.PermitOnly" />
 
             
 
-             has not been granted the permission, even though it called <see
-             cref="M:System.Security.PermissionSet.PermitOnly" />
+             has not been granted the permission, even though it called <see cref="M:System.Security.PermissionSet.PermitOnly" />
 
             
 
@@ -1795,18 +1727,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes any <see
-             cref="M:System.Security.PermissionSet.Demand" />
+            >Causes any <see cref="M:System.Security.PermissionSet.Demand" />
 
             
 
-             that passes through the calling code for any <see
-             cref="T:System.Security.PermissionSet" />
+             that passes through the calling code for any <see cref="T:System.Security.PermissionSet" />
 
             
 
-             that is not a subset of the current <see
-             cref="T:System.Security.PermissionSet" />
+             that is not a subset of the current <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1844,8 +1773,7 @@
             <para>You cannot remove permissions from an unrestricted permission set. The permission set remains unrestricted after you attempt to remove the permission, and an exception is not thrown.</para>
           </block>
           <para
-            >The following C# code attempts to remove the <see
-             cref="T:System.Security.Permissions.FileIOPermission" />
+            >The following C# code attempts to remove the <see cref="T:System.Security.Permissions.FileIOPermission" />
 
             
 
@@ -1864,7 +1792,11 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para>The permission removed from the set.</para>
         </returns>
         <param name="permClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1892,13 +1824,11 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is no <see
-             cref="M:System.Security.CodeAccessPermission.Assert" />
+            >If there is no <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
-             for the current frame, an <see
-             cref="T:System.ExecutionEngineException" />
+             for the current frame, an <see cref="T:System.ExecutionEngineException" />
 
             
 
@@ -1908,8 +1838,7 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Causes any previous <see
-             cref="M:System.Security.CodeAccessPermission.Assert" />
+            >Causes any previous <see cref="M:System.Security.CodeAccessPermission.Assert" />
 
             
 
@@ -1943,33 +1872,27 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method removes any existing permission object of the same type from the <see
-             cref="T:System.Security.PermissionSet" />
+            >This method removes any existing permission object of the same type from the <see cref="T:System.Security.PermissionSet" />
 
             
 
-             and replaces it with the <paramref
-             name="perm" />
+             and replaces it with the <paramref name="perm" />
 
             
 
-             parameter. If a permission that implements <see
-             cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+             parameter. If a permission that implements <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
             
 
-             is set on a <see
-             cref="T:System.Security.PermissionSet" />
+             is set on a <see cref="T:System.Security.PermissionSet" />
 
             
 
-             that is <see
-             cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+             that is <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
             
 
-            , the resulting <see
-             cref="T:System.Security.PermissionSet" />
+            , the resulting <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1979,8 +1902,7 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets a permission to the <see
-             cref="T:System.Security.PermissionSet" />
+            >Sets a permission to the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -1992,7 +1914,11 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para>The set permission.</para>
         </returns>
         <param name="perm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2022,8 +1948,7 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is required to support <see
-             cref="T:System.Collections.ICollection" />
+            >This method is required to support <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -2065,7 +1990,11 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para>Runs when the entire object graph has been deserialized.</para>
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2097,16 +2026,14 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         <example>
           <para
             >The following example displays the XML that encodes the 
-      state of a <see
-             cref="T:System.Security.PermissionSet" />
+      state of a <see cref="T:System.Security.PermissionSet" />
 
             
 
             
       .</para
           >
-          <code lang="C#"
-            >
+          <code lang="C#">
 using System;
 using System.Security;
 using System.Security.Permissions;
@@ -2128,8 +2055,7 @@ public class PermissionSetToStringExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string representation is useful in debugging to see the state of a <see
-             cref="T:System.Security.PermissionSet" />
+            >The string representation is useful in debugging to see the state of a <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -2139,8 +2065,7 @@ public class PermissionSetToStringExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string representation of the <see
-             cref="T:System.Security.PermissionSet" />
+            >Returns a string representation of the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -2150,8 +2075,7 @@ public class PermissionSetToStringExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A representation of the <see
-             cref="T:System.Security.PermissionSet" />
+            >A representation of the <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -2192,8 +2116,7 @@ public class PermissionSetToStringExample {
           <para>
             <block subset="none" type="overrides"
               >Override this method to return an
-      object containing the XML encoding for types derived from <see
-               cref="T:System.Security.PermissionSet" />
+      object containing the XML encoding for types derived from <see cref="T:System.Security.PermissionSet" />
 
               
 
@@ -2245,23 +2168,19 @@ public class PermissionSetToStringExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.PermissionSet.Union(System.Security.PermissionSet)" />
+            >The result of a call to <see cref="M:System.Security.PermissionSet.Union(System.Security.PermissionSet)" />
 
             
 
-             is a <see
-             cref="T:System.Security.PermissionSet" />
+             is a <see cref="T:System.Security.PermissionSet" />
 
             
 
-             that represents all the operations represented by the current <see
-             cref="T:System.Security.PermissionSet" />
+             that represents all the operations represented by the current <see cref="T:System.Security.PermissionSet" />
 
             
 
-             as well as all the operations represented by the specified <see
-             cref="T:System.Security.PermissionSet" />
+             as well as all the operations represented by the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -2271,18 +2190,15 @@ public class PermissionSetToStringExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Security.PermissionSet" />
+            >Creates a <see cref="T:System.Security.PermissionSet" />
 
             
 
-             that is the union of the current <see
-             cref="T:System.Security.PermissionSet" />
+             that is the union of the current <see cref="T:System.Security.PermissionSet" />
 
             
 
-             and the specified <see
-             cref="T:System.Security.PermissionSet" />
+             and the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -2292,13 +2208,11 @@ public class PermissionSetToStringExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new permission set that represents the union of the current <see
-             cref="T:System.Security.PermissionSet" />
+            >A new permission set that represents the union of the current <see cref="T:System.Security.PermissionSet" />
 
             
 
-             and the specified <see
-             cref="T:System.Security.PermissionSet" />
+             and the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -2306,12 +2220,15 @@ public class PermissionSetToStringExample {
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The permission set to form the union with the current <see
-           cref="T:System.Security.PermissionSet" />
+          The permission set to form the union with the current <see cref="T:System.Security.PermissionSet" />
 
           
 

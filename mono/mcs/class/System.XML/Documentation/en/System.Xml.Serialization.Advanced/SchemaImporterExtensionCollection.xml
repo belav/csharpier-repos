@@ -25,18 +25,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
+        >The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
 
         
 
-         is accessed through the <see
-         cref="P:System.Xml.Serialization.SchemaImporter.Extensions" />
+         is accessed through the <see cref="P:System.Xml.Serialization.SchemaImporter.Extensions" />
 
         
 
-         property of the <see
-         cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+         property of the <see cref="T:System.Xml.Serialization.XmlSchemaImporter" />
 
         
 
@@ -46,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+        >Represents a collection of <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
         
 
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
 
             
 
@@ -119,12 +114,15 @@
           <para>The index of the added extension.</para>
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
 
           
 
@@ -162,19 +160,26 @@
           <para>The index of the newly added item.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A custom name for the extension.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
 
           
 
@@ -241,12 +246,15 @@
           <para>true if the extension is found; otherwise, false.</para>
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
 
           
 
@@ -284,13 +292,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies all the elements of the current <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
+            >Copies all the elements of the current <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection" />
 
             
 
-             to the specified array of <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+             to the specified array of <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 
@@ -298,19 +304,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
           
 
            to copy the current collection to.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -353,12 +366,15 @@
           <para>The index of the found item.</para>
         </returns>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
           
 
@@ -396,8 +412,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+            >Inserts the specified <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 
@@ -405,24 +420,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-base index at which the <paramref
-           name="extension" />
+          The zero-base index at which the <paramref name="extension" />
 
           
 
            should be inserted.</param
         >
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
           
 
@@ -481,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+            >Removes the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 
@@ -490,17 +510,19 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+          The name of the <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
           
 
-           to remove. The name is set using the <see
-           cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection.Add(System.String,System.Type)" />
+           to remove. The name is set using the <see cref="M:System.Xml.Serialization.Advanced.SchemaImporterExtensionCollection.Add(System.String,System.Type)" />
 
           
 
@@ -537,8 +559,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+            >Removes the specified <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
             
 
@@ -546,12 +567,15 @@
           >
         </summary>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+          The <see cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
 
           
 

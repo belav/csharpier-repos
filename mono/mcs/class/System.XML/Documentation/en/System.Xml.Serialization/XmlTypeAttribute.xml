@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+        >The <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
         
 
-         belongs to a family of attributes that controls how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         belongs to a family of attributes that controls how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes or deserializes an object. For a complete list of similar attributes, see <format
-         type="text/html">
+         serializes or deserializes an object. For a complete list of similar attributes, see <format type="text/html">
           <a href="414b820f-a696-4206-b576-2711d85490c7"
             >Attributes That Control XML Serialization</a
           >
@@ -52,26 +49,22 @@
         .</para
       >
       <para
-        >You can apply the <see
-         cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+        >You can apply the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
         
 
          to a class, structure, enumeration, or interface declaration.</para
       >
       <para
-        >Apply the <see
-         cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+        >Apply the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
         
 
-         to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
-         cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+         to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
         
 
-         class, compile your application as an executable or DLL, and pass the resulting file to the <format
-         type="text/html">
+         class, compile your application as an executable or DLL, and pass the resulting file to the <format type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
 
@@ -81,13 +74,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If you set the <see
-           cref="P:System.Xml.Serialization.XmlTypeAttribute.IncludeInSchema" />
+          >If you set the <see cref="P:System.Xml.Serialization.XmlTypeAttribute.IncludeInSchema" />
 
           
 
-           property to false, the <format
-           type="text/html">
+           property to false, the <format type="text/html">
             <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
           </format>
 
@@ -97,8 +88,7 @@
         >
       </block>
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -108,8 +98,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You can use the word XmlType in your code instead of the longer <see
-           cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+          >You can use the word XmlType in your code instead of the longer <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
           
 
@@ -120,8 +109,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Controls the XML schema that is generated when the attribute target is serialized by the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Controls the XML schema that is generated when the attribute target is serialized by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -149,8 +137,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
@@ -179,18 +166,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+            >Apply the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-             to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-             class, compile your application as an executable or DLL, and pass the resulting file to the <format
-             type="text/html">
+             class, compile your application as an executable or DLL, and pass the resulting file to the <format type="text/html">
               <a href="a6e6e65c-347f-4494-9457-653bf29baac2"
                 >XML Schema Definition Tool (Xsd.exe)</a
               >
@@ -204,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
@@ -213,12 +196,15 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the XML type that the <see
-           cref="T:System.Xml.Serialization.XmlSerializer" />
+          The name of the XML type that the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
           
 
@@ -265,13 +251,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+            >Apply the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-             to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
@@ -324,18 +308,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+            >Apply the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-             to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             to a class to specify the XML type's namespace, the XML type name, and whether to include the type in the XML schema document. To see the results of setting the properties of the <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
-             class, compile your application as an executable or DLL, and pass the resulting file to the <format
-             type="text/html">
+             class, compile your application as an executable or DLL, and pass the resulting file to the <format type="text/html">
               <a href="a6e6e65c-347f-4494-9457-653bf29baac2"
                 >XML Schema Definition Tool (Xsd.exe)</a
               >

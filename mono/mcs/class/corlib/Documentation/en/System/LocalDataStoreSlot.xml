@@ -29,8 +29,7 @@
       <list type="bullet">
         <item>
           <para
-            >Thread-relative static fields are static fields (Shared fields in Visual Basic) that are marked with the <see
-             cref="T:System.ThreadStaticAttribute" />
+            >Thread-relative static fields are static fields (Shared fields in Visual Basic) that are marked with the <see cref="T:System.ThreadStaticAttribute" />
 
             
 
@@ -39,8 +38,7 @@
         </item>
         <item>
           <para
-            >Data slots are slower and more awkward to use than thread-relative static fields. Also, data is stored as type <see
-             cref="T:System.Object" />
+            >Data slots are slower and more awkward to use than thread-relative static fields. Also, data is stored as type <see cref="T:System.Object" />
 
             
 
@@ -49,8 +47,7 @@
         </item>
       </list>
       <para
-        >For more information about using TLS, see <format
-         type="text/html">
+        >For more information about using TLS, see <format type="text/html">
           <a href="c633a4dc-a790-4ed1-96b5-f72bd968b284"
             >Thread Local Storage: Thread-Relative Static Fields and Data Slots</a
           >
@@ -61,16 +58,14 @@
         . </para
       >
       <para
-        >Similarly, the .NET Framework provides two mechanisms for using context local storage: context-relative static fields and data slots. Context-relative static fields are static fields that are marked with the <see
-         cref="T:System.ContextStaticAttribute" />
+        >Similarly, the .NET Framework provides two mechanisms for using context local storage: context-relative static fields and data slots. Context-relative static fields are static fields that are marked with the <see cref="T:System.ContextStaticAttribute" />
 
         
 
          attribute. The trade-offs between using these two mechanisms are similar to the tradeoffs between using thread-relative static fields and data slots. </para
       >
       <para
-        >The <see
-         cref="T:System.LocalDataStoreSlot" />
+        >The <see cref="T:System.LocalDataStoreSlot" />
 
         
 
@@ -78,38 +73,31 @@
       >
       <para>The data slots are unique per thread or context; their values are not shared between the thread or context objects. Data slots can be allocated by a name or by an index number.</para>
       <para
-        >For more information about storing local data, see <see
-         cref="T:System.Threading.Thread" />
+        >For more information about storing local data, see <see cref="T:System.Threading.Thread" />
 
         
 
-         or <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         or <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
-        . The <see
-         cref="T:System.LocalDataStoreSlot" />
+        . The <see cref="T:System.LocalDataStoreSlot" />
 
         
 
-         class is used with methods such as <see
-         cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
+         class is used with methods such as <see cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
 
         
 
-        , <see
-         cref="M:System.Runtime.Remoting.Contexts.Context.AllocateNamedDataSlot(System.String)" />
+        , <see cref="M:System.Runtime.Remoting.Contexts.Context.AllocateNamedDataSlot(System.String)" />
 
         
 
-        , <see
-         cref="M:System.Threading.Thread.GetData(System.LocalDataStoreSlot)" />
+        , <see cref="M:System.Threading.Thread.GetData(System.LocalDataStoreSlot)" />
 
         
 
-        , and <see
-         cref="M:System.Runtime.Remoting.Contexts.Context.GetData(System.LocalDataStoreSlot)" />
+        , and <see cref="M:System.Runtime.Remoting.Contexts.Context.GetData(System.LocalDataStoreSlot)" />
 
         
 

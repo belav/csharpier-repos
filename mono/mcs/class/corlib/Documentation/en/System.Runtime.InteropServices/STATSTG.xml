@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.STATSTG" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.STATSTG" />
 
         
 

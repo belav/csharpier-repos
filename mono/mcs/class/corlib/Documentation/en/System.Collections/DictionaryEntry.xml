@@ -36,21 +36,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+        >The <see cref="P:System.Collections.IDictionaryEnumerator.Entry" />
 
         
 
          method returns an instance of this type.</para
       >
       <para
-        >The foreach statement of the C# language (for each in Visual C++, For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
-         cref="T:System.Collections.IDictionary" />
+        >The foreach statement of the C# language (for each in Visual C++, For Each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.IDictionary" />
 
         
 
-         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.DictionaryEntry" />
+         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
@@ -92,8 +89,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -102,8 +98,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In the dnprdnlong <paramref
-             name="key" />
+            >In the dnprdnlong <paramref name="key" />
 
             
 
@@ -113,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of the <see
-             cref="T:System.Collections.DictionaryEntry" />
+            >Initializes an instance of the <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -122,19 +116,26 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object defined in each key/value pair. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The definition associated with <paramref
-           name="key" />
+          The definition associated with <paramref name="key" />
 
           
 
@@ -163,14 +164,12 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
              representing the
-   key of the current <see
-             cref="T:System.Collections.DictionaryEntry" />
+   key of the current <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -179,13 +178,11 @@
         </value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentNullException"
-          >Set <paramref
-           name="value" />
+          >Set <paramref name="value" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -218,14 +215,12 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
              representing the
-   content of the current <see
-             cref="T:System.Collections.DictionaryEntry" />
+   content of the current <see cref="T:System.Collections.DictionaryEntry" />
 
             
 

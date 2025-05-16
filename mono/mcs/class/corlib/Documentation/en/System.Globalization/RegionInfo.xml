@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Unlike the <see
-         cref="T:System.Globalization.CultureInfo" />
+        >Unlike the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         class, the <see
-         cref="T:System.Globalization.RegionInfo" />
+         class, the <see cref="T:System.Globalization.RegionInfo" />
 
         
 
@@ -42,33 +40,28 @@
         <h2>Names Associated with a RegionInfo Object</h2>
       </format>
       <para
-        >The name of a <see
-         cref="T:System.Globalization.RegionInfo" />
+        >The name of a <see cref="T:System.Globalization.RegionInfo" />
 
         
 
-         object is one of the two-letter codes defined in ISO 3166 for country/region. Case is not significant. The <see
-         cref="P:System.Globalization.RegionInfo.Name" />
+         object is one of the two-letter codes defined in ISO 3166 for country/region. Case is not significant. The <see cref="P:System.Globalization.RegionInfo.Name" />
 
         
 
-        , <see
-         cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+        , <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
         
 
-        , and <see
-         cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+        , and <see cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
 
         
 
-         properties return the appropriate codes in uppercase. For the current list of <see
-         cref="T:System.Globalization.RegionInfo" />
+         properties return the appropriate codes in uppercase. For the current list of <see cref="T:System.Globalization.RegionInfo" />
 
         
 
          names, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=190591"
+          cref="http://go.microsoft.com/fwlink/?LinkId=190591"
           >English country names and code elements</see
         >
 
@@ -80,51 +73,42 @@
         <h2>Instantiating a RegionInfo Object</h2>
       </format>
       <para
-        >To instantiate a <see
-         cref="T:System.Globalization.RegionInfo" />
+        >To instantiate a <see cref="T:System.Globalization.RegionInfo" />
 
         
 
-         object, you pass the <see
-         cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
+         object, you pass the <see cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
 
         
 
-         constructor either a two-letter region name, such as "US" for the United States, or the name of a specific culture, such as "en-US" for English (United States). However, we recommend that you use a specific culture name instead of a two-letter region name, because a <see
-         cref="T:System.Globalization.RegionInfo" />
+         constructor either a two-letter region name, such as "US" for the United States, or the name of a specific culture, such as "en-US" for English (United States). However, we recommend that you use a specific culture name instead of a two-letter region name, because a <see cref="T:System.Globalization.RegionInfo" />
 
         
 
-         object is not completely language-independent. Several <see
-         cref="T:System.Globalization.RegionInfo" />
+         object is not completely language-independent. Several <see cref="T:System.Globalization.RegionInfo" />
 
         
 
-         properties, including <see
-         cref="P:System.Globalization.RegionInfo.DisplayName" />
+         properties, including <see cref="P:System.Globalization.RegionInfo.DisplayName" />
 
         
 
-        , <see
-         cref="P:System.Globalization.RegionInfo.NativeName" />
+        , <see cref="P:System.Globalization.RegionInfo.NativeName" />
 
         
 
-        , and <see
-         cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+        , and <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
         
 
         , depend on culture names. </para
       >
       <para
-        >The following example illustrates the difference in <see
-         cref="T:System.Globalization.RegionInfo" />
+        >The following example illustrates the difference in <see cref="T:System.Globalization.RegionInfo" />
 
         
 
-         property values for three objects that represent Belgium. The first is instantiated from a region name (BE) only, while the second and third are instantiated from culture names (fr-BE for French (Belgium) and and nl-BE for Dutch (Belgium), respectively). The example uses reflection to retrieve the property values of each <see
-         cref="T:System.Globalization.RegionInfo" />
+         property values for three objects that represent Belgium. The first is instantiated from a region name (BE) only, while the second and third are instantiated from culture names (fr-BE for French (Belgium) and and nl-BE for Dutch (Belgium), respectively). The example uses reflection to retrieve the property values of each <see cref="T:System.Globalization.RegionInfo" />
 
         
 
@@ -132,8 +116,7 @@
       >
       <para>code reference: System.Globalization.RegionInfo#2</para>
       <para
-        >In scenarios such as the following, use culture names instead of country/region names when you instantiate a <see
-         cref="T:System.Globalization.RegionInfo" />
+        >In scenarios such as the following, use culture names instead of country/region names when you instantiate a <see cref="T:System.Globalization.RegionInfo" />
 
         
 
@@ -148,18 +131,15 @@
         </item>
         <item>
           <para
-            >When maintenance of detail is important. The values returned by <see
-             cref="T:System.Globalization.RegionInfo" />
+            >When maintenance of detail is important. The values returned by <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             members can differ depending on whether the <see
-             cref="T:System.Globalization.RegionInfo" />
+             members can differ depending on whether the <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object was instantiated by using a culture name or a region name. For example, the following table lists the differences in return values when a <see
-             cref="T:System.Globalization.RegionInfo" />
+             object was instantiated by using a culture name or a region name. For example, the following table lists the differences in return values when a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -280,13 +260,11 @@
 
             
 
-             is the recommended constructor for instantiating a <see
-             cref="T:System.Globalization.RegionInfo" />
+             is the recommended constructor for instantiating a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object. Unlike the <see
-             cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" />
+             object. Unlike the <see cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" />
 
             
 
@@ -294,7 +272,7 @@
           >
           <para
             >The culture identifier is mapped to the corresponding National Language Support (NLS) locale identifier. Detailed culture information appears in the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=200048"
+              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
 
@@ -303,33 +281,27 @@
              at the Go Global Developer Center.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+            >The value of the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-             property of the new <see
-             cref="T:System.Globalization.RegionInfo" />
+             property of the new <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object instantiated by calling this constructor is the ISO 3166 2-letter code for the country/region, not the combined language and country/region code. For example, if a <see
-             cref="T:System.Globalization.RegionInfo" />
+             object instantiated by calling this constructor is the ISO 3166 2-letter code for the country/region, not the combined language and country/region code. For example, if a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is instantiated with the culture identifier 0x0409 for the English (United States) culture, the value of the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             object is instantiated with the culture identifier 0x0409 for the English (United States) culture, the value of the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-             property is "US". In contrast, if a <see
-             cref="T:System.Globalization.RegionInfo" />
+             property is "US". In contrast, if a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is instantiated with the combined language and country/region code en-US for the English (United States) culture, the value of the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             object is instantiated with the combined language and country/region code en-US for the English (United States) culture, the value of the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
@@ -339,8 +311,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -348,7 +319,11 @@
           >
         </summary>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -376,28 +351,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="name" />
+            >The <paramref name="name" />
 
             
 
-             parameter is either one of the codes defined for country/region, or a specific, custom, or Windows-only culture name. Case is not significant. However, the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             parameter is either one of the codes defined for country/region, or a specific, custom, or Windows-only culture name. Case is not significant. However, the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-            , the <see
-             cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+            , the <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
             
 
-            , and the <see
-             cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+            , and the <see cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
 
             
 
-             properties return the specified code or culture name in uppercase. See further discussion in <format
-             type="text/html">
+             properties return the specified code or culture name in uppercase. See further discussion in <format type="text/html">
               <a href="20a7b6ee-4705-4e0b-a4a2-d72341b1d495"
                 >Names Associated with a RegionInfo Object</a
               >
@@ -408,13 +378,12 @@
             .</para
           >
           <para
-            >The predefined <see
-             cref="T:System.Globalization.RegionInfo" />
+            >The predefined <see cref="T:System.Globalization.RegionInfo" />
 
             
 
              names are listed in <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=190591"
+              cref="http://go.microsoft.com/fwlink/?LinkId=190591"
               >Country names and code elements</see
             >
 
@@ -423,50 +392,42 @@
              on the ISO website. </para
           >
           <para
-            >You should provide the name of a specific culture rather than just a country/region name in the <paramref
-             name="name" />
+            >You should provide the name of a specific culture rather than just a country/region name in the <paramref name="name" />
 
             
 
-             parameter. For example, en-US for English (United States) or es-US for Spanish (United States) is preferable to US because properties such as <see
-             cref="P:System.Globalization.RegionInfo.NativeName" />
+             parameter. For example, en-US for English (United States) or es-US for Spanish (United States) is preferable to US because properties such as <see cref="P:System.Globalization.RegionInfo.NativeName" />
 
             
 
-             and <see
-             cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+             and <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
             
 
-             reflect a specific language. az-Latn-AZ or az-Cyrl-AZ is preferable to AZ because properties such as <see
-             cref="P:System.Globalization.RegionInfo.NativeName" />
+             reflect a specific language. az-Latn-AZ or az-Cyrl-AZ is preferable to AZ because properties such as <see cref="P:System.Globalization.RegionInfo.NativeName" />
 
             
 
-            , <see
-             cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+            , <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
             
 
-            , and <see
-             cref="P:System.Globalization.RegionInfo.CurrencySymbol" />
+            , and <see cref="P:System.Globalization.RegionInfo.CurrencySymbol" />
 
             
 
              reflect a specific script.  The predefined culture names are listed in the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=200048"
+              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
 
             
 
-             at the Go Global Developer Center. Note that a call to this constructor throws an <see
-             cref="T:System.ArgumentException" />
+             at the Go Global Developer Center. Note that a call to this constructor throws an <see cref="T:System.ArgumentException" />
 
             
 
-             if <paramref
-             name="name" />
+             if <paramref name="name" />
 
             
 
@@ -476,8 +437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -485,7 +445,11 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -541,46 +505,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >If the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is created with a specific culture and more than one language is used in the corresponding country/region, the <see
-             cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+             object is created with a specific culture and more than one language is used in the corresponding country/region, the <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
             
 
              property retrieves the currency name associated with the specific culture.</para
           >
           <para
-            >The value of this property depends on the language that is associated with a particular country/region. Therefore, if you intend to use the <see
-             cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+            >The value of this property depends on the language that is associated with a particular country/region. Therefore, if you intend to use the <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
             
 
-             property, you should instantiate the <see
-             cref="T:System.Globalization.RegionInfo" />
+             property, you should instantiate the <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object by passing the <see
-             cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
+             object by passing the <see cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
 
             
 
-             constructor a combined language and country/region code. For example, if a <see
-             cref="T:System.Globalization.RegionInfo" />
+             constructor a combined language and country/region code. For example, if a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is instantiated with a combined language and country/region code of "en-CA" for English (Canada), the value of its <see
-             cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+             object is instantiated with a combined language and country/region code of "en-CA" for English (Canada), the value of its <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
             
 
-             property is "Canadian Dollar". If it is instantiated with a combined language and country/region code of "fr-CA" for French (Canada), the value of its <see
-             cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+             property is "Canadian Dollar". If it is instantiated with a combined language and country/region code of "fr-CA" for French (Canada), the value of its <see cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
 
             
 
@@ -611,13 +567,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>For example, the currency symbol for the United States is "$".</para>
           <para
-            >If the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >If the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is created with a specific culture and more than one language is used in the corresponding country/region, the <see
-             cref="P:System.Globalization.RegionInfo.CurrencySymbol" />
+             object is created with a specific culture and more than one language is used in the corresponding country/region, the <see cref="P:System.Globalization.RegionInfo.CurrencySymbol" />
 
             
 
@@ -653,23 +607,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property is based on the culture selected through the regional and language options portion of Control Panel. However, that information can change during the life of the <see
-             cref="T:System.AppDomain" />
+            >The value of this property is based on the culture selected through the regional and language options portion of Control Panel. However, that information can change during the life of the <see cref="T:System.AppDomain" />
 
             
 
-            . The <see
-             cref="T:System.Globalization.RegionInfo" />
+            . The <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             class does not automatically detect changes in the system settings, but the <see
-             cref="P:System.Globalization.RegionInfo.CurrentRegion" />
+             class does not automatically detect changes in the system settings, but the <see cref="P:System.Globalization.RegionInfo.CurrentRegion" />
 
             
 
-             property is updated when you call the <see
-             cref="M:System.Globalization.CultureInfo.ClearCachedData" />
+             property is updated when you call the <see cref="M:System.Globalization.CultureInfo.ClearCachedData" />
 
             
 
@@ -679,8 +629,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Gets the <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -706,36 +655,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.RegionInfo.DisplayName" />
+            >The <see cref="P:System.Globalization.RegionInfo.DisplayName" />
 
             
 
-             property displays the country/region name in the language of the localized version of .NET Framework. For example, the <see
-             cref="P:System.Globalization.RegionInfo.DisplayName" />
+             property displays the country/region name in the language of the localized version of .NET Framework. For example, the <see cref="P:System.Globalization.RegionInfo.DisplayName" />
 
             
 
              property displays the country/region in English on the English version of the .NET Framework, and in Spanish on the Spanish version of the .NET Framework.</para
           >
           <para
-            >The value of the <see
-             cref="P:System.Globalization.RegionInfo.DisplayName" />
+            >The value of the <see cref="P:System.Globalization.RegionInfo.DisplayName" />
 
             
 
-             property is taken from the resource files in the language of the current user interface culture, represented by <see
-             cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+             property is taken from the resource files in the language of the current user interface culture, represented by <see cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
             
 
-            . Custom regions or those synthesized from the operating system might not have resource information, in which case the value for <see
-             cref="P:System.Globalization.RegionInfo.DisplayName" />
+            . Custom regions or those synthesized from the operating system might not have resource information, in which case the value for <see cref="P:System.Globalization.RegionInfo.DisplayName" />
 
             
 
-             is the same as the value of the <see
-             cref="P:System.Globalization.RegionInfo.NativeName" />
+             is the same as the value of the <see cref="P:System.Globalization.RegionInfo.NativeName" />
 
             
 
@@ -765,8 +708,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For example, a <see
-             cref="T:System.Globalization.RegionInfo" />
+            >For example, a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -801,8 +743,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method overrides <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -812,8 +753,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object is the same instance as the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Determines whether the specified object is the same instance as the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -823,28 +763,23 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="value" />
+            >true if the <paramref name="value" />
 
             
 
-             parameter is a <see
-             cref="T:System.Globalization.RegionInfo" />
+             parameter is a <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object and its <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             object and its <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-             property is the same as the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             property is the same as the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-             property of the current <see
-             cref="T:System.Globalization.RegionInfo" />
+             property of the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -852,12 +787,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to compare with the current <see
-           cref="T:System.Globalization.RegionInfo" />
+          The object to compare with the current <see cref="T:System.Globalization.RegionInfo" />
 
           
 
@@ -887,13 +825,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The application should use the <see
-             cref="P:System.Globalization.RegionInfo.GeoId" />
+            >The application should use the <see cref="P:System.Globalization.RegionInfo.GeoId" />
 
             
 
-             property to provide culture-specific services to customers. For example, the <see
-             cref="P:System.Globalization.RegionInfo.GeoId" />
+             property to provide culture-specific services to customers. For example, the <see cref="P:System.Globalization.RegionInfo.GeoId" />
 
             
 
@@ -901,7 +837,7 @@
           >
           <para
             >This property value corresponds to the Windows GetUserGeoID function. For a list of geographical identifiers, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=191287"
+              cref="http://go.microsoft.com/fwlink/?LinkId=191287"
               >Table of Geographical Locations</see
             >
 
@@ -936,16 +872,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.GetHashCode" />
+            >This method overrides <see cref="M:System.Object.GetHashCode" />
 
             
 
             .</para
           >
           <para
-            >This method generates the same hash code for two objects that are equal according to the <see
-             cref="M:System.Globalization.RegionInfo.Equals(System.Object)" />
+            >This method generates the same hash code for two objects that are equal according to the <see cref="M:System.Globalization.RegionInfo.Equals(System.Object)" />
 
             
 
@@ -955,8 +889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Serves as a hash function for the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -966,8 +899,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >A hash code for the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -1014,8 +946,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following example lists some of the ISO 4217 currency symbols returned by the <see
-             cref="P:System.Globalization.RegionInfo.ISOCurrencySymbol" />
+            >The following example lists some of the ISO 4217 currency symbols returned by the <see cref="P:System.Globalization.RegionInfo.ISOCurrencySymbol" />
 
             
 
@@ -2281,36 +2212,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >If the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is created with the <see
-             cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" />
+             object is created with the <see cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" />
 
             
 
-             constructor that takes a culture identifier parameter, the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             constructor that takes a culture identifier parameter, the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
              property value is one of the two-letter codes defined in ISO 3166 for the country/region and is formatted in uppercase. For example, the two-letter code for the United States is "US".</para
           >
           <para
-            >If the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >If the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             object is created with the <see
-             cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
+             object is created with the <see cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
 
             
 
-             constructor and is passed a full culture name such as "en-US", the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+             constructor and is passed a full culture name such as "en-US", the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
@@ -2320,8 +2245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name or ISO 3166 two-letter country/region code for the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Gets the name or ISO 3166 two-letter country/region code for the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -2353,8 +2277,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Globalization.RegionInfo.NativeName" />
+              >The <see cref="P:System.Globalization.RegionInfo.NativeName" />
 
               
 
@@ -2362,8 +2285,7 @@
             >
           </block>
           <para
-            >We recommend that you use the culture name—for example, "en-US" for English (United States)—to access the <see
-             cref="P:System.Globalization.RegionInfo.NativeName" />
+            >We recommend that you use the culture name—for example, "en-US" for English (United States)—to access the <see cref="P:System.Globalization.RegionInfo.NativeName" />
 
             
 
@@ -2399,26 +2321,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+            >The <see cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
 
             
 
              property contains the three-letter code defined in ISO 3166 for this country/region. For example, the three-letter code for United States is "USA".</para
           >
           <para
-            >Case is not significant. However, the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+            >Case is not significant. However, the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-            , the <see
-             cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+            , the <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
             
 
-            , and the <see
-             cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+            , and the <see cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
 
             
 
@@ -2458,8 +2376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the three-letter code assigned by Windows to the country/region represented by this <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Gets the three-letter code assigned by Windows to the country/region represented by this <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -2489,47 +2406,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides <see
-             cref="M:System.Object.ToString" />
+            >This method overrides <see cref="M:System.Object.ToString" />
 
             
 
             .</para
           >
           <para
-            >This method returns the value of the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+            >This method returns the value of the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
              property.</para
           >
           <para
-            >Case is not significant. However, the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+            >Case is not significant. However, the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-            , the <see
-             cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+            , the <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
             
 
-            , and the <see
-             cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+            , and the <see cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
 
             
 
              properties return the appropriate code in uppercase.</para
           >
           <para
-            >The predefined <see
-             cref="T:System.Globalization.RegionInfo" />
+            >The predefined <see cref="T:System.Globalization.RegionInfo" />
 
             
 
-             names are listed in the <see
-             cref="T:System.Globalization.RegionInfo" />
+             names are listed in the <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -2539,8 +2449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string containing the culture name or ISO 3166 two-letter country/region codes specified for the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >Returns a string containing the culture name or ISO 3166 two-letter country/region codes specified for the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -2550,8 +2459,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string containing the culture name or ISO 3166 two-letter country/region codes defined for the current <see
-             cref="T:System.Globalization.RegionInfo" />
+            >A string containing the culture name or ISO 3166 two-letter country/region codes defined for the current <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -2580,8 +2488,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Globalization.RegionInfo" />
+            >The <see cref="T:System.Globalization.RegionInfo" />
 
             
 
@@ -2589,13 +2496,11 @@
           >
           <block subset="none" type="note">
             <para
-              >In some cases, the <see
-               cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+              >In some cases, the <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
               
 
-               property may have more than two characters. For example, the value of the <see
-               cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+               property may have more than two characters. For example, the value of the <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
               
 
@@ -2603,18 +2508,15 @@
             >
           </block>
           <para
-            >Case is not significant. However, the <see
-             cref="P:System.Globalization.RegionInfo.Name" />
+            >Case is not significant. However, the <see cref="P:System.Globalization.RegionInfo.Name" />
 
             
 
-            , the <see
-             cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+            , the <see cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
             
 
-            , and the <see
-             cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+            , and the <see cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
 
             
 
@@ -2622,18 +2524,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If you want to persist a <see
-               cref="T:System.Globalization.RegionInfo" />
+              >If you want to persist a <see cref="T:System.Globalization.RegionInfo" />
 
               
 
-               object or communicate it between processes, you should instantiate it by using a full culture name rather than a two-letter ISO region code. Because <see
-               cref="T:System.Globalization.RegionInfo" />
+               object or communicate it between processes, you should instantiate it by using a full culture name rather than a two-letter ISO region code. Because <see cref="T:System.Globalization.RegionInfo" />
 
               
 
-               properties depend on script and language, instantiating a <see
-               cref="T:System.Globalization.RegionInfo" />
+               properties depend on script and language, instantiating a <see cref="T:System.Globalization.RegionInfo" />
 
               
 
@@ -2641,13 +2540,12 @@
             >
           </block>
           <para
-            >The predefined <see
-             cref="T:System.Globalization.RegionInfo" />
+            >The predefined <see cref="T:System.Globalization.RegionInfo" />
 
             
 
              names are listed in <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=190591"
+              cref="http://go.microsoft.com/fwlink/?LinkId=190591"
               >English country names and code elements</see
             >
 

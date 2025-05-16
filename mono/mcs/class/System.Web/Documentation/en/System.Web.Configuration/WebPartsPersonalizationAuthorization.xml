@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+        >The <see cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
 
         
 
@@ -43,8 +42,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. An instance of this class is available from the <see
-             cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+            >This constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. An instance of this class is available from the <see cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
 
             
 
@@ -54,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
 
             
 
@@ -106,33 +103,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+            >The <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
             
 
-             consists of <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+             consists of <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
-             objects. An <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+             objects. An <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
-             object contains an <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Action" />
+             object contains an <see cref="P:System.Web.Configuration.AuthorizationRule.Action" />
 
             
 
-             property, a <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+             property, a <see cref="P:System.Web.Configuration.AuthorizationRule.Users" />
 
             
 
-             property, and a <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
+             property, and a <see cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
 
             
 

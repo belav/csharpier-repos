@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the <format
-         type="text/html">
+        >This class corresponds to the <format type="text/html">
           <a href="0eb0c5cb-dd97-484d-8614-785e88877abb"
             >defaultFtpCachePolicy (Network Settings)</a
           >
@@ -34,13 +33,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to specify the FTP caching configuration that applies to network resources that are obtained by using the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to specify the FTP caching configuration that applies to network resources that are obtained by using the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.FtpCachePolicyElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.FtpCachePolicyElement" />
 
             
 
@@ -144,13 +140,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applications typically use <see
-             cref="F:System.Net.Cache.RequestCacheLevel.Default" />
+            >Applications typically use <see cref="F:System.Net.Cache.RequestCacheLevel.Default" />
 
             
 
-             as their cache policy level. The <see
-             cref="P:System.Net.WebRequest.CachePolicy" />
+             as their cache policy level. The <see cref="P:System.Net.WebRequest.CachePolicy" />
 
             
 

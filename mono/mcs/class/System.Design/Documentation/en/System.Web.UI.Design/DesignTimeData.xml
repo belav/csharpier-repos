@@ -39,8 +39,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataTable" />
+            >Creates a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -50,8 +49,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.DataTable" />
+            >A new <see cref="T:System.Data.DataTable" />
 
             
 
@@ -74,8 +72,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The column data types are all string. The calling designer component can call the <see
-             cref="M:System.Web.UI.Design.DesignTimeData.GetDesignTimeDataSource(System.Data.DataTable,System.Int32)" />
+            >The column data types are all string. The calling designer component can call the <see cref="M:System.Web.UI.Design.DesignTimeData.GetDesignTimeDataSource(System.Data.DataTable,System.Int32)" />
 
             
 
@@ -85,8 +82,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataTable" />
+            >Creates a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -96,8 +92,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Data.DataTable" />
+            >A new <see cref="T:System.Data.DataTable" />
 
             
 
@@ -126,8 +121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data types that can be created are the primitive types, such as number, string, and date types. Any other types are replaced by columns of type String. The calling designer component can call the <see
-             cref="M:System.Web.UI.Design.DesignTimeData.GetDesignTimeDataSource(System.Data.DataTable,System.Int32)" />
+            >The data types that can be created are the primitive types, such as number, string, and date types. Any other types are replaced by columns of type String. The calling designer component can call the <see cref="M:System.Web.UI.Design.DesignTimeData.GetDesignTimeDataSource(System.Data.DataTable,System.Int32)" />
 
             
 
@@ -137,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a sample <see
-             cref="T:System.Data.DataTable" />
+            >Creates a sample <see cref="T:System.Data.DataTable" />
 
             
 
@@ -148,13 +141,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
-             object that contains columns with the same names and data types as the provided <paramref
-             name="referenceData" />
+             object that contains columns with the same names and data types as the provided <paramref name="referenceData" />
 
             
 
@@ -162,12 +153,15 @@
           >
         </returns>
         <param name="referenceData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A data source with the desired schema to use as the format for the sample <see
-           cref="T:System.Data.DataTable" />
+          A data source with the desired schema to use as the format for the sample <see cref="T:System.Data.DataTable" />
 
           
 
@@ -199,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data types that can be created are the primitive types, such as number, string, and date types. Any other types are replaced by columns of type String. The calling designer component can use <see
-             cref="M:System.Web.UI.Design.DesignTimeData.GetDesignTimeDataSource(System.Data.DataTable,System.Int32)" />
+            >The data types that can be created are the primitive types, such as number, string, and date types. Any other types are replaced by columns of type String. The calling designer component can use <see cref="M:System.Web.UI.Design.DesignTimeData.GetDesignTimeDataSource(System.Data.DataTable,System.Int32)" />
 
             
 
@@ -210,8 +203,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Data.DataTable" />
+            >Creates a <see cref="T:System.Data.DataTable" />
 
             
 
@@ -221,8 +213,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataTable" />
+            >A <see cref="T:System.Data.DataTable" />
 
             
 
@@ -230,19 +221,26 @@
           >
         </returns>
         <param name="referenceData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IEnumerable" />
+          An <see cref="T:System.Collections.IEnumerable" />
 
           
 
            object containing data.</param
         >
         <param name="useDataBoundData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -292,8 +290,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+            >A <see cref="T:System.ComponentModel.PropertyDescriptorCollection" />
 
             
 
@@ -301,7 +298,11 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -330,8 +331,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method searches the specified data source for the specified data member. If <paramref
-             name="dataMember" />
+            >This method searches the specified data source for the specified data member. If <paramref name="dataMember" />
 
             
 
@@ -345,8 +345,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object implementing <see
-             cref="T:System.Collections.IEnumerable" />
+            >An object implementing <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -354,19 +353,26 @@
           >
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.IListSource" />
+          An <see cref="T:System.ComponentModel.IListSource" />
 
           
 
            that contains the data in which to find the member. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -401,7 +407,11 @@
           <para>An array of type String that contains the names of the data members in the specified data source.</para>
         </returns>
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,8 +445,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object implementing <see
-             cref="T:System.Collections.IEnumerable" />
+            >An object implementing <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -444,19 +453,26 @@
           >
         </returns>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
            object to which the sample rows are added. </param
         >
         <param name="minimumRows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -490,13 +506,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object implementing either <see
-             cref="T:System.ComponentModel.IListSource" />
+            >An object implementing either <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             or <see
-             cref="T:System.Collections.IEnumerable" />
+             or <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -504,19 +518,26 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            object that contains the data source. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -551,8 +572,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object implementing <see
-             cref="T:System.Collections.IEnumerable" />
+            >An object implementing <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -560,26 +580,37 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object implementing <see
-           cref="T:System.ComponentModel.IComponent" />
+          The object implementing <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            that contains the data sourced property. </param
         >
         <param name="dataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data source to retrieve. </param
         >
         <param name="dataMember">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

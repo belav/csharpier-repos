@@ -14,28 +14,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.PostBackOptions" />
+        >The <see cref="T:System.Web.UI.PostBackOptions" />
 
         
 
-         class allows controls to emit client-side script that initiates a postback event. The <see
-         cref="T:System.Web.UI.PostBackOptions" />
+         class allows controls to emit client-side script that initiates a postback event. The <see cref="T:System.Web.UI.PostBackOptions" />
 
         
 
-         class also provides a reference to the control that initiated the postback event through the <see
-         cref="P:System.Web.UI.PostBackOptions.TargetControl" />
+         class also provides a reference to the control that initiated the postback event through the <see cref="P:System.Web.UI.PostBackOptions.TargetControl" />
 
         
 
-         property. The postback event is created based on the options specified in the <see
-         cref="T:System.Web.UI.PostBackOptions" />
+         property. The postback event is created based on the options specified in the <see cref="T:System.Web.UI.PostBackOptions" />
 
         
 
-         object passed in to the <see
-         cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
+         object passed in to the <see cref="M:System.Web.UI.ClientScriptManager.GetPostBackEventReference(System.Web.UI.PostBackOptions)" />
 
         
 
@@ -64,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
@@ -73,12 +67,15 @@
           >
         </summary>
         <param name="targetControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
@@ -105,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
@@ -114,19 +110,26 @@
           >
         </summary>
         <param name="targetControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
            that receives the postback event.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -160,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
@@ -169,73 +171,107 @@
           >
         </summary>
         <param name="targetControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Control" />
+          The <see cref="T:System.Web.UI.Control" />
 
           
 
            that receives the postback event.</param
         >
         <param name="argument">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The optional parameter passed during the postback event.</param
         >
         <param name="actionUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target of the postback.</param
         >
         <param name="autoPostBack">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to automatically post the form back to the server in response to a user action; otherwise, false.</param
         >
         <param name="requiresJavaScriptProtocol">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the javascript: prefix is required; otherwise, false.</param
         >
         <param name="trackFocus">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the postback event should return the page to the current scroll position and return focus to the target control; otherwise, false.</param
         >
         <param name="clientSubmit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the postback event can be raised by client script; otherwise, false.</param
         >
         <param name="performValidation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if client-side validation is required before the postback event occurs; otherwise, false.</param
         >
         <param name="validationGroup">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The group of controls for which <see
-           cref="T:System.Web.UI.PostBackOptions" />
+          The group of controls for which <see cref="T:System.Web.UI.PostBackOptions" />
 
           
 
@@ -263,23 +299,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.PostBackOptions.ActionUrl" />
+            >The <see cref="P:System.Web.UI.PostBackOptions.ActionUrl" />
 
             
 
-             property of the <see
-             cref="T:System.Web.UI.PostBackOptions" />
+             property of the <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 
-             class specifies the URL for the action attribute of a Web Forms page. The <see
-             cref="P:System.Web.UI.PostBackOptions.ActionUrl" />
+             class specifies the URL for the action attribute of a Web Forms page. The <see cref="P:System.Web.UI.PostBackOptions.ActionUrl" />
 
             
 
-             property can be used to specify which Web Forms page to post data back to, causing a cross-page post. For more information on cross-page posting, see <format
-             type="text/html">
+             property can be used to specify which Web Forms page to post data back to, causing a cross-page post. For more information on cross-page posting, see <format type="text/html">
               <a href="fedf234e-b7c4-4644-a9e8-c1c0870b043b"
                 >Cross-Page Posting in an ASP.NET Web Page</a
               >
@@ -316,8 +348,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.PostBackOptions.Argument" />
+            >The <see cref="P:System.Web.UI.PostBackOptions.Argument" />
 
             
 
@@ -350,8 +381,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.UI.PostBackOptions.AutoPostBack" />
+            >You can use the <see cref="P:System.Web.UI.PostBackOptions.AutoPostBack" />
 
             
 
@@ -384,18 +414,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
+            >The <see cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
 
             
 
-             property indicates whether the postback event should occur from client-side script. If you set the <see
-             cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
+             property indicates whether the postback event should occur from client-side script. If you set the <see cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
 
             
 
-             property to false, then no JavaScript is generated. You might assign false to the <see
-             cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
+             property to false, then no JavaScript is generated. You might assign false to the <see cref="P:System.Web.UI.PostBackOptions.ClientSubmit" />
 
             
 
@@ -428,18 +455,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.PostBackOptions.PerformValidation" />
+            >The <see cref="P:System.Web.UI.PostBackOptions.PerformValidation" />
 
             
 
-             property is used to specify whether client-side validation is required before the postback event can occur. When the value of the <see
-             cref="P:System.Web.UI.PostBackOptions.PerformValidation" />
+             property is used to specify whether client-side validation is required before the postback event can occur. When the value of the <see cref="P:System.Web.UI.PostBackOptions.PerformValidation" />
 
             
 
-             property is set to true, you can also use the <see
-             cref="P:System.Web.UI.PostBackOptions.ValidationGroup" />
+             property is set to true, you can also use the <see cref="P:System.Web.UI.PostBackOptions.ValidationGroup" />
 
             
 
@@ -499,13 +523,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.PostBackOptions.TargetControl" />
+            >The <see cref="P:System.Web.UI.PostBackOptions.TargetControl" />
 
             
 
-             property returns a <see
-             cref="T:System.Web.UI.Control" />
+             property returns a <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -538,13 +560,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.PostBackOptions.TrackFocus" />
+            >The <see cref="P:System.Web.UI.PostBackOptions.TrackFocus" />
 
             
 
-             property indicates whether the postback event should return the page to the current scroll position and return focus to the <see
-             cref="P:System.Web.UI.PostBackOptions.TargetControl" />
+             property indicates whether the postback event should return the page to the current scroll position and return focus to the <see cref="P:System.Web.UI.PostBackOptions.TargetControl" />
 
             
 
@@ -577,8 +597,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.PostBackOptions.ValidationGroup" />
+            >Use the <see cref="P:System.Web.UI.PostBackOptions.ValidationGroup" />
 
             
 
@@ -588,8 +607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the group of controls for which the <see
-             cref="T:System.Web.UI.PostBackOptions" />
+            >Gets or sets the group of controls for which the <see cref="T:System.Web.UI.PostBackOptions" />
 
             
 

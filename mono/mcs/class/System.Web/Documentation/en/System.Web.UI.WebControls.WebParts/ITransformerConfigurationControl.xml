@@ -14,31 +14,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A configuration control can be displayed when a transformer requires a user to configure it. The configuration control provides a user interface (UI) that allows the user to select which values will be transformed. It is rendered in a connections zone. The <see
-         cref="M:System.Web.UI.WebControls.WebParts.WebPartTransformer.CreateConfigurationControl" />
+        >A configuration control can be displayed when a transformer requires a user to configure it. The configuration control provides a user interface (UI) that allows the user to select which values will be transformed. It is rendered in a connections zone. The <see cref="M:System.Web.UI.WebControls.WebParts.WebPartTransformer.CreateConfigurationControl" />
 
         
 
          method returns a configuration control.</para
       >
       <para
-        >You can override the <see
-         cref="M:System.Web.UI.WebControls.WebParts.WebPartTransformer.CreateConfigurationControl" />
+        >You can override the <see cref="M:System.Web.UI.WebControls.WebParts.WebPartTransformer.CreateConfigurationControl" />
 
         
 
-         method when your transformer requires a customized UI. The configuration control must implement the <see
-         cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
+         method when your transformer requires a customized UI. The configuration control must implement the <see cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
 
         
 
-         interface, which includes the <see
-         cref="E:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl.Cancelled" />
+         interface, which includes the <see cref="E:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl.Cancelled" />
 
         
 
-         and <see
-         cref="E:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl.Succeeded" />
+         and <see cref="E:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl.Succeeded" />
 
         
 
@@ -62,8 +57,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Web Parts control that implements <see
-             cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
+            >The Web Parts control that implements <see cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
 
             
 
@@ -90,8 +84,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Web Parts control that implements <see
-             cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
+            >The Web Parts control that implements <see cref="T:System.Web.UI.WebControls.WebParts.ITransformerConfigurationControl" />
 
             
 

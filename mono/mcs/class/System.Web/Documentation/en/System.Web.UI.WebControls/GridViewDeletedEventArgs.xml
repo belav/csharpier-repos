@@ -14,41 +14,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control raises the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
+         control raises the <see cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
 
         
 
-         event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but after the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
          control deletes the record. This allows you to provide an event-handling method that performs a custom routine, such as checking the results of a delete operation, whenever this event occurs.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
 
         
 
-         object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the delete operation, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.AffectedRows" />
+         object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the delete operation, use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.AffectedRows" />
 
         
 
-         property. Use the <see
-         cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Exception" />
+         property. Use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Exception" />
 
         
 
-         property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see
-         cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
+         property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
 
         
 
@@ -56,13 +49,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If an exception occurs during the delete operation and the <see
-           cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
+          >If an exception occurs during the delete operation and the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
 
           
 
-           property is set to false, the <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+           property is set to false, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
@@ -70,21 +61,18 @@
         >
       </block>
       <para
-        >If you want to access the name/value pairs of the key fields and non-key fields of the deleted record, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
+        >If you want to access the name/value pairs of the key fields and non-key fields of the deleted record, use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
+         and <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
 
         
 
          properties, respectively.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -96,8 +84,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowDeleted" />
 
         
 
@@ -121,16 +108,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
 
             
 
@@ -155,8 +140,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="affectedRows" />
+                  >The value of the <paramref name="affectedRows" />
 
                   
 
@@ -172,13 +156,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Exception" />
+                  >The <see cref="T:System.Exception" />
 
                   
 
-                   object contained in the <paramref
-                   name="e" />
+                   object contained in the <paramref name="e" />
 
                   
 
@@ -204,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewDeletedEventArgs" />
 
             
 
@@ -213,19 +194,26 @@
           >
         </summary>
         <param name="affectedRows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of rows affected by the delete operation.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Exception" />
+          An <see cref="T:System.Exception" />
 
           
 
@@ -248,8 +236,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.AffectedRows" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.AffectedRows" />
 
             
 
@@ -264,18 +251,15 @@
             </item>
             <item>
               <para
-                >Verify that a record was deleted when a data source control that supports optimistic concurrency (such as the <see
-                 cref="T:System.Web.UI.WebControls.SqlDataSource" />
+                >Verify that a record was deleted when a data source control that supports optimistic concurrency (such as the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
                 
 
-                 and <see
-                 cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+                 and <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
                 
 
-                 controls) has its <see
-                 cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
+                 controls) has its <see cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
 
                 
 
@@ -305,8 +289,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Exception" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Exception" />
 
             
 
@@ -314,13 +297,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If an exception was raised and you decide to handle the exception in the event handler, be sure to set the <see
-               cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
+              >If an exception was raised and you decide to handle the exception in the event handler, be sure to set the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
 
               
 
-               property to true; otherwise, the <see
-               cref="T:System.Web.UI.WebControls.GridView" />
+               property to true; otherwise, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
               
 
@@ -349,18 +330,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an exception is raised during the delete operation, use the <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
+            >When an exception is raised during the delete operation, use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.ExceptionHandled" />
 
             
 
-             property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not re-thrown. If this property is set to false, the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not re-thrown. If this property is set to false, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control re-throws the exception. To determine which exception was raised, use the <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Exception" />
+             control re-throws the exception. To determine which exception was raised, use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Exception" />
 
             
 
@@ -391,13 +369,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
 
             
 
-             property to access the values of the key fields (as specified by the <see
-             cref="P:System.Web.UI.WebControls.GridView.DataKeyNames" />
+             property to access the values of the key fields (as specified by the <see cref="P:System.Web.UI.WebControls.GridView.DataKeyNames" />
 
             
 
@@ -405,8 +381,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property contains only the key fields. To access the non-key fields, use the <see
-               cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
+              >This property contains only the key fields. To access the non-key fields, use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
 
               
 
@@ -414,18 +389,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
+            >The <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -456,8 +428,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
 
             
 
@@ -465,13 +436,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
+              >The <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
 
               
 
-               property is populated only when two-way binding expressions are used in the item template. For more information on two-way binding expressions, see <format
-               type="text/html">
+               property is populated only when two-way binding expressions are used in the item template. For more information on two-way binding expressions, see <format type="text/html">
                 <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
               </format>
 
@@ -481,18 +450,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
+            >The <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Values" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -500,13 +466,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property does not contain the key fields (as specified by the <see
-               cref="P:System.Web.UI.WebControls.GridView.DataKeyNames" />
+              >This property does not contain the key fields (as specified by the <see cref="P:System.Web.UI.WebControls.GridView.DataKeyNames" />
 
               
 
-               property) for the deleted record. To access the key fields, use the <see
-               cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
+               property) for the deleted record. To access the key fields, use the <see cref="P:System.Web.UI.WebControls.GridViewDeletedEventArgs.Keys" />
 
               
 

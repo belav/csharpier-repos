@@ -27,8 +27,7 @@
   </Interfaces>
   <Docs>
     <remarks
-      >This class represents an &lt;!ENTITY ... &gt; declaration node within a document type declaration node.  These nodes are children of <see
-       cref="T:System.Xml.XmlDocumentType" />
+      >This class represents an &lt;!ENTITY ... &gt; declaration node within a document type declaration node.  These nodes are children of <see cref="T:System.Xml.XmlDocumentType" />
 
       
 
@@ -294,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a duplicate of this node. Entity nodes cannot be cloned. Calling this method on an <see
-             cref="T:System.Xml.XmlEntity" />
+            >Creates a duplicate of this node. Entity nodes cannot be cloned. Calling this method on an <see cref="T:System.Xml.XmlEntity" />
 
             
 
@@ -305,8 +303,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a copy of the <see
-             cref="T:System.Xml.XmlNode" />
+            >Returns a copy of the <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -314,7 +311,11 @@
           >
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -605,8 +606,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -614,7 +614,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -651,8 +655,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -660,7 +663,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

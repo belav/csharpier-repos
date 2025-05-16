@@ -41,49 +41,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.TrackBar" />
+        >The <see cref="T:System.Windows.Forms.TrackBar" />
 
         
 
-         is a scrollable control similar to the <see
-         cref="T:System.Windows.Forms.ScrollBar" />
+         is a scrollable control similar to the <see cref="T:System.Windows.Forms.ScrollBar" />
 
         
 
-         control. You can configure ranges through which the value of the <see
-         cref="P:System.Windows.Forms.TrackBar.Value" />
+         control. You can configure ranges through which the value of the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
         
 
-         property of a track bar scrolls by setting the <see
-         cref="P:System.Windows.Forms.TrackBar.Minimum" />
+         property of a track bar scrolls by setting the <see cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
         
 
-         property to specify the lower end of the range and the <see
-         cref="P:System.Windows.Forms.TrackBar.Maximum" />
+         property to specify the lower end of the range and the <see cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
         
 
          property to specify the upper end of the range.</para
       >
       <para
-        >The <see
-         cref="P:System.Windows.Forms.TrackBar.LargeChange" />
+        >The <see cref="P:System.Windows.Forms.TrackBar.LargeChange" />
 
         
 
-         property defines the increment to add or subtract from the <see
-         cref="P:System.Windows.Forms.TrackBar.Value" />
+         property defines the increment to add or subtract from the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
         
 
          property when clicks occur on either side of the scroll box. The track bar can be displayed horizontally or vertically.</para
       >
       <para
-        >You can use this control to input numeric data obtained through the <see
-         cref="P:System.Windows.Forms.TrackBar.Value" />
+        >You can use this control to input numeric data obtained through the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
         
 
@@ -104,8 +96,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >The <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -115,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -154,13 +144,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can set the <see
-             cref="P:System.Windows.Forms.TrackBar.AutoSize" />
+            >You can set the <see cref="P:System.Windows.Forms.TrackBar.AutoSize" />
 
             
 
-             property to true to cause the track bar to adjust its height (if horizontally aligned) or width (if vertically aligned). The height or width is adjusted to a standard size based on the screen resolution on which the track bar is displayed. Set the <see
-             cref="P:System.Windows.Forms.TrackBar.AutoSize" />
+             property to true to cause the track bar to adjust its height (if horizontally aligned) or width (if vertically aligned). The height or width is adjusted to a standard size based on the screen resolution on which the track bar is displayed. Set the <see cref="P:System.Windows.Forms.TrackBar.AutoSize" />
 
             
 
@@ -198,8 +186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -211,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TrackBar.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TrackBar.AutoSize" />
 
             
 
@@ -243,13 +229,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
+            >The <see cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
 
             
 
-             property has no effect on the appearance of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+             property has no effect on the appearance of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -259,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the background image for the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets the background image for the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -291,13 +274,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
+            >The <see cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
 
             
 
-             property has no effect on the appearance of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+             property has no effect on the appearance of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -307,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.BackgroundImage" />
 
             
 
@@ -346,13 +326,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
+            >Setting the <see cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
 
             
 
-             property will have no effect on the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+             property will have no effect on the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -362,13 +340,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Windows.Forms.ImageLayout" />
+            >Gets or sets an <see cref="T:System.Windows.Forms.ImageLayout" />
 
             
 
-             value; however, setting this property has no effect on the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+             value; however, setting this property has no effect on the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -401,13 +377,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting the <see
-             cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
+            >Setting the <see cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
 
             
 
-             property will have no effect on the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+             property will have no effect on the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -417,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.BackgroundImageLayout" />
 
             
 
@@ -438,18 +411,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvs design environment uses this method to start the initialization of a component that is used on a form or used by another component. The <see
-             cref="M:System.Windows.Forms.TrackBar.EndInit" />
+            >The vsprvs design environment uses this method to start the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.TrackBar.EndInit" />
 
             
 
-             method ends the initialization. Using <see
-             cref="M:System.Windows.Forms.TrackBar.BeginInit" />
+             method ends the initialization. Using <see cref="M:System.Windows.Forms.TrackBar.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.TrackBar.EndInit" />
+             and <see cref="M:System.Windows.Forms.TrackBar.EndInit" />
 
             
 
@@ -459,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins the initialization of a <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Begins the initialization of a <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -492,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -518,8 +486,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="M:System.Windows.Forms.Control.CreateHandle" />
+            >Overrides the <see cref="M:System.Windows.Forms.Control.CreateHandle" />
 
             
 
@@ -547,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the <see
-             cref="P:System.Windows.Forms.Control.CreateParams" />
+            >Overrides the <see cref="P:System.Windows.Forms.Control.CreateParams" />
 
             
 
@@ -576,8 +542,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating the mode for the Input Method Editor (IME) for the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets a value indicating the mode for the Input Method Editor (IME) for the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -608,8 +573,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default size of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets the default size of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -641,8 +605,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property has no effect on the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Setting this property has no effect on the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -652,8 +615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether this control should redraw its surface using a secondary buffer to reduce or prevent flicker; however, this property has no effect on the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets a value indicating whether this control should redraw its surface using a secondary buffer to reduce or prevent flicker; however, this property has no effect on the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -681,8 +643,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -706,18 +667,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvs design environment uses this method to end the initialization of a component that is used on a form or used by another component. The <see
-             cref="M:System.Windows.Forms.TrackBar.BeginInit" />
+            >The vsprvs design environment uses this method to end the initialization of a component that is used on a form or used by another component. The <see cref="M:System.Windows.Forms.TrackBar.BeginInit" />
 
             
 
-             method starts the initialization. Using the <see
-             cref="M:System.Windows.Forms.TrackBar.BeginInit" />
+             method starts the initialization. Using the <see cref="M:System.Windows.Forms.TrackBar.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Windows.Forms.TrackBar.EndInit" />
+             and <see cref="M:System.Windows.Forms.TrackBar.EndInit" />
 
             
 
@@ -727,8 +685,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends the initialization of a <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Ends the initialization of a <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -766,10 +723,7 @@
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Overrides <see
-             cref="P:System.Windows.Forms.Control.Font" />
-          </para>
+          <para>Overrides <see cref="P:System.Windows.Forms.Control.Font" /></para>
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -796,8 +750,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.Font" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.Font" />
 
             
 
@@ -859,8 +812,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.ForeColor" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.ForeColor" />
 
             
 
@@ -922,8 +874,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.ImeMode" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.ImeMode" />
 
             
 
@@ -978,28 +929,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user presses the PAGE UP or PAGE DOWN key or clicks the track bar on either side of the scroll box, the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            >When the user presses the PAGE UP or PAGE DOWN key or clicks the track bar on either side of the scroll box, the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
-             property changes according to the value set in the <see
-             cref="P:System.Windows.Forms.TrackBar.LargeChange" />
+             property changes according to the value set in the <see cref="P:System.Windows.Forms.TrackBar.LargeChange" />
 
             
 
-             property. You might consider setting the <see
-             cref="P:System.Windows.Forms.TrackBar.LargeChange" />
+             property. You might consider setting the <see cref="P:System.Windows.Forms.TrackBar.LargeChange" />
 
             
 
-             value to a percentage of the <see
-             cref="P:System.Windows.Forms.Control.Height" />
+             value to a percentage of the <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-             (for a vertically oriented track bar) or <see
-             cref="P:System.Windows.Forms.Control.Width" />
+             (for a vertically oriented track bar) or <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
@@ -1009,8 +955,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value to be added to or subtracted from the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            >Gets or sets a value to be added to or subtracted from the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
@@ -1042,18 +987,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Windows.Forms.TrackBar.SetRange(System.Int32,System.Int32)" />
+            >You can use the <see cref="M:System.Windows.Forms.TrackBar.SetRange(System.Int32,System.Int32)" />
 
             
 
-             method to set both the <see
-             cref="P:System.Windows.Forms.TrackBar.Maximum" />
+             method to set both the <see cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.TrackBar.Minimum" />
+             and <see cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
             
 
@@ -1063,8 +1005,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the upper limit of the range this <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets the upper limit of the range this <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1096,18 +1037,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Windows.Forms.TrackBar.SetRange(System.Int32,System.Int32)" />
+            >You can use the <see cref="M:System.Windows.Forms.TrackBar.SetRange(System.Int32,System.Int32)" />
 
             
 
-             method to set both the <see
-             cref="P:System.Windows.Forms.TrackBar.Maximum" />
+             method to set both the <see cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.TrackBar.Minimum" />
+             and <see cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
             
 
@@ -1117,8 +1055,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the lower limit of the range this <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets the lower limit of the range this <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1156,8 +1093,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Occurs when the user clicks the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1191,8 +1127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user double-clicks the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Occurs when the user double-clicks the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1243,8 +1178,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)" />
+            >Use the <see cref="M:System.Windows.Forms.Control.OnHandleCreated(System.EventArgs)" />
 
             
 
@@ -1252,12 +1186,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1320,8 +1257,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1330,8 +1266,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TrackBar.OnRightToLeftLayoutChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TrackBar.OnRightToLeftLayoutChanged(System.EventArgs)" />
 
             
 
@@ -1341,8 +1276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TrackBar.RightToLeftLayoutChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TrackBar.RightToLeftLayoutChanged" />
 
             
 
@@ -1350,12 +1284,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1376,16 +1313,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Windows.Forms.TrackBar.OnScroll(System.EventArgs)" />
+            >You can use the <see cref="M:System.Windows.Forms.TrackBar.OnScroll(System.EventArgs)" />
 
             
 
              event to update other controls as the position of the scroll box changes.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1394,8 +1329,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TrackBar.OnScroll(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TrackBar.OnScroll(System.EventArgs)" />
 
             
 
@@ -1405,8 +1339,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TrackBar.Scroll" />
+            >Raises the <see cref="E:System.Windows.Forms.TrackBar.Scroll" />
 
             
 
@@ -1414,12 +1347,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1451,8 +1387,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The control will redraw when the system colors change.</para>
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1461,8 +1396,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TrackBar.OnSystemColorsChanged(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.TrackBar.OnSystemColorsChanged(System.EventArgs)" />
 
             
 
@@ -1472,8 +1406,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.Control.SystemColorsChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.Control.SystemColorsChanged" />
 
             
 
@@ -1481,12 +1414,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1508,8 +1444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.TrackBar.ValueChanged" />
+            >Raises the <see cref="E:System.Windows.Forms.TrackBar.ValueChanged" />
 
             
 
@@ -1517,12 +1452,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.EventArgs" />
+          The <see cref="T:System.EventArgs" />
 
           
 
@@ -1556,33 +1494,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.Windows.Forms.TrackBar.Orientation" />
+            >When the <see cref="P:System.Windows.Forms.TrackBar.Orientation" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.Orientation.Horizontal" />
+             property is set to <see cref="F:System.Windows.Forms.Orientation.Horizontal" />
 
             
 
-            , the scroll box moves from left to right as the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            , the scroll box moves from left to right as the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
-             increases. When the <see
-             cref="P:System.Windows.Forms.TrackBar.Orientation" />
+             increases. When the <see cref="P:System.Windows.Forms.TrackBar.Orientation" />
 
             
 
-             property is set to <see
-             cref="F:System.Windows.Forms.Orientation.Vertical" />
+             property is set to <see cref="F:System.Windows.Forms.Orientation.Vertical" />
 
             
 
-            , the scroll box moves from bottom to top as the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            , the scroll box moves from bottom to top as the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
@@ -1627,13 +1559,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TrackBar.Padding" />
+            >The <see cref="P:System.Windows.Forms.TrackBar.Padding" />
 
             
 
-             property has no effect on the appearance of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+             property has no effect on the appearance of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1643,8 +1573,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the space between the edges of a <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets the space between the edges of a <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1674,8 +1603,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1687,8 +1615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TrackBar.Padding" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TrackBar.Padding" />
 
             
 
@@ -1719,8 +1646,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Occurs when the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1755,13 +1681,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TrackBar.RightToLeftLayout" />
+            >The <see cref="P:System.Windows.Forms.TrackBar.RightToLeftLayout" />
 
             
 
-             property is used with the <see
-             cref="P:System.Windows.Forms.Control.RightToLeft" />
+             property is used with the <see cref="P:System.Windows.Forms.Control.RightToLeft" />
 
             
 
@@ -1771,8 +1695,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the contents of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets a value indicating whether the contents of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1794,8 +1717,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1808,8 +1730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.TrackBar.RightToLeftLayout" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.TrackBar.RightToLeftLayout" />
 
             
 
@@ -1828,8 +1749,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1895,38 +1815,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this method to set the entire range for the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >You can use this method to set the entire range for the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
-             at the same time. To set the minimum or maximum values individually, use the <see
-             cref="P:System.Windows.Forms.TrackBar.Minimum" />
+             at the same time. To set the minimum or maximum values individually, use the <see cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.TrackBar.Maximum" />
+             and <see cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
-             properties. If the <paramref
-             name="minValue" />
+             properties. If the <paramref name="minValue" />
 
             
 
-             parameter is greater than the <paramref
-             name="maxValue" />
+             parameter is greater than the <paramref name="maxValue" />
 
             
 
-             parameter, <paramref
-             name="maxValue" />
+             parameter, <paramref name="maxValue" />
 
             
 
-             is set equal to <paramref
-             name="minValue" />
+             is set equal to <paramref name="minValue" />
 
             
 
@@ -1936,8 +1849,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the minimum and maximum values for a <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Sets the minimum and maximum values for a <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -1945,14 +1857,22 @@
           >
         </summary>
         <param name="minValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The lower limit of the range of the track bar. </param
         >
         <param name="maxValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1980,31 +1900,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user presses one of the arrow keys, the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            >When the user presses one of the arrow keys, the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
-             property changes according to the value set in the <see
-             cref="P:System.Windows.Forms.TrackBar.SmallChange" />
+             property changes according to the value set in the <see cref="P:System.Windows.Forms.TrackBar.SmallChange" />
 
             
 
              property.</para
           >
           <para
-            >You might consider setting the value of <see
-             cref="P:System.Windows.Forms.TrackBar.SmallChange" />
+            >You might consider setting the value of <see cref="P:System.Windows.Forms.TrackBar.SmallChange" />
 
             
 
-             to a percentage of the value of the <see
-             cref="P:System.Windows.Forms.Control.Height" />
+             to a percentage of the value of the <see cref="P:System.Windows.Forms.Control.Height" />
 
             
 
-             (for a vertically oriented track bar) or <see
-             cref="P:System.Windows.Forms.Control.Width" />
+             (for a vertically oriented track bar) or <see cref="P:System.Windows.Forms.Control.Width" />
 
             
 
@@ -2014,8 +1929,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value added to or subtracted from the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            >Gets or sets the value added to or subtracted from the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
@@ -2054,8 +1968,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text of the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Gets or sets the text of the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -2087,8 +2000,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.Text" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.Text" />
 
             
 
@@ -2117,18 +2029,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >For a <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
-             with a large range of values between the <see
-             cref="P:System.Windows.Forms.TrackBar.Minimum" />
+             with a large range of values between the <see cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
             
 
-             and the <see
-             cref="P:System.Windows.Forms.TrackBar.Maximum" />
+             and the <see cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
@@ -2164,8 +2073,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Windows.Forms.TrackBar.TickStyle" />
+            >You can use the <see cref="P:System.Windows.Forms.TrackBar.TickStyle" />
 
             
 
@@ -2193,23 +2101,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.TrackBar.ToString" />
+            >The <see cref="M:System.Windows.Forms.TrackBar.ToString" />
 
             
 
-             method returns a string that includes the type and the values for the <see
-             cref="P:System.Windows.Forms.TrackBar.Minimum" />
+             method returns a string that includes the type and the values for the <see cref="P:System.Windows.Forms.TrackBar.Minimum" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.TrackBar.Maximum" />
+            , <see cref="P:System.Windows.Forms.TrackBar.Maximum" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            , and <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
@@ -2219,8 +2123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -2230,8 +2133,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the current <see
-             cref="T:System.Windows.Forms.TrackBar" />
+            >A string that represents the current <see cref="T:System.Windows.Forms.TrackBar" />
 
             
 
@@ -2263,8 +2165,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            >The <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 
@@ -2292,8 +2193,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>You can use this event to update other controls when the value represented in the track bar changes.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -2305,8 +2205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="P:System.Windows.Forms.TrackBar.Value" />
+            >Occurs when the <see cref="P:System.Windows.Forms.TrackBar.Value" />
 
             
 

@@ -13,8 +13,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enumerates the possible settings for the state of a <see
-         cref="T:System.Web.UI.Design.WebControls.ContentDesigner" />
+        >Enumerates the possible settings for the state of a <see cref="T:System.Web.UI.Design.WebControls.ContentDesigner" />
 
         
 

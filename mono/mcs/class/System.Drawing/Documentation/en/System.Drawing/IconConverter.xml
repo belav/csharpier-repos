@@ -22,13 +22,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts an <see
-         cref="T:System.Drawing.Icon" />
+        >Converts an <see cref="T:System.Drawing.Icon" />
 
         
 
-         object from one data type to another. Access this class through the <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         object from one data type to another. Access this class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.IconConverter" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.IconConverter" />
 
             
 
@@ -78,8 +75,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true only if <paramref
-             name="sourceType" />
+            >This method returns true only if <paramref name="sourceType" />
 
             
 
@@ -89,13 +85,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether this <see
-             cref="T:System.Drawing.IconConverter" />
+            >Determines whether this <see cref="T:System.Drawing.IconConverter" />
 
             
 
-             can convert an instance of a specified type to an <see
-             cref="T:System.Drawing.Icon" />
+             can convert an instance of a specified type to an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -105,8 +99,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if this <see
-             cref="T:System.Drawing.IconConverter" />
+            >This method returns true if this <see cref="T:System.Drawing.IconConverter" />
 
             
 
@@ -114,24 +107,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -160,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true only if <paramref
-             name="destinationType" />
+            >This method returns true only if <paramref name="destinationType" />
 
             
 
@@ -171,13 +169,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether this <see
-             cref="T:System.Drawing.IconConverter" />
+            >Determines whether this <see cref="T:System.Drawing.IconConverter" />
 
             
 
-             can convert an <see
-             cref="T:System.Drawing.Icon" />
+             can convert an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -187,8 +183,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if this <see
-             cref="T:System.Drawing.IconConverter" />
+            >This method returns true if this <see cref="T:System.Drawing.IconConverter" />
 
             
 
@@ -196,24 +191,30 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -244,8 +245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a specified object to an <see
-             cref="T:System.Drawing.Icon" />
+            >Converts a specified object to an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -255,8 +255,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this method succeeds, it returns the <see
-             cref="T:System.Drawing.Icon" />
+            >If this method succeeds, it returns the <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -264,36 +263,45 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            that holds information about a specific culture. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -324,13 +332,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation calls the <see
-             cref="M:System.Object.ToString" />
+            >The default implementation calls the <see cref="M:System.Object.ToString" />
 
             
 
-             method on the object if the object is valid and if the destination type is string. If this method cannot convert to the destination type, it throws a <see
-             cref="T:System.NotSupportedException" />
+             method on the object if the object is valid and if the destination type is string. If this method cannot convert to the destination type, it throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -340,13 +346,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts an <see
-             cref="T:System.Drawing.Icon" />
+            >Converts an <see cref="T:System.Drawing.Icon" />
 
             
 
-             (or an object that can be cast to an <see
-             cref="T:System.Drawing.Icon" />
+             (or an object that can be cast to an <see cref="T:System.Drawing.Icon" />
 
             
 
@@ -358,43 +362,56 @@
           <para>This method returns the converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that provides a format context. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that specifies formatting conventions used by a particular culture. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to convert. This object should be of type icon or some type that can be cast to <see
-           cref="T:System.Drawing.Icon" />
+          The object to convert. This object should be of type icon or some type that can be cast to <see cref="T:System.Drawing.Icon" />
 
           
 
           . </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

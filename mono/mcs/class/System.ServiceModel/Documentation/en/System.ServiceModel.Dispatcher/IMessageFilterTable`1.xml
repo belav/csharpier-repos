@@ -35,37 +35,32 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>The filter table is a core component of the filter engine. The primary use of the filter engine in indigo1 is to match application logic to messages by finding all the filters that match a message. </para>
       <para
-        >A filter table allows multiple filters to be matched against a single message more efficiently than they can be matched separately. A filter table associates filter data with filters. The table is a collection of key-value pairs, where the key is the <see
-         cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+        >A filter table allows multiple filters to be matched against a single message more efficiently than they can be matched separately. A filter table associates filter data with filters. The table is a collection of key-value pairs, where the key is the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
         
 
         , and the value is the associated filter data. Filter data can be any data of the type specified in the generic parameter and can be used to specify what actions to take if a message is matched by a filter in the table. </para
       >
       <para
-        >Filter table entries can be accessed using the <see
-         cref="T:System.Collections.Generic.IDictionary`2" />
+        >Filter table entries can be accessed using the <see cref="T:System.Collections.Generic.IDictionary`2" />
 
         
 
-         functionality that <see
-         cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+         functionality that <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
 
         
 
          inherits. </para
       >
       <para
-        >Note that a filter instance can only be added to a given <see
-         cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+        >Note that a filter instance can only be added to a given <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
 
         
 
          once. To add multiple instances of this filter to the same filter table, use a filter constructor to create additional instances.</para
       >
       <para
-        >A filter matches a message when the message satisfies the query criteria of the filter. There are four overloaded matching methods. The data returned is either the filter data or the <see
-         cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+        >A filter matches a message when the message satisfies the query criteria of the filter. There are four overloaded matching methods. The data returned is either the filter data or the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
         
 
@@ -151,13 +146,11 @@
         </item>
       </list>
       <para
-        >Each method contains two overloads. The difference between the two overloads is that one takes a <see
-         cref="T:System.ServiceModel.Channels.Message" />
+        >Each method contains two overloads. The difference between the two overloads is that one takes a <see cref="T:System.ServiceModel.Channels.Message" />
 
         
 
-         parameter and is not permitted to examine the contents of the body; the other takes a <see
-         cref="T:System.ServiceModel.Channels.MessageBuffer" />
+         parameter and is not permitted to examine the contents of the body; the other takes a <see cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
         
 
@@ -165,8 +158,7 @@
       >
       <para>Message headers are automatically buffered and can be inspected by a filter without being consumed. But if the body is to be inspected by a filter, then the entire message must be buffered because an unbuffered message body is consumed by a query and its contents destroyed.</para>
       <para
-        >The following classes implement <see
-         cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+        >The following classes implement <see cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
 
         
 
@@ -290,8 +282,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the match criterion of at least one filter in the table is satisfied by <paramref
-             name="message" />
+            >true if the match criterion of at least one filter in the table is satisfied by <paramref name="message" />
 
             
 
@@ -299,29 +290,34 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Message" />
+          The <see cref="T:System.ServiceModel.Channels.Message" />
 
           
 
            to test.</param
         >
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Reference parameter that stores the <see
-           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+          Reference parameter that stores the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
-           objects that match in <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+           objects that match in <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 
@@ -365,8 +361,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the match criterion of at least one filter in the table is satisfied by <paramref
-             name="messageBuffer" />
+            >true if the match criterion of at least one filter in the table is satisfied by <paramref name="messageBuffer" />
 
             
 
@@ -374,17 +369,19 @@
           >
         </returns>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Reference parameter that stores the <see
-           cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+          Reference parameter that stores the <see cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
           
 
-           objects that match in <see
-           cref="T:System.Collections.Generic.ICollection`1" />
+           objects that match in <see cref="T:System.Collections.Generic.ICollection`1" />
 
           
 

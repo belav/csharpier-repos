@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to <see
-         cref="T:System.Net.OpenWriteCompletedEventHandler" />
+        >Instances of this class are passed to <see cref="T:System.Net.OpenWriteCompletedEventHandler" />
 
         
 
@@ -33,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Net.WebClient.OpenWriteCompleted" />
+        >Provides data for the <see cref="E:System.Net.WebClient.OpenWriteCompleted" />
 
         
 
@@ -60,33 +58,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should check the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+            >You should check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             properties before using the stream returned by this property. If the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             properties before using the stream returned by this property. If the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             property's value is an <see
-             cref="T:System.Exception" />
+             property's value is an <see cref="T:System.Exception" />
 
             
 
-             object or the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             object or the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             property's value is true, the asynchronous operation did not complete correctly and the <see
-             cref="P:System.Net.OpenWriteCompletedEventArgs.Result" />
+             property's value is true, the asynchronous operation did not complete correctly and the <see cref="P:System.Net.OpenWriteCompletedEventArgs.Result" />
 
             
 

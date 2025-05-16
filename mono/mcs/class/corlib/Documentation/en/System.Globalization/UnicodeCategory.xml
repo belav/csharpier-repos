@@ -34,33 +34,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A member of the <see
-         cref="T:System.Globalization.UnicodeCategory" />
+        >A member of the <see cref="T:System.Globalization.UnicodeCategory" />
 
         
 
-         enumeration is returned by the <see
-         cref="M:System.Char.GetUnicodeCategory(System.Char)" />
+         enumeration is returned by the <see cref="M:System.Char.GetUnicodeCategory(System.Char)" />
 
         
 
-         and <see
-         cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
+         and <see cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
         
 
-         methods. The <see
-         cref="T:System.Globalization.UnicodeCategory" />
+         methods. The <see cref="T:System.Globalization.UnicodeCategory" />
 
         
 
-         enumeration is also used to support <see
-         cref="T:System.Char" />
+         enumeration is also used to support <see cref="T:System.Char" />
 
         
 
-         methods, such as <see
-         cref="M:System.Char.IsUpper(System.Char)" />
+         methods, such as <see cref="M:System.Char.IsUpper(System.Char)" />
 
         
 
@@ -68,7 +62,9 @@
       >
       <para
         >This enumeration is based on The Unicode Standard, version 5.0. For more information, see the "UCD File Format" and "General Category Values" subtopics at the <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=57650">Unicode Character Database</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=57650"
+          >Unicode Character Database</see
+        >
 
         
 

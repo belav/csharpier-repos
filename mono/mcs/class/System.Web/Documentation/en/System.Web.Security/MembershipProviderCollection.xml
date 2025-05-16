@@ -20,28 +20,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The membership providers for an application are exposed as a read-only <see
-         cref="T:System.Web.Security.MembershipProviderCollection" />
+        >The membership providers for an application are exposed as a read-only <see cref="T:System.Web.Security.MembershipProviderCollection" />
 
         
 
-         by the <see
-         cref="P:System.Web.Security.Membership.Providers" />
+         by the <see cref="P:System.Web.Security.Membership.Providers" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Security.Membership" />
+         property of the <see cref="T:System.Web.Security.Membership" />
 
         
 
-         class. You can access a specific membership provider in the collection by name and cast it as the specific provider type, such as <see
-         cref="T:System.Web.Security.SqlMembershipProvider" />
+         class. You can access a specific membership provider in the collection by name and cast it as the specific provider type, such as <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
         
 
-        . This enables you to manage membership information from multiple data stores in a single application as well as access custom members of a membership provider that are not part of the <see
-         cref="T:System.Web.Security.MembershipProvider" />
+        . This enables you to manage membership information from multiple data stores in a single application as well as access custom members of a membership provider that are not part of the <see cref="T:System.Web.Security.MembershipProvider" />
 
         
 
@@ -49,15 +44,13 @@
       >
       <block subset="none" type="note">
         <para
-          >If you are not familiar with the membership features of ASP.NET, see <format
-           type="text/html">
+          >If you are not familiar with the membership features of ASP.NET, see <format type="text/html">
             <a href="79184d17-f4c7-4c9f-a073-cec4f5543980">Introduction to Membership</a>
           </format>
 
           
 
-           before continuing. For a list of other topics related to membership, see <format
-           type="text/html">
+           before continuing. For a list of other topics related to membership, see <format type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
 
@@ -70,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of objects that inherit the <see
-         cref="T:System.Web.Security.MembershipProvider" />
+        >A collection of objects that inherit the <see cref="T:System.Web.Security.MembershipProvider" />
 
         
 
@@ -122,7 +114,11 @@
           <para>Adds a membership provider to the collection.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses <see
-             cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
+            >This method uses <see cref="M:System.Collections.ArrayList.CopyTo(System.Array,System.Int32)" />
 
             
 
@@ -164,24 +159,30 @@
           <para>Copies the membership provider collection to a one-dimensional array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A one-dimensional array that is the destination of the elements copied from the <see
-           cref="T:System.Web.Security.MembershipProviderCollection" />
+          A one-dimensional array that is the destination of the elements copied from the <see cref="T:System.Web.Security.MembershipProviderCollection" />
 
           
 
           . The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 

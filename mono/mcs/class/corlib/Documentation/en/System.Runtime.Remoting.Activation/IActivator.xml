@@ -21,8 +21,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Activators control and participate in the activation of marshal by reference objects. Some activators create contexts, whereas others create actual objects.</para>
       <para
-        >Activators use the <see
-         cref="P:System.Runtime.Remoting.Activation.IActivator.NextActivator" />
+        >Activators use the <see cref="P:System.Runtime.Remoting.Activation.IActivator.NextActivator" />
 
         
 
@@ -61,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the object that is specified in the provided <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+            >Creates an instance of the object that is specified in the provided <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
             
 
@@ -72,8 +70,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Status of the object activation contained in a <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+            >Status of the object activation contained in a <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
             
 
@@ -81,12 +78,15 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The information about the object that is needed to activate it, stored in a <see
-           cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+          The information about the object that is needed to activate it, stored in a <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
           
 
@@ -117,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Activation.IActivator.Level" />
+            >The <see cref="P:System.Runtime.Remoting.Activation.IActivator.Level" />
 
             
 
@@ -128,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Activation.ActivatorLevel" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Activation.ActivatorLevel" />
 
             
 

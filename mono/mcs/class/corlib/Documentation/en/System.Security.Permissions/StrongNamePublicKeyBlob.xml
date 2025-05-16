@@ -31,8 +31,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class facilitates the use of strong names for identification purposes.</para>
       <para
-        >For a complete description of strong names, see <see
-         cref="T:System.Security.Policy.StrongName" />
+        >For a complete description of strong names, see <see cref="T:System.Security.Policy.StrongName" />
 
         
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
 
             
 
@@ -75,7 +73,11 @@
           >
         </summary>
         <param name="publicKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,8 +112,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the public key blob of the current object is equal to the public key blob of the <paramref
-             name="obj" />
+            >true if the public key blob of the current object is equal to the public key blob of the <paramref name="obj" />
 
             
 
@@ -119,7 +120,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

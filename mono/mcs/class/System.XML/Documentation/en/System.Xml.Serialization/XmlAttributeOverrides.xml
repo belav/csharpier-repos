@@ -21,59 +21,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+        >The <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         enables the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         enables the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
          to override the default way of serializing a set of objects. Overriding serialization in this way has two uses: first, you can control and augment the serialization of objects found in a DLL--even if you do not have access to the source; second, you can create one set of serializable classes, but serialize the objects in multiple ways. For example, instead of serializing members of a class instance as XML elements, you can serialize them as XML attributes, resulting in a more efficient document to transport.</para
       >
       <para
-        >After you create an <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+        >After you create an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         object, you pass it as an argument to the <see
-         cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
+         object, you pass it as an argument to the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
 
         
 
-         constructor. The resulting <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         constructor. The resulting <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         uses the data contained by the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         uses the data contained by the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         to override attributes that control how objects are serialized. To accomplish this, the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         to override attributes that control how objects are serialized. To accomplish this, the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         contains a collection of the object types that are overridden, as well as an <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         contains a collection of the object types that are overridden, as well as an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         object associated with each overridden object type. The <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         object associated with each overridden object type. The <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
          object itself contains an appropriate set of attribute objects that control how each field, property, or class is serialized.</para
       >
       <para
-        >The process for creating and using an <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+        >The process for creating and using an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
@@ -82,8 +72,7 @@
       <list type="ordered">
         <item>
           <para
-            >Create an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Create an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
@@ -92,18 +81,15 @@
         </item>
         <item>
           <para
-            >Create an attribute object that is appropriate to the object being overridden. For example, to override a field or property, create an <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >Create an attribute object that is appropriate to the object being overridden. For example, to override a field or property, create an <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
-            , using the new, derived type. You can optionally assign a new <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.ElementName" />
+            , using the new, derived type. You can optionally assign a new <see cref="P:System.Xml.Serialization.XmlElementAttribute.ElementName" />
 
             
 
-            , or <see
-             cref="P:System.Xml.Serialization.XmlElementAttribute.Namespace" />
+            , or <see cref="P:System.Xml.Serialization.XmlElementAttribute.Namespace" />
 
             
 
@@ -112,23 +98,19 @@
         </item>
         <item>
           <para
-            >Add the attribute object to the appropriate <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Add the attribute object to the appropriate <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             property or collection. For example, you would add the <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+             property or collection. For example, you would add the <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
-             to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
+             to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlElements" />
 
             
 
-             collection of the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             collection of the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
@@ -137,8 +119,7 @@
         </item>
         <item>
           <para
-            >Create an <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+            >Create an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -147,28 +128,23 @@
         </item>
         <item>
           <para
-            >Using the <see
-             cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+            >Using the <see cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
 
             
 
-             method, add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             method, add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             object. If the object being overridden is an <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+             object. If the object being overridden is an <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
-             or <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             or <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
@@ -177,18 +153,15 @@
         </item>
         <item>
           <para
-            >When constructing the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >When constructing the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-            , pass the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+            , pass the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
-             to the <see
-             cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
+             to the <see cref="M:System.Xml.Serialization.XmlSerializer.#ctor" />
 
             
 
@@ -197,8 +170,7 @@
         </item>
         <item>
           <para
-            >Use the resulting <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Use the resulting <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -210,8 +182,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows you to override property, field, and class attributes when you use the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Allows you to override property, field, and class attributes when you use the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -239,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
@@ -275,61 +245,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >The <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object contains a union of attribute objects that cause the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object contains a union of attribute objects that cause the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to override its default serialization behavior for a set of objects. You choose the attribute objects to place in the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             to override its default serialization behavior for a set of objects. You choose the attribute objects to place in the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object, depending on the particular behaviors you want to override. For example, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object, depending on the particular behaviors you want to override. For example, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             serializes a class member as an XML element by default. If you want the member to be serialized as an XM attribute instead, you would create an <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             serializes a class member as an XML element by default. If you want the member to be serialized as an XM attribute instead, you would create an <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-            , assign it to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+            , assign it to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
 
             
 
-             property of an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             property of an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-            , and add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            , and add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
              object.</para
           >
           <para
-            >Use this overload to override an <see
-             cref="T:System.Xml.Serialization.XmlRootAttribute" />
+            >Use this overload to override an <see cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
             
 
-             or <see
-             cref="T:System.Xml.Serialization.XmlTypeAttribute" />
+             or <see cref="T:System.Xml.Serialization.XmlTypeAttribute" />
 
             
 
@@ -339,23 +298,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Adds an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to the collection of <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             object to the collection of <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             objects. The <paramref
-             name="type" />
+             objects. The <paramref name="type" />
 
             
 
-             parameter specifies an object to be overridden by the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             parameter specifies an object to be overridden by the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
@@ -363,24 +318,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the object that is overridden. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlAttributes" />
+          An <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
           
 
@@ -415,76 +376,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >The <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object contains a union of attribute objects that cause the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object contains a union of attribute objects that cause the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to override its default serialization behavior for a set of objects. You choose the attribute objects to place in the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             to override its default serialization behavior for a set of objects. You choose the attribute objects to place in the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object, depending on the particular behaviors you want to override. For example, the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             object, depending on the particular behaviors you want to override. For example, the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             serializes a class member as an XML element by default. If you want the member to be serialized as an XML attribute instead, you would create an <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+             serializes a class member as an XML element by default. If you want the member to be serialized as an XML attribute instead, you would create an <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-            , assign it to the <see
-             cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
+            , assign it to the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlAttribute" />
 
             
 
-             property of an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             property of an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-            , and add the <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            , and add the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to the <see
-             cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+             object to the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
             
 
              object.</para
           >
           <para
-            >Use this method when attempting to override an <see
-             cref="T:System.Xml.Serialization.XmlElementAttribute" />
+            >Use this method when attempting to override an <see cref="T:System.Xml.Serialization.XmlElementAttribute" />
 
             
 
-            , <see
-             cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
+            , <see cref="T:System.Xml.Serialization.XmlAttributeAttribute" />
 
             
 
-            , <see
-             cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+            , <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
             
 
-            , <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            , <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
-            , or <see
-             cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+            , or <see cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
 
             
 
@@ -494,23 +441,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+            >Adds an <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             object to the collection of <see
-             cref="T:System.Xml.Serialization.XmlAttributes" />
+             object to the collection of <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
             
 
-             objects. The <paramref
-             name="type" />
+             objects. The <paramref name="type" />
 
             
 
-             parameter specifies an object to be overridden. The <paramref
-             name="member" />
+             parameter specifies an object to be overridden. The <paramref name="member" />
 
             
 
@@ -518,31 +461,41 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the object to override. </param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the member to override. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Serialization.XmlAttributes" />
+          An <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
           
 

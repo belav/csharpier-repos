@@ -40,18 +40,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can apply this attribute to classes or assemblies.</para>
       <para
-        >This attribute should only be set when an explicit implementation is required. When you set the attribute to <see
-         cref="F:System.Runtime.InteropServices.IDispatchImplType.CompatibleImpl" />
+        >This attribute should only be set when an explicit implementation is required. When you set the attribute to <see cref="F:System.Runtime.InteropServices.IDispatchImplType.CompatibleImpl" />
 
         
 
-        , the IDispatch implementation is supplied by passing the type information for the object to COM's CreateStdDispatch API. When you set the attribute to <see
-         cref="F:System.Runtime.InteropServices.IDispatchImplType.InternalImpl" />
+        , the IDispatch implementation is supplied by passing the type information for the object to COM's CreateStdDispatch API. When you set the attribute to <see cref="F:System.Runtime.InteropServices.IDispatchImplType.InternalImpl" />
 
         
 
-        , the IDispatch implementation is supplied by the common language runtime. Setting the attribute to <see
-         cref="F:System.Runtime.InteropServices.IDispatchImplType.SystemDefinedImpl" />
+        , the IDispatch implementation is supplied by the common language runtime. Setting the attribute to <see cref="F:System.Runtime.InteropServices.IDispatchImplType.SystemDefinedImpl" />
 
         
 
@@ -84,13 +81,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor takes an underlying 16-bit signed integer that represents each <see
-             cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+            >This constructor takes an underlying 16-bit signed integer that represents each <see cref="T:System.Runtime.InteropServices.IDispatchImplType" />
 
             
 
-             enumeration member. The Type Library Importer (TlbImp.exe) uses this constructor to avoid generating a typeref to the IDispatchImplType value that <paramref
-             name="value" />
+             enumeration member. The Type Library Importer (TlbImp.exe) uses this constructor to avoid generating a typeref to the IDispatchImplType value that <paramref name="value" />
 
             
 
@@ -100,8 +95,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the IDispatchImplAttribute class with specified <see
-             cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+            >Initializes a new instance of the IDispatchImplAttribute class with specified <see cref="T:System.Runtime.InteropServices.IDispatchImplType" />
 
             
 
@@ -109,12 +103,15 @@
           >
         </summary>
         <param name="implType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Indicates which <see
-           cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+          Indicates which <see cref="T:System.Runtime.InteropServices.IDispatchImplType" />
 
           
 
@@ -149,8 +146,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the IDispatchImplAttribute class with specified <see
-             cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+            >Initializes a new instance of the IDispatchImplAttribute class with specified <see cref="T:System.Runtime.InteropServices.IDispatchImplType" />
 
             
 
@@ -158,12 +154,15 @@
           >
         </summary>
         <param name="implType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Indicates which <see
-           cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+          Indicates which <see cref="T:System.Runtime.InteropServices.IDispatchImplType" />
 
           
 
@@ -195,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+            >Gets the <see cref="T:System.Runtime.InteropServices.IDispatchImplType" />
 
             
 

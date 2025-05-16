@@ -16,26 +16,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The value of the <see
-         cref="T:System.ServiceModel.AddressFilterMode" />
+        >The value of the <see cref="T:System.ServiceModel.AddressFilterMode" />
 
         
 
-         enumeration is set on the <see
-         cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
+         enumeration is set on the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
 
         
 
          property. </para
       >
       <para
-        >The longest prefix match criterion specified by <see
-         cref="F:System.ServiceModel.AddressFilterMode.Prefix" />
+        >The longest prefix match criterion specified by <see cref="F:System.ServiceModel.AddressFilterMode.Prefix" />
 
         
 
-         requires that the destination address be matched by the largest number of leading address bits in the filter. The default value is <see
-         cref="F:System.ServiceModel.AddressFilterMode.Exact" />
+         requires that the destination address be matched by the largest number of leading address bits in the filter. The default value is <see cref="F:System.ServiceModel.AddressFilterMode.Exact" />
 
         
 

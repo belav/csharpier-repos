@@ -45,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -75,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -84,7 +82,11 @@
           >
         </summary>
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -114,8 +116,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor makes a copy of the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >This constructor makes a copy of the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -125,13 +126,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
-             class using an instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class using an instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -139,12 +138,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of the <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          An instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -176,13 +178,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.Oid" />
+             class using an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -190,19 +190,26 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.Oid" />
+          An <see cref="T:System.Security.Cryptography.Oid" />
 
           
 
            object.</param
         >
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -231,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -240,19 +246,26 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents <see
-           cref="T:System.Security.Cryptography.Oid" />
+          A string that represents <see cref="T:System.Security.Cryptography.Oid" />
 
           
 
            information.</param
         >
         <param name="rawData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -285,13 +298,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies information to an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >This method copies information to an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
-             object based on the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             object based on the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -301,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies information from an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -310,12 +320,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -345,8 +358,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method if you need to print Abstract Syntax Notation One (ASN.1)-encoded data or output the information to a text box. Use the <paramref
-             name="multiLine" />
+            >Use this method if you need to print Abstract Syntax Notation One (ASN.1)-encoded data or output the information to a text box. Use the <paramref name="multiLine" />
 
             
 
@@ -362,7 +374,11 @@
           <para>A formatted string that represents the Abstract Syntax Notation One (ASN.1)-encoded data.</para>
         </returns>
         <param name="multiLine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -397,13 +413,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Gets or sets the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             value for an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             value for an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -429,8 +443,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is the easiest way to access the information in an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >This property is the easiest way to access the information in an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 

@@ -30,21 +30,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
          value that is used.</para
       >
       <para
-        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. The <see
-         cref="T:System.Security.Permissions.StorePermissionAttribute" />
+        >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. The <see cref="T:System.Security.Permissions.StorePermissionAttribute" />
 
         
 
-         attribute is used only for declarative security. For imperative security, use the <see
-         cref="T:System.Security.Permissions.StorePermission" />
+         attribute is used only for declarative security. For imperative security, use the <see cref="T:System.Security.Permissions.StorePermission" />
 
         
 
@@ -54,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.StorePermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.StorePermission" />
 
         
 
@@ -87,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.StorePermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermissionAttribute" />
 
             
 
@@ -96,12 +91,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -161,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see
-             cref="T:System.Security.Permissions.StorePermission" />
+            >Creates and returns a new <see cref="T:System.Security.Permissions.StorePermission" />
 
             
 
@@ -172,8 +169,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.StorePermission" />
+            >A <see cref="T:System.Security.Permissions.StorePermission" />
 
             
 
@@ -199,8 +195,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >New stores are created by calling the <see
-             cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" />
+            >New stores are created by calling the <see cref="M:System.Security.Cryptography.X509Certificates.X509Store.Open(System.Security.Cryptography.X509Certificates.OpenFlags)" />
 
             
 
@@ -230,8 +225,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This functionality is not exposed by the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >This functionality is not exposed by the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -285,8 +279,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This functionality is not exposed by the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >This functionality is not exposed by the <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -325,23 +318,19 @@
             <para>Many of these flags are powerful and permit access to stores that should be granted only to highly trusted code.</para>
           </block>
           <para
-            >The most powerful of the flags are <see
-             cref="F:System.Security.Permissions.StorePermissionFlags.AddToStore" />
+            >The most powerful of the flags are <see cref="F:System.Security.Permissions.StorePermissionFlags.AddToStore" />
 
             
 
-            , <see
-             cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />
+            , <see cref="F:System.Security.Permissions.StorePermissionFlags.CreateStore" />
 
             
 
-            , <see
-             cref="F:System.Security.Permissions.StorePermissionFlags.DeleteStore" />
+            , <see cref="F:System.Security.Permissions.StorePermissionFlags.DeleteStore" />
 
             
 
-            , and <see
-             cref="F:System.Security.Permissions.StorePermissionFlags.AllFlags" />
+            , and <see cref="F:System.Security.Permissions.StorePermissionFlags.AllFlags" />
 
             
 

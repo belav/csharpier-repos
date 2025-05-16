@@ -49,23 +49,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This delegate is used by the <see
-         cref="M:System.Array.ConvertAll``2(``0[],System.Converter{``0,``1})" />
+        >This delegate is used by the <see cref="M:System.Array.ConvertAll``2(``0[],System.Converter{``0,``1})" />
 
         
 
-         method of the <see
-         cref="T:System.Array" />
+         method of the <see cref="T:System.Array" />
 
         
 
-         class and the <see
-         cref="M:System.Collections.Generic.List`1.ConvertAll``1(System.Converter{`0,``0})" />
+         class and the <see cref="M:System.Collections.Generic.List`1.ConvertAll``1(System.Converter{`0,``0})" />
 
         
 
-         method of the <see
-         cref="T:System.Collections.Generic.List`1" />
+         method of the <see cref="T:System.Collections.Generic.List`1" />
 
         
 

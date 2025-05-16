@@ -20,26 +20,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A principal object represents the security context of the user on whose behalf the code is running, including that user's identity (<see
-         cref="T:System.Security.Principal.IIdentity" />
+        >A principal object represents the security context of the user on whose behalf the code is running, including that user's identity (<see cref="T:System.Security.Principal.IIdentity" />
 
         
 
         ) and any roles to which they belong.</para
       >
       <para
-        >All principal objects are required to implement the <see
-         cref="T:System.Security.Principal.IPrincipal" />
+        >All principal objects are required to implement the <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         interface. For more information about <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         interface. For more information about <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         implementations, see the <see
-         cref="T:System.Security.Claims.ClaimsPrincipal" />
+         implementations, see the <see cref="T:System.Security.Claims.ClaimsPrincipal" />
 
         
 
@@ -108,7 +104,11 @@
           <para>true if the current principal is a member of the specified role; otherwise, false.</para>
         </returns>
         <param name="role">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -13,18 +13,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+        >The <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
 
         
 
-         class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see
-         cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+         class is one of several types that represent the schema of a data store at design-time. These schema items are made available to controls by designers implementing the <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
         
 
-         interface. Controls access schema objects by calling the <see
-         cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+         interface. Controls access schema objects by calling the <see cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetConnectionSchema(System.ComponentModel.Design.Data.DesignerDataConnection)" />
 
         
 
@@ -54,18 +51,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType)" />
+            >Use the <see cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType)" />
 
             
 
-             to set the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.Name" />
+             to set the <see cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.Name" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DataType" />
+             and <see cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DataType" />
 
             
 
@@ -75,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
 
             
 
@@ -84,19 +77,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name identifying the column in the data store.</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DbType" />
+          One of the <see cref="T:System.Data.DbType" />
 
           
 
@@ -122,23 +122,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType,System.Object)" />
+            >Use the <see cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType,System.Object)" />
 
             
 
-             constructor to set the <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.Name" />
+             constructor to set the <see cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.Name" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DataType" />
+            , <see cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DataType" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DefaultValue" />
+            , and <see cref="P:System.ComponentModel.Design.Data.DesignerDataColumn.DefaultValue" />
 
             
 
@@ -148,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
 
             
 
@@ -157,26 +152,37 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name identifying the column in the data store.</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DbType" />
+          One of the <see cref="T:System.Data.DbType" />
 
           
 
            values.</param
         >
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -208,13 +214,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Int32)" />
+            >Use the <see cref="M:System.ComponentModel.Design.Data.DesignerDataColumn.#ctor(System.String,System.Data.DbType,System.Object,System.Boolean,System.Boolean,System.Boolean,System.Int32,System.Int32,System.Int32)" />
 
             
 
-             constructor to set all the properties of a <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+             constructor to set all the properties of a <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
 
             
 
@@ -224,8 +228,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Data.DesignerDataColumn" />
 
             
 
@@ -233,68 +236,103 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name identifying the column in the data store.</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DbType" />
+          One of the <see cref="T:System.Data.DbType" />
 
           
 
            values.</param
         >
         <param name="defaultValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The default value of the column</param
         >
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the field is the identity field of the data row; otherwise, false.</param
         >
         <param name="nullable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the field can be null in the data store; otherwise, false.</param
         >
         <param name="primaryKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true if the field is the primary key of the data row; otherwise, false.</param
         >
         <param name="precision">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of digits used by a numeric data field.</param
         >
         <param name="scale">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum number of digits to the right of the decimal point in a numeric data field.</param
         >
         <param name="length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

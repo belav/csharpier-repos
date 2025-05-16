@@ -34,21 +34,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
+        >A <see cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
 
         
 
-         provides data about a <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
+         provides data about a <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
 
         
 
          event.</para
       >
       <para
-        >A <see
-         cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
+        >A <see cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
 
         
 
@@ -57,8 +54,7 @@
       <list type="bullet">
         <item>
           <para
-            >A <see
-             cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.Component" />
+            >A <see cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.Component" />
 
             
 
@@ -67,8 +63,7 @@
         </item>
         <item>
           <para
-            >An <see
-             cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.OldName" />
+            >An <see cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.OldName" />
 
             
 
@@ -77,8 +72,7 @@
         </item>
         <item>
           <para
-            >A <see
-             cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.NewName" />
+            >A <see cref="P:System.ComponentModel.Design.ComponentRenameEventArgs.NewName" />
 
             
 
@@ -90,8 +84,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
+        >Provides data for the <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
 
         
 
@@ -126,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
 
             
 
@@ -135,21 +127,33 @@
           >
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The component to be renamed. </param
         >
         <param name="oldName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The old name of the component. </param
         >
         <param name="newName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

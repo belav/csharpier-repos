@@ -59,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
 
             
 
@@ -91,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
 
             
 
@@ -124,16 +122,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when opening the client channel factory and provides a custom implementation of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >This method is called when opening the client channel factory and provides a custom implementation of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
              abstract class. </para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -143,8 +139,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance on the client of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Creates an instance on the client of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -154,8 +149,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >An instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -163,12 +157,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
@@ -199,16 +196,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when opening the service and provides a custom implementation of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >This method is called when opening the service and provides a custom implementation of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
              abstract class. </para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -218,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance on the server of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Creates an instance on the server of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -229,8 +223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >An instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -238,12 +231,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 

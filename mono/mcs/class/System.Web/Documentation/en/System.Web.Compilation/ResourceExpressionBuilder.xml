@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+        >The <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
         
 
@@ -35,26 +34,22 @@
       <para>A resource expression takes the form &lt;%$ Resources: ClassKey, ResourceKey %&gt; within the page. The part of the expression before the colon (:) designates the type of expression builder to use, and the part after the colon signifies the class name and resource key. The preceding expression would retrieve the following value from a file named ClassKey.resx:</para>
       <code>&lt;data name="ResourceKey"&gt;&lt;value xml:space="preserve"&gt;Hello!&lt;/value&gt;&lt;/data&gt;</code>
       <para
-        >When the page parser encounters an expression with the Resources prefix, it creates an instance of the <see
-         cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+        >When the page parser encounters an expression with the Resources prefix, it creates an instance of the <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
         
 
-         class. The <see
-         cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+         class. The <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
         
 
          class either evaluates the expression or generates code to return a value for the expression when the page is executed.</para
       >
       <para
-        >If the expression is encountered in a page that will be compiled, the <see
-         cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+        >If the expression is encountered in a page that will be compiled, the <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
         
 
-         object generates code that retrieves the specified value from the resource file. If the expression is encountered in a page that will not be compiled, the <see
-         cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+         object generates code that retrieves the specified value from the resource file. If the expression is encountered in a page that will not be compiled, the <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
         
 
@@ -77,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
             
 
@@ -118,8 +112,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -127,33 +120,48 @@
           >
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object containing the expression.</param
         >
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that represents information about the property bound to by the expression.</param
         >
         <param name="parsedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object containing parsed data as returned by the <see
-           cref="Overload:System.Web.Compilation.ResourceExpressionBuilder.ParseExpression" />
+          The object containing parsed data as returned by the <see cref="Overload:System.Web.Compilation.ResourceExpressionBuilder.ParseExpression" />
 
           
 
            method.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -183,13 +191,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called during the CodeDOM creation for a page or control. The <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >This method is called during the CodeDOM creation for a page or control. The <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
-             object returned is of the type <see
-             cref="T:System.CodeDom.CodeMethodInvokeExpression" />
+             object returned is of the type <see cref="T:System.CodeDom.CodeMethodInvokeExpression" />
 
             
 
@@ -203,8 +209,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.CodeDom.CodeExpression" />
+            >A <see cref="T:System.CodeDom.CodeExpression" />
 
             
 
@@ -212,21 +217,33 @@
           >
         </returns>
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The property name of the object.</param
         >
         <param name="parsedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The parsed value of the expression.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -254,18 +271,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method parses the expression and returns a <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+            >This method parses the expression and returns a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
             
 
-             and a <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
-             property value in the returned <see
-             cref="T:System.Web.Compilation.ResourceExpressionFields" />
+             property value in the returned <see cref="T:System.Web.Compilation.ResourceExpressionFields" />
 
             
 
@@ -279,8 +293,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Compilation.ResourceExpressionFields" />
+            >The <see cref="T:System.Web.Compilation.ResourceExpressionFields" />
 
             
 
@@ -288,7 +301,11 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -318,28 +335,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Object" />
+            >The returned <see cref="T:System.Object" />
 
             
 
-             is of type <see
-             cref="T:System.Web.Compilation.ResourceExpressionFields" />
+             is of type <see cref="T:System.Web.Compilation.ResourceExpressionFields" />
 
             
 
-            . This method parses the expression and returns a <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+            . This method parses the expression and returns a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
 
             
 
-             and a <see
-             cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+             and a <see cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
             
 
-             property value in the returned <see
-             cref="T:System.Web.Compilation.ResourceExpressionFields" />
+             property value in the returned <see cref="T:System.Web.Compilation.ResourceExpressionFields" />
 
             
 
@@ -353,8 +365,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -362,21 +373,33 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the declarative expression.</param
         >
         <param name="propertyType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the property bound to by the expression.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -399,23 +422,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.ResourceExpressionBuilder.SupportsEvaluate" />
+            >The <see cref="P:System.Web.Compilation.ResourceExpressionBuilder.SupportsEvaluate" />
 
             
 
-             property indicates whether the <see
-             cref="M:System.Web.Compilation.ResourceExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+             property indicates whether the <see cref="M:System.Web.Compilation.ResourceExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             method has been implemented in the class. <see
-             cref="M:System.Web.Compilation.ResourceExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+             method has been implemented in the class. <see cref="M:System.Web.Compilation.ResourceExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             must be implemented within an expression builder for an expression to be evaluated in a page that uses the no-compile feature. <see
-             cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
+             must be implemented within an expression builder for an expression to be evaluated in a page that uses the no-compile feature. <see cref="T:System.Web.Compilation.ResourceExpressionBuilder" />
 
             
 

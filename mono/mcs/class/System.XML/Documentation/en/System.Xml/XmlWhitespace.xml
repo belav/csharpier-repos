@@ -59,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlWhitespace" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlWhitespace" />
 
             
 
@@ -68,19 +67,26 @@
           >
         </summary>
         <param name="strData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The white space characters of the node.</param
         >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDocument" />
+          The <see cref="T:System.Xml.XmlDocument" />
 
           
 
@@ -117,16 +123,14 @@
 
             
 
-             serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see
-             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+             serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
 
             
 
             .</para
           >
           <para
-            >The cloned node has no parent. <see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >The cloned node has no parent. <see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
@@ -142,7 +146,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -300,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -309,12 +316,15 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -351,8 +361,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -360,12 +369,15 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 

@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="T:System.Drawing.Printing.PrintingPermission" />
+        >This enumeration is used by the <see cref="T:System.Drawing.Printing.PrintingPermission" />
 
         
 
@@ -61,13 +60,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides printing programmatically to the default printer, along with safe printing through semirestricted dialog box. <see
-             cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
+            >Provides printing programmatically to the default printer, along with safe printing through semirestricted dialog box. <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
 
             
 
-             is a subset of <see
-             cref="F:System.Drawing.Printing.PrintingPermissionLevel.AllPrinting" />
+             is a subset of <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.AllPrinting" />
 
             
 
@@ -92,13 +89,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prevents access to printers. <see
-             cref="F:System.Drawing.Printing.PrintingPermissionLevel.NoPrinting" />
+            >Prevents access to printers. <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.NoPrinting" />
 
             
 
-             is a subset of <see
-             cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
+             is a subset of <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
 
             
 
@@ -123,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides printing only from a restricted dialog box. <see
-             cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
+            >Provides printing only from a restricted dialog box. <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
 
             
 
-             is a subset of <see
-             cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
+             is a subset of <see cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
 
             
 

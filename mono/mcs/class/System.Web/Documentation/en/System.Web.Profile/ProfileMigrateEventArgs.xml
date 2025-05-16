@@ -14,49 +14,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+        >The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
 
         
 
-         object provides event information to the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+         object provides event information to the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
-         class. The <see
-         cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+         class. The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
 
         
 
-         object provides access to the <see
-         cref="T:System.Web.HttpContext" />
+         object provides access to the <see cref="T:System.Web.HttpContext" />
 
         
 
-         of the current request and the anonymous user identifier for the anonymous profile in the <see
-         cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
+         of the current request and the anonymous user identifier for the anonymous profile in the <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
 
         
 
          property. </para
       >
       <para
-        >You can use the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+        >You can use the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
          event to copy profile property values from an anonymous profile to an authenticated profile when a user who has been anonymously using your application logs in.</para
       >
       <para
-        >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
-         cref="T:System.Web.Profile.ProfileBase" />
+        >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
         
 
@@ -66,13 +58,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+        >Provides data for the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
@@ -96,33 +86,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Profile.ProfileMigrateEventArgs.#ctor(System.Web.HttpContext,System.String)" />
+            >The <see cref="M:System.Web.Profile.ProfileMigrateEventArgs.#ctor(System.Web.HttpContext,System.String)" />
 
             
 
-             creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+             creates an instance of the <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
 
             
 
-             class, sets the <see
-             cref="P:System.Web.Profile.ProfileMigrateEventArgs.Context" />
+             class, sets the <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.Context" />
 
             
 
-             property to the specified <see
-             cref="T:System.Web.HttpContext" />
+             property to the specified <see cref="T:System.Web.HttpContext" />
 
             
 
-            , and sets the <see
-             cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
+            , and sets the <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
 
             
 
-             property to the specified <paramref
-             name="anonymousId" />
+             property to the specified <paramref name="anonymousId" />
 
             
 
@@ -132,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+            >Creates an instance of the <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
 
             
 
@@ -141,19 +124,26 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 
            of the current request.</param
         >
         <param name="anonymousId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -176,21 +166,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
+            >The <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
 
             
 
-             property contains the unique identifier for an anonymous user. When someone who has been using your application anonymously logs in, you can handle the <see
-             cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+             property contains the unique identifier for an anonymous user. When someone who has been using your application anonymously logs in, you can handle the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
             
 
              event to copy profile property values from the user's anonymous profile to his or her authenticated profile.</para
           >
           <para
-            >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
-             cref="T:System.Web.Profile.ProfileBase" />
+            >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see cref="T:System.Web.Profile.ProfileBase" />
 
             
 
@@ -218,28 +205,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+            >The <see cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
 
             
 
-             object provides event information to the <see
-             cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+             object provides event information to the <see cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
             
 
-             event of the <see
-             cref="T:System.Web.Profile.ProfileModule" />
+             event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
             
 
-             class. The <see
-             cref="P:System.Web.Profile.ProfileMigrateEventArgs.Context" />
+             class. The <see cref="P:System.Web.Profile.ProfileMigrateEventArgs.Context" />
 
             
 
-             property provides access to the <see
-             cref="T:System.Web.HttpContext" />
+             property provides access to the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -249,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets the <see cref="T:System.Web.HttpContext" />
 
             
 

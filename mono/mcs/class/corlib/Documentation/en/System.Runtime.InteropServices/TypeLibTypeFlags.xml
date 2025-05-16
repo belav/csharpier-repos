@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >TypeLibTypeFlags is used along with the <see
-         cref="T:System.Runtime.InteropServices.TypeLibTypeAttribute" />
+        >TypeLibTypeFlags is used along with the <see cref="T:System.Runtime.InteropServices.TypeLibTypeAttribute" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Describes the original settings of the <see
-         cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+        >Describes the original settings of the <see cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
 
         
 

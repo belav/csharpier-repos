@@ -41,8 +41,7 @@
          is used to invoke a method with a default argument.</para
       >
       <para
-        >Only one instance of <see
-         cref="T:System.Reflection.Missing" />
+        >Only one instance of <see cref="T:System.Reflection.Missing" />
 
         
 
@@ -52,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a missing <see
-         cref="T:System.Object" />
+        >Represents a missing <see cref="T:System.Object" />
 
         
 
@@ -88,13 +86,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object with the logical context information needed to recreate the sole instance of the <see
-             cref="T:System.Reflection.Missing" />
+             object with the logical context information needed to recreate the sole instance of the <see cref="T:System.Reflection.Missing" />
 
             
 
@@ -102,24 +98,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            object to be populated with serialization information.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -151,13 +153,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this instance of the <see
-             cref="T:System.Reflection.Missing" />
+            >Use this instance of the <see cref="T:System.Reflection.Missing" />
 
             
 
-             class to represent missing values, for example, when you invoke methods that have default parameter values. For a code example, see the <see
-             cref="T:System.Reflection.Missing" />
+             class to represent missing values, for example, when you invoke methods that have default parameter values. For a code example, see the <see cref="T:System.Reflection.Missing" />
 
             
 
@@ -167,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the sole instance of the <see
-             cref="T:System.Reflection.Missing" />
+            >Represents the sole instance of the <see cref="T:System.Reflection.Missing" />
 
             
 

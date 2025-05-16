@@ -25,21 +25,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this control to display an image on a Web page. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+        >Use this control to display an image on a Web page. The <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
         
 
          control can be programmatically manipulated to change the image displayed, the image size, and the alignment of the image relative to other page elements.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.HtmlControls.HtmlImage.#ctor" />
+        , see the <see cref="M:System.Web.UI.HtmlControls.HtmlImage.#ctor" />
 
         
 
@@ -61,16 +58,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
             
 
@@ -102,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
             
 
@@ -191,8 +185,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The center value might not work on all browsers. To center an image, wrap the <see
-               cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+              >The center value might not work on all browsers. To center an image, wrap the <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
               
 
@@ -230,8 +223,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to specify the caption displayed when the image specified by the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
+            >Use this property to specify the caption displayed when the image specified by the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
 
             
 
@@ -302,44 +294,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 
-             properties can be used two ways. You can use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+             properties can be used two ways. You can use the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 
              properties to send image size specifications to the browser. This displays the Web page faster because the browser does not need to recalculate the positions of elements on the page when the image loads.</para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+            >You can also use the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 
              properties to scale the image. When using values different from the physical size of the image, the image is resized accordingly. However, this method for scaling the image is not recommended because it takes longer for the page to display it. Instead, physically resize the image to the size you need.</para
           >
           <para
-            >By default, the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+            >By default, the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
@@ -377,61 +362,49 @@
         <Parameter Name="w" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="w"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="w">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
+            >If the value of the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
 
             
 
-             property is a malformed URL, the <see
-             cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             property is a malformed URL, the <see cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method throws an <see
-             cref="T:System.Web.HttpException" />
+             method throws an <see cref="T:System.Web.HttpException" />
 
             
 
              exception.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method overrides the base class's <see
-             cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+             method overrides the base class's <see cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method to write the <paramref
-             name="src" />
+             method to write the <paramref name="src" />
 
             
 
-             attribute of the rendered <see
-             cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+             attribute of the rendered <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
             
 
              control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+            >The <see cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
             
 
-             method is used primarily by control developers extending the functionality of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+             method is used primarily by control developers extending the functionality of the <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
             
 
@@ -441,13 +414,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Renders the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+            >Renders the <see cref="T:System.Web.UI.HtmlControls.HtmlImage" />
 
             
 
-             control's attributes to the specified <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+             control's attributes to the specified <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -472,8 +443,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to specify the path to the image file to display. If the image file is in the same directory as the Web page source file that uses it, you can just specify the file name. Otherwise, you must also include the path to the file. The path can be absolute or relative to the directory that contains the Web page source file. You can use the relative path " ~/ " to refer to the current virtual directory where the page is located. For example, the value of <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
+            >Use this property to specify the path to the image file to display. If the image file is in the same directory as the Web page source file that uses it, you can just specify the file name. Otherwise, you must also include the path to the file. The path can be absolute or relative to the directory that contains the Web page source file. You can use the relative path " ~/ " to refer to the current virtual directory where the page is located. For example, the value of <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
 
             
 
@@ -513,44 +483,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 
-             properties can be used two ways. You can use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+             properties can be used two ways. You can use the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 
              properties to send the image size specifications to the browser. This displays the Web page faster because the browser does not need to recalculate the positions of elements on the page when the image loads.</para
           >
           <para
-            >You can also use the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+            >You can also use the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+             and <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 
              properties to scale the image. When using values that are different from the physical size of the image, the image is resized accordingly. However, this method for scaling the image is not recommended because it takes longer for the page to display it. Instead, physically resize the image to the size you need.</para
           >
           <para
-            >By default, the <see
-             cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+            >By default, the <see cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
 
             
 

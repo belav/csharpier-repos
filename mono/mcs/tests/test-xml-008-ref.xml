@@ -4,8 +4,7 @@
     <name>test-xml-008</name>
   </assembly>
   <members>
-    <member name="T:Testing.Test"
-      >
+    <member name="T:Testing.Test">
             comment without markup on class - it is allowed
         </member
     >

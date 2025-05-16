@@ -34,8 +34,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format
-           type="text/html">
+          >This class makes a link demand. A SecurityException is thrown if the immediate caller does not have infrastructure permission. See <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
@@ -48,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides APIs that are needed for communication and operation with unmanaged classes outside of the <see
-         cref="T:System.AppDomain" />
+        >Provides APIs that are needed for communication and operation with unmanaged classes outside of the <see cref="T:System.AppDomain" />
 
         
 
@@ -77,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Services.EnterpriseServicesHelper" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Services.EnterpriseServicesHelper" />
 
             
 
@@ -122,13 +119,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Constructs a <see
-             cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+            >Constructs a <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
             
 
-             from the specified <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+             from the specified <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
             
 
@@ -138,13 +133,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+            >A <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
             
 
-             returned from the construction call that is specified in the <paramref
-             name="ctorMsg" />
+             returned from the construction call that is specified in the <paramref name="ctorMsg" />
 
             
 
@@ -152,29 +145,34 @@
           >
         </returns>
         <param name="ctorMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A construction call to the object from which the new <see
-           cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+          A construction call to the object from which the new <see cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
 
           
 
            instance is returning. </param
         >
         <param name="retObj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
-           that represents the object that is constructed with the construction call in <paramref
-           name="ctorMsg" />
+           that represents the object that is constructed with the construction call in <paramref name="ctorMsg" />
 
           
 
@@ -214,8 +212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Switches a <format
-             type="text/html">
+            >Switches a <format type="text/html">
               <a href="D04BE3B5-27B9-4F5B-8469-A44149FABF78"
                 >[&lt;topic://cpconcomcallablewrapper&gt;]</a
               >
@@ -227,14 +224,22 @@
           >
         </summary>
         <param name="oldcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A proxy that represents the old instance of a class that is referenced by a CCW. </param
         >
         <param name="newcp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -267,18 +272,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(System.IntPtr)" />
+            >The <see cref="M:System.Runtime.Remoting.Services.EnterpriseServicesHelper.WrapIUnknownWithComObject(System.IntPtr)" />
 
             
 
-             method is similar to the <see
-             cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
+             method is similar to the <see cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
 
             
 
-             method, but does not attempt to maintain the identity of the unmanaged object. For example, two calls with the same IUnknown to the current method return two different RCWs, but two calls to the <see
-             cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
+             method, but does not attempt to maintain the identity of the unmanaged object. For example, two calls with the same IUnknown to the current method return two different RCWs, but two calls to the <see cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
 
             
 
@@ -288,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Wraps the specified IUnknown COM interface with a <format
-             type="text/html">
+            >Wraps the specified IUnknown COM interface with a <format type="text/html">
               <a href="7E542583-1E31-4E10-B523-8CF2F29CB4A4"
                 >[&lt;topic://cpconruntimecallablewrapper&gt;]</a
               >
@@ -305,7 +306,11 @@
           <para>The RCW where the specified IUnknown is wrapped.</para>
         </returns>
         <param name="punk">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

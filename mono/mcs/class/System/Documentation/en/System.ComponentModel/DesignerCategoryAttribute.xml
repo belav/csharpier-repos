@@ -33,8 +33,7 @@
       <para>A visual designer can use a designer category to inform a development environment of the type of designer that will be implemented. If no designer category is provided on a class, a development environment may or may not allow the class to be designed. A category can be created for any name.</para>
       <para>When you mark a class with this attribute, it is set to a constant member. When you want to check the value of this attribute in your code, you must specify the constant member. The Description column in the table below lists the constant member that each value is set to.</para>
       <para
-        >The <see
-         cref="T:System.ComponentModel.DesignerCategoryAttribute" />
+        >The <see cref="T:System.ComponentModel.DesignerCategoryAttribute" />
 
         
 
@@ -57,8 +56,7 @@
           </term>
           <description>
             <para
-              >Designers that are used with components. The attribute is set to the constant member <see
-               cref="F:System.ComponentModel.DesignerCategoryAttribute.Component" />
+              >Designers that are used with components. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Component" />
 
               
 
@@ -72,8 +70,7 @@
           </term>
           <description>
             <para
-              >Designers that are used with forms. The attribute is set to the constant member <see
-               cref="F:System.ComponentModel.DesignerCategoryAttribute.Form" />
+              >Designers that are used with forms. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Form" />
 
               
 
@@ -87,8 +84,7 @@
           </term>
           <description>
             <para
-              >Designers that are used with designers. The attribute is set to the constant member <see
-               cref="F:System.ComponentModel.DesignerCategoryAttribute.Generic" />
+              >Designers that are used with designers. The attribute is set to the constant member <see cref="F:System.ComponentModel.DesignerCategoryAttribute.Generic" />
 
               
 
@@ -106,8 +102,7 @@
         </item>
       </list>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -141,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerCategoryAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerCategoryAttribute" />
 
             
 
@@ -172,8 +166,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DesignerCategoryAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DesignerCategoryAttribute" />
 
             
 
@@ -181,7 +174,11 @@
           >
         </summary>
         <param name="category">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -290,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.DesignOnlyAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.DesignOnlyAttribute" />
 
             
 
@@ -303,7 +299,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

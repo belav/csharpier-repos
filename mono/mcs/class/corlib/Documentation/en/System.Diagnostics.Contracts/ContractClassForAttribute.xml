@@ -55,13 +55,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following example shows how to use the <see
-             cref="M:System.Diagnostics.Contracts.ContractClassAttribute.#ctor(System.Type)" />
+            >The following example shows how to use the <see cref="M:System.Diagnostics.Contracts.ContractClassAttribute.#ctor(System.Type)" />
 
             
 
-             constructor to specify that the contracts in the type apply to the IArray interface. This code example is part of a larger example provided for the <see
-             cref="T:System.Diagnostics.Contracts.ContractClassAttribute" />
+             constructor to specify that the contracts in the type apply to the IArray interface. This code example is part of a larger example provided for the <see cref="T:System.Diagnostics.Contracts.ContractClassAttribute" />
 
             
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.Contracts.ContractClassForAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.Contracts.ContractClassForAttribute" />
 
             
 
@@ -81,7 +78,11 @@
           >
         </summary>
         <param name="typeContractsAreFor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

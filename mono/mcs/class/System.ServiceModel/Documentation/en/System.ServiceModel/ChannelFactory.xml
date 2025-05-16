@@ -27,26 +27,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Channel factories that implement the <see
-         cref="T:System.ServiceModel.Channels.IChannelFactory" />
+        >Channel factories that implement the <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
         
 
-         interface and their associated channels are generally used by the initiators of a communication pattern. Listener factories that implement the <see
-         cref="T:System.ServiceModel.Channels.IChannelListener" />
+         interface and their associated channels are generally used by the initiators of a communication pattern. Listener factories that implement the <see cref="T:System.ServiceModel.Channels.IChannelListener" />
 
         
 
          interface and their associated listeners provide the mechanisms with which channels are accepted for communications.</para
       >
       <para
-        >This class is not part of the channel model, but of the service model. The <see
-         cref="M:System.ServiceModel.ChannelFactory.CreateFactory" />
+        >This class is not part of the channel model, but of the service model. The <see cref="M:System.ServiceModel.ChannelFactory.CreateFactory" />
 
         
 
-         method provides the means to create an <see
-         cref="T:System.ServiceModel.Channels.IChannelFactory" />
+         method provides the means to create an <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
         
 
@@ -62,8 +58,7 @@
         </item>
         <item>
           <para
-            >Avoid destructors; they cause the compiler to auto-generate <see
-             cref="T:System.IDisposable" />
+            >Avoid destructors; they cause the compiler to auto-generate <see cref="T:System.IDisposable" />
 
             
 
@@ -72,8 +67,7 @@
         </item>
         <item>
           <para
-            >Avoid non-reference members; they can cause the compiler to auto-generate <see
-             cref="T:System.IDisposable" />
+            >Avoid non-reference members; they can cause the compiler to auto-generate <see cref="T:System.IDisposable" />
 
             
 
@@ -82,13 +76,11 @@
         </item>
         <item>
           <para
-            >Avoid using a finalizer; but if you include one, you should suppress the build warning and call <see
-             cref="M:System.GC.SuppressFinalize(System.Object)" />
+            >Avoid using a finalizer; but if you include one, you should suppress the build warning and call <see cref="M:System.GC.SuppressFinalize(System.Object)" />
 
             
 
-             and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see
-             cref="T:System.IDisposable" />
+             and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see cref="T:System.IDisposable" />
 
             
 
@@ -97,8 +89,7 @@
         </item>
       </list>
       <para
-        >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see
-         cref="T:System.ServiceModel.ChannelFactory" />
+        >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see cref="T:System.ServiceModel.ChannelFactory" />
 
         
 
@@ -127,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory" />
 
             
 
@@ -161,18 +151,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="configurationName" />
+            >If <paramref name="configurationName" />
 
             
 
-             is null, only the behaviors specified in the service endpoint are loaded. If the wildcard, "*", is used, any endpoint configuration in the client configuration file is used, but only if there is precisely one. Otherwise an exception is thrown. Any other value for the <paramref
-             name="configurationName" />
+             is null, only the behaviors specified in the service endpoint are loaded. If the wildcard, "*", is used, any endpoint configuration in the client configuration file is used, but only if there is precisely one. Otherwise an exception is thrown. Any other value for the <paramref name="configurationName" />
 
             
 
-            , including the empty string "", matches the endpoint configuration with the same name. See the <format
-             type="text/html">
+            , including the empty string "", matches the endpoint configuration with the same name. See the <format type="text/html">
               <a href="5da5bd3b-65d9-43b7-91b9-cc9e989b1350">WCF Client Configuration</a>
             </format>
 
@@ -213,8 +200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -249,8 +235,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ServiceModel.Channels.IChannelFactory" />
+            >An <see cref="T:System.ServiceModel.Channels.IChannelFactory" />
 
             
 
@@ -280,49 +265,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+            >The <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 
-             object is stored as a type of endpoint behavior and can be accessed through the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+             object is stored as a type of endpoint behavior and can be accessed through the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
 
             
 
              property. </para
           >
           <para
-            >The <see
-             cref="M:System.ServiceModel.ChannelFactory.OnOpened" />
+            >The <see cref="M:System.ServiceModel.ChannelFactory.OnOpened" />
 
             
 
-             method initializes a read-only copy of the <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+             method initializes a read-only copy of the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 
              object for the factory.</para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+            >The <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 
-             object is used by the <see
-             cref="T:System.ServiceModel.ClientBase`1" />
+             object is used by the <see cref="T:System.ServiceModel.ClientBase`1" />
 
             
 
-             class (or a class that derives from this class) to create the proxy objects that can call services. The <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+             class (or a class that derives from this class) to create the proxy objects that can call services. The <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 
-             object is also accessible through the <see
-             cref="P:System.ServiceModel.ClientBase`1.ClientCredentials" />
+             object is also accessible through the <see cref="P:System.ServiceModel.ClientBase`1.ClientCredentials" />
 
             
 
@@ -359,23 +336,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default service model close time-out if both the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >Gets the default service model close time-out if both the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Binding" />
+             and <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Binding" />
 
             
 
-             are null. The default value for the service model close time-out is 1 minute. Otherwise, the value is set to the <see
-             cref="P:System.ServiceModel.Channels.Binding.CloseTimeout" />
+             are null. The default value for the service model close time-out is 1 minute. Otherwise, the value is set to the <see cref="P:System.ServiceModel.Channels.Binding.CloseTimeout" />
 
             
 
-             value associated with the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             value associated with the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -409,23 +382,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default service model open time-out if both the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >Gets the default service model open time-out if both the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Binding" />
+             and <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Binding" />
 
             
 
-             are null. The default value for the service model open time-out is 1 minute. Otherwise, the value is set to the <see
-             cref="P:System.ServiceModel.Channels.Binding.OpenTimeout" />
+             are null. The default value for the service model open time-out is 1 minute. Otherwise, the value is set to the <see cref="P:System.ServiceModel.Channels.Binding.OpenTimeout" />
 
             
 
-             value associated with the <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+             value associated with the <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 
@@ -481,18 +450,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Before opening the channel factory, checks that it is not <see
-             cref="F:System.ServiceModel.CommunicationState.Closed" />
+            >Before opening the channel factory, checks that it is not <see cref="F:System.ServiceModel.CommunicationState.Closed" />
 
             
 
-            , <see
-             cref="F:System.ServiceModel.CommunicationState.Closing" />
+            , <see cref="F:System.ServiceModel.CommunicationState.Closing" />
 
             
 
-            , or <see
-             cref="F:System.ServiceModel.CommunicationState.Opened" />
+            , or <see cref="F:System.ServiceModel.CommunicationState.Opened" />
 
             
 
@@ -545,8 +511,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The typed object <paramref
-             name="T" />
+            >The typed object <paramref name="T" />
 
             
 
@@ -554,7 +519,11 @@
           >
         </returns>
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -585,13 +554,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)" />
+            >Use <see cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)" />
 
             
 
-             if you have just the binding. Use <see
-             cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.String,System.ServiceModel.EndpointAddress)" />
+             if you have just the binding. Use <see cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.String,System.ServiceModel.EndpointAddress)" />
 
             
 
@@ -603,12 +570,15 @@
           <para>Initializes the service endpoint of the channel factory with a specified endpoint.</para>
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -641,8 +611,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.String,System.ServiceModel.EndpointAddress)" />
+            >Use <see cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.String,System.ServiceModel.EndpointAddress)" />
 
             
 
@@ -654,12 +623,15 @@
           <para>Initializes the service endpoint of the channel factory with a specified binding and address.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -693,8 +665,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)" />
+            >Use <see cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)" />
 
             
 
@@ -725,13 +696,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ServiceModel.ChannelFactory.OnAbort" />
+            >The <see cref="M:System.ServiceModel.ChannelFactory.OnAbort" />
 
             
 
-             method is called on a factory after it transitions to the closing state if the <see
-             cref="M:System.ServiceModel.Channels.CommunicationObject.Abort" />
+             method is called on a factory after it transitions to the closing state if the <see cref="M:System.ServiceModel.Channels.CommunicationObject.Abort" />
 
             
 
@@ -777,8 +746,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -786,31 +754,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous operation completion.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -851,8 +829,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.IAsyncResult" />
+            >The <see cref="T:System.IAsyncResult" />
 
             
 
@@ -860,31 +837,41 @@
           >
         </returns>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
            that specifies how long the operation has to complete before timing out.</param
         >
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.AsyncCallback" />
+          The <see cref="T:System.AsyncCallback" />
 
           
 
            delegate that receives the notification of the asynchronous operation completion.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -915,12 +902,15 @@
           <para>Calls close on the inner channel factory with a specified time-out for the completion of the operation.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -954,17 +944,19 @@
           <para>Completes an asynchronous close operation on the inner channel factory of the current channel factory. </para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.ServiceModel.ChannelFactory.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+           returned by a call to the <see cref="M:System.ServiceModel.ChannelFactory.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
           
 
@@ -998,17 +990,19 @@
           <para>Completes an asynchronous open operation on the inner channel factory of the current channel factory. </para>
         </summary>
         <param name="result">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IAsyncResult" />
+          The <see cref="T:System.IAsyncResult" />
 
           
 
-           returned by a call to the <see
-           cref="M:System.ServiceModel.ChannelFactory.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
+           returned by a call to the <see cref="M:System.ServiceModel.ChannelFactory.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
           
 
@@ -1039,12 +1033,15 @@
           <para>Calls open on the inner channel factory of the current channel factory with a specified time-out for the completion of the operation.</para>
         </summary>
         <param name="timeout">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Timespan" />
+          The <see cref="T:System.Timespan" />
 
           
 
@@ -1070,18 +1067,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides and invokes the <see
-             cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" />
+            >Overrides and invokes the <see cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" />
 
             
 
-             method, which is called during the transition of an object into the opened state. The <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+             method, which is called during the transition of an object into the opened state. The <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 
-             object is stored as a type of endpoint behavior and can be accessed through the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+             object is stored as a type of endpoint behavior and can be accessed through the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
 
             
 
@@ -1091,8 +1085,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a read-only copy of the <see
-             cref="T:System.ServiceModel.Description.ClientCredentials" />
+            >Initializes a read-only copy of the <see cref="T:System.ServiceModel.Description.ClientCredentials" />
 
             
 

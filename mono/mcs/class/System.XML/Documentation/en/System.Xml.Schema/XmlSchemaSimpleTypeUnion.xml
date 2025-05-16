@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the union element for simple types from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the union element for simple types from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleTypeUnion" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaSimpleTypeUnion" />
 
             
 
@@ -102,18 +100,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >Gets an array of <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
-             objects representing the type of the simpleType element based on the <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeUnion.BaseTypes" />
+             objects representing the type of the simpleType element based on the <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeUnion.BaseTypes" />
 
             
 
-             and <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeUnion.MemberTypes" />
+             and <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeUnion.MemberTypes" />
 
             
 

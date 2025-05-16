@@ -14,31 +14,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This event is sent when the OwnerDraw property of <see
-         cref="T:System.Windows.Forms.ListBox" />
+        >This event is sent when the OwnerDraw property of <see cref="T:System.Windows.Forms.ListBox" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ComboBox" />
+        , <see cref="T:System.Windows.Forms.ComboBox" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        , <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
-        , or <see
-         cref="T:System.Windows.Forms.MenuItem" />
+        , or <see cref="T:System.Windows.Forms.MenuItem" />
 
         
 
          is set to true. It is used to tell the drawing function how to size an item.</para
       >
       <para
-        >For information about the event model, see <format
-         type="text/html">
+        >For information about the event model, see <format type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
 
@@ -50,23 +45,19 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the MeasureItem event of the <see
-         cref="T:System.Windows.Forms.ListBox" />
+        >Provides data for the MeasureItem event of the <see cref="T:System.Windows.Forms.ListBox" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.ComboBox" />
+        , <see cref="T:System.Windows.Forms.ComboBox" />
 
         
 
-        , <see
-         cref="T:System.Windows.Forms.CheckedListBox" />
+        , <see cref="T:System.Windows.Forms.CheckedListBox" />
 
         
 
-        , and <see
-         cref="T:System.Windows.Forms.MenuItem" />
+        , and <see cref="T:System.Windows.Forms.MenuItem" />
 
         
 
@@ -90,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MeasureItemEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MeasureItemEventArgs" />
 
             
 
@@ -99,19 +89,26 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            object being written to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -139,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MeasureItemEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MeasureItemEventArgs" />
 
             
 
@@ -148,31 +144,41 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            object being written to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the item for which you need the height or width. </param
         >
         <param name="itemHeight">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The height of the item to measure relative to the <paramref
-           name="graphics" />
+          The height of the item to measure relative to the <paramref name="graphics" />
 
           
 
@@ -195,18 +201,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You use a <see
-             cref="T:System.Drawing.Graphics" />
+            >You use a <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object to determine the scale to use when setting the <see
-             cref="P:System.Windows.Forms.MeasureItemEventArgs.ItemHeight" />
+             object to determine the scale to use when setting the <see cref="P:System.Windows.Forms.MeasureItemEventArgs.ItemHeight" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.MeasureItemEventArgs.ItemWidth" />
+             and <see cref="P:System.Windows.Forms.MeasureItemEventArgs.ItemWidth" />
 
             
 
@@ -216,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets the <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -261,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the height of the item specified by the <see
-             cref="P:System.Windows.Forms.MeasureItemEventArgs.Index" />
+            >Gets or sets the height of the item specified by the <see cref="P:System.Windows.Forms.MeasureItemEventArgs.Index" />
 
             
 
@@ -286,8 +287,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is only used by <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >This member is only used by <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -297,8 +297,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the width of the item specified by the <see
-             cref="P:System.Windows.Forms.MeasureItemEventArgs.Index" />
+            >Gets or sets the width of the item specified by the <see cref="P:System.Windows.Forms.MeasureItemEventArgs.Index" />
 
             
 

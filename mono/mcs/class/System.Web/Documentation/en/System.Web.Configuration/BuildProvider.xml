@@ -37,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a <see
-             cref="T:System.Web.Configuration.BuildProvider" />
+            >Creates an instance of a <see cref="T:System.Web.Configuration.BuildProvider" />
 
             
 
@@ -46,19 +45,26 @@
           >
         </summary>
         <param name="extension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file extension of the dynamic resource used during compilation.</param
         >
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type that represents the <see
-           cref="T:System.Web.Configuration.BuildProvider" />
+          The type that represents the <see cref="T:System.Web.Configuration.BuildProvider" />
 
           
 
@@ -93,7 +99,11 @@
           <para>true if the objects are equal; otherwise, false.</para>
         </returns>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -194,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or set the comma-separated class and assembly combination that indicates the <see
-             cref="T:System.Web.Configuration.BuildProvider" />
+            >Gets or set the comma-separated class and assembly combination that indicates the <see cref="T:System.Web.Configuration.BuildProvider" />
 
             
 

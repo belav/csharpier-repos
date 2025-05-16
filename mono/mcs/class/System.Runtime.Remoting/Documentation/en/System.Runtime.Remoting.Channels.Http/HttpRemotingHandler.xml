@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Custom HTTP handlers process specific, predefined types of HTTP requests. Executable code defined in the <see
-         cref="T:System.Web.IHttpHandler" />
+        >Custom HTTP handlers process specific, predefined types of HTTP requests. Executable code defined in the <see cref="T:System.Web.IHttpHandler" />
 
         
 
@@ -52,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -81,8 +79,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the default <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >Use the default <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -92,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -101,24 +97,30 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The constructor ignores the <paramref
-           name="type" />
+          The constructor ignores the <paramref name="type" />
 
           
 
            parameter.</param
         >
         <param name="srvID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The constructor ignores the <paramref
-           name="srvID" />
+          The constructor ignores the <paramref name="srvID" />
 
           
 
@@ -142,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether another request can use the <see
-             cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+            >Gets a Boolean value that indicates whether another request can use the <see cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
 
             
 
@@ -172,13 +173,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about the <see
-             cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
+            >For more information about the <see cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
-             methods, see <see
-             cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
+             methods, see <see cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
 
             
 
@@ -190,12 +189,15 @@
           <para>Enables processing of HTTP Web requests by the current instance.</para>
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.HttpContext" />
+          A <see cref="T:System.Web.HttpContext" />
 
           
 

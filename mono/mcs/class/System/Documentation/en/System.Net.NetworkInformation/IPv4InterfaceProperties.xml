@@ -22,16 +22,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class provides access to configuration and address information for network interfaces that support IPv4. You do not create instances of this class; they are returned by the <see
-         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+        >This class provides access to configuration and address information for network interfaces that support IPv4. You do not create instances of this class; they are returned by the <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
 
         
 
          method.</para
       >
       <para
-        >For IPV6 properties, see <see
-         cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
+        >For IPV6 properties, see <see cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv6Properties" />
 
         
 
@@ -61,8 +59,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be called only by classes that derive from <see
-             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+            >This constructor can be called only by classes that derive from <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
 
             
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
+            >Initializes a new instance of the <see cref="T:System.Net.NetworkInformation.IPv4InterfaceProperties" />
 
             
 
@@ -133,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -170,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -201,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -232,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 
@@ -287,8 +279,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Boolean" />
+            >Gets a <see cref="T:System.Boolean" />
 
             
 

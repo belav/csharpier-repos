@@ -21,13 +21,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+        >The <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
         
 
          class provides support for the Authorization, ProxyAuthorization, WWW-Authenticate, and Proxy-Authenticate HTTP header values as defined in <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+          cref="http://go.microsoft.com/fwlink/?LinkID=241642"
+          >RFC 2616</see
+        >
 
         
 
@@ -58,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -67,7 +67,11 @@
           >
         </summary>
         <param name="scheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -97,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -106,14 +109,22 @@
           >
         </summary>
         <param name="scheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The scheme to use for authorization.</param
         >
         <param name="parameter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -142,13 +153,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+             is equal to the current <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -157,17 +166,13 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Boolean" />
+          <para>Returns <see cref="T:System.Boolean" />
 
             
 
-            .</para
-          >
+            .</para>
           <para
-            >true if the specified <see
-             cref="T:System.Object" />
+            >true if the specified <see cref="T:System.Object" />
 
             
 
@@ -175,7 +180,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -202,8 +211,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
           <para
-            >The <see
-             cref="M:System.Net.Http.Headers.AuthenticationHeaderValue.GetHashCode" />
+            >The <see cref="M:System.Net.Http.Headers.AuthenticationHeaderValue.GetHashCode" />
 
             
 
@@ -213,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for an  <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Serves as a hash function for an  <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -223,14 +230,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Int32" />
+          <para>Returns <see cref="T:System.Int32" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A hash code for the current object.</para>
         </returns>
       </Docs>
@@ -278,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts a string to an <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Converts a string to an <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -289,16 +292,14 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Returns <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
             .</para
           >
           <para
-            >An <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >An <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -306,7 +307,11 @@
           >
         </returns>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -352,8 +357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new object that is a copy of the current <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -362,14 +366,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.Object" />
+          <para>Returns <see cref="T:System.Object" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A copy of the current instance.</para>
         </returns>
       </Docs>
@@ -393,8 +394,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the current <see
-             cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.AuthenticationHeaderValue" />
 
             
 
@@ -403,14 +403,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.String" />
+          <para>Returns <see cref="T:System.String" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A string that represents the current object.</para>
         </returns>
       </Docs>

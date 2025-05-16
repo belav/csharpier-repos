@@ -111,8 +111,7 @@
 
         
 
-         could not be found on <paramref
-         name="type" />
+         could not be found on <paramref name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>
@@ -153,13 +152,11 @@
 
         
 
-         with <paramref
-         name="signature" />
+         with <paramref name="signature" />
 
         
 
-         could not be found on <paramref
-         name="type" />
+         could not be found on <paramref name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>
@@ -193,8 +190,7 @@
 
         
 
-         was <see
-         langword="null" />
+         was <see langword="null" />
 
         
 
@@ -229,8 +225,7 @@
 
         
 
-         could not be found on <paramref
-         name="type" />
+         could not be found on <paramref name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>
@@ -270,13 +265,11 @@
 
         
 
-         with <paramref
-         name="signature" />
+         with <paramref name="signature" />
 
         
 
-         could not be found on <paramref
-         name="type" />
+         could not be found on <paramref name="type" />
       </exception>
       <Docs>
         <param name="type">The type to lookup, a Type from Mono.Simd.</param>

@@ -38,54 +38,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Timers.Timer" />
+        >The <see cref="T:System.Timers.Timer" />
 
         
 
-         component is a server-based timer, which allows you to specify a recurring interval at which the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         component is a server-based timer, which allows you to specify a recurring interval at which the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
-         event is raised in your application. You can then handle this event to provide regular processing. For example, suppose you have a critical server that must be kept running 24 hours a day, 7 days a week. You could create a service that uses a <see
-         cref="T:System.Timers.Timer" />
+         event is raised in your application. You can then handle this event to provide regular processing. For example, suppose you have a critical server that must be kept running 24 hours a day, 7 days a week. You could create a service that uses a <see cref="T:System.Timers.Timer" />
 
         
 
          to periodically check the server and ensure that the system is up and running. If the system is not responding, the service could attempt to restart the server or notify an administrator.</para
       >
       <para
-        >The server-based <see
-         cref="T:System.Timers.Timer" />
+        >The server-based <see cref="T:System.Timers.Timer" />
 
         
 
-         is designed for use with worker threads in a multithreaded environment. Server timers can move among threads to handle the raised <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         is designed for use with worker threads in a multithreaded environment. Server timers can move among threads to handle the raised <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
          event, resulting in more accuracy than Windows timers in raising the event on time. </para
       >
       <para
-        >The <see
-         cref="T:System.Timers.Timer" />
+        >The <see cref="T:System.Timers.Timer" />
 
         
 
-         component raises the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         component raises the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
-         event, based on the value of the <see
-         cref="P:System.Timers.Timer.Interval" />
+         event, based on the value of the <see cref="P:System.Timers.Timer.Interval" />
 
         
 
-         property. You can handle this event to perform the processing you need. For example, suppose that you have an online sales application that continuously posts sales orders to a database. The service that compiles the instructions for shipping operates on a batch of orders rather than processing each order individually. You could use a <see
-         cref="T:System.Timers.Timer" />
+         property. You can handle this event to perform the processing you need. For example, suppose that you have an online sales application that continuously posts sales orders to a database. The service that compiles the instructions for shipping operates on a batch of orders rather than processing each order individually. You could use a <see cref="T:System.Timers.Timer" />
 
         
 
@@ -93,38 +84,31 @@
       >
       <block subset="none" type="note">
         <para
-          >When <see
-           cref="P:System.Timers.Timer.AutoReset" />
+          >When <see cref="P:System.Timers.Timer.AutoReset" />
 
           
 
-           is set to false, the <see
-           cref="T:System.Timers.Timer" />
+           is set to false, the <see cref="T:System.Timers.Timer" />
 
           
 
-           raises the <see
-           cref="E:System.Timers.Timer.Elapsed" />
+           raises the <see cref="E:System.Timers.Timer.Elapsed" />
 
           
 
-           event only once, after the first <see
-           cref="P:System.Timers.Timer.Interval" />
+           event only once, after the first <see cref="P:System.Timers.Timer.Interval" />
 
           
 
-           has elapsed. To keep raising the <see
-           cref="E:System.Timers.Timer.Elapsed" />
+           has elapsed. To keep raising the <see cref="E:System.Timers.Timer.Elapsed" />
 
           
 
-           event on the <see
-           cref="P:System.Timers.Timer.Interval" />
+           event on the <see cref="P:System.Timers.Timer.Interval" />
 
           
 
-          , set <see
-           cref="P:System.Timers.Timer.AutoReset" />
+          , set <see cref="P:System.Timers.Timer.AutoReset" />
 
           
 
@@ -132,46 +116,38 @@
         >
       </block>
       <para
-        >In the .NET Framework version 2.0 and earlier, the <see
-         cref="T:System.Timers.Timer" />
+        >In the .NET Framework version 2.0 and earlier, the <see cref="T:System.Timers.Timer" />
 
         
 
-         component catches and suppresses all exceptions thrown by event handlers for the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         component catches and suppresses all exceptions thrown by event handlers for the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
          event. This behavior is subject to change in future releases of the .NET Framework.</para
       >
       <para
-        >If the <see
-         cref="P:System.Timers.Timer.SynchronizingObject" />
+        >If the <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
         
 
-         property is null, the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         property is null, the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
-         event is raised on a <see
-         cref="T:System.Threading.ThreadPool" />
+         event is raised on a <see cref="T:System.Threading.ThreadPool" />
 
         
 
-         thread. If processing of the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         thread. If processing of the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
-         event lasts longer than <see
-         cref="P:System.Timers.Timer.Interval" />
+         event lasts longer than <see cref="P:System.Timers.Timer.Interval" />
 
         
 
-        , the event might be raised again on another <see
-         cref="T:System.Threading.ThreadPool" />
+        , the event might be raised again on another <see cref="T:System.Threading.ThreadPool" />
 
         
 
@@ -179,23 +155,19 @@
       >
       <block subset="none" type="note">
         <para
-          >The event-handling method might run on one thread at the same time that another thread calls the <see
-           cref="M:System.Timers.Timer.Stop" />
+          >The event-handling method might run on one thread at the same time that another thread calls the <see cref="M:System.Timers.Timer.Stop" />
 
           
 
-           method or sets the <see
-           cref="P:System.Timers.Timer.Enabled" />
+           method or sets the <see cref="P:System.Timers.Timer.Enabled" />
 
           
 
-           property to false. This might result in the <see
-           cref="E:System.Timers.Timer.Elapsed" />
+           property to false. This might result in the <see cref="E:System.Timers.Timer.Elapsed" />
 
           
 
-           event being raised after the timer is stopped. The example code for the <see
-           cref="M:System.Timers.Timer.Stop" />
+           event being raised after the timer is stopped. The example code for the <see cref="M:System.Timers.Timer.Stop" />
 
           
 
@@ -203,77 +175,64 @@
         >
       </block>
       <para
-        >Even if <see
-         cref="P:System.Timers.Timer.SynchronizingObject" />
+        >Even if <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
         
 
-         is not null, <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         is not null, <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
-         events can occur after the <see
-         cref="Overload:System.Timers.Timer.Dispose" />
+         events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" />
 
         
 
-         or <see
-         cref="M:System.Timers.Timer.Stop" />
+         or <see cref="M:System.Timers.Timer.Stop" />
 
         
 
-         method has been called or after the <see
-         cref="P:System.Timers.Timer.Enabled" />
+         method has been called or after the <see cref="P:System.Timers.Timer.Enabled" />
 
         
 
-         property has been set to false, because the signal to raise the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
-         event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see
-         cref="E:System.Timers.Timer.Elapsed" />
+         event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" />
 
         
 
          event to ignore subsequent events. </para
       >
       <para
-        >If you use the <see
-         cref="T:System.Timers.Timer" />
+        >If you use the <see cref="T:System.Timers.Timer" />
 
         
 
-         with a user interface element, such as a form or control, without placing the timer on that user interface element, assign the form or control that contains the <see
-         cref="T:System.Timers.Timer" />
+         with a user interface element, such as a form or control, without placing the timer on that user interface element, assign the form or control that contains the <see cref="T:System.Timers.Timer" />
 
         
 
-         to the <see
-         cref="P:System.Timers.Timer.SynchronizingObject" />
+         to the <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
         
 
          property, so that the event is marshaled to the user interface thread. </para
       >
       <para
-        >The <see
-         cref="T:System.Timers.Timer" />
+        >The <see cref="T:System.Timers.Timer" />
 
         
 
          is not visible at run time.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Timers.Timer" />
+        >For a list of initial property values for an instance of <see cref="T:System.Timers.Timer" />
 
         
 
-        , see the <see
-         cref="M:System.Timers.Timer.#ctor" />
+        , see the <see cref="M:System.Timers.Timer.#ctor" />
 
         
 
@@ -304,8 +263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Timers.Timer" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Timers.Timer" />
 
             
 
@@ -367,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Timers.Timer" />
+            >Initializes a new instance of the <see cref="T:System.Timers.Timer" />
 
             
 
@@ -397,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor sets the <see
-             cref="P:System.Timers.Timer.Interval" />
+            >This constructor sets the <see cref="P:System.Timers.Timer.Interval" />
 
             
 
@@ -408,13 +364,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Timers.Timer" />
+            >Initializes a new instance of the <see cref="T:System.Timers.Timer" />
 
             
 
-             class, and sets the <see
-             cref="P:System.Timers.Timer.Interval" />
+             class, and sets the <see cref="P:System.Timers.Timer.Interval" />
 
             
 
@@ -422,12 +376,15 @@
           >
         </summary>
         <param name="interval">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The time, in milliseconds, between events. The value must be greater than zero and less than or equal to <see
-           cref="F:System.Int32.MaxValue" />
+          The time, in milliseconds, between events. The value must be greater than zero and less than or equal to <see cref="F:System.Int32.MaxValue" />
 
           
 
@@ -464,51 +421,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Timers.Timer" />
+            >If the <see cref="T:System.Timers.Timer" />
 
             
 
-             is already enabled when the <see
-             cref="M:System.Timers.Timer.Start" />
+             is already enabled when the <see cref="M:System.Timers.Timer.Start" />
 
             
 
-             method is called, the interval is reset. If <see
-             cref="P:System.Timers.Timer.AutoReset" />
+             method is called, the interval is reset. If <see cref="P:System.Timers.Timer.AutoReset" />
 
             
 
-             is false, the <see
-             cref="M:System.Timers.Timer.Start" />
+             is false, the <see cref="M:System.Timers.Timer.Start" />
 
             
 
              method must be called in order to start the count again.</para
           >
           <para
-            >Resetting the interval affects when the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+            >Resetting the interval affects when the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is raised. For example, if you set the interval to 5 seconds and then set the <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event is raised. For example, if you set the interval to 5 seconds and then set the <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             property to true, the count starts at the time <see
-             cref="P:System.Timers.Timer.Enabled" />
+             property to true, the count starts at the time <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set. If you reset the interval to 10 seconds when the count is 3 seconds, the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             is set. If you reset the interval to 10 seconds when the count is 3 seconds, the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is raised for the first time 13 seconds after the <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event is raised for the first time 13 seconds after the <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -518,13 +466,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Timers.Timer" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Timers.Timer" />
 
             
 
-             should raise the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             should raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
@@ -553,18 +499,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvslong design environment uses this method to start the initialization of a component that is used on a form or by another component. The <see
-             cref="M:System.Timers.Timer.EndInit" />
+            >The vsprvslong design environment uses this method to start the initialization of a component that is used on a form or by another component. The <see cref="M:System.Timers.Timer.EndInit" />
 
             
 
-             method ends the initialization. Using the <see
-             cref="M:System.Timers.Timer.BeginInit" />
+             method ends the initialization. Using the <see cref="M:System.Timers.Timer.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Timers.Timer.EndInit" />
+             and <see cref="M:System.Timers.Timer.EndInit" />
 
             
 
@@ -574,8 +517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Begins the run-time initialization of a <see
-             cref="T:System.Timers.Timer" />
+            >Begins the run-time initialization of a <see cref="T:System.Timers.Timer" />
 
             
 
@@ -602,13 +544,11 @@
       <Parameters />
       <Docs>
         <remarks
-          >This has the same effect as calling <see
-           cref="M:System.Timers.Timer.Stop()" />
+          >This has the same effect as calling <see cref="M:System.Timers.Timer.Stop()" />
 
           
 
-          , or setting <see
-           cref="P:System.Timers.Timer.Enabled" />
+          , or setting <see cref="P:System.Timers.Timer.Enabled" />
 
           
 
@@ -617,8 +557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the resources used by the <see
-             cref="T:System.Timers.Timer" />
+            >Releases the resources used by the <see cref="T:System.Timers.Timer" />
 
             
 
@@ -650,8 +589,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current <see
-             cref="T:System.Timers.Timer" />
+            >Releases all resources used by the current <see cref="T:System.Timers.Timer" />
 
             
 
@@ -659,7 +597,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -698,89 +640,73 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >If <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set to true and <see
-             cref="P:System.Timers.Timer.AutoReset" />
+             is set to true and <see cref="P:System.Timers.Timer.AutoReset" />
 
             
 
-             is set to false, the <see
-             cref="T:System.Timers.Timer" />
+             is set to false, the <see cref="T:System.Timers.Timer" />
 
             
 
-             raises the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             raises the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
              event only once, the first time the interval elapses.</para
           >
           <para
-            >If <see
-             cref="P:System.Timers.Timer.Interval" />
+            >If <see cref="P:System.Timers.Timer.Interval" />
 
             
 
-             is set after the <see
-             cref="T:System.Timers.Timer" />
+             is set after the <see cref="T:System.Timers.Timer" />
 
             
 
-             has started, the count is reset. For example, if you set the interval to 5 seconds and then set <see
-             cref="P:System.Timers.Timer.Enabled" />
+             has started, the count is reset. For example, if you set the interval to 5 seconds and then set <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             to true, the count starts at the time <see
-             cref="P:System.Timers.Timer.Enabled" />
+             to true, the count starts at the time <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is raised for the first time 13 seconds after <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event is raised for the first time 13 seconds after <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
              was set to true.</para
           >
           <para
-            >If the <see
-             cref="P:System.Timers.Timer.SynchronizingObject" />
+            >If the <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
             
 
-             property is null, the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             property is null, the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is raised on a <see
-             cref="T:System.Threading.ThreadPool" />
+             event is raised on a <see cref="T:System.Threading.ThreadPool" />
 
             
 
-             thread. If the processing of the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             thread. If the processing of the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event lasts longer than <see
-             cref="P:System.Timers.Timer.Interval" />
+             event lasts longer than <see cref="P:System.Timers.Timer.Interval" />
 
             
 
-            , the event might be raised again on another <see
-             cref="T:System.Threading.ThreadPool" />
+            , the event might be raised again on another <see cref="T:System.Threading.ThreadPool" />
 
             
 
@@ -788,23 +714,19 @@
           >
           <block subset="none" type="note">
             <para
-              >The event-handling method might run on one thread at the same time that another thread calls the <see
-               cref="M:System.Timers.Timer.Stop" />
+              >The event-handling method might run on one thread at the same time that another thread calls the <see cref="M:System.Timers.Timer.Stop" />
 
               
 
-               method or sets the <see
-               cref="P:System.Timers.Timer.Enabled" />
+               method or sets the <see cref="P:System.Timers.Timer.Enabled" />
 
               
 
-               property to false. This might result in the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               property to false. This might result in the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event being raised after the timer is stopped. The example code for the <see
-               cref="M:System.Timers.Timer.Stop" />
+               event being raised after the timer is stopped. The example code for the <see cref="M:System.Timers.Timer.Stop" />
 
               
 
@@ -812,51 +734,42 @@
             >
           </block>
           <para
-            >Even if <see
-             cref="P:System.Timers.Timer.SynchronizingObject" />
+            >Even if <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
             
 
-             is not null, <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             is not null, <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             events can occur after the <see
-             cref="Overload:System.Timers.Timer.Dispose" />
+             events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" />
 
             
 
-             or <see
-             cref="M:System.Timers.Timer.Stop" />
+             or <see cref="M:System.Timers.Timer.Stop" />
 
             
 
-             method has been called or after the <see
-             cref="P:System.Timers.Timer.Enabled" />
+             method has been called or after the <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             property has been set to false, because the signal to raise the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
              event to ignore subsequent events. </para
           >
           <para
-            >The <see
-             cref="T:System.Timers.Timer" />
+            >The <see cref="T:System.Timers.Timer" />
 
             
 
-             component catches and suppresses all exceptions thrown by event handlers for the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             component catches and suppresses all exceptions thrown by event handlers for the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
@@ -898,23 +811,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >Setting <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             to true is the same as calling <see
-             cref="M:System.Timers.Timer.Start" />
+             to true is the same as calling <see cref="M:System.Timers.Timer.Start" />
 
             
 
-            , while setting <see
-             cref="P:System.Timers.Timer.Enabled" />
+            , while setting <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             to false is the same as calling <see
-             cref="M:System.Timers.Timer.Stop" />
+             to false is the same as calling <see cref="M:System.Timers.Timer.Stop" />
 
             
 
@@ -922,28 +831,23 @@
           >
           <block subset="none" type="note">
             <para
-              >The signal to raise the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+              >The signal to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event is always queued for execution on a <see
-               cref="T:System.Threading.ThreadPool" />
+               event is always queued for execution on a <see cref="T:System.Threading.ThreadPool" />
 
               
 
-               thread. This might result in the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               thread. This might result in the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event being raised after the <see
-               cref="P:System.Timers.Timer.Enabled" />
+               event being raised after the <see cref="P:System.Timers.Timer.Enabled" />
 
               
 
-               property is set to false. The code example for the <see
-               cref="M:System.Timers.Timer.Stop" />
+               property is set to false. The code example for the <see cref="M:System.Timers.Timer.Stop" />
 
               
 
@@ -951,51 +855,42 @@
             >
           </block>
           <para
-            >If <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >If <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set to true and <see
-             cref="P:System.Timers.Timer.AutoReset" />
+             is set to true and <see cref="P:System.Timers.Timer.AutoReset" />
 
             
 
-             is set to false, the <see
-             cref="T:System.Timers.Timer" />
+             is set to false, the <see cref="T:System.Timers.Timer" />
 
             
 
-             raises the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             raises the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
              event only once, the first time the interval elapses.</para
           >
           <para
-            >If the interval is set after the <see
-             cref="T:System.Timers.Timer" />
+            >If the interval is set after the <see cref="T:System.Timers.Timer" />
 
             
 
-             has started, the count is reset. For example, if you set the interval to 5 seconds and then set the <see
-             cref="P:System.Timers.Timer.Enabled" />
+             has started, the count is reset. For example, if you set the interval to 5 seconds and then set the <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             property to true, the count starts at the time <see
-             cref="P:System.Timers.Timer.Enabled" />
+             property to true, the count starts at the time <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is raised for the first time 13 seconds after <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event is raised for the first time 13 seconds after <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -1003,13 +898,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Some visual designers, such as those in Microsoft Visual Studio, set the <see
-               cref="P:System.Timers.Timer.Enabled" />
+              >Some visual designers, such as those in Microsoft Visual Studio, set the <see cref="P:System.Timers.Timer.Enabled" />
 
               
 
-               property to true when inserting a new <see
-               cref="T:System.Timers.Timer" />
+               property to true when inserting a new <see cref="T:System.Timers.Timer" />
 
               
 
@@ -1020,13 +913,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Timers.Timer" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Timers.Timer" />
 
             
 
-             should raise the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             should raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
@@ -1055,18 +946,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The vsprvslong design environment uses this method to end the initialization of a component that is used on a form or by another component. The <see
-             cref="M:System.Timers.Timer.BeginInit" />
+            >The vsprvslong design environment uses this method to end the initialization of a component that is used on a form or by another component. The <see cref="M:System.Timers.Timer.BeginInit" />
 
             
 
-             method starts the initialization. Using the <see
-             cref="M:System.Timers.Timer.BeginInit" />
+             method starts the initialization. Using the <see cref="M:System.Timers.Timer.BeginInit" />
 
             
 
-             and <see
-             cref="M:System.Timers.Timer.EndInit" />
+             and <see cref="M:System.Timers.Timer.EndInit" />
 
             
 
@@ -1076,8 +964,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ends the run-time initialization of a <see
-             cref="T:System.Timers.Timer" />
+            >Ends the run-time initialization of a <see cref="T:System.Timers.Timer" />
 
             
 
@@ -1118,56 +1005,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the interval is set after the <see
-             cref="T:System.Timers.Timer" />
+            >If the interval is set after the <see cref="T:System.Timers.Timer" />
 
             
 
-             has started, the count is reset. For example, if you set the interval to 5 seconds and then set the <see
-             cref="P:System.Timers.Timer.Enabled" />
+             has started, the count is reset. For example, if you set the interval to 5 seconds and then set the <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             property to true, the count starts at the time <see
-             cref="P:System.Timers.Timer.Enabled" />
+             property to true, the count starts at the time <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is raised for the first time 13 seconds after <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event is raised for the first time 13 seconds after <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
              was set to true.</para
           >
           <para
-            >If <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >If <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set to true and <see
-             cref="P:System.Timers.Timer.AutoReset" />
+             is set to true and <see cref="P:System.Timers.Timer.AutoReset" />
 
             
 
-             is set to false, the <see
-             cref="T:System.Timers.Timer" />
+             is set to false, the <see cref="T:System.Timers.Timer" />
 
             
 
-             raises the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             raises the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event only once, the first time the interval elapses. <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event only once, the first time the interval elapses. <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -1175,33 +1052,27 @@
           >
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="P:System.Timers.Timer.Enabled" />
+              >If <see cref="P:System.Timers.Timer.Enabled" />
 
               
 
-               and <see
-               cref="P:System.Timers.Timer.AutoReset" />
+               and <see cref="P:System.Timers.Timer.AutoReset" />
 
               
 
-               are both set to false, and the timer has previously been enabled, setting the <see
-               cref="P:System.Timers.Timer.Interval" />
+               are both set to false, and the timer has previously been enabled, setting the <see cref="P:System.Timers.Timer.Interval" />
 
               
 
-               property causes the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               property causes the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event to be raised once, as if the <see
-               cref="P:System.Timers.Timer.Enabled" />
+               event to be raised once, as if the <see cref="P:System.Timers.Timer.Enabled" />
 
               
 
-               property had been set to true. To set the interval without raising the event, you can temporarily set the <see
-               cref="P:System.Timers.Timer.AutoReset" />
+               property had been set to true. To set the interval without raising the event, you can temporarily set the <see cref="P:System.Timers.Timer.AutoReset" />
 
               
 
@@ -1212,8 +1083,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the interval at which to raise the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+            >Gets or sets the interval at which to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
@@ -1246,13 +1116,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sites bind a <see
-             cref="T:System.ComponentModel.Component" />
+            >Sites bind a <see cref="T:System.ComponentModel.Component" />
 
             
 
-             to a <see
-             cref="T:System.ComponentModel.Container" />
+             to a <see cref="T:System.ComponentModel.Container" />
 
             
 
@@ -1262,8 +1130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the site that binds the <see
-             cref="T:System.Timers.Timer" />
+            >Gets or sets the site that binds the <see cref="T:System.Timers.Timer" />
 
             
 
@@ -1292,51 +1159,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >If <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is set to true and <see
-             cref="P:System.Timers.Timer.AutoReset" />
+             is set to true and <see cref="P:System.Timers.Timer.AutoReset" />
 
             
 
-             is set to false, the <see
-             cref="T:System.Timers.Timer" />
+             is set to false, the <see cref="T:System.Timers.Timer" />
 
             
 
-             raises the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             raises the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event only once, the first time the interval elapses. When <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event only once, the first time the interval elapses. When <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
-             is true and <see
-             cref="P:System.Timers.Timer.AutoReset" />
+             is true and <see cref="P:System.Timers.Timer.AutoReset" />
 
             
 
-             is true, the <see
-             cref="T:System.Timers.Timer" />
+             is true, the <see cref="T:System.Timers.Timer" />
 
             
 
-             continues to raise the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             continues to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
              event on the specified interval.</para
           >
           <para
-            >You can also start timing by setting <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >You can also start timing by setting <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -1344,13 +1202,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If <see
-               cref="P:System.Timers.Timer.AutoReset" />
+              >If <see cref="P:System.Timers.Timer.AutoReset" />
 
               
 
-               is false, the <see
-               cref="M:System.Timers.Timer.Start" />
+               is false, the <see cref="M:System.Timers.Timer.Start" />
 
               
 
@@ -1361,13 +1217,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starts raising the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+            >Starts raising the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event by setting <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event by setting <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -1396,8 +1250,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also stop timing by setting <see
-             cref="P:System.Timers.Timer.Enabled" />
+            >You can also stop timing by setting <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -1405,28 +1258,23 @@
           >
           <block subset="none" type="note">
             <para
-              >The signal to raise the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+              >The signal to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event is always queued for execution on a <see
-               cref="T:System.Threading.ThreadPool" />
+               event is always queued for execution on a <see cref="T:System.Threading.ThreadPool" />
 
               
 
-               thread, so the event-handling method might run on one thread at the same time that a call to the <see
-               cref="M:System.Timers.Timer.Stop" />
+               thread, so the event-handling method might run on one thread at the same time that a call to the <see cref="M:System.Timers.Timer.Stop" />
 
               
 
-               method runs on another thread. This might result in the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               method runs on another thread. This might result in the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event being raised after the <see
-               cref="M:System.Timers.Timer.Stop" />
+               event being raised after the <see cref="M:System.Timers.Timer.Stop" />
 
               
 
@@ -1437,13 +1285,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stops raising the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+            >Stops raising the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event by setting <see
-             cref="P:System.Timers.Timer.Enabled" />
+             event by setting <see cref="P:System.Timers.Timer.Enabled" />
 
             
 
@@ -1487,36 +1333,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Timers.Timer.SynchronizingObject" />
+            >When <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
             
 
-             is null, the method that handles the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             is null, the method that handles the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is called on a thread from the system-thread pool. For more information on system-thread pools, see <see
-             cref="T:System.Threading.ThreadPool" />
+             event is called on a thread from the system-thread pool. For more information on system-thread pools, see <see cref="T:System.Threading.ThreadPool" />
 
             
 
             .</para
           >
           <para
-            >When the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+            >When the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
-             event is handled by a visual Windows Forms component, such as a button, accessing the component through the system-thread pool might result in an exception or just might not work. Avoid this effect by setting <see
-             cref="P:System.Timers.Timer.SynchronizingObject" />
+             event is handled by a visual Windows Forms component, such as a button, accessing the component through the system-thread pool might result in an exception or just might not work. Avoid this effect by setting <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
             
 
-             to a Windows Forms component, which causes the method that handles the <see
-             cref="E:System.Timers.Timer.Elapsed" />
+             to a Windows Forms component, which causes the method that handles the <see cref="E:System.Timers.Timer.Elapsed" />
 
             
 
@@ -1524,38 +1364,31 @@
           >
           <block subset="none" type="note">
             <para
-              >Even if the <see
-               cref="P:System.Timers.Timer.SynchronizingObject" />
+              >Even if the <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
               
 
-               property is not null, <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               property is not null, <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               events can occur after the <see
-               cref="Overload:System.Timers.Timer.Dispose" />
+               events can occur after the <see cref="Overload:System.Timers.Timer.Dispose" />
 
               
 
-               or <see
-               cref="M:System.Timers.Timer.Stop" />
+               or <see cref="M:System.Timers.Timer.Stop" />
 
               
 
-               method has been called or after the <see
-               cref="P:System.Timers.Timer.Enabled" />
+               method has been called or after the <see cref="P:System.Timers.Timer.Enabled" />
 
               
 
-               property has been set to false, because the signal to raise the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               property has been set to false, because the signal to raise the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
-               event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see
-               cref="E:System.Timers.Timer.Elapsed" />
+               event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see cref="E:System.Timers.Timer.Elapsed" />
 
               
 
@@ -1563,38 +1396,31 @@
             >
           </block>
           <para
-            >If the <see
-             cref="T:System.Timers.Timer" />
+            >If the <see cref="T:System.Timers.Timer" />
 
             
 
-             is used inside Visual Studio in a Windows Forms designer, <see
-             cref="P:System.Timers.Timer.SynchronizingObject" />
+             is used inside Visual Studio in a Windows Forms designer, <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
             
 
-             is automatically set to the control that contains the <see
-             cref="T:System.Timers.Timer" />
+             is automatically set to the control that contains the <see cref="T:System.Timers.Timer" />
 
             
 
-            . For example, if you place a <see
-             cref="T:System.Timers.Timer" />
+            . For example, if you place a <see cref="T:System.Timers.Timer" />
 
             
 
-             on a designer for Form1 (which inherits from <see
-             cref="T:System.Windows.Forms.Form" />
+             on a designer for Form1 (which inherits from <see cref="T:System.Windows.Forms.Form" />
 
             
 
-            ), the <see
-             cref="P:System.Timers.Timer.SynchronizingObject" />
+            ), the <see cref="P:System.Timers.Timer.SynchronizingObject" />
 
             
 
-             property of <see
-             cref="T:System.Timers.Timer" />
+             property of <see cref="T:System.Timers.Timer" />
 
             
 

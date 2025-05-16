@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >SQL Server creates a user-defined aggregate that is bound to the class definition that has the <see
-         cref="T:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute" />
+        >SQL Server creates a user-defined aggregate that is bound to the class definition that has the <see cref="T:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute" />
 
         
 
@@ -78,8 +77,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The serialization format as a <see
-             cref="T:Microsoft.SqlServer.Server.Format" />
+            >The serialization format as a <see cref="T:Microsoft.SqlServer.Server.Format" />
 
             
 
@@ -197,21 +195,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property does not have to be specified for Native format serialization. </para>
           <para
-            >You must specify the <see
-             cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+            >You must specify the <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
 
             
 
-             property with the UserDefined serialization <see
-             cref="T:Microsoft.SqlServer.Server.Format" />
+             property with the UserDefined serialization <see cref="T:Microsoft.SqlServer.Server.Format" />
 
             
 
             . </para
           >
           <para
-            >The maximum allowed value for this property is specified by the <see
-             cref="F:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSizeValue" />
+            >The maximum allowed value for this property is specified by the <see cref="F:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSizeValue" />
 
             
 
@@ -219,23 +214,19 @@
           >
           <para>The maximum size allowed is 2 gigabytes (GB). You can specify a number from 1 to 8000 bytes, or -1 to represent a value larger than 8000 bytes, up to 2 gigabytes.</para>
           <para
-            >For an aggregate with user-defined serialization specified, <see
-             cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+            >For an aggregate with user-defined serialization specified, <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
 
             
 
-             refers to the total size of the serialized data. Consider an aggregate serializing a string of 10 characters (<see
-             cref="T:System.Char" />
+             refers to the total size of the serialized data. Consider an aggregate serializing a string of 10 characters (<see cref="T:System.Char" />
 
             
 
-            ). When the string is serialized using a <see
-             cref="T:System.IO.BinaryWriter" />
+            ). When the string is serialized using a <see cref="T:System.IO.BinaryWriter" />
 
             
 
-            , the total size of the serialized string is 22 bytes: 2 bytes per Unicode UTF-16 character, multiplied by the maximum number of characters, plus 2 control bytes of overhead incurred from serializing a binary stream. So, when determining the value of <see
-             cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
+            , the total size of the serialized string is 22 bytes: 2 bytes per Unicode UTF-16 character, multiplied by the maximum number of characters, plus 2 control bytes of overhead incurred from serializing a binary stream. So, when determining the value of <see cref="P:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute.MaxByteSize" />
 
             
 
@@ -263,8 +254,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 

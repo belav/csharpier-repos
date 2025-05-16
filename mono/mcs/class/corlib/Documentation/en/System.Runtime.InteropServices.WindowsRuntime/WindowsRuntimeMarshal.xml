@@ -84,8 +84,9 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Frees the specified wrt <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+            >Frees the specified wrt <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+              >HSTRING</see
+            >
 
             
 
@@ -93,12 +94,18 @@
           >
         </summary>
         <param name="ptr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The address of the <see
-           cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+            cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+            >HSTRING</see
+          >
 
           
 
@@ -129,13 +136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In addition to the exceptions in the Exceptions section, any <unmanagedCodeEntityReference
-            >HRESULT</unmanagedCodeEntityReference>
+            >In addition to the exceptions in the Exceptions section, any <unmanagedCodeEntityReference>HRESULT</unmanagedCodeEntityReference>
 
             
 
-             other than <unmanagedCodeEntityReference
-            >S_OK</unmanagedCodeEntityReference>
+             other than <unmanagedCodeEntityReference>S_OK</unmanagedCodeEntityReference>
 
             
 
@@ -151,7 +156,11 @@
           <para>An object that implements the activation factory interface. </para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -184,7 +193,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >Returns a managed string that contains a copy of the specified wrt <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+              cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+              >HSTRING</see
+            >
 
             
 
@@ -195,22 +206,21 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >A managed string that contains a copy of the <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+              cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+              >HSTRING</see
+            >
 
             
 
-             if <paramref
-             name="ptr" />
+             if <paramref name="ptr" />
 
             
 
-             is not <see
-             cref="F:System.IntPtr.Zero" />
+             is not <see cref="F:System.IntPtr.Zero" />
 
             
 
-            ; otherwise, <see
-             cref="F:System.String.Empty" />
+            ; otherwise, <see cref="F:System.String.Empty" />
 
             
 
@@ -218,12 +228,18 @@
           >
         </returns>
         <param name="ptr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An unmanaged pointer to the <see
-           cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+            cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+            >HSTRING</see
+          >
 
           
 
@@ -260,7 +276,11 @@
           <para>Removes all the event handlers that can be removed by using the specified method. </para>
         </summary>
         <param name="removeMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -322,13 +342,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.FreeHString(System.IntPtr)" />
+            >Use the <see cref="M:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.FreeHString(System.IntPtr)" />
 
             
 
              method to release the <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+              cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+              >HSTRING</see
+            >
 
             
 
@@ -338,8 +359,9 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allocates a wrt <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+            >Allocates a wrt <see cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+              >HSTRING</see
+            >
 
             
 
@@ -350,22 +372,21 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >An unmanaged pointer to the new <see
-             cref="http://go.microsoft.com/fwlink/p/?LinkId=246451">HSTRING</see>
+              cref="http://go.microsoft.com/fwlink/p/?LinkId=246451"
+              >HSTRING</see
+            >
 
             
 
-            , or <see
-             cref="F:System.IntPtr.Zero" />
+            , or <see cref="F:System.IntPtr.Zero" />
 
             
 
-             if <paramref
-             name="s" />
+             if <paramref name="s" />
 
             
 
-             is <see
-             cref="F:System.String.Empty" />
+             is <see cref="F:System.String.Empty" />
 
             
 
@@ -373,7 +394,11 @@
           >
         </returns>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

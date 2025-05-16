@@ -16,36 +16,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.RepeatInfo" />
+        >The <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
         
 
-         class encapsulates the information used to render a list control that repeats a list of items, such as <see
-         cref="T:System.Web.UI.WebControls.CheckBoxList" />
+         class encapsulates the information used to render a list control that repeats a list of items, such as <see cref="T:System.Web.UI.WebControls.CheckBoxList" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+        , <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.RadioButtonList" />
+        , and <see cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
         
 
         . It is primarily used by control developers.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.RepeatInfo" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.RepeatInfo.#ctor" />
+        , see the <see cref="M:System.Web.UI.WebControls.RepeatInfo.#ctor" />
 
         
 
@@ -67,16 +61,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeatInfo" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
             
 
              class using default values.</para
           >
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.RepeatInfo" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
             
 
@@ -134,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeatInfo" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
             
 
@@ -164,13 +155,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.UI.WebControls.Table.Caption" />
+            >Gets or sets the <see cref="P:System.Web.UI.WebControls.Table.Caption" />
 
             
 
-             property if the control is rendered as a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property if the control is rendered as a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -202,13 +191,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property sets the <see
-             cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+            >This property sets the <see cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
 
             
 
-             property of the rendered <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             property of the rendered <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -218,13 +205,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the alignment of the caption, if the <see
-             cref="T:System.Web.UI.WebControls.RepeatInfo" />
+            >Gets or sets the alignment of the caption, if the <see cref="T:System.Web.UI.WebControls.RepeatInfo" />
 
             
 
-             is rendered as a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             is rendered as a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -245,8 +230,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeatInfo.OuterTableImplied" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeatInfo.OuterTableImplied" />
 
             
 
@@ -283,8 +267,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.RepeatInfo.RenderRepeater(System.Web.UI.HtmlTextWriter,System.Web.UI.WebControls.IRepeatInfoUser,System.Web.UI.WebControls.Style,System.Web.UI.WebControls.WebControl)" />
 
             
 
@@ -296,31 +279,41 @@
           <para>Renders a list control that repeats a list of items, using the specified information.</para>
         </summary>
         <param name="user">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+          An <see cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
 
           
 
            implemented object that represents the control to render.</param
         >
         <param name="controlStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.Style" />
+          A <see cref="T:System.Web.UI.WebControls.Style" />
 
           
 
            that represents the style in which to display the items.</param
         >
         <param name="baseControl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -344,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
 
             
 
@@ -377,8 +369,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatDirection" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatDirection" />
 
             
 
@@ -386,8 +377,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The number of columns displayed is always determined by the <see
-               cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+              >The number of columns displayed is always determined by the <see cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
 
               
 
@@ -395,8 +385,7 @@
             >
           </block>
           <para
-            >If this property is set to RepeatDirection.Vertical, the items in the list are displayed in columns loaded top to bottom, then left to right, until all items are rendered. For example, if the <see
-             cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+            >If this property is set to RepeatDirection.Vertical, the items in the list are displayed in columns loaded top to bottom, then left to right, until all items are rendered. For example, if the <see cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
 
             
 
@@ -438,8 +427,7 @@
             </item>
           </list>
           <para
-            >If this property is set to RepeatDirection.Horizontal, the items in the list are displayed in rows loaded left to right, then top to bottom, until all items are rendered. For example, if the <see
-             cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
+            >If this property is set to RepeatDirection.Horizontal, the items in the list are displayed in rows loaded left to right, then top to bottom, until all items are rendered. For example, if the <see cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatColumns" />
 
             
 
@@ -506,18 +494,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatLayout" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeatInfo.RepeatLayout" />
 
             
 
-             property to specify whether the items are displayed in a table. If this property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+             property to specify whether the items are displayed in a table. If this property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
 
             
 
-            , the items in the list are displayed in a table. If this property is set to <see
-             cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
+            , the items in the list are displayed in a table. If this property is set to <see cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
 
             
 
@@ -554,13 +539,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If true and the control is rendered as a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            >If true and the control is rendered as a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-            , a "scope" attribute with value "col" is added and a table header cell (&lt;th&gt;) is rendered instead of a table cell (&lt;td&gt;) for the header cells when the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+            , a "scope" attribute with value "col" is added and a table header cell (&lt;th&gt;) is rendered instead of a table cell (&lt;td&gt;) for the header cells when the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -570,13 +553,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value to indicate whether to add a <see
-             cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
+            >Gets or sets a value to indicate whether to add a <see cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
 
             
 
-             attribute when the control is rendered as a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             attribute when the control is rendered as a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 

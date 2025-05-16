@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Every object that is registered with <see
-         cref="T:System.Runtime.Remoting.Services.TrackingServices" />
+        >Every object that is registered with <see cref="T:System.Runtime.Remoting.Services.TrackingServices" />
 
         
 
-         is called by remoting when an object or proxy in the current <see
-         cref="T:System.AppDomain" />
+         is called by remoting when an object or proxy in the current <see cref="T:System.AppDomain" />
 
         
 
@@ -38,8 +36,7 @@
       <para>Note that only objects can be disconnected. An exception is thrown when disconnect is called on a proxy.</para>
       <block subset="none" type="note">
         <para
-          >This interface makes a link demand. A SecurityException is thrown if the immediate caller makes the call through a reference to the interface and does not have infrastructure permission. See <format
-           type="text/html">
+          >This interface makes a link demand. A SecurityException is thrown if the immediate caller makes the call through a reference to the interface and does not have infrastructure permission. See <format type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
 
@@ -80,7 +77,11 @@
           <para>Notifies the current instance that an object has been disconnected from its proxy.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -117,19 +118,26 @@
           <para>Notifies the current instance that an object has been marshaled.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that has been marshaled. </param
         >
         <param name="or">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
@@ -166,19 +174,26 @@
           <para>Notifies the current instance that an object has been unmarshaled.</para>
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The unmarshaled object. </param
         >
         <param name="or">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 

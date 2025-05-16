@@ -38,8 +38,7 @@
 
         
 
-         provides an abstract base class for code statements within the <see
-         cref="N:System.CodeDom" />
+         provides an abstract base class for code statements within the <see cref="N:System.CodeDom" />
 
         
 
@@ -71,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeStatement" />
 
             
 
@@ -104,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Gets a <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 
@@ -168,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.CodeDom.CodeDirectiveCollection" />
+            >Gets a <see cref="T:System.CodeDom.CodeDirectiveCollection" />
 
             
 

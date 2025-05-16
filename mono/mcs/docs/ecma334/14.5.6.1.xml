@@ -1,48 +1,49 @@
 <?xml version="1.0"?>
 <clause number="14.5.6.1" title="Array access">
   <paragraph
-    >For an array access, the <non_terminal
-     where="14.5">primary-no-array-creation-expression</non_terminal>
+    >For an array access, the <non_terminal where="14.5"
+      >primary-no-array-creation-expression</non_terminal
+    >
 
     
 
-     of the <non_terminal
-     where="14.5.6">element-access</non_terminal>
+     of the <non_terminal where="14.5.6"
+      >element-access</non_terminal
+    >
 
     
 
-     must be a value of an <non_terminal
-     where="19.1">array-type</non_terminal>
+     must be a value of an <non_terminal where="19.1"
+      >array-type</non_terminal
+    >
 
     
 
-    . The number of expressions in the <non_terminal
-     where="14.5.6">expression-list</non_terminal>
+    . The number of expressions in the <non_terminal where="14.5.6"
+      >expression-list</non_terminal
+    >
 
     
 
-     must be the same as the rank of the <non_terminal
-     where="19.1">array-type</non_terminal>
+     must be the same as the rank of the <non_terminal where="19.1"
+      >array-type</non_terminal
+    >
 
     
 
-    , and each expression must be of type <keyword
-    >int</keyword>
+    , and each expression must be of type <keyword>int</keyword>
 
     
 
-    , <keyword
-    >uint</keyword>
+    , <keyword>uint</keyword>
 
     
 
-    , <keyword
-    >long</keyword>
+    , <keyword>long</keyword>
 
     
 
-    , <keyword
-    >ulong</keyword>
+    , <keyword>ulong</keyword>
 
     
 
@@ -50,7 +51,9 @@
   >
   <paragraph
     >The result of evaluating an array access is a variable of the element type of the array, namely the array element selected by the value(s) of the expression(s) in the <non_terminal
-     where="14.5.6">expression-list</non_terminal>
+      where="14.5.6"
+      >expression-list</non_terminal
+    >
 
     
 
@@ -58,81 +61,74 @@
   >
   <paragraph
     >The run-time processing of an array access of the form P[A], where P is a  <non_terminal
-     where="14.5">primary-no-array-creation-expression</non_terminal>
-
-    
-
-     of an <non_terminal
-     where="19.1">array-type</non_terminal>
-
-    
-
-     and A is an <non_terminal
-     where="14.5.6">expression-list</non_terminal>
-
-    
-
-    , consists of the following steps: <list
+      where="14.5"
+      >primary-no-array-creation-expression</non_terminal
     >
+
+    
+
+     of an <non_terminal where="19.1"
+      >array-type</non_terminal
+    >
+
+    
+
+     and A is an <non_terminal where="14.5.6"
+      >expression-list</non_terminal
+    >
+
+    
+
+    , consists of the following steps: <list>
       <list_item> P is evaluated. If this evaluation causes an exception, no further steps are executed. </list_item>
       <list_item
-        > The index expressions of the <non_terminal
-         where="14.5.6">expression-list</non_terminal>
+        > The index expressions of the <non_terminal where="14.5.6"
+          >expression-list</non_terminal
+        >
 
         
 
-         are evaluated in order, from left to right. Following evaluation of each index expression, an implicit conversion (<hyperlink
-        >13.1</hyperlink>
+         are evaluated in order, from left to right. Following evaluation of each index expression, an implicit conversion (<hyperlink>13.1</hyperlink>
 
         
 
-        ) to one of the following types is performed: <keyword
-        >int</keyword>
+        ) to one of the following types is performed: <keyword>int</keyword>
 
         
 
-        , <keyword
-        >uint</keyword>
+        , <keyword>uint</keyword>
 
         
 
-        , <keyword
-        >long</keyword>
+        , <keyword>long</keyword>
 
         
 
-        , <keyword
-        >ulong</keyword>
+        , <keyword>ulong</keyword>
 
         
 
-        . The first type in this list for which an implicit conversion exists is chosen. For instance, if the index expression is of type <keyword
-        >short</keyword>
+        . The first type in this list for which an implicit conversion exists is chosen. For instance, if the index expression is of type <keyword>short</keyword>
 
         
 
-         then an implicit conversion to <keyword
-        >int</keyword>
+         then an implicit conversion to <keyword>int</keyword>
 
         
 
-         is performed, since implicit conversions from <keyword
-        >short</keyword>
+         is performed, since implicit conversions from <keyword>short</keyword>
 
         
 
-         to <keyword
-        >int</keyword>
+         to <keyword>int</keyword>
 
         
 
-         and from <keyword
-        >short</keyword>
+         and from <keyword>short</keyword>
 
         
 
-         to <keyword
-        >long</keyword>
+         to <keyword>long</keyword>
 
         
 
@@ -140,8 +136,9 @@
       >
       <list_item> The value of P is checked to be valid. If the value of P is null, a System.NullReferenceException is thrown and no further steps are executed. </list_item>
       <list_item
-        > The value of each expression in the <non_terminal
-         where="14.5.6">expression-list</non_terminal>
+        > The value of each expression in the <non_terminal where="14.5.6"
+          >expression-list</non_terminal
+        >
 
         
 

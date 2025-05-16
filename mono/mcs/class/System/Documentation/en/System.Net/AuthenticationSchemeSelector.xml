@@ -29,31 +29,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Delegates of this type are used by <see
-         cref="T:System.Net.HttpListener" />
+        >Delegates of this type are used by <see cref="T:System.Net.HttpListener" />
 
         
 
          instances to select an authentication scheme based on the characteristics of a request.</para
       >
       <para
-        >An <see
-         cref="T:System.Net.AuthenticationSchemeSelector" />
+        >An <see cref="T:System.Net.AuthenticationSchemeSelector" />
 
         
 
-         delegate is passed an <see
-         cref="T:System.Net.HttpListenerRequest" />
+         delegate is passed an <see cref="T:System.Net.HttpListenerRequest" />
 
         
 
-         object for each incoming request that has not provided authentication information. The method invoked by the delegate uses the <see
-         cref="T:System.Net.HttpListenerRequest" />
+         object for each incoming request that has not provided authentication information. The method invoked by the delegate uses the <see cref="T:System.Net.HttpListenerRequest" />
 
         
 
-         object and any other available information to decide which authentication scheme to require. The delegate is specified by using the <see
-         cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+         object and any other available information to decide which authentication scheme to require. The delegate is specified by using the <see cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
 
         
 
@@ -63,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Selects the authentication scheme for an <see
-         cref="T:System.Net.HttpListener" />
+        >Selects the authentication scheme for an <see cref="T:System.Net.HttpListener" />
 
         
 

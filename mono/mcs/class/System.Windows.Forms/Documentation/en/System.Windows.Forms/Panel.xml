@@ -37,99 +37,81 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Windows.Forms.Panel" />
+        >A <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         is a control that contains other controls. You can use a <see
-         cref="T:System.Windows.Forms.Panel" />
+         is a control that contains other controls. You can use a <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         to group collections of controls such as a group of <see
-         cref="T:System.Windows.Forms.RadioButton" />
+         to group collections of controls such as a group of <see cref="T:System.Windows.Forms.RadioButton" />
 
         
 
-         controls. As with other container controls such as the <see
-         cref="T:System.Windows.Forms.GroupBox" />
+         controls. As with other container controls such as the <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
-         control, if the <see
-         cref="T:System.Windows.Forms.Panel" />
+         control, if the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         control's <see
-         cref="P:System.Windows.Forms.Control.Enabled" />
+         control's <see cref="P:System.Windows.Forms.Control.Enabled" />
 
         
 
-         property is set to false, the controls contained within the <see
-         cref="T:System.Windows.Forms.Panel" />
+         property is set to false, the controls contained within the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
          will also be disabled.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Panel" />
+        >The <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         control is displayed by default without any borders. You can provide a standard or three-dimensional border using the <see
-         cref="P:System.Windows.Forms.Panel.BorderStyle" />
+         control is displayed by default without any borders. You can provide a standard or three-dimensional border using the <see cref="P:System.Windows.Forms.Panel.BorderStyle" />
 
         
 
-         property to distinguish the area of the panel from other areas on the form. Because the <see
-         cref="T:System.Windows.Forms.Panel" />
+         property to distinguish the area of the panel from other areas on the form. Because the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         control derives from the <see
-         cref="T:System.Windows.Forms.ScrollableControl" />
+         control derives from the <see cref="T:System.Windows.Forms.ScrollableControl" />
 
         
 
-         class, you can use the <see
-         cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+         class, you can use the <see cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
 
         
 
-         property to enable scroll bars in the <see
-         cref="T:System.Windows.Forms.Panel" />
+         property to enable scroll bars in the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         control. When the <see
-         cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+         control. When the <see cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
 
         
 
-         property is set to true, any controls located within the <see
-         cref="T:System.Windows.Forms.Panel" />
+         property is set to true, any controls located within the <see cref="T:System.Windows.Forms.Panel" />
 
         
 
          (but outside of its visible region), can be scrolled to with the scroll bars provided.</para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Panel" />
+        >The <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         control does not display a caption. If you need a control similar to a <see
-         cref="T:System.Windows.Forms.Panel" />
+         control does not display a caption. If you need a control similar to a <see cref="T:System.Windows.Forms.Panel" />
 
         
 
-         that can display a caption, see the <see
-         cref="T:System.Windows.Forms.GroupBox" />
+         that can display a caption, see the <see cref="T:System.Windows.Forms.GroupBox" />
 
         
 
@@ -151,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Panel" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Panel" />
 
             
 
@@ -215,8 +196,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -228,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Windows.Forms.Panel.AutoSize" />
+            >Occurs when the value of the <see cref="P:System.Windows.Forms.Panel.AutoSize" />
 
             
 
@@ -292,13 +271,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="T:System.Windows.Forms.Panel" />
+            >By default, the <see cref="T:System.Windows.Forms.Panel" />
 
             
 
-             control is displayed without a border. You can use this property to distinguish the boundaries of the <see
-             cref="T:System.Windows.Forms.Panel" />
+             control is displayed without a border. You can use this property to distinguish the boundaries of the <see cref="T:System.Windows.Forms.Panel" />
 
             
 
@@ -465,12 +442,15 @@
           <para>Fires the event indicating that the panel has been resized. Inheriting controls should use this in favor of actually listening to the event, but should still call base.onResize to ensure that the event is fired for external listeners.</para>
         </summary>
         <param name="eventargs">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -498,13 +478,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user presses the TAB key, the input focus is set to the next control in the tab order. Controls with the <see
-             cref="P:System.Windows.Forms.Control.TabStop" />
+            >When the user presses the TAB key, the input focus is set to the next control in the tab order. Controls with the <see cref="P:System.Windows.Forms.Control.TabStop" />
 
             
 
-             property value of false are not included in the collection of controls in the tab order. The tab order can be manipulated by setting the control's <see
-             cref="P:System.Windows.Forms.Control.TabIndex" />
+             property value of false are not included in the collection of controls in the tab order. The tab order can be manipulated by setting the control's <see cref="P:System.Windows.Forms.Control.TabIndex" />
 
             
 
@@ -512,13 +490,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Windows.Forms.Panel.TabStop" />
+              >The <see cref="P:System.Windows.Forms.Panel.TabStop" />
 
               
 
-               property has no effect on the <see
-               cref="T:System.Windows.Forms.Panel" />
+               property has no effect on the <see cref="T:System.Windows.Forms.Panel" />
 
               
 
@@ -608,8 +584,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 

@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Gets an object's <see
-         cref="T:System.Security.Policy.Evidence" />
+        >Gets an object's <see cref="T:System.Security.Policy.Evidence" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets <see
-             cref="T:System.Security.Policy.Evidence" />
+            >Gets <see cref="T:System.Security.Policy.Evidence" />
 
             
 

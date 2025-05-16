@@ -42,8 +42,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For more information about how to construct fonts, see <format
-         type="text/html">
+        >For more information about how to construct fonts, see <format type="text/html">
           <a href="d3a4a223-9492-4b54-9afd-db1c31c3cefd"
             >How To: Construct Font Families and Fonts</a
           >
@@ -75,13 +74,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For localized applications that are based on the dnprdnlong and earlier releases, specifying a font for <paramref
-             name="prototype" />
+            >For localized applications that are based on the dnprdnlong and earlier releases, specifying a font for <paramref name="prototype" />
 
             
 
-             when that font has not been installed on the computer that is used to build your application will cause the Microsoft Sans Serif font to be used instead. If your application depends on this behavior and you must recompile your application for the .NET Framework 3.0, you should specify the Microsoft Sans Serif font for <paramref
-             name="prototype" />
+             when that font has not been installed on the computer that is used to build your application will cause the Microsoft Sans Serif font to be used instead. If your application depends on this behavior and you must recompile your application for the .NET Framework 3.0, you should specify the Microsoft Sans Serif font for <paramref name="prototype" />
 
             
 
@@ -91,18 +88,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
-             that uses the specified existing <see
-             cref="T:System.Drawing.Font" />
+             that uses the specified existing <see cref="T:System.Drawing.Font" />
 
             
 
-             and <see
-             cref="T:System.Drawing.FontStyle" />
+             and <see cref="T:System.Drawing.FontStyle" />
 
             
 
@@ -110,39 +104,42 @@
           >
         </summary>
         <param name="prototype">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The existing <see
-           cref="T:System.Drawing.Font" />
+          The existing <see cref="T:System.Drawing.Font" />
 
           
 
-           from which to create the new <see
-           cref="T:System.Drawing.Font" />
+           from which to create the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="newStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
-           to apply to the new <see
-           cref="T:System.Drawing.Font" />
+           to apply to the new <see cref="T:System.Drawing.Font" />
 
           
 
-          . Multiple values of the <see
-           cref="T:System.Drawing.FontStyle" />
+          . Multiple values of the <see cref="T:System.Drawing.FontStyle" />
 
           
 
@@ -169,23 +166,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting font has its <see
-             cref="P:System.Drawing.Font.Style" />
+            >The resulting font has its <see cref="P:System.Drawing.Font.Style" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.FontStyle.Regular" />
+             property set to <see cref="F:System.Drawing.FontStyle.Regular" />
 
             
 
-             and its <see
-             cref="P:System.Drawing.Font.Unit" />
+             and its <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.GraphicsUnit.Point" />
+             property set to <see cref="F:System.Drawing.GraphicsUnit.Point" />
 
             
 
@@ -195,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -204,24 +196,30 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontFamily" />
+          The <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           of the new <see
-           cref="T:System.Drawing.Font" />
+           of the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -245,28 +243,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting font has its <see
-             cref="P:System.Drawing.Font.Style" />
+            >The resulting font has its <see cref="P:System.Drawing.Font.Style" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.FontStyle.Regular" />
+             property set to <see cref="F:System.Drawing.FontStyle.Regular" />
 
             
 
-             and its <see
-             cref="P:System.Drawing.Font.Unit" />
+             and its <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.GraphicsUnit.Point" />
+             property set to <see cref="F:System.Drawing.GraphicsUnit.Point" />
 
             
 
-            . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
-             name="familyName" />
+            . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref name="familyName" />
 
             
 
@@ -276,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -285,24 +277,30 @@
           >
         </summary>
         <param name="familyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of the <see
-           cref="T:System.Drawing.FontFamily" />
+          A string representation of the <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Font" />
+           for the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -330,13 +328,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting font has its <see
-             cref="P:System.Drawing.Font.Unit" />
+            >The resulting font has its <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.GraphicsUnit.Point" />
+             property set to <see cref="F:System.Drawing.GraphicsUnit.Point" />
 
             
 
@@ -346,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -355,36 +350,45 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontFamily" />
+          The <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           of the new <see
-           cref="T:System.Drawing.Font" />
+           of the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The em-size, in points, of the new font. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
@@ -412,13 +416,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting font has its <see
-             cref="P:System.Drawing.Font.Style" />
+            >The resulting font has its <see cref="P:System.Drawing.Font.Style" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.FontStyle.Regular" />
+             property set to <see cref="F:System.Drawing.FontStyle.Regular" />
 
             
 
@@ -428,13 +430,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
-             using a specified size and unit. Sets the style to <see
-             cref="F:System.Drawing.FontStyle.Regular" />
+             using a specified size and unit. Sets the style to <see cref="F:System.Drawing.FontStyle.Regular" />
 
             
 
@@ -442,41 +442,49 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontFamily" />
+          The <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           of the new <see
-           cref="T:System.Drawing.Font" />
+           of the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
@@ -504,18 +512,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting font has its <see
-             cref="P:System.Drawing.Font.Unit" />
+            >The resulting font has its <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.GraphicsUnit.Point" />
+             property set to <see cref="F:System.Drawing.GraphicsUnit.Point" />
 
             
 
-            . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
-             name="familyName" />
+            . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref name="familyName" />
 
             
 
@@ -525,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -534,36 +538,45 @@
           >
         </summary>
         <param name="familyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of the <see
-           cref="T:System.Drawing.FontFamily" />
+          A string representation of the <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Font" />
+           for the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The em-size, in points, of the new font. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
@@ -591,13 +604,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting font has its <see
-             cref="P:System.Drawing.Font.Style" />
+            >The resulting font has its <see cref="P:System.Drawing.Font.Style" />
 
             
 
-             property set to <see
-             cref="F:System.Drawing.FontStyle.Regular" />
+             property set to <see cref="F:System.Drawing.FontStyle.Regular" />
 
             
 
@@ -607,13 +618,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
-             using a specified size and unit. The style is set to <see
-             cref="F:System.Drawing.FontStyle.Regular" />
+             using a specified size and unit. The style is set to <see cref="F:System.Drawing.FontStyle.Regular" />
 
             
 
@@ -621,41 +630,49 @@
           >
         </summary>
         <param name="familyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of the <see
-           cref="T:System.Drawing.FontFamily" />
+          A string representation of the <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Font" />
+           for the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
@@ -685,8 +702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -694,53 +710,64 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontFamily" />
+          The <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           of the new <see
-           cref="T:System.Drawing.Font" />
+           of the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
            of the new font. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
@@ -769,8 +796,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
-             name="familyName" />
+            >Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref name="familyName" />
 
             
 
@@ -780,8 +806,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -789,53 +814,64 @@
           >
         </summary>
         <param name="familyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of the <see
-           cref="T:System.Drawing.FontFamily" />
+          A string representation of the <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Font" />
+           for the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
            of the new font. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
@@ -865,8 +901,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="gdiCharSet" />
+            >The <paramref name="gdiCharSet" />
 
             
 
@@ -876,8 +911,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -885,65 +919,79 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontFamily" />
+          The <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           of the new <see
-           cref="T:System.Drawing.Font" />
+           of the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
            of the new font. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
            of the new font. </param
         >
         <param name="gdiCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
@@ -973,13 +1021,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="gdiCharSet" />
+            >The <paramref name="gdiCharSet" />
 
             
 
-             parameter takes a value from the list defined in the Windows SDK header file WinGDI.h. Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
-             name="familyName" />
+             parameter takes a value from the list defined in the Windows SDK header file WinGDI.h. Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref name="familyName" />
 
             
 
@@ -989,8 +1035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -998,65 +1043,79 @@
           >
         </summary>
         <param name="familyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of the <see
-           cref="T:System.Drawing.FontFamily" />
+          A string representation of the <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Font" />
+           for the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
            of the new font. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
            of the new font. </param
         >
         <param name="gdiCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
@@ -1087,8 +1146,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="gdiCharSet" />
+            >The <paramref name="gdiCharSet" />
 
             
 
@@ -1098,8 +1156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1107,72 +1164,90 @@
           >
         </summary>
         <param name="family">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontFamily" />
+          The <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           of the new <see
-           cref="T:System.Drawing.Font" />
+           of the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
            of the new font. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
            of the new font. </param
         >
         <param name="gdiCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            that specifies a </param
         >
         <param name="gdiVerticalFont">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1203,13 +1278,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="gdiCharSet" />
+            >The <paramref name="gdiCharSet" />
 
             
 
-             parameter takes a value from the list defined in the Windows SDK header file WinGDI.h. If the <paramref
-             name="familyName" />
+             parameter takes a value from the list defined in the Windows SDK header file WinGDI.h. If the <paramref name="familyName" />
 
             
 
@@ -1219,8 +1292,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.Font" />
+            >Initializes a new <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1228,77 +1300,94 @@
           >
         </summary>
         <param name="familyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string representation of the <see
-           cref="T:System.Drawing.FontFamily" />
+          A string representation of the <see cref="T:System.Drawing.FontFamily" />
 
           
 
-           for the new <see
-           cref="T:System.Drawing.Font" />
+           for the new <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="emSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The em-size of the new font in the units specified by the <paramref
-           name="unit" />
+          The em-size of the new font in the units specified by the <paramref name="unit" />
 
           
 
            parameter. </param
         >
         <param name="style">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.FontStyle" />
+          The <see cref="T:System.Drawing.FontStyle" />
 
           
 
            of the new font. </param
         >
         <param name="unit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.GraphicsUnit" />
+          The <see cref="T:System.Drawing.GraphicsUnit" />
 
           
 
            of the new font. </param
         >
         <param name="gdiCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Byte" />
+          A <see cref="T:System.Byte" />
 
           
 
            that specifies a ndptecgdi character set to use for this font. </param
         >
         <param name="gdiVerticalFont">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A Boolean value indicating whether the new <see
-           cref="T:System.Drawing.Font" />
+          A Boolean value indicating whether the new <see cref="T:System.Drawing.Font" />
 
           
 
@@ -1322,8 +1411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether this <see
-             cref="T:System.Drawing.Font" />
+            >Gets a value that indicates whether this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1353,8 +1441,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Font" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1364,13 +1451,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
-             this method creates, cast as an <see
-             cref="T:System.Object" />
+             this method creates, cast as an <see cref="T:System.Object" />
 
             
 
@@ -1394,63 +1479,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Drawing.Font.Dispose" />
+            >Calling <see cref="M:System.Drawing.Font.Dispose" />
 
             
 
-             allows the resources used by this <see
-             cref="T:System.Drawing.Font" />
+             allows the resources used by this <see cref="T:System.Drawing.Font" />
 
             
 
              to be reallocated for other purposes.</para
           >
           <para
-            >Call <see
-             cref="M:System.Drawing.Font.Dispose" />
+            >Call <see cref="M:System.Drawing.Font.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Drawing.Font" />
+             when you are finished using the <see cref="T:System.Drawing.Font" />
 
             
 
-            . The <see
-             cref="M:System.Drawing.Font.Dispose" />
+            . The <see cref="M:System.Drawing.Font.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Drawing.Font" />
+             method leaves the <see cref="T:System.Drawing.Font" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Drawing.Font.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Drawing.Font.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Drawing.Font" />
+            , you must release all references to the <see cref="T:System.Drawing.Font" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Drawing.Font" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.Font" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -1460,18 +1534,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.Font.Dispose" />
+              >Always call <see cref="M:System.Drawing.Font.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.Font" />
+               before you release your last reference to the <see cref="T:System.Drawing.Font" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Drawing.Font" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Font" />
 
               
 
@@ -1482,8 +1553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Font" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1514,43 +1584,35 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the specified object is a <see
-             cref="T:System.Drawing.Font" />
+            >Indicates whether the specified object is a <see cref="T:System.Drawing.Font" />
 
             
 
-             and has the same <see
-             cref="P:System.Drawing.Font.FontFamily" />
+             and has the same <see cref="P:System.Drawing.Font.FontFamily" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.GdiVerticalFont" />
+            , <see cref="P:System.Drawing.Font.GdiVerticalFont" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.GdiCharSet" />
+            , <see cref="P:System.Drawing.Font.GdiCharSet" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.Style" />
+            , <see cref="P:System.Drawing.Font.Style" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.Size" />
+            , <see cref="P:System.Drawing.Font.Size" />
 
             
 
-            , and <see
-             cref="P:System.Drawing.Font.Unit" />
+            , and <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property values as this <see
-             cref="T:System.Drawing.Font" />
+             property values as this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1560,48 +1622,39 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="obj" />
+            >true if the <paramref name="obj" />
 
             
 
-             parameter is a <see
-             cref="T:System.Drawing.Font" />
+             parameter is a <see cref="T:System.Drawing.Font" />
 
             
 
-             and has the same <see
-             cref="P:System.Drawing.Font.FontFamily" />
+             and has the same <see cref="P:System.Drawing.Font.FontFamily" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.GdiVerticalFont" />
+            , <see cref="P:System.Drawing.Font.GdiVerticalFont" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.GdiCharSet" />
+            , <see cref="P:System.Drawing.Font.GdiCharSet" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.Style" />
+            , <see cref="P:System.Drawing.Font.Style" />
 
             
 
-            , <see
-             cref="P:System.Drawing.Font.Size" />
+            , <see cref="P:System.Drawing.Font.Size" />
 
             
 
-            , and <see
-             cref="P:System.Drawing.Font.Unit" />
+            , and <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property values as this <see
-             cref="T:System.Drawing.Font" />
+             property values as this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1609,7 +1662,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1648,8 +1705,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.FontFamily" />
+            >A <see cref="T:System.Drawing.FontFamily" />
 
             
 
@@ -1659,13 +1715,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.FontFamily" />
+            >Gets the <see cref="T:System.Drawing.FontFamily" />
 
             
 
-             associated with this <see
-             cref="T:System.Drawing.Font" />
+             associated with this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1699,23 +1753,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For this method to work, the <paramref
-             name="hdc" />
+            >For this method to work, the <paramref name="hdc" />
 
             
 
-             parameter must contain a handle to a device context in which a font is selected. This method will not work with an <paramref
-             name="hdc" />
+             parameter must contain a handle to a device context in which a font is selected. This method will not work with an <paramref name="hdc" />
 
             
 
-             handle acquired from a ndptecgdiplus <see
-             cref="T:System.Drawing.Graphics" />
+             handle acquired from a ndptecgdiplus <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object because the <paramref
-             name="hdc" />
+             object because the <paramref name="hdc" />
 
             
 
@@ -1725,8 +1775,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Font" />
+            >Creates a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1736,8 +1785,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1745,7 +1793,11 @@
           >
         </returns>
         <param name="hdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1774,8 +1826,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Font" />
+            >Creates a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1785,8 +1836,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1794,7 +1844,11 @@
           >
         </returns>
         <param name="hfont">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1822,13 +1876,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A ndptecgdi <unmanagedCodeEntityReference
-            >LOGFONT</unmanagedCodeEntityReference>
+            >A ndptecgdi <unmanagedCodeEntityReference>LOGFONT</unmanagedCodeEntityReference>
 
             
 
             , or logical font, is a structure that contains 14 properties that describe a particular font. For more information, see "The Logical Font" in the Windows Development documentation at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -1838,13 +1893,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Font" />
+            >Creates a <see cref="T:System.Drawing.Font" />
 
             
 
-             from the specified GDI logical font (<unmanagedCodeEntityReference
-            >LOGFONT</unmanagedCodeEntityReference>
+             from the specified GDI logical font (<unmanagedCodeEntityReference>LOGFONT</unmanagedCodeEntityReference>
 
             
 
@@ -1854,8 +1907,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1863,17 +1915,19 @@
           >
         </returns>
         <param name="lf">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that represents the ndptecgdi LOGFONT structure from which to create the <see
-           cref="T:System.Drawing.Font" />
+           that represents the ndptecgdi LOGFONT structure from which to create the <see cref="T:System.Drawing.Font" />
 
           
 
@@ -1902,13 +1956,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A ndptecgdi <unmanagedCodeEntityReference
-            >LOGFONT</unmanagedCodeEntityReference>
+            >A ndptecgdi <unmanagedCodeEntityReference>LOGFONT</unmanagedCodeEntityReference>
 
             
 
             , or logical font, is a structure that contains 14 properties that describe a particular font. For more information, see "The Logical Font" in the Windows Development documentation at <see
-             cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+              cref="http://msdn.microsoft.com/library"
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -1918,13 +1973,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Font" />
+            >Creates a <see cref="T:System.Drawing.Font" />
 
             
 
-             from the specified GDI logical font (<unmanagedCodeEntityReference
-            >LOGFONT</unmanagedCodeEntityReference>
+             from the specified GDI logical font (<unmanagedCodeEntityReference>LOGFONT</unmanagedCodeEntityReference>
 
             
 
@@ -1934,8 +1987,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
@@ -1943,29 +1995,34 @@
           >
         </returns>
         <param name="lf">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that represents the ndptecgdi LOGFONT structure from which to create the <see
-           cref="T:System.Drawing.Font" />
+           that represents the ndptecgdi LOGFONT structure from which to create the <see cref="T:System.Drawing.Font" />
 
           
 
           . </param
         >
         <param name="hdc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A handle to a device context that contains additional information about the <paramref
-           name="lf" />
+          A handle to a device context that contains additional information about the <paramref name="lf" />
 
           
 
@@ -1988,8 +2045,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns 1, unless a different character set is specified in the <see
-             cref="M:System.Drawing.Font.#ctor(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)" />
+            >This property returns 1, unless a different character set is specified in the <see cref="M:System.Drawing.Font.#ctor(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)" />
 
             
 
@@ -2171,8 +2227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a byte value that specifies the GDI character set that this <see
-             cref="T:System.Drawing.Font" />
+            >Gets a byte value that specifies the GDI character set that this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2213,8 +2268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a Boolean value that indicates whether this <see
-             cref="T:System.Drawing.Font" />
+            >Gets a Boolean value that indicates whether this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2244,8 +2298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the hash code for this <see
-             cref="T:System.Drawing.Font" />
+            >Gets the hash code for this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2255,8 +2308,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for this <see
-             cref="T:System.Drawing.Font" />
+            >The hash code for this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2280,21 +2332,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line spacing of a <see
-             cref="T:System.Drawing.Font" />
+            >The line spacing of a <see cref="T:System.Drawing.Font" />
 
             
 
              is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para
           >
           <para
-            >If the <see
-             cref="P:System.Drawing.Font.Unit" />
+            >If the <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property of the font is set to anything other than <see
-             cref="F:System.Drawing.GraphicsUnit.Pixel" />
+             property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />
 
             
 
@@ -2332,46 +2381,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The line spacing of a <see
-             cref="T:System.Drawing.Font" />
+            >The line spacing of a <see cref="T:System.Drawing.Font" />
 
             
 
              is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para
           >
           <para
-            >If the <see
-             cref="P:System.Drawing.Font.Unit" />
+            >If the <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property of the font is set to anything other than <see
-             cref="F:System.Drawing.GraphicsUnit.Pixel" />
+             property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />
 
             
 
-            , the height, in pixels, is calculated using the vertical resolution of the specified <see
-             cref="T:System.Drawing.Graphics" />
+            , the height, in pixels, is calculated using the vertical resolution of the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. If the <see
-             cref="T:System.Drawing.Graphics" />
+             object. For example, suppose the font unit is inches and the font size is 0.3. Also suppose that for the corresponding font family, the em-height is 2048 and the line spacing is 2355. If the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object has a <see
-             cref="P:System.Drawing.Font.Unit" />
+             object has a <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property value of <see
-             cref="F:System.Drawing.GraphicsUnit.Pixel" />
+             property value of <see cref="F:System.Drawing.GraphicsUnit.Pixel" />
 
             
 
-             and a <see
-             cref="P:System.Drawing.Graphics.DpiY" />
+             and a <see cref="P:System.Drawing.Graphics.DpiY" />
 
             
 
@@ -2379,23 +2420,19 @@
           >
           <para>2355*(0.3/2048)*96 = 33.1171875 </para>
           <para
-            >Continuing with the same example, suppose the <see
-             cref="P:System.Drawing.Font.Unit" />
+            >Continuing with the same example, suppose the <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property of the <see
-             cref="T:System.Drawing.Graphics" />
+             property of the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             object is set to <see
-             cref="F:System.Drawing.GraphicsUnit.Millimeter" />
+             object is set to <see cref="F:System.Drawing.GraphicsUnit.Millimeter" />
 
             
 
-             rather than <see
-             cref="F:System.Drawing.GraphicsUnit.Pixel" />
+             rather than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />
 
             
 
@@ -2406,8 +2443,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the line spacing, in the current unit of a specified <see
-             cref="T:System.Drawing.Graphics" />
+            >Returns the line spacing, in the current unit of a specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -2419,12 +2455,15 @@
           <para>The line spacing, in pixels, of this font.</para>
         </returns>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -2449,13 +2488,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Drawing.Font.Unit" />
+            >If the <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property of the font is set to anything other than <see
-             cref="F:System.Drawing.GraphicsUnit.Pixel" />
+             property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />
 
             
 
@@ -2466,8 +2503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the height, in pixels, of this <see
-             cref="T:System.Drawing.Font" />
+            >Returns the height, in pixels, of this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2477,8 +2513,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The height, in pixels, of this <see
-             cref="T:System.Drawing.Font" />
+            >The height, in pixels, of this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2486,7 +2521,11 @@
           >
         </returns>
         <param name="dpi">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2510,13 +2549,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The line spacing is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para>
           <para
-            >If the <see
-             cref="P:System.Drawing.Font.Unit" />
+            >If the <see cref="P:System.Drawing.Font.Unit" />
 
             
 
-             property of the font is set to anything other than <see
-             cref="F:System.Drawing.GraphicsUnit.Pixel" />
+             property of the font is set to anything other than <see cref="F:System.Drawing.GraphicsUnit.Pixel" />
 
             
 
@@ -2524,23 +2561,19 @@
           >
           <para>2355*(0.3/2048)*96 = 33.11719 </para>
           <para
-            >The value returned by the <see
-             cref="M:System.Drawing.Font.GetHeight" />
+            >The value returned by the <see cref="M:System.Drawing.Font.GetHeight" />
 
             
 
-             method would be 33.11719, and the value returned by the <see
-             cref="P:System.Drawing.Font.Height" />
+             method would be 33.11719, and the value returned by the <see cref="P:System.Drawing.Font.Height" />
 
             
 
-             property would be 34. The <see
-             cref="P:System.Drawing.Font.Height" />
+             property would be 34. The <see cref="P:System.Drawing.Font.Height" />
 
             
 
-             property is the value returned by <see
-             cref="M:System.Drawing.Font.GetHeight" />
+             property is the value returned by <see cref="M:System.Drawing.Font.GetHeight" />
 
             
 
@@ -2581,18 +2614,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the user changes the system font, the <see
-             cref="P:System.Drawing.Font.IsSystemFont" />
+            >When the user changes the system font, the <see cref="P:System.Drawing.Font.IsSystemFont" />
 
             
 
-             property could return true, even if the font is not actually a system font. To avoid this situation, if you are using system fonts in your application, you should track user preference changes by handling the <see
-             cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
+             property could return true, even if the font is not actually a system font. To avoid this situation, if you are using system fonts in your application, you should track user preference changes by handling the <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
 
             
 
-             or <see
-             cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanged" />
+             or <see cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanged" />
 
             
 
@@ -2602,8 +2632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the font is a member of <see
-             cref="T:System.Drawing.SystemFonts" />
+            >Gets a value indicating whether the font is a member of <see cref="T:System.Drawing.SystemFonts" />
 
             
 
@@ -2648,8 +2677,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the face name of this <see
-             cref="T:System.Drawing.Font" />
+            >Gets the face name of this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2685,13 +2713,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the em-size of this <see
-             cref="T:System.Drawing.Font" />
+            >Gets the em-size of this <see cref="T:System.Drawing.Font" />
 
             
 
-             measured in the units specified by the <see
-             cref="P:System.Drawing.Font.Unit" />
+             measured in the units specified by the <see cref="P:System.Drawing.Font.Unit" />
 
             
 
@@ -2716,8 +2742,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the em-size, in points, of this <see
-             cref="T:System.Drawing.Font" />
+            >Gets the em-size, in points, of this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2747,8 +2772,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether this <see
-             cref="T:System.Drawing.Font" />
+            >Gets a value that indicates whether this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2778,8 +2802,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets style information for this <see
-             cref="T:System.Drawing.Font" />
+            >Gets style information for this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2819,8 +2842,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2828,24 +2850,30 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination (see <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -2872,13 +2900,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name returned by the <see
-             cref="P:System.Drawing.Font.SystemFontName" />
+            >The name returned by the <see cref="P:System.Drawing.Font.SystemFontName" />
 
             
 
-             property will be one of the members of the <see
-             cref="T:System.Drawing.SystemFonts" />
+             property will be one of the members of the <see cref="T:System.Drawing.SystemFonts" />
 
             
 
@@ -2888,8 +2914,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of the system font if the <see
-             cref="P:System.Drawing.Font.IsSystemFont" />
+            >Gets the name of the system font if the <see cref="P:System.Drawing.Font.IsSystemFont" />
 
             
 
@@ -2909,13 +2934,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When using this method, you must dispose of the resulting <unmanagedCodeEntityReference
-            >Hfont</unmanagedCodeEntityReference>
+            >When using this method, you must dispose of the resulting <unmanagedCodeEntityReference>Hfont</unmanagedCodeEntityReference>
 
             
 
-             using the ndptecgdi <unmanagedCodeEntityReference
-            >DeleteObject</unmanagedCodeEntityReference>
+             using the ndptecgdi <unmanagedCodeEntityReference>DeleteObject</unmanagedCodeEntityReference>
 
             
 
@@ -2925,8 +2948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a handle to this <see
-             cref="T:System.Drawing.Font" />
+            >Returns a handle to this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2936,8 +2958,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Windows handle to this <see
-             cref="T:System.Drawing.Font" />
+            >A Windows handle to this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2964,7 +2985,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For more information about logical fonts, search for "LOGFONT" in the MSDN library at <see
-             cref="">http://msdn.microsoft.com/library</see>
+              cref=""
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -2974,13 +2997,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a GDI logical font (<unmanagedCodeEntityReference
-            >LOGFONT</unmanagedCodeEntityReference>
+            >Creates a GDI logical font (<unmanagedCodeEntityReference>LOGFONT</unmanagedCodeEntityReference>
 
             
 
-            ) structure from this <see
-             cref="T:System.Drawing.Font" />
+            ) structure from this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -2988,12 +3009,15 @@
           >
         </summary>
         <param name="logFont">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -3023,7 +3047,9 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >For more information about logical fonts, search for "LOGFONT" in the MSDN library at <see
-             cref="">http://msdn.microsoft.com/library</see>
+              cref=""
+              >http://msdn.microsoft.com/library</see
+            >
 
             
 
@@ -3033,13 +3059,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a GDI logical font (<unmanagedCodeEntityReference
-            >LOGFONT</unmanagedCodeEntityReference>
+            >Creates a GDI logical font (<unmanagedCodeEntityReference>LOGFONT</unmanagedCodeEntityReference>
 
             
 
-            ) structure from this <see
-             cref="T:System.Drawing.Font" />
+            ) structure from this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -3047,24 +3071,30 @@
           >
         </summary>
         <param name="logFont">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that represents the LOGFONT structure that this method creates. </param
         >
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Graphics" />
+          A <see cref="T:System.Drawing.Graphics" />
 
           
 
@@ -3092,8 +3122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a human-readable string representation of this <see
-             cref="T:System.Drawing.Font" />
+            >Returns a human-readable string representation of this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -3103,8 +3132,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents this <see
-             cref="T:System.Drawing.Font" />
+            >A string that represents this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -3129,8 +3157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether this <see
-             cref="T:System.Drawing.Font" />
+            >Gets a value that indicates whether this <see cref="T:System.Drawing.Font" />
 
             
 
@@ -3160,8 +3187,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the unit of measure for this <see
-             cref="T:System.Drawing.Font" />
+            >Gets the unit of measure for this <see cref="T:System.Drawing.Font" />
 
             
 

@@ -103,21 +103,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is a simple call to <see
-             cref="M:System.IDisposable.Dispose" />
+            >This method is a simple call to <see cref="M:System.IDisposable.Dispose" />
 
             
 
             .</para
           >
           <para
-            >Calling Dispose allows the resources used by the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+            >Calling Dispose allows the resources used by the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
-             to be reallocated for other purposes. For more information about Dispose, see <format
-             type="text/html">
+             to be reallocated for other purposes. For more information about Dispose, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
                 >[&lt;topic://cpconCleaningUpUnmanagedResources&gt;]</a
               >
@@ -131,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+            >Releases all resources used by the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
@@ -159,38 +155,32 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call Dispose when you are finished using the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+            >Call Dispose when you are finished using the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
-            . The Dispose method leaves the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+            . The Dispose method leaves the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
-             in an unusable state. After calling Dispose, you must release all references to the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+             in an unusable state. After calling Dispose, you must release all references to the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
              was occupying.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -200,13 +190,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call Dispose before you release your last reference to the <see
-               cref="T:System.Security.Cryptography.CryptoAPITransform" />
+              >Always call Dispose before you release your last reference to the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Security.Cryptography.CryptoAPITransform" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
               
 
@@ -217,8 +205,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the current instance of the <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+            >Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
@@ -330,8 +317,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.CryptoAPITransform.Reset" />
+            >The <see cref="M:System.Security.Cryptography.CryptoAPITransform.Reset" />
 
             
 
@@ -341,8 +327,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets the internal state of <see
-             cref="T:System.Security.Cryptography.CryptoAPITransform" />
+            >Resets the internal state of <see cref="T:System.Security.Cryptography.CryptoAPITransform" />
 
             
 
@@ -406,35 +391,55 @@
           <para>The number of bytes written.</para>
         </returns>
         <param name="inputBuffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input on which to perform the operation on. </param
         >
         <param name="inputOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the input byte array from which to begin using data from. </param
         >
         <param name="inputCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of bytes in the input byte array to use as data. </param
         >
         <param name="outputBuffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The output to which to write the data to. </param
         >
         <param name="outputOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -476,21 +481,33 @@
           <para>The computed transformation.</para>
         </returns>
         <param name="inputBuffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The input on which to perform the operation on. </param
         >
         <param name="inputOffset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the byte array from which to begin using data from. </param
         >
         <param name="inputCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

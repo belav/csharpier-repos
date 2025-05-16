@@ -22,13 +22,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when you call the <see
-         cref="M:System.Data.DataRow.EndEdit" />
+        >Represents the exception that is thrown when you call the <see cref="M:System.Data.DataRow.EndEdit" />
 
         
 
-         method within the <see
-         cref="E:System.Data.DataTable.RowChanging" />
+         method within the <see cref="E:System.Data.DataTable.RowChanging" />
 
         
 
@@ -47,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InRowChangingEventException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InRowChangingEventException" />
 
             
 
@@ -73,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InRowChangingEventException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InRowChangingEventException" />
 
             
 
@@ -82,7 +78,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -110,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InRowChangingEventException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InRowChangingEventException" />
 
             
 
@@ -119,14 +118,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -157,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.InRowChangingEventException" />
+            >Initializes a new instance of the <see cref="T:System.Data.InRowChangingEventException" />
 
             
 
@@ -166,7 +172,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

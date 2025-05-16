@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A common way to get an <see
-         cref="T:System.Net.Http.HttpResponseMessage" />
+        >A common way to get an <see cref="T:System.Net.Http.HttpResponseMessage" />
 
         
 
-         is from one of the <see
-         cref="M:System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage)" />
+         is from one of the <see cref="M:System.Net.Http.HttpClient.SendAsync(System.Net.Http.HttpRequestMessage)" />
 
         
 
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
@@ -87,13 +84,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
-             class with a specific <see
-             cref="P:System.Net.Http.HttpResponseMessage.StatusCode" />
+             class with a specific <see cref="P:System.Net.Http.HttpResponseMessage.StatusCode" />
 
             
 
@@ -101,7 +96,11 @@
           >
         </summary>
         <param name="statusCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -156,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources and disposes of unmanaged resources used by the <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+            >Releases the unmanaged resources and disposes of unmanaged resources used by the <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
@@ -186,33 +184,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
-             set to false.When the <paramref
-             name="disposing" />
+             set to false.When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
@@ -222,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
@@ -231,7 +222,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,18 +255,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode" />
+            >The <see cref="M:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode" />
 
             
 
-             method throws an exception if the HTTP response was unsuccessful. If the <see
-             cref="P:System.Net.Http.HttpResponseMessage.Content" />
+             method throws an exception if the HTTP response was unsuccessful. If the <see cref="P:System.Net.Http.HttpResponseMessage.Content" />
 
             
 
-             is not null, this method will also call <see
-             cref="M:System.Net.Http.HttpResponseMessage.Dispose" />
+             is not null, this method will also call <see cref="M:System.Net.Http.HttpResponseMessage.Dispose" />
 
             
 
@@ -281,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws an exception if the <see
-             cref="P:System.Net.Http.HttpResponseMessage.IsSuccessStatusCode" />
+            >Throws an exception if the <see cref="P:System.Net.Http.HttpResponseMessage.IsSuccessStatusCode" />
 
             
 
@@ -292,8 +283,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Net.Http.HttpResponseMessage" />
+            >Returns <see cref="T:System.Net.Http.HttpResponseMessage" />
 
             
 
@@ -387,8 +377,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set to the request message which led to this response message. In the case of a request sent using <see
-             cref="T:System.Net.Http.HttpClient" />
+            >This property is set to the request message which led to this response message. In the case of a request sent using <see cref="T:System.Net.Http.HttpClient" />
 
             
 
@@ -448,14 +437,11 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >Returns <see
-             cref="T:System.String" />
+          <para>Returns <see cref="T:System.String" />
 
             
 
-            .</para
-          >
+            .</para>
           <para>A string representation of the current object.</para>
         </returns>
       </Docs>

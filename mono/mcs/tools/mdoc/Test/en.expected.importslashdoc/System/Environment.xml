@@ -39,10 +39,8 @@
         <Parameter Name="folder" Type="System.Environment+SpecialFolder" />
       </Parameters>
       <Docs>
-        <param name="folder"
-          >
-              A <see
-           cref="T:System.Environment+SpecialFolder" />
+        <param name="folder">
+              A <see cref="T:System.Environment+SpecialFolder" />
 
           
 

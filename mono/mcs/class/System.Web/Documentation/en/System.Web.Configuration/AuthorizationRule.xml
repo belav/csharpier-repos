@@ -17,26 +17,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AuthorizationRule" />
+        >The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
         
 
          class provides a way to programmatically access and modify the authorization section of a configuration file.</para
       >
       <para
-        >This type is part of a group that includes the <see
-         cref="T:System.Web.Configuration.AuthorizationSection" />
+        >This type is part of a group that includes the <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
         
 
-        , the <see
-         cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
+        , the <see cref="T:System.Web.Configuration.AuthorizationRuleCollection" />
 
         
 
-        , and the <see
-         cref="T:System.Web.Configuration.AuthorizationRuleAction" />
+        , and the <see cref="T:System.Web.Configuration.AuthorizationRuleAction" />
 
         
 
@@ -44,8 +40,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.Configuration.AuthorizationSection" />
+          >The <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
           
 
@@ -56,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.AuthorizationRule" />
+        >The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
         
 
@@ -80,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.AuthorizationRule.#ctor(System.Web.Configuration.AuthorizationRuleAction)" />
+            >The <see cref="M:System.Web.Configuration.AuthorizationRule.#ctor(System.Web.Configuration.AuthorizationRuleAction)" />
 
             
 
@@ -91,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -100,12 +92,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Configuration.AuthorizationRule" />
+          The <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
           
 
@@ -135,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Gets or sets the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -169,7 +163,11 @@
           <para>true if the objects are equal; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -280,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the collection of the <see
-             cref="T:System.Web.Configuration.AuthorizationRule" />
+            >Specifies the collection of the <see cref="T:System.Web.Configuration.AuthorizationRule" />
 
             
 
@@ -354,18 +351,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+            >The <see cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
 
             
 
-             property is a list of roles that are granted or denied access to the resource. There must be at least one value in either the <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+             property is a list of roles that are granted or denied access to the resource. There must be at least one value in either the <see cref="P:System.Web.Configuration.AuthorizationRule.Users" />
 
             
 
-             property collection or the <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+             property collection or the <see cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
 
             
 
@@ -471,18 +465,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+            >The <see cref="P:System.Web.Configuration.AuthorizationRule.Users" />
 
             
 
-             property is a list of users that are granted or denied access to the resource. There must be at least one value in either the <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Users" />
+             property is a list of users that are granted or denied access to the resource. There must be at least one value in either the <see cref="P:System.Web.Configuration.AuthorizationRule.Users" />
 
             
 
-             property collection or the <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
+             property collection or the <see cref="P:System.Web.Configuration.AuthorizationRule.Roles" />
 
             
 
@@ -521,8 +512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
+            >The <see cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
 
             
 

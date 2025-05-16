@@ -36,8 +36,7 @@
         </item>
         <item>
           <para
-            >Display a shortcut menu of standard commands that is associated with a menu <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >Display a shortcut menu of standard commands that is associated with a menu <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -46,92 +45,76 @@
         </item>
       </list>
       <para
-        >Designer verbs represent custom-defined commands that are listed on the shortcut menu in design mode. A designer verb can provide a specified text label. Each designer verb is automatically assigned a unique <see
-         cref="T:System.ComponentModel.Design.CommandID" />
+        >Designer verbs represent custom-defined commands that are listed on the shortcut menu in design mode. A designer verb can provide a specified text label. Each designer verb is automatically assigned a unique <see cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
-        . A designer can provide designer verbs through its <see
-         cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+        . A designer can provide designer verbs through its <see cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
 
         
 
          property, but these are only available when the designer's component is currently selected. Global designer verbs are designer verb commands that can be accessed from a design-mode shortcut menu regardless of the selected component. This interface allows you to manage the set of global designer verbs that are available in design mode.</para
       >
       <para
-        >You can add a global designer verb using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
+        >You can add a global designer verb using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
 
         
 
-         method, and you can remove a global designer verb using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveVerb(System.ComponentModel.Design.DesignerVerb)" />
+         method, and you can remove a global designer verb using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveVerb(System.ComponentModel.Design.DesignerVerb)" />
 
         
 
-         method. You can invoke a designer verb using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.GlobalInvoke(System.ComponentModel.Design.CommandID)" />
+         method. You can invoke a designer verb using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.GlobalInvoke(System.ComponentModel.Design.CommandID)" />
 
         
 
-         method if you know the <see
-         cref="T:System.ComponentModel.Design.CommandID" />
+         method if you know the <see cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
-         of the verb. The <see
-         cref="P:System.ComponentModel.Design.IMenuCommandService.Verbs" />
+         of the verb. The <see cref="P:System.ComponentModel.Design.IMenuCommandService.Verbs" />
 
         
 
          property of this interface contains the current set of designer verb commands to display in a shortcut menu. This set of designer verb commands consists of all global designer verbs and any designer verbs offered by the designer of any currently selected component. This set of verbs is updated each time a component with a designer offering designer verb commands is selected or deselected.</para
       >
       <para
-        >Menu commands are limited to the set of predefined standard commands. Most of the predefined standard commands are defined in the <see
-         cref="T:System.ComponentModel.Design.StandardCommands" />
+        >Menu commands are limited to the set of predefined standard commands. Most of the predefined standard commands are defined in the <see cref="T:System.ComponentModel.Design.StandardCommands" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.Design.MenuCommands" />
+         and <see cref="T:System.Windows.Forms.Design.MenuCommands" />
 
         
 
          enumerations. You can add, remove, and invoke menu commands, and search for menu commands that have been added to a menu using methods of this interface.</para
       >
       <para
-        >You can add a standard menu command using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
+        >You can add a standard menu command using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
 
         
 
-         method, and remove a standard menu command using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveCommand(System.ComponentModel.Design.MenuCommand)" />
+         method, and remove a standard menu command using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveCommand(System.ComponentModel.Design.MenuCommand)" />
 
         
 
-         method. You can attach an event handler to a predefined standard menu command by following the procedure detailed in the documentation for the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
+         method. You can attach an event handler to a predefined standard menu command by following the procedure detailed in the documentation for the <see cref="M:System.ComponentModel.Design.IMenuCommandService.AddCommand(System.ComponentModel.Design.MenuCommand)" />
 
         
 
-         method. You can retrieve a menu command by <see
-         cref="T:System.ComponentModel.Design.CommandID" />
+         method. You can retrieve a menu command by <see cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
-         if it has been added to a menu using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+         if it has been added to a menu using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
         
 
-         method. You can invoke a menu command or designer verb command by <see
-         cref="T:System.ComponentModel.Design.CommandID" />
+         method. You can invoke a menu command or designer verb command by <see cref="T:System.ComponentModel.Design.CommandID" />
 
         
 
-         using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.GlobalInvoke(System.ComponentModel.Design.CommandID)" />
+         using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.GlobalInvoke(System.ComponentModel.Design.CommandID)" />
 
         
 
@@ -139,18 +122,15 @@
       >
       <block subset="none" type="note">
         <para
-          >An attempt to add a menu command with an already existing <see
-           cref="T:System.ComponentModel.Design.CommandID" />
+          >An attempt to add a menu command with an already existing <see cref="T:System.ComponentModel.Design.CommandID" />
 
           
 
-           will throw an <see
-           cref="T:System.InvalidOperationException" />
+           will throw an <see cref="T:System.InvalidOperationException" />
 
           
 
-          . When adding a menu command, be sure to check that it is not already on a menu using the <see
-           cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+          . When adding a menu command, be sure to check that it is not already on a menu using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
           
 
@@ -159,13 +139,11 @@
       </block>
       <block subset="none" type="note">
         <para
-          >A menu command can be added to a menu, and have its <see
-           cref="P:System.ComponentModel.Design.MenuCommand.Visible" />
+          >A menu command can be added to a menu, and have its <see cref="P:System.ComponentModel.Design.MenuCommand.Visible" />
 
           
 
-           or <see
-           cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
+           or <see cref="P:System.ComponentModel.Design.MenuCommand.Enabled" />
 
           
 
@@ -173,8 +151,7 @@
         >
       </block>
       <para
-        >You can show certain standard shortcut menus containing menu commands at a specified location using the <see
-         cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" />
+        >You can show certain standard shortcut menus containing menu commands at a specified location using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" />
 
         
 
@@ -212,18 +189,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.MenuCommands" />
+            >The <see cref="T:System.Windows.Forms.Design.MenuCommands" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.Design.StandardCommands" />
+             and <see cref="T:System.ComponentModel.Design.StandardCommands" />
 
             
 
-             enumerations contain <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+             enumerations contain <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -231,18 +205,15 @@
           >
           <block subset="none" type="note">
             <para
-              >An attempt to add a menu command with an already existing <see
-               cref="T:System.ComponentModel.Design.CommandID" />
+              >An attempt to add a menu command with an already existing <see cref="T:System.ComponentModel.Design.CommandID" />
 
               
 
-               will throw an <see
-               cref="T:System.InvalidOperationException" />
+               will throw an <see cref="T:System.InvalidOperationException" />
 
               
 
-              . When adding a menu command, be sure to check that it is not already on a menu using the <see
-               cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+              . When adding a menu command, be sure to check that it is not already on a menu using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
               
 
@@ -253,8 +224,7 @@
           <list type="ordered">
             <item>
               <para
-                >If the menu command to link with an event handler has been added to a menu, or is located with the <see
-                 cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+                >If the menu command to link with an event handler has been added to a menu, or is located with the <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
                 
 
@@ -263,13 +233,11 @@
             </item>
             <item>
               <para
-                >Ensure that any previously existing menu command with the same <see
-                 cref="T:System.ComponentModel.Design.CommandID" />
+                >Ensure that any previously existing menu command with the same <see cref="T:System.ComponentModel.Design.CommandID" />
 
                 
 
-                 has been removed from the menu using the <see
-                 cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveCommand(System.ComponentModel.Design.MenuCommand)" />
+                 has been removed from the menu using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.RemoveCommand(System.ComponentModel.Design.MenuCommand)" />
 
                 
 
@@ -278,23 +246,19 @@
             </item>
             <item>
               <para
-                >Create a new <see
-                 cref="T:System.ComponentModel.Design.MenuCommand" />
+                >Create a new <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
                 
 
-                 and specify your event handler in the constructor, along with a <see
-                 cref="T:System.ComponentModel.Design.CommandID" />
+                 and specify your event handler in the constructor, along with a <see cref="T:System.ComponentModel.Design.CommandID" />
 
                 
 
-                 representing the command to add. Each standard menu command is associated with a predefined menu location where it is added to. The supported command IDs are defined in the <see
-                 cref="T:System.ComponentModel.Design.StandardCommands" />
+                 representing the command to add. Each standard menu command is associated with a predefined menu location where it is added to. The supported command IDs are defined in the <see cref="T:System.ComponentModel.Design.StandardCommands" />
 
                 
 
-                 and <see
-                 cref="T:System.Windows.Forms.Design.MenuCommands" />
+                 and <see cref="T:System.Windows.Forms.Design.MenuCommands" />
 
                 
 
@@ -303,8 +267,7 @@
             </item>
             <item>
               <para
-                >If you want to invoke any preexisting event handler for the menu command, call the <see
-                 cref="M:System.ComponentModel.Design.MenuCommand.Invoke" />
+                >If you want to invoke any preexisting event handler for the menu command, call the <see cref="M:System.ComponentModel.Design.MenuCommand.Invoke" />
 
                 
 
@@ -321,12 +284,15 @@
           <para>Adds the specified standard menu command to the menu.</para>
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.MenuCommand" />
+          The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
           
 
@@ -359,8 +325,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Designers of components that provide designer verbs should use the <see
-             cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+            >Designers of components that provide designer verbs should use the <see cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
 
             
 
@@ -372,12 +337,15 @@
           <para>Adds the specified designer verb to the set of global designer verbs.</para>
         </summary>
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -415,8 +383,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
@@ -424,12 +391,15 @@
           >
         </returns>
         <param name="commandID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.CommandID" />
+          The <see cref="T:System.ComponentModel.Design.CommandID" />
 
           
 
@@ -462,13 +432,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method searches for a menu command or designer verb with a <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+            >This method searches for a menu command or designer verb with a <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
-             matching the specified <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+             matching the specified <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -484,12 +452,15 @@
           <para>true if the command was found and invoked successfully; otherwise, false.</para>
         </returns>
         <param name="commandID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.CommandID" />
+          The <see cref="T:System.ComponentModel.Design.CommandID" />
 
           
 
@@ -522,28 +493,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method removes the specified <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+            >This method removes the specified <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
-             if it is found. This method does not raise an exception or return a value if the specified <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+             if it is found. This method does not raise an exception or return a value if the specified <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
-             is not found. Use the <see
-             cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
+             is not found. Use the <see cref="M:System.ComponentModel.Design.IMenuCommandService.FindCommand(System.ComponentModel.Design.CommandID)" />
 
             
 
-             method to determine whether a <see
-             cref="T:System.ComponentModel.Design.MenuCommand" />
+             method to determine whether a <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
             
 
-             matching a specified <see
-             cref="T:System.ComponentModel.Design.CommandID" />
+             matching a specified <see cref="T:System.ComponentModel.Design.CommandID" />
 
             
 
@@ -555,12 +521,15 @@
           <para>Removes the specified standard menu command from the menu.</para>
         </summary>
         <param name="command">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.MenuCommand" />
+          The <see cref="T:System.ComponentModel.Design.MenuCommand" />
 
           
 
@@ -593,8 +562,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method removes the specified global designer verb if it is within the global designer verbs collection. You can add a designer verb to the global designer verbs collection using the <see
-             cref="M:System.ComponentModel.Design.IMenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
+            >This method removes the specified global designer verb if it is within the global designer verbs collection. You can add a designer verb to the global designer verbs collection using the <see cref="M:System.ComponentModel.Design.IMenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
 
             
 
@@ -606,12 +574,15 @@
           <para>Removes the specified designer verb from the collection of global designer verbs.</para>
         </summary>
         <param name="verb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.DesignerVerb" />
+          The <see cref="T:System.ComponentModel.Design.DesignerVerb" />
 
           
 
@@ -646,8 +617,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" />
+            >The <see cref="M:System.ComponentModel.Design.IMenuCommandService.ShowContextMenu(System.ComponentModel.Design.CommandID,System.Int32,System.Int32)" />
 
             
 
@@ -712,26 +682,37 @@
           <para>Shows the specified shortcut menu at the specified location.</para>
         </summary>
         <param name="menuID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.CommandID" />
+          The <see cref="T:System.ComponentModel.Design.CommandID" />
 
           
 
            for the shortcut menu to show. </param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate at which to display the menu, in screen coordinates. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -762,13 +743,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The set of currently available designer verbs consists of all global designer verbs, which are added by the <see
-             cref="M:System.ComponentModel.Design.IMenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
+            >The set of currently available designer verbs consists of all global designer verbs, which are added by the <see cref="M:System.ComponentModel.Design.IMenuCommandService.AddVerb(System.ComponentModel.Design.DesignerVerb)" />
 
             
 
-             method on this interface, and individual designer verbs, which are offered by the <see
-             cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+             method on this interface, and individual designer verbs, which are offered by the <see cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
 
             
 

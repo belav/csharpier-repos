@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
 
         
 
-         interface allows the implementing formatter to send and receive remote procedure calls (RPCs). For more information, see <see
-         cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+         interface allows the implementing formatter to send and receive remote procedure calls (RPCs). For more information, see <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
         
 
-        . This interface is derived from <see
-         cref="T:System.RuntimeSerialization.IFormatter" />
+        . This interface is derived from <see cref="T:System.RuntimeSerialization.IFormatter" />
 
         
 
@@ -100,24 +97,30 @@
           <para>The root of the deserialized object graph.</para>
         </returns>
         <param name="serializationStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            from which the data is deserialized. </param
         >
         <param name="handler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The delegate designed to handle <see
-           cref="T:System.Runtime.Remoting.Messaging.Header" />
+          The delegate designed to handle <see cref="T:System.Runtime.Remoting.Messaging.Header" />
 
           
 
@@ -167,36 +170,45 @@
           <para>Starts the serialization process of a remote procedure call (RPC).</para>
         </summary>
         <param name="serializationStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            onto which the specified graph is serialized. </param
         >
         <param name="graph">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The root of the object graph to be serialized. </param
         >
         <param name="headers">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Runtime.Remoting.Messaging.Header" />
+          The array of <see cref="T:System.Runtime.Remoting.Messaging.Header" />
 
           
 
-           objects to transmit with the graph specified by the <paramref
-           name="graph" />
+           objects to transmit with the graph specified by the <paramref name="graph" />
 
           
 

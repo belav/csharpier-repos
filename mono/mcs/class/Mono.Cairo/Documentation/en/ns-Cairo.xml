@@ -12,11 +12,9 @@
 	 1.0 and 1.2 APIs regardless of the underlying Cairo
 	 implementation available on the underlying system.
       </para>
-      <para
-        >
+      <para>
          If you are planning on using the 1.2 API, you should first
-	 check using the <see
-         cref="M:Cairo.CairoAPI.Version" />
+	 check using the <see cref="M:Cairo.CairoAPI.Version" />
 
         
 
@@ -34,8 +32,7 @@
 	more).  Drawing operations are performed on the Cairo surfaces, for example:
       </para>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 //
 // To compile use: mcs test.cs -r:Mono.Cairo
 //

@@ -16,41 +16,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The methods and properties of the <see
-         cref="T:System.Web.HttpResponse" />
+        >The methods and properties of the <see cref="T:System.Web.HttpResponse" />
 
         
 
-         class are exposed through the <see
-         cref="P:System.Web.HttpApplication.Response" />
+         class are exposed through the <see cref="P:System.Web.HttpApplication.Response" />
 
         
 
-         property of the <see
-         cref="T:System.Web.HttpApplication" />
+         property of the <see cref="T:System.Web.HttpApplication" />
 
         
 
-        , <see
-         cref="T:System.Web.HttpContext" />
+        , <see cref="T:System.Web.HttpContext" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.Page" />
+        , <see cref="T:System.Web.UI.Page" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.UserControl" />
+        , and <see cref="T:System.Web.UI.UserControl" />
 
         
 
          classes.</para
       >
       <para
-        >The following methods of the <see
-         cref="T:System.Web.HttpResponse" />
+        >The following methods of the <see cref="T:System.Web.HttpResponse" />
 
         
 
@@ -114,20 +107,17 @@
         </item>
       </list>
       <para
-        >Partial-page updates are enabled when you use <see
-         cref="T:System.Web.UI.UpdatePanel" />
+        >Partial-page updates are enabled when you use <see cref="T:System.Web.UI.UpdatePanel" />
 
         
 
-         controls to update selected regions of a page instead of updating the whole page with a postback. For more information, see <format
-         type="text/html">
+         controls to update selected regions of a page instead of updating the whole page with a postback. For more information, see <format type="text/html">
           <a href="29a2265d-9674-4c19-b70e-e5560ee9689a">UpdatePanel Control Overview</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
         </format>
 
@@ -154,13 +144,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This member supports the .NET Framework infrastructure and is not intended to be used directly from your code.</para>
           <para
-            >The methods and properties of the <see
-             cref="T:System.Web.HttpResponse" />
+            >The methods and properties of the <see cref="T:System.Web.HttpResponse" />
 
             
 
-             class are exposed through the intrinsic <see
-             cref="P:System.Web.HttpContext.Response" />
+             class are exposed through the intrinsic <see cref="P:System.Web.HttpContext.Response" />
 
             
 
@@ -170,8 +158,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpResponse" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpResponse" />
 
             
 
@@ -179,12 +166,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.TextWriter" />
+          A <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -215,13 +205,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpResponse.AddCacheDependency(System.Web.Caching.CacheDependency[])" />
+            >The <see cref="M:System.Web.HttpResponse.AddCacheDependency(System.Web.Caching.CacheDependency[])" />
 
             
 
-             method allows dependencies to be created between cached responses and a <see
-             cref="T:System.Web.Caching.CacheDependency" />
+             method allows dependencies to be created between cached responses and a <see cref="T:System.Web.Caching.CacheDependency" />
 
             
 
@@ -233,12 +221,15 @@
           <para>Associates a set of cache dependencies with the response to facilitate invalidation of the response if it is stored in the output cache and the specified dependencies change.</para>
         </summary>
         <param name="dependencies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A file, cache key, or <see
-           cref="T:System.Web.Caching.CacheDependency" />
+          A file, cache key, or <see cref="T:System.Web.Caching.CacheDependency" />
 
           
 
@@ -262,8 +253,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the items referred to in the <paramref
-             name="cacheKeys" />
+            >When the items referred to in the <paramref name="cacheKeys" />
 
             
 
@@ -275,12 +265,15 @@
           <para>Makes the validity of a cached response dependent on other items in the cache.</para>
         </summary>
         <param name="cacheKeys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.ArrayList" />
+          The <see cref="T:System.Collections.ArrayList" />
 
           
 
@@ -311,8 +304,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When any of the <paramref
-             name="cacheKey" />
+            >When any of the <paramref name="cacheKey" />
 
             
 
@@ -324,7 +316,11 @@
           <para>Makes the validity of a cached item dependent on another item in the cache.</para>
         </summary>
         <param name="cacheKeys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -348,8 +344,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the item corresponding to the <paramref
-             name="cacheKey" />
+            >When the item corresponding to the <paramref name="cacheKey" />
 
             
 
@@ -361,7 +356,11 @@
           <para>Makes the validity of a cached response dependent on another item in the cache.</para>
         </summary>
         <param name="cacheKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -392,7 +391,11 @@
           <para>Adds a group of file names to the collection of file names on which the current response is dependent.</para>
         </summary>
         <param name="filenames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -426,7 +429,11 @@
           <para>Adds an array of file names to the collection of file names on which the current response is dependent.</para>
         </summary>
         <param name="filenames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,20 +454,17 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you use the <see
-             cref="M:System.Web.HttpResponse.AddFileDependency(System.String)" />
+            >When you use the <see cref="M:System.Web.HttpResponse.AddFileDependency(System.String)" />
 
             
 
-             method to add a file dependency, you must also specify output caching programmatically or declaratively. For example, to specify output caching declaratively, use the <format
-             type="text/html">
+             method to add a file dependency, you must also specify output caching programmatically or declaratively. For example, to specify output caching declaratively, use the <format type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
 
             
 
-             directive. For more information, see <format
-             type="text/html">
+             directive. For more information, see <format type="text/html">
               <a href="95ad1c54-329e-45af-9343-a03a1d2ce9db"
                 >How to: Cache Page Output with File Dependencies</a
               >
@@ -476,7 +480,11 @@
           <para>Adds a single file name to the collection of file names on which the current response is dependent.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -506,13 +514,11 @@
 
             
 
-             is the same as <see
-             cref="M:System.Web.HttpResponse.AppendHeader(System.String,System.String)" />
+             is the same as <see cref="M:System.Web.HttpResponse.AppendHeader(System.String,System.String)" />
 
             
 
-             and is provided only for compatibility with earlier versions of ASP. With ASP.NET, use <see
-             cref="M:System.Web.HttpResponse.AppendHeader(System.String,System.String)" />
+             and is provided only for compatibility with earlier versions of ASP. With ASP.NET, use <see cref="M:System.Web.HttpResponse.AppendHeader(System.String,System.String)" />
 
             
 
@@ -522,8 +528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an HTTP header to the output stream. <see
-             cref="M:System.Web.HttpResponse.AddHeader(System.String,System.String)" />
+            >Adds an HTTP header to the output stream. <see cref="M:System.Web.HttpResponse.AddHeader(System.String,System.String)" />
 
             
 
@@ -531,19 +536,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the HTTP header to add <paramref
-           name="value" />
+          The name of the HTTP header to add <paramref name="value" />
 
           
 
            to.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -574,12 +586,15 @@
           <para>Adds an HTTP cookie to the intrinsic cookie collection.</para>
         </summary>
         <param name="cookie">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpCookie" />
+          The <see cref="T:System.Web.HttpCookie" />
 
           
 
@@ -608,18 +623,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use the <see
-             cref="M:System.Web.HttpResponse.AppendHeader(System.String,System.String)" />
+            >If you use the <see cref="M:System.Web.HttpResponse.AppendHeader(System.String,System.String)" />
 
             
 
-             method to send cache-specific headers and at the same time use the cache object model (<see
-             cref="P:System.Web.HttpResponse.Cache" />
+             method to send cache-specific headers and at the same time use the cache object model (<see cref="P:System.Web.HttpResponse.Cache" />
 
             
 
-            ) to set cache policy, HTTP response headers that pertain to caching (Cache-Control, Expires, Last-Modified, Pragma, and Vary) might be deleted when the cache object model is used. This behavior enables ASP.NET to maintain the most restrictive settings. For example, consider a page that includes user controls. If those controls have conflicting cache policies, the most restrictive cache policy will be used. If one user control sets the header "Cache-Control: Public" and another user control sets the more restrictive header "Cache-Control: Private" via calls to <see
-             cref="M:System.Web.HttpCachePolicy.SetCacheability(System.Web.HttpCacheability)" />
+            ) to set cache policy, HTTP response headers that pertain to caching (Cache-Control, Expires, Last-Modified, Pragma, and Vary) might be deleted when the cache object model is used. This behavior enables ASP.NET to maintain the most restrictive settings. For example, consider a page that includes user controls. If those controls have conflicting cache policies, the most restrictive cache policy will be used. If one user control sets the header "Cache-Control: Public" and another user control sets the more restrictive header "Cache-Control: Private" via calls to <see cref="M:System.Web.HttpCachePolicy.SetCacheability(System.Web.HttpCacheability)" />
 
             
 
@@ -627,7 +639,7 @@
           >
           <para
             >For a list of standard HTTP/1.1 headers, see section 14, "Header Field Definitions," in the <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=73147"
+              cref="http://go.microsoft.com/fwlink/?LinkID=73147"
               >Hypertext Transfer Protocol -- HTTP/1.1</see
             >
 
@@ -641,14 +653,22 @@
           <para>Adds an HTTP header to the output stream.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the HTTP header to add to the output stream.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -673,13 +693,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To allow for the specified string to be recorded in the log file, you first must enable the <ui
-            >URI Query</ui>
+            >To allow for the specified string to be recorded in the log file, you first must enable the <ui>URI Query</ui>
 
             
 
-             option of the <ui
-            >Extended Logging Properties</ui>
+             option of the <ui>Extended Logging Properties</ui>
 
             
 
@@ -689,8 +707,7 @@
           <list type="ordered">
             <item>
               <para
-                >In IIS Manager, expand the local computer node, expand the Web or FTP Sites folder, right-click the Web or FTP site, and then click <ui
-                >Properties</ui>
+                >In IIS Manager, expand the local computer node, expand the Web or FTP Sites folder, right-click the Web or FTP site, and then click <ui>Properties</ui>
 
                 
 
@@ -699,13 +716,11 @@
             </item>
             <item>
               <para
-                >Click the <ui
-                >Web or FTP Site</ui>
+                >Click the <ui>Web or FTP Site</ui>
 
                 
 
-                 tab, and then select the <ui
-                >Enable logging</ui>
+                 tab, and then select the <ui>Enable logging</ui>
 
                 
 
@@ -714,23 +729,11 @@
             </item>
             <item>
               <para
-                >In the <ui
-                >Active log format</ui>
+                >In the <ui>Active log format</ui>
 
                 
 
-                 box, click <ui
-                >W3C Extended Log File Format</ui>
-
-                
-
-                . </para
-              >
-            </item>
-            <item>
-              <para
-                >Click <ui
-                >Properties</ui>
+                 box, click <ui>W3C Extended Log File Format</ui>
 
                 
 
@@ -738,14 +741,19 @@
               >
             </item>
             <item>
-              <para
-                >Click the <ui
-                >Advanced</ui>
+              <para>Click <ui>Properties</ui>
 
                 
 
-                 tab, select the properties that you want to log, and then click <ui
-                >OK</ui>
+                . </para>
+            </item>
+            <item>
+              <para
+                >Click the <ui>Advanced</ui>
+
+                
+
+                 tab, select the properties that you want to log, and then click <ui>OK</ui>
 
                 
 
@@ -759,7 +767,11 @@
           <para>Adds custom log information to the Internet Information Services (IIS) log file.</para>
         </summary>
         <param name="param">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -797,18 +809,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a session ID to the virtual path if the session is using <see
-             cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
+            >Adds a session ID to the virtual path if the session is using <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
             
 
-             session state and returns the combined path. If <see
-             cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
+             session state and returns the combined path. If <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
             
 
-             session state is not used, <see
-             cref="M:System.Web.HttpResponse.ApplyAppPathModifier(System.String)" />
+             session state is not used, <see cref="M:System.Web.HttpResponse.ApplyAppPathModifier(System.String)" />
 
             
 
@@ -818,8 +827,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="virtualPath" />
+            >The <paramref name="virtualPath" />
 
             
 
@@ -827,7 +835,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -855,7 +867,11 @@
           <para>Writes a string of binary characters to the HTTP output stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -879,18 +895,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpResponse.Buffer" />
+            >The <see cref="P:System.Web.HttpResponse.Buffer" />
 
             
 
-             property has been deprecated in favor of the <see
-             cref="P:System.Web.HttpResponse.BufferOutput" />
+             property has been deprecated in favor of the <see cref="P:System.Web.HttpResponse.BufferOutput" />
 
             
 
-             property and is provided only for compatibility with earlier versions of ASP. With ASP.NET, use <see
-             cref="P:System.Web.HttpResponse.BufferOutput" />
+             property and is provided only for compatibility with earlier versions of ASP. With ASP.NET, use <see cref="P:System.Web.HttpResponse.BufferOutput" />
 
             
 
@@ -917,21 +930,17 @@
       <Docs>
         <value>Whether output is currently being buffered.</value>
         <remarks
-          >This controls whether HttpResponse should buffer the output before it is delivered to a client.  The default is <see
-           langword="true" />
+          >This controls whether HttpResponse should buffer the output before it is delivered to a client.  The default is <see langword="true" />
 
           
 
           .
 
-<para
-          >
+<para>
 The buffering can be changed during the execution back and forth if needed.
 </para>
-          <para
-            >
-This property is the same as <see
-             cref="P:System.Web.HttpResponse.Buffer" />
+          <para>
+This property is the same as <see cref="P:System.Web.HttpResponse.Buffer" />
           </para>
         </remarks>
         <summary>
@@ -975,51 +984,42 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The values for Private, Public, and No-Cache are strings and must be enclosed in quotation marks (" "). If the <see
-             cref="P:System.Web.HttpResponse.CacheControl" />
+            >The values for Private, Public, and No-Cache are strings and must be enclosed in quotation marks (" "). If the <see cref="P:System.Web.HttpResponse.CacheControl" />
 
             
 
-             property is set to a value that does not match one of the <see
-             cref="T:System.Web.HttpCacheability" />
+             property is set to a value that does not match one of the <see cref="T:System.Web.HttpCacheability" />
 
             
 
-             enumeration values, then an <see
-             cref="T:System.ArgumentException" />
+             enumeration values, then an <see cref="T:System.ArgumentException" />
 
             
 
-             is thrown. If the <see
-             cref="P:System.Web.HttpResponse.CacheControl" />
+             is thrown. If the <see cref="P:System.Web.HttpResponse.CacheControl" />
 
             
 
-             property is not set, the cacheability of the response is set to <see
-             cref="F:System.Web.HttpCacheability.NoCache" />
+             property is not set, the cacheability of the response is set to <see cref="F:System.Web.HttpCacheability.NoCache" />
 
             
 
             .</para
           >
           <para
-            >The CacheControl, <see
-             cref="P:System.Web.HttpResponse.Expires" />
+            >The CacheControl, <see cref="P:System.Web.HttpResponse.Expires" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpResponse.ExpiresAbsolute" />
+            , and <see cref="P:System.Web.HttpResponse.ExpiresAbsolute" />
 
             
 
-             properties have been deprecated. Instead, the methods of the <see
-             cref="T:System.Web.HttpCachePolicy" />
+             properties have been deprecated. Instead, the methods of the <see cref="T:System.Web.HttpCachePolicy" />
 
             
 
-             class are available through the <see
-             cref="P:System.Web.HttpResponse.Cache" />
+             class are available through the <see cref="P:System.Web.HttpResponse.Cache" />
 
             
 
@@ -1029,8 +1029,7 @@ This property is the same as <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the Cache-Control HTTP header that matches one of the <see
-             cref="T:System.Web.HttpCacheability" />
+            >Gets or sets the Cache-Control HTTP header that matches one of the <see cref="T:System.Web.HttpCacheability" />
 
             
 
@@ -1077,8 +1076,7 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpResponse.Clear" />
+            >The <see cref="M:System.Web.HttpResponse.Clear" />
 
             
 
@@ -1106,8 +1104,7 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpResponse.ClearContent" />
+            >The <see cref="M:System.Web.HttpResponse.ClearContent" />
 
             
 
@@ -1133,23 +1130,18 @@ This property is the same as <see
       <Parameters />
       <Docs>
         <remarks
-          >This clears all the header definitions that might have been added with <see
-           cref="M:System.Web.HttpResponse.AppendHeader" />
+          >This clears all the header definitions that might have been added with <see cref="M:System.Web.HttpResponse.AppendHeader" />
 
           
 
           .
 
-<para
-
-            >
-   This throws an <see
-             cref="T:System.Web.HttpException" />
+<para>
+   This throws an <see cref="T:System.Web.HttpException" />
 
             
 
-             if the headers have already been sent to the client (for example, if the user has called the <see
-             cref="M:System.Web.HttpResponse.Flush" />
+             if the headers have already been sent to the client (for example, if the user has called the <see cref="M:System.Web.HttpResponse.Flush" />
 
             
 
@@ -1179,13 +1171,11 @@ This property is the same as <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method terminates the connection to the client in an abrupt manner and is not intended for normal HTTP request processing. The method sends a reset packet to the client, which can cause response data that is buffered on the server, the client, or somewhere in between to be dropped. </para>
           <para
-            >You might use this method in response to an attack by a malicious HTTP client. However, typically you should call <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+            >You might use this method in response to an attack by a malicious HTTP client. However, typically you should call <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
-             instead if you want to jump ahead to the <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+             instead if you want to jump ahead to the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
@@ -1213,15 +1203,11 @@ This property is the same as <see
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Text.Encoding" />
-        </value>
+        <value>a <see cref="T:System.Text.Encoding" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Default ContentEncoding can be specified in an ASP.NET configuration file in the <format
-             type="text/html">
+            >Default ContentEncoding can be specified in an ASP.NET configuration file in the <format type="text/html">
               <a href="e2dffc8e-ebd2-439b-a2fd-e3ac5e620da7"
                 >globalization Element (ASP.NET Settings Schema)</a
               >
@@ -1229,8 +1215,7 @@ This property is the same as <see
 
             
 
-             section. If <see
-             cref="P:System.Web.HttpResponse.ContentEncoding" />
+             section. If <see cref="P:System.Web.HttpResponse.ContentEncoding" />
 
             
 
@@ -1281,36 +1266,30 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET includes two intrinsic cookie collections. The collection accessed through the <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+            >ASP.NET includes two intrinsic cookie collections. The collection accessed through the <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
-             collection of <see
-             cref="T:System.Web.HttpRequest" />
+             collection of <see cref="T:System.Web.HttpRequest" />
 
             
 
-             contains cookies transmitted by the client to the server in the Cookie header. The collection accessed through the <see
-             cref="P:System.Web.HttpResponse.Cookies" />
+             contains cookies transmitted by the client to the server in the Cookie header. The collection accessed through the <see cref="P:System.Web.HttpResponse.Cookies" />
 
             
 
-             collection of <see
-             cref="T:System.Web.HttpResponse" />
+             collection of <see cref="T:System.Web.HttpResponse" />
 
             
 
              contains new cookies created on the server and transmitted to the client in the Set-Cookie header.</para
           >
           <para
-            >After you add a cookie by using the <see
-             cref="P:System.Web.HttpResponse.Cookies" />
+            >After you add a cookie by using the <see cref="P:System.Web.HttpResponse.Cookies" />
 
             
 
-             collection, the cookie is immediately available in the <see
-             cref="P:System.Web.HttpRequest.Cookies" />
+             collection, the cookie is immediately available in the <see cref="P:System.Web.HttpRequest.Cookies" />
 
             
 
@@ -1338,80 +1317,67 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is provided only for compatibility with ASP—that is, for compatibility with COM-based Web-programming technology that preceded ASP.NET. If you want to jump ahead to the <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >This method is provided only for compatibility with ASP—that is, for compatibility with COM-based Web-programming technology that preceded ASP.NET. If you want to jump ahead to the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
-             event and send a response to the client, it is usually preferable to call <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+             event and send a response to the client, it is usually preferable to call <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
              instead. </para
           >
           <para
-            >To mimic the behavior of the End method in ASP, this method tries to raise a <see
-             cref="ThreadAbortException" />
+            >To mimic the behavior of the End method in ASP, this method tries to raise a <see cref="ThreadAbortException" />
 
             
 
-             exception. If this attempt is successful, the calling thread will be aborted, which is detrimental to your site's performance. In that case, no code after the call to the <see
-             cref="M:System.Web.HttpResponse.End" />
+             exception. If this attempt is successful, the calling thread will be aborted, which is detrimental to your site's performance. In that case, no code after the call to the <see cref="M:System.Web.HttpResponse.End" />
 
             
 
              method is executed.</para
           >
           <para
-            >If the <see
-             cref="M:System.Web.HttpResponse.End" />
+            >If the <see cref="M:System.Web.HttpResponse.End" />
 
             
 
-             method is not able to raise a <see
-             cref="ThreadAbortException" />
+             method is not able to raise a <see cref="ThreadAbortException" />
 
             
 
             , it instead flushes the response bytes to the client. It does this synchronously, which can also be detrimental to your site's performance.</para
           >
           <para
-            >In either case (whether or not a <see
-             cref="ThreadAbortException" />
+            >In either case (whether or not a <see cref="ThreadAbortException" />
 
             
 
-             exception is successfully raised), the response pipeline jumps ahead to the <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+             exception is successfully raised), the response pipeline jumps ahead to the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
              event.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+            >The <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
-             method does not raise an exception, and code after the call to the <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+             method does not raise an exception, and code after the call to the <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
-             method might be executed. If your intention is to avoid execution of subsequent code, and if the performance penalty of <see
-             cref="M:System.Web.HttpResponse.End" />
+             method might be executed. If your intention is to avoid execution of subsequent code, and if the performance penalty of <see cref="M:System.Web.HttpResponse.End" />
 
             
 
-             is acceptable, you can call <see
-             cref="M:System.Web.HttpResponse.End" />
+             is acceptable, you can call <see cref="M:System.Web.HttpResponse.End" />
 
             
 
-             instead of <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+             instead of <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
@@ -1421,8 +1387,7 @@ This property is the same as <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sends all currently buffered output to the client, stops execution of the page, and raises the <see
-             cref="E:System.Web.HttpApplication.EndRequest" />
+            >Sends all currently buffered output to the client, stops execution of the page, and raises the <see cref="E:System.Web.HttpApplication.EndRequest" />
 
             
 
@@ -1447,23 +1412,19 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Expires, <see
-             cref="P:System.Web.HttpResponse.ExpiresAbsolute" />
+            >The Expires, <see cref="P:System.Web.HttpResponse.ExpiresAbsolute" />
 
             
 
-             and <see
-             cref="P:System.Web.HttpResponse.CacheControl" />
+             and <see cref="P:System.Web.HttpResponse.CacheControl" />
 
             
 
-             properties have been deprecated in favor of the methods of the <see
-             cref="T:System.Web.HttpCachePolicy" />
+             properties have been deprecated in favor of the methods of the <see cref="T:System.Web.HttpCachePolicy" />
 
             
 
-             class available through the <see
-             cref="P:System.Web.HttpResponse.Cache" />
+             class available through the <see cref="P:System.Web.HttpResponse.Cache" />
 
             
 
@@ -1473,8 +1434,7 @@ This property is the same as <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of minutes before a page cached on a browser expires. If the user returns to the same page before it expires, the cached version is displayed. <see
-             cref="P:System.Web.HttpResponse.Expires" />
+            >Gets or sets the number of minutes before a page cached on a browser expires. If the user returns to the same page before it expires, the cached version is displayed. <see cref="P:System.Web.HttpResponse.Expires" />
 
             
 
@@ -1499,23 +1459,19 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ExpiresAbsolute, <see
-             cref="P:System.Web.HttpResponse.Expires" />
+            >The ExpiresAbsolute, <see cref="P:System.Web.HttpResponse.Expires" />
 
             
 
-            , and <see
-             cref="P:System.Web.HttpResponse.CacheControl" />
+            , and <see cref="P:System.Web.HttpResponse.CacheControl" />
 
             
 
-             properties have been deprecated in favor of the methods of the <see
-             cref="T:System.Web.HttpCachePolicy" />
+             properties have been deprecated in favor of the methods of the <see cref="T:System.Web.HttpCachePolicy" />
 
             
 
-             class available through the <see
-             cref="P:System.Web.HttpResponse.Cache" />
+             class available through the <see cref="P:System.Web.HttpResponse.Cache" />
 
             
 
@@ -1525,8 +1481,7 @@ This property is the same as <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the absolute date and time at which to remove cached information from the cache. <see
-             cref="P:System.Web.HttpResponse.ExpiresAbsolute" />
+            >Gets or sets the absolute date and time at which to remove cached information from the cache. <see cref="P:System.Web.HttpResponse.ExpiresAbsolute" />
 
             
 
@@ -1547,20 +1502,15 @@ This property is the same as <see
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.Stream" />
-        </value>
+        <value>a <see cref="T:System.IO.Stream" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create a Stream object and set the <see
-             cref="P:System.Web.HttpResponse.Filter" />
+            >When you create a Stream object and set the <see cref="P:System.Web.HttpResponse.Filter" />
 
             
 
-             property to the Stream object, all HTTP output sent by <see
-             cref="Overload:System.Web.HttpResponse.Write" />
+             property to the Stream object, all HTTP output sent by <see cref="Overload:System.Web.HttpResponse.Write" />
 
             
 
@@ -1588,8 +1538,7 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Forces all currently buffered output to be sent to the client. The <see
-             cref="M:System.Web.HttpResponse.Flush" />
+            >Forces all currently buffered output to be sent to the client. The <see cref="M:System.Web.HttpResponse.Flush" />
 
             
 
@@ -1623,56 +1572,46 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpResponse.HeaderEncoding" />
+            >The <see cref="P:System.Web.HttpResponse.HeaderEncoding" />
 
             
 
-             property gives you the ability to disable or change the <see
-             cref="T:System.Text.Encoding" />
+             property gives you the ability to disable or change the <see cref="T:System.Text.Encoding" />
 
             
 
-             object on a response header by using the <see
-             cref="T:System.Text.ASCIIEncoding" />
+             object on a response header by using the <see cref="T:System.Text.ASCIIEncoding" />
 
             
 
-            , <see
-             cref="T:System.Text.UnicodeEncoding" />
+            , <see cref="T:System.Text.UnicodeEncoding" />
 
             
 
-            , <see
-             cref="T:System.Text.UTF7Encoding" />
+            , <see cref="T:System.Text.UTF7Encoding" />
 
             
 
-            , or <see
-             cref="T:System.Text.UTF8Encoding" />
+            , or <see cref="T:System.Text.UTF8Encoding" />
 
             
 
-             object. The default encoding value is the <see
-             cref="T:System.Text.UTF8Encoding" />
+             object. The default encoding value is the <see cref="T:System.Text.UTF8Encoding" />
 
             
 
              class.</para
           >
           <para
-            >By changing the type of the <see
-             cref="P:System.Web.HttpResponse.HeaderEncoding" />
+            >By changing the type of the <see cref="P:System.Web.HttpResponse.HeaderEncoding" />
 
             
 
-             property, you can potentially increase the risk of certain malicious attacks or cause sensitive data to be sent through the response header. Header injection attacks can be avoided, in part, by leaving the <see
-             cref="P:System.Web.HttpResponse.HeaderEncoding" />
+             property, you can potentially increase the risk of certain malicious attacks or cause sensitive data to be sent through the response header. Header injection attacks can be avoided, in part, by leaving the <see cref="P:System.Web.HttpResponse.HeaderEncoding" />
 
             
 
-             property of a response to the default setting. An attack against a vulnerable application could echo back entrusted data as part of a response header. If the <see
-             cref="P:System.Web.HttpResponse.HeaderEncoding" />
+             property of a response to the default setting. An attack against a vulnerable application could echo back entrusted data as part of a response header. If the <see cref="P:System.Web.HttpResponse.HeaderEncoding" />
 
             
 
@@ -1682,8 +1621,7 @@ This property is the same as <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Text.Encoding" />
+            >Gets or sets an <see cref="T:System.Text.Encoding" />
 
             
 
@@ -1704,8 +1642,7 @@ This property is the same as <see
 
           
 
-           if the client is still connected, <see
-           langword="false" />
+           if the client is still connected, <see langword="false" />
 
           
 
@@ -1714,8 +1651,7 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.HttpResponse.IsClientConnected" />
+            >The <see cref="P:System.Web.HttpResponse.IsClientConnected" />
 
             
 
@@ -1724,8 +1660,7 @@ This property is the same as <see
           <list type="bullet">
             <item>
               <para
-                >The connection to the client was terminated. This can occur if the <see
-                 cref="M:System.Web.HttpResponse.Close" />
+                >The connection to the client was terminated. This can occur if the <see cref="M:System.Web.HttpResponse.Close" />
 
                 
 
@@ -1734,23 +1669,19 @@ This property is the same as <see
             </item>
             <item>
               <para
-                >The <see
-                 cref="T:System.Web.HttpWorkerRequest" />
+                >The <see cref="T:System.Web.HttpWorkerRequest" />
 
                 
 
-                 object that is handling the request is null or the <see
-                 cref="M:System.Web.HttpWorkerRequest.IsClientConnected" />
+                 object that is handling the request is null or the <see cref="M:System.Web.HttpWorkerRequest.IsClientConnected" />
 
                 
 
-                 method returns false. If a custom <see
-                 cref="T:System.Web.HttpWorkerRequest" />
+                 method returns false. If a custom <see cref="T:System.Web.HttpWorkerRequest" />
 
                 
 
-                 object handles the request, then the <see
-                 cref="M:System.Web.HttpWorkerRequest.IsClientConnected" />
+                 object handles the request, then the <see cref="M:System.Web.HttpWorkerRequest.IsClientConnected" />
 
                 
 
@@ -1783,13 +1714,11 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.HttpResponse.IsRequestBeingRedirected" />
+            >Use the <see cref="P:System.Web.HttpResponse.IsRequestBeingRedirected" />
 
             
 
-             property with the <see
-             cref="P:System.Web.HttpResponse.RedirectLocation" />
+             property with the <see cref="P:System.Web.HttpResponse.RedirectLocation" />
 
             
 
@@ -1812,13 +1741,11 @@ This property is the same as <see
       <Docs>
         <value>The textwriter.</value>
         <remarks
-          >The text writer uses the encoding specified in the <see
-           cref="P:System.Web.HttpResponse.ContentEncoding" />
+          >The text writer uses the encoding specified in the <see cref="P:System.Web.HttpResponse.ContentEncoding" />
 
           
 
-          .  This writer is TextWriter wrapper on top of the <see
-           cref="P:System.Web.HttpResponse.OutputStream" />
+          .  This writer is TextWriter wrapper on top of the <see cref="P:System.Web.HttpResponse.OutputStream" />
 
           
 
@@ -1842,20 +1769,15 @@ This property is the same as <see
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.IO.Stream" />
-        </value>
+        <value>a <see cref="T:System.IO.Stream" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starting with the .NET Framework version 2.0, when you use the <see
-             cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+            >Starting with the .NET Framework version 2.0, when you use the <see cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method of the IO stream returned by the <see
-             cref="P:System.Web.HttpResponse.OutputStream" />
+             method of the IO stream returned by the <see cref="P:System.Web.HttpResponse.OutputStream" />
 
             
 
@@ -1868,23 +1790,19 @@ This property is the same as <see
 
                 
 
-                , if the <paramref
-                 name="offset" />
+                , if the <paramref name="offset" />
 
                 
 
-                 or <paramref
-                 name="count" />
+                 or <paramref name="count" />
 
                 
 
-                 parameter is negative or if the <paramref
-                 name="buffer" />
+                 parameter is negative or if the <paramref name="buffer" />
 
                 
 
-                 parameter's length minus the <paramref
-                 name="offset" />
+                 parameter's length minus the <paramref name="offset" />
 
                 
 
@@ -1897,8 +1815,7 @@ This property is the same as <see
 
                 
 
-                , if the <paramref
-                 name="buffer" />
+                , if the <paramref name="buffer" />
 
                 
 
@@ -1932,7 +1849,9 @@ This property is the same as <see
           <para>Platform for Internet Content Selection (PICS) is a World Wide Web Consortium (W3C) standard for content labeling. PICS is essentially a language for creating a ratings system.</para>
           <para
             >Any value can be a PICS label; ASP.NET does not validate the label. The maximum length of the string is 255 characters. For more information about PICS standards and syntax, see the <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=37125">World Wide Web Consortium</see>
+              cref="http://go.microsoft.com/fwlink/?LinkID=37125"
+              >World Wide Web Consortium</see
+            >
 
             
 
@@ -1944,7 +1863,11 @@ This property is the same as <see
           <para>Appends a HTTP PICS-Label header to the output stream.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1969,13 +1892,11 @@ This property is the same as <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling <see
-             cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+            >Calling <see cref="M:System.Web.HttpResponse.Redirect(System.String)" />
 
             
 
-             is equivalent to calling <see
-             cref="M:System.Web.HttpResponse.Redirect(System.String,System.Boolean)" />
+             is equivalent to calling <see cref="M:System.Web.HttpResponse.Redirect(System.String,System.Boolean)" />
 
             
 
@@ -1986,33 +1907,27 @@ This property is the same as <see
 
             
 
-             calls <see
-             cref="M:System.Web.HttpResponse.End" />
+             calls <see cref="M:System.Web.HttpResponse.End" />
 
             
 
-             which throws a <see
-             cref="T:System.Threading.ThreadAbortException" />
+             which throws a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-             exception upon completion. This exception has a detrimental effect on Web application performance. Therefore, we recommend that instead of this overload you use the <see
-             cref="M:System.Web.HttpResponse.Redirect(System.String,System.Boolean)" />
+             exception upon completion. This exception has a detrimental effect on Web application performance. Therefore, we recommend that instead of this overload you use the <see cref="M:System.Web.HttpResponse.Redirect(System.String,System.Boolean)" />
 
             
 
-             overload and pass false for the <paramref
-             name="endResponse" />
+             overload and pass false for the <paramref name="endResponse" />
 
             
 
-             parameter, and then call the <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+             parameter, and then call the <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
-             method. For more information, see the <see
-             cref="M:System.Web.HttpResponse.End" />
+             method. For more information, see the <see cref="M:System.Web.HttpResponse.End" />
 
             
 
@@ -2020,8 +1935,7 @@ This property is the same as <see
           >
           <block subset="none" type="note">
             <para
-              >For mobile pages only, if your application relies on cookieless sessions, or might receive requests from mobile devices that require cookieless sessions, using a tilde (~) in a path can result in creating a new session and potentially losing session data. To set a property on a mobile control with a path such as "~/path", resolve the path using <see
-               cref="M:System.Web.UI.MobileControls.MobileControl.ResolveUrl(System.String)" />
+              >For mobile pages only, if your application relies on cookieless sessions, or might receive requests from mobile devices that require cookieless sessions, using a tilde (~) in a path can result in creating a new session and potentially losing session data. To set a property on a mobile control with a path such as "~/path", resolve the path using <see cref="M:System.Web.UI.MobileControls.MobileControl.ResolveUrl(System.String)" />
 
               
 
@@ -2029,18 +1943,15 @@ This property is the same as <see
             >
           </block>
           <para
-            >ASP.NET performs the redirection by returning a 302 HTTP status code. An alternative way to transfer control to another page is the <see
-             cref="M:System.Web.HttpServerUtility.Transfer" />
+            >ASP.NET performs the redirection by returning a 302 HTTP status code. An alternative way to transfer control to another page is the <see cref="M:System.Web.HttpServerUtility.Transfer" />
 
             
 
-             method. The <see
-             cref="M:System.Web.HttpServerUtility.Transfer" />
+             method. The <see cref="M:System.Web.HttpServerUtility.Transfer" />
 
             
 
-             method is typically more efficient because it does not cause a round trip to the client. For more information, see <format
-             type="text/html">
+             method is typically more efficient because it does not cause a round trip to the client. For more information, see <format type="text/html">
               <a href="daef3f43-e018-43aa-b43c-46b27bac599e"
                 >How to: Redirect Users to Another Page</a
               >
@@ -2056,7 +1967,11 @@ This property is the same as <see
           <para>Redirects a request to a new URL and specifies the new URL.</para>
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2083,38 +1998,31 @@ This property is the same as <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An absolute URL (for example, http://www.contoso.com/default.aspx) or a relative URL (for example, Default.aspx) can be specified for the target location but some browsers may reject a relative URL.</para>
           <para
-            >When you use this method in a page handler to terminate a request for one page and start a new request for another page, set <paramref
-             name="endResponse" />
+            >When you use this method in a page handler to terminate a request for one page and start a new request for another page, set <paramref name="endResponse" />
 
             
 
-             to false and then call the <see
-             cref="M:System.Web.HttpApplication.CompleteRequest" />
+             to false and then call the <see cref="M:System.Web.HttpApplication.CompleteRequest" />
 
             
 
-             method. If you specify true for the <paramref
-             name="endResponse" />
+             method. If you specify true for the <paramref name="endResponse" />
 
             
 
-             parameter, this method calls the <see
-             cref="M:System.Web.HttpResponse.End" />
+             parameter, this method calls the <see cref="M:System.Web.HttpResponse.End" />
 
             
 
-             method for the original request, which throws a <see
-             cref="T:System.Threading.ThreadAbortException" />
+             method for the original request, which throws a <see cref="T:System.Threading.ThreadAbortException" />
 
             
 
-             exception when it completes. This exception has a detrimental effect on Web application performance, which is why passing false for the <paramref
-             name="endResponse" />
+             exception when it completes. This exception has a detrimental effect on Web application performance, which is why passing false for the <paramref name="endResponse" />
 
             
 
-             parameter is recommended. For more information, see the <see
-             cref="M:System.Web.HttpResponse.End" />
+             parameter is recommended. For more information, see the <see cref="M:System.Web.HttpResponse.End" />
 
             
 
@@ -2122,8 +2030,7 @@ This property is the same as <see
           >
           <block subset="none" type="note">
             <para
-              >For mobile pages, if your application relies on cookieless sessions, or might receive requests from mobile devices that require cookieless sessions, using a tilde (~) in a path can create a new session and potentially lose session data. To set a property on a mobile control with a path such as "~/path", resolve the path using <see
-               cref="M:System.Web.UI.MobileControls.MobileControl.ResolveUrl(System.String)" />
+              >For mobile pages, if your application relies on cookieless sessions, or might receive requests from mobile devices that require cookieless sessions, using a tilde (~) in a path can create a new session and potentially lose session data. To set a property on a mobile control with a path such as "~/path", resolve the path using <see cref="M:System.Web.UI.MobileControls.MobileControl.ResolveUrl(System.String)" />
 
               
 
@@ -2131,18 +2038,15 @@ This property is the same as <see
             >
           </block>
           <para
-            >ASP.NET performs the redirection by returning a 302 HTTP status code. An alternative way to transfer control to another page is the <see
-             cref="M:System.Web.HttpServerUtility.Transfer" />
+            >ASP.NET performs the redirection by returning a 302 HTTP status code. An alternative way to transfer control to another page is the <see cref="M:System.Web.HttpServerUtility.Transfer" />
 
             
 
-             method. The <see
-             cref="M:System.Web.HttpServerUtility.Transfer" />
+             method. The <see cref="M:System.Web.HttpServerUtility.Transfer" />
 
             
 
-             method is typically more efficient because it does not cause a round trip to the client. For more information, see <format
-             type="text/html">
+             method is typically more efficient because it does not cause a round trip to the client. For more information, see <format type="text/html">
               <a href="daef3f43-e018-43aa-b43c-46b27bac599e"
                 >How to: Redirect Users to Another Page</a
               >
@@ -2158,14 +2062,22 @@ This property is the same as <see
           <para>Redirects a client to a new URL. Specifies the new URL and whether execution of the current page should terminate.</para>
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The location of the target. </param
         >
         <param name="endResponse">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2186,25 +2098,20 @@ This property is the same as <see
       <Docs>
         <value>The redirect</value>
         <remarks>
-          <para
-            >
-This is a low-level request, for the Location header to be complete you must also update the StatusCode to one of the valid redirection codes (3xx).  See the <see
-             cref="M:System.Web.HttpResponse.Redirect(string)" />
+          <para>
+This is a low-level request, for the Location header to be complete you must also update the StatusCode to one of the valid redirection codes (3xx).  See the <see cref="M:System.Web.HttpResponse.Redirect(string)" />
 
             
 
-             and <see
-             cref="M:System.Web.HttpResponse.Redirect(string,bool)" />
+             and <see cref="M:System.Web.HttpResponse.Redirect(string,bool)" />
 
             
 
              methods for a high-level interface to redirection.
 </para
           >
-          <para
-            >
-If set this property controls whether the header "Location" in the HTTP headers is set.  If the value is <see
-             langword="null" />
+          <para>
+If set this property controls whether the header "Location" in the HTTP headers is set.  If the value is <see langword="null" />
 
             
 
@@ -2238,8 +2145,7 @@ If set this property controls whether the header "Location" in the HTTP headers 
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call this method to remove output-cache items that are associated with the default output-cache provider. Call the <see
-             cref="M:System.Web.HttpResponse.RemoveOutputCacheItem(System.String,System.String)" />
+            >Call this method to remove output-cache items that are associated with the default output-cache provider. Call the <see cref="M:System.Web.HttpResponse.RemoveOutputCacheItem(System.String,System.String)" />
 
             
 
@@ -2251,7 +2157,11 @@ If set this property controls whether the header "Location" in the HTTP headers 
           <para>Removes from the cache all cached items that are associated with the default output-cache provider. This method is static.</para>
         </summary>
         <param name="path">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2282,7 +2192,11 @@ If set this property controls whether the header "Location" in the HTTP headers 
           <para>Updates an existing cookie in the cookie collection.</para>
         </summary>
         <param name="cookie">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2310,13 +2224,11 @@ If set this property controls whether the header "Location" in the HTTP headers 
 
             
 
-             has been deprecated in favor of <see
-             cref="P:System.Web.HttpResponse.StatusDescription" />
+             has been deprecated in favor of <see cref="P:System.Web.HttpResponse.StatusDescription" />
 
             
 
-             and is provided only for compatibility with earlier versions of ASP. With ASP.NET, use <see
-             cref="P:System.Web.HttpResponse.StatusDescription" />
+             and is provided only for compatibility with earlier versions of ASP. With ASP.NET, use <see cref="P:System.Web.HttpResponse.StatusDescription" />
 
             
 
@@ -2345,11 +2257,8 @@ If set this property controls whether the header "Location" in the HTTP headers 
         <remarks
           >This property controls the HTTP status code that is sent back to the HTTP client.
 
-<para
-
-            >
-If the setter method is called after the headers have been set, an <see
-             cref="T:System.Web.HttpException" />
+<para>
+If the setter method is called after the headers have been set, an <see cref="T:System.Web.HttpException" />
 
             
 
@@ -2548,8 +2457,7 @@ If the setter method is called after the headers have been set, an <see
         <remarks
           >The status description is described in RFC 2616, section 6.1.1
 
-<para
-          >
+<para>
    The following is a list of the RFC defined status codes:
 </para>
           <list type="table">
@@ -2769,7 +2677,11 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes the specified file directly to an HTTP response output stream, without buffering it in memory.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2793,7 +2705,11 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes a character to an HTTP response output stream.</para>
         </summary>
         <param name="ch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2816,8 +2732,7 @@ If the setter method is called after the headers have been set, an <see
       </Parameters>
       <Docs>
         <remarks
-          >This will invoke <see
-           cref="M:System.Object.ToString()" />
+          >This will invoke <see cref="M:System.Object.ToString()" />
 
           
 
@@ -2826,8 +2741,7 @@ If the setter method is called after the headers have been set, an <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes an <see
-             cref="T:System.Object" />
+            >Writes an <see cref="T:System.Object" />
 
             
 
@@ -2835,12 +2749,15 @@ If the setter method is called after the headers have been set, an <see
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
@@ -2866,13 +2783,11 @@ If the setter method is called after the headers have been set, an <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Dynamically generated HTML pages can introduce security risks if input received from Web clients is not validated either when it is received from a client or when it is transmitted back to a client. Malicious script that is embedded in input submitted to a Web site and later written back out to a client can appear to be originating from a trusted source. This security risk is referred to as a cross-site scripting attack. You should always validate data that is received from a client when it will be transmitted from your site to client browsers.</para>
           <para
-            >Moreover, whenever you write out as HTML any data that was received as input, you should encode it using a technique such as <see
-             cref="M:System.Web.HttpServerUtility.HtmlEncode(System.String)" />
+            >Moreover, whenever you write out as HTML any data that was received as input, you should encode it using a technique such as <see cref="M:System.Web.HttpServerUtility.HtmlEncode(System.String)" />
 
             
 
-             or <see
-             cref="M:System.Web.HttpServerUtility.UrlEncode(System.String)" />
+             or <see cref="M:System.Web.HttpServerUtility.UrlEncode(System.String)" />
 
             
 
@@ -2881,7 +2796,9 @@ If the setter method is called after the headers have been set, an <see
           <para>When you encode or filter data, you must specify a character set for your Web pages so that your filter can identify and remove any byte sequences that do not belong to that set (such as nonalphanumeric sequences) and could potentially have malicious script embedded in them.</para>
           <para
             >For more information about cross-site scripting attacks, see article Q252985, "How to Prevent Cross-Site Scripting Security Issues" on the <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=37115">Microsoft Knowledge Base</see>
+              cref="http://go.microsoft.com/fwlink/?LinkID=37115"
+              >Microsoft Knowledge Base</see
+            >
 
             
 
@@ -2893,7 +2810,11 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes a string to an HTTP response output stream.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2926,26 +2847,37 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes an array of characters to an HTTP response output stream.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array to write.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The position in the character array where writing starts.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters to write, beginning at <paramref
-           name="index" />
+          The number of characters to write, beginning at <paramref name="index" />
 
           
 
@@ -2971,7 +2903,9 @@ If the setter method is called after the headers have been set, an <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >When this method is used with large files, calling the method might throw an exception. The size of the file that can be used with this method depends on the hardware configuration of the Web server. For more information, see article 812406, "PRB: Response.WriteFile Cannot Download a Large File" on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=149903">Microsoft Knowledge Base</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=149903"
+              >Microsoft Knowledge Base</see
+            >
 
             
 
@@ -2983,7 +2917,11 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes the contents of the specified file directly to an HTTP response output stream as a file block.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3013,7 +2951,9 @@ If the setter method is called after the headers have been set, an <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >When this method is used with large files, calling the method might throw an exception. The size of the file that can be used with this method depends on the hardware configuration of the Web server. For more information, see article 812406, "PRB: Response.WriteFile Cannot Download a Large File" on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=149903">Microsoft Knowledge Base</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=149903"
+              >Microsoft Knowledge Base</see
+            >
 
             
 
@@ -3025,14 +2965,22 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes the contents of the specified file directly to an HTTP response output stream as a memory block.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to write into a memory block.</param
         >
         <param name="readIntoMemory">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3063,7 +3011,9 @@ If the setter method is called after the headers have been set, an <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >When this method is used with large files, calling the method might throw an exception. The size of the file that can be used with this method depends on the hardware configuration of the Web server. For more information, see article 812406, "PRB: Response.WriteFile Cannot Download a Large File" on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=149903">Microsoft Knowledge Base</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=149903"
+              >Microsoft Knowledge Base</see
+            >
 
             
 
@@ -3075,21 +3025,33 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes the specified file directly to an HTTP response output stream.</para>
         </summary>
         <param name="fileHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The file handle of the file to write to the HTTP output stream.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte position in the file where writing will start.</param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3120,7 +3082,9 @@ If the setter method is called after the headers have been set, an <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >When this method is used with large files, calling the method might throw an exception. The size of the file that can be used with this method depends on the hardware configuration of the Web server. For more information, see article 812406, "PRB: Response.WriteFile Cannot Download a Large File" on the <see
-             cref="http://go.microsoft.com/fwlink/?linkid=149903">Microsoft Knowledge Base</see>
+              cref="http://go.microsoft.com/fwlink/?linkid=149903"
+              >Microsoft Knowledge Base</see
+            >
 
             
 
@@ -3132,21 +3096,33 @@ If the setter method is called after the headers have been set, an <see
           <para>Writes the specified file directly to an HTTP response output stream.</para>
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the file to write to the HTTP output stream.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte position in the file where writing will start.</param
         >
         <param name="size">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3177,23 +3153,19 @@ If the setter method is called after the headers have been set, an <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
+            >You can use the <see cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
 
             
 
-             method for post-cache substitution in your output-cached pages. By passing an <see
-             cref="T:System.Web.HttpContext" />
+             method for post-cache substitution in your output-cached pages. By passing an <see cref="T:System.Web.HttpContext" />
 
             
 
-             object to a callback method with a prescribed <see
-             cref="T:System.Web.HttpResponseSubstitutionCallback" />
+             object to a callback method with a prescribed <see cref="T:System.Web.HttpResponseSubstitutionCallback" />
 
             
 
-             signature, you can replace output cached content at any given location in the page cache. To initiate the replacement, call the <see
-             cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
+             signature, you can replace output cached content at any given location in the page cache. To initiate the replacement, call the <see cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
 
             
 
@@ -3208,13 +3180,11 @@ If the setter method is called after the headers have been set, an <see
             </item>
           </list>
           <para
-            >On the first request to the page, the <see
-             cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
+            >On the first request to the page, the <see cref="M:System.Web.HttpResponse.WriteSubstitution(System.Web.HttpResponseSubstitutionCallback)" />
 
             
 
-             calls the <see
-             cref="T:System.Web.HttpResponseSubstitutionCallback" />
+             calls the <see cref="T:System.Web.HttpResponseSubstitutionCallback" />
 
             
 
@@ -3222,8 +3192,7 @@ If the setter method is called after the headers have been set, an <see
           >
           <block subset="none" type="note">
             <para
-              >Post-cache substitution is not supported for a cached user control where output caching is applied at the user control level. This is also known as fragment caching. For more information, see <format
-               type="text/html">
+              >Post-cache substitution is not supported for a cached user control where output caching is applied at the user control level. This is also known as fragment caching. For more information, see <format type="text/html">
                 <a href="cdd8e523-7305-4685-a456-c5be1de1367e"
                   >Caching Portions of an ASP.NET Page</a
                 >
@@ -3240,7 +3209,11 @@ If the setter method is called after the headers have been set, an <see
           <para>Allows insertion of response substitution blocks into the response, which allows dynamic generation of specified response regions for output cached responses.</para>
         </summary>
         <param name="callback">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

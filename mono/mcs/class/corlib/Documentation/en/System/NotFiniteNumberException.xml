@@ -53,13 +53,11 @@
          uses the HRESULT COR_E_NOTFINITENUMBER, which has the value 0x80131528.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.NotFiniteNumberException" />
+        >For a list of initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
         
 
-        , see the <see
-         cref="M:System.NotFiniteNumberException.#ctor" />
+        , see the <see cref="M:System.NotFiniteNumberException.#ctor" />
 
         
 
@@ -94,16 +92,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Exception.Message" />
+            >This constructor initializes the <see cref="P:System.Exception.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "The number encountered was not a finite quantity." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotFiniteNumberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -145,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -183,21 +178,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="offendingNumber" />
+            >The <paramref name="offendingNumber" />
 
             
 
-             parameter must be both a <see
-             cref="T:System.Double" />
+             parameter must be both a <see cref="T:System.Double" />
 
             
 
              and an invalid number.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotFiniteNumberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -239,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -248,7 +239,11 @@
           >
         </summary>
         <param name="offendingNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -281,16 +276,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ensure that the <paramref
-             name="message" />
+            >Ensure that the <paramref name="message" />
 
             
 
              string is understandable to the user and that it is localized for the current culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotFiniteNumberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -332,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -341,7 +333,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -377,8 +373,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -386,14 +381,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -429,16 +432,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Ensure that the <paramref
-             name="message" />
+            >Ensure that the <paramref name="message" />
 
             
 
              string is understandable to the user and that it is localized for the current culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotFiniteNumberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -490,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -499,14 +499,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message that describes the error. </param
         >
         <param name="offendingNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -538,26 +546,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotFiniteNumberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -599,8 +603,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -608,19 +611,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -657,26 +667,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.NotFiniteNumberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -728,8 +734,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.NotFiniteNumberException" />
+            >Initializes a new instance of the <see cref="T:System.NotFiniteNumberException" />
 
             
 
@@ -737,26 +742,37 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="offendingNumber">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the argument that caused the exception. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If the <paramref name="innerException" />
 
           
 
@@ -795,21 +811,18 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -819,8 +832,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -828,14 +840,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -863,8 +883,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Double" />
+            >A <see cref="T:System.Double" />
 
             
 
@@ -874,13 +893,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.NotFiniteNumberException.OffendingNumber" />
+            >The <see cref="P:System.NotFiniteNumberException.OffendingNumber" />
 
             
 
-             property returns the same value as was passed into the constructor, or zero if no value was supplied. Override the <see
-             cref="P:System.NotFiniteNumberException.OffendingNumber" />
+             property returns the same value as was passed into the constructor, or zero if no value was supplied. Override the <see cref="P:System.NotFiniteNumberException.OffendingNumber" />
 
             
 

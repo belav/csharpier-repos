@@ -60,44 +60,37 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TableRow" />
+        >The <see cref="T:System.Web.UI.WebControls.TableRow" />
 
         
 
-         class represents a row in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+         class represents a row in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
          control.</para
       >
       <para
-        >This class allows you to control how the contents of the row are displayed. The alignment of the contents in the row are specified by setting the <see
-         cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" />
+        >This class allows you to control how the contents of the row are displayed. The alignment of the contents in the row are specified by setting the <see cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
+         and <see cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
 
         
 
          properties.</para
       >
       <para
-        >You can programmatically manage the cells in the row by using the <see
-         cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+        >You can programmatically manage the cells in the row by using the <see cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
         
 
-         collection. The <see
-         cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+         collection. The <see cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
         
 
-         collection is a collection of <see
-         cref="T:System.Web.UI.WebControls.TableCell" />
+         collection is a collection of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
         
 
@@ -105,13 +98,11 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Web.UI.WebControls.TableCell" />
+          >The <see cref="T:System.Web.UI.WebControls.TableCell" />
 
           
 
-           control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-           type="text/html">
+           control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
             <a href="fa2aa14d-a461-492e-9a79-c990904613ef">Validation ASP.NET Controls</a>
           </format>
 
@@ -131,8 +122,7 @@
     AccessKey="string"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
-    BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -140,61 +130,52 @@
         Inset|Outset"
     BorderWidth="size"
     CssClass="string"
-    Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Names="string"
-    Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     Font-Size="string|Smaller|Larger|XX-Small|X-Small|Small|Medium|
         Large|X-Large|XX-Large"
-    Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-    Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+    Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
     ForeColor="color name|#dddddd"
     Height="size"
-    HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -210,21 +191,18 @@
     SkinID="string"
     Style="string"
     TabIndex="integer"
-    TableSection="TableHeader|<codeFeaturedElement
-        >TableBody</codeFeaturedElement>
+    TableSection="TableHeader|<codeFeaturedElement>TableBody</codeFeaturedElement>
 
         
 
         |TableFooter"
     ToolTip="string"
-    VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+    VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -236,8 +214,7 @@
             AssociatedHeaderCellID="string"
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -246,61 +223,52 @@
             BorderWidth="size"
             ColumnSpan="integer"
             CssClass="string"
-            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|
                 X-Small|Small|Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             ForeColor="color name|#dddddd"
             Height="size"
-            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -319,21 +287,18 @@
             TabIndex="integer"
             Text="string"
             ToolTip="string"
-            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
             Width="size"
-            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -345,8 +310,7 @@
             AssociatedHeaderCellID="string"
             BackColor="color name|#dddddd"
             BorderColor="color name|#dddddd"
-            BorderStyle="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            BorderStyle="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -356,61 +320,52 @@
             CategoryText="string"
             ColumnSpan="integer"
             CssClass="string"
-            Enabled="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            Enabled="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-            EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-            EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-            Font-Bold="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Bold="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Italic="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Italic="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Names="string"
-            Font-Overline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Overline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             Font-Size="string|Smaller|Larger|XX-Small|
                 X-Small|Small|Medium|Large|X-Large|XX-Large"
-            Font-Strikeout="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Strikeout="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
-            Font-Underline="True|<codeFeaturedElement
-        >False</codeFeaturedElement>
+            Font-Underline="True|<codeFeaturedElement>False</codeFeaturedElement>
 
         
 
         "
             ForeColor="color name|#dddddd"
             Height="size"
-            HorizontalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            HorizontalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -424,8 +379,7 @@
             OnUnload="Unload event handler"
             RowSpan="integer"
             runat="server"
-            Scope="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            Scope="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
@@ -435,21 +389,18 @@
             TabIndex="integer"
             Text="string"
             ToolTip="string"
-            VerticalAlign="<codeFeaturedElement
-        >NotSet</codeFeaturedElement>
+            VerticalAlign="<codeFeaturedElement>NotSet</codeFeaturedElement>
 
         
 
         |Top|Middle|Bottom"
-            Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
             Width="size"
-            Wrap="<codeFeaturedElement
-        >True</codeFeaturedElement>
+            Wrap="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -461,8 +412,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a row in a <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >Represents a row in a <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -480,8 +430,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -491,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -519,18 +467,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to programmatically control a collection of <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Use this property to programmatically control a collection of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects that represent the cells from a row of the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             objects that represent the cells from a row of the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control. You can programmatically add, insert, or remove a <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+             control. You can programmatically add, insert, or remove a <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
@@ -538,13 +483,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property is only used when building <see
-               cref="T:System.Web.UI.WebControls.Table" />
+              >This property is only used when building <see cref="T:System.Web.UI.WebControls.Table" />
 
               
 
-               controls programmatically. At design time, this property is set by declaring <see
-               cref="T:System.Web.UI.WebControls.TableCell" />
+               controls programmatically. At design time, this property is set by declaring <see cref="T:System.Web.UI.WebControls.TableCell" />
 
               
 
@@ -555,13 +498,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Web.UI.WebControls.TableCell" />
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.TableCell" />
 
             
 
-             objects that represent the cells of a row in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             objects that represent the cells of a row in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -596,31 +537,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" />
+            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" />
 
             
 
-             method creates a new <see
-             cref="T:System.Web.UI.ControlCollection" />
+             method creates a new <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object that holds the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object that holds the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
              cells.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" />
+            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" />
 
             
 
-             method is primarily of interest to control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             method is primarily of interest to control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -630,13 +566,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Creates a new <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object for the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object for the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -646,13 +580,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >A <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             object that contains the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object that contains the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -680,13 +612,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.TableItemStyle" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
             
 
-             object for the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object for the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -696,26 +626,22 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.Style" />
+            >A <see cref="T:System.Web.UI.WebControls.Style" />
 
             
 
-             object that specifies the style properties for the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             object that specifies the style properties for the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
              control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" />
+            >The <see cref="M:System.Web.UI.WebControls.TableRow.CreateControlCollection" />
 
             
 
-             method is primarily of interest to control developers extending the functionality of the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             method is primarily of interest to control developers extending the functionality of the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
@@ -743,8 +669,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.HorizontalAlign" />
 
             
 
@@ -850,23 +775,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableRow.TableSection" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.TableSection" />
 
             
 
-             property to get or set where the <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+             property to get or set where the <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
-             object is placed in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             object is placed in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
-             control. For the available table locations, see <see
-             cref="T:System.Web.UI.WebControls.TableRowSection" />
+             control. For the available table locations, see <see cref="T:System.Web.UI.WebControls.TableRowSection" />
 
             
 
@@ -916,13 +837,11 @@
           </list>
           <para>When using the declarative syntax, the sections must be in the order of header, body, and then footer.</para>
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.TableRowSection" />
+            >The <see cref="T:System.Web.UI.WebControls.TableRowSection" />
 
             
 
-             enumeration enables you to build accessible Web sites using the <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             enumeration enables you to build accessible Web sites using the <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -933,13 +852,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the location for a <see
-             cref="T:System.Web.UI.WebControls.TableRow" />
+            >Gets or sets the location for a <see cref="T:System.Web.UI.WebControls.TableRow" />
 
             
 
-             object in a <see
-             cref="T:System.Web.UI.WebControls.Table" />
+             object in a <see cref="T:System.Web.UI.WebControls.Table" />
 
             
 
@@ -963,8 +880,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
 
             
 

@@ -20,54 +20,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default, types derived from <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+        >By default, types derived from <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         appear in <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         appear in <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control-specific parts of the Visual Studio designer, but inherit a <see
-         cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
+         control-specific parts of the Visual Studio designer, but inherit a <see cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
 
         
 
-         of <see
-         cref="F:System.ComponentModel.DesignTimeVisibleAttribute.No" />
+         of <see cref="F:System.ComponentModel.DesignTimeVisibleAttribute.No" />
 
         
 
-         to prevent them from appearing in other parts of the designer. This is necessary because the <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+         to prevent them from appearing in other parts of the designer. This is necessary because the <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         type implements the <see
-         cref="T:System.ComponentModel.IComponent" />
+         type implements the <see cref="T:System.ComponentModel.IComponent" />
 
         
 
          interface, which normally makes an instance of the type appear in the designer.</para
       >
       <para
-        >Use this attribute to prevent a <see
-         cref="T:System.Windows.Forms.DataGridViewColumn" />
+        >Use this attribute to prevent a <see cref="T:System.Windows.Forms.DataGridViewColumn" />
 
         
 
-         type from appearing in the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         type from appearing in the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
          control-specific designer.</para
       >
       <para
-        >For more information about using attributes, see <format
-         type="text/html">
+        >For more information about using attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -79,8 +70,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies whether a column type is visible in the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Specifies whether a column type is visible in the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -102,13 +92,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
 
             
 
-             class using the default <see
-             cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+             class using the default <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
             
 
@@ -135,13 +123,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
 
             
 
-             class using the specified value to initialize the <see
-             cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+             class using the specified value to initialize the <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
             
 
@@ -149,12 +135,15 @@
           >
         </summary>
         <param name="visible">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of the <see
-           cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+          The value of the <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
           
 
@@ -179,8 +168,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This attribute instance has a <see
-             cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+            >This attribute instance has a <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
             
 
@@ -190,18 +178,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default <see
-             cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
+            >The default <see cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
 
             
 
-             value, which is <see
-             cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Yes" />
+             value, which is <see cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Yes" />
 
             
 
-            , indicating that the column is visible in the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            , indicating that the column is visible in the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -232,13 +217,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate that the specified object is a <see
-             cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
+            >true to indicate that the specified object is a <see cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
 
             
 
-             instance with the same <see
-             cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+             instance with the same <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
             
 
@@ -246,17 +229,19 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to compare with the current <see
-           cref="T:System.Object" />
+           to compare with the current <see cref="T:System.Object" />
 
           
 
@@ -297,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this attribute instance is equal to the <see
-             cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Default" />
+            >Gets a value indicating whether this attribute instance is equal to the <see cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Default" />
 
             
 
@@ -308,8 +292,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate that this instance is equal to the <see
-             cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Default" />
+            >true to indicate that this instance is equal to the <see cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Default" />
 
             
 
@@ -335,8 +318,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This attribute instance has a <see
-             cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+            >This attribute instance has a <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
             
 
@@ -346,13 +328,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
+            >A <see cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
 
             
 
-             value indicating that the column is not visible in the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             value indicating that the column is not visible in the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -377,8 +357,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the column type is visible in the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets a value indicating whether the column type is visible in the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -404,8 +383,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This attribute instance has a <see
-             cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+            >This attribute instance has a <see cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
 
             
 
@@ -415,13 +393,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
+            >A <see cref="T:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute" />
 
             
 
-             value indicating that the column is visible in the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             value indicating that the column is visible in the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 

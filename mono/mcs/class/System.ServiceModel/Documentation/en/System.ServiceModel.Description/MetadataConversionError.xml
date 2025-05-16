@@ -20,28 +20,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You typically use <see
-         cref="T:System.ServiceModel.Description.MetadataConversionError" />
+        >You typically use <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
         
 
-         objects to determine whether classes that extend <see
-         cref="T:System.ServiceModel.Description.MetadataExporter" />
+         objects to determine whether classes that extend <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Description.MetadataImporter" />
+         and <see cref="T:System.ServiceModel.Description.MetadataImporter" />
 
         
 
-         have encountered an error or warning condition by checking the <see
-         cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
+         have encountered an error or warning condition by checking the <see cref="P:System.ServiceModel.Description.MetadataExporter.Errors" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
+         and <see cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
 
         
 
@@ -51,13 +46,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an error or warning event that occurred during the use of a <see
-         cref="T:System.ServiceModel.Description.MetadataExporter" />
+        >Represents an error or warning event that occurred during the use of a <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
         
 
-         or <see
-         cref="T:System.ServiceModel.Description.MetadataImporter" />
+         or <see cref="T:System.ServiceModel.Description.MetadataImporter" />
 
         
 
@@ -87,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
             
 
@@ -96,7 +88,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -129,13 +125,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
             
 
-             class using the specified message and <paramref
-             name="isWarning" />
+             class using the specified message and <paramref name="isWarning" />
 
             
 
@@ -143,19 +137,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message for the warning or error.</param
         >
         <param name="isWarning">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Whether the <see
-           cref="T:System.ServiceModel.Description.MetadataConversionError" />
+          Whether the <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
           
 
@@ -184,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about reference and value equality, see <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >For details about reference and value equality, see <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -195,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether two <see
-             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+            >Returns a value that indicates whether two <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
             
 
@@ -206,8 +205,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+            >true if the two <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
             
 
@@ -234,8 +232,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For details about hash codes, see <see
-             cref="M:System.Object.GetHashCode" />
+            >For details about hash codes, see <see cref="M:System.Object.GetHashCode" />
 
             
 
@@ -245,8 +242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that serves as a hash function for a <see
-             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+            >Returns a value that serves as a hash function for a <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
             
 
@@ -275,8 +271,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.ServiceModel.Description.MetadataConversionError" />
+            >Gets a value that indicates whether the <see cref="T:System.ServiceModel.Description.MetadataConversionError" />
 
             
 

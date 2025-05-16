@@ -23,33 +23,31 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >A Visual Studio project with source code is available to accompany this topic: <see
-         cref="http://go.microsoft.com/fwlink/?linkid=158686">Download</see>
+          cref="http://go.microsoft.com/fwlink/?linkid=158686"
+          >Download</see
+        >
 
         
 
         . </para
       >
       <para
-        >MVC uses the <see
-         cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+        >MVC uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
         
 
-         class to associate a model with a data field. Dynamic Data uses the <see
-         cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+         class to associate a model with a data field. Dynamic Data uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
         
 
-         class to associate a user control with a data field. Dynamic Data uses the <see
-         cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+         class to associate a user control with a data field. Dynamic Data uses the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
 
         
 
          property to determine which user control to use in order to display a data field.</para
       >
       <para
-        >For more information about how to use attributes, see <format
-         type="text/html">
+        >For more information about how to use attributes, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -81,21 +79,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >A <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
-             object that is created with this constructor is initialized using the specified <paramref
-             name="uiHint" />
+             object that is created with this constructor is initialized using the specified <paramref name="uiHint" />
 
             
 
             , which specifies the user control (field template) to use in order to display the data field. </para
           >
           <para
-            >ASP.NET Dynamic Data provides field templates, page templates, and data controls to render data fields in a data model. You can modify these templates and controls to customize them, or you can create a custom user control. If you create a custom user control, you use the <see
-             cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+            >ASP.NET Dynamic Data provides field templates, page templates, and data controls to render data fields in a data model. You can modify these templates and controls to customize them, or you can create a custom user control. If you create a custom user control, you use the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
 
             
 
@@ -105,8 +100,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -114,7 +108,11 @@
           >
         </summary>
         <param name="uiHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -153,14 +150,22 @@
           >
         </summary>
         <param name="uiHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user control (field template) to use to display the data field.</param
         >
         <param name="presentationLayer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -197,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -206,21 +210,33 @@
           >
         </summary>
         <param name="uiHint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The user control (field template) to use to display the data field.</param
         >
         <param name="presentationLayer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The presentation layer that uses the class. Can be set to "HTML", "Silverlight", "WPF", or "WinForms".</param
         >
         <param name="controlParameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.ControlParameters" />
+            >The <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.ControlParameters" />
 
             
 
@@ -260,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.DynamicData.DynamicControlParameter" />
+            >Gets or sets the <see cref="T:System.Web.DynamicData.DynamicControlParameter" />
 
             
 
@@ -297,7 +311,11 @@
           <para>true if the specified object is equal to this instance; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -346,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property represents the presentation layer that uses the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >This property represents the presentation layer that uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -357,8 +374,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the presentation layer that uses the <see
-             cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            >Gets or sets the presentation layer that uses the <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
 
             
 
@@ -401,23 +417,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >ASP.NET Dynamic Data provides field templates and page templates for rendering data fields in a data model. Field templates are user controls (.ascx files) that are mapped to data fields in the model. You can modify the default user controls that Dynamic Data provides, or you can create a custom user controls to use as field template. If you create a custom user control, you use the <see
-             cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+            >ASP.NET Dynamic Data provides field templates and page templates for rendering data fields in a data model. Field templates are user controls (.ascx files) that are mapped to data fields in the model. You can modify the default user controls that Dynamic Data provides, or you can create a custom user controls to use as field template. If you create a custom user control, you use the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
 
             
 
-             property on a property so that the property is rendered using the custom user control. The <see
-             cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+             property on a property so that the property is rendered using the custom user control. The <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
 
             
 
-             property specifies which field template to use when a specific column is rendered. The <see
-             cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+             property specifies which field template to use when a specific column is rendered. The <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
 
             
 
-             property can point to one of the templates provided in Dynamic Data or to a custom template. For example, you can create a custom field template named RedText_Edit.ascx, and then use the <see
-             cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+             property can point to one of the templates provided in Dynamic Data or to a custom template. For example, you can create a custom field template named RedText_Edit.ascx, and then use the <see cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
 
             
 

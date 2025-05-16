@@ -26,46 +26,38 @@
 
         
 
-         is the top-level container that supersedes <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         is the top-level container that supersedes <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-        . It also provides key handling and multiple document interface (MDI) features. Functionally, <see
-         cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+        . It also provides key handling and multiple document interface (MDI) features. Functionally, <see cref="T:System.Windows.Forms.ToolStripDropDownItem" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStripMenuItem" />
+         and <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
         
 
-         work along with <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+         work along with <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-        , although they are derived from <see
-         cref="T:System.Windows.Forms.ToolStripItem" />
+        , although they are derived from <see cref="T:System.Windows.Forms.ToolStripItem" />
 
         
 
         .</para
       >
       <para
-        >The following items are specifically designed to work seamlessly with both <see
-         cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+        >The following items are specifically designed to work seamlessly with both <see cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+         and <see cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
         
 
-         in all orientations. They are available by default at design time for the <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+         in all orientations. They are available by default at design time for the <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
@@ -89,41 +81,34 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+        >The <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-         control represents the container for the menu structure of a form. You can add <see
-         cref="T:System.Windows.Forms.ToolStripMenuItem" />
+         control represents the container for the menu structure of a form. You can add <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
         
 
-         objects to the <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+         objects to the <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-         that represent the individual menu commands in the menu structure. Each <see
-         cref="T:System.Windows.Forms.ToolStripMenuItem" />
+         that represent the individual menu commands in the menu structure. Each <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
         
 
          can be a command for your application or a parent menu for other submenu items.</para
       >
       <para
-        >Although <see
-         cref="T:System.Windows.Forms.MenuStrip" />
+        >Although <see cref="T:System.Windows.Forms.MenuStrip" />
 
         
 
-         replaces and adds functionality to the <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         replaces and adds functionality to the <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         control of previous versions, <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
@@ -145,13 +130,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Use this constructor to create a <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             to which you can add <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             to which you can add <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -161,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -194,18 +176,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The overflow feature moves menu items to a drop-down menu when there is not enough room to display them in a <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >The overflow feature moves menu items to a drop-down menu when there is not enough room to display them in a <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            . When you set the <see
-             cref="P:System.Windows.Forms.MenuStrip.CanOverflow" />
+            . When you set the <see cref="P:System.Windows.Forms.MenuStrip.CanOverflow" />
 
             
 
-             property to true, you must also enable overflow for specific menu items by setting the <see
-             cref="P:System.Windows.Forms.ToolStripMenuItem.Overflow" />
+             property to true, you must also enable overflow for specific menu items by setting the <see cref="P:System.Windows.Forms.ToolStripMenuItem.Overflow" />
 
             
 
@@ -215,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -245,13 +223,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.MenuStrip.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.MenuStrip.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
             
 
@@ -259,8 +235,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set the <see
-               cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+              >To get or set the <see cref="P:System.Windows.Forms.Control.AccessibilityObject" />
 
               
 
@@ -268,13 +243,11 @@
             >
           </block>
           <para
-            >For a code example of using <see
-             cref="M:System.Windows.Forms.MenuStrip.CreateAccessibilityInstance" />
+            >For a code example of using <see cref="M:System.Windows.Forms.MenuStrip.CreateAccessibilityInstance" />
 
             
 
-            , see <see
-             cref="M:System.Windows.Forms.Control.CreateAccessibilityInstance" />
+            , see <see cref="M:System.Windows.Forms.Control.CreateAccessibilityInstance" />
 
             
 
@@ -288,8 +261,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -319,18 +291,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Windows.Forms.MenuStrip.CreateDefaultItem(System.String,System.Drawing.Image,System.EventHandler)" />
+            >Use the <see cref="M:System.Windows.Forms.MenuStrip.CreateDefaultItem(System.String,System.Drawing.Image,System.EventHandler)" />
 
             
 
-             method to add a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             method to add a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             with commonly used characteristics to a <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             with commonly used characteristics to a <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -340,13 +309,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Creates a <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
-             with the specified text, image, and event handler on a new <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             with the specified text, image, and event handler on a new <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -356,18 +323,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="M:System.Windows.Forms.ToolStripMenuItem.#ctor(System.String,System.Drawing.Image,System.EventHandler)" />
+            >A <see cref="M:System.Windows.Forms.ToolStripMenuItem.#ctor(System.String,System.Drawing.Image,System.EventHandler)" />
 
             
 
-            , or a <see
-             cref="T:System.Windows.Forms.ToolStripSeparator" />
+            , or a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
             
 
-             if the <paramref
-             name="text" />
+             if the <paramref name="text" />
 
             
 
@@ -375,56 +339,61 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The text to use for the <see
-           cref="T:System.Windows.Forms.ToolStripMenuItem" />
+          The text to use for the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
           
 
-          . If the <paramref
-           name="text" />
+          . If the <paramref name="text" />
 
           
 
-           parameter is a hyphen (-), this method creates a <see
-           cref="T:System.Windows.Forms.ToolStripSeparator" />
+           parameter is a hyphen (-), this method creates a <see cref="T:System.Windows.Forms.ToolStripSeparator" />
 
           
 
           .</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
-           to display on the <see
-           cref="T:System.Windows.Forms.ToolStripMenuItem" />
+           to display on the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
           
 
           .</param
         >
         <param name="onClick">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An event handler that raises the <see
-           cref="E:System.Windows.Forms.Control.Click" />
+          An event handler that raises the <see cref="E:System.Windows.Forms.Control.Click" />
 
           
 
-           event when the <see
-           cref="T:System.Windows.Forms.ToolStripMenuItem" />
+           event when the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
           
 
@@ -448,8 +417,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the default spacing, in pixels, between the sizing grip and the edges of the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets the default spacing, in pixels, between the sizing grip and the edges of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -476,8 +444,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.MenuStrip.DefaultPadding" />
+            >Use the <see cref="P:System.Windows.Forms.MenuStrip.DefaultPadding" />
 
             
 
@@ -487,8 +454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the spacing, in pixels, between the left, right, top, and bottom edges of the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets the spacing, in pixels, between the left, right, top, and bottom edges of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -515,8 +481,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.MenuStrip.DefaultShowItemToolTips" />
+            >The <see cref="P:System.Windows.Forms.MenuStrip.DefaultShowItemToolTips" />
 
             
 
@@ -526,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether ToolTips are shown for the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -555,8 +519,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the horizontal and vertical dimensions, in pixels, of the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets the horizontal and vertical dimensions, in pixels, of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -623,31 +586,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Windows.Forms.MenuStrip.MdiWindowListItem" />
+            >Use the <see cref="P:System.Windows.Forms.MenuStrip.MdiWindowListItem" />
 
             
 
-             property to designate or discover which <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+             property to designate or discover which <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
              displays MDI children.</para
           >
           <para
-            >Use the <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
+            >Use the <see cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
+             and <see cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
 
             
 
-             events on child menus to reflect changes to the value of <see
-             cref="P:System.Windows.Forms.MenuStrip.MdiWindowListItem" />
+             events on child menus to reflect changes to the value of <see cref="P:System.Windows.Forms.MenuStrip.MdiWindowListItem" />
 
             
 
@@ -657,8 +615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Windows.Forms.ToolStripMenuItem" />
+            >Gets or sets the <see cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
             
 
@@ -678,66 +635,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When activated by the ALT key, the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >When activated by the ALT key, the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             or <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             typically neither take nor remove the focus from the control that currently has the focus. If there is a control hosted within the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             typically neither take nor remove the focus from the control that currently has the focus. If there is a control hosted within the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             or a drop-down of the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             or a drop-down of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , the control gains focus when the user presses the TAB key. In general, the <see
-             cref="E:System.Windows.Forms.Control.GotFocus" />
+            , the control gains focus when the user presses the TAB key. In general, the <see cref="E:System.Windows.Forms.Control.GotFocus" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.LostFocus" />
+            , <see cref="E:System.Windows.Forms.Control.LostFocus" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+            , <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-            , and <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+            , and <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             events of <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             events of <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             might not be raised when they are activated by the keyboard. In such cases, use the <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
+             might not be raised when they are activated by the keyboard. In such cases, use the <see cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
+             and <see cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
 
             
 
              events instead.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -766,66 +711,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When activated by the ALT key, the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >When activated by the ALT key, the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+             or <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 
-             typically neither take nor remove the focus from the control that currently has the focus. If there is a control hosted within the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             typically neither take nor remove the focus from the control that currently has the focus. If there is a control hosted within the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             or a drop-down of the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             or a drop-down of the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-            , the control gains focus when the user presses the TAB key. In general, the <see
-             cref="E:System.Windows.Forms.Control.GotFocus" />
+            , the control gains focus when the user presses the TAB key. In general, the <see cref="E:System.Windows.Forms.Control.GotFocus" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.LostFocus" />
+            , <see cref="E:System.Windows.Forms.Control.LostFocus" />
 
             
 
-            , <see
-             cref="E:System.Windows.Forms.Control.Enter" />
+            , <see cref="E:System.Windows.Forms.Control.Enter" />
 
             
 
-            , and <see
-             cref="E:System.Windows.Forms.Control.Leave" />
+            , and <see cref="E:System.Windows.Forms.Control.Leave" />
 
             
 
-             events of <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+             events of <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
-             might not be raised when they are activated by the keyboard. In such cases, use the <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
+             might not be raised when they are activated by the keyboard. In such cases, use the <see cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
+             and <see cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
 
             
 
              events instead.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -837,8 +770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Occurs when the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -864,8 +796,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -874,8 +805,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.MenuStrip.OnMenuActivate(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.MenuStrip.OnMenuActivate(System.EventArgs)" />
 
             
 
@@ -885,8 +815,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
+            >Raises the <see cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
 
             
 
@@ -894,12 +823,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -927,8 +859,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -937,8 +868,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Windows.Forms.MenuStrip.OnMenuDeactivate(System.EventArgs)" />
+            >The <see cref="M:System.Windows.Forms.MenuStrip.OnMenuDeactivate(System.EventArgs)" />
 
             
 
@@ -948,8 +878,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
+            >Raises the <see cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
 
             
 
@@ -957,12 +886,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1015,8 +947,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.MenuStrip.ShowItemToolTips" />
+            >The <see cref="P:System.Windows.Forms.MenuStrip.ShowItemToolTips" />
 
             
 
@@ -1026,8 +957,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether ToolTips are shown for the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets or sets a value indicating whether ToolTips are shown for the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 
@@ -1057,8 +987,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Windows.Forms.MenuStrip" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Windows.Forms.MenuStrip" />
 
             
 

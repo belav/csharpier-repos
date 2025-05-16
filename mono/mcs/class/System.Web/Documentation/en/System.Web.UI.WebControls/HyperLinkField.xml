@@ -17,56 +17,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+        >The <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         class is used by data-bound controls (such as <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         class is used by data-bound controls (such as <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         and <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-        ) to display a hyperlink for each record displayed. When the user clicks a hyperlink, he or she is directed to the Web page associated with the hyperlink. The <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+        ) to display a hyperlink for each record displayed. When the user clicks a hyperlink, he or she is directed to the Web page associated with the hyperlink. The <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object is displayed differently depending on the data-bound control in which it is used. For example, the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         object is displayed differently depending on the data-bound control in which it is used. For example, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control displays a <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+         control displays a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object as a column, while the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         object as a column, while the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
          control displays it as a row.</para
       >
       <para
-        >To specify the caption to display for the hyperlinks, use the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
+        >To specify the caption to display for the hyperlinks, use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
 
         
 
-         property. Use the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
+         property. Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
 
         
 
-         property to specify the URL to navigate to when a hyperlink is clicked. If you want to display the linked content in a specific window or frame, set the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
+         property to specify the URL to navigate to when a hyperlink is clicked. If you want to display the linked content in a specific window or frame, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
 
         
 
@@ -74,23 +64,19 @@
       >
       <block subset="none" type="note">
         <para
-          >When the <see
-           cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
+          >When the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
 
           
 
-           and <see
-           cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
+           and <see cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
 
           
 
-           properties are set, all hyperlinks in the <see
-           cref="T:System.Web.UI.WebControls.HyperLinkField" />
+           properties are set, all hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
           
 
-           object share the same caption and navigation URL. Likewise, the <see
-           cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
+           object share the same caption and navigation URL. Likewise, the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
 
           
 
@@ -98,82 +84,68 @@
         >
       </block>
       <para
-        >Alternatively, you can bind the <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+        >Alternatively, you can bind the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object to fields in a data source. This allows you to display a different caption for each hyperlink in the <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+         object to fields in a data source. This allows you to display a different caption for each hyperlink in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object and to have each hyperlink navigate to a different location. To bind a field to a caption, set the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+         object and to have each hyperlink navigate to a different location. To bind a field to a caption, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
         
 
-         property. To create a URL for navigation, set the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+         property. To create a URL for navigation, set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
         
 
          property to a comma-separated list of fields to use to create the URL. </para
       >
       <para
-        >You can specify a custom format for the captions and navigation URLs by setting the <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
+        >You can specify a custom format for the captions and navigation URLs by setting the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
+         and <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
 
         
 
          properties, respectively.</para
       >
       <para
-        >You can hide a <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+        >You can hide a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object in a data-bound control by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+         object in a data-bound control by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
 
         
 
          property to false.</para
       >
       <para
-        >You can customize the header and footer sections of a <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+        >You can customize the header and footer sections of a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object. To display a caption in the header or footer sections, set the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+         object. To display a caption in the header or footer sections, set the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
 
         
 
-         or <see
-         cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
+         or <see cref="P:System.Web.UI.WebControls.DataControlField.FooterText" />
 
         
 
-         properties, respectively. To display an image in the header section instead of text, set the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+         properties, respectively. To display an image in the header section instead of text, set the <see cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
 
         
 
-         property. The header section can be hidden in the <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+         property. The header section can be hidden in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
-         object by setting the <see
-         cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+         object by setting the <see cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
 
         
 
@@ -181,13 +153,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Some data-bound controls (such as the <see
-           cref="T:System.Web.UI.WebControls.GridView" />
+          >Some data-bound controls (such as the <see cref="T:System.Web.UI.WebControls.GridView" />
 
           
 
-           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
-           cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+           control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
 
           
 
@@ -195,8 +165,7 @@
         >
       </block>
       <para
-        >You also can customize the appearance of the <see
-         cref="T:System.Web.UI.WebControls.HyperLinkField" />
+        >You also can customize the appearance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
         
 
@@ -221,8 +190,7 @@
           </term>
           <description>
             <para
-              >The style settings for the child Web server controls of the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkField" />
+              >The style settings for the child Web server controls of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
               
 
@@ -238,8 +206,7 @@
           </term>
           <description>
             <para
-              >The style settings for the footer section of the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkField" />
+              >The style settings for the footer section of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
               
 
@@ -255,8 +222,7 @@
           </term>
           <description>
             <para
-              >The style settings for the header section of the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkField" />
+              >The style settings for the header section of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
               
 
@@ -272,8 +238,7 @@
           </term>
           <description>
             <para
-              >The style settings for the data items in the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkField" />
+              >The style settings for the data items in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
               
 
@@ -298,36 +263,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
-            >To dynamically add a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >To dynamically add a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object to a data-bound control, create a new <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             object to a data-bound control, create a new <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control, add the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             control, add the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object to the <see
-             cref="P:System.Web.UI.WebControls.GridView.Columns" />
+             object to the <see cref="P:System.Web.UI.WebControls.GridView.Columns" />
 
             
 
@@ -340,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -370,18 +328,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HyperLinkField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is called by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to copy the properties of the current <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             method to copy the properties of the current <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -391,8 +346,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the properties of the current <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Copies the properties of the current <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -400,12 +354,15 @@
           >
         </summary>
         <param name="newField">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.DataControlField" />
+          The <see cref="T:System.Web.UI.WebControls.DataControlField" />
 
           
 
@@ -431,18 +388,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HyperLinkField.CreateField" />
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.CreateField" />
 
             
 
-             method is called by the <see
-             cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+             method is called by the <see cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
             
 
-             method to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             method to create a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -452,8 +406,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Returns a new instance of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -463,8 +416,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >A new instance of <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -502,28 +454,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
             
 
-             property when the data source contains multiple fields that must be combined to create the hyperlinks for the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property when the data source contains multiple fields that must be combined to create the hyperlinks for the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object. The fields specified in the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+             object. The fields specified in the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
             
 
-             property are combined with the format string in the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
+             property are combined with the format string in the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
 
             
 
-             property to construct the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property to construct the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -531,8 +478,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When you set the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+              >When you set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
               
 
@@ -540,8 +486,7 @@
             >
           </block>
           <para
-            >Instead of using this property to bind the URLs of the hyperlinks to a field, you can use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
+            >Instead of using this property to bind the URLs of the hyperlinks to a field, you can use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
 
             
 
@@ -549,18 +494,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+              >If the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
               
 
-               and the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
+               and the <see cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
 
               
 
-               properties are both set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+               properties are both set, the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
               
 
@@ -571,8 +513,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the names of the fields from the data source used to construct the URLs for the hyperlinks in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Gets or sets the names of the fields from the data source used to construct the URLs for the hyperlinks in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -604,18 +545,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
 
             
 
-             property to specify a custom format for the URLs of the hyperlinks in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property to specify a custom format for the URLs of the hyperlinks in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object. If the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
+             object. If the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
 
             
 
@@ -623,8 +561,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The format string is applied only when the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+              >The format string is applied only when the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
               
 
@@ -632,8 +569,7 @@
             >
           </block>
           <para
-            >The format string can be any literal string and usually includes a placeholder for the field's value. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the field's value in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >The format string can be any literal string and usually includes a placeholder for the field's value. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the field's value in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -643,18 +579,15 @@
             <para>If the format string does not include a placeholder, the field's value from the data source is not included in the final display text.</para>
           </block>
           <para
-            >The placeholder consists of two parts, separated by a colon and wrapped in braces, in the form {<paramref
-             name="A" />
+            >The placeholder consists of two parts, separated by a colon and wrapped in braces, in the form {<paramref name="A" />
 
             
 
-            :<paramref
-             name="Bxx" />
+            :<paramref name="Bxx" />
 
             
 
-            }. The value before the colon (<paramref
-             name="A" />
+            }. The value before the colon (<paramref name="A" />
 
             
 
@@ -664,8 +597,7 @@
             <para>This parameter is part of the formatting syntax. Because there is only one field value in each cell, this value can only be set to 0.</para>
           </block>
           <para
-            >The colon and the values after the colon are optional. The character after the colon (<paramref
-             name="B" />
+            >The colon and the values after the colon are optional. The character after the colon (<paramref name="B" />
 
             
 
@@ -743,16 +675,14 @@
             <para>The format characters are not case-sensitive, except for X, which displays the hexadecimal characters in the case specified.</para>
           </block>
           <para
-            >The value after the format character (<paramref
-             name="xx" />
+            >The value after the format character (<paramref name="xx" />
 
             
 
              in the general example) specifies the number of significant digits or decimal places to display. For example, the format string "{0:F2}" displays a fixed-point number with two decimal places.</para
           >
           <para
-            >For more information on formatting strings, see <format
-             type="text/html">
+            >For more information on formatting strings, see <format type="text/html">
               <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Overview</a>
             </format>
 
@@ -764,8 +694,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the string that specifies the format in which the URLs for the hyperlinks in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Gets or sets the string that specifies the format in which the URLs for the hyperlinks in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -797,21 +726,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
             
 
-             property to specify the name of the field that contains the text to display for the hyperlink captions in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property to specify the name of the field that contains the text to display for the hyperlink captions in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
              object.</para
           >
           <para
-            >Instead of using this property to bind the hyperlink captions to a field, you can use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
+            >Instead of using this property to bind the hyperlink captions to a field, you can use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
 
             
 
@@ -819,18 +745,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+              >If the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
 
               
 
-               properties are both set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+               properties are both set, the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
               
 
@@ -841,8 +764,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the field from the data source containing the text to display for the hyperlink captions in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Gets or sets the name of the field from the data source containing the text to display for the hyperlink captions in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -874,18 +796,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
 
             
 
-             property to specify a custom display format for the captions displayed in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property to specify a custom display format for the captions displayed in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object. If the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
+             object. If the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
 
             
 
@@ -893,8 +812,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The format string is applied only when the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+              >The format string is applied only when the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
               
 
@@ -902,8 +820,7 @@
             >
           </block>
           <para
-            >The format string can be any literal string and usually includes a placeholder for the field's value. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the field's value when it is displayed in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >The format string can be any literal string and usually includes a placeholder for the field's value. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the field's value when it is displayed in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -913,18 +830,15 @@
             <para>If the format string does not include a placeholder, the field's value from the data source is not included in the final display text.</para>
           </block>
           <para
-            >The placeholder consists of two parts, separated by a colon and wrapped in braces, in the form {<paramref
-             name="A" />
+            >The placeholder consists of two parts, separated by a colon and wrapped in braces, in the form {<paramref name="A" />
 
             
 
-            :<paramref
-             name="Bxx" />
+            :<paramref name="Bxx" />
 
             
 
-            }. The value before the colon (<paramref
-             name="A" />
+            }. The value before the colon (<paramref name="A" />
 
             
 
@@ -934,8 +848,7 @@
             <para>This parameter is part of the formatting syntax. Because there is only one field value in each cell, this value can only be set to 0.</para>
           </block>
           <para
-            >The colon and the values after the colon are optional. The character after the colon (<paramref
-             name="B" />
+            >The colon and the values after the colon are optional. The character after the colon (<paramref name="B" />
 
             
 
@@ -1013,16 +926,14 @@
             <para>The format characters are not case-sensitive, except for X, which displays the hexadecimal characters in the case specified.</para>
           </block>
           <para
-            >The value after the format character (<paramref
-             name="xx" />
+            >The value after the format character (<paramref name="xx" />
 
             
 
              in the general example) specifies the number of significant digits or decimal places to display. For example, the format string "{0:F2}" displays a fixed-point number with two decimal places.</para
           >
           <para
-            >For more information on formatting strings, see <format
-             type="text/html">
+            >For more information on formatting strings, see <format type="text/html">
               <a href="0D1364DA-5B30-4D42-8E6B-03378343343F">Formatting Overview</a>
             </format>
 
@@ -1034,8 +945,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Get or sets the string that specifies the format in which the hyperlink captions in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Get or sets the string that specifies the format in which the hyperlink captions in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1064,18 +974,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HyperLinkField.FormatDataNavigateUrlValue(System.Object[])" />
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.FormatDataNavigateUrlValue(System.Object[])" />
 
             
 
-             method is a helper method used to format the URL of a hyperlink in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             method is a helper method used to format the URL of a hyperlink in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object with the format string specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
+             object with the format string specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
 
             
 
@@ -1085,8 +992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formats the navigation URL using the format string specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
+            >Formats the navigation URL using the format string specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFormatString" />
 
             
 
@@ -1098,7 +1004,11 @@
           <para>The formatted URL value.</para>
         </returns>
         <param name="dataUrlValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1126,18 +1036,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HyperLinkField.FormatDataTextValue(System.Object)" />
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.FormatDataTextValue(System.Object)" />
 
             
 
-             method is a helper method used to format the caption text of a hyperlink in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             method is a helper method used to format the caption text of a hyperlink in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object with the format string specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
+             object with the format string specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
 
             
 
@@ -1150,8 +1057,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Formats the caption text using the format string specified by the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
+            >Formats the caption text using the format string specified by the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextFormatString" />
 
             
 
@@ -1163,7 +1069,11 @@
           <para>The formatted text value.</para>
         </returns>
         <param name="dataTextValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1194,8 +1104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Initializes the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1207,12 +1116,15 @@
           <para>Always returns false.</para>
         </returns>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The data control that acts as the parent for the <see
-           cref="T:System.Web.UI.WebControls.HyperLinkField" />
+          The data control that acts as the parent for the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
           
 
@@ -1243,18 +1155,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HyperLinkField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
 
             
 
-             method is called by the data-bound control that contains the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             method is called by the data-bound control that contains the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
-             object to initialize a <see
-             cref="T:System.Web.UI.WebControls.HyperLink" />
+             object to initialize a <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
             
 
@@ -1264,8 +1173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a cell in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Initializes a cell in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1273,53 +1181,64 @@
           >
         </summary>
         <param name="cell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+          A <see cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
           
 
-           that contains the text or controls of the <see
-           cref="T:System.Web.UI.WebControls.HyperLinkField" />
+           that contains the text or controls of the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
           
 
           .</param
         >
         <param name="cellType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlCellType" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlCellType" />
 
           
 
            values.</param
         >
         <param name="rowState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.DataControlRowState" />
+          One of the <see cref="T:System.Web.UI.WebControls.DataControlRowState" />
 
           
 
-           values that specifies the state of the row containing the <see
-           cref="T:System.Web.UI.WebControls.HyperLinkField" />
+           values that specifies the state of the row containing the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
           
 
           .</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1353,21 +1272,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
 
             
 
-             property to specify the URL to navigate to when a hyperlink in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property to specify the URL to navigate to when a hyperlink in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
              object is clicked. When this property is set, each hyperlink shares the same navigation URL.</para
           >
           <para
-            >Instead of using this property to set the URL for the hyperlinks, you can use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+            >Instead of using this property to set the URL for the hyperlinks, you can use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
             
 
@@ -1375,18 +1291,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+              >If the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkField.NavigateUrl" />
 
               
 
-               properties are both set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
+               properties are both set, the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataNavigateUrlFields" />
 
               
 
@@ -1397,8 +1310,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URL to navigate to when a hyperlink in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Gets or sets the URL to navigate to when a hyperlink in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1430,8 +1342,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
 
             
 
@@ -1495,23 +1406,19 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
+              >The <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
 
               
 
-               property is rendered as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
+               property is rendered as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
 
               
 
-               property if the rendered output for the <see
-               cref="T:System.Web.UI.WebControls.HyperLinkField" />
+               property if the rendered output for the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
               
 
-               object must be XHTML 1.1-compliant. For more information, refer to the topic <format
-               type="text/html">
+               object must be XHTML 1.1-compliant. For more information, refer to the topic <format type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
 
@@ -1520,13 +1427,11 @@
               . </para
             >
             <para
-              >When creating accessible Web pages, it is strongly recommended you avoid using the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
+              >When creating accessible Web pages, it is strongly recommended you avoid using the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Target" />
 
               
 
-               property to target another window. For more information, see <format
-               type="text/html">
+               property to target another window. For more information, see <format type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
 
@@ -1539,8 +1444,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the target window or frame in which to display the Web page linked to when a hyperlink in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Gets or sets the target window or frame in which to display the Web page linked to when a hyperlink in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1572,21 +1476,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
+            >Use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
 
             
 
-             property to specify the caption to display for the hyperlinks in a <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             property to specify the caption to display for the hyperlinks in a <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
              object. When this property is set, each hyperlink shares the same caption.</para
           >
           <para
-            >Instead of using this property to set the hyperlink captions, you can use the <see
-             cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+            >Instead of using this property to set the hyperlink captions, you can use the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
             
 
@@ -1594,18 +1495,15 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+              >If the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
               
 
-               and <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
+               and <see cref="P:System.Web.UI.WebControls.HyperLinkField.Text" />
 
               
 
-               properties are both set, the <see
-               cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
+               properties are both set, the <see cref="P:System.Web.UI.WebControls.HyperLinkField.DataTextField" />
 
               
 
@@ -1613,13 +1511,11 @@
             >
           </block>
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -1633,8 +1529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text to display for each hyperlink in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Gets or sets the text to display for each hyperlink in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1658,18 +1553,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.HyperLinkField.ValidateSupportsCallback" />
+            >The <see cref="M:System.Web.UI.WebControls.HyperLinkField.ValidateSupportsCallback" />
 
             
 
-             method overrides the default <see
-             cref="M:System.Web.UI.WebControls.DataControlField.ValidateSupportsCallback" />
+             method overrides the default <see cref="M:System.Web.UI.WebControls.DataControlField.ValidateSupportsCallback" />
 
             
 
-             method to indicate that controls contained in the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+             method to indicate that controls contained in the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 
@@ -1679,8 +1571,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that the controls contained by the <see
-             cref="T:System.Web.UI.WebControls.HyperLinkField" />
+            >Indicates that the controls contained by the <see cref="T:System.Web.UI.WebControls.HyperLinkField" />
 
             
 

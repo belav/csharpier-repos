@@ -20,28 +20,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+        >Use the <see cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
 
         
 
-         object passed to the <see
-         cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
+         object passed to the <see cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
 
         
 
-         method to modify the code document object model prior to the generation of code. Typically, the <see
-         cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
+         method to modify the code document object model prior to the generation of code. Typically, the <see cref="T:System.ServiceModel.Description.IOperationContractGenerationExtension" />
 
         
 
-         interface is implemented on a custom <see
-         cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+         interface is implemented on a custom <see cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
         
 
-         implementation that is used to import custom WSDL elements or otherwise modify the code at the service or operation level. To modify the code at the service level, see <see
-         cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
+         implementation that is used to import custom WSDL elements or otherwise modify the code at the service or operation level. To modify the code at the service level, see <see cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
 
         
 
@@ -51,8 +46,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Passed to the <see
-         cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
+        >Passed to the <see cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
 
         
 
@@ -92,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
 
             
 
@@ -101,35 +94,55 @@
           >
         </summary>
         <param name="serviceContractGenerator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service contract generator that generates the code.</param
         >
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract and its generation context.</param
         >
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The operation description for the operation to be generated.</param
         >
         <param name="declaringType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The declaring code type.</param
         >
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -171,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.OperationContractGenerationContext" />
 
             
 
@@ -180,42 +192,66 @@
           >
         </summary>
         <param name="serviceContractGenerator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service contract generator that generates the code.</param
         >
         <param name="contract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The contract and its generation context.</param
         >
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The operation description for the operation to be generated.</param
         >
         <param name="declaringType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The declaring code type.</param
         >
         <param name="beginMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The asynchronous begin method.</param
         >
         <param name="endMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -244,8 +280,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.BeginMethod" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.BeginMethod" />
 
             
 
@@ -255,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >Gets the <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 
@@ -286,8 +320,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.Contract" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.Contract" />
 
             
 
@@ -321,8 +354,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.DeclaringType" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.DeclaringType" />
 
             
 
@@ -356,8 +388,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.EndMethod" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.EndMethod" />
 
             
 
@@ -410,8 +441,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.Operation" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.Operation" />
 
             
 
@@ -421,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Description.OperationDescription" />
+            >Gets the <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
             
 
@@ -452,8 +481,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.ServiceContractGenerator" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.ServiceContractGenerator" />
 
             
 
@@ -463,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+            >Gets the <see cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
 
             
 
@@ -494,8 +521,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationContractGenerationContext.SyncMethod" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationContractGenerationContext.SyncMethod" />
 
             
 
@@ -505,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.CodeDom.CodeMemberMethod" />
+            >Gets the <see cref="T:System.CodeDom.CodeMemberMethod" />
 
             
 

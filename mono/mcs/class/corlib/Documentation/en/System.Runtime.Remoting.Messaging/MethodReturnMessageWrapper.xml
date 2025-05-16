@@ -37,31 +37,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
         
 
-         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
         
 
-         class directly; instead, use the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+         class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
         
 
          interface.</para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
         
 
-         class wraps remoting data for passing between message sinks. A remoting server sends a <see
-         cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+         class wraps remoting data for passing between message sinks. A remoting server sends a <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
         
 
@@ -71,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see
-         cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+        >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
         
 
@@ -104,18 +98,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
             
 
-             class directly; instead, use the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+             class directly; instead, use the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
@@ -125,13 +116,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Wraps an <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+            >Wraps an <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
-             to create a <see
-             cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+             to create a <see cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
 
             
 
@@ -139,7 +128,11 @@
           >
         </summary>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -254,7 +247,11 @@
           <para>The method argument as an object.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -294,7 +291,11 @@
           <para>The name of the method argument.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -334,7 +335,11 @@
           <para>The specified argument marked as a ref parameter or an out parameter.</para>
         </returns>
         <param name="argNum">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,7 +379,11 @@
           <para>The argument name, or null if the current method is not implemented.</para>
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -433,8 +442,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+            >Gets the <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
             
 
@@ -470,8 +478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Reflection.MethodBase" />
+            >Gets the <see cref="T:System.Reflection.MethodBase" />
 
             
 
@@ -603,8 +610,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 

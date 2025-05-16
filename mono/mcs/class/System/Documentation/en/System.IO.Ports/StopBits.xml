@@ -18,36 +18,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You use this enumeration when setting the value of the <see
-         cref="P:System.IO.Ports.SerialPort.StopBits" />
+        >You use this enumeration when setting the value of the <see cref="P:System.IO.Ports.SerialPort.StopBits" />
 
         
 
-         property on the <see
-         cref="T:System.IO.Ports.SerialPort" />
+         property on the <see cref="T:System.IO.Ports.SerialPort" />
 
         
 
          class. Stop bits separate each unit of data on an asynchronous serial connection. They are also sent continuously when no data is available for transmission.</para
       >
       <para
-        >The <see
-         cref="T:System.IO.Ports.SerialPort" />
+        >The <see cref="T:System.IO.Ports.SerialPort" />
 
         
 
-         class throws an <see
-         cref="T:System.ArgumentOutOfRangeException" />
+         class throws an <see cref="T:System.ArgumentOutOfRangeException" />
 
         
 
-         exception when you set the <see
-         cref="P:System.IO.Ports.SerialPort.StopBits" />
+         exception when you set the <see cref="P:System.IO.Ports.SerialPort.StopBits" />
 
         
 
-         property to <see
-         cref="F:System.IO.Ports.StopBits.None" />
+         property to <see cref="F:System.IO.Ports.StopBits.None" />
 
         
 
@@ -57,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the number of stop bits used on the <see
-         cref="T:System.IO.Ports.SerialPort" />
+        >Specifies the number of stop bits used on the <see cref="T:System.IO.Ports.SerialPort" />
 
         
 
@@ -86,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >No stop bits are used. This value is not supported by the <see
-             cref="P:System.IO.Ports.SerialPort.StopBits" />
+            >No stop bits are used. This value is not supported by the <see cref="P:System.IO.Ports.SerialPort.StopBits" />
 
             
 

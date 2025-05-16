@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+        >The <see cref="T:System.Web.UI.IDReferencePropertyAttribute" />
 
         
 
-         class is applied to properties that contain ID references. <see
-         cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+         class is applied to properties that contain ID references. <see cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
 
         
 
@@ -45,13 +43,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call this constructor, the <see
-             cref="P:System.Web.UI.IDReferencePropertyAttribute.ReferencedControlType" />
+            >When you call this constructor, the <see cref="P:System.Web.UI.IDReferencePropertyAttribute.ReferencedControlType" />
 
             
 
-             property is set to <see
-             cref="T:System.Web.UI.Control" />
+             property is set to <see cref="T:System.Web.UI.Control" />
 
             
 
@@ -61,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.IDReferencePropertyAttribute" />
 
             
 
@@ -90,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.IDReferencePropertyAttribute" />
 
             
 
@@ -153,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the controls allowed by the property to which the <see
-             cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+            >Gets the type of the controls allowed by the property to which the <see cref="T:System.Web.UI.IDReferencePropertyAttribute" />
 
             
 

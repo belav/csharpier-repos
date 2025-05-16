@@ -17,13 +17,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
+        >The <see cref="T:System.Runtime.Remoting.Channels.ISecurableChannel" />
 
         
 
-         contains one property, <see
-         cref="P:System.Runtime.Remoting.Channels.ISecurableChannel.IsSecured" />
+         contains one property, <see cref="P:System.Runtime.Remoting.Channels.ISecurableChannel.IsSecured" />
 
         
 

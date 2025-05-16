@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To add a security upgrade, you implement a class that derives from <see
-         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+        >To add a security upgrade, you implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
 
         
 
@@ -34,8 +33,7 @@
       <list type="ordered">
         <item>
           <para
-            >Implement a class that derives from <see
-             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+            >Implement a class that derives from <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
 
             
 
@@ -47,8 +45,7 @@
         </item>
         <item>
           <para
-            >The derived class that you implement creates an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />
+            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />
 
             
 
@@ -57,8 +54,7 @@
         </item>
         <item>
           <para
-            >The derived class that you implement creates an instance of <see
-             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />
+            >The derived class that you implement creates an instance of <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />
 
             
 
@@ -67,8 +63,7 @@
         </item>
       </list>
       <para
-        >The security upgrade request can be one of many similar requests. If so, the requests are processed in a definite order. For more information, see <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+        >The security upgrade request can be one of many similar requests. If so, the requests are processed in a definite order. For more information, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
         
 
@@ -97,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
 
             
 
@@ -132,8 +126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
 
             
 

@@ -11,18 +11,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.IControlBuilderAccessor" />
+        >The <see cref="T:System.Web.UI.IControlBuilderAccessor" />
 
         
 
-         interface defines the property a control must implement to allow a control serializer to access the control's builder. <see
-         cref="T:System.Web.UI.Control" />
+         interface defines the property a control must implement to allow a control serializer to access the control's builder. <see cref="T:System.Web.UI.Control" />
 
         
 
-         implements this interface, so all controls deriving from <see
-         cref="T:System.Web.UI.Control" />
+         implements this interface, so all controls deriving from <see cref="T:System.Web.UI.Control" />
 
         
 
@@ -50,13 +47,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.IControlBuilderAccessor.ControlBuilder" />
+            >The <see cref="P:System.Web.UI.IControlBuilderAccessor.ControlBuilder" />
 
             
 
-             property allows a control serializer to access the builder that built the control that implements <see
-             cref="T:System.Web.UI.IControlBuilderAccessor" />
+             property allows a control serializer to access the builder that built the control that implements <see cref="T:System.Web.UI.IControlBuilderAccessor" />
 
             
 

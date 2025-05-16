@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Holds the value, <see
-         cref="T:System.Type" />
+        >Holds the value, <see cref="T:System.Type" />
 
         
 
@@ -75,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the serialized object is null, this property returns the <see
-             cref="T:System.Object" />
+            >If the serialized object is null, this property returns the <see cref="T:System.Object" />
 
             
 
@@ -86,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 

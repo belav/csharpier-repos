@@ -36,8 +36,7 @@
     <remarks>
       <para>
         <block subset="none" type="note"
-          >This class provides the loaded assembly via the <see
-           cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" />
+          >This class provides the loaded assembly via the <see cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" />
 
           
 
@@ -49,8 +48,7 @@ property.</block
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.AppDomain.AssemblyLoad" />
+        >Provides data for the <see cref="E:System.AppDomain.AssemblyLoad" />
 
         
 
@@ -85,14 +83,12 @@ property.</block
       <Docs>
         <remarks>
           <para
-            >The <see
-             cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" />
+            >The <see cref="P:System.AssemblyLoadEventArgs.LoadedAssembly" />
 
             
 
              property is initialized using 
-<paramref
-             name="loadedAssembly" />
+<paramref name="loadedAssembly" />
 
             
 
@@ -102,13 +98,11 @@ property.</block
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.AssemblyLoadEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.AssemblyLoadEventArgs" />
 
             
 
-             class using the specified <see
-             cref="T:System.Reflection.Assembly" />
+             class using the specified <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -116,7 +110,11 @@ property.</block
           >
         </summary>
         <param name="loadedAssembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +149,7 @@ property.</block
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Reflection.Assembly" />
+            > A <see cref="T:System.Reflection.Assembly" />
 
             
 
@@ -163,8 +160,7 @@ representing the assembly that has been loaded.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of this property is set by the common language runtime when the <see
-             cref="E:System.AppDomain.AssemblyLoad" />
+            >The value of this property is set by the common language runtime when the <see cref="E:System.AppDomain.AssemblyLoad" />
 
             
 
@@ -174,8 +170,7 @@ representing the assembly that has been loaded.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Reflection.Assembly" />
+            >Gets an <see cref="T:System.Reflection.Assembly" />
 
             
 

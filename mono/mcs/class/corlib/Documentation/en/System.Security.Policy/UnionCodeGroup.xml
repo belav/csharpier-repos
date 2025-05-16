@@ -42,8 +42,7 @@
 
         
 
-         code groups are the code groups created by the CASPOL utility (see <format
-         type="text/html">
+         code groups are the code groups created by the CASPOL utility (see <format type="text/html">
           <a href="D2BF6123-7B0C-4E60-87AD-A39A1C3EB2E0"
             >[&lt;topic://cpgrfcodeaccesssecuritypolicyutilitycaspolexe&gt;]</a
           >
@@ -84,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a basic code group and should be called from the constructors of custom code groups. You can add child code groups by using the <see
-             cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
+            >This constructor creates a basic code group and should be called from the constructors of custom code groups. You can add child code groups by using the <see cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
 
             
 
@@ -95,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.UnionCodeGroup" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.UnionCodeGroup" />
 
             
 
@@ -104,14 +101,22 @@
           >
         </summary>
         <param name="membershipCondition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A membership condition that tests evidence to determine whether this code group applies policy. </param
         >
         <param name="policy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -200,16 +205,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Given evidence for an assembly to be loaded, this method evaluates the code group by first checking the membership condition against the specified evidence. If there is a match, this method returns a policy statement for the code group, including evaluation of child code groups.</para>
           <para
-            >For union code groups, all child code groups whose membership condition match the evidence are also resolved, and all resulting policy statements form a union with the policy statement of the parent union code group. Each child code group type determines how its child groups are applied, depending on how their respective <see
-             cref="M:System.Security.Policy.UnionCodeGroup.Resolve(System.Security.Policy.Evidence)" />
+            >For union code groups, all child code groups whose membership condition match the evidence are also resolved, and all resulting policy statements form a union with the policy statement of the parent union code group. Each child code group type determines how its child groups are applied, depending on how their respective <see cref="M:System.Security.Policy.UnionCodeGroup.Resolve(System.Security.Policy.Evidence)" />
 
             
 
              methods work.</para
           >
           <para
-            >The .NET Framework security system uses <see
-             cref="M:System.Security.Policy.UnionCodeGroup.Resolve(System.Security.Policy.Evidence)" />
+            >The .NET Framework security system uses <see cref="M:System.Security.Policy.UnionCodeGroup.Resolve(System.Security.Policy.Evidence)" />
 
             
 
@@ -226,7 +229,11 @@
           <para>A policy statement consisting of the permissions granted by the code group with optional attributes, or null if the code group does not apply (the membership condition does not match the specified evidence).</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,7 +276,11 @@
           <para>The complete set of code groups that were matched by the evidence.</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

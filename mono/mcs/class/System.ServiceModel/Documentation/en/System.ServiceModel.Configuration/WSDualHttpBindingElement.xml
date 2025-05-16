@@ -47,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" />
 
             
 
@@ -213,21 +212,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the messages that can be received on the wire by services using the <see
-             cref="T:System.ServiceModel.WsDualHttpBinding" />
+            >The size of the messages that can be received on the wire by services using the <see cref="T:System.ServiceModel.WsDualHttpBinding" />
 
             
 
              class is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DoS-style attacks. </para
           >
           <para
-            >Note that the settings for <see
-             cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxBufferPoolSize" />
+            >Note that the settings for <see cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxBufferPoolSize" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxReceivedMessageSize" />
+             and <see cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxReceivedMessageSize" />
 
             
 
@@ -296,7 +292,11 @@
           <para>Called when the content of a specified binding collection is applied to this binding configuration element.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -326,18 +326,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" />
 
             
 
-             instance that contains a collection of <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+             instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-             objects that can be attributes or <see
-             cref="T:System.Configuration.ConfigurationElement" />
+             objects that can be attributes or <see cref="T:System.Configuration.ConfigurationElement" />
 
             
 
@@ -366,8 +363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" />
+            >If the <see cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" />
 
             
 

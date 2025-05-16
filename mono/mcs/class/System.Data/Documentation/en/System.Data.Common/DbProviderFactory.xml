@@ -27,8 +27,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use one of the DbProviderFactories.GetFactory methods to get an instance of <see
-             cref="T:System.Data.Common.DbProviderFactory" />
+            >Use one of the DbProviderFactories.GetFactory methods to get an instance of <see cref="T:System.Data.Common.DbProviderFactory" />
 
             
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of a <see
-             cref="T:System.Data.Common.DbProviderFactory" />
+            >Initializes a new instance of a <see cref="T:System.Data.Common.DbProviderFactory" />
 
             
 
@@ -67,13 +65,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies whether the specific <see
-             cref="T:System.Data.Common.DbProviderFactory" />
+            >Specifies whether the specific <see cref="T:System.Data.Common.DbProviderFactory" />
 
             
 
-             supports the <see
-             cref="T:System.Data.Common.DbDataSourceEnumerator" />
+             supports the <see cref="T:System.Data.Common.DbDataSourceEnumerator" />
 
             
 
@@ -101,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -112,8 +107,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbCommand" />
+            >A new instance of <see cref="T:System.Data.Common.DbCommand" />
 
             
 
@@ -141,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -152,8 +145,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+            >A new instance of <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -181,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbConnection" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -192,8 +183,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbConnection" />
+            >A new instance of <see cref="T:System.Data.Common.DbConnection" />
 
             
 
@@ -221,8 +211,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -232,8 +221,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbConnectionStringBuilder" />
+            >A new instance of <see cref="T:System.Data.Common.DbConnectionStringBuilder" />
 
             
 
@@ -261,8 +249,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 
@@ -272,8 +259,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbDataAdapter" />
+            >A new instance of <see cref="T:System.Data.Common.DbDataAdapter" />
 
             
 
@@ -301,8 +287,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbDataSourceEnumerator" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbDataSourceEnumerator" />
 
             
 
@@ -312,8 +297,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbDataSourceEnumerator" />
+            >A new instance of <see cref="T:System.Data.Common.DbDataSourceEnumerator" />
 
             
 
@@ -341,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Returns a new instance of the provider's class that implements the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -352,8 +335,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of <see
-             cref="T:System.Data.Common.DbParameter" />
+            >A new instance of <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -383,8 +365,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new instance of the provider's class that implements the provider's version of the <see
-             cref="T:System.Security.CodeAccessPermission" />
+            >Returns a new instance of the provider's class that implements the provider's version of the <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
@@ -394,13 +375,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.CodeAccessPermission" />
+            >A <see cref="T:System.Security.CodeAccessPermission" />
 
             
 
-             object for the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             object for the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -408,12 +387,15 @@
           >
         </returns>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 

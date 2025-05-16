@@ -87,13 +87,11 @@
           <para>Creates either a fully restricted (None) or Unrestricted permission.</para>
           <block subset="none" type="note">
             <para
-              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see
-               cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+              >In the .NET Framework versions 1.0 and 1.1, identity permissions cannot have an <see cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
 
               
 
-               permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
-               cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+               permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see cref="T:System.Security.Permissions.IUnrestrictedPermission" />
 
               
 
@@ -105,13 +103,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             class with the specified <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -119,12 +115,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -156,8 +155,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
@@ -165,7 +163,11 @@
           >
         </summary>
         <param name="zone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -232,7 +234,11 @@
           <para>Reconstructs a permission with a specified state from an XML encoding.</para>
         </summary>
         <param name="esd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -266,8 +272,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The intersection of two permissions is a permission that describes the set of operations they both describe in common. Only a demand that passes both original permissions will pass the intersection.</para>
           <para
-            >The intersection of two identical <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+            >The intersection of two identical <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
@@ -283,7 +288,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -316,8 +325,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current permission is a subset of the specified permission if the two permissions are equal or if the current permission represents the <see
-             cref="F:System.Security.SecurityZone.NoZone" />
+            >The current permission is a subset of the specified permission if the two permissions are equal or if the current permission represents the <see cref="F:System.Security.SecurityZone.NoZone" />
 
             
 
@@ -333,7 +341,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -365,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the zone represented by the current <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+            >Gets or sets the zone represented by the current <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
@@ -453,51 +464,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.ZoneIdentityPermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.ZoneIdentityPermission.Union(System.Security.IPermission)" />
 
             
 
-             is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+             is a permission that represents the security zone represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. The union of two identical <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
-             objects is the same permission. The union of a null permission and a <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+             objects is the same permission. The union of a null permission and a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
              permission is the permission that is not null. </para
           >
           <para
-            >Note that a <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+            >Note that a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
-             object representing a <see
-             cref="F:System.Security.SecurityZone.NoZone" />
+             object representing a <see cref="F:System.Security.SecurityZone.NoZone" />
 
             
 
-             security zone is treated as a null permission and handled as a special case. The union of a <see
-             cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+             security zone is treated as a null permission and handled as a special case. The union of a <see cref="T:System.Security.Permissions.ZoneIdentityPermission" />
 
             
 
-             object representing the <see
-             cref="F:System.Security.SecurityZone.NoZone" />
+             object representing the <see cref="F:System.Security.SecurityZone.NoZone" />
 
             
 
-             security zone and a null permission is null. The union of two different zone identity permissions results in an <see
-             cref="T:System.ArgumentException" />
+             security zone and a null permission is null. The union of two different zone identity permissions results in an <see cref="T:System.ArgumentException" />
 
             
 
-             exception being thrown when neither of the two permissions represents the <see
-             cref="F:System.Security.SecurityZone.NoZone" />
+             exception being thrown when neither of the two permissions represents the <see cref="F:System.Security.SecurityZone.NoZone" />
 
             
 
@@ -513,7 +515,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

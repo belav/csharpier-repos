@@ -29,8 +29,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class allows users to specify a custom format for data transmission, rather than limiting them to the standard format ("name=value&amp;name=value") used in HTTP query strings. For example, a developer could decide to use the following custom format: "/name,value/name,value".</para>
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >
@@ -44,8 +43,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an extensibility element added to an <see
-         cref="T:System.Web.Services.Description.InputBinding" />
+        >Represents an extensibility element added to an <see cref="T:System.Web.Services.Description.InputBinding" />
 
         
 
@@ -64,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.HttpUrlReplacementBinding" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.HttpUrlReplacementBinding" />
 
             
 

@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.IOControlCode" />
+        >The <see cref="T:System.Net.Sockets.IOControlCode" />
 
         
 
-         enumeration provides named values for specifying socket operational modes. These values are the control codes passed to the Windows Sockets 2 (Winsock 2) <unmanagedCodeEntityReference
-        >WSAIoctl</unmanagedCodeEntityReference>
+         enumeration provides named values for specifying socket operational modes. These values are the control codes passed to the Windows Sockets 2 (Winsock 2) <unmanagedCodeEntityReference>WSAIoctl</unmanagedCodeEntityReference>
 
         
 
@@ -33,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the IO control codes supported by the <see
-         cref="M:System.Net.Sockets.Socket.IOControl(System.Int32,System.Byte[],System.Byte[])" />
+        >Specifies the IO control codes supported by the <see cref="M:System.Net.Sockets.Socket.IOControl(System.Int32,System.Byte[],System.Byte[])" />
 
         
 
@@ -145,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sort the structure returned by the <see
-             cref="F:System.Net.Sockets.IOControlCode.AddressListQuery" />
+            >Sort the structure returned by the <see cref="F:System.Net.Sockets.IOControlCode.AddressListQuery" />
 
             
 
@@ -320,8 +316,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Return a SOCKADDR structure that contains the broadcast address for the address family of the current socket. The returned address can be used with the <see
-             cref="Overload:System.Net.Sockets.Socket.SendTo" />
+            >Return a SOCKADDR structure that contains the broadcast address for the address family of the current socket. The returned address can be used with the <see cref="Overload:System.Net.Sockets.Socket.SendTo" />
 
             
 
@@ -600,18 +595,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enable receiving all IPv4 packets on the network. The socket must have address family <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+            >Enable receiving all IPv4 packets on the network. The socket must have address family <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
 
             
 
-            , the socket type must be <see
-             cref="F:System.Net.Sockets.SocketType.Raw" />
+            , the socket type must be <see cref="F:System.Net.Sockets.SocketType.Raw" />
 
             
 
-            , and the protocol type must be <see
-             cref="F:System.Net.Sockets.ProtocolType.IP" />
+            , and the protocol type must be <see cref="F:System.Net.Sockets.ProtocolType.IP" />
 
             
 
@@ -638,18 +630,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enable receiving all Internet Group Management Protocol (IGMP) packets on the network. The socket must have address family <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+            >Enable receiving all Internet Group Management Protocol (IGMP) packets on the network. The socket must have address family <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
 
             
 
-            , the socket type must be <see
-             cref="F:System.Net.Sockets.SocketType.Raw" />
+            , the socket type must be <see cref="F:System.Net.Sockets.SocketType.Raw" />
 
             
 
-            , and the protocol type must be <see
-             cref="F:System.Net.Sockets.ProtocolType.Igmp" />
+            , and the protocol type must be <see cref="F:System.Net.Sockets.ProtocolType.Igmp" />
 
             
 
@@ -676,18 +665,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Enable receiving all multicast IPv4 packets on the network. These are packets with destination addresses in the range 224.0.0.0 through 239.255.255.255. The socket must have address family <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
+            >Enable receiving all multicast IPv4 packets on the network. These are packets with destination addresses in the range 224.0.0.0 through 239.255.255.255. The socket must have address family <see cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
 
             
 
-            , the socket type must be <see
-             cref="F:System.Net.Sockets.SocketType.Raw" />
+            , the socket type must be <see cref="F:System.Net.Sockets.SocketType.Raw" />
 
             
 
-            , and the protocol type must be <see
-             cref="F:System.Net.Sockets.ProtocolType.Udp" />
+            , and the protocol type must be <see cref="F:System.Net.Sockets.ProtocolType.Udp" />
 
             
 

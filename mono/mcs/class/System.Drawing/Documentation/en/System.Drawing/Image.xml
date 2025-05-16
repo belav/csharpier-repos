@@ -45,13 +45,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To draw an <see
-         cref="T:System.Drawing.Image" />
+        >To draw an <see cref="T:System.Drawing.Image" />
 
         
 
-         on a Windows Form, you should use one of the <see
-         cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
+         on a Windows Form, you should use one of the <see cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
 
         
 
@@ -61,13 +59,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An abstract base class that provides functionality for the <see
-         cref="T:System.Drawing.Bitmap" />
+        >An abstract base class that provides functionality for the <see cref="T:System.Drawing.Bitmap" />
 
         
 
-         and <see
-         cref="T:System.Drawing.Imaging.Metafile" />
+         and <see cref="T:System.Drawing.Imaging.Metafile" />
 
         
 
@@ -88,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Image" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -99,8 +94,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Image" />
+            >The <see cref="T:System.Drawing.Image" />
 
             
 
@@ -124,63 +118,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="M:System.Drawing.Image.Dispose" />
+            >Calling the <see cref="M:System.Drawing.Image.Dispose" />
 
             
 
-             method allows the resources used by this <see
-             cref="T:System.Drawing.Image" />
+             method allows the resources used by this <see cref="T:System.Drawing.Image" />
 
             
 
              to be reallocated for other purposes.</para
           >
           <para
-            >Call <see
-             cref="M:System.Drawing.Image.Dispose" />
+            >Call <see cref="M:System.Drawing.Image.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Drawing.Image" />
+             when you are finished using the <see cref="T:System.Drawing.Image" />
 
             
 
-            . The <see
-             cref="M:System.Drawing.Image.Dispose" />
+            . The <see cref="M:System.Drawing.Image.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Drawing.Image" />
+             method leaves the <see cref="T:System.Drawing.Image" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Drawing.Image.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Drawing.Image.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Drawing.Image" />
+            , you must release all references to the <see cref="T:System.Drawing.Image" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Drawing.Image" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Drawing.Image" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -190,18 +173,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.Image.Dispose" />
+              >Always call <see cref="M:System.Drawing.Image.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.Image" />
+               before you release your last reference to the <see cref="T:System.Drawing.Image" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Drawing.Image" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Image" />
 
               
 
@@ -212,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Image" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -244,18 +223,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Drawing.Image.Dispose" />
+              >Always call <see cref="M:System.Drawing.Image.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Drawing.Image" />
+               before you release your last reference to the <see cref="T:System.Drawing.Image" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Drawing.Image" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Drawing.Image" />
 
               
 
@@ -267,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Drawing.Image" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Drawing.Image" />
 
             
 
@@ -276,7 +251,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -315,8 +294,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The integer value returned from this method will correspond to a sum of <see
-             cref="T:System.Drawing.Imaging.ImageFlags" />
+            >The integer value returned from this method will correspond to a sum of <see cref="T:System.Drawing.Imaging.ImageFlags" />
 
             
 
@@ -447,38 +425,31 @@
             </item>
           </list>
           <para
-            >For example, if the <see
-             cref="P:System.Drawing.Image.Flags" />
+            >For example, if the <see cref="P:System.Drawing.Image.Flags" />
 
             
 
-             property for an image returned 77960, the <see
-             cref="T:System.Drawing.Imaging.ImageFlags" />
+             property for an image returned 77960, the <see cref="T:System.Drawing.Imaging.ImageFlags" />
 
             
 
-             for the image would be <see
-             cref="F:System.Drawing.Imaging.ImageFlags.ReadOnly" />
+             for the image would be <see cref="F:System.Drawing.Imaging.ImageFlags.ReadOnly" />
 
             
 
-            , <see
-             cref="F:System.Drawing.Imaging.ImageFlags.HasRealDpi" />
+            , <see cref="F:System.Drawing.Imaging.ImageFlags.HasRealDpi" />
 
             
 
-            , <see
-             cref="F:System.Drawing.Imaging.ImageFlags.HasRealPixelSize" />
+            , <see cref="F:System.Drawing.Imaging.ImageFlags.HasRealPixelSize" />
 
             
 
-            , <see
-             cref="F:System.Drawing.Imaging.ImageFlags.ColorSpaceYcbcr" />
+            , <see cref="F:System.Drawing.Imaging.ImageFlags.ColorSpaceYcbcr" />
 
             
 
-            , and <see
-             cref="F:System.Drawing.Imaging.ImageFlags.PartiallyScalable" />
+            , and <see cref="F:System.Drawing.Imaging.ImageFlags.PartiallyScalable" />
 
             
 
@@ -488,8 +459,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets attribute flags for the pixel data of this <see
-             cref="T:System.Drawing.Image" />
+            >Gets attribute flags for the pixel data of this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -520,8 +490,7 @@
           <para>This method returns information about multiple-frame images, which come in two styles: multiple page and multiple resolution.</para>
           <para>A multiple-page image is an image that contains more than one image. Each page contains a single image (or frame). These pages (or images, or frames) are typically displayed in succession to produce an animated sequence, such as an animated .gif file.</para>
           <para
-            >A multiple-resolution image is an image that contains more than one copy of an image at different resolutions. This is commonly used by MIP mapping where the displayed image size determines the resolution of the image used for drawing. ndptecgdiplus can support an arbitrary number of pages (or images, or frames), as well as an arbitrary number of resolutions. The defined dimensions are properties of the <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >A multiple-resolution image is an image that contains more than one copy of an image at different resolutions. This is commonly used by MIP mapping where the displayed image size determines the resolution of the image used for drawing. ndptecgdiplus can support an arbitrary number of pages (or images, or frames), as well as an arbitrary number of resolutions. The defined dimensions are properties of the <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -531,8 +500,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of GUIDs that represent the dimensions of frames within this <see
-             cref="T:System.Drawing.Image" />
+            >Gets an array of GUIDs that represent the dimensions of frames within this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -584,16 +552,14 @@
             </item>
           </list>
           <para
-            >The file remains locked until the <see
-             cref="T:System.Drawing.Image" />
+            >The file remains locked until the <see cref="T:System.Drawing.Image" />
 
             
 
              is disposed.</para
           >
           <para
-            >If the file does not have a valid image format or if ndptecgdiplus does not support the pixel format of the file, this method throws an <see
-             cref="T:System.OutOfMemoryException" />
+            >If the file does not have a valid image format or if ndptecgdiplus does not support the pixel format of the file, this method throws an <see cref="T:System.OutOfMemoryException" />
 
             
 
@@ -601,8 +567,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Drawing.Image" />
+              >The <see cref="T:System.Drawing.Image" />
 
               
 
@@ -613,8 +578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Drawing.Image" />
+            >Creates an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -624,8 +588,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Image" />
+            >The <see cref="T:System.Drawing.Image" />
 
             
 
@@ -633,12 +596,15 @@
           >
         </returns>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the file from which to create the <see
-           cref="T:System.Drawing.Image" />
+          A string that contains the name of the file from which to create the <see cref="T:System.Drawing.Image" />
 
           
 
@@ -685,29 +651,25 @@
             </item>
           </list>
           <para
-            >If the file does not have a valid image format or if ndptecgdiplus does not support the pixel format of the file, this method throws an <see
-             cref="T:System.OutOfMemoryException" />
+            >If the file does not have a valid image format or if ndptecgdiplus does not support the pixel format of the file, this method throws an <see cref="T:System.OutOfMemoryException" />
 
             
 
              exception.</para
           >
           <para
-            >The file remains locked until the <see
-             cref="T:System.Drawing.Image" />
+            >The file remains locked until the <see cref="T:System.Drawing.Image" />
 
             
 
              is disposed.</para
           >
           <para
-            >The <paramref
-             name="useEmbeddedColorManagement" />
+            >The <paramref name="useEmbeddedColorManagement" />
 
             
 
-             parameter specifies whether the new <see
-             cref="T:System.Drawing.Image" />
+             parameter specifies whether the new <see cref="T:System.Drawing.Image" />
 
             
 
@@ -715,8 +677,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Drawing.Image" />
+              >The <see cref="T:System.Drawing.Image" />
 
               
 
@@ -727,8 +688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Drawing.Image" />
+            >Creates an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -738,8 +698,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Image" />
+            >The <see cref="T:System.Drawing.Image" />
 
             
 
@@ -747,19 +706,26 @@
           >
         </returns>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the file from which to create the <see
-           cref="T:System.Drawing.Image" />
+          A string that contains the name of the file from which to create the <see cref="T:System.Drawing.Image" />
 
           
 
           . </param
         >
         <param name="useEmbeddedColorManagement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -787,13 +753,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Image.FromHbitmap(System.IntPtr)" />
+            >The <see cref="M:System.Drawing.Image.FromHbitmap(System.IntPtr)" />
 
             
 
-             method makes a copy of the ndptecgdi bitmap; so you can release the incoming ndptecgdi bitmap using the ndptecgdi DeleteObject method immediately after creating the new <see
-             cref="T:System.Drawing.Image" />
+             method makes a copy of the ndptecgdi bitmap; so you can release the incoming ndptecgdi bitmap using the ndptecgdi DeleteObject method immediately after creating the new <see cref="T:System.Drawing.Image" />
 
             
 
@@ -803,8 +767,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -814,8 +777,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Bitmap" />
+            >The <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -823,12 +785,15 @@
           >
         </returns>
         <param name="hbitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The ndptecgdi bitmap handle from which to create the <see
-           cref="T:System.Drawing.Bitmap" />
+          The ndptecgdi bitmap handle from which to create the <see cref="T:System.Drawing.Bitmap" />
 
           
 
@@ -857,13 +822,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Image.FromHbitmap(System.IntPtr,System.IntPtr)" />
+            >The <see cref="M:System.Drawing.Image.FromHbitmap(System.IntPtr,System.IntPtr)" />
 
             
 
-             method makes a copy of the ndptecgdi bitmap; so you can release the incoming ndptecgdi bitmap using the ndptecgdi DeleteObject method immediately after creating the new <see
-             cref="T:System.Drawing.Image" />
+             method makes a copy of the ndptecgdi bitmap; so you can release the incoming ndptecgdi bitmap using the ndptecgdi DeleteObject method immediately after creating the new <see cref="T:System.Drawing.Image" />
 
             
 
@@ -873,8 +836,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Drawing.Bitmap" />
+            >Creates a <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -884,8 +846,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Bitmap" />
+            >The <see cref="T:System.Drawing.Bitmap" />
 
             
 
@@ -893,24 +854,30 @@
           >
         </returns>
         <param name="hbitmap">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The ndptecgdi bitmap handle from which to create the <see
-           cref="T:System.Drawing.Bitmap" />
+          The ndptecgdi bitmap handle from which to create the <see cref="T:System.Drawing.Bitmap" />
 
           
 
           . </param
         >
         <param name="hpalette">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A handle to a ndptecgdi palette used to define the bitmap colors if the bitmap specified in the <paramref
-           name="hBitmap" />
+          A handle to a ndptecgdi palette used to define the bitmap colors if the bitmap specified in the <paramref name="hBitmap" />
 
           
 
@@ -938,8 +905,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must keep the stream open for the lifetime of the <see
-             cref="T:System.Drawing.Image" />
+            >You must keep the stream open for the lifetime of the <see cref="T:System.Drawing.Image" />
 
             
 
@@ -948,8 +914,7 @@
           <para>The stream is reset to zero if this method is called successively with the same stream.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Drawing.Image" />
+              >The <see cref="T:System.Drawing.Image" />
 
               
 
@@ -960,8 +925,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Drawing.Image" />
+            >Creates an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -971,8 +935,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Image" />
+            >The <see cref="T:System.Drawing.Image" />
 
             
 
@@ -980,17 +943,19 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Image" />
+           that contains the data for this <see cref="T:System.Drawing.Image" />
 
           
 
@@ -1019,21 +984,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must keep the stream open for the lifetime of the <see
-             cref="T:System.Drawing.Image" />
+            >You must keep the stream open for the lifetime of the <see cref="T:System.Drawing.Image" />
 
             
 
             .</para
           >
           <para
-            >The <paramref
-             name="useEmbeddedColorManagement" />
+            >The <paramref name="useEmbeddedColorManagement" />
 
             
 
-             parameter specifies whether the new <see
-             cref="T:System.Drawing.Image" />
+             parameter specifies whether the new <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1042,8 +1004,7 @@
           <para>The stream is reset to zero if this method is called successively with the same stream.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Drawing.Image" />
+              >The <see cref="T:System.Drawing.Image" />
 
               
 
@@ -1054,8 +1015,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Drawing.Image" />
+            >Creates an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1065,8 +1025,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Image" />
+            >The <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1074,24 +1033,30 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Image" />
+           that contains the data for this <see cref="T:System.Drawing.Image" />
 
           
 
           . </param
         >
         <param name="useEmbeddedColorManagement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1125,13 +1090,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="useEmbeddedColorManagement" />
+            >The <paramref name="useEmbeddedColorManagement" />
 
             
 
-             parameter specifies whether the new <see
-             cref="T:System.Drawing.Image" />
+             parameter specifies whether the new <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1139,8 +1102,7 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Drawing.Image" />
+              >The <see cref="T:System.Drawing.Image" />
 
               
 
@@ -1151,8 +1113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Drawing.Image" />
+            >Creates an <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1162,8 +1123,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Image" />
+            >The <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1171,31 +1131,41 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.IO.Stream" />
+          A <see cref="T:System.IO.Stream" />
 
           
 
-           that contains the data for this <see
-           cref="T:System.Drawing.Image" />
+           that contains the data for this <see cref="T:System.Drawing.Image" />
 
           
 
           . </param
         >
         <param name="useEmbeddedColorManagement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use color management information embedded in the data stream; otherwise, false. </param
         >
         <param name="validateImageData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1247,18 +1217,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Imaging.EncoderParameters" />
+            >An <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
             
 
-             that contains an array of <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             that contains an array of <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
-             objects. Each <see
-             cref="T:System.Drawing.Imaging.EncoderParameter" />
+             objects. Each <see cref="T:System.Drawing.Imaging.EncoderParameter" />
 
             
 
@@ -1266,7 +1233,11 @@
           >
         </returns>
         <param name="encoder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1296,8 +1267,7 @@
           <para>This method returns information about multiple-frame images, which come in two styles: multiple page and multiple resolution.</para>
           <para>A multiple-page image is an image that contains more than one image. Each page contains a single image (or frame). These pages (or images, or frames) are typically displayed in succession to produce an animated sequence, such as an animated .gif file.</para>
           <para
-            >A multiple-resolution image is an image that contains more than one copy of an image at different resolutions. This is commonly used by MIP mapping where the displayed image size determines the resolution of the image used for drawing. ndptecgdiplus can support an arbitrary number of pages (or images, or frames), as well as an arbitrary number of resolutions. The defined dimensions are properties of the <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+            >A multiple-resolution image is an image that contains more than one copy of an image at different resolutions. This is commonly used by MIP mapping where the displayed image size determines the resolution of the image used for drawing. ndptecgdiplus can support an arbitrary number of pages (or images, or frames), as well as an arbitrary number of resolutions. The defined dimensions are properties of the <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
@@ -1313,12 +1283,15 @@
           <para>The number of frames in the specified dimension.</para>
         </returns>
         <param name="dimension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.FrameDimension" />
+          A <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
           
 
@@ -1353,12 +1326,15 @@
           <para>The color depth of the specified pixel format.</para>
         </returns>
         <param name="pixfmt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          The <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
@@ -1386,46 +1362,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a list of property item IDs and links to more information, see <see
-             cref="P:System.Drawing.Imaging.PropertyItem.Id" />
+            >For a list of property item IDs and links to more information, see <see cref="P:System.Drawing.Imaging.PropertyItem.Id" />
 
             
 
             . </para
           >
           <para
-            >It is difficult to set property items, because the <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+            >It is difficult to set property items, because the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             class has no public constructors. One way to work around this restriction is to obtain a <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+             class has no public constructors. One way to work around this restriction is to obtain a <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             by retrieving the <see
-             cref="P:System.Drawing.Image.PropertyItems" />
+             by retrieving the <see cref="P:System.Drawing.Image.PropertyItems" />
 
             
 
-             property value or calling the <see
-             cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
+             property value or calling the <see cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
 
             
 
-             method of an <see
-             cref="T:System.Drawing.Image" />
+             method of an <see cref="T:System.Drawing.Image" />
 
             
 
-             that already has property items. Then you can set the fields of the <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+             that already has property items. Then you can set the fields of the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             and pass it to <see
-             cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
+             and pass it to <see cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
 
             
 
@@ -1435,8 +1403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the specified property item from this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the specified property item from this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1446,8 +1413,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+            >The <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
@@ -1455,7 +1421,11 @@
           >
         </returns>
         <param name="propid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1508,8 +1478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the height, in pixels, of this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the height, in pixels, of this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1545,8 +1514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the horizontal resolution, in pixels per inch, of this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the horizontal resolution, in pixels per inch, of this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1576,8 +1544,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the pixel format for this <see
-             cref="T:System.Drawing.Image" />
+            >Returns a value that indicates whether the pixel format for this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1587,8 +1554,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="pixfmt" />
+            >true if <paramref name="pixfmt" />
 
             
 
@@ -1596,12 +1562,15 @@
           >
         </returns>
         <param name="pixfmt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          The <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
@@ -1637,8 +1606,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="pixfmt" />
+            >true if <paramref name="pixfmt" />
 
             
 
@@ -1646,12 +1614,15 @@
           >
         </returns>
         <param name="pixfmt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          The <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
@@ -1684,8 +1655,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="pixfmt" />
+            >true if <paramref name="pixfmt" />
 
             
 
@@ -1693,12 +1663,15 @@
           >
         </returns>
         <param name="pixfmt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.PixelFormat" />
+          The <see cref="T:System.Drawing.Imaging.PixelFormat" />
 
           
 
@@ -1725,13 +1698,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns a copy of the <see
-             cref="T:System.Drawing.Imaging.ColorPalette" />
+            >This property returns a copy of the <see cref="T:System.Drawing.Imaging.ColorPalette" />
 
             
 
-             object used by this <see
-             cref="T:System.Drawing.Image" />
+             object used by this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1741,8 +1712,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the color palette used for this <see
-             cref="T:System.Drawing.Image" />
+            >Gets or sets the color palette used for this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1800,8 +1770,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the pixel format for this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the pixel format for this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1825,8 +1794,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the image has no property items or if the image format does not support property items, the <see
-             cref="P:System.Drawing.Image.PropertyIdList" />
+            >If the image has no property items or if the image format does not support property items, the <see cref="P:System.Drawing.Image.PropertyIdList" />
 
             
 
@@ -1836,8 +1804,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets IDs of the property items stored in this <see
-             cref="T:System.Drawing.Image" />
+            >Gets IDs of the property items stored in this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1869,8 +1836,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the image has no property items or if the image format does not support property items, <see
-             cref="P:System.Drawing.Image.PropertyItems" />
+            >If the image has no property items or if the image format does not support property items, <see cref="P:System.Drawing.Image.PropertyItems" />
 
             
 
@@ -1880,8 +1846,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets all the property items (pieces of metadata) stored in this <see
-             cref="T:System.Drawing.Image" />
+            >Gets all the property items (pieces of metadata) stored in this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1914,8 +1879,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the file format of this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the file format of this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1941,38 +1905,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >It is difficult to set property items, because the <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+            >It is difficult to set property items, because the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             class has no public constructors. One way to work around this restriction is to obtain a <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+             class has no public constructors. One way to work around this restriction is to obtain a <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             by retrieving the <see
-             cref="P:System.Drawing.Image.PropertyItems" />
+             by retrieving the <see cref="P:System.Drawing.Image.PropertyItems" />
 
             
 
-             property value or calling the <see
-             cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
+             property value or calling the <see cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
 
             
 
-             method of an <see
-             cref="T:System.Drawing.Image" />
+             method of an <see cref="T:System.Drawing.Image" />
 
             
 
-             that already has property items. Then you can set the fields of the <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+             that already has property items. Then you can set the fields of the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             and pass it to <see
-             cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
+             and pass it to <see cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
 
             
 
@@ -1982,8 +1939,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified property item from this <see
-             cref="T:System.Drawing.Image" />
+            >Removes the specified property item from this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -1991,7 +1947,11 @@
           >
         </summary>
         <param name="propid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2019,8 +1979,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.Image.RotateFlip(System.Drawing.RotateFlipType)" />
+            >The <see cref="M:System.Drawing.Image.RotateFlip(System.Drawing.RotateFlipType)" />
 
             
 
@@ -2031,8 +1990,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rotates, flips, or rotates and flips the <see
-             cref="T:System.Drawing.Image" />
+            >Rotates, flips, or rotates and flips the <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2040,12 +1998,15 @@
           >
         </summary>
         <param name="rotateFlipType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RotateFlipType" />
+          A <see cref="T:System.Drawing.RotateFlipType" />
 
           
 
@@ -2070,8 +2031,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If no encoder exists for the file format of the image, the Portable Network Graphics (PNG) encoder is used. When you use the <see
-             cref="M:System.Drawing.Image.Save(System.String)" />
+            >If no encoder exists for the file format of the image, the Portable Network Graphics (PNG) encoder is used. When you use the <see cref="M:System.Drawing.Image.Save(System.String)" />
 
             
 
@@ -2082,8 +2042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves this <see
-             cref="T:System.Drawing.Image" />
+            >Saves this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2091,12 +2050,15 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the file to which to save this <see
-           cref="T:System.Drawing.Image" />
+          A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />
 
           
 
@@ -2132,24 +2094,30 @@
           <para>Saves this image to the specified stream in the specified format.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            where the image will be saved. </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.ImageFormat" />
+          An <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
           
 
@@ -2179,8 +2147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves this <see
-             cref="T:System.Drawing.Image" />
+            >Saves this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2188,29 +2155,34 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the file to which to save this <see
-           cref="T:System.Drawing.Image" />
+          A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />
 
           
 
           . </param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.ImageFormat" />
+          The <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
           
 
-           for this <see
-           cref="T:System.Drawing.Image" />
+           for this <see cref="T:System.Drawing.Image" />
 
           
 
@@ -2247,41 +2219,49 @@
           <para>Saves this image to the specified stream, with the specified encoder and image encoder parameters.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IO.Stream" />
+          The <see cref="T:System.IO.Stream" />
 
           
 
            where the image will be saved. </param
         >
         <param name="encoder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+          The <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
           
 
-           for this <see
-           cref="T:System.Drawing.Image" />
+           for this <see cref="T:System.Drawing.Image" />
 
           
 
           .</param
         >
         <param name="encoderParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EncoderParameters" />
+          An <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
           
 
@@ -2315,8 +2295,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves this <see
-             cref="T:System.Drawing.Image" />
+            >Saves this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2324,46 +2303,53 @@
           >
         </summary>
         <param name="filename">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that contains the name of the file to which to save this <see
-           cref="T:System.Drawing.Image" />
+          A string that contains the name of the file to which to save this <see cref="T:System.Drawing.Image" />
 
           
 
           . </param
         >
         <param name="encoder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.ImageCodecInfo" />
+          The <see cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
           
 
-           for this <see
-           cref="T:System.Drawing.Image" />
+           for this <see cref="T:System.Drawing.Image" />
 
           
 
           . </param
         >
         <param name="encoderParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EncoderParameters" />
+          An <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
           
 
-           to use for this <see
-           cref="T:System.Drawing.Image" />
+           to use for this <see cref="T:System.Drawing.Image" />
 
           
 
@@ -2392,8 +2378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a frame to the file or stream specified in a previous call to the <see
-             cref="Overload:System.Drawing.Image.Save" />
+            >Adds a frame to the file or stream specified in a previous call to the <see cref="Overload:System.Drawing.Image.Save" />
 
             
 
@@ -2405,12 +2390,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="encoderParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EncoderParameters" />
+          An <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
           
 
@@ -2440,8 +2428,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a frame to the file or stream specified in a previous call to the <see
-             cref="Overload:System.Drawing.Image.Save" />
+            >Adds a frame to the file or stream specified in a previous call to the <see cref="Overload:System.Drawing.Image.Save" />
 
             
 
@@ -2453,24 +2440,30 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Image" />
+          An <see cref="T:System.Drawing.Image" />
 
           
 
            that contains the frame to add. </param
         >
         <param name="encoderParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Drawing.Imaging.EncoderParameters" />
+          An <see cref="T:System.Drawing.Imaging.EncoderParameters" />
 
           
 
@@ -2499,21 +2492,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The possible values of the <paramref
-             name="dimensionID" />
+            >The possible values of the <paramref name="dimensionID" />
 
             
 
-             parameter are properties of the <see
-             cref="T:System.Drawing.Imaging.FrameDimension" />
+             parameter are properties of the <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
             
 
             . These can be used to identify an image by its time, resolution, or page number.</para
           >
           <para
-            >Calling this method causes all changes made to the previous frame to be discarded. Before selecting another frame, save all changes made to the current frame, including changes to pixel values and properties. If the call to the <see
-             cref="M:System.Drawing.Image.SelectActiveFrame(System.Drawing.Imaging.FrameDimension,System.Int32)" />
+            >Calling this method causes all changes made to the previous frame to be discarded. Before selecting another frame, save all changes made to the current frame, including changes to pixel values and properties. If the call to the <see cref="M:System.Drawing.Image.SelectActiveFrame(System.Drawing.Imaging.FrameDimension,System.Int32)" />
 
             
 
@@ -2529,19 +2519,26 @@
           <para>Always returns 0.</para>
         </returns>
         <param name="dimension">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Imaging.FrameDimension" />
+          A <see cref="T:System.Drawing.Imaging.FrameDimension" />
 
           
 
            that specifies the identity of the dimension type. </param
         >
         <param name="frameIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2569,46 +2566,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the image format does not support property items, this method throws <see
-             cref="T:System.ArgumentException" />
+            >If the image format does not support property items, this method throws <see cref="T:System.ArgumentException" />
 
             
 
              with the message "Property not supported." If the image format supports property items but does not support the particular property you are attempting to set, this method ignores the attempt but does not throw an exception.</para
           >
           <para
-            >It is difficult to set property items, because the <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+            >It is difficult to set property items, because the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             class has no public constructors. One way to work around this restriction is to obtain a <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+             class has no public constructors. One way to work around this restriction is to obtain a <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             by retrieving the <see
-             cref="P:System.Drawing.Image.PropertyItems" />
+             by retrieving the <see cref="P:System.Drawing.Image.PropertyItems" />
 
             
 
-             property value or calling the <see
-             cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
+             property value or calling the <see cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
 
             
 
-             method of an <see
-             cref="T:System.Drawing.Image" />
+             method of an <see cref="T:System.Drawing.Image" />
 
             
 
-             that already has property items. Then you can set the fields of the <see
-             cref="T:System.Drawing.Imaging.PropertyItem" />
+             that already has property items. Then you can set the fields of the <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
             
 
-             and pass it to <see
-             cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
+             and pass it to <see cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
 
             
 
@@ -2618,8 +2607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Stores a property item (piece of metadata) in this <see
-             cref="T:System.Drawing.Image" />
+            >Stores a property item (piece of metadata) in this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2631,12 +2619,15 @@
           <para>This method does not return a value.</para>
         </returns>
         <param name="propitem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Imaging.PropertyItem" />
+          The <see cref="T:System.Drawing.Imaging.PropertyItem" />
 
           
 
@@ -2689,8 +2680,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -2698,24 +2688,30 @@
           >
         </summary>
         <param name="si">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The destination (see <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The destination (see <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -2767,8 +2763,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the vertical resolution, in pixels per inch, of this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the vertical resolution, in pixels per inch, of this <see cref="T:System.Drawing.Image" />
 
             
 
@@ -2793,8 +2788,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the width, in pixels, of this <see
-             cref="T:System.Drawing.Image" />
+            >Gets the width, in pixels, of this <see cref="T:System.Drawing.Image" />
 
             
 

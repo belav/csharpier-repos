@@ -21,38 +21,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is returned as the result of the <see
-         cref="M:System.Xml.XPath.XPathNavigator.Compile(System.String)" />
+        >This class is returned as the result of the <see cref="M:System.Xml.XPath.XPathNavigator.Compile(System.String)" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+         method of the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         class. It is a parameter to the <see
-         cref="Overload:System.Xml.XPath.XPathNavigator.Evaluate" />
+         class. It is a parameter to the <see cref="Overload:System.Xml.XPath.XPathNavigator.Evaluate" />
 
         
 
-        , <see
-         cref="Overload:System.Xml.XPath.XPathNavigator.Matches" />
+        , <see cref="Overload:System.Xml.XPath.XPathNavigator.Matches" />
 
         
 
-        , <see
-         cref="Overload:System.Xml.XPath.XPathNavigator.Select" />
+        , <see cref="Overload:System.Xml.XPath.XPathNavigator.Select" />
 
         
 
-        , and <see
-         cref="Overload:System.Xml.XPath.XPathNavigator.SelectSingleNode" />
+        , and <see cref="Overload:System.Xml.XPath.XPathNavigator.SelectSingleNode" />
 
         
 
-         methods of the <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+         methods of the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
@@ -91,26 +84,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.XPath.XPathExpression.AddSort(System.Object,System.Collections.IComparer)" />
+            >The <see cref="M:System.Xml.XPath.XPathExpression.AddSort(System.Object,System.Collections.IComparer)" />
 
             
 
-             method enables users to sort objects by their data type instead of by string or number. The <see
-             cref="T:System.Collections.IComparer" />
+             method enables users to sort objects by their data type instead of by string or number. The <see cref="T:System.Collections.IComparer" />
 
             
 
-             object provides an implementation of the <see
-             cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+             object provides an implementation of the <see cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
 
             
 
              method that supports sorting on user-defined classes.</para
           >
           <para
-            >In the following example, the books are sorted by ISBN number, where isbn is an object that implements the <see
-             cref="T:System.Collections.IComparer" />
+            >In the following example, the books are sorted by ISBN number, where isbn is an object that implements the <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -123,8 +112,7 @@ expression.AddSort("@ISBN", (IComparer)isbn)</code>
 ISBN isbn = new ISBN();
 expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.XPath.XPathExpression.AddSort(System.Object,System.Collections.IComparer)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.XPath.XPathExpression.AddSort(System.Object,System.Collections.IComparer)" />
 
             
 
@@ -136,18 +124,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                >If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
-                 or the sort key requires namespace resolution, you must use the <see
-                 cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+                 or the sort key requires namespace resolution, you must use the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
                 
 
-                 method to provide an <see
-                 cref="T:System.Xml.XmlNamespaceManager" />
+                 method to provide an <see cref="T:System.Xml.XmlNamespaceManager" />
 
                 
 
@@ -156,18 +141,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                >If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
-                 does not include a prefix, it is assumed that the namespace Uniform Resource Identifier (URI) is the empty namespace. If your XML includes a default namespace, you must still use the <see
-                 cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+                 does not include a prefix, it is assumed that the namespace Uniform Resource Identifier (URI) is the empty namespace. If your XML includes a default namespace, you must still use the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
                 
 
-                 method and provide an <see
-                 cref="T:System.Xml.XmlNamespaceManager" />
+                 method and provide an <see cref="T:System.Xml.XmlNamespaceManager" />
 
                 
 
@@ -179,8 +161,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, sorts the nodes selected by the XPath expression according to the specified <see
-             cref="T:System.Collections.IComparer" />
+            >When overridden in a derived class, sorts the nodes selected by the XPath expression according to the specified <see cref="T:System.Collections.IComparer" />
 
             
 
@@ -188,24 +169,30 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           >
         </summary>
         <param name="expr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object representing the sort key. This can be the string value of the node or an <see
-           cref="T:System.Xml.XPath.XPathExpression" />
+          An object representing the sort key. This can be the string value of the node or an <see cref="T:System.Xml.XPath.XPathExpression" />
 
           
 
            object with a compiled XPath expression.</param
         >
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IComparer" />
+          An <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -247,18 +234,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                >If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
-                 or the sort key requires namespace resolution, you must use the <see
-                 cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+                 or the sort key requires namespace resolution, you must use the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
                 
 
-                 method to provide an <see
-                 cref="T:System.Xml.XmlNamespaceManager" />
+                 method to provide an <see cref="T:System.Xml.XmlNamespaceManager" />
 
                 
 
@@ -267,18 +251,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                >If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
-                 does not include a prefix, it is assumed that the namespace Uniform Resource Identifier (URI) is the empty namespace. If your XML includes a default namespace, you must still use the <see
-                 cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+                 does not include a prefix, it is assumed that the namespace Uniform Resource Identifier (URI) is the empty namespace. If your XML includes a default namespace, you must still use the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
                 
 
-                 method and provide an <see
-                 cref="T:System.Xml.XmlNamespaceManager" />
+                 method and provide an <see cref="T:System.Xml.XmlNamespaceManager" />
 
                 
 
@@ -292,70 +273,83 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <para>When overridden in a derived class, sorts the nodes selected by the XPath expression according to the supplied parameters.</para>
         </summary>
         <param name="expr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object representing the sort key. This can be the string value of the node or an <see
-           cref="T:System.Xml.XPath.XPathExpression" />
+          An object representing the sort key. This can be the string value of the node or an <see cref="T:System.Xml.XPath.XPathExpression" />
 
           
 
            object with a compiled XPath expression. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XPath.XmlSortOrder" />
+          An <see cref="T:System.Xml.XPath.XmlSortOrder" />
 
           
 
            value indicating the sort order. </param
         >
         <param name="caseOrder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XPath.XmlCaseOrder" />
+          An <see cref="T:System.Xml.XPath.XmlCaseOrder" />
 
           
 
            value indicating how to sort uppercase and lowercase letters.</param
         >
         <param name="lang">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The language to use for comparison. Uses the <see
-           cref="T:System.Globalization.CultureInfo" />
+          The language to use for comparison. Uses the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
-           class that can be passed to the <see
-           cref="Overload:System.String.Compare" />
+           class that can be passed to the <see cref="Overload:System.String.Compare" />
 
           
 
-           method for the language types, for example, "us-en" for U.S. English. If an empty string is specified, the system environment is used to determine the <see
-           cref="T:System.Globalization.CultureInfo" />
+           method for the language types, for example, "us-en" for U.S. English. If an empty string is specified, the system environment is used to determine the <see cref="T:System.Globalization.CultureInfo" />
 
           
 
           . </param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XPath.XmlDataType" />
+          An <see cref="T:System.Xml.XPath.XmlDataType" />
 
           
 
@@ -386,18 +380,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, the <see
-             cref="M:System.Xml.XPath.XPathExpression.Clone" />
+            >When overridden in a derived class, the <see cref="M:System.Xml.XPath.XPathExpression.Clone" />
 
             
 
-             method returns a clone of this <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+             method returns a clone of this <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
-             object with the same state as this <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+             object with the same state as this <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -407,8 +398,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns a clone of this <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+            >When overridden in a derived class, returns a clone of this <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -418,8 +408,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+            >A new <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -482,8 +471,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the XPath expression specified and returns an <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+            >Compiles the XPath expression specified and returns an <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -493,8 +481,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+            >An <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -502,7 +489,11 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           >
         </returns>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -564,28 +555,23 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           </block>
           <block subset="none" type="note">
             <para
-              >It is not possible to compile a <see
-               cref="T:System.Xml.XPath.XPathExpression" />
+              >It is not possible to compile a <see cref="T:System.Xml.XPath.XPathExpression" />
 
               
 
-               with a custom context in one step by passing an <see
-               cref="T:System.Xml.Xsl.XsltContext" />
+               with a custom context in one step by passing an <see cref="T:System.Xml.Xsl.XsltContext" />
 
               
 
-              , which implements <see
-               cref="T:System.Xml.IXmlNamespaceResolver" />
+              , which implements <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
               
 
-              , as an argument to this method. To use a <see
-               cref="T:System.Xml.XPath.XPathExpression" />
+              , as an argument to this method. To use a <see cref="T:System.Xml.XPath.XPathExpression" />
 
               
 
-               with a custom context, you must call the <see
-               cref="Overload:System.Xml.XPath.XPathExpression.SetContext" />
+               with a custom context, you must call the <see cref="Overload:System.Xml.XPath.XPathExpression.SetContext" />
 
               
 
@@ -596,13 +582,11 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compiles the specified XPath expression, with the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >Compiles the specified XPath expression, with the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
-             object specified for namespace resolution, and returns an <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+             object specified for namespace resolution, and returns an <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -612,8 +596,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+            >An <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -621,19 +604,26 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           >
         </returns>
         <param name="xpath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An XPath expression.</param
         >
         <param name="nsResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          An object that implements the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -659,8 +649,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets a string representation of the <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+            >When overridden in a derived class, gets a string representation of the <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
@@ -689,16 +678,14 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
       </ReturnValue>
       <Docs>
         <value
-          >An <see
-           cref="T:System.Xml.XPath.XPathResultType" />
+          >An <see cref="T:System.Xml.XPath.XPathResultType" />
 
           
 
            value that indicates the return type.</value
         >
         <remarks
-          >The return type varies for each XPath expression and it might be <see
-           cref="F:System.Xml.XPath.XPathResultType.Any" />
+          >The return type varies for each XPath expression and it might be <see cref="F:System.Xml.XPath.XPathResultType.Any" />
 
           
 
@@ -735,51 +722,42 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Namespace resolution is supported using classes that implement the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >Namespace resolution is supported using classes that implement the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
-             interface, such as the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             interface, such as the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             class. The <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             class. The <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             stores prefix and namespace Uniform Resource Identifier (URI) mappings. If the <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+             stores prefix and namespace Uniform Resource Identifier (URI) mappings. If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
-             requires namespace resolution, the prefix and namespace URI pair must be added to an object, such as the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             requires namespace resolution, the prefix and namespace URI pair must be added to an object, such as the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             class, which implements the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             class, which implements the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
-             interface, and the <see
-             cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
+             interface, and the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
 
             
 
-             method must be called to specify the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             method must be called to specify the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
              interface object to use for namespace resolution.</para
           >
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
 
             
 
@@ -788,13 +766,11 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <list type="bullet">
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                >If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
-                 does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see
-                 cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
+                 does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
 
                 
 
@@ -803,18 +779,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             </item>
             <item>
               <para
-                >You can also supply an <see
-                 cref="T:System.Xml.IXmlNamespaceResolver" />
+                >You can also supply an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
                 
 
-                 interface object for namespace resolution to the <see
-                 cref="M:System.Xml.XPath.XPathExpression.Compile(System.String,System.Xml.IXmlNamespaceResolver)" />
+                 interface object for namespace resolution to the <see cref="M:System.Xml.XPath.XPathExpression.Compile(System.String,System.Xml.IXmlNamespaceResolver)" />
 
                 
 
-                 method when you create your <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                 method when you create your <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
@@ -827,23 +800,19 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
-                 accepts <see
-                 cref="T:System.Xml.Xsl.XsltContext" />
+                 accepts <see cref="T:System.Xml.Xsl.XsltContext" />
 
                 
 
-                 as a namespace resolver, so you can implement a custom context and use functions and variables based on <see
-                 cref="T:System.Xml.Xsl.IXsltContextFunction" />
+                 as a namespace resolver, so you can implement a custom context and use functions and variables based on <see cref="T:System.Xml.Xsl.IXsltContextFunction" />
 
                 
 
-                 and <see
-                 cref="T:System.Xml.Xsl.IXsltContextVariable" />
+                 and <see cref="T:System.Xml.Xsl.IXsltContextVariable" />
 
                 
 
-                . The XPath expression will execute them. For more information, see <format
-                 type="text/html">
+                . The XPath expression will execute them. For more information, see <format type="text/html">
                   <a href="4772f20e-1e7f-496e-93c2-1484473be555"
                     >User Defined Functions and Variables</a
                   >
@@ -859,8 +828,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, specifies the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >When overridden in a derived class, specifies the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -868,12 +836,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           >
         </summary>
         <param name="nsResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object that implements the <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          An object that implements the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -906,36 +877,30 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Namespace resolution is supported using the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >Namespace resolution is supported using the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             class which stores prefix and namespace Uniform Resource Identifier (URI) mappings. If the <see
-             cref="T:System.Xml.XPath.XPathExpression" />
+             class which stores prefix and namespace Uniform Resource Identifier (URI) mappings. If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
             
 
-             requires namespace resolution, the prefix and namespace URI pair must be added to the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             requires namespace resolution, the prefix and namespace URI pair must be added to the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             object and the <see
-             cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+             object and the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
             
 
-             method must be called to specify the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             method must be called to specify the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
              object to use for namespace resolution.</para
           >
           <para
-            >The following are important notes to consider when using the <see
-             cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+            >The following are important notes to consider when using the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
             
 
@@ -944,18 +909,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <list type="bullet">
             <item>
               <para
-                >If the <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                >If the <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
-                 does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see
-                 cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+                 does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
                 
 
-                 method and provide an <see
-                 cref="T:System.Xml.XmlNamespaceManager" />
+                 method and provide an <see cref="T:System.Xml.XmlNamespaceManager" />
 
                 
 
@@ -964,18 +926,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
             </item>
             <item>
               <para
-                >You can also supply an <see
-                 cref="T:System.Xml.IXmlNamespaceResolver" />
+                >You can also supply an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
                 
 
-                 object for namespace resolution to the <see
-                 cref="M:System.Xml.XPath.XPathExpression.Compile(System.String,System.Xml.IXmlNamespaceResolver)" />
+                 object for namespace resolution to the <see cref="M:System.Xml.XPath.XPathExpression.Compile(System.String,System.Xml.IXmlNamespaceResolver)" />
 
                 
 
-                 method when you create your <see
-                 cref="T:System.Xml.XPath.XPathExpression" />
+                 method when you create your <see cref="T:System.Xml.XPath.XPathExpression" />
 
                 
 
@@ -988,23 +947,19 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
-                 accepts <see
-                 cref="T:System.Xml.Xsl.XsltContext" />
+                 accepts <see cref="T:System.Xml.Xsl.XsltContext" />
 
                 
 
-                 as a namespace resolver, so you can implement a custom context and use functions and variables based on <see
-                 cref="T:System.Xml.Xsl.IXsltContextFunction" />
+                 as a namespace resolver, so you can implement a custom context and use functions and variables based on <see cref="T:System.Xml.Xsl.IXsltContextFunction" />
 
                 
 
-                 and <see
-                 cref="T:System.Xml.Xsl.IXsltContextVariable" />
+                 and <see cref="T:System.Xml.Xsl.IXsltContextVariable" />
 
                 
 
-                . The XPath expression will execute them. For more information, see <format
-                 type="text/html">
+                . The XPath expression will execute them. For more information, see <format type="text/html">
                   <a href="4772f20e-1e7f-496e-93c2-1484473be555"
                     >User Defined Functions and Variables</a
                   >
@@ -1020,8 +975,7 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, specifies the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >When overridden in a derived class, specifies the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -1029,12 +983,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           >
         </summary>
         <param name="nsManager">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceManager" />
+          An <see cref="T:System.Xml.XmlNamespaceManager" />
 
           
 

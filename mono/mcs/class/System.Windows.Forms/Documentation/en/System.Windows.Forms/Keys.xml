@@ -27,8 +27,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Keys" />
+        >The <see cref="T:System.Windows.Forms.Keys" />
 
         
 
@@ -43,13 +42,11 @@
       <list type="bullet">
         <item>
           <para
-            >Call the <see
-             cref="M:System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys)" />
+            >Call the <see cref="M:System.Windows.Forms.Control.IsKeyLocked(System.Windows.Forms.Keys)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.Control" />
+             method of the <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -58,8 +55,7 @@
         </item>
         <item>
           <para
-            >For finer control, use the Win32 API functions GetKeyState, GetAsyncKeyState, or GetKeyboardState defined in user32.dll, to do this. For more information about calling native functions, see <format
-             type="text/html">
+            >For finer control, use the Win32 API functions GetKeyState, GetAsyncKeyState, or GetKeyboardState defined in user32.dll, to do this. For more information about calling native functions, see <format type="text/html">
               <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
             </format>
 
@@ -207,13 +203,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >For the .NET Framework 2.0, a member <see
-           cref="F:System.Windows.Forms.Keys.IMEAccept" />
+          >For the .NET Framework 2.0, a member <see cref="F:System.Windows.Forms.Keys.IMEAccept" />
 
           
 
-           was added that supersedes the previous entry, <see
-           cref="F:System.Windows.Forms.Keys.IMEAceept" />
+           was added that supersedes the previous entry, <see cref="F:System.Windows.Forms.Keys.IMEAceept" />
 
           
 
@@ -1564,8 +1558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The IME accept key, replaces <see
-             cref="F:System.Windows.Forms.Keys.IMEAceept" />
+            >The IME accept key, replaces <see cref="F:System.Windows.Forms.Keys.IMEAceept" />
 
             
 
@@ -1587,8 +1580,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The IME accept key. Obsolete, use <see
-             cref="F:System.Windows.Forms.Keys.IMEAccept" />
+            >The IME accept key. Obsolete, use <see cref="F:System.Windows.Forms.Keys.IMEAccept" />
 
             
 

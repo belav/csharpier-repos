@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+        >The <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
-         objects created by one of the <see
-         cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader" />
+         objects created by one of the <see cref="Overload:System.Runtime.Serialization.Json.JsonReaderWriterFactory.CreateJsonReader" />
 
         
 
-         methods implement this interface and are initialized ready to read JSON-encoded data. But if a user wants to reuse the same <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+         methods implement this interface and are initialized ready to read JSON-encoded data. But if a user wants to reuse the same <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
-         object to read other JSON-encoded data, then the reader must be initialized to the second dataset to be read by using one of the <see
-         cref="Overload:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput" />
+         object to read other JSON-encoded data, then the reader must be initialized to the second dataset to be read by using one of the <see cref="Overload:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput" />
 
         
 
@@ -72,13 +68,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >A <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             object that reads JSON-encoded streams can be reused by calling the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+             object that reads JSON-encoded streams can be reused by calling the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
 
             
 
@@ -86,23 +80,19 @@
           >
           <para>The reader can interpret the UTF-8 and the UTF-16 (big- or little-endian) encodings. The reader uses the encoding set at initialization time if one is passed or the encoding is automatically detected if null is passed.</para>
           <para
-            >The <see
-             cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" />
+            >The <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" />
 
             
 
-             value set as part of the <paramref
-             name="quotas" />
+             value set as part of the <paramref name="quotas" />
 
             
 
-             parameter only limits the amount of information being read into memory when the input is being read from a stream with the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+             parameter only limits the amount of information being read into memory when the input is being read from a stream with the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
 
             
 
-             method and is not enforced when the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+             method and is not enforced when the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
 
             
 
@@ -114,24 +104,30 @@
           <para>Reinitializes a JavaScript Object Notation (JSON) enabled reader to a specified stream that contains JSON-encoded data.</para>
         </summary>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.IO.Stream" />
+          The input <see cref="T:System.IO.Stream" />
 
           
 
            from which to read.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
@@ -146,7 +142,11 @@
            to apply.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,18 +182,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >A <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
-             object that reads a JSON-encoded buffered <see
-             cref="T:System.Byte" />
+             object that reads a JSON-encoded buffered <see cref="T:System.Byte" />
 
             
 
-             can be reused by calling the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+             can be reused by calling the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
 
             
 
@@ -201,23 +198,19 @@
           >
           <para>The reader can interpret the UTF-8 and the UTF-16 (big- or little-endian) encodings. The reader uses the encoding set at initialization time if one is passed or the encoding is automatically detected if null is passed.</para>
           <para
-            >The <see
-             cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" />
+            >The <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxBytesPerRead" />
 
             
 
-             value set as part of the <paramref
-             name="quotas" />
+             value set as part of the <paramref name="quotas" />
 
             
 
-             parameter only limits the amount of information being read into memory when the input is being read from a stream with the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+             parameter only limits the amount of information being read into memory when the input is being read from a stream with the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.IO.Stream,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
 
             
 
-             method and is not enforced when the <see
-             cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
+             method and is not enforced when the <see cref="M:System.Runtime.Serialization.Json.IXmlJsonReaderInitializer.SetInput(System.Byte[],System.Int32,System.Int32,System.Text.Encoding,System.Xml.XmlDictionaryReaderQuotas,System.Xml.OnXmlDictionaryReaderClose)" />
 
             
 
@@ -229,72 +222,90 @@
           <para>Reinitializes a JavaScript Object Notation (JSON) enabled reader to a specified buffer that contains JSON-encoded data.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.Byte" />
+          The input <see cref="T:System.Byte" />
 
           
 
            buffer array from which to read. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The starting position from which to read in <paramref
-           name="buffer" />
+          The starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes that can be read from <paramref
-           name="buffer" />
+          The number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            used by the reader.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            to apply.</param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.OnXmlDictionaryReaderClose" />
+          The <see cref="T:System.Xml.OnXmlDictionaryReaderClose" />
 
           
 

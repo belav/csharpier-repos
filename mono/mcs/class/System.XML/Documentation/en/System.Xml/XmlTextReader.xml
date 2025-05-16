@@ -45,18 +45,15 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >In the dnprdnext release, the recommended practice is to create <see
-           cref="T:System.Xml.XmlReader" />
+          >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
           
 
-           instances using the <see
-           cref="Overload:System.Xml.XmlReader.Create" />
+           instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
           
 
-           method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-           type="text/html">
+           method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
             <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
           </format>
 
@@ -73,8 +70,7 @@
          provides forward-only, read-only access to a stream of XML data. The current node refers to the node on which the reader is positioned. The reader is advanced using any of the read methods and properties reflect the value of the current node.</para
       >
       <para
-        >This class implements <see
-         cref="T:System.Xml.XmlReader" />
+        >This class implements <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -92,13 +88,11 @@
         </item>
         <item>
           <para
-            >For nodes where <see
-             cref="P:System.Xml.XmlTextReader.NodeType" />
+            >For nodes where <see cref="P:System.Xml.XmlTextReader.NodeType" />
 
             
 
-             is XmlNodeType.EntityReference, a single empty EntityReference node is returned (that is, the <see
-             cref="P:System.Xml.XmlTextReader.Value" />
+             is XmlNodeType.EntityReference, a single empty EntityReference node is returned (that is, the <see cref="P:System.Xml.XmlTextReader.Value" />
 
             
 
@@ -116,13 +110,11 @@
       </list>
       <para>Because the XmlTextReader does not perform the extra checks required for data validation, it provides a fast well-formedness parser.</para>
       <para
-        >To perform data validation, use a validating <see
-         cref="T:System.Xml.XmlReader" />
+        >To perform data validation, use a validating <see cref="T:System.Xml.XmlReader" />
 
         
 
-        . For more information, see <format
-         type="text/html">
+        . For more information, see <format type="text/html">
           <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
         </format>
 
@@ -131,34 +123,29 @@
         .</para
       >
       <para
-        >To read XML data from an <see
-         cref="T:System.Xml.XmlDocument" />
+        >To read XML data from an <see cref="T:System.Xml.XmlDocument" />
 
         
 
-        , use <see
-         cref="T:System.Xml.XmlNodeReader" />
+        , use <see cref="T:System.Xml.XmlNodeReader" />
 
         
 
         .</para
       >
       <para
-        >XmlTextReader throws an <see
-         cref="T:System.Xml.XmlException" />
+        >XmlTextReader throws an <see cref="T:System.Xml.XmlException" />
 
         
 
-         on XML parse errors. After an exception is thrown the state of the reader is not predictable. For example, the reported node type may be different than the actual node type of the current node. Use the <see
-         cref="P:System.Xml.XmlTextReader.ReadState" />
+         on XML parse errors. After an exception is thrown the state of the reader is not predictable. For example, the reported node type may be different than the actual node type of the current node. Use the <see cref="P:System.Xml.XmlTextReader.ReadState" />
 
         
 
          property to check whether a reader is in error state.</para
       >
       <para
-        >For further discussion on the XmlReader classes, see <format
-         type="text/html">
+        >For further discussion on the XmlReader classes, see <format type="text/html">
           <a href="3029834C-A27E-4331-B7AA-711924062182">Reading XML with the XmlReader</a>
         </format>
 
@@ -170,8 +157,7 @@
         <h2>Security Considerations</h2>
       </format>
       <para
-        >The following are things to consider when using the <see
-         cref="T:System.Xml.XmlTextReader" />
+        >The following are things to consider when using the <see cref="T:System.Xml.XmlTextReader" />
 
         
 
@@ -180,8 +166,7 @@
       <list type="bullet">
         <item>
           <para
-            >Exceptions thrown the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Exceptions thrown the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -190,26 +175,22 @@
         </item>
         <item>
           <para
-            >DTD processing is enabled by default. Disable DTD processing if you are concerned about Denial of Service issues or if you are dealing with untrusted sources. Set the <see
-             cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+            >DTD processing is enabled by default. Disable DTD processing if you are concerned about Denial of Service issues or if you are dealing with untrusted sources. Set the <see cref="P:System.Xml.XmlTextReader.DtdProcessing" />
 
             
 
-             property to <see
-             cref="F:System.Xml.DtdProcessing.Prohibit" />
+             property to <see cref="F:System.Xml.DtdProcessing.Prohibit" />
 
             
 
              to disable DTD processing.</para
           >
           <para
-            >If you have DTD processing enabled, you can use the <see
-             cref="T:System.Xml.XmlSecureResolver" />
+            >If you have DTD processing enabled, you can use the <see cref="T:System.Xml.XmlSecureResolver" />
 
             
 
-             to restrict the resources that the <see
-             cref="T:System.Xml.XmlTextReader" />
+             to restrict the resources that the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -218,8 +199,7 @@
         </item>
         <item>
           <para
-            >XML data can include references to external resources such as a DTD file. By default external resources are resolved using an <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >XML data can include references to external resources such as a DTD file. By default external resources are resolved using an <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
@@ -228,18 +208,15 @@
           <list type="bullet">
             <item>
               <para
-                >Restrict the resources that the <see
-                 cref="T:System.Xml.XmlTextReader" />
+                >Restrict the resources that the <see cref="T:System.Xml.XmlTextReader" />
 
                 
 
-                 can access by setting the <see
-                 cref="P:System.Xml.XmlTextReader.XmlResolver" />
+                 can access by setting the <see cref="P:System.Xml.XmlTextReader.XmlResolver" />
 
                 
 
-                 property to an <see
-                 cref="T:System.Xml.XmlSecureResolver" />
+                 property to an <see cref="T:System.Xml.XmlSecureResolver" />
 
                 
 
@@ -248,13 +225,11 @@
             </item>
             <item>
               <para
-                >Do not allow the <see
-                 cref="T:System.Xml.XmlReader" />
+                >Do not allow the <see cref="T:System.Xml.XmlReader" />
 
                 
 
-                 to open any external resources by setting the <see
-                 cref="P:System.Xml.XmlTextReader.XmlResolver" />
+                 to open any external resources by setting the <see cref="P:System.Xml.XmlTextReader.XmlResolver" />
 
                 
 
@@ -265,13 +240,11 @@
         </item>
         <item>
           <para
-            >XML data can contain a large number of attributes, namespace declarations, nested elements and so on that require a substantial amount of time to process. To limit the size of the input that is sent to the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >XML data can contain a large number of attributes, namespace declarations, nested elements and so on that require a substantial amount of time to process. To limit the size of the input that is sent to the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-            , create a custom IStream implementation and supply it the <see
-             cref="T:System.Xml.XmlTextReader" />
+            , create a custom IStream implementation and supply it the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -280,8 +253,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+            >The <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -290,8 +262,7 @@
         </item>
         <item>
           <para
-            >By default general entities are not expanded. General entities are expanded when you call the <see
-             cref="M:System.Xml.XmlTextReader.ResolveEntity" />
+            >By default general entities are not expanded. General entities are expanded when you call the <see cref="M:System.Xml.XmlTextReader.ResolveEntity" />
 
             
 
@@ -359,8 +330,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -370,18 +340,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -391,13 +358,11 @@
             >
           </block>
           <para
-            >The <see
-             cref="T:System.Xml.XmlTextReader" />
+            >The <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             decodes the stream using <see
-             cref="T:System.Text.Encoding" />
+             decodes the stream using <see cref="T:System.Text.Encoding" />
 
             
 
@@ -407,8 +372,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -416,7 +380,11 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -450,18 +418,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -475,13 +440,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified <see
-             cref="T:System.IO.TextReader" />
+             class with the specified <see cref="T:System.IO.TextReader" />
 
             
 
@@ -489,7 +452,11 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -524,8 +491,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -535,18 +501,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -556,8 +519,7 @@
             >
           </block>
           <para
-            >If the file is located on a resource that requires access credentials, use the <see
-             cref="P:System.Xml.XmlTextReader.XmlResolver" />
+            >If the file is located on a resource that requires access credentials, use the <see cref="P:System.Xml.XmlTextReader.XmlResolver" />
 
             
 
@@ -565,18 +527,15 @@
           >
           <block subset="none" type="note">
             <para
-              >In version 1.1 of the dnprdnshort, partially trusted code cannot set the XmlResolver property. The workaround is to create an <see
-               cref="T:System.Xml.XmlUrlResolver" />
+              >In version 1.1 of the dnprdnshort, partially trusted code cannot set the XmlResolver property. The workaround is to create an <see cref="T:System.Xml.XmlUrlResolver" />
 
               
 
-               with the necessary credentials, pass the URI to the <see
-               cref="M:System.Xml.XmlUrlResolver.GetEntity(System.Uri,System.String,System.Type)" />
+               with the necessary credentials, pass the URI to the <see cref="M:System.Xml.XmlUrlResolver.GetEntity(System.Uri,System.String,System.Type)" />
 
               
 
-               method, and then construct the XmlTextReader using the resulting <see
-               cref="T:System.IO.Stream" />
+               method, and then construct the XmlTextReader using the resulting <see cref="T:System.IO.Stream" />
 
               
 
@@ -596,8 +555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -605,12 +563,15 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for the file containing the XML data. The <see
-           cref="P:System.Xml.XmlTextReader.BaseURI" />
+          The URL for the file containing the XML data. The <see cref="P:System.Xml.XmlTextReader.BaseURI" />
 
           
 
@@ -648,8 +609,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -659,18 +619,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -683,13 +640,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified <see
-             cref="T:System.Xml.XmlNameTable" />
+             class with the specified <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -697,7 +652,11 @@
           >
         </summary>
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -736,13 +695,11 @@
 
           
 
-           or <paramref
-           name="nt" />
+           or <paramref name="nt" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -752,18 +709,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -773,13 +727,11 @@
             >
           </block>
           <para
-            >The <see
-             cref="T:System.Xml.XmlTextReader" />
+            >The <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             decodes the stream using <see
-             cref="T:System.Text.Encoding" />
+             decodes the stream using <see cref="T:System.Text.Encoding" />
 
             
 
@@ -790,13 +742,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified stream and <see
-             cref="T:System.Xml.XmlNameTable" />
+             class with the specified stream and <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -804,14 +754,22 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream containing the XML data to read. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -850,8 +808,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -861,18 +818,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -886,18 +840,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified <see
-             cref="T:System.IO.TextReader" />
+             class with the specified <see cref="T:System.IO.TextReader" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlNameTable" />
+             and <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -905,14 +856,22 @@
           >
         </summary>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The TextReader containing the XML data to read. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -951,15 +910,18 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -969,18 +931,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -993,8 +952,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -1002,19 +960,26 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL to use for resolving external resources. The <see
-           cref="P:System.Xml.XmlTextReader.BaseURI" />
+          The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" />
 
           
 
            is set to this value. </param
         >
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1049,7 +1014,11 @@
       </Parameters>
       <Docs>
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1059,18 +1028,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -1084,13 +1050,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified URL and <see
-             cref="T:System.IO.TextReader" />
+             class with the specified URL and <see cref="T:System.IO.TextReader" />
 
             
 
@@ -1098,19 +1062,26 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL to use for resolving external resources. The <see
-           cref="P:System.Xml.XmlTextReader.BaseURI" />
+          The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" />
 
           
 
            is set to this value. </param
         >
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1149,8 +1120,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1161,8 +1131,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1172,18 +1141,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -1196,13 +1162,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified file and <see
-             cref="T:System.Xml.XmlNameTable" />
+             class with the specified file and <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1210,14 +1174,22 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL for the file containing the XML data to read. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1257,8 +1229,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1269,18 +1240,15 @@
 
           
 
-           is not an <see
-           langword="Element" />
+           is not an <see langword="Element" />
 
           
 
-          , <see
-           langword="Attribute" />
+          , <see langword="Attribute" />
 
           
 
-          , or <see
-           langword="Document" />
+          , or <see langword="Document" />
           <see cref="T:System.Xml.XmlNodeType" />
 
           
@@ -1288,34 +1256,38 @@
           .</exception
         >
         <param name="fragType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNodeType" />
+          The <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the XML fragment. This also determines what the fragment can contain. (See table below.) </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlParserContext" />
+          The <see cref="T:System.Xml.XmlParserContext" />
 
           
 
-           in which the <paramref
-           name="xmlFragment" />
+           in which the <paramref name="xmlFragment" />
 
           
 
-           is to be parsed. This includes the <see
-           cref="T:System.Xml.XmlNameTable" />
+           is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -1325,18 +1297,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -1347,8 +1316,7 @@
           </block>
           <para>This constructor parses the given string as a fragment of XML. If the XML fragment is an element or attribute, you can bypass the root level rules for well-formed XML documents.</para>
           <para
-            >The following table lists valid values for <paramref
-             name="fragType" />
+            >The following table lists valid values for <paramref name="fragType" />
 
             
 
@@ -1372,8 +1340,7 @@
               <description>
                 <para>Any valid element content (for example, any combination of elements, comments, processing instructions, CDATA sections, text, and entity references). </para>
                 <para
-                  >An XML declaration can also be supplied. This allows you to specify the encoding for the XML fragment, rather than having to set it on the <see
-                   cref="T:System.Xml.XmlParserContext" />
+                  >An XML declaration can also be supplied. This allows you to specify the encoding for the XML fragment, rather than having to set it on the <see cref="T:System.Xml.XmlParserContext" />
 
                   
 
@@ -1402,8 +1369,7 @@
           <list type="ordered">
             <item>
               <para
-                >Checks the <see
-                 cref="P:System.Xml.XmlParserContext.Encoding" />
+                >Checks the <see cref="P:System.Xml.XmlParserContext.Encoding" />
 
                 
 
@@ -1421,18 +1387,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified stream, <see
-             cref="T:System.Xml.XmlNodeType" />
+             class with the specified stream, <see cref="T:System.Xml.XmlNodeType" />
 
             
 
-            , and <see
-             cref="T:System.Xml.XmlParserContext" />
+            , and <see cref="T:System.Xml.XmlParserContext" />
 
             
 
@@ -1440,41 +1403,49 @@
           >
         </summary>
         <param name="xmlFragment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream containing the XML fragment to parse. </param
         >
         <param name="fragType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNodeType" />
+          The <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the XML fragment. This also determines what the fragment can contain. (See table below.) </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlParserContext" />
+          The <see cref="T:System.Xml.XmlParserContext" />
 
           
 
-           in which the <paramref
-           name="xmlFragment" />
+           in which the <paramref name="xmlFragment" />
 
           
 
-           is to be parsed. This includes the <see
-           cref="T:System.Xml.XmlNameTable" />
+           is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -1514,37 +1485,41 @@
 
           
 
-           or <paramref
-           name="nt" />
+           or <paramref name="nt" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL to use for resolving external resources. The <see
-           cref="P:System.Xml.XmlTextReader.BaseURI" />
+          The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" />
 
           
 
-           is set to this value. If <paramref
-           name="url" />
+           is set to this value. If <paramref name="url" />
 
           
 
            is null, BaseURI is set to String.Empty. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1554,18 +1529,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -1578,13 +1550,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified URL, stream and <see
-             cref="T:System.Xml.XmlNameTable" />
+             class with the specified URL, stream and <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1592,31 +1562,41 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL to use for resolving external resources. The <see
-           cref="P:System.Xml.XmlTextReader.BaseURI" />
+          The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" />
 
           
 
-           is set to this value. If <paramref
-           name="url" />
+           is set to this value. If <paramref name="url" />
 
           
 
            is null, BaseURI is set to String.Empty. </param
         >
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream containing the XML data to read. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1656,22 +1636,29 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The TextReader containing the XML data to read. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1681,18 +1668,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -1706,18 +1690,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified URL, <see
-             cref="T:System.IO.TextReader" />
+             class with the specified URL, <see cref="T:System.IO.TextReader" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlNameTable" />
+             and <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1725,31 +1706,41 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL to use for resolving external resources. The <see
-           cref="P:System.Xml.XmlTextReader.BaseURI" />
+          The URL to use for resolving external resources. The <see cref="P:System.Xml.XmlTextReader.BaseURI" />
 
           
 
-           is set to this value. If <paramref
-           name="url" />
+           is set to this value. If <paramref name="url" />
 
           
 
            is null, BaseURI is set to String.Empty. </param
         >
         <param name="input">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The TextReader containing the XML data to read. </param
         >
         <param name="nt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1789,8 +1780,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1801,18 +1791,15 @@
 
           
 
-           is not an <see
-           langword="Element" />
+           is not an <see langword="Element" />
 
           
 
-          , <see
-           langword="Attribute" />
+          , <see langword="Attribute" />
 
           
 
-          , or <see
-           langword="Document" />
+          , or <see langword="Document" />
           <see cref="T:System.Xml.XmlNodeType" />
 
           
@@ -1820,34 +1807,38 @@
           .</exception
         >
         <param name="fragType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNodeType" />
+          The <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the XML fragment. This also determines what the fragment string can contain. (See table below.) </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlParserContext" />
+          The <see cref="T:System.Xml.XmlParserContext" />
 
           
 
-           in which the <paramref
-           name="xmlFragment" />
+           in which the <paramref name="xmlFragment" />
 
           
 
-           is to be parsed. This includes the <see
-           cref="T:System.Xml.XmlNameTable" />
+           is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -1857,18 +1848,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -1878,16 +1866,14 @@
             >
           </block>
           <para
-            >This constructor parses the given string as a fragment of XML. If the XML fragment is an element or attribute, you can bypass the root level rules for well-formed XML documents. This constructor can handle strings returned from <see
-             cref="M:System.Xml.XmlReader.ReadInnerXml" />
+            >This constructor parses the given string as a fragment of XML. If the XML fragment is an element or attribute, you can bypass the root level rules for well-formed XML documents. This constructor can handle strings returned from <see cref="M:System.Xml.XmlReader.ReadInnerXml" />
 
             
 
             .</para
           >
           <para
-            >The following table lists valid values for <paramref
-             name="fragType" />
+            >The following table lists valid values for <paramref name="fragType" />
 
             
 
@@ -1911,8 +1897,7 @@
               <description>
                 <para>Any valid element content (for example, any combination of elements, comments, processing instructions, CDATA sections, text, and entity references). </para>
                 <para
-                  >An XML declaration can also be supplied. This allows you to specify the encoding for the XML fragment, rather than having to set it on the <see
-                   cref="T:System.Xml.XmlParserContext" />
+                  >An XML declaration can also be supplied. This allows you to specify the encoding for the XML fragment, rather than having to set it on the <see cref="T:System.Xml.XmlParserContext" />
 
                   
 
@@ -1941,18 +1926,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             class with the specified string, <see
-             cref="T:System.Xml.XmlNodeType" />
+             class with the specified string, <see cref="T:System.Xml.XmlNodeType" />
 
             
 
-            , and <see
-             cref="T:System.Xml.XmlParserContext" />
+            , and <see cref="T:System.Xml.XmlParserContext" />
 
             
 
@@ -1960,41 +1942,49 @@
           >
         </summary>
         <param name="xmlFragment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string containing the XML fragment to parse. </param
         >
         <param name="fragType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNodeType" />
+          The <see cref="T:System.Xml.XmlNodeType" />
 
           
 
            of the XML fragment. This also determines what the fragment string can contain. (See table below.) </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlParserContext" />
+          The <see cref="T:System.Xml.XmlParserContext" />
 
           
 
-           in which the <paramref
-           name="xmlFragment" />
+           in which the <paramref name="xmlFragment" />
 
           
 
-           is to be parsed. This includes the <see
-           cref="T:System.Xml.XmlNameTable" />
+           is to be parsed. This includes the <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -2024,7 +2014,9 @@
         <value>
           <para
             > A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
@@ -2036,18 +2028,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2091,18 +2080,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2138,18 +2124,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2159,23 +2142,19 @@
             >
           </block>
           <para
-            >The binary content read methods include the <see
-             cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >The binary content read methods include the <see cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , <see
-             cref="M:System.Xml.XmlTextReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            , <see cref="M:System.Xml.XmlTextReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-            , and <see
-             cref="M:System.Xml.XmlTextReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            , and <see cref="M:System.Xml.XmlTextReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
@@ -2185,8 +2164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Gets a value indicating whether the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -2213,18 +2191,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2234,18 +2209,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="T:System.Xml.XmlTextReader" />
+            >The <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             throws a <see
-             cref="T:System.NotSupportedException" />
+             throws a <see cref="T:System.NotSupportedException" />
 
             
 
-             if the <see
-             cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+             if the <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -2255,13 +2227,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Gets a value indicating whether the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             implements the <see
-             cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+             implements the <see cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -2289,18 +2259,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2339,18 +2306,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2365,8 +2329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Xml.XmlReader.ReadState" />
+            >Changes the <see cref="P:System.Xml.XmlReader.ReadState" />
 
             
 
@@ -2397,7 +2360,9 @@
         <value>
           <para
             > A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
@@ -2409,18 +2374,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2460,23 +2422,25 @@
       <Docs>
         <value>
           <para
-            > If the <see
-             cref="P:System.Xml.XmlTextReader.ReadState" />
+            > If the <see cref="P:System.Xml.XmlTextReader.ReadState" />
 
             
 
              is <see
-             cref="F:System.Xml.ReadState.Interactive" qualify="true" />
+              cref="F:System.Xml.ReadState.Interactive"
+              qualify="true"
+            />
 
             
 
             , a <see
-             cref="T:System.Text.Encoding" qualify="true" />
+              cref="T:System.Text.Encoding"
+              qualify="true"
+            />
 
             
 
-            ; otherwise <see
-             langword="null" />
+            ; otherwise <see langword="null" />
 
             
 
@@ -2487,18 +2451,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2508,13 +2469,11 @@
             >
           </block>
           <para
-            >Because <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Because <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             uses the <see
-             cref="T:System.Text.Encoding" />
+             uses the <see cref="T:System.Text.Encoding" />
 
             
 
@@ -2552,18 +2511,15 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2573,8 +2529,7 @@
             >
           </block>
           <para
-            >This property can be changed on the fly and takes effect after the next <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+            >This property can be changed on the fly and takes effect after the next <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
@@ -2618,8 +2573,7 @@
             </item>
           </list>
           <para
-            >When EntityHandling is set to ExpandCharEntites, and <see
-             cref="P:System.Xml.XmlTextReader.WhitespaceHandling" />
+            >When EntityHandling is set to ExpandCharEntites, and <see cref="P:System.Xml.XmlTextReader.WhitespaceHandling" />
 
             
 
@@ -2713,19 +2667,19 @@
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
             
 indicates the reader is positioned at the end of the stream;
-otherwise, <see
-             langword="false" />
+otherwise, <see langword="false" />
 
             
 
@@ -2736,18 +2690,15 @@ otherwise, <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2792,35 +2743,29 @@ otherwise, <see
 
           
 
-           is less than 0, or greater than or equal to the <see
-           cref="P:System.Xml.XmlTextReader.AttributeCount" />
+           is less than 0, or greater than or equal to the <see cref="P:System.Xml.XmlTextReader.AttributeCount" />
 
           
 
-           of the containing element.<para
-          >
+           of the containing element.<para>
             <block subset="none" type="note">
               <see cref="P:System.Xml.XmlTextReader.AttributeCount" />
 
               
 
-               returns zero for all node types except <see
-               langword="Attribute" />
+               returns zero for all node types except <see langword="Attribute" />
 
               
 
-              , <see
-               langword="DocumentType" />
+              , <see langword="DocumentType" />
 
               
 
-              , <see
-               langword="Element" />
+              , <see langword="Element" />
 
               
 
-              , and <see
-               langword="XmlDeclaration" />
+              , and <see langword="XmlDeclaration" />
 
               
 
@@ -2830,19 +2775,16 @@ otherwise, <see
         </exception>
         <example>
           <para
-            >See the <see
-             cref="M:System.Xml.XmlTextReader.GetAttribute(System.Int32)" />
+            >See the <see cref="M:System.Xml.XmlTextReader.GetAttribute(System.Int32)" />
 
             
 
-            (<see
-             langword="String" />
+            (<see langword="String" />
 
             
 
             ,
-<see
-             langword="String" />
+<see langword="String" />
 
             
 
@@ -2853,18 +2795,15 @@ otherwise, <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2884,7 +2823,11 @@ otherwise, <see
           <para>The value of the specified attribute.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2918,18 +2861,15 @@ otherwise, <see
       <Docs>
         <example>
           <para
-            >See the <see
-             cref="M:System.Xml.XmlTextReader.GetAttribute(System.Int32)" />
+            >See the <see cref="M:System.Xml.XmlTextReader.GetAttribute(System.Int32)" />
 
             
 
-            (<see
-             langword="String" />
+            (<see langword="String" />
 
             
 
-            , <see
-             langword="String" />
+            , <see langword="String" />
 
             
 
@@ -2941,18 +2881,15 @@ otherwise, <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -2973,7 +2910,11 @@ otherwise, <see
           <para>The value of the specified attribute. If the attribute is not found, null is returned.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3057,7 +2998,11 @@ public class Reader {
           <para> int - int - int</para>
         </example>
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3067,18 +3012,15 @@ public class Reader {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3096,8 +3038,7 @@ String dt2 = reader.GetAttribute("type","urn:datatypes");</code>
           <code>String dt3 = reader.GetAttribute("xmlns:dt");
 String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
-            >You can also get this information using the <see
-             cref="P:System.Xml.XmlTextReader.Prefix" />
+            >You can also get this information using the <see cref="P:System.Xml.XmlTextReader.Prefix" />
 
             
 
@@ -3113,14 +3054,22 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>The value of the specified attribute. If the attribute is not found, null is returned. This method does not move the reader.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3155,18 +3104,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3177,13 +3123,11 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           </block>
           <para>The dictionary consists of a collection of namespace names keyed by prefix. It can be used to enumerate the in-scope namespaces. The dictionary is a disconnected copy of the namespace list of the reader. It remains unchanged as the reader position, current in-scope namespace list, changes.</para>
           <para
-            >The following table describes how the <see
-             cref="T:System.Xml.XmlNamespaceScope" />
+            >The following table describes how the <see cref="T:System.Xml.XmlNamespaceScope" />
 
             
 
-             enumeration value affects the whether or not the default and built-in namespaces are returned by <see
-             cref="M:System.Xml.XmlTextReader.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+             enumeration value affects the whether or not the default and built-in namespaces are returned by <see cref="M:System.Xml.XmlTextReader.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
 
             
 
@@ -3257,8 +3201,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -3266,12 +3209,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           >
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceScope" />
+          An <see cref="T:System.Xml.XmlNamespaceScope" />
 
           
 
@@ -3304,18 +3250,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3325,16 +3268,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             >
           </block>
           <para
-            >Because <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Because <see cref="T:System.Xml.XmlTextReader" />
 
             
 
              does a buffered Read, it must be able to return the remainder of the unused buffer so that no data is lost. This allows protocols (such as multi-part MIME) to package XML in the same stream as other things.</para
           >
           <para
-            >After calling this method, <see
-             cref="P:System.Xml.XmlTextReader.EOF" />
+            >After calling this method, <see cref="P:System.Xml.XmlTextReader.EOF" />
 
             
 
@@ -3348,8 +3289,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.TextReader" />
+            >A <see cref="T:System.IO.TextReader" />
 
             
 
@@ -3380,18 +3320,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3432,19 +3369,19 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates the node on
    which the reader is currently positioned can have an associated text value;
-   otherwise, <see
-             langword="false" />
+   otherwise, <see langword="false" />
 
             
 
@@ -3455,18 +3392,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3564,8 +3498,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the current node can have a <see
-             cref="P:System.Xml.XmlTextReader.Value" />
+            >Gets a value indicating whether the current node can have a <see cref="P:System.Xml.XmlTextReader.Value" />
 
             
 
@@ -3596,12 +3529,13 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <value>
           <para
             >This property always returns the <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             value <see
-             langword="false" />
+             value <see langword="false" />
 
             
 
@@ -3613,18 +3547,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3663,35 +3594,32 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates the
-   current node is an element (<see
-             cref="P:System.Xml.XmlTextReader.NodeType" />
+   current node is an element (<see cref="P:System.Xml.XmlTextReader.NodeType" />
 
             
 
              equals
-<see
-             cref="F:System.Xml.XmlNodeType.Element" />
+<see cref="F:System.Xml.XmlNodeType.Element" />
 
             
 
             ) that ends 
-   with "<c
-            >/&gt;</c>
+   with "<c>/&gt;</c>
 
             
 
-            "; otherwise,<see
-             langword=" false" />
+            "; otherwise,<see langword=" false" />
 
             
 
@@ -3702,18 +3630,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -3751,7 +3676,9 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
       <Docs>
         <param name="i"
           >A <see
-           cref="T:System.Int32" qualify="true" />
+            cref="T:System.Int32"
+            qualify="true"
+          />
 
           
 
@@ -3763,7 +3690,9 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
@@ -3775,8 +3704,7 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para>This property does not move the reader.</para>
           <block subset="none" type="note">
             <para
-              >This property overrides the <see
-               cref="T:System.Xml.XmlReader" />
+              >This property overrides the <see cref="T:System.Xml.XmlReader" />
 
               
 
@@ -3789,35 +3717,29 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
-           is less than 0 or greater than or equal to the <see
-           cref="P:System.Xml.XmlTextReader.AttributeCount" />
+           is less than 0 or greater than or equal to the <see cref="P:System.Xml.XmlTextReader.AttributeCount" />
 
           
 
-           of the containing element.<para
-          >
+           of the containing element.<para>
             <block subset="none" type="note">
               <see cref="P:System.Xml.XmlTextReader.AttributeCount" />
 
               
 
-               returns zero for all node types except <see
-               langword="Attribute" />
+               returns zero for all node types except <see langword="Attribute" />
 
               
 
-              , <see
-               langword="DocumentType" />
+              , <see langword="DocumentType" />
 
               
 
-              , <see
-               langword="Element" />
+              , <see langword="Element" />
 
               
 
-              , and <see
-               langword="XmlDeclaration" />
+              , and <see langword="XmlDeclaration" />
 
               
 
@@ -3848,7 +3770,9 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
       <Docs>
         <param name="name"
           >A <see
-           cref="T:System.String" qualify="true" />
+            cref="T:System.String"
+            qualify="true"
+          />
 
           
 
@@ -3860,13 +3784,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
             
-containing the value of the specified attribute, or <see
-             langword="null" />
+containing the value of the specified attribute, or <see langword="null" />
 
             
 
@@ -3879,8 +3804,7 @@ attribute is not found.</para
           <para>This property does not move the reader.</para>
           <block subset="none" type="note">
             <para
-              >If the reader is positioned on a <see
-               langword="DocumentType" />
+              >If the reader is positioned on a <see langword="DocumentType" />
 
               
 
@@ -3888,8 +3812,7 @@ attribute is not found.</para
       method can be used to get the PUBLIC and SYSTEM literals.</para
             >
             <para
-              >This property overrides the <see
-               cref="T:System.Xml.XmlReader" />
+              >This property overrides the <see cref="T:System.Xml.XmlReader" />
 
               
 
@@ -3930,13 +3853,14 @@ attribute is not found.</para
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
             
-containing the value of the specified attribute, or <see
-             langword="null" />
+containing the value of the specified attribute, or <see langword="null" />
 
             
 
@@ -3949,8 +3873,7 @@ attribute is not found.</para
           <para>This property does not move the reader.</para>
           <block subset="none" type="note">
             <para
-              >This property overrides the <see
-               cref="T:System.Xml.XmlReader" />
+              >This property overrides the <see cref="T:System.Xml.XmlReader" />
 
               
 
@@ -3986,7 +3909,9 @@ attribute is not found.</para
         <value>
           <para
             >A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
@@ -3997,18 +3922,15 @@ attribute is not found.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4019,8 +3941,7 @@ attribute is not found.</para
           </block>
           <para>This property is most commonly used for error reporting, but can be called at any time. The starting value for this property is 1.</para>
           <para
-            >Combined with <see
-             cref="P:System.Xml.XmlTextReader.LinePosition" />
+            >Combined with <see cref="P:System.Xml.XmlTextReader.LinePosition" />
 
             
 
@@ -4055,7 +3976,9 @@ attribute is not found.</para
         <value>
           <para
             >A <see
-             cref="T:System.Int32" qualify="true" />
+              cref="T:System.Int32"
+              qualify="true"
+            />
 
             
 
@@ -4066,18 +3989,15 @@ attribute is not found.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4093,8 +4013,7 @@ attribute is not found.</para
  &lt;/root&gt;</code>
           <para>On the first line of the preceding XML text, a LinePosition of 2 corresponds to the character r; on the second line, a LinePosition of 5 corresponds to the character t; and on the third line, a LinePosition of 3 corresponds to the character r.</para>
           <para
-            >Combined with <see
-             cref="P:System.Xml.XmlTextReader.LineNumber" />
+            >Combined with <see cref="P:System.Xml.XmlTextReader.LineNumber" />
 
             
 
@@ -4129,26 +4048,28 @@ attribute is not found.</para
         <value>
           <para
             > A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
              
 containing the local name of the current
 node or, for node types that do not have a name (like
-<see
-             langword="Text" />
+<see langword="Text" />
 
             
 
-            , <see
-             langword="Comment" />
+            , <see langword="Comment" />
 
             
 
              
 , and so on), <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -4159,18 +4080,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4214,23 +4132,19 @@ node or, for node types that do not have a name (like
       </Parameters>
       <Docs>
         <exception cref="T:System.ArgumentNullException"
-          >The <see
-           cref="P:System.Xml.XmlTextReader.Namespaces" />
+          >The <see cref="P:System.Xml.XmlTextReader.Namespaces" />
 
           
 
-           property of the current instance is <see
-           langword="true" />
+           property of the current instance is <see langword="true" />
 
           
 
-           and <paramref
-           name="prefix" />
+           and <paramref name="prefix" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -4240,18 +4154,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4276,7 +4187,11 @@ node or, for node types that do not have a name (like
           <para>The namespace URI to which the prefix maps or null if no matching prefix is found.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4337,35 +4252,29 @@ node or, for node types that do not have a name (like
 
           
 
-           is less than 0 or greater than or equal to the <see
-           cref="P:System.Xml.XmlTextReader.AttributeCount" />
+           is less than 0 or greater than or equal to the <see cref="P:System.Xml.XmlTextReader.AttributeCount" />
 
           
 
-           of the containing element.<para
-          >
+           of the containing element.<para>
             <block subset="none" type="note">
               <see cref="P:System.Xml.XmlTextReader.AttributeCount" />
 
               
 
-               returns zero for all node types except <see
-               langword="Attribute" />
+               returns zero for all node types except <see langword="Attribute" />
 
               
 
-              , <see
-               langword="DocumentType" />
+              , <see langword="DocumentType" />
 
               
 
-              , <see
-               langword="Element" />
+              , <see langword="Element" />
 
               
 
-              , and <see
-               langword="XmlDeclaration" />
+              , and <see langword="XmlDeclaration" />
 
               
 
@@ -4377,18 +4286,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4403,7 +4309,11 @@ node or, for node types that do not have a name (like
           <para>Moves to the attribute with the specified index.</para>
         </summary>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4439,18 +4349,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4460,18 +4367,15 @@ node or, for node types that do not have a name (like
             >
           </block>
           <para
-            >After calling MoveToAttribute, the <see
-             cref="P:System.Xml.XmlTextReader.Name" />
+            >After calling MoveToAttribute, the <see cref="P:System.Xml.XmlTextReader.Name" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlTextReader.NamespaceURI" />
+            , <see cref="P:System.Xml.XmlTextReader.NamespaceURI" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlTextReader.Prefix" />
+            , and <see cref="P:System.Xml.XmlTextReader.Prefix" />
 
             
 
@@ -4487,7 +4391,11 @@ node or, for node types that do not have a name (like
           <para>true if the attribute is found; otherwise, false. If false, the reader's position does not change.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4527,18 +4435,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4548,18 +4453,15 @@ node or, for node types that do not have a name (like
             >
           </block>
           <para
-            >After calling MoveToAttribute, the <see
-             cref="P:System.Xml.XmlTextReader.Name" />
+            >After calling MoveToAttribute, the <see cref="P:System.Xml.XmlTextReader.Name" />
 
             
 
-            , <see
-             cref="P:System.Xml.XmlTextReader.NamespaceURI" />
+            , <see cref="P:System.Xml.XmlTextReader.NamespaceURI" />
 
             
 
-            , and <see
-             cref="P:System.Xml.XmlTextReader.Prefix" />
+            , and <see cref="P:System.Xml.XmlTextReader.Prefix" />
 
             
 
@@ -4575,14 +4477,22 @@ node or, for node types that do not have a name (like
           <para>true if the attribute is found; otherwise, false. If false, the reader's position does not change.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -4616,18 +4526,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4674,18 +4581,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4731,18 +4635,15 @@ node or, for node types that do not have a name (like
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4752,8 +4653,7 @@ node or, for node types that do not have a name (like
             >
           </block>
           <para
-            >If the current node is an element node, this method is equivalent to <see
-             cref="M:System.Xml.XmlTextReader.MoveToFirstAttribute" />
+            >If the current node is an element node, this method is equivalent to <see cref="M:System.Xml.XmlTextReader.MoveToFirstAttribute" />
 
             
 
@@ -4792,25 +4692,27 @@ node or, for node types that do not have a name (like
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
             
 containing the qualified name of the current node or, for node types that do not
-have a name (like <see
-             langword="Text" />
+have a name (like <see langword="Text" />
 
             
 
-            , <see
-             langword="Comment" />
+            , <see langword="Comment" />
 
             
 
              , and so on),
 <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -4821,18 +4723,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4870,23 +4769,22 @@ have a name (like <see
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates the reader supports namespaces; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
-            . The default is <see
-             langword="true" />
+            . The default is <see langword="true" />
 
             
 
@@ -4895,13 +4793,14 @@ have a name (like <see
           >
         </value>
         <exception cref="T:System.InvalidOperationException"
-          >When attempting to set the property, the <see
-           cref="P:System.Xml.XmlTextReader.ReadState" />
+          >When attempting to set the property, the <see cref="P:System.Xml.XmlTextReader.ReadState" />
 
           
 
            was not <see
-           cref="F:System.Xml.ReadState.Initial" qualify="true" />
+            cref="F:System.Xml.ReadState.Initial"
+            qualify="true"
+          />
 
           
 
@@ -4911,18 +4810,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -4962,14 +4858,18 @@ have a name (like <see
         <value>
           <para
             > A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
              containing the
    namespace URI of the current node or, if no namespace URI is associated with the
    current node, <see
-             cref="F:System.String.Empty" qualify="true" />
+              cref="F:System.String.Empty"
+              qualify="true"
+            />
 
             
 
@@ -4981,18 +4881,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5037,7 +4934,9 @@ have a name (like <see
         <value>
           <para
             > The <see
-             cref="T:System.Xml.XmlNameTable" qualify="true" />
+              cref="T:System.Xml.XmlNameTable"
+              qualify="true"
+            />
 
             
 
@@ -5048,18 +4947,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5069,8 +4965,7 @@ have a name (like <see
             >
           </block>
           <para
-            >All node and attribute names returned from <see
-             cref="T:System.Xml.XmlTextReader" />
+            >All node and attribute names returned from <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -5080,8 +4975,7 @@ have a name (like <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Gets the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -5117,8 +5011,7 @@ have a name (like <see
       <Docs>
         <value>
           <para
-            > One of the members of the <see
-             cref="T:System.Xml.XmlNodeType" />
+            > One of the members of the <see cref="T:System.Xml.XmlNodeType" />
 
             
 
@@ -5131,18 +5024,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5181,23 +5071,22 @@ have a name (like <see
         <value>
           <para
             >A <see
-             cref="T:System.Boolean" qualify="true" />
+              cref="T:System.Boolean"
+              qualify="true"
+            />
 
             
 
-             where <see
-             langword="true" />
+             where <see langword="true" />
 
             
 
              indicates to normalize; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
-            . The default is <see
-             langword="false" />
+            . The default is <see langword="false" />
 
             
 
@@ -5211,18 +5100,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5234,13 +5120,11 @@ have a name (like <see
           <para>This property can be changed at any time and takes effect on the next read operation.</para>
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="T:System.Xml.XmlTextReader" />
+              >If the <see cref="T:System.Xml.XmlTextReader" />
 
               
 
-               is used to construct an <see
-               cref="T:System.Xml.XmlValidatingReader" />
+               is used to construct an <see cref="T:System.Xml.XmlValidatingReader" />
 
               
 
@@ -5297,7 +5181,9 @@ have a name (like <see
         <value>
           <para
             > A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
@@ -5309,18 +5195,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5356,18 +5239,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5377,29 +5257,25 @@ have a name (like <see
             >
           </block>
           <para
-            >DTD processing is enabled by default for backwards compatibility. However, unless your application requires DTD processing, you should disable this setting. Disabling DTD processing can be useful in preventing certain denial of service attacks. If set to true, the reader throws an <see
-             cref="T:System.Xml.XmlException" />
+            >DTD processing is enabled by default for backwards compatibility. However, unless your application requires DTD processing, you should disable this setting. Disabling DTD processing can be useful in preventing certain denial of service attacks. If set to true, the reader throws an <see cref="T:System.Xml.XmlException" />
 
             
 
              when any DTD content is encountered.</para
           >
           <para
-            >If you have DTD processing enabled, you need to be aware of including DTDs from untrusted sources and possible denial of service attacks. Use the <see
-             cref="T:System.Xml.XmlSecureResolver" />
+            >If you have DTD processing enabled, you need to be aware of including DTDs from untrusted sources and possible denial of service attacks. Use the <see cref="T:System.Xml.XmlSecureResolver" />
 
             
 
-             to restrict the resources that the <see
-             cref="T:System.Xml.XmlTextReader" />
+             to restrict the resources that the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
              can access. You can also design your application so that the XML processing is memory and time constrained. For example, configure time-out limits in your ASP.NET application</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="9f180c2a-e7e9-4e6f-b93a-074d7ab0dcb0"
                 >Security and Your System.Xml Applications</a
               >
@@ -5413,8 +5289,7 @@ have a name (like <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether to allow DTD processing. This property is obsolete. Use <see
-             cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+            >Gets or sets a value indicating whether to allow DTD processing. This property is obsolete. Use <see cref="P:System.Xml.XmlTextReader.DtdProcessing" />
 
             
 
@@ -5444,7 +5319,9 @@ have a name (like <see
         <value>
           <para
             > A <see
-             cref="T:System.Char" qualify="true" />
+              cref="T:System.Char"
+              qualify="true"
+            />
 
             
 
@@ -5457,18 +5334,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5511,18 +5385,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5570,18 +5441,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5591,8 +5459,7 @@ have a name (like <see
             >
           </block>
           <para
-            >Use this method after calling MoveToAttribute to read through the text or entity reference nodes that make up the attribute value. The <see
-             cref="P:System.Xml.XmlReader.Depth" />
+            >Use this method after calling MoveToAttribute to read through the text or entity reference nodes that make up the attribute value. The <see cref="P:System.Xml.XmlReader.Depth" />
 
             
 
@@ -5645,8 +5512,7 @@ have a name (like <see
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -5658,8 +5524,7 @@ have a name (like <see
 
             
 
-             &lt; 0, or <paramref
-             name="len" />
+             &lt; 0, or <paramref name="len" />
 
             
 
@@ -5671,18 +5536,15 @@ have a name (like <see
 
             
 
-             &gt; <paramref
-             name="array" />
+             &gt; <paramref name="array" />
 
             
 
-            .<see
-             langword="Length" />
+            .<see langword="Length" />
 
             
 
-             - <paramref
-             name="offset" />
+             - <paramref name="offset" />
 
             
 
@@ -5691,7 +5553,11 @@ have a name (like <see
         </exception>
         <exception cref="T:System.Xml.XmlException">The Base64 sequence is not valid.</exception>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5701,18 +5567,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5722,8 +5585,7 @@ have a name (like <see
             >
           </block>
           <para
-            >Like <see
-             cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />
+            >Like <see cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -5739,21 +5601,33 @@ have a name (like <see
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of characters that serves as the buffer to which the text contents are written. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index into the array specifying where the method can begin to write to the buffer. </param
         >
         <param name="len">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5795,8 +5669,7 @@ have a name (like <see
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -5808,8 +5681,7 @@ have a name (like <see
 
             
 
-             &lt; 0, or <paramref
-             name="len" />
+             &lt; 0, or <paramref name="len" />
 
             
 
@@ -5821,18 +5693,15 @@ have a name (like <see
 
             
 
-             &gt; <paramref
-             name="array" />
+             &gt; <paramref name="array" />
 
             
 
-            .<see
-             langword="Length" />
+            .<see langword="Length" />
 
             
 
-             - <paramref
-             name="offset" />
+             - <paramref name="offset" />
 
             
 
@@ -5841,7 +5710,11 @@ have a name (like <see
         </exception>
         <exception cref="T:System.Xml.XmlException">The BinHex sequence is not valid.</exception>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5851,18 +5724,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -5872,8 +5742,7 @@ have a name (like <see
             >
           </block>
           <para
-            >Like <see
-             cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />
+            >Like <see cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />
 
             
 
@@ -5889,21 +5758,33 @@ have a name (like <see
           <para>The number of bytes written to your buffer.</para>
         </returns>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The byte array that serves as the buffer to which the decoded binary bytes are written. </param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index into the array specifying where the method can begin to write to the buffer. </param
         >
         <param name="len">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -5946,18 +5827,15 @@ have a name (like <see
 
             
 
-             &gt; <paramref
-             name="buffer" />
+             &gt; <paramref name="buffer" />
 
             
 
-            .<see
-             langword="Length" />
+            .<see langword="Length" />
 
             
 
-             - <paramref
-             name="index" />
+             - <paramref name="index" />
 
             
 
@@ -5969,8 +5847,7 @@ have a name (like <see
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -5982,8 +5859,7 @@ have a name (like <see
 
             
 
-             &lt; 0, or <paramref
-             name="count" />
+             &lt; 0, or <paramref name="count" />
 
             
 
@@ -5994,18 +5870,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6063,31 +5936,41 @@ have a name (like <see
           <para>The number of characters read. This can be 0 if the reader is not positioned on an element or if there is no more text content to return in the current context.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of characters that serves as the buffer to which the text contents are written. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position within <paramref
-           name="buffer" />
+          The position within <paramref name="buffer" />
 
           
 
            where the method can begin writing text contents. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters to write into <paramref
-           name="buffer" />
+          The number of characters to write into <paramref name="buffer" />
 
           
 
@@ -6124,18 +6007,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6147,8 +6027,7 @@ have a name (like <see
           <para>This method streams the content, decodes the Base64 content, and returns the decoded binary bytes (for example, an inline Base64-encoded GIF image) into the buffer. This method can be called successively to read large streams of embedded text. For more information, see RFC 1521, "MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for Specifying and Describing the Format of Internet Message Bodies". You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org.</para>
           <block subset="none" type="note">
             <para
-              >You should not access any of the reader properties between calls to the <see
-               cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+              >You should not access any of the reader properties between calls to the <see cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
               
 
@@ -6189,21 +6068,33 @@ have a name (like <see
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6239,18 +6130,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6262,8 +6150,7 @@ have a name (like <see
           <para>This method streams the content, decodes the BinHex content, and returns the decoded binary bytes (for example, an inline BinHex encoded GIF image) into the buffer. This method can be called successively to read large streams of embedded text.</para>
           <block subset="none" type="note">
             <para
-              >You should not access any of the reader properties between calls to the <see
-               cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+              >You should not access any of the reader properties between calls to the <see cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
               
 
@@ -6304,21 +6191,33 @@ have a name (like <see
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6354,18 +6253,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6377,44 +6273,37 @@ have a name (like <see
           <para>This method reads the element content, decodes it using Base64 encoding, and returns the decoded binary bytes (for example, an inline Base64 encoded GIF image) into the buffer. For more information, see RFC 1521, "MIME (Multipurpose Internet Mail Extensions) Part One: Mechanisms for Specifying and Describing the Format of Internet Message Bodies". You can obtain RFCs from the Request for Comments Web site at http://www.rfc-editor.org.</para>
           <para>This method can only read simple-content elements. The element can contain text, white space, significant white space, CDATA sections, comments and processing instructions. It can also contain entity references, which are automatically expanded. The element cannot have child elements.</para>
           <para
-            >This method is very similar to the <see
-             cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+            >This method is very similar to the <see cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method except that it can only be called on element node types.</para
           >
           <para
-            >If the <paramref
-             name="count" />
+            >If the <paramref name="count" />
 
             
 
-             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see
-             cref="T:System.Xml.XmlTextReader" />
+             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             reads all the remaining bytes in the document and returns the number of bytes read. The next <see
-             cref="T:System.Xml.XmlTextReader" />
+             reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             method call returns a zero and moves the reader to the node following the <see
-             cref="F:System.Xml.XmlNodeType.EndElement" />
+             method call returns a zero and moves the reader to the node following the <see cref="F:System.Xml.XmlNodeType.EndElement" />
 
             
 
             .</para
           >
           <para
-            >If you call <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+            >If you call <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
-             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
@@ -6430,21 +6319,33 @@ have a name (like <see
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6480,18 +6381,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6503,44 +6401,37 @@ have a name (like <see
           <para>This method reads the element content, decodes it using BinHex encoding, and returns the decoded binary bytes (for example, an inline BinHex encoded GIF image) into the buffer.</para>
           <para>This method can only read simple-content elements. The element can contain text, white space, significant white space, CDATA sections, comments and processing instructions. It can also contain entity references, which are automatically expanded. The element cannot have child elements.</para>
           <para
-            >This method is very similar to the <see
-             cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+            >This method is very similar to the <see cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
             
 
              method except that it can only be called on element node types.</para
           >
           <para
-            >If the <paramref
-             name="count" />
+            >If the <paramref name="count" />
 
             
 
-             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see
-             cref="T:System.Xml.XmlTextReader" />
+             value is higher than the number of bytes in the document, or if it is equal to the number of bytes in the document, the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             reads all the remaining bytes in the document and returns the number of bytes read. The next <see
-             cref="T:System.Xml.XmlTextReader" />
+             reads all the remaining bytes in the document and returns the number of bytes read. The next <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             method call returns a zero and moves the reader to the node following the <see
-             cref="F:System.Xml.XmlNodeType.EndElement" />
+             method call returns a zero and moves the reader to the node following the <see cref="F:System.Xml.XmlNodeType.EndElement" />
 
             
 
             .</para
           >
           <para
-            >If you call <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+            >If you call <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
-             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+             before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
@@ -6556,21 +6447,33 @@ have a name (like <see
           <para>The number of bytes written to the buffer.</para>
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -6604,8 +6507,7 @@ have a name (like <see
       <Docs>
         <value>
           <para
-            > One of the members of the <see
-             cref="T:System.Xml.ReadState" />
+            > One of the members of the <see cref="T:System.Xml.ReadState" />
 
             
 
@@ -6617,18 +6519,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6672,18 +6571,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6728,8 +6624,7 @@ have a name (like <see
       <Parameters />
       <Docs>
         <exception cref="T:System.InvalidOperationException"
-          >The current instance was constructed with a <see
-           cref="T:System.Xml.XmlParserContext" />
+          >The current instance was constructed with a <see cref="T:System.Xml.XmlParserContext" />
 
           
 
@@ -6739,18 +6634,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6762,8 +6654,7 @@ have a name (like <see
           <para>This method enables you to parse multiple XML documents in a single stream. When you reach the end of an XML document, you can call ResetState to reset the state of the reader in preparation for the next XML document.</para>
           <block subset="none" type="note">
             <para
-              >The documents in the stream must share the same encoding. If this is not the case, when ResetState is called an <see
-               cref="T:System.Xml.XmlException" />
+              >The documents in the stream must share the same encoding. If this is not the case, when ResetState is called an <see cref="T:System.Xml.XmlException" />
 
               
 
@@ -6827,18 +6718,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6848,8 +6736,7 @@ have a name (like <see
             >
           </block>
           <para
-            >If the reader is positioned on an EntityReference node (XmlNodeType.EntityReference), if <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+            >If the reader is positioned on an EntityReference node (XmlNodeType.EntityReference), if <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
@@ -6857,8 +6744,7 @@ have a name (like <see
           >
           <block subset="none" type="note">
             <para
-              >After calling this method, if the entity is part of an attribute value, you must call <see
-               cref="M:System.Xml.XmlTextReader.ReadAttributeValue" />
+              >After calling this method, if the entity is part of an attribute value, you must call <see cref="M:System.Xml.XmlTextReader.ReadAttributeValue" />
 
               
 
@@ -6889,18 +6775,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6913,13 +6796,11 @@ have a name (like <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlReaderSettings" />
+            >Gets the <see cref="T:System.Xml.XmlReaderSettings" />
 
             
 
-             object used to create this <see
-             cref="T:System.Xml.XmlTextReader" />
+             object used to create this <see cref="T:System.Xml.XmlTextReader" />
 
             
 
@@ -6952,18 +6833,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -6974,8 +6852,7 @@ have a name (like <see
           </block>
           <para>In the following XML input if the reader is positioned on the &lt;a&gt; node or any of its attributes, calling Skip positions the reader to the &lt;b&gt; node.</para>
           <para
-            >If the reader is positioned on a leaf node already (such as the &lt;x&gt; node or the text node abc), calling Skip is the same as calling <see
-             cref="M:System.Xml.XmlTextReader.Read" />
+            >If the reader is positioned on a leaf node already (such as the &lt;x&gt; node or the text node abc), calling Skip is the same as calling <see cref="M:System.Xml.XmlTextReader.Read" />
 
             
 
@@ -7006,13 +6883,11 @@ have a name (like <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.IXmlLineInfo" />
+             instance is cast to an <see cref="T:System.Xml.IXmlLineInfo" />
 
             
 
@@ -7022,8 +6897,7 @@ have a name (like <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlLineInfo.HasLineInfo" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlLineInfo.HasLineInfo" />
 
             
 
@@ -7033,13 +6907,11 @@ have a name (like <see
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="P:System.Xml.IXmlLineInfo.LineNumber" />
+            >true if <see cref="P:System.Xml.IXmlLineInfo.LineNumber" />
 
             
 
-             and <see
-             cref="P:System.Xml.IXmlLineInfo.LinePosition" />
+             and <see cref="P:System.Xml.IXmlLineInfo.LinePosition" />
 
             
 
@@ -7076,13 +6948,11 @@ have a name (like <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.XmlTextReader" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+             instance is cast to an <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -7092,8 +6962,7 @@ have a name (like <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlNamespaceResolver.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
 
             
 
@@ -7103,8 +6972,7 @@ have a name (like <see
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionary" />
+            >An <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -7112,12 +6980,15 @@ have a name (like <see
           >
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNamespaceScope" />
+          An <see cref="T:System.Xml.XmlNamespaceScope" />
 
           
 
@@ -7152,8 +7023,7 @@ have a name (like <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
+            >For a description of this member, see <see cref="M:System.Xml.IXmlNamespaceResolver.LookupPrefix(System.String)" />
 
             
 
@@ -7187,7 +7057,9 @@ have a name (like <see
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
@@ -7198,18 +7070,15 @@ have a name (like <see
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -7253,12 +7122,13 @@ have a name (like <see
         <value>
           <para
             >One of the members of the <see
-             cref="T:System.Xml.WhitespaceHandling" qualify="true" />
+              cref="T:System.Xml.WhitespaceHandling"
+              qualify="true"
+            />
 
             
 
-             enumeration. The default is <see
-             cref="F:System.Xml.WhitespaceHandling.All" />
+             enumeration. The default is <see cref="F:System.Xml.WhitespaceHandling.All" />
 
             
 
@@ -7268,21 +7138,18 @@ space).</para
           >
         </value>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value to be set is not one of the members of the <see
-           cref="T:System.Xml.WhitespaceHandling" />
+          >The value to be set is not one of the members of the <see cref="T:System.Xml.WhitespaceHandling" />
 
           
 
            enumeration.</exception
         >
         <exception cref="T:System.InvalidOperationException"
-          >When setting the property, the <see
-           cref="P:System.Xml.XmlTextReader.ReadState" />
+          >When setting the property, the <see cref="P:System.Xml.XmlTextReader.ReadState" />
 
           
 
-           is <see
-           cref="F:System.Xml.ReadState.Closed" />
+           is <see cref="F:System.Xml.ReadState.Closed" />
 
           
 
@@ -7292,18 +7159,15 @@ space).</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -7343,13 +7207,14 @@ space).</para
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
              containing the 
-   current <c
-            >xml:lang</c>
+   current <c>xml:lang</c>
 
             
 
@@ -7360,18 +7225,15 @@ space).</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -7417,7 +7279,9 @@ space).</para
         <value>
           <para
             > The <see
-             cref="T:System.Xml.XmlResolver" qualify="true" />
+              cref="T:System.Xml.XmlResolver"
+              qualify="true"
+            />
 
             
 
@@ -7425,14 +7289,12 @@ space).</para
           >
           <para
             > If this property is not set, the current instance uses a 
-   new instance of the <see
-             cref="T:System.Xml.XmlUrlResolver" />
+   new instance of the <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
              class with
-   default credentials. If this property is set to <see
-             langword="null" />
+   default credentials. If this property is set to <see langword="null" />
 
             
 
@@ -7444,18 +7306,15 @@ space).</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 
@@ -7468,8 +7327,7 @@ space).</para
           <para>This property can be changed at any time and takes effect on the next read operation. If this property is set to null, any external DTD references encountered by the reader are not resolved. </para>
           <para>In version 1.1 of the dnprdnshort, if this property is not set, the trust level of the application determines the default behavior.</para>
           <para
-            >Fully trusted code: The reader uses a default <see
-             cref="T:System.Xml.XmlUrlResolver" />
+            >Fully trusted code: The reader uses a default <see cref="T:System.Xml.XmlUrlResolver" />
 
             
 
@@ -7480,8 +7338,7 @@ space).</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Xml.XmlResolver" />
+            >Sets the <see cref="T:System.Xml.XmlResolver" />
 
             
 
@@ -7517,19 +7374,16 @@ space).</para
       <Docs>
         <value>
           <para
-            >One of the members of the <see
-             cref="T:System.Xml.XmlSpace" />
+            >One of the members of the <see cref="T:System.Xml.XmlSpace" />
 
             
 
-             enumeration. If no <c
-            >xml:space</c>
+             enumeration. If no <c>xml:space</c>
 
             
 
              scope exists, this property defaults to
-<see
-             cref="F:System.Xml.XmlSpace.None" />
+<see cref="F:System.Xml.XmlSpace.None" />
 
             
 
@@ -7540,18 +7394,15 @@ space).</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >In the dnprdnext release, the recommended practice is to create <see
-               cref="T:System.Xml.XmlReader" />
+              >In the dnprdnext release, the recommended practice is to create <see cref="T:System.Xml.XmlReader" />
 
               
 
-               instances using the <see
-               cref="Overload:System.Xml.XmlReader.Create" />
+               instances using the <see cref="Overload:System.Xml.XmlReader.Create" />
 
               
 
-               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format
-               type="text/html">
+               method. This allows you to take full advantage of the new features introduced in this release. For more information, see <format type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
 

@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -47,15 +49,9 @@
         <Parameter Name="hashName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="hashName"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="hashName">a <see cref="T:System.String" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.String" />
-        </returns>
+        <returns>a <see cref="T:System.String" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -72,10 +68,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -96,15 +89,9 @@
         <Parameter Name="aa" Type="System.Security.Cryptography.AsymmetricAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="aa"
-          >a <see
-           cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
-        </param>
+        <param name="aa">a <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -125,15 +112,9 @@
         <Parameter Name="key" Type="System.Security.Cryptography.DSA" />
       </Parameters>
       <Docs>
-        <param name="key"
-          >a <see
-           cref="T:System.Security.Cryptography.DSA" />
-        </param>
+        <param name="key">a <see cref="T:System.Security.Cryptography.DSA" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -154,15 +135,9 @@
         <Parameter Name="key" Type="System.Security.Cryptography.RSA" />
       </Parameters>
       <Docs>
-        <param name="key"
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
-        </param>
+        <param name="key">a <see cref="T:System.Security.Cryptography.RSA" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -183,15 +158,9 @@
         <Parameter Name="hashName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="hashName"
-          >a <see
-           cref="T:System.String" />
-        </param>
+        <param name="hashName">a <see cref="T:System.String" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:Mono.Security.ASN1" />
-        </returns>
+        <returns>a <see cref="T:Mono.Security.ASN1" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

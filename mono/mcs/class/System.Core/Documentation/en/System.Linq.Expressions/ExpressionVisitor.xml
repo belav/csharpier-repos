@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Linq.Expressions.ExpressionVisitor" />
+            >Initializes a new instance of <see cref="T:System.Linq.Expressions.ExpressionVisitor" />
 
             
 
@@ -83,7 +82,11 @@
           <para>The modified expression list, if any one of the elements were modified; otherwise, returns the original expression list.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,7 +124,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -163,21 +170,33 @@
           <para>The modified node list, if any of the elements were modified; otherwise, returns the original node list.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The nodes to visit.</param
         >
         <param name="elementVisitor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A delegate that visits a single element, optionally replacing it with a new element.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -223,21 +242,33 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The expression to visit.</param
         >
         <param name="callerName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the calling method; used to report to report a better error message.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.BinaryExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.BinaryExpression" />
 
             
 
@@ -318,7 +348,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -350,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.BlockExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.BlockExpression" />
 
             
 
@@ -363,7 +396,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -395,8 +432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.CatchBlock" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.CatchBlock" />
 
             
 
@@ -408,7 +444,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -440,8 +480,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.ConditionalExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.ConditionalExpression" />
 
             
 
@@ -453,7 +492,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -485,8 +528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the <see
-             cref="T:System.Linq.Expressions.ConstantExpression" />
+            >Visits the <see cref="T:System.Linq.Expressions.ConstantExpression" />
 
             
 
@@ -498,7 +540,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -530,8 +576,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the <see
-             cref="T:System.Linq.Expressions.DebugInfoExpression" />
+            >Visits the <see cref="T:System.Linq.Expressions.DebugInfoExpression" />
 
             
 
@@ -543,7 +588,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -575,8 +624,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the <see
-             cref="T:System.Linq.Expressions.DefaultExpression" />
+            >Visits the <see cref="T:System.Linq.Expressions.DefaultExpression" />
 
             
 
@@ -588,7 +636,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -620,8 +672,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.DynamicExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.DynamicExpression" />
 
             
 
@@ -633,7 +684,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -665,8 +720,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.ElementInit" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.ElementInit" />
 
             
 
@@ -678,7 +732,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -710,13 +768,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This can be overridden to visit or rewrite specific extension nodes.</para>
           <para
-            > If it is not overridden, this method will call <see
-             cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
+            > If it is not overridden, this method will call <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
 
             
 
-            , which gives the node a chance to walk its children. By default, <see
-             cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
+            , which gives the node a chance to walk its children. By default, <see cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
 
             
 
@@ -732,7 +788,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -764,8 +824,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.GotoExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.GotoExpression" />
 
             
 
@@ -777,7 +836,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -809,8 +872,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.IndexExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.IndexExpression" />
 
             
 
@@ -822,7 +884,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -854,8 +920,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.InvocationExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.InvocationExpression" />
 
             
 
@@ -867,7 +932,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -899,8 +968,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.LabelExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.LabelExpression" />
 
             
 
@@ -912,7 +980,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -944,8 +1016,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the <see
-             cref="T:System.Linq.Expressions.LabelTarget" />
+            >Visits the <see cref="T:System.Linq.Expressions.LabelTarget" />
 
             
 
@@ -957,7 +1028,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -992,8 +1067,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.Expression`1" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.Expression`1" />
 
             
 
@@ -1005,14 +1079,22 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The expression to visit.</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1044,8 +1126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.ListInitExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.ListInitExpression" />
 
             
 
@@ -1057,7 +1138,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1089,8 +1174,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.LoopExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.LoopExpression" />
 
             
 
@@ -1102,7 +1186,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1134,8 +1222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MemberExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberExpression" />
 
             
 
@@ -1147,7 +1234,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1179,8 +1270,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MemberAssignment" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberAssignment" />
 
             
 
@@ -1192,7 +1282,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1224,8 +1318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MemberBinding" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberBinding" />
 
             
 
@@ -1237,7 +1330,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1269,8 +1366,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MemberInitExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberInitExpression" />
 
             
 
@@ -1282,7 +1378,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1314,8 +1414,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MemberListBinding" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberListBinding" />
 
             
 
@@ -1327,7 +1426,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1359,8 +1462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MemberMemberBinding" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MemberMemberBinding" />
 
             
 
@@ -1372,7 +1474,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1404,8 +1510,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.MethodCallExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.MethodCallExpression" />
 
             
 
@@ -1417,7 +1522,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1449,8 +1558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.NewExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.NewExpression" />
 
             
 
@@ -1462,7 +1570,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1494,8 +1606,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.NewArrayExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.NewArrayExpression" />
 
             
 
@@ -1507,7 +1618,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1539,8 +1654,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the <see
-             cref="T:System.Linq.Expressions.ParameterExpression" />
+            >Visits the <see cref="T:System.Linq.Expressions.ParameterExpression" />
 
             
 
@@ -1552,7 +1666,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1584,8 +1702,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.RuntimeVariablesExpression" />
 
             
 
@@ -1597,7 +1714,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1629,8 +1750,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.SwitchExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.SwitchExpression" />
 
             
 
@@ -1642,7 +1762,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1674,8 +1798,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.SwitchCase" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.SwitchCase" />
 
             
 
@@ -1687,7 +1810,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1719,8 +1846,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.TryExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.TryExpression" />
 
             
 
@@ -1732,7 +1858,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1764,8 +1894,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.TypeBinaryExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.TypeBinaryExpression" />
 
             
 
@@ -1777,7 +1906,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1809,8 +1942,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Visits the children of the <see
-             cref="T:System.Linq.Expressions.UnaryExpression" />
+            >Visits the children of the <see cref="T:System.Linq.Expressions.UnaryExpression" />
 
             
 
@@ -1822,7 +1954,11 @@
           <para>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</para>
         </returns>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -1,21 +1,24 @@
 <?xml version="1.0"?>
 <clause number="17.4.2" title="Readonly fields">
   <paragraph
-    >When a <non_terminal
-     where="17.4">field-declaration</non_terminal>
+    >When a <non_terminal where="17.4"
+      >field-declaration</non_terminal
+    >
 
     
 
-     includes a readonly modifier, the fields introduced by the declaration are readonly fields. Direct assignments to readonly fields can only occur as part of that declaration or in an instance constructor or static constructor in the same class. (A readonly field can be assigned to multiple times in these contexts.) Specifically, direct assignments to a readonly field are permitted only in the following contexts: <list
-    >
+     includes a readonly modifier, the fields introduced by the declaration are readonly fields. Direct assignments to readonly fields can only occur as part of that declaration or in an instance constructor or static constructor in the same class. (A readonly field can be assigned to multiple times in these contexts.) Specifically, direct assignments to a readonly field are permitted only in the following contexts: <list>
       <list_item
-        > In the <non_terminal
-         where="17.4">variable-declarator</non_terminal>
+        > In the <non_terminal where="17.4"
+          >variable-declarator</non_terminal
+        >
 
         
 
          that introduces the field (by including a <non_terminal
-         where="19.6">variable-initializer</non_terminal>
+          where="19.6"
+          >variable-initializer</non_terminal
+        >
 
         
 

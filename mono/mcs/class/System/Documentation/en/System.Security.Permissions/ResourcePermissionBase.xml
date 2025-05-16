@@ -31,8 +31,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Security.Permissions.ResourcePermissionBase" />
+          >The <see cref="T:System.Security.Permissions.ResourcePermissionBase" />
 
           
 
@@ -65,8 +64,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ResourcePermissionBase" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBase" />
 
             
 
@@ -99,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.ResourcePermissionBase" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.ResourcePermissionBase" />
 
             
 
@@ -108,12 +105,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -149,12 +149,15 @@
           <para>Adds a permission entry to the permission.</para>
         </summary>
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+          The <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
 
           
 
@@ -274,7 +277,11 @@
           <para>Reconstructs a security object with a specified state from an XML encoding.</para>
         </summary>
         <param name="securityElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,13 +312,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Security.Permissions.ResourcePermissionBase.AddPermissionAccess(System.Security.Permissions.ResourcePermissionBaseEntry)" />
+            >Use <see cref="M:System.Security.Permissions.ResourcePermissionBase.AddPermissionAccess(System.Security.Permissions.ResourcePermissionBaseEntry)" />
 
             
 
-             and <see
-             cref="M:System.Security.Permissions.ResourcePermissionBase.RemovePermissionAccess(System.Security.Permissions.ResourcePermissionBaseEntry)" />
+             and <see cref="M:System.Security.Permissions.ResourcePermissionBase.RemovePermissionAccess(System.Security.Permissions.ResourcePermissionBaseEntry)" />
 
             
 
@@ -321,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an array of the <see
-             cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+            >Returns an array of the <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
 
             
 
@@ -332,8 +336,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+            >An array of <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
 
             
 
@@ -377,7 +380,11 @@
           <para>A new permission object that represents the intersection of the current object and the specified target. This object is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -421,7 +428,11 @@
           <para>true if the current permission object is a subset of the specified permission object; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -536,12 +547,15 @@
           <para>Removes a permission entry from the permission.</para>
         </summary>
         <param name="entry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
+          The <see cref="T:System.Security.Permissions.ResourcePermissionBaseEntry" />
 
           
 
@@ -626,8 +640,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.ResourcePermissionBase.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.ResourcePermissionBase.Union(System.Security.IPermission)" />
 
             
 
@@ -643,7 +656,11 @@
           <para>A new permission object that represents the union of the current permission object and the specified permission object.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A designer can utilize <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+        >A designer can utilize <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
         
 
@@ -78,7 +77,11 @@
           <para>Adds the specified serialization provider to the serialization manager.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -109,8 +112,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This storage area provides communication of object context information to serializers. Context information about objects that are being serialized can be stored and accessed through this <see
-             cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
+            >This storage area provides communication of object context information to serializers. Context information about objects that are being serialized can be stored and accessed through this <see cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
 
             
 
@@ -151,13 +153,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Objects that implement <see
-             cref="T:System.ComponentModel.IComponent" />
+            >Objects that implement <see cref="T:System.ComponentModel.IComponent" />
 
             
 
-             are added to the design-time container if the <paramref
-             name="addToContainer" />
+             are added to the design-time container if the <paramref name="addToContainer" />
 
             
 
@@ -173,38 +173,52 @@
           <para>The newly created object instance.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type to create. </param
         >
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The arguments to pass to the constructor for this type. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the object. This name can be used to access the object later through <see
-           cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetInstance(System.String)" />
+          The name of the object. This name can be used to access the object later through <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetInstance(System.String)" />
 
           
 
           . If null is passed, the object is still created but cannot be accessed by name. </param
         >
         <param name="addToContainer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, this object is added to the design container. The object must implement <see
-           cref="T:System.ComponentModel.IComponent" />
+          If true, this object is added to the design container. The object must implement <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -234,8 +248,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of the object to retrieve must have been set through a prior call to <see
-             cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+            >The name of the object to retrieve must have been set through a prior call to <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
 
             
 
@@ -251,7 +264,11 @@
           <para>An instance of the object with the given name, or null if no object by that name can be found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -288,7 +305,11 @@
           <para>The name of the object, or null if the object is unnamed.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -329,14 +350,22 @@
           <para>An instance of the requested serializer, or null if no appropriate serializer can be located.</para>
         </returns>
         <param name="objectType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the object to get the serializer for. </param
         >
         <param name="serializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -373,7 +402,11 @@
           <para>An instance of the type, or null if the type cannot be loaded.</para>
         </returns>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -404,8 +437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property can contain an empty collection. A serializer should never assume that such properties exist. A derived class or implementation of <see
-             cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+            >This property can contain an empty collection. A serializer should never assume that such properties exist. A derived class or implementation of <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
 
             
 
@@ -449,12 +481,15 @@
           <para>Removes a custom serialization provider from the serialization manager.</para>
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The provider to remove. This object must have been added using <see
-           cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.AddSerializationProvider(System.ComponentModel.Design.Serialization.IDesignerSerializationProvider)" />
+          The provider to remove. This object must have been added using <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.AddSerializationProvider(System.ComponentModel.Design.Serialization.IDesignerSerializationProvider)" />
 
           
 
@@ -484,8 +519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the serialization manager supports logging multiple errors in its implementation of <see
-             cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ReportError(System.Object)" />
+            >If the serialization manager supports logging multiple errors in its implementation of <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ReportError(System.Object)" />
 
             
 
@@ -500,12 +534,15 @@
           <para>Reports an error in serialization.</para>
         </summary>
         <param name="errorInformation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The error to report. This information object can be of any object type. If it is an exception, the message of the exception is extracted and reported to the user. If it is any other type, <see
-           cref="M:System.Object.ToString" />
+          The error to report. This information object can be of any object type. If it is an exception, the message of the exception is extracted and reported to the user. If it is any other type, <see cref="M:System.Object.ToString" />
 
           
 
@@ -540,8 +577,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when <see
-             cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetName(System.Object)" />
+            >Occurs when <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.GetName(System.Object)" />
 
             
 
@@ -571,16 +607,14 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This event is raised when serialization or deserialization is complete.</para>
           <para
-            >Generally, serialization code is written to emit serialization data and does not typically require state-related checking and processing. If it is necessary to maintain state data throughout serialization, data can be set and accessed by a serializer, which can listen to the <see
-             cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.SerializationComplete" />
+            >Generally, serialization code is written to emit serialization data and does not typically require state-related checking and processing. If it is necessary to maintain state data throughout serialization, data can be set and accessed by a serializer, which can listen to the <see cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.SerializationComplete" />
 
             
 
              event, and clear the data after serialization. Restoring the proper state after serialization can be important because serializers can be reused during serialization, and leftover state data or open streams might not be correct.</para
           >
           <para
-            >For example, if a serializer needs to write to another file, such as a resource file, it is inefficient to design the serializer to close the file when finished. Serializing an object graph usually requires several serializers. The resource file would be opened and closed many times. Instead, the resource file can be closed at the end of serialization by an object that listened to the <see
-             cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.SerializationComplete" />
+            >For example, if a serializer needs to write to another file, such as a resource file, it is inefficient to design the serializer to close the file when finished. Serializing an object graph usually requires several serializers. The resource file would be opened and closed many times. Instead, the resource file can be closed at the end of serialization by an object that listened to the <see cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.SerializationComplete" />
 
             
 
@@ -616,8 +650,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is useful when it is necessary to create and then name an instance of an object without using <see
-             cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
+            >This method is useful when it is necessary to create and then name an instance of an object without using <see cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.CreateInstance(System.Type,System.Collections.ICollection,System.String,System.Boolean)" />
 
             
 
@@ -629,14 +662,22 @@
           <para>Sets the name of the specified existing object.</para>
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object instance to name. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

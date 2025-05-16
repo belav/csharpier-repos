@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ControlPropertyNameConverter" />
+        >The <see cref="T:System.Web.UI.WebControls.ControlPropertyNameConverter" />
 
         
 
-         class derives from the <see
-         cref="T:System.ComponentModel.StringConverter" />
+         class derives from the <see cref="T:System.ComponentModel.StringConverter" />
 
         
 
@@ -34,13 +32,11 @@
       >
       <block subset="none" type="note">
         <para
-          >You should never access a type converter directly. Instead, call the appropriate converter by using the <see
-           cref="T:System.ComponentModel.TypeDescriptor" />
+          >You should never access a type converter directly. Instead, call the appropriate converter by using the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
           
 
-           class. For more information, see the examples in the <see
-           cref="T:System.ComponentModel.TypeConverter" />
+           class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
           
 
@@ -63,13 +59,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is not intended to be called directly. You should never access a type converter directly. Instead, call the appropriate converter by using the <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >This constructor is not intended to be called directly. You should never access a type converter directly. Instead, call the appropriate converter by using the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-             class. For more information, see the examples in the <see
-             cref="T:System.ComponentModel.TypeConverter" />
+             class. For more information, see the examples in the <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
@@ -79,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ControlPropertyNameConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ControlPropertyNameConverter" />
 
             
 
@@ -111,26 +104,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method returns a <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+             method returns a <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
              collection that contains a set of strings representing the names of the current control's properties. </para
           >
           <para
-            >Use the <paramref
-             name="context" />
+            >Use the <paramref name="context" />
 
             
 
-             parameter to extract additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref
-             name="context" />
+             parameter to extract additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref name="context" />
 
             
 
@@ -140,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a collection of property names for the control within a designer that implements <see
-             cref="T:System.ComponentModel.Design.IDesignerHost" />
+            >Returns a collection of property names for the control within a designer that implements <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
             
 
@@ -151,13 +139,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             that contains a set of strings representing property names for the current control. If the current control is null, an empty collection is returned. If the <paramref
-             name="context" />
+             that contains a set of strings representing property names for the current control. If the current control is null, an empty collection is returned. If the <paramref name="context" />
 
             
 
@@ -165,12 +151,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -197,21 +186,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)" />
+            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
-             method always returns false to indicate that the list of property values returned by the <see
-             cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" />
+             method always returns false to indicate that the list of property values returned by the <see cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" />
 
             
 
              method is not an exclusive list of possible values.</para
           >
           <para
-            >Use the <paramref
-             name="context" />
+            >Use the <paramref name="context" />
 
             
 
@@ -221,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the collection of standard values returned by the <see
-             cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" />
+            >Returns a value that indicates whether the collection of standard values returned by the <see cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" />
 
             
 
@@ -234,12 +219,15 @@
           <para>false in all cases, which indicates that the list is not exclusive.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -266,21 +254,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+            >The <see cref="M:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValuesSupported(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
              method returns a value that indicates whether this object supports a standard set of values. </para
           >
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
-             parameter extracts additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref
-             name="context" />
+             parameter extracts additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref name="context" />
 
             
 
@@ -294,8 +279,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="context" />
+            >true if the <paramref name="context" />
 
             
 
@@ -303,12 +287,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

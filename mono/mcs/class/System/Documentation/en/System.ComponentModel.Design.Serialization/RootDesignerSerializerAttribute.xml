@@ -109,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
 
             
 
@@ -118,21 +117,33 @@
           >
         </summary>
         <param name="serializerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the data type of the serializer. </param
         >
         <param name="baseSerializerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the base type of the serializer. A class can include multiple serializers as they all have different base types. </param
         >
         <param name="reloadable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -169,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
 
             
 
@@ -178,21 +188,33 @@
           >
         </summary>
         <param name="serializerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the data type of the serializer. </param
         >
         <param name="baseSerializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the base type of the serializer. A class can include multiple serializers, as they all have different base types. </param
         >
         <param name="reloadable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -229,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
 
             
 
@@ -238,21 +259,33 @@
           >
         </summary>
         <param name="serializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type of the serializer. </param
         >
         <param name="baseSerializerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base type of the serializer. A class can include multiple serializers as they all have different base types. </param
         >
         <param name="reloadable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -278,13 +311,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If this property is set to false, the design document does not automatically perform a reload on behalf of the user. If this property is set to false, it is the user's responsibility to reopen the designer view window for the design document, if an update or reload is desired.</para>
           <para
-            >Some serializers require the interaction of external components in the designer loading process in order to rebuild the design document. These serializers sometimes need to create a new designer host each time the design document is loaded. If this is the situation, <see
-             cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.Reloadable" />
+            >Some serializers require the interaction of external components in the designer loading process in order to rebuild the design document. These serializers sometimes need to create a new designer host each time the design document is loaded. If this is the situation, <see cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.Reloadable" />
 
             
 
-             will be set to false, and the designer host must be recreated by user interaction (launching the designer for the document) after the design document is disposed. The events and services that were connected to the designer host, except through deserialization, do not remain and may need to be set again. If <see
-             cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.Reloadable" />
+             will be set to false, and the designer host must be recreated by user interaction (launching the designer for the document) after the design document is disposed. The events and services that were connected to the designer host, except through deserialization, do not remain and may need to be set again. If <see cref="P:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute.Reloadable" />
 
             
 
@@ -356,13 +387,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see
-             cref="T:System.Type" />
+            >This property is used by filtering algorithms to identify two attributes that are the same type. For most attributes, this just returns the <see cref="T:System.Type" />
 
             
 
-             instance for the attribute. <see
-             cref="T:System.ComponentModel.EditorAttribute" />
+             instance for the attribute. <see cref="T:System.ComponentModel.EditorAttribute" />
 
             
 

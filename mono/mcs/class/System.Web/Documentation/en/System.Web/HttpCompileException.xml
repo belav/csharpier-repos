@@ -36,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpCompileException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpCompileException" />
 
             
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpCompileException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpCompileException" />
 
             
 
@@ -69,7 +67,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -94,23 +96,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the <paramref
-             name="sourceCode" />
+            >For the <paramref name="sourceCode" />
 
             
 
-             parameter, you can pass any string information that is descriptive to the error condition; there are no checks on file or path. The <see
-             cref="P:System.Web.HttpCompileException.SourceCode" />
+             parameter, you can pass any string information that is descriptive to the error condition; there are no checks on file or path. The <see cref="P:System.Web.HttpCompileException.SourceCode" />
 
             
 
-             property returns the string that was passed as the parameter value. If you use a constructor that does not require the <paramref
-             name="sourceCode" />
+             property returns the string that was passed as the parameter value. If you use a constructor that does not require the <paramref name="sourceCode" />
 
             
 
-             parameter, the <see
-             cref="P:System.Web.HttpCompileException.SourceCode" />
+             parameter, the <see cref="P:System.Web.HttpCompileException.SourceCode" />
 
             
 
@@ -120,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpCompileException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpCompileException" />
 
             
 
@@ -129,19 +126,26 @@
           >
         </summary>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.Compiler.CompilerResults" />
+          A <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
           
 
            containing compiler output and error information. </param
         >
         <param name="sourceCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,8 +171,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpCompileException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpCompileException" />
 
             
 
@@ -176,19 +179,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If <paramref
-           name="innerException" />
+          The exception that is the cause of the current exception. If <paramref name="innerException" />
 
           
 
@@ -217,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -226,24 +235,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -281,10 +296,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.CodeDom.Compiler.CompilerResults" />
-        </value>
+        <value>a <see cref="T:System.CodeDom.Compiler.CompilerResults" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

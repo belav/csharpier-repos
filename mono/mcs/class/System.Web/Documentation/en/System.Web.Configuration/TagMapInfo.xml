@@ -17,16 +17,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.TagMapInfo" />
+        >The <see cref="T:System.Web.Configuration.TagMapInfo" />
 
         
 
          class allows you to remap the types of tags at compile time. This remapping causes the mapped type to be used in place of the original tag type for all pages and controls in the ASP.NET application in the scope of the configuration file.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Configuration.TagMapCollection" />
+        >The <see cref="T:System.Web.Configuration.TagMapCollection" />
 
         
 
@@ -58,8 +56,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.TagMapInfo" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.TagMapInfo" />
 
             
 
@@ -67,14 +64,22 @@
           >
         </summary>
         <param name="tagTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the type for the tag that is being remapped.</param
         >
         <param name="mappedTagTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -154,13 +159,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tag remapping occurs at compile time. This remapping causes the mapped type (specified by the <see
-             cref="P:System.Web.Configuration.TagMapInfo.MappedTagType" />
+            >Tag remapping occurs at compile time. This remapping causes the mapped type (specified by the <see cref="P:System.Web.Configuration.TagMapInfo.MappedTagType" />
 
             
 
-             property) to be used in place of the original tag type (specified by the <see
-             cref="P:System.Web.Configuration.TagMapInfo.TagType" />
+             property) to be used in place of the original tag type (specified by the <see cref="P:System.Web.Configuration.TagMapInfo.TagType" />
 
             
 
@@ -195,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of all the properties belonging to this <see
-             cref="T:System.Web.Configuration.TagPrefixInfo" />
+            >Gets a collection of all the properties belonging to this <see cref="T:System.Web.Configuration.TagPrefixInfo" />
 
             
 
@@ -253,13 +255,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tag remapping occurs at compile time. This remapping causes the mapped type (specified by the <see
-             cref="P:System.Web.Configuration.TagMapInfo.MappedTagType" />
+            >Tag remapping occurs at compile time. This remapping causes the mapped type (specified by the <see cref="P:System.Web.Configuration.TagMapInfo.MappedTagType" />
 
             
 
-             property) to be used in place of the original tag type (specified by the <see
-             cref="P:System.Web.Configuration.TagMapInfo.TagType" />
+             property) to be used in place of the original tag type (specified by the <see cref="P:System.Web.Configuration.TagMapInfo.TagType" />
 
             
 

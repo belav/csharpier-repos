@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class corresponds to the address attribute of the <format
-         type="text/html">
+        >This class corresponds to the address attribute of the <format type="text/html">
           <a href="a0b86e28-86b4-4497-abe8-d5fd614c7926"
             >Add Element for Bypasslist (Network Settings)</a
           >
@@ -34,13 +33,11 @@
          configuration element.</para
       >
       <para
-        >This class is used to specify when a proxy server should not be used to handle requests made with the <see
-         cref="T:System.Net.WebRequest" />
+        >This class is used to specify when a proxy server should not be used to handle requests made with the <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebClient" />
+         and <see cref="T:System.Net.WebClient" />
 
         
 
@@ -72,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.BypassElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.BypassElement" />
 
             
 
@@ -101,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Configuration.BypassElement.Address" />
+            >The <see cref="P:System.Net.Configuration.BypassElement.Address" />
 
             
 
-             property is set to <paramref
-             name="address" />
+             property is set to <paramref name="address" />
 
             
 
@@ -117,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Configuration.BypassElement" />
+            >Initializes a new instance of the <see cref="T:System.Net.Configuration.BypassElement" />
 
             
 
@@ -126,7 +119,11 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

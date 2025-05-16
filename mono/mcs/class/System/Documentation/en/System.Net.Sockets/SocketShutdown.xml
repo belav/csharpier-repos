@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Sockets.SocketShutdown" />
+        >The <see cref="T:System.Net.Sockets.SocketShutdown" />
 
         
 
-         enumeration defines the values that can be passed to the <see
-         cref="M:System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown)" />
+         enumeration defines the values that can be passed to the <see cref="M:System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown)" />
 
         
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines constants that are used by the <see
-         cref="M:System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown)" />
+        >Defines constants that are used by the <see cref="M:System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown)" />
 
         
 
@@ -81,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disables a <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Disables a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -117,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disables a <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Disables a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -153,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Disables a <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Disables a <see cref="T:System.Net.Sockets.Socket" />
 
             
 

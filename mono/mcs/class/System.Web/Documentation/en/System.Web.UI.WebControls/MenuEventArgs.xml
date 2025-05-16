@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+        >The <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
         
 
@@ -43,8 +42,7 @@
           </term>
           <description>
             <para
-              >Occurs when a menu item is clicked. This event is commonly used to synchronize a <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >Occurs when a menu item is clicked. This event is commonly used to synchronize a <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -60,8 +58,7 @@
           </term>
           <description>
             <para
-              >Occurs when a menu item is bound to data. This event is commonly used to modify a menu item before it is rendered in a <see
-               cref="T:System.Web.UI.WebControls.Menu" />
+              >Occurs when a menu item is bound to data. This event is commonly used to modify a menu item before it is rendered in a <see cref="T:System.Web.UI.WebControls.Menu" />
 
               
 
@@ -71,21 +68,18 @@
         </item>
       </list>
       <para
-        >Depending on the event raised, you can access the menu item clicked by the user or the menu item being bound to data by using the <see
-         cref="P:System.Web.UI.WebControls.MenuEventArgs.Item" />
+        >Depending on the event raised, you can access the menu item clicked by the user or the menu item being bound to data by using the <see cref="P:System.Web.UI.WebControls.MenuEventArgs.Item" />
 
         
 
          property.</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
         
 
-         class, see the <see
-         cref="M:System.Web.UI.WebControls.MenuEventArgs.#ctor(System.Web.UI.WebControls.MenuItem)" />
+         class, see the <see cref="M:System.Web.UI.WebControls.MenuEventArgs.#ctor(System.Web.UI.WebControls.MenuItem)" />
 
         
 
@@ -95,18 +89,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
         
 
-         and <see
-         cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+         and <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
         
 
-         events of a <see
-         cref="T:System.Web.UI.WebControls.Menu" />
+         events of a <see cref="T:System.Web.UI.WebControls.Menu" />
 
         
 
@@ -129,13 +120,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
-             class from the specified menu item. The following table shows initial property values for an instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+             class from the specified menu item. The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
@@ -192,13 +181,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.MenuItem" />
+                  >The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
                   
 
-                   object specified by the <paramref
-                   name="item" />
+                   object specified by the <paramref name="item" />
 
                   
 
@@ -211,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
@@ -220,17 +206,19 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          For the <see
-           cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+          For the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
           
 
-           event, this parameter represents the menu item clicked by the user. For the <see
-           cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+           event, this parameter represents the menu item clicked by the user. For the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
           
 
@@ -259,13 +247,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+            >Use this constructor to create a new instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
-             class from the specified menu item, command source, and event arguments. The following table shows initial property values for an instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+             class from the specified menu item, command source, and event arguments. The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
@@ -290,8 +276,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="originalArgs.CommandArgument" />
+                  >The value of the <paramref name="originalArgs.CommandArgument" />
 
                   
 
@@ -307,8 +292,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="originalArgs.CommandName" />
+                  >The value of the <paramref name="originalArgs.CommandName" />
 
                   
 
@@ -324,13 +308,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Object" />
+                  >The <see cref="T:System.Object" />
 
                   
 
-                   specified by the <paramref
-                   name="commandSource" />
+                   specified by the <paramref name="commandSource" />
 
                   
 
@@ -346,13 +328,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Web.UI.WebControls.MenuItem" />
+                  >The <see cref="T:System.Web.UI.WebControls.MenuItem" />
 
                   
 
-                   object specified by the <paramref
-                   name="item" />
+                   object specified by the <paramref name="item" />
 
                   
 
@@ -365,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MenuEventArgs" />
 
             
 
@@ -374,17 +353,19 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          For the <see
-           cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+          For the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
           
 
-           event, this parameter represents the menu item clicked by the user. For the <see
-           cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+           event, this parameter represents the menu item clicked by the user. For the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
           
 
@@ -407,13 +388,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuEventArgs.CommandSource" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuEventArgs.CommandSource" />
 
             
 
-             property to access the <see
-             cref="T:System.Object" />
+             property to access the <see cref="T:System.Object" />
 
             
 
@@ -423,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Object" />
+            >Gets the <see cref="T:System.Object" />
 
             
 
@@ -451,18 +429,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.MenuEventArgs.Item" />
+            >Use the <see cref="P:System.Web.UI.WebControls.MenuEventArgs.Item" />
 
             
 
-             property to access or modify the properties of the menu item associated with the event raised. For the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
+             property to access or modify the properties of the menu item associated with the event raised. For the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
             
 
-             event, this item represents the menu item clicked by the user. For the <see
-             cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+             event, this item represents the menu item clicked by the user. For the <see cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
             
 

@@ -25,94 +25,77 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
+        >The <see cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
 
         
 
          class allows you to specify the derived types that can be inserted into an array returned by a public field or public read/write property.</para
       >
       <para
-        >An instance of this class is returned by the <see
-         cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
+        >An instance of this class is returned by the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
 
         
 
-         property of the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         property of the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         class. The <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         class. The <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         class is used when overriding the set of <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+         class is used when overriding the set of <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
         
 
-         objects that can be inserted into an array to which the <see
-         cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+         objects that can be inserted into an array to which the <see cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
         
 
          has been applied.</para
       >
       <para
-        >For each new type you want the field or property to accept, create an <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+        >For each new type you want the field or property to accept, create an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
         
 
-         and use the <see
-         cref="M:System.Xml.Serialization.XmlArrayItemAttributes.Add(System.Xml.Serialization.XmlArrayItemAttribute)" />
+         and use the <see cref="M:System.Xml.Serialization.XmlArrayItemAttributes.Add(System.Xml.Serialization.XmlArrayItemAttribute)" />
 
         
 
-         to add the object to the <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
+         to add the object to the <see cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
 
         
 
-         collection returned by the <see
-         cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
+         collection returned by the <see cref="P:System.Xml.Serialization.XmlAttributes.XmlArrayItems" />
 
         
 
-         property. <see
-         cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
+         property. <see cref="M:System.Xml.Serialization.XmlAttributeOverrides.Add(System.Type,System.Xml.Serialization.XmlAttributes)" />
 
         
 
-         the <see
-         cref="T:System.Xml.Serialization.XmlAttributes" />
+         the <see cref="T:System.Xml.Serialization.XmlAttributes" />
 
         
 
-         to an <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         to an <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-        , that specifies the type of the object that contains the field or property, and the name of the field or property. Construct an <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        , that specifies the type of the object that contains the field or property, and the name of the field or property. Construct an <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         with the <see
-         cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+         with the <see cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
         
 
-         before calling the <see
-         cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+         before calling the <see cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
         
 
-         or <see
-         cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+         or <see cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
 
         
 
@@ -122,8 +105,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+        >Represents a collection of <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
         
 
@@ -151,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.XmlArrayItemAttributes" />
 
             
 
@@ -187,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >Adds an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -200,12 +180,15 @@
           <para>The index of the added item.</para>
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
           
 
@@ -239,8 +222,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the collection contains the specified <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >Determines whether the collection contains the specified <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -250,8 +232,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains the specified <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >true if the collection contains the specified <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -259,12 +240,15 @@
           >
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
           
 
@@ -299,8 +283,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >Copies an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -308,19 +291,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+          The array of <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
           
 
            objects to copy to the collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -354,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the zero-based index of the first occurrence of the specified <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >Returns the zero-based index of the first occurrence of the specified <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -365,8 +354,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first index of the <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >The first index of the <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -374,12 +362,15 @@
           >
         </returns>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
           
 
@@ -414,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >Inserts an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -423,19 +413,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index at which the attribute is inserted.</param
         >
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
           
 
@@ -496,8 +493,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The implementation of this is the same as the <see
-             cref="M:System.Collections.ArrayList.Remove(System.Object)" />
+            >The implementation of this is the same as the <see cref="M:System.Collections.ArrayList.Remove(System.Object)" />
 
             
 
@@ -507,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an <see
-             cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+            >Removes an <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
             
 
@@ -516,12 +511,15 @@
           >
         </summary>
         <param name="attribute">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+          The <see cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
           
 

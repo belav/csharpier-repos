@@ -23,8 +23,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.mmap" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.mmap" />
       <paramref name="prot" />
 
       

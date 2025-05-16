@@ -41,13 +41,11 @@
 
         
 
-         is the base class for <see
-         cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" />
+         is the base class for <see cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" />
 
         
 
-         and <see
-         cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />
+         and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />
 
         
 
@@ -58,8 +56,7 @@
 
         
 
-         and <see
-         cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />
+         and <see cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />
 
         
 
@@ -73,20 +70,17 @@
          handles the complex task of asking a channel object for its properties.</para
       >
       <para
-        >This class makes a link demand and an inheritance demand at the class level. A <see
-         cref="T:System.Security.SecurityException" />
+        >This class makes a link demand and an inheritance demand at the class level. A <see cref="T:System.Security.SecurityException" />
 
         
 
-         is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
-         type="text/html">
+         is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format type="text/html">
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">Link Demands</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9">Inheritance Demands</a>
         </format>
 
@@ -120,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
 
             
 
@@ -153,13 +146,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not be implemented because it does not apply to the way <see
-             cref="T:System.Collections.IDictionary" />
+            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" />
 
             
 
-             is being used in this case, and because <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+             is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
 
             
 
@@ -169,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -178,19 +168,26 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key that is associated with the object in the <paramref
-           name="value" />
+          The key that is associated with the object in the <paramref name="value" />
 
           
 
            parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -218,13 +215,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not be implemented because it does not apply to the way <see
-             cref="T:System.Collections.IDictionary" />
+            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" />
 
             
 
-             is being used in this case, and because <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+             is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
 
             
 
@@ -234,8 +229,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -273,7 +267,11 @@
           <para>true if the channel object contains a property associated with the specified key; otherwise, false.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -314,14 +311,22 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array to copy the properties to. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -374,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns a <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -385,8 +389,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >A <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
@@ -412,8 +415,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
 
             
 
@@ -443,8 +445,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsReadOnly" />
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsReadOnly" />
 
             
 
@@ -474,8 +475,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsSynchronized" />
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsSynchronized" />
 
             
 
@@ -534,8 +534,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets a <see
-             cref="T:System.Collections.ICollection" />
+            >When overridden in a derived class, gets a <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -571,8 +570,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets a <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -603,13 +601,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method must not be implemented because it does not apply to the way <see
-             cref="T:System.Collections.IDictionary" />
+            >This method must not be implemented because it does not apply to the way <see cref="T:System.Collections.IDictionary" />
 
             
 
-             is being used in this case, and because <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+             is being used in this case, and because <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
 
             
 
@@ -619,8 +615,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Throws a <see
-             cref="T:System.NotSupportedException" />
+            >Throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -628,7 +623,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -653,13 +652,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see
-             cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.SyncRoot" />
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.SyncRoot" />
 
             
 
-             returns a reference to the current instance of <see
-             cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
+             returns a reference to the current instance of <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
 
             
 
@@ -669,8 +666,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that is used to synchronize access to the <see
-             cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
+            >Gets an object that is used to synchronize access to the <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
 
             
 
@@ -703,8 +699,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -714,8 +709,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -748,8 +742,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a <see cref="T:System.Collections.ICollection" />
 
             
 

@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemImage" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ToolStripRenderer.RenderItemImage" />
 
         
 
@@ -48,13 +47,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
 
             
 
-             class for the specified <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class for the specified <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -62,31 +59,41 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to paint the image.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
           .</param
         >
         <param name="imageRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -115,13 +122,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
 
             
 
-             class for the specified <see
-             cref="T:System.Windows.Forms.ToolStripItem" />
+             class for the specified <see cref="T:System.Windows.Forms.ToolStripItem" />
 
             
 
@@ -129,43 +134,56 @@
           >
         </summary>
         <param name="g">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to paint the image.</param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ToolStripItem" />
+          The <see cref="T:System.Windows.Forms.ToolStripItem" />
 
           
 
            on which to draw the image.</param
         >
         <param name="image">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Image" />
+          The <see cref="T:System.Drawing.Image" />
 
           
 
            to paint.</param
         >
         <param name="imageRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,8 +207,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the image painted on the <see
-             cref="T:System.Windows.Forms.ToolStrip" />
+            >Gets the image painted on the <see cref="T:System.Windows.Forms.ToolStrip" />
 
             
 

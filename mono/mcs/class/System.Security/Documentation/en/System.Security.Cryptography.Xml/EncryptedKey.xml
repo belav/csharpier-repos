@@ -23,8 +23,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class represents the &lt;EncryptedKey&gt; element in XML encryption. The &lt;EncryptedKey&gt; element is used to send encryption keys. It can be created in a stand-alone XML document, be placed within an application document, or be inside an &lt;EncryptedData&gt; element as a child of a &lt;KeyInfo&gt; element. The key value is always encrypted to the recipient. When &lt;EncryptedKey&gt; is decrypted, the resulting key is made available to the &lt;EncryptionMethod&gt; algorithm without any additional processing.</para>
       <para
-        >The &lt;EncryptedKey&gt; element is similar to the &lt;EncryptedData&gt; element of the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+        >The &lt;EncryptedKey&gt; element is similar to the &lt;EncryptedData&gt; element of the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
@@ -54,8 +53,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+            >This constructor creates a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -65,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -100,18 +97,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds a <see
-             cref="T:System.Security.Cryptography.Xml.DataReference" />
+            >This method adds a <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
             
 
-             object to the <see
-             cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
+             object to the <see cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
 
             
 
-             property of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             property of the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -123,17 +117,19 @@
           <para>Adds a &lt;DataReference&gt; element to the &lt;ReferenceList&gt; element.</para>
         </summary>
         <param name="dataReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Xml.DataReference" />
+          A <see cref="T:System.Security.Cryptography.Xml.DataReference" />
 
           
 
-           object to add to the <see
-           cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
+           object to add to the <see cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
 
           
 
@@ -166,18 +162,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds A <see
-             cref="T:System.Security.Cryptography.Xml.KeyReference" />
+            >This method adds A <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
             
 
-             object to the <see
-             cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
+             object to the <see cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
 
             
 
-             property of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+             property of the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -189,17 +182,19 @@
           <para>Adds a &lt;KeyReference&gt; element to the &lt;ReferenceList&gt; element.</para>
         </summary>
         <param name="keyReference">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Security.Cryptography.Xml.KeyReference" />
+          A <see cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
           
 
-           object to add to the <see
-           cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
+           object to add to the <see cref="P:System.Security.Cryptography.Xml.EncryptedKey.ReferenceList" />
 
           
 
@@ -255,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the XML representation of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+            >Returns the XML representation of the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
             
 
@@ -266,8 +260,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -301,8 +294,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to load an existing XML element into the &lt;EncryptedKey&gt; element represented by the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+            >Use this method to load an existing XML element into the &lt;EncryptedKey&gt; element represented by the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
             
 
@@ -314,12 +306,15 @@
           <para>Loads the specified XML information into the &lt;EncryptedKey&gt; element in XML encryption.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 

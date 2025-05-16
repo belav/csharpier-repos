@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.IMoniker" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.IMoniker" />
 
         
 
@@ -438,7 +437,11 @@
           <para>Compares this moniker with a specified moniker and indicates whether they are identical.</para>
         </summary>
         <param name="pmkOtherMoniker">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -479,21 +482,33 @@
           <para>Determines whether the object that is identified by this moniker is currently loaded and running.</para>
         </summary>
         <param name="pbc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A reference to the bind context to be used in this binding operation. </param
         >
         <param name="pmkToLeft">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A reference to the moniker to the left of this moniker if this moniker is part of a composite. </param
         >
         <param name="pmkNewlyRunning">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -556,7 +571,11 @@
           <para>Initializes an object from the stream where it was previously saved.</para>
         </summary>
         <param name="pStm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -709,14 +728,22 @@
           <para>Saves an object to the specified stream.</para>
         </summary>
         <param name="pStm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The stream into which the object is saved. </param
         >
         <param name="fClearDirty">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

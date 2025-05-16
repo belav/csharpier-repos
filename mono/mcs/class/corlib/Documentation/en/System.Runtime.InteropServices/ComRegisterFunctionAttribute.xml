@@ -41,21 +41,18 @@
 
         
 
-         enables you to add arbitrary registration code to accommodate the requirements of COM clients. For example, you can update the registry using registration functions from the <see
-         cref="N:Microsoft.Win32" />
+         enables you to add arbitrary registration code to accommodate the requirements of COM clients. For example, you can update the registry using registration functions from the <see cref="N:Microsoft.Win32" />
 
         
 
-         namespace. If you provide a registration method, you must also apply <see
-         cref="T:System.Runtime.InteropServices.ComUnregisterFunctionAttribute" />
+         namespace. If you provide a registration method, you must also apply <see cref="T:System.Runtime.InteropServices.ComUnregisterFunctionAttribute" />
 
         
 
          to an unregistration method, which reverses the operations done in the registration method.</para
       >
       <para
-        >The common language runtime calls the method with this attribute when its containing assembly is registered (directly or indirectly) with the <format
-         type="text/html">
+        >The common language runtime calls the method with this attribute when its containing assembly is registered (directly or indirectly) with the <format type="text/html">
           <a href="E190E342-36EF-4651-A0B4-0E8C2C0281CB"
             >[&lt;topic://cpgrfassemblyregistrationtoolregasmexe&gt;]</a
           >
@@ -63,8 +60,7 @@
 
         
 
-        or through the <see
-         cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
+        or through the <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
 
         
 
@@ -80,13 +76,11 @@
         </item>
         <item>
           <para
-            >Parameters: Accepts a single <see
-             cref="T:System.Type" />
+            >Parameters: Accepts a single <see cref="T:System.Type" />
 
             
 
-             parameter or a <see
-             cref="T:System.String" />
+             parameter or a <see cref="T:System.String" />
 
             
 
@@ -123,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.ComRegisterFunctionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.ComRegisterFunctionAttribute" />
 
             
 

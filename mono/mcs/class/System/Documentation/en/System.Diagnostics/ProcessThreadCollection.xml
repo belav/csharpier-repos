@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a strongly typed collection of <see
-         cref="T:System.Diagnostics.ProcessThread" />
+        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.ProcessThread" />
 
         
 
@@ -56,13 +55,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.ProcessThreadCollection" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessThreadCollection" />
 
             
 
-             class, with no associated <see
-             cref="T:System.Diagnostics.ProcessThread" />
+             class, with no associated <see cref="T:System.Diagnostics.ProcessThread" />
 
             
 
@@ -95,13 +92,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.ProcessThreadCollection" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.ProcessThreadCollection" />
 
             
 
-             class, using the specified array of <see
-             cref="T:System.Diagnostics.ProcessThread" />
+             class, using the specified array of <see cref="T:System.Diagnostics.ProcessThread" />
 
             
 
@@ -109,17 +104,19 @@
           >
         </summary>
         <param name="processThreads">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Diagnostics.ProcessThread" />
+          An array of <see cref="T:System.Diagnostics.ProcessThread" />
 
           
 
-           instances with which to initialize this <see
-           cref="T:System.Diagnostics.ProcessThreadCollection" />
+           instances with which to initialize this <see cref="T:System.Diagnostics.ProcessThreadCollection" />
 
           
 
@@ -159,7 +156,11 @@
           <para>The zero-based index of the thread in the collection.</para>
         </returns>
         <param name="thread">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -202,12 +203,15 @@
           <para>true if the thread exists in the collection; otherwise, false.</para>
         </returns>
         <param name="thread">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.ProcessThread" />
+          A <see cref="T:System.Diagnostics.ProcessThread" />
 
           
 
@@ -242,8 +246,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies an array of <see
-             cref="T:System.Diagnostics.ProcessThread" />
+            >Copies an array of <see cref="T:System.Diagnostics.ProcessThread" />
 
             
 
@@ -251,19 +254,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Diagnostics.ProcessThread" />
+          An array of <see cref="T:System.Diagnostics.ProcessThread" />
 
           
 
            instances to add to the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -301,8 +311,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index that defines the location of the thread within the <see
-             cref="T:System.Diagnostics.ProcessThreadCollection" />
+            >The zero-based index that defines the location of the thread within the <see cref="T:System.Diagnostics.ProcessThreadCollection" />
 
             
 
@@ -310,12 +319,15 @@
           >
         </returns>
         <param name="thread">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.ProcessThread" />
+          The <see cref="T:System.Diagnostics.ProcessThread" />
 
           
 
@@ -352,14 +364,22 @@
           <para>Inserts a process thread at the specified location in the collection.</para>
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index indicating the location at which to insert the thread. </param
         >
         <param name="thread">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -423,7 +443,11 @@
           <para>Deletes a process thread from the collection.</para>
         </summary>
         <param name="thread">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

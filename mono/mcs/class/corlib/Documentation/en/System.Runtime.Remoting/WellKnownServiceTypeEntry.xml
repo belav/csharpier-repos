@@ -31,13 +31,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>Server-activated object types can be either single call or singleton. If an object type is single call, a new instance of it is created each time a call from the client comes in. All calls to a singleton object are handled by one instance of that object.</para>
       <para
-        >Any client that knows the URI of this object can obtain a proxy for this object by registering the channel it prefers with <see
-         cref="T:System.Runtime.Remoting.Channels.ChannelServices" />
+        >Any client that knows the URI of this object can obtain a proxy for this object by registering the channel it prefers with <see cref="T:System.Runtime.Remoting.Channels.ChannelServices" />
 
         
 
-         and activating the object by calling new or <see
-         cref="M:System.Activator.GetObject(System.Type,System.String)" />
+         and activating the object by calling new or <see cref="M:System.Activator.GetObject(System.Type,System.String)" />
 
         
 
@@ -45,8 +43,7 @@
       >
       <para>It is important to note that the remote object itself is not created by the registration process. This only happens when a client attempts to call a method on the object or activates the object from the client side.</para>
       <para
-        >For a more detailed description of server-activated objects and remote object activation, see <format
-         type="text/html">
+        >For a more detailed description of server-activated objects and remote object activation, see <format type="text/html">
           <a href="E90D0C64-00DA-4080-AE78-A6C558825C25">[&lt;topic://cpconActivation&gt;]</a>
         </format>
 
@@ -87,18 +84,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.WellKnownServiceTypeEntry" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.WellKnownServiceTypeEntry" />
 
             
 
-             class with the given <see
-             cref="T:System.Type" />
+             class with the given <see cref="T:System.Type" />
 
             
 
-            , object URI, and <see
-             cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+            , object URI, and <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
             
 
@@ -106,31 +100,41 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the server-activated service type object. </param
         >
         <param name="objectUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the server-activated type. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+          The <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
           
 
@@ -165,13 +169,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.WellKnownServiceTypeEntry" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.WellKnownServiceTypeEntry" />
 
             
 
-             class with the given type name, assembly name, object URI, and <see
-             cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+             class with the given type name, assembly name, object URI, and <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
             
 
@@ -179,33 +181,48 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The full type name of the server-activated service type. </param
         >
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The assembly name of the server-activated service type. </param
         >
         <param name="objectUri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URI of the server-activated object. </param
         >
         <param name="mode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+          The <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
           
 
@@ -269,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+            >Gets the <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
             
 
@@ -297,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -349,13 +364,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the type name, assembly name, object URI and the <see
-             cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+            >Returns the type name, assembly name, object URI and the <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
             
 
-             of the server-activated type as a <see
-             cref="T:System.String" />
+             of the server-activated type as a <see cref="T:System.String" />
 
             
 
@@ -365,13 +378,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type name, assembly name, object URI, and the <see
-             cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
+            >The type name, assembly name, object URI, and the <see cref="T:System.Runtime.Remoting.WellKnownObjectMode" />
 
             
 
-             of the server-activated type as a <see
-             cref="T:System.String" />
+             of the server-activated type as a <see cref="T:System.String" />
 
             
 

@@ -21,8 +21,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Although these different states, like <see
-         cref="F:System.Windows.Forms.DataGridViewElementStates.Frozen" />
+        >Although these different states, like <see cref="F:System.Windows.Forms.DataGridViewElementStates.Frozen" />
 
         
 
@@ -32,8 +31,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the user interface (UI) state of a element within a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Specifies the user interface (UI) state of a element within a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -121,8 +119,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates that an element can be resized through the UI. This value is ignored except when combined with the <see
-             cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" />
+            >Indicates that an element can be resized through the UI. This value is ignored except when combined with the <see cref="F:System.Windows.Forms.DataGridViewElementStates.ResizableSet" />
 
             
 

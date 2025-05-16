@@ -37,36 +37,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
         
 
-         class is used in conjunction with asynchronous method calls made using delegates. The <see
-         cref="T:System.IAsyncResult" />
+         class is used in conjunction with asynchronous method calls made using delegates. The <see cref="T:System.IAsyncResult" />
 
         
 
-         returned from the delegate's BeginInvoke method can be cast to an <see
-         cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+         returned from the delegate's BeginInvoke method can be cast to an <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
         
 
-        . The <see
-         cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+        . The <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
         
 
-         has the <see
-         cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncDelegate" />
+         has the <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncDelegate" />
 
         
 
          property that holds the delegate object on which the asynchronous call was invoked.</para
       >
       <para
-        >For more information about BeginInvoke and asynchronous calls using delegates, see <format
-         type="text/html">
+        >For more information about BeginInvoke and asynchronous calls using delegates, see <format type="text/html">
           <a href="38A345CA-6963-4436-9608-5C9DEFEF9C64"
             >Asynchronous Programming Using Delegates</a
           >
@@ -100,8 +94,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncDelegate" />
+            >The <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncDelegate" />
 
             
 
@@ -141,38 +134,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.AsyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Messaging.IMessageSink)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.AsyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Messaging.IMessageSink)" />
 
             
 
-             method of the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+             method of the <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
 
             
 
-             interface is not relevant to the <see
-             cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+             interface is not relevant to the <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
             
 
-             class. Implementation by <see
-             cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+             class. Implementation by <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
             
 
-             throws a <see
-             cref="T:System.NotSupportedException" />
+             throws a <see cref="T:System.NotSupportedException" />
 
             
 
-            . Instead, obtain an <see
-             cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+            . Instead, obtain an <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
             
 
-             by casting the <see
-             cref="T:System.IAsyncResult" />
+             by casting the <see cref="T:System.IAsyncResult" />
 
             
 
@@ -182,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+            >Implements the <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
 
             
 
@@ -195,24 +180,30 @@
           <para>No value is returned.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The request <see
-           cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+          The request <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
           
 
            interface. </param
         >
         <param name="replySink">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The response <see
-           cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+          The response <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
 
           
 
@@ -237,8 +228,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about the BeginInvoke method, see <format
-             type="text/html">
+            >For more information about the BeginInvoke method, see <format type="text/html">
               <a href="38A345CA-6963-4436-9608-5C9DEFEF9C64"
                 >[&lt;topic://cpovrasynchronousdelegates&gt;]</a
               >
@@ -278,16 +268,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Threading.WaitHandle" />
+            >The <see cref="T:System.Threading.WaitHandle" />
 
             
 
              returned by this method is automatically signaled when the asynchronous operation has completed.</para
           >
           <para
-            >The wait handle is not closed automatically when you call EndInvoke on the delegate that was used to make the asynchronous method call. If you release all references to the wait handle, system resources are freed when garbage collection reclaims the wait handle. To free the system resources as soon as you are finished using the wait handle, call the <see
-             cref="M:System.Threading.WaitHandle.Close" />
+            >The wait handle is not closed automatically when you call EndInvoke on the delegate that was used to make the asynchronous method call. If you release all references to the wait handle, system resources are freed when garbage collection reclaims the wait handle. To free the system resources as soon as you are finished using the wait handle, call the <see cref="M:System.Threading.WaitHandle.Close" />
 
             
 
@@ -295,43 +283,35 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Threading.WaitHandle" />
+              >The <see cref="T:System.Threading.WaitHandle" />
 
               
 
-               contained in the <see
-               cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncWaitHandle" />
+               contained in the <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.AsyncWaitHandle" />
 
               
 
-               property can be used to block the current thread until the asynchronous call is complete. However the <see
-               cref="T:System.Threading.WaitHandle" />
+               property can be used to block the current thread until the asynchronous call is complete. However the <see cref="T:System.Threading.WaitHandle" />
 
               
 
-               will ignore the <see
-               cref="T:System.AsyncCallback" />
+               will ignore the <see cref="T:System.AsyncCallback" />
 
               
 
-              , if one was specified during the BeginInvoke call. Therefore, a situation can occur where the application shuts down before the <see
-               cref="T:System.AsyncCallback" />
+              , if one was specified during the BeginInvoke call. Therefore, a situation can occur where the application shuts down before the <see cref="T:System.AsyncCallback" />
 
               
 
-               has finished executing, even if a <see
-               cref="T:System.Threading.WaitHandle" />
+               has finished executing, even if a <see cref="T:System.Threading.WaitHandle" />
 
               
 
-               is used to block until the asynchronous call completion. For an example of such a situation, see the example for the <see
-               cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+               is used to block until the asynchronous call completion. For an example of such a situation, see the example for the <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
               
 
-               class, and remove the <see
-               cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+               class, and remove the <see cref="M:System.Threading.Thread.Sleep(System.Int32)" />
 
               
 
@@ -342,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Threading.WaitHandle" />
+            >Gets a <see cref="T:System.Threading.WaitHandle" />
 
             
 
@@ -369,21 +348,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If it is detected that the BeginInvoke call completed synchronously in the <see
-             cref="T:System.AsyncCallback" />
+            >If it is detected that the BeginInvoke call completed synchronously in the <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate, it is probable that the thread that called BeginInvoke is the current thread. Most providers of the <see
-             cref="T:System.IAsyncResult" />
+             delegate, it is probable that the thread that called BeginInvoke is the current thread. Most providers of the <see cref="T:System.IAsyncResult" />
 
             
 
              interface will not use the capability and will return a default false.</para
           >
           <para
-            >Current implementation of <see
-             cref="P:System.Runtime.Remoting.Messaging.AsyncResult.CompletedSynchronously" />
+            >Current implementation of <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.CompletedSynchronously" />
 
             
 
@@ -414,8 +390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether EndInvoke has been called on the current <see
-             cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+            >Gets or sets a value indicating whether EndInvoke has been called on the current <see cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
 
             
 
@@ -447,23 +422,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
 
             
 
-             method can return an object after the <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
+             method can return an object after the <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
 
             
 
-             method is called. The <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+             method is called. The <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
             
 
-             return value can be cast to an <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+             return value can be cast to an <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
@@ -498,13 +469,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The server must not use any client supplied resources outside of the agreed upon sharing semantics after it sets the <see
-             cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
+            >The server must not use any client supplied resources outside of the agreed upon sharing semantics after it sets the <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
 
             
 
-             property to true. Thus, it is safe for the client to destroy the resources after the <see
-             cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
+             property to true. Thus, it is safe for the client to destroy the resources after the <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
 
             
 
@@ -540,8 +509,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current implementation of <see
-             cref="P:System.Runtime.Remoting.Messaging.AsyncResult.NextSink" />
+            >The current implementation of <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.NextSink" />
 
             
 
@@ -579,8 +547,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not need to call the <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SetMessageCtrl(System.Runtime.Remoting.Messaging.IMessageCtrl)" />
+            >You do not need to call the <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SetMessageCtrl(System.Runtime.Remoting.Messaging.IMessageCtrl)" />
 
             
 
@@ -590,8 +557,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets an <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
+            >Sets an <see cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
 
             
 
@@ -599,12 +565,15 @@
           >
         </summary>
         <param name="mc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
+          The <see cref="T:System.Runtime.Remoting.Messaging.IMessageCtrl" />
 
           
 
@@ -637,13 +606,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
+            >The <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.SyncProcessMessage(System.Runtime.Remoting.Messaging.IMessage)" />
 
             
 
-             method implements the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+             method implements the <see cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
 
             
 
@@ -654,33 +621,27 @@
 
             
 
-             invokes the consumer code's <see
-             cref="T:System.AsyncCallback" />
+             invokes the consumer code's <see cref="T:System.AsyncCallback" />
 
             
 
-             delegate. It also sets the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+             delegate. It also sets the <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
-             instance returned by the <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
+             instance returned by the <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
 
             
 
-             method. If the <paramref
-             name="msg" />
+             method. If the <paramref name="msg" />
 
             
 
-             parameter is of type <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+             parameter is of type <see cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
             
 
-            , the same object is returned by <see
-             cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
+            , the same object is returned by <see cref="M:System.Runtime.Remoting.Messaging.AsyncResult.GetReplyMessage" />
 
             
 
@@ -691,8 +652,7 @@
 
             
 
-             also modifies the value returned by the <see
-             cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
+             also modifies the value returned by the <see cref="P:System.Runtime.Remoting.Messaging.AsyncResult.IsCompleted" />
 
             
 
@@ -708,7 +668,11 @@
           <para>Returns null.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

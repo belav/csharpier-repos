@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class can hold any string value, but has optimizations for dealing with <see
-         cref="T:System.Guid" />
+        >This class can hold any string value, but has optimizations for dealing with <see cref="T:System.Guid" />
 
         
 
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of this class using a byte array that represents a <see
-             cref="T:System.Guid" />
+            >Creates a new instance of this class using a byte array that represents a <see cref="T:System.Guid" />
 
             
 
@@ -101,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of this class using a <see
-             cref="T:System.Guid" />
+            >Creates a new instance of this class using a <see cref="T:System.Guid" />
 
             
 
@@ -142,12 +139,15 @@
           <para>Creates a new instance of this class using a string.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string used to generate the <see
-           cref="T:System.Xml.UniqueId" />
+          A string used to generate the <see cref="T:System.Xml.UniqueId" />
 
           
 
@@ -186,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of this class starting from an offset within a byte array that represents a <see
-             cref="T:System.Guid" />
+            >Creates a new instance of this class starting from an offset within a byte array that represents a <see cref="T:System.Guid" />
 
             
 
@@ -195,12 +194,15 @@
           >
         </summary>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Offset position within the byte array that represents a <see
-           cref="T:System.Guid" />
+          Offset position within the byte array that represents a <see cref="T:System.Guid" />
 
           
 
@@ -239,24 +241,30 @@
           <para>Creates a new instance of this class starting from an offset within a char using a specified number of entries.</para>
         </summary>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Offset position within the char array that represents a <see
-           cref="T:System.Guid" />
+          Offset position within the char array that represents a <see cref="T:System.Guid" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Number of array entries to use, starting from <paramref
-           name="offset" />
+          Number of array entries to use, starting from <paramref name="offset" />
 
           
 
@@ -288,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length of the string representation of the <see
-             cref="T:System.Xml.UniqueId" />
+            >Gets the length of the string representation of the <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -319,8 +326,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether an object equals this <see
-             cref="T:System.Xml.UniqueId" />
+            >Tests whether an object equals this <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -330,8 +336,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object equals this <see
-             cref="T:System.Xml.UniqueId" />
+            >true if the object equals this <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -339,7 +344,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -366,8 +375,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a hash-code representation of this <see
-             cref="T:System.Xml.UniqueId" />
+            >Creates a hash-code representation of this <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -377,8 +385,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An integer hash-code representation of this <see
-             cref="T:System.Xml.UniqueId" />
+            >An integer hash-code representation of this <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -403,13 +410,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the <see
-             cref="T:System.Xml.UniqueId" />
+            >Indicates whether the <see cref="T:System.Xml.UniqueId" />
 
             
 
-             is a <see
-             cref="T:System.Guid" />
+             is a <see cref="T:System.Guid" />
 
             
 
@@ -443,8 +448,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the equality operator to test for equality of two <see
-             cref="T:System.Xml.UniqueId" />
+            >Overrides the equality operator to test for equality of two <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -454,8 +458,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Xml.UniqueId" />
+            >true if the two <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -463,24 +466,30 @@
           >
         </returns>
         <param name="id1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.UniqueId" />
+          The first <see cref="T:System.Xml.UniqueId" />
 
           
 
           .</param
         >
         <param name="id2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.UniqueId" />
+          The second <see cref="T:System.Xml.UniqueId" />
 
           
 
@@ -513,8 +522,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Overrides the equality operator to test for inequality of two <see
-             cref="T:System.Xml.UniqueId" />
+            >Overrides the equality operator to test for inequality of two <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -526,24 +534,30 @@
           <para>true if the overridden equality operator returns false; otherwise false.</para>
         </returns>
         <param name="id1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.UniqueId" />
+          The first <see cref="T:System.Xml.UniqueId" />
 
           
 
           .</param
         >
         <param name="id2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.UniqueId" />
+          The second <see cref="T:System.Xml.UniqueId" />
 
           
 
@@ -585,8 +599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Puts the <see
-             cref="T:System.Xml.UniqueId" />
+            >Puts the <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -596,8 +609,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Number of entries in the char array filled by the <see
-             cref="T:System.Xml.UniqueId" />
+            >Number of entries in the char array filled by the <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -605,12 +617,15 @@
           >
         </returns>
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Position in the char array to start inserting the <see
-           cref="T:System.Xml.UniqueId" />
+          Position in the char array to start inserting the <see cref="T:System.Xml.UniqueId" />
 
           
 
@@ -645,8 +660,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Displays the <see
-             cref="T:System.Xml.UniqueId" />
+            >Displays the <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -656,8 +670,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representation of the <see
-             cref="T:System.Xml.UniqueId" />
+            >A string representation of the <see cref="T:System.Xml.UniqueId" />
 
             
 
@@ -722,13 +735,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tries to get the value of the <see
-             cref="T:System.Xml.UniqueId" />
+            >Tries to get the value of the <see cref="T:System.Xml.UniqueId" />
 
             
 
-             as a <see
-             cref="T:System.Guid" />
+             as a <see cref="T:System.Guid" />
 
             
 
@@ -738,13 +749,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value stored in this instance of <see
-             cref="T:System.Xml.UniqueId" />
+            >true if the value stored in this instance of <see cref="T:System.Xml.UniqueId" />
 
             
 
-             is a <see
-             cref="T:System.Guid" />
+             is a <see cref="T:System.Guid" />
 
             
 
@@ -752,24 +761,30 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          byte array that will contain the <see
-           cref="T:System.Guid" />
+          byte array that will contain the <see cref="T:System.Guid" />
 
           
 
           .</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Position in the byte array to start inserting the <see
-           cref="T:System.Guid" />
+          Position in the byte array to start inserting the <see cref="T:System.Guid" />
 
           
 

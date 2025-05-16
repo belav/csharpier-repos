@@ -34,13 +34,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeNamespaceCollection" />
+        >The <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
         
 
-         class provides a simple collection object that can be used to store a set of <see
-         cref="T:System.CodeDom.CodeNamespace" />
+         class provides a simple collection object that can be used to store a set of <see cref="T:System.CodeDom.CodeNamespace" />
 
         
 
@@ -50,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.CodeDom.CodeNamespace" />
+        >Represents a collection of <see cref="T:System.CodeDom.CodeNamespace" />
 
         
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeNamespaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
             
 
@@ -113,13 +109,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeNamespaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
             
 
-             class that contains the specified array of <see
-             cref="T:System.CodeDom.CodeNamespace" />
+             class that contains the specified array of <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -127,12 +121,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          An array of <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -164,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeNamespaceCollection" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
             
 
@@ -173,12 +169,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespaceCollection" />
+          The <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
           
 
@@ -209,8 +208,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Adds the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -222,12 +220,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -261,8 +262,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Copies the elements of the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -270,12 +270,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          An array of type <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -309,8 +312,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the contents of the specified <see
-             cref="T:System.CodeDom.CodeNamespaceCollection" />
+            >Adds the contents of the specified <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
             
 
@@ -318,12 +320,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespaceCollection" />
+          A <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
           
 
@@ -357,8 +362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the collection contains the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Gets a value that indicates whether the collection contains the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -368,8 +372,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >true if the <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -377,12 +380,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -417,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the collection objects to a one-dimensional <see
-             cref="T:System.Array" />
+            >Copies the collection objects to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -426,19 +431,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -472,13 +484,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Gets the index of the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
-             object in the <see
-             cref="T:System.CodeDom.CodeNamespaceCollection" />
+             object in the <see cref="T:System.CodeDom.CodeNamespaceCollection" />
 
             
 
@@ -488,8 +498,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >The index of the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -497,12 +506,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -537,8 +549,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Inserts the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -546,19 +557,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index where the new item should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -620,8 +638,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.CodeDom.CodeNamespace" />
+            >Removes the specified <see cref="T:System.CodeDom.CodeNamespace" />
 
             
 
@@ -629,12 +646,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          The <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 

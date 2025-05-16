@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+        >The <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
             
 
@@ -67,7 +65,11 @@
           >
         </summary>
         <param name="val">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -101,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether <paramref
-             name="obj" />
+            >Determines whether <paramref name="obj" />
 
             
 
@@ -112,8 +113,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -121,12 +121,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+          The <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
           
 
@@ -157,13 +160,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether <paramref
-             name="obj" />
+            >Determines whether <paramref name="obj" />
 
             
 
-             is an instance of <see
-             cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+             is an instance of <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
             
 
@@ -173,13 +174,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
-             is an instance of <see
-             cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+             is an instance of <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
             
 
@@ -187,7 +186,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -277,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two <see
-             cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+            >Returns a value indicating whether two <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
             
 
@@ -288,13 +290,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -302,24 +302,30 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+          A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
           
 
            structure.</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+          A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
           
 
@@ -353,8 +359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two <see
-             cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+            >Returns a value indicating whether two <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
             
 
@@ -364,13 +369,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="a" />
+            >true if <paramref name="a" />
 
             
 
-             and <paramref
-             name="b" />
+             and <paramref name="b" />
 
             
 
@@ -378,24 +381,30 @@
           >
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+          A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
           
 
            structure.</param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+          A <see cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
 
           
 

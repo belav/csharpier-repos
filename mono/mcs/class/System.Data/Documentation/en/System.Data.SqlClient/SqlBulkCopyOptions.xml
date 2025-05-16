@@ -18,18 +18,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
+        >You can use the <see cref="T:System.Data.SqlClient.SqlBulkCopyOptions" />
 
         
 
-         enumeration when you construct a <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+         enumeration when you construct a <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
-         instance to change how the <see
-         cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+         instance to change how the <see cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
 
         
 
@@ -39,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Bitwise flag that specifies one or more options to use with an instance of <see
-         cref="T:System.Data.SqlClient.SqlBulkCopy" />
+        >Bitwise flag that specifies one or more options to use with an instance of <see cref="T:System.Data.SqlClient.SqlBulkCopy" />
 
         
 
@@ -162,13 +158,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When specified, each batch of the bulk-copy operation will occur within a transaction. If you indicate this option and also provide a <see
-             cref="T:System.Data.SqlClient.SqlTransaction" />
+            >When specified, each batch of the bulk-copy operation will occur within a transaction. If you indicate this option and also provide a <see cref="T:System.Data.SqlClient.SqlTransaction" />
 
             
 
-             object to the constructor, an <see
-             cref="T:System.ArgumentException" />
+             object to the constructor, an <see cref="T:System.ArgumentException" />
 
             
 

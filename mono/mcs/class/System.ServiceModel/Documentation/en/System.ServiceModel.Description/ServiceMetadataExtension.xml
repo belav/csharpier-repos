@@ -27,26 +27,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
+        >The <see cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
 
         
 
-         is configured and used by configuring a service with the <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+         is configured and used by configuring a service with the <see cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
 
         
 
         .</para
       >
       <para
-        >You can also use the <see
-         cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
+        >You can also use the <see cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
 
         
 
-         class to get the service's metadata at runtime by accessing the <see
-         cref="P:System.ServiceModel.Description.ServiceMetadataExtension.Metadata" />
+         class to get the service's metadata at runtime by accessing the <see cref="P:System.ServiceModel.Description.ServiceMetadataExtension.Metadata" />
 
         
 
@@ -75,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of a <see
-             cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
+            >Creates an instance of a <see cref="T:System.ServiceModel.Description.ServiceMetadataExtension" />
 
             
 

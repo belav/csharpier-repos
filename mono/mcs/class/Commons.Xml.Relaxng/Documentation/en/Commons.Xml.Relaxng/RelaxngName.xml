@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -40,10 +42,7 @@
       </Parameters>
       <Docs>
         <summary>Writes the whole element to the argument XmlWriter.</summary>
-        <param name="writer"
-          >a <see
-           cref="T:System.Xml.XmlWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Xml.XmlWriter" /></param>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -66,29 +65,25 @@
       </Parameters>
       <Docs>
         <summary
-          >The constructor that initializes <see
-           cref="P:Commons.Xml.Relaxng.RelaxngName.Name" />
+          >The constructor that initializes <see cref="P:Commons.Xml.Relaxng.RelaxngName.Name" />
 
           
 
-           and <see
-           cref="P:Commons.Xml.Relaxng.RelaxngName.Namespace" />
+           and <see cref="P:Commons.Xml.Relaxng.RelaxngName.Namespace" />
 
           
 
           .</summary
         >
         <param name="ncname"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
            that represents the local name.</param
         >
         <param name="ns"
-          >a <see
-           cref="T:System.String" />
+          >a <see cref="T:System.String" />
 
           
 
@@ -106,10 +101,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the local part of the target qualified name.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -122,10 +114,7 @@
       <Parameters />
       <Docs>
         <summary>Represents the namespace URI part of the target qualified name.</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

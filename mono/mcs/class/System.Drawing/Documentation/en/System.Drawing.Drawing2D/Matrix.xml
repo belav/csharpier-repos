@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In ndptecgdiplus you can store an affine transformation in a <see
-         cref="T:System.Drawing.Drawing2D.Matrix" />
+        >In ndptecgdiplus you can store an affine transformation in a <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
         
 
-         object. Because the third column of a matrix that represents an affine transformation is always (0, 0, 1), you specify only the six numbers in the first two columns when you construct a <see
-         cref="T:System.Drawing.Drawing2D.Matrix" />
+         object. Because the third column of a matrix that represents an affine transformation is always (0, 0, 1), you specify only the six numbers in the first two columns when you construct a <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
         
 
@@ -79,8 +77,7 @@
         <image />
       </mediaLink>
       <para
-        >The fact that the matrix of a composite transformation can be formed by multiplying the individual transformation matrices means that any sequence of affine transformations can be stored in a single <see
-         cref="T:System.Drawing.Drawing2D.Matrix" />
+        >The fact that the matrix of a composite transformation can be formed by multiplying the individual transformation matrices means that any sequence of affine transformations can be stored in a single <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
         
 
@@ -90,38 +87,31 @@
         <para>The order of a composite transformation is important. In general, rotate, then scale, then translate is not the same as scale, then rotate, then translate. Similarly, the order of matrix multiplication is important. In general, ABC is not the same as BAC.</para>
       </block>
       <para
-        >The <see
-         cref="T:System.Drawing.Drawing2D.Matrix" />
+        >The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
         
 
-         class provides several methods for building a composite transformation: <see
-         cref="Overload:System.Drawing.Drawing2D.Matrix.Multiply" />
+         class provides several methods for building a composite transformation: <see cref="Overload:System.Drawing.Drawing2D.Matrix.Multiply" />
 
         
 
-        , <see
-         cref="Overload:System.Drawing.Drawing2D.Matrix.Rotate" />
+        , <see cref="Overload:System.Drawing.Drawing2D.Matrix.Rotate" />
 
         
 
-        , <see
-         cref="Overload:System.Drawing.Drawing2D.Matrix.RotateAt" />
+        , <see cref="Overload:System.Drawing.Drawing2D.Matrix.RotateAt" />
 
         
 
-        , <see
-         cref="Overload:System.Drawing.Drawing2D.Matrix.Scale" />
+        , <see cref="Overload:System.Drawing.Drawing2D.Matrix.Scale" />
 
         
 
-        , <see
-         cref="Overload:System.Drawing.Drawing2D.Matrix.Shear" />
+        , <see cref="Overload:System.Drawing.Drawing2D.Matrix.Shear" />
 
         
 
-        , and <see
-         cref="Overload:System.Drawing.Drawing2D.Matrix.Translate" />
+        , and <see cref="Overload:System.Drawing.Drawing2D.Matrix.Translate" />
 
         
 
@@ -145,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -174,18 +163,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method initializes the new Matrix such that it represents the geometric transform that maps the rectangle specified by the <paramref
-             name="rect" />
+            >This method initializes the new Matrix such that it represents the geometric transform that maps the rectangle specified by the <paramref name="rect" />
 
             
 
-             parameter to the parallelogram defined by the three points in the <paramref
-             name="plgpts" />
+             parameter to the parallelogram defined by the three points in the <paramref name="plgpts" />
 
             
 
-             parameter. The upper-left corner of the rectangle is mapped to the first point in the <paramref
-             name="plgpts" />
+             parameter. The upper-left corner of the rectangle is mapped to the first point in the <paramref name="plgpts" />
 
             
 
@@ -195,8 +181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -204,24 +189,30 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            structure that represents the rectangle to be transformed. </param
         >
         <param name="plgpts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of three <see
-           cref="T:System.Drawing.Point" />
+          An array of three <see cref="T:System.Drawing.Point" />
 
           
 
@@ -248,23 +239,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method initializes the new <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >This method initializes the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             such that it represents the geometric transform that maps the rectangle specified by the <paramref
-             name="rect" />
+             such that it represents the geometric transform that maps the rectangle specified by the <paramref name="rect" />
 
             
 
-             parameter to the parallelogram defined by the three points in the <paramref
-             name="plgpts" />
+             parameter to the parallelogram defined by the three points in the <paramref name="plgpts" />
 
             
 
-             parameter. The upper-left corner of the rectangle is mapped to the first point in the <paramref
-             name="plgpts" />
+             parameter. The upper-left corner of the rectangle is mapped to the first point in the <paramref name="plgpts" />
 
             
 
@@ -274,8 +261,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -283,24 +269,30 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.RectangleF" />
+          A <see cref="T:System.Drawing.RectangleF" />
 
           
 
            structure that represents the rectangle to be transformed. </param
         >
         <param name="plgpts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of three <see
-           cref="T:System.Drawing.PointF" />
+          An array of three <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -332,8 +324,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -341,72 +332,90 @@
           >
         </summary>
         <param name="m11">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value in the first row and first column of the new <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value in the first row and first column of the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="m12">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value in the first row and second column of the new <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value in the first row and second column of the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="m21">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value in the second row and first column of the new <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value in the second row and first column of the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="m22">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value in the second row and second column of the new <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value in the second row and second column of the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="dx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value in the third row and first column of the new <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value in the third row and first column of the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="dy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value in the third row and second column of the new <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value in the third row and second column of the new <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -430,8 +439,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an exact copy of this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Creates an exact copy of this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -441,8 +449,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -466,8 +473,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling Dispose allows the resources used by this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Calling Dispose allows the resources used by this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -477,8 +483,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Releases all resources used by this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -506,8 +511,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements m11, m12, m21, m22, dx, and dy of the <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >The elements m11, m12, m21, m22, dx, and dy of the <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -517,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of floating-point values that represents the elements of this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets an array of floating-point values that represents the elements of this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -545,13 +548,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether the specified object is a <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Tests whether the specified object is a <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             and is identical to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             and is identical to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -561,18 +562,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if <paramref
-             name="obj" />
+            >This method returns true if <paramref name="obj" />
 
             
 
-             is the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             is the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             identical to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             identical to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -580,7 +578,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -624,8 +626,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The hash code for this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >The hash code for this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -650,8 +651,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inverts this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Inverts this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -676,8 +676,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets a value indicating whether this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -702,8 +701,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets a value indicating whether this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -733,18 +731,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Multiplies this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             by the matrix specified in the <paramref
-             name="matrix" />
+             by the matrix specified in the <paramref name="matrix" />
 
             
 
-             parameter, by prepending the specified <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             parameter, by prepending the specified <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -752,17 +747,19 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
-           by which this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+           by which this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -791,23 +788,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the specified order is <see
-             cref="F:System.Drawing.Drawing2D.MatrixOrder.Prepend" />
+            >If the specified order is <see cref="F:System.Drawing.Drawing2D.MatrixOrder.Prepend" />
 
             
 
-            , this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            , this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             is multiplied by the specified matrix in a prepended order. If the specified order is <see
-             cref="F:System.Drawing.Drawing2D.MatrixOrder.Append" />
+             is multiplied by the specified matrix in a prepended order. If the specified order is <see cref="F:System.Drawing.Drawing2D.MatrixOrder.Append" />
 
             
 
-            , this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            , this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -817,18 +810,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Multiplies this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Multiplies this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             by the matrix specified in the <paramref
-             name="matrix" />
+             by the matrix specified in the <paramref name="matrix" />
 
             
 
-             parameter, and in the order specified in the <paramref
-             name="order" />
+             parameter, and in the order specified in the <paramref name="order" />
 
             
 
@@ -836,29 +826,34 @@
           >
         </summary>
         <param name="matrix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
-           by which this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+           by which this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            is to be multiplied. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          The <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -882,8 +877,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the x translation value (the dx value, or the element in the third row and first column) of this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets the x translation value (the dx value, or the element in the third row and first column) of this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -908,8 +902,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the y translation value (the dy value, or the element in the third row and second column) of this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Gets the y translation value (the dy value, or the element in the third row and second column) of this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -937,8 +930,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resets this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Resets this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -965,8 +957,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Prepend to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Prepend to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -974,7 +965,11 @@
           >
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1004,13 +999,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a clockwise rotation of an amount specified in the <paramref
-             name="angle" />
+            >Applies a clockwise rotation of an amount specified in the <paramref name="angle" />
 
             
 
-             parameter, around the origin (zero x and y coordinates) for this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+             parameter, around the origin (zero x and y coordinates) for this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1018,24 +1011,30 @@
           >
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle (extent) of the rotation, in degrees. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
-           that specifies the order (append or prepend) in which the rotation is applied to this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+           that specifies the order (append or prepend) in which the rotation is applied to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1065,13 +1064,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a clockwise rotation to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies a clockwise rotation to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
-             around the point specified in the <paramref
-             name="point" />
+             around the point specified in the <paramref name="point" />
 
             
 
@@ -1079,19 +1076,26 @@
           >
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle (extent) of the rotation, in degrees. </param
         >
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -1122,8 +1126,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies a clockwise rotation about the specified point to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies a clockwise rotation about the specified point to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1131,31 +1134,41 @@
           >
         </summary>
         <param name="angle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The angle of the rotation, in degrees. </param
         >
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.PointF" />
+          A <see cref="T:System.Drawing.PointF" />
 
           
 
            that represents the center of the rotation. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1182,8 +1195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified scale vector to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies the specified scale vector to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1191,24 +1203,30 @@
           >
         </summary>
         <param name="scaleX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value by which to scale this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value by which to scale this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            in the x-axis direction. </param
         >
         <param name="scaleY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value by which to scale this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value by which to scale this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1239,18 +1257,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified scale vector (<paramref
-             name="scaleX" />
+            >Applies the specified scale vector (<paramref name="scaleX" />
 
             
 
-             and <paramref
-             name="scaleY" />
+             and <paramref name="scaleY" />
 
             
 
-            ) to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            ) to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1258,41 +1273,49 @@
           >
         </summary>
         <param name="scaleX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value by which to scale this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value by which to scale this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            in the x-axis direction. </param
         >
         <param name="scaleY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value by which to scale this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The value by which to scale this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
            in the y-axis direction. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
-           that specifies the order (append or prepend) in which the scale vector is applied to this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+           that specifies the order (append or prepend) in which the scale vector is applied to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1318,23 +1341,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformation applied in this method is a pure shear only if one of the parameters is 0. Applied to a rectangle at the origin, when the <paramref
-             name="shearY" />
+            >The transformation applied in this method is a pure shear only if one of the parameters is 0. Applied to a rectangle at the origin, when the <paramref name="shearY" />
 
             
 
-             factor is 0, the transformation moves the bottom edge horizontally by <paramref
-             name="shearX" />
+             factor is 0, the transformation moves the bottom edge horizontally by <paramref name="shearX" />
 
             
 
-             times the height of the rectangle. When the <paramref
-             name="shearX" />
+             times the height of the rectangle. When the <paramref name="shearX" />
 
             
 
-             factor is 0, it moves the right edge vertically by <paramref
-             name="shearY" />
+             factor is 0, it moves the right edge vertically by <paramref name="shearY" />
 
             
 
@@ -1344,8 +1363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified shear vector to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies the specified shear vector to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1353,14 +1371,22 @@
           >
         </summary>
         <param name="shearX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal shear factor. </param
         >
         <param name="shearY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1390,23 +1416,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformation applied in this method is a pure shear only if one of the parameters is 0. Applied to a rectangle at the origin, when the <paramref
-             name="shearY" />
+            >The transformation applied in this method is a pure shear only if one of the parameters is 0. Applied to a rectangle at the origin, when the <paramref name="shearY" />
 
             
 
-             factor is 0, the transformation moves the bottom edge horizontally by <paramref
-             name="shearX" />
+             factor is 0, the transformation moves the bottom edge horizontally by <paramref name="shearX" />
 
             
 
-             times the height of the rectangle. When the <paramref
-             name="shearX" />
+             times the height of the rectangle. When the <paramref name="shearX" />
 
             
 
-             factor is 0, it moves the right edge vertically by <paramref
-             name="shearY" />
+             factor is 0, it moves the right edge vertically by <paramref name="shearY" />
 
             
 
@@ -1416,8 +1438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified shear vector to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies the specified shear vector to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1425,26 +1446,37 @@
           >
         </summary>
         <param name="shearX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The horizontal shear factor. </param
         >
         <param name="shearY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The vertical shear factor. </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
@@ -1473,8 +1505,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the geometric transform represented by this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies the geometric transform represented by this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1482,12 +1513,15 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1516,8 +1550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the geometric transform represented by this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies the geometric transform represented by this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1525,12 +1558,15 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.PointF" />
+          An array of <see cref="T:System.Drawing.PointF" />
 
           
 
@@ -1559,8 +1595,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies only the scale and rotate components of this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies only the scale and rotate components of this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1568,12 +1603,15 @@
           >
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1604,12 +1642,15 @@
           <para>Multiplies each vector in an array by the matrix. The translation elements of this matrix (third row) are ignored.</para>
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1639,18 +1680,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified translation vector (<paramref
-             name="offsetX" />
+            >Applies the specified translation vector (<paramref name="offsetX" />
 
             
 
-             and <paramref
-             name="offsetY" />
+             and <paramref name="offsetY" />
 
             
 
-            ) to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            ) to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1658,24 +1696,30 @@
           >
         </summary>
         <param name="offsetX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The x value by which to translate this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The x value by which to translate this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="offsetY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The y value by which to translate this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The y value by which to translate this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1706,8 +1750,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified translation vector to this <see
-             cref="T:System.Drawing.Drawing2D.Matrix" />
+            >Applies the specified translation vector to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
             
 
@@ -1715,41 +1758,49 @@
           >
         </summary>
         <param name="offsetX">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The x value by which to translate this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The x value by which to translate this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="offsetY">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The y value by which to translate this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+          The y value by which to translate this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
           . </param
         >
         <param name="order">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+          A <see cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
           
 
-           that specifies the order (append or prepend) in which the translation is applied to this <see
-           cref="T:System.Drawing.Drawing2D.Matrix" />
+           that specifies the order (append or prepend) in which the translation is applied to this <see cref="T:System.Drawing.Drawing2D.Matrix" />
 
           
 
@@ -1780,12 +1831,15 @@
           <para>Multiplies each vector in an array by the matrix. The translation elements of this matrix (third row) are ignored.</para>
         </summary>
         <param name="pts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Drawing.Point" />
+          An array of <see cref="T:System.Drawing.Point" />
 
           
 

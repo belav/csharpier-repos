@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Translates colors to and from GDI+ <see
-         cref="T:System.Drawing.Color" />
+        >Translates colors to and from GDI+ <see cref="T:System.Drawing.Color" />
 
         
 
@@ -44,8 +43,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method translates a string representation of an HTML color name, such as Blue or Red, to a GDI+ <see
-             cref="T:System.Drawing.Color" />
+            >This method translates a string representation of an HTML color name, such as Blue or Red, to a GDI+ <see cref="T:System.Drawing.Color" />
 
             
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates an HTML color representation to a GDI+ <see
-             cref="T:System.Drawing.Color" />
+            >Translates an HTML color representation to a GDI+ <see cref="T:System.Drawing.Color" />
 
             
 
@@ -66,18 +63,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
-             structure that represents the translated HTML color or <see
-             cref="F:System.Drawing.Color.Empty" />
+             structure that represents the translated HTML color or <see cref="F:System.Drawing.Color.Empty" />
 
             
 
-             if <paramref
-             name="htmlColor" />
+             if <paramref name="htmlColor" />
 
             
 
@@ -85,7 +79,11 @@
           >
         </returns>
         <param name="htmlColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -114,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates an OLE color value to a GDI+ <see
-             cref="T:System.Drawing.Color" />
+            >Translates an OLE color value to a GDI+ <see cref="T:System.Drawing.Color" />
 
             
 
@@ -125,8 +122,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
@@ -134,7 +130,11 @@
           >
         </returns>
         <param name="oleColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -163,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a Windows color value to a GDI+ <see
-             cref="T:System.Drawing.Color" />
+            >Translates a Windows color value to a GDI+ <see cref="T:System.Drawing.Color" />
 
             
 
@@ -174,8 +173,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Color" />
+            >The <see cref="T:System.Drawing.Color" />
 
             
 
@@ -183,7 +181,11 @@
           >
         </returns>
         <param name="win32Color">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -211,8 +213,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method translates a <see
-             cref="T:System.Drawing.Color" />
+            >This method translates a <see cref="T:System.Drawing.Color" />
 
             
 
@@ -222,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the specified <see
-             cref="T:System.Drawing.Color" />
+            >Translates the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -235,12 +235,15 @@
           <para>The string that represents the HTML color.</para>
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -266,8 +269,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the specified <see
-             cref="T:System.Drawing.Color" />
+            >Translates the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -279,12 +281,15 @@
           <para>The OLE color value.</para>
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 
@@ -310,8 +315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates the specified <see
-             cref="T:System.Drawing.Color" />
+            >Translates the specified <see cref="T:System.Drawing.Color" />
 
             
 
@@ -323,12 +327,15 @@
           <para>The Windows color value.</para>
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Color" />
+          The <see cref="T:System.Drawing.Color" />
 
           
 

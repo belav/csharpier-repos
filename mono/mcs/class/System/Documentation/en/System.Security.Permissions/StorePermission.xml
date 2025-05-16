@@ -61,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The permission object provides either fully restricted (None) or Unrestricted access to X.509 stores. If fully restricted (None), the <see
-             cref="P:System.Security.Permissions.StorePermission.Flags" />
+            >The permission object provides either fully restricted (None) or Unrestricted access to X.509 stores. If fully restricted (None), the <see cref="P:System.Security.Permissions.StorePermission.Flags" />
 
             
 
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.StorePermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" />
 
             
 
@@ -81,12 +79,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -117,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="flag" />
+            >The <paramref name="flag" />
 
             
 
@@ -128,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.StorePermission" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.StorePermission" />
 
             
 
@@ -192,8 +191,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Permissions.StorePermission.Flags" />
+            >The <see cref="P:System.Security.Permissions.StorePermission.Flags" />
 
             
 
@@ -203,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type of <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+            >Gets or sets the type of <see cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
 
             
 
@@ -239,28 +236,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" />
+            >The <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method reconstructs a <see
-             cref="T:System.Security.Permissions.StorePermission" />
+             method reconstructs a <see cref="T:System.Security.Permissions.StorePermission" />
 
             
 
-             object from an XML encoding defined by the <see
-             cref="T:System.Security.SecurityElement" />
+             object from an XML encoding defined by the <see cref="T:System.Security.SecurityElement" />
 
             
 
-             class. Use the <see
-             cref="M:System.Security.Permissions.StorePermission.ToXml" />
+             class. Use the <see cref="M:System.Security.Permissions.StorePermission.ToXml" />
 
             
 
-             method to XML-encode the <see
-             cref="T:System.Security.Permissions.StorePermission" />
+             method to XML-encode the <see cref="T:System.Security.Permissions.StorePermission" />
 
             
 
@@ -308,7 +300,11 @@
           <para>A new permission that represents the intersection of the current permission and the specified permission. This new permission is null if the intersection is empty.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -351,7 +347,11 @@
           <para>true if the current permission is a subset of the specified permission; otherwise, false.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -413,13 +413,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" />
+            >Use the <see cref="M:System.Security.Permissions.StorePermission.FromXml(System.Security.SecurityElement)" />
 
             
 
-             method to restore the state information from a <see
-             cref="T:System.Security.SecurityElement" />
+             method to restore the state information from a <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -433,8 +431,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.SecurityElement" />
+            >A <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -468,8 +465,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The result of a call to <see
-             cref="M:System.Security.Permissions.StorePermission.Union(System.Security.IPermission)" />
+            >The result of a call to <see cref="M:System.Security.Permissions.StorePermission.Union(System.Security.IPermission)" />
 
             
 
@@ -485,7 +481,11 @@
           <para>A new permission that represents the union of the current permission and the specified permission.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

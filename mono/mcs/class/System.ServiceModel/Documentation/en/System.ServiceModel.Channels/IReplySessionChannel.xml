@@ -24,36 +24,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IReplySessionChannel" />
+        >The <see cref="T:System.ServiceModel.Channels.IReplySessionChannel" />
 
         
 
-         interface indicates that an <see
-         cref="T:System.ServiceModel.Channels.IReplyChannel" />
+         interface indicates that an <see cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
         
 
-         implements <see
-         cref="T:System.ServiceModel.Channels.IInputSession" />
+         implements <see cref="T:System.ServiceModel.Channels.IInputSession" />
 
         
 
          semantics. </para
       >
       <para
-        >The <see
-         cref="T:System.ServiceModel.Channels.IInputSession" />
+        >The <see cref="T:System.ServiceModel.Channels.IInputSession" />
 
         
 
-         associated with its <see
-         cref="T:System.ServiceModel.Channels.IReplySessionChannel" />
+         associated with its <see cref="T:System.ServiceModel.Channels.IReplySessionChannel" />
 
         
 
-         can be retrieved through the <see
-         cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+         can be retrieved through the <see cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
 
         
 

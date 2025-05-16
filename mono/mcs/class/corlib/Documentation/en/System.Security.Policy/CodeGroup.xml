@@ -58,8 +58,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a basic code group and should be called from the constructors of custom code groups. You can add child code groups using the <see
-             cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
+            >This constructor creates a basic code group and should be called from the constructors of custom code groups. You can add child code groups using the <see cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
 
             
 
@@ -69,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Security.Policy.CodeGroup" />
+            >Initializes a new instance of <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
@@ -78,14 +76,22 @@
           >
         </summary>
         <param name="membershipCondition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A membership condition that tests evidence to determine whether this code group applies policy. </param
         >
         <param name="policy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -121,7 +127,11 @@
           <para>Adds a child code group to the current code group.</para>
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -178,8 +188,7 @@
           <para>The order of child code groups is significant for certain code groups.</para>
           <block subset="none" type="note">
             <para
-              >The return value is a copy of the child code list. Do not use the returned list to add a child code group; instead, use the <see
-               cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
+              >The return value is a copy of the child code list. Do not use the returned list to add a child code group; instead, use the <see cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
 
               
 
@@ -258,41 +267,34 @@
 
             
 
-             cannot be overridden. If you need to serialize members specific to a particular implementation of <see
-             cref="T:System.Security.Policy.CodeGroup" />
+             cannot be overridden. If you need to serialize members specific to a particular implementation of <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
-            , you must override <see
-             cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+            , you must override <see cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
-             and serialize your members there. When the code group is serialized, <see
-             cref="M:System.Security.Policy.CodeGroup.ToXml" />
+             and serialize your members there. When the code group is serialized, <see cref="M:System.Security.Policy.CodeGroup.ToXml" />
 
             
 
-             calls <see
-             cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+             calls <see cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
-             and adds your serialization to the <see
-             cref="T:System.Security.SecurityElement" />
+             and adds your serialization to the <see cref="T:System.Security.SecurityElement" />
 
             
 
-             created by <see
-             cref="M:System.Security.Policy.CodeGroup.ToXml" />
+             created by <see cref="M:System.Security.Policy.CodeGroup.ToXml" />
 
             
 
             .</para
           >
           <para
-            >The XML created using this method is deserialized by the <see
-             cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+            >The XML created using this method is deserialized by the <see cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
@@ -302,8 +304,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, serializes properties and internal state specific to a derived code group and adds the serialization to the specified <see
-             cref="T:System.Security.SecurityElement" />
+            >When overridden in a derived class, serializes properties and internal state specific to a derived code group and adds the serialization to the specified <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -311,14 +312,22 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to which to add the serialization. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -369,18 +378,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two code groups are equivalent if they have the same <see
-             cref="P:System.Security.Policy.CodeGroup.Name" />
+            >Two code groups are equivalent if they have the same <see cref="P:System.Security.Policy.CodeGroup.Name" />
 
             
 
-            , <see
-             cref="P:System.Security.Policy.CodeGroup.Description" />
+            , <see cref="P:System.Security.Policy.CodeGroup.Description" />
 
             
 
-            , and <see
-             cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
+            , and <see cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
 
             
 
@@ -397,7 +403,11 @@
           <para>true if the specified code group is equivalent to the current code group; otherwise, false.</para>
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,26 +441,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two code groups are equivalent if they have the same <see
-             cref="P:System.Security.Policy.CodeGroup.Name" />
+            >Two code groups are equivalent if they have the same <see cref="P:System.Security.Policy.CodeGroup.Name" />
 
             
 
-            , <see
-             cref="P:System.Security.Policy.CodeGroup.Description" />
+            , <see cref="P:System.Security.Policy.CodeGroup.Description" />
 
             
 
-            , and <see
-             cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
+            , and <see cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
 
             
 
             .</para
           >
           <para
-            >If the <paramref
-             name="compareChildren" />
+            >If the <paramref name="compareChildren" />
 
             
 
@@ -466,14 +472,22 @@
           <para>true if the specified code group is equivalent to the current code group; otherwise, false.</para>
         </returns>
         <param name="cg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The code group to compare with the current code group. </param
         >
         <param name="compareChildren">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -509,7 +523,11 @@
           <para>Reconstructs a security object with a given state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -549,14 +567,22 @@
           <para>Reconstructs a security object with a given state and policy level from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -694,36 +720,30 @@
 
             
 
-             cannot be overridden. If you need to deserialize members specific to a particular implementation of <see
-             cref="T:System.Security.Policy.CodeGroup" />
+             cannot be overridden. If you need to deserialize members specific to a particular implementation of <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
-            , you must override <see
-             cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+            , you must override <see cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
-             and deserialize your members there. When the code group is deserialized, <see
-             cref="M:System.Security.Policy.CodeGroup.FromXml(System.Security.SecurityElement)" />
+             and deserialize your members there. When the code group is deserialized, <see cref="M:System.Security.Policy.CodeGroup.FromXml(System.Security.SecurityElement)" />
 
             
 
-             calls <see
-             cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+             calls <see cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
-             and reconstructs your members from the <see
-             cref="T:System.Security.SecurityElement" />
+             and reconstructs your members from the <see cref="T:System.Security.SecurityElement" />
 
             
 
             .</para
           >
           <para
-            >This method deserializes XML created using <see
-             cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+            >This method deserializes XML created using <see cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
             
 
@@ -733,8 +753,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, reconstructs properties and internal state specific to a derived code group from the specified <see
-             cref="T:System.Security.SecurityElement" />
+            >When overridden in a derived class, reconstructs properties and internal state specific to a derived code group from the specified <see cref="T:System.Security.SecurityElement" />
 
             
 
@@ -742,14 +761,22 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -843,7 +870,11 @@
           <para>Removes the specified child code group.</para>
         </summary>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -877,21 +908,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Given evidence for an assembly to be loaded, this method evaluates the code group by checking the membership condition against the specified evidence. If there is a match, this method returns a policy statement for the code group, including evaluation of child code groups.</para>
           <para
-            >For a <see
-             cref="T:System.Security.Policy.UnionCodeGroup" />
+            >For a <see cref="T:System.Security.Policy.UnionCodeGroup" />
 
             
 
-            , all child code groups whose membership condition match the specified evidence are also resolved, and all resulting policy statements are combined with the policy statement of the parent union code group. Each child code group type determines how all child groups under it are applied, depending on how the <see
-             cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
+            , all child code groups whose membership condition match the specified evidence are also resolved, and all resulting policy statements are combined with the policy statement of the parent union code group. Each child code group type determines how all child groups under it are applied, depending on how the <see cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
 
             
 
              methods of these child groups work.</para
           >
           <para
-            >The .NET Framework security system uses <see
-             cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
+            >The .NET Framework security system uses <see cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
 
             
 
@@ -907,7 +935,11 @@
           <para>A policy statement that consists of the permissions granted by the code group with optional attributes, or null if the code group does not apply (the membership condition does not match the specified evidence).</para>
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -940,8 +972,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method has the same evaluation characteristics as <see
-             cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
+            >This method has the same evaluation characteristics as <see cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
 
             
 
@@ -955,8 +986,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Policy.CodeGroup" />
+            >A <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
@@ -964,7 +994,11 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1035,7 +1069,11 @@
           <para>An XML encoding of the security object, including any state information.</para>
         </returns>
         <param name="level">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

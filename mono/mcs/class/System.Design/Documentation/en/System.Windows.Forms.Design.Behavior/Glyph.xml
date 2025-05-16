@@ -13,51 +13,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The sole purpose of a <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        >The sole purpose of a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         is to paint and hit test. A <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+         is to paint and hit test. A <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         does not have a window handle (HWND), as it is rendered on the adorner window control of the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         does not have a window handle (HWND), as it is rendered on the adorner window control of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-        . Each <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+        . Each <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         can have a <see
-         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+         can have a <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
         
 
-         associated with it. A successfully hit-tested <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+         associated with it. A successfully hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         has the opportunity to push a new or different <see
-         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+         has the opportunity to push a new or different <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
         
 
-         onto the behavior stack of the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         onto the behavior stack of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
         . </para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a>
         </format>
 
@@ -69,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a single user interface (UI) entity managed by an <see
-         cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+        >Represents a single user interface (UI) entity managed by an <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
         
 
@@ -96,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -105,17 +94,19 @@
           >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
-           associated with the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 
@@ -141,13 +132,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Gets the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             associated with the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -174,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the bounds of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Gets the bounds of the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -203,28 +191,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Glyph.GetHitTest(System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Glyph.GetHitTest(System.Drawing.Point)" />
 
             
 
-             method is an abstract method that forces <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             method is an abstract method that forces <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             implementations to provide hit test logic. Given any point, if the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             implementations to provide hit test logic. Given any point, if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             has decided to be involved with that location, it will need to return a valid <see
-             cref="T:System.Windows.Forms.Cursor" />
+             has decided to be involved with that location, it will need to return a valid <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-            . Otherwise, returning null will cause the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            . Otherwise, returning null will cause the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -238,18 +221,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Cursor" />
+            >A <see cref="T:System.Windows.Forms.Cursor" />
 
             
 
-             if the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             if the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             is associated with <paramref
-             name="p" />
+             is associated with <paramref name="p" />
 
             
 
@@ -257,7 +237,11 @@
           >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -284,28 +268,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.Glyph.Paint(System.Windows.Forms.PaintEventArgs)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.Glyph.Paint(System.Windows.Forms.PaintEventArgs)" />
 
             
 
-             method is an abstract method that forces <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             method is an abstract method that forces <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-             implementations to provide paint logic. The <paramref
-             name="pe" />
+             implementations to provide paint logic. The <paramref name="pe" />
 
             
 
-             parameter contains the <see
-             cref="T:System.Drawing.Graphics" />
+             parameter contains the <see cref="T:System.Drawing.Graphics" />
 
             
 
-             related to the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             related to the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -317,12 +296,15 @@
           <para>Provides paint logic.</para>
         </summary>
         <param name="pe">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -350,13 +332,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Changes the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             associated with the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             associated with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -364,17 +344,19 @@
           >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
-           to associate with the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+           to associate with the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
           
 

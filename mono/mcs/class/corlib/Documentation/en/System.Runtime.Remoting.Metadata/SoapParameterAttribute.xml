@@ -36,13 +36,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The target objects for the <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapParameterAttribute" />
+        >The target objects for the <see cref="T:System.Runtime.Remoting.Metadata.SoapParameterAttribute" />
 
         
 
-         attributes are parameters of method calls that are remotely invoked. The <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapParameterAttribute" />
+         attributes are parameters of method calls that are remotely invoked. The <see cref="T:System.Runtime.Remoting.Metadata.SoapParameterAttribute" />
 
         
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapParameterAttribute" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapParameterAttribute" />
 
             
 

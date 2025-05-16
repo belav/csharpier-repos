@@ -20,36 +20,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+        >The <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
-         uses HTTP as the transport for sending SOAP 1.1 messages. A service can use this binding to expose endpoints that conform to WS-I BP 1.1, such as those that ASMX clients access. Similarly, a client can use the <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+         uses HTTP as the transport for sending SOAP 1.1 messages. A service can use this binding to expose endpoints that conform to WS-I BP 1.1, such as those that ASMX clients access. Similarly, a client can use the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
-         to communicate with services exposing endpoints that conform to WS-I BP 1.1, such as ASMX Web services or indigo1 services configured with the <see
-         cref="T:System.ServiceModel.BasicHttpBinding" />
+         to communicate with services exposing endpoints that conform to WS-I BP 1.1, such as ASMX Web services or indigo1 services configured with the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
         
 
         .</para
       >
       <para
-        >Security is turned off by default, but can be added setting the <see
-         cref="T:System.ServiceModel.BasicHttpSecurityMode" />
+        >Security is turned off by default, but can be added setting the <see cref="T:System.ServiceModel.BasicHttpSecurityMode" />
 
         
 
-         to a value other than <see
-         cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+         to a value other than <see cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
 
         
 
-         in the <see
-         cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" />
+         in the <see cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" />
 
         
 
@@ -77,13 +71,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of <see
-             cref="T:System.ServiceModel.BasicHttpSecurityMode" />
+            >The default value of <see cref="T:System.ServiceModel.BasicHttpSecurityMode" />
 
             
 
-             used is <see
-             cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+             used is <see cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
 
             
 
@@ -93,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
             
 
@@ -123,13 +114,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of <see
-             cref="T:System.ServiceModel.BasicHttpSecurityMode" />
+            >The default value of <see cref="T:System.ServiceModel.BasicHttpSecurityMode" />
 
             
 
-             used is <see
-             cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+             used is <see cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
 
             
 
@@ -139,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
             
 
@@ -148,12 +136,15 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value of <see
-           cref="T:System.ServiceModel.BasicHttpSecurityMode" />
+          The value of <see cref="T:System.ServiceModel.BasicHttpSecurityMode" />
 
           
 
@@ -179,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.BasicHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
             
 
@@ -188,12 +178,15 @@
           >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binding configuration name for the <see
-           cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" />
+          The binding configuration name for the <see cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" />
 
           
 
@@ -222,8 +215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the binding elements is important. It reflects the order in which the protocol and transport channels are constructed and stacked. This collection of binding elements is a new collection and can be modified and then used to create a <see
-             cref="T:System.ServiceModel.Channels.CustomBinding" />
+            >The order of the binding elements is important. It reflects the order in which the protocol and transport channels are constructed and stacked. This collection of binding elements is a new collection and can be modified and then used to create a <see cref="T:System.ServiceModel.Channels.CustomBinding" />
 
             
 
@@ -237,13 +229,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+            >The <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
             
 
-             that contains the ordered stack of binding elements described by the <see
-             cref="T:System.ServiceModel.BasicHttpBinding" />
+             that contains the ordered stack of binding elements described by the <see cref="T:System.ServiceModel.BasicHttpBinding" />
 
             
 
@@ -317,8 +307,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the SOAP message is not secured and the client is not authenticated. To use a non-default type of security, use the <see
-             cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" />
+            >By default, the SOAP message is not secured and the client is not authenticated. To use a non-default type of security, use the <see cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" />
 
             
 

@@ -17,33 +17,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Robust client and service indigo1 applications handle <see
-         cref="T:System.ServiceModel.CommunicationException" />
+        >Robust client and service indigo1 applications handle <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-         objects that may be thrown during communication. There are also two <see
-         cref="T:System.ServiceModel.CommunicationException" />
+         objects that may be thrown during communication. There are also two <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-        -derived exception types (<see
-         cref="T:System.ServiceModel.FaultException`1" />
+        -derived exception types (<see cref="T:System.ServiceModel.FaultException`1" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.FaultException" />
+         and <see cref="T:System.ServiceModel.FaultException" />
 
         
 
-        ) that clients also often expect. Therefore, in order to prevent the generic <see
-         cref="T:System.ServiceModel.CommunicationException" />
+        ) that clients also often expect. Therefore, in order to prevent the generic <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-         handler from catching these more specific exception types, catch these exceptions prior to handling <see
-         cref="T:System.ServiceModel.CommunicationException" />
+         handler from catching these more specific exception types, catch these exceptions prior to handling <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
@@ -56,13 +50,11 @@
 
             
 
-             objects are thrown on the client when a SOAP fault that is specified in the operation contract is received in response to a two-way operation (that is, a method with an <see
-             cref="T:System.ServiceModel.OperationContractAttribute" />
+             objects are thrown on the client when a SOAP fault that is specified in the operation contract is received in response to a two-way operation (that is, a method with an <see cref="T:System.ServiceModel.OperationContractAttribute" />
 
             
 
-             attribute with <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
+             attribute with <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
 
             
 
@@ -75,8 +67,7 @@
 
         
 
-         objects are thrown when a listener receives a SOAP fault that is not expected or specified in the operation contract. This usually occurs when the application is being debugged and the service has the <see
-         cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+         objects are thrown when a listener receives a SOAP fault that is not expected or specified in the operation contract. This usually occurs when the application is being debugged and the service has the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
         
 
@@ -84,18 +75,15 @@
       >
       <block subset="none" type="note">
         <para
-          >When implementing custom channels and binding elements, it is strongly recommended that your components throw only <see
-           cref="T:System.TimeoutException" />
+          >When implementing custom channels and binding elements, it is strongly recommended that your components throw only <see cref="T:System.TimeoutException" />
 
           
 
-           or <see
-           cref="T:System.ServiceModel.CommunicationException" />
+           or <see cref="T:System.ServiceModel.CommunicationException" />
 
           
 
-          -derived objects. In the case where your components throw a recoverable exception that is specific to the component, wrap that exception inside a <see
-           cref="T:System.ServiceModel.CommunicationException" />
+          -derived objects. In the case where your components throw a recoverable exception that is specific to the component, wrap that exception inside a <see cref="T:System.ServiceModel.CommunicationException" />
 
           
 
@@ -103,8 +91,7 @@
         >
       </block>
       <para
-        >For more details about designing and using the indigo2 fault system, see <format
-         type="text/html">
+        >For more details about designing and using the indigo2 fault system, see <format type="text/html">
           <a href="a9696563-d404-4905-942d-1e0834c26dea"
             >Specifying and Handling Faults in Contracts and Services</a
           >
@@ -116,8 +103,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The WCF Runtime will not throw a <see
-           cref="T:System.ServiceModel.CommunicationException" />
+          >The WCF Runtime will not throw a <see cref="T:System.ServiceModel.CommunicationException" />
 
           
 
@@ -147,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" />
 
             
 
@@ -176,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" />
 
             
 
@@ -208,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" />
 
             
 
@@ -217,14 +200,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Information relevant to the deserialization process.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -256,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationException" />
 
             
 

@@ -44,8 +44,7 @@
          represents the value argument of a property set method call within a property set method declaration.</para
       >
       <para
-        >A property set method typically assigns or uses the value assigned to the property. Within the property set method, this value is represented by an implicit variable represented in CodeDOM by a <see
-         cref="T:System.CodeDom.CodePropertySetValueReferenceExpression" />
+        >A property set method typically assigns or uses the value assigned to the property. Within the property set method, this value is represented by an implicit variable represented in CodeDOM by a <see cref="T:System.CodeDom.CodePropertySetValueReferenceExpression" />
 
         
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodePropertySetValueReferenceExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePropertySetValueReferenceExpression" />
 
             
 

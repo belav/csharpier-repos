@@ -32,28 +32,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>You can specify this attribute for multiple members, typically properties, on a control.</para>
       <para
-        >If a property has been marked with the <see
-         cref="T:System.ComponentModel.BindableAttribute" />
+        >If a property has been marked with the <see cref="T:System.ComponentModel.BindableAttribute" />
 
         
 
-         set to true, then a property change notification should be raised for that property. This means that if the <see
-         cref="P:System.ComponentModel.BindableAttribute.Bindable" />
+         set to true, then a property change notification should be raised for that property. This means that if the <see cref="P:System.ComponentModel.BindableAttribute.Bindable" />
 
         
 
-         property is <see
-         cref="F:System.ComponentModel.BindableAttribute.Yes" />
+         property is <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
         
 
-        , then two-way data binding is supported. If <see
-         cref="P:System.ComponentModel.BindableAttribute.Bindable" />
+        , then two-way data binding is supported. If <see cref="P:System.ComponentModel.BindableAttribute.Bindable" />
 
         
 
-         is <see
-         cref="F:System.ComponentModel.BindableAttribute.No" />
+         is <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
         
 
@@ -61,33 +56,27 @@
       >
       <block subset="none" type="note">
         <para
-          >When you mark a property with <see
-           cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
+          >When you mark a property with <see cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
 
           
 
-           set to true, the value of this attribute is set to the constant member <see
-           cref="F:System.ComponentModel.BindableAttribute.Yes" />
+           set to true, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
           
 
-          . For a property marked with the <see
-           cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
+          . For a property marked with the <see cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
 
           
 
-           set to false, the value is <see
-           cref="F:System.ComponentModel.BindableAttribute.No" />
+           set to false, the value is <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
           
 
-          . Therefore, to check the value of this attribute in your code, you must specify the attribute as <see
-           cref="F:System.ComponentModel.BindableAttribute.Yes" />
+          . Therefore, to check the value of this attribute in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
           
 
-           or <see
-           cref="F:System.ComponentModel.BindableAttribute.No" />
+           or <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
           
 
@@ -98,8 +87,7 @@
         <para>You can use this attribute at design time only. Nothing prevents you from binding to any property during run time.</para>
       </block>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -134,33 +122,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >When you mark a property with the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             set to true, the value of this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BindableAttribute.Yes" />
+             set to true, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
             
 
-            . For a property marked with the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            . For a property marked with the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             set to false, the value is <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+             set to false, the value is <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
-            . Therefore, to check the value of this attribute in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BindableAttribute.Yes" />
+            . Therefore, to check the value of this attribute in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
             
 
-             or <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+             or <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
@@ -170,8 +152,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -179,7 +160,11 @@
           >
         </summary>
         <param name="bindable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -210,33 +195,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >When you mark a property with the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             set to true, the value of this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BindableAttribute.Yes" />
+             set to true, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
             
 
-            . For a property marked with the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            . For a property marked with the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             set to false, the value is <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+             set to false, the value is <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
-            . Therefore, to check the value of this attribute in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BindableAttribute.Yes" />
+            . Therefore, to check the value of this attribute in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
             
 
-             or <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+             or <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
@@ -246,13 +225,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             class with one of the <see
-             cref="T:System.ComponentModel.BindableSupport" />
+             class with one of the <see cref="T:System.ComponentModel.BindableSupport" />
 
             
 
@@ -260,12 +237,15 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.BindableSupport" />
+          One of the <see cref="T:System.ComponentModel.BindableSupport" />
 
           
 
@@ -296,8 +276,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -305,19 +284,26 @@
           >
         </summary>
         <param name="bindable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to use property for binding; otherwise, false.</param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.BindingDirection" />
+          One of the <see cref="T:System.ComponentModel.BindingDirection" />
 
           
 
@@ -348,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -357,24 +342,30 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.BindableSupport" />
+          One of the <see cref="T:System.ComponentModel.BindableSupport" />
 
           
 
            values. </param
         >
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.ComponentModel.BindingDirection" />
+          One of the <see cref="T:System.ComponentModel.BindingDirection" />
 
           
 
@@ -426,18 +417,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with this value, the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >When you mark a property with this value, the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             is set to the constant member <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+             is set to the constant member <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
-            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+            . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
@@ -447,13 +435,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the default value for the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Specifies the default value for the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-            , which is <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+            , which is <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
@@ -511,8 +497,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Determines whether two <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -522,13 +507,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >true if the specified <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+             is equal to the current <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -536,7 +519,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -565,8 +552,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >Serves as a hash function for the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -576,8 +562,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
@@ -637,31 +622,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+            >The <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
-             field is the default setting for the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+             field is the default setting for the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
             .</para
           >
           <para
-            >When you mark a property with the <see
-             cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
+            >When you mark a property with the <see cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor of the value false, the value of this attribute is set to the constant member <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+             constructor of the value false, the value of this attribute is set to the constant member <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
-            . Therefore, to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BindableAttribute.No" />
+            . Therefore, to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BindableAttribute.No" />
 
             
 
@@ -697,23 +677,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you mark a property with the <see
-             cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
+            >When you mark a property with the <see cref="M:System.ComponentModel.BindableAttribute.#ctor(System.Boolean)" />
 
             
 
-             constructor of the value true, the value of the <see
-             cref="T:System.ComponentModel.BindableAttribute" />
+             constructor of the value true, the value of the <see cref="T:System.ComponentModel.BindableAttribute" />
 
             
 
-             is set to the constant member <see
-             cref="F:System.ComponentModel.BindableAttribute.Yes" />
+             is set to the constant member <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
             
 
-            . Therefore, to check whether the attribute is set to this value in your code, you must specify the attribute as <see
-             cref="F:System.ComponentModel.BindableAttribute.Yes" />
+            . Therefore, to check whether the attribute is set to this value in your code, you must specify the attribute as <see cref="F:System.ComponentModel.BindableAttribute.Yes" />
 
             
 

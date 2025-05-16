@@ -32,31 +32,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Queues are useful for storing messages in the order they were received for sequential processing. Objects stored in a <see
-         cref="T:System.Collections.Generic.Queue`1" />
+        >Queues are useful for storing messages in the order they were received for sequential processing. Objects stored in a <see cref="T:System.Collections.Generic.Queue`1" />
 
         
 
          are inserted at one end and removed from the other.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Generic.Queue`1" />
+        >The capacity of a <see cref="T:System.Collections.Generic.Queue`1" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.Generic.Queue`1" />
+         is the number of elements the <see cref="T:System.Collections.Generic.Queue`1" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.Generic.Queue`1" />
+         can hold. As elements are added to a <see cref="T:System.Collections.Generic.Queue`1" />
 
         
 
-        , the capacity is automatically increased as required by reallocating the internal array. The capacity can be decreased by calling <see
-         cref="M:System.Collections.Generic.Queue`1.TrimExcess" />
+        , the capacity is automatically increased as required by reallocating the internal array. The capacity can be decreased by calling <see cref="M:System.Collections.Generic.Queue`1.TrimExcess" />
 
         
 

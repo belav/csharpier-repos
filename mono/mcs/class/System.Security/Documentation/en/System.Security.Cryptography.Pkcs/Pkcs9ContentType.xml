@@ -22,18 +22,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
+        >A <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
 
         
 
-         object will be automatically generated and placed in the <see
-         cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
+         object will be automatically generated and placed in the <see cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
 
         
 
-         property  whenever the <see
-         cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+         property  whenever the <see cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
 
         
 
@@ -43,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
+        >The <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
 
         
 
@@ -71,13 +67,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Cryptography.Pkcs.Pkcs9ContentType.#ctor" />
+            >The <see cref="M:System.Security.Cryptography.Pkcs.Pkcs9ContentType.#ctor" />
 
             
 
-             constructor creates an instance of the <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
+             constructor creates an instance of the <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
 
             
 
@@ -110,13 +104,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Security.Cryptography.Pkcs.Pkcs9ContentType.ContentType" />
+            >The <see cref="P:System.Security.Cryptography.Pkcs.Pkcs9ContentType.ContentType" />
 
             
 
-             property gets an <see
-             cref="T:System.Security.Cryptography.Oid" />
+             property gets an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -150,13 +142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method replaces the current <see
-             cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
+            >This method replaces the current <see cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
 
             
 
-             object with the specified <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             object with the specified <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -166,8 +156,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies information from an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -175,12 +164,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 

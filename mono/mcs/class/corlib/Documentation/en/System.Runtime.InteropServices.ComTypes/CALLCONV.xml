@@ -25,8 +25,7 @@
 
             
 
-             uses the naming and calling conventions of the C language. The caller pushes the parameters onto the stack in reverse (right-to-left) order, and cleans the stack after the function returns. This calling convention enables you to call functions with varargs, which makes it appropriate for use with methods that accept a variable number of parameters, such as the C run-time functions <format
-             type="text/html">
+             uses the naming and calling conventions of the C language. The caller pushes the parameters onto the stack in reverse (right-to-left) order, and cleans the stack after the function returns. This calling convention enables you to call functions with varargs, which makes it appropriate for use with methods that accept a variable number of parameters, such as the C run-time functions <format type="text/html">
               <a href="77a854ae-5b48-4865-89f4-f2dc5cf80f52"
                 >printf, _printf_l, wprintf, _wprintf_l</a
               >
@@ -67,16 +66,14 @@
       </list>
       <para>These calling convention identifiers are used by the dnprdnshort, the wince platform, and by Automation.</para>
       <para
-        >For additional information about <see
-         cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
+        >For additional information about <see cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
 
         
 
         , see the MSDN Library.</para
       >
       <para
-        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format
-         type="text/html">
+        >The common language runtime throws an exception when a COM method in native code returns an HRESULT. For more information, see <format type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
 
@@ -88,8 +85,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Identifies the calling convention used by a method described in a <format
-         type="text/html">
+        >Identifies the calling convention used by a method described in a <format type="text/html">
           <a href="85fd7121-3eed-4a83-9ba2-caa81fa1e048">METHODDATA</a>
         </format>
 
@@ -163,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates the end of the <see
-             cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
+            >Indicates the end of the <see cref="T:System.Runtime.InteropServices.ComTypes.CALLCONV" />
 
             
 

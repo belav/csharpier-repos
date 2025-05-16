@@ -52,8 +52,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Reflection.MemberInfo" />
+        >The <see cref="T:System.Reflection.MemberInfo" />
 
         
 
@@ -93,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -152,15 +150,13 @@
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
             <see langword=" " />
 
             
 
             object of the class that declares the member
-reflected by the current instance; or, <see
-             langword="null" />
+reflected by the current instance; or, <see langword="null" />
 
             
 
@@ -171,15 +167,13 @@ member reflected by the current instance is a global member.</para
         <example>
           <para
             >The following example demonstrates the difference 
-      between the <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+      between the <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
             <see langword=" " />
 
             
 
              and
-   <see
-             cref="P:System.Reflection.MemberInfo.ReflectedType" />
+   <see cref="P:System.Reflection.MemberInfo.ReflectedType" />
 
             
 
@@ -214,23 +208,19 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+            >The <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
-             property retrieves a reference to the <see
-             cref="T:System.Type" />
+             property retrieves a reference to the <see cref="T:System.Type" />
 
             
 
-             object for the type that declares this member. A member of a type is either declared by the type or inherited from a base type, so the Type object returned by the <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+             object for the type that declares this member. A member of a type is either declared by the type or inherited from a base type, so the Type object returned by the <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
-             property might not be the same as the Type object used to obtain the current <see
-             cref="T:System.Reflection.MemberInfo" />
+             property might not be the same as the Type object used to obtain the current <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -239,8 +229,7 @@ public class DeclaringTypeExample {
           <list type="bullet">
             <item>
               <para
-                >If the Type object from which this MemberInfo object was obtained did not declare this member, the <see
-                 cref="P:System.Reflection.MemberInfo.DeclaringType" />
+                >If the Type object from which this MemberInfo object was obtained did not declare this member, the <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
                 
 
@@ -249,13 +238,11 @@ public class DeclaringTypeExample {
             </item>
             <item>
               <para
-                >If the MemberInfo object is a global member (that is, if it was obtained from the <see
-                 cref="M:System.Reflection.Module.GetMethods" />
+                >If the MemberInfo object is a global member (that is, if it was obtained from the <see cref="M:System.Reflection.Module.GetMethods" />
 
                 
 
-                 method, which returns global methods on a module), the returned <see
-                 cref="P:System.Reflection.MemberInfo.DeclaringType" />
+                 method, which returns global methods on a module), the returned <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
                 
 
@@ -296,8 +283,7 @@ public class DeclaringTypeExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="obj" />
+            >true if <paramref name="obj" />
 
             
 
@@ -305,7 +291,11 @@ public class DeclaringTypeExample {
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -338,13 +328,11 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref
-             name="inherit" />
+            >This method ignores the <paramref name="inherit" />
 
             
 
-             parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see
-             cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
+             parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
 
             
 
@@ -352,8 +340,7 @@ public class DeclaringTypeExample {
           >
           <block subset="none" type="note">
             <para
-              >   In the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if they are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >   In the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if they are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -374,7 +361,11 @@ public class DeclaringTypeExample {
           <para>An array that contains all the custom attributes applied to this member, or an array with zero elements if no attributes are defined.</para>
         </returns>
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -408,13 +399,11 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref
-             name="inherit" />
+            >This method ignores the <paramref name="inherit" />
 
             
 
-             parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see
-             cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
+             parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
 
             
 
@@ -422,8 +411,7 @@ public class DeclaringTypeExample {
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >In the .NET Framework version 2.0, this method returns security attributes on methods, constructors, and types if the attributes are stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -438,8 +426,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, returns an array of custom attributes applied to this member and identified by <see
-             cref="T:System.Type" />
+            >When overridden in a derived class, returns an array of custom attributes applied to this member and identified by <see cref="T:System.Type" />
 
             
 
@@ -449,8 +436,7 @@ public class DeclaringTypeExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of custom attributes applied to this member, or an array with zero elements if no attributes assignable to <paramref
-             name="attributeType" />
+            >An array of custom attributes applied to this member, or an array with zero elements if no attributes assignable to <paramref name="attributeType" />
 
             
 
@@ -458,14 +444,22 @@ public class DeclaringTypeExample {
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -494,36 +488,30 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods like <see
-             cref="Overload:System.Attribute.GetCustomAttributes" />
+            >Use this method to examine the custom attributes of code in the reflection-only context, in cases where the custom attributes themselves are defined in code that is loaded into the reflection-only context. Methods like <see cref="Overload:System.Attribute.GetCustomAttributes" />
 
             
 
-             and <see
-             cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
+             and <see cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
 
             
 
-             cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and for example code, see the <see
-             cref="T:System.Reflection.CustomAttributeData" />
+             cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and for example code, see the <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
              class.</para
           >
           <para
-            >This method gets custom attribute data for types, nested types, and type members, because the <see
-             cref="T:System.Type" />
+            >This method gets custom attribute data for types, nested types, and type members, because the <see cref="T:System.Type" />
 
             
 
-             class and the classes in the <see
-             cref="N:System.Reflection" />
+             class and the classes in the <see cref="N:System.Reflection" />
 
             
 
-             namespace that represent type members all derive from <see
-             cref="T:System.Reflection.MemberInfo" />
+             namespace that represent type members all derive from <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -533,8 +521,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a list of <see
-             cref="T:System.Reflection.CustomAttributeData" />
+            >Returns a list of <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -544,8 +531,7 @@ public class DeclaringTypeExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A generic list of <see
-             cref="T:System.Reflection.CustomAttributeData" />
+            >A generic list of <see cref="T:System.Reflection.CustomAttributeData" />
 
             
 
@@ -593,8 +579,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Type" />
+            >Gets a <see cref="T:System.Type" />
 
             
 
@@ -632,13 +617,11 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method ignores the <paramref
-             name="inherit" />
+            >This method ignores the <paramref name="inherit" />
 
             
 
-             parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see
-             cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" />
+             parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" />
 
             
 
@@ -646,8 +629,7 @@ public class DeclaringTypeExample {
           >
           <block subset="none" type="note">
             <para
-              >In the .NET Framework version 2.0, this method returns true if a type, method, or constructor has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format
-               type="text/html">
+              >In the .NET Framework version 2.0, this method returns true if a type, method, or constructor has security attributes stored in the new metadata format. Assemblies compiled with version 2.0 use this format. Dynamic assemblies and assemblies compiled with earlier versions of the .NET Framework use the old XML format. See <format type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
@@ -666,8 +648,7 @@ public class DeclaringTypeExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if one or more instances of <paramref
-             name="attributeType" />
+            >true if one or more instances of <paramref name="attributeType" />
 
             
 
@@ -675,14 +656,22 @@ public class DeclaringTypeExample {
           >
         </returns>
         <param name="attributeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of custom attribute to search for. The search includes derived types. </param
         >
         <param name="inherit">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -713,31 +702,26 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is overridden in derived classes, and the override returns the appropriate member type. Therefore, when you examine a set of <see
-             cref="T:System.Reflection.MemberInfo" />
+            >This property is overridden in derived classes, and the override returns the appropriate member type. Therefore, when you examine a set of <see cref="T:System.Reflection.MemberInfo" />
 
             
 
-             objects — for example, the array returned by <see
-             cref="Overload:System.Type.GetMembers" />
+             objects — for example, the array returned by <see cref="Overload:System.Type.GetMembers" />
 
             
 
-             — the <see
-             cref="P:System.Reflection.MemberInfo.MemberType" />
+             — the <see cref="P:System.Reflection.MemberInfo.MemberType" />
 
             
 
              property can be used to determine the member type of any given member.</para
           >
           <para
-            >To get the MemberType property, get the class <see
-             cref="T:System.Type" />
+            >To get the MemberType property, get the class <see cref="T:System.Type" />
 
             
 
-            . From the Type, get the <see
-             cref="T:System.Reflection.MethodInfo" />
+            . From the Type, get the <see cref="T:System.Reflection.MethodInfo" />
 
             
 
@@ -747,8 +731,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, gets a <see
-             cref="T:System.Reflection.MemberTypes" />
+            >When overridden in a derived class, gets a <see cref="T:System.Reflection.MemberTypes" />
 
             
 
@@ -774,8 +757,7 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The tokens obtained using this property can be passed to the unmanaged reflection API. For more information, please see <format
-             type="text/html">
+            >The tokens obtained using this property can be passed to the unmanaged reflection API. For more information, please see <format type="text/html">
               <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
             </format>
 
@@ -786,14 +768,14 @@ public class DeclaringTypeExample {
           <block subset="none" type="note">
             <para
               >Using the unmanaged reflection API requires familiarity with the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics" and "Partition III: CIL Instruction Set". The documentation is available online; see <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=99212"
+                cref="http://go.microsoft.com/fwlink/?LinkID=99212"
                 >ECMA C# and Common Language Infrastructure Standards</see
               >
 
               
 
                on MSDN and <see
-               cref="http://go.microsoft.com/fwlink/?LinkID=65552"
+                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
 
@@ -832,18 +814,15 @@ public class DeclaringTypeExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is provided as a convenience. It is equivalent to using the <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+            >This property is provided as a convenience. It is equivalent to using the <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
-             property to get the type in which the method is declared, and then calling the <see
-             cref="P:System.Type.Module" />
+             property to get the type in which the method is declared, and then calling the <see cref="P:System.Type.Module" />
 
             
 
-             property of the resulting <see
-             cref="T:System.Type" />
+             property of the resulting <see cref="T:System.Type" />
 
             
 
@@ -853,8 +832,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the module in which the type that declares the member represented by the current <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Gets the module in which the type that declares the member represented by the current <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -883,8 +861,7 @@ public class DeclaringTypeExample {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -897,18 +874,15 @@ public class DeclaringTypeExample {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Only the simple name of the member is returned, not the fully qualified name.</para>
           <para
-            >To get the <see
-             cref="P:System.Reflection.MemberInfo.Name" />
+            >To get the <see cref="P:System.Reflection.MemberInfo.Name" />
 
             
 
-             property, get the class <see
-             cref="T:System.Type" />
+             property, get the class <see cref="T:System.Type" />
 
             
 
-            . From the Type, get the <see
-             cref="T:System.Reflection.MemberInfo" />
+            . From the Type, get the <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -947,8 +921,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Indicates whether two <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -958,13 +931,11 @@ public class DeclaringTypeExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is equal to <paramref
-             name="right" />
+             is equal to <paramref name="right" />
 
             
 
@@ -972,34 +943,38 @@ public class DeclaringTypeExample {
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MemberInfo" />
+          The <see cref="T:System.Reflection.MemberInfo" />
 
           
 
-           to compare to <paramref
-           name="right" />
+           to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MemberInfo" />
+          The <see cref="T:System.Reflection.MemberInfo" />
 
           
 
-           to compare to <paramref
-           name="left" />
+           to compare to <paramref name="left" />
 
           
 
@@ -1032,8 +1007,7 @@ public class DeclaringTypeExample {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether two <see
-             cref="T:System.Reflection.MemberInfo" />
+            >Indicates whether two <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -1043,13 +1017,11 @@ public class DeclaringTypeExample {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="left" />
+            >true if <paramref name="left" />
 
             
 
-             is not equal to <paramref
-             name="right" />
+             is not equal to <paramref name="right" />
 
             
 
@@ -1057,34 +1029,38 @@ public class DeclaringTypeExample {
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MemberInfo" />
+          The <see cref="T:System.Reflection.MemberInfo" />
 
           
 
-           to compare to <paramref
-           name="right" />
+           to compare to <paramref name="right" />
 
           
 
           .</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Reflection.MemberInfo" />
+          The <see cref="T:System.Reflection.MemberInfo" />
 
           
 
-           to compare to <paramref
-           name="left" />
+           to compare to <paramref name="left" />
 
           
 
@@ -1115,8 +1091,7 @@ public class DeclaringTypeExample {
       <Docs>
         <value>
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
             <see langword="" />
 
             
@@ -1128,31 +1103,26 @@ obtained.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ReflectedType property retrieves the <see
-             cref="T:System.Type" />
+            >The ReflectedType property retrieves the <see cref="T:System.Type" />
 
             
 
-             object that was used to obtain this instance of MemberInfo. This may differ from the value of the <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+             object that was used to obtain this instance of MemberInfo. This may differ from the value of the <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
-             property if this <see
-             cref="T:System.Reflection.MemberInfo" />
+             property if this <see cref="T:System.Reflection.MemberInfo" />
 
             
 
              object represents a member that is inherited from a base class.</para
           >
           <para
-            >If the MemberInfo object is a global member (that is, if it was obtained from the <see
-             cref="M:System.Reflection.Module.GetMethods" />
+            >If the MemberInfo object is a global member (that is, if it was obtained from the <see cref="M:System.Reflection.Module.GetMethods" />
 
             
 
-             method, which returns global methods on a module), the returned <see
-             cref="P:System.Reflection.MemberInfo.DeclaringType" />
+             method, which returns global methods on a module), the returned <see cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
             
 
@@ -1220,13 +1190,11 @@ obtained.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Type" />
+            >Gets a <see cref="T:System.Type" />
 
             
 
-             object representing the <see
-             cref="T:System.Reflection.MemberInfo" />
+             object representing the <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -1236,13 +1204,11 @@ obtained.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
-             object representing the <see
-             cref="T:System.Reflection.MemberInfo" />
+             object representing the <see cref="T:System.Reflection.MemberInfo" />
 
             
 
@@ -1278,8 +1244,7 @@ obtained.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference
-            >IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
+            >This method is for access to managed classes from unmanaged code, and should not be called from managed code. For more information about <unmanagedCodeEntityReference>IDispatch::GetTypeInfo</unmanagedCodeEntityReference>
 
             
 
@@ -1291,21 +1256,33 @@ obtained.</para
           <para>Retrieves the type information for an object, which can then be used to get the type information for an interface.</para>
         </summary>
         <param name="iTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type information to return.</param
         >
         <param name="lcid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

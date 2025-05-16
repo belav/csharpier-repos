@@ -17,23 +17,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.TagPrefixInfo" />
+        >The <see cref="T:System.Web.Configuration.TagPrefixInfo" />
 
         
 
-         class allows you to programmatically access and modify tag-prefix information stored in a configuration file. It provides the same functionality as the ASP.NET @Register directive. Tag prefixes associate a "namespace" in ASP.NET to the assemblies and namespaces that must be included for custom controls and user controls to work properly. <see
-         cref="T:System.Web.Configuration.TagPrefixInfo" />
+         class allows you to programmatically access and modify tag-prefix information stored in a configuration file. It provides the same functionality as the ASP.NET @Register directive. Tag prefixes associate a "namespace" in ASP.NET to the assemblies and namespaces that must be included for custom controls and user controls to work properly. <see cref="T:System.Web.Configuration.TagPrefixInfo" />
 
         
 
-         objects are stored as members of a <see
-         cref="T:System.Web.Configuration.TagPrefixCollection" />
+         objects are stored as members of a <see cref="T:System.Web.Configuration.TagPrefixCollection" />
 
         
 
-         object. The <see
-         cref="T:System.Web.Configuration.TagPrefixCollection" />
+         object. The <see cref="T:System.Web.Configuration.TagPrefixCollection" />
 
         
 
@@ -49,18 +45,15 @@
       <list type="bullet">
         <item>
           <para
-            >If it is a user control, you must define the <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+            >If it is a user control, you must define the <see cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
 
             
 
-            , <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.TagName" />
+            , <see cref="P:System.Web.Configuration.TagPrefixInfo.TagName" />
 
             
 
-            , and <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.Source" />
+            , and <see cref="P:System.Web.Configuration.TagPrefixInfo.Source" />
 
             
 
@@ -69,23 +62,19 @@
         </item>
         <item>
           <para
-            >If it is a custom control, you must define the <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+            >If it is a custom control, you must define the <see cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
 
             
 
-            , <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.Namespace" />
+            , <see cref="P:System.Web.Configuration.TagPrefixInfo.Namespace" />
 
             
 
-            , and <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
+            , and <see cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
 
             
 
-             properties. The <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
+             properties. The <see cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
 
             
 
@@ -122,8 +111,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates an instance of the <see
-             cref="T:System.Web.Configuration.TagPrefixInfo" />
+            >This constructor creates an instance of the <see cref="T:System.Web.Configuration.TagPrefixInfo" />
 
             
 
@@ -132,18 +120,15 @@
           <list type="bullet">
             <item>
               <para
-                >If the control is a user control, you must specify values for the <paramref
-                 name="tagPrefix" />
+                >If the control is a user control, you must specify values for the <paramref name="tagPrefix" />
 
                 
 
-                , <paramref
-                 name="tagName" />
+                , <paramref name="tagName" />
 
                 
 
-                , and <paramref
-                 name="source" />
+                , and <paramref name="source" />
 
                 
 
@@ -152,18 +137,15 @@
             </item>
             <item>
               <para
-                >If the control is a custom control, you must specify values for the <paramref
-                 name="tagPrefix" />
+                >If the control is a custom control, you must specify values for the <paramref name="tagPrefix" />
 
                 
 
-                 and <paramref
-                 name="nameSpace" />
+                 and <paramref name="nameSpace" />
 
                 
 
-                 parameters. If the control is not in the application code directory, you must also specify the <paramref
-                 name="assembly" />
+                 parameters. If the control is not in the application code directory, you must also specify the <paramref name="assembly" />
 
                 
 
@@ -175,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.TagPrefixInfo" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.TagPrefixInfo" />
 
             
 
@@ -184,35 +165,55 @@
           >
         </summary>
         <param name="tagPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The tag prefix being mapped to a source file or namespace and assembly. </param
         >
         <param name="nameSpace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace associated with the tag prefix.</param
         >
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The assembly where the namespace resides.</param
         >
         <param name="tagName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the control to be used in the page.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -290,7 +291,11 @@
           <para>true if the objects are identical; otherwise, false.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -447,8 +452,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+            >The <see cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
 
             
 

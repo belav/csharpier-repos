@@ -17,48 +17,39 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>View state is the accumulation of a page's or an ASP.NET server control's property values and is sent to the requesting browser in a hidden field.</para>
       <para
-        >You can explicitly add <see
-         cref="T:System.Web.UI.StateItem" />
+        >You can explicitly add <see cref="T:System.Web.UI.StateItem" />
 
         
 
-         objects to an ASP.NET server control's <see
-         cref="T:System.Web.UI.StateBag" />
+         objects to an ASP.NET server control's <see cref="T:System.Web.UI.StateBag" />
 
         
 
-         object using either the <see
-         cref="P:System.Web.UI.StateBag.Item(System.String)" />
+         object using either the <see cref="P:System.Web.UI.StateBag.Item(System.String)" />
 
         
 
-         property or the <see
-         cref="M:System.Web.UI.StateBag.Add(System.String,System.Object)" />
+         property or the <see cref="M:System.Web.UI.StateBag.Add(System.String,System.Object)" />
 
         
 
-         method. The <see
-         cref="T:System.Web.UI.StateBag" />
+         method. The <see cref="T:System.Web.UI.StateBag" />
 
         
 
-         then tracks changes to all the items that it stores. Any changes to a <see
-         cref="T:System.Web.UI.StateItem" />
+         then tracks changes to all the items that it stores. Any changes to a <see cref="T:System.Web.UI.StateItem" />
 
         
 
-         object are reflected in its <see
-         cref="P:System.Web.UI.StateItem.IsDirty" />
+         object are reflected in its <see cref="P:System.Web.UI.StateItem.IsDirty" />
 
         
 
-         property. These changes are saved by a call to the <see
-         cref="M:System.Web.UI.Control.SaveViewState" />
+         property. These changes are saved by a call to the <see cref="M:System.Web.UI.Control.SaveViewState" />
 
         
 
-         method during the save view state phase of server control processing, just before the control is rendered to the page. For more information, see <format
-         type="text/html">
+         method during the save view state phase of server control processing, just before the control is rendered to the page. For more information, see <format type="text/html">
           <a href="e18eb2f2-cf00-47ae-b1a1-dfc188a6dea1">ASP.NET Web Server Controls</a>
         </format>
 
@@ -70,8 +61,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an item that is saved in the <see
-         cref="T:System.Web.UI.StateBag" />
+        >Represents an item that is saved in the <see cref="T:System.Web.UI.StateBag" />
 
         
 
@@ -93,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.UI.StateItem" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.UI.StateItem" />
 
             
 
@@ -120,13 +109,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the <see
-             cref="T:System.Web.UI.StateItem" />
+            >Gets or sets the value of the <see cref="T:System.Web.UI.StateItem" />
 
             
 
-             object that is stored in the <see
-             cref="T:System.Web.UI.StateBag" />
+             object that is stored in the <see cref="T:System.Web.UI.StateBag" />
 
             
 

@@ -39,23 +39,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A property is imported as an indexer (default indexed property in Visual Basic) if the property has arguments and if the name of the property or one of its accessors matches the name specified by the <see
-         cref="T:System.Reflection.DefaultMemberAttribute" />
+        >A property is imported as an indexer (default indexed property in Visual Basic) if the property has arguments and if the name of the property or one of its accessors matches the name specified by the <see cref="T:System.Reflection.DefaultMemberAttribute" />
 
         
 
-        . If the <see
-         cref="T:System.Reflection.DefaultMemberAttribute" />
+        . If the <see cref="T:System.Reflection.DefaultMemberAttribute" />
 
         
 
-         is not present on the containing type, then the type does not have an indexer. The C# compiler emits the <see
-         cref="T:System.Reflection.DefaultMemberAttribute" />
+         is not present on the containing type, then the type does not have an indexer. The C# compiler emits the <see cref="T:System.Reflection.DefaultMemberAttribute" />
 
         
 
-         on any type containing an indexer. In C# it is an error to manually attribute a type with the <see
-         cref="T:System.Reflection.DefaultMemberAttribute" />
+         on any type containing an indexer. In C# it is an error to manually attribute a type with the <see cref="T:System.Reflection.DefaultMemberAttribute" />
 
         
 
@@ -65,8 +61,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines the member of a type that is the default member used by <see
-         cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+        >Defines the member of a type that is the default member used by <see cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
 
         
 
@@ -98,13 +93,11 @@
       <Docs>
         <remarks>
           <para
-            >This constructor initializes the <see
-             cref="P:System.Reflection.DefaultMemberAttribute.MemberName" />
+            >This constructor initializes the <see cref="P:System.Reflection.DefaultMemberAttribute.MemberName" />
 
             
 
-             property using <paramref
-             name="memberName" />
+             property using <paramref name="memberName" />
 
             
 
@@ -115,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Reflection.DefaultMemberAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Reflection.DefaultMemberAttribute" />
 
             
 
@@ -124,7 +116,11 @@
           >
         </summary>
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -153,8 +149,7 @@
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.String" />
+            > A <see cref="T:System.String" />
 
             
 

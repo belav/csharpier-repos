@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Windows.Forms.SendKeys" />
+        >Use <see cref="T:System.Windows.Forms.SendKeys" />
 
         
 
-         to send keystrokes and keystroke combinations to the active application. This class cannot be instantiated. To send a keystroke to a class and immediately continue with the flow of your program, use <see
-         cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
+         to send keystrokes and keystroke combinations to the active application. This class cannot be instantiated. To send a keystroke to a class and immediately continue with the flow of your program, use <see cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
 
         
 
-        . To wait for any processes started by the keystroke, use <see
-         cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+        . To wait for any processes started by the keystroke, use <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
 
         
 
@@ -33,13 +30,11 @@
       >
       <para>Each key is represented by one or more characters. To specify a single keyboard character, use the character itself. For example, to represent the letter A, pass in the string "A" to the method. To represent more than one character, append each additional character to the one preceding it. To represent the letters A, B, and C, specify the parameter as "ABC".</para>
       <para
-        >The plus sign (+), caret (^), percent sign (%), tilde (~), and parentheses () have special meanings to <see
-         cref="T:System.Windows.Forms.SendKeys" />
+        >The plus sign (+), caret (^), percent sign (%), tilde (~), and parentheses () have special meanings to <see cref="T:System.Windows.Forms.SendKeys" />
 
         
 
-        . To specify one of these characters, enclose it within braces ({}). For example, to specify the plus sign, use "{+}". To specify brace characters, use "{{}" and "{}}". Brackets ([ ]) have no special meaning to <see
-         cref="T:System.Windows.Forms.SendKeys" />
+        . To specify one of these characters, enclose it within braces ({}). For example, to specify the plus sign, use "{+}". To specify brace characters, use "{{}" and "{}}". Brackets ([ ]) have no special meaning to <see cref="T:System.Windows.Forms.SendKeys" />
 
         
 
@@ -47,8 +42,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If your application is intended for international use with a variety of keyboards, the use of <see
-           cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
+          >If your application is intended for international use with a variety of keyboards, the use of <see cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
 
           
 
@@ -432,44 +426,37 @@
       </block>
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="T:System.Windows.Forms.SendKeys" />
+          >The <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
            class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
         >
         <para
-          >The <see
-           cref="T:System.Windows.Forms.SendKeys" />
+          >The <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
-           class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see
-           cref="T:System.Windows.Forms.SendKeys" />
+           class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
-           class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see
-           cref="T:System.Windows.Forms.SendKeys" />
+           class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
-           class may behave differently on different operating systems. Additionally, when the <see
-           cref="T:System.Windows.Forms.SendKeys" />
+           class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
-           class uses the new implementation, the <see
-           cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+           class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
 
           
 
            method will not wait for messages to be processed when they are sent to another process. </para
         >
         <para
-          >If your application relies on consistent behavior regardless of the operating system, you can force the <see
-           cref="T:System.Windows.Forms.SendKeys" />
+          >If your application relies on consistent behavior regardless of the operating system, you can force the <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
@@ -479,8 +466,7 @@
         <para>    &lt;add key="SendKeys" value="SendInput"/&gt;</para>
         <para>&lt;/appSettings&gt;</para>
         <para
-          >To force the <see
-           cref="T:System.Windows.Forms.SendKeys" />
+          >To force the <see cref="T:System.Windows.Forms.SendKeys" />
 
           
 
@@ -505,13 +491,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Windows.Forms.SendKeys.Flush" />
+            >Use <see cref="M:System.Windows.Forms.SendKeys.Flush" />
 
             
 
-             to wait for the application to process keystrokes and other operating system messages that are in the message queue. This is equivalent to calling <see
-             cref="M:System.Windows.Forms.Application.DoEvents" />
+             to wait for the application to process keystrokes and other operating system messages that are in the message queue. This is equivalent to calling <see cref="M:System.Windows.Forms.Application.DoEvents" />
 
             
 
@@ -545,13 +529,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Each key is represented by one or more characters. To specify a single keyboard character, use the character itself. For example, to represent the letter A, pass in the string "A" to the method. To represent more than one character, append each additional character to the one preceding it. To represent the letters A, B, and C, specify the parameter as "ABC".</para>
           <para
-            >The plus sign (+), caret (^), percent sign (%), tilde (~), and parentheses () have special meanings to <see
-             cref="T:System.Windows.Forms.SendKeys" />
+            >The plus sign (+), caret (^), percent sign (%), tilde (~), and parentheses () have special meanings to <see cref="T:System.Windows.Forms.SendKeys" />
 
             
 
-            . To specify one of these characters, enclose it within braces ({}). For example, to specify the plus sign, use "{+}". To specify brace characters, use "{{}" and "{}}". Brackets ([ ]) have no special meaning to <see
-             cref="T:System.Windows.Forms.SendKeys" />
+            . To specify one of these characters, enclose it within braces ({}). For example, to specify the plus sign, use "{+}". To specify brace characters, use "{{}" and "{}}". Brackets ([ ]) have no special meaning to <see cref="T:System.Windows.Forms.SendKeys" />
 
             
 
@@ -559,8 +541,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If your application is intended for international use with a variety of keyboards, the use of <see
-               cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
+              >If your application is intended for international use with a variety of keyboards, the use of <see cref="M:System.Windows.Forms.SendKeys.Send(System.String)" />
 
               
 
@@ -944,44 +925,37 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >The <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
                class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
             >
             <para
-              >The <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >The <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see
-               cref="T:System.Windows.Forms.SendKeys" />
+               class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+               class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class may behave differently on different operating systems. Additionally, when the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+               class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class uses the new implementation, the <see
-               cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+               class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
 
               
 
                method will not wait for messages to be processed when they are sent to another process. </para
             >
             <para
-              >If your application relies on consistent behavior regardless of the operating system, you can force the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >If your application relies on consistent behavior regardless of the operating system, you can force the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
@@ -991,8 +965,7 @@
             <para>    &lt;add key="SendKeys" value="SendInput"/&gt;</para>
             <para>&lt;/appSettings&gt;</para>
             <para
-              >To force the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >To force the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
@@ -1005,7 +978,11 @@
           <para>Sends keystrokes to the active application.</para>
         </summary>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1030,8 +1007,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+            >Use <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
 
             
 
@@ -1042,44 +1018,37 @@
           </block>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >The <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
                class has been updated for the .NET Framework 3.0 to enable its use in applications that run on Windows Vista. The enhanced security of Windows Vista (known as User Account Control or UAC) prevents the previous implementation from working as expected. </para
             >
             <para
-              >The <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >The <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see
-               cref="T:System.Windows.Forms.SendKeys" />
+               class is susceptible to timing issues, which some developers have had to work around. The updated implementation is still susceptible to timing issues, but is slightly faster and may require changes to the workarounds. The <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+               class tries to use the previous implementation first, and if that fails, uses the new implementation. As a result, the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class may behave differently on different operating systems. Additionally, when the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+               class may behave differently on different operating systems. Additionally, when the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
-               class uses the new implementation, the <see
-               cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
+               class uses the new implementation, the <see cref="M:System.Windows.Forms.SendKeys.SendWait(System.String)" />
 
               
 
                method will not wait for messages to be processed when they are sent to another process. </para
             >
             <para
-              >If your application relies on consistent behavior regardless of the operating system, you can force the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >If your application relies on consistent behavior regardless of the operating system, you can force the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
@@ -1089,8 +1058,7 @@
             <para>    &lt;add key="SendKeys" value="SendInput"/&gt;</para>
             <para>&lt;/appSettings&gt;</para>
             <para
-              >To force the <see
-               cref="T:System.Windows.Forms.SendKeys" />
+              >To force the <see cref="T:System.Windows.Forms.SendKeys" />
 
               
 
@@ -1103,7 +1071,11 @@
           <para>Sends the given keys to the active application, and then waits for the messages to be processed.</para>
         </summary>
         <param name="keys">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

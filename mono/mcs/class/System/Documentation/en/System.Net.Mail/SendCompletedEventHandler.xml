@@ -30,18 +30,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.Mail.SendCompletedEventHandler" />
+        >The <see cref="T:System.Net.Mail.SendCompletedEventHandler" />
 
         
 
-         delegate is used to handle events that occur when the <see
-         cref="T:System.Net.Mail.SmtpClient" />
+         delegate is used to handle events that occur when the <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
-         class finishes asynchronously sending an e-mail message using the <see
-         cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+         class finishes asynchronously sending an e-mail message using the <see cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
 
         
 
@@ -51,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that will handle the <see
-         cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
+        >Represents the method that will handle the <see cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
 
         
 

@@ -31,21 +31,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The class used for the installer must implement the <see
-         cref="T:System.ComponentModel.Design.IDesigner" />
+        >The class used for the installer must implement the <see cref="T:System.ComponentModel.Design.IDesigner" />
 
         
 
-         interface. Use the <see
-         cref="P:System.ComponentModel.InstallerTypeAttribute.InstallerType" />
+         interface. Use the <see cref="P:System.ComponentModel.InstallerTypeAttribute.InstallerType" />
 
         
 
          property to get the installer associated with this attribute.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
 
@@ -81,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.InstallerTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InstallerTypeAttribute" />
 
             
 
@@ -90,17 +86,19 @@
           >
         </summary>
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Type" />
+          The name of a <see cref="T:System.Type" />
 
           
 
-           that represents the installer for the component this attribute is bound to. This class must implement <see
-           cref="T:System.ComponentModel.Design.IDesigner" />
+           that represents the installer for the component this attribute is bound to. This class must implement <see cref="T:System.ComponentModel.Design.IDesigner" />
 
           
 
@@ -129,13 +127,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.InstallerTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.InstallerTypeAttribute" />
 
             
 
-             class, when given a <see
-             cref="T:System.Type" />
+             class, when given a <see cref="T:System.Type" />
 
             
 
@@ -143,17 +139,19 @@
           >
         </summary>
         <param name="installerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           that represents the installer for the component this attribute is bound to. This class must implement <see
-           cref="T:System.ComponentModel.Design.IDesigner" />
+           that represents the installer for the component this attribute is bound to. This class must implement <see cref="T:System.ComponentModel.Design.IDesigner" />
 
           
 
@@ -184,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns whether the value of the given object is equal to the current <see
-             cref="T:System.ComponentModel.InstallerTypeAttribute" />
+            >Returns whether the value of the given object is equal to the current <see cref="T:System.ComponentModel.InstallerTypeAttribute" />
 
             
 
@@ -197,7 +194,11 @@
           <para>true if the value of the given object is equal to that of the current; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -230,8 +231,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.InstallerTypeAttribute" />
+            >A hash code for the current <see cref="T:System.ComponentModel.InstallerTypeAttribute" />
 
             
 

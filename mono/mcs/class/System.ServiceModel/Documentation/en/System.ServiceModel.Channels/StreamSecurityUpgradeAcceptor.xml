@@ -23,21 +23,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used with <see
-         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />
+        >This class is used with <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />
 
         
 
-         and <see
-         cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+         and <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
 
         
 
          to implement a security stream upgrade.  </para
       >
       <para
-        >For a detailed description of the upgrade process, see <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+        >For a detailed description of the upgrade process, see <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
         
 
@@ -66,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeAcceptor" />
 
             
 
@@ -105,8 +101,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+            >Returns the <see cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
 
             
 

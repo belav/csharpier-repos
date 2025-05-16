@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewStream" />
+        >Use the <see cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.CreateViewStream" />
 
         
 
-         method of a <see
-         cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
+         method of a <see cref="T:System.IO.MemoryMappedFiles.MemoryMappedFile" />
 
         
 

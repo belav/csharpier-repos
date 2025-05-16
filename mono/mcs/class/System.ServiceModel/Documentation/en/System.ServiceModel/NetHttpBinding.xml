@@ -24,13 +24,11 @@
 
         
 
-        is a binding designed for consuming HTTP or WebSocket services and uses binary encoding by default. Note: WebSockets are only supported on Windows 8. <see
-         cref="T:System.ServiceModel.NetHttpBinding" />
+        is a binding designed for consuming HTTP or WebSocket services and uses binary encoding by default. Note: WebSockets are only supported on Windows 8. <see cref="T:System.ServiceModel.NetHttpBinding" />
 
         
 
-         will detect whether it is used with a request-reply contract or duplex contract and change its behavior to match - it will use HTTP for request-reply and WebSockets for duplex (only on Windows 8). This behavior can be overridden by setting the <see
-         cref="P:System.ServiceModel.NetHttpBinding.WebSocketTransportUsage" />
+         will detect whether it is used with a request-reply contract or duplex contract and change its behavior to match - it will use HTTP for request-reply and WebSockets for duplex (only on Windows 8). This behavior can be overridden by setting the <see cref="P:System.ServiceModel.NetHttpBinding.WebSocketTransportUsage" />
 
         
 
@@ -58,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies settings for <see
-         cref="T:System.ServiceModel.NetHttpBinding" />
+        >Specifies settings for <see cref="T:System.ServiceModel.NetHttpBinding" />
 
         
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" />
 
             
 
@@ -115,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" />
 
             
 
@@ -124,7 +119,11 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" />
 
             
 
@@ -159,7 +157,11 @@
           >
         </summary>
         <param name="configurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,8 +191,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.NetHttpBinding" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.NetHttpBinding" />
 
             
 
@@ -198,14 +199,22 @@
           >
         </summary>
         <param name="securityMode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The mode of the security.</param
         >
         <param name="reliableSessionEnabled">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -33,43 +33,35 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default culture is the culture whose resources are loaded if the appropriate culture-specific resources cannot be found. By default, resources for the default culture are located in the main assembly, and a <see
-         cref="T:System.Resources.MissingManifestResourceException" />
+        >The default culture is the culture whose resources are loaded if the appropriate culture-specific resources cannot be found. By default, resources for the default culture are located in the main assembly, and a <see cref="T:System.Resources.MissingManifestResourceException" />
 
         
 
-         is thrown if the resource manager tries to retrieve but cannot find a resource for the default culture. However, the .NET Framework will load the resources for an app's default culture from a satellite assembly if the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         is thrown if the resource manager tries to retrieve but cannot find a resource for the default culture. However, the .NET Framework will load the resources for an app's default culture from a satellite assembly if the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
-         attribute specifies a value of <see
-         cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" />
+         attribute specifies a value of <see cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" />
 
         
 
-         for the location parameter. When this is the case, the <see
-         cref="T:System.Resources.MissingSatelliteAssemblyException" />
+         for the location parameter. When this is the case, the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
         
 
-         exception is thrown when the resource manager tries to retrieve a resource of the default culture and the satellite assembly for the culture specified in the <see
-         cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+         exception is thrown when the resource manager tries to retrieve a resource of the default culture and the satellite assembly for the culture specified in the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
         
 
-         attribute is missing. Note that the exception is thrown by a resource retrieval method such as <see
-         cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+         attribute is missing. Note that the exception is thrown by a resource retrieval method such as <see cref="M:System.Resources.ResourceManager.GetString(System.String)" />
 
         
 
-         or <see
-         cref="M:System.Resources.ResourceManager.GetObject(System.String)" />
+         or <see cref="M:System.Resources.ResourceManager.GetObject(System.String)" />
 
         
 
-        , and not when the <see
-         cref="T:System.Resources.ResourceManager" />
+        , and not when the <see cref="T:System.Resources.ResourceManager" />
 
         
 
@@ -87,21 +79,18 @@
 
         
 
-         uses the default <see
-         cref="Overload:System.Object.Equals" />
+         uses the default <see cref="Overload:System.Object.Equals" />
 
         
 
          implementation, which supports reference equality.</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Resources.MissingSatelliteAssemblyException" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
         
 
-         class, see the <see
-         cref="M:System.Resources.MissingSatelliteAssemblyException.#ctor" />
+         class, see the <see cref="M:System.Resources.MissingSatelliteAssemblyException.#ctor" />
 
         
 
@@ -109,8 +98,7 @@
       >
       <block subset="none" type="note">
         <para
-          >You should always use the <see
-           cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+          >You should always use the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
           
 
@@ -141,8 +129,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -177,8 +164,7 @@
               </term>
               <description>
                 <para
-                  >The localized error message for <see
-                   cref="T:System.Resources.MissingSatelliteAssemblyException" />
+                  >The localized error message for <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
                   
 
@@ -191,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -223,8 +208,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -259,8 +243,7 @@
               </term>
               <description>
                 <para
-                  >The <paramref
-                   name="message" />
+                  >The <paramref name="message" />
 
                   
 
@@ -273,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -282,7 +264,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -317,8 +303,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -326,14 +311,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -364,26 +357,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -425,8 +414,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -434,19 +422,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="inner" />
+          The exception that is the cause of the current exception. If the <paramref name="inner" />
 
           
 
@@ -477,8 +472,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >The following table shows the initial property values for an instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -520,8 +514,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Resources.MissingSatelliteAssemblyException" />
+            >Initializes a new instance of the <see cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
             
 
@@ -529,14 +522,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception.</param
         >
         <param name="cultureName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -561,13 +562,12 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The app's default culture is defined by the <see
-             cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+            >The app's default culture is defined by the <see cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
 
             
 
              attribute. For a list of culture names, see the <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=200048"
+              cref="http://go.microsoft.com/fwlink/?LinkId=200048"
               >National Language Support (NLS) API Reference</see
             >
 

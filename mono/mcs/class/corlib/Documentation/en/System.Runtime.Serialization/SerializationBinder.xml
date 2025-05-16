@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >During serialization, a formatter transmits the information required to create an instance of an object of the correct type and version. This information generally includes the full type name and assembly name of the object. The assembly name includes the name, version, and strong name (see <format
-         type="text/html">
+        >During serialization, a formatter transmits the information required to create an instance of an object of the correct type and version. This information generally includes the full type name and assembly name of the object. The assembly name includes the name, version, and strong name (see <format type="text/html">
           <a href="D4A80263-F3E0-4D81-9B61-F0CBEAE3797B"
             >[&lt;topic://cpconStrong-NamedAssemblies&gt;]</a
           >
@@ -50,8 +49,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Only use <see
-           cref="T:System.Runtime.Serialization.SerializationBinder" />
+          >Only use <see cref="T:System.Runtime.Serialization.SerializationBinder" />
 
           
 
@@ -85,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.SerializationBinder" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.SerializationBinder" />
 
             
 
@@ -157,24 +154,30 @@
           <para>The type of the object the formatter creates a new instance of.</para>
         </returns>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the <see
-           cref="T:System.Reflection.Assembly" />
+          Specifies the <see cref="T:System.Reflection.Assembly" />
 
           
 
            name of the serialized object. </param
         >
         <param name="typeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies the <see
-           cref="T:System.Type" />
+          Specifies the <see cref="T:System.Type" />
 
           
 

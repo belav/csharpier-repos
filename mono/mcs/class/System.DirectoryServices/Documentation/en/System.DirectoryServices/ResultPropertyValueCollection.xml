@@ -90,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.DirectoryServices.ResultPropertyValueCollection.Contains(System.Object)" />
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.Contains(System.Object)" />
 
             
 
@@ -103,7 +102,11 @@
           <para>The return value is true if the specified property belongs to this collection; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -127,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.DirectoryServices.ResultPropertyValueCollection.CopyTo(System.Object[],System.Int32)" />
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.CopyTo(System.Object[],System.Int32)" />
 
             
 
@@ -136,7 +138,11 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -158,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.DirectoryServices.ResultPropertyValueCollection.IndexOf(System.Object)" />
+            >The <see cref="M:System.DirectoryServices.ResultPropertyValueCollection.IndexOf(System.Object)" />
 
             
 
@@ -171,7 +176,11 @@
           <para>The zero-based index of the specified property value. If the object is not found, the return value is -1.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,33 +213,27 @@
 
         
 
-         instances are similar to <see
-         cref="T:System.DirectoryServices.DirectoryEntry" />
+         instances are similar to <see cref="T:System.DirectoryServices.DirectoryEntry" />
 
         
 
-         instances. The notable difference is that the <see
-         cref="T:System.DirectoryServices.DirectoryEntry" />
+         instances. The notable difference is that the <see cref="T:System.DirectoryServices.DirectoryEntry" />
 
         
 
-         retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see
-         cref="T:System.DirectoryServices.SearchResult" />
+         retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see cref="T:System.DirectoryServices.SearchResult" />
 
         
 
-         is already available in the <see
-         cref="T:System.DirectoryServices.SearchResultCollection" />
+         is already available in the <see cref="T:System.DirectoryServices.SearchResultCollection" />
 
         
 
-         that a <see
-         cref="T:System.DirectoryServices.DirectorySearcher" />
+         that a <see cref="T:System.DirectoryServices.DirectorySearcher" />
 
         
 
-         query returns. If you try to get a <see
-         cref="T:System.DirectoryServices.SearchResult" />
+         query returns. If you try to get a <see cref="T:System.DirectoryServices.SearchResult" />
 
         
 
@@ -240,8 +243,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains the values of a <see
-         cref="T:System.DirectoryServices.SearchResult" />
+        >Contains the values of a <see cref="T:System.DirectoryServices.SearchResult" />
 
         
 

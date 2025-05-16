@@ -23,8 +23,7 @@
   <Docs>
     <summary
       >Represents the error that occurs when there is an error parsing
-      an <see
-       cref="T:Mono.Options.Option" />
+      an <see cref="T:Mono.Options.Option" />
 
       
 
@@ -36,15 +35,13 @@
         <item>
           <term
             >There is an exception generated converting a string to an
-        object of type <typeparamref
-             name="T" />
+        object of type <typeparamref name="T" />
 
             
 
              within the callback
         registered by
-        <see
-             cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
+        <see cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
 
             
 
@@ -60,14 +57,12 @@
             
 
             
-          could not convert a <see
-             cref="T:System.String" />
+          could not convert a <see cref="T:System.String" />
 
             
 
              to an object
-          of type <typeparamref
-             name="T" />
+          of type <typeparamref name="T" />
 
             
 
@@ -76,16 +71,13 @@
           >
         </item>
         <item>
-          <term
-            >
-          An option with a <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+          <term>
+          An option with a <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              
-          value of <see
-             cref="F:Mono.Options.OptionValueType.Required" />
+          value of <see cref="F:Mono.Options.OptionValueType.Required" />
 
             
 
@@ -138,10 +130,8 @@
         <Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
       </Parameters>
       <Docs>
-        <param name="info"
-          >
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+        <param name="info">
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
@@ -150,10 +140,8 @@
           thrown.
         </param
         >
-        <param name="context"
-          >
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+        <param name="context">
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -162,11 +150,9 @@
           destination.
         </param
         >
-        <summary
-          >
+        <summary>
           Initializes a new instance of the 
-          <see
-           cref="T:Mono.Options.OptionException" />
+          <see cref="T:Mono.Options.OptionException" />
 
           
 
@@ -202,20 +188,16 @@
         <Parameter Name="optionName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="message"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="message">
+          A <see cref="T:System.String" />
 
           
 
            that describes the error.
         </param
         >
-        <param name="optionName"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="optionName">
+          A <see cref="T:System.String" />
 
           
 
@@ -223,40 +205,33 @@
 		      option that caused the exception.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
-          <see
-           cref="T:Mono.Options.OptionException" />
+          <see cref="T:Mono.Options.OptionException" />
 
           
 
            class.
         </summary
         >
-        <remarks
-          >
+        <remarks>
           This constructor initializes the 
-          <see
-           cref="P:System.Exception.Message" />
+          <see cref="P:System.Exception.Message" />
 
           
 
            property of the new
-          instance using <paramref
-           name="message" />
+          instance using <paramref name="message" />
 
           
 
           , and the 
-          <see
-           cref="P:Mono.Options.OptionException.OptionName" />
+          <see cref="P:Mono.Options.OptionException.OptionName" />
 
           
 
           
-          property of the new instance using <paramref
-           name="optionName" />
+          property of the new instance using <paramref name="optionName" />
 
           
 
@@ -287,20 +262,16 @@
         <Parameter Name="innerException" Type="System.Exception" />
       </Parameters>
       <Docs>
-        <param name="message"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="message">
+          A <see cref="T:System.String" />
 
           
 
            that describes the error.
         </param
         >
-        <param name="optionName"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="optionName">
+          A <see cref="T:System.String" />
 
           
 
@@ -308,80 +279,66 @@
           option that caused the exception.
         </param
         >
-        <param name="innerException"
-          >
-          An instance of <see
-           cref="T:System.Exception" />
+        <param name="innerException">
+          An instance of <see cref="T:System.Exception" />
 
           
 
            that is the cause
-          of the current exception.  If <paramref
-           name="innerException" />
+          of the current exception.  If <paramref name="innerException" />
 
           
 
            is
-          non-<see
-           langword="null" />
+          non-<see langword="null" />
 
           
 
           , then the current Exception was raised
-          in a catch block handling <paramref
-           name="innerException" />
+          in a catch block handling <paramref name="innerException" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
-          <see
-           cref="T:Mono.Options.OptionException" />
+          <see cref="T:Mono.Options.OptionException" />
 
           
 
            class.
         </summary
         >
-        <remarks
-          >
+        <remarks>
           This constructor initializes the 
-          <see
-           cref="P:System.Exception.Message" />
+          <see cref="P:System.Exception.Message" />
 
           
 
            property of the new
-          instance using <paramref
-           name="message" />
+          instance using <paramref name="message" />
 
           
 
           , the
-          <see
-           cref="P:System.Exception.InnerException" />
+          <see cref="P:System.Exception.InnerException" />
 
           
 
            property of the new
-          instance using <paramref
-           name="innerException" />
+          instance using <paramref name="innerException" />
 
           
 
           , and the 
-          <see
-           cref="P:Mono.Options.OptionException.OptionName" />
+          <see cref="P:Mono.Options.OptionException.OptionName" />
 
           
 
           
-          property of the new instance using <paramref
-           name="optionName" />
+          property of the new instance using <paramref name="optionName" />
 
           
 
@@ -414,10 +371,8 @@
         <Parameter Name="context" Type="System.Runtime.Serialization.StreamingContext" />
       </Parameters>
       <Docs>
-        <param name="info"
-          >
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+        <param name="info">
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
@@ -426,10 +381,8 @@
           thrown.
         </param
         >
-        <param name="context"
-          >
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+        <param name="context">
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -438,11 +391,9 @@
           destination.
         </param
         >
-        <summary
-          >
+        <summary>
           Adds information about the exception to the provided 
-          <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
@@ -450,11 +401,9 @@
           instance.
         </summary
         >
-        <remarks
-          >
+        <remarks>
           Adds information about this exception instance to the provided 
-          <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
@@ -479,10 +428,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          A <see
-           cref="T:System.String" />
+        <summary>
+          A <see cref="T:System.String" />
 
           
 
@@ -490,10 +437,8 @@
           caused the exception.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 

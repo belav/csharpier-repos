@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+        >The <see cref="T:System.Web.Configuration.SystemWebSectionGroup" />
 
         
 
@@ -40,13 +39,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called by the ASP.NET configuration system and is not intended to be used directly from your code. You can obtain an instance of the <see
-             cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+            >This constructor is called by the ASP.NET configuration system and is not intended to be used directly from your code. You can obtain an instance of the <see cref="T:System.Web.Configuration.SystemWebSectionGroup" />
 
             
 
-             class by using the <see
-             cref="M:System.Configuration.Configuration.GetSectionGroup(System.String)" />
+             class by using the <see cref="M:System.Configuration.Configuration.GetSectionGroup(System.String)" />
 
             
 
@@ -56,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of <see
-             cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+            >Creates a new instance of <see cref="T:System.Web.Configuration.SystemWebSectionGroup" />
 
             
 
@@ -89,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+            >The <see cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
 
             
 
@@ -126,8 +121,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.AuthenticationSection" />
+            >The <see cref="T:System.Web.Configuration.AuthenticationSection" />
 
             
 
@@ -163,8 +157,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.AuthorizationSection" />
+            >The <see cref="T:System.Web.Configuration.AuthorizationSection" />
 
             
 
@@ -200,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Configuration.DefaultSection" />
+            >The <see cref="T:System.Configuration.DefaultSection" />
 
             
 
@@ -237,8 +229,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.ClientTargetSection" />
+            >The <see cref="T:System.Web.Configuration.ClientTargetSection" />
 
             
 
@@ -274,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.CompilationSection" />
+            >The <see cref="T:System.Web.Configuration.CompilationSection" />
 
             
 
@@ -311,8 +301,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.CustomErrorsSection" />
+            >The <see cref="T:System.Web.Configuration.CustomErrorsSection" />
 
             
 
@@ -348,8 +337,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.DeploymentSection" />
+            >The <see cref="T:System.Web.Configuration.DeploymentSection" />
 
             
 
@@ -385,8 +373,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Configuration.DefaultSection" />
+            >The <see cref="T:System.Configuration.DefaultSection" />
 
             
 
@@ -422,8 +409,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.GlobalizationSection" />
+            >The <see cref="T:System.Web.Configuration.GlobalizationSection" />
 
             
 
@@ -459,8 +445,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+            >The <see cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
@@ -523,8 +508,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.HttpCookiesSection" />
+            >The <see cref="T:System.Web.Configuration.HttpCookiesSection" />
 
             
 
@@ -560,8 +544,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.HttpHandlersSection" />
+            >The <see cref="T:System.Web.Configuration.HttpHandlersSection" />
 
             
 
@@ -597,8 +580,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.HttpModulesSection" />
+            >The <see cref="T:System.Web.Configuration.HttpModulesSection" />
 
             
 
@@ -634,8 +616,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.HttpRuntimeSection" />
+            >The <see cref="T:System.Web.Configuration.HttpRuntimeSection" />
 
             
 
@@ -671,8 +652,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.IdentitySection" />
+            >The <see cref="T:System.Web.Configuration.IdentitySection" />
 
             
 
@@ -708,8 +688,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.MachineKeySection" />
+            >The <see cref="T:System.Web.Configuration.MachineKeySection" />
 
             
 
@@ -745,8 +724,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.MembershipSection" />
+            >The <see cref="T:System.Web.Configuration.MembershipSection" />
 
             
 
@@ -809,8 +787,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.PagesSection" />
+            >The <see cref="T:System.Web.Configuration.PagesSection" />
 
             
 
@@ -846,8 +823,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.ProcessModelSection" />
+            >The <see cref="T:System.Web.Configuration.ProcessModelSection" />
 
             
 
@@ -883,8 +859,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.ProfileSection" />
+            >The <see cref="T:System.Web.Configuration.ProfileSection" />
 
             
 
@@ -947,8 +922,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.RoleManagerSection" />
+            >The <see cref="T:System.Web.Configuration.RoleManagerSection" />
 
             
 
@@ -984,8 +958,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.SecurityPolicySection" />
+            >The <see cref="T:System.Web.Configuration.SecurityPolicySection" />
 
             
 
@@ -1021,8 +994,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.SessionStateSection" />
+            >The <see cref="T:System.Web.Configuration.SessionStateSection" />
 
             
 
@@ -1058,8 +1030,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.SiteMapSection" />
+            >The <see cref="T:System.Web.Configuration.SiteMapSection" />
 
             
 
@@ -1095,8 +1066,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.TraceSection" />
+            >The <see cref="T:System.Web.Configuration.TraceSection" />
 
             
 
@@ -1132,8 +1102,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Configuration.TrustSection" />
+            >The <see cref="T:System.Web.Configuration.TrustSection" />
 
             
 

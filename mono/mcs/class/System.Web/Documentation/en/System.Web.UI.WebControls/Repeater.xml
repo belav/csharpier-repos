@@ -78,44 +78,37 @@
         <h2>Introduction</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >The <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
          control is a basic templated data-bound list. It has no built-in layout or styles, so you must explicitly declare all layout, formatting, and style tags within the control's templates.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >The <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control allows you to split markup tags across the templates.  To create a table using templates, include the begin table tag (&lt;table&gt;) in the <see
-         cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
+         control allows you to split markup tags across the templates.  To create a table using templates, include the begin table tag (&lt;table&gt;) in the <see cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
 
         
 
-        , a single table row tag (&lt;tr&gt;) in the <see
-         cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+        , a single table row tag (&lt;tr&gt;) in the <see cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
 
         
 
-        , and the end table tag (&lt;/table&gt;) in the <see
-         cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
+        , and the end table tag (&lt;/table&gt;) in the <see cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >The <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control has no built-in selection capabilities or editing support. You can use the <see
-         cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+         control has no built-in selection capabilities or editing support. You can use the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
 
         
 
@@ -123,8 +116,7 @@
       >
       <block subset="none" type="note">
         <para
-          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-           type="text/html">
+          >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
             <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
           </format>
 
@@ -140,139 +132,113 @@
         <h2>Data Binding</h2>
       </format>
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >The <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control provides two properties to support data binding. To bind data to any collection that implements the <see
-         cref="T:System.Collections.IEnumerable" />
+         control provides two properties to support data binding. To bind data to any collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         interface (such as a <see
-         cref="T:System.Data.DataView" />
+         interface (such as a <see cref="T:System.Data.DataView" />
 
         
 
-        , a <see
-         cref="T:System.Collections.ArrayList" />
+        , a <see cref="T:System.Collections.ArrayList" />
 
         
 
-        , or an array), or the <see
-         cref="T:System.ComponentModel.IListSource" />
+        , or an array), or the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
-         interface, use the <see
-         cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+         interface, use the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
         
 
-         property to specify the data source. When you set the <see
-         cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+         property to specify the data source. When you set the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
         
 
-         property, you must manually write the code to perform data binding. To automatically bind the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         property, you must manually write the code to perform data binding. To automatically bind the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control to a data source represented by a data source control, set the <see
-         cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+         control to a data source represented by a data source control, set the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
         
 
-         property to the <see
-         cref="P:System.Web.UI.Control.ID" />
+         property to the <see cref="P:System.Web.UI.Control.ID" />
 
         
 
-         of the data source control to use. When you set the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+         of the data source control to use. When you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
         
 
-         property, the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         property, the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control automatically binds to the specified data source control on the first request. Therefore, you do not need to explicitly call the <see
-         cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+         control automatically binds to the specified data source control on the first request. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
         
 
-         method unless you have changed data-related properties of the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         method unless you have changed data-related properties of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
          control.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >A <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control binds its <see
-         cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+         control binds its <see cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Repeater.AlternatingItemTemplate" />
+         and <see cref="P:System.Web.UI.WebControls.Repeater.AlternatingItemTemplate" />
 
         
 
-         to either the data model declared and referenced by its <see
-         cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+         to either the data model declared and referenced by its <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
         
 
-         property or the data source control specified by its <see
-         cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+         property or the data source control specified by its <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
         
 
-         property. The <see
-         cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
+         property. The <see cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
 
         
 
-        , <see
-         cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
+        , <see cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
 
         
 
-        , and <see
-         cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
+        , and <see cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
 
         
 
          are not data-bound.</para
       >
       <para
-        >If the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >If the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control's data source is set but no data is returned, the control renders the <see
-         cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
+         control's data source is set but no data is returned, the control renders the <see cref="P:System.Web.UI.WebControls.Repeater.HeaderTemplate" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
+         and <see cref="P:System.Web.UI.WebControls.Repeater.FooterTemplate" />
 
         
 
-         with no items. If the data source is null, the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         with no items. If the data source is null, the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -285,13 +251,11 @@
         <h2>Templates</h2>
       </format>
       <para
-        >At a minimum, every <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >At a minimum, every <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control must define an <see
-         cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+         control must define an <see cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
 
         
 
@@ -326,8 +290,7 @@
           </term>
           <description>
             <para
-              >If defined, determines the content and layout of alternating (zero-based odd-indexed) items. If not defined, <see
-               cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+              >If defined, determines the content and layout of alternating (zero-based odd-indexed) items. If not defined, <see cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
 
               
 
@@ -377,14 +340,12 @@
     DataMember="string"
     DataSource="string"
     DataSourceID="string"
-    EnableTheming="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableTheming="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
         |False"
-    EnableViewState="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    EnableViewState="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -400,8 +361,7 @@
     OnPreRender="PreRender event handler"
     OnUnload="Unload event handler"
     runat="server"
-    Visible="<codeFeaturedElement
-        >True</codeFeaturedElement>
+    Visible="<codeFeaturedElement>True</codeFeaturedElement>
 
         
 
@@ -441,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -466,20 +425,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to provide a different appearance for alternating items in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Use this property to provide a different appearance for alternating items in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control from what is specified in the <see
-             cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
+             control from what is specified in the <see cref="P:System.Web.UI.WebControls.Repeater.ItemTemplate" />
 
             
 
@@ -487,8 +441,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-               type="text/html">
+              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
 
@@ -501,8 +454,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the object implementing <see
-             cref="T:System.Web.UI.ITemplate" />
+            >Gets or sets the object implementing <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -540,20 +492,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ControlCollection" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ControlCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.Controls" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Repeater.Controls" />
 
             
 
-             collection to manage the child controls of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             collection to manage the child controls of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -561,33 +508,27 @@
           >
           <block subset="none" type="note">
             <para
-              >To access a child control within a <see
-               cref="T:System.Web.UI.WebControls.Repeater" />
+              >To access a child control within a <see cref="T:System.Web.UI.WebControls.Repeater" />
 
               
 
-               control, iterate through the <see
-               cref="T:System.Web.UI.WebControls.Repeater" />
+               control, iterate through the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
               
 
-               control's <see
-               cref="P:System.Web.UI.WebControls.Repeater.Items" />
+               control's <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
               
 
-               collection to retrieve the <see
-               cref="T:System.Web.UI.WebControls.RepeaterItem" />
+               collection to retrieve the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
               
 
-               for a given index. Then call the <ui
-              >Repeater</ui>
+               for a given index. Then call the <ui>Repeater</ui>
 
               
 
-               item's inherited <see
-               cref="M:System.Web.UI.Control.FindControl(System.String)" />
+               item's inherited <see cref="M:System.Web.UI.Control.FindControl(System.String)" />
 
               
 
@@ -598,13 +539,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets a <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
-             that contains the child controls of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             that contains the child controls of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -652,7 +591,11 @@
           <para>Creates a control hierarchy, with or without the specified data source.</para>
         </summary>
         <param name="useDataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -681,18 +624,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first call to the <see
-             cref="P:System.Web.UI.WebControls.Repeater.SelectArguments" />
+            >The first call to the <see cref="P:System.Web.UI.WebControls.Repeater.SelectArguments" />
 
             
 
-             property calls the <see
-             cref="M:System.Web.UI.WebControls.Repeater.CreateDataSourceSelectArguments" />
+             property calls the <see cref="M:System.Web.UI.WebControls.Repeater.CreateDataSourceSelectArguments" />
 
             
 
-             method to return the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+             method to return the <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
@@ -702,8 +642,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+            >Returns the <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
@@ -713,8 +652,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+            >The <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
@@ -741,13 +679,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Creates a <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             object with the specified item type and location within the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             object with the specified item type and location within the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -757,8 +693,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >The new <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -766,29 +701,34 @@
           >
         </returns>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified location within the <see
-           cref="T:System.Web.UI.WebControls.Repeater" />
+          The specified location within the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
           
 
            control to place the created item. </param
         >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          A <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
-           that represents the specified type of the <see
-           cref="T:System.Web.UI.WebControls.Repeater" />
+           that represents the specified type of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
           
 
@@ -811,54 +751,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+            >Use the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
-             method to bind the data source specified by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+             method to bind the data source specified by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             property to the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property to the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control. When you bind a data source to the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             control. When you bind a data source to the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
              control, the information in the data source is displayed in the control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
              method is also commonly used to synchronize the data source and a data listing control after information in the data source is updated. This allows any changes in the data source to also be updated in a data listing control.</para
           >
           <para
-            >If the data source for the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >If the data source for the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control is specified by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             control is specified by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property, you do not need to explicitly call the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             property, you do not need to explicitly call the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
-             method. ASP.NET calls this method automatically to bind the specified data source control to the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             method. ASP.NET calls this method automatically to bind the specified data source control to the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -868,8 +799,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Binds the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Binds the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -894,23 +824,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the data source specified by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >If the data source specified by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             property contains multiple sources of data, use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+             property contains multiple sources of data, use the <see cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
 
             
 
-             property to specify the specific source to bind to the control. For example, if you have a <see
-             cref="T:System.Data.DataSet" />
+             property to specify the specific source to bind to the control. For example, if you have a <see cref="T:System.Data.DataSet" />
 
             
 
-             with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
@@ -921,8 +847,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the specific table in the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >Gets or sets the specific table in the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
@@ -952,107 +877,88 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to specify the source of data to populate the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Use this property to specify the source of data to populate the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control. The <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+             control. The <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             can be any <see
-             cref="T:System.Collections.IEnumerable" />
+             can be any <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             collection such as a <see
-             cref="T:System.Data.DataView" />
+             collection such as a <see cref="T:System.Data.DataView" />
 
             
 
-             for accessing databases, a <see
-             cref="T:System.Collections.ArrayList" />
+             for accessing databases, a <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or an array, or an <see
-             cref="T:System.ComponentModel.IListSource" />
+            , or an array, or an <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             object. When you set the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+             object. When you set the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
              property you must manually write the code to bind to the data source.</para
           >
           <para
-            >If the data source specified by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >If the data source specified by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             property contains multiple sources of data, use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+             property contains multiple sources of data, use the <see cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
 
             
 
-             property to specify the specific source to bind to the control. For example, if you have a <see
-             cref="T:System.Data.DataSet" />
+             property to specify the specific source to bind to the control. For example, if you have a <see cref="T:System.Data.DataSet" />
 
             
 
-             with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
              method to bind the data source to the control.</para
           >
           <para
-            >Alternately, you can use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            >Alternately, you can use the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property to automatically bind to a data source represented by a data source control. When you set the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             property to automatically bind to a data source represented by a data source control. When you set the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property, the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property, the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
-             method unless you dynamically change properties of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             method unless you dynamically change properties of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
              control.</para
           >
           <para
-            >If values are specified for both the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >If values are specified for both the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             property and the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property, ASP.NET is not able to resolve the data source and a <see
-             cref="T:System.Web.HttpException" />
+             property, ASP.NET is not able to resolve the data source and a <see cref="T:System.Web.HttpException" />
 
             
 
@@ -1102,109 +1008,89 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property to access the <see
-             cref="P:System.Web.UI.Control.ID" />
+             property to access the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
-             property of the data source control that the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property of the data source control that the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control should use to retrieve its data source. The data source control that is referenced by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             control should use to retrieve its data source. The data source control that is referenced by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property can be any control that implements the <see
-             cref="T:System.Web.UI.IDataSource" />
+             property can be any control that implements the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface. The data source control must exist either in the same naming container as the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             interface. The data source control must exist either in the same naming container as the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control that references it or in a parent control of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             control that references it or in a parent control of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control. When you specify a value for the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             control. When you specify a value for the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property, the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property, the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control binds to the specified data source control. You do not need to write code that explicitly calls the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             control binds to the specified data source control. You do not need to write code that explicitly calls the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
              method.</para
           >
           <para
-            >Alternatively, you can use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >Alternatively, you can use the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             property to specify the source of values to bind to the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property to specify the source of values to bind to the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control. The data source must be a collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             control. The data source must be a collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interface (such as the <see
-             cref="T:System.Data.DataView" />
+             interface (such as the <see cref="T:System.Data.DataView" />
 
             
 
-             or <see
-             cref="T:System.Collections.ArrayList" />
+             or <see cref="T:System.Collections.ArrayList" />
 
             
 
-             object) or the <see
-             cref="T:System.ComponentModel.IListSource" />
+             object) or the <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interface. When you set the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+             interface. When you set the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
              property, you must write the code to perform the data binding.</para
           >
           <para
-            >If values are specified for both the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >If values are specified for both the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             and <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             properties, ASP.NET is not able to resolve the data source and an <see
-             cref="T:System.Web.HttpException" />
+             properties, ASP.NET is not able to resolve the data source and an <see cref="T:System.Web.HttpException" />
 
             
 
@@ -1215,13 +1101,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.UI.Control.ID" />
+            >Gets or sets the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
-             property of the data source control that the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property of the data source control that the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1252,13 +1136,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Repeater.EnableTheming" />
+            >The <see cref="P:System.Web.UI.WebControls.Repeater.EnableTheming" />
 
             
 
-             property indicates whether themes are enabled. When the <see
-             cref="P:System.Web.UI.WebControls.Repeater.EnableTheming" />
+             property indicates whether themes are enabled. When the <see cref="P:System.Web.UI.WebControls.Repeater.EnableTheming" />
 
             
 
@@ -1285,43 +1167,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify a value for the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            >When you specify a value for the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property, ASP.NET automatically binds the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property, ASP.NET automatically binds the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control to the specified data source control. When ASP.NET performs data binding for the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             control to the specified data source control. When ASP.NET performs data binding for the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control, it first calls the <see
-             cref="M:System.Web.UI.WebControls.Repeater.EnsureDataBound" />
+             control, it first calls the <see cref="M:System.Web.UI.WebControls.Repeater.EnsureDataBound" />
 
             
 
-             method to verify that the control has not already been data bound and that a valid data source control that implements the <see
-             cref="T:System.Web.UI.IDataSource" />
+             method to verify that the control has not already been data bound and that a valid data source control that implements the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface is specified for its <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             interface is specified for its <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             property. The <see
-             cref="M:System.Web.UI.WebControls.Repeater.EnsureDataBound" />
+             property. The <see cref="M:System.Web.UI.WebControls.Repeater.EnsureDataBound" />
 
             
 
-             method then calls the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             method then calls the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
@@ -1331,13 +1205,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies that the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Verifies that the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control requires data binding and that a valid data source control is specified before calling the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             control requires data binding and that a valid data source control is specified before calling the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
@@ -1357,15 +1229,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to create a template that controls how the footer section of a <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Use this property to create a template that controls how the footer section of a <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1373,8 +1241,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-               type="text/html">
+              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
 
@@ -1387,13 +1254,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.UI.ITemplate" />
+            >Gets or sets the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             that defines how the footer section of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             that defines how the footer section of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1437,18 +1302,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The data source is specified either by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >The data source is specified either by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-             property or by the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+             property or by the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-             and <see
-             cref="P:System.Web.UI.WebControls.Repeater.SelectArguments" />
+             and <see cref="P:System.Web.UI.WebControls.Repeater.SelectArguments" />
 
             
 
@@ -1458,8 +1320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerable" />
+            >Returns an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1469,8 +1330,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object implementing <see
-             cref="T:System.Collections.IEnumerable" />
+            >An object implementing <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1490,15 +1350,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to create a template that controls how the header section of a <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Use this property to create a template that controls how the header section of a <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1506,8 +1362,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-               type="text/html">
+              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
 
@@ -1520,13 +1375,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.UI.ITemplate" />
+            >Gets or sets the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             that defines how the header section of the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             that defines how the header section of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1567,23 +1420,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Repeater.Initialized" />
+            >The <see cref="P:System.Web.UI.WebControls.Repeater.Initialized" />
 
             
 
-             property is a helper property that is used to determine whether data binding is required when the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+             property is a helper property that is used to determine whether data binding is required when the <see cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            , <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            , or <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
@@ -1613,8 +1462,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates iteratively the specified <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Populates iteratively the specified <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -1622,7 +1470,11 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1648,18 +1500,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Repeater.IsBoundUsingDataSourceID" />
+            >The <see cref="P:System.Web.UI.WebControls.Repeater.IsBoundUsingDataSourceID" />
 
             
 
-             property is a helper property that determines whether the control is bound to an ASP.NET 2.0 data source control, such as an <see
-             cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+             property is a helper property that determines whether the control is bound to an ASP.NET 2.0 data source control, such as an <see cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
             
 
-             or a <see
-             cref="T:System.Web.UI.WebControls.SqlDataSource" />
+             or a <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
             
 
@@ -1669,8 +1518,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            >Gets a value indicating whether the <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
@@ -1693,8 +1541,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when a button in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >This event is raised when a button in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1702,8 +1549,7 @@
           >
           <para>This event causes a round-trip from the client to occur.</para>
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1715,8 +1561,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when a button is clicked in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Occurs when a button is clicked in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1743,16 +1588,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when an item is created in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >This event is raised when an item is created in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
              control.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1764,8 +1607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when an item is created in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Occurs when an item is created in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1792,16 +1634,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This event is raised when an item in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >This event is raised when an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
              control is data-bound.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -1813,8 +1653,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs after an item in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Occurs after an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1841,28 +1680,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >The <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control populates the <see
-             cref="P:System.Web.UI.WebControls.Repeater.Items" />
+             control populates the <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
             
 
-             collection by enumerating every object in its <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+             collection by enumerating every object in its <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-            . The <see
-             cref="P:System.Web.UI.WebControls.Repeater.Items" />
+            . The <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
             
 
-             collection is then used by the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             collection is then used by the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1872,13 +1706,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Gets a collection of <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             objects in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1910,15 +1742,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to create a template that controls how items in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Use this property to create a template that controls how items in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1926,8 +1754,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-               type="text/html">
+              >This control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
 
@@ -1940,13 +1767,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.UI.ITemplate" />
+            >Gets or sets the <see cref="T:System.Web.UI.ITemplate" />
 
             
 
-             that defines how items in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             that defines how items in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -1991,18 +1816,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
 
             
 
-             event if the <paramref
-             name="EventArgs" />
+             event if the <paramref name="EventArgs" />
 
             
 
-             parameter is an instance of <see
-             cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+             parameter is an instance of <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
 
             
 
@@ -2012,8 +1834,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+            >true if the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
 
             
 
@@ -2021,19 +1842,26 @@
           >
         </returns>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2061,12 +1889,15 @@
           <para>Raises the DataBinding event.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2092,23 +1923,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Repeater.OnDataPropertyChanged" />
+            >The <see cref="M:System.Web.UI.WebControls.Repeater.OnDataPropertyChanged" />
 
             
 
-             method is a helper method that is called when the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+             method is a helper method that is called when the <see cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            , <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            , or <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
@@ -2141,23 +1968,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Repeater.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Repeater.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
-             method is a helper method that participates in the data binding process. This method is called when the <see
-             cref="T:System.Web.UI.DataSourceView" />
+             method is a helper method that participates in the data binding process. This method is called when the <see cref="T:System.Web.UI.DataSourceView" />
 
             
 
-             object that is associated data source control raises its <see
-             cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+             object that is associated data source control raises its <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
 
             
 
-             event. The event causes the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             event. The event causes the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -2167,8 +1990,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
+            >Sets the <see cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
@@ -2176,19 +1998,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2213,8 +2042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
@@ -2222,12 +2050,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2251,8 +2082,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2264,8 +2094,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCommand" />
 
             
 
@@ -2273,12 +2102,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+          The <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
 
           
 
@@ -2306,8 +2138,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2319,8 +2150,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.Repeater.ItemCreated" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.Repeater.ItemCreated" />
 
             
 
@@ -2328,12 +2158,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+          The <see cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
 
           
 
@@ -2361,8 +2194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2374,8 +2206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.Repeater.ItemDataBound" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.Repeater.ItemDataBound" />
 
             
 
@@ -2383,12 +2214,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+          The <see cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
 
           
 
@@ -2416,13 +2250,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.Repeater.OnLoad(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.Repeater.OnLoad(System.EventArgs)" />
 
             
 
-             method notifies the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             method notifies the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -2432,8 +2264,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Load" />
+            >Raises the <see cref="E:System.Web.UI.Control.Load" />
 
             
 
@@ -2441,12 +2272,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+          The <see cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
 
           
 
@@ -2493,8 +2327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >The <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -2504,8 +2337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -2513,12 +2345,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
+          The <see cref="T:System.Web.UI.WebControls.RepeaterItemEventArgs" />
 
           
 
@@ -2540,69 +2375,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >The <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control uses the <see
-             cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
+             control uses the <see cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
-             property to determine whether the control needs to call the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             property to determine whether the control needs to call the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
              method to bind to its specified data source.</para
           >
           <para
-            >Each time the set accessor is called on either the <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
+            >Each time the set accessor is called on either the <see cref="P:System.Web.UI.WebControls.Repeater.DataSource" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
+            , <see cref="P:System.Web.UI.WebControls.Repeater.DataSourceID" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
+            , or <see cref="P:System.Web.UI.WebControls.Repeater.DataMember" />
 
             
 
-             property to change the data source after the <see
-             cref="M:System.Web.UI.WebControls.Repeater.OnInit(System.EventArgs)" />
+             property to change the data source after the <see cref="M:System.Web.UI.WebControls.Repeater.OnInit(System.EventArgs)" />
 
             
 
-             method has already been called, ASP.NET sets the value of the <see
-             cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
+             method has already been called, ASP.NET sets the value of the <see cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
-             property to true. The value of the <see
-             cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
+             property to true. The value of the <see cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
-             property is also set to true when the <see
-             cref="M:System.Web.UI.WebControls.Repeater.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+             property is also set to true when the <see cref="M:System.Web.UI.WebControls.Repeater.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
              method is called.</para
           >
           <para
-            >ASP.NET sets the value of the <see
-             cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
+            >ASP.NET sets the value of the <see cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
-             property to false immediately after the <see
-             cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
+             property to false immediately after the <see cref="M:System.Web.UI.WebControls.Repeater.DataBind" />
 
             
 
@@ -2612,8 +2435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Gets or sets a value indicating whether the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -2639,18 +2461,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The first call to the <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >The first call to the <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object calls the <see
-             cref="M:System.Web.UI.WebControls.Repeater.CreateDataSourceSelectArguments" />
+             object calls the <see cref="M:System.Web.UI.WebControls.Repeater.CreateDataSourceSelectArguments" />
 
             
 
-             method to create the <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+             method to create the <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
@@ -2660,13 +2479,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Gets a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             object that the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             object that the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -2686,15 +2503,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ITemplate" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ITemplate" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
+            >Use the <see cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
 
             
 
@@ -2702,13 +2515,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can use the <see
-               cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
+              >You can use the <see cref="P:System.Web.UI.WebControls.Repeater.SeparatorTemplate" />
 
               
 
-               property to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
-               type="text/html">
+               property to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format type="text/html">
                 <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
               </format>
 
@@ -2721,8 +2532,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Web.UI.ITemplate" />
+            >Gets or sets the <see cref="T:System.Web.UI.ITemplate" />
 
             
 

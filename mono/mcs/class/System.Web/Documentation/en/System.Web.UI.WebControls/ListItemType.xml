@@ -15,23 +15,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ListItemType" />
+        >The <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
         
 
-         enumeration represents the different items that can be included in a list control, such as the <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         enumeration represents the different items that can be included in a list control, such as the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+        , <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        , and <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -151,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A pager that displays the controls to navigate to different pages associated with the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+            >A pager that displays the controls to navigate to different pages associated with the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 

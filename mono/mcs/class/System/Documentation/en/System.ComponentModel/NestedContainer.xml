@@ -28,18 +28,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.NestedContainer" />
+        >The <see cref="T:System.ComponentModel.NestedContainer" />
 
         
 
-         class is a simple implementation of the <see
-         cref="T:System.ComponentModel.INestedContainer" />
+         class is a simple implementation of the <see cref="T:System.ComponentModel.INestedContainer" />
 
         
 
-         interface, which defines a component that logically contains zero or more other components and is owned by a parent component. The behavior of nested containers differs from a standard <see
-         cref="T:System.ComponentModel.Container" />
+         interface, which defines a component that logically contains zero or more other components and is owned by a parent component. The behavior of nested containers differs from a standard <see cref="T:System.ComponentModel.Container" />
 
         
 
@@ -48,13 +45,11 @@
       <list type="bullet">
         <item>
           <para
-            >Site characteristics such as <see
-             cref="P:System.ComponentModel.Component.DesignMode" />
+            >Site characteristics such as <see cref="P:System.ComponentModel.Component.DesignMode" />
 
             
 
-             and <see
-             cref="M:System.ComponentModel.Component.GetService(System.Type)" />
+             and <see cref="M:System.ComponentModel.Component.GetService(System.Type)" />
 
             
 
@@ -63,8 +58,7 @@
         </item>
         <item>
           <para
-            >The site’s <see
-             cref="P:System.ComponentModel.ISite.Name" />
+            >The site’s <see cref="P:System.ComponentModel.ISite.Name" />
 
             
 
@@ -77,8 +71,7 @@
 
             
 
-             provides support for the <see
-             cref="T:System.ComponentModel.INestedContainer" />
+             provides support for the <see cref="T:System.ComponentModel.INestedContainer" />
 
             
 
@@ -91,8 +84,7 @@
       </list>
       <para>In addition, designers treat nested containers differently. A designer host is only interested in one container—the one associated with the host. Therefore, component add and remove events are not raised when a component is added to or removed from a nested container. However, because services flow through to the nested container, component change events are raised when a component in a nested container is changed. </para>
       <para
-        >This disparity in event tracking also impacts undo functionality, which is closely tied to serialization. The standard undo engine uses <see
-         cref="T:System.ComponentModel.Design.IReferenceService" />
+        >This disparity in event tracking also impacts undo functionality, which is closely tied to serialization. The standard undo engine uses <see cref="T:System.ComponentModel.Design.IReferenceService" />
 
         
 
@@ -102,8 +94,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the base implementation for the <see
-         cref="T:System.ComponentModel.INestedContainer" />
+        >Provides the base implementation for the <see cref="T:System.ComponentModel.INestedContainer" />
 
         
 
@@ -133,13 +124,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor enlists in its owner's <see
-             cref="E:System.ComponentModel.IComponent.Disposed" />
+            >This constructor enlists in its owner's <see cref="E:System.ComponentModel.IComponent.Disposed" />
 
             
 
-             event so that the nested container's <see
-             cref="Overload:System.ComponentModel.NestedContainer.Dispose" />
+             event so that the nested container's <see cref="Overload:System.ComponentModel.NestedContainer.Dispose" />
 
             
 
@@ -149,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.NestedContainer" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.NestedContainer" />
 
             
 
@@ -158,12 +146,15 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
@@ -196,13 +187,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="name" />
+            >If the <paramref name="name" />
 
             
 
-             parameter is null, the <see
-             cref="T:System.ComponentModel.IComponent" />
+             parameter is null, the <see cref="T:System.ComponentModel.IComponent" />
 
             
 
@@ -216,8 +205,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ComponentModel.ISite" />
+            >The newly created <see cref="T:System.ComponentModel.ISite" />
 
             
 
@@ -225,24 +213,30 @@
           >
         </returns>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
            to create a site for.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name to assign to <paramref
-           name="component" />
+          The name to assign to <paramref name="component" />
 
           
 
@@ -271,36 +265,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.ComponentModel.NestedContainer" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.ComponentModel.NestedContainer" />
 
             
 
@@ -312,7 +300,11 @@
           <para>Releases the resources used by the nested container.</para>
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -341,18 +333,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.ComponentModel.Container.GetService(System.Type)" />
+            >This method overrides the <see cref="M:System.ComponentModel.Container.GetService(System.Type)" />
 
             
 
-             method. This implementation only resolves requests for the <see
-             cref="T:System.ComponentModel.INestedContainer" />
+             method. This implementation only resolves requests for the <see cref="T:System.ComponentModel.INestedContainer" />
 
             
 
-             and <see
-             cref="T:System.ComponentModel.IContainer" />
+             and <see cref="T:System.ComponentModel.IContainer" />
 
             
 
@@ -366,8 +355,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
@@ -375,12 +363,15 @@
           >
         </returns>
         <param name="service">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -433,18 +424,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property may be overridden to provide a custom owner name. The default implementation searches the owner's site for <see
-             cref="T:System.ComponentModel.INestedSite" />
+            >This property may be overridden to provide a custom owner name. The default implementation searches the owner's site for <see cref="T:System.ComponentModel.INestedSite" />
 
             
 
-             and calls <see
-             cref="P:System.ComponentModel.INestedSite.FullName" />
+             and calls <see cref="P:System.ComponentModel.INestedSite.FullName" />
 
             
 
-            , or <see
-             cref="P:System.ComponentModel.ISite.Name" />
+            , or <see cref="P:System.ComponentModel.ISite.Name" />
 
             
 

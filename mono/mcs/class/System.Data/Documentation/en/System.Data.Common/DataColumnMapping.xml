@@ -33,23 +33,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Data.Common.DataColumnMapping" />
+        >A <see cref="T:System.Data.Common.DataColumnMapping" />
 
         
 
-         enables you to use column names in a <see
-         cref="T:System.Data.DataTable" />
+         enables you to use column names in a <see cref="T:System.Data.DataTable" />
 
         
 
-         that are different from those in the data source. The DataAdapter uses the mapping to match the columns when the tables in the <see
-         cref="T:System.Data.DataSet" />
+         that are different from those in the data source. The DataAdapter uses the mapping to match the columns when the tables in the <see cref="T:System.Data.DataSet" />
 
         
 
-         or data source are updated. For more information, see <format
-         type="text/html">
+         or data source are updated. For more information, see <format type="text/html">
           <a href="D023260A-A66A-4C39-B8F4-090CD130E730"
             >[&lt;topic://cpconsettingupdatatabledatacolumnmappings&gt;]</a
           >
@@ -63,8 +59,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a generic column mapping for an object that inherits from <see
-         cref="T:System.Data.Common.DataAdapter" />
+        >Contains a generic column mapping for an object that inherits from <see cref="T:System.Data.Common.DataAdapter" />
 
         
 
@@ -83,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -113,13 +107,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             class with the specified source column name and <see
-             cref="T:System.Data.DataSet" />
+             class with the specified source column name and <see cref="T:System.Data.DataSet" />
 
             
 
@@ -127,19 +119,26 @@
           >
         </summary>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive column name from a data source. </param
         >
         <param name="dataSetColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The column name, which is not case sensitive, from a <see
-           cref="T:System.Data.DataSet" />
+          The column name, which is not case sensitive, from a <see cref="T:System.Data.DataSet" />
 
           
 
@@ -164,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the column within the <see
-             cref="T:System.Data.DataSet" />
+            >Gets or sets the name of the column within the <see cref="T:System.Data.DataSet" />
 
             
 
@@ -202,23 +200,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Data.DataColumn" />
+            >Gets a <see cref="T:System.Data.DataColumn" />
 
             
 
-             from the given <see
-             cref="T:System.Data.DataTable" />
+             from the given <see cref="T:System.Data.DataTable" />
 
             
 
-             using the <see
-             cref="T:System.Data.MissingSchemaAction" />
+             using the <see cref="T:System.Data.MissingSchemaAction" />
 
             
 
-             and the <see
-             cref="P:System.Data.Common.DataColumnMapping.DataSetColumn" />
+             and the <see cref="P:System.Data.Common.DataColumnMapping.DataSetColumn" />
 
             
 
@@ -230,36 +224,45 @@
           <para>A data column.</para>
         </returns>
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataTable" />
+          The <see cref="T:System.Data.DataTable" />
 
           
 
            to get the column from.</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the data column.</param
         >
         <param name="schemaAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.MissingSchemaAction" />
+          One of the <see cref="T:System.Data.MissingSchemaAction" />
 
           
 
@@ -305,13 +308,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A static version of <see
-             cref="M:System.Data.Common.DataColumnMapping.GetDataColumnBySchemaAction(System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)" />
+            >A static version of <see cref="M:System.Data.Common.DataColumnMapping.GetDataColumnBySchemaAction(System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)" />
 
             
 
-             that can be called without instantiating a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+             that can be called without instantiating a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -321,8 +322,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataColumn" />
+            >A <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -330,50 +330,67 @@
           >
         </returns>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive column name from a data source. </param
         >
         <param name="dataSetColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The column name, which is not case sensitive, from a <see
-           cref="T:System.Data.DataSet" />
+          The column name, which is not case sensitive, from a <see cref="T:System.Data.DataSet" />
 
           
 
            to map to. </param
         >
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Data.DataTable" />
+          An instance of <see cref="T:System.Data.DataTable" />
 
           
 
           .</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type for the column being mapped.</param
         >
         <param name="schemaAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Determines the action to take when existing <see
-           cref="T:System.Data.DataSet" />
+          Determines the action to take when existing <see cref="T:System.Data.DataSet" />
 
           
 
@@ -421,21 +438,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.SqlClient.SqlCommand" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.SqlClient.SqlCommand" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.ICloneable.Clone" />
+            >For more information, see <see cref="M:System.ICloneable.Clone" />
 
             
 
@@ -464,8 +478,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the current <see
-             cref="P:System.Data.Common.DataColumnMapping.SourceColumn" />
+            >Converts the current <see cref="P:System.Data.Common.DataColumnMapping.SourceColumn" />
 
             
 
@@ -475,8 +488,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="P:System.Data.Common.DataColumnMapping.SourceColumn" />
+            >The current <see cref="P:System.Data.Common.DataColumnMapping.SourceColumn" />
 
             
 

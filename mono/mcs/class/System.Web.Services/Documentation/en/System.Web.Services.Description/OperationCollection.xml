@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.Operation" />
+        >The <see cref="T:System.Web.Services.Description.Operation" />
 
         
 
@@ -31,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of instances of the <see
-         cref="T:System.Web.Services.Description.Operation" />
+        >Represents a collection of instances of the <see cref="T:System.Web.Services.Description.Operation" />
 
         
 
@@ -58,13 +56,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+             to the end of the <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
@@ -74,8 +70,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index where the <paramref
-             name="operation" />
+            >The zero-based index where the <paramref name="operation" />
 
             
 
@@ -83,12 +78,15 @@
           >
         </returns>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Operation" />
+          The <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -117,13 +115,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the specified <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             is a member of the <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+             is a member of the <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
@@ -133,13 +129,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="operation" />
+            >true if <paramref name="operation" />
 
             
 
-             is a member of the <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+             is a member of the <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
@@ -147,12 +141,15 @@
           >
         </returns>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Operation" />
+          The <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -182,13 +179,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+            >Copies the entire <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
-             to a compatible one-dimensional array of type <see
-             cref="T:System.Web.Services.Description.Operation" />
+             to a compatible one-dimensional array of type <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -196,19 +191,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Description.Operation" />
+          An array of type <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
            serving as the destination for the copy action. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -237,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Searches for the specified <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -250,12 +251,15 @@
           <para>A 32-bit signed integer.</para>
         </returns>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Operation" />
+          The <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -285,23 +289,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , the <paramref
-             name="operation" />
+            , the <paramref name="operation" />
 
             
 
-             parameter is added to the end of the <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+             parameter is added to the end of the <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
@@ -312,13 +312,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+             to the <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
@@ -326,24 +324,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="operation" />
+          The zero-based index at which to insert the <paramref name="operation" />
 
           
 
            parameter. </param
         >
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Operation" />
+          The <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -394,16 +398,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >The elements that follow the removed <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >The elements that follow the removed <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -413,13 +415,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Description.OperationCollection" />
+             from the <see cref="T:System.Web.Services.Description.OperationCollection" />
 
             
 
@@ -427,12 +427,15 @@
           >
         </summary>
         <param name="operation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.Operation" />
+          The <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -458,14 +461,8 @@
         <Parameter Name="parent" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <param name="parent"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="value">a <see cref="T:System.Object" /></param>
+        <param name="parent">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>

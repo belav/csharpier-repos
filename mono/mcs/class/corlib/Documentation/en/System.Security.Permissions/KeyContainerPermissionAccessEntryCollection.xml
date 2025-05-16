@@ -44,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+        >Represents a collection of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
         
 
@@ -82,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >The <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -93,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >Adds a <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -106,12 +103,15 @@
           <para>The index at which the new element was inserted.</para>
         </returns>
         <param name="accessEntry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+          The <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
           
 
@@ -139,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to empty the <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
+            >Use this method to empty the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
 
             
 
@@ -150,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all the <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >Removes all the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -192,24 +190,30 @@
           <para>Copies the elements of the collection to a compatible one-dimensional array, starting at the specified index of the target array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+          The one-dimensional <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
           
 
            array that is the destination of the elements copied from the current collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -234,23 +238,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Count" />
+            >Use the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Count" />
 
             
 
-             property to determine the number of <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+             property to determine the number of <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
-             objects in the <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
+             objects in the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
 
             
 
-             collection. The <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Count" />
+             collection. The <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Count" />
 
             
 
@@ -286,32 +286,28 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+            >Use this method to create a <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
 
             
 
              object that can be used to iterate through the collection to get each item.</para
           >
           <para
-            >Use the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+            >Use the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
             
 
              property of the enumerator to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
             
 
              method of the enumerator to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+            >Use the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
             
 
@@ -319,23 +315,19 @@
           >
           <block subset="none" type="note">
             <para
-              >After you create a <see
-               cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+              >After you create a <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
 
               
 
-               object or use the <see
-               cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+               object or use the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection, you must call the <see
-               cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+               method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
 
               
 
@@ -346,8 +338,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+            >Returns a <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
 
             
 
@@ -357,8 +348,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+            >A <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
 
             
 
@@ -395,13 +385,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to determine the index number of the specified <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >Use this method to determine the index number of the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
-             object in the collection. If the specified <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+             object in the collection. If the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -411,8 +399,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index in the collection of the specified <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >Gets the index in the collection of the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -422,8 +409,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >The index of the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -431,12 +417,15 @@
           >
         </returns>
         <param name="accessEntry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+          The <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
           
 
@@ -461,8 +450,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property implements the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+            >This property implements the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -531,8 +519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you remove an item from the collection, the index values change for subsequent items in the collection. All information about the removed item is deleted. Use this method when you want to remove a specific item by specifying the actual item to remove. To remove all items from the list, use the <see
-             cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Clear" />
+            >When you remove an item from the collection, the index values change for subsequent items in the collection. All information about the removed item is deleted. Use this method when you want to remove a specific item by specifying the actual item to remove. To remove all items from the list, use the <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.Clear" />
 
             
 
@@ -542,8 +529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+            >Removes the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
             
 
@@ -551,12 +537,15 @@
           >
         </summary>
         <param name="accessEntry">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+          The <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
 
           
 
@@ -581,26 +570,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -639,19 +624,26 @@
           <para>Copies the elements of the collection to a compatible one-dimensional array, starting at the specified index of the target array.</para>
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The one-dimensional array that is the destination of the elements copied from the current collection.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index in <paramref
-           name="array" />
+          The index in <paramref name="array" />
 
           
 
@@ -683,8 +675,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+            >Returns a <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
 
             
 
@@ -694,8 +685,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
+            >A <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator" />
 
             
 

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="14.10.1" title="Integer logical operators">
   <paragraph
-    >The predefined integer logical operators are: <code_example
-    >
+    >The predefined integer logical operators are: <code_example>
       <![CDATA[
 int operator &(int x, int y);  
 uint operator &(uint x, uint y);  

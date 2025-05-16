@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="F:Microsoft.Win32.RegistryValueOptions.DoNotExpandEnvironmentNames" />
+        >Use the <see cref="F:Microsoft.Win32.RegistryValueOptions.DoNotExpandEnvironmentNames" />
 
         
 
-         flag with the <see
-         cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String,System.Object,Microsoft.Win32.RegistryValueOptions)" />
+         flag with the <see cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String,System.Object,Microsoft.Win32.RegistryValueOptions)" />
 
         
 
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value of type <see
-             cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+            >A value of type <see cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
 
             
 

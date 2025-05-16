@@ -56,8 +56,7 @@ library OldLib {
         <h2>Implementing the ICustomMarshaler Interface</h2>
       </format>
       <para
-        >Your custom marshaler must implement the <see
-         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+        >Your custom marshaler must implement the <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
 
         
 
@@ -66,8 +65,7 @@ library OldLib {
       <para>The following C# code displays the base interface that must be implemented by all custom marshalers. </para>
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#2</para>
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+        >The <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
 
         
 
@@ -124,8 +122,7 @@ library OldLib {
           </description>
           <description>
             <para
-              >Enables the marshaler to clean up the native data (the CCW) that is returned by the <see
-               cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+              >Enables the marshaler to clean up the native data (the CCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
 
               
 
@@ -144,8 +141,7 @@ library OldLib {
           </description>
           <description>
             <para
-              >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see
-               cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+              >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
 
               
 
@@ -185,8 +181,7 @@ library OldLib {
         <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.CleanUpNativeData(System.IntPtr)" />
       </para>
       <para
-        >Enables the marshaler to clean up the native data (the CCW) that is returned by the <see
-         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+        >Enables the marshaler to clean up the native data (the CCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
 
         
 
@@ -196,8 +191,7 @@ library OldLib {
         <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.CleanUpManagedData(System.Object)" />
       </para>
       <para
-        >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see
-         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+        >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
 
         
 
@@ -214,18 +208,15 @@ library OldLib {
         <h2>Implementing the GetInstance Method</h2>
       </format>
       <para
-        >In addition to implementing the <see
-         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+        >In addition to implementing the <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
 
         
 
-         interface, custom marshalers must implement a static method called GetInstance that accepts a <see
-         cref="T:System.String" />
+         interface, custom marshalers must implement a static method called GetInstance that accepts a <see cref="T:System.String" />
 
         
 
-         as a parameter and has a return type of <see
-         cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+         as a parameter and has a return type of <see cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
 
         
 
@@ -236,26 +227,22 @@ library OldLib {
         <h2>Applying MarshalAsAttribute</h2>
       </format>
       <para
-        >To use a custom marshaler, you must apply the <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+        >To use a custom marshaler, you must apply the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
          attribute to the parameter or field that is being marshaled.</para
       >
       <para
-        >You must also pass the <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+        >You must also pass the <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
 
         
 
-         enumeration value to the <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+         enumeration value to the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
-         constructor. In addition, you must specify the <see
-         cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+         constructor. In addition, you must specify the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
         
 
@@ -272,18 +259,15 @@ library OldLib {
           >
           <block subset="none" type="note">
             <para
-              >You can use the <see
-               cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+              >You can use the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
               
 
-               field instead of the <see
-               cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+               field instead of the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
               
 
-               field. <see
-               cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+               field. <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
               
 
@@ -302,21 +286,18 @@ library OldLib {
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+        >The <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
          attribute identifies the custom marshaler so it can activate the appropriate wrapper. The common language runtime's interop service then examines the attribute and creates the custom marshaler the first time the argument (parameter or field) needs to be marshaled.</para
       >
       <para
-        >The runtime then calls the <see
-         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+        >The runtime then calls the <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
 
         
 
-         and <see
-         cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+         and <see cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
 
         
 
@@ -335,8 +316,7 @@ library UserLib {
          HRESULT DoSomeStuff(IUnknown* pIOld);
 }</code>
       <para
-        >The type library that is generated by exporting the managed definition of IUserData yields the unmanaged definition shown in this example instead of the standard definition. The <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+        >The type library that is generated by exporting the managed definition of IUserData yields the unmanaged definition shown in this example instead of the standard definition. The <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
@@ -345,21 +325,18 @@ library UserLib {
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#4</para>
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#5</para>
       <para
-        >In the previous examples, the first parameter provided to the <see
-         cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+        >In the previous examples, the first parameter provided to the <see cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
 
         
 
-         attribute is the <see
-         cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+         attribute is the <see cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
 
         
 
          enumeration value UnmanagedType.CustomMarshaler.</para
       >
       <para
-        >The second parameter is the <see
-         cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+        >The second parameter is the <see cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
 
         
 
@@ -397,7 +374,11 @@ library UserLib {
           <para>Performs necessary cleanup of the managed data when it is no longer needed.</para>
         </summary>
         <param name="ManagedObj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -430,7 +411,11 @@ library UserLib {
           <para>Performs necessary cleanup of the unmanaged data when it is no longer needed.</para>
         </summary>
         <param name="pNativeData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -498,7 +483,11 @@ library UserLib {
           <para>A pointer to the COM view of the managed object.</para>
         </returns>
         <param name="ManagedObj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -538,7 +527,11 @@ library UserLib {
           <para>An object that represents the managed view of the COM data.</para>
         </returns>
         <param name="pNativeData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

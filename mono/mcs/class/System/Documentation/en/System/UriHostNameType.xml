@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.UriHostNameType" />
+        >The <see cref="T:System.UriHostNameType" />
 
         
 
-         enumeration defines the values that the <see
-         cref="M:System.Uri.CheckHostName(System.String)" />
+         enumeration defines the values that the <see cref="M:System.Uri.CheckHostName(System.String)" />
 
         
 
@@ -46,8 +44,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines host name types for the <see
-         cref="M:System.Uri.CheckHostName(System.String)" />
+        >Defines host name types for the <see cref="M:System.Uri.CheckHostName(System.String)" />
 
         
 

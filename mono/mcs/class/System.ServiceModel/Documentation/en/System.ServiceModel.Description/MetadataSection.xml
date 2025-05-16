@@ -22,97 +22,80 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Description.MetadataSection" />
+        >The <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
         
 
          class conforms to the definition of the wsx:Metadata/wsx:MetadataSection element in the WS-Metadata Exchange specification and contains XML metadata or references to XML metadata. </para
       >
       <para
-        >A <see
-         cref="T:System.ServiceModel.Description.MetadataSection" />
+        >A <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
         
 
-         object contains one dialect of metadata in XML form (such as a Web Services Description Language or WSDL file). You can add a <see
-         cref="T:System.ServiceModel.Description.MetadataSection" />
+         object contains one dialect of metadata in XML form (such as a Web Services Description Language or WSDL file). You can add a <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
         
 
-         to a collection of XML metadata represented by a <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+         to a collection of XML metadata represented by a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
-         object. Much of the indigo1 metadata system, such as the <see
-         cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+         object. Much of the indigo1 metadata system, such as the <see cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
 
         
 
-         class, use the <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+         class, use the <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
          class to import or export service metadata in XML form.</para
       >
       <para
-        >For example, to export indigo2 contract or endpoint objects to a <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+        >For example, to export indigo2 contract or endpoint objects to a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
-         object that contains the equivalent metadata in XML form, call the appropriate Export methods on the <see
-         cref="T:System.ServiceModel.Description.WsdlExporter" />
+         object that contains the equivalent metadata in XML form, call the appropriate Export methods on the <see cref="T:System.ServiceModel.Description.WsdlExporter" />
 
         
 
-         class, passing either <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         class, passing either <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-         or <see
-         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+         or <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
         
 
-         objects, and then call the <see
-         cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
+         objects, and then call the <see cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
 
         
 
          method. </para
       >
       <para
-        >To import XML-based metadata from a <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+        >To import XML-based metadata from a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
-         object into indigo2 <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         object into indigo2 <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-        , <see
-         cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+        , <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
         
 
-        , and <see
-         cref="T:System.ServiceModel.Channels.Binding" />
+        , and <see cref="T:System.ServiceModel.Channels.Binding" />
 
         
 
-         objects, pass a <see
-         cref="T:System.ServiceModel.Description.MetadataSet" />
+         objects, pass a <see cref="T:System.ServiceModel.Description.MetadataSet" />
 
         
 
-         object to the constructor of the <see
-         cref="T:System.ServiceModel.Description.WsdlImporter" />
+         object to the constructor of the <see cref="T:System.ServiceModel.Description.WsdlImporter" />
 
         
 
@@ -141,8 +124,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
@@ -176,38 +158,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.ServiceModel.Description.MetadataSection.#ctor(System.String,System.String,System.Object)" />
+            >Use the <see cref="M:System.ServiceModel.Description.MetadataSection.#ctor(System.String,System.String,System.Object)" />
 
             
 
-             constructor to specify the metadata to be included in this <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+             constructor to specify the metadata to be included in this <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-            , its dialect and its identifier. The metadata object must be serializable using the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            , its dialect and its identifier. The metadata object must be serializable using the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             class so that the <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+             class so that the <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             object can be serialized. If it is not serializable, an exception is thrown when the object is serialized. Use a <see
-             cref="T:System.ServiceModel.Description.MetadataLocation" />
+             object can be serialized. If it is not serializable, an exception is thrown when the object is serialized. Use a <see cref="T:System.ServiceModel.Description.MetadataLocation" />
 
             
 
-             or <see
-             cref="T:System.ServiceModel.Description.MetadataReference" />
+             or <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
             
 
-             object for the <paramref
-             name="metadata" />
+             object for the <paramref name="metadata" />
 
             
 
@@ -217,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
@@ -253,8 +227,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataSection.Attributes" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataSection.Attributes" />
 
             
 
@@ -294,23 +267,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this static factory method to quickly create a <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Use this static factory method to quickly create a <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             for a XML Schema document. The <see
-             cref="P:System.ServiceModel.Description.MetadataSection.Dialect" />
+             for a XML Schema document. The <see cref="P:System.ServiceModel.Description.MetadataSection.Dialect" />
 
             
 
-             property is assigned the value of <see
-             cref="P:System.ServiceModel.Description.MetadataSection.XmlSchemaDialect" />
+             property is assigned the value of <see cref="P:System.ServiceModel.Description.MetadataSection.XmlSchemaDialect" />
 
             
 
-             and the <see
-             cref="P:System.ServiceModel.Description.MetadataSection.Identifier" />
+             and the <see cref="P:System.ServiceModel.Description.MetadataSection.Identifier" />
 
             
 
@@ -320,13 +289,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Creates a <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             from the specified <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             from the specified <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -336,8 +303,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >A <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
@@ -373,23 +339,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this static factory method to quickly create a <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Use this static factory method to quickly create a <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             for a WSDL document. The <see
-             cref="P:System.ServiceModel.Description.MetadataSection.Dialect" />
+             for a WSDL document. The <see cref="P:System.ServiceModel.Description.MetadataSection.Dialect" />
 
             
 
-             property is assigned the value of <see
-             cref="P:System.ServiceModel.Description.MetadataSection.ServiceDescriptionDialect" />
+             property is assigned the value of <see cref="P:System.ServiceModel.Description.MetadataSection.ServiceDescriptionDialect" />
 
             
 
-             and the <see
-             cref="P:System.ServiceModel.Description.MetadataSection.Identifier" />
+             and the <see cref="P:System.ServiceModel.Description.MetadataSection.Identifier" />
 
             
 
@@ -399,13 +361,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >Returns a <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             that contains the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             that contains the specified <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -415,13 +375,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >A <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-             that contains the specified <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             that contains the specified <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
@@ -450,8 +408,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The dialect indicates the type of metadata in this <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >The dialect indicates the type of metadata in this <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
@@ -506,8 +463,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The identifier for the metadata in this <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+            >The identifier for the metadata in this <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
@@ -555,28 +511,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.MetadataSection.Metadata" />
+            >Use the <see cref="P:System.ServiceModel.Description.MetadataSection.Metadata" />
 
             
 
-             property to access or modify the metadata content contained in the <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+             property to access or modify the metadata content contained in the <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 
-            . The metadata object can be <see
-             cref="T:System.ServiceModel.Description.MetadataReference" />
+            . The metadata object can be <see cref="T:System.ServiceModel.Description.MetadataReference" />
 
             
 
-             or a <see
-             cref="T:System.ServiceModel.Description.MetadataLocation" />
+             or a <see cref="T:System.ServiceModel.Description.MetadataLocation" />
 
             
 
-             as a reference to the metadata content. When a <see
-             cref="T:System.ServiceModel.Description.MetadataSection" />
+             as a reference to the metadata content. When a <see cref="T:System.ServiceModel.Description.MetadataSection" />
 
             
 

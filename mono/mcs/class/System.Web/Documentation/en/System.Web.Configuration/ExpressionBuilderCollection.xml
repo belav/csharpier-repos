@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+        >The <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
         
 
@@ -36,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Configuration.ExpressionBuilder" />
+        >Represents a collection of <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
         
 
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
             
 
@@ -86,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Web.Configuration.ExpressionBuilder" />
+            >Adds an <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
             
 
@@ -97,13 +93,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Web.Configuration.ExpressionBuilder" />
+            >Adds an <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
             
 
-             object to the <see
-             cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+             object to the <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
             
 
@@ -111,12 +105,15 @@
           >
         </summary>
         <param name="buildProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string value specifying the <see
-           cref="T:System.Web.Configuration.ExpressionBuilder" />
+          A string value specifying the <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
           
 
@@ -140,13 +137,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears all the <see
-             cref="T:System.Web.Configuration.ExpressionBuilder" />
+            >Clears all the <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
             
 
-             objects from the <see
-             cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+             objects from the <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
             
 
@@ -284,13 +279,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an <see
-             cref="T:System.Web.Configuration.ExpressionBuilder" />
+            >Removes an <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
             
 
-             object from the <see
-             cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+             object from the <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
             
 
@@ -298,12 +291,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string value specifying the <see
-           cref="T:System.Web.Configuration.ExpressionBuilder" />
+          A string value specifying the <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
           
 
@@ -332,13 +328,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an <see
-             cref="T:System.Web.Configuration.ExpressionBuilder" />
+            >Removes an <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
             
 
-             object from the <see
-             cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+             object from the <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
             
 
@@ -346,17 +340,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An integer value specifying a specific <see
-           cref="T:System.Web.Configuration.ExpressionBuilder" />
+          An integer value specifying a specific <see cref="T:System.Web.Configuration.ExpressionBuilder" />
 
           
 
-           object within the <see
-           cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
+           object within the <see cref="T:System.Web.Configuration.ExpressionBuilderCollection" />
 
           
 

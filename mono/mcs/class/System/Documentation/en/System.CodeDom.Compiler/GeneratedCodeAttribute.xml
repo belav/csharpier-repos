@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" />
+        >The <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" />
 
         
 
@@ -62,8 +61,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.GeneratedCodeAttribute" />
 
             
 
@@ -71,14 +69,22 @@
           >
         </summary>
         <param name="tool">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the tool that generated the code.</param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

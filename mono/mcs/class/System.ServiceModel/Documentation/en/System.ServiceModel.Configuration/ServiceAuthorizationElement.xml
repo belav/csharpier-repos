@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ServiceAuthorizationElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.ServiceAuthorizationElement" />
 
             
 
@@ -134,7 +133,11 @@
           <para>Copies the content of a specified configuration element to this configuration element.</para>
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

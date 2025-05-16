@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This event is raised when the bounding rectangle necessary to accept new text changes. If the text within the control spans multiple lines, the requested rectangle will always be the width of the control. You can handle this event in your control to implement auto-resizing for multiline <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+        >This event is raised when the bounding rectangle necessary to accept new text changes. If the text within the control spans multiple lines, the requested rectangle will always be the width of the control. You can handle this event in your control to implement auto-resizing for multiline <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
-         controls. The <see
-         cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
+         controls. The <see cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
 
         
 
-         identifies the requested size of the <see
-         cref="T:System.Windows.Forms.RichTextBox" />
+         identifies the requested size of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
         
 
@@ -35,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
+        >Provides data for the <see cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
 
         
 
@@ -59,8 +55,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ContentsResizedEventArgs" />
 
             
 
@@ -68,17 +63,19 @@
           >
         </summary>
         <param name="newRectangle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that specifies the requested dimensions of the <see
-           cref="T:System.Windows.Forms.RichTextBox" />
+           that specifies the requested dimensions of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
           
 
@@ -104,28 +101,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When text is entered into the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >When text is entered into the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control, the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             control, the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
-             control determines the proper size of the control in order to display all of the contents of the control. You can use the <see
-             cref="P:System.Windows.Forms.ContentsResizedEventArgs.NewRectangle" />
+             control determines the proper size of the control in order to display all of the contents of the control. You can use the <see cref="P:System.Windows.Forms.ContentsResizedEventArgs.NewRectangle" />
 
             
 
-             property in an event handler for the <see
-             cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
+             property in an event handler for the <see cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
 
             
 
-             event of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+             event of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 
@@ -135,8 +127,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents the requested size of the <see
-             cref="T:System.Windows.Forms.RichTextBox" />
+            >Represents the requested size of the <see cref="T:System.Windows.Forms.RichTextBox" />
 
             
 

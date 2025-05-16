@@ -26,44 +26,37 @@
 
         
 
-         is passed to the code generation methods of an <see
-         cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+         is passed to the code generation methods of an <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
         
 
          implementation to specify options used during code generation.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.IndentString" />
+        >The <see cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.IndentString" />
 
         
 
-         property specifies the string to use for each spacing indentation. The <see
-         cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.BracingStyle" />
+         property specifies the string to use for each spacing indentation. The <see cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.BracingStyle" />
 
         
 
-         property specifies the placement style for braces indicating the boundaries of code blocks. The <see
-         cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.ElseOnClosing" />
+         property specifies the placement style for braces indicating the boundaries of code blocks. The <see cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.ElseOnClosing" />
 
         
 
-         property specifies whether to append an else, catch, or finally block, including brackets, at the closing line of each if or try block. The <see
-         cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.BlankLinesBetweenMembers" />
+         property specifies whether to append an else, catch, or finally block, including brackets, at the closing line of each if or try block. The <see cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.BlankLinesBetweenMembers" />
 
         
 
          property specifies whether to insert blank lines between members.</para
       >
       <para
-        >An <see
-         cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+        >An <see cref="T:System.CodeDom.Compiler.ICodeGenerator" />
 
         
 
-         implementation can provide custom code generation options which you can set or pass data to using the <see
-         cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.Item(System.String)" />
+         implementation can provide custom code generation options which you can set or pass data to using the <see cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.Item(System.String)" />
 
         
 
@@ -71,20 +64,17 @@
       >
       <block subset="none" type="note">
         <para
-          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
-           cref="T:System.Security.SecurityException" />
+          >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see cref="T:System.Security.SecurityException" />
 
           
 
-           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
-           type="text/html">
+           is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
 
           
 
-           and <format
-           type="text/html">
+           and <format type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
 
@@ -119,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
 
             
 
@@ -266,8 +255,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default generates members by their type, for example; field, member, constructor, or property.  A code generator can use the <see
-             cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.VerbatimOrder" />
+            >The default generates members by their type, for example; field, member, constructor, or property.  A code generator can use the <see cref="P:System.CodeDom.Compiler.CodeGeneratorOptions.VerbatimOrder" />
 
             
 

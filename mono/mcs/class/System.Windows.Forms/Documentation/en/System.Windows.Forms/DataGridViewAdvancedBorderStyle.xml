@@ -24,78 +24,63 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >The <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control allows you to fully customize its appearance, including the borders of the cells and headers. The <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         control allows you to fully customize its appearance, including the borders of the cells and headers. The <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         has <see
-         cref="P:System.Windows.Forms.DataGridView.CellBorderStyle" />
+         has <see cref="P:System.Windows.Forms.DataGridView.CellBorderStyle" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridView.ColumnHeadersBorderStyle" />
+        , <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersBorderStyle" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.DataGridView.RowHeadersBorderStyle" />
+        , and <see cref="P:System.Windows.Forms.DataGridView.RowHeadersBorderStyle" />
 
         
 
-         properties that allow you to set the appearance of the cell border. However, if you need to further customize the borders, the <see
-         cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+         properties that allow you to set the appearance of the cell border. However, if you need to further customize the borders, the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
         
 
-         class allows you to set the style of the border on the individual sides of the cells. The <see
-         cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
+         class allows you to set the style of the border on the individual sides of the cells. The <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+        , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
+        , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+        , and <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
 
         
 
-         properties of <see
-         cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+         properties of <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
         
 
-         represent the left, right, top, and bottom border of a cell, respectively. You can set these properties on the <see
-         cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />
+         represent the left, right, top, and bottom border of a cell, respectively. You can set these properties on the <see cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridView.AdvancedColumnHeadersBorderStyle" />
+        , <see cref="P:System.Windows.Forms.DataGridView.AdvancedColumnHeadersBorderStyle" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" />
+        , <see cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" />
 
         
 
-         properties of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         properties of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -105,8 +90,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains border styles for the cells in a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Contains border styles for the cells in a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -125,8 +109,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 
@@ -153,38 +136,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
+            >If the <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
 
             
 
-             properties are not set to the same <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" />
+             properties are not set to the same <see cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" />
 
             
 
-             value, the <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.All" />
+             value, the <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.All" />
 
             
 
-             property value is <see
-             cref="F:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle.NotSet" />
+             property value is <see cref="F:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle.NotSet" />
 
             
 
@@ -237,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified object is equal to the current <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+            >Determines whether the specified object is equal to the current <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 
@@ -248,38 +223,31 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="other" />
+            >true if <paramref name="other" />
 
             
 
-             is a <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+             is a <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 
-             and the values for the <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
+             and the values for the <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
 
             
 
-             properties are equal to their counterpart in the current <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+             properties are equal to their counterpart in the current <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 
@@ -287,12 +255,15 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -378,13 +349,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
@@ -435,33 +404,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.DataGridViewAdvancedBorderStyle.ToString" />
+            >The <see cref="M:System.Windows.Forms.DataGridViewAdvancedBorderStyle.ToString" />
 
             
 
-             method returns a string that includes the values for the <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.All" />
+             method returns a string that includes the values for the <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.All" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Top" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
+            , <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Left" />
 
             
 
-            , and <see
-             cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+            , and <see cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
 
             
 
@@ -471,8 +434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a string that represents the <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+            >Returns a string that represents the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 
@@ -482,8 +444,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string that represents the <see
-             cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+            >A string that represents the <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
             
 

@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.Operation" />
+        >The <see cref="T:System.Web.Services.Description.Operation" />
 
         
 
@@ -44,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -81,13 +79,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
+            >Gets the <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtensionCollection" />
 
             
 
-             associated with this <see
-             cref="T:System.Web.Services.Description.Operation" />
+             associated with this <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -111,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of faults, or error messages, defined by the current <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Gets the collection of faults, or error messages, defined by the current <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -150,13 +145,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the specified <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Returns a value that indicates whether the specified <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             matches with the <see
-             cref="T:System.Web.Services.Description.Operation" />
+             matches with the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -166,13 +159,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >true if the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             instance matches the <paramref
-             name="operationBinding" />
+             instance matches the <paramref name="operationBinding" />
 
             
 
@@ -180,17 +171,19 @@
           >
         </returns>
         <param name="operationBinding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          An <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
-           to be checked to determine whether it matches with the <see
-           cref="T:System.Web.Services.Description.Operation" />
+           to be checked to determine whether it matches with the <see cref="T:System.Web.Services.Description.Operation" />
 
           
 
@@ -216,18 +209,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because an <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Because an <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             is associated with exactly one <see
-             cref="T:System.Web.Services.Description.OperationInput" />
+             is associated with exactly one <see cref="T:System.Web.Services.Description.OperationInput" />
 
             
 
-             and exactly one <see
-             cref="T:System.Web.Services.Description.OperationOutput" />
+             and exactly one <see cref="T:System.Web.Services.Description.OperationOutput" />
 
             
 
@@ -237,13 +227,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of instances of the <see
-             cref="T:System.Web.Services.Description.Message" />
+            >Gets the collection of instances of the <see cref="T:System.Web.Services.Description.Message" />
 
             
 
-             class defined by the current <see
-             cref="T:System.Web.Services.Description.Operation" />
+             class defined by the current <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
@@ -298,8 +286,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements of this array are identical to those of the <see
-             cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
+            >The elements of this array are identical to those of the <see cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
 
             
 
@@ -309,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an array of the elements contained in the <see
-             cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
+            >Gets or sets an array of the elements contained in the <see cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
 
             
 
@@ -340,8 +326,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The named <see
-             cref="T:System.Web.Services.Description.MessagePart" />
+            >The named <see cref="T:System.Web.Services.Description.MessagePart" />
 
             
 
@@ -350,8 +335,7 @@
           <list type="bullet">
             <item>
               <para
-                >The order of the named <see
-                 cref="T:System.Web.Services.Description.MessagePart" />
+                >The order of the named <see cref="T:System.Web.Services.Description.MessagePart" />
 
                 
 
@@ -363,28 +347,11 @@
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Web.Services.Description.MessagePart" />
+                >If the <see cref="T:System.Web.Services.Description.MessagePart" />
 
                 
 
-                 name appears in both the input and output messages, it is an <paramref
-                 name="in/out" />
-
-                
-
-                 parameter.</para
-              >
-            </item>
-            <item>
-              <para
-                >If the <see
-                 cref="T:System.Web.Services.Description.MessagePart" />
-
-                
-
-                 name appears only in the input message, it is an <paramref
-                 name="in" />
+                 name appears in both the input and output messages, it is an <paramref name="in/out" />
 
                 
 
@@ -393,13 +360,24 @@
             </item>
             <item>
               <para
-                >If the <see
-                 cref="T:System.Web.Services.Description.MessagePart" />
+                >If the <see cref="T:System.Web.Services.Description.MessagePart" />
 
                 
 
-                 name appears only in the output message, it is an <paramref
-                 name="out" />
+                 name appears only in the input message, it is an <paramref name="in" />
+
+                
+
+                 parameter.</para
+              >
+            </item>
+            <item>
+              <para
+                >If the <see cref="T:System.Web.Services.Description.MessagePart" />
+
+                
+
+                 name appears only in the output message, it is an <paramref name="out" />
 
                 
 
@@ -408,23 +386,19 @@
             </item>
           </list>
           <para
-            >Note that this parameter list is not required, even if the <see
-             cref="T:System.Web.Services.Description.Operation" />
+            >Note that this parameter list is not required, even if the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 
-             is to be used with an RPC-style <see
-             cref="T:System.Web.Services.Description.Binding" />
+             is to be used with an RPC-style <see cref="T:System.Web.Services.Description.Binding" />
 
             
 
-            . Do not call <see
-             cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
+            . Do not call <see cref="P:System.Web.Services.Description.Operation.ParameterOrderString" />
 
             
 
-             directly. This method is only used internally for XML serialization. To return the parameter list use <see
-             cref="P:System.Web.Services.Description.Operation.ParameterOrder" />
+             directly. This method is only used internally for XML serialization. To return the parameter list use <see cref="P:System.Web.Services.Description.Operation.ParameterOrder" />
 
             
 
@@ -464,13 +438,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Services.Description.PortType" />
+            >Gets the <see cref="T:System.Web.Services.Description.PortType" />
 
             
 
-             of which the <see
-             cref="T:System.Web.Services.Description.Operation" />
+             of which the <see cref="T:System.Web.Services.Description.Operation" />
 
             
 

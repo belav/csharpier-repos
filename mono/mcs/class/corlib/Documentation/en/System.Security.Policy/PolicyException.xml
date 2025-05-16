@@ -38,8 +38,7 @@
          uses the HRESULT CORSEC_E_POLICY_EXCEPTION.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Security.Policy.PolicyException" />
+        >For a list of initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />
 
         
 
@@ -70,8 +69,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -113,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -143,8 +140,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -186,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -195,7 +190,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -231,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -240,14 +238,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -279,26 +285,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or null if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or null if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -340,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Policy.PolicyException" />
+            >Initializes a new instance of the <see cref="T:System.Security.Policy.PolicyException" />
 
             
 
@@ -349,19 +350,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The exception that is the cause of the current exception. If the <paramref
-           name="exception" />
+          The exception that is the cause of the current exception. If the <paramref name="exception" />
 
           
 

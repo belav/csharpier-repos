@@ -30,13 +30,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Transports that use a stream-oriented protocol such as TCP and named pipes support stream-based transport upgrades. Specifically, indigo1 provides security upgrades. The configuration of this transport security is encapsulated by this class as well as by <see
-         cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+        >Transports that use a stream-oriented protocol such as TCP and named pipes support stream-based transport upgrades. Specifically, indigo1 provides security upgrades. The configuration of this transport security is encapsulated by this class as well as by <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
         
 
-        , which can be configured and added to a custom binding. In addition, a third party can write their own custom StreamSecurityBindingElement. These binding elements extend the <see
-         cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+        , which can be configured and added to a custom binding. In addition, a third party can write their own custom StreamSecurityBindingElement. These binding elements extend the <see cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
 
         
 
@@ -50,8 +48,7 @@
         <steps>
           <step>
             <para
-              >Create a <see
-               cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+              >Create a <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
               
 
@@ -60,13 +57,11 @@
           </step>
           <step>
             <para
-              >Create custom binding elements that are above this binding element in the binding stack, such as the optional <see
-               cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+              >Create custom binding elements that are above this binding element in the binding stack, such as the optional <see cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
 
               
 
-               and <see
-               cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+               and <see cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
 
               
 
@@ -75,13 +70,11 @@
           </step>
           <step>
             <para
-              >Add the created elements in the order described previously to the <see
-               cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+              >Add the created elements in the order described previously to the <see cref="T:System.ServiceModel.Channels.BindingElementCollection" />
 
               
 
-               using the <see
-               cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
+               using the <see cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
 
               
 
@@ -90,8 +83,7 @@
           </step>
           <step>
             <para
-              >Create an instance of <see
-               cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+              >Create an instance of <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
               
 
@@ -100,8 +92,7 @@
           </step>
           <step>
             <para
-              >Add any additional custom binding elements to the collection, such as <see
-               cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+              >Add any additional custom binding elements to the collection, such as <see cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
 
               
 
@@ -111,13 +102,11 @@
         </steps>
       </procedure>
       <para
-        >There are three scenarios in which you must either manually specify the correct UPN/SPN on the client endpoint after importing the WSDL, or specify a custom <see
-         cref="T:System.ServiceModel.Security.IdentityVerifier" />
+        >There are three scenarios in which you must either manually specify the correct UPN/SPN on the client endpoint after importing the WSDL, or specify a custom <see cref="T:System.ServiceModel.Security.IdentityVerifier" />
 
         
 
-         on the client’s <see
-         cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+         on the client’s <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
         
 
@@ -126,18 +115,15 @@
       <list type="ordered">
         <item>
           <para
-            >No service identity is published in WSDL. <see
-             cref="F:System.ServiceModel.Configuration.AuthenticationMode.SspiNegotiatedOverTransport" />
+            >No service identity is published in WSDL. <see cref="F:System.ServiceModel.Configuration.AuthenticationMode.SspiNegotiatedOverTransport" />
 
             
 
-             and HTTPS are used (for example, a <see
-             cref="T:System.ServiceModel.WSHttpBinding" />
+             and HTTPS are used (for example, a <see cref="T:System.ServiceModel.WSHttpBinding" />
 
             
 
-             with SecurityMode = <see
-             cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
+             with SecurityMode = <see cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
 
             
 
@@ -146,23 +132,19 @@
         </item>
         <item>
           <para
-            >DNSservice identity is published in WSDL. <see
-             cref="F:System.ServiceModel.Configuration.AuthenticationMode.SspiNegotiatedOverTransport" />
+            >DNSservice identity is published in WSDL. <see cref="F:System.ServiceModel.Configuration.AuthenticationMode.SspiNegotiatedOverTransport" />
 
             
 
-             and <see
-             cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+             and <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
             
 
-             are used (for example, <see
-             cref="T:System.ServiceModel.NetTcpBinding" />
+             are used (for example, <see cref="T:System.ServiceModel.NetTcpBinding" />
 
             
 
-             with SecurityMode = <see
-             cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
+             with SecurityMode = <see cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
 
             
 
@@ -171,18 +153,15 @@
         </item>
         <item>
           <para
-            > DNS identity is published in WSDL. If <see
-             cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+            > DNS identity is published in WSDL. If <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
             
 
-             is overridden on the client, you must specify a custom <see
-             cref="T:System.ServiceModel.Security.IdentityVerifier" />
+             is overridden on the client, you must specify a custom <see cref="T:System.ServiceModel.Security.IdentityVerifier" />
 
             
 
-             on the client's <see
-             cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+             on the client's <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
             
 
@@ -191,13 +170,11 @@
         </item>
       </list>
       <para
-        >The following code shows how to manually specify the correct UPN/SPN on the client endpoint, as well as how to specify a custom <see
-         cref="T:System.ServiceModel.Security.IdentityVerifier" />
+        >The following code shows how to manually specify the correct UPN/SPN on the client endpoint, as well as how to specify a custom <see cref="T:System.ServiceModel.Security.IdentityVerifier" />
 
         
 
-         on the client's <see
-         cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+         on the client's <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
         
 
@@ -323,8 +300,7 @@ namespace ServiceNamespace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
             
 
@@ -367,13 +343,11 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.serviceModel.Channels.IChannelFactory" />
+            >An <see cref="T:System.serviceModel.Channels.IChannelFactory" />
 
             
 
-             object that represents the channel factory of type <paramref
-             name="TChannel" />
+             object that represents the channel factory of type <paramref name="TChannel" />
 
             
 
@@ -381,19 +355,26 @@ namespace ServiceNamespace
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.serviceModel.Channels.BindingContext" />
+          The <see cref="T:System.serviceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -440,13 +421,11 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.serviceModel.Channels.IChannelListener" />
+            >An <see cref="T:System.serviceModel.Channels.IChannelListener" />
 
             
 
-             object that represents a channel listener of type <paramref
-             name="TChannel" />
+             object that represents a channel listener of type <paramref name="TChannel" />
 
             
 
@@ -454,19 +433,26 @@ namespace ServiceNamespace
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.serviceModel.Channels.BindingContext" />
+          The <see cref="T:System.serviceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -497,16 +483,14 @@ namespace ServiceNamespace
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when opening the client channel factory and provides a custom implementation of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >This method is called when opening the client channel factory and provides a custom implementation of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
              abstract class.</para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -516,8 +500,7 @@ namespace ServiceNamespace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance on the client of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Creates an instance on the client of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -527,8 +510,7 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >An instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -536,12 +518,15 @@ namespace ServiceNamespace
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
@@ -572,16 +557,14 @@ namespace ServiceNamespace
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called when opening the service and provides a custom implementation of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >This method is called when opening the service and provides a custom implementation of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
              abstract class.</para
           >
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -591,8 +574,7 @@ namespace ServiceNamespace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance on the server of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >Creates an instance on the server of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -602,8 +584,7 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+            >An instance of the <see cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
 
             
 
@@ -611,12 +592,15 @@ namespace ServiceNamespace
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
@@ -660,19 +644,26 @@ namespace ServiceNamespace
           <para>true if a channel factory of the specified type can be built; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          The <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -721,19 +712,26 @@ namespace ServiceNamespace
           <para>true if a channel listener of the specified type can be built; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.serviceModel.Channels.BindingContext" />
+          The <see cref="T:System.serviceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="TChannel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -767,8 +765,7 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
+            >A <see cref="T:System.ServiceModel.Channels.SslStreamSecurityBindingElement" />
 
             
 
@@ -807,8 +804,7 @@ namespace ServiceNamespace
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method gets the specified object from the base class or from one of that class's ancestors. The object returned is usually a collection of properties, for example, an object that implements <see
-             cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />
+            >This method gets the specified object from the base class or from one of that class's ancestors. The object returned is usually a collection of properties, for example, an object that implements <see cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />
 
             
 
@@ -818,8 +814,7 @@ namespace ServiceNamespace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a specified object from the <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            >Gets a specified object from the <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -829,13 +824,11 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The  object of type <paramref
-             name="T" />
+            >The  object of type <paramref name="T" />
 
             
 
-            from the <see
-             cref="T:System.ServiceModel.Channels.BindingContext" />
+            from the <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
             
 
@@ -843,19 +836,26 @@ namespace ServiceNamespace
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.BindingContext" />
+          A <see cref="T:System.ServiceModel.Channels.BindingContext" />
 
           
 
           .</param
         >
         <typeparam name="T">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -888,8 +888,7 @@ namespace ServiceNamespace
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlElement" />
+            >Gets the <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -899,8 +898,7 @@ namespace ServiceNamespace
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlElement" />
+            >An <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -978,54 +976,45 @@ namespace ServiceNamespace
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This method writes binding-related statements into the WSDL information exposed by a particular contract and is used by indigo2 to communicate to clients the existence of this custom binding element in the binding stack.</para>
           <para
-            >This method takes two parameters: the <see
-             cref="T:System.ServiceModel.Description.MetadataExporter" />
+            >This method takes two parameters: the <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
             
 
-             and <see
-             cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+             and <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
             
 
-             objects. Use the <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
+             objects. Use the <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
 
             
 
-            , <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
+            , <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
             
 
-            , and <see
-             cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+            , and <see cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
 
             
 
              methods to obtain collections of policy assertions that have already been exported at various scopes. Then use this method to add your own policy assertions to the appropriate collection.</para
           >
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+            >The <see cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
 
             
 
-             property exposes the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             property exposes the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
-             for the endpoint that is being exported. This enables this method to correctly scope their exported policy assertions. For example, security attributes in code can add behaviors to the <see
-             cref="T:System.ServiceModel.Description.ContractDescription" />
+             for the endpoint that is being exported. This enables this method to correctly scope their exported policy assertions. For example, security attributes in code can add behaviors to the <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
             
 
              that indicate where security policy assertions should be added.</para
           >
           <para
-            >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
-             cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+            >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
 
             
 
@@ -1037,24 +1026,30 @@ namespace ServiceNamespace
           <para>Exports a custom policy assertion about bindings.</para>
         </summary>
         <param name="exporter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.MetadataExporter" />
+          The <see cref="T:System.ServiceModel.Description.MetadataExporter" />
 
           
 
            that you can use to modify the exporting process.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+          The <see cref="T:System.ServiceModel.Description.PolicyConversionContext" />
 
           
 

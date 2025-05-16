@@ -22,16 +22,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>SOAP encoding of SOAP Web service messages is described in Section 5 of the SOAP 1.1 specification.</para>
       <para
-        >The <see
-         cref="T:System.Xml.Schema.XmlSchema" />
+        >The <see cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
          class provides a programmatic representation of an XML Schema definition language (XSD) document.</para
       >
       <para
-        >You should not use the <see
-         cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+        >You should not use the <see cref="T:System.Xml.Serialization.SoapSchemaExporter" />
 
         
 
@@ -41,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Populates <see
-         cref="T:System.Xml.Schema.XmlSchema" />
+        >Populates <see cref="T:System.Xml.Schema.XmlSchema" />
 
         
 
@@ -74,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not create an instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+            >You should not create an instance of the <see cref="T:System.Xml.Serialization.SoapSchemaExporter" />
 
             
 
@@ -85,13 +81,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapSchemaExporter" />
 
             
 
-             class, which supplies the collection of <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             class, which supplies the collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -99,12 +93,15 @@
           >
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Xml.Schema.XmlSchema" />
+          A collection of <see cref="T:System.Xml.Schema.XmlSchema" />
 
           
 
@@ -137,8 +134,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not use the <see
-             cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+            >You should not use the <see cref="T:System.Xml.Serialization.SoapSchemaExporter" />
 
             
 
@@ -148,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -157,7 +152,11 @@
           >
         </summary>
         <param name="xmlMembersMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -191,8 +190,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not use the <see
-             cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+            >You should not use the <see cref="T:System.Xml.Serialization.SoapSchemaExporter" />
 
             
 
@@ -202,8 +200,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -211,14 +208,22 @@
           >
         </summary>
         <param name="xmlMembersMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Internal .NET Framework type mappings for the element parts of a WSDL message definition.</param
         >
         <param name="exportEnclosingType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -251,8 +256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should not use the <see
-             cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+            >You should not use the <see cref="T:System.Xml.Serialization.SoapSchemaExporter" />
 
             
 
@@ -262,8 +266,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds to the applicable <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+            >Adds to the applicable <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
@@ -271,7 +274,11 @@
           >
         </summary>
         <param name="xmlTypeMapping">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

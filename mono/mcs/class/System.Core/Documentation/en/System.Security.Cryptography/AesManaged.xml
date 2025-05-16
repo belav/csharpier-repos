@@ -20,8 +20,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The AES algorithm is essentially the Rijndael symmetric algorithm with a fixed block size and iteration count. This class functions the same way as the <see
-         cref="T:System.Security.Cryptography.RijndaelManaged" />
+        >The AES algorithm is essentially the Rijndael symmetric algorithm with a fixed block size and iteration count. This class functions the same way as the <see cref="T:System.Security.Cryptography.RijndaelManaged" />
 
         
 
@@ -29,8 +28,7 @@
       >
       <block subset="none" type="note">
         <para
-          >If the Windows security policy setting for Federal Information Processing Standards (FIPS)-compliant algorithms is enabled, using this algorithm throws a <see
-           cref="T:System.Security.Cryptography.CryptographicException" />
+          >If the Windows security policy setting for Federal Information Processing Standards (FIPS)-compliant algorithms is enabled, using this algorithm throws a <see cref="T:System.Security.Cryptography.CryptographicException" />
 
           
 
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AesManaged" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AesManaged" />
 
             
 
@@ -130,14 +127,22 @@
           <para>A symmetric decryptor object.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret key to use for the symmetric algorithm.</param
         >
         <param name="iv">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,14 +210,22 @@
           <para>A symmetric encryptor object.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The secret key to use for the symmetric algorithm.</param
         >
         <param name="iv">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -393,13 +406,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Security.Cryptography.CipherMode.CFB" />
+            >The <see cref="F:System.Security.Cryptography.CipherMode.CFB" />
 
             
 
-             and <see
-             cref="F:System.Security.Cryptography.CipherMode.OFB" />
+             and <see cref="F:System.Security.Cryptography.CipherMode.OFB" />
 
             
 

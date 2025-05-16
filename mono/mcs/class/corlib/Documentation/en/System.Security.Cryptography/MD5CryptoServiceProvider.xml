@@ -35,23 +35,19 @@
       <para>Hash functions map binary strings of an arbitrary length to small binary strings of a fixed length. A cryptographic hash function has the property that it is computationally infeasible to find two distinct inputs that hash to the same value; that is, hashes of two sets of data should match if the corresponding data also matches. Small changes to the data result in large, unpredictable changes in the hash.</para>
       <block subset="none" type="note">
         <para
-          >Newer hash functions such as the Secure Hash Algorithms SHA-256 and SHA-512 are available. Consider using the <see
-           cref="T:System.Security.Cryptography.SHA256" />
+          >Newer hash functions such as the Secure Hash Algorithms SHA-256 and SHA-512 are available. Consider using the <see cref="T:System.Security.Cryptography.SHA256" />
 
           
 
-           class or the <see
-           cref="T:System.Security.Cryptography.SHA512" />
+           class or the <see cref="T:System.Security.Cryptography.SHA512" />
 
           
 
-           class instead of the <see
-           cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+           class instead of the <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
           
 
-           class. Use <see
-           cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+           class. Use <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
           
 
@@ -59,26 +55,22 @@
         >
       </block>
       <para
-        >The hash size for the <see
-         cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+        >The hash size for the <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
         
 
          class is 128 bits.</para
       >
       <para
-        >The <see
-         cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
+        >The <see cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
 
         
 
-         methods of the <see
-         cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+         methods of the <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
         
 
-         class return the hash as an array of 16 bytes.  Note that some MD5 implementations produce a 32-character, hexadecimal-formatted hash.  To interoperate with such implementations, format the return value of the <see
-         cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
+         class return the hash as an array of 16 bytes.  Note that some MD5 implementations produce a 32-character, hexadecimal-formatted hash.  To interoperate with such implementations, format the return value of the <see cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
 
         
 
@@ -88,8 +80,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Computes the <see
-         cref="T:System.Security.Cryptography.MD5" />
+        >Computes the <see cref="T:System.Security.Cryptography.MD5" />
 
         
 
@@ -117,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
             
 
@@ -149,26 +139,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+            >This method is called by the public Dispose() method and the Finalize method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. Finalize invokes Dispose with <paramref
-             name="disposing" />
+             parameter set to true. Finalize invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
             
 
@@ -178,8 +164,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
             
 
@@ -187,7 +172,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -247,8 +236,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Routes data written to the object into the <see
-             cref="T:System.Security.Cryptography.MD5" />
+            >Routes data written to the object into the <see cref="T:System.Security.Cryptography.MD5" />
 
             
 
@@ -256,21 +244,33 @@
           >
         </summary>
         <param name="rgb">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of data bytes. </param
         >
         <param name="ibStart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -299,8 +299,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the computed <see
-             cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+            >Returns the computed <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
             
 
@@ -334,8 +333,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an instance of <see
-             cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+            >Initializes an instance of <see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
 
             
 

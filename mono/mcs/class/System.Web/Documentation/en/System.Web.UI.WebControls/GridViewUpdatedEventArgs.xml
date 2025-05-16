@@ -14,85 +14,71 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >The <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control raises the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowUpdated" />
+         control raises the <see cref="E:System.Web.UI.WebControls.GridView.RowUpdated" />
 
         
 
-         event when an Update button in the control is clicked, but after the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         event when an Update button in the control is clicked, but after the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
          control updates the record. (An Update button is a button control whose CommandName property is set to "Update".) You can perform a custom routine whenever this event occurs, such as checking the results of an update operation.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
 
         
 
-         object is passed to the event handler, which enables you to determine the number of records that were affected and any exceptions that might have occurred. To determine the number of records that were affected by the update operation, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.AffectedRows" />
+         object is passed to the event handler, which enables you to determine the number of records that were affected and any exceptions that might have occurred. To determine the number of records that were affected by the update operation, use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.AffectedRows" />
 
         
 
-         property. To determine whether any exceptions occurred, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Exception" />
+         property. To determine whether any exceptions occurred, use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Exception" />
 
         
 
-         property. You can also indicate whether the exception was handled in the event handler by setting the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.ExceptionHandled" />
+         property. You can also indicate whether the exception was handled in the event handler by setting the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.ExceptionHandled" />
 
         
 
          property. </para
       >
       <para
-        >To access the key field values for the updated record, use the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Keys" />
+        >To access the key field values for the updated record, use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Keys" />
 
         
 
-         property. You can access the original non-key field values by using the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.OldValues" />
+         property. You can access the original non-key field values by using the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.OldValues" />
 
         
 
-         property. You can access the updated non-key field values by using the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.NewValues" />
+         property. You can access the updated non-key field values by using the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.NewValues" />
 
         
 
          properties.</para
       >
       <para
-        >By default, the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+        >By default, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control returns to read-only mode after an update operation. When you handle an exception that occurred during the update operation, you can keep the <see
-         cref="T:System.Web.UI.WebControls.GridView" />
+         control returns to read-only mode after an update operation. When you handle an exception that occurred during the update operation, you can keep the <see cref="T:System.Web.UI.WebControls.GridView" />
 
         
 
-         control in edit mode by setting the <see
-         cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.KeepInEditMode" />
+         control in edit mode by setting the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.KeepInEditMode" />
 
         
 
          property to true.</para
       >
       <para
-        >For more information about how to handle events, see <format
-         type="text/html">
+        >For more information about how to handle events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -101,13 +87,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
 
         
 
-         class, see the <see
-         cref="M:System.Web.UI.WebControls.GridViewUpdatedEventArgs.#ctor(System.Int32,System.Exception)" />
+         class, see the <see cref="M:System.Web.UI.WebControls.GridViewUpdatedEventArgs.#ctor(System.Int32,System.Exception)" />
 
         
 
@@ -117,8 +101,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.GridView.RowUpdated" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.GridView.RowUpdated" />
 
         
 
@@ -142,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
+            >The following table shows initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
 
             
 
@@ -168,8 +150,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="affectedRows" />
+                  >The value of the <paramref name="affectedRows" />
 
                   
 
@@ -185,13 +166,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Exception" />
+                  >The <see cref="T:System.Exception" />
 
                   
 
-                   object that is contained in the <paramref
-                   name="e" />
+                   object that is contained in the <paramref name="e" />
 
                   
 
@@ -227,8 +206,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.GridViewUpdatedEventArgs" />
 
             
 
@@ -236,14 +214,22 @@
           >
         </summary>
         <param name="affectedRows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of rows that were affected by the update operation.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -267,8 +253,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Because only one record is typically updated, this property usually contains a value of 0 or 1.</para>
           <para
-            >An error can occur during the update operation that does not raise an exception. You can use the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.AffectedRows" />
+            >An error can occur during the update operation that does not raise an exception. You can use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.AffectedRows" />
 
             
 
@@ -296,13 +281,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an exception was raised and you decide to handle the exception in the event handler, set the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.ExceptionHandled" />
+            >If an exception was raised and you decide to handle the exception in the event handler, set the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.ExceptionHandled" />
 
             
 
-             property to true. Otherwise, the exception is thrown again by the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             property to true. Otherwise, the exception is thrown again by the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
@@ -330,18 +313,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an exception is raised during the update operation, use the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.ExceptionHandled" />
+            >When an exception is raised during the update operation, use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.ExceptionHandled" />
 
             
 
-             property to indicate whether you handled the exception in the event handler. When this property is set to true, the exception is considered handled and is not thrown again by the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             property to indicate whether you handled the exception in the event handler. When this property is set to true, the exception is considered handled and is not thrown again by the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control. If this property is set to false, the exception is thrown again. To determine which exception was raised, use the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Exception" />
+             control. If this property is set to false, the exception is thrown again. To determine which exception was raised, use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Exception" />
 
             
 
@@ -369,18 +349,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            >By default, the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control returns to read-only mode after an update operation. To keep the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+             control returns to read-only mode after an update operation. To keep the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
-             control in edit mode, set the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.KeepInEditMode" />
+             control in edit mode, set the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.KeepInEditMode" />
 
             
 
@@ -390,8 +367,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether the <see
-             cref="T:System.Web.UI.WebControls.GridView" />
+            >Gets or sets a value that indicates whether the <see cref="T:System.Web.UI.WebControls.GridView" />
 
             
 
@@ -418,26 +394,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Keys" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Keys" />
 
             
 
              property to access the values of the key field for an updated record. For example, you can use these values to keep a log of updated records.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Keys" />
+            >The <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.Keys" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -445,8 +417,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 
@@ -478,26 +449,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.NewValues" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.NewValues" />
 
             
 
              property to access the new field values for the updated record. For example, you can use these values to keep a log of updated records.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.NewValues" />
+            >The <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.NewValues" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -505,8 +472,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 
@@ -538,26 +504,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.OldValues" />
+            >Use the <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.OldValues" />
 
             
 
              property to access the original field values for the updated record. For example, you can use these values to keep a log of updated records.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.OldValues" />
+            >The <see cref="P:System.Web.UI.WebControls.GridViewUpdatedEventArgs.OldValues" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -565,8 +527,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 

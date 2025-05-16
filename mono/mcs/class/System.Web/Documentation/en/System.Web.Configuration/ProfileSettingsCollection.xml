@@ -35,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see
-         cref="T:System.Web.Configuration.ProfileSettings" />
+        >Contains a collection of <see cref="T:System.Web.Configuration.ProfileSettings" />
 
         
 
@@ -54,18 +53,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HealthMonitoringSection.Profiles" />
+            >The <see cref="P:System.Web.Configuration.HealthMonitoringSection.Profiles" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Configuration.HealthMonitoringSection" />
+             property of the <see cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
             
 
-             class always contains an instance of the <see
-             cref="T:System.Web.Configuration.ProfileSettingsCollection" />
+             class always contains an instance of the <see cref="T:System.Web.Configuration.ProfileSettingsCollection" />
 
             
 
@@ -75,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Configuration.ProfileSettingsCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Configuration.ProfileSettingsCollection" />
 
             
 
@@ -105,8 +100,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The collection must not already contain a <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >The collection must not already contain a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -116,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Adds a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -125,12 +118,15 @@
           >
         </summary>
         <param name="profilesSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          A <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -157,8 +153,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Removes all <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -185,8 +180,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether the collection contains a <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Indicates whether the collection contains a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -196,13 +190,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains a <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >true if the collection contains a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
-             object with the specified <paramref
-             name="name" />
+             object with the specified <paramref name="name" />
 
             
 
@@ -210,12 +202,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The name of a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -264,12 +259,15 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          A <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -295,8 +293,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of the specified <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Returns the index of the specified <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -306,8 +303,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >The index of the specified <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -315,12 +311,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The name of a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -349,8 +348,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
@@ -360,8 +358,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Inserts the specified <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -369,24 +366,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of a <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The index of a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
            object in the collection.</param
         >
         <param name="authorizationSettings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          A <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -480,8 +483,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.BufferModeSettings" />
+            >Removes a <see cref="T:System.Web.Configuration.BufferModeSettings" />
 
             
 
@@ -489,12 +491,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of a <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The name of a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 
@@ -523,8 +528,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Configuration.ProfileSettings" />
+            >Removes a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
             
 
@@ -532,12 +536,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of a <see
-           cref="T:System.Web.Configuration.ProfileSettings" />
+          The index of a <see cref="T:System.Web.Configuration.ProfileSettings" />
 
           
 

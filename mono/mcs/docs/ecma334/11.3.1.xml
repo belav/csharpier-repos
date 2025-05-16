@@ -1,48 +1,55 @@
 <?xml version="1.0"?>
 <clause number="11.3.1" title="Boxing conversions">
   <paragraph
-    >A boxing conversion permits any <non_terminal
-     where="11.1">value-type</non_terminal>
+    >A boxing conversion permits any <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
 
     
 
      to be implicitly converted to the type object or to any <non_terminal
-     where="11.2">interface-type</non_terminal>
+      where="11.2"
+      >interface-type</non_terminal
+    >
 
     
 
-     implemented by the <non_terminal
-     where="11.1">value-type</non_terminal>
+     implemented by the <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
 
     
 
-    . Boxing a value of a <non_terminal
-     where="11.1">value-type</non_terminal>
+    . Boxing a value of a <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
 
     
 
      consists of allocating an object instance and copying the <non_terminal
-     where="11.1">value-type</non_terminal>
+      where="11.1"
+      >value-type</non_terminal
+    >
 
     
 
      value into that instance. </paragraph
   >
   <paragraph
-    >The actual process of boxing a value of a <non_terminal
-     where="11.1">value-type</non_terminal>
+    >The actual process of boxing a value of a <non_terminal where="11.1"
+      >value-type</non_terminal
+    >
 
     
 
      is best explained by imagining the existence of a boxing class for that type. <example
-
-      >[Example: For any <non_terminal
-       where="11.1">value-type</non_terminal>
+      >[Example: For any <non_terminal where="11.1"
+        >value-type</non_terminal
+      >
 
       
 
-       T, the boxing class behaves as if it were declared as follows: <code_example
-      >
+       T, the boxing class behaves as if it were declared as follows: <code_example>
         <![CDATA[
 sealed class T_Box  
 {  
@@ -57,8 +64,7 @@ sealed class T_Box
   </paragraph>
   <paragraph>
     <example
-      >Boxing of a value v of type T now consists of executing the expression new T_Box(v), and returning the resulting instance as a value of type object. Thus, the statements <code_example
-      >
+      >Boxing of a value v of type T now consists of executing the expression new T_Box(v), and returning the resulting instance as a value of type object. Thus, the statements <code_example>
         <![CDATA[
 int i = 123;  
 object box = i;  
@@ -67,8 +73,7 @@ object box = i;
 
       
 
-      conceptually correspond to <code_example
-      >
+      conceptually correspond to <code_example>
         <![CDATA[
 int i = 123;  
 object box = new int_Box(i);  
@@ -82,9 +87,7 @@ object box = new int_Box(i);
   </paragraph>
   <paragraph
     >Boxing classes like T_Box and int_Box above don't actually exist and the dynamic type of a boxed value isn't actually a class type. Instead, a boxed value of type T has the dynamic type T, and a dynamic type check using the is operator can simply reference type T. <example
-
-      >[Example: For example, <code_example
-      >
+      >[Example: For example, <code_example>
         <![CDATA[
 int i = 123;  
 object box = i;  
@@ -101,14 +104,14 @@ if (box is int) {
   </paragraph>
   <paragraph
     >A boxing conversion implies making a copy of the value being boxed. This is different from a conversion of a <non_terminal
-     where="11.2">reference-type</non_terminal>
+      where="11.2"
+      >reference-type</non_terminal
+    >
 
     
 
      to type object, in which the value continues to reference the same instance and simply is regarded as the less derived type object. <example
-
-      >[Example: For example, given the declaration <code_example
-      >
+      >[Example: For example, given the declaration <code_example>
         <![CDATA[
 struct Point  
 {  
@@ -123,8 +126,7 @@ struct Point
 
       
 
-      the following statements <code_example
-      >
+      the following statements <code_example>
         <![CDATA[
 Point p = new Point(10, 10);  
 object box = p;  

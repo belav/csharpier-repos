@@ -17,26 +17,22 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>When creating a indigo1 application that requires authentication and/or authorization of the callers, you can specify that events related to security be recorded for either success, failure, or both. The level of auditing is determined by this enumeration.</para>
       <para
-        >The location of the audit log is specified by setting the <see
-         cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.AuditLogLocation" />
+        >The location of the audit log is specified by setting the <see cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.AuditLogLocation" />
 
         
 
-         property of the <see
-         cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
+         property of the <see cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
 
         
 
-         class to one of the <see
-         cref="T:System.ServiceModel.AuditLogLocation" />
+         class to one of the <see cref="T:System.ServiceModel.AuditLogLocation" />
 
         
 
          values.</para
       >
       <para
-        >For more information about auditing, see <format
-         type="text/html">
+        >For more information about auditing, see <format type="text/html">
           <a href="5633f61c-a3c9-40dd-8070-1c373b66a716">Auditing Security Events</a>
         </format>
 
@@ -45,8 +41,7 @@
         .</para
       >
       <para
-        >You can also specify audit behavior using the <format
-         type="text/html">
+        >You can also specify audit behavior using the <format type="text/html">
           <a href="ba517369-a034-4f8e-a2c4-66517716062b">serviceSecurityAudit element</a>
         </format>
 

@@ -50,13 +50,11 @@
     <typeparam name="T">To be added.</typeparam>
     <summary>
       <para
-        >Implements the <see
-         cref="T:System.Collections.Generic.IList&lt;T&gt;" />
+        >Implements the <see cref="T:System.Collections.Generic.IList&lt;T&gt;" />
 
         
 
-         interface. The size of a List is dynamically increased as required. A List is not guaranteed to be sorted. It is the programmer's responsibility to sort the List prior to performing operations (such as <see
-         langword="BinarySearch" />
+         interface. The size of a List is dynamically increased as required. A List is not guaranteed to be sorted. It is the programmer's responsibility to sort the List prior to performing operations (such as <see langword="BinarySearch" />
 
         
 
@@ -65,39 +63,32 @@
     </summary>
     <remarks>
       <para
-        >Some methods, such as <see
-         langword="Contains" />
+        >Some methods, such as <see langword="Contains" />
 
         
 
-        , <see
-         langword="IndexOf" />
+        , <see langword="IndexOf" />
 
         
 
-        , <see
-         langword="LastIndexOf" />
+        , <see langword="LastIndexOf" />
 
         
 
-        , and <see
-         langword="Remove" />
+        , and <see langword="Remove" />
 
         
 
-        , use an equality comparer for the list elements.  The default equality comparer for type T is determined as follows:  If type T implements <see
-         cref="T:System.IEquatable&lt;T&gt;" />
+        , use an equality comparer for the list elements.  The default equality comparer for type T is determined as follows:  If type T implements <see cref="T:System.IEquatable&lt;T&gt;" />
 
         
 
-         then the default equality comparer is <see
-         cref="M:System.IEquatable;T&gt;.Equals" />
+         then the default equality comparer is <see cref="M:System.IEquatable;T&gt;.Equals" />
         <see langword="(T)" />
 
         
 
-        ; otherwise the default equality comparer is <see
-         cref="M:System.Object.Equals" />
+        ; otherwise the default equality comparer is <see cref="M:System.Object.Equals" />
         <see langword="(Object)" />
 
         
@@ -105,73 +96,60 @@
         .</para
       >
       <para
-        >Some methods, such as <see
-         langword="BinarySearch" />
+        >Some methods, such as <see langword="BinarySearch" />
 
         
 
-         and <see
-         langword="Sort" />
+         and <see langword="Sort" />
 
         
 
-        , use a comparer for the list elements.  Some overloads of these methods take an explicit comparer as argument, while others use a default comparer.  The default comparer for type T is determined as follows:  If type T implements <see
-         cref="I:System.IComparable&lt;T&gt;" />
+        , use a comparer for the list elements.  Some overloads of these methods take an explicit comparer as argument, while others use a default comparer.  The default comparer for type T is determined as follows:  If type T implements <see cref="I:System.IComparable&lt;T&gt;" />
 
         
 
-         then the default comparer is <see
-         cref="M:System.IComparable&lt;T&gt;.CompareTo" />
+         then the default comparer is <see cref="M:System.IComparable&lt;T&gt;.CompareTo" />
         <see langword="(T)" />
 
         
 
-        ; otherwise, if type T implements <see
-         cref="T:System.IComparable" />
+        ; otherwise, if type T implements <see cref="T:System.IComparable" />
 
         
 
-         then the default comparer is <see
-         cref="M:System.IComparable.CompareTo" />
+         then the default comparer is <see cref="M:System.IComparable.CompareTo" />
         <see langword="(Object)" />
 
         
 
-        .  If type T implements neither <see
-         cref="T:System.IComparable&lt;T&gt;" />
+        .  If type T implements neither <see cref="T:System.IComparable&lt;T&gt;" />
 
         
 
-         nor <see
-         cref="T:System.IComparable" />
+         nor <see cref="T:System.IComparable" />
 
         
 
           then there is no default comparer; in this case a comparer or comparison delegate must be given explicitly.</para
       >
       <para
-        >The capacity of a <see
-         cref="T:System.Collections.Generic.List&lt;T&gt;" />
+        >The capacity of a <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
         
 
-         is the number of elements the <see
-         cref="T:System.Collections.Generic.List&lt;T&gt;" />
+         is the number of elements the <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
         
 
-         can hold. As elements are added to a <see
-         cref="T:System.Collections.Generic.List&lt;T&gt;" />
+         can hold. As elements are added to a <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
         
 
-        , the capacity is automatically increased as required.. The capacity can be decreased by calling <see
-         cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
+        , the capacity is automatically increased as required.. The capacity can be decreased by calling <see cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
 
         
 
-         or by setting the <see
-         cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+         or by setting the <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
         
 
@@ -183,31 +161,26 @@
 
         
 
-         accepts <see
-         langword="null" />
+         accepts <see langword="null" />
 
         
 
          as a valid value for reference types and allows duplicate elements.</para
       >
       <para
-        >This type contains a member that is a nested type, called <see
-         langword="Enumerator" />
+        >This type contains a member that is a nested type, called <see langword="Enumerator" />
 
         
 
-        . Although <see
-         langword="Enumerator" />
+        . Although <see langword="Enumerator" />
 
         
 
-         is a member of this type, <see
-         langword="Enumerator" />
+         is a member of this type, <see langword="Enumerator" />
 
         
 
-         is not described here; instead, it is described in its own entry, <see
-         langword="List&lt;T&gt;.Enumerator" />
+         is not described here; instead, it is described in its own entry, <see langword="List&lt;T&gt;.Enumerator" />
 
         
 
@@ -279,8 +252,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -339,13 +311,11 @@
       </Parameters>
       <Docs>
         <param name="item"
-          >The item to add to the end of the list. (<paramref
-           name="item" />
+          >The item to add to the end of the list. (<paramref name="item" />
 
           
 
-           can be <see
-           langword="null" />
+           can be <see langword="null" />
 
           
 
@@ -360,39 +330,33 @@
 
             
 
-             accepts <see
-             cref="null" />
+             accepts <see cref="null" />
 
             
 
              as a valid value for reference types and allows duplicate elements.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >If <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             already equals <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             already equals <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
             , the capacity of the list is increased.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >If <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             is less than <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             is less than <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
-            , this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            , this method is an O(1) operation. If the capacity needs to be increased to accommodate the new element, this method becomes an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -435,47 +399,40 @@
 
             
 
-             accepts <see
-             langword="null" />
+             accepts <see langword="null" />
 
             
 
              as a valid value for reference types and allows duplicate elements.</para
           >
           <para
-            >The order of the elements in the collection is preserved in the <see
-             cref="T:System.Collections.Generic.List&lt;T&gt;" />
+            >The order of the elements in the collection is preserved in the <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
             
 
             .</para
           >
           <para
-            >If the new <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >If the new <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             (the current  <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+             (the current  <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             plus the size of the collection) will be greater than <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             plus the size of the collection) will be greater than <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
             , the capacity of the list is increased.</para
           >
           <para
-            >If the list can accommodate the new elements without increasing <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+            >If the list can accommodate the new elements without increasing <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
-            , this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added and m is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            , this method is an O(n) operation, where n is the number of elements to be added. If the capacity needs to be increased to accommodate the new elements, this method becomes an O(n + m) operation, where n is the number of elements to be added and m is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -488,8 +445,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -548,13 +504,11 @@
       </Parameters>
       <Docs>
         <param name="item"
-          >The element for which to search. (<paramref
-           name="item" />
+          >The element for which to search. (<paramref name="item" />
 
           
 
-           can be <see
-           langword="null" />
+           can be <see langword="null" />
 
           
 
@@ -565,23 +519,19 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of <paramref
-             name="item" />
+            >The zero-based index of <paramref name="item" />
 
             
 
-             in the sorted list, if <paramref
-             name="item" />
+             in the sorted list, if <paramref name="item" />
 
             
 
-             is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref
-             name="item" />
+             is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref name="item" />
 
             
 
-             or, if there is no larger element, the bitwise complement of <see
-             cref="T:System.Collections.Generic.List&lt;T&gt;.Count" />
+             or, if there is no larger element, the bitwise complement of <see cref="T:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -590,13 +540,11 @@
         </returns>
         <remarks>
           <para
-            >This method uses the default comparer for type T to determine the order of list elements.  If there is no default comparer, then the method throws <see
-             cref="T:System.InvalidOperationException" />
+            >This method uses the default comparer for type T to determine the order of list elements.  If there is no default comparer, then the method throws <see cref="T:System.InvalidOperationException" />
 
             
 
-            .  The default comparer for a given element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            .  The default comparer for a given element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
@@ -604,18 +552,15 @@
           >
           <para>The list must already be sorted according to the comparer implementation; otherwise, the result is incorrect.</para>
           <para
-            >Comparing <see
-             langword="null" />
+            >Comparing <see langword="null" />
 
             
 
-             with any reference type is allowed and does not generate an exception when using <see
-             cref="T:System.IComparable&lt;T&gt;" />
+             with any reference type is allowed and does not generate an exception when using <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-            . When sorting, <see
-             langword="null" />
+            . When sorting, <see langword="null" />
 
             
 
@@ -628,13 +573,11 @@
         <since version=".NET 2.0" />
         <exception cref="T:System.InvalidOperationException">
           <para
-            >The default comparer cannot find a <see
-             cref="T:System.IComparable&lt;T&gt;" />
+            >The default comparer cannot find a <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-             or <see
-             cref="T:System.IComparable" />
+             or <see cref="T:System.IComparable" />
 
             
 
@@ -666,13 +609,11 @@
       </Parameters>
       <Docs>
         <param name="item"
-          >The element for which to search. (<paramref
-           name="item" />
+          >The element for which to search. (<paramref name="item" />
 
           
 
-           can be <see
-           langword="null" />
+           can be <see langword="null" />
 
           
 
@@ -680,8 +621,7 @@
         >
         <param name="comparer">
           <para
-            >The <see
-             cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
+            >The <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
 
             
 
@@ -701,23 +641,19 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of <paramref
-             name="item" />
+            >The zero-based index of <paramref name="item" />
 
             
 
-             in the sorted list, if <paramref
-             name="item" />
+             in the sorted list, if <paramref name="item" />
 
             
 
-             is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref
-             name="item" />
+             is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref name="item" />
 
             
 
-             or, if there is no larger element, the bitwise complement of <see
-             cref="T:System.Collections.Generic.List&lt;T&gt;.Count" />
+             or, if there is no larger element, the bitwise complement of <see cref="T:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -726,36 +662,30 @@
         </returns>
         <remarks>
           <para
-            >If the given comparer is non-<see
-             langword="null" />
+            >If the given comparer is non-<see langword="null" />
 
             
 
-            , it is used to determine the order of list elements.  If the given comparer is <see
-             langword="null" />
+            , it is used to determine the order of list elements.  If the given comparer is <see langword="null" />
 
             
 
-            , the default comparer for type T is used; if there is no default comparer, then the method throws <see
-             cref="T:System.InvalidOperationException" />
+            , the default comparer for type T is used; if there is no default comparer, then the method throws <see cref="T:System.InvalidOperationException" />
 
             
 
-            .  The default comparer for a given element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            .  The default comparer for a given element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >The comparer customizes how the elements are compared. For example, if T is <see
-             cref="T:System.String" />
+            >The comparer customizes how the elements are compared. For example, if T is <see cref="T:System.String" />
 
             
 
-            , you can use a <see
-             cref="T:System.Collections.CaseInsensitiveComparer" />
+            , you can use a <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
             
 
@@ -763,26 +693,22 @@
           >
           <para>The list must already be sorted according to the comparer implementation; otherwise, the result is incorrect.</para>
           <para
-            >Comparing <see
-             langword="null" />
+            >Comparing <see langword="null" />
 
             
 
-             with any reference type is allowed and does not generate an exception when using <see
-             cref="T:System.IComparable&lt;T&gt;" />
+             with any reference type is allowed and does not generate an exception when using <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-            . When sorting, <see
-             langword="null" />
+            . When sorting, <see langword="null" />
 
             
 
              is considered to be less than any other object.</para
           >
           <para
-            >If the <see
-             cref="T:System.Collections.Generic.List&lt;T&gt;" />
+            >If the <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
             
 
@@ -798,18 +724,15 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-            , and the default comparer cannot find a <see
-             cref="T:System.IComparable&lt;T&gt;" />
+            , and the default comparer cannot find a <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-             or<see
-             cref="T:System.IComparable" />
+             or<see cref="T:System.IComparable" />
 
             
 
@@ -845,13 +768,11 @@
         <param name="index">The zero-based starting index of the range to search.</param>
         <param name="count">The length of the range to search.</param>
         <param name="item"
-          >The element for which to search. (<paramref
-           name="item" />
+          >The element for which to search. (<paramref name="item" />
 
           
 
-           can be <see
-           langword="null" />
+           can be <see langword="null" />
 
           
 
@@ -859,8 +780,7 @@
         >
         <param name="comparer">
           <para
-            >The <see
-             cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
+            >The <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
 
             
 
@@ -880,28 +800,23 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of <paramref
-             name="item" />
+            >The zero-based index of <paramref name="item" />
 
             
 
-             in the sorted list, if <paramref
-             name="item" />
+             in the sorted list, if <paramref name="item" />
 
             
 
-             is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref
-             name="item" />
+             is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref name="item" />
 
             
 
-             or, if there is no larger element, the bitwise complement of <paramref
-             name="index" />
+             or, if there is no larger element, the bitwise complement of <paramref name="index" />
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
@@ -910,36 +825,30 @@
         </returns>
         <remarks>
           <para
-            >If the given comparer is non-<see
-             langword="null" />
+            >If the given comparer is non-<see langword="null" />
 
             
 
-            , it is used to determine the order of list elements.  If the given comparer is <see
-             langword="null" />
+            , it is used to determine the order of list elements.  If the given comparer is <see langword="null" />
 
             
 
-            , the default comparer for type T is used; if there is no default comparer, then the method throws <see
-             cref="T:System.InvalidOperationException" />
+            , the default comparer for type T is used; if there is no default comparer, then the method throws <see cref="T:System.InvalidOperationException" />
 
             
 
-            .  The default comparer for a given element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            .  The default comparer for a given element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >The comparer customizes how the elements are compared. For example, if T is <see
-             cref="T:System.String" />
+            >The comparer customizes how the elements are compared. For example, if T is <see cref="T:System.String" />
 
             
 
-            , you can use a <see
-             cref="T:System.Collections.CaseInsensitiveComparer" />
+            , you can use a <see cref="T:System.Collections.CaseInsensitiveComparer" />
 
             
 
@@ -947,26 +856,22 @@
           >
           <para>The list must already be sorted according to the comparer implementation; otherwise, the result is incorrect.</para>
           <para
-            >Comparing <see
-             langword="null" />
+            >Comparing <see langword="null" />
 
             
 
-             with any reference type is allowed and does not generate an exception when using <see
-             cref="T:System.IComparable&lt;T&gt;" />
+             with any reference type is allowed and does not generate an exception when using <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-            . When sorting, <see
-             langword="null" />
+            . When sorting, <see langword="null" />
 
             
 
              is considered to be less than any other object.</para
           >
           <para
-            >If the <see
-             cref="T:System.Collections.Generic.List&lt;T&gt;" />
+            >If the <see cref="T:System.Collections.Generic.List&lt;T&gt;" />
 
             
 
@@ -981,34 +886,28 @@
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           is greater than <see
-           cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+           is greater than <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para>
@@ -1016,18 +915,15 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-            , and the default comparer cannot find a <see
-             cref="T:System.IComparable&lt;T&gt;" />
+            , and the default comparer cannot find a <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-             or<see
-             cref="T:System.IComparable" />
+             or<see cref="T:System.IComparable" />
 
             
 
@@ -1053,8 +949,7 @@
         </summary>
         <value>
           <para
-            > A <see
-             cref="T:System.Int32" />
+            > A <see cref="T:System.Int32" />
 
             
 
@@ -1068,8 +963,7 @@
 
             
 
-             is the number of elements that the list is capable of storing without needing to be extended. <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+             is the number of elements that the list is capable of storing without needing to be extended. <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -1080,31 +974,26 @@
 
             
 
-             is always greater than or equal to <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+             is always greater than or equal to <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-            . When <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            . When <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             exceeds <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             exceeds <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
              while adding elements, the capacity is increased.</para
           >
           <para
-            >The capacity can be decreased by calling <see
-             cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
+            >The capacity can be decreased by calling <see cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
 
             
 
-             or by setting the <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             or by setting the <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
@@ -1113,8 +1002,7 @@
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >Attempt to set the capacity to a value less than  <see
-           cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+          >Attempt to set the capacity to a value less than  <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
           
 
@@ -1152,13 +1040,11 @@
           <para>
             <block subset="none" type="note">
               <para
-                >To reset the capacity, call <see
-                 cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
+                >To reset the capacity, call <see cref="M:System.Collections.Generic.List&lt;T&gt;.TrimToSize" />
 
                 
 
-                 or set the <see
-                 cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+                 or set the <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
                 
 
@@ -1189,13 +1075,11 @@
       </Parameters>
       <Docs>
         <param name="item"
-          >The object to locate in the current collection. (<paramref
-           name="item" />
+          >The object to locate in the current collection. (<paramref name="item" />
 
           
 
-           can be <see
-           langword="null" />
+           can be <see langword="null" />
 
           
 
@@ -1210,13 +1094,11 @@
 
             
 
-            , if <paramref
-             name="item" />
+            , if <paramref name="item" />
 
             
 
-             is found in the list; otherwise, <see
-             langword="false" />
+             is found in the list; otherwise, <see langword="false" />
 
             
 
@@ -1225,16 +1107,14 @@
         </returns>
         <remarks>
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.    The default equality comparer for element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.    The default equality comparer for element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -1302,8 +1182,7 @@
         </summary>
         <remarks>
           <para
-            >The elements are copied onto the array (using <see
-             cref="M:System.Array.Copy" />
+            >The elements are copied onto the array (using <see cref="M:System.Array.Copy" />
 
             
 
@@ -1329,8 +1208,7 @@
           >
           <para>-or-</para>
           <para
-            >The number of elements in the list is greater than the number of elements that the destination <paramref
-             name="array" />
+            >The number of elements in the list is greater than the number of elements that the destination <paramref name="array" />
 
             
 
@@ -1345,8 +1223,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1378,8 +1255,7 @@
           >A one-dimensional, zero-based array that is the destination of the elements copied from the list.</param
         >
         <param name="arrayIndex"
-          >The zero-based index in <paramref
-           name="array" />
+          >The zero-based index in <paramref name="array" />
 
           
 
@@ -1390,8 +1266,7 @@
         </summary>
         <remarks>
           <para
-            >The elements are copied onto the array (using <see
-             cref="M:System.Array.Copy" />
+            >The elements are copied onto the array (using <see cref="M:System.Array.Copy" />
 
             
 
@@ -1417,8 +1292,7 @@
           >
           <para>-or-</para>
           <para
-            >The sum of <paramref
-             name="arrayIndex" />
+            >The sum of <paramref name="arrayIndex" />
 
             
 
@@ -1433,8 +1307,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1481,8 +1354,7 @@
           >A one-dimensional, zero-based array that is the destination of the elements copied from the list.</param
         >
         <param name="arrayIndex"
-          >The zero-based index in <paramref
-           name="array" />
+          >The zero-based index in <paramref name="array" />
 
           
 
@@ -1496,8 +1368,7 @@
         </summary>
         <remarks>
           <para
-            >The elements are copied onto the array (using <see
-             cref="M:System.Array.Copy" />
+            >The elements are copied onto the array (using <see cref="M:System.Array.Copy" />
 
             
 
@@ -1519,8 +1390,7 @@
 
             
 
-             is equal to or greater than the <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+             is equal to or greater than the <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -1532,8 +1402,7 @@
 
             
 
-             is equal to or greater than the length of <paramref
-             name="array" />
+             is equal to or greater than the length of <paramref name="array" />
 
             
 
@@ -1541,18 +1410,15 @@
           >
           <para>-or-</para>
           <para
-            >The number of elements from <paramref
-             name="index" />
+            >The number of elements from <paramref name="index" />
 
             
 
-            to the end of the source list is greater than the available space from <paramref
-             name="arrayIndex" />
+            to the end of the source list is greater than the available space from <paramref name="arrayIndex" />
 
             
 
-             to the end of the destination <paramref
-             name="array" />
+             to the end of the destination <paramref name="array" />
 
             
 
@@ -1567,8 +1433,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1576,13 +1441,11 @@
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
           <para>-or-</para>
           <para>
             <paramref name="array" />
@@ -1600,13 +1463,11 @@
              is less than zero.</para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
         </exception>
       </Docs>
     </Member>
@@ -1664,8 +1525,7 @@
 
             
 
-             if the List contains one or more elements that match the conditions defined by the specified predicate; otherwise, <see
-             langword="false" />
+             if the List contains one or more elements that match the conditions defined by the specified predicate; otherwise, <see langword="false" />
 
             
 
@@ -1674,8 +1534,7 @@
         </returns>
         <remarks>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -1689,8 +1548,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1726,8 +1584,7 @@
         </returns>
         <remarks>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -1741,8 +1598,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1783,8 +1639,7 @@
         </returns>
         <remarks>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -1798,8 +1653,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1832,8 +1686,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref
-             name="match" />
+            >The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref name="match" />
 
             
 
@@ -1843,8 +1696,7 @@
         <remarks>
           <para>The List is searched forward starting at the first element and ending at the last element.</para>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -1858,8 +1710,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1897,8 +1748,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref
-             name="match" />
+            >The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref name="match" />
 
             
 
@@ -1907,16 +1757,14 @@
         </returns>
         <remarks>
           <para
-            >The List is searched forward starting at <paramref
-             name="index" />
+            >The List is searched forward starting at <paramref name="index" />
 
             
 
              and ending at the last element.</para
           >
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -1930,8 +1778,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -1944,8 +1791,7 @@
 
             
 
-             is less than 0 or greater than  or equal to <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is less than 0 or greater than  or equal to <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -1985,8 +1831,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref
-             name="match" />
+            >The zero-based index of the first occurrence of an element that matches the conditions defined by <paramref name="match" />
 
             
 
@@ -1995,21 +1840,18 @@
         </returns>
         <remarks>
           <para
-            >The List is searched forward starting at <paramref
-             name="index" />
+            >The List is searched forward starting at <paramref name="index" />
 
             
 
-             and ending after <paramref
-             name="count" />
+             and ending after <paramref name="count" />
 
             
 
              elements.</para
           >
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -2023,8 +1865,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2032,34 +1873,28 @@
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="index" />
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2095,8 +1930,7 @@
         </returns>
         <remarks>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -2110,8 +1944,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2144,8 +1977,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref
-             name="match" />
+            >The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref name="match" />
 
             
 
@@ -2155,8 +1987,7 @@
         <remarks>
           <para>The List is searched backward starting at the last element and ending at the first element.</para>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -2170,8 +2001,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2209,8 +2039,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref
-             name="match" />
+            >The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref name="match" />
 
             
 
@@ -2219,16 +2048,14 @@
         </returns>
         <remarks>
           <para
-            >The List is searched backward starting at <paramref
-             name="index" />
+            >The List is searched backward starting at <paramref name="index" />
 
             
 
              and ending at the first element.</para
           >
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -2242,8 +2069,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2256,8 +2082,7 @@
 
             
 
-             is less than 0 or greater than or equal to <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is less than 0 or greater than or equal to <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2297,8 +2122,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref
-             name="match" />
+            >The zero-based index of the last occurrence of an element that matches the conditions defined by <paramref name="match" />
 
             
 
@@ -2307,21 +2131,18 @@
         </returns>
         <remarks>
           <para
-            >The List is searched backward starting at <paramref
-             name="index" />
+            >The List is searched backward starting at <paramref name="index" />
 
             
 
-             and ending after <paramref
-             name="count" />
+             and ending after <paramref name="count" />
 
             
 
              elements.</para
           >
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -2335,8 +2156,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2349,29 +2169,25 @@
 
             
 
-             is less than zero, or greater than or equal to <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is less than zero, or greater than or equal to <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
             .</para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="count" />
 
             
 
-             is greater than <paramref
-             name="index" />
+             is greater than <paramref name="index" />
 
             
 
@@ -2404,8 +2220,7 @@
         </summary>
         <remarks>
           <para
-            >The action is a delegate  that performs an action on the object passed to it.  The elements of the current List are individually passed to the action delegate, sequentially, in index order, and on the same thread as that used to call <see
-             langword="ForEach" />
+            >The action is a delegate  that performs an action on the object passed to it.  The elements of the current List are individually passed to the action delegate, sequentially, in index order, and on the same thread as that used to call <see langword="ForEach" />
 
             
 
@@ -2419,8 +2234,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -2457,8 +2271,7 @@
         <remarks>
           <para>
             <block subset="none" type="usage"
-              >For a detailed description regarding the use of an enumerator, see <see
-               cref="T:System.Collections.Generic.IEnumerator&lt;T&gt;" />
+              >For a detailed description regarding the use of an enumerator, see <see cref="T:System.Collections.Generic.IEnumerator&lt;T&gt;" />
 
               
 
@@ -2509,13 +2322,11 @@
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2523,21 +2334,17 @@
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
         </exception>
       </Docs>
     </Member>
@@ -2565,8 +2372,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the first occurrence of  <paramref
-             name="item" />
+            >The zero-based index of the first occurrence of  <paramref name="item" />
 
             
 
@@ -2576,21 +2382,18 @@
         <remarks>
           <para>The list is searched forward starting at the first element and ending at the last element.</para>
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method performs a linear search; therefore, the average number of comparisons is proportional to <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method performs a linear search; therefore, the average number of comparisons is proportional to <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-            . That is, this method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            . That is, this method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2626,8 +2429,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="item" />
+            >The zero-based index of the first occurrence of <paramref name="item" />
 
             
 
@@ -2636,24 +2438,21 @@
         </returns>
         <remarks>
           <para
-            >The list is searched forward starting at <paramref
-             name="index" />
+            >The list is searched forward starting at <paramref name="index" />
 
             
 
              and ending at the last element.</para
           >
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is the number of elements from <paramref
-             name="index" />
+            >This method is an O(n) operation, where n is the number of elements from <paramref name="index" />
 
             
 
@@ -2667,8 +2466,7 @@
 
             
 
-             is less than zero or greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is less than zero or greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2705,8 +2503,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the first occurrence of <paramref
-             name="item" />
+            >The zero-based index of the first occurrence of <paramref name="item" />
 
             
 
@@ -2715,39 +2512,33 @@
         </returns>
         <remarks>
           <para
-            >The list is searched forward starting at <paramref
-             name="index" />
+            >The list is searched forward starting at <paramref name="index" />
 
             
 
-             and ending at <paramref
-             name="index" />
+             and ending at <paramref name="index" />
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
-             - 1, and searching at most <paramref
-             name="count" />
+             - 1, and searching at most <paramref name="count" />
 
             
 
              terms.</para
           >
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class  <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class  <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is <paramref
-             name="count" />
+            >This method is an O(n) operation, where n is <paramref name="count" />
 
             
 
@@ -2756,34 +2547,28 @@
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="index" />
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2812,21 +2597,18 @@
       </Parameters>
       <Docs>
         <param name="index"
-          >The zero-based index at which <paramref
-           name="item" />
+          >The zero-based index at which <paramref name="item" />
 
           
 
            is to be inserted.</param
         >
         <param name="item"
-          >The item to insert. (<paramref
-           name="item" />
+          >The item to insert. (<paramref name="item" />
 
           
 
-           can be <see
-           langword="null" />
+           can be <see langword="null" />
 
           
 
@@ -2841,39 +2623,33 @@
 
             
 
-             accepts <see
-             langword="null" />
+             accepts <see langword="null" />
 
             
 
              as a valid value for reference types and allows duplicate elements.</para
           >
           <para
-            >If <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >If <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             already equals <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             already equals <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
             , the capacity of the List is increased.</para
           >
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is equal to <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+             is equal to <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-            , <paramref
-             name="item" />
+            , <paramref name="item" />
 
             
 
@@ -2882,21 +2658,18 @@
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="index" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2931,18 +2704,15 @@
           >The zero-based index at which the new elements should be inserted.</param
         >
         <param name="collection"
-          >The collection whose elements should be inserted into the list. (<paramref
-           name="collection" />
+          >The collection whose elements should be inserted into the list. (<paramref name="collection" />
 
           
 
-           itself cannot be <see
-           langword="null" />
+           itself cannot be <see langword="null" />
 
           
 
-          , but the collection can contain elements that are <see
-           langword="null" />
+          , but the collection can contain elements that are <see langword="null" />
 
           
 
@@ -2957,34 +2727,29 @@
 
             
 
-             accepts <see
-             langword="null" />
+             accepts <see langword="null" />
 
             
 
              as a valid value for reference types and allows duplicate elements.</para
           >
           <para
-            >If the new value of <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >If the new value of <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
-             will be greater than <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
+             will be greater than <see cref="P:System.Collections.Generic.List&lt;T&gt;.Capacity" />
 
             
 
             , the capacity of the List is increased.</para
           >
           <para
-            >If <paramref
-             name="index" />
+            >If <paramref name="index" />
 
             
 
-             is equal to <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+             is equal to <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -2999,8 +2764,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -3008,21 +2772,18 @@
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than zero,</para
-          >
+             is less than zero,</para>
           <para>-or-</para>
           <para>
             <paramref name="index" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3058,21 +2819,18 @@
         <remarks>To be added.</remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="index" />
 
             
 
-             &gt;= <see
-             cref="P:System.Collections.Generics.List&lt;T&gt;.Count" />
+             &gt;= <see cref="P:System.Collections.Generics.List&lt;T&gt;.Count" />
 
             
 
@@ -3105,8 +2863,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the last occurrence of <paramref
-             name="item" />
+            >The zero-based index of the last occurrence of <paramref name="item" />
 
             
 
@@ -3116,16 +2873,14 @@
         <remarks>
           <para>The list is searched backward starting at the last element and ending at the first element.</para>
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3161,8 +2916,7 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the last occurrence of <paramref
-             name="item" />
+            >The zero-based index of the last occurrence of <paramref name="item" />
 
             
 
@@ -3171,24 +2925,21 @@
         </returns>
         <remarks>
           <para
-            >The list is searched backward starting at <paramref
-             name="index" />
+            >The list is searched backward starting at <paramref name="index" />
 
             
 
              and ending at the first element.</para
           >
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is the number of elements from the beginning of the list to <paramref
-             name="index" />
+            >This method is an O(n) operation, where n is the number of elements from the beginning of the list to <paramref name="index" />
 
             
 
@@ -3202,8 +2953,7 @@
 
             
 
-             is less than zero or greater than or equal to <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is less than zero or greater than or equal to <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3243,18 +2993,15 @@
         </summary>
         <returns>
           <para
-            >The zero-based index of the last occurrence of <paramref
-             name="item" />
+            >The zero-based index of the last occurrence of <paramref name="item" />
 
             
 
-             within the range of elements in the list that contains <paramref
-             name="count" />
+             within the range of elements in the list that contains <paramref name="count" />
 
             
 
-             number of elements and ends at <paramref
-             name="index" />
+             number of elements and ends at <paramref name="index" />
 
             
 
@@ -3263,29 +3010,25 @@
         </returns>
         <remarks>
           <para
-            >The list is searched backward starting at <paramref
-             name="index" />
+            >The list is searched backward starting at <paramref name="index" />
 
             
 
-             and ending after <paramref
-             name="count" />
+             and ending after <paramref name="count" />
 
             
 
              elements.</para
           >
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is <paramref
-             name="count" />
+            >This method is an O(n) operation, where n is <paramref name="count" />
 
             
 
@@ -3299,29 +3042,25 @@
 
             
 
-             is less than zero, or greater than or equal to <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is less than zero, or greater than or equal to <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
             .</para
           >
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="count" />
 
             
 
-             is greater than <paramref
-             name="index" />
+             is greater than <paramref name="index" />
 
             
 
@@ -3358,13 +3097,11 @@
 
             
 
-             if <paramref
-             name="item" />
+             if <paramref name="item" />
 
             
 
-             is successfully removed; otherwise, <see
-             langword="false" />
+             is successfully removed; otherwise, <see langword="false" />
 
             
 
@@ -3373,16 +3110,14 @@
         </returns>
         <remarks>
           <para
-            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see
-             cref="List&lt;T&gt;" />
+            >This method uses the default equality comparer for type T to determine equality of list elements.  The default equality comparer for element type T is defined in the Description section of this (class <see cref="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >This method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3419,16 +3154,14 @@
         </returns>
         <remarks>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
              if the object passed to it matches the conditions defined in the delegate.  The elements of the current List are individually passed to the predicate delegate, and the elements that match the conditions are removed from the List.</para
           >
           <para
-            >This method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3442,8 +3175,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -3477,8 +3209,7 @@
         <remarks>
           <para>The item is removed and all the elements following it in the List have their indexes reduced by 1.</para>
           <para
-            >This method is an O(n) operation, where n is <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method is an O(n) operation, where n is <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3487,21 +3218,18 @@
         </remarks>
         <since version=".NET 2.0" />
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than 0.</para
-          >
+             is less than 0.</para>
           <para>-or-</para>
           <para>
             <paramref name="index" />
 
             
 
-             is equal to or greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is equal to or greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3538,8 +3266,7 @@
         </summary>
         <remarks>
           <para
-            >The items are removed and all the elements following them in the List have their indexes reduced by <paramref
-             name="count" />
+            >The items are removed and all the elements following them in the List have their indexes reduced by <paramref name="count" />
 
             
 
@@ -3553,13 +3280,11 @@
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3567,21 +3292,17 @@
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
         </exception>
       </Docs>
     </Member>
@@ -3606,8 +3327,7 @@
         </summary>
         <remarks>
           <para
-            >This method uses <see
-             cref="M:System.Array.Reverse" />
+            >This method uses <see cref="M:System.Array.Reverse" />
             <see langword="(System.Array)" />
 
             
@@ -3615,8 +3335,7 @@
               to reverse the order of the elements.</para
           >
           <para
-            >This method is an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This method is an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3655,8 +3374,7 @@
         <remarks>
           <para>This method reverses the order of the elements in the specified element range</para>
           <para
-            >This method is an O(n) operation, where n is <paramref
-             name="count" />
+            >This method is an O(n) operation, where n is <paramref name="count" />
 
             
 
@@ -3670,13 +3388,11 @@
 
             
 
-             + <paramref
-             name="count" />
+             + <paramref name="count" />
 
             
 
-             is greater than <see
-             cref="System.Collections.Generic.List&lt;T&gt;.Count" />
+             is greater than <see cref="System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -3684,21 +3400,17 @@
           >
         </exception>
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
         </exception>
       </Docs>
     </Member>
@@ -3723,21 +3435,18 @@
         </summary>
         <remarks>
           <para
-            >This method uses the default comparer for type T to determine the order of list elements.   If there is no default comparer, then the method throws <see
-             cref="T:System.InvalidOperationException" />
+            >This method uses the default comparer for type T to determine the order of list elements.   If there is no default comparer, then the method throws <see cref="T:System.InvalidOperationException" />
 
             
 
-            .  The default comparer for a given element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            .  The default comparer for a given element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >At worst, this operation is O(n<sup
-            >2</sup>
+            >At worst, this operation is O(n<sup>2</sup>
 
             
 
@@ -3747,13 +3456,11 @@
         <since version=".NET 2.0" />
         <exception cref="T:System.InvalidOperationException">
           <para
-            >The default comparer cannot find a <see
-             cref="T:System.IComparable&lt;T&gt;" />
+            >The default comparer cannot find a <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-             or <see
-             cref="T:System.IComparable" />
+             or <see cref="T:System.IComparable" />
 
             
 
@@ -3785,8 +3492,7 @@
       <Docs>
         <param name="comparer">
           <para
-            >The <see
-             cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
+            >The <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
 
             
 
@@ -3806,31 +3512,26 @@
         </summary>
         <remarks>
           <para
-            >If the given comparer is non-<see
-             langword="null" />
+            >If the given comparer is non-<see langword="null" />
 
             
 
-            , it is used to determine the order of list elements.  If the given comparer is <see
-             langword="null" />
+            , it is used to determine the order of list elements.  If the given comparer is <see langword="null" />
 
             
 
-            , the default comparer for type T is used; if there is no default comparer, then the method throws <see
-             cref="T:System.InvalidOperationException" />
+            , the default comparer for type T is used; if there is no default comparer, then the method throws <see cref="T:System.InvalidOperationException" />
 
             
 
-            .  The default comparer for a given element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            .  The default comparer for a given element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >At worst, this operation is O(n<sup
-            >2</sup>
+            >At worst, this operation is O(n<sup>2</sup>
 
             
 
@@ -3844,18 +3545,15 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-            , and the default comparer cannot find a <see
-             cref="T:System.IComparable&lt;T&gt;" />
+            , and the default comparer cannot find a <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-             or <see
-             cref="T:System.IComparable" />
+             or <see cref="T:System.IComparable" />
 
             
 
@@ -3890,8 +3588,7 @@
         </summary>
         <remarks>
           <para
-            >At worst, this operation is O(n<sup
-            >2</sup>
+            >At worst, this operation is O(n<sup>2</sup>
 
             
 
@@ -3904,8 +3601,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -3940,8 +3636,7 @@
         <param name="count">The number of elements to sort.</param>
         <param name="comparer">
           <para
-            >The <see
-             cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
+            >The <see cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
 
             
 
@@ -3961,31 +3656,26 @@
         </summary>
         <remarks>
           <para
-            >If the given comparer is non-<see
-             langword="null" />
+            >If the given comparer is non-<see langword="null" />
 
             
 
-            , it is used to determine the order of list elements.  If the given comparer is <see
-             langword="null" />
+            , it is used to determine the order of list elements.  If the given comparer is <see langword="null" />
 
             
 
-            , the default comparer for type T is used; if there is no default comparer, then the method throws <see
-             cref="T:System.InvalidOperationException" />
+            , the default comparer for type T is used; if there is no default comparer, then the method throws <see cref="T:System.InvalidOperationException" />
 
             
 
-            .  The default comparer for a given element type T is defined in the Description section of this (class <see
-             langword="List&lt;T&gt;" />
+            .  The default comparer for a given element type T is defined in the Description section of this (class <see langword="List&lt;T&gt;" />
 
             
 
             ) specification.</para
           >
           <para
-            >At worst, this operation is O(n<sup
-            >2</sup>
+            >At worst, this operation is O(n<sup>2</sup>
 
             
 
@@ -3998,34 +3688,28 @@
 
           
 
-           + <paramref
-           name="count" />
+           + <paramref name="count" />
 
           
 
-           is greater than <see
-           cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+           is greater than <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
           
 
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
-          <para>
-            <paramref name="index" />
+          <para><paramref name="index" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
           <para>-or-</para>
-          <para>
-            <paramref name="count" />
+          <para><paramref name="count" />
 
             
 
-             is less than zero.</para
-          >
+             is less than zero.</para>
         </exception>
         <exception cref="T:System.InvalidOperationException">
           <para>
@@ -4033,18 +3717,15 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-            , and the default comparer cannot find a <see
-             cref="T:System.IComparable&lt;T&gt;" />
+            , and the default comparer cannot find a <see cref="T:System.IComparable&lt;T&gt;" />
 
             
 
-             or <see
-             cref="T:System.IComparable" />
+             or <see cref="T:System.IComparable" />
 
             
 
@@ -4073,8 +3754,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.Generic.ICollection&lt;T&gt;" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.Generic.ICollection&lt;T&gt;" />
 
             
 
@@ -4082,8 +3762,7 @@
           >
           <block subset="none" type="note">
             <para
-              >For more information, see <see
-               cref="P:System.Collections.Generic.ICollection&lt;T&gt;.IsReadOnly" />
+              >For more information, see <see cref="P:System.Collections.Generic.ICollection&lt;T&gt;.IsReadOnly" />
 
               
 
@@ -4117,8 +3796,7 @@
       <Docs>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
+            >This method is implemented to support the <see cref="T:System.Collections.Generic.IEnumerable&lt;T&gt;" />
 
             
 
@@ -4156,8 +3834,7 @@
         <param name="arrayIndex">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.ICollection" />
+            >This method is implemented to support the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -4188,8 +3865,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.ICollection " />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.ICollection " />
 
             
 
@@ -4221,8 +3897,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.ICollection " />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.ICollection " />
 
             
 
@@ -4255,8 +3930,7 @@
       <Docs>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IEnumerable" />
+            >This method is implemented to support the <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -4289,8 +3963,7 @@
         <param name="item">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This method is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4323,8 +3996,7 @@
         <param name="item">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This method is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4357,8 +4029,7 @@
         <param name="item">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This method is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4393,8 +4064,7 @@
         <param name="item">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This method is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4422,8 +4092,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4452,8 +4121,7 @@
       <Docs>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4489,8 +4157,7 @@
         <param name="index">To be added.</param>
         <summary>
           <para
-            >This read-only property is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This read-only property is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4523,8 +4190,7 @@
         <param name="item">To be added.</param>
         <summary>
           <para
-            >This method is implemented to support the <see
-             cref="T:System.Collections.IList" />
+            >This method is implemented to support the <see cref="T:System.Collections.IList" />
 
             
 
@@ -4559,8 +4225,7 @@
         </returns>
         <remarks>
           <para
-            >This an O(n) operation, where n is <see
-             cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
+            >This an O(n) operation, where n is <see cref="P:System.Collections.Generic.List&lt;T&gt;.Count" />
 
             
 
@@ -4593,13 +4258,11 @@
           <para>This method can be used to suggest a collection's memory overhead be minimized, e.g., if no new elements are expected to be added to the collection.</para>
           <para>
             <block subset="none" type="note"
-              >To reset a list to its initial state, call the <see
-               cref="M:System.Collections.Generic.List.Clear " />
+              >To reset a list to its initial state, call the <see cref="M:System.Collections.Generic.List.Clear " />
 
               
 
-               method before calling <see
-               cref="M:System.Collections.Generic.List.TrimExcess" />
+               method before calling <see cref="M:System.Collections.Generic.List.TrimExcess" />
 
               
 
@@ -4640,8 +4303,7 @@
 
             
 
-            , if every element in the List matches the conditions defined by the specified predicate; otherwise, <see
-             langword="false" />
+            , if every element in the List matches the conditions defined by the specified predicate; otherwise, <see langword="false" />
 
             
 
@@ -4650,8 +4312,7 @@
         </returns>
         <remarks>
           <para
-            >The predicate is a delegate that returns <see
-             langword="true" />
+            >The predicate is a delegate that returns <see langword="true" />
 
             
 
@@ -4665,8 +4326,7 @@
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 

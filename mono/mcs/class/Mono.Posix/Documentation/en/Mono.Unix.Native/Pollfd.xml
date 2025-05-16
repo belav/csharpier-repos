@@ -28,8 +28,7 @@
   <Docs>
     <summary
       >Polling information for 
-    <see
-       cref="M:Mono.Unix.Native.Syscall.poll" />
+    <see cref="M:Mono.Unix.Native.Syscall.poll" />
 
       
 
@@ -129,8 +128,7 @@
       <Docs>
         <summary>File descriptor.</summary>
         <remarks
-          >File descriptor to poll.  If fd is equal to -1 then <see
-           cref="F:Mono.Unix.Native.Pollfd.revents" />
+          >File descriptor to poll.  If fd is equal to -1 then <see cref="F:Mono.Unix.Native.Pollfd.revents" />
 
           
 

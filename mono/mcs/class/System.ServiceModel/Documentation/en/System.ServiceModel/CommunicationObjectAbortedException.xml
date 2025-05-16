@@ -27,18 +27,15 @@
 
         
 
-         is a derived class of <see
-         cref="T:System.ServiceModel.CommunicationException" />
+         is a derived class of <see cref="T:System.ServiceModel.CommunicationException" />
 
         
 
-         and can occur in correct applications. Because typically the code that calls the <see
-         cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+         and can occur in correct applications. Because typically the code that calls the <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />
 
         
 
-         method reports the error condition that caused the call to <see
-         cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+         method reports the error condition that caused the call to <see cref="M:System.ServiceModel.ICommunicationObject.Abort" />
 
         
 
@@ -48,8 +45,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The exception that is thrown when the call is to an <see
-         cref="T:System.ServiceModel.ICommunicationObject" />
+        >The exception that is thrown when the call is to an <see cref="T:System.ServiceModel.ICommunicationObject" />
 
         
 
@@ -74,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 
@@ -105,13 +100,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 
-             using the specified <paramref
-             name="message" />
+             using the specified <paramref name="message" />
 
             
 
@@ -121,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 
@@ -156,13 +148,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 
-             class used to deserialize data into a <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+             class used to deserialize data into a <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 
@@ -170,24 +160,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -218,18 +214,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+            >Creates a new <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 
-             using the specified <paramref
-             name="message" />
+             using the specified <paramref name="message" />
 
             
 
-             and <paramref
-             name="innerException" />
+             and <paramref name="innerException" />
 
             
 
@@ -239,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.CommunicationObjectAbortedException" />
 
             
 

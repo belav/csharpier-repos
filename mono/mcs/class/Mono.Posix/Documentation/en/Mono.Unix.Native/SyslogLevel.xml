@@ -21,8 +21,7 @@
   <Docs>
     <summary>System logging levels.</summary>
     <remarks
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.syslog" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.syslog" />
       <paramref name="level" />
 
       

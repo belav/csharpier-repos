@@ -6,8 +6,7 @@
   <members>
     <member name="T:Test">
       <returns
-        >A <see
-         cref="T:System.Collections.Generic.IList`1" />
+        >A <see cref="T:System.Collections.Generic.IList`1" />
 
         
 

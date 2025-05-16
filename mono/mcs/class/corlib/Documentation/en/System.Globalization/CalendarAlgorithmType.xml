@@ -23,51 +23,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A date calculation for a particular calendar depends on whether the calendar is solar-based, lunar-based, or lunisolar-based. For example, the <see
-         cref="T:System.Globalization.GregorianCalendar" />
+        >A date calculation for a particular calendar depends on whether the calendar is solar-based, lunar-based, or lunisolar-based. For example, the <see cref="T:System.Globalization.GregorianCalendar" />
 
         
 
-        , <see
-         cref="T:System.Globalization.JapaneseCalendar" />
+        , <see cref="T:System.Globalization.JapaneseCalendar" />
 
         
 
-        , and <see
-         cref="T:System.Globalization.JulianCalendar" />
+        , and <see cref="T:System.Globalization.JulianCalendar" />
 
         
 
-         classes are solar-based, the <see
-         cref="T:System.Globalization.HijriCalendar" />
+         classes are solar-based, the <see cref="T:System.Globalization.HijriCalendar" />
 
         
 
-         and <see
-         cref="T:System.Globalization.UmAlQuraCalendar" />
+         and <see cref="T:System.Globalization.UmAlQuraCalendar" />
 
         
 
-         classes are lunar-based,.and the <see
-         cref="T:System.Globalization.HebrewCalendar" />
+         classes are lunar-based,.and the <see cref="T:System.Globalization.HebrewCalendar" />
 
         
 
-         and <see
-         cref="T:System.Globalization.JapaneseLunisolarCalendar" />
+         and <see cref="T:System.Globalization.JapaneseLunisolarCalendar" />
 
         
 
          classes are lunisolar-based, thus using solar calculations for the year and lunar calculations for the month and day.</para
       >
       <para
-        >A <see
-         cref="T:System.Globalization.CalendarAlgorithmType" />
+        >A <see cref="T:System.Globalization.CalendarAlgorithmType" />
 
         
 
-         value, which is returned by a calendar member such as the <see
-         cref="P:System.Globalization.Calendar.AlgorithmType" />
+         value, which is returned by a calendar member such as the <see cref="P:System.Globalization.Calendar.AlgorithmType" />
 
         
 

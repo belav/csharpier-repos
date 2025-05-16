@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The implementation of the derived class is responsible for ordering the elements into key-value pairs in whatever manner is appropriate. For more information, see <format
-         type="text/html">
+        >The implementation of the derived class is responsible for ordering the elements into key-value pairs in whatever manner is appropriate. For more information, see <format type="text/html">
           <a href="96153688-9a01-47c4-8430-909cee9a2887">Custom Partitioners for PLINQ and TPL</a>
         </format>
 
@@ -68,8 +67,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -83,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Called from constructors in derived classes to initialize the <see
-             cref="T:System.Collections.Concurrent.OrderablePartitioner`1" />
+            >Called from constructors in derived classes to initialize the <see cref="T:System.Collections.Concurrent.OrderablePartitioner`1" />
 
             
 
@@ -92,21 +89,33 @@
           >
         </summary>
         <param name="keysOrderedInEachPartition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether the elements in each partition are yielded in the order of increasing keys.</param
         >
         <param name="keysOrderedAcrossPartitions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Indicates whether elements in an earlier partition always come before elements in a later partition. If true, each element in partition 0 has a smaller order key than any element in partition 1, each element in partition 1 has a smaller order key than any element in partition 2, and so on.</param
         >
         <param name="keysNormalized">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -135,42 +144,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The returned object implements the <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            > The returned object implements the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             interface. Calling <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+             interface. Calling <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
              on the object creates another partition over the sequence.</para
           >
           <para
-            >  The default implementation provides the same behavior as <see
-             cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetOrderableDynamicPartitions" />
+            >  The default implementation provides the same behavior as <see cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetOrderableDynamicPartitions" />
 
             
 
              except that the returned set of partitions does not provide the keys for the elements.</para
           >
           <para
-            >  The <see
-             cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetDynamicPartitions" />
+            >  The <see cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetDynamicPartitions" />
 
             
 
-             method is only supported if the <see
-             cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+             method is only supported if the <see cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
 
             
 
              property returns true.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -212,13 +215,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            > The returned object implements the <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            > The returned object implements the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             interface. Calling <see
-             cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+             interface. Calling <see cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
 
             
 
@@ -226,21 +227,18 @@
           >
           <para>  Each partition is represented as an enumerator over key-value pairs. The value in the pair is the element itself, and the key is an integer which determines the relative ordering of this element against other elements.</para>
           <para
-            >  The <see
-             cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetOrderableDynamicPartitions" />
+            >  The <see cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetOrderableDynamicPartitions" />
 
             
 
-             method is only supported if the <see
-             cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+             method is only supported if the <see cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
 
             
 
              property returns true.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -286,8 +284,7 @@
           <para>Each partition is represented as an enumerator over key-value pairs.</para>
           <para> The value of the pair is the element itself, and the key is an integer which determines the relative ordering of this element against other elements in the data source.</para>
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -305,8 +302,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list containing <paramref
-             name="partitionCount" />
+            >A list containing <paramref name="partitionCount" />
 
             
 
@@ -314,7 +310,11 @@
           >
         </returns>
         <param name="partitionCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -345,16 +345,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation provides the same behavior as <see
-             cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetOrderablePartitions(System.Int32)" />
+            >The default implementation provides the same behavior as <see cref="M:System.Collections.Concurrent.OrderablePartitioner`1.GetOrderablePartitions(System.Int32)" />
 
             
 
              except that the returned set of partitions does not provide the keys for the elements.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -372,8 +370,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list containing <paramref
-             name="partitionCount" />
+            >A list containing <paramref name="partitionCount" />
 
             
 
@@ -381,7 +378,11 @@
           >
         </returns>
         <param name="partitionCount">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -404,16 +405,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.Concurrent.OrderablePartitioner`1.KeysNormalized" />
+            >If <see cref="P:System.Collections.Concurrent.OrderablePartitioner`1.KeysNormalized" />
 
             
 
              returns true, all order keys are distinct integers in the range [0 .. numberOfElements-1]. If the property returns false, order keys must still be distinct, but only their relative order is considered, not their absolute values.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -448,16 +447,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <see
-             cref="P:System.Collections.Concurrent.OrderablePartitioner`1.KeysOrderedAcrossPartitions" />
+            >If <see cref="P:System.Collections.Concurrent.OrderablePartitioner`1.KeysOrderedAcrossPartitions" />
 
             
 
              returns true, each element in partition 0 has a smaller order key than any element in partition 1, each element in partition 1 has a smaller order key than any element in partition 2, and so on.</para
           >
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
@@ -492,8 +489,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >

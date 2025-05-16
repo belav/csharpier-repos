@@ -29,13 +29,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+        >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
         
 
-         class is a collection of service principal names that represent a configuration element for an <see
-         cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+         class is a collection of service principal names that represent a configuration element for an <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
         
 
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -96,26 +93,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method ignores a duplicate name provided in the <paramref
-             name="element" />
+             method ignores a duplicate name provided in the <paramref name="element" />
 
             
 
              parameter.</para
           >
           <para
-            >The <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
+            >The <see cref="T:System.Security.Authentication.ExtendedProtection.ServiceNameCollection" />
 
             
 
-             class is a collection of Service Principal Names (SPNs) that represent a configuration element for an <see
-             cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+             class is a collection of Service Principal Names (SPNs) that represent a configuration element for an <see cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
 
             
 
@@ -125,18 +118,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Add(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method adds a <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+             method adds a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             instance to this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             instance to this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -144,17 +134,19 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+          The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
-           instance to add to this <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+           instance to add to this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
           
 
@@ -181,13 +173,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Clear" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Clear" />
 
             
 
-             method removes all configuration element objects from this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             method removes all configuration element objects from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -272,13 +262,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.IndexOf(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.IndexOf(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method retrieves the index of the specified configuration element in this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             method retrieves the index of the specified configuration element in this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -288,13 +276,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the specified <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+            >The index of the specified <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             in this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             in this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -302,17 +288,19 @@
           >
         </returns>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+          The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
-           instance to retrieve the index of in this <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+           instance to retrieve the index of in this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
           
 
@@ -399,18 +387,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Remove(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Remove(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method removes a <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+             method removes a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             instance from this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             instance from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -418,17 +403,19 @@
           >
         </summary>
         <param name="element">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+          The <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
-           instance to remove from this <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+           instance to remove from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
           
 
@@ -457,23 +444,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Remove(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Remove(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method removes a <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+             method removes a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             instance from this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             instance from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
-             based on the <see
-             cref="T:System.String" />
+             based on the <see cref="T:System.String" />
 
             
 
@@ -481,22 +464,23 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
-           that represents the <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+           that represents the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
-           instance to remove from this <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+           instance to remove from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
         </param>
       </Docs>
     </Member>
@@ -521,18 +505,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Remove(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
+            >The <see cref="M:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection.Remove(System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement)" />
 
             
 
-             method removes a <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+             method removes a <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
             
 
-             instance from this <see
-             cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+             instance from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
             
 
@@ -540,17 +521,19 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
+          The index of the <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElement" />
 
           
 
-           instance to remove from this <see
-           cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
+           instance to remove from this <see cref="T:System.Security.Authentication.ExtendedProtection.Configuration.ServiceNameElementCollection" />
 
           
 

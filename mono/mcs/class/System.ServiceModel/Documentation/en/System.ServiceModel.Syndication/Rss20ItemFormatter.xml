@@ -29,23 +29,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use this class to serialize instances of <see
-         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+        >Use this class to serialize instances of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
         
 
-         and to create an instance of <see
-         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+         and to create an instance of <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
         
 
-         from an XML document that represents an RSS 2.0 item. If you have derived a class from <see
-         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+         from an XML document that represents an RSS 2.0 item. If you have derived a class from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
         
 
-         and want to serialize it, use the <see
-         cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" />
+         and want to serialize it, use the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" />
 
         
 
@@ -55,8 +51,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A class that serializes a <see
-         cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+        >A class that serializes a <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
         
 
@@ -81,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
             
 
@@ -112,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
             
 
@@ -121,12 +114,15 @@
           >
         </summary>
         <param name="itemToWrite">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+          The <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
           
 
@@ -151,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to specify a class derived from <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Use this constructor to specify a class derived from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -162,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
             
 
@@ -171,17 +165,19 @@
           >
         </summary>
         <param name="itemTypeToCreate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The instance derived from <see
-           cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+          The instance derived from <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
           
 
-           to associate with the <see
-           cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+           to associate with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
           
 
@@ -210,8 +206,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="serializeExtensionsAsAtom" />
+            >If the <paramref name="serializeExtensionsAsAtom" />
 
             
 
@@ -221,8 +216,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
             
 
@@ -230,19 +224,26 @@
           >
         </summary>
         <param name="itemToWrite">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+          The <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
           
 
            to serialize.</param
         >
         <param name="serializeExtensionsAsAtom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -274,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies whether the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Verifies whether the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -285,8 +285,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value that specifies if the <see
-             cref="T:System.Xml.XmlReader" />
+            >A value that specifies if the <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -294,12 +293,15 @@
           >
         </returns>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -328,13 +330,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >The newly created <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             instance is not automatically associated with the <see
-             cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+             instance is not automatically associated with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
             
 
@@ -344,8 +344,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -355,8 +354,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >A new <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -381,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the syndication item associated with the <see
-             cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+            >Gets the type of the syndication item associated with the <see cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
 
             
 
@@ -412,8 +409,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of this property is true. Attribute extensions are XML attributes that are not defined in the Atom 1.0 specification. This property determines whether to write these attributes during serialization. Similarly, this property determines whether to preserve attribute extensions inside the AttributeExtensions properties in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >The default value of this property is true. Attribute extensions are XML attributes that are not defined in the Atom 1.0 specification. This property determines whether to write these attributes during serialization. Similarly, this property determines whether to preserve attribute extensions inside the AttributeExtensions properties in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -441,8 +437,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of this property is true. Element extensions are XML elements that are not defined in the Atom 1.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve element extensions inside the ElementExtensions property in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >The default value of this property is true. Element extensions are XML elements that are not defined in the Atom 1.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve element extensions inside the ElementExtensions property in the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
@@ -479,8 +474,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Reads an RSS 2.0 syndication item from the specified <see
-             cref="T:System.Xml.XmlReader" />
+            >Reads an RSS 2.0 syndication item from the specified <see cref="T:System.Xml.XmlReader" />
 
             
 
@@ -488,12 +482,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -516,8 +513,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of this property is true. When this property is true, any properties in the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+            >The default value of this property is true. When this property is true, any properties in the <see cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
             
 
@@ -555,8 +551,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
+            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
 
             
 
@@ -593,8 +588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
 
             
 
@@ -602,12 +596,15 @@
           >
         </summary>
         <param name="reader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlReader" />
+          The <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -639,8 +636,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
+            >Implements the <see cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
             
 
@@ -648,12 +644,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 
@@ -707,18 +706,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Writes the <see
-             cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+            >Writes the <see cref="T:System.ServiceModel.Syndication.SyndicationItem" />
 
             
 
-             associated with the <see
-             cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+             associated with the <see cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
 
             
 
-             to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+             to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -726,12 +722,15 @@
           >
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlWriter" />
+          The <see cref="T:System.Xml.XmlWriter" />
 
           
 

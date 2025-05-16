@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.HttpException" />
+        >The <see cref="T:System.Web.HttpException" />
 
         
 
-         class is an HTTP-specific exception class that enables ASP.NET to generate exception information. For more information about throwing and handling exceptions, see <format
-         type="text/html">
+         class is an HTTP-specific exception class that enables ASP.NET to generate exception information. For more information about throwing and handling exceptions, see <format type="text/html">
           <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
         </format>
 
@@ -51,13 +49,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When handling exceptions, it can be useful to capture a series of related exceptions with the outer exception being thrown in response to an inner exception.</para>
           <para
-            >A reference to the inner exception that caused the outer exception is available from the <see
-             cref="P:System.Exception.InnerException" />
+            >A reference to the inner exception that caused the outer exception is available from the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see
-             cref="P:System.Exception.InnerException" />
+             property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -67,13 +63,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
-             class and creates an empty <see
-             cref="T:System.Web.HttpException" />
+             class and creates an empty <see cref="T:System.Web.HttpException" />
 
             
 
@@ -98,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
@@ -107,7 +100,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -132,8 +129,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
@@ -141,14 +137,22 @@
           >
         </summary>
         <param name="httpCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP response status code sent to the client corresponding to this error. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -177,13 +181,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Web.HttpException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             constructor is called during deserialization to reconstitute the exception object that is transmitted over a stream. For more information, see <format
-             type="text/html">
+             constructor is called during deserialization to reconstitute the exception object that is transmitted over a stream. For more information, see <format type="text/html">
               <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and SOAP Serialization</a>
             </format>
 
@@ -195,8 +197,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
@@ -204,24 +205,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -245,13 +252,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When handling exceptions, it can be useful to capture a series of related exceptions with the outer exception being thrown in response to an inner exception.</para>
           <para
-            >A reference to the inner exception that caused the outer exception is available from the <see
-             cref="P:System.Exception.InnerException" />
+            >A reference to the inner exception that caused the outer exception is available from the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see
-             cref="P:System.Exception.InnerException" />
+             property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -261,13 +266,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
-             class using an error message and the <see
-             cref="P:System.Exception.InnerException" />
+             class using an error message and the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -275,19 +278,26 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Exception.InnerException" />
+          The <see cref="P:System.Exception.InnerException" />
 
           
 
@@ -312,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
@@ -321,14 +330,22 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="hr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -357,13 +374,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>When handling exceptions, it can be useful to capture a series of related exceptions with the outer exception being thrown in response to an inner exception.</para>
           <para
-            >A reference to the inner exception that caused the outer exception is available from the <see
-             cref="P:System.Exception.InnerException" />
+            >A reference to the inner exception that caused the outer exception is available from the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see
-             cref="P:System.Exception.InnerException" />
+             property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -373,13 +388,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
-             class using an HTTP response status code, an error message, and the <see
-             cref="P:System.Exception.InnerException" />
+             class using an HTTP response status code, an error message, and the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -387,26 +400,37 @@
           >
         </summary>
         <param name="httpCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP response status code displayed on the client. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="innerException">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Exception.InnerException" />
+          The <see cref="P:System.Exception.InnerException" />
 
           
 
@@ -435,8 +459,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.HttpException" />
+            >Initializes a new instance of the <see cref="T:System.Web.HttpException" />
 
             
 
@@ -444,21 +467,33 @@
           >
         </summary>
         <param name="httpCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The HTTP response status code displayed on the client. </param
         >
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="hr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -512,8 +547,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.HttpException" />
+            >Creates a new <see cref="T:System.Web.HttpException" />
 
             
 
@@ -523,8 +557,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.HttpException" />
+            >An <see cref="T:System.Web.HttpException" />
 
             
 
@@ -532,7 +565,11 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -578,18 +615,16 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If there is a non-zero HTTP code, it is returned. Otherwise, the <see
-             cref="P:System.Exception.InnerException" />
+            >If there is a non-zero HTTP code, it is returned. Otherwise, the <see cref="P:System.Exception.InnerException" />
 
             
 
-             code is returned. If neither an <see
-             cref="P:System.Exception.InnerException" />
+             code is returned. If neither an <see cref="P:System.Exception.InnerException" />
 
             
 
              code nor a non-zero HTTP code is available, the HTTP response status code 500 is returned. For more information on HTTP response status codes, see the Status Code Definitions of the Hypertext Transfer Protocol - HTTP/1.1 on the World <see
-             cref="http://go.microsoft.com/fwlink/?linkid=37125"
+              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >Wide Web Consortium (W3C) Web site</see
             >
 
@@ -605,8 +640,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A non-zero HTTP code representing the exception or the <see
-             cref="P:System.Exception.InnerException" />
+            >A non-zero HTTP code representing the exception or the <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -639,18 +673,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.HttpException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+            >The <see cref="M:System.Web.HttpException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
 
             
 
-             method adds information about the exception to the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             method adds information about the exception to the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             object that is targeted for serialization. During deserialization, the exception is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             object that is targeted for serialization. During deserialization, the exception is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -660,8 +691,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets information about the exception and adds it to the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Gets information about the exception and adds it to the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -669,24 +699,30 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            that holds the serialized object data about the exception being thrown.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          The <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 

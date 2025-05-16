@@ -17,33 +17,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The SOAP versions currently available are SOAP 1.1 and SOAP 1.2. There is an <see
-         cref="T:System.ServiceModel.EnvelopeVersion" />
+        >The SOAP versions currently available are SOAP 1.1 and SOAP 1.2. There is an <see cref="T:System.ServiceModel.EnvelopeVersion" />
 
         
 
-         for each of these versions of SOAP that can be recovered using the <see
-         cref="P:System.ServiceModel.EnvelopeVersion.Soap11" />
+         for each of these versions of SOAP that can be recovered using the <see cref="P:System.ServiceModel.EnvelopeVersion.Soap11" />
 
         
 
-         and <see
-         cref="P:System.ServiceModel.EnvelopeVersion.Soap12" />
+         and <see cref="P:System.ServiceModel.EnvelopeVersion.Soap12" />
 
         
 
-         properties. There is also a <see
-         cref="P:System.ServiceModel.EnvelopeVersion.None" />
+         properties. There is also a <see cref="P:System.ServiceModel.EnvelopeVersion.None" />
 
         
 
-         message version that is used to sent and receive XML messages that do not use SOAP formatting. The processing roles associated with each message version can be recovered using the <see
-         cref="P:System.ServiceModel.EnvelopeVersion.NextDestinationActorValue" />
+         message version that is used to sent and receive XML messages that do not use SOAP formatting. The processing roles associated with each message version can be recovered using the <see cref="P:System.ServiceModel.EnvelopeVersion.NextDestinationActorValue" />
 
         
 
-         property and the <see
-         cref="M:System.ServiceModel.EnvelopeVersion.GetUltimateDestinationActorValues" />
+         property and the <see cref="M:System.ServiceModel.EnvelopeVersion.GetUltimateDestinationActorValues" />
 
         
 
@@ -77,8 +71,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ultimate receiver is null if <see
-             cref="P:System.ServiceModel.EnvelopeVersion.None" />
+            >The ultimate receiver is null if <see cref="P:System.ServiceModel.EnvelopeVersion.None" />
 
             
 
@@ -138,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.ServiceModel.EnvelopeVersion.None" />
+            >If the <see cref="P:System.ServiceModel.EnvelopeVersion.None" />
 
             
 
@@ -174,8 +166,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >crdefault the schema for <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=96641">SOAP 1.1</see>
+            >crdefault the schema for <see cref="http://go.microsoft.com/fwlink/?LinkID=96641"
+              >SOAP 1.1</see
+            >
 
             
 
@@ -209,8 +202,9 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >crdefault the schema for <see
-             cref="http://go.microsoft.com/fwlink/?LinkID=96642">SOAP 1.2</see>
+            >crdefault the schema for <see cref="http://go.microsoft.com/fwlink/?LinkID=96642"
+              >SOAP 1.2</see
+            >
 
             
 

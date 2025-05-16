@@ -32,13 +32,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.IPEndPoint" />
+        >The <see cref="T:System.Net.IPEndPoint" />
 
         
 
-         class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the <see
-         cref="T:System.Net.IPEndPoint" />
+         class contains the host and local or remote port information needed by an application to connect to a service on a host. By combining the host's IP address and port number of a service, the <see cref="T:System.Net.IPEndPoint" />
 
         
 
@@ -80,21 +78,18 @@
 
             
 
-            is less than <see
-             cref="F:System.Net.IPEndPoint.MinPort" />
+            is less than <see cref="F:System.Net.IPEndPoint.MinPort" />
 
             
 
-             or greater than <see
-             cref="F:System.Net.IPEndPoint.MaxPort" />
+             or greater than <see cref="F:System.Net.IPEndPoint.MaxPort" />
 
             
 
             . </para
           >
           <para
-            >A negative number was specified for <paramref
-             name="address" />
+            >A negative number was specified for <paramref name="address" />
 
             
 
@@ -104,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.IPEndPoint" />
+            >Initializes a new instance of the <see cref="T:System.Net.IPEndPoint" />
 
             
 
@@ -113,24 +107,30 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The IP address of the Internet host. </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The port number associated with the <paramref
-           name="address" />
+          The port number associated with the <paramref name="address" />
 
           
 
-          , or 0 to specify any available port. <paramref
-           name="port" />
+          , or 0 to specify any available port. <paramref name="port" />
 
           
 
@@ -170,8 +170,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -183,13 +182,11 @@
 
             
 
-            is less than <see
-             cref="F:System.Net.IPEndPoint.MinPort" />
+            is less than <see cref="F:System.Net.IPEndPoint.MinPort" />
 
             
 
-             or greater than <see
-             cref="F:System.Net.IPEndPoint.MaxPort" />
+             or greater than <see cref="F:System.Net.IPEndPoint.MaxPort" />
 
             
 
@@ -199,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.IPEndPoint" />
+            >Initializes a new instance of the <see cref="T:System.Net.IPEndPoint" />
 
             
 
@@ -208,29 +204,34 @@
           >
         </summary>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Net.IPAddress" />
+          An <see cref="T:System.Net.IPAddress" />
 
           
 
           . </param
         >
         <param name="port">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The port number associated with the <paramref
-           name="address" />
+          The port number associated with the <paramref name="address" />
 
           
 
-          , or 0 to specify any available port. <paramref
-           name="port" />
+          , or 0 to specify any available port. <paramref name="port" />
 
           
 
@@ -262,8 +263,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Net.IPAddress" />
+            >A <see cref="T:System.Net.IPAddress" />
 
             
 
@@ -306,7 +306,9 @@
         <value>
           <para
             >Returns <see
-             cref="F:System.Net.Sockets.AddressFamily.InterNetwork" qualify="true" />
+              cref="F:System.Net.Sockets.AddressFamily.InterNetwork"
+              qualify="true"
+            />
 
             
 
@@ -353,8 +355,7 @@
           <para>
             <block subset="none" type="note"
               >This method
-      overrides <see
-               cref="M:System.Net.EndPoint.Create(System.Net.SocketAddress)" />
+      overrides <see cref="M:System.Net.EndPoint.Create(System.Net.SocketAddress)" />
 
               
 
@@ -363,18 +364,15 @@
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException"
-          >The <see
-           langword="AddressFamily" />
+          >The <see langword="AddressFamily" />
 
           
 
-           of the specified <see
-           cref="T:System.Net.SocketAddress" />
+           of the specified <see cref="T:System.Net.SocketAddress" />
 
           
 
-           is not equal to the <see
-           langword="AddressFamily" />
+           is not equal to the <see langword="AddressFamily" />
 
           
 
@@ -387,8 +385,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Net.EndPoint" />
+            >An <see cref="T:System.Net.EndPoint" />
 
             
 
@@ -396,12 +393,15 @@
           >
         </returns>
         <param name="socketAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Net.SocketAddress" />
+          The <see cref="T:System.Net.SocketAddress" />
 
           
 
@@ -439,31 +439,26 @@
 
             
 
-             if <paramref
-             name="comparand" />
+             if <paramref name="comparand" />
 
             
 
              represents 
- the same endpoint as the current instance. If <paramref
-             name="comparand" />
+ the same endpoint as the current instance. If <paramref name="comparand" />
 
             
 
              is a
-<see
-             langword="null" />
+<see langword="null" />
 
             
 
-             reference or is not an instance of <see
-             cref="T:System.Net.IPEndPoint" />
+             reference or is not an instance of <see cref="T:System.Net.IPEndPoint" />
 
             
 
             , returns 
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -472,19 +467,16 @@
         </returns>
         <remarks>
           <para
-            >Two <see
-             cref="T:System.Net.IPEndPoint" />
+            >Two <see cref="T:System.Net.IPEndPoint" />
 
             
 
-             instances are equal if their <see
-             cref="P:System.Net.IPEndPoint.Address" />
+             instances are equal if their <see cref="P:System.Net.IPEndPoint.Address" />
 
             
 
              
-and <see
-             cref="P:System.Net.IPEndPoint.Port" />
+and <see cref="P:System.Net.IPEndPoint.Port" />
 
             
 
@@ -493,8 +485,7 @@ and <see
           <para>
             <block subset="none" type="note"
               >This method 
- overrides <see
-               cref="M:System.Object.Equals(System.Object)" />
+ overrides <see cref="M:System.Object.Equals(System.Object)" />
 
               
 
@@ -505,13 +496,11 @@ and <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Object" />
+            >Determines whether the specified <see cref="T:System.Object" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Net.IPEndPoint" />
+             is equal to the current <see cref="T:System.Net.IPEndPoint" />
 
             
 
@@ -519,17 +508,19 @@ and <see
           >
         </summary>
         <param name="comparand">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified <see
-           cref="T:System.Object" />
+          The specified <see cref="T:System.Object" />
 
           
 
-           to compare with the current <see
-           cref="T:System.Net.IPEndPoint" />
+           to compare with the current <see cref="T:System.Net.IPEndPoint" />
 
           
 
@@ -562,8 +553,7 @@ and <see
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.IPEndPoint.GetHashCode" />
+            >The <see cref="M:System.Net.IPEndPoint.GetHashCode" />
 
             
 
@@ -573,8 +563,7 @@ and <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash value for a <see
-             cref="T:System.Net.IPEndPoint" />
+            >Returns a hash value for a <see cref="T:System.Net.IPEndPoint" />
 
             
 
@@ -616,8 +605,7 @@ and <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the maximum value that can be assigned to the <see
-             cref="P:System.Net.IPEndPoint.Port" />
+            >Specifies the maximum value that can be assigned to the <see cref="P:System.Net.IPEndPoint.Port" />
 
             
 
@@ -649,8 +637,7 @@ and <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the minimum value that can be assigned to the <see
-             cref="P:System.Net.IPEndPoint.Port" />
+            >Specifies the minimum value that can be assigned to the <see cref="P:System.Net.IPEndPoint.Port" />
 
             
 
@@ -680,18 +667,15 @@ and <see
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
-             value that is between <see
-             cref="F:System.Net.IPEndPoint.MinPort" />
+             value that is between <see cref="F:System.Net.IPEndPoint.MinPort" />
 
             
 
-             and <see
-             cref="F:System.Net.IPEndPoint.MaxPort" />
+             and <see cref="F:System.Net.IPEndPoint.MaxPort" />
 
             
 
@@ -701,13 +685,11 @@ inclusive.</para
         </value>
         <remarks>To be added.</remarks>
         <exception cref="T:System.ArgumentOutOfRangeException"
-          >The value specified for a set operation was less than <see
-           cref="F:System.Net.IPEndPoint.MinPort" />
+          >The value specified for a set operation was less than <see cref="F:System.Net.IPEndPoint.MinPort" />
 
           
 
-           or greater than <see
-           cref="F:System.Net.IPEndPoint.MaxPort" />
+           or greater than <see cref="F:System.Net.IPEndPoint.MaxPort" />
 
           
 
@@ -744,8 +726,7 @@ inclusive.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes endpoint information into a <see
-             cref="T:System.Net.SocketAddress" />
+            >Serializes endpoint information into a <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -755,8 +736,7 @@ inclusive.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.SocketAddress" />
+            >A <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -789,8 +769,7 @@ inclusive.</para
         <remarks>
           <para>
             <block subset="none" type="note"
-              >This method overrides <see
-               cref="M:System.Object.ToString" />
+              >This method overrides <see cref="M:System.Object.ToString" />
 
               
 

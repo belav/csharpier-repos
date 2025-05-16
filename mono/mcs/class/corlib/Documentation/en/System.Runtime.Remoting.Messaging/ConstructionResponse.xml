@@ -37,31 +37,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+        >A <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
         
 
-         object returns the result of a construction request sent with the <see
-         cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+         object returns the result of a construction request sent with the <see cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
 
         
 
          interface.</para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+        >The <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
         
 
-         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-         cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+         class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
         
 
-         class directly; instead, use the <see
-         cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+         class directly; instead, use the <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
         
 
@@ -71,8 +66,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements the <see
-         cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+        >Implements the <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
         
 
@@ -105,18 +99,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+            >The <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
             
 
-             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+             class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
             
 
-             class directly; instead, use the <see
-             cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+             class directly; instead, use the <see cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
 
             
 
@@ -126,8 +117,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
             
 
@@ -135,19 +125,26 @@
           >
         </summary>
         <param name="h">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of remoting headers that contain key-value pairs. This array is used to initialize <see
-           cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
+          An array of remoting headers that contain key-value pairs. This array is used to initialize <see cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
           
 
            fields for those headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param
         >
         <param name="mcm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -178,13 +175,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Messaging.ConstructionResponse.Properties" />
+            >The <see cref="P:System.Runtime.Remoting.Messaging.ConstructionResponse.Properties" />
 
             
 
-             property returns the value of the inherited <see
-             cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+             property returns the value of the inherited <see cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
 
             
 
@@ -194,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.IDictionary" />
+            >Gets an <see cref="T:System.Collections.IDictionary" />
 
             
 

@@ -5,15 +5,12 @@
   </assembly>
   <members>
     <!-- Badly formed XML comment ignored for member "T:Testing.Test2" -->
-    <member name="M:Testing.Test2.Foo"
-      >
+    <member name="M:Testing.Test2.Foo">
             			another documentation style (Java-mimic)
         </member
     >
-    <member name="T:Testing.StructTest"
-      >
-            testing indentation <summary
-      > test test ;-)
+    <member name="T:Testing.StructTest">
+            testing indentation <summary> test test ;-)
             comment for struct
             </summary>
     </member>
@@ -47,26 +44,23 @@
             description for class Test
             </summary>
     </member>
-    <member name="F:Testing.Test.Constant"
-      >
+    <member name="F:Testing.Test.Constant">
             comment for const declaration
         </member
     >
-    <member name="F:Testing.Test.BadPublicField"
-      >
+    <member name="F:Testing.Test.BadPublicField">
             comment for public field
         </member
     >
-    <member name="F:Testing.Test.PrivateField"
-      >
+    <member name="F:Testing.Test.PrivateField">
             comment for private field
         </member
     >
     <member name="M:Testing.Test.Foo">
             here is a documentation!!!
-        </member>
-    <member name="M:Testing.Test.Foo(System.Int64,Testing.Test,System.Collections.ArrayList)"
-      >
+        </member
+    >
+    <member name="M:Testing.Test.Foo(System.Int64,Testing.Test,System.Collections.ArrayList)">
             here is a documentation with parameters
         </member
     >
@@ -82,47 +76,41 @@
     </member>
     <member name="M:Testing.Test.Finalize">
             comment for destructor
-        </member>
+        </member
+    >
     <member name="M:Testing.Test.#ctor">
             comment for .ctor()
-        </member>
-    <member name="M:Testing.Test.#ctor(System.String,System.String[])"
-      >
+        </member
+    >
+    <member name="M:Testing.Test.#ctor(System.String,System.String[])">
             comment for .ctor(string arg, string [] args)
         </member
     >
-    <member name="P:Testing.Test.PublicProperty"
-      >
+    <member name="P:Testing.Test.PublicProperty">
             comment for public property
         </member
     >
-    <member name="P:Testing.Test.PrivateProperty"
-      >
+    <member name="P:Testing.Test.PrivateProperty">
             comment for private property
         </member
     >
-    <member name="E:Testing.Test.MyEvent"
-      >
+    <member name="E:Testing.Test.MyEvent">
             public event EventHandler MyEvent ;-)
         </member
     >
-    <member name="P:Testing.Test.Item(System.Int32)"
-      >
+    <member name="P:Testing.Test.Item(System.Int32)">
             comment for indexer
         </member
     >
-    <member name="P:Testing.Test.Item(System.Int32,Testing.Test)"
-      >
+    <member name="P:Testing.Test.Item(System.Int32,Testing.Test)">
             comment for indexer wit multiple parameters
         </member
     >
-    <member name="T:Testing.Test.InternalClass"
-      >
+    <member name="T:Testing.Test.InternalClass">
             comment for internal class
         </member
     >
-    <member name="T:Testing.Test.InternalStruct"
-      >
+    <member name="T:Testing.Test.InternalStruct">
             comment for internal struct
         </member
     >

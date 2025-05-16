@@ -25,23 +25,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >If an XML Web service client calls an XML Web service method using HTTP-GET, <see
-         cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+        >If an XML Web service client calls an XML Web service method using HTTP-GET, <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
         
 
-         must be set to XmlReturnReader and <see
-         cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+         must be set to XmlReturnReader and <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
 
         
 
-         set to UrlParameterWriter. XML Web service clients invoking a XML Web service using HTTP-POST must set <see
-         cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+         set to UrlParameterWriter. XML Web service clients invoking a XML Web service using HTTP-POST must set <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
         
 
-         to XmlReturnReader and <see
-         cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+         to XmlReturnReader and <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
 
         
 
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
 
             
 
@@ -94,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
 
             
 
@@ -103,34 +97,38 @@
           >
         </summary>
         <param name="returnFormatter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Initializes the <see
-           cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+          Initializes the <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
           
 
-           property to a <see
-           cref="T:System.Type" />
+           property to a <see cref="T:System.Type" />
 
           
 
            that deserializes the response from an XML Web service method. </param
         >
         <param name="parameterFormatter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Initializes the <see
-           cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+          Initializes the <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
 
           
 
-           property to a <see
-           cref="T:System.Type" />
+           property to a <see cref="T:System.Type" />
 
           
 
@@ -154,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XML Web service client is invoking an XML Web service method using HTTP-GET or HTTP-POST, <see
-             cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+            >If the XML Web service client is invoking an XML Web service method using HTTP-GET or HTTP-POST, <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
 
             
 
@@ -165,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Type" />
+            >Gets or sets a <see cref="T:System.Type" />
 
             
 
@@ -191,13 +187,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the XML Web service client is invoking an XML Web service method using HTTP-GET, <see
-             cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+            >If the XML Web service client is invoking an XML Web service method using HTTP-GET, <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
             
 
-             must be UrlParameterWriter, whereas a client using HTTP-POST must set <see
-             cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
+             must be UrlParameterWriter, whereas a client using HTTP-POST must set <see cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
             
 
@@ -207,8 +201,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Type" />
+            >Gets or sets a <see cref="T:System.Type" />
 
             
 

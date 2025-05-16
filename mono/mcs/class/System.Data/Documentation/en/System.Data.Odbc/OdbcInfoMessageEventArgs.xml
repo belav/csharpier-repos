@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+        >The <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
 
         
 
-         event contains an <see
-         cref="T:System.Data.Odbc.OdbcErrorCollection" />
+         event contains an <see cref="T:System.Data.Odbc.OdbcErrorCollection" />
 
         
 
@@ -30,8 +28,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+        >Provides data for the <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
 
         
 
@@ -73,18 +70,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a wrapper for the <see
-             cref="P:System.Data.Odbc.OdbcError.Message" />
+            >This is a wrapper for the <see cref="P:System.Data.Odbc.OdbcError.Message" />
 
             
 
-             property of the first <see
-             cref="T:System.Data.Odbc.OdbcError" />
+             property of the first <see cref="T:System.Data.Odbc.OdbcError" />
 
             
 
-             in the <see
-             cref="P:System.Data.Odbc.OdbcInfoMessageEventArgs.Errors" />
+             in the <see cref="P:System.Data.Odbc.OdbcInfoMessageEventArgs.Errors" />
 
             
 
@@ -113,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a string representation of the <see
-             cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+            >Retrieves a string representation of the <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
 
             
 
@@ -124,8 +117,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string representing the <see
-             cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
+            >A string representing the <see cref="E:System.Data.Odbc.OdbcConnection.InfoMessage" />
 
             
 

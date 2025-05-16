@@ -14,26 +14,22 @@
   <Interfaces />
   <Docs>
     <summary
-      >This is an even lighter and faster version of <see
-       cref="T:System.Threading.ReaderWriterLockSlim" />
+      >This is an even lighter and faster version of <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
       
 
-       that provide only the bare functionnality of a reader-writer lock with no thread tracking and no heavy wait mechanism. In summary, it's what <see
-       cref="T:System.Threading.SpinLock" />
+       that provide only the bare functionnality of a reader-writer lock with no thread tracking and no heavy wait mechanism. In summary, it's what <see cref="T:System.Threading.SpinLock" />
 
       
 
-       is to <see
-       cref="T:System.Threading.Monitor" />
+       is to <see cref="T:System.Threading.Monitor" />
 
       
 
       .</summary
     >
     <remarks
-      >The Enter methods of this class use <see
-       cref="T:System.Threading.SpinWait" />
+      >The Enter methods of this class use <see cref="T:System.Threading.SpinWait" />
 
       
 
@@ -62,10 +58,8 @@
           <para>
 Must be set to false prior calling this method.
 </para>
-          <para
-            >
-If value is <see
-             langword="true" />
+          <para>
+If value is <see langword="true" />
 
             
 
@@ -98,10 +92,8 @@ If value is <see
           <para>
 Must be set to false prior calling this method.
 </para>
-          <para
-            >
-If value is <see
-             langword="true" />
+          <para>
+If value is <see langword="true" />
 
             
 
@@ -130,13 +122,11 @@ If value is <see
       <Docs>
         <summary>Remove a reader from the lock.</summary>
         <remarks
-          >A call to <see
-           cref="M:Mono.Threading.ReaderWriterLockSlimmer.EnterReadLock()" />
+          >A call to <see cref="M:Mono.Threading.ReaderWriterLockSlimmer.EnterReadLock()" />
 
           
 
-           or <see
-           cref="M:Mono.Threading.ReaderWriterLockSlimmer.TryEnterReadLock()" />
+           or <see cref="M:Mono.Threading.ReaderWriterLockSlimmer.TryEnterReadLock()" />
 
           
 
@@ -161,13 +151,11 @@ If value is <see
       <Docs>
         <summary>Remove writer from the lock.</summary>
         <remarks
-          >A call to <see
-           cref="M:Mono.Threading.ReaderWriterLockSlimmer.EnterWriteLock()" />
+          >A call to <see cref="M:Mono.Threading.ReaderWriterLockSlimmer.EnterWriteLock()" />
 
           
 
-           or <see
-           cref="M:Mono.Threading.ReaderWriterLockSlimmer.TryEnterWriteLock()" />
+           or <see cref="M:Mono.Threading.ReaderWriterLockSlimmer.TryEnterWriteLock()" />
 
           
 
@@ -196,10 +184,8 @@ If value is <see
           <para>
 Must be set to false prior calling this method.
 </para>
-          <para
-            >
-If value is <see
-             langword="true" />
+          <para>
+If value is <see langword="true" />
 
             
 
@@ -208,8 +194,7 @@ If value is <see
           >
         </param>
         <summary
-          >Non-blocking equivalent of <see
-           cref="m:Mono.Threading.EnterReadLock(System.Boolean@)" />
+          >Non-blocking equivalent of <see cref="m:Mono.Threading.EnterReadLock(System.Boolean@)" />
 
           
 
@@ -239,10 +224,8 @@ If value is <see
           <para>
 Must be set to false prior calling this method.
 </para>
-          <para
-            >
-If value is <see
-             langword="true" />
+          <para>
+If value is <see langword="true" />
 
             
 
@@ -251,8 +234,7 @@ If value is <see
           >
         </param>
         <summary
-          >Non-blocking equivalent of <see
-           cref="m:Mono.Threading.EnterWriteLock(System.Boolean@)" />
+          >Non-blocking equivalent of <see cref="m:Mono.Threading.EnterWriteLock(System.Boolean@)" />
 
           
 

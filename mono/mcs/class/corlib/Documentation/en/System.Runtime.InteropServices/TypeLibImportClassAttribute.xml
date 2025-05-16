@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
+        >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
 
         
 
-         attribute to a managed interface to specify which <see
-         cref="T:System.Type" />
+         attribute to a managed interface to specify which <see cref="T:System.Type" />
 
         
 
@@ -49,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies which <see
-         cref="T:System.Type" />
+        >Specifies which <see cref="T:System.Type" />
 
         
 
@@ -81,13 +78,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see
-             cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
+            >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
 
             
 
-             attribute to a managed interface to specify the <see
-             cref="T:System.Type" />
+             attribute to a managed interface to specify the <see cref="T:System.Type" />
 
             
 
@@ -97,13 +92,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
 
             
 
-             class specifying the <see
-             cref="T:System.Type" />
+             class specifying the <see cref="T:System.Type" />
 
             
 
@@ -111,12 +104,15 @@
           >
         </summary>
         <param name="importClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -141,8 +137,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Apply the <see
-             cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
+            >Apply the <see cref="T:System.Runtime.InteropServices.TypeLibImportClassAttribute" />
 
             
 
@@ -152,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the name of a <see
-             cref="T:System.Type" />
+            >Gets the name of a <see cref="T:System.Type" />
 
             
 

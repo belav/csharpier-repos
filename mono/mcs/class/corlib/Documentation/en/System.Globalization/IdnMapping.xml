@@ -25,8 +25,7 @@
       <para>The IDNA mechanism uses Punycode to map an internationalized domain name that contains Unicode characters outside the US-ASCII character range to the US-ASCII character range supported by the domain name system. The IDNA mechanism is used to convert only domain names, not data transmitted over the Internet. </para>
       <block subset="none" type="note">
         <para
-          >In the net_v45, the <see
-           cref="T:System.Globalization.IdnMapping" />
+          >In the net_v45, the <see cref="T:System.Globalization.IdnMapping" />
 
           
 
@@ -36,7 +35,7 @@
           <item>
             <para
               >When run on win8, it supports the 2008 version of the IDNA standard outlined by <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=231875"
+                cref="http://go.microsoft.com/fwlink/?LinkId=231875"
                 >RFC 5891: Internationalized Domain Names in Applications (IDNA): Protocol</see
               >
 
@@ -48,7 +47,7 @@
           <item>
             <para
               >When run on earlier versions of the Windows operating system, it supports the 2003 version of the standard outlined by <see
-               cref="http://go.microsoft.com/fwlink/?LinkId=158110"
+                cref="http://go.microsoft.com/fwlink/?LinkId=158110"
                 >RFC 3490: Internationalizing Domain Names in Applications (IDNA)</see
               >
 
@@ -59,8 +58,7 @@
           </item>
         </list>
         <para
-          >See <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=232459"
+          >See <see cref="http://go.microsoft.com/fwlink/?LinkId=232459"
             >Unicode Technical Standard #46: IDNA Compatibility Processing</see
           >
 
@@ -70,31 +68,26 @@
         >
       </block>
       <para
-        >The <see
-         cref="Overload:System.Globalization.IdnMapping.GetAscii" />
+        >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" />
 
         
 
-         method normalizes a domain name, converts the normalized name to a representation that consists of displayable Unicode characters in the US-ASCII code point range (U+0020 to U+007E), and prepends an ASCII-compatible encoding (ACE) prefix ("xn--") to each label. The <see
-         cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" />
+         method normalizes a domain name, converts the normalized name to a representation that consists of displayable Unicode characters in the US-ASCII code point range (U+0020 to U+007E), and prepends an ASCII-compatible encoding (ACE) prefix ("xn--") to each label. The <see cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" />
 
         
 
-         method restores the domain name labels converted by the <see
-         cref="Overload:System.Globalization.IdnMapping.GetAscii" />
+         method restores the domain name labels converted by the <see cref="Overload:System.Globalization.IdnMapping.GetAscii" />
 
         
 
          method. </para
       >
       <para
-        >If the string to be converted includes the label separator characters IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61), the <see
-         cref="M:System.Globalization.IdnMapping.GetAscii(System.String)" />
+        >If the string to be converted includes the label separator characters IDEOGRAPHIC FULL STOP (U+3002), FULLWIDTH FULL STOP (U+FF0E), and HALFWIDTH IDEOGRAPHIC FULL STOP (U+FF61), the <see cref="M:System.Globalization.IdnMapping.GetAscii(System.String)" />
 
         
 
-         method converts them to the label separator FULL STOP (period, U+002E). The <see
-         cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" />
+         method converts them to the label separator FULL STOP (period, U+002E). The <see cref="M:System.Globalization.IdnMapping.GetUnicode(System.String)" />
 
         
 
@@ -124,13 +117,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+            >The <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
             
 
-             and <see
-             cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+             and <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
             
 
@@ -140,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Globalization.IdnMapping" />
+            >Initializes a new instance of the <see cref="T:System.Globalization.IdnMapping" />
 
             
 
@@ -167,20 +157,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A registered domain name cannot contain unassigned code points. Consequently, the default value of the <see
-             cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+            >A registered domain name cannot contain unassigned code points. Consequently, the default value of the <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
             
 
              property is false. The IDNA specification permits unassigned code points only in queries for matching strings (that is, in domain name lookup). For more information about the use of unassigned code points in domain names, see <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=231873"
+              cref="http://go.microsoft.com/fwlink/?LinkId=231873"
               >RFC 3454, "Preparation of Internationalized Strings (stringprep)"</see
             >
 
             
 
              and <see
-             cref="http://go.microsoft.com/fwlink/?LinkId=231875"
+              cref="http://go.microsoft.com/fwlink/?LinkId=231875"
               >RFC 5891, "Internationalized Domain Names in Applications (IDNA): Protocol"</see
             >
 
@@ -190,23 +179,19 @@
           >
           <block subset="none" type="note">
             <para
-              >If the <see
-               cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+              >If the <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
               
 
-               property is false, the behavior associated with the property depends on the underlying operating system. On win8, the <see
-               cref="T:System.Globalization.IdnMapping" />
+               property is false, the behavior associated with the property depends on the underlying operating system. On win8, the <see cref="T:System.Globalization.IdnMapping" />
 
               
 
-               class conforms to IDNA 2008, which is based on the Unicode 6.0 standard. On previous versions of Windows, the <see
-               cref="T:System.Globalization.IdnMapping" />
+               class conforms to IDNA 2008, which is based on the Unicode 6.0 standard. On previous versions of Windows, the <see cref="T:System.Globalization.IdnMapping" />
 
               
 
-               class is based on IDNA 2003, which is based on Unicode 3.x. Some code points that were unassigned in IDNA 2003 have been assigned characters and are supported in IDNA 2008. For example, U+0221 was introduced in Unicode 4.0. On win8, it is encoded as "xn—6la". On previous versions of Windows, it throws an <see
-               cref="T:System.ArgumentException" />
+               class is based on IDNA 2003, which is based on Unicode 3.x. Some code points that were unassigned in IDNA 2003 have been assigned characters and are supported in IDNA 2008. For example, U+0221 was introduced in Unicode 4.0. On win8, it is encoded as "xn—6la". On previous versions of Windows, it throws an <see cref="T:System.ArgumentException" />
 
               
 
@@ -217,8 +202,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether unassigned Unicode code points are used in operations performed by members of the current <see
-             cref="T:System.Globalization.IdnMapping" />
+            >Gets or sets a value that indicates whether unassigned Unicode code points are used in operations performed by members of the current <see cref="T:System.Globalization.IdnMapping" />
 
             
 
@@ -250,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a specified object and the current <see
-             cref="T:System.Globalization.IdnMapping" />
+            >Indicates whether a specified object and the current <see cref="T:System.Globalization.IdnMapping" />
 
             
 
@@ -261,23 +244,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the object specified by the <paramref
-             name="obj" />
+            >true if the object specified by the <paramref name="obj" />
 
             
 
-             parameter is derived from <see
-             cref="T:System.Globalization.IdnMapping" />
+             parameter is derived from <see cref="T:System.Globalization.IdnMapping" />
 
             
 
-             and its <see
-             cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+             and its <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
             
 
-             and <see
-             cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+             and <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
             
 
@@ -285,7 +264,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -315,13 +298,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="unicode" />
+            >The <paramref name="unicode" />
 
             
 
-             parameter specifies a string of one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The <paramref
-             name="unicode" />
+             parameter specifies a string of one or more labels that consist of valid Unicode characters. The labels are separated by label separators. The <paramref name="unicode" />
 
             
 
@@ -334,8 +315,7 @@
             </item>
             <item>
               <para
-                >Unassigned Unicode characters, if the value of the <see
-                 cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+                >Unassigned Unicode characters, if the value of the <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
                 
 
@@ -344,8 +324,7 @@
             </item>
             <item>
               <para
-                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, if the value of the <see
-                 cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, if the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
                 
 
@@ -355,14 +334,14 @@
             <item>
               <para
                 >Characters that are prohibited by a specific version of the IDNA standard. For more information about prohibited characters, see <see
-                 cref="http://go.microsoft.com/fwlink/?LinkId=231873"
+                  cref="http://go.microsoft.com/fwlink/?LinkId=231873"
                   >RFC 3454: Preparation of Internationalized Strings ("stringprep")</see
                 >
 
                 
 
                  for IDNA 2003, and <see
-                 cref="http://go.microsoft.com/fwlink/?LinkId=231877"
+                  cref="http://go.microsoft.com/fwlink/?LinkId=231877"
                   >RFC 5982: The Unicode Code Points and Internationalized Domain Names for Applications</see
                 >
 
@@ -373,21 +352,18 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="Overload:System.Globalization.IdnMapping.GetAscii" />
+            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" />
 
             
 
              method converts all label separators to FULL STOP (period, U+002E). </para
           >
           <para
-            >If <paramref
-             name="unicode" />
+            >If <paramref name="unicode" />
 
             
 
-             contains no characters outside the US-ASCII character range and no characters within the US-ASCII character range are prohibited, the method returns <paramref
-             name="unicode" />
+             contains no characters outside the US-ASCII character range and no characters within the US-ASCII character range are prohibited, the method returns <paramref name="unicode" />
 
             
 
@@ -401,8 +377,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The equivalent of the string specified by the <paramref
-             name="unicode" />
+            >The equivalent of the string specified by the <paramref name="unicode" />
 
             
 
@@ -410,7 +385,11 @@
           >
         </returns>
         <param name="unicode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -441,13 +420,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="unicode" />
+            >The <paramref name="unicode" />
 
             
 
-             and <paramref
-             name="index" />
+             and <paramref name="index" />
 
             
 
@@ -460,8 +437,7 @@
             </item>
             <item>
               <para
-                >Unassigned Unicode characters, depending on the value of the <see
-                 cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+                >Unassigned Unicode characters, depending on the value of the <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
                 
 
@@ -470,8 +446,7 @@
             </item>
             <item>
               <para
-                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, depending on the value of the <see
-                 cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, depending on the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
                 
 
@@ -481,14 +456,14 @@
             <item>
               <para
                 >Characters that are prohibited by a specific version of the IDNA standard. For more information about prohibited characters, see <see
-                 cref="http://go.microsoft.com/fwlink/?LinkId=231873"
+                  cref="http://go.microsoft.com/fwlink/?LinkId=231873"
                   >RFC 3454: Preparation of Internationalized Strings ("stringprep")</see
                 >
 
                 
 
                  for IDNA 2003, and <see
-                 cref="http://go.microsoft.com/fwlink/?LinkId=231877"
+                  cref="http://go.microsoft.com/fwlink/?LinkId=231877"
                   >RFC 5982: The Unicode Code Points and Internationalized Domain Names for Applications</see
                 >
 
@@ -499,21 +474,18 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="Overload:System.Globalization.IdnMapping.GetAscii" />
+            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" />
 
             
 
              method converts all label separators to FULL STOP (period, U+002E). </para
           >
           <para
-            >If <paramref
-             name="unicode" />
+            >If <paramref name="unicode" />
 
             
 
-             contains no characters outside the US-ASCII character range and no characters within the US-ASCII character range are prohibited, the method returns <paramref
-             name="unicode" />
+             contains no characters outside the US-ASCII character range and no characters within the US-ASCII character range are prohibited, the method returns <paramref name="unicode" />
 
             
 
@@ -527,13 +499,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The equivalent of the substring specified by the <paramref
-             name="unicode" />
+            >The equivalent of the substring specified by the <paramref name="unicode" />
 
             
 
-             and <paramref
-             name="index" />
+             and <paramref name="index" />
 
             
 
@@ -541,24 +511,30 @@
           >
         </returns>
         <param name="unicode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to convert, which consists of one or more domain name labels delimited with label separators.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based offset into <paramref
-           name="unicode" />
+          A zero-based offset into <paramref name="unicode" />
 
           
 
-           that specifies the start of the substring to convert. The conversion operation continues to the end of the <paramref
-           name="unicode" />
+           that specifies the start of the substring to convert. The conversion operation continues to the end of the <paramref name="unicode" />
 
           
 
@@ -593,18 +569,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="Unicode" />
+            >The <paramref name="Unicode" />
 
             
 
-            , <paramref
-             name="index" />
+            , <paramref name="index" />
 
             
 
-            , and <paramref
-             name="count" />
+            , and <paramref name="count" />
 
             
 
@@ -617,8 +590,7 @@
             </item>
             <item>
               <para
-                >Unassigned Unicode characters, depending on the value of the <see
-                 cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
+                >Unassigned Unicode characters, depending on the value of the <see cref="P:System.Globalization.IdnMapping.AllowUnassigned" />
 
                 
 
@@ -627,8 +599,7 @@
             </item>
             <item>
               <para
-                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, depending on the value of the <see
-                 cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+                >Non-standard characters in the US-ASCII character range, such as the SPACE (U+0020), EXCLAMATION MARK (U+0021), and LOW LINE (U+005F) characters, depending on the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
                 
 
@@ -638,14 +609,14 @@
             <item>
               <para
                 >Characters that are prohibited by a specific version of the IDNA standard. For more information about prohibited characters, see <see
-                 cref="http://go.microsoft.com/fwlink/?LinkId=231873"
+                  cref="http://go.microsoft.com/fwlink/?LinkId=231873"
                   >RFC 3454: Preparation of Internationalized Strings ("stringprep")</see
                 >
 
                 
 
                  for IDNA 2003, and <see
-                 cref="http://go.microsoft.com/fwlink/?LinkId=231877"
+                  cref="http://go.microsoft.com/fwlink/?LinkId=231877"
                   >RFC 5982: The Unicode Code Points and Internationalized Domain Names for Applications</see
                 >
 
@@ -656,8 +627,7 @@
             </item>
           </list>
           <para
-            >The <see
-             cref="Overload:System.Globalization.IdnMapping.GetAscii" />
+            >The <see cref="Overload:System.Globalization.IdnMapping.GetAscii" />
 
             
 
@@ -671,18 +641,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The equivalent of the substring specified by the <paramref
-             name="unicode" />
+            >The equivalent of the substring specified by the <paramref name="unicode" />
 
             
 
-            , <paramref
-             name="index" />
+            , <paramref name="index" />
 
             
 
-            , and <paramref
-             name="count" />
+            , and <paramref name="count" />
 
             
 
@@ -690,36 +657,45 @@
           >
         </returns>
         <param name="unicode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to convert, which consists of one or more domain name labels delimited with label separators.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based offset into <paramref
-           name="unicode" />
+          A zero-based offset into <paramref name="unicode" />
 
           
 
            that specifies the start of the substring.</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters to convert in the substring that starts at the position specified by  <paramref
-           name="index" />
+          The number of characters to convert in the substring that starts at the position specified by  <paramref name="index" />
 
           
 
-           in the <paramref
-           name="unicode" />
+           in the <paramref name="unicode" />
 
           
 
@@ -747,8 +723,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Globalization.IdnMapping.GetHashCode" />
+            >Override the <see cref="M:System.Globalization.IdnMapping.GetHashCode" />
 
             
 
@@ -758,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a hash code for this <see
-             cref="T:System.Globalization.IdnMapping" />
+            >Returns a hash code for this <see cref="T:System.Globalization.IdnMapping" />
 
             
 
@@ -769,8 +743,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >One of four 32-bit signed constants derived from the properties of an <see
-             cref="T:System.Globalization.IdnMapping" />
+            >One of four 32-bit signed constants derived from the properties of an <see cref="T:System.Globalization.IdnMapping" />
 
             
 
@@ -801,8 +774,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about domain names, labels, and label separators, see the remarks for the <see
-             cref="M:System.Globalization.IdnMapping.GetAscii(System.String,System.Int32,System.Int32)" />
+            >For more information about domain names, labels, and label separators, see the remarks for the <see cref="M:System.Globalization.IdnMapping.GetAscii(System.String,System.Int32,System.Int32)" />
 
             
 
@@ -816,8 +788,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unicode equivalent of the IDNA substring specified by the <paramref
-             name="ascii" />
+            >The Unicode equivalent of the IDNA substring specified by the <paramref name="ascii" />
 
             
 
@@ -825,7 +796,11 @@
           >
         </returns>
         <param name="ascii">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -856,8 +831,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about domain names, labels, and label separators, see the remarks for the <see
-             cref="M:System.Globalization.IdnMapping.GetAscii(System.String,System.Int32,System.Int32)" />
+            >For more information about domain names, labels, and label separators, see the remarks for the <see cref="M:System.Globalization.IdnMapping.GetAscii(System.String,System.Int32,System.Int32)" />
 
             
 
@@ -871,13 +845,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unicode equivalent of the IDNA substring specified by the <paramref
-             name="ascii" />
+            >The Unicode equivalent of the IDNA substring specified by the <paramref name="ascii" />
 
             
 
-             and <paramref
-             name="index" />
+             and <paramref name="index" />
 
             
 
@@ -885,24 +857,30 @@
           >
         </returns>
         <param name="ascii">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based offset into <paramref
-           name="ascii" />
+          A zero-based offset into <paramref name="ascii" />
 
           
 
-           that specifies the start of the substring to decode. The decoding operation continues to the end of the <paramref
-           name="ascii" />
+           that specifies the start of the substring to decode. The decoding operation continues to the end of the <paramref name="ascii" />
 
           
 
@@ -937,8 +915,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about domain names, labels, and label separators, see the remarks for the <see
-             cref="M:System.Globalization.IdnMapping.GetAscii(System.String,System.Int32,System.Int32)" />
+            >For more information about domain names, labels, and label separators, see the remarks for the <see cref="M:System.Globalization.IdnMapping.GetAscii(System.String,System.Int32,System.Int32)" />
 
             
 
@@ -952,18 +929,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Unicode equivalent of the IDNA substring specified by the <paramref
-             name="ascii" />
+            >The Unicode equivalent of the IDNA substring specified by the <paramref name="ascii" />
 
             
 
-            , <paramref
-             name="index" />
+            , <paramref name="index" />
 
             
 
-            , and <paramref
-             name="count" />
+            , and <paramref name="count" />
 
             
 
@@ -971,36 +945,45 @@
           >
         </returns>
         <param name="ascii">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The string to decode, which consists of one or more labels in the US-ASCII character range (U+0020 to U+007E) encoded according to the IDNA standard. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based offset into <paramref
-           name="ascii" />
+          A zero-based offset into <paramref name="ascii" />
 
           
 
            that specifies the start of the substring. </param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of characters to convert in the substring that starts at the position specified by <paramref
-           name="index" />
+          The number of characters to convert in the substring that starts at the position specified by <paramref name="index" />
 
           
 
-           in the <paramref
-           name="ascii" />
+           in the <paramref name="ascii" />
 
           
 
@@ -1025,21 +1008,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Domain names that follow standard naming rules consist of a specific subset of characters in the US-ASCII character range. The characters are the letters A through Z, the digits 0 through 9, the hyphen (-) character (U+002D), and the period (.) character. The case of the characters is not significant. Relaxed naming conventions allow the use of a broader range of ASCII characters, including the space character (U+0020), the exclamation point character (U+0021), and the underbar character (U+005F). If <see
-             cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+            >Domain names that follow standard naming rules consist of a specific subset of characters in the US-ASCII character range. The characters are the letters A through Z, the digits 0 through 9, the hyphen (-) character (U+002D), and the period (.) character. The case of the characters is not significant. Relaxed naming conventions allow the use of a broader range of ASCII characters, including the space character (U+0020), the exclamation point character (U+0021), and the underbar character (U+005F). If <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
             
 
-             is true, only standard characters can appear in a label returned by the <see
-             cref="M:System.Globalization.IdnMapping.GetAscii(System.String)" />
+             is true, only standard characters can appear in a label returned by the <see cref="M:System.Globalization.IdnMapping.GetAscii(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >By default, the value of the <see
-             cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+            >By default, the value of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
             
 
@@ -1047,13 +1027,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Globalization.IdnMapping" />
+              >The <see cref="T:System.Globalization.IdnMapping" />
 
               
 
-               class prohibits the use of the nondisplayable characters U+0000 through U+001F, and U+007F in domain name labels regardless of the setting of the <see
-               cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
+               class prohibits the use of the nondisplayable characters U+0000 through U+001F, and U+007F in domain name labels regardless of the setting of the <see cref="P:System.Globalization.IdnMapping.UseStd3AsciiRules" />
 
               
 
@@ -1064,8 +1042,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that indicates whether standard or relaxed naming conventions are used in operations performed by members of the current <see
-             cref="T:System.Globalization.IdnMapping" />
+            >Gets or sets a value that indicates whether standard or relaxed naming conventions are used in operations performed by members of the current <see cref="T:System.Globalization.IdnMapping" />
 
             
 

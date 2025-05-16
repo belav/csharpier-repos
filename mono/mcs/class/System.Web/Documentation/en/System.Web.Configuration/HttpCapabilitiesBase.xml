@@ -28,28 +28,23 @@
 
         
 
-         is the base class from which the <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+         is the base class from which the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
-         class is derived. <see
-         cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+         class is derived. <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
 
         
 
-         offers a large number of read-only properties that provide type-safe access to a browser's capabilities dictionary. You can access the <see
-         cref="T:System.Web.HttpBrowserCapabilities" />
+         offers a large number of read-only properties that provide type-safe access to a browser's capabilities dictionary. You can access the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
         
 
-         class through the <see
-         cref="P:System.Web.HttpRequest.Browser" />
+         class through the <see cref="P:System.Web.HttpRequest.Browser" />
 
         
 
-         property that is exposed by the ASP.NET <see
-         cref="P:System.Web.HttpRequest.Browser" />
+         property that is exposed by the ASP.NET <see cref="P:System.Web.HttpRequest.Browser" />
 
         
 
@@ -72,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+            >Creates a new instance of the <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
 
             
 
@@ -144,7 +138,11 @@
           <para>Used internally to add an entry to the internal collection of browsers for which capabilities are recognized.</para>
         </summary>
         <param name="browserName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -245,13 +243,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ArrayList" />
+            >Gets an <see cref="T:System.Collections.ArrayList" />
 
             
 
-             of the browsers in the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Capabilities" />
+             of the browsers in the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Capabilities" />
 
             
 
@@ -274,8 +270,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanCombineFormsInDeck" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanCombineFormsInDeck" />
 
             
 
@@ -302,8 +297,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
 
             
 
@@ -333,8 +327,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderAfterInputOrSelectElement" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderAfterInputOrSelectElement" />
 
             
 
@@ -382,8 +375,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderInputAndSelectElementsTogether" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderInputAndSelectElementsTogether" />
 
             
 
@@ -410,8 +402,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" />
 
             
 
@@ -442,8 +433,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderOneventAndPrevElementsTogether" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderOneventAndPrevElementsTogether" />
 
             
 
@@ -471,8 +461,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderPostBackCards" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderPostBackCards" />
 
             
 
@@ -503,8 +492,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderSetvarZeroWithMultiSelectionList" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderSetvarZeroWithMultiSelectionList" />
 
             
 
@@ -589,8 +577,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
 
             
 
@@ -598,8 +585,7 @@
           >
           <para>If the .NET Framework is not installed on the client, the value of the version elements returned is 0, 0,-1,-1.</para>
           <para
-            >If more than one version of the .NET Framework is installed on the client, the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
+            >If more than one version of the .NET Framework is installed on the client, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
 
             
 
@@ -626,13 +612,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
 
             
 
-             property indicates whether the browser application supports cookies. If the user has disabled cookies in their application, the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
+             property indicates whether the browser application supports cookies. If the user has disabled cookies in their application, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
 
             
 
@@ -683,8 +667,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -694,8 +677,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new instance of the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >A new instance of the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -726,31 +708,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
 
             
 
              property primarily represents the number of soft keys that are available on a WML-compatible mobile device. </para
           >
           <para
-            >Web Forms pages for mobile devices can contain a <see
-             cref="T:System.Web.UI.MobileControls.SelectionList" />
+            >Web Forms pages for mobile devices can contain a <see cref="T:System.Web.UI.MobileControls.SelectionList" />
 
             
 
-             object and more than one <see
-             cref="T:System.Web.UI.MobileControls.Command" />
+             object and more than one <see cref="T:System.Web.UI.MobileControls.Command" />
 
             
 
-             control. The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
+             control. The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
 
             
 
-             allows you to choose which of the <see
-             cref="T:System.Web.UI.MobileControls.Command" />
+             allows you to choose which of the <see cref="T:System.Web.UI.MobileControls.Command" />
 
             
 
@@ -885,13 +862,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.HttpCapabilitiesBase.GetClrVersions" />
+            >The <see cref="M:System.Web.Configuration.HttpCapabilitiesBase.GetClrVersions" />
 
             
 
-              method is supported only when the browser is Internet Explorer version 5.0 or later. If the common language runtime is not installed on the client, the property returns an array containing a single <see
-             cref="T:System.Version" />
+              method is supported only when the browser is Internet Explorer version 5.0 or later. If the common language runtime is not installed on the client, the property returns an array containing a single <see cref="T:System.Version" />
 
             
 
@@ -905,8 +880,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Version" />
+            >An array of <see cref="T:System.Version" />
 
             
 
@@ -933,13 +907,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used internally to return an instance of <see
-             cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+            >Used internally to return an instance of <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
 
             
 
-             representing the browser that generated the specified <see
-             cref="T:System.Web.HttpRequest" />
+             representing the browser that generated the specified <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -949,13 +921,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of <see
-             cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+            >An instance of <see cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
 
             
 
-             representing the browser that generated the specified <see
-             cref="T:System.Web.HttpRequest" />
+             representing the browser that generated the specified <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -963,24 +933,30 @@
           >
         </returns>
         <param name="configKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the configuration section that configures browser capabilities.</param
         >
         <param name="request">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpRequest" />
+          The <see cref="T:System.Web.HttpRequest" />
 
           
 
-           generated by the browser for which to return capabilities and which is usually the current <see
-           cref="T:System.Web.HttpRequest" />
+           generated by the browser for which to return capabilities and which is usually the current <see cref="T:System.Web.HttpRequest" />
 
           
 
@@ -1006,8 +982,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If false, a link control might be necessary when a <ui
-            >Back</ui>
+            >If false, a link control might be necessary when a <ui>Back</ui>
 
             
 
@@ -1017,8 +992,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the browser has a dedicated <ui
-            >Back</ui>
+            >Gets a value indicating whether the browser has a dedicated <ui>Back</ui>
 
             
 
@@ -1063,8 +1037,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the fully qualified class name of the <see
-             cref="T:System.Web.UI.HtmlTextWriter" />
+            >Gets or sets the fully qualified class name of the <see cref="T:System.Web.UI.HtmlTextWriter" />
 
             
 
@@ -1158,8 +1131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Configuration.HttpCapabilitiesBase.IsBrowser(System.String)" />
+            >The <see cref="M:System.Web.Configuration.HttpCapabilitiesBase.IsBrowser(System.String)" />
 
             
 
@@ -1175,7 +1147,11 @@
           <para>true if the client browser is the same as the specified browser; otherwise, false. The default is false.</para>
         </returns>
         <param name="browserName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1276,8 +1252,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the browser supports JavaScript but scripting is disabled through a security setting, the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.JavaScript" />
+            >If the browser supports JavaScript but scripting is disabled through a security setting, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.JavaScript" />
 
             
 
@@ -1389,8 +1364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumSoftkeyLabelLength" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumSoftkeyLabelLength" />
 
             
 
@@ -1510,8 +1484,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.NumberOfSoftkeys" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.NumberOfSoftkeys" />
 
             
 
@@ -1539,8 +1512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Some of the possible values for the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" />
+            >Some of the possible values for the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" />
 
             
 
@@ -1710,8 +1682,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreakBeforeWmlSelectAndInput" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreakBeforeWmlSelectAndInput" />
 
             
 
@@ -1766,8 +1737,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlAnchor" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlAnchor" />
 
             
 
@@ -1798,8 +1768,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlInput" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlInput" />
 
             
 
@@ -1830,8 +1799,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlDoAcceptsInline" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlDoAcceptsInline" />
 
             
 
@@ -1861,8 +1829,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlSelectsAsMenuCards" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlSelectsAsMenuCards" />
 
             
 
@@ -1943,13 +1910,11 @@
           <para>If true, server-control adapters insert the following tag into the HTML &lt;head&gt; element of a Web page:</para>
           <code>&lt;META HTTP-EQUIV="CONTENT-TYPE" CONTENT=""; CHARSET=""&gt;</code>
           <para
-            >In this example, <paramref
-             name="CONTENT" />
+            >In this example, <paramref name="CONTENT" />
 
             
 
-             is the value returned by the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.PreferredRenderingMime" />
+             is the value returned by the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.PreferredRenderingMime" />
 
             
 
@@ -2089,8 +2054,7 @@
           <para>If true, server control adapters generate minimal output to reduce the size of the resulting page.</para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresOutputOptimization" />
+              >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresOutputOptimization" />
 
               
 
@@ -2121,13 +2085,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresPhoneNumbersAsPlainText" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.RequiresPhoneNumbersAsPlainText" />
 
             
 
-              property applies only to browsers for which the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
+              property applies only to browsers for which the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
 
             
 
@@ -2157,8 +2119,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >HTTP is a stateless protocol, and VIEWSTATE is one mechanism used to persist client changes across multiple requests. Each control on a Web page contains a <see
-             cref="P:System.Web.UI.Control.ViewState" />
+            >HTTP is a stateless protocol, and VIEWSTATE is one mechanism used to persist client changes across multiple requests. Each control on a Web page contains a <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
@@ -2190,8 +2151,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A self-referring HTML &lt;form&gt; element is one for which the action attribute specifies its own URL. If true, self-referring forms do not return the correct results. This is due to caching by either the browser or an intermediate gateway. To correct this, server control adapters append a default query string (__ufps=<paramref
-             name="uniquefilepathsuffix" />
+            >A self-referring HTML &lt;form&gt; element is one for which the action attribute specifies its own URL. If true, self-referring forms do not return the correct results. This is due to caching by either the browser or an intermediate gateway. To correct this, server control adapters append a default query string (__ufps=<paramref name="uniquefilepathsuffix" />
 
             
 
@@ -2449,16 +2409,14 @@
           <code>&lt;META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE"/&gt;</code>
           <para>If true, the inclusion of this tag in the &lt;head&gt; element of a Web page should force the browser to reload content from the server.</para>
           <para
-            >If false, server control adapters append a default query string (__ufps=<paramref
-             name="uniquefilepathsuffix" />
+            >If false, server control adapters append a default query string (__ufps=<paramref name="uniquefilepathsuffix" />
 
             
 
             ) onto link URL values that do not already have one. This forces the browser to reload content from the server.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCacheControlMetaTag" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCacheControlMetaTag" />
 
             
 
@@ -2657,16 +2615,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
 
             
 
              property applies only to i-mode–compatible devices.</para
           >
           <para
-            >Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see
-             cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+            >Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
 
             
 
@@ -2693,8 +2649,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
 
             
 
@@ -2722,8 +2677,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
 
             
 
@@ -2772,8 +2726,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneMultiMediaAttributes" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneMultiMediaAttributes" />
 
             
 
@@ -2821,16 +2774,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneSymbols" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsJPhoneSymbols" />
 
             
 
              property applies only to J-Phone–compatible mobile devices.</para
           >
           <para
-            >Set J-Phone–specific picture symbols for J-Phone–compatible browsers by using the <see
-             cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+            >Set J-Phone–specific picture symbols for J-Phone–compatible browsers by using the <see cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
 
             
 
@@ -2884,41 +2835,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With UP.Browser 4.1 or UP.Browser 3.2, the <see
-             cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+            >With UP.Browser 4.1 or UP.Browser 3.2, the <see cref="M:System.Web.HttpResponse.Redirect(System.String)" />
 
             
 
-             method behaves as if the value of the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" />
+             method behaves as if the value of the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" />
 
             
 
-             property of the <see
-             cref="T:System.Web.HttpBrowserCapabilities" />
+             property of the <see cref="T:System.Web.HttpBrowserCapabilities" />
 
             
 
-             object is false, unless the <see
-             cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
+             object is false, unless the <see cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
             
 
-             property in the <see
-             cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
+             property in the <see cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
 
             
 
              section of Web.config has been explicitly set to true.</para
           >
           <para
-            >In ASP.NET 1.1, the options for this setting were true or false, but with ASP.NET 2.0, the choices are expanded, and <see
-             cref="F:System.Web.HttpCookieMode.AutoDetect" />
+            >In ASP.NET 1.1, the options for this setting were true or false, but with ASP.NET 2.0, the choices are expanded, and <see cref="F:System.Web.HttpCookieMode.AutoDetect" />
 
             
 
-             is now the default setting. If your Web application has the cookieless attribute of the &lt;sessionState&gt; section in the Web.config file set to a Boolean value, <see
-             cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+             is now the default setting. If your Web application has the cookieless attribute of the &lt;sessionState&gt; section in the Web.config file set to a Boolean value, <see cref="M:System.Web.HttpResponse.Redirect(System.String)" />
 
             
 
@@ -3013,33 +2957,27 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >1 if <paramref
-             name="filter1" />
+            >1 if <paramref name="filter1" />
 
             
 
-             is a parent of <paramref
-             name="filter2" />
+             is a parent of <paramref name="filter2" />
 
             
 
-            ; -1 if <paramref
-             name="filter2" />
+            ; -1 if <paramref name="filter2" />
 
             
 
-             is a parent of <paramref
-             name="filter1" />
+             is a parent of <paramref name="filter1" />
 
             
 
-            ; 0 if there is no parent-child relationship between <paramref
-             name="filter1" />
+            ; 0 if there is no parent-child relationship between <paramref name="filter1" />
 
             
 
-             and <paramref
-             name="filter2" />
+             and <paramref name="filter2" />
 
             
 
@@ -3047,14 +2985,22 @@
           >
         </returns>
         <param name="filter1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The first filter to compare.</param
         >
         <param name="filter2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3088,7 +3034,11 @@
           <para>true if the filter was successfully evaluated; otherwise, false.</para>
         </returns>
         <param name="filterName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3200,23 +3150,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
+            >The <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
 
             
 
-             property returns a string. In some scenarios, the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
+             property returns a string. In some scenarios, the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
 
             
 
-             property might contain letter characters, as in the case of a browser or client device that is a beta version such as "7.0b." To correctly get the version as a data type that can be used in a numeric comparison, concatenate the <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.MajorVersion" />
+             property might contain letter characters, as in the case of a browser or client device that is a beta version such as "7.0b." To correctly get the version as a data type that can be used in a numeric comparison, concatenate the <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MajorVersion" />
 
             
 
-             and <see
-             cref="P:System.Web.Configuration.HttpCapabilitiesBase.MinorVersion" />
+             and <see cref="P:System.Web.Configuration.HttpCapabilitiesBase.MinorVersion" />
 
             
 

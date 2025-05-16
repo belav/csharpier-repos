@@ -17,36 +17,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
+        >The <see cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
 
         
 
-         event is raised when the value of the <see
-         cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
+         event is raised when the value of the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control changes. The <see
-         cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+         control changes. The <see cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
 
         
 
-         event is raised when the value of the <see
-         cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
+         event is raised when the value of the <see cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
 
         
 
          property changes.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -58,14 +52,12 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Provides data for the <see cref="T:System.Windows.Forms.DataGridView" />
         <see cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+         and <see cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
 
         
 
@@ -88,28 +80,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When implementing a source for <see
-             cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
+            >When implementing a source for <see cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+             and <see cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
 
             
 
-             events, pass in true for <paramref
-             name="previousModeAutoSized" />
+             events, pass in true for <paramref name="previousModeAutoSized" />
 
             
 
-             if the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             if the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             already had an automatic resizing mode and the new mode is different. Otherwise, pass in false for <paramref
-             name="previousModeAutoSized" />
+             already had an automatic resizing mode and the new mode is different. Otherwise, pass in false for <paramref name="previousModeAutoSized" />
 
             
 
@@ -119,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewAutoSizeModeEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewAutoSizeModeEventArgs" />
 
             
 
@@ -128,42 +114,39 @@
           >
         </summary>
         <param name="previousModeAutoSized">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          true if the <see
-           cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
+          true if the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
 
           
 
-           property was previously set to any <see
-           cref="T:System.Windows.Forms.DataGridViewAutoSizeRowsMode" />
+           property was previously set to any <see cref="T:System.Windows.Forms.DataGridViewAutoSizeRowsMode" />
 
           
 
-           value other than <see
-           cref="F:System.Windows.Forms.DataGridViewAutoSizeRowsMode.None" />
+           value other than <see cref="F:System.Windows.Forms.DataGridViewAutoSizeRowsMode.None" />
 
           
 
-           or the <see
-           cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
+           or the <see cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
 
           
 
-           property was previously set to any <see
-           cref="T:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode" />
+           property was previously set to any <see cref="T:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode" />
 
           
 
-           value other than <see
-           cref="F:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing" />
+           value other than <see cref="F:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing" />
 
           
 
-           or <see
-           cref="F:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.EnableResizing" />
+           or <see cref="F:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.EnableResizing" />
 
           
 
@@ -186,28 +169,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.DataGridViewAutoSizeModeEventArgs" />
+            >The <see cref="T:System.Windows.Forms.DataGridViewAutoSizeModeEventArgs" />
 
             
 
-             class is used with the <see
-             cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
+             class is used with the <see cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
 
             
 
-             and <see
-             cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+             and <see cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
 
             
 
-             events, so this property relates specifically to the previous state of either the <see
-             cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
+             events, so this property relates specifically to the previous state of either the <see cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
 
             
 
-             or <see
-             cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
+             or <see cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
 
             
 
@@ -217,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value specifying whether the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >Gets a value specifying whether the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 

@@ -20,31 +20,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Using indigo1, you can generate CLR types representing data contracts from XML schemas. In certain cases when doing so, the schemas may not all be represented as data contracts. In this case, you can use the <see
-         cref="P:System.Runtime.Serialization.ImportOptions.ImportXmlType" />
+        >Using indigo1, you can generate CLR types representing data contracts from XML schemas. In certain cases when doing so, the schemas may not all be represented as data contracts. In this case, you can use the <see cref="P:System.Runtime.Serialization.ImportOptions.ImportXmlType" />
 
         
 
-         property of the <see
-         cref="T:System.Runtime.Serialization.ImportOptions" />
+         property of the <see cref="T:System.Runtime.Serialization.ImportOptions" />
 
         
 
-         class.  Setting the property to true specifies that these types are imported as XML types that implement the <see
-         cref="T:System.Xml.Serialization.IXmlSerializable" />
+         class.  Setting the property to true specifies that these types are imported as XML types that implement the <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
         
 
          interface. In the process, the generated types can store anything, but they are read and written as XML by the serializer. </para
       >
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.XmlSerializableServices" />
+        >The <see cref="T:System.Runtime.Serialization.XmlSerializableServices" />
 
         
 
-         is an abstract helper class that contains code that is used by the generated <see
-         cref="T:System.Xml.Serialization.IXmlSerializable" />
+         is an abstract helper class that contains code that is used by the generated <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
         
 
@@ -87,24 +82,30 @@
           <para>Generates a default schema type given the specified type name and adds it to the specified schema set. </para>
         </summary>
         <param name="schemas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Schema.XmlSchemaSet" />
+          An <see cref="T:System.Xml.Schema.XmlSchemaSet" />
 
           
 
            to add the generated schema type to.</param
         >
         <param name="typeQName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -135,18 +136,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method reads all XML contained within the node the reader is positioned on when this call is made. This enables it to read and store all XML as an array of <see
-             cref="T:System.Xml.XmlNode" />
+            >This method reads all XML contained within the node the reader is positioned on when this call is made. This enables it to read and store all XML as an array of <see cref="T:System.Xml.XmlNode" />
 
             
 
-             objects. It is a helper method used by the types that implement <see
-             cref="T:System.Xml.Serialization.IXmlSerializable" />
+             objects. It is a helper method used by the types that implement <see cref="T:System.Xml.Serialization.IXmlSerializable" />
 
             
 
-             and that use the <see
-             cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+             and that use the <see cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
 
             
 
@@ -160,8 +158,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Xml.XmlNode" />
+            >An array of type <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -169,12 +166,15 @@
           >
         </returns>
         <param name="xmlReader">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlReader" />
+          An <see cref="T:System.Xml.XmlReader" />
 
           
 
@@ -209,24 +209,30 @@
           <para>Writes the supplied nodes using the specified writer.</para>
         </summary>
         <param name="xmlWriter">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlWriter" />
+          An <see cref="T:System.Xml.XmlWriter" />
 
           
 
            used for writing.</param
         >
         <param name="nodes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Xml.XmlNode" />
+          An array of type <see cref="T:System.Xml.XmlNode" />
 
           
 

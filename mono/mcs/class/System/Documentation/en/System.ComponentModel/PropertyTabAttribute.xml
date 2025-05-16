@@ -31,18 +31,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.PropertyTabAttribute" />
+        >The <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
         
 
-         lets you add a new property page to a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         lets you add a new property page to a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
-         control. The <see
-         cref="T:System.ComponentModel.PropertyTabAttribute" />
+         control. The <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
         
 
@@ -73,13 +70,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This is a default constructor that creates an uninitialized <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >This is a default constructor that creates an uninitialized <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
-            . This constructor can be used to derive from this attribute and specify multiple tab types by calling <see
-             cref="M:System.ComponentModel.PropertyTabAttribute.InitializeArrays(System.String[],System.ComponentModel.PropertyTabScope[])" />
+            . This constructor can be used to derive from this attribute and specify multiple tab types by calling <see cref="M:System.ComponentModel.PropertyTabAttribute.InitializeArrays(System.String[],System.ComponentModel.PropertyTabScope[])" />
 
             
 
@@ -89,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -120,8 +114,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -129,12 +122,15 @@
           >
         </summary>
         <param name="tabClassName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The assembly qualified name of the type of tab to create. For an example of this format convention, see <see
-           cref="P:System.Type.AssemblyQualifiedName" />
+          The assembly qualified name of the type of tab to create. For an example of this format convention, see <see cref="P:System.Type.AssemblyQualifiedName" />
 
           
 
@@ -163,8 +159,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -172,7 +167,11 @@
           >
         </summary>
         <param name="tabClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -205,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -214,39 +212,42 @@
           >
         </summary>
         <param name="tabClassName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The assembly qualified name of the type of tab to create. For an example of this format convention, see <see
-           cref="P:System.Type.AssemblyQualifiedName" />
+          The assembly qualified name of the type of tab to create. For an example of this format convention, see <see cref="P:System.Type.AssemblyQualifiedName" />
 
           
 
           . </param
         >
         <param name="tabScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyTabScope" />
+          A <see cref="T:System.ComponentModel.PropertyTabScope" />
 
           
 
-           that indicates the scope of this tab. If the scope is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Component" />
+           that indicates the scope of this tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />
 
           
 
-          , it is shown only for components with the corresponding <see
-           cref="T:System.ComponentModel.PropertyTabAttribute" />
+          , it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
-          . If it is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Document" />
+          . If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />
 
           
 
@@ -279,8 +280,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -288,34 +288,38 @@
           >
         </summary>
         <param name="tabClass">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of tab to create. </param
         >
         <param name="tabScope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyTabScope" />
+          A <see cref="T:System.ComponentModel.PropertyTabScope" />
 
           
 
-           that indicates the scope of this tab. If the scope is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Component" />
+           that indicates the scope of this tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />
 
           
 
-          , it is shown only for components with the corresponding <see
-           cref="T:System.ComponentModel.PropertyTabAttribute" />
+          , it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
-          . If it is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Document" />
+          . If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />
 
           
 
@@ -353,8 +357,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >true if the <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -362,12 +365,15 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.PropertyTabAttribute" />
+          A <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
@@ -402,13 +408,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="other" />
+            >true if <paramref name="other" />
 
             
 
-             refers to the same <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+             refers to the same <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -416,7 +420,11 @@
           >
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -482,8 +490,7 @@
 
             
 
-             provides a utility function that can be used to set the types of tab classes that this <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+             provides a utility function that can be used to set the types of tab classes that this <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -495,29 +502,34 @@
           <para>Initializes the attribute using the specified names of tab classes and array of tab scopes.</para>
         </summary>
         <param name="tabClassNames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of fully qualified type names of the types to create for tabs on the Properties window. </param
         >
         <param name="tabScopes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scope of each tab. If the scope is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Component" />
+          The scope of each tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />
 
           
 
-          , it is shown only for components with the corresponding <see
-           cref="T:System.ComponentModel.PropertyTabAttribute" />
+          , it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
-          . If it is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Document" />
+          . If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />
 
           
 
@@ -555,8 +567,7 @@
 
             
 
-             provides a utility function that can be used to set the types of tab classes that this <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+             provides a utility function that can be used to set the types of tab classes that this <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 
@@ -568,29 +579,34 @@
           <para>Initializes the attribute using the specified names of tab classes and array of tab scopes.</para>
         </summary>
         <param name="tabClasses">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The types of tabs to create. </param
         >
         <param name="tabScopes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scope of each tab. If the scope is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Component" />
+          The scope of each tab. If the scope is <see cref="F:System.ComponentModel.PropertyTabScope.Component" />
 
           
 
-          , it is shown only for components with the corresponding <see
-           cref="T:System.ComponentModel.PropertyTabAttribute" />
+          , it is shown only for components with the corresponding <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
           
 
-          . If it is <see
-           cref="F:System.ComponentModel.PropertyTabScope.Document" />
+          . If it is <see cref="F:System.ComponentModel.PropertyTabScope.Document" />
 
           
 
@@ -615,8 +631,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >All specified types must be able to be assigned to a <see
-             cref="T:System.Windows.Forms.Design.PropertyTab" />
+            >All specified types must be able to be assigned to a <see cref="T:System.Windows.Forms.Design.PropertyTab" />
 
             
 
@@ -674,8 +689,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of tab scopes of each tab of this <see
-             cref="T:System.ComponentModel.PropertyTabAttribute" />
+            >Gets an array of tab scopes of each tab of this <see cref="T:System.ComponentModel.PropertyTabAttribute" />
 
             
 

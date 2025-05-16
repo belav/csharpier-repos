@@ -2,8 +2,7 @@
 <clause number="12.1.2.1" title="Instance variables in classes">
   <paragraph>An instance variable of a class comes into existence when a new instance of that class is created, and ceases to exist when there are no references to that instance and the instance's destructor (if any) has executed. </paragraph>
   <paragraph
-    >The initial value of an instance variable of a class is the default value (<hyperlink
-    >12.2</hyperlink>
+    >The initial value of an instance variable of a class is the default value (<hyperlink>12.2</hyperlink>
 
     
 

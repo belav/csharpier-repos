@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.CommandBehavior" />
+        >The <see cref="T:System.Data.CommandBehavior" />
 
         
 
-         values are used by the <see
-         cref="M:System.Data.IDbCommand.ExecuteReader" />
+         values are used by the <see cref="M:System.Data.IDbCommand.ExecuteReader" />
 
         
 
-         method of <see
-         cref="T:System.Data.IDbCommand" />
+         method of <see cref="T:System.Data.IDbCommand" />
 
         
 
@@ -44,13 +41,11 @@
 
         
 
-         is ignored when used to define a <see
-         cref="T:System.Data.Sql.SqlNotificationRequest" />
+         is ignored when used to define a <see cref="T:System.Data.Sql.SqlNotificationRequest" />
 
         
 
-         or <see
-         cref="T:System.Data.SqlClient.SqlDependency" />
+         or <see cref="T:System.Data.SqlClient.SqlDependency" />
 
         
 
@@ -58,13 +53,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Use <see
-           cref="F:System.Data.CommandBehavior.SequentialAccess" />
+          >Use <see cref="F:System.Data.CommandBehavior.SequentialAccess" />
 
           
 
-           to retrieve large values and binary data. Otherwise, an <see
-           cref="T:System.OutOfMemoryException" />
+           to retrieve large values and binary data. Otherwise, an <see cref="T:System.OutOfMemoryException" />
 
           
 
@@ -109,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The query may return multiple result sets. Execution of the query may affect the database state. Default sets no <see
-             cref="T:System.Data.CommandBehavior" />
+            >The query may return multiple result sets. Execution of the query may affect the database state. Default sets no <see cref="T:System.Data.CommandBehavior" />
 
             
 
@@ -134,16 +126,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="F:System.Data.CommandBehavior.KeyInfo" />
+            >When <see cref="F:System.Data.CommandBehavior.KeyInfo" />
 
             
 
              is used for command execution, the provider will append extra columns to the result set for existing primary key and timestamp columns. </para
           >
           <para
-            >When using <see
-             cref="F:System.Data.CommandBehavior.KeyInfo" />
+            >When using <see cref="F:System.Data.CommandBehavior.KeyInfo" />
 
             
 
@@ -172,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The query returns column information only. When using <see
-             cref="F:System.Data.CommandBehavior.SchemaOnly" />
+            >The query returns column information only. When using <see cref="F:System.Data.CommandBehavior.SchemaOnly" />
 
             
 
@@ -197,13 +186,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify SequentialAccess, you are required to read from the columns in the order they are returned, although you are not required to read each column. Once you have read past a location in the returned stream of data, data at or before that location can no longer be read from the DataReader. When using the <see
-             cref="T:System.Data.OleDb.OleDbDataReader" />
+            >When you specify SequentialAccess, you are required to read from the columns in the order they are returned, although you are not required to read each column. Once you have read past a location in the returned stream of data, data at or before that location can no longer be read from the DataReader. When using the <see cref="T:System.Data.OleDb.OleDbDataReader" />
 
             
 
-            , you can reread the current column value until reading past it. When using the <see
-             cref="T:System.Data.SqlClient.SqlDataReader" />
+            , you can reread the current column value until reading past it. When using the <see cref="T:System.Data.SqlClient.SqlDataReader" />
 
             
 
@@ -251,23 +238,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The query is expected to return a single row of the first result set. Execution of the query may affect the database state. Some .NET Framework data providers may, but are not required to, use this information to optimize the performance of the command. When you specify <see
-             cref="F:System.Data.CommandBehavior.SingleRow" />
+            >The query is expected to return a single row of the first result set. Execution of the query may affect the database state. Some .NET Framework data providers may, but are not required to, use this information to optimize the performance of the command. When you specify <see cref="F:System.Data.CommandBehavior.SingleRow" />
 
             
 
-             with the <see
-             cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
+             with the <see cref="M:System.Data.OleDb.OleDbCommand.ExecuteReader" />
 
             
 
-             method of the <see
-             cref="T:System.Data.OleDb.OleDbCommand" />
+             method of the <see cref="T:System.Data.OleDb.OleDbCommand" />
 
             
 
-             object, the .NET Framework Data Provider for OLE DB performs binding using the OLE DB IRow interface if it is available. Otherwise, it uses the IRowset interface. If your SQL statement is expected to return only a single row, specifying <see
-             cref="F:System.Data.CommandBehavior.SingleRow" />
+             object, the .NET Framework Data Provider for OLE DB performs binding using the OLE DB IRow interface if it is available. Otherwise, it uses the IRowset interface. If your SQL statement is expected to return only a single row, specifying <see cref="F:System.Data.CommandBehavior.SingleRow" />
 
             
 

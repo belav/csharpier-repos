@@ -21,13 +21,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.NoNullAllowedException" />
+        >The <see cref="T:System.Data.NoNullAllowedException" />
 
         
 
-         is thrown when invoking the following methods or properties when you try to insert a null value into a column where <see
-         cref="P:System.Data.DataColumn.AllowDBNull" />
+         is thrown when invoking the following methods or properties when you try to insert a null value into a column where <see cref="P:System.Data.DataColumn.AllowDBNull" />
 
         
 
@@ -59,8 +57,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the exception that is thrown when you try to insert a null value into a column where <see
-         cref="P:System.Data.DataColumn.AllowDBNull" />
+        >Represents the exception that is thrown when you try to insert a null value into a column where <see cref="P:System.Data.DataColumn.AllowDBNull" />
 
         
 
@@ -79,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.NoNullAllowedException" />
+            >Initializes a new instance of the <see cref="T:System.Data.NoNullAllowedException" />
 
             
 
@@ -105,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.NoNullAllowedException" />
+            >Initializes a new instance of the <see cref="T:System.Data.NoNullAllowedException" />
 
             
 
@@ -114,7 +109,11 @@
           >
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -142,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.NoNullAllowedException" />
+            >Initializes a new instance of the <see cref="T:System.Data.NoNullAllowedException" />
 
             
 
@@ -151,14 +149,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.NoNullAllowedException" />
+            >Initializes a new instance of the <see cref="T:System.Data.NoNullAllowedException" />
 
             
 
@@ -198,7 +203,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

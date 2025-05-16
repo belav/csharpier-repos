@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" />
 
             
 
@@ -76,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Configuration.ProtocolMappingElement" />
 
             
 
@@ -85,21 +83,33 @@
           >
         </summary>
         <param name="schemeType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A communications protocol scheme.</param
         >
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A communications protocol message format style.</param
         >
         <param name="bindingConfiguration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

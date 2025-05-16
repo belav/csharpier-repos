@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >indigo1 processes JSON messages using a mapping between JSON data and the XML Infoset. Normally, this mapping is hidden from view. However, in some advanced scenarios it may be necessary to manually convert between JSON and XML. In this case, the <see
-         cref="T:System.Runtime.Serialization.Json.JsonReaderWriterFactory" />
+        >indigo1 processes JSON messages using a mapping between JSON data and the XML Infoset. Normally, this mapping is hidden from view. However, in some advanced scenarios it may be necessary to manually convert between JSON and XML. In this case, the <see cref="T:System.Runtime.Serialization.Json.JsonReaderWriterFactory" />
 
         
 
-         class can be used to create the necessary XML readers and writers. Note that not every XML Infoset element can be mapped to JSON. crabout mapping, see <format
-         type="text/html">
+         class can be used to create the necessary XML readers and writers. Note that not every XML Infoset element can be mapped to JSON. crabout mapping, see <format type="text/html">
           <a href="88abc1fb-8196-4ee3-a23b-c6934144d1dd">JSON Serialization</a>
         </format>
 
@@ -38,13 +36,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Produces instances of <see
-         cref="T:System.Xml.XmlDictionaryReader" />
+        >Produces instances of <see cref="T:System.Xml.XmlDictionaryReader" />
 
         
 
-         that can read data encoded with JavaScript Object Notation (JSON) from a stream or buffer and map it to an XML Infoset and instances of <see
-         cref="T:System.Xml.XmlDictionaryWriter" />
+         that can read data encoded with JavaScript Object Notation (JSON) from a stream or buffer and map it to an XML Infoset and instances of <see cref="T:System.Xml.XmlDictionaryWriter" />
 
         
 
@@ -77,21 +73,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload does not accept an <see
-             cref="T:System.Text.Encoding" />
+            >This overload does not accept an <see cref="T:System.Text.Encoding" />
 
             
 
              parameter. The character encoding (UTF-8, Unicode or Big-Endian Unicode) is auto-detected when the data is read.</para
           >
           <para
-            >crabout using <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >crabout using <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-             to prevent Denial of Service attacks when reading untrusted data, see <format
-             type="text/html">
+             to prevent Denial of Service attacks when reading untrusted data, see <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
 
@@ -103,8 +96,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -114,8 +106,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -123,24 +114,30 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.Byte" />
+          The input <see cref="T:System.Byte" />
 
           
 
            buffer array from which to read.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
@@ -172,21 +169,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload does not take an <see
-             cref="T:System.Text.Encoding" />
+            >This overload does not take an <see cref="T:System.Text.Encoding" />
 
             
 
              parameter. The character encoding (UTF-8, Unicode or Big-Endian Unicode) is auto-detected when the data is read.</para
           >
           <para
-            >crabout using <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >crabout using <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-             to prevent Denial of Service attacks when reading untrusted data, see <format
-             type="text/html">
+             to prevent Denial of Service attacks when reading untrusted data, see <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
 
@@ -198,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -209,8 +202,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -218,24 +210,30 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.IO.Stream" />
+          The input <see cref="T:System.IO.Stream" />
 
           
 
            from which to read.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
@@ -269,21 +267,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This overload does not take an <see
-             cref="T:System.Text.Encoding" />
+            >This overload does not take an <see cref="T:System.Text.Encoding" />
 
             
 
              parameter. The character encoding (UTF-8, Unicode or Big-Endian Unicode) is auto-detected when the data is read.</para
           >
           <para
-            >crabout using <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >crabout using <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-             to prevent Denial of Service attacks when reading untrusted data, see <format
-             type="text/html">
+             to prevent Denial of Service attacks when reading untrusted data, see <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
 
@@ -295,8 +290,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -306,8 +300,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -315,48 +308,60 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.Byte" />
+          The input <see cref="T:System.Byte" />
 
           
 
            buffer array from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Starting position from which to read in <paramref
-           name="buffer" />
+          Starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Number of bytes that can be read from <paramref
-           name="buffer" />
+          Number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
@@ -390,13 +395,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >crabout using <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >crabout using <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-             to prevent Denial of Service attacks when reading untrusted data, see <format
-             type="text/html">
+             to prevent Denial of Service attacks when reading untrusted data, see <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
 
@@ -408,8 +411,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -419,8 +421,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -428,48 +429,60 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.IO.Stream" />
+          The input <see cref="T:System.IO.Stream" />
 
           
 
            from which to read.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            that specifies the character encoding used by the reader. If null is specified as the value, the reader attempts to auto-detect the encoding.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            used to prevent Denial of Service attacks when reading untrusted data. </param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.OnXmlDictionaryReaderClose" />
+          The <see cref="T:System.Xml.OnXmlDictionaryReaderClose" />
 
           
 
@@ -505,13 +518,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >crabout using <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >crabout using <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-             to prevent Denial of Service attacks when reading untrusted data, see <format
-             type="text/html">
+             to prevent Denial of Service attacks when reading untrusted data, see <format type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
 
@@ -523,8 +534,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -534,8 +544,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryReader" />
+            >An <see cref="T:System.Xml.XmlDictionaryReader" />
 
             
 
@@ -543,72 +552,90 @@
           >
         </returns>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input <see
-           cref="T:System.Byte" />
+          The input <see cref="T:System.Byte" />
 
           
 
            buffer array from which to read.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Starting position from which to read in <paramref
-           name="buffer" />
+          Starting position from which to read in <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Number of bytes that can be read from <paramref
-           name="buffer" />
+          Number of bytes that can be read from <paramref name="buffer" />
 
           
 
           .</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            that specifies the character encoding used by the reader. If null is specified as the value, the reader attempts to auto-detect the encoding.</param
         >
         <param name="quotas">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+          The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
           
 
            used to prevent Denial of Service attacks when reading untrusted data. </param
         >
         <param name="onClose">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.OnXmlDictionaryReaderClose" />
+          The <see cref="T:System.Xml.OnXmlDictionaryReaderClose" />
 
           
 
@@ -643,8 +670,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -654,8 +680,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >An <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -663,12 +688,15 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The output <see
-           cref="T:System.IO.Stream" />
+          The output <see cref="T:System.IO.Stream" />
 
           
 
@@ -704,8 +732,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -715,8 +742,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >An <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -724,24 +750,30 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The output <see
-           cref="T:System.IO.Stream" />
+          The output <see cref="T:System.IO.Stream" />
 
           
 
            for the JSON writer.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
@@ -775,8 +807,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >Creates an <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -786,8 +817,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlDictionaryWriter" />
+            >An <see cref="T:System.Xml.XmlDictionaryWriter" />
 
             
 
@@ -795,31 +825,41 @@
           >
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The output <see
-           cref="T:System.IO.Stream" />
+          The output <see cref="T:System.IO.Stream" />
 
           
 
            for the JSON writer.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Text.Encoding" />
+          The <see cref="T:System.Text.Encoding" />
 
           
 
            that specifies the character encoding used by the writer. The default encoding is UTF-8.</param
         >
         <param name="ownsStream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

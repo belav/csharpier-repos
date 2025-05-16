@@ -25,8 +25,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >In a wrt component, all the parameters of a method and the return value must have names. By default, <format
-         type="text/html">
+        >In a wrt component, all the parameters of a method and the return value must have names. By default, <format type="text/html">
           <a href="d2ce0683-343d-403e-bb8d-209186f7a19d"
             >Winmdexp.exe (Windows Runtime Metadata Export Tool)</a
           >
@@ -34,8 +33,7 @@
 
         
 
-         gives the return value the name "value". When you use a component in a win8_appname_long app written in JavaScript, you can use this name to retrieve the return value. For example, suppose a component defines a method that has a return value and two out parameters (ByRef parameters with the <see
-         cref="T:System.Runtime.InteropServices.OutAttribute" />
+         gives the return value the name "value". When you use a component in a win8_appname_long app written in JavaScript, you can use this name to retrieve the return value. For example, suppose a component defines a method that has a return value and two out parameters (ByRef parameters with the <see cref="T:System.Runtime.InteropServices.OutAttribute" />
 
         
 
@@ -61,8 +59,7 @@ End Function
         results.value + ", Max=" + results.maxValue;
 </code>
       <para
-        >You must give the return value a different name if you already have a parameter named "value". Or you might simply want to use a more meaningful name (such as "average" in this example). Apply the <see
-         cref="T:System.Runtime.InteropServices.WindowsRuntime.ReturnValueNameAttribute" />
+        >You must give the return value a different name if you already have a parameter named "value". Or you might simply want to use a more meaningful name (such as "average" in this example). Apply the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReturnValueNameAttribute" />
 
         
 
@@ -108,8 +105,7 @@ End Function
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.WindowsRuntime.ReturnValueNameAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.WindowsRuntime.ReturnValueNameAttribute" />
 
             
 
@@ -117,7 +113,11 @@ End Function
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

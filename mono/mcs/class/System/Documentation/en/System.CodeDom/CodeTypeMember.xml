@@ -34,23 +34,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.CodeDom.CodeTypeMember" />
+        >The <see cref="T:System.CodeDom.CodeTypeMember" />
 
         
 
-         class can be used to represent the declaration for a member of a type. <see
-         cref="T:System.CodeDom.CodeTypeMember" />
+         class can be used to represent the declaration for a member of a type. <see cref="T:System.CodeDom.CodeTypeMember" />
 
         
 
-         is a base class from which more specific types of members are derived, such as <see
-         cref="T:System.CodeDom.CodeMemberField" />
+         is a base class from which more specific types of members are derived, such as <see cref="T:System.CodeDom.CodeMemberField" />
 
         
 
-         and <see
-         cref="T:System.CodeDom.CodeMemberMethod" />
+         and <see cref="T:System.CodeDom.CodeMemberMethod" />
 
         
 
@@ -82,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeMember" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeMember" />
 
             
 
@@ -117,43 +112,35 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property is used to specify the attributes of the type member. </para>
           <para
-            >Member attributes are classified in groups, with a mask for each group. The access group consists of flags containing the terms Public, Private, Family, or Assembly.  The scope group includes flags for <see
-             cref="F:System.CodeDom.MemberAttributes.Abstract" />
+            >Member attributes are classified in groups, with a mask for each group. The access group consists of flags containing the terms Public, Private, Family, or Assembly.  The scope group includes flags for <see cref="F:System.CodeDom.MemberAttributes.Abstract" />
 
             
 
-            , <see
-             cref="F:System.CodeDom.MemberAttributes.Final" />
+            , <see cref="F:System.CodeDom.MemberAttributes.Final" />
 
             
 
-            , <see
-             cref="F:System.CodeDom.MemberAttributes.Static" />
+            , <see cref="F:System.CodeDom.MemberAttributes.Static" />
 
             
 
-            , <see
-             cref="F:System.CodeDom.MemberAttributes.Override" />
+            , <see cref="F:System.CodeDom.MemberAttributes.Override" />
 
             
 
-            , and <see
-             cref="F:System.CodeDom.MemberAttributes.Const" />
+            , and <see cref="F:System.CodeDom.MemberAttributes.Const" />
 
             
 
-            . The <see
-             cref="F:System.CodeDom.MemberAttributes.AccessMask" />
+            . The <see cref="F:System.CodeDom.MemberAttributes.AccessMask" />
 
             
 
-             mask identifies the access attributes. The <see
-             cref="F:System.CodeDom.MemberAttributes.ScopeMask" />
+             mask identifies the access attributes. The <see cref="F:System.CodeDom.MemberAttributes.ScopeMask" />
 
             
 
-             mask identifies the scope attributes. The default value for the <see
-             cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+             mask identifies the scope attributes. The default value for the <see cref="P:System.CodeDom.CodeTypeMember.Attributes" />
 
             
 

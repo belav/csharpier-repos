@@ -25,26 +25,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The inherited member <see
-         cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+        >The inherited member <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
 
         
 
-         must be invoked to create this specific common dialog box. <see
-         cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
+         must be invoked to create this specific common dialog box. <see cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
 
         
 
          can be overridden to implement specific dialog box hook functionality.</para
       >
       <para
-        >When you create an instance of <see
-         cref="T:System.Windows.Forms.FontDialog" />
+        >When you create an instance of <see cref="T:System.Windows.Forms.FontDialog" />
 
         
 
-        , some of the read/write properties are set to initial values. For a list of these values, see the <see
-         cref="M:System.Windows.Forms.FontDialog.#ctor" />
+        , some of the read/write properties are set to initial values. For a list of these values, see the <see cref="M:System.Windows.Forms.FontDialog.#ctor" />
 
         
 
@@ -65,8 +61,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you create an instance of <see
-             cref="T:System.Windows.Forms.FontDialog" />
+            >When you create an instance of <see cref="T:System.Windows.Forms.FontDialog" />
 
             
 
@@ -219,8 +214,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.FontDialog" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FontDialog" />
 
             
 
@@ -249,13 +243,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <ui
-            >Script</ui>
+            >The <ui>Script</ui>
 
             
 
-             combo box found on the <ui
-            >Font</ui>
+             combo box found on the <ui>Font</ui>
 
             
 
@@ -265,8 +257,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the user can change the character set specified in the <ui
-            >Script</ui>
+            >Gets or sets a value indicating whether the user can change the character set specified in the <ui>Script</ui>
 
             
 
@@ -361,21 +352,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Every time the <ui
-            >Apply</ui>
+            >Every time the <ui>Apply</ui>
 
             
 
-             button is clicked, another <see
-             cref="E:System.Windows.Forms.FontDialog.Apply" />
+             button is clicked, another <see cref="E:System.Windows.Forms.FontDialog.Apply" />
 
             
 
              event is raised.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67"
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
@@ -389,8 +377,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the user clicks the <ui
-            >Apply</ui>
+            >Occurs when the user clicks the <ui>Apply</ui>
 
             
 
@@ -438,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Owns the <see
-             cref="E:System.Windows.Forms.FontDialog.Apply" />
+            >Owns the <see cref="E:System.Windows.Forms.FontDialog.Apply" />
 
             
 
@@ -538,13 +524,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hook procedure is a mechanism by which a function can intercept events before they reach an application. When you override the <see
-             cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
+            >A hook procedure is a mechanism by which a function can intercept events before they reach an application. When you override the <see cref="M:System.Windows.Forms.CommonDialog.HookProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)" />
 
             
 
-             method for a <see
-             cref="T:System.Windows.Forms.CommonDialog" />
+             method for a <see cref="T:System.Windows.Forms.CommonDialog" />
 
             
 
@@ -560,28 +544,44 @@
           <para>A zero value if the default dialog box procedure processes the message; a nonzero value if the default dialog box procedure ignores the message.</para>
         </returns>
         <param name="hWnd">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The handle to the dialog box window. </param
         >
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The message being received. </param
         >
         <param name="wparam">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           Additional information about the message. </param
         >
         <param name="lparam">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -609,46 +609,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order for the maximum and minimum size settings to take effect, <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+            >In order for the maximum and minimum size settings to take effect, <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
-             must be greater than <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+             must be greater than <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
             , and both must be greater than 0.</para
           >
           <para
-            >Attempts to set this property to values less than 0 will result in a value of 0 being used. If you set <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+            >Attempts to set this property to values less than 0 will result in a value of 0 being used. If you set <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
-             to a value less than <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+             to a value less than <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+            , <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
-             is set to <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+             is set to <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
-            . The effect of setting <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+            . The effect of setting <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+             and <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
@@ -682,46 +674,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In order for the maximum and minimum size settings to take effect, <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+            >In order for the maximum and minimum size settings to take effect, <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
-             must be greater than <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+             must be greater than <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
             , and both must be greater than 0.</para
           >
           <para
-            >Attempts to set this property to values less than 0 will result in a value of 0 being used. If you set <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+            >Attempts to set this property to values less than 0 will result in a value of 0 being used. If you set <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
-             to a value greater than <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+             to a value greater than <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
-            , <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+            , <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
-             is set to the value of <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+             is set to the value of <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
-            . The effect of setting <see
-             cref="P:System.Windows.Forms.FontDialog.MinSize" />
+            . The effect of setting <see cref="P:System.Windows.Forms.FontDialog.MinSize" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.FontDialog.MaxSize" />
+             and <see cref="P:System.Windows.Forms.FontDialog.MaxSize" />
 
             
 
@@ -752,8 +736,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raising an event invokes the event handler through a delegate. For an overview, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For an overview, see <format type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
@@ -767,8 +750,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.FontDialog.Apply" />
+            >Raises the <see cref="E:System.Windows.Forms.FontDialog.Apply" />
 
             
 
@@ -776,12 +758,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -804,13 +789,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.FontDialog.Options" />
+            >The <see cref="P:System.Windows.Forms.FontDialog.Options" />
 
             
 
-             property corresponds to the flags used to initialize a color dialog box using Win32. Use the properties of the <see
-             cref="T:System.Windows.Forms.FontDialog" />
+             property corresponds to the flags used to initialize a color dialog box using Win32. Use the properties of the <see cref="T:System.Windows.Forms.FontDialog" />
 
             
 
@@ -820,8 +803,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets values to initialize the <see
-             cref="T:System.Windows.Forms.FontDialog" />
+            >Gets values to initialize the <see cref="T:System.Windows.Forms.FontDialog" />
 
             
 
@@ -872,13 +854,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.FontDialog.RunDialog(System.IntPtr)" />
+            >The <see cref="M:System.Windows.Forms.FontDialog.RunDialog(System.IntPtr)" />
 
             
 
-             method is invoked when the user of a font dialog box calls the <see
-             cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+             method is invoked when the user of a font dialog box calls the <see cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
 
             
 
@@ -894,7 +874,11 @@
           <para>true if the dialog box was successfully run; otherwise, false.</para>
         </returns>
         <param name="hWndOwner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -947,8 +931,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether the dialog box contains an <ui
-            >Apply</ui>
+            >Gets or sets a value indicating whether the dialog box contains an <ui>Apply</ui>
 
             
 

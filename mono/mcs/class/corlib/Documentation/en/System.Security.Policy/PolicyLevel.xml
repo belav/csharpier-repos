@@ -28,19 +28,19 @@
       <block subset="none" type="note">
         <para
           >Starting with the net_v40_long, the common language runtime (CLR) is moving away from providing security policy for computers. We recommend that you use <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=178101"
+            cref="http://go.microsoft.com/fwlink/?LinkId=178101"
             >Windows Software Restriction Policies (SRP)</see
           >
 
           
 
-           or <see
-           cref="http://go.microsoft.com/fwlink/?LinkId=178102">AppLocker</see>
+           or <see cref="http://go.microsoft.com/fwlink/?LinkId=178102"
+            >AppLocker</see
+          >
 
           
 
-           as a replacement for CLR security policy. The information in this topic applies to the .NET Framework version 3.5 and earlier; it does not apply to the net_v40_short and later. For more information about this and other changes, see <format
-           type="text/html">
+           as a replacement for CLR security policy. The information in this topic applies to the .NET Framework version 3.5 and earlier; it does not apply to the net_v40_short and later. For more information about this and other changes, see <format type="text/html">
             <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
               >Security Changes in the .NET Framework Version 4.0</a
             >
@@ -67,16 +67,14 @@
         </item>
       </list>
       <para
-        >A policy level consists of a set of code groups organized into a single rooted tree (see <see
-         cref="T:System.Security.Policy.CodeGroup" />
+        >A policy level consists of a set of code groups organized into a single rooted tree (see <see cref="T:System.Security.Policy.CodeGroup" />
 
         
 
         ), a set of named permission sets that are referenced by the code groups to specify permissions to be granted to code belonging to the code group, and a list of fully-trusted assemblies.</para
       >
       <para
-        >Use <see
-         cref="M:System.Security.SecurityManager.PolicyHierarchy" />
+        >Use <see cref="M:System.Security.SecurityManager.PolicyHierarchy" />
 
         
 
@@ -119,8 +117,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongName)" />
+            >The <see cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongName)" />
 
             
 
@@ -130,18 +127,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Adds a <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
-             corresponding to the specified <see
-             cref="T:System.Security.Policy.StrongName" />
+             corresponding to the specified <see cref="T:System.Security.Policy.StrongName" />
 
             
 
-             to the list of <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+             to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -149,22 +143,23 @@
           >
         </summary>
         <param name="sn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.StrongName" />
+          The <see cref="T:System.Security.Policy.StrongName" />
 
           
 
-           used to create the <see
-           cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+           used to create the <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
           
 
-           to add to the list of <see
-           cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+           to add to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
           
 
@@ -202,8 +197,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition)" />
+            >The <see cref="M:System.Security.Policy.PolicyLevel.AddFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition)" />
 
             
 
@@ -213,13 +207,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Adds the specified <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
-             to the list of <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+             to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -227,17 +219,19 @@
           >
         </summary>
         <param name="snMC">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+          The <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
           
 
-           to add to the list of <see
-           cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+           to add to the list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
           
 
@@ -274,8 +268,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Adds a <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -283,12 +276,15 @@
           >
         </summary>
         <param name="permSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.NamedPermissionSet" />
+          The <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -323,13 +319,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces a <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Replaces a <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
-             in the current policy level with the specified <see
-             cref="T:System.Security.PermissionSet" />
+             in the current policy level with the specified <see cref="T:System.Security.PermissionSet" />
 
             
 
@@ -339,8 +333,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A copy of the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >A copy of the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -348,34 +341,38 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Security.NamedPermissionSet" />
+          The name of the <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
            to replace. </param
         >
         <param name="pSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.PermissionSet" />
+          The <see cref="T:System.Security.PermissionSet" />
 
           
 
-           that replaces the <see
-           cref="T:System.Security.NamedPermissionSet" />
+           that replaces the <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
-           specified by the <paramref
-           name="name" />
+           specified by the <paramref name="name" />
 
           
 
@@ -406,23 +403,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method creates a new <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >This method creates a new <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
-             with the <see
-             cref="P:System.Security.Policy.PolicyLevel.Label" />
+             with the <see cref="P:System.Security.Policy.PolicyLevel.Label" />
 
             
 
-             "AppDomain". The new <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+             "AppDomain". The new <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
-             will initially contain the same <see
-             cref="T:System.Security.NamedPermissionSet" />
+             will initially contain the same <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -436,8 +429,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The newly created <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >The newly created <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -474,7 +466,11 @@
           <para>Reconstructs a security object with a given state from an XML encoding.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -517,8 +513,7 @@
              are granted full trust during security policy evaluation of assemblies not in the list, but are not automatically granted full trust when directly evaluated by the security policy system.</para
           >
           <para
-            >The <see
-             cref="P:System.Security.Policy.PolicyLevel.FullTrustAssemblies" />
+            >The <see cref="P:System.Security.Policy.PolicyLevel.FullTrustAssemblies" />
 
             
 
@@ -528,8 +523,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Gets a list of <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -564,8 +558,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Returns the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -575,8 +568,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >The <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -584,12 +576,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Security.NamedPermissionSet" />
+          The name of the <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -668,26 +663,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method does not make modifications to the current <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >This method does not make modifications to the current <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
-            . Instead, it updates the <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            . Instead, it updates the <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
-             object's file and the <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+             object's file and the <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
              that the security system uses to evaluate policy.</para
           >
           <para
-            >This method is used by the caspol -recover option (see <format
-             type="text/html">
+            >This method is used by the caspol -recover option (see <format type="text/html">
               <a href="D2BF6123-7B0C-4E60-87AD-A39A1C3EB2E0"
                 >[&lt;topic://cpgrfcodeaccesssecuritypolicyutilitycaspolexe&gt;]</a
               >
@@ -701,8 +692,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces the configuration file for this <see
-             cref="T:System.Security.Policy.PolicyLevel" />
+            >Replaces the configuration file for this <see cref="T:System.Security.Policy.PolicyLevel" />
 
             
 
@@ -741,8 +731,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongName)" />
+            >The <see cref="M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongName)" />
 
             
 
@@ -752,8 +741,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an assembly with the specified <see
-             cref="T:System.Security.Policy.StrongName" />
+            >Removes an assembly with the specified <see cref="T:System.Security.Policy.StrongName" />
 
             
 
@@ -761,12 +749,15 @@
           >
         </summary>
         <param name="sn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.StrongName" />
+          The <see cref="T:System.Security.Policy.StrongName" />
 
           
 
@@ -804,8 +795,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition)" />
+            >The <see cref="M:System.Security.Policy.PolicyLevel.RemoveFullTrustAssembly(System.Security.Policy.StrongNameMembershipCondition)" />
 
             
 
@@ -815,8 +805,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an assembly with the specified <see
-             cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+            >Removes an assembly with the specified <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
             
 
@@ -824,12 +813,15 @@
           >
         </summary>
         <param name="snMC">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+          The <see cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
           
 
@@ -863,8 +855,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Removes the specified <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -874,8 +865,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >The <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -883,12 +873,15 @@
           >
         </returns>
         <param name="permSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.NamedPermissionSet" />
+          The <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -922,8 +915,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >Removes the <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -933,8 +925,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.NamedPermissionSet" />
+            >The <see cref="T:System.Security.NamedPermissionSet" />
 
             
 
@@ -942,12 +933,15 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Security.NamedPermissionSet" />
+          The name of the <see cref="T:System.Security.NamedPermissionSet" />
 
           
 
@@ -1011,8 +1005,7 @@
 
             
 
-             is the basic policy evaluation operation for policy levels. Given a set of evidence as input, this method tests membership conditions of code groups starting at the root and working down as matched. The combination of permissions resulting from the matching code groups produces a <see
-             cref="T:System.Security.Policy.PolicyStatement" />
+             is the basic policy evaluation operation for policy levels. Given a set of evidence as input, this method tests membership conditions of code groups starting at the root and working down as matched. The combination of permissions resulting from the matching code groups produces a <see cref="T:System.Security.Policy.PolicyStatement" />
 
             
 
@@ -1023,8 +1016,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Resolves policy based on evidence for the policy level, and returns the resulting <see
-             cref="T:System.Security.Policy.PolicyStatement" />
+            >Resolves policy based on evidence for the policy level, and returns the resulting <see cref="T:System.Security.Policy.PolicyStatement" />
 
             
 
@@ -1034,8 +1026,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The resulting <see
-             cref="T:System.Security.Policy.PolicyStatement" />
+            >The resulting <see cref="T:System.Security.Policy.PolicyStatement" />
 
             
 
@@ -1043,17 +1034,19 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
-           used to resolve the <see
-           cref="T:System.Security.Policy.PolicyLevel" />
+           used to resolve the <see cref="T:System.Security.Policy.PolicyLevel" />
 
           
 
@@ -1095,8 +1088,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Policy.CodeGroup" />
+            >A <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
@@ -1104,12 +1096,15 @@
           >
         </returns>
         <param name="evidence">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Policy.Evidence" />
+          The <see cref="T:System.Security.Policy.Evidence" />
 
           
 
@@ -1140,8 +1135,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Every policy level has one root <see
-             cref="T:System.Security.Policy.CodeGroup" />
+            >Every policy level has one root <see cref="T:System.Security.Policy.CodeGroup" />
 
             
 
@@ -1243,8 +1237,7 @@
             </item>
           </list>
           <para
-            >For more information, see <see
-             cref="T:System.Security.PolicyLevelType" />
+            >For more information, see <see cref="T:System.Security.PolicyLevelType" />
 
             
 

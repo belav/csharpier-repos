@@ -41,8 +41,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >For general information about how namespaces are declared and used in XML documents, see <format
-         type="text/html">
+        >For general information about how namespaces are declared and used in XML documents, see <format type="text/html">
           <a href="682643fc-b848-4e42-8c0d-50deeaeb5f2a">Managing Namespaces in an XML Document</a>
         </format>
 
@@ -163,8 +162,7 @@
 
               
 
-               and <see
-               cref="M:System.Xml.XmlNamespaceManager.PopScope" />
+               and <see cref="M:System.Xml.XmlNamespaceManager.PopScope" />
 
               
 
@@ -203,59 +201,49 @@
       </list>
       <para></para>
       <para
-        >To add namespaces to the namespace manager, you create a <see
-         cref="T:System.Xml.XmlNamespaceManager" />
+        >To add namespaces to the namespace manager, you create a <see cref="T:System.Xml.XmlNamespaceManager" />
 
         
 
-         object and then use the <see
-         cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+         object and then use the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
         
 
          method. Default prefix and namespace pairs are automatically added to the namespace manager on creation.</para
       >
       <para
-        >When you create the namespace manager, you can specify a name table from the <see
-         cref="T:System.Xml.XmlReader" />
+        >When you create the namespace manager, you can specify a name table from the <see cref="T:System.Xml.XmlReader" />
 
         
 
-        , <see
-         cref="T:System.Xml.Xsl.XsltContext" />
+        , <see cref="T:System.Xml.Xsl.XsltContext" />
 
         
 
-        , or <see
-         cref="T:System.Xml.XmlDocument" />
+        , or <see cref="T:System.Xml.XmlDocument" />
 
         
 
-         class, and then use the <see
-         cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+         class, and then use the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
         
 
          method to add the namespaces. </para
       >
       <para
-        >You can supply the <see
-         cref="T:System.Xml.XmlNamespaceManager" />
+        >You can supply the <see cref="T:System.Xml.XmlNamespaceManager" />
 
         
 
-         object as a parameter to the <see
-         cref="Overload:System.Xml.XmlNode.SelectNodes" />
+         object as a parameter to the <see cref="Overload:System.Xml.XmlNode.SelectNodes" />
 
         
 
-         or <see
-         cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
+         or <see cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
         
 
-         method of the <see
-         cref="T:System.Xml.XmlDocument" />
+         method of the <see cref="T:System.Xml.XmlDocument" />
 
         
 
@@ -263,25 +251,24 @@
       >
       <para
         >The namespace manager assumes that prefixes and namespaces have already been verified and conform to the <see
-         cref="http://www.w3.org/TR/REC-xml-names/">W3C Namespaces</see>
+          cref="http://www.w3.org/TR/REC-xml-names/"
+          >W3C Namespaces</see
+        >
 
         
 
          specification. The namespace manager does not perform any validation. </para
       >
       <para
-        >The namespace manager atomizes the strings when they are added by using the <see
-         cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+        >The namespace manager atomizes the strings when they are added by using the <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
         
 
-         method and when a lookup is performed by using the <see
-         cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" />
+         method and when a lookup is performed by using the <see cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" />
 
         
 
-         or <see
-         cref="M:System.Xml.XmlNamespaceManager.LookupPrefix(System.String)" />
+         or <see cref="M:System.Xml.XmlNamespaceManager.LookupPrefix(System.String)" />
 
         
 
@@ -293,8 +280,7 @@
       <code>nsmgr.AddNamespace("xsd", "http://www.w3.org/2001/XMLSchema")</code>
       <code>nsmgr.AddNamespace("xsd", "http://www.w3.org/2001/XMLSchema");</code>
       <para
-        >You can then find the namespace by using the <see
-         cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" />
+        >You can then find the namespace by using the <see cref="M:System.Xml.XmlNamespaceManager.LookupNamespace(System.String)" />
 
         
 
@@ -303,8 +289,7 @@
       <code>nsmgr.LookupNamespace("xsd")</code>
       <code>nsmgr.LookupNamespace("xsd");</code>
       <para
-        >The following example creates an <see
-         cref="T:System.Xml.XmlNamespaceManager" />
+        >The following example creates an <see cref="T:System.Xml.XmlNamespaceManager" />
 
         
 
@@ -367,8 +352,7 @@ while (reader.Read())
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -377,21 +361,18 @@ while (reader.Read())
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name table is used to look up prefixes and namespaces. An existing name table with pre-atomized strings can be specified in the constructor. There are several advantages in doing so. For example, if the name table of an <see
-             cref="T:System.Xml.XmlReader" />
+            >The name table is used to look up prefixes and namespaces. An existing name table with pre-atomized strings can be specified in the constructor. There are several advantages in doing so. For example, if the name table of an <see cref="T:System.Xml.XmlReader" />
 
             
 
-             object is used, after each read, any namespace and prefix strings pushed into the name table can be re-used by <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             object is used, after each read, any namespace and prefix strings pushed into the name table can be re-used by <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
             . </para
           >
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -399,18 +380,15 @@ while (reader.Read())
           >
           <block subset="none" type="note">
             <para
-              >If you specify an existing name table, any namespaces in the name table are not automatically added to <see
-               cref="T:System.Xml.XmlNamespaceManager" />
+              >If you specify an existing name table, any namespaces in the name table are not automatically added to <see cref="T:System.Xml.XmlNamespaceManager" />
 
               
 
-              . You must use <see
-               cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+              . You must use <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
               
 
-               and <see
-               cref="M:System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)" />
+               and <see cref="M:System.Xml.XmlNamespaceManager.RemoveNamespace(System.String,System.String)" />
 
               
 
@@ -421,13 +399,11 @@ while (reader.Read())
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             class with the specified <see
-             cref="T:System.Xml.XmlNameTable" />
+             class with the specified <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -435,12 +411,15 @@ while (reader.Read())
           >
         </summary>
         <param name="nameTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlNameTable" />
+          The <see cref="T:System.Xml.XmlNameTable" />
 
           
 
@@ -489,18 +468,15 @@ while (reader.Read())
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
-            , or <paramref
-             name="uri" />
+            , or <paramref name="uri" />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
@@ -508,7 +484,11 @@ while (reader.Read())
           >
         </exception>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -521,13 +501,11 @@ while (reader.Read())
 
             
 
-             does not check <paramref
-             name="prefix" />
+             does not check <paramref name="prefix" />
 
             
 
-             and <paramref
-             name="uri" />
+             and <paramref name="uri" />
 
             
 
@@ -539,22 +517,21 @@ while (reader.Read())
             
 
              checks names, including prefixes and namespaces, to ensure they are valid XML names according to the World Wide Web Consortium (W3C) <see
-             cref="http://www.w3.org/TR/REC-xml-names/">Namespaces specification</see>
+              cref="http://www.w3.org/TR/REC-xml-names/"
+              >Namespaces specification</see
+            >
 
             
 
-            . <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            . <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             is used internally by <see
-             cref="T:System.Xml.XmlReader" />
+             is used internally by <see cref="T:System.Xml.XmlReader" />
 
             
 
-            , so to avoid a duplication of efforts, <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            , so to avoid a duplication of efforts, <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -562,8 +539,7 @@ while (reader.Read())
           >
           <para>If the prefix and namespace already exist within the current scope, the new prefix and namespace pair will replace the existing prefix/namespace combination. The same prefix and namespace combination can exist across different scopes.</para>
           <para
-            >The following prefix/namespace pairs are added by default to the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >The following prefix/namespace pairs are added by default to the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -611,14 +587,22 @@ while (reader.Read())
           <para>Adds the given namespace to the collection.</para>
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix to associate with the namespace being added. Use String.Empty to add a default namespace.</param
         >
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -648,13 +632,14 @@ while (reader.Read())
         <value>
           <para
             >A <see
-             cref="T:System.String" qualify="true" />
+              cref="T:System.String"
+              qualify="true"
+            />
 
             
 
              containing the
-   namespace URI for the default namespace, or <see
-             cref="F:System.String.Empty" />
+   namespace URI for the default namespace, or <see cref="F:System.String.Empty" />
 
             
 
@@ -700,13 +685,11 @@ while (reader.Read())
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following code shows how to use the <see
-             cref="T:System.Collections.IEnumerator" />
+            >The following code shows how to use the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             to view all the namespace pairs stored in the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             to view all the namespace pairs stored in the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -722,8 +705,7 @@ Loop</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator to use to iterate through the namespaces in the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >Returns an enumerator to use to iterate through the namespaces in the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -733,13 +715,11 @@ Loop</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             containing the prefixes stored by the <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+             containing the prefixes stored by the <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
@@ -775,13 +755,11 @@ Loop</code>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The dictionary consists of a collection of namespace names keyed by prefix. It can be used to enumerate the in-scope namespaces. The dictionary is a disconnected copy of the namespace list. It remains unchanged as the current in-scope namespace list changes.</para>
           <para
-            >The following table shows how <see
-             cref="T:System.Xml.XmlNamespaceScope" />
+            >The following table shows how <see cref="T:System.Xml.XmlNamespaceScope" />
 
             
 
-             values affect the namespaces returned by the <see
-             cref="M:System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+             values affect the namespaces returned by the <see cref="M:System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
 
             
 
@@ -857,7 +835,11 @@ Loop</code>
           <para>A collection of namespace and prefix pairs currently in scope.</para>
         </returns>
         <param name="scope">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -891,8 +873,7 @@ Loop</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To determine whether there is a default empty namespace defined, set <paramref
-             name="prefix" />
+            >To determine whether there is a default empty namespace defined, set <paramref name="prefix" />
 
             
 
@@ -901,7 +882,9 @@ Loop</code>
           <block subset="none" type="note">
             <para
               >xmlns:x= "" is illegal according to the <see
-               cref="http://www.w3.org/TR/REC-xml-names/">W3C Namespaces</see>
+                cref="http://www.w3.org/TR/REC-xml-names/"
+                >W3C Namespaces</see
+              >
 
               
 
@@ -918,7 +901,11 @@ Loop</code>
           <para>true if there is a namespace defined; otherwise, false.</para>
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -961,8 +948,7 @@ Loop</code>
             <block subset="none" type="overrides"
               >  Override this
       method to customize the behavior of this method in types derived from
-      the <see
-               cref="T:System.Xml.XmlNamespaceManager" />
+      the <see cref="T:System.Xml.XmlNamespaceManager" />
 
               
 
@@ -979,16 +965,14 @@ Loop</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the namespace URI for <paramref
-             name="prefix" />
+            >Returns the namespace URI for <paramref name="prefix" />
 
             
 
              or null if there is no mapped namespace. The returned string is atomized.</para
           >
           <para
-            >For more information on atomized strings, see the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >For more information on atomized strings, see the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -996,7 +980,11 @@ Loop</code>
           >
         </returns>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1031,16 +1019,14 @@ Loop</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method finds the mapped prefix by walking the stack (that is, it looks globally). The supplied string must be atomized for the lookup to succeed. In other words, the supplied string object must exist in the namespace manager's name table (<see
-             cref="P:System.Xml.XmlNamespaceManager.NameTable" />
+            >This method finds the mapped prefix by walking the stack (that is, it looks globally). The supplied string must be atomized for the lookup to succeed. In other words, the supplied string object must exist in the namespace manager's name table (<see cref="P:System.Xml.XmlNamespaceManager.NameTable" />
 
             
 
             ).</para
           >
           <para
-            >The returned string is also atomized. For more information on atomized strings, see the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >The returned string is also atomized. For more information on atomized strings, see the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1056,7 +1042,11 @@ Loop</code>
           <para>The matching prefix. If there is no mapped prefix, the method returns String.Empty. If a null value is supplied, then null is returned.</para>
         </returns>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1091,8 +1081,7 @@ Loop</code>
       <Docs>
         <value>
           <para
-            > The <see
-             cref="T:System.Xml.XmlNameTable" />
+            > The <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1106,8 +1095,7 @@ Loop</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlNameTable" />
+            >Gets the <see cref="T:System.Xml.XmlNameTable" />
 
             
 
@@ -1138,18 +1126,15 @@ Loop</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call this method, all namespaces which were added to <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >When you call this method, all namespaces which were added to <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             (by calling <see
-             cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+             (by calling <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
             
 
-            ) since the last call to <see
-             cref="M:System.Xml.XmlNamespaceManager.PopScope" />
+            ) since the last call to <see cref="M:System.Xml.XmlNamespaceManager.PopScope" />
 
             
 
@@ -1188,13 +1173,11 @@ Loop</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After a call to this method, all namespaces, which are added to <see
-             cref="T:System.Xml.XmlNamespaceManager" />
+            >After a call to this method, all namespaces, which are added to <see cref="T:System.Xml.XmlNamespaceManager" />
 
             
 
-             (by calling <see
-             cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
+             (by calling <see cref="M:System.Xml.XmlNamespaceManager.AddNamespace(System.String,System.String)" />
 
             
 
@@ -1243,13 +1226,11 @@ Loop</code>
             <block subset="none" type="default"
               > The namespace
       removed is from the current namespace scope. Namespaces outside the current
-      scope are ignored. If <paramref
-               name="prefix" />
+      scope are ignored. If <paramref name="prefix" />
 
               
 
-               or <paramref
-               name=" uri" />
+               or <paramref name=" uri" />
 
               
 
@@ -1261,8 +1242,7 @@ Loop</code>
             <block subset="none" type="overrides"
               > Override this
       method to customize the behavior of this method in types derived from
-      the <see
-               cref="T:System.Xml.XmlNamespaceManager" />
+      the <see cref="T:System.Xml.XmlNamespaceManager" />
 
               
 
@@ -1277,25 +1257,26 @@ Loop</code>
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
-          , or <paramref
-           name="uri" />
+          , or <paramref name="uri" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           .</exception
         >
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1306,14 +1287,22 @@ Loop</code>
           <para>Removes the given namespace for the given prefix.</para>
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The prefix for the namespace </param
         >
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

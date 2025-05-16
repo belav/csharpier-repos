@@ -88,8 +88,7 @@
           <para>The module's entry point is the location of the function that is called during process startup, thread startup, process shutdown, and thread shutdown. While the entry point is not the address of the DllMain function, it should be close enough for most purposes.</para>
           <block subset="none" type="note">
             <para
-              >Due to changes in the way that Windows loads assemblies, <see
-               cref="P:System.Diagnostics.ProcessModule.EntryPointAddress" />
+              >Due to changes in the way that Windows loads assemblies, <see cref="P:System.Diagnostics.ProcessModule.EntryPointAddress" />
 
               
 
@@ -253,8 +252,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Diagnostics.ProcessModule.ModuleName" />
+            >The value of the <see cref="P:System.Diagnostics.ProcessModule.ModuleName" />
 
             
 

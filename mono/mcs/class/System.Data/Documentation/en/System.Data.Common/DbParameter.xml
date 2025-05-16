@@ -22,18 +22,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a parameter to a <see
-         cref="T:System.Data.Common.DbCommand" />
+        >Represents a parameter to a <see cref="T:System.Data.Common.DbCommand" />
 
         
 
-         and optionally, its mapping to a <see
-         cref="T:System.Data.DataSet" />
+         and optionally, its mapping to a <see cref="T:System.Data.DataSet" />
 
         
 
-         column. For more information on parameters, see <format
-         type="text/html">
+         column. For more information on parameters, see <format type="text/html">
           <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
             >Configuring Parameters and Parameter Data Types (ADO.NET)</a
           >
@@ -56,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Initializes a new instance of the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -96,8 +92,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.DbType" />
+            >Gets or sets the <see cref="T:System.Data.DbType" />
 
             
 
@@ -132,41 +127,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Data.ParameterDirection" />
+            >If the <see cref="T:System.Data.ParameterDirection" />
 
             
 
-             is output, and execution of the associated <see
-             cref="T:System.Data.Common.DbCommand" />
+             is output, and execution of the associated <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             does not return a value, the <see
-             cref="T:System.Data.Common.DbParameter" />
+             does not return a value, the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
              contains a null value.</para
           >
           <para
-            >Output, InputOut, and ReturnValue parameters returned by calling <see
-             cref="M:System.Data.Common.DbCommand.ExecuteReader" />
+            >Output, InputOut, and ReturnValue parameters returned by calling <see cref="M:System.Data.Common.DbCommand.ExecuteReader" />
 
             
 
-             cannot be accessed until you call <see
-             cref="M:System.Data.Common.DbDataReader.Close" />
+             cannot be accessed until you call <see cref="M:System.Data.Common.DbDataReader.Close" />
 
             
 
-             or <see
-             cref="M:System.Data.Common.DbDataReader.Dispose" />
+             or <see cref="M:System.Data.Common.DbDataReader.Dispose" />
 
             
 
-             on the <see
-             cref="T:System.Data.Common.DbDataReader" />
+             on the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
@@ -205,8 +193,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Null values are handled using the <see
-             cref="T:System.DBNull" />
+            >Null values are handled using the <see cref="T:System.DBNull" />
 
             
 
@@ -240,8 +227,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the <see
-             cref="T:System.Data.Common.DbParameter" />
+            >Gets or sets the name of the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
@@ -289,119 +275,100 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+            >The <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
              property is used for binary and string types.</para
           >
           <para
-            >For nonstring data types and ANSI string data, the <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+            >For nonstring data types and ANSI string data, the <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
-             property refers to the number of bytes. For Unicode string data, <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+             property refers to the number of bytes. For Unicode string data, <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
              refers to the number of characters. The count for strings does not include the terminating character.</para
           >
           <para
-            >For variable-length data types, <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+            >For variable-length data types, <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
-             describes the maximum amount of data to transmit to the server. For example, for a Unicode string value, <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+             describes the maximum amount of data to transmit to the server. For example, for a Unicode string value, <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
              could be used to limit the amount of data sent to the server to the first one hundred characters.</para
           >
           <para
-            >For bidirectional and output parameters, and return values, you must set the value of <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+            >For bidirectional and output parameters, and return values, you must set the value of <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
             . This is not required for input parameters, and if not explicitly set, the value is inferred from the actual size of the specified parameter when a parameterized statement is executed.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.Common.DbParameter.DbType" />
+            >The <see cref="P:System.Data.Common.DbParameter.DbType" />
 
             
 
-             and <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+             and <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
-             properties of a parameter can be inferred by setting <see
-             cref="P:System.Data.Common.DbParameter.Value" />
+             properties of a parameter can be inferred by setting <see cref="P:System.Data.Common.DbParameter.Value" />
 
             
 
-            . Therefore, you are not required to specify them. However, they are not exposed in <see
-             cref="T:System.Data.Common.DbParameter" />
+            . Therefore, you are not required to specify them. However, they are not exposed in <see cref="T:System.Data.Common.DbParameter" />
 
             
 
-             property settings. For example, if the size of the parameter has been inferred, <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+             property settings. For example, if the size of the parameter has been inferred, <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
              does not contain inferred value after statement execution.</para
           >
           <para
-            >For fixed length data types, the value of <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+            >For fixed length data types, the value of <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
              is ignored. It can be retrieved for informational purposes, and returns the maximum amount of bytes the provider uses when transmitting the value of the parameter to the server.</para
           >
           <para
-            >If the size of the value supplied for a <see
-             cref="T:System.Data.Common.DbParameter" />
+            >If the size of the value supplied for a <see cref="T:System.Data.Common.DbParameter" />
 
             
 
-             exceeds the specified <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+             exceeds the specified <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
-            , the <see
-             cref="P:System.Data.Common.DbParameter.Value" />
+            , the <see cref="P:System.Data.Common.DbParameter.Value" />
 
             
 
-             of the <see
-             cref="T:System.Data.Common.DbParameter" />
+             of the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
-             will contain the specified value, truncated to the Size of the <see
-             cref="T:System.Data.Common.DbParameter" />
+             will contain the specified value, truncated to the Size of the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
             .</para
           >
           <para
-            >For parameters of type DbType.String, the value of <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+            >For parameters of type DbType.String, the value of <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
-             is length in Unicode characters. For parameters of type DbType.Xml, <see
-             cref="P:System.Data.Common.DbParameter.Size" />
+             is length in Unicode characters. For parameters of type DbType.Xml, <see cref="P:System.Data.Common.DbParameter.Size" />
 
             
 
@@ -434,53 +401,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When <see
-             cref="P:System.Data.Common.DbParameter.SourceColumn" />
+            >When <see cref="P:System.Data.Common.DbParameter.SourceColumn" />
 
             
 
-             is set to anything other than an empty string, the value of the parameter is retrieved from the column with the <see
-             cref="P:System.Data.Common.DbParameter.SourceColumn" />
+             is set to anything other than an empty string, the value of the parameter is retrieved from the column with the <see cref="P:System.Data.Common.DbParameter.SourceColumn" />
 
             
 
-             name. If <see
-             cref="P:System.Data.Common.DbParameter.Direction" />
+             name. If <see cref="P:System.Data.Common.DbParameter.Direction" />
 
             
 
-             is set to Input, the value is taken from the <see
-             cref="T:System.Data.DataSet" />
+             is set to Input, the value is taken from the <see cref="T:System.Data.DataSet" />
 
             
 
-            . If <see
-             cref="P:System.Data.Common.DbParameter.Direction" />
+            . If <see cref="P:System.Data.Common.DbParameter.Direction" />
 
             
 
-             is set to Output, the value is taken from the data source. A <see
-             cref="P:System.Data.Common.DbParameter.Direction" />
+             is set to Output, the value is taken from the data source. A <see cref="P:System.Data.Common.DbParameter.Direction" />
 
             
 
              of InputOutput is a combination of both.</para
           >
           <para
-            >For more information about how to use the <see
-             cref="P:System.Data.Common.DbParameter.SourceColumn" />
+            >For more information about how to use the <see cref="P:System.Data.Common.DbParameter.SourceColumn" />
 
             
 
-             property, see <format
-             type="text/html">
+             property, see <format type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="d1bd9a8c-0e29-40e3-bda8-d89176b72fb1"
                 >Updating the Database with a DataAdapter and the DataSet</a
               >
@@ -494,13 +452,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the name of the source column mapped to the <see
-             cref="T:System.Data.DataSet" />
+            >Gets or sets the name of the source column mapped to the <see cref="T:System.Data.DataSet" />
 
             
 
-             and used for loading or returning the <see
-             cref="P:System.Data.Common.DbParameter.Value" />
+             and used for loading or returning the <see cref="P:System.Data.Common.DbParameter.Value" />
 
             
 
@@ -542,18 +498,15 @@
 
             
 
-             is used by the <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             is used by the <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
-             to correctly generate update commands when dealing with nullable columns. Generally, use of <see
-             cref="P:System.Data.Common.DbParameter.SourceColumnNullMapping" />
+             to correctly generate update commands when dealing with nullable columns. Generally, use of <see cref="P:System.Data.Common.DbParameter.SourceColumnNullMapping" />
 
             
 
-             is limited to developers inheriting from <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             is limited to developers inheriting from <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -564,18 +517,15 @@
 
             
 
-             uses this property to determine whether the source column is nullable, and sets this property to true if it is nullable, and false if it is not. When <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             uses this property to determine whether the source column is nullable, and sets this property to true if it is nullable, and false if it is not. When <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
-             is generating its Update statement, it examines the <see
-             cref="P:System.Data.Common.DbParameter.SourceColumnNullMapping" />
+             is generating its Update statement, it examines the <see cref="P:System.Data.Common.DbParameter.SourceColumnNullMapping" />
 
             
 
-             for each parameter. If the property is true, <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             for each parameter. If the property is true, <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -584,13 +534,11 @@
           <code>((@IsNull_FieldName = 1 AND FieldName IS NULL) OR 
   (FieldName = @Original_FieldName))</code>
           <para
-            >If <see
-             cref="P:System.Data.Common.DbParameter.SourceColumnNullMapping" />
+            >If <see cref="P:System.Data.Common.DbParameter.SourceColumnNullMapping" />
 
             
 
-             for the field is false, <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+             for the field is false, <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -602,8 +550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets or gets a value which indicates whether the source column is nullable. This allows <see
-             cref="T:System.Data.Common.DbCommandBuilder" />
+            >Sets or gets a value which indicates whether the source column is nullable. This allows <see cref="T:System.Data.Common.DbCommandBuilder" />
 
             
 
@@ -635,28 +582,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Used by <see
-             cref="P:System.Data.Common.DbDataAdapter.UpdateCommand" />
+            >Used by <see cref="P:System.Data.Common.DbDataAdapter.UpdateCommand" />
 
             
 
-             during an <see
-             cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+             during an <see cref="Overload:System.Data.Common.DbDataAdapter.Update" />
 
             
 
-             operation to determine whether the parameter value is set to Current or Original. This lets primary keys be updated. This property is set to the version of the <see
-             cref="T:System.Data.DataRow" />
+             operation to determine whether the parameter value is set to Current or Original. This lets primary keys be updated. This property is set to the version of the <see cref="T:System.Data.DataRow" />
 
             
 
-             used by the DataRow.Item property, or the <see
-             cref="M:System.Data.DataRow.GetChildRows(System.String,System.Data.DataRowVersion)" />
+             used by the DataRow.Item property, or the <see cref="M:System.Data.DataRow.GetChildRows(System.String,System.Data.DataRowVersion)" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataRow" />
+             method of the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -666,13 +608,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Data.DataRowVersion" />
+            >Gets or sets the <see cref="T:System.Data.DataRowVersion" />
 
             
 
-             to use when you load <see
-             cref="P:System.Data.Common.DbParameter.Value" />
+             to use when you load <see cref="P:System.Data.Common.DbParameter.Value" />
 
             
 
@@ -701,21 +641,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbParameter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataParameter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataParameter" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Data.IDbDataParameter.Precision" />
+            >For more information, see <see cref="P:System.Data.IDbDataParameter.Precision" />
 
             
 
@@ -745,21 +682,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DbParameter" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DbParameter" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IDbDataParameter" />
+             instance is cast to an <see cref="T:System.Data.IDbDataParameter" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Data.IDbDataParameter.Scale" />
+            >For more information, see <see cref="P:System.Data.IDbDataParameter.Scale" />
 
             
 
@@ -769,8 +703,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Data.IDbDataParameter.Scale" />
+            >For a description of this member, see <see cref="P:System.Data.IDbDataParameter.Scale" />
 
             
 
@@ -799,55 +732,47 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For input parameters, the value is bound to the <see
-             cref="T:System.Data.Common.DbCommand" />
+            >For input parameters, the value is bound to the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             that is sent to the server. For output and return value parameters, the value is set on completion of the <see
-             cref="T:System.Data.Common.DbCommand" />
+             that is sent to the server. For output and return value parameters, the value is set on completion of the <see cref="T:System.Data.Common.DbCommand" />
 
             
 
-             and after the <see
-             cref="T:System.Data.Common.DbDataReader" />
+             and after the <see cref="T:System.Data.Common.DbDataReader" />
 
             
 
              is closed.</para
           >
           <para
-            >When you send a null parameter value to the server, you must specify <see
-             cref="T:System.DBNull" />
+            >When you send a null parameter value to the server, you must specify <see cref="T:System.DBNull" />
 
             
 
-            , not null. The null value in the system is an empty object that has no value. <see
-             cref="T:System.DBNull" />
+            , not null. The null value in the system is an empty object that has no value. <see cref="T:System.DBNull" />
 
             
 
              is used to represent null values.</para
           >
           <para
-            >If the application specifies the database type, the bound value is converted to that type when the provider sends the data to the server. The provider tries to convert any type of value if it supports the <see
-             cref="T:System.IConvertible" />
+            >If the application specifies the database type, the bound value is converted to that type when the provider sends the data to the server. The provider tries to convert any type of value if it supports the <see cref="T:System.IConvertible" />
 
             
 
              interface. Conversion errors may result if the specified type is not compatible with the value.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.Common.DbParameter.DbType" />
+            >The <see cref="P:System.Data.Common.DbParameter.DbType" />
 
             
 
              property can be inferred by setting the Value.</para
           >
           <para
-            >The <see
-             cref="P:System.Data.Common.DbParameter.Value" />
+            >The <see cref="P:System.Data.Common.DbParameter.Value" />
 
             
 

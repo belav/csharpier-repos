@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the restriction element for simple types from XML Schema as specified by the <format
-         type="text/html">
+        >Represents the restriction element for simple types from XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleTypeRestriction" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaSimpleTypeRestriction" />
 
             
 
@@ -99,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The use of <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeRestriction.BaseTypeName" />
+            >The use of <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeRestriction.BaseTypeName" />
 
             
 
@@ -142,8 +139,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The use of BaseTypeName and <see
-             cref="P:System.Xml.Schema.XmlSchemaSimpleTypeRestriction.BaseType" />
+            >The use of BaseTypeName and <see cref="P:System.Xml.Schema.XmlSchemaSimpleTypeRestriction.BaseType" />
 
             
 

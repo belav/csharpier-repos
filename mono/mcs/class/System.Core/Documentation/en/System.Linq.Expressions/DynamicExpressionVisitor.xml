@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of <see
-             cref="T:System.Linq.Expressions.DynamicExpressionVisitor" />
+            >Initializes a new instance of <see cref="T:System.Linq.Expressions.DynamicExpressionVisitor" />
 
             
 

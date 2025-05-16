@@ -22,16 +22,14 @@
     <remarks>
       <para>This class represents a single unmanaged function with "cdecl" calling convention -- that is, it can accept a variable number of arguments which are passed on the runtime stack.</para>
       <para
-        >To use, create an instance, then call <see
-         cref="M:Mono.Unix.Native.CdeclFunction.Invoke" />
+        >To use, create an instance, then call <see cref="M:Mono.Unix.Native.CdeclFunction.Invoke" />
 
         
 
          with the appropriate number of arguments:</para
       >
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 CdeclFunction printf = new CdeclFunction (
 	"libc",       // the libraary
 	"printf",     // the function name
@@ -98,8 +96,7 @@ printf.Invoke (new object[]{"hello, %s\n", "world!"});
         <param name="library">The library the cdecl function resides in.</param>
         <param name="method">The export to invoke from library.</param>
         <param name="returnType"
-          >The return type of the function to invoke.  The default return type is <see
-           cref="T:System.Void" />
+          >The return type of the function to invoke.  The default return type is <see cref="T:System.Void" />
 
           
 

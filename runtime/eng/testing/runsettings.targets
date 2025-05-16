@@ -53,8 +53,7 @@
       >
       <!-- Arm64 is currently not a known TargetPlatform value in VSTEST: https://github.com/microsoft/vstest/issues/2566 -->
       <RunSettingsFileContent Condition="'$(TargetArchitecture)' != 'arm64'"
-        >$(RunSettingsFileContent.Replace('$$TARGETPLATFORM$$', '<TargetPlatform
-        >$(TargetArchitecture)</TargetPlatform>
+        >$(RunSettingsFileContent.Replace('$$TARGETPLATFORM$$', '<TargetPlatform>$(TargetArchitecture)</TargetPlatform>
 
         
 

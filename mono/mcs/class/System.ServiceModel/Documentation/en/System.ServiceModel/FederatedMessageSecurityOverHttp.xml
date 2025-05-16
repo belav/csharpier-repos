@@ -48,8 +48,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+            >The <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
 
             
 
@@ -88,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of the <see
-             cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
+            >Gets a collection of the <see cref="T:System.ServiceModel.Security.Tokens.ClaimTypeRequirement" />
 
             
 
@@ -138,18 +136,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Valid values of <see
-             cref="T:System.IdentityModel.Tokens.SecurityKeyType" />
+            >Valid values of <see cref="T:System.IdentityModel.Tokens.SecurityKeyType" />
 
             
 
-             are <see
-             cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
+             are <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.SymmetricKey" />
 
             
 
-             and <see
-             cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
+             and <see cref="F:System.IdentityModel.Tokens.SecurityKeyType.AsymmetricKey" />
 
             
 
@@ -240,8 +235,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the binding to be used by the client when communicating with the security token service whose endpoint address equals <see
-             cref="P:System.ServiceModel.FederatedMessageSecurityOverHttp.IssuerAddress" />
+            >Gets or sets the binding to be used by the client when communicating with the security token service whose endpoint address equals <see cref="P:System.ServiceModel.FederatedMessageSecurityOverHttp.IssuerAddress" />
 
             
 

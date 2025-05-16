@@ -22,38 +22,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Control" />
+        >The <see cref="T:System.Windows.Forms.Control" />
 
         
 
-         class exposes a public <see
-         cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
+         class exposes a public <see cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
 
         
 
-         event. You can use the properties of the <see
-         cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
+         event. You can use the properties of the <see cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
 
         
 
-         class to return custom help for a particular control to an accessible client, such as a screen reader. When you handle the <see
-         cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
+         class to return custom help for a particular control to an accessible client, such as a screen reader. When you handle the <see cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
 
         
 
-         event, you must set the values of the <see
-         cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpNamespace" />
+         event, you must set the values of the <see cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpNamespace" />
 
         
 
-        , <see
-         cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpKeyword" />
+        , <see cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpKeyword" />
 
         
 
-        , and <see
-         cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpString" />
+        , and <see cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpString" />
 
         
 
@@ -61,8 +54,7 @@
       >
       <block subset="none" type="note">
         <para
-          >The <see
-           cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpKeyword" />
+          >The <see cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpKeyword" />
 
           
 
@@ -73,8 +65,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
 
         
 
@@ -92,8 +83,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
 
             
 
@@ -122,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
 
             
 
@@ -131,36 +120,45 @@
           >
         </summary>
         <param name="helpNamespace">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The file containing Help for the <see
-           cref="T:System.Windows.Forms.AccessibleObject" />
+          The file containing Help for the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
           
 
           . </param
         >
         <param name="helpString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The string defining what Help to get for the <see
-           cref="T:System.Windows.Forms.AccessibleObject" />
+          The string defining what Help to get for the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
           
 
           . </param
         >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The keyword to associate with the Help request for the <see
-           cref="T:System.Windows.Forms.AccessibleObject" />
+          The keyword to associate with the Help request for the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
           
 
@@ -222,8 +220,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the string defining what Help to get for the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Gets or sets the string defining what Help to get for the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 

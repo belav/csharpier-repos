@@ -27,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the typed value of a validated XML element or attribute. The <see
-         cref="T:System.Xml.Schema.XmlAtomicValue" />
+        >Represents the typed value of a validated XML element or attribute. The <see cref="T:System.Xml.Schema.XmlAtomicValue" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a copy of this <see
-             cref="T:System.Xml.Schema.XmlAtomicValue" />
+            >Returns a copy of this <see cref="T:System.Xml.Schema.XmlAtomicValue" />
 
             
 
@@ -69,13 +67,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Schema.XmlAtomicValue" />
+            >An <see cref="T:System.Xml.Schema.XmlAtomicValue" />
 
             
 
-             object copy of this <see
-             cref="T:System.Xml.Schema.XmlAtomicValue" />
+             object copy of this <see cref="T:System.Xml.Schema.XmlAtomicValue" />
 
             
 
@@ -101,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.IsNode" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.IsNode" />
 
             
 
@@ -135,13 +130,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Xml.Schema.XmlAtomicValue" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Xml.Schema.XmlAtomicValue" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.ICloneable" />
+             instance is cast to an <see cref="T:System.ICloneable" />
 
             
 
@@ -151,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Xml.Schema.XmlAtomicValue.Clone" />
+            >For a description of this member, see <see cref="M:System.Xml.Schema.XmlAtomicValue.Clone" />
 
             
 
@@ -162,8 +154,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a copy of this <see
-             cref="T:System.Xml.Schema.XmlAtomicValue" />
+            >Returns a copy of this <see cref="T:System.Xml.Schema.XmlAtomicValue" />
 
             
 
@@ -216,26 +207,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the value of the item is not valid according to its specified schema type, the value of the <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.TypedValue" />
+            >If the value of the item is not valid according to its specified schema type, the value of the <see cref="P:System.Xml.Schema.XmlAtomicValue.TypedValue" />
 
             
 
-             property is equivalent to the value of the <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.Value" />
+             property is equivalent to the value of the <see cref="P:System.Xml.Schema.XmlAtomicValue.Value" />
 
             
 
              property.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -299,29 +286,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Xml.Schema.XmlAtomicValue.ValueAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
+            >The <see cref="M:System.Xml.Schema.XmlAtomicValue.ValueAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
 
             
 
              method attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework type specified.</para
           >
           <para
-            >The <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >The <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
              object is used to resolve namespace prefixes related to type conversions. For example, when converting an xs:QName to an xs:string.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -335,8 +318,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the validated XML element or attribute's value as the type specified using the <see
-             cref="T:System.Xml.IXmlNamespaceResolver" />
+            >Returns the validated XML element or attribute's value as the type specified using the <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
             
 
@@ -348,19 +330,26 @@
           <para>The value of the validated XML element or attribute as the type requested.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type to return the validated XML element or attribute's value as.</param
         >
         <param name="nsResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.IXmlNamespaceResolver" />
+          The <see cref="T:System.Xml.IXmlNamespaceResolver" />
 
           
 
@@ -385,26 +374,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsBoolean" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsBoolean" />
 
             
 
-             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
-             cref="T:System.Boolean" />
+             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see cref="T:System.Boolean" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -418,8 +403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the validated XML element or attribute's value as a <see
-             cref="T:System.Boolean" />
+            >Gets the validated XML element or attribute's value as a <see cref="T:System.Boolean" />
 
             
 
@@ -448,26 +432,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsDateTime" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsDateTime" />
 
             
 
-             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
-             cref="T:System.DateTime" />
+             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see cref="T:System.DateTime" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -481,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the validated XML element or attribute's value as a <see
-             cref="T:System.DateTime" />
+            >Gets the validated XML element or attribute's value as a <see cref="T:System.DateTime" />
 
             
 
@@ -527,26 +506,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsDouble" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsDouble" />
 
             
 
-             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
-             cref="T:System.Double" />
+             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see cref="T:System.Double" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -560,8 +535,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the validated XML element or attribute's value as a <see
-             cref="T:System.Double" />
+            >Gets the validated XML element or attribute's value as a <see cref="T:System.Double" />
 
             
 
@@ -587,26 +561,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsInt" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsInt" />
 
             
 
-             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
-             cref="T:System.Int32" />
+             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see cref="T:System.Int32" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -620,8 +590,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the validated XML element or attribute's value as an <see
-             cref="T:System.Int32" />
+            >Gets the validated XML element or attribute's value as an <see cref="T:System.Int32" />
 
             
 
@@ -647,26 +616,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsLong" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueAsLong" />
 
             
 
-             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
-             cref="T:System.Int64" />
+             property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see cref="T:System.Int64" />
 
             
 
              type according to the XPath 2.0 rules for casting the item's type.</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -680,8 +645,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the validated XML element or attribute's value as an <see
-             cref="T:System.Int64" />
+            >Gets the validated XML element or attribute's value as an <see cref="T:System.Int64" />
 
             
 
@@ -707,49 +671,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
 
             
 
              property gets the .NET Framework type of the typed value of the validated XML element or attribute.</para
           >
           <para
-            >For example, an element of type xs:int would have a <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
+            >For example, an element of type xs:int would have a <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
 
             
 
-             of <see
-             cref="T:System.Int32" />
+             of <see cref="T:System.Int32" />
 
             
 
-             by default. However, the <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
+             by default. However, the <see cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
 
             
 
-             could be any one of the valid types that can be mapped to xs:int, such as <see
-             cref="T:System.Int16" />
+             could be any one of the valid types that can be mapped to xs:int, such as <see cref="T:System.Int16" />
 
             
 
-             or <see
-             cref="T:System.Double" />
+             or <see cref="T:System.Double" />
 
             
 
             .</para
           >
           <para
-            >For more information about type support in the <see
-             cref="N:System.Xml" />
+            >For more information about type support in the <see cref="N:System.Xml" />
 
             
 
-             namespace, see <format
-             type="text/html">
+             namespace, see <format type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
@@ -789,23 +745,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.Schema.XmlAtomicValue.XmlType" />
+            >The <see cref="P:System.Xml.Schema.XmlAtomicValue.XmlType" />
 
             
 
-             property gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+             property gets the <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 
-             for the validated XML element or attribute. For example, the <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+             for the validated XML element or attribute. For example, the <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
-             or <see
-             cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+             or <see cref="T:System.Xml.Schema.XmlSchemaComplexType" />
 
             
 
@@ -815,8 +767,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Schema.XmlSchemaType" />
+            >Gets the <see cref="T:System.Xml.Schema.XmlSchemaType" />
 
             
 

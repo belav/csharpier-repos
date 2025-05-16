@@ -29,8 +29,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the attribute element from the XML Schema as specified by the <format
-         type="text/html">
+        >Represents the attribute element from the XML Schema as specified by the <format type="text/html">
           <a href="">World Wide Web Consortium (W3C)</a>
         </format>
 
@@ -60,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
             
 
@@ -102,18 +100,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+            >Gets an <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
-             object representing the type of the attribute based on the <see
-             cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
+             object representing the type of the attribute based on the <see cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
 
             
 
-             or <see
-             cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaTypeName" />
+             or <see cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaTypeName" />
 
             
 
@@ -147,13 +142,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object can be <see
-             cref="T:System.Xml.Schema.XmlSchemaDatatype" />
+            >The object can be <see cref="T:System.Xml.Schema.XmlSchemaDatatype" />
 
             
 
-             if the attribute has a built-in XML Schema type or <see
-             cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+             if the attribute has a built-in XML Schema type or <see cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
             
 
@@ -161,13 +154,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Xml.Schema.XmlSchemaAttribute.AttributeType" />
+              >The <see cref="P:System.Xml.Schema.XmlSchemaAttribute.AttributeType" />
 
               
 
-               property is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see
-               cref="P:System.Xml.Schema.XmlSchemaAttribute.AttributeSchemaType" />
+               property is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see cref="P:System.Xml.Schema.XmlSchemaAttribute.AttributeSchemaType" />
 
               
 
@@ -178,13 +169,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the common language runtime (CLR) object based on the <see
-             cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
+            >Gets the common language runtime (CLR) object based on the <see cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
 
             
 
-             or <see
-             cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaTypeName" />
+             or <see cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaTypeName" />
 
             
 
@@ -466,8 +455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >SchemaTypeName and <see
-             cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
+            >SchemaTypeName and <see cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
 
             
 

@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of instances of the <see
-         cref="T:System.Web.Services.Protocols.SoapHeader" />
+        >Contains a collection of instances of the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
         
 
@@ -41,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -72,13 +70,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Adds a <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+             to the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -88,8 +84,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The position at which the <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >The position at which the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -97,17 +92,19 @@
           >
         </returns>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapHeader" />
+          The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           to add to the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 
@@ -136,13 +133,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+            >Determines whether the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
-             contains a specific <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             contains a specific <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -152,13 +147,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the value of the <paramref
-             name="header" />
+            >true if the value of the <paramref name="header" />
 
             
 
-             parameter is found in the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+             parameter is found in the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -166,17 +159,19 @@
           >
         </returns>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapHeader" />
+          The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
-           to locate in the <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           to locate in the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 
@@ -206,18 +201,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+            >Copies the elements of the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular index of the <see
-             cref="T:System.Array" />
+            , starting at a particular index of the <see cref="T:System.Array" />
 
             
 
@@ -225,29 +217,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           that is the destination of the elements copied from <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 
           . The array must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in the <paramref
-           name="array" />
+          The zero-based index in the <paramref name="array" />
 
           
 
@@ -276,13 +273,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of the <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Determines the index of the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             in the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+             in the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -292,13 +287,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the <paramref
-             name="header" />
+            >The index of the <paramref name="header" />
 
             
 
-             parameter, if found in the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+             parameter, if found in the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -306,17 +299,19 @@
           >
         </returns>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapHeader" />
+          The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
-           to locate in the <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           to locate in the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 
@@ -345,21 +340,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter equals the number of items in the collection, then the <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             parameter equals the number of items in the collection, then the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
              is appended to the end of the collection.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -369,13 +361,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Inserts a <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             into the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+             into the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -383,34 +373,38 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <see
-           cref="T:System.Web.Services.Protocols.SoapHeader" />
+          The zero-based index at which to insert the <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
-           into the <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           into the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 
           . </param
         >
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapHeader" />
+          The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
-           to insert into the <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           to insert into the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 
@@ -461,13 +455,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             elements that follow the removed <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+             elements that follow the removed <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
@@ -477,13 +469,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific <see
-             cref="T:System.Web.Services.Protocols.SoapHeader" />
+            >Removes the first occurrence of a specific <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+             from the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
             
 
@@ -491,17 +481,19 @@
           >
         </summary>
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapHeader" />
+          The <see cref="T:System.Web.Services.Protocols.SoapHeader" />
 
           
 
-           to remove from the <see
-           cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+           to remove from the <see cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
 
           
 

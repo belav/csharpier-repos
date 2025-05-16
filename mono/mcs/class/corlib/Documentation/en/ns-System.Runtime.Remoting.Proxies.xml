@@ -9,8 +9,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Runtime.Remoting.Proxies" />
+        >The <see cref="N:System.Runtime.Remoting.Proxies" />
 
         
 
@@ -20,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >One of the most important classes of the <see
-         cref="N:System.Runtime.Remoting.Proxies" />
+        >One of the most important classes of the <see cref="N:System.Runtime.Remoting.Proxies" />
 
         
 
-         namespace is the <see
-         cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+         namespace is the <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
         
 

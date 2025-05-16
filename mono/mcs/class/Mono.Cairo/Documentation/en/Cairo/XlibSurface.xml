@@ -52,16 +52,14 @@
           >the visual to use for drawing to drawable. The depth of the visual must match the depth of the drawable. Currently, only TrueColor visuals are fully supported.</param
         >
         <param name="width"
-          >the current width of <paramref
-           name="drawable" />
+          >the current width of <paramref name="drawable" />
 
           
 
           .</param
         >
         <param name="height"
-          > the current height of <paramref
-           name="drawable" />
+          > the current height of <paramref name="drawable" />
 
           
 
@@ -71,15 +69,14 @@
         <remarks
           >The way that colors are represented in the drawable is specified by the provided visual.
 		  <block
-           subset="none" type="note"
-            >
-			If <paramref
-             name="drawable" />
+            subset="none"
+            type="note"
+          >
+			If <paramref name="drawable" />
 
             
 
-             is a Window, then the function <see
-             cref="M:Cairo.XlibSurface.SetSize()" />
+             is a Window, then the function <see cref="M:Cairo.XlibSurface.SetSize()" />
 
             
 

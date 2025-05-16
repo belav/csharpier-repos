@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The properties of this class can be used either as literals or as resource identifiers for a specified <see
-         cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+        >The properties of this class can be used either as literals or as resource identifiers for a specified <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
         
 
@@ -51,23 +50,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor initializes the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+            >The constructor initializes the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            , <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            , <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+            , and <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
@@ -77,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.DisplayAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.DisplayAttribute" />
 
             
 
@@ -102,13 +96,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to access the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
+            >Do not use this property to access the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
 
             
 
-             property. Use the <see
-             cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetAutoGenerateField" />
+             property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetAutoGenerateField" />
 
             
 
@@ -136,13 +128,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to get the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateFilter" />
+            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateFilter" />
 
             
 
-             property. Use the <see
-             cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetAutoGenerateFilter" />
+             property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetAutoGenerateFilter" />
 
             
 
@@ -171,21 +161,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to get the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
-             property. Use the <see
-             cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" />
+             property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" />
 
             
 
              method instead. </para
           >
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            >The <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
@@ -217,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
+            >Returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
 
             
 
@@ -228,8 +214,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
+            >The value of <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
 
             
 
@@ -264,8 +249,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateFilter" />
+            >The value of <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateFilter" />
 
             
 
@@ -292,8 +276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            >The <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
@@ -303,8 +286,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            >Returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
@@ -314,18 +296,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The localized description, if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+            >The localized description, if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             has been specified and the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+             has been specified and the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
-             property represents a resource key; otherwise, the non-localized value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+             property represents a resource key; otherwise, the non-localized value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
@@ -353,8 +332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
+            >Returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
 
             
 
@@ -364,18 +342,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A value that will be used for grouping fields in the UI, if <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
+            >A value that will be used for grouping fields in the UI, if <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
 
             
 
-             has been initialized; otherwise, null. If the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             has been initialized; otherwise, null. If the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             property has been specified and the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
+             property has been specified and the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
 
             
 
@@ -402,8 +377,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name is typically used as the field label for a UI element that is bound to the property that is annotated with the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            >The name is typically used as the field label for a UI element that is bound to the property that is annotated with the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
@@ -417,23 +391,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The localized string for the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            >The localized string for the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
-             property, if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             property, if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             property has been specified and the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+             property has been specified and the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
-             property represents a resource key; otherwise, the non-localized value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+             property represents a resource key; otherwise, the non-localized value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
@@ -460,8 +430,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an order is not specified, presentation layers should consider setting the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
+            >If an order is not specified, presentation layers should consider setting the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
 
             
 
@@ -471,8 +440,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
+            >Returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
 
             
 
@@ -482,8 +450,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
+            >The value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
 
             
 
@@ -510,13 +477,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+            >The <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
-             property is typically used as a prompt or watermark for a UI element that is bound to the property that is annotated with the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+             property is typically used as a prompt or watermark for a UI element that is bound to the property that is annotated with the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
@@ -526,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+            >Returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
@@ -537,23 +501,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the localized string for the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+            >Gets the localized string for the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
-             property if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             property if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             property has been specified and if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+             property has been specified and if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
-             property represents a resource key; otherwise, the non-localized value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+             property represents a resource key; otherwise, the non-localized value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
@@ -580,8 +540,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The short name is used as the grid column label for a UI element that is bound to the property that is annotated with this attribute. This property returns either the literal, non-localized string, or a localized string if <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+            >The short name is used as the grid column label for a UI element that is bound to the property that is annotated with this attribute. This property returns either the literal, non-localized string, or a localized string if <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
@@ -591,8 +550,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+            >Returns the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
@@ -602,23 +560,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The localized string for the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+            >The localized string for the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-             property if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             property if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             property has been specified and if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+             property has been specified and if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-             property represents a resource key; otherwise, the non-localized value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+             property represents a resource key; otherwise, the non-localized value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
@@ -642,13 +596,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to get the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
+            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
 
             
 
-             property. Use the <see
-             cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" />
+             property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" />
 
             
 
@@ -676,21 +628,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not use this property to get the value of the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            >Do not use this property to get the value of the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
-             property. Use the <see
-             cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetName" />
+             property. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetName" />
 
             
 
              method instead. </para
           >
           <para
-            >The name is typically used as the field label for a UI element that is bound to the property that is annotated with this attribute. The Dynamic Data List.aspx, ListDetails.aspx, and Details.aspx page templates use the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            >The name is typically used as the field label for a UI element that is bound to the property that is annotated with this attribute. The Dynamic Data List.aspx, ListDetails.aspx, and Details.aspx page templates use the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
@@ -740,8 +689,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is typically used as a prompt or watermark for a UI element that is bound to the property that is annotated with this attribute. Do not use this method to access the prompt string. Use the <see
-             cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetPrompt" />
+            >This property is typically used as a prompt or watermark for a UI element that is bound to the property that is annotated with this attribute. Do not use this method to access the prompt string. Use the <see cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetPrompt" />
 
             
 
@@ -769,23 +717,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this value is null, the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+            >If this value is null, the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            , <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+            , <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            , and <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
@@ -795,23 +739,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the type that contains the resources for the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+            >Gets or sets the type that contains the resources for the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+            , <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
 
             
 
-            , <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+            , <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
 
             
 
-            , and <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+            , and <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
             
 
@@ -835,33 +775,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The short name is used as the grid column label for a UI element that is bound to the property that is annotated with this attribute. The Dynamic Data Insert.aspx and Edit.aspx page templates use the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+            >The short name is used as the grid column label for a UI element that is bound to the property that is annotated with this attribute. The Dynamic Data Insert.aspx and Edit.aspx page templates use the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-             for the field label. This property returns the localized string for <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             for the field label. This property returns the localized string for <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             property has been specified and if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+             property has been specified and if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 
-             property represents a resource key. If the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+             property represents a resource key. If the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
             
 
-             property has not been specified or if the <see
-             cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+             property has not been specified or if the <see cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
 
             
 

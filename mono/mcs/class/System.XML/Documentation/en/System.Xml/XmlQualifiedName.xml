@@ -22,8 +22,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>An XML qualified name is a namespace qualified local name in the format of namespace:localname.</para>
       <para
-        >Because prefixes are only required when XML is persisted or read, they are irrelevant for <see
-         cref="T:System.Xml.XmlQualifiedName" />
+        >Because prefixes are only required when XML is persisted or read, they are irrelevant for <see cref="T:System.Xml.XmlQualifiedName" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -92,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -101,12 +98,15 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The local name to use as the name of the <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -136,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -145,24 +144,30 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The local name to use as the name of the <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The local name to use as the name of the <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            object. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace for the <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The namespace for the <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -194,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides an empty <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Provides an empty <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -227,13 +231,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Determines whether the specified <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Xml.XmlQualifiedName" />
+             object is equal to the current <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -245,12 +247,15 @@
           <para>true if the two are the same instance object; otherwise, false.</para>
         </returns>
         <param name="other">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          The <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -279,8 +284,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the hash code for the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Returns the hash code for the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -311,8 +315,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Gets a value indicating whether the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -339,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the qualified name of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Gets a string representation of the qualified name of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -367,8 +369,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a string representation of the namespace of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Gets a string representation of the namespace of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -404,8 +405,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Compares two <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -417,24 +417,30 @@
           <para>true if the two objects have the same name and namespace values; otherwise, false.</para>
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            to compare. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -469,8 +475,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Compares two <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -482,24 +487,30 @@
           <para>true if the name and namespace values for the two objects differ; otherwise, false.</para>
         </returns>
         <param name="a">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
            to compare. </param
         >
         <param name="b">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlQualifiedName" />
+          An <see cref="T:System.Xml.XmlQualifiedName" />
 
           
 
@@ -528,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the string value of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Returns the string value of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -539,8 +549,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >The string value of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -576,8 +585,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the string value of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >Returns the string value of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -587,8 +595,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string value of the <see
-             cref="T:System.Xml.XmlQualifiedName" />
+            >The string value of the <see cref="T:System.Xml.XmlQualifiedName" />
 
             
 
@@ -596,14 +603,22 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the object. </param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

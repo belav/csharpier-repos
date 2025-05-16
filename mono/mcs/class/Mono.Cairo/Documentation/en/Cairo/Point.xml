@@ -26,8 +26,7 @@
         <param name="y">y coordinate.</param>
         <summary>Default constructor that accepts a pair of x, y coordinates.</summary>
         <remarks
-          >This class is most probably not what you want. Most classes use the <see
-           cref="T:Cairo.PointD" />
+          >This class is most probably not what you want. Most classes use the <see cref="T:Cairo.PointD" />
 
           
 

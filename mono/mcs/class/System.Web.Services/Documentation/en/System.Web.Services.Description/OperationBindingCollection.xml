@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Services.Description.OperationBinding" />
+        >The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
         
 
-         class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see
-         cref="T:System.Web.Services.Description.Binding" />
+         class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see cref="T:System.Web.Services.Description.Binding" />
 
         
 
@@ -39,8 +37,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of instances of the <see
-         cref="T:System.Web.Services.Description.OperationBinding" />
+        >Represents a collection of instances of the <see cref="T:System.Web.Services.Description.OperationBinding" />
 
         
 
@@ -69,13 +66,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             to the end of the <see
-             cref="T:System.Web.Services.Description.OperationBindingCollection" />
+             to the end of the <see cref="T:System.Web.Services.Description.OperationBindingCollection" />
 
             
 
@@ -85,8 +80,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index where the <paramref
-             name="bindingOperation" />
+            >The zero-based index where the <paramref name="bindingOperation" />
 
             
 
@@ -94,12 +88,15 @@
           >
         </returns>
         <param name="bindingOperation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
@@ -131,13 +128,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether the specified <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Returns a value indicating whether the specified <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             is a member of the <see
-             cref="T:System.Web.Services.Description.OperationBindingCollection" />
+             is a member of the <see cref="T:System.Web.Services.Description.OperationBindingCollection" />
 
             
 
@@ -147,13 +142,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="bindingOperation" />
+            >true if the <paramref name="bindingOperation" />
 
             
 
-             parameter is a member of the <see
-             cref="T:System.Web.Services.Description.OperationBindingCollection" />
+             parameter is a member of the <see cref="T:System.Web.Services.Description.OperationBindingCollection" />
 
             
 
@@ -161,12 +154,15 @@
           >
         </returns>
         <param name="bindingOperation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
@@ -196,8 +192,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the entire OperationBindingCollection to a compatible one-dimensional array of type <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Copies the entire OperationBindingCollection to a compatible one-dimensional array of type <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -205,19 +200,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          An array of type <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
            serving as the destination for the copy action. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -249,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches for the specified <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Searches for the specified <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -262,12 +263,15 @@
           <para>A 32-bit signed integer.</para>
         </returns>
         <param name="bindingOperation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
@@ -300,23 +304,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the number of items in the collection already equals the collection's capacity, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para>
           <para
-            >If the <paramref
-             name="index" />
+            >If the <paramref name="index" />
 
             
 
-             parameter is equal to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+             parameter is equal to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
-            , the <paramref
-             name="bindingOperation" />
+            , the <paramref name="bindingOperation" />
 
             
 
-             parameter is added to the end of the <see
-             cref="T:System.Web.Services.Description.OperationBindingCollection" />
+             parameter is added to the end of the <see cref="T:System.Web.Services.Description.OperationBindingCollection" />
 
             
 
@@ -327,13 +327,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Adds the specified <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             instance to the <see
-             cref="T:System.Web.Services.Description.OperationBindingCollection" />
+             instance to the <see cref="T:System.Web.Services.Description.OperationBindingCollection" />
 
             
 
@@ -341,24 +339,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="bindingOperation" />
+          The zero-based index at which to insert the <paramref name="bindingOperation" />
 
           
 
            parameter. </param
         >
         <param name="bindingOperation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
@@ -412,16 +416,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method performs a linear search; therefore, the average execution time is proportional to <see
-             cref="P:System.Collections.CollectionBase.Count" />
+            >This method performs a linear search; therefore, the average execution time is proportional to <see cref="P:System.Collections.CollectionBase.Count" />
 
             
 
             .</para
           >
           <para
-            >The elements that follow the removed <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >The elements that follow the removed <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
@@ -431,13 +433,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of the specified <see
-             cref="T:System.Web.Services.Description.OperationBinding" />
+            >Removes the first occurrence of the specified <see cref="T:System.Web.Services.Description.OperationBinding" />
 
             
 
-             from the <see
-             cref="T:System.Web.Services.Description.OperationBindingCollection" />
+             from the <see cref="T:System.Web.Services.Description.OperationBindingCollection" />
 
             
 
@@ -445,12 +445,15 @@
           >
         </summary>
         <param name="bindingOperation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Description.OperationBinding" />
+          The <see cref="T:System.Web.Services.Description.OperationBinding" />
 
           
 
@@ -476,14 +479,8 @@
         <Parameter Name="parent" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >a <see
-           cref="T:System.Object" />
-        </param>
-        <param name="parent"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="value">a <see cref="T:System.Object" /></param>
+        <param name="parent">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>

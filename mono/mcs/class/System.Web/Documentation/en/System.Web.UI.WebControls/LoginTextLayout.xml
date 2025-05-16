@@ -14,8 +14,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the position of labels relative to their associated text boxes for the <see
-         cref="T:System.Web.UI.WebControls.Login" />
+        >Specifies the position of labels relative to their associated text boxes for the <see cref="T:System.Web.UI.WebControls.Login" />
 
         
 

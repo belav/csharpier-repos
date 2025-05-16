@@ -38,16 +38,14 @@
   </ReturnValue>
   <Docs>
     <param name="StatusCode"
-      >A <see
-       cref="T:System.Int32" />
+      >A <see cref="T:System.Int32" />
 
       
 
        containing the numeric value of the HTTP status from the server. </param
     >
     <param name="httpHeaders"
-      >A <see
-       cref="T:System.Net.WebHeaderCollection" />
+      >A <see cref="T:System.Net.WebHeaderCollection" />
 
       
 
@@ -56,21 +54,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Net.HttpContinueDelegate" />
+        >Use <see cref="T:System.Net.HttpContinueDelegate" />
 
         
 
-         to specify the callback method to be called when an HTTP 100-continue response is received from the server. When set, the delegate is called whenever the first protocol response of type <see
-         cref="F:System.Net.HttpStatusCode.Continue" />
+         to specify the callback method to be called when an HTTP 100-continue response is received from the server. When set, the delegate is called whenever the first protocol response of type <see cref="F:System.Net.HttpStatusCode.Continue" />
 
         
 
          is received. This is a change from the behavior of the version 1.1 Framework. </para
       >
       <para
-        >Your event handler must declare the same parameters as the <see
-         cref="T:System.Net.HttpContinueDelegate" />
+        >Your event handler must declare the same parameters as the <see cref="T:System.Net.HttpContinueDelegate" />
 
         
 
@@ -82,8 +77,7 @@
 
           
 
-           is always <see
-           cref="F:System.Net.HttpStatusCode.Continue" />
+           is always <see cref="F:System.Net.HttpStatusCode.Continue" />
 
           
 

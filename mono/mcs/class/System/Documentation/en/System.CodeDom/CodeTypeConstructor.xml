@@ -42,13 +42,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Not all languages support static constructors. Support for static constructors can be checked by calling <see
-           cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+          >Not all languages support static constructors. Support for static constructors can be checked by calling <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
           
 
-           with the <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.StaticConstructors" />
+           with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.StaticConstructors" />
 
           
 
@@ -81,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeTypeConstructor" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeTypeConstructor" />
 
             
 

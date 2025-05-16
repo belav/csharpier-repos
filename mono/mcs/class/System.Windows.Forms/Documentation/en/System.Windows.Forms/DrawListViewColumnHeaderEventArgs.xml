@@ -16,92 +16,76 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+        >The <see cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
 
         
 
-         event lets you customize (or owner-draw) the appearance of a <see
-         cref="T:System.Windows.Forms.ListView" />
+         event lets you customize (or owner-draw) the appearance of a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
          control in the details view.</para
       >
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+        >The <see cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
 
         
 
-         event is raised by a <see
-         cref="T:System.Windows.Forms.ListView" />
+         event is raised by a <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         control when its <see
-         cref="P:System.Windows.Forms.ListView.OwnerDraw" />
+         control when its <see cref="P:System.Windows.Forms.ListView.OwnerDraw" />
 
         
 
-         property is set to true and its <see
-         cref="P:System.Windows.Forms.ListView.View" />
+         property is set to true and its <see cref="P:System.Windows.Forms.ListView.View" />
 
         
 
-         property is set to <see
-         cref="F:System.Windows.Forms.View.Details" />
+         property is set to <see cref="F:System.Windows.Forms.View.Details" />
 
         
 
-        . The <see
-         cref="T:System.Windows.Forms.DrawListViewColumnHeaderEventArgs" />
+        . The <see cref="T:System.Windows.Forms.DrawListViewColumnHeaderEventArgs" />
 
         
 
-         passed to the event handler contains information about the <see
-         cref="T:System.Windows.Forms.ColumnHeader" />
+         passed to the event handler contains information about the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
         
 
          to draw and also provides methods to help you draw the header.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Header" />
+        >Use the <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Header" />
 
         
 
-         property to retrieve information about the column header to draw. Use the <see
-         cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Graphics" />
+         property to retrieve information about the column header to draw. Use the <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Graphics" />
 
         
 
-         property to do the actual drawing within the area specified by the <see
-         cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Bounds" />
+         property to do the actual drawing within the area specified by the <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Bounds" />
 
         
 
-         property. To draw standard <see
-         cref="T:System.Windows.Forms.ListView" />
+         property. To draw standard <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         elements that do not need customization, use the <see
-         cref="M:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawBackground" />
+         elements that do not need customization, use the <see cref="M:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawBackground" />
 
         
 
-         and <see
-         cref="Overload:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawText" />
+         and <see cref="Overload:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawText" />
 
         
 
          methods.</para
       >
       <para
-        >Use the <see
-         cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawDefault" />
+        >Use the <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawDefault" />
 
         
 
@@ -109,18 +93,15 @@
       >
       <block subset="none" type="note">
         <para
-          >To avoid issues with graphics flickering when owner drawing, override the <see
-           cref="T:System.Windows.Forms.ListView" />
+          >To avoid issues with graphics flickering when owner drawing, override the <see cref="T:System.Windows.Forms.ListView" />
 
           
 
-           control and set the <see
-           cref="P:System.Windows.Forms.ListView.DoubleBuffered" />
+           control and set the <see cref="P:System.Windows.Forms.ListView.DoubleBuffered" />
 
           
 
-           property to true. This feature is available only on Windows XP and the Windows Server 2003 family when your application calls the <see
-           cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+           property to true. This feature is available only on Windows XP and the Windows Server 2003 family when your application calls the <see cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
 
           
 
@@ -131,8 +112,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
 
         
 
@@ -165,8 +145,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DrawListViewColumnHeaderEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DrawListViewColumnHeaderEventArgs" />
 
             
 
@@ -174,96 +153,120 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            surface on which to draw. </param
         >
         <param name="bounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Rectangle" />
+          The <see cref="T:System.Drawing.Rectangle" />
 
           
 
            within which to draw.</param
         >
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the header's column within the <see
-           cref="P:System.Windows.Forms.ListView.Columns" />
+          The index of the header's column within the <see cref="P:System.Windows.Forms.ListView.Columns" />
 
           
 
            collection.</param
         >
         <param name="header">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.ColumnHeader" />
+          The <see cref="T:System.Windows.Forms.ColumnHeader" />
 
           
 
            representing the header to draw.</param
         >
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.ListViewItemStates" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.ListViewItemStates" />
 
           
 
            values indicating the current state of the column header.</param
         >
         <param name="foreColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The foreground <see
-           cref="T:System.Drawing.Color" />
+          The foreground <see cref="T:System.Drawing.Color" />
 
           
 
            of the header.</param
         >
         <param name="backColor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The background <see
-           cref="T:System.Drawing.Color" />
+          The background <see cref="T:System.Drawing.Color" />
 
           
 
            of the header.</param
         >
         <param name="font">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Font" />
+          The <see cref="T:System.Drawing.Font" />
 
           
 
@@ -303,8 +306,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The location specified by this property is relative to the upper-left corner of the <see
-             cref="T:System.Windows.Forms.ListView" />
+            >The location specified by this property is relative to the upper-left corner of the <see cref="T:System.Windows.Forms.ListView" />
 
             
 
@@ -332,8 +334,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets the index of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -377,8 +378,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property when handling the <see
-             cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+            >Use this property when handling the <see cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
 
             
 
@@ -431,13 +431,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method when you do not need to customize the appearance of the header text. The <see
-             cref="T:System.Windows.Forms.TextFormatFlags" />
+            >Use this method when you do not need to customize the appearance of the header text. The <see cref="T:System.Windows.Forms.TextFormatFlags" />
 
             
 
-             values specified in the <paramref
-             name="flags" />
+             values specified in the <paramref name="flags" />
 
             
 
@@ -447,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Draws the column header text, formatting it with the specified <see
-             cref="T:System.Windows.Forms.TextFormatFlags" />
+            >Draws the column header text, formatting it with the specified <see cref="T:System.Windows.Forms.TextFormatFlags" />
 
             
 
@@ -456,12 +453,15 @@
           >
         </summary>
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.TextFormatFlags" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.TextFormatFlags" />
 
           
 
@@ -519,8 +519,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Graphics" />
+            >The <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -530,8 +529,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets the <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -557,23 +555,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is useful when the <see
-             cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.State" />
+            >This property is useful when the <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.State" />
 
             
 
-             property does not provide adequate information to meet your needs. The <see
-             cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.State" />
+             property does not provide adequate information to meet your needs. The <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.State" />
 
             
 
-             property provides only basic state information that you can use, for example, to determine whether the mouse is over the column header. The <see
-             cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Header" />
+             property provides only basic state information that you can use, for example, to determine whether the mouse is over the column header. The <see cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Header" />
 
             
 
-             property, on the other hand, allows you to access all members of the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+             property, on the other hand, allows you to access all members of the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -583,8 +577,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.ColumnHeader" />
+            >Gets the <see cref="T:System.Windows.Forms.ColumnHeader" />
 
             
 
@@ -610,18 +603,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine whether the mouse pointer is over the header or whether the user has clicked the header. The <see
-             cref="T:System.Windows.Forms.ListViewItemStates" />
+            >Use this property to determine whether the mouse pointer is over the header or whether the user has clicked the header. The <see cref="T:System.Windows.Forms.ListViewItemStates" />
 
             
 
-             values for these states are <see
-             cref="F:System.Windows.Forms.ListViewItemStates.Hot" />
+             values for these states are <see cref="F:System.Windows.Forms.ListViewItemStates.Hot" />
 
             
 
-             and <see
-             cref="F:System.Windows.Forms.ListViewItemStates.Selected" />
+             and <see cref="F:System.Windows.Forms.ListViewItemStates.Selected" />
 
             
 

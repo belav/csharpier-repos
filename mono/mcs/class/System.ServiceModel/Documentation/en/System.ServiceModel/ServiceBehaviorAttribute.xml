@@ -29,18 +29,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+        >Apply the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
         
 
-         attribute to a service implementation to specify service-wide execution behavior. (To specify execution behavior at the method level, use the <see
-         cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+         attribute to a service implementation to specify service-wide execution behavior. (To specify execution behavior at the method level, use the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
         
 
-         attribute.) This attribute can be applied only to service implementations. For working examples, see the <format
-         type="text/html">
+         attribute.) This attribute can be applied only to service implementations. For working examples, see the <format type="text/html">
           <a href="4e3c6513-a7ff-4b35-8dcf-b5506c6f39a7">Service Behaviors Samples</a>
         </format>
 
@@ -53,15 +50,13 @@
 
         
 
-         properties are a indigo1 programming model feature that enables common features that developers otherwise have to implement. For more information about these and other behaviors, see <format
-         type="text/html">
+         properties are a indigo1 programming model feature that enables common features that developers otherwise have to implement. For more information about these and other behaviors, see <format type="text/html">
           <a href="5c5450ea-6af1-4b75-a267-613d0ac54707">Specifying Runtime Behavior</a>
         </format>
 
         
 
-        . For more information about the underlying runtime properties that some of the following properties set, see <format
-         type="text/html">
+        . For more information about the underlying runtime properties that some of the following properties set, see <format type="text/html">
           <a href="954c138a-1cd0-45a0-8abe-e4d2b8ff5400"
             >Extending ServiceHost and the Dispatcher</a
           >
@@ -74,8 +69,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
 
             
 
@@ -84,8 +78,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
 
             
 
@@ -94,8 +87,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
@@ -104,8 +96,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConfigurationName" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConfigurationName" />
 
             
 
@@ -114,8 +105,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
 
             
 
@@ -124,8 +114,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
             
 
@@ -134,8 +123,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
@@ -144,8 +132,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
 
             
 
@@ -154,13 +141,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.Name" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.Name" />
 
             
 
-             and <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.Namespace" />
+             and <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.Namespace" />
 
             
 
@@ -169,8 +154,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
@@ -179,8 +163,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionAutoCompleteOnSessionClose" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionAutoCompleteOnSessionClose" />
 
             
 
@@ -189,8 +172,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionIsolationLevel" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionIsolationLevel" />
 
             
 
@@ -199,8 +181,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionTimeout" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionTimeout" />
 
             
 
@@ -209,8 +190,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
 
             
 
@@ -219,8 +199,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
+            >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
 
             
 
@@ -229,13 +208,11 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+        >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
         
 
-         property can also be set using an application configuration file. For details, see <see
-         cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+         property can also be set using an application configuration file. For details, see <see cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
         
 
@@ -263,8 +240,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default values for the <see
-             cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+            >The default values for the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
             
 
@@ -273,13 +249,11 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.AddressFilterMode.Exact" />
+                 is set to <see cref="F:System.ServiceModel.AddressFilterMode.Exact" />
 
                 
 
@@ -288,8 +262,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
 
                 
 
@@ -298,13 +271,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
                 
 
-                 is set to <see
-                 cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+                 is set to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
                 
 
@@ -313,8 +284,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConfigurationName" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConfigurationName" />
 
                 
 
@@ -323,8 +293,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
 
                 
 
@@ -333,8 +302,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
 
                 
 
@@ -343,8 +311,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.Name" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.Name" />
 
                 
 
@@ -353,8 +320,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.Namespace" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.Namespace" />
 
                 
 
@@ -363,8 +329,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
                 
 
@@ -391,8 +356,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionAutoCompleteOnSessionClose" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionAutoCompleteOnSessionClose" />
 
                 
 
@@ -401,28 +365,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionIsolationLevel" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionIsolationLevel" />
 
                 
 
-                 property is <see
-                 cref="F:System.Transactions.IsolationLevel.Unspecified" />
-
-                
-
-                .</para
-              >
-            </item>
-            <item>
-              <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionTimeout" />
-
-                
-
-                 property is set to <see
-                 cref="F:System.TimeSpan.Zero" />
+                 property is <see cref="F:System.Transactions.IsolationLevel.Unspecified" />
 
                 
 
@@ -431,8 +378,20 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionTimeout" />
+
+                
+
+                 property is set to <see cref="F:System.TimeSpan.Zero" />
+
+                
+
+                .</para
+              >
+            </item>
+            <item>
+              <para
+                >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
 
                 
 
@@ -444,8 +403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
             
 
@@ -476,8 +434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.AddressFilterMode" />
+            >Gets or sets the <see cref="T:System.ServiceModel.AddressFilterMode" />
 
             
 
@@ -501,8 +458,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
+            >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
 
             
 
@@ -538,38 +494,31 @@
           <para>This property indicates whether an instance of a service can handle one thread or multiple threads that execute concurrently, and if single-threaded, whether reentrancy is supported. </para>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+              >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
               
 
-               property interacts with some other settings. For example, if the <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+               property interacts with some other settings. For example, if the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
               
 
-               value is set to <see
-               cref="F:System.ServiceModel.InstanceContextMode.Single" />
+               value is set to <see cref="F:System.ServiceModel.InstanceContextMode.Single" />
 
               
 
-               the result is that your service can only process one message at a time unless you also set the <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+               the result is that your service can only process one message at a time unless you also set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
               
 
-               value to <see
-               cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+               value to <see cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
 
               
 
-              . This property also produces behavior in combination with the <see
-               cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+              . This property also produces behavior in combination with the <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
 
               
 
-               property. For details, see <format
-               type="text/html">
+               property. For details, see <format type="text/html">
                 <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                   >Sessions, Instancing, and Concurrency</a
                 >
@@ -581,18 +530,15 @@
             >
           </block>
           <para
-            >Setting <see
-             cref="T:System.ServiceModel.ConcurrencyMode" />
+            >Setting <see cref="T:System.ServiceModel.ConcurrencyMode" />
 
             
 
-             to <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+             to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
             
 
-             instructs the system to restrict instances of the service to one thread of execution at a time, which frees you from dealing with threading issues. A value of <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+             instructs the system to restrict instances of the service to one thread of execution at a time, which frees you from dealing with threading issues. A value of <see cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
 
             
 
@@ -607,8 +553,7 @@
           >
           <block subset="none" type="note">
             <para
-              >It is your responsibility to leave your object state consistent before callouts and you must confirm that operation-local data is valid after callouts. Note that the service instance is unlocked only by calling another service over a indigo2 channel. In this case, the called service can reenter the first service via a callback. If the first service is not reentrant, the sequence of calls results in a deadlock. For details, see <see
-               cref="T:System.ServiceModel.ConcurrencyMode" />
+              >It is your responsibility to leave your object state consistent before callouts and you must confirm that operation-local data is valid after callouts. Note that the service instance is unlocked only by calling another service over a indigo2 channel. In this case, the called service can reenter the first service via a callback. If the first service is not reentrant, the sequence of calls results in a deadlock. For details, see <see cref="T:System.ServiceModel.ConcurrencyMode" />
 
               
 
@@ -629,23 +574,19 @@
 }
 </code>
           <para
-            >Using the Begin/End asynchronous call pattern for an outbound call when the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+            >Using the Begin/End asynchronous call pattern for an outbound call when the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
-             is <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
+             is <see cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
 
             
 
-             triggers an exception. Asynchronous outbound calls require an operation in which <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+             triggers an exception. Asynchronous outbound calls require an operation in which <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
-             is <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+             is <see cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
 
             
 
@@ -653,13 +594,11 @@
           >
           <para>Generally, if a message arrives for an instance that violates its concurrency mode, the message waits until the instance is available, or until it times out.  </para>
           <para
-            >In addition, if the <see
-             cref="T:System.ServiceModel.ConcurrencyMode" />
+            >In addition, if the <see cref="T:System.ServiceModel.ConcurrencyMode" />
 
             
 
-             is set to <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+             is set to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
             
 
@@ -667,23 +606,19 @@
           >
           <block subset="none" type="note">
             <para
-              >A <see
-               cref="T:System.InvalidOperationException" />
+              >A <see cref="T:System.InvalidOperationException" />
 
               
 
-               is thrown at runtime if <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+               is thrown at runtime if <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
               
 
-               is true when the <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+               is true when the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
               
 
-               property is set to <see
-               cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+               property is set to <see cref="F:System.ServiceModel.ConcurrencyMode.Single" />
 
               
 
@@ -691,41 +626,34 @@
             >
           </block>
           <para
-            >Note that you must explicitly set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+            >Note that you must explicitly set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
-             to false if there is an operation with <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+             to false if there is an operation with <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
 
             
 
-             set to true and you set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+             set to true and you set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
-             to <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
+             to <see cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
 
             
 
-            . Otherwise a validation exception is thrown because the default value of <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+            . Otherwise a validation exception is thrown because the default value of <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
              is true.</para
           >
           <para
-            >There is an interaction of the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+            >There is an interaction of the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
-             and other properties that can alter runtime behavior. For a complete description of these interactions, see <format
-             type="text/html">
+             and other properties that can alter runtime behavior. For a complete description of these interactions, see <format type="text/html">
               <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                 >Sessions, Instancing, and Concurrency</a
               >
@@ -808,26 +736,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a type implements the <see
-             cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+            >If a type implements the <see cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
 
             
 
-             interface, it stores any extra data it doesn’t know about that comes over the wire when deserializing into that type. For example, if a type Person has members FirstName and LastName, and an element called PhoneNumber comes in, it is stored. When later serializing the type, PhoneNumber will be re-emitted. The problem is that the schema for Person exported by that service only has FirstName and LastName, so indigo1 generates a schema-invalid instance! If strict schema compliance is important, you can set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
+             interface, it stores any extra data it doesn’t know about that comes over the wire when deserializing into that type. For example, if a type Person has members FirstName and LastName, and an element called PhoneNumber comes in, it is stored. When later serializing the type, PhoneNumber will be re-emitted. The problem is that the schema for Person exported by that service only has FirstName and LastName, so indigo1 generates a schema-invalid instance! If strict schema compliance is important, you can set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
 
             
 
              to true to turn this re-emitting behavior off.</para
           >
           <para
-            >Regardless <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
+            >Regardless <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
 
             
 
-             setting, indigo2 always processes known data (both in and out) and does not throw exceptions when extra data comes in. You can also set this property using the <format
-             type="text/html">
+             setting, indigo2 always processes known data (both in and out) and does not throw exceptions when extra data comes in. You can also set this property using the <format type="text/html">
               <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
             </format>
 
@@ -863,21 +787,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+            >Set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
             
 
              to true to enable exception information to flow to clients for debugging purposes. This property requires a binding that supports either request-response or duplex messaging. </para
           >
           <para
-            >In all managed applications, processing errors are represented by <see
-             cref="T:System.Exception" />
+            >In all managed applications, processing errors are represented by <see cref="T:System.Exception" />
 
             
 
-             objects. In SOAP-based applications such as indigo2 applications, methods that implement service operations communicate error information using SOAP fault messages. Because indigo2 applications execute under both types of error systems, any managed exception information that needs to be sent to the client must be converted from exceptions into SOAP faults. For more information, see <format
-             type="text/html">
+             objects. In SOAP-based applications such as indigo2 applications, methods that implement service operations communicate error information using SOAP fault messages. Because indigo2 applications execute under both types of error systems, any managed exception information that needs to be sent to the client must be converted from exceptions into SOAP faults. For more information, see <format type="text/html">
               <a href="a9696563-d404-4905-942d-1e0834c26dea"
                 >Specifying and Handling Faults in Contracts and Services</a
               >
@@ -889,21 +810,18 @@
           >
           <para>During development, you may want your service to also send other exceptions back to the client to assist you in debugging. This is a development-only feature and should not be employed in deployed services.</para>
           <para
-            >To facilitate debugging development, set the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+            >To facilitate debugging development, set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
             
 
              to true either in code or using an application configuration file. </para
           >
           <para
-            >When enabled, the service automatically returns safer exception information to the caller. These faults appear to the client as <see
-             cref="T:System.ServiceModel.FaultException`1" />
+            >When enabled, the service automatically returns safer exception information to the caller. These faults appear to the client as <see cref="T:System.ServiceModel.FaultException`1" />
 
             
 
-             objects of type <see
-             cref="T:System.ServiceModel.ExceptionDetail" />
+             objects of type <see cref="T:System.ServiceModel.ExceptionDetail" />
 
             
 
@@ -911,18 +829,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Setting <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+              >Setting <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
 
               
 
-               to true enables clients to obtain information about internal service method exceptions; it is only recommended as a way of temporarily debugging a service application. In addition, the WSDL for a method that returns unhandled managed exceptions in this way does not contain the contract for the <see
-               cref="T:System.ServiceModel.FaultException`1" />
+               to true enables clients to obtain information about internal service method exceptions; it is only recommended as a way of temporarily debugging a service application. In addition, the WSDL for a method that returns unhandled managed exceptions in this way does not contain the contract for the <see cref="T:System.ServiceModel.FaultException`1" />
 
               
 
-               of type <see
-               cref="T:System.ServiceModel.ExceptionDetail" />
+               of type <see cref="T:System.ServiceModel.ExceptionDetail" />
 
               
 
@@ -931,8 +846,7 @@
             <para />
           </block>
           <para
-            >Setting this property to true can also be done using an application configuration file and the <format
-             type="text/html">
+            >Setting this property to true can also be done using an application configuration file and the <format type="text/html">
               <a href="6d7ea986-f232-49fe-842c-f934d9966889">&lt;serviceDebug&gt;</a>
             </format>
 
@@ -945,13 +859,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies that general unhandled execution exceptions are to be converted into a <see
-             cref="T:System.ServiceModel.FaultException`1" />
+            >Gets or sets a value that specifies that general unhandled execution exceptions are to be converted into a <see cref="T:System.ServiceModel.FaultException`1" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.ExceptionDetail" />
+             of type <see cref="T:System.ServiceModel.ExceptionDetail" />
 
             
 
@@ -981,13 +893,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="T:System.ServiceModel.InstanceContextMode" />
+            >Use the <see cref="T:System.ServiceModel.InstanceContextMode" />
 
             
 
-             property to specify when new service objects are created. Because the service object is not directly connected to the communicating channel, the lifetime of the service objects is independent of the lifetime of the channel between a client and the service application. The default value, <see
-             cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+             property to specify when new service objects are created. Because the service object is not directly connected to the communicating channel, the lifetime of the service objects is independent of the lifetime of the channel between a client and the service application. The default value, <see cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
 
             
 
@@ -1002,38 +912,31 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+              >The <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
               
 
-               property interacts with some other settings. For example, if the <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+               property interacts with some other settings. For example, if the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
               
 
-               value is set to <see
-               cref="F:System.ServiceModel.InstanceContextMode.Single" />
+               value is set to <see cref="F:System.ServiceModel.InstanceContextMode.Single" />
 
               
 
-               the result is that your service can only process one message at a time unless you also set the <see
-               cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+               the result is that your service can only process one message at a time unless you also set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
               
 
-               value to <see
-               cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+               value to <see cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
 
               
 
-              . This property also produces behavior in combination with the <see
-               cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+              . This property also produces behavior in combination with the <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
 
               
 
-               property. For details, see <format
-               type="text/html">
+               property. For details, see <format type="text/html">
                 <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                   >Sessions, Instancing, and Concurrency</a
                 >
@@ -1045,13 +948,11 @@
             >
           </block>
           <para
-            >For singleton lifetime behavior (for example, if the host application calls the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+            >For singleton lifetime behavior (for example, if the host application calls the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
 
             
 
-             constructor and passes an object to use as the service), the service class must set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+             constructor and passes an object to use as the service), the service class must set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
@@ -1079,13 +980,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
+            >Use the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
 
             
 
-             property set a limit on the number of items in an object graph that are serialized. You can also set this property using the <format
-             type="text/html">
+             property set a limit on the number of items in an object graph that are serialized. You can also set this property using the <format type="text/html">
               <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
             </format>
 
@@ -1159,36 +1058,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that you must explicitly set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+            >Note that you must explicitly set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
-             to false if there is an operation with <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+             to false if there is an operation with <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
 
             
 
-             set to true and you set <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+             set to true and you set <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
 
             
 
-             to <see
-             cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
+             to <see cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
 
             
 
-            . Otherwise a validation exception is thrown because the default value of <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+            . Otherwise a validation exception is thrown because the default value of <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
              is true.</para
           >
           <para
-            >In addition, it is important to realize that if the service is created by passing a service object to the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+            >In addition, it is important to realize that if the service is created by passing a service object to the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
 
             
 
@@ -1222,23 +1115,19 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This provides the service instance to which all messages addressed to the service will be dispatched. </para>
           <para
-            >If <see
-             cref="M:System.ServiceModel.ServiceBehaviorAttribute.SetWellKnownSingleton(System.Object)" />
+            >If <see cref="M:System.ServiceModel.ServiceBehaviorAttribute.SetWellKnownSingleton(System.Object)" />
 
             
 
-             is set to a non-null value, then the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+             is set to a non-null value, then the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
-             must be set to <see
-             cref="F:System.ServiceModel.InstanceContextMode.Single" />
+             must be set to <see cref="F:System.ServiceModel.InstanceContextMode.Single" />
 
             
 
-             or an <see
-             cref="T:System.InvalidOperationException" />
+             or an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -1250,7 +1139,11 @@
           <para>Specifies an object that implements the service and that is used as the singleton instance of the service.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1293,28 +1186,44 @@
           <para>Passes custom data objects to the bindings that support the behavior properties.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service host.</param
         >
         <param name="endpoints">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service endpoints.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1349,14 +1258,22 @@
           <para>Customizes the service run time to support the behavior properties.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1391,14 +1308,22 @@
           <para>Confirms that the service description and service host are capable of supporting the behavior.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The service description.</param
         >
         <param name="serviceHostBase">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1452,8 +1377,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The isolation level in which your transaction runs determines how data is treated when changes are made in other transactions and how long your transaction must hold locks to protect against these changes. For example, the default value, <see
-             cref="F:System.Transactions.IsolationLevel.Unspecified" />
+            >The isolation level in which your transaction runs determines how data is treated when changes are made in other transactions and how long your transaction must hold locks to protect against these changes. For example, the default value, <see cref="F:System.Transactions.IsolationLevel.Unspecified" />
 
             
 
@@ -1482,13 +1406,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This value sets the <see
-             cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.TransactionTimeout" />
+            >This value sets the <see cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.TransactionTimeout" />
 
             
 
-             property. You can also set this property using the <format
-             type="text/html">
+             property. You can also set this property using the <format type="text/html">
               <a href="ada536cf-97dc-4cd7-89ec-ed1466c1c557">&lt;serviceTimeOuts&gt;</a>
             </format>
 
@@ -1518,13 +1440,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to provide the user interface thread affinity that some applications require. For example, a Windows Forms application may be registered as a singleton service object. In this case, all calls into the service must run on the Windows Forms thread. The default case, in which <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
+            >Use this property to provide the user interface thread affinity that some applications require. For example, a Windows Forms application may be registered as a singleton service object. In this case, all calls into the service must run on the Windows Forms thread. The default case, in which <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
 
             
 
-             is set to true, synchronizes all calls to the service to run on the thread captured from the <see
-             cref="T:System.Threading.SynchronizationContext" />
+             is set to true, synchronizes all calls to the service to run on the thread captured from the <see cref="T:System.Threading.SynchronizationContext" />
 
             
 
@@ -1552,13 +1472,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
+            >Use the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
 
             
 
-             property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see
-             cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+             property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
 
             
 

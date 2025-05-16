@@ -15,21 +15,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BorderStyle" />
+        >The <see cref="T:System.Web.UI.WebControls.BorderStyle" />
 
         
 
          enumeration represents the different border style options for a control.</para
       >
       <para
-        >The width of the border is controlled by using the <see
-         cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
+        >The width of the border is controlled by using the <see cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.WebControl" />
+         property of the <see cref="T:System.Web.UI.WebControls.WebControl" />
 
         
 
@@ -37,8 +34,7 @@
       >
       <block subset="none" type="note">
         <para
-          >When using the <see
-           cref="F:System.Web.UI.WebControls.BorderStyle.Double" />
+          >When using the <see cref="F:System.Web.UI.WebControls.BorderStyle.Double" />
 
           
 

@@ -23,18 +23,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
+        >The <see cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.References" />
 
         
 
-         property of <see
-         cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+         property of <see cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
         
 
-         is of type <see
-         cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+         is of type <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
         
 
@@ -44,8 +41,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+        >Represents a collection of <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
         
 
@@ -64,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
@@ -95,13 +90,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+            >Adds a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
-             to the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+             to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
@@ -109,17 +102,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+          The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+           to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
           
 
@@ -149,13 +144,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+            >Adds a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
-             with the specified URL and value to the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+             with the specified URL and value to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
@@ -163,29 +156,34 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for the reference to add to the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+          The URL for the reference to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
           
 
           . </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+          The <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
-           to add to the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+           to add to the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
           
 
@@ -211,13 +209,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines if the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+            >Determines if the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
-             contains a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+             contains a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
@@ -227,13 +223,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+            >true if the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
-             contains a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+             contains a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
@@ -241,17 +235,19 @@
           >
         </returns>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URL for the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+          The URL for the <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
           
 
-           to locate within the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+           to locate within the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
           
 
@@ -294,21 +290,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ICollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.ICollection" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object with all the keys in the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+             object with all the keys in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
@@ -335,13 +326,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+            >Removes a <see cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
             
 
-             with the specified URL from the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+             with the specified URL from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 
@@ -349,12 +338,15 @@
           >
         </summary>
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A string that represents the URL for the object to remove from the <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+          A string that represents the URL for the object to remove from the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
           
 
@@ -377,21 +369,16 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ICollection" />
-        </value>
+        <value>a <see cref="T:System.Collections.ICollection" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             object with all the values in the <see
-             cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+             object with all the values in the <see cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
 
             
 

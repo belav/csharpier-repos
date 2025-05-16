@@ -14,48 +14,39 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the <see
-         cref="T:System.Web.Profile.ProfileEventArgs" />
+        >You can use the <see cref="T:System.Web.Profile.ProfileEventArgs" />
 
         
 
-         class during the <see
-         cref="E:System.Web.Profile.ProfileModule.Personalize" />
+         class during the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
         
 
-         event to specify a custom user profile. If, when the <see
-         cref="E:System.Web.Profile.ProfileModule.Personalize" />
+         event to specify a custom user profile. If, when the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
         
 
-         event completes, the <see
-         cref="T:System.Web.Profile.ProfileEventArgs" />
+         event completes, the <see cref="T:System.Web.Profile.ProfileEventArgs" />
 
         
 
-         parameter of the <see
-         cref="T:System.Web.Profile.ProfileEventHandler" />
+         parameter of the <see cref="T:System.Web.Profile.ProfileEventHandler" />
 
         
 
-         has its <see
-         cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+         has its <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
         
 
-         property set to a value that’s not null, then the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         property set to a value that’s not null, then the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
-         uses the value of the <see
-         cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+         uses the value of the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
         
 
-         property in the current <see
-         cref="T:System.Web.HttpContext" />
+         property in the current <see cref="T:System.Web.HttpContext" />
 
         
 
@@ -65,13 +56,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.Profile.ProfileModule.Personalize" />
+        >Provides data for the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Profile.ProfileModule" />
+         event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
         
 
@@ -94,23 +83,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Profile.ProfileEventArgs.#ctor(System.Web.HttpContext)" />
+            >The <see cref="M:System.Web.Profile.ProfileEventArgs.#ctor(System.Web.HttpContext)" />
 
             
 
-             creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileEventArgs" />
+             creates an instance of the <see cref="T:System.Web.Profile.ProfileEventArgs" />
 
             
 
-             class and sets the <see
-             cref="P:System.Web.Profile.ProfileEventArgs.Context" />
+             class and sets the <see cref="P:System.Web.Profile.ProfileEventArgs.Context" />
 
             
 
-             property to the specified <see
-             cref="T:System.Web.HttpContext" />
+             property to the specified <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -120,8 +105,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Web.Profile.ProfileEventArgs" />
+            >Creates an instance of the <see cref="T:System.Web.Profile.ProfileEventArgs" />
 
             
 
@@ -129,12 +113,15 @@
           >
         </summary>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.HttpContext" />
+          The <see cref="T:System.Web.HttpContext" />
 
           
 
@@ -157,28 +144,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Profile.ProfileEventArgs" />
+            >The <see cref="T:System.Web.Profile.ProfileEventArgs" />
 
             
 
-             object provides event information to the <see
-             cref="E:System.Web.Profile.ProfileModule.Personalize" />
+             object provides event information to the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
             
 
-             event of the <see
-             cref="T:System.Web.Profile.ProfileModule" />
+             event of the <see cref="T:System.Web.Profile.ProfileModule" />
 
             
 
-             class. The <see
-             cref="P:System.Web.Profile.ProfileEventArgs.Context" />
+             class. The <see cref="P:System.Web.Profile.ProfileEventArgs.Context" />
 
             
 
-             property provides access to the <see
-             cref="T:System.Web.HttpContext" />
+             property provides access to the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -188,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpContext" />
+            >Gets the <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -216,48 +197,39 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the <see
-             cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+            >You can use the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
             
 
-             property during the <see
-             cref="E:System.Web.Profile.ProfileModule.Personalize" />
+             property during the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
             
 
-             event to specify a custom user profile. If, when the <see
-             cref="E:System.Web.Profile.ProfileModule.Personalize" />
+             event to specify a custom user profile. If, when the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
             
 
-             event completes, the <see
-             cref="T:System.Web.Profile.ProfileEventArgs" />
+             event completes, the <see cref="T:System.Web.Profile.ProfileEventArgs" />
 
             
 
-             parameter of the <see
-             cref="T:System.Web.Profile.ProfileEventHandler" />
+             parameter of the <see cref="T:System.Web.Profile.ProfileEventHandler" />
 
             
 
-             has its <see
-             cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+             has its <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
             
 
-             property set to a value that’s not null, then the <see
-             cref="T:System.Web.Profile.ProfileModule" />
+             property set to a value that’s not null, then the <see cref="T:System.Web.Profile.ProfileModule" />
 
             
 
-             uses the value of the <see
-             cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+             uses the value of the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
             
 
-             property in the current <see
-             cref="T:System.Web.HttpContext" />
+             property in the current <see cref="T:System.Web.HttpContext" />
 
             
 
@@ -265,48 +237,39 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="T:System.Web.Profile.ProfileModule" />
+              >The <see cref="T:System.Web.Profile.ProfileModule" />
 
               
 
-               does not set the <see
-               cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+               does not set the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
               
 
-               property for the <see
-               cref="E:System.Web.Profile.ProfileModule.Personalize" />
+               property for the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
               
 
-               event. The <see
-               cref="T:System.Web.Profile.ProfileModule" />
+               event. The <see cref="T:System.Web.Profile.ProfileModule" />
 
               
 
-               only gets the value of the <see
-               cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+               only gets the value of the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
               
 
-               property when the code in the <see
-               cref="E:System.Web.Profile.ProfileModule.Personalize" />
+               property when the code in the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
               
 
-               event completes. If the <see
-               cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+               event completes. If the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
               
 
-               property is not explicitly set by application code during the <see
-               cref="E:System.Web.Profile.ProfileModule.Personalize" />
+               property is not explicitly set by application code during the <see cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
               
 
-               event, the <see
-               cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+               event, the <see cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
               
 

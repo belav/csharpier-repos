@@ -52,8 +52,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
@@ -61,18 +60,15 @@
       >
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
       <para
-        >When you use the <see
-         cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
+        >When you use the <see cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
 
         
 
-         class, follow the security action with the permission(s) that are being requested. Each security permission that can be requested, as defined in the <see
-         cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+         class, follow the security action with the permission(s) that are being requested. Each security permission that can be requested, as defined in the <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
         
 
-         enumeration, has a corresponding property in the <see
-         cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
+         enumeration, has a corresponding property in the <see cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
 
         
 
@@ -80,28 +76,23 @@
       >
       <block subset="none" type="note">
         <para
-          >An exception to the equivalence between the <see
-           cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+          >An exception to the equivalence between the <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
           
 
-           enumeration and the <see
-           cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
+           enumeration and the <see cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
 
           
 
-           properties is that the <see
-           cref="F:System.Security.Permissions.SecurityPermissionFlag.AllFlags" />
+           properties is that the <see cref="F:System.Security.Permissions.SecurityPermissionFlag.AllFlags" />
 
           
 
-           enumeration value is represented by the <see
-           cref="P:System.Security.Permissions.SecurityAttribute.Unrestricted" />
+           enumeration value is represented by the <see cref="P:System.Security.Permissions.SecurityAttribute.Unrestricted" />
 
           
 
-           property (inherited from the <see
-           cref="T:System.Security.Permissions.SecurityAttribute" />
+           property (inherited from the <see cref="T:System.Security.Permissions.SecurityAttribute" />
 
           
 
@@ -112,8 +103,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.SecurityPermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.SecurityPermission" />
 
         
 
@@ -152,8 +142,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -162,13 +151,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.SecurityPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -176,12 +163,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -253,8 +243,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether permission to manipulate <see
-             cref="T:System.AppDomain" />
+            >Gets or sets a value indicating whether permission to manipulate <see cref="T:System.AppDomain" />
 
             
 
@@ -343,8 +332,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <format
-             type="text/html">
+            >For more information, see <format type="text/html">
               <a href="1A7F35B0-F858-43A9-B9E4-241A8C046263">[&lt;topic://cpconprincipal&gt;]</a>
             </format>
 
@@ -376,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="T:System.Threading.Thread" />
+            >For more information, see <see cref="T:System.Threading.Thread" />
 
             
 
@@ -422,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+            >Creates and returns a new <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
@@ -433,8 +419,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+            >A <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
@@ -461,18 +446,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A demand for <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
+            >A demand for <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
 
             
 
-             permission at the assembly level is ignored. If an assembly has the right to execute, <see
-             cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
+             permission at the assembly level is ignored. If an assembly has the right to execute, <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Execution" />
 
             
 
-             permission is automatically granted, and setting the <see
-             cref="P:System.Security.Permissions.SecurityPermissionAttribute.Execution" />
+             permission is automatically granted, and setting the <see cref="P:System.Security.Permissions.SecurityPermissionAttribute.Execution" />
 
             
 
@@ -511,8 +493,7 @@
       <Docs>
         <value>
           <para
-            > One or more <see
-             cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+            > One or more <see cref="T:System.Security.Permissions.SecurityPermissionFlag" />
 
             
 
@@ -525,8 +506,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets all permission flags comprising the <see
-             cref="T:System.Security.Permissions.SecurityPermission" />
+            >Gets or sets all permission flags comprising the <see cref="T:System.Security.Permissions.SecurityPermission" />
 
             
 
@@ -624,13 +604,11 @@
             <para>This is a powerful permission that should be granted only to highly trusted code.</para>
           </block>
           <para
-            >For information on the use of <see
-             cref="P:System.Security.Permissions.SecurityPermissionAttribute.SkipVerification" />
+            >For information on the use of <see cref="P:System.Security.Permissions.SecurityPermissionAttribute.SkipVerification" />
 
             
 
-            , see <format
-             type="text/html">
+            , see <format type="text/html">
               <a href="095CD1F6-D8DB-4C0E-BCE2-83CCB34DD5DC"
                 >[&lt;topic://cpcontypesafetysecurity&gt;]</a
               >

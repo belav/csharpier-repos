@@ -25,132 +25,108 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthenticationEventHandler" />
+        >The <see cref="T:System.Web.Security.FormsAuthenticationEventHandler" />
 
         
 
-         delegate is defined for the <see
-         cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
+         delegate is defined for the <see cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+         event of the <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 
-         class. You can access the <see
-         cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
+         class. You can access the <see cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
 
         
 
-         event of the <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+         event of the <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 
-         class by specifying a subroutine named <system
-        >FormsAuthentication_OnAuthenticate</system>
+         class by specifying a subroutine named <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
-         in the Global.asax file for your ASP.NET application. The <see
-         cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
+         in the Global.asax file for your ASP.NET application. The <see cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
 
         
 
-         event is raised during the <see
-         cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+         event is raised during the <see cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
         
 
          event.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+        >The <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 
-         constructs a <see
-         cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+         constructs a <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
         
 
-         object using the current <see
-         cref="T:System.Web.HttpContext" />
+         object using the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         and passes it to the <system
-        >FormsAuthentication_OnAuthenticate</system>
+         and passes it to the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
          event.</para
       >
       <para
-        >You can use the <see
-         cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
+        >You can use the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+         property of the <see cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
 
         
 
-         object supplied to the <system
-        >FormsAuthentication_OnAuthenticate</system>
+         object supplied to the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
-         event to set the <see
-         cref="P:System.Web.HttpContext.User" />
+         event to set the <see cref="P:System.Web.HttpContext.User" />
 
         
 
-         property of the current <see
-         cref="T:System.Web.HttpContext" />
+         property of the current <see cref="T:System.Web.HttpContext" />
 
         
 
-         to a custom <see
-         cref="T:System.Security.Principal.IPrincipal" />
+         to a custom <see cref="T:System.Security.Principal.IPrincipal" />
 
         
 
-         object. If you do not specify a value for the <see
-         cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
+         object. If you do not specify a value for the <see cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
         
 
-         property during the <system
-        >FormsAuthentication_OnAuthenticate</system>
+         property during the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
          event, the identity supplied by the forms authentication ticket in the cookie or URL is used.</para
       >
       <para
-        >The <system
-        >FormsAuthentication_OnAuthenticate</system>
+        >The <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
-         event is only raised when the authentication <see
-         cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+         event is only raised when the authentication <see cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
 
         
 
-         is set to <see
-         cref="F:System.Web.Configuration.AuthenticationMode.Forms" />
+         is set to <see cref="F:System.Web.Configuration.AuthenticationMode.Forms" />
 
         
 
-         and the <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+         and the <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 
@@ -160,13 +136,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the method that handles the <system
-        >FormsAuthentication_OnAuthenticate</system>
+        >Represents the method that handles the <system>FormsAuthentication_OnAuthenticate</system>
 
         
 
-         event of a <see
-         cref="T:System.Web.Security.FormsAuthenticationModule" />
+         event of a <see cref="T:System.Web.Security.FormsAuthenticationModule" />
 
         
 

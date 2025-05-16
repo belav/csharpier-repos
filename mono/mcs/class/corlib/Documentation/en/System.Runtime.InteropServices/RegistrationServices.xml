@@ -40,8 +40,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Registration is needed when the objects within an assembly are being used by COM clients. The <format
-         type="text/html">
+        >Registration is needed when the objects within an assembly are being used by COM clients. The <format type="text/html">
           <a href="E190E342-36EF-4651-A0B4-0E8C2C0281CB"
             >[&lt;topic://cpgrfassemblyregistrationtoolregasmexe&gt;]</a
           >
@@ -49,8 +48,7 @@
 
         
 
-         and vsprvsext use methods exposed by the <see
-         cref="T:System.Runtime.InteropServices.RegistrationServices" />
+         and vsprvsext use methods exposed by the <see cref="T:System.Runtime.InteropServices.RegistrationServices" />
 
         
 
@@ -80,27 +78,23 @@
         </item>
       </list>
       <para
-        >Although these methods help in gathering information to be used in a registration file, they do not actually produce a registration file. Instead, you can use the <format
-         type="text/html">
+        >Although these methods help in gathering information to be used in a registration file, they do not actually produce a registration file. Instead, you can use the <format type="text/html">
           <a href="e190e342-36ef-4651-a0b4-0e8c2c0281cb">Assembly Registration Tool (Regasm.exe)</a>
         </format>
 
         
 
-         tool with the /regfile option to perform this task. <see
-         cref="T:System.Runtime.InteropServices.RegistrationServices" />
+         tool with the /regfile option to perform this task. <see cref="T:System.Runtime.InteropServices.RegistrationServices" />
 
         
 
-         methods cannot export and register a type library. To export and register a type library, you can use the <format
-         type="text/html">
+         methods cannot export and register a type library. To export and register a type library, you can use the <format type="text/html">
           <a href="e190e342-36ef-4651-a0b4-0e8c2c0281cb">Assembly Registration Tool (Regasm.exe)</a>
         </format>
 
         
 
-         tool and the <format
-         type="text/html">
+         tool and the <format type="text/html">
           <a href="a487d61b-d166-467b-a7ca-d8b52fbff42d">Type Library Exporter (Tlbexp.exe)</a>
         </format>
 
@@ -134,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.InteropServices.RegistrationServices" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.InteropServices.RegistrationServices" />
 
             
 
@@ -201,7 +194,11 @@
           <para>The ProgID for the specified type.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -235,8 +232,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves a list of classes in an assembly that would be registered by a call to <see
-             cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
+            >Retrieves a list of classes in an assembly that would be registered by a call to <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
 
             
 
@@ -246,13 +242,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Type" />
+            >A <see cref="T:System.Type" />
 
             
 
-             array containing a list of classes in <paramref
-             name="assembly" />
+             array containing a list of classes in <paramref name="assembly" />
 
             
 
@@ -260,7 +254,11 @@
           >
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -295,8 +293,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>RegisterAssembly adds the appropriate registry entries for the types in the specified assembly. This method also calls any registration functions found in the assembly.</para>
           <para
-            >Use <see
-             cref="M:System.Reflection.Assembly.Load(System.String)" />
+            >Use <see cref="M:System.Reflection.Assembly.Load(System.String)" />
 
             
 
@@ -310,8 +307,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="assembly" />
+            >true if <paramref name="assembly" />
 
             
 
@@ -319,24 +315,30 @@
           >
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The assembly to be registered. </param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" />
+          An <see cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" />
 
           
 
-           value indicating any special settings used when registering <paramref
-           name="assembly" />
+           value indicating any special settings used when registering <paramref name="assembly" />
 
           
 
@@ -408,16 +410,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is equivalent to calling CoRegisterClassObject in COM. The <see
-             cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
+            >This method is equivalent to calling CoRegisterClassObject in COM. The <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
 
             
 
              method is not atomic and can cause unpredictable results when used in a multithreaded context. </para
           >
           <para
-            >In the .NET Framework version 2.0 and later, use the <see
-             cref="M:System.Runtime.InteropServices.RegistrationServices.UnregisterTypeForComClients(System.Int32)" />
+            >In the .NET Framework version 2.0 and later, use the <see cref="M:System.Runtime.InteropServices.RegistrationServices.UnregisterTypeForComClients(System.Int32)" />
 
             
 
@@ -434,36 +434,45 @@
           <para>An integer that represents a cookie value.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            object to register for use from COM.</param
         >
         <param name="classContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.InteropServices.RegistrationClassContext" />
+          One of the <see cref="T:System.Runtime.InteropServices.RegistrationClassContext" />
 
           
 
            values that indicates the context in which the executable code will be run.</param
         >
         <param name="flags">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.InteropServices.RegistrationConnectionType" />
+          One of the <see cref="T:System.Runtime.InteropServices.RegistrationConnectionType" />
 
           
 
@@ -497,13 +506,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Indicates whether a type is marked with the <see
-             cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+            >Indicates whether a type is marked with the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />
 
             
 
-            , or derives from a type marked with the <see
-             cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+            , or derives from a type marked with the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />
 
             
 
@@ -513,13 +520,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if a type is marked with the <see
-             cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+            >true if a type is marked with the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />
 
             
 
-            , or derives from a type marked with the <see
-             cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+            , or derives from a type marked with the <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />
 
             
 
@@ -527,7 +532,11 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -567,7 +576,11 @@
           <para>true if the type must be registered for use from COM; otherwise false.</para>
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -600,8 +613,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >UnregisterAssembly removes the registry entries for the types in the specified assembly previously added by <see
-             cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
+            >UnregisterAssembly removes the registry entries for the types in the specified assembly previously added by <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterAssembly(System.Reflection.Assembly,System.Runtime.InteropServices.AssemblyRegistrationFlags)" />
 
             
 
@@ -615,8 +627,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <paramref
-             name="assembly" />
+            >true if <paramref name="assembly" />
 
             
 
@@ -624,7 +635,11 @@
           >
         </returns>
         <param name="assembly">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -666,8 +681,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes references to a type registered with the <see
-             cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
+            >Removes references to a type registered with the <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
 
             
 
@@ -675,12 +689,15 @@
           >
         </summary>
         <param name="cookie">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The cookie value returned by a previous call to the <see
-           cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
+          The cookie value returned by a previous call to the <see cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
 
           
 

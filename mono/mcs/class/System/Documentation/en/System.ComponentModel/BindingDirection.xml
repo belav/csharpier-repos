@@ -41,8 +41,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The template can only accept property values. Used with a generic <see
-             cref="T:System.Web.UI.ITemplate" />
+            >The template can only accept property values. Used with a generic <see cref="T:System.Web.UI.ITemplate" />
 
             
 
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The template can accept and expose property values. Used with an <see
-             cref="T:System.Web.UI.IBindableTemplate" />
+            >The template can accept and expose property values. Used with an <see cref="T:System.Web.UI.IBindableTemplate" />
 
             
 

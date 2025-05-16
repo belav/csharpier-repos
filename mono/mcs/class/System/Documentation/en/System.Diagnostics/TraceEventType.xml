@@ -21,8 +21,7 @@
 
         
 
-         is used to identify the event that caused a trace in calls to the <see
-         cref="Overload:System.Diagnostics.TraceSource.TraceEvent" />
+         is used to identify the event that caused a trace in calls to the <see cref="Overload:System.Diagnostics.TraceSource.TraceEvent" />
 
         
 

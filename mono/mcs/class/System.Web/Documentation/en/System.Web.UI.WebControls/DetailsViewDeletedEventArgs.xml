@@ -17,59 +17,49 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+        >The <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
-         control raises the <see
-         cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleted" />
+         control raises the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleted" />
 
         
 
-         event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but after the <see
-         cref="T:System.Web.UI.WebControls.DetailsView" />
+         event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but after the <see cref="T:System.Web.UI.WebControls.DetailsView" />
 
         
 
          control deletes the record. This allows you to provide an event handler that performs a custom routine, such as checking the results of a delete operation, whenever this event occurs.</para
       >
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
+        >A <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
 
         
 
-         object is passed to the event handler, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the delete operation, use the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.AffectedRows" />
+         object is passed to the event handler, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the delete operation, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.AffectedRows" />
 
         
 
-         property. Use the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Exception" />
+         property. Use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Exception" />
 
         
 
-         property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event handler by setting the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.ExceptionHandled" />
+         property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event handler by setting the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.ExceptionHandled" />
 
         
 
-         property. If you want to access the name/value pairs of the key fields and non-key fields of the deleted record, use the <see
-         cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
+         property. If you want to access the name/value pairs of the key fields and non-key fields of the deleted record, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
 
         
 
-         and <see
-         cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
+         and <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
 
         
 
          properties, respectively.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -78,13 +68,11 @@
         .</para
       >
       <para
-        >For a list of initial property values for an instance of the <see
-         cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
+        >For a list of initial property values for an instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
 
         
 
-         class, see the <see
-         cref="M:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.#ctor(System.Int32,System.Exception)" />
+         class, see the <see cref="M:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.#ctor(System.Int32,System.Exception)" />
 
         
 
@@ -94,8 +82,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleted" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.DetailsView.ItemDeleted" />
 
         
 
@@ -119,16 +106,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
+            >Use this constructor to initialize a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
 
             
 
              class.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
 
             
 
@@ -153,8 +138,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="affectedRows" />
+                  >The value of the <paramref name="affectedRows" />
 
                   
 
@@ -170,13 +154,11 @@
               </term>
               <description>
                 <para
-                  >The <see
-                   cref="T:System.Exception" />
+                  >The <see cref="T:System.Exception" />
 
                   
 
-                   contained in the <paramref
-                   name="e" />
+                   contained in the <paramref name="e" />
 
                   
 
@@ -202,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.DetailsViewDeletedEventArgs" />
 
             
 
@@ -211,19 +192,26 @@
           >
         </summary>
         <param name="affectedRows">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of rows affected by the delete operation.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Exception" />
+          An <see cref="T:System.Exception" />
 
           
 
@@ -246,8 +234,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.AffectedRows" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.AffectedRows" />
 
             
 
@@ -275,8 +262,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Exception" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Exception" />
 
             
 
@@ -284,8 +270,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If an exception was raised and you decide to handle the exception in the event handler, be sure to set the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.ExceptionHandled" />
+              >If an exception was raised and you decide to handle the exception in the event handler, be sure to set the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.ExceptionHandled" />
 
               
 
@@ -314,13 +299,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When an exception is raised during the delete operation, use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.ExceptionHandled" />
+            >When an exception is raised during the delete operation, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.ExceptionHandled" />
 
             
 
-             property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not passed further up the call stack. If this property is set to false, the exception is passed to the next method on the call stack for handling. To determine which exception was raised, use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Exception" />
+             property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not passed further up the call stack. If this property is set to false, the exception is passed to the next method on the call stack for handling. To determine which exception was raised, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Exception" />
 
             
 
@@ -351,8 +334,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
 
             
 
@@ -360,8 +342,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property contains only the key fields. To access the non-key fields, use the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
+              >This property contains only the key fields. To access the non-key fields, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
 
               
 
@@ -369,18 +350,15 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
 
             
 
-             property returns an object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -388,8 +366,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 
@@ -421,8 +398,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
+            >Use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
 
             
 
@@ -430,8 +406,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This property does not contain the key fields for the record. To access the key fields, use the <see
-               cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
+              >This property does not contain the key fields for the record. To access the key fields, use the <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Keys" />
 
               
 
@@ -439,23 +414,19 @@
             >
           </block>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
+            >The <see cref="P:System.Web.UI.WebControls.DetailsViewDeletedEventArgs.Values" />
 
             
 
-             property returns an <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             property returns an <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             object that implements the <see
-             cref="T:System.Collections.Specialized.IOrderedDictionary" />
+             object that implements the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
             
 
-             interface. The object contains <see
-             cref="T:System.Collections.DictionaryEntry" />
+             interface. The object contains <see cref="T:System.Collections.DictionaryEntry" />
 
             
 
@@ -463,8 +434,7 @@
           >
           <block subset="none" type="note">
             <para
-              >As a shortcut, you can also use the indexer of the <see
-               cref="T:System.Collections.Specialized.IOrderedDictionary" />
+              >As a shortcut, you can also use the indexer of the <see cref="T:System.Collections.Specialized.IOrderedDictionary" />
 
               
 

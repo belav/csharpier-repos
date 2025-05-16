@@ -14,13 +14,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each property of the <see
-         cref="T:System.Drawing.SystemFonts" />
+        >Each property of the <see cref="T:System.Drawing.SystemFonts" />
 
         
 
-         class returns a <see
-         cref="T:System.Drawing.Font" />
+         class returns a <see cref="T:System.Drawing.Font" />
 
         
 
@@ -49,8 +47,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Font" />
+            >Gets a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -77,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table describes the value returned by the <see
-             cref="P:System.Drawing.SystemFonts.DefaultFont" />
+            >The following table describes the value returned by the <see cref="P:System.Drawing.SystemFonts.DefaultFont" />
 
             
 
@@ -122,31 +118,26 @@
           </list>
           <para>MS Shell Dlg maps to a font set in the system registry.</para>
           <para
-            >If the above fonts are not installed, the default font is Tahoma, 8 point. If Tahoma, 8 point, is not installed, <see
-             cref="P:System.Drawing.SystemFonts.DefaultFont" />
+            >If the above fonts are not installed, the default font is Tahoma, 8 point. If Tahoma, 8 point, is not installed, <see cref="P:System.Drawing.SystemFonts.DefaultFont" />
 
             
 
-             returns the value of the <see
-             cref="P:System.Drawing.FontFamily.GenericSansSerif" />
+             returns the value of the <see cref="P:System.Drawing.FontFamily.GenericSansSerif" />
 
             
 
              property.</para
           >
           <para
-            >The <see
-             cref="T:System.Drawing.Font" />
+            >The <see cref="T:System.Drawing.Font" />
 
             
 
-             returned by <see
-             cref="P:System.Drawing.SystemFonts.DefaultFont" />
+             returned by <see cref="P:System.Drawing.SystemFonts.DefaultFont" />
 
             
 
-             does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see
-             cref="P:System.Drawing.SystemFonts.IconTitleFont" />
+             does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see cref="P:System.Drawing.SystemFonts.IconTitleFont" />
 
             
 
@@ -177,33 +168,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the operating system is Windows 2000 or Windows XP, the <see
-             cref="P:System.Drawing.SystemFonts.DialogFont" />
+            >If the operating system is Windows 2000 or Windows XP, the <see cref="P:System.Drawing.SystemFonts.DialogFont" />
 
             
 
-             property returns Tahoma, 8 point. Otherwise, <see
-             cref="P:System.Drawing.SystemFonts.DialogFont" />
+             property returns Tahoma, 8 point. Otherwise, <see cref="P:System.Drawing.SystemFonts.DialogFont" />
 
             
 
-             returns the value of the <see
-             cref="P:System.Drawing.SystemFonts.DefaultFont" />
+             returns the value of the <see cref="P:System.Drawing.SystemFonts.DefaultFont" />
 
             
 
-             property. The <see
-             cref="T:System.Drawing.Font" />
+             property. The <see cref="T:System.Drawing.Font" />
 
             
 
-             returned by <see
-             cref="P:System.Drawing.SystemFonts.DialogFont" />
+             returned by <see cref="P:System.Drawing.SystemFonts.DialogFont" />
 
             
 
-             does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see
-             cref="P:System.Drawing.SystemFonts.IconTitleFont" />
+             does not change when the user is in High Contrast mode. For a font that changes when the user is in High Contrast mode use another system font such as <see cref="P:System.Drawing.SystemFonts.IconTitleFont" />
 
             
 
@@ -236,13 +221,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.SystemFonts.GetFontByName(System.String)" />
+            >The <see cref="M:System.Drawing.SystemFonts.GetFontByName(System.String)" />
 
             
 
-             method returns null if the specified name does not match a font in the <see
-             cref="T:System.Drawing.SystemFonts" />
+             method returns null if the specified name does not match a font in the <see cref="T:System.Drawing.SystemFonts" />
 
             
 
@@ -256,13 +239,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Font" />
+            >A <see cref="T:System.Drawing.Font" />
 
             
 
-             if the specified name matches a value in <see
-             cref="T:System.Drawing.SystemFonts" />
+             if the specified name matches a value in <see cref="T:System.Drawing.SystemFonts" />
 
             
 
@@ -270,7 +251,11 @@
           >
         </returns>
         <param name="systemFontName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -297,8 +282,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Font" />
+            >Gets a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -323,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Font" />
+            >Gets a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -352,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Font" />
+            >Gets a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -381,8 +363,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Font" />
+            >Gets a <see cref="T:System.Drawing.Font" />
 
             
 
@@ -410,8 +391,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Drawing.Font" />
+            >Gets a <see cref="T:System.Drawing.Font" />
 
             
 

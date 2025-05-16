@@ -23,44 +23,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.AccessControl.FileSystemRights" />
+        >The <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
         
 
          enumeration specifies which file system actions are allowed for a particular user account and which file system actions are audited for a particular user account.      </para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.AccessControl.FileSystemRights" />
+        >Use the <see cref="T:System.Security.AccessControl.FileSystemRights" />
 
         
 
-         enumeration when creating an access rule with the <see
-         cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+         enumeration when creating an access rule with the <see cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
         
 
-         class or when creating an audit rule with the <see
-         cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+         class or when creating an audit rule with the <see cref="T:System.Security.AccessControl.FileSystemAuditRule" />
 
         
 
          class.</para
       >
       <para
-        >This enumeration contains several granular system rights values and several values that are a combination of those granular values.  It is easier to use the combination values such as <see
-         cref="F:System.Security.AccessControl.FileSystemRights.FullControl" />
+        >This enumeration contains several granular system rights values and several values that are a combination of those granular values.  It is easier to use the combination values such as <see cref="F:System.Security.AccessControl.FileSystemRights.FullControl" />
 
         
 
-        , <see
-         cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+        , <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
         
 
-        , and <see
-         cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+        , and <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
         
 
@@ -136,18 +129,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This right requires the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >This right requires the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             value.  Note that if you do not explicitly set the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             value.  Note that if you do not explicitly set the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             value when creating a file or folder, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             value when creating a file or folder, the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -179,18 +169,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This right requires the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >This right requires the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             value.  Note that if you do not explicitly set the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             value.  Note that if you do not explicitly set the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
-             value when creating a file or folder, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+             value when creating a file or folder, the <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -332,18 +319,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to read, write, list folder contents, delete folders and files, and run application files.  This right includes the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAndExecute" />
+            >Specifies the right to read, write, list folder contents, delete folders and files, and run application files.  This right includes the <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAndExecute" />
 
             
 
-             right, the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+             right, the <see cref="F:System.Security.AccessControl.FileSystemRights.Write" />
 
             
 
-             right, and the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Delete" />
+             right, and the <see cref="F:System.Security.AccessControl.FileSystemRights.Delete" />
 
             
 
@@ -371,23 +355,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to open and copy folders or files as read-only.  This right includes the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadData" />
+            >Specifies the right to open and copy folders or files as read-only.  This right includes the <see cref="F:System.Security.AccessControl.FileSystemRights.ReadData" />
 
             
 
-             right, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+             right, <see cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
 
             
 
-             right, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+             right, <see cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
 
             
 
-             right, and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ReadPermissions" />
+             right, and <see cref="F:System.Security.AccessControl.FileSystemRights.ReadPermissions" />
 
             
 
@@ -415,13 +395,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to open and copy folders or files as read-only, and to run application files.  This right includes the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+            >Specifies the right to open and copy folders or files as read-only, and to run application files.  This right includes the <see cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
             
 
-             right and the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.ExecuteFile" />
+             right and the <see cref="F:System.Security.AccessControl.FileSystemRights.ExecuteFile" />
 
             
 
@@ -537,8 +515,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+            >The <see cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
             
 
@@ -615,23 +592,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to create folders and files, and to add or remove data from files.  This right includes the <see
-             cref="F:System.Security.AccessControl.FileSystemRights.WriteData" />
+            >Specifies the right to create folders and files, and to add or remove data from files.  This right includes the <see cref="F:System.Security.AccessControl.FileSystemRights.WriteData" />
 
             
 
-             right, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.AppendData" />
+             right, <see cref="F:System.Security.AccessControl.FileSystemRights.AppendData" />
 
             
 
-             right, <see
-             cref="F:System.Security.AccessControl.FileSystemRights.WriteExtendedAttributes" />
+             right, <see cref="F:System.Security.AccessControl.FileSystemRights.WriteExtendedAttributes" />
 
             
 
-             right, and <see
-             cref="F:System.Security.AccessControl.FileSystemRights.WriteAttributes" />
+             right, and <see cref="F:System.Security.AccessControl.FileSystemRights.WriteAttributes" />
 
             
 

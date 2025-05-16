@@ -16,56 +16,46 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of the <see
-         cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+        >An instance of the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
         
 
-         class is a <see
-         cref="T:System.Drawing.Design.UITypeEditor" />
+         class is a <see cref="T:System.Drawing.Design.UITypeEditor" />
 
         
 
-         object that can be used at design time to select and edit a connection string expression and to assign the expression to a control property. For example, the <see
-         cref="T:System.Web.UI.WebControls.SqlDataSource" />
+         object that can be used at design time to select and edit a connection string expression and to assign the expression to a control property. For example, the <see cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
         
 
-         control uses the <see
-         cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+         control uses the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
         
 
-         class at design time to set the value of the <see
-         cref="P:System.Web.UI.WebControls.SqlDataSource.ConnectionString" />
+         class at design time to set the value of the <see cref="P:System.Web.UI.WebControls.SqlDataSource.ConnectionString" />
 
         
 
          property.</para
       >
       <para
-        >Use the <see
-         cref="T:System.ComponentModel.EditorAttribute" />
+        >Use the <see cref="T:System.ComponentModel.EditorAttribute" />
 
         
 
-         attribute to associate the <see
-         cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+         attribute to associate the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
         
 
-         with a property. When the associated property is edited on the design surface, the designer host calls the <see
-         cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+         with a property. When the associated property is edited on the design surface, the designer host calls the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
         
 
-         method. The <see
-         cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+         method. The <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
         
 
-         method displays a user interface for building the connection string expression and returns the connection string that is selected by the user. The <see
-         cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
+         method displays a user interface for building the connection string expression and returns the connection string that is selected by the user. The <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
 
         
 
@@ -90,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
@@ -121,64 +110,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+            >The <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
             
 
-             method starts the user interface for editing the <paramref
-             name="value" />
+             method starts the user interface for editing the <paramref name="value" />
 
             
 
-             object. The designer host calls the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+             object. The designer host calls the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
             
 
-             method when you edit the value of a property that the connection string editor is associated with. The input service provider is used to obtain any editing services that are required within the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+             method when you edit the value of a property that the connection string editor is associated with. The input service provider is used to obtain any editing services that are required within the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
             
 
              method.</para
           >
           <para
-            >If an <see
-             cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+            >If an <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
             
 
-             service implementation is supported in the specified context, the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+             service implementation is supported in the specified context, the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
             
 
-             method initializes a <see
-             cref="T:System.Web.UI.WebControls.ListBox" />
+             method initializes a <see cref="T:System.Web.UI.WebControls.ListBox" />
 
             
 
-             control, which prompts you to select an existing connection expression or build a new connection expression. If an <see
-             cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+             control, which prompts you to select an existing connection expression or build a new connection expression. If an <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
             
 
-             service implementation is not supported in the specified context, the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
+             service implementation is not supported in the specified context, the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.EditValue" />
 
             
 
-             method displays a simple instance of the <see
-             cref="T:System.Windows.Forms.Form" />
+             method displays a simple instance of the <see cref="T:System.Windows.Forms.Form" />
 
             
 
              class, which prompts you to enter the connection expression string. </para
           >
           <para
-            >If you cancel without selecting a connection expression string, the returned object is the same as the <paramref
-             name="value" />
+            >If you cancel without selecting a connection expression string, the returned object is the same as the <paramref name="value" />
 
             
 
@@ -192,8 +170,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The selected connection expression, as a string object; otherwise, if a connection expression was not selected, the same <paramref
-             name="value" />
+            >The selected connection expression, as a string object; otherwise, if a connection expression was not selected, the same <paramref name="value" />
 
             
 
@@ -201,26 +178,37 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            to use to gain additional context information.</param
         >
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A service provider object through which to obtain editing services.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -247,51 +235,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
+            >By default, the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
 
             
 
-             method of the <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+             method of the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
-             class returns the <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.Modal" />
+             class returns the <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.Modal" />
 
             
 
-             value. If an <see
-             cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
+             value. If an <see cref="T:System.ComponentModel.Design.Data.IDataEnvironment" />
 
             
 
-             service implementation is supported in the specified context, the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
+             service implementation is supported in the specified context, the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
 
             
 
-             method returns the <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.DropDown" />
+             method returns the <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.DropDown" />
 
             
 
              value.</para
           >
           <para
-            >If the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
+            >If the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
 
             
 
-             method is not supported in the specified context, the <see
-             cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
+             method is not supported in the specified context, the <see cref="Overload:System.Web.UI.Design.ConnectionStringEditor.GetEditStyle" />
 
             
 
-             method returns the <see
-             cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+             method returns the <see cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
 
             
 
@@ -305,8 +284,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+            >An <see cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
 
             
 
@@ -314,12 +292,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -346,28 +327,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ConnectionStringEditor.GetProviderName(System.Object)" />
+            >The <see cref="M:System.Web.UI.Design.ConnectionStringEditor.GetProviderName(System.Object)" />
 
             
 
-             method gets the provider name for the current instance of the <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+             method gets the provider name for the current instance of the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
-             class. For example, in the <see
-             cref="T:System.Web.UI.Design.WebControls.SqlDataSourceConnectionStringEditor" />
+             class. For example, in the <see cref="T:System.Web.UI.Design.WebControls.SqlDataSourceConnectionStringEditor" />
 
             
 
-             class, which is derived from <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+             class, which is derived from <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
-             class, the <see
-             cref="M:System.Web.UI.Design.ConnectionStringEditor.GetProviderName(System.Object)" />
+             class, the <see cref="M:System.Web.UI.Design.ConnectionStringEditor.GetProviderName(System.Object)" />
 
             
 
@@ -377,8 +353,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the provider name for the provided instance of the <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+            >Returns the provider name for the provided instance of the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
@@ -390,12 +365,15 @@
           <para>Always an empty string ("").</para>
         </returns>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+          A <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
           
 
@@ -426,28 +404,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ConnectionStringEditor.SetProviderName(System.Object,System.ComponentModel.Design.Data.DesignerDataConnection)" />
+            >The <see cref="M:System.Web.UI.Design.ConnectionStringEditor.SetProviderName(System.Object,System.ComponentModel.Design.Data.DesignerDataConnection)" />
 
             
 
-             method sets the provider name on the <paramref
-             name="instance" />
+             method sets the provider name on the <paramref name="instance" />
 
             
 
-             parameter. For example, in the SqlDataSourceConnectionStringEditor, which derives from the <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+             parameter. For example, in the SqlDataSourceConnectionStringEditor, which derives from the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
-             class, this either sets the provider name or adds an <see
-             cref="T:System.Web.UI.ExpressionBinding" />
+             class, this either sets the provider name or adds an <see cref="T:System.Web.UI.ExpressionBinding" />
 
             
 
-             object, if the connection is a configured connection. In this implementation, the <see
-             cref="M:System.Web.UI.Design.ConnectionStringEditor.SetProviderName(System.Object,System.ComponentModel.Design.Data.DesignerDataConnection)" />
+             object, if the connection is a configured connection. In this implementation, the <see cref="M:System.Web.UI.Design.ConnectionStringEditor.SetProviderName(System.Object,System.ComponentModel.Design.Data.DesignerDataConnection)" />
 
             
 
@@ -457,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Puts the provider name on the specified instance of the <see
-             cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+            >Puts the provider name on the specified instance of the <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
             
 
@@ -466,24 +438,30 @@
           >
         </summary>
         <param name="instance">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.Design.ConnectionStringEditor" />
+          A <see cref="T:System.Web.UI.Design.ConnectionStringEditor" />
 
           
 
            or an instance of a derived class.</param
         >
         <param name="connection">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+          A <see cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
 
           
 

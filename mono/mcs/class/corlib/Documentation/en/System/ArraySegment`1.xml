@@ -46,39 +46,33 @@
 
         
 
-         is a wrapper around an array that delimits a range of elements in that array. Multiple <see
-         cref="T:System.ArraySegment`1" />
+         is a wrapper around an array that delimits a range of elements in that array. Multiple <see cref="T:System.ArraySegment`1" />
 
         
 
          instances can refer to the same original array and can overlap. The original array must be one-dimensional and must have zero-based indexing. </para
       >
       <para
-        >The <see
-         cref="P:System.ArraySegment`1.Array" />
+        >The <see cref="P:System.ArraySegment`1.Array" />
 
         
 
-         property returns the entire original array, not a copy of the array; therefore, changes made to the array returned by the <see
-         cref="P:System.ArraySegment`1.Array" />
+         property returns the entire original array, not a copy of the array; therefore, changes made to the array returned by the <see cref="P:System.ArraySegment`1.Array" />
 
         
 
          property are made to the original array.</para
       >
       <para
-        >The <see
-         cref="M:System.ArraySegment`1.Equals(System.ArraySegment{`0})" />
+        >The <see cref="M:System.ArraySegment`1.Equals(System.ArraySegment{`0})" />
 
         
 
-         method and the equality and inequality operators test for reference equality when they compare two <see
-         cref="T:System.ArraySegment`1" />
+         method and the equality and inequality operators test for reference equality when they compare two <see cref="T:System.ArraySegment`1" />
 
         
 
-         objects. For two <see
-         cref="T:System.ArraySegment`1" />
+         objects. For two <see cref="T:System.ArraySegment`1" />
 
         
 
@@ -96,23 +90,19 @@
         </item>
       </list>
       <para
-        >If you want to retrieve an element by its index in the <see
-         cref="T:System.ArraySegment`1" />
+        >If you want to retrieve an element by its index in the <see cref="T:System.ArraySegment`1" />
 
         
 
-         object, you must cast it to an <see
-         cref="T:System.Collections.Generic.IList`1" />
+         object, you must cast it to an <see cref="T:System.Collections.Generic.IList`1" />
 
         
 
-         object and retrieve it or modify it by using the <see
-         cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
+         object and retrieve it or modify it by using the <see cref="P:System.Collections.Generic.IList`1.Item(System.Int32)" />
 
         
 
-         property. The following example retrieves the element in an <see
-         cref="T:System.ArraySegment`1" />
+         property. The following example retrieves the element in an <see cref="T:System.ArraySegment`1" />
 
         
 
@@ -192,8 +182,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ArraySegment`1.Array" />
+            >The <see cref="P:System.ArraySegment`1.Array" />
 
             
 
@@ -274,8 +263,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Two <see
-             cref="T:System.ArraySegment`1" />
+            >Two <see cref="T:System.ArraySegment`1" />
 
             
 
@@ -300,8 +288,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified object is a <see
-             cref="T:System.ArraySegment`1" />
+            >true if the specified object is a <see cref="T:System.ArraySegment`1" />
 
             
 
@@ -309,7 +296,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -727,13 +718,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.ArraySegment`1" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.ArraySegment`1" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IEnumerable" />
+             instance is cast to an <see cref="T:System.Collections.IEnumerable" />
 
             
 

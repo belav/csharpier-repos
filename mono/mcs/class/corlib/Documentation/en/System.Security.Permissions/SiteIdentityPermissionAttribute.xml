@@ -43,8 +43,7 @@
         <para />
       </block>
       <para
-        >The scope of the declaration that is allowed depends on the <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+        >The scope of the declaration that is allowed depends on the <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
@@ -55,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Allows security actions for <see
-         cref="T:System.Security.Permissions.SiteIdentityPermission" />
+        >Allows security actions for <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
         
 
@@ -89,13 +87,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Permissions.SiteIdentityPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Security.Permissions.SiteIdentityPermissionAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+             class with the specified <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -103,12 +99,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -144,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new instance of <see
-             cref="T:System.Security.Permissions.SiteIdentityPermission" />
+            >Creates and returns a new instance of <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
             
 
@@ -155,8 +153,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Security.Permissions.SiteIdentityPermission" />
+            >A <see cref="T:System.Security.Permissions.SiteIdentityPermission" />
 
             
 

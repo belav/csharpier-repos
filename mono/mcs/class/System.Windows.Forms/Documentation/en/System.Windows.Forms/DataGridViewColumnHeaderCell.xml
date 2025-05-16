@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a column header in a <see
-         cref="T:System.Windows.Forms.DataGridView" />
+        >Represents a column header in a <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
@@ -40,13 +39,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.Windows.Forms.DataGridViewColumnHeaderCell.SortGlyphDirection" />
+            >This constructor initializes the <see cref="P:System.Windows.Forms.DataGridViewColumnHeaderCell.SortGlyphDirection" />
 
             
 
-             property to <see
-             cref="F:System.Windows.Forms.SortOrder.None" />
+             property to <see cref="F:System.Windows.Forms.SortOrder.None" />
 
             
 
@@ -56,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
 
             
 
@@ -101,13 +97,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you do not explicitly call the <see
-             cref="M:System.Windows.Forms.DataGridViewColumnHeaderCell.CreateAccessibilityInstance" />
+            >If you do not explicitly call the <see cref="M:System.Windows.Forms.DataGridViewColumnHeaderCell.CreateAccessibilityInstance" />
 
             
 
-             method, it will be called when the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+             method, it will be called when the <see cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
 
             
 
@@ -115,8 +109,7 @@
           >
           <block subset="none" type="note">
             <para
-              >To get or set <see
-               cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+              >To get or set <see cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
 
               
 
@@ -127,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new accessible object for the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
+            >Creates a new accessible object for the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
 
             
 
@@ -138,13 +130,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >A new <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
-             for the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
+             for the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
 
             
 
@@ -178,57 +168,48 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Depending on the value of the <see
-             cref="P:System.Windows.Forms.DataGridView.ClipboardCopyMode" />
+            >Depending on the value of the <see cref="P:System.Windows.Forms.DataGridView.ClipboardCopyMode" />
 
             
 
-             property of the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             property of the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-             control, this method is called by the control's <see
-             cref="M:System.Windows.Forms.DataGridView.GetClipboardContent" />
+             control, this method is called by the control's <see cref="M:System.Windows.Forms.DataGridView.GetClipboardContent" />
 
             
 
              method to retrieve a clipboard-formatted value that represents the cell. </para
           >
           <para
-            >The position-related parameters of this method indicate where this cell is located in the table of data representing the region defined by the selected cells in the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+            >The position-related parameters of this method indicate where this cell is located in the table of data representing the region defined by the selected cells in the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
              control. Depending on the cell's position, formatting information may be returned by this method in addition to the cell value. For example, the HTML format for a cell in the first column of a row will include the tag that indicates the beginning of a row. </para
           >
           <para
-            >The supported clipboard formats include <see
-             cref="F:System.Windows.Forms.DataFormats.Text" />
+            >The supported clipboard formats include <see cref="F:System.Windows.Forms.DataFormats.Text" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.DataFormats.UnicodeText" />
+            , <see cref="F:System.Windows.Forms.DataFormats.UnicodeText" />
 
             
 
-            , <see
-             cref="F:System.Windows.Forms.DataFormats.Html" />
+            , <see cref="F:System.Windows.Forms.DataFormats.Html" />
 
             
 
-            , and <see
-             cref="F:System.Windows.Forms.DataFormats.CommaSeparatedValue" />
+            , and <see cref="F:System.Windows.Forms.DataFormats.CommaSeparatedValue" />
 
             
 
             .</para
           >
           <para
-            >For more information, see the <see
-             cref="T:System.Windows.Forms.Clipboard" />
+            >For more information, see the <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
@@ -238,8 +219,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieves the formatted value of the cell to copy to the <see
-             cref="T:System.Windows.Forms.Clipboard" />
+            >Retrieves the formatted value of the cell to copy to the <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
@@ -249,13 +229,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Object" />
+            >A <see cref="T:System.Object" />
 
             
 
-             that represents the value of the cell to copy to the <see
-             cref="T:System.Windows.Forms.Clipboard" />
+             that represents the value of the cell to copy to the <see cref="T:System.Windows.Forms.Clipboard" />
 
             
 
@@ -263,42 +241,66 @@
           >
         </returns>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the row containing the cell.</param
         >
         <param name="firstCell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the cell is in the first column of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="lastCell">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the cell is the last column of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="inFirstRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the cell is in the first row of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="inLastRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           true to indicate that the cell is in the last row of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -328,8 +330,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The size of the cell's contents is computed dynamically when this method is called. This method is called internally when the <see
-             cref="P:System.Windows.Forms.DataGridViewCell.ContentBounds" />
+            >The size of the cell's contents is computed dynamically when this method is called. This method is called internally when the <see cref="P:System.Windows.Forms.DataGridViewCell.ContentBounds" />
 
             
 
@@ -339,8 +340,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the bounding rectangle that encloses the cell's content area, which is calculated using the specified <see
-             cref="T:System.Drawing.Graphics" />
+            >Returns the bounding rectangle that encloses the cell's content area, which is calculated using the specified <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -350,8 +350,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.Rectangle" />
+            >The <see cref="T:System.Drawing.Rectangle" />
 
             
 
@@ -359,26 +358,37 @@
           >
         </returns>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The graphics context for the cell.</param
         >
         <param name="cellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          The <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
            to be applied to the cell.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -413,18 +423,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+            >The <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
-             of the column headers if one exists; otherwise, the <see
-             cref="T:System.Windows.Forms.ContextMenuStrip" />
+             of the column headers if one exists; otherwise, the <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
             
 
-             inherited from <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             inherited from <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -432,12 +439,15 @@
           >
         </returns>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the row to get the <see
-           cref="T:System.Windows.Forms.ContextMenuStrip" />
+          The index of the row to get the <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
           
 
@@ -464,33 +474,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns a <see
-             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+            >This method returns a <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
             
 
-             that inherits its settings from the <see
-             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+             that inherits its settings from the <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
             
 
-             objects returned by the <see
-             cref="P:System.Windows.Forms.DataGridView.ColumnHeadersDefaultCellStyle" />
+             objects returned by the <see cref="P:System.Windows.Forms.DataGridView.ColumnHeadersDefaultCellStyle" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
+             and <see cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
 
             
 
-             properties of the <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             properties of the <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
-            . For more information, see <format
-             type="text/html">
+            . For more information, see <format type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
@@ -508,13 +512,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+            >A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
             
 
-             that includes the style settings of the cell inherited from the cell's parent row, column, and <see
-             cref="T:System.Windows.Forms.DataGridView" />
+             that includes the style settings of the cell inherited from the cell's parent row, column, and <see cref="T:System.Windows.Forms.DataGridView" />
 
             
 
@@ -522,26 +524,37 @@
           >
         </returns>
         <param name="inheritedCellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
            to be populated with the inherited cell style. </param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the cell's parent row. </param
         >
         <param name="includeColors">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -577,8 +590,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Size" />
+            >A <see cref="T:System.Drawing.Size" />
 
             
 
@@ -586,38 +598,52 @@
           >
         </returns>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to draw the cell.</param
         >
         <param name="cellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
            that represents the style of the cell.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based row index of the cell.</param
         >
         <param name="constraintSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -647,8 +673,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value contained in the <see
-             cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
+            >The value contained in the <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
 
             
 
@@ -656,7 +681,11 @@
           >
         </returns>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -701,8 +730,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Paints the current <see
-             cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
+            >Paints the current <see cref="T:System.Windows.Forms.DataGridViewColumnHeaderCell" />
 
             
 
@@ -710,117 +738,153 @@
           >
         </summary>
         <param name="graphics">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Graphics" />
+          The <see cref="T:System.Drawing.Graphics" />
 
           
 
            used to paint the cell.</param
         >
         <param name="clipBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
-           that represents the area of the <see
-           cref="T:System.Windows.Forms.DataGridView" />
+           that represents the area of the <see cref="T:System.Windows.Forms.DataGridView" />
 
           
 
            that needs to be repainted.</param
         >
         <param name="cellBounds">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Rectangle" />
+          A <see cref="T:System.Drawing.Rectangle" />
 
           
 
            that contains the bounds of the cell that is being painted.</param
         >
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The row index of the cell that is being painted.</param
         >
         <param name="dataGridViewElementState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.DataGridViewElementStates" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.DataGridViewElementStates" />
 
           
 
            values that specifies the state of the cell.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data of the cell that is being painted.</param
         >
         <param name="formattedValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The formatted data of the cell that is being painted.</param
         >
         <param name="errorText">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
           
 
            that contains formatting and style information about the cell.</param
         >
         <param name="advancedBorderStyle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+          A <see cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
 
           
 
            that contains border styles for the cell that is being painted.</param
         >
         <param name="paintParts">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of the <see
-           cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+          A bitwise combination of the <see cref="T:System.Windows.Forms.DataGridViewPaintParts" />
 
           
 
@@ -888,14 +952,22 @@
           <para>true if the value has been set; otherwise false.</para>
         </returns>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The index of the cell's parent row. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -921,23 +993,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is set automatically for columns with the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
+            >This property is set automatically for columns with the <see cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
 
             
 
-             property set to <see
-             cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Automatic" />
+             property set to <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Automatic" />
 
             
 
-            . You must set this property yourself when sorting by columns with the <see
-             cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
+            . You must set this property yourself when sorting by columns with the <see cref="P:System.Windows.Forms.DataGridViewColumn.SortMode" />
 
             
 
-             property set to <see
-             cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Programmatic" />
+             property set to <see cref="F:System.Windows.Forms.DataGridViewColumnSortMode.Programmatic" />
 
             
 

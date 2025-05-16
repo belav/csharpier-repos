@@ -28,22 +28,17 @@
   <Interfaces />
   <Docs>
     <typeparam name="U">Seriously!</typeparam>
-    <typeparam name="V"
-      >Too <c
-      >many</c>
+    <typeparam name="V">Too <c>many</c>
 
       
 
-       docs!</typeparam
-    >
+       docs!</typeparam>
     <summary>To be added.</summary>
-    <remarks>
-      <c>T:Mono.DocTest.MyList`1.Helper`2</c>
+    <remarks><c>T:Mono.DocTest.MyList`1.Helper`2</c>
 
       
 
-      .</remarks
-    >
+      .</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">

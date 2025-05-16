@@ -14,69 +14,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ConvertEventArgs" />
+        >The <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
         
 
-         is used to format and unformat values displayed by a Windows Forms control that is bound to data through a <see
-         cref="T:System.Windows.Forms.Binding" />
+         is used to format and unformat values displayed by a Windows Forms control that is bound to data through a <see cref="T:System.Windows.Forms.Binding" />
 
         
 
-         object. The <see
-         cref="E:System.Windows.Forms.Binding.Format" />
+         object. The <see cref="E:System.Windows.Forms.Binding.Format" />
 
         
 
-         event occurs whenever a control property is bound to a value and the <see
-         cref="E:System.Windows.Forms.Binding.Parse" />
+         event occurs whenever a control property is bound to a value and the <see cref="E:System.Windows.Forms.Binding.Parse" />
 
         
 
          event occurs whenever the bound value changes.</para
       >
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Binding.Format" />
+        >The <see cref="E:System.Windows.Forms.Binding.Format" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.Binding.Parse" />
+         and <see cref="E:System.Windows.Forms.Binding.Parse" />
 
         
 
-         events allow you to create custom formats for displaying data. For example, if the data in a table is of type <see
-         cref="T:System.Decimal" />
+         events allow you to create custom formats for displaying data. For example, if the data in a table is of type <see cref="T:System.Decimal" />
 
         
 
-        , you can specify that the data should be displayed in the local currency format--by setting the <see
-         cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+        , you can specify that the data should be displayed in the local currency format--by setting the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
 
         
 
-         property of the <see
-         cref="T:System.Windows.Forms.ConvertEventArgs" />
+         property of the <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
         
 
-         to the formatted value in the <see
-         cref="E:System.Windows.Forms.Binding.Format" />
+         to the formatted value in the <see cref="E:System.Windows.Forms.Binding.Format" />
 
         
 
-         event. You must consequently unformat the displayed value in the <see
-         cref="E:System.Windows.Forms.Binding.Parse" />
+         event. You must consequently unformat the displayed value in the <see cref="E:System.Windows.Forms.Binding.Parse" />
 
         
 
          event.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
 
@@ -88,13 +76,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Binding.Format" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Binding.Format" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.Binding.Parse" />
+         and <see cref="E:System.Windows.Forms.Binding.Parse" />
 
         
 
@@ -118,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ConvertEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
             
 
@@ -127,24 +112,30 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that contains the value of the current property. </param
         >
         <param name="desiredType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -167,8 +158,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.ConvertEventArgs.DesiredType" />
+            >The <see cref="P:System.Windows.Forms.ConvertEventArgs.DesiredType" />
 
             
 
@@ -196,84 +186,69 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value contained by the <see
-             cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+            >The value contained by the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
 
             
 
-             property depends on the event in which the <see
-             cref="T:System.Windows.Forms.ConvertEventArgs" />
+             property depends on the event in which the <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
             
 
-             is returned. The <see
-             cref="T:System.Windows.Forms.ConvertEventArgs" />
+             is returned. The <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
             
 
-             can be returned in either the <see
-             cref="E:System.Windows.Forms.Binding.Format" />
+             can be returned in either the <see cref="E:System.Windows.Forms.Binding.Format" />
 
             
 
-             event or the <see
-             cref="E:System.Windows.Forms.Binding.Parse" />
+             event or the <see cref="E:System.Windows.Forms.Binding.Parse" />
 
             
 
              event.</para
           >
           <para
-            >When the <see
-             cref="T:System.Windows.Forms.ConvertEventArgs" />
+            >When the <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
             
 
-             is returned in the <see
-             cref="E:System.Windows.Forms.Binding.Format" />
+             is returned in the <see cref="E:System.Windows.Forms.Binding.Format" />
 
             
 
-             event, the <see
-             cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+             event, the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
 
             
 
-             property contains the unformatted property value of the data source. Within the <see
-             cref="E:System.Windows.Forms.Binding.Format" />
+             property contains the unformatted property value of the data source. Within the <see cref="E:System.Windows.Forms.Binding.Format" />
 
             
 
-             event, you can read the property value, format the value, and reset the <see
-             cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+             event, you can read the property value, format the value, and reset the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
 
             
 
              property to the new (formatted) value, thereby setting the value displayed in the data-bound control.</para
           >
           <para
-            >When the <see
-             cref="T:System.Windows.Forms.ConvertEventArgs" />
+            >When the <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
             
 
-             is returned in the <see
-             cref="E:System.Windows.Forms.Binding.Parse" />
+             is returned in the <see cref="E:System.Windows.Forms.Binding.Parse" />
 
             
 
-             event, the property contains the custom-formatted value of the data-bound control. Within the <see
-             cref="E:System.Windows.Forms.Binding.Parse" />
+             event, the property contains the custom-formatted value of the data-bound control. Within the <see cref="E:System.Windows.Forms.Binding.Parse" />
 
             
 
-             event, you must read the formatted value, parse it, and convert it back to the same data type as the data source. You can then reset the <see
-             cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+             event, you must read the formatted value, parse it, and convert it back to the same data type as the data source. You can then reset the <see cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
 
             
 
-             property to the unformatted value, and thereby set the value of the data source. To determine the type of the data source, examine the <see
-             cref="P:System.Windows.Forms.ConvertEventArgs.DesiredType" />
+             property to the unformatted value, and thereby set the value of the data source. To determine the type of the data source, examine the <see cref="P:System.Windows.Forms.ConvertEventArgs.DesiredType" />
 
             
 
@@ -283,8 +258,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of the <see
-             cref="T:System.Windows.Forms.ConvertEventArgs" />
+            >Gets or sets the value of the <see cref="T:System.Windows.Forms.ConvertEventArgs" />
 
             
 

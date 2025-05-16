@@ -29,21 +29,18 @@
     <remarks>
       <para
         >Different operating systems give different values to the same
-    identifier.  For example, <c
-        >SIGBUS</c>
+    identifier.  For example, <c>SIGBUS</c>
 
         
 
          is 10 under FreeBSD, while it's 7 
-    for x86 Linux.  Meanwhile, <see
-         cref="F:Mono.Unix.Native.Signum.SIGBUS" />
+    for x86 Linux.  Meanwhile, <see cref="F:Mono.Unix.Native.Signum.SIGBUS" />
 
         
 
          will 
     have the same value everywhere.  Since it is undesirable to require
-    recompilation for every target platform, the <see
-         cref="N:Mono.Unix.Native" />
+    recompilation for every target platform, the <see cref="N:Mono.Unix.Native" />
 
         
 
@@ -95,8 +92,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.AccessModes" />
+          >Converts a <see cref="T:Mono.Unix.Native.AccessModes" />
 
           
 
@@ -142,8 +138,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.ConfstrName" />
+          >Converts a <see cref="T:Mono.Unix.Native.ConfstrName" />
 
           
 
@@ -185,8 +180,7 @@
       </Parameters>
       <Docs>
         <param name="time"
-          >A <see
-           cref="T:System.DateTime" />
+          >A <see cref="T:System.DateTime" />
 
           
 
@@ -194,26 +188,20 @@
         current time zone.</param
         >
         <summary
-          >Converts a <see
-           cref="T:System.DateTime" />
+          >Converts a <see cref="T:System.DateTime" />
 
           
 
            into a Unix
-        <c
-          >time_t</c>
+        <c>time_t</c>
 
           
 
           .</summary
         >
-        <returns
-          >The converted <see
-           cref="T:System.DateTime" />
-        </returns>
+        <returns>The converted <see cref="T:System.DateTime" /></returns>
         <remarks
-          >A Unix <c
-          >time_t</c>
+          >A Unix <c>time_t</c>
 
           
 
@@ -247,8 +235,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
 
           
 
@@ -346,8 +333,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.Errno" />
+          >Converts a <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -393,8 +379,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.FcntlCommand" />
+          >Converts a <see cref="T:Mono.Unix.Native.FcntlCommand" />
 
           
 
@@ -440,8 +425,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          >Converts a <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -487,8 +471,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.LockfCommand" />
+          >Converts a <see cref="T:Mono.Unix.Native.LockfCommand" />
 
           
 
@@ -534,8 +517,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.LockType" />
+          >Converts a <see cref="T:Mono.Unix.Native.LockType" />
 
           
 
@@ -581,8 +563,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MlockallFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MlockallFlags" />
 
           
 
@@ -628,8 +609,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MmapFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MmapFlags" />
 
           
 
@@ -675,8 +655,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MmapProts" />
+          >Converts a <see cref="T:Mono.Unix.Native.MmapProts" />
 
           
 
@@ -722,8 +701,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MountFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MountFlags" />
 
           
 
@@ -769,8 +747,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MremapFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MremapFlags" />
 
           
 
@@ -816,8 +793,7 @@
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MsyncFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MsyncFlags" />
 
           
 
@@ -863,8 +839,7 @@
       <Docs>
         <param name="value"
           >The octal representation of a 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -872,14 +847,12 @@
         >
         <summary
           >Converts an octal string representation of a 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
            into a 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -887,8 +860,7 @@
         >
         <returns
           >The converted 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -897,8 +869,7 @@
         <remarks>
           <para
             >This method makes it easier to create a 
-          <see
-             cref="T:Mono.Unix.Native.FilePermissions" />
+          <see cref="T:Mono.Unix.Native.FilePermissions" />
 
             
 
@@ -906,8 +877,7 @@
           the use of common octal permission notation.</para
           >
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Unix.Native;
 
@@ -953,8 +923,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.OpenFlags" />
 
           
 
@@ -1000,8 +969,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PathconfName" />
+          >Converts a <see cref="T:Mono.Unix.Native.PathconfName" />
 
           
 
@@ -1047,8 +1015,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PollEvents" />
+          >Converts a <see cref="T:Mono.Unix.Native.PollEvents" />
 
           
 
@@ -1094,8 +1061,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
+          >Converts a <see cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
 
           
 
@@ -1141,8 +1107,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
+          >Converts a <see cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
 
           
 
@@ -1187,8 +1152,7 @@ class Test
       <Docs>
         <param name="sig">The signal to convert from.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.RealTimeSignum" />
+          >Converts a <see cref="T:Mono.Unix.Native.RealTimeSignum" />
 
           
 
@@ -1223,8 +1187,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SeekFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.SeekFlags" />
 
           
 
@@ -1270,8 +1233,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.Signum" />
+          >Converts a <see cref="T:Mono.Unix.Native.Signum" />
 
           
 
@@ -1317,8 +1279,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SysconfName" />
+          >Converts a <see cref="T:Mono.Unix.Native.SysconfName" />
 
           
 
@@ -1364,8 +1325,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SyslogFacility" />
+          >Converts a <see cref="T:Mono.Unix.Native.SyslogFacility" />
 
           
 
@@ -1411,8 +1371,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SyslogLevel" />
+          >Converts a <see cref="T:Mono.Unix.Native.SyslogLevel" />
 
           
 
@@ -1458,8 +1417,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SyslogOptions" />
+          >Converts a <see cref="T:Mono.Unix.Native.SyslogOptions" />
 
           
 
@@ -1500,39 +1458,30 @@ class Test
         <Parameter Name="time" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="time"
-          >A Unix <c
-          >time_t</c>
+        <param name="time">A Unix <c>time_t</c>
 
           
 
-           value.</param
-        >
+           value.</param>
         <summary
-          >Converts a Unix <c
-          >time_t</c>
+          >Converts a Unix <c>time_t</c>
 
           
 
            in the user's current time zone 
-        into a <see
-           cref="T:System.DateTime" />
+        into a <see cref="T:System.DateTime" />
 
           
 
           .</summary
         >
-        <returns
-          >The converted <c
-          >time_t</c>
+        <returns>The converted <c>time_t</c>
 
           
 
-          .</returns
-        >
+          .</returns>
         <remarks
-          >A Unix <c
-          >time_t</c>
+          >A Unix <c>time_t</c>
 
           
 
@@ -1566,8 +1515,7 @@ class Test
       <Docs>
         <param name="value"
           >The unix permission representation of a 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -1575,14 +1523,12 @@ class Test
         >
         <summary
           >Converts a unix permission representation of a 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
            into a 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -1590,8 +1536,7 @@ class Test
         >
         <returns
           >The converted 
-        <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+        <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -1600,14 +1545,12 @@ class Test
         <remarks>
           <para
             >A "Unix permission string" is the 9 or 10 character string
-          commonly seen in the output of <c
-            >ls -l</c>
+          commonly seen in the output of <c>ls -l</c>
 
             
 
             , e.g.
-          "<c
-            >-rwxr-x---</c>
+          "<c>-rwxr-x---</c>
 
             
 
@@ -1615,8 +1558,7 @@ class Test
           >
           <para
             >This method makes it easier to create a 
-          <see
-             cref="T:Mono.Unix.Native.FilePermissions" />
+          <see cref="T:Mono.Unix.Native.FilePermissions" />
 
             
 
@@ -1626,8 +1568,7 @@ class Test
           <para>Both 9 and 10 character representations are decoded, the
           difference being the file type.</para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Unix.Native;
 
@@ -1684,8 +1625,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.WaitOptions" />
+          >Converts a <see cref="T:Mono.Unix.Native.WaitOptions" />
 
           
 
@@ -1731,8 +1671,7 @@ class Test
       <Docs>
         <param name="value">The managed value to convert.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.XattrFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.XattrFlags" />
 
           
 
@@ -1773,14 +1712,12 @@ class Test
       <Docs>
         <summary>The start of the Unix epoch.</summary>
         <remarks
-          >This <c
-          >DateTime</c>
+          >This <c>DateTime</c>
 
           
 
            corresponds to a 
-        Unix <c
-          >time_t</c>
+        Unix <c>time_t</c>
 
           
 
@@ -1833,8 +1770,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.AccessModes" />
+          <see cref="T:Mono.Unix.Native.AccessModes" />
 
           
 
@@ -1844,19 +1780,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -1865,15 +1798,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
 
             
 
@@ -1910,8 +1841,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.ConfstrName" />
+          <see cref="T:Mono.Unix.Native.ConfstrName" />
 
           
 
@@ -1951,39 +1881,30 @@ class Test
         <Parameter Name="time" Type="System.Int64" />
       </Parameters>
       <Docs>
-        <param name="time"
-          >A Unix <c
-          >time_t</c>
+        <param name="time">A Unix <c>time_t</c>
 
           
 
-           value.</param
-        >
+           value.</param>
         <summary
-          >Converts a Unix <c
-          >time_t</c>
+          >Converts a Unix <c>time_t</c>
 
           
 
            in the user's current time zone 
-        into a <see
-           cref="T:System.DateTime" />
+        into a <see cref="T:System.DateTime" />
 
           
 
           .</summary
         >
-        <returns
-          >The converted <c
-          >time_t</c>
+        <returns>The converted <c>time_t</c>
 
           
 
-          .</returns
-        >
+          .</returns>
         <remarks
-          >A Unix <c
-          >time_t</c>
+          >A Unix <c>time_t</c>
 
           
 
@@ -2018,8 +1939,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
+          <see cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
 
           
 
@@ -2029,19 +1949,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2050,15 +1967,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
 
             
 
@@ -2147,8 +2062,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.Errno" />
+          <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -2194,8 +2108,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.FcntlCommand" />
+          <see cref="T:Mono.Unix.Native.FcntlCommand" />
 
           
 
@@ -2241,8 +2154,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -2252,19 +2164,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2273,15 +2182,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
 
             
 
@@ -2318,21 +2225,18 @@ class Test
         <param name="access">Specifies what can be done to the file.</param>
         <summary
           >Converts the managed 
-        <see
-           cref="T:System.IO.FileAccess" />
+        <see cref="T:System.IO.FileAccess" />
 
           
 
            into a
         string suitable for use with
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.fopen" />
+        <see cref="M:Mono.Unix.Native.Stdlib.fopen" />
 
           
 
           's 
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
@@ -2341,14 +2245,12 @@ class Test
         <returns>The morally equivalent file mode.</returns>
         <remarks
           >This is primarily useful if you're trying to make a
-        Unix-specific API look like a <c
-          >CLI</c>
+        Unix-specific API look like a <c>CLI</c>
 
           
 
            API, such as with 
-        <see
-           cref="T:Mono.Unix.StdioFileStream" />
+        <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
@@ -2381,21 +2283,18 @@ class Test
         <param name="mode">Specifies how to open the file</param>
         <summary
           >Converts the managed 
-        <see
-           cref="T:System.IO.FileMode" />
+        <see cref="T:System.IO.FileMode" />
 
           
 
            into a
         string suitable for use with
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.fopen" />
+        <see cref="M:Mono.Unix.Native.Stdlib.fopen" />
 
           
 
           's 
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
@@ -2404,14 +2303,12 @@ class Test
         <returns>The morally equivalent file mode.</returns>
         <remarks
           >This is primarily useful if you're trying to make a
-        Unix-specific API look like a <c
-          >CLI</c>
+        Unix-specific API look like a <c>CLI</c>
 
           
 
            API, such as with 
-        <see
-           cref="T:Mono.Unix.StdioFileStream" />
+        <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
@@ -2447,9 +2344,7 @@ class Test
         <summary
           >Converts the managed 
         <c
-
-            >(<see
-             cref="T:System.IO.FileMode" />
+            >(<see cref="T:System.IO.FileMode" />
             <see cref="T:System.IO.FileAccess" />
 
             
@@ -2461,14 +2356,12 @@ class Test
 
            pair into a
         string suitable for use with
-        <see
-           cref="M:Mono.Unix.Native.Stdlib.fopen" />
+        <see cref="M:Mono.Unix.Native.Stdlib.fopen" />
 
           
 
           's 
-        <paramref
-           name="mode" />
+        <paramref name="mode" />
 
           
 
@@ -2477,14 +2370,12 @@ class Test
         <returns>The morally equivalent file mode.</returns>
         <remarks
           >This is primarily useful if you're trying to make a
-        Unix-specific API look like a <c
-          >CLI</c>
+        Unix-specific API look like a <c>CLI</c>
 
           
 
            API, such as with 
-        <see
-           cref="T:Mono.Unix.StdioFileStream" />
+        <see cref="T:Mono.Unix.StdioFileStream" />
 
           
 
@@ -2517,8 +2408,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.LockfCommand" />
+          <see cref="T:Mono.Unix.Native.LockfCommand" />
 
           
 
@@ -2564,8 +2454,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.LockType" />
+          <see cref="T:Mono.Unix.Native.LockType" />
 
           
 
@@ -2611,8 +2500,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MlockallFlags" />
+          <see cref="T:Mono.Unix.Native.MlockallFlags" />
 
           
 
@@ -2622,19 +2510,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2643,15 +2528,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
 
             
 
@@ -2688,8 +2571,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MmapFlags" />
+          <see cref="T:Mono.Unix.Native.MmapFlags" />
 
           
 
@@ -2699,19 +2581,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2720,15 +2599,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
 
             
 
@@ -2765,8 +2642,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MmapProts" />
+          <see cref="T:Mono.Unix.Native.MmapProts" />
 
           
 
@@ -2776,19 +2652,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2797,15 +2670,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
 
             
 
@@ -2842,8 +2713,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MountFlags" />
+          <see cref="T:Mono.Unix.Native.MountFlags" />
 
           
 
@@ -2853,19 +2723,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2874,15 +2741,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
 
             
 
@@ -2919,8 +2784,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MremapFlags" />
+          <see cref="T:Mono.Unix.Native.MremapFlags" />
 
           
 
@@ -2930,19 +2794,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -2951,15 +2812,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
 
             
 
@@ -2996,8 +2855,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MsyncFlags" />
+          <see cref="T:Mono.Unix.Native.MsyncFlags" />
 
           
 
@@ -3007,19 +2865,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -3028,15 +2883,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
 
             
 
@@ -3070,17 +2923,13 @@ class Test
         <Parameter Name="value" Type="Mono.Unix.Native.FilePermissions" />
       </Parameters>
       <Docs>
-        <param name="value"
-          >A Unix <c
-          >mode_t</c>
+        <param name="value">A Unix <c>mode_t</c>
 
           
 
-           value.</param
-        >
+           value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          >Converts a <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -3088,8 +2937,7 @@ class Test
         into an octal string representation.</summary
         >
         <returns
-          >An octal string representation of a Unix <c
-          >mode_t</c>
+          >An octal string representation of a Unix <c>mode_t</c>
 
           
 
@@ -3097,8 +2945,7 @@ class Test
         >
         <remarks>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Unix.Native;
 
@@ -3152,8 +2999,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+          <see cref="T:Mono.Unix.Native.OpenFlags" />
 
           
 
@@ -3163,19 +3009,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -3184,15 +3027,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
 
             
 
@@ -3232,9 +3073,7 @@ class Test
         <summary
           >Converts the managed 
         <c
-
-            >(<see
-             cref="T:System.IO.FileMode" />
+            >(<see cref="T:System.IO.FileMode" />
             <see cref="T:System.IO.FileAccess" />
 
             
@@ -3245,20 +3084,17 @@ class Test
           
 
            pair into a
-        <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+        <see cref="T:Mono.Unix.Native.OpenFlags" />
         </summary>
         <returns>The morally equivalent file flags.</returns>
         <remarks
           >This is primarily useful if you're trying to make a
-        Unix-specific API look like a <c
-          >CLI</c>
+        Unix-specific API look like a <c>CLI</c>
 
           
 
            API, such as with 
-        <see
-           cref="T:Mono.Unix.UnixStream" />
+        <see cref="T:Mono.Unix.UnixStream" />
 
           
 
@@ -3291,8 +3127,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PathconfName" />
+          <see cref="T:Mono.Unix.Native.PathconfName" />
 
           
 
@@ -3338,8 +3173,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PollEvents" />
+          <see cref="T:Mono.Unix.Native.PollEvents" />
 
           
 
@@ -3349,19 +3183,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -3370,15 +3201,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
 
             
 
@@ -3415,8 +3244,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
+          <see cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
 
           
 
@@ -3462,8 +3290,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
+          <see cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
 
           
 
@@ -3536,8 +3363,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SeekFlags" />
+          <see cref="T:Mono.Unix.Native.SeekFlags" />
 
           
 
@@ -3583,8 +3409,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.Signum" />
+          <see cref="T:Mono.Unix.Native.Signum" />
 
           
 
@@ -3630,8 +3455,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SysconfName" />
+          <see cref="T:Mono.Unix.Native.SysconfName" />
 
           
 
@@ -3677,8 +3501,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SyslogFacility" />
+          <see cref="T:Mono.Unix.Native.SyslogFacility" />
 
           
 
@@ -3724,8 +3547,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SyslogLevel" />
+          <see cref="T:Mono.Unix.Native.SyslogLevel" />
 
           
 
@@ -3771,8 +3593,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SyslogOptions" />
+          <see cref="T:Mono.Unix.Native.SyslogOptions" />
 
           
 
@@ -3782,19 +3603,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -3803,15 +3621,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
 
             
 
@@ -3843,8 +3659,7 @@ class Test
       </Parameters>
       <Docs>
         <param name="time"
-          >A <see
-           cref="T:System.DateTime" />
+          >A <see cref="T:System.DateTime" />
 
           
 
@@ -3852,26 +3667,20 @@ class Test
         current time zone.</param
         >
         <summary
-          >Converts a <see
-           cref="T:System.DateTime" />
+          >Converts a <see cref="T:System.DateTime" />
 
           
 
            into a Unix
-        <c
-          >time_t</c>
+        <c>time_t</c>
 
           
 
           .</summary
         >
-        <returns
-          >The converted <see
-           cref="T:System.DateTime" />
-        </returns>
+        <returns>The converted <see cref="T:System.DateTime" /></returns>
         <remarks
-          >A Unix <c
-          >time_t</c>
+          >A Unix <c>time_t</c>
 
           
 
@@ -3911,8 +3720,7 @@ class Test
            to convert.</param
         >
         <summary
-          >Converts a <see
-           cref="Mono.Unix.Native.FilePermissions" />
+          >Converts a <see cref="Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -3922,14 +3730,12 @@ class Test
         <remarks>
           <para
             >A "Unix permission string" is the 9 or 10 character string
-          commonly seen in the output of <c
-            >ls -l</c>
+          commonly seen in the output of <c>ls -l</c>
 
             
 
             , e.g.
-          "<c
-            >-rwxr-x---</c>
+          "<c>-rwxr-x---</c>
 
             
 
@@ -3940,8 +3746,7 @@ class Test
           character string is returned, with the file type encoded in the
           first character.  Otherwise a 9 character string is returned.</para>
           <example>
-            <code lang="C#"
-              >
+            <code lang="C#">
 using System;
 using Mono.Unix.Native;
 
@@ -3995,8 +3800,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.WaitOptions" />
+          <see cref="T:Mono.Unix.Native.WaitOptions" />
 
           
 
@@ -4006,19 +3810,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -4027,15 +3828,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
 
             
 
@@ -4072,8 +3871,7 @@ class Test
         <param name="value">The OS-specific value to convert.</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.XattrFlags" />
+          <see cref="T:Mono.Unix.Native.XattrFlags" />
 
           
 
@@ -4083,19 +3881,16 @@ class Test
         <remarks>
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -4104,15 +3899,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
 
             
 
@@ -4626,8 +4419,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.AccessModes" />
+          >Converts a <see cref="T:Mono.Unix.Native.AccessModes" />
 
           
 
@@ -4640,8 +4432,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -4650,8 +4441,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
 
             
 
@@ -4659,24 +4449,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -4714,8 +4500,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.ConfstrName" />
+          >Converts a <see cref="T:Mono.Unix.Native.ConfstrName" />
 
           
 
@@ -4728,8 +4513,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -4738,8 +4522,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromConfstrName" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromConfstrName" />
 
             
 
@@ -4747,24 +4530,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -4802,8 +4581,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
 
           
 
@@ -4816,8 +4594,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -4826,8 +4603,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
 
             
 
@@ -4835,24 +4611,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -4946,8 +4718,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.Errno" />
+          >Converts a <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -4960,8 +4731,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -4970,8 +4740,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromErrno" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromErrno" />
 
             
 
@@ -4979,24 +4748,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5034,8 +4799,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.FcntlCommand" />
+          >Converts a <see cref="T:Mono.Unix.Native.FcntlCommand" />
 
           
 
@@ -5048,8 +4812,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5058,8 +4821,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromFcntlCommand" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromFcntlCommand" />
 
             
 
@@ -5067,24 +4829,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5122,8 +4880,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          >Converts a <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -5136,8 +4893,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5146,8 +4902,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
 
             
 
@@ -5155,24 +4910,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5210,8 +4961,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.LockfCommand" />
+          >Converts a <see cref="T:Mono.Unix.Native.LockfCommand" />
 
           
 
@@ -5224,8 +4974,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5234,8 +4983,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromLockfCommand" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromLockfCommand" />
 
             
 
@@ -5243,24 +4991,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5298,8 +5042,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.LockType" />
+          >Converts a <see cref="T:Mono.Unix.Native.LockType" />
 
           
 
@@ -5312,8 +5055,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5322,8 +5064,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromLockType" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromLockType" />
 
             
 
@@ -5331,24 +5072,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5386,8 +5123,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MlockallFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MlockallFlags" />
 
           
 
@@ -5400,8 +5136,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5410,8 +5145,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
 
             
 
@@ -5419,24 +5153,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5474,8 +5204,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MmapFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MmapFlags" />
 
           
 
@@ -5488,8 +5217,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5498,8 +5226,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
 
             
 
@@ -5507,24 +5234,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5562,8 +5285,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MmapProts" />
+          >Converts a <see cref="T:Mono.Unix.Native.MmapProts" />
 
           
 
@@ -5576,8 +5298,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5586,8 +5307,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
 
             
 
@@ -5595,24 +5315,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5650,8 +5366,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MountFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MountFlags" />
 
           
 
@@ -5664,8 +5379,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5674,8 +5388,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
 
             
 
@@ -5683,24 +5396,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5738,8 +5447,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MremapFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MremapFlags" />
 
           
 
@@ -5752,8 +5460,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5762,8 +5469,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
 
             
 
@@ -5771,24 +5477,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5826,8 +5528,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.MsyncFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.MsyncFlags" />
 
           
 
@@ -5840,8 +5541,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5850,8 +5550,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
 
             
 
@@ -5859,24 +5558,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -5914,8 +5609,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.OpenFlags" />
 
           
 
@@ -5928,8 +5622,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -5938,8 +5631,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
 
             
 
@@ -5947,24 +5639,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6002,8 +5690,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PathconfName" />
+          >Converts a <see cref="T:Mono.Unix.Native.PathconfName" />
 
           
 
@@ -6016,8 +5703,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6026,8 +5712,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromPathconfName" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromPathconfName" />
 
             
 
@@ -6035,24 +5720,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6090,8 +5771,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PollEvents" />
+          >Converts a <see cref="T:Mono.Unix.Native.PollEvents" />
 
           
 
@@ -6104,8 +5784,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6114,8 +5793,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
 
             
 
@@ -6123,24 +5801,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6178,8 +5852,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
+          >Converts a <see cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
 
           
 
@@ -6192,8 +5865,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6202,8 +5874,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromPosixFadviseAdvice" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromPosixFadviseAdvice" />
 
             
 
@@ -6211,24 +5882,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6266,8 +5933,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
+          >Converts a <see cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
 
           
 
@@ -6280,8 +5946,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6290,8 +5955,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromPosixMadviseAdvice" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromPosixMadviseAdvice" />
 
             
 
@@ -6299,24 +5963,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6354,8 +6014,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SeekFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.SeekFlags" />
 
           
 
@@ -6368,8 +6027,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6378,8 +6036,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSeekFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSeekFlags" />
 
             
 
@@ -6387,24 +6044,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6442,8 +6095,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.Signum" />
+          >Converts a <see cref="T:Mono.Unix.Native.Signum" />
 
           
 
@@ -6456,8 +6108,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6466,8 +6117,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSignum" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSignum" />
 
             
 
@@ -6475,24 +6125,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6530,8 +6176,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SysconfName" />
+          >Converts a <see cref="T:Mono.Unix.Native.SysconfName" />
 
           
 
@@ -6544,8 +6189,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6554,8 +6198,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSysconfName" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSysconfName" />
 
             
 
@@ -6563,24 +6206,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6618,8 +6257,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SyslogFacility" />
+          >Converts a <see cref="T:Mono.Unix.Native.SyslogFacility" />
 
           
 
@@ -6632,8 +6270,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6642,8 +6279,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSyslogFacility" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSyslogFacility" />
 
             
 
@@ -6651,24 +6287,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6706,8 +6338,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SyslogLevel" />
+          >Converts a <see cref="T:Mono.Unix.Native.SyslogLevel" />
 
           
 
@@ -6720,8 +6351,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6730,8 +6360,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSyslogLevel" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSyslogLevel" />
 
             
 
@@ -6739,24 +6368,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6794,8 +6419,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.SyslogOptions" />
+          >Converts a <see cref="T:Mono.Unix.Native.SyslogOptions" />
 
           
 
@@ -6808,8 +6432,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6818,8 +6441,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
 
             
 
@@ -6827,24 +6449,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6882,8 +6500,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.WaitOptions" />
+          >Converts a <see cref="T:Mono.Unix.Native.WaitOptions" />
 
           
 
@@ -6896,8 +6513,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6906,8 +6522,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
 
             
 
@@ -6915,24 +6530,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -6970,8 +6581,7 @@ class Test
         <param name="value">The managed value to convert.</param>
         <param name="rval">The OS-specific equivalent value.</param>
         <summary
-          >Converts a <see
-           cref="T:Mono.Unix.Native.XattrFlags" />
+          >Converts a <see cref="T:Mono.Unix.Native.XattrFlags" />
 
           
 
@@ -6984,8 +6594,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -6994,8 +6603,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
 
             
 
@@ -7003,24 +6611,20 @@ class Test
           >
           <para
             >If successful, this method stores the OS-specific equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain <c
-            >0</c>
+             will contain <c>0</c>
 
             
 
@@ -7059,8 +6663,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.AccessModes" />
+          <see cref="T:Mono.Unix.Native.AccessModes" />
 
           
 
@@ -7072,8 +6675,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7082,8 +6684,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToAccessModes" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToAccessModes" />
 
             
 
@@ -7091,30 +6692,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.AccessModes" />
+        cast to a <see cref="T:Mono.Unix.Native.AccessModes" />
 
             
 
@@ -7122,19 +6718,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -7143,15 +6736,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromAccessModes" />
 
             
 
@@ -7190,8 +6781,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.ConfstrName" />
+          <see cref="T:Mono.Unix.Native.ConfstrName" />
 
           
 
@@ -7203,8 +6793,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7213,8 +6802,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToConfstrName" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToConfstrName" />
 
             
 
@@ -7222,30 +6810,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.ConfstrName" />
+        cast to a <see cref="T:Mono.Unix.Native.ConfstrName" />
 
             
 
@@ -7284,8 +6867,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
+          <see cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
 
           
 
@@ -7297,8 +6879,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7307,8 +6888,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToDirectoryNotifyFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToDirectoryNotifyFlags" />
 
             
 
@@ -7316,30 +6896,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.DirectoryNotifyFlags" />
 
             
 
@@ -7347,19 +6922,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -7368,15 +6940,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromDirectoryNotifyFlags" />
 
             
 
@@ -7471,8 +7041,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.Errno" />
+          <see cref="T:Mono.Unix.Native.Errno" />
 
           
 
@@ -7484,8 +7053,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7494,8 +7062,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToErrno" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToErrno" />
 
             
 
@@ -7503,30 +7070,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.Errno" />
+        cast to a <see cref="T:Mono.Unix.Native.Errno" />
 
             
 
@@ -7565,8 +7127,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.FcntlCommand" />
+          <see cref="T:Mono.Unix.Native.FcntlCommand" />
 
           
 
@@ -7578,8 +7139,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7588,8 +7148,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToFcntlCommand" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToFcntlCommand" />
 
             
 
@@ -7597,30 +7156,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.FcntlCommand" />
+        cast to a <see cref="T:Mono.Unix.Native.FcntlCommand" />
 
             
 
@@ -7659,8 +7213,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.FilePermissions" />
+          <see cref="T:Mono.Unix.Native.FilePermissions" />
 
           
 
@@ -7672,8 +7225,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7682,8 +7234,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToFilePermissions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToFilePermissions" />
 
             
 
@@ -7691,30 +7242,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.FilePermissions" />
+        cast to a <see cref="T:Mono.Unix.Native.FilePermissions" />
 
             
 
@@ -7722,19 +7268,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -7743,15 +7286,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromFilePermissions" />
 
             
 
@@ -7790,8 +7331,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.LockfCommand" />
+          <see cref="T:Mono.Unix.Native.LockfCommand" />
 
           
 
@@ -7803,8 +7343,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7813,8 +7352,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToLockfCommand" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToLockfCommand" />
 
             
 
@@ -7822,30 +7360,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.LockfCommand" />
+        cast to a <see cref="T:Mono.Unix.Native.LockfCommand" />
 
             
 
@@ -7884,8 +7417,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.LockType" />
+          <see cref="T:Mono.Unix.Native.LockType" />
 
           
 
@@ -7897,8 +7429,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -7907,8 +7438,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToLockType" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToLockType" />
 
             
 
@@ -7916,30 +7446,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.LockType" />
+        cast to a <see cref="T:Mono.Unix.Native.LockType" />
 
             
 
@@ -7978,8 +7503,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MlockallFlags" />
+          <see cref="T:Mono.Unix.Native.MlockallFlags" />
 
           
 
@@ -7991,8 +7515,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8001,8 +7524,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToMlockallFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToMlockallFlags" />
 
             
 
@@ -8010,30 +7532,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.MlockallFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.MlockallFlags" />
 
             
 
@@ -8041,19 +7558,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8062,15 +7576,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMlockallFlags" />
 
             
 
@@ -8109,8 +7621,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MmapFlags" />
+          <see cref="T:Mono.Unix.Native.MmapFlags" />
 
           
 
@@ -8122,8 +7633,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8132,8 +7642,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToMmapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToMmapFlags" />
 
             
 
@@ -8141,30 +7650,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.MmapFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.MmapFlags" />
 
             
 
@@ -8172,19 +7676,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8193,15 +7694,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMmapFlags" />
 
             
 
@@ -8240,8 +7739,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MmapProts" />
+          <see cref="T:Mono.Unix.Native.MmapProts" />
 
           
 
@@ -8253,8 +7751,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8263,8 +7760,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToMmapProts" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToMmapProts" />
 
             
 
@@ -8272,30 +7768,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.MmapProts" />
+        cast to a <see cref="T:Mono.Unix.Native.MmapProts" />
 
             
 
@@ -8303,19 +7794,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8324,15 +7812,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMmapProts" />
 
             
 
@@ -8371,8 +7857,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MountFlags" />
+          <see cref="T:Mono.Unix.Native.MountFlags" />
 
           
 
@@ -8384,8 +7869,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8394,8 +7878,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToMountFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToMountFlags" />
 
             
 
@@ -8403,30 +7886,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.MountFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.MountFlags" />
 
             
 
@@ -8434,19 +7912,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8455,15 +7930,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMountFlags" />
 
             
 
@@ -8502,8 +7975,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MremapFlags" />
+          <see cref="T:Mono.Unix.Native.MremapFlags" />
 
           
 
@@ -8515,8 +7987,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8525,8 +7996,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToMremapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToMremapFlags" />
 
             
 
@@ -8534,30 +8004,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.MremapFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.MremapFlags" />
 
             
 
@@ -8565,19 +8030,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8586,15 +8048,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMremapFlags" />
 
             
 
@@ -8633,8 +8093,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.MsyncFlags" />
+          <see cref="T:Mono.Unix.Native.MsyncFlags" />
 
           
 
@@ -8646,8 +8105,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8656,8 +8114,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToMsyncFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToMsyncFlags" />
 
             
 
@@ -8665,30 +8122,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.MsyncFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.MsyncFlags" />
 
             
 
@@ -8696,19 +8148,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8717,15 +8166,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromMsyncFlags" />
 
             
 
@@ -8764,8 +8211,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.OpenFlags" />
+          <see cref="T:Mono.Unix.Native.OpenFlags" />
 
           
 
@@ -8777,8 +8223,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8787,8 +8232,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToOpenFlags" />
 
             
 
@@ -8796,30 +8240,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.OpenFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.OpenFlags" />
 
             
 
@@ -8827,19 +8266,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -8848,15 +8284,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromOpenFlags" />
 
             
 
@@ -8895,8 +8329,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PathconfName" />
+          <see cref="T:Mono.Unix.Native.PathconfName" />
 
           
 
@@ -8908,8 +8341,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -8918,8 +8350,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToPathconfName" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToPathconfName" />
 
             
 
@@ -8927,30 +8358,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.PathconfName" />
+        cast to a <see cref="T:Mono.Unix.Native.PathconfName" />
 
             
 
@@ -8989,8 +8415,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PollEvents" />
+          <see cref="T:Mono.Unix.Native.PollEvents" />
 
           
 
@@ -9002,8 +8427,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9012,8 +8436,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToPollEvents" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToPollEvents" />
 
             
 
@@ -9021,30 +8444,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.PollEvents" />
+        cast to a <see cref="T:Mono.Unix.Native.PollEvents" />
 
             
 
@@ -9052,19 +8470,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -9073,15 +8488,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromPollEvents" />
 
             
 
@@ -9120,8 +8533,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
+          <see cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
 
           
 
@@ -9133,8 +8545,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9143,8 +8554,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToPosixFadviseAdvice" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToPosixFadviseAdvice" />
 
             
 
@@ -9152,30 +8562,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
+        cast to a <see cref="T:Mono.Unix.Native.PosixFadviseAdvice" />
 
             
 
@@ -9214,8 +8619,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
+          <see cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
 
           
 
@@ -9227,8 +8631,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9237,8 +8640,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToPosixMadviseAdvice" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToPosixMadviseAdvice" />
 
             
 
@@ -9246,30 +8648,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
+        cast to a <see cref="T:Mono.Unix.Native.PosixMadviseAdvice" />
 
             
 
@@ -9308,8 +8705,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SeekFlags" />
+          <see cref="T:Mono.Unix.Native.SeekFlags" />
 
           
 
@@ -9321,8 +8717,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9331,8 +8726,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToSeekFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToSeekFlags" />
 
             
 
@@ -9340,30 +8734,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.SeekFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.SeekFlags" />
 
             
 
@@ -9402,8 +8791,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.Signum" />
+          <see cref="T:Mono.Unix.Native.Signum" />
 
           
 
@@ -9415,8 +8803,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9425,8 +8812,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToSignum" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToSignum" />
 
             
 
@@ -9434,30 +8820,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.Signum" />
+        cast to a <see cref="T:Mono.Unix.Native.Signum" />
 
             
 
@@ -9496,8 +8877,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SysconfName" />
+          <see cref="T:Mono.Unix.Native.SysconfName" />
 
           
 
@@ -9509,8 +8889,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9519,8 +8898,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToSysconfName" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToSysconfName" />
 
             
 
@@ -9528,30 +8906,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.SysconfName" />
+        cast to a <see cref="T:Mono.Unix.Native.SysconfName" />
 
             
 
@@ -9590,8 +8963,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SyslogFacility" />
+          <see cref="T:Mono.Unix.Native.SyslogFacility" />
 
           
 
@@ -9603,8 +8975,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9613,8 +8984,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToSyslogFacility" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToSyslogFacility" />
 
             
 
@@ -9622,30 +8992,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.SyslogFacility" />
+        cast to a <see cref="T:Mono.Unix.Native.SyslogFacility" />
 
             
 
@@ -9684,8 +9049,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SyslogLevel" />
+          <see cref="T:Mono.Unix.Native.SyslogLevel" />
 
           
 
@@ -9697,8 +9061,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9707,8 +9070,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToSyslogLevel" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToSyslogLevel" />
 
             
 
@@ -9716,30 +9078,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.SyslogLevel" />
+        cast to a <see cref="T:Mono.Unix.Native.SyslogLevel" />
 
             
 
@@ -9778,8 +9135,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.SyslogOptions" />
+          <see cref="T:Mono.Unix.Native.SyslogOptions" />
 
           
 
@@ -9791,8 +9147,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9801,8 +9156,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToSyslogOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToSyslogOptions" />
 
             
 
@@ -9810,30 +9164,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.SyslogOptions" />
+        cast to a <see cref="T:Mono.Unix.Native.SyslogOptions" />
 
             
 
@@ -9841,19 +9190,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -9862,15 +9208,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromSyslogOptions" />
 
             
 
@@ -9909,8 +9253,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.WaitOptions" />
+          <see cref="T:Mono.Unix.Native.WaitOptions" />
 
           
 
@@ -9922,8 +9265,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -9932,8 +9274,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToWaitOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToWaitOptions" />
 
             
 
@@ -9941,30 +9282,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.WaitOptions" />
+        cast to a <see cref="T:Mono.Unix.Native.WaitOptions" />
 
             
 
@@ -9972,19 +9308,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -9993,15 +9326,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromWaitOptions" />
 
             
 
@@ -10040,8 +9371,7 @@ class Test
         <param name="rval">The managed equivalent value</param>
         <summary
           >Converts an OS-specific value to a 
-          <see
-           cref="T:Mono.Unix.Native.XattrFlags" />
+          <see cref="T:Mono.Unix.Native.XattrFlags" />
 
           
 
@@ -10053,8 +9383,7 @@ class Test
           
 
            if the conversion was successful; 
-        otherwise, <see
-           langword="false" />
+        otherwise, <see langword="false" />
 
           
 
@@ -10063,8 +9392,7 @@ class Test
         <remarks>
           <para
             >This is an exception-safe alternative to 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.ToXattrFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.ToXattrFlags" />
 
             
 
@@ -10072,30 +9400,25 @@ class Test
           >
           <para
             >If successful, this method stores the managed equivalent
-        value of <paramref
-             name="value" />
+        value of <paramref name="value" />
 
             
 
-             into <paramref
-             name="rval" />
+             into <paramref name="rval" />
 
             
 
             .
-        Otherwise, <paramref
-             name="rval" />
+        Otherwise, <paramref name="rval" />
 
             
 
-             will contain a <c
-            >0</c>
+             will contain a <c>0</c>
 
             
 
             
-        cast to a <see
-             cref="T:Mono.Unix.Native.XattrFlags" />
+        cast to a <see cref="T:Mono.Unix.Native.XattrFlags" />
 
             
 
@@ -10103,19 +9426,16 @@ class Test
           >
           <para
             >The current conversion functions are unable to determine
-        if a value in a <c
-            >[Flags]</c>
+        if a value in a <c>[Flags]</c>
 
             
 
-            -marked enumeration <i
-            >does not</i>
+            -marked enumeration <i>does not</i>
 
             
 
              
-        exist on the current platform.  As such, if <paramref
-             name="value" />
+        exist on the current platform.  As such, if <paramref name="value" />
 
             
 
@@ -10124,15 +9444,13 @@ class Test
         will not be present in the managed value returned.</para
           >
           <para
-            >This should only be a problem if <paramref
-             name="value" />
+            >This should only be a problem if <paramref name="value" />
             <i>was not</i>
 
             
 
              previously returned by 
-        <see
-             cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
+        <see cref="M:Mono.Unix.Native.NativeConvert.FromXattrFlags" />
 
             
 

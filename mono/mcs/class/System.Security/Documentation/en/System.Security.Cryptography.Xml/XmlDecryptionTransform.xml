@@ -25,29 +25,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+        >The <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
         
 
          class provides a transform that determines the order of XML Digital Signature and XML Encryption operations when both are performed on the same document.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
         
 
          class whenever you need to perform XML encryption and apply an XML digital signature to the same XML document.  </para
       >
       <para
-        >You must pass an <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+        >You must pass an <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
         
 
-         object to the <see
-         cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.EncryptedXml" />
+         object to the <see cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.EncryptedXml" />
 
         
 
@@ -78,8 +74,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
@@ -113,7 +108,11 @@
           <para>Adds a Uniform Resource Identifier (URI) to exclude from processing.</para>
         </summary>
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,13 +143,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You must pass an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >You must pass an <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
-             object to the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.EncryptedXml" />
+             object to the <see cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.EncryptedXml" />
 
             
 
@@ -160,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+            >Gets or sets an <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
 
             
 
@@ -194,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an XML representation of the parameters of an <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+            >Returns an XML representation of the parameters of an <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
@@ -205,8 +200,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+            >A list of the XML nodes that represent the transform-specific content needed to describe the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
@@ -236,8 +230,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -247,8 +240,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -280,8 +272,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >Returns the output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -291,8 +282,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The output of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
+            >The output of the current <see cref="T:System.Security.Cryptography.Xml.XmlDsigEnvelopedSignatureTransform" />
 
             
 
@@ -300,12 +290,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The type of the output to return. <see
-           cref="T:System.Xml.XmlNodeList" />
+          The type of the output to return. <see cref="T:System.Xml.XmlNodeList" />
 
           
 
@@ -330,36 +323,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array returned by the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.InputTypes" />
+            >The array returned by the <see cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.InputTypes" />
 
             
 
-             property must contain at least one element because every <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+             property must contain at least one element because every <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
              object must accept at least one type as valid input.</para
           >
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+            >An <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
-             object typically accepts one or more of the following types as input: <see
-             cref="T:System.IO.Stream" />
+             object typically accepts one or more of the following types as input: <see cref="T:System.IO.Stream" />
 
             
 
-            , <see
-             cref="T:System.Xml.XmlDocument" />
+            , <see cref="T:System.Xml.XmlDocument" />
 
             
 
-            , or <see
-             cref="T:System.Xml.XmlNodeList" />
+            , or <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -369,13 +356,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are valid inputs to the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDecryptionTransform.LoadInput(System.Object)" />
+            >Gets an array of types that are valid inputs to the <see cref="M:System.Security.Cryptography.Xml.XmlDecryptionTransform.LoadInput(System.Object)" />
 
             
 
-             method of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+             method of the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
@@ -411,8 +396,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the ID attribute of an <see
-             cref="T:System.Xml.XmlElement" />
+            >Determines whether the ID attribute of an <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -422,13 +406,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the ID attribute of the <paramref
-             name="inputElement" />
+            >true if the ID attribute of the <paramref name="inputElement" />
 
             
 
-             parameter matches the <paramref
-             name="idValue" />
+             parameter matches the <paramref name="idValue" />
 
             
 
@@ -436,29 +418,34 @@
           >
         </returns>
         <param name="inputElement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlElement" />
+          An <see cref="T:System.Xml.XmlElement" />
 
           
 
-           object with an ID attribute to compare with <paramref
-           name="idValue" />
+           object with an ID attribute to compare with <paramref name="idValue" />
 
           
 
           .</param
         >
         <param name="idValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The value to compare with the ID attribute of <paramref
-           name="inputElement" />
+          The value to compare with the ID attribute of <paramref name="inputElement" />
 
           
 
@@ -495,13 +482,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Parses the specified <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Parses the specified <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+             object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
@@ -509,17 +494,19 @@
           >
         </summary>
         <param name="nodeList">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.XmlNodeList" />
+          An <see cref="T:System.Xml.XmlNodeList" />
 
           
 
-           object that specifies transform-specific content for the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+           object that specifies transform-specific content for the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
           
 
@@ -549,8 +536,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The type of the input object must be one of the types in the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.InputTypes" />
+            >The type of the input object must be one of the types in the <see cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.InputTypes" />
 
             
 
@@ -560,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overridden in a derived class, loads the specified input into the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+            >When overridden in a derived class, loads the specified input into the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 
@@ -569,12 +554,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The input to load into the current <see
-           cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+          The input to load into the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
           
 
@@ -602,8 +590,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The array returned by the <see
-             cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.OutputTypes" />
+            >The array returned by the <see cref="P:System.Security.Cryptography.Xml.XmlDecryptionTransform.OutputTypes" />
 
             
 
@@ -613,13 +600,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an array of types that are possible outputs from the <see
-             cref="M:System.Security.Cryptography.Xml.XmlDecryptionTransform.GetOutput" />
+            >Gets an array of types that are possible outputs from the <see cref="M:System.Security.Cryptography.Xml.XmlDecryptionTransform.GetOutput" />
 
             
 
-             methods of the current <see
-             cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
+             methods of the current <see cref="T:System.Security.Cryptography.Xml.XmlDecryptionTransform" />
 
             
 

@@ -34,8 +34,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A visual designer can display the description when referencing the component member, such as in a Properties window. Access the <see
-         cref="P:System.Diagnostics.MonitoringDescriptionAttribute.Description" />
+        >A visual designer can display the description when referencing the component member, such as in a Properties window. Access the <see cref="P:System.Diagnostics.MonitoringDescriptionAttribute.Description" />
 
         
 
@@ -71,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The description you specify in the <see
-             cref="M:System.Diagnostics.MonitoringDescriptionAttribute.#ctor(System.String)" />
+            >The description you specify in the <see cref="M:System.Diagnostics.MonitoringDescriptionAttribute.#ctor(System.String)" />
 
             
 
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.MonitoringDescriptionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.MonitoringDescriptionAttribute" />
 
             
 
@@ -91,7 +88,11 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

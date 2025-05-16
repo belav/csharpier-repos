@@ -26,54 +26,45 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Linq.Expressions.LambdaExpression" />
+        >The <see cref="T:System.Linq.Expressions.LambdaExpression" />
 
         
 
-         type represents a lambda expression in the form of an expression tree. The <see
-         cref="T:System.Linq.Expressions.Expression`1" />
+         type represents a lambda expression in the form of an expression tree. The <see cref="T:System.Linq.Expressions.Expression`1" />
 
         
 
-         type, which derives from <see
-         cref="T:System.Linq.Expressions.LambdaExpression" />
+         type, which derives from <see cref="T:System.Linq.Expressions.LambdaExpression" />
 
         
 
-         and captures the type of the lambda expression more explicitly, can also be used to represent a lambda expression. At runtime, an expression tree node that represents a lambda expression is always of type <see
-         cref="T:System.Linq.Expressions.Expression`1" />
+         and captures the type of the lambda expression more explicitly, can also be used to represent a lambda expression. At runtime, an expression tree node that represents a lambda expression is always of type <see cref="T:System.Linq.Expressions.Expression`1" />
 
         
 
         .</para
       >
       <para
-        >The value of the <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+        >The value of the <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
-         property of a <see
-         cref="T:System.Linq.Expressions.LambdaExpression" />
+         property of a <see cref="T:System.Linq.Expressions.LambdaExpression" />
 
         
 
-         is <see
-         cref="F:System.Linq.Expressions.ExpressionType.Lambda" />
+         is <see cref="F:System.Linq.Expressions.ExpressionType.Lambda" />
 
         
 
         .</para
       >
       <para
-        >Use the <see
-         cref="M:System.Linq.Expressions.Expression.Lambda(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" />
+        >Use the <see cref="M:System.Linq.Expressions.Expression.Lambda(System.Linq.Expressions.Expression,System.Linq.Expressions.ParameterExpression[])" />
 
         
 
-         factory methods to create a <see
-         cref="T:System.Linq.Expressions.LambdaExpression" />
+         factory methods to create a <see cref="T:System.Linq.Expressions.LambdaExpression" />
 
         
 
@@ -131,13 +122,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Linq.Expressions.LambdaExpression.Compile" />
+            >The <see cref="M:System.Linq.Expressions.LambdaExpression.Compile" />
 
             
 
-             method can be used to convert a <see
-             cref="T:System.Linq.Expressions.LambdaExpression" />
+             method can be used to convert a <see cref="T:System.Linq.Expressions.LambdaExpression" />
 
             
 
@@ -151,8 +140,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Delegate" />
+            >A <see cref="T:System.Delegate" />
 
             
 
@@ -194,7 +182,11 @@
           <para>A delegate containing the compiled version of the lambda.</para>
         </returns>
         <param name="debugInfoGenerator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,12 +220,15 @@
           <para>Compiles the lambda into a method definition.</para>
         </summary>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.Emit.MethodBuilder" />
+          A <see cref="T:System.Reflection.Emit.MethodBuilder" />
 
           
 
@@ -271,19 +266,26 @@
           <para>Compiles the lambda into a method definition and custom debug information.</para>
         </summary>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Reflection.Emit.MethodBuilder" />
+          A <see cref="T:System.Reflection.Emit.MethodBuilder" />
 
           
 
            which will be used to hold the lambda's IL.</param
         >
         <param name="debugInfoGenerator">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -335,8 +337,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the node type of this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Returns the node type of this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 
@@ -425,8 +426,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the static type of the expression that this <see
-             cref="T:System.Linq.Expressions.Expression" />
+            >Gets the static type of the expression that this <see cref="T:System.Linq.Expressions.Expression" />
 
             
 

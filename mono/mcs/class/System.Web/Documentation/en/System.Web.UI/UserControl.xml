@@ -50,13 +50,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.UserControl" />
+        >The <see cref="T:System.Web.UI.UserControl" />
 
         
 
-         class is associated with files that have .ascx extensions. These files are compiled at run time as <see
-         cref="T:System.Web.UI.UserControl" />
+         class is associated with files that have .ascx extensions. These files are compiled at run time as <see cref="T:System.Web.UI.UserControl" />
 
         
 
@@ -64,8 +62,7 @@
       >
       <para>You can nest user controls by declaring one .ascx file in another including the latter in a Web Forms page.</para>
       <para
-        >User controls are contained in ASP.NET Web Forms pages, and offer Web developers an easy way to capture commonly used Web UI. They are instantiated and cached in ways similar to <see
-         cref="T:System.Web.UI.Page" />
+        >User controls are contained in ASP.NET Web Forms pages, and offer Web developers an easy way to capture commonly used Web UI. They are instantiated and cached in ways similar to <see cref="T:System.Web.UI.Page" />
 
         
 
@@ -73,8 +70,7 @@
       >
       <para>Derive from this class if you want to create a user control using the code-behind technique. This is recommended if you are developing Web Forms pages using this technique.</para>
       <para
-        >For information about creating user controls declaratively, see <format
-         type="text/html">
+        >For information about creating user controls declaratively, see <format type="text/html">
           <a href="5e601b3d-bb16-4dbe-9e35-7e92a34565ca">Web Forms User Controls</a>
         </format>
 
@@ -98,21 +94,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You do not typically create an instance of the <see
-             cref="T:System.Web.UI.UserControl" />
+            >You do not typically create an instance of the <see cref="T:System.Web.UI.UserControl" />
 
             
 
-             class. To create your own user control, inherit from the <see
-             cref="T:System.Web.UI.UserControl" />
+             class. To create your own user control, inherit from the <see cref="T:System.Web.UI.UserControl" />
 
             
 
              class.</para
           >
           <para
-            >To create a new user control on an ASP.NET page programmatically, use the <see
-             cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
+            >To create a new user control on an ASP.NET page programmatically, use the <see cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
 
             
 
@@ -122,8 +115,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.UserControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -147,16 +139,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.HttpApplicationState" />
-        </value>
+        <value>a <see cref="T:System.Web.HttpApplicationState" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="P:System.Web.HttpContext.Application" />
+            >Gets the <see cref="P:System.Web.HttpContext.Application" />
 
             
 
@@ -215,20 +203,15 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.Caching.Cache" />
-        </value>
+        <value>a <see cref="T:System.Web.Caching.Cache" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.UserControl.Cache" />
+            >The <see cref="P:System.Web.UI.UserControl.Cache" />
 
             
 
-             allows you to store data for later retrieval, and is shared across the application. The data that you store is independent of the current page or user session. Access data through this property to boost page or application performance if creating the data is slow. For more information about using the Cache, see <format
-             type="text/html">
+             allows you to store data for later retrieval, and is shared across the application. The data that you store is independent of the current page or user session. Access data through this property to boost page or application performance if creating the data is slow. For more information about using the Cache, see <format type="text/html">
               <a href="206f977d-7860-4d20-bdd5-c3b3d8479f3d">Caching Application Data</a>
             </format>
 
@@ -240,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.Caching.Cache" />
+            >Gets the <see cref="T:System.Web.Caching.Cache" />
 
             
 
@@ -287,31 +269,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.UserControl.CachePolicy" />
+            >The <see cref="P:System.Web.UI.UserControl.CachePolicy" />
 
             
 
-             property defines the cache parameters for the instance of the <see
-             cref="T:System.Web.UI.UserControl" />
+             property defines the cache parameters for the instance of the <see cref="T:System.Web.UI.UserControl" />
 
             
 
-             class. The <see
-             cref="P:System.Web.UI.UserControl.CachePolicy" />
+             class. The <see cref="P:System.Web.UI.UserControl.CachePolicy" />
 
             
 
-             property is read-only; however, you can set the properties of the <see
-             cref="T:System.Web.UI.ControlCachePolicy" />
+             property is read-only; however, you can set the properties of the <see cref="T:System.Web.UI.ControlCachePolicy" />
 
             
 
              object that it returns. </para
           >
           <para
-            >The <see
-             cref="P:System.Web.UI.UserControl.CachePolicy" />
+            >The <see cref="P:System.Web.UI.UserControl.CachePolicy" />
 
             
 
@@ -365,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.UI.UserControl" />
+            >Initializes the <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -374,12 +350,15 @@
           >
         </summary>
         <param name="page">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.Page" />
+          The <see cref="T:System.Web.UI.Page" />
 
           
 
@@ -439,8 +418,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is used primarily by the .NET Framework infrastructure and is not intended to be used directly from your code.  However, control developers can override this method to specify how a custom server control restores its view state. For more information, see <format
-             type="text/html">
+            >This method is used primarily by the .NET Framework infrastructure and is not intended to be used directly from your code.  However, control developers can override this method to specify how a custom server control restores its view state. For more information, see <format type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
 
@@ -449,18 +427,15 @@
             .</para
           >
           <para
-            >You can load a view-state value into a field so that you do not have to retrieve it from the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+            >You can load a view-state value into a field so that you do not have to retrieve it from the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
-             property later. You can also insert the value into the <see
-             cref="P:System.Web.UI.Control.ViewState" />
+             property later. You can also insert the value into the <see cref="P:System.Web.UI.Control.ViewState" />
 
             
 
-             property just before calling <see
-             cref="M:System.Web.UI.UserControl.SaveViewState" />
+             property just before calling <see cref="M:System.Web.UI.UserControl.SaveViewState" />
 
             
 
@@ -470,8 +445,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Restores the view-state information from a previous user control request that was saved by the <see
-             cref="M:System.Web.UI.UserControl.SaveViewState" />
+            >Restores the view-state information from a previous user control request that was saved by the <see cref="M:System.Web.UI.UserControl.SaveViewState" />
 
             
 
@@ -479,12 +453,15 @@
           >
         </summary>
         <param name="savedState">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -509,13 +486,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >While similar to the <see
-             cref="M:System.Web.UI.Page.MapPath(System.String)" />
+            >While similar to the <see cref="M:System.Web.UI.Page.MapPath(System.String)" />
 
             
 
-             method, this method maps the path from the .ascx file's location, not the .aspx file's location. You can use this method to obtain a path to a directory of images or other resources associated with your <see
-             cref="T:System.Web.UI.UserControl" />
+             method, this method maps the path from the .ascx file's location, not the .aspx file's location. You can use this method to obtain a path to a directory of images or other resources associated with your <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -531,7 +506,11 @@
           <para>The physical path to the file.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -556,18 +535,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When notified by this method, the <see
-             cref="T:System.Web.UI.UserControl" />
+            >When notified by this method, the <see cref="T:System.Web.UI.UserControl" />
 
             
 
-             must perform any initialization steps that are required to create and set up an instance. This method confirms site information associated with the <see
-             cref="T:System.Web.UI.UserControl" />
+             must perform any initialization steps that are required to create and set up an instance. This method confirms site information associated with the <see cref="T:System.Web.UI.UserControl" />
 
             
 
-             instance and ensures that the class is initialized correctly as a <see
-             cref="T:System.Web.UI.UserControl" />
+             instance and ensures that the class is initialized correctly as a <see cref="T:System.Web.UI.UserControl" />
 
             
 
@@ -578,8 +554,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
@@ -587,12 +562,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -612,16 +590,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.HttpRequest" />
-        </value>
+        <value>a <see cref="T:System.Web.HttpRequest" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpRequest" />
+            >Gets the <see cref="T:System.Web.HttpRequest" />
 
             
 
@@ -650,16 +624,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.HttpResponse" />
-        </value>
+        <value>a <see cref="T:System.Web.HttpResponse" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpResponse" />
+            >Gets the <see cref="T:System.Web.HttpResponse" />
 
             
 
@@ -714,15 +684,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.HttpServerUtility" />
-        </value>
+        <value>a <see cref="T:System.Web.HttpServerUtility" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.UserControl.Server" />
+            >The <see cref="P:System.Web.UI.UserControl.Server" />
 
             
 
@@ -732,8 +698,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.HttpServerUtility" />
+            >Gets the <see cref="T:System.Web.HttpServerUtility" />
 
             
 
@@ -765,16 +730,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.SessionState.HttpSessionState" />
-        </value>
+        <value>a <see cref="T:System.Web.SessionState.HttpSessionState" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.SessionState.HttpSessionState" />
+            >Gets the <see cref="T:System.Web.SessionState.HttpSessionState" />
 
             
 
@@ -815,8 +776,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.UserControl.System.Web.UI.IAttributeAccessor.GetAttribute(System.String)" />
+            >Use the <see cref="M:System.Web.UI.UserControl.System.Web.UI.IAttributeAccessor.GetAttribute(System.String)" />
 
             
 
@@ -832,7 +792,11 @@
           <para>The value of the specified user control attribute.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -861,8 +825,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.UserControl.System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.UI.UserControl.System.Web.UI.IAttributeAccessor.SetAttribute(System.String,System.String)" />
 
             
 
@@ -874,14 +837,22 @@
           <para>Sets the value of the specified user control attribute.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute to set.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -987,16 +958,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.TraceContext" />
-        </value>
+        <value>a <see cref="T:System.Web.TraceContext" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Tracing tracks and presents the execution details about a Web request. For trace data to be visible in a rendered page, you must enable tracing for that page.</para>
           <para
-            >By default, page tracing is disabled. To enable tracing for a page, use the <format
-             type="text/html">
+            >By default, page tracing is disabled. To enable tracing for a page, use the <format type="text/html">
               <a href="f06cf9e5-22bb-461d-8b8f-549e53ff40a4">@ Page</a>
             </format>
 
@@ -1008,8 +975,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Web.TraceContext" />
+            >Gets the <see cref="T:System.Web.TraceContext" />
 
             
 

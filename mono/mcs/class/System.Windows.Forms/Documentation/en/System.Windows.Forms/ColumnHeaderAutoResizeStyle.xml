@@ -16,23 +16,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
+        >The <see cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
 
         
 
-         is used by the <see
-         cref="M:System.Windows.Forms.ListView.AutoResizeColumn(System.Int32,System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+         is used by the <see cref="M:System.Windows.Forms.ListView.AutoResizeColumn(System.Int32,System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
 
         
 
-        , <see
-         cref="M:System.Windows.Forms.ListView.AutoResizeColumns(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+        , <see cref="M:System.Windows.Forms.ListView.AutoResizeColumns(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
 
         
 
-        , and <see
-         cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+        , and <see cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
 
         
 
@@ -42,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies how a column contained in a <see
-         cref="T:System.Windows.Forms.ListView" />
+        >Specifies how a column contained in a <see cref="T:System.Windows.Forms.ListView" />
 
         
 

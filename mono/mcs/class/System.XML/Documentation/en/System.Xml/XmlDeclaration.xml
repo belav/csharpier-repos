@@ -57,13 +57,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see
-             cref="T:System.Xml.XmlDeclaration" />
+            >Do not instantiate an <see cref="T:System.Xml.XmlDeclaration" />
 
             
 
-             directly; instead, use methods such as <see
-             cref="Overload:System.Xml.XmlDocument.CreateNode" />
+             directly; instead, use methods such as <see cref="Overload:System.Xml.XmlDocument.CreateNode" />
 
             
 
@@ -73,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlDeclaration" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlDeclaration" />
 
             
 
@@ -82,43 +79,56 @@
           >
         </summary>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The XML version; see the <see
-           cref="P:System.Xml.XmlDeclaration.Version" />
+          The XML version; see the <see cref="P:System.Xml.XmlDeclaration.Version" />
 
           
 
            property.</param
         >
         <param name="encoding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The encoding scheme; see the <see
-           cref="P:System.Xml.XmlDeclaration.Encoding" />
+          The encoding scheme; see the <see cref="P:System.Xml.XmlDeclaration.Encoding" />
 
           
 
            property.</param
         >
         <param name="standalone">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Indicates whether the XML document depends on an external DTD; see the <see
-           cref="P:System.Xml.XmlDeclaration.Standalone" />
+          Indicates whether the XML document depends on an external DTD; see the <see cref="P:System.Xml.XmlDeclaration.Standalone" />
 
           
 
            property.</param
         >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,16 +161,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see
-             cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+            >CloneNode serves as a copy constructor for nodes. To see how this method behaves with other node types, see <see cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
 
             
 
             .</para
           >
           <para
-            >The cloned node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >The cloned node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
@@ -176,7 +184,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,8 +401,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -398,7 +409,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -431,13 +446,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the encoding and standalone attributes are determined by the <see
-             cref="P:System.Xml.XmlDeclaration.Encoding" />
+            >The value of the encoding and standalone attributes are determined by the <see cref="P:System.Xml.XmlDeclaration.Encoding" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlDeclaration.Standalone" />
+             and <see cref="P:System.Xml.XmlDeclaration.Standalone" />
 
             
 
@@ -447,8 +460,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -456,7 +468,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

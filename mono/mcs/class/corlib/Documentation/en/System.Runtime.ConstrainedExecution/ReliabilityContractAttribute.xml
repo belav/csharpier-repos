@@ -30,21 +30,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
+        >The <see cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
 
         
 
-         attribute provides a mechanism for you to document your code, and to indicate what type of reliability guarantees you can make in the face of exceptional conditions that could potentially lead to an inconsistent state. In this context, exceptional conditions are defined as asynchronous exceptions that can be generated at run time by the common language runtime, such as aborted threads, out-of-memory situations, and stack overflows. You can apply the <see
-         cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
+         attribute provides a mechanism for you to document your code, and to indicate what type of reliability guarantees you can make in the face of exceptional conditions that could potentially lead to an inconsistent state. In this context, exceptional conditions are defined as asynchronous exceptions that can be generated at run time by the common language runtime, such as aborted threads, out-of-memory situations, and stack overflows. You can apply the <see cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
 
         
 
          attribute to assemblies, types, and methods. </para
       >
       <para
-        >Use this attribute with the <see
-         cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+        >Use this attribute with the <see cref="T:System.Runtime.ConstrainedExecution.Consistency" />
 
         
 
@@ -84,18 +81,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
 
             
 
-             class with the specified <see
-             cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+             class with the specified <see cref="T:System.Runtime.ConstrainedExecution.Consistency" />
 
             
 
-             guarantee and <see
-             cref="T:System.Runtime.ConstrainedExecution.Cer" />
+             guarantee and <see cref="T:System.Runtime.ConstrainedExecution.Cer" />
 
             
 
@@ -103,24 +97,30 @@
           >
         </summary>
         <param name="consistencyGuarantee">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+          One of the <see cref="T:System.Runtime.ConstrainedExecution.Consistency" />
 
           
 
            values. </param
         >
         <param name="cer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Runtime.ConstrainedExecution.Cer" />
+          One of the <see cref="T:System.Runtime.ConstrainedExecution.Cer" />
 
           
 
@@ -179,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the value of the <see
-             cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+            >Gets the value of the <see cref="T:System.Runtime.ConstrainedExecution.Consistency" />
 
             
 

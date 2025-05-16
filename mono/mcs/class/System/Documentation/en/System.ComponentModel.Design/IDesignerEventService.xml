@@ -23,8 +23,7 @@
 
         
 
-         provides notification when a new root designer is created, changed, or disposed. A root designer provides design time support for the base component of a document in designer view. The <see
-         cref="E:System.ComponentModel.Design.IDesignerEventService.SelectionChanged" />
+         provides notification when a new root designer is created, changed, or disposed. A root designer provides design time support for the base component of a document in designer view. The <see cref="E:System.ComponentModel.Design.IDesignerEventService.SelectionChanged" />
 
         
 

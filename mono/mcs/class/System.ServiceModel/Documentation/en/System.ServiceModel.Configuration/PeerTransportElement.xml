@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.PeerTransportElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.PeerTransportElement" />
 
             
 
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -108,8 +106,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Channels.BindingElement" />
+            >A <see cref="T:System.ServiceModel.Channels.BindingElement" />
 
             
 
@@ -147,8 +144,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this property is not set, or is set to a null reference, the associated <see
-             cref="T:System.ServiceModel.PeerNode" />
+            >If this property is not set, or is set to a null reference, the associated <see cref="T:System.ServiceModel.PeerNode" />
 
             
 
@@ -241,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the port value is invalid, <see
-             cref="T:System.Exceptions.ArgumentException" />
+            >If the port value is invalid, <see cref="T:System.Exceptions.ArgumentException" />
 
             
 
@@ -277,18 +272,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+            >Gets a <see cref="T:System.Configuration.ConfigurationPropertyCollection" />
 
             
 
-             instance that contains a collection of <see
-             cref="T:System.Configuration.ConfigurationProperty" />
+             instance that contains a collection of <see cref="T:System.Configuration.ConfigurationProperty" />
 
             
 
-             objects that can be attributes or <see
-             cref="T:System.Configuration ConfigurationElement" />
+             objects that can be attributes or <see cref="T:System.Configuration ConfigurationElement" />
 
             
 

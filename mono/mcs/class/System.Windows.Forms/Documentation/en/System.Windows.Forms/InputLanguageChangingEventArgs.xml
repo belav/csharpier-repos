@@ -20,57 +20,48 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use the data from the <see
-         cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
+        >You can use the data from the <see cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
 
         
 
-         class to prepare to change Input Method Editors (IME) or swap right-to-left values. You can also change a thread's <see
-         cref="P:System.Threading.Thread.CurrentCulture" />
+         class to prepare to change Input Method Editors (IME) or swap right-to-left values. You can also change a thread's <see cref="P:System.Threading.Thread.CurrentCulture" />
 
         
 
-         and <see
-         cref="P:System.Threading.Thread.CurrentUICulture" />
+         and <see cref="P:System.Threading.Thread.CurrentUICulture" />
 
         
 
-         properties so that different resources get picked up. To prevent the input language from changing, set the <see
-         cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+         properties so that different resources get picked up. To prevent the input language from changing, set the <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
         
 
          property to true.</para
       >
       <para
-        >An <see
-         cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
+        >An <see cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
 
         
 
-         identifies the requested input language and the character set of new input language. The <see
-         cref="P:System.Windows.Forms.InputLanguageChangingEventArgs.Culture" />
+         identifies the requested input language and the character set of new input language. The <see cref="P:System.Windows.Forms.InputLanguageChangingEventArgs.Culture" />
 
         
 
          property identifies the locale of the requested language.</para
       >
       <para
-        >The <see
-         cref="E:System.Windows.Forms.Form.InputLanguageChanging" />
+        >The <see cref="E:System.Windows.Forms.Form.InputLanguageChanging" />
 
         
 
-         event precedes the <see
-         cref="E:System.Windows.Forms.Form.InputLanguageChanged" />
+         event precedes the <see cref="E:System.Windows.Forms.Form.InputLanguageChanged" />
 
         
 
          event.</para
       >
       <para
-        >For information about handling events, see <format
-         type="text/html">
+        >For information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -82,8 +73,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.Form.InputLanguageChanging" />
+        >Provides data for the <see cref="E:System.Windows.Forms.Form.InputLanguageChanging" />
 
         
 
@@ -107,8 +97,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
 
             
 
@@ -116,14 +105,22 @@
           >
         </summary>
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The locale of the requested input language. </param
         >
         <param name="sysCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,8 +147,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
 
             
 
@@ -159,14 +155,22 @@
           >
         </summary>
         <param name="inputLanguage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The requested input language. </param
         >
         <param name="sysCharSet">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -192,13 +196,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.InputLanguageChangedEventArgs.Culture" />
+            >The <see cref="P:System.Windows.Forms.InputLanguageChangedEventArgs.Culture" />
 
             
 
-             property specifies a <see
-             cref="T:System.Globalization.CultureInfo" />
+             property specifies a <see cref="T:System.Globalization.CultureInfo" />
 
             
 

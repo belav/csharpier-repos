@@ -41,21 +41,18 @@
          can represent a literal block of code that is included directly in the source without modification.</para
       >
       <para
-        >A <see
-         cref="T:System.CodeDom.CodeSnippetCompileUnit" />
+        >A <see cref="T:System.CodeDom.CodeSnippetCompileUnit" />
 
         
 
          stores a section of code, exactly in its original format, as a string. The CodeDOM does not translate literal code fragments. Literal code fragments are stored and output in their original format. CodeDOM objects that contain literal code are provided so developers can encapsulate code that is already in the target language.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeSnippetCompileUnit.Value" />
+        >The <see cref="P:System.CodeDom.CodeSnippetCompileUnit.Value" />
 
         
 
-         property contains the literal code fragment as a string. The <see
-         cref="P:System.CodeDom.CodeSnippetCompileUnit.LinePragma" />
+         property contains the literal code fragment as a string. The <see cref="P:System.CodeDom.CodeSnippetCompileUnit.LinePragma" />
 
         
 
@@ -84,8 +81,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor you should also set the <see
-             cref="P:System.CodeDom.CodeSnippetCompileUnit.Value" />
+            >If you use this constructor you should also set the <see cref="P:System.CodeDom.CodeSnippetCompileUnit.Value" />
 
             
 
@@ -95,8 +91,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeSnippetCompileUnit" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetCompileUnit" />
 
             
 
@@ -126,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeSnippetCompileUnit" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeSnippetCompileUnit" />
 
             
 
@@ -135,7 +129,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

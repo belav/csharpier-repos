@@ -23,13 +23,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides simple functionality for enumerating resources for a component or object. The <see
-         cref="T:System.ComponentModel.ComponentResourceManager" />
+        >Provides simple functionality for enumerating resources for a component or object. The <see cref="T:System.ComponentModel.ComponentResourceManager" />
 
         
 
-         class is a <see
-         cref="T:System.Resources.ResourceManager" />
+         class is a <see cref="T:System.Resources.ResourceManager" />
 
         
 
@@ -56,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.ComponentResourceManager" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.ComponentResourceManager" />
 
             
 
@@ -86,13 +83,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.ComponentModel.ComponentResourceManager" />
+            >Creates a <see cref="T:System.ComponentModel.ComponentResourceManager" />
 
             
 
-             that looks up resources in satellite assemblies based on information from the specified <see
-             cref="T:System.Type" />
+             that looks up resources in satellite assemblies based on information from the specified <see cref="T:System.Type" />
 
             
 
@@ -100,17 +95,19 @@
           >
         </summary>
         <param name="t">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
-           from which the <see
-           cref="T:System.ComponentModel.ComponentResourceManager" />
+           from which the <see cref="T:System.ComponentModel.ComponentResourceManager" />
 
           
 
@@ -144,18 +141,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method examines all the resources for the current culture used in the development environment. It attempts to find a resource with a key in the format of <paramref
-             name="objectName" />
+            >This method examines all the resources for the current culture used in the development environment. It attempts to find a resource with a key in the format of <paramref name="objectName" />
 
             
 
-            .propertyName, where <paramref
-             name="objectName" />
+            .propertyName, where <paramref name="objectName" />
 
             
 
-             is passed in as a parameter and propertyName is the name of a property. It will then apply that resource's <paramref
-             name="value" />
+             is passed in as a parameter and propertyName is the name of a property. It will then apply that resource's <paramref name="value" />
 
             
 
@@ -167,24 +161,30 @@
           <para>Applies a resource's value to the corresponding property of the object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that contains the property value to be applied. </param
         >
         <param name="objectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -219,31 +219,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method examines all the resources for the provided culture. If <paramref
-             name="culture" />
+            >This method examines all the resources for the provided culture. If <paramref name="culture" />
 
             
 
              is null, the current culture is assumed. </para
           >
           <para
-            >The <see
-             cref="M:System.ComponentModel.ComponentResourceManager.ApplyResources(System.Object,System.String,System.Globalization.CultureInfo)" />
+            >The <see cref="M:System.ComponentModel.ComponentResourceManager.ApplyResources(System.Object,System.String,System.Globalization.CultureInfo)" />
 
             
 
-             method attempts to find a resource with a key in the format of <paramref
-             name="objectName" />
+             method attempts to find a resource with a key in the format of <paramref name="objectName" />
 
             
 
-            .propertyName, where <paramref
-             name="objectName" />
+            .propertyName, where <paramref name="objectName" />
 
             
 
-             is passed in as a parameter and propertyName is the name of a property. It will then apply that resource's <paramref
-             name="value" />
+             is passed in as a parameter and propertyName is the name of a property. It will then apply that resource's <paramref name="value" />
 
             
 
@@ -255,31 +250,41 @@
           <para>Applies a resource's value to the corresponding property of the object.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
            that contains the property value to be applied. </param
         >
         <param name="objectName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the name of the object to look up in the resources.</param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

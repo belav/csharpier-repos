@@ -49,8 +49,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.AccessControl.AceFlags" />
+            >An <see cref="T:System.Security.AccessControl.AceFlags" />
 
             
 
@@ -60,13 +59,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Security.AccessControl.AceFlags" />
+            >Gets or sets the <see cref="T:System.Security.AccessControl.AceFlags" />
 
             
 
-             associated with this <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+             associated with this <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -147,13 +144,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the length, in bytes, of the binary representation of the current <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Gets the length, in bytes, of the binary representation of the current <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
-             object. This length should be used before marshaling the ACL into a binary array with the <see
-             cref="M:System.Security.AccessControl.GenericAce.GetBinaryForm" />
+             object. This length should be used before marshaling the ACL into a binary array with the <see cref="M:System.Security.AccessControl.GenericAce.GetBinaryForm" />
 
             
 
@@ -190,8 +185,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >The <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -227,8 +221,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Creates a <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -238,8 +231,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >The <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -247,19 +239,26 @@
           >
         </returns>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The binary data from which to create the new <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The binary data from which to create the new <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
            object.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -290,13 +289,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+             object is equal to the current <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -306,13 +303,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >true if the specified <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
-             object is equal to the current <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+             object is equal to the current <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -320,17 +315,19 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
-           object to compare to the current <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+           object to compare to the current <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
@@ -365,8 +362,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Marshals the contents of the <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Marshals the contents of the <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -374,19 +370,26 @@
           >
         </summary>
         <param name="binaryForm">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The byte array into which the contents of the <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The byte array into which the contents of the <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
            is marshaled.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -415,13 +418,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serves as a hash function for the <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Serves as a hash function for the <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
-             class. The  <see
-             cref="M:System.Security.AccessControl.GenericAce.GetHashCode" />
+             class. The  <see cref="M:System.Security.AccessControl.GenericAce.GetHashCode" />
 
             
 
@@ -431,8 +432,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >A hash code for the current <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -516,8 +516,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -527,8 +526,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >true if the two <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -536,24 +534,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The first <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
            object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The second <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
@@ -588,8 +592,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >Determines whether the specified <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -599,8 +602,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the two <see
-             cref="T:System.Security.AccessControl.GenericAce" />
+            >true if the two <see cref="T:System.Security.AccessControl.GenericAce" />
 
             
 
@@ -608,24 +610,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The first <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 
            object to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Security.AccessControl.GenericAce" />
+          The second <see cref="T:System.Security.AccessControl.GenericAce" />
 
           
 

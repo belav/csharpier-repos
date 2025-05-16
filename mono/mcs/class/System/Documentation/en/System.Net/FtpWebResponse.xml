@@ -19,64 +19,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of <see
-         cref="T:System.Net.FtpWebResponse" />
+        >Instances of <see cref="T:System.Net.FtpWebResponse" />
 
         
 
-         are obtained by calling the <see
-         cref="M:System.Net.FtpWebRequest.GetResponse" />
+         are obtained by calling the <see cref="M:System.Net.FtpWebRequest.GetResponse" />
 
         
 
-         method. The returned object must be cast to an <see
-         cref="T:System.Net.FtpWebResponse" />
+         method. The returned object must be cast to an <see cref="T:System.Net.FtpWebResponse" />
 
         
 
-        . When your application no longer needs the <see
-         cref="T:System.Net.FtpWebResponse" />
+        . When your application no longer needs the <see cref="T:System.Net.FtpWebResponse" />
 
         
 
-         object, call the <see
-         cref="M:System.Net.FtpWebResponse.Close" />
+         object, call the <see cref="M:System.Net.FtpWebResponse.Close" />
 
         
 
-         method to free the resources held by the <see
-         cref="T:System.Net.FtpWebResponse" />
+         method to free the resources held by the <see cref="T:System.Net.FtpWebResponse" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="P:System.Net.FtpWebResponse.StatusCode" />
+        >The <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
         
 
-         property contains the status code returned by the server, and the <see
-         cref="P:System.Net.FtpWebResponse.StatusDescription" />
+         property contains the status code returned by the server, and the <see cref="P:System.Net.FtpWebResponse.StatusDescription" />
 
         
 
          property returns the status code and a message that describes the status. The values returned by these properties change as the messages are returned by the server.</para
       >
       <para
-        >Any data returned by the request, such as the list of file names returned for a <see
-         cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
+        >Any data returned by the request, such as the list of file names returned for a <see cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
 
         
 
-         request, is available in the stream returned by the <see
-         cref="M:System.Net.FtpWebResponse.GetResponseStream" />
+         request, is available in the stream returned by the <see cref="M:System.Net.FtpWebResponse.GetResponseStream" />
 
         
 
-         method. The length of the stream data can be obtained from the <see
-         cref="P:System.Net.FtpWebResponse.ContentLength" />
+         method. The length of the stream data can be obtained from the <see cref="P:System.Net.FtpWebResponse.ContentLength" />
 
         
 
@@ -130,18 +119,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.FtpWebResponse.Close" />
+            >The <see cref="M:System.Net.FtpWebResponse.Close" />
 
             
 
-             method closes the data stream returned by the <see
-             cref="M:System.Net.FtpWebResponse.GetResponseStream" />
+             method closes the data stream returned by the <see cref="M:System.Net.FtpWebResponse.GetResponseStream" />
 
             
 
-             method if the <see
-             cref="P:System.Net.FtpWebRequest.KeepAlive" />
+             method if the <see cref="P:System.Net.FtpWebRequest.KeepAlive" />
 
             
 
@@ -149,8 +135,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This member outputs trace information when you enable network tracing in your application. For more information, see <format
-               type="text/html">
+              >This member outputs trace information when you enable network tracing in your application. For more information, see <format type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804"
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
@@ -185,51 +170,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a response stream is returned by the FTP server, the <see
-             cref="P:System.Net.FtpWebResponse.ContentLength" />
+            >When a response stream is returned by the FTP server, the <see cref="P:System.Net.FtpWebResponse.ContentLength" />
 
             
 
-             property contains the number of bytes in the stream. <see
-             cref="P:System.Net.FtpWebResponse.ContentLength" />
+             property contains the number of bytes in the stream. <see cref="P:System.Net.FtpWebResponse.ContentLength" />
 
             
 
-             returns −1 if no data was returned in the response or if the server did not send content length information. The return value is greater than or equal to zero if data was or should have been returned. For example, for requests that use the <see
-             cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
+             returns −1 if no data was returned in the response or if the server did not send content length information. The return value is greater than or equal to zero if data was or should have been returned. For example, for requests that use the <see cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
 
             
 
-             field, the <see
-             cref="P:System.Net.FtpWebResponse.ContentLength" />
+             field, the <see cref="P:System.Net.FtpWebResponse.ContentLength" />
 
             
 
-             property always returns −1. For requests that use the <see
-             cref="F:System.Net.WebRequestMethods.Ftp.UploadFile" />
+             property always returns −1. For requests that use the <see cref="F:System.Net.WebRequestMethods.Ftp.UploadFile" />
 
             
 
-             method, the <see
-             cref="P:System.Net.FtpWebResponse.ContentLength" />
+             method, the <see cref="P:System.Net.FtpWebResponse.ContentLength" />
 
             
 
-             property is always zero. For requests that use the <see
-             cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
+             property is always zero. For requests that use the <see cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
 
             
 
              method, the property is greater than zero if the downloaded file contained data and is zero if it was empty. </para
           >
           <para
-            >For requests that use the <see
-             cref="F:System.Net.WebRequestMethods.Ftp.GetFileSize" />
+            >For requests that use the <see cref="F:System.Net.WebRequestMethods.Ftp.GetFileSize" />
 
             
 
-             method, <see
-             cref="P:System.Net.FtpWebResponse.ContentLength" />
+             method, <see cref="P:System.Net.FtpWebResponse.ContentLength" />
 
             
 
@@ -259,13 +235,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.FtpWebResponse.ExitMessage" />
+            >The <see cref="P:System.Net.FtpWebResponse.ExitMessage" />
 
             
 
-             property is not available until the connection to the server is closed or reused. If the <see
-             cref="P:System.Net.FtpWebRequest.KeepAlive" />
+             property is not available until the connection to the server is closed or reused. If the <see cref="P:System.Net.FtpWebRequest.KeepAlive" />
 
             
 
@@ -301,21 +275,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After reading the data, you must close the stream. The stream is automatically closed when you close the <see
-             cref="T:System.Net.FtpWebResponse" />
+            >After reading the data, you must close the stream. The stream is automatically closed when you close the <see cref="T:System.Net.FtpWebResponse" />
 
             
 
              object that contains it.</para
           >
           <para
-            >An exception is thrown unless the request method is <see
-             cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
+            >An exception is thrown unless the request method is <see cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
 
             
 
-             or <see
-             cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
+             or <see cref="F:System.Net.WebRequestMethods.Ftp.ListDirectory" />
 
             
 
@@ -329,13 +300,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A readable <see
-             cref="T:System.IO.Stream" />
+            >A readable <see cref="T:System.IO.Stream" />
 
             
 
-             instance that contains data returned with the response; otherwise, <see
-             cref="F:System.IO.Stream.Null" />
+             instance that contains data returned with the response; otherwise, <see cref="F:System.IO.Stream.Null" />
 
             
 
@@ -367,18 +336,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.FtpWebResponse.Headers" />
+            >The <see cref="P:System.Net.FtpWebResponse.Headers" />
 
             
 
-             property is provided only for compatibility with other implementations of the <see
-             cref="T:System.Net.WebRequest" />
+             property is provided only for compatibility with other implementations of the <see cref="T:System.Net.WebRequest" />
 
             
 
-             and <see
-             cref="T:System.Net.WebResponse" />
+             and <see cref="T:System.Net.WebResponse" />
 
             
 
@@ -388,8 +354,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an empty <see
-             cref="T:System.Net.WebHeaderCollection" />
+            >Gets an empty <see cref="T:System.Net.WebHeaderCollection" />
 
             
 
@@ -418,23 +383,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.FtpWebResponse.LastModified" />
+            >The <see cref="P:System.Net.FtpWebResponse.LastModified" />
 
             
 
-             property returns the data requested by the <see
-             cref="F:System.Net.WebRequestMethods.Ftp.GetDateTimeStamp" />
+             property returns the data requested by the <see cref="F:System.Net.WebRequestMethods.Ftp.GetDateTimeStamp" />
 
             
 
-             method. For requests sent using any other method, <see
-             cref="P:System.Net.FtpWebResponse.LastModified" />
+             method. For requests sent using any other method, <see cref="P:System.Net.FtpWebResponse.LastModified" />
 
             
 
-             returns <see
-             cref="F:System.DateTime.MinValue" />
+             returns <see cref="F:System.DateTime.MinValue" />
 
             
 
@@ -464,26 +425,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because of server- and resource-specific behaviors, such as redirection, the value returned by the <see
-             cref="P:System.Net.FtpWebRequest.RequestUri" />
+            >Because of server- and resource-specific behaviors, such as redirection, the value returned by the <see cref="P:System.Net.FtpWebRequest.RequestUri" />
 
             
 
-             property is not always the same as the value returned by the <see
-             cref="P:System.Net.FtpWebResponse.ResponseUri" />
+             property is not always the same as the value returned by the <see cref="P:System.Net.FtpWebResponse.ResponseUri" />
 
             
 
              property.</para
           >
           <para
-            >For requests that use the <see
-             cref="F:System.Net.WebRequestMethods.Ftp.UploadFileWithUniqueName" />
+            >For requests that use the <see cref="F:System.Net.WebRequestMethods.Ftp.UploadFileWithUniqueName" />
 
             
 
-             method, <see
-             cref="P:System.Net.FtpWebResponse.ResponseUri" />
+             method, <see cref="P:System.Net.FtpWebResponse.ResponseUri" />
 
             
 
@@ -516,38 +473,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value returned by the <see
-             cref="P:System.Net.FtpWebResponse.StatusCode" />
+            >The value returned by the <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
             
 
-             property is included in the <see
-             cref="P:System.Net.FtpWebResponse.StatusDescription" />
+             property is included in the <see cref="P:System.Net.FtpWebResponse.StatusDescription" />
 
             
 
-             property. When you are downloading data, the value of <see
-             cref="P:System.Net.FtpWebResponse.StatusCode" />
+             property. When you are downloading data, the value of <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
             
 
-             changes as status codes are returned by the FTP server. After you call the <see
-             cref="M:System.Net.FtpWebRequest.GetResponse" />
+             changes as status codes are returned by the FTP server. After you call the <see cref="M:System.Net.FtpWebRequest.GetResponse" />
 
             
 
-             method, <see
-             cref="P:System.Net.FtpWebResponse.StatusCode" />
+             method, <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
             
 
-             contains an intermediate status code. When you call the <see
-             cref="M:System.Net.FtpWebResponse.Close" />
+             contains an intermediate status code. When you call the <see cref="M:System.Net.FtpWebResponse.Close" />
 
             
 
-             method, <see
-             cref="P:System.Net.FtpWebResponse.StatusCode" />
+             method, <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
             
 
@@ -577,38 +527,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The text returned by the <see
-             cref="P:System.Net.FtpWebResponse.StatusDescription" />
+            >The text returned by the <see cref="P:System.Net.FtpWebResponse.StatusDescription" />
 
             
 
-             property includes the 3-digit <see
-             cref="P:System.Net.FtpWebResponse.StatusCode" />
+             property includes the 3-digit <see cref="P:System.Net.FtpWebResponse.StatusCode" />
 
             
 
-             property value. When downloading data, the value of <see
-             cref="P:System.Net.FtpWebResponse.StatusDescription" />
+             property value. When downloading data, the value of <see cref="P:System.Net.FtpWebResponse.StatusDescription" />
 
             
 
-             changes as status codes are returned by the FTP server. After you call the <see
-             cref="M:System.Net.FtpWebRequest.GetResponse" />
+             changes as status codes are returned by the FTP server. After you call the <see cref="M:System.Net.FtpWebRequest.GetResponse" />
 
             
 
-             method, <see
-             cref="P:System.Net.FtpWebResponse.StatusDescription" />
+             method, <see cref="P:System.Net.FtpWebResponse.StatusDescription" />
 
             
 
-             contains an intermediate status code. When you call the <see
-             cref="M:System.Net.FtpWebResponse.Close" />
+             contains an intermediate status code. When you call the <see cref="M:System.Net.FtpWebResponse.Close" />
 
             
 
-             method, <see
-             cref="P:System.Net.FtpWebResponse.StatusDescription" />
+             method, <see cref="P:System.Net.FtpWebResponse.StatusDescription" />
 
             
 
@@ -638,13 +581,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the connection is being reused (the <see
-             cref="P:System.Net.FtpWebRequest.KeepAlive" />
+            >If the connection is being reused (the <see cref="P:System.Net.FtpWebRequest.KeepAlive" />
 
             
 
-             property is set to true), the <see
-             cref="P:System.Net.FtpWebResponse.WelcomeMessage" />
+             property is set to true), the <see cref="P:System.Net.FtpWebResponse.WelcomeMessage" />
 
             
 

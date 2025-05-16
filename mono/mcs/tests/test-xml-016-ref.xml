@@ -9,8 +9,7 @@
             public event EventHandler MyEvent
             </summary>
     </member>
-    <member name="E:Testing.Test.MyEvent2"
-      >
+    <member name="E:Testing.Test.MyEvent2">
             private event EventHandler MyEvent; without markup - it is OK.
         </member
     >

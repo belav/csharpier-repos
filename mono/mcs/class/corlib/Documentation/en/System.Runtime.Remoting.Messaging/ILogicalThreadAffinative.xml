@@ -30,38 +30,31 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When a remote method call is made to an object in another <see
-         cref="T:System.AppDomain" />
+        >When a remote method call is made to an object in another <see cref="T:System.AppDomain" />
 
         
 
-        , the current <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+        , the current <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         class generates a <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         class generates a <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
-         that travels along with the call to the remote location. Only objects that expose the <see
-         cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
+         that travels along with the call to the remote location. Only objects that expose the <see cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
 
         
 
-         interface and are stored in the <see
-         cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+         interface and are stored in the <see cref="T:System.Runtime.Remoting.Messaging.CallContext" />
 
         
 
-         are propagated outside the <see
-         cref="T:System.AppDomain" />
+         are propagated outside the <see cref="T:System.AppDomain" />
 
         
 
-        . Objects that do not support this interface are not transmitted in <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+        . Objects that do not support this interface are not transmitted in <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 
@@ -71,13 +64,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Marks an object that can propagate outside of an <see
-         cref="T:System.AppDomain" />
+        >Marks an object that can propagate outside of an <see cref="T:System.AppDomain" />
 
         
 
-         in a <see
-         cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+         in a <see cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
 
         
 

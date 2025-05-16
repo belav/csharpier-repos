@@ -32,8 +32,7 @@
       <list type="ordered">
         <item>
           <para
-            >Build a class that derives from <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+            >Build a class that derives from <see cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
 
             
 
@@ -42,8 +41,7 @@
         </item>
         <item>
           <para
-            >Apply an <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+            >Apply an <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
 
             
 
@@ -52,8 +50,7 @@
         </item>
         <item>
           <para
-            >Optionally, apply an <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
+            >Optionally, apply an <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute" />
 
             
 
@@ -62,8 +59,7 @@
         </item>
         <item>
           <para
-            >Optionally, apply an <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+            >Optionally, apply an <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
 
             
 
@@ -91,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
 
             
 
@@ -121,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
 
             
 
@@ -130,14 +124,22 @@
           >
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The XML namespace prefix associated with a service description format extension.</param
         >
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

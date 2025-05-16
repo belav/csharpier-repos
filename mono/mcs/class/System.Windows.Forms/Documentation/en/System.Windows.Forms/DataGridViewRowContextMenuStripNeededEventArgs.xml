@@ -20,90 +20,75 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+        >The <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
         
 
-         event occurs only when the <see
-         cref="T:System.Windows.Forms.DataGridView" />
+         event occurs only when the <see cref="T:System.Windows.Forms.DataGridView" />
 
         
 
-         control <see
-         cref="P:System.Windows.Forms.DataGridView.DataSource" />
+         control <see cref="P:System.Windows.Forms.DataGridView.DataSource" />
 
         
 
-         property is set or its <see
-         cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
+         property is set or its <see cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
 
         
 
-         property is true. Handling the <see
-         cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+         property is true. Handling the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
         
 
          event is useful when you want to display a shortcut menu determined by a row's current state or the values it contains. </para
       >
       <para
-        >When you handle the <see
-         cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+        >When you handle the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
         
 
-         event, the shortcut menu that you specify in the handler is shown whenever the user right-clicks a row unless the <see
-         cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" />
+         event, the shortcut menu that you specify in the handler is shown whenever the user right-clicks a row unless the <see cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" />
 
         
 
          event overrides the shortcut menu for the specific cell that was clicked. </para
       >
       <para
-        >The <see
-         cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+        >The <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
         
 
-         event also occurs whenever the value of the <see
-         cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+         event also occurs whenever the value of the <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
 
         
 
          property is retrieved, either programmatically or when the user right-clicks a row. </para
       >
       <para
-        >You can use the <see
-         cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.RowIndex" />
+        >You can use the <see cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.RowIndex" />
 
         
 
-         property to determine the state of a row or the values it contains, and use this information to change or modify the <see
-         cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.ContextMenuStrip" />
+         property to determine the state of a row or the values it contains, and use this information to change or modify the <see cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.ContextMenuStrip" />
 
         
 
-         property. This property is initialized with the value of the row <see
-         cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+         property. This property is initialized with the value of the row <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
 
         
 
          property, which the event value overrides. </para
       >
       <para
-        >Handle the <see
-         cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+        >Handle the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
         
 
-         event when working with large amounts of data to avoid the performance penalties of setting the row <see
-         cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+         event when working with large amounts of data to avoid the performance penalties of setting the row <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
 
         
 
-         value for multiple rows. For more information, see <format
-         type="text/html">
+         value for multiple rows. For more information, see <format type="text/html">
           <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
             >Best Practices for Scaling the Windows Forms DataGridView Control</a
           >
@@ -114,8 +99,7 @@
         .</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
 
@@ -127,8 +111,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+        >Provides data for the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
         
 
@@ -151,13 +134,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses the <paramref
-             name="rowIndex" />
+            >This constructor uses the <paramref name="rowIndex" />
 
             
 
-             parameter value to initialize the <see
-             cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.RowIndex" />
+             parameter value to initialize the <see cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.RowIndex" />
 
             
 
@@ -167,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs" />
 
             
 
@@ -176,7 +156,11 @@
           >
         </summary>
         <param name="rowIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -204,8 +188,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property initially contains the value of the <see
-             cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+            >This property initially contains the value of the <see cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
 
             
 
@@ -215,8 +198,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the shortcut menu for the row that raised the <see
-             cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+            >Gets or sets the shortcut menu for the row that raised the <see cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
             
 

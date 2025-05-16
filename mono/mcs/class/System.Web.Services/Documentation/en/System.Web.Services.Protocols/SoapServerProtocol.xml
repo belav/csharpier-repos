@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can override the <see
-         cref="M:System.Web.Services.Protocols.SoapServerProtocol.RouteRequest(System.Web.Services.Protocols.SoapServerMessage)" />
+        >You can override the <see cref="M:System.Web.Services.Protocols.SoapServerProtocol.RouteRequest(System.Web.Services.Protocols.SoapServerMessage)" />
 
         
 
@@ -28,8 +27,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The .NET Framework creates an instance of the <see
-         cref="T:System.Web.Services.Protocols.SoapServerProtocol" />
+        >The .NET Framework creates an instance of the <see cref="T:System.Web.Services.Protocols.SoapServerProtocol" />
 
         
 
@@ -48,8 +46,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.Web.Services.Protocols.SoapServerProtocol" />
+            >Creates a new <see cref="T:System.Web.Services.Protocols.SoapServerProtocol" />
 
             
 
@@ -80,13 +77,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlTextReader" />
+            >Returns an <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             initialized with the specified <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+             initialized with the specified <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
@@ -96,23 +91,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.XmlTextReader" />
+            >A <see cref="T:System.Xml.XmlTextReader" />
 
             
 
-             initialized with the <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+             initialized with the <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             specified by <paramref
-             name="message" />
+             specified by <paramref name="message" />
 
             
 
-             and the buffer size specified by <paramref
-             name="bufferSize" />
+             and the buffer size specified by <paramref name="bufferSize" />
 
             
 
@@ -120,29 +111,34 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+          The <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
           
 
-           with which to initialize the <see
-           cref="T:System.Xml.XmlTextReader" />
+           with which to initialize the <see cref="T:System.Xml.XmlTextReader" />
 
           
 
           .</param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The buffer size with which to initialize the <see
-           cref="T:System.Xml.XmlTextReader" />
+          The buffer size with which to initialize the <see cref="T:System.Xml.XmlTextReader" />
 
           
 
@@ -172,13 +168,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlTextWriter" />
+            >Returns an <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
-             initialized with the specified <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+             initialized with the specified <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
@@ -188,23 +182,19 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Xml.XmlTextWriter" />
+            >A <see cref="T:System.Xml.XmlTextWriter" />
 
             
 
-             initialized with the <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+             initialized with the <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             specified by <paramref
-             name="message" />
+             specified by <paramref name="message" />
 
             
 
-             and the buffer size specified by <paramref
-             name="bufferSize" />
+             and the buffer size specified by <paramref name="bufferSize" />
 
             
 
@@ -212,29 +202,34 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+          The <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
           
 
-           with which to initialize the <see
-           cref="T:System.Xml.XmlTextWriter" />
+           with which to initialize the <see cref="T:System.Xml.XmlTextWriter" />
 
           
 
           .</param
         >
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The buffer size with which to initialize the <see
-           cref="T:System.Xml.XmlTextWriter" />
+          The buffer size with which to initialize the <see cref="T:System.Xml.XmlTextWriter" />
 
           
 
@@ -264,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Applies the specified priority and group attributes to the SOAP extensions contained in the specified array of type <see
-             cref="T:System.Web.Services.Protocols.SoapExtension" />
+            >Applies the specified priority and group attributes to the SOAP extensions contained in the specified array of type <see cref="T:System.Web.Services.Protocols.SoapExtension" />
 
             
 
@@ -275,13 +269,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of type <see
-             cref="T:System.Web.Services.Protocols.SoapExtension" />
+            >An array of type <see cref="T:System.Web.Services.Protocols.SoapExtension" />
 
             
 
-             with the priority and group attributes specified by <paramref
-             name="group" />
+             with the priority and group attributes specified by <paramref name="group" />
 
             
 
@@ -289,34 +281,38 @@
           >
         </returns>
         <param name="group">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Configuration.PriorityGroup" />
+          A <see cref="T:System.Web.Services.Configuration.PriorityGroup" />
 
           
 
-           that specifies the priority and group attributes to be applied to the SOAP extensions contained in <paramref
-           name="extensions" />
+           that specifies the priority and group attributes to be applied to the SOAP extensions contained in <paramref name="extensions" />
 
           
 
           .</param
         >
         <param name="extensions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.Web.Services.Protocols.SoapExtension" />
+          An array of type <see cref="T:System.Web.Services.Protocols.SoapExtension" />
 
           
 
-           to which to apply the priority and group attributes specified by <paramref
-           name="group" />
+           to which to apply the priority and group attributes specified by <paramref name="group" />
 
           
 
@@ -344,8 +340,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can override the <see
-             cref="M:System.Web.Services.Protocols.SoapServerProtocol.RouteRequest(System.Web.Services.Protocols.SoapServerMessage)" />
+            >You can override the <see cref="M:System.Web.Services.Protocols.SoapServerProtocol.RouteRequest(System.Web.Services.Protocols.SoapServerMessage)" />
 
             
 
@@ -355,13 +350,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+            >Returns the <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />
 
             
 
-             to which the specified <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+             to which the specified <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
@@ -371,18 +364,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+            >The <see cref="T:System.Web.Services.Protocols.SoapServerMethod" />
 
             
 
-             to which the <see
-             cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+             to which the <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
             
 
-             specified by <paramref
-             name="message" />
+             specified by <paramref name="message" />
 
             
 
@@ -390,12 +380,15 @@
           >
         </returns>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+          The <see cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
           
 

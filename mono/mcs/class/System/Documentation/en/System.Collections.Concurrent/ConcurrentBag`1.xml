@@ -42,8 +42,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Bags are useful for storing objects when ordering doesn't matter, and unlike sets, bags support duplicates. <see
-         cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+        >Bags are useful for storing objects when ordering doesn't matter, and unlike sets, bags support duplicates. <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
         
 
@@ -58,7 +57,7 @@
       >
       <para
         >For more information, see the entry <see
-         cref="http://blogs.msdn.com/b/pfxteam/archive/2010/01/26/9953725.aspx"
+          cref="http://blogs.msdn.com/b/pfxteam/archive/2010/01/26/9953725.aspx"
           >FAQ: Are all of the new concurrent collections lock-free?</see
         >
 
@@ -89,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >Initializes a new instance of the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -186,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >Gets the number of elements contained in the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -217,8 +214,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The enumeration represents a moment-in-time snapshot of the contents of the bag. It does not reflect any updates to the collection after <see
-             cref="M:System.Collections.Concurrent.ConcurrentBag`1.GetEnumerator" />
+            >The enumeration represents a moment-in-time snapshot of the contents of the bag. It does not reflect any updates to the collection after <see cref="M:System.Collections.Concurrent.ConcurrentBag`1.GetEnumerator" />
 
             
 
@@ -228,8 +224,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -239,8 +234,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the contents of the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >An enumerator for the contents of the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -265,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >Gets a value that indicates whether the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -323,18 +316,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Collections.ICollection" />
+            >Copies the elements of the <see cref="T:System.Collections.ICollection" />
 
             
 
-             to an <see
-             cref="T:System.Array" />
+             to an <see cref="T:System.Array" />
 
             
 
-            , starting at a particular <see
-             cref="T:System.Array" />
+            , starting at a particular <see cref="T:System.Array" />
 
             
 
@@ -342,34 +332,38 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the elements copied from the <see
-           cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+           that is the destination of the elements copied from the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -399,8 +393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -431,8 +424,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -462,8 +454,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The items enumerated represent a moment-in-time snapshot of the contents of the bag. It does not reflect any update to the collection after <see
-             cref="M:System.Collections.Concurrent.ConcurrentBag`1.GetEnumerator" />
+            >The items enumerated represent a moment-in-time snapshot of the contents of the bag. It does not reflect any update to the collection after <see cref="M:System.Collections.Concurrent.ConcurrentBag`1.GetEnumerator" />
 
             
 
@@ -473,8 +464,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >Returns an enumerator that iterates through the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -484,8 +474,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator for the contents of the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >An enumerator for the contents of the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -513,8 +502,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >Copies the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 
@@ -524,8 +512,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new array containing a snapshot of elements copied from the <see
-             cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
+            >A new array containing a snapshot of elements copied from the <see cref="T:System.Collections.Concurrent.ConcurrentBag`1" />
 
             
 

@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >By default, the message body is formatted with the Style set to <see
-         cref="F:System.ServiceModel.OperationFormatStyle.Document" />
+        >By default, the message body is formatted with the Style set to <see cref="F:System.ServiceModel.OperationFormatStyle.Document" />
 
         
 
@@ -33,8 +32,7 @@
     &lt;wsdl:part name="parameters" element="tns:Add"/&gt;
   &lt;/wsdl:message&gt;</code>
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+        >Use the <see cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
 
         
 

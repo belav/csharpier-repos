@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <clause number="24.4.3" title="The Obsolete attribute">
   <paragraph
-    >The attribute Obsolete is used to mark types and members of types that should no longer be used. <code_example
-    >
+    >The attribute Obsolete is used to mark types and members of types that should no longer be used. <code_example>
       <![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |  
@@ -24,8 +23,7 @@ public class ObsoleteAttribute: Attribute
   <paragraph>If a program uses a type or member that is decorated with the Obsolete attribute, then the compiler shall issue a warning or error in order to alert the developer, so the offending code can be fixed. Specifically, the compiler shall issue a warning if no error parameter is provided, or if the error parameter is provided and has the value false. The compiler shall issue a compile-time error if the error parameter is specified and has the value true. </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 [Obsolete("This class is obsolete; use class B instead")]  
 class A  

@@ -20,30 +20,25 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An instance of this class is created when a user control is specified for output caching, using either an <format
-         type="text/html">
+        >An instance of this class is created when a user control is specified for output caching, using either an <format type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
 
         
 
-         directive in the declarative .ascx file, or the <see
-         cref="T:System.Web.UI.PartialCachingAttribute" />
+         directive in the declarative .ascx file, or the <see cref="T:System.Web.UI.PartialCachingAttribute" />
 
         
 
-         class in the user control's code-behind file. When the user control is included declaratively in its containing page (as opposed to being dynamically loaded using the <see
-         cref="Overload:System.Web.UI.TemplateControl.LoadControl" />
+         class in the user control's code-behind file. When the user control is included declaratively in its containing page (as opposed to being dynamically loaded using the <see cref="Overload:System.Web.UI.TemplateControl.LoadControl" />
 
         
 
-         method in the <see
-         cref="T:System.Web.UI.TemplateControl" />
+         method in the <see cref="T:System.Web.UI.TemplateControl" />
 
         
 
-         control class), the <see
-         cref="T:System.Web.UI.StaticPartialCachingControl" />
+         control class), the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
         
 
@@ -53,8 +48,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an instance of the <see
-         cref="T:System.Web.UI.UserControl" />
+        >Represents an instance of the <see cref="T:System.Web.UI.UserControl" />
 
         
 
@@ -83,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.StaticPartialCachingControl.#ctor(System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+            >The <see cref="M:System.Web.UI.StaticPartialCachingControl.#ctor(System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
 
             
 
@@ -94,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates the <see
-             cref="T:System.Web.UI.StaticPartialCachingControl" />
+            >Creates the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
             
 
@@ -105,8 +97,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The instance of the <see
-             cref="T:System.Web.UI.StaticPartialCachingControl" />
+            >The instance of the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
             
 
@@ -114,54 +105,81 @@
           >
         </returns>
         <param name="ctrlID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identifier assigned to the server control by ASP.NET. </param
         >
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The globally unique identifier passed from the server control. </param
         >
         <param name="duration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of time the server control is to remain in the cache. </param
         >
         <param name="varyByParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string of the query string or form POST parameters by which to vary the user control in the cache. </param
         >
         <param name="varyByControls">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string of the server control properties by which to vary the user control in the cache. </param
         >
         <param name="varyByCustom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A user-defined string that contains custom output-cache parameter values.</param
         >
         <param name="buildMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A delegate that calls the method to build the <see
-           cref="T:System.Web.UI.StaticPartialCachingControl" />
+          A delegate that calls the method to build the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
           
 
@@ -196,16 +214,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+            >The <see cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
 
             
 
              method builds a cached control with no relationship to a Microsoft SQL Server database table. </para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+            >The <see cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
 
             
 
@@ -215,8 +231,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Builds a <see
-             cref="T:System.Web.UI.StaticPartialCachingControl" />
+            >Builds a <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
             
 
@@ -224,61 +239,92 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server control to contain the <see
-           cref="T:System.Web.UI.StaticPartialCachingControl" />
+          The server control to contain the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
           
 
            instance. </param
         >
         <param name="ctrlID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identifier assigned to the control by ASP.NET. </param
         >
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The globally unique identifier for the cached control. </param
         >
         <param name="duration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of time the control's output is cached. </param
         >
         <param name="varyByParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string of the query string or form POST parameters by which to vary the server control in the cache. </param
         >
         <param name="varyByControls">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that lists the server-control properties by which to vary the user control in the cache.</param
         >
         <param name="varyByCustom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A user-defined string that contains custom output-cache parameter values.</param
         >
         <param name="buildMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -317,21 +363,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+            >The <see cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
 
             
 
-             method builds a cached control with a relationship to a SQL Server database table specified by the <paramref
-             name="sqlDependency" />
+             method builds a cached control with a relationship to a SQL Server database table specified by the <paramref name="sqlDependency" />
 
             
 
              parameter.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.StaticPartialCachingControl.#ctor(System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+            >The <see cref="M:System.Web.UI.StaticPartialCachingControl.#ctor(System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
 
             
 
@@ -341,8 +384,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Builds a <see
-             cref="T:System.Web.UI.StaticPartialCachingControl" />
+            >Builds a <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
             
 
@@ -350,68 +392,103 @@
           >
         </summary>
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The server control to contain the <see
-           cref="T:System.Web.UI.StaticPartialCachingControl" />
+          The server control to contain the <see cref="T:System.Web.UI.StaticPartialCachingControl" />
 
           
 
            instance. </param
         >
         <param name="ctrlID">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The identifier assigned to the control by ASP.NET. </param
         >
         <param name="guid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The globally unique identifier for the cached control. </param
         >
         <param name="duration">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The length of time the control's output is cached. </param
         >
         <param name="varyByParams">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string of the query string or form POST parameters by which to vary the server control in the cache. </param
         >
         <param name="varyByControls">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string that lists the server-control properties by which to vary the user control in the cache.</param
         >
         <param name="varyByCustom">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A user-defined string that contains custom output-cache parameter values.</param
         >
         <param name="sqlDependency">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A semicolon-delimited string that specifies which databases and tables to use for the Microsoft SQL Server cache dependency.</param
         >
         <param name="buildMethod">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

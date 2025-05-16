@@ -22,13 +22,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Apply the <see
-         cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
+        >Apply the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
 
         
 
-         attribute to a type to indicate to the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+         attribute to a type to indicate to the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -38,23 +36,19 @@
         <para>In your code, you can use the word KnownType instead of the longer KnownTypeAttribute. </para>
       </block>
       <para
-        >You can either apply exactly one <see
-         cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
+        >You can either apply exactly one <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
 
         
 
-         instance with the <see
-         cref="P:System.Runtime.Serialization.KnownTypeAttribute.MethodName" />
+         instance with the <see cref="P:System.Runtime.Serialization.KnownTypeAttribute.MethodName" />
 
         
 
-         property set, or one or more <see
-         cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
+         property set, or one or more <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
 
         
 
-         instances with the <see
-         cref="P:System.Runtime.Serialization.KnownTypeAttribute.Type" />
+         instances with the <see cref="P:System.Runtime.Serialization.KnownTypeAttribute.Type" />
 
         
 
@@ -64,8 +58,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies types that should be recognized by the <see
-         cref="T:System.Runtime.Serialization.DataContractSerializer" />
+        >Specifies types that should be recognized by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
         
 
@@ -91,13 +84,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor uses a method name that matches a method of the class.  The method returns a <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+            >This constructor uses a method name that matches a method of the class.  The method returns a <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             of <see
-             cref="T:System.Type" />
+             of <see cref="T:System.Type" />
 
             
 
@@ -107,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
 
             
 
-             class with the name of a method that returns an <see
-             cref="T:System.Collections.IEnumerable" />
+             class with the name of a method that returns an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -121,12 +110,15 @@
           >
         </summary>
         <param name="methodName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the method that returns an <see
-           cref="T:System.Collections.IEnumerable" />
+          The name of the method that returns an <see cref="T:System.Collections.IEnumerable" />
 
           
 
@@ -152,8 +144,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
 
             
 
@@ -161,12 +152,15 @@
           >
         </summary>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -189,23 +183,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method must exist on the class or structure that the <see
-             cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
+            >The method must exist on the class or structure that the <see cref="T:System.Runtime.Serialization.KnownTypeAttribute" />
 
             
 
-             is applied to, must be static, must accept no parameters, and must return an instance of any type that implements the generic <see
-             cref="T:System.Collections.Generic.IEnumerable`1" />
+             is applied to, must be static, must accept no parameters, and must return an instance of any type that implements the generic <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
             
 
-             interface, such as the <see
-             cref="T:System.Collections.ObjectModel.Collection`1" />
+             interface, such as the <see cref="T:System.Collections.ObjectModel.Collection`1" />
 
             
 
-             class, or an array of <see
-             cref="T:System.Type" />
+             class, or an array of <see cref="T:System.Type" />
 
             
 
@@ -235,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type that should be recognized during serialization or deserialization by the <see
-             cref="T:System.Runtime.Serialization.DataContractSerializer" />
+            >Gets the type that should be recognized during serialization or deserialization by the <see cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
             
 

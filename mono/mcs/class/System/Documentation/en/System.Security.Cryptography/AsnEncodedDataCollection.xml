@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class implements the <see
-         cref="T:System.Collections.ICollection" />
+        >This class implements the <see cref="T:System.Collections.ICollection" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Cryptography.AsnEncodedData" />
+        >Represents a collection of <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
         
 
@@ -68,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -101,13 +98,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
-             class and adds an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class and adds an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -115,12 +110,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -154,13 +152,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Adds an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
-             object to the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             object to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -170,8 +166,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the added <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >The index of the added <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -179,12 +174,15 @@
           >
         </returns>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -218,8 +216,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies the contents of an <see
-             cref="T:System.Security.Cryptography.OidCollection" />
+            >This method copies the contents of an <see cref="T:System.Security.Cryptography.OidCollection" />
 
             
 
@@ -229,8 +226,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >Copies the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -238,19 +234,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array that the <see
-           cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+          The array that the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
           
 
            object is to be copied into.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -275,8 +278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine how many <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Use this property to determine how many <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -286,8 +288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Gets the number of <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -319,13 +320,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+            >The <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
 
             
 
-             class implements the <see
-             cref="T:System.Collections.IEnumerator" />
+             class implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -335,13 +334,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+            >Returns an <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
 
             
 
-             object that can be used to navigate the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             object that can be used to navigate the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -351,8 +348,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+            >An <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
 
             
 
@@ -382,8 +378,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -446,13 +441,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Removes an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
-             object from the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             object from the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -460,12 +453,15 @@
           >
         </summary>
         <param name="asnEncodedData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.AsnEncodedData" />
+          The <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
           
 
@@ -494,23 +490,19 @@
 
             
 
-             is not thread safe. Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             is not thread safe. Derived classes can provide their own synchronized version of the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
-             using this property. The synchronizing code must perform operations on the <see
-             cref="P:System.Security.Cryptography.AsnEncodedDataCollection.SyncRoot" />
+             using this property. The synchronizing code must perform operations on the <see cref="P:System.Security.Cryptography.AsnEncodedDataCollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             property of the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
-             class, not directly on the class itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             class, not directly on the class itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -520,8 +512,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -552,8 +543,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method copies the contents of an <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >This method copies the contents of an <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -563,8 +553,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+            >Copies the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -572,19 +561,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array that the <see
-           cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+          The array that the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
           
 
            object is to be copied into.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -614,13 +610,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+            >The <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
 
             
 
-             class implements the <see
-             cref="T:System.Collections.IEnumerator" />
+             class implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -630,13 +624,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+            >Returns an <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
 
             
 
-             object that can be used to navigate the <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+             object that can be used to navigate the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
 
             
 
@@ -646,8 +638,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
+            >An <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" />
 
             
 

@@ -20,13 +20,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >You can use platform invoke on the native RegCreateKeyEx Windows function to obtain a <see
-         cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
+        >You can use platform invoke on the native RegCreateKeyEx Windows function to obtain a <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
 
         
 
-         object, and then use it to create registry keys with the <see
-         cref="M:Microsoft.Win32.RegistryKey.FromHandle(Microsoft.Win32.SafeHandles.SafeRegistryHandle,Microsoft.Win32.RegistryView)" />
+         object, and then use it to create registry keys with the <see cref="M:Microsoft.Win32.RegistryKey.FromHandle(Microsoft.Win32.SafeHandles.SafeRegistryHandle,Microsoft.Win32.RegistryView)" />
 
         
 
@@ -60,8 +58,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifying false for <paramref
-             name="ownsHandle" />
+            >Specifying false for <paramref name="ownsHandle" />
 
             
 
@@ -71,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />
 
             
 
@@ -80,14 +76,22 @@
           >
         </summary>
         <param name="preexistingHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object that represents the pre-existing handle to use.</param
         >
         <param name="ownsHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by the <see
-         cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
+        >This enumeration is used by the <see cref="M:System.Uri.GetComponents(System.UriComponents,System.UriFormat)" />
 
         
 
@@ -27,7 +26,9 @@
       >
       <para
         >RFC 2396 defines the standard escaping for URIs, and is available at <see
-         cref="http://rfc-editor.org">http://rfc-editor.org</see>
+          cref="http://rfc-editor.org"
+          >http://rfc-editor.org</see
+        >
 
         
 
@@ -38,8 +39,7 @@
 
         
 
-         leaves the following characters escaped if the character has a reserved meaning in the requested <see
-         cref="T:System.UriComponents" />
+         leaves the following characters escaped if the character has a reserved meaning in the requested <see cref="T:System.UriComponents" />
 
         
 

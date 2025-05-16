@@ -13,23 +13,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.VisualStyles.FontProperty" />
+        >The <see cref="T:System.Windows.Forms.VisualStyles.FontProperty" />
 
         
 
-         enumeration represents a set of font properties that describe visual style elements. The <see
-         cref="T:System.Windows.Forms.VisualStyles.FontProperty" />
+         enumeration represents a set of font properties that describe visual style elements. The <see cref="T:System.Windows.Forms.VisualStyles.FontProperty" />
 
         
 
-         values are used as an argument in the <see
-         cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetFont(System.Drawing.IDeviceContext,System.Windows.Forms.VisualStyles.FontProperty)" />
+         values are used as an argument in the <see cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetFont(System.Drawing.IDeviceContext,System.Windows.Forms.VisualStyles.FontProperty)" />
 
         
 
-         method to specify which property value to retrieve for the element that the <see
-         cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+         method to specify which property value to retrieve for the element that the <see cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
         
 

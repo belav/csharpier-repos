@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A type converter is used to convert values between data types. A type converter also supports property configuration at design time by providing text-to-value conversion or a list of values that users can select from. Access the <see
-         cref="T:System.Drawing.ImageFormatConverter" />
+        >A type converter is used to convert values between data types. A type converter also supports property configuration at design time by providing text-to-value conversion or a list of values that users can select from. Access the <see cref="T:System.Drawing.ImageFormatConverter" />
 
         
 
-         class through the <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
-         class by calling the <see
-         cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+         class by calling the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
         
 
          method.</para
       >
       <para
-        >The <see
-         cref="T:System.Drawing.ImageFormatConverter" />
+        >The <see cref="T:System.Drawing.ImageFormatConverter" />
 
         
 
-         converts to and from known image formats, as specified in the <see
-         cref="T:System.Drawing.Imaging.ImageFormat" />
+         converts to and from known image formats, as specified in the <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
         
 
@@ -53,13 +48,11 @@
       >
       <block subset="none" type="note">
         <para
-          >If you want to convert between image formats, such as converting between BMP and JPEG, use one of the <see
-           cref="M:System.Drawing.Image.Save(System.IO.Stream,System.Drawing.Imaging.ImageFormat)" />
+          >If you want to convert between image formats, such as converting between BMP and JPEG, use one of the <see cref="M:System.Drawing.Image.Save(System.IO.Stream,System.Drawing.Imaging.ImageFormat)" />
 
           
 
-           methods that takes an <see
-           cref="T:System.Drawing.Imaging.ImageFormat" />
+           methods that takes an <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
           
 
@@ -74,13 +67,11 @@
 
         
 
-         is a class that can be used to convert <see
-         cref="T:System.Drawing.Imaging.ImageFormat" />
+         is a class that can be used to convert <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
         
 
-         objects from one data type to another. Access this class through the <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         objects from one data type to another. Access this class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
@@ -98,23 +89,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not create a <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+            >Do not create a <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
-             object directly. Access the <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+             object directly. Access the <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
-             class through the <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+             class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
-             class by calling the <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+             class by calling the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
             
 
@@ -124,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
@@ -155,13 +141,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+            >The <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
-             converts to and from known image formats, as specified in the <see
-             cref="T:System.Drawing.Imaging.ImageFormat" />
+             converts to and from known image formats, as specified in the <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
             
 
@@ -177,14 +161,22 @@
           <para>This method returns true if this object can perform the conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,13 +205,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+            >The <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
-             converts to and from known image formats, as specified in the <see
-             cref="T:System.Drawing.Imaging.ImageFormat" />
+             converts to and from known image formats, as specified in the <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
             
 
@@ -235,29 +225,34 @@
           <para>This method returns true if this object can perform the conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
            that specifies the context for this type conversion. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
-           that represents the type to which you want to convert this <see
-           cref="T:System.Drawing.Imaging.ImageFormat" />
+           that represents the type to which you want to convert this <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
           
 
@@ -287,13 +282,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+            >The <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
-             converts to and from known image formats, as specified in the <see
-             cref="T:System.Drawing.Imaging.ImageFormat" />
+             converts to and from known image formats, as specified in the <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
             
 
@@ -303,8 +296,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the specified object to an <see
-             cref="T:System.Drawing.Imaging.ImageFormat" />
+            >Converts the specified object to an <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
             
 
@@ -316,26 +308,37 @@
           <para>The converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that specifies formatting conventions for a particular culture. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -366,26 +369,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Drawing.ImageFormatConverter" />
+            >The <see cref="T:System.Drawing.ImageFormatConverter" />
 
             
 
-             converts to and from known image formats, as specified in the <see
-             cref="T:System.Drawing.Imaging.ImageFormat" />
+             converts to and from known image formats, as specified in the <see cref="T:System.Drawing.Imaging.ImageFormat" />
 
             
 
              class.</para
           >
           <para
-            >The most common type conversion is to and from a string type. The default implementation calls the <see
-             cref="M:System.Object.ToString" />
+            >The most common type conversion is to and from a string type. The default implementation calls the <see cref="M:System.Object.ToString" />
 
             
 
-             method of the object if the object is valid and if the destination type is string. If this method cannot convert the specified object to the specified destination type, it throws a <see
-             cref="T:System.NotSupportedException" />
+             method of the object if the object is valid and if the destination type is string. If this method cannot convert the specified object to the specified destination type, it throws a <see cref="T:System.NotSupportedException" />
 
             
 
@@ -401,33 +400,48 @@
           <para>The converted object.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that specifies formatting conventions for a particular culture. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -462,7 +476,11 @@
           <para>A collection that contains a standard set of valid values, or null. The default implementation always returns null.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -495,8 +513,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the <see
-             cref="Overload:System.Drawing.ImageFormatConverter.GetStandardValues" />
+            >This method returns true if the <see cref="Overload:System.Drawing.ImageFormatConverter.GetStandardValues" />
 
             
 
@@ -504,7 +521,11 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

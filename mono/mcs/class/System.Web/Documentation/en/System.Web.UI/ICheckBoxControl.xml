@@ -11,23 +11,19 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.ICheckBoxControl" />
+        >The <see cref="T:System.Web.UI.ICheckBoxControl" />
 
         
 
-         interface defines the property and event that must be implemented for a control to act as a check box on a Web page. The <see
-         cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+         interface defines the property and event that must be implemented for a control to act as a check box on a Web page. The <see cref="P:System.Web.UI.ICheckBoxControl.Checked" />
 
         
 
-         property can be used to determine whether the check box is selected or to set the property programmatically. The <see
-         cref="E:System.Web.UI.ICheckBoxControl.CheckedChanged" />
+         property can be used to determine whether the check box is selected or to set the property programmatically. The <see cref="E:System.Web.UI.ICheckBoxControl.CheckedChanged" />
 
         
 
-         event is raised when the <see
-         cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+         event is raised when the <see cref="P:System.Web.UI.ICheckBoxControl.Checked" />
 
         
 
@@ -52,13 +48,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Controls implementing <see
-             cref="T:System.Web.UI.ICheckBoxControl" />
+            >Controls implementing <see cref="T:System.Web.UI.ICheckBoxControl" />
 
             
 
-             use <see
-             cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+             use <see cref="P:System.Web.UI.ICheckBoxControl.Checked" />
 
             
 
@@ -68,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the value of an <see
-             cref="T:System.Web.UI.ICheckBoxControl" />
+            >Gets or sets the value of an <see cref="T:System.Web.UI.ICheckBoxControl" />
 
             
 
@@ -92,13 +85,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.ICheckBoxControl.CheckedChanged" />
+            >The <see cref="E:System.Web.UI.ICheckBoxControl.CheckedChanged" />
 
             
 
-             event is raised when the value of <see
-             cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+             event is raised when the value of <see cref="P:System.Web.UI.ICheckBoxControl.Checked" />
 
             
 
@@ -108,8 +99,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the value of the <see
-             cref="P:System.Web.UI.ICheckBoxControl.Checked" />
+            >Occurs when the value of the <see cref="P:System.Web.UI.ICheckBoxControl.Checked" />
 
             
 

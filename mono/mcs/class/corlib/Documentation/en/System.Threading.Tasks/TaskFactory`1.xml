@@ -24,26 +24,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Threading.Tasks.TaskFactory`1" />
+        >The <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
         
 
-         class encodes some common <see
-         cref="T:System.Threading.Tasks.Task`1" />
+         class encodes some common <see cref="T:System.Threading.Tasks.Task`1" />
 
         
 
          patterns into methods that pick up default settings, which are configurable through its constructors.</para
       >
       <para
-        >A default instance of <see
-         cref="T:System.Threading.Tasks.TaskFactory`1" />
+        >A default instance of <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
         
 
-         is available through the <see
-         cref="P:System.Threading.Tasks.Task`1.Factory" />
+         is available through the <see cref="P:System.Threading.Tasks.Task`1.Factory" />
 
         
 
@@ -53,8 +49,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides support for creating and scheduling <see
-         cref="T:System.Threading.Tasks.Task`1" />
+        >Provides support for creating and scheduling <see cref="T:System.Threading.Tasks.Task`1" />
 
         
 
@@ -78,38 +73,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >This constructor creates a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
-             instance with a default configuration. The <see
-             cref="T:System.Threading.Tasks.TaskCreationOptions" />
+             instance with a default configuration. The <see cref="T:System.Threading.Tasks.TaskCreationOptions" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
+             property is initialized to <see cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
 
             
 
-            , the <see
-             cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+            , the <see cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
+             property is initialized to <see cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
 
             
 
-            , and the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            , and the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             property is initialized to the current scheduler (see <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+             property is initialized to the current scheduler (see <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 
@@ -119,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >Initializes a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
@@ -149,38 +136,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor creates a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >This constructor creates a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
-             instance with a default configuration. The <see
-             cref="T:System.Threading.Tasks.TaskCreationOptions" />
+             instance with a default configuration. The <see cref="T:System.Threading.Tasks.TaskCreationOptions" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
+             property is initialized to <see cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
 
             
 
-            , the <see
-             cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+            , the <see cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
+             property is initialized to <see cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
 
             
 
-            , and the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            , and the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             property is initialized to the current scheduler (see <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+             property is initialized to the current scheduler (see <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 
@@ -190,8 +170,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >Initializes a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
@@ -199,12 +178,15 @@
           >
         </summary>
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default cancellation token that will be assigned to tasks created by this <see
-           cref="T:System.Threading.Tasks.TaskFactory" />
+          The default cancellation token that will be assigned to tasks created by this <see cref="T:System.Threading.Tasks.TaskFactory" />
 
           
 
@@ -232,38 +214,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With this constructor, the <see
-             cref="T:System.Threading.Tasks.TaskCreationOptions" />
+            >With this constructor, the <see cref="T:System.Threading.Tasks.TaskCreationOptions" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
+             property is initialized to <see cref="F:System.Threading.Tasks.TaskCreationOptions.None" />
 
             
 
-            , the <see
-             cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+            , the <see cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
             
 
-             property is initialized to <see
-             cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
+             property is initialized to <see cref="F:System.Threading.Tasks.TaskContinuationOptions.None" />
 
             
 
-            , and the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            , and the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             property is initialized to <paramref
-             name="scheduler" />
+             property is initialized to <paramref name="scheduler" />
 
             
 
-            , unless it's null, in which case the property is initialized to the current scheduler (see <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+            , unless it's null, in which case the property is initialized to the current scheduler (see <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 
@@ -273,8 +248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >Initializes a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
@@ -282,17 +256,19 @@
           >
         </summary>
         <param name="scheduler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scheduler to use to schedule any tasks created with this <see
-           cref="T:System.Threading.Tasks.TaskFactory`1" />
+          The scheduler to use to schedule any tasks created with this <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
-          . A null value indicates that the current <see
-           cref="T:System.Threading.Tasks.TaskScheduler" />
+          . A null value indicates that the current <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
           
 
@@ -324,33 +300,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With this constructor, the <see
-             cref="T:System.Threading.Tasks.TaskCreationOptions" />
+            >With this constructor, the <see cref="T:System.Threading.Tasks.TaskCreationOptions" />
 
             
 
-             property is initialized to <paramref
-             name="creationOptions" />
+             property is initialized to <paramref name="creationOptions" />
 
             
 
-            , the <see
-             cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+            , the <see cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
             
 
-             property is initialized to <paramref
-             name="continuationOptions" />
+             property is initialized to <paramref name="continuationOptions" />
 
             
 
-            , and the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            , and the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             property is initialized to the current scheduler (see <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+             property is initialized to the current scheduler (see <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 
@@ -360,8 +330,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >Initializes a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
@@ -369,24 +338,30 @@
           >
         </summary>
         <param name="creationOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default options to use when creating tasks with this <see
-           cref="T:System.Threading.Tasks.TaskFactory`1" />
+          The default options to use when creating tasks with this <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
           .</param
         >
         <param name="continuationOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default options to use when creating continuation tasks with this <see
-           cref="T:System.Threading.Tasks.TaskFactory`1" />
+          The default options to use when creating continuation tasks with this <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
@@ -420,38 +395,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >With this constructor, the <see
-             cref="T:System.Threading.Tasks.TaskCreationOptions" />
+            >With this constructor, the <see cref="T:System.Threading.Tasks.TaskCreationOptions" />
 
             
 
-             property is initialized to <paramref
-             name="creationOptions" />
+             property is initialized to <paramref name="creationOptions" />
 
             
 
-            , the <see
-             cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+            , the <see cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
             
 
-             property is initialized to <paramref
-             name="continuationOptions" />
+             property is initialized to <paramref name="continuationOptions" />
 
             
 
-            , and the <see
-             cref="T:System.Threading.Tasks.TaskScheduler" />
+            , and the <see cref="T:System.Threading.Tasks.TaskScheduler" />
 
             
 
-             property is initialized to <paramref
-             name="scheduler" />
+             property is initialized to <paramref name="scheduler" />
 
             
 
-            , unless it's null, in which case the property is initialized to the current scheduler (see <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+            , unless it's null, in which case the property is initialized to the current scheduler (see <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 
@@ -461,8 +429,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+            >Initializes a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
@@ -470,53 +437,64 @@
           >
         </summary>
         <param name="cancellationToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default cancellation token that will be assigned to tasks created by this <see
-           cref="T:System.Threading.Tasks.TaskFactory" />
+          The default cancellation token that will be assigned to tasks created by this <see cref="T:System.Threading.Tasks.TaskFactory" />
 
           
 
            unless another cancellation token is explicitly specified when calling the factory methods.</param
         >
         <param name="creationOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default options to use when creating tasks with this <see
-           cref="T:System.Threading.Tasks.TaskFactory`1" />
+          The default options to use when creating tasks with this <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
           .</param
         >
         <param name="continuationOptions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default options to use when creating continuation tasks with this <see
-           cref="T:System.Threading.Tasks.TaskFactory`1" />
+          The default options to use when creating continuation tasks with this <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
           .</param
         >
         <param name="scheduler">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The default scheduler to use to schedule any tasks created with this <see
-           cref="T:System.Threading.Tasks.TaskFactory`1" />
+          The default scheduler to use to schedule any tasks created with this <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
           
 
-          . A null value indicates that <see
-           cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+          . A null value indicates that <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
           
 
@@ -577,8 +555,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Threading.Tasks.TaskContinuationOptions" />
+            >Gets the <see cref="T:System.Threading.Tasks.TaskContinuationOptions" />
 
             
 
@@ -1204,8 +1181,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Threading.Tasks.TaskCreationOptions" />
+            >Gets the <see cref="T:System.Threading.Tasks.TaskCreationOptions" />
 
             
 
@@ -1658,8 +1634,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property returns the default scheduler for this factory. It will be used to schedule all tasks unless another scheduler is explicitly specified during calls to this factory's methods.</para>
           <para
-            >If this property returns null, <see
-             cref="P:System.Threading.Tasks.TaskScheduler.Current" />
+            >If this property returns null, <see cref="P:System.Threading.Tasks.TaskScheduler.Current" />
 
             
 

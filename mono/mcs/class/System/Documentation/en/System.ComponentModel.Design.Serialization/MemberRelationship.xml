@@ -25,13 +25,11 @@
 
         
 
-         is used by a serializer to announce that one property is related to a property on another object. <see
-         cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+         is used by a serializer to announce that one property is related to a property on another object. <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
         
 
-         represents a single relationship between an object and a member that <see
-         cref="T:System.ComponentModel.Design.Serialization.MemberRelationshipService" />
+         represents a single relationship between an object and a member that <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationshipService" />
 
         
 
@@ -67,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -76,24 +73,30 @@
           >
         </summary>
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that owns <paramref
-           name="member" />
+          The object that owns <paramref name="member" />
 
           
 
           .</param
         >
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The member which is to be related to <paramref
-           name="owner" />
+          The member which is to be related to <paramref name="owner" />
 
           
 
@@ -122,8 +125,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >A <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -159,8 +161,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether two <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >Determines whether two <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -170,13 +171,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >true if the specified <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
-             is equal to the current <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+             is equal to the current <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -209,8 +208,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A hash code for the current <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >A hash code for the current <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -236,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether this relationship is equal to the <see
-             cref="F:System.ComponentModel.Design.Serialization.MemberRelationship.Empty" />
+            >Gets a value indicating whether this relationship is equal to the <see cref="F:System.ComponentModel.Design.Serialization.MemberRelationship.Empty" />
 
             
 
@@ -304,8 +301,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two specified <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >Tests whether two specified <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -315,8 +311,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator returns true if the two <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >This operator returns true if the two <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -324,24 +319,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
           
 
            structure that is to the left of the equality operator.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
           
 
@@ -381,8 +382,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Tests whether two specified <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >Tests whether two specified <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -392,8 +392,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operator returns true if the two <see
-             cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+            >This operator returns true if the two <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
             
 
@@ -401,24 +400,30 @@
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
           
 
            structure that is to the left of the inequality operator.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+          The <see cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
           
 

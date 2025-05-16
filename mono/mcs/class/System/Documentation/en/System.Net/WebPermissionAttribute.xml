@@ -47,33 +47,27 @@
          allows you to declaratively specify which URI strings and regular expression strings your class can use.</para
       >
       <para
-        >The security information specified in the <see
-         cref="T:System.Net.WebPermissionAttribute" />
+        >The security information specified in the <see cref="T:System.Net.WebPermissionAttribute" />
 
         
 
-         is stored in the metadata of the attribute target, which is the class to which <see
-         cref="T:System.Net.WebPermissionAttribute" />
+         is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.WebPermissionAttribute" />
 
         
 
-         is applied. The system accesses this information at run time. The <see
-         cref="T:System.Security.Permissions.SecurityAction" />
+         is applied. The system accesses this information at run time. The <see cref="T:System.Security.Permissions.SecurityAction" />
 
         
 
-         passed to the constructor determines the allowable <see
-         cref="T:System.Net.WebPermissionAttribute" />
+         passed to the constructor determines the allowable <see cref="T:System.Net.WebPermissionAttribute" />
 
         
 
-         targets. The system uses the <see
-         cref="T:System.Net.WebPermission" />
+         targets. The system uses the <see cref="T:System.Net.WebPermission" />
 
         
 
-         returned by the <see
-         cref="M:System.Net.WebPermissionAttribute.CreatePermission" />
+         returned by the <see cref="M:System.Net.WebPermissionAttribute.CreatePermission" />
 
         
 
@@ -85,8 +79,7 @@
 
           
 
-           is used only for <format
-           type="text/html">
+           is used only for <format type="text/html">
             <a href="97E21EFD-6E89-4115-90D5-AD239513DAD8"
               >[&lt;topic://cpcondeclarativesecurity&gt;]</a
             >
@@ -94,8 +87,7 @@
 
           
 
-          . For <format
-           type="text/html">
+          . For <format type="text/html">
             <a href="15AAB1E1-6B7D-41AD-B102-C1ED7BEDEA27"
               >[&lt;topic://cpconimperativesecurity&gt;]</a
             >
@@ -103,8 +95,7 @@
 
           
 
-          , use the corresponding <see
-           cref="T:System.Net.WebPermission" />
+          , use the corresponding <see cref="T:System.Net.WebPermission" />
 
           
 
@@ -147,8 +138,7 @@
 
           
 
-           is not a valid <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+           is not a valid <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -157,8 +147,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.SecurityAction" />
+            >The <see cref="T:System.Security.Permissions.SecurityAction" />
 
             
 
@@ -168,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -177,12 +165,15 @@
           >
         </summary>
         <param name="action">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.SecurityAction" />
+          One of the <see cref="T:System.Security.Permissions.SecurityAction" />
 
           
 
@@ -211,8 +202,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -225,8 +215,7 @@
 
           
 
-          is being set and is not <see
-           langword="null" />
+          is being set and is not <see langword="null" />
 
           
 
@@ -235,13 +224,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
-             to your class, this property specifies what URI string will be accepted for use within your class. This permission is applied when the security system calls <see
-             cref="M:System.Net.WebPermissionAttribute.CreatePermission" />
+             to your class, this property specifies what URI string will be accepted for use within your class. This permission is applied when the security system calls <see cref="M:System.Net.WebPermissionAttribute.CreatePermission" />
 
             
 
@@ -251,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URI string accepted by the current <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >Gets or sets the URI string accepted by the current <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -279,8 +265,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -290,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a regular expression pattern that describes the URI accepted by the current <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >Gets or sets a regular expression pattern that describes the URI accepted by the current <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -320,8 +304,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -334,8 +317,7 @@
 
           
 
-           is being set and is not <see
-           langword="null" />
+           is being set and is not <see langword="null" />
 
           
 
@@ -344,8 +326,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -355,8 +336,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the URI connection string controlled by the current <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >Gets or sets the URI connection string controlled by the current <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -383,8 +363,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When applying <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >When applying <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -394,8 +373,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a regular expression pattern that describes the URI connection controlled by the current <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >Gets or sets a regular expression pattern that describes the URI connection controlled by the current <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
@@ -431,31 +409,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
+            >The <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
 
             
 
              method is called by the security system, not by application code.</para
           >
           <para
-            >The security information described by <see
-             cref="T:System.Net.WebPermissionAttribute" />
+            >The security information described by <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
-             is stored in the metadata of the attribute target, which is the class to which <see
-             cref="T:System.Net.WebPermissionAttribute" />
+             is stored in the metadata of the attribute target, which is the class to which <see cref="T:System.Net.WebPermissionAttribute" />
 
             
 
-             is applied. The system accesses the information at run time. The system uses the <see
-             cref="T:System.Net.WebPermission" />
+             is applied. The system accesses the information at run time. The system uses the <see cref="T:System.Net.WebPermission" />
 
             
 
-             returned by <see
-             cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
+             returned by <see cref="M:System.Net.SocketPermissionAttribute.CreatePermission" />
 
             
 
@@ -465,8 +438,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates and returns a new instance of the <see
-             cref="T:System.Net.WebPermission" />
+            >Creates and returns a new instance of the <see cref="T:System.Net.WebPermission" />
 
             
 
@@ -476,8 +448,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.WebPermission" />
+            >A <see cref="T:System.Net.WebPermission" />
 
             
 

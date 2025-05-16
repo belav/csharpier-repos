@@ -41,8 +41,7 @@
          can be used to represent a goto statement, which is used in some languages to redirect program flow to a specified label.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeGotoStatement.Label" />
+        >The <see cref="P:System.CodeDom.CodeGotoStatement.Label" />
 
         
 
@@ -50,13 +49,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Not all languages support goto statements. Call the <see
-           cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
+          >Not all languages support goto statements. Call the <see cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
           
 
-           method with the <see
-           cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" />
+           method with the <see cref="F:System.CodeDom.Compiler.GeneratorSupport.GotoStatements" />
 
           
 
@@ -86,8 +83,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If you use this constructor you must also set the <see
-             cref="P:System.CodeDom.CodeGotoStatement.Label" />
+            >If you use this constructor you must also set the <see cref="P:System.CodeDom.CodeGotoStatement.Label" />
 
             
 
@@ -97,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeGotoStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeGotoStatement" />
 
             
 
@@ -128,8 +123,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeGotoStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeGotoStatement" />
 
             
 
@@ -137,7 +131,11 @@
           >
         </summary>
         <param name="label">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -164,8 +162,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property indicates the name of the label at which to continue program execution.</para>
           <para
-            >A label can be represented by a <see
-             cref="T:System.CodeDom.CodeLabeledStatement" />
+            >A label can be represented by a <see cref="T:System.CodeDom.CodeLabeledStatement" />
 
             
 

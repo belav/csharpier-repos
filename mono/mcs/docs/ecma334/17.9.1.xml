@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <clause number="17.9.1" title="Unary operators">
   <paragraph
-    >The following rules apply to unary operator declarations, where T denotes the class or struct type that contains the operator declaration: <list
-    >
+    >The following rules apply to unary operator declarations, where T denotes the class or struct type that contains the operator declaration: <list>
       <list_item> A unary +, -, !, or ~ operator must take a single parameter of type T and can return any type. </list_item>
       <list_item> A unary ++ or  --operator must take a single parameter of type T and must return type T. </list_item>
       <list_item
-        > A unary true or false operator must take a single parameter of type T and must return type <keyword
-        >bool</keyword>
+        > A unary true or false operator must take a single parameter of type T and must return type <keyword>bool</keyword>
 
         
 
@@ -17,8 +15,7 @@
   </paragraph>
   <paragraph>The signature of a unary operator consists of the operator token (+, -, !, ~, ++, --, true, or false) and the type of the single formal parameter. The return type is not part of a unary operator's signature, nor is the name of the formal parameter. </paragraph>
   <paragraph
-    >The true and false unary operators require pair-wise declaration. A compile-time error occurs if a class declares one of these operators without also declaring the other. The true and false operators are described further in <hyperlink
-    >14.16</hyperlink>
+    >The true and false unary operators require pair-wise declaration. A compile-time error occurs if a class declares one of these operators without also declaring the other. The true and false operators are described further in <hyperlink>14.16</hyperlink>
 
     
 
@@ -26,8 +23,7 @@
   >
   <paragraph>
     <example
-      >[Example: The following example shows an implementation and subsequent usage of operator++ for an integer vector class: <code_example
-      >
+      >[Example: The following example shows an implementation and subsequent usage of operator++ for an integer vector class: <code_example>
         <![CDATA[
 public class IntVector  
 {  
@@ -56,13 +52,11 @@ class Test
   </paragraph>
   <paragraph>
     <example
-      >Note how the operator method returns the value produced by adding 1 to the operand, just like the postfix increment and decrement operators(<hyperlink
-      >14.5.9</hyperlink>
+      >Note how the operator method returns the value produced by adding 1 to the operand, just like the postfix increment and decrement operators(<hyperlink>14.5.9</hyperlink>
 
       
 
-      ), and the prefix increment and decrement operators (<hyperlink
-      >14.6.5</hyperlink>
+      ), and the prefix increment and decrement operators (<hyperlink>14.6.5</hyperlink>
 
       
 

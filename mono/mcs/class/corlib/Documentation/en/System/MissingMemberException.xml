@@ -39,13 +39,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Normally a compilation error is generated if the code attempts to access a nonexistent member of a class. <see
-         cref="T:System.MissingMemberException" />
+        >Normally a compilation error is generated if the code attempts to access a nonexistent member of a class. <see cref="T:System.MissingMemberException" />
 
         
 
-         is designed to handle cases where a field or a method is deleted or renamed in one assembly and the change is not reflected in a second assembly. At runtime, <see
-         cref="T:System.MissingMemberException" />
+         is designed to handle cases where a field or a method is deleted or renamed in one assembly and the change is not reflected in a second assembly. At runtime, <see cref="T:System.MissingMemberException" />
 
         
 
@@ -56,23 +54,19 @@
 
         
 
-         is the base class for <see
-         cref="T:System.MissingFieldException" />
+         is the base class for <see cref="T:System.MissingFieldException" />
 
         
 
-         and <see
-         cref="T:System.MissingMethodException" />
+         and <see cref="T:System.MissingMethodException" />
 
         
 
-        . In general it is better to use one of the derived classes of <see
-         cref="T:System.MissingMemberException" />
+        . In general it is better to use one of the derived classes of <see cref="T:System.MissingMemberException" />
 
         
 
-         to more precisely indicate the exact nature of the error. Throw a <see
-         cref="T:System.MissingMemberException" />
+         to more precisely indicate the exact nature of the error. Throw a <see cref="T:System.MissingMemberException" />
 
         
 
@@ -86,13 +80,11 @@
          uses the HRESULT COR_E_MISSINGMEMBER, that has the value 0x80131512.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.MissingMemberException" />
+        >For a list of initial property values for an instance of <see cref="T:System.MissingMemberException" />
 
         
 
-        , see the <see
-         cref="M:System.MissingMemberException.#ctor" />
+        , see the <see cref="M:System.MissingMemberException.#ctor" />
 
         
 
@@ -127,16 +119,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes the <see
-             cref="P:System.MissingMemberException.Message" />
+            >This constructor initializes the <see cref="P:System.MissingMemberException.Message" />
 
             
 
              property of the new instance to a system-supplied message that describes the error, such as "Attempted to access a missing member." This message takes into account the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.MissingMemberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.MissingMemberException" />
 
             
 
@@ -178,8 +168,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MissingMemberException" />
+            >Initializes a new instance of the <see cref="T:System.MissingMemberException" />
 
             
 
@@ -213,16 +202,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The content of the <paramref
-             name="message" />
+            >The content of the <paramref name="message" />
 
             
 
              parameter should be understandable by the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.MissingMemberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.MissingMemberException" />
 
             
 
@@ -264,8 +251,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MissingMemberException" />
+            >Initializes a new instance of the <see cref="T:System.MissingMemberException" />
 
             
 
@@ -273,7 +259,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -305,8 +295,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format
-             type="text/html">
+            >This constructor is called during deserialization to reconstitute the exception object transmitted over a stream. For more information, see <format type="text/html">
               <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and Soap Serialization</a>
             </format>
 
@@ -318,8 +307,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MissingMemberException" />
+            >Initializes a new instance of the <see cref="T:System.MissingMemberException" />
 
             
 
@@ -327,14 +315,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -370,26 +366,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see
-             cref="P:System.Exception.InnerException" />
+            >An exception that is thrown as a direct result of a previous exception can include a reference to the previous exception in the <see cref="P:System.Exception.InnerException" />
 
             
 
-             property. The <see
-             cref="P:System.Exception.InnerException" />
+             property. The <see cref="P:System.Exception.InnerException" />
 
             
 
-             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
-             cref="P:System.Exception.InnerException" />
+             property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see cref="P:System.Exception.InnerException" />
 
             
 
              property does not supply the inner exception value to the constructor.</para
           >
           <para
-            >The following table shows the initial property values for an instance of <see
-             cref="T:System.MissingMemberException" />
+            >The following table shows the initial property values for an instance of <see cref="T:System.MissingMemberException" />
 
             
 
@@ -431,8 +423,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MissingMemberException" />
+            >Initializes a new instance of the <see cref="T:System.MissingMemberException" />
 
             
 
@@ -440,29 +431,34 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The error message that explains the reason for the exception. </param
         >
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Exception" />
+          An instance of <see cref="T:System.Exception" />
 
           
 
-           that is the cause of the current Exception. If <paramref
-           name="inner" />
+           that is the cause of the current Exception. If <paramref name="inner" />
 
           
 
-           is not a null reference (Nothing in Visual Basic), then the current Exception is raised in a catch block handling <paramref
-           name="inner" />
+           is not a null reference (Nothing in Visual Basic), then the current Exception is raised in a catch block handling <paramref name="inner" />
 
           
 
@@ -495,8 +491,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.MissingMemberException" />
+            >Initializes a new instance of the <see cref="T:System.MissingMemberException" />
 
             
 
@@ -504,14 +499,22 @@
           >
         </summary>
         <param name="className">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the class in which access to a nonexistent member was attempted. </param
         >
         <param name="memberName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -569,21 +572,18 @@
 
             
 
-             sets a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             sets a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             with all the exception object data targeted for serialization. During deserialization, the exception object is reconstituted from the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
              transmitted over the stream.</para
           >
           <para
-            >For more information, see <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >For more information, see <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -593,8 +593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Sets the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -602,14 +601,22 @@
           >
         </summary>
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object that holds the serialized object data. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -655,8 +662,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>If the class name is not specified when the object is constructed, the default text string inherited from the base class is returned.</para>
           <para
-            >This property overrides <see
-             cref="P:System.Exception.Message" />
+            >This property overrides <see cref="P:System.Exception.Message" />
 
             
 
@@ -690,8 +696,7 @@
 
             
 
-             contains a <see
-             cref="T:System.Byte" />
+             contains a <see cref="T:System.Byte" />
 
             
 
@@ -702,18 +707,15 @@
 
             
 
-             is used to format the signature. For additional information, see <see
-             cref="T:System.Reflection.Emit.SignatureHelper" />
+             is used to format the signature. For additional information, see <see cref="T:System.Reflection.Emit.SignatureHelper" />
 
             
 
-            , <see
-             cref="T:System.Reflection.Emit.SignatureToken" />
+            , <see cref="T:System.Reflection.Emit.SignatureToken" />
 
             
 
-            , and <see
-             cref="T:System.String" />
+            , and <see cref="T:System.String" />
 
             
 

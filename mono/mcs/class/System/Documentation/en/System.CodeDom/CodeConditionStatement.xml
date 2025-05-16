@@ -38,26 +38,22 @@
 
         
 
-         can be used to represent code that consists of a conditional expression, a collection of statements to execute if the conditional expression evaluates to true, and an optional collection of statements to execute if the conditional expression evaluates to false. A <see
-         cref="T:System.CodeDom.CodeConditionStatement" />
+         can be used to represent code that consists of a conditional expression, a collection of statements to execute if the conditional expression evaluates to true, and an optional collection of statements to execute if the conditional expression evaluates to false. A <see cref="T:System.CodeDom.CodeConditionStatement" />
 
         
 
          is generated in many languages as an if statement.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodeConditionStatement.Condition" />
+        >The <see cref="P:System.CodeDom.CodeConditionStatement.Condition" />
 
         
 
-         property indicates the expression to test. The <see
-         cref="P:System.CodeDom.CodeConditionStatement.TrueStatements" />
+         property indicates the expression to test. The <see cref="P:System.CodeDom.CodeConditionStatement.TrueStatements" />
 
         
 
-         property contains the statements to execute if the expression to test evaluates to true. The <see
-         cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
+         property contains the statements to execute if the expression to test evaluates to true. The <see cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
 
         
 
@@ -89,8 +85,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeConditionStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeConditionStatement" />
 
             
 
@@ -130,8 +125,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeConditionStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeConditionStatement" />
 
             
 
@@ -139,24 +133,30 @@
           >
         </summary>
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that indicates the expression to evaluate. </param
         >
         <param name="trueStatements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeStatement" />
+          An array of type <see cref="T:System.CodeDom.CodeStatement" />
 
           
 
@@ -190,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeConditionStatement" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeConditionStatement" />
 
             
 
@@ -199,36 +198,45 @@
           >
         </summary>
         <param name="condition">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeExpression" />
+          A <see cref="T:System.CodeDom.CodeExpression" />
 
           
 
            that indicates the condition to evaluate. </param
         >
         <param name="trueStatements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeStatement" />
+          An array of type <see cref="T:System.CodeDom.CodeStatement" />
 
           
 
            containing the statements to execute if the condition is true. </param
         >
         <param name="falseStatements">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of type <see
-           cref="T:System.CodeDom.CodeStatement" />
+          An array of type <see cref="T:System.CodeDom.CodeStatement" />
 
           
 
@@ -260,18 +268,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If this conditional expression evaluates to true, the code contained in the <see
-             cref="P:System.CodeDom.CodeConditionStatement.TrueStatements" />
+            >If this conditional expression evaluates to true, the code contained in the <see cref="P:System.CodeDom.CodeConditionStatement.TrueStatements" />
 
             
 
-             collection will be executed. If this conditional expression evaluates to false and the <see
-             cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
+             collection will be executed. If this conditional expression evaluates to false and the <see cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
 
             
 
-             collection is not empty, the code contained in the <see
-             cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
+             collection is not empty, the code contained in the <see cref="P:System.CodeDom.CodeConditionStatement.FalseStatements" />
 
             
 

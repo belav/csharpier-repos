@@ -30,8 +30,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Ordinarily, types and members with internal scope (in C#) and friend scope (in Visual Basic) are visible only in the assembly in which they are defined. The <see
-         cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+        >Ordinarily, types and members with internal scope (in C#) and friend scope (in Visual Basic) are visible only in the assembly in which they are defined. The <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
         
 
@@ -40,8 +39,7 @@
       <para>The attribute is applied at the assembly level. This means that it can be included at the beginning of a source code file, or it can be included in the AssemblyInfo file in a Visual Studio project. You can use the attribute to specify a single friend assembly that can access the internal types and members of the current assembly. You can define multiple friend assemblies in two ways. They can appear as individual assembly-level attributes, as the following example illustrates.</para>
       <para>code reference: System.Runtime.CompilerServices.InternalsVisibleToAttribute#3</para>
       <para
-        >They can also appear with separate <see
-         cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+        >They can also appear with separate <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
         
 
@@ -49,58 +47,48 @@
       >
       <para>code reference: System.Runtime.CompilerServices.InternalsVisibleToAttribute#4</para>
       <para
-        >The friend assembly is identified by the <see
-         cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
+        >The friend assembly is identified by the <see cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
 
         
 
-         constructor. Both the current assembly and the friend assembly must be unsigned, or both assemblies must be signed with a strong name. If they are signed with a strong name, the argument to the <see
-         cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
+         constructor. Both the current assembly and the friend assembly must be unsigned, or both assemblies must be signed with a strong name. If they are signed with a strong name, the argument to the <see cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
 
         
 
-         constructor must include the full public key as well as the name of the assembly. For more information about using <see
-         cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+         constructor must include the full public key as well as the name of the assembly. For more information about using <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
         
 
-         with strong-named assemblies, see the <see
-         cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
+         with strong-named assemblies, see the <see cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
 
         
 
          constructor.</para
       >
       <para
-        >Do not include values for the <see
-         cref="P:System.Reflection.AssemblyName.CultureInfo" />
+        >Do not include values for the <see cref="P:System.Reflection.AssemblyName.CultureInfo" />
 
         
 
-        , <see
-         cref="P:System.Reflection.AssemblyName.Version" />
+        , <see cref="P:System.Reflection.AssemblyName.Version" />
 
         
 
-        , or <see
-         cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
+        , or <see cref="P:System.Reflection.AssemblyName.ProcessorArchitecture" />
 
         
 
-         field in the argument; the Visual Basic, C#, and C++ compilers treat this as a compiler error. If you use a compiler that does not treat it as an error (such as the <format
-         type="text/html">
+         field in the argument; the Visual Basic, C#, and C++ compilers treat this as a compiler error. If you use a compiler that does not treat it as an error (such as the <format type="text/html">
           <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (ILAsm.exe)</a>
         </format>
 
         
 
-        ) and the assemblies are strong-named, a <see
-         cref="T:System.MethodAccessException" />
+        ) and the assemblies are strong-named, a <see cref="T:System.MethodAccessException" />
 
         
 
-         exception is thrown the first time the specified friend assembly accesses the assembly that contains the <see
-         cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+         exception is thrown the first time the specified friend assembly accesses the assembly that contains the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
         
 
@@ -155,16 +143,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
+            >The <see cref="M:System.Runtime.CompilerServices.InternalsVisibleToAttribute.#ctor(System.String)" />
 
             
 
              constructor defines a friend assembly, which is an assembly that has access to the internal types and members of the current assembly. </para
           >
           <para
-            >Both the current assembly and the friend assembly must be unsigned, or both must be signed with a strong name. (For more information about strong-named assemblies, see <format
-             type="text/html">
+            >Both the current assembly and the friend assembly must be unsigned, or both must be signed with a strong name. (For more information about strong-named assemblies, see <format type="text/html">
               <a href="ffbf6d9e-4a88-4a8a-9645-4ce0ee1ee5f9"
                 >Creating and Using Strong-Named Assemblies</a
               >
@@ -172,26 +158,22 @@
 
             
 
-            .) If both are unsigned, the <paramref
-             name="assemblyName" />
+            .) If both are unsigned, the <paramref name="assemblyName" />
 
             
 
-             parameter consists of the name of the friend assembly, specified without a directory path or file extension. If both are signed, <paramref
-             name="assemblyName" />
+             parameter consists of the name of the friend assembly, specified without a directory path or file extension. If both are signed, <paramref name="assemblyName" />
 
             
 
-             consists of the name of the friend assembly along with its full public key (but not its public key token). The other components of a strong name, such as those that provide culture, version, or processor architecture information, cannot be specified in the <paramref
-             name="assemblyName" />
+             consists of the name of the friend assembly along with its full public key (but not its public key token). The other components of a strong name, such as those that provide culture, version, or processor architecture information, cannot be specified in the <paramref name="assemblyName" />
 
             
 
              parameter.</para
           >
           <para
-            >You can use <format
-             type="text/html">
+            >You can use <format type="text/html">
               <a href="c1d2b532-1b8e-4c7a-8ac5-53b801135ec6">Sn.exe (Strong Name Tool)</a>
             </format>
 
@@ -212,21 +194,18 @@
             </item>
             <item>
               <para>Display the full public key to the console:</para>
-              <para>
-                <system>Sn -tp</system>
+              <para><system>Sn -tp</system>
 
                 
 
-                 outfile</para
-              >
+                 outfile</para>
             </item>
             <item>
               <para>Copy and paste the full public key value into your source code.</para>
             </item>
           </list>
           <para
-            >For more information about how to use the <see
-             cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+            >For more information about how to use the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
             
 
@@ -254,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
             
 
@@ -263,7 +241,11 @@
           >
         </summary>
         <param name="assemblyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -308,8 +290,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about how to use the <see
-             cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+            >For more information about how to use the <see cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
 
             
 

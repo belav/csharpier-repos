@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default value is <see
-         cref="F:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat.Xml" />
+        >The default value is <see cref="F:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat.Xml" />
 
         
 
@@ -70,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+            >The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
             
 

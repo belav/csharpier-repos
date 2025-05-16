@@ -18,41 +18,34 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Trace filters can be used by trace listeners to provide an extra layer of filtering beyond that provided by trace switches. The trace filter for a trace listener can be found in the listener's <see
-         cref="P:System.Diagnostics.TraceListener.Filter" />
+        >Trace filters can be used by trace listeners to provide an extra layer of filtering beyond that provided by trace switches. The trace filter for a trace listener can be found in the listener's <see cref="P:System.Diagnostics.TraceListener.Filter" />
 
         
 
-         property. Trace switches determine if a trace is to be sent to the trace listeners. Trace filters allow the individual trace listeners to determine whether or not the trace is to be written to the associated output medium. For example, as determined by each trace filter, a trace may be written to the console by a <see
-         cref="T:System.Diagnostics.ConsoleTraceListener" />
+         property. Trace switches determine if a trace is to be sent to the trace listeners. Trace filters allow the individual trace listeners to determine whether or not the trace is to be written to the associated output medium. For example, as determined by each trace filter, a trace may be written to the console by a <see cref="T:System.Diagnostics.ConsoleTraceListener" />
 
         
 
-        , but not to the event log by a <see
-         cref="T:System.Diagnostics.EventLogTraceListener" />
+        , but not to the event log by a <see cref="T:System.Diagnostics.EventLogTraceListener" />
 
         
 
         .</para
       >
       <para
-        >Filters that inherit from the <see
-         cref="T:System.Diagnostics.TraceFilter" />
+        >Filters that inherit from the <see cref="T:System.Diagnostics.TraceFilter" />
 
         
 
-         class can be used by trace listeners that inherit from the <see
-         cref="T:System.Diagnostics.TraceListener" />
+         class can be used by trace listeners that inherit from the <see cref="T:System.Diagnostics.TraceListener" />
 
         
 
-         class to perform filtering of events being traced. <see
-         cref="T:System.Diagnostics.TraceFilter" />
+         class to perform filtering of events being traced. <see cref="T:System.Diagnostics.TraceFilter" />
 
         
 
-         contains a single method, <see
-         cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
+         contains a single method, <see cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
 
         
 
@@ -82,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.TraceFilter" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.TraceFilter" />
 
             
 
@@ -130,71 +122,100 @@
           <para>true to trace the specified event; otherwise, false. </para>
         </returns>
         <param name="cache">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.TraceEventCache" />
+          The <see cref="T:System.Diagnostics.TraceEventCache" />
 
           
 
            that contains information for the trace event.</param
         >
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the source.</param
         >
         <param name="eventType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Diagnostics.TraceEventType" />
+          One of the <see cref="T:System.Diagnostics.TraceEventType" />
 
           
 
            values specifying the type of event that has caused the trace.</param
         >
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A trace identifier number.</param
         >
         <param name="formatOrMessage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Either the format to use for writing an array of arguments specified by the <paramref
-           name="args" />
+          Either the format to use for writing an array of arguments specified by the <paramref name="args" />
 
           
 
            parameter, or a message to write.</param
         >
         <param name="args">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of argument objects.</param
         >
         <param name="data1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A trace data object.</param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

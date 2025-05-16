@@ -17,18 +17,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.PropertyGrid.SelectedGridItemChanged" />
+        >The <see cref="E:System.Windows.Forms.PropertyGrid.SelectedGridItemChanged" />
 
         
 
-         event occurs when the user changes the <see
-         cref="T:System.Windows.Forms.GridItem" />
+         event occurs when the user changes the <see cref="T:System.Windows.Forms.GridItem" />
 
         
 
-         that is selected in a <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         that is selected in a <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -38,13 +35,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.PropertyGrid.SelectedGridItemChanged" />
+        >Provides data for the <see cref="E:System.Windows.Forms.PropertyGrid.SelectedGridItemChanged" />
 
         
 
-         event of the <see
-         cref="T:System.Windows.Forms.PropertyGrid" />
+         event of the <see cref="T:System.Windows.Forms.PropertyGrid" />
 
         
 
@@ -68,8 +63,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.SelectedGridItemChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.SelectedGridItemChangedEventArgs" />
 
             
 
@@ -77,14 +71,22 @@
           >
         </summary>
         <param name="oldSel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The previously selected grid item. </param
         >
         <param name="newSel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,8 +113,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the newly selected <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >Gets the newly selected <see cref="T:System.Windows.Forms.GridItem" />
 
             
 
@@ -140,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the previously selected <see
-             cref="T:System.Windows.Forms.GridItem" />
+            >Gets the previously selected <see cref="T:System.Windows.Forms.GridItem" />
 
             
 

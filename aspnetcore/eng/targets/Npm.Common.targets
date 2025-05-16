@@ -106,8 +106,7 @@
       $(PackDependsOn);
       PrepareForBuild
     </PackDependsOn>
-    <PackDependsOn Condition="'$(NoBuild)' != 'true'"
-      >
+    <PackDependsOn Condition="'$(NoBuild)' != 'true'">
       $(PackDependsOn);
       Build;
       _Pack

@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.IdentityElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.IdentityElement" />
 
             
 
@@ -166,7 +165,11 @@
           <para>Initializes this configuration element with the content of the specified object.</para>
         </summary>
         <param name="identity">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

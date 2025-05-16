@@ -18,51 +18,42 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ScrollBars" />
+        >The <see cref="T:System.Web.UI.WebControls.ScrollBars" />
 
         
 
-         enumeration represents the visibility and position of the scroll bars in a <see
-         cref="T:System.Web.UI.WebControls.Panel" />
+         enumeration represents the visibility and position of the scroll bars in a <see cref="T:System.Web.UI.WebControls.Panel" />
 
         
 
-         control. The <see
-         cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+         control. The <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
 
         
 
-         property uses these enumeration values to specify the type of scroll bars to display in a <see
-         cref="T:System.Web.UI.WebControls.Panel" />
+         property uses these enumeration values to specify the type of scroll bars to display in a <see cref="T:System.Web.UI.WebControls.Panel" />
 
         
 
-         control. The default value for the <see
-         cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+         control. The default value for the <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
 
         
 
          property is None, indicating that no scroll bars are shown.</para
       >
       <para
-        >If you specify Auto for the <see
-         cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
+        >If you specify Auto for the <see cref="P:System.Web.UI.WebControls.Panel.ScrollBars" />
 
         
 
-         property, scroll bars are automatically shown when the size of the content in a <see
-         cref="T:System.Web.UI.WebControls.Panel" />
+         property, scroll bars are automatically shown when the size of the content in a <see cref="T:System.Web.UI.WebControls.Panel" />
 
         
 
-         control exceeds the size of the <see
-         cref="T:System.Web.UI.WebControls.Panel" />
+         control exceeds the size of the <see cref="T:System.Web.UI.WebControls.Panel" />
 
         
 
-         control. For example, if a <see
-         cref="T:System.Web.UI.WebControls.Panel" />
+         control. For example, if a <see cref="T:System.Web.UI.WebControls.Panel" />
 
         
 
@@ -72,8 +63,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the visibility and position of scroll bars in a <see
-         cref="T:System.Web.UI.WebControls.Panel" />
+        >Specifies the visibility and position of scroll bars in a <see cref="T:System.Web.UI.WebControls.Panel" />
 
         
 

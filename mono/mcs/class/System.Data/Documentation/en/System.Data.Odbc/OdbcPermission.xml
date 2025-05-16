@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is intended for future use when the .NET Framework Data Provider for ODBC is enabled for partial trust scenarios. The .NET Framework Data Provider for ODBD currently requires FullTrust permission. Currently, using the OdbcPermission class has no effect. For more information, see <format
-         type="text/html">
+        >This class is intended for future use when the .NET Framework Data Provider for ODBC is enabled for partial trust scenarios. The .NET Framework Data Provider for ODBD currently requires FullTrust permission. Currently, using the OdbcPermission class has no effect. For more information, see <format type="text/html">
           <a href="93e099eb-daa1-4f1e-b031-c1e10a996f88">Code Access Security and ADO.NET</a>
         </format>
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcPermission" />
 
             
 
@@ -78,13 +76,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcPermission" />
 
             
 
-             class with one of the <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             class with one of the <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -92,12 +88,15 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Permissions.PermissionState" />
+          One of the <see cref="T:System.Security.Permissions.PermissionState" />
 
           
 
@@ -128,23 +127,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Permissions.PermissionState" />
+            >The <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
-             enumeration takes precedence over the <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             enumeration takes precedence over the <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             property. Therefore, if you set <see
-             cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+             property. Therefore, if you set <see cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
 
             
 
-             to false, you must also set <see
-             cref="T:System.Security.Permissions.PermissionState" />
+             to false, you must also set <see cref="T:System.Security.Permissions.PermissionState" />
 
             
 
@@ -154,8 +149,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.Odbc.OdbcPermission" />
+            >Initializes a new instance of the <see cref="T:System.Data.Odbc.OdbcPermission" />
 
             
 
@@ -163,14 +157,22 @@
           >
         </summary>
         <param name="state">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the System.Security.Permissions.PermissionState values. </param
         >
         <param name="allowBlankPassword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -221,26 +223,37 @@
           <para>Adds access for the specified connection string to the existing state of the permission.</para>
         </summary>
         <param name="connectionString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A permitted connection string. </param
         >
         <param name="restrictions">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           String that identifies connection string parameters that are allowed or disallowed. </param
         >
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.KeyRestrictionBehavior" />
+          One of the <see cref="T:System.Data.KeyRestrictionBehavior" />
 
           
 
@@ -260,13 +273,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Data.Odbc.OdbcPermission" />
+            >Returns the <see cref="T:System.Data.Odbc.OdbcPermission" />
 
             
 
-             as an <see
-             cref="T:System.Security.IPermission" />
+             as an <see cref="T:System.Security.IPermission" />
 
             
 

@@ -18,8 +18,7 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>ASP.NET role management is designed to enable you to easily use a number of different role providers for your ASP.NET applications. You can use the supplied role providers that are included with the .NET Framework, or you can implement your own provider.</para>
       <para
-        >When implementing a custom role provider, you are required to inherit the <see
-         cref="T:System.Web.Security.RoleProvider" />
+        >When implementing a custom role provider, you are required to inherit the <see cref="T:System.Web.Security.RoleProvider" />
 
         
 
@@ -50,18 +49,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You are not required to implement a constructor for a class that inherits the <see
-             cref="T:System.Web.Security.RoleProvider" />
+            >You are not required to implement a constructor for a class that inherits the <see cref="T:System.Web.Security.RoleProvider" />
 
             
 
-             abstract class. Initialization values for a <see
-             cref="T:System.Web.Security.RoleProvider" />
+             abstract class. Initialization values for a <see cref="T:System.Web.Security.RoleProvider" />
 
             
 
-             implementation are passed to the <see
-             cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+             implementation are passed to the <see cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
             
 
@@ -71,8 +67,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Security.RoleProvider" />
+            >Initializes a new instance of the <see cref="T:System.Web.Security.RoleProvider" />
 
             
 
@@ -107,29 +102,25 @@
 
             
 
-             is called by the <see
-             cref="T:System.Web.Security.Roles" />
+             is called by the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to associate the specified users with the specified roles at the data source. Roles are added to the configured <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
-
-            
-
-            .</para
-          >
-          <para
-            >If any of the specified role names are not found for the configured applicationName, we recommend that your provider throw a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+             class to associate the specified users with the specified roles at the data source. Roles are added to the configured <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
             .</para
           >
           <para
-            >If any of the specified user names are not associated with any of the specified role names for the configured applicationName, we recommend that your provider throw a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+            >If any of the specified role names are not found for the configured applicationName, we recommend that your provider throw a <see cref="T:System.Configuration.Provider.ProviderException" />
+
+            
+
+            .</para
+          >
+          <para
+            >If any of the specified user names are not associated with any of the specified role names for the configured applicationName, we recommend that your provider throw a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
@@ -144,7 +135,11 @@
           <para>Adds the specified user names to the specified roles for the configured applicationName.</para>
         </summary>
         <param name="usernames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -167,36 +162,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+            >The <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
-             is used by the <see
-             cref="T:System.Web.Security.Roles" />
+             is used by the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to associate users and roles with different applications. This enables multiple applications to use the same database to store user and role information without running into conflicts between duplicate user names or role names. Multiple ASP.NET applications can use the same database by specifying the same value in the <see
-             cref="P:System.Web.Security.Roles.ApplicationName" />
+             class to associate users and roles with different applications. This enables multiple applications to use the same database to store user and role information without running into conflicts between duplicate user names or role names. Multiple ASP.NET applications can use the same database by specifying the same value in the <see cref="P:System.Web.Security.Roles.ApplicationName" />
 
             
 
-             property. The <see
-             cref="P:System.Web.Security.Roles.ApplicationName" />
+             property. The <see cref="P:System.Web.Security.Roles.ApplicationName" />
 
             
 
              property can be set programmatically, or it can be set declaratively in the configuration file for the Web application using the applicationName attribute.</para
           >
           <para
-            >If no <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+            >If no <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
-             property is specified, we recommend that the <see
-             cref="P:System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath" />
+             property is specified, we recommend that the <see cref="P:System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath" />
 
             
 
@@ -231,18 +220,15 @@
 
             
 
-             is called by the <see
-             cref="M:System.Web.Security.Roles.CreateRole(System.String)" />
+             is called by the <see cref="M:System.Web.Security.Roles.CreateRole(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Roles" />
+             method of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to add the specified role to the data source for the configured <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+             class to add the specified role to the data source for the configured <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
@@ -284,23 +270,19 @@
 
             
 
-             is called by the <see
-             cref="M:System.Web.Security.Roles.DeleteRole(System.String)" />
+             is called by the <see cref="M:System.Web.Security.Roles.DeleteRole(System.String)" />
 
             
 
-             and the <see
-             cref="M:System.Web.Security.Roles.DeleteRole(System.String,System.Boolean)" />
+             and the <see cref="M:System.Web.Security.Roles.DeleteRole(System.String,System.Boolean)" />
 
             
 
-             methods of the <see
-             cref="T:System.Web.Security.Roles" />
+             methods of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to delete the specified role from the data source for the configured <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+             class to delete the specified role from the data source for the configured <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
@@ -308,23 +290,19 @@
           >
           <para>When you delete a role from the data source, ensure that you also delete any associations between a user name and the deleted role for the configured applicationName.</para>
           <para
-            >If <paramref
-             name="throwOnPopulatedRole" />
+            >If <paramref name="throwOnPopulatedRole" />
 
             
 
-             is true, and the role identified by the <paramref
-             name="roleName" />
+             is true, and the role identified by the <paramref name="roleName" />
 
             
 
-             parameter has one or more members, throw a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+             parameter has one or more members, throw a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
-             and do not delete the role. If <paramref
-             name="throwOnPopulatedRole" />
+             and do not delete the role. If <paramref name="throwOnPopulatedRole" />
 
             
 
@@ -341,17 +319,19 @@
           <para>true if the role was successfully deleted; otherwise, false.</para>
         </returns>
         <param name="throwOnPopulatedRole">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          If true, throw an exception if <paramref
-           name="roleName" />
+          If true, throw an exception if <paramref name="roleName" />
 
           
 
-           has one or more members and do not delete <paramref
-           name="roleName" />
+           has one or more members and do not delete <paramref name="roleName" />
 
           
 
@@ -380,31 +360,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Security.RoleProvider.FindUsersInRole(System.String,System.String)" />
+            >The <see cref="M:System.Web.Security.RoleProvider.FindUsersInRole(System.String,System.String)" />
 
             
 
-             method is called by the <see
-             cref="T:System.Web.Security.Roles" />
+             method is called by the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class and returns a list of users in a role where the user name contains a match of the supplied <paramref
-             name="usernameToMatch" />
+             class and returns a list of users in a role where the user name contains a match of the supplied <paramref name="usernameToMatch" />
 
             
 
              for the configured applicationName. Wildcard support is included based on the data source. Users are returned in alphabetical order by user name.</para
           >
           <para
-            >We recommend that you throw a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+            >We recommend that you throw a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
-             if <paramref
-             name="roleName" />
+             if <paramref name="roleName" />
 
             
 
@@ -418,8 +393,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string array containing the names of all the users where the user name matches <paramref
-             name="usernameToMatch" />
+            >A string array containing the names of all the users where the user name matches <paramref name="usernameToMatch" />
 
             
 
@@ -427,14 +401,22 @@
           >
         </returns>
         <param name="roleName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The role to search in.</param
         >
         <param name="usernameToMatch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -461,18 +443,15 @@
 
             
 
-             is called by the <see
-             cref="M:System.Web.Security.Roles.GetAllRoles" />
+             is called by the <see cref="M:System.Web.Security.Roles.GetAllRoles" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Roles" />
+             method of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to retrieve a list of role names from the data source. Only the roles for the specified <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+             class to retrieve a list of role names from the data source. Only the roles for the specified <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
@@ -514,18 +493,15 @@
 
             
 
-             is called by the <see
-             cref="M:System.Web.Security.Roles.GetRolesForUser" />
+             is called by the <see cref="M:System.Web.Security.Roles.GetRolesForUser" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Roles" />
+             method of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to retrieve the role names that the specified user is associated with from the data source. Only the roles for the configured <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+             class to retrieve the role names that the specified user is associated with from the data source. Only the roles for the configured <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
@@ -543,7 +519,11 @@
           <para>A string array containing the names of all the roles that the specified user is in for the configured applicationName.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -576,18 +556,15 @@
 
             
 
-             is called by the <see
-             cref="M:System.Web.Security.Roles.GetUsersInRole(System.String)" />
+             is called by the <see cref="M:System.Web.Security.Roles.GetUsersInRole(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Roles" />
+             method of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to retrieve the user names associated with a role from the data source. Only the roles for the configured <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+             class to retrieve the user names associated with a role from the data source. Only the roles for the configured <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
@@ -628,23 +605,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Security.RoleProvider.IsUserInRole(System.String,System.String)" />
+            >The <see cref="M:System.Web.Security.RoleProvider.IsUserInRole(System.String,System.String)" />
 
             
 
-             method is called by the <see
-             cref="Overload:System.Web.Security.Roles.IsUserInRole" />
+             method is called by the <see cref="Overload:System.Web.Security.Roles.IsUserInRole" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Roles" />
+             method of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to determine whether the current logged-on user is associated with a role from the data source for the configured <see
-             cref="P:System.Web.Security.Roles.ApplicationName" />
+             class to determine whether the current logged-on user is associated with a role from the data source for the configured <see cref="P:System.Web.Security.Roles.ApplicationName" />
 
             
 
@@ -662,7 +635,11 @@
           <para>true if the specified user is in the specified role for the configured applicationName; otherwise, false.</para>
         </returns>
         <param name="username">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -696,49 +673,41 @@
 
             
 
-             is called by <see
-             cref="M:System.Web.Security.Roles.RemoveUserFromRole(System.String,System.String)" />
+             is called by <see cref="M:System.Web.Security.Roles.RemoveUserFromRole(System.String,System.String)" />
 
             
 
-             , <see
-             cref="M:System.Web.Security.Roles.RemoveUsersFromRole(System.String[],System.String)" />
+             , <see cref="M:System.Web.Security.Roles.RemoveUsersFromRole(System.String[],System.String)" />
 
             
 
-             , <see
-             cref="M:System.Web.Security.Roles.RemoveUserFromRoles(System.String,System.String[])" />
+             , <see cref="M:System.Web.Security.Roles.RemoveUserFromRoles(System.String,System.String[])" />
 
             
 
-             , and <see
-             cref="M:System.Web.Security.Roles.RemoveUsersFromRoles(System.String[],System.String[])" />
+             , and <see cref="M:System.Web.Security.Roles.RemoveUsersFromRoles(System.String[],System.String[])" />
 
             
 
-             methods of the <see
-             cref="T:System.Web.Security.Roles" />
+             methods of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to remove the specified users from the specified roles at the data source. Only roles for the configured <see
-             cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+             class to remove the specified users from the specified roles at the data source. Only roles for the configured <see cref="P:System.Web.Security.RoleProvider.ApplicationName" />
 
             
 
              are modified.</para
           >
           <para
-            >If any of the specified role names are not found for the configured applicationName, we recommend that your provider throw a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+            >If any of the specified role names are not found for the configured applicationName, we recommend that your provider throw a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
             .</para
           >
           <para
-            >If any of the specified user names are not associated with any of the specified role names for the configured applicationName, we recommend that your provider throw a <see
-             cref="T:System.Configuration.Provider.ProviderException" />
+            >If any of the specified user names are not associated with any of the specified role names for the configured applicationName, we recommend that your provider throw a <see cref="T:System.Configuration.Provider.ProviderException" />
 
             
 
@@ -753,7 +722,11 @@
           <para>Removes the specified user names from the specified roles for the configured applicationName.</para>
         </summary>
         <param name="usernames">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -783,18 +756,15 @@
 
             
 
-             is called by the <see
-             cref="M:System.Web.Security.Roles.RoleExists(System.String)" />
+             is called by the <see cref="M:System.Web.Security.Roles.RoleExists(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Web.Security.Roles" />
+             method of the <see cref="T:System.Web.Security.Roles" />
 
             
 
-             class to determine whether a role name exists in the data source for the configured <see
-             cref="P:System.Web.Security.Roles.ApplicationName" />
+             class to determine whether a role name exists in the data source for the configured <see cref="P:System.Web.Security.Roles.ApplicationName" />
 
             
 

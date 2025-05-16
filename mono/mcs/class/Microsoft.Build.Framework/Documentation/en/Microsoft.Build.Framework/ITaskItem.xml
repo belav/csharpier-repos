@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The number of <see
-         cref="T:Microsoft.Build.Framework.ITaskItem" />
+        >The number of <see cref="T:Microsoft.Build.Framework.ITaskItem" />
 
         
 
@@ -100,8 +99,7 @@
           <list type="bullet">
             <item>
               <para
-                >Do not overwrite the <see
-                 cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+                >Do not overwrite the <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
 
                 
 
@@ -121,7 +119,11 @@
           <para>Copies the custom metadata entries to another item.</para>
         </summary>
         <param name="destinationItem">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +153,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <paramref
-             name="attributeName" />
+            >The value of the <paramref name="attributeName" />
 
             
 
@@ -160,7 +161,11 @@
           >
         </returns>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -184,8 +189,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The item specification is an arbitrary string. If the item represents a file on disk, the item specification will be the path of that file.</para>
           <para
-            >The <see
-             cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+            >The <see cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
 
             
 
@@ -262,7 +266,11 @@
           <para>Removes the specified metadata entry from the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -294,14 +302,22 @@
           <para>Adds or changes a custom metadata entry to the item.</para>
         </summary>
         <param name="metadataName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the metadata entry.</param
         >
         <param name="metadataValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

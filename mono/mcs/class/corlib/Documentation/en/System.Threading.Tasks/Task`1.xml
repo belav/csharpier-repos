@@ -36,23 +36,19 @@
 
         
 
-         instances may be created in a variety of ways. The most common approach is by using the task's <see
-         cref="P:System.Threading.Tasks.Task`1.Factory" />
+         instances may be created in a variety of ways. The most common approach is by using the task's <see cref="P:System.Threading.Tasks.Task`1.Factory" />
 
         
 
-         property to retrieve a <see
-         cref="T:System.Threading.Tasks.TaskFactory`1" />
+         property to retrieve a <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
         
 
-         instance that can be used to create tasks for several purposes. For example, to create a <see
-         cref="T:System.Threading.Tasks.Task`1" />
+         instance that can be used to create tasks for several purposes. For example, to create a <see cref="T:System.Threading.Tasks.Task`1" />
 
         
 
-         that runs a function, the factory's <see
-         cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />
+         that runs a function, the factory's <see cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />
 
         
 
@@ -64,8 +60,7 @@ var t = Task&lt;int&gt;.Factory.StartNew(() =&gt; GenerateResult());
 ' Visual Basic
 Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
       <para
-        >For more complete examples, see <format
-         type="text/html">
+        >For more complete examples, see <format type="text/html">
           <a href="458b5e69-5210-45e5-bc44-3888f86abd6f"
             >Task Parallelism (Task Parallel Library)</a
           >
@@ -76,13 +71,11 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         .</para
       >
       <para
-        >The <see
-         cref="T:System.Threading.Tasks.Task`1" />
+        >The <see cref="T:System.Threading.Tasks.Task`1" />
 
         
 
-         class also provides constructors that initialize the task but that do not schedule it for execution. For performance reasons, the StartNew method should be the preferred mechanism for creating and scheduling computational tasks, but for scenarios where creation and scheduling must be separated, the constructors may be used, and the task's <see
-         cref="M:System.Threading.Tasks.Task.Start" />
+         class also provides constructors that initialize the task but that do not schedule it for execution. For performance reasons, the StartNew method should be the preferred mechanism for creating and scheduling computational tasks, but for scenarios where creation and scheduling must be separated, the constructors may be used, and the task's <see cref="M:System.Threading.Tasks.Task.Start" />
 
         
 
@@ -316,8 +309,7 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Configures an awaiter used to await this <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Configures an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -329,7 +321,11 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
           <para>An object used to await this task.</para>
         </returns>
         <param name="continueOnCapturedContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1070,13 +1066,11 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The factory returned from <see
-             cref="P:System.Threading.Tasks.Task`1.Factory" />
+            >The factory returned from <see cref="P:System.Threading.Tasks.Task`1.Factory" />
 
             
 
-             is a default instance of <see
-             cref="T:System.Threading.Tasks.TaskFactory`1" />
+             is a default instance of <see cref="T:System.Threading.Tasks.TaskFactory`1" />
 
             
 
@@ -1086,8 +1080,7 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Provides access to factory methods for creating <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Provides access to factory methods for creating <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -1121,8 +1114,7 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an awaiter used to await this <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Gets an awaiter used to await this <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -1155,8 +1147,7 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The get accessor for this property ensures that the asynchronous operation is complete before returning. Once the result of the computation is available, it is stored and will be returned immediately on later calls to <see
-             cref="P:System.Threading.Tasks.Task`1.Result" />
+            >The get accessor for this property ensures that the asynchronous operation is complete before returning. Once the result of the computation is available, it is stored and will be returned immediately on later calls to <see cref="P:System.Threading.Tasks.Task`1.Result" />
 
             
 
@@ -1166,8 +1157,7 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the result value of this <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Gets the result value of this <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 

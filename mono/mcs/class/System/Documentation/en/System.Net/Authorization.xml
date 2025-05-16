@@ -29,31 +29,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.AuthenticationManager" />
+        >The <see cref="T:System.Net.AuthenticationManager" />
 
         
 
-         returns an instance of the <see
-         cref="T:System.Net.Authorization" />
+         returns an instance of the <see cref="T:System.Net.Authorization" />
 
         
 
-         class that contains an authentication message. This message is sent to the Internet server to indicate that the client (such as <see
-         cref="T:System.Net.WebRequest" />
+         class that contains an authentication message. This message is sent to the Internet server to indicate that the client (such as <see cref="T:System.Net.WebRequest" />
 
         
 
          or one of its descendants) is authorized to access the server.</para
       >
       <para
-        >The <see
-         cref="T:System.Net.Authorization" />
+        >The <see cref="T:System.Net.Authorization" />
 
         
 
-         instance is created by the authentication module that the <see
-         cref="T:System.Net.AuthenticationManager" />
+         instance is created by the authentication module that the <see cref="T:System.Net.AuthenticationManager" />
 
         
 
@@ -90,23 +85,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Authorization" />
+            >The <see cref="T:System.Net.Authorization" />
 
             
 
-             instance is created with the <see
-             cref="P:System.Net.Authorization.Message" />
+             instance is created with the <see cref="P:System.Net.Authorization.Message" />
 
             
 
-             property set to <paramref
-             name="token" />
+             property set to <paramref name="token" />
 
             
 
-             and the <see
-             cref="P:System.Net.Authorization.Complete" />
+             and the <see cref="P:System.Net.Authorization.Complete" />
 
             
 
@@ -116,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Authorization" />
+            >Creates a new instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -125,7 +115,11 @@
           >
         </summary>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -159,28 +153,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Authorization" />
+            >The <see cref="T:System.Net.Authorization" />
 
             
 
-             instance is created with the <see
-             cref="P:System.Net.Authorization.Message" />
+             instance is created with the <see cref="P:System.Net.Authorization.Message" />
 
             
 
-             property set to <paramref
-             name="token" />
+             property set to <paramref name="token" />
 
             
 
-             and the <see
-             cref="P:System.Net.Authorization.Complete" />
+             and the <see cref="P:System.Net.Authorization.Complete" />
 
             
 
-             property set to <paramref
-             name="finished" />
+             property set to <paramref name="finished" />
 
             
 
@@ -190,8 +179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Authorization" />
+            >Creates a new instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -199,14 +187,22 @@
           >
         </summary>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encrypted authorization message expected by the server. </param
         >
         <param name="finished">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -243,83 +239,68 @@
       <Docs>
         <remarks>
           <para
-            >This constructor creates a <see
-             cref="T:System.Net.Authorization" />
+            >This constructor creates a <see cref="T:System.Net.Authorization" />
 
             
 
-             instance with the <see
-             cref="P:System.Net.Authorization.Message" />
+             instance with the <see cref="P:System.Net.Authorization.Message" />
 
             
 
-             property set to <paramref
-             name="token" />
+             property set to <paramref name="token" />
 
             
 
             , the
-<see
-             cref="P:System.Net.Authorization.Complete" />
+<see cref="P:System.Net.Authorization.Complete" />
 
             
 
-             property set to <paramref
-             name="finished" />
+             property set to <paramref name="finished" />
 
             
 
             , and 
-   the <see
-             cref="P:System.Net.Authorization.ConnectionGroupId" />
+   the <see cref="P:System.Net.Authorization.ConnectionGroupId" />
 
             
 
-             property set to <paramref
-             name="connectionGroupId" />
+             property set to <paramref name="connectionGroupId" />
 
             
 
-            . If <paramref
-             name="token" />
+            . If <paramref name="token" />
 
             
 
              is
-<see
-             langword="null" />
+<see langword="null" />
 
             
 
-             or a zero-length string, <see
-             cref="P:System.Net.Authorization.Message" />
+             or a zero-length string, <see cref="P:System.Net.Authorization.Message" />
 
             
 
-             is set to <see
-             langword="null" />
+             is set to <see langword="null" />
 
             
 
             . If 
-<paramref
-             name="connectionGroupId " />
+<paramref name="connectionGroupId " />
 
             
 
-             is <see
-             langword="null" />
+             is <see langword="null" />
 
             
 
              or a zero-length string, 
-<see
-             cref="P:System.Net.Authorization.ConnectionGroupId" />
+<see cref="P:System.Net.Authorization.ConnectionGroupId" />
 
             
 
-             is set to <see
-             langword="null" />
+             is set to <see langword="null" />
 
             
 
@@ -329,26 +310,22 @@
             <para
               >The connection group identifier is used to restrict access to the
       server connection established with the current authorization instance. Only
-   <see
-               cref="T:System.Net.WebRequest" />
+   <see cref="T:System.Net.WebRequest" />
 
               
 
               
-   instances that have <paramref
-               name="connectionGroupId" />
+   instances that have <paramref name="connectionGroupId" />
 
               
 
-               as their <see
-               cref="P:System.Net.WebRequest.ConnectionGroupName" />
+               as their <see cref="P:System.Net.WebRequest.ConnectionGroupName" />
 
               
 
               
    property value can use the connection. The connection group information
-   set by this constructor is also available in the <see
-               cref="P:System.Net.ServicePoint.ConnectionName" />
+   set by this constructor is also available in the <see cref="P:System.Net.ServicePoint.ConnectionName" />
 
               
 
@@ -356,8 +333,7 @@
    the service point that represents the connection.</para
             >
             <para
-              >The <see
-               cref="P:System.Net.Authorization.Complete" />
+              >The <see cref="P:System.Net.Authorization.Complete" />
 
               
 
@@ -371,8 +347,7 @@ client and server.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Net.Authorization" />
+            >Creates a new instance of the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -380,21 +355,33 @@ client and server.</para
           >
         </summary>
         <param name="token">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encrypted authorization message expected by the server. </param
         >
         <param name="finished">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The completion status of the authorization attempt. true if the authorization attempt is complete; otherwise, false. </param
         >
         <param name="connectionGroupId">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -428,8 +415,7 @@ client and server.</para
             
 
             if the authentication process is complete; otherwise,
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -439,18 +425,15 @@ client and server.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Authorization.Complete" />
+            >The <see cref="P:System.Net.Authorization.Complete" />
 
             
 
-             property is set to true when the authentication process between the client and the server is finished. Some authentication modules, such as the Kerberos module, use multiple round trips between the client and server to complete the authentication process. To keep the <see
-             cref="T:System.Net.WebRequest" />
+             property is set to true when the authentication process between the client and the server is finished. Some authentication modules, such as the Kerberos module, use multiple round trips between the client and server to complete the authentication process. To keep the <see cref="T:System.Net.WebRequest" />
 
             
 
-             or descendant that initiated the authentication process from interrupting while authorization is taking place, the authentication module sets the <see
-             cref="P:System.Net.Authorization.Complete" />
+             or descendant that initiated the authentication process from interrupting while authorization is taking place, the authentication module sets the <see cref="P:System.Net.Authorization.Complete" />
 
             
 
@@ -484,14 +467,12 @@ client and server.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
              containing a unique
-   connection identifier, or <see
-             langword="null" />
+   connection identifier, or <see langword="null" />
 
             
 
@@ -503,8 +484,7 @@ client and server.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Authorization.ConnectionGroupId" />
+            >The <see cref="P:System.Net.Authorization.ConnectionGroupId" />
 
             
 
@@ -538,8 +518,7 @@ client and server.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -550,16 +529,14 @@ client and server.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Authorization.Message" />
+            >The <see cref="P:System.Net.Authorization.Message" />
 
             
 
              property contains the authorization string that the client will return to the server when accessing protected resources. The actual contents of the message are defined by the authentication type the client and server are using. Basic HTTP authentication, for example, uses a different message than Kerberos authentication.</para
           >
           <para
-            >When an authentication module supports preauthentication, the <see
-             cref="P:System.Net.Authorization.Message" />
+            >When an authentication module supports preauthentication, the <see cref="P:System.Net.Authorization.Message" />
 
             
 
@@ -598,8 +575,7 @@ client and server.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Boolean" />
+            >Gets or sets a <see cref="T:System.Boolean" />
 
             
 
@@ -628,8 +604,7 @@ client and server.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -639,23 +614,19 @@ client and server.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Authorization.ProtectionRealm" />
+            >The <see cref="P:System.Net.Authorization.ProtectionRealm" />
 
             
 
-             property contains a list of URI prefixes that the <see
-             cref="P:System.Net.Authorization.Message" />
+             property contains a list of URI prefixes that the <see cref="P:System.Net.Authorization.Message" />
 
             
 
-             property can be used to authenticate. <see
-             cref="T:System.Net.WebRequest" />
+             property can be used to authenticate. <see cref="T:System.Net.WebRequest" />
 
             
 
-             and its descendants compare a URI to this list to determine if the <see
-             cref="T:System.Net.Authorization" />
+             and its descendants compare a URI to this list to determine if the <see cref="T:System.Net.Authorization" />
 
             
 
@@ -665,8 +636,7 @@ client and server.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the prefix for Uniform Resource Identifiers (URIs) that can be authenticated with the <see
-             cref="P:System.Net.Authorization.Message" />
+            >Gets or sets the prefix for Uniform Resource Identifiers (URIs) that can be authenticated with the <see cref="P:System.Net.Authorization.Message" />
 
             
 

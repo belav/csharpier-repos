@@ -19,69 +19,57 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Windows.Forms.ContextMenu" />
+        >The <see cref="T:System.Windows.Forms.ContextMenu" />
 
         
 
-         class represents shortcut menus that can be displayed when the user clicks the right mouse button over a control or area of the form. Shortcut menus are typically used to combine different menu items from a <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         class represents shortcut menus that can be displayed when the user clicks the right mouse button over a control or area of the form. Shortcut menus are typically used to combine different menu items from a <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         of a form that are useful for the user given the context of the application. For example, you can use a shortcut menu assigned to a <see
-         cref="T:System.Windows.Forms.TextBox" />
+         of a form that are useful for the user given the context of the application. For example, you can use a shortcut menu assigned to a <see cref="T:System.Windows.Forms.TextBox" />
 
         
 
-         control to provide menu items for changing the font of the text, finding text within the control, or Clipboard features for copying and pasting text. You can also display new <see
-         cref="T:System.Windows.Forms.MenuItem" />
+         control to provide menu items for changing the font of the text, finding text within the control, or Clipboard features for copying and pasting text. You can also display new <see cref="T:System.Windows.Forms.MenuItem" />
 
         
 
-         objects in a shortcut menu that are not located within a <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         objects in a shortcut menu that are not located within a <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
-         to provide situation specific commands that are not appropriate for the <see
-         cref="T:System.Windows.Forms.MainMenu" />
+         to provide situation specific commands that are not appropriate for the <see cref="T:System.Windows.Forms.MainMenu" />
 
         
 
          to display.</para
       >
       <para
-        >Typically, a shortcut menu is displayed when a user clicks the right mouse button over a control or the form itself. Visible controls and <see
-         cref="T:System.Windows.Forms.Form" />
+        >Typically, a shortcut menu is displayed when a user clicks the right mouse button over a control or the form itself. Visible controls and <see cref="T:System.Windows.Forms.Form" />
 
         
 
-         have a <see
-         cref="P:System.Windows.Forms.Control.ContextMenu" />
+         have a <see cref="P:System.Windows.Forms.Control.ContextMenu" />
 
         
 
-         property that binds the <see
-         cref="T:System.Windows.Forms.ContextMenu" />
+         property that binds the <see cref="T:System.Windows.Forms.ContextMenu" />
 
         
 
-         class to the control that displays the shortcut menu. More than one control can use a <see
-         cref="T:System.Windows.Forms.ContextMenu" />
+         class to the control that displays the shortcut menu. More than one control can use a <see cref="T:System.Windows.Forms.ContextMenu" />
 
         
 
-        . You can use the <see
-         cref="P:System.Windows.Forms.ContextMenu.SourceControl" />
+        . You can use the <see cref="P:System.Windows.Forms.ContextMenu.SourceControl" />
 
         
 
          property to determine which control last displayed the shortcut menu in order to perform tasks specific to the control or to modify the shortcut menu displayed for the control.</para
       >
       <para
-        >You might want to know when the shortcut menu is being displayed in order to set check marks, disable items, and perform other menu tasks before the menu is displayed to the user. You can handle the <see
-         cref="E:System.Windows.Forms.ContextMenu.Popup" />
+        >You might want to know when the shortcut menu is being displayed in order to set check marks, disable items, and perform other menu tasks before the menu is displayed to the user. You can handle the <see cref="E:System.Windows.Forms.ContextMenu.Popup" />
 
         
 
@@ -89,43 +77,35 @@
       >
       <block subset="none" type="note">
         <para
-          >In order to reuse <see
-           cref="T:System.Windows.Forms.MenuItem" />
+          >In order to reuse <see cref="T:System.Windows.Forms.MenuItem" />
 
           
 
-           objects that are displayed in a <see
-           cref="T:System.Windows.Forms.MainMenu" />
+           objects that are displayed in a <see cref="T:System.Windows.Forms.MainMenu" />
 
           
 
-           for use in a <see
-           cref="T:System.Windows.Forms.ContextMenu" />
+           for use in a <see cref="T:System.Windows.Forms.ContextMenu" />
 
           
 
-          , you must create a copy of the menu using the <see
-           cref="M:System.Windows.Forms.MenuItem.CloneMenu" />
+          , you must create a copy of the menu using the <see cref="M:System.Windows.Forms.MenuItem.CloneMenu" />
 
           
 
-           method of the <see
-           cref="T:System.Windows.Forms.MenuItem" />
+           method of the <see cref="T:System.Windows.Forms.MenuItem" />
 
           
 
-           class. You can also merge menu items and their submenu items into a single <see
-           cref="T:System.Windows.Forms.MenuItem" />
+           class. You can also merge menu items and their submenu items into a single <see cref="T:System.Windows.Forms.MenuItem" />
 
           
 
-           object using the <see
-           cref="M:System.Windows.Forms.MenuItem.MergeMenu" />
+           object using the <see cref="M:System.Windows.Forms.MenuItem.MergeMenu" />
 
           
 
-           method of the <see
-           cref="T:System.Windows.Forms.MenuItem" />
+           method of the <see cref="T:System.Windows.Forms.MenuItem" />
 
           
 
@@ -136,18 +116,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a shortcut menu. Although <see
-         cref="T:System.Windows.Forms.ContextMenuStrip" />
+        >Represents a shortcut menu. Although <see cref="T:System.Windows.Forms.ContextMenuStrip" />
 
         
 
-         replaces and adds functionality to the <see
-         cref="T:System.Windows.Forms.ContextMenu" />
+         replaces and adds functionality to the <see cref="T:System.Windows.Forms.ContextMenu" />
 
         
 
-         control of previous versions, <see
-         cref="T:System.Windows.Forms.ContextMenu" />
+         control of previous versions, <see cref="T:System.Windows.Forms.ContextMenu" />
 
         
 
@@ -164,28 +141,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Once you have used this version of the constructor, you can add menu items to the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >Once you have used this version of the constructor, you can add menu items to the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             by using the <see
-             cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
+             by using the <see cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+             method of the <see cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
 
             
 
-             class. You can access the <see
-             cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+             class. You can access the <see cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
 
             
 
-             through the <see
-             cref="P:System.Windows.Forms.Menu.MenuItems" />
+             through the <see cref="P:System.Windows.Forms.Menu.MenuItems" />
 
             
 
@@ -195,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
@@ -222,33 +193,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this version of the constructor to create a <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >You can use this version of the constructor to create a <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             that has its menu items specified at the time it is created. Once you have used this version of the constructor, you can add additional menu items to the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+             that has its menu items specified at the time it is created. Once you have used this version of the constructor, you can add additional menu items to the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             by using the <see
-             cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
+             by using the <see cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
 
             
 
-             method of the <see
-             cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+             method of the <see cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
 
             
 
-             class. You can access the <see
-             cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+             class. You can access the <see cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
 
             
 
-             through the <see
-             cref="P:System.Windows.Forms.Menu.MenuItems" />
+             through the <see cref="P:System.Windows.Forms.Menu.MenuItems" />
 
             
 
@@ -258,13 +223,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             class with a specified set of <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             class with a specified set of <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
@@ -272,12 +235,15 @@
           >
         </summary>
         <param name="menuItems">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Windows.Forms.MenuItem" />
+          An array of <see cref="T:System.Windows.Forms.MenuItem" />
 
           
 
@@ -302,8 +268,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -335,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ContextMenu.Collapse" />
+            >Raises the <see cref="E:System.Windows.Forms.ContextMenu.Collapse" />
 
             
 
@@ -344,12 +308,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -375,8 +342,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Windows.Forms.ContextMenu.Popup" />
+            >Raises the <see cref="E:System.Windows.Forms.ContextMenu.Popup" />
 
             
 
@@ -384,12 +350,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -407,56 +376,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this event to initialize the <see
-             cref="T:System.Windows.Forms.MenuItem" />
+            >You can use this event to initialize the <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
-             objects before they are displayed. For example, if you use a <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+             objects before they are displayed. For example, if you use a <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             for three <see
-             cref="T:System.Windows.Forms.TextBox" />
+             for three <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             controls and you want to disable certain menu items in the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+             controls and you want to disable certain menu items in the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             depending on which <see
-             cref="T:System.Windows.Forms.TextBox" />
+             depending on which <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             is displaying the shortcut menu, you can create an event handler for this event. You could use the <see
-             cref="P:System.Windows.Forms.ContextMenu.SourceControl" />
+             is displaying the shortcut menu, you can create an event handler for this event. You could use the <see cref="P:System.Windows.Forms.ContextMenu.SourceControl" />
 
             
 
-             property to determine which <see
-             cref="T:System.Windows.Forms.TextBox" />
+             property to determine which <see cref="T:System.Windows.Forms.TextBox" />
 
             
 
-             is about to display the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+             is about to display the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             and disable the appropriate <see
-             cref="T:System.Windows.Forms.MenuItem" />
+             and disable the appropriate <see cref="T:System.Windows.Forms.MenuItem" />
 
             
 
              objects.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
 
@@ -525,8 +484,7 @@
           <para>This property enables your menus to support languages that are written from right to left. When this property is set to RightToLeft.Yes, the menu item text is displayed from right to left instead of the default left to right method.</para>
           <block subset="none" type="note">
             <para
-              >For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see
-               cref="P:System.Windows.Forms.Control.RightToLeft" />
+              >For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see cref="P:System.Windows.Forms.Control.RightToLeft" />
 
               
 
@@ -561,13 +519,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Typically, a <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >Typically, a <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-             is displayed when the user clicks the right mouse button on a control or area of the form that the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+             is displayed when the user clicks the right mouse button on a control or area of the form that the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
@@ -579,29 +535,34 @@
           <para>Displays the shortcut menu at the specified position.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that specifies the control with which this shortcut menu is associated. </param
         >
         <param name="pos">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
-           that specifies the coordinates at which to display the menu. These coordinates are specified relative to the client coordinates of the control specified in the <paramref
-           name="control" />
+           that specifies the coordinates at which to display the menu. These coordinates are specified relative to the client coordinates of the control specified in the <paramref name="control" />
 
           
 
@@ -637,46 +598,53 @@
           <para>Displays the shortcut menu at the specified position and with the specified alignment.</para>
         </summary>
         <param name="control">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Control" />
+          A <see cref="T:System.Windows.Forms.Control" />
 
           
 
            that specifies the control with which this shortcut menu is associated.</param
         >
         <param name="pos">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
-           that specifies the coordinates at which to display the menu. These coordinates are specified relative to the client coordinates of the control specified in the <paramref
-           name="control" />
+           that specifies the coordinates at which to display the menu. These coordinates are specified relative to the client coordinates of the control specified in the <paramref name="control" />
 
           
 
            parameter.</param
         >
         <param name="alignment">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.LeftRightAlignment" />
+          A <see cref="T:System.Windows.Forms.LeftRightAlignment" />
 
           
 
-           that specifies the alignment of the control relative to the <paramref
-           name="pos" />
+           that specifies the alignment of the control relative to the <paramref name="pos" />
 
           
 
@@ -706,28 +674,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property enables you to determine which control currently displays the shortcut menu defined in the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            >This property enables you to determine which control currently displays the shortcut menu defined in the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 
-            . If the shortcut menu is not currently displayed, you can use this property to determine which control last displayed the shortcut menu. You can use this property in the <see
-             cref="E:System.Windows.Forms.ContextMenu.Popup" />
+            . If the shortcut menu is not currently displayed, you can use this property to determine which control last displayed the shortcut menu. You can use this property in the <see cref="E:System.Windows.Forms.ContextMenu.Popup" />
 
             
 
-             event to ensure that the control displays the proper menu items. You can also use this property to pass a reference to the control to a method that performs the tasks associated with a menu command displayed in the shortcut menu. Since the <see
-             cref="T:System.Windows.Forms.Form" />
+             event to ensure that the control displays the proper menu items. You can also use this property to pass a reference to the control to a method that performs the tasks associated with a menu command displayed in the shortcut menu. Since the <see cref="T:System.Windows.Forms.Form" />
 
             
 
-             class inherits from <see
-             cref="T:System.Windows.Forms.Control" />
+             class inherits from <see cref="T:System.Windows.Forms.Control" />
 
             
 
-            , you can also use this property if the <see
-             cref="T:System.Windows.Forms.ContextMenu" />
+            , you can also use this property if the <see cref="T:System.Windows.Forms.ContextMenu" />
 
             
 

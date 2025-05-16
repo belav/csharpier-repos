@@ -26,13 +26,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The following tables summarize the factory methods that can be used to create a <see
-         cref="T:System.Linq.Expressions.BinaryExpression" />
+        >The following tables summarize the factory methods that can be used to create a <see cref="T:System.Linq.Expressions.BinaryExpression" />
 
         
 
-         that has a specific node type, represented by the <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+         that has a specific node type, represented by the <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
@@ -432,23 +430,19 @@
         </item>
       </list>
       <para
-        >In addition, the <see
-         cref="Overload:System.Linq.Expressions.Expression.MakeBinary" />
+        >In addition, the <see cref="Overload:System.Linq.Expressions.Expression.MakeBinary" />
 
         
 
-         methods can also be used to create a <see
-         cref="T:System.Linq.Expressions.BinaryExpression" />
+         methods can also be used to create a <see cref="T:System.Linq.Expressions.BinaryExpression" />
 
         
 
-        . These factory methods can be used to create a <see
-         cref="T:System.Linq.Expressions.BinaryExpression" />
+        . These factory methods can be used to create a <see cref="T:System.Linq.Expressions.BinaryExpression" />
 
         
 
-         of any node type that represents a binary operation. The parameter of these methods that is of type <see
-         cref="P:System.Linq.Expressions.Expression.NodeType" />
+         of any node type that represents a binary operation. The parameter of these methods that is of type <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
         
 
@@ -484,23 +478,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This default implementation for <see
-             cref="F:System.Linq.Expressions.ExpressionType.Extension" />
+            >This default implementation for <see cref="F:System.Linq.Expressions.ExpressionType.Extension" />
 
             
 
-             nodes calls <see
-             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+             nodes calls <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
 
             
 
-            . Override this method to call into a more specific method on a derived visitor class of the <see
-             cref="T:System.Linq.Expressions.ExpressionVisitor" />
+            . Override this method to call into a more specific method on a derived visitor class of the <see cref="T:System.Linq.Expressions.ExpressionVisitor" />
 
             
 
-             class. However, it should still support unknown visitors by calling <see
-             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+             class. However, it should still support unknown visitors by calling <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
 
             
 
@@ -510,13 +500,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Dispatches to the specific visit method for this node type. For example, <see
-             cref="T:System.Linq.Expressions.MethodCallExpression" />
+            >Dispatches to the specific visit method for this node type. For example, <see cref="T:System.Linq.Expressions.MethodCallExpression" />
 
             
 
-             calls the <see
-             cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+             calls the <see cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
 
             
 
@@ -528,7 +516,11 @@
           <para>The result of visiting this node.</para>
         </returns>
         <param name="visitor">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -577,23 +569,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Linq.Expressions.BinaryExpression.Conversion" />
+            >The <see cref="P:System.Linq.Expressions.BinaryExpression.Conversion" />
 
             
 
-             property is null for any <see
-             cref="T:System.Linq.Expressions.BinaryExpression" />
+             property is null for any <see cref="T:System.Linq.Expressions.BinaryExpression" />
 
             
 
-             whose <see
-             cref="P:System.Linq.Expressions.Expression.NodeType" />
+             whose <see cref="P:System.Linq.Expressions.Expression.NodeType" />
 
             
 
-             property is not <see
-             cref="F:System.Linq.Expressions.ExpressionType.Coalesce" />
+             property is not <see cref="F:System.Linq.Expressions.ExpressionType.Coalesce" />
 
             
 
@@ -626,8 +614,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the expression tree node represents a <newTerm
-            >lifted</newTerm>
+            >Gets a value that indicates whether the expression tree node represents a <newTerm>lifted</newTerm>
 
             
 
@@ -652,8 +639,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An operator call is lifted if the operator expects non-nullable operands but nullable operands are passed to it. If the value of <see
-             cref="P:System.Linq.Expressions.BinaryExpression.IsLiftedToNull" />
+            >An operator call is lifted if the operator expects non-nullable operands but nullable operands are passed to it. If the value of <see cref="P:System.Linq.Expressions.BinaryExpression.IsLiftedToNull" />
 
             
 
@@ -663,8 +649,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the expression tree node represents a <newTerm
-            >lifted</newTerm>
+            >Gets a value that indicates whether the expression tree node represents a <newTerm>lifted</newTerm>
 
             
 
@@ -718,13 +703,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a <see
-             cref="T:System.Linq.Expressions.BinaryExpression" />
+            >If a <see cref="T:System.Linq.Expressions.BinaryExpression" />
 
             
 
-             represents an operation that uses a predefined operator, the <see
-             cref="P:System.Linq.Expressions.BinaryExpression.Method" />
+             represents an operation that uses a predefined operator, the <see cref="P:System.Linq.Expressions.BinaryExpression.Method" />
 
             
 
@@ -828,36 +811,45 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.BinaryExpression.Left" />
+          The <see cref="P:System.Linq.Expressions.BinaryExpression.Left" />
 
           
 
            property of the result. </param
         >
         <param name="conversion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.BinaryExpression.Conversion" />
+          The <see cref="P:System.Linq.Expressions.BinaryExpression.Conversion" />
 
           
 
            property of the result.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.BinaryExpression.Right" />
+          The <see cref="P:System.Linq.Expressions.BinaryExpression.Right" />
 
           
 

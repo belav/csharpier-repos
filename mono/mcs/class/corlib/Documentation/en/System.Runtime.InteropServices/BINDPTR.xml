@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.BINDPTR" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.BINDPTR" />
 
         
 
@@ -58,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a pointer to a <see
-             cref="T:System.Runtime.InteropServices.FUNCDESC" />
+            >Represents a pointer to a <see cref="T:System.Runtime.InteropServices.FUNCDESC" />
 
             
 
@@ -86,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a pointer to a <see
-             cref="F:System.Runtime.InteropServices.BINDPTR.lptcomp" />
+            >Represents a pointer to a <see cref="F:System.Runtime.InteropServices.BINDPTR.lptcomp" />
 
             
 
@@ -114,8 +111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Represents a pointer to a <see
-             cref="T:System.Runtime.InteropServices.VARDESC" />
+            >Represents a pointer to a <see cref="T:System.Runtime.InteropServices.VARDESC" />
 
             
 

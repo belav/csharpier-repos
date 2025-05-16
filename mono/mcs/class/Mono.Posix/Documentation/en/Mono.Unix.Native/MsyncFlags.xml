@@ -23,8 +23,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.msync" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.msync" />
       <paramref name="flags" />
 
       

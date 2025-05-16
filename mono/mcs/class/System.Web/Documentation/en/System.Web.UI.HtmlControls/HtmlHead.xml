@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The HTML head element is a container that can contain additional information about the page. The <see
-         cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+        >The HTML head element is a container that can contain additional information about the page. The <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
         
 
@@ -31,8 +30,7 @@
       >
       <block subset="none" type="note">
         <para
-          >Adding styles or style rules programmatically during asynchronous postbacks is not supported. When you add AJAX capabilities to an ASP.NET Web page, asynchronous postbacks update regions of the page without updating the whole page. For more information, see <format
-           type="text/html">
+          >Adding styles or style rules programmatically during asynchronous postbacks is not supported. When you add AJAX capabilities to an ASP.NET Web page, asynchronous postbacks update regions of the page without updating the whole page. For more information, see <format type="text/html">
             <a href="be84d9b3-b7cd-47d7-8494-be4abfaad9cb">ASP.NET AJAX Overview</a>
           </format>
 
@@ -57,8 +55,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 
@@ -114,8 +110,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows the initial property value for an instance of <see
-             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+            >The following table shows the initial property value for an instance of <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 
@@ -140,8 +135,7 @@
               </term>
               <description>
                 <para
-                  >The value of the <paramref
-                   name="tag" />
+                  >The value of the <paramref name="tag" />
 
                   
 
@@ -154,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 
@@ -163,7 +156,11 @@
           >
         </summary>
         <param name="tag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -269,18 +266,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.HtmlControls.HtmlHead.StyleSheet" />
+            >The <see cref="P:System.Web.UI.HtmlControls.HtmlHead.StyleSheet" />
 
             
 
-             property returns an <see
-             cref="T:System.Web.UI.IStyleSheet" />
+             property returns an <see cref="T:System.Web.UI.IStyleSheet" />
 
             
 
-             that represents the embedded style rules in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+             that represents the embedded style rules in the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 
@@ -288,8 +282,7 @@
           >
           <block subset="none" type="note">
             <para
-              >Adding styles or style rules programmatically during asynchronous postbacks is not supported. When you add AJAX capabilities to an ASP.NET Web page, asynchronous postbacks update regions of the page without updating the whole page. For more information, see <format
-               type="text/html">
+              >Adding styles or style rules programmatically during asynchronous postbacks is not supported. When you add AJAX capabilities to an ASP.NET Web page, asynchronous postbacks update regions of the page without updating the whole page. For more information, see <format type="text/html">
                 <a href="be84d9b3-b7cd-47d7-8494-be4abfaad9cb">ASP.NET AJAX Overview</a>
               </format>
 
@@ -302,13 +295,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Web.UI.IStyleSheet" />
+            >Gets an <see cref="T:System.Web.UI.IStyleSheet" />
 
             
 
-             instance that represents the style rules in the <see
-             cref="T:System.Web.UI.HtmlControls.HtmlHead" />
+             instance that represents the style rules in the <see cref="T:System.Web.UI.HtmlControls.HtmlHead" />
 
             
 

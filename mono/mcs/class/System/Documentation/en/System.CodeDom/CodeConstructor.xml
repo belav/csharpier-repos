@@ -38,21 +38,18 @@
 
         
 
-         can be used to represent a declaration of an instance constructor for a type. Use <see
-         cref="T:System.CodeDom.CodeTypeConstructor" />
+         can be used to represent a declaration of an instance constructor for a type. Use <see cref="T:System.CodeDom.CodeTypeConstructor" />
 
         
 
          to declare a static constructor for a type.</para
       >
       <para
-        >If the constructor calls a base class constructor, set the constructor arguments for the base class constructor in the <see
-         cref="P:System.CodeDom.CodeConstructor.BaseConstructorArgs" />
+        >If the constructor calls a base class constructor, set the constructor arguments for the base class constructor in the <see cref="P:System.CodeDom.CodeConstructor.BaseConstructorArgs" />
 
         
 
-         property. If the constructor overloads another constuctor for the type, set the constructor arguments to pass to the overloaded type constructor in the <see
-         cref="P:System.CodeDom.CodeConstructor.ChainedConstructorArgs" />
+         property. If the constructor overloads another constuctor for the type, set the constructor arguments to pass to the overloaded type constructor in the <see cref="P:System.CodeDom.CodeConstructor.ChainedConstructorArgs" />
 
         
 
@@ -84,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodeConstructor" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodeConstructor" />
 
             
 
@@ -117,13 +113,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.CodeDom.CodeConstructor" />
+            >When the <see cref="T:System.CodeDom.CodeConstructor" />
 
             
 
-             overloads a base class constructor, this collection contains any arguments to pass to a base class constructor. To call a base class constructor with no arguments, set a <see
-             cref="T:System.CodeDom.CodeSnippetExpression" />
+             overloads a base class constructor, this collection contains any arguments to pass to a base class constructor. To call a base class constructor with no arguments, set a <see cref="T:System.CodeDom.CodeSnippetExpression" />
 
             
 
@@ -159,13 +153,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="T:System.CodeDom.CodeConstructor" />
+            >When the <see cref="T:System.CodeDom.CodeConstructor" />
 
             
 
-             overloads another constructor of the same type, this collection contains any arguments to pass to the overloaded type constructor. To call a constructor for the current type with no arguments, set a <see
-             cref="T:System.CodeDom.CodeSnippetExpression" />
+             overloads another constructor of the same type, this collection contains any arguments to pass to the overloaded type constructor. To call a constructor for the current type with no arguments, set a <see cref="T:System.CodeDom.CodeSnippetExpression" />
 
             
 

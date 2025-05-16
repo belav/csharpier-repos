@@ -24,8 +24,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >An application identity consists of the publisher's public key, the application name, the target processor architecture, the application culture, and the application version. The application identity properties values correspond to information contained in the application manifest. For more information about the application manifest, see <format
-         type="text/html">
+        >An application identity consists of the publisher's public key, the application name, the target processor architecture, the application culture, and the application version. The application identity properties values correspond to information contained in the application manifest. For more information about the application manifest, see <format type="text/html">
           <a href="29570cec-4e53-4660-a850-abc4fa150243">ClickOnce Application Manifest</a>
         </format>
 
@@ -38,8 +37,7 @@
 
         
 
-         is used by the <see
-         cref="T:System.Security.Policy.ApplicationSecurityInfo" />
+         is used by the <see cref="T:System.Security.Policy.ApplicationSecurityInfo" />
 
         
 
@@ -78,33 +76,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The constructor initializes the <see
-             cref="P:System.ApplicationId.Culture" />
+            >The constructor initializes the <see cref="P:System.ApplicationId.Culture" />
 
             
 
-            , <see
-             cref="P:System.ApplicationId.Name" />
+            , <see cref="P:System.ApplicationId.Name" />
 
             
 
-            , <see
-             cref="P:System.ApplicationId.ProcessorArchitecture" />
+            , <see cref="P:System.ApplicationId.ProcessorArchitecture" />
 
             
 
-            , <see
-             cref="P:System.ApplicationId.PublicKeyToken" />
+            , <see cref="P:System.ApplicationId.PublicKeyToken" />
 
             
 
-            , and <see
-             cref="P:System.ApplicationId.Version" />
+            , and <see cref="P:System.ApplicationId.Version" />
 
             
 
-             properties of the <see
-             cref="T:System.ApplicationId" />
+             properties of the <see cref="T:System.ApplicationId" />
 
             
 
@@ -114,8 +106,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ApplicationId" />
+            >Initializes a new instance of the <see cref="T:System.ApplicationId" />
 
             
 
@@ -123,40 +114,59 @@
           >
         </summary>
         <param name="publicKeyToken">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The array of bytes representing the raw public key data. </param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the application. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Version" />
+          A <see cref="T:System.Version" />
 
           
 
            object that specifies the version of the application. </param
         >
         <param name="processorArchitecture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The processor architecture of the application. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -184,8 +194,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The copy returned by this method is equal to the original as substantiated by the <see
-             cref="M:System.ApplicationId.Equals(System.Object)" />
+            >The copy returned by this method is equal to the original as substantiated by the <see cref="M:System.ApplicationId.Equals(System.Object)" />
 
             
 
@@ -199,8 +208,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.ApplicationId" />
+            >An <see cref="T:System.ApplicationId" />
 
             
 
@@ -226,16 +234,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ApplicationId.Culture" />
+            >The <see cref="P:System.ApplicationId.Culture" />
 
             
 
              value can include language information, for example, "en-US".</para
           >
           <para
-            >For information about culture values, see <see
-             cref="T:System.Globalization.CultureInfo" />
+            >For information about culture values, see <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -270,8 +276,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >This method overrides the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -281,13 +286,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.ApplicationId" />
+            >Determines whether the specified <see cref="T:System.ApplicationId" />
 
             
 
-             object is equivalent to the current <see
-             cref="T:System.ApplicationId" />
+             object is equivalent to the current <see cref="T:System.ApplicationId" />
 
             
 
@@ -297,13 +300,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.ApplicationId" />
+            >true if the specified <see cref="T:System.ApplicationId" />
 
             
 
-             object is equivalent to the current <see
-             cref="T:System.ApplicationId" />
+             object is equivalent to the current <see cref="T:System.ApplicationId" />
 
             
 
@@ -311,17 +312,19 @@
           >
         </returns>
         <param name="o">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ApplicationId" />
+          The <see cref="T:System.ApplicationId" />
 
           
 
-           object to compare to the current <see
-           cref="T:System.ApplicationId" />
+           object to compare to the current <see cref="T:System.ApplicationId" />
 
           
 
@@ -349,13 +352,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method generates the same hash code for two objects that have the same values for their <see
-             cref="P:System.ApplicationId.Name" />
+            >This method generates the same hash code for two objects that have the same values for their <see cref="P:System.ApplicationId.Name" />
 
             
 
-             and <see
-             cref="P:System.ApplicationId.Version" />
+             and <see cref="P:System.ApplicationId.Version" />
 
             
 
@@ -444,8 +445,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The public key token is represented by the last 8 bytes of the SHA-1 hash of the public key under which the application is signed.</para>
           <para
-            >For more information, see <see
-             cref="M:System.Reflection.AssemblyName.GetPublicKeyToken" />
+            >For more information, see <see cref="M:System.Reflection.AssemblyName.GetPublicKeyToken" />
 
             
 
@@ -478,8 +478,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.Object.ToString" />
+            >This method overrides the <see cref="M:System.Object.ToString" />
 
             
 
@@ -513,8 +512,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information, see <see
-             cref="T:System.Version" />
+            >For more information, see <see cref="T:System.Version" />
 
             
 

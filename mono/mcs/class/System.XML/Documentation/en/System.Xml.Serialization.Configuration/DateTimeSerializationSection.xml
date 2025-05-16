@@ -19,15 +19,13 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class handles the configuration element <format
-         type="text/html">
+        >This class handles the configuration element <format type="text/html">
           <a href="90fda55c-7730-41e9-bc4b-6423a4b920af">&lt;dateTimeSerialization&gt; Element</a>
         </format>
 
         
 
-         found under the <format
-         type="text/html">
+         found under the <format type="text/html">
           <a href="3ce45919-388a-418c-8968-6df0372c73ec"
             >&lt;system.xml.serialization&gt; Element</a
           >
@@ -35,8 +33,7 @@
 
         
 
-        . For more information about configuration files, see <format
-         type="text/html">
+        . For more information about configuration files, see <format type="text/html">
           <a href="69003d39-dc8a-460c-a6be-e6d93e690b38"
             >Configuration File Schema for the .NET Framework</a
           >
@@ -50,8 +47,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Handles configuration settings for XML serialization of <see
-         cref="T:System.DateTime" />
+        >Handles configuration settings for XML serialization of <see cref="T:System.DateTime" />
 
         
 
@@ -72,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.Configuration.DateTimeSerializationSection" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.Configuration.DateTimeSerializationSection" />
 
             
 
@@ -104,8 +99,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is used when handling the mode attribute of the <format
-             type="text/html">
+            >This property is used when handling the mode attribute of the <format type="text/html">
               <a href="90fda55c-7730-41e9-bc4b-6423a4b920af"
                 >&lt;dateTimeSerialization&gt; Element</a
               >

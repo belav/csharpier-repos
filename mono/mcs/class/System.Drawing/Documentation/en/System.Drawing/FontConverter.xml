@@ -21,18 +21,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A type converter is used to convert values between data types. A type converter also supports property configuration at design time by providing text-to-value conversion or a list of values that users can select from. Access the <see
-         cref="T:System.Drawing.FontConverter" />
+        >A type converter is used to convert values between data types. A type converter also supports property configuration at design time by providing text-to-value conversion or a list of values that users can select from. Access the <see cref="T:System.Drawing.FontConverter" />
 
         
 
-         class through the <see
-         cref="T:System.ComponentModel.TypeDescriptor" />
+         class through the <see cref="T:System.ComponentModel.TypeDescriptor" />
 
         
 
-         class by calling the <see
-         cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+         class by calling the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
 
         
 
@@ -42,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Converts <see
-         cref="T:System.Drawing.Font" />
+        >Converts <see cref="T:System.Drawing.Font" />
 
         
 
@@ -61,13 +57,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should access a <see
-             cref="T:System.Drawing.FontConverter" />
+            >You should access a <see cref="T:System.Drawing.FontConverter" />
 
             
 
-             object through the <see
-             cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
+             object through the <see cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Type)" />
 
             
 
@@ -77,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new <see
-             cref="T:System.Drawing.FontConverter" />
+            >Initializes a new <see cref="T:System.Drawing.FontConverter" />
 
             
 
@@ -115,14 +108,22 @@
           <para>This method returns true if this object can perform the conversion.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -151,8 +152,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="context" />
+            >The <paramref name="context" />
 
             
 
@@ -168,19 +168,26 @@
           <para>This method returns true if this converter can perform the conversion; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An ITypeDescriptorContext object that provides a format context. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -217,21 +224,33 @@
           <para>The converted object. </para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A CultureInfo object that specifies the culture used to represent the font. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -262,8 +281,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The most common type conversion is to and from a string type. The default implementation calls the <see
-             cref="M:System.Object.ToString" />
+            >The most common type conversion is to and from a string type. The default implementation calls the <see cref="M:System.Object.ToString" />
 
             
 
@@ -279,33 +297,48 @@
           <para>The converted object. </para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Globalization.CultureInfo" />
+          A <see cref="T:System.Globalization.CultureInfo" />
 
           
 
            object that specifies the culture used to represent the object. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="destinationType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -348,19 +381,26 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A type descriptor through which additional context can be provided. </param
         >
         <param name="propertyValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A dictionary of new property values. The dictionary contains a series of name-value pairs, one for each property returned from the <see
-           cref="Overload:System.Drawing.FontConverter.GetProperties" />
+          A dictionary of new property values. The dictionary contains a series of name-value pairs, one for each property returned from the <see cref="Overload:System.Drawing.FontConverter.GetProperties" />
 
           
 
@@ -388,13 +428,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allows the <see
-             cref="T:System.Drawing.FontConverter" />
+            >Allows the <see cref="T:System.Drawing.FontConverter" />
 
             
 
-             to attempt to free resources and perform other cleanup operations before the <see
-             cref="T:System.Drawing.FontConverter" />
+             to attempt to free resources and perform other cleanup operations before the <see cref="T:System.Drawing.FontConverter" />
 
             
 
@@ -420,8 +458,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether changing a value on this object should require a call to the <see
-             cref="Overload:System.Drawing.FontConverter.CreateInstance" />
+            >Determines whether changing a value on this object should require a call to the <see cref="Overload:System.Drawing.FontConverter.CreateInstance" />
 
             
 
@@ -433,7 +470,11 @@
           <para>This method returns true if the CreateInstance object should be called when a change is made to one or more properties of this object; otherwise, false.</para>
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -469,8 +510,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The set of properties that should be exposed for this data type. If no properties should be exposed, this may return null. The default implementation always returns null.</para>
           <para
-            >An easy implementation of this method can call the <see
-             cref="Overload:System.ComponentModel.TypeConverter.GetProperties" />
+            >An easy implementation of this method can call the <see cref="Overload:System.ComponentModel.TypeConverter.GetProperties" />
 
             
 
@@ -478,26 +518,37 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A type descriptor through which additional context can be provided. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The value of the object to get the properties for. </param
         >
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Attribute" />
+          An array of <see cref="T:System.Attribute" />
 
           
 
@@ -530,8 +581,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method returns true if the <see
-             cref="M:System.Drawing.FontConverter.GetPropertiesSupported(System.ComponentModel.ITypeDescriptorContext)" />
+            >This method returns true if the <see cref="M:System.Drawing.FontConverter.GetPropertiesSupported(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -539,7 +589,11 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -32,8 +32,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Net.EndPoint" />
+        >The <see cref="T:System.Net.EndPoint" />
 
         
 
@@ -66,8 +65,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.EndPoint" />
+            >Initializes a new instance of the <see cref="T:System.Net.EndPoint" />
 
             
 
@@ -103,8 +101,7 @@
       <Docs>
         <value>
           <para
-            >One of the values defined in <see
-             cref="T:System.Net.Sockets.AddressFamily" />
+            >One of the values defined in <see cref="T:System.Net.Sockets.AddressFamily" />
 
             
 
@@ -112,8 +109,7 @@
           >
         </value>
         <exception cref="T:System.NotSupportedException"
-          >This property is required to be overridden in types derived from <see
-           cref="T:System.Net.EndPoint" />
+          >This property is required to be overridden in types derived from <see cref="T:System.Net.EndPoint" />
 
           
 
@@ -122,8 +118,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.EndPoint.AddressFamily" />
+            >The <see cref="P:System.Net.EndPoint.AddressFamily" />
 
             
 
@@ -170,8 +165,7 @@
           <para>
             <block subset="none" type="default"
               >The default implementation throws
-   <see
-               cref="T:System.NotSupportedException" />
+   <see cref="T:System.NotSupportedException" />
 
               
 
@@ -181,14 +175,12 @@
           <para>
             <block subset="none" type="overrides"
               >Override this
-      method to return a <see
-               cref="T:System.Net.EndPoint" />
+      method to return a <see cref="T:System.Net.EndPoint" />
 
               
 
                instance that contains the address information from
-      the specified <see
-               cref="T:System.Net.SocketAddress" />
+      the specified <see cref="T:System.Net.SocketAddress" />
 
               
 
@@ -198,15 +190,13 @@
           <para>
             <block subset="none" type="usage"
               >Use this method to
-      obtain a <see
-               cref="T:System.Net.EndPoint" />
+      obtain a <see cref="T:System.Net.EndPoint" />
 
               
 
               
       instance that represents the same network resource or service as the specified
-   <see
-               cref="T:System.Net.SocketAddress" />
+   <see cref="T:System.Net.SocketAddress" />
 
               
 
@@ -215,8 +205,7 @@
           </para>
         </remarks>
         <exception cref="T:System.NotSupportedException"
-          >This method is required to be overridden in types derived from <see
-           cref="T:System.Net.EndPoint" />
+          >This method is required to be overridden in types derived from <see cref="T:System.Net.EndPoint" />
 
           
 
@@ -225,13 +214,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an <see
-             cref="T:System.Net.EndPoint" />
+            >Creates an <see cref="T:System.Net.EndPoint" />
 
             
 
-             instance from a <see
-             cref="T:System.Net.SocketAddress" />
+             instance from a <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -241,13 +228,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new <see
-             cref="T:System.Net.EndPoint" />
+            >A new <see cref="T:System.Net.EndPoint" />
 
             
 
-             instance that is initialized from the specified <see
-             cref="T:System.Net.SocketAddress" />
+             instance that is initialized from the specified <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -255,7 +240,11 @@
           >
         </returns>
         <param name="socketAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -288,8 +277,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes endpoint information into a <see
-             cref="T:System.Net.SocketAddress" />
+            >Serializes endpoint information into a <see cref="T:System.Net.SocketAddress" />
 
             
 
@@ -299,8 +287,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Net.SocketAddress" />
+            >A <see cref="T:System.Net.SocketAddress" />
 
             
 

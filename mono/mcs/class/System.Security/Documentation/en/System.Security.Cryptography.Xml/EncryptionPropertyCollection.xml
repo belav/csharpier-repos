@@ -29,26 +29,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+        >The <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
         
 
          class encapsulates the &lt;EncryptionProperty&gt; element defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
         
 
-         class to provide additional encryption information related to the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+         class to provide additional encryption information related to the <see cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
         
 
-         and <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+         and <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
         
 
@@ -58,8 +54,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of <see
-         cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+        >Represents a collection of <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
         
 
@@ -86,8 +81,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -122,13 +116,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Adds an <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
-             object to the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+             object to the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -140,17 +132,19 @@
           <para>The position at which the new element is inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          An <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
-           object to add to the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           object to add to the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
@@ -179,8 +173,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all items from the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Removes all items from the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -215,13 +208,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Determines whether the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
-             object contains a specific <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             object contains a specific <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -231,13 +222,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >true if the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
-             object is found in the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+             object is found in the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -245,17 +234,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
-           object to locate in the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           object to locate in the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
@@ -287,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Copies the elements of the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -296,29 +286,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           object that is the destination of the elements copied from the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           object that is the destination of the elements copied from the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
            object. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -353,13 +348,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Copies the elements of the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
-             object to an array of <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+             object to an array of <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -367,29 +360,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional array of  <see
-           cref=" T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          The one-dimensional array of  <see cref=" T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
-           objects that is the destination of the elements copied from the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           objects that is the destination of the elements copied from the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
            object. The array must have zero-based indexing.</param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -415,8 +413,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of elements contained in the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Gets the number of elements contained in the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -452,8 +449,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator that iterates through an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Returns an enumerator that iterates through an <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -463,13 +459,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             object that can be used to iterate through an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+             object that can be used to iterate through an <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -504,8 +498,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Determines the index of a specific item in the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -515,8 +508,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -524,17 +516,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
-           object to locate in the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           object to locate in the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
@@ -569,13 +563,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Inserts an <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
-             object into the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+             object into the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -583,29 +575,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted.</param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          An <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
-           object to insert into the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           object to insert into the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
@@ -635,8 +632,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -667,8 +663,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Gets a value that indicates whether the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -695,8 +690,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -731,8 +725,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Returns the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -742,8 +735,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >The <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -751,12 +743,15 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          The index of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
@@ -818,13 +813,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Removes the first occurrence of a specific <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
-             object from the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+             object from the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -832,17 +825,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          The <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
-           object to remove from the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+           object to remove from the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
           
 
@@ -873,8 +868,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+            >Removes the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
             
 
@@ -882,12 +876,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+          The zero-based index of the <see cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
           
 
@@ -913,8 +910,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
 
             
 
@@ -945,8 +941,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an item to the <see
-             cref="T:System.Collections.IList" />
+            >Adds an item to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -958,17 +953,19 @@
           <para>The position into which the new element was inserted.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to add to the <see
-           cref="T:System.Collections.IList" />
+           to add to the <see cref="T:System.Collections.IList" />
 
           
 
@@ -998,8 +995,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.IList" />
+            >Determines whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1009,13 +1005,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1023,17 +1017,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1063,8 +1059,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index of a specific item in the <see
-             cref="T:System.Collections.IList" />
+            >Determines the index of a specific item in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1074,8 +1069,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -1083,17 +1077,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to locate in the <see
-           cref="T:System.Collections.IList" />
+           to locate in the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1124,8 +1120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts an item to the <see
-             cref="T:System.Collections.IList" />
+            >Inserts an item to the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1133,29 +1128,34 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
            should be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to insert into the <see
-           cref="T:System.Collections.IList" />
+           to insert into the <see cref="T:System.Collections.IList" />
 
           
 
@@ -1212,8 +1212,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the first occurrence of a specific object from the <see
-             cref="T:System.Collections.IList" />
+            >Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1221,17 +1220,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           to remove from the <see
-           cref="T:System.Collections.IList" />
+           to remove from the <see cref="T:System.Collections.IList" />
 
           
 

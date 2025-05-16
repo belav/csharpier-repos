@@ -15,26 +15,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration applies to extensibility elements which specify that data transmissions use the SOAP protocol, and which are added to <see
-         cref="T:System.Web.Services.Description.FaultBinding" />
+        >This enumeration applies to extensibility elements which specify that data transmissions use the SOAP protocol, and which are added to <see cref="T:System.Web.Services.Description.FaultBinding" />
 
         
 
-        , <see
-         cref="T:System.Web.Services.Description.InputBinding" />
+        , <see cref="T:System.Web.Services.Description.InputBinding" />
 
         
 
-         and <see
-         cref="T:System.Web.Services.Description.OutputBinding" />
+         and <see cref="T:System.Web.Services.Description.OutputBinding" />
 
         
 
          instances.</para
       >
       <para
-        >For more information about specifying protocols for XML Web services, see <format
-         type="text/html">
+        >For more information about specifying protocols for XML Web services, see <format type="text/html">
           <a href="01DFC27C-C68E-4910-A0AA-5E4C2A766B0C"
             >[&lt;topic://cpconbuildingaspnetwebservices&gt;]</a
           >

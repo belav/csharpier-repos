@@ -12,7 +12,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -39,10 +41,7 @@
         <Parameter Name="data" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="data"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
+        <param name="data">a <see cref="T:System.Byte" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -86,23 +85,11 @@
         <Parameter Name="signature" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="hash"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="hashAlgorithm"
-          >a <see
-           cref="T:System.String" />
-        </param>
-        <param name="signature"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
+        <param name="hash">a <see cref="T:System.Byte" /></param>
+        <param name="hashAlgorithm">a <see cref="T:System.String" /></param>
+        <param name="signature">a <see cref="T:System.Byte" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -122,10 +109,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Security.Cryptography.DSA" />
-        </value>
+        <value>a <see cref="T:System.Security.Cryptography.DSA" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -145,10 +129,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:Mono.Security.X509.X509ExtensionCollection" />
-        </value>
+        <value>a <see cref="T:Mono.Security.X509.X509ExtensionCollection" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -220,10 +201,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -240,10 +218,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Boolean" />
-        </value>
+        <value>a <see cref="T:System.Boolean" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -260,10 +235,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Boolean" />
-        </value>
+        <value>a <see cref="T:System.Boolean" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -280,10 +252,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -316,10 +285,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -339,10 +305,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -359,10 +322,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -379,10 +339,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -402,10 +359,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Security.Cryptography.RSA" />
-        </value>
+        <value>a <see cref="T:System.Security.Cryptography.RSA" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -422,10 +376,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -442,10 +393,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -462,10 +410,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -485,10 +430,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Byte[]" />
-        </value>
+        <value>a <see cref="T:System.Byte[]" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -505,10 +447,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.String" />
-        </value>
+        <value>a <see cref="T:System.String" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -541,13 +480,9 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.DateTime" />
-        </value>
+        <value>a <see cref="T:System.DateTime" /></value>
         <remarks
-          >The returned <see
-           cref="T:System.DateTime" />
+          >The returned <see cref="T:System.DateTime" />
 
           
 
@@ -568,13 +503,9 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.DateTime" />
-        </value>
+        <value>a <see cref="T:System.DateTime" /></value>
         <remarks
-          >The returned <see
-           cref="T:System.DateTime" />
+          >The returned <see cref="T:System.DateTime" />
 
           
 
@@ -599,15 +530,9 @@
         <Parameter Name="aa" Type="System.Security.Cryptography.AsymmetricAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="aa"
-          >a <see
-           cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
-        </param>
+        <param name="aa">a <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -624,10 +549,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -645,15 +567,9 @@
         <Parameter Name="instant" Type="System.DateTime" />
       </Parameters>
       <Docs>
-        <param name="instant"
-          >a <see
-           cref="T:System.DateTime" />
-        </param>
+        <param name="instant">a <see cref="T:System.DateTime" /></param>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Boolean" />
-        </returns>
+        <returns>a <see cref="T:System.Boolean" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

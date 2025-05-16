@@ -28,8 +28,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSink" />
+        >The <see cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSink" />
 
         
 
@@ -39,8 +38,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides the implementation for the server channel sink provider that creates <see
-         cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSink" />
+        >Provides the implementation for the server channel sink provider that creates <see cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSink" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
 
             
 
@@ -89,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
 
             
 
@@ -98,39 +94,42 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.IDictionary" />
+          A <see cref="T:System.Collections.IDictionary" />
 
           
 
-           of configuration properties to use with the new instance of <see
-           cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
+           of configuration properties to use with the new instance of <see cref="T:System.Runtime.Remoting.MetadataServices.SdlChannelSinkProvider" />
 
           
 
           . </param
         >
         <param name="providerData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Collections.ICollection" />
+          A <see cref="T:System.Collections.ICollection" />
 
           
 
-           of <see
-           cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
+           of <see cref="T:System.Runtime.Remoting.Channels.SinkProviderData" />
 
           
 
-           instances to use with the new instance of <see
-           cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
+           instances to use with the new instance of <see cref="T:System.Runtime.Remoting.Channels.BinaryServerFormatterSinkProvider" />
 
           
 
@@ -165,7 +164,11 @@
           <para>The first sink of the newly formed channel sink chain.</para>
         </returns>
         <param name="channel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -199,12 +202,15 @@
           <para>Returns the channel data for the channel that the current sink is associated with.</para>
         </summary>
         <param name="localChannelData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
+          A <see cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
 
           
 
@@ -232,8 +238,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the next <see
-             cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+            >Gets or sets the next <see cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
             
 

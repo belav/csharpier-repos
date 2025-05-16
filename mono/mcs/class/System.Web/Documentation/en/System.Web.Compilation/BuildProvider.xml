@@ -14,140 +14,116 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The ASP.NET build environment uses <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >The ASP.NET build environment uses <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         objects to generate source code for different file types within an application. Classes derived from <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         objects to generate source code for different file types within an application. Classes derived from <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          predominantly provide source code for files, Web pages, resources, and other custom items.</para
       >
       <para
-        >Typically, you do not create an instance of the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >Typically, you do not create an instance of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         class directly. Instead, you implement a class that derives from <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         class directly. Instead, you implement a class that derives from <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-        , and configure the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        , and configure the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          implementation for use within the ASP.NET build environment.</para
       >
       <para
-        >Instances of the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >Instances of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         class are used with <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         class are used with <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         objects to build one or more files into a compiled assembly. A <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         objects to build one or more files into a compiled assembly. A <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         instance generates source code in the appropriate language for individual files, and the <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         instance generates source code in the appropriate language for individual files, and the <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         object combines the source contributed by each <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         object combines the source contributed by each <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          instance into a single assembly.</para
       >
       <para
-        >The ASP.NET build environment uses instances of the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >The ASP.NET build environment uses instances of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         class to build files within an application. The <see
-         cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+         class to build files within an application. The <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
         
 
-         property of the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         property of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         class indicates the path of the file to be built. The file extension of each file within an application is mapped to a corresponding build provider. The ASP.NET build environment initializes a <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         class indicates the path of the file to be built. The file extension of each file within an application is mapped to a corresponding build provider. The ASP.NET build environment initializes a <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         instance for each file based on the file extension, and uses the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         instance for each file based on the file extension, and uses the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         methods to generate source code for the file. The ASP.NET build environment passes an <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         methods to generate source code for the file. The ASP.NET build environment passes an <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         object based on the preferred compiler language and the context of the file to the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         object based on the preferred compiler language and the context of the file to the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         methods when building an assembly from one or more files, so that the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         methods when building an assembly from one or more files, so that the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
          instance can contribute source code for its file to the overall assembly.</para
       >
       <para
-        >To define custom build actions for a file type within an ASP.NET application, you must derive a class from <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >To define custom build actions for a file type within an ASP.NET application, you must derive a class from <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
         , implement members within the derived class for building the file type, and configure the build provider for the corresponding file extension within the application configuration file. </para
       >
       <para
-        >The <format
-         type="text/html">
+        >The <format type="text/html">
           <a href="35f1076f-7823-42ae-a585-2bf19cd60582">add element</a>
         </format>
 
         
 
-         specifies the file extension for supported files, and whether the build provider supports code files, Web files, resource files or all files. Use the type attribute to specify the fully qualified type name of the build provider implementation. Use the <see
-         cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
+         specifies the file extension for supported files, and whether the build provider supports code files, Web files, resource files or all files. Use the type attribute to specify the fully qualified type name of the build provider implementation. Use the <see cref="T:System.Web.Compilation.BuildProviderAppliesToAttribute" />
 
         
 
-         class to specify whether the build provider applies to files in the App_Code directory, to files in a Web content directory, to global or local resources, or to all files. Use the extension attribute to specify the file extension used to identify files that the <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         class to specify whether the build provider applies to files in the App_Code directory, to files in a Web content directory, to global or local resources, or to all files. Use the extension attribute to specify the file extension used to identify files that the <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         class supports. Use the <see
-         cref="T:System.Web.Configuration.BuildProviderCollection" />
+         class supports. Use the <see cref="T:System.Web.Configuration.BuildProviderCollection" />
 
         
 
-         class to examine build providers in a configuration file. For more information about configuring a build provider, see <format
-         type="text/html">
+         class to examine build providers in a configuration file. For more information about configuring a build provider, see <format type="text/html">
           <a href="40fa889d-5412-487a-b6a9-21eb011c2384"
             >buildproviders Element for compilation (ASP.NET Settings Schema)</a
           >
@@ -158,61 +134,50 @@
         .</para
       >
       <para
-        >To implement a build provider that generates source code for a custom file type, derive a class from <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >To implement a build provider that generates source code for a custom file type, derive a class from <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-        , and override the <see
-         cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+        , and override the <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
         
 
-         method to generate source code for the supported file type. The generated source is added to the <see
-         cref="T:System.Web.Compilation.AssemblyBuilder" />
+         method to generate source code for the supported file type. The generated source is added to the <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
         
 
-         object in the form of a CodeDOM graph, or as content that represents a physical source code file. If the build provider requires a specific programming language, override the <see
-         cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+         object in the form of a CodeDOM graph, or as content that represents a physical source code file. If the build provider requires a specific programming language, override the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
         
 
-         property to return a <see
-         cref="T:System.Web.Compilation.CompilerType" />
+         property to return a <see cref="T:System.Web.Compilation.CompilerType" />
 
         
 
-         object for the supported programming language. If the build provider does not require a specific programming language, do not override the <see
-         cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+         object for the supported programming language. If the build provider does not require a specific programming language, do not override the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
         
 
          property; use the base class implementation, which indicates that the build provider can use any .NET Framework language, such as Visual Basic or C#.</para
       >
       <para
-        >To implement a build provider that generates source code for Web content, derive a class from <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+        >To implement a build provider that generates source code for Web content, derive a class from <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-         and override the <see
-         cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
+         and override the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
 
         
 
-         method to return the <see
-         cref="T:System.Type" />
+         method to return the <see cref="T:System.Type" />
 
         
 
-         for the class generated by <see
-         cref="T:System.Web.Compilation.BuildProvider" />
+         for the class generated by <see cref="T:System.Web.Compilation.BuildProvider" />
 
         
 
-        . Override the <see
-         cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+        . Override the <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
         
 
@@ -220,18 +185,15 @@
       >
       <block subset="none" type="note">
         <para
-          >Adding a customized <see
-           cref="T:System.Web.Compilation.BuildProvider" />
+          >Adding a customized <see cref="T:System.Web.Compilation.BuildProvider" />
 
           
 
-           class to the Web.config file works in an ASP.NET Web site but does not work in an ASP.NET Web application project. In a Web application project, the code that is generated by the <see
-           cref="T:System.Web.Compilation.BuildProvider" />
+           class to the Web.config file works in an ASP.NET Web site but does not work in an ASP.NET Web application project. In a Web application project, the code that is generated by the <see cref="T:System.Web.Compilation.BuildProvider" />
 
           
 
-           class cannot be included in the application. For more information, see <format
-           type="text/html">
+           class cannot be included in the application. For more information, see <format type="text/html">
             <a href="b940abbd-178d-4570-b441-52914fa7b887">Compiling Web Application Projects</a>
           </format>
 
@@ -256,21 +218,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >Because the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class is abstract, you cannot create an instance of <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             class is abstract, you cannot create an instance of <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              directly using the constructor.</para
           >
           <para
-            >When deriving from the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >When deriving from the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
@@ -280,8 +239,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >Initializes a new instance of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
@@ -308,54 +266,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+            >Use the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
             
 
-             property to provide the settings for compiling source code for an implementation of <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             property to provide the settings for compiling source code for an implementation of <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-            . The <see
-             cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+            . The <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
             
 
              property is null if the build provider does not require a specific code language for generating and compiling source code.</para
           >
           <para
-            >To set the value for a <see
-             cref="T:System.Web.Compilation.CompilerType" />
+            >To set the value for a <see cref="T:System.Web.Compilation.CompilerType" />
 
             
 
-             object within a build provider implementation, use the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
+             object within a build provider implementation, use the <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
 
             
 
-             or <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
+             or <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Compilation.CompilerType.CodeDomProviderType" />
+            >The <see cref="P:System.Web.Compilation.CompilerType.CodeDomProviderType" />
 
             
 
-             property specifies the <see
-             cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+             property specifies the <see cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
             
 
-             implementation that is used to generate and compile source code for a build provider. The <see
-             cref="P:System.Web.Compilation.CompilerType.CompilerParameters" />
+             implementation that is used to generate and compile source code for a build provider. The <see cref="P:System.Web.Compilation.CompilerType.CompilerParameters" />
 
             
 
@@ -388,64 +337,53 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement a build provider that generates source code for a custom file type, derive a class from the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >To implement a build provider that generates source code for a custom file type, derive a class from the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class, and override the <see
-             cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+             class, and override the <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
             
 
              method to generate source code for the supported file type. </para
           >
           <para
-            >Typically, a build provider's <see
-             cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
+            >Typically, a build provider's <see cref="M:System.Web.Compilation.BuildProvider.GenerateCode(System.Web.Compilation.AssemblyBuilder)" />
 
             
 
-             implementation reads the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             implementation reads the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
-             property, parses the contents, and adds the generated source code to the specified <see
-             cref="T:System.Web.Compilation.AssemblyBuilder" />
+             property, parses the contents, and adds the generated source code to the specified <see cref="T:System.Web.Compilation.AssemblyBuilder" />
 
             
 
-             object. You can contribute source code to the assembly in the form of a <see
-             cref="T:System.IO.TextWriter" />
+             object. You can contribute source code to the assembly in the form of a <see cref="T:System.IO.TextWriter" />
 
             
 
-             object or a CodeDOM graph. To add source code to the assembly through a <see
-             cref="T:System.IO.TextWriter" />
+             object or a CodeDOM graph. To add source code to the assembly through a <see cref="T:System.IO.TextWriter" />
 
             
 
-             object, use the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
+             object, use the <see cref="M:System.Web.Compilation.AssemblyBuilder.CreateCodeFile(System.Web.Compilation.BuildProvider)" />
 
             
 
-             method. To add source code in a CodeDOM graph to the assembly, use the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
+             method. To add source code in a CodeDOM graph to the assembly, use the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddCodeCompileUnit(System.Web.Compilation.BuildProvider,System.CodeDom.CodeCompileUnit)" />
 
             
 
              method.</para
           >
           <para
-            >If the build provider generates source code in a specific programming language, you must override the <see
-             cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+            >If the build provider generates source code in a specific programming language, you must override the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
             
 
-             property to return a <see
-             cref="T:System.Web.Compilation.CompilerType" />
+             property to return a <see cref="T:System.Web.Compilation.CompilerType" />
 
             
 
@@ -457,7 +395,11 @@
           <para>Generates source code for the virtual path of the build provider, and adds the source code to a specified assembly builder.</para>
         </summary>
         <param name="assemblyBuilder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -485,79 +427,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Compilation.BuildManager.GetCompiledCustomString(System.String)" />
+            >The <see cref="M:System.Web.Compilation.BuildManager.GetCompiledCustomString(System.String)" />
 
             
 
-             method of a <see
-             cref="T:System.Web.Compilation.BuildManager" />
+             method of a <see cref="T:System.Web.Compilation.BuildManager" />
 
             
 
-             object creates an instance of a build provider for an input virtual path, and calls the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+             object creates an instance of a build provider for an input virtual path, and calls the <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method on the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             method on the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              object.</para
           >
           <para
-            >The base <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >The base <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class returns null for the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+             class returns null for the <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method, indicating that <see
-             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+             method, indicating that <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
              is not implemented.</para
           >
           <para
-            >Certain build provider implementations can implement <see
-             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+            >Certain build provider implementations can implement <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             in place of the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
+             in place of the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method. A <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             method. A <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             object typically uses <see
-             cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
+             object typically uses <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             to return a <see
-             cref="T:System.Type" />
+             to return a <see cref="T:System.Type" />
 
             
 
-             object for a virtual path. However, the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+             object for a virtual path. However, the <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method can be used to indicate that a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             method can be used to indicate that a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
@@ -571,13 +499,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A string to be persisted in the build environment, or null if the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >A string to be persisted in the build environment, or null if the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             instance does not implement <see
-             cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
+             instance does not implement <see cref="M:System.Web.Compilation.BuildProvider.GetCustomString(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
@@ -585,7 +511,11 @@
           >
         </returns>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -611,51 +541,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
+            >Use the <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
 
             
 
-             method to examine the default compiler type for a build provider. Use the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
+             method to examine the default compiler type for a build provider. Use the <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
 
             
 
              method to examine the compiler type configured in a build provider for a specific language name.</para
           >
           <para
-            >The base <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >The base <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class determines the default compiler type using the defaultLanguage attribute value in the <format
-             type="text/html">
+             class determines the default compiler type using the defaultLanguage attribute value in the <format type="text/html">
               <a href="7c319582-074a-4d2a-a787-03b9d4541c12">compilation</a>
             </format>
 
             
 
-             section of the application configuration file. If there is no default language setting in the compilation section, the default compiler type is set using the <see
-             cref="T:Microsoft.VisualBasic.VBCodeProvider" />
+             section of the application configuration file. If there is no default language setting in the compilation section, the default compiler type is set using the <see cref="T:Microsoft.VisualBasic.VBCodeProvider" />
 
             
 
              language provider.</para
           >
           <para
-            >When deriving from the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >When deriving from the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class, you can use <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
+             class, you can use <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
 
             
 
-             to set the <see
-             cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+             to set the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
             
 
@@ -669,8 +591,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.CompilerType" />
+            >A <see cref="T:System.Web.Compilation.CompilerType" />
 
             
 
@@ -699,97 +620,81 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
+            >Use the <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
 
             
 
-             method to examine the compiler type configured in the build provider for a specific language name. Use the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
+             method to examine the compiler type configured in the build provider for a specific language name. Use the <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
 
             
 
              method to examine the default compiler type for a build provider.</para
           >
           <para
-            >The base <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >The base <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class determines the default compiler type using the <see
-             cref="T:System.Web.Configuration.Compiler" />
+             class determines the default compiler type using the <see cref="T:System.Web.Configuration.Compiler" />
 
             
 
-             elements in the <see
-             cref="P:System.Web.Configuration.CompilationSection.Compilers" />
+             elements in the <see cref="P:System.Web.Configuration.CompilationSection.Compilers" />
 
             
 
-             property of the <see
-             cref="T:System.Web.Configuration.CompilationSection" />
+             property of the <see cref="T:System.Web.Configuration.CompilationSection" />
 
             
 
-             object for the configuration file. This is equivalent to examining the <format
-             type="text/html">
+             object for the configuration file. This is equivalent to examining the <format type="text/html">
               <a href="f7d6b078-5d42-4134-b3f7-62e1aba1df1e">compiler</a>
             </format>
 
             
 
-             elements in the <format
-             type="text/html">
+             elements in the <format type="text/html">
               <a href="a7589d5e-8dce-4951-a876-b1276c02b60b">system.web</a>
             </format>
 
             
 
-             and the <format
-             type="text/html">
+             and the <format type="text/html">
               <a href="7a151659-b803-4c27-b5ce-1c4aa0d5a823">compiler</a>
             </format>
 
             
 
-             elements in the <format
-             type="text/html">
+             elements in the <format type="text/html">
               <a href="672a68f7-e69f-4479-ac30-e980085ec4fe">system.codedom</a>
             </format>
 
             
 
-             sections of the configuration file. For example, for the <paramref
-             name="language" />
+             sections of the configuration file. For example, for the <paramref name="language" />
 
             
 
-             value VB, the base class method returns a <see
-             cref="T:System.Web.Compilation.CompilerType" />
+             value VB, the base class method returns a <see cref="T:System.Web.Compilation.CompilerType" />
 
             
 
-             object that corresponds to the configured settings for an instance of <see
-             cref="T:Microsoft.VisualBasic.VBCodeProvider" />
+             object that corresponds to the configured settings for an instance of <see cref="T:Microsoft.VisualBasic.VBCodeProvider" />
 
             
 
             .</para
           >
           <para
-            >When you derive from the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >When you derive from the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class, you can use <see
-             cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
+             class, you can use <see cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
 
             
 
-             to set the <see
-             cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
+             to set the <see cref="P:System.Web.Compilation.BuildProvider.CodeCompilerType" />
 
             
 
@@ -803,8 +708,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.CompilerType" />
+            >A <see cref="T:System.Web.Compilation.CompilerType" />
 
             
 
@@ -812,7 +716,11 @@
           >
         </returns>
         <param name="language">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -840,46 +748,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To implement a build provider that generates source code for Web content such as .aspx files, derive a class from the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >To implement a build provider that generates source code for Web content such as .aspx files, derive a class from the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class and override the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
+             class and override the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
              method to return the type generated by the build provider. </para
           >
           <para
-            >The ASP.NET build system compiles files for each build provider, and generates a <see
-             cref="T:System.CodeDom.Compiler.CompilerResults" />
+            >The ASP.NET build system compiles files for each build provider, and generates a <see cref="T:System.CodeDom.Compiler.CompilerResults" />
 
             
 
-             object, which is passed to the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
+             object, which is passed to the <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method. Typically, a build provider's <see
-             cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
+             method. Typically, a build provider's <see cref="M:System.Web.Compilation.BuildProvider.GetGeneratedType(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             implementation uses the <see
-             cref="Overload:System.Reflection.Assembly.GetType" />
+             implementation uses the <see cref="Overload:System.Reflection.Assembly.GetType" />
 
             
 
-             method on the <see
-             cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
+             method on the <see cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
 
             
 
-             property of the input <paramref
-             name="results" />
+             property of the input <paramref name="results" />
 
             
 
@@ -895,7 +795,11 @@
           <para>The type that is generated by the build provider for the virtual path. The base class returns null.</para>
         </returns>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -923,59 +827,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
+            >The <see cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method is used by the ASP.NET build environment when using instances of the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             method is used by the ASP.NET build environment when using instances of the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              class to build files and load the compiled assemblies.</para
           >
           <para
-            >The base <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >The base <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class method returns the <see
-             cref="F:System.Web.Compilation.BuildProviderResultFlags.Default" />
+             class method returns the <see cref="F:System.Web.Compilation.BuildProviderResultFlags.Default" />
 
             
 
              field value, indicating that no special action is required when the virtual path is built.</para
           >
           <para
-            >When deriving from the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >When deriving from the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class, you can implement the <see
-             cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
+             class, you can implement the <see cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
-             method to return a different <see
-             cref="T:System.Web.Compilation.BuildProviderResultFlags" />
+             method to return a different <see cref="T:System.Web.Compilation.BuildProviderResultFlags" />
 
             
 
-             value for your custom file type or virtual path. For example, if a rebuild of your virtual path requires the containing <see
-             cref="T:System.AppDomain" />
+             value for your custom file type or virtual path. For example, if a rebuild of your virtual path requires the containing <see cref="T:System.AppDomain" />
 
             
 
-             object to be reloaded, you can return the <see
-             cref="F:System.Web.Compilation.BuildProviderResultFlags.ShutdownAppDomainOnChange" />
+             object to be reloaded, you can return the <see cref="F:System.Web.Compilation.BuildProviderResultFlags.ShutdownAppDomainOnChange" />
 
             
 
-             enumeration value from your <see
-             cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
+             enumeration value from your <see cref="M:System.Web.Compilation.BuildProvider.GetResultFlags(System.CodeDom.Compiler.CompilerResults)" />
 
             
 
@@ -989,8 +883,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Compilation.BuildProviderResultFlags" />
+            >A <see cref="T:System.Web.Compilation.BuildProviderResultFlags" />
 
             
 
@@ -998,7 +891,11 @@
           >
         </returns>
         <param name="results">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1021,41 +918,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.IO.TextReader.Read" />
+            >Use the <see cref="Overload:System.IO.TextReader.Read" />
 
             
 
-             method on the returned <see
-             cref="T:System.IO.TextReader" />
+             method on the returned <see cref="T:System.IO.TextReader" />
 
             
 
-             object to read the contents of the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             object to read the contents of the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
-             property for a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             property for a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              object.</para
           >
           <para
-            >After calling the <see
-             cref="M:System.Web.Compilation.BuildProvider.OpenReader" />
+            >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenReader" />
 
             
 
-             method, you must use the <see
-             cref="M:System.IO.TextReader.Close" />
+             method, you must use the <see cref="M:System.IO.TextReader.Close" />
 
             
 
-             method to close the <see
-             cref="T:System.IO.TextReader" />
+             method to close the <see cref="T:System.IO.TextReader" />
 
             
 
@@ -1069,13 +959,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An open <see
-             cref="T:System.IO.TextReader" />
+            >An open <see cref="T:System.IO.TextReader" />
 
             
 
-             that can be used to read the contents of the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             that can be used to read the contents of the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
@@ -1104,31 +992,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="Overload:System.IO.TextReader.Read" />
+            >Use the <see cref="Overload:System.IO.TextReader.Read" />
 
             
 
-             method on the returned <see
-             cref="T:System.IO.TextReader" />
+             method on the returned <see cref="T:System.IO.TextReader" />
 
             
 
              object to read the contents of the virtual path. </para
           >
           <para
-            >After calling the <see
-             cref="M:System.Web.Compilation.BuildProvider.OpenReader" />
+            >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenReader" />
 
             
 
-             method, you must use the <see
-             cref="M:System.IO.TextReader.Close" />
+             method, you must use the <see cref="M:System.IO.TextReader.Close" />
 
             
 
-             method to close the <see
-             cref="T:System.IO.TextReader" />
+             method to close the <see cref="T:System.IO.TextReader" />
 
             
 
@@ -1142,8 +1025,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An open <see
-             cref="T:System.IO.TextReader" />
+            >An open <see cref="T:System.IO.TextReader" />
 
             
 
@@ -1151,7 +1033,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1174,36 +1060,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >Use the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method on the returned <see
-             cref="T:System.IO.Stream" />
+             method on the returned <see cref="T:System.IO.Stream" />
 
             
 
-             object to read the contents of the virtual path for the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             object to read the contents of the virtual path for the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              object. </para
           >
           <para
-            >After calling the <see
-             cref="M:System.Web.Compilation.BuildProvider.OpenStream" />
+            >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenStream" />
 
             
 
-             method, you must use the <see
-             cref="M:System.IO.Stream.Close" />
+             method, you must use the <see cref="M:System.IO.Stream.Close" />
 
             
 
-             method to close the <see
-             cref="T:System.IO.Stream" />
+             method to close the <see cref="T:System.IO.Stream" />
 
             
 
@@ -1217,13 +1097,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An open <see
-             cref="T:System.IO.Stream" />
+            >An open <see cref="T:System.IO.Stream" />
 
             
 
-             that can be used to read the contents of the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             that can be used to read the contents of the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
@@ -1252,31 +1130,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+            >Use the <see cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
 
             
 
-             method on the returned <see
-             cref="T:System.IO.Stream" />
+             method on the returned <see cref="T:System.IO.Stream" />
 
             
 
              object to read the contents of the virtual path. </para
           >
           <para
-            >After calling the <see
-             cref="M:System.Web.Compilation.BuildProvider.OpenStream" />
+            >After calling the <see cref="M:System.Web.Compilation.BuildProvider.OpenStream" />
 
             
 
-             method, you must use the <see
-             cref="M:System.IO.Stream.Close" />
+             method, you must use the <see cref="M:System.IO.Stream.Close" />
 
             
 
-             method to close the <see
-             cref="T:System.IO.Stream" />
+             method to close the <see cref="T:System.IO.Stream" />
 
             
 
@@ -1290,8 +1163,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An open <see
-             cref="T:System.IO.Stream" />
+            >An open <see cref="T:System.IO.Stream" />
 
             
 
@@ -1299,7 +1171,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1325,8 +1201,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The ASP.NET build environment initializes the collection of assemblies that are available for reference by the build provider. The source code generated by a build provider can use public types in the referenced assemblies. The referenced assembly collection consists of other assemblies built in the ASP.NET application, and assemblies listed in the <format
-             type="text/html">
+            >The ASP.NET build environment initializes the collection of assemblies that are available for reference by the build provider. The source code generated by a build provider can use public types in the referenced assemblies. The referenced assembly collection consists of other assemblies built in the ASP.NET application, and assemblies listed in the <format type="text/html">
               <a href="3811c448-af1c-498d-be2b-6ed2634c51e9">assemblies</a>
             </format>
 
@@ -1335,21 +1210,18 @@
              element in the configuration file. </para
           >
           <para
-            >If the build provider generates source code that references additional assemblies, the build provider adds the additional assemblies using the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
+            >If the build provider generates source code that references additional assemblies, the build provider adds the additional assemblies using the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
 
             
 
              method. The ASP.NET build environment resolves external types during assembly compilation using both the referenced assemblies added by build providers and the default collection of assemblies available for reference.</para
           >
           <para
-            >The <see
-             cref="P:System.Web.Compilation.BuildProvider.ReferencedAssemblies" />
+            >The <see cref="P:System.Web.Compilation.BuildProvider.ReferencedAssemblies" />
 
             
 
-             collection does not include assemblies that are added for reference by other build providers through the <see
-             cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
+             collection does not include assemblies that are added for reference by other build providers through the <see cref="M:System.Web.Compilation.AssemblyBuilder.AddAssemblyReference(System.Reflection.Assembly)" />
 
             
 
@@ -1379,39 +1251,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The virtual path of a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >The virtual path of a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             object is the path to the file that is being compiled by the build provider. For example, if you have configured a custom <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             object is the path to the file that is being compiled by the build provider. For example, if you have configured a custom <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             class to build all files in the Web site with the custom extension of .abc, if your Web site is named WebSite1, and the Web site contains a file named Example.abc, the <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
+             class to build all files in the Web site with the custom extension of .abc, if your Web site is named WebSite1, and the Web site contains a file named Example.abc, the <see cref="P:System.Web.Compilation.BuildProvider.VirtualPath" />
 
             
 
              property contains the value /WebSite1/Example.abc.</para
           >
           <para
-            >The file extension of each file within the application determines the file type, and the corresponding build provider for the file type. The ASP.NET build environment initializes a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >The file extension of each file within the application determines the file type, and the corresponding build provider for the file type. The ASP.NET build environment initializes a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             object for each file based on the file type, and uses the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             object for each file based on the file type, and uses the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
              methods to generate source for each file.</para
           >
           <para
-            >For more information about configuring a build provider, see <format
-             type="text/html">
+            >For more information about configuring a build provider, see <format type="text/html">
               <a href="40fa889d-5412-487a-b6a9-21eb011c2384"
                 >buildproviders Element for compilation (ASP.NET Settings Schema)</a
               >
@@ -1443,23 +1309,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPathDependencies" />
+            >The <see cref="P:System.Web.Compilation.BuildProvider.VirtualPathDependencies" />
 
             
 
-             property is a collection of virtual paths that must be compiled before the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             property is a collection of virtual paths that must be compiled before the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
-             instance generates source code. The assemblies from the virtual paths in <see
-             cref="P:System.Web.Compilation.BuildProvider.VirtualPathDependencies" />
+             instance generates source code. The assemblies from the virtual paths in <see cref="P:System.Web.Compilation.BuildProvider.VirtualPathDependencies" />
 
             
 
-             are added as references to the compilation for the <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+             are added as references to the compilation for the <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 

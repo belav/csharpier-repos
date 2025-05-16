@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This class is used to encode and decode the content of the security context token when a binding with message security that uses a stateful security context token is used. crabout stateful security context tokens, see <format
-         type="text/html">
+        >This class is used to encode and decode the content of the security context token when a binding with message security that uses a stateful security context token is used. crabout stateful security context tokens, see <format type="text/html">
           <a href="640676b6-c75a-4ff7-aea4-b1a1524d71b2"
             >How To: Create a Stateful Security Context Token for a Secure Session</a
           >
@@ -29,18 +28,18 @@
          topic.</para
       >
       <para
-        >Microsoft’s version of <see
-         cref="T:System.ServiceModel.Security.SecurityStateEncoder" />
+        >Microsoft’s version of <see cref="T:System.ServiceModel.Security.SecurityStateEncoder" />
 
         
 
-         is <see
-         cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
+         is <see cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
 
         
 
         . It uses Microsoft’s <see
-         cref="http://go.microsoft.com/fwlink/?LinkId=96704">Windows Data Protection (DPAPI)</see>
+          cref="http://go.microsoft.com/fwlink/?LinkId=96704"
+          >Windows Data Protection (DPAPI)</see
+        >
 
         
 
@@ -72,8 +71,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Security.SecurityStateEncoder" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Security.SecurityStateEncoder" />
 
             
 
@@ -112,7 +110,11 @@
           <para>A byte array that represents the security state.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -150,7 +152,11 @@
           <para>A byte array that results from encoding the security state.</para>
         </returns>
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

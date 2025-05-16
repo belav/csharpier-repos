@@ -32,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.TYPEFLAGS" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.TYPEFLAGS" />
 
         
 
@@ -279,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The types used in the interface are fully compatible with Automation, including VTBL binding support. Setting dual on an interface sets this flag in addition to <see
-             cref="F:System.Runtime.InteropServices.TYPEFLAGS.TYPEFLAG_FDUAL" />
+            >The types used in the interface are fully compatible with Automation, including VTBL binding support. Setting dual on an interface sets this flag in addition to <see cref="F:System.Runtime.InteropServices.TYPEFLAGS.TYPEFLAG_FDUAL" />
 
             
 

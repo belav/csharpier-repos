@@ -23,8 +23,7 @@
   </Attributes>
   <Docs>
     <summary
-      >Possible <see
-       cref="M:Mono.Unix.Native.Syscall.mremap" />
+      >Possible <see cref="M:Mono.Unix.Native.Syscall.mremap" />
       <paramref name="flags" />
 
       

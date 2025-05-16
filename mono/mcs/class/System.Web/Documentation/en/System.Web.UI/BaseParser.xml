@@ -36,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.BaseParser" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.BaseParser" />
 
             
 

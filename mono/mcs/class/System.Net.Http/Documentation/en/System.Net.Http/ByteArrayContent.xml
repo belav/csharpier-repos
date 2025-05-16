@@ -42,8 +42,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.ByteArrayContent" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.ByteArrayContent" />
 
             
 
@@ -51,12 +50,15 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The content used to initialize the <see
-           cref="T:System.Net.Http.ByteArrayContent" />
+          The content used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />
 
           
 
@@ -86,13 +88,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Only the range specified by the <paramref
-             name="offset" />
+            >Only the range specified by the <paramref name="offset" />
 
             
 
-             parameter and the <paramref
-             name="count " />
+             parameter and the <paramref name="count " />
 
             
 
@@ -102,8 +102,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Http.ByteArrayContent" />
+            >Initializes a new instance of the <see cref="T:System.Net.Http.ByteArrayContent" />
 
             
 
@@ -111,51 +110,57 @@
           >
         </summary>
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The content used to initialize the <see
-           cref="T:System.Net.Http.ByteArrayContent" />
+          The content used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />
 
           
 
           .</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The offset, in bytes, in the <paramref
-           name="content" />
+          The offset, in bytes, in the <paramref name="content" />
 
           
 
-            parameter used to initialize the <see
-           cref="T:System.Net.Http.ByteArrayContent" />
+            parameter used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />
 
           
 
           .</param
         >
         <param name="count">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The number of bytes in the <paramref
-           name="content" />
+          The number of bytes in the <paramref name="content" />
 
           
 
-           starting from the <paramref
-           name="offset" />
+           starting from the <paramref name="offset" />
 
           
 
-           parameter used to initialize the <see
-           cref="T:System.Net.Http.ByteArrayContent" />
+           parameter used to initialize the <see cref="T:System.Net.Http.ByteArrayContent" />
 
           
 
@@ -184,8 +189,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation will not block. The returned <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >This operation will not block. The returned <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -195,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an HTTP content stream as an asynchronous operation for reading whose backing store is memory from the <see
-             cref="T:System.Net.Http.ByteArrayContent" />
+            >Creates an HTTP content stream as an asynchronous operation for reading whose backing store is memory from the <see cref="T:System.Net.Http.ByteArrayContent" />
 
             
 
@@ -206,8 +209,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task`1" />
+            >Returns <see cref="T:System.Threading.Tasks.Task`1" />
 
             
 
@@ -241,13 +243,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This operation does not block. When the returned <see
-             cref="T:System.Threading.Tasks.Task" />
+            >This operation does not block. When the returned <see cref="T:System.Threading.Tasks.Task" />
 
             
 
-             object completes, the whole byte array has been written to the <paramref
-             name="stream" />
+             object completes, the whole byte array has been written to the <paramref name="stream" />
 
             
 
@@ -261,8 +261,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns <see
-             cref="T:System.Threading.Tasks.Task" />
+            >Returns <see cref="T:System.Threading.Tasks.Task" />
 
             
 
@@ -271,14 +270,22 @@
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="stream">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The target stream.</param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

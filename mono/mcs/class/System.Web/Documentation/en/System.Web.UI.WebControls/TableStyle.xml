@@ -20,36 +20,30 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TableStyle" />
+        >The <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
         
 
          class is used to represent the style for a table control. It encapsulates the properties that control the appearance of a table and can be applied to multiple table controls to provide a common appearance.</para
       >
       <para
-        >You can specify an image to display in the background of the table by setting the <see
-         cref="P:System.Web.UI.WebControls.TableStyle.BackImageUrl" />
+        >You can specify an image to display in the background of the table by setting the <see cref="P:System.Web.UI.WebControls.TableStyle.BackImageUrl" />
 
         
 
-         property. The amount of spacing between the cells of a table is controlled by the <see
-         cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
+         property. The amount of spacing between the cells of a table is controlled by the <see cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
 
         
 
-         property. The spacing between the contents of a cell and the cell border is specified using the <see
-         cref="P:System.Web.UI.WebControls.TableStyle.CellPadding" />
+         property. The spacing between the contents of a cell and the cell border is specified using the <see cref="P:System.Web.UI.WebControls.TableStyle.CellPadding" />
 
         
 
-         property. You can specify whether cell borders are displayed by setting the <see
-         cref="P:System.Web.UI.WebControls.TableStyle.GridLines" />
+         property. You can specify whether cell borders are displayed by setting the <see cref="P:System.Web.UI.WebControls.TableStyle.GridLines" />
 
         
 
-         property. The horizontal alignment of the table in relation to other elements on the Web Forms page is indicated by the <see
-         cref="P:System.Web.UI.WebControls.TableStyle.HorizontalAlign" />
+         property. The horizontal alignment of the table in relation to other elements on the Web Forms page is indicated by the <see cref="P:System.Web.UI.WebControls.TableStyle.HorizontalAlign" />
 
         
 
@@ -62,8 +56,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the style for the <see
-         cref="T:System.Web.UI.WebControls.Table" />
+        >Represents the style for the <see cref="T:System.Web.UI.WebControls.Table" />
 
         
 
@@ -81,8 +74,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableStyle" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
             
 
@@ -92,8 +84,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableStyle" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
             
 
@@ -117,13 +108,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableStyle" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
             
 
-             class using the specified <see
-             cref="T:System.Web.UI.StateBag" />
+             class using the specified <see cref="T:System.Web.UI.StateBag" />
 
             
 
@@ -133,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TableStyle" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
             
 
@@ -142,12 +130,15 @@
           >
         </summary>
         <param name="bag">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.StateBag" />
+          A <see cref="T:System.Web.UI.StateBag" />
 
           
 
@@ -182,14 +173,22 @@
           <para>Adds information about the background image, cell spacing, cell padding, gridlines, and alignment to the list of attributes to render.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The output stream that renders HTML content to the client. </param
         >
         <param name="owner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,8 +212,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableStyle.BackImageUrl" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableStyle.BackImageUrl" />
 
             
 
@@ -258,8 +256,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableStyle.CellPadding" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableStyle.CellPadding" />
 
             
 
@@ -299,8 +296,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
 
             
 
@@ -308,13 +304,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you set this property to a value greater than 0 and set the <see
-               cref="P:System.Web.UI.WebControls.TableStyle.GridLines" />
+              >If you set this property to a value greater than 0 and set the <see cref="P:System.Web.UI.WebControls.TableStyle.GridLines" />
 
               
 
-               property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see
-               cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
+               property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
 
               
 
@@ -360,7 +354,11 @@
           <para>Copies non-blank elements from the specified style, overwriting existing style elements if necessary.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -392,18 +390,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.TableStyle.FillStyleAttributes(System.Web.UI.CssStyleCollection,System.Web.UI.IUrlResolutionService)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.TableStyle.FillStyleAttributes(System.Web.UI.CssStyleCollection,System.Web.UI.IUrlResolutionService)" />
 
             
 
-             method to add the style properties of the <see
-             cref="T:System.Web.UI.WebControls.TableStyle" />
+             method to add the style properties of the <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
             
 
-             object to the specified <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+             object to the specified <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -413,13 +408,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the style properties of the <see
-             cref="T:System.Web.UI.WebControls.TableStyle" />
+            >Adds the style properties of the <see cref="T:System.Web.UI.WebControls.TableStyle" />
 
             
 
-             object to the specified <see
-             cref="T:System.Web.UI.CssStyleCollection" />
+             object to the specified <see cref="T:System.Web.UI.CssStyleCollection" />
 
             
 
@@ -427,24 +420,30 @@
           >
         </summary>
         <param name="attributes">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.CssStyleCollection" />
+          The <see cref="T:System.Web.UI.CssStyleCollection" />
 
           
 
            to which to add the style properties. </param
         >
         <param name="urlResolver">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An object implemented by the <see
-           cref="T:System.Web.UI.IUrlResolutionService" />
+          An object implemented by the <see cref="T:System.Web.UI.IUrlResolutionService" />
 
           
 
@@ -467,13 +466,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableStyle.GridLines" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableStyle.GridLines" />
 
             
 
-             property to specify whether the border between the cells of the data list control is displayed. This property is set with one of the <see
-             cref="T:System.Web.UI.WebControls.GridLines" />
+             property to specify whether the border between the cells of the data list control is displayed. This property is set with one of the <see cref="T:System.Web.UI.WebControls.GridLines" />
 
             
 
@@ -566,13 +563,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.TableStyle.HorizontalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.TableStyle.HorizontalAlign" />
 
             
 
-             property to specify the horizontal alignment of the data list control within its container. This property is set with one of the <see
-             cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+             property to specify the horizontal alignment of the data list control within its container. This property is set with one of the <see cref="T:System.Web.UI.WebControls.HorizontalAlign" />
 
             
 
@@ -669,7 +664,11 @@
           <para>Copies non-blank elements from the specified style, but will not overwrite any existing style elements.</para>
         </summary>
         <param name="s">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

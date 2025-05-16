@@ -31,163 +31,134 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+        >The <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
-         class provides the common functionality for all data listing controls, such as <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+         class provides the common functionality for all data listing controls, such as <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         and <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
-        . A data listing control is used to display the records from a data source, such as a <see
-         cref="T:System.Data.DataView" />
+        . A data listing control is used to display the records from a data source, such as a <see cref="T:System.Data.DataView" />
 
         
 
-         control. Each data listing control can have a unique display style and capabilities. Because the <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+         control. Each data listing control can have a unique display style and capabilities. Because the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
          class is abstract, an instance of this class is not created directly. Instead, data listing controls inherit the methods and properties common to all data listing controls from this class.</para
       >
       <para
-        >You can control the appearance of a data listing control by setting certain properties of this class. To determine the amount of spacing between the cells of a data listing control, set the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.CellSpacing" />
+        >You can control the appearance of a data listing control by setting certain properties of this class. To determine the amount of spacing between the cells of a data listing control, set the <see cref="P:System.Web.UI.WebControls.BaseDataList.CellSpacing" />
 
         
 
-         property. To determine the amount of spacing between the contents of a cell and the cell's border, set the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.CellPadding" />
+         property. To determine the amount of spacing between the contents of a cell and the cell's border, set the <see cref="P:System.Web.UI.WebControls.BaseDataList.CellPadding" />
 
         
 
-         property. You can display the border between the individual cells of a data listing control by setting the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.GridLines" />
+         property. You can display the border between the individual cells of a data listing control by setting the <see cref="P:System.Web.UI.WebControls.BaseDataList.GridLines" />
 
         
 
-         property. The horizontal alignment of the content in the cells of a data listing control is controlled by the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.HorizontalAlign" />
+         property. The horizontal alignment of the content in the cells of a data listing control is controlled by the <see cref="P:System.Web.UI.WebControls.BaseDataList.HorizontalAlign" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+        >The <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
-         class provides two properties to support data binding. To bind data to any collection that implements the <see
-         cref="T:System.Collections.IEnumerable" />
+         class provides two properties to support data binding. To bind data to any collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
         
 
-         interface (such as <see
-         cref="T:System.Data.DataView" />
+         interface (such as <see cref="T:System.Data.DataView" />
 
         
 
-         or <see
-         cref="T:System.Collections.ArrayList" />
+         or <see cref="T:System.Collections.ArrayList" />
 
         
 
-        ), or the <see
-         cref="T:System.ComponentModel.IListSource" />
+        ), or the <see cref="T:System.ComponentModel.IListSource" />
 
         
 
-         interface, use the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+         interface, use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
         
 
-         property to specify the data source. When you set the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+         property to specify the data source. When you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
         
 
-         property, you must manually write the code to perform the data binding. To automatically bind a data listing control to a data source represented by a data source control, use the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+         property, you must manually write the code to perform the data binding. To automatically bind a data listing control to a data source represented by a data source control, use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
         
 
-         property and set its value to the <see
-         cref="P:System.Web.UI.Control.ID" />
+         property and set its value to the <see cref="P:System.Web.UI.Control.ID" />
 
         
 
-         property of the data source control to use. When you set the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+         property of the data source control to use. When you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
         
 
-         property, the data listing control automatically binds to the specified data source control. Therefore, you do not need to explicitly call the <see
-         cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+         property, the data listing control automatically binds to the specified data source control. Therefore, you do not need to explicitly call the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
         
 
          method.</para
       >
       <para
-        >If the data source specified by the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+        >If the data source specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
         
 
-         property contains multiple sources of data, use the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+         property contains multiple sources of data, use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
         
 
-         property to specify the specific source to bind to the control. For example, if you have a <see
-         cref="T:System.Data.DataSet" />
+         property to specify the specific source to bind to the control. For example, if you have a <see cref="T:System.Data.DataSet" />
 
         
 
-         object with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see
-         cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+         object with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
         
 
          method to bind the data source to the control.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+        >The <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
-         class contains a <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
+         class contains a <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
 
         
 
-         collection that stores the key field of each record (displayed as a row) in a data listing control. This allows you to store the key field with a data listing control without displaying it in the control. The key field is commonly used as part of an update query string to revise a specific record in the data source. The collection is filled with the values from the field specified by the <see
-         cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
+         collection that stores the key field of each record (displayed as a row) in a data listing control. This allows you to store the key field with a data listing control without displaying it in the control. The key field is commonly used as part of an update query string to revise a specific record in the data source. The collection is filled with the values from the field specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
 
         
 
          property.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.BaseDataList" />
+        >The <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
         
 
-         class provides a <see
-         cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
+         class provides a <see cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
 
         
 
@@ -197,13 +168,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Serves as the abstract base class for data listing controls, such as <see
-         cref="T:System.Web.UI.WebControls.DataList" />
+        >Serves as the abstract base class for data listing controls, such as <see cref="T:System.Web.UI.WebControls.DataList" />
 
         
 
-         and <see
-         cref="T:System.Web.UI.WebControls.DataGrid" />
+         and <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
         
 
@@ -221,13 +190,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >A <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             object is not created directly. This constructor is commonly called in the constructor of a derived class to initialize the properties defined in the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             object is not created directly. This constructor is commonly called in the constructor of a derived class to initialize the properties defined in the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -237,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -268,8 +234,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Notifies the server control that an element, either XML or HTML, was parsed, and adds the element to the server control's <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Notifies the server control that an element, either XML or HTML, was parsed, and adds the element to the server control's <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -277,12 +242,15 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
@@ -317,29 +285,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.Caption" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.Caption" />
 
             
 
              property to specify the text to render in an HTML caption element in the control. The text that you specify provides assistive technology devices with a description of the control.</para
           >
           <para
-            >To specify the alignment of the HTML caption element in the control, use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.CaptionAlign" />
+            >To specify the alignment of the HTML caption element in the control, use the <see cref="P:System.Web.UI.WebControls.BaseDataList.CaptionAlign" />
 
             
 
              property.</para
           >
           <para
-            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
-             cref="T:System.ComponentModel.LocalizableAttribute" />
+            >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see cref="T:System.ComponentModel.LocalizableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
@@ -379,16 +343,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.CaptionAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.CaptionAlign" />
 
             
 
              property to specify the horizontal or vertical position of the HTML caption element in a control. This property is provided to make the control more accessible to users of assistive technology devices.</para
           >
           <para
-            >This property is set using one of the <see
-             cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
+            >This property is set using one of the <see cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
 
             
 
@@ -447,8 +409,7 @@
             </item>
           </list>
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.Caption" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.Caption" />
 
             
 
@@ -473,8 +434,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.CellPadding" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.CellPadding" />
 
             
 
@@ -510,8 +470,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.CellSpacing" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.CellSpacing" />
 
             
 
@@ -519,13 +478,11 @@
           >
           <block subset="none" type="note">
             <para
-              >If you set this property to a value greater than 0 and set the <see
-               cref="P:System.Web.UI.WebControls.BaseDataList.GridLines" />
+              >If you set this property to a value greater than 0 and set the <see cref="P:System.Web.UI.WebControls.BaseDataList.GridLines" />
 
               
 
-               property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see
-               cref="P:System.Web.UI.WebControls.BaseDataList.CellSpacing" />
+               property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see cref="P:System.Web.UI.WebControls.BaseDataList.CellSpacing" />
 
               
 
@@ -559,15 +516,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Web.UI.ControlCollection" />
-        </value>
+        <value>a <see cref="T:System.Web.UI.ControlCollection" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.Controls" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.Controls" />
 
             
 
@@ -577,8 +530,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.ControlCollection" />
+            >Gets a <see cref="T:System.Web.UI.ControlCollection" />
 
             
 
@@ -626,8 +578,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.CreateControlHierarchy(System.Boolean)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.CreateControlHierarchy(System.Boolean)" />
 
             
 
@@ -639,7 +590,11 @@
           <para>When overridden in a derived class, creates the control hierarchy for the data listing control with or without the specified data source.</para>
         </summary>
         <param name="useDataSource">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -668,18 +623,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.CreateDataSourceSelectArguments" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.CreateDataSourceSelectArguments" />
 
             
 
-             method is a helper method used by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.SelectArguments" />
+             method is a helper method used by the <see cref="P:System.Web.UI.WebControls.BaseDataList.SelectArguments" />
 
             
 
-             property to create its default <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             property to create its default <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -689,8 +641,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a default <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Creates a default <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -700,13 +651,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >A <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
-             initialized to <see
-             cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
+             initialized to <see cref="P:System.Web.UI.DataSourceSelectArguments.Empty" />
 
             
 
@@ -726,34 +675,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
-             method to bind the data source specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+             method to bind the data source specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
              property to the data listing control. By binding the data source to a data listing control, the information in the data source is displayed in a data listing control.</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
              method is also commonly used to synchronize the data source and a data listing control after information in the data source is updated. This allows any changes in the data source to also be updated in a data listing control.</para
           >
           <para
-            >If the data source for the data listing control is specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            >If the data source for the data listing control is specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property, you do not need to call the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             property, you do not need to call the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
@@ -782,31 +726,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
 
             
 
-             property to specify the key field in the data source indicated by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+             property to specify the key field in the data source indicated by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property. The specified field is used to populate the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
+             property. The specified field is used to populate the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
 
             
 
              collection. This allows you to store the key field with a data listing control without displaying it in the control. The key field is commonly used in a handler for an event, such as ItemCommand or DeleteCommand, as part of an update query string to revise a specific record in the data source. The key field helps the update query string identify the appropriate record to modify.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -818,8 +757,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the key field in the data source specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >Gets or sets the key field in the data source specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
@@ -854,13 +792,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
 
             
 
-             collection to access the key values of each record (displayed as a row) in a data listing control. This allows you to store the key field with a data listing control without displaying it in the control. This collection is automatically filled with the values from the field specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
+             collection to access the key values of each record (displayed as a row) in a data listing control. This allows you to store the key field with a data listing control without displaying it in the control. This collection is automatically filled with the values from the field specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
 
             
 
@@ -868,8 +804,7 @@
           >
           <para>The key field is commonly used in a handler for an event, such as ItemCommand or DeleteCommand, as part of an update query string to revise a specific record in the data source. The key field helps the update query string identify the appropriate record to modify.</para>
           <para
-            >For more information on accessing data with ASP.NET, see <format
-             type="text/html">
+            >For more information on accessing data with ASP.NET, see <format type="text/html">
               <a href="f9219396-a0fa-481f-894d-e3d9c67d64f2">Accessing Data with ASP.NET</a>
             </format>
 
@@ -881,8 +816,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+            >Gets a <see cref="T:System.Web.UI.WebControls.DataKeyCollection" />
 
             
 
@@ -914,25 +848,19 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.ArrayList" />
-        </value>
+        <value>a <see cref="T:System.Collections.ArrayList" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataKeysArray" />
+            >The <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeysArray" />
 
             
 
-             property is used by a derived class to store the key values of each record in a data listing control. This property is generally used to generate the <see
-             cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+             property is used by a derived class to store the key values of each record in a data listing control. This property is generally used to generate the <see cref="T:System.Web.UI.WebControls.DataKeyCollection" />
 
             
 
-             object contained in the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
+             object contained in the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataKeys" />
 
             
 
@@ -942,8 +870,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ArrayList" />
+            >Gets an <see cref="T:System.Collections.ArrayList" />
 
             
 
@@ -968,31 +895,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
-             property to specify a member from a multimember data source to bind to the list control. For example, if you have a data source with more than one table specified in the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+             property to specify a member from a multimember data source to bind to the list control. For example, if you have a data source with more than one table specified in the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property, use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+             property, use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
              property to specify which table to bind to a data listing control.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1031,115 +953,95 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property to specify the source of values to bind to a data listing control. A data source must be a collection that implements either the <see
-             cref="T:System.Collections.IEnumerable" />
+             property to specify the source of values to bind to a data listing control. A data source must be a collection that implements either the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interface (such as <see
-             cref="T:System.Data.DataView" />
+             interface (such as <see cref="T:System.Data.DataView" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or <see
-             cref="T:System.Collections.Generic.List`1" />
+            , or <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-            ) or the <see
-             cref="T:System.ComponentModel.IListSource" />
+            ) or the <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interface to bind to a control derived from the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             interface to bind to a control derived from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             class. When you set the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+             class. When you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
              property, you must manually write the code to perform data binding.</para
           >
           <para
-            >If the data source specified by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >If the data source specified by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property contains multiple sources of data, use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+             property contains multiple sources of data, use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
-             property to specify the specific source to bind to the control. For example, if you have a <see
-             cref="T:System.Data.DataSet" />
+             property to specify the specific source to bind to the control. For example, if you have a <see cref="T:System.Data.DataSet" />
 
             
 
-             object with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             object with multiple tables, you must specify which table to bind to the control. After you have specified the data source, use the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
              method to bind the data source to the control.</para
           >
           <para
-            >Alternately, you can use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            >Alternately, you can use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property to automatically bind to a data source represented by a data source control. When you set the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+             property to automatically bind to a data source represented by a data source control. When you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
              method.</para
           >
           <para
-            >If values are specified for both the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >If values are specified for both the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+             property and the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property, ASP.NET is not able to resolve the data source and an <see
-             cref="T:System.Web.HttpException" />
+             property, ASP.NET is not able to resolve the data source and an <see cref="T:System.Web.HttpException" />
 
             
 
              exception is thrown.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1197,102 +1099,84 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property to access the <see
-             cref="P:System.Web.UI.Control.ID" />
+             property to access the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
-             property of the data source control that the data listing control should use to retrieve its data source. The data source control referenced by the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+             property of the data source control that the data listing control should use to retrieve its data source. The data source control referenced by the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property can be any control that implements the <see
-             cref="T:System.Web.UI.IDataSource" />
+             property can be any control that implements the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface. The data source control must exist either in the same naming container as the data listing control that references it, or in a parent control of the data listing control. When you specify a value for this property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             interface. The data source control must exist either in the same naming container as the data listing control that references it, or in a parent control of the data listing control. When you specify a value for this property, the data listing control automatically binds to the specified data source control. You do not need to write code that explicitly calls the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
              method.</para
           >
           <para
-            >Alternately, you can use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >Alternately, you can use the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property to specify the source of values to bind to a data listing control. The data source must be a collection that implements the <see
-             cref="T:System.Collections.IEnumerable" />
+             property to specify the source of values to bind to a data listing control. The data source must be a collection that implements the <see cref="T:System.Collections.IEnumerable" />
 
             
 
-             interface (such as <see
-             cref="T:System.Data.DataView" />
+             interface (such as <see cref="T:System.Data.DataView" />
 
             
 
-            , <see
-             cref="T:System.Collections.ArrayList" />
+            , <see cref="T:System.Collections.ArrayList" />
 
             
 
-            , or <see
-             cref="T:System.Collections.Generic.List`1" />
+            , or <see cref="T:System.Collections.Generic.List`1" />
 
             
 
-            ) or the <see
-             cref="T:System.ComponentModel.IListSource" />
+            ) or the <see cref="T:System.ComponentModel.IListSource" />
 
             
 
-             interface to bind to a control derived from the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             interface to bind to a control derived from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             class. When you set the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+             class. When you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
              property, you must manually write the code to perform data binding.</para
           >
           <para
-            >If values are specified for both the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >If values are specified for both the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-             property and the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+             property and the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property, ASP.NET is not able to resolve the data source and an <see
-             cref="T:System.Web.HttpException" />
+             property, ASP.NET is not able to resolve the data source and an <see cref="T:System.Web.HttpException" />
 
             
 
              exception is thrown.</para
           >
           <para
-            >This property cannot be set by themes or style sheet themes. For more information, see <see
-             cref="T:System.Web.UI.ThemeableAttribute" />
+            >This property cannot be set by themes or style sheet themes. For more information, see <see cref="T:System.Web.UI.ThemeableAttribute" />
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
 
@@ -1304,8 +1188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="P:System.Web.UI.Control.ID" />
+            >Gets or sets the <see cref="P:System.Web.UI.Control.ID" />
 
             
 
@@ -1328,33 +1211,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you specify a value for the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            >When you specify a value for the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property, ASP.NET automatically binds the data listing control to the specified data source control. When ASP.NET performs data binding for the control, it calls the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.EnsureDataBound" />
+             property, ASP.NET automatically binds the data listing control to the specified data source control. When ASP.NET performs data binding for the control, it calls the <see cref="M:System.Web.UI.WebControls.BaseDataList.EnsureDataBound" />
 
             
 
-             method first to verify that the control has not already been bound to data and that a valid data source control that implements the <see
-             cref="T:System.Web.UI.IDataSource" />
+             method first to verify that the control has not already been bound to data and that a valid data source control that implements the <see cref="T:System.Web.UI.IDataSource" />
 
             
 
-             interface is specified for its <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+             interface is specified for its <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property. The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.EnsureDataBound" />
+             property. The <see cref="M:System.Web.UI.WebControls.BaseDataList.EnsureDataBound" />
 
             
 
-             method then calls the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             method then calls the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
@@ -1364,8 +1241,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Verifies that the data listing control requires data binding and that a valid data source control is specified before calling the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+            >Verifies that the data listing control requires data binding and that a valid data source control is specified before calling the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
@@ -1391,18 +1267,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.GetData" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.GetData" />
 
             
 
-             method is a helper method called by derived classes (such as <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             method is a helper method called by derived classes (such as <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+             and <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
@@ -1412,8 +1285,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerable" />
+            >Returns an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1423,8 +1295,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerable" />
+            >An <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -1448,13 +1319,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.GridLines" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.GridLines" />
 
             
 
-             property to specify whether the border between the cells of a data listing control is displayed. This property is set with one of the <see
-             cref="T:System.Web.UI.WebControls.GridLines" />
+             property to specify whether the border between the cells of a data listing control is displayed. This property is set with one of the <see cref="T:System.Web.UI.WebControls.GridLines" />
 
             
 
@@ -1535,13 +1404,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.HorizontalAlign" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.HorizontalAlign" />
 
             
 
-             property to specify the horizontal alignment of a data listing control within its container. This property is set with one of the <see
-             cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+             property to specify the horizontal alignment of a data listing control within its container. This property is set with one of the <see cref="T:System.Web.UI.WebControls.HorizontalAlign" />
 
             
 
@@ -1624,18 +1491,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.Initialized" />
+            >The <see cref="P:System.Web.UI.WebControls.BaseDataList.Initialized" />
 
             
 
-             property is used by derived classes (such as <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+             property is used by derived classes (such as <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             and <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -1661,88 +1525,71 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.IsBindableType(System.Type)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.BaseDataList.IsBindableType(System.Type)" />
 
             
 
-             static method to determine whether the specified data type can be bound to a list control that inherits from the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             static method to determine whether the specified data type can be bound to a list control that inherits from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             class. The supported data types are <see
-             cref="T:System.Boolean" />
+             class. The supported data types are <see cref="T:System.Boolean" />
 
             
 
-            , <see
-             cref="T:System.Byte" />
+            , <see cref="T:System.Byte" />
 
             
 
-            , <see
-             cref="T:System.SByte" />
+            , <see cref="T:System.SByte" />
 
             
 
-            , <see
-             cref="T:System.Int16" />
+            , <see cref="T:System.Int16" />
 
             
 
-            , <see
-             cref="T:System.UInt16" />
+            , <see cref="T:System.UInt16" />
 
             
 
-            , <see
-             cref="T:System.Int32" />
+            , <see cref="T:System.Int32" />
 
             
 
-            , <see
-             cref="T:System.UInt32" />
+            , <see cref="T:System.UInt32" />
 
             
 
-            , <see
-             cref="T:System.Int64" />
+            , <see cref="T:System.Int64" />
 
             
 
-            , <see
-             cref="T:System.UInt64" />
+            , <see cref="T:System.UInt64" />
 
             
 
-            , <see
-             cref="T:System.Char" />
+            , <see cref="T:System.Char" />
 
             
 
-            , <see
-             cref="T:System.Double" />
+            , <see cref="T:System.Double" />
 
             
 
-            , <see
-             cref="T:System.Single" />
+            , <see cref="T:System.Single" />
 
             
 
-            , <see
-             cref="T:System.DateTime" />
+            , <see cref="T:System.DateTime" />
 
             
 
-            , <see
-             cref="T:System.Decimal" />
+            , <see cref="T:System.Decimal" />
 
             
 
-            , and <see
-             cref="T:System.String" />
+            , and <see cref="T:System.String" />
 
             
 
@@ -1752,8 +1599,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified data type can be bound to a list control that derives from the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >Determines whether the specified data type can be bound to a list control that derives from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -1763,8 +1609,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified data type can be bound to a list control that derives from the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >true if the specified data type can be bound to a list control that derives from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -1772,12 +1617,15 @@
           >
         </returns>
         <param name="type">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Type" />
+          A <see cref="T:System.Type" />
 
           
 
@@ -1803,18 +1651,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.IsBoundUsingDataSourceID" />
+            >The <see cref="P:System.Web.UI.WebControls.BaseDataList.IsBoundUsingDataSourceID" />
 
             
 
-             property is used by derived classes (such as <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+             property is used by derived classes (such as <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
-             and <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             and <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
@@ -1824,8 +1669,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            >Gets a value indicating whether the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
@@ -1847,21 +1691,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >The <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
-             event is raised when data is bound to the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             event is raised when data is bound to the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
              control. This method notifies the control to perform any data-binding logic that is associated with it.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -1870,8 +1711,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnDataBinding(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnDataBinding(System.EventArgs)" />
 
             
 
@@ -1881,13 +1721,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.DataBinding" />
+            >Raises the <see cref="E:System.Web.UI.Control.DataBinding" />
 
             
 
-             event of a <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             event of a <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -1895,12 +1733,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1926,28 +1767,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnDataPropertyChanged" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnDataPropertyChanged" />
 
             
 
-             method is called to rebind the data-bound control to its data when the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+             method is called to rebind the data-bound control to its data when the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
-            , <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            , <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-            , or <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            , or <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-             property changes values after the page's <see
-             cref="E:System.Web.UI.Control.PreRender" />
+             property changes values after the page's <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -1980,39 +1816,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
-             method notifies a data-bound control that the underlying data source has changed and that the control should rebind and any necessary work should be performed. Typically, the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+             method notifies a data-bound control that the underlying data source has changed and that the control should rebind and any necessary work should be performed. Typically, the <see cref="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
              method is called when a property of the data source view has changed.</para
           >
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >The <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             class sets the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
+             class sets the <see cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
 
             
 
-             property to true when the <see
-             cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+             property to true when the <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
 
             
 
              event is raised.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2021,8 +1851,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnDataSourceViewChanged(System.Object,System.EventArgs)" />
 
             
 
@@ -2032,8 +1861,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
+            >Raises the <see cref="E:System.Web.UI.DataSourceView.DataSourceViewChanged" />
 
             
 
@@ -2041,19 +1869,26 @@
           >
         </summary>
         <param name="sender">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event.</param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2077,13 +1912,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnInit(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnInit(System.EventArgs)" />
 
             
 
-             method notifies the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             method notifies the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -2093,13 +1926,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Init" />
+            >Raises the <see cref="E:System.Web.UI.Control.Init" />
 
             
 
-             event for the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             event for the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -2107,12 +1938,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2137,8 +1971,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.Load" />
+            >Raises the <see cref="E:System.Web.UI.Control.Load" />
 
             
 
@@ -2146,12 +1979,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2199,8 +2035,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.Control.PreRender" />
+            >Raises the <see cref="E:System.Web.UI.Control.PreRender" />
 
             
 
@@ -2208,12 +2043,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2237,21 +2075,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
 
             
 
-             event is raised when a different item is selected in a data listing control between posts to the server. The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnSelectedIndexChanged(System.EventArgs)" />
+             event is raised when a different item is selected in a data listing control between posts to the server. The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnSelectedIndexChanged(System.EventArgs)" />
 
             
 
              method allows you to create a custom handler for the event.</para
           >
           <para
-            >Raising an event invokes the event handler through a delegate. For more information, see <format
-             type="text/html">
+            >Raising an event invokes the event handler through a delegate. For more information, see <format type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
 
@@ -2260,8 +2095,7 @@
             .</para
           >
           <para
-            >The <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnSelectedIndexChanged(System.EventArgs)" />
+            >The <see cref="M:System.Web.UI.WebControls.BaseDataList.OnSelectedIndexChanged(System.EventArgs)" />
 
             
 
@@ -2271,13 +2105,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Raises the <see
-             cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
+            >Raises the <see cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
 
             
 
-             event of a <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             event of a <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
@@ -2285,12 +2117,15 @@
           >
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -2313,13 +2148,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you inherit from <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >When you inherit from <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-            , you must implement the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.PrepareControlHierarchy" />
+            , you must implement the <see cref="M:System.Web.UI.WebControls.BaseDataList.PrepareControlHierarchy" />
 
             
 
@@ -2355,12 +2188,15 @@
           <para>Renders the control to the specified HTML writer.</para>
         </summary>
         <param name="writer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
+          A <see cref="T:System.Web.UI.HtmlTextWriter" />
 
           
 
@@ -2386,69 +2222,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+            >The <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             control uses the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
+             control uses the <see cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
 
             
 
-             property to determine whether the control needs to call the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             property to determine whether the control needs to call the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
              method to bind to its specified data source.</para
           >
           <para
-            >Each time the set accessor is called on either the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
+            >Each time the set accessor is called on either the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSource" />
 
             
 
-            , the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
+            , the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataSourceID" />
 
             
 
-            , or the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
+            , or the <see cref="P:System.Web.UI.WebControls.BaseDataList.DataMember" />
 
             
 
-             property to change the data source after the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.OnInit(System.EventArgs)" />
+             property to change the data source after the <see cref="M:System.Web.UI.WebControls.BaseDataList.OnInit(System.EventArgs)" />
 
             
 
-             method has already been called, ASP.NET automatically sets the value of the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
+             method has already been called, ASP.NET automatically sets the value of the <see cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
 
             
 
-             property to true. The value of the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
+             property to true. The value of the <see cref="P:System.Web.UI.WebControls.BaseDataList.RequiresDataBinding" />
 
             
 
-             property is also set to true when the <see
-             cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.OnDataSourceChanged(System.Object,System.EventArgs)" />
+             property is also set to true when the <see cref="M:System.Web.UI.WebControls.HierarchicalDataBoundControl.OnDataSourceChanged(System.Object,System.EventArgs)" />
 
             
 
              method is called.</para
           >
           <para
-            >ASP.NET automatically sets the value of the <see
-             cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
+            >ASP.NET automatically sets the value of the <see cref="P:System.Web.UI.WebControls.Repeater.RequiresDataBinding" />
 
             
 
-             property to false immediately after the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             property to false immediately after the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 
@@ -2478,18 +2302,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.SelectArguments" />
+            >The <see cref="P:System.Web.UI.WebControls.BaseDataList.SelectArguments" />
 
             
 
-             property calls the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.CreateDataSourceSelectArguments" />
+             property calls the <see cref="M:System.Web.UI.WebControls.BaseDataList.CreateDataSourceSelectArguments" />
 
             
 
-             method to create a default <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+             method to create a default <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -2499,8 +2320,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Web.UI.DataSourceSelectArguments" />
+            >Gets a <see cref="T:System.Web.UI.DataSourceSelectArguments" />
 
             
 
@@ -2520,16 +2340,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
+            >The <see cref="E:System.Web.UI.WebControls.BaseDataList.SelectedIndexChanged" />
 
             
 
              event is raised when a different item is selected in a data listing control between posts to the server.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -2571,41 +2389,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.UseAccessibleHeader" />
+            >Use the <see cref="P:System.Web.UI.WebControls.BaseDataList.UseAccessibleHeader" />
 
             
 
              property to specify whether the data listing control renders its header in an accessible format. This property is provided to make the control more accessible to users of assistive technology devices. By default, the value of this property is false and the header for the control is rendered between cell tags &lt;td&gt; and &lt;/td&gt;. If the value of this property is true, the header for the control is rendered between table header cell tags &lt;th&gt; and &lt;/th&gt;. In addition, a scope="col" attribute is added to the table header to specify that the header applies to all the cells in the column. The default rendering of the &lt;th&gt; element is preserved, rendering text as bold and centered horizontally. Developers can override the behavior of the &lt;th&gt; element using a cascading style sheet (CSS). However, requiring the use of style sheets is discouraged when creating accessible Web pages.</para
           >
           <para
-            >For data listing controls, such as the <see
-             cref="T:System.Web.UI.WebControls.DataList" />
+            >For data listing controls, such as the <see cref="T:System.Web.UI.WebControls.DataList" />
 
             
 
-             control and the <see
-             cref="T:System.Web.UI.WebControls.DataGrid" />
+             control and the <see cref="T:System.Web.UI.WebControls.DataGrid" />
 
             
 
-             control, that inherit from the <see
-             cref="T:System.Web.UI.WebControls.BaseDataList" />
+             control, that inherit from the <see cref="T:System.Web.UI.WebControls.BaseDataList" />
 
             
 
-             class, you can set the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.UseAccessibleHeader" />
+             class, you can set the <see cref="P:System.Web.UI.WebControls.BaseDataList.UseAccessibleHeader" />
 
             
 
-             property declaratively or programmatically. If you set the <see
-             cref="P:System.Web.UI.WebControls.BaseDataList.UseAccessibleHeader" />
+             property declaratively or programmatically. If you set the <see cref="P:System.Web.UI.WebControls.BaseDataList.UseAccessibleHeader" />
 
             
 
-             property programmatically, set it before binding data with the <see
-             cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
+             property programmatically, set it before binding data with the <see cref="M:System.Web.UI.WebControls.BaseDataList.DataBind" />
 
             
 

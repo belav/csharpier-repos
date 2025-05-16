@@ -36,8 +36,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.Web.UI.Design.ContentDefinition" />
+            >Creates a new instance of the <see cref="T:System.Web.UI.Design.ContentDefinition" />
 
             
 
@@ -45,21 +44,33 @@
           >
         </summary>
         <param name="id">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A string identifier for the content.</param
         >
         <param name="content">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The default HTML markup content.</param
         >
         <param name="designTimeHtml">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -82,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the ID of the <see
-             cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+            >Gets the ID of the <see cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
             
 

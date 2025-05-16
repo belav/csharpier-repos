@@ -9,8 +9,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Web.Security" />
+        >The <see cref="N:System.Web.Security" />
 
         
 
@@ -20,64 +19,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Security.Membership" />
+        >The <see cref="T:System.Web.Security.Membership" />
 
         
 
-         class is used by ASP.NET applications to validate user credentials and manage user settings such as passwords and e-mail addresses. The <see
-         cref="T:System.Web.Security.Roles" />
+         class is used by ASP.NET applications to validate user credentials and manage user settings such as passwords and e-mail addresses. The <see cref="T:System.Web.Security.Roles" />
 
         
 
          class enables you to manage authorization for your application based on groups of users assigned to roles in the Web application. </para
       >
       <para
-        >Both the <see
-         cref="T:System.Web.Security.Membership" />
+        >Both the <see cref="T:System.Web.Security.Membership" />
 
         
 
-         class and the <see
-         cref="T:System.Web.Security.Roles" />
+         class and the <see cref="T:System.Web.Security.Roles" />
 
         
 
-         class work with providers, classes that access your application's data store to retrieve membership and role information. Membership and role information can be stored in a Microsoft SQL Server database using the <see
-         cref="T:System.Web.Security.SqlMembershipProvider" />
+         class work with providers, classes that access your application's data store to retrieve membership and role information. Membership and role information can be stored in a Microsoft SQL Server database using the <see cref="T:System.Web.Security.SqlMembershipProvider" />
 
         
 
-         and <see
-         cref="T:System.Web.Security.SqlRoleProvider" />
+         and <see cref="T:System.Web.Security.SqlRoleProvider" />
 
         
 
-         classes; in an Active Directory using the <see
-         cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+         classes; in an Active Directory using the <see cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
 
         
 
-         and <see
-         cref="T:System.Web.Security.AuthorizationStoreRoleProvider" />
+         and <see cref="T:System.Web.Security.AuthorizationStoreRoleProvider" />
 
         
 
-         classes, or in a custom data source using implementations of the <see
-         cref="T:System.Web.Security.MembershipProvider" />
+         classes, or in a custom data source using implementations of the <see cref="T:System.Web.Security.MembershipProvider" />
 
         
 
-         and <see
-         cref="T:System.Web.Security.RoleProvider" />
+         and <see cref="T:System.Web.Security.RoleProvider" />
 
         
 
          classes.</para
       >
       <para
-        >You configure ASP.NET membership using the <format
-         type="text/html">
+        >You configure ASP.NET membership using the <format type="text/html">
           <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049"
             >membership Element (ASP.NET Settings Schema)</a
           >
@@ -85,26 +73,22 @@
 
         
 
-        . When an application using membership is accessed, ASP.NET creates an instance of the <see
-         cref="T:System.Web.Security.Membership" />
+        . When an application using membership is accessed, ASP.NET creates an instance of the <see cref="T:System.Web.Security.Membership" />
 
         
 
-         class that you can use to query membership information. Provider-specific implementations of the <see
-         cref="T:System.Web.Security.MembershipUser" />
+         class that you can use to query membership information. Provider-specific implementations of the <see cref="T:System.Web.Security.MembershipUser" />
 
         
 
-         class contain information about the user accessing the page. You can create custom implementations of the <see
-         cref="T:System.Web.Security.MembershipUser" />
+         class contain information about the user accessing the page. You can create custom implementations of the <see cref="T:System.Web.Security.MembershipUser" />
 
         
 
          class for your application.</para
       >
       <para
-        >You configure ASP.NET roles using the <format
-         type="text/html">
+        >You configure ASP.NET roles using the <format type="text/html">
           <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
             >roleManager Element (ASP.NET Settings Schema)</a
           >
@@ -112,46 +96,38 @@
 
         
 
-        . ASP.NET creates an instance of the <see
-         cref="T:System.Web.Security.Roles" />
+        . ASP.NET creates an instance of the <see cref="T:System.Web.Security.Roles" />
 
         
 
          class that contains information about the role membership of the current user. </para
       >
       <para
-        >ASP.NET provides server controls that interact with the <see
-         cref="T:System.Web.Security.Membership" />
+        >ASP.NET provides server controls that interact with the <see cref="T:System.Web.Security.Membership" />
 
         
 
-         class and the <see
-         cref="T:System.Web.Security.Roles" />
+         class and the <see cref="T:System.Web.Security.Roles" />
 
         
 
-         class. The <see
-         cref="T:System.Web.UI.WebControls.Login" />
+         class. The <see cref="T:System.Web.UI.WebControls.Login" />
 
         
 
-        , <see
-         cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+        , <see cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
         
 
-        , and <see
-         cref="T:System.Web.UI.WebControls.ChangePassword" />
+        , and <see cref="T:System.Web.UI.WebControls.ChangePassword" />
 
         
 
-         controls work with the <see
-         cref="T:System.Web.Security.Membership" />
+         controls work with the <see cref="T:System.Web.Security.Membership" />
 
         
 
-         class to simplify creating an authenticated Web application, and the <see
-         cref="T:System.Web.UI.WebControls.LoginView" />
+         class to simplify creating an authenticated Web application, and the <see cref="T:System.Web.UI.WebControls.LoginView" />
 
         
 

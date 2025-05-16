@@ -68,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a proxy for a well-known object, given the <see
-             cref="T:System.Type" />
+            >Creates a proxy for a well-known object, given the <see cref="T:System.Type" />
 
             
 
@@ -81,19 +80,26 @@
           <para>A proxy to the remote object that points to an endpoint served by the specified well-known object.</para>
         </returns>
         <param name="classToProxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of a well-known object on the server end to which you want to connect. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -134,13 +140,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The returned proxy object points to an endpoint served by the specified well-known object. No messages are sent over the network until a method is called on the proxy.</para>
           <para
-            >The <paramref
-             name="data" />
+            >The <paramref name="data" />
 
             
 
-             object is used to communicate information to the channel, and is passed to the <see
-             cref="M:System.Runtime.Remoting.Channels.IChannelSender.CreateMessageSink(System.String,System.Object,System.String@)" />
+             object is used to communicate information to the channel, and is passed to the <see cref="M:System.Runtime.Remoting.Channels.IChannelSender.CreateMessageSink(System.String,System.Object,System.String@)" />
 
             
 
@@ -150,8 +154,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a proxy for a well-known object, given the <see
-             cref="T:System.Type" />
+            >Creates a proxy for a well-known object, given the <see cref="T:System.Type" />
 
             
 
@@ -163,26 +166,37 @@
           <para>A proxy that points to an endpoint that is served by the requested well-known object.</para>
         </returns>
         <param name="classToProxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
            of the well-known object to which you want to connect. </param
         >
         <param name="url">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL of the well-known object. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -222,7 +236,11 @@
           <para>true if the object was disconnected from the registered remoting channels successfully; otherwise, false.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -260,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Connects to the specified remote object, and executes the provided <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+            >Connects to the specified remote object, and executes the provided <see cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
 
             
 
@@ -273,14 +290,22 @@
           <para>The response of the remote method.</para>
         </returns>
         <param name="target">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The remote object whose method you want to call. </param
         >
         <param name="reqMsg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -313,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Envoy sinks are sinks sent along with the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >Envoy sinks are sinks sent along with the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -330,7 +354,11 @@
           <para>A chain of envoy sinks associated with the specified proxy.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -363,13 +391,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For the default lifetime service the returned object will be an object of type <see
-             cref="T:System.Runtime.Remoting.Lifetime.ILease" />
+            >For the default lifetime service the returned object will be an object of type <see cref="T:System.Runtime.Remoting.Lifetime.ILease" />
 
             
 
-            . If the <paramref
-             name="obj" />
+            . If the <paramref name="obj" />
 
             
 
@@ -383,8 +409,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that controls the lifetime of <paramref
-             name="obj" />
+            >The object that controls the lifetime of <paramref name="obj" />
 
             
 
@@ -392,7 +417,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -425,38 +454,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This determines the method base from the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.TypeName" />
+            >This determines the method base from the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.TypeName" />
 
             
 
-            , <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodName" />
+            , <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodName" />
 
             
 
-            , and <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodSignature" />
+            , and <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodSignature" />
 
             
 
-             properties of <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+             properties of <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
-             and is used by classes implementing the <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+             and is used by classes implementing the <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
-             interface. Consumers of <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+             interface. Consumers of <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
-             classes should reference the <see
-             cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodBase" />
+             classes should reference the <see cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodBase" />
 
             
 
@@ -466,8 +488,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the method base from the given <see
-             cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+            >Returns the method base from the given <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
             
 
@@ -477,8 +498,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method base extracted from the <paramref
-             name="msg" />
+            >The method base extracted from the <paramref name="msg" />
 
             
 
@@ -486,7 +506,11 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -522,8 +546,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes the specified marshal by reference object into the provided <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Serializes the specified marshal by reference object into the provided <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -531,26 +554,37 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to serialize. </param
         >
         <param name="info">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            into which the object is serialized. </param
         >
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -590,12 +624,15 @@
           <para>The URI of the specified object if it has one, or null if the object has not yet been marshaled.</para>
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.MarshalByRefObject" />
+          The <see cref="T:System.MarshalByRefObject" />
 
           
 
@@ -628,46 +665,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             for an object is known as marshaling. The <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             for an object is known as marshaling. The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. During unmarshaling, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. During unmarshaling, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is parsed to extract the method information of the remote object and both the transparent proxy and <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+             is parsed to extract the method information of the remote object and both the transparent proxy and <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
              objects are created.</para
           >
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             contains information that describes the <see
-             cref="T:System.Type" />
+             contains information that describes the <see cref="T:System.Type" />
 
             
 
@@ -677,8 +706,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >Returns the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -688,8 +716,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -697,12 +724,15 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A proxy connected to the object you want to create a <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          A proxy connected to the object you want to create a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
@@ -741,13 +771,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A client that uses an object across any kind of remoting boundary is actually using a transparent proxy for the object. The transparent proxy gives the impression that the actual object resides in the client's space. It achieves this by forwarding calls made on it to the real object using the remoting infrastructure.</para>
           <para
-            >The transparent proxy is backed by an instance of a managed runtime class of type <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+            >The transparent proxy is backed by an instance of a managed runtime class of type <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
-            . The <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+            . The <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
@@ -764,7 +792,11 @@
           <para>The real proxy instance backing the transparent proxy.</para>
         </returns>
         <param name="proxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -794,13 +826,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Because remoting identifies endpoints using URIs, the <see
-             cref="M:System.Runtime.Remoting.RemotingServices.GetServerTypeForUri(System.String)" />
+            >Because remoting identifies endpoints using URIs, the <see cref="M:System.Runtime.Remoting.RemotingServices.GetServerTypeForUri(System.String)" />
 
             
 
-             method is very useful in the pluggable parts of the remoting infrastructure (for example, channel sinks, dynamic sinks, and context sinks) that use <see
-             cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+             method is very useful in the pluggable parts of the remoting infrastructure (for example, channel sinks, dynamic sinks, and context sinks) that use <see cref="T:System.Runtime.Remoting.Messaging.IMessage" />
 
             
 
@@ -810,8 +840,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Type" />
+            >Returns the <see cref="T:System.Type" />
 
             
 
@@ -821,8 +850,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Type" />
+            >The <see cref="T:System.Type" />
 
             
 
@@ -830,12 +858,15 @@
           >
         </returns>
         <param name="URI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URI of the object whose <see
-           cref="T:System.Type" />
+          The URI of the object whose <see cref="T:System.Type" />
 
           
 
@@ -869,8 +900,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The same session ID might be returned for objects in the same application, but this method will never return the same session ID for two objects in different remote applications.</para>
           <para
-            >For more information about identifying sessions and session IDs, see ASP.Net <format
-             type="text/html">
+            >For more information about identifying sessions and session IDs, see ASP.Net <format type="text/html">
               <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">Session State</a>
             </format>
 
@@ -888,12 +918,15 @@
           <para>A session ID string that uniquely identifies the current session.</para>
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+          The <see cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
           
 
@@ -931,8 +964,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the method called in <paramref
-             name="msg" />
+            >true if the method called in <paramref name="msg" />
 
             
 
@@ -940,7 +972,11 @@
           >
         </returns>
         <param name="msg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -973,8 +1009,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For information about application domains, see <format
-             type="text/html">
+            >For information about application domains, see <format type="text/html">
               <a href="39E57D07-A740-4CD4-AE82-E119EA3856C1">Application Domains</a>
             </format>
 
@@ -992,7 +1027,11 @@
           <para>true if the object is out of the current application domain; otherwise, false.</para>
         </returns>
         <param name="tp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1032,7 +1071,11 @@
           <para>true if the object is out of the current context; otherwise, false.</para>
         </returns>
         <param name="tp">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1065,8 +1108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a one-way method is called, the client does not wait for the server to finish processing the message. The client method returns to the application with no knowledge of whether or not the server will successfully process the message. Methods are marked as one way using the <see
-             cref="T:System.Runtime.Remoting.Messaging.OneWayAttribute" />
+            >When a one-way method is called, the client does not wait for the server to finish processing the message. The client method returns to the application with no knowledge of whether or not the server will successfully process the message. Methods are marked as one way using the <see cref="T:System.Runtime.Remoting.Messaging.OneWayAttribute" />
 
             
 
@@ -1083,7 +1125,11 @@
           <para>true if the method is one way; otherwise, false.</para>
         </returns>
         <param name="method">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1122,21 +1168,18 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A client that uses an object across any kind of a remoting boundary is actually using a transparent proxy for the object. The transparent proxy gives the impression that the actual object resides in the client's space. It achieves this by forwarding calls made on it to the real object using the remoting infrastructure.</para>
           <para
-            >The transparent proxy is itself housed by an instance of a managed runtime class of type <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+            >The transparent proxy is itself housed by an instance of a managed runtime class of type <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
-            . The <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+            . The <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
              implements a part of the functionality needed to forward the operations from the transparent proxy. A proxy object inherits the associated semantics of managed objects such as garbage collection, support for members and methods, and can be extended to form new classes. Thus the proxy has a dual nature; on the one hand it needs to act as an object of the same class as the remote object (transparent proxy), and on the other it is a managed object itself.</para
           >
           <para
-            >A proxy object can be used without regard to any remoting subdivisions within a <see
-             cref="T:System.AppDomain" />
+            >A proxy object can be used without regard to any remoting subdivisions within a <see cref="T:System.AppDomain" />
 
             
 
@@ -1150,8 +1193,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A Boolean value that indicates whether the object specified in the <paramref
-             name="proxy" />
+            >A Boolean value that indicates whether the object specified in the <paramref name="proxy" />
 
             
 
@@ -1159,7 +1201,11 @@
           >
         </returns>
         <param name="proxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1197,8 +1243,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A "REMOTING_PERF" preprocessing symbol is applied to the method by using the <see
-             cref="T:System.Diagnostics.ConditionalAttribute" />
+            >A "REMOTING_PERF" preprocessing symbol is applied to the method by using the <see cref="T:System.Diagnostics.ConditionalAttribute" />
 
             
 
@@ -1210,7 +1255,11 @@
           <para>Logs the stage in a remoting exchange to an external debugger.</para>
         </summary>
         <param name="stage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1243,52 +1292,44 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             for an object is known as marshaling. The <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             for an object is known as marshaling. The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
              must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. </para
           >
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             contains information that describes the <see
-             cref="T:System.Type" />
+             contains information that describes the <see cref="T:System.Type" />
 
             
 
              and class of the object being marshaled, a URI that uniquely identifies the specific object instance, and communication related information about how to reach the remoting subdivision where the object is located.</para
           >
           <para
-            >During marshaling, the context from the current thread is used, not the context that was active when the object was created. If a URI was not explicitly set by the <see
-             cref="M:System.Runtime.Remoting.RemotingServices.SetObjectUriForMarshal(System.MarshalByRefObject,System.String)" />
+            >During marshaling, the context from the current thread is used, not the context that was active when the object was created. If a URI was not explicitly set by the <see cref="M:System.Runtime.Remoting.RemotingServices.SetObjectUriForMarshal(System.MarshalByRefObject,System.String)" />
 
             
 
              method, it is automatically generated by the remoting identity infrastructure.</para
           >
           <para
-            >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref
-             name="Obj" />
+            >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref name="Obj" />
 
             
 
@@ -1298,13 +1339,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Takes a <see
-             cref="T:System.MarshalByRefObject" />
+            >Takes a <see cref="T:System.MarshalByRefObject" />
 
             
 
-            , registers it with the remoting infrastructure, and converts it into an instance of the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            , registers it with the remoting infrastructure, and converts it into an instance of the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -1314,13 +1353,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >An instance of the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             class that represents the object specified in the <paramref
-             name="Obj" />
+             class that represents the object specified in the <paramref name="Obj" />
 
             
 
@@ -1328,7 +1365,11 @@
           >
         </returns>
         <param name="Obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1362,36 +1403,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             for an object is known as marshaling. The <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             for an object is known as marshaling. The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
              must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. </para
           >
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             contains information that describes the <see
-             cref="T:System.Type" />
+             contains information that describes the <see cref="T:System.Type" />
 
             
 
@@ -1399,8 +1434,7 @@
           >
           <para>During marshaling, the context from the current thread is used, not the context that was active when the object was created.</para>
           <para
-            >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref
-             name="Obj" />
+            >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref name="Obj" />
 
             
 
@@ -1410,13 +1444,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Converts the given <see
-             cref="T:System.MarshalByRefObject" />
+            >Converts the given <see cref="T:System.MarshalByRefObject" />
 
             
 
-             into an instance of the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             into an instance of the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -1426,13 +1458,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >An instance of the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             class that represents the object specified in the <paramref
-             name="Obj" />
+             class that represents the object specified in the <paramref name="Obj" />
 
             
 
@@ -1440,19 +1470,26 @@
           >
         </returns>
         <param name="Obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to convert. </param
         >
         <param name="URI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The specified URI with which to initialize the new <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          The specified URI with which to initialize the new <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
@@ -1487,49 +1524,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             for an object is known as marshaling. The <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             for an object is known as marshaling. The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
              must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. </para
           >
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             contains information that describes the <see
-             cref="T:System.Type" />
+             contains information that describes the <see cref="T:System.Type" />
 
             
 
              and class of the object being marshaled, a URI that uniquely identifies the specific object instance, and communication related information about how to reach the remoting subdivision where the object is located.</para
           >
           <para
-            >The specified <see
-             cref="T:System.Type" />
+            >The specified <see cref="T:System.Type" />
 
             
 
-             is used by the remoting infrastructure to limit the scope of the exposed type hierarchy. For example, if object A derives from object B, which derives from object C, and <see
-             cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
+             is used by the remoting infrastructure to limit the scope of the exposed type hierarchy. For example, if object A derives from object B, which derives from object C, and <see cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
 
             
 
@@ -1537,8 +1566,7 @@
           >
           <para>During marshaling, the context from the current thread is used, not the context that was active when the object was created.</para>
           <para
-            >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref
-             name="Obj" />
+            >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref name="Obj" />
 
             
 
@@ -1548,18 +1576,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Takes a <see
-             cref="T:System.MarshalByRefObject" />
+            >Takes a <see cref="T:System.MarshalByRefObject" />
 
             
 
-             and converts it into an instance of the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             and converts it into an instance of the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             class with the specified URI, and the provided <see
-             cref="T:System.Type" />
+             class with the specified URI, and the provided <see cref="T:System.Type" />
 
             
 
@@ -1569,13 +1594,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An instance of the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >An instance of the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             class that represents the object specified in the <paramref
-             name="Obj" />
+             class that represents the object specified in the <paramref name="Obj" />
 
             
 
@@ -1583,36 +1606,45 @@
           >
         </returns>
         <param name="Obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to convert into a <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          The object to convert into a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
           . </param
         >
         <param name="ObjURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The URI the object specified in the <paramref
-           name="Obj" />
+          The URI the object specified in the <paramref name="Obj" />
 
           
 
            parameter is marshaled with. Can be null. </param
         >
         <param name="RequestedType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
           <paramref name="Obj" />
 
           
@@ -1648,46 +1680,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>The URI set by the current method is used when marshaling the given object.</para>
           <para
-            >After marshaling, the URI of the specified object is set to the string in the <paramref
-             name="uri" />
+            >After marshaling, the URI of the specified object is set to the string in the <paramref name="uri" />
 
             
 
-             parameter appended onto the <see
-             cref="T:System.Guid" />
+             parameter appended onto the <see cref="T:System.Guid" />
 
             
 
-             of the current <see
-             cref="T:System.AppDomain" />
+             of the current <see cref="T:System.AppDomain" />
 
             
 
             .</para
           >
           <para
-            >If the current application is listening on an HTTP port, then both the string specified in the <paramref
-             name="uri" />
+            >If the current application is listening on an HTTP port, then both the string specified in the <paramref name="uri" />
 
             
 
-             parameter and the <paramref
-             name="uri" />
+             parameter and the <paramref name="uri" />
 
             
 
-             string appended onto the <see
-             cref="T:System.Guid" />
+             string appended onto the <see cref="T:System.Guid" />
 
             
 
-             of the current <see
-             cref="T:System.AppDomain" />
+             of the current <see cref="T:System.AppDomain" />
 
             
 
-             route to the specified object. For example, if the application is listening on HTTP port 9000, then both http://localhost:9000/objectUri, and http://localhost:9000/&lt;appdomainguid&gt;/objectUri route to the object specified in the <paramref
-             name="obj" />
+             route to the specified object. For example, if the application is listening on HTTP port 9000, then both http://localhost:9000/objectUri, and http://localhost:9000/&lt;appdomainguid&gt;/objectUri route to the object specified in the <paramref name="obj" />
 
             
 
@@ -1697,8 +1721,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the URI for the subsequent call to the <see
-             cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
+            >Sets the URI for the subsequent call to the <see cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
 
             
 
@@ -1706,14 +1729,22 @@
           >
         </summary>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object to set a URI for. </param
         >
         <param name="uri">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1746,51 +1777,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             for an object is known as marshaling. The <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             for an object is known as marshaling. The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. During unmarshaling, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. During unmarshaling, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is parsed to extract the method information of the remote object and both the transparent proxy and <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+             is parsed to extract the method information of the remote object and both the transparent proxy and <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
-             objects are created. The content of the parsed <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             objects are created. The content of the parsed <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
              is added to the transparent proxy before the transparent proxy is registered with the common language runtime.</para
           >
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             contains information that describes the <see
-             cref="T:System.Type" />
+             contains information that describes the <see cref="T:System.Type" />
 
             
 
@@ -1800,8 +1822,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Takes a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >Takes a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -1811,8 +1832,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A proxy to the object that the given <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A proxy to the object that the given <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -1820,12 +1840,15 @@
           >
         </returns>
         <param name="objectRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
@@ -1859,59 +1882,49 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             for an object is known as marshaling. The <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             for an object is known as marshaling. The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. During unmarshaling, the <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             must be parsed to create a proxy for the object, generally connected to the real object. This operation is known as unmarshaling. During unmarshaling, the <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             is parsed to extract the method information of the remote object and both the transparent proxy and <see
-             cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+             is parsed to extract the method information of the remote object and both the transparent proxy and <see cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
             
 
-             objects are created. The content of the parsed <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+             objects are created. The content of the parsed <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
              is added to the transparent proxy before the transparent proxy is registered with the common language runtime.</para
           >
           <para
-            >A <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
-             contains information that describes the <see
-             cref="T:System.Type" />
+             contains information that describes the <see cref="T:System.Type" />
 
             
 
              and class of the object being marshaled, a URI that uniquely identifies the specific object instance, and communication related information about how to reach the remoting subdivision where the object is located.</para
           >
           <para
-            >When first created, the proxy is of type <see
-             cref="T:System.MarshalByRefObject" />
+            >When first created, the proxy is of type <see cref="T:System.MarshalByRefObject" />
 
             
 
@@ -1921,8 +1934,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Takes a <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >Takes a <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -1932,8 +1944,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A proxy to the object that the given <see
-             cref="T:System.Runtime.Remoting.ObjRef" />
+            >A proxy to the object that the given <see cref="T:System.Runtime.Remoting.ObjRef" />
 
             
 
@@ -1941,19 +1952,26 @@
           >
         </returns>
         <param name="objectRef">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Remoting.ObjRef" />
+          The <see cref="T:System.Runtime.Remoting.ObjRef" />
 
           
 
            that represents the remote object for which the proxy is being created. </param
         >
         <param name="fRefine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

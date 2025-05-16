@@ -22,13 +22,11 @@
 
         
 
-         creates a <see
-         cref="T:System.Net.Sockets.SocketInformation" />
+         creates a <see cref="T:System.Net.Sockets.SocketInformation" />
 
         
 
-         instance for use with the <see
-         cref="M:System.Net.Sockets.Socket.#ctor(System.Net.Sockets.SocketInformation)" />
+         instance for use with the <see cref="M:System.Net.Sockets.Socket.#ctor(System.Net.Sockets.SocketInformation)" />
 
         
 
@@ -38,8 +36,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Encapsulates the information that is necessary to duplicate a <see
-         cref="T:System.Net.Sockets.Socket" />
+        >Encapsulates the information that is necessary to duplicate a <see cref="T:System.Net.Sockets.Socket" />
 
         
 
@@ -70,23 +67,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Options include <see
-             cref="F:System.Net.Sockets.SocketInformationOptions.Connected" />
+            >Options include <see cref="F:System.Net.Sockets.SocketInformationOptions.Connected" />
 
             
 
-            , <see
-             cref="F:System.Net.Sockets.SocketInformationOptions.Listening" />
+            , <see cref="F:System.Net.Sockets.SocketInformationOptions.Listening" />
 
             
 
-            , <see
-             cref="F:System.Net.Sockets.SocketInformationOptions.NonBlocking" />
+            , <see cref="F:System.Net.Sockets.SocketInformationOptions.NonBlocking" />
 
             
 
-            , and <see
-             cref="F:System.Net.Sockets.SocketInformationOptions.UseOnlyOverlappedIO" />
+            , and <see cref="F:System.Net.Sockets.SocketInformationOptions.UseOnlyOverlappedIO" />
 
             
 
@@ -96,8 +89,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the options for a <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets or sets the options for a <see cref="T:System.Net.Sockets.Socket" />
 
             
 
@@ -126,8 +118,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the protocol information for a <see
-             cref="T:System.Net.Sockets.Socket" />
+            >Gets or sets the protocol information for a <see cref="T:System.Net.Sockets.Socket" />
 
             
 

@@ -33,26 +33,22 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Linq.IQueryable`1" />
+        >The <see cref="T:System.Linq.IQueryable`1" />
 
         
 
          interface is intended for implementation by query providers.</para
       >
       <para
-        >This interface inherits the <see
-         cref="T:System.Collections.Generic.IEnumerable`1" />
+        >This interface inherits the <see cref="T:System.Collections.Generic.IEnumerable`1" />
 
         
 
-         interface so that if it represents a query, the results of that query can be enumerated. Enumeration forces the expression tree associated with an <see
-         cref="T:System.Linq.IQueryable`1" />
+         interface so that if it represents a query, the results of that query can be enumerated. Enumeration forces the expression tree associated with an <see cref="T:System.Linq.IQueryable`1" />
 
         
 
-         object to be executed. Queries that do not return enumerable results are executed when the <see
-         cref="M:System.Linq.IQueryProvider.Execute``1(System.Linq.Expressions.Expression)" />
+         object to be executed. Queries that do not return enumerable results are executed when the <see cref="M:System.Linq.IQueryProvider.Execute``1(System.Linq.Expressions.Expression)" />
 
         
 
@@ -60,41 +56,34 @@
       >
       <para>The definition of "executing an expression tree" is specific to a query provider. For example, it may involve translating the expression tree to a query language appropriate for an underlying data source.</para>
       <para
-        >The <see
-         cref="T:System.Linq.IQueryable`1" />
+        >The <see cref="T:System.Linq.IQueryable`1" />
 
         
 
-         interface enables queries to be polymorphic. That is, because a query against an <unmanagedCodeEntityReference
-        >IQueryable</unmanagedCodeEntityReference>
+         interface enables queries to be polymorphic. That is, because a query against an <unmanagedCodeEntityReference>IQueryable</unmanagedCodeEntityReference>
 
         
 
          data source is represented as an expression tree, it can be executed against different types of data sources.</para
       >
       <para
-        >The static (Shared in Visual Basic) methods defined in the class <see
-         cref="T:System.Linq.Queryable" />
+        >The static (Shared in Visual Basic) methods defined in the class <see cref="T:System.Linq.Queryable" />
 
         
 
-         (except for <see
-         cref="Overload:System.Linq.Queryable.AsQueryable" />
+         (except for <see cref="Overload:System.Linq.Queryable.AsQueryable" />
 
         
 
-        , <see
-         cref="Overload:System.Linq.Queryable.ThenBy" />
+        , <see cref="Overload:System.Linq.Queryable.ThenBy" />
 
         
 
-        , and <see
-         cref="Overload:System.Linq.Queryable.ThenByDescending" />
+        , and <see cref="Overload:System.Linq.Queryable.ThenByDescending" />
 
         
 
-        ) extend objects of types that implement the <see
-         cref="T:System.Linq.IQueryable`1" />
+        ) extend objects of types that implement the <see cref="T:System.Linq.IQueryable`1" />
 
         
 
@@ -102,7 +91,7 @@
       >
       <para
         >For more information about how to create your own LINQ provider, see <see
-         cref="http://go.microsoft.com/fwlink/?LinkID=112370"
+          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
 

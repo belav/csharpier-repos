@@ -2,9 +2,7 @@
 <clause number="17.2.6.5" title="Access to private and protected members of the containing type">
   <paragraph
     >A nested type has access to all of the members that are accessible to its containing type, including members of the containing type that have private and protected declared accessibility. <example
-
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 class C   
@@ -35,9 +33,7 @@ class Test
   </paragraph>
   <paragraph
     >A nested type also may access protected members defined in a base type of its containing type. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 using System;  
 class Base   

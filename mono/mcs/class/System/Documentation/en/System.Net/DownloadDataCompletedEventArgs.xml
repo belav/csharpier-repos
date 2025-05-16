@@ -22,8 +22,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of this class are passed to the <see
-         cref="T:System.Net.DownloadDataCompletedEventHandler" />
+        >Instances of this class are passed to the <see cref="T:System.Net.DownloadDataCompletedEventHandler" />
 
         
 
@@ -33,8 +32,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Net.WebClient.DownloadDataCompleted" />
+        >Provides data for the <see cref="E:System.Net.WebClient.DownloadDataCompleted" />
 
         
 
@@ -60,33 +58,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You should check the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+            >You should check the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             and <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             and <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             properties before using the data that is returned by this property. If the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+             properties before using the data that is returned by this property. If the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
 
             
 
-             property's value is an <see
-             cref="T:System.Exception" />
+             property's value is an <see cref="T:System.Exception" />
 
             
 
-             object or the <see
-             cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+             object or the <see cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
 
             
 
-             property's value is true, the asynchronous operation did not complete correctly and the <see
-             cref="P:System.Net.DownloadDataCompletedEventArgs.Result" />
+             property's value is true, the asynchronous operation did not complete correctly and the <see cref="P:System.Net.DownloadDataCompletedEventArgs.Result" />
 
             
 
@@ -96,8 +88,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the data that is downloaded by a <see
-             cref="Overload:System.Net.WebClient.DownloadDataAsync" />
+            >Gets the data that is downloaded by a <see cref="Overload:System.Net.WebClient.DownloadDataAsync" />
 
             
 

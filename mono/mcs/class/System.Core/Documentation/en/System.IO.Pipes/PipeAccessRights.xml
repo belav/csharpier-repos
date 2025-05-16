@@ -21,44 +21,37 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IO.Pipes.PipeAccessRights" />
+        >The <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
         
 
          enumeration specifies which file system actions are allowed for a particular user account and which file system actions are audited for a particular user account.      </para
       >
       <para
-        >Use the <see
-         cref="T:System.IO.Pipes.PipeAccessRights" />
+        >Use the <see cref="T:System.IO.Pipes.PipeAccessRights" />
 
         
 
-         enumeration when you create an access rule with the <see
-         cref="T:System.IO.Pipes.PipeAccessRule" />
+         enumeration when you create an access rule with the <see cref="T:System.IO.Pipes.PipeAccessRule" />
 
         
 
-         class or when you create an audit rule with the <see
-         cref="T:System.IO.Pipes.PipeAuditRule" />
+         class or when you create an audit rule with the <see cref="T:System.IO.Pipes.PipeAuditRule" />
 
         
 
          class.</para
       >
       <para
-        >This enumeration contains several specific system rights values and several values that are a combination of those specific values.  It is easier to use the combination values, such as <see
-         cref="F:System.IO.Pipes.PipeAccessRights.FullControl" />
+        >This enumeration contains several specific system rights values and several values that are a combination of those specific values.  It is easier to use the combination values, such as <see cref="F:System.IO.Pipes.PipeAccessRights.FullControl" />
 
         
 
-        , <see
-         cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+        , <see cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
         
 
-        , and <see
-         cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+        , and <see cref="F:System.IO.Pipes.PipeAccessRights.Write" />
 
         
 
@@ -128,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to create a new pipe. Setting this right also sets the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Synchronize" />
+            >Specifies the right to create a new pipe. Setting this right also sets the <see cref="F:System.IO.Pipes.PipeAccessRights.Synchronize" />
 
             
 
@@ -195,23 +187,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to read from the pipe. This right includes the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadAttributes" />
+            >Specifies the right to read from the pipe. This right includes the <see cref="F:System.IO.Pipes.PipeAccessRights.ReadAttributes" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadExtendedAttributes" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.ReadExtendedAttributes" />
 
             
 
-            , and <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadPermissions" />
+            , and <see cref="F:System.IO.Pipes.PipeAccessRights.ReadPermissions" />
 
             
 
@@ -317,38 +305,31 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to read and write from the pipe. This right includes the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadAttributes" />
+            >Specifies the right to read and write from the pipe. This right includes the <see cref="F:System.IO.Pipes.PipeAccessRights.ReadAttributes" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadExtendedAttributes" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.ReadExtendedAttributes" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.ReadPermissions" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.ReadPermissions" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.WriteAttributes" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.WriteAttributes" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.WriteData" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.WriteData" />
 
             
 
-            , and <see
-             cref="F:System.IO.Pipes.PipeAccessRights.WriteExtendedAttributes" />
+            , and <see cref="F:System.IO.Pipes.PipeAccessRights.WriteExtendedAttributes" />
 
             
 
@@ -374,8 +355,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="F:System.IO.Pipes.PipeAccessRights.Synchronize" />
+            >The <see cref="F:System.IO.Pipes.PipeAccessRights.Synchronize" />
 
             
 
@@ -426,18 +406,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies the right to write to the pipe. This right includes the <see
-             cref="F:System.IO.Pipes.PipeAccessRights.WriteAttributes" />
+            >Specifies the right to write to the pipe. This right includes the <see cref="F:System.IO.Pipes.PipeAccessRights.WriteAttributes" />
 
             
 
-            , <see
-             cref="F:System.IO.Pipes.PipeAccessRights.WriteData" />
+            , <see cref="F:System.IO.Pipes.PipeAccessRights.WriteData" />
 
             
 
-            , and <see
-             cref="F:System.IO.Pipes.PipeAccessRights.WriteExtendedAttributes" />
+            , and <see cref="F:System.IO.Pipes.PipeAccessRights.WriteExtendedAttributes" />
 
             
 

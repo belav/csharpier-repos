@@ -46,8 +46,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -168,8 +167,7 @@
         <h2>Instantiating a NumberFormatInfo object</h2>
       </format>
       <para
-        >You can instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >You can instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -182,13 +180,11 @@
         <h2>Instantiating a NumberFormatInfo object for the current culture</h2>
       </format>
       <para
-        >You can instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >You can instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object for the current thread culture in any of the following ways. In each case, the returned <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object for the current thread culture in any of the following ways. In each case, the returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -197,23 +193,19 @@
       <list type="bullet">
         <item>
           <para
-            >By retrieving a <see
-             cref="T:System.Globalization.CultureInfo" />
+            >By retrieving a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the current thread culture from the <see
-             cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+             object that represents the current thread culture from the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
             
 
-             property, and retrieving the <see
-             cref="T:System.Globalization.CultureInfo" />
+             property, and retrieving the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object from its <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+             object from its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
@@ -222,13 +214,11 @@
         </item>
         <item>
           <para
-            >By retrieving the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >By retrieving the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object returned by the static (Shared in Visual Basic) <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+             object returned by the static (Shared in Visual Basic) <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
 
             
 
@@ -237,13 +227,11 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
+            >By calling the <see cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
 
             
 
-             method with a <see
-             cref="T:System.Globalization.CultureInfo" />
+             method with a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -252,13 +240,11 @@
         </item>
       </list>
       <para
-        >The following example uses these three ways to create <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The following example uses these three ways to create <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         objects that represent the formatting conventions of the current culture. It also retrieves the value of the <see
-         cref="P:System.Globalization.NumberFormatInfo.IsReadOnly" />
+         objects that represent the formatting conventions of the current culture. It also retrieves the value of the <see cref="P:System.Globalization.NumberFormatInfo.IsReadOnly" />
 
         
 
@@ -266,8 +252,7 @@
       >
       <para>code reference: System.Globalization.NumberFormatInfo.Class.Instantiate#1</para>
       <para
-        >You can create a writable <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >You can create a writable <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -276,28 +261,23 @@
       <list type="bullet">
         <item>
           <para
-            >By retrieving a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >By retrieving a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object in any of the ways illustrated in the previous code example, and calling the <see
-             cref="M:System.Globalization.NumberFormatInfo.Clone" />
+             object in any of the ways illustrated in the previous code example, and calling the <see cref="M:System.Globalization.NumberFormatInfo.Clone" />
 
             
 
-             method on the returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method on the returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object. This creates a copy of the original <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             object. This creates a copy of the original <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object, except that its <see
-             cref="P:System.Globalization.NumberFormatInfo.IsReadOnly" />
+             object, except that its <see cref="P:System.Globalization.NumberFormatInfo.IsReadOnly" />
 
             
 
@@ -306,23 +286,19 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+            >By calling the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
             
 
-             method to create a <see
-             cref="T:System.Globalization.CultureInfo" />
+             method to create a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the current culture, and then using its <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+             object that represents the current culture, and then using its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
-             property to retrieve the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property to retrieve the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -331,13 +307,11 @@
         </item>
       </list>
       <para
-        >The following example illustrates these two ways of instantiating a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The following example illustrates these two ways of instantiating a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object, and displays the value of its <see
-         cref="P:System.Globalization.NumberFormatInfo.IsReadOnly" />
+         object, and displays the value of its <see cref="P:System.Globalization.NumberFormatInfo.IsReadOnly" />
 
         
 
@@ -345,33 +319,27 @@
       >
       <para>code reference: System.Globalization.NumberFormatInfo.Class.Instantiate#2</para>
       <para
-        >Note that the Windows operating system allows the user to override some of the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >Note that the Windows operating system allows the user to override some of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         property values used in numeric formatting and parsing operations through the <ui
-        >Region and Language</ui>
+         property values used in numeric formatting and parsing operations through the <ui>Region and Language</ui>
 
         
 
-         item in Control Panel. For example, a user whose culture is English (United States) might choose to display currency values as 1.1 USD instead of the default of $1.1. The <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         item in Control Panel. For example, a user whose culture is English (United States) might choose to display currency values as 1.1 USD instead of the default of $1.1. The <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         objects retrieved in the ways discussed previously all reflect these user overrides. If this is undesirable, you can create a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         objects retrieved in the ways discussed previously all reflect these user overrides. If this is undesirable, you can create a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that does not reflect user overrides (and that is also read/write rather than read-only) by calling the <see
-         cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" />
+         object that does not reflect user overrides (and that is also read/write rather than read-only) by calling the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String,System.Boolean)" />
 
         
 
-         constructor and supplying a value of false for the <paramref
-         name="useUserOverride" />
+         constructor and supplying a value of false for the <paramref name="useUserOverride" />
 
         
 
@@ -380,33 +348,27 @@
       <para>code reference: System.Globalization.NumberFormatInfo.Class.Instantiate#3</para>
       <para />
       <para
-        >If the <see
-         cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+        >If the <see cref="P:System.Globalization.CultureInfo.UseUserOverride" />
 
         
 
-         property is set to true, the properties <see
-         cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+         property is set to true, the properties <see cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
 
         
 
-        , <see
-         cref="P:System.Globalization.CultureInfo.NumberFormat" />
+        , <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
         
 
-        , and <see
-         cref="P:System.Globalization.CultureInfo.TextInfo" />
+        , and <see cref="P:System.Globalization.CultureInfo.TextInfo" />
 
         
 
-         are also retrieved from the user settings. If the user settings are incompatible with the culture associated with the <see
-         cref="T:System.Globalization.CultureInfo" />
+         are also retrieved from the user settings. If the user settings are incompatible with the culture associated with the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         object (for example, if the selected calendar is not one of the calendars listed by the <see
-         cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+         object (for example, if the selected calendar is not one of the calendars listed by the <see cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
 
         
 
@@ -419,16 +381,14 @@
         <h2>Instantiating a NumberFormatInfo object for the invariant culture</h2>
       </format>
       <para
-        >The invariant culture represents a culture that is culture-insensitive. It is based on the English language but not on any specific English-speaking country/region. Although the data of specific cultures can be dynamic and can change to reflect new cultural conventions or user preferences, the data of the invariant culture does not change. A <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The invariant culture represents a culture that is culture-insensitive. It is based on the English language but not on any specific English-speaking country/region. Although the data of specific cultures can be dynamic and can change to reflect new cultural conventions or user preferences, the data of the invariant culture does not change. A <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
          object that represents the formatting conventions of the invariant culture can be used for formatting operations in which result strings should not vary by culture. </para
       >
       <para
-        >You can instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >You can instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -437,38 +397,11 @@
       <list type="bullet">
         <item>
           <para
-            >By retrieving the value of the <see
-             cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
+            >By retrieving the value of the <see cref="P:System.Globalization.NumberFormatInfo.InvariantInfo" />
 
             
 
-             property. The returned  <see
-             cref="T:System.Globalization.NumberFormatInfo" />
-
-            
-
-             object is read-only. </para
-          >
-        </item>
-        <item>
-          <para
-            >By retrieving the value of the <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
-
-            
-
-             property from the <see
-             cref="T:System.Globalization.CultureInfo" />
-
-            
-
-             object that is returned by the <see
-             cref="P:System.Globalization.CultureInfo.InvariantCulture" />
-
-            
-
-             property. The returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property. The returned  <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -477,13 +410,32 @@
         </item>
         <item>
           <para
-            >By calling the parameterless <see
-             cref="M:System.Globalization.NumberFormatInfo.#ctor" />
+            >By retrieving the value of the <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
-             class constructor. The returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property from the <see cref="T:System.Globalization.CultureInfo" />
+
+            
+
+             object that is returned by the <see cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
+
+             property. The returned <see cref="T:System.Globalization.NumberFormatInfo" />
+
+            
+
+             object is read-only. </para
+          >
+        </item>
+        <item>
+          <para
+            >By calling the parameterless <see cref="M:System.Globalization.NumberFormatInfo.#ctor" />
+
+            
+
+             class constructor. The returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -492,8 +444,7 @@
         </item>
       </list>
       <para
-        >The following example uses each of these methods to instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The following example uses each of these methods to instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -507,8 +458,7 @@
         <h2>Instantiating a NumberFormatInfo object for a specific culture</h2>
       </format>
       <para
-        >A specific culture represents a language that is spoken in a particular country/region. For example, en-US is a specific culture that represents the English language spoken in the United States, and en-CA is a specific culture that represents the English language spoken in Canada. You can instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >A specific culture represents a language that is spoken in a particular country/region. For example, en-US is a specific culture that represents the English language spoken in the United States, and en-CA is a specific culture that represents the English language spoken in Canada. You can instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -517,23 +467,19 @@
       <list type="bullet">
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />
+            >By calling the <see cref="M:System.Globalization.CultureInfo.GetCultureInfo(System.String)" />
 
             
 
-             method and retrieving the value of the returned <see
-             cref="T:System.Globalization.CultureInfo" />
+             method and retrieving the value of the returned <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object's <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+             object's <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -542,23 +488,19 @@
         </item>
         <item>
           <para
-            >By passing a <see
-             cref="T:System.Globalization.CultureInfo" />
+            >By passing a <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object that represents the culture whose <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             object that represents the culture whose <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object you want to retrieve to the static <see
-             cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
+             object you want to retrieve to the static <see cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
 
             
 
-             method. The returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method. The returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -567,23 +509,19 @@
         </item>
         <item>
           <para
-            >By calling the <see
-             cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
+            >By calling the <see cref="M:System.Globalization.CultureInfo.CreateSpecificCulture(System.String)" />
 
             
 
-             method and retrieving the value of the returned <see
-             cref="T:System.Globalization.CultureInfo" />
+             method and retrieving the value of the returned <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object's <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+             object's <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -592,23 +530,19 @@
         </item>
         <item>
           <para
-            >By calling one of the <see
-             cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
+            >By calling one of the <see cref="M:System.Globalization.CultureInfo.#ctor(System.String)" />
 
             
 
-             class constructors and retrieving the value of the returned <see
-             cref="T:System.Globalization.CultureInfo" />
+             class constructors and retrieving the value of the returned <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             object's <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+             object's <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
-             property. The returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property. The returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -617,8 +551,7 @@
         </item>
       </list>
       <para
-        >The following example uses these four ways to create a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The following example uses these four ways to create a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -632,13 +565,11 @@
         <h2>Instantiating a NumberFormatInfo object for a neutral culture</h2>
       </format>
       <para
-        >A neutral culture represents a culture or language that is independent of a country/region. It is typically the parent of one or more specific cultures. For example, fr is a neutral culture for the French language and the parent of the fr-FR culture. You create a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >A neutral culture represents a culture or language that is independent of a country/region. It is typically the parent of one or more specific cultures. For example, fr is a neutral culture for the French language and the parent of the fr-FR culture. You create a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that represents the formatting conventions of a neutral culture in the same way that you create a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object that represents the formatting conventions of a neutral culture in the same way that you create a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -646,13 +577,11 @@
       >
       <block subset="none" type="note">
         <para
-          >In the net_v35_short and earlier versions, trying to retrieve a <see
-           cref="T:System.Globalization.NumberFormatInfo" />
+          >In the net_v35_short and earlier versions, trying to retrieve a <see cref="T:System.Globalization.NumberFormatInfo" />
 
           
 
-           object that reflects the formatting conventions of a neutral culture throws a <see
-           cref="T:System.NotSupportedException" />
+           object that reflects the formatting conventions of a neutral culture throws a <see cref="T:System.NotSupportedException" />
 
           
 
@@ -660,23 +589,19 @@
         >
       </block>
       <para
-        >However, because it is independent of a specific country/region, a neutral culture lacks culture-specific formatting information. Rather than populating the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >However, because it is independent of a specific country/region, a neutral culture lacks culture-specific formatting information. Rather than populating the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object with generic values, the .NET Framework returns a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object with generic values, the .NET Framework returns a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that reflects the formatting conventions of a specific culture that is a child of the neutral culture. For example, the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object that reflects the formatting conventions of a specific culture that is a child of the neutral culture. For example, the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object for the neutral en culture reflects the formatting conventions of the en-US culture, and the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object for the neutral en culture reflects the formatting conventions of the en-US culture, and the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -691,28 +616,23 @@
         <h2>NumberFormatInfo and dynamic data</h2>
       </format>
       <para
-        >The culture-specific data for formatting numeric values provided by the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The culture-specific data for formatting numeric values provided by the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         class is dynamic, just like the cultural data provided by the <see
-         cref="T:System.Globalization.CultureInfo" />
+         class is dynamic, just like the cultural data provided by the <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         class. You should not make any assumptions about the stability of values for <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         class. You should not make any assumptions about the stability of values for <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         objects that are associated with particular <see
-         cref="T:System.Globalization.CultureInfo" />
+         objects that are associated with particular <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         objects. Only the data provided by the invariant culture and its associated <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         objects. Only the data provided by the invariant culture and its associated <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -721,8 +641,7 @@
       <list type="bullet">
         <item>
           <para
-            >System updates. Cultural preferences such as the currency symbol or currency formats change over time. When this happens, Windows Update includes changes to the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >System updates. Cultural preferences such as the currency symbol or currency formats change over time. When this happens, Windows Update includes changes to the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -731,8 +650,7 @@
         </item>
         <item>
           <para
-            >Replacement cultures. The <see
-             cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
+            >Replacement cultures. The <see cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
 
             
 
@@ -741,18 +659,15 @@
         </item>
         <item>
           <para
-            >Cascading changes to property values. A number of culture-related properties can change at run time, which, in turn, causes <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Cascading changes to property values. A number of culture-related properties can change at run time, which, in turn, causes <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             data to change. For example, the current culture can be changed either programmatically or through user action. When this happens, the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             data to change. For example, the current culture can be changed either programmatically or through user action. When this happens, the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object returned by the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+             object returned by the <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
 
             
 
@@ -761,13 +676,11 @@
         </item>
         <item>
           <para
-            >User preferences. Users of your application might override some of the values associated with the current system culture through the region and language options in Control Panel. For example, users might choose a different currency symbol or a different decimal separator symbol. If the <see
-             cref="P:System.Globalization.CultureInfo.UseUserOverride" />
+            >User preferences. Users of your application might override some of the values associated with the current system culture through the region and language options in Control Panel. For example, users might choose a different currency symbol or a different decimal separator symbol. If the <see cref="P:System.Globalization.CultureInfo.UseUserOverride" />
 
             
 
-             property is set to true (its default value), the properties of the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property is set to true (its default value), the properties of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -776,21 +689,18 @@
         </item>
       </list>
       <para
-        >Starting with the .NET Framework 2.0, all user-overridable properties of a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >Starting with the .NET Framework 2.0, all user-overridable properties of a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
          object are initialized when the object is created. There is still a possibility of inconsistency, because neither object creation nor the user override process is atomic, and the relevant values may change during object creation. However, these inconsistencies should be extremely rare.</para
       >
       <para
-        >You can control whether user overrides are reflected in <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >You can control whether user overrides are reflected in <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         objects that represent the same culture as the current thread culture. The following table lists the ways in which a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         objects that represent the same culture as the current thread culture. The following table lists the ways in which a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -883,8 +793,7 @@
           </term>
           <description>
             <para
-              >Depends on value of <paramref
-               name="useUserOverride" />
+              >Depends on value of <paramref name="useUserOverride" />
 
               
 
@@ -894,18 +803,15 @@
         </item>
       </list>
       <para
-        >Unless there is a compelling reason to do otherwise, you should respect user overrides when you use the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >Unless there is a compelling reason to do otherwise, you should respect user overrides when you use the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object in client applications to format and parse user input or to display numeric data. For server applications or unattended applications, you should not respect user overrides. However, if you are using the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object in client applications to format and parse user input or to display numeric data. For server applications or unattended applications, you should not respect user overrides. However, if you are using the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object either explicitly or implicitly to persist numeric data in string form, you should either use a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object either explicitly or implicitly to persist numeric data in string form, you should either use a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -918,8 +824,7 @@
         <h2>IFormatProvider, NumberFormatInfo, and numeric formatting</h2>
       </format>
       <para
-        >A <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >A <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -928,18 +833,15 @@
       <list type="bullet">
         <item>
           <para
-            >All numeric formatting methods, such as <see
-             cref="M:System.Int32.ToString" />
+            >All numeric formatting methods, such as <see cref="M:System.Int32.ToString" />
 
             
 
-            , <see
-             cref="M:System.Double.ToString" />
+            , <see cref="M:System.Double.ToString" />
 
             
 
-            , and <see
-             cref="M:System.Convert.ToString(System.Int32)" />
+            , and <see cref="M:System.Convert.ToString(System.Int32)" />
 
             
 
@@ -948,8 +850,7 @@
         </item>
         <item>
           <para
-            >The major composite formatting method, <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+            >The major composite formatting method, <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
@@ -958,13 +859,11 @@
         </item>
         <item>
           <para
-            >Other composite formatting methods, such as <see
-             cref="M:System.Console.WriteLine(System.String,System.Object[])" />
+            >Other composite formatting methods, such as <see cref="M:System.Console.WriteLine(System.String,System.Object[])" />
 
             
 
-             and <see
-             cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
+             and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
 
             
 
@@ -973,28 +872,23 @@
         </item>
       </list>
       <para
-        >All numeric formatting operations make use of an <see
-         cref="T:System.IFormatProvider" />
+        >All numeric formatting operations make use of an <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation. The <see
-         cref="T:System.IFormatProvider" />
+         implementation. The <see cref="T:System.IFormatProvider" />
 
         
 
-         interface includes a single method, <see
-         cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+         interface includes a single method, <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
         
 
-        . This is a callback method that is passed a <see
-         cref="T:System.Type" />
+        . This is a callback method that is passed a <see cref="T:System.Type" />
 
         
 
-         object that represents the type needed to provide formatting information. The method is responsible for returning either an instance of that type or null, if it cannot provide an instance of the type. The .NET Framework provides two <see
-         cref="T:System.IFormatProvider" />
+         object that represents the type needed to provide formatting information. The method is responsible for returning either an instance of that type or null, if it cannot provide an instance of the type. The .NET Framework provides two <see cref="T:System.IFormatProvider" />
 
         
 
@@ -1003,23 +897,19 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             class, which represents a specific culture (or a specific language in a specific country/region). In a numeric formatting operation, the <see
-             cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
+             class, which represents a specific culture (or a specific language in a specific country/region). In a numeric formatting operation, the <see cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
             
 
-             method returns the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object associated with its <see
-             cref="P:System.Globalization.CultureInfo.NumberFormat" />
+             object associated with its <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
             
 
@@ -1028,13 +918,11 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             class, which provides information about the formatting conventions of its associated culture. The <see
-             cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+             class, which provides information about the formatting conventions of its associated culture. The <see cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
 
             
 
@@ -1043,81 +931,66 @@
         </item>
       </list>
       <para
-        >If an <see
-         cref="T:System.IFormatProvider" />
+        >If an <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation is not provided to a formatting method explicitly, a <see
-         cref="T:System.Globalization.CultureInfo" />
+         implementation is not provided to a formatting method explicitly, a <see cref="T:System.Globalization.CultureInfo" />
 
         
 
-         object returned by the <see
-         cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+         object returned by the <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
         
 
          property that represents the current thread culture is used.</para
       >
       <para
-        >The following example illustrates the relationship between the <see
-         cref="T:System.IFormatProvider" />
+        >The following example illustrates the relationship between the <see cref="T:System.IFormatProvider" />
 
         
 
-         interface and the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         interface and the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         class in formatting operations by defining a custom <see
-         cref="T:System.IFormatProvider" />
+         class in formatting operations by defining a custom <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation. Its <see
-         cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+         implementation. Its <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
         
 
-         method displays the type name of the object requested by the formatting operation. If the interface is requesting a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         method displays the type name of the object requested by the formatting operation. If the interface is requesting a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object, this method provides the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object, this method provides the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object for the current thread culture. As the output from the example shows, the <see
-         cref="M:System.Decimal.ToString(System.IFormatProvider)" />
+         object for the current thread culture. As the output from the example shows, the <see cref="M:System.Decimal.ToString(System.IFormatProvider)" />
 
         
 
-         method requests a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         method requests a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object to provide formatting information, whereas the <see
-         cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+         object to provide formatting information, whereas the <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
 
         
 
-         method requests <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         method requests <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         and <see
-         cref="T:System.Globalization.DateTimeFormatInfo" />
+         and <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
         
 
-         objects as well as an <see
-         cref="T:System.ICustomFormatter" />
+         objects as well as an <see cref="T:System.ICustomFormatter" />
 
         
 
@@ -1125,13 +998,11 @@
       >
       <para>code reference: System.Globalization.NumberFormatInfo.Class#1</para>
       <para
-        >If an <see
-         cref="T:System.IFormatProvider" />
+        >If an <see cref="T:System.IFormatProvider" />
 
         
 
-         implementation is not explicitly provided in a numeric formatting method call, the method calls the CultureInfo.CurrentCulture.GetFormat method, which returns the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         implementation is not explicitly provided in a numeric formatting method call, the method calls the CultureInfo.CurrentCulture.GetFormat method, which returns the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -1144,13 +1015,11 @@
         <h2>Format strings and NumberFormatInfo properties</h2>
       </format>
       <para
-        >Every formatting operation uses either a standard or a custom numeric format string to produce a result string from a number. In some cases, the use of a format string to produce a result string is explicit, as in the following example. This code calls the <see
-         cref="M:System.Decimal.ToString(System.IFormatProvider)" />
+        >Every formatting operation uses either a standard or a custom numeric format string to produce a result string from a number. In some cases, the use of a format string to produce a result string is explicit, as in the following example. This code calls the <see cref="M:System.Decimal.ToString(System.IFormatProvider)" />
 
         
 
-         method to convert a <see
-         cref="T:System.Decimal" />
+         method to convert a <see cref="T:System.Decimal" />
 
         
 
@@ -1158,13 +1027,11 @@
       >
       <para>code reference: System.Globalization.NumberFormatInfo.Class#2</para>
       <para
-        >In other cases, the use of a format string is implicit. For example, in the following method calls to the default or parameterless <see
-         cref="M:System.Decimal.ToString" />
+        >In other cases, the use of a format string is implicit. For example, in the following method calls to the default or parameterless <see cref="M:System.Decimal.ToString" />
 
         
 
-         method, the value of the <see
-         cref="T:System.Decimal" />
+         method, the value of the <see cref="T:System.Decimal" />
 
         
 
@@ -1172,37 +1039,31 @@
       >
       <para>code reference: System.Globalization.NumberFormatInfo.Class#3</para>
       <para
-        >Each standard numeric format string uses one or more <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >Each standard numeric format string uses one or more <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         properties to determine the pattern or the symbols used in the result string. Similarly, each custom numeric format specifier except "0" and "#" insert symbols in the result string that are defined by <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         properties to determine the pattern or the symbols used in the result string. Similarly, each custom numeric format specifier except "0" and "#" insert symbols in the result string that are defined by <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         properties. The following table lists the standard and custom numeric format specifiers and their associated <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         properties. The following table lists the standard and custom numeric format specifiers and their associated <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         properties.  To change the appearance of the result string for a particular culture, see the <format
-         type="text/html">
+         properties.  To change the appearance of the result string for a particular culture, see the <format type="text/html">
           <a href="#modifying">Modifying NumberFormatInfo properties</a>
         </format>
 
         
 
-         section. For details about the use of these format specifiers, see <format
-         type="text/html">
+         section. For details about the use of these format specifiers, see <format type="text/html">
           <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
         </format>
 
         
 
-         and <format
-         type="text/html">
+         and <format type="text/html">
           <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
         </format>
 
@@ -1609,38 +1470,31 @@
         </item>
       </list>
       <para
-        >Note that the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >Note that the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         class includes a <see
-         cref="P:System.Globalization.NumberFormatInfo.NativeDigits" />
+         class includes a <see cref="P:System.Globalization.NumberFormatInfo.NativeDigits" />
 
         
 
-         property that specifies the base 10 digits used by a specific culture. However, the property is not used in formatting operations; only the Basic Latin digits 0 (U+0030) through 9 (U+0039) are used in the result string. In addition, for <see
-         cref="T:System.Single" />
+         property that specifies the base 10 digits used by a specific culture. However, the property is not used in formatting operations; only the Basic Latin digits 0 (U+0030) through 9 (U+0039) are used in the result string. In addition, for <see cref="T:System.Single" />
 
         
 
-         and <see
-         cref="T:System.Double" />
+         and <see cref="T:System.Double" />
 
         
 
-         values of NaN, PositiveInfinity, and NegativeInfinity, the result string consists exclusively of the symbols defined by the <see
-         cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
+         values of NaN, PositiveInfinity, and NegativeInfinity, the result string consists exclusively of the symbols defined by the <see cref="P:System.Globalization.NumberFormatInfo.NaNSymbol" />
 
         
 
-        , <see
-         cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
+        , <see cref="P:System.Globalization.NumberFormatInfo.PositiveInfinitySymbol" />
 
         
 
-        , and <see
-         cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
+        , and <see cref="P:System.Globalization.NumberFormatInfo.NegativeInfinitySymbol" />
 
         
 
@@ -1653,8 +1507,7 @@
         <h2>Modifying NumberFormatInfo properties</h2>
       </format>
       <para
-        >You can modify the properties of a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >You can modify the properties of a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -1663,13 +1516,11 @@
       <list type="ordered">
         <item>
           <para
-            >Create a read/write copy of a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Create a read/write copy of a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object whose formatting conventions you want to modify. For more information, see the <format
-             type="text/html">
+             object whose formatting conventions you want to modify. For more information, see the <format type="text/html">
               <a href="#Instantiating">Instantiating a NumberFormatInfo object</a>
             </format>
 
@@ -1680,13 +1531,11 @@
         </item>
         <item>
           <para
-            >Modify the property or properties that are used to produce the desired result string. For information about how formatting methods use <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Modify the property or properties that are used to produce the desired result string. For information about how formatting methods use <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             properties to define result strings, see the <format
-             type="text/html">
+             properties to define result strings, see the <format type="text/html">
               <a href="#properties">Format strings and NumberFormatInfo properties</a>
             </format>
 
@@ -1697,13 +1546,11 @@
         </item>
         <item>
           <para
-            >Use the custom <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Use the custom <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object as the <see
-             cref="T:System.IFormatProvider" />
+             object as the <see cref="T:System.IFormatProvider" />
 
             
 
@@ -1713,8 +1560,7 @@
       </list>
       <block subset="none" type="note">
         <para
-          >Instead of dynamically modifying a culture's property values each time an application is started, you can use the <see
-           cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
+          >Instead of dynamically modifying a culture's property values each time an application is started, you can use the <see cref="T:System.Globalization.CultureAndRegionInfoBuilder" />
 
           
 
@@ -1729,13 +1575,11 @@
         <h2>Modifying the currency symbol and pattern</h2>
       </format>
       <para
-        >The following example modifies a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The following example modifies a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that that represents the formatting conventions of the en-US culture. It assigns the ISO-4217 currency symbol to the <see
-         cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
+         object that that represents the formatting conventions of the en-US culture. It assigns the ISO-4217 currency symbol to the <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
 
         
 
@@ -1749,13 +1593,11 @@
         <h2>Formatting a national identification number</h2>
       </format>
       <para
-        >Many national identification numbers consist exclusively of digits and so can easily be formatted by modifying the properties of a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >Many national identification numbers consist exclusively of digits and so can easily be formatted by modifying the properties of a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object. For example, a social security number in the United States consists of 9 digits arranged as follows: <literal
-        >XXX-XX-XXXX</literal>
+         object. For example, a social security number in the United States consists of 9 digits arranged as follows: <literal>XXX-XX-XXXX</literal>
 
         
 
@@ -1769,84 +1611,69 @@
         <h2>Parsing numeric strings</h2>
       </format>
       <para
-        >Parsing involves converting the string representation of a number to a number. Each numeric type in the .NET Framework includes two overloaded parsing methods: Parse and TryParse. The Parse method converts a string to a number and throws an exception if the conversion fails. The TryParse method converts a string to a number, assigns the number to an out argument, and returns a <see
-         cref="T:System.Boolean" />
+        >Parsing involves converting the string representation of a number to a number. Each numeric type in the .NET Framework includes two overloaded parsing methods: Parse and TryParse. The Parse method converts a string to a number and throws an exception if the conversion fails. The TryParse method converts a string to a number, assigns the number to an out argument, and returns a <see cref="T:System.Boolean" />
 
         
 
          value that indicates whether the conversion succeeded. </para
       >
       <para
-        >The parsing methods implicitly or explicitly use a <see
-         cref="T:System.Globalization.NumberStyles" />
+        >The parsing methods implicitly or explicitly use a <see cref="T:System.Globalization.NumberStyles" />
 
         
 
-         enumeration value to determine what style elements (such as group separators, a decimal separator, or a currency symbol) can be present in a string if the parsing operation is to succeed. If a <see
-         cref="T:System.Globalization.NumberStyles" />
+         enumeration value to determine what style elements (such as group separators, a decimal separator, or a currency symbol) can be present in a string if the parsing operation is to succeed. If a <see cref="T:System.Globalization.NumberStyles" />
 
         
 
-         value is not provided in the method call, the default is a <see
-         cref="T:System.Globalization.NumberStyles" />
+         value is not provided in the method call, the default is a <see cref="T:System.Globalization.NumberStyles" />
 
         
 
-         value that includes the <see
-         cref="F:System.Globalization.NumberStyles.Float" />
+         value that includes the <see cref="F:System.Globalization.NumberStyles.Float" />
 
         
 
-         and <see
-         cref="F:System.Globalization.NumberStyles.AllowThousands" />
+         and <see cref="F:System.Globalization.NumberStyles.AllowThousands" />
 
         
 
          flags, which specifies that the parsed string can include group symbols, a decimal separator, a negative sign, and white-space characters, or it can be the string representation of a number in exponential notation.  </para
       >
       <para
-        >The parsing methods also implicitly or explicitly use a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >The parsing methods also implicitly or explicitly use a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that defines the specific symbols and patterns that can occur in the string to be parsed. If a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object that defines the specific symbols and patterns that can occur in the string to be parsed. If a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object is not provided, the default is the <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object is not provided, the default is the <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         for the current thread culture. For more information about parsing, see the individual parsing methods, such as <see
-         cref="M:System.Int16.Parse(System.String)" />
+         for the current thread culture. For more information about parsing, see the individual parsing methods, such as <see cref="M:System.Int16.Parse(System.String)" />
 
         
 
-        , <see
-         cref="M:System.Int32.Parse(System.String,System.Globalization.NumberStyles)" />
+        , <see cref="M:System.Int32.Parse(System.String,System.Globalization.NumberStyles)" />
 
         
 
-        , <see
-         cref="M:System.Int64.Parse(System.String,System.IFormatProvider)" />
+        , <see cref="M:System.Int64.Parse(System.String,System.IFormatProvider)" />
 
         
 
-        , <see
-         cref="M:System.Decimal.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+        , <see cref="M:System.Decimal.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
 
         
 
-        , <see
-         cref="M:System.Double.TryParse(System.String,System.Double@)" />
+        , <see cref="M:System.Double.TryParse(System.String,System.Double@)" />
 
         
 
-        , and <see
-         cref="M:System.Numerics.BigInteger.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.Numerics.BigInteger@)" />
+        , and <see cref="M:System.Numerics.BigInteger.TryParse(System.String,System.Globalization.NumberStyles,System.IFormatProvider,System.Numerics.BigInteger@)" />
 
         
 
@@ -1871,18 +1698,15 @@
         <h2>Parsing user strings</h2>
       </format>
       <para
-        >When you are parsing numeric strings input by the user, you should always instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        >When you are parsing numeric strings input by the user, you should always instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that reflects the user's cultural settings. For information about how to instantiate a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object that reflects the user's cultural settings. For information about how to instantiate a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that reflects user customizations, see the <format
-         type="text/html">
+         object that reflects user customizations, see the <format type="text/html">
           <a href="#dynamic">NumberFormatInfo and dynamic data</a>
         </format>
 
@@ -1891,18 +1715,15 @@
          section. </para
       >
       <para
-        >The following example illustrates the difference between a parsing operation that reflects user cultural settings and one that does not. In this case, the default system culture is en-US, but the user has defined "," as the decimal symbol and "." as the group separator in Control Panel, <ui
-        >Region and Language</ui>
+        >The following example illustrates the difference between a parsing operation that reflects user cultural settings and one that does not. In this case, the default system culture is en-US, but the user has defined "," as the decimal symbol and "." as the group separator in Control Panel, <ui>Region and Language</ui>
 
         
 
-        . Ordinarily, these symbols are reversed in the default en-US culture. When the user enters a string that reflects user settings, and the string is parsed by a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+        . Ordinarily, these symbols are reversed in the default en-US culture. When the user enters a string that reflects user settings, and the string is parsed by a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
-         object that also reflects user settings (overrides), the parsing operation returns a correct result. However, when the string is parsed by a <see
-         cref="T:System.Globalization.NumberFormatInfo" />
+         object that also reflects user settings (overrides), the parsing operation returns a correct result. However, when the string is parsed by a <see cref="T:System.Globalization.NumberFormatInfo" />
 
         
 
@@ -1917,8 +1738,7 @@
       </format>
       <para>When numeric data is serialized in string format and later deserialized and parsed, the strings should be generated and parsed by using the conventions of the invariant culture. The formatting and parsing operations should never reflect the conventions of a specific culture. If culture-specific settings are used, the portability of the data is strictly limited; it can be successfully deserialized only on a thread whose culture-specific settings are identical to those of the thread on which it was serialized. In some cases, this means that the data cannot even be successfully deserialized on the same system on which it was serialized. </para>
       <para
-        >The following example illustrates what can happen when this principle is violated. Floating-point values in an array are converted to strings when the current thread uses the culture-specific settings of the en-US culture. The data is then parsed by a thread that uses the culture-specific settings of the en-GB culture. In this case, although each parsing operation succeeds, the data does not round-trip successfully and data corruption occurs. In other cases, a parsing operation could fail and a <see
-         cref="T:System.FormatException" />
+        >The following example illustrates what can happen when this principle is violated. Floating-point values in an array are converted to strings when the current thread uses the culture-specific settings of the en-US culture. The data is then parsed by a thread that uses the culture-specific settings of the en-GB culture. In this case, although each parsing operation succeeds, the data does not round-trip successfully and data corruption occurs. In other cases, a parsing operation could fail and a <see cref="T:System.FormatException" />
 
         
 
@@ -1958,8 +1778,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new writable instance of the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Initializes a new writable instance of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -1993,16 +1812,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The clone is writable even if the original <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The clone is writable even if the original <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
              object is read-only. Therefore, the properties of the clone can be modified with user-defined patterns.</para
           >
           <para
-            >A shallow copy of an object is a copy of the object only. If the object contains references to other objects, the shallow copy will not create copies of the referred objects. It will refer to the original objects instead. On the other hand, a deep copy of an object creates a copy of the object and a copy of everything directly or indirectly referenced by that object. In the case of a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >A shallow copy of an object is a copy of the object only. If the object contains references to other objects, the shallow copy will not create copies of the referred objects. It will refer to the original objects instead. On the other hand, a deep copy of an object creates a copy of the object and a copy of everything directly or indirectly referenced by that object. In the case of a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2012,8 +1829,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a shallow copy of the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Creates a shallow copy of the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2023,8 +1839,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A new object copied from the original <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >A new object copied from the original <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2054,8 +1869,7 @@
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -2072,13 +1886,11 @@ containing the number of decimal places in currency values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalDigits" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalDigits" />
 
             
 
-             property is used with the "C" standard format string without a precision specifier in numeric formatting operations. It defines the default number of fractional digits that appear after the decimal separator. This value is overridden if a precision specifier is used. For more information, see <format
-             type="text/html">
+             property is used with the "C" standard format string without a precision specifier in numeric formatting operations. It defines the default number of fractional digits that appear after the decimal separator. This value is overridden if a precision specifier is used. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -2117,8 +1929,7 @@ containing the number of decimal places in currency values.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2134,21 +1945,18 @@ containing the number of decimal places in currency values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The initial value of this property is derived from the settings in the <ui
-            >Region and Language</ui>
+            >The initial value of this property is derived from the settings in the <ui>Region and Language</ui>
 
             
 
              item in Control Panel. </para
           >
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
 
             
 
-             property is used with the "C" standard format string to define the symbol that separates integral from fractional digits. For more information, see <format
-             type="text/html">
+             property is used with the "C" standard format string to define the symbol that separates integral from fractional digits. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -2184,8 +1992,7 @@ containing the number of decimal places in currency values.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2202,21 +2009,18 @@ containing the group separator used in currency values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The initial value of this property is derived from the settings in the <ui
-            >Regional and Language</ui>
+            >The initial value of this property is derived from the settings in the <ui>Regional and Language</ui>
 
             
 
              item in Control Panel. </para
           >
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
             
 
-              property is used with the "C" standard format string to define the symbol that separates groups of integers. For more information, see <format
-             type="text/html">
+              property is used with the "C" standard format string to define the symbol that separates groups of integers. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -2252,8 +2056,7 @@ containing the group separator used in currency values.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -2273,8 +2076,7 @@ containing the group separator used in currency values.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
 
             
 
@@ -2318,13 +2120,11 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSizes" />
 
             
 
-              property is used with the "C" standard format string to define the number of digits that appear in integral groups. For more information, see <format
-             type="text/html">
+              property is used with the "C" standard format string to define the number of digits that appear in integral groups. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -2333,8 +2133,7 @@ class Test {
             . Every element in the one-dimensional array must be an integer from 1 through 9. The last element can be 0.</para
           >
           <para
-            >The first element of the array defines the number of elements in the least significant group of digits immediately to the left of the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+            >The first element of the array defines the number of elements in the least significant group of digits immediately to the left of the <see cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
 
             
 
@@ -2369,8 +2168,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -2388,8 +2186,7 @@ values.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
 
             
 
@@ -2434,30 +2231,25 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.CurrencyNegativePattern" />
 
             
 
-             property is used with the "C" standard format string to define the pattern of negative currency values. For more information, see <format
-             type="text/html">
+             property is used with the "C" standard format string to define the pattern of negative currency values. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
             
 
-            . This property has one of the values in the following table. The symbol "$" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
+            . This property has one of the values in the following table. The symbol "$" is the <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
 
             
 
-            , the symbol "-" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+            , the symbol "-" is the <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
             
 
-            , and <paramref
-             name="n" />
+            , and <paramref name="n" />
 
             
 
@@ -2631,8 +2423,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -2650,8 +2441,7 @@ values.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
 
             
 
@@ -2683,25 +2473,21 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
 
             
 
-              property is used with the "C" standard format string to define pattern of positive currency values. For more information, see <format
-             type="text/html">
+              property is used with the "C" standard format string to define pattern of positive currency values. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
             
 
-            . This property has one of the values in the following table. The symbol "$" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
+            . This property has one of the values in the following table. The symbol "$" is the <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
 
             
 
-             and <paramref
-             name="n" />
+             and <paramref name="n" />
 
             
 
@@ -2780,8 +2566,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -2798,13 +2583,11 @@ containing the currency symbol.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string assigned to the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
+            >The string assigned to the <see cref="P:System.Globalization.NumberFormatInfo.CurrencySymbol" />
 
             
 
-             property is included in the result string when a numeric value is formatted with the "C" <format
-             type="text/html">
+             property is included in the result string when a numeric value is formatted with the "C" <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
 
@@ -2846,8 +2629,7 @@ containing the currency symbol.</para
       <Docs>
         <value>
           <para
-            >A read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >A read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2858,18 +2640,15 @@ containing the currency symbol.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Retrieving a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Retrieving a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object from the <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+             object from the <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
 
             
 
-             property is equivalent to retrieving a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             property is equivalent to retrieving a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2879,8 +2658,7 @@ containing the currency symbol.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Gets a read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -2918,13 +2696,11 @@ containing the currency symbol.</para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="P:System.Globalization.NumberFormatInfo.DigitSubstitution" />
+              >The <see cref="P:System.Globalization.NumberFormatInfo.DigitSubstitution" />
 
               
 
-               property is reserved for future use. Currently, it is not used in either parsing or formatting operations for the current <see
-               cref="T:System.Globalization.NumberFormatInfo" />
+               property is reserved for future use. Currently, it is not used in either parsing or formatting operations for the current <see cref="T:System.Globalization.NumberFormatInfo" />
 
               
 
@@ -2964,18 +2740,15 @@ containing the currency symbol.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The Format(String, IFormatProvider) methods supported by the base data types invoke this method when the current <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The Format(String, IFormatProvider) methods supported by the base data types invoke this method when the current <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             is passed as the <see
-             cref="T:System.IFormatProvider" />
+             is passed as the <see cref="T:System.IFormatProvider" />
 
             
 
-             parameter. This method implements <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             parameter. This method implements <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
@@ -2989,18 +2762,15 @@ containing the currency symbol.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The current <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The current <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-            , if <paramref
-             name="formatType" />
+            , if <paramref name="formatType" />
 
             
 
-             is the same as the type of the current <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             is the same as the type of the current <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3008,12 +2778,15 @@ containing the currency symbol.</para
           >
         </returns>
         <param name="formatType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 
@@ -3047,41 +2820,34 @@ containing the currency symbol.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method uses the <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+            >This method uses the <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             method of <paramref
-             name="formatProvider" />
+             method of <paramref name="formatProvider" />
 
             
 
-             using <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             using <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             as the Type parameter. If <paramref
-             name="formatProvider" />
+             as the Type parameter. If <paramref name="formatProvider" />
 
             
 
-             is null or if <see
-             cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+             is null or if <see cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
             
 
-             returns null, this method returns <see
-             cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+             returns null, this method returns <see cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
 
             
 
             .</para
           >
           <para
-            >Your application gets a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Your application gets a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3090,8 +2856,7 @@ containing the currency symbol.</para
           <list type="bullet">
             <item>
               <para
-                >Through the <see
-                 cref="P:System.Globalization.CultureInfo.NumberFormat" />
+                >Through the <see cref="P:System.Globalization.CultureInfo.NumberFormat" />
 
                 
 
@@ -3100,18 +2865,15 @@ containing the currency symbol.</para
             </item>
             <item>
               <para
-                >Through the <see
-                 cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
+                >Through the <see cref="M:System.Globalization.NumberFormatInfo.GetInstance(System.IFormatProvider)" />
 
                 
 
-                 method where <paramref
-                 name="provider" />
+                 method where <paramref name="provider" />
 
                 
 
-                 is a <see
-                 cref="T:System.Globalization.CultureInfo" />
+                 is a <see cref="T:System.Globalization.CultureInfo" />
 
                 
 
@@ -3120,13 +2882,11 @@ containing the currency symbol.</para
             </item>
           </list>
           <para
-            >A <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >A <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object is created only for the invariant culture or for specific cultures, not for neutral cultures. For more information about the invariant culture, specific cultures, and neutral cultures, see the <see
-             cref="T:System.Globalization.CultureInfo" />
+             object is created only for the invariant culture or for specific cultures, not for neutral cultures. For more information about the invariant culture, specific cultures, and neutral cultures, see the <see cref="T:System.Globalization.CultureInfo" />
 
             
 
@@ -3136,13 +2896,11 @@ containing the currency symbol.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Gets the <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             associated with the specified <see
-             cref="T:System.IFormatProvider" />
+             associated with the specified <see cref="T:System.IFormatProvider" />
 
             
 
@@ -3152,13 +2910,11 @@ containing the currency symbol.</para
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             associated with the specified <see
-             cref="T:System.IFormatProvider" />
+             associated with the specified <see cref="T:System.IFormatProvider" />
 
             
 
@@ -3166,17 +2922,19 @@ containing the currency symbol.</para
           >
         </returns>
         <param name="formatProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.IFormatProvider" />
+          The <see cref="T:System.IFormatProvider" />
 
           
 
-           used to get the <see
-           cref="T:System.Globalization.NumberFormatInfo" />
+           used to get the <see cref="T:System.Globalization.NumberFormatInfo" />
 
           
 
@@ -3210,14 +2968,12 @@ containing the currency symbol.</para
       <Docs>
         <value>
           <para
-            >A read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >A read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
              with property values which are
-   universally supported. The property values of the returned <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+   universally supported. The property values of the returned <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3228,8 +2984,7 @@ containing the currency symbol.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >This <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3239,8 +2994,7 @@ containing the currency symbol.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Gets a read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3275,8 +3029,7 @@ containing the currency symbol.</para
             
 
              if the current instance is read-only; otherwise
-<see
-             langword="false" />
+<see langword="false" />
 
             
 
@@ -3286,26 +3039,22 @@ containing the currency symbol.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Attempting to perform an assignment to a property of a read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Attempting to perform an assignment to a property of a read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             causes an <see
-             cref="T:System.InvalidOperationException" />
+             causes an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >You can call the <see
-             cref="M:System.Globalization.NumberFormatInfo.Clone" />
+            >You can call the <see cref="M:System.Globalization.NumberFormatInfo.Clone" />
 
             
 
-             method to create a read/write <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             method to create a read/write <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3316,8 +3065,7 @@ containing the currency symbol.</para
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether this <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Gets a value that indicates whether this <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -3347,8 +3095,7 @@ containing the currency symbol.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -3365,13 +3112,11 @@ containing the symbol for NaN values. </para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on NaN values, see <see
-             cref="T:System.Double" />
+            >For more information on NaN values, see <see cref="T:System.Double" />
 
             
 
-             or <see
-             cref="T:System.Single" />
+             or <see cref="T:System.Single" />
 
             
 
@@ -3407,8 +3152,7 @@ containing the symbol for NaN values. </para
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >The character set that is specified by the <see
-               cref="P:System.Globalization.NumberFormatInfo.NativeDigits" />
+              >The character set that is specified by the <see cref="P:System.Globalization.NumberFormatInfo.NativeDigits" />
 
               
 
@@ -3442,8 +3186,7 @@ containing the symbol for NaN values. </para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -3460,13 +3203,11 @@ containing the symbol for negative infinity. </para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on negative infinity, see <see
-             cref="T:System.Double" />
+            >For more information on negative infinity, see <see cref="T:System.Double" />
 
             
 
-             or <see
-             cref="T:System.Single" />
+             or <see cref="T:System.Single" />
 
             
 
@@ -3500,8 +3241,7 @@ containing the symbol for negative infinity. </para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -3546,8 +3286,7 @@ containing the symbol that indicates a value is negative. </para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -3564,13 +3303,11 @@ containing the number of decimal places for numeric values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberDecimalDigits" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.NumberDecimalDigits" />
 
             
 
-             property is used with the "F" and "N" standard format strings without a precision specifier in numeric formatting operations. It defines the default number of fractional digits that appear after the decimal separator. This value is overridden if a precision specifier is used. For more information, see <format
-             type="text/html">
+             property is used with the "F" and "N" standard format strings without a precision specifier in numeric formatting operations. It defines the default number of fractional digits that appear after the decimal separator. This value is overridden if a precision specifier is used. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -3606,8 +3343,7 @@ containing the number of decimal places for numeric values.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -3624,13 +3360,11 @@ containing the decimal separator.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
 
             
 
-             property is used with the "E", "F", "G", "N", and "R" standard format strings to define the symbol that separates integral from fractional digits. For more information, see <format
-             type="text/html">
+             property is used with the "E", "F", "G", "N", and "R" standard format strings to define the symbol that separates integral from fractional digits. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -3639,8 +3373,7 @@ containing the decimal separator.</para
             . </para
           >
           <para
-            >The initial value of this property is derived from the settings in the <ui
-            >Region and Language</ui>
+            >The initial value of this property is derived from the settings in the <ui>Region and Language</ui>
 
             
 
@@ -3674,8 +3407,7 @@ containing the decimal separator.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -3692,13 +3424,11 @@ containing the group separator.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
 
             
 
-              property is used with the "N" standard format string to define the symbol that separates groups of integers. For more information, see <format
-             type="text/html">
+              property is used with the "N" standard format string to define the symbol that separates groups of integers. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -3707,8 +3437,7 @@ containing the group separator.</para
             .</para
           >
           <para
-            >The initial value of this property is derived from the settings in the <ui
-            >Region and Language</ui>
+            >The initial value of this property is derived from the settings in the <ui>Region and Language</ui>
 
             
 
@@ -3742,8 +3471,7 @@ containing the group separator.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -3763,8 +3491,7 @@ containing the group separator.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
 
             
 
@@ -3802,20 +3529,17 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
+            >The value of the <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
 
             
 
-             property affects the result of number values that are formatted by using the "N" <format
-             type="text/html">
+             property affects the result of number values that are formatted by using the "N" <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format string</a>
             </format>
 
             
 
-            . If a custom numeric format string or other standard numeric format strings are used, the value of the <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
+            . If a custom numeric format string or other standard numeric format strings are used, the value of the <see cref="P:System.Globalization.NumberFormatInfo.NumberGroupSizes" />
 
             
 
@@ -3823,8 +3547,7 @@ class Test {
           >
           <para>Every element in the one-dimensional array must be an integer from 1 through 9. The last element can be 0.</para>
           <para
-            >The first element of the array defines the number of elements in the least significant group of digits immediately to the left of the <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
+            >The first element of the array defines the number of elements in the least significant group of digits immediately to the left of the <see cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
 
             
 
@@ -3859,8 +3582,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -3877,8 +3599,7 @@ between 0 and 4 inclusive that specifies the format of negative values.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberNegativePattern" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.NumberNegativePattern" />
 
             
 
@@ -3912,18 +3633,15 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.NumberNegativePattern" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.NumberNegativePattern" />
 
             
 
-             property defines the format of negative values formatted with the "N" standard numeric format string. This property has one of the values in the following table. The symbol "-" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+             property defines the format of negative values formatted with the "N" standard numeric format string. This property has one of the values in the following table. The symbol "-" is the <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
             
 
-             and <paramref
-             name="n" />
+             and <paramref name="n" />
 
             
 
@@ -4009,8 +3727,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -4027,13 +3744,11 @@ containing the number of decimal places in percent values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentDecimalDigits" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.PercentDecimalDigits" />
 
             
 
-             property is used with the "P" standard format string without a precision specifier in numeric formatting operations. It defines the default number of fractional digits that appear after the decimal separator. This value is overridden if a precision specifier is used. For more information, see <format
-             type="text/html">
+             property is used with the "P" standard format string without a precision specifier in numeric formatting operations. It defines the default number of fractional digits that appear after the decimal separator. This value is overridden if a precision specifier is used. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -4069,8 +3784,7 @@ containing the number of decimal places in percent values.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4086,13 +3800,11 @@ containing the number of decimal places in percent values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentDecimalSeparator" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.PercentDecimalSeparator" />
 
             
 
-             property is used with the "P" standard format string to define the symbol that separates integral from fractional digits. For more information, see <format
-             type="text/html">
+             property is used with the "P" standard format string to define the symbol that separates integral from fractional digits. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -4128,8 +3840,7 @@ containing the number of decimal places in percent values.</para
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4146,13 +3857,11 @@ containing the group separator symbol used in percent values.</para
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentGroupSeparator" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.PercentGroupSeparator" />
 
             
 
-              property is used with the "P" standard format string to define the symbol that separates groups of integers. For more information, see <format
-             type="text/html">
+              property is used with the "P" standard format string to define the symbol that separates groups of integers. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -4188,8 +3897,7 @@ containing the group separator symbol used in percent values.</para
       <Docs>
         <value>
           <para
-            > A <see
-             cref="T:System.Int32" />
+            > A <see cref="T:System.Int32" />
 
             
 
@@ -4209,8 +3917,7 @@ containing the group separator symbol used in percent values.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentGroupSizes" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.PercentGroupSizes" />
 
             
 
@@ -4253,13 +3960,11 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentGroupSizes" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.PercentGroupSizes" />
 
             
 
-             property is used with the "P" standard format string to define the number of digits that appear in integral groups. For more information, see <format
-             type="text/html">
+             property is used with the "P" standard format string to define the number of digits that appear in integral groups. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
@@ -4268,8 +3973,7 @@ class Test {
             . Every element in the one-dimensional array must be an integer from 1 through 9. The last element can be 0.</para
           >
           <para
-            >The first element of the array defines the number of elements in the least significant group of digits immediately to the left of the <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentDecimalSeparator" />
+            >The first element of the array defines the number of elements in the least significant group of digits immediately to the left of the <see cref="P:System.Globalization.NumberFormatInfo.PercentDecimalSeparator" />
 
             
 
@@ -4304,8 +4008,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -4323,8 +4026,7 @@ values.</para
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentNegativePattern" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.PercentNegativePattern" />
 
             
 
@@ -4355,30 +4057,25 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentNegativePattern" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.PercentNegativePattern" />
 
             
 
-             property is used with the "P" standard format string to define the pattern of negative percentage values. For more information, see <format
-             type="text/html">
+             property is used with the "P" standard format string to define the pattern of negative percentage values. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
             
 
-            . This property has one of the values in the following table. The symbol "%" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />
+            . This property has one of the values in the following table. The symbol "%" is the <see cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />
 
             
 
-            , the symbol "-" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
+            , the symbol "-" is the <see cref="P:System.Globalization.NumberFormatInfo.NegativeSign" />
 
             
 
-            , and <paramref
-             name="n" />
+            , and <paramref name="n" />
 
             
 
@@ -4520,8 +4217,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.Int32" />
+            >A <see cref="T:System.Int32" />
 
             
 
@@ -4538,8 +4234,7 @@ class Test {
         <example>
           <para
             >The following example demonstrates the effects of
-      different <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentPositivePattern" />
+      different <see cref="P:System.Globalization.NumberFormatInfo.PercentPositivePattern" />
 
             
 
@@ -4571,25 +4266,21 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentPositivePattern" />
+            >The <see cref="P:System.Globalization.NumberFormatInfo.PercentPositivePattern" />
 
             
 
-              property is used with the "P" standard format string to define pattern of positive percentage values. For more information, see <format
-             type="text/html">
+              property is used with the "P" standard format string to define pattern of positive percentage values. For more information, see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
             
 
-            . This property has one of the values in the following table. The symbol "%" is the <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />
+            . This property has one of the values in the following table. The symbol "%" is the <see cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />
 
             
 
-             and <paramref
-             name="n" />
+             and <paramref name="n" />
 
             
 
@@ -4667,8 +4358,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4684,20 +4374,17 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string assigned to the <see
-             cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />
+            >The string assigned to the <see cref="P:System.Globalization.NumberFormatInfo.PercentSymbol" />
 
             
 
-             property is included in the result string when a numeric value is formatted with the "P" <format
-             type="text/html">
+             property is included in the result string when a numeric value is formatted with the "P" <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
 
             
 
-             or with a format string that includes the "%" <format
-             type="text/html">
+             or with a format string that includes the "%" <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">custom numeric format specifier</a>
             </format>
 
@@ -4733,8 +4420,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4750,13 +4436,11 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The string assigned to the <see
-             cref="P:System.Globalization.NumberFormatInfo.PerMilleSymbol" />
+            >The string assigned to the <see cref="P:System.Globalization.NumberFormatInfo.PerMilleSymbol" />
 
             
 
-             property is included in the result string when a numeric value is formatted with a format string that includes the "‰" <format
-             type="text/html">
+             property is included in the result string when a numeric value is formatted with a format string that includes the "‰" <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">custom numeric format specifier</a>
             </format>
 
@@ -4792,8 +4476,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4810,13 +4493,11 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on positive infinity, see <see
-             cref="T:System.Double" />
+            >For more information on positive infinity, see <see cref="T:System.Double" />
 
             
 
-             or <see
-             cref="T:System.Single" />
+             or <see cref="T:System.Single" />
 
             
 
@@ -4850,8 +4531,7 @@ class Test {
       <Docs>
         <value>
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -4912,21 +4592,18 @@ class Test {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This wrapper prevents any modifications to <paramref
-             name="nfi" />
+            >This wrapper prevents any modifications to <paramref name="nfi" />
 
             
 
             .</para
           >
           <para
-            >Attempting to perform an assignment to a property of a read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Attempting to perform an assignment to a property of a read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             causes an <see
-             cref="T:System.InvalidOperationException" />
+             causes an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -4936,8 +4613,7 @@ class Test {
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >Returns a read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -4947,13 +4623,11 @@ class Test {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >A read-only <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             wrapper around <paramref
-             name="nfi" />
+             wrapper around <paramref name="nfi" />
 
             
 
@@ -4961,12 +4635,15 @@ class Test {
           >
         </returns>
         <param name="nfi">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Globalization.NumberFormatInfo" />
+          The <see cref="T:System.Globalization.NumberFormatInfo" />
 
           
 

@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Contains a collection of <see
-         cref="T:System.Data.Common.DataColumnMapping" />
+        >Contains a collection of <see cref="T:System.Data.Common.DataColumnMapping" />
 
         
 
@@ -46,8 +45,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >Creates an empty <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
@@ -74,8 +72,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Adds a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -87,7 +84,11 @@
           <para>The index of the DataColumnMapping object that was added to the collection.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -117,13 +118,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Adds a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object to the collection when given a source column name and a <see
-             cref="T:System.Data.DataSet" />
+             object to the collection when given a source column name and a <see cref="T:System.Data.DataSet" />
 
             
 
@@ -135,19 +134,26 @@
           <para>The DataColumnMapping object that was added to the collection.</para>
         </returns>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name of the source column to map to. </param
         >
         <param name="dataSetColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name, which is not case-sensitive, of the <see
-           cref="T:System.Data.DataSet" />
+          The name, which is not case-sensitive, of the <see cref="T:System.Data.DataSet" />
 
           
 
@@ -176,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Array" />
+            >Copies the elements of the specified <see cref="T:System.Array" />
 
             
 
@@ -185,12 +190,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Array" />
+          The <see cref="T:System.Array" />
 
           
 
@@ -215,8 +223,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the specified <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Copies the elements of the specified <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -224,12 +231,15 @@
           >
         </summary>
         <param name="values">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The array of <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The array of <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -253,8 +263,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Removes all <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -281,13 +290,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets a value indicating whether a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object with the given <see
-             cref="T:System.Object" />
+             object with the given <see cref="T:System.Object" />
 
             
 
@@ -297,8 +304,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the collection contains the specified <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >true if the collection contains the specified <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -306,17 +312,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that is the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+           that is the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -342,8 +350,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets a value indicating whether a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -353,8 +360,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if collection contains a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >true if collection contains a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -362,12 +368,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The case-sensitive source column name of the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The case-sensitive source column name of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -394,8 +403,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >Copies the elements of the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
@@ -403,24 +411,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Array" />
+          An <see cref="T:System.Array" />
 
           
 
-           to which to copy <see
-           cref="T:System.Data.Common.DataColumnMappingCollection" />
+           to which to copy <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
           
 
            elements. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -454,13 +468,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >Copies the elements of the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+             to the specified <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -468,12 +480,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in the <paramref
-           name="array" />
+          The zero-based index in the <paramref name="array" />
 
           
 
@@ -493,8 +508,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets the number of <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -532,13 +546,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object with the specified <see
-             cref="T:System.Data.DataSet" />
+             object with the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -548,13 +560,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >The <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object with the specified <see
-             cref="T:System.Data.DataSet" />
+             object with the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -562,12 +572,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name, which is not case-sensitive, of the <see
-           cref="T:System.Data.DataSet" />
+          The name, which is not case-sensitive, of the <see cref="T:System.Data.DataSet" />
 
           
 
@@ -597,21 +610,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >If the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
              exists in the collection, it is returned.</para
           >
           <para
-            >If the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >If the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             does not exist in the collection, for a given <see
-             cref="T:System.Data.MissingMappingAction" />
+             does not exist in the collection, for a given <see cref="T:System.Data.MissingMappingAction" />
 
             
 
@@ -634,18 +644,15 @@
               </term>
               <description>
                 <para
-                  >Creates a <see
-                   cref="T:System.Data.Common.DataColumnMapping" />
+                  >Creates a <see cref="T:System.Data.Common.DataColumnMapping" />
 
                   
 
-                   with the specified source column name as both the source column name and the <see
-                   cref="T:System.Data.DataSet" />
+                   with the specified source column name as both the source column name and the <see cref="T:System.Data.DataSet" />
 
                   
 
-                   column name. This <see
-                   cref="T:System.Data.Common.DataColumnMapping" />
+                   column name. This <see cref="T:System.Data.Common.DataColumnMapping" />
 
                   
 
@@ -659,8 +666,7 @@
               </term>
               <description>
                 <para
-                  >An <see
-                   cref="T:System.InvalidOperationException" />
+                  >An <see cref="T:System.InvalidOperationException" />
 
                   
 
@@ -681,18 +687,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             for the specified <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+             for the specified <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-            , source column name, and <see
-             cref="T:System.Data.MissingMappingAction" />
+            , source column name, and <see cref="T:System.Data.MissingMappingAction" />
 
             
 
@@ -702,8 +705,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >A <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -711,31 +713,41 @@
           >
         </returns>
         <param name="columnMappings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataColumnMappingCollection" />
+          The <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
           
 
           . </param
         >
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive source column name to find. </param
         >
         <param name="mappingAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.MissingMappingAction" />
+          One of the <see cref="T:System.Data.MissingMappingAction" />
 
           
 
@@ -782,13 +794,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A static method that returns a <see
-             cref="T:System.Data.DataColumn" />
+            >A static method that returns a <see cref="T:System.Data.DataColumn" />
 
             
 
-             object without instantiating a <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+             object without instantiating a <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
@@ -798,8 +808,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataColumn" />
+            >A <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -807,62 +816,82 @@
           >
         </returns>
         <param name="columnMappings">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataColumnMappingCollection" />
+          The <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
           
 
           .</param
         >
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive column name from a data source.</param
         >
         <param name="dataType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data type for the column being mapped.</param
         >
         <param name="dataTable">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An instance of <see
-           cref="T:System.Data.DataTable" />
+          An instance of <see cref="T:System.Data.DataTable" />
 
           
 
           .</param
         >
         <param name="mappingAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.MissingMappingAction" />
+          One of the <see cref="T:System.Data.MissingMappingAction" />
 
           
 
            values.</param
         >
         <param name="schemaAction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Determines the action to take when the existing <see
-           cref="T:System.Data.DataSet" />
+          Determines the action to take when the existing <see cref="T:System.Data.DataSet" />
 
           
 
@@ -889,8 +918,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -917,13 +945,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Object" />
+            >Gets the location of the specified <see cref="T:System.Object" />
 
             
 
-             that is a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+             that is a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -933,13 +959,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Object" />
+            >The zero-based location of the specified <see cref="T:System.Object" />
 
             
 
-             that is a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+             that is a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -947,17 +971,19 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Object" />
+          An <see cref="T:System.Object" />
 
           
 
-           that is the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+           that is the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -983,8 +1009,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets the location of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -994,8 +1019,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >The zero-based location of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1003,7 +1027,11 @@
           >
         </returns>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1032,13 +1060,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the location of the specified <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets the location of the specified <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             with the given <see
-             cref="T:System.Data.DataSet" />
+             with the given <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1048,8 +1074,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based location of the specified <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >The zero-based location of the specified <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1057,7 +1082,11 @@
           >
         </returns>
         <param name="dataSetColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1091,13 +1120,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Inserts a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object into the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+             object into the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
@@ -1105,12 +1132,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The zero-based index of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -1133,13 +1163,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Inserts a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object into the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+             object into the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
@@ -1149,8 +1177,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >A <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1158,24 +1185,30 @@
           >
         </returns>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The zero-based index of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
            object to insert. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -1269,8 +1302,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Removes the specified <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1278,12 +1310,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -1305,13 +1340,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Object" />
+            >Removes the <see cref="T:System.Object" />
 
             
 
-             that is a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+             that is a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1319,17 +1352,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Object" />
+          The <see cref="T:System.Object" />
 
           
 
-           that is the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+           that is the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -1355,8 +1390,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Removes the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1364,12 +1398,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <see
-           cref="T:System.Data.Common.DataColumnMapping" />
+          The zero-based index of the <see cref="T:System.Data.Common.DataColumnMapping" />
 
           
 
@@ -1395,8 +1432,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Removes the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
@@ -1404,7 +1440,11 @@
           >
         </summary>
         <param name="sourceColumn">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1434,21 +1474,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+            >For more information, see <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
@@ -1458,8 +1495,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets a value that indicates whether access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1486,21 +1522,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.ICollection" />
+             instance is cast to an <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+            >For more information, see <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
@@ -1510,8 +1543,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1535,21 +1567,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For more information, see <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -1559,8 +1588,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Collections.IList" />
+            >Gets a value that indicates whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1584,21 +1612,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="P:System.Collections.IList.IsReadOnly" />
+            >For more information, see <see cref="P:System.Collections.IList.IsReadOnly" />
 
             
 
@@ -1608,8 +1633,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the <see
-             cref="T:System.Collections.IList" />
+            >Gets a value that indicates whether the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1662,21 +1686,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IColumnMappingCollection" />
+             instance is cast to an <see cref="T:System.Data.IColumnMappingCollection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IColumnMappingCollection.Add(System.String,System.String)" />
+            >For more information, see <see cref="M:System.Data.IColumnMappingCollection.Add(System.String,System.String)" />
 
             
 
@@ -1686,18 +1707,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds a <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Adds a <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object to the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+             object to the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             by using the source column and <see
-             cref="T:System.Data.DataSet" />
+             by using the source column and <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1709,19 +1727,26 @@
           <para>The ColumnMapping object that was added to the collection.</para>
         </returns>
         <param name="sourceColumnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The case-sensitive name of the source column.</param
         >
         <param name="dataSetColumnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of the <see
-           cref="T:System.Data.DataSet" />
+          The name of the <see cref="T:System.Data.DataSet" />
 
           
 
@@ -1749,21 +1774,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Data.Common.DataColumnMappingCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Data.Common.DataColumnMappingCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Data.IColumnMappingCollection" />
+             instance is cast to an <see cref="T:System.Data.IColumnMappingCollection" />
 
             
 
              interface.</para
           >
           <para
-            >For more information, see <see
-             cref="M:System.Data.IColumnMappingCollection.GetByDataSetColumn(System.String)" />
+            >For more information, see <see cref="M:System.Data.IColumnMappingCollection.GetByDataSetColumn(System.String)" />
 
             
 
@@ -1773,13 +1795,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >Gets the <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object that has the specified <see
-             cref="T:System.Data.DataSet" />
+             object that has the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1789,13 +1809,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.Common.DataColumnMapping" />
+            >The <see cref="T:System.Data.Common.DataColumnMapping" />
 
             
 
-             object that  has the specified <see
-             cref="T:System.Data.DataSet" />
+             object that  has the specified <see cref="T:System.Data.DataSet" />
 
             
 
@@ -1803,12 +1821,15 @@
           >
         </returns>
         <param name="dataSetColumnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name, which is not case-sensitive, of the <see
-           cref="T:System.Data.DataSet" />
+          The name, which is not case-sensitive, of the <see cref="T:System.Data.DataSet" />
 
           
 

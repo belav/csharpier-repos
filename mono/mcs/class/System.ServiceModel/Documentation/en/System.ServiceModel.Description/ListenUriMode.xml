@@ -16,64 +16,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The URI for the endpoint on which a service listens can be set programmatically using the <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+        >The URI for the endpoint on which a service listens can be set programmatically using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
         
 
-         property and the value of the <see
-         cref="T:System.ServiceModel.Description.ListenUriMode" />
+         property and the value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
         
 
-         for that endpoint is set using the <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
+         for that endpoint is set using the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
 
         
 
-         property. The default value for <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+         property. The default value for <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
         
 
-         is <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.Address" />
+         is <see cref="P:System.ServiceModel.Description.ServiceEndpoint.Address" />
 
         
 
-        . The default value for <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
+        . The default value for <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
 
         
 
-         is <see
-         cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
+         is <see cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
 
         
 
         .</para
       >
       <para
-        >The value of these properties may also be set using the <see
-         cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" />
+        >The value of these properties may also be set using the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUri" />
 
         
 
-         property and the <see
-         cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUriMode" />
+         property and the <see cref="P:System.ServiceModel.Configuration.ServiceEndpointElement.ListenUriMode" />
 
         
 
          property.</para
       >
       <para
-        >When the value of the <see
-         cref="T:System.ServiceModel.Description.ListenUriMode" />
+        >When the value of the <see cref="T:System.ServiceModel.Description.ListenUriMode" />
 
         
 
-         is set to <see
-         cref="F:System.ServiceModel.Description.ListenUriMode.Unique" />
+         is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Unique" />
 
         
 
@@ -82,8 +71,7 @@
       <list type="bullet">
         <item>
           <para
-            >For TCP in exclusive mode (<see
-             cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.PortSharingEnabled" />
+            >For TCP in exclusive mode (<see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.PortSharingEnabled" />
 
             
 
@@ -92,13 +80,11 @@
         </item>
         <item>
           <para
-            > For TCP in port sharing mode (<see
-             cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.PortSharingEnabled" />
+            > For TCP in port sharing mode (<see cref="P:System.ServiceModel.Channels.TcpTransportBindingElement.PortSharingEnabled" />
 
             
 
-             is true) and for all of the other existing indigo2 transports, this means appending a unique path (a GUID) to the end of the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+             is true) and for all of the other existing indigo2 transports, this means appending a unique path (a GUID) to the end of the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 
@@ -107,18 +93,15 @@
         </item>
       </list>
       <para
-        >When the value of the <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
+        >When the value of the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUriMode" />
 
         
 
-         is set to <see
-         cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
+         is set to <see cref="F:System.ServiceModel.Description.ListenUriMode.Explicit" />
 
         
 
-         mode, the transport uses the <see
-         cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+         mode, the transport uses the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
         
 
@@ -148,8 +131,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+            >Uses the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 
@@ -175,8 +157,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specifies that the transport should use a transport-specific mechanism to ensure that the <see
-             cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+            >Specifies that the transport should use a transport-specific mechanism to ensure that the <see cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
 
             
 

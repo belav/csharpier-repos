@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="P:System.Net.HttpListener.Prefixes" />
+        >The <see cref="P:System.Net.HttpListener.Prefixes" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the collection used to store Uniform Resource Identifier (URI) prefixes for <see
-         cref="T:System.Net.HttpListener" />
+        >Represents the collection used to store Uniform Resource Identifier (URI) prefixes for <see cref="T:System.Net.HttpListener" />
 
         
 
@@ -72,54 +70,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method adds a URI prefix to the set of prefixes managed by the associated <see
-             cref="T:System.Net.HttpListener" />
+            >This method adds a URI prefix to the set of prefixes managed by the associated <see cref="T:System.Net.HttpListener" />
 
             
 
-             object. When checking <paramref
-             name="uriPrefix" />
+             object. When checking <paramref name="uriPrefix" />
 
             
 
              to ensure it is valid, case is ignored.</para
           >
           <para
-            >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path, for example, "http://www.contoso.com:8080/customerData/". The prefix must be terminated with a forward slash ("/"). The <see
-             cref="T:System.Net.HttpListener" />
+            >A URI prefix string is composed of a scheme (http or https), a host, an optional port, and an optional path, for example, "http://www.contoso.com:8080/customerData/". The prefix must be terminated with a forward slash ("/"). The <see cref="T:System.Net.HttpListener" />
 
             
 
-             with the prefix that most closely matches a requested URI responds to the request. Multiple <see
-             cref="T:System.Net.HttpListener" />
+             with the prefix that most closely matches a requested URI responds to the request. Multiple <see cref="T:System.Net.HttpListener" />
 
             
 
-             objects cannot add the same prefix. An <see
-             cref="T:System.Net.HttpListenerException" />
+             objects cannot add the same prefix. An <see cref="T:System.Net.HttpListenerException" />
 
             
 
-             exception is thrown if an <see
-             cref="T:System.Net.HttpListener" />
+             exception is thrown if an <see cref="T:System.Net.HttpListener" />
 
             
 
              adds a prefix that is already in use. </para
           >
           <para
-            >When a port is specified, the host element can be replaced with "*" to indicate that the <see
-             cref="T:System.Net.HttpListener" />
+            >When a port is specified, the host element can be replaced with "*" to indicate that the <see cref="T:System.Net.HttpListener" />
 
             
 
-             accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any other <see
-             cref="T:System.Net.HttpListener" />
+             accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any other <see cref="T:System.Net.HttpListener" />
 
             
 
-            , the prefix is "http://*:8080/". Similarly, to specify that the <see
-             cref="T:System.Net.HttpListener" />
+            , the prefix is "http://*:8080/". Similarly, to specify that the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -131,12 +120,15 @@
           <para>Adds a Uniform Resource Identifier (URI) prefix to the collection.</para>
         </summary>
         <param name="uriPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -164,8 +156,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >After calling this method, you cannot start the associated <see
-             cref="T:System.Net.HttpListener" />
+            >After calling this method, you cannot start the associated <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -204,8 +195,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Boolean" />
+            >Returns a <see cref="T:System.Boolean" />
 
             
 
@@ -215,8 +205,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if this collection contains the prefix specified by <paramref
-             name="uriPrefix" />
+            >true if this collection contains the prefix specified by <paramref name="uriPrefix" />
 
             
 
@@ -224,12 +213,15 @@
           >
         </returns>
         <param name="uriPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -264,8 +256,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of an <see
-             cref="T:System.Net.HttpListenerPrefixCollection" />
+            >Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" />
 
             
 
@@ -273,24 +264,30 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one dimensional <see
-           cref="T:System.Array" />
+          The one dimensional <see cref="T:System.Array" />
 
           
 
            that receives the Uniform Resource Identifier (URI) prefix strings in this collection.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -325,8 +322,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the contents of an <see
-             cref="T:System.Net.HttpListenerPrefixCollection" />
+            >Copies the contents of an <see cref="T:System.Net.HttpListenerPrefixCollection" />
 
             
 
@@ -334,19 +330,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The one dimensional string array that receives the Uniform Resource Identifier (URI) prefix strings in this collection.</param
         >
         <param name="offset">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -398,44 +401,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method before you can access the first element. To access the element at the current position, call the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property.</para
           >
           <para
-            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             causes an <see
-             cref="T:System.InvalidOperationException" />
+             causes an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >For a detailed description of enumerators, see the documentation for the <see
-             cref="T:System.Collections.IEnumerator" />
+            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             class and the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+             class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -449,8 +445,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see
-             cref="T:System.Collections.IEnumerator" />
+            >An object that implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -526,8 +521,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="uriPrefix" />
+            >If <paramref name="uriPrefix" />
 
             
 
@@ -537,8 +531,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified Uniform Resource Identifier (URI) from the list of prefixes handled by the <see
-             cref="T:System.Net.HttpListener" />
+            >Removes the specified Uniform Resource Identifier (URI) from the list of prefixes handled by the <see cref="T:System.Net.HttpListener" />
 
             
 
@@ -548,13 +541,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <paramref
-             name="uriPrefix" />
+            >true if the <paramref name="uriPrefix" />
 
             
 
-             was found in the <see
-             cref="T:System.Net.HttpListenerPrefixCollection" />
+             was found in the <see cref="T:System.Net.HttpListenerPrefixCollection" />
 
             
 
@@ -562,12 +553,15 @@
           >
         </returns>
         <param name="uriPrefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -597,44 +591,37 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >The object that is returned by this method is initially positioned before the first element in this collection. You must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             method before you can access the first element. To access the element at the current position, call the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             method before you can access the first element. To access the element at the current position, call the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property.</para
           >
           <para
-            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Do not modify the collection while using the enumerator. If the collection is modified while an enumerator is in use, an attempt to set the position by calling <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             causes an <see
-             cref="T:System.InvalidOperationException" />
+             causes an <see cref="T:System.InvalidOperationException" />
 
             
 
             .</para
           >
           <para
-            >For a detailed description of enumerators, see the documentation for the <see
-             cref="T:System.Collections.IEnumerator" />
+            >For a detailed description of enumerators, see the documentation for the <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             class and the <see
-             cref="M:System.Collections.IEnumerable.GetEnumerator" />
+             class and the <see cref="M:System.Collections.IEnumerable.GetEnumerator" />
 
             
 
@@ -648,8 +635,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An object that implements the <see
-             cref="T:System.Collections.IEnumerator" />
+            >An object that implements the <see cref="T:System.Collections.IEnumerator" />
 
             
 

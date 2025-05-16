@@ -4,8 +4,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="N:System.Runtime.Serialization" />
+        >The <see cref="N:System.Runtime.Serialization" />
 
         
 
@@ -15,21 +14,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Runtime.Serialization.ISerializable" />
+        >The <see cref="T:System.Runtime.Serialization.ISerializable" />
 
         
 
-         interface provides a way for classes to control their own serialization behavior. Classes in the <see
-         cref="N:System.Runtime.Serialization.Formatters" />
+         interface provides a way for classes to control their own serialization behavior. Classes in the <see cref="N:System.Runtime.Serialization.Formatters" />
 
         
 
          namespace control the actual formatting of various data types encapsulated in the serialized objects.</para
       >
       <para
-        >Formatters that serialize and deserialize objects to and from a particular format can be found in the <see
-         cref="N:System.Runtime.Serialization.Formatters" />
+        >Formatters that serialize and deserialize objects to and from a particular format can be found in the <see cref="N:System.Runtime.Serialization.Formatters" />
 
         
 

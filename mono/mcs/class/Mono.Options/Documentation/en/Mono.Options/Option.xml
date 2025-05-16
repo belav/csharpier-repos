@@ -11,12 +11,10 @@
     <AssemblyVersion>0.2.2.0</AssemblyVersion>
     <AssemblyVersion>0.2.3.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadingSafetyStatement
-    >
+  <ThreadingSafetyStatement>
     All members of this type are safe for multithreaded operations.
     Subclasses must be thread-safe if multithreaded invocation of 
-    <see
-     cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable&lt;System.String&gt;)" />
+    <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable&lt;System.String&gt;)" />
 
     
 
@@ -33,16 +31,13 @@
       Represents information about an option.
     </summary>
     <remarks>
-      <para
-        >
-        Instances of <see
-         cref="T:Mono.Options.Option" />
+      <para>
+        Instances of <see cref="T:Mono.Options.Option" />
 
         
 
          are created via
-        the various <see
-         cref="M:Mono.Options.OptionSet.Add" />
+        the various <see cref="M:Mono.Options.OptionSet.Add" />
 
         
 
@@ -92,22 +87,18 @@
           </term>
         </item>
       </list>
-      <para
-        >
-        You can also add custom <see
-         cref="T:Mono.Options.Option" />
+      <para>
+        You can also add custom <see cref="T:Mono.Options.Option" />
 
         
 
          
-        subclasses to an <see
-         cref="T:Mono.Options.OptionSet" />
+        subclasses to an <see cref="T:Mono.Options.OptionSet" />
 
         
 
          via the 
-        <see
-         cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
+        <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
 
         
 
@@ -115,29 +106,24 @@
         method.
       </para
       >
-      <block subset="none" type="overrides"
-        >
-        Inheritors of this type must override the <see
-         langword="abstract" />
+      <block subset="none" type="overrides">
+        Inheritors of this type must override the <see langword="abstract" />
 
         
 
          method
-        <see
-         cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+        <see cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
 
         
 
         ,
         which is (indirectly) invoked from within 
-        <see
-         cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+        <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
 
         
 
         
-        when an option matching one of the <paramref
-         name="prototype" />
+        when an option matching one of the <paramref name="prototype" />
 
         
 
@@ -169,15 +155,12 @@
         <Parameter Name="description" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
-           containing a <c
-          >|</c>
+           containing a <c>|</c>
 
           
 
@@ -185,10 +168,8 @@
           list of option names (aliases) and an optional value-type specifier.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
@@ -196,11 +177,9 @@
           option.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
@@ -208,66 +187,54 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
-            <see
-             cref="P:Mono.Options.Option.Prototype" />
+            <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
              property of the
-            new instance using <paramref
-             name="prototype" />
+            new instance using <paramref name="prototype" />
 
             
 
             , the 
-            <see
-             cref="P:Mono.Options.Option.Description" />
+            <see cref="P:Mono.Options.Option.Description" />
 
             
 
              property of the
-            new instance using <paramref
-             name="description" />
+            new instance using <paramref name="description" />
 
             
 
             . and
-            initializes the <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+            initializes the <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
              
-            property of the new instance to <c
-            >1</c>
+            property of the new instance to <c>1</c>
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             This is equivalent to calling the 
-            <see
-             cref="C:Mono.Options.Option(System.String,System.String,System.Int32,System.Boolean)" />
+            <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32,System.Boolean)" />
 
             
 
             
             constructor as with <c
-
-              >Option(<paramref
-               name="prototype" />
+              >Option(<paramref name="prototype" />
 
               
 
               , 
-            <paramref
-               name="description" />
+            <paramref name="description" />
 
               
 
@@ -286,8 +253,7 @@
 
             
 
-             is the empty string <c
-            >""</c>
+             is the empty string <c>""</c>
 
             
 
@@ -301,8 +267,7 @@
             
 
              contains an empty alias, such as
-            <c
-            >a||b</c>
+            <c>a||b</c>
 
             
 
@@ -310,16 +275,13 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
-            Conflicting <see
-             cref="T:Mono.Options.OptionValueType" />
+          <para>
+            Conflicting <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              values
-            were found within <paramref
-             name="prototype" />
+            were found within <paramref name="prototype" />
 
             
 
@@ -333,25 +295,21 @@
             
 
              only includes the default handler
-            <c
-            >&lt;&gt;</c>
+            <c>&lt;&gt;</c>
 
             
 
-             and <paramref
-             name="prototype" />
+             and <paramref name="prototype" />
 
             
 
              did not specify an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
@@ -364,8 +322,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -396,15 +353,12 @@
         <Parameter Name="maxValueCount" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
-           containing a <c
-          >|</c>
+           containing a <c>|</c>
 
           
 
@@ -412,10 +366,8 @@
           list of option names (aliases) and an optional value-type specifier.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
@@ -423,10 +375,8 @@
           option.
         </param
         >
-        <param name="maxValueCount"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="maxValueCount">
+          A <see cref="T:System.Int32" />
 
           
 
@@ -434,11 +384,9 @@
           option accepts.
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the 
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
@@ -446,71 +394,58 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the 
-            <see
-             cref="P:Mono.Options.Option.Prototype" />
+            <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
              property of the
-            new instance using <paramref
-             name="prototype" />
+            new instance using <paramref name="prototype" />
 
             
 
             , the 
-            <see
-             cref="P:Mono.Options.Option.Description" />
+            <see cref="P:Mono.Options.Option.Description" />
 
             
 
              property of the
-            new instance using <paramref
-             name="description" />
+            new instance using <paramref name="description" />
 
             
 
             . and
-            initializes the <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+            initializes the <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
             
-            property of the new instance to <c
-            >1</c>
+            property of the new instance to <c>1</c>
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             This is equivalent to calling the
-            <see
-             cref="C:Mono.Options.Option(System.String,System.String,System.Int32,System.Boolean)" />
+            <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32,System.Boolean)" />
 
             
 
             
             constructor as with <c
-
-              >Option(<paramref
-               name="prototype" />
+              >Option(<paramref name="prototype" />
 
               
 
               ,
-            <paramref
-               name="description" />
+            <paramref name="description" />
 
               
 
-              , <paramref
-               name="maxValueCount" />
+              , <paramref name="maxValueCount" />
 
               
 
@@ -529,8 +464,7 @@
 
             
 
-             is the empty string <c
-            >""</c>
+             is the empty string <c>""</c>
 
             
 
@@ -544,8 +478,7 @@
             
 
              contains an empty alias, such as
-            <c
-            >a||b</c>
+            <c>a||b</c>
 
             
 
@@ -553,16 +486,13 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
-            Conflicting <see
-             cref="T:Mono.Options.OptionValueType" />
+          <para>
+            Conflicting <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              values
-            were found within <paramref
-             name="prototype" />
+            were found within <paramref name="prototype" />
 
             
 
@@ -575,32 +505,27 @@
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
              and
-            <paramref
-             name="prototype" />
+            <paramref name="prototype" />
 
             
 
              specified an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              or
-            <see
-             cref="F:Mono.Options.OptionValueType.Required" />
+            <see cref="F:Mono.Options.OptionValueType.Required" />
 
             
 
@@ -613,26 +538,22 @@
 
             
 
-             is greater than <c
-            >1</c>
+             is greater than <c>1</c>
 
             
 
              and
-            <paramref
-             name="prototype" />
+            <paramref name="prototype" />
 
             
 
              specified an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
@@ -646,18 +567,15 @@
             
 
              contains a separator list and
-            <paramref
-             name="maxValueCount" />
+            <paramref name="maxValueCount" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
-             or <c
-            >1</c>
+             or <c>1</c>
 
             
 
@@ -671,18 +589,15 @@
             
 
              contains a badly formatted
-            separator list, such as <c
-            >{{</c>
+            separator list, such as <c>{{</c>
 
             
 
-            , <c
-            >}}</c>
+            , <c>}}</c>
 
             
 
-            , <c
-            >{{}</c>
+            , <c>{{}</c>
 
             
 
@@ -696,25 +611,21 @@
             
 
              only includes the default handler
-            <c
-            >&lt;&gt;</c>
+            <c>&lt;&gt;</c>
 
             
 
-             and <paramref
-             name="prototype" />
+             and <paramref name="prototype" />
 
             
 
              did not specify an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
@@ -728,19 +639,16 @@
             
 
              includes the default handler
-            <c
-            >&lt;&gt;</c>
+            <c>&lt;&gt;</c>
 
             
 
-            , and <paramref
-             name="MaxValueCount" />
+            , and <paramref name="MaxValueCount" />
 
             
 
              is greater
-            than <c
-            >1</c>
+            than <c>1</c>
 
             
 
@@ -753,8 +661,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -783,15 +690,12 @@
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="prototype"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="prototype">
+          A <see cref="T:System.String" />
 
           
 
-           containing a <c
-          >|</c>
+           containing a <c>|</c>
 
           
 
@@ -799,10 +703,8 @@
           list of option names (aliases) and an optional value-type specifier.
         </param
         >
-        <param name="description"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="description">
+          A <see cref="T:System.String" />
 
           
 
@@ -810,10 +712,8 @@
           option.
         </param
         >
-        <param name="maxValueCount"
-          >
-          A <see
-           cref="T:System.Int32" />
+        <param name="maxValueCount">
+          A <see cref="T:System.Int32" />
 
           
 
@@ -821,28 +721,23 @@
           option accepts.
         </param
         >
-        <param name="hidden"
-          >
-          A <see
-           cref="T:System.Boolean" />
+        <param name="hidden">
+          A <see cref="T:System.Boolean" />
 
           
 
            specifying whether or not the
           Option should be displayed in
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
 
           
 
           .
         </param
         >
-        <summary
-          >
+        <summary>
           Creates and initializes a new instance of the
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
@@ -850,53 +745,44 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This constructor initializes the
-            <see
-             cref="P:Mono.Options.Option.Prototype" />
+            <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
              property of the
-            new instance using <paramref
-             name="prototype" />
+            new instance using <paramref name="prototype" />
 
             
 
             , the
-            <see
-             cref="P:Mono.Options.Option.Description" />
+            <see cref="P:Mono.Options.Option.Description" />
 
             
 
              property of the
-            new instance using <paramref
-             name="description" />
+            new instance using <paramref name="description" />
 
             
 
             ,
-            initializes the <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+            initializes the <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
              
-            property of the new instance using <paramref
-             name="maxValueCount" />
+            property of the new instance using <paramref name="maxValueCount" />
 
             
 
             ,
-            and initializes the <see
-             cref="P:Mono.Options.Option.Hidden" />
+            and initializes the <see cref="P:Mono.Options.Option.Hidden" />
 
             
 
             
-            property of the new instance using <paramref
-             name="hidden" />
+            property of the new instance using <paramref name="hidden" />
 
             
 
@@ -908,38 +794,32 @@
 
             
 
-             is a <c
-            >|</c>
+             is a <c>|</c>
 
             
 
             -separated list of
             option names.  It should be listed in shortest-to-longest order,
-            e.g. <c
-            >h|help</c>
+            e.g. <c>h|help</c>
 
             
 
-            .  <paramref
-             name="prototype" />
+            .  <paramref name="prototype" />
 
             
 
              may contain a
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              specifier following
-            one of the <c
-            >|</c>
+            one of the <c>|</c>
 
             
 
             -separated entries, and a value separator list
-            following the <see
-             cref="T:Mono.Options.OptionValueType" />
+            following the <see cref="T:Mono.Options.OptionValueType" />
 
             
 
@@ -947,224 +827,186 @@
             specifier.
           </para
           >
-          <para
-            >
-            The <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+          <para>
+            The <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              property
-            is initialized based on whether a <c
-            >=</c>
+            is initialized based on whether a <c>=</c>
 
             
 
-             or <c
-            >:</c>
+             or <c>:</c>
 
             
 
              follows one
-            of the aliases within <paramref
-             name="prototype" />
+            of the aliases within <paramref name="prototype" />
 
             
 
             .
-            <c
-            >=</c>
+            <c>=</c>
 
             
 
              specifies a 
-            <see
-             cref="F:Mono.Options.OptionValueType.Required" />
+            <see cref="F:Mono.Options.OptionValueType.Required" />
 
             
 
              value,
-            while <c
-            >:</c>
+            while <c>:</c>
 
             
 
              specifies an 
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              value.  
-            If neither <c
-            >=</c>
+            If neither <c>=</c>
 
             
 
-             nor <c
-            >:</c>
+             nor <c>:</c>
 
             
 
              is not specified, then 
-            <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
              is used.
             The value specifier may be used anywhere within 
-            <paramref
-             name="prototype" />
+            <paramref name="prototype" />
 
             
 
-            , so <c
-            >n|name=</c>
+            , so <c>n|name=</c>
 
             
 
-            , <c
-            >n=|name</c>
+            , <c>n=|name</c>
 
             
 
              
-            and <c
-            >n=|name=</c>
+            and <c>n=|name=</c>
 
             
 
              are equivalent, but you cannot mix types; 
-            <c
-            >n:|name=</c>
+            <c>n:|name=</c>
 
             
 
              is invalid.
           </para
           >
-          <para
-            >
-            A default handler may be specified by using <c
-            >&lt;&gt;</c>
+          <para>
+            A default handler may be specified by using <c>&lt;&gt;</c>
 
             
 
              as the
             option name.  The default handler is invoked for any unhandled
             argument within 
-        		<see
-             cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+        		<see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
             ;
             consequently, if a default handler is provided then
-        		<see
-             cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
+        		<see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
 
             
 
             
             will return an empty 
-            <see
-             cref="T:System.Collections.Generic.List{System.String}" />
+            <see cref="T:System.Collections.Generic.List{System.String}" />
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             The default handler may either be provided as a stand-alone 
-            <see
-             cref="T:Mono.Options.Option" />
+            <see cref="T:Mono.Options.Option" />
 
             
 
             , in which case it may not
-            specify a <see
-             cref="T:Mono.Options.OptionValueType" />
+            specify a <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              other
-            than <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            than <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
             .
             Alternatively, it may be an alias, in which case the 
-            <see
-             cref="T:Mono.Options.Option" />
+            <see cref="T:Mono.Options.Option" />
 
             
 
              must accept an
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              or
-            <see
-             cref="F:Mono.Options.OptionValueType.Required" />
+            <see cref="F:Mono.Options.OptionValueType.Required" />
 
             
 
              value, and
-            <paramref
-             name="maxValueCount" />
+            <paramref name="maxValueCount" />
 
             
 
-             must be <c
-            >1</c>
+             must be <c>1</c>
 
             
 
             .
           </para
           >
-          <para
-            >
+          <para>
             Multiple values may be bundled together, such as 
-            <c
-            >-opt key=value</c>
+            <c>-opt key=value</c>
 
             
 
             .  The value separator list specifies which
             characters can be used to split the value argument to generate
             separate values.  The value separator list is available when 
-            <paramref
-             name="maxValueCount" />
+            <paramref name="maxValueCount" />
 
             
 
-             is greater than <c
-            >1</c>
+             is greater than <c>1</c>
 
             
 
             , and
-            and an <see
-             cref="T:Mono.Options.OptionValueType" />
+            and an <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              was
-            specified.  The value separator list follows the <c
-            >=</c>
+            specified.  The value separator list follows the <c>=</c>
 
             
 
              or
-            <c
-            >:</c>
+            <c>:</c>
 
             
 
@@ -1174,32 +1016,26 @@
           <list type="bullet">
             <item>
               <term>
-                <para
-                  >
-                A sequence of character enclosed by <c
-                  >{</c>
+                <para>
+                A sequence of character enclosed by <c>{</c>
 
                   
 
-                   and <c
-                  >}</c>
+                   and <c>}</c>
 
                   
 
                   .
                 Multiple such sequences may be specified by listing the 
-                <c
-                  >{...}</c>
+                <c>{...}</c>
 
                   
 
                    sequence multiple times.
               </para
                 >
-                <para
-                  >
-                The sequence <c
-                  >{}</c>
+                <para>
+                The sequence <c>{}</c>
 
                   
 
@@ -1207,8 +1043,7 @@
                 argument, and no argument splitting will be performed.
                 This sequence has no effect if other separators are also
                 listed (as separate arguments are always permitted for
-                <see
-                   cref="F:Mono.Options.OptionValueType.Required" />
+                <see cref="F:Mono.Options.OptionValueType.Required" />
 
                   
 
@@ -1219,15 +1054,12 @@
               </term>
             </item>
             <item>
-              <term
-                >
-              Any literal character other than <c
-                >{</c>
+              <term>
+              Any literal character other than <c>{</c>
 
                 
 
-                 and <c
-                >}</c>
+                 and <c>}</c>
 
                 
 
@@ -1236,10 +1068,8 @@
               >
             </item>
           </list>
-          <para
-            >
-            If the separator list is not provided, then <c
-            >=:</c>
+          <para>
+            If the separator list is not provided, then <c>=:</c>
 
             
 
@@ -1247,115 +1077,94 @@
             default separator list.
           </para
           >
-          <para
-            >
-            For example, the prototype <c
-            >"A:+-*/"</c>
+          <para>
+            For example, the prototype <c>"A:+-*/"</c>
 
             
 
              would permit any of
-            `<c
-            >+</c>
+            `<c>+</c>
 
             
 
-            ', `<c
-            >-</c>
+            ', `<c>-</c>
 
             
 
-            ', `<c
-            >*</c>
+            ', `<c>*</c>
 
             
 
-            ', or `<c
-            >/</c>
+            ', or `<c>/</c>
 
             
 
             ' to be used to
-            split an argument into values, so <c
-            >-A:5/2</c>
+            split an argument into values, so <c>-A:5/2</c>
 
             
 
              would generate the
-            sequence of values <c
-            >5</c>
+            sequence of values <c>5</c>
 
             
 
-             and <c
-            >2</c>
+             and <c>2</c>
 
             
 
-             for the option <c
-            >-A</c>
+             for the option <c>-A</c>
 
             
 
             .
-            Furthermore, the prototype <c
-            >"A={--&gt;}{=&gt;}"</c>
+            Furthermore, the prototype <c>"A={--&gt;}{=&gt;}"</c>
 
             
 
              would permit
-            either the string <c
-            >--&gt;</c>
+            either the string <c>--&gt;</c>
 
             
 
-             or the string <c
-            >=&gt;</c>
+             or the string <c>=&gt;</c>
 
             
 
              to be used,
-            so <c
-            >-A A-&gt;B C</c>
+            so <c>-A A-&gt;B C</c>
 
             
 
-             woud parse <c
-            >A-&gt;B</c>
+             woud parse <c>A-&gt;B</c>
 
             
 
              as one value and
-            <c
-            >C</c>
+            <c>C</c>
 
             
 
-             as the other value, while <c
-            >-A A--&gt;B C</c>
+             as the other value, while <c>-A A--&gt;B C</c>
 
             
 
              would parse
-            <c
-            >A</c>
+            <c>A</c>
 
             
 
-             as one value and <c
-            >B</c>
+             as one value and <c>B</c>
 
             
 
              as the other value while
-            <c
-            >C</c>
+            <c>C</c>
 
             
 
              would be unhandled (unless the option required 3 values,
-            in which case <c
-            >C</c>
+            in which case <c>C</c>
 
             
 
@@ -1369,8 +1178,7 @@
 
             
 
-             is the empty string <c
-            >""</c>
+             is the empty string <c>""</c>
 
             
 
@@ -1384,8 +1192,7 @@
             
 
              contains an empty alias, such as
-            <c
-            >a||b</c>
+            <c>a||b</c>
 
             
 
@@ -1393,16 +1200,13 @@
           </para
           >
           <para>-or-</para>
-          <para
-            >
-            Conflicting <see
-             cref="T:Mono.Options.OptionValueType" />
+          <para>
+            Conflicting <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              values
-            were found within <paramref
-             name="prototype" />
+            were found within <paramref name="prototype" />
 
             
 
@@ -1415,32 +1219,27 @@
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
              and 
-            <paramref
-             name="prototype" />
+            <paramref name="prototype" />
 
             
 
              specified an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              or
-            <see
-             cref="F:Mono.Options.OptionValueType.Required" />
+            <see cref="F:Mono.Options.OptionValueType.Required" />
 
             
 
@@ -1453,26 +1252,22 @@
 
             
 
-             is greater than <c
-            >1</c>
+             is greater than <c>1</c>
 
             
 
              and
-            <paramref
-             name="prototype" />
+            <paramref name="prototype" />
 
             
 
              specified an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
@@ -1486,18 +1281,15 @@
             
 
              contains a separator list and
-            <paramref
-             name="maxValueCount" />
+            <paramref name="maxValueCount" />
 
             
 
-             is <c
-            >0</c>
+             is <c>0</c>
 
             
 
-             or <c
-            >1</c>
+             or <c>1</c>
 
             
 
@@ -1511,18 +1303,15 @@
             
 
              contains a badly formatted 
-            separator list, such as <c
-            >{{</c>
+            separator list, such as <c>{{</c>
 
             
 
-            , <c
-            >}}</c>
+            , <c>}}</c>
 
             
 
-            , <c
-            >{{}</c>
+            , <c>{{}</c>
 
             
 
@@ -1536,25 +1325,21 @@
             
 
              only includes the default handler
-            <c
-            >&lt;&gt;</c>
+            <c>&lt;&gt;</c>
 
             
 
-             and <paramref
-             name="prototype" />
+             and <paramref name="prototype" />
 
             
 
              did not specify an
-            <see
-             cref="T:Mono.Options.OptionValueType" />
+            <see cref="T:Mono.Options.OptionValueType" />
 
             
 
              value of
-            <see
-             cref="F:Mono.Options.OptionValueType.None" />
+            <see cref="F:Mono.Options.OptionValueType.None" />
 
             
 
@@ -1568,19 +1353,16 @@
             
 
              includes the default handler
-            <c
-            >&lt;&gt;</c>
+            <c>&lt;&gt;</c>
 
             
 
-            , and <paramref
-             name="MaxValueCount" />
+            , and <paramref name="MaxValueCount" />
 
             
 
              is greater
-            than <c
-            >1</c>
+            than <c>1</c>
 
             
 
@@ -1593,8 +1375,7 @@
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -1617,10 +1398,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          A <see
-           cref="T:System.String" />
+        <summary>
+          A <see cref="T:System.String" />
 
           
 
@@ -1628,10 +1407,8 @@
           option.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
@@ -1639,31 +1416,26 @@
           option.
         </value
         >
-        <remarks
-          >
+        <remarks>
           This property is used to generate documentation within 
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
 
           
 
           .
           The string returned is translated via the 
-          <paramref
-           name="localizer" />
+          <paramref name="localizer" />
 
           
 
            parameter provided to the
-          <see
-           cref="C:Mono.Options.OptionSet(System.Converter{System.String,System.String})" />
+          <see cref="C:Mono.Options.OptionSet(System.Converter{System.String,System.String})" />
 
           
 
           
           constructor before being written to the 
-          <see
-           cref="T:System.IO.TextWriter" />
+          <see cref="T:System.IO.TextWriter" />
 
           
 
@@ -1693,68 +1465,56 @@
       <Docs>
         <summary
           >Retrieves all name aliases that make up 
-          <see
-           cref="P:Mono.Options.Option.Prototype" />
+          <see cref="P:Mono.Options.Option.Prototype" />
 
           
 
           .</summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing all name aliases
-          for this <see
-           cref="T:Mono.Options.Option" />
+          for this <see cref="T:Mono.Options.Option" />
 
           
 
            instance.
         </returns
         >
-        <remarks
-          >
+        <remarks>
           The returned option names will not contain any 
-          <see
-           cref="T:Mono.Options.OptionValueType" />
+          <see cref="T:Mono.Options.OptionValueType" />
 
           
 
            specifier that may be
-          within <see
-           cref="P:Mono.Options.Option.Prototype" />
+          within <see cref="P:Mono.Options.Option.Prototype" />
 
           
 
           .  
-          If <see
-           cref="P:Mono.Options.Option.Prototype" />
+          If <see cref="P:Mono.Options.Option.Prototype" />
 
           
 
            is
-          <c
-          >a=|b=|c=</c>
+          <c>a=|b=|c=</c>
 
           
 
-          , the array returned will contain <c
-          >a</c>
+          , the array returned will contain <c>a</c>
 
           
 
-          , <c
-          >b</c>
+          , <c>b</c>
 
           
 
           ,
-          and <c
-          >c</c>
+          and <c>c</c>
 
           
 
@@ -1781,29 +1541,24 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
+        <summary>
           Retreives all value separators, strings which are used to split an
           argument into one or more values for the this 
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            array containing all strings that
           should be used when splitting an argument into one or more values
-          for this <see
-           cref="T:Mono.Options.Option" />
+          for this <see cref="T:Mono.Options.Option" />
 
           
 
@@ -1811,11 +1566,9 @@
         </returns
         >
         <remarks>
-          <para
-            >
+          <para>
             Value separators may be provided within 
-            <see
-             cref="P:Mono.Options.Option.Prototype" />
+            <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
@@ -1840,14 +1593,12 @@
                 
 
                  is 
-              <see
-                 cref="F:Mono.Options.OptionValueType.Optional" />
+              <see cref="F:Mono.Options.OptionValueType.Optional" />
 
                 
 
                  or
-              <see
-                 cref="F:Mono.Options.OptionValueType.Required" />
+              <see cref="F:Mono.Options.OptionValueType.Required" />
 
                 
 
@@ -1856,11 +1607,9 @@
               >
             </item>
           </list>
-          <para
-            >
+          <para>
             See the 
-            <see
-             cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
+            <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
 
             
 
@@ -1882,11 +1631,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
+        <summary>
           Whether
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
 
           
 
@@ -1894,23 +1641,19 @@
           should write this option.
         </summary
         >
-        <value
-          >
-          If <see
-           langword="true" />
+        <value>
+          If <see langword="true" />
 
           
 
           , then
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
 
           
 
           
           will not print this option; otherwise,
-          <see
-           cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
+          <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />
 
           
 
@@ -1941,10 +1684,8 @@
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <param name="c"
-          >
-          An <see
-           cref="T:Mono.Options.OptionContext" />
+        <param name="c">
+          An <see cref="T:Mono.Options.OptionContext" />
 
           
 
@@ -1952,17 +1693,14 @@
           information about the option that was parsed.
         </param
         >
-        <summary
-          >
+        <summary>
           Invokes 
-          <see
-           cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+          <see cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
 
           
 
           
-          then clears out <paramref
-           name="c" />
+          then clears out <paramref name="c" />
 
           
 
@@ -1970,31 +1708,26 @@
         </summary
         >
         <remarks>
-          <para
-            >
+          <para>
             This method is invoked from within 
-            <see
-             cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+            <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
 
             
 
             
             when an option with a name from
-            <see
-             cref="M:Mono.Options.Option.GetNames" />
+            <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
              is encountered and
             matches the required number of values governed by
-            <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+            <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              and
-            <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+            <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
@@ -2002,47 +1735,39 @@
           </para
           >
           <block subset="none" type="behaviors">
-            <para
-              >
+            <para>
               This method invokes 
-              <see
-               cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+              <see cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
 
               
 
               ,
-              passing along <paramref
-               name="c" />
+              passing along <paramref name="c" />
 
               
 
                unchanged, and then sets the 
-              <see
-               cref="P:Mono.Options.OptionContext.Option" />
+              <see cref="P:Mono.Options.OptionContext.Option" />
 
               
 
                and
-              <see
-               cref="P:Mono.Options.OptionContext.OptionName" />
+              <see cref="P:Mono.Options.OptionContext.OptionName" />
 
               
 
               
-              properties to <see
-               langword="null" />
+              properties to <see langword="null" />
 
               
 
               , and 
-              <see
-               cref="M:Mono.Options.OptionValueCollection.Clear" />
+              <see cref="M:Mono.Options.OptionValueCollection.Clear" />
 
               
 
               s out
-              <see
-               cref="P:Mono.Options.OptionContext.OptionValues" />
+              <see cref="P:Mono.Options.OptionContext.OptionValues" />
 
               
 
@@ -2070,32 +1795,26 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          A <see
-           cref="T:System.Int32" />
+        <summary>
+          A <see cref="T:System.Int32" />
 
           
 
            containing the maximum number of
-          values this <see
-           cref="T:Mono.Options.Option" />
+          values this <see cref="T:Mono.Options.Option" />
 
           
 
            accepts.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.Int32" />
+        <value>
+          A <see cref="T:System.Int32" />
 
           
 
            containing the maximum number of
-          values this <see
-           cref="T:Mono.Options.Option" />
+          values this <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2103,55 +1822,46 @@
         </value
         >
         <remarks>
-          <para
-            >
+          <para>
             This is a maximum, and may not be the number of values present
-            within <see
-             cref="P:Mono.Options.OptionContext.OptionValues" />
+            within <see cref="P:Mono.Options.OptionContext.OptionValues" />
 
             
 
             
             when 
-            <see
-             cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+            <see cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
 
             
 
             
             is invoked.  There will be 
-            <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+            <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
              values if
-            <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+            <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              is
-            <see
-             cref="F:Mono.Options.OptionValueType.Required" />
+            <see cref="F:Mono.Options.OptionValueType.Required" />
 
             
 
             , but if
-            <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+            <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              is
-            <see
-             cref="F:Mono.Options.OptionValueType.Optional" />
+            <see cref="F:Mono.Options.OptionValueType.Optional" />
 
             
 
              then
-            <see
-             cref="P:Mono.Options.OptionContext.OptionValues" />
+            <see cref="P:Mono.Options.OptionContext.OptionValues" />
 
             
 
@@ -2185,10 +1895,8 @@
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <param name="c"
-          >
-          An <see
-           cref="T:Mono.Options.OptionContext" />
+        <param name="c">
+          An <see cref="T:Mono.Options.OptionContext" />
 
           
 
@@ -2204,31 +1912,26 @@
             This method must be overridden by all subclasses, within which the
             subclass can perform some custom per-option processing.
           </para>
-          <para
-            >
+          <para>
             This method is invoked from within 
-            <see
-             cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
+            <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
 
             
 
             
             when an option with a name from
-            <see
-             cref="M:Mono.Options.Option.GetNames" />
+            <see cref="M:Mono.Options.Option.GetNames" />
 
             
 
              is encountered and
             matches the required number of values governed by
-            <see
-             cref="P:Mono.Options.Option.OptionValueType" />
+            <see cref="P:Mono.Options.Option.OptionValueType" />
 
             
 
              and
-            <see
-             cref="P:Mono.Options.Option.MaxValueCount" />
+            <see cref="P:Mono.Options.Option.MaxValueCount" />
 
             
 
@@ -2237,17 +1940,14 @@
           >
         </remarks>
         <example>
-          <para
-            >
+          <para>
             The following example has a custom 
-            <see
-             cref="T:Mono.Options.Option" />
+            <see cref="T:Mono.Options.Option" />
 
             
 
              subclass which overrides
-            <see
-             cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+            <see cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
 
             
 
@@ -2392,10 +2092,8 @@ class Demo {
 
 </code
           >
-          <para
-            >
-            See <see
-             cref="T:Mono.Options.OptionSet" />
+          <para>
+            See <see cref="T:Mono.Options.OptionSet" />
 
             
 
@@ -2427,16 +2125,13 @@ class Demo {
         <ReturnType>Mono.Options.OptionValueType</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          An <see
-           cref="T:Mono.Options.OptionValueType" />
+        <summary>
+          An <see cref="T:Mono.Options.OptionValueType" />
 
           
 
            instance
-          specifying whether this <see
-           cref="T:Mono.Options.Option" />
+          specifying whether this <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2444,10 +2139,8 @@ class Demo {
           a value, and if so, whether it's required or optional.
         </summary
         >
-        <value
-          >
-          An <see
-           cref="T:Mono.Options.OptionValueType" />
+        <value>
+          An <see cref="T:Mono.Options.OptionValueType" />
 
           
 
@@ -2456,21 +2149,17 @@ class Demo {
         </value
         >
         <remarks>
-          <para
-            >
-            This is initialized based on the presence of <c
-            >=</c>
+          <para>
+            This is initialized based on the presence of <c>=</c>
 
             
 
              or
-            <c
-            >:</c>
+            <c>:</c>
 
             
 
-             within <see
-             cref="P:Mono.Options.Option.Prototype" />
+             within <see cref="P:Mono.Options.Option.Prototype" />
 
             
 
@@ -2507,42 +2196,34 @@ class Demo {
         <Parameter Name="c" Type="Mono.Options.OptionContext" />
       </Parameters>
       <Docs>
-        <typeparam name="T"
-          >
-          The type to convert the string <paramref
-           name="value" />
+        <typeparam name="T">
+          The type to convert the string <paramref name="value" />
 
           
 
            to.
         </typeparam
         >
-        <param name="value"
-          >
-          A <see
-           cref="T:System.String" />
+        <param name="value">
+          A <see cref="T:System.String" />
 
           
 
            containing a representation of the
-          type <typeparamref
-           name="T" />
+          type <typeparamref name="T" />
 
           
 
            that should be converted into an
-          instance of type <typeparamref
-           name="T" />
+          instance of type <typeparamref name="T" />
 
           
 
           .
         </param
         >
-        <param name="c"
-          >
-          A <see
-           cref="T:Mono.Options.OptionContext" />
+        <param name="c">
+          A <see cref="T:Mono.Options.OptionContext" />
 
           
 
@@ -2550,50 +2231,41 @@ class Demo {
           contextual information needed error handling.
         </param
         >
-        <summary
-          >
-          Converts the <see
-           cref="T:System.String" />
+        <summary>
+          Converts the <see cref="T:System.String" />
           <paramref name="value" />
 
           
 
           
-          into an object of type <typeparamref
-           name="T" />
+          into an object of type <typeparamref name="T" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          If <paramref
-           name="value" />
+        <returns>
+          If <paramref name="value" />
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
           , then 
-          <see
-           langword="default(T)" />
+          <see langword="default(T)" />
 
           
 
            is returned.  Otherwise, 
-          <paramref
-           name="value" />
+          <paramref name="value" />
 
           
 
            is converted to a value of type 
-          <typeparamref
-           name="T" />
+          <typeparamref name="T" />
 
           
 
@@ -2608,32 +2280,27 @@ class Demo {
 
             
             is used to get the 
-            <see
-             cref="T:System.ComponentModel.TypeConverter" />
+            <see cref="T:System.ComponentModel.TypeConverter" />
 
             
 
              associated
-            with type <typeparamref
-             name="T" />
+            with type <typeparamref name="T" />
 
             
 
             , and 
-            <see
-             cref="M:System.ComponentModel.TypeConverter.ConvertFromString" />
+            <see cref="M:System.ComponentModel.TypeConverter.ConvertFromString" />
 
             
 
             
-            is used to convert <paramref
-             name="value" />
+            is used to convert <paramref name="value" />
 
             
 
              into a
-            <typeparamref
-             name="T" />
+            <typeparamref name="T" />
 
             
 
@@ -2641,28 +2308,23 @@ class Demo {
           </para
           >
         </remarks>
-        <exception cref="T:Mono.Options.OptionException"
-          >
-          If <paramref
-           name="value" />
+        <exception cref="T:Mono.Options.OptionException">
+          If <paramref name="value" />
 
           
 
-           is not <see
-           langword="null" />
+           is not <see langword="null" />
 
           
 
            and
-          <see
-           cref="M:System.ComponentModel.TypeConverter.ConvertFromString" />
+          <see cref="M:System.ComponentModel.TypeConverter.ConvertFromString" />
 
           
 
           
           generated an exception while trying to convert 
-          <paramref
-           name="value" />
+          <paramref name="value" />
 
           
 
@@ -2685,10 +2347,8 @@ class Demo {
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary
-          >
-          The <see
-           cref="T:Mono.Options.Option" />
+        <summary>
+          The <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2696,16 +2356,13 @@ class Demo {
           option name aliases and the option value requirements.
         </summary
         >
-        <value
-          >
-          A <see
-           cref="T:System.String" />
+        <value>
+          A <see cref="T:System.String" />
 
           
 
            containing the prototype of this
-          <see
-           cref="T:Mono.Options.Option" />
+          <see cref="T:Mono.Options.Option" />
 
           
 
@@ -2713,32 +2370,26 @@ class Demo {
         </value
         >
         <remarks>
-          <para
-            >
-            The prototype contains a <c
-            >|</c>
+          <para>
+            The prototype contains a <c>|</c>
 
             
 
             -separated list of all option name
-            aliases and a value specifier of <c
-            >=</c>
+            aliases and a value specifier of <c>=</c>
 
             
 
              for required values and
-            <c
-            >:</c>
+            <c>:</c>
 
             
 
-             for optional values; if neither <c
-            >=</c>
+             for optional values; if neither <c>=</c>
 
             
 
-             nor <c
-            >:</c>
+             nor <c>:</c>
 
             
 
@@ -2771,26 +2422,21 @@ class Demo {
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary
-          >
-          Returns <see
-           cref="P:Mono.Options.Option.Prototype" />
+        <summary>
+          Returns <see cref="P:Mono.Options.Option.Prototype" />
 
           
 
           .
         </summary
         >
-        <returns
-          >
-          A <see
-           cref="T:System.String" />
+        <returns>
+          A <see cref="T:System.String" />
 
           
 
            containing
-          <see
-           cref="P:Mono.Options.Option.Prototype" />
+          <see cref="P:Mono.Options.Option.Prototype" />
 
           
 

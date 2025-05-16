@@ -23,61 +23,50 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A indigo1 contract is a collection of operations that specifies what the endpoint communicates to the outside world. Each operation is a message exchange. For example, a request message and an associated reply message forming a request/reply message exchange. </para>
       <para
-        >A <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+        >A <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-         object is used to describe contracts and their operations. Within a <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         object is used to describe contracts and their operations. Within a <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-        , each contract operation has a corresponding <see
-         cref="T:System.ServiceModel.Description.OperationDescription" />
+        , each contract operation has a corresponding <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
         
 
-         that describes aspects of the operation, such as whether the operation is one-way or request/reply. Each <see
-         cref="T:System.ServiceModel.Description.OperationDescription" />
+         that describes aspects of the operation, such as whether the operation is one-way or request/reply. Each <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
         
 
-         also describes the messages that make up the operation using a collection of <see
-         cref="T:System.ServiceModel.Description.MessageDescription" />
+         also describes the messages that make up the operation using a collection of <see cref="T:System.ServiceModel.Description.MessageDescription" />
 
         
 
-         objects. <see
-         cref="T:System.ServiceModel.Description.ContractDescription" />
+         objects. <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
         
 
-         contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see
-         cref="T:System.ServiceModel.ServiceContractAttribute" />
+         contains a reference to an interface that defines the contract using the programming model. This interface is marked with <see cref="T:System.ServiceModel.ServiceContractAttribute" />
 
         
 
-        , and its methods that correspond to endpoint operations are marked with <see
-         cref="T:System.ServiceModel.OperationContractAttribute" />
+        , and its methods that correspond to endpoint operations are marked with <see cref="T:System.ServiceModel.OperationContractAttribute" />
 
         
 
         . </para
       >
       <para
-        >Many of the properties on <see
-         cref="T:System.ServiceModel.Description.OperationDescription" />
+        >Many of the properties on <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
         
 
-         have corresponding properties in the indigo2 programming model on <see
-         cref="T:System.ServiceModel.OperationContractAttribute" />
+         have corresponding properties in the indigo2 programming model on <see cref="T:System.ServiceModel.OperationContractAttribute" />
 
         
 
-        , for example, <see
-         cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+        , for example, <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
 
         
 
@@ -115,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Description.OperationDescription" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Description.OperationDescription" />
 
             
 
@@ -124,19 +112,26 @@
           >
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the operation description.</param
         >
         <param name="declaringContract">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ContractDescription" />
+          The <see cref="T:System.ServiceModel.Description.ContractDescription" />
 
           
 
@@ -190,8 +185,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.IOperationBehavior" />
+            >The <see cref="T:System.ServiceModel.Description.IOperationBehavior" />
 
             
 
@@ -294,13 +288,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.ProtectionLevel" />
+            >When the <see cref="P:System.ServiceModel.Description.OperationDescription.ProtectionLevel" />
 
             
 
-             is set, the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
+             is set, the <see cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
 
             
 
@@ -311,16 +303,14 @@
 
             
 
-             corresponds to the <see
-             cref="P:System.ServiceModel.OperationContractAttribute.HasProtectionLevel" />
+             corresponds to the <see cref="P:System.ServiceModel.OperationContractAttribute.HasProtectionLevel" />
 
             
 
              property in the indigo1 programming model.</para
           >
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
 
             
 
@@ -348,8 +338,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+            >The <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
 
             
 
@@ -357,13 +346,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The value of <see
-               cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+              >The value of <see cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
 
               
 
-               must be true and the binding used must support sessions for the <see
-               cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+               must be true and the binding used must support sessions for the <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
 
               
 
@@ -372,8 +359,7 @@
           </block>
           <para>The default is true, which means that an operation can be the first one called on a channel. Subsequent calls to the initiating method have no effect, other than to call the method. No other sessions are created.</para>
           <para
-            >Typically, you set <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+            >Typically, you set <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
 
             
 
@@ -384,8 +370,7 @@
 
             
 
-             corresponds to the <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+             corresponds to the <see cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
 
             
 
@@ -413,16 +398,14 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.IsOneWay" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationDescription.IsOneWay" />
 
             
 
              property to indicate that an operation does not return a reply message. This type of operation is useful for notifications or event-style communication, especially in two-way communication. </para
           >
           <para
-            >If the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.IsOneWay" />
+            >If the <see cref="P:System.ServiceModel.Description.OperationDescription.IsOneWay" />
 
             
 
@@ -433,8 +416,7 @@
 
             
 
-             corresponds to the <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
+             corresponds to the <see cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
 
             
 
@@ -462,8 +444,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.IsTerminating" />
+            >Use the <see cref="P:System.ServiceModel.Description.OperationDescription.IsTerminating" />
 
             
 
@@ -474,8 +455,7 @@
 
             
 
-             corresponds to the <see
-             cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+             corresponds to the <see cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
 
             
 
@@ -509,13 +489,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <newTerm
-            >known types</newTerm>
+            >The <newTerm>known types</newTerm>
 
             
 
-             are types which may be present in an object graph when serialization or deserialization occurs. For more information about known types, see <format
-             type="text/html">
+             are types which may be present in an object graph when serialization or deserialization occurs. For more information about known types, see <format type="text/html">
               <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
             </format>
 
@@ -570,8 +548,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.OperationDescription.Name" />
+            >The <see cref="P:System.ServiceModel.Description.OperationDescription.Name" />
 
             
 
@@ -630,8 +607,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.ServiceModel.Description.OperationDescription.ProtectionLevel" />
+            >The <see cref="P:System.ServiceModel.Description.OperationDescription.ProtectionLevel" />
 
             
 
@@ -642,21 +618,18 @@
 
             
 
-             corresponds to the <see
-             cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+             corresponds to the <see cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
 
             
 
              property in the indigo1 programming model.</para
           >
           <para
-            >When the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.ProtectionLevel" />
+            >When the <see cref="P:System.ServiceModel.Description.OperationDescription.ProtectionLevel" />
 
             
 
-             is set, the <see
-             cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
+             is set, the <see cref="P:System.ServiceModel.Description.OperationDescription.HasProtectionLevel" />
 
             
 

@@ -16,34 +16,29 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
+        >The <see cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
 
         
 
-         event is raised when the user clicks the <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         event is raised when the user clicks the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
          navigation controls to display the next or previous month.</para
       >
       <para
-        >For a list of initial property values for an instance of <see
-         cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
+        >For a list of initial property values for an instance of <see cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
 
         
 
-        , see the <see
-         cref="M:System.Web.UI.WebControls.MonthChangedEventArgs.#ctor(System.DateTime,System.DateTime)" />
+        , see the <see cref="M:System.Web.UI.WebControls.MonthChangedEventArgs.#ctor(System.DateTime,System.DateTime)" />
 
         
 
          constructor.</para
       >
       <para
-        >For more information about handling events, see <format
-         type="text/html">
+        >For more information about handling events, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -55,13 +50,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
+        >Provides data for the <see cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
 
         
 
-         event of a <see
-         cref="T:System.Web.UI.WebControls.Calendar" />
+         event of a <see cref="T:System.Web.UI.WebControls.Calendar" />
 
         
 
@@ -85,8 +78,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following table shows initial property values for an instance of <see
-             cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
+            >The following table shows initial property values for an instance of <see cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
 
             
 
@@ -128,8 +120,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.MonthChangedEventArgs" />
 
             
 
@@ -137,24 +128,30 @@
           >
         </summary>
         <param name="newDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The date that determines the month currently displayed by the <see
-           cref="T:System.Web.UI.WebControls.Calendar" />
+          The date that determines the month currently displayed by the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
           
 
           . </param
         >
         <param name="previousDate">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The date that determines the month previously displayed by the <see
-           cref="T:System.Web.UI.WebControls.Calendar" />
+          The date that determines the month previously displayed by the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
           
 
@@ -177,8 +174,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to get the month currently displayed by the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Use this property to get the month currently displayed by the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -186,13 +182,11 @@
           >
           <para>This date is normally the first date of the currently displayed month; however, it can be programmatically changed to any date within the month.</para>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Calendar.VisibleDate" />
+            >The <see cref="P:System.Web.UI.WebControls.Calendar.VisibleDate" />
 
             
 
-             property can be assigned to this property programmatically to override the month change when the user clicks the navigation controls for the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             property can be assigned to this property programmatically to override the month change when the user clicks the navigation controls for the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -202,8 +196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the date that determines the currently displayed month in the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Gets the date that determines the currently displayed month in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
@@ -227,23 +220,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this property to determine the previously displayed month on the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Use this property to determine the previously displayed month on the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
-             control. You can restore the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+             control. You can restore the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 
-             control to the previously displayed month by setting the <see
-             cref="P:System.Web.UI.WebControls.Calendar.VisibleDate" />
+             control to the previously displayed month by setting the <see cref="P:System.Web.UI.WebControls.Calendar.VisibleDate" />
 
             
 
-             property to <see
-             cref="P:System.Web.UI.WebControls.MonthChangedEventArgs.PreviousDate" />
+             property to <see cref="P:System.Web.UI.WebControls.MonthChangedEventArgs.PreviousDate" />
 
             
 
@@ -251,13 +240,11 @@
           >
           <para>This date is normally the first date of the previously displayed month; however, it can be programmatically changed to any date within the month.</para>
           <para
-            >The <see
-             cref="P:System.Web.UI.WebControls.Calendar.VisibleDate" />
+            >The <see cref="P:System.Web.UI.WebControls.Calendar.VisibleDate" />
 
             
 
-             property is updated to the date in this property before the <see
-             cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
+             property is updated to the date in this property before the <see cref="E:System.Web.UI.WebControls.Calendar.VisibleMonthChanged" />
 
             
 
@@ -267,8 +254,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the date that determines the previously displayed month in the <see
-             cref="T:System.Web.UI.WebControls.Calendar" />
+            >Gets the date that determines the previously displayed month in the <see cref="T:System.Web.UI.WebControls.Calendar" />
 
             
 

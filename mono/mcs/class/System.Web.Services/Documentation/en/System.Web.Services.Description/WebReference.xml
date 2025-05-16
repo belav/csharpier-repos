@@ -14,18 +14,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.Services.Description.WebReference" />
+        >A <see cref="T:System.Web.Services.Description.WebReference" />
 
         
 
-         object is used to pass information about a set of Web services to the static <see
-         cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+         object is used to pass information about a set of Web services to the static <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
         
 
-         method of the <see
-         cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+         method of the <see cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
 
         
 
@@ -56,28 +53,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="documents" />
+            >The <paramref name="documents" />
 
             
 
-             collection should contain only <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             and <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             and <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             objects; the <see
-             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+             objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
-             method is unable to interpret <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+             method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -87,8 +79,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.WebReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.WebReference" />
 
             
 
@@ -96,24 +87,30 @@
           >
         </summary>
         <param name="documents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          A <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
             that specifies a collection of description documents.</param
         >
         <param name="proxyCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          A <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
@@ -144,28 +141,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="documents" />
+            >The <paramref name="documents" />
 
             
 
-             collection should contain only <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             and <see
-             cref="T:Sytem.Xml.Schema.XmlSchema" />
+             and <see cref="T:Sytem.Xml.Schema.XmlSchema" />
 
             
 
-             objects; the <see
-             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+             objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
-             method is unable to interpret <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+             method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -175,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.WebReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.WebReference" />
 
             
 
@@ -184,38 +175,52 @@
           >
         </summary>
         <param name="documents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          A <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
             that specifies a collection of description documents.</param
         >
         <param name="proxyCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          A <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that specifies a namespace for code compilation.</param
         >
         <param name="appSettingUrlKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL key of the Web reference.</param
         >
         <param name="appSettingBaseUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -247,28 +252,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="documents" />
+            >The <paramref name="documents" />
 
             
 
-             collection should contain only <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+             collection should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             and <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             and <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             objects; the <see
-             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+             objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
-             method is unable to interpret <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+             method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -278,8 +278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.Services.Description.WebReference" />
+            >Initializes a new instance of the <see cref="T:System.Web.Services.Description.WebReference" />
 
             
 
@@ -287,45 +286,63 @@
           >
         </summary>
         <param name="documents">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+          A <see cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
 
           
 
             that specifies a collection of description documents.</param
         >
         <param name="proxyCode">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.CodeDom.CodeNamespace" />
+          A <see cref="T:System.CodeDom.CodeNamespace" />
 
           
 
            that specifies a namespace for code compilation.</param
         >
         <param name="protocolName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The protocol used by the XML Web service.</param
         >
         <param name="appSettingUrlKey">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The URL key of the Web reference.</param
         >
         <param name="appSettingBaseUrl">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,23 +406,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The description document collection associated with a Web reference should contain only <see
-             cref="T:System.Web.Services.Description.ServiceDescription" />
+            >The description document collection associated with a Web reference should contain only <see cref="T:System.Web.Services.Description.ServiceDescription" />
 
             
 
-             and <see
-             cref="T:System.Xml.Schema.XmlSchema" />
+             and <see cref="T:System.Xml.Schema.XmlSchema" />
 
             
 
-             objects; the <see
-             cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
+             objects; the <see cref="M:System.Web.Services.Description.ServiceDescriptionImporter.GenerateWebReferences(System.Web.Services.Description.WebReferenceCollection,System.CodeDom.Compiler.CodeDomProvider,System.CodeDom.CodeCompileUnit,System.Web.Services.Description.WebReferenceOptions)" />
 
             
 
-             method is unable to interpret <see
-             cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+             method is unable to interpret <see cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
             
 
@@ -433,8 +446,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Allowed protocol strings include "Soap" (indicating SOAP 1.0) and "Soap12" (indicating SOAP 1.2). The value of this property determines the protocol used by proxy clients when contacting any XML Web service in the <see
-             cref="P:System.Web.Services.Description.WebReference.Documents" />
+            >Allowed protocol strings include "Soap" (indicating SOAP 1.0) and "Soap12" (indicating SOAP 1.2). The value of this property determines the protocol used by proxy clients when contacting any XML Web service in the <see cref="P:System.Web.Services.Description.WebReference.Documents" />
 
             
 

@@ -34,8 +34,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Drawing.CharacterRange" />
+            >Initializes a new instance of the <see cref="T:System.Drawing.CharacterRange" />
 
             
 
@@ -43,19 +42,26 @@
           >
         </summary>
         <param name="First">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The position of the first character in the range. For example, if <paramref
-           name="First" />
+          The position of the first character in the range. For example, if <paramref name="First" />
 
           
 
            is set to 0, the first position of the range is position 0 in the string. </param
         >
         <param name="Length">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -83,8 +89,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also use <see
-             cref="M:System.Drawing.CharacterRange.op_Equality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
+            >You can also use <see cref="M:System.Drawing.CharacterRange.op_Equality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
 
             
 
@@ -98,13 +103,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate the specified object is an instance with the same <see
-             cref="P:System.Drawing.CharacterRange.First" />
+            >true to indicate the specified object is an instance with the same <see cref="P:System.Drawing.CharacterRange.First" />
 
             
 
-             and <see
-             cref="P:System.Drawing.CharacterRange.Length" />
+             and <see cref="P:System.Drawing.CharacterRange.Length" />
 
             
 
@@ -112,7 +115,11 @@
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -133,8 +140,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the position in the string of the first character of this <see
-             cref="T:System.Drawing.CharacterRange" />
+            >Gets or sets the position in the string of the first character of this <see cref="T:System.Drawing.CharacterRange" />
 
             
 
@@ -176,8 +182,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the number of positions in this <see
-             cref="T:System.Drawing.CharacterRange" />
+            >Gets or sets the number of positions in this <see cref="T:System.Drawing.CharacterRange" />
 
             
 
@@ -210,8 +215,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can also test for equality using the <see
-             cref="M:System.Drawing.CharacterRange.Equals(System.Object)" />
+            >You can also test for equality using the <see cref="M:System.Drawing.CharacterRange.Equals(System.Object)" />
 
             
 
@@ -221,23 +225,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Drawing.CharacterRange" />
+            >Compares two <see cref="T:System.Drawing.CharacterRange" />
 
             
 
-             objects. Gets a value indicating whether the <see
-             cref="P:System.Drawing.CharacterRange.First" />
+             objects. Gets a value indicating whether the <see cref="P:System.Drawing.CharacterRange.First" />
 
             
 
-             and <see
-             cref="P:System.Drawing.CharacterRange.Length" />
+             and <see cref="P:System.Drawing.CharacterRange.Length" />
 
             
 
-             values of the two <see
-             cref="T:System.Drawing.CharacterRange" />
+             values of the two <see cref="T:System.Drawing.CharacterRange" />
 
             
 
@@ -247,18 +247,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate the two <see
-             cref="T:System.Drawing.CharacterRange" />
+            >true to indicate the two <see cref="T:System.Drawing.CharacterRange" />
 
             
 
-             objects have the same <see
-             cref="P:System.Drawing.CharacterRange.First" />
+             objects have the same <see cref="P:System.Drawing.CharacterRange.First" />
 
             
 
-             and <see
-             cref="P:System.Drawing.CharacterRange.Length" />
+             and <see cref="P:System.Drawing.CharacterRange.Length" />
 
             
 
@@ -266,24 +263,30 @@
           >
         </returns>
         <param name="cr1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.CharacterRange" />
+          A <see cref="T:System.Drawing.CharacterRange" />
 
           
 
            to compare for equality.</param
         >
         <param name="cr2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.CharacterRange" />
+          A <see cref="T:System.Drawing.CharacterRange" />
 
           
 
@@ -311,13 +314,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Drawing.CharacterRange.op_Inequality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
+            >The <see cref="M:System.Drawing.CharacterRange.op_Inequality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
 
             
 
-             method returns the opposite of the <see
-             cref="M:System.Drawing.CharacterRange.op_Equality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
+             method returns the opposite of the <see cref="M:System.Drawing.CharacterRange.op_Equality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
 
             
 
@@ -327,23 +328,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Compares two <see
-             cref="T:System.Drawing.CharacterRange" />
+            >Compares two <see cref="T:System.Drawing.CharacterRange" />
 
             
 
-             objects. Gets a value indicating whether the <see
-             cref="P:System.Drawing.CharacterRange.First" />
+             objects. Gets a value indicating whether the <see cref="P:System.Drawing.CharacterRange.First" />
 
             
 
-             or <see
-             cref="P:System.Drawing.CharacterRange.Length" />
+             or <see cref="P:System.Drawing.CharacterRange.Length" />
 
             
 
-             values of the two <see
-             cref="T:System.Drawing.CharacterRange" />
+             values of the two <see cref="T:System.Drawing.CharacterRange" />
 
             
 
@@ -353,18 +350,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true to indicate the either the <see
-             cref="P:System.Drawing.CharacterRange.First" />
+            >true to indicate the either the <see cref="P:System.Drawing.CharacterRange.First" />
 
             
 
-             or <see
-             cref="P:System.Drawing.CharacterRange.Length" />
+             or <see cref="P:System.Drawing.CharacterRange.Length" />
 
             
 
-             values of the two <see
-             cref="T:System.Drawing.CharacterRange" />
+             values of the two <see cref="T:System.Drawing.CharacterRange" />
 
             
 
@@ -372,24 +366,30 @@
           >
         </returns>
         <param name="cr1">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.CharacterRange" />
+          A <see cref="T:System.Drawing.CharacterRange" />
 
           
 
            to compare for inequality.</param
         >
         <param name="cr2">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.CharacterRange" />
+          A <see cref="T:System.Drawing.CharacterRange" />
 
           
 

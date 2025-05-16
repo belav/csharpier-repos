@@ -27,13 +27,11 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>A context is an ordered sequence of properties that define an environment for the objects resident inside it. Contexts get created during the activation process for objects that are configured to require certain automatic services, such as synchronization, transactions, just-in-time activation, security, and so on. Multiple objects can live inside a context.</para>
       <para
-        >Classes are marked with an instance of the <see
-         cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" />
+        >Classes are marked with an instance of the <see cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" />
 
         
 
-         class, which provides the usage rules. Whenever a new object is instantiated, the .NET Framework finds a compatible or creates a new instance of the <see
-         cref="T:System.Runtime.Remoting.Contexts.Context" />
+         class, which provides the usage rules. Whenever a new object is instantiated, the .NET Framework finds a compatible or creates a new instance of the <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
         
 
@@ -41,8 +39,7 @@
       >
       <para>A new object's context is generally chosen based on meta-data attributes on the class. This mechanism is extensible through custom attributes. These are known as static-context properties, which are compiled into the class meta-data. Dynamic-context properties (also known as configuration properties) can be applied and configured by administrators.</para>
       <para
-        >For more information on contexts, see <format
-         type="text/html">
+        >For more information on contexts, see <format type="text/html">
           <a href="7574180D-70DF-44B8-8B78-55A119F2C96D"
             >[&lt;topic://cpconboundariesprocessesapplicationdomainscontexts&gt;]</a
           >
@@ -78,8 +75,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Runtime.Remoting.Contexts.Context" />
+            >Initializes a new instance of the <see cref="T:System.Runtime.Remoting.Contexts.Context" />
 
             
 
@@ -157,7 +153,11 @@
           <para>A local data slot object.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -268,13 +268,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A callback can be done by calling the <see
-             cref="M:System.Runtime.Remoting.Contexts.Context.DoCallBack(System.Runtime.Remoting.Contexts.CrossContextDelegate)" />
+            >A callback can be done by calling the <see cref="M:System.Runtime.Remoting.Contexts.Context.DoCallBack(System.Runtime.Remoting.Contexts.CrossContextDelegate)" />
 
             
 
-             method on it by passing in a delegate. The delegate is used to request a callback. The delegate must be a <see
-             cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
+             method on it by passing in a delegate. The delegate is used to request a callback. The delegate must be a <see cref="T:System.Runtime.Remoting.Contexts.CrossContextDelegate" />
 
             
 
@@ -286,7 +284,11 @@
           <para>Executes code in another context.</para>
         </summary>
         <param name="deleg">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -314,8 +316,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For default contexts, backing objects are cleaned up during shut down of the <see
-             cref="T:System.AppDomain" />
+            >For default contexts, backing objects are cleaned up during shut down of the <see cref="T:System.AppDomain" />
 
             
 
@@ -356,7 +357,11 @@
           <para>Frees a named data slot on all the contexts.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -421,8 +426,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the data associated with <paramref
-             name="slot" />
+            >Returns the data associated with <paramref name="slot" />
 
             
 
@@ -430,7 +434,11 @@
           >
         </returns>
         <param name="slot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -473,7 +481,11 @@
           <para>Returns a local data slot.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -513,7 +525,11 @@
           <para>The specified context property.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -548,62 +564,52 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Based on <paramref
-             name="obj" />
+            >Based on <paramref name="obj" />
 
             
 
-             and <paramref
-             name="ctx" />
+             and <paramref name="ctx" />
 
             
 
-            , <paramref
-             name="prop" />
+            , <paramref name="prop" />
 
             
 
              is asked to contribute a sink that is placed at some location in the path of remoting calls. If multiple properties are registered, their sinks will be called in an arbitrary order that can change between calls.</para
           >
           <para
-            >If <paramref
-             name="obj" />
+            >If <paramref name="obj" />
 
             
 
-             is not null, and then if it is a proxy, all calls made on the proxy are intercepted. Otherwise, if <paramref
-             name="obj" />
+             is not null, and then if it is a proxy, all calls made on the proxy are intercepted. Otherwise, if <paramref name="obj" />
 
             
 
-             is a real object, all calls on the object are intercepted. The <paramref
-             name="ctx" />
+             is a real object, all calls on the object are intercepted. The <paramref name="ctx" />
 
             
 
              parameter must be null.</para
           >
           <para
-            >If <paramref
-             name="ctx" />
+            >If <paramref name="ctx" />
 
             
 
-             is not null, <paramref
-             name="obj" />
+             is not null, <paramref name="obj" />
 
             
 
              must be null and all calls entering and leaving the context are intercepted.</para
           >
           <para
-            >If both <paramref
-             name="ctx" />
+            >If both <paramref name="ctx" />
 
             
 
-             and <paramref
-             name="obj" />
+             and <paramref name="obj" />
 
             
 
@@ -613,8 +619,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Registers a dynamic property implementing the <see
-             cref="T:System.Runtime.Remoting.Contexts.IDynamicProperty" />
+            >Registers a dynamic property implementing the <see cref="T:System.Runtime.Remoting.Contexts.IDynamicProperty" />
 
             
 
@@ -626,31 +631,41 @@
           <para>true if the property was successfully registered; otherwise, false.</para>
         </returns>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dynamic property to register. </param
         >
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object/proxy for which the <paramref
-           name="property" />
+          The object/proxy for which the <paramref name="property" />
 
           
 
            is registered. </param
         >
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The context for which the <paramref
-           name="property" />
+          The context for which the <paramref name="property" />
 
           
 
@@ -687,14 +702,22 @@
           <para>Sets the data in the specified slot on the current context.</para>
         </summary>
         <param name="slot">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The data slot where the data is to be added. </param
         >
         <param name="data">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -733,7 +756,11 @@
           <para>Sets a specific context property by name.</para>
         </summary>
         <param name="prop">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -762,8 +789,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.String" />
+            >Returns a <see cref="T:System.String" />
 
             
 
@@ -773,8 +799,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.String" />
+            >A <see cref="T:System.String" />
 
             
 
@@ -811,8 +836,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Unregisters a dynamic property implementing the <see
-             cref="T:System.Runtime.Remoting.Contexts.IDynamicProperty" />
+            >Unregisters a dynamic property implementing the <see cref="T:System.Runtime.Remoting.Contexts.IDynamicProperty" />
 
             
 
@@ -824,31 +848,41 @@
           <para>true if the object was successfully unregistered; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the dynamic property to unregister. </param
         >
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object/proxy for which the <paramref
-           name="property" />
+          The object/proxy for which the <paramref name="property" />
 
           
 
            is registered. </param
         >
         <param name="ctx">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The context for which the <paramref
-           name="property" />
+          The context for which the <paramref name="property" />
 
           
 

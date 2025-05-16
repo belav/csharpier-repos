@@ -25,36 +25,30 @@
 
         
 
-         provides a base class for designers of components that derive from <see
-         cref="T:System.Windows.Forms.Control" />
+         provides a base class for designers of components that derive from <see cref="T:System.Windows.Forms.Control" />
 
         
 
-        . In addition to the methods and functionality inherited from the <see
-         cref="T:System.ComponentModel.Design.ComponentDesigner" />
+        . In addition to the methods and functionality inherited from the <see cref="T:System.ComponentModel.Design.ComponentDesigner" />
 
         
 
-         class, <see
-         cref="T:System.Windows.Forms.Design.ControlDesigner" />
+         class, <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
         
 
-         provides additional methods to support extending and altering the behavior of an associated <see
-         cref="T:System.Windows.Forms.Control" />
+         provides additional methods to support extending and altering the behavior of an associated <see cref="T:System.Windows.Forms.Control" />
 
         
 
          at design time.</para
       >
       <para
-        >You can associate a designer with a type using a <see
-         cref="T:System.ComponentModel.DesignerAttribute" />
+        >You can associate a designer with a type using a <see cref="T:System.ComponentModel.DesignerAttribute" />
 
         
 
-        . For an overview of customizing design time behavior, see <format
-         type="text/html">
+        . For an overview of customizing design time behavior, see <format type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
 
@@ -66,8 +60,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Extends the design mode behavior of a <see
-         cref="T:System.Windows.Forms.Control" />
+        >Extends the design mode behavior of a <see cref="T:System.Windows.Forms.Control" />
 
         
 
@@ -85,8 +78,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -141,8 +133,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.AccessibleObject" />
+            >Gets the <see cref="T:System.Windows.Forms.AccessibleObject" />
 
             
 
@@ -197,8 +188,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value indicating whether resize handle allocation depends on the value of the <see
-             cref="P:System.Windows.Forms.Control.AutoSize" />
+            >Gets or sets a value indicating whether resize handle allocation depends on the value of the <see cref="P:System.Windows.Forms.Control.AutoSize" />
 
             
 
@@ -247,8 +237,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Gets the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -273,13 +262,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is useful for testing whether a control can be parented by a particular type of parent. For example, <see
-             cref="T:System.Windows.Forms.TabPage" />
+            >This method is useful for testing whether a control can be parented by a particular type of parent. For example, <see cref="T:System.Windows.Forms.TabPage" />
 
             
 
-             controls can only be parented by <see
-             cref="T:System.Windows.Forms.TabControl" />
+             controls can only be parented by <see cref="T:System.Windows.Forms.TabControl" />
 
             
 
@@ -287,8 +274,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method is not called when an item is dragged from the <ui
-              >Toolbox</ui>
+              >This method is not called when an item is dragged from the <ui>Toolbox</ui>
 
               
 
@@ -305,12 +291,15 @@
           <para>true if the control managed by the specified designer can parent the control managed by this designer; otherwise, false.</para>
         </returns>
         <param name="parentDesigner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.Design.IDesigner" />
+          The <see cref="T:System.ComponentModel.Design.IDesigner" />
 
           
 
@@ -382,12 +371,15 @@
           <para>Displays information about the specified exception to the user.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Exception" />
+          The <see cref="T:System.Exception" />
 
           
 
@@ -412,36 +404,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -451,8 +437,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -460,7 +445,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -492,53 +481,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The child control specified by <paramref
-             name="child" />
+            >The child control specified by <paramref name="child" />
 
             
 
-             is a child of this control designer's control. The child does not directly participate in persistence, but it will if it is exposed as a property of the main control. Consider a control like the <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             is a child of this control designer's control. The child does not directly participate in persistence, but it will if it is exposed as a property of the main control. Consider a control like the <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
-            : it has two panels, Panel1 and Panel2. These panels are exposed through read only <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+            : it has two panels, Panel1 and Panel2. These panels are exposed through read only <see cref="P:System.Windows.Forms.SplitContainer.Panel1" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+             and <see cref="P:System.Windows.Forms.SplitContainer.Panel2" />
 
             
 
-             properties on the <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             properties on the <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
-             control. The <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             control. The <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
-             control's designer calls <see
-             cref="M:System.Windows.Forms.Design.ControlDesigner.EnableDesignMode(System.Windows.Forms.Control,System.String)" />
+             control's designer calls <see cref="M:System.Windows.Forms.Design.ControlDesigner.EnableDesignMode(System.Windows.Forms.Control,System.String)" />
 
             
 
-             for each panel, which allows other components to be dropped on them. But, in order for the contents of <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+             for each panel, which allows other components to be dropped on them. But, in order for the contents of <see cref="P:System.Windows.Forms.SplitContainer.Panel1" />
 
             
 
-             and <see
-             cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+             and <see cref="P:System.Windows.Forms.SplitContainer.Panel2" />
 
             
 
-             to be saved, the <see
-             cref="T:System.Windows.Forms.SplitContainer" />
+             to be saved, the <see cref="T:System.Windows.Forms.SplitContainer" />
 
             
 
@@ -546,8 +525,7 @@
           >
           <para>Control names must be unique within a control designer, but they are not required to be unique with respect to the children of other control designers. </para>
           <para
-            >To support this feature, the hosting infrastructure must expose the <see
-             cref="T:System.ComponentModel.INestedContainer" />
+            >To support this feature, the hosting infrastructure must expose the <see cref="T:System.ComponentModel.INestedContainer" />
 
             
 
@@ -563,19 +541,26 @@
           <para>true if the child control could be enabled for design time; false if the hosting infrastructure does not support it.</para>
         </returns>
         <param name="child">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The child control for which design mode will be enabled.</param
         >
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The name of <paramref
-           name="child" />
+          The name of <paramref name="child" />
 
           
 
@@ -596,8 +581,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of false specifies that a control cannot have children dragged onto it at design time. To allow a control to parent other controls at design time, associate it with a designer that derives from <see
-             cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+            >The default value of false specifies that a control cannot have children dragged onto it at design time. To allow a control to parent other controls at design time, associate it with a designer that derives from <see cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
 
             
 
@@ -609,7 +593,11 @@
           <para>Enables or disables drag-and-drop support for the control being designed.</para>
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -663,8 +651,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+            >Returns a <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
 
             
 
@@ -674,8 +661,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
+            >A <see cref="T:System.Windows.Forms.Design.Behavior.ControlBodyGlyph" />
 
             
 
@@ -683,12 +669,15 @@
           >
         </returns>
         <param name="selectionType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
 
           
 
@@ -718,13 +707,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Note that based on <paramref
-             name="selectionType" />
+            >Note that based on <paramref name="selectionType" />
 
             
 
-            , the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            , the <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -739,8 +726,7 @@
             </item>
             <item>
               <para
-                >A single 'hidden' selection <see
-                 cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+                >A single 'hidden' selection <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
                 
 
@@ -752,8 +738,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Gets a collection of <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -763,8 +748,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A collection of <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >A collection of <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -772,12 +756,15 @@
           >
         </returns>
         <param name="selectionType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+          A <see cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
 
           
 
@@ -801,8 +788,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.ControlDesigner.GetHitTest(System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.ControlDesigner.GetHitTest(System.Drawing.Point)" />
 
             
 
@@ -810,13 +796,11 @@
           >
           <block subset="none" type="note">
             <para
-              >You can pass a point in screen coordinates to the <see
-               cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
+              >You can pass a point in screen coordinates to the <see cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
 
               
 
-               method of the <see
-               cref="T:System.Windows.Forms.Control" />
+               method of the <see cref="T:System.Windows.Forms.Control" />
 
               
 
@@ -824,8 +808,7 @@
             >
           </block>
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.ControlDesigner.GetHitTest(System.Drawing.Point)" />
+            >The <see cref="M:System.Windows.Forms.Design.ControlDesigner.GetHitTest(System.Drawing.Point)" />
 
             
 
@@ -841,12 +824,15 @@
           <para>true if a click at the specified point is to be handled by the control; otherwise, false.</para>
         </returns>
         <param name="point">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -902,8 +888,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ComponentModel.InheritanceAttribute" />
+            >Gets the <see cref="T:System.ComponentModel.InheritanceAttribute" />
 
             
 
@@ -934,17 +919,19 @@
           <para>Initializes the designer with the specified component.</para>
         </summary>
         <param name="component">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ComponentModel.IComponent" />
+          The <see cref="T:System.ComponentModel.IComponent" />
 
           
 
-           to associate the designer with. This component must always be an instance of, or derive from, <see
-           cref="T:System.Windows.Forms.Control" />
+           to associate the designer with. This component must always be an instance of, or derive from, <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -975,8 +962,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >The <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -988,7 +974,11 @@
           <para>Re-initializes an existing component.</para>
         </summary>
         <param name="defaultValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1015,8 +1005,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >The <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1028,7 +1017,11 @@
           <para>Initializes a newly created component.</para>
         </summary>
         <param name="defaultValues">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1055,18 +1048,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An internal control is a control that is not in the <see
-             cref="P:System.ComponentModel.IContainer.Components" />
+            >An internal control is a control that is not in the <see cref="P:System.ComponentModel.IContainer.Components" />
 
             
 
-             collection of the <see
-             cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
+             collection of the <see cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
 
             
 
-            . <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            . <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -1076,8 +1066,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the internal control designer with the specified index in the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >Returns the internal control designer with the specified index in the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1087,8 +1076,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >A <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1096,7 +1084,11 @@
           >
         </returns>
         <param name="internalControlIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1121,13 +1113,11 @@
 
             
 
-             has an <see
-             cref="P:System.Drawing.Point.X" />
+             has an <see cref="P:System.Drawing.Point.X" />
 
             
 
-             and <see
-             cref="P:System.Drawing.Point.Y" />
+             and <see cref="P:System.Drawing.Point.Y" />
 
             
 
@@ -1137,13 +1127,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Defines a local <see
-             cref="T:System.Drawing.Point" />
+            >Defines a local <see cref="T:System.Drawing.Point" />
 
             
 
-             that represents the values of an invalid <see
-             cref="T:System.Drawing.Point" />
+             that represents the values of an invalid <see cref="T:System.Drawing.Point" />
 
             
 
@@ -1173,18 +1161,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An internal control is a control that is not in the <see
-             cref="P:System.ComponentModel.IContainer.Components" />
+            >An internal control is a control that is not in the <see cref="P:System.ComponentModel.IContainer.Components" />
 
             
 
-             collection of the <see
-             cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
+             collection of the <see cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
 
             
 
-            . <see
-             cref="T:System.Windows.Forms.SplitterPanel" />
+            . <see cref="T:System.Windows.Forms.SplitterPanel" />
 
             
 
@@ -1194,8 +1179,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the number of internal control designers in the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >Returns the number of internal control designers in the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1205,8 +1189,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The number of internal control designers in the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >The number of internal control designers in the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1232,14 +1215,22 @@
           <para>Shows the context menu and provides an opportunity to perform additional processing when the context menu is about to be displayed.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x coordinate at which to display the context menu. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1292,12 +1283,15 @@
           <para>Receives a call to clean up a drag-and-drop operation.</para>
         </summary>
         <param name="de">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.DragEventArgs" />
+          A <see cref="T:System.Windows.Forms.DragEventArgs" />
 
           
 
@@ -1371,12 +1365,15 @@
           <para>Receives a call when a drag-and-drop operation leaves the control designer view.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -1435,12 +1432,15 @@
           <para>Receives a call when a drag-and-drop operation is in progress to provide visual cues based on the location of the mouse while a drag operation is in progress.</para>
         </summary>
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
+          A <see cref="T:System.Windows.Forms.GiveFeedbackEventArgs" />
 
           
 
@@ -1471,13 +1471,11 @@
           <para>This method is called at the start of a drag-and-drop operation.</para>
           <block subset="none" type="note">
             <para
-              >You can pass a point in screen coordinates to the <see
-               cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
+              >You can pass a point in screen coordinates to the <see cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
 
               
 
-               method of the <see
-               cref="T:System.Windows.Forms.Control" />
+               method of the <see cref="T:System.Windows.Forms.Control" />
 
               
 
@@ -1490,14 +1488,22 @@
           <para>Receives a call in response to the left mouse button being pressed and held while over the component.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x position of the mouse in screen coordinates. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1525,7 +1531,11 @@
           <para>Receives a call at the end of a drag-and-drop operation to complete or cancel the operation.</para>
         </summary>
         <param name="cancel">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1555,13 +1565,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <block subset="none" type="note">
             <para
-              >You can pass a point in screen coordinates to the <see
-               cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
+              >You can pass a point in screen coordinates to the <see cref="M:System.Windows.Forms.Control.PointToClient(System.Drawing.Point)" />
 
               
 
-               method of the <see
-               cref="T:System.Windows.Forms.Control" />
+               method of the <see cref="T:System.Windows.Forms.Control" />
 
               
 
@@ -1574,14 +1582,22 @@
           <para>Receives a call for each movement of the mouse during a drag-and-drop operation.</para>
         </summary>
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x position of the mouse in screen coordinates. </param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1669,12 +1685,15 @@
           <para>Receives a call when the control that the designer is managing has painted its surface so the designer can paint any additional adornments on top of the control.</para>
         </summary>
         <param name="pe">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Windows.Forms.PaintEventArgs" />
+          A <see cref="T:System.Windows.Forms.PaintEventArgs" />
 
           
 
@@ -1744,8 +1763,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation simply checks to see if the component being designed is a control and if it is, <see
-             cref="P:System.Windows.Forms.Design.ControlDesigner.ParentComponent" />
+            >The default implementation simply checks to see if the component being designed is a control and if it is, <see cref="P:System.Windows.Forms.Design.ControlDesigner.ParentComponent" />
 
             
 
@@ -1755,8 +1773,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent component for the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >Gets the parent component for the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1783,8 +1800,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Windows.Forms.Design.ControlDesigner" />
+            >Gets a value indicating whether the <see cref="T:System.Windows.Forms.Design.ControlDesigner" />
 
             
 
@@ -1809,8 +1825,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This <see
-             cref="T:System.ComponentModel.Design.IDesignerFilter" />
+            >This <see cref="T:System.ComponentModel.Design.IDesignerFilter" />
 
             
 
@@ -1820,8 +1835,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adjusts the set of properties the component exposes through a <see
-             cref="T:System.ComponentModel.TypeDescriptor" />
+            >Adjusts the set of properties the component exposes through a <see cref="T:System.ComponentModel.TypeDescriptor" />
 
             
 
@@ -1829,12 +1843,15 @@
           >
         </summary>
         <param name="properties">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Collections.IDictionary" />
+          An <see cref="T:System.Collections.IDictionary" />
 
           
 
@@ -1888,8 +1905,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use the offered <see
-             cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+            >You can use the offered <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
 
             
 
@@ -1899,8 +1915,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a list of <see
-             cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+            >Gets a list of <see cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
 
             
 

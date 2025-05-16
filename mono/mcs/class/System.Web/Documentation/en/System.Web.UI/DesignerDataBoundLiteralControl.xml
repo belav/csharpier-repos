@@ -31,8 +31,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.DesignerDataBoundLiteralControl" />
+        >The <see cref="T:System.Web.UI.DesignerDataBoundLiteralControl" />
 
         
 
@@ -42,8 +41,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the design-time version of the <see
-         cref="T:System.Web.UI.DataBoundLiteralControl" />
+        >Represents the design-time version of the <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
         
 
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.DesignerDataBoundLiteralControl" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.DesignerDataBoundLiteralControl" />
 
             
 
@@ -88,10 +85,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Web.UI.ControlCollection" />
-        </returns>
+        <returns>a <see cref="T:System.Web.UI.ControlCollection" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -112,10 +106,7 @@
         <Parameter Name="savedState" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="savedState"
-          >a <see
-           cref="T:System.Object" />
-        </param>
+        <param name="savedState">a <see cref="T:System.Object" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -137,10 +128,7 @@
         <Parameter Name="output" Type="System.Web.UI.HtmlTextWriter" />
       </Parameters>
       <Docs>
-        <param name="output"
-          >a <see
-           cref="T:System.Web.UI.HtmlTextWriter" />
-        </param>
+        <param name="output">a <see cref="T:System.Web.UI.HtmlTextWriter" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -158,10 +146,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Object" />
-        </returns>
+        <returns>a <see cref="T:System.Object" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>
@@ -181,8 +166,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.DesignerDataBoundLiteralControl.Text" />
+            >The <see cref="P:System.Web.UI.DesignerDataBoundLiteralControl.Text" />
 
             
 
@@ -192,8 +176,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the text content of the <see
-             cref="T:System.Web.UI.DataBoundLiteralControl" />
+            >Gets or sets the text content of the <see cref="T:System.Web.UI.DataBoundLiteralControl" />
 
             
 

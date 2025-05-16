@@ -32,28 +32,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.ListItemCollection" />
+        >The <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
         
 
-         class represents a collection of <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+         class represents a collection of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
-         objects. The <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+         objects. The <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
-         objects, in turn, represent the items displayed in list controls, such as the <see
-         cref="T:System.Web.UI.WebControls.ListBox" />
+         objects, in turn, represent the items displayed in list controls, such as the <see cref="T:System.Web.UI.WebControls.ListBox" />
 
         
 
-        . To programmatically retrieve <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+        . To programmatically retrieve <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
@@ -62,8 +57,7 @@
       <list type="bullet">
         <item>
           <para
-            >Use the indexer to get a single <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Use the indexer to get a single <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -72,13 +66,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.CopyTo(System.Array,System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.CopyTo(System.Array,System.Int32)" />
 
             
 
-             method to copy the contents of the collection to a <see
-             cref="T:System.Array" />
+             method to copy the contents of the collection to a <see cref="T:System.Array" />
 
             
 
@@ -87,13 +79,11 @@
         </item>
         <item>
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.GetEnumerator" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.GetEnumerator" />
 
             
 
-             method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+             method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
@@ -105,18 +95,15 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+        >The <see cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
 
         
 
-         property specifies the total number of items in the collection, and is commonly used to determine the upper bound of the collection. You can add and remove items from the collection by using the <see
-         cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
+         property specifies the total number of items in the collection, and is commonly used to determine the upper bound of the collection. You can add and remove items from the collection by using the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
 
         
 
-         and <see
-         cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
+         and <see cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
 
         
 
@@ -126,8 +113,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A collection of <see
-         cref="T:System.Web.UI.WebControls.ListItem" />
+        >A collection of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
         
 
@@ -145,8 +131,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -156,8 +141,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -183,28 +167,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
 
             
 
-             method to append a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to append a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             to the end of the collection. This implementation of the method creates a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             to the end of the collection. This implementation of the method creates a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             to represent the text specified by the <paramref
-             name="item" />
+             to represent the text specified by the <paramref name="item" />
 
             
 
-             parameter. This <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             parameter. This <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -214,8 +193,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Appends a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -223,12 +201,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -256,23 +237,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Add(System.String)" />
 
             
 
-             method to append a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to append a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             to the end of the collection. This implementation of the method takes the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             to the end of the collection. This implementation of the method takes the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             specified by the <paramref
-             name="item" />
+             specified by the <paramref name="item" />
 
             
 
@@ -282,8 +259,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Appends the specified <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Appends the specified <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -291,12 +267,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          The <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -324,23 +303,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.AddRange(System.Web.UI.WebControls.ListItem[])" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.AddRange(System.Web.UI.WebControls.ListItem[])" />
 
             
 
-             method to add the items in the array of <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to add the items in the array of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             objects specified by the <paramref
-             name="items" />
+             objects specified by the <paramref name="items" />
 
             
 
-             parameter. This allows you to add multiple <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             parameter. This allows you to add multiple <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -350,8 +325,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the items in an array of <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Adds the items in an array of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -359,12 +333,15 @@
           >
         </summary>
         <param name="items">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          An array of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -388,13 +365,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ListItemCollection.Capacity" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ListItemCollection.Capacity" />
 
             
 
-             property to specify or determine the maximum number of items that the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             property to specify or determine the maximum number of items that the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -404,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the maximum number of items that the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Gets or sets the maximum number of items that the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -429,18 +403,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Clear" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Clear" />
 
             
 
-             method to remove all <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to remove all <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             objects. The <see
-             cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+             objects. The <see cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
 
             
 
@@ -448,8 +419,7 @@
           >
           <block subset="none" type="note">
             <para
-              >When you use this method, all <see
-               cref="T:System.Web.UI.WebControls.ListItem" />
+              >When you use this method, all <see cref="T:System.Web.UI.WebControls.ListItem" />
 
               
 
@@ -460,8 +430,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Removes all <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -490,18 +459,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Contains(System.Web.UI.WebControls.ListItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Contains(System.Web.UI.WebControls.ListItem)" />
 
             
 
-             method to determine whether the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to determine whether the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             specified by the <paramref
-             name="item" />
+             specified by the <paramref name="item" />
 
             
 
@@ -517,12 +483,15 @@
           <para>true if the collection contains the specified item; otherwise, false.</para>
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          A <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -548,13 +517,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to copy the contents of the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Use this method to copy the contents of the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             into the specified <see
-             cref="T:System.Array" />
+             into the specified <see cref="T:System.Array" />
 
             
 
@@ -562,13 +529,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <paramref
-               name="array" />
+              >The <paramref name="array" />
 
               
 
-               parameter must be a zero-based <see
-               cref="T:System.Array" />
+               parameter must be a zero-based <see cref="T:System.Array" />
 
               
 
@@ -579,13 +544,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the items from the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Copies the items from the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             to the specified <see
-             cref="T:System.Array" />
+             to the specified <see cref="T:System.Array" />
 
             
 
@@ -593,29 +556,34 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A zero-based <see
-           cref="T:System.Array" />
+          A zero-based <see cref="T:System.Array" />
 
           
 
-           that receives the copied items from the <see
-           cref="T:System.Web.UI.WebControls.ListItemCollection" />
+           that receives the copied items from the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
           
 
           . </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first index in the specified <see
-           cref="T:System.Array" />
+          The first index in the specified <see cref="T:System.Array" />
 
           
 
@@ -638,23 +606,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+            >Use the <see cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
 
             
 
-             property to determine the number of <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property to determine the number of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-            . The <see
-             cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
+            . The <see cref="P:System.Web.UI.WebControls.ListItemCollection.Count" />
 
             
 
@@ -664,8 +628,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Gets the number of <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -694,23 +657,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.FindByText(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.FindByText(System.String)" />
 
             
 
-             method to search the collection for a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to search the collection for a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             with a <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+             with a <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             property that equals text specified by the <paramref
-             name="text" />
+             property that equals text specified by the <paramref name="text" />
 
             
 
@@ -720,13 +679,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the collection for a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Searches the collection for a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             with a <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+             with a <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
@@ -736,13 +693,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >A <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             that contains the text specified by the <paramref
-             name="text" />
+             that contains the text specified by the <paramref name="text" />
 
             
 
@@ -750,7 +705,11 @@
           >
         </returns>
         <param name="text">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -778,23 +737,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.FindByValue(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.FindByValue(System.String)" />
 
             
 
-             method to search the collection for a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to search the collection for a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             with a <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             with a <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property that contains value specified by the <paramref
-             name="value" />
+             property that contains value specified by the <paramref name="value" />
 
             
 
@@ -804,13 +759,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Searches the collection for a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Searches the collection for a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             with a <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             with a <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
@@ -820,13 +773,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >A <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             that contains the value specified by the <paramref
-             name="value" />
+             that contains the value specified by the <paramref name="value" />
 
             
 
@@ -834,7 +785,11 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -860,42 +815,36 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this method to create a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Use this method to create a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that can be iterated through to get each <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             that can be iterated through to get each <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             object in the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
             .</para
           >
           <para
-            >Use the <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            >Use the <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              property to get the item currently pointed to in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >Use the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
              method to move to the next item in the collection.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
@@ -903,23 +852,19 @@
           >
           <block subset="none" type="note">
             <para
-              >After you create a <see
-               cref="T:System.Collections.IEnumerator" />
+              >After you create a <see cref="T:System.Collections.IEnumerator" />
 
               
 
-               object or use the <see
-               cref="M:System.Collections.IEnumerator.Reset" />
+               object or use the <see cref="M:System.Collections.IEnumerator.Reset" />
 
               
 
-               method to move the enumerator to the first item in the collection, you must call the <see
-               cref="M:System.Collections.IEnumerator.MoveNext" />
+               method to move the enumerator to the first item in the collection, you must call the <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
               
 
-               method. Otherwise, the item represented by the <see
-               cref="P:System.Collections.IEnumerator.Current" />
+               method. Otherwise, the item represented by the <see cref="P:System.Collections.IEnumerator.Current" />
 
               
 
@@ -930,18 +875,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns a <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             implemented object that contains all <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             implemented object that contains all <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -951,18 +893,15 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Collections.IEnumerator" />
+            >A <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             implemented object that contains all <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             implemented object that contains all <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             objects in the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             objects in the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -991,18 +930,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.IndexOf(System.Web.UI.WebControls.ListItem)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.IndexOf(System.Web.UI.WebControls.ListItem)" />
 
             
 
-             method to determine the index value of the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to determine the index value of the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             specified by the <paramref
-             name="item" />
+             specified by the <paramref name="item" />
 
             
 
@@ -1012,8 +948,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines the index value that represents the position of the specified <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Determines the index value that represents the position of the specified <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1023,8 +958,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index position of the specified <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >The index position of the specified <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1032,12 +966,15 @@
           >
         </returns>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          A <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -1063,53 +1000,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Insert(System.Int32,System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Insert(System.Int32,System.String)" />
 
             
 
-             method to add a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to add a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             to the collection at the index specified by the <paramref
-             name="index" />
+             to the collection at the index specified by the <paramref name="index" />
 
             
 
-             parameter. This implementation of the method creates a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             parameter. This implementation of the method creates a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             to represent the text specified by the <paramref
-             name="item" />
+             to represent the text specified by the <paramref name="item" />
 
             
 
-             parameter. The <see
-             cref="P:System.Web.UI.WebControls.ListItem.Text" />
+             parameter. The <see cref="P:System.Web.UI.WebControls.ListItem.Text" />
 
             
 
-             property of the new <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property of the new <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             has the value <paramref
-             name="item" />
+             has the value <paramref name="item" />
 
             
 
-            , and the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+            , and the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property has the value null. This <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property has the value null. This <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1119,8 +1046,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Inserts a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1128,24 +1054,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in the collection to insert the <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          The location in the collection to insert the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
           . </param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -1174,28 +1106,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Insert(System.Int32,System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Insert(System.Int32,System.String)" />
 
             
 
-             method to add a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to add a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             to the collection at the index specified by the <paramref
-             name="index" />
+             to the collection at the index specified by the <paramref name="index" />
 
             
 
-             parameter. This implementation of the method takes the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             parameter. This implementation of the method takes the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             specified by the <paramref
-             name="item" />
+             specified by the <paramref name="item" />
 
             
 
@@ -1205,8 +1132,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts the specified <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Inserts the specified <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1214,24 +1140,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The location in the collection to insert the <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          The location in the collection to insert the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
           . </param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          The <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -1254,8 +1186,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property always returns false to indicate that the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This property always returns false to indicate that the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -1265,8 +1196,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Gets a value indicating whether the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -1290,26 +1220,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property is derived from <see
-             cref="T:System.Collections.ICollection" />
+            >This property is derived from <see cref="T:System.Collections.ICollection" />
 
             
 
              and is overridden to always return false.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.SelectedDatesCollection.IsSynchronized" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.SelectedDatesCollection.IsSynchronized" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.IsSynchronized" />
+             property, see the <see cref="P:System.Collections.ICollection.IsSynchronized" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1319,8 +1245,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether access to the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Gets a value indicating whether access to the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -1369,43 +1294,35 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
 
             
 
-             method to remove a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to remove a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             object from the collection. This implementation of the method creates a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             object from the collection. This implementation of the method creates a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             object using the text in the <paramref
-             name="item" />
+             object using the text in the <paramref name="item" />
 
             
 
-             parameter and then removes this <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             parameter and then removes this <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             from the collection. The specified <paramref
-             name="item" />
+             from the collection. The specified <paramref name="item" />
 
             
 
-             parameter must match the <see
-             cref="P:System.Web.UI.WebControls.ListItem.Value" />
+             parameter must match the <see cref="P:System.Web.UI.WebControls.ListItem.Value" />
 
             
 
-             property of an existing <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             property of an existing <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1415,8 +1332,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Removes a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1424,12 +1340,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -1457,23 +1376,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.Remove(System.String)" />
 
             
 
-             method to remove a <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to remove a <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             from the collection. This implementation of the method takes the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             from the collection. This implementation of the method takes the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
-             specified by the <paramref
-             name="item" />
+             specified by the <paramref name="item" />
 
             
 
@@ -1483,8 +1398,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Removes the specified <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1492,12 +1406,15 @@
           >
         </summary>
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          The <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -1522,13 +1439,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.UI.WebControls.ListItemCollection.RemoveAt(System.Int32)" />
+            >Use the <see cref="M:System.Web.UI.WebControls.ListItemCollection.RemoveAt(System.Int32)" />
 
             
 
-             method to remove the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+             method to remove the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1538,8 +1453,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Web.UI.WebControls.ListItem" />
+            >Removes the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
             
 
@@ -1547,12 +1461,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the <see
-           cref="T:System.Web.UI.WebControls.ListItem" />
+          The index of the <see cref="T:System.Web.UI.WebControls.ListItem" />
 
           
 
@@ -1575,26 +1492,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The object returned in this implementation is the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >The object returned in this implementation is the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
              object itself.</para
           >
           <para
-            >For more information on the <see
-             cref="P:System.Web.UI.WebControls.SelectedDatesCollection.SyncRoot" />
+            >For more information on the <see cref="P:System.Web.UI.WebControls.SelectedDatesCollection.SyncRoot" />
 
             
 
-             property, see the <see
-             cref="P:System.Collections.ICollection.SyncRoot" />
+             property, see the <see cref="P:System.Collections.ICollection.SyncRoot" />
 
             
 
-             property of the <see
-             cref="T:System.Collections.ICollection" />
+             property of the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1604,8 +1517,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the object that can be used to synchronize access to the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >Gets the object that can be used to synchronize access to the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -1636,13 +1548,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1652,8 +1562,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IList.Add(System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IList.Add(System.Object)" />
 
             
 
@@ -1684,13 +1593,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1700,8 +1607,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IList.Contains(System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IList.Contains(System.Object)" />
 
             
 
@@ -1711,13 +1617,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Object" />
+            >true if the <see cref="T:System.Object" />
 
             
 
-             is found in the <see
-             cref="T:System.Collections.IList" />
+             is found in the <see cref="T:System.Collections.IList" />
 
             
 
@@ -1744,13 +1648,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1760,8 +1662,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IList.IndexOf(System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IList.IndexOf(System.Object)" />
 
             
 
@@ -1771,8 +1672,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of <paramref
-             name="value" />
+            >The index of <paramref name="value" />
 
             
 
@@ -1800,13 +1700,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1816,8 +1714,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
 
             
 
@@ -1825,12 +1722,15 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which <paramref
-           name="value" />
+          The zero-based index at which <paramref name="value" />
 
           
 
@@ -1853,13 +1753,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1869,8 +1767,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Collections.IList.IsFixedSize" />
+            >For a description of this member, see <see cref="P:System.Collections.IList.IsFixedSize" />
 
             
 
@@ -1920,13 +1817,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Collections.IList" />
+             instance is cast to an <see cref="T:System.Collections.IList" />
 
             
 
@@ -1936,8 +1831,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="M:System.Collections.IList.Remove(System.Object)" />
+            >For a description of this member, see <see cref="M:System.Collections.IList.Remove(System.Object)" />
 
             
 
@@ -1964,13 +1858,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -1980,8 +1872,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IStateManager.IsTrackingViewState" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IStateManager.IsTrackingViewState" />
 
             
 
@@ -2011,13 +1902,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -2045,13 +1934,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 
@@ -2065,13 +1952,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Object" />
+            >An <see cref="T:System.Object" />
 
             
 
-             that represents the state of the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+             that represents the state of the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
@@ -2095,13 +1980,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.ListItemCollection" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.ListItemCollection" />
 
             
 
-             instance is cast to an <see
-             cref="T:System.Web.UI.IStateManager" />
+             instance is cast to an <see cref="T:System.Web.UI.IStateManager" />
 
             
 

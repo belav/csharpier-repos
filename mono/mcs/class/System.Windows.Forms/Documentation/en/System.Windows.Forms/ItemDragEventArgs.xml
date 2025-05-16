@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Windows.Forms.ListView.ItemDrag" />
+        >The <see cref="E:System.Windows.Forms.ListView.ItemDrag" />
 
         
 
-         event occurs when the user begins dragging an item. An <see
-         cref="T:System.Windows.Forms.ItemDragEventArgs" />
+         event occurs when the user begins dragging an item. An <see cref="T:System.Windows.Forms.ItemDragEventArgs" />
 
         
 
@@ -35,18 +33,15 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.ListView.ItemDrag" />
+        >Provides data for the <see cref="E:System.Windows.Forms.ListView.ItemDrag" />
 
         
 
-         event of the <see
-         cref="T:System.Windows.Forms.ListView" />
+         event of the <see cref="T:System.Windows.Forms.ListView" />
 
         
 
-         and <see
-         cref="T:System.Windows.Forms.TreeView" />
+         and <see cref="T:System.Windows.Forms.TreeView" />
 
         
 
@@ -68,8 +63,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When this version of the constructor is used, the value of the <see
-             cref="P:System.Windows.Forms.ItemDragEventArgs.Item" />
+            >When this version of the constructor is used, the value of the <see cref="P:System.Windows.Forms.ItemDragEventArgs.Item" />
 
             
 
@@ -79,8 +73,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ItemDragEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ItemDragEventArgs" />
 
             
 
@@ -88,12 +81,15 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
@@ -120,8 +116,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.ItemDragEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.ItemDragEventArgs" />
 
             
 
@@ -129,19 +124,26 @@
           >
         </summary>
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A bitwise combination of <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          A bitwise combination of <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            values that indicates which mouse buttons were pressed. </param
         >
         <param name="item">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -189,13 +191,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to determine which item from the <see
-             cref="T:System.Windows.Forms.TreeView" />
+            >You can use this property to determine which item from the <see cref="T:System.Windows.Forms.TreeView" />
 
             
 
-             or <see
-             cref="T:System.Windows.Forms.ListView" />
+             or <see cref="T:System.Windows.Forms.ListView" />
 
             
 

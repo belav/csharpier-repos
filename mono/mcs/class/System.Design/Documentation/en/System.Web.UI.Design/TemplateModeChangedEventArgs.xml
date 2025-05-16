@@ -16,80 +16,67 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+        >The <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
         
 
          event is raised by a designer host, such as vsprvslong, for certain actions on a control on the design surface. For example, an event is raised when you enter or exit template editing mode for a control.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+        >The <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
-         class supplies a default delegate to handle the <see
-         cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+         class supplies a default delegate to handle the <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
         
 
-         event. When you exit or enter template editing mode, the designer host initializes a <see
-         cref="T:System.Web.UI.Design.ViewEventArgs" />
+         event. When you exit or enter template editing mode, the designer host initializes a <see cref="T:System.Web.UI.Design.ViewEventArgs" />
 
         
 
-         object for a <see
-         cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+         object for a <see cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
 
         
 
-         event type, and then sets the <see
-         cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+         event type, and then sets the <see cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
 
         
 
-         property with a <see
-         cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+         property with a <see cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
 
         
 
          object.</para
       >
       <para
-        >When the <see
-         cref="T:System.Web.UI.Design.ViewEventArgs" />
+        >When the <see cref="T:System.Web.UI.Design.ViewEventArgs" />
 
         
 
-         object indicates that the template mode has changed, the default delegate in the <see
-         cref="T:System.Web.UI.Design.ControlDesigner" />
+         object indicates that the template mode has changed, the default delegate in the <see cref="T:System.Web.UI.Design.ControlDesigner" />
 
         
 
-         class updates the value for the <see
-         cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+         class updates the value for the <see cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
 
         
 
          property.</para
       >
       <para
-        >Custom designers that are derived from the <see
-         cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+        >Custom designers that are derived from the <see cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
 
         
 
-         class can override the <see
-         cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+         class can override the <see cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
 
         
 
          method to perform additional processing when the template editing mode changes for a control on the design surface.</para
       >
       <para
-        >For more information about events and delegates, see <format
-         type="text/html">
+        >For more information about events and delegates, see <format type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
 
@@ -101,8 +88,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for a <see
-         cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+        >Provides data for a <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
         
 
@@ -127,56 +113,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+            >A <see cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
 
             
 
-             delegate method uses the <see
-             cref="M:System.Web.UI.Design.TemplateModeChangedEventArgs.#ctor(System.Web.UI.Design.TemplateGroup)" />
+             delegate method uses the <see cref="M:System.Web.UI.Design.TemplateModeChangedEventArgs.#ctor(System.Web.UI.Design.TemplateGroup)" />
 
             
 
-             constructor to initialize a <see
-             cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+             constructor to initialize a <see cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
 
             
 
-             object for use with a <see
-             cref="T:System.Web.UI.Design.ViewEventArgs" />
+             object for use with a <see cref="T:System.Web.UI.Design.ViewEventArgs" />
 
             
 
              object.</para
           >
           <para
-            >When you exit or enter template editing mode, the designer host initializes a <see
-             cref="T:System.Web.UI.Design.ViewEventArgs" />
+            >When you exit or enter template editing mode, the designer host initializes a <see cref="T:System.Web.UI.Design.ViewEventArgs" />
 
             
 
-             object for a <see
-             cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+             object for a <see cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
 
             
 
-             event type, and then sets the <see
-             cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+             event type, and then sets the <see cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
 
             
 
-             property with a <see
-             cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+             property with a <see cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
 
             
 
-             object. The <paramref
-             name="newTemplateGroup" />
+             object. The <paramref name="newTemplateGroup" />
 
             
 
-             parameter specifies a new template group when you enter template editing mode. The <paramref
-             name="newTemplateGroup" />
+             parameter specifies a new template group when you enter template editing mode. The <paramref name="newTemplateGroup" />
 
             
 
@@ -186,8 +162,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
 
             
 
@@ -195,12 +170,15 @@
           >
         </summary>
         <param name="newTemplateGroup">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A new template group that is used to initialize the <see
-           cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
+          A new template group that is used to initialize the <see cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
 
           
 
@@ -225,13 +203,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
+            >The <see cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
 
             
 
-             property specifies a new template group when you enter template editing mode. <see
-             cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
+             property specifies a new template group when you enter template editing mode. <see cref="P:System.Web.UI.Design.TemplateModeChangedEventArgs.NewTemplateGroup" />
 
             
 

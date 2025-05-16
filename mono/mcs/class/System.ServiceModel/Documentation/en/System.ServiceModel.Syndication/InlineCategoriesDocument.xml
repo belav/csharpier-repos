@@ -43,8 +43,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
             
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
             
 
@@ -86,7 +84,11 @@
           >
         </summary>
         <param name="categories">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -120,8 +122,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new instance of the <see
-             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+            >Creates a new instance of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
             
 
@@ -129,31 +130,41 @@
           >
         </summary>
         <param name="categories">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A collection of syndication categories.</param
         >
         <param name="isFixed">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Specifies whether syndication categories can be added to the <see
-           cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+          Specifies whether syndication categories can be added to the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
           
 
           .</param
         >
         <param name="scheme">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The scheme of the <see
-           cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+          The scheme of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
           
 
@@ -183,8 +194,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of syndication categories associated with the <see
-             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+            >Gets the collection of syndication categories associated with the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
             
 
@@ -215,8 +225,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a new <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+            >Creates a new <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -225,10 +234,8 @@
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para
-            >
-Returns a new  <see
-             cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+          <para>
+Returns a new  <see cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
             
 
@@ -254,8 +261,7 @@ Returns a new  <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets a value that specifies whether syndication categories can be added to the <see
-             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+            >Gets and sets a value that specifies whether syndication categories can be added to the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
             
 
@@ -280,8 +286,7 @@ Returns a new  <see
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets and sets the scheme of the <see
-             cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+            >Gets and sets the scheme of the <see cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
 
             
 

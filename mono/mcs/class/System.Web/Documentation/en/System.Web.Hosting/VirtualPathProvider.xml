@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+        >The <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
@@ -34,8 +33,7 @@
         </item>
         <item>
           <para
-            >Any custom extension mapped to a <see
-             cref="T:System.Web.Compilation.BuildProvider" />
+            >Any custom extension mapped to a <see cref="T:System.Web.Compilation.BuildProvider" />
 
             
 
@@ -56,8 +54,7 @@
         </item>
         <item>
           <para
-            >Site map data files used by the <see
-             cref="T:System.Web.XmlSiteMapProvider" />
+            >Site map data files used by the <see cref="T:System.Web.XmlSiteMapProvider" />
 
             
 
@@ -73,13 +70,11 @@
       </list>
       <block subset="none" type="note">
         <para
-          >If a Web site is precompiled for deployment, content provided by a <see
-           cref="T:System.Web.Hosting.VirtualPathProvider" />
+          >If a Web site is precompiled for deployment, content provided by a <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
           
 
-           instance is not compiled, and no <see
-           cref="T:System.Web.Hosting.VirtualPathProvider" />
+           instance is not compiled, and no <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
           
 
@@ -90,44 +85,37 @@
         <h2>Registering a VirtualPathProvider</h2>
       </format>
       <para
-        >A custom <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+        >A custom <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
-         instance should be registered with the ASP.NET compilation system by using the <see
-         cref="M:System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(System.Web.Hosting.VirtualPathProvider)" />
+         instance should be registered with the ASP.NET compilation system by using the <see cref="M:System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(System.Web.Hosting.VirtualPathProvider)" />
 
         
 
          method before any page parsing or compilation is performed by the Web application.</para
       >
       <para
-        >Typically, a <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+        >Typically, a <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
-         instance is registered in an AppInitialize method defined in the App_Code directory, or during the Application_Start event in the Global.asax file. For an example of registering a <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+         instance is registered in an AppInitialize method defined in the App_Code directory, or during the Application_Start event in the Global.asax file. For an example of registering a <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
          instance in an AppInitialize method, see the Example section.</para
       >
       <para
-        >You can register a <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+        >You can register a <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
-         instance during other events, but pages compiled and cached before the <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+         instance during other events, but pages compiled and cached before the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
-         instance is registered will not be invalidated, even if the new <see
-         cref="T:System.Web.Hosting.VirtualPathProvider" />
+         instance is registered will not be invalidated, even if the new <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
         
 
@@ -149,18 +137,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When overriding the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.#ctor" />
+            >When overriding the <see cref="M:System.Web.Hosting.VirtualPathProvider.#ctor" />
 
             
 
-             constructor, defer any initialization that must occur after the <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             constructor, defer any initialization that must occur after the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
-             object is registered to the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
+             object is registered to the <see cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
 
             
 
@@ -194,21 +179,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.CombineVirtualPaths(System.String,System.String)" />
+            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.CombineVirtualPaths(System.String,System.String)" />
 
             
 
              method to inspect the contents of a relative path to a virtual resource and perform any modifications required. </para
           >
           <para
-            >The default implementation combines the <paramref
-             name="basePath" />
+            >The default implementation combines the <paramref name="basePath" />
 
             
 
-             and <paramref
-             name="relativePath" />
+             and <paramref name="relativePath" />
 
             
 
@@ -224,14 +206,22 @@
           <para>The complete path to a virtual resource.</para>
         </returns>
         <param name="basePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The base path for the application.</param
         >
         <param name="relativePath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -259,31 +249,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.DirectoryExists(System.String)" />
+            >Override the <see cref="M:System.Web.Hosting.VirtualPathProvider.DirectoryExists(System.String)" />
 
             
 
-             method to indicate to the compilation system that the resource represented by <paramref
-             name="virtualDir" />
+             method to indicate to the compilation system that the resource represented by <paramref name="virtualDir" />
 
             
 
-             exists in the virtual file system provided by this <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             exists in the virtual file system provided by this <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
              instance.</para
           >
           <para
-            >If your custom <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >If your custom <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
-             class does not support directories, the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.DirectoryExists(System.String)" />
+             class does not support directories, the <see cref="M:System.Web.Hosting.VirtualPathProvider.DirectoryExists(System.String)" />
 
             
 
@@ -291,8 +276,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If your virtual file system will contain themes for the Web site (by creating a virtual App_Themes directory), your custom <see
-               cref="T:System.Web.Hosting.VirtualPathProvider" />
+              >If your virtual file system will contain themes for the Web site (by creating a virtual App_Themes directory), your custom <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
               
 
@@ -309,7 +293,11 @@
           <para>true if the directory exists in the virtual file system; otherwise, false.</para>
         </returns>
         <param name="virtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -334,18 +322,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Override the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.FileExists(System.String)" />
+            >Override the <see cref="M:System.Web.Hosting.VirtualPathProvider.FileExists(System.String)" />
 
             
 
-             method to indicate to the compilation system that the resource represented by <paramref
-             name="virtualPath" />
+             method to indicate to the compilation system that the resource represented by <paramref name="virtualPath" />
 
             
 
-             exists in the virtual file system provided by this <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             exists in the virtual file system provided by this <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -361,7 +346,11 @@
           <para>true if the file exists in the virtual file system; otherwise, false.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -391,18 +380,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)" />
+            >The default implementation of the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)" />
 
             
 
-             method returns null. To cache virtual resources for later use you must override either the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)" />
+             method returns null. To cache virtual resources for later use you must override either the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)" />
 
             
 
-             method or the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" />
+             method or the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" />
 
             
 
@@ -416,8 +402,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Web.Caching.CacheDependency" />
+            >A <see cref="T:System.Web.Caching.CacheDependency" />
 
             
 
@@ -425,21 +410,33 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path to the primary virtual resource.</param
         >
         <param name="virtualPathDependencies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An array of paths to other resources required by the primary virtual resource.</param
         >
         <param name="utcStart">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -467,13 +464,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheKey(System.String)" />
+            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheKey(System.String)" />
 
             
 
-             method to provide a custom cache key for virtual resources. If you do not override the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheKey(System.String)" />
+             method to provide a custom cache key for virtual resources. If you do not override the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheKey(System.String)" />
 
             
 
@@ -489,7 +484,11 @@
           <para>A cache key for the specified virtual resource.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -517,31 +516,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetDirectory(System.String)" />
+            >The <see cref="M:System.Web.Hosting.VirtualPathProvider.GetDirectory(System.String)" />
 
             
 
-             method returns a descendent of the <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+             method returns a descendent of the <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
-             class that contains the file and directories contained in the directory specified in the <paramref
-             name="virtualDir" />
+             class that contains the file and directories contained in the directory specified in the <paramref name="virtualDir" />
 
             
 
              parameter.</para
           >
           <para
-            >If your custom <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >If your custom <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
-             class does not support directories, the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetDirectory(System.String)" />
+             class does not support directories, the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetDirectory(System.String)" />
 
             
 
@@ -549,8 +543,7 @@
           >
           <block subset="none" type="note">
             <para
-              >If your virtual file system will contain themes for the Web site (by creating a virtual App_Themes directory), your custom <see
-               cref="T:System.Web.Hosting.VirtualPathProvider" />
+              >If your virtual file system will contain themes for the Web site (by creating a virtual App_Themes directory), your custom <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
               
 
@@ -565,8 +558,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A descendent of the <see
-             cref="T:System.Web.Hosting.VirtualDirectory" />
+            >A descendent of the <see cref="T:System.Web.Hosting.VirtualDirectory" />
 
             
 
@@ -574,7 +566,11 @@
           >
         </returns>
         <param name="virtualDir">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -602,18 +598,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetFile(System.String)" />
+            >The <see cref="M:System.Web.Hosting.VirtualPathProvider.GetFile(System.String)" />
 
             
 
-             method returns a descendent of the <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+             method returns a descendent of the <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
-             class that represents the file specified by the <paramref
-             name="virtualPath" />
+             class that represents the file specified by the <paramref name="virtualPath" />
 
             
 
@@ -627,8 +620,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A descendent of the <see
-             cref="T:System.Web.Hosting.VirtualFile" />
+            >A descendent of the <see cref="T:System.Web.Hosting.VirtualFile" />
 
             
 
@@ -636,7 +628,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -665,8 +661,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" />
+            >Use the <see cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" />
 
             
 
@@ -682,14 +677,22 @@
           <para>A hash of the specified virtual paths.</para>
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The path to the primary virtual resource.</param
         >
         <param name="virtualPathDependencies">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -712,18 +715,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
+            >The <see cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
 
             
 
-             method is called after the provider is registered with the ASP.NET compilation system. The <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
+             method is called after the provider is registered with the ASP.NET compilation system. The <see cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
 
             
 
-             method is used to provide any initialization required after the <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             method is used to provide any initialization required after the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -733,8 +733,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes the <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >Initializes the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -758,13 +757,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method overrides the <see
-             cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
+            >This method overrides the <see cref="M:System.MarshalByRefObject.InitializeLifetimeService" />
 
             
 
-             method in its base class. It always returns null and thereby prevents a lease from being created that would limit the <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             method in its base class. It always returns null and thereby prevents a lease from being created that would limit the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -774,8 +771,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gives the <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >Gives the <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -808,13 +804,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.Hosting.VirtualPathProvider.OpenFile(System.String)" />
+            >The <see cref="M:System.Web.Hosting.VirtualPathProvider.OpenFile(System.String)" />
 
             
 
-             method is a convenience method that enables you to get a stream from a virtual file without creating a <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             method is a convenience method that enables you to get a stream from a virtual file without creating a <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -828,8 +822,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A read-only <see
-             cref="T:System.IO.Stream" />
+            >A read-only <see cref="T:System.IO.Stream" />
 
             
 
@@ -837,7 +830,11 @@
           >
         </returns>
         <param name="virtualPath">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -865,23 +862,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When a <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >When a <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
-             object is registered with the ASP.NET compilation system, it is added to a chain of providers. Use the <see
-             cref="P:System.Web.Hosting.VirtualPathProvider.Previous" />
+             object is registered with the ASP.NET compilation system, it is added to a chain of providers. Use the <see cref="P:System.Web.Hosting.VirtualPathProvider.Previous" />
 
             
 
-             property to hand processing off to the previous <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             property to hand processing off to the previous <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
-             object in the chain if the requested path is not provided by this <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+             object in the chain if the requested path is not provided by this <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 
@@ -892,8 +885,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a reference to a previously registered <see
-             cref="T:System.Web.Hosting.VirtualPathProvider" />
+            >Gets a reference to a previously registered <see cref="T:System.Web.Hosting.VirtualPathProvider" />
 
             
 

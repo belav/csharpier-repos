@@ -1,31 +1,30 @@
 <?xml version="1.0"?>
 <clause number="22.1" title="Delegate declarations">
   <paragraph
-    >A <non_terminal
-     where="22.1">delegate-declaration</non_terminal>
-
-    
-
-     is a <non_terminal
-     where="16.5">type-declaration</non_terminal>
-
-    
-
-     (<hyperlink
-    >16.5</hyperlink>
-
-    
-
-    ) that declares a new delegate type. <grammar_production
+    >A <non_terminal where="22.1"
+      >delegate-declaration</non_terminal
     >
+
+    
+
+     is a <non_terminal where="16.5"
+      >type-declaration</non_terminal
+    >
+
+    
+
+     (<hyperlink>16.5</hyperlink>
+
+    
+
+    ) that declares a new delegate type. <grammar_production>
       <name>
         <non_terminal where="22.1">delegate-declaration</non_terminal>
       </name>
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="24.2">attributes</non_terminal>
         <opt />
         <non_terminal where="22.1">delegate-modifiers</non_terminal>
@@ -51,8 +50,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <non_terminal where="22.1">delegate-modifier</non_terminal>
       </rhs>
       <rhs>
@@ -67,8 +65,7 @@
 
       
 
-       : <rhs
-      >
+       : <rhs>
         <keyword>new</keyword>
       </rhs>
       <rhs>
@@ -90,16 +87,14 @@
     It is a compile-time error for the same modifier to appear multiple times in a delegate declaration. </paragraph
   >
   <paragraph
-    >The new modifier is only permitted on delegates declared within another type, in which case it specifies that such a delegate hides an inherited member by the same name, as described in <hyperlink
-    >17.2.2</hyperlink>
+    >The new modifier is only permitted on delegates declared within another type, in which case it specifies that such a delegate hides an inherited member by the same name, as described in <hyperlink>17.2.2</hyperlink>
 
     
 
     . </paragraph
   >
   <paragraph
-    >The public, protected, internal, and private modifiers control the accessibility of the delegate type. Depending on the context in which the delegate declaration occurs, some of these modifiers may not be permitted (<hyperlink
-    >10.5.1</hyperlink>
+    >The public, protected, internal, and private modifiers control the accessibility of the delegate type. Depending on the context in which the delegate declaration occurs, some of these modifiers may not be permitted (<hyperlink>10.5.1</hyperlink>
 
     
 
@@ -107,22 +102,24 @@
   >
   <paragraph>The delegate's type name is identifier. </paragraph>
   <paragraph
-    >The optional <non_terminal
-     where="17.5.1">formal-parameter-list</non_terminal>
-
-    
-
-     specifies the parameters of the delegate, and <non_terminal
-     where="17.5">return-type</non_terminal>
-
-    
-
-     indicates the return type of the delegate. A method and a delegate type are compatible if both of the following are true: <list
+    >The optional <non_terminal where="17.5.1"
+      >formal-parameter-list</non_terminal
     >
+
+    
+
+     specifies the parameters of the delegate, and <non_terminal where="17.5"
+      >return-type</non_terminal
+    >
+
+    
+
+     indicates the return type of the delegate. A method and a delegate type are compatible if both of the following are true: <list>
       <list_item> They have the same number or parameters, with the same types, in the same order, with the same parameter modifiers. </list_item>
       <list_item
-        > Their <non_terminal
-         where="17.5">return-type</non_terminal>
+        > Their <non_terminal where="17.5"
+          >return-type</non_terminal
+        >
 
         
 
@@ -132,9 +129,7 @@
   </paragraph>
   <paragraph
     >Delegate types in C# are name equivalent, not structurally equivalent. <note
-
-      >[Note: However, instances of two distinct but structurally equivalent delegate types may compare as equal (<hyperlink
-      >14.9.8</hyperlink>
+      >[Note: However, instances of two distinct but structurally equivalent delegate types may compare as equal (<hyperlink>14.9.8</hyperlink>
 
       
 
@@ -144,9 +139,7 @@
     
 
      Specifically, two different delegate types that have the same parameter lists and return type are considered different delegate types. <example
-
-      >[Example: For example: <code_example
-      >
+      >[Example: For example: <code_example>
         <![CDATA[
 delegate int D1(int i, double d);  
 class A  
@@ -169,8 +162,9 @@ class B
     <example>The delegate types D1 and D2 are both compatible with the methods A.M1 and B.M1, since they have the same return type and parameter list; however, these delegate types are two different types, so they are not interchangeable. The delegate types D1 and D2 are incompatible with the methods B.M2, B.M3, and B.M4, since they have different return types or parameter lists. end example]</example>
   </paragraph>
   <paragraph
-    >The only way to declare a delegate type is via a <non_terminal
-     where="22.1">delegate-declaration</non_terminal>
+    >The only way to declare a delegate type is via a <non_terminal where="22.1"
+      >delegate-declaration</non_terminal
+    >
 
     
 
@@ -178,36 +172,30 @@ class B
   >
   <paragraph>C# provides special syntax for delegate instantiation and invocation. Except for instantiation, any operation that can be applied to a class or class instance can also be applied to a delegate class or instance, respectively. In particular, it is possible to access members of the System.Delegate type via the usual member access syntax. </paragraph>
   <paragraph
-    >The set of methods encapsulated by a delegate instance is called an invocation list. When a delegate instance is created (<hyperlink
-    >22.2</hyperlink>
+    >The set of methods encapsulated by a delegate instance is called an invocation list. When a delegate instance is created (<hyperlink>22.2</hyperlink>
 
     
 
     ) from a single method, it encapsulates that method, and its invocation list contains only one entry. However, when two non-null delegate instances are combined, their invocation lists are concatenated-in the order left operand then right operand-to form a new invocation list, which contains two or more entries. </paragraph
   >
   <paragraph
-    >Delegates are combined using the binary + (<hyperlink
-    >14.7.4</hyperlink>
+    >Delegates are combined using the binary + (<hyperlink>14.7.4</hyperlink>
 
     
 
-    ) and += operators (<hyperlink
-    >14.13.2</hyperlink>
+    ) and += operators (<hyperlink>14.13.2</hyperlink>
 
     
 
-    ). A delegate can be removed from a combination of delegates, using the binary  (<hyperlink
-    >14.7.5</hyperlink>
+    ). A delegate can be removed from a combination of delegates, using the binary  (<hyperlink>14.7.5</hyperlink>
 
     
 
-    ) -and -= operators (<hyperlink
-    >14.13.2</hyperlink>
+    ) -and -= operators (<hyperlink>14.13.2</hyperlink>
 
     
 
-    ). Delegates can be compared for equality (<hyperlink
-    >14.9.8</hyperlink>
+    ). Delegates can be compared for equality (<hyperlink>14.9.8</hyperlink>
 
     
 
@@ -215,8 +203,7 @@ class B
   >
   <paragraph>
     <example
-      >[Example: The following example shows the instantiation of a number of delegates, and their corresponding invocation lists: <code_example
-      >
+      >[Example: The following example shows the instantiation of a number of delegates, and their corresponding invocation lists: <code_example>
         <![CDATA[
 delegate void D(int x);  
 class Test  
@@ -243,8 +230,7 @@ class Demo
   </paragraph>
   <paragraph>
     <example
-      >For more examples of combining (as well as removing) delegates, see <hyperlink
-      >22.3</hyperlink>
+      >For more examples of combining (as well as removing) delegates, see <hyperlink>22.3</hyperlink>
 
       
 

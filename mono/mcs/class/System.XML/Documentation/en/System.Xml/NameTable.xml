@@ -29,13 +29,14 @@
       <para
         > The following example demonstrates the difference between
       equal string values and equal <see
-         cref="T:System.String" qualify="true" />
+          cref="T:System.String"
+          qualify="true"
+        />
 
         
 
          objects using
-      the <see
-         cref="T:System.Xml.NameTable" />
+      the <see cref="T:System.Xml.NameTable" />
 
         
 
@@ -84,13 +85,11 @@ class Ntable {
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Several classes, such as <see
-         cref="T:System.Xml.XmlDocument" />
+        >Several classes, such as <see cref="T:System.Xml.XmlDocument" />
 
         
 
-         and <see
-         cref="T:System.Xml.XmlReader" />
+         and <see cref="T:System.Xml.XmlReader" />
 
         
 
@@ -101,8 +100,7 @@ class Ntable {
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Implements a single-threaded <see
-         cref="T:System.Xml.XmlNameTable" />
+        >Implements a single-threaded <see cref="T:System.Xml.XmlNameTable" />
 
         
 
@@ -169,8 +167,7 @@ class Ntable {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -179,8 +176,7 @@ class Ntable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.NameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />
 
             
 
@@ -196,7 +192,11 @@ class Ntable {
           <para>The atomized string or the existing string if it already exists in the NameTable.</para>
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,21 +234,18 @@ class Ntable {
       </Parameters>
       <Docs>
         <exception cref="T:System.IndexOutOfRangeException">
-          <para>
-            <paramref name="start" />
+          <para><paramref name="start" />
 
             
 
-             &lt; 0.</para
-          >
+             &lt; 0.</para>
           <para>- or -</para>
           <para>
             <paramref name="start" />
 
             
 
-             &gt;= <paramref
-             name="key" />
+             &gt;= <paramref name="key" />
 
             
 
@@ -260,21 +257,18 @@ class Ntable {
 
             
 
-             &gt; <paramref
-             name="key" />
+             &gt; <paramref name="key" />
 
             
 
-            .Length - <paramref
-             name="start" />
+            .Length - <paramref name="start" />
 
             
 
             .</para
           >
           <para
-            >The above conditions do not cause an exception to be thrown if <paramref
-             name="len" />
+            >The above conditions do not cause an exception to be thrown if <paramref name="len" />
 
             
 
@@ -285,8 +279,7 @@ class Ntable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.NameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />
 
             
 
@@ -300,8 +293,7 @@ class Ntable {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The atomized string or the existing string if one already exists in the NameTable. If <paramref
-             name="len" />
+            >The atomized string or the existing string if one already exists in the NameTable. If <paramref name="len" />
 
             
 
@@ -309,21 +301,33 @@ class Ntable {
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array containing the string to add. </param
         >
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index into the array specifying the first character of the string. </param
         >
         <param name="len">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -360,8 +364,7 @@ class Ntable {
 
           
 
-           is <see
-           langword="null" />
+           is <see langword="null" />
 
           
 
@@ -370,8 +373,7 @@ class Ntable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.NameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />
 
             
 
@@ -387,7 +389,11 @@ class Ntable {
           <para>The atomized string object or null if the string has not already been atomized.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -435,8 +441,7 @@ class Ntable {
 
             
 
-             &gt;= <paramref
-             name="key" />
+             &gt;= <paramref name="key" />
 
             
 
@@ -448,21 +453,18 @@ class Ntable {
 
             
 
-             &gt; <paramref
-             name="key" />
+             &gt; <paramref name="key" />
 
             
 
-            .Length - <paramref
-             name="start" />
+            .Length - <paramref name="start" />
 
             
 
             .</para
           >
           <para
-            >The above conditions do not cause an exception to be thrown if <paramref
-             name="len" />
+            >The above conditions do not cause an exception to be thrown if <paramref name="len" />
 
             
 
@@ -473,8 +475,7 @@ class Ntable {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information on atomized strings, see <see
-             cref="T:System.Xml.NameTable" />
+            >For more information on atomized strings, see <see cref="T:System.Xml.NameTable" />
 
             
 
@@ -488,8 +489,7 @@ class Ntable {
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The atomized string or null if the string has not already been atomized. If <paramref
-             name="len" />
+            >The atomized string or null if the string has not already been atomized. If <paramref name="len" />
 
             
 
@@ -497,21 +497,33 @@ class Ntable {
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The character array containing the name to find. </param
         >
         <param name="start">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index into the array specifying the first character of the name. </param
         >
         <param name="len">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

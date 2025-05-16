@@ -25,13 +25,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+        >The <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
 
         
 
-         class uses the flags in the <see
-         cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+         class uses the flags in the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
 
         
 
@@ -62,8 +60,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
 
             
 
@@ -95,8 +92,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor if the information to create the extension is already in an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+            >Use this constructor if the information to create the extension is already in an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -106,13 +102,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class using an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -120,14 +114,22 @@
           >
         </summary>
         <param name="encodedKeyUsage">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The encoded data to use to create the extension.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -162,13 +164,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+             class using the specified <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
 
             
 
@@ -176,19 +176,26 @@
           >
         </summary>
         <param name="keyUsages">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+          One of the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
 
           
 
            values that describes how to use the key.</param
         >
         <param name="critical">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -223,13 +230,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
 
             
 
-             class using an <see
-             cref="T:System.Security.Cryptography.AsnEncodedData" />
+             class using an <see cref="T:System.Security.Cryptography.AsnEncodedData" />
 
             
 
@@ -261,8 +266,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property returns a value from the <see
-             cref="P:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension.KeyUsages" />
+            >This property returns a value from the <see cref="P:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension.KeyUsages" />
 
             
 

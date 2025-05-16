@@ -17,8 +17,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Each field in the <see
-         cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+        >Each field in the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" />
 
         
 
@@ -26,13 +25,11 @@
       >
       <block subset="none" type="note">
         <para
-          >Some members of the <see
-           cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+          >Some members of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" />
 
           
 
-           class, (such as <see
-           cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
+           class, (such as <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
 
           
 
@@ -43,8 +40,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Returns the type of schema table specified by the <see
-         cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" />
+        >Returns the type of schema table specified by the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" />
 
         
 
@@ -63,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+            >Initializes a new instance of the <see cref="T:System.Data.OleDb.OleDbSchemaGuid" />
 
             
 
@@ -1081,36 +1076,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Using <see
-             cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
+            >Using <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
 
             
 
              is equivalent to calling the OLE DB IDBInfo::GetLiteralInfo interface, or the ADO Connection.OpenSchema method with the adSchemaDBInfoLiterals constant.</para
           >
           <para
-            >When using the <see
-             cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" />
+            >When using the <see cref="M:System.Data.OleDb.OleDbConnection.GetOleDbSchemaTable(System.Guid,System.Object[])" />
 
             
 
-             method, if the <paramref
-             name="schema" />
+             method, if the <paramref name="schema" />
 
             
 
-             parameter contains a value of <see
-             cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
+             parameter contains a value of <see cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
 
             
 
-             and the <paramref
-             name="restrictions" />
+             and the <paramref name="restrictions" />
 
             
 
-             parameter contains one or more restrictions, an <see
-             cref="T:System.ArgumentException" />
+             parameter contains one or more restrictions, an <see cref="T:System.ArgumentException" />
 
             
 
@@ -1632,8 +1621,7 @@
           </list>
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
+              >The <see cref="F:System.Data.OleDb.OleDbSchemaGuid.Procedure_Columns" />
 
               
 

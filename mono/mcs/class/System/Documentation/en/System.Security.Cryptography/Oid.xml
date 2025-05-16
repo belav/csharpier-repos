@@ -19,13 +19,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Cryptographic object identifiers consist of a value/name pair. If one property in a pair is set to a known value, the other property is updated automatically to a corresponding value. For example, if the <see
-         cref="P:System.Security.Cryptography.Oid.Value" />
+        >Cryptographic object identifiers consist of a value/name pair. If one property in a pair is set to a known value, the other property is updated automatically to a corresponding value. For example, if the <see cref="P:System.Security.Cryptography.Oid.Value" />
 
         
 
-         property is set to "1.3.6.1.5.5.7.3.4", the <see
-         cref="P:System.Security.Cryptography.Oid.FriendlyName" />
+         property is set to "1.3.6.1.5.5.7.3.4", the <see cref="P:System.Security.Cryptography.Oid.FriendlyName" />
 
         
 
@@ -59,8 +57,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -88,8 +85,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor copies the values of an existing <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >This constructor copies the values of an existing <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -99,13 +95,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             class using the specified <see
-             cref="T:System.Security.Cryptography.Oid" />
+             class using the specified <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -113,7 +107,11 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -140,8 +138,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor copies the values of an existing <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >This constructor copies the values of an existing <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -151,13 +148,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             class using a string value of an <see
-             cref="T:System.Security.Cryptography.Oid" />
+             class using a string value of an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -165,7 +160,11 @@
           >
         </summary>
         <param name="oid">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -193,18 +192,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor can be used to copy the values of an existing <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >This constructor can be used to copy the values of an existing <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             object. Note that if the Oid value is not recognized, the <paramref
-             name="value" />
+             object. Note that if the Oid value is not recognized, the <paramref name="value" />
 
             
 
-             and <paramref
-             name="friendlyName" />
+             and <paramref name="friendlyName" />
 
             
 
@@ -214,8 +210,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
@@ -223,14 +218,22 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The dotted number of the identifier.</param
         >
         <param name="friendlyName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -255,23 +258,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If one value of an <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >If one value of an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             property is set to a known value, the other value of an <see
-             cref="T:System.Security.Cryptography.Oid" />
+             property is set to a known value, the other value of an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             property is updated automatically to a corresponding value. For example, if the <see
-             cref="P:System.Security.Cryptography.Oid.FriendlyName" />
+             property is updated automatically to a corresponding value. For example, if the <see cref="P:System.Security.Cryptography.Oid.FriendlyName" />
 
             
 
-             property is set to "Secure Email", the <see
-             cref="P:System.Security.Cryptography.Oid.Value" />
+             property is set to "Secure Email", the <see cref="P:System.Security.Cryptography.Oid.Value" />
 
             
 
@@ -301,23 +300,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If one value of an <see
-             cref="T:System.Security.Cryptography.Oid" />
+            >If one value of an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             property is set to a known value, the other value of an <see
-             cref="T:System.Security.Cryptography.Oid" />
+             property is set to a known value, the other value of an <see cref="T:System.Security.Cryptography.Oid" />
 
             
 
-             property is updated automatically to a corresponding value. For example, if the <see
-             cref="P:System.Security.Cryptography.Oid.Value" />
+             property is updated automatically to a corresponding value. For example, if the <see cref="P:System.Security.Cryptography.Oid.Value" />
 
             
 
-             property is set to "1.3.6.1.5.5.7.3.4", the <see
-             cref="P:System.Security.Cryptography.Oid.FriendlyName" />
+             property is set to "1.3.6.1.5.5.7.3.4", the <see cref="P:System.Security.Cryptography.Oid.FriendlyName" />
 
             
 

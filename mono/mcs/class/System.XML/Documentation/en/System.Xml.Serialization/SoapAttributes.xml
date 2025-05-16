@@ -21,46 +21,38 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Creating a <see
-         cref="T:System.Xml.Serialization.SoapAttributes" />
+        >Creating a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
         
 
-         is part of a process that overrides the default way the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+         is part of a process that overrides the default way the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         serializes class instances. For example, suppose you want to serialize an object that is created from a DLL that has an inaccessible source. By using the <see
-         cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+         serializes class instances. For example, suppose you want to serialize an object that is created from a DLL that has an inaccessible source. By using the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
         
 
          class, you can augment or otherwise control how the object is serialized.</para
       >
       <para
-        >The members of the <see
-         cref="T:System.Xml.Serialization.SoapAttributes" />
+        >The members of the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
         
 
-         class correspond directly to a family of attribute classes that control serialization. For example, the <see
-         cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
+         class correspond directly to a family of attribute classes that control serialization. For example, the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
 
         
 
-         property must be set to a <see
-         cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+         property must be set to a <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
         
 
-        , which allows you to override serialization of a field or property by instructing the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        , which allows you to override serialization of a field or property by instructing the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
-         to serialize the property value as an encoded SOAP attribute. For a complete list of attributes that control encoded SOAP serialization, see <format
-         type="text/html">
+         to serialize the property value as an encoded SOAP attribute. For a complete list of attributes that control encoded SOAP serialization, see <format type="text/html">
           <a href="93EE258C-9C0F-4A08-897C-C10DB7A00F91"
             >[&lt;topic://cpconAttributesThatControlSOAPEncodedSerialization&gt;]</a
           >
@@ -71,18 +63,15 @@
         .</para
       >
       <para
-        >For more details about adding an instance of the <see
-         cref="T:System.Xml.Serialization.SoapAttributes" />
+        >For more details about adding an instance of the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
         
 
-         class to an instance of the <see
-         cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+         class to an instance of the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
         
 
-         class, see the <see
-         cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+         class, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
         
 
@@ -92,8 +81,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a collection of attribute objects that control how the <see
-         cref="T:System.Xml.Serialization.XmlSerializer" />
+        >Represents a collection of attribute objects that control how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
         
 
@@ -120,23 +108,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For each member or class instance whose serialization is being overridden, you must create a new <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            >For each member or class instance whose serialization is being overridden, you must create a new <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-            . Set the properties for the <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            . Set the properties for the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-             as appropriate to the member or object, then add the <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+             as appropriate to the member or object, then add the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-             to an instance of the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             to an instance of the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -146,8 +130,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
@@ -180,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            >Initializes a new instance of the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
@@ -189,17 +171,19 @@
           >
         </summary>
         <param name="provider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          Any object that implements the <see
-           cref="T:System.Reflection.ICustomAttributeProvider" />
+          Any object that implements the <see cref="T:System.Reflection.ICustomAttributeProvider" />
 
           
 
-           interface, such as the <see
-           cref="T:System.Type" />
+           interface, such as the <see cref="T:System.Type" />
 
           
 
@@ -231,41 +215,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, if no attribute is applied to a public field or public read/write property, it is serialized as an XML element. You can also instruct the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >By default, if no attribute is applied to a public field or public read/write property, it is serialized as an XML element. You can also instruct the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             to serialize a member as an encoded SOAP XML attribute by applying a <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+             to serialize a member as an encoded SOAP XML attribute by applying a <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-             to the field or property. (The <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             to the field or property. (The <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             must be created with an <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+             must be created with an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
              in order to serialize an object as an encoded SOAP XML stream.)</para
           >
           <para
-            >The <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
+            >The <see cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
 
             
 
-             property allows you to override the serialization controlled by applying a <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+             property allows you to override the serialization controlled by applying a <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
-             to the member. For more details on this process, see the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             to the member. For more details on this process, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -275,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+            >Gets or sets the <see cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
             
 
@@ -303,38 +279,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default value of a member can be set by applying a <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+            >The default value of a member can be set by applying a <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
-             attribute to the member. If the member is being serialized as an encoded SOAP message, you can change the default value by creating a new <see
-             cref="T:System.ComponentModel.DefaultValueAttribute" />
+             attribute to the member. If the member is being serialized as an encoded SOAP message, you can change the default value by creating a new <see cref="T:System.ComponentModel.DefaultValueAttribute" />
 
             
 
-            , setting its <see
-             cref="P:System.ComponentModel.DefaultValueAttribute.Value" />
+            , setting its <see cref="P:System.ComponentModel.DefaultValueAttribute.Value" />
 
             
 
-             property, and setting the <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapDefaultValue" />
+             property, and setting the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapDefaultValue" />
 
             
 
-             property to the object. Add the <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+             property to the object. Add the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-             to a <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             to a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
-            . For more details, see the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+            . For more details, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -371,61 +340,50 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapElementAttribute" />
+            >The <see cref="T:System.Xml.Serialization.SoapElementAttribute" />
 
             
 
-             is used to control the serialization of a class member as an XML element. Set the <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapElement" />
+             is used to control the serialization of a class member as an XML element. Set the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapElement" />
 
             
 
-             property to a new <see
-             cref="T:System.Xml.Serialization.SoapElementAttribute" />
+             property to a new <see cref="T:System.Xml.Serialization.SoapElementAttribute" />
 
             
 
-             to override the serialization of a class member as an XML element by creating a new <see
-             cref="T:System.Xml.Serialization.SoapElementAttribute" />
+             to override the serialization of a class member as an XML element by creating a new <see cref="T:System.Xml.Serialization.SoapElementAttribute" />
 
             
 
-             and assigning it to the property. Then add the <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+             and assigning it to the property. Then add the <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-             to a <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             to a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
-            . Create an <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+            . Create an <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
-             with the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             with the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
-            , then construct an <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            , then construct an <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-             with the <see
-             cref="T:System.Xml.Serialization.XmlTypeMapping" />
+             with the <see cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
             
 
             .</para
           >
           <para
-            >For more information, see the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+            >For more information, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -435,8 +393,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a <see
-             cref="T:System.Xml.Serialization.SoapElementAttribute" />
+            >Gets or sets a <see cref="T:System.Xml.Serialization.SoapElementAttribute" />
 
             
 
@@ -469,26 +426,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+            >The <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
             
 
-             is used to control the serialization of an enumeration member. Set the <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
+             is used to control the serialization of an enumeration member. Set the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
 
             
 
-             property to a new <see
-             cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+             property to a new <see cref="T:System.Xml.Serialization.SoapEnumAttribute" />
 
             
 
              to override the serialization of such a member.</para
           >
           <para
-            >For more information, see the <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+            >For more information, see the <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -498,8 +451,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that specifies how the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that specifies how the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -526,54 +478,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >By default, all public fields and public read/write properties are serialized by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >By default, all public fields and public read/write properties are serialized by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
             . That is, the value of each public field or property is persisted as an XML element or XML attribute in an XML document.</para
           >
           <para
-            >To override the default serialization of a field or property, create a <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+            >To override the default serialization of a field or property, create a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-            , and set its <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapIgnore" />
+            , and set its <see cref="P:System.Xml.Serialization.SoapAttributes.SoapIgnore" />
 
             
 
-             property to true. Use the <see
-             cref="M:System.Xml.Serialization.SoapAttributeOverrides.Add(System.Type,System.Xml.Serialization.SoapAttributes)" />
+             property to true. Use the <see cref="M:System.Xml.Serialization.SoapAttributeOverrides.Add(System.Type,System.Xml.Serialization.SoapAttributes)" />
 
             
 
-             method to add the object to a <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             method to add the object to a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
              and specify the type of the object that contains the field or property to ignore and the name of the field or property to ignore.</para
           >
           <para
-            >If a <see
-             cref="T:System.Xml.Serialization.SoapIgnoreAttribute" />
+            >If a <see cref="T:System.Xml.Serialization.SoapIgnoreAttribute" />
 
             
 
-             is applied to a field or property, the field or property is ignored. However you can override that behavior by creating a <see
-             cref="T:System.Xml.Serialization.SoapAttributes" />
+             is applied to a field or property, the field or property is ignored. However you can override that behavior by creating a <see cref="T:System.Xml.Serialization.SoapAttributes" />
 
             
 
-            , setting its <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapIgnore" />
+            , setting its <see cref="P:System.Xml.Serialization.SoapAttributes.SoapIgnore" />
 
             
 
-             property to false, and adding it to a <see
-             cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+             property to false, and adding it to a <see cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
             
 
@@ -583,8 +526,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a value that specifies whether the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets a value that specifies whether the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
@@ -617,23 +559,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+            >The <see cref="T:System.Xml.Serialization.SoapTypeAttribute" />
 
             
 
-             can be used to control the XML stream generated by the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+             can be used to control the XML stream generated by the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 
-            . Set the <see
-             cref="P:System.Xml.Serialization.SoapAttributes.SoapType" />
+            . Set the <see cref="P:System.Xml.Serialization.SoapAttributes.SoapType" />
 
             
 
-             property to a new <see
-             cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+             property to a new <see cref="T:System.Xml.Serialization.SoapTypeAttribute" />
 
             
 
@@ -643,8 +581,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets an object that instructs the <see
-             cref="T:System.Xml.Serialization.XmlSerializer" />
+            >Gets or sets an object that instructs the <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
             
 

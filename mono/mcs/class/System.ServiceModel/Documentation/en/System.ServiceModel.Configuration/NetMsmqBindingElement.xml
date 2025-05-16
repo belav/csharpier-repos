@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+        >The <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
-         binding provides support for queuing by leveraging Microsoft Message Queuing (MSMQ) as a transport and enables support for loosely coupled applications, failure isolation, load leveling and disconnected operations. For a discussion of these features, see <format
-         type="text/html">
+         binding provides support for queuing by leveraging Microsoft Message Queuing (MSMQ) as a transport and enables support for loosely coupled applications, failure isolation, load leveling and disconnected operations. For a discussion of these features, see <format type="text/html">
           <a href="b8757992-ffce-40ad-9e9b-3243f6d0fce1">Queues</a>
         </format>
 
@@ -61,8 +59,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" />
 
             
 
@@ -90,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Type" />
+            >Gets the <see cref="T:System.Type" />
 
             
 
@@ -123,18 +119,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+            >The <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
-             minimizes the cost of using buffers by using a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+             minimizes the cost of using buffers by using a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
-             must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see
-             cref="P:System.ServiceModel.BasicHttpBinding.MaxBufferPoolSize" />
+             must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see cref="P:System.ServiceModel.BasicHttpBinding.MaxBufferPoolSize" />
 
             
 
@@ -173,12 +166,15 @@
           <para>Applies the specified binding to the configuration element.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          A <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -208,8 +204,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Configuration.ConfigurationPropertyCollection" />
+            >Gets the <see cref="T:System.Configuration.ConfigurationPropertyCollection" />
 
             
 
@@ -244,18 +239,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >MSMQ does not support Active Directory addressing when using SOAP Reliable Messaging Protocol. Therefore, you should not set this property to <see
-             cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+            >MSMQ does not support Active Directory addressing when using SOAP Reliable Messaging Protocol. Therefore, you should not set this property to <see cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
+             or <see cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
 
             
 
-             when <see
-             cref="P:System.ServiceModel.Configuration.NetMsmqBindingElement.UseActiveDirectory" />
+             when <see cref="P:System.ServiceModel.Configuration.NetMsmqBindingElement.UseActiveDirectory" />
 
             
 
@@ -294,13 +286,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >The <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
-             object defines a number of constraints on the complexity of SOAP messages that can be processed by endpoints configured with a binding. These constraints include maxArrayLength, maxBytesPerRead, maxDepth, maxNameTableCharCount, and maxStringContentLength. These values aid in the prevention of denial of service attacks. For more information, see <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+             object defines a number of constraints on the complexity of SOAP messages that can be processed by endpoints configured with a binding. These constraints include maxArrayLength, maxBytesPerRead, maxDepth, maxNameTableCharCount, and maxStringContentLength. These values aid in the prevention of denial of service attacks. For more information, see <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
@@ -310,8 +300,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+            >Gets or sets the <see cref="T:System.Xml.XmlDictionaryReaderQuotas" />
 
             
 
@@ -356,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.NetMsmqSecurity" />
+            >Gets the <see cref="T:System.ServiceModel.NetMsmqSecurity" />
 
             
 
@@ -387,8 +375,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>MSMQ queue addresses can consist of path names or direct format names. With a direct format name, MSMQ resolves the queue name using DNS, NetBIOS, or IP. With a path name, MSMQ resolves the queue name using Active Directory.</para>
           <para
-            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
-             cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" />
+            >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" />
 
             
 

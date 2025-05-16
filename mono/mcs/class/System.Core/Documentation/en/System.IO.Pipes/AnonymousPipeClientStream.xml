@@ -25,47 +25,40 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Anonymous pipes help provide safe and secure interprocess communication between child and parent processes. The <see
-         cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+        >Anonymous pipes help provide safe and secure interprocess communication between child and parent processes. The <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
         
 
          class enables a child process to connect to and exchange information with a parent process.</para
       >
       <para
-        >Anonymous pipes are unnamed, one-way pipes that typically transfer data between parent and child processes. Anonymous pipes are always local; they cannot be used over a network. A <see
-         cref="T:System.IO.Pipes.PipeDirection" />
+        >Anonymous pipes are unnamed, one-way pipes that typically transfer data between parent and child processes. Anonymous pipes are always local; they cannot be used over a network. A <see cref="T:System.IO.Pipes.PipeDirection" />
 
         
 
-         value of <see
-         cref="F:System.IO.Pipes.PipeDirection.InOut" />
+         value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />
 
         
 
          is not supported because anonymous pipes are defined to be one-way.</para
       >
       <para
-        >Anonymous pipes do not support <see
-         cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+        >Anonymous pipes do not support <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
 
         
 
          read modes.</para
       >
       <para
-        >The client side of an anonymous pipe must be created from a pipe handle provided by the server side by calling the <see
-         cref="M:System.IO.Pipes.AnonymousPipeServerStream.GetClientHandleAsString" />
+        >The client side of an anonymous pipe must be created from a pipe handle provided by the server side by calling the <see cref="M:System.IO.Pipes.AnonymousPipeServerStream.GetClientHandleAsString" />
 
         
 
-         method. The string is then passed as a parameter when creating the client process. From the client process, it is passed to the <see
-         cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+         method. The string is then passed as a parameter when creating the client process. From the client process, it is passed to the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
         
 
-         constructor as the <paramref
-         name="pipeHandleAsString" />
+         constructor as the <paramref name="pipeHandleAsString" />
 
         
 
@@ -101,13 +94,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For constructors without a <see
-             cref="T:System.IO.Pipes.PipeDirection" />
+            >For constructors without a <see cref="T:System.IO.Pipes.PipeDirection" />
 
             
 
-             parameter, the default direction is <see
-             cref="F:System.IO.Pipes.PipeDirection.In" />
+             parameter, the default direction is <see cref="F:System.IO.Pipes.PipeDirection.In" />
 
             
 
@@ -117,8 +108,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
             
 
@@ -126,7 +116,11 @@
           >
         </summary>
         <param name="pipeHandleAsString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -155,13 +149,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.Pipes.PipeDirection" />
+            >A <see cref="T:System.IO.Pipes.PipeDirection" />
 
             
 
-             value of <see
-             cref="F:System.IO.Pipes.PipeDirection.InOut" />
+             value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />
 
             
 
@@ -171,8 +163,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
             
 
@@ -180,19 +171,26 @@
           >
         </summary>
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that determines the direction of the pipe.</param
         >
         <param name="safePipeHandle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A safe handle for the pipe that this <see
-           cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+          A safe handle for the pipe that this <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
           
 
@@ -221,13 +219,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.IO.Pipes.PipeDirection" />
+            >A <see cref="T:System.IO.Pipes.PipeDirection" />
 
             
 
-             value of <see
-             cref="F:System.IO.Pipes.PipeDirection.InOut" />
+             value of <see cref="F:System.IO.Pipes.PipeDirection.InOut" />
 
             
 
@@ -237,8 +233,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+            >Initializes a new instance of the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
             
 
@@ -246,14 +241,22 @@
           >
         </summary>
         <param name="direction">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           One of the enumeration values that determines the direction of the pipe.</param
         >
         <param name="pipeHandleAsString">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -301,8 +304,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Anonymous pipes do not support <see
-             cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+            >Anonymous pipes do not support <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
 
             
 
@@ -312,8 +314,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the reading mode for the <see
-             cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+            >Sets the reading mode for the <see cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
 
             
 
@@ -343,8 +344,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Anonymous pipes do not support <see
-             cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+            >Anonymous pipes do not support <see cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
 
             
 

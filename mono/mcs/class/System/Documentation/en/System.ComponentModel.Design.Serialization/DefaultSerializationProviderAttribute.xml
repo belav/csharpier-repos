@@ -29,8 +29,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >To be a default serialization provider, a class must implement the <see
-         cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+        >To be a default serialization provider, a class must implement the <see cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
 
         
 
@@ -40,8 +39,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
 
         
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
 
             
 
@@ -81,7 +78,11 @@
           >
         </summary>
         <param name="providerTypeName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -111,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.DefaultSerializationProviderAttribute" />
 
             
 
@@ -120,12 +120,15 @@
           >
         </summary>
         <param name="providerType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Type" />
+          The <see cref="T:System.Type" />
 
           
 

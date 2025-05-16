@@ -29,49 +29,41 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Web.UI.WebControls.RepeaterItem" />
+        >A <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
         
 
-         object represents an item in the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         object represents an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
          control, such as the heading section, footer section, or a data item.</para
       >
       <para
-        >The data items of the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >The data items of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
-         control are stored in a <see
-         cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+         control are stored in a <see cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
 
         
 
-         object that can be accessed by using the <see
-         cref="P:System.Web.UI.WebControls.Repeater.Items" />
+         object that can be accessed by using the <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
         
 
-         property of the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         property of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
          control.</para
       >
       <para
-        >You can use a <see
-         cref="T:System.Web.UI.WebControls.RepeaterItem" />
+        >You can use a <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
         
 
-         object to programmatically access the properties of an item in the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+         object to programmatically access the properties of an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -81,8 +73,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an item in the <see
-         cref="T:System.Web.UI.WebControls.Repeater" />
+        >Represents an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
         
 
@@ -106,8 +97,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor to create and initialize a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Use this constructor to create and initialize a new instance of the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -117,8 +107,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
@@ -126,29 +115,34 @@
           >
         </summary>
         <param name="itemIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The index of the item in the <see
-           cref="T:System.Web.UI.WebControls.Repeater" />
+          The index of the item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
           
 
-           control from the <see
-           cref="P:System.Web.UI.WebControls.Repeater.Items" />
+           control from the <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
           
 
            collection of the control. </param
         >
         <param name="itemType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Web.UI.WebControls.ListItemType" />
+          One of the <see cref="T:System.Web.UI.WebControls.ListItemType" />
 
           
 
@@ -172,18 +166,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeaterItem.DataItem" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeaterItem.DataItem" />
 
             
 
-             property to specify or determine the properties of a data item associated with the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+             property to specify or determine the properties of a data item associated with the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             object in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -191,13 +182,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property only applies to data items in the <see
-               cref="T:System.Web.UI.WebControls.Repeater" />
+              >This property only applies to data items in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
 
               
 
@@ -208,13 +197,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets a data item associated with the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >Gets or sets a data item associated with the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             object in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             object in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -238,18 +225,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeaterItem.ItemIndex" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeaterItem.ItemIndex" />
 
             
 
-             property to determine the index number of the item in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property to determine the index number of the item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control from the <see
-             cref="P:System.Web.UI.WebControls.Repeater.Items" />
+             control from the <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
             
 
@@ -257,13 +241,11 @@
           >
           <block subset="none" type="note">
             <para
-              >This property only applies to data items in the <see
-               cref="T:System.Web.UI.WebControls.Repeater" />
+              >This property only applies to data items in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
               
 
-               control. The <see
-               cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
+               control. The <see cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
 
               
 
@@ -274,13 +256,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the index of the item in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Gets the index of the item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control from the <see
-             cref="P:System.Web.UI.WebControls.Repeater.Items" />
+             control from the <see cref="P:System.Web.UI.WebControls.Repeater.Items" />
 
             
 
@@ -307,13 +287,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
+            >Use the <see cref="P:System.Web.UI.WebControls.RepeaterItem.ItemType" />
 
             
 
-             property to determine the type of an item in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+             property to determine the type of an item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -336,8 +314,7 @@
               </term>
               <description>
                 <para
-                  >The heading section of the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >The heading section of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -351,8 +328,7 @@
               </term>
               <description>
                 <para
-                  >The footer section of the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >The footer section of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -366,8 +342,7 @@
               </term>
               <description>
                 <para
-                  >An item in the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >An item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -381,8 +356,7 @@
               </term>
               <description>
                 <para
-                  >An alternating item in the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >An alternating item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -396,8 +370,7 @@
               </term>
               <description>
                 <para
-                  >The selected item in the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >The selected item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -411,8 +384,7 @@
               </term>
               <description>
                 <para
-                  >The item selected for editing in the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >The item selected for editing in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -426,8 +398,7 @@
               </term>
               <description>
                 <para
-                  >A separator between the items of the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >A separator between the items of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -441,8 +412,7 @@
               </term>
               <description>
                 <para
-                  >The page selection section of the <see
-                   cref="T:System.Web.UI.WebControls.Repeater" />
+                  >The page selection section of the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
                   
 
@@ -455,8 +425,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the type of the item in the <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Gets the type of the item in the <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
@@ -487,18 +456,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Assigns any sources of the event and its information to the parent <see
-             cref="T:System.Web.UI.WebControls.Repeater" />
+            >Assigns any sources of the event and its information to the parent <see cref="T:System.Web.UI.WebControls.Repeater" />
 
             
 
-             control, if the <see
-             cref="T:System.EventArgs" />
+             control, if the <see cref="T:System.EventArgs" />
 
             
 
-             parameter is an instance of <see
-             cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
+             parameter is an instance of <see cref="T:System.Web.UI.WebControls.RepeaterCommandEventArgs" />
 
             
 
@@ -510,19 +476,26 @@
           <para>true if the event assigned to the parent was raised, otherwise false.</para>
         </returns>
         <param name="source">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The source of the event. </param
         >
         <param name="e">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.EventArgs" />
+          An <see cref="T:System.EventArgs" />
 
           
 
@@ -551,13 +524,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             instance is cast to the <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to the <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -567,8 +538,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
 
             
 
@@ -594,13 +564,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This member is an explicit interface member implementation. It can be used only when the <see
-             cref="T:System.Web.UI.WebControls.RepeaterItem" />
+            >This member is an explicit interface member implementation. It can be used only when the <see cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
             
 
-             instance is cast to the <see
-             cref="T:System.Web.UI.IDataItemContainer" />
+             instance is cast to the <see cref="T:System.Web.UI.IDataItemContainer" />
 
             
 
@@ -610,8 +578,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For a description of this member, see <see
-             cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+            >For a description of this member, see <see cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
 
             
 

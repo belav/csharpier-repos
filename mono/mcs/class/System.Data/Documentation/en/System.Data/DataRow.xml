@@ -17,149 +17,121 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Data.DataRow" />
+        >The <see cref="T:System.Data.DataRow" />
 
         
 
-         and <see
-         cref="T:System.Data.DataColumn" />
+         and <see cref="T:System.Data.DataColumn" />
 
         
 
-         objects are primary components of a <see
-         cref="T:System.Data.DataTable" />
+         objects are primary components of a <see cref="T:System.Data.DataTable" />
 
         
 
-        . Use the <see
-         cref="T:System.Data.DataRow" />
+        . Use the <see cref="T:System.Data.DataRow" />
 
         
 
-         object and its properties and methods to retrieve and evaluate; and insert, delete, and update the values in the <see
-         cref="T:System.Data.DataTable" />
+         object and its properties and methods to retrieve and evaluate; and insert, delete, and update the values in the <see cref="T:System.Data.DataTable" />
 
         
 
-        . The <see
-         cref="T:System.Data.DataRowCollection" />
+        . The <see cref="T:System.Data.DataRowCollection" />
 
         
 
-         represents the actual <see
-         cref="T:System.Data.DataRow" />
+         represents the actual <see cref="T:System.Data.DataRow" />
 
         
 
-         objects in the <see
-         cref="T:System.Data.DataTable" />
+         objects in the <see cref="T:System.Data.DataTable" />
 
         
 
-        , and the <see
-         cref="T:System.Data.DataColumnCollection" />
+        , and the <see cref="T:System.Data.DataColumnCollection" />
 
         
 
-         contains the <see
-         cref="T:System.Data.DataColumn" />
+         contains the <see cref="T:System.Data.DataColumn" />
 
         
 
-         objects that describe the schema of the <see
-         cref="T:System.Data.DataTable" />
+         objects that describe the schema of the <see cref="T:System.Data.DataTable" />
 
         
 
-        . Use the overloaded <see
-         cref="P:System.Data.DataRow.Item(System.Int32)" />
+        . Use the overloaded <see cref="P:System.Data.DataRow.Item(System.Int32)" />
 
         
 
-         property to return or set the value of a <see
-         cref="T:System.Data.DataColumn" />
+         property to return or set the value of a <see cref="T:System.Data.DataColumn" />
 
         
 
         .</para
       >
       <para
-        >Use the <see
-         cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+        >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
         
 
-         and <see
-         cref="M:System.Data.DataRow.IsNull(System.Int32)" />
+         and <see cref="M:System.Data.DataRow.IsNull(System.Int32)" />
 
         
 
-         properties to determine the status of a particular row value, and the <see
-         cref="P:System.Data.DataRow.RowState" />
+         properties to determine the status of a particular row value, and the <see cref="P:System.Data.DataRow.RowState" />
 
         
 
-         property to determine the state of the row relative to its parent <see
-         cref="T:System.Data.DataTable" />
+         property to determine the state of the row relative to its parent <see cref="T:System.Data.DataTable" />
 
         
 
         .</para
       >
       <para
-        >To create a new <see
-         cref="T:System.Data.DataRow" />
+        >To create a new <see cref="T:System.Data.DataRow" />
 
         
 
-        , use the <see
-         cref="M:System.Data.DataTable.NewRow" />
+        , use the <see cref="M:System.Data.DataTable.NewRow" />
 
         
 
-         method of the <see
-         cref="T:System.Data.DataTable" />
+         method of the <see cref="T:System.Data.DataTable" />
 
         
 
-         object. After creating a new <see
-         cref="T:System.Data.DataRow" />
+         object. After creating a new <see cref="T:System.Data.DataRow" />
 
         
 
-        , use the <see
-         cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
+        , use the <see cref="M:System.Data.DataRowCollection.Add(System.Data.DataRow)" />
 
         
 
-         method to add the new <see
-         cref="T:System.Data.DataRow" />
+         method to add the new <see cref="T:System.Data.DataRow" />
 
         
 
-         to the <see
-         cref="T:System.Data.DataRowCollection" />
+         to the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-        . Finally, call the <see
-         cref="M:System.Data.DataRow.AcceptChanges" />
+        . Finally, call the <see cref="M:System.Data.DataRow.AcceptChanges" />
 
         
 
-         method of the <see
-         cref="T:System.Data.DataTable" />
+         method of the <see cref="T:System.Data.DataTable" />
 
         
 
-         object to confirm the addition. For more information about adding data to a <see
-         cref="T:System.Data.DataTable" />
+         object to confirm the addition. For more information about adding data to a <see cref="T:System.Data.DataTable" />
 
         
 
-        , see <format
-         type="text/html">
+        , see <format type="text/html">
           <a href="d6aa8474-7bde-48f7-949d-20dc38a1625b">Adding Data to a Table</a>
         </format>
 
@@ -168,63 +140,51 @@
         .</para
       >
       <para
-        >You can delete a <see
-         cref="T:System.Data.DataRow" />
+        >You can delete a <see cref="T:System.Data.DataRow" />
 
         
 
-         from the <see
-         cref="T:System.Data.DataRowCollection" />
+         from the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-         by calling the <see
-         cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
+         by calling the <see cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
 
         
 
-         method of the <see
-         cref="T:System.Data.DataRowCollection" />
+         method of the <see cref="T:System.Data.DataRowCollection" />
 
         
 
-        , or by calling the <see
-         cref="M:System.Data.DataRow.Delete" />
+        , or by calling the <see cref="M:System.Data.DataRow.Delete" />
 
         
 
-         method of the <see
-         cref="T:System.Data.DataRow" />
+         method of the <see cref="T:System.Data.DataRow" />
 
         
 
-         object. The <see
-         cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
+         object. The <see cref="M:System.Data.DataRowCollection.Remove(System.Data.DataRow)" />
 
         
 
-         method removes the row from the collection. In contrast, <see
-         cref="M:System.Data.DataRow.Delete" />
+         method removes the row from the collection. In contrast, <see cref="M:System.Data.DataRow.Delete" />
 
         
 
-         marks the <see
-         cref="T:System.Data.DataRow" />
+         marks the <see cref="T:System.Data.DataRow" />
 
         
 
-         for removal. The actual removal occurs when you call <see
-         cref="M:System.Data.DataRow.AcceptChanges" />
+         for removal. The actual removal occurs when you call <see cref="M:System.Data.DataRow.AcceptChanges" />
 
         
 
-         method. By calling <see
-         cref="M:System.Data.DataRow.Delete" />
+         method. By calling <see cref="M:System.Data.DataRow.Delete" />
 
         
 
-        , you can programmatically check which rows are marked for removal before actually deleting them. For more information, see <format
-         type="text/html">
+        , you can programmatically check which rows are marked for removal before actually deleting them. For more information, see <format type="text/html">
           <a href="c34f531d-4b9b-4071-b2d7-342c402aa586">Deleting a Row from a Table</a>
         </format>
 
@@ -236,8 +196,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents a row of data in a <see
-         cref="T:System.Data.DataTable" />
+        >Represents a row of data in a <see cref="T:System.Data.DataTable" />
 
         
 
@@ -266,7 +225,11 @@
           <para>Initializes a new instance of the DataRow. Constructs a row from the builder. Only for internal usage..</para>
         </summary>
         <param name="builder">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -285,54 +248,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When invoking <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >When invoking <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
-            , the <see
-             cref="M:System.Data.DataRow.EndEdit" />
+            , the <see cref="M:System.Data.DataRow.EndEdit" />
 
             
 
-             method is implicitly called to end any edits. If the <see
-             cref="P:System.Data.DataRow.RowState" />
+             method is implicitly called to end any edits. If the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of the row was Added or Modified, the <see
-             cref="P:System.Data.DataRow.RowState" />
+             of the row was Added or Modified, the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             becomes Unchanged. If the <see
-             cref="P:System.Data.DataRow.RowState" />
+             becomes Unchanged. If the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
              was Deleted, the row is removed.</para
           >
           <para
-            >See the <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+            >See the <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
              method for more information.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             class also has an <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+             class also has an <see cref="M:System.Data.DataTable.AcceptChanges" />
 
             
 
-             method which affects changes made to the whole table. For more information and a code example that demonstrates how to accept and reject changes to individual data rows, see <format
-             type="text/html">
+             method which affects changes made to the whole table. For more information and a code example that demonstrates how to accept and reject changes to individual data rows, see <format type="text/html">
               <a href="e2d1a6fe-31f9-4b83-9728-06c406a3394e">AcceptChanges and RejectChanges</a>
             </format>
 
@@ -344,8 +298,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Commits all the changes made to this row since the last time <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >Commits all the changes made to this row since the last time <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -369,69 +322,57 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+            >Use the <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
-             method to put a <see
-             cref="T:System.Data.DataRow" />
+             method to put a <see cref="T:System.Data.DataRow" />
 
             
 
              into edit mode. In this mode, events are temporarily suspended, letting the user make changes to more than one row without triggering validation rules. For example, if you must make sure that the value of the column for a total amount is equal to the values for the debit and credit columns in a row, you can put each row into edit mode to suspend the validation of the row values until the user tries to commit the values.</para
           >
           <para
-            >The <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+            >The <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
-             method is called implicitly when the user changes the value of a data-bound control; the <see
-             cref="M:System.Data.DataRow.EndEdit" />
+             method is called implicitly when the user changes the value of a data-bound control; the <see cref="M:System.Data.DataRow.EndEdit" />
 
             
 
-             method is called implicitly when you invoke the <see
-             cref="M:System.Data.DataTable.AcceptChanges" />
+             method is called implicitly when you invoke the <see cref="M:System.Data.DataTable.AcceptChanges" />
 
             
 
-             method for the <see
-             cref="T:System.Data.DataTable" />
+             method for the <see cref="T:System.Data.DataTable" />
 
             
 
-             object. While in this edit mode, the <see
-             cref="T:System.Data.DataRow" />
+             object. While in this edit mode, the <see cref="T:System.Data.DataRow" />
 
             
 
-             stores representations of the original and new proposed values. Therefore, as long as the <see
-             cref="M:System.Data.DataRow.EndEdit" />
+             stores representations of the original and new proposed values. Therefore, as long as the <see cref="M:System.Data.DataRow.EndEdit" />
 
             
 
-             method has not been called, you can retrieve either the original or proposed version by passing either DataRowVersion.Original or DataRowVersion.Proposed for the <paramref
-             name="version" />
+             method has not been called, you can retrieve either the original or proposed version by passing either DataRowVersion.Original or DataRowVersion.Proposed for the <paramref name="version" />
 
             
 
-             parameter of the <see
-             cref="P:System.Data.DataRow.Item(System.Int32)" />
+             parameter of the <see cref="P:System.Data.DataRow.Item(System.Int32)" />
 
             
 
-             property. You can also cancel any edits at this point by invoking the <see
-             cref="M:System.Data.DataRow.CancelEdit" />
+             property. You can also cancel any edits at this point by invoking the <see cref="M:System.Data.DataRow.CancelEdit" />
 
             
 
              method.</para
           >
           <para
-            >To see if the row contains an original or proposed value, call the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >To see if the row contains an original or proposed value, call the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
@@ -439,13 +380,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Data.DataRow.BeginEdit" />
+              >The <see cref="M:System.Data.DataRow.BeginEdit" />
 
               
 
-               method temporarily suspends <see
-               cref="E:System.Data.DataTable.RowChanging" />
+               method temporarily suspends <see cref="E:System.Data.DataTable.RowChanging" />
 
               
 
@@ -456,8 +395,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Starts an edit operation on a <see
-             cref="T:System.Data.DataRow" />
+            >Starts an edit operation on a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -486,8 +424,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+            >See the <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
@@ -520,34 +457,29 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+            >Use <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
-             and <see
-             cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
+             and <see cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
 
             
 
              to set and return errors for individual columns.</para
           >
           <para
-            >Set the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >Set the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
              property to set an error that applies to the whole row.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             method. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             method. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
@@ -557,13 +489,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the errors for the row. This includes the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >Clears the errors for the row. This includes the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
-             and errors set with <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+             and errors set with <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
@@ -587,46 +517,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="P:System.Data.DataRow.RowState" />
+            >If the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of the row is Added, the <see
-             cref="P:System.Data.DataRow.RowState" />
+             of the row is Added, the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             becomes Detached and the row is removed from the table when you call <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+             becomes Detached and the row is removed from the table when you call <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
             .</para
           >
           <para
-            >The <see
-             cref="P:System.Data.DataRow.RowState" />
+            >The <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             becomes Deleted after you use the <see
-             cref="M:System.Data.DataRow.Delete" />
+             becomes Deleted after you use the <see cref="M:System.Data.DataRow.Delete" />
 
             
 
-             method on an existing <see
-             cref="T:System.Data.DataRow" />
+             method on an existing <see cref="T:System.Data.DataRow" />
 
             
 
-            . It remains Deleted until you call <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            . It remains Deleted until you call <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
-            . At this time, the <see
-             cref="T:System.Data.DataRow" />
+            . At this time, the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -637,21 +559,18 @@
 
             
 
-             should not be called in a foreach loop while iterating through a <see
-             cref="T:System.Data.DataRowCollection" />
+             should not be called in a foreach loop while iterating through a <see cref="T:System.Data.DataRowCollection" />
 
             
 
-             object. <see
-             cref="M:System.Data.DataRow.Delete" />
+             object. <see cref="M:System.Data.DataRow.Delete" />
 
             
 
              modifies the state of the collection.</para
           >
           <para
-            >A deleted row can be undeleted by invoking <see
-             cref="M:System.Data.DataRow.RejectChanges" />
+            >A deleted row can be undeleted by invoking <see cref="M:System.Data.DataRow.RejectChanges" />
 
             
 
@@ -659,13 +578,11 @@
           >
           <block subset="none" type="note">
             <para
-              >The <see
-               cref="M:System.Data.DataRow.BeginEdit" />
+              >The <see cref="M:System.Data.DataRow.BeginEdit" />
 
               
 
-               method temporarily suspends <see
-               cref="E:System.Data.DataTable.RowChanging" />
+               method temporarily suspends <see cref="E:System.Data.DataTable.RowChanging" />
 
               
 
@@ -676,8 +593,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Deletes the <see
-             cref="T:System.Data.DataRow" />
+            >Deletes the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -701,8 +617,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you set the property, an exception is generated if an exception occurs in the <see
-             cref="E:System.Data.DataTable.RowChanging" />
+            >When you set the property, an exception is generated if an exception occurs in the <see cref="E:System.Data.DataTable.RowChanging" />
 
             
 
@@ -740,18 +655,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects that is returned by the <see
-             cref="P:System.Data.DataTable.ChildRelations" />
+             objects that is returned by the <see cref="P:System.Data.DataTable.ChildRelations" />
 
             
 
@@ -761,13 +673,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child rows of this <see
-             cref="T:System.Data.DataRow" />
+            >Gets the child rows of this <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="T:System.Data.DataRelation" />
+             using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -777,8 +687,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -786,12 +695,15 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -819,18 +731,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects that is returned by the <see
-             cref="P:System.Data.DataTable.ChildRelations" />
+             objects that is returned by the <see cref="P:System.Data.DataTable.ChildRelations" />
 
             
 
@@ -840,18 +749,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the child rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="P:System.Data.DataRelation.RelationName" />
+             using the specified <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRelation" />
+             of a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -861,8 +767,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -870,17 +775,19 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.DataRelation.RelationName" />
+          The <see cref="P:System.Data.DataRelation.RelationName" />
 
           
 
-           of the <see
-           cref="T:System.Data.DataRelation" />
+           of the <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -909,54 +816,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects that is returned by the <see
-             cref="P:System.Data.DataTable.ChildRelations" />
+             objects that is returned by the <see cref="P:System.Data.DataTable.ChildRelations" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Data.DataRowVersion" />
+             property to determine whether the <see cref="T:System.Data.DataRowVersion" />
 
             
 
              that you want exists.</para
           >
           <para
-            >If <see
-             cref="F:System.Data.DataRowVersion.Default" />
+            >If <see cref="F:System.Data.DataRowVersion.Default" />
 
             
 
-             is specified, the version that is used depends on the <see
-             cref="P:System.Data.DataRow.RowState" />
+             is specified, the version that is used depends on the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of the row on which GetChildRows is invoked. If the row on which GetChildRows is invoked has a RowState of Modified, New, or Unchanged, the <see
-             cref="F:System.Data.DataRowVersion.Current" />
+             of the row on which GetChildRows is invoked. If the row on which GetChildRows is invoked has a RowState of Modified, New, or Unchanged, the <see cref="F:System.Data.DataRowVersion.Current" />
 
             
 
-             version of the row is used for fetching related child rows with matching values in their Current versions. If the row on which GetChildRows is invoked has a RowState of Deleted, the <see
-             cref="F:System.Data.DataRowVersion.Original" />
+             version of the row is used for fetching related child rows with matching values in their Current versions. If the row on which GetChildRows is invoked has a RowState of Deleted, the <see cref="F:System.Data.DataRowVersion.Original" />
 
             
 
@@ -966,18 +864,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the child rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="T:System.Data.DataRelation" />
+             using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataRowVersion" />
+            , and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -987,8 +882,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -996,24 +890,30 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
            to use. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -1042,54 +942,45 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects that is returned by the <see
-             cref="P:System.Data.DataTable.ChildRelations" />
+             objects that is returned by the <see cref="P:System.Data.DataTable.ChildRelations" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Data.DataRowVersion" />
+             property to determine whether the <see cref="T:System.Data.DataRowVersion" />
 
             
 
              that you want exists.</para
           >
           <para
-            >If <see
-             cref="F:System.Data.DataRowVersion.Default" />
+            >If <see cref="F:System.Data.DataRowVersion.Default" />
 
             
 
-             is specified, the version that is used depends on the <see
-             cref="P:System.Data.DataRow.RowState" />
+             is specified, the version that is used depends on the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of the row on which GetChildRows is invoked. If the row on which GetChildRows is invoked has a RowState of Modified, New, or Unchanged, the <see
-             cref="F:System.Data.DataRowVersion.Current" />
+             of the row on which GetChildRows is invoked. If the row on which GetChildRows is invoked has a RowState of Modified, New, or Unchanged, the <see cref="F:System.Data.DataRowVersion.Current" />
 
             
 
-             version of the row is used for fetching related child rows with matching values in their Current versions. If the row on which GetChildRows is invoked has a RowState of Deleted, the <see
-             cref="F:System.Data.DataRowVersion.Original" />
+             version of the row is used for fetching related child rows with matching values in their Current versions. If the row on which GetChildRows is invoked has a RowState of Deleted, the <see cref="F:System.Data.DataRowVersion.Original" />
 
             
 
@@ -1099,23 +990,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the child rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the child rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="P:System.Data.DataRelation.RelationName" />
+             using the specified <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRelation" />
+             of a <see cref="T:System.Data.DataRelation" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataRowVersion" />
+            , and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -1125,8 +1012,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1134,29 +1020,34 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.DataRelation.RelationName" />
+          The <see cref="P:System.Data.DataRelation.RelationName" />
 
           
 
-           of the <see
-           cref="T:System.Data.DataRelation" />
+           of the <see cref="T:System.Data.DataRelation" />
 
           
 
            to use. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -1184,39 +1075,33 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+            >Use the <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
              method to set column errors.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             method. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             method. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
-             method to retrieve all the columns with errors. Alternatively, the <see
-             cref="M:System.Data.DataTable.GetErrors" />
+             method to retrieve all the columns with errors. Alternatively, the <see cref="M:System.Data.DataTable.GetErrors" />
 
             
 
-             method of the <see
-             cref="T:System.Data.DataTable" />
+             method of the <see cref="T:System.Data.DataTable" />
 
             
 
              returns all rows with errors.</para
           >
           <para
-            >To clear all errors for the columns collection, use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >To clear all errors for the columns collection, use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
@@ -1226,8 +1111,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the error description of the specified <see
-             cref="T:System.Data.DataColumn" />
+            >Gets the error description of the specified <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -1239,12 +1123,15 @@
           <para>The text of the error description.</para>
         </returns>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataColumn" />
+          A <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -1269,29 +1156,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+            >Use the <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
              method to set column errors.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             method. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             method. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
              method to retrieve all the columns with errors.</para
           >
           <para
-            >To clear all errors for the columns collection, use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >To clear all errors for the columns collection, use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
@@ -1307,7 +1190,11 @@
           <para>The text of the error description.</para>
         </returns>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1332,29 +1219,25 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+            >Use the <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
              method to set column errors.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             method. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             method. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
              method to retrieve all the columns with errors.</para
           >
           <para
-            >To clear all errors for the columns collection, use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >To clear all errors for the columns collection, use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
@@ -1370,7 +1253,11 @@
           <para>The text of the error description.</para>
         </returns>
         <param name="columnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1396,51 +1283,42 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+            >The <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
-             lets you reduce the number of <see
-             cref="T:System.Data.DataColumn" />
+             lets you reduce the number of <see cref="T:System.Data.DataColumn" />
 
             
 
-             objects that must be processed for errors by returning only those columns that have an error. Errors can be set to individual columns with the <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+             objects that must be processed for errors by returning only those columns that have an error. Errors can be set to individual columns with the <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
-             method. To further reduce the number of processing, examine the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+             method. To further reduce the number of processing, examine the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataRow" />
+             property of the <see cref="T:System.Data.DataRow" />
 
             
 
-             class to determine whether a <see
-             cref="T:System.Data.DataRow" />
+             class to determine whether a <see cref="T:System.Data.DataRow" />
 
             
 
-             has errors before invoking <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             has errors before invoking <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
             .</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >Use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
-             method to clear all errors on the row. This includes the <see
-             cref="P:System.Data.DataRow.RowError" />
+             method to clear all errors on the row. This includes the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
@@ -1454,8 +1332,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataColumn" />
+            >An array of <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -1484,36 +1361,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
@@ -1523,13 +1394,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent row of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent row of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="T:System.Data.DataRelation" />
+             using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1539,8 +1408,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parent <see
-             cref="T:System.Data.DataRow" />
+            >The parent <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1548,12 +1416,15 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -1581,36 +1452,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
@@ -1620,18 +1485,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent row of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent row of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="P:System.Data.DataRelation.RelationName" />
+             using the specified <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRelation" />
+             of a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -1641,8 +1503,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parent <see
-             cref="T:System.Data.DataRow" />
+            >The parent <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1650,17 +1511,19 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.DataRelation.RelationName" />
+          The <see cref="P:System.Data.DataRelation.RelationName" />
 
           
 
-           of a <see
-           cref="T:System.Data.DataRelation" />
+           of a <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -1689,49 +1552,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Data.DataRowVersion" />
+             property to determine whether the <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -1741,18 +1596,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent row of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent row of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="T:System.Data.DataRelation" />
+             using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataRowVersion" />
+            , and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -1762,8 +1614,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parent <see
-             cref="T:System.Data.DataRow" />
+            >The parent <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1771,24 +1622,30 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
            to use. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -1817,49 +1674,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Data.DataRowVersion" />
+             property to determine whether the <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -1869,23 +1718,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent row of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent row of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="P:System.Data.DataRelation.RelationName" />
+             using the specified <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRelation" />
+             of a <see cref="T:System.Data.DataRelation" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataRowVersion" />
+            , and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -1895,8 +1740,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The parent <see
-             cref="T:System.Data.DataRow" />
+            >The parent <see cref="T:System.Data.DataRow" />
 
             
 
@@ -1904,29 +1748,34 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.DataRelation.RelationName" />
+          The <see cref="P:System.Data.DataRelation.RelationName" />
 
           
 
-           of a <see
-           cref="T:System.Data.DataRelation" />
+           of a <see cref="T:System.Data.DataRelation" />
 
           
 
           . </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -1954,36 +1803,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
@@ -1993,13 +1836,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="T:System.Data.DataRelation" />
+             using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -2009,8 +1850,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -2018,12 +1858,15 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -2051,36 +1894,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
@@ -2090,18 +1927,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="P:System.Data.DataRelation.RelationName" />
+             using the specified <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRelation" />
+             of a <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -2111,8 +1945,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -2120,17 +1953,19 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.DataRelation.RelationName" />
+          The <see cref="P:System.Data.DataRelation.RelationName" />
 
           
 
-           of a <see
-           cref="T:System.Data.DataRelation" />
+           of a <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -2159,49 +1994,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Data.DataRowVersion" />
+             property to determine whether the <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -2211,18 +2038,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="T:System.Data.DataRelation" />
+             using the specified <see cref="T:System.Data.DataRelation" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataRowVersion" />
+            , and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -2232,8 +2056,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -2241,24 +2064,30 @@
           >
         </returns>
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataRelation" />
+          The <see cref="T:System.Data.DataRelation" />
 
           
 
            to use. </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -2287,49 +2116,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >In a <see
-             cref="T:System.Data.DataSet" />
+            >In a <see cref="T:System.Data.DataSet" />
 
             
 
-            , the collection of all parent <see
-             cref="T:System.Data.DataRelation" />
+            , the collection of all parent <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects for the data set is returned by the <see
-             cref="M:System.Data.DataRow.GetParentRows(System.String)" />
+             objects for the data set is returned by the <see cref="M:System.Data.DataRow.GetParentRows(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <see
-             cref="T:System.Data.DataTable" />
+            >The <see cref="T:System.Data.DataTable" />
 
             
 
-             also contains a collection of <see
-             cref="T:System.Data.DataRelation" />
+             also contains a collection of <see cref="T:System.Data.DataRelation" />
 
             
 
-             objects, returned by the <see
-             cref="P:System.Data.DataTable.ParentRelations" />
+             objects, returned by the <see cref="P:System.Data.DataTable.ParentRelations" />
 
             
 
              property.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
+            >Use the <see cref="M:System.Data.DataRow.HasVersion(System.Data.DataRowVersion)" />
 
             
 
-             property to determine whether the <see
-             cref="T:System.Data.DataRowVersion" />
+             property to determine whether the <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -2339,23 +2160,19 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the parent rows of a <see
-             cref="T:System.Data.DataRow" />
+            >Gets the parent rows of a <see cref="T:System.Data.DataRow" />
 
             
 
-             using the specified <see
-             cref="P:System.Data.DataRelation.RelationName" />
+             using the specified <see cref="P:System.Data.DataRelation.RelationName" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRelation" />
+             of a <see cref="T:System.Data.DataRelation" />
 
             
 
-            , and <see
-             cref="T:System.Data.DataRowVersion" />
+            , and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -2365,8 +2182,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An array of <see
-             cref="T:System.Data.DataRow" />
+            >An array of <see cref="T:System.Data.DataRow" />
 
             
 
@@ -2374,29 +2190,34 @@
           >
         </returns>
         <param name="relationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Data.DataRelation.RelationName" />
+          The <see cref="P:System.Data.DataRelation.RelationName" />
 
           
 
-           of a <see
-           cref="T:System.Data.DataRelation" />
+           of a <see cref="T:System.Data.DataRelation" />
 
           
 
           . </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -2419,50 +2240,43 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >HasErrors returns true if any <see
-             cref="T:System.Data.DataColumn" />
+            >HasErrors returns true if any <see cref="T:System.Data.DataColumn" />
 
             
 
-             object in the row contains an error, or if the <see
-             cref="P:System.Data.DataRow.RowError" />
+             object in the row contains an error, or if the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataRow" />
+             property of the <see cref="T:System.Data.DataRow" />
 
             
 
              is not an empty string.</para
           >
           <para
-            >When validating data, you can set an error on any column in a row. Such a column, when displayed in the <see
-             cref="T:System.Windows.Forms.DataGrid" />
+            >When validating data, you can set an error on any column in a row. Such a column, when displayed in the <see cref="T:System.Windows.Forms.DataGrid" />
 
             
 
              control, is marked with a red exclamation point to signal to the user that the column is in error.</para
           >
           <para
-            >Use <see
-             cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+            >Use <see cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
 
             
 
              to set an error on any column.</para
           >
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
+            >Use the <see cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
 
             
 
              and GetColumnsInError methods to return columns with errors.</para
           >
           <para
-            >The <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >The <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
@@ -2495,8 +2309,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the <see
-             cref="M:System.Data.DataRow.BeginEdit" />
+            >See the <see cref="M:System.Data.DataRow.BeginEdit" />
 
             
 
@@ -2512,12 +2325,15 @@
           <para>true if the version exists; otherwise, false.</para>
         </returns>
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -2543,8 +2359,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the specified <see
-             cref="T:System.Data.DataColumn" />
+            >Gets a value that indicates whether the specified <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -2556,12 +2371,15 @@
           <para>true if the column contains a null value; otherwise, false.</para>
         </returns>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataColumn" />
+          A <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -2593,7 +2411,11 @@
           <para>true if the column contains a null value; otherwise, false.</para>
         </returns>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2625,7 +2447,11 @@
           <para>true if the column contains a null value; otherwise, false.</para>
         </returns>
         <param name="columnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -2655,13 +2481,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value that indicates whether the specified <see
-             cref="T:System.Data.DataColumn" />
+            >Gets a value that indicates whether the specified <see cref="T:System.Data.DataColumn" />
 
             
 
-             and <see
-             cref="T:System.Data.DataRowVersion" />
+             and <see cref="T:System.Data.DataRowVersion" />
 
             
 
@@ -2673,24 +2497,30 @@
           <para>true if the column contains a null value; otherwise, false.</para>
         </returns>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataColumn" />
+          A <see cref="T:System.Data.DataColumn" />
 
           
 
           . </param
         >
         <param name="version">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Data.DataRowVersion" />
+          One of the <see cref="T:System.Data.DataRowVersion" />
 
           
 
@@ -2852,21 +2682,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >You can use this property to set or get values for this row through an array. If you use this property to set values, the array must have the same size and ordering as the column collection. Passing null in the <see
-             cref="P:System.Data.DataRow.ItemArray" />
+            >You can use this property to set or get values for this row through an array. If you use this property to set values, the array must have the same size and ordering as the column collection. Passing null in the <see cref="P:System.Data.DataRow.ItemArray" />
 
             
 
              indicates that no value was specified.</para
           >
           <para
-            >Users can generate exceptions in the <see
-             cref="E:System.Data.DataTable.ColumnChanging" />
+            >Users can generate exceptions in the <see cref="E:System.Data.DataTable.ColumnChanging" />
 
             
 
-             event or the <see
-             cref="E:System.Data.DataTable.RowChanging" />
+             event or the <see cref="E:System.Data.DataTable.RowChanging" />
 
             
 
@@ -2894,28 +2721,23 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >When you call the <see
-             cref="M:System.Data.DataRow.RejectChanges" />
+            >When you call the <see cref="M:System.Data.DataRow.RejectChanges" />
 
             
 
-             method, the <see
-             cref="M:System.Data.DataRow.CancelEdit" />
+             method, the <see cref="M:System.Data.DataRow.CancelEdit" />
 
             
 
-             method is implicitly called to cancel any edits. If <see
-             cref="P:System.Data.DataRow.RowState" />
+             method is implicitly called to cancel any edits. If <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             is deleted or modified, the row reverts to its previous values, and <see
-             cref="P:System.Data.DataRow.RowState" />
+             is deleted or modified, the row reverts to its previous values, and <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             becomes unchanged. If the <see
-             cref="P:System.Data.DataRow.RowState" />
+             becomes unchanged. If the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
@@ -2925,8 +2747,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Rejects all changes made to the row since <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+            >Rejects all changes made to the row since <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
@@ -2951,13 +2772,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Uses the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >Uses the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             property to first determine whether a <see
-             cref="T:System.Data.DataRow" />
+             property to first determine whether a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -2985,18 +2804,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Data.DataRow.RowState" />
+            >The value of the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             depends on two factors: the kind of operation has been performed on the row, and whether <see
-             cref="M:System.Data.DataRow.AcceptChanges" />
+             depends on two factors: the kind of operation has been performed on the row, and whether <see cref="M:System.Data.DataRow.AcceptChanges" />
 
             
 
-             has been called on the <see
-             cref="T:System.Data.DataRow" />
+             has been called on the <see cref="T:System.Data.DataRow" />
 
             
 
@@ -3006,8 +2822,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the current state of the row with regard to its relationship to the <see
-             cref="T:System.Data.DataRowCollection" />
+            >Gets the current state of the row with regard to its relationship to the <see cref="T:System.Data.DataRowCollection" />
 
             
 
@@ -3034,18 +2849,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Data.DataRow.RowState" />
+            >Changes the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
-             to Added. If the current row is not in either an Unchanged or an Added state, it throws an <see
-             cref="T:System.InvalidOperationException" />
+             to Added. If the current row is not in either an Unchanged or an Added state, it throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -3055,13 +2867,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Data.DataRow.Rowstate" />
+            >Changes the <see cref="P:System.Data.DataRow.Rowstate" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -3087,63 +2897,54 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To examine error descriptions, use the <see
-             cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
+            >To examine error descriptions, use the <see cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             property. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             property. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
              method to retrieve all the columns with errors. </para
           >
           <para
-            >If null or an empty string is passed in as the <paramref
-             name="error" />
+            >If null or an empty string is passed in as the <paramref name="error" />
 
             
 
-             parameter, the <see
-             cref="T:System.Data.DataRow" />
+             parameter, the <see cref="T:System.Data.DataRow" />
 
             
 
-             behaves as if no error was set and the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+             behaves as if no error was set and the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
              property will return false.</para
           >
           <para
-            >To set a custom error description on the whole row, use the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >To set a custom error description on the whole row, use the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
              property.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
              method.</para
           >
           <para
-            >To clear all errors for the columns collection, use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >To clear all errors for the columns collection, use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
@@ -3153,8 +2954,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the error description for a column specified as a <see
-             cref="T:System.Data.DataColumn" />
+            >Sets the error description for a column specified as a <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -3162,19 +2962,26 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Data.DataColumn" />
+          The <see cref="T:System.Data.DataColumn" />
 
           
 
            to set the error description for. </param
         >
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3203,71 +3010,61 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The method is used to set custom error descriptions on specified columns. You can use the <see
-             cref="T:System.Windows.Forms.ErrorProvider" />
+            >The method is used to set custom error descriptions on specified columns. You can use the <see cref="T:System.Windows.Forms.ErrorProvider" />
 
             
 
              control to display the text of the error.</para
           >
           <para
-            >To examine error descriptions, use the <see
-             cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
+            >To examine error descriptions, use the <see cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             property. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             property. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
              method to retrieve all the columns with errors.</para
           >
           <para
-            >If null or an empty string is passed in as the <paramref
-             name="error" />
+            >If null or an empty string is passed in as the <paramref name="error" />
 
             
 
-             parameter, the <see
-             cref="T:System.Data.DataRow" />
+             parameter, the <see cref="T:System.Data.DataRow" />
 
             
 
-             behaves as if no error was set and the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+             behaves as if no error was set and the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
              property will return false.</para
           >
           <para
-            >To set a custom error description on the whole row, use the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >To set a custom error description on the whole row, use the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
              property.</para
           >
           <para
-            >To clear all errors for the columns collection, use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >To clear all errors for the columns collection, use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
              method.</para
           >
           <para
-            >To set error text that applies to a whole row, set the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >To set error text that applies to a whole row, set the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
@@ -3279,14 +3076,22 @@
           <para>Sets the error description for a column specified by index.</para>
         </summary>
         <param name="columnIndex">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The zero-based index of the column. </param
         >
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3315,76 +3120,65 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The name of a column is set with the <see
-             cref="P:System.Data.DataColumn.ColumnName" />
+            >The name of a column is set with the <see cref="P:System.Data.DataColumn.ColumnName" />
 
             
 
-             property of the <see
-             cref="T:System.Data.DataColumn" />
+             property of the <see cref="T:System.Data.DataColumn" />
 
             
 
              class.</para
           >
           <para
-            >To examine error descriptions, use the <see
-             cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
+            >To examine error descriptions, use the <see cref="M:System.Data.DataRow.GetColumnError(System.Int32)" />
 
             
 
              method.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
-             property. Consequently, you can use the <see
-             cref="M:System.Data.DataRow.GetColumnsInError" />
+             property. Consequently, you can use the <see cref="M:System.Data.DataRow.GetColumnsInError" />
 
             
 
              method to retrieve all the columns with errors.</para
           >
           <para
-            >If null or an empty string is passed in as the <paramref
-             name="error" />
+            >If null or an empty string is passed in as the <paramref name="error" />
 
             
 
-             parameter, the <see
-             cref="T:System.Data.DataRow" />
+             parameter, the <see cref="T:System.Data.DataRow" />
 
             
 
-             behaves as if no error was set and the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+             behaves as if no error was set and the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
              property will return false.</para
           >
           <para
-            >To set a custom error description on the whole row, use the <see
-             cref="P:System.Data.DataRow.RowError" />
+            >To set a custom error description on the whole row, use the <see cref="P:System.Data.DataRow.RowError" />
 
             
 
              property.</para
           >
           <para
-            >To determine whether any errors exist for the columns collection, use the <see
-             cref="P:System.Data.DataRow.HasErrors" />
+            >To determine whether any errors exist for the columns collection, use the <see cref="P:System.Data.DataRow.HasErrors" />
 
             
 
              method.</para
           >
           <para
-            >To clear all errors for the columns collection, use the <see
-             cref="M:System.Data.DataRow.ClearErrors" />
+            >To clear all errors for the columns collection, use the <see cref="M:System.Data.DataRow.ClearErrors" />
 
             
 
@@ -3396,14 +3190,22 @@
           <para>Sets the error description for a column specified by name.</para>
         </summary>
         <param name="columnName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the column. </param
         >
         <param name="error">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -3429,18 +3231,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Data.DataRow.Rowstate" />
+            >Changes the <see cref="P:System.Data.DataRow.Rowstate" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
-             to Modified. If the current row is not in either an Unchanged or an Added state, it throws an <see
-             cref="T:System.InvalidOperationException" />
+             to Modified. If the current row is not in either an Unchanged or an Added state, it throws an <see cref="T:System.InvalidOperationException" />
 
             
 
@@ -3450,13 +3249,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Changes the <see
-             cref="P:System.Data.DataRow.Rowstate" />
+            >Changes the <see cref="P:System.Data.DataRow.Rowstate" />
 
             
 
-             of a <see
-             cref="T:System.Data.DataRow" />
+             of a <see cref="T:System.Data.DataRow" />
 
             
 
@@ -3481,8 +3278,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="M:System.Data.DataRow.IsNull(System.Int32)" />
+            >Use the <see cref="M:System.Data.DataRow.IsNull(System.Int32)" />
 
             
 
@@ -3492,8 +3288,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the value of the specified <see
-             cref="T:System.Data.DataColumn" />
+            >Sets the value of the specified <see cref="T:System.Data.DataColumn" />
 
             
 
@@ -3501,12 +3296,15 @@
           >
         </summary>
         <param name="column">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Data.DataColumn" />
+          A <see cref="T:System.Data.DataColumn" />
 
           
 
@@ -3535,13 +3333,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the parent row of a <see
-             cref="T:System.Data.DataRow" />
+            >Sets the parent row of a <see cref="T:System.Data.DataRow" />
 
             
 
-             with specified new parent <see
-             cref="T:System.Data.DataRow" />
+             with specified new parent <see cref="T:System.Data.DataRow" />
 
             
 
@@ -3549,12 +3345,15 @@
           >
         </summary>
         <param name="parentRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new parent <see
-           cref="T:System.Data.DataRow" />
+          The new parent <see cref="T:System.Data.DataRow" />
 
           
 
@@ -3584,18 +3383,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the parent row of a <see
-             cref="T:System.Data.DataRow" />
+            >Sets the parent row of a <see cref="T:System.Data.DataRow" />
 
             
 
-             with specified new parent <see
-             cref="T:System.Data.DataRow" />
+             with specified new parent <see cref="T:System.Data.DataRow" />
 
             
 
-             and <see
-             cref="T:System.Data.DataRelation" />
+             and <see cref="T:System.Data.DataRelation" />
 
             
 
@@ -3603,24 +3399,30 @@
           >
         </summary>
         <param name="parentRow">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The new parent <see
-           cref="T:System.Data.DataRow" />
+          The new parent <see cref="T:System.Data.DataRow" />
 
           
 
           . </param
         >
         <param name="relation">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The relation <see
-           cref="T:System.Data.DataRelation" />
+          The relation <see cref="T:System.Data.DataRelation" />
 
           
 
@@ -3643,23 +3445,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Data.DataRow" />
+            >A <see cref="T:System.Data.DataRow" />
 
             
 
-             does not necessarily belong to any table's collection of rows. This behavior occurs when the <see
-             cref="T:System.Data.DataRow" />
+             does not necessarily belong to any table's collection of rows. This behavior occurs when the <see cref="T:System.Data.DataRow" />
 
             
 
-             has been created but not added to the <see
-             cref="T:System.Data.DataRowCollection" />
+             has been created but not added to the <see cref="T:System.Data.DataRowCollection" />
 
             
 
-            . If the <see
-             cref="P:System.Data.DataRow.RowState" />
+            . If the <see cref="P:System.Data.DataRow.RowState" />
 
             
 
@@ -3669,8 +3467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Data.DataTable" />
+            >Gets the <see cref="T:System.Data.DataTable" />
 
             
 

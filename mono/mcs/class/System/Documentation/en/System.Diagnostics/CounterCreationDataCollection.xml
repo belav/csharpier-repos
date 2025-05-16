@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides a strongly typed collection of <see
-         cref="T:System.Diagnostics.CounterCreationData" />
+        >Provides a strongly typed collection of <see cref="T:System.Diagnostics.CounterCreationData" />
 
         
 
@@ -59,13 +58,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.CounterCreationDataCollection" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
             
 
-             class, with no associated <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+             class, with no associated <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -98,13 +95,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.CounterCreationDataCollection" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
             
 
-             class by using the specified array of <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+             class by using the specified array of <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -112,17 +107,19 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          An array of <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
-           instances with which to initialize this <see
-           cref="T:System.Diagnostics.CounterCreationDataCollection" />
+           instances with which to initialize this <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
           
 
@@ -154,13 +151,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Diagnostics.CounterCreationDataCollection" />
+            >Initializes a new instance of the <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
             
 
-             class by using the specified collection of <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+             class by using the specified collection of <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -168,22 +163,23 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterCreationDataCollection" />
+          A <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
           
 
-           that holds <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+           that holds <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
-           instances with which to initialize this <see
-           cref="T:System.Diagnostics.CounterCreationDataCollection" />
+           instances with which to initialize this <see cref="T:System.Diagnostics.CounterCreationDataCollection" />
 
           
 
@@ -217,8 +213,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an instance of the <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Adds an instance of the <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -228,8 +223,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The index of the new <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >The index of the new <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -237,12 +231,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          A <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
@@ -276,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified array of <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Adds the specified array of <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -285,12 +281,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          An array of <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
@@ -324,8 +323,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified collection of <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Adds the specified collection of <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -333,12 +331,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A collection of <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          A collection of <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
@@ -372,8 +373,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether a <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Determines whether a <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -383,8 +383,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the specified <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >true if the specified <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -392,12 +391,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          The <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
@@ -432,8 +434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the elements of the <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Copies the elements of the <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -441,19 +442,26 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An array of <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          An array of <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
            instances to add to the collection. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -487,8 +495,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the index of a <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Returns the index of a <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -498,8 +505,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The zero-based index of the specified <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >The zero-based index of the specified <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -507,12 +513,15 @@
           >
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          The <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
@@ -547,8 +556,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Inserts a <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Inserts a <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -556,24 +564,30 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the location at which the <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          The zero-based index of the location at which the <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
            is to be inserted. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          The <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 
@@ -653,23 +667,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Diagnostics.CounterCreationDataCollection.OnValidate(System.Object)" />
+            >The <see cref="M:System.Diagnostics.CounterCreationDataCollection.OnValidate(System.Object)" />
 
             
 
-             method determines whether the object specified in the <paramref
-             name="value" />
+             method determines whether the object specified in the <paramref name="value" />
 
             
 
-             parameter is a <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+             parameter is a <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
-             instance. If not, it throws an <see
-             cref="T:System.ArgumentException" />
+             instance. If not, it throws an <see cref="T:System.ArgumentException" />
 
             
 
@@ -679,8 +689,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Checks the specified object to determine whether it is a valid <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Checks the specified object to determine whether it is a valid <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -688,7 +697,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -722,8 +735,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes a <see
-             cref="T:System.Diagnostics.CounterCreationData" />
+            >Removes a <see cref="T:System.Diagnostics.CounterCreationData" />
 
             
 
@@ -731,12 +743,15 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Diagnostics.CounterCreationData" />
+          The <see cref="T:System.Diagnostics.CounterCreationData" />
 
           
 

@@ -18,28 +18,23 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This class represents the XML construct of namespaces.</para>
       <para
-        >Every <see
-         cref="T:System.Xml.Linq.XName" />
+        >Every <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         contains an <see
-         cref="T:System.Xml.Linq.XNamespace" />
+         contains an <see cref="T:System.Xml.Linq.XNamespace" />
 
         
 
-        . Even if an element is not in a namespace, the element's <see
-         cref="T:System.Xml.Linq.XName" />
+        . Even if an element is not in a namespace, the element's <see cref="T:System.Xml.Linq.XName" />
 
         
 
-         still contains a namespace, <see
-         cref="P:System.Xml.Linq.XNamespace.None" />
+         still contains a namespace, <see cref="P:System.Xml.Linq.XNamespace.None" />
 
         
 
-        . The <see
-         cref="P:System.Xml.Linq.XName.Namespace" />
+        . The <see cref="P:System.Xml.Linq.XName.Namespace" />
 
         
 
@@ -49,8 +44,7 @@
         <h2>Creating an XNamespace Object</h2>
       </format>
       <para
-        >The most common way to create an <see
-         cref="T:System.Xml.Linq.XNamespace" />
+        >The most common way to create an <see cref="T:System.Xml.Linq.XNamespace" />
 
         
 
@@ -75,21 +69,18 @@ End Module</code>
       <para>This example produces the following output:</para>
       <code>&lt;Root xmlns="http://www.adventure-works.com"&gt;Content&lt;/Root&gt;</code>
       <para
-        >Assigning a string to an <see
-         cref="T:System.Xml.Linq.XNamespace" />
+        >Assigning a string to an <see cref="T:System.Xml.Linq.XNamespace" />
 
         
 
-         uses the implicit conversion from <see
-         cref="T:System.String" />
+         uses the implicit conversion from <see cref="T:System.String" />
 
         
 
         .</para
       >
       <para
-        >See <format
-         type="text/html">
+        >See <format type="text/html">
           <a href="af4a595e-ffb2-4187-a61b-d5ed71642c4c"
             >How to: Create a Document with Namespaces (LINQ to XML) (C#)</a
           >
@@ -100,8 +91,7 @@ End Module</code>
          for more information and examples.</para
       >
       <para
-        >See <format
-         type="text/html">
+        >See <format type="text/html">
           <a href="10b7ba7b-518c-4f14-899f-892575d14dcc"
             >Namespaces in Visual Basic (LINQ to XML)</a
           >
@@ -115,8 +105,7 @@ End Module</code>
         <h2>Controlling Namespace Prefixes</h2>
       </format>
       <para
-        >If you create an attribute that declares a namespace, the prefix specified in the attribute will be persisted in the serialized XML. To create an attribute that declares a namespace with a prefix, you create an attribute where the namespace of the name of the attribute is <see
-         cref="P:System.Xml.Linq.XNamespace.Xmlns" />
+        >If you create an attribute that declares a namespace, the prefix specified in the attribute will be persisted in the serialized XML. To create an attribute that declares a namespace with a prefix, you create an attribute where the namespace of the name of the attribute is <see cref="P:System.Xml.Linq.XNamespace.Xmlns" />
 
         
 
@@ -145,8 +134,7 @@ End Module</code>
       <para>This example produces the following output:</para>
       <code>&lt;aw:Root xmlns:aw="http://www.adventure-works.com"&gt;Content&lt;/aw:Root&gt;</code>
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="a40d4479-f1b9-4d8b-8623-445648caed28"
             >How to: Control Namespace Prefixes (C#) (LINQ to XML)</a
           >
@@ -197,8 +185,7 @@ End Module</code>
 
         
 
-         objects are guaranteed to be atomized; that is, if two <see
-         cref="T:System.Xml.Linq.XNamespace" />
+         objects are guaranteed to be atomized; that is, if two <see cref="T:System.Xml.Linq.XNamespace" />
 
         
 
@@ -248,8 +235,7 @@ Console.WriteLine(e)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For two <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >For two <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -259,13 +245,11 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the specified <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Determines whether the specified <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             is equal to the current <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -275,18 +259,15 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             that indicates whether the specified <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             that indicates whether the specified <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-             is equal to the current <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             is equal to the current <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -294,17 +275,19 @@ Console.WriteLine(e)</code>
           >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Xml.Linq.XNamespace" />
+          The <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
-           to compare to the current <see
-           cref="T:System.Xml.Linq.XNamespace" />
+           to compare to the current <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
@@ -335,8 +318,7 @@ Console.WriteLine(e)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >The returned <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -346,8 +328,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Gets an <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -357,8 +338,7 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >An <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -366,12 +346,15 @@ Console.WriteLine(e)</code>
           >
         </returns>
         <param name="namespaceName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -397,13 +380,11 @@ Console.WriteLine(e)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a hash function for <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >This method serves as a hash function for <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-            . You can use <see
-             cref="M:System.Xml.Linq.XNamespace.GetHashCode" />
+            . You can use <see cref="M:System.Xml.Linq.XNamespace.GetHashCode" />
 
             
 
@@ -413,8 +394,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a hash code for this <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Gets a hash code for this <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -424,13 +404,11 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Int32" />
+            >An <see cref="T:System.Int32" />
 
             
 
-             that contains the hash code for the <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             that contains the hash code for the <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -462,8 +440,7 @@ Console.WriteLine(e)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The returned <see
-             cref="T:System.Xml.Linq.XName" />
+            >The returned <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -473,13 +450,11 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.Linq.XName" />
+            >Returns an <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             object created from this <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             object created from this <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -489,13 +464,11 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.Linq.XName" />
+            >An <see cref="T:System.Xml.Linq.XName" />
 
             
 
-             created from this <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             created from this <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -503,12 +476,15 @@ Console.WriteLine(e)</code>
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -557,8 +533,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Gets the <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -595,13 +570,11 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Combines an <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Combines an <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-             object with a local name to create an <see
-             cref="T:System.Xml.Linq.XName" />
+             object with a local name to create an <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -611,8 +584,7 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The new <see
-             cref="T:System.Xml.Linq.XName" />
+            >The new <see cref="T:System.Xml.Linq.XName" />
 
             
 
@@ -620,24 +592,30 @@ Console.WriteLine(e)</code>
           >
         </returns>
         <param name="ns">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.Xml.Linq.XNamespace" />
+          An <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
            that contains the namespace.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -669,13 +647,11 @@ Console.WriteLine(e)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operator overloads == and != are provided to enable comparisons between <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >The operator overloads == and != are provided to enable comparisons between <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-             and string (for example, element.Name.Namespace == "http://www.adventure-works.com"). The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only, and do not consider the implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             and string (for example, element.Name.Namespace == "http://www.adventure-works.com"). The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only, and do not consider the implicit conversion from string to <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -685,8 +661,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two instances of <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Returns a value indicating whether two instances of <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -696,18 +671,15 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             that indicates whether <paramref
-             name="left" />
+             that indicates whether <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -715,24 +687,30 @@ Console.WriteLine(e)</code>
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.Linq.XNamespace" />
+          The first <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.Linq.XNamespace" />
+          The second <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
@@ -795,13 +773,11 @@ Console.WriteLine(e)</code>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The operator overloads == and != are provided to enable comparisons between <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >The operator overloads == and != are provided to enable comparisons between <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
-             and string (for example, element.Name.Namespace == "http://www.adventure-works.com"). The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only, and do not consider the implicit conversion from string to <see
-             cref="T:System.Xml.Linq.XNamespace" />
+             and string (for example, element.Name.Namespace == "http://www.adventure-works.com"). The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only, and do not consider the implicit conversion from string to <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -811,8 +787,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value indicating whether two instances of <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Returns a value indicating whether two instances of <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -822,18 +797,15 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Boolean" />
+            >A <see cref="T:System.Boolean" />
 
             
 
-             that indicates whether <paramref
-             name="left" />
+             that indicates whether <paramref name="left" />
 
             
 
-             and <paramref
-             name="right" />
+             and <paramref name="right" />
 
             
 
@@ -841,24 +813,30 @@ Console.WriteLine(e)</code>
           >
         </returns>
         <param name="left">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The first <see
-           cref="T:System.Xml.Linq.XNamespace" />
+          The first <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
            to compare.</param
         >
         <param name="right">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The second <see
-           cref="T:System.Xml.Linq.XNamespace" />
+          The second <see cref="T:System.Xml.Linq.XNamespace" />
 
           
 
@@ -885,8 +863,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the URI of this <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Returns the URI of this <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -896,8 +873,7 @@ Console.WriteLine(e)</code>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The URI of this <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >The URI of this <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -928,8 +904,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Gets the <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 
@@ -960,8 +935,7 @@ Console.WriteLine(e)</code>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.Linq.XNamespace" />
+            >Gets the <see cref="T:System.Xml.Linq.XNamespace" />
 
             
 

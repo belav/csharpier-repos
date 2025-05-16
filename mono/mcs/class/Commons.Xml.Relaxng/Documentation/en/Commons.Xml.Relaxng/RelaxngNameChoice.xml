@@ -11,7 +11,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -40,10 +42,7 @@
       </Parameters>
       <Docs>
         <summary>Writes the whole element to the argument XmlWriter.</summary>
-        <param name="writer"
-          >a <see
-           cref="T:System.Xml.XmlWriter" />
-        </param>
+        <param name="writer">a <see cref="T:System.Xml.XmlWriter" /></param>
         <remarks>To be added</remarks>
       </Docs>
     </Member>
@@ -69,10 +68,7 @@
       <Parameters />
       <Docs>
         <summary>The list that contains all the alternatives contained in this choice name class.</summary>
-        <value
-          >a <see
-           cref="T:Commons.Xml.Relaxng.RelaxngNameClassList" />
-        </value>
+        <value>a <see cref="T:Commons.Xml.Relaxng.RelaxngNameClassList" /></value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

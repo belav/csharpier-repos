@@ -13,8 +13,7 @@
     <summary>Color objects holding red, green, blue, and alpha values.</summary>
     <remarks>
       <example>
-        <code lang="C#"
-          >
+        <code lang="C#">
 static readonly double  M_PI = 3.14159265358979323846;
 
 Cairo.Graphics gr;
@@ -46,8 +45,7 @@ gr.Fill ();
         <param name="b">Blue value</param>
         <summary>Convenience to create a color with alpha of 1.0</summary>
         <remarks
-          >See <see
-           cref="C:Cairo.Color(System.Double,System.Double,System.Double,System.Double)" />
+          >See <see cref="C:Cairo.Color(System.Double,System.Double,System.Double,System.Double)" />
         </remarks>
       </Docs>
       <AssemblyInfo>

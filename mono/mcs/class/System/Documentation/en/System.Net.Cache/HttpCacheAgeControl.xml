@@ -18,8 +18,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration is used by members of the <see
-         cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+        >This enumeration is used by members of the <see cref="T:System.Net.Cache.HttpRequestCachePolicy" />
 
         
 
@@ -29,8 +28,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the meaning of time values that control caching behavior for resources obtained using <see
-         cref="T:System.Net.HttpWebRequest" />
+        >Specifies the meaning of time values that control caching behavior for resources obtained using <see cref="T:System.Net.HttpWebRequest" />
 
         
 
@@ -84,8 +82,7 @@
 
             
 
-             and <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+             and <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
             
 
@@ -116,8 +113,7 @@
 
             
 
-             and <see
-             cref="P:System.Net.Cache.HttpRequestCachePolicy.MinFresh" />
+             and <see cref="P:System.Net.Cache.HttpRequestCachePolicy.MinFresh" />
 
             
 
@@ -188,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For internal use only. The Framework will throw an <see
-             cref="T:System.ArgumentException" />
+            >For internal use only. The Framework will throw an <see cref="T:System.ArgumentException" />
 
             
 

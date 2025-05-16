@@ -17,8 +17,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Specifies the action to take with regard to the current and remaining rows during an <see
-         cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+        >Specifies the action to take with regard to the current and remaining rows during an <see cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
         
 
@@ -39,8 +38,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Data.Common.DataAdapter" />
+            >The <see cref="T:System.Data.Common.DataAdapter" />
 
             
 

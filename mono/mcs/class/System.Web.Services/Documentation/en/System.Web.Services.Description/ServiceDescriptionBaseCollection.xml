@@ -24,8 +24,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Forms the basis for the strongly typed collections that are members of the <see
-         cref="N:System.Web.Services.Description" />
+        >Forms the basis for the strongly typed collections that are members of the <see cref="N:System.Web.Services.Description" />
 
         
 
@@ -47,8 +46,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation of this method is intended to be overridden by a derived class in order to return the name of the key associated with the <paramref
-             name="value" />
+            >The default implementation of this method is intended to be overridden by a derived class in order to return the name of the key associated with the <paramref name="value" />
 
             
 
@@ -64,7 +62,11 @@
           <para>A null reference.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -91,8 +93,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Clears the contents of the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+            >Clears the contents of the <see cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
 
             
 
@@ -127,8 +128,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Performs additional custom processes after inserting a new element into the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+            >Performs additional custom processes after inserting a new element into the <see cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
 
             
 
@@ -136,19 +136,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index at which to insert the <paramref
-           name="value" />
+          The zero-based index at which to insert the <paramref name="value" />
 
           
 
            parameter. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -182,8 +189,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes an element from the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+            >Removes an element from the <see cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
 
             
 
@@ -191,19 +197,26 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index of the <paramref
-           name="value" />
+          The zero-based index of the <paramref name="value" />
 
           
 
            parameter to be removed. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -237,8 +250,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Replaces one value with another within the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+            >Replaces one value with another within the <see cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
 
             
 
@@ -246,36 +258,45 @@
           >
         </summary>
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index where the <paramref
-           name="oldValue" />
+          The zero-based index where the <paramref name="oldValue" />
 
           
 
            parameter can be found. </param
         >
         <param name="oldValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object to replace with the <paramref
-           name="newValue" />
+          The object to replace with the <paramref name="newValue" />
 
           
 
            parameter. </param
         >
         <param name="newValue">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The object that replaces the <paramref
-           name="oldValue" />
+          The object that replaces the <paramref name="oldValue" />
 
           
 
@@ -308,8 +329,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Sets the parent object of the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+            >Sets the parent object of the <see cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
 
             
 
@@ -317,14 +337,22 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The object for which to set the parent object. </param
         >
         <param name="parent">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -347,15 +375,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Collections.IDictionary" />
-        </value>
+        <value>a <see cref="T:System.Collections.IDictionary" /></value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The default implementation returns a <see
-             cref="T:System.Collections.Hashtable" />
+            >The default implementation returns a <see cref="T:System.Collections.Hashtable" />
 
             
 
@@ -365,8 +389,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an interface that implements the association of the keys and values in the <see
-             cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
+            >Gets an interface that implements the association of the keys and values in the <see cref="T:System.Web.Services.Description.ServiceDescriptionBaseCollection" />
 
             
 

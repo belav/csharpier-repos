@@ -41,16 +41,14 @@
          can be used to represent an expression that indicates a primitive data type value.</para
       >
       <para
-        >The <see
-         cref="P:System.CodeDom.CodePrimitiveExpression.Value" />
+        >The <see cref="P:System.CodeDom.CodePrimitiveExpression.Value" />
 
         
 
          property specifies the primitive data type value to represent.</para
       >
       <para
-        >Primitive data types that can be represented using <see
-         cref="T:System.CodeDom.CodePrimitiveExpression" />
+        >Primitive data types that can be represented using <see cref="T:System.CodeDom.CodePrimitiveExpression" />
 
         
 
@@ -82,8 +80,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodePrimitiveExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePrimitiveExpression" />
 
             
 
@@ -113,8 +110,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.CodeDom.CodePrimitiveExpression" />
+            >Initializes a new instance of the <see cref="T:System.CodeDom.CodePrimitiveExpression" />
 
             
 
@@ -122,7 +118,11 @@
           >
         </summary>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

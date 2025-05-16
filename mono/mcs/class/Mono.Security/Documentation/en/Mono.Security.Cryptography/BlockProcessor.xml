@@ -8,7 +8,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -35,8 +37,7 @@
       </Parameters>
       <Docs>
         <param name="transform"
-          >a <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >a <see cref="T:System.Security.Cryptography.ICryptoTransform" />
         </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
@@ -59,13 +60,9 @@
       </Parameters>
       <Docs>
         <param name="transform"
-          >a <see
-           cref="T:System.Security.Cryptography.ICryptoTransform" />
+          >a <see cref="T:System.Security.Cryptography.ICryptoTransform" />
         </param>
-        <param name="blockSize"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="blockSize">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -84,10 +81,7 @@
         <Parameter Name="rgb" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="rgb"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
+        <param name="rgb">a <see cref="T:System.Byte" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -108,18 +102,9 @@
         <Parameter Name="cb" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="rgb"
-          >a <see
-           cref="T:System.Byte" />
-        </param>
-        <param name="ib"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
-        <param name="cb"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="rgb">a <see cref="T:System.Byte" /></param>
+        <param name="ib">a <see cref="T:System.Int32" /></param>
+        <param name="cb">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -137,10 +122,7 @@
       <Parameters />
       <Docs>
         <summary>To be added</summary>
-        <returns
-          >a <see
-           cref="T:System.Byte[]" />
-        </returns>
+        <returns>a <see cref="T:System.Byte[]" /></returns>
         <remarks>To be added</remarks>
       </Docs>
       <AssemblyInfo>

@@ -14,7 +14,9 @@
   </AssemblyInfo>
   <ThreadSafetyStatement
     >Gtk# is thread aware, but not thread safe; See the <link
-     location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link>
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    >
 
     
 
@@ -28,97 +30,80 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Security.Cryptography.Xml.TransformChain" />
+        >The <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
         
 
-         class contains a list of <see
-         cref="T:System.Security.Cryptography.Xml.Transform" />
+         class contains a list of <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
         
 
          objects that determine how to order XML data before creating a digest.</para
       >
       <para
-        >Use the <see
-         cref="T:System.Security.Cryptography.Xml.TransformChain" />
+        >Use the <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
         
 
          class whenever you need to add one or more transform objects to an encrypted XML document or to a signed XML document. </para
       >
       <para
-        >Both the <see
-         cref="T:System.Security.Cryptography.Xml.Reference" />
+        >Both the <see cref="T:System.Security.Cryptography.Xml.Reference" />
 
         
 
-         class and the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+         class and the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
 
         
 
-         class contain a <see
-         cref="T:System.Security.Cryptography.Xml.TransformChain" />
+         class contain a <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
         
 
-         object.  You can add a <see
-         cref="T:System.Security.Cryptography.Xml.Transform" />
+         object.  You can add a <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
         
 
-         object to the <see
-         cref="T:System.Security.Cryptography.Xml.Reference" />
+         object to the <see cref="T:System.Security.Cryptography.Xml.Reference" />
 
         
 
-         class by calling the <see
-         cref="M:System.Security.Cryptography.Xml.Reference.AddTransform(System.Security.Cryptography.Xml.Transform)" />
+         class by calling the <see cref="M:System.Security.Cryptography.Xml.Reference.AddTransform(System.Security.Cryptography.Xml.Transform)" />
 
         
 
-         method. You can add a <see
-         cref="T:System.Security.Cryptography.Xml.Transform" />
+         method. You can add a <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
         
 
-         object to the <see
-         cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+         object to the <see cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
 
         
 
-         class by calling the <see
-         cref="M:System.Security.Cryptography.Xml.EncryptedReference.AddTransform(System.Security.Cryptography.Xml.Transform)" />
+         class by calling the <see cref="M:System.Security.Cryptography.Xml.EncryptedReference.AddTransform(System.Security.Cryptography.Xml.Transform)" />
 
         
 
-         method.  You can also create a <see
-         cref="T:System.Security.Cryptography.Xml.TransformChain" />
+         method.  You can also create a <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
         
 
-         object manually and pass it to either the <see
-         cref="P:System.Security.Cryptography.Xml.Reference.TransformChain" />
+         object manually and pass it to either the <see cref="P:System.Security.Cryptography.Xml.Reference.TransformChain" />
 
         
 
-         property or the <see
-         cref="P:System.Security.Cryptography.Xml.EncryptedReference.TransformChain" />
+         property or the <see cref="P:System.Security.Cryptography.Xml.EncryptedReference.TransformChain" />
 
         
 
          property.      </para
       >
       <para
-        >If you want to sign only a portion of an XML document, you can use a transform to identify the XML elements you intend to sign.  Note that the <see
-         cref="P:System.Security.Cryptography.Xml.Reference.Uri" />
+        >If you want to sign only a portion of an XML document, you can use a transform to identify the XML elements you intend to sign.  Note that the <see cref="P:System.Security.Cryptography.Xml.Reference.Uri" />
 
         
 
-         property and the <see
-         cref="P:System.Security.Cryptography.Xml.EncryptedReference.Uri" />
+         property and the <see cref="P:System.Security.Cryptography.Xml.EncryptedReference.Uri" />
 
         
 
@@ -129,8 +114,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines an ordered list of <see
-         cref="T:System.Security.Cryptography.Xml.Transform" />
+        >Defines an ordered list of <see cref="T:System.Security.Cryptography.Xml.Transform" />
 
         
 
@@ -158,8 +142,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Security.Cryptography.Xml.TransformChain" />
+            >Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
             
 
@@ -193,8 +176,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transforms are applied to the unsigned content in the order in which they were added to the <see
-             cref="T:System.Security.Cryptography.Xml.TransformChain" />
+            >The transforms are applied to the unsigned content in the order in which they were added to the <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
             
 
@@ -206,7 +188,11 @@
           <para>Adds a transform to the list of transforms to be applied to the unsigned content prior to digest calculation.</para>
         </summary>
         <param name="transform">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -228,16 +214,12 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <value
-          >a <see
-           cref="T:System.Int32" />
-        </value>
+        <value>a <see cref="T:System.Int32" /></value>
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of transforms in the <see
-             cref="T:System.Security.Cryptography.Xml.TransformChain" />
+            >Gets the number of transforms in the <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
             
 
@@ -270,8 +252,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an enumerator of the transforms in the <see
-             cref="T:System.Security.Cryptography.Xml.TransformChain" />
+            >Returns an enumerator of the transforms in the <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
             
 
@@ -281,8 +262,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An enumerator of the transforms in the <see
-             cref="T:System.Security.Cryptography.Xml.TransformChain" />
+            >An enumerator of the transforms in the <see cref="T:System.Security.Cryptography.Xml.TransformChain" />
 
             
 
@@ -313,15 +293,9 @@
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="index"
-          >a <see
-           cref="T:System.Int32" />
-        </param>
+        <param name="index">a <see cref="T:System.Int32" /></param>
         <summary>To be added</summary>
-        <value
-          >a <see
-           cref="T:System.Security.Cryptography.Xml.Transform" />
-        </value>
+        <value>a <see cref="T:System.Security.Cryptography.Xml.Transform" /></value>
         <remarks>To be added</remarks>
       </Docs>
     </Member>

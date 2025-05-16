@@ -18,8 +18,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:Microsoft.Build.Framework.IEventSource.TargetStarted" />
+        >Provides data for the <see cref="E:Microsoft.Build.Framework.IEventSource.TargetStarted" />
 
         
 
@@ -38,8 +37,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.TargetStartedEventArgs" />
+            >Initializes a new instance of the <see cref="T:Microsoft.Build.Framework.TargetStartedEventArgs" />
 
             
 
@@ -70,8 +68,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initalizes a new instance of the <see
-             cref="T:Microsoft.Build.Framework.TargetStartedEventArgs" />
+            >Initalizes a new instance of the <see cref="T:Microsoft.Build.Framework.TargetStartedEventArgs" />
 
             
 
@@ -79,35 +76,55 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The text of the event.</param
         >
         <param name="helpKeyword">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The Help keyword associated with the event.</param
         >
         <param name="targetName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the target associated with the event.</param
         >
         <param name="projectFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the project file associated with the event.</param
         >
         <param name="targetFile">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

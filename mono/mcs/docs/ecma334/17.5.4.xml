@@ -3,8 +3,7 @@
   <paragraph>When an instance method declaration includes an override modifier, the method is said to be an override method. An override method overrides an inherited virtual method with the same signature. Whereas a virtual method declaration introduces a new method, an override method declaration specializes an existing inherited virtual method by providing a new implementation of that method. </paragraph>
   <paragraph>The method overridden by an override declaration is known as the overridden base method. For an override method M declared in a class C, the overridden base method is determined by examining each base class of C, starting with the direct base class of C and continuing with each successive direct base class, until an accessible method with the same signature as M is located. For the purposes of locating the overridden base method, a method is considered accessible if it is public, if it is protected, if it is protected internal, or if it is internal and declared in the same program as C. </paragraph>
   <paragraph
-    >A compile-time error occurs unless all of the following are true for an override declaration: <list
-    >
+    >A compile-time error occurs unless all of the following are true for an override declaration: <list>
       <list_item> An overridden base method can be located as described above. </list_item>
       <list_item> The overridden base method is a virtual, abstract, or override method. In other words, the overridden base method cannot be static or non-virtual. </list_item>
       <list_item> The overridden base method is not a sealed method. </list_item>
@@ -13,19 +12,18 @@
   </paragraph>
   <paragraph
     >An override declaration can access the overridden base method using a <non_terminal
-     where="14.5.8">base-access</non_terminal>
+      where="14.5.8"
+      >base-access</non_terminal
+    >
 
     
 
-     (<hyperlink
-    >14.5.8</hyperlink>
+     (<hyperlink>14.5.8</hyperlink>
 
     
 
     ). <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  
@@ -48,7 +46,9 @@ class B: A
       
 
       the base.PrintFields() invocation in B invokes the PrintFields method declared in A. A  <non_terminal
-       where="14.5.8">base-access</non_terminal>
+        where="14.5.8"
+        >base-access</non_terminal
+      >
 
       
 
@@ -60,9 +60,7 @@ class B: A
   </paragraph>
   <paragraph
     >Only by including an override modifier can a method override another method. In all other cases, a method with the same signature as an inherited method simply hides the inherited method. <example
-
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  
@@ -82,8 +80,7 @@ class B: A
   </paragraph>
   <paragraph>
     <example
-      >[Example: In the example <code_example
-      >
+      >[Example: In the example <code_example>
         <![CDATA[
 class A  
 {  

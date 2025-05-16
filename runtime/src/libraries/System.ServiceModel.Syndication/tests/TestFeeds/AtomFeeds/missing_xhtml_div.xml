@@ -15,10 +15,10 @@
     <link href="http://contoso.com/2003/12/13/atom03" />
     <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
     <updated>2003-12-13T18:30:02Z</updated>
-    <summary type="xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    <summary type="xhtml" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+      So I was reading <xhtml:a href="http://contoso.com/"
+        >contoso.com</xhtml:a
       >
-      So I was reading <xhtml:a
-       href="http://contoso.com/">contoso.com</xhtml:a>
 
       
 

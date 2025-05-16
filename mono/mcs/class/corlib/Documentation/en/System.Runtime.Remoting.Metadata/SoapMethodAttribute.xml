@@ -33,13 +33,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The target objects for the <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+        >The target objects for the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
 
         
 
-         attribute are methods that can be remotely invoked. Apply the <see
-         cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+         attribute are methods that can be remotely invoked. Apply the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
 
         
 
@@ -71,8 +69,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+            >Creates an instance of <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
 
             
 
@@ -192,13 +189,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" />
+            >The <see cref="P:System.Runtime.Remoting.Metadata.SoapTypeAttribute.UseAttribute" />
 
             
 
-             property cannot be set on the <see
-             cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
+             property cannot be set on the <see cref="T:System.Runtime.Remoting.Metadata.SoapMethodAttribute" />
 
             
 

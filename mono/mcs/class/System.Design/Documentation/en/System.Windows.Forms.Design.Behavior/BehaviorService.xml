@@ -17,74 +17,61 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >When the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+        >When the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-         is created, it adds a transparent window over the designer frame. The <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         is created, it adds a transparent window over the designer frame. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-         can then use this window to render user interface elements, called <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+         can then use this window to render user interface elements, called <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         objects, as well as catch all mouse messages. In this way, the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         objects, as well as catch all mouse messages. In this way, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
          can control designer behavior. </para
       >
       <para
-        >The <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+        >The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-         class supports a behavior stack, onto which <see
-         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+         class supports a behavior stack, onto which <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
         
 
-         objects can be pushed. When a message is intercepted through the transparent window, the <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         objects can be pushed. When a message is intercepted through the transparent window, the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-         can send the message to the <see
-         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+         can send the message to the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
         
 
-         at the top of the stack. This enables different user interface modes depending on the currently pushed <see
-         cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+         at the top of the stack. This enables different user interface modes depending on the currently pushed <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
         
 
-        . The <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+        . The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
-         is used to render all <see
-         cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+         is used to render all <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
         
 
-         objects, such as selection borders, sizing handles, and smart tags. The <see
-         cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+         objects, such as selection borders, sizing handles, and smart tags. The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
         
 
          also controls many design-time behaviors, such as using snaplines, dragging, and selecting.</para
       >
       <para
-        >For more information, see <format
-         type="text/html">
+        >For more information, see <format type="text/html">
           <a href="7c60cc41-4324-46b5-b444-b39eda7cb33f">Behavior Service Overview</a>
         </format>
 
@@ -116,18 +103,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
+            >The <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
 
             
 
-             property provides access to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+             property provides access to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
-             managed by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             managed by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -137,8 +121,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
+            >Gets the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorServiceAdornerCollection" />
 
             
 
@@ -165,8 +148,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Drawing.Graphics" />
+            >Gets the <see cref="T:System.Drawing.Graphics" />
 
             
 
@@ -195,8 +177,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a <see
-             cref="T:System.Drawing.Point" />
+            >Translates a <see cref="T:System.Drawing.Point" />
 
             
 
@@ -206,8 +187,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformed <see
-             cref="T:System.Drawing.Point" />
+            >The transformed <see cref="T:System.Drawing.Point" />
 
             
 
@@ -215,12 +195,15 @@
           >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Point" />
+          The <see cref="T:System.Drawing.Point" />
 
           
 
@@ -269,21 +252,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             raises the <see
-             cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" />
+             raises the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.BeginDrag" />
 
             
 
              event immediately before it starts a drag-and-drop operation.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -295,8 +275,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Occurs when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -324,13 +303,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The adorner window is a transparent window that resides on top of the designer's frame. This window is used by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >The adorner window is a transparent window that resides on top of the designer's frame. This window is used by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             to intercept all messages. It also serves as a unified canvas on which to paint a <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             to intercept all messages. It also serves as a unified canvas on which to paint a <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -340,13 +317,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the bounding <see
-             cref="T:System.Drawing.Rectangle" />
+            >Returns the bounding <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             of a <see
-             cref="T:System.Windows.Forms.Control" />
+             of a <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -356,13 +331,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The bounding <see
-             cref="T:System.Drawing.Rectangle" />
+            >The bounding <see cref="T:System.Drawing.Rectangle" />
 
             
 
-             of a <see
-             cref="T:System.Windows.Forms.Control" />
+             of a <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -370,12 +343,15 @@
           >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -403,8 +379,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the location of a <see
-             cref="T:System.Windows.Forms.Control" />
+            >Returns the location of a <see cref="T:System.Windows.Forms.Control" />
 
             
 
@@ -414,13 +389,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Point" />
+            >A <see cref="T:System.Drawing.Point" />
 
             
 
-             value indicating the location of <paramref
-             name="c" />
+             value indicating the location of <paramref name="c" />
 
             
 
@@ -428,12 +401,15 @@
           >
         </returns>
         <param name="c">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Control" />
+          The <see cref="T:System.Windows.Forms.Control" />
 
           
 
@@ -459,8 +435,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Gets the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -483,50 +458,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+            >Call <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
 
             
 
-             when you are finished using the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             when you are finished using the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-            . The <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+            . The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             method leaves the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            , you must release all references to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -536,18 +502,15 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
+              >Always call <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+               before you release your last reference to the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
               
 
-              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
-               cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+              . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
               
 
@@ -558,8 +521,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Releases all resources used by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -584,21 +546,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
-             raises the <see
-             cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
+             raises the <see cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
 
             
 
              event immediately after the drag operation is complete.</para
           >
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 
@@ -610,8 +569,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Occurs when the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Occurs when the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -640,13 +598,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Returns the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             immediately after the given <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+             immediately after the given <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -656,13 +612,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             immediately after <paramref
-             name="behavior" />
+             immediately after <paramref name="behavior" />
 
             
 
@@ -670,17 +624,19 @@
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
-           preceding the <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+           preceding the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
@@ -702,18 +658,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Calling the <see
-             cref="Overload:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate" />
+            >Calling the <see cref="Overload:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate" />
 
             
 
-             method forces a refresh of all <see
-             cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+             method forces a refresh of all <see cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
 
             
 
-             objects and, in turn, all <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             objects and, in turn, all <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -723,8 +676,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invalidates the adorner window of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Invalidates the adorner window of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -752,18 +704,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Rectangle)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Rectangle)" />
 
             
 
-             method will force a refresh of all <see
-             cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
+             method will force a refresh of all <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
 
             
 
-             and, in turn, all <see
-             cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
+             and, in turn, all <see cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
 
             
 
@@ -773,8 +722,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invalidates, within the adorner window, the specified area of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Invalidates, within the adorner window, the specified area of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -782,7 +730,11 @@
           >
         </summary>
         <param name="rect">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -806,18 +758,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Region)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.Invalidate(System.Drawing.Region)" />
 
             
 
-             method will force a refresh of all <see
-             cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
+             method will force a refresh of all <see cref="P:System.Windows.Forms.Design.Behavior.BehaviorService.Adorners" />
 
             
 
-             and, in turn, all <see
-             cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
+             and, in turn, all <see cref="P:System.Windows.Forms.Design.Behavior.Adorner.Glyphs" />
 
             
 
@@ -827,8 +776,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Invalidates, within the adorner window, the specified area of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Invalidates, within the adorner window, the specified area of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -836,7 +784,11 @@
           >
         </summary>
         <param name="r">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -869,8 +821,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Drawing.Point" />
+            >A <see cref="T:System.Drawing.Point" />
 
             
 
@@ -878,19 +829,26 @@
           >
         </returns>
         <param name="handle">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An adorner window's handle.</param
         >
         <param name="pt">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Drawing.Point" />
+          A <see cref="T:System.Drawing.Point" />
 
           
 
@@ -917,13 +875,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the current <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Removes the current <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
-             from the behavior stack internally maintained by the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+             from the behavior stack internally maintained by the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -933,8 +889,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes and returns the <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Removes and returns the <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -944,8 +899,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -953,12 +907,15 @@
           >
         </returns>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
@@ -985,13 +942,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
+            >The <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
 
             
 
-             method is often performed by means of a hit-tested <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+             method is often performed by means of a hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
@@ -1001,8 +956,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Pushes a <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Pushes a <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -1010,12 +964,15 @@
           >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
@@ -1042,18 +999,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Pushing a capture behavior is often done through a hit-tested <see
-             cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+            >Pushing a capture behavior is often done through a hit-tested <see cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
 
             
 
-            . If a behavior calls the <see
-             cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
+            . If a behavior calls the <see cref="M:System.Windows.Forms.Design.Behavior.BehaviorService.PushCaptureBehavior(System.Windows.Forms.Design.Behavior.Behavior)" />
 
             
 
-             method and mouse capture is lost, the behavior's <see
-             cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
+             method and mouse capture is lost, the behavior's <see cref="M:System.Windows.Forms.Design.Behavior.Behavior.OnLoseCapture(System.Windows.Forms.Design.Behavior.Glyph,System.EventArgs)" />
 
             
 
@@ -1063,8 +1017,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Pushes a <see
-             cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+            >Pushes a <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
             
 
@@ -1072,12 +1025,15 @@
           >
         </summary>
         <param name="behavior">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
+          The <see cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
           
 
@@ -1105,8 +1061,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Translates a point in screen coordinates into the adorner window coordinates of the <see
-             cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+            >Translates a point in screen coordinates into the adorner window coordinates of the <see cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
 
             
 
@@ -1116,8 +1071,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The transformed <see
-             cref="T:System.Drawing.Point" />
+            >The transformed <see cref="T:System.Drawing.Point" />
 
             
 
@@ -1125,12 +1079,15 @@
           >
         </returns>
         <param name="p">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Drawing.Point" />
+          The <see cref="T:System.Drawing.Point" />
 
           
 
@@ -1151,8 +1108,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >For more information about handling events, see <format
-             type="text/html">
+            >For more information about handling events, see <format type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
 

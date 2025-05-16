@@ -20,21 +20,18 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A visual designer host, such as vsprvslong, uses the <see
-         cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
+        >A visual designer host, such as vsprvslong, uses the <see cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
 
         
 
          class to select a connection string from the connectionStrings configuration section.</para
       >
       <para
-        >The <see
-         cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
+        >The <see cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
 
         
 
-         class is derived from the <see
-         cref="T:System.Web.UI.Design.ExpressionEditor" />
+         class is derived from the <see cref="T:System.Web.UI.Design.ExpressionEditor" />
 
         
 
@@ -57,8 +54,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.Design.ConnectionStringsExpressionEditor" />
 
             
 
@@ -90,49 +86,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+            >The <see cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
 
             
 
-             method looks up the connection name and type specified by <paramref
-             name="expression" />
+             method looks up the connection name and type specified by <paramref name="expression" />
 
             
 
             , and then returns the connection.</para
           >
           <para
-            >The visual designer uses the <see
-             cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+            >The visual designer uses the <see cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
 
             
 
-             method to evaluate a connection string expression and provide the design-time value for an associated control property. The visual designer uses the <see
-             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+             method to evaluate a connection string expression and provide the design-time value for an associated control property. The visual designer uses the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             method to parse the expression string at design time, and then calls the <see
-             cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+             method to parse the expression string at design time, and then calls the <see cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
 
             
 
              method with the parsed expression data. The visual designer uses the evaluated expression result to assign control property values that are rendered on the design surface.</para
           >
           <para
-            >At run time, the page parser uses the <see
-             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+            >At run time, the page parser uses the <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             and <see
-             cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+             and <see cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
             
 
-             methods of the corresponding <see
-             cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+             methods of the corresponding <see cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
 
             
 
@@ -148,28 +136,44 @@
           <para>The object referenced by the evaluated expression string if the expression evaluation succeeded; otherwise, null.</para>
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           A connection string expression to evaluate. The expression does not include the ConnectionStrings expression prefix.</param
         >
         <param name="parseTimeData">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           An object containing additional parsing information for evaluating the expression.</param
         >
         <param name="propertyType">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The type of the control property.</param
         >
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -198,13 +202,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" />
+            >The <see cref="M:System.Web.UI.Design.ConnectionStringsExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" />
 
             
 
-             method returns an editor sheet implementation for connection string expressions. The editor sheet for connection string expressions allows users to select a connection name and type, based on the current connection strings that are defined in the <format
-             type="text/html">
+             method returns an editor sheet implementation for connection string expressions. The editor sheet for connection string expressions allows users to select a connection name and type, based on the current connection strings that are defined in the <format type="text/html">
               <a href="b6ffbb2e-a4d1-410e-8f7e-9755e92c65de">connectionStrings</a>
             </format>
 
@@ -220,8 +222,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+            >An <see cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
 
             
 
@@ -229,14 +230,22 @@
           >
         </returns>
         <param name="expression">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The expression string set for a control property, used to initialize the expression editor sheet. The expression does not include the ConnectionStrings expression prefix.</param
         >
         <param name="serviceProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -23,39 +23,33 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Instances of the <see
-         cref="T:System.Net.Mail.MailMessage" />
+        >Instances of the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class are used to construct e-mail messages that are transmitted to an SMTP server for delivery using the <see
-         cref="T:System.Net.Mail.SmtpClient" />
+         class are used to construct e-mail messages that are transmitted to an SMTP server for delivery using the <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
          class. </para
       >
       <para
-        >The sender, recipient, subject, and body of an e-mail message may be specified as parameters when a <see
-         cref="Overload:System.Net.Mail.MailMessage.#ctor" />
+        >The sender, recipient, subject, and body of an e-mail message may be specified as parameters when a <see cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
         
 
-         is used to initialize a <see
-         cref="T:System.Net.Mail.MailMessage" />
+         is used to initialize a <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         object. These parameters may also be set or accessed using properties on the <see
-         cref="T:System.Net.Mail.MailMessage" />
+         object. These parameters may also be set or accessed using properties on the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
          object.</para
       >
       <para
-        >The primary mail message headers and elements for the message may be set using the following properties of the <see
-         cref="T:System.Net.Mail.MailMessage" />
+        >The primary mail message headers and elements for the message may be set using the following properties of the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
@@ -184,81 +178,66 @@
         </item>
       </list>
       <para
-        >The <see
-         cref="T:System.Net.Mail.MailMessage" />
+        >The <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class also allows an application to access the headers collection for the message using the <see
-         cref="P:System.Net.Mail.MailMessage.Headers" />
+         class also allows an application to access the headers collection for the message using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
         
 
-         property. While this collection is read-only (a new collection can not be set), custom headers can be added to or deleted from this collection. Any custom headers added will be included when the <see
-         cref="T:System.Net.Mail.MailMessage" />
+         property. While this collection is read-only (a new collection can not be set), custom headers can be added to or deleted from this collection. Any custom headers added will be included when the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         instance is sent. Before a message is sent, only headers specifically added to this collection in the <see
-         cref="P:System.Net.Mail.MailMessage.Headers" />
+         instance is sent. Before a message is sent, only headers specifically added to this collection in the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
         
 
-         property are included in the collection. After a the <see
-         cref="T:System.Net.Mail.MailMessage" />
+         property are included in the collection. After a the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         instance is sent, the <see
-         cref="P:System.Net.Mail.MailMessage.Headers" />
+         instance is sent, the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
         
 
-         property will also include headers that are set using the associated properties of the <see
-         cref="T:System.Net.Mail.MailMessage" />
+         property will also include headers that are set using the associated properties of the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class or parameters passed when a <see
-         cref="Overload:System.Net.Mail.MailMessage.#ctor" />
+         class or parameters passed when a <see cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
         
 
-         is used to initialize a <see
-         cref="T:System.Net.Mail.MailMessage" />
+         is used to initialize a <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
          object.</para
       >
       <para
-        >If some mail headers are malformed, they could cause the email message to become corrupted. So any mail header in the headers collection that can be set using a property on the <see
-         cref="T:System.Net.Mail.MailMessage" />
+        >If some mail headers are malformed, they could cause the email message to become corrupted. So any mail header in the headers collection that can be set using a property on the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class should only be set using the <see
-         cref="T:System.Net.Mail.MailMessage" />
+         class should only be set using the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         class property or as a parameter passed when a <see
-         cref="Overload:System.Net.Mail.MailMessage.#ctor" />
+         class property or as a parameter passed when a <see cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
         
 
-         initializes a <see
-         cref="T:System.Net.Mail.MailMessage" />
+         initializes a <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
-         object. The following list of mail headers should not be added using the <see
-         cref="P:System.Net.Mail.MailMessage.Headers" />
+         object. The following list of mail headers should not be added using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
         
 
-         property and any values set for these headers using the <see
-         cref="P:System.Net.Mail.MailMessage.Headers" />
+         property and any values set for these headers using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
         
 
@@ -312,52 +291,44 @@
         </item>
       </list>
       <para
-        >If the application does not specify an X-Sender header using the <see
-         cref="P:System.Net.Mail.MailMessage.Headers" />
+        >If the application does not specify an X-Sender header using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
         
 
-         property, the <see
-         cref="T:System.Net.Mail.MailMessage" />
+         property, the <see cref="T:System.Net.Mail.MailMessage" />
 
         
 
          class will create one when the message is sent. </para
       >
       <para
-        >Use the <see
-         cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+        >Use the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
         
 
-         property to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want to provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content. For an example that demonstrates creating a message with alternate views, see <see
-         cref="P:System.Net.Mail.MailMessage.AlternateViews" />
-
-        
-
-        .</para
-      >
-      <para
-        >Use the <see
-         cref="P:System.Net.Mail.MailMessage.Attachments" />
-
-        
-
-         property to add attachments to an e-mail message. For an example that demonstrates creating a message with an attachment, see <see
-         cref="P:System.Net.Mail.MailMessage.Attachments" />
+         property to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want to provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content. For an example that demonstrates creating a message with alternate views, see <see cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
         
 
         .</para
       >
       <para
-        >After assembling your e-mail message, you can send it by using the <see
-         cref="M:System.Net.Mail.SmtpClient.Send(System.Net.Mail.MailMessage)" />
+        >Use the <see cref="P:System.Net.Mail.MailMessage.Attachments" />
 
         
 
-         or <see
-         cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+         property to add attachments to an e-mail message. For an example that demonstrates creating a message with an attachment, see <see cref="P:System.Net.Mail.MailMessage.Attachments" />
+
+        
+
+        .</para
+      >
+      <para
+        >After assembling your e-mail message, you can send it by using the <see cref="M:System.Net.Mail.SmtpClient.Send(System.Net.Mail.MailMessage)" />
+
+        
+
+         or <see cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
 
         
 
@@ -367,8 +338,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an e-mail message that can be sent using the <see
-         cref="T:System.Net.Mail.SmtpClient" />
+        >Represents an e-mail message that can be sent using the <see cref="T:System.Net.Mail.SmtpClient" />
 
         
 
@@ -394,8 +364,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >From is set to the value in the network element for mailSettings<format
-             type="text/html">
+            >From is set to the value in the network element for mailSettings<format type="text/html">
               <a href="220b0329-e384-4e0c-86b4-0945ad17efd9"></a>
             </format>
 
@@ -407,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes an empty instance of the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >Initializes an empty instance of the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -440,23 +408,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mail.MailMessage.From" />
+            >The <see cref="P:System.Net.Mail.MailMessage.From" />
 
             
 
-             property is initialized using <paramref
-             name="from" />
+             property is initialized using <paramref name="from" />
 
             
 
-             and the <see
-             cref="P:System.Net.Mail.MailMessage.To" />
+             and the <see cref="P:System.Net.Mail.MailMessage.To" />
 
             
 
-             property is initialized using <paramref
-             name="to" />
+             property is initialized using <paramref name="to" />
 
             
 
@@ -466,13 +430,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class by using the specified <see
-             cref="T:System.Net.Mail.MailAddress" />
+             class by using the specified <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
@@ -480,24 +442,30 @@
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Mail.MailAddress" />
+          A <see cref="T:System.Net.Mail.MailAddress" />
 
           
 
            that contains the address of the sender of the e-mail message.</param
         >
         <param name="to">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Net.Mail.MailAddress" />
+          A <see cref="T:System.Net.Mail.MailAddress" />
 
           
 
@@ -525,23 +493,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mail.MailMessage.From" />
+            >The <see cref="P:System.Net.Mail.MailMessage.From" />
 
             
 
-             property is initialized using <paramref
-             name="from" />
+             property is initialized using <paramref name="from" />
 
             
 
-             and the <see
-             cref="P:System.Net.Mail.MailMessage.To" />
+             and the <see cref="P:System.Net.Mail.MailMessage.To" />
 
             
 
-             property is initialized using <paramref
-             name="to" />
+             property is initialized using <paramref name="to" />
 
             
 
@@ -551,13 +515,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class by using the specified <see
-             cref="T:System.String" />
+             class by using the specified <see cref="T:System.String" />
 
             
 
@@ -565,24 +527,30 @@
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the address of the sender of the e-mail message.</param
         >
         <param name="to">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -615,8 +583,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The properties for the new <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >The properties for the new <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -707,13 +674,11 @@
             </item>
           </list>
           <para
-            >By default, the subject and content are assumed to use the default encoding based on local computer settings. Use the <see
-             cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
+            >By default, the subject and content are assumed to use the default encoding based on local computer settings. Use the <see cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
 
             
 
-             and <see
-             cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
+             and <see cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
 
             
 
@@ -723,8 +688,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >Initializes a new instance of the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -732,48 +696,60 @@
           >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the address of the sender of the e-mail message.</param
         >
         <param name="to">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the address of the recipient of the e-mail message.</param
         >
         <param name="subject">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
            that contains the subject text.</param
         >
         <param name="body">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.String" />
+          A <see cref="T:System.String" />
 
           
 
@@ -804,41 +780,34 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+            >Use the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
             
 
              property to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want to provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para
           >
           <para
-            >To add an alternate view to a <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >To add an alternate view to a <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             object, create an <see
-             cref="T:System.Net.Mail.Attachment" />
+             object, create an <see cref="T:System.Net.Mail.Attachment" />
 
             
 
-             for the view, and then add it to the collection returned by <see
-             cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+             for the view, and then add it to the collection returned by <see cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
             
 
-            . Use the <see
-             cref="P:System.Net.Mail.MailMessage.Body" />
+            . Use the <see cref="P:System.Net.Mail.MailMessage.Body" />
 
             
 
-             property to specify the text version and use the <see
-             cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+             property to specify the text version and use the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
             
 
-             collection to specify views with other MIME types. Use the <see
-             cref="T:System.Net.Mime.MediaTypeNames" />
+             collection to specify views with other MIME types. Use the <see cref="T:System.Net.Mime.MediaTypeNames" />
 
             
 
@@ -874,36 +843,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the collection returned by the <see
-             cref="P:System.Net.Mail.MailMessage.Attachments" />
+            >Use the collection returned by the <see cref="P:System.Net.Mail.MailMessage.Attachments" />
 
             
 
-             property to add an attachment, such as a file or the contents of a <see
-             cref="T:System.IO.Stream" />
+             property to add an attachment, such as a file or the contents of a <see cref="T:System.IO.Stream" />
 
             
 
-            , to this <see
-             cref="T:System.Net.Mail.MailMessage" />
+            , to this <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
             . </para
           >
           <para
-            >Create an <see
-             cref="T:System.Net.Mail.Attachment" />
+            >Create an <see cref="T:System.Net.Mail.Attachment" />
 
             
 
-             that contains or references the data to be attached, and then add the <see
-             cref="T:System.Net.Mail.Attachment" />
+             that contains or references the data to be attached, and then add the <see cref="T:System.Net.Mail.Attachment" />
 
             
 
-             to the collection returned by <see
-             cref="P:System.Net.Mail.MailMessage.Attachments" />
+             to the collection returned by <see cref="P:System.Net.Mail.MailMessage.Attachments" />
 
             
 
@@ -939,21 +902,18 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To add a BCC recipient to an e-mail message, create a <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >To add a BCC recipient to an e-mail message, create a <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
-             for the recipient's address, and then add that object to the collection returned by the <see
-             cref="P:System.Net.Mail.MailMessage.Bcc" />
+             for the recipient's address, and then add that object to the collection returned by the <see cref="P:System.Net.Mail.MailMessage.Bcc" />
 
             
 
              property.</para
           >
           <para
-            >When recipients view an e-mail message, the <see
-             cref="P:System.Net.Mail.MailMessage.Bcc" />
+            >When recipients view an e-mail message, the <see cref="P:System.Net.Mail.MailMessage.Bcc" />
 
             
 
@@ -983,26 +943,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.Net.Mime.ContentType" />
+            >The <see cref="T:System.Net.Mime.ContentType" />
 
             
 
-             of the <see
-             cref="P:System.Net.Mail.MailMessage.Body" />
+             of the <see cref="P:System.Net.Mail.MailMessage.Body" />
 
             
 
-             content is "text/plain". Specify the encoding used for the body with the <see
-             cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
+             content is "text/plain". Specify the encoding used for the body with the <see cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
 
             
 
              property. </para
           >
           <para
-            >If the body content is available in alternative formats that provide richer presentation options for the recipients, you can specify alternate views for the body content by using the <see
-             cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+            >If the body content is available in alternative formats that provide richer presentation options for the recipients, you can specify alternate views for the body content by using the <see cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
             
 
@@ -1038,46 +994,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value specified for the <see
-             cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
+            >The value specified for the <see cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
 
             
 
              property sets the character set field in the Content-Type header. The default character set is "us-ascii".</para
           >
           <para
-            >If you set the <see
-             cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
+            >If you set the <see cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
 
             
 
-             property to <see
-             cref="P:System.Text.Encoding.UTF8" />
+             property to <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
-            , <see
-             cref="P:System.Text.Encoding.Unicode" />
+            , <see cref="P:System.Text.Encoding.Unicode" />
 
             
 
-            , or <see
-             cref="P:System.Text.Encoding.UTF32" />
+            , or <see cref="P:System.Text.Encoding.UTF32" />
 
             
 
-            , the Framework selects a <see
-             cref="T:System.Net.Mime.TransferEncoding" />
+            , the Framework selects a <see cref="T:System.Net.Mime.TransferEncoding" />
 
             
 
-             of <see
-             cref="F:System.Net.Mime.TransferEncoding.Base64" />
+             of <see cref="F:System.Net.Mime.TransferEncoding.Base64" />
 
             
 
-             for this <see
-             cref="T:System.Net.Mail.MailMessage" />
+             for this <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -1113,13 +1061,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >To add a CC recipient to an e-mail message, create a <see
-             cref="T:System.Net.Mail.MailAddress" />
+            >To add a CC recipient to an e-mail message, create a <see cref="T:System.Net.Mail.MailAddress" />
 
             
 
-             for the recipient's address and then add that object to the collection returned by the <see
-             cref="P:System.Net.Mail.MailMessage.CC" />
+             for the recipient's address and then add that object to the collection returned by the <see cref="P:System.Net.Mail.MailMessage.CC" />
 
             
 
@@ -1179,50 +1125,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Call the <see
-             cref="M:System.Net.Mail.MailMessage.Dispose" />
+            >Call the <see cref="M:System.Net.Mail.MailMessage.Dispose" />
 
             
 
-             method when you are finished using the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             method when you are finished using the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-            . The <see
-             cref="M:System.Net.Mail.MailMessage.Dispose" />
+            . The <see cref="M:System.Net.Mail.MailMessage.Dispose" />
 
             
 
-             method leaves the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             method leaves the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             in an unusable state. After calling <see
-             cref="M:System.Net.Mail.MailMessage.Dispose" />
+             in an unusable state. After calling <see cref="M:System.Net.Mail.MailMessage.Dispose" />
 
             
 
-            , you must release all references to the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            , you must release all references to the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             so the garbage collector can reclaim the memory that the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             so the garbage collector can reclaim the memory that the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             was occupying. For more information, see <format
-             type="text/html">
+             was occupying. For more information, see <format type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
 
@@ -1232,13 +1169,11 @@
           >
           <block subset="none" type="note">
             <para
-              >Always call <see
-               cref="M:System.Net.Mail.MailMessage.Dispose" />
+              >Always call <see cref="M:System.Net.Mail.MailMessage.Dispose" />
 
               
 
-               before you release your last reference to the <see
-               cref="T:System.Net.Mail.MailMessage" />
+               before you release your last reference to the <see cref="T:System.Net.Mail.MailMessage" />
 
               
 
@@ -1249,8 +1184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases all resources used by the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >Releases all resources used by the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -1281,36 +1215,30 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is called by the public Dispose() method and the <see
-             cref="M:System.Object.Finalize" />
+            >This method is called by the public Dispose() method and the <see cref="M:System.Object.Finalize" />
 
             
 
-             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
-             name="disposing" />
+             method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref name="disposing" />
 
             
 
-             parameter set to true. <see
-             cref="M:System.Object.Finalize" />
+             parameter set to true. <see cref="M:System.Object.Finalize" />
 
             
 
-             invokes Dispose with <paramref
-             name="disposing" />
+             invokes Dispose with <paramref name="disposing" />
 
             
 
              set to false.</para
           >
           <para
-            >When the <paramref
-             name="disposing" />
+            >When the <paramref name="disposing" />
 
             
 
-             parameter is true, this method releases all resources held by any managed objects that this <see
-             cref="T:System.Net.Mail.MailMessage" />
+             parameter is true, this method releases all resources held by any managed objects that this <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -1320,8 +1248,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Releases the unmanaged resources used by the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >Releases the unmanaged resources used by the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -1329,7 +1256,11 @@
           >
         </summary>
         <param name="disposing">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1390,76 +1321,62 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mail.MailMessage.Headers" />
+            >The <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
             
 
-             property allows an application to access the headers collection for the message. While this collection is read-only (a new collection can not be set), custom headers can be added to or deleted from this collection. Any custom headers added will be included when the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             property allows an application to access the headers collection for the message. While this collection is read-only (a new collection can not be set), custom headers can be added to or deleted from this collection. Any custom headers added will be included when the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             instance is sent. Before a message is sent, only headers specifically added to this collection in the <see
-             cref="P:System.Net.Mail.MailMessage.Headers" />
+             instance is sent. Before a message is sent, only headers specifically added to this collection in the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
             
 
-             property are included in the collection. After the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             property are included in the collection. After the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             instance is sent, the <see
-             cref="P:System.Net.Mail.MailMessage.Headers" />
+             instance is sent, the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
             
 
-             property will also include headers that are set using the associated properties of the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             property will also include headers that are set using the associated properties of the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class or parameters passed when a <see
-             cref="Overload:System.Net.Mail.MailMessage.#ctor" />
+             class or parameters passed when a <see cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
             
 
-             is used to initialize a <see
-             cref="T:System.Net.Mail.MailMessage" />
+             is used to initialize a <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
              object. </para
           >
           <para
-            >If some mail headers are malformed, they could cause the email message to become corrupted. So any mail header in the headers collection that can be set using a property on the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >If some mail headers are malformed, they could cause the email message to become corrupted. So any mail header in the headers collection that can be set using a property on the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class should only be set using the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             class should only be set using the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             class property or as a parameter passed when a <see
-             cref="Overload:System.Net.Mail.MailMessage.#ctor" />
+             class property or as a parameter passed when a <see cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
             
 
-             initializes a <see
-             cref="T:System.Net.Mail.MailMessage" />
+             initializes a <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             object. The following list of mail headers should not be added using the <see
-             cref="P:System.Net.Mail.MailMessage.Headers" />
+             object. The following list of mail headers should not be added using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
             
 
-             property and any values set for these headers using the <see
-             cref="P:System.Net.Mail.MailMessage.Headers" />
+             property and any values set for these headers using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
             
 
@@ -1513,39 +1430,33 @@
             </item>
           </list>
           <para
-            >If the application does not specify an X-Sender header using the <see
-             cref="P:System.Net.Mail.MailMessage.Headers" />
+            >If the application does not specify an X-Sender header using the <see cref="P:System.Net.Mail.MailMessage.Headers" />
 
             
 
-             property, the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             property, the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
              class will create one when the message is sent. </para
           >
           <para
-            >The sender, recipient, subject, and body of an e-mail message may be specified as parameters when a <see
-             cref="Overload:System.Net.Mail.MailMessage.#ctor" />
+            >The sender, recipient, subject, and body of an e-mail message may be specified as parameters when a <see cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
             
 
-             is used to initialize a <see
-             cref="T:System.Net.Mail.MailMessage" />
+             is used to initialize a <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
-             object. These parameters may also be set or accessed using properties on the <see
-             cref="T:System.Net.Mail.MailMessage" />
+             object. These parameters may also be set or accessed using properties on the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
              object.</para
           >
           <para
-            >The primary mail message headers and elements for the message may be set using the following properties of the <see
-             cref="T:System.Net.Mail.MailMessage" />
+            >The primary mail message headers and elements for the message may be set using the following properties of the <see cref="T:System.Net.Mail.MailMessage" />
 
             
 
@@ -1701,26 +1612,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The value of the <see
-             cref="P:System.Net.Mail.MailMessage.HeadersEncoding" />
+            >The value of the <see cref="P:System.Net.Mail.MailMessage.HeadersEncoding" />
 
             
 
-             property defaults to <see
-             cref="P:System.Text.Encoding.UTF8" />
+             property defaults to <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
             . </para
           >
           <para
-            >SMTP messages consist of headers and body parts. The IETF RFCs for SMTP restrict the header and body part names to be ASCII. However, the IETF RFCs allow header and body part values to contain Unicode characters. In any particular value, if non-ASCII characters exist, then the value is encoded using a combination of character encoding (UTF8 or Shift-JIS, for example) followed by byte encoding (<see
-             cref="F:System.Net.Mime.TransferEncoding.Base64" />
+            >SMTP messages consist of headers and body parts. The IETF RFCs for SMTP restrict the header and body part names to be ASCII. However, the IETF RFCs allow header and body part values to contain Unicode characters. In any particular value, if non-ASCII characters exist, then the value is encoded using a combination of character encoding (UTF8 or Shift-JIS, for example) followed by byte encoding (<see cref="F:System.Net.Mime.TransferEncoding.Base64" />
 
             
 
-             or <see
-             cref="F:System.Net.Mime.TransferEncoding.QuotedPrintable" />
+             or <see cref="F:System.Net.Mime.TransferEncoding.QuotedPrintable" />
 
             
 
@@ -1809,13 +1716,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Net.Mail.MailMessage.ReplyTo" />
+            >Use the <see cref="P:System.Net.Mail.MailMessage.ReplyTo" />
 
             
 
-             property to indicate an address other than the <see
-             cref="P:System.Net.Mail.MailMessage.From" />
+             property to indicate an address other than the <see cref="P:System.Net.Mail.MailMessage.From" />
 
             
 
@@ -1849,26 +1754,22 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.Net.Mail.MailMessage.ReplyToList" />
+            >Use the <see cref="P:System.Net.Mail.MailMessage.ReplyToList" />
 
             
 
-             property to indicate the list of addresses other than the <see
-             cref="P:System.Net.Mail.MailMessage.From" />
+             property to indicate the list of addresses other than the <see cref="P:System.Net.Mail.MailMessage.From" />
 
             
 
              address to use to reply to this message.</para
           >
           <para
-            >The <see
-             cref="P:System.Net.Mail.MailMessage.ReplyToList" />
+            >The <see cref="P:System.Net.Mail.MailMessage.ReplyToList" />
 
             
 
-             property replaces the <see
-             cref="P:System.Net.Mail.MailMessage.ReplyTo" />
+             property replaces the <see cref="P:System.Net.Mail.MailMessage.ReplyTo" />
 
             
 
@@ -1928,8 +1829,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Specify the encoding used for the subject by using the <see
-             cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
+            >Specify the encoding used for the subject by using the <see cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
 
             
 
@@ -1965,18 +1865,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If a mail agent has difficulty with a <see
-             cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
+            >If a mail agent has difficulty with a <see cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
 
             
 
-             of <see
-             cref="P:System.Text.Encoding.Unicode" />
+             of <see cref="P:System.Text.Encoding.Unicode" />
 
             
 
-            , use <see
-             cref="P:System.Text.Encoding.UTF8" />
+            , use <see cref="P:System.Text.Encoding.UTF8" />
 
             
 
@@ -2012,13 +1909,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Net.Mail.MailMessage.To" />
+            >The <see cref="P:System.Net.Mail.MailMessage.To" />
 
             
 
-             property is used to designate the addresses on the To line of an e-mail message. To add a recipient to an e-mail message, create a <see
-             cref="T:System.Net.Mail.MailAddress" />
+             property is used to designate the addresses on the To line of an e-mail message. To add a recipient to an e-mail message, create a <see cref="T:System.Net.Mail.MailAddress" />
 
             
 

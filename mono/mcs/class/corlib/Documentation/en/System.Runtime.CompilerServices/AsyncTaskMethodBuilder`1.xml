@@ -138,8 +138,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an instance of the <see
-             cref="T:System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1" />
+            >Creates an instance of the <see cref="T:System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1" />
 
             
 
@@ -178,7 +177,11 @@
           <para>Marks the task as failed and binds the specified exception to the task.</para>
         </summary>
         <param name="exception">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -234,7 +237,11 @@
           <para>Associates the builder with the specified state machine.</para>
         </summary>
         <param name="stateMachine">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

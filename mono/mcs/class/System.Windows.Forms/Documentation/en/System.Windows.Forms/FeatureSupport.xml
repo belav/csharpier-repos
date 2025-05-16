@@ -21,31 +21,26 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the static methods of this class when the classes you query for feature information implement the <see
-         cref="T:System.Windows.Forms.IFeatureSupport" />
+        >Use the static methods of this class when the classes you query for feature information implement the <see cref="T:System.Windows.Forms.IFeatureSupport" />
 
         
 
-         interface. Otherwise, inherit from <see
-         cref="T:System.Windows.Forms.FeatureSupport" />
+         interface. Otherwise, inherit from <see cref="T:System.Windows.Forms.FeatureSupport" />
 
         
 
-         and provide your own implementation. For an implementation of this class, see <see
-         cref="T:System.Windows.Forms.OSFeature" />
+         and provide your own implementation. For an implementation of this class, see <see cref="T:System.Windows.Forms.OSFeature" />
 
         
 
         .</para
       >
       <para
-        >To get the version number of a feature, call <see
-         cref="M:System.Windows.Forms.FeatureSupport.GetVersionPresent(System.String,System.String)" />
+        >To get the version number of a feature, call <see cref="M:System.Windows.Forms.FeatureSupport.GetVersionPresent(System.String,System.String)" />
 
         
 
-        . Call <see
-         cref="M:System.Windows.Forms.FeatureSupport.IsPresent(System.String,System.String)" />
+        . Call <see cref="M:System.Windows.Forms.FeatureSupport.IsPresent(System.String,System.String)" />
 
         
 
@@ -67,8 +62,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.FeatureSupport" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.FeatureSupport" />
 
             
 
@@ -105,8 +99,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Version" />
+            >A <see cref="T:System.Version" />
 
             
 
@@ -114,7 +107,11 @@
           >
         </returns>
         <param name="feature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -144,13 +141,11 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Version numbers consist of three parts: major, minor, and build. Typically, a version number is displayed as "major number.minor number.build number".</para>
           <para
-            >See the documentation for the product containing the feature to determine the names to pass to the <paramref
-             name="featureClassName" />
+            >See the documentation for the product containing the feature to determine the names to pass to the <paramref name="featureClassName" />
 
             
 
-             and the <paramref
-             name="featureConstName" />
+             and the <paramref name="featureConstName" />
 
             
 
@@ -164,8 +159,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.Version" />
+            >A <see cref="T:System.Version" />
 
             
 
@@ -173,19 +167,26 @@
           >
         </returns>
         <param name="featureClassName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the class to query for information about the specified feature. This class must implement the <see
-           cref="T:System.Windows.Forms.IFeatureSupport" />
+          The fully qualified name of the class to query for information about the specified feature. This class must implement the <see cref="T:System.Windows.Forms.IFeatureSupport" />
 
           
 
            interface or inherit from a class that implements this interface. </param
         >
         <param name="featureConstName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -217,7 +218,11 @@
           <para>true if the feature is present; otherwise, false.</para>
         </returns>
         <param name="feature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -253,19 +258,26 @@
           <para>true if the feature is present and its version number is greater than or equal to the specified minimum version number; false if the feature is not installed or its version number is below the specified minimum number.</para>
         </returns>
         <param name="feature">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The feature to look for. </param
         >
         <param name="minimumVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Version" />
+          A <see cref="T:System.Version" />
 
           
 
@@ -294,13 +306,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the documentation for the product containing the feature to determine the names to pass to the <paramref
-             name="featureClassName" />
+            >See the documentation for the product containing the feature to determine the names to pass to the <paramref name="featureClassName" />
 
             
 
-             and the <paramref
-             name="featureConstName" />
+             and the <paramref name="featureConstName" />
 
             
 
@@ -316,19 +326,26 @@
           <para>true if the specified feature is present; false if the specified feature is not present or if the product containing the feature is not installed.</para>
         </returns>
         <param name="featureClassName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the class to query for information about the specified feature. This class must implement the <see
-           cref="T:System.Windows.Forms.IFeatureSupport" />
+          The fully qualified name of the class to query for information about the specified feature. This class must implement the <see cref="T:System.Windows.Forms.IFeatureSupport" />
 
           
 
            interface or inherit from a class that implements this interface. </param
         >
         <param name="featureConstName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -358,13 +375,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >See the documentation for the product containing the feature to determine the names to pass to the <paramref
-             name="featureClassName" />
+            >See the documentation for the product containing the feature to determine the names to pass to the <paramref name="featureClassName" />
 
             
 
-             and the <paramref
-             name="featureConstName" />
+             and the <paramref name="featureConstName" />
 
             
 
@@ -380,31 +395,41 @@
           <para>true if the feature is present and its version number is greater than or equal to the specified minimum version number; false if the feature is not installed or its version number is below the specified minimum number.</para>
         </returns>
         <param name="featureClassName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The fully qualified name of the class to query for information about the specified feature. This class must implement the <see
-           cref="T:System.Windows.Forms.IFeatureSupport" />
+          The fully qualified name of the class to query for information about the specified feature. This class must implement the <see cref="T:System.Windows.Forms.IFeatureSupport" />
 
           
 
            interface or inherit from a class that implements this interface. </param
         >
         <param name="featureConstName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The fully qualified name of the feature to look for. </param
         >
         <param name="minimumVersion">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Version" />
+          A <see cref="T:System.Version" />
 
           
 

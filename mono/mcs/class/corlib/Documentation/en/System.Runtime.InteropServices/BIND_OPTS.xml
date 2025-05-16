@@ -30,8 +30,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use <see
-         cref="T:System.Runtime.InteropServices.ComTypes.BIND_OPTS" />
+        >Use <see cref="T:System.Runtime.InteropServices.ComTypes.BIND_OPTS" />
 
         
 

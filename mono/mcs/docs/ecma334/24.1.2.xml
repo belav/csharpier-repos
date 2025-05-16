@@ -3,8 +3,7 @@
   <paragraph>Attribute classes can have positional parameters and named parameters. Each public instance constructor for an attribute class defines a valid sequence of positional parameters for that attribute class. Each  non-static public read-write field and property for an attribute class defines a named parameter for the attribute class. </paragraph>
   <paragraph>
     <example
-      >[Example: The example <code_example
-      >
+      >[Example: The example <code_example>
         <![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class)]  
@@ -29,8 +28,7 @@ public class HelpAttribute: Attribute
   </paragraph>
   <paragraph>
     <example
-      >This attribute class might be used as follows: <code_example
-      >
+      >This attribute class might be used as follows: <code_example>
         <![CDATA[
 [Help("http://www.mycompany.com/.../Class1.htm")]  
 class Class1 {  

@@ -32,16 +32,14 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>This generic class enables more advanced scenarios where there is a requirement to create a channel factory that can be used to create more than one type of channel.</para>
       <para
-        >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see
-         cref="T:System.ServiceModel.ChannelFactory" />
+        >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see cref="T:System.ServiceModel.ChannelFactory" />
 
         
 
          prior to the creation of any channel. See the example section for a code sample.</para
       >
       <para
-        >Frequently client or calling applications (for example, middle-tier applications are client applications, too) using this type also have complex state management needs as well as performance needs. For more information about these scenarios, please see <format
-         type="text/html">
+        >Frequently client or calling applications (for example, middle-tier applications are client applications, too) using this type also have complex state management needs as well as performance needs. For more information about these scenarios, please see <format type="text/html">
           <a href="f9714a64-d0ae-4a98-bca0-5d370fdbd631">Middle-Tier Client Applications</a>
         </format>
 
@@ -72,8 +70,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -106,8 +103,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -115,12 +111,15 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -152,8 +151,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -161,12 +159,15 @@
           >
         </summary>
         <param name="endpoint">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+          The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
           
 
@@ -198,8 +199,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -207,7 +207,11 @@
           >
         </summary>
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -233,8 +237,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use this constructor when you want to pass the channel type information programmatically rather than using an application configuration file. The <paramref
-             name="channelType" />
+            >Use this constructor when you want to pass the channel type information programmatically rather than using an application configuration file. The <paramref name="channelType" />
 
             
 
@@ -244,8 +247,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -279,8 +281,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -288,24 +289,30 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to configure the endpoint.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -338,8 +345,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -347,19 +353,26 @@
           >
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to configure the endpoint.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -389,8 +402,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.ChannelFactory`1" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.ChannelFactory`1" />
 
             
 
@@ -398,19 +410,26 @@
           >
         </summary>
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The configuration name used for the endpoint.</param
         >
         <param name="remoteAddress">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -436,8 +455,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates a channel of type <paramref
-             name="TChannel" />
+            >Creates a channel of type <paramref name="TChannel" />
 
             
 
@@ -451,13 +469,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="TChannel" />
+            >The <paramref name="TChannel" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -494,13 +510,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="TChannel" />
+            >The <paramref name="TChannel" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -508,12 +522,15 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
@@ -549,13 +566,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="TChannel" />
+            >The <paramref name="TChannel" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -563,7 +578,11 @@
           >
         </returns>
         <param name="endpointConfigurationName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -601,13 +620,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="TChannel" />
+            >The <paramref name="TChannel" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -615,12 +632,15 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
@@ -657,13 +677,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="TChannel" />
+            >The <paramref name="TChannel" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -671,24 +689,30 @@
           >
         </returns>
         <param name="address">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.EndpointAddress" />
+          The <see cref="T:System.ServiceModel.EndpointAddress" />
 
           
 
            that provides the location of the service.</param
         >
         <param name="via">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -727,13 +751,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <paramref
-             name="TChannel" />
+            >The <paramref name="TChannel" />
 
             
 
-             of type <see
-             cref="T:System.ServiceModel.Channels.IChannel" />
+             of type <see cref="T:System.ServiceModel.Channels.IChannel" />
 
             
 
@@ -741,24 +763,30 @@
           >
         </returns>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.ServiceModel.Channels.Binding" />
+          The <see cref="T:System.ServiceModel.Channels.Binding" />
 
           
 
            used to configure the endpoint.</param
         >
         <param name="via">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Uri" />
+          The <see cref="T:System.Uri" />
 
           
 
@@ -792,8 +820,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+            >The <see cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
             
 

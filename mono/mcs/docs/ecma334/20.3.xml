@@ -2,9 +2,7 @@
 <clause number="20.3" title="Fully qualified interface member names">
   <paragraph
     >An interface member is sometimes referred to by its fully qualified name. The fully qualified name of an interface member consists of the name of the interface in which the member is declared, followed by a dot, followed by the name of the member. The fully qualified name of a member references the interface in which the member is declared. <example
-
-      >[Example: For example, given the declarations <code_example
-      >
+      >[Example: For example, given the declarations <code_example>
         <![CDATA[
 interface IControl  
 {  
@@ -24,9 +22,7 @@ interface ITextBox: IControl
   </paragraph>
   <paragraph
     >When an interface is part of a namespace, the fully qualified name of an interface member includes the namespace name. <example
-
-      >[Example: For example <code_example
-      >
+      >[Example: For example <code_example>
         <![CDATA[
 namespace System  
 {  

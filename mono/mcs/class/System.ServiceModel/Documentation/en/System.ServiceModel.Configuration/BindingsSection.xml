@@ -40,8 +40,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.BindingsSection" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.BindingsSection" />
 
             
 
@@ -77,8 +76,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" />
 
             
 
@@ -114,8 +112,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.BasicHttpsBindingElement" />
 
             
 
@@ -146,8 +143,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a collection of <see
-             cref="T:System.ServiceModel.Configuration.BindingCollectionElement" />
+            >Gets a collection of <see cref="T:System.ServiceModel.Configuration.BindingCollectionElement" />
 
             
 
@@ -214,8 +210,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ServiceModel.Configuration.BindingsSection" />
+            >A <see cref="T:System.ServiceModel.Configuration.BindingsSection" />
 
             
 
@@ -223,7 +218,11 @@
           >
         </returns>
         <param name="config">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -344,8 +343,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.NetNamedPipeBindingElement" />
 
             
 
@@ -411,8 +409,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.NetTcpBindingElement" />
 
             
 
@@ -470,8 +467,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.WSDualHttpBindingElement" />
 
             
 
@@ -507,8 +503,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.WSFederationHttpBindingElement" />
 
             
 
@@ -544,8 +539,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the configuration element that contains a collection of <see
-             cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" />
+            >Gets the configuration element that contains a collection of <see cref="T:System.ServiceModel.Configuration.WSHttpBindingElement" />
 
             
 

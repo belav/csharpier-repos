@@ -21,13 +21,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Provides data for the <see
-         cref="E:System.Windows.Forms.TreeView.NodeMouseClick" />
+        >Provides data for the <see cref="E:System.Windows.Forms.TreeView.NodeMouseClick" />
 
         
 
-         and <see
-         cref="E:System.Windows.Forms.TreeView.NodeMouseDoubleClick" />
+         and <see cref="E:System.Windows.Forms.TreeView.NodeMouseDoubleClick" />
 
         
 
@@ -55,8 +53,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Windows.Forms.TreeNodeMouseClickEventArgs" />
+            >Initializes a new instance of the <see cref="T:System.Windows.Forms.TreeNodeMouseClickEventArgs" />
 
             
 
@@ -64,40 +61,59 @@
           >
         </summary>
         <param name="node">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The node that was clicked.</param
         >
         <param name="button">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          One of the <see
-           cref="T:System.Windows.Forms.MouseButtons" />
+          One of the <see cref="T:System.Windows.Forms.MouseButtons" />
 
           
 
            members.</param
         >
         <param name="clicks">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The number of clicks that occurred.</param
         >
         <param name="x">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The x-coordinate where the click occurred.</param
         >
         <param name="y">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

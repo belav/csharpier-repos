@@ -30,64 +30,53 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This is a simple implementation of <see
-         cref="T:System.Collections.IDictionary" />
+        >This is a simple implementation of <see cref="T:System.Collections.IDictionary" />
 
         
 
-         using a singly linked list. It is smaller and faster than a <see
-         cref="T:System.Collections.Hashtable" />
+         using a singly linked list. It is smaller and faster than a <see cref="T:System.Collections.Hashtable" />
 
         
 
          if the number of elements is 10 or less. This should not be used if performance is important for large numbers of elements.</para
       >
       <para
-        >Items in a <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+        >Items in a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
-         are not in any guaranteed order; code should not depend on the current order. The <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+         are not in any guaranteed order; code should not depend on the current order. The <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
          is implemented for fast keyed retrieval; the actual internal order of items is implementation-dependent and could change in future versions of the product. </para
       >
       <para
-        >Members, such as <see
-         cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
+        >Members, such as <see cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
 
         
 
-        , <see
-         cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />
+        , <see cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />
 
         
 
-        , <see
-         cref="M:System.Collections.Specialized.ListDictionary.Remove(System.Object)" />
+        , <see cref="M:System.Collections.Specialized.ListDictionary.Remove(System.Object)" />
 
         
 
-        , and <see
-         cref="M:System.Collections.Specialized.ListDictionary.Contains(System.Object)" />
+        , and <see cref="M:System.Collections.Specialized.ListDictionary.Contains(System.Object)" />
 
         
 
-         are O(<paramref
-         name="n" />
+         are O(<paramref name="n" />
 
         
 
-        ) operations, where <paramref
-         name="n" />
+        ) operations, where <paramref name="n" />
 
         
 
-         is <see
-         cref="P:System.Collections.Specialized.ListDictionary.Count" />
+         is <see cref="P:System.Collections.Specialized.ListDictionary.Count" />
 
         
 
@@ -95,13 +84,11 @@
       >
       <para>A key cannot be null, but a value can.</para>
       <para
-        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see
-         cref="T:System.Collections.Specialized.ListDictionary" />
+        >The foreach statement of the C# language (for each in Visual Basic) requires the type of each element in the collection. Since each element of the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
         
 
-         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
-         cref="T:System.Collections.DictionaryEntry" />
+         is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see cref="T:System.Collections.DictionaryEntry" />
 
         
 
@@ -134,13 +121,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -151,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Creates an empty <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -184,13 +168,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The comparer determines whether two keys are equal. Every key in a <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >The comparer determines whether two keys are equal. Every key in a <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             must be unique. The default comparer is the key's implementation of <see
-             cref="M:System.Object.Equals(System.Object)" />
+             must be unique. The default comparer is the key's implementation of <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
@@ -202,8 +184,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Creates an empty <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Creates an empty <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -211,12 +192,15 @@
           >
         </summary>
         <param name="comparer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Collections.IComparer" />
+          The <see cref="T:System.Collections.IComparer" />
 
           
 
@@ -248,46 +232,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An object that has no correlation between its state and its hash code value should typically not be used as the key. For example, String objects are better than StringBuilder objects for use as keys.</para>
           <para
-            >You can also use the <see
-             cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
+            >You can also use the <see cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
 
             
 
-             property to add new elements by setting the value of a key that does not exist in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             property to add new elements by setting the value of a key that does not exist in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            ; for example, myCollection["myNonexistentKey"] = myValue. However, if the specified key already exists in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , setting the <see
-             cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
+            , setting the <see cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
 
             
 
-             property overwrites the old value. In contrast, the <see
-             cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />
+             property overwrites the old value. In contrast, the <see cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />
 
             
 
              method does not modify existing elements.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.ListDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.ListDictionary.Count" />
 
             
 
@@ -297,8 +273,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds an entry with the specified key and value into the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Adds an entry with the specified key and value into the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -306,14 +281,22 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The key of the entry to add. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -352,8 +335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes all entries from the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Removes all entries from the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -384,56 +366,46 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.ListDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.ListDictionary.Count" />
 
             
 
             .</para
           >
           <para
-            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see
-             cref="M:System.Object.Equals(System.Object)" />
+            >Starting with the .NET Framework 2.0, this method uses the collection’s objects’ <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods on <paramref
-             name="key" />
+             methods on <paramref name="key" />
 
             
 
-             to determine whether <paramref
-             name="item" />
+             to determine whether <paramref name="item" />
 
             
 
-             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
-             cref="M:System.Object.Equals(System.Object)" />
+             exists. In the earlier versions of the .NET Framework, this determination was made by using the <see cref="M:System.Object.Equals(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.IComparable.CompareTo(System.Object)" />
+             and <see cref="M:System.IComparable.CompareTo(System.Object)" />
 
             
 
-             methods of the <paramref
-             name="item" />
+             methods of the <paramref name="item" />
 
             
 
@@ -443,8 +415,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Determines whether the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Determines whether the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -454,8 +425,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >true if the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -463,12 +433,15 @@
           >
         </returns>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The key to locate in the <see
-           cref="T:System.Collections.Specialized.ListDictionary" />
+          The key to locate in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
           
 
@@ -499,47 +472,40 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The elements are copied to the <see
-             cref="T:System.Array" />
+            >The elements are copied to the <see cref="T:System.Array" />
 
             
 
-             in the same order in which the enumerator iterates through the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             in the same order in which the enumerator iterates through the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
             .</para
           >
           <para
-            >To copy only the keys in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >To copy only the keys in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
             , use ListDictionary.Keys.CopyTo.</para
           >
           <para
-            >To copy only the values in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >To copy only the values in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
             , use ListDictionary.Values.CopyTo.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.ListDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.ListDictionary.Count" />
 
             
 
@@ -549,13 +515,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Copies the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Copies the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             entries to a one-dimensional <see
-             cref="T:System.Array" />
+             entries to a one-dimensional <see cref="T:System.Array" />
 
             
 
@@ -563,39 +527,42 @@
           >
         </summary>
         <param name="array">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The one-dimensional <see
-           cref="T:System.Array" />
+          The one-dimensional <see cref="T:System.Array" />
 
           
 
-           that is the destination of the <see
-           cref="T:System.Collections.DictionaryEntry" />
+           that is the destination of the <see cref="T:System.Collections.DictionaryEntry" />
 
           
 
-           objects copied from <see
-           cref="T:System.Collections.Specialized.ListDictionary" />
+           objects copied from <see cref="T:System.Collections.Specialized.ListDictionary" />
 
           
 
-          . The <see
-           cref="T:System.Array" />
+          . The <see cref="T:System.Array" />
 
           
 
            must have zero-based indexing. </param
         >
         <param name="index">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The zero-based index in <paramref
-           name="array" />
+          The zero-based index in <paramref name="array" />
 
           
 
@@ -624,8 +591,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the number of key/value pairs contained in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Gets the number of key/value pairs contained in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -659,23 +625,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position.  At this position, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position.  At this position, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is undefined. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -686,66 +648,54 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             is undefined. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             is undefined. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
@@ -758,13 +708,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >Returns an <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             that iterates through the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -774,13 +722,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IDictionaryEnumerator" />
+            >An <see cref="T:System.Collections.IDictionaryEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             for the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -810,13 +756,11 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.ListDictionary.IsFixedSize" />
+             implements the <see cref="P:System.Collections.Specialized.ListDictionary.IsFixedSize" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.IDictionary" />
+             property because it is required by the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -829,8 +773,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -860,13 +803,11 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.ListDictionary.IsReadOnly" />
+             implements the <see cref="P:System.Collections.Specialized.ListDictionary.IsReadOnly" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.IDictionary" />
+             property because it is required by the <see cref="T:System.Collections.IDictionary" />
 
             
 
@@ -879,8 +820,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -910,26 +850,22 @@
 
             
 
-             implements the <see
-             cref="P:System.Collections.Specialized.ListDictionary.IsSynchronized" />
+             implements the <see cref="P:System.Collections.Specialized.ListDictionary.IsSynchronized" />
 
             
 
-             property because it is required by the <see
-             cref="T:System.Collections.ICollection" />
+             property because it is required by the <see cref="T:System.Collections.ICollection" />
 
             
 
              interface.</para
           >
           <para
-            >Derived classes can provide a synchronized version of the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Derived classes can provide a synchronized version of the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
 
             
 
@@ -940,8 +876,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets a value indicating whether the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Gets a value indicating whether the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -992,46 +927,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated values in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Specialized.ListDictionary.Values" />
+             returned by the <see cref="P:System.Collections.Specialized.ListDictionary.Values" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the keys in the original <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             refers back to the keys in the original <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            . Therefore, changes to the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1042,13 +969,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the keys in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             containing the keys in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1079,31 +1004,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >If the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             does not contain an element with the specified key, the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             does not contain an element with the specified key, the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
              remains unchanged. No exception is thrown.</para
           >
           <para
-            >This method is an O(<paramref
-             name="n" />
+            >This method is an O(<paramref name="n" />
 
             
 
-            ) operation, where <paramref
-             name="n" />
+            ) operation, where <paramref name="n" />
 
             
 
-             is <see
-             cref="P:System.Collections.Specialized.ListDictionary.Count" />
+             is <see cref="P:System.Collections.Specialized.ListDictionary.Count" />
 
             
 
@@ -1113,8 +1033,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the entry with the specified key from the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Removes the entry with the specified key from the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1122,7 +1041,11 @@
           >
         </summary>
         <param name="key">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1147,33 +1070,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Derived classes can provide their own synchronized version of the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Derived classes can provide their own synchronized version of the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             using the <see
-             cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
+             using the <see cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
 
             
 
-             property. The synchronizing code must perform operations on the <see
-             cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
+             property. The synchronizing code must perform operations on the <see cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
 
             
 
-             of the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             of the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            , not directly on the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            , not directly on the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1184,8 +1101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an object that can be used to synchronize access to the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            >Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1219,23 +1135,19 @@
           <para>The foreach statement of the C# language (for each in Visual Basic) hides the complexity of the enumerators.  Therefore, using foreach is recommended, instead of directly manipulating the enumerator.</para>
           <para>Enumerators can be used to read the data in the collection, but they cannot be used to modify the underlying collection.</para>
           <para
-            >Initially, the enumerator is positioned before the first element in the collection. <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+            >Initially, the enumerator is positioned before the first element in the collection. <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             also brings the enumerator back to this position. At this position, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             also brings the enumerator back to this position. At this position, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. Therefore, you must call <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             throws an exception. Therefore, you must call <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             to advance the enumerator to the first element of the collection before reading the value of <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             to advance the enumerator to the first element of the collection before reading the value of <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1246,99 +1158,81 @@
 
             
 
-             returns the same object until either <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns the same object until either <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             is called. <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             is called. <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             sets <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             sets <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
              to the next element.</para
           >
           <para
-            >If <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >If <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             passes the end of the collection, the enumerator is positioned after the last element in the collection and <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returns false. When the enumerator is at this position, subsequent calls to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             returns false. When the enumerator is at this position, subsequent calls to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             also return false. If the last call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             also return false. If the last call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             returned false, calling <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             returned false, calling <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             throws an exception. To set <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             throws an exception. To set <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-             to the first element of the collection again, you can call <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             to the first element of the collection again, you can call <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             followed by <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+             followed by <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
             .</para
           >
           <para
-            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            >An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator is irrecoverably invalidated and the next call to <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             or <see
-             cref="M:System.Collections.IEnumerator.Reset" />
+             or <see cref="M:System.Collections.IEnumerator.Reset" />
 
             
 
-             throws an <see
-             cref="T:System.InvalidOperationException" />
+             throws an <see cref="T:System.InvalidOperationException" />
 
             
 
-            . If the collection is modified between <see
-             cref="M:System.Collections.IEnumerator.MoveNext" />
+            . If the collection is modified between <see cref="M:System.Collections.IEnumerator.MoveNext" />
 
             
 
-             and <see
-             cref="P:System.Collections.IEnumerator.Current" />
+             and <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
-            , <see
-             cref="P:System.Collections.IEnumerator.Current" />
+            , <see cref="P:System.Collections.IEnumerator.Current" />
 
             
 
@@ -1350,13 +1244,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Collections.IEnumerator" />
+            >Returns an <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             that iterates through the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             that iterates through the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1366,13 +1258,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Collections.IEnumerator" />
+            >An <see cref="T:System.Collections.IEnumerator" />
 
             
 
-             for the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             for the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
@@ -1404,46 +1294,38 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The order of the values in the <see
-             cref="T:System.Collections.ICollection" />
+            >The order of the values in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             is unspecified, but it is the same order as the associated keys in the <see
-             cref="T:System.Collections.ICollection" />
+             is unspecified, but it is the same order as the associated keys in the <see cref="T:System.Collections.ICollection" />
 
             
 
-             returned by the <see
-             cref="P:System.Collections.Specialized.ListDictionary.Keys" />
+             returned by the <see cref="P:System.Collections.Specialized.ListDictionary.Keys" />
 
             
 
              method.</para
           >
           <para
-            >The returned <see
-             cref="T:System.Collections.ICollection" />
+            >The returned <see cref="T:System.Collections.ICollection" />
 
             
 
-             is not a static copy; instead, the <see
-             cref="T:System.Collections.ICollection" />
+             is not a static copy; instead, the <see cref="T:System.Collections.ICollection" />
 
             
 
-             refers back to the values in the original <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             refers back to the values in the original <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-            . Therefore, changes to the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+            . Therefore, changes to the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 
-             continue to be reflected in the <see
-             cref="T:System.Collections.ICollection" />
+             continue to be reflected in the <see cref="T:System.Collections.ICollection" />
 
             
 
@@ -1454,13 +1336,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Collections.ICollection" />
+            >Gets an <see cref="T:System.Collections.ICollection" />
 
             
 
-             containing the values in the <see
-             cref="T:System.Collections.Specialized.ListDictionary" />
+             containing the values in the <see cref="T:System.Collections.Specialized.ListDictionary" />
 
             
 

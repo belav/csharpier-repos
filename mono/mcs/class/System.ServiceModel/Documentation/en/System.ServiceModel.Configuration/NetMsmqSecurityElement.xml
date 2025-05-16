@@ -23,13 +23,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Objects of this type are created by creating an instance of the <see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+        >Objects of this type are created by creating an instance of the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
-         binding. You can then use this object to reference all of the various security settings related to the <see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+         binding. You can then use this object to reference all of the various security settings related to the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
@@ -39,13 +37,11 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
+        >The <see cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
 
         
 
-         class encapsulates the MSMQ security features available when using the <see
-         cref="T:System.ServiceModel.NetMsmqBinding" />
+         class encapsulates the MSMQ security features available when using the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
         
 
@@ -70,8 +66,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.NetMsmqSecurityElement" />
 
             
 
@@ -106,8 +101,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
+            >The <see cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
 
             
 
@@ -117,13 +111,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
+            >Gets the <see cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
 
             
 
-             instance that is associated with the <see
-             cref="T:System.ServiceModel.NetMsmqBinding" />
+             instance that is associated with the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
             
 
@@ -176,13 +168,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.NetMsmqSecurityMode" />
+            >Gets or sets the <see cref="T:System.ServiceModel.NetMsmqSecurityMode" />
 
             
 
-             instance that is associated with the <see
-             cref="T:System.ServiceModel.NetMsmqBinding" />
+             instance that is associated with the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
             
 
@@ -243,13 +233,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.ServiceModel.Configuration.MsmqTransportSecurityElement" />
+            >Gets the <see cref="T:System.ServiceModel.Configuration.MsmqTransportSecurityElement" />
 
             
 
-             element that is associated with the <see
-             cref="T:System.ServiceModel.NetMsmqBinding" />
+             element that is associated with the <see cref="T:System.ServiceModel.NetMsmqBinding" />
 
             
 

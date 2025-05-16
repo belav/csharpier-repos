@@ -20,18 +20,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Web.UI.WebControls.TargetConverter" />
+        >The <see cref="T:System.Web.UI.WebControls.TargetConverter" />
 
         
 
-         class creates a collection of values that can be used to specify the location in which to display content resulting from a Web navigation, such as the page navigated to when a <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+         class creates a collection of values that can be used to specify the location in which to display content resulting from a Web navigation, such as the page navigated to when a <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
-         control is clicked. This collection is commonly used in a designer to display a list of values that can be used for the Target property of a navigation control, such as the <see
-         cref="T:System.Web.UI.WebControls.HyperLink" />
+         control is clicked. This collection is commonly used in a designer to display a list of values that can be used for the Target property of a navigation control, such as the <see cref="T:System.Web.UI.WebControls.HyperLink" />
 
         
 
@@ -54,8 +51,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Web.UI.WebControls.TargetConverter" />
+            >Initializes a new instance of the <see cref="T:System.Web.UI.WebControls.TargetConverter" />
 
             
 
@@ -92,8 +88,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >A <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
@@ -101,12 +96,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -138,8 +136,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a value that indicates whether the collection of standard values returned from the <see
-             cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >Returns a value that indicates whether the collection of standard values returned from the <see cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -149,13 +146,11 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if the <see
-             cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+            >true if the <see cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
             
 
-             returned from <see
-             cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+             returned from <see cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -163,12 +158,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 
@@ -204,8 +202,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >true if <see
-             cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+            >true if <see cref="M:System.Web.UI.WebControls.TargetConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
             
 
@@ -213,12 +210,15 @@
           >
         </returns>
         <param name="context">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          An <see
-           cref="T:System.ComponentModel.ITypeDescriptorContext" />
+          An <see cref="T:System.ComponentModel.ITypeDescriptorContext" />
 
           
 

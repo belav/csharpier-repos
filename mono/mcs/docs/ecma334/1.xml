@@ -2,8 +2,7 @@
 <clause number="1" title="Scope" informative="true">
   <paragraph>This clause is informative. </paragraph>
   <paragraph
-    >This ECMA Standard specifies the form and establishes the interpretation of programs written in the C# programming language. It specifies <list
-    >
+    >This ECMA Standard specifies the form and establishes the interpretation of programs written in the C# programming language. It specifies <list>
       <list_item> The representation of C# programs; </list_item>
       <list_item> The syntax and constraints of the C# language; </list_item>
       <list_item> The semantic rules for interpreting C# programs; </list_item>
@@ -11,8 +10,7 @@
     </list>
   </paragraph>
   <paragraph
-    >This ECMA Standard does not specify <list
-    >
+    >This ECMA Standard does not specify <list>
       <list_item> The mechanism by which C# programs are transformed for use by a data-processing system; </list_item>
       <list_item> The mechanism by which C# applications are invoked for use by a data-processing system; </list_item>
       <list_item> The mechanism by which input data are transformed for use by a C# application; </list_item>

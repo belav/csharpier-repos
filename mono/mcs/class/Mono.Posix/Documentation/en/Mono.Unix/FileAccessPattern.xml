@@ -19,8 +19,7 @@
       <para
         >Operating systems maintain a cache of all open files to speed up
     performance for common tasks.  The default caching behavior may not be
-    appropriate for some tasks.  The <c
-        >FileAccessPattern</c>
+    appropriate for some tasks.  The <c>FileAccessPattern</c>
 
         
 

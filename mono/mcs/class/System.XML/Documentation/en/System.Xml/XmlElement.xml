@@ -29,33 +29,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Elements are one of the most common nodes in the W3C Document Object Model (DOM). Elements can have attributes associated with them. The XmlElement class has many methods for accessing attributes (<see
-         cref="M:System.Xml.XmlElement.GetAttribute(System.String)" />
+        >Elements are one of the most common nodes in the W3C Document Object Model (DOM). Elements can have attributes associated with them. The XmlElement class has many methods for accessing attributes (<see cref="M:System.Xml.XmlElement.GetAttribute(System.String)" />
 
         
 
-        , <see
-         cref="M:System.Xml.XmlElement.SetAttribute(System.String,System.String)" />
+        , <see cref="M:System.Xml.XmlElement.SetAttribute(System.String,System.String)" />
 
         
 
-        , <see
-         cref="M:System.Xml.XmlElement.RemoveAttribute(System.String)" />
+        , <see cref="M:System.Xml.XmlElement.RemoveAttribute(System.String)" />
 
         
 
-        , <see
-         cref="M:System.Xml.XmlElement.GetAttributeNode(System.String)" />
+        , <see cref="M:System.Xml.XmlElement.GetAttributeNode(System.String)" />
 
         
 
-        , and so on). You can also use the <see
-         cref="P:System.Xml.XmlElement.Attributes" />
+        , and so on). You can also use the <see cref="P:System.Xml.XmlElement.Attributes" />
 
         
 
-         property which returns an <see
-         cref="T:System.Xml.XmlAttributeCollection" />
+         property which returns an <see cref="T:System.Xml.XmlAttributeCollection" />
 
         
 
@@ -93,13 +87,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Do not instantiate an <see
-             cref="T:System.Xml.XmlElement" />
+            >Do not instantiate an <see cref="T:System.Xml.XmlElement" />
 
             
 
-             directly; instead, use methods such as <see
-             cref="Overload:System.Xml.XmlDocument.CreateElement" />
+             directly; instead, use methods such as <see cref="Overload:System.Xml.XmlDocument.CreateElement" />
 
             
 
@@ -109,8 +101,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Xml.XmlElement" />
+            >Initializes a new instance of the <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -118,43 +109,56 @@
           >
         </summary>
         <param name="prefix">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace prefix; see the <see
-           cref="P:System.Xml.XmlElement.Prefix" />
+          The namespace prefix; see the <see cref="P:System.Xml.XmlElement.Prefix" />
 
           
 
            property.</param
         >
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The local name; see the <see
-           cref="P:System.Xml.XmlElement.LocalName" />
+          The local name; see the <see cref="P:System.Xml.XmlElement.LocalName" />
 
           
 
            property.</param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The namespace URI; see the <see
-           cref="P:System.Xml.XmlElement.NamespaceURI" />
+          The namespace URI; see the <see cref="P:System.Xml.XmlElement.NamespaceURI" />
 
           
 
            property.</param
         >
         <param name="doc">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -186,8 +190,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets an <see
-             cref="T:System.Xml.XmlAttributeCollection" />
+            >Gets an <see cref="T:System.Xml.XmlAttributeCollection" />
 
             
 
@@ -221,8 +224,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method serves as a copy constructor for nodes. The duplicate node has no parent (<see
-             cref="P:System.Xml.XmlNode.ParentNode" />
+            >This method serves as a copy constructor for nodes. The duplicate node has no parent (<see cref="P:System.Xml.XmlNode.ParentNode" />
 
             
 
@@ -238,7 +240,11 @@
           <para>The cloned node.</para>
         </returns>
         <param name="deep">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -275,7 +281,11 @@
           <para>The value of the specified attribute. An empty string is returned if a matching attribute is not found or if the attribute does not have a specified or default value.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -316,14 +326,22 @@
           <para>The value of the specified attribute. An empty string is returned if a matching attribute is not found or if the attribute does not have a specified or default value.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute to retrieve. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -363,7 +381,11 @@
           <para>The specified XmlAttribute or null if a matching attribute was not found.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -398,8 +420,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Returns the <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -411,14 +432,22 @@
           <para>The specified XmlAttribute or null if a matching attribute was not found.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -451,8 +480,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The nodes are placed in the order in which they would be encountered in a preorder traversal of the <see
-             cref="T:System.Xml.XmlElement" />
+            >The nodes are placed in the order in which they would be encountered in a preorder traversal of the <see cref="T:System.Xml.XmlElement" />
 
             
 
@@ -460,18 +488,15 @@
           >
           <block subset="none" type="note">
             <para
-              >It is recommended that you use the <see
-               cref="Overload:System.Xml.XmlNode.SelectNodes" />
+              >It is recommended that you use the <see cref="Overload:System.Xml.XmlNode.SelectNodes" />
 
               
 
-               or <see
-               cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
+               or <see cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
               
 
-               method instead of the <see
-               cref="M:System.Xml.XmlElement.GetElementsByTagName(System.String)" />
+               method instead of the <see cref="M:System.Xml.XmlElement.GetElementsByTagName(System.String)" />
 
               
 
@@ -482,13 +507,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Returns an <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             containing a list of all descendant elements that match the specified <see
-             cref="P:System.Xml.XmlElement.Name" />
+             containing a list of all descendant elements that match the specified <see cref="P:System.Xml.XmlElement.Name" />
 
             
 
@@ -498,8 +521,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlNodeList" />
+            >An <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -507,7 +529,11 @@
           >
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -543,18 +569,15 @@
           <para>The nodes are placed in the order in which they would be encountered in a preorder traversal of the XmlElement tree.</para>
           <block subset="none" type="note">
             <para
-              >It is recommended that you use the <see
-               cref="Overload:System.Xml.XmlNode.SelectNodes" />
+              >It is recommended that you use the <see cref="Overload:System.Xml.XmlNode.SelectNodes" />
 
               
 
-               or <see
-               cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
+               or <see cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
               
 
-               method instead of the <see
-               cref="M:System.Xml.XmlElement.GetElementsByTagName(System.String,System.String)" />
+               method instead of the <see cref="M:System.Xml.XmlElement.GetElementsByTagName(System.String,System.String)" />
 
               
 
@@ -565,18 +588,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns an <see
-             cref="T:System.Xml.XmlNodeList" />
+            >Returns an <see cref="T:System.Xml.XmlNodeList" />
 
             
 
-             containing a list of all descendant elements that match the specified <see
-             cref="P:System.Xml.XmlElement.LocalName" />
+             containing a list of all descendant elements that match the specified <see cref="P:System.Xml.XmlElement.LocalName" />
 
             
 
-             and <see
-             cref="P:System.Xml.XmlElement.NamespaceURI" />
+             and <see cref="P:System.Xml.XmlElement.NamespaceURI" />
 
             
 
@@ -586,8 +606,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >An <see
-             cref="T:System.Xml.XmlNodeList" />
+            >An <see cref="T:System.Xml.XmlNodeList" />
 
             
 
@@ -595,14 +614,22 @@
           >
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name to match. The asterisk (*) is a special value that matches all tags. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -639,7 +666,11 @@
           <para>true if the current node has the specified attribute; otherwise, false.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -680,14 +711,22 @@
           <para>true if the current node has the specified attribute; otherwise, false.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute to find. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -811,8 +850,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If the node does not have a prefix, LocalName is the same as <see
-             cref="P:System.Xml.XmlElement.Name" />
+            >If the node does not have a prefix, LocalName is the same as <see cref="P:System.Xml.XmlElement.Name" />
 
             
 
@@ -894,8 +932,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlNode" />
+            >Gets the <see cref="T:System.Xml.XmlNode" />
 
             
 
@@ -958,8 +995,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the <see
-             cref="T:System.Xml.XmlDocument" />
+            >Gets the <see cref="T:System.Xml.XmlDocument" />
 
             
 
@@ -1010,8 +1046,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Setting this property changes the <see
-             cref="P:System.Xml.XmlElement.Name" />
+            >Setting this property changes the <see cref="P:System.Xml.XmlElement.Name" />
 
             
 
@@ -1103,7 +1138,11 @@
           <para>Removes an attribute by name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1143,14 +1182,22 @@
           <para>Removes an attribute with the specified local name and namespace URI. (If the removed attribute has a default value, it is immediately replaced).</para>
         </summary>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute to remove. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1193,7 +1240,11 @@
           <para>The attribute node removed or null if there is no node at the given index.</para>
         </returns>
         <param name="i">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1227,8 +1278,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the specified <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Removes the specified <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -1238,8 +1288,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The removed XmlAttribute or null if <paramref
-             name="oldAttr" />
+            >The removed XmlAttribute or null if <paramref name="oldAttr" />
 
             
 
@@ -1247,7 +1296,11 @@
           >
         </returns>
         <param name="oldAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1282,8 +1335,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Removes the <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Removes the <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -1295,14 +1347,22 @@
           <para>The removed XmlAttribute or null if the XmlElement does not have a matching attribute node.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1333,8 +1393,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Xml.XmlElement.SchemaInfo" />
+            >The <see cref="P:System.Xml.XmlElement.SchemaInfo" />
 
             
 
@@ -1373,33 +1432,27 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If an attribute with the same name is already present in the element, its value is changed to that of <paramref
-             name="value" />
+            >If an attribute with the same name is already present in the element, its value is changed to that of <paramref name="value" />
 
             
 
-            . <paramref
-             name="value" />
+            . <paramref name="value" />
 
             
 
-             is a simple string. It is not parsed as it is being set. Any markup, such as syntax to be recognized as an entity reference, is treated as literal text and needs to be properly escaped by the implementation when it is written out. In order to assign an attribute value that contains entity references, the user must create an <see
-             cref="T:System.Xml.XmlAttribute" />
+             is a simple string. It is not parsed as it is being set. Any markup, such as syntax to be recognized as an entity reference, is treated as literal text and needs to be properly escaped by the implementation when it is written out. In order to assign an attribute value that contains entity references, the user must create an <see cref="T:System.Xml.XmlAttribute" />
 
             
 
-             node plus any <see
-             cref="T:System.Xml.XmlText" />
+             node plus any <see cref="T:System.Xml.XmlText" />
 
             
 
-             and <see
-             cref="T:System.Xml.XmlEntityReference" />
+             and <see cref="T:System.Xml.XmlEntityReference" />
 
             
 
-             nodes, build the appropriate subtree and use <see
-             cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+             nodes, build the appropriate subtree and use <see cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
 
             
 
@@ -1411,14 +1464,22 @@
           <para>Sets the value of the attribute with the specified name.</para>
         </summary>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The name of the attribute to create or alter. This is a qualified name. If the name contains a colon it is parsed into prefix and local name components. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1460,21 +1521,33 @@
           <para>The attribute value.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The namespace URI of the attribute. </param
         >
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1511,8 +1584,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Adds the specified <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -1524,7 +1596,11 @@
           <para>If the attribute replaces an existing attribute with the same name, the old XmlAttribute is returned; otherwise, null is returned.</para>
         </returns>
         <param name="newAttr">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1558,13 +1634,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The XmlAttribute does not have any children. Use <see
-             cref="P:System.Xml.XmlAttribute.Value" />
+            >The XmlAttribute does not have any children. Use <see cref="P:System.Xml.XmlAttribute.Value" />
 
             
 
-             to assign a text value to the attribute or use <see
-             cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" />
+             to assign a text value to the attribute or use <see cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" />
 
             
 
@@ -1574,8 +1648,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Adds the specified <see
-             cref="T:System.Xml.XmlAttribute" />
+            >Adds the specified <see cref="T:System.Xml.XmlAttribute" />
 
             
 
@@ -1587,14 +1660,22 @@
           <para>The XmlAttribute to add.</para>
         </returns>
         <param name="localName">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1655,8 +1736,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves all the children of the node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves all the children of the node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1664,7 +1744,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -1701,8 +1785,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Saves the current node to the specified <see
-             cref="T:System.Xml.XmlWriter" />
+            >Saves the current node to the specified <see cref="T:System.Xml.XmlWriter" />
 
             
 
@@ -1710,7 +1793,11 @@
           >
         </summary>
         <param name="w">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

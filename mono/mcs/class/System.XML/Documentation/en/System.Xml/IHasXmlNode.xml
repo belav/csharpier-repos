@@ -15,28 +15,23 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The IHasXmlNode interface provides an interface that enables a class to return an <see
-         cref="T:System.Xml.XmlNode" />
+        >The IHasXmlNode interface provides an interface that enables a class to return an <see cref="T:System.Xml.XmlNode" />
 
         
 
-         from the current context or position. It is implemented by <see
-         cref="T:System.Xml.XPath.XPathNavigator" />
+         from the current context or position. It is implemented by <see cref="T:System.Xml.XPath.XPathNavigator" />
 
         
 
-         objects that operate over classes that have <see
-         cref="T:System.Xml.XmlNode" />
+         objects that operate over classes that have <see cref="T:System.Xml.XmlNode" />
 
         
 
-         nodes. For example, if the XPathNavigator object is created by an <see
-         cref="T:System.Xml.XmlDocument" />
+         nodes. For example, if the XPathNavigator object is created by an <see cref="T:System.Xml.XmlDocument" />
 
         
 
-        , you can use the <see
-         cref="M:System.Xml.IHasXmlNode.GetNode" />
+        , you can use the <see cref="M:System.Xml.IHasXmlNode.GetNode" />
 
         
 
@@ -46,8 +41,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Enables a class to return an <see
-         cref="T:System.Xml.XmlNode" />
+        >Enables a class to return an <see cref="T:System.Xml.XmlNode" />
 
         
 
@@ -76,8 +70,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The following C# code uses GetNode to access a node the <see
-             cref="T:System.Xml.XPath.XPathNavigator" />
+            >The following C# code uses GetNode to access a node the <see cref="T:System.Xml.XPath.XPathNavigator" />
 
             
 
@@ -93,8 +86,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns the <see
-             cref="T:System.Xml.XmlNode" />
+            >Returns the <see cref="T:System.Xml.XmlNode" />
 
             
 

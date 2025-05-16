@@ -13,8 +13,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.DisplayMode" />
+        >The <see cref="T:System.ComponentModel.Design.DisplayMode" />
 
         
 
@@ -24,8 +23,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Defines identifiers that indicate the display modes used by <see
-         cref="T:System.ComponentModel.Design.ByteViewer" />
+        >Defines identifiers that indicate the display modes used by <see cref="T:System.ComponentModel.Design.ByteViewer" />
 
         
 
@@ -61,18 +59,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A display mode that automatically selects a display mode. In this mode, the bytes are examined to determine if they are hexadecimal or printable. If the bytes are in hexadecimal format, the <see
-             cref="F:System.ComponentModel.Design.DisplayMode.Hexdump" />
+            >A display mode that automatically selects a display mode. In this mode, the bytes are examined to determine if they are hexadecimal or printable. If the bytes are in hexadecimal format, the <see cref="F:System.ComponentModel.Design.DisplayMode.Hexdump" />
 
             
 
-             mode is selected. If the characters match a printable character set, a test is run to automatically select either the <see
-             cref="F:System.ComponentModel.Design.DisplayMode.Ansi" />
+             mode is selected. If the characters match a printable character set, a test is run to automatically select either the <see cref="F:System.ComponentModel.Design.DisplayMode.Ansi" />
 
             
 
-             or <see
-             cref="F:System.ComponentModel.Design.DisplayMode.Unicode" />
+             or <see cref="F:System.ComponentModel.Design.DisplayMode.Unicode" />
 
             
 

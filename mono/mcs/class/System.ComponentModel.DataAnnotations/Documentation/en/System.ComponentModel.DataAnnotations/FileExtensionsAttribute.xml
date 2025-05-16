@@ -48,8 +48,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.DataAnnotations.FileExtensionsAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.DataAnnotations.FileExtensionsAttribute" />
 
             
 
@@ -107,7 +106,11 @@
           <para>The formatted error message.</para>
         </returns>
         <param name="name">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -142,7 +145,11 @@
           <para>true if the file name extension is valid; otherwise, false.</para>
         </returns>
         <param name="value">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

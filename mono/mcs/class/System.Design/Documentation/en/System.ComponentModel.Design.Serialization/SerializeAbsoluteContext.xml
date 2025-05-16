@@ -16,18 +16,15 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
+        >The <see cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
 
         
 
-         supports absolute serialization. This means that instead of serializing only values that differ from an object's default values, all values are serialized, allowing values to be reset to their defaults for objects that may have already been initialized. When a component serialization service wishes to indicate this behavior to <see
-         cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+         supports absolute serialization. This means that instead of serializing only values that differ from an object's default values, all values are serialized, allowing values to be reset to their defaults for objects that may have already been initialized. When a component serialization service wishes to indicate this behavior to <see cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
 
         
 
-         objects, it will place a <see
-         cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
+         objects, it will place a <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
 
         
 
@@ -55,8 +52,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
 
             
 
@@ -81,8 +77,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >If <paramref
-             name="member" />
+            >If <paramref name="member" />
 
             
 
@@ -92,8 +87,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
+            >Initializes a new instance of the <see cref="T:System.ComponentModel.Design.Serialization.SerializeAbsoluteContext" />
 
             
 
@@ -101,7 +95,11 @@
           >
         </summary>
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -156,7 +154,11 @@
           <para>true if the given member should be serialized in this context; otherwise, false.</para>
         </returns>
         <param name="member">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -26,8 +26,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents an initializer for a single element of an <see
-         cref="T:System.Collections.IEnumerable" />
+        >Represents an initializer for a single element of an <see cref="T:System.Collections.IEnumerable" />
 
         
 
@@ -59,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the instance method that is used to add an element to an <see
-             cref="T:System.Collections.IEnumerable" />
+            >Gets the instance method that is used to add an element to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -92,8 +90,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets the collection of arguments that are passed to a method that adds an element to an <see
-             cref="T:System.Collections.IEnumerable" />
+            >Gets the collection of arguments that are passed to a method that adds an element to an <see cref="T:System.Collections.IEnumerable" />
 
             
 
@@ -170,8 +167,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a textual representation of an <see
-             cref="T:System.Linq.Expressions.ElementInit" />
+            >Returns a textual representation of an <see cref="T:System.Linq.Expressions.ElementInit" />
 
             
 
@@ -181,8 +177,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A textual representation of the <see
-             cref="T:System.Linq.Expressions.ElementInit" />
+            >A textual representation of the <see cref="T:System.Linq.Expressions.ElementInit" />
 
             
 
@@ -224,12 +219,15 @@
           <para>This expression if no children are changed or an expression with the updated children.</para>
         </returns>
         <param name="arguments">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="P:System.Linq.Expressions.ElementInit.Arguments" />
+          The <see cref="P:System.Linq.Expressions.ElementInit.Arguments" />
 
           
 

@@ -26,79 +26,65 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.Text.RegularExpressions.Match" />
+        >The <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         object is immutable and has no public constructor. An instance of the <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         object is immutable and has no public constructor. An instance of the <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         class is returned by the <see
-         cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+         class is returned by the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
 
         
 
-         method and represents the first pattern match in a string. Subsequent matches are represented by <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         method and represents the first pattern match in a string. Subsequent matches are represented by <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         objects returned by the <see
-         cref="M:System.Text.RegularExpressions.Match.NextMatch" />
+         objects returned by the <see cref="M:System.Text.RegularExpressions.Match.NextMatch" />
 
         
 
-         method. In addition, a <see
-         cref="T:System.Text.RegularExpressions.MatchCollection" />
+         method. In addition, a <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
         
 
-         object that consists of zero, one, or more <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         object that consists of zero, one, or more <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         objects is returned by the <see
-         cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
+         objects is returned by the <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
 
         
 
          method.</para
       >
       <para
-        >If the <see
-         cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
+        >If the <see cref="M:System.Text.RegularExpressions.Regex.Matches(System.String)" />
 
         
 
-         method fails to match a regular expression pattern in an input string, it returns an empty <see
-         cref="T:System.Text.RegularExpressions.MatchCollection" />
+         method fails to match a regular expression pattern in an input string, it returns an empty <see cref="T:System.Text.RegularExpressions.MatchCollection" />
 
         
 
          object. You can then use a foreach construct in C# or a For Each construct in Visual Basic to iterate the collection. </para
       >
       <para
-        >If the <see
-         cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
+        >If the <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String)" />
 
         
 
-         method fails to match the regular expression pattern, it returns a <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         method fails to match the regular expression pattern, it returns a <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         object that is equal to <see
-         cref="P:System.Text.RegularExpressions.Match.Empty" />
+         object that is equal to <see cref="P:System.Text.RegularExpressions.Match.Empty" />
 
         
 
-        . You can use the <see
-         cref="P:System.Text.RegularExpressions.Group.Success" />
+        . You can use the <see cref="P:System.Text.RegularExpressions.Group.Success" />
 
         
 
@@ -106,46 +92,38 @@
       >
       <para>code reference: System.Text.RegularExpressions.Match.Class#1</para>
       <para
-        >If a pattern match is successful, the <see
-         cref="P:System.Text.RegularExpressions.Capture.Value" />
+        >If a pattern match is successful, the <see cref="P:System.Text.RegularExpressions.Capture.Value" />
 
         
 
-         property contains the matched substring, the <see
-         cref="P:System.Text.RegularExpressions.Capture.Index" />
+         property contains the matched substring, the <see cref="P:System.Text.RegularExpressions.Capture.Index" />
 
         
 
-         property indicates the zero-based starting position of the matched substring in the input string, and the <see
-         cref="P:System.Text.RegularExpressions.Capture.Length" />
+         property indicates the zero-based starting position of the matched substring in the input string, and the <see cref="P:System.Text.RegularExpressions.Capture.Length" />
 
         
 
          property indicates the length of matched substring in the input string.</para
       >
       <para
-        >Because a single match can involve multiple capturing groups, <see
-         cref="T:System.Text.RegularExpressions.Match" />
+        >Because a single match can involve multiple capturing groups, <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
-         has a <see
-         cref="P:System.Text.RegularExpressions.Match.Groups" />
+         has a <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
         
 
-         property that returns the <see
-         cref="T:System.Text.RegularExpressions.GroupCollection" />
+         property that returns the <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
         
 
-        . The <see
-         cref="T:System.Text.RegularExpressions.GroupCollection" />
+        . The <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
         
 
-         has accessors that return each group. The <see
-         cref="T:System.Text.RegularExpressions.Match" />
+         has accessors that return each group. The <see cref="T:System.Text.RegularExpressions.Match" />
 
         
 
@@ -181,8 +159,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This property should not be used to determine if a match is successful. Instead, use the Match.Success property (which is inherited from <see
-             cref="P:System.Text.RegularExpressions.Group.Success" />
+            >This property should not be used to determine if a match is successful. Instead, use the Match.Success property (which is inherited from <see cref="P:System.Text.RegularExpressions.Group.Success" />
 
             
 
@@ -218,18 +195,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >A regular expression pattern can include subexpressions, which are defined by enclosing a portion of the regular expression pattern in parentheses. Every such subexpression forms a group. The <see
-             cref="P:System.Text.RegularExpressions.Match.Groups" />
+            >A regular expression pattern can include subexpressions, which are defined by enclosing a portion of the regular expression pattern in parentheses. Every such subexpression forms a group. The <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
             
 
-             property provides access to information about those subexpression matches. For example, the regular expression pattern (\d{3})-(\d{3}-\d{4}), which matches North American telephone numbers, has two subexpressions. The first consists of the area code, which composes the first three digits of the telephone number. This group is captured by the first portion of the regular expression, (\d{3}).The second consists of the individual telephone number, which composes the last seven digits of the telephone number. This group is captured by the second portion of the regular expression, (\d{3}-\d{4}). These two groups can then be retrieved from the <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+             property provides access to information about those subexpression matches. For example, the regular expression pattern (\d{3})-(\d{3}-\d{4}), which matches North American telephone numbers, has two subexpressions. The first consists of the area code, which composes the first three digits of the telephone number. This group is captured by the first portion of the regular expression, (\d{3}).The second consists of the individual telephone number, which composes the last seven digits of the telephone number. This group is captured by the second portion of the regular expression, (\d{3}-\d{4}). These two groups can then be retrieved from the <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
-             object that is returned by the <see
-             cref="P:System.Text.RegularExpressions.Match.Groups" />
+             object that is returned by the <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
             
 
@@ -237,53 +211,43 @@
           >
           <para>code reference: System.Text.RegularExpressions.Match.Groups#1</para>
           <para
-            >The <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+            >The <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
-             object returned by the <see
-             cref="P:System.Text.RegularExpressions.Match.Groups" />
+             object returned by the <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
             
 
-             property always has at least one member. If the regular expression engine cannot find any matches in a particular input string, the <see
-             cref="P:System.Text.RegularExpressions.Group.Success" />
+             property always has at least one member. If the regular expression engine cannot find any matches in a particular input string, the <see cref="P:System.Text.RegularExpressions.Group.Success" />
 
             
 
-             property of the single <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             property of the single <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             object in the collection is set to false and the <see
-             cref="T:System.Text.RegularExpressions.Group" />
+             object in the collection is set to false and the <see cref="T:System.Text.RegularExpressions.Group" />
 
             
 
-             object's <see
-             cref="P:System.Text.RegularExpressions.Capture.Value" />
+             object's <see cref="P:System.Text.RegularExpressions.Capture.Value" />
 
             
 
-             property is set to <see
-             cref="F:System.String.Empty" />
+             property is set to <see cref="F:System.String.Empty" />
 
             
 
-            . If the regular expression engine can find a match, the first element of the <see
-             cref="T:System.Text.RegularExpressions.GroupCollection" />
+            . If the regular expression engine can find a match, the first element of the <see cref="T:System.Text.RegularExpressions.GroupCollection" />
 
             
 
-             object returned by the <see
-             cref="P:System.Text.RegularExpressions.Match.Groups" />
+             object returned by the <see cref="P:System.Text.RegularExpressions.Match.Groups" />
 
             
 
-             property contains a string that matches the entire regular expression pattern. Each subsequent element represents a captured group, if the regular expression includes capturing groups. For more information, see the "Grouping Constructs and Regular Expression Objects" section of the <format
-             type="text/html">
+             property contains a string that matches the entire regular expression pattern. Each subsequent element represents a captured group, if the regular expression includes capturing groups. For more information, see the "Grouping Constructs and Regular Expression Objects" section of the <format type="text/html">
               <a href="0fc18634-f590-4062-8d5c-f0b71abe405b"
                 >Grouping Constructs in Regular Expressions</a
               >
@@ -323,8 +287,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This method is similar to calling <see
-             cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" />
+            >This method is similar to calling <see cref="M:System.Text.RegularExpressions.Regex.Match(System.String,System.Int32)" />
 
             
 
@@ -332,8 +295,7 @@
           >
           <block subset="none" type="note">
             <para
-              >This method does not modify the current instance. Instead, it returns a new <see
-               cref="T:System.Text.RegularExpressions.Match" />
+              >This method does not modify the current instance. Instead, it returns a new <see cref="T:System.Text.RegularExpressions.Match" />
 
               
 
@@ -341,8 +303,7 @@
             >
           </block>
           <para
-            >Attempting to retrieve the next match may throw a <see
-             cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
+            >Attempting to retrieve the next match may throw a <see cref="T:System.Text.RegularExpressions.RegexMatchTimeoutException" />
 
             
 
@@ -352,8 +313,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a new <see
-             cref="T:System.Text.RegularExpressions.Match" />
+            >Returns a new <see cref="T:System.Text.RegularExpressions.Match" />
 
             
 
@@ -388,31 +348,26 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Whereas the <see
-             cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String)" />
+            >Whereas the <see cref="M:System.Text.RegularExpressions.Regex.Replace(System.String,System.String)" />
 
             
 
-             method replaces all matches in an input string with a specified replacement pattern, the <see
-             cref="M:System.Text.RegularExpressions.Match.Result(System.String)" />
+             method replaces all matches in an input string with a specified replacement pattern, the <see cref="M:System.Text.RegularExpressions.Match.Result(System.String)" />
 
             
 
-             method replaces a single match with a specified replacement pattern. Because it operates on an individual match, it is also possible to perform processing on the matched string before you call the <see
-             cref="M:System.Text.RegularExpressions.Match.Result(System.String)" />
+             method replaces a single match with a specified replacement pattern. Because it operates on an individual match, it is also possible to perform processing on the matched string before you call the <see cref="M:System.Text.RegularExpressions.Match.Result(System.String)" />
 
             
 
              method.</para
           >
           <para
-            >The <paramref
-             name="replacement" />
+            >The <paramref name="replacement" />
 
             
 
-             parameter is a standard regular expression replacement pattern. It can consist of literal characters and regular expression substitutions. For more information, see <format
-             type="text/html">
+             parameter is a standard regular expression replacement pattern. It can consist of literal characters and regular expression substitutions. For more information, see <format type="text/html">
               <a href="d1f52431-1c7d-4dc6-8792-6b988256892e">Substitutions</a>
             </format>
 
@@ -428,8 +383,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The expanded version of the <paramref
-             name="replacement" />
+            >The expanded version of the <paramref name="replacement" />
 
             
 
@@ -437,7 +391,11 @@
           >
         </returns>
         <param name="replacement">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -476,8 +434,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.Text.RegularExpressions.Match" />
+            >Returns a <see cref="T:System.Text.RegularExpressions.Match" />
 
             
 
@@ -489,7 +446,11 @@
           <para>A regular expression match that is suitable to share between multiple threads. </para>
         </returns>
         <param name="inner">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -18,7 +18,9 @@
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
         >Represents well known WebSocket close codes as defined in <see
-         cref="http://www.rfc-editor.org/rfc/rfc6455.txt">section 11.7</see>
+          cref="http://www.rfc-editor.org/rfc/rfc6455.txt"
+          >section 11.7</see
+        >
 
         
 

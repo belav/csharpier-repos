@@ -23,8 +23,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" />
+        >The <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" />
 
         
 
@@ -34,8 +33,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This binding element can be used to enable indigo1 applications to send messages to and receive messages from existing MSMQ applications that use either COM, MSMQ native APIs, or the APIs in <see
-         cref="N:System.Messaging" />
+        >This binding element can be used to enable indigo1 applications to send messages to and receive messages from existing MSMQ applications that use either COM, MSMQ native APIs, or the APIs in <see cref="N:System.Messaging" />
 
         
 
@@ -60,8 +58,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Configuration.MsmqIntegrationBindingElement" />
 
             
 
@@ -118,7 +115,11 @@
           <para>Called when the content of this binding is applied to a specified binding.</para>
         </summary>
         <param name="binding">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -213,8 +214,7 @@
             </item>
             <item>
               <para
-                >Binary - The <see
-                 cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+                >Binary - The <see cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
                 
 
@@ -229,8 +229,7 @@
             </item>
             <item>
               <para
-                >Xml - The <see
-                 cref="T:System.Xml.Serialization.XmlSerializer" />
+                >Xml - The <see cref="T:System.Xml.Serialization.XmlSerializer" />
 
                 
 
@@ -243,8 +242,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Gets or sets the <see
-             cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
+            >Gets or sets the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
 
             
 

@@ -21,8 +21,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Many indigo1 features require the use of buffers, which are expensive to create and destroy. You can use the <see
-         cref="T:System.ServiceModel.Channels.BufferManager" />
+        >Many indigo1 features require the use of buffers, which are expensive to create and destroy. You can use the <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
         
 
@@ -50,8 +49,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
@@ -114,8 +112,7 @@
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Returns a <see
-             cref="T:System.ServiceModel.Channels.BufferManager" />
+            >Returns a <see cref="T:System.ServiceModel.Channels.BufferManager" />
 
             
 
@@ -123,14 +120,22 @@
           >
         </returns>
         <param name="maxBufferPoolSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The maximum size of the pool.</param
         >
         <param name="maxBufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -164,7 +169,11 @@
           <para>Returns a buffer to the pool.</para>
         </summary>
         <param name="buffer">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -202,7 +211,11 @@
           <para>A byte array that is the requested size of the buffer.</para>
         </returns>
         <param name="bufferSize">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

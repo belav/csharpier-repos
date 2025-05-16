@@ -29,13 +29,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Use the <see
-         cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+        >Use the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
         
 
-         attribute to indicate what operation-specific execution behavior the operation has when executed. (To specify execution behavior at the service level, use the <see
-         cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+         attribute to indicate what operation-specific execution behavior the operation has when executed. (To specify execution behavior at the service level, use the <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
         
 
@@ -43,23 +41,19 @@
       >
       <block subset="none" type="note">
         <para
-          >You can also use <see
-           cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+          >You can also use <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
           
 
-           to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see
-           cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+           to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
           
 
-           property must be <see
-           cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+           property must be <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
           
 
-           or an <see
-           cref="T:System.InvalidOperationException" />
+           or an <see cref="T:System.InvalidOperationException" />
 
           
 
@@ -67,8 +61,7 @@
         >
       </block>
       <para
-        >The <see
-         cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+        >The <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
         
 
@@ -77,8 +70,7 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
 
             
 
@@ -87,8 +79,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
 
             
 
@@ -97,8 +88,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
 
             
 
@@ -107,8 +97,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
 
             
 
@@ -117,8 +106,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
@@ -151,8 +139,7 @@
           <list type="bullet">
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+                >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
 
                 
 
@@ -161,8 +148,7 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+                >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
 
                 
 
@@ -171,13 +157,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+                >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
                 
 
-                 property is <see
-                 cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+                 property is <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
                 
 
@@ -186,13 +170,11 @@
             </item>
             <item>
               <para
-                >The <see
-                 cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
+                >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
 
                 
 
-                 is <see
-                 cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />
+                 is <see cref="F:System.ServiceModel.ImpersonationOption.NotAllowed" />
 
                 
 
@@ -204,8 +186,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+            >Initializes a new instance of the <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
             
 
@@ -230,8 +211,7 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>This property determines whether the service disposes all disposable parameters (input, output or reference parameters) that were created while processing a message. The default value is true. Set this property to false if you want to prevent the system from disposing of resources and cache them if required.</para>
           <para
-            >For example, if <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
+            >For example, if <see cref="P:System.ServiceModel.OperationBehaviorAttribute.AutoDisposeParameters" />
 
             
 
@@ -265,38 +245,31 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
+            >Use the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
 
             
 
-             property (together with a binding configuration that supports impersonation) to enable specified methods (those marked with the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
+             property (together with a binding configuration that supports impersonation) to enable specified methods (those marked with the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.Impersonation" />
 
             
 
-             property set to <see
-             cref="F:System.ServiceModel.ImpersonationOption.Allowed" />
+             property set to <see cref="F:System.ServiceModel.ImpersonationOption.Allowed" />
 
             
 
-             or <see
-             cref="F:System.ServiceModel.ImpersonationOption.Required" />
+             or <see cref="F:System.ServiceModel.ImpersonationOption.Required" />
 
             
 
-            ) to execute under the caller's identity. For details, including how impersonation is performed when using <see
-             cref="F:System.ServiceModel.ImpersonationOption.Allowed" />
+            ) to execute under the caller's identity. For details, including how impersonation is performed when using <see cref="F:System.ServiceModel.ImpersonationOption.Allowed" />
 
             
 
-             together with the <see
-             cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.ImpersonateCallerForAllOperations" />
+             together with the <see cref="P:System.ServiceModel.Description.ServiceAuthorizationBehavior.ImpersonateCallerForAllOperations" />
 
             
 
-             property, see <format
-             type="text/html">
+             property, see <format type="text/html">
               <a href="110e60f7-5b03-4b69-b667-31721b8e3152"
                 >Delegation and Impersonation with WCF</a
               >
@@ -304,8 +277,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="431db851-a75b-4009-9fe2-247243d810d3"
                 >How To: Impersonate a Client on a Service</a
               >
@@ -317,18 +289,15 @@
           >
           <block subset="none" type="note">
             <para
-              >When programmatically adding a service endpoint that performs impersonation, you must either use one of the <see
-               cref="Overload:System.ServiceModel.ServiceHost.AddServiceEndpoint" />
+              >When programmatically adding a service endpoint that performs impersonation, you must either use one of the <see cref="Overload:System.ServiceModel.ServiceHost.AddServiceEndpoint" />
 
               
 
-               methods or the <see
-               cref="M:System.ServiceModel.Description.ContractDescription.GetContract(System.Type,System.Type)" />
+               methods or the <see cref="M:System.ServiceModel.Description.ContractDescription.GetContract(System.Type,System.Type)" />
 
               
 
-               method to properly load the contract into a new <see
-               cref="T:System.ServiceModel.Description.ServiceDescription" />
+               method to properly load the contract into a new <see cref="T:System.ServiceModel.Description.ServiceDescription" />
 
               
 
@@ -336,8 +305,7 @@
             >
           </block>
           <para
-            >There may be specific scenarios when impersonation is not supported. crdefault <format
-             type="text/html">
+            >There may be specific scenarios when impersonation is not supported. crdefault <format type="text/html">
               <a href="72027d0f-146d-40c5-9d72-e94392c8bb40">Unsupported Scenarios</a>
             </format>
 
@@ -373,49 +341,41 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Use the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+            >Use the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
-             property to specify when indigo1 recycles a service object in the course of executing a method. The default behavior is to recycle a service object according to the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+             property to specify when indigo1 recycles a service object in the course of executing a method. The default behavior is to recycle a service object according to the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
-             value. Setting the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+             value. Setting the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
              property changes that default behavior.</para
           >
           <para
-            >The <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+            >The <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
-             makes no threading guarantees. If you must have a new, unmodified object when your service runs, set the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+             makes no threading guarantees. If you must have a new, unmodified object when your service runs, set the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
             
 
-             property to <see
-             cref="F:System.ServiceModel.InstanceContextMode.PerCall" />
+             property to <see cref="F:System.ServiceModel.InstanceContextMode.PerCall" />
 
             
 
             . </para
           >
           <para
-            >In transaction scenarios, the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+            >In transaction scenarios, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
-             property is often used to ensure that old data associated with the service object is cleaned up prior to processing a method call. You can also ensure that service objects associated with transactions are recycled after the transaction successfully completes by setting the <see
-             cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+             property is often used to ensure that old data associated with the service object is cleaned up prior to processing a method call. You can also ensure that service objects associated with transactions are recycled after the transaction successfully completes by setting the <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
 
             
 
@@ -437,36 +397,30 @@
             </item>
           </list>
           <para
-            >You can also use <see
-             cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+            >You can also use <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
             
 
-             to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
+             to configure a callback contract operation in a duplex client application. When used on a callback operation, the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.ReleaseInstanceMode" />
 
             
 
-             property must be <see
-             cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+             property must be <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
             
 
-             or an <see
-             cref="T:System.InvalidOperationException" />
+             or an <see cref="T:System.InvalidOperationException" />
 
             
 
              exception is thrown at runtime.</para
           >
           <para
-            >In addition, it is important to realize that if the service is created by passing a service object to the <see
-             cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+            >In addition, it is important to realize that if the service is created by passing a service object to the <see cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
 
             
 
-             constructor, the value of this property is treated as if it were <see
-             cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
+             constructor, the value of this property is treated as if it were <see cref="F:System.ServiceModel.ReleaseInstanceMode.None" />
 
             
 
@@ -507,8 +461,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Implements the <see
-             cref="M:System.ServiceModel.Description.IOperationBehavior.AddBindingParameters(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Channels.BindingParameterCollection)" />
+            >Implements the <see cref="M:System.ServiceModel.Description.IOperationBehavior.AddBindingParameters(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Channels.BindingParameterCollection)" />
 
             
 
@@ -516,19 +469,26 @@
           >
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The operation description modified to support <see
-           cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+          The operation description modified to support <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
           
 
            properties.</param
         >
         <param name="parameters">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -563,19 +523,26 @@
           <para>Implements the client operation behavior.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The operation description modified to support <see
-           cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+          The operation description modified to support <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
           
 
            properties.</param
         >
         <param name="proxy">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -610,19 +577,26 @@
           <para>Implements the service operation behavior.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The operation description modified to support <see
-           cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+          The operation description modified to support <see cref="T:System.ServiceModel.OperationBehaviorAttribute" />
 
           
 
            properties.</param
         >
         <param name="dispatch">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -656,7 +630,11 @@
           <para>Implements the validation behavior.</para>
         </summary>
         <param name="description">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -679,8 +657,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
+            >Set the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionAutoComplete" />
 
             
 
@@ -709,13 +686,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Set the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+            >Set the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
 
             
 
-             to true to require your operation to execute within a transaction scope. If a flowed transaction is available, the operation executes within that transaction. If one is not available, a new transaction is created and used for the operation execution. The binding specified in the endpoint controls whether flowed transactions are supported. Therefore, to obtain the proper behavior you must understand the interaction between whether transaction flow is permitted by the binding and the <see
-             cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+             to true to require your operation to execute within a transaction scope. If a flowed transaction is available, the operation executes within that transaction. If one is not available, a new transaction is created and used for the operation execution. The binding specified in the endpoint controls whether flowed transactions are supported. Therefore, to obtain the proper behavior you must understand the interaction between whether transaction flow is permitted by the binding and the <see cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
 
             
 

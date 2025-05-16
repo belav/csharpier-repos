@@ -26,8 +26,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The <see
-         cref="T:System.IFormattable" />
+        >The <see cref="T:System.IFormattable" />
 
         
 
@@ -37,8 +36,7 @@
       <list type="bullet">
         <item>
           <para
-            >Standard format strings for formatting enumeration values (see <format
-             type="text/html">
+            >Standard format strings for formatting enumeration values (see <format type="text/html">
               <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
             </format>
 
@@ -49,15 +47,13 @@
         </item>
         <item>
           <para
-            >Standard and custom format strings for formatting numeric values (see <format
-             type="text/html">
+            >Standard and custom format strings for formatting numeric values (see <format type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
             </format>
 
@@ -68,8 +64,7 @@
         </item>
         <item>
           <para
-            >Standard and custom format strings for formatting date and time values (see <format
-             type="text/html">
+            >Standard and custom format strings for formatting date and time values (see <format type="text/html">
               <a href="bb79761a-ca08-44ee-b142-b06b3e2fc22b"
                 >Standard Date and Time Format Strings</a
               >
@@ -77,8 +72,7 @@
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
 
@@ -89,15 +83,13 @@
         </item>
         <item>
           <para
-            >Standard and custom format strings for formatting time intervals (see <format
-             type="text/html">
+            >Standard and custom format strings for formatting time intervals (see <format type="text/html">
               <a href="9f6c95eb-63ae-4dcc-9c32-f81985c75794">Standard TimeSpan Format Strings</a>
             </format>
 
             
 
-             and <format
-             type="text/html">
+             and <format type="text/html">
               <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
             </format>
 
@@ -112,18 +104,15 @@
       <list type="bullet">
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.CultureInfo" />
+            >The <see cref="T:System.Globalization.CultureInfo" />
 
             
 
-             class, which returns either a <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+             class, which returns either a <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
-             object for formatting numeric values, or a <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+             object for formatting numeric values, or a <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -132,8 +121,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.NumberFormatInfo" />
+            >The <see cref="T:System.Globalization.NumberFormatInfo" />
 
             
 
@@ -142,8 +130,7 @@
         </item>
         <item>
           <para
-            >The <see
-             cref="T:System.Globalization.DateTimeFormatInfo" />
+            >The <see cref="T:System.Globalization.DateTimeFormatInfo" />
 
             
 
@@ -152,71 +139,59 @@
         </item>
       </list>
       <para
-        >In addition, you can define your own custom format providers to supply culture-specific, profession-specific, or industry-specific information used in formatting. For more information about implementing custom formatting by using a custom format provider, see <see
-         cref="T:System.ICustomFormatter" />
+        >In addition, you can define your own custom format providers to supply culture-specific, profession-specific, or industry-specific information used in formatting. For more information about implementing custom formatting by using a custom format provider, see <see cref="T:System.ICustomFormatter" />
 
         
 
         .</para
       >
       <para
-        >The <see
-         cref="T:System.IFormattable" />
+        >The <see cref="T:System.IFormattable" />
 
         
 
-         interface defines a single method, <see
-         cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+         interface defines a single method, <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
         
 
-        , that supplies formatting services for the implementing type. The <see
-         cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+        , that supplies formatting services for the implementing type. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
         
 
-         method can be called directly. In addition, it is called automatically by the <see
-         cref="M:System.Convert.ToString(System.Object)" />
+         method can be called directly. In addition, it is called automatically by the <see cref="M:System.Convert.ToString(System.Object)" />
 
         
 
-         and <see
-         cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" />
+         and <see cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" />
 
         
 
-         methods, and by methods that use the <format
-         type="text/html">
+         methods, and by methods that use the <format type="text/html">
           <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting feature</a>
         </format>
 
         
 
-         in the .NET Framework. Such methods include <see
-         cref="M:System.Console.WriteLine(System.String,System.Object)" />
+         in the .NET Framework. Such methods include <see cref="M:System.Console.WriteLine(System.String,System.Object)" />
 
         
 
-        , <see
-         cref="M:System.String.Format(System.String,System.Object[])" />
+        , <see cref="M:System.String.Format(System.String,System.Object[])" />
 
         
 
-        , and <see
-         cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object)" />
+        , and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object)" />
 
         
 
-        , among others. The <see
-         cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+        , among others. The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
         
 
          method is called for each format item in the method's format string. </para
       >
       <para
-        >The <see
-         cref="T:System.IFormattable" />
+        >The <see cref="T:System.IFormattable" />
 
         
 
@@ -257,8 +232,7 @@
       </Parameters>
       <Docs>
         <exception cref="T:System.FormatException"
-          >The specified <paramref
-           name="format" />
+          >The specified <paramref name="format" />
 
           
 
@@ -266,21 +240,18 @@
         >
         <example>
           <para
-            >The following example demonstrates using the <see
-             cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+            >The following example demonstrates using the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
             
 
             
 method to display values in a variety of formats. The current system culture is
-U.S. English, which provides the default values for the <paramref
-             name="formatProvider" />
+U.S. English, which provides the default values for the <paramref name="formatProvider" />
 
             
 
             
-parameter of <see
-             cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+parameter of <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -322,38 +293,31 @@ class FormattableExample {
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+            >The <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
             
 
-             method converts a value to a string representation that can be expressed in multiple ways. Its precise format depends on specific symbols or a specified order defined by specific cultures, professions, or industries. You can call the method directly. It is also called automatically by the <see
-             cref="M:System.Convert.ToString(System.Object)" />
+             method converts a value to a string representation that can be expressed in multiple ways. Its precise format depends on specific symbols or a specified order defined by specific cultures, professions, or industries. You can call the method directly. It is also called automatically by the <see cref="M:System.Convert.ToString(System.Object)" />
 
             
 
-             and <see
-             cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" />
+             and <see cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" />
 
             
 
-             methods, and by methods that use the composite formatting feature in the .NET Framework, such as <see
-             cref="M:System.String.Format(System.String,System.Object[])" />
+             methods, and by methods that use the composite formatting feature in the .NET Framework, such as <see cref="M:System.String.Format(System.String,System.Object[])" />
 
             
 
-            , <see
-             cref="M:System.Console.WriteLine(System.String,System.Object[])" />
+            , <see cref="M:System.Console.WriteLine(System.String,System.Object[])" />
 
             
 
-            , and <see
-             cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
+            , and <see cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
 
             
 
-            . (For more information, see <format
-             type="text/html">
+            . (For more information, see <format type="text/html">
               <a href="87b7d528-73f6-43c6-b71a-f23043039a49">Composite Formatting</a>
             </format>
 
@@ -362,8 +326,7 @@ class FormattableExample {
             .)</para
           >
           <para
-            >Composite formatting methods call the <see
-             cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+            >Composite formatting methods call the <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
             
 
@@ -372,8 +335,7 @@ class FormattableExample {
           <list type="bullet">
             <item>
               <para
-                >If the format item does not include a format string (for example, if the format item is simply {0}), it is passed null as the value of the <see
-                 cref="T:System.String" />
+                >If the format item does not include a format string (for example, if the format item is simply {0}), it is passed null as the value of the <see cref="T:System.String" />
 
                 
 
@@ -382,8 +344,7 @@ class FormattableExample {
             </item>
             <item>
               <para
-                >If the format item includes a format string (for example, {0:G}), that format string is passed as the value of the <see
-                 cref="T:System.String" />
+                >If the format item includes a format string (for example, {0:G}), that format string is passed as the value of the <see cref="T:System.String" />
 
                 
 
@@ -392,18 +353,15 @@ class FormattableExample {
             </item>
             <item>
               <para
-                >If the original method call does not include an <see
-                 cref="T:System.IFormatProvider" />
+                >If the original method call does not include an <see cref="T:System.IFormatProvider" />
 
                 
 
-                 parameter, <see
-                 cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+                 parameter, <see cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
                 
 
-                 is passed as the value of the <see
-                 cref="T:System.IFormatProvider" />
+                 is passed as the value of the <see cref="T:System.IFormatProvider" />
 
                 
 
@@ -412,13 +370,11 @@ class FormattableExample {
             </item>
             <item>
               <para
-                >If the original method call includes an <see
-                 cref="T:System.IFormatProvider" />
+                >If the original method call includes an <see cref="T:System.IFormatProvider" />
 
                 
 
-                 parameter, the provider that is supplied in the method call is passed as the value of the <see
-                 cref="T:System.IFormatProvider" />
+                 parameter, the provider that is supplied in the method call is passed as the value of the <see cref="T:System.IFormatProvider" />
 
                 
 
@@ -428,18 +384,15 @@ class FormattableExample {
           </list>
           <block subset="none" type="note">
             <para
-              >An object's <see
-               cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+              >An object's <see cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
 
               
 
-               implementation is called by composite formatting methods only if they are not passed an <see
-               cref="T:System.ICustomFormatter" />
+               implementation is called by composite formatting methods only if they are not passed an <see cref="T:System.ICustomFormatter" />
 
               
 
-               format provider, or if the <see
-               cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
+               format provider, or if the <see cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
 
               
 
@@ -447,8 +400,7 @@ class FormattableExample {
             >
           </block>
           <para
-            >The .NET Framework includes three format providers, all of which implement the <see
-             cref="T:System.IFormatProvider" />
+            >The .NET Framework includes three format providers, all of which implement the <see cref="T:System.IFormatProvider" />
 
             
 
@@ -494,14 +446,22 @@ class FormattableExample {
           <para>The value of the current instance in the specified format.</para>
         </returns>
         <param name="format">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
           The format to use.</param
         >
         <param name="formatProvider">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 

@@ -19,8 +19,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >This enumeration can be set within a configuration file in the <format
-         type="text/html">
+        >This enumeration can be set within a configuration file in the <format type="text/html">
           <a href="ae5c68a8-14a2-4c6e-b9e0-3e94e3e9135e"
             >security element for msmqIntegrationBinding</a
           >
@@ -28,8 +27,7 @@
 
         
 
-         section. It can also be set in code by passing the appropriate value into the constructor of the <see
-         cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
+         section. It can also be set in code by passing the appropriate value into the constructor of the <see cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
 
         
 

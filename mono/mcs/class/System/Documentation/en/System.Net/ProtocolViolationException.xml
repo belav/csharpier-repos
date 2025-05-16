@@ -35,33 +35,27 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >A <see
-         cref="T:System.Net.ProtocolViolationException" />
+        >A <see cref="T:System.Net.ProtocolViolationException" />
 
         
 
-         is thrown by descendants of <see
-         cref="T:System.Net.WebRequest" />
+         is thrown by descendants of <see cref="T:System.Net.WebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.WebResponse" />
+         and <see cref="T:System.Net.WebResponse" />
 
         
 
-         to indicate an error using the underlying protocol. For example, the <see
-         cref="T:System.Net.HttpWebRequest" />
+         to indicate an error using the underlying protocol. For example, the <see cref="T:System.Net.HttpWebRequest" />
 
         
 
-         and <see
-         cref="T:System.Net.HttpWebResponse" />
+         and <see cref="T:System.Net.HttpWebResponse" />
 
         
 
-         classes throw a <see
-         cref="T:System.Net.ProtocolViolationException" />
+         classes throw a <see cref="T:System.Net.ProtocolViolationException" />
 
         
 
@@ -96,13 +90,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >The <see
-             cref="P:System.Exception.Message" />
+            >The <see cref="P:System.Exception.Message" />
 
             
 
-             property is initialized to a system-supplied message that describes the error. The <see
-             cref="P:System.Exception.InnerException" />
+             property is initialized to a system-supplied message that describes the error. The <see cref="P:System.Exception.InnerException" />
 
             
 
@@ -112,8 +104,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.ProtocolViolationException" />
+            >Initializes a new instance of the <see cref="T:System.Net.ProtocolViolationException" />
 
             
 
@@ -147,23 +138,19 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor initializes a new instance of the <see
-             cref="T:System.Net.ProtocolViolationException" />
+            >This constructor initializes a new instance of the <see cref="T:System.Net.ProtocolViolationException" />
 
             
 
-             class with the <see
-             cref="P:System.Exception.Message" />
+             class with the <see cref="P:System.Exception.Message" />
 
             
 
-             property set to the value of the <paramref
-             name="message" />
+             property set to the value of the <paramref name="message" />
 
             
 
-             parameter. If <paramref
-             name="message" />
+             parameter. If <paramref name="message" />
 
             
 
@@ -173,8 +160,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.ProtocolViolationException" />
+            >Initializes a new instance of the <see cref="T:System.Net.ProtocolViolationException" />
 
             
 
@@ -182,7 +168,11 @@
           >
         </summary>
         <param name="message">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
@@ -214,13 +204,11 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This constructor implements the <see
-             cref="T:System.Runtime.Serialization.ISerializable" />
+            >This constructor implements the <see cref="T:System.Runtime.Serialization.ISerializable" />
 
             
 
-             interface for the <see
-             cref="T:System.Net.ProtocolViolationException" />
+             interface for the <see cref="T:System.Net.ProtocolViolationException" />
 
             
 
@@ -230,18 +218,15 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Initializes a new instance of the <see
-             cref="T:System.Net.ProtocolViolationException" />
+            >Initializes a new instance of the <see cref="T:System.Net.ProtocolViolationException" />
 
             
 
-             class from the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+             class from the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
-             and <see
-             cref="T:System.Runtime.Serialization.StreamingContext" />
+             and <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
             
 
@@ -249,34 +234,38 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          A <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
-           that contains the information that is required to deserialize the <see
-           cref="T:System.Net.ProtocolViolationException" />
+           that contains the information that is required to deserialize the <see cref="T:System.Net.ProtocolViolationException" />
 
           
 
           . </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
-           that contains the source of the serialized stream that is associated with the new <see
-           cref="T:System.Net.ProtocolViolationException" />
+           that contains the source of the serialized stream that is associated with the new <see cref="T:System.Net.ProtocolViolationException" />
 
           
 
@@ -309,8 +298,7 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Any objects included in the <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Any objects included in the <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -320,8 +308,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Populates a <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Populates a <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 
@@ -329,24 +316,30 @@
           >
         </summary>
         <param name="serializationInfo">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          The <see
-           cref="T:System.Runtime.Serialization.SerializationInfo" />
+          The <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
           
 
            to populate with data. </param
         >
         <param name="streamingContext">
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />
 
           
 
-          A <see
-           cref="T:System.Runtime.Serialization.StreamingContext" />
+          A <see cref="T:System.Runtime.Serialization.StreamingContext" />
 
           
 
@@ -383,8 +376,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >Serializes this instance into the specified <see
-             cref="T:System.Runtime.Serialization.SerializationInfo" />
+            >Serializes this instance into the specified <see cref="T:System.Runtime.Serialization.SerializationInfo" />
 
             
 

@@ -17,13 +17,11 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The methods and properties exposed by the <see
-         cref="T:System.ComponentModel.Design.IDesignerHostTransactionState" />
+        >The methods and properties exposed by the <see cref="T:System.ComponentModel.Design.IDesignerHostTransactionState" />
 
         
 
-         interface supplement those of the <see
-         cref="T:System.ComponentModel.Design.IDesignerHost" />
+         interface supplement those of the <see cref="T:System.ComponentModel.Design.IDesignerHost" />
 
         
 

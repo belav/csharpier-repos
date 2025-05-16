@@ -35,8 +35,7 @@
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >Represents the types of handles the <see
-         cref="T:System.Runtime.InteropServices.GCHandle" />
+        >Represents the types of handles the <see cref="T:System.Runtime.InteropServices.GCHandle" />
 
         
 
@@ -101,13 +100,11 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This handle type is similar to <see
-             cref="F:System.Runtime.InteropServices.GCHandleType.Normal" />
+            >This handle type is similar to <see cref="F:System.Runtime.InteropServices.GCHandleType.Normal" />
 
             
 
-            , but allows the address of the pinned object to be taken. This prevents the garbage collector from moving the object and hence undermines the efficiency of the garbage collector. Use the <see
-             cref="M:System.Runtime.InteropServices.GCHandle.Free" />
+            , but allows the address of the pinned object to be taken. This prevents the garbage collector from moving the object and hence undermines the efficiency of the garbage collector. Use the <see cref="M:System.Runtime.InteropServices.GCHandle.Free" />
 
             
 
@@ -138,8 +135,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This handle type is used to track an object, but allow it to be collected. When an object is collected, the contents of the <see
-             cref="T:System.Runtime.InteropServices.GCHandle" />
+            >This handle type is used to track an object, but allow it to be collected. When an object is collected, the contents of the <see cref="T:System.Runtime.InteropServices.GCHandle" />
 
             
 
@@ -169,8 +165,7 @@
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
-            >This handle type is similar to <see
-             cref="F:System.Runtime.InteropServices.GCHandleType.Weak" />
+            >This handle type is similar to <see cref="F:System.Runtime.InteropServices.GCHandleType.Weak" />
 
             
 

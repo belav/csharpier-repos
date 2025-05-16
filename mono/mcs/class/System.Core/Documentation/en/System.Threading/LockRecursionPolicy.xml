@@ -16,8 +16,7 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para
-        >The default recursion policy depends on the type of lock. For the default policy and the precise behavior of lock recursion for any given lock type, see the documentation for the type. For example, the <see
-         cref="T:System.Threading.ReaderWriterLockSlim" />
+        >The default recursion policy depends on the type of lock. For the default policy and the precise behavior of lock recursion for any given lock type, see the documentation for the type. For example, the <see cref="T:System.Threading.ReaderWriterLockSlim" />
 
         
 
@@ -31,8 +30,7 @@
 
             
 
-            . For more information, see the <see
-             cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" />
+            . For more information, see the <see cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" />
 
             
 
